@@ -40,6 +40,19 @@ const getIcon = (name: string) => {
         : null
 }
 
+export const Icon = ({ color, icon }: { color?: string; icon: string | React.ReactNode }) => {
+    return (
+        <span
+            className={`flex items-center justify-center shrink-0 ${
+                color
+                    ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px] basis-[30px]`
+                    : 'w-[25px] h-[25px] basis-[25px] opacity-70'
+            }`}
+        >
+            {typeof icon === 'string' ? getIcon(icon) : icon}
+        </span>
+    )
+}
 export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
 export const MenuItem = ({ icon, color, badge, name }) => {
@@ -49,15 +62,7 @@ export const MenuItem = ({ icon, color, badge, name }) => {
                 color ? 'items-center' : 'items-center'
             }`}
         >
-            <span
-                className={`flex items-center justify-center shrink-0 ${
-                    color
-                        ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px] basis-[30px]`
-                        : 'w-[25px] h-[25px] basis-[25px] opacity-70'
-                }`}
-            >
-                {typeof icon === 'string' ? getIcon(icon) : icon}
-            </span>
+            <Icon icon={icon} color={color} />
             <span className={`${color ? '' : 'opacity-100'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
                 {name}
             </span>
@@ -88,10 +93,11 @@ export default function Menu({
     badge,
     color,
     hidden,
+    tag,
     ...other
 }: IMenu): JSX.Element | null {
     if (hidden) return null
-    const { isMenuItemActive } = usePost()
+    const { isMenuItemActive, isMenuItemOpen } = usePost()
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
@@ -102,7 +108,6 @@ export default function Menu({
             ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
             : ''
     } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
-
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -116,7 +121,12 @@ export default function Menu({
                 })
             )
         }
-        setOpen(isMenuItemActive?.({ name, url }) || url === pathname || (children && isOpen(children)))
+        setOpen(
+            isMenuItemOpen?.({ name, url }) ||
+                isMenuItemActive?.({ name, url }) ||
+                url === pathname ||
+                (children && isOpen(children))
+        )
         setIsActive(isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
     }, [pathname])
 
@@ -156,7 +166,7 @@ export default function Menu({
                 ) : name && url ? (
                     <MenuLink
                         onClick={() => {
-                            handleLinkClick && handleLinkClick()
+                            handleLinkClick && handleLinkClick({ name, url, topLevel, tag })
                             if (isWithChild) {
                                 setOpen(!open)
                             }

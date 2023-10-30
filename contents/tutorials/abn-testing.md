@@ -4,7 +4,6 @@ date: 2023-08-21
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ['experimentation', 'feature flags']
 ---
 

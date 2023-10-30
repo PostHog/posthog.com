@@ -4,7 +4,6 @@ date: 2023-09-14
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-11.png
 tags: ['feature flags']
 ---
 
@@ -144,7 +143,7 @@ function App() {
 export default App;
 ```
 
-These are basic implementations of React feature flags setup. From here, you can set up [A/B tests](/ab-testing), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release).
+These are basic implementations of React feature flags setup. From here, you can set up [A/B tests](/ab-testing), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release).
 
 ## Further reading
 

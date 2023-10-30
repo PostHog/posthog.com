@@ -4,9 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-08
-featuredImage: ../images/tutorials/banners/tutorial-18.png
 featuredVideo: https://www.youtube-nocookie.com/embed/ExaQmFuaSyo
-tags: ['funnels', 'insights']
+tags: ['funnels', 'insights', 'product analytics']
 --- 
 
 Performance marketing is paying for ads, attention, and clicks to your site where you try to convert them into users and customers. Companies use channels like Google, Facebook, other social media, ad networks, and sponsorships to do this. 

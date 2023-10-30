@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-22
-featuredImage: ../images/tutorials/banners/tutorial-10.png
-tags: ["stickiness", "dashboards", "retention"]
+tags: ["stickiness", "dashboards", "retention", 'product analytics']
 ---
 
 Every company wants to build a product that keeps users coming back. Returning and reoccurring users are often your best ones. Many teams focus on improving user retention metrics, like weekly active users or customer retention. Retention is also an excellent way to [measure your product-market fit](/blog/measure-product-market-fit).

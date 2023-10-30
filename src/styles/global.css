@@ -200,6 +200,13 @@ h4 {
     blockquote {
         letter-spacing: initial;
 
+        h2,
+        h3,
+        h4,
+        h5 {
+            @apply mt-0 mb-0.5;
+        }
+
         code {
             @apply bg-gray-accent dark:bg-gray-accent-dark;
         }
@@ -425,6 +432,18 @@ h4 {
 
     &:hover:before {
         opacity: 1;
+    }
+}
+
+.footnotes {
+    @apply border-t border-border dark:border-dark pt-4;
+
+    hr {
+        @apply hidden;
+    }
+
+    li {
+        @apply text-sm;
     }
 }
 
@@ -858,6 +877,18 @@ ul {
         position: absolute;
         top: 4px;
         width: 4px;
+    }
+}
+
+.active-sidebar-item {
+    &:before {
+        @apply bg-red absolute;
+        bottom: 2px;
+        border-radius: 2px;
+        content: '';
+        left: 0px;
+        top: 2px;
+        width: 2px;
     }
 }
 

@@ -2,11 +2,10 @@ import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
 import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { Analytics, SessionRecording, FeatureFlags } from 'components/ProductIcons'
+import { Analytics, SessionRecording, FeatureFlags, Surveys } from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
 import React, { useEffect } from 'react'
 import Link from 'components/Link'
-import { pricingLogic } from '../pricingLogic'
 import { ExternalLink } from 'components/Icons'
 
 export const section = cntl`
@@ -28,8 +27,12 @@ export const PricingCalculator = () => {
         featureFlagSliderValue,
         featureFlagNumber,
         featureFlagCost,
+        surveyResponseSliderValue,
+        surveyResponseNumber,
+        surveyResponseCost,
     } = useValues(pricingSliderLogic)
-    const { setSessionRecordingSliderValue, setSliderValue, setFeatureFlagSliderValue } = useActions(pricingSliderLogic)
+    const { setSessionRecordingSliderValue, setSliderValue, setFeatureFlagSliderValue, setSurveyResponseSliderValue } =
+        useActions(pricingSliderLogic)
 
     useEffect(() => {
         setSliderValue(13.815510557964274)
@@ -127,6 +130,29 @@ export const PricingCalculator = () => {
                         </div>
                         <div className="border-b border-border dark:border-dark p-2 text-center">
                             <span className="text-lg font-bold">${featureFlagCost.toLocaleString()}</span>
+                        </div>
+                        <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
+                            <span className="w-5 h-5 flex absolute top-3 left-3">{<Surveys />}</span>
+                            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
+                                <strong>Surveys</strong>
+                                <span>
+                                    <span className="text-lg font-bold">{surveyResponseNumber.toLocaleString()}</span>{' '}
+                                    <span className="opacity-60 text-sm">responses</span>
+                                </span>
+                            </div>
+                            <div className="pt-4 pb-6">
+                                <LogSlider
+                                    stepsInRange={100}
+                                    marks={[250, 2000, 15000, 100000]}
+                                    min={250}
+                                    max={100000}
+                                    onChange={(value) => setSurveyResponseSliderValue(value)}
+                                    value={surveyResponseSliderValue}
+                                />
+                            </div>
+                        </div>
+                        <div className="border-b border-border dark:border-dark p-2 text-center">
+                            <span className="text-lg font-bold">${surveyResponseCost.toLocaleString()}</span>
                         </div>
                         <div className="col-span-3 p-4">
                             <strong>Monthly estimate</strong>

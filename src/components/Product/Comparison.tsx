@@ -26,7 +26,7 @@ const companies = {
         comparisonURL: '',
     },
     LaunchDarkly: {
-        comparisonURL: '',
+        comparisonURL: '/blog/posthog-vs-launchdarkly',
     },
     Pendo: {
         comparisonURL: '/blog/posthog-vs-pendo',
@@ -44,7 +44,7 @@ const companies = {
         comparisonURL: '',
     },
     GrowthBook: {
-        comparisonURL: '',
+        comparisonURL: '/blog/posthog-vs-growthbook',
     },
     Sprig: {
         comparisonURL: '',
@@ -65,14 +65,14 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                 className={`max-w-vw -mx-5 pl-5 pb-2 mb-10 md:mb-20 md:mx-0 overflow-x-auto [justify-content:_safe_center]`}
             >
                 <div
-                    className={`flex-1 grid grid-cols-${columnCount} max-w-7xl text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit ${
+                    className={`flex-1 grid grid-cols-${columnCount} text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit ${
                         collapsed
                             ? 'h-[460px] overflow-y-hidden relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
                             : ' '
                     }`}
                 >
                     {/* header row */}
-                    <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-border-dark">
+                    <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-dark">
                         <strong></strong>
                     </div>
                     {activeCompanies.map((company) => {
@@ -142,9 +142,11 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                     })}
                 </div>
                 {collapsed && (
-                    <CallToAction onClick={() => setCollapsed(false)} className="mt-4" width="full">
-                        See full comparison
-                    </CallToAction>
+                    <div className="-mt-8 text-center z-20 relative">
+                        <CallToAction onClick={() => setCollapsed(false)} className="mt-4 max-w-sm">
+                            See full comparison
+                        </CallToAction>
+                    </div>
                 )}
             </div>
         </>

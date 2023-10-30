@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -39,6 +38,7 @@ import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const product = {
     slug: 'surveys',
@@ -346,14 +346,15 @@ export const ProductSurveys = () => {
             }
         }
     `)
+    const { fullWidthContent } = useLayoutData()
     return (
-        <Layout>
+        <>
             <SEO
                 title="Surveys - PostHog"
                 description="Ask anything with no-code surveys – or use the API for complete control."
                 image={`/images/og/surveys.jpg`}
             />
-            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0 -mb-20">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="salmon"
                     icon={<IconMessage />}
@@ -362,7 +363,7 @@ export const ProductSurveys = () => {
                     description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
                 />
 
-                <div className="">
+                <div className="text-center">
                     <StaticImage
                         src="../../../images/products/screenshot-surveys.png"
                         alt="Screenshot of survey results in PostHog"
@@ -407,7 +408,10 @@ export const ProductSurveys = () => {
                     </Marquee>
                 </section>
             </div>
-            <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
+            <section
+                id="pricing"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
+            >
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -434,7 +438,7 @@ export const ProductSurveys = () => {
                 </div>
             </section>
 
-            <div className="max-w-7xl mx-auto">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -587,7 +591,7 @@ export const ProductSurveys = () => {
                     <CTA />
                 </section>
             </div>
-        </Layout>
+        </>
     )
 }
 

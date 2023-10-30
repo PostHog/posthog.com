@@ -28,9 +28,13 @@ export default function RecentChange({ team }) {
         }
     `)
 
-    const [{ title, date, description, cta }] = data.allRoadmap.nodes.filter(({ teams: { data } }) =>
+    const roadmaps = data.allRoadmap.nodes.filter(({ teams: { data } }) =>
         data.some(({ attributes: { name } }) => name === team)
     )
+
+    if (roadmaps.length <= 0) return null
+
+    const [{ title, date, description, cta }] = roadmaps
     return (
         <div>
             <h4 className="opacity-60 text-base">Latest update</h4>

@@ -4,7 +4,6 @@ date: 2023-04-05
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 featuredVideo: https://www.youtube-nocookie.com/embed/trk8LM2FQKw
 tags: ["configuration", "feature flags", "events"]
 ---

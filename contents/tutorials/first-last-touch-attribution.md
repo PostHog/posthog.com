@@ -4,8 +4,7 @@ date: 2023-08-11
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-18.png
-tags: ['insights', 'hogql', 'user paths']
+tags: ['insights', 'hogql', 'user paths', 'product analytics']
 ---
 
 Understanding where users are coming from helps prioritize future development and marketing efforts. To analyze this, companies do "attribution", which is the process of figuring out what caused a conversion. 

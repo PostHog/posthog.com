@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -49,6 +48,7 @@ import Install from '../Install'
 import Tooltip from 'components/Tooltip'
 import { TextCard } from 'components/Products/TextCard'
 import { SEO } from 'components/seo'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const ProductIcon = ({ name, url, color, icon }) => {
     return (
@@ -132,14 +132,15 @@ export const ProductOS = () => {
             }
         }
     `)
+    const { fullWidthContent } = useLayoutData()
     return (
-        <Layout>
+        <>
             <SEO
                 title="Product OS - PostHog"
                 description="The product data infrastructure that powers the PostHog platform"
                 image={`/images/og/product-os.jpg`}
             />
-            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="blue"
                     icon={<IconStack />}
@@ -441,7 +442,7 @@ export const ProductOS = () => {
                     <CTA />
                 </section>
             </div>
-        </Layout>
+        </>
     )
 }
 
