@@ -1,5 +1,5 @@
 ---
-title: Why PurpleWave moved from HotJar and Checkmarket, to PostHog
+title: How Purplewave reached a 25% response rate with PostHog surveys
 customer: Purplewave
 logo: ../images/customers/purplewave/purplewave_logo.png
 logoDark: ../images/customers/purplewave/purplewave_logo_dark.png
