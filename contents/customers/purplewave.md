@@ -35,13 +35,13 @@ Purplewave began using many PostHog features, including [analytics](/product-ana
 
 ### How Purplewave reached a 25% response rate for user surveys
 
-Before switching to PostHog, Purplewave had previously attempted to solicit feedback over email using CheckMarket by Medallia. Unfortunately, CheckMarket’s approach introduced needless friction for users and led to a poor experience that was reflected in low response rates. 
+Before switching to PostHog, Purple Wave had previously attempted to solicit feedback over email using other tools. Response rates were poor, leading the team to consider more innovative ways to collect feedback. 
 
-“We used CheckMarket for our [NPS surveys](/tutorials/nps-survey) but were only getting a 14% response rate,” says Matt. “So, I decided to run a test with in-app surveys using PostHog and roll that out to identified, registered users only. The response rate then was 25%, which was almost twice as good!”
+“We were only getting a 14% response rate on NPS surveys previously,” says Matt. “So, I ran a test with in-app surveys using PostHog. I was still able to target identified users, and the response rate jumped to 25% — almost twice as good!”
 
-In addition to improving the response rate, conducting surveys with PostHog was also ideal because it centralized data into a single platform. Responses could be analyzed using PostHog insights, linked to feature flags, or observed with session replays — none of which was true with other tools the team had tried. 
+Conducting surveys with PostHog also enabled Purplewave to centralize data into a single platform. Responses could be analyzed using insights, linked to feature flags, or observed with session replays — all in one place. 
 
-“We had used [HotJar](/blog/posthog-vs-hotjar) before and I just hated having responses in a separate software,” says Matt. “I want it all in one platform so it’s easy to access — because ultimately everything needs to come back to the [data warehouse](/docs/data-warehouse). You have to have your data centralized, and with HotJar it wasn’t.” 
+“I really hate having to switch between separate software,” says Matt. “I want it all in one platform so it’s easy to access. Ultimately everything comes back to the [data warehouse](/docs/data-warehouse). You have to have your data centralized in order to use it effectively.” 
 
 
 ![PostHog surveys](../images/customers/purplewave/purplewave_survey.png)
