@@ -2,7 +2,7 @@ import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import { useQuestion } from '../hooks/useQuestion'
-import { Bell } from 'components/NotProductIcons'
+import { IconBell } from '@posthog/icons'
 
 export const Button = ({
     className,
@@ -23,7 +23,7 @@ export const Button = ({
             onClick={handleSubscribe}
         >
             <span className={`w-6 h-6 rotate-6 ${subscribed ? 'animate-wiggle origin-top' : ''}`}>
-                <Bell />
+                <IconBell />
             </span>
         </button>
     )
@@ -75,7 +75,7 @@ export default function SubscribeButton({
                         disabled
                     >
                         <span className="w-6 h-6 rotate-6">
-                            <Bell />
+                            <IconBell />
                         </span>
                     </button>
                 )}

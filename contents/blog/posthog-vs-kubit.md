@@ -12,7 +12,6 @@ author:
 category: General
 tags:
     - Comparisons
-    - Guides
 ---
 
 Kubit is a product analytics platform built for product teams. PostHog, on the other hand, is built primarily for engineers. 
@@ -200,7 +199,7 @@ As explained above, PostHog offers a wider selection of feature than Kubit, whic
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td><strong>LogRocket</strong></td>
+            <td><strong>Kubit</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
         </tr>

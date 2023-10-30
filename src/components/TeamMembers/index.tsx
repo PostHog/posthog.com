@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import { ContributorImage } from 'components/PostLayout/Contributors'
 import Link from 'components/Link'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
@@ -118,12 +117,15 @@ const AddTeamMember = ({ handleChange }) => {
             />
         </li>
     ) : (
-        <li className="!m-0 !text-inherit flex space-x-4 items-center py-3 relative active:top-[1px] active:scale-[.99] transition-transform px-4 hover:bg-accent dark:hover:bg-accent-dark rounded h-full group">
-            <button onClick={() => setShowMods(true)} className="flex items-center space-x-2 w-full">
+        <li className="!m-0 !text-inherit flex space-x-4 items-center relative active:top-[1px] active:scale-[.99] transition-transform h-full group">
+            <button
+                onClick={() => setShowMods(true)}
+                className="flex items-center space-x-2 w-full p-2 hover:bg-accent dark:hover:bg-accent-dark rounded"
+            >
                 <span className=" w-[32px] h-[32px] flex justify-center items-center p-1 rounded-full bg-accent dark:bg-accent-dark border group-hover:border-border dark:group-hover:border-dark border-transparent transition-colors">
                     <Plus className="w-full h-full" />
                 </span>
-                <span className="font-semibold">Add team member</span>
+                <span className="font-semibold text-sm">Add team member</span>
             </button>
         </li>
     )
@@ -226,7 +228,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                         const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
                             <li
-                                className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded min-h-28 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px]"
+                                className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded min-h-28 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] group"
                                 key={name}
                             >
                                 <Link
@@ -241,7 +243,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                             </p>
                                         </div>
 
-                                        <span className="flex items-center gap-2">
+                                        <span className="flex items-center gap-2 mt-1">
                                             {country && (
                                                 <span className="!leading-none text-2xl">
                                                     {country === 'world' ? (
@@ -250,6 +252,31 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                                         <ReactCountryFlag svg countryCode={country} />
                                                     )}
                                                 </span>
+                                            )}
+                                            {leadTeams?.data?.some(({ attributes: { name } }) => name === teamName) ? (
+                                                <button
+                                                    onClick={(e) => {
+                                                        if (isModerator) {
+                                                            e.preventDefault()
+                                                            handleTeamLead(member.id, true)
+                                                        }
+                                                    }}
+                                                    className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white dark:bg-transparent"
+                                                >
+                                                    Team lead
+                                                </button>
+                                            ) : (
+                                                isModerator && (
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.preventDefault()
+                                                            handleTeamLead(member.id, false)
+                                                        }}
+                                                        className="group-hover:visible inline-block border-2 border-primary/10 dark:border-primary-dark/10 border-dashed rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-primary/40 dark:text-primary-dark/40 invisible"
+                                                    >
+                                                        Team lead?
+                                                    </button>
+                                                )
                                             )}
                                         </span>
                                     </div>
@@ -263,10 +290,10 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                 </Link>
                                 {isModerator && (
                                     <button
-                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-1 -right-1"
+                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-3 -right-3"
                                         onClick={(e) => removeTeamMember(member)}
                                     >
-                                        <Close className="w-2 h-2" />
+                                        <Close className="w-3 h-3" />
                                     </button>
                                 )}
                             </li>

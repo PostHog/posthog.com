@@ -4,7 +4,6 @@ date: 2023-09-18
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ['experimentation']
 ---
 
@@ -12,14 +11,14 @@ A/B tests help you make your React app better by comparing changes for their imp
 
 ## Creating a React app
 
-First, create our React app using `create-react-app` and go into the newly created `react-ab-test` folder.
+First, create our React app using `create-react-app` and go into the newly created `react-ab-test` folder.
 
 ```bash
 npx create-react-app react-ab-test
 cd react-flags
 ```
 
-Next, remove the boilerplate code in `src/App.js` to simplify it to only a title and button we encourage users to press.
+Next, remove the boilerplate code in `src/App.js` to simplify it to only a title and button we encourage users to press.
 
 ```js
 // src/App.js
@@ -37,19 +36,19 @@ function App() {
 export default App;
 ```
 
-Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:3000/) to see our new homepage.
+Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:3000/) to see our new homepage.
 
 ![React app](../images/tutorials/react-ab-testing/app.png)
 
 ## Adding PostHog
 
-To use PostHog to manage and track our A/B test, we must install and set it up. We do this by installing the `posthog-js` library to get access to the [React SDK](https://posthog-git-react-feature-flags-post-hog.vercel.app/docs/libraries/react).
+To use PostHog to manage and track our A/B test, we must install and set it up. We do this by installing the `posthog-js` library to get access to the [React SDK](/docs/libraries/react).
 
 ```bash
 npm install posthog-js
 ```
 
-Once installed, import PostHog into `src/index.js` and set up a client using our project API key and instance address from [our project settings](https://app.posthog.com/project/settings). We can wrap our app in the React `PostHogProvider` to access PostHog in any component.
+Once installed, import PostHog into `src/index.js` and set up a client using our project API key and instance address from [our project settings](https://app.posthog.com/project/settings). We can wrap our app in the React `PostHogProvider` to access PostHog in any component.
 
 ```js
 import React from 'react';

@@ -10,8 +10,6 @@ featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 featuredVideo: https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y
 category: Inside PostHog
-tags:
- - Marketing
 ---
 
 As you publish more content, inevitably you need a way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, Wix, Ghost, and many more. 

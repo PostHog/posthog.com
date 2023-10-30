@@ -12,7 +12,6 @@ author:
   - joe-martin
 category: General
 tags:
-  - Guides
   - Comparisons
 ---
 
@@ -29,7 +28,7 @@ tags:
 Over 10,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
 
 ### 1. It's an all-in-one platform
-PostHog is more than a product analytics tool, it's an all-in-one Product OS that replaces multiple tools in your data stack. You could run Amplitude for analytics, LaunchDarkly for feature flagging, Hotjar for session recording, and Optimizely for A/B testing, or you could just use PostHog for everything. One platform, one price: seamless integration.
+PostHog is more than a product analytics tool, it's an all-in-one Product OS that replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flagging, Hotjar for session recording, and Optimizely for A/B testing, or you could just use PostHog for everything. One platform, one price: seamless integration.
 
 ### 2. It's built for engineers
 Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures data, so you don't have to spend time instrumenting events every time you update your app or website – we also offer robust tools for capturing custom events and actions when you need to. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/contact-sales) if you have questions.

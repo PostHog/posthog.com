@@ -4,7 +4,7 @@ import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
 import { useSearch } from 'components/Search/SearchContext'
 
-import { App, Brightness, Chat, Search, TextWidth, User } from '@posthog/icons'
+import { IconApp, IconBrightness, IconChat, IconSearch, IconTextWidth, IconUser } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
 import React, { useEffect, useRef, useState } from 'react'
@@ -32,7 +32,7 @@ const DarkModeToggle = () => {
             className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
         >
             <div>
-                <Brightness className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                <IconBrightness className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                 <span>Dark mode</span>
             </div>
             <Toggle checked={websiteTheme === 'dark'} />
@@ -302,7 +302,7 @@ export const Main = () => {
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
-                        fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl box-content'
+                        fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
                     }`}
                 >
                     <div className="flex-1 flex">
@@ -360,7 +360,7 @@ export const Main = () => {
                                 className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded"
                                 onClick={() => open('header')}
                             >
-                                <Search className="opacity-50 inline-block w-6 group-hover:opacity-75" />
+                                <IconSearch className="opacity-50 inline-block w-6 group-hover:opacity-75" />
                             </button>
                         </HoverTooltip>
 
@@ -378,7 +378,7 @@ export const Main = () => {
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
                                                 to="https://app.posthog.com"
                                             >
-                                                <App className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                <IconApp className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                 PostHog app
                                             </Link>
                                         </li>
@@ -387,7 +387,7 @@ export const Main = () => {
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
                                                 to="/questions"
                                             >
-                                                <Chat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                 Community
                                             </Link>
                                         </li>
@@ -403,7 +403,7 @@ export const Main = () => {
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
                                             >
                                                 <div>
-                                                    <TextWidth className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    <IconTextWidth className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                     <span>Wide mode</span>
                                                 </div>
                                                 <Toggle checked={fullWidthContent} />
@@ -413,7 +413,7 @@ export const Main = () => {
                                 )
                             }}
                         >
-                            <User className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
+                            <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
                         </Tooltip>
                     </div>
                 </div>

@@ -5,7 +5,6 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredTutorial: true
-featuredImage: ../images/tutorials/banners/flags.png
 featuredVideo: https://www.youtube-nocookie.com/embed/nSBjr1Sz18o
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
@@ -419,8 +418,8 @@ export default function Home({ posts }) {
   const posthog = usePostHog()
 
   const router = useRouter()
-  const signedIn = router.query.signedIn
-  if (signedIn == 'True' && session) {
+  const newLoginState = router.query.loginState
+  if (newloginState == 'signedIn' && session) {
     posthog.identify(session.user.email);
     router.replace('/', undefined, { shallow: true });
   }
@@ -437,7 +436,7 @@ export default function Home({ posts }) {
         {!session ? (
 					<button 
             onClick={() => signIn(
-              'github', { callbackUrl: '/?signedIn=True'}
+              'github', { callbackUrl: '/?loginState=signedIn'}
             )}>
               Sign in
           </button>        
@@ -466,13 +465,14 @@ To set this up, we do something similar to what we did with user identification.
 const router = useRouter()
 const posthog = usePostHog()
 
-const signedIn = router.query.signedIn
-if (signedIn == 'True' && session) {
-  posthog.identify(session.user.email);
-  router.replace('/', undefined, { shallow: true });
-}
-if (signedIn == 'False') {
-  posthog.reset();
+const newLoginState = router.query.loginState
+if (newLoginState) {
+  if (newLoginState === 'signedIn' && session)) {
+    posthog.identify(session.user.email);
+  }
+  if (newLoginState === 'signedOut') {
+    posthog.reset();
+  }
   router.replace('/', undefined, { shallow: true });
 }
 
@@ -488,7 +488,7 @@ return (
       {!session ? (
         <button 
           onClick={() => signIn(
-            'github', { callbackUrl: '/?signedIn=True'}
+            'github', { callbackUrl: '/?loginState=signedIn'}
           )}>
             Sign in
         </button>
@@ -496,7 +496,7 @@ return (
         <div>
           <p>Welcome {session.user.name}</p>
           <button onClick={() => signOut(
-            { callbackUrl: '/?signedIn=False' }
+            { callbackUrl: '/?loginState=signedOut' }
           )}>
             Sign out
           </button>
@@ -505,9 +505,11 @@ return (
 //...
 ```
 
-When you log out now, PostHog creates and connects events to a new person when you next load the page. This person is disconnected from your old anonymous and identified person.
+When you log out now, PostHog creates and connects events to a new anonymous person when you next load the page. This person is disconnected from your old anonymous and identified person.
 
 ![Pageview](../images/tutorials/nextjs-analytics/pageview.png)
+
+> **Note:** Be careful to only reset when a user logs out, **not** on every request. If you reset on every request, you create an excess of new anonymous users and new session recordings.
 
 ## Setting up and using feature flags
 

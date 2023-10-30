@@ -11,7 +11,6 @@ featuredImage: ../images/blog/product-people.png
 featuredImageType: full
 category: Product growth
 tags:
-  - Product analytics
   - Guides
   - Product metrics
 ---

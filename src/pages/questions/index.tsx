@@ -55,6 +55,16 @@ export default function Questions() {
     const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
         limit: 20,
         sortBy: 'activity',
+        filters: {
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
+        },
     })
 
     const topicsNav = useTopicsNav()

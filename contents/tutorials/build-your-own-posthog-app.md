@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['joe-martin']
 date: 2022-10-04
-featuredImage: ../images/tutorials/banners/tutorial-1.png
-tags: ["apps"]
+tags: ["apps", 'product os']
 ---
 
 **Estimated reading time:** 10 minutes ☕☕☕

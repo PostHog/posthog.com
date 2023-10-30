@@ -328,7 +328,9 @@ export default function Handbook({
                                 </div>
                             )}
                         </div>
-                        {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
+                        <div className="lg:hidden">
+                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
+                        </div>
                         {features && <LibraryFeatures availability={features} />}
                         <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>

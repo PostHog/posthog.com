@@ -12,8 +12,6 @@ featuredImageType: full
 category: Inside PostHog
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VKSPhPbhyRs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 We’re proud to announce a new hire; Phil Leggetter will head up Developer Relations at PostHog.
 
 Developer relations sits at the intersection of product development, engineering, and marketing. The role serves communities of core and secondary customers through content, tutorials, events, and sponsorships. At PostHog, we’ve been blessed with a highly engaged community of [contributors](https://posthog.com/contributors), and we hope to improve our product to suit our users’ needs over the long run.

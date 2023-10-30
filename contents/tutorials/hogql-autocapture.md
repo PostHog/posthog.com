@@ -4,8 +4,7 @@ date: 2023-06-07
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-16.png
-tags: ['hogql', 'trends']
+tags: ['hogql', 'trends', 'product analytics']
 --- 
 
 [Autocapture](/docs/data/autocapture) is a powerful way to capture usage data without having to implement any tracking yourself. [HogQL](/docs/product-analytics/hogql) unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use HogQL to analyze autocapture events.
@@ -31,7 +30,7 @@ We can also get the full component, where getting the first or last index might 
 - To breakdown by the first component in the chain, use `arrayElement(splitByChar(';', elements_chain), 1)`
 - To breakdown by the last component in the chain, use `arrayElement(splitByChar(';', elements_chain), -1)`
 
-You can use this method to other get components or elements at other indexes or run other [array-specific functions](/docs/product-analytics/hogql#arrays-and-strings-in-common).
+You can use this method to other get components or elements at other indexes or run other [array-specific functions](/tutorials/array-filter-breakdown).
 
 ## Breaking down by attributes
 

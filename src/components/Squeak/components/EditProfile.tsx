@@ -9,7 +9,7 @@ import getAvatarURL from '../util/getAvatar'
 import usePostHog from 'hooks/usePostHog'
 import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
 import Toggle from 'components/Toggle'
-import { Info } from '@posthog/icons'
+import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 
 const fields = {
@@ -66,7 +66,7 @@ const fields = {
                             content="Allows community members to ask you questions directly on your profile page"
                         >
                             <span className="relative">
-                                <Info className="w-4 h-4" />
+                                <IconInfo className="w-4 h-4" />
                             </span>
                         </Tooltip>
                         <span>Ask me anything</span>

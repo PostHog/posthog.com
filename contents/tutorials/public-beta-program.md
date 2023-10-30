@@ -4,7 +4,6 @@ date: 2023-07-28
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ['feature flags']
 ---
 
@@ -16,7 +15,7 @@ Our example uses Next.js, but this also works for other frameworks and languages
 
 ## Creating a Next.js app and adding PostHog
 
-First, create a Next.js app. To do so, install Node and run the command below. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+First, create a Next.js app. To do so, install Node and run the command below. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest beta-program

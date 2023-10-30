@@ -7,6 +7,7 @@ showTitle: true
 You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
 1. You can create a pull request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
+
 2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a pull request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
 
 Below, we'll explain how to set up option two.
@@ -20,6 +21,7 @@ In order to run the PostHog website locally, you need the following installed:
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) – version control system
 - [Node.js](https://nodejs.org/en/download/) – server runtime
 - [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x) – package manager for Node.js
+- [Apple Rosetta](https://support.apple.com/en-gb/HT211861) (version 2) – dynamic binary translator for Apple silicon
 
 If you are unfamiliar with using Git from the command line (or just prefer graphical interfaces), use the [GitHub Desktop app](https://desktop.github.com/).
 
@@ -93,7 +95,7 @@ Once this command has finished executing, run the following:
 yarn start
 ```
 
-The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8001` in your web browser.
+This runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8001` in your web browser.
 
 Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8001` in your web browser.
 
@@ -198,14 +200,13 @@ title: How to filter out internal users
 author: ["joe-martin"]
 featuredTutorial: false
 featuredVideo: https://www.youtube-nocookie.com/embed/2bptTniYPGc
-featuredImage: ../images/tutorials/banners/tutorial-17.png
 tags: ['filters', 'settings']
 ---
 ```
 
 - `date`: the date the tutorial was posted
 - `title`: the title that appears at the top of the tutorial and on the tutorial listing page
-- `author`: the author(s) of the tutorial. correlates to your handle located in /src/data/authors.json
+- `author`: the author(s) of the tutorial. Ccrrelates to your handle located in /src/data/authors.json
 - `featuredTutorial`: determines if tutorial should be featured on the homepage
 - `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
 - `featuredImage`: the URL of the image that appears at the top of the tutorial and on the tutorial listing page
@@ -532,7 +533,7 @@ If you know who you would like to review the pull request, select them in the **
 
 ## Preview branch
 
-After a series of checks are run (to ensure nothing in your pull request breaks the website), Vercel will generate a preview link available in the Vercel bot comment. This includes all of your changes so you can preview before your pull request is merged.
+After a series of checks are run (to ensure nothing in your pull request breaks the website), Vercel will generate a preview link available in the Vercel bot comment. This includes all of your changes, so you can preview before your pull request is merged.
 
 ![Preview branch](../../../images/docs/contribute/preview-branch.png)
 

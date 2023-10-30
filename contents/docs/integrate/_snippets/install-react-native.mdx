@@ -102,7 +102,7 @@ export const posthog = await PostHog.initAsync("<ph_project_api_key>", {
     flushInterval?: number = 10000
     // If set to false, tracking will be disabled until `optIn` is called
     enable?: boolean = true,
-    // Whether to track that `getFeatureFlag` was called (used by Expriements)
+    // Whether to track that `getFeatureFlag` was called (used by Experiments)
     sendFeatureFlagEvent?: boolean = true,
     // Whether to load feature flags when initialised or not
     preloadFeatureFlags?: boolean = true,

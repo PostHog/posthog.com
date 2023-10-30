@@ -11,7 +11,6 @@ featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
 category: Product growth
 tags:
-  - Product analytics
   - Explainers
 ---
 

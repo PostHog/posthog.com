@@ -7,12 +7,29 @@ PostHog offers a range of controls to limit what data is captured by session rec
 
 ## Input elements
 
-As any input element is highly likely to contain sensitive text such as email or password, **we mask these by default**. You can explicitly set this to false to disable the masking.
+As any input element is highly likely to contain sensitive text such as email or password, **we mask these by default**. You can explicitly set this to false to disable the masking. You can then specify inputs types you would like to be masked.
 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskAllInputs: false
+        maskAllInputs: false,
+        maskInputOptions: {
+            password: true, // Highly recommended as a minimum!!
+            // color: false,
+            // date: false,
+            // 'datetime-local': false,
+            // email: false,
+            // month: false,
+            // number: false,
+            // range: false,
+            // search: false,
+            // tel: false,
+            // text: false,
+            // time: false,
+            // url: false,
+            // week: false,
+            // textarea: false,
+            // select: false,
     }
 })
 ```

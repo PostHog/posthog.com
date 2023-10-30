@@ -53,7 +53,7 @@ export default function CTA() {
                     </div>
                 </div>
             </Modal>
-            <section ref={ref} className="pt-8 md:pt-0 px-5 lg:px-0 overflow-hidden relative">
+            <section ref={ref} className="pt-8 md:pt-0 px-5 lg:px-0 overflow-hidden">
                 {inView && (
                     <motion.div
                         transition={{ delay: 1, duration: 0.5 }}

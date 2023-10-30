@@ -4,8 +4,7 @@ date: 2023-04-26
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-18.png
-tags: ["trends", "cohorts"]
+tags: ["trends", "cohorts", 'product analytics']
 ---
 
 Understanding user growth is critical to building a successful product. A lack of new users or existing users churning is a bad sign. This tutorial goes over the different ways to calculate new and returning users in PostHog, as well as insights you can create using these calculations.

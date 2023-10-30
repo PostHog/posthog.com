@@ -4,7 +4,6 @@ date: 2023-04-11
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/svelte-analytics.png
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
@@ -322,6 +321,8 @@ To avoid having multiple users identified as one, make sure to call `posthog.res
 ```
 
 This ensures when a user logs out, the events after they do aren’t connected to them, and future users who log in aren’t also connected.
+
+> **Note:** Be careful to only reset when a user logs out, **not** on every request. If you reset on every request, you create an excess of new anonymous users and new session recordings.
 
 ## Using feature flags
 
