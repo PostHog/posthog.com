@@ -47,7 +47,7 @@ This guide covers:
 
 ### What is PostHog?
 
-[PostHog](https://posthog.com/) (that's us 👋) is an open-source platform that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to Heap, but also tools like [LaunchDarkly](https://posthog.com/blog/posthog-vs-launchdarkly) and [LogRocket](https://posthog.com/blog/posthog-vs-logrocket).
+[PostHog](https://posthog.com/) (that's us 👋) is an open-source platform that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to Heap, but also tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) and [LogRocket](/blog/posthog-vs-logrocket).
 
 Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
  
@@ -55,13 +55,13 @@ Typical PostHog users are engineers and product managers at startups and mid-siz
 
 - 📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
 
-- 📺 **Session replays:** Including event timelines, console logs, and network activity, and 90-day retention.
+- 📺 **Session replays:** Including event timelines, console logs, and network activity, and 90-day data retention.
 
 - 🚩 **Feature flags** with local evaluation (for faster performance) and JSON payloads.
 
-- 🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Test duration, sample size, and statistical significance calculated automatically.
+- 🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
-- 💬 **Surveys:** Target surveys by event or user properties. Templates for Net Promoter Score (NPS) and Product-market fit (PMF) surveys, and more.
+- 💬 **Surveys:** Target surveys by event or user properties. Templates for Net Promoter Score (NPS), product-market fit (PMF) surveys, and more.
 
 ### How does PostHog compare to Heap?
 
@@ -124,7 +124,7 @@ You can also [create and label events using the PostHog toolbar](/tutorials/how-
    <tr>
  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
+ <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
   <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
@@ -245,7 +245,7 @@ FullStory offers both product analytics with autocapture and session replay. It 
   <tr>
  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
+ <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
   <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
@@ -258,7 +258,7 @@ FullStory offers both product analytics with autocapture and session replay. It 
 
 ### How popular is FullStory?
 
-FullStory is more popular than Heap. According to data from BuiltWith, as of October 202 FullStory is deployed on 8,107 of the top 1 million websites in the world. Heap is used by 4,248.
+FullStory is more popular than Heap. According to data from BuiltWith, as of October 2023, FullStory is deployed on 8,107 of the top 1 million websites in the world. Heap is used by 4,248.
 
 ### Why do companies use FullStory?
 
@@ -278,7 +278,7 @@ According to reviews on G2, companies use FullStory for:
 ## 3. Glassbox
 
 - **Founded:** 2010
-- **Most similar to:** Glassbox
+- **Most similar to:** FullStory
 - **Typical users:** Business analysts, product support
 - **Typical customers:** Retail and financial services
 
@@ -302,9 +302,9 @@ Unlike Heap, which is mainly used by product managers, G2 suggests Glassbox is p
 
 - ✅ **User feedback:** Gather satisfaction and user feedback on app experience.
 
-### How does Glassdoor compare to Heap?
+### How does Glassbox compare to Heap?
 
-Glassdoor offers similar core features to Heap, including product analytics with autocapture – Glassdoor calls it tagless tracking. It doesn't offer visual labeling tool, however.
+Glassbox offers similar core features to Heap, including product analytics with autocapture – Glassbox calls it tagless tracking. It doesn't offer visual labeling tool, however.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
 <table className="w-full mt-4">
@@ -359,7 +359,7 @@ Glassdoor offers similar core features to Heap, including product analytics with
   <tr>
  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
+ <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
   <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
@@ -370,7 +370,7 @@ Glassdoor offers similar core features to Heap, including product analytics with
 </table>
 </div>
 
-### How popular is Glassdoor?
+### How popular is Glassbox?
 
 According to data from BuiltWith, Glassbox isn't as popular as Heap. 
 
@@ -384,7 +384,7 @@ According to G2 reviews, customers use Glassbox for:
 
 1. **Session replay and error analysis:** Glassbox is best-known for its session replay features, so this is the most popular use case. Customers use Glassbox to analyze user journeys and identify app-breaking bugs.
 
-2. **Heatmap and funnel analysis:** Users like the heatmaps feature, which allows them to see the user preferences on key site pages, and using this to visualize user funnels.
+2. **Heatmap and funnel analysis:** Users like the heatmaps feature, which enables them to see user preferences on key pages and use this to visualize user funnels.
 
 3. **Fixing low conversion and abandonment:** Glassbox is popular among online retailers, who use it to solve issues around conversion and basket abandonment.
 
@@ -473,7 +473,7 @@ Pendo offers similar features to Heap, including event autocapture and session r
   <tr>
  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
+ <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
   <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
@@ -583,7 +583,7 @@ Mixpanel and Heap are similar in many ways. They're both used mainly by product 
   <tr>
  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
+ <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
   <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
@@ -596,7 +596,7 @@ Mixpanel and Heap are similar in many ways. They're both used mainly by product 
 
 ### How popular is Mixpanel?
 
-According to [BuiltWith data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, Mixpanel is slightly more popular than Heap. As of July 2023, **Mixpanel** is deployed by 5,218 of the top 1 million websites in 2023. **Heap** is deployed by 3,200.
+According to [BuiltWith data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, Mixpanel is more popular than Heap. As of July 2023, **Mixpanel** is deployed by 5,218 of the top 1 million websites in 2023. **Heap** is deployed by 3,200.
 
 ### Why do companies use Mixpanel?
 
@@ -607,7 +607,7 @@ According to [BuiltWith data compiled by Jason Packer](https://www.linkedin.com/
 3. **Understanding user behavior:** In common with most analytics tools, Mixpanel's users mostly want to understand user behavior, identify bottlenecks, and monitor core metrics like conversion rates, activation, and retention.
 
 > #### Bottom line 
-> Mixpanel is a good option to replace Heap, but it has shortcomings. The lack of autocapture is a major drawback for Heap users reliant on that feature, and you'll need to find another session replay tool if you use that feature in Heap.
+> Mixpanel is a good option to replace Heap, but it has shortcomings. The lack of autocapture is a major drawback for Heap users reliant on that feature, and you'll need to find another session replay tool if you want that feature.
 
 <br />
 
@@ -689,7 +689,7 @@ Like Mixpanel, Amplitude lacks features Heap users rely on, such as autocapture,
   <tr>
  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
+ <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
   <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
@@ -702,7 +702,7 @@ Like Mixpanel, Amplitude lacks features Heap users rely on, such as autocapture,
 
 ### How popular is Amplitude?
 
-Amplitude is more popular than Heap, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant. 
+Amplitude is more than twice as popular than Heap, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant. 
 
 As of July 2023, Amplitude is deployed by 6,973 of the top 1 million websites in 2023. Heap is deployed by 3,200.
 
@@ -744,7 +744,7 @@ Unlike its predecessor, Universal Analytics (GA3), it's event-based. It also int
 
 ### How does GA4 compare to Heap?
 
-GA4 is another tool that supports event autocpature, though confusingly Google calls this "enhanced analytics". 
+GA4 is another tool that supports event autocapture, though confusingly Google calls this "enhanced analytics". 
 
 On paper, it offers similar feature to Heap, though GA4's product analytics are less mature than those of Heap and other more established event-based tools.
 
@@ -801,7 +801,7 @@ On paper, it offers similar feature to Heap, though GA4's product analytics are 
   <tr>
  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
+ <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
   <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
@@ -839,8 +839,8 @@ We're biased, obviously, but we think PostHog is the perfect Heap replacement if
 
 - You value transparency (we're open source and open core)
 - You want to use fewer tools (we can replace way more than just Heap)
-- You want try before you buy (we're self-serve with a [generous free tier](https://posthog.com/pricing))
+- You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](https://posthog.com/product-analytics) and [read our docs](https://posthog.com/docs) to learn more.
+Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
 
 <ArrayCTA />
