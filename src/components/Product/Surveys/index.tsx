@@ -109,10 +109,6 @@ const subfeatures = [
 
 const questions = [
     {
-        question: 'How likely are you to recommend this product to a friend?',
-        url: '/tutorials/nps-survey',
-    },
-    {
         question: 'Would you like to book a user interview?',
         url: '/tutorials/feedback-interviews-site-apps',
     },
