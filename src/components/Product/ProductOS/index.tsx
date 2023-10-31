@@ -330,9 +330,7 @@ export const ProductOS = () => {
                             <p>
                                 We poke fun at a lot of things, but we take security seriously. We're{' '}
                                 <b>SOC 2 Type-1 certified</b>, GDPR compliant, and we share our security reports
-                                publicly. Check{' '}
-                                <a href="https://posthog.com/handbook/company/security#overview">our security docs</a>{' '}
-                                for more!
+                                publicly. Check <a href="/handbook/company/security">our security docs</a> for more!
                             </p>
                         </div>
                         <aside className="shrink-0 basis-[500px]">
