@@ -174,7 +174,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is FullStory?
 
-FullStory describes itself as Digital Experience Intelligence, which is code for session replay and mobile app analytics, with a side of product analytics. Like Heap and PostHog, it supports event autocapture, so you don't have to manually every event you want to capture.
+FullStory describes itself as Digital Experience Intelligence, which is code for session replay and mobile app analytics, with a side of product analytics. Like Heap and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
 
 ### Key features
 
@@ -190,7 +190,7 @@ FullStory describes itself as Digital Experience Intelligence, which is code for
 
 ### How does FullStory compare to Heap?
 
-FullStory offers both product analytics with autocapture and session replay. It also offers session replay for mobile apps, whereas Heap only supports it only desktop web apps.
+FullStory offers both product analytics with autocapture and session replay. It also offers session replay for mobile apps, which Heap doesn't support.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
 <table className="w-full mt-4">
@@ -262,14 +262,16 @@ FullStory is more popular than Heap. According to data from BuiltWith, as of Oct
 
 ### Why do companies use FullStory?
 
+According to reviews on G2, companies use FullStory for:
+
 1. **Easier collaboration:** As an accessible tool for non-technical users, FullStory facilitates collaboration between product, UX, and engineering teams by allowing all teams to access useful, reliable data.
 
-2. **Viewing users issues:** Some user problems are hard to reproduce. Support teams use FullStory to replay sessions to understand user problems and identify bugs that need fixing.
+2. **Viewing user issues:** Support teams use FullStory to replay sessions to understand user hard to replicate problems, and identify bugs that need fixing.
 
 3. **Improving conversion:** FullStory users like to combine funnel insights with replays of user sessions to understand pain points and improve conversion.
 
 > ### Bottom line
-> FullStory is a good Heap alternative for non-technical teams, particularly customer success and support teams who need to diagnose user problems. It has superior session replay features, though arguably is less focused on analytics uses cases than Heap or PostHog.
+> FullStory is a good Heap alternative for non-technical teams, particularly customer success and support teams who need to diagnose user problems. It has superior session replay features, though arguably is less focused on analytics use cases than Heap or PostHog.
 
 <br />
 
@@ -488,11 +490,13 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo)
 
 ### Why do companies use Pendo?
 
+Acording to G2 reviews, customers use Pendo for:
+
 1. **Customer support and feedback:** Users value Pendo as a useful tool for customer support and feedback collection. They use Pendo's feedback features to gather qualitative data, and feed that into Pendo's validation and roadmap features.
 
 2. **Improving onboarding:** Combining Pendo's in-app guides and analytics features makes it easy for non-technical users to experiment with new onboarding flows, improving user adoption.
 
-3. **Product planning:** 
+3. **Product planning:** Customers to use Pendo's data tools, product validation, and roadmap features to align internal teams and stakeholders on product development.
 
 > ### Bottom line
 > Pendo is similar to Heap in many ways. It's primarily designed for non-technical users, and supports event autocapture, making it viable alternative for product teams.
@@ -510,7 +514,7 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo)
 
 ### What is Mixpanel?
 
-Mixpanel is one of the most popular product analytics tools on the market. Founded in XXXX, in recent years it's deprecated additional features, such as A/B testing, in favor of focusing on product analytics alone.
+Mixpanel is one of the most popular product analytics tools on the market. Founded in 2009, in recent years it's deprecated additional features, such as A/B testing, to focus on product analytics alone.
  
 ### Key features
 
@@ -524,7 +528,7 @@ Mixpanel is one of the most popular product analytics tools on the market. Found
 
 ### How does Mixpanel compare to Heap?
 
-Mixpanel and Heap are similar in many ways. They're both used mainly by product managers and offer product analyitcs. However, Mixpanel lacks several features Heap users rely on, such as event autocapture and session replay.
+Mixpanel and Heap are similar in many ways. They're both used mainly by product managers and offer product analytics. However, Mixpanel lacks several features Heap users rely on, such as event autocapture and session replay.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
 <table className="w-full mt-4">
@@ -704,14 +708,14 @@ As of July 2023, Amplitude is deployed by 6,973 of the top 1 million websites in
 
 ### Why do companies use Amplitude?
 
-1. **Reducing load on data teams:** Amplitude is designed to enable non-technical to self-serve analytics. Amplitude [cites](https://amplitude.com/case-studies/nbc) NBCUniversal as a company that's benefited from its data team spending less time responding to requests for analysis.
+1. **Reducing load on data teams:** Amplitude is designed to enable non-technical users to self-serve analytics. Amplitude cites NBCUniversal as a company that's benefited from its data team spending less time responding to requests for analysis.
 
-2. **Large-scale experimentation:** Unlike Mixpanel, Amplitude offers a built-in experimentation features. This enables companies to run experiments on users using existing cohorts created in Amplitude.
+2. **Large-scale experimentation:** Unlike Mixpanel, Amplitude offers built-in experimentation features. This enables companies to run experiments on users using existing cohorts created in Amplitude.
 
-3. **Resolving data quality problems:** Companies that use Amplitude, particularly large ones, often migrate from outdated, self-built, tools that generate poor quality data. Amplitude helps them fix that and makes analytics more accessible.
+3. **Resolving data quality problems:** Companies that use Amplitude, particularly large ones, often migrate from outdated, self-built, tools that generate poor quality data. Amplitude helps them fix that while making analytics more accessible.
 
 > #### Bottom line
-> The case for Amplitude is very similar to the case for Mixpanel. It's a well-established Heap alternative, but falls short of a like-for-like replacement due to is lack of autocapture support.
+> The case for Amplitude is very similar to the case for Mixpanel. It's a well-established Heap alternative, but falls short of a like-for-like replacement due to is lack of autocapture and session replay.
 
 <br />
 
@@ -742,7 +746,7 @@ Unlike its predecessor, Universal Analytics (GA3), it's event-based. It also int
 
 GA4 is another tool that supports event autocpature, though confusingly Google calls this "enhanced analytics". 
 
-On paper, it does many of things Heap does, though GA4's product analytics features are less mature than those of Heap and other more established tools.
+On paper, it offers similar feature to Heap, though GA4's product analytics are less mature than those of Heap and other more established event-based tools.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
 <table className="w-full mt-4">
@@ -825,12 +829,16 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 > #### Bottom line
 > Until recently, Google Analytics wasn't a viable Heap alternative. The launch of GA4 changed this, but switching from Heap to Google only makes sense if you're keen to integrate deeper into Google's ecosystem of data tools, like BigQuery and Looker Studio.
 
-## Should you choose PostHog?
+## Is PostHog right for you?
 
-So, here's the sales pitch. We're biased, obviously, but we think PostHog is the perfect Heap replacement if:
+Here's the (short) sales pitch. 
+
+We're biased, obviously, but we think PostHog is the perfect Heap replacement if:
 
 - You value transparency (we're open source and open core)
 - You want to use fewer tools (we can replace way more than just Heap)
 - You want try before you buy (we're self-serve with a [generous free tier](https://posthog.com/pricing))
+
+Check out [our product pages](https://posthog.com/product-analytics) and [read our docs](https://posthog.com/docs) to learn more.
 
 <ArrayCTA />
