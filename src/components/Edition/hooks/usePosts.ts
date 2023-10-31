@@ -5,7 +5,7 @@ import qs from 'qs'
 const query = (params: any, offset: number) => {
     return qs.stringify(
         {
-            populate: ['featuredImage.image', 'post_category.defaultImage', 'authors', 'likes'],
+            populate: ['featuredImage.image', 'post_category.defaultImage', 'authors.avatar', 'likes'],
             sort: 'date:desc',
             pagination: {
                 start: offset * 20,
@@ -25,13 +25,18 @@ export const usePosts = ({ params }: { params: any }) => {
         (url: string) => fetch(url).then((r) => r.json())
     )
     const posts = React.useMemo(() => {
-        return data?.reduce((acc, cur) => [...acc, ...cur.data], []) ?? []
+        return data?.reduce((acc, cur) => [...(acc || []), ...(cur.data || [])], []) ?? []
     }, [size, data])
+
+    const total = data && data[0]?.meta?.pagination?.total
+    const hasMore = total ? posts?.length < total : false
 
     return {
         posts,
-        isLoading: isLoading || isValidating,
+        isLoading,
+        isValidating,
         fetchMore: () => setSize(size + 1),
         mutate,
+        hasMore,
     }
 }

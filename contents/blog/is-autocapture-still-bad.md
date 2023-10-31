@@ -11,7 +11,6 @@ featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: General
 tags:
-  - Product analytics
   - Explainers
 ---
 

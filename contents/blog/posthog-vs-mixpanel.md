@@ -12,7 +12,6 @@ category: General
 tags:
   - Comparisons
   - Guides
-  - Product analytics
 ---
 
 Want to know how PostHog and Mixpanel are different? If you remember nothing else, remember these two points:

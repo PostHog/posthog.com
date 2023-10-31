@@ -1,6 +1,6 @@
 import { CallToAction } from 'components/CallToAction'
 import { pineappleText } from 'components/Job/Sidebar'
-import { ContributorImage } from 'components/PostLayout/Contributors'
+import { ContributorImageSmall } from 'components/PostLayout/Contributors'
 import TeamRoadmap from 'components/TeamRoadmap'
 import { graphql, useStaticQuery } from 'gatsby'
 import { getImage } from 'gatsby-plugin-image'
@@ -92,7 +92,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
                                 return (
                                     <li className="flex space-x-2 items-center py-1" key={name}>
                                         <figure className="mb-0">
-                                            <ContributorImage className="w-[45px] h-[45px]" image={avatar} />
+                                            <ContributorImageSmall className="w-[45px] h-[45px]" image={avatar} />
                                         </figure>
                                         <div>
                                             <span className="flex items-center md:flex-row space-x-2">

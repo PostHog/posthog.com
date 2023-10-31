@@ -4,7 +4,6 @@ date: 2023-08-16
 author: ["joe-martin"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ['surveys', 'insights']
 ---
 

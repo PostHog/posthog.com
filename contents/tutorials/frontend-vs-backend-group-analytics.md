@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-09
-featuredImage: ../images/tutorials/banners/tutorial-11.png
-tags: ["configuration","group analytics"]
+tags: ["configuration","group analytics", 'product analytics']
 ---
 
 Group analytics is a powerful feature for understanding how groups such as organizations, customers, and companies use your product as a unit. It provides a new level of analysis between individual users and all your users.

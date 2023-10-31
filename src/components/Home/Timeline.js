@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { heading } from './classes'
 import groupBy from 'lodash.groupby'
 import React, { useEffect, useRef, useState } from 'react'
-import { ArrowLeft, ArrowRight } from '@posthog/icons'
+import { IconArrowLeft, IconArrowRight } from '@posthog/icons'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -118,7 +118,7 @@ export default function Timeline() {
                         onClick={() => listRef?.current?.scrollBy({ left: -50, behavior: 'smooth' })}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 px-2 py-8"
                     >
-                        <ArrowLeft className="w-10" />
+                        <IconArrowLeft className="w-10" />
                     </button>
                 </div>
                 <div
@@ -192,7 +192,7 @@ export default function Timeline() {
                         onClick={() => listRef?.current?.scrollBy({ left: 50, behavior: 'smooth' })}
                         className="md:block hidden relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 px-2 py-8"
                     >
-                        <ArrowRight className="w-10" />
+                        <IconArrowRight className="w-10" />
                     </button>
                 </div>
             </div>

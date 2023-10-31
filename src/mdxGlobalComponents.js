@@ -20,7 +20,25 @@ import { Label } from './components/Label'
 import { List } from './components/List'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
-import { ProductLayout } from './components/ProductLayout'
+import { AbTesting } from './components/Product/AbTesting'
+import { FeatureFlags } from './components/Product/FeatureFlags'
+import { ProductAnalytics } from './components/Product/ProductAnalytics'
+import { ProductOS } from './components/Product/ProductOS'
+import { SessionReplay } from './components/Product/SessionReplay'
+import { Surveys } from './components/Product/Surveys'
+import { Competitor } from './components/Products/Competitor'
+import { CustomerCard } from './components/Products/CustomerCard'
+import { DocsLinks } from './components/Products/DocsLinks'
+import { FAQ } from './components/Products/FAQ'
+import { Feature } from './components/Products/Feature'
+import { Marquee } from './components/Products/Marquee'
+import { MobileSlides } from './components/Products/MobileSlides'
+import { PairsWith } from './components/Products/PairsWith'
+import { Question } from './components/Products/Question'
+import { SmoothScroll } from './components/Products/SmoothScroll'
+import { Subfeature } from './components/Products/Subfeature'
+import { TextCard } from './components/Products/TextCard'
+import { TutorialCard } from './components/Products/TutorialCard'
 import { Quote2 } from './components/Quote2'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
@@ -51,7 +69,25 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
-    ProductLayout,
+    AbTesting,
+    FeatureFlags,
+    ProductAnalytics,
+    ProductOS,
+    SessionReplay,
+    Surveys,
+    Competitor,
+    CustomerCard,
+    DocsLinks,
+    FAQ,
+    Feature,
+    Marquee,
+    MobileSlides,
+    PairsWith,
+    Question,
+    SmoothScroll,
+    Subfeature,
+    TextCard,
+    TutorialCard,
     Quote2,
     Signatures,
     SlackPage,

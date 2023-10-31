@@ -21,13 +21,15 @@ We run full team 360-degree feedback session as part of every offsite. The sessi
 
 - Preparation includes reading our handbook about how to be a good feedback [giver](/handbook/people/feedback#how-to-give-good-feedback) and [receiver](/handbook/people/feedback#how-to-receive-feedback-well).
 
-- Feedback to be 70% constructive – this is an opportunity to help each other to grow. 
+- As a guide the mix of positive and constructive feedback will vary. You should spend more time talking over the constructive even if you have a long list of positive things to share – this is an opportunity to help each other to grow. 
 
 - Everyone is  expected to give feedback to everyone, even if they don’t work together directly. It may be very short feedback, which is ok! 
 
 - That being said, avoid piling on and repeating feedback others have given unless you have a different perspective or can add more context. It is ok to say "+1 to what X said about Y" and move on. Do not spend 2min repeating the same point that has already been made by someone else. 
 
-- Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you). 
+- Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you).
+
+- What is discussed is for the benefit of those present and does not need to be shared with others who were not present. It is ok to follow up with anyone on feedback you received or gave after the session. 
 
 ### How to give good feedback
 

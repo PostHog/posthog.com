@@ -11,7 +11,6 @@ featuredImage: ../images/blog/lw-queries.png
 featuredImageType: full
 category: Product growth
 tags:
-  - Product analytics
   - Product metrics
   - Guides
 ---
