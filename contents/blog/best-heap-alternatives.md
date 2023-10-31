@@ -490,7 +490,7 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo)
 
 ### Why do companies use Pendo?
 
-Acording to G2 reviews, customers use Pendo for:
+According to G2 reviews, customers use Pendo for:
 
 1. **Customer support and feedback:** Users value Pendo as a useful tool for customer support and feedback collection. They use Pendo's feedback features to gather qualitative data, and feed that into Pendo's validation and roadmap features.
 
