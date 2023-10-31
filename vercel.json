@@ -6,6 +6,7 @@
         { "source": "/careers/(.*)", "destination": "/careers" }
     ],
     "redirects": [
+        { "source": "/tutorials/nps-survey", "destination": "/docs/surveys/creating-surveys" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
