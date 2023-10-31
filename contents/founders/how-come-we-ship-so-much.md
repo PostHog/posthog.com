@@ -1,6 +1,6 @@
 ---
 date: 2023-10-30
-title: "Why we (probably) ship faster than your company"
+title: "We like to ship fast. Here's how we designed our company to do it"
 author:
   - james-hawkins
 featuredImage: ../images/blog/super-hog-pink.png
@@ -39,9 +39,9 @@ I often get asked how we build so much, so quickly. The answer is simple: we del
 
 ### 1. No design by default
 
-When we started, we felt the best engineers would eventually quit if they felt dictated to by product designers. Product engineers need autonomy and freedom to enjoy their work.
+When we started, we felt the best engineers would eventually quit if they felt dictated by product designers. [Product engineers](/blog/what-is-a-product-engineer) need autonomy and freedom to enjoy their work.
 
-As we grew, we realized that engineers can design the UX of a product. Especially if we hire people that have this skill set, and provide a framework for their work.
+As we grew, we realized that engineers can design the UX of a product, especially if we hire people that have this skill set and provide a framework for their work.
 
 We invested considerable time getting our design *system* up and running, and worked with a designer to get it done. Then we moved onto this "no design by default" phase. Had we been in this phase from the beginning, the app would have been very inconsistent... at best.
 
@@ -65,7 +65,7 @@ The above requires a lot of context setting from the company. To that end, we're
 
 ### 3. Hiring with intention
 
-I think 90%+ of an organization's problems are solved by hiring right – see [what we've learned about hiring](https://newsletter.posthog.com/p/everything-weve-learned-about-hiring) in our Substack newsletter.
+I think 90%+ of an organization's problems are solved by hiring right – see [what we've learned about hiring](https://newsletter.posthog.com/p/everything-weve-learned-about-hiring) in our newsletter.
 
 We've found it invaluable to pay people during our hiring process to do some actual work. Over time, we've refined this down to a one-day task, which gives us a good sense of how much someone can get done and the quality of their actual code.
 
@@ -73,7 +73,7 @@ We tend to hire people with more experience, who we find work better with more a
 
 ### 4. Each team is a mini startup
 
-I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel), who runs [Twilio](https://twilio.com/). He described how the greatest innovation at [Amazon](https://www.amazon.com/) was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
+I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel), who runs [Twilio](https://twilio.com/). He described how the greatest innovation at Amazon was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
 
 PostHog works like a group of startups with lots of [small teams](/handbook/company/small-teams). Each of our products has a team of up to 6 who can ship with minimal interference from the rest of the company. We hire a lot of former technical founders to help here.
 
@@ -89,7 +89,7 @@ We're product-led because our ideal users, engineers, want to try something rath
 
 ### 6. No meeting Tuesdays and Thursdays
 
-We want a culture where people can deep work. We push back on unnecessary meetings. 
+We want a culture where people can deep work. We push back on unnecessary meetings. If a meeting is booked for 45 minutes but frequently only takes 25, we'll rebook it so it's shorter by default – something we did recently with our engineering sprint meetings.```
 
 We have learned, often painfully, that some meetings are necessary, but we default to asynchronous communication and adapt where needed.
 
