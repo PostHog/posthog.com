@@ -28,7 +28,7 @@ In this guide, we explore how they compare to Mixpanel, who uses them, and how t
 
 ### What is PostHog?
 
-PostHog is an open-source product that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one platform. This means it's not just an alternative to Mixpanel, but also [LaunchDarkly](/blog/posthog-vs-launchdarkly), Hotjar, and Optimizely. 
+PostHog is an open-source product that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one platform. This means it's not just an alternative to Mixpanel, but also [LaunchDarkly](/blog/posthog-vs-launchdarkly), Hotjar, and [Optimizely](/blog/posthog-vs-optimizely). 
  
 ### Key features
 

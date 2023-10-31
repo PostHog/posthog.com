@@ -119,7 +119,7 @@ PostHog integrates several normally separate tools, such as product analytics, s
 
 - **Sync to data warehouse:** The ability to sync with your data warehouse is part of Heap Connect, a paid add-on on to Heap's Pro plan – it's included on Heap's Premier plan. Data warehouse sync is available in PostHog at no additional cost because we believe companies should own their data.
 
-- **Experiments:** Heap doesn't have a built-in testing feature, though it does integrate with a number of popular A/B testing tools, such as AB Tasty and Optimizely. PostHog has a [built-in experimentation suite](/product/experimentation-suite) for running A/B and multivariate experiments.
+- **Experiments:** Heap doesn't have a built-in testing feature, though it does integrate with a number of popular A/B testing tools, such as AB Tasty and [Optimizely](/blog/posthog-vs-optimizely). PostHog has a [built-in experimentation suite](/product/experimentation-suite) for running A/B and multivariate experiments.
 
 - **Feature flagging:** The [benefits of feature flags](/blog/feature-flag-benefits-use-cases) include the ability to stagger new feature releases, ship to test groups or specific cohorts, manage feature access, and more. PostHog's feature flag product is built-in and tightly integrated with all other products.
 

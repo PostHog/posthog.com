@@ -14,7 +14,7 @@ tags:
   - Privacy
 ---
 
-What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee have in common?
+What do Google Optimize, [Optimizely](/blog/posthog-vs-optimizely), Convert, Webtrends Optimize and Splitbee have in common?
 
 1. They're popular A/B testing tools
 2. None of them are HIPAA compliant
