@@ -321,6 +321,26 @@ export const ProductOS = () => {
                     </div>
                 </section>
 
+                <section className="max-w-7xl mx-auto px-5 md:mb-20">
+                    <div className="flex flex-col-reverse items-center md:flex-row md:gap-8 mb-20">
+                        <div className="flex-1">
+                            <h2 className="text-4xl">
+                                This bit is boring, but <span className="text-red dark:text-yellow">important</span>
+                            </h2>
+                            <p>
+                                We poke fun at a lot of things, but we take security seriously. We're{' '}
+                                <b>SOC 2 Type-1 certified</b>, GDPR compliant, and we share our security reports
+                                publicly. Check{' '}
+                                <a href="https://posthog.com/handbook/company/security#overview">our security docs</a>{' '}
+                                for more!
+                            </p>
+                        </div>
+                        <aside className="shrink-0 basis-[500px]">
+                            <StaticImage src="./images/alert.png" alt="" className="w-full max-w-[262px]" />
+                        </aside>
+                    </div>
+                </section>
+
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h2 className="text-4xl mb-2">API</h2>
                     <p className="max-w-2xl mb-2">
