@@ -829,6 +829,8 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 > #### Bottom line
 > Until recently, Google Analytics wasn't a viable Heap alternative. The launch of GA4 changed this, but switching from Heap to Google only makes sense if you're keen to integrate deeper into Google's ecosystem of data tools, like BigQuery and Looker Studio.
 
+<br />
+
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch. 
