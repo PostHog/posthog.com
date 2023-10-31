@@ -21,7 +21,7 @@ The most popular Heap alternatives in 2023 are:
 
 3. **Glassbox:** Session replay and analytics platform that's mainly used by business and data analysts at e-commerce companies.
 
-4. **Pendo:**
+4. **Pendo:** Product experience platform that includes analytics, session replay, in-app guides, user feedback, and product validation tools. 
 
 5. **Mixpanel:** A pure product analytics tool designed for product managers at startups and mid-size companies.
 
