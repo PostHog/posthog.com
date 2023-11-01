@@ -1,5 +1,5 @@
 ---
-date: 2023-10-30
+date: 2023-11-01
 title: "We like to ship fast. Here's how we designed our company to do it"
 author:
   - james-hawkins
