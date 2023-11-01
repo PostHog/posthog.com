@@ -13,6 +13,9 @@ tags:
   - Comparisons
 ---
 
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
 The most popular Heap alternatives in 2023 are:
 
 1. **PostHog:** All-in-one platform that combines comprehensive analytics with session replay, A/B testing, feature flags, and user surveys. Ideal for B2B SaaS apps.
@@ -69,74 +72,19 @@ Unlike Mixpanel and Amplitude, PostHog supports event autocapture, which means i
 
 You can also [create and label events using the PostHog toolbar](/tutorials/how-to-capture-events-the-easy-way). This is similar to Heap's visual labeling feature, though it's only supported on web apps.
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>PostHog</strong></td>
- <td class="text-center"><strong>Heap</strong></td>
- </tr>
- </thead>
- <tbody>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-serve</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Free to try, no mandatory sales calls</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Visual labeling</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Create and tag custom events without using code</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replays</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
-   <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Open source</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Build your own apps and contribute code</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr> 
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="Heap">
+  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
+</ComparisonTable>
 
 ### How popular is PostHog?
 
@@ -190,69 +138,18 @@ FullStory describes itself as Digital Experience Intelligence, which is code for
 
 FullStory offers both product analytics with autocapture and session replay. It also offers session replay for mobile apps, which Heap doesn't support.
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>FullStory</strong></td>
- <td class="text-center"><strong>Heap</strong></td>
- </tr>
- </thead>
- <tbody>
- <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-serve</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Free to try, no mandatory sales calls</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Visual labeling</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Create and tag custom events without using code</p></td>
-  <td className="text-center"><span className="text-red text-lg">✖</span></td>
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replays</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
-<td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>  
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="FullStory" column2="Heap">
+  <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={false} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+</ComparisonTable>
 
 ### How popular is FullStory?
 
@@ -304,69 +201,18 @@ Unlike Heap, which is mainly used by product managers, G2 suggests Glassbox is p
 
 Glassbox offers similar core features to Heap, including product analytics with autocapture – Glassbox calls it tagless tracking. It doesn't offer visual labeling tool, however.
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>Glassbox</strong></td>
- <td class="text-center"><strong>Heap</strong></td>
- </tr>
- </thead>
- <tbody>
-  <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-serve</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Free to try, no mandatory sales calls</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Visual labeling</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Create and tag custom events without using code</p></td>
-  <td className="text-center"><span className="text-red text-lg">✖</span></td>
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
-<td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>  
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="Glassbox" column2="Heap">
+  <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+</ComparisonTable>
 
 ### How popular is Glassbox?
 
@@ -418,69 +264,18 @@ Pendo describes itself as a product experience platform. In addition to product 
 
 Pendo offers similar features to Heap, including event autocapture and session replay. It lacks a visual labeling tool for events, however.
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>Pendo</strong></td>
- <td class="text-center"><strong>Heap</strong></td>
- </tr>
- </thead>
- <tbody>
-  <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-serve</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Free to try, no mandatory sales calls</p></td>
- <td className="text-center">Starter plans only</td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Visual labeling</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Create and tag custom events without using code</p></td>
-  <td className="text-center"><span className="text-red text-lg">✖</span></td>
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
-<td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>  
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="Pendo" column2="Heap">
+  <ComparisonRow column1="Starter plans only" column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+</ComparisonTable>
 
 ### How popular is Pendo?
 
@@ -528,69 +323,18 @@ Mixpanel is one of the most popular product analytics tools on the market. Found
 
 Mixpanel and Heap are similar in many ways. They're both used mainly by product managers and offer product analytics. However, Mixpanel lacks several features Heap users rely on, such as event autocapture and session replay.
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>Mixpanel</strong></td>
- <td class="text-center"><strong>Heap</strong></td>
- </tr>
- </thead>
- <tbody>
-  <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-serve</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Free to try, no mandatory sales calls</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Visual labeling</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Create and tag custom events without using code</p></td>
-  <td className="text-center"><span className="text-red text-lg">✖</span></td>
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
-<td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>  
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="Heap">
+  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
+  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={false} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+</ComparisonTable>
 
 ### How popular is Mixpanel?
 
@@ -634,69 +378,18 @@ Amplitude is an analytics and testing tool with a particular focus on large ente
 
 Like Mixpanel, Amplitude lacks features Heap users rely on, such as autocapture, visual labeling, and session replay. But its analytics features are arguably a little more mature, particularly the natural language and anomaly detection features.
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>Amplitude</strong></td>
- <td class="text-center"><strong>Heap</strong></td>
- </tr>
- </thead>
- <tbody>
-  <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-serve</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Free to try, no mandatory sales calls</p></td>
- <td className="text-center">Starter plans only</td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Visual labeling</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Create and tag custom events without using code</p></td>
-  <td className="text-center"><span className="text-red text-lg">✖</span></td>
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>  
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>  
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="Amplitude" column2="Heap">
+  <ComparisonRow column1="Starter plans only" column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
+  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={false} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+</ComparisonTable>
 
 ### How popular is Amplitude?
 
@@ -746,69 +439,18 @@ GA4 is another tool that supports event autocapture, though confusingly Google c
 
 On paper, it offers similar feature to Heap, though GA4's product analytics are less mature than those of Heap and other more established event-based tools.
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>Google Analytics 4</strong></td>
- <td class="text-center"><strong>Heap</strong></td>
- </tr>
- </thead>
- <tbody>
-   <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-serve</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Free to try, no mandatory sales calls</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
-  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Visual labeling</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Create and tag custom events without using code</p></td>
-  <td className="text-center"><span className="text-red text-lg">✖</span></td>
-  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>  
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See where users click and interact</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
-  <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>  
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="Google Analytics 4" column2="Heap">
+  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Visual labeling" description="Create and tag custom events without using code" />
+  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={false} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+</ComparisonTable>
 
 ### How popular is GA4?
 
