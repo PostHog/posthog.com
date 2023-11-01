@@ -62,69 +62,16 @@ Because we build for engineers first, we're also open source. You can check out 
 
 To make a clean comparison between PostHog and Pendo, we’ll focus on comparing Pendo Engage to PostHog and include features from all pricing tiers.
 
-## Core features
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-          <td className="w-3/12"></td>
-            <td><strong>Pendo</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Product analytics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track events and conversion; analyze user behavior</td>
-        </tr>
-        <tr>
-            <td><strong>Session replays</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product; diagnose bugs</td>
-        </tr>
-        <tr>
-            <td><strong>User surveys</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ask users for qualitative feedback and gather responses</td>
-        </tr>
-        <tr>
-            <td><strong>Feature flags</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Roll out features safely; toggle features for cohorts or individuals</td>
-        </tr>
-        <tr>
-            <td><strong>A/B testing</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test changes and analyze impact</td>
-        </tr>
-        <tr>
-            <td><strong>In-app prompts and messages</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send messages to users in your app</td>
-        </tr>
-        <tr>
-            <td><strong>Apps/Integrations</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Push and pull data to other destinations</td>
-        </tr>
-        <tr>
-            <td><strong>Open source</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build your own apps and contribute code</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Pendo" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
+  <ComparisonRow column1={false} column2={true} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={true} column2={true} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Test changes and analyze impact" />
+  <ComparisonRow column1={true} column2={true} feature="In-app prompts and messages" description="Send messages to users in your app" />
+  <ComparisonRow column1={true} column2={true} feature="Apps/integrations" description="Push and pull data to other destinations" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Build your own apps and contribute code" />
+</ComparisonTable>
 
 - **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in console logs and network performance.
 
