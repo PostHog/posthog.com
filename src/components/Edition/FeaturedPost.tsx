@@ -19,10 +19,11 @@ const Skeleton = () => {
     )
 }
 
-export default function FeaturedPost({ title, date, authors, featuredImage, slug, excerpt }) {
+export default function FeaturedPost({ title, date, authors, featuredImage, slug, excerpt, publishedAt }) {
     const { isLoading } = useContext(PostsContext)
-    const postDate = dayjs(date).format('MMM D, YYYY')
-    const imageURL = featuredImage?.image?.data?.attributes?.url || `https://posthog.com${featuredImage?.url}`
+    const postDate = dayjs(date || publishedAt).format('MMM D, YYYY')
+    const imageURL = featuredImage?.url && `https://posthog.com${featuredImage?.url}`
+
     return (
         <section className="grid md:grid-cols-2 gap-6 md:gap-8 items-center rounded-md border border-border dark:border-dark p-5 md:mx-4 bg-accent dark:bg-accent-dark">
             {isLoading ? (
@@ -31,7 +32,7 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
                 <>
                     <div className="w-full aspect-video rounded-md overflow-hidden">
                         <Link to={slug}>
-                            <img className="w-full h-full object-cover" src={imageURL} />
+                            <img className="w-full h-full object-cover" src={imageURL || '/banner.png'} />
                         </Link>
                     </div>
                     <div>

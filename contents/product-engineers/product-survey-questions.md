@@ -162,5 +162,4 @@ As an all-in-one platform, PostHog is uniquely placed to do all of the above. In
 ## Further reading
 
 - [In-depth: How to measure product-market fit](/blog/measure-product-market-fit)
-- [How to measure your NPS score in PostHog](/tutorials/nps-survey)
 - [10x engineers talk to users](/blog/10x-engineers-do-user-interviews)

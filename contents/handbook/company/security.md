@@ -12,6 +12,13 @@ We maintain a robust security program that follows best practice in order to mee
 
 This page covers SOC 2, GDPR, and CCPA compliance.
 
+## Multi-factor authentication 
+
+We enforce the use of hardware security keys wherever we can. Every team members gets two of these, most commonly:
+
+- One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
+- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) for use with mobile devices, and as backup
+
 ## SOC 2
 
 PostHog is certified as SOC 2 Type 1 compliant, following an external audit. 
@@ -81,10 +88,3 @@ Under the California Consumer Privacy Act (CCPA), PostHog as a Service Provider 
 We give all PostHog customers the tools to easily comply with their end users' requests under CCPA, including deletion of their data. We provide separate guidance for our customers on how to use PostHog in a CCPA-compliant way in our [Docs](/docs/privacy/ccpa-compliance). 
 
 We receive data collected by our customers from end-users and allow them to understand usage metrics of their products. We don't access customer end-user data unless instructed by a customer, and customer data is never sold to third parties. We do not have access to data collected by our customers who are using a self-hosted version of PostHog from end-users at all, unless they give us access to their instance. 
-
-## Yubikeys
-
-We enforce the use of Yubikeys wherever we can. We recommend everyone buy two Yubikeys, in case you lose one and for ease of use.
-
-- One [Yubikey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) that you can leave plugged into your Macbook at all times
-- One [Yubikey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) that you can use in case you lose the first one, and to authenticate on your phone
