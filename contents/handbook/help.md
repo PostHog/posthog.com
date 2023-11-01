@@ -54,6 +54,8 @@ You can find these in [posthog.com/questions](https://posthog.com/questions).
 
 A beginner's guide to some of our custom Slack emojis and various anecdotes you'll see and hear about.
 
+* [Lottie](/community/profiles/227), [Simon](/community/profiles/49), and [Joe](/community/profiles/59) once made [a game about James and Tim](/easter-egg). A former games journalist has described it as '7/10'.
+
 * <Emoji name="bad-internet" src="/images/emojis/bad-internet.png" /> Yakko always had bad internet when demoing. <em>Always.</em>
 
 * [Jams](/community/profiles/90) wore a skin tight green all-body suit for months to improve his Zoom background game without us realizing.
