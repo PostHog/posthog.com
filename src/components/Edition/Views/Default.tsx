@@ -315,6 +315,8 @@ function PostsListing() {
     return articleView && breakpoints.sm ? null : (
         <div
             className={`
+                overflow-hidden
+                h-auto
                 min-w-0
                 transition-all 
                 ${
