@@ -137,6 +137,9 @@ happen if an exceptionally large number of properties are sent along with the
 event (including person properties), or one or more installed apps transformed
 the event and enriched it with a large amount of additional property data.
 
+Please note that these warnings are sampled: the actual number of events that
+were discarded may exceed the total displayed quantity.
+
 ## How event timestamps are computed
 
 If you are using one of our [libraries](/docs/integrate#libraries) event timestamps will be handled for you. However, users doing manual instrumentation, we provide you with several mechanisms to set event timestamps:
