@@ -46,6 +46,7 @@
         "busboy": "^1.6.0",
         "chart.js": "^4.3.3",
         "chrome-aws-lambda": "^10.1.0",
+        "clsx": "^2.0.0",
         "cntl": "^1.0.0",
         "core-js": "^3.21.1",
         "country-code-emoji": "^2.3.0",
@@ -161,10 +162,12 @@
         "styled-components": "^5.3.3",
         "svg-sprite": "^1.5.0",
         "swr": "^2.0.0",
+        "tailwind-merge": "^2.0.0",
         "tsparticles-preset-stars": "^2.11.0",
         "typescript": "^4.0.2",
         "unist-util-visit": "^1.4.0",
-        "yup": "^0.32.11"
+        "yup": "^0.32.11",
+        "zustand": "^4.4.5"
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",
