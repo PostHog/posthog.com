@@ -23,7 +23,7 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 * [Feature flags](/feature-flags)
 * [A/B testing](/ab-testing)
 * [User surveys](/docs/surveys)
-* Heatmaps
+* [Heatmaps](/docs/toolbar/heatmaps)
 * [SDKs](/docs/libraries) for all the above
 * A basic [CDP](/docs/cdp) to stream data to warehouses
 * [Data warehouse](/docs/data-warehouse) MVP
@@ -33,7 +33,7 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 
 All the above are being used a lot, too. We're ingesting 10s of billions of events a month, have 10s of thousands of companies regularly using our service, and over 100k user signups.
 
-I often get asked how we build so much, so quickly. The answer is simple: we deliberately designed our company for speed.
+I often get asked how we build so much, so quickly. The answer is simple: we deliberately designed our company for speed.  We did this because we want to build [lots of products in one](/handbook/why-does-posthog-exist) – it's a lot to ship!
 
 ## How we designed PostHog for speed
 
@@ -61,7 +61,15 @@ The concept internally is a "[product engineer](/blog/what-is-a-product-engineer
 
 We have one product manager who steps in reactively if a small team needs more support.
 
-The above requires a lot of context setting from the company. To that end, we're *unusually transparent*. We share board slides, financial information, fundraising progress before, during and after it happens, and much more.
+The above requires a lot of context setting from the company. To that end, we're *unusually transparent*. There are two main ways we do this.
+
+First, we make clear what we're trying to achieve. To do this we have a clear, simple [mission and strategy](/handbook/why-does-posthog-exist). We communicate this repeatedly through our handbook, during everyone's onboarding, repeatedly in our all hands and when we plan each quarter of work. 
+
+Our mission and strategy have both been refined as the company has made progress – they have felt more meaningful as a result as we've gotten further along. We've gradually gone from something hypothetical to these things feeling like an obvious label for what we do.
+
+Second, when it comes to the _output_ of our work, and our progress towards these goals, we share all our metrics (for each product and in total), financial information, fundraising progress (before, during and after it happens), and pretty much anything else people ask for.
+
+We've written an entire post on [how to run a transparent company](/founders/how-to-run-a-transparent-company) that goes into more detail.
 
 ### 3. Hiring with intention
 
@@ -75,7 +83,7 @@ We tend to hire people with more experience, who we find work better with more a
 
 I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel), who runs [Twilio](https://twilio.com/). He described how the greatest innovation at Amazon was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
 
-PostHog works like a group of startups with lots of [small teams](/handbook/company/small-teams). Each of our products has a team of up to 6 who can ship with minimal interference from the rest of the company. We hire a lot of former technical founders to help here.
+PostHog works like a group of startups with lots of [small teams](/handbook/company/small-teams). Each of our products has a team of up to 6 who can ship with minimal interference from the rest of the company. They make their own product decisions, own their pricing, and are responsible for co-ordinating with our marketing and growth teams. We hire a lot of former technical founders to help here.
 
 ### 5. Nearly everyone is an engineer
 
