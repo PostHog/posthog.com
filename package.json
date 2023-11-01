@@ -137,6 +137,7 @@
         "react-markdown": "^8.0.4",
         "react-medium-image-zoom": "^4.3.5",
         "react-modal": "^3.11.2",
+        "react-pico-8": "^4.1.0",      
         "react-popper": "^2.2.5",
         "react-redux": "^7.2.1",
         "react-responsive": "^8.2.0",
