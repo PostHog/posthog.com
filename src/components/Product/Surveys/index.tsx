@@ -102,7 +102,7 @@ const subfeatures = [
     },
     {
         title: 'Customizable wait periods',
-        description: 'Set a delay before the survey opens',
+        description: 'Set a delay before a survey opens',
         icon: <IconClock />,
     },
 ]
