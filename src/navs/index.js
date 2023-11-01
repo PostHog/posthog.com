@@ -858,7 +858,7 @@ export const communityMenu = {
             name: 'Merch',
             icon: 'Store',
             color: 'seagreen',
-            url: 'https://merch.posthog.com',
+            url: '/merch',
         },
     ],
 }

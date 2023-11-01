@@ -329,12 +329,36 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fieldValue
                 }
             }
+            allShopifyProduct(limit: 1000, sort: { order: ASC, fields: title }) {
+                edges {
+                    node {
+                        handle
+                    }
+                }
+            }
         }
     `)
 
     if (result.errors) {
         return Promise.reject(result.errors)
     }
+
+    // Merch
+    const shopifyProducts = result.data.allShopifyProduct.edges
+    const productsPerPage = 6
+    const numCollectionPages = Math.ceil(shopifyProducts.length / productsPerPage)
+    Array.from({ length: numCollectionPages }).forEach((_, i) => {
+        createPage({
+            path: i === 0 ? `/merch` : `/merch/${i + 1}`,
+            component: path.resolve('./src/templates/merch/index.tsx'),
+            context: {
+                limit: productsPerPage,
+                skip: i * productsPerPage,
+                numCollectionPages,
+                currentPage: i + 1,
+            },
+        })
+    })
 
     const menuFlattened = flattenMenu(menu)
 
