@@ -125,6 +125,8 @@ PostHog integrates several normally separate tools, such as product analytics, s
 
 - **Open source:** PostHog is open source and self-hostable via Docker Compose for small event volumes of ~100k events per month. See our [open source deployment docs](/docs/self-host/open-source/deployment) for more.
 
+**Related:** Our in-depth guide to the best Heap alternatives
+
 ### Product analytics
 
 Heap and PostHog offer similar product analytics features with a slight difference in emphasis – Heap has more insight options for marketing teams, while PostHog has more for product teams.
