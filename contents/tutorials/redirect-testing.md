@@ -122,15 +122,15 @@ Click the button on each page to capture a custom event in PostHog.
 
 ## Creating our A/B test
 
-Our A/B test will compare these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (our name for A/B tests) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
+Our A/B test will compare these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (what we call A/B tests in PostHog) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
 
 ![A/B test set up](../images/tutorials/redirect-testing/test.png)
 
-Because we are working locally, you can click "Launch" immediately.
+Because we are working locally, you can launch the experiment immediately.
 
 ## Setting up the redirect test middleware
 
-Next.js enables you to run [middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) that intercepts and modifies requests for your app. We use it for our redirect test.
+Next.js enables you to run [middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) that intercepts and modifies requests for your app. We use it to redirect a user to the `control` or `test` page based on their assigned variant.
 
 To start, create a `middleware.js` file in the base `redirect-test` directory. We want it to run on both the `/test` and `/control` paths, so we add them to the matcher config. For now, we have the `/test` path redirect to `/control` as a placeholder.
 
@@ -153,7 +153,7 @@ export const config = {
 
 ### Getting or creating a user ID for flag evaluation
 
-To evaluate the experiment flag in our middleware, we need a distinct user ID to target. This needs to be consistent because we want the same user to see the same variant of the experiment every time.
+To evaluate the experiment flag value for each unique user, each user will need a distinct user ID.
 
 To do this, we need to:
 
@@ -185,7 +185,7 @@ export async function middleware(request) {
 
 With our distinct ID, we use the PostHog API to check the value of the `main-redirect` feature flag for a user (because [we can’t use PostHog SDKs in Next.js middleware](https://vercel.com/docs/functions/edge-functions/edge-runtime#supported-apis)). This is known as evaluating the feature flag.
 
-Specifically, we evaluate the flag by making a POST request to the `https://app.posthog.com/decide?v=3` route (replace `app` with `eu` if you’re on EU Cloud) with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
+Specifically, we evaluate the flag by making a POST request to the `[https://app.posthog.com/decide?v=3](/docs/api/post-only-endpoints#feature-flags)` route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
 
 ```js
 // redirect-test/middleware.js
@@ -222,9 +222,11 @@ Specifically, we evaluate the flag by making a POST request to the `https://app.
 //... rest of code
 ```
 
-### Capturing exposure
+### Capturing exposures
 
-To get accurate results for our experiment, we also need to capture a `$feature_flag_called` event after the feature flag has been evaluated, but before redirecting. This is known as an exposure event and shows a user is part of the experiment. It requires another POST request like this:
+To get accurate results for our experiment, we also need to capture a `$feature_flag_called` event after the feature flag has been evaluated. This records which experiment variant each user was assigned to and enables us to calculate results for the experiment.
+
+This is known as an exposure event and shows a user is part of the experiment. It requires another POST request like this:
 
 ```js
 //... rest of code, after flag evaluation
@@ -256,7 +258,7 @@ const eventRequest = await fetch(
 
 ## Bootstrapping the data
 
-The final piece to our redirect test is bootstrapping the user distinct ID (and flags while we are at it). Bootstrapping is adding the flag and user data from the server to the client library so it is available as soon as the client PostHog library loads.
+The final piece to our redirect test is [bootstrapping](/docs/feature-flags/bootstrapping) the user distinct ID and feature flags. Bootstrapping is when you initialize PostHog with precomputed user data so that it is available as soon as PostHog loads, without needing to make additional API calls 
 
 > **Why is bootstrapping necessary?** If we didn't bootstrap the distinct ID, PostHog would set a second distinct ID for the same user on the frontend. When calculating the results of the experiment, PostHog wouldn't know the two were connected, creating a broken test.
 
