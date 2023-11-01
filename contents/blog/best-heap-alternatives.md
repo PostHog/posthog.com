@@ -1,6 +1,6 @@
 ---
-title: "The 7 most popular Heap alternatives and competitors, compared"
-date: 2023-10-31
+title: "The most popular Heap alternatives and competitors, compared"
+date: 2023-11-01
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -33,8 +33,6 @@ This guide covers:
 - How these tools compare to Heap
 - Which key Heap features they support
 - What kind of users and companies use them, and why
-
-<br />
 
 ## 1. PostHog
 
