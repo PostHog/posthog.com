@@ -4,14 +4,20 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
 // import { getShopifyProduct } from './transforms'
 import Pagination from 'components/Pagination'
+import { Drawer } from 'components/Drawer'
 
 export default function MerchPage(props) {
     const { data, pageContext } = props
+    const [drawerIsOpen, setDrawerIsOpen] = React.useState<boolean>(false)
 
     return (
         <Layout className="[&_main]:pb-[200px]">
             <div className="container mx-auto">
                 <h1>Products</h1>
+                <h2 onClick={() => setDrawerIsOpen(true)}>Open Drawer</h2>
+                <Drawer isOpen={drawerIsOpen} onClose={() => setDrawerIsOpen(false)}>
+                    test
+                </Drawer>
                 <div className="sm:grid sm:grid-cols-2 md:grid-cols-3 sm:gap-4">
                     {data.allShopifyProduct.edges.map(({ node }) => {
                         // const shopifyProduct = getShopifyProduct(node)
