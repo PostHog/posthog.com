@@ -6,6 +6,7 @@
         { "source": "/careers/(.*)", "destination": "/careers" }
     ],
     "redirects": [
+        { "source": "/tutorials/nps-survey", "destination": "/docs/surveys/creating-surveys" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
@@ -1115,6 +1116,7 @@
         { "source": "/ab-testing/tutorials", "destination": "/ab-testing#tutorials" },
         { "source": "/ab-testing/roadmap", "destination": "/ab-testing#roadmap" },
         { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" },
-        { "source": "/handbook/what-is-posthog", "destination": "/handbook/why-does-posthog-exist" }
+        { "source": "/handbook/what-is-posthog", "destination": "/handbook/why-does-posthog-exist" },
+        { "source": "/handbook/finance/fundraising", "destination": "/handbook/finance" }
     ]
 }
