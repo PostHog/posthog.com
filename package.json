@@ -55,7 +55,7 @@
         "formik": "^2.2.9",
         "framer-motion": "^4.1.17",
         "fuse.js": "^6.6.2",
-        "gatsby": "4.25.3",
+        "gatsby": "4.25.7",
         "gatsby-cli": "^4.20.0",
         "gatsby-plugin-algolia": "^0.26.0",
         "gatsby-plugin-breakpoints": "^1.3.9",
