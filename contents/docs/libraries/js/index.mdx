@@ -359,11 +359,12 @@ If you would like to change how PostHog stores this information, you can do so w
 -   `persistence: "cookie"` (default). Everything is stored in a cookie.
 -   `persistence: "localStorage+cookie"`. User's distinct ID is stored in a cookie and everything else is stored in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">localStorage</a>.
 -   `persistence: "localStorage"`. Everything is stored in localStorage.
+-   `persistence: "sessionStorage"`. Everything is stored in sessionStorage.
 -   `persistence: "memory"`. Stores in page memory, which means data is only persisted for the duration of the page view.
 
 As a note, due to the size limitation of cookies you may run into `431 Request Header Fields Too Large` errors (e.g. if you have a lot of feature flags). In that case, use `localStorage+cookie`.
 
-> **Note: ** Please be aware that localStorage can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider the <code>cookie</code> option or make sure to set all super properties across each subdomain.
+> **Note: ** Please be aware that localStorage and sessionStorage can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider the <code>cookie</code> option or make sure to set all super properties across each subdomain.
 
 If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only, or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config.
 **Warning:** Remember to call `posthog.identify` every time your app loads or every page refresh will be treated as a different user.
@@ -405,7 +406,7 @@ Some of the most relevant options are:
 | `mask_all_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                       | Prevent PostHog autocapture from capturing any text from your elements.                                                        |
 | `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                         | Prevent PostHog autocapture from capturing any attributes from your elements.                                                  |
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
-| `persistence`<br/><br/>**Type:** `localStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
+| `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
 | `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                       | A list of properties that should never be sent with `capture` calls.                                                           |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |

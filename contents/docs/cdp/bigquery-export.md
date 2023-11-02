@@ -6,7 +6,7 @@ tags:
     - bigquery-export
 ---
 
-> **Important:** This app has been depreciated in favor of the [BigQuery batch exports destination](/docs/cdp/batch-exports/bigquery). 
+> **Important:** This app has been deprecated in favor of the [BigQuery batch exports destination](/docs/cdp/batch-exports/bigquery). 
 
 This app streams events from PostHog into BigQuery as they are ingested.
 

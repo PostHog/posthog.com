@@ -13,6 +13,7 @@ import uploadImage from 'components/Squeak/util/uploadImage'
 import transformValues from 'components/Squeak/util/transformValues'
 import Spinner from 'components/Spinner'
 import { PostsContext } from './Posts'
+import Checkbox from 'components/Checkbox'
 
 const Categories = ({ value, setFieldValue }) => {
     const [categories, setCategories] = useState([])
@@ -130,6 +131,7 @@ const Image = ({ setFieldValue, featuredImage }) => {
 }
 
 export default function NewPost({ onSubmit, initialValues, postID }) {
+    const [excerptDisabled, setExcerptDisabled] = useState(true)
     const { mutate } = useContext(PostsContext)
     const { getJwt, user } = useUser()
 
@@ -215,15 +217,24 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
                                 setFieldValue={setFieldValue}
                                 values={values}
                                 maxLength={524288}
+                                excerptDisabled={excerptDisabled}
                             />
                         </Accordion>
                         <Accordion initialOpen label="Excerpt" active={!!values.excerpt}>
                             <textarea
+                                disabled={excerptDisabled}
                                 rows={5}
                                 name="excerpt"
                                 onChange={(e) => setFieldValue('excerpt', e.target.value)}
+                                value={values.excerpt}
                                 placeholder="Excerpt"
                                 className="px-4 py-2 border-none w-full dark:bg-accent-dark resize-none"
+                            />
+                            <Checkbox
+                                className="px-4 mb-2 text-sm"
+                                checked={excerptDisabled}
+                                value="Automatic excerpt"
+                                onChange={() => setExcerptDisabled(!excerptDisabled)}
                             />
                         </Accordion>
                         <Categories setFieldValue={setFieldValue} value={values.category} />
