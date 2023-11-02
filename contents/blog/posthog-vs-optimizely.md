@@ -22,21 +22,21 @@ This post compares their platforms, experimentation features, reporting, pricing
 
 ## How is PostHog different than Optimizely?
 
-### Product and startup-focused
+### 1. Product and startup-focused
 
-PostHog is built for high-growth startups working to build the best possible products. This means being easy to get started and providing all the tools you need at an early stage. As a bonus, PostHog has a generous free plan (and [startups](/startups) get free credits).
+PostHog is built for high-growth startups working to build the best possible products. It's easy to get started and provides all the tools you need at an early stage. There's a generous free plan and [startups](/startups) get free credits. 
 
-Optimizely focuses on providing marketing, ecommerce, and content tools to massive enterprises. They have fewer product focused tools. 
+Optimizely focuses on providing marketing, ecommerce, and content tools to massive enterprises. It has fewer product focused tools. 
 
-### Transparent, free, and self-service
+### 2. Transparent, free, and self-service
 
-At PostHog, we are open-source. Everything from our [code](https://github.com/PostHog/posthog) to [roadmap](/roadmap) to [strategy](/handbook) is open for everyone to see. 
+PostHog is open source. Everything from our [code](https://github.com/PostHog/posthog) to [roadmap](/roadmap) to [strategy](/handbook) is open for everyone to see. 
 
 Along with this, you can [sign up for PostHog for free](https://app.posthog.com/). You don’t need to fill out a contact form, add a credit card, or have a sales call. You can use PostHog for free forever if you want.
 
-Optimizely is open about some areas like roadmap and their SDKs, but they aren’t self-serve or free (although they do offer a limited free trial of some features).
+Optimizely is open about some areas, like roadmap and its SDKs, but you have to talk to sales before signing up.
 
-### Analytics and reporting built-in
+### 3. Analytics and reporting built-in
 
 PostHog links all its tools together. This means you get all the features and visualizations of product analytics for your feature flags and A/B tests. You can use them in [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels), and even directly query related metrics with [SQL](/docs/product-analytics/sql).
 
@@ -123,7 +123,7 @@ Although both Optimizely and PostHog provide experimentation and feature flags, 
 
 ## Web experimentation
 
-Optimizely splits their experimentation features into two separate categories, web and feature. We will compare both separately against PostHog. 
+Optimizely splits its experimentation features into two separate categories, web and feature. We will compare both separately against PostHog. 
 
 The core web experimentation features like traffic allocation, preview mode, cross-browser, dynamic website support, targeting, and more are available in both Optimizely and PostHog 
 
@@ -193,7 +193,7 @@ The core web experimentation features like traffic allocation, preview mode, cro
 
 - In Optimizely, many features of web experiments, like scheduling, multi-armed bandits, [multi-variate testing](/tutorials/abn-testing), and advanced personalization are only available on the higher-tier "Accelerate" plan or as add-ons.
 
-- Although there isn’t a no-code experiment creator for PostHog, it does have a UI to create and manage experiments as well as snippets to make it easy to implement them. For example, you can add a basic experiment anywhere you can insert custom JavaScript like this:
+- PostHog doesn't offer a no-code experiment creator yet, but it does have a UI to create and manage experiments as well as snippets to make it easy to implement them. For example, you can add a basic experiment anywhere you can insert custom JavaScript like this:
 
 ```html
 <script>
@@ -285,7 +285,7 @@ In Optimizely, many of the feature experimentation features, like multi-armed ba
 
 ## Pricing
 
-PostHog and Optimizely differ significantly in their approach to pricing. Optimizely is sales-driven and completely opaque. PostHog is self-serve and transparent.
+PostHog and Optimizely are very different here. Optimizely is sales-driven and completely opaque. PostHog is self-serve and transparent.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
 <table className="w-full mt-4">
@@ -339,7 +339,7 @@ For many Optimizely products, there are also paid add-ons like advanced personal
 
 Although Optimizely has web analytics through its content marketing platform, it relies on Google Analytics or other third-party analytics providers for advanced tracking and reporting. 
 
-PostHog’s product analytics suite shines here. It treats feature flags and experiments as usage so you can analyze them like any other user behavior. On top of standard experiment results, you can use visualizations like trends, funnels, user paths, and even direct SQL access. 
+PostHog’s product analytics suite shines here. It treats feature flags and experiments as usage, so you can analyze them like any other user behavior. On top of standard experiment results, you can use visualizations like trends, funnels, user paths, and even direct SQL access. 
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
 <table className="w-full mt-4">
