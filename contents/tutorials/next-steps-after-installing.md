@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-15
-featuredImage: ../images/tutorials/banners/tutorial-4.png
-tags: ["configuration", "events", "dashboards", "team collaboration", "subscriptions", "experimentation"]
+tags: ["configuration", "experimentation", 'product os']
 ---
 
 You created a PostHog account and installed it on your site, but what’s next? This tutorial goes over what to do after signing up and installing PostHog (we are assuming you’ve done both).
@@ -24,9 +23,9 @@ If you are using [a different library](/docs/integrate#libraries) or the [API](/
 
 ```js
 posthog.capture(
-  'movie played', 
+  'movie_played', 
   { 
-    movieId: 'Return of the Hedgehogs', 
+    movie_id: 'Return of the Hedgehogs', 
     category: 'thriller' 
   }
 );
@@ -35,9 +34,9 @@ posthog.capture(
 ```php
 PostHog::capture(array(
   'distinctId' => 'ian@posthog.com',
-  'event' => 'movie played',
+  'event' => 'movie_played',
   'properties' => array(
-    'movieId' => 'Return of the Hedgehogs',
+    'movie_id' => 'Return of the Hedgehogs',
     'category' => 'thriller'
   )
 ));
@@ -46,7 +45,7 @@ PostHog::capture(array(
 ```ruby
 posthog.capture({
   distinct_id: 'ian@posthog.com',
-  event: 'movie played',
+  event: 'movie_played',
   properties: {
     movie_id: 'Return of the Hedgehogs',
     category: 'thriller'
@@ -57,9 +56,9 @@ posthog.capture({
 ```node
 client.capture({
   distinctId: 'ian@posthog.com',
-  event: 'movie played',
+  event: 'movie_played',
   properties: {
-      movieId: 'Return of the Hedgehogs',
+      movie_id: 'Return of the Hedgehogs',
       category: 'thriller',
   },
 })
@@ -68,7 +67,7 @@ client.capture({
 ```python
 posthog.capture(
   'ian@posthog.com', 
-  'movie played', 
+  'movie_played', 
   {
     'movie_id': 'Return of the Hedgehogs',
     'category': 'thriller'
@@ -81,7 +80,7 @@ client.Enqueue(posthog.Capture{
   DistinctId: "ian@posthog.com",
   Event:      "movie played",
   Properties: posthog.NewProperties().
-    Set("movieId", "Return of the Hedgehogs").
+    Set("movie_id", "Return of the Hedgehogs").
     Set("category", "thriller"),
 })
 ```

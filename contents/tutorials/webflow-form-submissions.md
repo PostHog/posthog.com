@@ -4,8 +4,7 @@ date: 2023-06-22
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-18.png
-tags: ["configuration"]
+tags: ["configuration", 'surveys']
 ---
 
 With PostHog, you can autocapture events and record sessions on your Webflow site. With a bit more setup, you can also use it to capture form submissions. In this tutorial, we show how to do this with a basic Webflow site, PostHog, and some JavaScript.
@@ -55,7 +54,7 @@ submitButton.addEventListener('click', function(event) {
 
   // Capture the values in PostHog
   posthog.capture(
-    'form submitted', 
+    'form_submitted', 
     {
       name: name, 
       email: email

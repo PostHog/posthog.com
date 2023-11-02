@@ -43,7 +43,7 @@ posthog.getActiveMatchingSurveys((surveys) => {
 3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's name, ID, and any properties you'd want.
 
 ```js-web
-posthog.capture("survey sent", {
+posthog.capture("survey_sent", {
     $survey_id: {survey.id} // required
     $survey_response: {survey_response} // required
     $survey_name: {survey.name} // optional

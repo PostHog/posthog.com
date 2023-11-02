@@ -79,7 +79,7 @@ Read about how we do this in the dedicated handbook section, [Ensuring Customer 
 
 We typically use two top-level metrics when looking at revenue: MRR (monthly recurring revenue) and NRR (net revenue retention).
 
-The easiest way to see these is on the [go/revenue](go/revenue) dashboard. These queries were built by Tim 
+The easiest way to see these is on the [go/revenue](http://go/revenue) dashboard. These queries were built by Tim 
 
 
 ## FAQs

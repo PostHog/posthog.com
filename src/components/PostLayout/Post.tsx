@@ -44,7 +44,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="">
-            {menu && mobileMenu && <MobileNav />}
+            {menu && mobileMenu && <MobileNav className="flex md:hidden" menu={menu} />}
             <div
                 className={`w-full relative md:flex justify-between mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
@@ -56,7 +56,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         className="w-full flex-shrink-0 md:block hidden relative z-20"
                     >
                         <aside
-                            className={`md:sticky md:sticky md:top-0 reasonable:top-[108px] max-h-screen reasonable:max-h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark ${
+                            className={`md:sticky md:top-0 reasonable:top-[108px] max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark border-r border-light dark:border-dark ${
                                 hideSearch ? 'pt-5' : ''
                             }`}
                         >
@@ -75,7 +75,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     style={contentWidth && !fullWidthContent ? { width: '100%', maxWidth: contentWidth } : {}}
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className={`py-4 box-border w-full flex-shrink mx-auto transition-all ${
+                    className={`py-4 box-border w-full flex-shrink mx-auto transition-all min-w-0 ${
                         !fullWidthContent && sidebar && !hideSidebar ? ' max-w-3xl' : 'max-w-screen-2xl'
                     }`}
                 >
@@ -90,7 +90,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     <aside
                         key={`${title}-sidebar`}
                         style={{ maxWidth: menuWidth?.right ?? defaultMenuWidth.right }}
-                        className="flex-shrink-0 pt-4 w-full justify-self-end my-10 lg:my-0 h-full lg:px-0 px-4 box-border lg:flex hidden flex-col reasonable:sticky reasonable:top-[108px]"
+                        className="flex-shrink-0 pt-4 pl-4 w-full justify-self-end my-10 lg:my-0 box-border hidden xl:flex flex-col reasonable:sticky reasonable:top-[108px] mr-8 border-l border-light dark:border-dark"
                     >
                         <div
                             className={`${
@@ -102,7 +102,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         <div className="flex flex-grow items-end">
                             <div className="sticky bottom-0 w-full">
                                 {tableOfContents && tableOfContents?.length > 0 && (
-                                    <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
+                                    <div className="px-0 -mx-1 lg:pb-4 lg:block hidden">
                                         <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
                                             Jump to:
                                         </h4>

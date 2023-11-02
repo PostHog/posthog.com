@@ -155,7 +155,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 - "I do feel amplitude makes it difficult to parse out nuanced information on data. For more technical people, like myself, SQL is better for really digging into data."
 
-**Read more:** [In-depth PostHog vs Amplitude comparison](/blog/posthog-vs-amplitude) 
+**Read more:** [The best alternatives to Mixpanel compared](/blog/best-mixpanel-alternatives)
 
 ## Mixpanel
 

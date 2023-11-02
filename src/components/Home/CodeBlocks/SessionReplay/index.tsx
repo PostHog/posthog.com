@@ -9,7 +9,7 @@ function CaptureFormInputs() {
                 <code>input</code> fields are masked by default. But if you'd like to see what users are typing into a
                 form, set <code>maskAllInputs</code> to <code>false</code>. (Password fields will still remain masked.)
             </p>
-            <div className="flex gap-x-6">
+            <div className="flex flex-col md:flex-row gap-x-6">
                 <div className="shrink">
                     <h4 className="text-lg">Your code</h4>
                     <CodeBlock

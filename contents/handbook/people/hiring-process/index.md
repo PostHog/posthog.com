@@ -28,12 +28,9 @@ This has resulted in the highest number of qualified and motivated candidates re
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
- Tech Lead      | GMT -5:00 to +2:00                   | Pipeline  | Tim | 1) Culture Screen - Coua<br/> 2) Technical Screen - Tim<br/> 3) Small Team Culture Screen - Tiina/Tomás/Xavíer<br/> 4) SuperDay Assessment - Tiina, Tomás, Xavíer, James G., Tim & James H. | Live Task (link not available) |
-  Software Engineer      | GMT -5:00 to +2:00                   | Pipeline  | Tim | 1) Culture Screen - Coua<br/> 2) Technical Screen - Tim<br/> 3) Small Team Culture Screen - Tiina/Tomás/Xavíer<br/> 4) SuperDay Assessment - Tiina, Tomás, Xavíer, James G., Tim & James H. | Live Task (link not available) |
-| Full Stack Engineer       | GMT -0:00 to +2:00                   | Product Analyics  | Marius | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Small Team Culture Screen - James H.<br/> 4) SuperDay Assessment - Thomas, Michael, Marius, Tim & James H. | Live Task (link not available) |
-| Backend/Full Stack Engineer       | GMT 0:00 to +2:00                   | Product Analytics  | Marius | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Small Team Culture Screen - James H.<br/> 4) SuperDay Assessment - Thomas, Michael, Marius, Tim & James H. | Live Task (link not available) |
-| Growth Engineer     | GMT -8:00 to -5:00                  | Growth  | Tim| 1) Culture Screen - Coua<br/> 2) Technical Screen - Tim<br/> 3) Small Team Culture Screen - Raquel<br/> 4) Super Week Assessment - Raquel, Tim & James H. | Live Task (link not available) |
-| Full Stack Engineer     | GMT -5:00 to +2:00                  | Feature Success  | Neil| 1) Culture Screen - Coua<br/> 2) Design/Product Screen - James<br/> 3) Technical Screen - Neil<br/> 4) Super Week Assessment - Li, Neil, Tim & James H. | Live Task (link not available) |
+ Tech Lead      | GMT -5:00 to +2:00                   | Pipeline  | Tim | 1) Culture Screen - Coua<br/> 2) Technical Screen - Tim<br/> 3) Small Team Screen - Tiina/Tomás/Xavíer<br/> 4) SuperDay Assessment - Tiina, Tomás, Xavíer, James G., Tim & James H. | Live Task (link not available) |
+| Growth Engineer     | GMT -8:00 to -5:00                  | Growth  | Tim| 1) Culture Screen - Coua<br/> 2) Small Team Screen - Raquel<br/> 3) Technical Screen - Tim<br/> 4) SuperDay Assessment - Raquel, Tim & James H. | Live Task (link not available) |
+| Ops & Finance Lead     | GMT -5:00 to 0:00                  | People & Ops  | Charles | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles<br/> 3) Small Team Screen - James<br/> 4) SuperDay Assessment - Charles, Tim & James H. | Live Task (link not available) |
 
 
 Tasks are only available internally - please do not share these publicly. 
@@ -281,7 +278,7 @@ Once the candidate accepts, the People & Ops team will kick off the [onboarding 
 
 ## Visa sponsorship
 
-Building a diverse team is at the heart of our culture at PostHog and we are proud to be hiring internationally. In some cases, this includes the need for visa sponsorship. We are currently only able to provide visas in the US and the UK.
+Building a diverse team is at the heart of our culture at PostHog and we are proud to be hiring internationally. In some cases, this includes the need for visa sponsorship. We are currently only able to provide visas in the UK.
 
 *   If the candidate is already in the country on a visa (e.g. employed, youth mobility), or require a new visa to remain in the country (e.g. student converting to employed), we will cover the costs for any employee, new or current.
 *   If they wish to relocate and need a visa, we unfortunately will not cover the cost for obtaining the visa or any relocation costs.
@@ -289,3 +286,7 @@ Building a diverse team is at the heart of our culture at PostHog and we are pro
 For employees where PostHog covers the costs related to obtaining a visa, the employee agrees to reimburse PostHog if they voluntarily terminate their employment prior to the completion of 12 months of service. The costs will be calculated on a monthly basis, so when the employee decides to leave after 10 months, they will have to repay 2/12 of the costs related to the visa.
 
 If a candidate needs visa sponsorship, please keep in mind that the process is lengthy and costly.
+
+## E-Verify
+
+We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all U.S. new hires which allows us to verify employment eligibility remotely and continue hiring in multiple states. E-Verify is not used as a tool to pre-screen candidates.

@@ -7,7 +7,7 @@ tags:
     - snowflake-export
 ---
 
-> **Important:** This app has been replaced by [a new export system](/docs/cdp/batch-exports), which is currently in public beta. This app is no longer available.
+> **Important:** This app has been deprecated in favor of the [Snowflake batch exports destination](/docs/cdp/batch-exports/snowflake). 
 
 This app allows you to export both live and historical events from PostHog into Snowflake.
 This is useful when you want to run custom SQL queries on your data in PostHog using Snowflake's high-performance infrastructure.

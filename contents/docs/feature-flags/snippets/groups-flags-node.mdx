@@ -3,7 +3,7 @@ Update [posthog-node](https://posthog.com/docs/integrate/server/node) to version
 To check a flag that's matching by companies, specify groups in relevant feature flag call:
 
 ```node
-const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', '[user distinct id]', false, { company: 'company_id_in_your_db' })
+const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, { company: 'company_id_in_your_db' })
 
 if (isFlagEnabled) {
     // Toggle feature-flag specific behavior

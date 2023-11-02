@@ -4,8 +4,7 @@ date: 2023-05-29
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-14.png
-tags: ["insights", "trends"]
+tags: ["insights", "trends", 'product analytics']
 ---
 
 The ratio of daily active users over monthly active users, or DAU/MAU ratio, is a popular engagement metric measuring stickiness. It shows what percentage of your users are active and use your product every day.

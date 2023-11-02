@@ -4,8 +4,7 @@ date: 2023-08-18
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-7.png
-tags: []
+tags: ['session replay', 'product analytics', 'feature flags']
 ---
 
 [Framer](https://www.framer.com/) is a popular no-code site builder that makes it easy to design a high-quality site. 
@@ -50,7 +49,7 @@ Once done, delete the existing code and add a button that captures an event with
 ```js
 export default function CaptureButton() {
     const handleClick = () => {
-        window.posthog.capture("clicked homepage button", {
+        window.posthog.capture("clicked_homepage_button", {
             $set_once: { clicked_homepage_button: true },
         })
     }

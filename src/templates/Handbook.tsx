@@ -35,6 +35,7 @@ import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
 import { TutorialTags } from 'components/Tutorials/constants/tags'
+import { Emoji } from 'components/Emoji'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -248,6 +249,7 @@ export default function Handbook({
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
         TutorialTags,
+        Emoji,
         ...shortcodes,
     }
 
@@ -270,6 +272,7 @@ export default function Handbook({
                         </div>
                     }
                     menu={menu}
+                    menuWidth={{ left: 400 }}
                     sidebar={
                         <HandbookSidebar
                             contributors={contributors}
@@ -325,7 +328,9 @@ export default function Handbook({
                                 </div>
                             )}
                         </div>
-                        {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
+                        <div className="lg:hidden">
+                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
+                        </div>
                         {features && <LibraryFeatures availability={features} />}
                         <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>

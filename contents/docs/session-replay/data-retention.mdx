@@ -17,9 +17,15 @@ Pinned or Shared recordings are kept for as long as they are actively in use. Al
 
 ## Self-hosted 
 
-In order to make PostHog cheaper and easier to run and maintain. 
-We are deprecating storing recordings in ClickHouse. 
-All releases after 19th September 2023 only officially support blob storage backed recordings.
+In order to make PostHog cheaper and easier to run and maintain we are deprecating storing recordings in ClickHouse. 
+
+### Pinning a non-deprecated version
+
+The [final PostHog release to officially support ClickHouse stored recordings](https://hub.docker.com/layers/posthog/posthog/9c68581779c78489cfe737cfa965b73f7fc5503c/images/sha256-4dec586a83328f4123039bab924289f9bd52bd46f56bf14e9ae91fcd6d05ed5d?context=explore) can be pinned using the `deploy-hobby` script. All subsequent releases only support blob storage backed recordings.
+
+Or edit your docker compose file to replace `image: posthog/posthog:$POSTHOG_APP_TAG` with `image: posthog/posthog:9c68581779c78489cfe737cfa965b73f7fc5503c`
+
+### Managing storage
 
 Self-hosted installations, pinned to earlier versions, 
 are able to control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
@@ -32,4 +38,4 @@ ClickHouse requires abundant free disk space to manage the `session_recording_ev
 
 In later versions (which do not use Clickhouse for recording storage), 
 the installation will be relying on its configured blob storage. 
-You can manage storage using blob storage lifecycle policies.
+You can manage storage using blob storage lifecycle policies. This will vary by environment.

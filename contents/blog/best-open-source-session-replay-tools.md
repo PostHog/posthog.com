@@ -14,7 +14,7 @@ author:
 category: General
 tags:
   - Open source
-  - Session recording
+  - Guides
 ---
 
 Analytics is great when you need hard numbers, but hard numbers don't give you the full picture. What else do you need to do? [Talk to users](/blog/10x-engineers-do-user-interviews)? Sure. Gather feedback? That's useful, too. But, for us, there's nothing better than watching session replays for understanding a user's pain points.

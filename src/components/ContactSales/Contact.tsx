@@ -10,6 +10,7 @@ import { motion } from 'framer-motion'
 import TextareaAutosize from 'react-textarea-autosize'
 import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import usePostHog from 'hooks/usePostHog'
 
 const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
 
@@ -329,6 +330,7 @@ export default function Contact({
         [k: string]: any
     }
 }) {
+    const posthog = usePostHog()
     const { href } = useLocation()
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
@@ -336,6 +338,13 @@ export default function Contact({
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
+            const distinctId = posthog?.get_distinct_id?.()
+            posthog?.identify?.(distinctId, {
+                email: values.workEmail,
+            })
+            posthog?.capture?.('form submission', {
+                form_name: 'Contact sales',
+            })
             const submission = {
                 pageUri: href,
                 pageName: 'Contact sales',

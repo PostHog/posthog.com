@@ -7,7 +7,7 @@ import Intro from "./intro.mdx"
 ```php
 PostHog::capture(array(
   'distinctId' => 'distinct_id_of_the_user',
-  'event' => 'user signed up'
+  'event' => 'user_signed_up'
 ));
 ```
 
@@ -18,7 +18,7 @@ PostHog::capture(array(
 ```php
 PostHog::capture(array(
   'distinctId' => 'distinct_id_of_the_user',
-  'event' => 'user signed up',
+  'event' => 'user_signed_up',
   'properties' => array(
     'login_type' => 'email',
     'is_free_trial' => 'true'

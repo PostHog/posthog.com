@@ -6,7 +6,7 @@ tags:
     - bigquery-export
 ---
 
-> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+> **Important:** This app has been deprecated in favor of the [BigQuery batch exports destination](/docs/cdp/batch-exports/bigquery). 
 
 This app streams events from PostHog into BigQuery as they are ingested.
 

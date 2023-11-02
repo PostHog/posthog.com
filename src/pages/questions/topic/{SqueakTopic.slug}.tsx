@@ -46,6 +46,14 @@ export default function Questions({ data, pageContext }: IProps) {
                     $null: true,
                 },
             },
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
         },
     })
 
@@ -56,6 +64,14 @@ export default function Questions({ data, pageContext }: IProps) {
             pinnedTopics: {
                 id: {
                     $eq: data?.squeakTopic?.squeakId,
+                },
+            },
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
                 },
             },
         },

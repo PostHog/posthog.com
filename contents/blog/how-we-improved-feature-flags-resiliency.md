@@ -10,8 +10,6 @@ author:
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
-tags:
-  - Feature flags
 hideLastUpdated: false
 ---
 

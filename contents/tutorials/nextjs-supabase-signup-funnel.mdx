@@ -2,7 +2,6 @@
 title: Building and measuring a sign up funnel with Next.js, Supabase, and PostHog
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/nextjs-supabase.png
 author: ['leggetter']
 tags:
     - funnels
@@ -342,7 +341,7 @@ const Index = () => {
 
   if(user) {
     posthog.identify(user.email, user)
-    posthog.capture('loggedIn')
+    posthog.capture('logged_in')
   }
 
 ```

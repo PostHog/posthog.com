@@ -6,7 +6,7 @@ showTitle: true
 
 > Looking for our brand style guide? [Look no further.](/handbook/company/branding)
 
-## Different ~by~ _with_ design
+## Different ~~by~~ _with_ design
 
 Design at PostHog works differently than most companies. We fundamentally believe that we can differentiate ourselves with design – by thinking outside the box and pushing boundaries. This means we're not structured like a typical design org.
 

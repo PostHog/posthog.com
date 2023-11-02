@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
             child: Text('TRACK ACTION WITH POSTHOG'),
             onPressed: () {
               Posthog.capture(
-                eventName: 'ButtonClicked',
+                eventName: 'button_clicked',
                 properties: {
                   'foo': 'bar',
                   'number': 1337,

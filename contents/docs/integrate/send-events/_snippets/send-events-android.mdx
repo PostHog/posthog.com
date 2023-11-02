@@ -6,7 +6,7 @@ import Intro from "./intro.mdx"
 
 ```java
 PostHog.with(this)
-       .capture("User signed up");
+       .capture("user_signed_up");
 ```
 
 <NamingTip />
@@ -15,7 +15,7 @@ PostHog.with(this)
 
 ```java
 PostHog.with(this)
-       .capture("User signed up", new Properties()
+       .capture("user_signed_up", new Properties()
               .putValue("login_type", "email")
               .putValue("is_free_trial", true));
 ```

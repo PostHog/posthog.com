@@ -4,11 +4,12 @@ date: 2023-03-03
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-1.png
-tags: ["configuration", "events"]
+tags: ["configuration", "events", 'product os']
 ---
 
-The need to migrate from a product analytics platform like Mixpanel to a fully-featured platform like PostHog is a common one. In this tutorial, we'll walk through how to pull, format, and ingest data from Mixpanel into PostHog.
+PostHog is a great [alternative to Mixpanel](/blog/best-mixpanel-alternatives), especially if you want to replace other tools for session replay and A/B testing.
+
+In this tutorial, we'll walk through how to pull, format, and ingest data from Mixpanel into PostHog.
 
 > Curious about the similarities and differences between the two platforms? Read our comparison of [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel).
 

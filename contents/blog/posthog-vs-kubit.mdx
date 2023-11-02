@@ -1,0 +1,159 @@
+---
+date: 2023-08-04
+title: "In-depth: PostHog vs Kubit"
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: ../images/blog/posthog-vs-kubit/posthog-vs-kubit.jpg
+featuredImageType: full
+author:
+    - joe-martin
+category: General
+tags:
+    - Comparisons
+    - Guides
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+Kubit is a product analytics platform built for product teams. PostHog, on the other hand, is built primarily for engineers. 
+
+In this article we’ll explore the differences between Kubit and PostHog in detail, but it can helpful to first discuss the different needs of engineers and product teams:  
+
+- Product managers need tools which help them simply collect and analyze product data, so they can unearth user patterns. They also need to collaborate closely with other roles.
+ 
+- Engineers and developers also need to collect and analyze data, but often want to run much more detailed analysis and crucially want to directly implement or test changes as a result of their discoveries.
+
+These differences explain why PostHog and Kubit have such different features, even though they both include product analytics tooling. Kubit focuses on providing a simplified, no-code experience, while PostHog has a much broader suite of tools — feature flags, user surveys, A/B experimentation, and much more. 
+
+> ### What about product-minded engineers?
+>
+> Increasingly, many organizations are hiring engineers with a product-orientated approach, called _product engineers_. PostHog is especially helpful for these types of roles and we’ve written at length about [what product engineering is, and why it matters](/blog/what-is-a-product-engineer) — and [we even have a newsletter about it](/newsletter).
+
+In this article we’ll explore these differences in more detail, and take a deep dive into the product analytics features of both. 
+
+## How do PostHog and Kubit differ?
+
+### PostHog does more than product analytics
+Kubit is intended for product and data teams at large organizations. It therefore focuses solely on providing product analytics tools (and has an opaque pricing model that’s squarely aimed at enterprises), and that’s it.
+
+PostHog, on the other hand, offers far more than just product analytics and empowers engineers to collect feedback (with surveys), deploy changes (with feature flags), test ideas (with A/B testing), and gather more information (with session replays). In short, it’s just ridiculously more powerful. 
+
+### PostHog can gather multiple types of data
+Both Kubit and PostHog are built around the concept of _events_, which users define, track and analyze. An event can be performed, or not, and can have properties, or not. That’s about it. 
+
+However, what if you want to analyze something which isn’t an event, like a feedback comment, or how long a user spent reading a page? With Kubit that’s not possible, but with PostHog it is. You can watch replays of actual user interactions with your product, issue surveys to collect feedback — or even use PostHog as a data warehouse to track other data. 
+
+### PostHog is open source 
+At PostHog, we aren’t just open source – we’re transparent by default. Everything from our [roadmap](/roadmap) to our [team profiles](/team) are available to the public. This means we’re constantly taking feedback on how to improve, as well as code contributions from our community that directly impact the product. Need an integration that doesn’t exist yet? You can build it yourself. 
+
+Kubit, on the other hand, is _incredibly_ closed source. There's no public pricing information, free trials require personal information, and the roadmap is non-existent. That’s not the way we like to work.  
+
+## PostHog and Kubit feature comparison
+As explained above, PostHog offers a wider selection of feature than Kubit, which focuses solely on product analytics.
+
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
+  <ComparisonRow column1={false} column2={true} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={true} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Experiments" description="Test changes and analyze impact" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Track where users click" />
+  <ComparisonRow column1={false} column2={true} feature="Event pipelines" description="Push and pull data to enrich customer profiles" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Build your own apps and contribute code" />
+</ComparisonTable>
+
+## Product analytics comparison
+
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Funnel analysis" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={true} feature="Path analysis" description="Chart how users get from A to B" />
+  <ComparisonRow column1={true} column2={true} feature="Retention analysis" description="Visualize which users stay, for how long" />
+  <ComparisonRow column1={false} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
+  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Identify predictors and shared commonalities" />
+  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Save insights into a shared workspace" />
+  <ComparisonRow column1={true} column2={true} feature="Formulas" description="Calculate unique insights, with math" />
+  <ComparisonRow column1={false} column2={true} feature="SQL access" description="Use code to directly query the data" />
+  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Gather individual users into larger organizations" />
+  <ComparisonRow column1={true} column2={false} feature="Predictive analytics" description="Extrapolate from now, into the future" />
+</ComparisonTable>
+
+## Collaboration tools 
+
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="User permissions" description="Control user roles and levels of access" />
+  <ComparisonRow column1={true} column2={true} feature="Notebooks" description="A built-in scratch pad for making notes, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Public insights" description="Make insights available without login" />
+  <ComparisonRow column1={false} column2={true} feature="Public dashboards" description="Make dashboards available without login" />
+  <ComparisonRow column1={true} column2={true} feature="Export dashboards" description="Export dashboards as reports" />
+  <ComparisonRow column1={false} column2={true} feature="Dashboard subscriptions" description="Receive regular alerts about new data" />
+  <ComparisonRow column1={false} column2={true} feature="Embeddable dashboards" description="Embed dashboards in other pages" />
+  <ComparisonRow column1={false} column2={true} feature="Slack integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={false} column2={true} feature="Discord integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={false} column2={true} feature="MS Teams integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={true} column2={true} feature="Data management suite" description="Categorize and define a list of events and properties" />
+</ComparisonTable>
+
+> ### Should you use autocapture?
+> 
+> Autocapturing events is a controversial topic for data teams. The argument against it is that it introduces more noise and can introduce additional costs. The argument for it is that it collects more data for users to collaborate with, at greater consistency. 
+>
+> At PostHog, [we think it’s better to have more information](/blog/is-autocapture-still-bad), than less. We give users their first 1M events for free every month too, to negate the costs argument. But if you disagree, autocapture can be easily disabled. 
+
+## Library support
+PostHog supports a wide range of client and server libraries, but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all our features. See our [client library documentation](/docs/getting-started/install?tab=snippet) for more information.
+
+Kubit, on the other hand, is a closed-source, no-code product. Because it's designed to work on top of a data warehouse, it doesn't use SDKs or libraries in the traditional sense. You can only use it if you have your event data in a data warehouse already.
+
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={false} column2={true} feature="JavaScript" />
+  <ComparisonRow column1={false} column2={true} feature="React Native" />
+  <ComparisonRow column1={false} column2={true} feature="React" />
+  <ComparisonRow column1={false} column2={true} feature="Flutter" />
+  <ComparisonRow column1={false} column2={true} feature="iOS" />
+  <ComparisonRow column1={false} column2={true} feature="Android" />
+  <ComparisonRow column1={false} column2={true} feature="Ruby" />
+</ComparisonTable>
+
+
+## Security and compliance
+
+Compliance can be a bit of a regulatory headache, especially for international organizations who have to adhere to rules such as GDPR. PostHog makes such things simple by offering a choice of where your data is hosted, and a variety of security options to keep your data secure. 
+
+Kubit is similar on most fronts, but lacks the option for EU hosting (despite claiming to be GDPR ready) and doesn’t offer two-factor authentication itself (it’s offered exclusively via an integration with Google OAuth).
+
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="GDPR ready" />
+  <ComparisonRow column1={false} column2={true} feature="Data anonymization" />
+  <ComparisonRow column1={false} column2={true} feature="Cookie-less tracking option" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2 certified" />
+  <ComparisonRow column1={true} column2={true} feature="SAML/SSO available" />
+  <ComparisonRow column1={false} column2={true} feature="2FA available" />
+</ComparisonTable>
+
+> ### To cookie, or not to cookie?
+> To ensure compliance with local privacy regulations, you may need to ask users for their permission to track them with cookies. PostHog has [tools to help you do that](/tutorials/react-cookie-banner), but if you’d rather not use cookies to track users then [you can do that too](/tutorials/cookieless-tracking). 
+
+## Frequently asked questions
+
+### How much should I expect to pay?
+
+With Kubit, it’s impossible to estimate costs as pricing is not transparent and is tailored to each customer. At PostHog, [we strongly disagree with this approach](/blog/transparent-enterprise-pricing) and publish our pricing publicly.
+
+For PostHog, we have [a guide for estimating your usage](/docs/billing/estimating-usage-costs), and [a pricing calculator](/pricing) to help — but with a generous free tier and no up-front fees, it’s often easiest to just get started and see how much data you send through that way. 
+
+### Is there a free trial?
+
+With PostHog, you don’t need a free trial — it’s free to get started, with a generous monthly allowance of events, replays, and API calls. If you’re within this allowance, PostHog is free to use forever. 
+
+Kubit does offer a free trial, but you’ll need to submit your company information and wait for Kubit to respond with an invite to do so. 
+
+### Are there discounts for nonprofits and startups?
+
+Yes, PostHog offers both. Nonprofit organizations can contact our team and are usually eligible for a 50% discount, while startups can sign up for $50,000 of free credit (and a host of other perks) in the [PostHog for Startups program](/startups). 
+
+Kubit currently offers no information on discounts for either nonprofits, or startups. 
+
+<ArrayCTA/>

@@ -4,7 +4,6 @@ date: 2023-02-13
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-16.png
 tags: ['feature flags']
 ---
 

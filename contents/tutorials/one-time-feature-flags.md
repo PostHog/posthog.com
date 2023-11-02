@@ -4,7 +4,6 @@ date: 2023-05-12
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ['feature flags']
 ---
 
@@ -81,9 +80,9 @@ With these, our route now looks like this:
 app.get('/', (req, res) => {
   client.capture({
     distinctId: req.query.id,
-    event: 'first request',
+    event: 'first_request',
     properties: {
-      $set: { firstRequestComplete: true },
+      $set: { first_request_complete: true },
     },
   });
   res.send('Hello World!')
@@ -98,7 +97,7 @@ We haven’t set up a way to check if users made their first request. With only 
 
 ## Creating the one-time feature flag
 
-To create our feature flag, go to the feature flags tab in PostHog, create a new one, set the key as `completed-first-request`, then set the release conditions to 100% of users where `firstRequestComplete` equals `true`, and click save.
+To create our feature flag, go to the feature flags tab in PostHog, create a new one, set the key as `completed-first-request`, then set the release conditions to 100% of users where `first_request_complete` equals `true`, and click save.
 
 ![Conditions](../images/tutorials/one-time-feature-flags/condition.png)
 
@@ -119,9 +118,9 @@ app.get('/', async (req, res) => {
   if (!completedFirstRequest) {
     client.capture({
       distinctId: req.query.id,
-      event: 'first request',
+      event: 'first_request',
       properties: {
-        $set: { firstRequestComplete: true },
+        $set: { first_request_complete: true },
       },
     });
     res.send('Hello World!')
@@ -131,13 +130,13 @@ app.get('/', async (req, res) => {
   // Else, it is a subsequent request
   client.capture({
     distinctId: req.query.id,
-    event: 'subsequent request'
+    event: 'subsequent_request'
   })
   res.send('Welcome Back!')
 })
 ```
 
-The problem now is that it takes time for PostHog to ingest the person properties. Since this flag relies on the `firstRequestComplete` person property, it won’t accurately evaluate until PostHog knows the property is set. Requests sent immediately after the first one might have the wrong feature flag values. To solve this, we can set up a fallback with cookies.
+The problem now is that it takes time for PostHog to ingest the person properties. Since this flag relies on the `first_request_complete` person property, it won’t accurately evaluate until PostHog knows the property is set. Requests sent immediately after the first one might have the wrong feature flag values. To solve this, we can set up a fallback with cookies.
 
 ### Using cookies as a fallback
 
@@ -172,7 +171,7 @@ app.get('/', async (req, res) => {
 
   // If the flag is false, check cookies to see if this is the first request
   if (!completedFirstRequest) {
-    if (req.cookies && req.cookies[`firstRequestComplete-${req.query.id}`] == 'true') {
+    if (req.cookies && req.cookies[`first_request_complete-${req.query.id}`] == 'true') {
       completedFirstRequest = true
     }
   }
@@ -181,12 +180,12 @@ app.get('/', async (req, res) => {
   if (!completedFirstRequest) {
     client.capture({
       distinctId: req.query.id,
-      event: 'first request',
+      event: 'first_request',
       properties: {
-        $set: { firstRequestComplete: true },
+        $set: { first_request_complete: true },
       },
     });
-    res.cookie(`firstRequestComplete-${req.query.id}`, 'true')
+    res.cookie(`first_request_complete-${req.query.id}`, 'true')
     res.send('Hello World!')
     return
   }
@@ -194,7 +193,7 @@ app.get('/', async (req, res) => {
   // Else, it is a subsequent request
   client.capture({
     distinctId: req.query.id,
-    event: 'subsequent request'
+    event: 'subsequent_request'
   })
   res.send('Welcome Back!')
 })

@@ -4,8 +4,7 @@ date: 2023-05-16
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-8.png
-tags: ['hogql', 'trends']
+tags: ['hogql', 'trends', 'product analytics']
 ---    
 
 HogQL opens limitless possibilities for how you can breakdown your trends, funnels, and more. This tutorial showcases some of the advanced breakdowns you can create using HogQL.
@@ -108,13 +107,13 @@ For example, you can group events into mobile and desktop by checking the `$os` 
 
 ```
 multiIf(
-	properties.$os == 'Android', 'mobile',
-	properties.$os == 'iOS', 'mobile', 
+	properties.$os == 'Android', 'mobile',
+	properties.$os == 'iOS', 'mobile', 
 	'desktop'
 )
 ```
 
-You could also do this by checking screen height and width and using the ternary operator the ternary operator `? :` like this:
+You could also do this by checking screen height and width and using the ternary operator the ternary operator `? :` like this:
 
 ```
 properties.$screen_width < properties.$screen_height and properties.$screen_width < 500 ? 'mobile' : 'desktop'
@@ -133,7 +132,7 @@ You can also replace `week` in all of these with `second`, `minute`, `hour`, `da
 
 ## JSON arrays
 
-HogQL can provides access to JSON properties, which can then be used to breakdown by arrays within that JSON. We can use the [JSONExtractArrayRaw](https://clickhouse.com/docs/en/sql-reference/functions/json-functions#jsonextractarrayrawjson-indices_or_keys) function to extract an array from JSON. For example, we can break down by active feature flags with the following expression:
+HogQL can provides access to JSON properties, which can then be used to [breakdown by arrays](/tutorials/array-filter-breakdown) within that JSON. We can use the [JSONExtractArrayRaw](https://clickhouse.com/docs/en/sql-reference/functions/json-functions#jsonextractarrayrawjson-indices_or_keys) function to extract an array from JSON. For example, we can break down by active feature flags with the following expression:
 
 ```
 arrayJoin(

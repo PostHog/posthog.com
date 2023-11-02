@@ -4,7 +4,6 @@ date: 2023-09-05
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-18.png
 tags: ["feature-flags"]
 ---
 
@@ -79,7 +78,7 @@ def hello_world():
 def show_user(user):
   posthog.capture(
     user, 
-    "visited user page", 
+    "visited_user_page", 
     {
       '$set_once': {'initial_name': user} 
     }
@@ -117,7 +116,7 @@ def show_user(user):
 
   posthog.capture(
     user, 
-    "visited user page", 
+    "visited_user_page", 
     {
       '$set_once': {'initial_name': user}
     }
@@ -147,7 +146,7 @@ def show_user(user):
 
   posthog.capture(
     user, 
-    "visited user page", 
+    "visited_user_page", 
     {
       '$set_once': {'initial_name': user},
       '$feature/new-cool-feature': flag_enabled

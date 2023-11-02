@@ -12,20 +12,24 @@ const linklist: IProps[] = [
         url: '/products/product-analytics',
         items: [
             {
-                title: 'Product analytics',
+                title: 'Product Analytics',
                 url: '/product-analytics',
             },
             {
-                title: 'Session replay',
+                title: 'Session Replay',
                 url: '/session-replay',
             },
             {
-                title: 'Feature flags',
+                title: 'Feature Flags',
                 url: '/feature-flags',
             },
             {
-                title: 'A/B testing',
+                title: 'A/B Testing',
                 url: '/ab-testing',
+            },
+            {
+                title: 'Surveys',
+                url: '/surveys',
             },
             {
                 title: 'Product OS',
@@ -96,27 +100,31 @@ const linklist: IProps[] = [
         url: '/docs',
         items: [
             {
-                title: 'Product analytics',
+                title: 'Product Analytics',
                 url: '/docs/product-analytics/',
             },
             {
-                title: 'Session recording',
+                title: 'Session Recording',
                 url: '/docs/session-replay',
             },
             {
-                title: 'Feature flags',
+                title: 'Feature Flags',
                 url: '/docs/feature-flags',
             },
             {
-                title: 'A/B testing',
+                title: 'A/B Testing',
                 url: '/docs/experiments',
+            },
+            {
+                title: 'Surveys',
+                url: '/docs/surveys',
             },
             {
                 title: 'CDP',
                 url: '/docs/cdp',
             },
             {
-                title: 'Data warehouse',
+                title: 'Data Warehouse',
                 url: '/docs/data-warehouse',
             },
             {
@@ -144,6 +152,14 @@ const linklist: IProps[] = [
             {
                 title: 'Dashboard templates',
                 url: '/templates',
+            },
+            {
+                title: 'Founders',
+                url: '/founders/all',
+            },
+            {
+                title: 'Product engineers',
+                url: '/product-engineers/all',
             },
             {
                 title: 'Tracks',
@@ -176,20 +192,24 @@ const linklist: IProps[] = [
         url: '/handbook',
         items: [
             {
-                title: 'Getting started',
-                url: '/handbook/getting-started/start-here',
+                title: "Why we're here",
+                url: '/handbook/why-does-posthog-exist',
             },
             {
-                title: 'Company',
-                url: '/handbook/company/story',
-            },
-            {
-                title: 'Strategy',
-                url: '/handbook/strategy/overview',
+                title: 'Our story',
+                url: '/handbook/story',
             },
             {
                 title: 'How we work',
                 url: '/handbook/company/culture',
+            },
+            {
+                title: 'Values',
+                url: '/handbook/values',
+            },
+            {
+                title: 'Tips for working here',
+                url: '/handbook/help',
             },
             {
                 title: 'Small teams',
@@ -204,20 +224,12 @@ const linklist: IProps[] = [
                 url: '/handbook/engineering/developing-locally',
             },
             {
-                title: 'Product',
-                url: '/handbook/product/product-team',
-            },
-            {
                 title: 'Design',
                 url: '/handbook/design/philosophy',
             },
             {
                 title: 'Marketing',
                 url: '/handbook/growth/marketing',
-            },
-            {
-                title: 'Customer success',
-                url: '/handbook/growth/strategy',
             },
         ],
     },
@@ -243,7 +255,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Blog',
-                url: '/blog',
+                url: '/blog/all',
             },
             {
                 title: 'Investors',

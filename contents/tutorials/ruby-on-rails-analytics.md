@@ -4,7 +4,6 @@ date: 2023-02-02
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/ruby-on-rails-analytics.png
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
@@ -250,7 +249,7 @@ def create
     if @article.save
       $posthog.capture(
         distinct_id: @article.author,
-        event: 'Article created',
+        event: 'article_created',
         properties: {
           title: @article.title
         }
@@ -281,7 +280,7 @@ def create
     if @article.save
       $posthog.capture(
         distinct_id: @article.author,
-        event: 'Article created',
+        event: 'article_created',
         properties: {
           title: @article.title
         }
