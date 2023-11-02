@@ -742,14 +742,14 @@ export const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: 'https://posthog.com/posts',
+    url: '/posts',
     icon: 'Chat',
     children: [
         {
             name: 'Posts',
             icon: 'Newspaper',
             color: 'red',
-            url: 'https://posthog.com/posts',
+            url: '/posts',
         },
         {
             name: 'Questions',
@@ -761,7 +761,7 @@ export const communityMenu = {
             name: 'Guides',
             icon: 'Map',
             color: 'red',
-            url: 'https://posthog.com/tutorials',
+            url: '/tutorials',
             children: [
                 {
                     name: 'All guides',
@@ -852,7 +852,7 @@ export const communityMenu = {
             name: 'Newsletter',
             icon: 'Newspaper',
             color: 'green',
-            url: 'https://posthog.com/newsletter',
+            url: '/newsletter',
         },
         {
             name: 'Merch',
@@ -887,7 +887,7 @@ export const companyMenu = {
             name: 'Blog',
             icon: 'Newspaper',
             color: 'yellow',
-            url: 'https://posthog.com/blog',
+            url: '/blog',
             children: [
                 {
                     name: 'Blog',
