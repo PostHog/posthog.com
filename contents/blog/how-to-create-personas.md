@@ -1,6 +1,6 @@
 ---
-title: How to create user personas
-date: 2023-10-30
+title: How to create great user personas
+date: 2023-11-02
 author: ["lior-neu-ner"]
 showTitle: true
 rootpage: /blog
@@ -15,32 +15,25 @@ tags:
   - Product
 ---
 
-The best products are built by engineers that deeply understand their users' problems. A great way to do this is by creating user personas and building with them in mind. But what are they exactly? And what makes a good one?
+## What are user personas?
 
-In this post we'll dive into those answers, as well as show you how to create your own one.
-
-## What are user personas
-
-Personas are a generalized way of talking about the people who are using your product. This enables you to visualize and empathize with them while you're building your app.
+User personas are a generalized way of understanding and talking about the people using your product. This enables you to empathize with them and focus on their needs while you're building for them.
 
 This is different from other personas, like buyer personas or ideal customer profiles (ICPs), who may not actually use your product. 
 
 Here's a quick comparison:
 
-- **ICP:** Companies that buy your product.
+- **ICP:** Customers (companies, teams, or individuals) that buy your product.
 - **Buyer:** The person who sign off on the purchase.
 - **User:** The people who actually use your product. 
 
-As an example, here's how these different personas look like for our company:
+As an example, here's how these different personas look like for our product:
 
-![ICP vs buyer persona vs user persona](../images/blog/how-to-create-personas/posthog-personas.png)
-<Caption>Our ICP are companies that have engineers as decision makers. The buyer is the VP of engineering, but the actual users are the developers in the company.
-<br/><br/>
-Credit to <a href="https://www.developermarkepear.com/blog/developer-personas">developer markepear</a> for the original image.</Caption>
+![ICP vs buyer persona vs user persona](../images/blog/how-to-create-personas/posthog-personas-compared.png)
 
-## What makes a good user persona
+## What makes a good user persona?
 
-A great persona enables you to clearly picture who your user is. To do this, your persona needs to include the following information:
+A great persona needs three things:
 
 1. **Job Summary** – your user's skills and responsibilities. 
 2. **Motivation** – what their goals are.
@@ -50,11 +43,19 @@ If it helps you visualize your user, you can also include other information such
 
 Below are three examples of what user personas could look like for different companies:
 
+1. **Vercel**'s primary user persona are front-end developers who want simple solutions to deploying and hosting apps.
+
 ![Vercel user persona](../images/blog/how-to-create-personas/vercel-persona.png)
+
+2. **Github's**'s primary user persona are software engineers who want an easy way to maintain and collaborate on code.
+
 ![Github user persona](../images/blog/how-to-create-personas/github-persona.png)
+
+3. **Asana's**'s primary user persona are project managers who want track tasks and deliver successful projects.
+
 ![Asana user persona](../images/blog/how-to-create-personas/asana-persona.png)
 
-If you're looking for more examples, GitLab has published the [16 different personas they use](https://about.gitlab.com/handbook/product/personas/).
+If you're looking for more examples, GitLab has published the [16 different user personas they use](https://about.gitlab.com/handbook/product/personas/).
 
 ## How to build a user persona step-by-step
 
@@ -100,46 +101,61 @@ For example, let's say you're building an email client. You ask your receive wha
 | **Head of Product** | Due to the high volume of status updates I get via email, it's challenging to understand the overall project progress. | Email overload, project management |
 
 
-In the above, we see that your core users are **senior leaders** and the two most common themes are **email overload** and **prioritization**. Thus you'll include this in your persona.
+In the above, we see that your core users are **senior leaders** and the two most common themes are **email overload** and **prioritization**. Thus you'll include this in your user persona.
 
 ### Step 3: Combine your data with product analytics
 
 Now that you have your qualitative data, you can combine it with quantitative data to paint a clear picture of your who your users are. 
 
-Product analytics unlocks key insights into how users that match your persona are using your product, and whether their stated problems and behaviors align with real-world usage.
+Product analytics unlocks key insights into how users that match your user persona are using your product, and whether their stated problems and behaviors align with real-world usage.
 
 For example, continuing on our previous example of an email app, we could use product analytics to answer the following questions:
 
-| Theme               | Data questions    |
-|--------------------------------|----------------------------------------------------------------------------------------------------|
-| **Email Overload**             | How many emails do they receive every day?                                                          |
-|                                | How much time do they spend in the app compared to other users?                                    |
-|                                | Which folders or categories have the highest volume of unread emails?                              |
-| **Prioritization**             | What percentage of users who mention "prioritization" use features related to sorting or flagging emails? |
-|                                | Are there features within the product they aren't using that could help address this problem?      |
-|                                | How frequently do these users set reminders or snooze emails?                                      |
+| Theme: Email Overload    |
+|----------------------------------------------------------------------------------------------------|
+| How many emails do these users receive every day?                                                          |
+| How much time do they spend in the app compared to other users?                                    |
+| Which folders or categories have the highest volume of unread emails?                              |
+
+| Theme: Prioritization    |
+|----------------------------------------------------------------------------------------------------|
+| What percentage of users who mention "prioritization" use features related to sorting or flagging emails? |
+| Are there features within the product they aren't using that could help address this problem?      |
+| How frequently do these users set reminders or snooze emails?                                      |
 
 To help you brainstorm questions to ask for your own product, here's a list of common insights to dig into:
 
-- How often do users who match your persona use your product?
+- What percentage of your active users match your user persona?
+- How often do they use your product?
 - What are their most used features?
 - Which features are rarely or never used?
 - Are there common drop-off points or areas of friction?
 - How do users from different job titles or roles use the product differently?
 
-### Step 4: Put it all together
+> 💡 **PostHog Tip:** If you're using PostHog, you can use filters to create a [cohort](/docs/data/cohorts) of users in your user persona. Then, you can easily breakdown your insights using this cohort.
 
-You should now have enough information build your persona. You persona should be detailed enough that it accurately represents your user, but concise enough that it's easily understood by your team.
 
-Finishing our email app example, here's what the user persona looks like:
+### Step 4: Create a user persona with your findings
+
+The final step is to use what you've learned about your user and create a persona. Summarize your findings into the three key categories we mentioned earlier (job summary, motivations, and frustrations).
+
+Your summary should be detailed enough that it accurately represents your user, but concise enough that it's easily understood by your team.
+
+To illustrate this with an example, below is the completed user persona for our example email app. We created this persona after learning that:
+
+- Our key users are senior executive.
+- Email overload is their biggest pain point, and so prioritization is important to them.
+- People who complained about email overload were receiving 100 emails a day.
 
 ![The user persona for our example email app](../images/blog/how-to-create-personas/email-app-example-persona.png)
 
+> FAQ: How many users is enough
+
 ## Next steps
 
-Your persona is the voice of your user. It should guide your product development and company strategy. 
+Your user persona is the voice of your user. It should guide your product development and company strategy. 
 
-Incorporate them into team meetings and encourage your team to always ask, "How will this benefit our key personas?". By doing so, you build a culture of empathy for your users, ensuring that you can build the best products for them.
+Incorporate them into team meetings and encourage your team to always ask, "How will this benefit our key user personas?". By doing so, you build a culture of empathy for your users, ensuring that you can build the best products for them.
 
 ## Further reading
 
