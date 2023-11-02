@@ -1,6 +1,6 @@
 ---
 title: "In-depth: PostHog vs Optimizely"
-date: 2023-10-31
+date: 2023-11-02
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -13,10 +13,11 @@ tags:
   - Comparisons
 ---
 
-PostHog and Optimizely are both multi-product tools to help you improve your apps and websites. Two important products for each of them are experimentation and feature flags. Beyond these two, they diverge significantly:
+PostHog and Optimizely are both multi-product tools to help you improve your apps and websites. Beyond experimentation and feature flags, they have significantly different focuses:
 
-- PostHog focuses on helping you build a better product. This means having product and data tools like [product analytics](/product-analytics), [session replay](/session-replay), and [surveys](/surveys).
-- Optimizely focuses on being an all-in-one system for marketing. This means having marketing and ecommerce tools like content management, campaign planning, asset management, and checkout customizations.
+- PostHog helps you build better product with tools like [product analytics](/product-analytics), [session replay](/session-replay), and [surveys](/surveys).
+
+- Optimizely is an all-in-one system for marketing that includes content management, campaign planning, asset management, and checkout customizations.
 
 This post compares their platforms, experimentation features, reporting, pricing, and more.
 
@@ -42,80 +43,80 @@ PostHog links all its tools together. This means you get all the features and vi
 
 Optimizely has some analytics, such as web marketing, but largely relies on Google Analytics for tracking and reporting. This limits the analysis you can do related to your feature flags and experiments. 
 
-<ArrayCTA /> 
-
 ## Platform
 
 Although both Optimizely and PostHog provide experimentation and feature flags, their overall platforms are significantly different.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>PostHog</strong></td>
- <td class="text-center"><strong>Optimizely</strong></td>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Open source</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Optimizely has open-source SDKs</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-service</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Start without talking to sales</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Experimentation</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Run A/B tests</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Manage and rollout features remotely</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Native feature tracking</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Web analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Get web stats like pageviews</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">View real user sessions</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users questions and track responses</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>CMS</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Manage content</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Cart optimization</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Optimize ecommerce checkouts</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Project management</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Manage projects related to experiments</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- </tbody>
-</table>
+  <table className="w-full mt-4">
+    <thead>
+      <tr>
+        <td className="w-3/12"></td>
+        <td class="text-center"><strong>PostHog</strong></td>
+        <td class="text-center"><strong>Optimizely</strong></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Open source</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Optimizely has open-source SDKs</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Self-service</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Start without talking to sales</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Experimentation</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Run A/B tests</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Manage and rollout features remotely</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Native feature tracking</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Web analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Get web stats like traffic</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Play back real user sessions</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users questions and track responses</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>CMS</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Manage content</p></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Cart optimization</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Optimize ecommerce checkouts</p></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Project management</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Manage projects related to experiments</p></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<ArrayCTA />
 
 - The big platform difference between the two beyond marketing vs product features is **analytics**. Optimizely relies on external analytics providers like Google and Adobe Analytics to track feature flags and A/B tests. PostHog has a full analytics suite built-in, including [autocapture](/docs/product-analytics/autocapture), [custom events](/docs/getting-started/send-events#2-capture-custom-events), direct SQL access, and more.
 
@@ -138,7 +139,7 @@ The core web experimentation features like traffic allocation, preview mode, cro
     </thead>
     <tbody>
       <tr>
-        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B/n tests</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Do multi-armed bandit tests with multiple variants</p></td>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B/n tests</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Do tests with multiple variants</p></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
       </tr>
@@ -218,67 +219,67 @@ The core web experimentation features like traffic allocation, preview mode, cro
 Feature experimentation relates to releasing and testing feature changes in your product. Both Optimizely and PostHog have all the core features to do this safely and effectively.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>PostHog</strong></td>
- <td class="text-center"><strong>Optimizely</strong></td>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Use and evaluate feature flags</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Rollouts</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Control rollout of features remotely</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User targeting</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Target specific users</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Logging</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Log flag usage</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Audience builder</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Known as cohorts in PostHog</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Custom attributes</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Known as properties in PostHog</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>UI controls</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Configure experiments with UI</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Stats engine</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Calculate the statistical significance of experiments</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Remote configuration</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Config your experiments remotely</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Environments</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Use contexts to manage flag values</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- </tbody>
-</table>
+  <table className="w-full mt-4">
+    <thead>
+      <tr>
+        <td className="w-3/12"></td>
+        <td class="text-center"><strong>PostHog</strong></td>
+        <td class="text-center"><strong>Optimizely</strong></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Use and evaluate feature flags</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Rollouts</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Control rollout of features remotely</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User targeting</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Target specific users</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Logging</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Log flag usage</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Audience builder</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Known as cohorts in PostHog</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Custom attributes</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Known as properties in PostHog</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>UI controls</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Configure experiments with UI</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Stats engine</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Calculate the statistical significance of experiments</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Remote configuration</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Configure your experiments without changing code</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Environments</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Use contexts to manage flag values</p></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 In Optimizely, many of the feature experimentation features, like multi-armed bandits and custom segmentation, are only available are the higher tier plans. These are all available for free in PostHog.
@@ -288,50 +289,40 @@ In Optimizely, many of the feature experimentation features, like multi-armed ba
 PostHog and Optimizely are very different here. Optimizely is sales-driven and completely opaque. PostHog is self-serve and transparent.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>PostHog</strong></td>
- <td class="text-center"><strong>Optimizely</strong></td>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Transparent</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See pricing without talking to sales</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Usage-based</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Pay based on how much you use</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Free tier</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Use for free forever</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Per-product pricing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Different pricing</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- </tbody>
-</table>
+  <table className="w-full mt-4">
+    <thead>
+      <tr>
+        <td className="w-3/12"></td>
+        <td class="text-center"><strong>PostHog</strong></td>
+        <td class="text-center"><strong>Optimizely</strong></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Transparent</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">See pricing without talking to sales</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Usage-based</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Pay based on how much you use</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Free tier</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Use for free forever</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Per-product pricing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Separate pricing for each product</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-Both PostHog and Optimizely do per-product pricing. This means each product has its own pricing. Each PostHog product has free forever pricing as well as a generous free tier on paid plans.
-
-Products with pricing for each include:
-
-- Optimizely: content marketing platform, content management system, web experimentation, feature experimentation, configured commerce, customized commerce.
-
-- PostHog: product analytics, session replay, feature flags, A/B testing, surveys.
-
 For many Optimizely products, there are also paid add-ons like advanced personalization, the data platform, and their Salesforce integration. PostHog only has free and paid tiers for each product with a single addition enterprise add-on for SSO, dedicated support, and advanced permissions.
-
-![Flag pricing](../images/blog/posthog-vs-optimizely/pricing.png)
 
 <ArrayCTA />
 
@@ -342,67 +333,67 @@ Although Optimizely has web analytics through its content marketing platform, it
 PostHog’s product analytics suite shines here. It treats feature flags and experiments as usage, so you can analyze them like any other user behavior. On top of standard experiment results, you can use visualizations like trends, funnels, user paths, and even direct SQL access. 
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>PostHog</strong></td>
- <td class="text-center"><strong>Optimizely</strong></td>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Native analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track experiments without the use of third parties</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Results</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">View experiment results</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Segment results</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Break results down for segments</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Secondary metrics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Monitor non-goal metrics</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Winner</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Calculate the winning experiment variant</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Custom insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Query and customize analytics</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Trends</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Visualize results as a trend</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Funnels</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Visualize results as a funnel</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Confidence interval</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Show confidence in results</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">View user sessions related to the experiments</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- </tbody>
-</table>
+  <table className="w-full mt-4">
+    <thead>
+      <tr>
+        <td className="w-3/12"></td>
+        <td class="text-center"><strong>PostHog</strong></td>
+        <td class="text-center"><strong>Optimizely</strong></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Native analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track experiments without the use of third parties</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Results</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">View experiment results</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Segment results</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Break results down for segments</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Secondary metrics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Monitor non-goal metrics</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Winner</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Calculate the winning experiment variant</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Custom insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Query and customize analytics</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Trends</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Visualize results as a trend</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Funnels</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Visualize results as a funnel</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Confidence interval</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Show confidence in results</p></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td> 
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">View user sessions related to the experiments</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 Another bonus of PostHog is the ability to view user sessions related to feature flags and experiments. You can see directly how they respond to new features and changes as well as how it affects the rest of their session.
