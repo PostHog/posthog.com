@@ -60,7 +60,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
-        if (/^\/docs\/apps/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
+        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
             const { name, owner } = GitUrlParse(node.frontmatter.github)
 
             try {

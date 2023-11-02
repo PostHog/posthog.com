@@ -31,7 +31,7 @@ This is our standard first round culture interview with the People & Ops team.
 
 The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round is a 2-part interview, lasting up to 90 minutes in total.
 
-The first half of the interview will be with [Cory](/handbook/people/team#cory-watilo-lead-designer) and 1 or 2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
+The first half of the interview will be with [Cory](/community/profiles/2) and 1 or 2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
 
 The second part of the interview will be a portfolio interview, where you will meet a few other members of the team. You will present a deep dive into your portfolio, covering the end-to-end process from strategy to design to impact.
 
@@ -41,7 +41,7 @@ The final stage of our interview process is the PostHog [SuperDay](/handbook/peo
 
 A Design SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences):_
 
-*   Kick-off session with [Cory](/handbook/people/team#cory-watilo-lead-designer)(Lead Designer)
+*   Kick-off session with [Cory](/community/profiles/2)(Lead Designer)
 *   Meet the founders - Tim and James
 *   Time to focus on the task - we can provide support via your personal Slack channel
 *   On days when we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company-wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break

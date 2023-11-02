@@ -14,303 +14,85 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
-
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Installation
 
-```go
-go get github.com/posthog/posthog-go
-```
+import GoInstall from '../../integrate/_snippets/install-go.mdx'
 
-## Usage
+<GoInstall />
 
-```go
-package main
+## Capturing events
 
-import (
-    "os"
-    "github.com/posthog/posthog-go"
-)
+import GoSendEvents from '../../integrate/send-events/_snippets/send-events-go.mdx'
 
-func main() {
-	client, _ := posthog.NewWithConfig(
-		os.Getenv("POSTHOG_API_KEY"),
-		posthog.Config{
-			Endpoint:       "<ph_instance_address>",
-			PersonalApiKey: "your personal API key", // needed for feature flags
-		},
-	)
-	defer client.Close()
+<GoSendEvents />
 
-	// run commands
-}
+## Setting user properties
 
-```
-
-## Making calls
-
-### Capture
-
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve, or find out where people are giving up.
-
-A `capture` call requires:
-
--   `distinct id` which uniquely identifies your user
--   `event name` to specify the event
-    -   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-
--   `properties`, which can be an array with any information you'd like to add
-
-For example:
+To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
 ```go
 client.Enqueue(posthog.Capture{
-  DistinctId: "test-user",
-  Event:      "test-snippet",
-  Properties: posthog.NewProperties().
-    Set("plan", "Enterprise").
-    Set("friends", 42),
+    DistinctId: "distinct_id",
+    Event:      "event_name",
+    Properties: map[string]interface{}{
+        "$set": map[string]interface{}{
+            "name": "Max Hedgehog",
+        },
+        "$set_once": map[string]interface{}{
+            "initial_url": "/blog",
+        },
+    },
 })
 ```
 
-#### Setting user properties via an event
+For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+## Alias
 
-##### $set
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-**Example**
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-```go
-client.Enqueue(posthog.Capture{
-  DistinctId: "test-user",
-  Event:      "test-snippet",
-  Properties: map[string]interface{}{
-		"eventProp":    "value1",
-		"$set": map[string]interface{}{
-			"userProp": "value2",
-		},
-	}
-})
-```
+## Feature flags
 
-**Usage**
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+<FeatureFlagsLibsIntro />
 
-##### $set_once
+import GoFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-go.mdx'
 
-**Example**
+<GoFeatureFlagsCode />
 
-```go
-client.Enqueue(posthog.Capture{
-  DistinctId: "test-user",
-  Event:      "test-snippet",
-  Properties: map[string]interface{}{
-		"eventProp":    "value1",
-		"$set_once": map[string]interface{}{
-			"userProp": "value2",
-		},
-	}
-})
-```
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
-**Usage**
+### Local Evaluation
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+<LocalEvaluationIntro />
 
-### Identify
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
-> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+## Experiments (A/B tests)
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
-like segment users by these properties.
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
-An identify call requires:
-
--   `distinct id` which uniquely identifies your user
--   `properties` with a dictionary of any key:value pairs you'd like to add
-
-For example:
 
 ```go
-client.Enqueue(posthog.Identify{
-  DistinctId: "user:123",
-  Properties: posthog.NewProperties().
-    Set("email", "john@doe.com").
-    Set("proUser", false),
-})
-```
+variant, err := client.GetFeatureFlag(
+            FeatureFlagPayload{
+                Key:        "experimentfeature-flag-name",
+                DistinctId: "user_distinct_id",
+            })
 
-The most obvious place to make this call is whenever a user signs up, or when they update their information.
-
-### Alias
-
-To connect whatever a user does before they sign up or login with what they do after, you need to make an alias call. This will allow you to answer questions like "Which marketing channels lead to users churning after a month?" or "What do users do on our website before signing up?"
-
-In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
-
-The same concept applies for when a user logs in.
-
-If you're using PostHog in the front-end and back-end, doing the identify call in the frontend will be enough.
-
-An alias call requires
-
--   `DistinctId` – the user id
--   `Alias` – the anonymous session distinct ID
-
-For example:
-
-```go
-client.Enqueue(posthog.Alias{
-  DistinctId: "user:123",
-  Alias: "session:12345",
-})
-```
-
-### Sending page views
-
-If you're aiming for a full back-end implementation of PostHog, you can send page views from your backend, like so:
-
-```go
-client.Enqueue(posthog.Capture{
-  DistinctId: "test-user",
-  Event:      "$pageview",
-  Properties: posthog.NewProperties().
-    Set("$current_url", "https://example.com"),
-})
-```
-
-### Feature flags
-
-> Note that to use feature flags you must specify `PersonalApiKey` in the [options passed to `posthog.NewWithConfig`](#usage).
-
-**How to check if a flag is enabled**
-
-> **Note:** Whenever we face an error computing the flag, the library returns `undefined`, instead of `true`, `false`, or a string variant value.
-
-```go
-// IsFeatureEnabled(FeatureFlagPayload) (interface{}, error)
-isFlagEnabledForUser, err := client.IsFeatureEnabled(
-		FeatureFlagPayload{
-			Key:        "flag-key",
-			DistinctId: "distinct-id",
-		},
-	)
-
-if (isFlagEnabledForUser) {
-  // Do something differently for this user
+if variant == "variant-name" {
+    // Do something
 }
 ```
 
-> If your feature flag relies entirely on rollout percentage (i.e. it has no filters), `isFeatureEnabled` will provide a fast response, allowing it to be used in the logic for API endpoints, for example. Flags that depend on filters require a call to the PostHog API so will take longer.
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
-> **Note:** Whenever we face an error computing the flag, the library returns `nil`, instead of `true` or `false` or a string variant value.
-
-**Get a flag value**
-
-If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
-
-> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
-
-```go
-// GetFeatureFlag(FeatureFlagPayload) (interface{}, error)
-enabledVariant, err := client.GetFeatureFlag(
-		FeatureFlagPayload{
-			Key:        "multivariate-flag",
-			DistinctId: "distinct-id",
-		},
-)
-```
-
-**Overriding server properties**
-
-Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
-
-For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
-```go
-enabledVariant, err := client.GetFeatureFlag(
-		FeatureFlagPayload{
-			Key:        "multivariate-flag",
-			DistinctId: "distinct-id",
-      PersonProperties: posthog.NewProperties().
-        Set("is_authorized", true),
-		},
-)
-```
-
-The same holds for groups. if you have a group name `organisation`, you can add properties like so:
-
-```go
-enabledVariant, err := client.GetFeatureFlag(
-		FeatureFlagPayload{
-			Key:        "multivariate-flag",
-			DistinctId: "distinct-id",
-      Groups:          Groups{"organisation": "some-company"},
-			GroupProperties: map[string]Properties{"organisation": NewProperties().Set("is_authorized", true)},
-		},
-)
-```
-
-#### Getting all flag values
-
-You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
-
-```go
-featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
-		DistinctId: "distinct-id",
-})
-```
-
-#### Local Evaluation
-
-> **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
-
-All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. You must know all person or group properties the flag depends on.
-
-The method call looks just like above
-
-```go
-enabledVariant, err := client.GetFeatureFlag(
-		FeatureFlagPayload{
-			Key:        "multivariate-flag",
-			DistinctId: "distinct-id",
-      PersonProperties: posthog.NewProperties().
-        Set("is_authorized", true),
-		},
-)
-```
-
-This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
-
-```go
-featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
-		DistinctId: "distinct-id",
-})
-```
-
-#### Restricting evaluation to local only
-
-Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the OnlyEvaluateLocally parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns None, instead of going to PostHog's servers to get the value.
-
-<CohortExpansionSnippet />
-
-#### Reloading feature flags
-
-When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `ReloadFeatureFlags`:
-
-```go
-client.ReloadFeatureFlags()
-
-// Do something with feature flags here
-```
-
-### Group analytics
+## Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
@@ -320,10 +102,10 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```go
 client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
-    Event:      "some event",
+    DistinctId: "user_distinct_id",
+    Event:      "some_event",
     Groups: posthog.NewGroups().
-        Set("company", "42dlsfj23f").
+        Set("company", "company_id_in_your_db").
 })
 ```
 
@@ -332,7 +114,7 @@ client.Enqueue(posthog.Capture{
 ```go
 client.Enqueue(posthog.GroupIdentify{
     Type: "company",
-    Key:  "42dlsfj23f",
+    Key:  "company_id_in_your_db",
     Properties: posthog.NewProperties().
         Set("name", "Awesome Inc.").
         Set("employees", 11),

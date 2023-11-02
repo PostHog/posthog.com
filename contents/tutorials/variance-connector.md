@@ -2,15 +2,14 @@
 title: How to enrich customer data by connecting PostHog with Variance
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/variance-connector.png
 author: ["noah-brier"]
-tags: ['apps']
+tags: ['apps', 'cdp']
 date: 2022-07-01
 ---
 
 _Estimated reading time: 6 minutes_ ☕☕
 
-Variance lets revenue teams get more out of their analytics data. Using the [Variance Connector](/apps/variance-connector) to integrate Variance with PostHog makes it easy to send your event data on to Variance for processing. 
+Variance lets revenue teams get more out of their analytics data. Using the [Variance integration](/apps/variance-connector) to integrate Variance with PostHog makes it easy to send your event data on to Variance for processing. 
 
 To get the most out of [Variance](https://www.variance.com/), there are a few key use cases:
 
@@ -77,6 +76,3 @@ Say you want to keep track of the PQL progress for all your accounts in [Salesfo
 From there how you use that data is really up to you. Some users use it in CRM views for their sales team, to kick off automation flows, and a whole host of other scenarios. As we said at the beginning, a big part of the value of Variance is transforming analytics data into the structure of revenue, which means making it easy to work with in your CRM.
 
 Ready to get started? [Sign-up to Variance for free](https://www.variance.com/) and install the connector app in just a few minutes. 
-
-<NewsletterTutorial compact/>
-

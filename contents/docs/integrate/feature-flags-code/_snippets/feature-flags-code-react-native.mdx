@@ -1,0 +1,62 @@
+There are two ways to implement feature flags in React Native:
+
+1. Using hooks.
+2. Loading the flag directly.
+
+### Method 1: Using hooks
+
+#### Example 1: Boolean feature flags
+```react-native
+import { useFeatureFlag } from 'posthog-react-native'
+
+const MyComponent = () => {
+    const booleanFlag = useFeatureFlag('key-for-your-boolean-flag')
+
+    if (showFlaggedFeature === undefined) {
+        // the response is undefined if the flags are being loaded
+        return null
+    }
+
+    return showFlaggedFeature ? <Text>Testing feature 😄</Text> : <Text>Not Testing feature 😢</Text>
+}
+```
+
+#### Example 2: Multivariate feature flags
+
+```react-native
+import { useFeatureFlag } from 'posthog-react-native'
+
+const MyComponent = () => {
+    const multiVariantFeature = useFeatureFlag('key-for-your-multivariate-flag')
+
+    if (multiVariantFeature === undefined) {
+        // the response is undefined if the flags are being loaded
+        return null
+    } else if (multiVariantFeature === 'variant-name') { // replace 'variant-name' with the name of your variant
+      // Do something
+    }
+
+    return <div/>
+}
+```
+
+### Method 2: Loading the flag directly
+
+```react-native
+// Defaults to undefined if not loaded yet or if there was a problem loading
+posthog.getFeatureFlag('key-for-your-boolean-flag')
+
+// Multivariant feature flags are returned as a string
+posthog.getFeatureFlag('key-for-your-multivariate-flag')
+```
+
+### Reloading flags
+
+PostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag. 
+
+If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync()`:
+
+```react-native
+posthog.reloadFeatureFlagsAsync().then((refreshedFlags) => console.log(refreshedFlags))
+```
+

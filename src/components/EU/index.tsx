@@ -11,12 +11,12 @@ export default function EU() {
     return (
         <Layout className="eu-cloud">
             <SEO title={`PostHog Cloud EU`} />
-            <section className="grid md:grid-cols-2 md:gap-x-8 md:gap-y-0 gap-y-6 items-center bg-gradient-to-b from-[#DFDFCD] via-[#DFDFCD] to-gray-accent-light/30 px-5 md:pb-24 pb-12 pt-12">
+            <section className="grid md:grid-cols-2 md:gap-x-8 md:gap-y-0 gap-y-6 -mt-1 items-center bg-gradient-to-b from-[#DFDFCD] via-[#DFDFCD] to-accent dark:to-dark px-5 md:pb-24 pb-12 pt-12 text-primary">
                 <div className="text-right order-last lg:order-first ">
                     <StaticImage placeholder="none" src="./images/eu-hog.png" alt="EU hog" className="max-w-2xl" />
                 </div>
                 <div className="max-w-[530px]">
-                    <h1 className="text-xl sm:text-2xl m-0 mb-5 pb-5 border-b border-dashed border-gray-accent-light inline-block">
+                    <h1 className="text-xl sm:text-2xl m-0 mb-5 pb-5 inline-block">
                         Introducing PostHog Cloud{' '}
                         <span className="bg-[#003399] text-[#FFCC00] rounded-sm px-1">EU</span>
                     </h1>
@@ -37,11 +37,13 @@ export default function EU() {
                     </TrackedCTA>
                     <p className="text-sm font-semibold mt-7 mb-0">
                         <span className="opacity-60">Current customer?</span>{' '}
-                        <Link to="/tutorials/migrate-eu-cloud">Learn about migrating</Link>
+                        <Link to="/tutorials/migrate-eu-cloud" className="text-red">
+                            Learn about migrating
+                        </Link>
                     </p>
                 </div>
             </section>
-            <section className="sm:py-0 py-12 bg-white px-5">
+            <section className="sm:py-0 py-12 bg-light dark:bg-dark text-primary dark:text-primary-dark px-5">
                 <div className="flex sm:grid sm:grid-cols-2 max-w-5xl mx-auto items-end sm:items-center">
                     <div className="flex-grow">
                         <h2 className="text-3xl sm:text-5xl leading-[1.1]">

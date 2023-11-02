@@ -1,0 +1,115 @@
+---
+title: Capturing events
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+import Tab from "components/Tab"
+import APISendEvent from '../integrate/send-events/_snippets/send-events-api.mdx'
+import WebSendEvent from '../integrate/send-events/_snippets/send-events-web.mdx'
+import ReactSendEvent from '../integrate/send-events/_snippets/send-events-react.mdx'
+import NodeSendEvent from '../integrate/send-events/_snippets/send-events-node.mdx'
+import PythonSendEvent from '../integrate/send-events/_snippets/send-events-python.mdx'
+import PHPSendEvent from '../integrate/send-events/_snippets/send-events-php.mdx'
+import RubySendEvent from '../integrate/send-events/_snippets/send-events-ruby.mdx'
+import GoSendEvent from '../integrate/send-events/_snippets/send-events-go.mdx'
+import ReactNativeSendEvent from '../integrate/send-events/_snippets/send-events-react-native.mdx'
+import AndroidSendEvent from '../integrate/send-events/_snippets/send-events-android.mdx'
+import IOSSendEvent from '../integrate/send-events/_snippets/send-events-ios.mdx'
+import JavaSendEvent from '../integrate/send-events/_snippets/send-events-java.mdx'
+import RustSendEvent from '../integrate/send-events/_snippets/send-events-rust.mdx'
+import FlutterSendEvent from '../integrate/send-events/_snippets/send-events-flutter.mdx'
+import ElixirSendEvent from '../integrate/send-events/_snippets/send-events-elixir.mdx'
+
+Once your PostHog instance is up and running, the next step is to start sending events.
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={[
+    'Web', 
+    'Node.js', 
+    'Python', 
+    'PHP', 
+    'Ruby', 
+    'Go', 
+    'React', 
+    'React Native', 
+    'Android', 
+    'iOS', 
+    'Java', 
+    'Rust', 
+    'Elixir', 
+    'Flutter', 
+    'api']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+        <Tab>React</Tab>
+        <Tab>React Native</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Java</Tab>
+        <Tab>Rust</Tab>
+        <Tab>Elixir</Tab>
+        <Tab>Flutter</Tab>
+        <Tab>API</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <WebSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NodeSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PHPSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <RubySendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNativeSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AndroidSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOSSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <JavaSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+           <RustSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ElixirSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+           <FlutterSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <APISendEvent />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## Event ingestion
+
+It's a priority for us that events are fully processed and saved as soon as possible. Typically, events will be usable in queries within a few minutes.

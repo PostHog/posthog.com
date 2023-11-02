@@ -1,0 +1,240 @@
+---
+title: "Advanced: How to run experiments without feature flags"
+---
+
+You may want to run experiments without using PostHog's feature flags. There are 2 reasons why you may want to do this:
+
+1. You're using a different library for feature flags rather than PostHog's, and you want to run your experiment using this library.
+2. Feature flag support is not yet available in the PostHog SDK that you are using.
+
+This doc walks you through how to set up an experiment without using PostHog's feature flags.
+
+## Step 1: Create your experiment in PostHog
+
+Create a new experiment in the [experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular one](/docs/experiments/manual#how-to-create-an-experiment-in-posthog).
+
+> **Note:** Although you won't be using feature flags directly in your experiment, you still need to name your feature flag key for submitting events so PostHog can calculate your experiment results.
+
+## Step 2 (optional): Call the `decide` endpoint
+
+If feature flag support is not yet available in your PostHog SDK, but you still want to leverage PostHog's feature flag infrastructure, use the PostHog [API](/docs/api) to call the [`decide`](/docs/api/post-only-endpoints#feature-flags) endpoint. This enables you to calculate the feature flag value for a given user.
+
+This step is not necessary if you are using your own feature flag library.
+
+## Step 3: Add the feature flag property to your events 
+
+In order to attribute events to their correct experiment variants, you'll need to include a `$feature/experiment_feature_flag_key: variant-name` property when submitting your events. You only need to do this for events that you'd like to track in your experiment.
+
+This is similar to the [same step](/docs/experiments/manual#step-2-server-side-only-add-the-feature-flag-property-to-your-events) when setting up regular experiments. The key difference is that now you need to include this property wherever you capture events for the experiment, not just server-side SDKs.
+
+<MultiLanguage>
+
+```js-web
+posthog.capture('event_name_of_your_goal_metric', {
+    "$feature/experiment-feature-flag-key": "variant-name"
+})
+```
+
+```react
+posthog.capture('event_name_of_your_goal_metric', {
+    "$feature/experiment-feature-flag-key": "variant-name"
+})
+```
+
+```react-native
+posthog.capture('event_name_of_your_goal_metric', {
+    "$feature/experiment-feature-flag-key": "variant-name"
+})
+```
+
+```Android
+PostHog.with(this)
+       .capture("event_name_of_your_goal_metric", new Properties()
+                                        .putValue("$feature/experiment-feature-flag-key", "variant-name"));
+```
+
+```iOS
+posthog.capture("event_name_of_your_goal_metric", properties: ["$feature/experiment-feature-flag-key": "variant-name"])
+```
+
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'event_name_of_your_goal_metric',
+    properties: {
+        '$feature/experiment-feature-flag-key': 'variant-name'
+    },
+})
+```
+
+```python
+posthog.capture(
+    'distinct_id',
+    'event_name_of_your_goal_metric',
+    {
+        '$feature/experiment-feature-flag-key': 'variant-name'
+    }
+)
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id',
+  'event' => 'event_name_of_your_goal_metric',
+  'properties' => array(
+    '$feature/experiment-feature-flag-key'  = 'variant-name'
+  )
+));
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id',
+    event: 'event_name_of_your_goal_metric',
+    properties: {
+        '$feature/experiment-feature-flag-key': 'variant-name',
+    }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "distinct_id",
+  Event:      "event_name_of_your_goal_metric",
+  Properties: posthog.NewProperties().
+    Set("$feature/experiment-feature-flag-key", "variant-name"),
+})
+```
+
+```java
+posthog.capture(
+  "distinct_id",
+  "event_name_of_your_goal_metric",
+  new HashMap<String, Object>() {
+    {
+      put("$feature/experiment-feature-flag-key", "variant-name");
+    }
+  }
+);
+```
+
+</MultiLanguage>
+
+## Step 4 (optional): Send the `$feature_flag_called` event
+
+> **This step is only required if your [experiment goal metric](/docs/experiments/manual#experiment-goal) is set to "trend"**. This is not required for funnel goals:
+
+You need to capture the `$feature_flag_called` event. This ensures that we record which experiment variant each user was assigned to. This is also referred to as "exposure logging", and without it you would not be able to analyze your results. 
+
+You need to include two properties with this event:
+
+1. `$feature_flag_response`: this is the name of the variant the user has been assigned to e.g., "control" or "test"
+2. `$feature_flag`: This is the key of the feature flag in your experiment.
+
+**Important:** For accurate results, you must submit this event whenever you retrieve the value of your feature flag.
+
+<MultiLanguage>
+
+```js-web
+posthog.capture('$feature_flag_called', {
+    "$feature_flag_response": "variant-name",
+    "$feature_flag": "feature-flag-key"
+})
+```
+
+```react
+posthog.capture('$feature_flag_called', {
+    "$feature_flag_response": "variant-name",
+    "$feature_flag": "feature-flag-key"
+})
+```
+
+```react-native
+posthog.capture('$feature_flag_called', {
+    "$feature_flag_response": "variant-name",
+    "$feature_flag": "feature-flag-key"
+})
+```
+
+```Android
+PostHog.with(this)
+       .capture("$feature_flag_called", new Properties()
+                                        .putValue("$feature_flag_response", "variant-name")
+                                        .putValue("$feature_flag", "feature-flag-key"));
+```
+
+```iOS
+posthog.capture("$feature_flag_called", properties: [
+    "$feature_flag_response": "variant-name",
+    "$feature_flag": "feature-flag-key"
+])
+```
+
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: '$feature_flag_called',
+    properties: {
+        '$feature_flag_response': 'variant-name',
+        '$feature_flag': 'feature-flag-key'
+    },
+})
+```
+
+```python
+posthog.capture(
+    'distinct_id',
+    '$feature_flag_called',
+    {
+        '$feature_flag_response': 'variant-name',
+        '$feature_flag': 'feature-flag-key'
+    }
+)
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id',
+  'event' => '$feature_flag_called',
+  'properties' => array(
+    '$feature_flag_response'  = 'variant-name',
+    '$feature_flag': 'feature-flag-key'
+  )
+));
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id',
+    event: '$feature_flag_called',
+    properties: {
+        '$feature_flag_response': 'variant-name',
+        '$feature_flag': 'feature-flag-key'
+    }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "distinct_id",
+  Event:      "$feature_flag_called",
+  Properties: posthog.NewProperties().
+    Set("$feature_flag_response", "variant-name").
+    Set("$feature_flag", "feature-flag-key"),
+})
+```
+
+```java
+posthog.capture(
+  "distinct_id",
+  "$feature_flag_called",
+  new HashMap<String, Object>() {
+    {
+      put("$feature_flag_response", "variant-name");
+      put("feature_flag", "feature-flag-key");
+    }
+  }
+);
+```
+
+</MultiLanguage>

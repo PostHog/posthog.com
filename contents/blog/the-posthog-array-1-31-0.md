@@ -20,7 +20,7 @@ tags:
 Happy holidays from PostHog! PostHog 1.31.0 is our last release of the year, introducing Group Analytics, improved Correlation Analysis, a revamped user experience on Insights and 350+ more improvements and fixes. Please note that Postgres-based installations are no longer supported for PostHog 1.31.0.
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must <a href="/docs/migrate/migrate-between-posthog-instances" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must upgrade to ClickHouse first.
 </blockquote>
 
 ## PostHog 1.31.0 release notes
@@ -92,7 +92,7 @@ The sidebar has been made more graceful: it adjusts to the screen size in a smar
 
 ### Deprecation & removal notices
 
-1. This version (1.31.0) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/migrate/migrate-between-posthog-instances) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+1. This version (1.31.0) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/migrate/migrate-to-cloud) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're [deprecating the **Sessions** insight](/blog/sessions-removal) (distribution of session length). Please [reach out](/support) if you have any feedback on this.
 
 ## Share your feedback

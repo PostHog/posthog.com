@@ -5,6 +5,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+> **Important:** At present, we don't offer the option to sign a BAA to use PostHog Cloud with HIPAA compliance. This page covers how to use [PostHog Open Source](https://posthog.com/docs/self-host), which is available [without guarantee](/docs/self-host/open-source/disclaimer) under an MIT license, within HIPAA rules. 
+
 HIPAA is the Health Insurance Portability and Accountability Act. It’s a piece of legislation that applies to certain [covered entities](https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html) operating in the United States of America (e.g. healthcare providers).
 
 A key goal of this legislation is to [“assure that individuals’ health information is properly protected while allowing the flow of health information needed to provide and promote high quality health care and to protect the public's health and well being.”](https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html) 

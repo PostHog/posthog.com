@@ -12,16 +12,16 @@ If PostHog is running behind a proxy, you need to do the following:
 
 -   Set the `IS_BEHIND_PROXY` environment variable to `True`. This will make sure the client's IP address is properly calculated, and SSL is properly handled (e.g. for OAuth requests).
 -   Set your [trusted proxies](#trusted-proxies) configuration.
--   Depending on your setup, you might also need to set the `ALLOWED_HOSTS` [environment variable](/docs/self-host/configure/environment-variables). If you don't allow all hosts (i.e. you are whitelisting specific hosts), you will need to set the address(es) of your proxy here.
+-   Depending on your setup, you might also need to set the `ALLOWED_HOSTS` [environment variable](/docs/self-host/configure/environment-variables). If you don't allow all hosts (i.e. you are allowlisting specific hosts), you will need to set the address(es) of your proxy here.
 
 <div class='note-block'><b>Note:</b> It is suggested to set up the proxy separately from PostHog's Docker Compose definition.</div>
 
 ### Trusted proxies
 
-Trusted proxies are used to determine which proxies to consider as valid from the `X-Forwarded-For` HTTP header included in all requests to determine the end user's real IP address. Specifically whitelisting your proxy server's address prevents spoofing of the end user's IP address while ensuring your service works as expected. There are two ways of setting up trusted proxies.
+Trusted proxies are used to determine which proxies to consider as valid from the `X-Forwarded-For` HTTP header included in all requests to determine the end user's real IP address. Specifically allowlisting your proxy server's address prevents spoofing of the end user's IP address while ensuring your service works as expected. There are two ways of setting up trusted proxies.
 
 -   **Recommended**. Set a list of trusted IP addresses for your proxies via the `TRUSTED_PROXIES` environment variable (comma-separated list of IP addresses).
--   Trust all proxies by setting `TRUST_ALL_PROXIES` environment variable to `True` (_not recommended unless you have a strong reason for which whitelisting specific addresses wouldn't work for you_).
+-   Trust all proxies by setting `TRUST_ALL_PROXIES` environment variable to `True` (_not recommended unless you have a strong reason for which allowlisting specific addresses wouldn't work for you_).
 
 ### Common issues
 
@@ -42,6 +42,9 @@ If you're setting up a proxy to protect your PostHog instance and prevent access
 | `/engage`          | Endpoint for ingesting/capturing events.                                                     |
 | `/s`               | Endpoint for capturing session recordings.                                                   |
 | `/static/array.js` | Frontend javascript code that loads `posthog-js`.                                            |
+| `/static/recorder-v2.js`| Frontend javascript code that loads recordings v2 in `posthog-js`.                      |
+| `/static/recorder.js`| Frontend javascript code that loads recordings in `posthog-js`.                            |
+| `/static/surveys.js`| Frontend javascript code that loads surveys in `posthog-js`.                                |
 | `/track`           | Endpoint for ingesting/capturing events.                                                     |
 
 ## NGINX config (Recommended)

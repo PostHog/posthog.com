@@ -6,7 +6,6 @@ import Layout from 'components/Layout'
 import { Posts, PostToggle } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
-import docs from 'sidebars/docs.json'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 
 const TutorialsCategory = ({
@@ -37,7 +36,6 @@ const TutorialsCategory = ({
                 breadcrumb={[{ name: 'Tutorials', url: '/tutorials' }, { name: capitalize(activeFilter) }]}
                 article={false}
                 title="Tutorials"
-                menu={docs}
                 hideSidebar
                 hideSurvey
             >

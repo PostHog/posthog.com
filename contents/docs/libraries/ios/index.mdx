@@ -14,70 +14,63 @@ features:
     groupAnalytics: true
 ---
 
+import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
+import IOSIdentify from './\_snippets/identify.mdx'
+import IOSSendEvents from '../../integrate/send-events/_snippets/send-events-ios.mdx'
+
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
 ## Installation
 
-import IOSInstall from './\_snippets/install.mdx'
-import IOSConfigure from './\_snippets/configure.mdx'
-import IOSIdentify from './\_snippets/identify.mdx'
-import IOSCapture from './\_snippets/capture.mdx'
-
 <IOSInstall />
 
-## Configuration
+## Capturing events
 
-<IOSConfigure />
+<IOSSendEvents />
 
-## Making calls
-
-### Identify
+## Identify
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 <IOSIdentify />
 
-### Capture
+### Setting user properties via an event
 
-<IOSCapture />
+To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `$set` and `$set_once`.
 
-#### Setting user properties via an event
-
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
-
-##### $set
+#### $set
 
 **Example**
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"userProp": "value1" } }];
+[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"user_property_name": "your_value" } }];
 ```
 
 ```swift
-posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set": ["userProp": "value1"] ])
+posthog.capture("signed_up", properties: ["plan": "Pro++", "$set": ["user_property_name": "your_value"] ])
 ```
 
 **Usage**
 
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
-##### $set_once
+#### $set_once
 
 **Example**
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"userProp": "value1" } }];
+[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"user_property_name": "your_value" } }];
 ```
 
 ```swift
-posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set_once": ["userProp": "value1"] ])
+posthog.capture("signed_up", properties: ["plan": "Pro++", "$set_once": ["user_property_name": "your_value"] ])
 ```
 
 **Usage**
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
-### Flush
+## Flush
 
 You can set the number of events in the configuration that should queue before flushing.
 Setting this to `1` will send events immediately and will use more battery. This is set to `20` by default.
@@ -89,16 +82,16 @@ configuration.flushAt = 1;
 You can also manually flush the queue:
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"Logged Out"];
+[[PHGPostHog sharedPostHog] capture:@"logged_out"];
 [[PHGPostHog sharedPostHog] flush]
 ```
 
 ```swift
-posthog.capture('Logged Out')
+posthog.capture('logged_out')
 posthog.flush()
 ```
 
-### Reset
+## Reset
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
@@ -110,27 +103,7 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 posthog.reset()
 ```
 
-### Sending screen views
-
-With `configuration.recordScreenViews` set as `YES`, PostHog will try to record all screen changes automatically.
-
-If you want to manually send a new screen capture event, use the `screen` function.
-
-```objectivec
-[[PHGPostHog sharedPostHog] screen:@"Dashboard" properties:@{ @"fromIcon": @"bottom" }];
-```
-
-```swift
-posthog.screen("Dashboard", properties: ["fromIcon": "bottom"])
-```
-
-## A note about IDFA (identifier for advertisers) collection in iOS 14
-
-Starting with iOS 14, Apple will further restrict apps that track users. Any references to Apple's AdSupport framework, even in strings, [will trip](https://github.com/PostHog/posthog-ios/issues/6) the App Store's static analysis.
-
-Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework.
-
-### Group analytics
+## Group analytics
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
@@ -139,69 +112,60 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```objectivec
-[[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f"];
+[[PHGPostHog sharedPostHog] group:@"company" groupKey:@"company_id_in_your_db"];
 ```
 
 ```swift
-posthog.group( "some-type", groupKey: "42dlsfj23f")
+posthog.group( "company", groupKey: "company_id_in_your_db")
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```objectivec
-[[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f" properties:@{ @"name": @"Awesome Inc." }];
+[[PHGPostHog sharedPostHog] group:@"company" groupKey:@"company_id_in_your_db" properties:@{ @"name": @"Awesome Inc." }];
 ```
 
 ```swift
-posthog.group( "organization", groupKey: "42dlsfj23f", properties: [
+posthog.group( "company", groupKey: "company_id_in_your_db", properties: [
     "name": "ACME Corp"
 ])
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
-### Feature Flags
+## Feature Flags
 
-[Feature Flags](/docs/user-guides/feature-flags) allow you to safely deploy and roll back new features.
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-> **Note:** This requires minimum library version 2.0.0
+<FeatureFlagsLibsIntro />
 
+import IOSFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-ios.mdx'
 
-Here's how you can use them:
+<IOSFeatureFlagsCode />
 
--   Check if a feature is enabled:
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```objectivec
-[[PHGPosthog sharedPostHog] isFeatureEnabled:@"keyword"];
+if ([[PHGPosthog sharedPostHog] getFeatureFlag:@"experiment-feature-flag-key"] == @"variant-name") {
+    // do something
+}
 ```
 
 ```swift
-posthog.isFeatureEnabled('keyword')
+if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+    // do something
+}
 ```
 
--   Trigger a reload of the feature flags:
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
-```objectivec
-[[PHGPosthog sharedPostHog] reloadFeatureFlags];
-```
+## A note about IDFA (identifier for advertisers) collection in iOS 14
 
-```swift
-posthog.reloadFeatureFlags()
-```
+Starting with iOS 14, Apple will further restrict apps that track users. Any references to Apple's AdSupport framework, even in strings, [will trip](https://github.com/PostHog/posthog-ios/issues/6) the App Store's static analysis.
 
--   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics.
-
-**Get a flag value**
-
-If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
-
-```objectivec
-[[PHGPosthog sharedPostHog] getFeatureFlag:@"some-flag"];
-```
-
-```swift
-posthog.getFeatureFlag("some-flag")
-```
+Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework.
 
 ## All configuration options
 

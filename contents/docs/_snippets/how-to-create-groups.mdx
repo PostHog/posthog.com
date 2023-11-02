@@ -1,133 +1,16 @@
-Groups are created and defined in your code when sending events. 
+Groups are created and defined in your code when capturing events. 
 
-In the example below, we create a group type `company`. Then, for each company, we set the `group key` as the unique identifier for that specific company. This can be anything that helps you identify it, such as ID or domain.
+import JSGroupEventCodeSnippet from "../\_snippets/capture-group-event-code.mdx"
 
-> We advise against using the _name_ of the company (or any other group) as the key, because that's rarely guaranteed to be unique, and thus can affect the quality of analytics data.
+<JSGroupEventCodeSnippet />
 
-<MultiLanguage>
-
-```js
-// All events for that session will be associated with company `company_id_on_your_db`
-posthog.group('company', 'company_id_in_your_db');
-
-posthog.capture('user_signed_up')
-```
-
-```python
-posthog.capture('[distinct id]', 'user_signed_up', groups={'company': 'company_id_in_your_db'})
-```
-
-```go
-client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
-    Event: "user_signed_up",
-    Groups: posthog.NewGroups().
-        Set("company", "company_id_in_your_db").
-})
-```
-
-```node
-posthog.capture({
-    event: 'user_signed_up',
-    distinctId: '[distinct id]',
-    groups: { company: 'company_id_in_your_db' }
-})
-```
-
-```php
-PostHog::capture(array(
-    'distinctId' => '[distinct id]',
-    'event' => 'user_signed_up',
-    '$groups' => array("company" => "company_id_in_your_db")
-));
-```
-
-```segment
-// You'll always need to pass through the $groups object for Segment, even for analytics.js
-analytics.track('user_signed_up', {
-    $groups: { segment_group: 'company_id_in_your_db' }
-})
-```
-
-</MultiLanguage>
-
-> **Tip:** When specifying the group type, use the singular version for clarity (`company` instead of `companies`).
+In the above example, we create a group type `company`. Then, for each company, we set the `group key` as the unique identifier for that specific company. This can be anything that helps you identify it, such as ID or domain.
 
 We now have one `company`-type group with a key `company_id_in_your_db`. When we send the event `user_signed_up`, it will be attached to this newly created group.
 
-A single event can only belong to a single group per group type. To elaborate what we mean, we'll continue using the example above:
+> **Tip:** When specifying the group type, use the singular version for clarity (`company` instead of `companies`).
 
-* It is **NOT** possible to assign the a single `user_signed_up` event to two companies at the same time.
-* It is possible to assign this event to a different group type, for example `channel` or `post`, in addition to the `company` group type.
-
-<MultiLanguage>
-
-```js
-// ❌ Not possible
-posthog.group('company', 'company_id_in_your_db');
-posthog.group('company', 'another_company_id_in_your_db');
-posthog.capture('user_signed_up')
-
-// ✅ Allowed
-posthog.group('company', 'company_id_in_your_db');
-posthog.group('channel', 'channel_id_in_your_db');
-posthog.capture('user_signed_up')
-
-```
-
-```python
-# ❌ Not possible
-posthog.capture('[distinct id]', 'user_signed_up', groups={'company': 'company_id_in_your_db', 'company': 'another_company_id_in_your_db'})
-
-# ✅ Allowed
-posthog.capture('[distinct id]', 'user_signed_up', groups={'company': 'company_id_in_your_db', 'channel': 'channel_id_in_your_db'})
-```
-
-```go
-// ❌ Not possible
-client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
-    Event: "user_signed_up",
-    Groups: posthog.NewGroups().
-        Set("company", "company_id_in_your_db").
-        Set("company", "another_company_id_in_your_db").
-})
-
-// ✅ Allowed
-client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
-    Event: "user_signed_up",
-    Groups: posthog.NewGroups().
-        Set("company", "company_id_in_your_db").
-        Set("channel", "channel_id_in_your_db").
-```
-
-```node
-// ✅ Allowed
-posthog.capture({
-    event: 'user_signed_up',
-    distinctId: '[distinct id]',
-    groups: { 
-        company: 'company_id_in_your_db',
-        channel: 'channel_id_in_your_db'
-    }
-})
-```
-
-```php
-// ❌ Not possible
-PostHog::capture(array(
-    'distinctId' => '[distinct id]',
-    'event' => 'user_signed_up',
-    '$groups' => array("company" => "company_id_in_your_db", "company" => "another_company_id_in_your_db")
-));
-// ✅ Allowed
-PostHog::capture(array(
-    'distinctId' => '[distinct id]',
-    'event' => 'user_signed_up',
-    '$groups' => array("company" => "company_id_in_your_db", "channel" => "channel_id_in_your_db")
-));
-```
-</MultiLanguage>
+> **Tip:** We advise against using the _name_ of the company (or any other group) as the key, because that's rarely guaranteed to be unique, and thus can affect the quality of analytics data. Use a unique string, like an ID.
 
 > **Group type limit:** There's a hard limit of 5 group types within PostHog, although within each group type you can have an unlimited number of groups.
+

@@ -1,0 +1,210 @@
+---
+title: Troubleshooting and FAQs
+---
+## Why are events not appearing in my project?
+
+There are a few common reasons that you may not see events appear in your project:
+
+### 1. Your library is configured incorrectly
+
+This is the most common reason events may be missing. To debug if this issue, you can try send events to `https://webhook.site/`:
+
+> Warning: Make sure to not use sensitive data while debugging using third-party tools.
+
+1. Visit [webhook.site](https://webhook.site/) and copy “Your unique URL”.
+2. In your PostHog [initialization code](https://posthog.com/docs/product-analytics/installation), replace "https://app.posthog.com" or "https://eu.posthog.com" if using the EU Cloud) with the URL you copied from webhook.site. For example:
+
+<MultiLanguage>
+
+```Web
+posthog.init('<ph_project_api_key>', { api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' }) // Replace with the URL you copied from webhook.site
+```
+
+```node
+const client = new PostHog(
+    '_6SG-F7I1vCuZ-HdJL3VZQqjBlaSb1_20hDPwqMNnGI',
+    
+{ host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' } // Replace with the URL you copied from webhook.site
+)
+```
+
+```react
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+import { PostHogProvider} from 'posthog-js/react'
+
+const options = {
+  api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' } // Replace with the URL you copied from webhook.site
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <PostHogProvider 
+      apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_KEY}
+      options={options}
+    >
+      <App />
+    </PostHogProvider>
+  </React.StrictMode>
+);
+```
+
+```ruby
+posthog = PostHog::Client.new({
+  api_key: "<ph_project_api_key>",
+  host: "<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>", # Replace with the URL you copied from webhook.site
+  on_error: Proc.new { |status, msg| print msg }
+})
+```
+
+</MultiLanguage>
+
+3. Send a few events from your app.
+
+If events are *not* visible in webhook.site, that means you have misconfigured your PostHog library, or incorrectly formatted your events. Consult our [installation guide](/docs/product-analytics/installation) for how to initialize PostHog.
+
+If events are indeed visible in webhook.site, these means that you have configured your PostHog correctly.
+
+![Events visible on webhook.site](../../images/docs/product-analytics/events-in-webhook.site.png)
+
+### 2. There is a bug the library
+
+Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite uncommon.
+
+To debug if this is the issue, most of our SDKs have an option to enable debug logging. Consult the relevant [SDK docs](/docs/libraries) for how to do this.
+
+If you're using the [JavaScript web](/docs/libraries/js) library, you can identify failed requests using the network tab in your browser devtools:
+
+1. Open devtools in your browser and switch to the network tab.
+2. Identify the failed requests to app.posthog.com/e (or eu.posthog.com/e if you're using EU Cloud).
+3. Right click one of those request and click Copy -> Copy as cURL.
+4. See below on how to [report your issue](#report-your-issue) and attach your cURL command to get further support.
+
+![network request being sent to posthog](../../images/docs/product-analytics/network-request-to-posthog.png)
+
+### 3. Events are not ingested after being received by PostHog.
+
+If your library is configured correctly and successfully sending events to PostHog, events may get lost in the ingestion pipeline – e.g. if there is an [active incident](https://status.posthog.com).
+
+To confirm if this is the issue, use the following steps:
+
+1. Ensure that PostHog is not [experiencing an incident](https://status.posthog.com), as this may cause ingestion lags.
+
+2. Check your PostHog app for any [ingestion warnings](https://app.posthog.com/data-management/ingestion-warnings).
+
+3. Send your event as a cURL request directly
+    - i) Copy your cURL request.
+         - If you're using the JavaScript web library, you can copy the cURL request from the network tab in your browser devtools.
+         - If you're using any other library, you can track your outgoing network requests using something like [Wireshark](https://www.wireshark.org/) and format them as a cURL request.
+    - ii) [Decode your request](/docs/product-analytics/troubleshooting#step-1-decode-your-curl-command).
+    - iii) Send your event a cURL request. Wait 1 hour and check if the event is still not visible in PostHog.
+
+Once you have confirmed there is an issue with event ingestion, you can [report your issue](#report-your-issue) to get further support.
+
+## Does PostHog block bots by default?
+
+Yes, PostHog blocks most known bots by default. Bots we block are listed below:
+
+| **Google bots**        | **Non-Google bots** |
+|------------------------|---------------------|
+| 'adsbot-google'        | 'ahrefsbot'         |
+| 'apis-google'          | 'applebot'          |
+| 'duplexweb-google'     | 'baiduspider'       |
+| 'feedfetcher-google'   | 'bingbot'           |
+| 'google favicon'       | 'bingpreview'       |
+| 'google web preview'   | 'bot.htm'           |
+| 'google-read-aloud'    | 'bot.php'           |
+| 'googlebot'            | 'crawler'           |
+| 'googleweblight'       | 'duckduckbot'       |
+| 'mediapartners-google' | 'facebookexternal'  |
+| 'storebot-google'      | 'facebookcatalog'   |
+|                        | 'gptbot'            |
+|                        | 'hubspot'           |
+|                        | 'linkedinbot'       |
+|                        | 'mj12bot'           |
+|                        | 'petalbot'          |
+|                        | 'pinterest'         |
+|                        | 'prerender'         |
+|                        | 'rogerbot'          |
+|                        | 'screaming frog',   |
+|                        | 'semrushbot',       |
+|                        | 'sitebulb',         |
+|                        | 'twitterbot',       |
+|                        | 'yahoo! slurp',     |
+|                        | 'yandexbot',        |
+
+Want a bot added to this list? Request it via the in-app feedback form, or raise an issue in the [posthog-js GitHub repo](https://github.com/PostHog/posthog-js/issues).
+
+## Report your issue
+
+### Step 1: Decode your cURL command
+
+1. Your copied cURL command will look similar to this:
+```
+curl 'http://localhost:3000/e?ip=1&_=1691496272289&ver=1.53.4' \
+  -H 'Origin: http://localhost:3000' \
+  --data-raw 'data=W3siZXZlbnQiOiJjaGFuZ2UgYmlsbGluZyBjeWNsZSIsInByb3BlcnRpZXMiOnsiJG9zIjoiTWFjIE9TIFgiLCIkYnJvd3NlciI6IkNocm9tZSIsIiRkZXZpY2VfdHlwZSI6IkRlc2t0b3AiLCIkY3VycmVudF91cmwiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvcHJpY2luZyIsIiRob3N0IjoibG9jYWxob3N0OjMwMDAiLCIkcGF0aG5hbWUiOiIvcHJpY2luZyIsIiRicm93c2VyX3ZlcnNpb24iOjExNSwiJGJyb3dzZXJfbGFuZ3VhZ2UiOiJlbi1HQiIsIiRzY3JlZW5faGVpZ2h0Ijo5MDAsIiRzY3JlZW5fd2lkdGgiOjE0NDAsIiR2aWV3cG9ydF9oZWlnaHQiOjc5MCwiJHZpZXdwb3J0X3dpZHRoIjo3OTcsIiRsaWIiOiJ3ZWIiLCIkbGliX3ZlcnNpb24iOiIxLjUzLjQiLCIkaW5zZXJ0X2lkIjoicnNsdm9pYXlocjEydXRvbSIsIiR0aW1lIjoxNjkxNDk2MjcxLjc5NywiZGlzdGluY3RfaWQiOiIxODlkNTA4YjBmNDRkNzAtMDBmN2E5MmRkNmE0MzgtMWE1MjU2MzQtMTNjNjgwLTE4OWQ1MDhiMGY1NTJlZSIsIiRkZXZpY2VfaWQiOiIxODlkMTM4ZmMxZjJjMzYtMGQ4MmQ4Njc4NjA4YmUtMWI1MjU2MzQtMTNjNjgwLTE4OWQxMzhmYzIwM2M2NCIsIiRyZWZlcnJlciI6IiRkaXJlY3QiLCIkcmVmZXJyaW5nX2RvbWFpbiI6IiRkaXJlY3QiLCJ0b2tlbiI6InRlc3QiLCIkc2Vzc2lvbl9pZCI6IjE4OWQ1MDhjZmIxMWViMi0wZjkyMjU2YTk1OTBhNS0xYTUyNTYzNC0xM2M2ODAtMTg5ZDUwOGNmYjI0MWZiIiwiJHdpbmRvd19pZCI6IjE4OWQ1MDhjZmIzNDc0Yy0wNmQ2Mzc2NWI3NGEzZi0xYTUyNTYzNC0xM2M2ODAtMTg5ZDUwOGNmYjQ0NzVlIiwiJHBhZ2V2aWV3X2lkIjoiMTg5ZDUwOGFlMjYzOWJmLTAyYjFjNzgwZTRmMDktMWE1MjU2MzQtMTNjNjgwLTE4OWQ1MDhhZTI3NDMxZCJ9LCJvZmZzZXQiOjQ5Mn1d' \
+  --compressed
+```
+
+2. Copy the base64 encoded string right after `--data-raw 'data=`.
+
+3. Visit [base64decode.org](https://www.base64decode.org/) and paste the encoded string.
+
+4. Click decode and paste the decoded output into this format:
+
+```
+POST https://[your-instance].com/capture/
+Content-Type: application/json
+Body:
+{
+    "api_key": "<ph_project_api_key>",
+    "event": "event_name",
+    "distinct_id": "distinct_id_of_your_user",
+    "properties": {
+        "key1": "value1",
+        "key2": "value2"
+    },
+    "timestamp": "[optional timestamp in ISO 8601 format]"
+}
+```
+
+### Step 2: Submit a support ticket
+
+1. [Submit a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)). Submit your issue in the below format, and also include the decoded request from step 1.
+```
+# Library:
+// e.g.
+// posthog-python https://posthog.com/docs/libraries/python
+
+# Library initialization:
+// e.g.
+// from posthog import Posthog
+// posthog = Posthog(phc_yourAPIKey, host='app_or_eu.posthog.com')
+
+# What was called:
+// e.g.
+// posthog.capture(
+//     "Bob", 
+//     "user_signed_up", 
+//     {
+//         "login_type": "email", 
+//         "is_free_trial": "true"
+//     }
+// )
+
+# Network request
+// [include request from previous step here]
+
+# What was expected to happen:
+// e.g.
+// To see the network call include the login_type property.
+
+# What actually happened:
+// e.g.
+// The "login_type" property was missing.
+```

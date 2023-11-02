@@ -16,9 +16,9 @@ This enables the strongest community growth possible. It causes the core team to
 
 ## We haven't built our defining feature yet
 
-We will never stop iterating.
+Ideas are fragile. Be direct but encouraging when you encounter new ideas. If we default to providing negative criticism of new ideas, then they'll simply stop coming. Instead, default to "yes and" rather than "no but", before rejecting an idea.
 
-You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
+We should never stop iterating. You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
 
 ## Everyone codes
 
@@ -26,9 +26,11 @@ You learn faster and help PostHog perform better by getting what you're working 
 
 No matter your role, being able to use the basics of GitHub helps you understand our audience. Beyond that, we'll encourage you to build your technical skill, rather than delegating more challenging tasks to others, so you become a more effective contributor.
 
-## Step on toes
+## Trust and feedback over process
 
-We have ambitious goals. This means people need to pick up what they know is most important at any time, not what they feel their job title means they are allowed to do.
+There are two ways to scale - trust and feedback, or process. We choose the former because we're building a wide platform with many products, so autonomy is more important than control. We hire people that work well with high level direction and will step on toes if needed to get things done.
+
+When giving / receiving feedback, we assume positive intentions and focus on giving specific examples. Many of our team's peak experiences at PostHog have been receiving direct feedback. Feedback should be acknowledged, but what you do with it is up to you - no one built anything great by committee.
 
 We expect you to pick out the very most important thing you can think of, and work on that. Discard plans as you see fit.
 

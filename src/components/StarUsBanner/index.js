@@ -30,9 +30,9 @@ export default function StarUsBanner() {
                     initial={{ translateY: 'calc(100% + 23px)', opacity: 0 }}
                     animate={{ translateY: '0%', opacity: 1 }}
                     exit={{ translateY: 'calc(100% + 23px)', opacity: 1 }}
-                    className="fixed bottom-0 sm:bottom-[23px] z-[9998] w-full sm:w-[350px] sm:left-[calc(50%_-_175px)] flex justify-center items-center"
+                    className="lg:flex hidden fixed lg:bottom-[23px] bottom-[80px] z-[9998] w-[350px] left-[calc(50%_-_175px)] justify-center items-center"
                 >
-                    <div className="flex space-x-4 bg-red/80 sm:bg-red py-[12px] px-[25px] text-white sm:rounded-full w-full sm:w-auto sm:items-center">
+                    <div className="flex space-x-4 bg-yellow py-[12px] px-[25px] text-white rounded-full w-full sm:w-auto sm:items-center">
                         <p className="mx-auto m-0 sm:pr-1 text-[15px] font-semibold flex items-center space-x-4">
                             {posthog?.isFeatureEnabled('london-banner') ? (
                                 <Link to="/hosthog/london" className="text-white hover:text-white">

@@ -5,10 +5,10 @@ import React from 'react'
 const responsive = (divider) => ({
     wrapper: {
         1: '',
-        2: `grid-cols-1 sm:grid-cols-2 ${divider ? 'sm:divide-x' : ''}`,
-        3: `grid-cols-1 md:grid-cols-3 ${divider ? 'md:divide-x' : ''}`,
-        5: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 ${divider ? 'lg:divide-x' : ''}`,
-        4: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ${divider ? 'lg:divide-x' : ''}`,
+        2: `grid-cols-1 sm:grid-cols-2 ${divider ? '' : ''}`,
+        3: `grid-cols-1 md:grid-cols-3 ${divider ? '' : ''}`,
+        5: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 ${divider ? '' : ''}`,
+        4: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ${divider ? '' : ''}`,
     },
 })
 
@@ -54,9 +54,9 @@ export const Section = ({
                 </Heading>
             )}
             <div
-                className={`grid ${
-                    divider ? 'divide-dashed divide-gray-accent-light' : ''
-                } template-section-content mx-auto ${responsive(divider).wrapper[cols]} ${contentSize[size]}`}
+                className={`grid ${divider ? '' : ''} template-section-content mx-auto ${
+                    responsive(divider).wrapper[cols]
+                } ${contentSize[size]}`}
             >
                 {children}
             </div>

@@ -26,7 +26,7 @@ Click "Test & Save" and you should receive a message on Teams.
 
 ## 3. Post actions to the webhook
 
-For each action that should be posted to Teams, select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
+In PostHog, navigate to the [action](https://app.posthog.com/data-management/actions) that you'd like to receive webhooks for. Then select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
 ![PostHog Edit Action](../../images/post-action-slack.png)
 

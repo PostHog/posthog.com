@@ -10,7 +10,7 @@ export default function BookADemo() {
     return (
         <Layout>
             <SEO title="Book a demo – PostHog" />
-            <section className="px-4 lg:pb-12 py-4 max-w-6xl mx-auto flex flex-col">
+            <section className="px-4 lg:pb-8 py-4 max-w-6xl mx-auto flex flex-col">
                 <header className="flex flex-col md:flex-row justify-between md:items-center pb-4 order-1">
                     <div>
                         <h1 className="text-4xl mt-0 mb-2">Watch a demo</h1>
@@ -25,7 +25,7 @@ export default function BookADemo() {
                         </CallToAction> */}
                     </aside>
                 </header>
-                <div className="border border-gray-accent-light border-dashed rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
+                <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <span className="bg-blue rounded-full leading-none flex h-12 w-12 overflow-hidden shrink-0 basis-12">
                         <StaticImage
                             src="../images/simon.png"
@@ -38,9 +38,8 @@ export default function BookADemo() {
 
                     <div className="md:flex items-center md:space-x-4">
                         <p className="mb-2 md:mb-0 text-[15px]">
-                            <Link to="/handbook/company/team#simon-fisher-customer-success">Simon Fisher</Link>, our
-                            Customer Success Lead, made this demo video. If you have bespoke needs that aren't covered
-                            here, he's happy to chat.
+                            <Link to="/community/profiles/49">Simon Fisher</Link>, our Customer Success Lead, made this
+                            demo video. If you have bespoke needs that aren't covered here, he's happy to chat.
                         </p>
 
                         <CallToAction type="secondary" to="/contact-sales" className="whitespace-nowrap">
@@ -52,6 +51,22 @@ export default function BookADemo() {
                     src="https://www.youtube-nocookie.com/embed/BPDmpepEwSY"
                     className="rounded shadow-xl order-2 md:order-3"
                 />
+            </section>
+
+            <section className="px-4 lg:pb-12 py-4 max-w-6xl mx-auto flex flex-col">
+                <div className="lg:border border-light dark:border-dark lg:bg-accent dark:lg:bg-accent-dark rounded lg:py-6 lg:px-8 flex items-center mb-12 lg:mb-8">
+                    <div className="w-full md:flex items-center md:space-x-4">
+                        <div className="flex-1">
+                            <h4 className="text-2xl mb-0">PostHog for startups</h4>
+                            <p className="p-0 mb-3 lg:mb-0 text-sm lg:text-base">
+                                Our startup program offers $50,000 in credits, plus other great benefits.
+                            </p>
+                        </div>
+                        <CallToAction type="secondary" to="/startups" className="whitespace-nowrap">
+                            Learn more
+                        </CallToAction>
+                    </div>
+                </div>
             </section>
         </Layout>
     )

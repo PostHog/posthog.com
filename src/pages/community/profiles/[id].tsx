@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PageProps } from 'gatsby'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -18,13 +18,17 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import { useNav } from 'components/Community/useNav'
+import Logomark from 'components/Home/images/Logomark'
+import { communityMenu } from '../../../navs'
+import useTopicsNav from '../../../navs/useTopicsNav'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
-        <div className={`overflow-hidden rounded-full ${props.className}`}>
+        <div
+            className={`overflow-hidden rounded-full p-[1px] bg-white border border-light dark:border-dark ${props.className}`}
+        >
             {props.src ? (
-                <img className="w-full h-full" alt="" src={props.src} />
+                <img className="w-full h-full rounded-full bg-white border-white border-[2px]" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -42,11 +46,11 @@ const Avatar = (props: { className?: string; src?: string }) => {
 }
 
 export default function ProfilePage({ params }: PageProps) {
-    const nav = useNav()
     const id = parseInt(params.id || params['*'])
-
+    const [view, setView] = useState('discussions')
     const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
+    const nav = useTopicsNav()
 
     const profileQuery = qs.stringify(
         {
@@ -58,7 +62,7 @@ export default function ProfilePage({ params }: PageProps) {
                 teams: {
                     populate: {
                         profiles: {
-                            populate: ['avatar'],
+                            populate: ['avatar', 'teams', 'pronouns'],
                         },
                     },
                 },
@@ -89,11 +93,16 @@ export default function ProfilePage({ params }: PageProps) {
     const { firstName, lastName } = profile || {}
 
     const name = [firstName, lastName].filter(Boolean).join(' ')
+    const isTeamMember = profile?.teams?.data?.length > 0
 
     const handleEditProfile = () => {
         mutate()
         setEditModalOpen(false)
     }
+
+    useEffect(() => {
+        if (!profile?.amaEnabled) setView('discussions')
+    }, [profile])
 
     if (!profile) {
         return null
@@ -102,7 +111,7 @@ export default function ProfilePage({ params }: PageProps) {
     return (
         <>
             <SEO title={`Community Profile - PostHog`} />
-            <Layout>
+            <Layout parent={communityMenu}>
                 <Modal setOpen={setEditModalOpen} open={editModalOpen}>
                     <div
                         onClick={() => setEditModalOpen(false)}
@@ -133,18 +142,34 @@ export default function ProfilePage({ params }: PageProps) {
                         <>
                             <div className="space-y-8 my-8">
                                 <section className="">
-                                    <Avatar
-                                        className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                        src={getAvatarURL(profile)}
-                                    />
+                                    <div className="relative w-48 h-48 float-right -mt-12">
+                                        <Avatar
+                                            className=" bg-gray-accent dark:gray-accent-dark"
+                                            src={getAvatarURL(profile)}
+                                        />
+                                        {isTeamMember && (
+                                            <span className="absolute right-1 bottom-1 h-12 w-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark border border-light dark:border-dark">
+                                                <Logomark className="w-8" />
+                                            </span>
+                                        )}
+                                    </div>
 
-                                    <div className="space-y-3">
-                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
-                                        {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
+                                    <div className="space-y-1 mb-8">
+                                        <div className="flex gap-x-2 items-baseline">
+                                            <h1 className="m-0 text-5xl">{name || 'Anonymous'}</h1>
+                                            {profile.pronouns && (
+                                                <div className="opacity-50 text-sm">{profile.pronouns}</div>
+                                            )}
+                                        </div>
+                                        {isTeamMember && profile.companyRole && (
+                                            <p className="text-primary/50 dark:text-primary-dark/50">
+                                                {profile?.companyRole}, PostHog
+                                            </p>
+                                        )}
                                     </div>
 
                                     {profile?.biography && (
-                                        <section>
+                                        <section className="article-content">
                                             <h3>Biography</h3>
 
                                             <Markdown>{profile.biography}</Markdown>
@@ -154,7 +179,40 @@ export default function ProfilePage({ params }: PageProps) {
                             </div>
 
                             <div className="mt-12">
-                                <Questions title="Discussions" profileId={id} showForm={false} />
+                                {profile?.amaEnabled ? (
+                                    <div className="grid grid-cols-2 relative max-w-xs mb-6 font-semibold border-b border-border dark:border-dark text-base">
+                                        <button
+                                            className={`${
+                                                view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('discussions')}
+                                        >
+                                            Discussions
+                                        </button>
+                                        <button
+                                            className={`${
+                                                view !== 'ama' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('ama')}
+                                        >
+                                            Ask me anything
+                                        </button>
+                                        <span
+                                            className={`transition-all absolute bottom-0 translate-y-1/2 border-b-2 border-red dark:border-yellow w-1/2 left-0 rounded ${
+                                                view === 'discussions' ? '' : 'translate-x-full'
+                                            }`}
+                                        />
+                                    </div>
+                                ) : (
+                                    <h3>Discussions</h3>
+                                )}
+                                <Questions
+                                    initialView={view === 'ama' ? 'question-form' : undefined}
+                                    slug={view === 'ama' ? window?.location?.pathname : undefined}
+                                    profileId={view === 'discussions' ? id : undefined}
+                                    showForm={view === 'ama'}
+                                    disclaimer={false}
+                                />
                             </div>
                         </>
                     ) : null}
@@ -213,7 +271,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                         {profile.twitter && (
                             <li>
                                 <Link to={profile.twitter}>
-                                    <Twitter className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                 </Link>
                             </li>
                         )}
@@ -238,7 +296,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                               </SidebarSection>
 
                               {profiles?.data?.length > 0 ? (
-                                  <SidebarSection title="Co-workers">
+                                  <SidebarSection title="Teammates">
                                       <ul className="p-0 grid gap-y-2">
                                           {profiles.data
                                               .filter(({ id }) => id !== profile.id)
@@ -271,7 +329,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                                 setEditModalOpen(true)
                             }
                         }}
-                        className="text-base text-red font-semibold"
+                        className="text-base text-red dark:text-yellow font-semibold"
                     >
                         Edit profile
                     </button>

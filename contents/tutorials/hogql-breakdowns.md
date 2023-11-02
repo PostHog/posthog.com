@@ -4,13 +4,12 @@ date: 2023-05-16
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-8.png
-tags: ['hogql', 'trends']
+tags: ['hogql', 'trends', 'product analytics']
 ---    
 
 HogQL opens limitless possibilities for how you can breakdown your trends, funnels, and more. This tutorial showcases some of the advanced breakdowns you can create using HogQL.
 
-To create a breakdown using [HogQL](/docs/product-analytics/hogql), create an insight then under "Breakdown by," click "Add breakdown," select HogQL from the options, and add your expression.
+To create a breakdown using [HogQL](/docs/product-analytics/hogql), create an insight then under "Breakdown by," click "Add breakdown," select HogQL from the options, and add your [expression](/docs/hogql/expressions).
 
 > To understand the full possibilities of HogQL, check out the [available functions in our docs](/docs/product-analytics/hogql#supported-clickhouse-functions) as well as the [events](https://app.posthog.com/data-management/events) and [properties](https://app.posthog.com/data-management/properties) lists from your PostHog instance.
 
@@ -108,13 +107,13 @@ For example, you can group events into mobile and desktop by checking the `$os` 
 
 ```
 multiIf(
-	properties.$os == 'Android', 'mobile',
-	properties.$os == 'iOS', 'mobile', 
+	properties.$os == 'Android', 'mobile',
+	properties.$os == 'iOS', 'mobile', 
 	'desktop'
 )
 ```
 
-You could also do this by checking screen height and width and using the ternary operator the ternary operator `? :` like this:
+You could also do this by checking screen height and width and using the ternary operator the ternary operator `? :` like this:
 
 ```
 properties.$screen_width < properties.$screen_height and properties.$screen_width < 500 ? 'mobile' : 'desktop'
@@ -131,8 +130,23 @@ There are endless ways to analyze dates and times, and HogQL enables more of the
 
 You can also replace `week` in all of these with `second`, `minute`, `hour`, `day`, `month`, `quarter`, and `year`.
 
+## JSON arrays
+
+HogQL can provides access to JSON properties, which can then be used to [breakdown by arrays](/tutorials/array-filter-breakdown) within that JSON. We can use the [JSONExtractArrayRaw](https://clickhouse.com/docs/en/sql-reference/functions/json-functions#jsonextractarrayrawjson-indices_or_keys) function to extract an array from JSON. For example, we can break down by active feature flags with the following expression:
+
+```
+arrayJoin(
+	JSONExtractArrayRaw(
+		properties.$active_feature_flags ?? '[]'
+	)
+)
+```
+
+With the total value bar chart, this breakdown looks like this:
+
+![Array](../images/tutorials/hogql-breakdowns/array.png)
+
 ## Further reading
 
-- [How to segment users](/tutorials/how-to-segment-users)
-- [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
-- [How to track performance marketing in PostHog](/tutorials/performance-marketing)
+- [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
+- [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)

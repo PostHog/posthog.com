@@ -12,9 +12,8 @@ author:
   - andy-vandervell
 category: General
 tags:
-  - Guides
   - Open source
-  - Comparisons
+  - Guides
 ---
 
 Also known as split testing or multivariate testing, A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
@@ -52,6 +51,8 @@ PostHog is ideal for product teams, particularly those who don't want to assembl
 ### How much does PostHog cost?
 
 Experimentation is free-to-use on PostHog's Scale plan, which is also [free up to 1 million events](/pricing) and 15,000 recordings per month – you can set billing limits to ensure you don't get surprise bills. While PostHog is open source, its A/B testing features aren't included in the open source release.
+
+> **Further reading:** New to A/B testing? Read [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes).
 
 ## 2. GrowthBook
 

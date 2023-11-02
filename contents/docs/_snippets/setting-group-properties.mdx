@@ -1,15 +1,15 @@
 In the same way that every user can have [properties](/docs/getting-started/user-properties) associated with them, every group can have properties associated with it.
 
-Continuing with the previous example of using `company` as our group type, we'll add `company_name`, `date_joined`, and `user_count` as additional properties.
+Continuing with the previous example of using `company` as our group type, we'll add `company_name`, `date_joined`, and `subscription` as additional properties.
 
 > **Note:** You must include at least one group property for a group to be visible in the "Persons & Groups" tab.
 
 <MultiLanguage>
 
-```js
+```js-web
 posthog.group('company', 'company_id_in_your_db', {
     name: 'PostHog',
-    user_count: 33,
+    subscription: "subscription",
     date_joined: '2020-01-23T00:00:00.000Z'
 });
 ```
@@ -17,7 +17,7 @@ posthog.group('company', 'company_id_in_your_db', {
 ```python
 posthog.group_identify('company', 'company_id_in_your_db', {
     'name': 'PostHog',
-    'user_count': 33,
+    'subscription': 'subscription',
     'date_joined': '2020-01-23T00:00:00.000Z'
 })
 ```
@@ -28,7 +28,7 @@ client.Enqueue(posthog.GroupIdentify{
     Key:  "company_id_in_your_db",
     Properties: posthog.NewProperties().
         Set("name", "PostHog").
-        Set("user_count", 33).
+        Set("subscription", "subscription").
         Set("date_joined", "2020-01-23T00:00:00.000Z"),
 })
 ```
@@ -39,7 +39,7 @@ posthog.groupIdentify({
     groupKey: 'company_id_in_your_db',
     properties: {
         name: 'PostHog',
-        user_count: 33,
+        subscription: "subscription",
         date_joined: '2020-01-23T00:00:00.000Z'
     }
 })
@@ -49,16 +49,32 @@ posthog.groupIdentify({
 PostHog::groupIdentify(array(
     'groupType' => 'company',
     'groupKey' => 'company_id_in_your_db',
-    'properties' => array("name" => "PostHog", "user_count" => 11, "date_joined": "2020-01-23T00:00:00.000Z")
+    'properties' => array("name" => "PostHog", "subscription" => "premium", "date_joined": "2020-01-23T00:00:00.000Z")
 ));
 ```
 
 ```segment
 analytics.group('company_id_in_your_db', {
     "name": "PostHog",
-    "user_count": 33,
+    "subscription": "subscription",
     "date_joined": "2020-01-23T00:00:00.000Z"
 })
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "properties": {
+        "distinct_id": "company_id_in_your_db",
+        "$group_type": "company",
+        "$group_key": "company_id_in_your_db",
+        "$group_set": {
+            "name": "PostHog",
+            "subscription": "premium",
+            "date_joined": "2020-01-23T00:00:00.000Z"
+        }
+    }
+}' <ph_instance_address>/capture/
 ```
 
 </MultiLanguage>

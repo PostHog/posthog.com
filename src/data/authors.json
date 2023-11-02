@@ -5,7 +5,8 @@
         "role": "Co-founder/CEO of PostHog",
         "image": "../../static/images/authors/james-hawkins-posthog.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/james406"
+        "link_url": "https://twitter.com/james406",
+        "profile_id": 71
     },
     {
         "handle": "mo-shehu",
@@ -21,7 +22,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/yakko-majuri-posthog.png",
         "link_type": "github",
-        "link_url": "https://github.com/yakkomajuri"
+        "link_url": "https://github.com/yakkomajuri",
+        "profile_id": 56
     },
     {
         "handle": "joe-martin",
@@ -29,7 +31,8 @@
         "role": "Product Marketer",
         "image": "../../static/images/authors/joe-martin-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/joemartinwords"
+        "link_url": "https://www.linkedin.com/in/joemartinwords",
+        "profile_id": 59
     },
     {
         "handle": "michael-matloka",
@@ -37,7 +40,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/michael-matloka-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/matlokam"
+        "link_url": "https://www.linkedin.com/in/matlokam",
+        "profile_id": 124
     },
     {
         "handle": "paolodamico",
@@ -45,7 +49,8 @@
         "role": "Product",
         "image": "../../static/images/authors/paolo-damico-posthog.png",
         "link_type": "github",
-        "link_url": "https://github.com/paolodamico"
+        "link_url": "https://github.com/paolodamico",
+        "profile_id": 24
     },
     {
         "handle": "marcus-hyett",
@@ -53,7 +58,8 @@
         "role": "VP Product",
         "image": "../../static/images/authors/marcus-hyett-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/marcus-hyett/"
+        "link_url": "https://www.linkedin.com/in/marcus-hyett/",
+        "profile_id": 79
     },
     {
         "handle": "marius-andra",
@@ -61,7 +67,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/marius-andra-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/mariusandra/"
+        "link_url": "https://www.linkedin.com/in/mariusandra/",
+        "profile_id": 1
     },
     {
         "handle": "cory-watilo",
@@ -69,7 +76,8 @@
         "role": "Lead Designer",
         "image": "../../static/images/authors/cory-watilo-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/corywatilo/"
+        "link_url": "https://www.linkedin.com/in/corywatilo/",
+        "profile_id": 2
     },
     {
         "handle": "leggetter",
@@ -85,7 +93,8 @@
         "role": "Graphic Designer",
         "image": "../../static/images/authors/lottie-coxon-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/charlotte-coxon/"
+        "link_url": "https://www.linkedin.com/in/charlotte-coxon/",
+        "profile_id": 227
     },
     {
         "handle": "hanna-crombie",
@@ -101,7 +110,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/karl-aksel-puulmann-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/karlakselpuulmann/"
+        "link_url": "https://www.linkedin.com/in/karlakselpuulmann/",
+        "profile_id": 73
     },
     {
         "handle": "james-greenhill",
@@ -109,7 +119,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/james-greenhill-posthog.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/fuziontech"
+        "link_url": "https://twitter.com/fuziontech",
+        "profile_id": 90
     },
     {
         "handle": "andy-vandervell",
@@ -117,7 +128,8 @@
         "role": "Content Marketer",
         "image": "../../static/images/authors/andy-vandervell-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/andyvandervell/"
+        "link_url": "https://www.linkedin.com/in/andyvandervell/",
+        "profile_id": 62
     },
     {
         "handle": "charles-cook",
@@ -125,7 +137,8 @@
         "role": "VP of Operations",
         "image": "../../static/images/authors/charles-cook-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/charlescook1/"
+        "link_url": "https://www.linkedin.com/in/charlescook1/",
+        "profile_id": 254
     },
     {
         "handle": "eli-kinsey",
@@ -134,7 +147,8 @@
         "image": "../../static/images/authors/eli-kinsey-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/eli-kinsey/",
-        "slack_username": "eli"
+        "slack_username": "eli",
+        "profile_id": 3
     },
     {
         "handle": "avi-press",
@@ -150,7 +164,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/neil-posthog.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/neilkakkar"
+        "link_url": "https://twitter.com/neilkakkar",
+        "profile_id": 68
     },
     {
         "handle": "rick-marron",
@@ -158,7 +173,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/rick-posthog.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/Rick_Marron"
+        "link_url": "https://twitter.com/Rick_Marron",
+        "profile_id": 50
     },
     {
         "handle": "alex-kim",
@@ -166,7 +182,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/alex-kim-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/alex-g-kim/"
+        "link_url": "https://www.linkedin.com/in/alex-g-kim/",
+        "profile_id": 133
     },
     {
         "handle": "harry-waye",
@@ -174,7 +191,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/harry-waye-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/harrywaye"
+        "link_url": "https://www.linkedin.com/in/harrywaye",
+        "profile_id": 719
     },
     {
         "handle": "guido-iaquinti",
@@ -182,7 +200,8 @@
         "role": "Software Engineer",
         "image": "../../static/images/authors/guido-iaquinti-posthog.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/guidoiaquinti"
+        "link_url": "https://twitter.com/guidoiaquinti",
+        "profile_id": 58
     },
     {
         "handle": "simon-fisher",
@@ -190,7 +209,8 @@
         "role": "Customer Success Lead",
         "image": "../../static/images/authors/simon-fisher.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/simfish85/"
+        "link_url": "https://www.linkedin.com/in/simfish85/",
+        "profile_id": 49
     },
     {
         "handle": "colin-wren",
@@ -206,7 +226,8 @@
         "role": "Contributor",
         "image": "../../static/images/authors/contributor-posthog.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/lsmith/"
+        "link_url": "https://www.linkedin.com/in/lsmith/",
+        "profile_id": 130
     },
     {
         "handle": "tim-glaser",
@@ -214,7 +235,8 @@
         "role": "Co-founder/CTO of PostHog",
         "image": "../../static/images/authors/tim-glaser.png",
         "link_type": "linkedin",
-        "link_url": "https://www.linkedin.com/in/timgl/"
+        "link_url": "https://www.linkedin.com/in/timgl/",
+        "profile_id": 108
     },
     {
         "handle": "noah-brier",
@@ -262,7 +284,8 @@
         "role": "Operations Manager",
         "image": "../../static/images/authors/grace.jpg",
         "link_type": "LinkedIn",
-        "link_url": "https://www.linkedin.com/in/withgracetoo/"
+        "link_url": "https://www.linkedin.com/in/withgracetoo/",
+        "profile_id": 718
     },
     {
         "handle": "patterns",
@@ -278,7 +301,8 @@
         "role": "Technical Content Marketer",
         "image": "../../static/images/authors/ian-vanagas-posthog.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/IanVanagas"
+        "link_url": "https://twitter.com/IanVanagas",
+        "profile_id": 269
     },
     {
         "handle": "laudspeaker",
@@ -294,7 +318,8 @@
         "role": "Head of Product",
         "image": "../../static/images/authors/luke.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/lukeharries_"
+        "link_url": "https://twitter.com/lukeharries_",
+        "profile_id": 222
     },
     {
         "handle": "raquel-m-smith",
@@ -302,7 +327,8 @@
         "role": "Product Engineer - Growth",
         "image": "../../static/images/authors/raquel-m-smith-posthog.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/raquel_m_smith"
+        "link_url": "https://twitter.com/raquel_m_smith",
+        "profile_id": 491
     },
     {
         "handle": "annika-schmid",
@@ -310,7 +336,8 @@
         "role": "Product Manager",
         "image": "../../contents/images/team/annika.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/annikaze_"
+        "link_url": "https://twitter.com/annikaze_",
+        "profile_id": 221
     },
     {
         "handle": "lior-neu-ner",
@@ -318,6 +345,21 @@
         "role": "Technical Content Marketer",
         "image": "../../contents/images/team/lior.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/liornn"
+        "link_url": "https://twitter.com/liornn",
+        "profile_id": 684
+    },
+    {
+        "handle": "anna-debenham",
+        "name": "Anna Debenham",
+        "role": "Contributor",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/anna-debenham/"
+    },
+    {
+        "handle": "tomas-farias",
+        "name": "Tomás Farías Santana",
+        "role": "Software Engineer",
+        "image": "../../contents/images/team/tomas.png"
     }
 ]

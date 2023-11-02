@@ -11,11 +11,10 @@ featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
 category: Product growth
 tags:
-  - Product analytics
   - Explainers
 ---
 
-There are lots of ways to do analytics. You can do SQL. You can do it in the cloud. You can not do it at all and hire an analytics agency or consultancy instead. But by far one of the most popular (and, we think, best) ways is _self-service_ analytics. 
+There are lots of ways to do analytics. You can [do SQL](/blog/sql-for-analytics). You can do it in the cloud. You can not do it at all and hire an analytics agency or consultancy instead. But by far one of the most popular (and, we think, best) ways is _self-service_ analytics. 
 
 That’s a term which covers a lot of popular analytics platforms, including PostHog, Mixpanel and Amplitude. But what does it mean, exactly? 
 
@@ -42,14 +41,15 @@ It’s important to emphasize that efficiency gains in particular can be a contr
 Issues can also come from elsewhere in the organization, as teams may lack visibility into the data team and be unable to leverage them. As always, communication is key. 
 
 <BorderWrapper>
-    <Quote
-        imageSource="/images/customers/andy.jpeg"
-        size="md"
-        name="Andy Su"
-        title="Founder and CEO, Pry"
-        quote={`“We look into things such as how valuable customers who come to us via ads are compared to those who are organic. We then use that information to make decisions about our advertising strategy.”`}
-    />
+<Quote
+    imageSource="/images/customers/andy.jpeg"
+    size="md"
+    name="Andy Su"
+    title="Founder and CEO, Pry"
+    quote={`“We look into things such as how valuable customers who come to us via ads are compared to those who are organic. We then use that information to make decisions about our advertising strategy.”`}
+/>
 </BorderWrapper>
+
 
 ## What are the benefits of self-service analytics?
 
@@ -73,15 +73,14 @@ It’s complicated.
 Google Analytics is a self-service analytics platform but that doesn’t mean it is a good platform for understanding your user behaviour. This is because Google Analytics is a self-service _web_ analytics platform and so focuses on metrics such as pageviews, bounce rate and click-through rates. It lacks the ability to go deep into topics such as retention and user trends, or the ability to watch session recordings and create multivariate experiments. 
 
 <BorderWrapper>
-    <Quote
-        imageSource="/images/customers/anca.png"
-        size="md"
-        name="Anca Filip"
-        title="Head of Product, Mention Me"
-        quote={`“We used to use Google Analytics, but PostHog has helped us improve our product and get a much better understanding of our users than we've ever been able to before."`}
-    />
+<Quote
+    imageSource="/images/customers/anca.png"
+    size="md"
+    name="Anca Filip"
+    title="Head of Product, Mention Me"
+    quote={`“We used to use Google Analytics, but PostHog has helped us improve our product and get a much better understanding of our users than we've ever been able to before."`}
+/>
 </BorderWrapper>
-
 
 For that, you need a _product_ analytics platform. 
 

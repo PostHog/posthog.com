@@ -32,7 +32,7 @@ export const CloudCalculator = () => {
                     <dd className="mb-0 font-bold text-sm">$0.00045</dd>
                 </dl>
             </div>
-            <div className="flex justify-between items-baseline border-t border-dashed border-gray-accent-light pt-3">
+            <div className="flex justify-between items-baseline  pt-3">
                 <div className="text-lg mb-0 text-lg font-bold">Estimated price</div>
                 <div className="mb-0 font-bold flex items-baseline">
                     <div className="text-lg">${finalCost}</div>

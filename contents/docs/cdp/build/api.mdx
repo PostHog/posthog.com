@@ -1,0 +1,103 @@
+---
+title: Using the PostHog API
+---
+
+All apps have access to a global helper object `posthog`, which provides easy access to the PostHog API.
+
+The global `posthog` object contains the following interfaces:
+- [`capture`](#capture) - Send additional events from an app
+- [`api`](#api) - Access the PostHog API from an app
+
+## `capture`
+
+> **Warning:** Be very careful when calling `posthog.capture` from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
+
+Calling `posthog.capture` allows you to capture a new event under the same project the app is running in.
+
+```ts
+capture(event: string, properties?: Record<string, any>) => void
+```
+
+It takes 2 arguments, the first one being an event name (required), and the second one being an object with properties to set on the event (optional).
+
+Apps can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be attributed to a generic "App Server" person.
+
+Apps can optionally pass a `timestamp`, which needs to be in ISO 8601 format. If not set, the timestamp will default to current time.
+
+##### Example usage
+
+```ts
+posthog.capture('stripe_customer_subscribed', {
+  distinct_id: 'a user id',
+  timestamp: new Date(subscription.created*1000).toISOString()
+})
+```
+
+## `api`
+
+The `posthog.api` object contains a number of methods that make interacting with the PostHog API much easier.
+
+`posthog.api` gives you access to the following 4 methods, which each correspond to the 4 HTTP methods used to access the API.
+
+```ts
+get(path: string, options?: ApiMethodOptions): Promise<Response>
+post(path: string, options?: ApiMethodOptions): Promise<Response>
+put(path: string, options?: ApiMethodOptions): Promise<Response>
+delete(path: string, options?: ApiMethodOptions): Promise<Response>
+```
+
+By default, all these methods will create a temporary access token that the app uses to access the API.
+
+> **Warning:** Be very careful when using `posthog.api.post` to send events from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
+
+#### Sending an API request
+
+It's best to look at an example to see how these methods work in practice. Here, we're looking to create a new annotation from within our app.
+
+```ts
+const res = await posthog.api.post(
+  '/api/projects/@current/annotations',
+  {
+    data: {
+      content: 'New Annotation',
+      scope: 'organization',
+      date_marker: '2022-09-22T07:30:00Z',
+    },
+    host: 'https://posthog.mydomain.com' // defaults to https://app.posthog.com if not specified
+  }
+)
+```
+
+As you can see, when specifying the path of our API route, we can use the `@current` identifier in place of our project ID in order to let the API know we want to access the project the app is currently running in.
+
+We've also specified the host of our PostHog instance. This is only necessary when running an app on a self-hosted instance, and when using PostHog Cloud this can be omitted.
+
+```js
+const body = await res.json()
+```
+
+Keep in mind that these functions will return the raw response object in a Promise, so in order to access the body, you can simply call the `.json()` method.
+
+#### Customizing options
+
+You can override these defaults to interact with another PostHog project or instance.
+
+The options available are:
+
+```ts
+interface ApiMethodOptions {
+    // any data to send with the request, GET and DELETE will set these as URL params
+    data?: Record<string, any>
+
+    // posthog host, defaults to https://app.posthog.com
+    host?: string
+
+    // specifies the project to interact with
+    projectApiKey?: string
+
+    // authenticates the user
+    personalApiKey?: string
+}
+```
+
+> **Tip:** When using `@current` you don't need to specify `projectApiKey` or `personalApiKey`.

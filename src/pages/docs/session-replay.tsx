@@ -1,25 +1,35 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
-import { Tutorials } from 'components/Docs/Tutorials'
-import { LinkGrid } from 'components/Docs/LinkGrid'
-import { GettingStarted } from 'components/Docs/GettingStarted'
+import List from 'components/List'
+import ResourceItem from 'components/Docs/ResourceItem'
+import { CallToAction } from 'components/CallToAction'
+import { docsMenu } from '../../navs'
 
 export const quickLinks = [
+    {
+        icon: 'GraduationCap',
+        name: 'Start here',
+        to: '/docs/session-replay/hey',
+        color: 'red',
+    },
     {
         name: 'Product manual',
         to: '/docs/session-replay/manual',
         description: 'How to use session replay.',
     },
     {
-        name: 'Configuration',
-        to: '/docs/session-replay/configure',
-        description: 'Settings for customizing session replay capture.',
+        name: 'Privacy controls',
+        to: '/docs/session-replay/privacy',
+        description: 'Settings for customizing session replay privacy.',
+    },
+    {
+        name: 'Sharing and emedding',
+        to: '/docs/session-replay/sharing',
+        description: 'Share and embed session replays in your product.',
     },
     {
         name: 'Data retention',
@@ -27,7 +37,7 @@ export const quickLinks = [
         description: 'Adjust how long session replays are stored when self-hosting.',
     },
     {
-        name: 'Troublehsooting & FAQs',
+        name: 'Troubleshooting & FAQs',
         to: '/docs/session-replay/troubleshooting',
         description: 'Common issues and how to resolve them.',
     },
@@ -45,91 +55,179 @@ type SessionRecordingProps = {
 
 export const Intro = ({ image = true }) => {
     return (
-        <>
-            {image && (
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/session-recording-hog.png"
-                />
-            )}
-            <h1 className="text-4xl mb-2 mt-6">Session replay</h1>
-            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Play back sessions to diagnose UI issues, improve support, and get context for nuanced user behavior.
-            </h3>
+        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 pt-2 mb-8">
+            <div className="p-4 md:p-8">
+                <h1 className="text-4xl mt-0 mb-2">Session replay</h1>
+                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                    Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
+                    behavior.
+                </h3>
+                <CallToAction to="/docs/session-replay/installation">Record your first session</CallToAction>
+            </div>
 
-            {/* Quick links */}
-            <section className="my-12">
-                <h3 className="mb-6 mt-0">Pages</h3>
-                <LinkGrid links={quickLinks} />
+            {image && (
+                <figure className="m-0 mt-auto p-0">
+                    <StaticImage
+                        alt=""
+                        placeholder="none"
+                        quality={100}
+                        className=""
+                        src="../../components/Home/Slider/images/session-recording-hog.png"
+                    />
+                </figure>
+            )}
+        </div>
+    )
+}
+
+export const Content = ({ quickLinks = false }) => {
+    return (
+        <>
+            {quickLinks && (
+                <section>
+                    <h3 className="mt-0 text-xl">Quick links</h3>
+                    <List
+                        className="grid grid-cols-3 gap-2 mb-6"
+                        items={docsMenu.children[2].children
+                            .filter(({ url }) => url)
+                            .map(({ url, name, icon, color }) => ({ label: name, url, icon, iconColor: color }))}
+                    />
+                </section>
+            )}
+            <section className="mb-12">
+                <h3 className="m-0 text-xl">Resources</h3>
+                <p className="text-[15px]">Real-world use cases to get you started</p>
+
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                    <ResourceItem
+                        type="Guide"
+                        title="Only record sessions you want"
+                        description="Control cost by reducing volume"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                            />
+                        }
+                        url="/tutorials/limit-session-recordings"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Discover user friction with replays"
+                        description="Pinpoint issues with filters and replays"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                            />
+                        }
+                        url="/tutorials/filter-session-recordings"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Analyze power users"
+                        description="Define a cohort and watch those sessions"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                            />
+                        }
+                        url="/tutorials/power-users"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Improve web app performance"
+                        description="Network monitoring in session replays"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                            />
+                        }
+                        url="/tutorials/performance-metrics"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Session replays in customer support"
+                        description="Rageclicks, sharing recordings, error monitoring"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                            />
+                        }
+                        url="/tutorials/session-recordings-for-support"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Replay users in a funnel"
+                        description="Learn from users who do (or don't) convert"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                            />
+                        }
+                        url="/tutorials/explore-insights-session-recordings"
+                    />
+                </ul>
+                <CallToAction
+                    to="/tutorials/categories/session-replay"
+                    type="custom"
+                    size="md"
+                    className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
+                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    width="[calc(100%_+_3px)]"
+                >
+                    Explore guides
+                </CallToAction>
             </section>
         </>
     )
 }
 
 const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
-    const { tutorials } = data
-
     return (
         <Layout>
             <SEO title="Session replay - Docs - PostHog" />
 
-            <PostLayout title={'Session replay'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Session replay'} hideSurvey hideSidebar>
                 <Intro />
-                {/* Get started section */}
-                <section className="pt-4 pb-0">
-                    <GettingStarted
-                        articleType="Pinned"
-                        title="Record your first session"
-                        description="Flip a switch to start capturing session replays in minutes."
-                        link="/docs/session-replay/manual#enabling-session-recording"
-                    ></GettingStarted>
-                </section>
+                <Content />
 
-                <Tutorials tutorials={tutorials} />
+                <div className="">
+                    <CallToAction to="/docs/session-replay/manual" width="full">
+                        Visit the manual
+                    </CallToAction>
+                </div>
             </PostLayout>
         </Layout>
     )
 }
 
 export default SessionRecording
-
-export const query = graphql`
-    query SessionRecording {
-        tutorials: allMdx(
-            limit: 6
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { tags: { in: ["session replay"] } }, fields: { slug: { regex: "/^/tutorials/" } } }
-        ) {
-            edges {
-                node {
-                    id
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        date(formatString: "MMM 'YY")
-                        Category: tags
-                        Contributor: authorData {
-                            id
-                            image {
-                                childImageSharp {
-                                    gatsbyImageData(width: 36, height: 36)
-                                }
-                            }
-                            name
-                        }
-                        featuredImage {
-                            childImageSharp {
-                                gatsbyImageData(placeholder: NONE)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-`

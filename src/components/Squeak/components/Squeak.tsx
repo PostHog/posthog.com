@@ -1,5 +1,6 @@
 import React from 'react'
 import { Questions } from './Questions'
+import { usePost } from 'components/PostLayout/hooks'
 
 type SqueakProps = {
     slug?: string
@@ -8,6 +9,8 @@ type SqueakProps = {
 }
 
 export const Squeak = ({ slug, limit, topicId }: SqueakProps) => {
+    const { breadcrumb } = usePost()
+    const parentName = (breadcrumb && breadcrumb?.length > 0 && breadcrumb[1]?.name) || undefined
     const currentSlug = topicId
         ? undefined
         : slug || typeof window !== 'undefined'
@@ -16,5 +19,5 @@ export const Squeak = ({ slug, limit, topicId }: SqueakProps) => {
 
     // TODO: Create hubspot contact on sign-up
 
-    return <Questions limit={limit} slug={currentSlug} topicId={topicId} />
+    return <Questions parentName={parentName} limit={limit} slug={currentSlug} topicId={topicId} />
 }

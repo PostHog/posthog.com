@@ -4,8 +4,7 @@ date: 2023-05-30
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-9.png
-tags: ["hogql", "insights"]
+tags: ["hogql", "insights", 'product analytics']
 ---
 
 Since there are infinite ways to break down time, there are infinite ways to filter based on time. HogQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
@@ -14,7 +13,7 @@ To add a HogQL filter:
 1. Create a [new insight](https://app.posthog.com/insights/new)
 2. Open the filter dropdown, and click "Add filter" below your data series
 3. Select HogQL from the options
-4. Write your expression, and click "Add HogQL expression" to apply it
+4. Write your [expression](/docs/hogql/expressions), and click "Add HogQL expression" to apply it
 
 HogQL filters are available on every type of insight from trends to funnels to lifecycle.
 
@@ -51,7 +50,7 @@ and timestamp < toDateTime('2022-10-01 14:34:00')
 
 ## Using the Unix timestamp
 
-If you'd like to filter using a Unix timestamp, you can use []`toUnixTimestamp`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#tounixtimestamp) to convert a date time object into a Unix timestamp, or `fromUnixTimestamp` to do the reverse. 
+If you'd like to filter using a Unix timestamp, you can use [`toUnixTimestamp`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#tounixtimestamp) to convert a date time object into a Unix timestamp, or `fromUnixTimestamp` to do the reverse. 
 
 For example, if you wanted to filter for events after the Unix timestamp `1674259200`, you could use the expression:
 
@@ -123,4 +122,4 @@ This is useful to learn what features are used immediately after sign up and oth
 
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [Running experiments on new users](/tutorials/new-user-experiments)
-- [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
+- [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)

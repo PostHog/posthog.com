@@ -18,9 +18,9 @@ export default function Modal({ open, setOpen, children }) {
                 as="div"
                 open={open}
                 onClose={() => setOpen(false)}
-                className="fixed z-[99999] inset-0 overflow-y-auto box-border"
+                className="fixed z-[99999999999] inset-0 overflow-y-auto box-border"
             >
-                <Dialog.Overlay className="fixed inset-0 bg-tan/90 dark:bg-primary/90" />
+                <Dialog.Overlay className="fixed inset-0 bg-accent/60 dark:bg-accent-dark/60" />
                 {children}
             </Dialog>
         </Transition>

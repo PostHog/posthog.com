@@ -71,14 +71,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
                                 <p>Check your email for password reset instructions</p>
                             </div>
                         ) : (
-                            <Button
-                                className={`font-bold w-full relative ${
-                                    loading || !isValid
-                                        ? 'opacity-50 cursor-not-allowed'
-                                        : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
-                                }`}
-                                type="submit"
-                            >
+                            <Button width="full" disabled={loading || !isValid}>
                                 Send password reset instructions
                             </Button>
                         )}

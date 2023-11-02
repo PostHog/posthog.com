@@ -23,6 +23,10 @@ const languageMap: LanguageMap = {
         language: 'javascript',
         label: 'JavaScript',
     },
+    'js-web': {
+        language: 'javascript',
+        label: 'Web',
+    },
     ts: {
         language: 'typescript',
         label: 'TypeScript',

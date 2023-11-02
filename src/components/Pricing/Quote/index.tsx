@@ -2,8 +2,32 @@ import cntl from 'cntl'
 import React from 'react'
 
 const sizes = {
+    sm: {
+        quote: cntl`
+            font-semibold
+            md:text-lg
+            md:leading-snug
+            m-0
+        `,
+        name: cntl`
+            md:text-base
+            md:leading-tight
+        `,
+        title: cntl`
+            md:text-sm
+        `,
+        image: cntl`
+            w-[60px]
+            h-[60px]
+        `,
+        footer: cntl`
+            mt-[20px]
+            space-x-[14px]
+        `,
+    },
     md: {
         quote: cntl`
+            font-bold
             md:text-[24px]
             md:leading-[33.6px]
             m-0
@@ -26,8 +50,9 @@ const sizes = {
     },
     lg: {
         quote: cntl`
-            md:text-[32px]
-            md:leading-[48px]
+            font-bold
+            md:text-4xl
+            md:leading-tight
         `,
         name: cntl`
             md:text-xl
@@ -40,8 +65,8 @@ const sizes = {
             h-[100px]
         `,
         footer: cntl`
-            space-x-8
-            mt-9
+            space-x-4
+            mt-4
         `,
     },
 }
@@ -71,7 +96,6 @@ const base = {
         !max-w-screen-lg
         mx-auto
         text-primary
-        font-bold
     `,
     image: cntl`
         rounded-full
@@ -97,7 +121,7 @@ interface Props {
 
 export const Quote = ({ quote, name, title, image, className = '', imageSource, size = 'lg', logo }: Props) => {
     return (
-        <section className={classes('section', size, className)}>
+        <section className={` ${classes('section', size, className)}`}>
             {logo && <img src={logo} className="mb-9" />}
             <blockquote className={classes('quote', size)}>
                 {quote}

@@ -99,7 +99,7 @@ The problem with the modern data stack is that it often fails the people it was 
 - Data security, safety, and privacy requirements.
 - Lack of knowledge of data available or how to use it.
 
-For example, engineers might need to write optimized SQL queries to understand customer feature usage. This requires an understanding of SQL, data availability, data structure, as well as access. All this does is slow down their work, blocking them from shipping new features and improvements efficiently.
+For example, engineers might need to write optimized SQL queries to understand customer feature usage. This requires an [understanding of SQL](/blog/sql-for-analytics), data availability, data structure, as well as access. All this does is slow down their work, blocking them from shipping new features and improvements efficiently.
 
 ## How we are fixing the modern data stack
 
@@ -112,7 +112,7 @@ We want to make it easy to evaluate whether products are working or not. Key to 
 To change this, we are improving PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We built the key functionality, such as the ability to:
 
 - Receive data from your app(s) and site(s) with our [SDKs](/docs/integrate?tab=sdks)
-- Receive data from sources like [Stripe](/apps/stripe-connector), [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
+- Receive data from sources like [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
 - Export to destinations such as [Snowflake](/apps/snowflake-export), [BigQuery](/apps/bigquery-export), or [RedShift](/apps/redshift-export)
 
 Improving reliability, integrations, and UX is critical for success here. Being a CDP gives startups access to their data and tools in one place with PostHog. More data also improves the depth of insights engineers can get from PostHog without having to use other tools such as BI or visualization.

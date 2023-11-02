@@ -1,10 +1,23 @@
 ---
-title: Brand assets
+title: Logos and hedgehogs
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
 > <em>This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com.</em>
+
+## The hedgehog library
+
+For team members we keep all our currently approved hedgehogs in [a Figma file called Hoggies](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team. 
+
+Here's how:
+1. Head to the Hoggies page. You can manually browse, or use Ctrl-F to search based on keywords such as 'happy', 'sad', or 'will smith'.
+2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar. 
+3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, then select 'Export [filename]' to download the image.
+
+If you can't find a suitable hog, you can [request one from the design team](/handbook/design/art-requests). 
+
+> Non-team members can find some of the most-used hogs to download on [our press page](/media).
 
 ## Logo
 

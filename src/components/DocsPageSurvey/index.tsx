@@ -19,12 +19,14 @@ const button = cntl`
     rounded-sm
     shadow-sm
     bg-white
-    text-black/70
-    hover:text-black/95
-    dark:bg-white/30
-    dark:text-white/90
-    dark:hover:bg-white/40
-    dark:hover:text-white/100
+    dark:bg-accent-dark
+    border
+    border-transparent
+    dark:border-dark
+    text-primary/75
+    dark:text-primary-dark/75
+    hover:text-primary/100
+    dark:text-primary-dark/100
     relative
     active:top-[1px]
     active:scale-[.98]

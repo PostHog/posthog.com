@@ -1,0 +1,24 @@
+Run either `npm` or `yarn` in terminal to add it to your project:
+
+```bash
+npm install posthog-node --save
+# or
+yarn add posthog-node
+```
+
+In your app, set your project API key **before** making any calls.
+
+```node
+import { PostHog } from 'posthog-node'
+
+const client = new PostHog(
+    '<ph_project_api_key>',
+    { host: '<ph_instance_address>' } // TIP: You can omit this line if using PostHog Cloud
+)
+
+await client.shutdownAsync() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+```
+
+You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+> **Note:** As a rule of thumb, we do not recommend hardcoding API keys. Setting it as an environment variable is preferred.

@@ -1,3 +1,37 @@
+## Objectives: Q4 2023
+
+- Keep the lights on
+  - Increase isolation with Redis - Xavier Vello
+  - Roll out RDKafka - Brett Hoerner
+  - All events ingested through capture-rs - Xavier Vello
+  - Make GeoIP cheaper - Ted
+  - moving event properties follow-ups, cohorts, ... outside of ingestion hot path - Ted
+- Batch exports migrations - Tomás Farías Santana
+  - Redshift and maybe replicator depending on demands
+  - Add logs/metrics/alerting
+  - Higher frequency
+- Webhooks v2 - Tiina Turban
+  - the new delivery system that can 
+  	- retries
+ 	- observability to both users and us for success rate, retry count, latency
+ 	- endpoint disabling
+ 	- multiple webhook destinations
+ 	- UI
+ 	- can be used for automation for other teams needs
+ - move webhooks, resthooks and onEvent apps to use the new system
+- PoE - Brett Hoerner
+  - KV store for person overrides
+  - Stretch: Squash person overrides 
+  - Stretch: persons without ordering constraints
+
+## Objectives: Q3 2023
+
+- Define and enforce limits on what users can send us - Owner @xaviervelo
+- Deprecate and improve apps
+  - Finish batch exports so we can deprecate export apps - Owner @tomasfarias
+  - Remove all processing apps - Owner @tiina303
+- Figure out the pipeline architecture for the next 2 years - Owner @timgl
+
 ## Objectives: Q2 2023
 
 - Objective: CDP - Owner @fuziontech

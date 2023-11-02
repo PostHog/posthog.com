@@ -12,7 +12,6 @@ featuredImageType: full
 category: Using PostHog
 tags:
   - Guides
-  - Product analytics
 ---
 
 While PostHog is obviously useful for product managers, engineers and analysts, there’s a lot it can do for other teams too — including customer success. Internally, for example, our CS team uses PostHog to track a variety of relevant metrics and to preemptively identify organizations that would benefit from their support.
@@ -52,8 +51,6 @@ Lifecycle insights categorize users based on whether they have completed any eve
 We like to think PostHog works brilliantly on its own, but to get the most out of the platform you may want to connect it with other software in your stack. We have a library of over 50 apps to help you do this, so you can connect PostHog with tools such as [Hubspot](/apps/hubspot-connector) or [Salesforce](/apps/salesforce-connector). 
 
 Best of all, because PostHog is entirely open source, you can build your own apps to enhance your data even further — all you need is a little Javascript or Typescript knowledge and you’re good to go!
-
-> 💡**PostHog Tip:** Don’t fancy learning to code? [Connect PostHog to Zapier](/apps/zapier-connector) and use that to connect to additional services instead!
 
 ## 5. Build and share a customer success dashboard
 ![subscriptions in posthog](../images/blog/activation-checklist-images/subscribe-in-posthog.png)

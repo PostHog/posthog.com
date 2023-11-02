@@ -5,15 +5,13 @@ import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
-import * as ProductIcons from '../ProductIcons'
 import * as NotProductIcons from '../NotProductIcons'
+import * as NewIcons from '@posthog/icons'
 import { usePost } from './hooks'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
     return (
-        <div
-            className={`bg-tan dark:bg-primary rounded-full h-[28px] w-[28px] flex justify-center items-center text-black dark:text-white ${className}`}
-        >
+        <div className={`h-8 w-8 flex justify-center items-center text-primary dark:text-primary-dark ${className}`}>
             <svg
                 className="transition-transform w-"
                 style={{ transform: `rotate(${open ? 0 : 180}deg)` }}
@@ -35,11 +33,53 @@ const Chevron = ({ open, className = '' }: { open: boolean; className?: string }
 }
 
 const getIcon = (name: string) => {
-    return ProductIcons[name]
-        ? ProductIcons[name]({ className: 'w-5' })
+    return NewIcons[name]
+        ? NewIcons[name]({ className: 'w-5' })
         : NotProductIcons[name]
         ? NotProductIcons[name]({ className: 'w-5' })
         : null
+}
+
+export const Icon = ({ color, icon }: { color?: string; icon: string | React.ReactNode }) => {
+    return (
+        <span
+            className={`flex items-center justify-center shrink-0 ${
+                color
+                    ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px] basis-[30px]`
+                    : 'w-[25px] h-[25px] basis-[25px] opacity-70'
+            }`}
+        >
+            {typeof icon === 'string' ? getIcon(icon) : icon}
+        </span>
+    )
+}
+export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
+
+export const MenuItem = ({ icon, color, badge, name }) => {
+    return icon ? (
+        <span
+            className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
+                color ? 'items-center' : 'items-center'
+            }`}
+        >
+            <Icon icon={icon} color={color} />
+            <span className={`${color ? '' : 'opacity-100'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
+                {name}
+            </span>
+            {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
+        </span>
+    ) : (
+        <>
+            <span>
+                <span
+                    className={`${color ? '' : 'opacity-50'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}
+                >
+                    {name}
+                </span>
+                {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
+            </span>
+        </>
+    )
 }
 
 export default function Menu({
@@ -51,21 +91,23 @@ export default function Menu({
     topLevel,
     icon,
     badge,
+    color,
+    hidden,
+    tag,
     ...other
 }: IMenu): JSX.Element | null {
-    const { isMenuItemActive } = usePost()
+    if (hidden) return null
+    const { isMenuItemActive, isMenuItemOpen } = usePost()
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1.5 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] cursor-pointer ${
+    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] pl-3 py-0.5 rounded border border-b-3 border-transparent cursor-pointer ${
         children || topLevel
-            ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
+            ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
             : ''
-    } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
-    const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
-
+    } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -79,8 +121,13 @@ export default function Menu({
                 })
             )
         }
-        setOpen(isMenuItemActive?.({ name, url }) || url === pathname || (children && isOpen(children)))
-        setIsActive(isMenuItemActive?.({ name, url }) || url === pathname)
+        setOpen(
+            isMenuItemOpen?.({ name, url }) ||
+                isMenuItemActive?.({ name, url }) ||
+                url === pathname ||
+                (children && isOpen(children))
+        )
+        setIsActive(isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
     }, [pathname])
 
     const variants = {
@@ -112,28 +159,26 @@ export default function Menu({
         },
     }[menuType]
     return (
-        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden mb-[1px] ml-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden py-[1px] ml-4 ${className}`}>
             <li>
                 {(url === undefined || url === null) && name ? (
-                    <p className="text-black dark:text-white font-semibold opacity-25 m-0 mt-3 mb-1 ml-3 text-[15px]">
-                        {name}
-                    </p>
+                    <p className="text-sm font-semibold opacity-25 mt-3 mx-3 mb-1">{name}</p>
                 ) : name && url ? (
                     <MenuLink
                         onClick={() => {
-                            handleLinkClick && handleLinkClick()
+                            handleLinkClick && handleLinkClick({ name, url, topLevel, tag })
                             if (isWithChild) {
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${
+                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${
                             isActive || isWithChild ? 'active' : ''
                         }`}
                         to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
                     >
                         <AnimatePresence>
-                            {isActive && (
+                            {isActive && !isWithChild && (
                                 <motion.span
                                     variants={variants}
                                     className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
@@ -143,30 +188,7 @@ export default function Menu({
                                 />
                             )}
                         </AnimatePresence>
-                        {icon ? (
-                            <span className="cursor-pointer flex items-center space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark">
-                                <span className="w-[25px] opacity-70">
-                                    {typeof icon === 'string' ? getIcon(icon) : icon}
-                                </span>
-                                <span>{name}</span>
-                            </span>
-                        ) : (
-                            <>
-                                <span>
-                                    <span
-                                        className={`opacity-50 group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}
-                                    >
-                                        {name}
-                                    </span>
-                                    {badge?.title && (
-                                        <span className={`${badgeClasses} ${badge.className || ''}`}>
-                                            {' '}
-                                            {badge.title}
-                                        </span>
-                                    )}
-                                </span>
-                            </>
-                        )}
+                        <MenuItem badge={badge} color={color} icon={icon} name={name} />
                         {isWithChild && <Chevron open={open ?? false} />}
                     </MenuLink>
                 ) : (
@@ -174,7 +196,7 @@ export default function Menu({
                         {isWithChild ? (
                             <>
                                 <Link
-                                    className="text-inherit hover:text-inherit flex-grow pl-3 py-1 leading-tight"
+                                    className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark flex-grow pl-3 py-1 leading-tight"
                                     to={children[0]?.url || ''}
                                 >
                                     <span>
@@ -187,7 +209,7 @@ export default function Menu({
                                         )}
                                     </span>
                                 </Link>
-                                <Chevron className="mr-2" open={open ?? false} />
+                                <Chevron open={open ?? false} />
                             </>
                         ) : (
                             <span className="inline-block pl-3 pr-2 py-1">{name}</span>

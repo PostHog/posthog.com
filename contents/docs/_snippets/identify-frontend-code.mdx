@@ -1,0 +1,29 @@
+<MultiLanguage selector="tabs">
+
+```js-web
+posthog.identify(
+  'distinct_id',  // Replace 'distinct_id' with your user's unique identifier
+  { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } // optional: set additional user properties
+);
+```
+
+```Android
+PostHog.with(this)
+     .identify(distinctID, new Properties() // Replace 'distinctID' with your user's unique identifier
+        .putValue("name", "Max Hedgehog") // optional: set additional user properties
+        .putValue("email", "max@hedgehogmail.com));
+```
+
+```iOS
+posthog.identify("distinct_id", // Replace "distinct_id" with your user's unique identifier
+  properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"]) // optional: set additional user properties
+```
+
+```react-native
+posthog.identify('distinct_id', { // Replace "distinct_id" with your user's unique identifier
+    email: 'max@hedgehogmail.com', // optional: set additional user properties
+    name: 'Max Hedgehog'
+})
+```
+
+</MultiLanguage>

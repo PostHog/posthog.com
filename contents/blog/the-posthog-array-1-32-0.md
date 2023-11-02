@@ -104,11 +104,11 @@ We've been working hard on a brand new Experimentation feature which will let yo
 
 We want to welcome our new team members!
 
-[Andy](https://posthog.com/handbook/company/team#andy-vandervell-content-marketer) joined PostHog as our first Content Marketer. Andy is a definite 👎 on pineapple on pizza (🍍 on 🍕).
+[Andy](/community/profiles/62) joined PostHog as our first Content Marketer. Andy is a definite 👎 on pineapple on pizza (🍍 on 🍕).
 
 > I am the only person called Andrew Vandervell in the universe.
 
-[Simon](https://posthog.com/handbook/company/team#simon-fisher-customer-success) joined us in Customer Success to help our Enterprise customers get the most value out of PostHog. Simon's stance on pineapple on pizza (🍍 on 🍕) is: On the fence. I'd never actively order a pizza with pineapple on it, but as a pizza lover and pineapple was the only option - I’d still eat it. Same response for Marmite.
+[Simon](/community/profiles/49) joined us in Customer Success to help our Enterprise customers get the most value out of PostHog. Simon's stance on pineapple on pizza (🍍 on 🍕) is: On the fence. I'd never actively order a pizza with pineapple on it, but as a pizza lover and pineapple was the only option - I’d still eat it. Same response for Marmite.
 
 > I’m (loosely) related to an actor who’s starred in 6 Star Wars movies.
 

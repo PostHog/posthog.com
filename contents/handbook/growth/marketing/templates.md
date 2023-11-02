@@ -6,6 +6,10 @@ showTitle: true
 
 Dashboard templates simultaneously showcase the use cases of PostHog and make it easier for users to get started. You can find a full list of them on the [templates page](/templates).
 
+This is "internal" documentation to show PostHog staff how to add new global templates.
+
+Let us know [on this GitHub issue](https://github.com/PostHog/posthog/issues/12732) if you'd like to see templates that are private for your team.
+
 ## Creating a new dashboard template
 
 1. Create your dashboard with all the insights you want on it. Be sure to add descriptions to both.

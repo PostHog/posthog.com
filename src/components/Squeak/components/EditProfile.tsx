@@ -8,6 +8,9 @@ import { useUser } from 'hooks/useUser'
 import getAvatarURL from '../util/getAvatar'
 import usePostHog from 'hooks/usePostHog'
 import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
+import Toggle from 'components/Toggle'
+import { IconInfo } from '@posthog/icons'
+import Tooltip from 'components/Tooltip'
 
 const fields = {
     avatar: {
@@ -32,6 +35,12 @@ const fields = {
     linkedin: {
         label: 'LinkedIn',
     },
+    location: {
+        modOnly: true,
+    },
+    country: {
+        modOnly: true,
+    },
     biography: {
         component: () => (
             <Field
@@ -45,6 +54,30 @@ const fields = {
             />
         ),
         className: 'w-full',
+    },
+    amaEnabled: {
+        hideLabel: true,
+        component: ({ values, setFieldValue }) => {
+            return (
+                <div className="flex space-x-2 mb-6">
+                    <label className="flex space-x-1 items-center">
+                        <Tooltip
+                            tooltipClassName="max-w-[200px]"
+                            content="Allows community members to ask you questions directly on your profile page"
+                        >
+                            <span className="relative">
+                                <IconInfo className="w-4 h-4" />
+                            </span>
+                        </Tooltip>
+                        <span>Ask me anything</span>
+                    </label>
+                    <Toggle
+                        checked={values.amaEnabled}
+                        onChange={() => setFieldValue('amaEnabled', !values.amaEnabled)}
+                    />
+                </div>
+            )
+        },
     },
 }
 
@@ -60,6 +93,8 @@ const ValidationSchema = Yup.object().shape({
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
+    country: Yup.string().nullable(),
+    location: Yup.string().nullable(),
 })
 
 type EditProfileProps = {
@@ -135,7 +170,20 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
     if (!user) return null
 
     // TODO: Need to grab these from `attributes`
-    const { firstName, lastName, website, github, linkedin, twitter, biography, id } = user?.profile || {}
+    const {
+        firstName,
+        lastName,
+        website,
+        github,
+        linkedin,
+        twitter,
+        biography,
+        id,
+        location,
+        country,
+        pronouns,
+        amaEnabled,
+    } = user?.profile || {}
 
     const avatar = getAvatarURL(user?.profile)
 
@@ -210,7 +258,20 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
 
     return (
         <Formik
-            initialValues={{ avatar, firstName, lastName, website, github, linkedin, twitter, biography }}
+            initialValues={{
+                avatar,
+                firstName,
+                lastName,
+                website,
+                github,
+                linkedin,
+                twitter,
+                location,
+                country,
+                pronouns,
+                biography,
+                amaEnabled,
+            }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
         >
@@ -218,7 +279,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 return (
                     <Form className="m-0">
                         <h2>Update profile</h2>
-                        <p className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark p-4 rounded-md mb-4">
+                        <p className=" dark:border-gray-accent-dark p-4 rounded-md mb-4">
                             <strong>Tip:</strong> Be sure to use full URLs when adding links to your website, GitHub,
                             LinkedIn and Twitter (start with https)
                         </p>
@@ -227,7 +288,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                                 const error = errors[key]
                                 const field = fields[key]
                                 const label = field?.label || capitalizeFirstLetter(key.replaceAll('_', ' '))
-
+                                if (field?.modOnly && user?.role?.type !== 'moderator') return null
                                 return (
                                     <div className={`${field?.className ?? 'w-1/2'} p-2`} key={key}>
                                         {!field?.hideLabel && <label htmlFor={key}>{label}</label>}

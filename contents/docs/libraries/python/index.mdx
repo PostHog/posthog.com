@@ -14,213 +14,98 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
-
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
 ## Installation
 
-```bash
-pip install posthog
-```
+import PythonInstall from '../../integrate/_snippets/install-python.mdx'
 
-In your app, import the `posthog` library and set your api key and host **before** making any calls.
+<PythonInstall />
 
-```python
-from posthog import Posthog
+## Capturing events
 
-# The personal API key is necessary only if you want to use local evaluation of feature flags.
-posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>', personal_api_key='<ph_personal_api_key>')
-```
+import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-python.mdx'
 
-You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs.
+<PythonSendEvents />
 
-> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
+## Setting user properties
 
-You can find your keys in the 'Project Settings' page in PostHog.
-
-To debug, you can toggle debug mode on:
-
-```python
-posthog.debug = True
-```
-
-And to make sure no calls happen during your tests, you can disable them, like so:
-
-```python
-if settings.TEST:
-    posthog.disabled = True
-```
-
-## Making Calls
-
-### Capture
-
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
-
-A `capture` call requires:
-
--   `distinct id` which uniquely identifies your user
--   `event name` to specify the event
-
-*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-
--   `properties`, which is a dictionary with any information you'd like to add
--   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
--   `uuid`, a unique `uuid` for the event, leave blank to autogenerate
--   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
-
-For example:
-
-```python
-posthog.capture('distinct id', 'movie played', {'movie_id': '123', 'category': 'romcom'})
-```
-
-or
-
-```python
-posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc()))
-```
-
-#### Setting user properties via an event
-
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
-
-##### $set
-
-**Example**
+To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
 ```python
 posthog.capture(
-    'distinct id',
-    event='movie played',
-    properties={ '$set': { 'userProperty': 'value' } }
+    'distinct_id',
+    event='event_name',
+    properties={
+        '$set': {'name': 'Max Hedgehog'},
+        '$set_once': {'initial_url': '/blog'}
+    }
 )
 ```
 
-**Usage**
+For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+## Alias
 
-##### $set_once
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-**Example**
+We strongly recommend reading our docs on [alias](/docs/getting-started/identify-users) to best understand how to correctly use this method.
+
+## Feature flags
+
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
+
+<FeatureFlagsLibsIntro />
+
+import PythonFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-python.mdx'
+
+<PythonFeatureFlagsCode />
+
+### Local Evaluation
+
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
+
+<LocalEvaluationIntro />
+
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
+
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```python
-posthog.capture(
-    'distinct id',
-    event='movie played',
-    properties={ '$set_once': { 'userProperty': 'value' } }
-)
+variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
+
+if variant == 'variant-name':
+    # Do something
 ```
 
-**Usage**
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+## Group analytics
 
-### Identify
+Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
-> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
-like segment users by these properties.
-
-An `identify` call requires:
-
--   `distinct id` which uniquely identifies your user
--   `properties` with a dict with any key:value pairs
-
-For example:
+-   Capture an event and associate it with a group
 
 ```python
-posthog.identify('distinct id', {
-    'email': 'dwayne@gmail.com',
-    'name': 'Dwayne Johnson'
+posthog.capture('user_distinct_id', 'some_event', groups={'company': 'company_id_in_your_db'})
+```
+
+-   Update properties on a group
+
+```python
+posthog.group_identify('company', 'company_id_in_your_db', {
+    'name': 'Awesome Inc.',
+    'employees': 11
 })
 ```
 
-The most obvious place to make this call is whenever a user signs up, or when they update their information.
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
-### Alias
-
-To connect whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
-
-In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID ([Django](https://stackoverflow.com/questions/526179/in-django-how-can-i-find-out-the-request-session-sessionid-and-use-it-as-a-vari), [Flask](https://stackoverflow.com/questions/15156132/flask-login-how-to-get-session-id)) with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
-
-The same concept applies for when a user logs in.
-
-If you're using PostHog in the front-end and back-end, doing the `identify` call in the frontend will be enough.
-
-An `alias` call requires:
-
--   `distinct id` – the user id
--   `alias` – the anonymous session distinct ID
-
-For example:
-
-```python
-posthog.alias('user:123', 'session:12345');
-```
-
-### Feature flags
-
-PostHog's [Feature Flags](/docs/user-guides/feature-flags) allow you to safely deploy and roll back new features.
-
-When using them with one of libraries, you should check if a feature flag is enabled and use the result to toggle functionality on and off in you application.
-
-**How to check if a flag is enabled**
-
-> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true`, `false`, or a string variant value.
-
-```python
-posthog.feature_enabled('beta-feature', 'distinct id')
-# returns True or False or None
-```
-
-**Example use case**
-
-Here's how you might send different users a different version of your homepage, for example:
-
-```python
-def homepage(request):
-    template = "new.html" if posthog.feature_enabled('new_ui', 'distinct id') else "old.html"
-    return render_template(template, request=request)
-```
-
-> **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence).
-
-**Get a flag value**
-
-If you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
-
-> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true`, `false`, or a string variant value.
-
-```python
-posthog.get_feature_flag('beta-feature', 'distinct id')
-# returns string or True or False or None
-```
-
-**Overriding server properties**
-
-Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
-
-For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
-```python
-posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_authorized': True})
-# returns string or None
-```
-
-The same holds for groups. If you have a group name `organisation`, you can add properties like so:
-
-```python
-posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 'google'}, group_properties={'organisation': {'is_authorized': True})
-# returns string or None
-```
-
-**Default overridden properties**
+## GeoIP properties
 
 Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
 
@@ -229,9 +114,7 @@ As of posthog-python v3.0, the default now is to disregard the server IP, not ad
 You can go back to previous behaviour by doing setting the `disable_geoip` argument in your initialization to `False`:
 
 ```python
-
 posthog = Posthog('api_key', disable_geoip=False)
-
 ```
 
 The list of properties that this overrides:
@@ -244,98 +127,20 @@ The list of properties that this overrides:
 6. $geoip_postal_code
 7. $geoip_time_zone
 
-
-You can also explicitly chose to override / not override properties for a single capture or feature flag request like so:
-
-```python
-posthog.get_feature_flag("beta-feature", "distinct_id", disable_geoip=True|False)
-```
+You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
 
 ```python
-posthog.capture('test id', 'test event', disable_geoip=True|False)
+posthog.capture('test_id', 'test_event', disable_geoip=True|False)
 ```
 
-**Getting all flag values**
+## Serverless environments (Render/Lambda/...)
 
-You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
+By default, the library buffers events before sending them to the capture endpoint, for better performance. This can
+lead to lost events in serverless environments, if the python process is terminated by the platform before the buffer
+is fully flushed. To avoid this, you can either:
 
-```python
-posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorized': True}, group_properties={})
-# returns dict of flag key and value pairs.
-```
-
-#### Feature Flag Payloads
-
-Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
-string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
-
-```python
-posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
-```
-
-#### Local Evaluation
-
-> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
-
-> **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
-
-All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
-
-1. The library must be initialised with a personal API key
-2. You must know all person or group properties the flag depends on.
-
-Then, the flag can be evaluated locally. The method signature looks exactly like above
-
-```python
-posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_authorized': True})
-# returns string or None
-```
-
-> **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `posthog.poll_interval = <value in seconds>`.
-
-This works for `get_all_flags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
-
-```python
-posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorized': True}, group_properties={})
-# returns dict of flag key and value pairs.
-```
-
-**Restricting evaluation to local only**
-
-Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
-
-<CohortExpansionSnippet />
-
-### Group analytics
-
-Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
-
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
-
--   Capture an event and associate it with a group
-
-```python
-posthog.capture('[distinct id]', 'some event', groups={'company': '42dlsfj23f'})
-```
-
--   Update properties on a group
-
-```python
-posthog.group_identify('company', '42dlsfj23f', {
-    'name': 'Awesome Inc.',
-    'employees': 11
-})
-```
-
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
-
-### Sending page views
-
-If you're aiming for a full back-end implementation of PostHog, you can send `pageviews` from your backend
-
-```python
-posthog.capture('distinct id', '$pageview', {'$current_url': 'https://example.com'})
-```
+- ensure that `posthog.flush()` is called after processing every request, by adding a middleware to your server: this allows `posthog.capture()` to remain asynchronous for better performance.
+- enable the `sync_mode` option when initializing the client, so that all calls to `posthog.capture()` become synchronous.
 
 ## Django
 

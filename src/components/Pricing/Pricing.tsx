@@ -1,6 +1,6 @@
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -11,6 +11,10 @@ import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
+import { useLocation } from '@reach/router'
+import { pricingMenu } from '../../navs'
+import tractorHog from '../../../static/lotties/tractor-hog.json'
+import Lottie from 'react-lottie'
 
 export const section = cntl`
     max-w-6xl
@@ -49,49 +53,92 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
+const internalProductNames: {
+    [key: string]: string
+} = {
+    'product-analytics': 'product_analytics',
+    'session-replay': 'session_replay',
+    'feature-flags': 'feature_flags',
+    'ab-testing': 'ab_testing',
+    surveys: 'surveys',
+}
+
+const pricingGroupsToShowOverride: {
+    [key: keyof typeof internalProductNames]: string[]
+} = {
+    'ab-testing': ['feature_flags'],
+}
+
 const Pricing = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
+    const { search } = useLocation()
+    const [groupsToShow, setGropsToShow] = useState<undefined | string[]>()
+    const [currentProduct, setCurrentProduct] = useState<string | null>()
+
+    const getGroupsToShow = (): string[] | undefined => {
+        const product = new URLSearchParams(search).get('product')
+        setCurrentProduct(product ? internalProductNames[product] : null)
+        const defaultGroupsToShow = product ? [internalProductNames[product]] : undefined
+        const groupsToShowOverride = product ? pricingGroupsToShowOverride[product] : undefined
+        return groupsToShowOverride || defaultGroupsToShow
+    }
+
+    useEffect(() => {
+        setGropsToShow(getGroupsToShow())
+    }, [search])
 
     return (
-        <Layout>
+        <Layout
+            parent={pricingMenu}
+            activeInternalMenu={
+                pricingMenu.children[
+                    Object.values(internalProductNames).findIndex((name) => name === currentProduct) + 1
+                ]
+            }
+        >
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
-            <section>
+            <section className="w-screen overflow-x-hidden">
                 <div
-                    className={`grid md:grid-cols-2 md:mt-12 md:mt-18 md:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
+                    className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
                     <div className="md:order-2">
-                        <StaticImage
-                            alt="The cutest hedgehog you've ever seen driving a red tractor"
-                            src={'./images/tractor-hog.png'}
-                            className="max-w-screen-sm"
-                            loading="eager"
-                            placeholder="none"
-                        />
+                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80">
+                            <Lottie
+                                options={{
+                                    loop: false,
+                                    autoplay: true,
+                                    animationData: tractorHog,
+                                }}
+                            />
+                        </div>
                     </div>
                     <div className="md:order-1">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Pricing</h1>
-                        <p className="text-base font-medium opacity-60 leading-tight">
+                        <p className="text-base font-medium opacity-60 leading-tight mb-4">
                             Use PostHog free forever (with generous usage limits). <br className="hidden lg:block" />
                             Or pay per use and get unrestricted access to everything.
+                        </p>
+                        <p className="text-base font-medium opacity-60 leading-tight">
+                            Each product is priced separately.
                         </p>
                     </div>
                 </div>
             </section>
-            <section className={`${section} mb-12 mt-12 md:px-4`}>
-                <PlanComparison />
+            <section className={`${section} mb-12 mt-8 md:px-4`}>
+                <PlanComparison groupsToShow={groupsToShow} />
             </section>
 
             <PricingCalculator />
 
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+                <h2 className="text-2xl m-0 flex items-center border-b border-light dark:border-dark pb-4">
                     <span>More options</span>
                 </h2>
                 <OtherOptions />
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Questions</h2>
                 <FAQs />
             </section>
             <section className="bg-primary my-12 md:px-4">

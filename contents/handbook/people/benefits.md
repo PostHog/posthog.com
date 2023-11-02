@@ -6,7 +6,7 @@ showTitle: true
 
 Outside of our [pay and equity](/handbook/people/compensation), we also offer several other exceptional benefits to our team.
 
-> With everyone being distributed across the world, we do our best to provide the same benefits to everyone, but they might vary slightly by country depending on the services that are available and local regulations. 
+> With everyone being distributed across the world, we do our best to provide the same benefits to everyone, but they vary slightly by country depending on the services that are available and local regulations. 
 
 If you have any ideas for how we can improve our benefits offering, then please let us know!
 
@@ -26,7 +26,7 @@ We offer private health insurance in countries where the health system struggles
 
 In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
 
-In the UK, we use [Bupa](https://www.bupa.co.uk/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
+In the UK, we use [Aviva](https://www.aviva.co.uk/business/health-protection-wellbeing/health-insurance/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
 
 ### Mental health support
 
@@ -34,7 +34,7 @@ For people in the US, we offer the option to opt in to a [Flexible Savings Accou
 
 There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. We will also contribute $50 per month to this account if you opt in. At the end of the year, any unused money rolls over and the contribution limit resets.
 
-For people in the UK, [Bupa](https://www.bupa.co.uk/health-information/mental-health/talking-therapies-for-mental-health) offers coverage for therapists that are inaccessible through the NHS alone.
+For people in the UK, [Aviva](https://www.aviva.co.uk/business/health-protection-wellbeing/health-insurance/) offers coverage for therapists that are inaccessible through the NHS alone.
 
 ### Time off
 
@@ -50,13 +50,13 @@ We currently offer a [Training budget](/handbook/people/training#training-budget
 
 As we are fully remote, we provide [all equipment](/handbook/people/spending-money#equipment) you need to have an ergonomic setup at home to be as productive as possible. We provide all team members with a company card for this purpose.
 
-If you ever need change of scenery, we offer $250/month budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access).
+If you ever need change of scenery, we offer a monthly budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access).
 
-> Please message Grace or Tim to get added to our company WeWork account. 
+> Please message Kendal to get added to our company WeWork account. 
 
 ### Meeting up 
 
-We do regular [team offsites](/handbook/company/offsites) - recent trips have included Aruba, Iceland and Portugal! Small Teams also have their own offsites at least once a year. 
+We do regular [team offsites](/handbook/company/offsites) - recent trips have included Aruba, Iceland, and Portugal! Small Teams also have their own offsites at least once a year. 
 
 We also give all team members a [$1,500/quarter budget](/handbook/people/spending-money#budget-for-socializing) to meet up in person _in addition_ to the offsite budget
 

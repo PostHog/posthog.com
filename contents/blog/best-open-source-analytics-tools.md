@@ -1,6 +1,6 @@
 ---
-date: 2023-03-14
-title: The 12 best open-source analytics and data tools
+date: 2023-09-13
+title: The best open-source analytics tools you can self-host
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -10,28 +10,28 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/vN-aGs5M2k4
 category: General
 tags:
   - Open source
   - Guides
-  - Comparisons
 ---
+**Author:** [Andy Vandervell](https://posthog.com/community/profiles/62)
 
-There's no shortage of high-quality open-source analytics tools. In this guide we've split them into two categories:
+There's no shortage of powerful open-source analytics tools. In this guide we've split them into two categories:
 
-- [Analytics tools](#the-best-open-source-analytics-tools) that collect data and help you understand user behavior. This includes product analytics platforms, but also web analytics, session recording, and AB testing tools.
+- [Self-hosted analytics tools](#the-best-open-source-analytics-tools) that collect data and help you understand user behavior. This includes product analytics platforms, but also web analytics, session recording, and AB testing tools.
 
 - [Dashboarding tools](#the-best-open-source-dashboard-and-bi-tools) that connect to data sources (e.g. a data warehouse) for building dashboards, insights, interactive visualizations, and real-time data logging.
 
-We've chosen each entry carefully based on a broad range factors, community size and activity, our own experience using them, and publicly available feedback and sentiment.
+We've chosen each entry carefully based on a broad range factors, such as community size and activity, our own experience using them, and publicly available feedback.
 
 We have separate guides on [open-source feature flag tools](/blog/best-open-source-feature-flag-tools) and [open-source AB testing products](/blog/best-open-source-ab-testing-tools).
 
 > **Changelog** 
-> - **Jun 16, 2022:** Added Fathom Lite, Open Web Analytics, GrowthBook, OpenReplay
-> - **Aug 24, 2022:** Removed Fathom Lite, Open Web Analytics; added Apache Superset, Redash
 > - **Mar 14, 2022:** Added Umami; updates to copy and screenshots
+> - **Jun 16, 2022:** Added Fathom Lite, GrowthBook, OpenReplay
+> - **Aug 24, 2022:** Removed Fathom Lite, added Apache Superset, Redash
+> - **Sep 13, 2023:** Added Ackee and Open Web Analytics
 
 ## The best open-source analytics tools
 
@@ -40,9 +40,9 @@ This section is dedicated to tools that actively collect data on user behavior. 
 ### PostHog
 ![PostHog - best open source analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-- **GitHub Stars:** 11.2k
+- **GitHub Stars:** 13.3k
 - **Language(s):** TypeScript (53%) and Python (42%)
-- **Alternative to:** Mixpanel, Amplitude, Hotjar, FullStory, LaunchDarkly
+- **Alternative to:** [Mixpanel](/blog/best-mixpanel-alternatives), Amplitude, Hotjar, FullStory, LaunchDarkly
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
 [PostHog](https://posthog.com/) is an all-in-one platform designed to give engineers and product managers a complete view of user behavior. It's built on the highly-scalable ClickHouse OLAP database.
@@ -75,8 +75,8 @@ Subscribing to PostHog Cloud removes the project limit and adds numerous paid-on
 ### Matomo
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
-- **GitHub Stars:** 17.4k
-- **Languages:** PHP (58%), HTML (18%), JavaScript (18%)
+- **GitHub Stars:** 18.1k
+- **Languages:** PHP (78%), JavaScript (8.1%)
 - **Alternative to:** Google Analytics
 - [Matomo on GitHub](https://github.com/matomo-org/matomo) 
 
@@ -100,7 +100,7 @@ Matomo on-premise is available under a AGPLv3 license. It includes Matomo's core
 ### Countly
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
-- **GitHub Stars:** 5k
+- **GitHub Stars:** 5.2k
 - **Languages:** JavaScript (82%), HTML (9.4%)
 - **Alternative to:** Mixpanel, Amplitude, LogRocket
 - [Countly on GitHub](https://github.com/Countly/countly-server)
@@ -119,35 +119,11 @@ Countly is suitable for both small teams and enterprise businesses, especially t
 #### Open source license and monetization
 Countly's Community Edition is available under a AGPLv3 license, but it's somewhat limited. It includes versions of its core analytics features, but customer behavior insights (e.g. retention, cohorts, funnels, user paths) are only available in the paid Enterprise Edition. Countly doesn't provide public pricing information.
 
-### OpenReplay
-
-![openreplay - open source analytics tools](../images/blog/open-source-analytics-tools/openreplay.png)
-
-- **GitHub Stars:** 7.1k
-- **Languages:** Python (25%), TypeScript (24%), JavaScript (24%)
-- **Alternative to:** LogRocket, Hotjar 
-- [OpenReplay on GitHub](https://github.com/openreplay/openreplay) 
-
-[OpenReplay](https://github.com/openreplay/openreplay) is a session replay suite built for developers and privacy conscious companies. While it lacks many core analytics features, it does offer some basic analytics features such as funnel analysis.  
-
-Its session replay feature automatically captures events, and provides useful click maps in addition to detecting rage clicks and slow loading pages. It also offers funnel analysis, performance monitoring, error tracking, and extensive integrations with other logging tools.
-
-#### Who is OpenReplay for?
-OpenReplay is primarily for developers, especially due to its focus on error tracking and bug fixing. It's a good option for early-stage products looking to understand user behavior and validate product-market fit.
-
-#### Strengths
-- Privacy-friendly
-- Error tracking and bug fixing features
-- Performance monitoring
-
-#### Open source license and monetization
-OpenReplay is available under the ELv2 license. An Enterprise version adds additional reporting features and dedicated support, but there's no public pricing. There's also a cloud version with pricing based on sessions. 
-
 ### Plausible Analytics
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-- **GitHub Stars:** 14.2k
-- **Languages:** Elixir (66%), HTML (18%), JavaScript (15%)
+- **GitHub Stars:** 16k
+- **Languages:** Elixir (74%), JavaScript (14%)
 - **Alternative to:** Google Analytics
 - [Plausible on Github](https://github.com/plausible/analytics/)
 
@@ -172,7 +148,7 @@ Plausible Analytics is available under a AGPLv3 license and can be self-hosted v
 
 ![umami analytics](../images/blog/open-source-analytics-tools/umami.png)
 
-- **GitHub Stars:** 14.9k
+- **GitHub Stars:** 16.9k
 - **Languages:** 91% JavaScript
 - **Alternative to:** Google Analytics
 - [Umami on GitHub](https://github.com/umami-software/umami)
@@ -193,11 +169,85 @@ Hobbyists who want basic website analytics that doesn't collect any personal dat
 
 Umami is available via an MIT license. There is no monetized features or hosting options at present, though it is currently running an open beta for managed cloud version that Umami will charge for.
 
+### Ackee
+
+![ackee](../images/blog/open-source-analytics-tools/ackee.png)
+
+- **GitHub Stars:** 4k
+- **Languages:** 85% JavaScript
+- **Alternative to:** Google Analytics
+- [Ackee on GitHub](https://github.com/electerious/Ackee)
+
+[Ackee](https://ackee.electerious.com/) is a barebones Node.js based analytics tool with a strong focus on privacy. It doesn't store any cookies, and supports numerous methods of self-hosted deployments. You can also build custom tools upon Ackee using its GraphQL API.
+
+#### Who is Ackee for?
+
+Ackee is ideally suited to engineers who need analytics for hobby projects. You can track as many domains as you like and retain complete control of your data.
+
+#### Strengths
+
+- Simple, lightweight analytics
+- Extendable via GraphQL API
+- No cookie banners needed
+- Unlimited domain tracking
+
+#### Open source license and monetization
+Ackee is an entirely free project that's distributed under a permissive MIT license.
+
+### Open Web Analytics
+
+![open web analytics](../images/blog/open-source-analytics-tools/owa.png)
+
+- **GitHub Stars:** 2.2k
+- **Languages:** 67% PHP, 23 JavaScript
+- **Alternative to:** Google Analytics
+- [OWA on GitHub](https://github.com/Open-Web-Analytics/Open-Web-Analytics)
+
+[Open Web Analytics](https://www.openwebanalytics.com/) is an entirely free, open-source alternative to Google Analytics. In addition to usual web analytics basics, it includes a basic heatmap feature, and the ability to track clicks on all DOM elements. It's less focused on privacy than others in this list, so you can use OWA to track when users come back, and perform basic campaign and e-commerce tracking. In comparative terms, it's more advanced than Plausible and Umami, but less advanced than Matomo or PostHog, though the interface is somewhat dated. 
+
+#### Who is Open Web Analytics for?
+
+OWA will suit any developer who wants self-hosted analytics, but desires more tracking capabilities than privacy-focused alternatives like Plausible.
+
+#### Strengths
+
+- Simple GDPR compliance
+- Control over your own data
+- Heatmap and DOM element tracking
+- Basic campaign and e-commerce tracking
+
+#### Open source license and monetization
+Open Web Analytics is distributed under the GPL-2.0 license. There are no paid features.
+
+### OpenReplay
+
+![openreplay - open source analytics tools](../images/blog/open-source-analytics-tools/openreplay.png)
+
+- **GitHub Stars:** 8k
+- **Languages:** Python (25%), TypeScript (24%), JavaScript (24%)
+- **Alternative to:** LogRocket, Hotjar 
+- [OpenReplay on GitHub](https://github.com/openreplay/openreplay) 
+
+[OpenReplay](https://github.com/openreplay/openreplay) is a session replay suite built for developers and privacy conscious companies. While it lacks many core analytics features, it does offer some basic analytics features such as funnel analysis.  
+
+Its session replay feature automatically captures events, and provides useful click maps in addition to detecting rage clicks and slow loading pages. It also offers funnel analysis, performance monitoring, error tracking, and extensive integrations with other logging tools.
+
+#### Who is OpenReplay for?
+OpenReplay is primarily for developers, especially due to its focus on error tracking and bug fixing. It's a good option for early-stage products looking to understand user behavior and validate product-market fit.
+
+#### Strengths
+- Privacy-friendly
+- Error tracking and bug fixing features
+- Performance monitoring
+
+#### Open source license and monetization
+OpenReplay is available under the ELv2 license. An Enterprise version adds additional reporting features and dedicated support, but there's no public pricing. There's also a cloud version with pricing based on sessions. 
+
 ### GrowthBook
 
 ![GrowthBook - best open source analytics tools](../images/blog/open-source-testing-tools/growthbook.png)
 
-- **GitHub Stars:** 4.3k
+- **GitHub Stars:** 4.9k
 - **Languages:** TypeScript (92%)
 - **Alternative to:** LaunchDarkly
 - [GrowthBook on GitHub](https://github.com/growthbook/growthbook)

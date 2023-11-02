@@ -1,0 +1,36 @@
+import Snippet from "./install-js-snippet.mdx"
+
+### Option 1: Add the JavaScript snippet to your HTML <span class="bg-gray-accent-light dark:bg-gray-accent-dark text-gray font-semibold align-middle text-sm p-1 rounded">Recommended</span>
+
+<Snippet />
+
+### Option 2: Install via package manager
+
+<MultiLanguage>
+
+```bash file=Yarn
+yarn add posthog-js
+```
+
+```bash file=NPM
+npm install --save posthog-js
+```
+
+</MultiLanguage>
+
+And then include it in your files:
+
+```js-web
+import posthog from 'posthog-js'
+posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
+```
+
+If you don't want to send test data while you're developing, you can do the following:
+
+```js-web
+if (!window.location.host.includes('127.0.0.1') && !window.location.host.includes('localhost')) {
+    posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
+}
+```
+
+If you're using React or Next.js, checkout our [React SDK](/docs/libraries/react) or [Next.js integration](/docs/libraries/next-js).

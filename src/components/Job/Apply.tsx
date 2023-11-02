@@ -1,4 +1,4 @@
-import { button, CallToAction, TrackedCTA } from 'components/CallToAction'
+import { button, CallToAction, child, container, TrackedCTA } from 'components/CallToAction'
 import { Check2 } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import Modal from 'components/Modal'
@@ -78,7 +78,23 @@ const components = {
         }
 
         return (
-            <div className="relative h-24 w-full border border-gray-accent-light dark:border-gray-accent-dark border-dashed rounded-md flex justify-center items-center text-black/50 dark:text-white/50">
+            <div className="relative h-24 w-full border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md flex justify-center items-center text-black/50 dark:text-white/50">
+                <div className="absolute">
+                    {fileName ? (
+                        <p className="!m-0">{fileName}</p>
+                    ) : (
+                        <p className="flex space-x-3 items-center !m-0">
+                            <button
+                                onClick={() => inputRef?.current.click()}
+                                type="button"
+                                className={container('primary', 'sm')}
+                            >
+                                <span className={child('primary', undefined, undefined, 'sm')}>Upload file</span>
+                            </button>
+                            <span className="text-sm">or drag and drop here</span>
+                        </p>
+                    )}
+                </div>
                 <input
                     ref={inputRef}
                     onChange={handleDrop}
@@ -90,22 +106,6 @@ const components = {
                     type="file"
                     accept={allowedFileTypes.join(',')}
                 />
-                <div className="absolute">
-                    {fileName ? (
-                        <p className="m-0">{fileName}</p>
-                    ) : (
-                        <p className="flex space-x-3 items-center !m-0">
-                            <button
-                                onClick={() => inputRef?.current.click()}
-                                type="button"
-                                className={button('primary', undefined, 'cursor-pointer', 'sm')}
-                            >
-                                Upload file
-                            </button>
-                            <span className="text-sm">or drag and drop here</span>
-                        </p>
-                    )}
-                </div>
             </div>
         )
     },
@@ -186,7 +186,9 @@ const Form = ({ setSubmitted, info, id }) => {
                     })}
                 </div>
                 {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
-                <button className={`${button()} mt-6 shadow-none !w-full box-border`}>Submit</button>
+                <button className={`${container()} mt-6 shadow-none !w-full box-border`}>
+                    <span className={child()}>Submit</span>
+                </button>
             </form>
         </div>
     )
@@ -272,7 +274,7 @@ export default function Apply({ id, info }) {
                             <p className="m-0 mb-3 text-sm">
                                 This code is our token of appreciation for taking the time to apply.
                             </p>
-                            <div className="rounded-md bg-tan dark:bg-primary border border-dashed border-gray-accent-light py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
+                            <div className="rounded-md bg-tan dark:bg-primary  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}
@@ -328,7 +330,7 @@ export default function Apply({ id, info }) {
                             </CallToAction>
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
+                        <div className="mx-6 md:mx-12 py-6 ">
                             <h4 className="mb-0">Be our next star?</h4>
                             <aside className="float-right h-[28px] w-[125px] ml-8">
                                 <GitHubButton href="https://github.com/PostHog/posthog" />
@@ -338,13 +340,13 @@ export default function Apply({ id, info }) {
                             </p>
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
+                        <div className="mx-6 md:mx-12 py-6 ">
                             <h4 className="mb-0">Join our mailing list</h4>
                             <p className="text-sm mb-0">The best of PostHog. Delivered twice a month.</p>
                             <NewsletterForm subcompact className="px-0" />
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
+                        <div className="mx-6 md:mx-12 py-6 ">
                             <h4 className="mb-0">Install PostHog on a side project</h4>
                             <p className="text-sm">
                                 Feel free to give PostHog a whirl - we’d love to hear your feedback!
@@ -396,7 +398,7 @@ export default function Apply({ id, info }) {
                             </div>
                         </div>
 
-                        <div className="mx-6 md:mx-12 pt-2 pb-6 border-t border-dashed border-gray-accent-light text-center">
+                        <div className="mx-6 md:mx-12 pt-2 pb-6  text-center">
                             <Link to="/" className="font-bold text-red hover:bg-tan/50 w-full block px-4 py-2 rounded">
                                 Go back to PostHog.com
                             </Link>

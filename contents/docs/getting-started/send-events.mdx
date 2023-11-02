@@ -14,7 +14,7 @@ We recommend starting with autocapture for your web app as it's the quickest way
 
 ## 1. Setup autocapture
 
-When you call `posthog.init` the PostHog JS library begins automatically capturing user events:
+When you call `posthog.init`, the PostHog browser JS library begins automatically capturing user events:
 
 - **Page views**, including the URL
 - **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
@@ -38,8 +38,8 @@ On the client-side, we can use the `capture` method, with the first argument bei
 
 <MultiLanguage selector="tabs">
 
-```js
-posthog.capture('User signed up')
+```js-web
+posthog.capture('user_signed_up')
 ```
 
 </MultiLanguage>
@@ -61,10 +61,10 @@ We include extra information on events by adding a second parameter in our captu
 
 <MultiLanguage selector="tabs">
 
-```js
-posthog.capture('Plan purchased', {
+```js-web
+posthog.capture('plan_purchased', {
     price: 1599,
-    planId: 'XYZ12345',
+    plan_id: 'XYZ12345',
     frequency: 'monthly',
     features: {
         'SSO': true,

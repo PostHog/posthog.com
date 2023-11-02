@@ -11,7 +11,6 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: Product growth
 tags:
-  - Product analytics
   - Explainers
 ---
 ## What is product analytics?
@@ -64,6 +63,7 @@ Individuals will often employ product analytics on a particular area, depending 
         quote={`“We use feature flags to issue changes to 50% of users and then compare the effect. Experiment, find results, decide where to focus and then iterate.”`}
     />
 </BorderWrapper>
+
 
 ## What product metrics should I track?
 

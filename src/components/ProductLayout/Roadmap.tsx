@@ -1,6 +1,6 @@
 import { CallToAction } from 'components/CallToAction'
 import { pineappleText } from 'components/Job/Sidebar'
-import { ContributorImage } from 'components/PostLayout/Contributors'
+import { ContributorImageSmall } from 'components/PostLayout/Contributors'
 import TeamRoadmap from 'components/TeamRoadmap'
 import { graphql, useStaticQuery } from 'gatsby'
 import { getImage } from 'gatsby-plugin-image'
@@ -15,41 +15,53 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
         team: { nodes },
     } = useStaticQuery(graphql`
         query {
-            team: allMdx(
-                filter: { fields: { slug: { regex: "/^/team/" } } }
-                sort: { fields: frontmatter___startDate }
+            team: allSqueakProfile(
+                filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+                sort: { fields: startDate, order: ASC }
             ) {
                 nodes {
-                    frontmatter {
-                        headshot {
-                            childImageSharp {
-                                gatsbyImageData
+                    avatar {
+                        url
+                    }
+                    teams {
+                        data {
+                            attributes {
+                                name
                             }
                         }
-                        team
-                        jobTitle
-                        name
-                        country
-                        github
-                        teamLead
-                        pineappleOnPizza
                     }
+                    companyRole
+                    firstName
+                    lastName
+                    country
+                    github
+                    leadTeams {
+                        data {
+                            attributes {
+                                name
+                            }
+                        }
+                    }
+                    pineappleOnPizza
                 }
             }
         }
     `)
     const teamMembers = nodes
-        .filter((node: any) => node?.frontmatter?.team?.some((teamName: any) => teamName === team))
-        .sort((l: any, r: any) => (l.frontmatter.teamLead ? -1 : r.frontmatter.teamLead ? 1 : 0))
+        .filter((node) => node?.teams?.data?.some(({ attributes: { name: teamName } }) => teamName === team))
+        .sort((l, r) =>
+            l.leadTeams?.data?.some(({ attributes: { name: teamName } }) => teamName === team)
+                ? -1
+                : r.leadTeams?.data?.some(({ attributes: { name: teamName } }) => teamName === team)
+                ? 1
+                : 0
+        )
     const teamLength = teamMembers?.length
     if (!teamMembers || !teamLength) return null
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
-        Math.round(
-            (teamMembers.filter(({ frontmatter: { pineappleOnPizza } }: any) => pineappleOnPizza).length / teamLength) *
-                100
-        )
+        Math.round((teamMembers.filter(({ pineappleOnPizza }: any) => pineappleOnPizza).length / teamLength) * 100)
     const teamURL = `/handbook/small-teams/${slugify(team, { lower: true })}`
     return (
         <div id="roadmap">
@@ -68,18 +80,23 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
                         <p className="text-xs mb-4 opacity-75">{pineappleText(pineapplePercentage)}</p>
                         <ul className="list-none m-0 mb-4 p-0 space-y-2 md:space-y-0">
                             {teamMembers.map((member: any) => {
-                                const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
+                                const {
+                                    firstName,
+                                    lastName,
+                                    avatar: { url: avatar },
+                                    companyRole,
+                                    leadTeams,
+                                    country,
+                                } = member
+                                const name = [firstName, lastName].filter(Boolean).join(' ')
                                 return (
                                     <li className="flex space-x-2 items-center py-1" key={name}>
                                         <figure className="mb-0">
-                                            <ContributorImage
-                                                className="w-[45px] h-[45px]"
-                                                image={getImage(headshot)}
-                                            />
+                                            <ContributorImageSmall className="w-[45px] h-[45px]" image={avatar} />
                                         </figure>
                                         <div>
                                             <span className="flex items-center md:flex-row space-x-2">
-                                                <p className="text-base font-bold m-0 leading-none">{name}</p>
+                                                <p className="text-base font-bold !m-0 leading-none">{name}</p>
                                                 {country && (
                                                     <span className="!leading-none">
                                                         {country === 'world' ? (
@@ -89,13 +106,15 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
                                                         )}
                                                     </span>
                                                 )}
-                                                {teamLead && (
+                                                {leadTeams?.data?.some(
+                                                    ({ attributes: { name: teamName } }) => teamName === team
+                                                ) && (
                                                     <span className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white">
                                                         Team lead
                                                     </span>
                                                 )}
                                             </span>
-                                            <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{jobTitle}</p>
+                                            <p className="!text-sm !mb-0 opacity-50 !leading-none">{companyRole}</p>
                                         </div>
                                     </li>
                                 )

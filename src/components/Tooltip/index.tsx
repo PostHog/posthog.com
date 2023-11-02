@@ -10,6 +10,7 @@ export default function Tooltip({
     className = '',
     tooltipClassName = '',
     placement = 'bottom',
+    title,
 }: {
     children: JSX.Element
     content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
@@ -17,6 +18,7 @@ export default function Tooltip({
     className?: string
     tooltipClassName?: string
     placement?: Placement
+    title?: string
 }) {
     const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
@@ -38,16 +40,25 @@ export default function Tooltip({
             {open &&
                 createPortal(
                     <div
-                        className="z-[10000]"
+                        className="z-[9999999999]"
                         role="tooltip"
                         ref={setPopperElement}
                         style={{ ...styles.popper, paddingTop: offset[1], paddingBottom: offset[1] }}
                         {...attributes.popper}
                     >
-                        <div
-                            className={`bg-white dark:bg-[#484848] text-black dark:text-white rounded-md px-2 py-1 text-sm z-20 shadow-lg ${tooltipClassName}`}
-                        >
-                            {content && (typeof content === 'string' ? content : content(setOpen))}
+                        <div className={`rounded-sm overflow-hidden ${tooltipClassName}`}>
+                            {title && (
+                                <h5
+                                    className={`bg-white text-sm dark:bg-[#484848] text-black dark:text-white px-4 py-2 z-20 m-0 font-semibold`}
+                                >
+                                    {title}
+                                </h5>
+                            )}
+                            <div
+                                className={`bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary dark:text-primary-dark px-2 py-2 text-sm z-20`}
+                            >
+                                {content && (typeof content === 'string' ? content : content(setOpen))}
+                            </div>
                         </div>
                     </div>,
                     document.body

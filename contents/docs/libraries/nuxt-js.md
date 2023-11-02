@@ -138,7 +138,7 @@ export default function({ app: { router } }, inject) {
 
 Finally, we need to activate it on the client side in our `nuxt.config.js`
 
-```javascript
+```js
 plugins: [
     ...
     { src: './plugins/posthog', mode: 'client' }
@@ -152,7 +152,7 @@ Compare with the [Nuxt.js docs](https://nuxtjs.org/docs/2.x/directory-structure/
 
 Let's say for example the user makes a purchase you could track an event like that:
 
-```javascript
+```js-web
 <template>
   <button @click="purchase">Buy</button>
 </template>
@@ -170,6 +170,6 @@ Let's say for example the user makes a purchase you could track an event like th
 
 ## Further reading
 
-- [PostHog for VueJS users](tutorials/posthog-for-vuejs)
+- [PostHog for VueJS users](/docs/libraries/vue-js)
 - [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
-- [Building a Vue cookie consent banner](tutorials/vue-cookie-banner)
+- [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)

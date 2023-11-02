@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: Newsletter
+category: General
 ---
 
 > Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
@@ -29,7 +29,7 @@ One week later than originally promised... welcome to the first HogMail of 2023.
 
 - [How to track performance marketing in PostHog](https://posthog.com/tutorials/performance-marketing): How to set up UTM tracking for your campaigns and attribution. See also: [how our marketing team uses PostHog](https://posthog.com/blog/posthog-marketing).
 
-- [How to do a canary release using PostHog](https://posthog.com/tutorials/canary-release): Step-by-step guide to gradually rolling out a new feature release.
+- [How to do a canary release using PostHog](/tutorials/canary-release): Step-by-step guide to gradually rolling out a new feature release.
 
 ## #talking-points
 
@@ -47,7 +47,7 @@ But the real game changer is defaulting to asynchronous communication and writin
  
 ### Product-market fit is a moving target 🎯
 
-We often get asked how to achieve the fabled product-market fit (PMF), mainly because [there is no universal standard](https://posthog.com/blog/how-to-product-market-fit) and, as Run the Business points out in [Product Market Flex](https://runthebusiness.substack.com/p/product-market-flex), it's not a stationary target:
+We often get asked how to achieve the fabled product-market fit (PMF), mainly because [there is no universal standard](/blog/product-market-fit-game) and, as Run the Business points out in [Product Market Flex](https://runthebusiness.substack.com/p/product-market-flex), it's not a stationary target:
 
 >"At any given moment in time, even if you have PMF, you still need to be working towards a future state where the market has evolved, and your product has kept up."
 

@@ -1,23 +1,23 @@
 import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import { CodeBlock as CB } from 'components/CodeBlock'
 
-export default function CodeBlock({ code, language, hideNumbers }) {
+export default function CodeBlock({ code, language, hideNumbers, lineNumberStart, tooltips }) {
+    const languages = [
+        {
+            language,
+            code,
+        },
+    ]
     return (
-        <Highlight {...defaultProps} code={code} language={language}>
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={`${className}`} style={{ background: '#24292E', margin: 0 }}>
-                    {tokens.map((line, i) => (
-                        <div className="table-row" key={i} {...getLineProps({ line, key: i })}>
-                            {!hideNumbers && <span className="table-cell pr-4">{i + 1}</span>}
-                            <span className="table-cell">
-                                {line.map((token, key) => (
-                                    <span key={key} {...getTokenProps({ token, key })} />
-                                ))}
-                            </span>
-                        </div>
-                    ))}
-                </pre>
-            )}
-        </Highlight>
+        <CB
+            currentLanguage={languages[0]}
+            showLabel={false}
+            showLineNumbers
+            lineNumberStart={lineNumberStart}
+            tooltips={tooltips}
+        >
+            {languages}
+        </CB>
     )
 }

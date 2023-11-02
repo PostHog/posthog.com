@@ -40,7 +40,7 @@ function Endpoints({ paths }) {
                             {Object.keys(value).map((verb) => (
                                 <tr
                                     key={verb}
-                                    className="border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b first:border-t-0 last:border-b-0"
+                                    className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0"
                                 >
                                     <td>
                                         <code className={`method text-${mapVerbsColor[verb]}`}>
@@ -115,10 +115,7 @@ function Params({ params, objects, object, depth = 0 }) {
         <>
             <ul className="list-none pl-0">
                 {params.map((param, index) => (
-                    <li
-                        key={index}
-                        className="py-1 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark first:border-0"
-                    >
+                    <li key={index} className="py-1  first:border-0">
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
                                 <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
@@ -503,7 +500,6 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 tableOfContents={tableOfContents}
                 fullWidthContent={true}
                 hideSidebar
-                contentWidth="100%"
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
             >
                 <h2 className="!mt-0">{name}</h2>

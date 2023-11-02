@@ -4,201 +4,37 @@ nextPage: ./user-properties.mdx
 featuredImage: ./images/docs-identify.png
 ---
 
-import IdentifyUserBackend from "./\_snippets/identify-user-backend.mdx"
+import JSIdentifyIntro from "../\_snippets/identify-intro.mdx"
+import JSIdentifyHowItWorks from "../\_snippets/identify-how-it-works"
+import JSIdentifyWhenToCall from "../\_snippets/identify-when-to-call.mdx"
+import JSIdentifyUseUniqueIds from "../\_snippets/identify-use-unique-ids.mdx"
+import JSIdentifyReset from "../\_snippets/identify-reset.mdx"
+import JSIdentifySetUserProperties from "../\_snippets/identify-setting-user-properties.mdx"
 
-PostHog allows you to identify your users with an ID of your choice. This enables PostHog to associate events with a specific user, track them on different platforms, and connect events from before and after they log in for the first time.
+<JSIdentifyIntro/> 
 
-All events within PostHog are associated with a specific person, either an **Anonymous person** or an **Identified person**, typically based on whether they're logged in to your application or not.
+## How identify works
 
-Identifying users is done using the `identify` method in one of our SDKs.
+<JSIdentifyHowItWorks/>
 
-## 1. Anonymous users
+## Best practices when using `identify`
 
-When a user starts browsing on your website or app, they'll be automatically assigned an **anonymous ID**, which is then stored locally and allows us to track anonymous users even across different sessions.
-This anonymous ID is created using the user's device ID and will typically look like `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55`.
+### 1. Call `identify` as soon as you're able to
 
-In order to track users across different devices, we will use the `identify` method to associate events with a logged-in user rather than simply the device they are using.
+<JSIdentifyWhenToCall/>
 
-## 2. Identifying a user when they sign up
+### 2. Use unique strings for distinct IDs
 
-To start, let's walk through the flow of identifying a user as they are signing up for our service for the first time.
-This is one of the most important areas to get right when setting up analytics, but it can sometimes feel daunting when setting it up for the first time.
+<JSIdentifyUseUniqueIds/>
 
-We'll start by following a user viewing your website for the first time; as mentioned above, this user is first assigned a unique anonymous ID, which we start using to send events.
+### 3. Reset after logout
 
-### Identifying our newly created user
+<JSIdentifyReset/>
 
-Now, this user navigates to your login flow and goes through the process of creating an account.
-After your backend logic handles creating an account, you'll then want to call `identify` to create a person within PostHog.
+### 4. Setting user properties
 
-<IdentifyUserBackend />
+<JSIdentifySetUserProperties/>
 
-For the `distinct_id`, you'll typically want to use whatever unique ID was assigned to the user within your database or a unique piece of information such as their `email`.
+## Further reading
 
-### Linking past events with our new user
-
-Now that we've created our new user, the next step is to associate any past events that were sent with the old anonymous ID with this new user.
-
-On the client side, this is done by calling `identify` with the same `distinct_id` that we just used in our backend `identify` call.
-
-```js
-// Using the 'distinct_id' returned to us from the server
-posthog.identify('my_user_12345')
-```
-
-Calling `identify` from the frontend will do two things:
-
-1. PostHog will merge all the previous events from our anonymous user into our new user (`distinct_id`)
-2. All future events will be associated with this new user (`distinct_id`), even if we still use their anonymous ID
-
-Effectively, these two users have been merged into one.
-
-From now on, all events PostHog sees with ID `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55` (anonymous ID) will be attributed to the person with ID `my_user_12345`. This person now has 2 distinct IDs, and either of them can be used to reference the same person.
-
-By combining our anonymous user with our newly created user, we can answer important questions about our onboarding flow such as conversion rate and total unique users.
-
-## 3. Identifying logged-in users
-
-Now that we've covered the process of handling a user first signing up, the next question is what to do when this user returns.
-
-In most cases, all we need to do is call `identify` whenever they return back to our site with whatever `distinct_id` we previously used!
-
-```js
-// The same 'distinct_id' as before
-posthog.identify('my_user_12345', {
-    name: 'Max Hedgehog',
-    email: 'max@hedgehogmail.com',
-    // ... any other user properties
-}
-```
-
-You'll usually want to call `identify` every time your application initially loads, or directly after log in if a user first landed on your website while logged out.
-Typically you'll want this to be the first call you make to PostHog - before sending any events with `capture` – so making the call _as soon as you can determine the `distinct_id` of the user_ is best.
-
-There's no gotcha's with calling `identify` multiple times for the same user **as long as you continue to pass the same `distinct_id`**, so feel free to call it multiple times throughout a session.
-
-## 4. Setting user properties
-
-In addition to adding extra data to specific events like we discussed earlier, it's also very common to want to also set properties on users as well.
-
-As shown above, each time you call `identify`, you can pass in a `properties` object which will be set on the user. We suggest passing in all the user properties you have available each time they login, as this will ensure that their user profile on PostHog is up to date.
-
-Tracking properties on users becomes incredibly useful when we start creating insights, which we'll cover in the next guide.
-
-In PostHog, we can also include special `$set` and `$set_once` properties on events to set properties for whichever user is sending the event.
-
-### What is the difference between `$set` and `$set_once`?
-
-If a `$set` property is included on an event, it will replace whatever value may have already been set on a person for a specific property.
-In contrast, `$set_once` will only set the property if it has never been set before.
-
-`$set` is typically used for properties that you always want up-to-date information for (email, current plan, etc.), while `$set_once` is typically only used for information related to when a user first is seen (first URL they viewed, first time they logged in).
-
-Note: that we ignore the event timestamps and just process everything at ingestion time.
-
-In summary: `set` always overrides, `set_once` only writes when the property doesn't already exist on the user.
-
-For example:
-
-```js
-posthog.people.set({ plan: 'free_trail' })
-posthog.people.set({ plan: 'premium' })
-
-// { plan: 'premium' }
-
-posthog.people.set_once({ initial_location: 'London' })
-posthog.people.set_once({ initial_location: 'Rome' })
-
-// { initial_location: 'London' }
-```
-
-## 5. Merging users
-
-Sometimes you need to merge users (typically in the backend), there are two options:
-1. alias, which is safeguarded to not merging already identified users into others
-2. merge, with no safeguards. We don't recommend using this in your code, but rather as a one-off manually for recovering from implementation problems. Note that a common error is merging users together who shouldn't be and that's not reversible.
-
-For example using the posthog python library:
-
-```py
-posthog.alias('user-id', 'non-identified-id')
-
-posthog.capture('user-id', '$merge_dangerously', {'alias': 'second-user-id'})
-```
-
-## Considerations
-
-Identifying users is a powerful feature, but it also has the potential to create problems if misused. 
-
-An important mistake to avoid is using non-unique distinct IDs to identify users. Two common ways in which this can happen are:
-
-- Your logic for generating IDs does not generate sufficiently strong IDs and you can end up with a clash where 2 users have the same ID.
-
-- There's a bug, typo, or mistake in your code leading to most or all users being identified with generic IDs like `null`, `true`, or `distinctId`.
-
-All of the above scenarios are highly problematic, as they will cause distinct users to be merged together in PostHog.
-
-While implementing analytics with PostHog, make sure you avoid above pitfalls to maintain data integrity.
-
-PostHog also has a few built-in protections stopping the most common threats to data integrity:
-
-- We do not allow identifying users with the following IDs (case insensitive):
-    - `anonymous`
-    - `guest`
-    - `distinctid`
-    - `distinct_id`
-    - `id`
-    - `not_authenticated`
-    - `email`
-    - `undefined`
-    - `true`
-    - `false`
-- We do not allow identifying users with the following IDs (case sensitive):
-  - `[object Object]` 
-  - `NaN`
-  - `None`
-  - `none`
-  - `null`
-  - `0`
-- We do not allow identifying users with empty space strings of any length (`' '`, `'       '`, etc.)
-- We do not allow merging from an already identified user (`distinct_id` user can be previously identified, but `anon_distinct_id` and `alias` user cannot).
-
-If we encounter an `$identify` or `$create_alias` event with one of the above problems, the following will happen:
-
-- We process the event normally (it will be ingested and show up in the UI)
-- We refuse to merge users and an ingestion warning will be logged (see [ingestion warnings](/manual/data-management#ingestion-warnings) for more details).
-- The event will be only be tied to user behind the first passed `distinct_id`
-
-## Signup flow with frontend and backend
-
-To use PostHog effectively, we want all of the events tied to the same user to be tied to the same `person_id`.
-
-You may trigger some events on the frontend and the backend when a user signs up to your service. The key is to make sure that **both frontend and backend use the same** `distinctId` **at least once.**
-
-### Example login flow
-
-On the backend (example with Node.JS) you receive the signup / login code and track the user
-
-```js
-const user = await createUser();
-posthog.identify({
-  distinctId: user.id,
-  properties: {
-    email: user.email
-  }
-})
-```
-
-On the frontend you need to have the same ID passed down in order to link the two users
-```js
-const user = await fetch("/api/users/@me")
-posthog.identify(user.id)
-```
-
-If you use a different identifier or multiple identifiers, be sure to alias the two IDs together for example on the backend with `posthog-node`
-```js
-posthog.alias({
-    distinctId: user.id,
-    alias: user.alternativeId,
-})
-```
+For detailed information on how to use identify in PostHog, check out our [identify docs](/docs/data/identify).

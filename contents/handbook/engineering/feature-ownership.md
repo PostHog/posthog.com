@@ -23,17 +23,16 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Actors Modal | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/actors-modal</span>  |
 | Annotations | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
 | API Structure | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team | <span class="lemon-tag gh-tag">feature/api-structure</span> |
-| Application Performance Monitoring (APM) | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
 | Async migrations | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Billing | [Team Growth][Team Growth]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
-| Cohorts | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
-| Correlation Analysis | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
+| Cohorts | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
+| Correlation Analysis | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
 | Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
-| Experimentation | [Team Experimentation][Team Experimentation] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
-| Feature Flags | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
+| Experimentation | [Team Feature Success][Team Feature Success] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
+| Feature Flags | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Funnels | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
 | Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | Ingestion | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
@@ -42,11 +41,11 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Paths | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
-| Persons | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
+| Persons | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
 | Platform (US + EU) | [Team Infrastructure][Team Infrastructure] | <span class="lemon-tag gh-tag">feature/platform</span>  |
 | Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
-| Recordings | [Team Session Recording][Team Session Recording]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
+| Recordings | [Team Monitoring][Team Monitoring]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
 | Retention | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/retention</span> |
 | Saved Insights | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/saved-insights</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
@@ -54,8 +53,9 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SSO | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
 | Stickiness | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/stickiness</span>  |
-| Toolbar | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
+| Toolbar | [Team Monitoring][Team Monitoring]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Trends | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/trends</span>  |
+| Web Analytics                            | [Team Web Analytics][Team Web Analytics]                                                                   | <span class="lemon-tag gh-tag">feature/web-analytics</span>        |
 
 
 ## Why did we establish feature owners?
@@ -67,7 +67,6 @@ Some of the features we are building may exist in other products already. It is 
 - We're highly unlikely to overtake everyone else if we just build the open source version of everything that is already out there.
 - We may expose ourselves to legal risk/challenges from those companies, especially if they can point to a public issue where we have said 'let's copy X'.
 
-[@alexkim205]: https://github.com/alexkim205
 [@EDsCODE]: https://github.com/EDsCODE
 [@liyiy]: https://github.com/liyiy
 [@macobo]: https://github.com/macobo
@@ -79,6 +78,7 @@ Some of the features we are building may exist in other products already. It is 
 [@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
 [Team Product Analytics]: /handbook/small-teams/product-analytics
+[Team Web Analytics]: /handbook/small-teams/web-analytics
 [Team Monitoring]: /handbook/small-teams/monitoring
 [Team Pipeline]: /handbook/small-teams/pipeline
 [Team Infrastructure]: /handbook/small-teams/infrastructure

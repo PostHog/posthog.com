@@ -4,13 +4,15 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IContributor } from './types'
 
-export const ContributorImage = ({ image, name, className = '', imgClassName = '' }) => {
+export const ContributorImageSmall = ({ image, name, className = '', imgClassName = '' }) => {
     const gatsbyImage = image && getImage(image)
     return (
         <div
             className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
         >
-            {gatsbyImage ? (
+            {typeof image === 'string' ? (
+                <img className={`rounded-full bg-gray-accent dark:bg-gray-accent-dark ${imgClassName}`} src={image} />
+            ) : gatsbyImage ? (
                 <GatsbyImage
                     imgClassName={`rounded-full ${imgClassName}`}
                     image={gatsbyImage}
@@ -33,7 +35,22 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
     )
 }
 
-export const Contributor = ({
+export const ContributorImage = ({ image, name, className = '', imgClassName = '' }) => {
+    const gatsbyImage = image && getImage(image)
+    return (
+        <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
+            {typeof image === 'string' ? (
+                <img className="w-24 h-24" src={image} />
+            ) : gatsbyImage ? (
+                <GatsbyImage image={gatsbyImage} alt={name} className="w-24 h-24" />
+            ) : (
+                ''
+            )}
+        </figure>
+    )
+}
+
+export const ContributorSmall = ({
     image,
     name,
     url,
@@ -43,12 +60,41 @@ export const Contributor = ({
     const Container = url ? Link : 'div'
     return (
         <Container {...(url ? { to: url, state } : {})} className="flex space-x-2 items-center no-underline">
-            <ContributorImage
+            <ContributorImageSmall
                 className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
                 image={image}
                 name={name}
             />
             {text && <span className="author text-[14px] font-semibold">{name}</span>}
+        </Container>
+    )
+}
+
+export const Contributor = ({
+    image,
+    name,
+    url,
+    state,
+    text = false,
+    role,
+}: IContributor & { text?: boolean; url?: string }) => {
+    const Container = url ? Link : 'div'
+    return (
+        <Container
+            {...(url ? { to: url, state } : {})}
+            className="flex bg-accent dark:bg-accent-dark border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+        >
+            <div className="pr-20">
+                <div className="flex flex-col justify-between px-4 py-2 w-full">
+                    <h3 className="mb-0 text-base leading-tight">{text && <span>{name}</span>}</h3>
+                    {role && <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{role}</p>}
+                </div>
+            </div>
+            <ContributorImage
+                className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
+                image={image}
+                name={name}
+            />
         </Container>
     )
 }
@@ -68,7 +114,7 @@ export default function Contributors({
                 <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 text-sm flex space-x-1 items-center">
                     <span>Contributors</span>
                     <span
-                        className={`w-[20px] h-[20px] bg-black/40 dark:bg-white/40 flex items-center justify-center rounded-full ${
+                        className={`w-[24px] h-[24px] bg-black/40 dark:bg-white/40 flex items-center justify-center ${
                             contributors.length > maxContributorsToShow ? 'text-xs' : ''
                         }`}
                     >
@@ -93,11 +139,11 @@ export default function Contributors({
                                     )}
                                 >
                                     <span className="relative">
-                                        <Contributor image={image} name={name} url={url} state={state} />
+                                        <ContributorSmall image={image} name={name} url={url} state={state} />
                                     </span>
                                 </Tooltip>
                             ) : (
-                                <Contributor image={image} name={name} url={url} state={state} text />
+                                <ContributorSmall image={image} name={name} url={url} state={state} text />
                             )}
                         </li>
                     )

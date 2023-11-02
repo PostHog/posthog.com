@@ -23,7 +23,7 @@ Make sure you're using both PostHog and Sentry as JS modules. You'll need to rep
 - `'your organization'` will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
 - `project-id` will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
 
-```js
+```js-web
 import posthog from 'posthog-js'
 import * as Sentry from '@sentry/browser'
 

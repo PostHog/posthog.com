@@ -8,11 +8,9 @@ showTitle: true
 import Disclaimer from './\_snippets/disclaimer.mdx'
 import Sunset from '../self-host/\_snippets/sunset-disclaimer.mdx'
 
-> **This page covers our open-source Docker compose deployment**, which is available under a MIT license, [without guarantee](/docs/self-host/open-source/disclaimer). We are currently in the process of [sunsetting our paid Kubernetes deployment](/blog/sunsetting-helm-support-posthog).
+> **This page covers our open-source Docker compose deployment**, which is available under a MIT license, [without guarantee](/docs/self-host/open-source/disclaimer). We [sunset our paid Kubernetes deployment](/blog/sunsetting-helm-support-posthog) and no longer offer support for them.
 
-Our MIT-licensed Docker compose deployment is a great for internal tools, or evaluating features without vendor approval. It's also great for hobby projects which don't need advanced tools. 
-
-Want no hosting cost or hassle? The easiest way to get started with PostHog is to use [PostHog Cloud](https://app.posthog.com/signup), which comes with a generous free tier.
+Our MIT-licensed Docker compose deployment is best suited to internal tools, or evaluating features without vendor approval. It's also great for hobby projects which don't need advanced tools. For all other use cases, we recommend you use [PostHog Cloud](https://app.posthog.com/signup), which comes with a generous free tier.
 
 ## Requirements
 
@@ -21,7 +19,7 @@ Want no hosting cost or hassle? The easiest way to get started with PostHog is t
 -   You have set up an `A` record to connect a custom domain to your instance.
     -   PostHog will automatically create an SSL certificate for your domain using LetsEncrypt
 
-New deployments of PostHog open source using Kubernetes are no longer supported.
+New deployments of PostHog's paid open source product using Kubernetes are no longer supported.
 
 ## Configuration
 
@@ -42,6 +40,8 @@ To get started, all we need to do is run the following command, which will spin 
 ```
 
 You'll now be asked to provide the release tag you would like to use, as well as the domain you have connected to your instance.
+
+> **This release tag is the [DockerHub tag](https://hub.docker.com/r/posthog/posthog/tags)** and doesn't refer to the [sunsetted Helm chart releases](https://posthog.com/blog/sunsetting-helm-support-posthog)
 
 Once everything has been setup, you should see the following message:
 
@@ -114,6 +114,8 @@ To upgrade, you can run the `upgrade-hobby` script from the PostHog repo.
 
 > **Warning:** Before upgrading, make sure you have created back-ups of all your data!
 
+Our recommendation is to keep your PostHog deployment up-to-date. While we avoid breaking changes wherever possible we may sometimes deprecate or add features that require you to update to the latest version. You can track our latest updates in [the changelog](/changelog).
+
 ## Migrating
 
-If your server is struggling, you can either increase your instance size or move to [PostHog Cloud](/docs/migrate/migrate-between-posthog-instances) for a hands-off experience
+If your server is struggling, you can either increase your instance size or move to [PostHog Cloud](/docs/migrate/migrate-to-cloud#option-1-for-events-migration-self-hosted-migration-tool-alpha) for a hands-off experience

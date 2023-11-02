@@ -1,0 +1,239 @@
+---
+title: "PostHog: An all-in-one alternative to Google Analytics"
+showTitle: false
+showSidebar: true
+width: lg
+images:
+    - './images/cat_li.png'
+    - './templates/thumbnails/website-dashboard.png'
+    - './templates/thumbnails/utm-dashboard.png'
+    - './templates/thumbnails/real-time-dashboard.png'
+    - './templates/thumbnails/support-dashboard.png'
+    - './images/ursula.png'
+    - './images/funnels.png'
+---
+
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+import { FeatureSnapshot } from 'components/FeatureSnapshot'
+import { StaticImage } from 'gatsby-plugin-image'
+import funnel from './images/funnels.png'
+
+<Hero
+    title="The <span style='color: #f64e00;'>all-in-one</span> alternative to Google Analytics"
+    subtitle="Get beyond mere analytics with session replays, feature flags, A/B experiments and more."
+    ctas={[
+        <CallToAction width="56" to="https://app.posthog.com/">
+            Get started for free
+        </CallToAction>
+    ]}
+/>
+
+<div>
+<br>
+</br>
+<p className="font-semibold mt-2 md:mt-3 text-center pb-5 pt-5 ">
+On July 1st 2023, Google sunset Universal Analytics and forced users to beging using Google Analytics 4 (GA4), without offering a way to migrate existing data. The new version of Google Analytics tracks events rather than sessions and offers an improved interface. Yet, while GA4 offers a more modern approach to tracking user activity, it still lags behind other tools - especially in terms of enabling teams to act on the data the discover.
+</p>
+</div>
+
+<Section>
+<h2 className="text-3xl lg:text-5xl text-center">Why is PostHog better than Google Analytics?</h2>
+<h3 className="m-0 font-semibold mt-2 md:mt-3 text-center pb-5">PostHog does more than collect basic web metrics. It's an all-in-one tool for building better products.</h3>
+<FeatureSnapshot
+        image={funnel}
+        features={[
+            <>
+                <strong>Product, not web analytics.</strong> Track any user event and analyze them with six different insight types - or use SQL to create custom reports.
+            </>,
+            <>
+                <strong>Session replays and surveys.</strong> Watch user sessions and gather feedback directly, so you get the full picture in one place.
+            </>,
+            <>
+                <strong>Feature flags and A/B experiments.</strong> Act on your data by creating experiments, observing results and deploying improvements all in one platform.
+            </>,
+        ]}
+    />
+<h5 className="text-center pt-5">New to product analytics? <a href="/blog/google-analytics-to-posthog">Check our guide for Google Analytics users</a></h5>
+</Section>
+
+<section className="my-24 px-5">
+  <div className="max-w-screen-2xl mx-auto">
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Get started in less than 5 minutes</h3>
+    <p className="m-0 font-semibold mt-2 md:mt-3 text-center pb-5">Install the PostHog snippet to start capturing data, then leverage the following dashboard templates to discover insights immediately.</p>
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 sm:after:block after:hidden sm:before:block lg:before:hidden lg:after:hidden before:hidden">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[1])} alt="landing page template" objectFit="contain" style={{ maxWidth: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4"><a href="/templates/landing-dashboard">Landing page report</a></h5>
+          <p class="m-0 text-[15px]">Like a GA report, this template tracks how landing pages perform.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[2])} alt="UTM tracking" objectFit="contain" style={{ maxWidth: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4"><a href="/templates/advertising-dashboard">Advertising report</a></h5>
+          <p class="m-0 text-[15px]">Track UTMs and channel attribution in a streamlined dashboard template.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[3])} alt="Website traffic report" objectFit="contain" style={{ maxWidth: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4"><a href="/templates/website-dashboard">Traffic report</a></h5>
+          <p class="m-0 text-[15px]">Help content marketers understand which articles perform best.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[4])} alt="growth analytics" objectFit="contain" style={{ maxWidth: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4"><a href="/templates/growth-dashboard">Growth report</a></h5>
+          <p class="m-0 text-[15px]">From DAU to ARR, this template has everything a growth team needs.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section className="my-24 px-5">
+
+  <div class="max-w-screen-lg mx-auto font-bold border-dashed">
+    
+    <blockquote class="text-xl text-primary dark:text-primary-dark m-0 quote md:text-[32px] md:leading-tight">
+      <span class="leading-tight">
+        "Google Analytics gives a broad overview, but to get really deep into the data, to see what users are actually clicking, where they are hovering? <span class="text-red">That’s where PostHog comes in.</span>”
+      </span>
+      <footer class="flex items-center space-x-8 mt-9">
+        <GatsbyImage image={getImage(props?.images[0])} alt="Cat Li" objectFit="contain" style={{ maxWidth: 100 }} />
+        <span class="flex flex-col"><cite class="not-italic text-lg md:text-xl">Cat Li</cite><cite class="not-italic font-medium text-lg opacity-50 md:text-lg">Product &amp; Engineering Lead, <span class="inline-block">Y Combinator</span></cite></span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<Section cols={2}>
+    <div>
+        <GatsbyImage image={getImage(props?.images[5])} alt="GA4 illegal?" objectFit="contain" style={{ maxWidth: 700 }} />
+    </div>
+    <div>
+        <h5>
+            <span className="text-red block text-2xl">Is Google Analytics illegal?</span> (PostHog definitely isn't.)
+        </h5>
+        <p>
+            If your country is bound by GDPR then it may be illegal to use GA4. Many governments, including Sweden, France, Italy and Germany, are issuing hefty fines, and encouraging teams to use alternative tools.{' '}
+        </p>
+        <CallToAction href="https://www.isgoogleanalyticsillegal.com/">Check local rulings</CallToAction>
+    </div>
+</Section>
+
+<Section>
+<h2 className="text-3xl lg:text-5xl text-center">Reasons to switch to PostHog from Google Analytics 4</h2>
+<div className="overflow-x-auto -mx-5" style="display: flex; justify-content: center;">
+<table className="w-400 mt-4" style="max-width: 1100px; font-size: 15px;">
+    <thead>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td className="w-1/12"></td>
+            <td className="w-1/12 text-center"><strong>Google Analytics (GA4)</strong></td>
+            <td className="w-1/12 text-center bg-gray-accent bg-opacity-50"><strong>PostHog</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Free to get started</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Open source platform</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>GDPR ready</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Events-based tracking</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Website analytics</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Dashboard and report templates</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Funnels analysis</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Path templates</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>SQL access</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>A/B experimentation</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Session replays</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Feature flags</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Requires 3rd party cookies</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div style="display: flex; justify-content: center;">
+<p><a href="/blog/tags/comparisons">Explore more product comparisons</a></p>
+</div>
+</Section>
+
+<Section cols={3}>
+    <div>
+        <h5>
+            <span className="text-yellow block text-2xl">Get deeper into your data</span> and create tailored reports
+        </h5>
+        <p>
+            PostHog has all the GA4 tools you already know, such as funnels, paths and retention charts, but also enables you to create custom insights using SQL.
+        </p>
+    </div>
+    <div>
+        <h5>
+            <span className="text-yellow block text-2xl">Transparent pricing</span> with a generous free allowance
+        </h5>
+        <p>
+          Get your first million events for free, every month - and then only pay based on usage. We make it easy to figure out exactly how much you can expect to pay.  
+        </p>
+    </div>
+    <div>
+        <h5>
+            <span className="text-yellow block text-2xl">Do more with your discoveries</span> without switching tools
+        </h5>
+        <p>
+            Use additional tools, such as A/B experimentation and feature flags, to test changes and improve your website without needing to redeploy.
+        </p>
+    </div>
+</Section>
+
+<div className="text-center">
+
+<h2 className="text-3xl lg:text-5xl pb-1">Ready to get started?</h2>
+<h3 className="m-0 font-semibold mt-2 md:mt-3 text-center pb-5">Get your first million events for free, every month.</h3>
+<CallToAction href="app.posthog.com/signup">Get started for free</CallToAction>
+
+</div>

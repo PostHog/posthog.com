@@ -35,20 +35,17 @@ export const useNav = () => {
             : []),
         {
             name: 'Roadmap',
+            url: '/roadmap',
+        },
+        {
+            name: 'Changelog',
             url: '',
-            children: [
-                { name: 'Roadmap', url: '/roadmap' },
-                {
-                    name: 'Changelog',
-                    url: '',
-                    children: roadmapYears.group
-                        .sort((a, b) => Number(b.fieldValue) - Number(a.fieldValue))
-                        .map(({ fieldValue: year }) => ({
-                            name: year,
-                            url: `/roadmap/changelog/${year}`,
-                        })),
-                },
-            ],
+            children: roadmapYears.group
+                .sort((a, b) => Number(b.fieldValue) - Number(a.fieldValue))
+                .map(({ fieldValue: year }) => ({
+                    name: year,
+                    url: `/changelog/${year}`,
+                })),
         },
         {
             name: 'Contributors',

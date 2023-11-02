@@ -1,0 +1,11 @@
+When a user starts browsing your website or app, PostHog automatically assigns them an **anonymous ID**, which is stored locally. This enables us to track anonymous users – even across different sessions.
+
+> **Note:** depending on your [persistence configuration](/docs/libraries/js#persistence), the anonymous ID may not be stored, and thus regenerated across sessions.
+
+By calling `identify` with a `distinct_id` of your choice (usually the user's ID in your database, or their email), you link the anonymous ID and distinct ID together.
+
+Thus all past and future events made with that anonymous ID are now associated with the distinct ID. This enables you to do things like associate events with a user from before they log in for the first time, or associate their events across different devices or platforms.
+
+> **Using `identify` in the backend:**
+>
+> Although it is technically possible to call `identify` using our backend SDKs, it is typically most useful in frontends. This is because there is no concept of anonymous sessions in the backend SDKs.

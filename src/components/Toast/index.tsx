@@ -12,7 +12,7 @@ export const Toast = (props: IToast & { index: number }): JSX.Element => {
             initial={{ translateY: '100%', opacity: 0 }}
             animate={{ translateY: `-${10 * (toasts.length - index)}px`, opacity: 1 }}
             exit={{ opacity: 0 }}
-            className={`bg-white py-2 px-4 rounded-md shadow-lg border border-gray-accent-light border-dashed mt-2 font-semibold text-sm flex items-center fixed max-w-[350px] w-full bottom-4 right-4 space-x-4`}
+            className={`bg-accent dark:bg-accent-dark text-primary dark:text-primary-dark py-2 px-4 rounded-md shadow-lg border border-light dark:border-dark mt-2 font-semibold text-sm flex items-center fixed max-w-[350px] w-full bottom-4 right-4 space-x-4`}
         >
             <span className="flex-shrink-0">
                 {error ? <Close opacity={1} className="w-3 h-3 text-red" /> : <Check2 className="w-4 h-4 text-green" />}

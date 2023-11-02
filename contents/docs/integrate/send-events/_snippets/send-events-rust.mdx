@@ -1,0 +1,34 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
+
+```rust
+let mut event = Event::new("user_signed_up", "distinct_id_of_the_user");
+client.capture(event).unwrap();
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```rust
+let mut event = Event::new("user_signed_up", "distinct_id_of_the_user");
+
+event.insert_prop("login_type", "email").unwrap();
+event.insert_prop("is_free_trial", true).unwrap();
+
+client.capture(event).unwrap();
+```
+
+### Batching events
+
+To capture multiple events at once, use `batch()`:
+
+```rust
+let event1 = posthog_rs::Event::new("event 1", "distinct_id_of_user_A");
+let event2 = posthog_rs::Event::new("event 2", "distinct_id_of_user_B");
+
+client.capture_batch(vec![event1, event2]).unwrap();
+```

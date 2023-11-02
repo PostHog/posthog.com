@@ -12,20 +12,6 @@ export default function Integration({ data }) {
         <>
             <SEO title={`${name} - PostHog`} description={description} image={logo?.publicURL} />
             <Layout>
-                <div className="px-4 sticky top-[-2px] bg-tan dark:bg-primary z-10">
-                    <Breadcrumbs
-                        crumbs={[
-                            {
-                                title: 'Integrations',
-                                url: '/integrations',
-                            },
-                            {
-                                title: name,
-                            },
-                        ]}
-                        darkModeToggle
-                    />
-                </div>
                 <div className="max-w-screen-sm mx-auto px-4 flex flex-col md:flex-row items-start mt-16 md:mt-20">
                     <section className="article-content plugin-content">
                         <div dangerouslySetInnerHTML={{ __html: markdown?.childMarkdownRemark?.html }} />

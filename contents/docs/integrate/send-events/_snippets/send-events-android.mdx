@@ -1,0 +1,36 @@
+import NamingTip from "./naming-tip.mdx" 
+import SettingProperties from "./setting-properties-text.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
+
+```java
+PostHog.with(this)
+       .capture("user_signed_up");
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```java
+PostHog.with(this)
+       .capture("user_signed_up", new Properties()
+              .putValue("login_type", "email")
+              .putValue("is_free_trial", true));
+```
+
+### Capturing screen views
+
+With [`recordScreenViews()`](/docs/libraries/android#all-configuration-options), PostHog will try to record all screen changes automatically.
+
+If you want to manually send a new screen capture event, use the `screen` function.
+
+This function requires a `name`. You may also pass in an optional `properties` object.
+
+```java
+PostHog.with(this)
+       .screen("Dashboard", new Properties()
+                                  .putValue("background", "blue")
+                                  .putValue("hero", "superhog"));
+```

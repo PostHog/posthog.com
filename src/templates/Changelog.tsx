@@ -11,47 +11,38 @@ import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { Heading } from 'components/Heading'
 import { ZoomImage } from 'components/ZoomImage'
+import { companyMenu } from '../navs'
+import dayjs from 'dayjs'
+import { navigate } from 'gatsby'
 
-const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-]
-
-const Select = ({ onChange, values }) => {
+const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
     return (
         <div className="relative">
             <Listbox onChange={onChange} defaultValue={defaultValue}>
-                <Listbox.Button className="py-2 px-4 bg-white dark:bg-gray-accent-dark rounded-md text-left shadow-md flex justify-between items-center font-semibold text-sm">
+                <Listbox.Button className="py-2 px-4 bg-accent dark:bg-accent-dark rounded text-left border border-light dark:border-dark flex justify-between items-center font-semibold text-sm">
                     {({ value }) => (
                         <>
-                            <span>{value.label}</span>
+                            <span>{other.value || value.label}</span>
                             <Chevron className="w-2.5 ml-2 opacity-50" />
                         </>
                     )}
                 </Listbox.Button>
-                <Listbox.Options className="absolute right-0 min-w-full shadow-md bg-white dark:bg-gray-accent-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-gray-accent-light/50">
+                <Listbox.Options className="absolute right-0 min-w-full shadow-md bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-light dark:divide-dark">
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
-                            {({ selected }) => (
-                                <li
-                                    className={`py-2 px-4 text-sm cursor-pointer hover:bg-gray-accent-light/40 dark:hover:bg-gray-accent-light/20 transition-colors whitespace-nowrap ${
-                                        selected ? 'bg-gray-accent-light/80 dark:bg-gray-accent-light/40' : ''
-                                    }`}
-                                >
-                                    {value.label}
-                                </li>
-                            )}
+                            {({ selected }) => {
+                                console.log(other.value, value.label)
+                                return (
+                                    <li
+                                        className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
+                                            (other.value ? value.label === other.value : selected) ? 'font-bold' : ''
+                                        }`}
+                                    >
+                                        {value.label}
+                                    </li>
+                                )
+                            }}
                         </Listbox.Option>
                     ))}
                 </Listbox.Options>
@@ -60,15 +51,18 @@ const Select = ({ onChange, values }) => {
     )
 }
 
-export default function Changelog({ data: { allRoadmap, filterOptions } }) {
+export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
 
-    const changesByMonth = groupBy(changes, (node) => {
-        const month = new Date(node.date).getMonth()
-        return months[month]
+    const changesByDate = groupBy(changes, (node) => {
+        const date = new Date(node.date)
+        return dayjs().month(date.getMonth()).year(date.getFullYear())
     })
-    const tableOfContents = Object.keys(changesByMonth).map((month) => ({ url: month, value: month, depth: 0 }))
+    const tableOfContents = Object.keys(changesByDate).map((date) => {
+        const month = dayjs(date).format('MMMM')
+        return { url: month, value: month, depth: 0 }
+    })
 
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
@@ -95,8 +89,13 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
     }, [filters])
 
     return (
-        <CommunityLayout title="Changelog" tableOfContents={tableOfContents}>
-            <section className="mb-12 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
+        <CommunityLayout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children[2]}
+            title="Changelog"
+            tableOfContents={tableOfContents}
+        >
+            <section className="mb-4 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
                 <div>
                     <h1 className="m-0 text-3xl">Changelog</h1>
                     <p className="m-0 mt-2">
@@ -104,6 +103,16 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                     </p>
                 </div>
                 <div className="flex space-x-2 items-center">
+                    <Select
+                        value={pageContext.year}
+                        onChange={({ value }) => navigate(value)}
+                        values={[
+                            { label: 2023, value: '/changelog/2023' },
+                            { label: 2022, value: '/changelog/2022' },
+                            { label: 2021, value: '/changelog/2021' },
+                            { label: 2020, value: '/changelog/2020' },
+                        ]}
+                    />
                     {Object.keys(filterOptions).map((filter) => {
                         const { field } = filterOptions[filter][0] ?? {}
                         if (!field) return null
@@ -117,15 +126,18 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                     })}
                 </div>
             </section>
-            <section className="grid gap-y-12">
-                {Object.keys(changesByMonth).map((month) => {
-                    const nodes = changesByMonth[month]
+            <section className="grid article-content">
+                {Object.keys(changesByDate).map((date) => {
+                    const nodes = changesByDate[date]
                     return (
-                        <div key={month} id={slugify(month)}>
-                            <h2 className="pb-2 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark mb-8 text-2xl">
-                                {month}
-                            </h2>
-                            <ul className="list-none m-0 p-0 grid gap-y-12">
+                        <div key={date} id={slugify(dayjs(date).format('MMMM'))} className="flex gap-4">
+                            <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
+                                <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
+                                    <h2 className="!text-sm font-bold uppercase !m-0">{dayjs(date).format('MMM')}</h2>
+                                    <div className="text-xs font-semibold">{dayjs(date).format('YYYY')}</div>
+                                </div>
+                            </div>
+                            <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
                                 {nodes.map(({ description, media, topic, teams, title, cta }) => {
                                     const team = teams?.data[0]
                                     const topicName = topic?.data?.attributes.label
@@ -135,12 +147,14 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                                     return (
                                         <li key={title}>
                                             {topicName && (
-                                                <p className="m-0 font-bold flex space-x-2 mb-3 opacity-80">
-                                                    {Icon && <Icon className="w-5" />}
-                                                    <span>{topicName}</span>
+                                                <p className="font-bold flex mt-3 !-mb-4 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
+                                                    <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
+                                                        {Icon && <Icon className="w-5" />}
+                                                        <span>{topicName}</span>
+                                                    </span>
                                                 </p>
                                             )}
-                                            <Heading as="h3" id={slugify(title, { lower: true })} className="mt-0 mb-1">
+                                            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
                                                 {title}
                                             </Heading>
                                             {teamName && (
@@ -170,7 +184,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                                                 <Markdown>{description}</Markdown>
                                             </div>
                                             {cta && (
-                                                <CallToAction type="secondary" size="sm" to={cta.url}>
+                                                <CallToAction type="secondary" size="md" to={cta.url}>
                                                     {cta.label}
                                                 </CallToAction>
                                             )}
@@ -188,7 +202,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
 
 export const query = graphql`
     query ChangelogQuery($year: Int!) {
-        allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: 2023 }, complete: { eq: true } }) {
+        allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year }, complete: { eq: true } }) {
             nodes {
                 date
                 description

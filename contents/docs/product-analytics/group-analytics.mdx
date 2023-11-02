@@ -6,13 +6,12 @@ availability:
     free: none
     selfServe: full
     enterprise: full
-related:
-    - ../../tutorials/tracking-teams.md
 ---
 import JSGroupsIntro from "../\_snippets/groups-intro.mdx"
 import JSGroupsVSCohorts from "../\_snippets/groups-vs-cohorts.mdx"
 import JSCreateGroups from "../\_snippets/how-to-create-groups.mdx"
 import JSSetGroupProperties from "../\_snippets/setting-group-properties.mdx"
+import JSLinkEventsToGroups from "../\_snippets/how-to-link-events-to-groups.mdx"
 
 <JSGroupsIntro />
 
@@ -24,9 +23,64 @@ import JSSetGroupProperties from "../\_snippets/setting-group-properties.mdx"
 
 <JSCreateGroups />
 
-### Setting and updating group properties
+## How to set group properties
 
 <JSSetGroupProperties />
+
+## How to capture group events
+
+<JSLinkEventsToGroups />
+
+### Advanced (server-side only): Capturing group events without a user
+
+If you want to capture group events but don't want to associate them with a specific user, we recommend using a single static string as the distinct ID to capture these events. This can be anything you want, as long as it's the same for every group event:
+
+<MultiLanguage >
+
+```node
+posthog.capture({
+    event: 'group_event_name',
+    distinctId: 'static_string_for_group_events',
+    groups: { company: 'company_id_in_your_db' }
+})
+```
+
+```python
+posthog.capture('static_string_for_group_events', 
+    'group_event_name', 
+    groups={'company': 'company_id_in_your_db'}
+)
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "static_string_for_group_events",
+    Event: "group_event_name",
+    Groups: posthog.NewGroups().
+    Set("company", "company_id_in_your_db").
+})
+```
+
+```php
+PostHog::capture(array(
+    'distinctId' => 'static_string_for_group_events',
+    'event' => 'group_event_name',
+    '$groups' => array("company" => "company_id_in_your_db")
+));
+```
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "group_event_name",
+    "distinct_id": "static_string_for_group_events",
+    "properties": {
+        "$groups": {"company": "company_id_in_your_db"}
+    }
+}' <ph_instance_address>/capture/
+```
+
+</MultiLanguage >
 
 ## Using groups in PostHog
 
@@ -76,7 +130,7 @@ You also need to update your event tracking code for the feature flag to determi
 
 <MultiLanguage>
 
-```js
+```js-web
 // Make sure you have called posthog.group() earlier in that session
 
 if (posthog.isFeatureEnabled('new-groups-feature')) {
@@ -85,18 +139,18 @@ if (posthog.isFeatureEnabled('new-groups-feature')) {
 ```
 
 ```python
-if posthog.feature_enabled("new-groups-feature", "[distinct id]", groups={"company": "company_id_in_your_db"}):
+if posthog.feature_enabled("new-groups-feature", "user_distinct_id", groups={"company": "company_id_in_your_db"}):
     # Do something
 ```
 
 ```php
-if (PostHog::isFeatureEnabled('new-groups-feature', '[distinct id]', false, array("company" => "company_id_in_your_db"))) {
+if (PostHog::isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, array("company" => "company_id_in_your_db"))) {
     // Do something
 }
 ```
 
 ```node
-const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', '[distinct id]', false, { company: 'company_id_in_your_db' })
+const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, { company: 'company_id_in_your_db' })
 
 if (isFlagEnabled) {
     // Toggle feature-flag specific behavior
@@ -119,7 +173,7 @@ You can change how group types are displayed in the insights interface and throu
     -   Lifecycle - Expected soon.
     -   User paths - These only support user level analytics.
 -   Only groups with known properties are shown under 'Persons & groups'.
--   Currently there is no functionality within the app to delete groups. If you need to delete a group for privacy or security reasons, please [use the support modal](https://app.posthog.com/home#supportModal=support%3Adata_management).```
+- Currently there is no functionality within the app to delete groups. If you need to delete a group for privacy or security reasons, please [use the support modal](https://app.posthog.com/home#supportModal=support%3Adata_management).
 
 ## Further reading
 

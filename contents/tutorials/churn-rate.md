@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-10
-featuredImage: ../images/tutorials/banners/tutorial-15.png
-tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions']
+tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions', 'product analytics']
 ---
 
 - **Level:** Easy 🦔
@@ -87,6 +86,3 @@ Now we’ve targeted churn on multiple fronts, both by understanding what users 
 - [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
 - [The most useful B2B SaaS product metrics](/blog/b2b-saas-product-metrics)
 - [Finding your North Star metric and why it matters](/blog/north-star-metrics)
-- [How to get Stripe payment and revenue data](/tutorials/stripe-payment-data)
-
-<NewsletterTutorial compact/>

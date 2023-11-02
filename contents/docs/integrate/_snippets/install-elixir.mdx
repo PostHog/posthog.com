@@ -1,0 +1,21 @@
+> This library was built by the community and is not maintained by the PostHog core team.
+
+The package can be installed by adding `posthog` to your list of dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:posthog, "~> 0.1"}
+  ]
+end
+```
+
+### Configuration
+
+```elixir
+config :posthog,
+  api_url: "<ph_instance_address>",
+  api_key: "<ph_project_api_key>"
+```
+
+Optionally, you can pass in a `:json_library` key. The default JSON parser is Jason.

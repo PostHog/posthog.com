@@ -1,0 +1,150 @@
+---
+title: Autocapture
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+> **Note:** Autocapture is available for our [JavaScript Web](/docs/libraries/js), [React](/docs/libraries/react), and [React Native](/docs/libraries/react-native) SDKs.
+
+PostHog can capture frontend events automatically using autocapture, such as any `click`, `change of input`, or submission associated with a `button`, `form`, `input`, `select`, or `textarea`.
+
+This means you do not need to manually instrument tracking for individual components, links, buttons, or other parts of your product.
+
+Autocapture is **enabled by default**. 
+
+ ## Disabling autocapture
+
+You can disable autocapture completely by setting `autocapture: false` in the [config](/docs/libraries/js#config). You can also disable autocapture in your [project settings](https://app.posthog.com/project/settings). 
+
+Please note, autocapture is only enabled if _neither_ of these options are disabled.
+
+> Disabling autocapture **will not disable [session recording](/docs/session-replay/manual)**. You can disable session recording using `disable_session_recording` or by turning it off in your [project settings](https://app.posthog.com/project/settings).
+
+## Configuring autocapture
+
+> This section covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
+
+### Reducing events
+
+Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using allowlists. Allowlists are an array of allowed events – any events for elements not matching an item in the array are dropped.
+
+For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture`, you can do the following:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    autocapture: {
+        dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
+        url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
+        element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
+        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
+    },
+})
+```
+Allowlists only filter autocapture events – they won't affect the data collected by session recordings or custom events.
+
+### Preventing sensitive data capture
+
+PostHog tries to not capture any sensitive data from your website. If there are elements you don't want captured, add the `ph-no-capture` class name.
+
+```html
+<button class='ph-no-capture'>Sensitive information here</button>
+```
+
+## Capturing additional properties in autocapture events
+
+If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add additional information to autocapture events. 
+
+### Example 1: Get the value of an element on the page
+
+For example, with a notification bell:
+
+![a notification bell showing 1 unread notification](../../images/docs/data/autocapture/notification-bell.png)
+
+You can include the unread count in the autocapture event by adding the `data-ph-capture-attribute` class like this: 
+
+```HTML
+<div
+    onClick={toggleNotificationsPopover}
+    data-ph-capture-attribute-unread-notifications-count={unreadCount}
+>
+```
+
+The autocapture event for clicks on the bell will include the unread count.
+
+### Example 2: Tracking ecommerce metadata
+
+You can also track metadata when a customer performs a transaction (like adding an item to a cart or completing a purchase). Going beyond just knowing _User clicked 'Add to cart'_ is valuable in understanding _what_ users are interested in, even if they don't complete a transaction. It can also shed light onto which products users are interested in, when correlated with other information like marketing campaigns, regionality, or device type.
+
+You can attach metadata to autocapture events by adding data attributes to the element that triggers the event. Below we'll record some metadata when a user adds an item to their cart, based on content available in the DOM.
+
+```HTML
+<button
+    data-ph-capture-attribute-product-id={productId}
+    data-ph-capture-attribute-product-name={productName}
+    data-ph-capture-attribute-product-price={productPrice}
+    data-ph-capture-attribute-product-quantity={productQuantity}
+>
+    Add to cart
+</button>
+```
+Replace the `{productXx}` values with the relevant information available on the webpage. Now when the _Add to cart_ button is clicked, the autocapture event will include the product information in the event's properties, like:
+
+```json
+properties: {
+    "product-id": "12345678"
+    "product-name": "Red t-shirt"
+    "product-price": "30"
+    "product-quantity": "1"
+}
+```
+
+## Limitations of autocapture
+
+While autocapture tracks the majority of general events on your site, it is important to note that, for security reasons, PostHog is conservative regarding `input` tags. To prevent passwords or other sensitive data from being collected, little data is collected from inputs with autocapture.
+
+Specifically, PostHog autocapture only grabs the `name`, `id`, and `class` attributes from `input` tags.
+
+If you need to collect more data from inputs, you should use [custom events](/tutorials/event-tracking-guide).
+
+## Autocaptured properties
+
+Autocaptured events (and client-side custom events) have a number of default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the event explorer, and the verified event logo in the [data management tab](https://app.posthog.com/data-management/properties). These properties can be hidden in the event explorer by checking the "Hide PostHog properties" box.
+
+Autocaptured properties include:
+
+- Timestamp (`$timestamp`)
+- OS (`$os`)
+- Browser (`$browser`)
+- Browser Version (`$browser_version`)
+- Device Type (`$device_type`)
+- Current URL (`$current_url`)
+- Host (`$host`)
+- Path Name (`$pathname`)
+- Screen Height (`$screen_height`)
+- Screen Width (`$screen_width`)
+- Viewport Height (`$viewport_height`)
+- Viewport Width (`$viewport_width`)
+- Library (`$lib`)
+- Library Version (`$lib_version`)
+- Search Engine (`$search_engine`)
+- Referrer URL (`$referrer`)
+- Referring Domain (`$referring_domain`)
+- UTM Source (`$utm_source`)
+- UTM Medium (`$utm_medium`)
+- UTM Campaign (`$utm_campaign`)
+- UTM term (`$utm_term`)
+- Google Click ID (`$gclid`)
+- Facebook Click ID (`$fbclid`)
+- Microsoft Click ID (`$msclkid`)
+- Active Feature Flags (`$active_feature_flags`)
+- Plugins Succeeded (`$plugins_succeeded`)
+- Plugins Failed (`$plugins_failed`)
+- Plugins Deferred (`$plugins_deferred`)
+- IP Address (`$ip`)
+
+If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties. 

@@ -2,7 +2,7 @@ import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import { useQuestion } from '../hooks/useQuestion'
-import { Bell } from 'components/NotProductIcons'
+import { IconBell } from '@posthog/icons'
 
 export const Button = ({
     className,
@@ -17,13 +17,13 @@ export const Button = ({
         <button
             className={`flex rounded-sm p-1 ${
                 !subscribed
-                    ? 'relative bg-gray-accent-light hover:bg-gray-accent-light-hover/50 dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover/50 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]'
+                    ? 'relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]'
                     : 'bg-red text-white dark:text-white'
             } ${className}`}
             onClick={handleSubscribe}
         >
             <span className={`w-6 h-6 rotate-6 ${subscribed ? 'animate-wiggle origin-top' : ''}`}>
-                <Bell />
+                <IconBell />
             </span>
         </button>
     )
@@ -67,15 +67,15 @@ export default function SubscribeButton({
                     <Button
                         subscribed={subscribed}
                         handleSubscribe={handleSubscribe}
-                        className={`${className} p-0 border-0 relative font-bold`}
+                        className={`${className} p-0 relative font-bold`}
                     />
                 ) : (
                     <button
-                        className={`${className} flex gap-1 p-0 border-0 relative opacity-50 font-bold text-black dark:text-white`}
+                        className={`${className} flex gap-1 p-0 relative opacity-50 font-bold text-black dark:text-white`}
                         disabled
                     >
                         <span className="w-6 h-6 rotate-6">
-                            <Bell />
+                            <IconBell />
                         </span>
                     </button>
                 )}

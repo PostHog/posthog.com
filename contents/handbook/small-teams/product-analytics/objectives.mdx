@@ -1,25 +1,12 @@
-## Q2 2023 Goals
+## Q4 2023 Goals
 
-### Objective 1: PostHog 3000 Hacker News launch is a wild success
+1. Project "NoteForce Exploration 3000" (Michael, Thomas)
+  - Pair up with Team Monitoring to complete projects Data Exploration, Notebooks and PostHog 3000.
+  - Release new navigation and insight editor.
+  - Work more HogQL prompts into the interface.
+  - Build metrics into the system, introduce Metric Mondays.
 
-- Why? Subjectively, we believe there are many UI/UX improvements to make it a tool that product engineers love.
-- Key results:
-  - We have shipped a reimagined IDE-inspired interface
-
-### Objective 2: Make PostHog performance frustration free for our 10 largest customers
-
-- Key results:
-  - For top 10 US&EU clients p95 of dashboard load time <10s
-  - For top 10 US&EU clients p95 of insight load time <10s
-  - US ClickHouse setup is less bespoke
-  
-### Objective 3: HogQL
-
-- Why? We have built our query language called HogQL. The experience using it is still lacking.
-- Key results:
-  - HogQL is launched and used by 10% of users
-  - HogQL parsing errors are insightful and timely.
-  - HogQL supports all of ClickHouse SQL, including arrays and window functions.
-  - You can do pivot tables via HogQL, or in the interface we built to make this easier.
-  - The trends and funnels insights are powered by HogQL.
-
+2. Project "Finish the darned Query Engine" (Tom, Marius)
+  - Finish insight HogQL conversion.
+  - Support non-event data sources on HogQL insights (BI tools for data warehouse).
+  - Build tools to measure HogQL query performance, and catch regressions before they hit users.

@@ -1,13 +1,23 @@
+import { child, container } from 'components/CallToAction'
 import React, { ButtonHTMLAttributes } from 'react'
 
 export default function Button({
     className = '',
     children,
+    width,
+    buttonType,
+    size,
     ...other
-}: { className?: string; children: React.ReactNode } & ButtonHTMLAttributes<HTMLButtonElement>) {
+}: {
+    className?: string
+    children: React.ReactNode
+    buttonType?: string
+    width?: string
+    size?: string
+} & ButtonHTMLAttributes<HTMLButtonElement>) {
     return (
-        <button className={`border-[1.5px] rounded-sm px-4 py-2.5 text-[15px] ${className}`} {...other}>
-            {children}
+        <button className={`${container(buttonType, size, width)} ${className}`} {...other}>
+            <span className={`${child(buttonType, width, undefined, size)}`}>{children}</span>
         </button>
     )
 }

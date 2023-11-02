@@ -33,7 +33,7 @@ I was getting so little value from Google Analytics that I started to look for a
 ### Switching from Mixpanel to PostHog
 Initially Mixpanel delivered the value we had hoped for. We were able to see how our app was used, see which areas of the product weren’t converting and use that data in discussions about improvements to the product. However, Mixpanel’s free tier is _very_ limited and only lets you create five funnels. They want you to pay for their services, but we found them too expensive to justify. 
 
-So, I started looking for a self-hosted alternative. By [self-hosting our analytics](/docs/self-host) we would only have to pay for the server the analytics tool was running on, which would be around one fifth of the cost of Mixpanel's lowest pricing tier. We would also have more control over our user data. 
+So, I started looking for a [Mixpanel alternative](/blog/best-mixpanel-alternatives) we could self-host. By [self-hosting our analytics](/docs/self-host) we would only have to pay for the server the analytics tool was running on, which would be around one fifth of the cost of Mixpanel's lowest pricing tier. We would also have more control over our user data. 
 
 During my research I came across PostHog. It offered the same funnel views that Mixpanel did, could be self-hosted and even offered a free tier that offered unlimited funnels. It was a no-brainer for us to switch.
 

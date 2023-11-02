@@ -13,15 +13,14 @@ features:
     featureFlags: true
     groupAnalytics: true
 ---
-This is a <b>community maintained</b> library. It is not officially supported by PostHog.
 
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
-## Package
+## Installation
 
-import FlutterPackage from './\_snippets/package.mdx'
+import FlutterInstall from '../../integrate/_snippets/install-flutter.mdx'
 
-<FlutterPackage />
+<FlutterInstall />
 
 ## Usage
 
@@ -43,6 +42,7 @@ To use this, add `posthog_flutter` as a [dependency in your pubspec.yaml file](h
 | `setContext`         | X       | X   |     |
 | `isFeatureEnabled`   | X       | X   | X   |
 | `reloadFeatureFlags` | X       | X   | X   |
+| `groups`             | X       | X   | X   |
 
 > Debugging must be set as a configuration parameter in `AndroidManifest.xml` (see below). The Official PostHog Library does not offer the debug method for Android.
 
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
             child: Text('TRACK ACTION WITH POSTHOG'),
             onPressed: () {
               Posthog.capture(
-                eventName: 'ButtonClicked',
+                eventName: 'button_clicked',
                 properties: {
                   'foo': 'bar',
                   'number': 1337,
@@ -98,11 +98,21 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-## Installation
+## Capturing events
 
-import FlutterInstall from './\_snippets/install.mdx'
+import FlutterSendEvents from '../../integrate/send-events/_snippets/send-events-flutter.mdx'
 
-<FlutterInstall />
+<FlutterSendEvents />
+
+## Feature Flags
+
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
+
+<FeatureFlagsLibsIntro />
+
+import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-flutter.mdx'
+
+<FlutterFeatureFlagsCode />
 
 ## Issues
 

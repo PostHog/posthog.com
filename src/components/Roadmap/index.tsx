@@ -75,7 +75,7 @@ export const Section = ({
     return (
         <div className={`xl:px-7 2xl:px-8 px-5 py-8 ${className ?? ''}`}>
             <h3 className="text-xl m-0">{title}</h3>
-            {description && <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>}
+            {description && <p className="text-[15px] m-0 text-black/60 dark:text-white/60 mb-4">{description}</p>}
             {children}
         </div>
     )
@@ -84,14 +84,14 @@ export const Section = ({
 export const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
         <>
-            {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
+            {team !== 'undefined' && <h4 className="text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
             <li className="m-0 mb-3">{children}</li>
         </>
     )
 }
 
 export const CardContainer = ({ children }: { children: React.ReactNode }) => {
-    return <ul className="list-none m-0 p-0 grid">{children}</ul>
+    return <ul className="list-none m-0 p-0 grid space-y-2">{children}</ul>
 }
 
 export default function Roadmap() {
@@ -125,19 +125,19 @@ export default function Roadmap() {
     return (
         <Layout>
             <SEO title="PostHog Roadmap" />
-            <div className="border-t border-dashed border-gray-accent-light">
+            <div className="">
                 <PostLayout
-                    contentWidth={'100%'}
                     article={false}
                     title={'Roadmap'}
                     hideSurvey
                     menu={nav}
                     darkMode={false}
                     contentContainerClassName="lg:-mb-12 -mb-8"
+                    fullWidthContent
                 >
                     <div className="relative">
                         <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
-                        <figure className="-mt-8 sm:-mt-20 xl:-mt-32 mb-0">
+                        <figure className="sm:-mt-12 xl:-mt-24 mb-0">
                             <StaticImage
                                 className="w-full"
                                 imgClassName="w-full aspect-auto"
@@ -147,7 +147,7 @@ export default function Roadmap() {
                             />
                         </figure>
                     </div>
-                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed">
+                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-light dark:divide-dark pb-8">
                         <Section
                             title="Under consideration"
                             description="The top features we might build next. Your feedback is requested."
@@ -204,9 +204,9 @@ export default function Roadmap() {
                             // description="Here's what was included in our last array."
                             className=""
                         >
-                            <p className="p-4 border border-dashed border-gray-accent-light rounded-sm text-[15px]">
-                                Check out <Link to="/blog/categories/product-updates">product updates</Link> on our blog
-                                to see what we've shipped recently.
+                            <p className="p-4  rounded-sm text-[15px]">
+                                Check out <Link to="/changelog">our changelog</Link> on our blog to see what we've
+                                shipped recently.
                             </p>
                             {/*
                             hidden until we have more historical content loaded

@@ -5,61 +5,34 @@ sidebar: Docs
 showTitle: true
 ---
 
-Webhooks enable you to receive messages whenever any of your [actions](/docs/user-guides/actions) trigger. You can receive messages in [Slack](/docs/webhooks/slack), [Teams](/docs/webhooks/teams), [Discord](/docs/webhooks/discord), or your own custom webhook endpoint.
+Webhooks enable you to receive messages whenever any of your [actions](/docs/user-guides/actions) trigger. You can receive messages in [Slack](/docs/webhooks/slack), [Teams](/docs/webhooks/microsoft-teams), [Discord](/docs/webhooks/discord), or your own custom webhook endpoint.
 
 ## Message formatting
 
-Message tokens are in the format `[type.property]`.
-
-By default, the message format is:
-```
-[action.name] was triggered by [user.name].
-```
-
-You can customize the message when creating or editing actions.
-
-## Token types
-
-### User
-
-- `name`: user's username, email, or distinct ID depending on availability.
-- `ip`: IP address of the user when the action triggered.
-- `os`: user's operating system.
-- `browser`: user's web browser.
-- `browser_version`: version of user's web browser.
-- `host`: the PostHog instance URL.
-- `time`: timestamp of Event.
-- `pathname`: the href of path the action triggered on.
-- `device_id`: ID of user's device.
-- `screen_width`: width of user's screen.
-- `screen_height`: height of user's screen.
-- `initial_referrer`: domain user visited before event (`$direct` for direct visits).
-
-### Action
-
-- `name`: name of triggered action with link.
-
-### Event
-
-- `name`: name of the event which triggered the action.
-- `properties`: see section below.
-
-#### Accessing event properties
-
-You can access the properties of the event that triggered the webhook by using `event.properties.your_desired_prop`.
-
-This can be a property set by PostHog, such as `event.properties.$ip`, or it can be any custom property you set. 
-
-If a property does not exist on the event, the webhook message will say `undefined` for the property.
-
-For example, the following message format:
+By default, the webhook message format is:
 
 ```
-[user.name] triggered [action.name] from [event.properties.country]
+[action.name] was triggered by [person]
 ```
 
-Creates a message like the one below, if the property `country` is not set on the event:
+The parts in square brackets `[]` are called _message tokens_. You can use tokens to customize your message based on the event that triggered the webhook. There are three types of tokens:
 
-```
-John Doe triggered pageview from undefined
-```
+### Event tokens
+
+- `[event]`: Type of the event (a standard one, such as `$pageview`, or custom, such as `completed level`). This token is formatted as a link to the event that triggered the webhook in PostHog.
+- `[event.link]`: A plain link to the event that triggered the webhook in PostHog.
+- `[event.event]`: Same as `[event]` except not formatted as a link.
+- `[event.uuid]`: ID of the event. Always in UUID format.
+- `[event.distinct_id]`: Person distinct ID associated with the event.
+- `[event.properties.property_name]`: Value of property `property_name` – e.g., `[event.properties.$os]`, `[event.properties.amountUSD]`, or `[event.properties.object.nested_prop]`.
+
+### Person tokens
+
+- `[person]`: Display name of the person. Based on the Person Display Name preference in Project Settings. If none of the properties from the preference are available, the distinct ID is used. This token is formatted as a link to the person.
+- `[person.link]`: A plain link to the person in PostHog.
+- `[person.properties.property_name]`: Value of person `property_name` – e.g., `[person.properties.$browser]`, `[person.properties.subscriptionPlan]`, or `[person.properties.object.nested_prop]`.
+
+### Action tokens
+
+- `[action.name]`: The name of the triggered action. This token is formatted as a link to the action in PostHog.
+- `[action.link]`: A plain link to the action in PostHog.

@@ -1,5 +1,4 @@
 import { MDXProvider } from '@mdx-js/react'
-import { BorderWrapper } from 'components/BorderWrapper'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { Caption } from 'components/Caption'
 import { FloatedImage } from 'components/FloatedImage'
@@ -15,106 +14,62 @@ import FooterCTA from 'components/FooterCTA'
 import PostLayout from 'components/PostLayout'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Topics from 'components/PostLayout/Topics'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
+import Title from 'components/Edition/Title'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const components = {
     ...shortcodes,
-    BorderWrapper,
     Caption,
     ImageBlock,
     FloatedImage,
     a: A,
 }
 
-const Tags = ({ tags }) => {
-    return (
-        <li className="border-b border-dashed border-gray-accent-light">
-            <ul className="list-none m-0 p-0 text-lg flex flex-wrap">
-                {tags.map((tag, index) => {
-                    return (
-                        <li key={index} className="font-bold after:content-['\002C\00A0'] last:after:content-['']">
-                            {tag}
-                        </li>
-                    )
-                })}
-            </ul>
-        </li>
-    )
-}
+export default function Customer({ data, mobile, pageContext: { tableOfContents } }) {
+    const { websiteTheme } = useValues(layoutLogic)
 
-const CustomerSidebar = ({ industries, users, toolsUsed, logo }) => {
-    return (
-        <>
-            <SidebarSection>{logo && <img className="w-full max-w-[200px]" src={logo.publicURL} />}</SidebarSection>
-            <SidebarSection title="Industry">
-                <Topics topics={industries.map((industry) => ({ name: industry }))} />
-            </SidebarSection>
-            <SidebarSection title="Users">
-                <Topics topics={users.map((user) => ({ name: user }))} />
-            </SidebarSection>
-            <SidebarSection title="Tools used">
-                <Topics topics={toolsUsed.map((toolUsed) => ({ name: toolUsed }))} />
-            </SidebarSection>
-        </>
-    )
-}
-
-export default function Customer({ data, pageContext: { tableOfContents } }) {
     const {
-        allCustomers,
         customerData: {
             body,
             excerpt,
             fields,
-            frontmatter: { title, customer, logo, description, industries, users, toolsUsed, featuredImage },
+            frontmatter: { title, description },
         },
     } = data
 
+    const { fullWidthContent } = useLayoutData()
+
     return (
-        <>
+        <article className="@container">
             <SEO
                 title={`${title} - PostHog`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
-            <Layout>
-                <PostLayout
-                    tableOfContents={tableOfContents}
-                    hideSearch
-                    menu={[
-                        { name: 'Customers' },
-                        ...allCustomers?.nodes?.map(({ fields: { slug }, frontmatter: { customer } }) => ({
-                            name: customer,
-                            url: slug,
-                        })),
-                    ]}
-                    title={title}
-                    hideSurvey
-                    sidebar={
-                        <CustomerSidebar logo={logo} industries={industries} toolsUsed={toolsUsed} users={users} />
-                    }
-                    breadcrumb={[
-                        {
-                            name: 'Customers',
-                            url: '/customers',
-                        },
-                        {
-                            name: customer,
-                        },
-                    ]}
-                >
-                    <section className="article-content customer-content">
-                        <h1 className="text-5xl leading-none mt-0">{title}</h1>
+            <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
+                <section className="article-content customer-content flex-1 transition-all pt-8 w-full">
+                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
+                        <Title className="mb-4">{title}</Title>
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
-                    </section>
-                    <FooterCTA />
-                </PostLayout>
-            </Layout>
-        </>
+                    </div>
+                </section>
+                <aside
+                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-dark pt-4 ${
+                        mobile ? 'lg:hidden' : ''
+                    } `}
+                >
+                    aside
+                </aside>
+            </div>
+            <FooterCTA />
+        </article>
     )
 }
 
@@ -143,6 +98,9 @@ export const query = graphql`
                 title
                 customer
                 logo {
+                    publicURL
+                }
+                logoDark {
                     publicURL
                 }
                 description

@@ -4,7 +4,6 @@ date: 2023-01-26
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-2.png
 featuredVideo: https://www.youtube-nocookie.com/embed/rwP2leifdNk
 tags: ['experimentation', 'feature flags']
 ---
@@ -59,7 +58,7 @@ Back in the Webflow site designer, click the "Pages" tab on the left panel, hove
 </script>
 ```
 
-Once you do this, go back to PostHog and click "Launch" on the experiment. When you publish the changes and reload your Webflow page, there should be a 50% chance you see the new CTA. If not, add `posthog.feature_flags.override({'cta': 'test'})` to the custom code you just added (but don’t forget to remove it). You can check the variations in incognito windows in your browser.
+Once you do this, go back to PostHog and click "Launch" on the experiment. When you publish the changes and reload your Webflow page, there should be a 50% chance you see the new CTA. If not, add `posthog.featureFlags.override({'cta': 'test'})` to the custom code you just added (but don’t forget to remove it). You can check the variations in incognito windows in your browser.
 
 ![CTA changed](../images/tutorials/webflow-ab-tests/cta.png)
 
@@ -69,6 +68,6 @@ Now that you set up an A/B test in Webflow with PostHog, you can use this same p
 
 ## Further reading
 
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)

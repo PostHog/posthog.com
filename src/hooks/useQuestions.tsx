@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { QuestionData, StrapiResult, StrapiRecord } from 'lib/strapi'
 import usePostHog from './usePostHog'
+import { useUser } from './useUser'
 
 type UseQuestionsOptions = {
     slug?: string
@@ -50,6 +51,12 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             replies: {
                 populate: {
                     profile: {
+                        populate: {
+                            user: {
+                                populate: ['role'],
+                                fields: ['role'],
+                            },
+                        },
                         fields: ['firstName', 'lastName'],
                     },
                 },
@@ -127,11 +134,19 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
 }
 
 export const useQuestions = (options?: UseQuestionsOptions) => {
+    const { getJwt, user } = useUser()
     const posthog = usePostHog()
 
-    const { data, size, setSize, isLoading, error, mutate } = useSWRInfinite<StrapiResult<QuestionData[]>>(
+    const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite<
+        StrapiResult<QuestionData[]>
+    >(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options)}`,
-        (url: string) => fetch(url).then((r) => r.json())
+        async (url: string) => {
+            const jwt = await getJwt()
+            return fetch(url, user && jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined).then((r) =>
+                r.json()
+            )
+        }
     )
 
     if (error) {
@@ -151,11 +166,15 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
     const total = data && data[0]?.meta?.pagination?.total
     const hasMore = total ? questions?.data.length < total : false
 
+    useEffect(() => {
+        mutate()
+    }, [user])
+
     return {
         hasMore,
         questions,
         fetchMore: () => setSize(size + 1),
-        isLoading,
+        isLoading: isLoading || isValidating,
         refresh: () => mutate(),
     }
 }

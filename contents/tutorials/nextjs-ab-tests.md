@@ -4,7 +4,6 @@ date: 2023-03-06
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-2.png
 featuredVideo: https://www.youtube-nocookie.com/embed/QfTMREUEc18
 tags: ['experimentation', 'feature flags', 'actions']
 ---
@@ -140,7 +139,7 @@ In `index.js`, set up a state for the call to action button and a `useEffect()` 
 
 To check the flag, import `useFeatureFlagEnabled` from `posthog-js/react`, use it to call the flag name (`main-cta`), and change the state of the button text to "Learn more" if `true`.
 
-> **Note:** Use `posthog.feature_flags.override({'main-cta': 'test'})` to make sure it is working, but remove it when we go to release.
+> **Note:** Use `posthog.featureFlags.override({'main-cta': 'test'})` to make sure it is working, but remove it when we go to release.
 
 ```js
 // pages/index.js
@@ -152,7 +151,7 @@ export default function Home() {
 
   const [ ctaState, setCtaState ] = useState('Click me')
   const posthog = usePostHog()
-  posthog.feature_flags.override({'main-cta': 'test'})
+  posthog.featureFlags.override({'main-cta': 'test'})
   const ctaVariant = useFeatureFlagVariantKey('main-cta')
 
   useEffect(() => {
@@ -267,4 +266,4 @@ Now, when you refresh the page, the call to action loads faster.
 
 - [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)

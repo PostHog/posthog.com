@@ -12,7 +12,7 @@ export default function TeamRoadmap({ team }: { team?: string }) {
     const futureRoadmaps = roadmaps.filter((r) => r.projectedCompletion && !r.complete)
 
     return futureRoadmaps.length <= 0 ? (
-        <p className="!m-0 py-4 px-6 border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md">
+        <p className="!m-0 py-4 px-6  dark:border-gray-accent-dark rounded-md">
             Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!
         </p>
     ) : (
@@ -21,7 +21,7 @@ export default function TeamRoadmap({ team }: { team?: string }) {
                 return (
                     <InProgress
                         more
-                        className="bg-opacity-0 shadow-none border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md !border-t !mb-4"
+                        className="border border-light dark:border-dark rounded-md !border-t !mb-4"
                         key={node.title}
                         {...node}
                     />

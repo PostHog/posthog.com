@@ -215,7 +215,7 @@ In a nutshell, comparing the analytics efficiency of ClickHouse and Elasticsearc
 
 ClickHouse and Elasticsearch are both fantastic solutions for data aggregation and fast search respectively. 
 
-Elasticsearch grew quickly thanks to fast-paced development by its parent company, Elastic. Elastic has spearheaded the development of Elasticsearch, Kibana, and other accessory products like Beats, a data shipper. For many enterprise customers, Elastic being a psuedo-closed-source solution is balanced by the fact that it can leverage its enterprise revenue to foster a massive engineering effort to improve Elastic.
+Elasticsearch grew quickly thanks to fast-paced development by its parent company, Elastic. Elastic has spearheaded the development of Elasticsearch, Kibana, and other accessory products like Beats, a data shipper. For many enterprise customers, Elastic being a pseudo-closed-source solution is balanced by the fact that it can leverage its enterprise revenue to foster a massive engineering effort to improve Elastic.
 
 Conversely, while the team behind ClickHouse is smaller, ClickHouse has an avid developer community, with contributors existing outside of the two major ClickHouse developers – ClickHouse Inc and Altinity Inc. And one of the reasons that ClickHouse is starting to grow in the last few years is because of its open-source, pro-community brand, and it's blistering performance.
 

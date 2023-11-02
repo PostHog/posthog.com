@@ -7,12 +7,12 @@ showTitle: true
 Content is the main pillar of our marketing strategy. As our products are quite technical in nature, we believe that frequent and regular content output helps improve acquisition and ongoing product engagement. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
 
 **Other useful links:**
-- [PostHog style guide](../handbook/growth/marketing/posthog-style-guide)
-- [Exporting a blog post image](../handbook/growth/marketing/exporting-blog-post-image)
+- [PostHog style guide](/handbook/growth/marketing/posthog-style-guide)
+- [Exporting a blog post image](/handbook/growth/marketing/exporting-blog-post-image)
 
 ## Content strategy
 
-Content is a long-term strategy and we'e focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
+Content is a long-term strategy and we're focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
 
 We **win on depth**, not breadth – a few high-quality pieces > a larger number of medium quality pieces. We have four content buckets:
 
@@ -20,14 +20,13 @@ We **win on depth**, not breadth – a few high-quality pieces > a larger number
 
 2. **Tutorials:** The purpose of tutorials is to encourage new signups (because we show potential users how to solve their problems using PostHog), and help customers expand usage. Some tutorials are also SEO-optimized, especially when they cover general topics, such as [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics). It's mostly written by the marketing team and published in the tutorials section.
 
-3. **Brand building:** Can be written by anyone on the team, with the marketing team acting as editors. The purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit, share our culture / vision / philosophy. Examples include [10x engineers talk to users](/blog/10x-engineers-do-user-interviews), [What we've learned about developer marketing](/blog/dev-marketing-for-startups), and [Raising money is less stressful than bootstrapping](/blog/vc-or-bootstrap). This content is posted on the blog.
+3. **Brand building:** Can be written by anyone on the team, with the marketing team acting as editors. The purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit, share our culture / vision / philosophy. Examples include [10x engineers talk to users](/blog/10x-engineers-do-user-interviews), [What we've learned about dev tool marketing](/blog/dev-marketing-for-startups), and [Raising money is less stressful than bootstrapping](/blog/vc-or-bootstrap). This content is posted on the blog.
 
 4. **Behind-the-scenes:** Content about what we're doing at PostHog. This can also be brand building content, but is more directly relevant to our existing customers. Examples include [All the cool things we built at our Rome hackathon](/blog/rome-hackathon) and the [weekly changelog blog post](/blog/posthog-changelog). This content is posted on the blog.
 
 ### Good to knows
 
 - The marketing team is responsible for all the above – mostly Andy and Ian, but James Hawkins, Joe and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
-
 
 - You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter. All planned content should have an issue.
 
@@ -137,22 +136,21 @@ tags:
 ---
  ```
 
-## Distribution
+## Distribution channels
 
 We repurpose and distribute content in a mixture of channels - those we want to be good at, and those we put minimal effort into out of habit and good practice.
 
 ### High effort
 
-- SEO - _Andy_
-- Newsletter - _Andy_
-- PostHog LinkedIn - _Andy (but other people post here as well)_
-- PostHog Twitter - _Charles (but other people post here as well)_
-- James' personal Twitter - _James H_
-- YouTube - _Ian_
+- SEO - _Andy and Ian_
+- Newsletter - _Andy and Ian_
+- PostHog Twitter - _Andy (outsourced to Mouneil)_
+- James' personal Twitter - _Andy (outsourced to Mouneil)_
 
 ### Low effort/hygiene
 
+- PostHog LinkedIn - _whoever wrote the content_
 - User Slack - _whoever wrote the content_
 - Hacker News - _only for Show HN announcements, otherwise do not post here and hope others do it outside PostHog_
-- LinkedIn paid ads - _Charles (outsourced)_
-- Twitter paid ads - _Andy (outsourced)_
+- LinkedIn paid ads - _Charles (outsourced to Hey)_
+- Twitter paid ads - _Charles (outsourced to Hey)_

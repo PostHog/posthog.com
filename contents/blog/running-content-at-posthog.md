@@ -10,12 +10,10 @@ author:
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
 category: Inside PostHog
-tags:
-  - Marketing
 ---
 
 ## Why you need content
-Developers are a selective bunch when it comes to what type of content they consume, and clickbait-y “Ultimate Guide To X” posts won’t fly with them. Your content needs to be detailed, thoughtful, and relevant to their problems.
+[Dev tool marketing](/blog/dev-marketing-for-startups) is tough. Developers are a selective bunch when it comes to what type of content they consume, and clickbait-y “Ultimate Guide To X” posts won’t fly with them. Your content needs to be detailed, thoughtful, and relevant to their problems.
 
 Content at PostHog is meant to accomplish two things: 
 * Tell our story

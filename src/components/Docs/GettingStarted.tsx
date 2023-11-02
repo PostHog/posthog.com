@@ -18,7 +18,7 @@ export const GettingStarted: React.FC<ProductAnalyticsProps> = ({
     children,
 }) => {
     return (
-        <div className="clear-both relative flex items-center border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark py-4">
+        <div className="clear-both relative flex items-center py-4">
             <div className="flex flex-col sm:flex-row gap-4 w-full items-center">
                 <div className="flex-1 w-full">
                     <div className="flex flex-row items-center opacity-60 space-x-1 mb-2">

@@ -51,8 +51,6 @@ Ideas for the agenda:
 
 The budget for these trips is up to $1,500 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. 
 
-The budget for the offsite replaces that month's [meeting each other budget](/handbook/people/spending-money#meeting-each-other). The accommodation for the offsite should have space to work. If this isn't possible (or to give space for smaller meetings during off-sites) your [workspace budget](/handbook/people/spending-money#work-space) can be used.
-
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
 ## Hedge House
@@ -65,7 +63,7 @@ Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge
 
 Many of our company offsites involve team members traveling abroad, and although we hope that these trips are uneventful and safe for all, in the event of an accident or medical emergency, we carry travel insurance through as well as general & auto liability policies through our partner [Embroker](https://www.embroker.com). 
 
-In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to either Charles or Grace as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
+In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to either Charles as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
 
 ## How to plan an offsite in 8 weeks - a checklist
 

@@ -14,238 +14,78 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from '../_snippets/cohort-expansion'
-
 This is an optional library you can install if you're working with PHP. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Installation
 
-Add the following to composer.json:
-```json
-{
-    "require": {
-        "posthog/posthog-php": "3.0.*"
-    }
-}
-```
-And then install the dependencies with the command: `php composer.phar install`
+import PHPInstall from '../../integrate/_snippets/install-php.mdx'
 
-In your app, set your API key before making any calls.
+<PHPInstall />
 
-```php
-PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_instance_address>') // You can remove this line if you're using app.posthog.com
-);
-```
+## Capturing events
 
-> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
+import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php.mdx'
 
-You can find your key in the 'Project Settings' page in PostHog.
+<PHPSendEvents />
 
-## Making calls
+## Setting user properties
 
-### Capture
-
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
-
-A `capture` call requires:
- - `distinct id` which uniquely identifies your user
- - `event name` to specify the event
-  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-- `properties`, which is an array with any information you'd like to add
-
-For example:
+To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
 ```php
 PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    'movieId' => '123',
-    'category' => 'romcom'
-  )
-));
-```
-
-#### Setting user properties via an event
-
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
-
-##### $set
-
-**Example**
-
-```php
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    '$set' => array(
-      'userProperty' => 'value'
+    'distinctId' => 'distinct_id',
+    'event' => 'event_name',
+    'properties' => array(
+        '$set' => array(
+            'name' => 'Max Hedgehog'
+        ),
+        '$set_once' => array(
+            'initial_url' => '/blog'
+        )
     )
-  )
 ));
 ```
 
-**Usage**
+For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+## Alias
 
-##### $set_once
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-**Example**
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-```php
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    '$set_once' => array(
-      'userProperty' => 'value'
-    )
-  )
-));
-```
+## Feature flags
 
-**Usage**
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+<FeatureFlagsLibsIntro />
 
-### Identify
+import PHPFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-php.mdx'
 
-> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+<PHPFeatureFlagsCode />
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
-like segment users by these properties.
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
-An `identify` call requires:
-- `distinct id` which uniquely identifies your user
-- `properties` with a dict with any key: value pairs 
+### Local Evaluation
 
+<LocalEvaluationIntro />
 
-For example:
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
+
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```php
-PostHog::identify(array(
-  'distinctId' => 'user:123',
-  'properties' => array(
-    'email' => 'john@doe.com',
-    'proUser' => false
-  )
-));
-```
+$variant = PostHog::getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
 
-The most obvious place to make this call is whenever a user signs up, or when they update their information.
-
-### Alias
-
-To connect whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
-
-In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
-
-The same concept applies for when a user logs in.
-
-If you're using PostHog in the front-end and back-end, doing the identify call in the frontend will be enough.
-
-An alias call requires:
--   `distinctId` – the user id
--   `alias` – the anonymous session distinct ID
-
-For example:
-
-```php
-PostHog::alias(array(
-  'distinctId' => 'user:123',
-  'alias' => 'session:12345'
-));
-```
-
-### Sending page views
-
-If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
-
-```php
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => '$pageview',
-  'properties' => array(
-    '$current_url' => 'https://example.com'
-  )
-));
-```
-
-### Feature flags
-
-#### How to check if a flag is enabled
-
-To check if a feature flag is enabled for a given user, use `isFeatureEnabled`, like so:
-
-```php
-if (PostHog::isFeatureEnabled('my-amazing-flag', 'some distinct id')) {
-    // do something here
+if ($variant === 'variant-name') {
+    // Do something differently for this user
 }
 ```
 
-#### Get a flag value
-
-if you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
-
-```php
-PostHog::getFeatureFlag('multivariate-flag', 'some distinct id');
-// returns string or true or false or null
-```
-
-#### Overriding server properties
-
-Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
-
-FOr example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
-```php
-PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
-// the third argument is for groups
-```
-
-The same holds for groups. If you have a group name `organisation`, you can add properties like so:
-
-```php
-PostHog::getFeatureFlag('beta-feature', 'some distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
-```
-
-#### Getting all flag values
-
-You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
-
-```php
-PostHog::getAllFlags('distinct id')
-```
-
-#### Local Evaluation
-> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
-> **Note:** This feature requires version 3.0 of the library, which in turn requires a minimum PostHog version of 1.38
-
-All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
-1. The library must be initialised with a personal API key
-2. You must know all person or group properties the flag depends on.
-Then, the flag can be evaluated locally. The method signature looks exactly like above.
-
-```php
-PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
-// the third argument is for groups
-```
-
-This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
-
-```js
-PostHog::getAllFlags('distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
-```
-
-**Restricting evaluation to local only**
-Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `onlyEvaluateLocally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
-
-<CohortExpansionSnippet />
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ### Group analytics
 
@@ -257,9 +97,9 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```php
 PostHog::capture(array(
-    'distinctId' => '[distinct id]',
-    'event' => 'some event',
-    '$groups' => array("company" => "42dlsfj23f")
+    'distinctId' => 'user_distinct_id',
+    'event' => 'some_event',
+    '$groups' => array("company" => "company_id_in_your_db")
 ));
 ```
 
@@ -268,7 +108,7 @@ PostHog::capture(array(
 ```php
 PostHog::groupIdentify(array(
     'groupType' => 'company',
-    'groupKey' => '42dlsfj23f',
+    'groupKey' => 'company_id_in_your_db',
     'properties' => array("name" => "Awesome Inc.", "employees" => 11)
 ));
 ```

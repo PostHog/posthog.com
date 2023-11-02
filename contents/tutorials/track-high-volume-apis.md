@@ -4,7 +4,6 @@ date: 2023-05-09
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ['feature flags', 'configuration']
 ---
 
@@ -93,7 +92,7 @@ const client = new PostHog(
 app.get('/big/:id', (req, res) => {
   client.capture(
     { 
-      event: 'big route',
+      event: 'big_route',
       distinctId: req.params.id,
 			properties: {
         $set_once: { firstRouteCalled: req.url },   
@@ -140,7 +139,7 @@ app.get('/big/:id', async (req, res) => {
   if (eventSampling) {
     client.capture(
       { 
-        event: 'big route',
+        event: 'big_route',
         distinctId: req.params.id,
         properties: {
           $set_once: { firstRouteCalled: req.url },   
@@ -234,7 +233,7 @@ cron.schedule('*/10 * * * * *', () => {
     let apiCalls = cache.get(key);
     client.capture(
       { 
-        event: 'big route batch',
+        event: 'big_route_batch',
         distinctId: key,
         properties: { 
           calls: apiCalls,

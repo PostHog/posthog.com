@@ -13,57 +13,60 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 </div>
 
 <h1 className="text-center px-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20">
-  PostHog will undergo maintenance on <span className="text-red">June 1st</span>
+  We have scheduled maintenance on <span className="text-red">September 14th</span>
 </h1>
 
 <Hero
-    subtitle={<>We'll temporarily pause ingestion.<br/><a href="https://status.posthog.com/">Check our status page for updates.</a></>}
+    subtitle={<>We'll temporarily pause ingestion, but you won't lose any data.</>}
 />
 
 <details>
+  <summary>What are you doing during the maintenance?</summary>
+  <p>
+      We're planning to upgrade the Postgres database for our EU cloud, moving from Aurora 11 to Aurora 15. This will make PostHog faster, and much more scalable. 
+  </p>
+  <p>
+      This is planned maintenance, so there's <a href="https://github.com/PostHog/posthog-cloud-infra/issues/2027">a public GitHub issue</a> if you'd like to follow the technical discussion.
+  </p>
+  </details>
+
+  <details>
   <summary>Why will you pause ingestion, and for how long?</summary>
   <p>
-    We're planning to migrate the Postgres database for our US cloud to make PostHog faster, and more scalable. We can't migrate the database efficiently while it's in use, so we'll temporarily paused ingestion. This is a planned event and is not related to an incident or outage.
-</p>
-<p>
-    We'll start work at 09:00 UTC (06:00 EDT / 05:00 CDT / 03:00 PDT), June 1st and expect it to take up to four hours. If it takes longer, we'll keep this page updated with the latest information. We'll remove the in-app banner once work is finished.
-</p>
-</details>
+    We can't efficiently upgrade the database while it's in use, so we'll temporarily pause ingestion while work is underway. We expect it to take around four hours, and we'll start at 17:00 UTC (18:00 BST / 18:00 WEST / 19:00 CEST / 20:00 EEST).
+  </p>
+  </details>
 
 <details>
 <summary>What will the impact be?</summary>
   <p>
-    This work will only impact users on our US Cloud, regardless of where they are in the world. Self-hosted and EU Cloud users are unaffected.
+    This work will only impact users on our EU Cloud, regardless of where the teams are physically located. Self-hosted, hobby, and US cloud users are unaffected. The US cloud has already been upgraded in a previous maintenance.
 </p>
 <p>
-    You'll still be able to log in and use PostHog to analyze historic data as normal, but no new data will be ingested to PostHog while this maintenance is underway. Instead, we'll store data and ingest it as normal once the work is complete. Events will be delayed, but not lost.
+    Teams on the EU Cloud will still be able to log in and analyze historic data as normal, but no new data will be ingested while the maintenance is underway. Instead, we'll queue that data and ingest it once the work is complete. We expect it to take approximately four hours.
 </p>
 <p>
-    Feature flags and experiments will function as expected for your users, but you won't be able to make changes to them until the maintenance is complete.
+    Feature flags and experiments will function as expected for your users, but you won't be able to make changes to them until the upgrade is complete. Flags set to persist across authentication steps will not persist for new users who are identified during the upgrade.
 </p>
 </details>
 
 <details>
 <summary>Will I lose any data?</summary>
   <p>
-    No. No events or data will be lost. Instead, data will be delayed during the maintenance period and become accessible once the work is complete.
+    No. Data will be delayed during the maintenance period and become accessible once the work is complete.
 </p>
 </details>
 
 <details>
-  <summary>Haven't you tried to run this migration before?</summary>
+  <summary>How do I stay updated or report issues?</summary>
   <p>
-    We first tried to complete this migration on April 28nd, and notified users at the time. Our team ran into issues however, and we had to rollback. We tried again on May 16th, but ran into issues again. Thank you for your patience! 
-</p>
-</details>
-
-<details>
-  <summary>How do I report an issue not covered here?</summary>
+    We'll keep this page updated with the latest information. We'll also post an in-app banner while work is underway and remove it once work is finished.
+  </p>
   <p>
-    If you're seeing a bug or other unexpected behaviour, you can <a href="http://app.posthog.com/home#supportModal" target="_blank">report it in the app</a>. Alternatively, you can <a href="/questions" target="_blank">ask us a question via the community forum</a>.
+    If you're seeing a bug or other unexpected behaviour, you can <a href="http://app.posthog.com/home#supportModal">report it in the app</a>. Alternatively, if you have a question you can <a href="/questions">ask us in our forum</a>.
 </p>
 <p>
-    If you suspect an outage or incident affecting PostHog services, we recommend checking our <a href="https://status.posthog.com/" target="_blank">status page</a> before reporting.
+    If you suspect an outage or incident affecting PostHog services, we recommend checking our <a href="https://status.posthog.com/">status page</a> before reporting.
 </p>
 </details>
 

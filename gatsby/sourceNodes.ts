@@ -157,6 +157,35 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     await createGitHubStatsNode('posthog', 'posthog')
     await createGitHubStatsNode('posthog', 'posthog.com')
 
+    const createProductDataNode = async () => {
+        const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
+        const headers = {
+            'Content-Type': 'application/json',
+        }
+        const productData = await fetch(url, {
+            method: 'GET',
+            headers: headers,
+        }).then((res) => res.json())
+        const { products } = productData
+
+        const data = {
+            products,
+        }
+
+        const node = {
+            id: createNodeId(`posting-product-data`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `ProductData`,
+                contentDigest: createContentDigest(data),
+            },
+            ...data,
+        }
+        createNode(node)
+    }
+    await createProductDataNode()
+
     const integrations = await fetch(
         'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'
     ).then((res) => res.json())
@@ -243,4 +272,20 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
     }
     await createRoadmapItems()
+
+    const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
+        (res) => res.json()
+    )
+
+    postCategories.data.forEach(({ id, ...other }) => {
+        const node = {
+            id: createNodeId(`post-category-${id}`),
+            internal: {
+                type: `PostCategory`,
+                contentDigest: createContentDigest(other),
+            },
+            ...other,
+        }
+        createNode(node)
+    })
 }

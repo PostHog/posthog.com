@@ -16,8 +16,8 @@ export const DarkModeToggle = () => {
             setWebsiteTheme(window.__theme)
             window.__onThemeChange = () => {
                 setWebsiteTheme(window.__theme)
-                if (posthog) {
-                    posthog.people.set({ preferred_theme: window.__theme })
+                if (posthog?.setPersonProperties) {
+                    posthog.setPersonProperties({ preferred_theme: window.__theme })
                 }
             }
         }
@@ -25,7 +25,6 @@ export const DarkModeToggle = () => {
 
     return (
         <Toggle
-            iconLeft={<DarkMode />}
             checked={websiteTheme === 'dark'}
             onChange={(checked) => window.__setPreferredTheme(checked ? 'dark' : 'light')}
         />

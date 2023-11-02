@@ -132,11 +132,11 @@ James and Tim will meet every hire we make - it's a standard startup failure for
 
 #### Does a Small Team have a budget?
 
-Spend money when it makes sense to do so. See our general policy on spending money.
+Spend money when it makes sense to do so. See our [general policy on spending money](/handbook/people/spending-money).
 
 #### How do you keep the product together as a company?
 
-Luke is ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
+James and Tim are ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
 
 #### How do you stop duplicate work?
 

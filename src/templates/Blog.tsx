@@ -1,14 +1,13 @@
 import PostLayout from 'components/PostLayout'
 import { graphql } from 'gatsby'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { SEO } from 'components/seo'
-import blogMenu from 'components/Blog/blogMenu'
 import Layout from 'components/Layout'
 import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
-import blog from 'sidebars/blog.json'
 import CommunityCTA from 'components/CommunityCTA'
+import { companyMenu } from '../navs'
 
 const BlogCategory = ({
     data: {
@@ -17,14 +16,13 @@ const BlogCategory = ({
     pageContext: { numPages, currentPage, base },
 }) => {
     return (
-        <Layout>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[5]}>
             <SEO title={`All posts - PostHog`} />
 
             <PostLayout
                 breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: 'All' }]}
                 article={false}
                 title="Blog"
-                menu={blog}
                 hideSidebar
                 hideSurvey
             >

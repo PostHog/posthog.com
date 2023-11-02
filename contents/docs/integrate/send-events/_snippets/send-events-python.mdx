@@ -1,0 +1,33 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
+
+```python
+posthog.capture('distinct_id_of_the_user', 
+    'user_signed_up')
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```
+posthog.capture(
+    "distinct_id_of_the_user", 
+    "user_signed_up", 
+    {
+        "login_type": "email", 
+        "is_free_trial": "true"
+    }
+)
+```
+
+### Sending page views
+
+If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
+
+```python
+posthog.capture('distinct_id_of_the_user', '$pageview', {'$current_url': 'https://example.com'})
+```

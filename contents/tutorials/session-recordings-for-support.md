@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-02
-featuredImage: ../images/tutorials/banners/tutorial-1.png
 tags: ['session replay', 'sentry']
 ---
 
@@ -38,7 +37,7 @@ You can share these links on platforms you use to coordinate user support, such 
 
 ## Combining error monitoring and session replay
 
-You can combine PostHog’s suite of product tools for a better support experience. Because errors hurt user experience, capturing and monitoring them is vital to triaging and resolving them. Using custom event capture and integrations enables PostHog to capture errors. You can then use that error data to analyze session replays and provide better support.
+You can combine PostHog’s suite of product tools for a better support experience through [real user monitoring](/blog/real-user-monitoring). Because errors hurt user experience, capturing and monitoring them is vital to triaging and resolving them. Using custom event capture and integrations enables PostHog to capture errors. You can then use that error data to analyze session replays and provide better support.
 
 The most basic way to do this is to send custom error events in problem areas using a capture call. In an extremely basic form, it looks like this:
 

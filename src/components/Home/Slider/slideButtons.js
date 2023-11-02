@@ -1,40 +1,56 @@
 import {
-    ABTesting,
-    Analytics,
-    DataWarehouse,
-    EventPipelines,
-    FeatureFlags,
-    OpenSource,
-    SessionRecording,
-} from './Icons'
+    IconGraph,
+    IconRewindPlay,
+    IconToggle,
+    IconFlask,
+    IconMessage,
+    IconPerson,
+    IconServer,
+    IconDatabase,
+    IconTerminal,
+} from '@posthog/icons'
 
 export const slideButtons = [
     {
         title: 'Product analytics',
-        Icon: Analytics,
+        Icon: IconGraph,
+        color: 'blue',
     },
     {
         title: 'Session replay',
-        Icon: SessionRecording,
+        Icon: IconRewindPlay,
+        color: 'yellow',
     },
     {
         title: 'Feature flags',
-        Icon: FeatureFlags,
+        Icon: IconToggle,
+        color: 'teal',
     },
     {
         title: 'A/B testing',
-        Icon: ABTesting,
+        Icon: IconFlask,
+        color: 'purple',
     },
     {
-        title: 'Event pipelines',
-        Icon: EventPipelines,
+        title: 'Surveys',
+        Icon: IconMessage,
+        color: 'salmon',
+    },
+    {
+        title: 'CDP',
+        Icon: IconPerson,
+        color: 'yellow',
     },
     {
         title: 'Data warehouse',
-        Icon: DataWarehouse,
+        Icon: IconServer,
+        color: 'seagreen',
     },
+    /*
     {
-        title: 'Open source',
-        Icon: OpenSource,
+        title: 'API',
+        Icon: Terminal,
+        color: 'blue',
     },
+    */
 ]

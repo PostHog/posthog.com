@@ -89,26 +89,6 @@
     }
 }
 
-// slider overrides
-.rc-slider {
-    // entire bar
-    .rc-slider-rail {
-        background-color: rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        height: 8px;
-    }
-
-    // filled in portion of bar
-    .rc-slider-track {
-        height: 8px;
-    }
-
-    // legend plots
-    .rc-slider-dot {
-        display: none;
-    }
-}
-
 .plans-comparison-table {
     table th,
     table td {

@@ -10,10 +10,13 @@ This means that events are sent from your own domain and are less likely to be i
 
 Setting up a reverse proxy means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog. It is best practice to use a subdomain that does not include `posthog`, `analytics`, `tracking`, or other similar words. 
 
+> **Note:** PostHog Cloud requires that the proxy sets the `Host` header to `eu.posthog.com` for requests sent to `https://eu.posthog.com`
+> and `app.posthog.com` for requests sent to `https://app.posthog.com`. Check the guides below on how to do that for several proxies.
+
 You then use this subdomain as your instance host in the initialization of PostHog instead of `app.posthog.com` or `eu.posthog.com`.
 
-> **Note:** PostHog Cloud requires that the proxy sets the `Host` header to `eu.posthog.com` for requests sent to `https://eu.posthog.com`
-> and `app.posthog.com` for requests sent to `https://app.posthog.com`.
+> Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing our browser integration,
+> so that links to the PostHog interface point to the correct host.
 
 ## Deploying a reverse proxy
 
@@ -24,5 +27,6 @@ Options for deploying a reverse proxy include:
 - [Cloudflare](/docs/advanced/proxy/cloudflare)
 - [Kubernetes Ingress Controller](/docs/advanced/proxy/kubernetes-ingress-controller)
 - [Netlify](/docs/advanced/proxy/netlify)
-- [Next.js](/docs/advanced/proxy/nextjs)
+- [Next.js rewrites](/docs/advanced/proxy/nextjs)
+- [Next.js middleware](/docs/advanced/proxy/nextjs-middleware)
 - [Vercel](/docs/advanced/proxy/vercel)

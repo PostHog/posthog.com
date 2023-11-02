@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-31
-featuredImage: ../images/tutorials/banners/tutorial-5.png
-tags: ['trends', 'cohorts', 'session replay']
+tags: ['trends', 'cohorts', 'session replay', 'product analytics']
 ---
 
 Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.
@@ -71,8 +70,6 @@ With all that, you’ve set up a power user cohort and begun to do analysis. Fro
 
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics): use your newly created power user cohort to calculate session-based metrics like time on site and pages per session with help from this tutorial.
 
-- [How to run Experiments without feature flags](/tutorials/experiments): Learn how to improve your power user experience by running experiments without feature flags.
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags): Learn how to improve your power user experience by running experiments without feature flags.
 
 - [How we made something people want](/blog/making-something-people-want): Learn how we make something people want (and create power users by doing it) in this blog post by our CEO James.
-
-<NewsletterTutorial compact/>
