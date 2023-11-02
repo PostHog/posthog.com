@@ -1,6 +1,6 @@
 ---
 title: Salesforce
-github: https://github.com/Vinovest/posthog-salesforce
+github: https://github.com/PostHog/salesforce-plugin
 installUrl: https://app.posthog.com/project/apps?name=Salesforce
 thumbnail: ../../cdp/thumbnails/salesforce.svg
 tags:
@@ -32,7 +32,7 @@ You'll also need a Salesforce account to connect to, as well as the relevant lev
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/Vinovest/posthog-salesforce) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/salesforce-plugin) is available on GitHub.
 
 ### Who created this app?
 
