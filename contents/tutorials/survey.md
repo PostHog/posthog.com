@@ -4,7 +4,6 @@ date: 2023-07-25
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-8.png
 tags: ['surveys']
 ---
 
@@ -14,7 +13,7 @@ tags: ['surveys']
 
 ## Creating a Next.js app and installing PostHog
 
-First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest surveys
@@ -27,7 +26,7 @@ cd surveys
 npm i posthog-js
 ```
 
-Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive and a check for the window. Altogether, this looks like this:
+Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive and a check for the window. Altogether, this looks like this:
 
 ```js-web
 // app/providers.js
@@ -46,7 +45,7 @@ export function PHProvider({ children }) {
 }
 ```
 
-We can then import the `PHProvider` component from the `provider.js` file in our `app/layout.js` file, and wrap our app in it.
+We can then import the `PHProvider` component from the `provider.js` file in our `app/layout.js` file, and wrap our app in it.
 
 ```js-web
 // app/layout.js
@@ -63,7 +62,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-After setting this up and running `npm run dev`, your app is ready for surveys.
+After setting this up and running `npm run dev`, your app is ready for surveys.
 
 ## Creating a basic survey
 

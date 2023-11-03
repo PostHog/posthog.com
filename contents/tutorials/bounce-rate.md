@@ -4,8 +4,7 @@ date: 2023-06-27
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-15.png
-tags: ['insights', 'hogql']
+tags: ['insights', 'hogql', 'product analytics']
 ---
 
 Bounce rate is the percentage of users who leave your page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors.  

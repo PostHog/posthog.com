@@ -55,9 +55,7 @@ export default function Hero({
                             <CallToAction to={mainCTA.url} size="md" className="">
                                 {mainCTA.title}
                             </CallToAction>
-                            {pricingCTA && (
-                                <PricingCTA {...pricingCTA} />
-                            )}
+                            {pricingCTA && <PricingCTA {...pricingCTA} />}
                         </div>
                     )}
                     {customers && customers.nodes.length > 0 && (

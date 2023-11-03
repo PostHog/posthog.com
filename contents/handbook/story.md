@@ -100,7 +100,7 @@ Our team had now grown to 25 people in 10 countries.
 
 We achieved product-market fit for our open-source product and PostHog Scale.
 
-Our quickly rose as a result, now we needed to optimize it.
+Our revenue quickly rose as a result, now we needed to optimize it.
 
 We were 30 people in 12 countries.
 

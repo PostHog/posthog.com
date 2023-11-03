@@ -6,7 +6,7 @@ tags:
     - postgres-export
 ---
 
-> **Important:** This app has been depreciated in favor of the [Postgres batch exports destination](/docs/cdp/batch-exports/postgres). 
+> **Important:** This app has been deprecated in favor of the [Postgres batch exports destination](/docs/cdp/batch-exports/postgres). 
 
 Export events from PostHog to a PostgreSQL instance on ingestion.
 

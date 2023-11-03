@@ -1,35 +1,22 @@
-## Q3 2023 Goals
+## Q4 2023 Goals
 
-1. Make CI/CD spark joy
-- Deploying components separately
-- Better controls, allow people to roll back. UI to manage deploy.
-- Make CI faster/have more capacity
+1. Continued maintenance of systems
+  - Int -> bigint on postgres EU
+  - EKS 1.28+
 
-2. Empower teams to own their stack
-- Help teams self-serve observability/alerting/paging
-- Give teams insight and control over their costs
-- Help teams figure out how to provision infrastructure
+2. Controlling costs
+  - Reduce cross AZ traffic
+  - Rust capture
 
-3. Ongoing maintenance
-- Upgrade Postgres
-- Terraform state/controls
-- Any other interruptions that come up
-
-## Roadmap
-
-#### 3-year
-
-- All infrastructure is managed as code
-- Cloud is global
-- Best in class security and privacy compliance
-- Scale beyond 1 Trillion events / month
-- Support non-k8s Deploys 🤖
-- Painless developer/contributor experience
-
-#### 6 month
-
-- No Heroku
-- 5 Billion / month events
-- SOC 2 Ready
-- All infra is managed as code on prod / staging + EU Ready 🎈
-- Rock solid, reliable infrastructure with regular production load testing to inform scaling plans
+3. Platform improvements
+  - Better kafka ops 
+  - Try confluent/redpanda/whatever instead of MSK
+  - Figure out how to hotswap clusters quickly if required
+  - Write a guide to take a full stack engineer to confidently make the first debugging steps themselves
+  - Provide a logging + tracing system that engineers want to use
+  - A deploy workflow that every engineer can use
+  - Easy dev deploys
+  - Easy rollbacks using Github Actions
+	
+4. Clickhouse changes	
+  - Migrate to Clickhouse cloud

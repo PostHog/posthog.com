@@ -11,9 +11,6 @@ author:
   - andy-vandervell
 category: Using PostHog
 tags:
-  - Product analytics
-  - Session recording
-  - Feature flags
   - Guides
 ---
 

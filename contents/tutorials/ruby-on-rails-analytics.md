@@ -4,7 +4,6 @@ date: 2023-02-02
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/ruby-on-rails-analytics.png
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 

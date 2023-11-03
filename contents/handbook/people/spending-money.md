@@ -12,6 +12,8 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
+> Need a one off budget increase? You can do this directly within Brex - just request the amount and duration for the relevant budget in the app, and the People & Ops team will automatically be notified for approval. 
+
 You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. 
 
 For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request on this page_, so we can document our decision making into our policy, rather than making everything case by case. If it's likely to just be a one-off, you can post in #team-people-and-ops in Slack instead. 
@@ -66,12 +68,12 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 ### Laptop
 
-We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
+We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many. Please make sure you order a laptop with a keyboard that is US/UK/International English - this makes it much easier for us to reuse your laptop if you upgrade to another model or leave PostHog. 
 
 * For engineering roles, we recommend a Macbook Pro 14-inch M2 Pro, with the 10-core CPU, 16-core GPU upgrade and 32GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
 * For all other roles, we currently recommend a Macbook Air with an Apple Silicon (M2) processor and 16GB of RAM.
 
-These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask.
+These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Charles.
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 

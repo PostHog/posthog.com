@@ -16,6 +16,8 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import Topics from 'components/PostLayout/Topics'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import Title from 'components/Edition/Title'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -27,7 +29,7 @@ const components = {
     a: A,
 }
 
-export default function Customer({ data, pageContext: { tableOfContents } }) {
+export default function Customer({ data, mobile, pageContext: { tableOfContents } }) {
     const { websiteTheme } = useValues(layoutLogic)
 
     const {
@@ -39,22 +41,35 @@ export default function Customer({ data, pageContext: { tableOfContents } }) {
         },
     } = data
 
+    const { fullWidthContent } = useLayoutData()
+
     return (
-        <>
+        <article className="@container">
             <SEO
                 title={`${title} - PostHog`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
-            <section className="article-content customer-content">
-                <h1 className="text-5xl leading-none mt-0">{title}</h1>
-                <MDXProvider components={components}>
-                    <MDXRenderer>{body}</MDXRenderer>
-                </MDXProvider>
-            </section>
+            <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
+                <section className="article-content customer-content flex-1 transition-all pt-8 w-full">
+                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
+                        <Title className="mb-4">{title}</Title>
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                </section>
+                <aside
+                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-dark pt-4 ${
+                        mobile ? 'lg:hidden' : ''
+                    } `}
+                >
+                    aside
+                </aside>
+            </div>
             <FooterCTA />
-        </>
+        </article>
     )
 }
 

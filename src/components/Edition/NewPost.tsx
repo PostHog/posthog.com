@@ -8,11 +8,12 @@ import { fetchCategories } from './lib'
 import { useUser } from 'hooks/useUser'
 import slugify from 'slugify'
 import { useDropzone } from 'react-dropzone'
-import { Upload } from '@posthog/icons'
+import { IconUpload } from '@posthog/icons'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import transformValues from 'components/Squeak/util/transformValues'
 import Spinner from 'components/Spinner'
 import { PostsContext } from './Posts'
+import Checkbox from 'components/Checkbox'
 
 const Categories = ({ value, setFieldValue }) => {
     const [categories, setCategories] = useState([])
@@ -122,7 +123,7 @@ const Image = ({ setFieldValue, featuredImage }) => {
         <div className="relative flex justify-center items-center p-4 h-[250px]" {...getRootProps()}>
             <input className="hidden" {...getInputProps()} />
             <div className="w-7 h-7 opacity-60">
-                <Upload />
+                <IconUpload />
             </div>
             <button type="button" onClick={open} className="absolute w-full h-full inset-0" />
         </div>
@@ -130,6 +131,7 @@ const Image = ({ setFieldValue, featuredImage }) => {
 }
 
 export default function NewPost({ onSubmit, initialValues, postID }) {
+    const [excerptDisabled, setExcerptDisabled] = useState(true)
     const { mutate } = useContext(PostsContext)
     const { getJwt, user } = useUser()
 
@@ -142,8 +144,9 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
             ctaLabel: '',
             ctaURL: '',
             category: undefined,
+            excerpt: '',
         },
-        onSubmit: async ({ title, body, images, ctaLabel, ctaURL, category, featuredImage }) => {
+        onSubmit: async ({ title, body, images, ctaLabel, ctaURL, category, featuredImage, excerpt }) => {
             try {
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
@@ -169,6 +172,7 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
                         post_category: {
                             connect: [category],
                         },
+                        excerpt,
                         ...(uploadedFeaturedImage || featuredImage === null
                             ? {
                                   featuredImage: {
@@ -197,7 +201,7 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
     return (
         <div className="max-w-[450px] h-full ml-auto relative bg-white dark:bg-accent-dark overflow-auto border-l border-border dark:border-dark">
             <form className="m-0 flex flex-col h-full" onSubmit={handleSubmit}>
-                <div className="border-b border-border dark:border-dark overflow-hidden">
+                <div className="border-b border-border dark:border-dark">
                     <div className="grid grid-cols-1 divide-y divide-border dark:divide-border-dark border-border dark:border-dark w-full items-center">
                         <input
                             required
@@ -212,6 +216,25 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
                                 initialValue={initialValues?.body}
                                 setFieldValue={setFieldValue}
                                 values={values}
+                                maxLength={524288}
+                                excerptDisabled={excerptDisabled}
+                            />
+                        </Accordion>
+                        <Accordion initialOpen label="Excerpt" active={!!values.excerpt}>
+                            <textarea
+                                disabled={excerptDisabled}
+                                rows={5}
+                                name="excerpt"
+                                onChange={(e) => setFieldValue('excerpt', e.target.value)}
+                                value={values.excerpt}
+                                placeholder="Excerpt"
+                                className="px-4 py-2 border-none w-full dark:bg-accent-dark resize-none"
+                            />
+                            <Checkbox
+                                className="px-4 mb-2 text-sm"
+                                checked={excerptDisabled}
+                                value="Automatic excerpt"
+                                onChange={() => setExcerptDisabled(!excerptDisabled)}
                             />
                         </Accordion>
                         <Categories setFieldValue={setFieldValue} value={values.category} />
