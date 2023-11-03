@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { IconX } from '@posthog/icons'
 import React, { Fragment } from 'react'
 import { cn } from '../../utils'
+import React from 'react'
 
 interface DrawerProps {
     children: React.ReactNode
