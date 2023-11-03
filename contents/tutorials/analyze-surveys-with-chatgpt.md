@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-14.png
 tags: ['surveys']
 ---
 
-[Surveys](/docs/surveys) are a great way of collecting feedback from your users, especially if you ask your users like "How can we improve our product?". However, they can be hard to analyze if you receive hundreds or more answers. Fortunately, [OpenAI's ChatGPT](https://openai.com/chatgpt) is great at doing this.
+Surveys are a great way of collecting feedback from your users, especially if you ask your users like "How can we improve our product?". However, they can be hard to analyze if you receive hundreds or more answers. Fortunately, [OpenAI's ChatGPT](https://openai.com/chatgpt) is great at doing this.
 
 In this tutorial, we'll show you how to use ChatGPT to analyze your survey results. We'll create a basic Node.js script, parse a CSV of survey answers, and use the ChatGPT API to extract useful information such as sentiment and theme.
 
@@ -41,6 +41,10 @@ analyzeSurveyAnswers()
 
 We'll import sample survey answers into our script from a CSV file called `answers.csv`. You can [download the CSV file here](https://github.com/PostHog/analyze-surveys-with-chatgpt/blob/main/answers.csv).
 
+> 💡 **PostHog Tip:** If you're using [PostHog surveys](/surveys), you can export your answers by navigating to your survey, clicking "Export", and then "Copy CSV to clipboard".
+>
+> ![Export PostHog survey results to a CSV](../images/tutorials/analyze-surveys-with-chatgpt/export-posthog-csv.mp4)
+
 Add the CSV file to your project folder. Then, install [`csv-parser`](https://github.com/mafintosh/csv-parser) – a handy library for parsing CSVs.
 
 ```bash
@@ -59,7 +63,7 @@ const csvToArr = async (filePath) => {
   const results = [];
   return new Promise((resolve, reject) => {
     fs.createReadStream(filePath)
-      .pipe(csv({ headers: ['answer'] }))
+      .pipe(csv({ headers: ['answer', 'timestamp', 'person'] })) // your CSV header names
       .on('data', data => results.push(data))
       .on('end', () => {
         resolve(results);
@@ -101,7 +105,7 @@ const openai = new OpenAI({
 
 Next, for each survey answer, we'll make an API call to [chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api) to extract the following information:
 
-1. The sentiment of the answer i.e., is it positive or negative?
+1. Whether the sentiment is positive or negative?
 2. The theme of the answer.
 
 To do so, the API method requires 2 parameters:
