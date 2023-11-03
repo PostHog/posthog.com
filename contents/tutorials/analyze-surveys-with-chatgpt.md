@@ -1,6 +1,6 @@
 ---
 title: How to analyze surveys with ChatGPT
-date: 2023-10-18
+date: 2023-11-02
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
@@ -99,15 +99,15 @@ const openai = new OpenAI({
 // rest of the code
 ```
 
-Next, for each survey answer, we'll make an API call to [Chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api) to extract the following information:
+Next, for each survey answer, we'll make an API call to [chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api) to extract the following information:
 
 1. The sentiment of the answer i.e., is it positive or negative?
 2. The theme of the answer.
 
 To do so, the API method requires 2 parameters:
 
-- **[model](https://platform.openai.com/docs/models/overview)** – which ChatGPT model to use. We use `gpt-3.5-turbo-16k` (we explain why later in this post).
-- [messages](https://platform.openai.com/docs/guides/gpt/chat-completions-api) – i.e., the task you are requesting ChatGPT to perform. You can find more details on the required format in the [API docs](https://platform.openai.com/docs/guides/gpt/chat-completions-api).
+- [model](https://platform.openai.com/docs/models/overview) – which OpenAI model to use. We use `gpt-3.5-turbo-16k` (we explain why later in this post).
+- [messages](https://platform.openai.com/docs/guides/gpt/chat-completions-api) – i.e., the task you are requesting the model to perform. You can find more details on the required format in the [API docs](https://platform.openai.com/docs/guides/gpt/chat-completions-api).
 
 With this in mind, here's what our code looks like:
 
@@ -153,7 +153,7 @@ const analyzeSurveyAnswers = async () => {
 }
 ```
 
-Finally, we'll save the answer from ChatGPT into a CSV file. This way we'll be able to analyze the results later:
+Finally, we'll save the answer from ChatGPT into a CSV file. This way we can analyze the results later:
 
 ```js
 const analyzeSurveyAnswers = async () => {
@@ -172,11 +172,11 @@ const analyzeSurveyAnswers = async () => {
 }
 ```
 
-If you now run `node survey-analyzer.js`, you should see your analyzed answers appear in your new CSV file! 
+If you now run `node survey-analyzer.js`, you should see your analyzed answers appear in your new CSV file.
 
 ## Batching our requests
 
-Since we submit each survey answer one at a time, it can be quite tedious to wait for the script to complete. To improve this, we can batch our survey answers so that multiple are analyzed at the same time. 
+Since we submit each survey answer one at a time, it can be quite tedious waiting for the script to complete. To improve this, we can batch our survey answers so we analyze multiple at the same time. 
 
 However, an important consideration is that ChatGPT has something called a `token limit`:
 
@@ -186,23 +186,23 @@ This means that the number of tokens in your API call is number tokens in your r
 
 The `token limit` refers to the maximum number of tokens that the model can process in a single request. If we exceed this limit, the model won't be able to handle the request, resulting in an error. Each [model](https://platform.openai.com/docs/models) has a different limit, ranging from approximately 4,000 to 32,000 tokens. 
 
-We've found that [`gpt-3.5-turbo-16k`](https://platform.openai.com/docs/models/gpt-3-5) has the large limit (~16,000 tokens), while still being sufficiently fast and powerful for analyzing survey answers. 
+The [`gpt-3.5-turbo-16k`](https://platform.openai.com/docs/models/gpt-3-5) model we use has a large limit (~16,000 tokens), while still being sufficiently fast and powerful for analyzing survey answers. 
 
-This brings us to the question: **How many survey answers will we be able to batch and analyze at the same time? **
+This brings us to the question: **How many survey answers can we batch and analyze at the same time? **
 
-Using [tokenizer](https://platform.openai.com/tokenizer), a tool that counts the number of tokens in a string, we see that each of our survey answers are roughly `60 tokens`. Thus to estimate how many tokens each API request will use:
+Using [tokenizer](https://platform.openai.com/tokenizer), a tool that counts the number of tokens in a string, we see that each survey answer is roughly `60 tokens`. Thus to estimate how many tokens each API request will use:
 
-1. `60 tokens` for each survey answer requested to be analyzed.
+1. `60 tokens` for each survey answer request.
 2. `120 token` for each response from ChatGPT (since each response includes the original survey answer, plus some extra text).
 
-So the total cost to analyze each survey answer will be approximately `180 tokens`. **This means we can batch at most `16,000 / 180 = 88` answers together**. 
+So the total cost to analyze each survey answer is approximately `180 tokens`. **This means we can batch at most `16,000 / 180 = 88` answers together**. 
 
 To be extra safe and ensure we don't exceed this limit, we'll batch at most 50 answers together.
 
 Let's update our code to do that:
 
 - First we use a variable `batchSize = 50` in our `for-loop`. 
-- Next, we modify our `messages` argument to request ChatGPT to analyze many survey answers (instead of only one at a time). 
+- Next, we modify our `messages` argument to request ChatGPT to analyze multiple survey answers (instead of only one at a time). 
 - Finally, we save the array from the API response into our CSV file.
 
 ```js
@@ -260,11 +260,11 @@ const analyzeSurveyAnswers = async () => {
 // rest of code...
 ```
 
-Now if you run `node survey-analyzer.js`, ChatGPT will analyze 50 survey answers at a time!
+Now if you run `node survey-analyzer.js`, ChatGPT analyzes 50 survey answers at a time.
 
 ## Analyzing results in Excel or Google Sheets
 
-Now that we've analyzed our survey answers, we can import them into excel or Google sheets and visualize them. 
+Now that we've analyzed our survey answers, we can import them into Excel or Google Sheets to visualize them. 
 
 For example, you can create a [pivot table](https://support.microsoft.com/en-gb/office/create-a-pivottable-to-analyze-worksheet-data-a9a84538-bfe9-40a9-a8e9-f99134456576) to find the most common themes in the survey answers. You can do this by:
 
@@ -280,7 +280,7 @@ You should now see a sorted list of the most common themes in your survey answer
 
 ## Reducing duplicate themes
 
-You may have noticed that some of the themes suggested by ChatGPT may be very similar to others. 
+You may have noticed that some of the themes suggested by ChatGPT are similar to others (but not the exact same).
 
 For example, when we ran the script, it suggested a theme of `user permissions` for one survey answer but `user roles and permissions` for another. These are clearly the same theme, but the slightly different names mean that it's harder to aggregate the results in our pivot table.
 
@@ -376,7 +376,7 @@ const reduceThemes = async () => {
 reduceThemes()
 ```
 
-Now, running `node reduce-themes.js` will aggregate similar themes. If you re-import your list in Google sheets or excel and create a pivot table, you should see fewer themes!
+Now, running `node reduce-themes.js` will aggregate similar themes. If you re-import your list in Google Sheets or Excel and create a pivot table, you should see fewer themes.
 
 ## Further reading
 
