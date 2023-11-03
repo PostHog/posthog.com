@@ -11,7 +11,6 @@ type LineItemsProps = {
 }
 
 export function LineItem(props: LineItemsProps): React.ReactElement {
-    console.log('📀📀📀 props', props)
     const { className, item } = props
     const remove = useCartStore((state) => state.remove)
 

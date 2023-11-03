@@ -27,12 +27,14 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     const discountCode = useCartStore((state) => state.discountCode)
 
     const handleCheckout = useCallback(() => {
+        setIsCheckingOut(true)
         async function checkoutMutation() {
             setIsCheckingOut(true)
             const createCartVariables = getCartVariables(cartItems)
             const newCart = (await createCartQuery(createCartVariables)) as CreateCartResponse
+            console.log('--- newCart', newCart)
             const checkoutUrl = getCheckoutUrl(newCart)
-            console.log('📀📀📀 checkoutUrl', checkoutUrl)
+            console.log('--- checkoutUrl', checkoutUrl)
             // if (checkoutUrl) {
             //     window.location.href = checkoutUrl
             // }
@@ -44,7 +46,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
 
     return (
         <button className={classes} onClick={handleCheckout}>
-            Checkout
+            {isCheckingOut ? 'Moving to checkout...' : 'Checkout'}
         </button>
     )
 }

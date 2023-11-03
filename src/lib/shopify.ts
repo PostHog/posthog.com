@@ -15,14 +15,73 @@ const SHOPIFY_HEADERS: ShopifyHeaders = {
     'X-Shopify-Storefront-Access-Token': process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN!,
 }
 
+/**
+ * Create a cart and return its checkout URL, along with the cart's line items.
+ * At this point we need to validate the cart's line items to make sure they are
+ * still available for sale.
+ *
+ * TODO: Decide on how to handle unavailable items. Should we remove them from the cart
+ * with some kind of promp? If not, it will error in checkout where we won't have
+ * control.
+ */
 export const CREATE_CART = `
-  mutation CartCreateMutation($input: CartInput!) {
-    cartCreate(input: $input) {
-      cart {
-        checkoutUrl
-      }
+    mutation CartCreateMutation($input: CartInput!) {
+        cartCreate(input: $input) {
+            cart {
+                checkoutUrl
+                lines(first: 250) {
+                    edges {
+                        node {
+                            merchandise {
+                                ... on ProductVariant {
+                                    availableForSale
+                                    compareAtPriceV2 {
+                                        amount
+                                        currencyCode
+                                    }
+                                    currentlyNotInStock
+                                    id
+                                    image {
+                                        altText
+                                        height
+                                        id
+                                        originalSrc
+                                        transformedSrc
+                                        width
+                                    }
+                                    priceV2 {
+                                        amount
+                                        currencyCode
+                                    }
+                                    product {
+                                        id
+                                        handle
+                                        productType
+                                        title
+                                        vendor
+                                    }
+                                    quantityAvailable
+                                    selectedOptions {
+                                        name
+                                        value
+                                    }
+                                    sku
+                                    title
+                                    weight
+                                    weightUnit
+                                    }
+                              }
+                        }
+                    }
+                    pageInfo {
+                        hasNextPage
+                        hasPreviousPage
+
+                    }
+                }
+            }
+        }
     }
-  }
 `
 
 export const createCartQuery = (variables: CreateCartVariables): Promise<CreateCartResponse | void> =>
