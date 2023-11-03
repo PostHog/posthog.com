@@ -13,12 +13,13 @@ import LikeButton from '../LikeButton'
 import { CallToAction, child, container } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
 import { Menu } from '@headlessui/react'
-import { IconChevronDown, IconFilter, IconX } from '@posthog/icons'
+import { IconChevronDown, IconFilter, IconX, IconSort } from '@posthog/icons'
 import { Icon, getIcon } from 'components/PostLayout/Menu'
 import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../../navs/posts'
 import Intro from '../Intro'
 import Tags from '../Tags'
+import Tooltip from 'components/Tooltip'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -187,13 +188,16 @@ export const Skeleton = () => {
 const SortDropdown = () => {
     const { sort, setSort, articleView } = useContext(PostsContext)
     return (
-        <div className={`mb-4 flex items-center space-x-2 ${articleView ? 'px-4 mt-4' : 'mt-8'}`}>
-            <p className="m-0 text-sm">Sort by:</p>
+        <div className={`flex items-center ${articleView ? '' : ''}`}>
             <div className="relative">
                 <Menu>
-                    <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent border-light dark:border-dark">
-                        <span>{sort}</span>
-                        <IconChevronDown className="w-5" />
+                    <Menu.Button className="flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                        <Tooltip content={<>Sorting by: ${sort}</>}>
+                            <span className="relative">
+                                <IconSort className="w-5 h-5" />
+                            </span>
+                        </Tooltip>
+                        <IconChevronDown className="w-6" />
                     </Menu.Button>
                     <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-0 left-0 translate-y-full overflow-hidden">
                         {sortOptions.map((option, index) => {
@@ -267,7 +271,8 @@ export const PostFilters = () => {
                     </Menu>
                 </div>
                 {activeMenu?.children?.length > 0 && (
-                    <div className="flex-grow-0 flex items-center justify-center">
+                    <div className="flex-grow-0 flex items-center justify-center gap-0.5">
+                        <SortDropdown />
                         <Menu>
                             <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
                                 <IconFilter className="w-5 h-5" />
@@ -392,7 +397,7 @@ function PostsListing() {
                         )}
                     </>
                 )}
-                <SortDropdown />
+
                 <ul
                     className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
