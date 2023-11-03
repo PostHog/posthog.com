@@ -223,12 +223,6 @@ export const postsMenu: IMenu[] = [
         ],
     },
     {
-        name: 'Newsletter',
-        url: '/newsletter',
-        icon: 'IconLetter',
-        color: 'green',
-    },
-    {
         name: 'Spotlight',
         url: '/spotlight',
         icon: 'IconSpotlight',
