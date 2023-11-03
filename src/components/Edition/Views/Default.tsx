@@ -117,7 +117,7 @@ const Post = ({
     return (
         <li
             ref={containerRef}
-            className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[32px_1fr] gap-2 items-center' : ''}`}
+            className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[28px_1fr] items-center' : ''}`}
         >
             {!articleView && <LikeButton postID={id} />}
             <span className={`flex items-center ${articleView ? 'py-px' : ''}`}>
@@ -191,7 +191,7 @@ const SortDropdown = () => {
             <p className="m-0 text-sm">Sort by:</p>
             <div className="relative">
                 <Menu>
-                    <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent border-light dark:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                    <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent border-light dark:border-dark">
                         <span>{sort}</span>
                         <IconChevronDown className="w-5" />
                     </Menu.Button>
