@@ -383,13 +383,6 @@ function PostsListing() {
                             </h2>
                         )}
                         <Intro />
-                        <Tags />
-
-                        {tag && (
-                            <h3 className="text-lg">
-                                {activeMenu?.children?.find((menuItem) => menuItem.tag === tag)?.name || tag}
-                            </h3>
-                        )}
                     </>
                 )}
                 <SortDropdown />

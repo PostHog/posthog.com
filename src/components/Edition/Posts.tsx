@@ -356,15 +356,21 @@ export default function Posts({
                 <PostProvider
                     value={{
                         title: title || 'Posts',
-                        menu: menu.map((menuItem) => ({
+                        menu: (!root
+                            ? menu
+                            : [
+                                  { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
+                                  ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || menu),
+                              ]
+                        ).map((menuItem) => ({
                             ...menuItem,
-                            handleLinkClick: ({ name, url: activeURL, topLevel, tag }) => {
-                                if (topLevel) {
+                            handleLinkClick: ({ name, url: activeURL, tag }) => {
+                                if (root && name !== 'All') {
+                                    setTag(tag || name)
+                                } else {
                                     setRoot(activeURL === '/posts' ? undefined : activeURL?.split('/')[1])
                                     setTag(undefined)
                                     setActiveMenu(menu.find(({ url }) => url === activeURL))
-                                } else {
-                                    setTag(tag || name)
                                 }
                             },
                             children: undefined,
