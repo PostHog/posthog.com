@@ -17,6 +17,21 @@ Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-con
 }
 ```
 
+Some frameworks, like **SvelteKit** and **Astro**, require a hungrier regex pattern like:
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/ingest/:path(.*)",
+      "destination": "https://app.posthog.com/:path*"
+    }
+  ]
+}
+```
+
+> **Note:** Some frameworks, like T3 app, don't support Vercel rewrites well. If neither of these options work, we recommend trying another proxy method.
+
 Once done, set the `/ingest` route of your domain as the API host in your PostHog initialization like this:
 
 ```js
@@ -28,8 +43,6 @@ posthog.init('<ph_project_api_key>',
 ```
 
 Once updated, deploy your changes on Vercel and check that PostHog requests are going to `https://www.your-domain.com/ingest` by checking the network tab on your domain.
-
-> **Note:** Some frameworks, including [Astro](https://vercel.com/docs/frameworks/astro#can-i-use-vercel.json-to-create-rewrites-with-astro) and [SvelteKit](https://vercel.com/docs/frameworks/sveltekit#rewrites), don't support Vercel rewrites well. If you're using one of these frameworks, we recommend trying another proxy method.
 
 ## Setup video
 
