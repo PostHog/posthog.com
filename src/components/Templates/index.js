@@ -97,7 +97,10 @@ function TemplatesPage({ location }) {
                     ),
                     {
                         label: <>Build your own &rarr;</>,
-                        url: 'https://app.posthog.com/dashboard',
+                        url:
+                            currentFilter === 'survey'
+                                ? 'https://app.posthog.com/survey_templates'
+                                : 'https://app.posthog.com/dashboard',
                         image: '/images/builder-hog.png',
                     },
                 ]}
