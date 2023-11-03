@@ -7,15 +7,15 @@ sidebar: Docs
 tags: ['surveys']
 ---
 
-To get the most accurate responses for your surveys, you want users to experience your site and product before asking. You want to wait and let them have their first impressions, instead of showing a survey right away.
+Before asking users about your app, you want them to **actually use it**. Surveys that pop up right away hinder their initial experience and get less useful responses as a result.
 
-To help you do this, you can delay your surveys and this tutorial shows you how. It goes over how to create a survey in PostHog and then implement a delay in your app for that survey.
+To help you do prevent this, you can set up a delay surveys and this tutorial shows you how. It goes over how to create a survey targeting a HTML class in PostHog and then implement a delay using that class and survey in your app.
 
 ## Create your delayed survey
 
-First, we create our survey in PostHog by going to the [Surveys tab](https://app.posthog.com/surveys) and clicking "New survey." Choose any template or create a blank survey, fill out the details, and open the "Targeting" section. 
+First, we create our class-targeted survey in PostHog by going to the [Surveys tab](https://app.posthog.com/surveys) and clicking "New survey." Choose any template or create a blank survey, fill out the details, and open the "Targeting" section. 
 
-In the targeting section, switch from "All users" to "Users who match…". Add `.delayed-survey` under "Selector matches" (the **leading period** is important) and click "Save as draft." Our implementation will add this class to the page when want the survey to show.
+In the targeting section, we need to set up the class targeting. Start by switching from "All users" to "Users who match…". Add `.delayed-survey` under "Selector matches" (the **leading period** is important) and click "Save as draft." Our implementation will add this class to the page when want the survey to show.
 
 Finally, click Launch. You don’t have to worry about this survey showing early, because the class selector won’t match anything until we implement it.
 
