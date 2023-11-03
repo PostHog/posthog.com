@@ -221,8 +221,8 @@ const SortDropdown = () => {
     )
 }
 
-export const PostFilters = () => {
-    const { setRoot, setTag, tag, activeMenu, setActiveMenu } = useContext(PostsContext)
+export const PostFilters = ({ showTags = true, showSort = true }) => {
+    const { setRoot, setTag, tag, activeMenu, setActiveMenu, articleView } = useContext(PostsContext)
     const { fullWidthContent } = useLayoutData()
     const breakpoints = useBreakpoint()
 
@@ -255,7 +255,7 @@ export const PostFilters = () => {
                                                 setActiveMenu(menu)
                                                 setRoot(url === '/posts' ? undefined : url?.split('/')[1])
                                                 setTag(undefined)
-                                                if (breakpoints.sm) {
+                                                if (!articleView || breakpoints.sm) {
                                                     navigate(url)
                                                 }
                                             }}
@@ -270,8 +270,8 @@ export const PostFilters = () => {
                         </Menu.Items>
                     </Menu>
                 </div>
-                <SortDropdown />
-                {activeMenu?.children?.length > 0 && (
+                {showSort && <SortDropdown />}
+                {showTags && activeMenu?.children?.length > 0 && (
                     <div className="flex-grow-0 flex items-center justify-center">
                         <Menu>
                             <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
@@ -323,7 +323,7 @@ export const PostFilters = () => {
                 )}
             </div>
 
-            {tag && (
+            {showTags && tag && (
                 <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-dark -mb-1">
                     <span
                         className="
@@ -446,10 +446,9 @@ export default function Default({ children }) {
                         >
                             <UserBar />
                         </div>
+                        {pathname !== '/posts' && <PostFilters showTags={false} showSort={false} />}
                         <div
-                            className={`max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 pt-3 pr-4 mt-[-2px] ${
-                                fullWidthContent ? 'pl-2' : 'pl-4'
-                            }`}
+                            className={`max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 pt-3 pr-4 mt-[-2px]`}
                         >
                             <TableOfContents />
                         </div>

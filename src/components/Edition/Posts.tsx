@@ -360,7 +360,7 @@ export default function Posts({
                             ? menu
                             : [
                                   { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
-                                  ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || menu),
+                                  ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),
                               ]
                         ).map((menuItem) => ({
                             ...menuItem,
