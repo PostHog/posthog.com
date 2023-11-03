@@ -1117,6 +1117,13 @@
         { "source": "/ab-testing/roadmap", "destination": "/ab-testing#roadmap" },
         { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" },
         { "source": "/handbook/what-is-posthog", "destination": "/handbook/why-does-posthog-exist" },
-        { "source": "/handbook/finance/fundraising", "destination": "/handbook/finance" }
+        { "source": "/handbook/finance/fundraising", "destination": "/handbook/finance" },
+        { "source": "/blog/guardrail-metrics", "destination": "/product-engineers/guardrail-metrics" },
+        { "source": "/blog/fixing-growth-problems", "destination": "/product-engineers/fixing-growth-problems" },
+        {
+            "source": "/blog/decouple-deployment-from-release",
+            "destination": "/product-engineers/decouple-deployment-from-release"
+        },
+        { "source": "/blog/testing-in-production", "destination": "/product-engineers/testing-in-production" }
     ]
 }
