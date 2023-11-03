@@ -290,7 +290,7 @@ export default function Posts({
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
 }) {
     const didMount = useRef(false)
-    const [sort, setSort] = useState('Popularity')
+    const [sort, setSort] = useState(sortOptions[0].label)
     const [loginModalOpen, setLoginModalOpen] = useState(false)
     const { pathname } = useLocation()
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)

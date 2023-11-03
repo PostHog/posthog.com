@@ -21,6 +21,11 @@ import usePostHog from 'hooks/usePostHog'
 import Logomark from 'components/Home/images/Logomark'
 import { communityMenu } from '../../../navs'
 import useTopicsNav from '../../../navs/useTopicsNav'
+import { usePosts } from 'components/Edition/hooks/usePosts'
+import PostsTable from 'components/Edition/PostsTable'
+import { SortDropdown } from 'components/Edition/Views/Default'
+import { sortOptions } from 'components/Edition/Posts'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -45,12 +50,46 @@ const Avatar = (props: { className?: string; src?: string }) => {
     )
 }
 
+const LikedPosts = ({ profileID }) => {
+    const posts = usePosts({
+        params: {
+            filters: {
+                likes: {
+                    id: {
+                        $eq: profileID,
+                    },
+                },
+            },
+        },
+    })
+
+    return (
+        <ul className="list-none m-0 p-0">
+            <PostsTable {...posts} />
+        </ul>
+    )
+}
+
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const [view, setView] = useState('discussions')
     const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
     const nav = useTopicsNav()
+    const { user } = useUser()
+    const [sort, setSort] = useState(sortOptions[0].label)
+    const posts = usePosts({
+        params: {
+            sort: sortOptions.find((option) => option.label === sort)?.sort,
+            filters: {
+                authors: {
+                    id: {
+                        $eq: id,
+                    },
+                },
+            },
+        },
+    })
 
     const profileQuery = qs.stringify(
         {
@@ -179,16 +218,16 @@ export default function ProfilePage({ params }: PageProps) {
                             </div>
 
                             <div className="mt-12">
-                                {profile?.amaEnabled ? (
-                                    <div className="grid grid-cols-2 relative max-w-xs mb-6 font-semibold border-b border-border dark:border-dark text-base">
-                                        <button
-                                            className={`${
-                                                view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
-                                            } p-4 transition-opacity`}
-                                            onClick={() => setView('discussions')}
-                                        >
-                                            Discussions
-                                        </button>
+                                <div className="flex items-center relative mb-6 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
+                                    <button
+                                        className={`${
+                                            view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                        } p-4 transition-opacity`}
+                                        onClick={() => setView('discussions')}
+                                    >
+                                        Discussions
+                                    </button>
+                                    {profile?.amaEnabled && (
                                         <button
                                             className={`${
                                                 view !== 'ama' ? 'opacity-60 hover:opacity-80' : 'font-bold'
@@ -197,22 +236,57 @@ export default function ProfilePage({ params }: PageProps) {
                                         >
                                             Ask me anything
                                         </button>
-                                        <span
-                                            className={`transition-all absolute bottom-0 translate-y-1/2 border-b-2 border-red dark:border-yellow w-1/2 left-0 rounded ${
-                                                view === 'discussions' ? '' : 'translate-x-full'
-                                            }`}
-                                        />
-                                    </div>
-                                ) : (
-                                    <h3>Discussions</h3>
+                                    )}
+                                    {user?.profile?.id === id && (
+                                        <button
+                                            className={`${
+                                                view !== 'liked-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('liked-posts')}
+                                        >
+                                            Liked posts
+                                        </button>
+                                    )}
+                                    {user?.profile?.id && (
+                                        <div className="flex items-center">
+                                            <button
+                                                className={`${
+                                                    view !== 'user-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                                } p-4 transition-opacity`}
+                                                onClick={() => setView('user-posts')}
+                                            >
+                                                Posts
+                                            </button>
+                                            <AnimatePresence>
+                                                {view === 'user-posts' && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, translateY: '100%' }}
+                                                        animate={{ opacity: 1, translateY: 0 }}
+                                                        exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                                                        className={`-ml-4 z-50`}
+                                                    >
+                                                        <SortDropdown sort={sort} setSort={setSort} />
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    )}
+                                </div>
+                                {(view === 'discussions' || view === 'ama') && (
+                                    <Questions
+                                        initialView={view === 'ama' ? 'question-form' : undefined}
+                                        slug={view === 'ama' ? window?.location?.pathname : undefined}
+                                        profileId={view === 'discussions' ? id : undefined}
+                                        showForm={view === 'ama'}
+                                        disclaimer={false}
+                                    />
                                 )}
-                                <Questions
-                                    initialView={view === 'ama' ? 'question-form' : undefined}
-                                    slug={view === 'ama' ? window?.location?.pathname : undefined}
-                                    profileId={view === 'discussions' ? id : undefined}
-                                    showForm={view === 'ama'}
-                                    disclaimer={false}
-                                />
+                                {view === 'liked-posts' && user?.profile?.id === id && <LikedPosts profileID={id} />}
+                                {view === 'user-posts' && (
+                                    <ul className="list-none m-0 p-0">
+                                        <PostsTable {...posts} />
+                                    </ul>
+                                )}
                             </div>
                         </>
                     ) : null}
