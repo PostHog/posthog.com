@@ -344,6 +344,24 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
     )
 }
 
+const Title = () => {
+    const { activeMenu } = useContext(PostsContext)
+    return (
+        <div className="flex justify-between items-center mb-2 pt-4">
+            <h2 className="m-0 text-xl space-x-2 flex-wrap md:flex hidden">
+                {activeMenu?.name === 'Founders' ? (
+                    <>Founder's hub</>
+                ) : activeMenu?.name === 'Product engineers' ? (
+                    <>Product engineer's hub</>
+                ) : (
+                    <>{activeMenu?.name}</>
+                )}
+            </h2>
+            <SortDropdown />
+        </div>
+    )
+}
+
 function PostsListing() {
     const { posts, fetchMore, isValidating, isLoading, articleView, hasMore, activeMenu, tag } =
         useContext(PostsContext)
@@ -376,25 +394,12 @@ function PostsListing() {
             >
                 {!articleView && (
                     <>
-                        {activeMenu?.children?.length > 0 && (
-                            <h2 className="pt-4 text-xl mb-2 space-x-2 flex-wrap md:flex hidden">
-                                {activeMenu?.name === 'Founders' ? (
-                                    <>Founder's hub</>
-                                ) : activeMenu?.name === 'Product engineers' ? (
-                                    <>Product engineer's hub</>
-                                ) : (
-                                    <>{activeMenu?.name}</>
-                                )}
-                            </h2>
-                        )}
+                        <Title />
                         <Intro />
-                        <div className="mt-8">
-                            <SortDropdown />
-                        </div>
                     </>
                 )}
                 <ul
-                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden ${
+                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden mt-4 ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
                     }`}
                 >
