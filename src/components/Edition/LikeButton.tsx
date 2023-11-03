@@ -1,7 +1,7 @@
 import { useUser } from 'hooks/useUser'
 import React, { useContext, useEffect, useState } from 'react'
 import Tooltip from 'components/Tooltip'
-import { IconTriangleUp, IconTriangleUpFilled } from '@posthog/icons'
+import { IconTriangleUpFilled } from '@posthog/icons'
 import { PostsContext } from './Posts'
 
 export default function LikeButton({ className = '', postID }: { postID: number }) {
@@ -25,10 +25,20 @@ export default function LikeButton({ className = '', postID }: { postID: number 
 
     return (
         <button
-            className={`w-full flex justify-center items-center h-full relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${className}`}
+            className={`w-full flex justify-center items-center h-full relative p-1.5 transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${className}`}
             onClick={handleClick}
         >
-            <span className="w-5">{liked ? <IconTriangleUpFilled /> : <IconTriangleUp />}</span>
+            <span className="w-6">
+                {liked ? (
+                    <IconTriangleUpFilled className="text-red" />
+                ) : (
+                    <Tooltip content="Upvote this post">
+                        <span className="relative">
+                            <IconTriangleUpFilled className="opacity-50 hover:opacity-75" />
+                        </span>
+                    </Tooltip>
+                )}
+            </span>
         </button>
     )
 }
