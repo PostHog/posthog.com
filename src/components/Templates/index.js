@@ -10,14 +10,6 @@ import List from 'components/List'
 const filters = [
     {
         type: 'type',
-        name: 'Product',
-    },
-    {
-        type: 'type',
-        name: 'Marketing',
-    },
-    {
-        type: 'type',
         name: 'Dashboard',
     },
     {
