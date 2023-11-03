@@ -231,8 +231,9 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
     )
 }
 
-export const getParams = (root, tag) => {
+export const getParams = (root, tag, sort) => {
     return {
+        sort,
         filters: {
             $and: [
                 ...(root
@@ -273,11 +274,23 @@ export const getParams = (root, tag) => {
     }
 }
 
+export const sortOptions = [
+    {
+        sort: ['score:desc', 'date:desc'],
+        label: 'Popularity',
+    },
+    {
+        sort: ['date:desc'],
+        label: 'Newest',
+    },
+]
+
 export default function Posts({
     children,
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
 }) {
     const didMount = useRef(false)
+    const [sort, setSort] = useState('Popularity')
     const [loginModalOpen, setLoginModalOpen] = useState(false)
     const { pathname } = useLocation()
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)
@@ -289,7 +302,7 @@ export default function Posts({
         menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
     )
 
-    const [params, setParams] = useState(getParams(root, initialTag))
+    const [params, setParams] = useState(getParams(root, initialTag, sortOptions[0].sort))
 
     const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
 
@@ -313,8 +326,8 @@ export default function Posts({
     }, [pathname])
 
     useEffect(() => {
-        setParams(getParams(root, tag))
-    }, [root, tag])
+        setParams(getParams(root, tag, sortOptions.find((option) => option.label === sort)?.sort))
+    }, [root, tag, sort])
 
     return (
         <Layout parent={layoutMenu.parent} activeInternalMenu={layoutMenu.activeInternalMenu}>
@@ -336,6 +349,8 @@ export default function Posts({
                     tag,
                     activeMenu,
                     setActiveMenu,
+                    sort,
+                    setSort,
                 }}
             >
                 <PostProvider

@@ -1,7 +1,7 @@
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
 import React, { useContext, useEffect, useRef } from 'react'
-import { PostsContext } from '../Posts'
+import { PostsContext, sortOptions } from '../Posts'
 import TableOfContents from 'components/PostLayout/TableOfContents'
 import { useLocation } from '@reach/router'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -184,6 +184,39 @@ export const Skeleton = () => {
     )
 }
 
+const SortDropdown = () => {
+    const { sort, setSort, articleView } = useContext(PostsContext)
+    return (
+        <div className={`mb-4 flex items-center space-x-2 ${articleView ? 'px-4 mt-4' : 'mt-8'}`}>
+            <p className="m-0 text-sm">Sort by:</p>
+            <div className="relative">
+                <Menu>
+                    <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent border-light dark:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                        <span>{sort}</span>
+                        <IconChevronDown className="w-5" />
+                    </Menu.Button>
+                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-0 left-0 translate-y-full overflow-hidden">
+                        {sortOptions.map((option, index) => {
+                            return (
+                                <Menu.Item key={`${option.label}-${index}`}>
+                                    <button
+                                        onClick={() => setSort(option.label)}
+                                        className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
+                                            option.label === sort ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                                        }`}
+                                    >
+                                        {option.label}
+                                    </button>
+                                </Menu.Item>
+                            )
+                        })}
+                    </Menu.Items>
+                </Menu>
+            </div>
+        </div>
+    )
+}
+
 export const PostFilters = () => {
     const { setRoot, setTag, tag, activeMenu, setActiveMenu } = useContext(PostsContext)
     const { fullWidthContent } = useLayoutData()
@@ -310,7 +343,6 @@ function PostsListing() {
     const { posts, fetchMore, isValidating, isLoading, articleView, hasMore, activeMenu, tag } =
         useContext(PostsContext)
     const breakpoints = useBreakpoint()
-    const { fullWidthContent } = useLayoutData()
 
     return articleView && breakpoints.sm ? null : (
         <div
@@ -339,19 +371,17 @@ function PostsListing() {
             >
                 {!articleView && (
                     <>
-                        <h2 className="pt-4 text-xl mb-2 space-x-2 flex-wrap md:flex hidden">
-                            {activeMenu?.children?.length > 0 && (
-                                <>
-                                    {activeMenu?.name === 'Founders' ? (
-                                        <>Founder's hub</>
-                                    ) : activeMenu?.name === 'Product engineers' ? (
-                                        <>Product engineer's hub</>
-                                    ) : (
-                                        <>{activeMenu?.name}</>
-                                    )}
-                                </>
-                            )}
-                        </h2>
+                        {activeMenu?.children?.length > 0 && (
+                            <h2 className="pt-4 text-xl mb-2 space-x-2 flex-wrap md:flex hidden">
+                                {activeMenu?.name === 'Founders' ? (
+                                    <>Founder's hub</>
+                                ) : activeMenu?.name === 'Product engineers' ? (
+                                    <>Product engineer's hub</>
+                                ) : (
+                                    <>{activeMenu?.name}</>
+                                )}
+                            </h2>
+                        )}
                         <Intro />
                         <Tags />
 
@@ -362,6 +392,7 @@ function PostsListing() {
                         )}
                     </>
                 )}
+                <SortDropdown />
                 <ul
                     className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
