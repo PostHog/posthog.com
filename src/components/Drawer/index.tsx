@@ -13,7 +13,7 @@ interface DrawerProps {
 export const Drawer = (props: DrawerProps): React.ReactElement => {
     const { children, className, isOpen, onClose } = props
 
-    const classes = cn('relative p-4 min-h-full w-[600px] max-w-[90%] bg-white', className)
+    const classes = cn('relative p-4 min-h-full h-screen w-[600px] max-w-[90%] bg-white overflow-scroll', className)
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -42,7 +42,7 @@ export const Drawer = (props: DrawerProps): React.ReactElement => {
                             leaveTo="translate-x-full"
                         >
                             <Dialog.Panel className={classes}>
-                                <XIcon className="text-black absolute top-4 right-4 w-8 h-8" onClick={onClose} />
+                                <XIcon className="text-black absolute top-4 right-4 w-8 h-8 cursor" onClick={onClose} />
                                 {children}
                             </Dialog.Panel>
                         </Transition.Child>
