@@ -192,7 +192,7 @@ const SortDropdown = () => {
             <div className="relative">
                 <Menu>
                     <Menu.Button className="flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
-                        <Tooltip content={<>Sorting by: ${sort}</>}>
+                        <Tooltip content={() => <>Sorting by: {sort}</>}>
                             <span className="relative">
                                 <IconSort className="w-5 h-5" />
                             </span>
@@ -270,9 +270,9 @@ export const PostFilters = () => {
                         </Menu.Items>
                     </Menu>
                 </div>
+                <SortDropdown />
                 {activeMenu?.children?.length > 0 && (
-                    <div className="flex-grow-0 flex items-center justify-center gap-0.5">
-                        <SortDropdown />
+                    <div className="flex-grow-0 flex items-center justify-center">
                         <Menu>
                             <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
                                 <IconFilter className="w-5 h-5" />
@@ -388,9 +388,11 @@ function PostsListing() {
                             </h2>
                         )}
                         <Intro />
+                        <div className="mt-8">
+                            <SortDropdown />
+                        </div>
                     </>
                 )}
-
                 <ul
                     className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
