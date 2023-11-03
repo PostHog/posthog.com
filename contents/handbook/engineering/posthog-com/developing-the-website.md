@@ -161,7 +161,7 @@ Most PostHog pages utilize frontmatter as a way of providing additional data to 
 
 ##### Blog
 
-Markdown files located in /contents/blog
+Markdown files located in `/contents/blog``
 
 ```markdown
 ---
@@ -227,9 +227,34 @@ title: Contribute to the website: documentation, handbook, and blog
 
 - `title`: the title that appears at the top of the handbook / doc page
 
+##### Comparison pages
+
+Create a table on a "PostHog vs..." page with the following components. (You can see examples of how this is used [in this pull request](https://github.com/PostHog/posthog.com/pull/7001).)
+
+**Import the components at the top of the post content (after frontmatter):**
+
+```
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
+```
+
+**Create a table like:**
+
+```
+<ComparisonTable column1="Company name 1" column2="Company name 2">
+  <ComparisonHeader category="Optional header row" />
+  <ComparisonRow column1={true} column2="Text" feature="Feature name" description="Feature descrpition" />
+</ComparisonTable>
+```
+
+In `ComparisonRow`:
+- Values for `column1` and `column2` can be: `{true}` | `{false}` | `"Text string"`
+- `feature` is required but `description` can be omitted (only if not using that column for the entire table)
+
 ##### Customers
 
-Markdown files located in /contents/customers
+Markdown files located in `/contents/customers`
 
 ```markdown
 ---
@@ -258,95 +283,6 @@ toolsUsed:
 - `industries`: a list of industries that apply to the company
 - `users`: a list of user types that use the company's product
 - `toolsUsed`: a list of highlighted PostHog tools used by the company
-
-##### Team
-
-Markdown files located in /contents/team
-
-```markdown
----
-name: James Hawkins
-jobTitle: Co-Founder & CEO
-headshot: ../images/team/James.png
-github: jamesefhawkins
-country: GB
-startDate: 2019-07-03
----
-```
-
-- `name`: the name of the team member
-- `jobTitle`: the role of the team member
-- `headshot`: the relative path to the team member's headshot
-- `github`: the team member's GitHub handle
-- `country`: the country the team member resides in
-- `startDate`: the team member's date of hire
-
-##### HostHog
-
-Markdown files located in /contents/hosthog
-
-```markdown
----
-date: 2022-02-24
-city: London
-venue: { name: Cobalance, address: Shoreditch High Street, London }
-from: '18:00'
-to: '20:30'
-agenda:
-    [
-        {
-            from: '18:00',
-            to: '18:30',
-            description: 'Sign in, grab some exclusive merch and meet the PostHog team over a cocktail in the Cellar Bar.',
-            emoji: '👋🏼',
-        },
-        {
-            from: '18:30',
-            to: '19:00',
-            description: 'After a welcome from CEO James Hawkins, hear how Mention Me uses PostHog to build better products in a fireside chat with Head of Product Anca Filip, hosted by PostHog’s Marcus Hyett.',
-            emoji: '💬',
-        },
-        {
-            from: '19:15',
-            to: '20:30',
-            description: 'Chat to the team and other PostHog users over a cocktail and slice of pizza. We’d love to hear your ideas and feedback!',
-            emoji: '🍺',
-        },
-    ]
-speakers:
-    [
-        {
-            name: 'James Hawkins',
-            title: 'Co-founder & CEO',
-            company: 'PostHog',
-            linkedIn: 'https://www.linkedin.com/in/j-hawkins',
-            image: '../images/hosthog/london/speakers/james.png',
-        },
-        {
-            name: 'Anca Filip',
-            title: 'Head of Product',
-            company: 'Mention Me',
-            linkedIn: 'https://www.linkedin.com/in/ancafilip',
-            image: '../images/hosthog/london/speakers/anca.png',
-        },
-        {
-            name: 'Marcus Hyett',
-            title: 'VP of Product',
-            company: 'PostHog',
-            linkedIn: '',
-            image: '../images/hosthog/london/speakers/marcus.png',
-        },
-    ]
----
-```
-
-- `date`: date of the event
-- `city`: city where the event takes place
-- `venue`: venue details
-- `from`: event start time
-- `to`: event end time
-- `agenda`: event timeline
-- `speakers`: list of event speakers
 
 ##### Plain
 

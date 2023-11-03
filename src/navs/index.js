@@ -153,7 +153,7 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/product-design',
             },
             {
-                name: 'Brand assets',
+                name: 'Logos and hedgehogs',
                 url: '/handbook/company/brand-assets',
             },
             {

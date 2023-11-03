@@ -1,0 +1,269 @@
+---
+date: 2023-03-15
+title: PostHog vs LogRocket
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: ../images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg
+featuredImageType: full
+author:
+    - joe-martin
+category: General
+tags:
+    - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+LogRocket is a frontend monitoring platform which, like PostHog, combines multiple tools into one platform. In this article we’ll explain some of the biggest similarities and differences between PostHog and LogRocket, but here’s the short version:
+
+- LogRocket focuses on helping frontend developers detect and solve issues. It offers tools such as session recording, analytics, and performance monitoring.
+
+- PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B testing and more.
+
+In this article, we will:
+
+- Compare PostHog and LogRocket’s core features
+- Examine PostHog and LogRocket’s library support
+- Discuss what integrations are available with other tools
+- Explore other frequently asked questions about PostHog and LogRocket
+
+## How do PostHog and LogRocket differ?
+
+### 1. PostHog does more than frontend monitoring
+
+PostHog goes beyond frontend monitoring by augmenting product analytics and session recording with powerful product and data tools, such as feature flags, A/B testing, and SQL querying. While LogRocket’s focus on the frontend means it offers a few specialist features, PostHog offers greater value and is more widely useful for the majority of teams and organizations
+
+### 2. PostHog is open source and transparent
+
+PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/blog/how-we-built-an-app-server), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
+
+### 3. PostHog constantly ships new features
+
+At PostHog, we ship weirdly fast. We update [our changelog](/blog/posthog-changelog) with a recap of new features every week, and often there’s even more in beta testing. And that’s without counting all the apps and integrations submitted by our community! We work hard to keep PostHog on the cutting edge and we’re transparent about the ways we do that.
+
+## PostHog and LogRocket feature comparison
+
+PostHog offers a much wider selection of tools than LogRocket, including several tools that are helpful to frontend developers — such as feature flags, and experimentation. PostHog is also entirely open source, meaning that it offers far greater transparency than LogRocket. You can even develop your own PostHog apps!
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={true} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Experiments" description="Test changes and analyze impact" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Track where users click" />
+  <ComparisonRow column1={true} column2={true} feature="Event pipelines" description="Push and pull data to enrich customer profiles" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Build your own apps and contribute code" />
+</ComparisonTable>
+
+-   **Feature flags:** PostHog offers robust, multivariate feature flags which support JSON payloads. This enables you to push real-time changes to your product without needing to redeploy. Visit [our feature flag page](/product/feature-flags) for more information. LogRocket doesn’t have any in-built feature flag functions.
+
+-   **Experiments:** PostHog offers multivariate experimentation, which enables you to test changes and discover statistically relevant insights. Visit [the experimentation page](/product/experimentation-suite) for more information. LogRocket doesn’t have any in-built experimentation features.
+
+-   **Open source:** PostHog is entirely open source, under a permissive MIT license. The biggest advantage for users is the ability to build on top of PostHog and to access the source code directly. [Our team also works in the open](/handbook/company/culture). LogRocket is not an open source company, nor is the product available under an open source license.
+
+### Product analytics
+
+While LogRocket contains some product analytics features, it isn’t primarily intended as an analytics platform and lacks many features that product managers and engineers may require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis.
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
+  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Understand conversion between events, pages" />
+  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+  <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
+  <ComparisonRow column1={true} column2={true} feature="Retention" description="Analyze user and revenue retention" />
+  <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
+  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
+  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Understand how organizations use your product" />
+  <ComparisonRow column1={false} column2={true} feature="Formulas" description="Use custom formulas to calculate unique insights" />
+  <ComparisonRow column1={false} column2={true} feature="Query editor" description="Write your own queries in SQL" />
+</ComparisonTable>
+
+-   **Correlation analysis:** This feature enables you to [automatically find correlated events or properties](/manual/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn’t offer any such automated correlation discovery, meaning users must search for correlating factors manually and without assistance.
+
+-   **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries... but [we’re actively working on it](/manual/hogql).
+
+> **Further reading:** [How LogRocket compares to other PostHog alternatives](/blog/posthog-alternatives)
+
+### Session replays
+
+LogRocket and PostHog both offer robust, full-featured session replay tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session replay tool offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Web app recordings" description="Capture recordings from single-page apps" />
+  <ComparisonRow column1={true} column2="On the roadmap" feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
+  <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
+  <ComparisonRow column1={true} column2={true} feature="Console logs" description="Capture extra content from a users’ browser environment" />
+  <ComparisonRow column1={true} column2={true} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
+  <ComparisonRow column1={true} column2={true} feature="Performance monitoring" description="Track network events within a session" />
+  <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />
+  <ComparisonRow column1={true} column2={true} feature="Conditional recording" description="Only capture the sessions you want" />
+  <ComparisonRow column1={true} column2={true} feature="Export recordings" description="Take recordings in/out of the platform" />
+</ComparisonTable>
+
+-   **Mobile app recordings:** PostHog does not currently offer recordings for mobile apps, but it is something we’re actively working on. Check [our roadmap](/roadmap) for more info!
+
+### Heatmaps and click tracking
+
+LogRocket’s heatmap and click tracking functionality exceeds PostHog’s and enables you to visualize more precisely how users interact with your site at the aggregate level. PostHog’s [toolbar](/manual/toolbar) focuses on visualizing clicks, and enabling users to [quickly track such events within product analytics](/tutorials/toolbar).
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize cursor movements on a page" />
+  <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="Visualize where users click on a page" />
+  <ComparisonRow column1={true} column2={false} feature="Scrollmaps" description="Visualize how far down a page users scroll" />
+  <ComparisonRow column1={false} column2={false} feature="Eyetracking" description="Visualize precisely where users are looking on a page" />
+</ComparisonTable>
+
+**Toolbar:** PostHog’s heatmap functionality (technically, clickmapping) is accessed via the [toolbar](/manual/toolbar). It enables you to visualize clicks as an overlay on a live page, but also enables you to quickly create events and actions which can be analyzed using PostHog’s analytics features.
+
+## Tracking & SDKs
+
+**Tl;dr:** Both PostHog and LogRocket support a broad range of tracking options and libraries, and manual event instrumentation, as well as autocapture.
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Track manually instrumented events" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Automatically track events without instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Combined events" description="Track related events as a single trackable action or behavior" />
+  <ComparisonRow column1={true} column2={true} feature="Reverse proxy available" description="Send events from your own domain to capture more data" />
+  <ComparisonRow column1={true} column2={true} feature="Cross-domain tracking" description="Track users across domains and sub-domains" />
+  <ComparisonRow column1={true} column2={true} feature="Server-side tracking" description="Send events from your server" />
+  <ComparisonRow column1={true} column2={true} feature="Capture API" description="Send events through an API" />
+</ComparisonTable>
+
+> ### Should you autocapture events?
+>
+> LogRocket and PostHog both support manual instrumentation, as well as autocapture. Autocapture is much faster to setup, but some argue that it creates too much noise to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month — so you can capture events freely. [It’s something we feel quite strongly about](/blog/is-autocapture-still-bad).
+
+### Library support
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="JavaScript" />
+  <ComparisonRow column1={true} column2={true} feature="React Native" />
+  <ComparisonRow column1={true} column2={true} feature="React" />
+  <ComparisonRow column1={false} column2={true} feature="Flutter" />
+  <ComparisonRow column1={true} column2={true} feature="iOS" />
+  <ComparisonRow column1={true} column2={true} feature="Android" />
+  <ComparisonRow column1={false} column2={true} feature="Ruby" />
+</ComparisonTable>
+
+> ### PostHog library support
+>
+> PostHog supports a wide range of client and server libraries, but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all our features. See [our client library documentation](/docs/integrate?tab=snippet) for more information.
+
+## Integrations and extensions
+
+Both PostHog and LogRocket are capable of integrating with third-party tools in a variety of ways. This enables you to accomplish tasks such as exporting data to another platform, importing data for analysis, or enabling two-way communication between the tools.
+
+[PostHog offers more than 50 integrations and apps](/apps), while [LogRocket offers slightly fewer](https://logrocket.com/features/integrations).
+
+As an open source software, PostHog welcomes contributions from the community. If an integration you need isn’t available, [it’s possible to create it](/docs/apps/build)!
+
+### Data pipelines
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Export API" description="Export data via API" />
+  <ComparisonRow column1={true} column2={true} feature="Import API" description="Import data via API" />
+  <ComparisonRow column1={false} column2={true} feature="Amazon Redshift" description="Export data to Redshift" />
+  <ComparisonRow column1={false} column2={true} feature="Amazon S3" description="Export data to S3 bucket" />
+  <ComparisonRow column1={false} column2={true} feature="Azure Blob Storage" description="Export data to Microsoft Azure" />
+  <ComparisonRow column1={false} column2={true} feature="Google Cloud Storage" description="Export data to GCS" />
+  <ComparisonRow column1={false} column2={true} feature="Snowflake" description="Export data to Snowflake database" />
+  <ComparisonRow column1={false} column2={true} feature="BigQuery" description="Export data to Google BigQuery for analysis" />
+  <ComparisonRow column1={false} column2={true} feature="RudderStack" description="Sync event and person data" />
+  <ComparisonRow column1={false} column2={true} feature="Airbyte" description="Extract and load data to external platforms" />
+</ComparisonTable>
+
+> **Want more?** For a full list of PostHog’s available integrations, please [check the app directory](/apps).
+
+### Popular integrations 
+
+Below, we've listed a few of the most popular integrations used across PostHog and LogRocket. 
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={false} column2={true} feature="Hubspot" description="Sync event and person data" />
+  <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync event and person data" />
+  <ComparisonRow column1={false} column2={true} feature="Zapier" description="Export events for use in Zaps" />
+  <ComparisonRow column1={false} column2={true} feature="Stripe" description="Sync customer and invoice data" />
+  <ComparisonRow column1={true} column2={true} feature="Intercom" description="Extract and load data to external platforms" />
+  <ComparisonRow column1={false} column2={true} feature="Customer.io" description="Sync data between platforms" />
+  <ComparisonRow column1={true} column2={true} feature="Sentry" description="Ingest Sentry errors for analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events from Segment" />
+</ComparisonTable>
+
+> **Want more?** For a full list of PostHog’s available integrations, please [check the app directory](/apps).
+
+### Site apps
+
+PostHog’s extensions also include [site apps](/tutorials/build-site-app), which enable you to easily add frontend components to your site — something that isn’t possible with LogRocket.
+
+Some examples of PostHog’s site apps include:
+
+-   **[User Notifications](/apps/notification-bar):** Display a site banner to alert users about important information.
+
+-   **[Schedule interviews](/apps/user-interview):** Target different types of users to receive Calendly notification, so you can arrange feedback calls.
+
+-   **[In-app prompts](/apps/feedback-widget):** Display in-app prompts which ask for written feedback, or bug reports.
+
+-   **[Raining Pineapples](/apps/pineapple-mode):** Sometimes you just want it to rain Pineapples. You’re welcome.
+
+## Collaboration
+
+PostHog provides multiple ways for users to share information with their teams, or to set up notifications for important events. Depending on the collaboration tools you use already, it may even be possible to integrate with PostHog directly.
+
+LogRocket does not offer as many ways to share information with external parties, though does still provide details role-based permissioning for users across multiple projects.
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="User permissions" description="Control user roles and levels of access" />
+  <ComparisonRow column1={false} column2={true} feature="Public dashboards" description="Make dashboards available without login" />
+  <ComparisonRow column1={false} column2={true} feature="Dashboard subscriptions" description="Receive regular alerts about new data" />
+  <ComparisonRow column1={false} column2={true} feature="Embeddable dashboards" description="Embed dashboards in other pages" />
+  <ComparisonRow column1={true} column2={true} feature="Slack" description="Receive notifications about new data" />
+  <ComparisonRow column1={false} column2={true} feature="Discord" description="Receive notifications about new data" />
+  <ComparisonRow column1={false} column2={true} feature="Microsoft Teams" description="Receive notifications about new data" />
+</ComparisonTable>
+
+## Compliance
+
+Regulatory compliance can be make-or-break for many teams, especially those operating in fields such as healthcare or the financial sector. Luckily, LogRocket and PostHog both offer a variety of ways to comply with such regulations.
+
+<ComparisonTable column1="LogRocket" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="GDPR ready" />
+  <ComparisonRow column1={true} column2={true} feature="Data anonymization" />
+  <ComparisonRow column1={false} column2={true} feature="Cookie-less tracking option" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2 certified" />
+  <ComparisonRow column1={true} column2={true} feature="SAML/SSO available" />
+  <ComparisonRow column1={true} column2={true} feature="2FA available" />
+</ComparisonTable>
+
+## Frequently asked questions
+
+-   How much does LogRocket cost?
+-   How much does PostHog cost?
+-   Do LogRocket and PostHog offer free trials?
+
+Got another question? You can [ask the PostHog team anything you want](/questions)!
+
+### How much does LogRocket cost?
+
+LogRocket has a complex pricing structure which isn’t fully transparent. Although it offers a free trial, this is limited to only 1,000 sessions per month. Beyond this, subsequent product tiers begin at $99 USD per month, depending on usage. This version does not include access to many features, such as product analytics.
+
+More feature-rich product tiers begin at $550 USD per month, but increase depending on how many session are captured — and the per session cost is not clear. Pricing for the full version of LogRocket is not publicly available.
+
+### How much does PostHog cost?
+
+PostHog has transparent pricing based on usage. It’s free to get started and completely free for the first 1 million events and 15,000 sessions captured every month.
+
+After this free monthly allowance you'll pay $0.00031/event and $0.005/recording, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
+
+### Do LogRocket and PostHog offer free trials?
+
+LogRocket offers a free version of its basic product, which is limited to only 1,000 session captures per month. 14-day free trials are also available for other product tiers, after which users must pay to continue usage.
+
+With PostHog, it’s free to get started and all users get their first 1 million events and 15,000 sessions for free, every month. Billing limits can be used to keep usage beneath this allowance, enabling you to use PostHog for free indefinitely.
+
+<ArrayCTA />

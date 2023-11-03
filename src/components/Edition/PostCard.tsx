@@ -16,8 +16,9 @@ export const Skeleton = () => {
     )
 }
 
-export default function PostCard({ title, featuredImage, date, excerpt, slug, fetchMore }) {
-    const postDate = dayjs(date).format('MMM D, YYYY')
+export default function PostCard({ title, featuredImage, date, excerpt, slug, fetchMore, publishedAt }) {
+    console.log(publishedAt)
+    const postDate = dayjs(date || publishedAt).format('MMM D, YYYY')
     const imageURL = featuredImage?.url && `https://posthog.com${featuredImage?.url}`
 
     const { ref, inView } = useInView({

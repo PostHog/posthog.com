@@ -19,6 +19,9 @@ We enforce the use of hardware security keys wherever we can. Every team members
 - One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
 - One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) for use with mobile devices, and as backup
 
+
+Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) & GitHub at the very least. You can also use the Yubikeys to protect personal accounts.
+
 ## SOC 2
 
 PostHog is certified as SOC 2 Type 1 compliant, following an external audit. 

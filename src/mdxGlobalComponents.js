@@ -6,6 +6,7 @@ import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { Images } from './components/Careers/Images'
+import { ComparisonTable } from './components/ComparisonTable'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { Drawer } from './components/Drawer'
@@ -56,6 +57,7 @@ export const shortcodes = {
     CallToAction,
     Caption,
     Images,
+    ComparisonTable,
     CompensationCalculator,
     ContentViewer,
     Drawer,
