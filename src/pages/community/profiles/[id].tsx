@@ -247,30 +247,28 @@ export default function ProfilePage({ params }: PageProps) {
                                             Liked posts
                                         </button>
                                     )}
-                                    {user?.profile?.id && (
-                                        <div className="flex items-center">
-                                            <button
-                                                className={`${
-                                                    view !== 'user-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
-                                                } p-4 transition-opacity`}
-                                                onClick={() => setView('user-posts')}
-                                            >
-                                                Posts
-                                            </button>
-                                            <AnimatePresence>
-                                                {view === 'user-posts' && (
-                                                    <motion.div
-                                                        initial={{ opacity: 0, translateY: '100%' }}
-                                                        animate={{ opacity: 1, translateY: 0 }}
-                                                        exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                                                        className={`-ml-4 z-50`}
-                                                    >
-                                                        <SortDropdown sort={sort} setSort={setSort} />
-                                                    </motion.div>
-                                                )}
-                                            </AnimatePresence>
-                                        </div>
-                                    )}
+                                    <div className="flex items-center">
+                                        <button
+                                            className={`${
+                                                view !== 'user-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('user-posts')}
+                                        >
+                                            Posts
+                                        </button>
+                                        <AnimatePresence>
+                                            {view === 'user-posts' && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, translateY: '100%' }}
+                                                    animate={{ opacity: 1, translateY: 0 }}
+                                                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                                                    className={`-ml-4 z-50`}
+                                                >
+                                                    <SortDropdown sort={sort} setSort={setSort} />
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
                                 {(view === 'discussions' || view === 'ama') && (
                                     <Questions
