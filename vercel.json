@@ -563,7 +563,11 @@
         { "source": "/handbook/people/team-structure/platform", "destination": "/handbook/small-teams/platform" },
         {
             "source": "/handbook/people/team-structure/session-recording",
-            "destination": "/handbook/small-teams/monitoring"
+            "destination": "/handbook/small-teams/replay"
+        },
+        {
+            "source": "/handbook/small-teams/monitoring",
+            "destination": "/handbook/small-teams/replay"
         },
         {
             "source": "/handbook/people/team-structure/website-docs",

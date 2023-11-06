@@ -45,7 +45,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Platform (US + EU) | [Team Infrastructure][Team Infrastructure] | <span class="lemon-tag gh-tag">feature/platform</span>  |
 | Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
-| Recordings | [Team Monitoring][Team Monitoring]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
+| Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
 | Retention | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/retention</span> |
 | Saved Insights | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/saved-insights</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
@@ -53,7 +53,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SSO | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
 | Stickiness | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/stickiness</span>  |
-| Toolbar | [Team Monitoring][Team Monitoring]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
+| Toolbar | [Team Replay][Team Replay]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Trends | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/trends</span>  |
 | Web Analytics                            | [Team Web Analytics][Team Web Analytics]                                                                   | <span class="lemon-tag gh-tag">feature/web-analytics</span>        |
 
@@ -79,7 +79,7 @@ Some of the features we are building may exist in other products already. It is 
 [@timgl]: https://github.com/timgl
 [Team Product Analytics]: /handbook/small-teams/product-analytics
 [Team Web Analytics]: /handbook/small-teams/web-analytics
-[Team Monitoring]: /handbook/small-teams/monitoring
+[Team Replay]: /handbook/small-teams/replay
 [Team Pipeline]: /handbook/small-teams/pipeline
 [Team Infrastructure]: /handbook/small-teams/infrastructure
 [Team Feature Success]: /handbook/small-teams/feature-success
