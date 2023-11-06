@@ -149,6 +149,15 @@ To illustrate this with an example, below is the completed user persona for our 
 
 ![The user persona for our example email app](../images/blog/how-to-create-personas/email-app-example-persona.png)
 
+> **💡 How many user personas should you have?**
+>
+> There are two things to remember:
+>
+> - The more personas you have, the greater the chance team members will not remember information about them.
+> - Your user personas should focus on your most important user groups.
+> 
+> With this in mind, having only one user persona may be enough. You should have at most five, though.
+
 ## Next steps
 
 Your user persona is the voice of your user. It should guide your product development and company strategy. 
@@ -156,17 +165,6 @@ Your user persona is the voice of your user. It should guide your product develo
 Incorporate them into team meetings and encourage your team to always ask, "How will this benefit our key user personas?". By doing so, you build a culture of empathy for your users, ensuring that you make the best products for them.
 
 For instance, at PostHog our product teams use our personas to create their team mission, values, and quarterly goals. Since our company handbook is public, you can view precisely how by visiting each team's page – e.g., our [Feature Success](/handbook/small-teams/feature-success#personas) and [Web Analytics](/handbook/small-teams/web-analytics#who-are-we-building-for) teams.
-
-## Frequently asked questions
-
-### How many user personas should I have?
-
-There are two things to remember:
-
-- The more personas you have, the greater the chance team members will not remember information about them.
-- Your user personas should focus on your most important user groups — those people you really want your product to reach.
-
-With this in mind, having only one user persona may be enough. You should have at most five, though.
 
 ## Further reading
 
