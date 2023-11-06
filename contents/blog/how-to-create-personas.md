@@ -43,15 +43,15 @@ If it helps you visualize your user, you can also include other information such
 
 Below are three examples of what user personas could look like for different companies:
 
-1. **Vercel**'s primary user persona is a front-end developer who wants simple solutions to deploying and hosting apps.
+1. **Vercel's** primary user persona is a front-end developer who wants simple solutions to deploying and hosting apps.
 
 ![Vercel user persona](../images/blog/how-to-create-personas/vercel-persona.png)
 
-2. **Github's**'s primary user persona is a software engineer who wants an easy way to maintain and collaborate on code.
+2. **Github's** primary user persona is a software engineer who wants an easy way to maintain and collaborate on code.
 
 ![Github user persona](../images/blog/how-to-create-personas/github-persona.png)
 
-3. **Asana's**'s primary user persona is a project manager who wants to track tasks and deliver successful projects.
+3. **Asana's** primary user persona is a project manager who wants to track tasks and deliver successful projects.
 
 ![Asana user persona](../images/blog/how-to-create-personas/asana-persona.png)
 
