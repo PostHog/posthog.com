@@ -10,11 +10,11 @@ import List from 'components/List'
 const filters = [
     {
         type: 'type',
-        name: 'Product',
+        name: 'Dashboard',
     },
     {
         type: 'type',
-        name: 'Marketing',
+        name: 'Survey',
     },
 ]
 
@@ -70,7 +70,7 @@ function TemplatesPage({ location }) {
                     <span className="text-blue">PostHog Templates</span>
                 </h2>
                 <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary dark:text-primary-dark max-w-2xl opacity-75">
-                    Instantly start collecting essential insights in one place
+                    Instantly start collecting essential insights and feedback
                 </p>
             </header>
             <div className="flex justify-start px-4 md:justify-center items-center mb-6 space-x-2 overflow-auto whitespace-nowrap">
@@ -97,7 +97,10 @@ function TemplatesPage({ location }) {
                     ),
                     {
                         label: <>Build your own &rarr;</>,
-                        url: 'https://app.posthog.com/dashboard',
+                        url:
+                            currentFilter === 'survey'
+                                ? 'https://app.posthog.com/survey_templates'
+                                : 'https://app.posthog.com/dashboard',
                         image: '/images/builder-hog.png',
                     },
                 ]}
