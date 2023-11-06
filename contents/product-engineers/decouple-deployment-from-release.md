@@ -2,16 +2,12 @@
 title: Why you should decouple deployment from release (and how) 
 date: 2023-09-18
 author: ["ian-vanagas"]
-showTitle: true
-rootpage: /blog
-sidebar: Blog
-hideAnchor: true
 featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
-category: Engineering
 tags:
- - Guides
- - Explainers
+ - Product engineers
+ - Engineering
+ - Feature management
 ---
 
 Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break your app, or cause other issues. Without the right processes in place, the safety of your releases is a big question mark.
