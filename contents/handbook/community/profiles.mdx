@@ -10,7 +10,6 @@ Their profile page also aggregates any community disucssions they've participate
 
 Team members have access to special profile features, like:
 
-- an optional AMA tab ([example](/community/profiles/71))
 - a sidebar that shows which small team they're on, and their teammates
 
 We also use data from these profiles in other areas of the site:
@@ -23,22 +22,24 @@ We also use data from these profiles in other areas of the site:
 To reduce the onboarding steps, Lottie or Cory can help create a profile for a new team member. To do this:
 
 1. On [posthog.com/questions](http://posthog.com/questions)…
-    1. Create an account with their @posthog.com email
+    1. Create an account with their `@posthog.com` email
     2. First name, Last name, Email, Random password
-2. In our website CMS, visit the Users tab, look up the new user by email, and click their user ID
-    1. Under *Role*, change to `Moderator` and hit Save
-    2. Under *Profile*, click their first name to be taken to their community profile record
-3. In their profile, update the following, then hit Save:
+2. Via the PostHog website, visit the newly created profile in our website CMS
+    1. Click the newly created profile link in the right sidebar (below My profile and above Edit profile)
+    2. Click the "View in Strapi" link in the right sidebar
+3. Now, in their profile on our website CMS, update the following, then hit Save:
     1. `companyRole` *
     2. `startDate` *
     3. `location` * - use a string, like “London, UK”
-    4. `country` - use TWO-CHARACTER country code, eg: `UK`
+    4. `country` - use TWO-CHARACTER country code, eg: `GB`
     5. `avatar` (can be a placeholder image until an illustration is drawn, but should be a png with a transparent background)
     
     *This information can be found in their onboarding checklist
-    
-4. Let the team member know their profile is created, and that they should add a bio!
+4. Update their user permissions
+    1. Under *user*, click their email address to be taken to their user page
+    1. Under *role*, change to `Moderator` and hit Save
+5. Let the team member know their profile is created, and that they should add a bio!
     1. To access their account, use the password reset option on the login form at [posthog.com/questions](/questions)
-5. Uploading profile illustration (when ready)
+6. Uploading profile illustration (when ready)
     1. Make sure it's uploaded on a square canvas at @2x PNG, and that the portrait fills as much of the canvas as possible. If an arm has to be clipped, set the image to be clipped on the right side so their arm on the left side of the image doesn't get cut off.
 
