@@ -1,29 +1,29 @@
 ---
 title: How to show a survey after a delay
-date: 2023-11-01
+date: 2023-11-06
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 tags: ['surveys']
 ---
 
-Before asking users about your app, you want them to **actually use it**. Surveys that pop up right away hinder their initial experience and get less useful responses as a result.
+When asking for feedback, timing is everything. You want users to actually **use your app** before asking them about it. A survey that pops up immediately can annoy users and receive worse responses.
 
-To help you do prevent this, you can set up a delay surveys and this tutorial shows you how. It goes over how to create a survey targeting a HTML class in PostHog and then implement a delay using that class and survey in your app.
+To help you get feedback at the right time, this tutorial shows you how to set up a [PostHog survey](/docs/surveys) that shows after a delay.
 
 ## Create your delayed survey
 
-First, we create our class-targeted survey in PostHog by going to the [Surveys tab](https://app.posthog.com/surveys) and clicking "New survey." Choose any template or create a blank survey, fill out the details, and open the "Targeting" section. 
+First, we create our survey in PostHog by going to the [Surveys tab](https://app.posthog.com/surveys) and clicking "New survey." Choose any template or create a blank survey, fill out the details, and open the "Targeting" section. 
 
-In the targeting section, we need to set up the class targeting. Start by switching from "All users" to "Users who match…". Add `.delayed-survey` under "Selector matches" (the **leading period** is important) and click "Save as draft." Our implementation will add this class to the page when want the survey to show.
+In the targeting section, start by switching from "All users" to "Users who match…". Under "Selector matches," add `.delayed-survey` (the **leading period** is important). This means our survey only shows when an HTML element with the class `delayed-survey` is on the page. Writing logic to add this class when we want the survey to display is the simplest way to set up a delay.
 
-Finally, click Launch. You don’t have to worry about this survey showing early, because the class selector won’t match anything until we implement it.
+Finally, click "Save as draft" and then "Launch." You don’t have to worry about this survey showing early because the class selector won’t match anything until we implement it.
 
 ![Creating a survey video](../images/tutorials/delayed-survey/survey.mp4)
 
 ## Implement your delayed survey
 
-Once installed in your app using the SDK or snippet, PostHog automatically shows your survey to targeted users. All we need to do is set up the logic to do the delay and add the class to our page.
+Once installed in your app, PostHog automatically shows your surveys to targeted users. All we need to do is set up the logic to do the delay and add the class to our page.
 
 As an example, we do this in a basic Next.js app with PostHog already installed, but you can use any app or site that can run client-side JavaScript, including no-code site builders like [Webflow](/tutorials/webflow) and [Framer](/tutorials/framer-analytics).
 
