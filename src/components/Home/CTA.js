@@ -57,8 +57,8 @@ export default function CTA() {
                 {inView && (
                     <motion.div
                         transition={{ delay: 1, duration: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: '-2rem' }}
+                        initial={{ translateX: '100%', opacity: 0 }}
+                        animate={{ translateX: '-2rem', opacity: 1 }}
                         className="absolute bottom-0 right-0 xl:block hidden"
                     >
                         <StaticImage loading="eager" placeholder="none" width={300} src="./images/conversion-hog.png" />
