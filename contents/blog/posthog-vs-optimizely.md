@@ -1,6 +1,6 @@
 ---
 title: "In-depth: PostHog vs Optimizely"
-date: 2023-11-02
+date: 2023-11-07
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
