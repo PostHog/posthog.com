@@ -163,7 +163,7 @@ export const Trends = () => {
                     Visualize user data with graphs, tables, charts, maps, and more
                 </h2>
             </div>
-            <div className="product-slider overflow-x-auto flex gap-8 pb-4 -mx-8 px-8">
+            <div className="product-slider overflow-x-auto flex gap-8 pb-4 -mx-8 px-8 product-scrollbar">
                 <div className="flex-shrink-0 w-full md:w-3/5">
                     <StaticImage
                         objectPosition="left"
