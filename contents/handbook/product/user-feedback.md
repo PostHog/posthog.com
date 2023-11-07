@@ -15,7 +15,7 @@ We actively seek (outbound) input in everything we work on. In addition to havin
 **Recruiting users**
 
 Ways to invite users for an interview:
-- [PostHog Surveys](https://app.posthog.com/survey_templates). We even have a template for user interviews.
+- [PostHog Surveys](https://app.posthog.com/survey_templates). We even have a template for [user interviews](/templates/user-interview).
 - If a customer has requested a feature through slack then message them directly
 - Email customers who have subscribed to the feature on the [roadmap](https://posthog.com/roadmap)
 

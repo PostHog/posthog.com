@@ -16,11 +16,10 @@ Today, we make money from:
 * Product analytics
 * Feature flags
 * A/B testing
+* User surveys
 
 We've also got:
 
-* User surveys
-  * We built this product in Q3, so it's early, has no pricing and isn't listed on our website yet
 * CDP (ability to send data to other tools like data warehouses)
   * This is being used by thousands of customers, but we want to make it more reliable
 * Data warehouse + ETL - both in MVP
@@ -66,7 +65,7 @@ We’ve got multiple products that are early:
 
 - **ETL** (simple imports of other data sources like Postgres or Stripe into our warehouse) are needed for the above to make sense.
 
-- **Surveys** (being used a lot but not paid / lots of quality improvements we can make / not on website yet).
+- **Surveys** (being used a lot but not paid / lots of quality improvements we can make).
 
 - **Feature flags and experiments** - we’ve just started making our first revenue. Let’s get 100% sure we have [product-market fit](/blog/product-market-fit-game) for these tools.
 

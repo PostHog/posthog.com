@@ -130,6 +130,16 @@ instrumentation code (the `sent_at` or the `offset` values might be wrong).
 These events have been ingested and stored, but will not show up in the UI. If these events
 create new persons, these persons will have a "first seen" property in the future.
 
+### Discarded event exceeding 1MB limit
+
+Events that exceed 1 megabyte in size after processing are discarded. This may
+happen if an exceptionally large number of properties are sent along with the
+event (including person properties), or one or more installed apps transformed
+the event and enriched it with a large amount of additional property data.
+
+Please note that these warnings are sampled: the actual number of events that
+were discarded may exceed the total displayed quantity.
+
 ## How event timestamps are computed
 
 If you are using one of our [libraries](/docs/integrate#libraries) event timestamps will be handled for you. However, users doing manual instrumentation, we provide you with several mechanisms to set event timestamps:
