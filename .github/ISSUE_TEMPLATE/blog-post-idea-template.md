@@ -32,7 +32,7 @@ assignees: andyvan-ph
 - [ ] Low-level guide (step-by-step guide / tutorial)
 - [ ] Other (please specify)
 
-## Who is primary audience?
+## Who is the primary audience?
 
 > _select any that apply_
 
