@@ -24,7 +24,7 @@ date: 2023-11-05
 
 “The data stack evolution of Adauris has been really interesting on the engineering side,” says Co-founder and CTO Varun Sharma. “The initial MVP used Google Tag Manager and just basic API calls. Then we started to put in much more refined data points with Mongo, and eventually progressed from there to Mixpanel and Segment.”
 
-“I quickly got just completely exhausted with each of those solutions however. Mongo was very difficult for us to use, for example, while Segment was very expensive. It was only when I found PostHog did I find a platform that was magically a perfect fit!” 
+“I quickly got just completely exhausted with each of those solutions, however. Mongo was very difficult for us to use, for example, while Segment was very expensive. It was only when I found PostHog did I find a platform that was magically a perfect fit!” 
 
 After some initial research, Varun signed Adauris up to the [PostHog for Startups](/startups) program and began thinking about how the team could use PostHog to replace multiple tools in its stack.
 
@@ -34,7 +34,7 @@ Varun immediately integrated PostHog throughout the Adauris platform, including 
 
 “It was very easy for us to whip up some events and get PostHog setup out of the box,” says Varun. “Now the whole team uses analytics when we’re making product decisions, while on the engineering side we appreciate the data integrity that comes from a consistent and opinionated approach. That’s the best way to make sure data is reliable, and that events match.” 
 
-In addition to monitoring performance and tracking error, the team also uses PostHog to track adoption for each feature and to get a sense of what resonates with users. 
+In addition to monitoring performance and tracking errors, the team also uses PostHog to track adoption for each feature and to get a sense of what resonates with users. 
 
 “[Session replays](/session-replay) are a great way to get a sense for a users’ sentiment as they go through your product,” says Co-founder and COO Tina Haertel. “We even pass some of the data we get back to our customers, telling them how many users are clicking on the audio player and how long they listen for.”
 
