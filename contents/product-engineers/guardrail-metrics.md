@@ -2,16 +2,12 @@
 title: Guardrail metrics for A/B tests, explained
 date: 2023-10-16
 author: ["ian-vanagas"]
-showTitle: true
-rootpage: /blog
-sidebar: Blog
-hideAnchor: true
 featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
-category: Engineering
 tags:
- - Guides
- - Explainers
+ - Product engineers
+ - AB testing
+ - Growth engineering
 ---
 
 ## What are guardrail metrics?

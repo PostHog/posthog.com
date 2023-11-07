@@ -1,18 +1,16 @@
 ---
-title: Fixing growth problems with MasterClass's former Head of Growth Engineering
+title: The most common growth team failure modes (and how to fix them)
 date: 2023-10-17
 author: ["lior-neu-ner"]
-showTitle: true
-rootpage: /blog
-sidebar: Blog
-hideAnchor: true
 featuredImage: ../images/blog/athlete-hog.jpeg
 featuredImageType: full
-category: Product growth
 tags: 
-  - Guides
-  - Product metrics
   - Product engineers
+  - Founders
+  - Growth engineering
+  - Growth
+crosspost:
+  - Founders  
 ---
 
 Stuck metrics. Missed KPIs. Burnt out engineers. These are the telltale signs of a growth team in crisis. But how do you fix it?

@@ -18,10 +18,10 @@ Our small teams are:
 - [Growth](/handbook/small-teams/growth)
 - [Infrastructure](/handbook/small-teams/infrastructure)
 - [Marketing](/handbook/small-teams/marketing)
-- [Monitoring](/handbook/small-teams/monitoring)
 - [People & Ops](/handbook/small-teams/people)
 - [Pipeline](/handbook/small-teams/pipeline)
 - [Product Analytics](/handbook/small-teams/product-analytics)
+- [Replay](/handbook/small-teams/replay)
 - [Web Analytics](/handbook/small-teams/web-analytics)
 - [Website & Docs](/handbook/small-teams/website-docs)
 

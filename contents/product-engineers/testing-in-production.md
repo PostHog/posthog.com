@@ -2,16 +2,12 @@
 title: "Why we test in production (and you should too)"
 date: 2023-07-03
 author: ["ian-vanagas"]
-showTitle: true
-rootpage: /blog
-sidebar: Blog
-hideAnchor: true
 featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
-category: Engineering
 tags:
- - Guides
- - Explainers
+ - Product engineers
+ - Engineering
+ - Feature management
 --- 
 
 At PostHog, we test in production. There are many misconceptions about doing this. It **does not** mean:
