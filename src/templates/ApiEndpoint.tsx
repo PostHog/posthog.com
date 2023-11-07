@@ -196,8 +196,8 @@ function Params({ params, objects, object, depth = 0 }) {
                                         </div>
                                     </>
                                 )}
-                                <div className="text-sm">
-                                    <ReactMarkdown>{param.schema.description}</ReactMarkdown>
+                                <div className="text-sm pt-2">
+                                    <ReactMarkdown>{param.schema.description || param.description}</ReactMarkdown>
                                 </div>
                             </div>
                         </div>
