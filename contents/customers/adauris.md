@@ -3,7 +3,7 @@ title: How Adauris tracks performance, tailors activation and grew traffic by 50
 customer: Adauris
 logo: ../images/customers/adauris/logo.png
 logoDark: ../images/customers/adauris/logo-dark.png
-featuredImage: ../images/customers/adauris/featured.svg
+featuredImage: ../images/customers/adauris/featured.png
 featuredCustomer: false
 industries:
     - SaaS, Publishing
