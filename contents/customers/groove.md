@@ -23,8 +23,7 @@ Founded in 2011, [Groove](https://www.groovehq.com/) is a simple yet powerful he
 
 Another specific aim was to find a tool which could collect Groove’s qualitative and quantitative data in one place, so that usage data could be charted against NPS scores and other metrics — and that’s what led the team to PostHog. 
 
-​​![PostHog groove experiment](../images/customers/groove/groove-test.png)
-![PostHog groove results](../images/customers/groove/groove-results.png)
+​​![PostHog groove experiment](../images/customers/groove/groove-test.jpg)
 <Caption>Even simple tests, such as changing the color of a CTA, can have dramatic results. For Groove, a purple button performed 84% better than a green one!</Caption>
 
 ## Building an ICP with user surveys and product analytics 
@@ -38,7 +37,7 @@ The solution therefore is to bring users’ anecdotal feedback together with the
 Putting information together in this way has enabled the team to develop an incredibly accurate sense of who their users are and how the audience breaks down into different personas. Armed with this understanding, the team has begun experimenting with new positioning statements, onboarding experiences and more.
 <BorderWrapper>
 <Quote
-    imageSource="/images/customers/groove_alex.jpg"
+    imageSource="/images/customers/alex.jpg"
     size="md"
     name="Alex Turnbull"
     title="Founder, Groove"
