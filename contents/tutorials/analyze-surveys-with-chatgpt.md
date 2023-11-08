@@ -85,7 +85,7 @@ analyzeSurveyAnswers()
 
 The next step is to submit our answers to ChatGPT to analyze them. To do this, first you'll need to [sign up for an OpenAI account](https://platform.openai.com/signup) and [retrieve your API key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key). 
 
-Then, install [OpenAI's Node library ](https://github.com/openai/openai-node) and initialize it in the code. 
+Then, install [OpenAI's Node library](https://github.com/openai/openai-node) and initialize it in the code. 
 
 ```bash
 npm install openai
@@ -103,9 +103,9 @@ const openai = new OpenAI({
 // rest of the code
 ```
 
-Next, for each survey answer, we'll make an API call to [chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api) to extract the following information:
+Next, for each survey answer, we'll make a call to the [chat completions API](https://platform.openai.com/docs/guides/gpt/chat-completions-api) to extract the following information:
 
-1. Whether the sentiment is positive or negative?
+1. Whether the sentiment is positive or negative.
 2. The theme of the answer.
 
 To do so, the API method requires 2 parameters:
@@ -182,11 +182,9 @@ If you now run `node survey-analyzer.js`, you should see your analyzed answers a
 
 Since we submit each survey answer one at a time, it can be quite tedious waiting for the script to complete. To improve this, we can batch our survey answers so we analyze multiple at the same time. 
 
-However, an important consideration is that ChatGPT has something called a `token limit`:
+The only constraint is the ChatGPT model `token limit`:
 
-A `token` can be thought of as roughly 4 characters or 0.75 words. When you make an API request, the text in the `messages` parameter is converted into tokens. The response from the API is then also converted into tokens. 
-
-This means that the number of tokens in your API call is number tokens in your request plus the number of tokens in the response.
+A `token` can be thought of as roughly 4 characters or 0.75 words. When you make an API request, the text in the `messages` parameter and the response from the API are converted into tokens. This means that the number of tokens in your API call is number tokens in your request plus the number of tokens in the response.
 
 The `token limit` refers to the maximum number of tokens that the model can process in a single request. If we exceed this limit, the model won't be able to handle the request, resulting in an error. Each [model](https://platform.openai.com/docs/models) has a different limit, ranging from approximately 4,000 to 32,000 tokens. 
 
@@ -194,14 +192,9 @@ The [`gpt-3.5-turbo-16k`](https://platform.openai.com/docs/models/gpt-3-5) model
 
 This brings us to the question: **How many survey answers can we batch and analyze at the same time? **
 
-Using [tokenizer](https://platform.openai.com/tokenizer), a tool that counts the number of tokens in a string, we see that each survey answer is roughly `60 tokens`. Thus to estimate how many tokens each API request will use:
+Using [tokenizer](https://platform.openai.com/tokenizer), a tool that counts the number of tokens in a string, we see that each survey answer is roughly `60 tokens` and each response is about `120 tokens`.
 
-1. `60 tokens` for each survey answer request.
-2. `120 token` for each response from ChatGPT (since each response includes the original survey answer, plus some extra text).
-
-So the total cost to analyze each survey answer is approximately `180 tokens`. **This means we can batch at most `16,000 / 180 = 88` answers together**. 
-
-To be extra safe and ensure we don't exceed this limit, we'll batch at most 50 answers together.
+So the total cost to analyze each survey answer is approximately `180 tokens`. **This means we can batch at most `16,000 / 180 = 88` answers together**. To be extra safe and ensure we don't exceed this limit, we'll batch at most 50 answers together.
 
 Let's update our code to do that:
 
