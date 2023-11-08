@@ -1,13 +1,13 @@
 ---
 title: How to collect feedback from beta users
-date: 2023-11-07
+date: 2023-11-08
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 tags: ['surveys', 'feature flags']
 ---
 
-The goal of a beta is to get a feature ready for a full release. This means fixing what isn’t working. Getting beta user feedback is one of the best ways to know what to fix, and PostHog makes it easy to collect.
+The goal of a beta is to get a feature ready for release. This means improving what works well and fixing what doesn't. Using surveys to collect feedback from your users is an easy and scalable way to do this.
 
 This tutorial shows you how to combine PostHog’s [early access management](/docs/feature-flags/early-access-feature-management) and [survey](/docs/surveys) features to set up a beta and get feedback on it.
 
@@ -129,6 +129,8 @@ To create a survey, go to the [surveys tab](https://app.posthog.com/surveys) in 
 Now when users opt-in to the beta and go to `/beta`, they see a survey asking for their feedback. 
 
 ![Survey in-app](../images/tutorials/beta-feedback/survey.png)
+
+This is an easy, targeted, and scalable way to learn users' thoughts and problems with your beta feature.
 
 ## Further reading
 
