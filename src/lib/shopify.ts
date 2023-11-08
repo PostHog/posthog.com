@@ -32,6 +32,7 @@ export const CREATE_CART = `
                 lines(first: 250) {
                     edges {
                         node {
+                            quantity
                             merchandise {
                                 ... on ProductVariant {
                                     availableForSale

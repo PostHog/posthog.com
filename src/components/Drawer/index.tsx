@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { cn } from '../../utils'
 import { XIcon } from '@heroicons/react/outline'
+import React, { Fragment } from 'react'
+import { cn } from '../../utils'
 
 interface DrawerProps {
     children: React.ReactNode
@@ -13,7 +13,10 @@ interface DrawerProps {
 export const Drawer = (props: DrawerProps): React.ReactElement => {
     const { children, className, isOpen, onClose } = props
 
-    const classes = cn('relative p-4 min-h-full h-screen w-[600px] max-w-[90%] bg-white overflow-scroll', className)
+    const classes = cn(
+        'shadow relative p-4 min-h-full h-screen w-[600px] max-w-[90%] bg-white overflow-scroll',
+        className
+    )
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>

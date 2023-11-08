@@ -1527,11 +1527,6 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@ebay/nice-modal-react@^1.2.13":
-  version "1.2.13"
-  resolved "https://registry.yarnpkg.com/@ebay/nice-modal-react/-/nice-modal-react-1.2.13.tgz#7e8229fe3a48a11f27cd7f5e21190d82d6f609ce"
-  integrity sha512-jx8xIWe/Up4tpNuM02M+rbnLoxdngTGk3Y8LjJsLGXXcSoKd/+eZStZcAlIO/jwxyz/bhPZnpqPJZWAmhOofuA==
-
 "@emotion/is-prop-valid@^0.8.2":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"

@@ -82,6 +82,57 @@ export type CartLineInput = {
     attributes?: Record<string, string>
 }
 
+export type AdjustedLineItem = {
+    item: ShopifyProductVariant
+    newCount: number | null
+    remove: boolean
+}
+
+// Cart GraphQL response types
+
+interface Image {
+    altText: string | null
+    height: number
+    id: string
+    originalSrc: string
+    transformedSrc: string
+    width: number
+}
+
+interface PriceV2 {
+    amount: string
+    currencyCode: string
+}
+
+interface SelectedOption {
+    name: string
+    value: string
+}
+
+interface Product {
+    id: string
+    handle: string
+    productType: string
+    title: string
+    vendor: string
+}
+
+interface CartProductVariant {
+    availableForSale: boolean
+    compareAtPriceV2: null
+    currentlyNotInStock: boolean
+    id: string
+    image: Image
+    priceV2: PriceV2
+    product: Product
+    quantityAvailable: number
+    selectedOptions: SelectedOption[]
+    sku: string
+    title: string
+    weight: number
+    weightUnit: string
+}
+
 export type CreateCartResponseError = {
     userErrors: {
         code:
@@ -103,6 +154,12 @@ export type CreateCartResponse = {
     cartCreate: {
         cart: {
             checkoutUrl: string
+            lines: {
+                edges: {
+                    node: { merchandise: CartProductVariant }
+                    quantity: number
+                }[]
+            }
         }
         userErrors?: CreateCartResponseError
     }

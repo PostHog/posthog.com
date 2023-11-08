@@ -1,8 +1,8 @@
-import { useCartStore } from 'hooks/useCartStore'
 import React from 'react'
 import { cn } from '../../utils'
-import { LineItem } from './LineItem'
 import { Checkout } from './Checkout'
+import { LineItem } from './LineItem'
+import { useCartStore } from './store'
 
 type CartProps = {
     className?: string
@@ -27,7 +27,7 @@ export function Cart(props: CartProps) {
                     return <LineItem key={item.shopifyId} item={item} />
                 })}
 
-            <Checkout />
+            <Checkout className="my-4" />
         </div>
     )
 }
