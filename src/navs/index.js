@@ -5,7 +5,7 @@ export const handbookSidebar = [
     {
         name: 'Table of contents',
         url: '/handbook',
-        // icon: 'Info',
+        // icon: 'IconInfo',
     },
     {
         name: 'Chapters',
@@ -743,35 +743,35 @@ export const handbookSidebar = [
 export const communityMenu = {
     name: 'Community',
     url: 'https://posthog.com/posts',
-    icon: 'Chat',
+    icon: 'IconChat',
     children: [
         {
             name: 'Posts',
-            icon: 'Newspaper',
+            icon: 'IconNewspaper',
             color: 'red',
             url: 'https://posthog.com/posts',
         },
         {
             name: 'Questions',
-            icon: 'Message',
+            icon: 'IconMessage',
             color: 'blue',
             url: '/questions',
         },
         {
             name: 'Guides',
-            icon: 'Map',
+            icon: 'IconMap',
             color: 'red',
             url: 'https://posthog.com/tutorials',
             children: [
                 {
                     name: 'All guides',
-                    icon: 'Home',
+                    icon: 'IconHome',
                     color: 'seagreen',
                     url: '/tutorials',
                 },
                 {
                     name: 'Product OS',
-                    icon: 'Stack',
+                    icon: 'IconStack',
                     color: 'salmon',
                     url: '/tutorials/categories/actions',
                     children: [
@@ -793,7 +793,7 @@ export const communityMenu = {
                 },
                 {
                     name: 'Product analytics',
-                    icon: 'Graph',
+                    icon: 'IconGraph',
                     color: 'blue',
                     url: '/tutorials/categories/correlation-analysis',
                     children: [
@@ -813,18 +813,18 @@ export const communityMenu = {
                 {
                     name: 'Session replay',
                     color: 'yellow',
-                    icon: 'RewindPlay',
+                    icon: 'IconRewindPlay',
                     url: '/tutorials/categories/session-replay',
                 },
                 {
                     name: 'Feature flags',
-                    icon: 'Toggle',
+                    icon: 'IconToggle',
                     color: 'seagreen',
                     url: '/tutorials/categories/feature-flags',
                 },
                 {
                     name: 'A/B testing',
-                    icon: 'Flask',
+                    icon: 'IconFlask',
                     color: 'purple',
                     url: '/tutorials/categories/experimentation',
                     children: [{ name: 'Experimentation', url: '/tutorials/categories/experimentation' }],
@@ -832,7 +832,7 @@ export const communityMenu = {
                 {
                     name: 'CDP',
                     color: 'yellow',
-                    icon: 'Person',
+                    icon: 'IconPerson',
                     url: '/tutorials/categories/filters',
                     children: [
                         { name: 'Filters', url: '/tutorials/categories/filters' },
@@ -844,19 +844,19 @@ export const communityMenu = {
         },
         {
             name: 'Templates',
-            icon: 'Magic',
+            icon: 'IconMagic',
             color: 'orange',
             url: '/templates',
         },
         {
             name: 'Newsletter',
-            icon: 'Newspaper',
+            icon: 'IconNewspaper',
             color: 'green',
             url: 'https://posthog.com/newsletter',
         },
         {
             name: 'Merch',
-            icon: 'Store',
+            icon: 'IconStore',
             color: 'seagreen',
             url: 'https://merch.posthog.com',
         },
@@ -866,26 +866,26 @@ export const communityMenu = {
 export const companyMenu = {
     name: 'Company',
     url: '/about',
-    icon: 'Logomark',
+    icon: 'IconLogomark',
     children: [
-        { name: 'About', icon: 'Logomark', url: '/about' },
+        { name: 'About', icon: 'IconLogomark', url: '/about' },
         {
             name: 'Roadmap',
-            icon: 'Map',
+            icon: 'IconMap',
             color: 'orange',
             url: '/roadmap',
         },
         {
             name: 'Changelog',
-            icon: 'Calendar',
+            icon: 'IconCalendar',
             color: 'red',
             url: '/changelog/2023',
         },
-        { name: 'Team', icon: 'Profile', color: 'blue', url: '/team' },
-        { name: 'Handbook', icon: 'Book', color: 'seagreen', url: '/handbook', children: handbookSidebar },
+        { name: 'Team', icon: 'IconProfile', color: 'blue', url: '/team' },
+        { name: 'Handbook', icon: 'IconBook', color: 'seagreen', url: '/handbook', children: handbookSidebar },
         {
             name: 'Blog',
-            icon: 'Newspaper',
+            icon: 'IconNewspaper',
             color: 'yellow',
             url: 'https://posthog.com/blog',
             children: [
@@ -927,18 +927,18 @@ export const companyMenu = {
                 },
             ],
         },
-        { name: 'Careers', icon: 'Laptop', color: 'purple', url: '/careers' },
+        { name: 'Careers', icon: 'IconLaptop', color: 'purple', url: '/careers' },
     ],
 }
 
 export const docsMenu = {
     name: 'Docs',
     url: '/docs',
-    icon: 'Book',
+    icon: 'IconBook',
     children: [
         {
             name: 'Product OS',
-            icon: 'Stack',
+            icon: 'IconStack',
             color: 'salmon',
             url: '/docs/product-os',
             children: [
@@ -948,7 +948,7 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs',
-                    icon: 'Info',
+                    icon: 'IconInfo',
                 },
                 {
                     name: 'New to PostHog?',
@@ -956,7 +956,7 @@ export const docsMenu = {
                 {
                     name: 'Start here',
                     url: '/docs/getting-started/install',
-                    icon: 'Flag',
+                    icon: 'IconFlag',
                     children: [
                         {
                             name: 'Install PostHog',
@@ -995,7 +995,7 @@ export const docsMenu = {
                 {
                     name: 'SDKs',
                     url: '/docs/libraries',
-                    icon: 'Box',
+                    icon: 'IconBox',
                     children: [
                         {
                             name: 'Library comparison',
@@ -1082,7 +1082,7 @@ export const docsMenu = {
                 {
                     name: 'Framework guides',
                     url: '/docs/frameworks',
-                    icon: 'Book',
+                    icon: 'IconBook',
                     children: [
                         {
                             name: 'Overview',
@@ -1159,7 +1159,7 @@ export const docsMenu = {
                 {
                     name: 'Advanced',
                     url: '/docs/advanced/cdp',
-                    icon: 'Advanced',
+                    icon: 'IconAdvanced',
                     children: [
                         {
                             name: 'Using a CDP',
@@ -1207,12 +1207,12 @@ export const docsMenu = {
                 {
                     name: 'What is Product OS?',
                     url: '/docs/product-os',
-                    icon: 'Info',
+                    icon: 'IconInfo',
                 },
                 {
                     name: 'Data',
                     url: '/docs/data',
-                    icon: 'HardDrive',
+                    icon: 'IconHardDrive',
                     children: [
                         {
                             name: 'Overview',
@@ -1279,7 +1279,7 @@ export const docsMenu = {
                 {
                     name: 'HogQL',
                     url: '/docs/hogql',
-                    icon: 'HogQL',
+                    icon: 'IconHogQL',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -1314,7 +1314,7 @@ export const docsMenu = {
                 {
                     name: 'Toolbar',
                     url: '/docs/toolbar',
-                    icon: 'Toolbar',
+                    icon: 'IconToolbar',
                     children: [
                         {
                             name: 'Overview',
@@ -1337,12 +1337,12 @@ export const docsMenu = {
                 {
                     name: 'Command palette',
                     url: '/docs/cmd-k',
-                    icon: 'Search',
+                    icon: 'IconSearch',
                 },
                 {
                     name: 'Apps',
                     url: '/docs/apps',
-                    icon: 'Apps',
+                    icon: 'IconApps',
                     children: [
                         {
                             url: '/docs/apps/notification-bar',
@@ -1387,7 +1387,7 @@ export const docsMenu = {
                 {
                     name: 'API',
                     url: '/docs/api',
-                    icon: 'Brackets',
+                    icon: 'IconBrackets',
                     children: [
                         {
                             name: 'Overview',
@@ -1502,7 +1502,7 @@ export const docsMenu = {
                 {
                     name: 'Webhooks',
                     url: '/docs/webhooks',
-                    icon: 'Webhooks',
+                    icon: 'IconWebhooks',
                     children: [
                         {
                             name: 'Overview',
@@ -1875,7 +1875,7 @@ export const docsMenu = {
         },
         {
             name: 'Product Analytics',
-            icon: 'Graph',
+            icon: 'IconGraph',
             color: 'blue',
             url: '/docs/product-analytics',
             children: [
@@ -2034,7 +2034,7 @@ export const docsMenu = {
             name: 'Session Replay',
             url: '/docs/session-replay',
             color: 'yellow',
-            icon: 'RewindPlay',
+            icon: 'IconRewindPlay',
             children: [
                 {
                     name: 'Session replay',
@@ -2118,7 +2118,7 @@ export const docsMenu = {
         },
         {
             name: 'Feature Flags',
-            icon: 'Toggle',
+            icon: 'IconToggle',
             color: 'seagreen',
             url: '/docs/feature-flags',
             children: [
@@ -2192,7 +2192,7 @@ export const docsMenu = {
         },
         {
             name: 'A/B Testing',
-            icon: 'Flask',
+            icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
             children: [
@@ -2209,7 +2209,7 @@ export const docsMenu = {
                 {
                     name: 'Getting started',
                     url: '/docs/experiments/start',
-                    icon: 'GraduationCap',
+                    icon: 'IconGraduationCap',
                     color: 'red',
                 },
                 */
@@ -2275,7 +2275,7 @@ export const docsMenu = {
         {
             name: 'Surveys',
             url: '/docs/surveys',
-            icon: 'Message',
+            icon: 'IconMessage',
             color: 'salmon',
             children: [
                 {
@@ -2327,7 +2327,7 @@ export const docsMenu = {
             name: 'CDP',
             url: '/docs/cdp',
             color: 'yellow',
-            icon: 'Person',
+            icon: 'IconPerson',
             children: [
                 {
                     name: 'Customer data platform',
@@ -2610,7 +2610,7 @@ export const docsMenu = {
             name: 'Data Warehouse',
             url: '/docs/data-warehouse',
             color: 'seagreen',
-            icon: 'Server',
+            icon: 'IconServer',
             children: [
                 {
                     name: 'Data warehouse',
@@ -2659,17 +2659,17 @@ export const docsMenu = {
 export const pricingMenu = {
     name: 'Pricing',
     url: '/pricing',
-    icon: 'Receipt',
+    icon: 'IconReceipt',
     children: [
         {
             name: 'All products',
-            icon: 'Receipt',
+            icon: 'IconReceipt',
             color: 'red',
             url: '/pricing',
         },
         {
             name: 'Product Analytics',
-            icon: 'Graph',
+            icon: 'IconGraph',
             color: 'blue',
             url: '/pricing?product=product-analytics',
         },
@@ -2677,23 +2677,23 @@ export const pricingMenu = {
             name: 'Session Replay',
             url: '/pricing?product=session-replay',
             color: 'yellow',
-            icon: 'RewindPlay',
+            icon: 'IconRewindPlay',
         },
         {
             name: 'Feature Flags',
-            icon: 'Toggle',
+            icon: 'IconToggle',
             color: 'seagreen',
             url: '/pricing?product=feature-flags',
         },
         {
             name: 'A/B Testing',
-            icon: 'Flask',
+            icon: 'IconFlask',
             color: 'purple',
             url: '/pricing?product=ab-testing',
         },
         {
             name: 'Surveys',
-            icon: 'Chat',
+            icon: 'IconChat',
             color: 'red',
             url: '/pricing?product=surveys',
         },
@@ -2704,41 +2704,41 @@ const menu = [
     {
         name: 'Products',
         url: '/product-analytics',
-        icon: 'Features',
+        icon: 'IconFeatures',
         children: [
             {
                 name: 'Product Analytics',
-                icon: 'Graph',
+                icon: 'IconGraph',
                 color: 'blue',
                 url: '/product-analytics',
             },
             {
                 name: 'Session Replay',
-                icon: 'RewindPlay',
+                icon: 'IconRewindPlay',
                 color: 'yellow',
                 url: '/session-replay',
             },
             {
                 name: 'Feature Flags',
-                icon: 'Toggle',
+                icon: 'IconToggle',
                 color: 'seagreen',
                 url: '/feature-flags',
             },
             {
                 name: 'A/B Testing',
-                icon: 'Flask',
+                icon: 'IconFlask',
                 color: 'purple',
                 url: '/ab-testing',
             },
             {
                 name: 'Surveys',
-                icon: 'Message',
+                icon: 'IconMessage',
                 color: 'salmon',
                 url: '/surveys',
             },
             {
                 name: 'Product OS',
-                icon: 'Stack',
+                icon: 'IconStack',
                 color: 'blue',
                 url: '/product-os',
             },
