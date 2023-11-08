@@ -17,7 +17,9 @@ toolsUsed:
 date: 2023-09-15
 ---
 
-Founded in 2011, [Groove](https://www.groovehq.com/) is a simple yet powerful helpdesk and ticketing platform, and a leading alternative to Zendesk for price-conscious teams. In such a saturated market, serial Founder and [Imperfect Startup](https://www.groovehq.com/helpdesk-software/imperfect-startup) blogger Alex Turnbull knows it’s important to build quickly and build effective, scalable data stacks. So, while Alex had previous experience with [Mixpanel](/blog/posthog-vs-mixpanel), [Hotjar](/blog/posthog-vs-hotjar) and [Google Analytics 4](/blog/posthog-vs-ga4), he began searching for a new solution. 
+Founded in 2011 by serial founder Alex Turnball, [Groove](https://www.groovehq.com/) is a simple yet powerful helpdesk and ticketing platform, and a leading alternative to Zendesk for price-conscious teams. It's a crowded market, which makes building quickly on an effective, scalable data stack more vital than ever.
+
+Alex had used [Mixpanel](/blog/posthog-vs-mixpanel), [Hotjar](/blog/posthog-vs-hotjar) and [Google Analytics 4](/blog/posthog-vs-ga4) in his earlier startups, but felt Groove needed a more complete platform to achieve their goals.
 
 “I used Mixpanel at a previous startup I founded for years and years, but didn’t feel it scaled well” says Alex. “Obviously I was also looking for a replacement for GA4, so eventually I decided we needed a standardized solution that will grow with us and bring everything into one place. I wanted the software to do its job, basically!”
 
