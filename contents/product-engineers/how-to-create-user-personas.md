@@ -2,10 +2,6 @@
 title: How to create a great user persona (with examples)
 date: 2023-11-02
 author: ["lior-neu-ner"]
-showTitle: true
-rootpage: /blog
-sidebar: Blog
-hideAnchor: true
 featuredImage: ../images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
