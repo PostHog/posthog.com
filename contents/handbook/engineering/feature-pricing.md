@@ -44,6 +44,12 @@ A good question to ask yourself here is, "If I were to switch away from PostHog,
 
 For example, if someone were to consider moving from PostHog to some other provider, cohorts would need to be manually recreated in the other provider, which would be tedious. However, something like Web Performance just happens and doesn't require any user involvement, so isn't sticky.
 
+### We should only charge users once per feature
+
+Our customers get confused when we charge for the same feature in multiple places. It's often hard to explain why we would do this.
+
+For example, when someone calls a feature flag, we send a $feature_flag_called event so we can have stats. In this case, we don't charge for those events, as our customers already pay for feature flags.
+
 ### Other guidelines
 
 - We should always ask ourselves how newly release features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
@@ -57,7 +63,5 @@ For example, if someone were to consider moving from PostHog to some other provi
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
 
 - Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers to avoid unexpected pricing changes.
-
-
 
 
