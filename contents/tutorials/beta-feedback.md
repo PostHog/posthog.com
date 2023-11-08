@@ -1,5 +1,5 @@
 ---
-title: How to collect beta feedback from beta users
+title: How to collect feedback from beta users
 date: 2023-11-07
 author: ["ian-vanagas"]
 showTitle: true
@@ -13,15 +13,17 @@ This tutorial shows you how to combine PostHog’s [early access management](/do
 
 ## Creating an early access feature
 
-To create a beta feature in PostHog, go to the [early access management](https://app.posthog.com/early_access_features) tab and click "create feature." Add a name like "new page beta," click "Save as draft," and then "Release beta." This also automatically creates a feature flag we use to control the display of the feature.
+To create a beta feature in PostHog, go to the [early access management tab](https://app.posthog.com/early_access_features) and click "Create feature". Add a name like "new page beta," click "Save as draft," and then "Release beta." This also automatically creates a feature flag we use to control the display of the feature.
 
-On the draft page, click "implement public opt-in" and go to the [opt-in app page](https://app.posthog.com/project/apps/574). Enable the app and set "Show features button on the page" to "Yes." This adds a modal to control early access features with no extra setup.
+On the draft page, click "Implement public opt-in" and go to the [opt-in app page](https://app.posthog.com/project/apps/574). Enable the app and set "Show features button on the page" to "Yes." This adds a modal to control early access features with no extra setup.
 
 ![Creating beta feature video](../images/tutorials/beta-feedback/beta.mp4)
 
 ## Creating our app
 
-We use [Next.js](/docs/libraries/next-js) for our app, but any app compatible with the [JavaScript Web library](/docs/libraries/js) or snippet works. To create our app, make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), and then run the command below. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+We use [Next.js](/docs/libraries/next-js) for our app, but any app with our [JavaScript Web library](/docs/libraries/js) or snippet installed works. 
+
+To create a Next.js app, make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) and then run `npx create-next-app@latest beta-page`. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest beta-page
