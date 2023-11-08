@@ -4,7 +4,7 @@ import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
 import { useSearch } from 'components/Search/SearchContext'
 
-import { IconApp, IconBrightness, IconChat, IconSearch, IconTextWidth, IconUser } from '@posthog/icons'
+import { IconApp, IconBrightness, IconChat, IconChevronDown, IconSearch, IconTextWidth, IconUser } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
 import React, { useEffect, useRef, useState } from 'react'
@@ -13,7 +13,6 @@ import { useLayoutData } from 'components/Layout/hooks'
 import { useLocation } from '@reach/router'
 import Toggle from 'components/Toggle'
 import usePostHog from 'hooks/usePostHog'
-import * as icons from '@posthog/icons'
 import HoverTooltip from 'components/Tooltip'
 import { SignupCTA } from 'components/SignupCTA'
 import { CallToAction } from 'components/CallToAction'
@@ -181,7 +180,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                         firstInView ? '-z-10' : 'z-10'
                     }`}
                 >
-                    <icons.ChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                    <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
                 </button>
             )}
             <ul
@@ -251,7 +250,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                         lastInView ? '-z-10' : 'z-10'
                     }`}
                 >
-                    <icons.ChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                    <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
                 </button>
             )}
         </div>
