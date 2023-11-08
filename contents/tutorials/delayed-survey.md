@@ -1,6 +1,6 @@
 ---
 title: How to show a survey after a delay
-date: 2023-11-06
+date: 2023-11-08
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
