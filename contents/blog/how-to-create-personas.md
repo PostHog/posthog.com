@@ -15,11 +15,11 @@ tags:
   - Product
 ---
 
-## What are user personas?
+## What is a user persona? 
 
 User personas are a generalized way of understanding and talking about the people using your product. This enables you to empathize with them and focus on their needs while you're building for them.
 
-This is different from other personas, like buyer personas or ideal customer profiles (ICPs), who may not actually use your product. 
+Users personas are not the same as buyer personas or ideal customer profiles (ICPs), who may not actually use your product. 
 
 Here's a quick comparison:
 
@@ -33,7 +33,7 @@ As an example, here's how these different personas look like for our product:
 
 ## What makes a good user persona?
 
-A great persona needs three things:
+A great user persona needs three things:
 
 1. **Job Summary** – your user's skills and responsibilities. 
 2. **Motivation** – what their goals are.
@@ -41,7 +41,7 @@ A great persona needs three things:
 
 If it helps you visualize your user, you can also include other information such as workflows, tools, or jobs to be done.
 
-Below are three examples of what user personas could look like for different companies:
+Here are three, real-world user persona examples from well-known companies:
 
 1. **Vercel's** primary user persona is a front-end developer who wants simple solutions to deploying and hosting apps.
 
@@ -57,7 +57,7 @@ Below are three examples of what user personas could look like for different com
 
 If you're looking for more examples, GitLab has published the [16 different user personas they use](https://about.gitlab.com/handbook/product/personas/).
 
-## How to build a user persona step-by-step
+## How to define your user persona – step-by-step guide
 
 ### Step 1: Speak to your users
 
