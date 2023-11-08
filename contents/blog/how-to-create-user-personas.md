@@ -57,7 +57,7 @@ Here are three, real-world user persona examples from well-known companies:
 
 If you're looking for more examples, GitLab has published the [16 different user personas they use](https://about.gitlab.com/handbook/product/personas/).
 
-## How to define your user persona – step-by-step guide
+## How to define your user persona – step-by-step
 
 ### Step 1: Speak to your users
 
@@ -81,7 +81,7 @@ If you need to go more in-depth, you can also interview your users. Good questio
 - What problem does our product solve for you? Which problems doesn't it solve?
 - Why is [name of specific feature] important for you to complete specific tasks?
 
-> Need more tips on how to interview your users? We've written a guide on [how to uncover your users' real problems](https://newsletter.posthog.com/p/how-to-uncover-your-users-real-problems)
+> Read [how to uncover your users' real problems](https://newsletter.posthog.com/p/how-to-uncover-your-users-real-problems) for more tips on how to interview your users
 
 ### Step 2: Distill their answers
 
