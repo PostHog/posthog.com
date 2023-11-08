@@ -3,9 +3,7 @@ import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
 import { useSearch } from 'components/Search/SearchContext'
-
 import { IconApp, IconBrightness, IconChat, IconChevronDown, IconSearch, IconTextWidth, IconUser } from '@posthog/icons'
-
 import { Placement } from '@popperjs/core'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
@@ -17,6 +15,7 @@ import HoverTooltip from 'components/Tooltip'
 import { SignupCTA } from 'components/SignupCTA'
 import { CallToAction } from 'components/CallToAction'
 import { useInView } from 'react-intersection-observer'
+import * as icons from '@posthog/icons'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
