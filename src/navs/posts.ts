@@ -208,6 +208,13 @@ export const postsMenu: IMenu[] = [
                 color: 'seagreen',
             },
             {
+                name: 'A/B testing',
+                url: '/tutorials/experimentation',
+                icon: 'IconFlask',
+                color: 'purple',
+                tag: 'Experimentation',
+            },
+            {
                 name: 'Surveys',
                 url: '/tutorials/surveys',
                 icon: 'IconMessage',
