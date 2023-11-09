@@ -18,9 +18,6 @@ import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
-import { PlanComparison } from 'components/Pricing/PlanComparison'
-import ContentViewer from 'components/ContentViewer'
-import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'
 import TeamRoadmap from 'components/TeamRoadmap'
 import { Marquee } from 'components/Products/Marquee'
@@ -39,6 +36,7 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import PlanComparisonNew from 'components/Pricing/PlanComparisonNew'
 
 const product = {
     slug: 'surveys',
@@ -423,7 +421,9 @@ export const ProductSurveys = () => {
                 </div>
 
                 <div className="md:flex justify-between items-start gap-12">
-                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['surveys']} />
+                    <div className="flex-grow">
+                        <PlanComparisonNew showHeaders={false} showCTA={false} groupsToShow={['surveys']} />
+                    </div>
 
                     <div className="md:w-96 md:mt-4">
                         <h4 className="text-3xl">FAQs</h4>

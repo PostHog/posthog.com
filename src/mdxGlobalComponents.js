@@ -20,6 +20,7 @@ import { LPCTA } from './components/LPCTA'
 import { Label } from './components/Label'
 import { List } from './components/List'
 import { OverflowXSection } from './components/OverflowXSection'
+import { PlanComparisonNew } from './components/Pricing/PlanComparisonNew'
 import { Quote } from './components/Pricing/Quote'
 import { AbTesting } from './components/Product/AbTesting'
 import { FeatureFlags } from './components/Product/FeatureFlags'
@@ -70,6 +71,7 @@ export const shortcodes = {
     Label,
     List,
     OverflowXSection,
+    PlanComparisonNew,
     Quote,
     AbTesting,
     FeatureFlags,

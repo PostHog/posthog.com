@@ -274,66 +274,35 @@ const AddonTooltipContent = ({
 export const allProductsData = graphql`
     query GetAllProductData {
         allProductData {
-            edges {
-                node {
-                    products {
+            nodes {
+                products {
+                    description
+                    docs_url
+                    image_url
+                    inclusion_only
+                    contact_support
+                    addons {
+                        contact_support
                         description
                         docs_url
                         image_url
                         inclusion_only
-                        contact_support
-                        addons {
-                            contact_support
-                            description
-                            docs_url
-                            image_url
-                            inclusion_only
-                            name
-                            type
-                            unit
-                            plans {
-                                description
-                                docs_url
-                                image_url
-                                name
-                                plan_key
-                                product_key
-                                unit
-                                features {
-                                    description
-                                    key
-                                    name
-                                }
-                                tiers {
-                                    current_amount_usd
-                                    current_usage
-                                    flat_amount_usd
-                                    unit_amount_usd
-                                    up_to
-                                }
-                            }
-                        }
                         name
                         type
                         unit
-                        usage_key
                         plans {
                             description
                             docs_url
-                            features {
-                                description
-                                key
-                                limit
-                                name
-                                note
-                                unit
-                            }
-                            free_allocation
                             image_url
-                            included_if
                             name
                             plan_key
                             product_key
+                            unit
+                            features {
+                                description
+                                key
+                                name
+                            }
                             tiers {
                                 current_amount_usd
                                 current_usage
@@ -341,8 +310,37 @@ export const allProductsData = graphql`
                                 unit_amount_usd
                                 up_to
                             }
+                        }
+                    }
+                    name
+                    type
+                    unit
+                    usage_key
+                    plans {
+                        description
+                        docs_url
+                        features {
+                            description
+                            key
+                            limit
+                            name
+                            note
                             unit
                         }
+                        free_allocation
+                        image_url
+                        included_if
+                        name
+                        plan_key
+                        product_key
+                        tiers {
+                            current_amount_usd
+                            current_usage
+                            flat_amount_usd
+                            unit_amount_usd
+                            up_to
+                        }
+                        unit
                     }
                 }
             }
@@ -361,7 +359,7 @@ export const PlanComparison = ({
 }): JSX.Element => {
     const posthog = usePostHog()
 
-    const staticProducts: BillingProductV2Type[] = useStaticQuery(allProductsData).allProductData.edges[0].node.products
+    const staticProducts: BillingProductV2Type[] = useStaticQuery(allProductsData).allProductData.nodes[0].products
     const staticPlans = staticProducts?.[0]?.plans
 
     const inclusionOnlyProducts = staticProducts
