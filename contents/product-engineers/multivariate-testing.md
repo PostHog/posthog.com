@@ -2,13 +2,8 @@
 title: Multivariate testing, explained
 date: 2023-11-07
 author: ['lior-neu-ner']
-showTitle: true
-rootpage: /blog
-sidebar: Blog
-hideAnchor: true
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-category: Engineering
 tags:
   - Guides 
   - Explainers
