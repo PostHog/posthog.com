@@ -374,7 +374,7 @@ export const ProductAbTesting = () => {
                 </div>
 
                 <div className="md:flex justify-between items-start gap-12">
-                    <div className="flex-grow">
+                    <div className="flex-grow overflow-auto">
                         <PlanComparisonNew showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
                     </div>
                     <div className="md:w-96 md:mt-4">

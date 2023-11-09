@@ -447,7 +447,7 @@ export const ProductSessionReplay = () => {
                 </div>
 
                 <div className="md:flex justify-between items-start gap-12">
-                    <div className="flex-grow">
+                    <div className="flex-grow overflow-auto">
                         <PlanComparisonNew showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
                     </div>
                     <div className="md:w-96 md:mt-4">

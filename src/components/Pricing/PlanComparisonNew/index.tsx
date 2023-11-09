@@ -51,7 +51,7 @@ export default function PlanComparisonNew({ groupsToShow }): JSX.Element {
         .filter(({ type }) => groupsToShow.includes(type))
         .map(({ type, plans, unit, addons, name }) => {
             return (
-                <div className="grid gap-y-1" key={type}>
+                <div className="grid gap-y-1 min-w-[615px]" key={type}>
                     <Row className="bg-accent dark:bg-accent-dark">
                         <Heading title="Plans" className="col-span-2" />
                         {plans.map(({ free_allocation, plan_key }) => {
