@@ -19,7 +19,7 @@ tags:
 
 ## What is multivariate testing
 
-Multivariate testing is when you test different combinations of variables to determine which performs the best. 
+Multivariate testing is when you test different combinations of changes to determine which performs the best. 
 
 For example, you want to test how the color and placement of a button affect your conversion rate. You would then create a test with four different variants:
 
@@ -38,9 +38,11 @@ It's similar to [A/B testing](/ab-testing), except in A/B testing you're only te
 
 ### 1. It saves you time
 
-Testing multiple combinations at the same time means you don't have to wait for many consecutive tests to finish. If you ran each variant as an A/B test, you'd have to wait for each test to finish before starting the next one.
+Running multiple A/B tests at the same risks them interfering with each other. As a result, you usually need to wait for each test to finish before starting the next one.
 
-### 2. It uncovers interactions between variables
+Multivariate tests enable you to test multiple combinations at the same time, meaning you don't have to wait for many consecutive tests to finish.
+
+### 2. It reveals how different elements interact with each other
 
 Multivariate testing is not just about looking at which variant is the best; it's about understanding the weight each factor had in that success. This provides insights into understanding your holistic user experience.
 
@@ -48,7 +50,7 @@ For example, let's say you're testing changes to the user dashboard of a B2B Saa
 
 In isolation, changing the button texts might affect how well users understand your app. Similarly, moving the navigation menu from the top to the side could influence their ability to navigate it.
 
-However, when you combine and test these changes together, you may discover that their combined effect is greater than each individual change.
+However, when you combine and test these changes together, you may discover that their combined effect is not necessarily greater than each individual change.
 
 Multivariate testing enables you to uncover insights like these.
 
@@ -66,11 +68,15 @@ If your duration is too long, but you'd still like to run a multivariant test, t
 
 2. **Use [surveys](/surveys)** – It's often easier to ask your users about their experience instead of guessing it from metrics. Survey responses can help decision-making when statistical significance is difficult to achieve.
 
+> 💡 **PostHog tip:** If you're running your test with PostHog, we calculate the recommended running time for you.
+>
+> ![Recommended running time in PostHog experiment setup](../images/blog/multivariated-testing-explained/recommended-running-time.png)
+
 ### 2. Multivariant tests require more work
 
 Because you have many different variants, multivariate tests require more code, generate more data, and need more time to analyze results than A/B tests.
 
-For example, if you have three properties and two possible variations for each, you need to create six different versions of your feature to test. Then, you need to analyze the results of each one. A huge effort!
+For example, if you have three properties and two possible variations for each, you need to create six different versions of your feature to test. Then, you need to analyze the results of each one. This can be a big effort if you plan to uncover and compare the nuances of how each variant affected user behavior.
 
 Multivariate tests can generate great insights, but they also use up more of your team's resources.
 
