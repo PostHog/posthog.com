@@ -39,11 +39,11 @@ Multivariate tests enable you to test multiple combinations at the same time, me
 
 ### 2. It reveals how different elements interact with each other
 
-Multivariate testing is not just about looking at which variant is the best; it's about understanding the weight each factor had in that success. This provides insights into understanding your holistic user experience.
+Multivariate testing is not just about looking at which variant is the best; it's about understanding the weight each factor had in that success. This provides insights into your holistic user experience.
 
 For example, let's say you're testing changes to the user dashboard of a B2B SaaS app. You decide to test how both the position of the navigation menu and the text of the buttons affect user engagement.
 
-In isolation, changing the button texts might affect how well users understand your app. Similarly, moving the navigation menu from the top to the side could influence their ability to navigate it.
+In isolation, changing the button text might affect how well users understand your app. Similarly, moving the navigation menu from the top to the side could influence their ability to navigate it.
 
 However, when you combine and test these changes together, you may discover that their combined effect is not necessarily greater than each individual change.
 
@@ -53,11 +53,11 @@ Multivariate testing enables you to uncover insights like these.
 
 ### 1. You need a larger sample size
 
-Since you split your participants into many groups, you need a larger sample size for a [statistically significant](/docs/experiments/significance) result. In practice, this means multivariant tests need to for run longer than a typical A/B test.
+Since you split your participants into many groups, you need a larger sample size for a [statistically significant](/docs/experiments/significance) result. In practice, this means multivariate tests need to for run longer than a typical A/B test.
 
 With this in mind, a good idea is to [calculate your required sample size](/product-engineers/ab-testing-guide-for-engineers#4-a-sufficiently-large-sample-size-of-users) before running your test so that you can ensure your test duration is reasonable.
 
-If your duration is too long, but you'd still like to run a multivariant test, there are two potential solutions:
+If your duration is too long, but you'd still like to run a multivariate test, there are two potential solutions:
 
 1. **Target proxy metrics** – e.g., if your goal is to increase conversion, instead target a metric higher up the funnel, like number of signups.
 
@@ -77,7 +77,7 @@ Multivariate tests can generate great insights, but they also use up more of you
 
 ## Multivariant vs A/B tests
 
-Here is a table summarizing the differences between the multivariant and A/B tests:
+Here is a table summarizing the differences between the multivariate and A/B tests:
 
 | Situation | A/B Testing | Multivariate Testing |
 |-----------|-------------|----------------------|

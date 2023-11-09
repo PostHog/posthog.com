@@ -38,7 +38,7 @@ You then run your A/B test to gather data (usually over a few days or weeks) and
 
 ![How A/B testing works](../images/blog/ab-testing-guide-for-engineers/ab-test-illustration.jpg)
 
-There are a few different types of A/B test, such as [multivariate](/blog/multivariated-testing-explained) (where you're testing more than one variation) and multi-page "funnel" tests (where you're testing different user paths), but this guide is focused traditional A/B tests. 
+There are a few different types of A/B test, such as [multivariate](/product-engineers/multivariate-testing-explained) (where you're testing more than one variation) and multi-page "funnel" tests (where you're testing different user paths), but this guide is focused traditional A/B tests. 
 
 ## What makes a good A/B test?
 

@@ -98,6 +98,6 @@ Once you’ve done this, you have everything you need for safer, more effective 
 
 ## Further reading
 
-- [Multivariate testing, explained](/blog/multivariated-testing-explained)
+- [Multivariate testing, explained](/product-engineers/multivariate-testing-explained)
 - [What you can learn from how GitHub and GitLab use feature flags](/blog/github-gitlab-feature-flags)
 - [How YC's biggest startups run A/B tests (with examples)](/blog/ab-testing-examples)
