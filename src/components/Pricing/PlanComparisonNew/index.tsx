@@ -2,11 +2,12 @@ import { useStaticQuery } from 'gatsby'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 import React from 'react'
 import { AddonTooltipContent, allProductsData } from '../PlanComparison'
-import { Check2, Close, Close2 } from 'components/Icons'
+import { Check2, Close } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
 import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
+import { BillingProductV2Type, BillingV2FeatureType } from 'types'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -21,7 +22,7 @@ const Row = ({ children, className = '' }: { children: React.ReactNode; classNam
     return <div className={`grid grid-cols-4 items-center gap-x-4 p-2 rounded ${className}`}>{children}</div>
 }
 
-const Feature = ({ feature }) => {
+const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
     return feature ? (
         feature?.limit || feature?.note ? (
             <p className="m-0 text-base opacity-70">
@@ -39,14 +40,36 @@ const Title = ({ title, className = '' }: { title: string; className?: string })
     return <h5 className={`m-0 text-base opacity-70 font-medium ${className}`}>{title}</h5>
 }
 
-export default function PlanComparisonNew({ groupsToShow }): JSX.Element {
+const AddonTooltip = ({
+    children,
+    addon,
+    parentProductName,
+}: {
+    children: React.ReactNode
+    addon: BillingProductV2Type
+    parentProductName: string
+}) => {
+    return (
+        <Tooltip
+            placement="right-end"
+            content={() => (
+                <div className="max-w-sm">
+                    <AddonTooltipContent addon={addon} parentProductName={parentProductName} />
+                </div>
+            )}
+        >
+            <span className="relative">{children}</span>
+        </Tooltip>
+    )
+}
+
+export default function PlanComparisonNew({ groupsToShow = [] }: { groupsToShow?: string[] }): JSX.Element {
     const {
         allProductData: {
             nodes: [{ products }],
         },
     } = useStaticQuery(allProductsData)
     const posthog = usePostHog()
-    console.log(products)
     return products
         .filter(({ type }) => groupsToShow.includes(type))
         .map(({ type, plans, unit, addons, name }) => {
@@ -119,42 +142,24 @@ export default function PlanComparisonNew({ groupsToShow }): JSX.Element {
                             return (
                                 <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
                                     <div className="col-span-2">
-                                        <Tooltip
-                                            placement="right-end"
-                                            content={() => (
-                                                <div className="max-w-sm">
-                                                    <AddonTooltipContent addon={addon} parentProductName={name} />
-                                                </div>
-                                            )}
-                                        >
-                                            <span className="relative inline-flex space-x-2 items-baseline">
-                                                <Title
-                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                    title={addon.name}
-                                                />
-                                                <Label text="Addon" />
-                                            </span>
-                                        </Tooltip>
+                                        <AddonTooltip addon={addon} parentProductName={name}>
+                                            <Title
+                                                className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                title={addon.name}
+                                            />
+                                            <Label className="ml-2" text="Addon" />
+                                        </AddonTooltip>
                                     </div>
                                     {plans.map((plan) => {
                                         return plan.free_allocation ? (
                                             <Close opacity={1} className="text-red w-4" />
                                         ) : (
-                                            <Tooltip
-                                                placement="right-end"
-                                                content={() => (
-                                                    <div className="max-w-sm">
-                                                        <AddonTooltipContent addon={addon} parentProductName={name} />
-                                                    </div>
-                                                )}
-                                            >
-                                                <span className="relative">
-                                                    <Title
-                                                        className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                        title="Available"
-                                                    />
-                                                </span>
-                                            </Tooltip>
+                                            <AddonTooltip addon={addon} parentProductName={name}>
+                                                <Title
+                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                    title="Available"
+                                                />
+                                            </AddonTooltip>
                                         )
                                     })}
                                 </Row>
