@@ -1,11 +1,12 @@
 import { useStaticQuery } from 'gatsby'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 import React from 'react'
-import { allProductsData } from '../PlanComparison'
-import { Check2, Close } from 'components/Icons'
+import { AddonTooltipContent, allProductsData } from '../PlanComparison'
+import { Check2, Close, Close2 } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
 import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
+import Label from 'components/Label'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -45,9 +46,10 @@ export default function PlanComparisonNew({ groupsToShow }): JSX.Element {
         },
     } = useStaticQuery(allProductsData)
     const posthog = usePostHog()
+    console.log(products)
     return products
         .filter(({ type }) => groupsToShow.includes(type))
-        .map(({ type, plans, unit }) => {
+        .map(({ type, plans, unit, addons, name }) => {
             return (
                 <div className="grid gap-y-1" key={type}>
                     <Row className="bg-accent dark:bg-accent-dark">
@@ -86,8 +88,7 @@ export default function PlanComparisonNew({ groupsToShow }): JSX.Element {
                         <Heading title="Features" className="col-span-4" />
                     </Row>
                     <div>
-                        {plans[1].features.map((feature, index) => {
-                            const freeFeature = plans[0].features?.[index]
+                        {plans[plans.length - 1].features.map((feature, index) => {
                             return (
                                 <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={feature.key}>
                                     <div className="col-span-2">
@@ -108,9 +109,54 @@ export default function PlanComparisonNew({ groupsToShow }): JSX.Element {
                                             </span>
                                         </Tooltip>
                                     </div>
-
-                                    <Feature feature={freeFeature} />
-                                    <Feature feature={feature} />
+                                    {plans.map((plan) => (
+                                        <Feature key={`${feature.key}-${type}`} feature={plan.features?.[index]} />
+                                    ))}
+                                </Row>
+                            )
+                        })}
+                        {addons.map((addon) => {
+                            return (
+                                <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
+                                    <div className="col-span-2">
+                                        <Tooltip
+                                            placement="right-end"
+                                            content={() => (
+                                                <div className="max-w-sm">
+                                                    <AddonTooltipContent addon={addon} parentProductName={name} />
+                                                </div>
+                                            )}
+                                        >
+                                            <span className="relative inline-flex space-x-2 items-baseline">
+                                                <Title
+                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                    title={addon.name}
+                                                />
+                                                <Label text="Addon" />
+                                            </span>
+                                        </Tooltip>
+                                    </div>
+                                    {plans.map((plan) => {
+                                        return plan.free_allocation ? (
+                                            <Close opacity={1} className="text-red w-4" />
+                                        ) : (
+                                            <Tooltip
+                                                placement="right-end"
+                                                content={() => (
+                                                    <div className="max-w-sm">
+                                                        <AddonTooltipContent addon={addon} parentProductName={name} />
+                                                    </div>
+                                                )}
+                                            >
+                                                <span className="relative">
+                                                    <Title
+                                                        className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                        title="Available"
+                                                    />
+                                                </span>
+                                            </Tooltip>
+                                        )
+                                    })}
                                 </Row>
                             )
                         })}

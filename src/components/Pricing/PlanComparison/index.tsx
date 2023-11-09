@@ -233,7 +233,7 @@ const AddonTag = () => {
     return <Label text="Addon" className="ml-2" />
 }
 
-const AddonTooltipContent = ({
+export const AddonTooltipContent = ({
     addon,
     parentProductName,
 }: {
