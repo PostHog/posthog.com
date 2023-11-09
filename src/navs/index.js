@@ -700,7 +700,21 @@ export const handbookSidebar = [
             },
             {
                 name: 'Community',
-                url: '/handbook/small-teams/website-docs/community',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/community',
+                    },
+                    {
+                        name: 'Answering community questions',
+                        url: '/handbook/community/questions',
+                    },
+                    {
+                        name: 'Profiles',
+                        url: '/handbook/community/profiles',
+                    },
+                ],
             },
             {
                 name: 'Designing PostHog.com',
