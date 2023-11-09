@@ -202,7 +202,7 @@ export default function PlanComparisonNew({ groupsToShow }): JSX.Element {
                     </div>
                     <Row>
                         <div className="col-span-2" />
-                        {Array.from(Array(2)).map((_, i) => (
+                        {plans.map((_, i) => (
                             <TrackedCTA
                                 key={`cta-${i}`}
                                 event={{
