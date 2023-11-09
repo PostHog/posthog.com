@@ -1312,6 +1312,15 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Notebooks',
+                    url: '/docs/notebooks',
+                    icon: 'Book',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Toolbar',
                     url: '/docs/toolbar',
                     icon: 'IconToolbar',
