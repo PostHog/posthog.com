@@ -236,6 +236,10 @@ const allProductsData = graphql`
     }
 `
 
+const planNames = {
+    'Product analytics + data stack': 'Product analytics',
+}
+
 export default function Plans({
     groupsToShow,
     showTitle,
@@ -252,7 +256,7 @@ export default function Plans({
         ({ type, plans, unit, addons, name, inclusion_only }) => {
             return (
                 <div className="grid gap-y-4 min-w-[450px]" key={type}>
-                    {showTitle && <h4>{name}</h4>}
+                    {showTitle && <h4>{planNames[name] || name}</h4>}
                     {plans.some(({ free_allocation }) => free_allocation) && (
                         <div>
                             <Row className="bg-accent dark:bg-accent-dark mb-2">
