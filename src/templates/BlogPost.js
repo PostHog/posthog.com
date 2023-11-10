@@ -58,7 +58,7 @@ export const Contributors = ({ contributors }) => {
     return contributors?.[0] ? (
         <>
             <div className="text-sm opacity-50 px-4 mb-2">Posted by</div>
-            <div className={`mb-4 flex flex-col gap-4`}>
+            <div className={`mb-4 flex flex-col gap-12`}>
                 {contributors.map(({ profile_id, image, name, role }) => (
                     <Contributor
                         url={profile_id && `/community/profiles/${profile_id}`}
