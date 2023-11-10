@@ -70,7 +70,7 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                             : !up_to
                             ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)} +`
                             : `${
-                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |K/)[0]
+                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |k/)[0]
                               }-${formatCompactNumber(up_to)}`
                     }
                 />
