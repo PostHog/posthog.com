@@ -263,11 +263,9 @@ export default function Plans({
                         {plans.some(({ free_allocation }) => free_allocation) && (
                             <div>
                                 <Row className="bg-accent dark:bg-accent-dark mb-2">
-                                    {showTitle && (
-                                        <div className="flex-grow">
-                                            <h4 className="text-lg mb-0">{planNames[name] || name}</h4>
-                                        </div>
-                                    )}
+                                    <div className="flex-grow">
+                                        {showTitle && <h4 className="text-lg mb-0">{planNames[name] || name}</h4>}
+                                    </div>
 
                                     {plans.map(({ free_allocation, plan_key }) => {
                                         return (
