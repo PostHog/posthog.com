@@ -70,7 +70,7 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                             : !up_to
                             ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)} +`
                             : `${
-                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(' ')[0]
+                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |K/)[0]
                               }-${formatCompactNumber(up_to)}`
                     }
                 />
@@ -97,8 +97,11 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
     })
 
 const formatCompactNumber = (number) => {
-    const formatter = Intl.NumberFormat('en', { notation: 'compact', compactDisplay: 'long' })
-    return formatter.format(number)
+    const formatter = Intl.NumberFormat('en', {
+        notation: 'compact',
+        compactDisplay: number < 999999 ? 'short' : 'long',
+    })
+    return formatter.format(number).toLowerCase()
 }
 
 const AddonTooltipContent = ({ addon }) => {
