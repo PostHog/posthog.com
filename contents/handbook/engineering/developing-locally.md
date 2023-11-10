@@ -222,15 +222,15 @@ pnpm i --dir plugin-server
 
 ### 4. Prepare the Django server
 
-1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details. We also need `clang-format` for code formatting.
+1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
     - On macOS:
         ```bash
-        brew install libxml2 libxmlsec1 pkg-config clang-format
+        brew install libxml2 libxmlsec1 pkg-config
         ```
     - On Debian-based Linux:
         ```bash
-        sudo apt install -y libxml2 libxmlsec1-dev pkg-config clang-format
+        sudo apt install -y libxml2 libxmlsec1-dev pkg-config
         ```
 
 1. Install Python 3.10.
