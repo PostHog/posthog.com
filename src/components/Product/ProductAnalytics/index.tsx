@@ -19,7 +19,6 @@ import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
-import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
 import ProductAnalytics from 'components/Home/CodeBlocks/ProductAnalytics'
 import { docsMenu } from '../../../navs'
@@ -43,6 +42,7 @@ import Slider from 'components/Products/Slider'
 import MobileSlides from 'components/Products/MobileSlides'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import Plans from 'components/Pricing/Plans'
 
 const product = {
     slug: 'product-analytics',
@@ -863,10 +863,11 @@ export const ProductProductAnalytics = () => {
                     </div>
                 </div>
 
-                <div className="md:flex justify-between items-start gap-12">
-                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['product_analytics']} />
-
-                    <div className="md:w-96 md:mt-4">
+                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
+                    <div className="flex-grow overflow-auto px-5 md:px-0">
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['product_analytics']} />
+                    </div>
+                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
                         {faqs.map((faq, index) => {
                             return <FAQ {...faq} key={index} />
