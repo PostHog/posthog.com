@@ -31,7 +31,9 @@ export interface IProps {
 }
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
-    const { pathname } = useLocation()
+    const { pathname, search } = useLocation()
+    const params = new URLSearchParams(search)
+    const compact = (typeof window !== 'undefined' && window !== window.parent) || params.get('compact')
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true'
     )
@@ -55,9 +57,23 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         localStorage.setItem('full-width-content', fullWidthContent + '')
     }, [fullWidthContent])
 
+    useEffect(() => {
+        if (compact && typeof window !== 'undefined' && window.parent) {
+            window.parent.postMessage(pathname, '*')
+        }
+    }, [pathname])
+
     return (
         <Context.Provider
-            value={{ menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent }}
+            value={{
+                menu,
+                parent,
+                internalMenu,
+                activeInternalMenu,
+                fullWidthContent,
+                setFullWidthContent,
+                compact,
+            }}
         >
             {children}
         </Context.Provider>
