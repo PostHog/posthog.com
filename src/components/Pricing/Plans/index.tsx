@@ -18,7 +18,7 @@ const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle
 }
 
 const Row = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`flex items-center space-x-4 px-2 py-1.5 rounded ${className}`}>{children}</div>
+    return <div className={`flex items-center space-x-4 px-2 lg:px-4 py-1.5 rounded ${className}`}>{children}</div>
 }
 
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
@@ -42,7 +42,7 @@ const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
 }
 
 const Title = ({ title, className = '' }: { title: string; className?: string }) => {
-    return <h5 className={`m-0 text-base opacity-70 font-medium ${className}`}>{title}</h5>
+    return <h5 className={`m-0 text-[15px] opacity-70 font-medium ${className}`}>{title}</h5>
 }
 
 const InclusionOnlyRow = ({ plans }) => (
@@ -50,7 +50,7 @@ const InclusionOnlyRow = ({ plans }) => (
         <div className="flex-grow" />
         {plans.map(({ included_if, plan_key }, index) => (
             <Title
-                key={`inlclusion-only-${plan_key}-${index}`}
+                key={`inclusion-only-${plan_key}-${index}`}
                 title={included_if === 'no_active_subscription' ? 'Free' : 'Paid'}
                 className="font-bold max-w-[25%] w-full min-w-[105px]"
             />
@@ -258,133 +258,139 @@ export default function Plans({
     return (groupsToShow?.length > 0 ? products.filter(({ type }) => groupsToShow.includes(type)) : products).map(
         ({ type, plans, unit, addons, name, inclusion_only }) => {
             return (
-                <div className="grid gap-y-4 min-w-[450px]" key={type}>
-                    {showTitle && <h4>{planNames[name] || name}</h4>}
-                    {plans.some(({ free_allocation }) => free_allocation) && (
-                        <div>
-                            <Row className="bg-accent dark:bg-accent-dark mb-2">
-                                <Heading title="Plans" className="flex-grow" />
-                                {plans.map(({ free_allocation, plan_key }) => {
-                                    return (
-                                        <Heading
-                                            title={free_allocation ? 'Free' : 'Unlimited'}
-                                            subtitle={
-                                                free_allocation
-                                                    ? 'No credit card required'
-                                                    : 'All features, no limitations'
-                                            }
-                                            className="max-w-[25%] w-full min-w-[105px]"
-                                            key={plan_key}
-                                        />
-                                    )
-                                })}
-                            </Row>
-                            <Row>
-                                <Title className="flex-grow" title={capitalize(`${unit}s`)} />
-                                {plans.map(({ free_allocation, plan_key }) => {
-                                    return (
-                                        <p
-                                            key={`${type}-${plan_key}`}
-                                            className="m-0 text-base opacity-70 max-w-[25%] w-full min-w-[105px]"
-                                        >
-                                            {free_allocation ? (
-                                                <>
-                                                    <strong>{free_allocation.toLocaleString()}</strong>
-                                                    <span className="text-xs">/mo</span>
-                                                </>
-                                            ) : (
-                                                <strong>Unlimited</strong>
-                                            )}
-                                        </p>
-                                    )
-                                })}
-                            </Row>
-                        </div>
-                    )}
-                    <div>
-                        <Row className="bg-accent dark:bg-accent-dark mb-2">
-                            <Heading title="Features" />
-                        </Row>
-                        {plans[plans.length - 1].features.map((feature, index) => {
-                            return (
-                                <Row
-                                    className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
-                                    key={`${type}-${feature.key}`}
-                                >
-                                    <div className="flex-grow">
-                                        <Tooltip
-                                            placement="right-end"
-                                            content={() => (
-                                                <div className="p-2 max-w-sm">
-                                                    <p className="font-bold text-[15px] mb-1">{feature.name}</p>
-                                                    <p className="mb-0 text-sm">{feature.description}</p>
-                                                </div>
-                                            )}
-                                        >
-                                            <span className="relative">
-                                                <Title
-                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                    title={feature.name}
-                                                />
-                                            </span>
-                                        </Tooltip>
-                                    </div>
-                                    {plans.map((plan, i) => (
-                                        <div
-                                            key={`${feature.key}-${type}-${i}`}
-                                            className="max-w-[25%] w-full min-w-[105px]"
-                                        >
-                                            <Feature feature={plan.features?.[index]} />
+                <div className="grid gap-y-2 min-w-[450px] mb-20" key={type}>
+                    <div className="border border-light dark:border-dark rounded pb-2">
+                        {plans.some(({ free_allocation }) => free_allocation) && (
+                            <div>
+                                <Row className="bg-accent dark:bg-accent-dark mb-2">
+                                    {showTitle && (
+                                        <div className="flex-grow">
+                                            <h4 className="text-lg mb-0">{planNames[name] || name}</h4>
                                         </div>
-                                    ))}
-                                </Row>
-                            )
-                        })}
-                        {addons.map((addon) => {
-                            return (
-                                <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
-                                    <div className="flex-grow">
-                                        <AddonTooltip addon={addon} parentProductName={name}>
-                                            <Title
-                                                className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                title={addon.name}
-                                            />
-                                            <Label className="ml-2" text="Addon" />
-                                        </AddonTooltip>
-                                    </div>
-                                    {plans.map((plan) => {
+                                    )}
+
+                                    {plans.map(({ free_allocation, plan_key }) => {
                                         return (
-                                            <div
+                                            <Heading
+                                                title={free_allocation ? 'Free' : 'Unlimited'}
+                                                subtitle={
+                                                    free_allocation
+                                                        ? 'No credit card required'
+                                                        : 'All features, no limitations'
+                                                }
                                                 className="max-w-[25%] w-full min-w-[105px]"
-                                                key={`${addon.type}-${plan.plan_key}`}
-                                            >
-                                                {plan.free_allocation ? (
-                                                    <Close opacity={1} className="text-red w-4" />
-                                                ) : (
-                                                    <AddonTooltip addon={addon} parentProductName={name}>
-                                                        <Title
-                                                            className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                            title="Available"
-                                                        />
-                                                    </AddonTooltip>
-                                                )}
-                                            </div>
+                                                key={plan_key}
+                                            />
                                         )
                                     })}
                                 </Row>
-                            )
-                        })}
-                    </div>
-                    <div>
-                        <Row className="bg-accent dark:bg-accent-dark mb-2">
-                            <Heading title="Monthly pricing" />
-                        </Row>
+                                <Row>
+                                    <Title className="flex-grow" title={capitalize(`${unit}s`)} />
+                                    {plans.map(({ free_allocation, plan_key }) => {
+                                        return (
+                                            <p
+                                                key={`${type}-${plan_key}`}
+                                                className="m-0 text-base opacity-70 max-w-[25%] w-full min-w-[105px]"
+                                            >
+                                                {free_allocation ? (
+                                                    <>
+                                                        <strong>{free_allocation.toLocaleString()}</strong>
+                                                        <span className="text-xs">/mo</span>
+                                                    </>
+                                                ) : (
+                                                    <strong>Unlimited</strong>
+                                                )}
+                                            </p>
+                                        )
+                                    })}
+                                </Row>
+                            </div>
+                        )}
                         <div>
-                            {inclusion_only ? (
-                                <InclusionOnlyRow plans={plans} />
-                            ) : (
-                                <PricingTiers plans={plans} unit={unit} />
-                            )}
+                            <Row className="bg-accent dark:bg-accent-dark my-2">
+                                <Heading title="Features" />
+                            </Row>
+                            {plans[plans.length - 1].features.map((feature, index) => {
+                                return (
+                                    <Row
+                                        className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
+                                        key={`${type}-${feature.key}`}
+                                    >
+                                        <div className="flex-grow">
+                                            <Tooltip
+                                                placement="right-end"
+                                                content={() => (
+                                                    <div className="p-2 max-w-sm">
+                                                        <p className="font-bold text-[15px] mb-1">{feature.name}</p>
+                                                        <p className="mb-0 text-sm">{feature.description}</p>
+                                                    </div>
+                                                )}
+                                            >
+                                                <span className="relative">
+                                                    <Title
+                                                        className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                        title={feature.name}
+                                                    />
+                                                </span>
+                                            </Tooltip>
+                                        </div>
+                                        {plans.map((plan, i) => (
+                                            <div
+                                                key={`${feature.key}-${type}-${i}`}
+                                                className="max-w-[25%] w-full min-w-[105px]"
+                                            >
+                                                <Feature feature={plan.features?.[index]} />
+                                            </div>
+                                        ))}
+                                    </Row>
+                                )
+                            })}
+                            {addons.map((addon) => {
+                                return (
+                                    <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
+                                        <div className="flex-grow">
+                                            <AddonTooltip addon={addon} parentProductName={name}>
+                                                <Title
+                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                    title={addon.name}
+                                                />
+                                                <Label className="ml-2" text="Addon" />
+                                            </AddonTooltip>
+                                        </div>
+                                        {plans.map((plan) => {
+                                            return (
+                                                <div
+                                                    className="max-w-[25%] w-full min-w-[105px]"
+                                                    key={`${addon.type}-${plan.plan_key}`}
+                                                >
+                                                    {plan.free_allocation ? (
+                                                        <Close opacity={1} className="text-red w-4" />
+                                                    ) : (
+                                                        <AddonTooltip addon={addon} parentProductName={name}>
+                                                            <Title
+                                                                className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                                title="Available"
+                                                            />
+                                                        </AddonTooltip>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </Row>
+                                )
+                            })}
+                        </div>
+                        <div>
+                            <Row className="bg-accent dark:bg-accent-dark my-2">
+                                <Heading title="Monthly pricing" />
+                            </Row>
+                            <div>
+                                {inclusion_only ? (
+                                    <InclusionOnlyRow plans={plans} />
+                                ) : (
+                                    <PricingTiers plans={plans} unit={unit} />
+                                )}
+                            </div>
                         </div>
                     </div>
                     <Row>

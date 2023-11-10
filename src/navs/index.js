@@ -2693,7 +2693,7 @@ export const pricingMenu = {
         },
         {
             name: 'Surveys',
-            icon: 'IconChat',
+            icon: 'IconMessage',
             color: 'red',
             url: '/pricing?product=surveys',
         },
