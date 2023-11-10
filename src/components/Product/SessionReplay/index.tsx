@@ -40,7 +40,7 @@ import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
-import PlanComparisonNew from 'components/Pricing/PlanComparisonNew'
+import Plans from 'components/Pricing/Plans'
 
 const product = {
     slug: 'session-replay',
@@ -448,7 +448,7 @@ export const ProductSessionReplay = () => {
 
                 <div className="md:flex justify-between items-start gap-12">
                     <div className="flex-grow overflow-auto">
-                        <PlanComparisonNew showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
                     </div>
                     <div className="md:w-96 md:mt-4">
                         <h4 className="text-3xl">FAQs</h4>

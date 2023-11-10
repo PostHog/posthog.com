@@ -32,7 +32,7 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
-import PlanComparisonNew from 'components/Pricing/PlanComparisonNew'
+import Plans from 'components/Pricing/Plans'
 
 const product = {
     slug: 'ab-testing',
@@ -375,7 +375,7 @@ export const ProductAbTesting = () => {
 
                 <div className="md:flex justify-between items-start gap-12">
                     <div className="flex-grow overflow-auto">
-                        <PlanComparisonNew showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
                     </div>
                     <div className="md:w-96 md:mt-4">
                         <h4 className="text-3xl">FAQs</h4>

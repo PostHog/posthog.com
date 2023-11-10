@@ -8,13 +8,13 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
 import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
+import Plans from './Plans'
 
 export const section = cntl`
     max-w-6xl
@@ -126,7 +126,7 @@ const Pricing = (): JSX.Element => {
                 </div>
             </section>
             <section className={`${section} mb-12 mt-8 md:px-4`}>
-                <PlanComparison groupsToShow={groupsToShow} />
+                <Plans showTitle groupsToShow={groupsToShow} />
             </section>
 
             <PricingCalculator />
