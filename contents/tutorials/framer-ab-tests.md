@@ -50,7 +50,7 @@ export default function CaptureButton() {
 ```
 
 Press `Cmd/Ctrl + s` to save your changes. Then press the "Home" button to go back to the home page. Add your new 
-CaptureButton to your page by dragging it from the Code tab.
+`CaptureButton` to your page by dragging it from the Code tab.
 
 ![Create a code snippet in Framer](../images/tutorials/framer-ab-tests/create-code-component.mp4)
 
