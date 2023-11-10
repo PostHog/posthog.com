@@ -373,11 +373,11 @@ export const ProductAbTesting = () => {
                     </div>
                 </div>
 
-                <div className="lg:flex justify-between items-start gap-12">
-                    <div className="flex-grow overflow-auto">
+                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
+                    <div className="flex-grow overflow-auto px-5 md:px-0">
                         <Plans showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
                     </div>
-                    <div className="lg:w-96 lg:mt-4">
+                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
                         {faqs.map((faq, index) => {
                             return <FAQ {...faq} key={index} />
