@@ -446,11 +446,11 @@ export const ProductSessionReplay = () => {
                     </div>
                 </div>
 
-                <div className="md:flex justify-between items-start gap-12">
+                <div className="lg:flex justify-between items-start gap-12">
                     <div className="flex-grow overflow-auto">
                         <Plans showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
                     </div>
-                    <div className="md:w-96 md:mt-4">
+                    <div className="lg:w-96 lg:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
                         {faqs.map((faq, index) => {
                             return <FAQ {...faq} key={index} />

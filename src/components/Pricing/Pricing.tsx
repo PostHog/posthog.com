@@ -14,7 +14,7 @@ import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
-import Plans from './Plans'
+import Plans, { CTA } from './Plans'
 
 export const section = cntl`
     max-w-6xl
@@ -122,10 +122,11 @@ const Pricing = (): JSX.Element => {
                         <p className="text-base font-medium opacity-60 leading-tight">
                             Each product is priced separately.
                         </p>
+                        <CTA />
                     </div>
                 </div>
             </section>
-            <section className={`${section} mb-12 mt-8 md:px-4`}>
+            <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
                 <Plans showTitle groupsToShow={groupsToShow} />
             </section>
 

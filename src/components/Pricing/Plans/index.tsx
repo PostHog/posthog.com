@@ -18,7 +18,7 @@ const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle
 }
 
 const Row = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`grid grid-cols-4 items-center gap-x-4 px-2 py-1.5 rounded ${className}`}>{children}</div>
+    return <div className={`flex items-center space-x-4 px-2 py-1.5 rounded ${className}`}>{children}</div>
 }
 
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
@@ -47,12 +47,12 @@ const Title = ({ title, className = '' }: { title: string; className?: string })
 
 const InclusionOnlyRow = ({ plans }) => (
     <Row className="!py-1">
-        <div className="col-span-2" />
+        <div className="flex-grow" />
         {plans.map(({ included_if, plan_key }, index) => (
             <Title
                 key={`inlclusion-only-${plan_key}-${index}`}
                 title={included_if === 'no_active_subscription' ? 'Free' : 'Paid'}
-                className="font-bold"
+                className="font-bold max-w-[25%] w-full min-w-[105px]"
             />
         ))}
     </Row>
@@ -61,9 +61,9 @@ const InclusionOnlyRow = ({ plans }) => (
 const PricingTiers = ({ plans, unit, compact = false }) =>
     plans[plans.length - 1]?.tiers?.map(({ up_to, unit_amount_usd }, index) => {
         return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
-            <Row className={`!py-1 ${compact ? '!px-0 !gap-x-0' : ''}`} key={`type-${index}`}>
+            <Row className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''}`} key={`type-${index}`}>
                 <Title
-                    className={`col-span-2 ${compact ? 'text-sm' : ''}`}
+                    className={`flex-grow ${compact ? 'text-sm' : ''}`}
                     title={
                         index === 0
                             ? `First ${formatCompactNumber(up_to)} ${unit}s`
@@ -74,9 +74,14 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                               }-${formatCompactNumber(up_to)}`
                     }
                 />
-                {!compact && <Title className="font-bold" title={plans[0].free_allocation === up_to ? 'Free' : '-'} />}
+                {!compact && (
+                    <Title
+                        className="font-bold max-w-[25%] w-full min-w-[105px]"
+                        title={plans[0].free_allocation === up_to ? 'Free' : '-'}
+                    />
+                )}
                 <Title
-                    className={`font-bold ${compact ? 'text-sm col-span-2' : ''}`}
+                    className={`font-bold max-w-[25%] w-full min-w-[105px] ${compact ? 'text-sm' : ''}`}
                     title={
                         plans[0].free_allocation === up_to
                             ? 'Free'
@@ -134,7 +139,7 @@ const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: B
     )
 }
 
-const CTA = () => {
+export const CTA = () => {
     const posthog = usePostHog()
     return (
         <TrackedCTA
@@ -246,12 +251,12 @@ export default function Plans({
     return (groupsToShow?.length > 0 ? products.filter(({ type }) => groupsToShow.includes(type)) : products).map(
         ({ type, plans, unit, addons, name, inclusion_only }) => {
             return (
-                <div className="grid gap-y-4 min-w-[615px]" key={type}>
+                <div className="grid gap-y-4 min-w-[450px]" key={type}>
                     {showTitle && <h4>{name}</h4>}
                     {plans.some(({ free_allocation }) => free_allocation) && (
                         <div>
                             <Row className="bg-accent dark:bg-accent-dark mb-2">
-                                <Heading title="Plans" className="col-span-2" />
+                                <Heading title="Plans" className="flex-grow" />
                                 {plans.map(({ free_allocation, plan_key }) => {
                                     return (
                                         <Heading
@@ -261,17 +266,20 @@ export default function Plans({
                                                     ? 'No credit card required'
                                                     : 'All features, no limitations'
                                             }
-                                            className="flex-shrink-0"
+                                            className="max-w-[25%] w-full min-w-[105px]"
                                             key={plan_key}
                                         />
                                     )
                                 })}
                             </Row>
                             <Row>
-                                <Title className="col-span-2" title={capitalize(`${unit}s`)} />
+                                <Title className="flex-grow" title={capitalize(`${unit}s`)} />
                                 {plans.map(({ free_allocation, plan_key }) => {
                                     return (
-                                        <p key={plan_key} className="m-0 text-base opacity-70">
+                                        <p
+                                            key={`${type}-${plan_key}`}
+                                            className="m-0 text-base opacity-70 max-w-[25%] w-full min-w-[105px]"
+                                        >
                                             {free_allocation ? (
                                                 <>
                                                     <strong>{free_allocation.toLocaleString()}</strong>
@@ -288,12 +296,15 @@ export default function Plans({
                     )}
                     <div>
                         <Row className="bg-accent dark:bg-accent-dark mb-2">
-                            <Heading title="Features" className="col-span-4" />
+                            <Heading title="Features" />
                         </Row>
                         {plans[plans.length - 1].features.map((feature, index) => {
                             return (
-                                <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={feature.key}>
-                                    <div className="col-span-2">
+                                <Row
+                                    className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
+                                    key={`${type}-${feature.key}`}
+                                >
+                                    <div className="flex-grow">
                                         <Tooltip
                                             placement="right-end"
                                             content={() => (
@@ -311,8 +322,13 @@ export default function Plans({
                                             </span>
                                         </Tooltip>
                                     </div>
-                                    {plans.map((plan) => (
-                                        <Feature key={`${feature.key}-${type}`} feature={plan.features?.[index]} />
+                                    {plans.map((plan, i) => (
+                                        <div
+                                            key={`${feature.key}-${type}-${i}`}
+                                            className="max-w-[25%] w-full min-w-[105px]"
+                                        >
+                                            <Feature feature={plan.features?.[index]} />
+                                        </div>
                                     ))}
                                 </Row>
                             )
@@ -320,7 +336,7 @@ export default function Plans({
                         {addons.map((addon) => {
                             return (
                                 <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
-                                    <div className="col-span-2">
+                                    <div className="flex-grow">
                                         <AddonTooltip addon={addon} parentProductName={name}>
                                             <Title
                                                 className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
@@ -330,15 +346,22 @@ export default function Plans({
                                         </AddonTooltip>
                                     </div>
                                     {plans.map((plan) => {
-                                        return plan.free_allocation ? (
-                                            <Close opacity={1} className="text-red w-4" />
-                                        ) : (
-                                            <AddonTooltip addon={addon} parentProductName={name}>
-                                                <Title
-                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                    title="Available"
-                                                />
-                                            </AddonTooltip>
+                                        return (
+                                            <div
+                                                className="max-w-[25%] w-full min-w-[105px]"
+                                                key={`${addon.type}-${plan.plan_key}`}
+                                            >
+                                                {plan.free_allocation ? (
+                                                    <Close opacity={1} className="text-red w-4" />
+                                                ) : (
+                                                    <AddonTooltip addon={addon} parentProductName={name}>
+                                                        <Title
+                                                            className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                            title="Available"
+                                                        />
+                                                    </AddonTooltip>
+                                                )}
+                                            </div>
                                         )
                                     })}
                                 </Row>
@@ -347,7 +370,7 @@ export default function Plans({
                     </div>
                     <div>
                         <Row className="bg-accent dark:bg-accent-dark mb-2">
-                            <Heading title="Monthly pricing" className="col-span-4" />
+                            <Heading title="Monthly pricing" />
                         </Row>
                         <div>
                             {inclusion_only ? (
@@ -358,9 +381,11 @@ export default function Plans({
                         </div>
                     </div>
                     <Row>
-                        <div className="col-span-2" />
-                        {plans.map((_, i) => (
-                            <CTA key={`cta-${i}`} />
+                        <div className="flex-grow" />
+                        {plans.map((plan, index) => (
+                            <div className="max-w-[25%] w-full min-w-[105px]" key={`cta-${plan.product_key}-${index}`}>
+                                <CTA />
+                            </div>
                         ))}
                     </Row>
                 </div>
