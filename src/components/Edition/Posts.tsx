@@ -285,16 +285,19 @@ export const sortOptions = [
     },
 ]
 
+const getSortOption = (root?: string) =>
+    sortOptions[['blog', 'changelog', 'newsletter', 'spotlight'].includes(root) ? 1 : 0]
+
 export default function Posts({
     children,
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
 }) {
     const didMount = useRef(false)
-    const [sort, setSort] = useState(sortOptions[0].label)
     const [loginModalOpen, setLoginModalOpen] = useState(false)
     const { pathname } = useLocation()
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)
     const [root, setRoot] = useState(pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
+    const [sort, setSort] = useState(getSortOption(root).label)
     const [tag, setTag] = useState(initialTag)
     const [prev, setPrev] = useState<string | null>(null)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
@@ -302,7 +305,7 @@ export default function Posts({
         menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
     )
 
-    const [params, setParams] = useState(getParams(root, initialTag, sortOptions[0].sort))
+    const [params, setParams] = useState(getParams(root, initialTag, getSortOption(root).sort))
 
     const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
 
@@ -324,6 +327,10 @@ export default function Posts({
             setLayoutMenu(menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] })
         }
     }, [pathname])
+
+    useEffect(() => {
+        setSort(getSortOption(root).label)
+    }, [root])
 
     useEffect(() => {
         setParams(getParams(root, tag, sortOptions.find((option) => option.label === sort)?.sort))
