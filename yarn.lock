@@ -2654,10 +2654,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@posthog/icons@^0.1.29":
-  version "0.1.29"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.1.29.tgz#3b9c57eb04dabbd26ca7a9536c6840dce2a89ffc"
-  integrity sha512-Ba0zgWcg3odWeH5scoTcgKo2S2tD0sdu+fVp6cKCmctQU/Bo9FTpaPtdNpusCFKyVlNlc/qvpK0FaSnnA928Mg==
+"@posthog/icons@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.3.0.tgz#eba550ca47d631643dcfdb53577c3edf176d26dd"
+  integrity sha512-qiYS0BZ1CwH39FOY9Nrui1RV45R7vm0JUveRIbPUNVoiBDFaXE2ciNQHhF4bkJFXXS6dolnWg7aG304SjXZhUw==
 
 "@redocly/ajv@^8.6.5":
   version "8.6.5"
@@ -18245,10 +18245,10 @@ postcss@^8.4.23:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-posthog-js@^1.80.0:
-  version "1.80.0"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.80.0.tgz#dbef1e2a0f26aab6e5690fe08feb23c3417461b1"
-  integrity sha512-GAbdSqNG1fsXqdmG2Wx9nuZbK/LlpDUGUC+OQyFWNRylGAczSc8TIEErupQYxDmybxtC7f2/1Jtw/fgyVNLnRA==
+posthog-js@^1.88.1:
+  version "1.88.1"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.88.1.tgz#ab81f21ec158a9c57be0e696744a9c9f6967ba3b"
+  integrity sha512-+8kFFU5KIcFSm8zB3tX8l0GSPyq/OtMtdrS9dYpMJk6nsEwXvOjkwFEpSrYzL5eGEpTPdbM65M52HvMqqsjpXw==
   dependencies:
     fflate "^0.4.1"
 

@@ -1,24 +1,60 @@
 ---
-name: New content idea template
-about: Share your idea for a new piece of content
-title: "{Content type} - {title}"
+name: New article idea
+about: Share your idea for a new article
+title: "{title}"
 labels: content
 assignees: andyvan-ph
 
 ---
 
-## Strapline
+## Summary
 
-_Explain the idea in a sentence or two_
+> _explain the idea in a sentence or two_
 
-## Why should we do it?
+## Where will it be published?
 
-_how it will it be useful or interesting for readers/viewers_
+> _select any that apply_
 
-## Headlines options
+- [ ] Blog
+- [ ] Founders Hub
+- [ ] Newsletter
+- [ ] Product engineers Hub
+- [ ] Tutorials
+- [ ] Other (please specify)
 
-_think of two of three possible headlines we could use_
+## Why type of article is this?
 
-## Outline
+> _select any that apply_
 
-_Bullet point outline of structure / questions / topics to be covered_
+- [ ] High intent (i.e. comparisons and similar)
+- [ ] Brand / opinionated (how we work and why, etc.)
+- [ ] High-level guide (concepts, frameworks, ideas, etc.)
+- [ ] Low-level guide (step-by-step guide / tutorial)
+- [ ] Other (please specify)
+
+## Who is the primary audience?
+
+> _select any that apply_
+
+- [ ] Existing PostHog users
+- [ ] Potential PostHog users
+- [ ] Engineers
+- [ ] Non-engineers
+- [ ] Other (please specify)
+
+## What (if any) keywords are we targeting?
+
+> _list any that apply_
+
+## Headline options
+
+> _suggest a few angles_
+
+## Will it need custom art?
+
+- [ ] Yes
+- [ ] No
+
+## Outline (optional)
+
+> _draft headings / questions you want to answer_

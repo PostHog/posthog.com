@@ -407,6 +407,17 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                     </button>
                 </SidebarSection>
             )}
+            {user?.role?.type === 'moderator' && (
+                <SidebarSection>
+                    <Link
+                        external
+                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::profile.profile/${profile.id}`}
+                        className="text-base text-red dark:text-yellow font-semibold"
+                    >
+                        View in Strapi
+                    </Link>
+                </SidebarSection>
+            )}
         </>
     ) : (
         <div className="pb-6">

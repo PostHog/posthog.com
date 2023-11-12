@@ -6,7 +6,7 @@
         { "source": "/careers/(.*)", "destination": "/careers" }
     ],
     "redirects": [
-        { "source": "/tutorials/nps-survey", "destination": "/docs/surveys/creating-surveys" },
+        { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
@@ -563,7 +563,11 @@
         { "source": "/handbook/people/team-structure/platform", "destination": "/handbook/small-teams/platform" },
         {
             "source": "/handbook/people/team-structure/session-recording",
-            "destination": "/handbook/small-teams/monitoring"
+            "destination": "/handbook/small-teams/replay"
+        },
+        {
+            "source": "/handbook/small-teams/monitoring",
+            "destination": "/handbook/small-teams/replay"
         },
         {
             "source": "/handbook/people/team-structure/website-docs",
@@ -809,7 +813,7 @@
         { "source": "/apps/variance-connector", "destination": "/cdp/variance-connector" },
         { "source": "/apps/zapier-connector", "destination": "/cdp/" },
         { "source": "/apps/zendesk-connector", "destination": "/cdp/zendesk-connector" },
-        { "source": "/apps/user-interview", "destination": "/apps/user-interviewer" },
+        { "source": "/apps/user-interview", "destination": "/templates/user-interview" },
         { "source": "/docs/apps/replicator", "destination": "/docs/cdp/replicator" },
         { "source": "/docs/apps/advanced-geoip", "destination": "/docs/cdp/geoip-enrichment" },
         { "source": "/docs/cdp/advanced-geoip", "destination": "/docs/cdp/geoip-enrichment" },
@@ -933,9 +937,9 @@
             "destination": "/docs/experiments/running-experiments-without-feature-flags"
         },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
-        { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/" },
-        { "source": "/apps/feedback-widget", "destination": "/docs/surveys" },
-        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/" },
+        { "source": "/docs/apps/feedback-widget", "destination": "/templates/in-app-feedback-survey" },
+        { "source": "/apps/feedback-widget", "destination": "/templates/in-app-feedback-survey" },
+        { "source": "/apps/user-interviewer", "destination": "/templates/user-interview" },
         { "source": "/jobs", "destination": "/careers" },
         {
             "source": "/docs/getting-started/estimating-usage-costs",
@@ -1117,6 +1121,14 @@
         { "source": "/ab-testing/roadmap", "destination": "/ab-testing#roadmap" },
         { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" },
         { "source": "/handbook/what-is-posthog", "destination": "/handbook/why-does-posthog-exist" },
-        { "source": "/handbook/finance/fundraising", "destination": "/handbook/finance" }
+        { "source": "/handbook/finance/fundraising", "destination": "/handbook/finance" },
+        { "source": "/blog/guardrail-metrics", "destination": "/product-engineers/guardrail-metrics" },
+        { "source": "/blog/fixing-growth-problems", "destination": "/product-engineers/fixing-growth-problems" },
+        {
+            "source": "/blog/decouple-deployment-from-release",
+            "destination": "/product-engineers/decouple-deployment-from-release"
+        },
+        { "source": "/blog/testing-in-production", "destination": "/product-engineers/testing-in-production" },
+        { "source": "/handbook/small-teams/website-docs/community", "destination": "/handbook/community" }
     ]
 }
