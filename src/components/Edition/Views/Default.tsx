@@ -1,6 +1,6 @@
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PostsContext, sortOptions } from '../Posts'
 import TableOfContents from 'components/PostLayout/TableOfContents'
 import { useLocation } from '@reach/router'
@@ -85,12 +85,23 @@ const CommunityBar = () => {
 }
 
 export const Skeleton = () => {
-    return (
-        <div className="flex items-center space-x-2 w-full mt-2 px-6">
+    const [count, setCount] = useState(1)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            console.log('interval')
+            setCount(count + 1)
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [count])
+
+    return Array.from(Array(count)).map((_, i) => (
+        <div key={`skeleton-${i}`} className="flex items-center space-x-2 w-full my-2 px-6">
             <div className="w-4/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
             <div className="w-2/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
         </div>
-    )
+    ))
 }
 
 export const SortDropdown = () => {
@@ -157,6 +168,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                         <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                             {menu.map((menu, index) => {
                                 const { name, url, icon, color } = menu
+                                const active = menu === activeMenu
                                 return (
                                     <Menu.Item key={`${name}-${index}`}>
                                         <button
@@ -168,7 +180,9 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                                                     navigate(url)
                                                 }
                                             }}
-                                            className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50 flex space-x-2 items-center"
+                                            className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50 flex space-x-2 items-center ${
+                                                active ? 'font-bold' : ''
+                                            }`}
                                         >
                                             <Icon icon={icon} color={color} />
                                             <span>{name}</span>
@@ -254,16 +268,20 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
 }
 
 const Title = () => {
-    const { activeMenu } = useContext(PostsContext)
+    const { activeMenu, tag } = useContext(PostsContext)
+
     return (
         <div className="flex justify-between items-center mb-2 pt-4">
             <h2 className="m-0 text-xl space-x-2 flex-wrap md:flex hidden">
                 {activeMenu?.name === 'Founders' ? (
-                    <>Founder's hub</>
+                    <>Founder's hub{tag ? `: ${tag}` : null}</>
                 ) : activeMenu?.name === 'Product engineers' ? (
-                    <>Product engineer's hub</>
+                    <>Product engineer's hub{tag ? `: ${tag}` : null}</>
                 ) : (
-                    <>{activeMenu?.name}</>
+                    <>
+                        {activeMenu?.name}
+                        {tag ? `: ${tag}` : null}
+                    </>
                 )}
             </h2>
             <SortDropdown />
