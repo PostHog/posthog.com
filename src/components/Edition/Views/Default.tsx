@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isToday from 'dayjs/plugin/isToday'
 import { useLayoutData } from 'components/Layout/hooks'
-import { CallToAction, child, container } from 'components/CallToAction'
+import { CallToAction } from 'components/CallToAction'
 import { Menu } from '@headlessui/react'
 import { IconChevronDown, IconFilter, IconX, IconSort } from '@posthog/icons'
 import { Icon } from 'components/PostLayout/Menu'
@@ -93,7 +93,9 @@ export const Skeleton = () => {
     )
 }
 
-export const SortDropdown = ({ sort, setSort }) => {
+export const SortDropdown = () => {
+    const { sort, setSort } = useContext(PostsContext)
+
     return (
         <div className={`flex items-center`}>
             <div className="relative">
@@ -129,7 +131,7 @@ export const SortDropdown = ({ sort, setSort }) => {
 }
 
 export const PostFilters = ({ showTags = true, showSort = true }) => {
-    const { setRoot, setTag, tag, activeMenu, setActiveMenu, articleView, sort, setSort } = useContext(PostsContext)
+    const { setRoot, setTag, tag, activeMenu, setActiveMenu, articleView } = useContext(PostsContext)
     const { fullWidthContent } = useLayoutData()
     const breakpoints = useBreakpoint()
 
@@ -177,7 +179,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                         </Menu.Items>
                     </Menu>
                 </div>
-                {showSort && <SortDropdown sort={sort} setSort={setSort} />}
+                {showSort && <SortDropdown />}
                 {showTags && activeMenu?.children?.length > 0 && (
                     <div className="flex-grow-0 flex items-center justify-center">
                         <Menu>
