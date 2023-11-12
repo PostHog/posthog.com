@@ -244,7 +244,7 @@ export default function ProfilePage({ params }: PageProps) {
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('liked-posts')}
                                         >
-                                            Liked posts
+                                            Upvoted posts
                                         </button>
                                     )}
                                     <div className="flex items-center">
