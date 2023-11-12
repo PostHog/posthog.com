@@ -104,9 +104,7 @@ export const Skeleton = () => {
     ))
 }
 
-export const SortDropdown = () => {
-    const { sort, setSort } = useContext(PostsContext)
-
+export const SortDropdown = ({ sort, setSort }) => {
     return (
         <div className={`flex items-center`}>
             <div className="relative">
@@ -142,7 +140,7 @@ export const SortDropdown = () => {
 }
 
 export const PostFilters = ({ showTags = true, showSort = true }) => {
-    const { setRoot, setTag, tag, activeMenu, setActiveMenu, articleView } = useContext(PostsContext)
+    const { setRoot, setTag, tag, activeMenu, setActiveMenu, articleView, sort, setSort } = useContext(PostsContext)
     const { fullWidthContent } = useLayoutData()
     const breakpoints = useBreakpoint()
 
@@ -193,7 +191,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                         </Menu.Items>
                     </Menu>
                 </div>
-                {showSort && <SortDropdown />}
+                {showSort && <SortDropdown sort={sort} setSort={setSort} />}
                 {showTags && activeMenu?.children?.length > 0 && (
                     <div className="flex-grow-0 flex items-center justify-center">
                         <Menu>
@@ -268,7 +266,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
 }
 
 const Title = () => {
-    const { activeMenu, tag } = useContext(PostsContext)
+    const { activeMenu, tag, sort, setSort } = useContext(PostsContext)
 
     return (
         <div className="flex justify-between items-center mb-2 pt-4">
@@ -284,13 +282,13 @@ const Title = () => {
                     </>
                 )}
             </h2>
-            <SortDropdown />
+            <SortDropdown sort={sort} setSort={setSort} />
         </div>
     )
 }
 
 function PostsListing() {
-    const { posts, fetchMore, isValidating, isLoading, articleView, hasMore } = useContext(PostsContext)
+    const { posts, fetchMore, isValidating, isLoading, articleView, hasMore, sort, setSort } = useContext(PostsContext)
     const breakpoints = useBreakpoint()
 
     return articleView && breakpoints.sm ? null : (
