@@ -487,7 +487,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/writing-for-posthog',
                     },
                     {
-                        name: 'SEO best practice',
+                        name: 'SEO best practices',
                         url: '/handbook/growth/marketing/seo-guide',
                     },
                     {
@@ -501,10 +501,6 @@ export const handbookSidebar = [
                     {
                         name: 'Content components',
                         url: '/handbook/growth/marketing/components',
-                    },
-                    {
-                        name: 'Blog art & hedgehogs',
-                        url: '/handbook/growth/marketing/cute-hoggies',
                     },
                 ],
             },
