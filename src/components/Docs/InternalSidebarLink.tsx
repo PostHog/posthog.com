@@ -14,7 +14,7 @@ export default function InternalSidebarLink({ url, name, depth, onClick, classNa
     return (
         <span>
             <Link
-                offset={compact ? 0 : breakpoints.md ? -56 : -108}
+                offset={compact ? -70 : breakpoints.md ? -56 : -108}
                 style={style}
                 smooth
                 duration={300}

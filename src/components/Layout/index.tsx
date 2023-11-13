@@ -20,7 +20,7 @@ const Article = ({ children, className = '' }: { children: React.ReactNode; clas
     return (
         <div className={className}>
             {compact ? (
-                <div className="m-4">
+                <div className="px-4 pt-3 sticky top-0 backdrop-blur-sm -mb-4">
                     <SearchBox className="!w-full" location="mobile-header" />
                 </div>
             ) : (
