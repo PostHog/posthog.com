@@ -59,7 +59,10 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
 
     useEffect(() => {
         if (compact && typeof window !== 'undefined' && window.parent) {
-            window.parent.postMessage(pathname, '*')
+            window.parent.postMessage({
+              type: "internal-navigation",
+              pathname: pathname
+            }, '*')
         }
     }, [pathname])
 
