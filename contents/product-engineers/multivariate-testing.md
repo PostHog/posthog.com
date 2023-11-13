@@ -5,31 +5,33 @@ author: ['lior-neu-ner']
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 tags:
-  - Guides 
-  - Explainers
   - Growth engineering
   - Product engineers
   - AB testing
 ---
 
-## What is multivariate testing
+## What is multivariate testing?
 
-Multivariate testing is when you test different combinations of changes to determine which performs the best. 
+Multivariate testing is when you test several different combinations of changes to determine which performs the best.
 
-For example, you want to test how the color and placement of a button affect your conversion rate. You would then create a test with four different variants:
+It's distinct from A/B testing, where you only test two variants – a control and a single variant you want to test against it.
+
+![A/B testing vs multivariate testing](../images/blog/multivariated-testing-explained/ab-vs-mvt.png)
+
+## Example of multivariate testing
+
+Imagine you want to test how the color _and_ placement of a button affects your conversion rate. In A/B testing you'd have to run three separate tests, one after the other, to determine which change had an impact.
+
+In multivariate testing you simply create one test with four different variants:
 
 1. The control variant.
 2. The variant with only the color changed.
 3. The variant with only the placement changed.
 4. The variant with both the color and the placement changed.
 
-The results from the multivariate test show not only which variant performs the best but also how each factor affected the outcome.
+The results from the multivariate test show not only which variant performs the best, but also how each factor affected the outcome.
 
-It's similar to [A/B testing](/ab-testing), except in A/B testing you're only testing two variants.
-
-![A/B testing vs multivariate testing](../images/blog/multivariated-testing-explained/ab-vs-mvt.png)
-
-## Benefits
+## Benefits of multivariate testing
 
 ### 1. It saves you time
 
@@ -49,13 +51,13 @@ However, when you combine and test these changes together, you may discover that
 
 Multivariate testing enables you to uncover insights like these.
 
-## Drawbacks
+## Drawbacks of multivariate testing
 
 ### 1. You need a larger sample size
 
 Since you split your participants into many groups, you need a larger sample size for a [statistically significant](/docs/experiments/significance) result. In practice, this means multivariate tests need to for run longer than a typical A/B test.
 
-With this in mind, a good idea is to [calculate your required sample size](/product-engineers/ab-testing-guide-for-engineers#4-a-sufficiently-large-sample-size-of-users) before running your test so that you can ensure your test duration is reasonable.
+With this in mind, a good idea is to [calculate your required sample size](/product-engineers/ab-testing-guide-for-engineers#4-a-sufficiently-large-sample-size-of-users) before running your test, so you can ensure your test duration is reasonable.
 
 If your duration is too long, but you'd still like to run a multivariate test, there are two potential solutions:
 
