@@ -31,9 +31,8 @@ export interface IProps {
 }
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
-    const { pathname, search } = useLocation()
-    const params = new URLSearchParams(search)
-    const compact = (typeof window !== 'undefined' && window !== window.parent) || params.get('compact')
+    const { pathname } = useLocation()
+    const compact = typeof window !== 'undefined' && window !== window.parent
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true'
     )
@@ -58,11 +57,14 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     }, [fullWidthContent])
 
     useEffect(() => {
-        if (compact && typeof window !== 'undefined' && window.parent) {
-            window.parent.postMessage({
-              type: "internal-navigation",
-              pathname: pathname
-            }, '*')
+        if (compact) {
+            window.parent.postMessage(
+                {
+                    type: 'internal-navigation',
+                    pathname,
+                },
+                '*'
+            )
         }
     }, [pathname])
 
