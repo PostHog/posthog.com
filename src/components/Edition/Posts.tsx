@@ -273,6 +273,19 @@ export const getParams = (root, tag) => {
     }
 }
 
+const Filters = () => {
+    const { compact } = useLayoutData()
+    return (
+        <div
+            className={`sticky top-0 reasonable:top-[57px] md:hidden lg:top-[108px] bg-light dark:bg-dark pt-2 mb-0 z-10 lg:hidden ${
+                compact ? '!top-[69px] mb-4' : ''
+            }`}
+        >
+            <PostFilters />
+        </div>
+    )
+}
+
 export default function Posts({
     children,
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
@@ -379,9 +392,7 @@ export default function Posts({
                     <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
-                    <div className="sticky top-0 reasonable:top-[57px] md:hidden lg:top-[108px] bg-light dark:bg-dark pt-2 mb-0 z-10 lg:hidden">
-                        <PostFilters />
-                    </div>
+                    <Filters />
                     {articleView && (
                         <button
                             onClick={() => navigate(prev ? -1 : '/posts')}

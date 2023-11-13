@@ -69,6 +69,15 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     }, [pathname])
 
     useEffect(() => {
+        if (compact) {
+            window.parent.postMessage(
+                {
+                    type: 'docs-ready',
+                },
+                '*'
+            )
+        }
+
         const onMessage = (e: MessageEvent): void => {
             if (e.data.type === 'theme-toggle') {
                 window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
