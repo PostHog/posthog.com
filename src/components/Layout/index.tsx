@@ -13,12 +13,19 @@ import './DarkMode.scss'
 import { IProps, LayoutProvider } from './context'
 import { Mobile as MobileNav } from 'components/MainNav'
 import { useLayoutData } from './hooks'
+import SearchBox from 'components/Search/SearchBox'
 
 const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     const { compact } = useLayoutData()
     return (
         <div className={className}>
-            {!compact && <Header />}
+            {compact ? (
+                <div className="m-4">
+                    <SearchBox className="!w-full" location="mobile-header" />
+                </div>
+            ) : (
+                <Header />
+            )}
             <main>{children}</main>
             {!compact && (
                 <>
