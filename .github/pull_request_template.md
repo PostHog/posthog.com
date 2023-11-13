@@ -4,9 +4,17 @@
 
 *Add screenshots or screen recordings for visual / UI-focused changes.*
 
+
 ## Checklist
-- [ ] Titles are in [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case)
-- [ ] Feature names are in **[sentence case too]([https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case))**
-- [ ] Words are spelled using American English
-- [ ] I have checked out our [style guide](https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md)
 - [ ] If I moved a page, I added a redirect in `vercel.json`
+- [ ] I've added (at least) 3 to 5 internal links to this new article
+- [ ] I've added keywords for this page to the rank tracker in Ahrefs
+- [ ] I've checked the preview build of the article
+- [ ] The date on the article is today's date
+
+## Useful resources:
+
+- [The PostHog style guide](/handbook/growth/marketing/posthog-style-guide)
+- [Full list of tags and categories](/handbook/growth/marketing/tags-and-categories)
+- [List of content components](/handbook/growth/marketing/components)
+- [PostHog SEO best practices](/handbook/growth/marketing/seo-guide)

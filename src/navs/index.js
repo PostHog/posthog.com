@@ -445,8 +445,8 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Content & SEO',
-                        url: '/handbook/growth/marketing/blog',
+                        name: 'Content',
+                        url: '/handbook/growth/marketing/content',
                     },
                     {
                         name: 'Email & newsletter',
@@ -479,6 +479,36 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Publishing guide',
+                url: '',
+                children: [
+                    {
+                        name: 'Writing for PostHog',
+                        url: '/handbook/growth/marketing/writing-for-posthog',
+                    },
+                    {
+                        name: 'SEO best practice',
+                        url: '/handbook/growth/marketing/seo-guide',
+                    },
+                    {
+                        name: 'Style guide',
+                        url: '/handbook/growth/marketing/posthog-style-guide',
+                    },
+                    {
+                        name: 'Tags and categories',
+                        url: '/handbook/growth/marketing/tags-and-categories',
+                    },
+                    {
+                        name: 'Content components',
+                        url: '/handbook/growth/marketing/components',
+                    },
+                    {
+                        name: 'Blog art & hedgehogs',
+                        url: '/handbook/growth/marketing/cute-hoggies',
+                    },
+                ],
+            },
+            {
                 name: 'Product announcements',
                 url: '/handbook/growth/marketing/product-announcements',
             },
@@ -489,10 +519,6 @@ export const handbookSidebar = [
             {
                 name: 'Dashboard templates',
                 url: '/handbook/growth/marketing/templates',
-            },
-            {
-                name: 'Style guide',
-                url: '/handbook/growth/marketing/posthog-style-guide',
             },
         ],
     },
