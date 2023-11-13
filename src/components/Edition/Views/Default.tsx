@@ -1,7 +1,7 @@
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import React, { useContext, useEffect, useRef } from 'react'
-import { PostsContext } from '../Posts'
+import React, { useContext, useEffect, useState } from 'react'
+import { PostsContext, sortOptions } from '../Posts'
 import TableOfContents from 'components/PostLayout/TableOfContents'
 import { useLocation } from '@reach/router'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -9,16 +9,16 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isToday from 'dayjs/plugin/isToday'
 import { useLayoutData } from 'components/Layout/hooks'
-import LikeButton from '../LikeButton'
-import { CallToAction, child, container } from 'components/CallToAction'
-import Spinner from 'components/Spinner'
+import { CallToAction } from 'components/CallToAction'
 import { Menu } from '@headlessui/react'
-import { IconChevronDown, IconFilter, IconX } from '@posthog/icons'
-import { Icon, getIcon } from 'components/PostLayout/Menu'
+import { IconChevronDown, IconFilter, IconX, IconSort } from '@posthog/icons'
+import { Icon } from 'components/PostLayout/Menu'
 import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../../navs/posts'
 import Intro from '../Intro'
 import Tags from '../Tags'
+import Tooltip from 'components/Tooltip'
+import PostsTable from '../PostsTable'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -84,108 +84,63 @@ const CommunityBar = () => {
     )
 }
 
-const Post = ({
-    id,
-    title,
-    featuredImage,
-    date,
-    publishedAt,
-    post_category,
-    authors,
-    slug,
-    fetchMore,
-    articleView,
-}) => {
-    const containerRef = useRef()
-    const { pathname } = useLocation()
-    const category = post_category?.data?.attributes?.label
-    const active = pathname === slug
-    const breakpoints = useBreakpoint()
-    const day = dayjs(date || publishedAt)
-    const { fullWidthContent } = useLayoutData()
+export const Skeleton = () => {
+    const [count, setCount] = useState(1)
 
     useEffect(() => {
-        if (active && typeof window !== 'undefined' && !breakpoints.sm) {
-            containerRef?.current?.scrollIntoView({ block: 'center', inline: 'nearest' })
-            window.scrollTo({ top: 0 })
-        }
-    }, [articleView])
+        const interval = setInterval(() => {
+            console.log('interval')
+            setCount(count + 1)
+        }, 1000)
 
-    const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
-    const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
+        return () => clearInterval(interval)
+    }, [count])
 
-    return (
-        <li
-            ref={containerRef}
-            className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[32px_1fr] gap-2 items-center' : ''}`}
-        >
-            {!articleView && <LikeButton postID={id} />}
-            <span className={`flex items-center ${articleView ? 'py-px' : ''}`}>
-                <Link
-                    className={`inline m-0 font-semibold border-t border-b !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit hover:transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark relative 
-                    ${
-                        active
-                            ? 'bg-accent dark:bg-accent-dark font-bold border-border dark:border-dark'
-                            : 'border-transparent hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99]'
-                    } 
-                    ${fullWidthContent ? 'p-2 ' : 'p-2 lg:px-4'}
-                    ${articleView ? 'text-[.933rem]' : 'text-base mr-1.5'}
-                    ${fullWidthContent && articleView ? 'lg:px-6' : ''} 
-                    `}
-                    to={slug}
-                >
-                    {pathname === '/posts' && category && (
-                        <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
-                    )}
-                    <div
-                        className={`items-baseline ${active ? 'flex  gap-1' : ''} ${
-                            articleView ? 'flex gap-4' : 'inline'
-                        }`}
-                    >
-                        <span className="mr-1 flex-1">{title}</span>
-                        <span className={`${articleView ? 'text-right flex-0 basis-22' : 'inline-flex gap-1'}`}>
-                            <span
-                                className={`font-medium leading-none opacity-60 ${
-                                    articleView ? 'text-[.813rem]' : 'text-[.933rem]'
-                                }`}
-                            >
-                                {day.isToday() ? 'Today' : day.fromNow()}
-                            </span>
-                        </span>
-                    </div>
-                    <div className="hidden sm:w-[100px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
-                        <span
-                            className={`text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit flex-grow`}
-                        >
-                            {imageURL?.endsWith('.mp4') ? (
-                                <video className="object-cover w-full h-full" src={imageURL} />
-                            ) : (
-                                <img
-                                    className={`w-full h-full ${
-                                        !imageURL && defaultImage ? 'object-contain' : 'object-cover'
-                                    }`}
-                                    src={imageURL || defaultImage || '/banner.png'}
-                                />
-                            )}
-                        </span>
-                    </div>
-                </Link>
-            </span>
-        </li>
-    )
-}
-
-export const Skeleton = () => {
-    return (
-        <div className="flex items-center space-x-2 w-full mt-2 px-6">
+    return Array.from(Array(count)).map((_, i) => (
+        <div key={`skeleton-${i}`} className="flex items-center space-x-2 w-full my-2 px-6">
             <div className="w-4/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
             <div className="w-2/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
+        </div>
+    ))
+}
+
+export const SortDropdown = ({ sort, setSort }) => {
+    return (
+        <div className={`flex items-center`}>
+            <div className="relative">
+                <Menu>
+                    <Menu.Button className="flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                        <Tooltip content={() => <>Sorting by: {sort}</>}>
+                            <span className="relative">
+                                <IconSort className="w-5 h-5" />
+                            </span>
+                        </Tooltip>
+                        <IconChevronDown className="w-6" />
+                    </Menu.Button>
+                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-0 left-0 translate-y-full overflow-hidden">
+                        {sortOptions.map((option, index) => {
+                            return (
+                                <Menu.Item key={`${option.label}-${index}`}>
+                                    <button
+                                        onClick={() => setSort(option.label)}
+                                        className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
+                                            option.label === sort ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                                        }`}
+                                    >
+                                        {option.label}
+                                    </button>
+                                </Menu.Item>
+                            )
+                        })}
+                    </Menu.Items>
+                </Menu>
+            </div>
         </div>
     )
 }
 
-export const PostFilters = () => {
-    const { setRoot, setTag, tag, activeMenu, setActiveMenu } = useContext(PostsContext)
+export const PostFilters = ({ showTags = true, showSort = true }) => {
+    const { setRoot, setTag, tag, activeMenu, setActiveMenu, articleView, sort, setSort } = useContext(PostsContext)
     const { fullWidthContent } = useLayoutData()
     const breakpoints = useBreakpoint()
 
@@ -211,6 +166,7 @@ export const PostFilters = () => {
                         <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                             {menu.map((menu, index) => {
                                 const { name, url, icon, color } = menu
+                                const active = menu === activeMenu
                                 return (
                                     <Menu.Item key={`${name}-${index}`}>
                                         <button
@@ -218,11 +174,13 @@ export const PostFilters = () => {
                                                 setActiveMenu(menu)
                                                 setRoot(url === '/posts' ? undefined : url?.split('/')[1])
                                                 setTag(undefined)
-                                                if (breakpoints.sm) {
+                                                if (!articleView || breakpoints.sm) {
                                                     navigate(url)
                                                 }
                                             }}
-                                            className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50 flex space-x-2 items-center"
+                                            className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50 flex space-x-2 items-center ${
+                                                active ? 'font-bold' : ''
+                                            }`}
                                         >
                                             <Icon icon={icon} color={color} />
                                             <span>{name}</span>
@@ -233,7 +191,8 @@ export const PostFilters = () => {
                         </Menu.Items>
                     </Menu>
                 </div>
-                {activeMenu?.children?.length > 0 && (
+                {showSort && <SortDropdown sort={sort} setSort={setSort} />}
+                {showTags && activeMenu?.children?.length > 0 && (
                     <div className="flex-grow-0 flex items-center justify-center">
                         <Menu>
                             <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
@@ -285,7 +244,7 @@ export const PostFilters = () => {
                 )}
             </div>
 
-            {tag && (
+            {showTags && tag && (
                 <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-dark -mb-1">
                     <span
                         className="
@@ -306,11 +265,31 @@ export const PostFilters = () => {
     )
 }
 
+const Title = () => {
+    const { activeMenu, tag, sort, setSort } = useContext(PostsContext)
+
+    return (
+        <div className="flex justify-between items-center mb-2 pt-4">
+            <h2 className="m-0 text-xl space-x-2 flex-wrap md:flex hidden">
+                {activeMenu?.name === 'Founders' ? (
+                    <>Founder's hub{tag ? `: ${tag}` : null}</>
+                ) : activeMenu?.name === 'Product engineers' ? (
+                    <>Product engineer's hub{tag ? `: ${tag}` : null}</>
+                ) : (
+                    <>
+                        {activeMenu?.name}
+                        {tag ? `: ${tag}` : null}
+                    </>
+                )}
+            </h2>
+            <SortDropdown sort={sort} setSort={setSort} />
+        </div>
+    )
+}
+
 function PostsListing() {
-    const { posts, fetchMore, isValidating, isLoading, articleView, hasMore, activeMenu, tag } =
-        useContext(PostsContext)
+    const { posts, fetchMore, isValidating, isLoading, articleView, hasMore, sort, setSort } = useContext(PostsContext)
     const breakpoints = useBreakpoint()
-    const { fullWidthContent } = useLayoutData()
 
     return articleView && breakpoints.sm ? null : (
         <div
@@ -319,7 +298,7 @@ function PostsListing() {
                 transition-all 
                 ${
                     articleView
-                        ? 'flex flex-col h-[calc(100vh_-_108px)] sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
+                        ? 'flex flex-col h-auto sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
                         : 'flex-grow md:px-8 2xl:px-12'
                 }
             `}
@@ -339,55 +318,23 @@ function PostsListing() {
             >
                 {!articleView && (
                     <>
-                        <h2 className="pt-4 text-xl mb-2 space-x-2 flex-wrap md:flex hidden">
-                            {activeMenu?.children?.length > 0 && (
-                                <>
-                                    {activeMenu?.name === 'Founders' ? (
-                                        <>Founder's hub</>
-                                    ) : activeMenu?.name === 'Product engineers' ? (
-                                        <>Product engineer's hub</>
-                                    ) : (
-                                        <>{activeMenu?.name}</>
-                                    )}
-                                </>
-                            )}
-                        </h2>
+                        <Title />
                         <Intro />
-                        <Tags />
-
-                        {tag && (
-                            <h3 className="text-lg">
-                                {activeMenu?.children?.find((menuItem) => menuItem.tag === tag)?.name || tag}
-                            </h3>
-                        )}
                     </>
                 )}
                 <ul
-                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden ${
+                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden mt-4 ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
                     }`}
                 >
-                    {posts.map(({ id, attributes }, index) => {
-                        return <Post articleView={articleView} key={id} {...attributes} id={id} />
-                    })}
-                    {isLoading && <Skeleton />}
-                    {hasMore && (
-                        <li className="mt-4 mb-24 px-4">
-                            <button
-                                onClick={fetchMore}
-                                disabled={isLoading || isValidating}
-                                className={`${container()} w-full`}
-                            >
-                                <span className={`${child()}`}>
-                                    {isLoading || isValidating ? (
-                                        <Spinner className="!w-6 !h-6 mx-auto text-white" />
-                                    ) : (
-                                        'Load more'
-                                    )}
-                                </span>
-                            </button>
-                        </li>
-                    )}
+                    <PostsTable
+                        posts={posts}
+                        fetchMore={fetchMore}
+                        isValidating={isValidating}
+                        isLoading={isLoading}
+                        hasMore={hasMore}
+                        articleView={articleView}
+                    />
                 </ul>
             </div>
         </div>
@@ -415,10 +362,9 @@ export default function Default({ children }) {
                         >
                             <UserBar />
                         </div>
+                        {pathname !== '/posts' && <PostFilters showTags={false} showSort={false} />}
                         <div
-                            className={`max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 pt-3 pr-4 mt-[-2px] ${
-                                fullWidthContent ? 'pl-2' : 'pl-4'
-                            }`}
+                            className={`max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 pt-3 pr-4 mt-[-2px]`}
                         >
                             <TableOfContents />
                         </div>

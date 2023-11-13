@@ -14,6 +14,7 @@ import transformValues from 'components/Squeak/util/transformValues'
 import Spinner from 'components/Spinner'
 import { PostsContext } from './Posts'
 import Checkbox from 'components/Checkbox'
+import dayjs from 'dayjs'
 
 const Categories = ({ value, setFieldValue }) => {
     const [categories, setCategories] = useState([])
@@ -135,7 +136,7 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
     const { mutate } = useContext(PostsContext)
     const { getJwt, user } = useUser()
 
-    const { handleSubmit, values, handleChange, setFieldValue, errors, validateField, isSubmitting } = useFormik({
+    const { handleSubmit, values, setFieldValue, isSubmitting } = useFormik({
         initialValues: initialValues || {
             title: '',
             body: '',
@@ -173,6 +174,7 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
                             connect: [category],
                         },
                         excerpt,
+                        date: new Date(),
                         ...(uploadedFeaturedImage || featuredImage === null
                             ? {
                                   featuredImage: {
@@ -180,6 +182,9 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
                                   },
                               }
                             : null),
+                        authors: {
+                            connect: [profileID],
+                        },
                     },
                 })
                 await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts/${postID || ''}`, {

@@ -30,7 +30,7 @@ const Intros = {
 }
 
 export default function Intro() {
-    const { activeMenu } = useContext(PostsContext)
-    const Intro = Intros[activeMenu?.name]
+    const { activeMenu, tag } = useContext(PostsContext)
+    const Intro = !tag && Intros[activeMenu?.name]
     return Intro ? <Intro /> : null
 }
