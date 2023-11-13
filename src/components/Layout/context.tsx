@@ -69,8 +69,10 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     }, [pathname])
 
     useEffect(() => {
-        const onMessage = (event: MessageEvent): void => {
-            console.log(event.data)
+        const onMessage = (e: MessageEvent): void => {
+            if (e.data.type === 'theme-toggle') {
+                window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
+            }
         }
 
         window.addEventListener('message', onMessage)
