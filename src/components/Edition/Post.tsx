@@ -43,7 +43,7 @@ export default function Post({
     return (
         <li
             ref={containerRef}
-            className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[28px_1fr] items-center' : ''}`}
+            className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[35px_1fr] items-center' : ''}`}
         >
             {!articleView && <LikeButton postID={id} />}
             <span className={`flex items-center ${articleView ? 'py-px' : ''}`}>

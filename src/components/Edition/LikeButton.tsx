@@ -28,7 +28,7 @@ export default function LikeButton({ className = '', postID }: { postID: number 
             className={`w-full flex justify-center items-center h-full relative p-1.5 transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${className}`}
             onClick={handleClick}
         >
-            <span className="w-6">
+            <span className="w-4">
                 {liked ? (
                     <IconTriangleUpFilled className="text-red" />
                 ) : (
