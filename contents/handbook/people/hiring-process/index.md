@@ -28,10 +28,8 @@ This has resulted in the highest number of qualified and motivated candidates re
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
- Tech Lead      | GMT -5:00 to +2:00                   | Pipeline  | Tim | 1) Culture Screen - Coua<br/> 2) Technical Screen - Tim<br/> 3) Small Team Screen - Tiina/Tomás/Xavíer<br/> 4) SuperDay Assessment - Tiina, Tomás, Xavíer, James G., Tim & James H. | Live Task (link not available) |
-| Growth Engineer     | GMT -8:00 to -5:00                  | Growth  | Tim| 1) Culture Screen - Coua<br/> 2) Small Team Screen - Raquel<br/> 3) Technical Screen - Tim<br/> 4) SuperDay Assessment - Raquel, Tim & James H. | Live Task (link not available) |
-| Ops & Finance Lead     | GMT -5:00 to 0:00                  | People & Ops  | Charles | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles<br/> 3) Small Team Screen - James<br/> 4) SuperDay Assessment - Charles, Tim & James H. | Live Task (link not available) |
-
+| Ops & Finance Lead     | GMT -5:00 to 0:00                  | People & Ops  | Charles | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles<br/> 3) Small Team Screen - James<br/> 4) SuperDay - Charles, Tim & James H. | Live Task (link not available) |
+| Customer Success Manager    | GMT -8:00 to 0:00                  | Customer Success  | Simon | 1) Culture Screen - Coua<br/> 2) Technical Screen - Simon<br/> 3) Small Team Screen - James<br/> 4) Small Team Screen - Tim<br/> 5) SuperDay - Cameron, Charles, Simon, Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
 
