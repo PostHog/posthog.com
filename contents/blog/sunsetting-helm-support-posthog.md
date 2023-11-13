@@ -1,6 +1,6 @@
 ---
 date: 2023-02-08
-title: "Sunsetting our paid self-hosted product"
+title: "Sunsetting Kubernetes support for PostHog"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
