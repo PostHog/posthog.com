@@ -68,6 +68,16 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         }
     }, [pathname])
 
+    useEffect(() => {
+        const onMessage = (event: MessageEvent): void => {
+            console.log(event.data)
+        }
+
+        window.addEventListener('message', onMessage)
+
+        return () => window.removeEventListener('message', onMessage)
+    }, [])
+
     return (
         <Context.Provider
             value={{
