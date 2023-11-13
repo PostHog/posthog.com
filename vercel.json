@@ -3,7 +3,8 @@
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
-        { "source": "/careers/(.*)", "destination": "/careers" }
+        { "source": "/careers/(.*)", "destination": "/careers" },
+        { "source": "/posts/:path*", "destination": "/posts/index.html" }
     ],
     "redirects": [
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
