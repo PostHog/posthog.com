@@ -61,7 +61,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
             window.parent.postMessage(
                 {
                     type: 'internal-navigation',
-                    pathname,
+                    url: pathname,
                 },
                 '*'
             )
