@@ -108,13 +108,3 @@ A [useful little tool](https://alsoasked.com/) with a decent free tier – 3 sea
 ![alsoasked](../images/handbook/alsoasked-product-market-fit.png)
 
 It's useful for deciding what subheadings to include in articles, though exact matches aren't really necessary.
-
-
-
-
-
-
-
-
-
-
