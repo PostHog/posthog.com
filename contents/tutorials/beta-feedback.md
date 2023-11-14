@@ -1,6 +1,6 @@
 ---
 title: How to collect feedback from beta users
-date: 2023-11-08
+date: 2023-11-14
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
