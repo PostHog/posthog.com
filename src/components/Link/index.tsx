@@ -50,15 +50,19 @@ export default function Link({
         })
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
-        if (compact && /(eu|app)\.posthog\.com/.test(url)) {
+        if (compact && !internal) {
             e.preventDefault()
-            window.parent.postMessage(
-                {
-                    type: 'external-navigation',
-                    url,
-                },
-                '*'
-            )
+            if (/(eu|app)\.posthog\.com/.test(url)) {
+                window.parent.postMessage(
+                    {
+                        type: 'external-navigation',
+                        url,
+                    },
+                    '*'
+                )
+            } else {
+                window.open(url, '_blank', 'noopener,noreferrer')
+            }
         }
         if (event && posthog) {
             posthog.capture(event)
@@ -96,12 +100,12 @@ export default function Link({
         )
     ) : (
         <a
-            target={compact || external || externalNoIcon ? '_blank' : ''}
             rel="noopener noreferrer"
             onClick={handleClick}
             {...other}
             href={url}
             className={`${className} group`}
+            target={external || externalNoIcon ? '_blank' : ''}
         >
             {external ? (
                 <span className="inline-flex justify-center items-center space-x-1 group">

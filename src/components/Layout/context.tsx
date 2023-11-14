@@ -34,7 +34,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const { pathname } = useLocation()
     const compact = typeof window !== 'undefined' && window !== window.parent
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
-        typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true'
+        compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
     const parent =
         other.parent ??

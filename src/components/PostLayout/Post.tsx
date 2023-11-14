@@ -52,7 +52,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
                 }`}
             >
-                {menu && (
+                {!compact && menu && (
                     <div
                         style={{ maxWidth: menuWidth?.left ?? defaultMenuWidth.left }}
                         className="w-full flex-shrink-0 md:block hidden relative z-20"
