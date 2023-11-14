@@ -44,7 +44,7 @@ A good question to ask yourself here is, "If I were to switch away from PostHog,
 
 For example, if someone were to consider moving from PostHog to some other provider, cohorts would need to be manually recreated in the other provider, which would be tedious. However, something like Web Performance just happens and doesn't require any user involvement, so isn't sticky.
 
-### We should only charge users once per feature
+### Product pricing should include everything required to use that product
 
 When one of our products has a dependency on another of our products, we should bundle the cost of the dependencies in with the product's pricing so customers only pay once for using a given product.
 
