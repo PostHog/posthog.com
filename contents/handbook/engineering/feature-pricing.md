@@ -46,9 +46,9 @@ For example, if someone were to consider moving from PostHog to some other provi
 
 ### We should only charge users once per feature
 
-Our customers get confused when we charge for the same feature in multiple places. It's often hard to explain why we would do this.
+When one of our products has a dependency on another of our products, we should bundle the cost of the dependencies in with the product's pricing so customers only pay once for using a given product.
 
-For example, when someone calls a feature flag, we send a $feature_flag_called event so we can have stats. In this case, we don't charge for those events, as our customers already pay for feature flags.
+For example, when someone calls a feature flag, we send a $feature_flag_called event so we can have stats. In this case, we don't charge for those events, as the events are solely related to feature flags.
 
 ### Other guidelines
 
