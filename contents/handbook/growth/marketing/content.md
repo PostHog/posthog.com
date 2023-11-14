@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary publishing goals.
+Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary volume goals.
 
 ## Who is our audience?
 
@@ -18,8 +18,7 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 ## What kind of content do we produce?
 
-1. **Opinionated advice** – Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [VC is a tool, not a religion](/founders/using-vc-carefully) 
-
+1. **Opinionated advice** – Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed) 
 
 2. **Brand building** – Articles where we share and advocate for our philosophy and values. Examples include [We like to ship fast. Here's how we designed our company to do it](/founders/how-come-we-ship-so-much), [How to run a transparent startup](/founders/how-to-run-a-transparent-company), and [How (and why) we treat pricing like a product](/founders/how-to-treat-your-pricing-like-a-product).
 

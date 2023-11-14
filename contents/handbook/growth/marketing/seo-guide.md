@@ -12,11 +12,11 @@ Successful SEO is all about anticipating a searcher's desire and delivering the 
 
 ### 2. Get to the point
 
-Google increasingly rewards pages that answer questions quickly. It's annoying for readers to have to scroll through masses of filler to find the answer to their question. Bear this in mind when writing.
+Google increasingly rewards pages that answer questions quickly. It's annoying for readers to have to scroll through masses of filler to find the answer to their question. 
 
 ### 3. Make guides easy to scan
 
-Readers rarely just start reading an article from the start – especially if they're coming from search. They're likely to scan the page looking for signs of quality and reassurance the page will answer their question. Clear headings and engaging visuals (e.g. diagrams and tables) massively help here.
+Readers rarely read an article from the start – especially if they're coming from search. They're likely to scan the page looking for signs of quality and reassurance the page will answer their question. Clear headings and engaging visuals (e.g. diagrams and tables) massively help here.
 
 ### 4. Write headlines that stand out
 
@@ -27,6 +27,20 @@ Writing headlines that work for users and Google is hard. The best thing we can 
 Good SEO articles always target more than one search term.
 
 While you may start with a core search term in mind, remember there are always multiple ways to search for the same information. Sometimes it's better to target a similar but lower volume search term than the big obvious one.
+
+For example, the parent search term "user persona" (27,000/mo) has numerous derivations:
+
+- Define user persona (8,100)
+- Create user persona (3,600) 
+- Persona modelling (720)
+- Benefits of personas (50) 
+- User persona examples (5,400) 
+- Examples of user persona (260)
+- How to create personas (2,900)
+- What is a user persona (260)
+- User persona template (27,000) 
+
+It may be hard to rank for the most popular term, but many of these smaller, more specific terms are attainable.
 
 ### 6. Updates work / are important
 
@@ -55,7 +69,7 @@ Here's a simple step-by-step you can follow:
 
 - Don't just use "Further reading" links. They're useful, but a link in the body of an article works better.
 
-- Don't use the same link text on every link. Google can treat too many identical links as spammy. Varying the link text with secondary terms will also help the page you're linking to rank for those terms. If you're linking to our guide on [how to measure product-market fit](https://posthog.com/founders/measure-product-market-fit), any of the following would be fine:
+- Don't use the same link text on every link. Google can treat too many identical links as spammy. Varying the link text with secondary terms will also help the page you're linking to rank for those terms. If you're linking to our guide on [how to measure product-market fit](/founders/measure-product-market-fit), any of the following would be fine:
   - "measure product-market fit"
   - "measuring product-market fit"
   - "guide to measuring product-market fit"
@@ -86,7 +100,7 @@ Ahrefs is an all-in-one tool. It's useful for:
 
 [Keywords Everywhere](https://keywordseverywhere.com/) is a very useful Chrome extension that adds keyword research context to Google searches and other popular SEO tools. It's a great way to do quick bits of keyword research and find related terms.
 
-![keywords everywhere](../images/handbook/keywords.png)
+![keywords everywhere](../../images/handbook/keywords.png)
 
 It's only ~$15 annually.
 
@@ -105,6 +119,6 @@ A free tool that lets you [test how your headline will look in Google search res
 
 A [useful little tool](https://alsoasked.com/) with a decent free tier – 3 searches per day. It generates "people also asked" questions based on search terms, like this:
 
-![alsoasked](../images/handbook/alsoasked-product-market-fit.png)
+![alsoasked](../../images/handbook/alsoasked-product-market-fit.png)
 
 It's useful for deciding what subheadings to include in articles, though exact matches aren't really necessary.
