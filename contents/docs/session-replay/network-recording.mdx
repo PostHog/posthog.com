@@ -30,3 +30,9 @@ posthog.init('<ph_project_api_key>', {
     }
 })
 ```
+
+# Troubleshooting
+
+## Recording from localhost
+
+Due the very high volume of network requests that some tools can make (for example when running hot-reload during development) PostHog does not capture network requests when running on localhost
