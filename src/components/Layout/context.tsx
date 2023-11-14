@@ -32,8 +32,9 @@ export interface IProps {
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
     const { pathname } = useLocation()
+    const compact = typeof window !== 'undefined' && window !== window.parent
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
-        typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true'
+        compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
     const parent =
         other.parent ??
@@ -55,9 +56,50 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         localStorage.setItem('full-width-content', fullWidthContent + '')
     }, [fullWidthContent])
 
+    useEffect(() => {
+        if (compact) {
+            window.parent.postMessage(
+                {
+                    type: 'internal-navigation',
+                    url: pathname,
+                },
+                '*'
+            )
+        }
+    }, [pathname])
+
+    useEffect(() => {
+        if (compact) {
+            window.parent.postMessage(
+                {
+                    type: 'docs-ready',
+                },
+                '*'
+            )
+        }
+
+        const onMessage = (e: MessageEvent): void => {
+            if (e.data.type === 'theme-toggle') {
+                window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
+            }
+        }
+
+        window.addEventListener('message', onMessage)
+
+        return () => window.removeEventListener('message', onMessage)
+    }, [])
+
     return (
         <Context.Provider
-            value={{ menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent }}
+            value={{
+                menu,
+                parent,
+                internalMenu,
+                activeInternalMenu,
+                fullWidthContent,
+                setFullWidthContent,
+                compact,
+            }}
         >
             {children}
         </Context.Provider>

@@ -15,6 +15,7 @@
     "scripts": {
         "build": "gatsby build",
         "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
+        "serve": "gatsby serve",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "clean": "gatsby clean",
         "test": "echo \"Error: no test specified\" && exit 1",

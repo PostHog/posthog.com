@@ -12,6 +12,31 @@ import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { IProps, LayoutProvider } from './context'
 import { Mobile as MobileNav } from 'components/MainNav'
+import { useLayoutData } from './hooks'
+import SearchBox from 'components/Search/SearchBox'
+
+const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
+    const { compact } = useLayoutData()
+    return (
+        <div className={className}>
+            {compact ? (
+                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-50 bg-light dark:bg-dark">
+                    <SearchBox className="!w-full !py-2" location="mobile-header" />
+                </div>
+            ) : (
+                <Header />
+            )}
+            <main>{children}</main>
+            {!compact && (
+                <>
+                    <Footer />
+                    <CookieBanner />
+                    <MobileNav />
+                </>
+            )}
+        </div>
+    )
+}
 
 const Layout = ({
     children,
@@ -32,13 +57,7 @@ const Layout = ({
     return (
         <SearchProvider>
             <LayoutProvider parent={parent} activeInternalMenu={activeInternalMenu}>
-                <div className={className}>
-                    <Header />
-                    <main>{children}</main>
-                    <Footer />
-                    <CookieBanner />
-                    <MobileNav />
-                </div>
+                <Article className={className}>{children}</Article>
             </LayoutProvider>
         </SearchProvider>
     )
