@@ -13,7 +13,7 @@ This tutorial shows you how to combine PostHog’s [early access management](/do
 
 ## Creating an early access feature
 
-To create a beta feature in PostHog, go to the [early access management tab](https://app.posthog.com/early_access_features) and click "Create feature". Add a name like "new page beta," click "Save as draft," and then "Release beta." This also automatically creates a feature flag we use to control the display of the feature.
+To create a beta feature in PostHog, go to the [early access management tab](https://app.posthog.com/early_access_features) and click "Create feature". Add a name like "new page beta," click "Save as draft," and then "Release beta." This also automatically creates a [feature flag](/docs/feature-flags) we use to control the display of the feature.
 
 On the draft page, click "Implement public opt-in" and go to the [opt-in app page](https://app.posthog.com/project/apps/574). Enable the app and set "Show features button on the page" to "Yes." This adds a modal to control early access features with no extra setup.
 
@@ -74,11 +74,11 @@ export default function RootLayout({ children }) {
 }
 ```
 
-When we run `npm run dev`, PostHog starts capturing events, the beta is ready to implement, and we can also set up surveys with no additional code. 
+When we run `npm run dev`, PostHog starts capturing events. Our beta is ready to implement and we can also set up surveys with no additional code. 
 
 ## Setting up our beta feature
 
-With PostHog and our early access feature set up, we can set up our beta in our app. This will be a button that goes to a `/beta` page. It conditionally shows based on the `new-page-beta` feature flag for out beta. We can evaluate this flag with the `useFeatureFlagEnabled` React hook. Altogether, a basic component looks like this:
+Next, we add a button that goes to a `/beta` page. It conditionally shows based on the `new-page-beta` feature flag for our beta. We can evaluate this flag with the `useFeatureFlagEnabled` React hook. Altogether, a basic component looks like this:
 
 ```js
 // app/page.js
