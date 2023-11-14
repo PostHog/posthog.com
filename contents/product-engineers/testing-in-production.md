@@ -62,7 +62,7 @@ The first reason we test in production is that production is reality. Ultimately
 
 Some checks aren’t even possible outside of production. For example, we handle massive amounts of data and use big machines to process and query it. Replicating this elsewhere is expensive and unsustainable.
 
-In production, we learn how new code and features interact with production data and infrastructure. There are often bugs or issues missed locally that get solved by doing this. As the code release widens, we also get feedback and real usage data from teammates and beta users.
+In production, we learn how new code and features interact with production data and infrastructure. There are often bugs or issues missed locally that get solved by doing this. As the code release widens, we also get feedback and real usage data from teammates and [beta users](/tutorials/beta-feedback).
 
 ### Dogfooding and collaboration
 
