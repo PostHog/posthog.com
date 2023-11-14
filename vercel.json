@@ -4,7 +4,7 @@
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
-        { "source": "/posts/:path*", "destination": "/posts/index.html" }
+        { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
