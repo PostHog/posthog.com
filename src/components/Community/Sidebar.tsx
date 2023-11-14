@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import Link from 'components/Link'
 import { Authentication, EditProfile } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import { CallToAction } from 'components/CallToAction'
+import { Listbox, Transition } from '@headlessui/react'
 
 import SidebarSection from 'components/PostLayout/SidebarSection'
 
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { User } from '../../hooks/useUser'
+
+const regions = [
+    { domain: 'https://app.posthog.com', label: 'US Cloud' },
+    { domain: 'https://eu.posthog.com', label: 'EU Cloud' },
+    { domain: 'http://localhost:3001/auth', label: 'Test Cloud' },
+]
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -33,40 +40,57 @@ export const Avatar = (props: { className?: string; src?: string }) => {
 
 export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void }) => {
     const [state, setState] = useState<null | 'login' | 'signup'>(null)
+    const [selectedRegion, setSelectedRegion] = useState(regions[0])
 
-    return state === 'login' ? (
+    const handleLogin = () => {
+        const path = `?redirect_url=${encodeURI(window.location.href)}`
+        window.location.href = selectedRegion.domain + path
+    }
+
+    return (
         <>
-            <p className="m-0 text-sm font-bold dark:text-white">
-                Note: PostHog.com authentication is separate from your PostHog app.
-            </p>
-            <p className="text-sm my-2 dark:text-white">
-                We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
-            </p>
-            <Authentication onAuth={onSubmit} showBanner={false} showProfile={false} />
-        </>
-    ) : state === 'signup' ? (
-        <>
-            <p className="m-0 text-sm font-bold dark:text-white">
-                Note: PostHog.com authentication is separate from your PostHog app.
-            </p>
-            <p className="text-sm my-2 dark:text-white">
-                We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
-            </p>
-            <Authentication onAuth={onSubmit} initialView="sign-up" showBanner={false} showProfile={false} />
-        </>
-    ) : (
-        <>
-            <p className="m-0 text-sm dark:text-white">
-                Your PostHog.com community profile lets you ask questions and get early access to beta features.
-            </p>
-            <p className="text-[13px] my-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
-                <strong>Tip:</strong> PostHog.com accounts are separate from signing into the PostHog app.
-            </p>
-            <CallToAction onClick={() => setState('login')} width="full" size="md">
-                Login to posthog.com
-            </CallToAction>
-            <CallToAction onClick={() => setState('signup')} width="full" type="secondary" size="md" className="mt-2">
-                Create an account
+            <Listbox value={selectedRegion} onChange={setSelectedRegion}>
+                <div className="relative mt-1">
+                    <Listbox.Button className="border border-light dark:border-dark relative flex w-full cursor-default flex-row items-center justify-start rounded-md bg-white mb-2 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
+                        <span className="block truncate">{selectedRegion?.label ?? 'No region selected'}</span>
+                    </Listbox.Button>
+                    <Transition
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <Listbox.Options className="bg-white list-none border border-light dark:border-dark pl-0 z-20 mt-[-5px] absolute mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            {regions.map((region, i) => (
+                                <Listbox.Option
+                                    key={i}
+                                    className={({ active }) =>
+                                        `relative cursor-pointer select-none py-2 px-4 hover:bg-accent dark:hover:bg-accent-dark ${
+                                            active ? 'bg-gray-200' : ''
+                                        }`
+                                    }
+                                    value={region}
+                                >
+                                    {({ selected }) => (
+                                        <>
+                                            <span
+                                                className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
+                                            >
+                                                {region.label}
+                                            </span>
+                                        </>
+                                    )}
+                                </Listbox.Option>
+                            ))}
+                        </Listbox.Options>
+                    </Transition>
+                </div>
+            </Listbox>
+            <CallToAction onClick={() => handleLogin()} width="full" size="md">
+                Login using Cloud Account
             </CallToAction>
         </>
     )
