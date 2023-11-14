@@ -19,7 +19,7 @@ import { PostContext } from 'components/Edition/Posts'
 import Title from 'components/Edition/Title'
 import Upvote from 'components/Edition/Upvote'
 import LikeButton from 'components/Edition/LikeButton'
-import { QuestionForm } from 'components/Squeak'
+import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
@@ -183,7 +183,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         </MDXProvider>
                         <Upvote className="mt-6" />
                         <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
-                            <QuestionForm
+                            <Questions
                                 disclaimer={false}
                                 subject={false}
                                 buttonText="Leave a comment"
