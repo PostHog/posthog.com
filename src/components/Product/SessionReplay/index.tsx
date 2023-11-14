@@ -20,7 +20,6 @@ import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { Marquee } from 'components/Products/Marquee'
 import { graphql, useStaticQuery } from 'gatsby'
-import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
 import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'
@@ -41,6 +40,7 @@ import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import Plans from 'components/Pricing/Plans'
 
 const product = {
     slug: 'session-replay',
@@ -446,10 +446,11 @@ export const ProductSessionReplay = () => {
                     </div>
                 </div>
 
-                <div className="md:flex justify-between items-start gap-12">
-                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
-
-                    <div className="md:w-96 md:mt-4">
+                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
+                    <div className="flex-grow overflow-auto px-5 md:px-0">
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
+                    </div>
+                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
                         {faqs.map((faq, index) => {
                             return <FAQ {...faq} key={index} />

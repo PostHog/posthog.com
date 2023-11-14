@@ -27,7 +27,7 @@ Our small teams are:
 
 ## Reporting lines
 
-We maintain our full org chart in Roots, [which you can access here](https://app.tryroots.io/org-chart).
+We maintain our full org chart in Deel, [which you can access here](https://app.tryroots.io/org-chart).
 
 Team leads do not necessarily = managers - read more about how we think about management [here](/handbook/company/management). 
 

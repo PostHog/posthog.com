@@ -61,13 +61,13 @@ export default function Comparison({ comparison, columnCount, truncate }) {
     )
     return (
         <>
-            <div
-                className={`max-w-vw -mx-5 pl-5 pb-2 mb-10 md:mb-20 md:mx-0 overflow-x-auto [justify-content:_safe_center]`}
-            >
+            <div className={`max-w-vw pb-2 mb-10 md:mb-20 [justify-content:_safe_center] overflow-auto`}>
                 <div
-                    className={`flex-1 grid grid-cols-${columnCount} text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit ${
+                    className={`flex-1 grid md:grid-cols-${columnCount} grid-cols-${
+                        columnCount + 1
+                    } text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit ${
                         collapsed
-                            ? 'h-[460px] overflow-y-hidden relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
+                            ? 'h-[460px] overflow-hidden relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
                             : ' '
                     }`}
                 >
@@ -78,7 +78,7 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                     {activeCompanies.map((company) => {
                         const { comparisonURL } = companies[company]
                         return company.toLowerCase() === 'posthog' ? (
-                            <div className="bg-white dark:bg-accent-dark !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center min-w-[200px]">
+                            <div className="bg-white dark:bg-accent-dark !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center md:col-span-1 col-span-2">
                                 <Logo className="w-32" />
                             </div>
                         ) : (
@@ -108,7 +108,7 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                                             key={company}
                                             className={`p-2 text-center flex justify-center ${
                                                 company.toLowerCase() === 'posthog'
-                                                    ? 'bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue min-w-[200px]'
+                                                    ? 'bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue md:col-span-1 col-span-2'
                                                     : ''
                                             }`}
                                         >
@@ -131,7 +131,7 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                     <div />
                     {activeCompanies.map((company) => {
                         return company.toLowerCase() === 'posthog' ? (
-                            <div className="p-2 bg-white dark:bg-accent-dark !border-x-2 !border-b-2 !border-x-blue !border-b-blue rounded rounded-tl-none rounded-tr-none text-center  min-w-[200px]">
+                            <div className="p-2 bg-white dark:bg-accent-dark !border-x-2 !border-b-2 !border-x-blue !border-b-blue rounded rounded-tl-none rounded-tr-none text-center md:col-span-1 col-span-2">
                                 <CallToAction href="https://app.posthog.com/sigup" type="primary" size="md">
                                     Get started - free
                                 </CallToAction>
@@ -141,14 +141,14 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                         )
                     })}
                 </div>
-                {collapsed && (
-                    <div className="-mt-8 text-center z-20 relative">
-                        <CallToAction onClick={() => setCollapsed(false)} className="mt-4 max-w-sm">
-                            See full comparison
-                        </CallToAction>
-                    </div>
-                )}
             </div>
+            {collapsed && (
+                <div className="-mt-10 mb-10 text-center z-20 relative">
+                    <CallToAction onClick={() => setCollapsed(false)} className="mt-4 max-w-sm">
+                        See full comparison
+                    </CallToAction>
+                </div>
+            )}
         </>
     )
 }

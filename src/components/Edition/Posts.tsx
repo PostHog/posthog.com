@@ -231,8 +231,9 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
     )
 }
 
-export const getParams = (root, tag) => {
+export const getParams = (root, tag, sort) => {
     return {
+        sort,
         filters: {
             $and: [
                 ...(root
@@ -286,6 +287,20 @@ const Filters = () => {
     )
 }
 
+export const sortOptions = [
+    {
+        sort: ['score:desc', 'date:desc'],
+        label: 'Popularity',
+    },
+    {
+        sort: ['date:desc'],
+        label: 'Newest',
+    },
+]
+
+const getSortOption = (root?: string) =>
+    sortOptions[['blog', 'changelog', 'newsletter', 'spotlight'].includes(root) ? 1 : 0]
+
 export default function Posts({
     children,
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
@@ -295,6 +310,7 @@ export default function Posts({
     const { pathname } = useLocation()
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)
     const [root, setRoot] = useState(pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
+    const [sort, setSort] = useState(getSortOption(root).label)
     const [tag, setTag] = useState(initialTag)
     const [prev, setPrev] = useState<string | null>(null)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
@@ -302,7 +318,7 @@ export default function Posts({
         menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
     )
 
-    const [params, setParams] = useState(getParams(root, initialTag))
+    const [params, setParams] = useState(getParams(root, initialTag, getSortOption(root).sort))
 
     const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
 
@@ -326,8 +342,12 @@ export default function Posts({
     }, [pathname])
 
     useEffect(() => {
-        setParams(getParams(root, tag))
-    }, [root, tag])
+        setSort(getSortOption(root).label)
+    }, [root])
+
+    useEffect(() => {
+        setParams(getParams(root, tag, sortOptions.find((option) => option.label === sort)?.sort))
+    }, [root, tag, sort])
 
     return (
         <Layout parent={layoutMenu.parent} activeInternalMenu={layoutMenu.activeInternalMenu}>
@@ -349,20 +369,28 @@ export default function Posts({
                     tag,
                     activeMenu,
                     setActiveMenu,
+                    sort,
+                    setSort,
                 }}
             >
                 <PostProvider
                     value={{
                         title: title || 'Posts',
-                        menu: menu.map((menuItem) => ({
+                        menu: (!root
+                            ? menu
+                            : [
+                                  { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
+                                  ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),
+                              ]
+                        ).map((menuItem) => ({
                             ...menuItem,
-                            handleLinkClick: ({ name, url: activeURL, topLevel, tag }) => {
-                                if (topLevel) {
+                            handleLinkClick: ({ name, url: activeURL, tag }) => {
+                                if (root && name !== 'All') {
+                                    setTag(tag || name)
+                                } else {
                                     setRoot(activeURL === '/posts' ? undefined : activeURL?.split('/')[1])
                                     setTag(undefined)
                                     setActiveMenu(menu.find(({ url }) => url === activeURL))
-                                } else {
-                                    setTag(tag || name)
                                 }
                             },
                             children: undefined,

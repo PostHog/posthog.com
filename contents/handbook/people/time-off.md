@@ -16,18 +16,18 @@ We care about your results, not how long you work.
 
 You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.
 
-### How to book time off in PTO by Roots
+### How to book time off in PTO by Deel
 
 Before you start, make sure that:
-- You have authorized the PTO by Roots app in Slack to connect to your Google Calendar
+- You have authorized the PTO by Deel app in Slack to connect to your Google Calendar
 - You have subscribed to the [team time off calendar](https://calendar.google.com/calendar/u/0/r?cid=c_52c05ff56171856873941d8a4e612c7d5dc317504b7533b0d22207480bc85763@group.calendar.google.com)
 
 If you don't do this, your holiday won't show up in the team time off calendar. 
 
 To book a day off:
-- Book it on the PTO by Roots app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar. 
-- Block out your own personal GCal to show that you are out. This is because PTO by Roots _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
-- Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Roots will automatically set your Slack status to out of office and will autorespond to Slack messages. 
+- Book it on the PTO by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar. 
+- Block out your own personal GCal to show that you are out. This is because PTO by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
+- Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages. 
 
 > Please manually book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. 
 
@@ -45,7 +45,7 @@ Whether you have an appointment with your doctor, school run with your kids, or 
 
 If you are sick, you don't need to work and you will be paid. This is assuming you need a day or two off, then just take them.
 
-Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Roots.
+Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel.
 
 For extended periods of illness, please speak to James or Tim so we can work out a plan. In some countries, we may be required to request a doctor's note from you. 
 
