@@ -1,22 +1,5 @@
 @import '../../vars';
 
-.posthog-scrollbars::-webkit-scrollbar {
-    width: 10px !important;
-    height: 10px !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-thumb {
-    background: #bfbfbc !important;
-    border-radius: 30px !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-thumb:hover {
-    background: #878387 !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-track {
-    background: #fff !important;
-    border-radius: 0px !important;
-    box-shadow: inset 0px 0px 0px 0px #f0f0f0 !important;
-}
-
 body {
     font-variant-numeric: proportional-nums !important;
     font-feature-settings: unset !important;
@@ -1316,27 +1299,6 @@ for all other rows the portrait image wraps above bio*/
     padding-bottom: 4px;
     border-bottom: solid 2px $brand_blue;
     color: $brand_blue;
-}
-
-/* width */
-div:not(.default-scrollbar)::-webkit-scrollbar {
-    width: 10px;
-    margin-left: 20px;
-}
-
-/* track */
-div:not(.default-scrollbar)::-webkit-scrollbar-track {
-    background: #eceff1;
-}
-
-/* handle */
-div:not(.default-scrollbar)::-webkit-scrollbar-thumb {
-    background: #cfd8dc;
-}
-
-/* handle on hover */
-div:not(.default-scrollbar)::-webkit-scrollbar-thumb:hover {
-    background: #b0bec5;
 }
 
 @media screen and (max-width: 834px) {

@@ -325,7 +325,7 @@ export const ProductAbTesting = () => {
                 </section>
             </div>
 
-            <SmoothScroll className="" />
+            <SmoothScroll />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
