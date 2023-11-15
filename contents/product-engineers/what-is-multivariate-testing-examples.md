@@ -1,5 +1,5 @@
 ---
-title: "Multivariate testing: Benefits, drawbacks and examples"
+title: "Multivariate testing, explained (with examples)
 date: 2023-11-15
 author: ['lior-neu-ner']
 featuredImage: ../images/blog/posthog-company-culture-blog.png
@@ -18,7 +18,7 @@ It's distinct from A/B testing, where you only test two variants – a control a
 
 ![A/B testing vs multivariate testing](../images/blog/multivariated-testing-explained/ab-vs-mvt.png)
 
-## Example of multivariate testing
+Here's an example:
 
 Imagine you want to test how the color _and_ placement of a button affects your conversion rate. In A/B testing you'd have to run three separate tests, one after the other, to determine which change had an impact.
 
