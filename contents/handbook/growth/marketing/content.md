@@ -20,13 +20,14 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 1. **Opinionated advice** – Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed) 
 
-2. **Brand building** – Articles where we share and advocate for our philosophy and values. Examples include [We like to ship fast. Here's how we designed our company to do it](/founders/how-come-we-ship-so-much), [How to run a transparent startup](/founders/how-to-run-a-transparent-company), and [How (and why) we treat pricing like a product](/founders/how-to-treat-your-pricing-like-a-product).
 
-3. **High intent SEO guides** – Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/blog/tags/comparisons), guides on the [best alternatives to popular tools](/blog/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
+2. **High intent SEO comparisons** – Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/blog/tags/comparisons), guides on the [best alternatives to popular tools](/blog/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
 
-4. **Helpful evergreen guides:** Articles on topics of interest to our users and potential users. They generally target popular search terms. Examples include [How to measure product-market fit](/founders/measure-product-market-fit), [The AARRR pirate funnel explained](/product-engineers/aarrr-pirate-funnel), and [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes).
+3. **Helpful evergreen guides:** Articles on topics of interest to our users and potential users. They generally target popular search terms. Examples include [How to measure product-market fit](/founders/measure-product-market-fit), [The AARRR pirate funnel explained](/product-engineers/aarrr-pirate-funnel), and [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes).
 
-5. **Engineering tutorials:** – Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others, like [How to show a survey after a delay](/tutorials/delayed-survey), focus on specific PostHog user pain points.
+4. **Engineering tutorials:** – Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others, like [How to show a survey after a delay](/tutorials/delayed-survey), focus on specific PostHog user pain points.
+
+5. **Newsletters:** – Our newsletter, [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy to digest, snackable format. 
 
 ### Good to knows
 

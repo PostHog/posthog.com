@@ -4,9 +4,25 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Most articles start life as an idea in the `#content-ideas` Slack channel, or a GitHub issue.
+Good writing is subjective, but it helps to have some common themes. At PostHog, consider the following when writing or reviewing an article:
 
-## Stage 1 – Create an issue
+- **Does it get to the point?** If you're explaining something, don't wait three paragraphs to do so. Start with the explanation and expand later. Almost all articles can be improved by shortening (or removing) the intro.
+
+- **Does it flow?** It's hard to describe, but obvious when you see it. Great articles feel effortless to read. At what point, as a reader, does your attention start to wander?
+
+- **Is it scannable?** Most readers will scan a page before committing to reading it. They're looking for signs it'll answer their question(s) and quality. Use clear headings, diagrams and tables to demonstrate thoroughness.
+
+- **Is it opinionated?** Not all articles are opinions, but all our work should be _opinionated_. Don't sit on the fence. It's better to be slightly wrong, or controversial, than say nothing.
+
+- **Does it pass the Neil test?** Neil (@neilkakkar) is a real product engineer on the PostHog team, and he reads a lot of content! Do you think your article is something he would find either interesting or useful? If not, you may not be writing something relevant to our target audience. (You do not literally need to ask him to read every piece of content - he is very busy.) 
+
+Above all, we write articles, not content. 
+
+Our publishing process is something like this:
+
+## Stage 1 – Create an issue / share an idea
+
+Most articles start life as an idea in the `#content-ideas` Slack channel, or a GitHub issue.
 
 Use [this issue template](https://github.com/PostHog/posthog.com/issues/new?assignees=andyvan-ph&labels=content&projects=&template=blog-post-idea-template.md&title=%7Btitle%7D). Add it to the Content & Marketing project board.
 
@@ -116,15 +132,6 @@ Unless the post is very short, or especially polished, the first round is mainly
 
 After initial edits, more effort goes into line edits and polish – "production value", structure and flow.
 
-Things to consider as a writer and reviewer:
-
-- **Does the article get to the point?** If you're explaining something, don't wait three paragraphs to do so. Start with the explanation and expand later. Almost all articles can be improved by shortening (or removing) the intro.
-
-- **Does it flow?** This is deeply subjective, but obvious when you see it. Great articles feel effortless to read. At what point, as a reader, does your attention start to wander?
-
-- **Is it scannable?** Most readers will scan a page before committing to reading it. They're looking for signs it'll answer their question(s) and is high quality. Good headings are key here, as are well-placed and clear diagrams. Readers want to know you won't waste their time.
-
-- **Is it opinionated?** Not all articles are opinions, but all our work should be _opinionated_. Don't sit on the fence. It's better to be slightly wrong, or controversial, than say nothing.
 
 ## Stage 4 – Merging and promotion
 
