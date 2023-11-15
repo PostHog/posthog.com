@@ -50,7 +50,7 @@ export default function Link({
         })
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
-        if (compact && !internal) {
+        if (compact && url && !internal) {
             e.preventDefault()
             if (/(eu|app)\.posthog\.com/.test(url)) {
                 window.parent.postMessage(
