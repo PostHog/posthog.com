@@ -11,7 +11,7 @@ PostHog makes [A/B testing on iOS](/docs/experiments/installation?tab=iOS) simpl
 
 ## Creating a new iOS app
 
-Our app will have two screens: The first screen will have a button which will take you to a second screen. The second screen will have it's background color set to `red` or `green`, depending on if the user is in the `control` or `test` group. Finally, the second screen will have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
+Our app will have two screens. The first screen will have a button which will take you to a second screen. The second screen will either have a `red` or `green` background color depending on if the user is in the `control` or `test` group. The second screen will also have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
 
 The first step is to create a new app. Open XCode and click "Create new project". Select iOS as your platform, then "App" and press next. Give your app a name, select `SwiftUI` as the interface, and the defaults for everything else. Click next and then "Create".
 
@@ -111,7 +111,8 @@ To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.c
 Finally, [capture a custom event](/docs/libraries/ios#capturing-events) when the button on `FeatureScreenView` is clicked. We'll use this event as our goal metric in our A/B test.
 
 ```swift
-// in FeatureScreenView.swft
+// in FeatureScreenView.swift
+import PostHog
 
 // ...rest of code
 
@@ -128,7 +129,7 @@ To check your setup, build and run your app. Click your button a few times. You 
 
 ## Create an A/B test in PostHog
 
-The next step is to set up an A/B test (We call them experiments in PostHog).
+The next step is to set up an A/B test (we call them experiments in PostHog).
 
 Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment". Add the following details to your experiment:
 
@@ -161,7 +162,7 @@ import PostHog
 
 // ...
 
-               Button("Go to Feature Screen") {
+               Button("Go to Next Screen") {
                     // Fetch feature flag here
                     let posthog = PHGPostHog.shared()
                     let flagValue = posthog?.getFeatureFlag("ios-background-color-experiment") as? String
@@ -181,7 +182,7 @@ import PostHog
 }
 ```
 
-That's it! Your A/B test is now ready. When you run your app, you should see either green or red as the background color of `FeatureScreenView`. 
+That's it! Your A/B test is now ready. When you run your app, you see either green or red as the background color of `FeatureScreenView` and PostHog will capture button clicks for each variant to calculate if changing the color has a statistically significant impact.
 
 If you want to test both variants of your experiment to make sure they are working correctly, you can add an [optional override](/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag.
 
