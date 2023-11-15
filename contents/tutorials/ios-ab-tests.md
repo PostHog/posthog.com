@@ -1,6 +1,6 @@
 ---
 title: "How to run A/B tests in iOS with PostHog"
-date: 2023-11-14
+date: 2023-11-15
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
@@ -184,7 +184,7 @@ import PostHog
 
 That's it! Your A/B test is now ready. When you run your app, you see either green or red as the background color of `FeatureScreenView` and PostHog will capture button clicks for each variant to calculate if changing the color has a statistically significant impact.
 
-If you want to test both variants of your experiment to make sure they are working correctly, you can add an [optional override](/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag.
+If you want to test both variants of your experiment to make sure they are working correctly, you can add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag.
 
 Lastly, you can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
 
