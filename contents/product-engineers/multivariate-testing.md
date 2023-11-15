@@ -41,7 +41,7 @@ Multivariate tests enable you to test multiple combinations at the same time, me
 
 ### 2. It reveals how different elements interact with each other
 
-Multivariate testing is not just about looking at which variant is the best; it's about understanding the weight each factor had in that success. This provides insights into your holistic user experience.
+Multivariate testing is not just about looking at which variant is the best; it's about understanding the weight each factor had in that success.
 
 For example, let's say you're testing changes to the user dashboard of a B2B SaaS app. You decide to test how both the position of the navigation menu and the text of the buttons affect user engagement.
 
