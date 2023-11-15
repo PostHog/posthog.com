@@ -1130,6 +1130,7 @@
             "destination": "/product-engineers/decouple-deployment-from-release"
         },
         { "source": "/blog/testing-in-production", "destination": "/product-engineers/testing-in-production" },
+        { "source": "/handbook/growth/marketing/blog", "destination": "/handbook/growth/marketing/content" },
         { "source": "/handbook/small-teams/website-docs/community", "destination": "/handbook/community" }
     ]
 }
