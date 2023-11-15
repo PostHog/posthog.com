@@ -1,5 +1,5 @@
 ---
-title: Multivariate testing, explained
+title: Multivariate testing: Benefits, drawbacks and examples
 date: 2023-11-07
 author: ['lior-neu-ner']
 featuredImage: ../images/blog/posthog-company-culture-blog.png

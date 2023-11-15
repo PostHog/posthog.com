@@ -22,7 +22,7 @@ Feature flags, aka feature toggles, turn specific functions on and off during ru
 
 - **Safely releasing new features** by eliminating complex branching and gradually rolling out feature access.
 
-- **Running multivariate tests**, so you can understand the impact of new features and changes.
+- **Running [multivariate tests](/product-engineers/what-is-multivariate-testing-examples)**, so you can understand the impact of new features and changes.
 
 - **Controlling feature access** to certain features based on user criteria, such as location, device type or subscription level.
 
