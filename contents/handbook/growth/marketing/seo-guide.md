@@ -100,8 +100,6 @@ Ahrefs is an all-in-one tool. It's useful for:
 
 [Keywords Everywhere](https://keywordseverywhere.com/) is a very useful Chrome extension that adds keyword research context to Google searches and other popular SEO tools. It's a great way to do quick bits of keyword research and find related terms.
 
-![keywords everywhere](../../images/handbook/keywords.png)
-
 It's only ~$15 annually.
 
 ### Google Search Console
@@ -117,8 +115,6 @@ A free tool that lets you [test how your headline will look in Google search res
 
 ### AlsoAsked
 
-A [useful little tool](https://alsoasked.com/) with a decent free tier – 3 searches per day. It generates "people also asked" questions based on search terms, like this:
-
-![alsoasked](../../images/handbook/alsoasked-product-market-fit.png)
+A [useful little tool](https://alsoasked.com/) with a decent free tier – 3 searches per day. It generates "people also asked" questions based on search terms.
 
 It's useful for deciding what subheadings to include in articles, though exact matches aren't really necessary.
