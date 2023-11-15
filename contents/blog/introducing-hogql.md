@@ -111,9 +111,7 @@ You can also create custom table insights directly from the Events Explorer (pre
 
 ![custom insights](../images/blog/array/custom_insights.mp4)
 
-Just hit that 'Open as a new insight' button (see above), tweak the JSON (if you want), and save your table to a dashboard or notebook... 
-
-_What's that? Notebooks haven't launched, yet? But they're the future of everyth... oh, my bad!"_. 🥸
+Just hit that 'Open as a new insight' button (see above), tweak the JSON (if you want), and save your table to a dashboard or [notebook](/docs/notebooks).
 
 Moving on... you can also use [HogQL expressions](/docs/hogql/expressions) (e.g. `properties.$screen_width * $properties.screen_height`) and aggregations (e.g. `sum(properties.price)`) as columns. This is helpful not just for generating tables that summarize person and event information, but also for exploring the data in new and totally custom ways. 
 

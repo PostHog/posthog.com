@@ -11,6 +11,10 @@ import { navigate } from 'gatsby'
 import { PostsContext } from './Posts'
 import Title from './Title'
 import { useLayoutData } from 'components/Layout/hooks'
+import Upvote from './Upvote'
+import { QuestionForm } from 'components/Squeak'
+import { useLocation } from '@reach/router'
+import { Contributors } from '../../templates/BlogPost'
 
 export default function ClientPost({
     id,
@@ -23,6 +27,7 @@ export default function ClientPost({
     post_category,
     excerpt,
     getPost,
+    authors,
 }: {
     title: string
     featuredImage?: { url: string }
@@ -34,7 +39,9 @@ export default function ClientPost({
     id: number
     excerpt: string
     getPost: () => Promise<void>
+    authors: any
 }) {
+    const { pathname } = useLocation()
     const { fullWidthContent } = useLayoutData()
     const { mutate } = useContext(PostsContext)
     const [confirmDelete, setConfirmDelete] = useState(false)
@@ -59,71 +66,109 @@ export default function ClientPost({
             navigate('/posts')
         }
     }
+    const author = authors?.data?.[0]
 
     return (
-        <>
-            <Modal open={editPostModalOpen} setOpen={setEditPostModalOpen}>
-                <NewPost
-                    postID={id}
-                    initialValues={{
-                        title,
-                        featuredImage: imageURL,
-                        body,
-                        ctaURL: CTA?.url,
-                        ctaLabel: CTA?.label,
-                        category: post_category?.data?.id,
-                        excerpt,
-                    }}
-                    onSubmit={handleNewPostSubmit}
-                />
-            </Modal>
-            <SEO title={title + ' - PostHog'} />
-            <article
-                className={`article-content mx-auto transition-all pb-6 md:py-6 md:pb-20 md:px-8 2xl:px-12 ${
-                    fullWidthContent ? 'max-w-full' : 'max-w-3xl'
-                }`}
-            >
-                {imageURL && (
-                    <div className="rounded bg-accent dark:bg-accent-dark leading-none max-h-96 text-center">
-                        <ZoomImage>
-                            {imageURL?.endsWith('.mp4') ? (
-                                <video className="max-w-full max-h-96 rounded-md" autoPlay src={imageURL} />
-                            ) : (
-                                <img className="max-w-full max-h-96 rounded-md" src={imageURL} />
+        <div className="@container">
+            <div className="flex flex-col-reverse @3xl:flex-row">
+                <div className={`article-content flex-1 transition-all md:pt-8 w-full overflow-auto`}>
+                    <div
+                        className={`mx-auto transition-all ${
+                            fullWidthContent ? 'max-w-full' : 'max-w-3xl'
+                        }  md:px-8 2xl:px-12`}
+                    >
+                        <Modal open={editPostModalOpen} setOpen={setEditPostModalOpen}>
+                            <NewPost
+                                postID={id}
+                                initialValues={{
+                                    title,
+                                    featuredImage: imageURL,
+                                    body,
+                                    ctaURL: CTA?.url,
+                                    ctaLabel: CTA?.label,
+                                    category: post_category?.data?.id,
+                                    excerpt,
+                                }}
+                                onSubmit={handleNewPostSubmit}
+                            />
+                        </Modal>
+                        <SEO title={title + ' - PostHog'} />
+                        <article>
+                            {imageURL && (
+                                <div className="rounded bg-accent dark:bg-accent-dark leading-none max-h-96 text-center">
+                                    <ZoomImage>
+                                        {imageURL?.endsWith('.mp4') ? (
+                                            <video className="max-w-full max-h-96 rounded-md" autoPlay src={imageURL} />
+                                        ) : (
+                                            <img className="max-w-full max-h-96 rounded-md" src={imageURL} />
+                                        )}
+                                    </ZoomImage>
+                                </div>
                             )}
-                        </ZoomImage>
-                    </div>
-                )}
-                <div className={`flex flex-col pt-4`}>
-                    <Title>{title}</Title>
-                    <p className="!mb-0">
-                        <span className="opacity-70">{dayjs(date || publishedAt).format('MMM DD, YYYY')}</span>
+                            <div className={`flex flex-col`}>
+                                <Title>{title}</Title>
+                                <p className="!mb-0">
+                                    <span className="opacity-70">
+                                        {dayjs(date || publishedAt).format('MMM DD, YYYY')}
+                                    </span>
 
-                        {isModerator && (
-                            <div className="ml-3 text-sm inline-flex space-x-2 text-primary/50 dark:text-primary-dark/50">
-                                <button
-                                    onClick={() => setEditPostModalOpen(true)}
-                                    className="text-red dark:text-yellow font-semibold"
-                                >
-                                    Edit post
-                                </button>
-                                <span>|</span>
-                                <button onClick={handleDeletePost} className="text-red font-semibold">
-                                    {confirmDelete ? 'Click again to confirm' : 'Delete post'}
-                                </button>
+                                    {isModerator && (
+                                        <div className="ml-3 text-sm inline-flex space-x-2 text-primary/50 dark:text-primary-dark/50">
+                                            <button
+                                                onClick={() => setEditPostModalOpen(true)}
+                                                className="text-red dark:text-yellow font-semibold"
+                                            >
+                                                Edit post
+                                            </button>
+                                            <span>|</span>
+                                            <button onClick={handleDeletePost} className="text-red font-semibold">
+                                                {confirmDelete ? 'Click again to confirm' : 'Delete post'}
+                                            </button>
+                                        </div>
+                                    )}
+                                </p>
                             </div>
-                        )}
-                    </p>
+                            <div className="my-2 article-content">
+                                <ClientPostMarkdown>{body}</ClientPostMarkdown>
+                            </div>
+                            {CTA?.label && CTA?.url && (
+                                <CallToAction size="md" type="outline" externalNoIcon to={CTA.url}>
+                                    {CTA.label}
+                                </CallToAction>
+                            )}
+                            <Upvote className="mt-6" />
+                            <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
+                                <QuestionForm
+                                    disclaimer={false}
+                                    subject={false}
+                                    buttonText="Leave a comment"
+                                    slug={pathname}
+                                />
+                            </div>
+                        </article>
+                    </div>
                 </div>
-                <div className="my-2 article-content">
-                    <ClientPostMarkdown>{body}</ClientPostMarkdown>
-                </div>
-                {CTA?.label && CTA?.url && (
-                    <CallToAction size="md" type="outline" externalNoIcon to={CTA.url}>
-                        {CTA.label}
-                    </CallToAction>
-                )}
-            </article>
-        </>
+                <aside
+                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-dark pt-4 xl:block hidden`}
+                >
+                    <Upvote className="px-4 mb-4" />
+                    {author && (
+                        <Contributors
+                            contributors={[
+                                {
+                                    profile_id: author.id,
+                                    image:
+                                        author.attributes?.avatar?.data?.attributes?.url ||
+                                        author.attributes.gravatarURL,
+                                    name: [author.attributes?.firstName, author.attributes?.lastName]
+                                        .filter(Boolean)
+                                        .join(' '),
+                                },
+                            ]}
+                        />
+                    )}
+                </aside>
+            </div>
+        </div>
     )
 }

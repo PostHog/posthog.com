@@ -82,6 +82,22 @@ export const Content = ({ quickLinks = false }) => {
                         }
                         url="/tutorials/survey"
                     />
+                    <ResourceItem
+                        type="Guide"
+                        title="How to show a survey after a delay"
+                        description="Delay the display of your survey to improve user experience"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="../../components/Home/Slider/images/surveys-hog.png"
+                            />
+                        }
+                        url="/tutorials/delayed-survey"
+                    />
                 </ul>
             </section>
         </>

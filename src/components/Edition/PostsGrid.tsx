@@ -5,7 +5,7 @@ import { PostsContext } from './Posts'
 export default function PostsGrid({ posts }) {
     const { isLoading, isValidating, fetchMore } = useContext(PostsContext)
     return (
-        <ul className="list-none m-0 p-0 grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-12">
+        <ul className="list-none m-0 p-0 grid sm:grid-cols-2 md:grid-cols-3 gap-4 my-12">
             {isLoading
                 ? Array.from(Array(9)).map((_, i) => <Skeleton key={i} />)
                 : posts.map(({ id, attributes }, index) => {

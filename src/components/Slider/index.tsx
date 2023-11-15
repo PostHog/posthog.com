@@ -62,7 +62,7 @@ export default function Slider({ className = '', activeIndex, children }) {
             )}
             <ul
                 ref={ref}
-                className={`list-none p-0 flex space-x-0.5 snap-x overflow-y-hidden overflow-x-auto justify-start`}
+                className={`list-none p-0 flex space-x-0.5 snap-x overflow-y-hidden overflow-x-auto justify-start ${className}`}
             >
                 {children.map((child, index) => {
                     return (

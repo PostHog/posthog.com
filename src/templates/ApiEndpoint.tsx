@@ -196,8 +196,8 @@ function Params({ params, objects, object, depth = 0 }) {
                                         </div>
                                     </>
                                 )}
-                                <div className="text-sm">
-                                    <ReactMarkdown>{param.schema.description}</ReactMarkdown>
+                                <div className="text-sm pt-2">
+                                    <ReactMarkdown>{param.schema.description || param.description}</ReactMarkdown>
                                 </div>
                             </div>
                         </div>
@@ -413,7 +413,7 @@ response = requests.${item.httpVerb}(
 
 function ResponseExample({ objects, objectKey }) {
     if (!objectKey) {
-        return 'No response'
+        return null
     }
 
     const response = JSON.stringify(
@@ -503,7 +503,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
             >
                 <h2 className="!mt-0">{name}</h2>
-                <blockquote className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
+                <blockquote className="p-6 mb-4 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
                     <p>
                         For instructions on how to authenticate to use this endpoint, see{' '}
                         <a className="text-red hover:text-red font-semibold" href="/docs/api/overview">
@@ -549,24 +549,33 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                     />
 
                                     <h4>Response</h4>
-                                    <ResponseExample
-                                        item={item}
-                                        objects={objects}
-                                        objectKey={
-                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
-                                                'application/json'
-                                            ]?.schema['$ref']
-                                                ?.split('/')
-                                                .at(-1) ||
-                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
-                                                'application/json'
-                                            ]?.schema['items']['$ref']
-                                                ?.split('/')
-                                                .at(-1)
-                                        }
-                                        exampleLanguage={exampleLanguage}
-                                        setExampleLanguage={setExampleLanguage}
-                                    />
+                                    {Object.keys(item.responses).map((statusCode) => {
+                                        const response = item.responses[statusCode]
+                                        return (
+                                            <div key={statusCode}>
+                                                <h5 className="text-sm font-semibold">
+                                                    <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                                        Status {statusCode}
+                                                    </span>{' '}
+                                                    {response.description}
+                                                </h5>
+                                                <ResponseExample
+                                                    item={item}
+                                                    objects={objects}
+                                                    objectKey={
+                                                        response.content?.['application/json']?.schema['$ref']
+                                                            ?.split('/')
+                                                            .at(-1) ||
+                                                        response.content?.['application/json']?.schema.items['$ref']
+                                                            ?.split('/')
+                                                            .at(-1)
+                                                    }
+                                                    exampleLanguage={exampleLanguage}
+                                                    setExampleLanguage={setExampleLanguage}
+                                                />
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>
