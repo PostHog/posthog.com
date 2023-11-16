@@ -47,7 +47,7 @@ This section is dedicated to tools that actively collect data on user behavior. 
 
 [PostHog](https://posthog.com/) is an all-in-one platform designed to give engineers and product managers a complete view of user behavior. It's built on the highly-scalable ClickHouse OLAP database.
 
-Features include a comprehensive product analytics suite (e.g. trend analysis, dashboards, funnels, path analysis, retention tracking etc.), feature flags for feature control, experimentation (A/B and multivariate testing), session recording, heatmaps and [more](/product).
+Features include a comprehensive product analytics suite (e.g. trend analysis, dashboards, funnels, path analysis, retention tracking etc.), feature flags for feature control, experimentation (A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples)), session recording, heatmaps and [more](/product).
 
 It’s entirely self-serve, with the ability to autocapture event information out of the box. PostHog can also be self-hosted on your existing infrastructure using Docker Compose, making it ideal if you don't want to share data with third parties. 
 

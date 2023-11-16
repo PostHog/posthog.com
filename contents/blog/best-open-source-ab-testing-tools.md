@@ -16,7 +16,7 @@ tags:
   - Guides
 ---
 
-Also known as split testing or multivariate testing, A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
+Also known as split testing or [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
 Product review website G2 lists 120 products in the A/B testing category, but what they offer varies widely. Many products on G2, for example, lean toward marketing uses cases (i.e. testing website landing pages) and aren't useful for product feature testing, or focus on a narrow subset of companies.
 
