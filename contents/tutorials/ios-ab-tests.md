@@ -1,6 +1,6 @@
 ---
 title: "How to run A/B tests in iOS with PostHog"
-date: 2023-11-15
+date: 2023-11-16
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
@@ -82,6 +82,10 @@ Our basic set up is now complete. Build and run your app to test that it's worki
 
 First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods) or [Carthage](/docs/libraries/ios#carthage)). To add the package dependency to your Xcode project, select File > Add Package Dependency and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
+Note that for this tutorial we use version `2.1.0` of the SDK.
+
+![Add PostHog from Swift Package Manager](../images/tutorials/ios-ab-tests/swift-npm.png)
+
 Next, configure your PostHog instance in your `App.swift` struct initializer:
 
 ```swift
@@ -161,6 +165,13 @@ import PostHog
     @State private var isTestVariant = false
 
 // ...
+    var body: some View {
+        NavigationStack {
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+                Text("Hello, world!")
 
                Button("Go to Next Screen") {
                     // Fetch feature flag here
