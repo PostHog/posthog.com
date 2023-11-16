@@ -1,5 +1,5 @@
 ---
-title: "Multivariate testing, explained (with examples)
+title: "Multivariate testing, explained (with examples)"
 date: 2023-11-15
 author: ['lior-neu-ner']
 featuredImage: ../images/blog/posthog-company-culture-blog.png
@@ -22,7 +22,7 @@ Here's an example:
 
 Imagine you want to test how the color _and_ placement of a button affects your conversion rate. In A/B testing you'd have to run three separate tests, one after the other, to determine which change had an impact.
 
-In multivariate testing you simply create one test with four different variants:
+In multivariate testing, you simply create one test with four different variants:
 
 1. The control variant.
 2. The variant with only the color changed.
@@ -99,7 +99,7 @@ Now that you know all about multivariate testing, here's how you implement one i
 3. Fill out the remaining fields, such as feature flag key, goal metric, and any other details.
 4. Click "Save as draft".
 5. Add the [experiment code](/docs/experiments/adding-experiment-code) to your app by customizing the user experience for each variant.
-6. [Launch your experiment](https://posthog.com/docs/experiments/testing-and-launching).
+6. [Launch your experiment](/docs/experiments/testing-and-launching).
 
 ![Creating multivariant tests in PostHog](../images/blog/multivariated-testing-explained/multiple-variants-in-posthog.png)
 
