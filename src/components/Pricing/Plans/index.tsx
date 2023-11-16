@@ -337,7 +337,9 @@ export default function Plans({
                                                 key={`${feature.key}-${type}-${i}`}
                                                 className="max-w-[25%] w-full min-w-[105px]"
                                             >
-                                                <Feature feature={plan.features?.[index]} />
+                                                <Feature
+                                                    feature={plan.features?.find(({ key }) => key === feature.key)}
+                                                />
                                             </div>
                                         ))}
                                     </Row>
