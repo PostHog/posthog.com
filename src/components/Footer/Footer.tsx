@@ -270,6 +270,10 @@ const linklist: IProps[] = [
                 url: '/faq',
             },
             {
+                title: 'Security',
+                url: '/handbook/company/security',
+            },
+            {
                 title: 'Support',
                 url: '/questions',
             },
