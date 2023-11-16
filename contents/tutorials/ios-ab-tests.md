@@ -164,8 +164,7 @@ import PostHog
 
                Button("Go to Next Screen") {
                     // Fetch feature flag here
-                    let posthog = PHGPostHog.shared()
-                    let flagValue = posthog?.getFeatureFlag("ios-background-color-experiment") as? String
+                    let flagValue = PHGPostHog.shared()?.getFeatureFlag("ios-background-color-experiment") as? String
                     if flagValue == "test" {
                         isTestVariant = true
                     }
