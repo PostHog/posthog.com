@@ -28,7 +28,6 @@ This has resulted in the highest number of qualified and motivated candidates re
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Ops & Finance Lead     | GMT -5:00 to 0:00                  | People & Ops  | Charles | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles<br/> 3) Small Team Screen - James<br/> 4) SuperDay - Charles, Tim & James H. | Live Task (link not available) |
 | Customer Success Manager    | GMT -8:00 to 0:00                  | Customer Success  | Simon | 1) Culture Screen - Coua<br/> 2) Technical Screen - Simon<br/> 3) Small Team Screen - James<br/> 4) Small Team Screen - Tim<br/> 5) SuperDay - Cameron, Charles, Simon, Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
