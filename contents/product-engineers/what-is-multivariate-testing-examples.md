@@ -1,6 +1,6 @@
 ---
 title: "Multivariate testing, explained (with examples)"
-date: 2023-11-15
+date: 2023-11-16
 author: ['lior-neu-ner']
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
