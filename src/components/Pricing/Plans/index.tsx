@@ -87,8 +87,10 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                             ? 'Free'
                             : `$${parseFloat(unit_amount_usd).toFixed(
                                   Math.max(
-                                      ...plans[plans.length - 1].tiers.map((tier) => tier.unit_amount_usd.length)
-                                  ) - 1
+                                      ...plans[plans.length - 1].tiers.map(
+                                          (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                      )
+                                  )
                               )}`
                     }
                 />
