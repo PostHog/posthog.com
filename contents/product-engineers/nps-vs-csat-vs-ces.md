@@ -11,135 +11,71 @@ tags:
   - Product engineers
   - Surveys
 ---
-good article - https://customergauge.com/blog/nps-csat-ces#NPS%20vs%20CSAT%20vs%20CES:%20In%20Summary10 
-
-format is probably:
-## What it is
-#### What is a good score
-## Why it's important
-## Drawbacks / shortfalls / what it doesnt tell you
-## When to use it
-
 
 Here's what you need to know about NPS, CSAT and CES:
 
-- **NPS (Net** is the percentage of customers who **stop using** your product during a given period of time.
+// TODO write TLDR
 
-- **Retention rate** is the percentage of **existing customers** who **continue using** your product. 
+## What is NPS?
 
-So, if you have 1,000 customers and 100 of them cancel their subscription, your monthly churn rate would be 10% and your retention rate would be 90%.
+NPS (net promoter score) measures user loyalty by asking them how they are to recommend you to a friend or coworker. Users submit their response on a scale from 0 (not likely at all) to 10 (extremely likely).
 
-In this guide, I'll cover:
-- How and when to use each metric
-- How to measure churn rate and retention
-- Industry benchmarks for churn and retention rates
+![NPS survey](../images/blog/nps-csat-ces/nps-survey.png)
 
-And... [how to reduce customer churn](#how-to-improve-retention-and-reduce-churn).
+NPS is great as it give you insights to who your loyal customers are, and which of your customers are at risk of churning.
 
+### How to calculate NPS score
 
-## NPS explained 📉
+Responses are grouped into 3 categories:
 
-add screenshot from PostHog Survey 
+- **Promoters** – people who respond with 9 or 10. They're extremely happy with your product.
+- **Passives** – people who respond with 7 or 8. They aren’t unhappy, but they’re not overly excited either.
+- **Detractors** – people who respond with 6 or below. These are people who have had a bad experience and are likely to complain to others.
 
+![NPS scale](../images/blog/nps-csat-ces/nps-score.png)
 
-Promoters are customers that give a score of 9 or 10. They’re customers that are very happy with their experience and are willing to tell others about it.
+You NPS score is the `% of promoters - % of detractors`. The scores range between -100 (100% negative) and +100 (100% positive).
 
-Passives give a score of 7 or 8. They aren’t unhappy with their customer experience, but they’re not overly thrilled either. Passive customers are more susceptible to competitor offers, and likely won’t talk about their experience with others, whether that experience has been positive or negative.
-
-Detractors make up the rest of the customer base, giving a score somewhere in the range of 0 to 6. These are people who have had a bad experience with your company, and they’re likely to complain to others unless you quickly take action to address their concerns.
-
-Nice image from hotjar: https://www.hotjar.com/_next/image/?url=https%3A%2F%2Fimages.ctfassets.net%2Flh3zuq09vnm2%2FuE7ysjq8oQyAUUd0eToJt%2F8886116e29f128e7aa03a6db4e861e9a%2FNPS-chart-1.width-750.jpg&w=946&q=75 
-
-1. It measures customer loyalty.
-Customer NPS helps brands evaluate customer loyalty — and the likelihood of them recommending you to a friend. It also helps evaluate the likelihood of customers churning — canceling their subscription or not repurchasing and seeking out a product or service from a different company.
-
-
-
----
-Net Promoter Score (NPS) is a measure used to gauge customer loyalty, satisfaction, and enthusiasm with a company that’s calculated by asking customers one question: “On a scale from 0 to 10, how likely are you to recommend this product/company to a friend or colleague?” Aggregate NPS scores help businesses improve upon service, customer support, delivery, etc. for increased customer loyalty.
-
---
-
-NPS is broad
-
-NPS is great because…
-It’s simple and standardised	
-NPS surveys tend to have high completion rates because they’re short and simple to understand. They’re also easy to use to benchmark, helping you see where you stand in relation to the rest of your industry.	
-
-NPS can be tricky because…
-It’s often contextless	
-An NPS score gives you an overall indication of customer loyalty, but not much else – including things customers don’t like. So it’s important to gather it in conjunction with other (qualitative) data.	
-**Is it useful for SaaS?**
-
-## How to calculate NPS score
-
-Your NPS score is expressed on a scale of -100 to +100 and is calculated by subtracting the percentage of Detractors from the percentage of Promoters.
-
-So if you have 60% promoters and 10% detractors, your NPS would be 50.
-
-## Benefits of NPS
-
-What are the limitations of NPS?
-We’ll be the first to admit that NPS, by itself in a survey, isn’t always enough to determine the root cause.
-
-So, yes, while NPS is considered the “Ultimate Question,” don’t be afraid to add additional drivers to this question to more easily determine the root cause of an issue.
-
-Following up is key to taking action. Without it, NPS is just a research tool and doesn’t drive growth.
-
-### Why should you care about your NPS? / Why is it important / When should you use a NPS survey?
-
-When should you measure NPS?
-
-NPS should be measured at the end of a buyer’s journey. It may be useful to choose neutral touchpoints, so that customers don’t link their answer to their most recent interaction. For example:
-After making any big changes, like a shift in the services or products you offer, or a merger with another business.
-To measure brand perception after a PR crisis (and to see if that image improves as a result of your actions).
-Finally, make sure to send NPS surveys regularly (for example, the same month every year) so you can keep track of the results and analyze brand happiness and loyalty over time.
-
-
-
-NPS can be used as a predictor of business growth. When your company’s NPS is high (or, at least, higher than the industry average), you know that you have a healthy relationship with customers who are likely to act as evangelists for the brand, fuel word of mouth, and generate a positive growth cycle.
-
-It helps anticipate churn rate & growth prospects. When you know your current number of detractors and promoters, you’ll predict your growth and customer churn better.
-
-When should you use an NPS survey?
-Finding the right moment to use an NPS survey in the case of SaaS products can be a bit tricky. But you can break the customer journey into two phases – the early phase and the ongoing phase, to get more accurate feedback.
-
-Here is how you can use NPS in each phase:
-
-Early phase: Send an NPS survey after the customer has finished the onboarding process and used the product or service for some time. But ensure that you don’t send it right after the customer starts using the product, as they won’t have enough feedback to share with you.
-Ongoing phase: Use NPS surveys at various touchpoints throughout your customer’s lifecycle with your product. It will help you understand how they feel about your customer experience.
-Try to send an NPS follow-up question to understand why a customer has given you a specific score.
-
-
-
-.
+For example, let's say you survey `100` people. `70` people give a promoter score and `20` people give a detractor score. Your NPS would be `70% - 20% = 50%`.
 
 ### What is a good NPS score for SaaS?
 
-// Superhuman 
+Anything above 0 is good, above 20 is great, and above 50 is amazing. According to [Satmetrix](https://www.satmetrix.com/wp-content/uploads/2023/07/NICE-Net-Promoter-Benchmarks-2023.pdf), the average NPS score for software and apps is 27.
 
-## 9 ways improve retention and reduce churn 🚀 NPS score / ## Follow up questions to 
-### How to improve NPS score
+Below is table with a benchmark of NPS scores from well-known SaaS products.
 
-Questions from Superhuman - Ask a multiple question survye. Get insights 
-find insihgts. Make sure you segment into personas (so you dont over index on users who arent your key personas)
+| Product | NPS score |
+|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| [Snowflake](https://www.snowflake.com/blog/customer-experience-report-2022/) | 72 |
+| [Square](https://d1g145x70srn7h.cloudfront.net/documents/investor-relations/presentations/05-11-2018-overview.pdf) | 70 |
+| [Zoom](https://blog.zoom.us/zooms-nps-dominates-video-conferencing/) | 69 | 
+| [DocuSign](https://www.docusign.com/why-docusign) | 66 |
+| [Zapier](https://www.comparably.com/brands/zapier) | 64 |
+| [Slack](https://www.comparably.com/brands/slack) | 53 |
+| [Mailchimp](https://www.comparably.com/brands/mailchimp) | 47 |
+| [NetFlix](https://www.comparably.com/brands/netflix) | 46 |
+| [Twilio](https://www.comparably.com/brands/twilio) | 34 |
+| [Dropbox](https://www.comparably.com/brands/dropbox) | 27 | 
 
+### Drawbacks of NPS
 
+NPS can be tricky because it's often contextless. It gives you an indication of your users' sentiment toward your product, but not much else.
 
-For research, I read several dozen data analyses and finger-in-the-air takes on what "good churn" looks like. Suffice it to say there are contrasting views on the topic.
+To counteract this, it's best to ask follow up questions in your NPS survey:
 
-I've collated the better sources [in the appendix](#more-on-churn-rate-benchmarks). What follows is my own, not-quite-scientific meta-analysis:
+- Which features do you find most useful?
+- What are you finding difficult to do?
+- Is there a feature or aspect of the product that particularly disappoints you?
+- What would it take to improve your score to a 9 or 10?
+- Would you be open to a follow-up call to discuss your feedback in more detail?
 
-- **B2C SaaS:** Subscription services like Netflix or Tidal typically have higher churn than those targeting businesses, so a 3 to 5% monthly churn rate is pretty good. Anything less than 3% is very good, though B2C services are more price sensitive – churn trends much lower among services that charge less than $10 per month, for example. A monthly churn rate of 5% is equivalent to annual churn of 46% – i.e. a company with 1,000 customers would lose 460 over 12 months.
+### When to use NPS surveys
 
-- **Mid-Market B2B SaaS:** Anything up to 5% monthly churn is OK for a B2B SaaS that **doesn't** sell to big enterprises, but something around 3% is preferable if your average revenue per customer (ARPC) is above $250 per month. Anything below 2% is excellent. A monthly churn rate of 3% is equivalent to 30.6% annually – i.e. a company with 1,000 customers would lose 306 over 12 months.
+Since NPS survey questions are broad, they are particularly useful for gauging long-term user satisfaction, rather than immediate or short-term feedback. 
 
-- **Early-stage B2B SaaS:** A monthly churn rate above 5% is to be expected for any early-stage company B2B SaaS, so don't worry too much if you're growing fast, and you're above that benchmark. Just monitor your trend and dig deeper if you don't see it decline as you mature. A monthly churn of 5.65% is equivalent to 50.24% annually – i.e. a company with 1,000 companies would lose 502 over 12 months, more than half.
+It's best to wait for users to have a chance to properly experience your product, and so NPS surveys are best for existing users and not new ones.
 
-- **Enterprise B2B SaaS:** Products selling to large enterprises (think more than 1,000 employees) have lower churn, mainly because large companies change slowly and are billed annually. A monthly churn rate up to 2% is good. Anything less than 1% is excellent. A monthly churn rate of 1% is equivalent to 11.3% annually – i.e. a company with 1,000 customers will lose 114 over 12 months.
-
-Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
-
+With this in mind, it's a good idea to run NPS surveys to a group of users every month or quarter to get an understanding of how their experience is changing over time. This enables you to identify trends in how your product changes are affecting your user experience.
 
 
 ## CSAT explained
