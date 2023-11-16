@@ -88,6 +88,14 @@ Following up is key to taking action. Without it, NPS is just a research tool an
 
 ### Why should you care about your NPS? / Why is it important / When should you use a NPS survey?
 
+When should you measure NPS?
+
+NPS should be measured at the end of a buyer’s journey. It may be useful to choose neutral touchpoints, so that customers don’t link their answer to their most recent interaction. For example:
+After making any big changes, like a shift in the services or products you offer, or a merger with another business.
+To measure brand perception after a PR crisis (and to see if that image improves as a result of your actions).
+Finally, make sure to send NPS surveys regularly (for example, the same month every year) so you can keep track of the results and analyze brand happiness and loyalty over time.
+
+
 
 NPS can be used as a predictor of business growth. When your company’s NPS is high (or, at least, higher than the industry average), you know that you have a healthy relationship with customers who are likely to act as evangelists for the brand, fuel word of mouth, and generate a positive growth cycle.
 
@@ -174,6 +182,8 @@ https://equals.com/learn/metrics/customer-satisfaction-score/
 
 Retention and churn: High customer satisfaction indicates that clients are likely to continue using your service. Conversely, low CSAT scores often correlate with high churn rates. Keeping existing customers is far more cost-effective than acquiring new ones.
 
+CSAT is better for end of specific interaction with a feature. NPS is for longer term, overall interaction with your product.
+
 Customer loyalty: Satisfied clients are more likely to recommend your service to others, which can lead to increased word-of-mouth marketing and organic growth.
 
 Feedback loop: Regularly monitoring CSAT scores and customer feedback can help identify areas needing improvement, allowing you to address issues in a timely manner and maintain a high-quality product.
@@ -182,6 +192,7 @@ Competitive advantage: Achieving high CSAT scores positions your company as a le
 
 
 This difference is made clear with the built-in connotation of the words “satisfaction” and “recommendation.” **Satisfaction tends to be a more short-lived sentiment, while recommendation tends to be harder won and long term**. 
+
 In short, just because someone is satisfied, doesn’t mean they’d recommend you to a friend.
 
 
@@ -198,11 +209,25 @@ Specific feature usage
 Before a renewal
 You can also use it regularly to assess overall customer health and identify pain points.
 
+When should you measure CSAT?
 
+CSAT surveys should be measured right after meaningful touchpoints or milestones. For example:
+
+After closing a support ticket ‒ to evaluate the performance of your support reps and the quality of your customer service.
+
+After finishing a trial period ‒ to see if customers like your product and if they found it useful.
+
+After making a purchase ‒ to detect any potential issues or bottlenecks.
 
 ## CES explained
 
 "Is "product" easy to use?"
+
+CES stands for Customer Effort Score. A good CES definition outlines it as a metric that’s used to measure customer satisfaction levels by focusing on the efforts customers make to interact with your business’ services and products.
+
+The idea is for the survey to help you find out if customers have a hard time performing certain actions when interacting with your brand, and take the necessary actions according to the survey data to streamline processes.
+
+
 
 The customer effort score (CES) is a metric that measures how easy it is for customers to interact and engage with your products or services.
 
