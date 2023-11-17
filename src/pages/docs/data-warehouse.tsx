@@ -12,6 +12,8 @@ import HubSpotForm from 'components/HubSpotForm'
 import { Close2 } from 'components/Icons'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
+import { useLayoutData } from 'components/Layout/hooks'
+import QuickLinks from 'components/QuickLinks'
 
 const AccessForm = () => {
     return (
@@ -97,19 +99,10 @@ export const Intro = ({ image = true }) => {
 }
 
 export const Content = ({ quickLinks = false }) => {
+    const { compact } = useLayoutData()
     return (
         <>
-            {quickLinks && (
-                <section>
-                    <h3 className="mt-0 text-xl">Quick links</h3>
-                    <List
-                        className="grid grid-cols-3 gap-2 mb-6"
-                        items={docsMenu.children[3].children
-                            .filter(({ url }) => url)
-                            .map(({ url, name, icon, color }) => ({ label: name, url, icon, iconColor: color }))}
-                    />
-                </section>
-            )}
+            {(quickLinks || compact) && <QuickLinks items={docsMenu.children[7].children} />}
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>

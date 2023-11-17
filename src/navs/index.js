@@ -976,7 +976,7 @@ export const docsMenu = {
             name: 'Product OS',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs/product-os',
+            url: '/docs',
             children: [
                 {
                     name: 'Docs',
