@@ -6,6 +6,7 @@ import Icon from './Icon'
 import Slider from './Slider'
 import { SignupCTA } from 'components/SignupCTA'
 import Accordion from './Accordion'
+import { motion } from 'framer-motion'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -40,15 +41,40 @@ const Feature = ({ title, icon, url }) => {
     )
 }
 
+const heroTitle = 'How engineers build better products'
+
 export default function Hero() {
     return (
         <section className="flex flex-col justify-center items-center">
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative md:!mb-8')}>
-                    <h1 className={heading()}>
-                        How engineers{' '}
-                        <span className="text-red dark:text-yellow inline-block">build better products</span>
-                    </h1>
+                    <motion.h1
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ staggerChildren: 0.1 }}
+                        className={heading()}
+                    >
+                        {heroTitle.split(' ').map((word, index) => (
+                            <motion.span
+                                variants={{
+                                    hidden: {
+                                        opacity: 0,
+                                        translateY: '50%',
+                                    },
+                                    visible: {
+                                        opacity: 1,
+                                        translateY: 0,
+                                    },
+                                }}
+                                key={word}
+                                className={`${
+                                    index > 1 ? 'text-red dark:text-yellow' : ''
+                                } ml-4 first:ml-0 inline-block`}
+                            >
+                                {word}
+                            </motion.span>
+                        ))}
+                    </motion.h1>
                     <h2 className={heading('subtitle', 'primary', 'my-6')}>
                         The single platform to analyze, test, observe, and deploy new features
                     </h2>
