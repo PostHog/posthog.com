@@ -12,29 +12,37 @@ tags:
   - Surveys
 ---
 
-Here's what you need to know about NPS, CSAT and CES:
+Here's the short version of what you need to know about NPS, CSAT, and CES:
 
-// TODO write TLDR
+- **NPS** is for measuring long-term user sentiment about your product.
+- **CSAT** tells you how users feel about your product _right now_.
+- **CES** is for understanding if your product is difficult to use.
+
+And now for the longer version…
+
+In this post, we'll go into the specifics of each [survey](/surveys) and how to use them in your SaaS app.
 
 ## What is NPS?
 
-Net promoter score (NPS) measures user loyalty by asking them how they are to recommend you to a friend or coworker. Users submit their response on a scale from 0 (not likely at all) to 10 (extremely likely).
+Net promoter score (NPS) measures user loyalty by asking them how likely they are to recommend you to a friend or coworker. 
+
+Users submit their responses on a scale from 0 (not likely at all) to 10 (extremely likely).
 
 ![NPS survey](../images/blog/nps-csat-ces/nps-survey.png)
 
-NPS is great as it give you insights to who your loyal customers are, and which of your customers are at risk of churning.
+NPS is great as it gives you insight into who your loyal customers are and which are at risk of churning.
 
 ### How to calculate NPS score
 
-Responses are grouped into 3 categories:
+NPS survey responses are grouped into three categories:
 
 - **Promoters** – people who respond with 9 or 10. They're extremely happy with your product.
-- **Passives** – people who respond with 7 or 8. They aren’t unhappy, but they’re not overly excited either.
-- **Detractors** – people who respond with 6 or below. These are people who have had a bad experience and are likely to complain to others.
+- **Passives** – people who respond with 7 or 8. They aren't unhappy, but they're not overly excited either.
+- **Detractors** – people who respond with 6 or below. These people have had a bad experience and are likely to complain to others.
 
 ![NPS scale](../images/blog/nps-csat-ces/nps-score.png)
 
-You NPS score is the `% of promoters - % of detractors`. The scores range between -100 (100% negative) and +100 (100% positive).
+Your NPS score is the `% of promoters - % of detractors`. The scores range between -100 (100% negative) and +100 (100% positive).
 
 For example, let's say you survey `100` people. `70` people give a promoter score and `20` people give a detractor score. Your NPS would be `70% - 20% = 50%`.
 
@@ -42,7 +50,7 @@ For example, let's say you survey `100` people. `70` people give a promoter scor
 
 Anything above 0 is good, above 20 is great, and above 50 is amazing. According to [Satmetrix](https://www.satmetrix.com/wp-content/uploads/2023/07/NICE-Net-Promoter-Benchmarks-2023.pdf), the average NPS score for SaaS apps is 27.
 
-Below is table with a benchmark of NPS scores from well-known SaaS products.
+Below is a table with a benchmark of NPS scores from well-known SaaS products.
 
 | Product | NPS score |
 |--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -59,9 +67,9 @@ Below is table with a benchmark of NPS scores from well-known SaaS products.
 
 ### Drawbacks of NPS
 
-NPS can be tricky because it's often contextless. It gives you an indication of your users' sentiment toward your product, but not much else.
+NPS can be tricky because it's often contextless. It gives you an indication of your users' sentiment toward your product but not much else.
 
-To counteract this, it's best to ask follow up questions in your NPS survey:
+To counteract this, it's best to ask follow-up questions in your NPS survey, like:
 
 - Which features do you find most useful?
 - What are you finding difficult to do?
@@ -71,142 +79,124 @@ To counteract this, it's best to ask follow up questions in your NPS survey:
 
 ### When to use NPS surveys
 
-Since NPS survey questions are broad, they are particularly useful for gauging long-term user satisfaction, rather than immediate or short-term feedback. 
+NPS is particularly handy for understanding long-term user satisfaction – as opposed to immediate or short-term feedback.
 
-It's best to wait for users to have a chance to properly experience your product, and so NPS surveys are best for existing users and not new ones.
+With this in mind, it's best to wait for users to properly experience your app. Then, you should run NPS surveys every month or quarter to understand how their experience changes over time. 
 
-With this in mind, it's a good idea to run NPS surveys to a group of users every month or quarter to get an understanding of how their experience is changing over time. This enables you to identify trends in how your product changes are affecting your user experience.
+This enables you to identify trends in how your product changes are affecting your user experience.
 
 ## What is CSAT?
 
-Customer satisfaction (CSAT) score measure how satisfied your users are with a specific feature or product. The scale typically ranges from 1-5 or 1-10 on an "extremely dissatisfied – extremely satisfied" scale.
+Customer satisfaction (CSAT) score measures how satisfied your users are with a specific feature or product.
+
+Responses typically range from 1-5 or 1-10 on an "extremely dissatisfied – extremely satisfied" scale.
 
 ![CSAT survey](../images/blog/nps-csat-ces/csat-survey.png)
 
-CSAT is great because it can be targeted to specific parts of your app, helping you to find out where exactly customers feel satisfied and where they don’t. This makes it easy to find out where your UX can be improved.
+CSAT is great because it can be targeted to specific parts of your app, helping you identify where exactly users feel satisfied and where they don't. This makes it easy to find out where you can improve your UX.
 
 ### How to calculate CSAT score
 
-Responses are grouped into 3 categories:
+Responses are grouped into three categories:
 
 - **Positive responses** – people who respond with 4 or 5 if your scale is from 1-5 (or 8, 9, or 10 if your scale is from 1-10).
 - **Everyone else**
 
 ![CSAT scale](../images/blog/nps-csat-ces/csat-score.png)
 
-The idea behind using the highest scores is it gives the most accurate predictor for customer retention, as customers who are likely to stick around will give higher scores.
+Your CSAT score is the `Total number of positive responses / Total responses = % of satisfied customers`.
 
-You CSAT score is the `Total number of positive responses / Total responses = % of satisfied customers`.
+For example, let's say you survey `100` people. `70` people give a positive score, your CSAT would be '70 / 100 = 70%`.
 
-For example, let's say you survey `100` people. `70` people give a postive score, your CSAT would be `70 / 100 = 70%`.
-
-Naturally, higher CSAT indicates that users are likely to continue using your product. Conversely, low CSAT scores correlate with high churn rates.
+Naturally, a higher CSAT indicates that users are likely to continue using your product. Conversely, low CSAT scores correlate with high churn rates.
 
 ### What is a good CSAT score for SaaS?
 
-A good score is typically 75-85%. Anything higher is amazing, and anything lower is poor. According to [fullview](https://www.fullview.io/blog/csat-benchmarks-by-industry#toc-csat-benchmarks-for-software-companies), the average CSAT score for SaaS apps is 78.
+A good score is typically 75-85%. Anything higher is amazing, and anything lower is poor. 
+
+According to [fullview](https://www.fullview.io/blog/csat-benchmarks-by-industry#toc-csat-benchmarks-for-software-companies), the average CSAT score for SaaS apps is 78.
 
 ### Drawbacks of CSAT
 
-Since CSAT is specific, customers only answer about what's being asked – and nothing more. This means if you're only asking about one feature, you might miss broader issues with your product.
+Since CSAT survey questions are specific to a feature, customers only answer about what's being asked and nothing more. This means you may miss broader issues with your product.
 
-It's also important to note that a high CSAT score doesn't necessarily translate to customer loyalty or long-term engagement. Customers might be satisfied with certain aspects of your product but could still switch to a competitor for reasons not covered in the CSAT survey, like pricing or other features. 
+It's also important to note that a high CSAT score doesn't necessarily translate to user loyalty. Users might be satisfied with certain aspects of your product but could still switch to a competitor for reasons not covered in the survey – like pricing or other features. 
 
-Thus, while CSAT is a useful tool for understanding immediate user sentiment, it should be complemented with other feedback methods to get a full view of your long term customer loyalty. (Maybe different word for loyatly here)
+Thus, while CSAT is useful for understanding short-term sentiment, it should be paired with other feedback methods to understand the long-term.
 
 ### When to use CSAT surveys
 
 CSAT surveys are most effective when you need real-time feedback after specific interactions with your product.
 
-With this in mind, try to use a CSAT surveys after key interactions in your user journey such as:
+With this in mind, try to use CSAT surveys after key interactions in your user journey. For example:
 
 - **After onboarding –** to understand if your onboarding was effective and engaging.
 - **During [beta testing of a new feature](https://posthog.com/tutorials/beta-feedback) –**  to see if it meets your users' expectations.
-- **After major app updates –** to understand understand whether your UX has improved or if there are new issues to address.
-- **Before subscription renewal –** to give you a chance to address any issues beforehand.
+- **After major app updates –** to understand whether your UX has improved or if there are new issues to address.
+- **Before subscription renewal –** to allow you to address any issues beforehand.
 - **After customer support interaction –** to see if customers feel their issue has been resolved.
 
-## CES explained
+## What is CES?
 
-"Is "product" easy to use?"
+Customer effort score (CES) measures how easy it is to use your product or feature. 
 
-CES stands for Customer Effort Score. A good CES definition outlines it as a metric that’s used to measure customer satisfaction levels by focusing on the efforts customers make to interact with your business’ services and products.
+Users are asked "How easy was it to use `<name of feature>`" and a response scale ranging from 1 (very difficult) to 5 (very easy).
 
-The idea is for the survey to help you find out if customers have a hard time performing certain actions when interacting with your brand, and take the necessary actions according to the survey data to streamline processes.
+![CES survey](../images/blog/nps-csat-ces/ces-survey.png)
 
+CES is great for debugging UX problems in your app and pinpointing problem areas.
 
+### How to calculate CES score
 
-The customer effort score (CES) is a metric that measures how easy it is for customers to interact and engage with your products or services.
+To find your CES score, you calculate the average score of all your responses. That is: `sum of all responses / number of responses = CES score`
 
-Customer Effort Score (CES) is a metric that measures the effort required by a customer to interact with your business.
-Measuring your CES allows you to identify where the problem lies, leading to less friction and better customer experience.
+![CES score](../images/blog/nps-csat-ces/ces-score.png)
 
+For example, let's say you survey `100` people. If the sum of all their responses is `450`, your CES score is `4.5`.
 
-What could we do to make it easier to use
-What makes it difficult to use? (better to ask this than easier to use, since users are bad at telling you what they want)
+### What is a good CES score for SaaS?
 
-Measuring Customer Effort Score leads to less friction, as you can now identify where your users need help.
+While there are no published benchmarks for CES scores, you should aim for a score of 4 or higher. Any lower is a sign that users are struggling to use your app and this will lead to churn.
 
-Are they facing issues engaging with a feature? How much effort does it take for them to contact support?
+### Drawbacks of CES
 
-## When should you use a CES survey?
-You can get the best output by using CES surveys after your customer:
+CES surveys focus on a single feature interaction and are very narrow in scope. So, while they help you debug UX issues, they don't give you insights into overall satisfaction with your feature.
 
-Engages with a feature for the first time
-Engages with customer support or success
-Reaches a milestone in the customer journey
-Has used the product for a long time
-Here is how Nicereply uses the CES survey.
+Additionally, CES only tells you if a feature is difficult to use, but it doesn't tell you _why_. To counteract this, you need to ask follow-up questions, such as:
 
-## How to measure customer effort score?
-CES is measured using a survey that asks a specific question related to the user experience after engaging with parts of the product or your team. The survey either uses a numerical scale from 1 to 5 or 1 to 7 or emoticons with angry to happy faces to make it more engaging and easy for the user.
+- What makes `<feature name>` difficult to use?
+- What could we do to make it easier to use?
 
-The most commonly used channels to send a CES survey are in-app and email.
+### When to use CES surveys
 
-### NPS vs CSAT vs CES: Which to use?
+To best debug UX problems, you should use CES surveys after key interactions such as:
 
-This difference is made clear with the built-in connotation of the words “satisfaction” and “recommendation.” **Satisfaction tends to be a more short-lived sentiment, while recommendation tends to be harder won and long term**. 
-In short, just because someone is satisfied, doesn’t mean they’d recommend you to a friend.
+- **After using a feature for the time** – to understand how intuitive it is.
+- **After a major UI update** – to confirm users can still navigate through your app effectively.
+- **When a user is migrating from a competitor's product to yours** – to highlight areas for improvement in onboarding.
 
+## NPS vs CSAT vs CES: Which one is best?
 
-xyz is better because. Then prioritize abc, then def
+In an ideal world, you could use all three survey types. However, survey fatigue means that it's not possible to send surveys to your users constantly, so you need to prioritize which ones to use.
 
-NPS is more broad. CSAt is more narrow and specific 
-(see table in this blog - https://www.qualtrics.com/uk/experience-management/customer/csat-vs-nps/ )
+Our recommendation is to use CSAT before you have [product-market fit](https://posthog.com/founders/measure-product-market-fit), and NPS after you do:
 
-WHich is short term. Which is long term e.g. NPS is more long term. CES is more short term. 
+Before product-market fit, your app is constantly changing, so it makes sense to focus on the short-term only and thus use CSAT. Conversely, once you've achieved product-market fit, you can focus on the long-term and use NPS.
 
-Good article: https://userpilot.com/blog/customer-effort-score/
+Lastly, we prefer to avoid using CES as its scope is too narrow. There are other ways to understand if a feature is easy to use, like interviews or user testing. CSAT or NPS surveys generate far better insights, so we prefer to avoid fatiguing users with CES surveys.
 
-When to use a CES vs. CSAT vs. NPS survey
-Customer Effort Score (CES), Customer Satisfaction Score (CSAT), and Net Promoter Score (NPS) are the most known customer satisfaction surveys. Each of these comes with its unique benefits, and you should use all to collect different types of insights.
+Here's a table summarizing the differences between the three:
 
-While the CES survey is a very useful tool, it can be too narrowly focused in a single interaction, causing you to ignore the big picture. But if you use it along with NPS and CSAT, you’ll get a better idea about the overall situation of customer experience for your product.
-
-CES surveys
-CES surveys can be used to assess the perceived effort in completing a specific task. It’s best for collecting more granular insights.
-
-CES surveys are best sent:
-
-After engaging with a feature for the first time
-After engaging with customer support or success
-After reaching a milestone in the customer journey
-CSAT surveys
-CSAT surveys assess the short-term satisfaction with either your product or the service offered. It can give you an overview of how happy the customer is, while CES tells you what’s making them happy or not.
-
-CSAT surveys are best sent:
-
-After reaching a milestone in the journey (for example, reaching the activation point)
-After engaging with customer support (a most common practice in SaaS).
-
-## How to run an NPS in PostHog
-
-## How to run an NPS in CSAT in PostHog
-
-## How to run a CES survey in PostHog
-
-
-## Takeaways 👍
+|           | NPS                                   | CSAT                                       | CES                                           |
+|-----------------|---------------------------------------|--------------------------------------------|-----------------------------------------------|
+| **Timeframe**   | Long-term                             | Short-term                                 | Short-term                                    |
+| **Focus**       | Broad – overall user sentiment        | Granular – specific features  | Very granular – ease of using a specific feature |
+| **When to ask**    | At regular intervals (e.g., monthly, quarterly) to existing users           | Immediately after using a feature                | Immediately after using a feature      |
+| **Product-market fit**         | After PMF               | Before PMF                          | Useful at both stages                 |
 
 ## Further reading 📖
+
+- [How to create a great user persona (with examples)](/product-engineers/how-to-create-user-personas)
+- [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
+- [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
 
