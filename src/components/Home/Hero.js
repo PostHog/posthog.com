@@ -42,6 +42,14 @@ const Feature = ({ title, icon, url }) => {
 }
 
 const heroTitle = 'How engineers build better products'
+const ctaVariants = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+    },
+}
 
 export default function Hero() {
     return (
@@ -51,18 +59,21 @@ export default function Hero() {
                     <motion.h1
                         initial="hidden"
                         animate="visible"
-                        transition={{ staggerChildren: 0.1 }}
-                        className={heading()}
+                        transition={{ staggerChildren: 0.1, duration: 1 }}
+                        className={`${heading()} overflow-hidden md:!leading-tight md:-mb-3`}
                     >
                         {heroTitle.split(' ').map((word, index) => (
                             <motion.span
                                 variants={{
                                     hidden: {
-                                        opacity: 0,
-                                        translateY: '50%',
+                                        translateY: '100%',
                                     },
                                     visible: {
-                                        opacity: 1,
+                                        transition: {
+                                            type: 'tween',
+                                            duration: 0.6,
+                                            ease: 'easeOut',
+                                        },
                                         translateY: 0,
                                     },
                                 }}
@@ -75,22 +86,43 @@ export default function Hero() {
                             </motion.span>
                         ))}
                     </motion.h1>
-                    <h2 className={heading('subtitle', 'primary', 'my-6')}>
+                    <motion.h2
+                        transition={{ delay: 0.6, duration: 1.2 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className={heading('subtitle', 'primary', 'my-6')}
+                    >
                         The single platform to analyze, test, observe, and deploy new features
-                    </h2>
+                    </motion.h2>
 
-                    <div className="flex justify-center items-center gap-2">
-                        <SignupCTA className="" />
-
-                        <TrackedCTA
-                            event={{ name: `clicked Get a demo` }}
-                            href="/book-a-demo"
-                            type="secondary"
-                            size="lg"
-                        >
-                            Get a demo
-                        </TrackedCTA>
-                    </div>
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: {
+                                opacity: 0,
+                            },
+                            visible: {
+                                opacity: 1,
+                            },
+                        }}
+                        transition={{ delay: 1.2, staggerChildren: 1.5 }}
+                        className="flex justify-center items-center gap-2"
+                    >
+                        <motion.div variants={ctaVariants} transition={{ duration: 4 }}>
+                            <TrackedCTA
+                                event={{ name: `clicked Get a demo` }}
+                                href="/book-a-demo"
+                                type="secondary"
+                                size="lg"
+                            >
+                                Get a demo
+                            </TrackedCTA>
+                        </motion.div>
+                        <motion.div variants={ctaVariants} transition={{ duration: 2 }}>
+                            <SignupCTA className="" />
+                        </motion.div>
+                    </motion.div>
                 </div>
                 <Slider />
                 <Accordion />
