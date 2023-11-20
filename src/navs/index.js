@@ -1129,11 +1129,23 @@ export const docsMenu = {
                             url: '/docs/frameworks',
                         },
                         {
+                            name: 'Angular',
+                            url: '/tutorials/angular-analytics',
+                        },
+                        {
+                            name: 'Django',
+                            url: '/tutorials/django-analytics',
+                        },
+                        {
                             name: 'Docusaurus v2',
                             url: '/docs/libraries/docusaurus',
                             badge: {
                                 title: '3rd party',
                             },
+                        },
+                        {
+                            name: 'Flask',
+                            url: '/tutorials/flask-analytics',
                         },
                         {
                             name: 'Framer',
@@ -1159,6 +1171,10 @@ export const docsMenu = {
                             url: '/docs/libraries/nuxt-js',
                         },
                         {
+                            name: 'Remix',
+                            url: '/tutorials/remix-analytics',
+                        },
+                        {
                             name: 'Retool',
                             url: '/docs/libraries/retool',
                         },
@@ -1181,6 +1197,10 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
+                        },
+                        {
+                            name: 'Svelte',
+                            url: '/tutorials/svelte-analytics',
                         },
                         {
                             name: 'Vue.js',
