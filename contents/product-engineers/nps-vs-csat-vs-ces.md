@@ -14,23 +14,20 @@ tags:
 
 Here's the short version of what you need to know about NPS, CSAT, and CES:
 
-- **NPS** is for measuring long-term user sentiment about your product.
+- **NPS** measures long-term user sentiment about your product.
 - **CSAT** tells you how users feel about your product _right now_.
-- **CES** is for understanding if your product is difficult to use.
+- **CES** shows how difficult your product is to use.
 
-And now for the longer version…
 
 In this post, we'll go into the specifics of each [survey](/surveys) and how to use them in your SaaS app.
 
 ## What is NPS?
 
-Net promoter score (NPS) measures user loyalty by asking them how likely they are to recommend you to a friend or coworker. 
-
-Users submit their responses on a scale from 0 (not likely at all) to 10 (extremely likely).
+Net promoter score (NPS) measures user loyalty by asking how likely users are to recommend your product to a friend or coworker. Responses are on a scale from 0 (not likely at all) to 10 (extremely likely).
 
 ![NPS survey](../images/blog/nps-csat-ces/nps-survey.png)
 
-NPS is great as it gives you insight into who your loyal customers are and which are at risk of churning.
+NPS gives you insight into who your loyal customers are and which are at risk of churning.
 
 ### How to calculate NPS score
 
@@ -44,11 +41,11 @@ NPS survey responses are grouped into three categories:
 
 Your NPS score is the `% of promoters - % of detractors`. The scores range between -100 (100% negative) and +100 (100% positive).
 
-For example, let's say you survey `100` people. `70` people give a promoter score and `20` people give a detractor score. Your NPS would be `70% - 20% = 50%`.
+For example, let's say you survey `100` people. `50` are promoters, `30` are passives, and `20` are detractors. Your NPS would be `50% - 20% = 30`.
 
 ### What is a good NPS score for SaaS?
 
-Anything above 0 is good, above 20 is great, and above 50 is amazing. According to [Satmetrix](https://www.satmetrix.com/wp-content/uploads/2023/07/NICE-Net-Promoter-Benchmarks-2023.pdf), the average NPS score for SaaS apps is 27.
+Anything above 0 is good, above 20 is great, and above 50 is amazing. According to [Satmetrix](https://www.satmetrix.com/wp-content/uploads/2023/07/NICE-Net-Promoter-Benchmarks-2023.pdf), the average NPS score for software and apps is 27.
 
 Below is a table with a benchmark of NPS scores from well-known SaaS products.
 
@@ -61,7 +58,7 @@ Below is a table with a benchmark of NPS scores from well-known SaaS products.
 | [Zapier](https://www.comparably.com/brands/zapier) | 64 |
 | [Slack](https://www.comparably.com/brands/slack) | 53 |
 | [Mailchimp](https://www.comparably.com/brands/mailchimp) | 47 |
-| [NetFlix](https://www.comparably.com/brands/netflix) | 46 |
+| [Netflix](https://www.comparably.com/brands/netflix) | 46 |
 | [Twilio](https://www.comparably.com/brands/twilio) | 34 |
 | [Dropbox](https://www.comparably.com/brands/dropbox) | 27 | 
 
@@ -93,11 +90,11 @@ Responses typically range from 1-5 or 1-10 on an "extremely dissatisfied – ext
 
 ![CSAT survey](../images/blog/nps-csat-ces/csat-survey.png)
 
-CSAT is great because it can be targeted to specific parts of your app, helping you identify where exactly users feel satisfied and where they don't. This makes it easy to find out where you can improve your UX.
+CSAT can target specific parts of your app, helping you identify where exactly users feel satisfied and where they don't. This makes it easy to find out where you can improve your UX.
 
 ### How to calculate CSAT score
 
-Responses are grouped into three categories:
+Responses are grouped into two categories:
 
 - **Positive responses** – people who respond with 4 or 5 if your scale is from 1-5 (or 8, 9, or 10 if your scale is from 1-10).
 - **Everyone else**
@@ -118,7 +115,7 @@ According to [fullview](https://www.fullview.io/blog/csat-benchmarks-by-industry
 
 ### Drawbacks of CSAT
 
-Since CSAT survey questions are specific to a feature, customers only answer about what's being asked and nothing more. This means you may miss broader issues with your product.
+Since CSAT survey questions are specific to a feature, you may miss broader issues with your product.
 
 It's also important to note that a high CSAT score doesn't necessarily translate to user loyalty. Users might be satisfied with certain aspects of your product but could still switch to a competitor for reasons not covered in the survey – like pricing or other features. 
 
@@ -131,7 +128,7 @@ CSAT surveys are most effective when you need real-time feedback after specific 
 With this in mind, try to use CSAT surveys after key interactions in your user journey. For example:
 
 - **After onboarding –** to understand if your onboarding was effective and engaging.
-- **During [beta testing of a new feature](https://posthog.com/tutorials/beta-feedback) –**  to see if it meets your users' expectations.
+- **During [beta testing of a new feature](/tutorials/beta-feedback) –**  to see if it meets your users' expectations.
 - **After major app updates –** to understand whether your UX has improved or if there are new issues to address.
 - **Before subscription renewal –** to allow you to address any issues beforehand.
 - **After customer support interaction –** to see if customers feel their issue has been resolved.
@@ -148,7 +145,7 @@ CES is great for debugging UX problems in your app and pinpointing problem areas
 
 ### How to calculate CES score
 
-To find your CES score, you calculate the average score of all your responses. That is: `sum of all responses / number of responses = CES score`
+To find your CES score, calculate the average score of all your responses. That is: `sum of all responses / number of responses = CES score`
 
 ![CES score](../images/blog/nps-csat-ces/ces-score.png)
 
@@ -179,7 +176,7 @@ To best debug UX problems, you should use CES surveys after key interactions suc
 
 In an ideal world, you could use all three survey types. However, survey fatigue means that it's not possible to send surveys to your users constantly, so you need to prioritize which ones to use.
 
-Our recommendation is to use CSAT before you have [product-market fit](https://posthog.com/founders/measure-product-market-fit), and NPS after you do:
+Our recommendation is to use CSAT before you have [product-market fit](/founders/measure-product-market-fit), and NPS after you do:
 
 Before product-market fit, your app is constantly changing, so it makes sense to focus on the short-term only and thus use CSAT. Conversely, once you've achieved product-market fit, you can focus on the long-term and use NPS.
 
