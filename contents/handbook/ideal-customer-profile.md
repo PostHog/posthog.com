@@ -1,25 +1,25 @@
 ---
-title: Ideal customer persona
+title: Who we are building for
 sidebar: Handbook
 showTitle: true
 ---
 
-## Summary
+AKA our 'ideal customer profile' or ICP.
 
 We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most loved products** at **high-growth startups**. We focus specifically on the  **product-engineers** (full-stack engineers skewed towards the frontend) but it should be usable by everyone in the product team.
 
-Example: PostHog anytime from their Series B to IPO
+> Example: PostHog anytime from their Series B to IPO
 
-Marketing and customer success should primarily focus on this ICP, but should also develop **high-*potential* customers** (customers that are likely to later become high-growth customers e.g. James and Tim during YC). We should be in maintenance mode for **hobbyists** (engineers building side-projects e.g. Ben White building Mealyo). We want to be the first tool that technical founders add to their product.
+Marketing and customer success should primarily focus on this ICP, but should also develop **high-*potential* customers** - customers that are likely to later become high-growth customers (e.g. James and Tim during YC). We should be in maintenance mode for **hobbyists**, such as engineers building side projects. We want to be the first tool that technical founders add to their product.
 
 Why? We believe that the best tech companies are increasingly engineering-led. By building for the best product-engineers we'll create a positive feedback loop of being the best product for them. This is clearly differentiated from others in the space which are focused on less technical PMs. As more of the leading tech companies adopt being engineering-led and having highly technical PMs PostHog will become the clear product leader.
 
-## Proposed ICP
+## Our current ICP
 
 |  | High-growth startup |
 | --- | --- |
 | **Description** | Startups that have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. |
-| **Suggested Criteria** | - 15-500 employees<br />- $100k+/month in revenue OR very large number of consumer users<br />- Raised from leading investors<br />- Not yet IPO’ed |
+| **Criteria** | - 15-500 employees<br />- $100k+/month in revenue OR very large number of consumer users<br />- Raised from leading investors<br />- Not yet IPO’ed |
 | **Why they matter?** | - Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
 | **Job role** | We build for the power users of the **The Product team**<br /><br />**Primary focus**<br/><br/>- Product-engineers (full-stack engineer skewing front-end)<br />- PMs (those that are highly technical)<br /><br />**Should be usable by**:<br />- Designers<br />- Less technical PMs<br />- Marketers<br />|
 | **Examples** | PostHog anytime from their Series B to IPO, Linear, Ramp, Vercel, Retool |
@@ -28,27 +28,26 @@ Each team will focus more or less on different members of the product team. This
 
 ## FAQs
 
-### Why double-down on product engineers vs making it more accessible and easy to use?
+### Why double-down on product engineers vs. making it more accessible and easy to use?
 
-**Situation**:
+**Background**
 
-- We have good product market fit with engineers and ok with less technical product managers.
+- We have good product-market fit with engineers and ok fit with less technical product managers.
 - Most of the existing product analytics tools are built for product managers who are less technical, not engineers.
 - However, the best tech company are increasingly engineering led, with all members of the product team being technical. We believe more companies will work like this in future.
 
-**Guiding policy**:
+**Principles**
 
 - We should double-down on the best product-engineers at the best product companies.
 - Going incredibly far with a more specific user type instead of placating every body, means that we'll get over the threshold for "I need to tell my engineer friends about this". We only get word-of-mouth growth by doing a remarkable job, not an average one for lots of people.
 - We develop a strong feedback loop: by building for the best product engineers we'll attract more of the best product engineers and the best companies. This improves PostHog and drives more word of mouth growth from high authority individuals/companies.
 - As more of the best companies become engineering-led and grow faster as a result PostHog gains significant market share.
 
-**Counter argument**:
+**Counterargument**
 
 - We have good PMF with engineers and not yet with product people.
 - Instead we should make the tool much simpler and more accessible to product managers so we can better work for them and the companies with product manager led cultures. 
-- This could potentially help us grow faster in the short-term.
-- However, I find this less convincing for long-term growth and less clearly differentiates PostHog.
+- This could potentially help us grow faster in the short-term. However, this is less convincing for long-term growth and less clearly differentiates PostHog from existing tools.
 
 ### Who specifically should we keep in mind when building?
 
