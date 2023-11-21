@@ -7,9 +7,9 @@ featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 tags:
   - Product analytics
-  - Product metrics
   - Product engineers
-  - Surveys
+  - User research
+  - Growth engineering
 ---
 
 Here's the short version of what you need to know about NPS, CSAT, and CES:
@@ -23,9 +23,9 @@ In this post, we'll go into the specifics of each [survey](/surveys) and how to 
 
 ## What is NPS?
 
-Net promoter score (NPS) measures user loyalty by asking how likely users are to recommend your product to a friend or coworker. Responses are on a scale from 0 (not likely at all) to 10 (extremely likely).
-
 ![NPS survey](../images/blog/nps-csat-ces/nps-survey.png)
+
+Net Promoter Score (NPS) measures user loyalty by asking how likely users are to recommend your product to a friend or coworker. Responses are on a scale from 0 (not likely at all) to 10 (extremely likely).
 
 NPS gives you insight into who your loyal customers are and which are at risk of churning.
 
@@ -84,11 +84,11 @@ This enables you to identify trends in how your product changes are affecting yo
 
 ## What is CSAT?
 
+![CSAT survey](../images/blog/nps-csat-ces/csat-survey.png)
+
 Customer satisfaction (CSAT) score measures how satisfied your users are with a specific feature or product.
 
 Responses typically range from 1-5 or 1-10 on an "extremely dissatisfied – extremely satisfied" scale.
-
-![CSAT survey](../images/blog/nps-csat-ces/csat-survey.png)
 
 CSAT can target specific parts of your app, helping you identify where exactly users feel satisfied and where they don't. This makes it easy to find out where you can improve your UX.
 
@@ -125,7 +125,7 @@ Thus, while CSAT is useful for understanding short-term sentiment, it should be 
 
 CSAT surveys are most effective when you need real-time feedback after specific interactions with your product.
 
-With this in mind, try to use CSAT surveys after key interactions in your user journey. For example:
+With this in mind, try to use CSAT surveys after key interactions in your user journey, such as:
 
 - **After onboarding –** to understand if your onboarding was effective and engaging.
 - **During [beta testing of a new feature](/tutorials/beta-feedback) –**  to see if it meets your users' expectations.
@@ -135,11 +135,12 @@ With this in mind, try to use CSAT surveys after key interactions in your user j
 
 ## What is CES?
 
+![CES survey](../images/blog/nps-csat-ces/ces-survey.png)
+
+
 Customer effort score (CES) measures how easy it is to use your product or feature. 
 
 Users are asked "How easy was it to use `<name of feature>`" and a response scale ranging from 1 (very difficult) to 5 (very easy).
-
-![CES survey](../images/blog/nps-csat-ces/ces-survey.png)
 
 CES is great for debugging UX problems in your app and pinpointing problem areas.
 
@@ -166,7 +167,7 @@ Additionally, CES only tells you if a feature is difficult to use, but it doesn'
 
 ### When to use CES surveys
 
-To best debug UX problems, you should use CES surveys after key interactions such as:
+To best debug UX problems, you should use CES surveys after key interactions, such as:
 
 - **After using a feature for the time** – to understand how intuitive it is.
 - **After a major UI update** – to confirm users can still navigate through your app effectively.
