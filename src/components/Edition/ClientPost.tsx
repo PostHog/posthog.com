@@ -16,6 +16,40 @@ import { QuestionForm } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
 
+export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformImageUri }) => {
+    return (
+        <>
+            {imageURL && (
+                <div className="rounded bg-accent dark:bg-accent-dark leading-none max-h-96 text-center">
+                    <ZoomImage>
+                        {imageURL?.endsWith('.mp4') ? (
+                            <video className="max-w-full max-h-96 rounded-md" autoPlay src={imageURL} />
+                        ) : (
+                            <img className="max-w-full max-h-96 rounded-md" src={imageURL} />
+                        )}
+                    </ZoomImage>
+                </div>
+            )}
+            <div className={`flex flex-col`}>
+                <Title>{title}</Title>
+                <p className="!mb-0">
+                    <span className="opacity-70">{dayjs(date).format('MMM DD, YYYY')}</span>
+
+                    {belowTitle?.()}
+                </p>
+            </div>
+            <div className="my-2 article-content">
+                <ClientPostMarkdown transformImageUri={transformImageUri}>{body}</ClientPostMarkdown>
+            </div>
+            {cta?.label && cta?.url && (
+                <CallToAction size="md" type="outline" externalNoIcon to={cta.url}>
+                    {cta.label}
+                </CallToAction>
+            )}
+        </>
+    )
+}
+
 export default function ClientPost({
     id,
     title,
@@ -94,25 +128,12 @@ export default function ClientPost({
                         </Modal>
                         <SEO title={title + ' - PostHog'} />
                         <article>
-                            {imageURL && (
-                                <div className="rounded bg-accent dark:bg-accent-dark leading-none max-h-96 text-center">
-                                    <ZoomImage>
-                                        {imageURL?.endsWith('.mp4') ? (
-                                            <video className="max-w-full max-h-96 rounded-md" autoPlay src={imageURL} />
-                                        ) : (
-                                            <img className="max-w-full max-h-96 rounded-md" src={imageURL} />
-                                        )}
-                                    </ZoomImage>
-                                </div>
-                            )}
-                            <div className={`flex flex-col`}>
-                                <Title>{title}</Title>
-                                <p className="!mb-0">
-                                    <span className="opacity-70">
-                                        {dayjs(date || publishedAt).format('MMM DD, YYYY')}
-                                    </span>
-
-                                    {isModerator && (
+                            <Post
+                                imageURL={imageURL}
+                                title={title}
+                                date={date || publishedAt}
+                                belowTitle={() =>
+                                    isModerator ? (
                                         <div className="ml-3 text-sm inline-flex space-x-2 text-primary/50 dark:text-primary-dark/50">
                                             <button
                                                 onClick={() => setEditPostModalOpen(true)}
@@ -125,17 +146,11 @@ export default function ClientPost({
                                                 {confirmDelete ? 'Click again to confirm' : 'Delete post'}
                                             </button>
                                         </div>
-                                    )}
-                                </p>
-                            </div>
-                            <div className="my-2 article-content">
-                                <ClientPostMarkdown>{body}</ClientPostMarkdown>
-                            </div>
-                            {CTA?.label && CTA?.url && (
-                                <CallToAction size="md" type="outline" externalNoIcon to={CTA.url}>
-                                    {CTA.label}
-                                </CallToAction>
-                            )}
+                                    ) : null
+                                }
+                                body={body}
+                                cta={CTA}
+                            />
                             <Upvote className="mt-6" />
                             <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
                                 <QuestionForm
