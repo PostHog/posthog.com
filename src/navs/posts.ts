@@ -235,4 +235,10 @@ export const postsMenu: IMenu[] = [
         icon: 'IconSpotlight',
         color: 'blue',
     },
+    {
+        name: 'Newsletter',
+        icon: 'IconNewspaper',
+        color: 'green',
+        url: '/newsletter',
+    },
 ]
