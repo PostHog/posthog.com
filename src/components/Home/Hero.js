@@ -7,6 +7,7 @@ import Slider from './Slider'
 import { SignupCTA } from 'components/SignupCTA'
 import Accordion from './Accordion'
 import { motion } from 'framer-motion'
+import './hero.scss'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -56,36 +57,18 @@ export default function Hero() {
         <section className="flex flex-col justify-center items-center">
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative md:!mb-8')}>
-                    <motion.h1
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ staggerChildren: 0.1, duration: 1 }}
-                        className={`${heading()} overflow-hidden md:!leading-tight md:-mb-3`}
-                    >
+                    <h1 className={`${heading()} overflow-hidden home-hero-title`}>
                         {heroTitle.split(' ').map((word, index) => (
-                            <motion.span
-                                variants={{
-                                    hidden: {
-                                        translateY: '100%',
-                                    },
-                                    visible: {
-                                        transition: {
-                                            type: 'tween',
-                                            duration: 0.6,
-                                            ease: 'easeOut',
-                                        },
-                                        translateY: 0,
-                                    },
-                                }}
+                            <span
                                 key={word}
                                 className={`${
                                     index > 1 ? 'text-red dark:text-yellow' : ''
                                 } ml-4 first:ml-0 inline-block`}
                             >
                                 {word}
-                            </motion.span>
+                            </span>
                         ))}
-                    </motion.h1>
+                    </h1>
                     <motion.h2
                         transition={{ delay: 0.6, duration: 1.2 }}
                         initial={{ opacity: 0 }}

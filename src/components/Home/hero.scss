@@ -1,0 +1,42 @@
+$wordCount: 5;
+
+@keyframes staggerInLg {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes staggerInSm {
+    0% {
+        opacity: 0;
+        transform: translateY(80%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.home-hero-title {
+    @for $i from 1 through $wordCount {
+        span:nth-of-type(#{$i}) {
+            animation: staggerInLg;
+            animation-duration: 0.6s;
+            animation-delay: calc(#{$i} * 100ms);
+            animation-timing-function: ease-out;
+            animation-fill-mode: both;
+            @media (max-width: 1200px) {
+                animation: staggerInSm;
+                animation-duration: 0.6s;
+                animation-delay: calc(#{$i} * 100ms);
+                animation-timing-function: ease-out;
+                animation-fill-mode: both;
+            }
+        }
+    }
+}
