@@ -70,7 +70,7 @@ export default function Hero() {
                         ))}
                     </h1>
                     <motion.h2
-                        transition={{ delay: 0.6, duration: 1.2 }}
+                        transition={{ delay: 0.4, duration: 1.2 }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         className={heading('subtitle', 'primary', 'my-6')}
@@ -89,7 +89,7 @@ export default function Hero() {
                                 opacity: 1,
                             },
                         }}
-                        transition={{ delay: 1.2, staggerChildren: 1.5 }}
+                        transition={{ delay: 1, staggerChildren: 1.5 }}
                         className="flex justify-center items-center gap-2"
                     >
                         <motion.div variants={ctaVariants} transition={{ duration: 4 }}>
