@@ -1,6 +1,6 @@
 ---
 title: "How to run A/B tests in Android with PostHog"
-date: 2023-11-16
+date: 2023-11-21
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
