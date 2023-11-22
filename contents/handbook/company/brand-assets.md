@@ -140,7 +140,9 @@ Use fully rounded buttons and centered text.
 
 ### Icons
 
-Use filled in icons over outlined icons.
+Use filled in icons over outlined icons. 
+
+Team members can use the [icons library](https://github.com/PostHog/icons). The repo contains a list of all available icons along with instructions on how to request a new one.
 
 ## Presentations
 
