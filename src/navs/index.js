@@ -2090,6 +2090,16 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Web analytics',
+                    url: '/docs/product-analytics/web-analytics',
+                    icon: 'IconPieChart',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
