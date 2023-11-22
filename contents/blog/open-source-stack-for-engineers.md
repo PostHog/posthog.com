@@ -19,7 +19,7 @@ At PostHog, we believe an open source approach doesn’t just lead to greater gr
 
 We think the open source approach is best because it forces teams to be transparent, both in their decision making and also in their implementation. Then, because other teams have full visibility of the code, they can build on it and make it even better, faster and _stronger_. Often, they can do this for free.  
 
-Of course, PostHog isn’t the only open-source platform out there. In fact, there’s such variety that it’s possible to build an entirely open-source stack — and here are some of our favourite open source alternatives for engineers.
+Of course, PostHog isn’t the only [open-source analytics platform](/blog/best-open-source-analytics-tools) out there. In fact, there’s such variety that it’s possible to build an entirely open-source stack — and here are some of our favorite open source alternatives for engineers.
 
 > Not an engineer? Find other [open source alternatives on the PostHog blog](/blog/categories/open-source)!
 

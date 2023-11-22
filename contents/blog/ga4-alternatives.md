@@ -783,7 +783,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-[Counter](https://counter.dev/) is a free and open source analytics tool that operates a "pay what you want" model. It's by no means a feature-complete alternative to GA4, but it's ideal if you want to track basic website activity like visits, referral data, and user properties (device, platform, browser etc.).
+[Counter](https://counter.dev/) is a free and [open source analytics](/blog/best-open-source-analytics-tools) tool that operates a "pay what you want" model. It's by no means a feature-complete alternative to GA4, but it's ideal if you want to track basic website activity like visits, referral data, and user properties (device, platform, browser etc.).
 
 Counter's creators can offer it for free because it only collects aggregated data, reducing the complexity and load on the server, while also improving data privacy. To count unique users, Counter uses a combination of techniques including the browser's cache, `sessionStorage`, and referrer inspection.
 
