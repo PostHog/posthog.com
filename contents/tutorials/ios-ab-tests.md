@@ -202,4 +202,4 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
-- [When and how to run group-targeted A/B tests](/product-engineers/running-group-targeted-ab-tests)
+- [How to run A/B tests in Android with PostHog](/tutorials/android-ab-tests)
