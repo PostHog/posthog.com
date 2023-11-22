@@ -38,7 +38,7 @@ Each team will focus more or less on different members of the product team. This
 
 **Principles**
 
-- We should double-down on the best product-engineers at the best product companies.
+- We should double-down on the best product engineers at the best product companies.
 - Going incredibly far with a more specific user type instead of placating every body, means that we'll get over the threshold for "I need to tell my engineer friends about this". We only get word-of-mouth growth by doing a remarkable job, not an average one for lots of people.
 - We develop a strong feedback loop: by building for the best product engineers we'll attract more of the best product engineers and the best companies. This improves PostHog and drives more word of mouth growth from high authority individuals/companies.
 - As more of the best companies become engineering-led and grow faster as a result PostHog gains significant market share.
