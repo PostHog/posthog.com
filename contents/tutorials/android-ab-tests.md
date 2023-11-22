@@ -11,9 +11,12 @@ PostHog makes [A/B testing on Android](/docs/experiments/installation?tab=androi
 
 ## Creating a new Android app
 
-Our app will have two screens: The first screen will have a button which will take you to a second screen. The second screen will either have a `red` or `green` background color depending on if the user is in the `control` or `test` group. The second screen will also have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
+Our app will have two screens: 
 
-The first step is to create a new app. Open Android studio and create a new project. Select `Empty Activity`, name your project `My-AB-Test` and use the defaults for everything else.
+- The first screen will have a button which will take you to a second screen. 
+- The second screen will either have a `red` or `green` background color depending on if the user is in the `control` or `test` group of the A/B test. It will also have a button which captures an event when pressed. We'll use this event as our goal metric for our test.
+
+The first step is to create a new app. Open [Android Studio](https://developer.android.com/studio) and create a new project. Select `Empty Activity`, name your project `My-AB-Test`, and use the defaults for everything else.
 
 Then, replace your code in `MainActivity.kt` to set up a basic UI with a button to navigate to a new screen.
 
@@ -82,11 +85,9 @@ fun Greeting(name: String, navController: NavController, modifier: Modifier = Mo
 @Composable
 fun SecondScreen() {
     val isTestVariant = remember { mutableStateOf(false) } // We'll set this value later in the tutorial
-
     val backgroundColor = if (isTestVariant.value) Color.Green else Color.Red
 
     Surface(modifier = Modifier.fillMaxSize(), color = backgroundColor) {
-
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
             Button(onClick = { /* Do nothing for now */ }) {
                 Text("Click Me!")
@@ -104,7 +105,7 @@ fun DefaultPreview() {
 }
 ```
 
-Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")` to your dependencies in to `build.gradle (Module: app)`.
+Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")` to your `dependencies` in to `app/build.gradle.kts` and sync your project with the Gradle files.
 
 Our basic set up is now complete. Build and run your app to test that it's working.
 
@@ -112,18 +113,19 @@ Our basic set up is now complete. Build and run your app to test that it's worki
 
 ## Adding PostHog to your Android app
 
-First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `build.gradle` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). For this tutorial, we use version `2.0.3`.
+First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `app/build.gradle.kts` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). For this tutorial, we use version `2.0.3`.
 
 
-```gradle
+```kotlin
 dependencies {
     implementation("com.posthog.android:posthog:2.0.3")
+    //... other dependencies
 }
 ```
 
 Sync your project with your Gradle file changes.
 
-Next, we create a custom application class where we can configure our PostHog instance. In a new file `MyABTestApplication.kt`, add the following code:
+Next, we create a Kotlin class where we can configure our PostHog instance. In the `src/main/java/com.example.my_ab_test` folder, add a new file `MyABTestApplication.kt`, add the following code:
 
 ```kotlin
 // in MyABTestApplication.kt
@@ -153,7 +155,7 @@ class MyABTestApplication : Application() {
 }
 ```
 
-To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project). Replace the strings `<ph_project_api_key>` and `<ph_instance_address>` with your API key and host.
+To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project).
 
 We now need to register our custom application class. Go to `AndroidManifest.xml` and add `android:name=".MyABTestApplication"` within the `<application` tag. We also need to give our app internet permission by adding `<uses-permission android:name="android.permission.INTERNET" />`. 
 
@@ -189,10 +191,9 @@ fun SecondScreen() {
     val isTestVariant = remember { mutableStateOf(false) } // We'll set this value later in the tutorial
     val backgroundColor = if (isTestVariant.value) Color.Green else Color.Red
 
-    val context = LocalContext.current
+    val context = LocalContext.current // new
 
     Surface(modifier = Modifier.fillMaxSize(), color = backgroundColor) {
-
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
             Button(onClick = {
                 PostHog.with(context)
@@ -205,7 +206,7 @@ fun SecondScreen() {
 }
 ```
 
-To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [PostHog event explorer](https://app.posthog.com/events).
+To check your setup, build and run your app. Click your button a few times and you should start seeing events in the [PostHog event explorer](https://app.posthog.com/events).
 
 ![Android events captured](../images/tutorials/android-ab-tests/android-events.png)
 
@@ -226,7 +227,7 @@ Click "Save as draft" and then click "Launch".
 
 ## Implement the A/B test code
 
-The final step is to add the experiment code. We'll add code that does the following:
+The final step is to add the experiment code that does the following:
 
 1. Retrieve the value of the `android-background-color-experiment` flag when `SecondScreen` is initialized.
 2. Change the background color of `SecondScreen` based on the value of the flag (`control` or `test`).
