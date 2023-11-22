@@ -7,7 +7,7 @@ tags: ["configuration", "feature flags", "events"]
 
 Remix is a full stack web framework built on [React](/docs/libraries/react) with a specific focus on following web standards. 
 
-In this tutorial, we show you how to create a basic Remix app, add PostHog on both the client and server side, implement custom event capture, capture pageviews, and use feature flags.
+In this tutorial, we show you how to add PostHog to your Remix app (on both the client and server side), implement custom event capture, capture pageviews, and use feature flags.
 
 ## Creating a Remix app
 
@@ -143,7 +143,7 @@ npm run dev
 
 ## Adding PostHog on the client side
 
-Up next is adding PostHog, which you can start by installing:
+Up next is adding PostHog, which you can install by running:
 
 ```bash
 npm i posthog-js
@@ -151,7 +151,7 @@ npm i posthog-js
 
 Once done, you need your project API key and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
 
-With these, go to `routes/root.tsx` and set up a `useEffect` to initialize PostHog (import both). 
+With these, go to `routes/root.tsx` and set up a `useEffect` to initialize PostHog. 
 
 ```ts
 // routes/root.tsx
@@ -208,7 +208,7 @@ After relaunching your app, PostHog begins autocapturing initial pageviews, clic
 
 ## Capturing pageviews
 
-You might notice we captured only one pageview even though we navigated between multiple pages. This is because Remix acts as a [single-page app](/tutorials/single-page-app-pageviews) and only triggers an initial page load event. PostHog uses the page load event for pageviews, so to fix this, we must implement pageview capture ourselves.
+You might notice we captured only one pageview even though we navigated between multiple pages. This is because Remix is a [single-page app](/tutorials/single-page-app-pageviews) and only triggers an initial page load event. PostHog uses the page load event for pageviews, so to fix this, we must implement pageview capture ourselves.
 
 Again, we do this in `routes/root.tsx`. We import and set up `useLocation`, and then trigger another `useEffect` to capture a `$pageview` event. We also set the `capture_pageview` PostHog property to `false` so we don’t double capture the initial pageview.
 
@@ -322,7 +322,7 @@ export default function PostSlug() {
 }
 ```
 
-Our post page now shows the updated button, which you can control remotely with the flag in PostHog.
+Our post page now shows the updated button, which you can toggle remotely with the flag in PostHog.
 
 ![Button text controlled by flag](../images/tutorials/remix-analytics/flag.png)
 
