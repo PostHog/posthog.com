@@ -195,7 +195,7 @@ export async function middleware(request) {
   const data = await ph_request.json();
 
   const bootstrapData = {
-    distinctId: distinct_id,
+    distinctID: distinct_id,
     featureFlags: data.featureFlags
   }
 
