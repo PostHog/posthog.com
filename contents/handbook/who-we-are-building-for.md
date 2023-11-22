@@ -52,7 +52,7 @@ Each team will focus more or less on different members of the product team. This
 ### Who specifically should we keep in mind when building?
 
 - We should focus on the [high-expectation customer](https://review.firstround.com/what-i-learned-from-developing-branding-for-airbnb-dropbox-and-thumbtack). "This isn’t an all encompassing persona, but rather the most discerning person within your target demographic. Most importantly, they will enjoy our product for its greatest benefit and help spread the word."
-- Generally, we should build for the **best product-engineers** building the **most loved products** at **high-growth startups**.
+- Generally, we should build for the **best product engineers** building the **most loved products** at **high-growth startups**.
 - These kind of users are speaking to customers, looking at data, and quickly building and shipping features. They operate collaboratively within a diverse team including designers, other PMs, marketeers and executives. We want to be loved by the sophisticated power users and still good to use for the others on the team.
 - For the product analytics, product managers who are technical (ex-engineer type) are the power-users of analytics (further evidence in the data analysis of paying users). They have the desire and the time to go significantly deeper into the data.
 
