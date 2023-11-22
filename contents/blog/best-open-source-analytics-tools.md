@@ -1,6 +1,6 @@
 ---
 date: 2023-11-22
-title: The 13 best open source analytics tools you can self-host
+title: The 12 best open source analytics tools you can self-host
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -19,11 +19,11 @@ tags:
 
 This guide only includes open-source analytics tools that:
 
-1. Allow users to visualize and analyze behavioral data for products or websites. This includes tools that actively capture data and dashboarding tools that connect to existing data sources, but not data pipeline platforms like Snowplow or Rudderstack. 
+1. **Enable users to visualize and analyze behavioral data for products or websites.** This includes tools that actively capture data as well as dashboarding tools that connect to existing data sources, but not data pipeline platforms like Snowplow or Rudderstack. 
 
-2. Are actively developed or maintained by a company or community. This is subjectively judged based on recently merged pull requests, commits to their repos, and the responsiveness of the maintainer to review requests.
+2. **Are actively developed or maintained by a company or community.** This is subjectively judged based on recently merged pull requests, commits to their repos, and the responsiveness of the maintainer to review requests.
 
-3. Are self-hostable. Tools that are "open core" but don't offer a free, self-hostable deployment option are not eligible.
+3. **Are self-hostable.** Tools that are "open core" but don't offer a free, self-hostable deployment option are not included.
 
 ## Who maintains this guide?
 
@@ -118,9 +118,10 @@ Matomo on-premise is available under a AGPLv3 license. It includes Matomo's core
 
 #### What is Metabase?
 
-[Metabase](https://www.metabase.com/) is one of the most popular open-source business intelligence (BI) tools in the world, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
+[Metabase](https://www.metabase.com/) is one of the most popular open-source business intelligence (BI) tools, offering teams a way to visualize complex data and run analysis with no coding required. Instead, Metabase’s visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
 
 #### Who is Metabase for?
+
 Metabase's drag-and-drop interface makes it accessible for technical and non-technical teams, making it an ideal platform for democratizing data analytics in organizations.
 
 #### Strengths
@@ -169,20 +170,23 @@ Plausible Analytics is available under a AGPLv3 license and can be self-hosted v
 - **Languages:** TypeScript (57%), Go (37%)
 - [Grafana on GitHub](https://github.com/grafana/grafana)
 
-#### What is Snowplow?
+#### What is Grafana?
 
-[Grafana](https://grafana.com/products/cloud/) is an open-source data observability platform. It focuses on interactive visualization, providing a wide variety of charts, graphs and alerts that can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
+[Grafana](https://grafana.com/products/cloud/) is an open-source data observability platform. It focuses on interactive visualization, providing a wide variety of charts, graphs, and alerts that can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
 
 #### Who is Grafana for?
-Grafana is an ideal choice for engineering, dev ops or data scientists in businesses or teams of any size, including enterprises, who need to observe and monitor data.
+
+Grafana is an ideal choice for engineering, DevOps, or data science teams in businesses of any size, including enterprises, who need to observe and monitor data.
 
 #### Strengths
+
 - Great for tracking data in real time
 - Multiple products allow you to scale
 - Get alerts when anomalous events occur
 - Integrates with a wide range of data sources
 
 #### License and monetization
+
 Grafana is available to self-host under an AGPLv3 license. Grafana Cloud also has a free tier, though it's limited to three active users and 14 days retention. Additional tiers remove those limitations.
 
 ### 6. Umami
@@ -191,13 +195,13 @@ Grafana is available to self-host under an AGPLv3 license. Grafana Cloud also ha
 
 - **GitHub Stars:** 16.9k
 - **Category:** Website analytics
-- **Alternative to:** Google Analytics
-- **Languages:** 91% JavaScript
+- **Alternative to:** Google Analytics, Plausible
+- **Languages:** 53% JavaScript, 39% TypeScript
 - [Umami on GitHub](https://github.com/umami-software/umami)
 
 #### What is Umami?
 
-[Umami](https://umami.is/) is another popular privacy-first website analytics tool. Like Plausible, it tracks basic website analytics, doesn't collect any personal information, and is extremely fast. You can also track basic events, such button clicks, using CSS classes or JavaScript. Unlike Plausible, it doesn't currently offer a cloud-hosted option, though one is in beta. 
+[Umami](https://umami.is/) is another popular privacy-first website analytics tool. Like Plausible, it tracks basic website analytics, doesn't collect any personal information, and is extremely fast. On top of this, you can track basic events, such button clicks, using CSS classes or JavaScript. It also offers a free cloud hosting option.
 
 #### Who is Umami for?
 
@@ -211,7 +215,7 @@ Hobbyists who want basic website analytics that doesn't collect any personal dat
 
 #### License and monetization
 
-Umami is available via an MIT license. There is no monetized features or hosting options at present, though it is currently running an open beta for managed cloud version that Umami will charge for.
+Umami is available via an MIT license. The cloud hosted option is free up to 10k events per month, then starts at $9 per month for their "Pro" tier.
 
 ### 7. OpenReplay
 
@@ -281,7 +285,7 @@ GrowthBook is distributed under an MIT license and self-hosted is supported at n
 - **Languages:** Python (41%), JavaScript (33%), TypeScript (17%)
 - [Redash on GitHub](https://github.com/getredash/redash)
 
-### What is Redash?
+#### What is Redash?
 
 Like Metabase, Redash is a tool for connecting to and visualizing data from a number of different sources. Unlike Metabase, you need to be fluent in SQL to get the most from it. Redash supports more data sources than Metabase by default, though how important this is will depend on your specific needs.
 
@@ -343,9 +347,11 @@ Apache Superset is distributed under an Apache-2.0 license. There are no paid fe
 Like PostHog, [Countly](https://count.ly/) offers a wide range of tools to help you build better products. It has a strong focus on mobile and desktop applications, and enables you to bring together both qualitative and quantitative insights. However many features, such as dashboards, funnel analysis, and retention tracking are only available in the enterprise-level product.
 
 #### Who is Countly for?
+
 Countly is suitable for both small teams and enterprise businesses, especially those which focus on mobile apps. The crash analytics tools make it useful for customer support and engineering teams, too. 
 
 #### Strengths
+
 - Wide range of analysis tools
 - Focus on mobile and desktop app development
 - Crash analytics to diagnose bugs
@@ -366,11 +372,13 @@ Countly's Community Edition is available under a AGPLv3 license, but it's somewh
 
 #### What is Open Web Analytics?
 
-[Open Web Analytics](https://www.openwebanalytics.com/) is an entirely free, open-source alternative to Google Analytics. In addition to usual web analytics basics, it includes a basic heatmap feature, and the ability to track clicks on all DOM elements. It's less focused on privacy than others in this list, so you can use OWA to track when users come back, and perform basic campaign and e-commerce tracking. In comparative terms, it's more advanced than Plausible and Umami, but less advanced than Matomo or PostHog, though the interface is somewhat dated. 
+[Open Web Analytics](https://www.openwebanalytics.com/) is an entirely free, open-source alternative to Google Analytics. In addition to usual web analytics basics, it includes a basic heatmap feature, and the ability to track clicks on all DOM elements. It's less focused on privacy than others in this list, so you can use it to track when users come back, and perform basic campaign and ecommerce tracking. 
+
+In comparative terms, it's more advanced than Plausible and Umami, but less advanced than Matomo or PostHog, though the interface is somewhat dated. 
 
 #### Who is Open Web Analytics for?
 
-OWA will suit any developer who wants self-hosted analytics, but desires more tracking capabilities than privacy-focused alternatives like Plausible.
+OWA suits developers who want self-hosted analytics, but desire more tracking capabilities than privacy-focused alternatives like Plausible.
 
 #### Strengths
 
