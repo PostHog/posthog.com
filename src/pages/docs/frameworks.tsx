@@ -10,8 +10,20 @@ import List from 'components/List'
 
 export const quickLinks = [
     {
+        name: 'Angular',
+        to: '/tutorials/angular-analytics',
+    },
+    {
+        name: 'Django',
+        to: '/tutorials/django-analytics',
+    },
+    {
         name: 'Docusaurus v2',
         to: '/docs/libraries/docusaurus',
+    },
+    {
+        name: 'Flask',
+        to: '/tutorials/python-feature-flags',
     },
     {
         name: 'Framer',
@@ -32,6 +44,10 @@ export const quickLinks = [
     {
         name: 'Nuxt.js',
         to: '/docs/libraries/nuxt-js',
+    },
+    {
+        name: 'Remix',
+        to: '/tutorials/remix-analytics',
     },
     {
         name: 'Retool',
@@ -56,6 +72,10 @@ export const quickLinks = [
     {
         name: 'Shopify',
         to: '/docs/libraries/shopify',
+    },
+    {
+        name: 'Svelte',
+        to: '/tutorials/svelte-analytics',
     },
     {
         name: 'Vue.js',
