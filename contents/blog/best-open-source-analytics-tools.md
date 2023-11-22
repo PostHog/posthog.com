@@ -17,7 +17,7 @@ tags:
 
 ## What are the criteria for this guide?
 
-This guides only includes open-source analytics tools that:
+This guide only includes open-source analytics tools that:
 
 1. Allow users to visualize and analyze behavioral data for products or websites. This includes tools that actively capture data and dashboarding tools that connect to existing data sources, but not data pipeline platforms like Snowplow or Rudderstack. 
 
