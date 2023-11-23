@@ -1,12 +1,10 @@
 import { CallToAction } from 'components/CallToAction'
-import Modal from 'components/Modal'
 import ClientPostMarkdown from 'components/Squeak/components/ClientPostMarkdown'
 import { ZoomImage } from 'components/ZoomImage'
 import SEO from 'components/seo'
 import dayjs from 'dayjs'
 import { useUser } from 'hooks/useUser'
 import React, { useContext, useState } from 'react'
-import NewPost from './NewPost'
 import { navigate } from 'gatsby'
 import { PostsContext } from './Posts'
 import Title from './Title'
@@ -15,6 +13,7 @@ import Upvote from './Upvote'
 import { QuestionForm } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
+import Link from 'components/Link'
 
 export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformImageUri }) => {
     return (
@@ -62,6 +61,7 @@ export default function ClientPost({
     excerpt,
     getPost,
     authors,
+    post_tags,
 }: {
     title: string
     featuredImage?: { url: string }
@@ -74,18 +74,13 @@ export default function ClientPost({
     excerpt: string
     getPost: () => Promise<void>
     authors: any
+    post_tags: { data: { id: number }[] }
 }) {
     const { pathname } = useLocation()
     const { fullWidthContent } = useLayoutData()
     const { mutate } = useContext(PostsContext)
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const [editPostModalOpen, setEditPostModalOpen] = useState(false)
     const { getJwt, isModerator } = useUser()
-    const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
-    const handleNewPostSubmit = () => {
-        setEditPostModalOpen(false)
-        getPost()
-    }
     const handleDeletePost = async () => {
         if (!confirmDelete) {
             setConfirmDelete(true)
@@ -111,21 +106,6 @@ export default function ClientPost({
                             fullWidthContent ? 'max-w-full' : 'max-w-3xl'
                         }  md:px-8 2xl:px-12`}
                     >
-                        <Modal open={editPostModalOpen} setOpen={setEditPostModalOpen}>
-                            <NewPost
-                                postID={id}
-                                initialValues={{
-                                    title,
-                                    featuredImage: imageURL,
-                                    body,
-                                    ctaURL: CTA?.url,
-                                    ctaLabel: CTA?.label,
-                                    category: post_category?.data?.id,
-                                    excerpt,
-                                }}
-                                onSubmit={handleNewPostSubmit}
-                            />
-                        </Modal>
                         <SEO title={title + ' - PostHog'} />
                         <article>
                             <Post
@@ -135,12 +115,23 @@ export default function ClientPost({
                                 belowTitle={() =>
                                     isModerator ? (
                                         <div className="ml-3 text-sm inline-flex space-x-2 text-primary/50 dark:text-primary-dark/50">
-                                            <button
-                                                onClick={() => setEditPostModalOpen(true)}
+                                            <Link
+                                                state={{
+                                                    id,
+                                                    initialValues: {
+                                                        title,
+                                                        category: post_category?.data,
+                                                        body,
+                                                        images: [],
+                                                        tags: post_tags?.data,
+                                                        excerpt,
+                                                    },
+                                                }}
+                                                to={`/posts/${id}/edit`}
                                                 className="text-red dark:text-yellow font-semibold"
                                             >
                                                 Edit post
-                                            </button>
+                                            </Link>
                                             <span>|</span>
                                             <button onClick={handleDeletePost} className="text-red font-semibold">
                                                 {confirmDelete ? 'Click again to confirm' : 'Delete post'}

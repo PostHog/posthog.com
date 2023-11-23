@@ -38,7 +38,8 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 }
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
-    return slug !== 'posts/new' && (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
+    return !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
+        (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
         <Posts {...props}>{element}</Posts>
     ) : props.custom404 || !props.data ? (
         element
