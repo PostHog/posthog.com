@@ -262,7 +262,10 @@ Note that you cannot use storage nor cache nor external calls in processEvent ap
 
 > **Minimum PostHog hash:** https://github.com/PostHog/posthog/commit/0137b9d40d8c0b4a7183fd6bb3c718a35d116b95
 
-`composeWebhook` is a non-async function that returns `Webhook` object. This is called at the end of the pipeline after the event has been stored in PostHog data store. It allows users to send data out of PostHog one event at a time. See batch exports for exporting events in batches. The function can also return null if for this event we don't want to send the webhook.
+`composeWebhook` is a non-async function that is executed at the end of the pipeline. It allows users to submit data to their own HTTP endpoint when an event happens. The function can return 
+- null if for a specific event we don't want to trigger an HTTP request. 
+- `Webhook` object, for which we'll trigger an HTTP request to the url with the payload, method and headers returned.
+If you are interested in exporting large amounts of event data from PostHog, look into [batch exports](/docs/cdp/batch-exports).
 
 Here's a quick example:
 
