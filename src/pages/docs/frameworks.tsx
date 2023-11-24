@@ -14,6 +14,10 @@ export const quickLinks = [
         to: '/tutorials/angular-analytics',
     },
     {
+        name: 'Astro',
+        to: '/tutorials/astro-analytics',
+    },
+    {
         name: 'Django',
         to: '/tutorials/django-analytics',
     },

@@ -1137,6 +1137,10 @@ export const docsMenu = {
                             url: '/tutorials/angular-analytics',
                         },
                         {
+                            name: 'Angular',
+                            url: '/tutorials/astro-analytics',
+                        },
+                        {
                             name: 'Django',
                             url: '/tutorials/django-analytics',
                         },
