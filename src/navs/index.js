@@ -6,6 +6,10 @@ export const handbookSidebar = [
         name: 'Table of contents',
         url: '/handbook',
         // icon: 'IconInfo',
+    },
+    {
+        name: 'Chapters',
+        url: '',
         children: [
             {
                 name: '1. Why does PostHog exist?',
