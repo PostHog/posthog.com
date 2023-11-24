@@ -121,7 +121,7 @@ Another key part of the decision is figuring out what works well with the stack 
 
 - If you are relying on many Google-related products, [Firebase Remote Config](https://firebase.google.com/docs/remote-config) might be best.
 
-- If you implemented the modern data stack with a data warehouse, you might use a feature flag tool like [LaunchDarkly](/feature-flags/comparisons).
+- If you implemented the modern data stack with a data warehouse, you might use a feature flag tool like [LaunchDarkly](/blog/best-launchdarkly-alternatives).
 
 - If you’re just starting up and want an all-in-one platform with analytics, A/B tests, and session replays, [PostHog](https://app.posthog.com/signup) is your choice.
 
