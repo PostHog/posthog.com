@@ -6,10 +6,6 @@ export const handbookSidebar = [
         name: 'Table of contents',
         url: '/handbook',
         // icon: 'IconInfo',
-    },
-    {
-        name: 'Chapters',
-        url: '',
         children: [
             {
                 name: '1. Why does PostHog exist?',
@@ -74,6 +70,148 @@ export const handbookSidebar = [
             {
                 name: '16. How you can help',
                 url: '/handbook/help',
+            },
+        ],
+    },
+    {
+        name: 'Working at PostHog',
+        url: '',
+        children: [
+            {
+                name: 'How we work',
+                url: '',
+                children: [
+                    {
+                        name: 'Culture',
+                        url: '/handbook/company/culture',
+                    },
+                    {
+                        name: 'Small teams',
+                        url: '/handbook/company/small-teams',
+                    },
+                    {
+                        name: 'Meetings',
+                        url: '/handbook/getting-started/meetings',
+                    },
+                    {
+                        name: 'Goal setting',
+                        url: '/handbook/company/goal-setting',
+                    },
+                    {
+                        name: 'Diversity and inclusion',
+                        url: '/handbook/company/diversity',
+                    },
+                    {
+                        name: 'Communication',
+                        url: '/handbook/company/communication',
+                    },
+                    {
+                        name: 'Kudos',
+                        url: '/handbook/company/kudos',
+                    },
+                    {
+                        name: 'Management',
+                        url: '/handbook/company/management',
+                    },
+                    {
+                        name: 'Sprints',
+                        url: '/handbook/company/sprints',
+                    },
+                    {
+                        name: 'Offsites',
+                        url: '/handbook/company/offsites',
+                    },
+                    {
+                        name: 'Security',
+                        url: '/handbook/company/security',
+                    },
+                ],
+            },
+            {
+                name: 'Compensation',
+                url: '/handbook/people/compensation',
+            },
+            {
+                name: 'Share options',
+                url: '/handbook/people/share-options',
+            },
+            {
+                name: 'Benefits',
+                url: '/handbook/people/benefits',
+            },
+            {
+                name: 'Time off',
+                url: '/handbook/people/time-off',
+            },
+            {
+                name: 'Spending money',
+                url: '/handbook/people/spending-money',
+            },
+            {
+                name: 'Progression',
+                url: '/handbook/people/career-progression',
+            },
+            {
+                name: 'Clubs',
+                url: '/handbook/people/clubs',
+            },
+            {
+                name: 'Training',
+                url: '/handbook/people/training',
+            },
+            {
+                name: 'Side gigs',
+                url: '/handbook/people/side-gigs',
+            },
+            {
+                name: 'Feedback',
+                url: '/handbook/people/feedback',
+            },
+            {
+                name: 'Onboarding',
+                url: '/handbook/people/onboarding',
+            },
+            {
+                name: 'Offboarding',
+                url: '/handbook/people/offboarding',
+            },
+            {
+                name: 'HR processes',
+                url: '/handbook/people/grievances',
+            },
+            {
+                name: 'Hiring processes',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/people/hiring-process',
+                    },
+                    {
+                        name: 'How to interview',
+                        url: '/handbook/people/hiring-process/how-to-interview',
+                    },
+                    {
+                        name: 'Engineering hiring',
+                        url: '/handbook/people/hiring-process/engineering-hiring',
+                    },
+                    {
+                        name: 'Marketing hiring',
+                        url: '/handbook/people/hiring-process/marketing-hiring',
+                    },
+                    {
+                        name: 'Operations hiring',
+                        url: '/handbook/people/hiring-process/operations-hiring',
+                    },
+                    {
+                        name: 'Design hiring',
+                        url: '/handbook/people/hiring-process/design-hiring',
+                    },
+                    {
+                        name: 'Exec hiring',
+                        url: '/handbook/people/hiring-process/exec-hiring',
+                    },
+                ],
             },
         ],
     },
@@ -429,7 +567,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Marketing & content',
+        name: 'Marketing',
         url: '',
         children: [
             {
@@ -523,12 +661,12 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Ops & finance',
+        name: 'People & ops',
         url: '',
         children: [
             {
                 name: 'Team',
-                url: '/handbook/small-teams/ops',
+                url: '/handbook/small-teams/people',
             },
             {
                 name: 'Finance',
@@ -537,156 +675,6 @@ export const handbookSidebar = [
             {
                 name: 'Merch store',
                 url: '/handbook/company/merch-store',
-            },
-        ],
-    },
-    {
-        name: 'People',
-        url: '',
-        children: [
-            {
-                name: 'Team',
-                url: '/handbook/small-teams/people',
-            },
-            {
-                name: 'Compensation',
-                url: '/handbook/people/compensation',
-            },
-            {
-                name: 'Share options',
-                url: '/handbook/people/share-options',
-            },
-            {
-                name: 'Benefits',
-                url: '/handbook/people/benefits',
-            },
-            {
-                name: 'Time off',
-                url: '/handbook/people/time-off',
-            },
-            {
-                name: 'Spending money',
-                url: '/handbook/people/spending-money',
-            },
-            {
-                name: 'Progression',
-                url: '/handbook/people/career-progression',
-            },
-            {
-                name: 'Clubs',
-                url: '/handbook/people/clubs',
-            },
-            {
-                name: 'Training',
-                url: '/handbook/people/training',
-            },
-            {
-                name: 'Side gigs',
-                url: '/handbook/people/side-gigs',
-            },
-            {
-                name: 'Feedback',
-                url: '/handbook/people/feedback',
-            },
-            {
-                name: 'Onboarding',
-                url: '/handbook/people/onboarding',
-            },
-            {
-                name: 'Offboarding',
-                url: '/handbook/people/offboarding',
-            },
-            {
-                name: 'HR processes',
-                url: '/handbook/people/grievances',
-            },
-            {
-                name: 'Hiring process',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/people/hiring-process',
-                    },
-                    {
-                        name: 'How to interview',
-                        url: '/handbook/people/hiring-process/how-to-interview',
-                    },
-                    {
-                        name: 'Engineering hiring',
-                        url: '/handbook/people/hiring-process/engineering-hiring',
-                    },
-                    {
-                        name: 'Marketing hiring',
-                        url: '/handbook/people/hiring-process/marketing-hiring',
-                    },
-                    {
-                        name: 'Operations hiring',
-                        url: '/handbook/people/hiring-process/operations-hiring',
-                    },
-                    {
-                        name: 'Design hiring',
-                        url: '/handbook/people/hiring-process/design-hiring',
-                    },
-                    {
-                        name: 'Exec hiring',
-                        url: '/handbook/people/hiring-process/exec-hiring',
-                    },
-                ],
-            },
-            {
-                name: 'How we work',
-                url: '',
-                children: [
-                    {
-                        name: 'Culture',
-                        url: '/handbook/company/culture',
-                    },
-                    {
-                        name: 'Values',
-                        url: '/handbook/company/values',
-                    },
-                    {
-                        name: 'Small teams',
-                        url: '/handbook/company/small-teams',
-                    },
-                    {
-                        name: 'Meetings',
-                        url: '/handbook/getting-started/meetings',
-                    },
-                    {
-                        name: 'Goal setting',
-                        url: '/handbook/company/goal-setting',
-                    },
-                    {
-                        name: 'Diversity and inclusion',
-                        url: '/handbook/company/diversity',
-                    },
-                    {
-                        name: 'Communication',
-                        url: '/handbook/company/communication',
-                    },
-                    {
-                        name: 'Kudos',
-                        url: '/handbook/company/kudos',
-                    },
-                    {
-                        name: 'Management',
-                        url: '/handbook/company/management',
-                    },
-                    {
-                        name: 'Sprints',
-                        url: '/handbook/company/sprints',
-                    },
-                    {
-                        name: 'Offsites',
-                        url: '/handbook/company/offsites',
-                    },
-                    {
-                        name: 'Security',
-                        url: '/handbook/company/security',
-                    },
-                ],
             },
         ],
     },
