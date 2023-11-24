@@ -665,7 +665,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'People & ops',
+        name: 'People & Ops',
         url: '',
         children: [
             {
