@@ -54,7 +54,7 @@ import Layout from '../../layouts/Layout.astro';
 
 In the `posts` folder, we also create a `first-post.md` file where we write a bit of Markdown as an example. You can customize this or add more posts and links here if you’d like.
 
-```markdown
+```md
 ---
 layout: ../../layouts/Layout.astro
 ---
