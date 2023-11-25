@@ -81,9 +81,8 @@ export default function NewPost({ id, onSubmit, ...other }: { id?: number; onSub
             cta: null,
             images: [],
             tags: [],
-            excerpt: '',
         },
-        onSubmit: async ({ title, category, body, cta, images, tags, excerpt }) => {
+        onSubmit: async ({ title, category, body, cta, images, tags }) => {
             try {
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
@@ -97,7 +96,6 @@ export default function NewPost({ id, onSubmit, ...other }: { id?: number; onSub
                         post_category: {
                             connect: [category],
                         },
-                        excerpt,
                         date: new Date(),
                         ...(uploadedFeaturedImage
                             ? {
@@ -162,7 +160,6 @@ export default function NewPost({ id, onSubmit, ...other }: { id?: number; onSub
                         setFieldValue={setFieldValue}
                         values={values}
                         maxLength={524288}
-                        excerptDisabled
                     />
                 </div>
                 {errors.body && touched.body && <ErrorMessage>{errors.body}</ErrorMessage>}

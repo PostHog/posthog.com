@@ -85,7 +85,6 @@ export default function RichText({
     values,
     onSubmit,
     maxLength = 2000,
-    excerptDisabled,
     preview = true,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
@@ -182,9 +181,6 @@ export default function RichText({
 
     useEffect(() => {
         setFieldValue('body', value)
-        if (excerptDisabled) {
-            setFieldValue('excerpt', value.split('\n')[0])
-        }
     }, [value])
 
     const handleKeyDown = (e) => {
