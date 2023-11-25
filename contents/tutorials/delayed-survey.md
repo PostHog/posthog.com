@@ -29,7 +29,7 @@ Once installed in your app, PostHog automatically shows your surveys to users wh
 
 As an example, we do this in a basic Next.js app with PostHog already installed, but you can use any app or site that can run client-side JavaScript, including no-code site builders like [Webflow](/tutorials/webflow) and [Framer](/tutorials/framer-analytics).
 
-> Need help installing and setting up PostHog for Next.js? Check out our tutorial on [How to set up Next.js app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics).
+> Need help installing and setting up PostHog for Next.js? Check out our tutorial on [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics).
 
 In our `app` directory, we create a `test` folder and a `page.js` file within it. This page will be a basic client component. We use a `useEffect` to set a 3000-millisecond delay, then select the `h1` component and add the `delayed-survey` class to it. This triggers our survey to show.
 
