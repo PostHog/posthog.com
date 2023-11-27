@@ -76,8 +76,6 @@ To counteract this, it's best to ask follow-up questions in your NPS survey, lik
 - What would it take to improve your score to a 9 or 10?
 - Would you be open to a follow-up call to discuss your feedback in more detail?
 
-### When to use NPS surveys
-
 NPS is particularly handy for understanding long-term user satisfaction.
 
 With this in mind, it's best to wait for users to properly experience your app. Then, you should run NPS surveys every month or quarter to understand how their experience changes over time. This enables you to identify trends in how your product changes are affecting your user experience.
@@ -125,8 +123,6 @@ According to [fullview](https://www.fullview.io/blog/csat-benchmarks-by-industry
 While a low CSAT scores correlates with user churn, a high CSAT doesn't necessarily mean users are likely to stay. Users might be satisfied with your product but could still switch to a competitor for reasons not covered in the survey – like pricing or other features. 
 
 Thus if your goal is to increase long-term retention (as is the case for most SaaS apps), it's best to pair CSAT with other feedback methods in order to [uncover your users' real problems](https://newsletter.posthog.com/p/how-to-uncover-your-users-real-problems).
-
-
 
 ### When to use CSAT surveys
 
