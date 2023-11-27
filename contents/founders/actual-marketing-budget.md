@@ -10,7 +10,7 @@ tags:
   - Marketing
 ---
 
-It really annoys me that no one is willing to talk in detail about how much they actually spend on marketing in startup-land. 
+It really annoys me that no one is willing to talk about how much they _actually_ spend on marketing in startup-land. 
 
 When I’m trying to figure out what a sensible amount is for PostHog to spend, all I can find are articles that talk very generally about marketing budgets in terms of things like % of revenue or general benchmarks. Which is nice, but [the ranges given are wild](https://www.datadab.com/blog/how-much-saas-companies-spend-on-marketing/) and I want _cold, hard numbers_. 
 
