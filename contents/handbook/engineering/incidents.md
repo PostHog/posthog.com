@@ -64,8 +64,8 @@ The person who raised the incident is the incident lead. It’s their responsibi
 - Make sure the right people join the call. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](https://posthog.com/handbook/engineering/feature-ownership) and Marketing if relevant. Marketing can assist on running communication if required.
 - Take notes in the incident channel. This should include time stamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status banner on app](https://app.posthog.com/feature_flags/984). There are some templates below to make this easier.
-- Update the [status page](https://uptimerobot.com/statuspage.php)
-- Update users in [#announcements](https://posthogusers.slack.com/archives/CT7HXDEG3)
+- Update the [status page](https://status.posthog.com/) - this is best done via the incident slack channel.
+  - This will automatically update users in [#status-updates](https://posthogusers.slack.com/archives/CT7HXDEG3)
 
 If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 
@@ -73,11 +73,11 @@ If the person who raised the incident is the best person to debug the issue, the
 
 ### Customer communications
 
-The main way to communicate an incident to customers is via [the banner feature flag](https://app.posthog.com/feature_flags/984). It's the responsibility of the incident lead to enable the banner, and to disable it when the incident is resolved.
+Major incidents such as the app being partially or fully unreachable, as well as ingestion delays of 15 minutes or longer should be clearly communicated to our customers so that they know what is going on and what we are doing to resolve it.
 
-All in-app banners should link to a resource offering more information, usually the status page.
+The main way to communicate an incident to customers is via the [status page](https://status.posthog.com/). There you can set granular information on the status of the problem and which components are affected. If the incident is critical and clearly impacting users then it makes sense to also update [the banner feature flag](https://app.posthog.com/feature_flags/984) which will show an announcement at the top of the app. It's the responsibility of the incident lead to enable the banner, and to disable it when the incident is resolved.
 
-The banner should simply state the user impact and direct users to more detailed information. Keep it simple, and direct.
+All in-app banners should link to a resource offering more information, usually the status page. The banner should simply state the user impact and direct users to more detailed information. Keep it simple, and direct.
 
 Example flag payloads:
 `Events from the last 5 days may be duplicated due to an error. [More info](https://status.posthog.com/).`
