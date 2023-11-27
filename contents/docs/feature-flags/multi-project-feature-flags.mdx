@@ -1,0 +1,29 @@
+---
+title: Multi-project feature flags
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+In the PostHog app, projects are often used as different environments, like staging and production, to test new features before releasing them to production.
+
+## Copying a flag across projects
+
+The copy/update feature ensures that your flag is transferred accurately and consistently to the target project. This eliminates the need for manual replication, which can be prone to errors.
+
+If the flag with the given key does not exist in the target project, a new flag will be created from scratch. If it already exists, the existing flag in the target project will be fully overwritten with the one from your source project
+
+> **Note:** If you copy a flag linked to a dynamic cohort and the cohort with the same name does not exist in the target project, the entire cohort will be copied over. For a linked static cohort, the cohort will get copied, but it will be empty. This is because the associated persons might not exist in the target project.
+
+Follow these steps to copy or update the flag in another project:
+
+1. Select a feature flag you want to copy.
+2. Go to the __Projects__ tab.
+3. Choose the project to copy the flag to
+4. Click __Copy__ or __Update__ - this depends on whether the flag already exists in the target project.
+5. Check the table overview at the bottom to see the newly created or updated flag.
+
+![Multi-project feature flags](../../images/features/feature-flags/multi-project-feature-flags.png)
