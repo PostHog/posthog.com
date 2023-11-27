@@ -1,6 +1,6 @@
 ---
 date: 2023-11-17
-title: "NPS vs CSAT vs CES: Which is best for SaaS"
+title: "NPS vs CSAT vs CES: Which is best for SaaS?"
 author:
   - lior-neu-ner
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
@@ -173,27 +173,31 @@ To best debug UX problems, you should use CES surveys after key interactions, su
 - **After a major UI update** – to confirm users can still navigate through your app effectively.
 - **When a user is migrating from a competitor's product to yours** – to highlight areas for improvement in onboarding.
 
-## NPS vs CSAT vs CES: Which one is best?
+## Which one should you use?
  
-Our recommendation is to use CSAT before you have [product-market fit](/founders/measure-product-market-fit), and NPS after you do.
+Here's what we recommend:
 
-Before product-market fit, your app is constantly changing as you figure out what to build, so it makes sense to focus on the short-term only. CSAT surveys will enable to you quickly determine if your changes are meeting the expectations of your users, helping you iterate faster. On the other hand, NPS is better for understanding long-term user sentiment, so is not well suited for rapidly evolving products.
+- **Use CSAT before before product-market fit.** Your app is constantly changing at this stage as you figure out what to build, so it makes sense to focus on the short term only. CSAT surveys enable to you quickly determine if your changes are meeting expectations, so you can iterate further. Also consider [measuring product-market fit](/founders/measure-product-market-fit) using a PMF survey.
 
-Conversely, once you've achieved product-market fit and your product is more stable, NPS will be more valuable. At this stage, you're looking to grow and maintain a loyal user base, and NPS provides a clearer picture of which of your users are likely to retain or churn.
+- **Use NPS after you've achieved product-market fit.** At this stage, you're looking to grow and maintain a loyal user base. NPS provides a clearer picture than CSAT of which of your users are likely to retain or churn.
 
-CES surveys don't provide insights into short or long-term user sentiment, so we prefer to avoid using them. However, CES can be useful if ease of use is key feature differentiating you from your competitors. For example, [Linear](https://linear.app/) emphasizes it's speed and keyboard shortcuts as a differentator from it's main competitor [Jira](https://www.atlassian.com/software/jira). In this case, measuring CES over time can be an indicator of whether your product is maintaining its competitive advantage.
+- **Use CES surveys if ease of use is a competitive advantage.** CES surveys don't provide any insight into short or long-term user sentiment, but they're useful if ease of use is _critical_ to your product. [Linear](https://linear.app/) , for example, emphasizes speed and keyboard shortcuts as a key benefit compared to its main competitor, [Jira](https://www.atlassian.com/software/jira). In this case, measuring CES over time can be an indicator of whether your product is maintaining its competitive advantage.
 
-Lastly, it's worth mentioning that neither NPS, CSAT, or CES surveys are a replacement for [talking to your users](/product-engineers/10x-engineers-do-user-interviews). Surveys are efficient at collecting data from a large audience and thus are useful for quickly identifying general trends in user opinions. However, they lack the depth and nuanced understanding that can be gained from direct conversations with your users. 
+Just remember that neither NPS, CSAT, nor CES surveys can replace [talking to your users](/product-engineers/10x-engineers-do-user-interviews). 
 
-User interviews are time-consuming, though, and so not scalable for larger user bases. Thus it's best to combining surveys with regular interviews. This approach allows you to gather both broad quantitative insights and deep qualitative feedback.
+Surveys are an efficient way to collect data from a large audience and identify general trends. But they lack the depth and nuanced understanding that can be gained from direct conversations with your users. 
+
+Combining surveys with regular interviews allows you to gather both broad quantitative insights and deep qualitative feedback.
 
 ## Summary
 
 To summarize:
 
 - **CSAT** is great for immediate feedback and is most useful during the early stages of a product when rapid iteration and responsiveness to user feedback are critical.
+
 - **NPS** is ideal for gauging long-term customer loyalty and can be more effective for mature products, where the focus is on growth and retention.
-- **CES** is particularly useful for products where ease of use is a key differentiator. It helps in understanding how smooth and effortless the user experience is, which can be a crucial factor in retaining users in highly competitive markets.
+
+- **CES** helps you understand how smooth and effortless the user experience is, which can be a crucial factor in retaining users in highly competitive markets.
 
 Here's a table summarizing their differences:
 
