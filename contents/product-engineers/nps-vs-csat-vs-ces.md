@@ -136,6 +136,20 @@ With this in mind, try to use CSAT surveys after key interactions in your user j
 - **Before subscription renewal –** to allow you to address any issues beforehand.
 - **After customer support interaction –** to see if customers feel their issue has been resolved.
 
+### How to use CSAT to improve your SaaS product
+
+Similar to [using NPS to improve your product](#how-to-use-nps-to-improve-your-saas-product), first segment your responses by assigning a [persona](/product-engineers/how-to-create-user-personas) to each one and filtering out any that don't match your key user persona. 
+
+Then, analyze the differences between users who answered positively versus those who didn't. You can do this by conducting user interviews, follow-up surveys, and looking at product analytics data. Here are some questions you should find answers to:
+
+- Which features are most used by users with positive response? How does this compare to everyone else? If there's a difference, why so?
+- What problem does your app solve for users with positive response? Why isn't this the case for everyone else?
+- What are the differences between positive responses and everyone else? 
+- What were the common complaints among those who gave lower ratings?
+- What features are most requested by users with lower scores?
+
+After gathering this data, identify patterns and translate these insights into actionable improvements for your product.
+
 ## What is CES?
 
 ![CES survey](../images/blog/nps-csat-ces/ces-survey.png)
