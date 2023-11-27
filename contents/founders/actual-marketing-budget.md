@@ -84,7 +84,7 @@ Increase:
 - Start doing events. We’re not sure what this looks like yet. 
 - Partner marketing. Probably more a sales thing, but this is something we’re potentially interested in.
 
-On the hiring side, we don’t currently have plans to hire additional people onto the team - we’re much more reactive here depending on how things go!
+On the hiring side, we don’t currently have plans to hire additional people onto the team – we’re much more reactive here depending on how things go!
 
 ## What do you think?
 
