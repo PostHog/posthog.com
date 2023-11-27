@@ -1,6 +1,6 @@
 ---
 date: 2023-11-23
-title: How we spend our marketing budget at PostHog - with actual $ figures
+title: How we spend our marketing budget at PostHog (with actual $ figures)
 author:
   - charles-cook
 featuredImage: ../images/blog/transparency.jpeg
