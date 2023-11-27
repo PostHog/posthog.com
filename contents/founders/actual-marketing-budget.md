@@ -39,9 +39,9 @@ This is a summary of what a typical monthly marketing spend looks like for us:
   - Paid ads: $40,000
   - Agency to manage the paid ads: $5,000
   - Sponsorships:
-  - Newsletters: $15,000
-  - Influencers: $5,000
-  - Open source projects: $2,000
+    - Newsletters: $15,000
+    - Influencers: $5,000
+    - Open source projects: $2,000
   - Merch: $3,000
   - Events: $0
   - PR: $0
