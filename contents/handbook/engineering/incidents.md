@@ -11,7 +11,6 @@ Incidents are going to happen.
 **When in doubt, raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong.
 
 To declare an incident, type `/incident` anywhere in Slack. This will create a new channel and send updates.
-
 Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
 
 Some things that should definitely be an incident
