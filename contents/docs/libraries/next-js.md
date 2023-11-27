@@ -14,7 +14,7 @@ PostHog makes it easy to get data about traffic and usage of your [Next.js](http
 
 This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/libraries/react) and the [Node.js](/docs/libraries/node) SDKs.
 
-> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
+> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs).
 
 Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
@@ -375,6 +375,6 @@ To improve the reliability of client-side tracking and make requests less likely
 
 ## Further reading
 
-- [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
