@@ -45,7 +45,7 @@ export default function Post({
             ref={containerRef}
             className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[35px_1fr] items-center' : ''}`}
         >
-            {!articleView && <LikeButton postID={id} />}
+            {!articleView && <LikeButton slug={slug} postID={id} />}
             <span className={`flex items-center ${articleView ? 'py-px' : ''}`}>
                 <Link
                     className={`inline m-0 font-semibold border-t border-b !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit hover:transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark relative 

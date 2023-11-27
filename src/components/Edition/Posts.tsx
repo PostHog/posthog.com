@@ -167,8 +167,6 @@ export const Sidebar = () => {
 
 export const PostsContext = createContext({})
 
-export const PostContext = createContext({})
-
 const menusByRoot = {
     tutorials: { parent: communityMenu, activeInternalMenu: communityMenu.children[2] },
     blog: { parent: companyMenu, activeInternalMenu: companyMenu.children[5] },
@@ -178,56 +176,27 @@ const menusByRoot = {
 const Router = ({ children, prev }: { children: React.ReactNode; prev: string | null }) => {
     const { fullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
-    const [postID, setPostID] = useState()
-
-    useEffect(() => {
-        fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${qs.stringify(
-                {
-                    fields: ['id'],
-                    filters: {
-                        slug: {
-                            $eq: pathname,
-                        },
-                    },
-                },
-                { encodeValuesOnly: true }
-            )}`
-        )
-            .then((res) => res.json())
-            .then((posts) => {
-                if (posts?.data?.length > 0) {
-                    setPostID(posts.data[0].id)
-                }
-            })
-    }, [pathname])
 
     return (
-        <PostContext.Provider
-            value={{
-                postID,
-            }}
+        <div
+            className={`px-4 md:px-0 2xl:px-5 md:mt-0 mb-12 md:mb-0 mx-auto transition-all ${
+                fullWidthContent ? 'max-w-full -mx-5' : 'max-w-screen-3xl box-content'
+            }`}
         >
-            <div
-                className={`px-4 md:px-0 2xl:px-5 md:mt-0 mb-12 md:mb-0 mx-auto transition-all ${
-                    fullWidthContent ? 'max-w-full -mx-5' : 'max-w-screen-3xl box-content'
-                }`}
-            >
-                {prev ? (
-                    <Default>{children}</Default>
-                ) : (
-                    {
-                        '/product-engineers': <Blog title="Product engineers" />,
-                        '/features': <Blog title="Features" />,
-                        '/founders': <Blog title="Founders" />,
-                        '/blog': <Blog />,
-                        '/newsletter': <Newsletter />,
-                        '/spotlight': <Blog title="Spotlight" />,
-                        '/customers': <Customers />,
-                    }[pathname] || <Default>{children}</Default>
-                )}
-            </div>
-        </PostContext.Provider>
+            {prev ? (
+                <Default>{children}</Default>
+            ) : (
+                {
+                    '/product-engineers': <Blog title="Product engineers" />,
+                    '/features': <Blog title="Features" />,
+                    '/founders': <Blog title="Founders" />,
+                    '/blog': <Blog />,
+                    '/newsletter': <Newsletter />,
+                    '/spotlight': <Blog title="Spotlight" />,
+                    '/customers': <Customers />,
+                }[pathname] || <Default>{children}</Default>
+            )}
+        </div>
     )
 }
 

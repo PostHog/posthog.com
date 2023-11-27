@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { PostContext, PostsContext } from './Posts'
-import { Heart } from 'components/Icons'
+import { PostsContext } from './Posts'
 import { useUser } from 'hooks/useUser'
-import { IconTriangleUp, IconTriangleUpFilled } from '@posthog/icons'
+import { IconTriangleUpFilled } from '@posthog/icons'
 
-export default function Upvote({ className = '' }: { children: React.ReactNode }) {
-    const { postID } = useContext(PostContext)
+export default function Upvote({ className = '', id, slug }: { id: number; slug: string; className?: string }) {
     const { setLoginModalOpen } = useContext(PostsContext)
     const [liked, setLiked] = useState(false)
     const { likePost, user } = useUser()
@@ -16,15 +14,15 @@ export default function Upvote({ className = '' }: { children: React.ReactNode }
             setLoginModalOpen(true)
         } else {
             setLiked(!liked)
-            likePost(postID, liked)
+            likePost(id, liked, slug)
         }
     }
 
     useEffect(() => {
-        setLiked(user?.profile?.postLikes?.some((post) => post.id === postID))
-    }, [user, postID])
+        setLiked(user?.profile?.postLikes?.some((post) => post.id === id))
+    }, [user, id])
 
-    return postID ? (
+    return id ? (
         <div className={className}>
             <div className="pb-1">
                 <strong className="text-sm">Was this post useful?</strong>
