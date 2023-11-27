@@ -70,7 +70,7 @@ I’ve written about [running paid ads channels](/founders/dev-marketing-paid-ad
   - Quora: 10%
   - Random experiments (e.g. G2, Bing): 0-10%
 
-As the barrier to implementing PostHog is reasonably high in the grand scheme of SaaS tools - you need a software product that has users, instrumenting PostHog isn’t totally trivial - we don’t use the channels listed under awareness to try and drive sign ups at all. 
+The barrier to implementing PostHog is reasonably high in the grand scheme of SaaS tools - you need a software product that has users, instrumenting PostHog isn’t totally trivial etc. This means we don’t use the channels listed under awareness to try and drive sign ups at all. 
 
 ## What we’re thinking of changing
 
