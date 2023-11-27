@@ -87,7 +87,7 @@ With this in mind, it's best to wait for users to properly experience your app. 
 First, segment your responses by assigning a [persona](/product-engineers/how-to-create-user-personas) to each person that filled out the survey. Then, filter out any responses by users who do not match your key user persona. This way 
 you can focus on the feedback from your target user group and ensure the insights are more relevant.
 
-Next, **focus your attention on the passive responses** (the users who responded with 7 or 8). These users will be the easiest to convert into active promoters of your product and there's usually just one or two things holding them back. Find out what these things are (by conducting interviews or follow-up surveys) and address their feedback with product changes. Once you've done so, let them know and they'll be grateful you've taken their input seriously. This should pursuade them into becoming promoters.
+Next, **focus your attention on the passive responses** (the users who responded with 7 or 8). These users will be the easiest to convert into active promoters of your product and there's usually just one or two things holding them back. Find out what these things are (by conducting interviews or follow-up surveys) and address their feedback with product changes. Once you've done so, let them know and they'll be grateful you've taken their input seriously. This should persuade them into becoming promoters.
 
 Once you've done so, repeat the same steps for detractors who responded with 5 or 6. You can also repeat the process again for detractors who reponded from 0-4, but keep in mind that the lower someones response is, the closer they are to being a lost cause and it may not be worth the effort to save.
 
