@@ -2091,7 +2091,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Web analytics',
-                    url: '/docs/product-analytics/web-analytics',
+                    url: '/docs/web-analytics',
                     icon: 'IconPieChart',
                     color: 'seagreen',
                     badge: {
