@@ -47,7 +47,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-[PostHog](https://posthog.com) is an all-in-one, [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a single platform. Think Amplitude + Hotjar + LaunchDarkly in one.
+[PostHog](https://posthog.com) is an all-in-one, [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a single platform. Think Amplitude + Hotjar + [LaunchDarkly](/blog/best-launchdarkly-alternatives) in one.
 
 PostHog offers EU data hosting, so you can keep all your user data within the EU to comply with the GDPR. Hobbyists can also self-host PostHog Open Source via Docker Compose, though this is only recommended for smaller event volumes in the ~100k per month range. PostHog also supports event autocapture, so you can start collecting useful data immediately without instrumenting events by hand.
 
