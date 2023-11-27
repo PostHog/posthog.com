@@ -62,8 +62,8 @@ If you want to learn more about how we implement these things in practice at Pos
 I’ve written about [running paid ads channels](/founders/dev-marketing-paid-ads) before, but this is how that $40k split looked over the last 3 months on average (as the channel mix varies month to month):
 
 - **Conversion**
-  - Google Search - brand: 10%
-  - Google Search - generic: 50%
+  - Google Search - brand keywords: 10%
+  - Google Search - product keywords: 50%
 - **Awareness**
   - Twitter: 10%
   - LinkedIn: 10%
