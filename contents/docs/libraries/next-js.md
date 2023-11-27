@@ -303,7 +303,13 @@ export async function getServerSideProps(ctx) {
     )
 
     flags = await client.getAllFlags(session.user.email);
-    client.capture(session.user.email, 'loaded blog article', { url: ctx.req.url })
+    client.capture({
+      distinctId: session.user.email,
+      event: 'loaded blog article',
+      properties: {
+        $current_url: ctx.req.url,
+      },
+    });
 
     await client.shutdownAsync()
   }
