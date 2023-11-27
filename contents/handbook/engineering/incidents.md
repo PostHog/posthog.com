@@ -75,7 +75,7 @@ If the person who raised the incident is the best person to debug the issue, the
 
 Major incidents such as the app being partially or fully unreachable, as well as ingestion delays of 15 minutes or longer should be clearly communicated to our customers so that they know what is going on and what we are doing to resolve it.
 
-The main way to communicate an incident to customers is via the [status page](https://status.posthog.com/). There you can set granular information on the status of the problem and which components are affected. If the incident is critical and clearly impacting users then it makes sense to also update [the banner feature flag](https://app.posthog.com/feature_flags/984) which will show an announcement at the top of the app. It's the responsibility of the incident lead to enable the banner, and to disable it when the incident is resolved.
+The main way to communicate an incident to customers is the [status page](https://status.posthog.com/) which is updated via the incident slack channel using `/incident sp`. There you can set granular information on the status of the problem and which components are affected. If the incident is critical and clearly impacting users then it makes sense to also update [the banner feature flag](https://app.posthog.com/feature_flags/984) which will show an announcement at the top of the app. It's the responsibility of the incident lead to enable the banner, and to disable it when the incident is resolved.
 
 All in-app banners should link to a resource offering more information, usually the status page. The banner should simply state the user impact and direct users to more detailed information. Keep it simple, and direct.
 
