@@ -15,7 +15,14 @@ export default function Post({ params }) {
                         $eq: slug,
                     },
                 },
-                populate: ['featuredImage.image', 'post_category', 'authors.avatar', 'likes', 'CTA'],
+                populate: [
+                    'featuredImage.image',
+                    'post_category.post_tags',
+                    'post_tags',
+                    'authors.avatar',
+                    'likes',
+                    'CTA',
+                ],
             },
             {
                 encodeValuesOnly: true,
