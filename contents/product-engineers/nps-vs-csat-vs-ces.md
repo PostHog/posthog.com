@@ -80,14 +80,15 @@ NPS is particularly handy for understanding long-term user satisfaction.
 
 With this in mind, it's best to wait for users to properly experience your app. Then, you should run NPS surveys every month or quarter to understand how their experience changes over time. This enables you to identify trends in how your product changes are affecting your user experience.
 
-### How to use NPS to improve your SaaS
+### How to use NPS to improve your app
 
-First, segment your responses by assigning a [persona](/product-engineers/how-to-create-user-personas) to each person that filled out the survey. Then, filter out any responses by users who do not match your key user persona. This way 
-you can focus on the feedback from your target user group and ensure the insights are more relevant.
+First, focus on the feedback from your main target audience only. Do this by assigning a [user persona](/product-engineers/how-to-create-user-personas) to each person that responded to your survey and then filtering out those who don't match your key persona.
 
-Next, **focus your attention on the passive responses** (the users who responded with 7 or 8). These users will be the easiest to convert into active promoters of your product and there's usually just one or two things holding them back. Find out what these things are (by conducting interviews or follow-up surveys) and address their feedback with product changes. Once you've done so, let them know and they'll be grateful you've taken their input seriously. This should persuade them into becoming promoters.
+Next, **focus your attention on the passive responses** (the users who responded with 7 or 8). These users will be the easiest to convert into active promoters of your product and there's usually just one or two things holding them back.
 
-Once you've done so, repeat the same steps for detractors who responded with 5 or 6. You can also repeat the process again for detractors who reponded from 0-4, but keep in mind that the lower someones response is, the closer they are to being a lost cause and it may not be worth the effort to save.
+Find out what these things are (by conducting interviews or follow-up surveys) and address their feedback with product changes. Once you've done so, let them know and they'll be grateful you've taken their input seriously. This should persuade them into becoming promoters.
+
+Once you've done so, repeat the same steps for detractors who responded with 5 or 6. You can also repeat the process again for detractors who responded from 0-4, but keep in mind that the lower their response is, the more effort it will take to improve – which may not be worthwhile.
 
 ## What is CSAT?
 
@@ -136,11 +137,13 @@ With this in mind, try to use CSAT surveys after key interactions in your user j
 - **Before subscription renewal –** to allow you to address any issues beforehand.
 - **After customer support interaction –** to see if customers feel their issue has been resolved.
 
-### How to use CSAT to improve your SaaS product
+### How to use CSAT to improve your app
 
-Similar to [using NPS to improve your product](#how-to-use-nps-to-improve-your-saas-product), first segment your responses by assigning a [persona](/product-engineers/how-to-create-user-personas) to each one and filtering out any that don't match your key user persona. 
+Similar to [using NPS to improve your product](#how-to-use-nps-to-improve-your-app), first segment your responses by assigning a [persona](/product-engineers/how-to-create-user-personas) to each one and filtering out any that don't match your key user persona. 
 
-Then, analyze the differences between users who answered positively versus those who didn't. You can do this by conducting user interviews, follow-up surveys, and looking at product analytics data. Here are some questions you should find answers to:
+Then, analyze the differences between users who answered positively versus those who didn't. You can do this by conducting user interviews, follow-up surveys, and looking at product analytics data. 
+
+Here are important questions you should find answers to:
 
 - Which features are most used by users with positive response? How does this compare to everyone else? If there's a difference, why so?
 - What problem does your app solve for users with positive response? Why isn't this the case for everyone else?
@@ -187,6 +190,17 @@ To best debug UX problems, you should use CES surveys after key interactions, su
 - **After a major UI update** – to confirm users can still navigate through your app effectively.
 - **When a user is migrating from a competitor's product to yours** – to highlight areas for improvement in onboarding.
 
+### How to use CES to improve your app
+
+Once you've identified a feature that is difficult to use, find out why this is the case. Once again, you can do this by conducting user interview, follow-up surveys or analyzing product analytics. 
+
+Good questions to dig into are:
+
+- Which parts of the user funnel had the biggest drop-offs? Why?
+- How does the user experience differ from expectations? Where are users getting confused or frustrated?
+- Are there any technical issues, like bugs or slow performance?
+- How does your feature's usability compare to competitors?
+
 ## Which one should you use?
  
 Here's what we recommend:
@@ -195,7 +209,7 @@ Here's what we recommend:
 
 - **Use NPS after you've achieved product-market fit.** At this stage, you're looking to grow and maintain a loyal user base. NPS provides a clearer picture than CSAT of which of your users are likely to retain or churn.
 
-- **Use CES surveys if ease of use is a competitive advantage.** CES surveys don't provide any insight into short or long-term user sentiment, but they're useful if ease of use is _critical_ to your product. [Linear](https://linear.app/) , for example, emphasizes speed and keyboard shortcuts as a key benefit compared to its main competitor, [Jira](https://www.atlassian.com/software/jira). In this case, measuring CES over time can be an indicator of whether your product is maintaining its competitive advantage.
+- **Use CES surveys if ease of use is a competitive advantage.** CES surveys don't provide any insight into short or long-term user sentiment, but they're useful if ease of use is _critical_ to your product. [Linear](https://linear.app/) , for example, emphasizes speed and keyboard shortcuts as a key benefit compared to its main competitor, [Jira](https://www.atlassian.com/software/jira). In this case, measuring CES over time can be an indicator of whether their product is maintaining its competitive advantage.
 
 Just remember that neither NPS, CSAT, nor CES surveys can replace [talking to your users](/product-engineers/10x-engineers-do-user-interviews). 
 
@@ -217,8 +231,8 @@ Here's a table summarizing their differences:
 
 |           | NPS                                   | CSAT                                       | CES                                           |
 |-----------------|---------------------------------------|--------------------------------------------|-----------------------------------------------|
-| **Timeframe**   | Long-term                             | Short-term                                 | Short-term                                    |
-| **Insight**   | User sentiment towards your app     | User satisfication                                | Ease of using a specific feature                                    |
+| **Time frame**   | Long-term                             | Short-term                                 | Short-term                                    |
+| **Insight**   | User sentiment towards your app     | User satisfaction                                | Ease of using a specific feature                                    |
 | **Best for**         | Identifying users who are likely to retain or churn              | Understanding how well your product meets user expectations                          | Identifying UX problems                 |
 | **When to ask**    | At regular intervals (e.g., monthly, quarterly) to existing users           | Immediately after using a feature                | Immediately after using a feature      |
 
