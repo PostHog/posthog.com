@@ -31,7 +31,7 @@ There are two types of data which you can gather for product analytics:
 - *Quantitative data* is objectively measurable, such as an increase in a number of users or sales. Using [funnel analysis](/docs/user-guides/funnels) in PostHog to measure drop-off is an example of quantitative data analysis.
 - *Qualitative data* is that which is subjective, such as user feedback or observations. Using [session recording](/docs/user-guides/recordings) in PostHog to intuit where users may be experiencing friction is an example of qualitative data analysis.
 
-There are also frameworks which can be used to translate information between the two. [NPS scores](/product-engineers/nps-vs-csat-vs-ces), for example, are often used to translate a user sentiment into a measurable data point.
+There are also frameworks which can be used to translate information between the two. [NPS and CSAT scores](/product-engineers/nps-vs-csat-vs-ces), for example, are often used to translate user sentiment into a measurable data point.
 
 > This article is part of our [PostHog Academy series](/tracks) where we explain the fundamentals of product analytics.
 
