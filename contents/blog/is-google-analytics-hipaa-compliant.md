@@ -61,7 +61,7 @@ If you want to find [product market fit](https://posthog.com/blog/how-to-product
 
 While there are lots options out there, we think **PostHog is the most HIPAA-compliant product analytics platform** out there.
 
-Unlike third-party analytics options like Mixpanel or Amplitude, **PostHog is the only comprehensive product analytics platform you can self-host** on your own infrastructure. 
+Unlike third-party analytics options like Mixpanel or [Amplitude](/blog/best-amplitude-alternatives), **PostHog is the only comprehensive product analytics platform you can self-host** on your own infrastructure. 
 
 This is important because:
 
