@@ -59,7 +59,7 @@ export default function Hero() {
                         transition={{ delay: 1.5, staggerChildren: 2 }}
                         className="flex justify-center items-center gap-2"
                     >
-                        <motion.div variants={ctaVariants} transition={{ duration: 3 }}>
+                        <motion.div variants={ctaVariants} transition={{ duration: 5 }}>
                             <SignupCTA className="" />
                         </motion.div>
                         <motion.div variants={ctaVariants} transition={{ duration: 2 }}>
