@@ -22,7 +22,7 @@ Um, sure I guess? But especially if you’re into product-led growth (like we ar
 
 By sharing some of this info, I’m hoping it’ll help others as a data point. **I am not saying this is the best way to spend your marketing budget.** I have no idea! That’s the point!! But I’m hoping _maybe_ someone will see this and tell us how we could do better...
 
-## Some context
+## But first, some context...
 
 Startups are different (woah, much insight!) 
 
@@ -37,7 +37,7 @@ Let’s get into it.
 
 ## Show me the money
 
-This is a summary of what a typical monthly marketing spend looks like for us:
+Our typical monthly marketing spend looks like this:
 
 - **People: $72,000 per month**
   - 3 content marketers
