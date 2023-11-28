@@ -2488,10 +2488,6 @@ export const docsMenu = {
                             name: 'n8n',
                         },
                         {
-                            url: '/docs/cdp/redshift-import',
-                            name: 'Redshift',
-                        },
-                        {
                             url: '/docs/cdp/rudderstack-import',
                             name: 'Rudderstack',
                         },
