@@ -2265,6 +2265,12 @@ export const docsMenu = {
                     icon: 'IconFeatures',
                     color: 'purple',
                 },
+                {
+                    name: 'Multi-project feature flags',
+                    url: '/docs/feature-flags/multi-project-feature-flags',
+                    icon: 'IconCalculator',
+                    color: 'blue',
+                },
             ],
         },
         {

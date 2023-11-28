@@ -85,7 +85,7 @@ export default function RichText({
     values,
     onSubmit,
     maxLength = 2000,
-    excerptDisabled,
+    preview = true,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
@@ -181,9 +181,6 @@ export default function RichText({
 
     useEffect(() => {
         setFieldValue('body', value)
-        if (excerptDisabled) {
-            setFieldValue('excerpt', value.split('\n')[0])
-        }
     }, [value])
 
     const handleKeyDown = (e) => {
@@ -271,50 +268,58 @@ export default function RichText({
                             </button>
                         </Tooltip>
                     </li>
-                    <li className="!ml-auto">
-                        <Tooltip content="Edit">
-                            <button
-                                onClick={() => setShowPreview(false)}
-                                type="button"
-                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
-                                    showPreview ? '' : '!border border-light dark:border-dark bg-light dark:bg-dark'
-                                }`}
-                            >
-                                <Edit />
-                            </button>
-                        </Tooltip>
-                    </li>
-                    <li>
-                        <Tooltip content="Preview">
-                            <button
-                                onClick={() => setShowPreview(true)}
-                                type="button"
-                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
-                                    showPreview ? 'border border-light dark:border-dark bg-light dark:bg-dark' : ''
-                                }`}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-5 h-5"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
-                                    />
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                    />
-                                </svg>
-                            </button>
-                        </Tooltip>
-                    </li>
+                    {preview && (
+                        <>
+                            <li className="!ml-auto">
+                                <Tooltip content="Edit">
+                                    <button
+                                        onClick={() => setShowPreview(false)}
+                                        type="button"
+                                        className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
+                                            showPreview
+                                                ? ''
+                                                : '!border border-light dark:border-dark bg-light dark:bg-dark'
+                                        }`}
+                                    >
+                                        <Edit />
+                                    </button>
+                                </Tooltip>
+                            </li>
+                            <li>
+                                <Tooltip content="Preview">
+                                    <button
+                                        onClick={() => setShowPreview(true)}
+                                        type="button"
+                                        className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
+                                            showPreview
+                                                ? 'border border-light dark:border-dark bg-light dark:bg-dark'
+                                                : ''
+                                        }`}
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-5 h-5"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                                            />
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </Tooltip>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </div>
             {imageLoading && (

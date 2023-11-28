@@ -17,7 +17,6 @@ tags:
 
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
-import { ComparisonHeader } from 'components/ComparisonTable/header'
 
 **Contents:**
 
@@ -32,12 +31,15 @@ import { ComparisonHeader } from 'components/ComparisonTable/header'
 Over 10,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
 
 ### 1. It's an all-in-one platform
+
 PostHog is more than a product analytics tool, it's an all-in-one Product OS that replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flagging, Hotjar for session recording, and [Optimizely](/blog/posthog-vs-optimizely) for A/B testing, or you could just use PostHog for everything. One platform, one price: seamless integration.
 
 ### 2. It's built for engineers
+
 Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures data, so you don't have to spend time instrumenting events every time you update your app or website – we also offer robust tools for capturing custom events and actions when you need to. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/contact-sales) if you have questions.
 
 ### 3. It's open source
+
 Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and use it to [build your own apps](/docs/apps/build) or even add extra functionality. You also benefit from the work of other teams who build their own apps. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
 
 > **Further reading:** [How Amplitude compares to other PostHog alternatives](/blog/posthog-alternatives)
@@ -58,10 +60,10 @@ This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our 
   <ComparisonRow column1={true} column2={true} feature="Revenue tracking" />
   <ComparisonRow column1={true} column2={true} feature="UTM tracking" />
   <ComparisonRow column1={true} column2={true} feature="Event tracking" />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" />
   <ComparisonRow column1={false} column2={true} feature="Heatmaps" />
   <ComparisonRow column1={false} column2={true} feature="Session replay" />
-  <ComparisonRow column1={false} column2={true} feature="Experimentation" />
+  <ComparisonRow column1={"Add-on"} column2={true} feature="Experimentation" />
   <ComparisonRow column1={true} column2={true} feature="Predictive analytics" />
   <ComparisonRow column1={false} column2={true} feature="User surveys" />
   <ComparisonRow column1={false} column2={true} feature="Hedgehogs" />
@@ -71,9 +73,9 @@ This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our 
 
 Both Amplitude and PostHog integrate with a large number of data sources. The table below is a snapshot of what each platform offers – check out the [PostHog App Store](/apps) for a full list of what's available.
 
+#### Export
 
 <ComparisonTable column1="Amplitude Analytics" column2="PostHog">
-  <ComparisonHeader category="Export" />
   <ComparisonRow column1={true} column2={true} feature="Redshift" />
   <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" />
   <ComparisonRow column1={true} column2={true} feature="Snowflake" />
@@ -85,10 +87,11 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
   <ComparisonRow column1={true} column2={true} feature="Salesforce" />
   <ComparisonRow column1={false} column2={true} feature="Sentry" />
   <ComparisonRow column1={true} column2={true} feature="API" />
-  </ComparisonTable>
+</ComparisonTable>
+
+#### Import
   
 <ComparisonTable column1="Amplitude Analytics" column2="PostHog">
-  <ComparisonHeader category="Import" />
   <ComparisonRow column1={true} column2={true} feature="Redshift" />
   <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" />
   <ComparisonRow column1={true} column2={true} feature="Snowflake" />
@@ -103,18 +106,19 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
 
 ![PostHog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-### Integrated session recording
-While Amplitude and PostHog share many features, PostHog has [Session Recording](/product/session-recording) built in as standard.
+### Integrated session replay
 
-Session recording is an incredibly powerful tool for understanding what people are actually doing in your product. The tight integration within PostHog means you can go from viewing a funnel insight to watching real users interact with the funnel, making it easy to diagnose problems and find solutions.
+While Amplitude and PostHog share many features, PostHog has [session replays](/product/session-replay) built in as standard.
 
-Amplitude doesn't have session recording, so you have to run a third-party tool [like Hotjar or FullStory](/blog/best-open-source-session-replay-tools) as well – an added expense that lacks the tight integration afforded by a built-in app.
+Session replay is an incredibly powerful tool for understanding what people are actually doing in your product. The tight integration within PostHog means you can go from viewing a funnel insight to watching real users interact with the funnel, making it easy to diagnose problems and find solutions.
 
-### Experimentation and Feature Flags
+Amplitude doesn't have session replay, so you have to run a third-party tool [like Hotjar or FullStory](/blog/best-open-source-session-replay-tools) as well – an added expense that lacks the tight integration afforded by a built-in app.
 
-Feature Flags and Experimentation (A/B testing and multivariate tests) are core PostHog features, available for free for anyone generating fewer than 1 million events per month. Feature Flags are also free as part of [PostHog Open Source](/docs/self-host)
+### Experimentation and surveys
 
-Amplitude Analytics doesn't include feature flags or experimentation by default, instead bundling them as part of a separate product, Amplitude Experiment, an additional cost on top of its core analytics product.
+Experimentation (A/B testing and multivariate tests) and surveys are core PostHog features, available for free for anyone generating fewer than 1 million flag requests or 250 survey responses per month.
+
+Amplitude doesn't have surveys. They also don't include experimentation by default, instead bundling it as part of a separate product, Amplitude Experiment, an additional cost on top of its core analytics product.
 
 ### Transparent pricing
 
@@ -136,8 +140,6 @@ Amplitude also uses machine learning to power what it calls predictive analytics
 
 Amplitude's entry-level tier is free to use up to 10 million events per month, which compares very favorably to rivals like Mixpanel (up to 100k monthly users), Pendo (up to 1,000 monthly users) and Heap (up to 10,000 sessions per month). Once you exceed 10 million events, you'll need to speak to Amplitude's sales team to proceed further.
 
-PostHog Cloud and PostHog Self-Hosted are free up to 1 million events per month, but unlike Amplitude you get premium features like Experimentation, Correlation Analysis, Group Analytics and user permissions for free when you're under this limit.
-
-PostHog Open Source is free for life, but is limited to one project. It includes all the core analytics features, such as Funnels, Trends, Cohorts, Paths, Feature Flags, and Session Recording, but doesn't have Experimentation or Correlation Analysis.
+PostHog Cloud is free up to 1 million events per month, but unlike Amplitude you get premium features like experimentation, correlation analysis, group analytics and user permissions for free when you're under this limit.
 
 <ArrayCTA /> 

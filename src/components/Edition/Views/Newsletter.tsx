@@ -4,6 +4,7 @@ import FeaturedPost from '../FeaturedPost'
 import PostsGrid from '../PostsGrid'
 import LandingPageNotice from '../LandingPageNotice'
 import { StaticImage } from 'gatsby-plugin-image'
+import SEO from 'components/seo'
 
 export default function Newsletter() {
     const { posts, isLoading } = useContext(PostsContext)
@@ -11,6 +12,7 @@ export default function Newsletter() {
 
     return (
         <div className="mx-auto max-w-screen-xl">
+            <SEO title="Newsletter - PostHog" />
             <LandingPageNotice title="Newsletter" />
             <FeaturedPost {...featuredPost?.attributes} />
             <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 pb-8 max-w-4xl mx-auto items-center border-border dark:border-dark border-2 rounded-md my-12 mt-24">
