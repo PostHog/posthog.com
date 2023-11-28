@@ -61,9 +61,9 @@ Our typical monthly marketing spend looks like this:
 ### Some notes
 
 - We do all of our content in-house. We have very occasionally worked with freelancers in the past, but we haven’t done this for a long time.
- 
+
 - Technically our frontend developer is not part of the marketing team ([Website & Docs](/handbook/small-teams/website-docs) is its own team at PostHog), but I appreciate at most companies your website will be considered a marketing expense.
- 
+
 - The 50-50 split is coincidental. 
 
 If you want to learn more about how we implement these things in practice at PostHog, it’s all in our [public handbook](/handbook/growth/marketing). 
@@ -91,8 +91,11 @@ Reduce:
 - Paid ads spend across a few channels we’ve been using purely for awareness. These don’t seem to be driving high paying customers for us. Hypothesis is that investing more in posting organic content will be much more effective. 
 
 Increase:
-- Spend on developer influencers, as we’ve been running some small experiments here that are looking promising. 
-- Start doing events. We’re not sure what this looks like yet. 
+
+- Spend on developer influencers, as we’ve been running some small experiments here that are looking promising.
+
+- Start doing events. We’re not sure what this looks like yet.
+
 - Partner marketing. Probably more a sales thing, but this is something we’re potentially interested in.
 
 On the hiring side, we don’t currently have plans to hire additional people onto the team – we’re much more reactive here depending on how things go!
