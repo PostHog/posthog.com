@@ -5,9 +5,9 @@ author: ["ian-vanagas"]
 tags: ["configuration", "feature flags", "events"]
 ---
 
-Astro is a frontend JavaScript framework focused on performance and simplifying the creation of content-based sites. It has seen a rapid increase in interest and usage since its release in 2022.
+[Astro](https://astro.build/) is a frontend JavaScript framework focused on performance and simplifying the creation of content-based sites. It has seen a rapid increase in interest and usage since its release in 2022.
 
-PostHog provides the tools you need to create the best possible Astro app. In this tutorial, we show you how to set them up. We create a basic Astro blog app, add PostHog on both the client and server, capture custom events, and set up feature flags.
+PostHog provides the tools you need to create the best possible Astro app. In this tutorial, we show you how to set them up. We create a basic Astro blog app, add PostHog on both the client and server, [capture custom events](/docs/product-analytics/capture-events), and set up [feature flags](/docs/feature-flags).
 
 ## Creating your Astro app
 
@@ -82,7 +82,7 @@ Finally, we can run our app with `npm run dev` to see our full Astro app running
 
 ## Adding PostHog on the client side
 
-With our app set up, we can add PostHog to it. To start, create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file. In this file, add your Javascript Web snippet which you can find in [your project settings](https://app.posthog.com/settings/project#snippet). 
+With our app set up, the next step is to add PostHog to it. To start, create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file. In this file, add your Javascript Web snippet which you can find in [your project settings](https://app.posthog.com/settings/project#snippet). 
 
 ```js
 ---
@@ -123,7 +123,7 @@ import PostHog from '../components/posthog.astro'
 </html>
 ```
 
-When you go back to your app and reload, PostHog now autocaptures pageviews, button clicks, session replays (if [you have them enabled](https://app.posthog.com/settings/project-replay)), and more.
+When you go back to your app and reload, PostHog now autocaptures pageviews, button clicks, session replays (if you [enable them](https://app.posthog.com/settings/project-replay)), and more.
 
 ![Event autocaptured](../images/tutorials/astro-analytics/events.png)
 
@@ -167,7 +167,7 @@ When you go back to your app and click the button, you then see a `praise_receiv
 
 ## Setting up a feature flag
 
-To use a feature flag in your app, first, you must create it in PostHog. Go to the [feature flags tab](https://app.posthog.com/feature_flags), click "New feature flag," add a key (we choose `new-button`), set the release condition to 100% of users, and click "Save."
+To use a feature flag in your app, first, you must create it in PostHog. Go to the [feature flags tab](https://app.posthog.com/feature_flags), click "New feature flag," add a key (we chose `new-button`), set the release condition to 100% of users, and click "Save."
 
 With the feature flag, go back to your home page at `pages/index.astro`. Add to your script the `onFeatureFlags()` function with an `isFeatureEnabled()` for your `new-button` flag. If enabled, change the `innerHTML` of your button.
 
@@ -250,7 +250,7 @@ Now when we reload the page, PostHog captures a `server_side_event`.
 One issue with our implementation is the hard-coded user distinct ID we are using to capture events. For it to use a real user’s ID, we can either:
 
 1. Use the distinct ID set by the client side PostHog in the request cookie.
-2. Create a new distinct ID on the server and use `identify()` to connect it in the client.
+2. Create a new distinct ID on the server and use [`identify()`](/docs/product-analytics/identify) to connect it in the client.
 
 We can start by changing the output mode in `astro.config.mjs` to `hybrid` so we can access the cookies.
 
