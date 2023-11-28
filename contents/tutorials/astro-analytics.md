@@ -1,6 +1,6 @@
 ---
 title: How to set up Astro analytics, feature flags, and more
-date: 2023-11-24
+date: 2023-11-28
 author: ["ian-vanagas"]
 tags: ["configuration", "feature flags", "events"]
 ---
@@ -33,8 +33,8 @@ Once created, go to the `src` folder and create a `layouts` folder. In this fold
 	</head>
 	<body>
 		<a href="/">Home</a>
-    <a href="/posts/">Posts</a>
-    <slot /> 
+		<a href="/posts/">Posts</a>
+		<slot /> 
 	</body>
 </html>
 ```
@@ -117,8 +117,8 @@ import PostHog from '../components/posthog.astro'
 	</head>
 	<body>
 		<a href="/">Home</a>
-    <a href="/posts/">Posts</a>
-    <slot /> 
+		<a href="/posts/">Posts</a>
+		<slot /> 
 	</body>
 </html>
 ```
@@ -188,7 +188,7 @@ import Layout from '../layouts/Layout.astro';
 		window.posthog.onFeatureFlags(() => {
 			if (window.posthog.isFeatureEnabled('new-button')) {
 				button.innerText = 'The best site ever!';
-    	}
+			}
 		});
 	</script>
 </Layout>
