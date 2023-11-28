@@ -1,5 +1,5 @@
 ---
-title: "How to create a survey in Webflow with PostHog"
+title: "How to create surveys in Webflow with PostHog"
 date: 2023-11-28
 author: ["lior-neu-ner"]
 showTitle: true
