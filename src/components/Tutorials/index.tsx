@@ -6,7 +6,6 @@ import Layout from '../Layout'
 import { SEO } from '../seo'
 import slugify from 'slugify'
 import { NewsletterForm } from 'components/NewsletterForm'
-import docs from 'sidebars/docs.json'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 import { Posts } from 'components/Blog'
 
@@ -21,12 +20,12 @@ const Tutorials = ({
 
     return (
         <Layout>
-            <SEO title="Tutorials - PostHog" />
+            <SEO title="Guides - PostHog" />
 
-            <PostLayout article={false} title="Tutorials" menu={docs} hideSidebar hideSurvey>
-                <h1 className="mb-6 mt-0">Tutorials</h1>
+            <PostLayout article={false} title="Guides" hideSidebar hideSurvey>
+                <h1 className="mb-6 mt-0">Guides</h1>
                 <Posts
-                    title={`Most ${allPostsFilter} tutorials`}
+                    title={`Most ${allPostsFilter} guides`}
                     posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
                     action={<Link to="/tutorials/all">View all</Link>}
                 />

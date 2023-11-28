@@ -128,7 +128,7 @@ C[iOS App - PostHog Swift] --> B[PostHog]
 D[Android App - PostHog Java] --> B[PostHog]
 E[Backend - PostHog Python] --> B[PostHog]
 B --> G
-G[3rd party CDP e.g. Segment/RudderStack] --> N[Extra destinations]
+G[3rd party CDP e.g. RudderStack] --> N[Extra destinations]
 B --> H[Saleforce]
 B --> I[Intercom]
 B --> K[Customer.io]

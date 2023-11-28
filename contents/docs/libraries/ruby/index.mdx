@@ -14,283 +14,70 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
-
 The `posthog-ruby` library provides tracking functionality on the server-side for applications built in Ruby.
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Installation
 
-Add this to your `Gemfile`:
+import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
 
-```bash
-gem "posthog-ruby"
-```
-
-In your app, set your API key **before** making any calls. If setting a custom `host`, make sure to include the protocol (e.g. `https://`).
-
-```ruby
-posthog = PostHog::Client.new({
-  api_key: "<ph_project_api_key>",
-  host: "<ph_instance_address>", # You can remove this line if you're using https://app.posthog.com
-  on_error: Proc.new { |status, msg| print msg }
-})
-```
-
-You can find your key in the 'Project Settings' page in PostHog.
+<RubyInstall />
 
 ### Debug logging
 
 The log level by default is set to WARN. You can change it to DEBUG if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.
 
-## Making calls
+## Capturing events
 
-### Capture
+import RubySendEvents from '../../integrate/send-events/_snippets/send-events-ruby.mdx'
 
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
+<RubySendEvents />
 
-A `capture` call requires:
+## Setting user properties
 
--   `distinct id` which uniquely identifies your user
--   `event name` to specify the event
+To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
-*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-
--   `properties`, which is a dictionary with any information you'd like to add
--   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
--   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
-
-For example:
-
-```ruby
+```php
 posthog.capture({
-    distinct_id: 'distinct id',
-    event: 'movie played',
+    distinct_id: 'distinct_id',
+    event: 'event_name',
     properties: {
-        movie_id: '123',
-        category: 'romcom'
+        '$set': { name: 'Max Hedgehog' },
+        '$set_once': { initial_url: '/blog' }
     }
 })
 ```
 
-#### Setting user properties via an event
+For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+## Alias
 
-##### $set
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-**Example**
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-```ruby
-posthog.capture({
-    distinct_id: 'distinct id',
-    event: 'movie played',
-    properties: {
-        $set: { userProperty: 'value' }
-    }
-})
-```
+## Feature flags
 
-**Usage**
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+<FeatureFlagsLibsIntro />
 
-##### $set_once
+import RubyFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-ruby.mdx'
 
-**Example**
+<RubyFeatureFlagsCode />
 
-```ruby
-posthog.capture({
-    distinct_id: 'distinct id',
-    event: 'movie played',
-    properties: {
-        $set_once: { userProperty: 'value' }
-    }
-})
-```
+### Local Evaluation
 
-**Usage**
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+<LocalEvaluationIntro />
 
-### Identify
-
-> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
-
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
-like segment users by these properties.
-
-An `identify` call requires:
-
--   `distinct id` which uniquely identifies your user
--   `properties` with a dict with any key:value pairs
-
-For example:
-
-```ruby
-posthog.identify({
-  distinct_id: "user:123",
-  properties: {
-    email: 'john@doe.com',
-    pro_user: false
-  }
-})
-```
-
-The most obvious place to make this call is whenever a user signs up, or when they update their information.
-
-### Alias
-
-To connect whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
-
-In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
-
-The same concept applies for when a user logs in.
-
-If you're using PostHog in the front-end and back-end, doing the `identify` call in the frontend will be enough.
-
-An `alias` call requires:
-
--   `distinct_id` – the logged in user id
--   `alias` – the anonymous session distinct ID
-
-For example:
-
-```ruby
-posthog.alias({
-  distinct_id: "user:123",
-  alias: "session:12345",
-})
-```
-
-### Sending page views
-
-If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
-
-```ruby
-posthog.capture({
-    distinct_id: 'distinct id',
-    event: '$pageview',
-    properties: {
-        '$current_url': 'https://example.com'
-    }
-})
-```
-
-### Feature flags
-
-PostHog's [feature flags](/docs/user-guides/feature-flags) enable you to safely deploy and roll back new features.
-
-When using them with one of libraries, you should check if a feature flag is enabled and use the result to toggle functionality on and off in you application.
-
-**How to check if a flag is enabled**
-
-> **Note:** Whenever we face an error computing the flag, the library returns `Nil`, instead of `true` or `false`.
-
-```ruby
-posthog.is_feature_enabled('beta-feature', 'distinct id')
-# returns True or False or Nil
-```
-
-**Example use case**
-
-Here's how you might send different users a different version of your homepage, for example:
-
-```ruby
-def homepage(request):
-    template = "new.html" if posthog.is_feature_enabled('new_ui', 'distinct id') else "old.html"
-    return render_template(template, request=request)
-```
-
-> **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence).
-
-**Get a flag value**
-
-If you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
-
-> **Note:** Whenever we face an error computing the flag, the library returns `Nil`, instead of `true` or `false` or a string variant value.
-
-```ruby
-posthog.get_feature_flag('beta-feature', 'distinct id')
-# returns string or True or False or Nil
-```
-
-**Overriding server properties**
-
-Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
-
-For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
-```ruby
-posthog.get_feature_flag('beta-feature', 'distinct id', person_properties: {'is_authorized': True})
-```
-
-You can pass symbols or strings, the library treats them the same.
-
-The same holds for [groups](/manual/group-analytics). If you have a group name `organisation`, you can add properties like so:
-
-```ruby
-posthog.get_feature_flag('beta-feature', 'distinct id', groups: {'organisation': 'google'}, group_properties: {'organisation': {'is_authorized': True})
-# returns string or Nil
-```
-
-**Getting all flag values**
-
-You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
-
-```ruby
-posthog.get_all_flags('distinct id', groups: {}, person_properties: {'is_authorized': True}, group_properties: {})
-# returns hash of flag key and value pairs.
-```
-
-#### Feature Flag Payloads
-
-Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
-string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
-
-```ruby
-posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
-```
-
-#### Local Evaluation
-
-> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
-
-> **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
-
-All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
-
-1. The library must be initialised with a personal API key
-2. You must know all person or group properties the flag depends on.
-
-Then, the flag can be evaluated locally. The method signature looks exactly like above
-
-```ruby
-posthog.get_feature_flag('beta-feature', 'distinct id', person_properties: {'is_authorized': True})
-# returns string or Nil
-```
-
-> **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `feature_flags_polling_interval = <value in seconds>`.
-
-This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
-
-```ruby
-posthog.get_all_flags('distinct id', groups: {}, person_properties: {'is_authorized': True}, group_properties: {})
-# returns hash of flag key and value pairs.
-```
-
-**Restricting evaluation to local only**
-
-Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
-
-<CohortExpansionSnippet />
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
 #### Evaluating feature flags locally in unicorn server
 
-If you have `preload_app true` in your unicorn config, you can use `after_fork` [hook](https://www.rubydoc.info/gems/unicorn/Unicorn%2FConfigurator:after_fork) which is part of the unicorn's configuration so that the feature flag cache will receive the updates from posthog dashboard.
+If you have `preload_app true` in your unicorn config, you can use the [`after_fork`](https://www.rubydoc.info/gems/unicorn/Unicorn%2FConfigurator:after_fork) hook (which is part of the unicorn's configuration) to enable the feature flag cache to receive the updates from posthog dashboard.
 
 ```ruby
 after_fork do |server, worker|
@@ -303,17 +90,21 @@ after_fork do |server, worker|
 end
 ```
 
-#### Reloading feature flags
+## Experiments (A/B tests)
 
-When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `reloadFeatureFlags`:
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```ruby
-posthog.reload_feature_flags()
+variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
 
-// Do something with feature flags here
+if variant == 'variant-name'
+    # Do something 
+end
 ```
 
-### Group analytics
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
@@ -323,14 +114,14 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```ruby
 posthog.capture({
-    distinct_id: 'distinct id',
-    event: 'movie played',
+    distinct_id: 'distinct_id_of_the_user',
+    event: 'movie_played',
     properties: {
         movie_id: '123',
         category: 'romcom'
     }
     groups: {
-        'company': '42dlsfj23f'
+        'company': 'company_id_in_your_db'
     }
 })
 ```
@@ -340,8 +131,8 @@ posthog.capture({
 ```ruby
 posthog.group_identify(
   {
-    group_type: "organization",
-    group_key: "42dlsfj23f",
+    group_type: "company",
+    group_key: "company_id_in_your_db",
     properties: {
       name: "Awesome Inc."
     }

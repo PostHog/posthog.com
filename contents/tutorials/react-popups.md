@@ -4,11 +4,11 @@ date: 2023-03-20
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-3.png
+featuredVideo: https://www.youtube-nocookie.com/embed/E9QA0xPDpUk
 tags: ['feature flags', 'experimentation']
 ---
 
-Popups are a way to highlight features in your app. This tutorial shows how to add them to a React app and control them using feature flags and JSON payloads. Feature flag payloads are an ideal tool for this because they enable you to send arbitrary data that controls the popup location and content without needing to redeploy. 
+Popups are a way to highlight features in your app. This tutorial shows how to add them to a React app and control them using [React feature flags](/tutorials/react-feature-flags) and JSON payloads. Feature flag payloads are an ideal tool for this because they enable you to send arbitrary data that controls the popup location and content without needing to redeploy. 
 
 ## Creating a React app
 

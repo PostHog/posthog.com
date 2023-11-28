@@ -37,6 +37,11 @@ export type QuestionData = {
     numReplies: number | null
     archived: boolean
     activeAt: string
+    pinnedTopics: StrapiData<TopicData[]>
+    slugs: { is: number; slug: string }[]
+    escalated: boolean
+    zendeskTicketID: number
+    autoLinkedToZendesk: boolean
 }
 
 export type AvatarData = {
@@ -62,6 +67,9 @@ export type ProfileData = {
     questionSubscriptions: StrapiData<QuestionData[]>
     user?: StrapiData<UserData>
     topicSubscriptions: StrapiData<TopicData[]>
+    pronouns?: string | null
+    country: string | null
+    amaEnabled: boolean | null
 }
 
 export type UserData = {
@@ -78,7 +86,7 @@ export type ReplyData = {
     createdAt: string
     updatedAt: string
     publishedAt: string
-    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL'>>
+    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL' | 'teams' | 'pronouns'>>
 }
 
 export type TopicData = {

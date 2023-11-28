@@ -9,7 +9,7 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: Newsletter
+category: General
 ---
 
 > Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
@@ -23,8 +23,6 @@ category: Newsletter
 🦔 [5 essential PostHog apps for new users](https://posthog.com/blog/essential-posthog-apps): An introduction to the world of PostHog apps. They're small and powerful, just like... hedgehogs? It's a power-to-weight ratio thing.
 
 ## #tutorials-and-guides
-
-💸 [How to get Stripe revenue data into PostHog](https://posthog.com/tutorials/stripe-payment-data): How to import Stripe data and what to do once it's there.
 
 🔎 [Tracking pageviews in single page apps](https://posthog.com/tutorials/spa): All the ways to track pageviews in single page apps (SPA) using PostHog.
 

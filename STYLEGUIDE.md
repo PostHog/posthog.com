@@ -24,6 +24,9 @@ Of course our audience is developers, so you can assume _some_ baseline knowledg
 
 PostHog is a global company. Our team and our customers are distributed around the world. For consistency, we use American English spelling and grammar.
 
+**Use Allowlist/Denylist instead of Whitelist/Blocklist**
+This term is clearer, and isn't rooted in the idea that white=good, black=bad. 
+
 **Use the Oxford comma** 
 
 Write "bananas, apples, and oranges", not "bananas, apples and oranges".

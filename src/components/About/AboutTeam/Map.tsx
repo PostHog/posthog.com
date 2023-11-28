@@ -1,7 +1,7 @@
 import React from 'react'
 import { ComposableMap, Geographies, Geography, Marker, Text } from 'react-simple-maps'
 
-const geoUrl = 'https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries-sans-antarctica.json'
+const geoUrl = '/world-countries-sans-antarctica.json'
 
 const locations = [
     { latitude: 41.38848523453815, longitude: 2.166622174480074 }, // barcelona

@@ -1,0 +1,41 @@
+---
+title: Toolbar
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+> **Note:** The PostHog toolbar is only available for the [JavaScript web SDK](/docs/libraries/js).
+
+The toolbar is like "Inspect Element" for PostHog features and data. When enabled, the toolbar appears as an overlay **on your product or website** (it's not visible to your users). With it, you can interact with elements to [create actions](/tutorials/how-to-capture-events-the-easy-way), visualize heatmaps, override feature flags, and more.
+
+## How to launch the toolbar
+
+1. In your PostHog instance, go to '[Launch Toolbar](https://app.posthog.com/toolbar)' in the left-hand menu
+2. Add the URLs you wish to enable the toolbar for. Only you will be able to see it – not your users.
+3. Click Save and then Launch.    
+4. A new window will open with toolbar on your website. Click on the toolbar to interact with it.
+
+## Troubleshooting and FAQ
+
+### Toolbar not loading or displaying
+
+When launched, the toolbar injects an API token in the format `#__posthog=JSON` in your site's URL, like this: `http://mysite.com/#__posthog=JSON`.
+
+The toolbar won't load if you have a frontend that overrides the injected API token (the information after the #) before the `posthog-js` library (or snippet) loads and has a chance to read the API token.
+
+To solve this, retrieve the `__posthog` JSON from the URL before it is overridden and call `posthog.loadToolbar(JSON)` in your code:
+
+```js-web
+const toolbarJSON = new URLSearchParams(window.location.hash.substring(1)).get('__posthog')
+if (toolbarJSON) {
+    posthog.loadToolbar(JSON.parse(toolbarJSON))
+}
+```
+
+We are also working on other solutions. Go to [the related issue](https://github.com/PostHog/posthog/issues/9100) to see progress updates (and encourage us to get it done faster!).
+
+> **Warning for Nuxt users:** The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`. If you have a solution, [please let us know](https://app.posthog.com/home#supportModal=feedback%3A).

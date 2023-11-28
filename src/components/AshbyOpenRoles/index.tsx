@@ -30,20 +30,31 @@ export default function AshbyOpenRoles() {
                 return (
                     <li key={title}>
                         <h3>{title}</h3>
-                        <ul className="list-none p-0 m-0 mt-4 mb-6 border border-dashed border-gray-accent-light border-b-0">
+                        <ul className="list-none p-0 m-0 mt-4 mb-6 divide divide-y divide-light dark:divide-dark">
                             {jobs
                                 .filter((job: OpenRoleType) => job.departmentName === title)
                                 .map((job: OpenRoleType) => {
                                     const {
                                         fields: { title, slug },
+                                        parent,
                                     } = job
+                                    const team = parent?.customFields?.find(({ title }) => title === 'Team')?.value
+                                    const [jobTitle] = title.split(' - ')
                                     return (
-                                        <li className="border-b border-dashed border-gray-accent-light" key={title}>
+                                        <li className="" key={title}>
                                             <Link
-                                                className="px-4 py-3 text-[17px] text-primary hover:text-primary font-bold flex justify-between"
+                                                className="px-4 py-3 text-base -mb-1 border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] hover:bg-light dark:hover:bg-dark active:translate-y-[1px] active:transition-all rounded font-bold flex justify-between"
                                                 to={slug}
                                             >
-                                                <span>{title}</span>
+                                                <div>
+                                                    <div>{jobTitle}</div>
+                                                    {team && (
+                                                        <div className="text-sm font-normal opacity-70 text-black dark:text-white">
+                                                            {team}
+                                                        </div>
+                                                    )}
+                                                </div>
+
                                                 <RightArrow className="w-[24px] h-[24px] opacity-50 group-hover:opacity-100 transition-opacity bounce" />
                                             </Link>
                                         </li>
@@ -64,6 +75,14 @@ const query = graphql`
                 fields {
                     title
                     slug
+                }
+                parent {
+                    ... on AshbyJob {
+                        customFields {
+                            value
+                            title
+                        }
+                    }
                 }
                 externalLink
                 departmentName

@@ -1,49 +1,122 @@
 ---
-title: Common questions about feature flags
+title: Troubleshooting and FAQs
 ---
 
-## Why is my feature flag not working?
+## Why is my feature flag not working as expected?
 
 Here's a list of suggestions to troubleshoot your flag:
 
-1. [ ] Check the feature flags tab on [the persons page](https://app.posthog.com/persons) for your specific person.
-    1. If the flag is showing up as disabled here, check the "match evaluation" column to know the reason why.
-    2. If the flag is showing up as enabled here, the problem lies somewhere in the implementation (your code).
-2. [ ] Check if you're calling `identify()` before the flag is called to get to the right person on your website.
-3. [ ] Check if an ad-blocker is blocking calls. If yes, you can fix this by [deploying a reverse proxy](/docs/advanced/proxy).
-4. [ ] If your flag depends on person properties, and doesn't work for initially anonymous users, you might be hitting the case where flags are being queried before those properties can be ingested. In this case, manually pass in properties to `getFeatureFlag` from your client.
-5. [ ] [Raise a support ticket](https://app.posthog.com/home#supportModal) to see if we can help debug.
+### 1. Check your flag evaluation on the feature flags tab
+
+Check the **feature flags tab** on [the persons page](https://app.posthog.com/persons) for your specific person.
+
+![Persons feature flag tab](../../images/docs/feature-flags/persons-feature-flag-tab.png)
+
+- If the flag is shown as disabled here, check the "match evaluation" column to know the understand why.
+- If the flag is shown as enabled here, there may be a problem in your code. Double-check the steps to [add feature flag code](/docs/feature-flags/adding-feature-flag-code).
+
+### 2. Check you're calling `identify()` before evaluating the flag
+
+If you're [identifying](/docs/product-analytics/identify) users, they may see a different value for a feature flag before and after you call `identify()`. 
+
+To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
+
+### 3. An ad-blocker may be blocking calls
+
+Check if an ad-blocker is interfering with PostHog calls. If this is the case, you can fix this by [deploying a reverse proxy](/docs/advanced/proxy).
+
+### 4. User or group properties may not have been ingested yet
+
+If your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) depend on user or group properties, and you immediately evaluate the feature flag after updating them, the properties may not be ingested in time to calculate the correct flag value.
+
+In this case, when making your `getFeatureFlag()` call, you can [manually include in these properties](/docs/feature-flags/adding-feature-flag-code#advanced-overriding-server-properties) in the method arguments.
+
+### 5. Raise a support ticket
+
+If none of the above resolve your issue, you can [raise a support ticket](https://app.posthog.com/home#supportModal) to see if we can help debug.
+
+import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
+
+<FAQFalseOrNoneEvents />
+
+## How can I reduce the latency of feature flag requests on my server?
+
+Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) instead – without having to make a request to PostHog.
 
 
----
+## How can I estimate the number of feature flag requests I'll be charged for?
 
+### Frontend SDKs
 
-## On my website, why does the feature flag sometimes flicker?
+We make a request to fetch feature flags (using the [`/decide` endpoint](https://posthog.com/docs/api/post-only-endpoints#feature-flags)) when:
 
-By default, flags are loaded from our servers which takes about 100-500ms. During this time, the flag is disabled, which can be the reason why you see things look differently for the first 500ms.
+1. The PostHog SDK is initialized
+2. A user is [identified](/docs/data/identify) 
+3. A user's [properties](/docs/product-analytics/user-properties) are updated.
+4. You call `posthog.reloadFeatureFlags()` in your code.
 
-To fix this, you can [bootstrap feature flags](/docs/feature-flags/bootstrapping-and-local-evaluation).
+For the [JavaScript web SDK](/docs/libraries/js), you can estimate how many feature flag requests you will make by doing the following:
 
----
+1. Check the networks tab in Chrome inspector tools for the number of `/decide` requests.
+2. Find out your number of monthly page views
+3. Multiply the number your number of `/decide` requests by your monthly page views
 
-## I care about latency a lot, and 500ms delays are unacceptable on my servers. Can I do something about this?
+For example, if on refresh, you see 2 `/decide` requests per pageview and you have ~150,000 pageviews, your monthly feature flag requests should be around ~300,000.
 
-Yes, use [local evaluation](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation). This downloads flag definitions on your servers and evaluates them locally.
+### Backend SDKS
 
----
+#### Without local evaluation 
 
-## My feature flags are sending a lot of events, how can I manage this?
+If you're not using [local evaluation](/docs/feature-flags/local-evaluation), a request to get feature flags is made every time you call `posthog.get_feature_flag()` on your backend. Your estimated usage will be however many times you are calling this code.
 
-Every library has the option to disable sending these events. Just check the relevant docs for the library for the `send_events` parameter in your `posthog.isFeatureEnabled()` or `posthog.getFeatureFlag()` calls.
+#### With local evaluation
 
-However, note that this has a few consequences:
+If you're using [local evaluation](/docs/feature-flags/local-evaluation), each local evaluation request charges 10 credits and by default are made every 30 seconds. Assuming your server is constantly running and making 2 requests per minute, you will be charged `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
 
-1. The usage tab on the flag will stop showing events since we can't track them anymore.
-2. Experiments that depend on trend goals won't work since we use this event to calculate relative exposure. Convert your trend experiments to funnel experiments instead to make this work.
+> **Note:** This figure is for a single server and a single instance of PostHog. If you have multiple servers, PostHog instances, or a different poll duration, you need to multiply your estimates too.
 
----
+## How can I reduce the cost of feature flags?
 
-## Is the rollout percentage for a flag deterministic? How about multiple flags?
+If your feature flag usage or costs are too high, there a few methods to reduce them:
 
-For any given feature flag, a user who is within the rollout bound will always remain within the rollout bound as the rollout percentage increases. Thus, the rollout percentage is deterministic.
-With multiple feature flags, users can fall under different points of rollout percentages per flag, so for a "50% rollout" for feature flag A and feature flag B, you won't always have the same users that see both features at once.
+### 1. Reduce client-side feature flag requests
+
+In our [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
+
+1. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
+
+2. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
+
+### 2. Reduce local evaluation costs
+
+If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill may be high because of too many requests to fetch feature flag definitions. By default, PostHog fetches these every 30 seconds.
+
+Each request charges 10 credits, so assuming your server is constantly running and making 2 requests per minute, this will charge `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
+
+You can reduce this by increasing the [feature flag polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-personal-api-key) when initializing PostHog. For example, every 5 minutes instead of every 30 seconds.
+
+The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30 seconds) for that change to roll to your server.
+
+> **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
+
+## Why do feature flags sometimes cause my app to flicker?
+
+By default, fetching flags from our servers takes about 100-500ms. During this time, the flag is disabled. When the request is complete, the flag is updated. This may be the cause of the flickering.
+
+To fix this, you can [bootstrap feature flags](/docs/feature-flags/bootstrapping).
+
+## Why can't I use a cohort with behavioral filters in my feature flag?
+
+Behavioral cohorts are [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts) created using an event or action filter (i.e., the options under the "behavioral" subheading)
+
+![Behavioral cohorts](../../images/docs/feature-flags/behavioral-cohorts.png)
+<Caption>
+Behavioral cohorts are dynamic cohorts created using the options under the "behavioral" subheading.
+</Caption>
+
+Feature flags require fast evaluation and behavioral queries are relatively slow. Thus enabling these queries would significantly impact the performance of feature flags. 
+
+A workaround is to create a dynamic behavioral cohort and then duplicate it as a static cohort (using the button on the top right of the cohort page).
+
+![How to duplicate as static cohort](../../images/docs/feature-flags/duplicate-as-static-cohort.png)
+

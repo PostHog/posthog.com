@@ -1,0 +1,74 @@
+---
+title: Sharing or embedding replays
+---
+
+Replays are typically viewed in **[Session Replay](https://app.posthog.com/replay)** part of PostHog. However, you may want to share specific recordings with people outside of your PostHog organization. You can share them directly using a URL, or embed them in a webpage using an iframe:
+
+<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
+
+> Above is an embedded recording of posthog.com… on posthog.com – very meta.
+
+## How to share session replays
+
+### Method one: Sharing via the PostHog app
+
+When viewing any recording, press `Share`. You can then configure the recording for **external sharing**. There are also configuration options for the iframe, as well as the ability to specify whether it should start at a particular timestamp.
+
+![Sharing a session replay via the PostHog app](../../images/docs/session-replay/share-replay.mp4)
+
+### Method two: Sharing via the PostHog API
+
+Using the [PostHog API](/docs/api/session-recordings), you can automate the sharing of replays. For example, a common use case is to include a session replay in a support ticket whenever a user reports a bug.
+
+Here is how to use the API to share replays:
+
+1. In your frontend, retrieve the `session_id` of the replay you want to share. Then, upload that `session_id` to your backend
+
+```js-web
+// Frontend - where the recording is taking place
+const sessionID = posthog.get_session_id()
+// Upload this sessionID to your backend
+uploadSessionIDToBackend(sessionID)
+```
+
+2. Once you have the `session_id` in your backend, you can enable sharing for that recording using the API to create an access token.
+
+```node
+// Node.JS backend example
+const projectID = 123 // Found in [Project Settings](https://app.posthog.com/project/settings)
+const sessionID = '{FROM_STEP_1}'
+const url = `https://app.posthog.com/api/projects/${projectID}/session_recordings/${sessionID}/sharing?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
+
+const response = await fetch(url, {
+  method: 'PATCH',
+  body: JSON.stringify({
+    enabled: true,
+  }),
+  headers: {
+    'Content-type': 'application/json;',
+  },
+}).then((res) => res.json())
+
+// You can also retrieve the access token again by calling the same endpoint
+// const response = await fetch(url).then((res) => res.json())
+
+const accessToken = response.accessToken
+```
+
+3. You can now share the replaying using the access token and an iframe:
+
+```html
+<iframe 
+  allowfullscreen 
+  width="100%" 
+  height="450" 
+  frameborder="0" 
+  src="https://app.posthog.com/embedded/{accessToken}">
+</iframe>
+```
+
+## Limitations
+
+1. We make **no guarantees** about sensitive information contained in the recording. We recommend you only sharing recordings that you are certain contain no sensitive information or embed them only where authorized users can see them.
+2. Events will not be shown in the shared iframe, as they are loaded from a separate endpoint that is not accessible from the embedded iframe.
+3. If your replays look incorrect or buggy, be sure to read our [troubleshooting docs on how to debug this](/docs/session-replay/troubleshooting#replay-of-recording-looks-incorrect-or-buggy).

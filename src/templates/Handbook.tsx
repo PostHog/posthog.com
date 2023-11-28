@@ -35,6 +35,7 @@ import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
 import { TutorialTags } from 'components/Tutorials/constants/tags'
+import { Emoji } from 'components/Emoji'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -248,6 +249,7 @@ export default function Handbook({
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
         TutorialTags,
+        Emoji,
         ...shortcodes,
     }
 
@@ -270,6 +272,7 @@ export default function Handbook({
                         </div>
                     }
                     menu={menu}
+                    menuWidth={{ left: 400 }}
                     sidebar={
                         <HandbookSidebar
                             contributors={contributors}
@@ -280,7 +283,6 @@ export default function Handbook({
                         />
                     }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
-                    contentWidth="100%"
                     breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
@@ -290,7 +292,7 @@ export default function Handbook({
                             <div className="flex items-center mt-0 flex-wrap justify-between">
                                 <div className="flex items-center space-x-2 mb-1">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
-                                    <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
+                                    <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{title}</h1>
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     {github && (
@@ -305,12 +307,29 @@ export default function Handbook({
                                     )}
                                 </div>
                             </div>
-
-                            {!hideLastUpdated && (
-                                <p className="mt-0 mb-4 md:mt-1 md:mb-0 !opacity-30 text-black dark:text-white font-semibold">
-                                    Last updated: <time>{lastUpdated}</time>
-                                </p>
+                            {(!hideLastUpdated || filePath) && (
+                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
+                                    {!hideLastUpdated && (
+                                        <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
+                                            Last updated: <time>{lastUpdated}</time>
+                                        </p>
+                                    )}
+                                    {!hideLastUpdated && filePath && (
+                                        <span className="text-primary/30 dark:text-primary-dark/30">|</span>
+                                    )}
+                                    {filePath && (
+                                        <Link
+                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
+                                            to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                        >
+                                            Edit this page
+                                        </Link>
+                                    )}
+                                </div>
                             )}
+                        </div>
+                        <div className="lg:hidden">
+                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
                         <div className={isArticle && 'article-content'}>
@@ -327,11 +346,6 @@ export default function Handbook({
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!, $mission: String, $objectives: String) {
-        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
-            group(field: frontmatter___country) {
-                totalCount
-            }
-        }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {

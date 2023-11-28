@@ -1,0 +1,152 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
+
+```react-native
+posthog.capture('user_signed_up')
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```react-native
+posthog.capture('user_signed_up', {
+    login_type: "email",
+    is_free_trial: true
+})
+```
+
+## Autocapture 
+
+PostHog autocapture automatically tracks the following events for you:
+
+-   **Application Opened** - when the app is opened from a closed state
+-   **Application Became Active** - when the app comes to the foreground (e.g. from the app switcher)
+-   **Application Backgrounded** - when the app is sent to the background by the user
+-   **$screen** - when the user navigates (if using `@react-navigation/native` or `react-native-navigation`)
+-   **$autocapture** - touch events when the user interacts with the screen
+
+With autocapture, all touch events for children of `PosthogProvider` are tracked, capturing a snapshot of the view hierarchy at that point. This enables you to create [insights](/docs/product-analytics/insights) in PostHog without having to add custom events.
+
+PostHog will try to generate a sensible name for the touched element based on the React component `displayName` or `name` but you can force this to something reliable (and also clearly marked for PostHog tracking) using the `ph-label` prop.
+
+```react-native
+<View ph-label="my-special-label"></View>
+```
+
+If there are elements you don't want to be captured, you can add the `ph-no-capture` property like so. If this property is found anywhere in the view hierarchy, the entire touch event is ignored.
+
+```react-native
+<View ph-no-capture>Sensitive view here</View>
+```
+
+#### Tracking Screen views and touches with `@react-navigation/native`:
+
+```react-native
+// App.(js|ts)
+
+import { PostHogProvider } from 'posthog-react-native'
+import { NavigationContainer } from '@react-navigation/native'
+
+export function App() {
+    return (
+        <NavigationContainer>
+            <PostHogProvider apiKey="<ph_project_api_key>" autocapture>
+                {/* Rest of app */}
+            </PostHogProvider>
+        </NavigationContainer>
+    )
+}
+```
+
+#### Tracking Screen views and touches with `react-native-navigation`:
+
+```react-native
+import PostHog, { PostHogProvider } from 'posthog-react-native'
+import { Navigation } from 'react-native-navigation';
+
+export const posthogAsync = PostHog.initAsync('<ph_project_api_key>');
+
+// Simplify the wrapping of your Screens with a shared PostHogProvider
+export const SharedPostHogProvider = (props: any) => {
+  return (
+    <PostHogProvider client={posthogAsync} autocapture={{
+      captureLifecycleEvents: false,  // Lifecycle events are handled differently for react-native-navigation
+      captureTouches: true,
+    }}>
+      {props.children}
+    </PostHogProvider>
+  );
+};
+
+export const MyScreen = () => {
+  return (
+    // Every screen needs to be wrapped with this provider if you want to capture touches or use the hook `usePostHog()` 
+    <SharedPostHogProvider>
+      <View>
+        ...
+      </View>
+    </SharedPostHogProvider>
+  );
+};
+
+Navigation.registerComponent('Screen', () => MyScreen);
+
+Navigation.events().registerAppLaunchedListener(async () => {
+  (await posthogAsync).initReactNativeNavigation({
+    navigation: {
+      // (Optional) Set the name based on the route. Defaults to the route name.
+      routeToName: (name, properties) => name,
+      // (Optional) Tracks all passProps as properties. Defaults to undefined
+      routeToProperties: (name, properties) => properties,
+    },
+  });
+});
+```
+
+### Autocapture configuration
+
+You can tweak how autocapture works by passing custom options.
+
+```react-native
+<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+    captureTouches: true, // If you don't want to capture touch events set this to false
+    captureLifecycleEvents: true, // If you don't want to capture the Lifecycle Events (e.g. Application Opened) set this to false
+    captureScreens: true, // If you don't want to capture screen events set this to false
+    ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
+    customLabelProp: "ph-label",
+    noCaptureProp: "ph-no-capture",
+    propsToCapture = ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
+
+    navigation: {
+        // By default only the Screen name is tracked but it is possible to track the
+        // params or modify the name by intercepting theautocapture like so
+        routeToName: (name, params) => {
+            if (params.id) return `${name}/${params.id}`
+            return name
+        },
+        routeToParams: (name, params) => {
+            if (name === "SensitiveScreen") return undefined
+            return params
+        },
+    }
+}}>
+    ...
+</PostHogProvider>
+```
+
+### Capturing screen views
+
+With the `PostHogProvider`, screen tracking is automatically captured if the `autocapture` property is used. Currently only [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) is supported by autocapture and it is important that the `PostHogProvider` is configured as a child of the `NavigationContainer`.
+
+If you want to manually send a new screen capture event, use the `screen` function. This function requires a `name`. You may also pass in an optional `properties` object.
+
+```javascript
+posthog.screen('dashboard', {
+    background: 'blue',
+    hero: 'superhog',
+})
+```

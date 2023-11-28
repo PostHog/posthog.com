@@ -9,8 +9,10 @@ import { animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
 import TextareaAutosize from 'react-textarea-autosize'
 import Confetti from 'react-confetti'
+import KeyboardShortcut from 'components/KeyboardShortcut'
+import usePostHog from 'hooks/usePostHog'
 
-const inputContainerClasses = `p-4 bg-tan group active:bg-white focus-within:bg-white relative text-left`
+const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
 
 const fields: {
     name: string
@@ -115,6 +117,12 @@ const fields: {
         placeHolder: 'Tell us more...',
         Component: TextArea,
         hubspotField: 'message',
+    },
+    {
+        name: 'whereDidYouHearAboutPostHog',
+        placeHolder: 'Where did you first hear about PostHog?',
+        Component: Input,
+        hubspotField: 'where_did_you_first_hear_about_posthog_',
     },
 ]
 interface IInputProps {
@@ -238,7 +246,7 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { la
                 id={`${other.name}-${other.value}`}
                 {...(reference ? { ref: reference } : {})}
             />
-            <span className="block py-2 w-full rounded-md border-[2px] border-black/10  peer-focus:border-black/40 peer-checked:!border-black/80 text-sm">
+            <span className="block py-2 w-full rounded-md border-[2px] peer-focus:border-dashed peer-checked:border-solid border-light dark:border-dark  peer-focus:border-black/40 dark:peer-focus:border-white/75 peer-checked:border-red dark:peer-checked:border-yellow text-sm">
                 {label || other.value}
             </span>
         </label>
@@ -273,21 +281,9 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
                 {props.placeholder}
             </p>
             <motion.div className="overflow-hidden" animate={{ height: open ? 'auto' : 0 }} initial={{ height: 0 }}>
-                <p className="m-0 mt-1 mb-4 text-xs">
-                    <strong>Tip:</strong> Use{' '}
-                    <kbd
-                        className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
-                        style={{ fontSize: '10px' }}
-                    >
-                        ←
-                    </kbd>
-                    <kbd
-                        className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
-                        style={{ fontSize: '10px' }}
-                    >
-                        →
-                    </kbd>{' '}
-                    to advance through options
+                <p className="m-0 mt-1 mb-4 text-sm">
+                    <strong>Tip:</strong> Use <KeyboardShortcut text="←" /> <KeyboardShortcut text="→" /> to advance
+                    through options
                 </p>
                 <div
                     role="radiogroup"
@@ -324,6 +320,7 @@ const ValidationSchema = Yup.object().shape({
     product: Yup.string().required("Please select the product you're interested in"),
     personalizedDemo: Yup.string().required('Please select an option'),
     details: Yup.string().nullable(),
+    whereDidYouHearAboutPostHog: Yup.string().nullable(),
 })
 
 export default function Contact({
@@ -333,6 +330,7 @@ export default function Contact({
         [k: string]: any
     }
 }) {
+    const posthog = usePostHog()
     const { href } = useLocation()
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
@@ -340,6 +338,13 @@ export default function Contact({
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
+            const distinctId = posthog?.get_distinct_id?.()
+            posthog?.identify?.(distinctId, {
+                email: values.workEmail,
+            })
+            posthog?.capture?.('form submission', {
+                form_name: 'Contact sales',
+            })
             const submission = {
                 pageUri: href,
                 pageName: 'Contact sales',
@@ -383,7 +388,7 @@ export default function Contact({
                     <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                 </div>
             )}
-            <div className="bg-gray-accent-light px-6 py-8 rounded-md mt-4">
+            <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
                 <h4>
                     ✅ <strong>Message received!</strong>
                 </h4>
@@ -392,24 +397,17 @@ export default function Contact({
                     information.&nbsp;
                 </p>
                 <p className="mb-0">
-                    In the meantime, why not join <Link to="/slack">our Slack community</Link>?
+                    If you have any questions in the meantime, <Link to="/questions">let us know</Link>!
                 </p>
             </div>
         </>
     ) : (
         <form onSubmit={handleSubmit}>
-            <p>
-                <strong>Tip:</strong> Press{' '}
-                <kbd
-                    role="button"
-                    className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
-                    style={{ fontSize: '10px' }}
-                >
-                    TAB
-                </kbd>{' '}
-                to advance through the form at a breakneck pace!
+            <p className="text-sm">
+                <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the form at a
+                breakneck pace!
             </p>
-            <div className="grid divide-y divide-dashed divide-gray-accent-light border border-gray-accent-light border-dashed">
+            <div className="grid border border-light dark:border-dark rounded overflow-hidden">
                 {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
                     return (
                         <Component
@@ -431,7 +429,7 @@ export default function Contact({
                     )
                 })}
             </div>
-            <button className={button(undefined, 'full', 'mt-4', 'sm')} type="submit">
+            <button className={button(undefined, 'full', 'mt-4', 'md')} type="submit">
                 Send message
             </button>
         </form>

@@ -1,0 +1,115 @@
+---
+title: Supported aggregations
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+The following [aggregations](https://clickhouse.com/docs/en/sql-reference/functions/) are enabled. This list is [ever expanding](https://github.com/PostHog/posthog/blob/dfce91d924fe038568c626416fa23e67d0f0906f/posthog/hogql/constants.py#L489). Please submit a pull request if we're missing something obvious.
+
+## Standard aggregate functions
+
+- `count`
+- `countIf`
+- `min`
+- `minIf`
+- `max`
+- `maxIf`
+- `sum`
+- `sumIf`
+- `avg`
+- `avgIf`
+- `any`
+- `anyIf`
+- `stddevPop`
+- `stddevPopIf`
+- `stddevSamp`
+- `stddevSampIf`
+- `varPop`
+- `varPopIf`
+- `varSamp`
+- `varSampIf`
+- `covarPop`
+- `covarPopIf`
+- `covarSamp`
+- `covarSampIf`
+
+## ClickHouse-specific aggregate functions
+
+- `anyHeavy`
+- `anyHeavyIf`
+- `anyLast`
+- `anyLastIf`
+- `argMin`
+- `argMinIf`
+- `argMax`
+- `argMaxIf`
+- `avgWeighted`
+- `avgWeightedIf`
+- `groupArray`
+- `groupUniqArray`
+- `groupArrayInsertAt`
+- `groupArrayInsertAtIf`
+- `groupArrayMovingAvg`
+- `groupArrayMovingAvgIf`
+- `groupArrayMovingSum`
+- `groupArrayMovingSumIf`
+- `groupBitAnd`
+- `groupBitAndIf`
+- `groupBitOr`
+- `groupBitOrIf`
+- `groupBitXor`
+- `groupBitXorIf`
+- `groupBitmap`
+- `groupBitmapIf`
+- `groupBitmapAnd`
+- `groupBitmapAndIf`
+- `groupBitmapOr`
+- `groupBitmapOrIf`
+- `groupBitmapXor`
+- `groupBitmapXorIf`
+- `sumWithOverflow`
+- `sumWithOverflowIf`
+- `deltaSum`
+- `deltaSumIf`
+- `deltaSumTimestamp`
+- `deltaSumTimestampIf`
+- `sumMap`
+- `sumMapIf`
+- `minMap`
+- `minMapIf`
+- `maxMap`
+- `maxMapIf`
+- `skewSamp`
+- `skewSampIf`
+- `skewPop`
+- `skewPopIf`
+- `kurtSamp`
+- `kurtSampIf`
+- `kurtPop`
+- `kurtPopIf`
+- `uniq`
+- `uniqIf`
+- `uniqExact`
+- `uniqExactIf`
+- `uniqHLL12`
+- `uniqHLL12If`
+- `uniqTheta`
+- `uniqThetaIf`
+- `simpleLinearRegression`
+- `simpleLinearRegressionIf`
+- `contingency`
+- `contingencyIf`
+- `cramersV`
+- `cramersVIf`
+- `cramersVBiasCorrected`
+- `cramersVBiasCorrectedIf`
+- `theilsU`
+- `theilsUIf`
+- `maxIntersections`
+- `maxIntersectionsIf`
+- `maxIntersectionsPosition`
+- `maxIntersectionsPositionIf`

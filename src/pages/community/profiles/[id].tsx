@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PageProps } from 'gatsby'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -18,13 +18,22 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import { useNav } from 'components/Community/useNav'
+import Logomark from 'components/Home/images/Logomark'
+import { communityMenu } from '../../../navs'
+import useTopicsNav from '../../../navs/useTopicsNav'
+import { usePosts } from 'components/Edition/hooks/usePosts'
+import PostsTable from 'components/Edition/PostsTable'
+import { SortDropdown } from 'components/Edition/Views/Default'
+import { sortOptions } from 'components/Edition/Posts'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
-        <div className={`overflow-hidden rounded-full ${props.className}`}>
+        <div
+            className={`overflow-hidden rounded-full p-[1px] bg-white border border-light dark:border-dark ${props.className}`}
+        >
             {props.src ? (
-                <img className="w-full h-full" alt="" src={props.src} />
+                <img className="w-full h-full rounded-full bg-white border-white border-[2px]" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -41,12 +50,46 @@ const Avatar = (props: { className?: string; src?: string }) => {
     )
 }
 
-export default function ProfilePage({ params }: PageProps) {
-    const nav = useNav()
-    const id = parseInt(params.id || params['*'])
+const LikedPosts = ({ profileID }) => {
+    const posts = usePosts({
+        params: {
+            filters: {
+                likes: {
+                    id: {
+                        $eq: profileID,
+                    },
+                },
+            },
+        },
+    })
 
+    return (
+        <ul className="list-none m-0 p-0">
+            <PostsTable {...posts} />
+        </ul>
+    )
+}
+
+export default function ProfilePage({ params }: PageProps) {
+    const id = parseInt(params.id || params['*'])
+    const [view, setView] = useState('discussions')
     const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
+    const nav = useTopicsNav()
+    const { user } = useUser()
+    const [sort, setSort] = useState(sortOptions[0].label)
+    const posts = usePosts({
+        params: {
+            sort: sortOptions.find((option) => option.label === sort)?.sort,
+            filters: {
+                authors: {
+                    id: {
+                        $eq: id,
+                    },
+                },
+            },
+        },
+    })
 
     const profileQuery = qs.stringify(
         {
@@ -58,7 +101,7 @@ export default function ProfilePage({ params }: PageProps) {
                 teams: {
                     populate: {
                         profiles: {
-                            populate: ['avatar'],
+                            populate: ['avatar', 'teams', 'pronouns'],
                         },
                     },
                 },
@@ -89,11 +132,16 @@ export default function ProfilePage({ params }: PageProps) {
     const { firstName, lastName } = profile || {}
 
     const name = [firstName, lastName].filter(Boolean).join(' ')
+    const isTeamMember = profile?.teams?.data?.length > 0
 
     const handleEditProfile = () => {
         mutate()
         setEditModalOpen(false)
     }
+
+    useEffect(() => {
+        if (!profile?.amaEnabled) setView('discussions')
+    }, [profile])
 
     if (!profile) {
         return null
@@ -102,7 +150,7 @@ export default function ProfilePage({ params }: PageProps) {
     return (
         <>
             <SEO title={`Community Profile - PostHog`} />
-            <Layout>
+            <Layout parent={communityMenu}>
                 <Modal setOpen={setEditModalOpen} open={editModalOpen}>
                     <div
                         onClick={() => setEditModalOpen(false)}
@@ -133,18 +181,34 @@ export default function ProfilePage({ params }: PageProps) {
                         <>
                             <div className="space-y-8 my-8">
                                 <section className="">
-                                    <Avatar
-                                        className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                        src={getAvatarURL(profile)}
-                                    />
+                                    <div className="relative w-48 h-48 float-right -mt-12">
+                                        <Avatar
+                                            className=" bg-gray-accent dark:gray-accent-dark"
+                                            src={getAvatarURL(profile)}
+                                        />
+                                        {isTeamMember && (
+                                            <span className="absolute right-1 bottom-1 h-12 w-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark border border-light dark:border-dark">
+                                                <Logomark className="w-8" />
+                                            </span>
+                                        )}
+                                    </div>
 
-                                    <div className="space-y-3">
-                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
-                                        {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
+                                    <div className="space-y-1 mb-8">
+                                        <div className="flex gap-x-2 items-baseline">
+                                            <h1 className="m-0 text-5xl">{name || 'Anonymous'}</h1>
+                                            {profile.pronouns && (
+                                                <div className="opacity-50 text-sm">{profile.pronouns}</div>
+                                            )}
+                                        </div>
+                                        {isTeamMember && profile.companyRole && (
+                                            <p className="text-primary/50 dark:text-primary-dark/50">
+                                                {profile?.companyRole}, PostHog
+                                            </p>
+                                        )}
                                     </div>
 
                                     {profile?.biography && (
-                                        <section>
+                                        <section className="article-content">
                                             <h3>Biography</h3>
 
                                             <Markdown>{profile.biography}</Markdown>
@@ -154,7 +218,73 @@ export default function ProfilePage({ params }: PageProps) {
                             </div>
 
                             <div className="mt-12">
-                                <Questions title="Discussions" profileId={id} showForm={false} />
+                                <div className="flex items-center relative mb-6 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
+                                    <button
+                                        className={`${
+                                            view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                        } p-4 transition-opacity`}
+                                        onClick={() => setView('discussions')}
+                                    >
+                                        Discussions
+                                    </button>
+                                    {profile?.amaEnabled && (
+                                        <button
+                                            className={`${
+                                                view !== 'ama' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('ama')}
+                                        >
+                                            Ask me anything
+                                        </button>
+                                    )}
+                                    {user?.profile?.id === id && (
+                                        <button
+                                            className={`${
+                                                view !== 'liked-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('liked-posts')}
+                                        >
+                                            Upvoted posts
+                                        </button>
+                                    )}
+                                    <div className="flex items-center">
+                                        <button
+                                            className={`${
+                                                view !== 'user-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('user-posts')}
+                                        >
+                                            Posts
+                                        </button>
+                                        <AnimatePresence>
+                                            {view === 'user-posts' && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, translateY: '100%' }}
+                                                    animate={{ opacity: 1, translateY: 0 }}
+                                                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                                                    className={`-ml-4 z-50`}
+                                                >
+                                                    <SortDropdown sort={sort} setSort={setSort} />
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
+                                </div>
+                                {(view === 'discussions' || view === 'ama') && (
+                                    <Questions
+                                        initialView={view === 'ama' ? 'question-form' : undefined}
+                                        slug={view === 'ama' ? window?.location?.pathname : undefined}
+                                        profileId={view === 'discussions' ? id : undefined}
+                                        showForm={view === 'ama'}
+                                        disclaimer={false}
+                                    />
+                                )}
+                                {view === 'liked-posts' && user?.profile?.id === id && <LikedPosts profileID={id} />}
+                                {view === 'user-posts' && (
+                                    <ul className="list-none m-0 p-0">
+                                        <PostsTable {...posts} />
+                                    </ul>
+                                )}
                             </div>
                         </>
                     ) : null}
@@ -213,7 +343,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                         {profile.twitter && (
                             <li>
                                 <Link to={profile.twitter}>
-                                    <Twitter className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                 </Link>
                             </li>
                         )}
@@ -238,7 +368,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                               </SidebarSection>
 
                               {profiles?.data?.length > 0 ? (
-                                  <SidebarSection title="Co-workers">
+                                  <SidebarSection title="Teammates">
                                       <ul className="p-0 grid gap-y-2">
                                           {profiles.data
                                               .filter(({ id }) => id !== profile.id)
@@ -271,10 +401,21 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                                 setEditModalOpen(true)
                             }
                         }}
-                        className="text-base text-red font-semibold"
+                        className="text-base text-red dark:text-yellow font-semibold"
                     >
                         Edit profile
                     </button>
+                </SidebarSection>
+            )}
+            {user?.role?.type === 'moderator' && (
+                <SidebarSection>
+                    <Link
+                        external
+                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::profile.profile/${profile.id}`}
+                        className="text-base text-red dark:text-yellow font-semibold"
+                    >
+                        View in Strapi
+                    </Link>
                 </SidebarSection>
             )}
         </>

@@ -1,0 +1,34 @@
+---
+title: PostgreSQL
+featuredImage: 
+documentation: /docs/cdp/postgres-export
+thumbnail: ../thumbnails/postgresql-export.png
+filters: {
+    type: ["data-out"],
+    maintainer: official
+}
+---
+
+<Section
+    divider={false}
+    title="Export events from PostHog to a PostgreSQL instance upon ingestion, enabling SQL analysis, archiving and more."
+    size="full"
+    cols={3}
+>
+    <div>
+        <h5>Analyze data elsewhere</h5>
+        <p>Want to do things the old-fashioned way? Use PostHog as a data pipeline and query data using good-ol' SQL.</p>
+    </div>
+    <div>
+        <h5>Consolidate databases</h5>
+        <p>Want a backup? Export events to a PostgreSQL instance on ingestion into PostHog to build a simple archive.</p>
+    </div>
+    <div>
+        <h5>Process data in PostHog</h5>
+        <p>Use other apps, such as the Taxonomy Standardizer, to process data before exportating to PostgreSQL.</p>
+    </div>
+</Section>
+
+<TutorialsSlider topic="postgres-export" />
+
+<Documentation />

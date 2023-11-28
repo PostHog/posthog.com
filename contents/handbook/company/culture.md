@@ -6,7 +6,7 @@ showTitle: true
 
 So, what's it like working at PostHog?
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rRwzJiljpSA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/rRwzJiljpSA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## All remote
 
@@ -73,8 +73,6 @@ One of the benefits of hiring high-performing, self-sufficient, empowered team m
 
 We have optimised for this by introducing [Small Teams](/handbook/small-teams/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
 
-Right now, our [management approach](/handbook/company/management) is super simple - James H, Tim and Charles are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
+Right now, our [management approach](/handbook/company/management) is super simple - James H, Tim and the team leaders are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 
-## A day in the life
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xlODCLrZyvM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+It's up to you how to get things done. If you want to make a change, feel free to just create the pull request. If you want to discuss something more widely for a bigger piece of work, it might make sense to use an RFC for a change inside your team. If you want to ship something that could significantly impact other teams, it usually works best to book a call - communicating with the relevant team (and using this to particularly focus on who you're building for, the goals of your idea before you get into the tactics) as a meeting tends to work better and usually saves time.

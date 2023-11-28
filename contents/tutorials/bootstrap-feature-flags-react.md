@@ -4,7 +4,7 @@ date: 2023-05-02
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-3.png
+featuredVideo: https://www.youtube-nocookie.com/embed/9z1axmXdqV8
 tags: ['feature flags']
 ---
 
@@ -231,7 +231,7 @@ In the get request below, check for the cookies (using our PostHog project API k
 //...
 app.get('/*', async (req, res, next) => {
   let distinctId = null
-  const phCookie = req.cookies[`ph_phc_<ph_project_api_key>_posthog`]
+  const phCookie = req.cookies[`ph_<ph_project_api_key>_posthog`]
   if (phCookie) {
     distinctId = JSON.parse(phCookie)['distinct_id']
   }

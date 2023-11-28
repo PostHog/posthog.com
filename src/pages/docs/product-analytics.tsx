@@ -1,72 +1,15 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
-import { Tutorials } from 'components/Docs/Tutorials'
-import { LinkGrid } from 'components/Docs/LinkGrid'
-import { GettingStarted } from 'components/Docs/GettingStarted'
-
-export const quickLinks = [
-    {
-        icon: 'Trends',
-        name: 'Graphs & trends',
-        to: '/docs/product-analytics/trends',
-    },
-    {
-        icon: 'Funnels',
-        name: 'Funnels',
-        to: '/docs/product-analytics/funnels',
-    },
-    {
-        icon: 'PathAnalysis',
-        name: 'User paths',
-        to: '/docs/product-analytics/paths',
-    },
-    {
-        icon: 'Dashboards',
-        name: 'Dashboards',
-        to: '/docs/product-analytics/dashboards',
-    },
-    {
-        icon: 'Retention',
-        name: 'Retention',
-        to: '/docs/product-analytics/retention',
-    },
-    {
-        icon: 'Stickiness',
-        name: 'Stickiness',
-        to: '/docs/product-analytics/stickiness',
-    },
-    {
-        icon: 'Lifecycle',
-        name: 'Lifecycle',
-        to: '/docs/product-analytics/lifecycle',
-    },
-    {
-        icon: 'CorrelationAnalysis',
-        name: 'Correlation analysis',
-        to: '/docs/product-analytics/correlation',
-    },
-    {
-        icon: 'GroupAnalytics',
-        name: 'Groups',
-        to: '/docs/product-analytics/group-analytics',
-    },
-    {
-        icon: 'Toolbar',
-        name: 'Toolbar',
-        to: '/docs/product-analytics/toolbar',
-    },
-    {
-        icon: 'Sampling',
-        name: 'Sampling',
-        to: '/docs/product-analytics/sampling',
-    },
-]
+import { CallToAction } from 'components/CallToAction'
+import ResourceItem from 'components/Docs/ResourceItem'
+import List from 'components/List'
+import { docsMenu } from '../../navs'
+import { useLayoutData } from 'components/Layout/hooks'
+import QuickLinks from 'components/QuickLinks'
 
 type ProductAnalyticsProps = {
     data: {
@@ -78,90 +21,211 @@ type ProductAnalyticsProps = {
     }
 }
 
+export const Intro = () => (
+    <header className="pb-8">
+        <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
+        <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+            Learn how to use product analytics to understand your users.
+        </h3>
+    </header>
+)
+
+export const Content = ({ quickLinks = false }) => {
+    const { compact } = useLayoutData()
+    return (
+        <>
+            <Intro />
+            {(quickLinks || compact) && <QuickLinks items={docsMenu.children[1].children} />}
+            <section className="mb-12">
+                <h3 className="mb-1 text-xl">Resources</h3>
+                <p className="text-[15px]">Real-world use cases to get you started</p>
+
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                    <ResourceItem
+                        type="Guide"
+                        title="Conversion funnels"
+                        description="Build, analyze, and optimize funnels"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                            />
+                        }
+                        url="/tutorials/funnels"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Track performance marketing"
+                        description="Optimize ads and marketing channels"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                            />
+                        }
+                        url="/tutorials/performance-marketing"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Reduce churn"
+                        description="The bread and butter of long-term growth"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                            />
+                        }
+                        url="/tutorials/churn-rate"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Track new and returning users"
+                        description="Build cohorts and compare users"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                            />
+                        }
+                        url="/tutorials/track-new-returning-users"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Identify and analyze power users"
+                        description="Find and understand your most engaged users"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                            />
+                        }
+                        url="/tutorials/power-users"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="Calculate DAU/MAU ratio"
+                        description="Popular engagement metrics that measure stickiness"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                            />
+                        }
+                        url="/tutorials/dau-mau-ratio"
+                    />
+                </ul>
+                <CallToAction
+                    to="/tutorials"
+                    type="custom"
+                    size="md"
+                    className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
+                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    width="[calc(100%_+_3px)]"
+                >
+                    Explore guides
+                </CallToAction>
+            </section>
+
+            <section>
+                <h3 className="mb-1 text-xl">Dashboard templates</h3>
+                <p className="text-[15px]">Choose from a variety of pre-built templates for your stage of growth.</p>
+
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                    <ResourceItem
+                        title="Product analytics"
+                        description="Active users, feature flags frowth accounting, traffic sources"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="./images/template-product-analytics.png"
+                            />
+                        }
+                        url="/templates/product-analytics"
+                    />
+                    <ResourceItem
+                        title="Website traffic"
+                        description="User, sessions, content performance"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="./images/template-website-traffic.png"
+                            />
+                        }
+                        url="/templates/website-dashboard"
+                    />
+                    <ResourceItem
+                        title="Realtime analytics"
+                        description="Live users, sessions, traffic, sources"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="./images/template-realtime-analytics.png"
+                            />
+                        }
+                        url="/templates/real-time-dashboard"
+                    />
+                </ul>
+                <CallToAction
+                    to="/templates"
+                    type="custom"
+                    size="md"
+                    className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
+                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    width="[calc(100%_+_3px)]"
+                >
+                    Browse templates
+                </CallToAction>
+            </section>
+        </>
+    )
+}
+
 const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
-    const { tutorials } = data
     return (
         <Layout>
             <SEO title="Product analytics - Documentation - PostHog" />
 
-            <PostLayout title={'Product Analytics'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/product-analytics-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    Learn how to use product analytics to understand your users.
-                </h3>
-
-                {/* Quick links */}
-                <section className="my-12 clear-both">
-                    <h3 className="mb-6 mt-0">Chapters</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
-
-                <Tutorials tutorials={tutorials} />
+            <PostLayout title={'Product Analytics'} hideSurvey hideSidebar>
+                <Content />
             </PostLayout>
         </Layout>
     )
 }
 
 export default ProductAnalytics
-
-export const query = graphql`
-    query ProductAnalytics {
-        tutorials: allMdx(
-            limit: 6
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: {
-                frontmatter: {
-                    tags: {
-                        in: [
-                            "cohorts"
-                            "actions"
-                            "funnels"
-                            "group-analytics"
-                            "insights"
-                            "retention"
-                            "user-paths"
-                            "toolbar"
-                            "trends"
-                        ]
-                    }
-                }
-                fields: { slug: { regex: "/^/tutorials/" } }
-            }
-        ) {
-            edges {
-                node {
-                    id
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        date(formatString: "MMM 'YY")
-                        Category: tags
-                        Contributor: authorData {
-                            id
-                            image {
-                                childImageSharp {
-                                    gatsbyImageData(width: 36, height: 36)
-                                }
-                            }
-                            name
-                        }
-                        featuredImage {
-                            childImageSharp {
-                                gatsbyImageData(placeholder: NONE)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-`

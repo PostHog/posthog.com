@@ -11,32 +11,9 @@ type QuestionSidebarProps = {
 
 export const QuestionSidebar = (props: QuestionSidebarProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
-    const [sidecarHeight, setSidecarHeight] = useState(0)
     const { isModerator } = useUser()
     const { question } = useQuestion(props.permalink)
     const avatar = getAvatarURL(question?.attributes?.profile?.data)
-
-    const adjustHeight = () => {
-        if (window.innerWidth < 1024) return setSidecarHeight(400)
-        const actions = document.getElementById('post-actions')
-        const containerTop = containerRef?.current?.getBoundingClientRect().top ?? 0
-        const actionsTop = actions?.getBoundingClientRect().top ?? 0
-        const height = actionsTop - containerTop
-        setSidecarHeight(height)
-    }
-
-    useEffect(() => {
-        if (typeof window !== 'undefined' && containerRef.current) {
-            window.addEventListener('scroll', adjustHeight)
-            window.addEventListener('resize', adjustHeight)
-            adjustHeight()
-        }
-
-        return () => {
-            window.removeEventListener('scroll', adjustHeight)
-            window.addEventListener('resize', adjustHeight)
-        }
-    }, [])
 
     return question ? (
         <div className="relative" ref={containerRef}>
@@ -47,7 +24,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                             <img className="w-8 h-8 rounded-full" src={avatar} />
                         ) : (
                             <svg
-                                className="w-8 h-8 rounded-full bg-gray-accent-light"
+                                className="w-8 h-8 rounded-full bg-gray-accent-light shrink-0"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 40 40"
@@ -75,8 +52,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
 
             {isModerator && (
                 <iframe
-                    style={{ height: sidecarHeight }}
-                    className="m-0 border-none w-full h-full lg:absolute"
+                    className="m-0 border-none w-full h-screen -mt-4"
                     src={`https://app.sidecar.posthog.com/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
                 />
             )}

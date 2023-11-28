@@ -25,16 +25,18 @@ import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
 import TutorialsSlider from 'components/TutorialsSlider'
+import { communityMenu, docsMenu } from '../../navs'
+import { useLayoutData } from 'components/Layout/hooks'
 
-const ViewButton = ({ title, view, setView }) => {
+export const ViewButton = ({ title, view, setView }) => {
     return (
         <button
             onClick={() => setView(title)}
-            style={{
-                background: view === title ? '#F54E00' : '#E5E7E0',
-                color: view === title ? 'white' : 'black',
-            }}
-            className="py-2 px-4 rounded-md w-1/2 transition-colors"
+            className={`py-2 px-4 text-sm transition-colors border-b-2 font-medium relative after:absolute after:top-[100%] after:left-0 after:right-0 after:rounded-full after:h-[2px] ${
+                view === title
+                    ? 'font-bold after:bg-red'
+                    : 'font-semibold border-transparent opacity-50 hover:opacity-75 hover:after:bg-gray-accent'
+            }`}
         >
             {title}
         </button>
@@ -42,35 +44,6 @@ const ViewButton = ({ title, view, setView }) => {
 }
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-
-const TutorialSidebar = ({ contributors, location, title, categories }) => {
-    return (
-        <>
-            {contributors?.length > 0 && (
-                <SidebarSection>
-                    <Contributors
-                        contributors={contributors.map((contributor) => ({
-                            ...contributor,
-                        }))}
-                    />
-                </SidebarSection>
-            )}
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
-            {categories?.length > 0 && (
-                <SidebarSection title="Filed under...">
-                    <Topics
-                        topics={categories?.map((category) => ({
-                            name: category,
-                            url: `/tutorials/categories/${slugify(category, { lower: true })}`,
-                        }))}
-                    />
-                </SidebarSection>
-            )}
-        </>
-    )
-}
 
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
@@ -95,64 +68,51 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     }
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
+    const { fullWidthContent } = useLayoutData()
 
     return (
-        <Layout>
+        <article className="@container">
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
-            <PostLayout
-                questions={
-                    <div id="squeak-questions" className="pb-8">
-                        <CommunityQuestions />
+            <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
+                <div className="flex-1 transition-all pt-8 w-full">
+                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
+                        <Intro
+                            contributors={contributors}
+                            featuredImage={featuredImage}
+                            title={title}
+                            featuredImageType="full"
+                            titlePosition="top"
+                            date={date}
+                        />
+                        {featuredVideo && (
+                            <div className="mb-6 flex space-x-2">
+                                <ViewButton view={view} title="Article" setView={setView} />
+                                <ViewButton view={view} title="Video" setView={setView} />
+                            </div>
+                        )}
+                        {view === 'Article' ? (
+                            <div className="article-content">
+                                <MDXProvider components={components}>
+                                    <MDXRenderer>{body}</MDXRenderer>
+                                </MDXProvider>
+                            </div>
+                        ) : (
+                            <iframe src={featuredVideo} />
+                        )}
                     </div>
-                }
-                body={body}
-                featuredImage={featuredImage}
-                featuredVideo={featuredVideo}
-                filePath={filePath}
-                tableOfContents={tableOfContents}
-                title={title}
-                menu={menu}
-                sidebar={
-                    <TutorialSidebar
-                        contributors={contributors}
-                        location={location}
-                        title={title}
-                        categories={categories}
-                    />
-                }
-            >
-                <Intro
-                    contributors={contributors}
-                    featuredImage={featuredImage}
-                    title={title}
-                    featuredImageType="full"
-                    titlePosition="top"
-                    date={date}
-                />
-
-                {featuredVideo && (
-                    <div className="mb-6 flex space-x-2">
-                        <ViewButton view={view} title="Article" setView={setView} />
-                        <ViewButton view={view} title="Video" setView={setView} />
-                    </div>
+                </div>
+                {view === 'Article' && (
+                    <aside className="shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-dark pt-4">
+                        <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+                    </aside>
                 )}
-                {view === 'Article' && breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
-                {view === 'Article' ? (
-                    <div className="article-content">
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
-                    </div>
-                ) : (
-                    <iframe src={featuredVideo} />
-                )}
-            </PostLayout>
-        </Layout>
+            </div>
+        </article>
     )
 }
 

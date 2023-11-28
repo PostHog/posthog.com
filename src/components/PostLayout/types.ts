@@ -13,6 +13,7 @@ export interface IContributor {
     name: string
     url?: string
     state?: any
+    role?: string
 }
 
 export interface IMenu {
@@ -21,13 +22,26 @@ export interface IMenu {
     url?: string
     children?: IMenu[]
     className?: string
-    handleLinkClick?: () => void
+    handleLinkClick?: ({
+        name,
+        url,
+        topLevel,
+        tag,
+    }: {
+        name: string
+        url?: string
+        topLevel?: boolean
+        tag?: string
+    }) => void
     topLevel?: boolean
     menuType?: 'scroll' | 'standard'
     badge?: {
         title: string
         className?: string
     }
+    color?: string
+    hidden?: boolean
+    tag?: string
 }
 
 export interface ICrumb {
@@ -55,12 +69,14 @@ export interface INextPost {
     }
 }
 
+export interface TableOfContents {
+    url: string
+    value: string
+    depth: number
+}
+
 export interface IProps {
-    tableOfContents?: {
-        url: string
-        value: string
-        depth: number
-    }[]
+    tableOfContents?: TableOfContents[]
     sidebar?: React.ReactNode
     contentWidth?: number | string
     questions?: React.ReactNode
@@ -86,4 +102,6 @@ export interface IProps {
     contentContainerClasses?: string
     stickySidebar?: boolean
     hideWidthToggle?: boolean
+    isMenuItemActive?: ({ name, url }: { name: string; url?: string }) => boolean
+    isMenuItemOpen?: ({ name, url }: { name: string; url?: string }) => boolean | undefined
 }

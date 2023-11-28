@@ -3,11 +3,11 @@
 ```node
 client.capture({
     distinctId: 'distinct_id',
-    event: 'Order created',
+    event: 'order_created',
     properties: {
-        orderId: '#0054'
+        order_id: '#0054'
         subtotal: 3599,
-        customerName: 'Max Hedgehog',
+        customer_name: 'Max Hedgehog',
     },
 })
 ```
@@ -15,11 +15,11 @@ client.capture({
 ```python
 posthog.capture(
     'distinct_id',
-    'Order created',
+    'order_created',
     {
-        'orderId': '#0054'
+        'order_id': '#0054',
         'subtotal': 3599,
-        'customerName': 'Max Hedgehog',
+        'customer_name': 'Max Hedgehog',
     }
 )
 ```
@@ -27,11 +27,11 @@ posthog.capture(
 ```php
 PostHog::capture(array(
   'distinctId' => 'distinct_id',
-  'event' => 'Order created',
+  'event' => 'order_created',
   'properties' => array(
-    'orderId' => '#0054'
+    'order_id' => '#0054'
     'subtotal' => 3599,
-    'customerName' => 'Max Hedgehog'
+    'customer_name' => 'Max Hedgehog'
   )
 ));
 ```
@@ -39,11 +39,11 @@ PostHog::capture(array(
 ```ruby
 posthog.capture({
     distinct_id: 'distinct_id',
-    event: 'Order created',
+    event: 'order_created',
     properties: {
-        orderId: '#0054',
+        order_id: '#0054',
         subtotal: 3599,
-        customerName: 'Max Hedgehog'
+        customer_name: 'Max Hedgehog'
     }
 })
 ```
@@ -51,23 +51,23 @@ posthog.capture({
 ```go
 client.Enqueue(posthog.Capture{
   DistinctId: "distinct_id",
-  Event:      "Order created",
+  Event:      "order_created",
   Properties: posthog.NewProperties().
-    Set("orderId", "#0054").
+    Set("order_id", "#0054").
     Set("subtotal", 3599).
-    Set("customerName", "Max Hedgehog"),
+    Set("customer_name", "Max Hedgehog"),
 })
 ```
 
 ```java
 posthog.capture(
   "distinct id",
-  "movie played",
+  "movie_played",
   new HashMap<String, Object>() {
     {
-      put("orderId", "#0054");
+      put("order_id", "#0054");
       put("subtotal", 3599);
-      put("customerName", "Max Hedgehog");
+      put("customer_name", "Max Hedgehog");
     }
   }
 );

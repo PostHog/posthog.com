@@ -63,7 +63,7 @@ My wife isn't a huge fan of them so, nearly every time we meet, I jump at the ch
 
 At one point, I was getting the individual contributor (IC) work done, but not prioritizing things like company vision/OKRs. Knowing when to do this is a real skill. Too much of it and you're setting a silly culture of planning over trying stuff out; too little, and you don't have a clear direction. 
 
-Tim suggested I hire [Kendal](../handbook/company/team#kendal-hall-executive-assistant) (Exec Assistant) to help solve this. I felt really silly hiring someone to manage my time and to keep me organized, but the reality is that I can now give more value to the company, which helps everyone. Having a nudge from someone else was what I needed to commit.
+Tim suggested I hire [Kendal](/community/profiles/721) (Exec Assistant) to help solve this. I felt really silly hiring someone to manage my time and to keep me organized, but the reality is that I can now give more value to the company, which helps everyone. Having a nudge from someone else was what I needed to commit.
 
 ### A crappy family situation got much better
 
@@ -97,7 +97,7 @@ In go-to-market, it's always tempting to explore new channels. However, in 2022,
 
 We get around twice as many community support questions now as we did last year. We've not tracked it, but it feels like we're a lot more rushed as a result when trying to get to everything.
 
-We've implemented multiple things to try to improve this – [Squeak!](https://github.com/PostHog/squeak), a backup infra hero, generally prioritizing cloud (since it's a better experience if possible), launching [Cloud EU](posthog-cloud-eu) to help with GDPR compliance, and hiring [Paul Hultgren](../handbook/company/team#paul-hultgren-developer-advocate) to work on our docs full time. 
+We've implemented multiple things to try to improve this – [Squeak!](https://github.com/PostHog/squeak), a backup infra hero, generally prioritizing cloud (since it's a better experience if possible), launching [Cloud EU](posthog-cloud-eu) to help with GDPR compliance, and hiring Paul Hultgren to work on our docs full time. 
 
 These improvements caused a 75% drop in the likelihood of each user to need support, but that was outweighed by how much growth we had. There are therefore more things to come here as this is an ongoing challenge as we keep scaling. 
 

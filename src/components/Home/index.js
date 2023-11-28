@@ -9,13 +9,16 @@ import Hero from './Hero'
 import Pipelines from './Pipelines'
 import Timeline from './Timeline'
 import Roadmap from './Roadmap'
-import Quote from './Quote'
+import Startups from './Startups'
 import Tutorials from './Tutorials'
 import usePostHog from '../../hooks/usePostHog'
 import AllInOne from './AllInOne'
-import Builders from './Builders'
-import Pricing from './Pricing'
+import ApiExamples from './ApiExamples'
+import HogQL from './HogQL'
 import CustomerData from './CustomerData'
+import CodeBlocks from './CodeBlocks'
+import OnePlatform from './OnePlatform'
+import NoHatingAllowed from './NoHatingAllowed'
 
 const Home = () => {
     usePostHog()
@@ -32,19 +35,24 @@ const Home = () => {
                 <Hero />
                 <Customers />
                 <AllInOne />
-                <Builders />
-                <Pricing />
+                <CodeBlocks />
+                <OnePlatform />
+                <NoHatingAllowed />
+                <ApiExamples />
+                <HogQL />
+                <Community />
                 <CustomerData />
                 <Timeline />
                 <Roadmap />
-                <Quote />
-                <Community />
-                <Tutorials
-                    title="Tutorials"
-                    subtitle="See PostHog in action"
+                <Startups />
+                {/*<Tutorials
+                    title="Latest tutorials"
+                    subtitle="Fresh from our keyboards"
                     cta={{ url: '/tutorials', title: 'Explore all tutorials' }}
-                />
-                <CTA />
+                />*/}
+                <div className="relative">
+                    <CTA />
+                </div>
             </Layout>
         </>
     )

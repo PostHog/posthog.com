@@ -14,37 +14,13 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
-
-If you're working with Node.js, the official `posthog-node` library is the simple way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
+If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
 
 ## Installation
 
-Run either `npm` or `yarn` in terminal to add it to your project:
+import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 
-```bash
-npm install posthog-node --save
-# or
-yarn add posthog-node
-```
-
-In your app, set your API key **before** making any calls.
-
-```node
-import { PostHog } from 'posthog-node'
-
-const client = new PostHog(
-    '<ph_project_api_key>',
-    { host: '<ph_instance_address>' } // You can omit this line if using PostHog Cloud
-)
-
-// On program exit, call shutdown to stop pending pollers and flush any remaining events
-await client.shutdownAsync()
-```
-
-You can find your key in the 'Project Settings' page in PostHog.
-
-> **Note:** As a rule of thumb, we do not recommend hardcoding API keys. Setting it as an environment variable would be best.
+<NodeInstall />
 
 ### Options
 
@@ -59,210 +35,122 @@ You can find your key in the 'Project Settings' page in PostHog.
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                         | `true`                    |
 
-> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`.
+> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdownAsync()` at the end to flush and send all pending events.
 
-## Making calls
 
-### Capture
+## Capturing events
 
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
+import NodeSendEvents from '../../integrate/send-events/_snippets/send-events-node.mdx'
 
-A `capture` call requires:
+<NodeSendEvents />
 
--   `distinct id` which uniquely identifies your user
--   `event name` to identify the event
+## Setting user properties
 
-*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-
--   `properties`, which is an object with any information you'd like to add
--   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
-
-For example:
+To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
 ```node
 client.capture({
-    distinctId: 'distinct id',
-    event: 'movie played',
+    distinctId: 'distinct_id_of_the_user',
+    event: 'movie_played',
     properties: {
-        movieId: '123',
-        category: 'romcom',
+        $set: { name: 'Max Hedgehog'  },
+        $set_once: { initial_url: '/blog' },
     },
 })
 ```
 
-#### Setting user properties via an event
+For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+## Alias
 
-##### $set
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-```node
-client.capture({
-    distinctId: 'distinct id',
-    event: 'movie played',
-    properties: {
-        $set: { userProperty: 'value' },
-    },
-})
-```
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+## Feature flags
 
-##### $set_once
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-```node
-client.capture({
-    distinctId: 'distinct id',
-    event: 'movie played',
-    properties: {
-        $set_once: { userProperty: 'value' },
-    },
-})
-```
+<FeatureFlagsLibsIntro />
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+import NodeFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-node.mdx'
 
-### Identify
+<NodeFeatureFlagsCode />
 
-> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
-like segment users by these properties.
+### Local Evaluation
 
-An `identify` call requires:
+<LocalEvaluationIntro />
 
--   `distinctId` – a distinct ID belonging to the user
--   `properties` – a user properties object
-
-For example:
-
-```node
-client.identify({
-    distinctId: 'user:123',
-    properties: {
-        email: 'john@doe.com',
-        proUser: false,
-    },
-})
-```
-
-The most obvious place to make this call is whenever a user signs up, or when they update their information.
-
-### Alias
-
-To connect whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
-
-In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
-
-The same concept applies for when a user logs in.
-
-If you're using PostHog in the front-end and back-end, doing the `identify` call in the frontend will be enough.
-
-An `alias` call requires:
-
--   `distinctId` – the user id
--   `alias` – the anonymous session distinct ID
-
-For example:
-
-```node
-client.alias({
-    distinctId: 'user:123',
-    alias: 'session:12345',
-})
-```
-
-### Sending page views
-
-If you're aiming for a full back-end implementation of PostHog, you can send `pageviews` from your backend, like so:
-
-```node
-client.capture({
-    distinctId: 'distinct id',
-    event: '$pageview',
-    properties: {
-        $current_url: 'https://example.com',
-    },
-})
-```
-
-### Feature flags
-
-PostHog's [feature flags](/docs/user-guides/feature-flags) enable you to safely deploy and roll back new features.
-
-When using them with one of libraries, you should check if a feature flag is enabled and use the result to toggle functionality on and off in you application.
-
-**How to check if a flag is enabled**
-
-> **Note:** Whenever we face an error computing the flag, the library returns `undefined`, instead of `true`, `false`, or a string variant value.
-
-```node
-// isFeatureEnabled(key: string, distinctId: string, options: {}): Promise<boolean | undefined>
-const isMyFlagEnabledForUser = await client.isFeatureEnabled('flag-key', 'user distinct id')
-
-if (isMyFlagEnabledForUser) {
-    // Do something differently for this user
-}
-```
-
-**Disable feature flag events**
-
-By default, calling `isFeatureEnabled()` or `getFeatureFlag()` sends a `$feature_flag_called` event so you can analyze flag usage. You can disable this by passing the `sendFeatureFlagEvents` property:
-
-```node
-const isMyFlagEnabledForUser = await client.isFeatureEnabled('flag-key', 'user distinct id', { sendFeatureFlagEvents: false })
-```
-
-**Get a flag value**
-
-If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
-
-> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
-
-```node
-// getFeatureFlag(key: string, distinctId: string, options: {}): Promise<string | boolean | undefined>
-const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id')
-```
-
-
-**Overriding server properties**
-
-Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
-
-For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
-```node
-// getFeatureFlag(
-//    key: string,
-//    distinctId: string,
-//    options?: {
-//      groups?: Record<string, string>
-//      personProperties?: Record<string, string>
-//      groupProperties?: Record<string, Record<string, string>>
-//      onlyEvaluateLocally?: boolean
-//      sendFeatureFlagEvents?: boolean
-//    }
-//  ): Promise<string | boolean | undefined>
-const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {
-    personProperties: { is_authorized: true },
-})
-```
-
-The same holds for [groups](/manual/group-analytics). If you have a group named `organisation`, you can add properties like so:
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
 ```node
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {groups:{'organisation': 'google'}, groupProperties:{'organisation': {'is_authorized': True}})
 ```
 
-**Default overridden properties**
+#### Reloading feature flags
+
+When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `reloadFeatureFlags`:
+
+```node
+await client.reloadFeatureFlags()
+
+// Do something with feature flags here
+```
+
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```node
+const variant = await client.getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+
+if (variant === 'variant-name') {
+    // do something
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## Group analytics
+
+Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Capture an event and associate it with a group
+
+```node
+client.capture({
+    event: 'some_event',
+    distinctId: 'user_distinct_id',
+    groups: { company: 'company_id_in_your_db' },
+})
+```
+
+-   Update properties on a group
+
+```node
+client.groupIdentify({
+    groupType: 'company',
+    groupKey: 'company_id_in_your_db',
+    properties: {
+        name: 'Awesome Inc',
+        employees: 11,
+    },
+    // optional distinct ID to associate event with an existing person
+    distinctId: 'xyz'
+})
+```
+
+## GeoIP properties
 
 Before posthog-node v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
 
 As of posthog-node v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
 
-You can go back to previous behaviour by setting `disableGeoip` to false in your initialization:
+You can go back to previous behavior by setting `disableGeoip` to false in your initialization:
 
 ```node
 const posthog = new PostHog(PH_API_KEY, {
@@ -282,125 +170,17 @@ The list of properties that this overrides:
 7. $geoip_time_zone
 
 
-You can also explicitly chose to override / not override properties for a single capture or feature flag request like so:
-
-```node
-const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {
-    personProperties: { is_authorized: true },
-    disableGeoip: `true|false`
-})
-```
-
-```node
-posthog.capture({
-  distinctId: distinctId,
-  event: 'test-event',
-  properties: { foo: 'bar' },
-  disableGeoip: `true|false`,
-})
-```
-
-
-**Getting all flag values**
-
-You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
-
-```node
-await client.getAllFlags('distinct id', { groups: {}, personProperties: { is_authorized: True }, groupProperties: {} })
-// returns dict of flag key and value pairs.
-```
-
-#### Feature Flag Payloads
-
-Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
-string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
-
-This was introduced in PostHog Node v2.3.0
-
-> **Note:** `getFeatureFlag` does not need to be called prior to `getFeatureFlagPayload`. `getFeatureFlagPayload` will implicitly perform
-> getFeatureFlag to determine the matching flag and return the corresponding payload.
-
-```node
-// getFeatureFlagPayload(key: string, distinctId: string, matchValue?: string | boolean, options: {}): Promise<JsonType | undefined>
-const flagPayload = await client.getFeatureFlagPayload('flag-key', 'user distinct id')
-```
-
-
-#### Local Evaluation
-
-> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
-
-> **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
-
-All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
-
-1. The library must be initialised with a personal API key
-2. You must know all person or group properties the flag depends on.
-
-Then, the flag can be evaluated locally. The method signature looks exactly like above.
-
-```node
-await client.getFeatureFlag('beta-feature', 'distinct id', { personProperties: { is_authorized: True } })
-// returns string or None
-```
-
-> **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `featureFlagsPollingInterval` during client initialisation.
-
-This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
-
-```node
-await client.getAllFlags('distinct id', { groups: {}, personProperties: { is_authorized: True }, groupProperties: {} })
-// returns dict of flag key and value pairs.
-```
-
-**Restricting evaluation to local only**
-
-Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
-
-<CohortExpansionSnippet />
-
-#### Reloading feature flags
-
-When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `reloadFeatureFlags`:
-
-```node
-await client.reloadFeatureFlags()
-
-// Do something with feature flags here
-```
-
-### Group analytics
-
-Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
-
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
-
--   Capture an event and associate it with a group
+You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
 
 ```node
 client.capture({
-    event: 'some event',
-    distinctId: '[distinct id]',
-    groups: { company: '42dlsfj23f' },
+  distinctId: distinctId,
+  event: 'your_event',
+  disableGeoip: `true`,
 })
 ```
 
--   Update properties on a group
-
-```node
-client.groupIdentify({
-    groupType: 'company',
-    groupKey: '42dlsfj23f',
-    properties: {
-        name: 'Awesome Inc',
-        employees: 11,
-    },
-    // optional distinct ID to associate event with an existing person
-    distinctId: 'xyz'
-})
-```
-
-### Shutdown
+## Shutdown
 
 You should call `shutdown` on your program's exit to exit cleanly:
 
@@ -438,14 +218,14 @@ For example:
 
 ```node
 export const handler() {
-  posthog.capture({
-    distinctId: 'distinct id',
-    event: 'thing happened'
+  client.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'thing_happened'
   })
 
-  posthog.capture({
-    distinctId: 'distinct id',
-    event: 'other thing happened'
+  client.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'other_thing_happened'
   })
 
   // So far 2 events are queued but not sent

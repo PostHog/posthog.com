@@ -1,0 +1,41 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_the_user',
+    event: 'user_signed_up'
+})
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_the_user',
+    event: 'user_signed_up',
+    properties: {
+        login_type: 'email',
+        is_free_trial: true
+    }
+})
+```
+
+### Sending pageviews
+
+If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_the_user',
+    event: '$pageview',
+    properties: {
+        '$current_url': 'https://example.com'
+    }
+})
+```

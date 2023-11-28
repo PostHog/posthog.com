@@ -4,17 +4,13 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-09-26
-featuredImage: ../images/tutorials/banners/tutorial-8.png
 featuredVideo: https://www.youtube-nocookie.com/embed/CVu6ObmOR8Q
-tags: ['trends', 'sessions']
+tags: ['trends', 'sessions', 'product analytics']
 ---
 
-- **Level:** Easy 🦔
-- **Estimated reading time:** 5 minutes ☕️
+Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is tracking metrics like time on site, average session duration, and pages per session. 
 
-Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is to track metrics like time on site, time on page, average session duration, and pages per session. 
-
-These metrics can be calculated and visualized in PostHog by making use of sessions and their durations. We define a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event, which we will rely on heavily. For more basic information about session data, see our [product manual](/manual/sessions). 
+PostHog defines a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event. We get session data from our [snippet](/docs/getting-started/install?tab=snippet), [JavaScript library](/docs/libraries/js), or ][mobile SDKs](/docs/libraries/ios). For more information about sessions, see our [docs](/docs/data/sessions). 
 
 In this tutorial, we will use sessions to calculate and visualize a variety of session and time-based metrics like time on site and average session duration.
 
@@ -37,29 +33,11 @@ Once you modify the graph to your liking, by choosing a date range and setting t
 
 This might be useful for getting a rough idea of the usage of our whole product over time but becomes more useful as you break it down. You can do this by filtering the data. For example, you can filter for sessions by section of your product or site such as pricing or signup.
 
-## Time in sections
-
-To visualize time in sections, add a filter where the `Current URL` contains the section URL you want. In this case, it will be pricing and signup. Once one is set up, use the copy button and then change the `Current URL` value. This makes it quick to add multiple sections to the graph.
-
-> **Tip:** Filter out pages you don’t want to be included, such as your main application on queries related to you marketing site.
-
-![Session duration filters](../images/tutorials/session-metrics/session-duration-filters.png)
-
-Once done, you’ll have a graph of session duration for the signup and pricing sections. Looks like people are spending a lot more time on pricing pages than signup, but remember that this is the *sum of session duration*, averages will be different.
-
-![Pricing vs signup session durations](../images/tutorials/session-metrics/pricing-vs-signup.png)
-
-## Time on pages
-
-If you want to know exactly what pages people are spending the most time in, you can *breakdown by* `Current URL` . Resetting the filters and switching the chart type to `Value` gives you a visual that looks like this:
-
-![Current URL values](../images/tutorials/session-metrics/current-url-values.png)
-
-These insights and visualization might help you reprioritize pages and sections people are spending more time on. Depending on the context, high time on a page could mean the page is important, confusing, or not optimized. [Session recordings](/product/session-recording) can help you find out if you don’t know.
+> **Calculating time on page**: PostHog doesn't keep track of how long users spend on individual pages, only entire sessions. To calculate time on page, you can either implement a custom pageleave event (like we do in [how to capture scroll depth](/tutorials/scroll-depth)) that contains the time a user spent on a page, or calculate the time between a pageview and a subsequent pageview or pageleave event (like we do in our [how to calculate time on page](/tutorials/time-on-page) tutorial).
 
 ## Average session duration
 
-Now that you visualized time on site, time in sections, and time on page, we can visualize some session-based metrics based on averages. Averages provide better insight into how individual users spend their time compared to the sum of time spent metrics calculated and visualized in the last section.
+Now that you visualized time on site, we can visualize session-based metrics based on averages. Averages provide better insight into how individual users spend their time, compared to the sum of time spent metrics shown in the previous section.
 
 We’ll start with the average session duration. It can be calculated by again choosing pageview, but now aggregating by average session duration. Ensuring Y-axis is set to `Duration (s)` creates a graph of average session duration. 
 
@@ -81,8 +59,6 @@ Again, you can filter these series to better identify the types of users you wan
 
 ### Understanding how users spend their time
 
-These metrics should give you a better understanding of how users are spending their time in your product and site. Time on site, time in sections, average session time, and pages per session all provide insight into the experience of your product or the quality of your content. Making improvements to product or content quality helps improves these metrics.
+These metrics should give you a better understanding of how users are spending their time in your product and site. Time on site, average session time, and pages per session all provide insight into the experience of your product or the quality of your content. Making improvements to product or content quality helps improves these metrics.
 
 To dive deeper into these insights, you can use [session recordings](/product/session-recording) to watch exactly how users are interacting with your product or the toolbar to use [heatmaps](/product/heatmaps) to understand popular areas on pages.
-
-<NewsletterTutorial compact/>

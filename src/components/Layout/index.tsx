@@ -4,31 +4,61 @@ import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
 import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
-import { UserProvider } from 'hooks/useUser'
-import { SWRConfig } from 'swr'
-
+import { useLocation } from '@reach/router'
+import { animateScroll as scroll } from 'react-scroll'
 import './Fonts.scss'
 import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
+import { IProps, LayoutProvider } from './context'
+import { Mobile as MobileNav } from 'components/MainNav'
+import { useLayoutData } from './hooks'
+import SearchBox from 'components/Search/SearchBox'
 
-const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
+const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
+    const { compact } = useLayoutData()
+    return (
+        <div className={className}>
+            {compact ? (
+                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-50 bg-light dark:bg-dark">
+                    <SearchBox className="!w-full !py-2" location="mobile-header" />
+                </div>
+            ) : (
+                <Header />
+            )}
+            <main>{children}</main>
+            {!compact && (
+                <>
+                    <Footer />
+                    <CookieBanner />
+                    <MobileNav />
+                </>
+            )}
+        </div>
+    )
+}
+
+const Layout = ({
+    children,
+    parent,
+    activeInternalMenu,
+    className = '',
+}: IProps & { className?: string }): JSX.Element => {
+    const { hash } = useLocation()
     const posthog = usePostHog()
 
     useEffect(() => {
-        if (window && posthog) {
-            posthog.people.set({ preferred_theme: (window as any).__theme })
+        if (window && posthog?.setPersonProperties) {
+            posthog.setPersonProperties({ preferred_theme: (window as any).__theme })
         }
+        if (hash) scroll.scrollMore(-108)
     }, [])
 
     return (
         <SearchProvider>
-            <div className={className}>
-                <Header />
-                <main>{children}</main>
-                <Footer />
-                <CookieBanner />
-            </div>
+            <LayoutProvider parent={parent} activeInternalMenu={activeInternalMenu}>
+                <Article className={className}>{children}</Article>
+            </LayoutProvider>
         </SearchProvider>
     )
 }

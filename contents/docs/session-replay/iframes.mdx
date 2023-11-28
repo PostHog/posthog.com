@@ -1,0 +1,34 @@
+---
+title: Iframe recording
+---
+
+PostHog **can** record iframes embedded in your website as long as:
+* ✅ The embedded iframe is from the same domain as the main page (e.g. `https://posthog.com` embeds `https://posthog.com/iframe`)
+* ✅ The embedded iframe is from a domain that you can install `posthog-js` on (e.g. `https://posthog.com` embeds `https://app.posthog.com/iframe`) - _**requires extra configuration**_
+
+PostHog **cannot** record iframes embedded in your website if:
+* ❌ The embedded iframe is from a domain than is not under your control (e.g. `https://posthog.com` embeds `https://google.com/iframe`)
+
+
+## Recording same-origin iframes
+
+There is nothing special that is needed if the iframe is from the same domain as the main page. As long as PostHog is installed on both the parent page and the iframe, the recording will work as expected.
+
+## Recording cross-origin iframes
+
+> 🚧 **Security warning**: Before enabling the cross-origin recording, be aware that when using an iframe that communicates with the parent page, there are potential security risks. Ensure your Content Security Policy (CSP) only permits trusted domains and correctly employs directives like `frame-src` or `frame-ancestors`. Failure to do so can lead to security breaches where an attacker would embed your website on their domain, gaining access to the recorded content. If unsure about CSP configurations, consult your security team or reach out to PostHog support.
+
+In order to record from a cross-origin iframe, you need to ensure that `posthog-js` is installed on both the parent domain and the iframe one.
+
+In addition, PostHog needs to be initialised **on both domains** with an explicit configuration as below:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        // WARNING: Only enable this if you understand the security implications
+        recordCrossOriginIframes: true,
+    }
+})
+```
+
+With this setting enabled, the child iframe will post events to the parent instead, resulting in a single replayable recording. If the parent page does not have this enabled, then the content of the embedded iframe will not be captured at all.

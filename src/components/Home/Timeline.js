@@ -1,9 +1,9 @@
-import { CallToAction } from 'components/CallToAction'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
-import { heading, section } from './classes'
+import { heading } from './classes'
 import groupBy from 'lodash.groupby'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { IconChevronDown } from '@posthog/icons'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const categories = {
@@ -12,7 +12,42 @@ const categories = {
     'Something cool happened': 'milestone',
 }
 
+export const Items = ({ items }) => {
+    const ref = useRef(null)
+    const [isOverflowing, setIsOverflowing] = useState(false)
+
+    useEffect(() => {
+        setIsOverflowing(ref?.current?.scrollHeight > ref?.current?.getBoundingClientRect()?.height)
+    }, [])
+
+    return (
+        <div
+            className={`relative ${
+                isOverflowing
+                    ? 'after:absolute after:h-[30px] after:w-full after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-accent dark:after:from-accent-dark after:to-transparent'
+                    : ''
+            }`}
+        >
+            <ul ref={ref} className={`m-0 p-0 h-[110px] overflow-auto ${isOverflowing ? 'pb-[30px]' : ''}`}>
+                {items?.map(({ title, category }) => {
+                    return (
+                        <li
+                            key={title}
+                            className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
+                            data-type={categories[category]}
+                        >
+                            {title}
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+}
+
 export default function Timeline() {
+    const breakpoints = useBreakpoint()
+    const listRef = useRef(null)
     const {
         allSqueakRoadmap: { nodes },
     } = useStaticQuery(graphql`
@@ -49,8 +84,12 @@ export default function Timeline() {
         }
     )
 
+    useEffect(() => {
+        listRef?.current?.scrollBy({ left: listRef?.current?.scrollWidth })
+    }, [])
+
     return (
-        <section className="px-4 mb-12 md:mb-20">
+        <section className="px-4 mb-12 md:mb-20 overflow-hidden">
             <h2 className={heading()}>
                 We ship <br className="sm:hidden" />
                 <span className="text-orange">weirdly fast</span>
@@ -73,80 +112,89 @@ export default function Timeline() {
                     </div>
                 </div>
             </div>
-
-            <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 shadow-xl">
-                {Object.keys(pastEvents).map((year) => {
-                    const pastMonths = groupBy(pastEvents[year], (node) => {
-                        const date = new Date(node.dateCompleted || node.projectedCompletion)
-                        return months[date.getUTCMonth()]
-                    })
-                    const futureQuarters = groupBy(futureEvents[year], (node) => {
-                        const date = node.dateCompleted || node.projectedCompletion
-                        return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
-                    })
-                    return (
-                        <div
-                            key={year}
-                            className="bg-white rounded w-full mb-4 lg:mb-0 border-gray-accent-light border-dashed border-r last:border-r-0"
-                        >
-                            <h4 className="text-base py-1 font-bold text-center bg-gray-accent-light ">{year}</h4>
-                            <div className="px-8">
-                                <ul role="list" className="py-1 px-0">
-                                    {Object.keys(pastMonths).map((month) => {
-                                        return (
-                                            <li
-                                                key={month}
-                                                className="timeline-entry list-none border-gray-accent-light/50 border-solid border-b last:border-none flex py-2 gap-3 items-start"
-                                            >
-                                                <p className="text-[14px] text-gray capitalize w-[30px] flex-shrink-0 m-0">
-                                                    {month}
-                                                </p>
-                                                <ul className="list-none m-0 p-0">
-                                                    {pastMonths[month].map(({ title, category }) => {
-                                                        return (
-                                                            <li
-                                                                key={title}
-                                                                className="flex-auto relative text-[14px] text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
-                                                                data-type={categories[category]}
-                                                            >
-                                                                {title}
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </ul>
-                                            </li>
-                                        )
-                                    })}
-                                    {Object.keys(futureQuarters).map((quarter) => {
-                                        return (
-                                            <li
-                                                key={quarter}
-                                                className="timeline-entry list-none  flex py-2 gap-3 items-start"
-                                            >
-                                                <p className="text-[14px] text-gray capitalize w-[30px] flex-shrink-0 m-0">
-                                                    Q{quarter}
-                                                </p>
-                                                <ul className="list-none m-0 p-0">
-                                                    {futureQuarters[quarter].map(({ title, category }) => {
-                                                        return (
-                                                            <li
-                                                                key={title}
-                                                                className="flex-auto relative text-[14px] text-left pl-4 text-gray content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
-                                                                data-type={categories[category]}
-                                                            >
-                                                                {title}
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </ul>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
+            <div className="relative -mx-4 pr-4">
+                <div className="md:block hidden absolute z-20 top-1/2 left-0 -translate-y-1/2">
+                    <button
+                        onClick={() => listRef?.current?.scrollBy({ left: -50, behavior: 'smooth' })}
+                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
+                    >
+                        <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark rotate-90" />
+                    </button>
+                </div>
+                <div
+                    ref={listRef}
+                    className="-mr-4 px-4 md:px-16 snap-x snap-mandatory flex flex-nowrap gap-4 overflow-auto relative"
+                >
+                    {Object.keys(pastEvents).map((year, index) => {
+                        const pastMonths = groupBy(pastEvents[year], (node) => {
+                            const date = new Date(node.dateCompleted || node.projectedCompletion)
+                            return months[date.getUTCMonth()]
+                        })
+                        const futureQuarters = groupBy(futureEvents[year], (node) => {
+                            const date = node.dateCompleted || node.projectedCompletion
+                            return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
+                        })
+                        return (
+                            <div key={year} className="w-[80vw] md:w-[90vw] max-w-5xl shrink-0 mb-4 snap-center">
+                                <h4 className="text-2xl py-1 font-bold text-center">{year}</h4>
+                                <div className="p-4 bg-white dark:bg-dark border border-light dark:border-dark sm:h-auto h-96 overflow-auto snap-x">
+                                    <ul role="list" className="py-1 px-0 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+                                        {months.map((month) => {
+                                            const items = pastMonths[month]
+                                            if (breakpoints.sm && !items) return null
+                                            return (
+                                                <li
+                                                    key={month}
+                                                    className="timeline-entry bg-accent dark:bg-accent-dark list-none px-4 pb-4 text-center min-h-[6rem] md:min-h-[8rem] lg:min-h-[10rem]"
+                                                >
+                                                    <p
+                                                        className={`text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2`}
+                                                    >
+                                                        {month}
+                                                    </p>
+                                                    <Items items={items} />
+                                                </li>
+                                            )
+                                        })}
+                                        {Object.keys(futureQuarters).map((quarter) => {
+                                            return (
+                                                <li
+                                                    key={quarter}
+                                                    className="timeline-entry list-none bg-accent dark:bg-accent-dark px-4 pb-4"
+                                                >
+                                                    <p className="text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2 text-center">
+                                                        Q{quarter}
+                                                    </p>
+                                                    <ul className="list-none m-0 p-0">
+                                                        {futureQuarters[quarter].map(({ title, category }) => {
+                                                            return (
+                                                                <li
+                                                                    key={title}
+                                                                    className="flex-auto relative text-[14px] text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
+                                                                    data-type={categories[category]}
+                                                                >
+                                                                    {title}
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </ul>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
+                <div className="absolute top-1/2 right-0 -translate-y-1/2">
+                    <button
+                        onClick={() => listRef?.current?.scrollBy({ left: 50, behavior: 'smooth' })}
+                        className="md:block hidden relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
+                    >
+                        <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark -rotate-90" />
+                    </button>
+                </div>
             </div>
         </section>
     )

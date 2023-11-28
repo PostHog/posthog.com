@@ -4,8 +4,7 @@ date: 2023-03-07
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/toolbar.png
-tags: ["heatmaps", "toolbar"]
+tags: ["heatmaps", "toolbar", 'product os']
 ---
 
 Understanding where users click your site or app shows you what interests them. A heatmap can visualize these clicks to make this analysis easier.
@@ -102,8 +101,8 @@ To activate the heatmap, click the PostHog toolbar icon, then the "🔥 Heatmap"
 With the heatmap open, you see elements highlighted in shades of yellow to red. Here’s what the numbers mean:
 
 - The numbers over the elements are how many times they were clicked over the last 7 days.
-- The number next to the 😡 emoji is the number of rage clicks for that element.
-- The number next to the 🔥 emoji is the number of clicked elements on the page.
+- The number next to the 😡 emoji is the number of rage clicks for that element.
+- The number next to the 🔥 emoji is the number of clicked elements on the page.
 
 When you click an element, you get a modal with different options:
 
@@ -113,7 +112,7 @@ When you click an element, you get a modal with different options:
 
 ## Changing the heatmap settings
 
-You can also change the settings for your heatmap by clicking on the number next to the 🔥 emoji. This enables you to:
+You can also change the settings for your heatmap by clicking on the number next to the 🔥 emoji. This enables you to:
 
 - Change the events list to contain more pages using wildcards (`*`). For example, if you wanted to see the heatmap for the same elements across all blog pages, you could use `/blog/*`.
 - Change the length of time the heatmap generates from. The default is 7 days.

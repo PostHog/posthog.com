@@ -69,7 +69,9 @@ The big difference between ClickHouse Cloud and Altinity Cloud is how they store
 
 Separately, an advantage of ClickHouse Cloud is that it includes some exclusive features not available in the ClickHouse core distribution. One of these is a SQL GUI explorer which provides similar features to some of Snowflake’s basic data exploration. 
 
-Overall, ClickHouse Cloud or Altinity Cloud are excellent options for companies that want a managed version of ClickHouse on the public cloud. Their emergence closes the gap between ClickHouse and Snowflake. 
+Overall, ClickHouse Cloud or Altinity Cloud are excellent options for companies that want a managed version of ClickHouse on the public cloud. Their emergence closes the gap between ClickHouse and Snowflake.
+
+> 📖 **Further reading:** ClickHouse also competes with another huge, established product... Google's BigQuery. Read our [ClickHouse vs BigQuery comparison](/blog/clickhouse-vs-bigquery) to understand how the two solutions differ.
 
 ## Architecture overview
 

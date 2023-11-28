@@ -5,8 +5,7 @@ showTitle: true
 author: ['lior-neu-ner']
 date: 2023-04-13
 featuredTutorial: true
-featuredImage: ../images/tutorials/banners/sessions.png
-tags: ["session recording"]
+tags: ["session replay"]
 ---
 
 Waiting for slow web apps is like watching paint dry. It's the bane of productivity, the destroyer of efficiency, and a leading cause of [customer churn](/blog/customer-churn-analysis-guide).
@@ -18,7 +17,7 @@ In this tutorial, we'll show you:
 
 ## Setting up performance monitoring
 
-First, ensure that session replays are [enabled]((https://posthog.com/docs/session-replay/manual)). Next, navigate to the Recordings tab in PostHog. Finally, click on the Network tab in the sidebar next to or below the replay.
+First, ensure that session replays are [enabled](/docs/session-replay/manual). Next, navigate to the Session Replay tab in PostHog. Finally, click on the Network tab in the sidebar next to or below the replay.
 
 ![A screenshot showing where to find the performance monitoring in the session replays tool](../images/tutorials/performance-metrics/performance-tool.png)
 
@@ -155,8 +154,7 @@ Once you have identified which factors are affected your page load times, here a
 
 ## Further reading
 
-- [How to use session replays to get a deeper understanding of user behavior](https://posthog.com/tutorials/explore-insights-session-recordings)
-- [How to use session replays to improve your support experience](https://posthog.com/tutorials/session-recordings-for-support)
-- [How to use filters + session replays to understand user friction](https://posthog.com/tutorials/filter-session-recordings)
-
+- [How to use session replays to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
+- [How to use session replays to improve your support experience](/tutorials/session-recordings-for-support)
+- [What is real user monitoring (and how to set it up)](/blog/real-user-monitoring)
 

@@ -56,7 +56,7 @@ Home
 HostingOption
 Icons
 ImageBlock
-IngestionAppsList
+IngestionPipelinesList
 InlineCode
 LandingPageCallToAction
 LibraryComparison
@@ -79,7 +79,9 @@ CloudVsSelfHost
 FAQs
 Features
 OtherOptions
-PlanComparison
+Pipelines
+PipelinesList
+Plans
 PricingCalculator
 PricingHero
 PricingSlider
@@ -139,3 +141,4 @@ Templates
 TemplatesList
 Tutorials
 UserLogosCarouse
+Slider

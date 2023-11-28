@@ -11,21 +11,23 @@ We've organized the team into small teams that are multi-disciplinary and as sel
 
 Our small teams are:
 
-- [Product Analytics](/handbook/small-teams/product-analytics)
-- [Feature Success](/handbook/small-teams/feature-success)
-- [Monitoring](/handbook/small-teams/monitoring)
-- [Infrastructure](/handbook/small-teams/infrastructure)
-- [Pipeline](/handbook/small-teams/pipeline)
-- [Marketing](/handbook/small-teams/marketing)
-- [Website & Docs](/handbook/small-teams/website-docs)
-- [Growth](/handbook/small-teams/growth)
-- [People & Ops](/handbook/small-teams/people)
 - [Customer Success](/handbook/small-teams/customer-success)
+- [Data Warehouse](/handbook/small-teams/dw)
 - [Exec](/handbook/small-teams/exec)
+- [Feature Success](/handbook/small-teams/feature-success)
+- [Growth](/handbook/small-teams/growth)
+- [Infrastructure](/handbook/small-teams/infrastructure)
+- [Marketing](/handbook/small-teams/marketing)
+- [People & Ops](/handbook/small-teams/people)
+- [Pipeline](/handbook/small-teams/pipeline)
+- [Product Analytics](/handbook/small-teams/product-analytics)
+- [Replay](/handbook/small-teams/replay)
+- [Web Analytics](/handbook/small-teams/web-analytics)
+- [Website & Docs](/handbook/small-teams/website-docs)
 
 ## Reporting lines
 
-We maintain our full org chart in Roots, [which you can access here](https://app.tryroots.io/org-chart).
+We maintain our full org chart in Deel, [which you can access here](https://app.tryroots.io/org-chart).
 
 Team leads do not necessarily = managers - read more about how we think about management [here](/handbook/company/management). 
 

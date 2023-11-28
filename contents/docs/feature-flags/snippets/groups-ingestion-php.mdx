@@ -3,8 +3,8 @@ Update [posthog-php](https://posthog.com/docs/integrate/server/php) to version 2
 ```c
 # Capturing an event with groups
 PostHog::capture(array(
-    'distinctId' => '[distinct id]',
-    'event' => 'some event',
+    'distinctId' => 'user_distinct_id',
+    'event' => 'some_event',
     '$groups' => array("company" => "id:5")
 ));
 

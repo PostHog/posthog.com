@@ -1,0 +1,182 @@
+When using `set`, it will replace any value that may have been set on a person for a specific property. In contrast, `set_once` will only set the property if it has never been set before.
+
+`set` is typically used for properties that may change over time – e.g., email, current plan, organization name. `set_once` is typically only used for information that is guaranteed to never change – e.g., the first URL a user visited, or the date a user first logged in.
+
+For example:
+
+<MultiLanguage selector="tabs">
+
+```js-web
+posthog.capture(
+    'event_name', 
+    { 
+        $set: { name: 'Max Hedgehog'  },
+        $set_once: { initial_url: '/blog' },
+    }
+)
+posthog.capture(
+    'event_name', 
+    { 
+        $set: { name: 'Mr. Fox'  },
+        $set_once: { initial_url: '/pricing' },
+    }
+)
+// name: 'Mr. Fox'
+// initial_url: '/blog'
+```
+
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        $set: { name: 'Max Hedgehog'  },
+        $set_once: { initial_url: '/blog' },
+    },
+})
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        $set: { name: 'Mr. Fox'  },
+        $set_once: { initial_url: '/pricing' },
+    },
+})
+// name: 'Mr. Fox'
+// initial_url: '/blog'
+```
+
+```python
+posthog.capture(
+    'distinct_id',
+    event='event_name',
+    properties={
+        '$set': {'name': 'Max Hedgehog'},
+        '$set_once': {'initial_url': '/blog'}
+    }
+)
+posthog.capture(
+    'distinct_id',
+    event='event_name',
+    properties={
+        '$set': {'name': 'Mr. Fox'},
+        '$set_once': {'initial_url': '/pricing'}
+    }
+)
+# name: 'Mr. Fox'
+# initial_url: '/blog'
+```
+
+```php
+PostHog::capture(array(
+    'distinctId' => 'distinct_id',
+    'event' => 'event_name',
+    'properties' => array(
+        '$set' => array(
+            'name' => 'Max Hedgehog'
+        ),
+        '$set_once' => array(
+            'initial_url' => '/blog'
+        )
+    )
+));
+PostHog::capture(array(
+    'distinctId' => 'distinct_id',
+    'event' => 'event_name',
+    'properties' => array(
+        '$set' => array(
+            'name' => 'Mr. Fox'
+        ),
+        '$set_once' => array(
+            'initial_url' => '/pricing'
+        )
+    )
+));
+# name: 'Mr. Fox'
+# initial_url: '/blog'
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        '$set': { name: 'Max Hedgehog' },
+        '$set_once': { initial_url: '/blog' }
+    }
+})
+posthog.capture({
+    distinct_id: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        '$set': { name: 'Mr. Fox' },
+        '$set_once': { initial_url: '/pricing' }
+    }
+})
+# name: 'Mr. Fox'
+# initial_url: '/blog'
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "distinct_id",
+    Event:      "event_name",
+    Properties: map[string]interface{}{
+        "$set": map[string]interface{}{
+            "name": "Max Hedgehog",
+        },
+        "$set_once": map[string]interface{}{
+            "initial_url": "/blog",
+        },
+    },
+})
+client.Enqueue(posthog.Capture{
+    DistinctId: "distinct_id",
+    Event:      "event_name",
+    Properties: map[string]interface{}{
+        "$set": map[string]interface{}{
+            "name": "Mr. Fox",
+        },
+        "$set_once": map[string]interface{}{
+            "initial_url": "/pricing",
+        },
+    },
+})
+// name: 'Mr. Fox'
+// initial_url: '/blog'
+```
+
+```java
+posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
+  {
+    put("$set",  new HashMap<String, Object>() {       
+      {
+        put("name", "Max Hedgehog");
+      }
+    });
+    put("$set_once",  new HashMap<String, Object>() {
+      {
+        put("initial_url", "/blog");
+      }
+    });
+  }
+});
+posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
+  {
+    put("$set",  new HashMap<String, Object>() {       
+      {
+        put("name", "Mr. Fox");
+      }
+    });
+    put("$set_once",  new HashMap<String, Object>() {
+      {
+        put("initial_url", "/pricing");
+      }
+    });
+  }
+});
+// name: 'Mr. Fox'
+// initial_url: '/blog'
+```
+
+</MultiLanguage>

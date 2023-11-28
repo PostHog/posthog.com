@@ -31,7 +31,7 @@ export const AboutHero = () => {
 
     return (
         <>
-            <header id="our-story" className="pb-4 md:pb-8 px-4 md:px-12">
+            <header id="our-story" className="pt-8 pb-4 md:pb-8 px-4 md:px-12">
                 <h1 className="text-4xl md:text-6xl text-center mb-4 leading-none">
                     We're a little hog-wild about <br className="hidden xl:block" />{' '}
                     <span className="text-red">helping you build successful products.</span>

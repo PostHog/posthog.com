@@ -8,8 +8,6 @@ import pluginLibraryOgImage from '../images/posthog-plugins.png'
 import { ContributorCard } from 'components/ContributorCard'
 import { Contributor } from 'types'
 import { ContributorSearch } from 'components/ContributorSearch'
-import { ContributorsChart } from 'components/ContributorsChart'
-import Tab from 'components/Tab'
 import Spinner from 'components/Spinner'
 
 export const ContributorsPage = () => {
@@ -26,44 +24,28 @@ export const ContributorsPage = () => {
                 <div className="centered" style={{ margin: 'auto' }}>
                     <Spacer />
                     <h1 className="center">Contributors</h1>
-                    <Tab.Group>
-                        <Tab.List className="justify-center my-8">
-                            <Tab>List</Tab>
-                            <Tab>Stats</Tab>
-                        </Tab.List>
 
-                        <Tab.Panels>
-                            <Tab.Panel>
-                                <div className="flex flex-col items-center space-y-8 px-6">
-                                    <ContributorSearch />
+                    <div className="flex flex-col items-center space-y-8 px-6">
+                        <ContributorSearch />
 
-                                    {contributorsLoading ? (
-                                        <Spinner />
-                                    ) : (
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
-                                            {filteredContributors.map((contributor: Contributor) => (
-                                                <ContributorCard
-                                                    key={contributor.login}
-                                                    name={contributor.login}
-                                                    link={contributor.profile}
-                                                    imageSrc={contributor.avatar_url}
-                                                    contributions={contributor.contributions}
-                                                    mvpWins={contributor.mvpWins}
-                                                    contributorLevel={contributor.level}
-                                                />
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            </Tab.Panel>
-
-                            <Tab.Panel>
-                                <ContributorsChart />
-                            </Tab.Panel>
-                        </Tab.Panels>
-                    </Tab.Group>
-
-                    <Spacer height={20} />
+                        {contributorsLoading ? (
+                            <Spinner />
+                        ) : (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
+                                {filteredContributors.map((contributor: Contributor) => (
+                                    <ContributorCard
+                                        key={contributor.login}
+                                        name={contributor.login}
+                                        link={contributor.profile}
+                                        imageSrc={contributor.avatar_url}
+                                        contributions={contributor.contributions}
+                                        mvpWins={contributor.mvpWins}
+                                        contributorLevel={contributor.level}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <Spacer />
             </Layout>

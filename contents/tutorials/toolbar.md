@@ -2,11 +2,11 @@
 title: "Using the PostHog Toolbar to visualize behavior and create actions"
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/toolbar.png
 author: ['yakko-majuri', 'andy-vandervell']
 tags:
     - heatmaps
     - toolbar
+    - product os
 date: 2022-07-15
 ---
 
@@ -23,7 +23,7 @@ Oftentimes, these questions don't have a straight-forward answer, and, more ofte
 
 However, there are some questions that have straightforward answers - the difficulty comes in getting that answer across. 
 
-Enter the PostHog Toolbar. 
+Enter the [PostHog Toolbar](/docs/toolbar). 
 
 Consider the question: _"Where are my users clicking?"_
 
@@ -64,6 +64,8 @@ The PostHog Toolbar will only be enabled for you – not your users. The little 
 
 To launch the toolbar, access your website and it should appear for you. If that does not work, you can go over to PostHog, click the dropdown arrow on 'Toolbar' in the sidebar menu, and click the URL you want to launch the toolbar on.
 
+![How to setup the PostHog toolbar](../images/tutorials/toolbar/toolbar-setup.mp4)
+
 ## Using the heatmap
 
 ### Enabling the heatmap
@@ -86,7 +88,7 @@ What the toolbar is doing here is displaying the number of clicks on each of tho
 
 You can change the date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. 
 
-![The toolbar with the hteamp showing and a little number next to it](../images/tutorials/toolbar/toolbar-heatmap-icon.png)
+![The toolbar with the heatmap showing and a little number next to it](../images/tutorials/toolbar/toolbar-heatmap-icon.png)
 
 This displays a new menu where you can select the date range to query over, load more data, change how links are matched, and view a list of the most clicked on elements in descending order.
 
@@ -98,7 +100,7 @@ If you have a lot of events, you may need to load more data to see everything yo
 
 ### Matching links within the page
 
-The toolbar does not match links in the page by their `href` attribute. This means if you have a button on your page with a unique link in it, the toolbar will count every click on that button as a click on the same element. This is useful for links that include IDs or other unique values, but can be confusing if you want to distinguish between links that vary for different users. 
+By default, the toolbar does not match links in the page by their `href` attribute. This means if you have a button on your page with a unique link in it, the toolbar will count every click on that button as a click on the same element. This is useful for links that include IDs or other unique values, but can be confusing if you want to distinguish between links that vary for different users. 
 
 For example, if you have a list of links that changes based on the logged in user. The toolbar shows all the clicks on the element's by position in the list, rather than by the link they point to.
 
@@ -210,8 +212,6 @@ Or in the same modal, click "Edit the selector" to use our element picker to bui
 
 ## Further reading
 
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
 - [B2B product metrics 101](/blog/b2b-saas-product-metrics)
-
-<NewsletterTutorial compact/>

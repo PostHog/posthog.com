@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { button } from 'components/CallToAction'
 import { useLocation } from '@reach/router'
 import Confetti from 'react-confetti'
-import { animateScroll as scroll } from 'react-scroll'
+import usePostHog from 'hooks/usePostHog'
 
 interface CustomFieldOption {
     label: string
@@ -15,11 +15,21 @@ interface IProps {
     formID: string
     validationSchema?: any
     customMessage?: React.ReactNode
+    onSubmit?: (values: any) => void
     customFields?: {
         [key: string]: {
             type: 'radioGroup'
-            options: CustomFieldOption[]
+            options?: CustomFieldOption[]
+            cols?: 1 | 2
         }
+    }
+    buttonOptions?: {
+        className?: string
+        size?: 'sm' | 'md' | 'lg' | 'absurd'
+        type?: 'primary' | 'secondary' | 'outline'
+    }
+    formOptions?: {
+        className?: string
     }
 }
 
@@ -186,7 +196,10 @@ function Radio({
                 id={`${name}-${value}`}
                 {...(reference ? { ref: reference } : {})}
             />
-            <span className="block py-2 w-full rounded-md border-[2px] border-black/10  peer-focus:border-black/40 peer-checked:!border-black/80 text-sm">
+            <span
+                className="block py-2 w-full rounded-md border-[2px] border-black/10  peer-focus:border-black/40 peer-checked:!border-black/80 dark:border-white/10  dark:peer-focus:border-white/40 dark:peer-checked:!border-white/80
+            text-sm"
+            >
                 {label}
             </span>
         </label>
@@ -197,10 +210,12 @@ function RadioGroup({
     options,
     name,
     placeholder,
+    cols = 2,
 }: {
     options: CustomFieldOption[]
     name: string
     placeholder: string
+    cols?: 1 | 2
 }) {
     if (!name) return null
     const { openOptions, setOpenOptions } = useContext(FormContext)
@@ -231,13 +246,13 @@ function RadioGroup({
                 <p className="m-0 mt-1 mb-4 text-xs">
                     <strong>Tip:</strong> Use{' '}
                     <kbd
-                        className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
+                        className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
                         style={{ fontSize: '10px' }}
                     >
                         ←
                     </kbd>
                     <kbd
-                        className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
+                        className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
                         style={{ fontSize: '10px' }}
                     >
                         →
@@ -247,7 +262,9 @@ function RadioGroup({
                 <div
                     role="radiogroup"
                     aria-labelledby={`group-${name}`}
-                    className={`mt-2 grid grid-cols-2 gap-x-2 gap-y-2 ${open ? 'opacity-100' : 'opacity-0 absolute'}`}
+                    className={`mt-2 grid grid-cols-${cols} gap-x-2 gap-y-2 ${
+                        open ? 'opacity-100' : 'opacity-0 absolute'
+                    }`}
                 >
                     {options?.map((option, index) => {
                         const { value, label } = option
@@ -263,12 +280,12 @@ function RadioGroup({
                     })}
                 </div>
             </motion.div>
-            {error && <p className="text-red font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
+            {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
         </div>
     )
 }
 
-const inputContainerClasses = `p-4 bg-tan group active:bg-white focus-within:bg-white relative text-left`
+const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark group active:bg-light focus-within:bg-light dark:active:bg-dark dark:focus-within:bg-dark relative text-left`
 
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { name, placeholder } = props
@@ -294,15 +311,24 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
             <span className="relative -top-3 peer-placeholder-shown:top-0 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
                 {placeholder}
             </span>
-            {error && <p className="text-red font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
+            {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
         </label>
     )
 }
 
-export default function HubSpotForm({ formID, customFields, customMessage, validationSchema }: IProps) {
+export default function HubSpotForm({
+    formID,
+    customFields,
+    customMessage,
+    validationSchema,
+    onSubmit,
+    buttonOptions,
+    formOptions,
+}: IProps) {
+    const posthog = usePostHog()
     const { href } = useLocation()
     const [openOptions, setOpenOptions] = useState<string[]>([])
-    const [form, setForm] = useState<{ fields: Field[]; buttonText: string; message: string }>({
+    const [form, setForm] = useState<{ fields: Field[]; buttonText: string; message: string; name: string }>({
         fields: [],
         buttonText: '',
         message: '',
@@ -311,6 +337,13 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
     const [confetti, setConfetti] = useState(true)
 
     const handleSubmit = async (values) => {
+        const distinctId = posthog?.get_distinct_id?.()
+        posthog?.identify?.(distinctId, {
+            email: values.email,
+        })
+        posthog?.capture?.('form submission', {
+            form_name: form.name,
+        })
         const submission = {
             pageUri: href,
             fields: form.fields.map(({ name, objectTypeId }) => {
@@ -336,6 +369,7 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
         if (res.status === 200) {
             setSubmitted(true)
             scroll.scrollToTop()
+            onSubmit && onSubmit(values)
         }
     }
 
@@ -345,13 +379,14 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
             .then((form: Form) => {
                 const fields = form.formFieldGroups
                     .map((group) => {
-                        return group.fields
+                        return group.fields.filter((field) => !field?.hidden)
                     })
                     .flat()
                 setForm({
                     fields,
                     buttonText: form.submitText,
                     message: form.inlineMessage,
+                    name: form.name,
                 })
             })
     }, [])
@@ -364,8 +399,8 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                         <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                     </div>
                 )}
-                <div className="bg-gray-accent-light px-6 py-8 rounded-md mt-4">
-                    {customMessage || <p>{form.message}</p>}
+                <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-8 rounded-md mt-4">
+                    {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message }} />}
                 </div>
             </>
         ) : (
@@ -376,19 +411,23 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                     initialValues={Object.fromEntries(form.fields.map(({ name }) => [name, '']))}
                     onSubmit={handleSubmit}
                 >
-                    <Form>
-                        <div className="grid divide-y divide-dashed divide-gray-accent-light border border-gray-accent-light border-dashed">
-                            {form.fields.map(({ name, label, type, required }, index) => {
+                    <Form className={formOptions?.className}>
+                        <div className="grid divide-y divide-border border border-border dark:divide-border-dark dark:border-dark">
+                            {form.fields.map(({ name, label, type, required, options }, index) => {
                                 if (customFields && customFields[name])
                                     return {
                                         radioGroup: (
                                             <RadioGroup
-                                                options={customFields[name].options}
+                                                options={customFields[name].options || options}
                                                 name={name}
                                                 placeholder={label}
+                                                cols={customFields[name].cols}
                                             />
                                         ),
                                     }[customFields[name]?.type]
+
+                                if (type === 'enumeration')
+                                    return <RadioGroup options={options} name={name} placeholder={label} />
 
                                 return (
                                     <Input
@@ -401,7 +440,15 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                                 )
                             })}
                         </div>
-                        <button className={button(undefined, 'full', 'mt-4', 'sm')} type="submit">
+                        <button
+                            className={button(
+                                buttonOptions?.type,
+                                'full',
+                                buttonOptions?.className ?? 'mt-4',
+                                buttonOptions?.size ?? 'sm'
+                            )}
+                            type="submit"
+                        >
                             {form.buttonText}
                         </button>
                     </Form>

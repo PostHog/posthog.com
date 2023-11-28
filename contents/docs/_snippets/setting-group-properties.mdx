@@ -1,0 +1,86 @@
+In the same way that every user can have [properties](/docs/getting-started/user-properties) associated with them, every group can have properties associated with it.
+
+Continuing with the previous example of using `company` as our group type, we'll add `company_name`, `date_joined`, and `subscription` as additional properties.
+
+> **Note:** You must include at least one group property for a group to be visible in the "Persons & Groups" tab.
+
+<MultiLanguage>
+
+```js-web
+posthog.group('company', 'company_id_in_your_db', {
+    name: 'PostHog',
+    subscription: "subscription",
+    date_joined: '2020-01-23T00:00:00.000Z'
+});
+```
+
+```python
+posthog.group_identify('company', 'company_id_in_your_db', {
+    'name': 'PostHog',
+    'subscription': 'subscription',
+    'date_joined': '2020-01-23T00:00:00.000Z'
+})
+```
+
+```go
+client.Enqueue(posthog.GroupIdentify{
+    Type: "company",
+    Key:  "company_id_in_your_db",
+    Properties: posthog.NewProperties().
+        Set("name", "PostHog").
+        Set("subscription", "subscription").
+        Set("date_joined", "2020-01-23T00:00:00.000Z"),
+})
+```
+
+```node
+posthog.groupIdentify({
+    groupType: 'company',
+    groupKey: 'company_id_in_your_db',
+    properties: {
+        name: 'PostHog',
+        subscription: "subscription",
+        date_joined: '2020-01-23T00:00:00.000Z'
+    }
+})
+```
+
+```php
+PostHog::groupIdentify(array(
+    'groupType' => 'company',
+    'groupKey' => 'company_id_in_your_db',
+    'properties' => array("name" => "PostHog", "subscription" => "premium", "date_joined": "2020-01-23T00:00:00.000Z")
+));
+```
+
+```segment
+analytics.group('company_id_in_your_db', {
+    "name": "PostHog",
+    "subscription": "subscription",
+    "date_joined": "2020-01-23T00:00:00.000Z"
+})
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "properties": {
+        "distinct_id": "company_id_in_your_db",
+        "$group_type": "company",
+        "$group_key": "company_id_in_your_db",
+        "$group_set": {
+            "name": "PostHog",
+            "subscription": "premium",
+            "date_joined": "2020-01-23T00:00:00.000Z"
+        }
+    }
+}' <ph_instance_address>/capture/
+```
+
+</MultiLanguage>
+
+Properties on groups behave in the same way as properties on [persons](/docs/data/persons). They can also be used within experiments and feature flags to rollout features to specific groups.
+
+> **Note:** The PostHog UI identifies a group using the `name` property. If the `name` property is not found, it falls back to the group key.
+
+For more on implementing group analytics, check out our [guide on frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics).

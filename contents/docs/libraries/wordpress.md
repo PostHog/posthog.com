@@ -9,7 +9,7 @@ In this guide, we'll walk you through how to set up PostHog on your WordPress si
 
 ## TL;DR: (the short version)
 
-1. [Deploy PostHog](/docs/deployment) or [signup for PostHog Cloud](https://app.posthog.com/signup).
+1. [Signup for PostHog Cloud](https://app.posthog.com/signup).
 
 2. Get your [PostHog snippet](/docs/integrate?tab=snippet) from your 'Project Settings' or the initial PostHog setup.
 
@@ -23,7 +23,7 @@ Read on for additional information.
 
 To follow this tutorial, you should:
 
-1. Have [deployed PostHog](/docs/deployment) or be using [PostHog Cloud](https://app.posthog.com/signup).
+1. Have a [PostHog Cloud](https://app.posthog.com/signup) account.
 
 ## Step-by-step instructions
 

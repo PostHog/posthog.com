@@ -18,7 +18,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     page,
                     pageSize: 100,
                 },
-                populate: ['avatar'],
+                populate: ['avatar', 'teams', 'leadTeams'],
             },
             {
                 encodeValuesOnly: true, // prettify URL
@@ -130,7 +130,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                         contentDigest: createContentDigest(replyData.body),
                         type: `SqueakReply`,
                         content: replyData.body,
-                        mediaType: 'text/markdown',
                     },
                     ...(profile.data && { profile: { id: createNodeId(`squeak-profile-${profile.data.id}`) } }),
                     ...replyData,
@@ -237,84 +236,94 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     }
 
     // Fetch all roadmaps
-    let roadmapQuery = qs.stringify({
-        pagination: {
-            page: 1,
-            pageSize: 100,
-        },
-        populate: {
-            teams: {
-                fields: ['id'],
+    const fetchRoadmaps = async (page = 1) => {
+        let roadmapQuery = qs.stringify({
+            pagination: {
+                page,
+                pageSize: 100,
             },
-            image: {
-                fields: ['id', 'url'],
+            populate: {
+                teams: {
+                    fields: ['id'],
+                },
+                image: {
+                    fields: ['id', 'url'],
+                },
             },
-        },
-    })
+        })
 
-    const roadmaps = await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
+        const roadmaps = await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
 
-    for (const roadmap of roadmaps.data) {
-        const { teams, githubUrls, image, ...rest } = roadmap.attributes
+        for (const roadmap of roadmaps.data) {
+            const { teams, githubUrls, image, ...rest } = roadmap.attributes
 
-        const node = {
-            id: createNodeId(`squeak-roadmap-${roadmap.id}`),
-            squeakId: roadmap.id,
-            internal: {
-                type: `SqueakRoadmap`,
-                contentDigest: createContentDigest(roadmap.attributes),
-            },
-            ...rest,
-            ...(image.data && { id: createNodeId(`squeak-image-${image.data.id}`), url: image.data.attributes.url }),
-            teams: roadmap.attributes.teams.data.map((team) => ({
-                id: createNodeId(`squeak-team-${team.id}`),
-            })),
-        }
+            const node = {
+                id: createNodeId(`squeak-roadmap-${roadmap.id}`),
+                squeakId: roadmap.id,
+                internal: {
+                    type: `SqueakRoadmap`,
+                    contentDigest: createContentDigest(roadmap.attributes),
+                },
+                ...rest,
+                ...(image.data && {
+                    id: createNodeId(`squeak-image-${image.data.id}`),
+                    url: image.data.attributes.url,
+                }),
+                teams: roadmap.attributes.teams.data.map((team) => ({
+                    id: createNodeId(`squeak-team-${team.id}`),
+                })),
+            }
 
-        /*if (image) {
-            const url = `https://res.cloudinary.com/${image.cloud_name}/v${image.version}/${image.publicId}.${image.format}`
+            /*if (image) {
+                const url = `https://res.cloudinary.com/${image.cloud_name}/v${image.version}/${image.publicId}.${image.format}`
+    
+                const fileNode = await createRemoteFileNode({
+                    url,
+                    parentNodeId: node.id,
+                    createNode,
+                    createNodeId,
+                    cache,
+                })
+                node.thumbnail___NODE = fileNode?.id
+            }*/
 
-            const fileNode = await createRemoteFileNode({
-                url,
-                parentNodeId: node.id,
-                createNode,
-                createNodeId,
-                cache,
-            })
-            node.thumbnail___NODE = fileNode?.id
-        }*/
+            if (githubUrls?.length > 0 && process.env.GITHUB_API_KEY) {
+                node.githubPages = await Promise.all(
+                    githubUrls
+                        .filter((url) => url.includes('github.com'))
+                        .map((url) => {
+                            const [owner, repo, type, issueNum] = url.split('/').slice(3)
+                            const ghURL = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNum}`
 
-        if (githubUrls.length > 0 && process.env.GITHUB_API_KEY) {
-            node.githubPages = await Promise.all(
-                githubUrls
-                    .filter((url) => url.includes('github.com'))
-                    .map((url) => {
-                        const [owner, repo, type, issueNum] = url.split('/').slice(3)
-                        const ghURL = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNum}`
-
-                        return fetch(ghURL, {
-                            headers: {
-                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                            },
-                        })
-                            .then((res) => res.json())
-                            .then((data) => {
-                                if (data.reactions) {
-                                    data.reactions.plus1 = data.reactions['+1']
-                                    data.reactions.minus1 = data.reactions['-1']
-                                }
-
-                                return data
+                            return fetch(ghURL, {
+                                headers: {
+                                    Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                                },
                             })
-                            .catch((err) => console.log(err))
-                    })
-            )
-        } else {
-            node.githubPages = []
-        }
+                                .then((res) => res.json())
+                                .then((data) => {
+                                    if (data.reactions) {
+                                        data.reactions.plus1 = data.reactions['+1']
+                                        data.reactions.minus1 = data.reactions['-1']
+                                    }
 
-        createNode(node)
+                                    return data
+                                })
+                                .catch((err) => console.log(err))
+                        })
+                )
+            } else {
+                node.githubPages = []
+            }
+
+            createNode(node)
+        }
+        if (roadmaps.meta.pagination.page < roadmaps.meta.pagination.pageCount) {
+            await fetchRoadmaps(page + 1)
+        }
     }
+
+    await fetchRoadmaps()
 }
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions }) => {

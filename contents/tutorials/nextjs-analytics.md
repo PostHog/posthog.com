@@ -5,7 +5,6 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredTutorial: true
-featuredImage: ../images/tutorials/banners/flags.png
 featuredVideo: https://www.youtube-nocookie.com/embed/nSBjr1Sz18o
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
@@ -18,7 +17,7 @@ In this tutorial, we will:
 2. add PostHog to it
 3. set up the features of PostHog like custom event capture, user identification, and feature flags
 
-> Already know how to build a Next.js app? [Click here to skip to the PostHog installation](#adding-posthog).
+> For a more detailed implementation tutorial for Next.js using the **app** router, check out our [Next.js app router analytics tutorial](/tutorials/nextjs-app-directory-analytics).
 
 ## Creating our Next.js app
 
@@ -28,7 +27,11 @@ First, [install Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) (14.6.
 npx create-next-app@latest
 ```
 
-Press "y" to install `create-next-app` if needed, name your app (I chose `tutorial`), select "No" for using TypeScript using the arrow keys, then press enter to select the defaults for the rest. Once installed and created, use the terminal go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
+Press "y" to install `create-next-app` if needed, name your app (I chose `tutorial`), select "No" for using TypeScript using the arrow keys, select "No" for using the app router, and then press enter to select the defaults for the rest. 
+
+> If you want to use the latest version of Next.js with the app router, check out "[How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)."
+
+Once installed and created, use the terminal go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
 
 ```bash
 cd tutorial
@@ -366,7 +369,7 @@ export default function Post({ post }) {
   
   function likePost() {
     posthog.capture(
-      'post liked',
+      'post_liked',
       {
         post: post.title,
         author: post.author,
@@ -415,8 +418,8 @@ export default function Home({ posts }) {
   const posthog = usePostHog()
 
   const router = useRouter()
-  const signedIn = router.query.signedIn
-  if (signedIn == 'True' && session) {
+  const newLoginState = router.query.loginState
+  if (newloginState == 'signedIn' && session) {
     posthog.identify(session.user.email);
     router.replace('/', undefined, { shallow: true });
   }
@@ -433,7 +436,7 @@ export default function Home({ posts }) {
         {!session ? (
 					<button 
             onClick={() => signIn(
-              'github', { callbackUrl: '/?signedIn=True'}
+              'github', { callbackUrl: '/?loginState=signedIn'}
             )}>
               Sign in
           </button>        
@@ -462,13 +465,14 @@ To set this up, we do something similar to what we did with user identification.
 const router = useRouter()
 const posthog = usePostHog()
 
-const signedIn = router.query.signedIn
-if (signedIn == 'True' && session) {
-  posthog.identify(session.user.email);
-  router.replace('/', undefined, { shallow: true });
-}
-if (signedIn == 'False') {
-  posthog.reset();
+const newLoginState = router.query.loginState
+if (newLoginState) {
+  if (newLoginState === 'signedIn' && session)) {
+    posthog.identify(session.user.email);
+  }
+  if (newLoginState === 'signedOut') {
+    posthog.reset();
+  }
   router.replace('/', undefined, { shallow: true });
 }
 
@@ -484,7 +488,7 @@ return (
       {!session ? (
         <button 
           onClick={() => signIn(
-            'github', { callbackUrl: '/?signedIn=True'}
+            'github', { callbackUrl: '/?loginState=signedIn'}
           )}>
             Sign in
         </button>
@@ -492,7 +496,7 @@ return (
         <div>
           <p>Welcome {session.user.name}</p>
           <button onClick={() => signOut(
-            { callbackUrl: '/?signedIn=False' }
+            { callbackUrl: '/?loginState=signedOut' }
           )}>
             Sign out
           </button>
@@ -501,9 +505,11 @@ return (
 //...
 ```
 
-When you log out now, PostHog creates and connects events to a new person when you next load the page. This person is disconnected from your old anonymous and identified person.
+When you log out now, PostHog creates and connects events to a new anonymous person when you next load the page. This person is disconnected from your old anonymous and identified person.
 
 ![Pageview](../images/tutorials/nextjs-analytics/pageview.png)
+
+> **Note:** Be careful to only reset when a user logs out, **not** on every request. If you reset on every request, you create an excess of new anonymous users and new session recordings.
 
 ## Setting up and using feature flags
 
@@ -635,6 +641,6 @@ You now have a basic Next.js app with user authentication and many of the featur
 
 ## Further reading
 
-- [Building and measuring a sign up funnel with Next.js, Supabase, and PostHog](/tutorials/nextjs-supabase-signup-funnel)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)

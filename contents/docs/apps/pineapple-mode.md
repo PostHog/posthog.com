@@ -7,17 +7,15 @@ tags:
     - pineapple-mode
 ---
 
-### What does the Pineapple Mode app do?
-
 Activating Pineapple Mode makes it rain pineapples all over your product or website. Yes, really.
 
-### OK, but why does Pineapple Mode do that?
+## OK, but why does Pineapple Mode do that?
 
 Pineapple Mode is an example site app. Site apps are a new, big and currently beta feature which enable you to inject code from PostHog into your website via `posthog-js`.
 
 We think site apps are a potentially useful feature for things such as displaying forms, notifications or surveys in your product or website. They're also useful for making it rain pineapples!
 
-### What are the requirements for this app?
+## Requirements
 
 Pineapple Mode requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.41.0](https://posthog.com/blog/the-posthog-array-1-41-0#one-more-thing-site-apps) or later.
 
@@ -25,13 +23,15 @@ Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need to manually opt in to the site apps feature, as it's currently in beta.
 
-### How do I install Pineapple Mode?
+## Installation
 
 First, you need to manually opt in to the site apps beta. You can do this by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Please be aware you do this at your own risk and, if you get hit on the head by a pineapple, it's not PostHog's fault.
 
 Once you've opted in, simply visit the 'Apps' page in your PostHog instance, search for 'Pineapple Mode' and press install. You may then need to refresh your page. Here's what you should expect:
 
-## Can I make my own site apps?
+## FAQ
+
+### Can I make my own site apps?
 
 You certainly can. Check our tutorial about [how to build a site app in PostHog](/tutorials/build-site-app) to get started. 
 
@@ -45,14 +45,12 @@ You can blame PostHog team member [Marius Andra](https://github.com/mariusandra)
 
 ### Who maintains this app?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&template=bug_report.md) to let us know!
+This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
 ### What if I have feedback on this app?
 
-We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think.
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 
 ### What if my question isn't answered above?
 
-We love answering questions. Ask us anything via [our Support page](/questions).
-
-You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 

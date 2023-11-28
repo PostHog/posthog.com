@@ -91,33 +91,32 @@ export interface BillingV2TierType {
 }
 
 export interface BillingProductV2Type {
-    type: 'events' | 'recordings' | 'enterprise' | 'base'
+    usage_key: 'events' | 'recordings' | 'enterprise' | 'base'
+    type: string
     name: string
-    description?: string
-    price_description?: string
+    description: string
     image_url?: string
-    free_allocation?: number
-    tiers?: BillingV2TierType[]
-    tiered?: boolean
-    current_usage?: number
-    projected_usage?: number
-    percentage_usage: number
-    current_amount_usd?: string
-    usage_limit?: number
-    unit_amount_usd: string | null
-    feature_groups: {
-        group: string
-        name: string
-        features: BillingV2FeatureType[]
-    }[]
+    docs_url?: string
+    inclusion_only: boolean
+    unit?: string
+    plans: BillingV2PlanType[]
+    addons?: BillingProductV2Type[]
 }
 
 export interface BillingV2PlanType {
     key: string
     name: string
     description: string
-    is_free?: boolean
-    products: BillingProductV2Type[]
+    image_url?: string
+    docs_url?: string
+    free_allocation?: number
+    included_if?: 'no_active_subscription' | 'has_subscription' | null
+    note?: string
+    plan_key: string
+    product_key: string
+    tiers?: BillingV2TierType[]
+    unit?: 'event' | 'recording'
+    features?: BillingV2FeatureType[]
 }
 
 export enum AvailableFeature {

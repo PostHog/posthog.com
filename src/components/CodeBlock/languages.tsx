@@ -23,6 +23,10 @@ const languageMap: LanguageMap = {
         language: 'javascript',
         label: 'JavaScript',
     },
+    'js-web': {
+        language: 'javascript',
+        label: 'Web',
+    },
     ts: {
         language: 'typescript',
         label: 'TypeScript',
@@ -136,6 +140,10 @@ const languageMap: LanguageMap = {
     android: {
         language: 'java',
         label: 'Android',
+    },
+    kotlin: {
+        language: 'java',
+        label: 'Kotlin',
     },
     objectivec: {
         language: 'objectivec',

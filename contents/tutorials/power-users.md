@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-31
-featuredImage: ../images/tutorials/banners/tutorial-5.png
-tags: ['trends', 'cohorts', 'session recordings']
+tags: ['trends', 'cohorts', 'session replay', 'product analytics']
 ---
 
 Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.
@@ -30,7 +29,7 @@ You can use PostHog to define exactly what a power user looks like. To do so, id
 
 - Create trends for average user usage vs 90th, 95th, and 99th percentile usage. Power users use features significantly more than average. The larger the gap, the better.
 
-If a feature shows higher retention, repeated use, and a large difference in usage to the average, it is likely valuable to a power user. You can use data related to this feature along with qualitative analysis, such as insights from user interviews and session recordings, to solidify the definition of your power user.
+If a feature shows higher retention, repeated use, and a large difference in usage to the average, it is likely valuable to a power user. You can use data related to this feature along with qualitative analysis, such as insights from user interviews and session replays, to solidify the definition of your power user.
 
 For example, at PostHog, we define power users as users with a high number of [discoveries](/handbook/product/metrics). It is a metric users do repeatedly every week, distinguishes engaged users, and creates higher retention. We've done tests to confirm its importance, checking it against other potential definitions, for example:
 
@@ -53,7 +52,7 @@ Make sure to add the title (that is searchable) and description, then select a t
 
 ## Analyzing power users
 
-Once we’ve saved a cohort, we immediately get a list of users who fit our power user criteria. We can start by using this list to check for session recordings. To do so, go to recordings, filter by persons and cohorts, then search for your power user cohort. From there you can filter further by events, date, or duration. Analyzing these recordings gives you insights into how power users use your product, and enables you to build a better one for them.
+Once we’ve saved a cohort, we immediately get a list of users who fit our power user criteria. We can start by using this list to check for session replays. To do so, go to recordings, filter by persons and cohorts, then search for your power user cohort. From there you can filter further by events, date, or duration. Analyzing these recordings gives you insights into how power users use your product, and enables you to build a better one for them.
 
 ![Session recordings](../images/tutorials/power-users/recordings.png)
 
@@ -71,8 +70,6 @@ With all that, you’ve set up a power user cohort and begun to do analysis. Fro
 
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics): use your newly created power user cohort to calculate session-based metrics like time on site and pages per session with help from this tutorial.
 
-- [How to run Experiments without feature flags](/tutorials/experiments): Learn how to improve your power user experience by running experiments without feature flags.
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags): Learn how to improve your power user experience by running experiments without feature flags.
 
 - [How we made something people want](/blog/making-something-people-want): Learn how we make something people want (and create power users by doing it) in this blog post by our CEO James.
-
-<NewsletterTutorial compact/>

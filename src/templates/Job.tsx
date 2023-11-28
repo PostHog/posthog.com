@@ -13,6 +13,8 @@ import { benefits } from 'components/Careers/Benefits'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { companyMenu } from '../navs'
+import groupBy from 'lodash.groupby'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -64,6 +66,23 @@ export default function Job({
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
     const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
     const showObjectives = missionAndObjectives !== 'false'
+    const availableTeams = groupBy(allJobPostings.nodes, ({ parent }) => {
+        const team = parent?.customFields?.find(({ title }) => title === 'Team')?.value
+        return !team ? 'TBD' : team
+    })
+
+    const openRolesMenu = []
+    Object.keys(availableTeams)
+        .sort()
+        .forEach((team) => {
+            openRolesMenu.push({ name: `Team ${team}` })
+            availableTeams[team]?.forEach(({ fields: { title, slug } }) => {
+                openRolesMenu.push({
+                    name: title.split(' - ')[0],
+                    url: slug,
+                })
+            })
+        })
     const menu = [
         {
             name: 'Work at PostHog',
@@ -83,19 +102,16 @@ export default function Job({
         {
             name: 'Open roles',
             url: '',
-            children: allJobPostings.nodes.map(({ fields: { title, slug } }) => {
-                return {
-                    name: title,
-                    url: slug,
-                }
-            }),
+            children: openRolesMenu,
         },
     ]
 
+    const [jobTitle] = title.split(' - ')
+
     return (
-        <Layout>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[6]}>
             <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
-            <div className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <div className="">
                 <PostLayout
                     tableOfContents={[
                         ...tableOfContents,
@@ -121,17 +137,20 @@ export default function Job({
                             teamSlug={teamInfo?.fields?.slug}
                             teamName={teamName}
                             team={team?.nodes}
-                            teamLead={teamLead}
+                            teamLead={teamLead?.nodes[0]}
                         />
                     }
-                    title="careers"
+                    title="Careers"
                     menu={menu}
                 >
                     <div className="relative">
                         <div>
-                            <h1 className="m-0 text-5xl">{title}</h1>
+                            {teamName && <p className="m-0 opacity-60 pb-2">Team {teamName}</p>}
+                            <h1 className="m-0 text-5xl">{jobTitle}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
-                                <Detail title="Department" value={departmentName} icon={<Department />} />
+                                {departmentName?.toLowerCase() !== 'speculative' && (
+                                    <Detail title="Department" value={departmentName} icon={<Department />} />
+                                )}
                                 <Detail title="Location" value={locationName} icon={<Location />} />
                                 {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Timezone />} />}
                             </ul>
@@ -159,7 +178,6 @@ export default function Job({
                                                     location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
                                                     level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
                                                 }}
-                                                hideFormula
                                                 hideRole
                                                 initialJob={salaryRole}
                                             />
@@ -172,7 +190,7 @@ export default function Job({
                                             return (
                                                 <li
                                                     key={title}
-                                                    className="flex space-x-4 items-center font-medium leading-tight text-[15px]"
+                                                    className="flex space-x-3 items-center font-medium leading-tight text-[15px]"
                                                 >
                                                     <img className="max-w-[30px]" alt={title} src={image} />
                                                     <span>{title}</span>
@@ -192,10 +210,7 @@ export default function Job({
                                             <ul className="list-none !m-0 p-0 grid gap-y-4">
                                                 {gitHubIssues.map(({ url, number, title, labels }) => {
                                                     return (
-                                                        <li
-                                                            key={title}
-                                                            className="flex flex-col md:flex-row md:items-center"
-                                                        >
+                                                        <li key={title} className="flex flex-col ">
                                                             <div className="flex space-x-2">
                                                                 <Link to={url} className="block w-[60px] md:w-auto">
                                                                     <span className="font-semibold text-sm text-black/50 hover:text-black/75 dark:text-white/50 dark:hover:text-white/75 font-code">
@@ -205,7 +220,7 @@ export default function Job({
                                                                 <Link to={url}>{title}</Link>
                                                             </div>
                                                             {labels && labels.length > 0 && (
-                                                                <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-2 !mt-0 !mb-0 p-0 flex items-center space-x-1">
+                                                                <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-14 !mt-0 !mb-0 p-0 flex items-center space-x-1">
                                                                     {labels.map(({ name, url }, index) => {
                                                                         return (
                                                                             <li key={name + index}>
@@ -260,34 +275,35 @@ export default function Job({
 
 export const query = graphql`
     query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!, $objectives: String!, $mission: String!) {
-        teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { in: [$teamName] } }) {
-            id
-            frontmatter {
-                name
+        teamLead: allSqueakProfile(
+            filter: {
+                teams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } }
+                leadTeams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } }
+            }
+        ) {
+            nodes {
+                squeakId
+                firstName
+                lastName
                 country
-                jobTitle
-                headshot {
-                    id
-                    childImageSharp {
-                        gatsbyImageData
-                    }
+                companyRole
+                avatar {
+                    url
                 }
             }
         }
-        team: allMdx(filter: { frontmatter: { team: { in: [$teamName] } } }) {
+        team: allSqueakProfile(
+            filter: { teams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } } }
+        ) {
             nodes {
-                id
-                frontmatter {
-                    name
-                    country
-                    jobTitle
-                    pineappleOnPizza
-                    headshot {
-                        id
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
+                squeakId
+                firstName
+                lastName
+                country
+                companyRole
+                pineappleOnPizza
+                avatar {
+                    url
                 }
             }
         }
@@ -340,6 +356,14 @@ export const query = graphql`
                 fields {
                     title
                     slug
+                }
+                parent {
+                    ... on AshbyJob {
+                        customFields {
+                            value
+                            title
+                        }
+                    }
                 }
             }
         }

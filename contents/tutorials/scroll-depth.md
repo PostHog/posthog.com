@@ -4,8 +4,8 @@ date: 2023-04-13
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-16.png
-tags: ["configuration", "insights"]
+featuredVideo: https://www.youtube-nocookie.com/embed/T9MbFiDU6hY
+tags: ["configuration", "insights", 'product analytics']
 ---
     
 You can waste a lot of effort on parts of pages people never see. While [session replay](/tutorials/explore-insights-session-recordings) is great for understanding individual sessions, an aggregate understanding of how much of a page is viewed is valuable too. This is where tracking scroll depth can be helpful. 
@@ -14,10 +14,10 @@ In this tutorial, we go over the different ways of measuring scroll depth, calcu
 
 ## Setup
 
-To showcase all this, first create a [Next.js app](/tutorials/nextjs-analytics). Run the script below, choose **not** to use TypeScript, and the defaults for everything else.
+To showcase all this, first create a [Next.js app](/tutorials/nextjs-analytics). Run the script below, choose **not** to use TypeScript, **not** to use the app router, and the defaults for everything else.
 
 ```bash
-npx create-next-app@latest
+npx create-next-app@latest scroll-depth
 ```
 
 Once created, create another page in the `pages` folder named `big`. It contains a long page with can scroll through.
@@ -160,7 +160,7 @@ export default function App({ Component, pageProps }) {
   const router = useRouter()
   useEffect(() => {
     const handleRouteChange = () => {
-      posthog.capture('left page', {
+      posthog.capture('left_page', {
         'max scroll percentage': maxPercentage.current,
         'max scroll pixels': maxPixels.current,
         'last scroll percentage': Math.min(1, (window.innerHeight + window.pageYOffset) / document.body.offsetHeight),

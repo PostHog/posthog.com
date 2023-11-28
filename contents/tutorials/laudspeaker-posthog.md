@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['laudspeaker']
 date: 2023-01-26
-featuredImage: ../images/tutorials/banners/tutorial-1.png
-tags: ["apps", "site-apps"]
+tags: ["apps", "site-apps", 'cdp']
 ---
 
 Laudspeaker is a cross-channel customer messaging platform and an open source alternative to platforms such as Customer.io, Braze, or Iterable. It enables you to create automated customer journeys so your users receive messages when they complete specific actions on your site. 
@@ -79,6 +78,4 @@ Add an email template to the `signed up` step and Laudspeaker sends that email w
 
 ![Laudspeaker Flow](../images/tutorials/laudspeaker/triggerfromtwosteps.png)
 
-PostHog can track many more events, including custom-defined actions. Laudspeaker supports these too, enabling you to create a wide range of customer journeys. Check [the official Laudspeaker website](https://laudspeaker.com/) for more information about what's possible, or [ask a question via the PostHog community](/questions). 
-
-<NewsletterTutorial compact/>
+PostHog can track many more events, including custom-defined actions. Laudspeaker supports these too, enabling you to create a wide range of customer journeys. Check [the official Laudspeaker website](https://laudspeaker.com/) for more information about what's possible, or [ask a question via the PostHog community](/questions).

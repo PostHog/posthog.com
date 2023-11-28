@@ -1,6 +1,6 @@
 ---
-date: 2022-12-08
-title: "Product engineer vs software engineer: what's the difference?"
+date: 2023-05-10
+title: "Product engineer vs software engineer: How are they different?"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -34,15 +34,15 @@ Here's the TL;DR:
 
 Let's break those points down a bit more.
 
-Product engineers own the product and are responsible for its successes and failures. They're empathetic towards users and care about solving their problems. They build with the user in mind and create what users need for success.
+Product engineers – sometimes referred to as product-minded engineers – own the product, and are responsible for its successes and failures. They're empathetic towards users and care about solving their problems. They build with the user in mind, and create what users need for success.
 
 In contrast, software engineers own the code they write. They care more about solving technical problems, optimizing systems, and writing clean, secure code. They have flexibility with implementation, but they aren’t making product decisions.
 
-Product engineers are less focused on implementation and focus more on solving the users’ problems. In this way, they are pragmatic. They are willing to build fast, iterate, or even from scratch if needed.
+Product engineers are less focused on implementation, and focus more on solving the users’ problems. In this way, they are pragmatic. They are willing to build fast, iterate, or even from scratch if needed.
 
 Software engineers are more idealistic. They look for the best solution to the problem in front of them, focus on best practices, and build off prior work. Security, risk, and scaling weigh heavier in their minds.
 
-> **What about growth engineers?** [Growth engineers]((/blog/what-is-a-growth-engineer) are a type of software engineer that focuses on projects that drive growth metrics like signups, subscriptions, and revenue. They have share many characteristics with product engineers, but have a broader focus on growth across the company rather than a specific product.
+> **What about growth engineers?** [Growth engineers](/blog/what-is-a-growth-engineer) are a type of software engineer that focuses on projects that drive growth metrics like signups, subscriptions, and revenue. They share many characteristics with product engineers, but have a broader focus on growth across the company rather than a specific product.
 
 ## How do they spend their time?
 
@@ -56,23 +56,34 @@ Software engineers focus on writing code, testing it, and maintaining it. They l
 
 ## Why is demand for product engineers growing?
 
-There's no single reason, but typically it's motivated by a desire to ship product improvements faster. Product engineers are popular among startups and early-stage companies for this reason, even if they don’t say it.
+There's no single reason, but typically it's motivated by a desire to ship product improvements faster. Product engineers are popular among startups and early-stage companies for this reason, even if they don’t say it. Many engineers behave like product engineers, even if it's not their job title.
 
 At larger companies, product engineers are seen as a way to drive innovation, sometimes through the creation of smaller teams that have the freedom to ideate and execute product ideas. Software engineers and multidiscipline teams are still important, but product engineers can inject urgency where it's needed.
 
-Elon Musk's Twitter is a good example of company that might benefit from product engineers, whether he's aware of it or not. Elon wants to make dramatic changes to the product, but in his opinion, the organization he inherited was too large and unwieldy to achieve this. In other words, he doesn't need software engineers to maintain or optimize the existing codebase; he needs product engineers who can identify problems and opportunities, and execute solutions quickly and independently. 
+Elon Musk's Twitter is a good example of company that could benefit from product engineers, whether he's aware of it or not. Elon wants to make dramatic changes to the product, but in his opinion, the organization he inherited was too large and unwieldy to achieve this. 
 
-## What’s right for you?
+In other words, he doesn't need software engineers to maintain or optimize the existing codebase; he needs product engineers who can identify problems and opportunities, and execute solutions quickly and independently. 
 
-As a person, if owning a product and its roadmap as well as responsibility for its success or failure interests you, then product engineering might be for you. If you want to focus on solving difficult technical problems and optimizing existing technologies and processes, then software engineering might be a better choice.
+## Is product engineering right for you?
 
-There isn’t a right answer, and roles change as companies change. It is possible a product engineer to focus on a specific area and becomes a software engineer as a company grows. It’s also possible for software engineers to join new teams or companies and take on a product engineering role.
+Good product engineers need to:
 
-As a company, having software engineers appeals to companies with a large-scale or complex products. Software engineers can focus deeply on specific areas of technology and are great for optimizing systems.
+- Be customer obsessed.
+- Enjoy talking directly to users.
+- Care deeply about outcomes and impact.
+- Be flexible about exact implementation.
 
-Startups or companies that want to be agile and move fast, should look for product engineers. Product engineers have a holistic view of the product and the ability to move fast when the need arises.
+If this sounds like you, product engineering might be for you.
 
-Picking what is right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can talk to users are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded and more will continue to succeed.
+If, however, you want to focus on solving difficult technical problems, and optimizing existing technologies and processes, then more traditional software engineering roles are a better choice.
+
+Just remember product engineering is more of a way of working, and thinking, than a defined, rigid role. Product engineers should be flexible enough to go deep on technical implementation when needed. Likewise, software engineers can choose to adopt a "product engineer" mindset whenever they like.
+
+## When should companies hire product engineers?
+
+Product engineers are ideal for startups, and companies that want to be agile and move fast, such as B2B SaaS or consumer subscription service. They take a holistic view of the product, and the ability to move fast when the need arises. They're less effective for companies with large, technically complex products, like a data tool, or platforms for large enterprises.
+
+Picking what's right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can talk to users are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded, and more will continue to succeed.
 
 ## Further reading
 

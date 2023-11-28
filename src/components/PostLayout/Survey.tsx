@@ -3,12 +3,10 @@ import React from 'react'
 import { usePost } from './hooks'
 
 export default function Survey(): JSX.Element | null {
-    const { contentContainerClasses } = usePost()
+    const { contentContainerClasses, filePath } = usePost()
     return (
-        <div className="py-8 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed">
-            <div className={contentContainerClasses}>
-                <DocsPageSurvey />
-            </div>
+        <div className={contentContainerClasses}>
+            <DocsPageSurvey filePath={filePath} />
         </div>
     )
 }

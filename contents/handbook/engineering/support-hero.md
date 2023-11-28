@@ -19,18 +19,18 @@ If you are planning on taking a day off or you won't be available, please find s
 ### Rotations
 
 - [Secondary - Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Secondary - Experimentation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Secondary - Session recordings](https://posthog.pagerduty.com/schedules#PUPERAV)
+- [Secondary - Feature Success](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Secondary - Monitoring](https://posthog.pagerduty.com/schedules#PUPERAV)
 - [Secondary – Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
 - [Secondary - Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 ### Channels
 
 There are a couple of channels that customer requests come in so make sure you keep an eye on all of them (in order of priority):
-- [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) is used by the CS team to track issues with our high priority customers in dedicated Slack Connect channels.
 - [Zendesk](https://posthoghelp.zendesk.com/agent/filters/5586845866651) - look for the dedicated folder for your team. If new tickets are created, then a slack notification will be sent also to your team's dedicated support channel.
-- [PostHog Users's Slack](/slack), specifically `#community` and `#general` or elsewhere should be redirected to using [the bug button](https://app.posthog.com/home#supportModal) within the app, which provides us with all the context and helps triage. We do not commit to providing support through Slack, and should suggest users who prefer this channel ask @Max-AI as a first port of call.
+- [PostHog Users' Slack](/slack), specifically `#community` and `#general` or elsewhere should be redirected to using [the bug button](https://app.posthog.com/home#supportModal) within the app, which provides us with all the context and helps triage. We do not commit to providing support through Slack, and should suggest users who prefer this channel ask @Max-AI as a first port of call.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
+- [Community forums](/questions) - each small team can decide how to handle questions pertaining to their part of the product, but we suggest working with your small team's marketing representative to make sure each question gets answered. (Read more in the [Community](/handbook/small-teams/website-docs/community) section of the handbook.)
 
 ### Communication
 
@@ -48,32 +48,15 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
-2. Any requests assigned to you in [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) as they will be from a high priority customer in a dedicated Slack channel.
-3. Open Zendesk tickets for your team that have `high` priority (high-paying customers).
-4. Open Zendesk tickets for your team that have `normal` priority (paying customers).
-5. [Squeak!](https://posthog.com/questions/) questions.
-7. Open Zendesk tickets for your team that have `low` priority (non-paying users).
+1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel as there will be some urgency needed
+1. Open Zendesk tickets for your team that have `high` priority (high-paying customers)
+1. Open Zendesk tickets for your team that have `normal` priority (paying customers)
+1. [Community questions](https://posthog.com/questions/)
+1. Open Zendesk tickets for your team that have `low` priority (non-paying users)
 
 ### Support for self-hosted users
 
-Supporting self-hosted users can be particularly tricky/time-consuming!
-
-If the messages are from a dedicated slack, a tag from the CS team or 'high' priority zendesk then these are high-priority and **do prioritize** them accordingly. You'll likely find [these docs useful](https://posthog.com/docs/self-host/deploy/troubleshooting).
-
-However, if it's in the community slack then these are low priority. If you don't have the time to solve it then it's fine to politely point them to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a github issue if they believe something is broken in the docs or deployment setup.
-
-#### Debugging deployments
-
-See the handbook page [Deployments Support](/handbook/engineering/deployments-support) and user-facing [Deployments Troubleshooting](/docs/self-host/deploy/troubleshooting) page.
-
-#### Ingestion issues
-
-If a user is sending events to PostHog and these are not getting ingested, despite them receiving a success response, try the following:
-
-1. Check if the app/plugin server is alive and healthy (suggest a restart if not - this is safe)
-2. Ask if they have Sentry set up and see any errors
-3. If Sentry is not available, tell them to [connect to ClickHouse](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-clickhouse) and query for the columns `error_location` and `error` on the table `events_dead_letter_queue`
+It's fine to politely direct users to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a GitHub issue if they believe something is broken in the docs or deployment setup. We do not otherwise provide support for self-hosted PostHog.
 
 ### How to help customers
 
@@ -107,19 +90,48 @@ From time to time, customers will request to get their apps added to PostHog Clo
   - Unit testing coverage when possible
 3. Update the app in our Cloud instances via the `Browse Apps` page, both on [prod-eu](https://eu.posthog.com/project/apps?tab=installed) and [prod-us](https://app.posthog.com/project/apps?tab=installed). You need instance staff permissions to do this.
 
+#### Ownership transfer
+
+In case a user requests for organization permissions to be altered (e.g the admin left the company) follow these steps:
+
+1. Ask them to get the current owner to log in and transfer the ownership.
+2. If they have access to the current owner’s email, ask them do a password reset and then login as the owner and perform the action themself.
+3. If not, we should email the account owner’s email to see if we get a bounce back. Also check how long it is since they logged in.
+4. If they’re on a paid plan we might need to switch the contact on Stripe.
+
+#### 2FA method removal
+
+1. Send the following email to the account owner:
+
+```
+Subject: Confirmation Required: Removal of 2FA on your PostHog Account
+
+Hi [name],
+
+According to ticket #XXXX, you mentioned wanting to remove the current 2FA method. Could you please confirm this by replying to this email?
+
+If you haven't requested this change, please let me know immediately.
+
+Best,
+[your name]
+```
+
+2. After the user responded and confirmed the change, delete their [TOTP device](https://app.posthog.com/admin/otp_totp/totpdevice/) ([EU link](https://eu.posthog.com/admin/otp_totp/totpdevice/)).
+
+
 ### Zendesk
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
-Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Help](https://www.atlassian.com/software/halp).
+Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Halp](https://www.atlassian.com/software/halp).
 
-Zendesk will get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself.
+Zendesk will get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also community questions. These tickets will come with links to the issue or the question posted in the community so you can answer them in the appropriate platform, rather than on Zendesk itself.
 
 #### How to access Zendesk
 
 You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com).
 
-The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting with!
 
 #### How to use Zendesk
 
@@ -134,7 +146,7 @@ Tips:
 
 ### Unthread
 
-Our Customer Success team uses Unthread to track the resolution of threads in Slack connect channels with our high priority customers.  By default, threads are assigned to the CS person who owns the relationship with the customer.  If they need Support Hero assistance they will re-assign the thread accordingly.
+Our Customer Success team uses Unthread to track the resolution of threads in Slack connect channels with our high priority customers.  By default, threads are assigned to the CS person who owns the relationship with the customer.  If they need Support Hero assistance they will create a Zendesk ticket for the team.
 
 #### Using Unthread
 
@@ -150,24 +162,20 @@ Our Customer Success team uses Unthread to track the resolution of threads in Sl
 
 * Try and close conversations once resolved, so we can track MTTR for our high priority customers.
 
-### Squeak!
+#### Community questions
 
-Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/small-teams/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
+At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (These questions also appear in the relevant category in the [PostHog community](/questions).)
 
-#### Q&A.js by Squeak!
+Community questions appear in Zendesk but tickets are closed automatically if they're resolved directly on the website.
 
-At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (It also appears on the pricing page, and will be used in other places in the future.) This is an embedded JavaScript snippet we call [Q&A.js](https://squeak.posthog.com/toolkit/qna.js), powered by Squeak!
+#### Answering questions
 
-Squeak questions appear in Zendesk.
+When a question is posted, it'll appear in Zendesk with a direct link to the question. A notification is also sent to the [#community-questions](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. (You can also receive notifications about specific topics in your own small team's Slack channel. Ask the Website & Docs team for help in setting this up if you like.)
 
-#### Answering questions using Squeak!
+You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification. (**Important:** Don't reply to community questions directly from Zendesk.)
 
-When a question is posted, it'll appear in Zendesk with a link to Squeak. A notification is also sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
+The first time you answer a question, you'll need to create a community account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
 
-The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
+Ask in [#team-website-and-docs](https://posthog.slack.com/archives/C01V9AT7DK4) to be upgraded to a moderator. This will also give you access to moderator controls available for each question.
 
-> **Important:** Do not sign up directly on squeak.cloud. Start by answering a question on the site - this creates an account within PostHog's Squeak! Cloud account. (As an alternate, you can ask an existing admin to invite you.) (Signing up directly on squeak.cloud creates a new account for you to use Squeak! on another site, which isn't what we want.)
-
-Ask in [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) to be upgraded to a moderator. This will also give you access to the [admin panel](https://squeak.posthog.com/toolkit/discussion-warehouse/) hosted on [squeak.cloud](https://squeak.cloud) to manage questions with moderator controls.
-
-_Note: Squeak! currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/squeak/issues/112) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
+_Note: The PostHog.com community currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/posthog.com/issues/5847) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._

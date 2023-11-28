@@ -1,0 +1,36 @@
+The best way to install the PostHog Android library is with a build system like 
+Gradle. This ensures you can easily upgrade to the latest versions. 
+
+All you need to do is add the `posthog` module to your `build.gradle`:
+
+```bash
+dependencies {
+  implementation 'com.posthog.android:posthog:1.+'
+}
+```
+
+### Configuration
+
+The best place to initialize the client is in your `Application` subclass.
+
+```java
+public class SampleApp extends Application {
+  private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
+  private static final String POSTHOG_HOST = "<ph_instance_address>";
+
+  @Override
+  public void onCreate() {
+    // Create a PostHog client with the given context, API key and host.
+    PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
+      .captureApplicationLifecycleEvents() // Record certain application events automatically!
+      .recordScreenViews() // Record screen views automatically!
+      .build();
+
+    // Set the initialized instance as a globally accessible instance.
+    PostHog.setSingletonInstance(posthog);
+
+    // Now anytime you call PostHog.with, the custom instance will be returned.
+    PostHog posthog = PostHog.with(this);
+  }
+}
+```

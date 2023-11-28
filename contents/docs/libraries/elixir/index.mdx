@@ -13,49 +13,31 @@ features:
     autoCapture: false
     sessionRecording: false
     featureFlags: false
-    groupAnalytics: false
+    groupAnalytics: true
 ---
-
-> This library was built by the community and is not maintained by the PostHog core team.
 
 This library provides an Elixir HTTP client for PostHog. [See the repository](https://github.com/whitepaperclip/posthog) for more information.
 
 ## Installation
 
-The package can be installed by adding `posthog` to your list of dependencies in `mix.exs`:
+import ElixirInstall from '../../integrate/_snippets/install-elixir.mdx'
 
-```elixir
-def deps do
-  [
-    {:posthog, "~> 0.1"}
-  ]
-end
-```
+<ElixirInstall />
 
-## Configuration
+## Capturing events
 
-```elixir
-config :posthog,
-  api_url: "<ph_instance_address>",
-  api_key: "<ph_project_api_key>"
-```
+import ElixirSendEvents from '../../integrate/send-events/_snippets/send-events-elixir.mdx'
 
-Optionally, you can pass in a `:json_library` key. The default JSON parser is Jason.
+<ElixirSendEvents />
 
-## Usage
+## Feature flags
 
-Capturing events:
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-```elixir
-Posthog.capture("login", distinct_id: user.id)
-```
+<FeatureFlagsLibsIntro />
 
-Capturing multiple events:
-
-```elixir
-Posthog.batch([{"login", [distinct_id: user.id], nil}])
-```
+Feature flags are not supported yet in our Elixir SDK. However, you can integrate them into your project by using the [PostHog API](/docs/feature-flags/adding-feature-flag-code?tab=api).
 
 ## Thanks
 
-Thanks to [whitepaperclip](https://github.com/whitepaperclip) for contributing this library.
+Thanks to [nkezhaya](https://github.com/nkezhaya) for contributing this library.

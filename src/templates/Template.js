@@ -10,6 +10,8 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import CreateDashboardImage from '../../contents/images/templates/create-dashboard.png'
+import CreateSurveyImage from '../../contents/images/templates/create-survey.png'
+import { communityMenu } from '../navs'
 
 export default function Template({ data }) {
     const { pageData } = data
@@ -18,19 +20,15 @@ export default function Template({ data }) {
         excerpt,
         fields: { slug },
     } = pageData
-    const { title, subtitle, featuredImage, description } = pageData?.frontmatter
+    const { title, subtitle, featuredImage, description, filters } = pageData?.frontmatter
+    const { type } = filters
 
     return (
-        <Layout>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[2]}>
             <SEO
                 image={`/images/templates/${slug.split('/')[2]}.png`}
                 title={`${title} template - PostHog`}
                 description={description || excerpt}
-            />
-            <Breadcrumbs
-                crumbs={[{ title: 'Templates', url: '/templates' }, { title }]}
-                darkModeToggle
-                className="px-4 mt-4 sticky top-0 z-10 bg-tan dark:bg-primary"
             />
             <div
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
@@ -38,8 +36,8 @@ export default function Template({ data }) {
             >
                 <section>
                     <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0 mx-auto">
-                        <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
-                        <h2 className="text-center mt-0 mb-6">{subtitle}</h2>
+                        <h1 className="text-center mt-0 mb-2 lg:block">{title}</h1>
+                        <h3 className="text-center mt-0 mb-6 font-semibold text-xl opacity-50">{subtitle}</h3>
                         <GatsbyImage image={getImage(featuredImage)} alt="" />
                         <article>
                             <MDXProvider components={{ ...shortcodes, Section }}>
@@ -47,14 +45,29 @@ export default function Template({ data }) {
                             </MDXProvider>
                         </article>
                         <article>
-                            <div className="m-6 mb-12">
-                                <p className="m-0 text-[15px]">
-                                    To use this template,{' '}
-                                    <Link to="https://app.posthog.com/dashboard"> go to the Dashboards tab</Link>, click
-                                    the "New dashboard" button, and select "{title}" from the modal.
-                                </p>
-                                <img className="w-full mt-6" src={CreateDashboardImage} alt="" />
-                            </div>
+                            {type.includes('dashboard') && (
+                                <div className="m-6 mb-12">
+                                    <p className="m-0 text-[15px]">
+                                        To use this template,{' '}
+                                        <Link to="https://app.posthog.com/dashboard"> go to the Dashboards tab</Link>,
+                                        click the "New dashboard" button, and select "{title}" from the modal.
+                                    </p>
+                                    <img className="w-full mt-6" src={CreateDashboardImage} alt="" />
+                                </div>
+                            )}
+                            {type.includes('survey') && (
+                                <div className="m-6 mb-12">
+                                    <p className="m-0 text-[15px]">
+                                        To use this template,{' '}
+                                        <Link to="https://app.posthog.com/survey_templates">
+                                            {' '}
+                                            go to the Surveys tab
+                                        </Link>
+                                        , click the "New survey" button, and select the {title} from the page.
+                                    </p>
+                                    <img className="w-full mt-6" src={CreateSurveyImage} alt="" />
+                                </div>
+                            )}
                         </article>
                     </div>
                 </section>
@@ -75,6 +88,9 @@ export const query = graphql`
                 title
                 subtitle
                 description
+                filters {
+                    type
+                }
                 featuredImage {
                     childImageSharp {
                         gatsbyImageData

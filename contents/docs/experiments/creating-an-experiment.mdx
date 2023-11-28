@@ -1,0 +1,53 @@
+---
+title: Creating an experiment
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: full
+    enterprise: full
+---
+
+To create a new experiment, go to the [experiments tab](https://app.posthog.com/experiments) in the PostHog app, and click on the "New experiment" button in the top right.
+
+This presents you with a form where you can complete the details of your new experiment:
+
+![How to create an experiment in PostHog](../../images/features/experiments/create-experiment.png)
+
+Here's a breakdown of each field in the form:
+
+## Feature flag key
+
+Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In your code, you use this feature flag key to check which experiment variant the user has been assigned to. 
+
+> **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you you're a different library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags) 
+
+## Experiment variants
+
+By default, all experiments have a 'control' and 'test' variant. If you have more variants that you'd like to test, you can use this field to add more variants and run multivariant tests.
+
+Participants are automatically split equally between variants. If you want assign specific users to a specific variant, you can set up [manual overrides](/docs/experiments/common-questions#how-do-i-assign-a-specific-person-to-the-controltest-variant-in-an-experiment).
+
+## Participant type
+
+The default is users, but if you've created [groups](/docs/product-analytics/group-analytics), you can run [group-targeted experiments](/blog/running-group-targeted-ab-tests). This will test how a change affects your product at a group-level by providing the same variant to every member of a group.
+
+## Participant targeting
+
+By default, your experiment will target 100% of participants. If you want to target a more specific set of participants, or change the rollout percentage, you need to do this by changing the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) for the feature flag used by your experiment.
+
+Below is a video showing how to navigate there:
+
+![How to set experiment feature flag release conditions](../../images/features/experiments/set-experiment-rollout.mp4)
+
+## Experiment goal
+
+Setting your goal metric enables PostHog to calculate the impact of your experiment and if your results are [statistically significant](/docs/experiments/significance). You can select between a "trend" or "conversion funnel" goal.
+
+You set the minimum acceptable improvement below. This combines historical data from your goal metric with your desired improvement rate to show a prediction for how long you need to run your experiment to see statistical significant results.
+
+![Minimum acceptable improvement calculator](../../images/features/experiments/improvement-calculator.mp4)
+
+> **Note:** If you select a server-side event, you may see a warning that no feature flag information can be detected with the event. To resolve this issue, see [step 2 of adding your experiment code and how to submit feature flag information with your events](/docs/experiments/adding-experiment-code#step-2-server-side-only-add-the-feature-flag-property-to-your-events).
+> 
+> ![Experiment goal warning](../../images/features/experiments/experiment-goal-warning.png)

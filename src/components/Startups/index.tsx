@@ -12,7 +12,6 @@ const benefits = [
     'A year of PostHog',
     'Free PostHog merch',
     '$50,000 in PostHog credit',
-    'Private office hours',
     'Startup spotlight',
     'Opportunities for extra credits',
 ]
@@ -22,10 +21,11 @@ const validationSchema = Yup.object().shape({
     lastname: Yup.string().required('Please enter your last name'),
     email: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
     name: Yup.string().required('Please enter your company name'),
-    domain: Yup.string().required('Please enter your company name'),
-    self_registration_organization_name: Yup.string().required('Please enter your company name'),
+    domain: Yup.string().required('Please enter your company domain'),
+    self_registration_organization_name: Yup.string().required('Please enter your PostHog organization name'),
     self_registration_raised: Yup.number().required('Please select a value'),
     self_registration_company_founded: Yup.string().required('Please enter a date'),
+    who_referred_you_to_posthog_: Yup.string(),
 })
 
 const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { slug } }) => {
@@ -44,7 +44,7 @@ const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { s
 export default function Startups() {
     const { spotlight } = useStaticQuery(graphql`
         {
-            spotlight: mdx(fields: { slug: { eq: "/blog/startup-tigris" } }) {
+            spotlight: mdx(fields: { slug: { eq: "/spotlight/startup-bugprove" } }) {
                 frontmatter {
                     title
                     featuredImage {
@@ -74,7 +74,7 @@ export default function Startups() {
                 <div className="relative hidden lg:block">
                     <h1 className="max-w-lg mx-auto pb-2 text-center">Apply for PostHog's startup program</h1>
 
-                    <div className="max-w-sm rounded p-4 text-left bg-gray-accent-light mx-auto">
+                    <div className="max-w-sm rounded p-4 text-left bg-accent dark:bg-accent-dark border border-border dark:border-dark mx-auto">
                         <h3 className="text-lg mb-1">How to apply:</h3>
                         <ol>
                             <li>

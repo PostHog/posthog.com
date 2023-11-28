@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
+import decode from 'jwt-decode'
 
 export type User = {
     id: number
@@ -63,6 +64,15 @@ type UserProviderProps = {
     children: React.ReactNode
 }
 
+const jwtValid = (jwt: string) => {
+    try {
+        const jwtDecoded = decode(jwt)
+        return Date.now() <= jwtDecoded?.exp * 1000
+    } catch (err) {
+        return false
+    }
+}
+
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
@@ -74,7 +84,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const jwt = localStorage.getItem('jwt')
         const user = localStorage.getItem('user')
 
-        if (jwt && user) {
+        if (jwt && user && jwtValid(jwt)) {
             setJwt(jwt)
             setUser(JSON.parse(user))
         } else {
@@ -84,7 +94,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }, [])
 
     const getJwt = async () => {
-        console.log('getJwt', jwt)
         return jwt || localStorage.getItem('jwt')
     }
 
@@ -131,7 +140,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             setJwt(userData.jwt)
 
             try {
-                const distinctId = posthog?.get_distinct_id()
+                const distinctId = posthog?.get_distinct_id?.()
 
                 if (distinctId) {
                     await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
@@ -272,6 +281,12 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             topicSubscriptions: {
                                 fields: ['slug', 'label'],
                             },
+                            postLikes: {
+                                fields: ['id'],
+                            },
+                            roadmapLikes: {
+                                fields: ['id'],
+                            },
                         },
                     },
                     role: {
@@ -305,7 +320,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         // We don't want any error thrown here to bubble up to the caller.
         try {
             // We use the existing distinct_id here so we don't clobber the currently identified user.
-            const distinctId = posthog?.get_distinct_id()
+            const distinctId = posthog?.get_distinct_id?.()
 
             if (distinctId && meData?.profile) {
                 posthog?.identify(distinctId, {
@@ -396,6 +411,34 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         await fetchUser()
     }
 
+    const likePost = async (id: number, unlike = false) => {
+        const profileID = user?.profile?.id
+        if (!profileID || !id) return
+        const body = {
+            data: {
+                postLikes: unlike
+                    ? { disconnect: [id] }
+                    : {
+                          connect: [id],
+                      },
+            },
+        }
+        const likeRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!likeRes.ok) {
+            throw new Error(`Failed to like post`)
+        }
+
+        await fetchUser()
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -412,6 +455,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         fetchUser,
         isSubscribed,
         setSubscription,
+        likePost,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

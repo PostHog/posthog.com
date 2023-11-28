@@ -1,0 +1,107 @@
+---
+title: Product analytics installation
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+import Tab from "components/Tab"
+import Frameworks from "../integrate/\_snippets/frameworks.mdx"
+import APIInstall from '../integrate/_snippets/install-api.mdx'
+import WebInstall from '../integrate/_snippets/install-web.mdx'
+import ReactInstall from '../integrate/_snippets/install-react.mdx'
+import NodeInstall from '../integrate/_snippets/install-node.mdx'
+import PythonInstall from '../integrate/_snippets/install-python.mdx'
+import PHPInstall from '../integrate/_snippets/install-php.mdx'
+import RubyInstall from '../integrate/_snippets/install-ruby.mdx'
+import GoInstall from '../integrate/_snippets/install-go.mdx'
+import ReactNativeInstall from '../integrate/_snippets/install-react-native.mdx'
+import AndroidInstall from '../integrate/_snippets/install-android.mdx'
+import IOSInstall from '../integrate/_snippets/install-ios.mdx'
+import JavaInstall from '../integrate/_snippets/install-java.mdx'
+import RustInstall from '../integrate/_snippets/install-rust.mdx'
+import FlutterInstall from '../integrate/_snippets/install-flutter.mdx'
+import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
+
+Product analytics enable you to gather and analyze data about how users interact with your product. 
+
+To start, install PostHog in the app you want to collect data in.
+
+> **Tip**: Even if you have multiple customer-facing products (e.g., a marketing website + iOS app + web app), it's best to have them share the same project. This enables you to track the user across their journey across different platforms. See [organizations & projects docs](/manual/organizations-and-projects) for more.
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'Flutter', 'guides', 'api']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>React</Tab>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+        <Tab>React Native</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Java</Tab>
+        <Tab>Rust</Tab>
+        <Tab>Elixir</Tab>
+        <Tab>Flutter</Tab>
+        <Tab count="11">Framework guides</Tab>
+        <Tab>API</Tab>
+    </Tab.List>
+    <Tab.Panels>
+            <Tab.Panel>
+            <WebInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NodeInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PHPInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <RubyInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNativeInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AndroidInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOSInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <JavaInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+           <RustInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ElixirInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+           <FlutterInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <Frameworks />
+        </Tab.Panel>
+        <Tab.Panel>
+            <APIInstall />
+            <blockquote>
+            For more details, see our <a href="/docs/api">API docs</a>
+            </blockquote>
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

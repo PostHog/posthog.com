@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Structure } from '../../Structure'
 import { mergeClassList } from '../../../lib/utils'
-import compensationImg from './images/compensation.svg'
+import { BoardMeetings, Compensation, Feedback, Finances } from 'components/Careers/Images'
 import boardMeetingsImg from './images/board-meetings.svg'
 import financesImg from './images/finances.svg'
 import feedbackImg from './images/feedback.svg'
 
 interface TransparencyFeatureProps {
-    image: string
+    Image: any
     title: string
     children: any
     className?: string
@@ -33,13 +33,13 @@ const TransparencyMattersItem = ({ title, description, className = '' }: Transpa
     )
 }
 
-const TransparencyFeature = ({ image, title, children, className = '' }: TransparencyFeatureProps) => {
+const TransparencyFeature = ({ Image, title, children, className = '' }: TransparencyFeatureProps) => {
     const classList = mergeClassList('flex flex-col w-full justify-between items-start', className)
 
     return (
         <div className={classList}>
             <div className="flex-shrink-0 flex justify-center items-start w-auto">
-                <img src={image} alt={title} className="max-w-full block h-24 w-24 p-2 pl-0 mb-2" />
+                <Image className="w-24 h-24" />
             </div>
             <div className="flex-grow text-left">
                 <h3 className="my-2 text-xl">{title}</h3>
@@ -63,10 +63,10 @@ export const Transparency = () => {
                 />
             </Structure.Section>
 
-            <div className="w-full my-16 text-left grid sm:grid-cols-2 border-gray-accent-light border-dashed border-l-0 border-r-0 border-t border-b">
-                <div className="border-gray-accent-light border-dashed border-b-0 border-t-0 sm:border-t-0 sm:border-l px-4 py-8 md:py-12 border-r-0">
-                    <TransparencyFeature title="Compensation" image={compensationImg} className="max-w-md mx-auto">
-                        <p className="mb-0 text-lg text-black font-lightish">
+            <div className="w-full max-w-screen-xl md:px-4 md:mx-auto my-16 text-left grid sm:grid-cols-2 gap-4">
+                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                    <TransparencyFeature title="Compensation" Image={Compensation} className="max-w-md mx-auto">
+                        <p className="mb-0 text-base">
                             We pay generously and built a{' '}
                             <a href="/handbook/people/compensation">compensation calculator</a> to keep salary
                             discussions simple and fair. You’ll know your approximate starting salary before you even
@@ -75,22 +75,18 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="border-gray-accent-light border-dashed border-b-0 border-t sm:border-t-0 border-l px-4 py-8 md:py-12 border-r">
-                    <TransparencyFeature title="Board meetings" image={boardMeetingsImg} className="max-w-md mx-auto">
-                        <p className="mb-0 text-lg text-black font-lightish">
+                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                    <TransparencyFeature title="Board meetings" Image={BoardMeetings} className="max-w-md mx-auto">
+                        <p className="mb-0 text-base">
                             We share slides from each board meeting internally. When everyone knows the direction we're
                             headed and the obstacles we face, they can decide where their time is best spent.
                         </p>
                     </TransparencyFeature>
                 </div>
 
-                <div className="border-gray-accent-light border-dashed border-b-0 border-t border-l px-4 py-8 md:py-12 border-r-0">
-                    <TransparencyFeature
-                        title="Fundraising & finances"
-                        image={financesImg}
-                        className="max-w-md mx-auto"
-                    >
-                        <p className="mb-0 text-lg text-black font-lightish">
+                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                    <TransparencyFeature title="Fundraising & finances" Image={Finances} className="max-w-md mx-auto">
+                        <p className="mb-0 text-base">
                             We keep our team informed about fundraising during the process and share a monthly report
                             covering revenue, runway, and more. It's nice when you can see your hard work paying off
                             (literally).
@@ -98,9 +94,9 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="border-gray-accent-light border-dashed border-b-0 border-t border-l px-4 py-8 md:py-12 border-r">
-                    <TransparencyFeature title="Constructive feedback" image={feedbackImg} className="max-w-md mx-auto">
-                        <p className="mb-0 text-lg text-black font-lightish">
+                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                    <TransparencyFeature title="Constructive feedback" Image={Feedback} className="max-w-md mx-auto">
+                        <p className="mb-0 text-base">
                             Transparency is a two-way street. We encourage individual feedback and run regular
                             360-degree group sessions with the whole company, so everyone can improve.
                         </p>
@@ -118,12 +114,12 @@ export const Transparency = () => {
                     />
                 </Structure.Section>
                 <div className="pb-16 px-4 md:px-0">
-                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12">
+                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12 px-4 text-left md:text-center">
                         In 2026 we aim to go public with $100M revenue. To achieve this, PostHog will need to be the
                         standard devtool for building better products.
                     </p>
 
-                    <h3 className="mb-4">We look for people who are:</h3>
+                    <h3 className="mb-4 px-4 text-left md:text-center">We look for people who are:</h3>
 
                     <div className="grid sm:grid-cols-3 sm:gap-8 lg:gap-24 max-w-6xl mx-auto px-4">
                         <TransparencyMattersItem

@@ -1,22 +1,22 @@
 ---
-title: Growth sessions
+title: Growth reviews
 sidebar: Handbook
 showTitle: true
 ---
 
-Now that PostHog has found product market fit, we hold regular growth sessions where we plan work to accelerate our growth and drive revenue. These sessions are only worth running _after_ you've found product market fit because until then you need to focus on building a solution users feel they really need. Once you've found product market fit, growth sessions can help you optimize. 
+Now that PostHog has found product market fit, we hold regular growth reviews where we plan work to accelerate our growth and drive revenue. These sessions are only worth running _after_ you've found product market fit because until then you need to focus on building a solution users feel they really need. Once you've found product market fit, growth sessions can help you optimize. 
 
 We've established a successful pattern for running these meetings every four weeks and actions we've taken from them have led to some significant increases in monthly revenue growth.
 
 ## Attendees
 We find it's important to bring a mixture of technical people, and those with wide context of what the business is working on. Regular attendees include...
 
-* Emanuele (Growth Engineer)
+* Raquel (Growth Engineer)
 * Tim (Co-founder / CTO)
 * James (Co-founder / CEO)
 * Charles (Marketing)
 
-## Running a growth session
+## Running a growth review
 
 ### Before the meeting
 * Before the meeting, everyone creates a list of hypotheses. These can be problems which limit growth, or opportunities to accelerate. They should all be related to growth engineering (e.g. not simple bug fixes), and they should be focused on improving our long term monthly growth rate.

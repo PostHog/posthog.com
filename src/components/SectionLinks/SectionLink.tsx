@@ -18,7 +18,7 @@ export default function SectionLink({ link, previous = false, className }: Secti
         <div className={className}>
             {link && (
                 <Link
-                    className={`whitespace-normal md:whitespace-nowrap text-[15px] flex items-center space-x-2 text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-bold ${linkClasses}`}
+                    className={`whitespace-normal md:whitespace-nowrap text-[15px] flex items-center space-x-2 text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark font-bold ${linkClasses}`}
                     to={link.url}
                 >
                     <span className={`w-1/2 flex-grow`}>{link.name}</span>

@@ -1,26 +1,33 @@
 ---
 title: Next.js
 icon: ../../images/docs/integrate/frameworks/nextjs.svg
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/libraries/react) and the [Node.js](/docs/libraries/node) SDKs.
 
-You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
+> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs).
 
-Next.js has both client and server-side rendering. We'll cover both in this guide.
+Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
 ## Prerequisites
 
 To follow this guide along, you need:
 
-1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
-2. a running Next.js application
+1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
+2. A Next.js application
 
-## Client-side analytics
+## Client-side setup
 
-Install posthog-js using your package manager:
+Install `posthog-js` using your package manager:
 
 ```shell
 yarn add posthog-js
@@ -28,16 +35,20 @@ yarn add posthog-js
 npm install --save posthog-js
 ```
 
-Add your environment variables to your .env.local file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in the PostHog app under Project Settings > API Keys.
+Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
 
 ```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
 ```
 
-3. Integrate PostHog at the root of your app (`pages/_app.js` for Next.js).
+These values need to start with `NEXT_PUBLIC_` to be accessible on the client-side.
 
-```react
+### Pages router
+
+If your Next.js app uses the [pages router](https://nextjs.org/docs/pages), you can integrate PostHog at the root of your app (`pages/_app.js`).
+
+```js
 // pages/_app.js
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -77,6 +88,152 @@ export default function App({ Component, pageProps }) {
 }
 ```
 
+### App router
+
+If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components).
+
+We need to export the `PostHogPageview` component containing [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) as [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if not wrapped in a `<Suspense>`.
+
+<MultiLanguage>
+
+```js
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
+  })
+}
+
+export function PostHogPageview() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  // Track pageviews
+  useEffect(() => {
+    if (pathname) {
+      let url = window.origin + pathname
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`
+      }
+      posthog.capture(
+        '$pageview',
+        {
+          '$current_url': url,
+        }
+      )
+    }
+  }, [pathname, searchParams])
+}
+
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+```ts
+// app/providers.tsx
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
+  })
+}
+
+export function PostHogPageview(): JSX.Element {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (pathname) {
+      let url = window.origin + pathname;
+      if (searchParams && searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`;
+      }
+      posthog.capture("$pageview", {
+        $current_url: url,
+      });
+    }
+  }, [pathname, searchParams]);
+
+  return <></>;
+}
+
+export function PHProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+</MultiLanguage>
+
+Once created, you can import the `PostHogPageview` and `PHProvider` components into your `app/layout` file, then wrap your app in the provider component and your pageview in a suspense.
+
+<MultiLanguage>
+
+```js
+// app/layout.js
+import './globals.css'
+import { PHProvider, PostHogPageview } from './providers'
+import { Suspense } from 'react'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
+      <PHProvider>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
+}
+```
+
+```ts
+// app/layout.tsx
+import './globals.css'
+import { ReactNode, Suspense } from 'react';
+import { PHProvider, PostHogPageview } from './providers';
+
+export default function RootLayout({
+  children,
+}: {
+  children: ReactNode
+}) {
+  return (
+    <html lang="en">
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
+      <PHProvider>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
+}
+```
+
+</MultiLanguage>
+
+Files and components accessing PostHog on the client-side need the `'use client'` directive.
+
+### Accessing PostHog using the provider
+
 PostHog can then be accessed throughout your Next.js app by using the `usePostHog` hook. See the [React SDK docs](/docs/libraries/react) for examples of how to use:
 
 - [posthog-js functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
@@ -86,9 +243,9 @@ You can also read [the full posthog-js documentation](/docs/libraries/js) for al
 
 ## Server-side analytics
 
-Server-side rendering is a Next.js feature that enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
+Server-side rendering enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
 
-To integrate PostHog into your Next.js for server-side analytics you should use the [Node SDK](/docs/libraries/node).
+To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
 
 First, install the `posthog-node` library:
 
@@ -98,11 +255,13 @@ yarn add posthog-node
 npm install --save posthog-node
 ```
 
-We can then use the `getServerSideProps` function to send events and pass the feature flags to the component.
+### Pages router
+
+For the pages router, we can use the `getServerSideProps` function to access PostHog on the server-side, send events, evaluate feature flags, and more.
 
 This looks like this:
 
-```react
+```js
 // pages/posts/[id].js
 import { useContext, useEffect, useState } from 'react'
 import { getServerSession } from "next-auth/next"
@@ -137,14 +296,20 @@ export async function getServerSideProps(ctx) {
 
   if (session) {
     const client = new PostHog(
-      '<ph_project_api_key>',
+      process.env.NEXT_PUBLIC_POSTHOG_KEY,
       {
-        api_host: '<ph_instance_address>',
+        host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
       }
     )
 
     flags = await client.getAllFlags(session.user.email);
-    client.capture(session.user.email, 'loaded blog article', { url: ctx.req.url })
+    client.capture({
+      distinctId: session.user.email,
+      event: 'loaded blog article',
+      properties: {
+        $current_url: ctx.req.url,
+      },
+    });
 
     await client.shutdownAsync()
   }
@@ -161,14 +326,61 @@ export async function getServerSideProps(ctx) {
 ```
 
 > **Note**: Make sure to _always_ call `client.shutdownAsync()` after sending events from the server-side.
-> PostHog queues events into larger batches, and this call will force all batched events to be flushed immediately.
+> PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+
+### App router
+
+For the app router, we can initialize the `posthog-node` SDK once with a `PostHogClient` function, and import it into files.
+
+This enables us to send events and fetch data from PostHog on the server – without making client-side requests.
+
+```js
+// app/posthog.js
+import { PostHog } from 'posthog-node'
+
+export default function PostHogClient() {
+  const posthogClient = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    flushAt: 1,
+    flushInterval: 0
+  })
+  return posthogClient
+}
+```
+
+> **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. `flushAt` sets how many how many capture calls we should flush the queue (in one batch). `flushInterval` sets how many milliseconds we should wait before flushing the queue. Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdownAsync()` once done.
+
+
+```js
+import Link from 'next/link'
+import PostHogClient from '../posthog'
+
+export default async function About() {
+
+  const posthog = PostHogClient()
+  const flags = await posthog.getAllFlags(
+    'user_distinct_id' // replace with a user's distinct ID
+  );
+  await posthog.shutdownAsync()
+
+  return (
+    <main>
+      <h1>About</h1>
+      <Link href="/">Go home</Link>
+      { flags['main-cta'] &&
+        <Link href="http://posthog.com/">Go to PostHog</Link>
+      }
+    </main>
+  )
+}
+```
 
 ## Configuring a reverse proxy to PostHog
 
-To improve the reliability of client-side tracking and make it less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. See [deploying a reverse proxy using Next.js rewrites](/docs/advanced/proxy/nextjs) or [using Vercel writes](/docs/advanced/proxy/vercel).
+To improve the reliability of client-side tracking and make requests less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. Read more about deploying a reverse proxy using [Next.js rewrites](/docs/advanced/proxy/nextjs), [Next.js middleware](/docs/advanced/proxy/nextjs-middleware), and [Vercel rewrites](/docs/advanced/proxy/vercel).
 
 ## Further reading
 
+- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
-- [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
-- [How (and why) our marketing team uses PostHog](/blog/posthog-marketing)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)

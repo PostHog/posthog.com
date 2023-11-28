@@ -112,11 +112,11 @@ export default function GitHubTooltip({
                     </Markdown>
                     <div className="absolute inset-0 h-full w-full bg-gradient-to-t from-white/100 via-white/50 to-white/0 dark:from-[#484848]/100 dark:via-[#484848]/50 dark:to-[#484848]/0" />
                 </div>
-                <CallToAction className="mb-1 mt-auto" size="xs" to={url}>
+                <CallToAction className="mb-1 mt-auto" size="sm" to={url}>
                     Continue reading on GitHub
                 </CallToAction>
             </div>
-            <div className="ml-4 pl-4 border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed w-[200px] hidden sm:flex flex-col space-y-2">
+            <div className="ml-4 pl-4  w-[200px] hidden sm:flex flex-col space-y-2">
                 <TooltipSection title="Author">
                     <span className="text-red font-bold">
                         <Author url={user?.url} avatar={user?.avatar} username={user?.username} />

@@ -2,10 +2,9 @@
 title: How to build, analyze and optimize conversion funnels in PostHog
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/tutorial-16.png
 featuredVideo: https://www.youtube-nocookie.com/embed/cMFz_xFlHaE
 author: ["yakko-majuri", "andy-vandervell"]
-tags: ["funnels", "correlation analysis", "paths", "session recording", "experimentation"]
+tags: ["funnels", "correlation analysis", "paths", 'product analytics']
 date: 2022-04-20
 ---
 
@@ -123,7 +122,7 @@ Once you've built a funnel in PostHog, you can take advantage of one our most us
 
 It's a powerful way to discover eye-opening insights into what your users are actually doing, allowing you to refine your funnel, and better understand your product.
 
-> **Note:** Correlation Analysis is a paid-only feature available on the [Scale](https://license.posthog.com/) and [Enterprise](/get-in-touch?plan=enterprise#contact) self-hosted plans, and all paid plans on PostHog Cloud. **Paid plans are free up to 1 million events per month** when you enter card details.
+> **Note:** Correlation Analysis is a paid-only feature available on PostHog Cloud. **Paid plans are free up to 1 million events per month** when you enter card details.
 
 Let's take a look at the Correlated Events for our example.
 
@@ -161,7 +160,7 @@ Where users choose to go next can reveal a great deal about issues impacting con
 
 ## Step 4: Watch people navigate your funnel
 
-User paths give you a zoomed out view of user behavior, but session recordings are the best way to understand "the why". And because PostHog is an all-in-one platform, you can go directly from your Funnels insight to viewing session recordings of people who either converted or dropped off.
+User paths give you a zoomed out view of user behavior, but session replays are the best way to understand "the why". And because PostHog is an all-in-one platform, you can go directly from your Funnels insight to viewing session replays of people who either converted or dropped off.
 
 To do so, simply click on the total of people who either completed or dropped off on any given step, and you'll be presented with the list of those users. From here you can watch specific recordings from your funnel, view individual user profiles, or even create a cohort of all users for further analysis.
 
@@ -194,5 +193,3 @@ Following these steps will help you identify problems in your funnel, and verify
 For more inspiration, we recommend reading our guide [building an AARRR pirate funnel](/blog/aarrr-pirate-funnel) tutorial, and Neil Kakkar's blog on [what we've learned about running effective A/B tests](/blog/experiments) – Neil is our product leader for Experimentation, so he should know.
 
 Got a question about anything in this tutorial? Leave a [question](/questions) below!
-
-<NewsletterTutorial compact/>

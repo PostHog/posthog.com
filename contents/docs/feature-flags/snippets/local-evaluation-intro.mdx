@@ -1,0 +1,3 @@
+Evaluating feature flags requires making a request to PostHog for each flag. However, you can improve performance by evaluating flags locally. Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.
+
+It is best practice to use local evaluation flags when possible, since this enables you to resolve flags faster and with fewer API calls.

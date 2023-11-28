@@ -48,16 +48,21 @@ const query = (id: string | number, isModerator: boolean) =>
                     sort: ['createdAt:asc'],
                     populate: {
                         profile: {
-                            fields: ['id', 'firstName', 'lastName', 'gravatarURL'],
+                            fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns'],
                             populate: {
                                 avatar: {
                                     fields: ['id', 'url'],
+                                },
+                                teams: {
+                                    fields: ['id'],
                                 },
                             },
                         },
                     },
                 },
                 topics: true,
+                pinnedTopics: true,
+                slugs: true,
             },
         },
         {
@@ -66,7 +71,7 @@ const query = (id: string | number, isModerator: boolean) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, isModerator } = useUser()
+    const { getJwt, fetchUser, user, isModerator } = useUser()
     const posthog = usePostHog()
 
     const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
@@ -79,7 +84,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
         const res = await fetch(
             url,
-            isModerator
+            user
                 ? {
                       headers: {
                           Authorization: `Bearer ${await getJwt()}`,
@@ -342,6 +347,43 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         mutate()
     }
 
+    const escalate = async (message?: string) => {
+        const body = JSON.stringify({
+            id: questionData?.id,
+            message,
+        })
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/escalate`, {
+            method: 'POST',
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        mutate()
+    }
+
+    const pinTopics = async (topicIDs: number[]) => {
+        if (!topicIDs) return
+        const body = JSON.stringify({
+            data: {
+                pinnedTopics: topicIDs,
+            },
+        })
+
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}`, {
+            method: 'PUT',
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        mutate()
+    }
+
     return {
         question: questionData,
         reply,
@@ -354,5 +396,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         addTopic,
         removeTopic,
         archive,
+        pinTopics,
+        escalate,
+        mutate,
     }
 }

@@ -10,11 +10,11 @@ Once your PostHog instance is up and running, the next step is to start sending 
 
 We recommend starting with autocapture for your web app as it's the quickest way to get set up, gives you full coverage, and avoids manually adding custom events. On top you can add custom events to track the most important events.
 
-> **Tip**: Autocapture sends lots of events. We provide a generous free tier but as you scale you might switch to mainly using [custom events](#3-capture-custom-events-client) on the areas of the product that are more stable and [tune autocapture](/docs/libraries/js#tuning-autocapture) to your needs.
+> **Tip**: Autocapture sends lots of events. We provide a generous free tier but as you scale you might switch to mainly using [custom events](#2-capture-custom-events-client) on the areas of the product that are more stable and [tune autocapture](/docs/libraries/js#tuning-autocapture) to your needs.
 
 ## 1. Setup autocapture
 
-When you call `posthog.init` the PostHog JS library begins automatically capturing user events:
+When you call `posthog.init`, the PostHog browser JS library begins automatically capturing user events:
 
 - **Page views**, including the URL
 - **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
@@ -38,8 +38,8 @@ On the client-side, we can use the `capture` method, with the first argument bei
 
 <MultiLanguage selector="tabs">
 
-```js
-posthog.capture('User signed up')
+```js-web
+posthog.capture('user_signed_up')
 ```
 
 </MultiLanguage>
@@ -55,16 +55,16 @@ At first, it may seem somewhat unnecessary to send these custom events when we a
 
 ### Sending custom properties on an event
 
-Suppose you're building an Saas app and want to track when a user purchases a plan. With autocapture, you'll already see `Clicked button with text 'Purchase'` events, but these won't have any information on which plan the user purchased!
+Suppose you're building a SaaS app and want to track when a user purchases a plan. With autocapture, you'll already see `Clicked button with text 'Purchase'` events, but these won't have any information on which plan the user purchased!
 
 We include extra information on events by adding a second parameter in our capture call, which contains a map of custom property names and values.
 
 <MultiLanguage selector="tabs">
 
-```js
-posthog.capture('Plan purchased', {
+```js-web
+posthog.capture('plan_purchased', {
     price: 1599,
-    planId: 'XYZ12345',
+    plan_id: 'XYZ12345',
     frequency: 'monthly',
     features: {
         'SSO': true,
@@ -91,58 +91,35 @@ While combining these two events using [Actions](/manual/actions) to fix this dr
 
 ## 3. Capture backend events
 
-We've now covered sending events using autocapture and custom tracking, but up until now we've only been sending events from our frontend website.
-While for simple websites this is all you'll need to set up, if you're building a web or mobile app with a backend, we also highly recommend setting up tracking from your server in addition to your frontend.
+If you're building a web or mobile app with a backend, we also highly recommend setting up tracking from your server in addition to your frontend.
 
-There are several reasons why it's often preferable to send certain custom events from the server-side:
+There are two main benefits to sending certain events from the server-side:
 
 1. **More reliable delivery**: As these events originate from your server, there's no way for them to get accidentally blocked by client-side ad-blockers
+
 2. **More reliable data**: You can fetch up-to-date information directly from your database or other services, which may not be readily available on the frontend
 
 Our [SDK pages](/docs/integrate?tab=sdks) contain information on installing PostHog on your specific platform. Once you have the library installed, you can send a capture event using the same `capture` method as in `posthog-js`.
 
 <SendEventBackend />
 
-The only major difference on the server side is that we must include a `distinct_id` with every event.
+The only major difference on the server-side is that we must include a `distinct_id` with every event.
 Often, this will come in the form of a unique user ID and can be pulled from a session cookie when requests arrive from the client.
 
 ## When should I send events from the server vs. the client?
 
-In general, our guidance is to track events on both the frontend and backend whenever possible, to ensure maximum reliability and the most flexibility when analyzing your data.
+In general, our guidance is to track events on both the frontend and backend whenever possible. This ensures maximum reliability, and the most flexibility when analyzing your data.
 
-That being said, there are certain events that we highly recommend tracking from the server-side specifically:
+That said, we strongly recommend tracking the following events from the server-side:
 
-1. **Sign-up events**: Given how high value these events are, you should also send a server-side even whenever possible
+1. **Sign-up events**: Given how high value these events are, you should also send server-side events whenever possible
+
 2. **C(R)UD events**: This is a broad class of events, but generally speaking, whenever you receive an API request to create or update a specific resource within your application, it's useful to forward these to PostHog. We also recommend including context about the request itself in the event (latency, errors, any properties passed in the request payload, etc.)
-3. **Backend jobs**: PostHog is for more than just optimizing your frontend! It can often be useful to send events whenever backend jobs or workflows are kicked off, which allows you to analyze them within PostHog.
+
+3. **Backend jobs**: PostHog is for more than just optimizing your frontend. It can often be useful to send events whenever backend jobs or workflows are kicked off, which allows you to analyze them within PostHog.
 
 > **Tip**: We recommend using different event names for your backend and frontend events to avoid the chance of duplicate counting. Often these should be the CRUD events themselves e.g. `User created` for the backend and `User signed up` for the frontend. Additionally, you can use the `source` property to filter for events from a specific source.
 
 ## Event ingestion nuances
 
-It's a priority for us that events are fully processed and saved as soon as possible. However, there is a class of events which we _deliberately_ process with a slight delay. Specifically, an event is delayed by around a minute if it fits **all** of the following three conditions:
-
--   isn't from an anonymous user (anonymous users are recognized by having the `distinct_id` the same as the `$device_id` property)
--   isn't an `$identify` event (e.g. from `posthog.identify()`)
--   its `distinct_id` cannot be matched to an existing person
-
-This delay mechanism is called the **event buffer**, and it materially improves handling of an edge case which could otherwise inflate unique user counts.
-
-<details>
-
-  <summary>How does the event buffer help?</summary>
-
-Starting with version 1.38.0, PostHog stores the person associated with an event inline with the event record. This greatly improves query performance, but because events are immutable, it also means that persons can't be merged retroactively. See this scenario where that's problematic:
-
-1. User visits signup page, in turn frontend captures anonymous `$pageview` for distinct ID `XYZ` (anonymous distinct ID = device ID).  
-   This event gets person ID `A`.
-2. User click signup button, initiating in a backend request, in turn frontend captures anonymous `$autocapture` (click) for distinct ID `XYZ`.  
-   This event gets person ID `A`.
-3. Signup request is processed in the backend, in turn backend captures identified signup for distinct ID `alice@example`.com.  
-   OOPS! We haven't seen `alice@example.com` before, so this event gets person ID `B`.
-4. Signup request finishes successfully, in turn frontend captures identified $identify aliasing distinct ID `XYZ` to `alice@example.com`.  
-   This event gets person ID `A`.
-
-Here, the event from step 3 got a new person ID `B`, impacting unique users counts. If it were delayed just a bit and processed after the event from step 4, all events would get the expected person ID `A`. This is exactly what the event buffer achieves.
-
-</details>
+It's a priority for us that events are fully processed and saved as soon as possible. Typically, events will be usable in queries within a few minutes.

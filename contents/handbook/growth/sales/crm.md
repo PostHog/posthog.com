@@ -25,34 +25,28 @@ If you'd like to dig deeper, HubSpot have a ton of [documentation](https://knowl
 
 ## Managing our CRM
 
-People currently come into HubSpot through one of 6 ways:
-- They email hey@posthog.com or sales@posthog.com
+People currently come into HubSpot through one of the following ways:
+- They email sales@posthog.com
 - They sign up to the PostHog app
-- They book a demo/meeting with the CS team through the website
-- They complete a sign-up/query form in HubSpot
+- They fill in a contact/demo request HubSpot form through the website
 - They sign up to our User Slack
 - They are manually added to HubSpot by a member of the team, e.g. if you met someone interested in PostHog at an event
 
 ### Email
 
-Emails which come in to hey@ or support@posthog.com will also create tickets in Zendesk.  Whilst many of these are 
-technical in nature and usually best looked after by the [support hero](/handbook/engineering/support-hero), we should respond to the non-technical sales/account management
-queries in Zendesk directly.
-
-Emails which come into sales@ do not automatically get copied to Zendesk, and we respond to these by replying with the sales@ 
-alias in BCC to ensure that everyone else on the team knows that you're handling the query.  
+We respond to emails which come into sales@posthog.com by replying with sales@ in BCC to ensure that everyone else on the team knows that you're handling the query.  
 
 If you've turned on the HubSpot Chrome Extension you can see the person's HubSpot profile directly within Gmail which should give you their 
 auto-computed ICP score (more on this below) so this will help you decide on the correct approach (hands-on/self-serve).
 
 We have lots of handy templates you can use as well - just select _Template_ in the email window in Hubspot. If you find yourself sending the same type of email repeatedly, you may want to create your own template - go to 'Conversations' -> 'Templates'.
 
-In addition to hey@posthog.com and sales@posthog.com, we sometimes create special one-off email addresses to use for specific groups, such as for an event or promotion. If you create a Google group and you want messages to flow into HubSpot to be managed, make sure you add our [HubSpot inbox email address](mailto:hello-1@posthoginc.hs-inbox.com) to your group as a member.
+In addition to sales@posthog.com, we sometimes create special one-off email addresses to use for specific groups, such as for an event or promotion. If you create a Google group and you want messages to flow into HubSpot to be managed, make sure you add our [HubSpot inbox email address](mailto:hello-1@posthoginc.hs-inbox.com) to your group as a member.
 
 ### New PostHog signups
 
 When a `user signed up` (Cloud signup) or `license purchased` (Self-host license purchase) event is ingested into PostHog 
-we use the [HubSpot App](https://posthog.com/apps/hubspot-connector) to sync contact data into HubSpot.  We also populate
+we use the [HubSpot App](/apps/hubspot-connector) to sync contact data into HubSpot.  We also populate
 the following HubSpot properties if they are set in the PostHog event:
 - selected_deployment_type - usually `cloud` or `hosted_clickhouse`
 - product_signup_ts - the time they signed up/purchased a license
@@ -64,7 +58,7 @@ a day and reach out to the people who've not been contacted yet.  We also have a
 
 ### Completed HubSpot forms
 
-We have a [contact us form](/get-in-touch#contact) on posthog.com where we ask users can get in touch with us.  The sales@ alias gets an email notification when one of these forms is submitted - respond to them in the same way as the email section above.
+We have a [contact us form](/contact-sales) on posthog.com where we ask users can get in touch with us.  The sales@ alias gets an email notification and a notification is also sent to [#website-contact-sales](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted - respond to them in the same way as the email section above.
 
 ### New Slack signups
 
@@ -106,7 +100,7 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 | Email provider | Non-work email | -10  |
 
 
-We also sync the HubSpot score back into PostHog as the `hubspot_score` person property using the [HubSpot App](https://posthog.com/apps/hubspot-connector).  Our current dividing line between High and Low ICP score is **12**.
+We also sync the HubSpot score back into PostHog as the `hubspot_score` person property using the [HubSpot App](/apps/hubspot-connector).  Our current dividing line between High and Low ICP score is **12**.
 
 ## Deals
 

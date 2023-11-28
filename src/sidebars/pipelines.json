@@ -1,0 +1,170 @@
+[
+    {
+        "name": "CDP",
+        "url": "/cdp"
+    },
+    {
+        "name": "Variance",
+        "url": "/cdp/variance-connector"
+    },
+    {
+        "name": "Engage",
+        "url": "/cdp/engage-connector"
+    },
+    {
+        "name": "Airbyte",
+        "url": "/cdp/airbyte-export"
+    },
+    {
+        "name": "Amazon Kinesis",
+        "url": "/cdp/amazon-kinesis"
+    },
+    {
+        "name": "BigQuery",
+        "url": "/cdp/bigquery-export"
+    },
+    {
+        "name": "BitBucket",
+        "url": "/cdp/bitbucket-release-tracker"
+    },
+    {
+        "name": "Customer.io",
+        "url": "/cdp/customer-io"
+    },
+    {
+        "name": "Downsampler",
+        "url": "/cdp/downsampling"
+    },
+    {
+        "name": "Event Sequence Timer",
+        "url": "/cdp/event-sequence-timer"
+    },
+    {
+        "name": "User Paths",
+        "url": "/product/user-paths"
+    },
+    {
+        "name": "Correlation Analysis",
+        "url": "/product/correlation-analysis"
+    },
+    {
+        "name": "Session Recording",
+        "url": "/product/session-recording"
+    },
+    {
+        "name": "Feature Flags",
+        "url": "/product/feature-flags"
+    },
+    {
+        "name": "First Time Event Tracker",
+        "url": "/cdp/first-time-event-tracker"
+    },
+    {
+        "name": "GeoIP Enricher",
+        "url": "/cdp/geoip-enrichment"
+    },
+    {
+        "name": "Experimentation",
+        "url": "/product/experimentation-suite"
+    },
+    {
+        "name": "GitHub Releases",
+        "url": "/cdp/github-release-tracker"
+    },
+    {
+        "name": "GitHub Stars",
+        "url": "/cdp/github-star-sync"
+    },
+    {
+        "name": "GitLab ",
+        "url": "/cdp/gitlab-release-tracker"
+    },
+    {
+        "name": "Google Cloud",
+        "url": "/cdp/google-cloud-export"
+    },
+    {
+        "name": "Google Pub/Sub",
+        "url": "/cdp/google-pub-sub-connector"
+    },
+    {
+        "name": "Hubspot",
+        "url": "/cdp/hubspot-connector"
+    },
+    {
+        "name": "Intercom",
+        "url": "/cdp/intercom"
+    },
+    {
+        "name": "n8n",
+        "url": "/cdp/n8n"
+    },
+    {
+        "name": "Postgres",
+        "url": "/cdp/postgres-export"
+    },
+    {
+        "name": "Property Filter",
+        "url": "/cdp/property-filter"
+    },
+    {
+        "name": "Redshift (Export)",
+        "url": "/cdp/redshift-export"
+    },
+    {
+        "name": "Replicator",
+        "url": "/cdp/replicator"
+    },
+    {
+        "name": "RudderStack",
+        "url": "/cdp/rudderstack-export"
+    },
+    {
+        "name": "S3",
+        "url": "/cdp/s3-export"
+    },
+    {
+        "name": "Salesforce",
+        "url": "/cdp/salesforce-connector"
+    },
+    {
+        "name": "Schema Enforcer",
+        "url": "/cdp/schema-enforcer"
+    },
+    {
+        "name": "Segment",
+        "url": "/cdp/segment"
+    },
+    {
+        "name": "Sendgrid",
+        "url": "/cdp/sendgrid-connector"
+    },
+    {
+        "name": "Sentry",
+        "url": "/cdp/sentry-connector"
+    },
+    {
+        "name": "Snowflake",
+        "url": "/cdp/snowflake-export"
+    },
+    {
+        "name": "Taxonomy Standardizer",
+        "url": "/cdp/taxonomy-standardizer"
+    },
+    {
+        "name": "Timestamp Parser",
+        "url": "/cdp/timestamp-parser"
+    },
+    {
+        "name": "Twilio",
+        "url": "/cdp/twilio"
+    },
+    {
+        "name": "User Agent Populator",
+        "url": "/cdp/user-agent-populator"
+    },
+    {
+        "name": "Zendesk",
+        "url": "/cdp/zendesk-connector"
+    }
+]

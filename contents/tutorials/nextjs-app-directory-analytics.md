@@ -1,35 +1,35 @@
 ---
-title: How to set up Next.js 13 app directory analytics, feature flags, and more
+title: How to set up Next.js app router analytics, feature flags, and more
 date: 2023-04-05
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/nextjs-analytics.png
+featuredVideo: https://www.youtube-nocookie.com/embed/trk8LM2FQKw
 tags: ["configuration", "feature flags", "events"]
 ---
 
-Next.js release 13 added many improvements including the Turbopack bundler, an improved `next/image` component, changes to the `Link` component, and more. One of the big ones was the move from the `pages` to the `app` directory.
+Next.js release 13 added many improvements including the Turbopack bundler, an improved `next/image` component, changes to the `Link` component, and more. One of the big ones was the move from the `pages` to the `app` directory and router.
 
-The `app` directory includes support for layouts, server components, streaming, and component-level data fetching. These are all upgrades to the Next.js `pages` directory, but change the implementation of a Next.js app, including setting up PostHog. This tutorial goes over how to implement PostHog on the client and server side when using the Next.js 13 app directory. 
+The `app` router includes support for layouts, server components, streaming, and component-level data fetching. These are all upgrades to the Next.js `pages` directory, but change the implementation of a Next.js app, including setting up PostHog. This tutorial goes over how to implement PostHog on the client and server side when using the Next.js app router. 
 
-> For a more detailed implementation tutorial for Next.js 13 **without** using the app directory, check out our [Next.js analytics tutorial](/tutorials/nextjs-analytics).
+> For a more detailed implementation tutorial for Next.js using the **pages** router, check out our [Next.js analytics tutorial](/tutorials/nextjs-analytics).
 
-## Creating a Next.js 13 app with the app directory
+## Creating a Next.js app with the app router
 
-First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js 13 app. Select **No** for TypeScript, **Yes** for using the `experimental app/ directory with this project`, and the defaults for every other option.
+First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
-npx create-next-app next-app
+npx create-next-app@latest next-app
 ```
 
-We name our app `next-app` and can go into the newly created folder to run it. Notice the `next-app` folder doesn’t contain a `pages` folder, but an `app` one. 
+We name our app `next-app` and can go into the newly created folder to run it.
 
 ```bash
 cd next-app
 npm run dev
 ```
 
-This opens a new page showing we are running Next.js 13.
+This opens a new page showing we are running Next.js.
 
 ![Next.js app](../images/tutorials/nextjs-app-directory-analytics/app.png)
 
@@ -42,7 +42,7 @@ NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
 ```
 
-Using the Next.js 13 app directory requires us to initialize PostHog differently than with [the pages directory](/tutorials/nextjs-analytics). Specifically, the app directory server-side renders components by default, and the `posthog-js` library is a client-side library. To make these work together, create a `providers.js` file and set up the `PostHogProvider` with the `'use client'`  directive.
+Using the Next.js app router requires us to initialize PostHog differently than with the [pages directory](/tutorials/nextjs-analytics). Specifically, the app router server-side renders components by default, and the `posthog-js` library is a client-side library. To make these work together, create a `providers.js` file and set up the `PostHogProvider` with the `'use client'`  directive.
 
 ```js
 // app/providers.js
@@ -56,7 +56,7 @@ if (typeof window !== 'undefined') {
   })
 }
 
-export default function PHProvider({ children }) {
+export function PHProvider({ children }) {
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -66,7 +66,7 @@ Once we do this, we can then import the `provider.js` file in our `app/layout.js
 ```js
 // app/layout.js
 import './globals.css'
-import Providers from './providers'
+import { PHProvider } from './providers'
 
 export const metadata = {
   title: 'Create Next App',
@@ -76,9 +76,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Providers>
+      <PHProvider>
         <body>{children}</body>
-      </Providers>
+      </PHProvider>
     </html>
   )
 }
@@ -88,11 +88,11 @@ After setting this up, events start being autocaptured into your PostHog instanc
 
 ![Events](../images/tutorials/nextjs-app-directory-analytics/events.png)
 
-> **Note:** if you don’t use the `"use client"` directive, Next.js assumes your page is server-side rendered. This means the client hooks like `usePostHog` cause errors. To interact with PostHog on the server side, use the [PostHog Node SDK](/docs/libraries/node) (which we show [later](#using-posthog-with-server-rendered-components)).
+> **Note:** If you don’t use the `"use client"` directive, Next.js assumes your page is server-side rendered. This means the client hooks like `usePostHog` cause errors. To interact with PostHog on the server side, use the [PostHog Node SDK](/docs/libraries/node) (which we show [later](#using-posthog-with-server-rendered-components)).
 
 ## Capturing pageviews on the client side
 
-When used with the app directory, Next.js 13 replaces `next/router` with `next/navigation.` This means we need a new implementation for capturing pageviews beyond the first-page load because Next.js acts as a [single-page app](/tutorials/single-page-app-pageviews). Luckily, we can add the code to handle this into our `provider.js` file.
+When used with the app router, Next.js replaces `next/router` with `next/navigation.` This means we need a new implementation for capturing pageviews beyond the first-page load because Next.js acts as a [single-page app](/tutorials/single-page-app-pageviews). Luckily, we can add the code to handle this into our `provider.js` file.
 
 To start, we need another page to navigate to. In the app folder, create a new folder named `about` and create a `page.js` file inside with a basic component.
 
@@ -127,12 +127,15 @@ export default function Home() {
 }
 ```
 
-Once this is set up, use the `usePathname` and `useSearchParams` client-side hooks from `next/navigation` to check when they change and capture a custom `$pageview`  event with PostHog when they do. We use the data from the pathname and search params to accurately create string for the `$current_url` property too. This looks like this:
+Once this is set up, we use the `usePathname` and `useSearchParams` client-side hooks from `next/navigation` to check when the URL changes and then capture a custom `$pageview` event. We use the data from the pathname and search params to accurately create string for the `$current_url` property too.
+
+Because [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) will [deopt](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering, we need to export this as its own `PostHogPageview` component and wrap it in a `<Suspense>` later.
+
+This looks like this:
 
 ```js
 // app/providers.js
 'use client'
-
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { usePathname, useSearchParams } from "next/navigation";
@@ -144,8 +147,7 @@ if (typeof window !== 'undefined') {
   })
 }
 
-export default function PHProvider({ children }) {
-
+export function PostHogPageview() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -163,8 +165,37 @@ export default function PHProvider({ children }) {
       )
     }
   }, [pathname, searchParams])
+}
 
+export function PHProvider({ children }) {
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+Finally, we will set up the `PostHogPageview` component in `layout.js` wrapped in a `<Suspense>` component.
+
+```js
+// app/layout.js
+import './globals.css'
+import { PHProvider, PostHogPageview } from './providers'
+import { Suspense } from 'react'
+
+export const metadata = {
+  title: 'Create Next App',
+  description: 'Generated by create next app',
+}
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
+      <PHProvider>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
 }
 ```
 
@@ -174,7 +205,7 @@ Once done, you should see pageview events for individual pages in your PostHog i
 
 ## Using PostHog with server-rendered components
 
-Next.js 13 with the app directory also added support for server-rendered components, they are the default. `getServerProps` is not used anymore. This means if we want server-side rendered feature flags or get other data from PostHog, we must use the [PostHog Node SDK](/docs/libraries/node).
+Server-rendered components are the default for the app router. `getServerProps` from the pages router is not used anymore. This means if we want server-side rendered feature flags or get other data from PostHog, we must use the [PostHog Node SDK](/docs/libraries/node).
 
 To set this up, create a `posthog.js` file in the app folder that returns a PostHog Node client:
 
@@ -207,7 +238,7 @@ export default function About() {
 
   posthog.capture({
     distinctId: 'ian@posthog.com', // replace with a user's distinct ID
-    event: 'server-side event'
+    event: 'server_side_event_name'
   })
 
   return (
@@ -221,11 +252,11 @@ export default function About() {
 
 ### Setting up feature flags
 
-We can use the `getData()` function [Next.js provides](https://beta.nextjs.org/docs/data-fetching/fetching) along with the PostHog Node client to get data about a user’s feature flags, then use that data to conditionally render a part of the component.
+We can create a server-side function along with the PostHog Node client to get data about a user’s feature flags, then use that data to conditionally render a part of the component.
 
-To do this, create a feature flag in PostHog with the key `main-cta` , roll it out to 100% of users, and then add the code to check it in `getData()`. Because you are awaiting the posthog request now, make sure to add `async` to the main `About()` function as well.
+To do this, create a feature flag in PostHog with the key `main-cta` , roll it out to 100% of users, and then add the code to check it in a function (in the example below, we name it `getData()`). Because you are awaiting the posthog request now, make sure to add `async` to the main `About()` function as well.
 
-> The feature flag does require a distinct user ID, which we hardcoded for now, but you could also set up [authentication as we’ve shown in the Next.js analytics tutoria](/tutorials/nextjs-analytics#adding-authentication)l or cookies (using the [Cookies function](https://beta.nextjs.org/docs/api-reference/cookies)) as we showed in the [Next.js A/B test tutorial](/tutorials/nextjs-ab-tests).
+> The feature flag does require a distinct user ID, which we hardcoded for now, but you could also set up [authentication as we’ve shown in the Next.js analytics tutorial](/tutorials/nextjs-analytics#adding-authentication) or cookies (using the [Cookies function](https://beta.nextjs.org/docs/api-reference/cookies)) as we showed in the [Next.js A/B test tutorial](/tutorials/nextjs-ab-tests).
 
 ```js
 import Link from 'next/link'
@@ -255,10 +286,10 @@ async function getData() {
 }
 ```
 
-With this, you have the basics of PostHog set up on both the client and server side with Next.js 13 and the app directory. 
+With this, you have the basics of PostHog set up on both the client and server side with Next.js and the app router. 
 
 ## Further reading
 
-- [Building and measuring a sign up funnel with Next.js, Supabase, and PostHog](/tutorials/nextjs-supabase-signup-funnel)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)

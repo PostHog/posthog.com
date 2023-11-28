@@ -2,6 +2,7 @@ import fetch from 'node-fetch'
 import { MenuBuilder } from 'redoc'
 import { GatsbyNode } from 'gatsby'
 import parseLinkHeader from 'parse-link-header'
+import qs from 'qs'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -156,6 +157,35 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     await createGitHubStatsNode('posthog', 'posthog')
     await createGitHubStatsNode('posthog', 'posthog.com')
 
+    const createProductDataNode = async () => {
+        const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
+        const headers = {
+            'Content-Type': 'application/json',
+        }
+        const productData = await fetch(url, {
+            method: 'GET',
+            headers: headers,
+        }).then((res) => res.json())
+        const { products } = productData
+
+        const data = {
+            products,
+        }
+
+        const node = {
+            id: createNodeId(`posting-product-data`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `ProductData`,
+                contentDigest: createContentDigest(data),
+            },
+            ...data,
+        }
+        createNode(node)
+    }
+    await createProductDataNode()
+
     const integrations = await fetch(
         'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'
     ).then((res) => res.json())
@@ -195,5 +225,67 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(node)
         }
+    })
+
+    const createRoadmapItems = async (page = 1) => {
+        const roadmapQuery = qs.stringify(
+            {
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+                populate: ['image', 'teams', 'topic', 'cta'],
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+        const roadmapsURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${roadmapQuery}`
+        const { data: roadmaps, meta } = await fetch(roadmapsURL).then((res) => res.json())
+        roadmaps.forEach((roadmap) => {
+            const {
+                id,
+                attributes: { image, projectedCompletion, dateCompleted, category, ...other },
+            } = roadmap
+
+            const date = dateCompleted || projectedCompletion
+
+            const data = {
+                date,
+                media: image,
+                type: category,
+                year: date && new Date(date)?.getFullYear(),
+                ...other,
+            }
+            const roadmapNode = {
+                id: createNodeId(`roadmap-${id}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Roadmap`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(roadmapNode)
+        })
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
+    }
+    await createRoadmapItems()
+
+    const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
+        (res) => res.json()
+    )
+
+    postCategories.data.forEach(({ id, ...other }) => {
+        const node = {
+            id: createNodeId(`post-category-${id}`),
+            internal: {
+                type: `PostCategory`,
+                contentDigest: createContentDigest(other),
+            },
+            ...other,
+        }
+        createNode(node)
     })
 }

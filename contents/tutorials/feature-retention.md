@@ -4,11 +4,10 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-22
-featuredImage: ../images/tutorials/banners/tutorial-10.png
-tags: ["stickiness", "dashboards", "retention"]
+tags: ["stickiness", "dashboards", "retention", 'product analytics']
 ---
 
-Every company wants to build a product that keeps users coming back. Returning and reoccurring users are often your best ones. Many teams focus on improving user retention metrics, like weekly active users or customer retention.
+Every company wants to build a product that keeps users coming back. Returning and reoccurring users are often your best ones. Many teams focus on improving user retention metrics, like weekly active users or customer retention. Retention is also an excellent way to [measure your product-market fit](/blog/measure-product-market-fit).
 
 This tutorial will help you discover the features that drive retention and keep users coming back. Specifically, we’ll build a dashboard to track metrics related to a feature’s retention and compare those metrics across your features.
 
@@ -16,7 +15,7 @@ This tutorial will help you discover the features that drive retention and keep 
 
 The first step in understanding feature retention is knowing what data you have. You need data from your product’s features to know anything about their retention. There are two ways to do this:
 
-1. Add the [snippet](/docs/integrate) or install the [JavaScript library](/docs/integrate/client/js) to enable [autocapture](/docs/integrate/client/js#autocapture). Find autocaptured events related to the feature (views, button presses, inputs). Create an [action](/manual/actions) (a combination of events) using the toolbar or under “Data Management” in the sidebar to represent that feature’s usage.
+1. Add the [snippet](/docs/integrate) or install the [JavaScript library](/docs/integrate/client/js) to enable [autocapture](/docs/data/autocapture). Find autocaptured events related to the feature (views, button presses, inputs). Create an [action](/manual/actions) (a combination of events) using the toolbar or under “Data Management” in the sidebar to represent that feature’s usage.
 
 2. Add event capture calls manually into the code that encompasses the feature usage. Use functions, methods, hooks, or other structures in your code to represent a feature’s usage.
 

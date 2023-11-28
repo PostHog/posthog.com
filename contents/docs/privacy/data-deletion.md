@@ -18,7 +18,9 @@ When deleting individual persons, you can also choose to delete all of their eve
 
 ## How to delete persons and related events using the API
 
-Persons and events can be deleted using our API endpoints.
+> **Please note:** reusing `distinct_id`s after deletion is not supported. If you wish to delete bad data on some `distinct_id`s but keep that person's other `distinct_id` active , you should first split that person with the "Split IDs" button.
+
+Persons and events can be deleted using our API endpoints. 
 
 To query all persons in your project, use the [GET Persons API endpoint](https://posthog.com/docs/api/persons#get-api-projects-project_id-persons).
 

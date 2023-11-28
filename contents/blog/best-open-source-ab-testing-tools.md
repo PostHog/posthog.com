@@ -12,12 +12,11 @@ author:
   - andy-vandervell
 category: General
 tags:
-  - Guides
   - Open source
-  - Comparisons
+  - Guides
 ---
 
-Also known as split testing or multivariate testing, A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
+Also known as split testing or [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
 Product review website G2 lists 120 products in the A/B testing category, but what they offer varies widely. Many products on G2, for example, lean toward marketing uses cases (i.e. testing website landing pages) and aren't useful for product feature testing, or focus on a narrow subset of companies.
 
@@ -31,7 +30,7 @@ In this guide, we're looking at the best free and open-source A/B testing tools.
 
 ![PostHog - best open source ab testing tools](../images/blog/open-source-testing-tools/img1_PostHog.png)
 
-[PostHog](https://posthog.com) is an all-in-one platform that integrates a comprehensive A/B testing suite with numerous other tools, such as product analytics, feature flags, and session recording. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
+[PostHog](https://posthog.com) is an [open-source analytics platform](/blog/best-open-source-analytics-tools) that integrates a comprehensive A/B testing suite with numerous other tools, such as product analytics, feature flags, and session recording. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
 [PostHog’s experimentation suite](/product/experimentation-suite) supports multivariate experiments, and targeting by geography, user cohorts, and user properties – all of which is built atop PostHog's multivariate feature flags. PostHog uses a Bayesian approach to calculate the probability of each variant being the best, and whether the results are statistically significant or not.
 
@@ -52,6 +51,8 @@ PostHog is ideal for product teams, particularly those who don't want to assembl
 ### How much does PostHog cost?
 
 Experimentation is free-to-use on PostHog's Scale plan, which is also [free up to 1 million events](/pricing) and 15,000 recordings per month – you can set billing limits to ensure you don't get surprise bills. While PostHog is open source, its A/B testing features aren't included in the open source release.
+
+> **Further reading:** New to A/B testing? Read [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes).
 
 ## 2. GrowthBook
 

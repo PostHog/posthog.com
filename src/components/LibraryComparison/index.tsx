@@ -66,12 +66,12 @@ export const LibraryComparison = () => {
                 <thead>
                     <tr>
                         <th className="w-48">Library</th>
-                        <th>Event Capture</th>
-                        <th>User Identification</th>
+                        <th>Event capture</th>
+                        <th>User identification</th>
                         <th>Autocapture</th>
                         <th>Session recording</th>
-                        <th>Feature Flags</th>
-                        <th>Group Analytics</th>
+                        <th>Feature flags</th>
+                        <th>Group analytics</th>
                     </tr>
                 </thead>
                 <tbody>

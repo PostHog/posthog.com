@@ -13,6 +13,7 @@ import uploadImage from '../util/uploadImage'
 import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import Spinner from 'components/Spinner'
 
 type QuestionFormValues = {
     subject: string
@@ -36,6 +37,7 @@ type QuestionFormMainProps = {
     initialValues?: Partial<QuestionFormValues> | null
     formType?: 'question' | 'reply'
     showTopicSelector?: boolean
+    disclaimer?: boolean
 }
 
 const Select = ({
@@ -112,6 +114,7 @@ function QuestionFormMain({
     loading,
     initialValues,
     showTopicSelector,
+    disclaimer = true,
 }: QuestionFormMainProps) {
     const { user, logout } = useUser()
 
@@ -141,18 +144,18 @@ function QuestionFormMain({
                 }}
                 onSubmit={(values) => onSubmit(values, user)}
             >
-                {({ setFieldValue, isValid, values }) => {
+                {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
                         <Form className="mb-0">
                             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
 
-                            <div className="bg-white border border-black/30 dark:bg-gray-accent-dark-hover dark:border-white/30 rounded-md overflow-hidden mb-4">
+                            <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
                                 {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
                                 {subject && (
                                     <>
                                         <Field
                                             autoFocus
-                                            className="font-semibold text-black dark:text-primary-dark dark:bg-gray-accent-dark-hover border-b border-black/30 dark:border-primary-dark/30 text-base w-full py-3 px-4 outline-none rounded-none"
+                                            className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-b border-light dark:border-dark text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
@@ -165,6 +168,7 @@ function QuestionFormMain({
                                 )}
                                 <div className="leading-[0]">
                                     <RichText
+                                        onSubmit={submitForm}
                                         autoFocus={!subject}
                                         setFieldValue={setFieldValue}
                                         initialValue={initialValues?.body}
@@ -173,23 +177,23 @@ function QuestionFormMain({
                                 </div>
                             </div>
                             <span className="ml-[50px]">
-                                <Button
-                                    disabled={loading || !isValid}
-                                    type="submit"
-                                    className={`w-[calc(100%_-_50px)] font-bold relative ${
-                                        loading || !isValid
-                                            ? ' opacity-50 cursor-not-allowed'
-                                            : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
-                                    } active:top-[0px] active:scale-[1]`}
-                                >
-                                    {user ? 'Post' : 'Login & post'}
+                                <Button disabled={loading || !isValid} type="submit" className="w-[calc(100%_-_50px)]">
+                                    {loading ? (
+                                        <Spinner className="!text-white mx-auto" />
+                                    ) : user ? (
+                                        'Post'
+                                    ) : (
+                                        'Login & post'
+                                    )}
                                 </Button>
                             </span>
 
-                            <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
-                                If you need to share personal info relating to a bug or issue with your account, we
-                                suggest filing a support ticket in the app.
-                            </p>
+                            {disclaimer && (
+                                <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
+                                    If you need to share personal info relating to a bug or issue with your account, we
+                                    suggest filing a support ticket in the app.
+                                </p>
+                            )}
                         </Form>
                     )
                 }}
@@ -208,6 +212,10 @@ type QuestionFormProps = {
     topicID?: number
     archived?: boolean
     showTopicSelector?: boolean
+    parentName?: string
+    buttonText?: React.ReactNode | string
+    subject?: boolean
+    disclaimer?: boolean
 }
 
 export const QuestionForm = ({
@@ -219,6 +227,9 @@ export const QuestionForm = ({
     onSubmit,
     archived,
     showTopicSelector,
+    parentName,
+    subject,
+    disclaimer,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -226,17 +237,16 @@ export const QuestionForm = ({
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const { breadcrumb } = usePost()
-    const parentName = breadcrumb && breadcrumb?.length > 0 && breadcrumb[1]?.name
 
     const buttonText =
-        formType === 'question' ? (
+        other.buttonText ??
+        (formType === 'question' ? (
             <span className="font-bold">Ask a question</span>
         ) : (
-            <span className="squeak-reply-label ">
+            <span className="squeak-reply-label">
                 <strong className="underline">Reply</strong> to question
             </span>
-        )
+        ))
 
     const createQuestion = async ({ subject, body, topic }: QuestionFormValues) => {
         const token = await getJwt()
@@ -354,13 +364,18 @@ export const QuestionForm = ({
         }
     }, [archived])
 
+    useEffect(() => {
+        setView(initialView || null)
+    }, [slug])
+
     return (
         <div>
             {view ? (
                 {
                     'question-form': (
                         <QuestionFormMain
-                            subject={formType === 'question'}
+                            disclaimer={disclaimer}
+                            subject={subject ?? formType === 'question'}
                             initialValues={formValues}
                             loading={loading}
                             onSubmit={handleMessageSubmit}
@@ -383,13 +398,8 @@ export const QuestionForm = ({
                     <Button
                         disabled={archived}
                         onClick={() => setView('question-form')}
-                        className={
-                            formType !== 'reply'
-                                ? 'text-red border-red'
-                                : `w-full text-left border-black/30 dark:border-white/30 ${
-                                      archived ? '' : 'hover:border-black/50 dark:hover:border-white/50'
-                                  }`
-                        }
+                        buttonType={formType === 'reply' ? 'outline' : 'primary'}
+                        size="md"
                     >
                         {buttonText}
                     </Button>
@@ -402,7 +412,7 @@ export const QuestionForm = ({
                                     setView('auth')
                                 }
                             }}
-                            className="!ml-auto text-red opacity-80 hover:opacity-100 font-bold"
+                            className="!ml-auto text-red dark:text-yellow opacity-80 hover:opacity-100 font-bold"
                         >
                             {user ? 'Logout' : 'Login'}
                         </button>

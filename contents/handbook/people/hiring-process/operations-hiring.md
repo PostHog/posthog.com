@@ -31,11 +31,11 @@ This is our usual first round interview with a member of the People & Ops team.
 
 #### Technical Interview 
 
-The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](https://posthog.com/handbook/small-teams/people) as well as [Charles](https://posthog.com/handbook/people/team#charles-cook-business-operations). For this round, you can expect questions about your background, together with scenario-based questions. 
+The [technical interview](/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](/handbook/small-teams/people) as well as [Charles](/community/profiles/254). For this round, you can expect questions about your background, together with scenario-based questions. 
 
 #### Operations SuperDay
 
-The final stage of our interview process is what we call a PostHog [SuperDay](https://posthog.com/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is what we call a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
 
 We will share the task with you at the start of the day. The task is representative of the work someone in this role at PostHog is doing, and it is always the same for each candidate, so we can make clear comparisons. It will typically involve doing actual PostHog work, e.g. sourcing candidates or planning an offsite. 
 

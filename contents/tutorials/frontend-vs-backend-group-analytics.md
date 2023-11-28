@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-09
-featuredImage: ../images/tutorials/banners/tutorial-11.png
-tags: ["configuration","group analytics"]
+tags: ["configuration","group analytics", 'product analytics']
 ---
 
 Group analytics is a powerful feature for understanding how groups such as organizations, customers, and companies use your product as a unit. It provides a new level of analysis between individual users and all your users.
@@ -152,5 +151,3 @@ The benefit of the backend is that you donâ€™t have to call `reset()` when youâ€
 ## Next steps in group analytics
 
 This should give you a better understanding of how you need to implement frontend vs backend group analytics. From here, you can utilize your group analytics to [view groups and their properties](/manual/group-analytics#viewing-groups-and-their-properties), [analyze group insights](/manual/group-analytics#analyzing-group-insights), and [setup group feature flags](/manual/group-analytics#integrating-groups-with-feature-flags). 
-
-<NewsletterTutorial compact/>

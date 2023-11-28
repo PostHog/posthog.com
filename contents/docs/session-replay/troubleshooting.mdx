@@ -4,11 +4,23 @@ title: Troubleshooting and FAQs
 
 Having trouble with recordings? Below are some tips for getting past some common issues
 
+The most common solution is...
+
+#### Update posthog-js
+
+We're always making improvements to the recordings feature, so you'll want to make sure that you're running the latest version of `posthog-js` on your website.
+
+To check the version that you're using, you can run the following in your browser console:
+
+```js
+window.posthog.LIB_VERSION
+```
+
 ## Recordings are not being captured
 
 There are a few common reasons that you may not see recordings appear in your project.
 
-#### Authorized domains for recordings
+### 1. Authorized domains for recordings
 
 In your project settings page, there's a section for 'Authorized URLs'. This is the list of domains where posthog will capture recordings. You should make sure it's not too restrictive.
 
@@ -16,7 +28,7 @@ For example, you may have `https://www.example.com` in the list. This will stop 
 
 If no domains are set here, PostHog will capture recordings on all domains.
 
-#### `posthog-js` configurations
+### 2. `posthog-js` configurations
 
 If you had previously disabled session recordings, you may have set the `disable_session_recording` option to `true` in posthog-js.
 
@@ -24,7 +36,7 @@ To re-enable session recordings you want to either remove the `disable_session_r
 
 You can read more about [posthog-js configurations here](/docs/integrate/client/js#config).
 
-#### Content security policy
+### 3. Content security policy
 
 When recordings are enabled, postHog-js will fetch a `recorder.js` script from the PostHog server. (This is not included in the default posthog-js to minimize the default bundle size)
 
@@ -32,21 +44,17 @@ Depending on your content security policy, this script may be blocked. If you ha
 
 If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
 
-#### Ad/tracking blockers
+### 4. Ad/tracking blockers
 
 Some ad/tracking blockers will block PostHog from fetching `posthog-js`. If you're testing your app locally, you may need to disable any ad/tracking blockers that you're running in your browser.
 
-## Replay of recording looks incorrect / buggy
+## Replay of recording looks incorrect or buggy
 
-If you're having issues with recordings not looking correct, there are a couple things to do.
+If you're having issues with recordings not looking correct, there are a few things you can:
 
-#### Enable the V2 Recorder
+### Ensure your website permits PostHog CORS
 
-From [PostHog recordings](https://app.posthog.com/recordings) open the `Configuration` and enable the "V2" recorder. We are slowly rolling this out to everyone as it fixes a lot of issues regarding things like ShadowDOM elements and more. For some web frameworks the results are immediately much better.
-
-#### Ensure your website permits PostHog CORS
-
-Most assets rendered on your website or app are captured **inline** meaning we keep a copy of the icon, css etc. to use when replaying. For some assets however this is either too difficult or too costly to do so we instead load them directly from the original webserver, just like your website does. This can lead to CORS issues where the webserver does not permit **app.posthog.com** (or **eu.posthog.com**) to load the required asset. Unfortunately we cannot easily detect when this happens but the browsers's developer tools `(Option + ⌘ + J, or Shift + CTRL + J)` will log when these errors occur saying something like:
+Most assets rendered on your website or app are captured **inline** – meaning we keep a copy of the icon, css etc. to use when replaying. For some assets however, this is either too difficult or too costly to do, so instead we load them directly from the original webserver (just like your website does). This can lead to CORS issues where the webserver does not permit **app.posthog.com** (or **eu.posthog.com**) to load the required asset. Unfortunately we cannot easily detect when this happens, but the browsers's developer tools `(Option + ⌘ + J, or Shift + CTRL + J)` will log when these errors occur saying something like:
 
 ```
 Access to font at 'https://yourwebsite.com/fonts/MyriadPro-Bold.woff2' from origin 'https://app.posthog.com has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
@@ -55,30 +63,17 @@ Access to font at 'https://yourwebsite.com/fonts/MyriadPro-Bold.woff2' from orig
 
 If you see errors like this, please add `app.posthog.com` to the list of permitted domains in your webservers CORS configuration.
 
-#### Update posthog-js
+## Filtering can't find my custom events
 
-We're always making improvements to the recordings feature, so you'll want to make sure that you're running the latest version of posthog-js on your website.
+The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.
 
-To check the version that you're using, you can run the following in your console:
+Session replay relies on the `$session_id` property added to events by the web SDK to link events to sessions.
 
-```js
-window.posthog.LIB_VERSION
-```
+To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events. 
 
-#### My browser freezes / crashes when recordings are enabled
+## Browser freezes or crashes when recordings are enabled
 
 Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to cookies, which can cause an infinite loop. If you are using a tool like this and experience the webpage becoming unresponsive or slow then try [configuring posthog](/docs/integrate/client/js#persistence) to use `persistence: "localStorage+cookie"`. This will use localStorage for the majority of storage needs, bypassing the infinite loop issue sometimes caused by cookie management tools.
-
-#### Report your specific issue
-
-To report a specific problem, you can open a [GitHub issue](https://github.com/PostHog/posthog/issues/new/choose). To help us figure it out as quickly as possible, please include the following information:
-
--   The URL of the page that you're trying to record
--   The version of posthog that you're using
--   The version of posthog-js that you're using
--   Details about the specific issue with your recording (e.g. how it looks and how it should look)
--   If you're on posthog-cloud, a link to the specific recording
--   Any unique details about your website (e.g. the frameworks that you're using etc.)
 
 ## Recorder Limitations
 
@@ -88,6 +83,15 @@ Due to the complexity of browser rendering and replay, some web resources are un
 - **WebGL**
 - **Object elements** - Most object elements cannot be played back. Non-HTML native plugins such as Flash or Silverlight cannot be recorded
 - **Heavy animations** - Some heavier animations such as SVG or Lottie animations may be _throttled_ or ignored entirely due to the performance overhead in recording and replaying
-* **Iframes** 
-  - iframes from the _same origin_ **can** be recorded and played back as long as posthog-js is installed and recording on both the parent and the child iframe
-  - iframes from an origin _not under your control_ cannot be recorded as the parent is unable to control the child.
+- **Iframes** - iframes from the origins under your control **can** be recorded and played back. See [iframe recording](/docs/session-replay/iframes) for more info.
+
+## Report your specific issue
+
+To report a specific problem, you can open a [GitHub issue](https://github.com/PostHog/posthog/issues/new/choose). To help us figure it out as quickly as possible, please include the following information:
+
+-   The URL of the page that you're trying to record
+-   The version of posthog that you're using
+-   The version of posthog-js that you're using
+-   Details about the specific issue with your recording (e.g. how it looks and how it should look)
+-   If you're on posthog-cloud, a link to the specific recording
+-   Any unique details about your website (e.g. the frameworks that you're using etc.)

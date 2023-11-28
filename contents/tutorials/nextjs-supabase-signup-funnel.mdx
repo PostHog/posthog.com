@@ -2,12 +2,11 @@
 title: Building and measuring a sign up funnel with Next.js, Supabase, and PostHog
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/nextjs-supabase.png
 author: ['leggetter']
 tags:
     - funnels
     - user paths
-    - session recording
+    - session replay
     - events
 date: 2021-10-21
 ---
@@ -24,7 +23,7 @@ The application in this tutorial is built entirely upon open-source technologies
 
 -   [Next.js](https://nextjs.org/) is feature rich, Node.js open-source React framework for building modern web apps.
 -   [Supabase](https://supabase.io/) is an open-source alternative to Firebase offering functionality such as a Postgres database, authentication, realtime subscriptions and storage.
--   [PostHog](/) is an open-source product analytics platform with features including feature flags, session recording, analysis of trends, funnels, user paths, and more.
+-   [PostHog](/) is an open-source product analytics platform with features including feature flags, session replay, analysis of trends, funnels, user paths, and more.
 
 To follow this tutorial along, you need to have:
 
@@ -342,7 +341,7 @@ const Index = () => {
 
   if(user) {
     posthog.identify(user.email, user)
-    posthog.capture('loggedIn')
+    posthog.capture('logged_in')
   }
 
 ```
@@ -390,7 +389,7 @@ A funnel visualization won't appear at this point because a funnel must have mor
 
 ### Step 2 - User clicks SignUp button
 
-To add the second step, click either of the **Add funnel step** buttons. Change the event to **Autocapture** since the event we're looking to make use of was one [autocaptured](/docs/integrate/client/js#autocapture) by the PostHog JS SDK. Then, set a filter. When you click the filter icon this time, select the **Elements** tab and select the **Text** property.
+To add the second step, click either of the **Add funnel step** buttons. Change the event to **Autocapture** since the event we're looking to make use of was one [autocaptured](/docs/data/autocapture) by the PostHog JS SDK. Then, set a filter. When you click the filter icon this time, select the **Elements** tab and select the **Text** property.
 
 ![Step 2 - user clicks sign up button filter on element text](../images/tutorials/supabase-nextjs-signup-funnel/step-2-signup-button-clicked.png)
 
@@ -458,5 +457,3 @@ There are a couple of options here:
 
 1. Supabase uses a tool called [GoTrue](https://github.com/supabase/gotrue) which does support webhook configuration for email events such as `validate`, `signup` or `login`. Why not get involved in the Supabase community and see if these events can be exposed via Supabase?
 2. Turn on **Enable Custom SMTP** within Supabase and use a third-party email provider that exposes webhooks for email events?
-
-<NewsletterTutorial compact/>

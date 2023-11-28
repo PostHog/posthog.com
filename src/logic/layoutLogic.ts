@@ -1,6 +1,8 @@
 import { kea, actions, reducers } from 'kea'
 
-export const layoutLogic = kea([
+import type { layoutLogicType } from './layoutLogicType'
+
+export const layoutLogic = kea<layoutLogicType>([
     actions({
         setAnchorOpen: (open: boolean) => ({ open }),
         setAnchorHide: (hide: boolean) => ({ hide }),

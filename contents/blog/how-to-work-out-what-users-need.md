@@ -11,7 +11,6 @@ featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 category: Product growth
 tags:
-  - Product analytics
   - Guides
 ---
 

@@ -13,7 +13,7 @@ export default function Tutorials({ title, subtitle, cta }) {
         <section className={section()}>
             <h2 className={heading('md')}>{title}</h2>
             <h3 className={heading('sm', 'gray')}>{subtitle}</h3>
-            <ul className="list-none p-0 m-0 grid lg:grid-cols-3 mt-9 lg:divide-x divide-y lg:divide-y-0 divide-dashed divide-gray-accent-light lg:border-r lg:border-l border-gray-accent-light border-dashed">
+            <ul className="list-none p-0 m-0 grid lg:grid-cols-3 mt-9 gap-4">
                 {nodes.map((tutorial, index) => {
                     const {
                         slug,
@@ -21,11 +21,14 @@ export default function Tutorials({ title, subtitle, cta }) {
                     } = tutorial
                     const image = getImage(featuredImage)
                     return (
-                        <li key={index} className="py-10 lg:px-10 lg:py-0">
-                            <Link to={slug} className="relative block">
-                                <GatsbyImage className="bg-[#E5E7E0] dark:bg-[#2C2C2C]" image={image} alt={title} />
+                        <li key={index} className="">
+                            <Link
+                                to={slug}
+                                className="relative rounded block bg-light dark:bg-dark border border-light dark:border-dark"
+                            >
+                                <GatsbyImage className="bg-accent dark:bg-accent-dark" image={image} alt={title} />
                                 <div className="rounded-md absolute p-4 top-0 left-0 w-full h-full">
-                                    <h4 className="text-2xl m-0 leading-8">{title}</h4>
+                                    <h4 className="text-xl m-0 leading-6">{title}</h4>
                                 </div>
                             </Link>
                         </li>

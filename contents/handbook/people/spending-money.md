@@ -12,6 +12,8 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
+> Need a one off budget increase? You can do this directly within Brex - just request the amount and duration for the relevant budget in the app, and the People & Ops team will automatically be notified for approval. 
+
 You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. 
 
 For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request on this page_, so we can document our decision making into our policy, rather than making everything case by case. If it's likely to just be a one-off, you can post in #team-people-and-ops in Slack instead. 
@@ -26,15 +28,18 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
-You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #team-people-and-ops channel in Slack afterwards and tag Charles and Grace to get reimbursed manually. 
+You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #team-people-and-ops channel in Slack afterwards and tag Charles to get reimbursed manually. 
 
 ### Brex
 
-- Buy something on your Brex card.
-- If it's a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it's a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
-- You only need to submit receipts for purchases of _$75 or more_. You don't need to keep receipts below this amount. 
+We now use Brex Empower. This allows the People and Ops team to effectively track overall spending habits of the company without waiting for end of month reports, with very little changes to how you use your Brex account.
 
-By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enabled forwarding from your personal email address if needed.
+- Before spending money on your Brex card, you’ll need to log into your account either through the app or desktop, and assign a ‘spending budget’ to your card. The budget you pick from should relate to the transaction you are about to complete. For example, if you are buying a book for BookHog, this should come out of your ‘Books stipend’ budget. When you then complete your purchase, the money will be taken from that specific budget and you will easily be able to see how much of your budget you have remaining.
+- If you forget to assign a budget before completing the purchase, you can retroactively go into your Brex account and assign the transaction to the related budget. 
+- For the vast majority of transactions, you now will not need to upload a receipt as Brex Empower does this automatically. The exception to this is if they have requirements to provide the IRS with itemized receipts. If this is the case and it’s a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it’s a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
+- You only need to submit receipts for purchases of $75 or more. You don’t need to keep receipts below this amount.
+
+By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
 
 ### Revolut
 
@@ -44,8 +49,8 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 
 ### Your personal card
 
-- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles or Grace to purchase it for you on theirs in the first instance. 
-- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Charles and Grace to get reimbursed manually.  
+- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles to purchase it for you on theirs in the first instance. 
+- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Charles to get reimbursed manually.  
 
 Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! Again, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
 
@@ -53,7 +58,7 @@ Accidentally bought something on the company card when it was a personal expense
 
 If your purchase fits within the policy below, there is no need to ask. We _cannot_ pay you back for anything without a receipt if you use your personal card.
 
-If you don't have enough space on your company card, just ask Charles or Grace to increase your limit.
+If you don't have enough space on your company card, just ask Charles to increase your limit.
 
 ## Equipment
 
@@ -63,16 +68,16 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 ### Laptop
 
-We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
+We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many. Please make sure you order a laptop with a keyboard that is US/UK/International English - this makes it much easier for us to reuse your laptop if you upgrade to another model or leave PostHog. 
 
-* For engineering roles, we recommend a Macbook Pro 14-inch M1, with the 10-core CPU, 14-core GPU upgrade and 32GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
-* For all other roles, we currently recommend a Macbook Air with an Apple Silicon (M1) processor and 16GB of RAM.
+* For engineering roles, we recommend a Macbook Pro 14-inch M2 Pro, with the 10-core CPU, 16-core GPU upgrade and 32GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
+* For all other roles, we currently recommend a Macbook Air with an Apple Silicon (M2) processor and 16GB of RAM.
 
-These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask.
+These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Charles.
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Grace or Charles. (Don't do this if you're in the UK though - use your Revolut card.)
+When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Charles. (Don't do this if you're in the UK though - use your Revolut card.)
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
@@ -147,33 +152,52 @@ We care about you being healthy, happy and productive.
 
 While PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
 
-You can spend up to $250/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
+You can spend up to $300/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
 
-We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Grace or Tim will add you. This membership costs the full budget per month, so please keep that in mind when opting in.
+We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Kendal will add you. This membership costs the full budget per month, so please keep that in mind when opting in.
 
 ## Travel
 
-If you need to travel on PostHog's behalf (e.g. in person onboarding, meeting customers, working on a specific project), again please spend money in the best interests of the company. We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
+If you need to travel on PostHog’s behalf (e.g. in person onboarding, meeting customers, working on a specific project), again please spend money in the best interests of the company. 
 
-- We all travel economy by default - we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you'd like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
-- Be sensible when considering the value of your time, and avoid _over-optimizing_ for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn't make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport. 
-- Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it - these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here. 
+We now use Brex Travel to help with planning and booking travel. If you are booking an individual trip, you can use the ‘Travel’ function to search and book flights directly through Brex.
+- First, click the trips icon and go to ‘Manage Profile’. Here you can enter all of your travel details, including loyalty program and known traveler numbers, so you won't have to enter them manually with an airline, hotel, or car hire service in the future.
+- Go back to the trips section and go into ‘Book a new trip’
+  - Here you can book flights (indexed from Google Flights), hotels, and rental cars
+  - You can also book for a guest, if someone is coming with you pre- or post-offsite
+- Name your trip and assign it to a budget. For example:
+  - To your meeting up stipend
+  - To your offsite budget
+  - To your in-person onboarding budget
+  - To your generic budget for other travel
+- Search for flights, accommodation, rental cars, or train tickets
+  - Your receipts and memos are automatically added to the expense, and you will receive emails with all of the confirmations (as well as be able to access them via the Brex app)
+  - You can also manage your trips if you need to change something or cancel
 
-If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Charles. 
+We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
+- We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
+- Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
+- Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
 
-### Budget for socializing
+If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Charles.
 
-As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of offsites.
+### Budget for working together/socializing
 
-We strongly encourage team members to try and meet up with each other in person when practical, and provide everyone with an $1500 quarterly budget to cover the cost of travel, accommodation, and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company (ie. not spending $500/night for 3 nights in a fancy hotel!).
+As a global, all-remote team, we don't get many regular opportunities to work with each other or socialize outside of offsites.
 
-We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in the #whereintheworld channel in Slack and see who is available to meet up!
+**Working together**
+
+We strongly encourage team members to try and work together in person when practical, and provide everyone with an $1500 quarterly budget to cover the cost of travel, accommodation, and meals. This isn't limited to just working with people in your team, but we do expect that you have a reasonable reason you need to work together. Beyond staying within the spending limit, please just spend the money in the best interests of the company (ie. not spending $500/night for 3 nights in a fancy hotel!).
 
 This budget is _in addition_ to things like in-person onboarding and team offsites. Any unused budget does not roll over into the next quarter. 
 
+**Socializing**
+
+If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity.  This will also come out of your $1500 quarterly budget. Again, just spend the money in the best interests of the company.
+
 ### Carbon offsetting
 
-We offset all carbon emissions generated by team flights using [Wren](https://www.wren.co/), so if you book a flight to meet up with someone, then please let Grace know the departure and destination airports, and she'll log it accordingly. 
+We offset all carbon emissions generated by team flights using [Wren](https://www.wren.co/), so if you book a flight to meet up with someone, then please let Kendal know the departure and destination airports, and she'll log it accordingly. 
 
 ## Customer meetings
 

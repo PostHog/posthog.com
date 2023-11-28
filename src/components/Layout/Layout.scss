@@ -1,22 +1,5 @@
 @import '../../vars';
 
-.posthog-scrollbars::-webkit-scrollbar {
-    width: 10px !important;
-    height: 10px !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-thumb {
-    background: #bfbfbc !important;
-    border-radius: 30px !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-thumb:hover {
-    background: #878387 !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-track {
-    background: #fff !important;
-    border-radius: 0px !important;
-    box-shadow: inset 0px 0px 0px 0px #f0f0f0 !important;
-}
-
 body {
     font-variant-numeric: proportional-nums !important;
     font-feature-settings: unset !important;
@@ -208,15 +191,7 @@ body.light {
     background-color: #eeefe9;
 }
 body.dark {
-    background-color: #151515;
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: white;
-    }
+    background-color: #1d1f27;
 }
 
 img {
@@ -1249,36 +1224,6 @@ a.middle {
         font-size: 16px !important;
     }
 }
-/* TEAM PAGE STYLES */
-
-.team-body {
-    background-color: none;
-}
-
-.team-title {
-    width: 100%;
-    float: left;
-    padding-top: 25px;
-}
-.team-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap-reverse;
-    width: 100%;
-    margin-bottom: 25px;
-    white-space: normal;
-}
-
-body.dark {
-    .team-right-image {
-        color: white;
-    }
-    .team-row {
-        svg {
-            fill: white;
-        }
-    }
-}
 
 /*the globe wraps below the intro text
 for all other rows the portrait image wraps above bio*/
@@ -1354,79 +1299,6 @@ for all other rows the portrait image wraps above bio*/
     padding-bottom: 4px;
     border-bottom: solid 2px $brand_blue;
     color: $brand_blue;
-}
-
-/*split to one column on smaller screens*/
-@media screen and (max-width: 560px) {
-    .team-left-text,
-    .team-right-text {
-        width: 100%;
-    }
-    .team-center-space {
-        display: none;
-    }
-}
-
-/*maintain columns & spacing on larger screens*/
-@media screen and (min-width: 560px) {
-    .team-left-text,
-    .team-right-text {
-        width: 50%;
-    }
-    .team-left-image,
-    .team-right-image {
-        width: 40%;
-    }
-    .team-center-space {
-        width: 5%;
-    }
-}
-
-.team-left-text,
-.team-right-text {
-    min-width: 280px;
-}
-
-.team-left-image,
-.team-right-image {
-    min-width: 200px;
-    vertical-align: top;
-    padding-top: 50px;
-}
-
-/* Team page: scroll bar styles */
-
-.scroll-area {
-    height: 400px;
-    width: 45%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.team-left-text-scroll {
-    float: left;
-    padding-right: 25px;
-}
-
-/* width */
-div:not(.default-scrollbar)::-webkit-scrollbar {
-    width: 10px;
-    margin-left: 20px;
-}
-
-/* track */
-div:not(.default-scrollbar)::-webkit-scrollbar-track {
-    background: #eceff1;
-}
-
-/* handle */
-div:not(.default-scrollbar)::-webkit-scrollbar-thumb {
-    background: #cfd8dc;
-}
-
-/* handle on hover */
-div:not(.default-scrollbar)::-webkit-scrollbar-thumb:hover {
-    background: #b0bec5;
 }
 
 @media screen and (max-width: 834px) {

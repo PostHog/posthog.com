@@ -7,37 +7,10 @@ hideAnchor: true
 
 Once your PostHog instance is up and running, the next step is to get PostHog installed.
 
-> **Tip**: Even if you have multiple customer-facing products e.g. a marketing website + iOS app + web app, it works best to have them share the same project to track the user across their journey. [Learn more](/manual/organizations-and-projects)
-
-import Tab from "components/Tab"
-
-import SnippetInstructions from "../integrate/\_snippets/snippet.mdx"
-import SDKs from "../integrate/\_snippets/sdks.mdx"
-import Frameworks from "../integrate/\_snippets/frameworks.mdx"
-import API from "../integrate/\_snippets/api.mdx"
+> **Tip**: Even if you have multiple customer-facing products e.g. a marketing website + iOS app + web app, it works best to have them share the same project to track the user across their journey. See: [Organizations & projects docs](/manual/organizations-and-projects)
 
 <h3 class="mb-0 mt-6">Installation</h3>
 
-<!-- prettier-ignore -->
-<Tab.Group tabs={['snippet', 'sdks', 'guides', 'api']}>
-    <Tab.List>
-        <Tab>JS snippet</Tab>
-        <Tab count="13">Libraries</Tab>
-        <Tab count="11">Framework guides</Tab>
-        <Tab>API</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <SnippetInstructions />
-        </Tab.Panel>
-        <Tab.Panel>
-            <SDKs />
-        </Tab.Panel>
-        <Tab.Panel>
-            <Frameworks />
-        </Tab.Panel>
-        <Tab.Panel>
-            <API />
-        </Tab.Panel>
-    </Tab.Panels>
-</Tab.Group>
+import Install from "./\_snippets/install.mdx"
+
+<Install />

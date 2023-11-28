@@ -1,0 +1,41 @@
+---
+title: Session replay installation
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+Session replay enables you to record users navigating through your website and play back the individual sessions to watch how real users use your product.
+
+<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
+
+<Caption>
+Above is a recording of posthog.com… on posthog.com - very meta.
+</Caption>
+
+## Step one: Install our JavaScript web library
+
+If you already have our JavaScript library or snippet installed, you can skip this step.
+
+import JSInstallWeb from "../integrate/\_snippets/install-web.mdx"
+
+<JSInstallWeb />
+
+## Step two: Enable session recordings in your project settings
+
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+![Enable session recordings in your PostHog](../../images/docs/session-replay/enable-session-replay-in-project-settings.png)
+
+Once enabled, the library will start recording sessions by default.
+
+They can be toggled off in the by setting the `disable_session_recording: true` flag in the [config](/docs/integrate/client/js/#config). 
+
+Users who [opt out](/docs/libraries/js#opt-users-out) of event capturing will not have their sessions recorded.
+
+> **Note on using Segment's SDK**: Session Replay does not work if you send data using [Segment's SDK](/docs/libraries/segment) as this data is not collected. If you use Segment, you may want to add the PostHog library as well – (make sure to only send regular event data from one source).
+
+## How to ignore sensitive elements
+
+You may want to hide sensitive text or elements in your replays. See our [privacy controls](/docs/session-replay/privacy) docs for how to do this.

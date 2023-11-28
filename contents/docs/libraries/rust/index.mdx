@@ -8,46 +8,26 @@ features:
     autoCapture: false
     sessionRecording: false
     featureFlags: false
-    groupAnalytics: false
+    groupAnalytics: true
 ---
-
-> **Warning:** This crate is still under development and is not recommended for production use yet.
 
 ## Installation
 
-Install the `posthog-rs` crate by adding it to your `Cargo.toml`.
+import RustInstall from '../../integrate/_snippets/install-rust.mdx'
 
-```toml file=Cargo.toml
-[dependencies]
-posthog-rs = "0.2.0"
-```
+<RustInstall />
 
-## Usage
+## Capturing events
 
-To setup the client, all you need to do is pass your PostHog project key.
+import RustSendEvents from '../../integrate/send-events/_snippets/send-events-rust.mdx'
 
-```rust
-let client = posthog_rs::client(env!("POSTHOG_API_KEY"));
-```
+<RustSendEvents />
 
-> **Note:** Currently, there is no way to customize the host that events are sent to, and we default to `app.posthog.com`
+## Feature flags
 
-### Capturing events
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-Currently, the only functionality this library supports is sending events, which can be done using the `capture` and `cature_batch` methods.
+<FeatureFlagsLibsIntro />
 
-```rust
-let mut event = Event::new("<event_name>", "<distinct_id>");
+Feature flags are not supported yet in our community-maintained Rust SDK. However, you can integrate them into your project by using the [PostHog API](/docs/feature-flags/adding-feature-flag-code?tab=api).
 
-event.insert_prop("key1", "value1").unwrap();
-event.insert_prop("key2", vec!["a", "b"]).unwrap();
-
-client.capture(event).unwrap();
-```
-
-```rust
-let event1 = posthog_rs::Event::new("event 1", "1234");
-let event2 = posthog_rs::Event::new("event 2", "1234");
-
-client.capture_batch(vec![event1, event2]).unwrap();
-```

@@ -7,18 +7,18 @@ import blurb from './images/blurb.svg'
 
 export default function FooterCTA() {
     return (
-        <div className="flex flex-col lg:flex-row justify-between py-12 px-6 sm:px-12 bg-primary dark:bg-gray-accent-dark items-center dark rounded-[10px] mt-12">
-            <div>
-                <h2 className="text-white text-5xl">Try it free.</h2>
-                <p className="text-white w-">It takes less than 5 minutes.</p>
-                <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
-                    <SignupCTA className="w-full sm:w-48" />
-                    <CallToAction to="/book-a-demo" type="secondary" className="w-full sm:w-48 ">
+        <div className="flex pt-16 pb-12 px-6 sm:px-12 md:pr-24 lg:pr-6 xl:pr-24 text-primary dark:text-primary-dark bg-accent dark:bg-accent-dark border border-light dark:border-dark items-center dark rounded-[10px] mt-6 md:mt-12 relative">
+            <div className="w-full text-center sm:text-left">
+                <h2 className="text-5xl">Try it free.</h2>
+                <p className="w-">It takes less than 5 minutes.</p>
+                <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 items-center">
+                    <SignupCTA className="w-full sm:w-48" size="md" />
+                    <CallToAction to="/book-a-demo" type="secondary" size="md">
                         Schedule a demo
                     </CallToAction>
                 </div>
             </div>
-            <div className="flex-shrink-0 self-end relative ml-12 -mb-12 -mr-10 mt-16 lg:mt-0">
+            <div className="absolute hidden sm:block lg:hidden xl:block bottom-0 -right-12 mt-16 lg:mt-0">
                 <AnimateIntoView className="absolute -left-20">
                     <img src={blurb} />
                 </AnimateIntoView>

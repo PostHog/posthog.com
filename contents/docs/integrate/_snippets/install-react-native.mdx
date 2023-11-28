@@ -1,0 +1,118 @@
+In your React Native or Expo project add the `posthog-react-native` package to your project as well as the required peer dependencies.
+
+#### Expo apps
+
+```sh
+expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
+```
+
+#### React Native apps
+
+```sh
+yarn add posthog-react-native @react-native-async-storage/async-storage react-native-device-info
+# or
+npm i -s posthog-react-native @react-native-async-storage/async-storage react-native-device-info
+```
+
+### Configuration
+
+#### With the PosthogProvider
+
+The recommended way to set up PostHog for React Native is to use the `PostHogProvider` which utilizes the Context API to pass the PostHog client around, enable autocapture, and ensure that the queue is flushed at the right time:
+
+```react-native
+// App.(js|ts)
+import { usePostHog, PostHogProvider } from 'posthog-react-native'
+...
+
+export function MyApp() {
+    return (
+        <PostHogProvider apiKey="<ph_project_api_key>" options={{
+            host: '<ph_instance_address>', // TIP: This is https://app.posthog.com by default
+        }}>
+            <MyComponent />
+        </PostHogProvider>
+    )
+}
+
+// Now you can simply access PostHog elsewhere in the app like so:
+
+const MyComponent = () => {
+    const posthog = usePostHog()
+
+    useEffect(() => {
+        posthog.capture("mycomponent_loaded", { foo: "bar" })
+    }, [])
+}
+```
+
+### Configuration
+
+#### Without the PosthogProvider
+
+Due to the async nature of React Native, PostHog needs to be initialized asynchronously for the persisted state to load properly. The `PosthogProvider` takes care of this under-the-hood but you can alternatively create the instance yourself like so:
+
+```react-native
+// posthog.ts
+import PostHog from 'posthog-react-native'
+
+export let posthog: PostHog | undefined = undefined
+
+export const posthogAsync: Promise<PostHog> = PostHog.initAsync('<ph_project_api_key>', {
+  host: '<ph_instance_address>' // TIP: This is https://app.posthog.com by default
+})
+
+posthogAsync.then(client => {
+  posthog = client
+})
+
+
+// app.ts
+import { posthog, posthogAsync} from './posthog'
+
+export function MyApp1() {
+    useEffect(async () => {
+        // Use posthog optionally with the possibility that it may still be loading
+        posthog?.capture('myapp1_loaded')
+        // OR use posthog via the promise
+        (await posthogAsync).capture('myapp1_loaded')
+    }, [])
+
+    return <View>Your app code</View>
+}
+
+
+// You can even use this instance with the PostHogProvider
+export function MyApp2() {
+  return <PostHogProvider client={posthogAsync}>{/* Your app code */}</PostHogProvider>
+}
+```
+
+### Configuration options
+
+You can further customize how PostHog works through its configuration on initialization.
+
+```ts
+export const posthog = await PostHog.initAsync("<ph_project_api_key>", {
+    // PostHog API host
+    host?: string = "https://app.posthog.com",
+    // The number of events to queue before sending to PostHog (flushing)
+    flushAt?: number = 20,
+    // The interval in milliseconds between periodic flushes
+    flushInterval?: number = 10000
+    // If set to false, tracking will be disabled until `optIn` is called
+    enable?: boolean = true,
+    // Whether to track that `getFeatureFlag` was called (used by Experiments)
+    sendFeatureFlagEvent?: boolean = true,
+    // Whether to load feature flags when initialised or not
+    preloadFeatureFlags?: boolean = true,
+    // How many times we will retry HTTP requests
+    fetchRetryCount?: number = 3,
+    // The delay between HTTP request retries
+    fetchRetryDelay?: number = 3000,
+    // For Session Analysis how long before we expire a session
+    sessionExpirationTimeSeconds?: number = 1800 // 30 mins
+    // Whether to post events to PostHog in JSON or compressed format
+    captureMode?: 'json' | 'form'
+})
+```

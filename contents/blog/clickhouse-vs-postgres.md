@@ -87,7 +87,9 @@ Robert Hodges, CEO of Altinity, [once compared](https://www.youtube.com/watch?v=
 
 These optimizations are made possible by ClickHouse’s insert-and-optimize-later philosophy. ClickHouse is constantly merging data in the background to collapse series of data into single values to expedite future queries. 
 
-Because ClickHouse doesn’t expect mutation requests, it can depend on merges because the individual data won’t be changed; by extension, aggregate values won’t need to be recalculated. 
+Because ClickHouse doesn’t expect mutation requests, it can depend on merges because the individual data won’t be changed; by extension, aggregate values won’t need to be recalculated.
+
+> 📖 **Further reader:** ClickHouse is just one of many column-based databases, others include Google's BigQuery, and Snowflake. Read our comparisons between [ClickHouse and BigQuery](/blog/clickhouse-vs-bigquery), and [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake) to learn more about different OLAP database solutions.
 
 ## Comparing ClickHouse and Postgres
 

@@ -1,0 +1,34 @@
+---
+title: Google Cloud Storage
+featuredImage: 
+documentation: /docs/cdp/google-cloud-export
+thumbnail: ../thumbnails/gcs-export.png
+filters: {
+    type: ["data-out"],
+    maintainer: official
+}
+---
+
+<Section
+    divider={false}
+    title="Export events from PostHog to a Google Cloud Storage bucket to use as an always-available, cost-effective analytics archive."
+    size="full"
+    cols={3}
+>
+    <div>
+        <h5>Create a GCS archive</h5>
+        <p>Want an easy data backup? Export events from PostHog to Google Cloud Storage every 30 seconds.</p>
+    </div>
+    <div>
+        <h5>Normalize in PostHog</h5>
+        <p>Ensure consistency by processing data with other PostHog apps before exporting to GCS.</p>
+    </div>
+    <div>
+        <h5>Automated redundancy</h5>
+        <p>GCS has an ever-growing list of storage bucket locations, where you can store data with multiple redundancy options.</p>
+    </div>
+</Section>
+
+<TutorialsSlider topic="gcs-export" />
+
+<Documentation />

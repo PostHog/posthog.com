@@ -1,0 +1,41 @@
+---
+title: Session recordings ingestion
+---
+
+## Overview
+
+This is aimed at PostHog employees and goes into detail in order to allow them to support the Session Replay product.
+
+We use `rrweb` to collect "snapshot data" from the browser. This data is gathered by the capture API and sent to ingestion.
+
+Because we use kafka for ingestion there is a maximum allowed message size and snapshot data is often larger than that. Replay has its own ingestion infrastructure with larger limits. 
+
+We store recording snapshot data in blob storage and aggregated session information in the `session_replay_events` table. As a result in Capture (`posthog-recordings` deployment) we no longer need to chunk recordings.
+
+The ingestion workload batches sessions to disk and periodically flushes them to blob storage. This is to allow us to write fewer files to storage reducing the operational cost of the system.
+
+
+## Recording metadata
+
+The ingestion workload generates metadata and stores it in the `session_replay_events` table in ClickHouse. This will be used to power the session replay UI. It uses the [ClickHouse Aggregating MergeTree engine](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/aggregatingmergetree) to power the table. 
+
+In combination with the blob storage ingestion workload this means we're storing at least a hundred times less data per row in ClickHouse than in the original infrastructure. And compressing it about twice as much. 🔥
+
+```mermaid
+flowchart TB
+    clickhouse_replay_summary_table[(Session replay summary table)]
+    received_snapshot_event[clients send snapshot data]
+    kafka_recordings_topic>Kafka recordings topic]
+    kafka_clickhouse_replay_summary_topic>Kafka clickhouse replay summary topic]
+    
+    subgraph recordings blob ingestion workload
+        recordings_blob_consumer-->|1. statefully batch|disk
+        disk-->recordings_blob_consumer
+        recordings_blob_consumer-->|2. periodic flush|blob_storage
+        recordings_blob_consumer-->|3. after flush|kafka_clickhouse_replay_summary_topic
+        kafka_clickhouse_replay_summary_topic-->clickhouse_replay_summary_table
+    end
+    received_snapshot_event --> capture
+    capture -->|compress into kafka messages| kafka_recordings_topic
+    kafka_recordings_topic --> recordings_blob_consumer
+```

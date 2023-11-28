@@ -15,11 +15,9 @@ category: General
 tags:
   - Open source
   - Guides
-  - Comparisons
-  - Session recording
 ---
 
-Analytics is great when you need hard numbers, but hard numbers don't give you the full picture. What else do you need to do? [Talk to users](/blog/10x-engineers-do-user-interviews)? Sure. Gather feedback? That's useful, too. But, for us, there's nothing better than watching session replays for understanding a user's pain points.
+[Open-source analytics](/blog/best-open-source-analytics-tools) is great when you need hard numbers, but hard numbers don't give you the full picture. What else do you need to do? [Talk to users](/blog/10x-engineers-do-user-interviews)? Sure. Gather feedback? That's useful, too. But, for us, there's nothing better than watching session replays for understanding a user's pain points.
 
 Replays (aka session recordings) are a great way to understand:
 
@@ -28,7 +26,7 @@ Replays (aka session recordings) are a great way to understand:
 - Hesitation at different stages of your funnel.
 - How your users are interacting with individual elements of your product.
 
-Hotjar and Fullstory are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
+Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
 
 > **Changelog:**
 >

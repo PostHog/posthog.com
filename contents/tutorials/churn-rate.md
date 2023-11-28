@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-10
-featuredImage: ../images/tutorials/banners/tutorial-15.png
-tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions']
+tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions', 'product analytics']
 ---
 
 - **Level:** Easy 🦔
@@ -76,7 +75,7 @@ Once saved, this provides us with a dynamic list of “high churn risk” users 
 
 ### Actions
 
-One way we can use a cohort is by combining it with an event to create an action. For example, we can set up an action to trigger when a user in our high churn risk cohort visits a help page. Using [webhooks](/docs/integrate/webhooks/message-formatting), we can bring these actions into [Slack](/docs/integrate/webhooks/slack) or wherever our sales or customer success team spends their time to have them reach out to users when the risk action is triggered.
+One way we can use a cohort is by combining it with an event to create an action. For example, we can set up an action to trigger when a user in our high churn risk cohort visits a help page. Using [webhooks](/docs/integrate/webhooks), we can bring these actions into [Slack](/docs/integrate/webhooks/slack) or wherever our sales or customer success team spends their time to have them reach out to users when the risk action is triggered.
 
 ![Churn risk action](../images/tutorials/churn-rate/churn-risk-action.png)
 
@@ -87,6 +86,3 @@ Now we’ve targeted churn on multiple fronts, both by understanding what users 
 - [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
 - [The most useful B2B SaaS product metrics](/blog/b2b-saas-product-metrics)
 - [Finding your North Star metric and why it matters](/blog/north-star-metrics)
-- [How to get Stripe payment and revenue data](/tutorials/stripe-payment-data)
-
-<NewsletterTutorial compact/>

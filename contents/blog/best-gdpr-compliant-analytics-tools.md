@@ -1,6 +1,6 @@
 ---
-date: 2023-03-15
-title: The 8 best GDPR-compliant analytics tools
+date: 2023-08-29
+title: The 9 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,17 +8,15 @@ hideAnchor: true
 author:
   - joe-martin
   - andy-vandervell
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/posthog-blog-at-desk.png
 featuredImageType: full
 featuredVideo: https://www.youtube-nocookie.com/embed/o_1AmP_-HPs
 category: General
 tags:
-  - Guides
-  - Comparisons
   - Privacy
 ---
 
-The GDPR places significant restrictions on how you can use tools like Google Analytics to track and collect user data.
+The GDPR (General Data Protection Regulation) places significant restrictions on how you can use tools like Google Analytics to track and collect user data.
 
 And, while there is **no universal legal definition** of what constitutes "GDPR-compliant analytics", there are some fundamental principles you can follow:
 
@@ -26,11 +24,14 @@ And, while there is **no universal legal definition** of what constitutes "GDPR-
 
 2. **Data must be handled securely:** GDPR punishes breaches of privacy and security severely. Data must be held securely and staff trained in how to handle data. You must also delete any personal data you hold if a user requests it.
 
-3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to the US. This is a hot button issue due to [recent rulings against websites](https://isgoogleanalyticsillegal.com/) that transferred the personal data of EU citizens (e.g. IP addresses) to Google's US-based servers.
+3. **Only collect data you actually need:** The GDPR encourages organizations to only collect information they actually need. A free online newsletter, for example, needs a user's email address and basic information, such as their name and what country or city they live in, but it doesn't need their home or work address.
+
+Until recently, storing personal data on EU citizens in the US was also considered a potential breach of the GDPR, but a [new adequacy decision](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/eu-us-data-transfers_en) agreed in July 2023 makes this less problematic. It's still good practice to avoid transferring this data if you can, but it's not a breach provided US-based companies participate in the new EU-US Data Privacy Framework.
 
 > **Changelog:**
 >
 > - **Mar 15, 2023:** Added Umami
+> - **Aug 29, 2023:** New adequacy decision, added Vercel Web Analytics
 
 ## The best GDPR-compliant analytics tools
 
@@ -46,7 +47,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-[PostHog](https://posthog.com) is an all-in-one, [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a [single platform](/product). Think Amplitude + Hotjar + LaunchDarkly in one and you're pretty close.
+[PostHog](https://posthog.com) is an all-in-one, [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a single platform. Think Amplitude + Hotjar + [LaunchDarkly](/blog/best-launchdarkly-alternatives) in one.
 
 PostHog offers EU data hosting, so you can keep all your user data within the EU to comply with the GDPR. Hobbyists can also self-host PostHog Open Source via Docker Compose, though this is only recommended for smaller event volumes in the ~100k per month range. PostHog also supports event autocapture, so you can start collecting useful data immediately without instrumenting events by hand.
 
@@ -70,7 +71,7 @@ PostHog is especially helpful for product teams that want to understand how user
 
 Smaller projects can self-host PostHog Open Source using Docker Compose, but [PostHog Cloud EU](/eu), a fully-managed service with servers hosted in Frankfurt, Germany, is the best option for most users.
 
-While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a Javascript object in `memory` that only lasts the duration of the pageview.
+While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a JavaScript object in `memory` that only lasts the duration of the pageview.
 
 #### How much does PostHog cost?
 
@@ -104,7 +105,7 @@ Plausible is a good fit for small content and marketing teams who need to track 
 - **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-Plausible is made and hosted in the EU. It collects no personally identifiable information at all, making it ideal if you want basic, GDPR-compliant analytics. It's doesn't collect any personal data, such as IP addresses, so you don't need to acquire permission from users to comply with GDPR.
+Plausible is made and hosted in the EU. It collects no personally identifiable information at all, making it ideal if you want basic, GDPR-compliant analytics.
 
 #### How much does Plausible cost?
 
@@ -118,7 +119,7 @@ Plausible charges by pageview with 1 million pageviews costing €69 per month �
 
 #### Who is Umami for?
 
-Privacy-conscious website owners who want a no frills solution that doesn't impact website performance.
+Privacy-conscious website owners who want a no-frills solution that doesn't impact website performance.
 
 #### Features and benefits
 
@@ -135,7 +136,7 @@ Privacy-conscious website owners who want a no frills solution that doesn't impa
 
 #### How much does Umami cost?
 
-Umami has no paid tier at present, so it's totally free provided you can self-host it. A managed cloud service is currently in private beta, however.
+Prices start at $9 for 100k monthly events. 1 million events is $49 per month; 10 million is $369 per month. Umami offers a 20% saving for paying annually.
 
 ### 4. Fathom
 
@@ -168,41 +169,9 @@ As a privacy-first solution, Fathom is GDPR compliant out-of-the-box with no com
 
 #### How much does Fathom cost?
 
-Like Plausible, Fathom charges by pageview, though it's a bit cheaper than Plausible. A website generating 1 million pageviews per month would pay $54 per month, compared to around $71 with Plausible. Fathom also offers two months free use for paying annually, but there is no free-to-use open sourcre version.
+Like Plausible, Fathom charges by pageview, though it's a bit cheaper than Plausible. A website generating 1 million pageviews per month would pay $54 per month, compared to around $71 with Plausible. Fathom also offers two months free use for paying annually, but there is no free-to-use open source version.
 
-### 5. Countly
-
-![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
-
-Like PostHog, [Countly](https://count.ly/) is an extendable product analytics platform that offers self-hosted open source and enterprise editions, or cloud deployments, for organizations that want to understand product performance and user journeys in greater detail. 
-
-Countly offers a robust suite of features and an extensive range of integrations, including a Net Promoter Score (NPS) survey plugin. The ability to track crashes and errors, and to issue push notifications to mobile users, are also useful additions over most other analytics tools.
-
-#### Who is Countly for?
-
-Countly's range of features make it particularly attractive to mobile app developers, especially those working on multi-platform apps across iOS, Mac, Windows, and Android. Its open source Community Edition is available on a AGPL v3 license, though this version removes the majority of its user behavior features, such as retention, revenue tracking, user tracking, cohorts, funnels, and user flow.   
-
-#### Features & benefits
-
-- Support for mobile, web, desktop and IoT devices
-- Extensible via plugins
-- Self-hosting and private cloud deployments available
-- Push notifications and crash analytics
-
-#### Countly and GDPR compliance
-
-- **Open Source:** <span className="text-green text-lg">✔</span>
-- **Self Hosting:** <span className="text-green text-lg">✔</span>
-- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
-- **Cookieless Tracking:** <span className="text-red text-lg">✖</span>
-
-Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud servers based in the EU, so that data isn't stored in servers outside of GDPR jurisdiction. It doesn't offer a cookie-less tracking option, but it does have consent systems built in.
-
-#### How much does Countly cost?
-
-Countly doesn't publish pricing on its website. You have to contact sales. Its open source Community Edition is free to self-host, but it excludes most of its user behavior features. 
-
-### 6. Matomo
+### 5. Matomo
 
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
@@ -237,7 +206,69 @@ Matomo's core open source analytics is free to self-host. More advanced features
 
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 
-### 7. TelemetryDeck
+### 6. Vercel Web Analytics
+
+![vercel analytics](../images/blog/ga4-alternatives/vercel.png)
+
+Vercel includes a lightweight, privacy-compliant analytics tool in all its front-end-as-a-service plans. Like most privacy-first tools, it tracks basic website metrics like pageviews, unique users, time on page, and referrers. You can also set up custom events you want to track (e.g. clicking a call to action). It records no personally identifiable information, so you can use it without cookie permission banners. It also includes a useful Speed Insights tool for keeping track of your website's Core Web Vitals.
+
+#### Who is Vercel Web Analytics for?
+
+While it's only available to Vercel customers, Vercel Web Analytics is ideal if you just need basic website analytics – e.g. for a company website. It does everything Plausible, Fathom and other privacy-first tools offer, so you don't need to deploy them if you're already using Vercel.
+
+#### Features & benefits
+
+- Included with Vercel
+- Tracks all key website metrics
+- Supports custom events
+- No cookie banners needed
+
+#### Vercel Web Analytics and GDPR compliance
+
+- **Open Source:** <span className="text-red text-lg">✖</span>
+- **Self Hosting:** <span className="text-red text-lg">✖</span>
+- **EU Cloud Hosting:** <span className="text-red text-lg">✖</span>
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
+
+Vercel doesn't support hosting your analytics data in the EU, but it collects no personally identifiable information, so this isn't necessary for GDPR compliance.
+
+#### How much does Vercel Web Analytics cost?
+
+Free hobby deployments are limited to just 2,500 events and 10,000 speed insights per month. The Pro plan includes 25,000 events, which you can increase to 500k events for $50 per month more.
+
+### 7. Countly
+
+![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
+
+Like PostHog, [Countly](https://count.ly/) is an extendable product analytics platform that offers self-hosted open source and enterprise editions, or cloud deployments, for organizations that want to understand product performance and user journeys in greater detail. 
+
+Countly offers a robust suite of features and an extensive range of integrations, including a Net Promoter Score (NPS) survey plugin. The ability to track crashes and errors, and to issue push notifications to mobile users, are also useful additions over most other analytics tools.
+
+#### Who is Countly for?
+
+Countly's range of features make it particularly attractive to mobile app developers, especially those working on multi-platform apps across iOS, Mac, Windows, and Android. Its open source Community Edition is available on a AGPL v3 license, though this version removes the majority of its user behavior features, such as retention, revenue tracking, user tracking, cohorts, funnels, and user flow.   
+
+#### Features & benefits
+
+- Support for mobile, web, desktop and IoT devices
+- Extensible via plugins
+- Self-hosting and private cloud deployments available
+- Push notifications and crash analytics
+
+#### Countly and GDPR compliance
+
+- **Open Source:** <span className="text-green text-lg">✔</span>
+- **Self Hosting:** <span className="text-green text-lg">✔</span>
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
+- **Cookieless Tracking:** <span className="text-red text-lg">✖</span>
+
+Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud servers based in the EU, so that data isn't stored in servers outside of GDPR jurisdiction. It doesn't offer a cookie-less tracking option, but it does have consent systems built in.
+
+#### How much does Countly cost?
+
+Countly doesn't publish pricing on its website. You have to contact sales. Its open source Community Edition is free to self-host, but it excludes most of its user behavior features. 
+
+### 8. TelemetryDeck
 
 ![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
 
@@ -269,7 +300,7 @@ TelemetryDeck makes GDPR compliance very easy. It doesn't collect enough persona
 
 TelemetryDeck's free plan gives you up to 100,000 signals per month – signals are TelemetryDeck's name for events. It has three other plans (Indie, Business and Enterprise) which unlock more signals, support, and user accounts.
 
-### 8. GoAccess
+### 9. GoAccess
 
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 

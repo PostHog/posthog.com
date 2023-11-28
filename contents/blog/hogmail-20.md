@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: Newsletter
+category: General
 ---
 
 > Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
@@ -29,7 +29,7 @@ Words by Andy Vandervell, who just trains AIs to write now.
 
 ## Why do startups fail? (or why "product-market fit" doesn't guarantee success)
 
-In November, Adam Smith, the founder of AI-assisted programming startup Kite, [announced they were closing](https://www.kite.com/blog/product/kite-is-saying-farewell/) despite having reached product-market fit and 500k monthly-active developers.
+In November, Adam Smith, the founder of AI-assisted programming startup Kite, [announced they were closing](https://www.kite.com/blog/product/kite-is-saying-farewell/) despite having reached [product-market fit](/blog/product-market-fit-game) and 500k monthly-active developers.
 
 ![kite](../images/blog/hogmail/kit-farewell.png)
 

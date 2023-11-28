@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-10
-featuredImage: ../images/tutorials/banners/tutorial-2.png
 tags: ['experimentation', 'feature flags']
 ---
 
@@ -191,6 +190,4 @@ Once results start to show up in PostHog, we can say we’ve successfully set up
 
 If you’re looking to learn more about feature flags, check out our [product manual](/manual/experimentation) to learn all about their features.
 
-You can also learn about how to run Experiments without feature flags in [this tutorial](/tutorials/experiments).
-
-<NewsletterTutorial compact/>
+You can also learn about how to run Experiments without feature flags in [this tutorial](/docs/experiments/running-experiments-without-feature-flags).

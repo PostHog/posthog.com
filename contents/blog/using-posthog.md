@@ -11,9 +11,6 @@ author:
   - andy-vandervell
 category: Using PostHog
 tags:
-  - Product analytics
-  - Session recording
-  - Feature flags
   - Guides
 ---
 
@@ -213,7 +210,7 @@ Once you're tracking this metric you can then make changes to improve the proces
 
 ## 19. Organize your custom events in Notion
 
-No modern data platform is complete without a [Zapier Connector](/apps/zapier-connector), so naturally PostHog has one. 
+No modern data platform is complete without [Zapier](/apps/zapier-connector), so naturally PostHog has one. 
 
 What's possible with PostHog and Zapier combined is almost limitless, but one option is to use Zapier to [keep a record of custom events in Notion](/tutorials/how-to-connect-posthog-and-notion-with-zapier). 
 
@@ -237,7 +234,7 @@ Try the [PostHog Toolbar](/tutorials/toolbar).
 
 ## 22. Track support tickets by connecting Zendesk
 
-The [Zendesk Connector for PostHog](/apps/zendesk-connector) is a two-way connector that allows you turn Zendesk tickets into PostHog events and enrich Zendesk tickets with PostHog event data. 
+The [Zendesk integration for PostHog](/apps/zendesk-connector) is a two-way connector that allows you turn Zendesk tickets into PostHog events and enrich Zendesk tickets with PostHog event data. 
 
 Importing support tickets as events allows you to understand support trends, and use Cohorts and Correlation Analysis to breakdown common traits among users who raise tickets frequently.
 

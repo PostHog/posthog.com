@@ -13,7 +13,6 @@ featuredVideo: https://www.youtube-nocookie.com/embed/rooOi7rxi8Y
 category: General
 tags:
   - Guides
-  - Comparisons
 ---
 
 Google recently confirmed the sunsetting Google Optimize, its A/B testing platform. In a [statement](https://support.google.com/optimize/answer/12979939) on its website, Google said:
@@ -35,7 +34,7 @@ If this sounds like bad news to you, consider one of following six Google Optimi
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[PostHog](https://posthog.com/) is a comprehensive Google Optimize and [GA4 alternative](/blog/ga4-alternatives) that integrates A/B and multivariate testing with event-based analytics, session recording, and feature flags.
+[PostHog](https://posthog.com/) is a comprehensive [Google Optimize](/blog/optimize-to-posthog) and [GA4 alternative](/blog/ga4-alternatives) that integrates A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples) with event-based analytics, session recording, and feature flags.
 
 PostHog supports A/B and multivariate experiments that target by geography, device, source, cohort, or limitless other user properties. It tracks metric improvement goals for success, secondary goals, and estimates how long it takes to get a statistically significant result. PostHog's experimentation suite is built on its feature flag functionality, making it easy to rollout winning variants.
 
@@ -153,7 +152,7 @@ Outside of its new Starter plan, VWO is largely a 'price on application' product
 - **Unlimited experiments:** <span className="text-red text-lg">✖</span>
 - **Best for:** Engineering and product teams
 
-[LaunchDarkly](https://launchdarkly.com) is a leading platform for feature management (feature flags) that also enables experimentation. Like all the products in this list, it supports A/B and multivariate testing. In contrast to Unbounce, however, LaunchDarkly is designed for product and engineering teams, so it lacks marketing-friendly features like a visual editor. 
+[LaunchDarkly](/blog/best-launchdarkly-alternatives) is a leading platform for feature management (feature flags) that also enables experimentation. Like all the products in this list, it supports A/B and multivariate testing. In contrast to Unbounce, however, LaunchDarkly is designed for product and engineering teams, so it lacks marketing-friendly features like a visual editor. 
 
 LaunchDarkly is a good option if you require a fully-featured feature flagging tool in addition to experimentation features, and it's particularly popular among enterprises with complex feature control needs.
 

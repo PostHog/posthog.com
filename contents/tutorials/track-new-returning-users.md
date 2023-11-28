@@ -4,8 +4,7 @@ date: 2023-04-26
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-18.png
-tags: ["trends", "cohorts"]
+tags: ["trends", "cohorts", 'product analytics']
 ---
 
 Understanding user growth is critical to building a successful product. A lack of new users or existing users churning is a bad sign. This tutorial goes over the different ways to calculate new and returning users in PostHog, as well as insights you can create using these calculations.
@@ -18,7 +17,7 @@ There are multiple ways to calculate new users in PostHog depending on your situ
 
 ### Completed event for the first time cohort
 
-The first and easiest is creating a cohort where the users completed an event (such as pageviews, [identify](/docs/getting-started/identify-users), or a custom event) for the first time. To set this up, go to the cohort tab, click new cohort, enter a title and description, then choose "completed an event for the first time" with your event and recency. 
+The first and easiest is creating a cohort where the users completed an event (such as pageviews, [identify](/docs/data/identify), or a custom event) for the first time. To set this up, go to the cohort tab, click new cohort, enter a title and description, then choose "completed an event for the first time" with your event and recency. 
 
 ![New users](../images/tutorials/track-new-returning-users/new.png)
 
@@ -45,7 +44,7 @@ For example, when a user first uses your API, set their creation date in their u
 ```python
 posthog.capture(
     '<ph_project_api_key>',
-    event='new user created',
+    event='new_user_created',
     properties={ '$set_once': { 'created_at': '2023-04-24T22:02:02' } }
 )
 ```

@@ -1,0 +1,39 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "distinct_id_of_the_user",
+  Event: "user_signed_up",
+})
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```go
+  client.Enqueue(posthog.Capture{
+    DistinctId: "distinct_id_of_the_user",
+    Event:      "user_signed_up",
+    Properties: posthog.NewProperties().
+      Set("login_type", "email").
+      Set("is_free_trial", true),
+  })
+```
+
+### Capturing pageviews
+
+If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "distinct_id_of_the_user",
+  Event:      "$pageview",
+  Properties: posthog.NewProperties().
+    Set("$current_url", "https://example.com"),
+})
+```

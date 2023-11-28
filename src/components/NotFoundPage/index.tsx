@@ -17,7 +17,7 @@ export default function NotFoundPage(): JSX.Element {
 
     return (
         <Layout className="not-found-page-container">
-            <div className="bg-black">
+            <div className="bg-black -mt-1">
                 <div className="max-w-6xl px-4 lg:px-8 xl:px-0 mx-auto py-24 text-white relative overflow-hidden">
                     <StaticImage
                         src="../../images/galaxy-1.png"
@@ -71,8 +71,11 @@ export default function NotFoundPage(): JSX.Element {
                         </CallToAction>
 
                         <p className="mt-8 text-sm text-white/70">
-                            Think this is a mistake? Email <a href="mailto:hey@posthog.com">hey@posthog.com</a> and
-                            we'll fix it!
+                            Think this is a mistake? Email{' '}
+                            <a href="mailto:hey@posthog.com" className="text-yellow">
+                                hey@posthog.com
+                            </a>{' '}
+                            and we'll fix it!
                         </p>
                     </div>
                 </div>

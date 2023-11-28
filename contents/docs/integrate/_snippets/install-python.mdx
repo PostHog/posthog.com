@@ -1,0 +1,31 @@
+<PythonInstall />
+
+```bash
+pip install posthog
+```
+
+In your app, import the `posthog` library and set your project API key and host **before** making any calls.
+
+```python
+from posthog import Posthog
+
+
+posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
+```
+
+> **Note:** As a rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable is best.
+
+You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+To debug, you can toggle debug mode:
+
+```python
+posthog.debug = True
+```
+
+To make sure no calls happen during tests, you can disable PostHog, like so:
+
+```python
+if settings.TEST:
+    posthog.disabled = True
+```

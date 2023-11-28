@@ -1,0 +1,150 @@
+---
+title: Estimating usage & costs
+featuredImage: ./images/docs-groups.png
+---
+
+It can be daunting to figure out how much a usage-based platform like PostHog will cost, but there are simple ways to estimate your usage and costs.
+
+This guide explains why we price based on usage, how to estimate your usage, and tips on how to reduce your costs.
+
+## Why do we price based on usage?
+
+Really it comes down to this: The more you use PostHog, the more value you get, and the more it costs us to process and store your data. Thus, we charge based on usage.
+
+### What about charging by monthly active users? Isn't that also usage?
+
+Kind of, yes, but actually no. Some users are very valuable. They use your product a ton, they respond to your feedback surveys, and they store a lot of data in your platform. Other users hit your landing page and bounce immediately. 
+
+From a value perspective, you shouldn't need to pay the same amount for both of these users. It makes more sense to pay _only for the value you receive_, which is _directly tied to user activity_ such as events, session replays, or data.
+
+## How do I estimate my usage?
+
+If you're already using another tool and want to switch to PostHog (welcome!), your existing tool may have the exact numbers you need. You might need to ask their support for this data directly if it's not easy to find.
+
+Alternatively, you can use one of these two methods.
+
+### Option 1: Sign up for free and get an accurate projected volume in a few days
+
+Each of our products has a very generous free tier. They're also very easy to get set up. 
+
+Simply [sign up](https://app.posthog.com/signup) and start to use whichever product you are interested in. After a few days, you'll get a good estimate of your projected volume on your [Organization Billing page](https://app.posthog.com/organization/billing).
+
+If you want a more accurate estimate, give it a week - this way weekdays and weekends will also be taken into account.
+
+> 💡 **PostHog Tip:** If your projects volume is higher than you'd like, we offer ways to "tune" your implementation to only capture or use what's valuable to you. See [How to reduce your PostHog usage](/docs/getting-started/estimating-usage-costs#how-to-reduce-your-posthog-costs) for more.
+
+### Option 2: Estimate based on your product category and/or MAUs
+
+Sometimes you can estimate your volumes based on another number that you know, like your monthly active users (MAU).
+
+#### Estimating Session replay volume based on MAUs
+
+If you know how manu MAUs you have, and you know the average number of sessions per MAU, you can get your estimated volume by simply multiplying the two together. Easy peasy!
+
+#### Estimating event volume based on MAUs
+
+Events are trickier to estimate based on MAUs because not every type of company has the same type of usage. However, we did a bit of diving into our own data and found that there is a bit of usage consistency within different company categories. Using the table below, take the average number of events per MAU and multiply by the number of MAUs you have to get an estimated event volume.
+
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+	<thead>
+    	<tr>
+			<td className="w-3/12"><strong>Product</strong></td>
+        	<td className="w-3/12 text-center"><strong>B2B / B2C</strong></td>
+        	<td className="w-3/12 text-center"><strong>Monthly events per MAU</strong></td>
+        	<td className="w-3/12 text-center"><strong>Autocapture</strong></td>
+        	<td className="w-3/12 text-center"><strong>Platforms</strong></td>
+    	</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>PostHog</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">87</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center">Web</td>
+      	</tr>
+		<tr>
+			<td>Financial reporting</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">44</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Web</td>
+    	</tr>
+		<tr>
+			<td>Cloud monitoring</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">22</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>	
+          	<td className="text-center">Web</td>
+      	</tr>
+		<tr>
+			<td>Document management</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">54</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>     	<td className="text-center">Web</td>
+      	</tr>
+		<tr>
+			<td>Speech to text API</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">583</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">API</td>
+     	</tr>
+		<tr>
+			<td>Crypto wallet</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">162</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Browser extension</td>
+      	</tr>
+		<tr>
+			<td>Meditation app</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">118</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Android, iOS</td>
+      	</tr>
+		<tr>
+			<td>Fashion retail</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">31</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>         <td className="text-center">Web</td>
+      	</tr>
+		<tr>
+			<td>Event booking</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">8</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">React Native</td>
+    	</tr>
+		<tr>
+			<td>Restaurant booking</td>
+        	<td className="text-center">B2B2C</td>
+        	<td className="text-center">54</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>        <td className="text-center">Web, Mobile</td>
+    	</tr>	
+	</tbody>
+</table>
+</div>
+
+Event counts also vary based upon whether you are using [autocapture](/docs/integrate/ingest-live-data#use-autocapture), [custom capture](/docs/integrate/ingest-live-data#capture-user-events) or a combination of both. Custom capture may be better if you have lots of users.
+
+### Estimating your monthly bill
+
+Once you've figured your projected event usages, you can either:
+
+1. Use the pricing calculator on our [pricing](/pricing) page and calculate your estimated costs for adopting PostHog. 
+2. If you're getting your estimated figures from your free PostHog account, you can see your projected volumes and costs right there in your [billing dashboard](https://app.posthog.com/organization/billing).
+
+And don't forget, we have generous free volumes for every one of our products – even if you're on a paid plan!
+
+## What about other products like Feature flags, etc?
+
+We don't have data on those yet, unfortunately. In that case, we'd recommend going with option 1 above – signing up for a free account and getting an accurate projection in just a few days.
+
+## How to reduce your PostHog costs
+
+Each product can be tuned to use only the resources you need. 
+
+- For product analytics, read [how to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
+- For session replay, read [how to only record the sessions you want](/tutorials/limit-session-recordings)
+- For feature flags, read [how to make fewer flag requests](/docs/feature-flags/common-questions#how-can-i-reduce-the-cost-of-feature-flags)
+
+You can also optionally set [billing limits](/docs/billing/limits-alerts) for every product. When you hit your billing limit, we'll stop ingesting your data and you won't be charged over the set amount. 

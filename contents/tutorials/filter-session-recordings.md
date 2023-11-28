@@ -1,22 +1,21 @@
 ---
-title: "How to use filters + session recordings to understand user friction" 
+title: "How to use filters + session replays to understand user friction" 
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/tutorial-12.png
 featuredTutorial: false
 author: ['joe-martin']
-tags: ['session recording']
+tags: ['session replay']
 featuredVideo: https://www.youtube-nocookie.com/embed/3BS5h2gkz90
 date: 2022-11-03
 ---
 
-Funnels may tell you _where_ users are experiencing friction within your product, but only session recordings can show you _why_.
+Funnels may tell you _where_ users are experiencing friction within your product, but only session replays can show you _why_.
 
-In this tutorial we’ll explain how to use PostHog’s various filters and features to find relevant session recordings quickly, and painlessly. 
+In this tutorial, we’ll explain how to use PostHog’s various filters and features to find relevant session replays quickly, and painlessly. 
 
 ## 1. Filter recordings by actions or events
 
-A typical use case for session recordings is to filter based on an event or action, so you can see how users interact with certain features or areas of your product. 
+A typical use case for session replays is to filter based on an event or action, so you can see how users interact with certain features or areas of your product. 
 
 You'll need an appropriate event or action set up to do this – see [our complete guide to event tracking](/tutorials/event-tracking-guide) for help there. 
 
@@ -78,4 +77,4 @@ In either case, you can filter recordings using the date and time controls at th
 
 Session recordings in PostHog are powerful tool for users such as support engineers, product designers and product managers who need context on the details of user behavior. 
 
-To find out more about session recordings, including how to [prevent PostHog from capturing sensitive user information](/manual/recordings#ignoring-sensitive-elements), check [the session recording docs](/manual/recordings). 
+To find out more about session replays, including how to [prevent PostHog from capturing sensitive user information](/manual/recordings#ignoring-sensitive-elements), check [the session replay docs](/manual/recordings). 

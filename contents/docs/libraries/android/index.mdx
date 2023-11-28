@@ -16,34 +16,27 @@ features:
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
-import AndroidInstall from './\_snippets/install.mdx'
-import AndroidConfigure from './\_snippets/configure.mdx'
+import AndroidInstall from '../../integrate/_snippets/install-android.mdx'
+import AndroidSendEvents from '../../integrate/send-events/_snippets/send-events-android.mdx'
 import AndroidIdentify from './\_snippets/identify.mdx'
-import AndroidCapture from './\_snippets/capture.mdx'
 
 ## Installation
 
 <AndroidInstall />
 
-## Configuration
+## Capturing events
 
-<AndroidConfigure />
+<AndroidSendEvents />
 
-## Making calls
-
-### Identify
+## Identify
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 <AndroidIdentify />
 
-### Capture
+### Setting user properties via an event
 
-<AndroidCapture />
-
-#### Setting user properties via an event
-
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `$set` and `$set_once`.
 
 ##### $set
 
@@ -56,7 +49,7 @@ userProps.put("string", "value1");
 userProps.put("integer", 2);
 
 PostHog.with(this)
-       .capture("Button B Clicked", new Properties()
+       .capture("button_b_clicked", new Properties()
                                         .putValue("color", "blue")
                                         .putValue("$set", userProps));
 ```
@@ -76,7 +69,7 @@ userProps.put("string", "value1");
 userProps.put("integer", 2);
 
 PostHog.with(this)
-       .capture("Button B Clicked", new Properties()
+       .capture("button_b_clicked", new Properties()
                                         .putValue("color", "blue")
                                         .putValue("$set_once", userProps));
 ```
@@ -85,7 +78,7 @@ PostHog.with(this)
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
-### Flush
+## Flush
 
 You can set the number of events in the configuration that should queue before flushing.
 Setting this to `1` will send events immediately and will use more battery. The default value for this is `20`.
@@ -108,7 +101,7 @@ PostHog.with(this)
        .flush();
 ```
 
-### Reset
+## Reset
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
@@ -117,50 +110,29 @@ PostHog.with(this)
        .reset();
 ```
 
-### Sending screen views
+## Feature Flags
 
-With `recordScreenViews()`, PostHog will try to record all screen changes automatically.
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-If you want to manually send a new screen capture event, use the `screen` function.
+<FeatureFlagsLibsIntro />
 
-This function requires a `name`. You may also pass in an optional `properties` object.
+import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-android.mdx'
 
-```java
-PostHog.with(this)
-       .screen("Dashboard", new Properties()
-                                  .putValue("background", "blue")
-                                  .putValue("hero", "superhog"));
+<AndroidFeatureFlagsCode />
+
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```android
+if (PostHog.with(this).getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+    // do something
+}
 ```
 
-### Feature Flags
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
-PostHog v1.10.0 introduced [Feature Flags](/docs/user-guides/feature-flags), which allow you to safely deploy and roll back new features. This feature requires posthog-android version of `2.0.0` or above.
-
-Here's how you can use them:
-
--   Check if a feature is enabled:
-
-```java
-PostHog.with(this).isFeatureEnabled("enabled-flag")
-```
-
--   Trigger a reload of the feature flags:
-
-```java
-PostHog.with(this).reloadFeatureFlags()
-```
-
-**Get a flag value**
-
-If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
-
-```java
-PostHog.with(this).getFeatureFlag("enabled-flag")
-```
-
--   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics.
-
-### Groups
+## Groups
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
@@ -169,13 +141,13 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```java
-PostHog.with(this).group("organization", "42dlsfj23f") // organization is the group type, 42dlsfj23f is the group ID
+PostHog.with(this).group("company", "company_id_in_your_db") // organization is the group type, company_id_in_your_db is the group ID
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```java
-PostHog.with(this).group("organization", "42dlsfj23f", new Properties().putValue("name", "Awesome Inc."));
+PostHog.with(this).group("company", "company_id_in_your_db", new Properties().putValue("name", "Awesome Inc."));
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.

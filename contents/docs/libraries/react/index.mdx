@@ -20,9 +20,7 @@ This guide will walk you through an example integration of PostHog using React a
 
 ## Installation
 
-For installation with Next.js we'd recommend following the [Next.js integration guide](/docs/integrate/next-js) instead.
-
-import ReactInstall from "./\_snippets/install.mdx"
+import ReactInstall from '../../integrate/_snippets/install-react.mdx'
 
 <ReactInstall />
 
@@ -103,22 +101,23 @@ function App() {
 
     useEffect(() => {
         if (user) {
-            posthog?.identify(user, {
+            // Identify sends an event, so you want may want to limit how often you call it
+            posthog?.identify(user.id, {
                 email: user.email,
             })
             posthog?.group('company', user.company_id)
         }
-    }, [posthog, user])
+    }, [posthog, user.id, user.email, user.company_id])
 
     const loginClicked = () => {
-        posthog?.capture('Clicked Log In')
+        posthog?.capture('clicked_log_in')
         login()
     }
 
     return (
         <div className="App">
             {/* Fire a custom event when the button is clicked */}
-            <button onClick={() => posthog?.capture('button clicked')}>Click me</button>
+            <button onClick={() => posthog?.capture('button_clicked')}>Click me</button>
             {/* This button click event is autocaptured by default */}
             <button data-attr="autocapture-button">Autocapture buttons</button>
             {/* This button click event is not autocaptured */}
@@ -137,123 +136,67 @@ If you see the error `TypeError: Cannot read properties of undefined (reading '.
 
 To fix this error, add a check that posthog has been initialized such as:
 
-```js
+```react
 useEffect(() => {
-  posthog?.capture('Test') // using optional chaining (recommended)
+  posthog?.capture('test') // using optional chaining (recommended)
 
   if (posthog) {
-    posthog.capture('Test') // using an if statement
+    posthog.capture('test') // using an if statement
   }
 }, [posthog])
 ```
 
 Typescript helps protect against these errors.
 
-### Feature flags
+## Feature Flags
 
-Feature flags are a powerful way to test new features and roll them out to a subset of your users. You can use feature flags to enable/disable features, change the behavior of a feature, or even change the UI of a feature.
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-PostHog provides several hooks to make it easy to use feature flags in your React app.
+<FeatureFlagsLibsIntro />
 
-| Hook | Description |
-| --- | --- |
-| `useFeatureFlagEnabled` | Returns a boolean indicating whether the feature flag is enabled. |
-| `useFeatureFlagPayload` | Returns the payload of the feature flag. |
-| `useFeatureFlagVariantKey` | Returns the variant key of the feature flag. |
-| `useActiveFeatureFlags` | Returns an array of active feature flags. |
+import ReactFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-react.mdx'
 
-For example, to show a welcome message if the feature flag is enabled:
+<ReactFeatureFlagsCode />
 
-```react
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+### Bootstrapping Flags
 
-function App() {
-  const showWelcomeMessage = useFeatureFlagEnabled('cool-flag')
+import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
 
-  return (
-    <div className="App">
-      {
-        showWelcomeMessage ? (
-          <div>
-            <h1>Welcome!</h1>
-            <p>Thanks for trying out our feature flags.</p>
-          </div>
-        ) : (
-          <div>
-            <h2>No welcome message</h2>
-            <p>Because the feature flag evaluated to false.</p>
-          </div>
-        )
-      }
-    </div>
-  );
-}
+<BootstrappingIntro />
 
-export default App;
-```
+For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
 
-To show a different message depending on the variant key:
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```react
+// You can either use the `useFeatureFlagVariantKey` hook,
+// or you can use the feature flags component - https://posthog.com/docs/libraries/react#feature-flags-react-component
+
+// Method one: using the useFeatureFlagVariantKey hook
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
-import { useState, useEffect } from 'react'
 
 function App() {
-  const variantKey = useFeatureFlagVariantKey('show-welcome-message')
-  const [ welcomeMessage, setWelcomeMessage ] = useState('')
-
-  useEffect(() => {
-    if (variantKey === 'variant-a') {
-      setWelcomeMessage('Welcome to the Alpha!')
-    } else if (variantKey === 'variant-b') {
-      setWelcomeMessage('Welcome to the Beta!')
+    const variant = useFeatureFlagVariantKey('experiment-feature-flag-key')
+    if (variant == 'variant-name') {
+        // do something
     }
-  }, [variantKey])
-
-  return (
-    <div className="App">
-      {
-        welcomeMessage ? (
-          <div>
-            <h1>{welcomeMessage}</h1>
-            <p>Thanks for trying out our feature flags.</p>
-          </div>
-        ) : (
-          <div>
-            <h2>No welcome message</h2>
-            <p>Because the feature flag evaluated to false.</p>
-          </div>
-        )
-      }
-    </div>
-  );
 }
 
-export default App;
-```
-
-To load the message and title from the feature flag payload:
-
-```react
-import { useFeatureFlagPayload } from 'posthog-js/react'
+// Method two: using the feature flags component
+import { PostHogFeature } from 'posthog-js/react'
 
 function App() {
-  const payload = useFeatureFlagPayload('show-welcome-message')
-
     return (
-                <>
-                {
-                    payload?.welcomeMessage ? (
-                        <div className="welcome-message">
-                            <h2>{payload?.welcomeTitle}</h2>
-                            <p>{payload.welcomeMessage}</p>
-                        </div>
-                    ) : <div>
-                        <h2>No welcome message</h2>
-                        <p>Because the feature flag evaluated to false.</p>
-                    </div>
-                }
-        </>
+        <PostHogFeature flag='experiment-feature-flag-key' match={'variant-name'}>
+            <!-- the component to show -->
+        </PostHogFeature>
     )
 }
+
+// You can also test your code by overriding the feature flag:
+// e.g., posthog.featureFlags.override({'experiment-feature-flag-key': 'test'})
 ```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).

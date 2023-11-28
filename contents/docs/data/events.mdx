@@ -25,6 +25,20 @@ You can view the properties of each event by clicking on the items in the ‘Eve
 
 You can also click each user to view a their entire event history.
 
+## Default events and properties
+
+You may notice that some events or properties are prefixed with `$` e.g., `$pageview`, `$feature_flag_called`, `$current_url`, or `$os_version`. This indicates that these are default PostHog events or properties.
+
+### Pageview events
+
+`$pageview` events are automatically sent when using the [JavaScript snippet or SDK](/docs/libraries/js). You can disable this by setting `capture_pageview: false` in the initialization [config](/docs/libraries/js#config).
+
+You can manually send pageview events by calling `posthog.capture('$pageview')`. This is necessary for single-page applications like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views), since otherwise a pageview event is only sent for the first page.
+
+### Pageleave events
+
+Similar to pageview, `$pageleave` events are automatically sent. You can disable them by setting `capture_pageleave: false` in the [config](/docs/libraries/js#config). For single-page applications, you'll also need to manually send these events using `posthog.capture('$pageleave')`.
+
 ## Event filtering
 
 You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts) to focus on specific events that are occurring in your project.
@@ -114,34 +128,9 @@ If PostHog does not detect a type for an event property. You can choose any of t
 
 ## Autocapture event tracking
 
-PostHog can capture all front-end events automatically using a small [JavaScript snippet](/docs/integrate). This means you do not need to add tracking to individual buttons, or parts of your product to get started at analyzing user behavior.
+PostHog can capture all frontend events automatically. This means you do not need to manually add tracking to individual buttons or other parts of your product to start analyzing user behavior.
 
-### Capturing additional properties onto autocapture events
-
-If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add information about autocaptured events without needing to instrument a custom event. 
-
-For example, with a notification bell:
-
-![a notification bell showing 1 unread notification](../../images/manual/events/notification-bell.png)
-
-You can template the HTML for it to include the unread count.
-
-```HTML
-<div
-    onClick={toggleNotificationsPopover}
-    data-ph-capture-attribute-unread-notifications-count={unreadCount}
->
-```
-
-And the autocapture event for clicks on the bell will include the unread count.
-
-#### Limitations of autocapture
-
-While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
-
-Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` attributes from `input` tags.
-
-If you need to collect more data from inputs, you should use [custom events and Actions](/docs/user-guides/actions).
+To get started, see our [autocapture docs](/docs/data/autocapture).
 
 ## Push-based event tracking
 

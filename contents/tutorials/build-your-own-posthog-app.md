@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['joe-martin']
 date: 2022-10-04
-featuredImage: ../images/tutorials/banners/tutorial-1.png
-tags: ["apps"]
+tags: ["apps", 'product os']
 ---
 
 **Estimated reading time:** 10 minutes ☕☕☕
@@ -132,15 +131,15 @@ App chains can be used for specific purposes, such as [filtering unwanted inform
 
 ## Submitting new apps to PostHog
 
-While it’s totally optional, we greatly appreciate everyone who contributes to PostHog by submitting their apps for inclusion in our public app library so that other users can benefit from them. 
+While it’s totally optional, we greatly appreciate everyone who contributes to PostHog by submitting their apps for inclusion in [our public app library](/apps) so that other users can benefit from them. 
 
-To submit apps made with the source editor, you’ll first need to move them onto a GitHub repo. We’ve made an app starter kit to simplify this process:
+To submit apps made with the source editor, you’ll need to move them onto a public GitHub repo. We’ve made an app starter kit to simplify this process:
 
-Create a new GitHub repo using [this template](https://github.com/PostHog/posthog-plugin-starter-kit/generate)
-Copy the contents of `index.js` in the source editor into the new `index.js` file within the repo
-Copy the contents of `plugin.json` in the source editor into the new `plugin.json` file within the repo
+- Create a new GitHub repo using [this template](https://github.com/PostHog/posthog-plugin-starter-kit/generate)
+- Copy the contents of `index.js` in the source editor into the new `index.js` file within the repo
+- Copy the contents of `plugin.json` in the source editor into the new `plugin.json` file within the repo
 
-Finally, [email your GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A) to let us know about your app, what it does, and how you would like to be credited. Once we receive your email we’ll review the app for security and performance reasons, then make it available to all PostHog users.
+Finally, however you create your app, [let us know that it's ready for review](https://app.posthog.com/home#supportModal=support%3Aapps), what it does, and how you would like to be credited. Once we receive your message we’ll review the app for security and performance reasons, then make it available to all PostHog users.
 
 ### Further reading
 

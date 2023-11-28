@@ -32,13 +32,11 @@ export const AboutBlog = () => {
     return (
         <section
             id="blog"
-            className="max-w-5xl mx-auto bg-black lg:grid lg:grid-cols-5 text-white p-8 lg:p-12 space-y-8 lg:gap-8 lg:space-y-0"
+            className="max-w-5xl mx-auto bg-black rounded lg:grid lg:grid-cols-5 text-white p-8 lg:p-12 space-y-8 lg:gap-8 lg:space-y-0 mb-12 lg:items-center"
         >
             <div className="col-span-3 text-center lg:text-left">
-                <h3 className="mb-2 lg:mb-4 text-4xl lg:text-5xl leading- leading-tight">
-                    Still can't get enough PostHog?
-                </h3>
-                <h4 className="text-lg lg:text-2xl mb-4">
+                <h3 className="mb-2 lg:mb-1 text-4xl lg:text-4xl leading-tight">Still can't get enough PostHog?</h3>
+                <h4 className="text-lg lg:text-lg font-semibold mb-4">
                     Check out our blog. <br className="lg:hidden" />
                     <span className="text-yellow">(We put a lot of work into it.)</span>
                 </h4>

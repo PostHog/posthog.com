@@ -2,12 +2,11 @@ import React from 'react'
 import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
-import { Pineapple, Pizza } from 'components/NotProductIcons'
 import ReactCountryFlag from 'react-country-flag'
-import { ContributorImage } from 'components/PostLayout/Contributors'
+import { ContributorImageSmall } from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 
-import { ThumbDown, ThumbUp } from 'components/Icons/Icons'
+import { IconPineapple, IconPizza, IconThumbsDown, IconThumbsUp } from '@posthog/icons'
 
 interface ITeam {
     frontmatter: {
@@ -42,7 +41,8 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
-        Math.round((team.filter(({ frontmatter: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) * 100)
+        Math.round((team.filter(({ pineappleOnPizza }) => pineappleOnPizza).length / teamLength) * 100)
+    const teamLeadName = teamLead && [teamLead.firstName, teamLead.lastName].filter(Boolean).join(' ')
     return (
         <>
             <SidebarSection title="Meet your team" className="-mt-2">
@@ -55,13 +55,14 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                     active:scale-[.98]"
                     >
                         <span>Team {teamName}</span>
-                        <span className="opacity-0 group-hover:opacity-100 text-black/30 text-lg leading-none">
+                        <span className="opacity-0 group-hover:opacity-100 text-black/30 dark:text-white text-lg leading-none">
                             &rarr;
                         </span>
                     </Link>
                 </h3>
                 <ul className="list-none m-0 p-0 flex flex-wrap">
-                    {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
+                    {team.map(({ avatar: { url: avatar }, firstName, lastName, country, companyRole, squeakId }) => {
+                        const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
                             <li
                                 key={name}
@@ -72,7 +73,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                 [&:nth-child(4n+4)]:bg-yellow 
                                 "
                             >
-                                <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(jobTitle)}`}>
+                                <Link to={`/community/profiles/${squeakId}`}>
                                     <Tooltip
                                         placement="top-end"
                                         className="whitespace-nowrap"
@@ -86,9 +87,9 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                         )}
                                     >
                                         <span className="relative">
-                                            <ContributorImage
+                                            <ContributorImageSmall
                                                 name={name}
-                                                image={headshot}
+                                                image={avatar}
                                                 className="!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary"
                                                 imgClassName=""
                                             />
@@ -104,21 +105,19 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
             {teamLead && (
                 <SidebarSection title="Team lead" className="-mt-2">
                     <Link
-                        to={`/handbook/company/team#${
-                            kebabCase(teamLead?.frontmatter?.name) + '-' + kebabCase(teamLead?.frontmatter?.jobTitle)
-                        }`}
+                        to={`/community/profiles/${teamLead?.squeakId}`}
                         className="flex space-x-2 items-center rounded p-1 -mx-1 -mt-1 hover:bg-gray-accent/50 
                     relative
                     active:top-[0.5px]
                     active:scale-[.98]"
                     >
-                        <ContributorImage
+                        <ContributorImageSmall
                             className="w-[40px] h-[40px] bg-orange border-2 border-white dark:border-primary border-solid"
-                            image={teamLead?.frontmatter?.headshot}
-                            name={teamLead?.frontmatter?.name}
+                            image={teamLead?.avatar?.url}
+                            name={teamLeadName}
                         />
-                        <p className="author text-base font-semibold m-0 text-[15px]">{teamLead?.frontmatter?.name}</p>
-                        <ReactCountryFlag svg countryCode={teamLead?.frontmatter?.country} />
+                        <p className="author text-base font-semibold m-0 text-[15px]">{teamLeadName}</p>
+                        <ReactCountryFlag svg countryCode={teamLead?.country} />
                     </Link>
                 </SidebarSection>
             )}
@@ -126,17 +125,17 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
             <SidebarSection title="Pineapple on pizza?" className="-mt-2">
                 <div className="space-x-2 flex items-center mb-4 text-lg font-semibold">
                     <span className="w-8 h-8 relative top-[-1px] -mr-1">
-                        <Pineapple />
+                        <IconPineapple />
                     </span>
                     <span>+</span>
                     <span className="w-7 h-7 relative top-[1px]">
-                        <Pizza />
+                        <IconPizza />
                     </span>
                     <span>=</span>
                     {pineapplePercentage >= 50 ? (
-                        <ThumbUp className="w-8 h-8 fill-green" />
+                        <IconThumbsUp className="w-8 h-8 fill-green" />
                     ) : (
-                        <ThumbDown className="w-8 h-8 fill-green" />
+                        <IconThumbsDown className="w-8 h-8 fill-red" />
                     )}
                 </div>
                 <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">{pineappleText(pineapplePercentage)}</p>

@@ -26,7 +26,7 @@ const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
     const classList = mergeClassList('p-8', className)
 
     return (
-        <div className={classList}>
+        <div className={`bg-accent dark:bg-accent-dark rounded-lg ${classList}`}>
             <div className="flex w-16 h-16">
                 <img src={image} alt={title} className="max-w-full block mb-0" />
             </div>
@@ -117,7 +117,7 @@ export const Benefits = () => {
                     />
                 </div>
 
-                <div className="benefits-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-auto border-gray-accent-light border border-dashed border-b-0 border-r-0 sm:border-r-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-auto gap-2">
                     {benefits.map((benefit) => (
                         <Benefit key={benefit.title} {...benefit} />
                     ))}

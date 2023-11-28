@@ -1,0 +1,96 @@
+In our client-side SDKs, any event captured after calling `posthog.group` will automatically be linked to the group during that session.
+
+To link an event to a group in our server-side SDKs or API, set the key-value pair `<group type>: <group_id>` to the `groups` property of the event.
+
+Below are code examples of how to do it in our various SDKs. Notice that it is the exact same code as creating a group.
+
+import JSGroupEventCodeSnippet from "../\_snippets/capture-group-event-code.mdx"
+
+<JSGroupEventCodeSnippet />
+
+Note that it is **NOT** possible to assign the a single event to two groups of the same type. However, it is possible to assign an event to multiple groups as long as the groups are of different types.
+
+<MultiLanguage>
+
+```js-web
+// ❌ Not possible
+posthog.group('company', 'company_id_in_your_db');
+posthog.group('company', 'another_company_id_in_your_db');
+posthog.capture('user_signed_up')
+
+// ✅ Allowed
+posthog.group('company', 'company_id_in_your_db');
+posthog.group('channel', 'channel_id_in_your_db');
+posthog.capture('user_signed_up')
+
+```
+
+```python
+# ❌ Not possible
+posthog.capture(
+    'user_distinct_id',
+    'user_signed_up',
+    groups={
+        'company': 'company_id_in_your_db',
+        'company': 'another_company_id_in_your_db'
+    }
+)
+
+# ✅ Allowed
+posthog.capture(
+    'user_distinct_id',
+    'user_signed_up',
+    groups={
+        'company': 'company_id_in_your_db',
+        'channel': 'channel_id_in_your_db'
+    }
+)
+```
+
+```go
+// ❌ Not possible
+client.Enqueue(posthog.Capture{
+    DistinctId: "user_distinct_id",
+    Event: "user_signed_up",
+    Groups: posthog.NewGroups().
+        Set("company", "company_id_in_your_db").
+        Set("company", "another_company_id_in_your_db").
+})
+
+// ✅ Allowed
+client.Enqueue(posthog.Capture{
+    DistinctId: "user_distinct_id",
+    Event: "user_signed_up",
+    Groups: posthog.NewGroups().
+        Set("company", "company_id_in_your_db").
+        Set("channel", "channel_id_in_your_db").
+```
+
+```node
+// ✅ Allowed
+posthog.capture({
+    event: 'user_signed_up',
+    distinctId: 'user_distinct_id',
+    groups: { 
+        company: 'company_id_in_your_db',
+        channel: 'channel_id_in_your_db'
+    }
+})
+```
+
+```php
+// ❌ Not possible
+PostHog::capture(array(
+    'distinctId' => 'user_distinct_id',
+    'event' => 'user_signed_up',
+    '$groups' => array("company" => "company_id_in_your_db", "company" => "another_company_id_in_your_db")
+));
+// ✅ Allowed
+PostHog::capture(array(
+    'distinctId' => 'user_distinct_id',
+    'event' => 'user_signed_up',
+    '$groups' => array("company" => "company_id_in_your_db", "channel" => "channel_id_in_your_db")
+));
+```
+</MultiLanguage>
+

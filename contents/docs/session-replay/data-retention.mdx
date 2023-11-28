@@ -1,20 +1,41 @@
 ---
-title: Recordings data retention
+title: Replay data retention
 ---
 
 Depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
 
-## PostHog Cloud & Clickhouse Self-hosted
+## PostHog Cloud
 
-By default, recordings are automatically deleted after 3 weeks. Old recordings are deleted with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>. If you're self-hosting, you can set your own retention policy by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page.
+Recordings are automatically deleted after **1 month** (**3 months** for paid customers). 
+The deletion is not immediate meaning that recordings may still appear for a short time in the UI after the retention period expires or when manually deleted via the UI. 
 
-Please note, if your Clickhouse storage is nearing capacity, you'll want to temporarily increase your volume size before running the command above (even if you're decreasing the value). Otherwise, the command can hang.
 
-## Legacy Postgres Self-hosted
+### Preserving recordings
 
-Recordings are kept indefinitely by default. You can set recordings to delete after a configurable number of days in the [project settings page](/docs/user-guides/application-settings#project-settings).
+Pinned or Shared recordings are kept for as long as they are actively in use. Alternatively, any individual recording that you would like to preserve for longer can be done by downloading them locally. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
 
-## Preserving recordings
 
-Any recordings you'd like to preserve for longer can be done by downloading them locally. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
-Currently, it's only possible to save a single recording at a time.
+## Self-hosted 
+
+In order to make PostHog cheaper and easier to run and maintain we are deprecating storing recordings in ClickHouse. 
+
+### Pinning a non-deprecated version
+
+The [final PostHog release to officially support ClickHouse stored recordings](https://hub.docker.com/layers/posthog/posthog/9c68581779c78489cfe737cfa965b73f7fc5503c/images/sha256-4dec586a83328f4123039bab924289f9bd52bd46f56bf14e9ae91fcd6d05ed5d?context=explore) can be pinned using the `deploy-hobby` script. All subsequent releases only support blob storage backed recordings.
+
+Or edit your docker compose file to replace `image: posthog/posthog:$POSTHOG_APP_TAG` with `image: posthog/posthog:9c68581779c78489cfe737cfa965b73f7fc5503c`
+
+### Managing storage
+
+Self-hosted installations, pinned to earlier versions, 
+are able to control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
+
+Please note, 
+for versions of PostHog that rely on Clickhouse storage, 
+you need to manage the available capacity. 
+Ensure you increase volume capacity before changing the `RECORDINGS_TTL_WEEKS` value (even if you're decreasing the value). 
+ClickHouse requires abundant free disk space to manage the `session_recording_events` table.
+
+In later versions (which do not use Clickhouse for recording storage), 
+the installation will be relying on its configured blob storage. 
+You can manage storage using blob storage lifecycle policies. This will vary by environment.

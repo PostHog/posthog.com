@@ -20,10 +20,9 @@ export default function RoadmapPage() {
     return (
         <Layout>
             <SEO title="PostHog Roadmap" />
-            <div className="border-t border-dashed border-gray-accent-light">
+            <div className="">
                 <PostLayout
                     darkMode={false}
-                    contentWidth={'100%'}
                     article={false}
                     title={'Roadmap'}
                     hideSearch

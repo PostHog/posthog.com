@@ -45,6 +45,10 @@ const categories = [
         name: 'Apps',
     },
     {
+        type: 'pipelines',
+        name: 'Pipelines',
+    },
+    {
         type: 'blog',
         name: 'Blog',
     },
@@ -387,7 +391,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                 />
                             </div>
 
-                            <div className="border border-gray-accent-light dark:border-gray-accent-dark p-4 rounded bg-tan/50 dark:bg-almost-black/100">
+                            <div className="border border-gray-accent-light dark:border-gray-accent-dark p-4 rounded bg-tan/50 dark:bg-primary">
                                 <h5 className="text-base opacity-75 mb-0">Tip: Ask the community</h5>
                                 <p className="text-sm mb-4 opacity-80">
                                     Our team monitor the Questions page. Somone's bound to know the answer!
@@ -401,7 +405,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                     </>
                 )}
             </section>
-            <section className="hidden md:block overflow-y-auto bg-tan/50 dark:bg-almost-black p-2 h-full">
+            <section className="hidden md:block overflow-y-auto bg-tan/50 dark:bg-primary p-2 h-full">
                 {activeOption ? (
                     <div className="p-6 bg-white dark:bg-gray-accent-dark rounded border border-gray-accent-light/40 dark:border-gray-accent-dark">
                         <div className="text-left">

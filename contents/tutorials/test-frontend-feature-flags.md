@@ -4,7 +4,7 @@ date: 2023-03-16
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-2.png
+featuredVideo: https://www.youtube-nocookie.com/embed/cKaQ2mR4sSc
 tags: ["feature flags"]
 --- 
 
@@ -78,7 +78,7 @@ root.render(
 );
 ```
 
-With this setup, events are automatically captured, and we can set up our feature flag.
+With this setup, events are automatically captured, and we can set up our [React feature flag](/tutorials/react-feature-flags).
 
 ## Setting up our feature flag
 
@@ -166,5 +166,5 @@ This tests both variants of the flag. You can use this mocking strategy to test 
 ## Further reading
 
 - [Master Feature Flags: Best practice, tips and examples](/blog/feature-flag-best-practices)
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)

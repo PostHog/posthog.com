@@ -2,7 +2,6 @@ import Layout from 'components/Layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import AnchorScrollNavbar from '../components/AnchorScrollNavbar'
 import { Benefits } from '../components/Careers/Benefits'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { InterviewProcess } from '../components/Careers/InterviewProcess'
@@ -64,9 +63,6 @@ const IndexPage = () => {
             <CareersHero />
             <div className="careers-anchor-navbar">
                 <WhyWereHere />
-                <div className="bg-tan sticky top-0 py-2 z-10 careers-nav">
-                    <AnchorScrollNavbar autoScroll={breakpoints.md} menu={menu} />
-                </div>
                 <Transparency />
                 <TeamQuote
                     backgroundColor="bg-primary"
@@ -122,7 +118,6 @@ const IndexPage = () => {
                 <Benefits />
                 <TeamQuote
                     backgroundColor=""
-                    textColor="text-primary"
                     fontSize="text-3xl"
                     width="max-w-4xl"
                     value={

@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: Newsletter
+category: General
 ---
 
 > Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
@@ -29,7 +29,7 @@ Words by Andy Vandervell, whose retention is rapidly declining with age. 😢
 
 ## Avoiding the "Product Death Cycle"
   
-If product-market fit isn't enough to succeed, what do you need? In a 2017 article, [Brian Balfour](https://www.linkedin.com/in/bbalfour/) says:
+If [product-market fit](/blog/product-market-fit-game) isn't enough to succeed, what do you need? In a 2017 article, [Brian Balfour](https://www.linkedin.com/in/bbalfour/) says:
 
  > _"The “go-to” answer for almost every question in startups, is “build a great product.” Every time I hear that answer it feels completely unsatisfied. Building a great product is a piece of the puzzle, but it’s far from the full picture."_
 

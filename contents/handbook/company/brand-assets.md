@@ -1,10 +1,23 @@
 ---
-title: Brand assets
+title: Logos and hedgehogs
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
 > <em>This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com.</em>
+
+## The hedgehog library
+
+For team members we keep all our currently approved hedgehogs in [a Figma file called Hoggies](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team. 
+
+Here's how:
+1. Head to the Hoggies page. You can manually browse, or use Ctrl-F to search based on keywords such as 'happy', 'sad', or 'will smith'.
+2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar. 
+3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, then select 'Export [filename]' to download the image.
+
+If you can't find a suitable hog, you can [request one from the design team](/handbook/design/art-requests). 
+
+> Non-team members can find some of the most-used hogs to download on [our press page](/media).
 
 ## Logo
 
@@ -14,7 +27,7 @@ If you're looking for the PostHog logo, you came to the right place. Please keep
 
 | Preview | Name          | Vector | PNG                   | PNG w/ padding*                      |
 |---------|---------------|--------|-----------------------|--------------------------------|
-| ![](/brand/posthog-logo.svg)        | Standard logo | <a href="/brand/posthog-logo.svg" download>SVG</a> | <a href="/brand/posthog-logo.png" download>PNG</a> \| <a href="/brand/posthog-logo@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-padded@2x.png" download>PNG @2x</a> |
+| <img src="/brand/posthog-logo@2x.png" width="157" />     | Standard logo | <a href="/brand/posthog-logo.svg" download>SVG</a> | <a href="/brand/posthog-logo.png" download>PNG</a> \| <a href="/brand/posthog-logo@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-padded@2x.png" download>PNG @2x</a> |
 | ![](/brand/posthog-logo-black.svg)  | Dark logo | <a href="/brand/posthog-logo-black.svg" download>SVG</a> | <a href="/brand/posthog-logo-black.png" download>PNG</a> \| <a href="/brand/posthog-logo-black@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-black-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-black-padded@2x.png" download>PNG @2x</a> |
 | ![](/brand/posthog-logo-white.svg)  | Light logo    | <a href="/brand/posthog-logo-white.svg" download>SVG</a> | <a href="/brand/posthog-logo-white.png" download>PNG</a> \| <a href="/brand/posthog-logo-white@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-white-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-white-padded@2x.png" download>PNG @2x</a> |
 | ![](/brand/posthog-logomark.svg)    | Logomark      | <a href="/brand/posthog-logomark.svg" download>SVG</a> | <a href="/brand/posthog-logomark.png" download>PNG</a> \| <a href="/brand/posthog-logomark@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logomark-padded.png" download>PNG</a> \| <a href="/brand/posthog-logomark-padded@2x.png" download>PNG @2x</a> |

@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 date: 2021-04-08
-featuredImage: ../images/tutorials/banners/tutorial-5.png
-tags: ['configuration']
+tags: ['configuration', 'product analytics']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
@@ -86,7 +85,7 @@ If we still want to keep some record of an event coming from a specific person, 
 * Event will be associated with the organization, but we have 
 * a way of tracing it back to the individual person if we want to.
 */
-posthog.capture('some event', { personEmail: user.email })
+posthog.capture('some_event', { personEmail: user.email })
 ```
 
 When using our JavaScript library, you can also simplify this with `posthog.register`:
@@ -258,6 +257,3 @@ But, most importantly, we learned that while PostHog is built with certain frame
 ## Further reading
 
 - [The guide to frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics)
-- [Analyzing user behavior with cohorts](/tutorials/cohorts)
-
-<NewsletterTutorial compact/>

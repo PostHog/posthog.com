@@ -4,123 +4,135 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Update:** These endpoints can now be accessed with either your Team API key or your [personal API key](/docs/api/overview).
+PostHog provides POST-only public endpoints to capture events, update user or group data, evaluate feature flags, and more. These use your [project API key](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
 
-As explained in our [API overview](/docs/api/overview) page, PostHog provides two different APIs.
+## Sending events
 
-This page refers to our public endpoints, which use the same API key as the [PostHog snippet](/docs/integrate/client/js). The endpoints documented here are used solely with `POST` requests, and will not return any sensitive data from your PostHog instance.
+PostHog is event-based meaning your analytics data takes the form of a value sent by a specific user with optional additional data. Much of the functionality of PostHog, including updating users or groups, combining users, and evaluating feature flags, is driven by this event-based structure. [Our SDKs](/docs/libraries) handle the different types of events for you, but with the API, you need to send the right type of event (listed below) to get the functionality you want. The default PostHog events have the `$` prefix. 
 
-> **Note:** For this API, you should use your 'Project API Key' from the 'Project' page in PostHog. This is the same key used in your frontend snippet.
+> **Note:** Make sure to send API requests to the correct domain. These are `https://app.posthog.com` for US Cloud, `https://eu.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
 
-# Sending events
+Here are examples of the types of events you can send:
 
-To send events to PostHog, you can use any of [our libraries](/docs/integrate/overview) **or** any Mixpanel library by changing the `api_host` setting to the address of your instance.
-
-If you'd prefer to do the requests yourself, you can send events in the following format:
-
-## Single event
-
-> **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
-
-```shell
-POST https://[your-instance].com/capture/
-Content-Type: application/json
-Body:
-{
-    "api_key": "<ph_project_api_key>",
-    "event": "[event name]",
-    "properties": {
-        "distinct_id": "[your users' distinct id]",
-        "key1": "value1",
-        "key2": "value2"
-    },
-    "timestamp": "[optional timestamp in ISO 8601 format]"
-}
-```
-
-## Batch events
-
-You can send multiple events in one go with the Batch API.
-
-There is no limit on the number of events you can send in a batch, but the entire request body must be less than 20MB by default (see [API overview](/docs/api/overview)).
-
-> **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
+### Single event
 
 ```bash
-POST https://[your-instance].com/batch/
-Content-Type: application/json
-Body:
-{
-    "api_key": "<ph_project_api_key>",
-    "batch": [
-        {
-            "event": "[event name]",
-            "properties": {
-                "distinct_id": "[your users' distinct id]",
-                "key1": "value1",
-                "key2": "value2"
-            },
-            "timestamp": "[optional timestamp in ISO 8601 format]"
-        },
-        ...
-    ]
-}
+curl -v -L --header "Content-Type: application/json" -d '{
+  "event": "event name",
+  "api_key": "<ph_project_api_key>",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "account_type": "pro"
+  },
+  "timestamp": "[optional timestamp in ISO 8601 format]"
+}' https://app.posthog.com/capture/ 
+
 ```
 
-## Sample requests
+### Batch events
 
-Here are some sample `curl` queries for each event type. Do note that you need to insert your API key into the `api_key` field.
+You can a list of multiple events in one request with the `/batch` API route.
 
-Additionally, if you're self-hosting, you'll have to substitute `https://app.posthog.com/` for the URL of your instance.
+There is no limit on the number of events you can send in a batch, but the entire request body must be less than 20MB by default.
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "batch": [
+    {
+      "event": "batched_event_name_1",
+      "properties": {
+        "distinct_id": "user distinct id",
+        "account_type": "pro"
+      },
+      "timestamp": "[optional timestamp in ISO 8601 format]"
+    }
+    # ...
+  ]
+}' https://app.posthog.com/batch/ 
+```
 
 ### Alias
 
+This assigns another distinct ID to the same user. Read more in our [identify docs](/docs/product-analytics/identify).
+
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
-    "properties": {
-        "distinct_id": "123",
-        "alias": "456"
-    },
-    "timestamp": "2020-08-16 09:03:11.913767",
-    "event": "$create_alias"
+  "api_key": "<ph_project_api_key>",
+  "distinct_id": "123",
+  "properties": {
+    "alias": "456"
+  },
+  "timestamp": "[optional timestamp in ISO 8601 format]",
+  "event": "$create_alias"
 }' https://app.posthog.com/capture/
 ```
 
-### Capture
+### Groups
+
+Captures a group event. Read more in our [group analytics docs](/docs/product-analytics/group-analytics).
+
+> **Note:** `company` is a [group type](/docs/product-analytics/group-analytics#groups-vs-group-types). You can set it to the value you want such as `organization`, `project`, or `channel`.
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
-    "properties": {},
-    "timestamp": "2020-08-16 09:03:11.913767",
-    "distinct_id": "1234",
-    "event": "$event"
+  "api_key": "<ph_project_api_key>",
+  "event": "$event",
+  "distinct_id": "1234",
+  "properties": {
+    "$groups": {"company": "<company_name>"}
+  }
+}' https://app.posthog.com/capture/
+```
+
+### Group identify
+
+Updates group information. Read more in our [group analytics docs](/docs/product-analytics/group-analytics).
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "$groupidentify",
+  "distinct_id": "groups_setup_id",
+  "properties": {
+    "$group_type": "<group_type>",
+    "$group_key": "<company_name>",
+    "$group_set": {
+      "name": "<company_name>",
+      "subscription": "premium"
+      "date_joined": "[optional timestamp in ISO 8601 format]"
+    }
+  }
 }' https://app.posthog.com/capture/
 ```
 
 ### Identify
 
+Updates user information. Read more in our [identify docs](/docs/product-analytics/identify).
+
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
-    "timestamp": "2020-08-16 09:03:11.913767",
-    "context": {},
-    "distinct_id": "1234",
+  "api_key": "<ph_project_api_key>",
+  "timestamp": "2020-08-16 09:03:11.913767",
+  "properties": {
     "$set": {},
-    "event": "$identify"
+  },
+  "distinct_id": "1234",
+  "event": "$identify"
 }' https://app.posthog.com/capture/
 ```
 
-### Page view
+### Pageview
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
-    "properties": {},
-    "timestamp": "2020-08-16T09:03:11.913767",
-    "distinct_id": "1234",
-    "event": "$pageview"
+  "api_key": "<ph_project_api_key>",
+  "properties": {
+    "title": "TheTitle"
+  },
+  "timestamp": "2020-08-16T09:03:11.913767",
+  "distinct_id": "1234",
+  "event": "$pageview"
 }' https://app.posthog.com/capture/
 ```
 
@@ -128,237 +140,114 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
-    "properties": {},
-    "timestamp": "2020-08-16T09:03:11.913767",
-    "distinct_id": "1234",
-    "event": "$screen"
+  "api_key": "<ph_project_api_key>",
+  "properties": {
+    "$screen_name": "TheScreen"
+  },
+  "timestamp": "2020-08-16T09:03:11.913767",
+  "distinct_id": "1234",
+  "event": "$screen"
 }' https://app.posthog.com/capture/
 ```
 
-### Responses
+## Feature flags
 
-#### Status code: 200
+import FeatureFlagsLibsIntro from "../libraries/_snippets/feature-flags-libs-intro.mdx"
 
-##### Responses
+<FeatureFlagsLibsIntro />
 
-```js
+import APIFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-api.mdx'
+
+<APIFeatureFlagsCode />
+
+## Responses
+
+### Status code: 200
+
+**Response:**
+
+```json
 {
-    status: 1
+  "status": 1
 }
 ```
 
-**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project API key (token) is valid. It **does not** imply that events are valid and will be ingested. As mentioned under [Invalid events](#invalid-events), certain event validation errors may cause an event not to be ingested.
+**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project API key (api_key) is valid. It **does not** imply that events are valid and will be ingested. As mentioned under [Invalid events](#invalid-events), certain event validation errors may cause an event not to be ingested.
 
-#### Status code: 400
+### Status code: 400
 
-##### Responses
+**Responses:**
 
-```js
+```json
 {
-    type: 'validation_error',
-    code: 'invalid_project',
-    detail: 'Invalid Project ID.',
-    attr: 'project_id'
+  "type": "validation_error", 
+  "code": "invalid_project",
+  "detail": "Invalid Project ID.",
+  "attr": "project_id"
 }
 ```
 
 **Meaning:** We were unable to determine the project to associate the events with.
 
-#### Status code: 401
-
-##### Responses
-
-```js
+```json
 {
-    type: 'authentication_error',
-    code: 'invalid_api_key',
-    detail: 'Project API key invalid. You can find your project API key in PostHog project settings.',
+  "type": "validation_error", 
+  "code": "invalid_payload", 
+  "detail": "Malformed request data", 
+  "attr": null
 }
 ```
 
-**Meaning:** The token/API key you provided is invalid.
+**Meaning:** Request payload data formatted incorrectly.
 
-<br />
+### Status code: 401
 
-```js
+**Responses:**
+
+```json
 {
-    type: 'authentication_error',
-    code: 'invalid_personal_api_key',
-    detail: 'Invalid Personal API key.',
+  "type": "authentication_error",
+  "code": "invalid_api_key",
+  "detail": "Project API key invalid. You can find your project API key in PostHog project settings."
+}
+```
+
+**Meaning:** The project API key you provided is invalid.
+
+```json
+{
+  "type": "authentication_error",
+  "code": "invalid_personal_api_key",
+  "detail": "Invalid Personal API key."
 }
 ```
 
 **Meaning:** The personal API key you used for authentication is invalid.
 
-#### Status code: 503 (Deprecated)
+### Status code: 503 (Deprecated)
 
-##### Responses
+**Response:**
 
-```js
+```json
 {
-    type: 'server_error',
-    code: 'fetch_team_fail',
-    detail: 'Unable to fetch team from database.'
+  "type": "server_error",
+  "code": "fetch_team_fail",
+  "detail": "Unable to fetch team from database."
 }
 ```
 
-**Meaning:** (Deprecated) This error will only occur in self-hosted Postgres instances if the database becomes unavailable. On ClickHouse-backed instances database failures cause events to be added to a dead letter queue, from which they can be recovered.
+**Meaning:** (Deprecated) This error only occurs in self-hosted Postgres instances if the database becomes unavailable. On ClickHouse-backed instances database failures cause events to be added to a dead letter queue, from which they can be recovered.
 
-### Invalid events
+## Invalid events
 
-We perform basic validation on the payload and project API key (token), returning a failure response if an error is encountered.
+We perform basic validation on the payload and project API key (api_key), returning a failure response if an error is encountered.
 
-However, we **will not return an error** to the client when the following happens:
+PostHog **does not return an error** to the client when the following happens:
 
--   An event does not have a name
--   An event does not have the `distinct_id` field set
--   The `distinct_id` field of an event has an empty value
+- An event does not have a name
+- An event does not have the `distinct_id` field set
+- The `distinct_id` field of an event has an empty value
 
-The three cases above will cause the event to not be ingested, but you will still receive a `200: OK` response from us.
+These three cases above cause the event to not be ingested, but you still receive a `200: OK` response from PostHog.
 
-This approach allows us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints.
-
-# Feature flags
-
-PostHog offers support for [feature flags](/docs/user-guides/feature-flags), and you can use our APIs to create and make use of feature flags. However, it is important to note that while creating a feature flag is a private action that only your team should be able to perform, checking if a feature flag is active is not.
-
-As such, to create feature flags, you will need to use another endpoint, which we're currently still documenting. However, to check if a feature flag is enabled, you can use the following endpoint:
-
-#### /decide
-
-`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript Library's](/docs/integrate/client/js) methods for feature flags.
-
-To get the feature flags that are enabled for a given user, you will need to perform the following request:
-
-```shell
-POST <ph_instance_address>/decide/ # e.g. https://posthog.yourcompany.com for self-hosted users
-Content-Type: application/json
-Body:
-{
-    "api_key": "<ph_project_api_key>",
-    "distinct_id": "[user's distinct id]"
-}
-```
-
-### Example request & response: /decide v3
-`/decide` version 3 introduces support for [feature flag payloads](docs/feature-flags/payloads) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
-
-### Request
-
-```shell
-curl -v -L --header "Content-Type: application/json" -d '  {
-    "api_key": "<ph_project_api_key>",
-    "distinct_id": "1234",
-    "groups" : {
-        "<groupType>": "<groupKey>"
-    }
-}' https://app.posthog.com/decide?v=3
-```
-
-#### Response
-
-```shell
-{
-  "config": {
-    "enable_collect_everything": true
-  },
-  "editorParams": {},
-  "isAuthenticated": false,
-  "supportedCompression": [
-    "gzip",
-    "lz64"
-  ],
-  "featureFlags": {
-    "my-awesome-flag": true,
-    "my-awesome-flag-2": true,
-    "my-multivariate-flag": "some-string-value",
-    "flag-thats-not-on": false,
-  },
-  "featureFlagPayloads": {
-    "my-awesome-flag": "example-payload-string",
-    "my-awesome-flag-2": {"color": "blue", "animal": "hedgehog"}
-  }
-}
-```
-
-### Example request & response: /decide v2 (legacy)
-
-`/decide` version 2 introduces support for [multivariate feature flags](/docs/user-guides/feature-flags#multivariate-feature-flags-alpha) and has a slightly different schema for the response. `posthog-js` version 1.13 and up will use version 2 of the decide endpoint by default.
-
-#### Request
-
-```shell
-curl -v -L --header "Content-Type: application/json" -d '  {
-    "api_key": "<ph_project_api_key>",
-    "distinct_id": "1234",
-    "groups" : { 
-        "<groupType>": "<groupKey>"
-    }
-}' https://app.posthog.com/decide?v=2
-```
-
-#### Response
-
-```shell
-{
-  "config": {
-    "enable_collect_everything": true
-  },
-  "editorParams": {},
-  "isAuthenticated": false,
-  "supportedCompression": [
-    "gzip",
-    "lz64"
-  ],
-  "featureFlags": {
-    "my-awesome-flag": true,
-    "my-awesome-flag-2": true,
-    "my-multivariate-flag": "some-string-value"
-  }
-}
-```
-
-### Example request & response: /decide v1 (legacy)
-
-`/decide` version 1 is still the default if the query parameter `v` is not specified, although the latest `posthog-js` library no longer uses version 1 of the decide endpoint, and we recommend using version 2 as described above.
-
-#### Request
-
-```shell
-curl -v -L --header "Content-Type: application/json" -d '  {
-    "api_key": "<ph_project_api_key>",
-    "distinct_id": "1234"
-}' https://app.posthog.com/decide?v=1
-```
-
-#### Response
-
-```shell
-{
-  "config": {
-    "enable_collect_everything": true
-  },
-  "editorParams": {},
-  "isAuthenticated": false,
-  "supportedCompression": [
-    "gzip",
-    "lz64"
-  ],
-  "featureFlags": [
-    "my-awesome-flag-1",
-    "my-awesome-flag-2",
-    "my-multivariate-flag"
-  ]
-}
-```
-
-From this response, if you are looking to use feature flags in your backend, you will most likely need only the values for the `featureFlags` key, which indicate what flags are on for the user with the distinct ID you provided. These flags persist for users (unless you change your flag settings), so you can cache them rather than send a request to the endpoint each time if you so wish.
-
-Note that if a multivariate feature flag is enabled for a given user, it will still show up in `featureFlags` under decide version 1, but its value will only be accessible when using decide version 2.
-
-# Reading data from PostHog
-
-We have another set of APIs to read/modify anything in PostHog. See our [API documentation](/docs/api/overview) for more information.
-
-Also, feel free to [reach out](https://app.posthog.com/home#supportModal) if you'd like help with the API.
+This approach enables us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints.

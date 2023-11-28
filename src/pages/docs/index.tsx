@@ -1,377 +1,166 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import docs from 'sidebars/docs.json'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import { LinkGrid } from 'components/Docs/LinkGrid'
-import { graphql, PageProps } from 'gatsby'
+import List from 'components/List'
+import { CallToAction } from 'components/CallToAction'
+import { IconLightBulb } from '@posthog/icons'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const quickLinks = [
     {
-        icon: 'Analytics',
+        icon: 'IconGraph',
         name: 'Product analytics',
         to: '/docs/product-analytics',
         description: 'Better understand your users and build better products',
+        color: 'blue',
     },
     {
-        icon: 'SessionRecording',
-        name: 'Session recording',
+        icon: 'IconRewindPlay',
+        name: 'Session replay',
         to: '/docs/session-replay',
         description: 'Play back sessions to diagnose UI issues and get inspired',
+        color: 'yellow',
     },
     {
-        icon: 'FeatureFlags',
+        icon: 'IconToggle',
         name: 'Feature flags',
         to: '/docs/feature-flags',
         description: 'Toggle features to test the impact before rolling out',
+        color: 'seagreen',
     },
     {
-        icon: 'AbTesting',
+        icon: 'IconFlask',
         name: 'A/B testing',
         to: '/docs/experiments',
         description: 'A/B test UI changes and new features',
+        color: 'purple',
     },
     {
-        icon: 'DataManagement',
-        name: 'Data',
-        to: '/docs/data',
+        icon: 'IconChat',
+        name: 'Surveys',
+        to: '/docs/surveys',
+        description: 'Ask your users questions to get qualitative feedback',
+        color: 'blue',
+    },
+    {
+        icon: 'IconPerson',
+        name: 'CDP',
+        to: '/docs/cdp',
         description: 'Get a complete picture of all your data',
+        color: 'yellow',
     },
     {
-        icon: 'AppLibrary',
-        name: 'Apps',
-        to: '/docs/apps',
+        icon: 'IconServer',
+        name: 'Data warehouse',
+        to: '/docs/data-warehouse',
         description: 'Extend PostHog by adding your own functionality',
+        color: 'seagreen',
     },
 ]
 
-const otherLinks = [
-    {
-        name: 'Integrate PostHog',
-        links: [
-            { name: 'Send events', to: '/docs/getting-started/send-events' },
-            { name: 'Historical events', to: '/docs/integrate/ingest-historic-data' },
-            { name: 'Identifying users', to: '/docs/integrate/identifying-users' },
-            { name: 'Libraries', to: '/docs/integrate/libraries' },
-            { name: 'Proxying events', to: '/docs/integrate/proxy' },
-        ],
-    },
-    {
-        name: 'Self-host',
-        links: [
-            { name: 'Deployment', to: '/docs/self-host' },
-            { name: 'Runbook', to: '/docs/runbook' },
-            { name: 'Environment variables', to: '/docs/self-host/configure/environment-variables' },
-            { name: 'Monitoring', to: '/docs/self-host/configure/monitoring-with-grafana' },
-            { name: 'Upgrading', to: '/docs/runbook/upgrading-posthog' },
-            { name: 'Troubleshooting', to: '/docs/self-host/deploy/troubleshooting' },
-        ],
-    },
-    {
-        name: 'Apps',
-        links: [
-            { name: 'Explore app library', to: '/apps' },
-            { name: 'Use cases', to: '/docs/apps' },
-            { name: 'Building an app', to: '/docs/apps/build' },
-            { name: 'Developer reference', to: '/docs/apps/build/reference' },
-        ],
-    },
-    {
-        name: 'Data management',
-        links: [
-            { name: 'Organizations & projects', to: '/manual/organizations-and-projects' },
-            { name: 'UTM parameters', to: '/manual/utm-segmentation' },
-            { name: 'Notifications & alerts', to: '/manual/notifications-and-alerts' },
-            { name: 'Events', to: '/manual/events' },
-            { name: 'Annotations', to: '/manual/annotations' },
-        ],
-    },
-    {
-        name: 'Developers',
-        links: [
-            { name: 'REST API', to: '/docs/api' },
-            { name: 'Developing locally', to: '/handbook/engineering/developing-locally' },
-            { name: 'Contributing', to: '/docs/contribute' },
-            { name: 'How PostHog works', to: '/docs/how-posthog-works' },
-        ],
-    },
-    {
-        name: 'Privacy & compliance',
-        links: [
-            { name: 'GDPR', to: '/docs/privacy/gdpr-compliance' },
-            { name: 'HIPAA', to: '/docs/privacy/hipaa-compliance' },
-            { name: 'CCPA', to: '/docs/privacy/ccpa-compliance' },
-            { name: 'Data deletion', to: '/docs/privacy/data-deletion' },
-        ],
-    },
-]
-
-type ImportantLinkProps = {
-    to: string
-    icon?: string
-    title: string
-    badge?: 'new' | 'beta' | undefined
-    children?: React.ReactNode
-}
-
-const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge, children }) => {
-    const badgeClass = badge === 'new' ? 'success' : badge === 'beta' ? 'warning' : null
-
-    return (
-        <Link
-            className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/60 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
-            to={to}
-        >
-            {icon ? <img src={icon} className="w-5 h-5" /> : children || null}
-            <span>{title}</span>
-            {badge && <span className={`lemon-tag ${badgeClass}`}>{badge}</span>}
-        </Link>
-    )
-}
-
-type DocsData = {
-    gettingStarted: {
-        nodes: {
-            fields: {
-                slug: string
-            }
-            frontmatter: {
-                title: string
-                icon?: {
-                    publicURL: string
-                }
-            }
-        }[]
-    }
-    sdks: {
-        nodes: {
-            fields: {
-                slug: string
-            }
-            frontmatter: {
-                title: string
-                icon?: {
-                    publicURL: string
-                }
-            }
-        }[]
-    }
-    apps: {
-        nodes: {
-            fields: {
-                slug: string
-            }
-            frontmatter: {
-                title: string
-                thumbnail?: {
-                    publicURL: string
-                }
-            }
-        }[]
-    }
-}
-
-export const DocsIndex = ({ data }: PageProps<DocsData>) => {
-    const { gettingStarted, sdks, apps } = data
-
-    const gettingStartedLinks = React.useMemo(() => {
-        const gettingStartedSection = docs.find((section) => section.name === 'Getting started')?.children || []
-        return gettingStarted.nodes.sort(
-            (a, b) =>
-                gettingStartedSection?.findIndex((link) => link.url === a.fields.slug) -
-                gettingStartedSection?.findIndex((link) => link.url === b.fields.slug)
-        )
-    }, [])
-
+export const DocsIndex = () => {
     return (
         <Layout>
             <SEO title="Documentation - PostHog" />
 
-            <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
-                <div className="space-y-16 lg:space-y-20 lg:mt-0 mt-8 mb-8">
-                    <section className="border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pb-8">
-                        <div className="w-full z-20">
+            <PostLayout article={false} title={'Docs'} hideSidebar hideSurvey>
+                <section className="mb-4 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
+                    <div className="flex-1 text-center sm:text-left">
+                        <h2>New to PostHog?</h2>
+                        <p className="text-[15px]">
+                            The getting started guide covers adding PostHog to your app or site, sending events,
+                            identifying users, creating actions and insights, and assigning properties to users and
+                            users to groups.
+                        </p>
+                        <CallToAction
+                            to="/docs/getting-started/install"
+                            type="primary"
+                            size="md"
+                            className="!w-full sm:!w-auto"
+                        >
+                            Get started
+                        </CallToAction>
+                    </div>
+                    <aside>
+                        <figure className="m-0">
                             <StaticImage
                                 objectFit="contain"
-                                src="../../../contents/images/search-hog-3.png"
-                                alt="This hog has an answer"
-                                width={400}
+                                src="../../../contents/images/adventure-hog.png"
+                                alt="This hog knows where he's headed"
+                                width={342}
                                 placeholder="blurred"
-                                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 mb-8"
+                                className="w-full sm:w-[345px]"
                             />
-                            <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl mb-2 whitespace-nowrap">
-                                Documentation
-                            </h1>
-                            <h5 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray pb-8">
-                                New to PostHog? Visit the{' '}
-                                <Link to="/docs/getting-started/start-here" className="font-semibold">
-                                    getting started guide
-                                </Link>
-                                .
-                            </h5>
-                        </div>
+                        </figure>
+                    </aside>
+                </section>
 
-                        <LinkGrid links={quickLinks} />
-                    </section>
-
-                    <section className="space-y-8">
-                        <div className="text-center">
-                            <h2 className="font-bold mb-1 inline-block w-full">Quick links</h2>
-                        </div>
-
-                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-x-4 rounded xl:rounded-none overflow-hidden">
-                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
-                                <div className="mb-3">
-                                    <h4 className="font-bold mb-0">Getting started</h4>
-                                    <p className="text-sm text-gray">Complete guide to getting set-up</p>
-                                </div>
-
-                                <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {gettingStartedLinks.map((step, index) => {
-                                        return (
-                                            <li className="flex-grow" key={step.fields.slug}>
-                                                <ImportantLink to={step.fields.slug} title={step.frontmatter.title}>
-                                                    <div className="bg-red text-white w-5 h-5 flex items-center justify-center rounded opacity-60 text-xs">
-                                                        <span>{index + 1}</span>
-                                                    </div>
-                                                </ImportantLink>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-
-                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
-                                <div className="mb-3">
-                                    <h4 className="font-bold mb-0">Popular SDKs</h4>
-                                    <p className="text-sm text-gray">Integrate with your favoriate language</p>
-                                </div>
-                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {sdks.nodes.map((sdk) => {
-                                        return (
-                                            <li className="flex-grow" key={sdk.fields.slug}>
-                                                <ImportantLink
-                                                    to={sdk.fields.slug}
-                                                    title={sdk.frontmatter.title}
-                                                    icon={sdk.frontmatter.icon?.publicURL}
-                                                    badge={undefined}
-                                                />
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-
-                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
-                                <div className="mb-3">
-                                    <h4 className="font-bold mb-0">Popular apps</h4>
-                                    <p className="text-sm text-gray">Import, transform, and export data</p>
-                                </div>
-                                <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {apps.nodes.map((app) => {
-                                        return (
-                                            <li className="flex-grow" key={app.fields.slug}>
-                                                <ImportantLink
-                                                    to={app.fields.slug}
-                                                    title={app.frontmatter.title}
-                                                    icon={app.frontmatter.thumbnail?.publicURL}
-                                                    badge={undefined}
-                                                />
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className="space-y-8">
-                        <div className="text-center">
-                            <h2 className="font-bold mb-1">More handy links</h2>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-                            {otherLinks.map((category) => {
-                                return (
-                                    <div
-                                        key={category.name}
-                                        className="space-y-2 py-4 md:py-6 px-4 md:px-8 border-dashed border-b border-r border-gray-accent-light dark:border-gray-accent-dark"
-                                    >
-                                        <h4 className="mb-0">{category.name}</h4>
-                                        <ul className="p-0 space-y-1">
-                                            {category.links.map((link) => {
-                                                return (
-                                                    <li key={link.to} className="list-none">
-                                                        <Link to={link.to}>{link.name}</Link>
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </section>
+                <div className="flex gap-1 items-center mb-8">
+                    <IconLightBulb className="w-6 h-6 text-primary dark:text-primary-dark opacity-50" />
+                    <p className="text-sm m-0">
+                        <strong>Tip:</strong> Open search with <KeyboardShortcut text="/" /> , then{' '}
+                        <KeyboardShortcut text="Tab" size="sm" /> to search docs
+                    </p>
                 </div>
+
+                <section className="@container">
+                    <div className="flex flex-col @3xl:grid md:grid-cols-3 gap-4 mb-8">
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                            <h3 className="text-xl mb-2">Data</h3>
+                            <p className="text-[15px]">
+                                Learn how to manage events and customer data for use with all PostHog products.
+                            </p>
+                            <CallToAction to="/docs/data" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Explore
+                            </CallToAction>
+                        </div>
+                        <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                            <h3 className="text-xl mb-2">Apps</h3>
+                            <p className="text-[15px]">
+                                Extend functionality with third-party apps that integrate into the PostHog ecosystem.
+                            </p>
+                            <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
+                                <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
+                                    Explore
+                                </CallToAction>
+                                <Link to="/apps" className="text-sm">
+                                    Browse apps
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                            <h3 className="text-xl mb-2">API</h3>
+                            <p className="text-[15px]">
+                                Push or pull data to build custom functionality or create bespoke views for your
+                                business needs.
+                            </p>
+                            <CallToAction to="/docs/api" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Explore
+                            </CallToAction>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="mb-4 lg:flex-row gap-4 lg:gap-8">
+                    <h2>Products</h2>
+                    <List
+                        className="grid md:grid-cols-2 gap-1"
+                        items={quickLinks.map(({ icon, name, to, description, color }) => ({
+                            label: name,
+                            url: to,
+                            icon,
+                            description,
+                            iconColor: color,
+                        }))}
+                    />
+                </section>
             </PostLayout>
         </Layout>
     )
 }
-
-export const query = graphql`
-    query PopularLinks {
-        gettingStarted: allMdx(
-            filter: { slug: { regex: "/^docs/getting-started/(?!start-here)[\\w\\-]+$/" } }
-        ) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    icon {
-                        publicURL
-                    }
-                }
-            }
-        }
-        sdks: allMdx(
-            filter: { slug: { regex: "/^docs/libraries/(js|node|python|react|ios|android)/$/" } }
-            sort: { fields: fields___pageViews, order: DESC }
-        ) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    icon {
-                        publicURL
-                    }
-                }
-            }
-        }
-        apps: allMdx(
-            filter: { slug: { regex: "/^docs/apps/(?!build)\\w+/" } }
-            sort: { fields: fields___pageViews, order: DESC }
-            limit: 6
-        ) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    thumbnail {
-                        publicURL
-                    }
-                }
-            }
-        }
-    }
-`
 
 export default DocsIndex

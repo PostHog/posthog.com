@@ -103,7 +103,7 @@ export default function GlossaryElement({ as = 'p', ...other }) {
             )
             return (
                 <Tooltip
-                    className="border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark"
+                    className=""
                     key={match + i}
                     content={() => (
                         <TooltipContent

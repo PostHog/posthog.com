@@ -4,9 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas', 'yakko-majuri']
 date: 2022-10-17
-featuredImage: ../images/tutorials/banners/tutorial-13.png
 featuredVideo: https://www.youtube-nocookie.com/embed/I_WJc8T5lL8
-tags: ['configuration', 'events']
+tags: ['configuration', 'events', 'product analytics']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕
@@ -302,5 +301,3 @@ Now that we are capturing pageviews, we can figure out how users move around our
 We can also track more events than just pageviews. The [event tracking guide](https://posthog.com/tutorials/event-tracking-guide) will provide you with all the details on how.
 
 For more advanced PostHog users, you can use all of your new pageview data to help you build [an AARRR dashboard](https://posthog.com/blog/aarrr-pirate-funnel).
-
-<NewsletterTutorial compact/>
