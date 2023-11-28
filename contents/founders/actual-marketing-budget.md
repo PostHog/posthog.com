@@ -1,5 +1,5 @@
 ---
-date: 2023-11-23
+date: 2023-11-28
 title: How we spend our marketing budget at PostHog (with actual $ figures)
 author:
   - charles-cook
