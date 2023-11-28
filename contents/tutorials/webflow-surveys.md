@@ -23,7 +23,7 @@ Go to the "Custom code" tab in site settings. In the "Head code" section, paste 
 
 ## Create your survey
 
-Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." There are a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, or you can create your own by clicking "Create blank survey". For this tutorial, we chose the [customer satisfaction score (CSAT)](/product-engineers/nps-vs-csat-vs-ces) template.
+Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." There are a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, or you can create your own by clicking "Create blank survey".
 
 ![PostHog survey templates](../images/tutorials/webflow-surveys/survey-templates.png)
 
