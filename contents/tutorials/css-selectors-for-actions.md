@@ -127,15 +127,15 @@ In general, CSS selectors are well-suited for situations such as...
 There are two ways to do it - through the Toolbar and Data Management section.
 
 ### The toolbar
-Go to your PostHog instance and select `Toolbar` in the bottom of the sidebar.
+Go to your PostHog instance and select `Launch toolbar` in the bottom of the sidebar.
 
-![Toolbar Location](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_location.png)
+![Toolbar Location](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_location.mp4)
 
 Then, press the `Open with Toolbar` button, which will take you to your website. You can read more about working with the toolbar [here](/manual/toolbar).
 
-After your website is open, you should see a PostHog logo 🦔 floating around. Press it. You will see a toolbar like the picture below.
+After your website is open, you should see a PostHog toolbar:
 
-![Toolbar In Action](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_in_action.png).
+![Toolbar In Action](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_in_action.png)
 
 The best option to start creating actions with CSS selectors is to use the `Inspect` option in the toolbar and then click on some element on the page. You should see the menu with a `Create a new action` button in the bottom. Press it and you will see the `Actions` menu with automatically generated CSS selector in the `Selector` section. Feel free to start from there and change it!
 
