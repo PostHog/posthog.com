@@ -2398,6 +2398,12 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/surveys/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                },
             ],
         },
         {
