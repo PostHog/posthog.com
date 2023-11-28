@@ -140,9 +140,7 @@ Use fully rounded buttons and centered text.
 
 ### Icons
 
-Use filled in icons over outlined icons. 
-
-Team members can use the [icons library](https://github.com/PostHog/icons). The repo contains a list of all available icons along with instructions on how to request a new one.
+Our icon library is managed in npm: `@posthog/icons`, and is maintained in [GitHub](https://github.com/posthog/icons). It's based on [Central Icon System](https://iconists.co/central) with the 1px radius, 1.5px stroke variant.
 
 ## Presentations
 
