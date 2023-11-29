@@ -1,5 +1,5 @@
 ---
-date: 2023-11-17
+date: 2023-11-29
 title: "NPS vs CSAT vs CES: Which is best for SaaS?"
 author:
   - lior-neu-ner
@@ -14,7 +14,7 @@ tags:
 
 The two most important metrics in SaaS are growth and retention. [User surveys](/surveys) are a great way to unlock insights into how to improve them, but which survey type gives you the best insights? 
 
-Net promoter score (NPS), customer satisfaction (CSAT) and customer effort score (CES) are three of the most popular surveys and in this post we'll dive into our choice for which one is best for SaaS.
+Net promoter score (NPS), customer satisfaction (CSAT) and customer effort score (CES) are three of the most popular surveys and in this post we'll dive into our choice for which one is best for SaaS apps.
 
 Here's the TLDR:
 
@@ -79,6 +79,8 @@ To counteract this, it's best to ask follow-up questions in your NPS survey, lik
 - What would it take to improve your score to a 9 or 10?
 - Would you be open to a follow-up call to discuss your feedback in more detail?
 
+### When to use NPS surveys
+
 NPS is particularly handy for understanding long-term user satisfaction.
 
 With this in mind, it's best to wait for users to properly experience your app. Then, you should run NPS surveys every month or quarter to understand how their experience changes over time. This enables you to identify trends in how your product changes are affecting your user experience.
@@ -91,7 +93,7 @@ Next, **focus your attention on the passive responses** (the users who responded
 
 Find out what these things are (by conducting interviews or follow-up surveys) and address their feedback with product changes. Once you've done so, let them know and they'll be grateful you've taken their input seriously. This should persuade them into becoming promoters.
 
-Once you've done so, repeat the same steps for detractors who responded with 5 or 6. You can also repeat the process again for detractors who responded from 0-4, but keep in mind that the lower their response is, the more effort it will take to improve – which may not be worthwhile.
+Then, repeat the same steps for detractors who responded with 5 or 6. You can also repeat the process again for detractors who responded from 0-4, but keep in mind that the lower their response is, the more effort it will take to improve – which may not be worthwhile.
 
 ## What is CSAT?
 
