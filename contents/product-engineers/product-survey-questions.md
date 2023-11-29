@@ -108,7 +108,7 @@ With those principles in mind, here are some example product survey questions as
 
 - [Uber](https://uber.app.box.com/s/ilxsiqy0bkfhgum8o15n6k6bqi2rqn9c?uclick_id=4bd0d002-01d8-48cd-8064-3bb2af4847f2) asked a series of questions to all drivers including "Overall, how would you rate your driving or delivery experience with Uber in X areas" like app performance and features, then added an open text field for details.
 
-- [Zola](https://review.firstround.com/heres-why-zola-cherishes-its-nps-detractors-as-much-as-its-promoters) sent NPS surveys every month since its launch. They focused on feedback from detractors over promoters to guide product changes.
+- [Zola](https://review.firstround.com/heres-why-zola-cherishes-its-nps-detractors-as-much-as-its-promoters) sent [NPS surveys](/product-engineers/nps-vs-csat-vs-ces) every month since its launch. They focused on feedback from detractors over promoters to guide product changes.
 
 This shows the diversity of questions, companies, and use cases for product surveys. Each of them utilized surveys to prioritize future development, monitor user satisfaction, and ultimately, make data-informed decisions to improve their product.
 
