@@ -4,7 +4,7 @@ import Tooltip from 'components/Tooltip'
 import { IconTriangleUpFilled } from '@posthog/icons'
 import { PostsContext } from './Posts'
 
-export default function LikeButton({ className = '', postID }: { postID: number }) {
+export default function LikeButton({ className = '', postID, slug }: { postID: number; slug: string }) {
     const { setLoginModalOpen } = useContext(PostsContext)
     const [liked, setLiked] = useState(false)
     const { likePost, user } = useUser()
@@ -15,7 +15,7 @@ export default function LikeButton({ className = '', postID }: { postID: number 
             setLoginModalOpen(true)
         } else {
             setLiked(!liked)
-            likePost(postID, liked)
+            likePost(postID, liked, slug)
         }
     }
 

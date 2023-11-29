@@ -42,12 +42,12 @@ const UserBar = () => {
                     </p>
                     <span>
                         {isModerator && (
-                            <button
+                            <Link
                                 className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
-                                onClick={() => setNewPostModalOpen(!newPostModalOpen)}
+                                to="/posts/new"
                             >
                                 New post
-                            </button>
+                            </Link>
                         )}
                         <button className="text-sm dark:text-yellow text-red font-semibold" onClick={() => logout()}>
                             Logout
@@ -89,7 +89,6 @@ export const Skeleton = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            console.log('interval')
             setCount(count + 1)
         }, 1000)
 

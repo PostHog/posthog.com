@@ -112,10 +112,6 @@
         "url": "/cdp/redshift-export"
     },
     {
-        "name": "Redshift (Import)",
-        "url": "/cdp/redshift-import"
-    },
-    {
         "name": "Replicator",
         "url": "/cdp/replicator"
     },

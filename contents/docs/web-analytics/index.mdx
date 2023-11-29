@@ -1,0 +1,79 @@
+---
+title: Web analytics
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: partial
+    enterprise: partial
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+> Web analytics is currently an [opt-in public beta](/docs/getting-started/enable-betas). This means it's not yet a perfect experience, but we'd love to know your thoughts. Please [share your feedback](http://app.posthog.com/home#supportModal) and [follow our roadmap](https://github.com/PostHog/posthog/issues/18547).
+
+Web analytics enables you to easily track and monitor many of the most important metrics for your website. 
+
+Unlike product analytics, web analytics offers a more streamlined and focused experience. This is especially useful for marketers, content creators, or anyone used to tools like Google Analytics. It includes a dashboard that offers essential metrics, such as visitors, views, sessions, session duration, bounce rate, paths, referrers, and more.
+
+![Web analytics](../../images/docs/web-analytics/web-analytics.png)
+
+## Get started with web analytics
+
+Getting started is a simple three-step process.
+
+### 1. Install PostHog on your website
+
+Follow the [installation instructions](/docs/product-analytics/installation) to setup either the JavaScript snippet or the JavaScript Web SDK for the website you want to track.
+
+> [Single page apps](/tutorials/single-page-app-pageviews) might require you to manually implement `$pageview` and `$pageleave` event capture for every navigation change. See our tutorials on how to do this in [React](/tutorials/single-page-app-pageviews), [Next.js](/docs/libraries/next-js#client-side-setup), [Vue](/docs/libraries/vue-js#capturing-page-views), and [Svelte](/tutorials/svelte-analytics#capturing-pageviews-and-pageleaves).
+
+### 2. Enable the web analytics beta
+
+In PostHog, click your profile icon in the top right and then click "Feature preview." In the [feature preview modal](https://app.posthog.com/home#panel=feature-previews), enable "Web Analytics Dashboard"
+
+![Enable web Analytics video](../../images/docs/web-analytics/web-analytics.mp4)
+
+### 3. Go to the web analytics dashboard
+
+Now, you can click the newly added [web analytics tab](https://app.posthog.com/web) to go to the dashboard.
+
+## Filtering your dashboard
+
+Like other dashboards in PostHog, the web analytics dashboard is filterable. This means you can filter for data with certain event or person property values. Options include browser, path name, device type, country, and UTMs. Just click the "Add filter" button next to the date range at the top of the dashboard.
+
+This enables you to dive into specific stats for regions, parts of the site, and specific marketing campaigns. 
+
+For more complex queries, you can still use the product analytics tab as usual.
+
+## Frequently asked questions
+
+Have a question not covered here? [Let us know](http://app.posthog.com/home#supportModal).
+
+### What is the difference between web analytics and product analytics?
+
+Web analytics is a streamlined experience for tracking and monitoring your most important website metrics. Product analytics is a more powerful and flexible experience for tracking your product.
+
+<ComparisonTable column1="Web analytics" column2="Product analytics">
+  <ComparisonRow column1={"One, pre-built"} column2={"Unlimited, customizable"} feature="Dashboards" />
+  <ComparisonRow column1={false} column2={true} feature="Custom insights" />
+  <ComparisonRow column1={"Pageview, pageleave"} column2={"Any, custom"} feature="Events" />
+  <ComparisonRow column1={"Limited, pre-defined"} column2={"Any, custom"} feature="Properties" />
+  <ComparisonRow column1={"Small teams, marketers"} column2={"Engineering, product, data teams"} feature="Built for" />
+  <ComparisonRow column1={"At-a-glance view of website traffic"} column2={"Analysis of product usage and user behavior"} feature="Use case" />
+</ComparisonTable>
+
+Web analytics relies on a subset of the events and properties used by product analytics. This means you can use both in tandem.
+
+### How much does web analytics cost?
+
+During beta, web analytics is no additional cost on top of product analytics. Events are used between both, and follow [product analytics' pricing](/pricing?product=product-analytics).
+
+### Where is my world map?
+
+All good web analytics dashboards need to include a world map. Ours includes it too. If you can't see it, you need to enable the [GeoIP app](https://app.posthog.com/project/apps/74).
+
+### Do stats include bots and crawlers?
+
+No, we automatically block bots and crawlers. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/master/src/utils/blocked-uas.ts).

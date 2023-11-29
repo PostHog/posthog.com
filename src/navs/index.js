@@ -24,51 +24,55 @@ export const handbookSidebar = [
                 url: '/handbook/how-we-get-users',
             },
             {
-                name: '4. How we make users happy',
+                name: '4. Who we are building for',
+                url: '/handbook/who-we-are-building-for',
+            },
+            {
+                name: '5. How we make users happy',
                 url: '/handbook/making-users-happy',
             },
             {
-                name: '5. How we make money',
+                name: '6. How we make money',
                 url: '/handbook/how-we-make-money',
             },
             {
-                name: '6. Enduringly low prices',
+                name: '7. Enduringly low prices',
                 url: '/handbook/low-prices',
             },
             {
-                name: '7. Deciding which products to build',
+                name: '8. Deciding which products to build',
                 url: '/handbook/which-products',
             },
             {
-                name: '8. A wide company with small teams',
+                name: '9. A wide company with small teams',
                 url: '/handbook/wide-company',
             },
             {
-                name: "9. How we're building a world-class team",
+                name: "10. How we're building a world-class team",
                 url: '/handbook/strong-team',
             },
             {
-                name: '10. What we value',
+                name: '11. What we value',
                 url: '/handbook/values',
             },
             {
-                name: '11. Providing a world-class engineering environment',
+                name: '12. Providing a world-class engineering environment',
                 url: '/handbook/world-class-engineering',
             },
             {
-                name: '12. Not running out of money',
+                name: '13. Not running out of money',
                 url: '/handbook/finance',
             },
             {
-                name: '13. Where we are now',
+                name: '14. Where we are now',
                 url: '/handbook/current-status',
             },
             {
-                name: '14. Where are we going?',
+                name: '15. Where are we going?',
                 url: '/handbook/future',
             },
             {
-                name: '15. How you can help',
+                name: '16. How you can help',
                 url: '/handbook/help',
             },
         ],
@@ -751,6 +755,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/developing-the-website',
                     },
                     {
+                        name: 'How PostHog.com works',
+                        url: '/handbook/engineering/posthog-com/how-posthog-website-works',
+                    },
+                    {
                         name: 'MDX setup',
                         url: '/handbook/engineering/posthog-com/mdx-setup',
                     },
@@ -976,7 +984,7 @@ export const docsMenu = {
             name: 'Product OS',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs/product-os',
+            url: '/docs',
             children: [
                 {
                     name: 'Docs',
@@ -1125,11 +1133,27 @@ export const docsMenu = {
                             url: '/docs/frameworks',
                         },
                         {
+                            name: 'Angular',
+                            url: '/tutorials/angular-analytics',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/tutorials/astro-analytics',
+                        },
+                        {
+                            name: 'Django',
+                            url: '/tutorials/django-analytics',
+                        },
+                        {
                             name: 'Docusaurus v2',
                             url: '/docs/libraries/docusaurus',
                             badge: {
                                 title: '3rd party',
                             },
+                        },
+                        {
+                            name: 'Flask',
+                            url: '/tutorials/flask-analytics',
                         },
                         {
                             name: 'Framer',
@@ -1155,6 +1179,10 @@ export const docsMenu = {
                             url: '/docs/libraries/nuxt-js',
                         },
                         {
+                            name: 'Remix',
+                            url: '/tutorials/remix-analytics',
+                        },
+                        {
                             name: 'Retool',
                             url: '/docs/libraries/retool',
                         },
@@ -1177,6 +1205,10 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
+                        },
+                        {
+                            name: 'Svelte',
+                            url: '/tutorials/svelte-analytics',
                         },
                         {
                             name: 'Vue.js',
@@ -1916,6 +1948,10 @@ export const docsMenu = {
                     name: 'Glossary',
                     url: '/docs/glossary',
                 },
+                {
+                    name: 'Partners',
+                    url: '/partners',
+                },
             ],
         },
         {
@@ -2056,6 +2092,16 @@ export const docsMenu = {
                     url: '/docs/product-analytics/autocapture',
                     icon: 'IconBolt',
                     color: 'red',
+                },
+                {
+                    name: 'Web analytics',
+                    url: '/docs/web-analytics',
+                    icon: 'IconPieChart',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Data management',
@@ -2233,6 +2279,12 @@ export const docsMenu = {
                     icon: 'IconFeatures',
                     color: 'purple',
                 },
+                {
+                    name: 'Multi-project feature flags',
+                    url: '/docs/feature-flags/multi-project-feature-flags',
+                    icon: 'IconCalculator',
+                    color: 'blue',
+                },
             ],
         },
         {
@@ -2366,6 +2418,12 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/surveys/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                },
             ],
         },
         {
@@ -2434,10 +2492,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/n8n',
                             name: 'n8n',
-                        },
-                        {
-                            url: '/docs/cdp/redshift-import',
-                            name: 'Redshift',
                         },
                         {
                             url: '/docs/cdp/rudderstack-import',

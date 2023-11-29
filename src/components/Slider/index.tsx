@@ -51,6 +51,7 @@ export default function Slider({ className = '', activeIndex, children }) {
         <div className={`relative ${overflowing ? '' : ''}`}>
             {overflowing && (
                 <button
+                    type="button"
                     onDoubleClick={(e) => e.preventDefault()}
                     onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
                     className={`absolute top-0 -left-4 md:left-0 h-[calc(100%-2px)] flex justify-end items-center w-8 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${
@@ -90,6 +91,7 @@ export default function Slider({ className = '', activeIndex, children }) {
             </ul>
             {overflowing && (
                 <button
+                    type="button"
                     onDoubleClick={(e) => e.preventDefault()}
                     onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
                     className={`absolute top-0 -right-4 md:right-0 h-[calc(100%-2px)] flex justify-end items-center w-8 pr-2 bg-gradient-to-r from-transparent to-light via-light dark:via-dark dark:to-dark ${

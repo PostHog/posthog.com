@@ -90,6 +90,35 @@ From time to time, customers will request to get their apps added to PostHog Clo
   - Unit testing coverage when possible
 3. Update the app in our Cloud instances via the `Browse Apps` page, both on [prod-eu](https://eu.posthog.com/project/apps?tab=installed) and [prod-us](https://app.posthog.com/project/apps?tab=installed). You need instance staff permissions to do this.
 
+#### Ownership transfer
+
+In case a user requests for organization permissions to be altered (e.g the admin left the company) follow these steps:
+
+1. Ask them to get the current owner to log in and transfer the ownership.
+2. If they have access to the current owner’s email, ask them do a password reset and then login as the owner and perform the action themself.
+3. If not, we should email the account owner’s email to see if we get a bounce back. Also check how long it is since they logged in.
+4. If they’re on a paid plan we might need to switch the contact on Stripe.
+
+#### 2FA method removal
+
+1. Send the following email to the account owner:
+
+```
+Subject: Confirmation Required: Removal of 2FA on your PostHog Account
+
+Hi [name],
+
+According to ticket #XXXX, you mentioned wanting to remove the current 2FA method. Could you please confirm this by replying to this email?
+
+If you haven't requested this change, please let me know immediately.
+
+Best,
+[your name]
+```
+
+2. After the user responded and confirmed the change, delete their [TOTP device](https://app.posthog.com/admin/otp_totp/totpdevice/) ([EU link](https://eu.posthog.com/admin/otp_totp/totpdevice/)).
+
+
 ### Zendesk
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.

@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react'
-import menu from '../../navs'
+import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
+import { navigate } from 'gatsby'
 
 export const Context = createContext<any>(undefined)
 
@@ -72,7 +73,27 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         if (compact) {
             window.parent.postMessage(
                 {
+                    type: 'docs-active-menu',
+                    activeMenuName: activeInternalMenu?.name,
+                },
+                '*'
+            )
+        }
+    }, [activeInternalMenu])
+
+    useEffect(() => {
+        if (compact) {
+            window.parent.postMessage(
+                {
                     type: 'docs-ready',
+                },
+                '*'
+            )
+
+            window.parent.postMessage(
+                {
+                    type: 'docs-menu',
+                    menu: docsMenu.children,
                 },
                 '*'
             )
@@ -81,6 +102,10 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         const onMessage = (e: MessageEvent): void => {
             if (e.data.type === 'theme-toggle') {
                 window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
+                return
+            }
+            if (e.data.type === 'navigate') {
+                navigate(e.data.url)
             }
         }
 

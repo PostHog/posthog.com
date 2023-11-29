@@ -411,7 +411,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         await fetchUser()
     }
 
-    const likePost = async (id: number, unlike = false) => {
+    const likePost = async (id: number, unlike = false, slug = '') => {
         const profileID = user?.profile?.id
         if (!profileID || !id) return
         const body = {
@@ -435,6 +435,13 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         if (!likeRes.ok) {
             throw new Error(`Failed to like post`)
         }
+
+        posthog?.capture(unlike ? 'post downvote' : 'post upvote', {
+            post: {
+                id,
+                url: `https://posthog.com${slug}`,
+            },
+        })
 
         await fetchUser()
     }
