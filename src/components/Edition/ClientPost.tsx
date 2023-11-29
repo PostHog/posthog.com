@@ -61,6 +61,7 @@ export default function ClientPost({
     excerpt,
     getPost,
     authors,
+    slug,
     post_tags,
 }: {
     title: string
@@ -74,6 +75,7 @@ export default function ClientPost({
     excerpt: string
     getPost: () => Promise<void>
     authors: any
+    slug: string
     post_tags: { data: { id: number }[] }
 }) {
     const { pathname } = useLocation()
@@ -142,7 +144,7 @@ export default function ClientPost({
                                 body={body}
                                 cta={CTA}
                             />
-                            <Upvote className="mt-6" />
+                            <Upvote slug={slug} id={id} className="mt-6" />
                             <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
                                 <QuestionForm
                                     disclaimer={false}
@@ -157,7 +159,7 @@ export default function ClientPost({
                 <aside
                     className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-dark pt-4 xl:block hidden`}
                 >
-                    <Upvote className="px-4 mb-4" />
+                    <Upvote id={id} slug={slug} className="px-4 mb-4" />
                     {author && (
                         <Contributors
                             contributors={[
