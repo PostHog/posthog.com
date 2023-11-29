@@ -46,7 +46,7 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
 - **GitHub Stars:** 14.4k
 - **Category:** Product and website analytics
-- **Alternative to:** [Mixpanel](/blog/best-mixpanel-alternatives), Amplitude, Hotjar, [FullStory](/blog/best-fullstory-alternatives), LaunchDarkly
+- **Alternative to:** [Mixpanel](/blog/best-mixpanel-alternatives), [Amplitude](/blog/best-amplitude-alternatives), Hotjar, [FullStory](/blog/best-fullstory-alternatives), LaunchDarkly
 - **Language(s):** TypeScript (53%) and Python (42%)
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 

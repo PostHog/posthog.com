@@ -28,7 +28,7 @@ Of course, PostHog isn’t the only [open-source analytics platform](/blog/best-
 ![PostHog - best open source analytics for engineers](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 - **Useful for:** Product analytics, session recording, feature flags<br/>
-- **Alternative to:** [Amplitude](/blog/posthog-vs-amplitude), [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), [Matomo](/blog/posthog-vs-matomo)<br/>
+- **Alternative to:** [Amplitude](/blog/best-amplitude-alternatives), [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), [Matomo](/blog/posthog-vs-matomo)<br/>
 - **License:** [MIT](https://en.wikipedia.org/wiki/MIT_License)<br/>
 
 Of course, [PostHog](https://posthog.com) may not be the _only_ open source software useful to engineers, but it’s our (completely biased) favorite. 
