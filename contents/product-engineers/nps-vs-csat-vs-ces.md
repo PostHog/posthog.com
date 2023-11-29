@@ -18,9 +18,10 @@ Net promoter score (NPS), customer satisfaction (CSAT) and customer effort score
 
 Here's the TLDR:
 
-- **CSAT** is most useful before product-market fit when you're constantly iterating on your product.
+- **CSAT** is most useful [before product-market fit](/founders/product-market-fit-game) when you're constantly iterating on your product.
+
 - **NPS** is best after you've achieved product-market fit.
-critical.
+
 - **CES** is good for understanding if your features are easy to use and debugging UX problems, but not much else.
 
 ## What is NPS?
@@ -36,7 +37,9 @@ NPS gives you insight into who your loyal customers are and which are at risk of
 NPS survey responses are grouped into three categories:
 
 - **Promoters** – people who respond with 9 or 10. They're extremely happy with your product.
+
 - **Passives** – people who respond with 7 or 8. They aren't unhappy, but they're not overly excited either.
+
 - **Detractors** – people who respond with 6 or below. They may have had a bad experience and are likely to complain to others.
 
 ![NPS scale](../images/blog/nps-csat-ces/nps-score.png)
@@ -105,6 +108,7 @@ The main difference between CSAT and NPS is that CSAT measures short-term satisf
 Responses are grouped into two categories:
 
 - **Positive responses** – people who respond with 4 or 5 if your scale is from 1-5 (or 8, 9, or 10 if your scale is from 1-10).
+
 - **Everyone else**
 
 ![CSAT scale](../images/blog/nps-csat-ces/csat-score.png)
@@ -132,9 +136,13 @@ CSAT surveys are most effective when you need real-time feedback after specific 
 With this in mind, try to use CSAT surveys after key interactions in your user journey, such as:
 
 - **After onboarding –** to understand if your onboarding was effective and engaging.
+
 - **During [beta testing of a new feature](/tutorials/beta-feedback) –**  to see if it meets your users' expectations.
+
 - **After major app updates –** to understand whether your UX has improved or if there are new issues to address.
+
 - **Before subscription renewal –** to allow you to address any issues beforehand.
+
 - **After customer support interaction –** to see if customers feel their issue has been resolved.
 
 ### How to use CSAT to improve your app
@@ -146,9 +154,13 @@ Then, analyze the differences between users who answered positively versus those
 Here are important questions you should find answers to:
 
 - Which features are most used by users with positive response? How does this compare to everyone else? If there's a difference, why so?
+
 - What problem does your app solve for users with positive response? Why isn't this the case for everyone else?
-- What are the differences between positive responses and everyone else? 
+
+- What are the differences between positive responses and everyone else?
+ 
 - What were the common complaints among those who gave lower ratings?
+
 - What features are most requested by users with lower scores?
 
 After gathering this data, identify patterns and translate these insights into actionable improvements for your product.
@@ -187,7 +199,9 @@ Additionally, CES only tells you if a feature is difficult to use, but it doesn'
 To best debug UX problems, you should use CES surveys after key interactions, such as:
 
 - **After using a feature for the time** – to understand how intuitive it is.
+
 - **After a major UI update** – to confirm users can still navigate through your app effectively.
+
 - **When a user is migrating from a competitor's product to yours** – to highlight areas for improvement in onboarding.
 
 ### How to use CES to improve your app
