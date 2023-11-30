@@ -45,7 +45,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 ### Things we might want to be good at but haven't tested yet
 
-- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (i.e. not our target audience). We tried this and didn't get traction. 
+- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (i.e. not our target audience). We tried this with an agency and didn't get traction, but have seen some early promising signs going to developers directly. 
 
 - **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
  
