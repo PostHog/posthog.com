@@ -53,22 +53,3 @@ You can call `getActiveMatchingSurveys` in your browser console to see which sur
 ```js
 posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
 ```
-
-## How are surveys priced?
-
-Surveys are priced based on the [number of responses](/pricing?product=surveys) received each month. However, because surveys utilize other parts of PostHog, such as events and feature flags, it's important to highlight the underlying costs too.
-
-Surveys incur additional costs in two ways:
-
-1. Surveys create events when shown, dismissed, and responded to.
-2. Targeting surveys by user properties or linked flags uses a feature flag.
-
-We have generous free allowances for events and feature flags each month, and [costs per event or flag request](/pricing) are negligible beyond this. 10,000 survey responses per month would typically cost less than $10 per month for events and flags, for example.
-
-### Why do surveys use events and feature flags?
-
-We built surveys in this way to enable maximum flexibility and ensure it combines well with other PostHog tools. 
-
-Storing responses as events means you can use them within insights or cohorts, for example. Unlike other tools, PostHog doesn't limit you to analyzing responses in a single way. Want to create a feature flag that targets users who responded to a survey in a particular way, or breakdown responses by geography? PostHog does that!
-
-If you have any questions about pricing, please reach out to us through any of these [support options](https://posthog.com/docs/support-options).
