@@ -1027,10 +1027,6 @@ export const docsMenu = {
                             url: '/docs/getting-started/group-analytics',
                         },
                         {
-                            name: 'Next steps',
-                            url: '/docs/getting-started/next-steps',
-                        },
-                        {
                             name: 'Enabling beta features',
                             url: '/docs/getting-started/enable-betas',
                         },
