@@ -44,15 +44,15 @@ If the URL you want isn’t listed, select ‘_+ Add authorized URL_’ and ente
 
 ## Using the toolbar to create new events
 
-![Using the toolbar](../images/tutorials/custom-events-the-easy-way/create-events-easy-way-posthog.png)
+![Using the toolbar](../images/tutorials/custom-events-the-easy-way/toolbar.png)
 
 When the toolbar is launched, you’ll see a floating PostHog logo in your browser. You can drag the logo to reveal obscured elements of the page as needed, and on click it will reveal a pop-out menu, as pictured above.
 
-![Using the toolbar overlay](../images/tutorials/toolbar/inspect-toolbar.png)
+![Using the toolbar overlay](../images/tutorials/custom-events-the-easy-way/toolbar-actions.png)
 
 Click ‘_Actions_’ to start creating a new action. This will create a blue overlay that highlights selectable elements. You can select any of these elements to summon a modal which gives you more information about the element. In this modal, click ‘_+ Create a new action_’ to continue.
 
-![create actions the easy way with posthog](../images/tutorials/toolbar/toolbar-create-action.png)
+![create actions the easy way with posthog](../images/tutorials/custom-events-the-easy-way/toolbar-create-action.png)
 
 Most information in the next modal will be auto-populated with relevant information — that’s why we call this the easy way! However, it’s important to give your new event a descriptive name. Enter this in the ‘_What did your user do?_’ field. A good example of an event name would be '_Clicked Get Started on homepage_' or '_New user signed up_'. 
 
