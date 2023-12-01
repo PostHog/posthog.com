@@ -58,6 +58,3 @@ As more and more users have begun using PostHog at carVertical, the team has bec
 “The Slack channel is great,” says Aleksandras. “Responses are quick, and we’re talking to the actual engineers so we can get answers to technical questions too. When we were implementing feature flags, we got a detailed answer from the person who actually built that feature, which is remarkable.”
 
 “Once we moved to Slack, our energy just matched with PostHog’s. We had to reflect on it afterwards: would we have gotten that from Mixpanel? Probably not!”
-
-
-
