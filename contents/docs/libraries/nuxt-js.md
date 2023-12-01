@@ -74,11 +74,11 @@ export default defineNuxtPlugin(nuxtApp => {
 PostHog can then be accessed throughout your Nuxt.js using the provider accessor, for example:
 
 ```vue filename=index.vue
-<script setup lang="ts">
+<script setup>
    const { $posthog } = useNuxtApp()
    if ($posthog) {
-      const posthog =$posthog()
-      posthog?.capture('<event_name>')
+      const posthog = $posthog()
+      posthog.capture('<event_name>')
    }
 </script>
 ```
