@@ -26,8 +26,8 @@ As befits a company which processes mountains of data on a regular basis, carVer
 
 After personally deploying PostHog in minutes, Aleksandras opted for a strict manual event ingestion process. This approach required every event to conform to a predefined schema before being processed, ensuring total control over the events they handle. This decision aligned with the team’s preference for precision and oversight in adopting a new tool. This approach also meant the team could focus specifically on the individual events they wanted to track and make decisions based on.
 
-![PostHog x CarVertical](../images/customers/carvertical/carvertical_sample.png)
-<Caption>CarVertical tracks which sections users find the most helpful, so it can plan improvements.</Caption>
+![PostHog x carVertical](../images/customers/carvertical/carvertical_sample.png)
+<Caption>carVertical tracks which sections users find the most helpful, so it can plan improvements.</Caption>
 
 
 “Our vehicle reports are made up of sections,” explains Aleksandras. “So, of course, we fire an event to PostHog when each section is viewed, or left, with extra properties to give us more information. We monitor specific interactions, such as button presses and key actions, to gain insights into user preferences and needs.”
