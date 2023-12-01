@@ -13,7 +13,19 @@ require('prismjs/components/prism-rust')
 
 type LanguageMap = {
     [key: string]: {
-        language: Language | 'html' | 'xml' | 'shell' | 'php' | 'ruby' | 'swift' | 'dart' | 'elixir' | 'java' | 'rust'
+        language:
+            | Language
+            | 'html'
+            | 'xml'
+            | 'shell'
+            | 'php'
+            | 'ruby'
+            | 'swift'
+            | 'dart'
+            | 'elixir'
+            | 'java'
+            | 'rust'
+            | 'vue'
         label: React.ReactNode
     }
 }
@@ -180,6 +192,10 @@ const languageMap: LanguageMap = {
     react: {
         language: 'jsx',
         label: 'React',
+    },
+    vue: {
+        language: 'vue',
+        label: 'Vue',
     },
 }
 
