@@ -256,37 +256,36 @@ async function processEvent(event, { config}) {
 
 As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all apps run).
 
-Note that you cannot use storage nor cache nor external calls in processEvent apps in PostHog cloud. Furthermore you can only define one of `processEvent` or `onEvent` per app.
+Note that you cannot use storage nor cache nor external calls in processEvent apps in PostHog cloud. Furthermore you can only define one of `processEvent` or `composeWebhook` per app.
 
-## `onEvent` function
+## `composeWebhook` function
 
-> **Minimum PostHog version:** 1.25.0 
+> **Minimum PostHog hash:** https://github.com/PostHog/posthog/commit/0137b9d40d8c0b4a7183fd6bb3c718a35d116b95
 
-`onEvent` works similarly to `processEvent`, except any returned value is ignored by the app server. In other words, `onEvent` can read an event but not modify it. 
-
-In addition, `onEvent` functions will run after all enabled apps have run `processEvent`. This ensures you will be receiving an event following all possible modifications to it.
-
-This was originally built for and is particularly useful for export apps. These apps need to receive the "final form" of an event and send it out of PostHog, without having to modify it.
+`composeWebhook` is a non-async function that is executed at the end of the pipeline. It allows users to submit data to their own HTTP endpoint when an event happens. The function can return 
+- null if for a specific event we don't want to trigger an HTTP request. 
+- `Webhook` object, for which we'll trigger an HTTP request to the url with the payload, method and headers returned.
+If you are interested in exporting large amounts of event data from PostHog, look into [batch exports](/docs/cdp/batch-exports).
 
 Here's a quick example:
 
 ```js
-async function onEvent(event) {
-    // do something to the event
-    payload = composePayload(event)
-    sendEventToSalesforce(payload)
-
-    // no need to return anything
+function composeWebhook(event) {
+    if (event.event == '$autocapture') {
+        return null
+    }
+    return {
+        url: "http://pineapples-make-pizzas-delicious.com,
+        body: JSON.stringify(event),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+    }
 }
 ```
 
-### `fetch`
-
-Can only be used at the end of `onEvent` function.
-
-Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch).
-
-Note that you cannot use storage nor cache and should have a single fetch at the end in onEvent apps in PostHog cloud. Furthermore you can only define one of `processEvent` or `onEvent` per app.
+Note that you cannot use storage nor cache in apps in PostHog cloud. Furthermore you can only define one of `processEvent` or `composeWebhook` per app.
 
 ## Testing
 
