@@ -29,7 +29,6 @@ After personally deploying PostHog in minutes, Aleksandras opted for a strict ma
 ![PostHog x carVertical](../images/customers/carvertical/carvertical_sample.png)
 <Caption>carVertical tracks which sections users find the most helpful, so it can plan improvements.</Caption>
 
-
 “Our vehicle reports are made up of sections,” explains Aleksandras. “So, of course, we fire an event to PostHog when each section is viewed, or left, with extra properties to give us more information. We monitor specific interactions, such as button presses and key actions, to gain insights into user preferences and needs.”
 
 This focused approach to tracking enabled the team to start tracking individual on-page interactions and correlating them to other activities, such as various types of conversions.
