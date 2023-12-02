@@ -1257,6 +1257,10 @@ export const docsMenu = {
                                     name: 'Vercel',
                                     url: '/docs/advanced/proxy/vercel',
                                 },
+                                {
+                                    name: 'Nuxt',
+                                    url: '/docs/advanced/proxy/nuxt',
+                                },
                             ],
                         },
                         {
