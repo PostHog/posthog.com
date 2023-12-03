@@ -82,12 +82,13 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         isLoading,
         mutate,
     } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
+        const jwt = user && (await getJwt())
         const res = await fetch(
             url,
-            user
+            jwt
                 ? {
                       headers: {
-                          Authorization: `Bearer ${await getJwt()}`,
+                          Authorization: `Bearer ${jwt}`,
                       },
                   }
                 : undefined
