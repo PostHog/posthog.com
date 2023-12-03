@@ -54,7 +54,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
         >
             {({ isValid }) => {
                 return (
-                    <Form>
+                    <Form className="m-0">
                         <label className={labelClasses} htmlFor="email">
                             Email address
                         </label>
@@ -68,10 +68,10 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
                         />
                         {emailSent ? (
                             <div>
-                                <p>Check your email for password reset instructions</p>
+                                <p className="pb-4 m-0 text-sm">Check your email for password reset instructions</p>
                             </div>
                         ) : (
-                            <Button width="full" disabled={loading || !isValid}>
+                            <Button width="full" className="mb-4" loading={loading} disabled={loading || !isValid}>
                                 Send password reset instructions
                             </Button>
                         )}
