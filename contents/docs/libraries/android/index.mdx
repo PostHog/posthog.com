@@ -42,7 +42,7 @@ To set [properties](/docs/data/user-properties) on your users via an event, you 
 
 **Example**
 
-```java
+```kotlin
 PostHog.capture(
     event = "button_b_clicked",
     properties = mapOf("color" to "blue"),
@@ -61,7 +61,7 @@ When capturing an event, you can pass a property called `$set` as an event prope
 
 **Example**
 
-```java
+```kotlin
 PostHog.capture(
     event = "button_b_clicked",
     properties = mapOf("color" to "blue"),
@@ -84,7 +84,7 @@ Setting this to `1` will send events immediately and will use more battery. The 
 You can also configure the flush interval. By default we flush all events after `30` seconds,
 no matter how many events have been gathered.
 
-```java
+```kotlin
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
     maxQueueSize = 20
     flushIntervalSeconds = 30
@@ -93,7 +93,7 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 
 You can also manually flush the queue:
 
-```java
+```kotlin
 PostHog.flush() 
 ```
 
@@ -101,7 +101,7 @@ PostHog.flush()
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
-```java
+```kotlin
 PostHog.reset()
 ```
 
@@ -119,7 +119,7 @@ import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
-```android
+```Android
 if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
     // do something
 }
@@ -135,7 +135,7 @@ Group analytics allows you to associate the events for that person's session wit
 
 -   Associate the events for this session with a group
 
-```java
+```kotlin
 // organization is the group type, company_id_in_your_db is the group ID
 PostHog.group(
     type = "company", 
@@ -145,7 +145,7 @@ PostHog.group(
 
 -   Associate the events for this session with a group AND update the properties of that group
 
-```java
+```kotlin
 PostHog.group(
     type = "company", 
     key = "company_id_in_your_db",
@@ -159,29 +159,15 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 When creating the PostHog client, there are many options you can set:
 
-```java
-PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
-    // Record certain application events automatically! (off/false by default)
-    .captureApplicationLifecycleEvents()
-
-     // Record screen views automatically! (off/false by default)
-    .recordScreenViews()
-
-    // Capture deep links as part of the screen call. (off by default)
-    .captureDeepLinks()
-
-     // Maximum number of events to keep in queue before flushing (20)
-    .flushQueueSize(int flushQueueSize)
-
-    // Max delay before flushing the queue (30 seconds)
-    .flushInterval(long flushInterval, TimeUnit timeUnit)
-
-    // Enable or disable collection of ANDROID_ID (true)
-    .collectDeviceId(boolean collect)
-
-    .build();
+```kotlin
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+    // Record certain application events automatically! (on/true by default)
+    captureApplicationLifecycleEvents = true
+    // Record screen views automatically! (on/true by default)
+    captureScreenViews = true // (on/true by default)
+    // Maximum number of events to keep in queue before flushing (20 by default)
+    flushAt = 20
+    // Maximum delay before flushing the queue (30 seconds)
+    flushIntervalSeconds = 30
+}
 ```
-
-## Thank you
-
-This library is largely based on the `analytics-android` package.

@@ -1,6 +1,6 @@
 ### Boolean feature flags
 
-```java
+```kotlin
 if (PostHog.isFeatureEnabled("flag-key") ) {
     // do something
 }
@@ -8,7 +8,7 @@ if (PostHog.isFeatureEnabled("flag-key") ) {
 
 ### Multivariate feature flags
 
-```java
+```kotlin
 if (PostHog.getFeatureFlag("flag-key")  == "variant-key") { // replace 'variant-key' with the key of your variant
     // do something
 }

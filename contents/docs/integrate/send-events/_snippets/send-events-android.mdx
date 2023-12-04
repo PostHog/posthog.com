@@ -4,7 +4,7 @@ import Intro from "./intro.mdx"
 
 <Intro />
 
-```java
+```kotlin
 PostHog.capture(event = "user_signed_up")
 ```
 
@@ -12,7 +12,7 @@ PostHog.capture(event = "user_signed_up")
 
 <SettingProperties />
 
-```java
+```kotlin
 PostHog.capture(
     event = "user_signed_up",
     properties = mapOf(
@@ -30,7 +30,7 @@ If you want to manually send a new screen capture event, use the `screen` functi
 
 This function requires a `name`. You may also pass in an optional `properties` object.
 
-```java
+```kotlin
 PostHog.capture(
     screenTitle = "Dashboard",
     properties = mapOf(
