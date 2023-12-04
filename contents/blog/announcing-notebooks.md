@@ -14,7 +14,7 @@ tags:
   - Product updates
 ---
 
-Today we’ve released a major change, dubbed PostHog 3000, which updates the look and feel of PostHog dramatically —  and you can read all about what’s changed and why in Cory’s post about the redesign. 
+Today we’ve released a major change, dubbed PostHog 3000, which updates the look and feel of PostHog dramatically. You can read all about what’s changed and why in [Cory’s post about the redesign](/blog/posthog-as-a-dev-tool). 
 
 Suffice to say that the new version has a lot to offer. It’s got dark mode! It’s got data density! It’s got side panels! It’s got...notebooks?
 
