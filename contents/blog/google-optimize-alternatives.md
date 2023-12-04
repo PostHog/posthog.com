@@ -27,7 +27,7 @@ If this sounds like bad news to you, consider one of following six Google Optimi
 
 ## 1. PostHog
 
-![google optimize alternatives](../images/apps/experimentation-suite.png)
+![google optimize alternatives](../images/blog/google-optimize-alternatives/posthog.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** <span className="text-green text-lg">✔</span>
