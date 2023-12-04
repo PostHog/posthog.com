@@ -119,7 +119,7 @@ import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
-```android_kotlin
+```kotlin
 if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
     // do something
 }

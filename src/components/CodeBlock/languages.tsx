@@ -153,6 +153,10 @@ const languageMap: LanguageMap = {
         language: 'kotlin',
         label: 'Gradle',
     },
+    gradle_java: {
+        language: 'java',
+        label: 'Gradle',
+    },
     objectivec: {
         language: 'objectivec',
         label: 'Objective-C',
