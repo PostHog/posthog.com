@@ -86,7 +86,7 @@ no matter how many events have been gathered.
 
 ```kotlin
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
-    maxQueueSize = 20
+    flushAt = 20
     flushIntervalSeconds = 30
 }
 ```
