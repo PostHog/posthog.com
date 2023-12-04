@@ -13,7 +13,20 @@ require('prismjs/components/prism-rust')
 
 type LanguageMap = {
     [key: string]: {
-        language: Language | 'html' | 'xml' | 'shell' | 'php' | 'ruby' | 'swift' | 'dart' | 'elixir' | 'java' | 'rust'
+        language:
+            | Language
+            | 'html'
+            | 'xml'
+            | 'shell'
+            | 'php'
+            | 'ruby'
+            | 'swift'
+            | 'dart'
+            | 'elixir'
+            | 'java'
+            | 'rust'
+            | 'kotlin'
+            | 'groovy'
         label: React.ReactNode
     }
 }
@@ -142,7 +155,7 @@ const languageMap: LanguageMap = {
         label: 'Android',
     },
     kotlin: {
-        language: 'java',
+        language: 'kotlin',
         label: 'Kotlin',
     },
     android_kotlin: {
@@ -153,8 +166,8 @@ const languageMap: LanguageMap = {
         language: 'kotlin',
         label: 'Gradle',
     },
-    gradle_java: {
-        language: 'java',
+    gradle_groovy: {
+        language: 'groovy',
         label: 'Gradle',
     },
     objectivec: {
