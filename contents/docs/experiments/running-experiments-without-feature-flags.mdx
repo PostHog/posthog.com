@@ -48,9 +48,12 @@ posthog.capture('event_name_of_your_goal_metric', {
 ```
 
 ```Android
-PostHog.with(this)
-       .capture("event_name_of_your_goal_metric", new Properties()
-                                        .putValue("$feature/experiment-feature-flag-key", "variant-name"));
+PostHog.capture(
+    event = "event_name_of_your_goal_metric",
+    properties = mapOf(
+        "\$feature/experiment-feature-flag-key" to "variant-name"
+    )
+)
 ```
 
 ```iOS
@@ -157,10 +160,13 @@ posthog.capture('$feature_flag_called', {
 ```
 
 ```Android
-PostHog.with(this)
-       .capture("$feature_flag_called", new Properties()
-                                        .putValue("$feature_flag_response", "variant-name")
-                                        .putValue("$feature_flag", "feature-flag-key"));
+PostHog.capture(
+    event = "\$feature_flag_called",
+    properties = mapOf(
+        "\$feature_flag_response" to "variant-name",
+        "\$feature_flag" to "feature-flag-key"
+    )
+)
 ```
 
 ```iOS

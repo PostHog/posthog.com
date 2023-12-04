@@ -234,10 +234,8 @@ posthog.identify(
 ```
 
 ```Android
-PostHog.with(this)
-       .identify(distinct_id_one, new Properties());
-PostHog.with(this)
-       .identify(distinct_id_two, new Properties());
+PostHog.identify(distinctId = "distinct_id_one")
+PostHog.identify(distinctId = "distinct_id_two")
 // ❌ Not possible, since we already identified this user with "distinct_id_one"
 // so we cannot identify them again with a different distinct ID "distinct_id_two"
 ```

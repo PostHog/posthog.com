@@ -125,7 +125,7 @@ import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```android
-if (PostHog.with(this).getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
     // do something
 }
 ```
