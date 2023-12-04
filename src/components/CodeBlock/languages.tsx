@@ -10,6 +10,7 @@ require('prismjs/components/prism-swift')
 require('prismjs/components/prism-dart')
 require('prismjs/components/prism-elixir')
 require('prismjs/components/prism-rust')
+require('prismjs/components/prism-kotlin')
 
 type LanguageMap = {
     [key: string]: {
