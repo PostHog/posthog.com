@@ -12,8 +12,6 @@ crosspost:
   - Founders
 ---
 
-> This post is from our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. We send it (roughly) every two weeks.
-
 Focus is important, right? Building a single great product and monetizing it is the path to startup success. Everyone knows this. It _feels_ intuitively correct. 
 
 Parker Conrad, founder and CEO of the workforce management platform Rippling, disagrees. [Speaking to Startup Grind in 2021](https://www.youtube.com/watch?v=BbSNA64TQ7s), he said:
