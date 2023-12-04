@@ -1,6 +1,6 @@
 ---
 date: 2023-12-17
-title: "Announcing Notebooks for PostHog"
+title: "Introducing Notebooks for PostHog"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
