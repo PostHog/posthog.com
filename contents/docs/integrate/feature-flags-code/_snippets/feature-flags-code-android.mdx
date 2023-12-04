@@ -1,7 +1,7 @@
 ### Boolean feature flags
 
 ```java
-if (PostHog.with(this).isFeatureEnabled("flag-key") ) {
+if (PostHog.isFeatureEnabled("flag-key") ) {
     // do something
 }
 ```
@@ -9,7 +9,7 @@ if (PostHog.with(this).isFeatureEnabled("flag-key") ) {
 ### Multivariate feature flags
 
 ```java
-if (PostHog.with(this).getFeatureFlag("flag-key")  == "variant-key") { // replace 'variant-key' with the key of your variant
+if (PostHog.getFeatureFlag("flag-key")  == "variant-key") { // replace 'variant-key' with the key of your variant
     // do something
 }
 ```

@@ -5,8 +5,7 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```java
-PostHog.with(this)
-       .capture("user_signed_up");
+PostHog.capture(event = "user_signed_up")
 ```
 
 <NamingTip />
@@ -14,10 +13,13 @@ PostHog.with(this)
 <SettingProperties />
 
 ```java
-PostHog.with(this)
-       .capture("user_signed_up", new Properties()
-              .putValue("login_type", "email")
-              .putValue("is_free_trial", true));
+PostHog.capture(
+    event = "user_signed_up",
+    properties = mapOf(
+        "login_type" to "email",
+        "is_free_trial" to true
+    )
+)
 ```
 
 ### Capturing screen views
@@ -29,8 +31,11 @@ If you want to manually send a new screen capture event, use the `screen` functi
 This function requires a `name`. You may also pass in an optional `properties` object.
 
 ```java
-PostHog.with(this)
-       .screen("Dashboard", new Properties()
-                                  .putValue("background", "blue")
-                                  .putValue("hero", "superhog"));
+PostHog.capture(
+    screenTitle = "Dashboard",
+    properties = mapOf(
+        "background" to "blue",
+        "hero" to "superhog"
+    )
+)
 ```

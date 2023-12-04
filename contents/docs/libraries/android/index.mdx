@@ -43,15 +43,14 @@ To set [properties](/docs/data/user-properties) on your users via an event, you 
 **Example**
 
 ```java
-// import java.util.HashMap;
-HashMap<String, Object> userProps = new HashMap<String, Object>();
-userProps.put("string", "value1");
-userProps.put("integer", 2);
-
-PostHog.with(this)
-       .capture("button_b_clicked", new Properties()
-                                        .putValue("color", "blue")
-                                        .putValue("$set", userProps));
+PostHog.capture(
+    event = "button_b_clicked",
+    properties = mapOf("color" to "blue"),
+    userProperties = mapOf(
+        "string" to "value1",
+        "integer" to 2
+    )
+)
 ```
 
 **Usage**
@@ -63,15 +62,14 @@ When capturing an event, you can pass a property called `$set` as an event prope
 **Example**
 
 ```java
-// import java.util.HashMap;
-HashMap<String, Object> userProps = new HashMap<String, Object>();
-userProps.put("string", "value1");
-userProps.put("integer", 2);
-
-PostHog.with(this)
-       .capture("button_b_clicked", new Properties()
-                                        .putValue("color", "blue")
-                                        .putValue("$set_once", userProps));
+PostHog.capture(
+    event = "button_b_clicked",
+    properties = mapOf("color" to "blue"),
+    userPropertiesSetOnce = mapOf(
+        "string" to "value1",
+        "integer" to 2
+    )
+)
 ```
 
 **Usage**
@@ -87,18 +85,16 @@ You can also configure the flush interval. By default we flush all events after 
 no matter how many events have been gathered.
 
 ```java
-PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
-  .flushQueueSize(20)
-  .flushInterval(30, TimeUnit.SECONDS)
-  .build();
-
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
+    maxQueueSize = 20
+    flushIntervalSeconds = 30
+}
 ```
 
 You can also manually flush the queue:
 
 ```java
-PostHog.with(this)
-       .flush();
+PostHog.flush() 
 ```
 
 ## Reset
@@ -106,8 +102,7 @@ PostHog.with(this)
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
 ```java
-PostHog.with(this)
-       .reset();
+PostHog.reset()
 ```
 
 ## Feature Flags
@@ -141,13 +136,21 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```java
-PostHog.with(this).group("company", "company_id_in_your_db") // organization is the group type, company_id_in_your_db is the group ID
+// organization is the group type, company_id_in_your_db is the group ID
+PostHog.group(
+    type = "company", 
+    key = "company_id_in_your_db"
+)
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```java
-PostHog.with(this).group("company", "company_id_in_your_db", new Properties().putValue("name", "Awesome Inc."));
+PostHog.group(
+    type = "company", 
+    key = "company_id_in_your_db",
+    groupProperties = mapOf("name" to "Awesome Inc.")
+)
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
