@@ -4,50 +4,83 @@ showTitle: false
 showSidebar: true
 width: lg
 images: 
-    - './images/wave_hog.png'
+    - './images/builds_hog.png'
     - './images/smart_hog.png'
-    - './images/science_hog.png'
+    - './images/partner2_hog.png'
+    - './images/talenodigital_logo.jpg'
+    - './images/mentat_analytics_logo.jpg'
+    - './images/marketing_engineers_logo.jpg'
 ---
 
-import { StaticImage } from 'gatsby-plugin-image'
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
-import Table from './_includes/partner-table.mdx'
 
 <Hero
     title="Partners of PostHog"
-    subtitle="Want to create a custom solution on top of our open source codebase? Our partners can help!"
-    ctas={[
-        <CallToAction href="/contact-sales">Get in touch</CallToAction>,
-    ]}
+    subtitle="We offer dedicated and community support, but you may want to team up with an external partner to get help on an on-going or project-basis. That's where our partners can help!"
 />
 
 <section class="my-24 px-5">
   <div class="max-w-screen-2xl mx-auto">
-    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">What can our partners help with?</h3>
     <div class="flex justify-center">
       <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-3 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[1])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 150 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Implementation</h5>
+          <GatsbyImage image={getImage(props?.images[1])} alt="Implementation support" objectFit="contain" style={{ maxHeight: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Implementation support</h5>
           <p class="m-0 text-[15px]">Struggling to get started? Partners can help you get the most out of your data by creating bespoke queries, dashboards, and more.</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[2])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 185 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Deployment</h5>
-          <p class="m-0 text-[15px]">PostHog no longer supports self-hosted instances, so if you need these services then a partner can help fill the gap.</p>
+          <GatsbyImage image={getImage(props?.images[2])} alt="App creation" objectFit="contain" style={{ maxHeight: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Apps and integrations</h5>
+          <p class="m-0 text-[15px]">Need to build a connection to another tool? We have plenty of ready-made integrations, but partners can help make more.</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[0])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 150 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Integrations</h5>
-          <p class="m-0 text-[15px]">Apps connect PostHog to other software, such as a CRM. We have plenty of ready-made integrations, but partners can help make more.</p>
+          <GatsbyImage image={getImage(props?.images[0])} alt="Self-hosted deployments" objectFit="contain" style={{ maxHeight: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Self-hosted deployments</h5>
+          <p class="m-0 text-[15px]">Need to self-host? We no longer support Kubernetes deployments, but a partner may be able to help fill the gap instead.</p>
         </li>
       </ul>
     </div>
   </div>
 </section>
 
-<Section title="Our partners" titleSize="sm" size="md">
-    <Table />
+<Section title="Our partners" className="@container">
+                    <div className="flex flex-col @3xl:grid md:grid-cols-3 gap-4 mb-8">
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                         <GatsbyImage image={getImage(props?.images[3])} alt="Taleno Digital" objectFit="contain" style={{ maxHeight: 100 }} />
+                            <h3 className="text-xl mb-2">Taleno Digital</h3>
+                            <p className="text-[15px]">
+                                Joey Taleno can help you deploy PostHog projects, create visualizations, and setup suitable data architectures. 
+                            </p>
+                            <CallToAction to="https://taleno.digital/" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Contact
+                            </CallToAction>
+                        </div>
+                        <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                         <GatsbyImage image={getImage(props?.images[4])} alt="Mentat Analytics" objectFit="contain" style={{ maxHeight: 100 }} />
+                            <h3 className="text-xl mb-2">Mentat Analytics</h3>
+                            <p className="text-[15px]">
+                                Specializing in helping tech startups, Mentat can help you build your data stack, implement PostHog, and scale your data.
+                            </p>
+                            <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
+                                <CallToAction to="https://www.mentatanalytics.co/" type="outline" size="md" className="!w-full sm:!w-auto">
+                                    Contact
+                                </CallToAction>
+                            </div>
+                        </div>
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                         <GatsbyImage image={getImage(props?.images[5])} alt="Marketing Engineers" objectFit="contain" style={{ maxHeight: 100 }} />
+                            <h3 className="text-xl mb-2">Marketing Engineers</h3>
+                            <p className="text-[15px]">
+                                An international team of engineers that can help you with deployment and configuring PostHog for marketing purpose. 
+                            </p>
+                            <CallToAction to="https://marketingengineers.nl/" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Contact
+                            </CallToAction>
+                        </div>
+                    </div>
+  <div className="max-w-[849px] mx-auto text-center">
+  <CallToAction href="/contact-sales">Become a partner</CallToAction>
+  </div>
 </Section>
 
 <section class="my-24 px-5">
