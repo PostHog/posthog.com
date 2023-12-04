@@ -11,13 +11,13 @@ crosspost:
   - Founders   
 ---
 
-> Welcome to [Product for Engineers](https://newsletter.posthog.com/), a free newsletter created by PostHog for engineers, founders, and anyone who wants to build successful startups.
-
 It’s “the only thing that matters” according to Marc Andreessen, who [coined the term](https://pmarchive.com/guide_to_startups_part4.html).
 
 In our new in-depth guide, [The Product-Market Game](/founders/product-market-fit-game), PostHog’s James Hawkins shares everything he’s learned from achieving it as CEO of PostHog.
 
 **This week’s theme is:** How to find product-market fit
+
+> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Fundraising + press ≠ product-market fit
 
