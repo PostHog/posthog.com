@@ -4,7 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-Nuxt 3 uses Nitro under the hood, which provides the [routeRules](https://nitro.unjs.io/config#routerules) config that can be used to proxy requests from one route to another. To do this add the config to your `nuxt.config.ts` file:
+Nuxt 3 uses [Nitro](https://nuxt.com/docs/guide/concepts/server-engine) under the hood, which provides the [routeRules](https://nitro.unjs.io/config#routerules) config that can be used to proxy requests from one route to another. 
+
+To do this, add the following `routeRules` to your `nuxt.config.ts` file:
 
 ```js
 // nuxt.config.ts
