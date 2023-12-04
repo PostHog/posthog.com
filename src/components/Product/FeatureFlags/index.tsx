@@ -340,7 +340,7 @@ const PairsWithArray = [
 ]
 
 export const ProductFeatureFlags = () => {
-    const { phantom, contra, speakeasy } = useStaticQuery(graphql`
+    const { phantom, contra, speakeasy, carvertical } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -362,6 +362,9 @@ export const ProductFeatureFlags = () => {
                 ...ProductCustomerFragment
             }
             speakeasy: mdx(slug: { eq: "customers/speakeasy" }) {
+                ...ProductCustomerFragment
+            }
+            carvertical: mdx(slug: { eq: "customers/carvertical" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -393,7 +396,7 @@ export const ProductFeatureFlags = () => {
                 </div>
 
                 <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="cut failure rates by 90%"
                             quote="Feature flags are crucial for us. We use them as kill switches for all our features."
@@ -408,6 +411,11 @@ export const ProductFeatureFlags = () => {
                             outcome="improved feature roll-out with flags"
                             quote="The integrated insights and feature flags help us monitor how users with specific flags enabled are using features"
                             customer={speakeasy}
+                        />
+                        <CustomerCard
+                            outcome="switched from an in-house tool"
+                            quote="Feature flags immediately bought a lot of value. What’s really elegant is how flags interlink with product analytics."
+                            customer={carvertical}
                         />
                     </ul>
                 </section>
