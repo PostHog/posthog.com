@@ -36,9 +36,9 @@ import AndroidIdentify from './\_snippets/identify.mdx'
 
 ### Setting user properties via an event
 
-To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
 
-##### $set
+##### userProperties
 
 **Example**
 
@@ -55,9 +55,9 @@ PostHog.capture(
 
 **Usage**
 
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+When capturing an event, you can pass a property called `userProperties` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
-##### $set_once
+##### userPropertiesSetOnce
 
 **Example**
 
@@ -74,7 +74,7 @@ PostHog.capture(
 
 **Usage**
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+`userPropertiesSetOnce` works just like `userProperties`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ## Flush
 
@@ -163,10 +163,16 @@ When creating the PostHog client, there are many options you can set:
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
     // Record certain application events automatically! (on/true by default)
     captureApplicationLifecycleEvents = true
+
     // Record screen views automatically! (on/true by default)
     captureScreenViews = true // (on/true by default)
+
+    // Record deep links automatically! (on/true by default)
+    captureDeepLinks = true
+
     // Maximum number of events to keep in queue before flushing (20 by default)
     flushAt = 20
+
     // Maximum delay before flushing the queue (30 seconds)
     flushIntervalSeconds = 30
 }

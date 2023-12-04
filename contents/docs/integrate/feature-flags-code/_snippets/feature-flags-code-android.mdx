@@ -16,4 +16,8 @@ if (PostHog.getFeatureFlag("flag-key")  == "variant-key") { // replace 'variant-
 
 ### Reloading feature flags
 
-Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call `PostHog.with(this).reloadFeatureFlags()`.
+Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call the `reloadFeatureFlags` method.
+
+```kotlin
+PostHog.reloadFeatureFlags()
+```

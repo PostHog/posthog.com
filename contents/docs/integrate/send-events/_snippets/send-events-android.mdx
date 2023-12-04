@@ -24,11 +24,11 @@ PostHog.capture(
 
 ### Capturing screen views
 
-With [`recordScreenViews()`](/docs/libraries/android#all-configuration-options), PostHog will try to record all screen changes automatically.
+With [`captureScreenViews = true`](/docs/libraries/android#all-configuration-options), PostHog will try to record all screen changes automatically.
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
-This function requires a `name`. You may also pass in an optional `properties` object.
+This function requires a `screenTitle`. You may also pass in an optional `properties` object.
 
 ```kotlin
 PostHog.capture(
