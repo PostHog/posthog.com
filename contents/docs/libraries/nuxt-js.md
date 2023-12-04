@@ -170,6 +170,7 @@ Let's say for example the user makes a purchase you could track an event like th
 
 ## Further reading
 
+- [How to set up A/B tests in Nuxt](tutorials/nuxtjs-ab-tests)
 - [PostHog for VueJS users](/docs/libraries/vue-js)
 - [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
 - [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)

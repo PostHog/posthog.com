@@ -6,11 +6,11 @@ tags: ['experimentation', 'feature flags']
 ---
 A/B tests are crucial for optimizing your Nuxt.js app. PostHog's experimentation tool simplifies this process. This tutorial will show you how to set up and run an A/B test in Nuxt using PostHog.
 
-We'll cover creating a basic Nuxt.js app, integrating PostHog, and setting up the A/B test.
+We'll cover creating a basic Nuxt app, integrating PostHog, and setting up the A/B test.
 
-## Creating a Nuxt.js app
+## Creating a Nuxt app
 
-> Already have a Nuxt.js app? [Skip to adding PostHog and setting up the A/B test](#adding-posthog).
+> Already have a Nuxt app? [Skip to adding PostHog and setting up the A/B test](#adding-posthog).
 
 For this tutorial, we create a basic `Nuxt 3` app with a simple button to run our test on. 
 
@@ -227,9 +227,9 @@ const { data: ctaData, error } = await useAsyncData('ctaText', async () => {
   );
 
   const cookies = useCookie(`ph_${runtimeConfig.public.posthogPublicKey}_posthog`);
-  const userId = cookies.value.distinct_id;
-  if (userId) {
+  if (cookies && cookies.value) {
     try {
+      const userId = cookies.value.distinct_id;
       const enabledVariant = await posthog.getFeatureFlag('nuxt-button-text-experiment', userId);
       if (enabledVariant === 'control') {
         ctaText = 'Control Variant';
