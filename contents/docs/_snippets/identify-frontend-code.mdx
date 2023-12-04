@@ -10,9 +10,9 @@ posthog.identify(
 ```Android
 PostHog.identify(
     distinctId = distinctID, // Replace 'distinctID' with your user's unique identifier
+    // optional: set additional user properties
     userProperties = mapOf(
         "name" to "Max Hedgehog", 
-        // optional: set additional user properties
         "email" to "max@hedgehogmail.com"
     )
 )

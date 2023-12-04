@@ -12,9 +12,9 @@ An identify call requires:
 ```kotlin
 PostHog.identify(
     distinctId = distinctID,
+    // optional: set additional user properties
     userProperties = mapOf(
         "name" to "Max Hedgehog", 
-        // optional: set additional user properties
         "email" to "max@hedgehogmail.com"
     )
 )
