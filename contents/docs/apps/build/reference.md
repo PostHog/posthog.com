@@ -103,7 +103,7 @@ Gives you access to the app config values as described in `plugin.json` and conf
 
 Example:
 ```js
-export async function processEvent(event, { config }) {
+export function processEvent(event, { config }) {
     event.properties['greeting'] = config.greeting
     return event
 }
@@ -149,54 +149,6 @@ export function setupPlugin({ attachments, global }: Meta) {
 }
 ```
 
-### `geoip`
-
-`geoip` provides a way to interface with a [MaxMind](https://www.maxmind.com/en/home) database running in the app server to get location data for an IP address. It is [primarily used for the PostHog GeoIP plugin](https://github.com/PostHog/posthog-plugin-geoip/blob/6412763f70a80cf3e1895e8a559a470d80abc9d5/index.ts#L12).
-
-It has a `locate` method that takes an IP address and returns an object possibly containing `city`, `location`, `postal`, and `subdivisions`.
-
-Read more about the response from `geoip.locate` [here](https://github.com/maxmind/GeoIP2-node/blob/af20a9681c85445a73d3446e2a682f64d3b673db/src/models/City.ts).
-
-## Maximizing reliability with `RetryError`
-
-Since plugins generally handle data in some way, it's crucial for data integrity that each plugin is as reliable as possible. One system-level mechanism you can leverage to improve reliability is **function retries**.
-
-While normally a plugin function simply fails without ceremony the moment it throws an error, **select functions can be retried** by throwing a special error type: **`RetryError`** – which is included in the `@posthog/plugin-scaffold` package.
-
-As an example, it's safe to assume that a connection to an external service _will_ fail eventually. Due to security considerations, `setTimeout` cannot be used in a plugin to wait until the network problem has passed, but with function retries the solution is even simpler! Just `catch` the connection error and `throw new RetryError` – the system will re-run the function for you:
-
-```js
-import { RetryError } from '@posthog/plugin-scaffold'
-
-export function setupPlugin() {
-    try {
-        // Some network connection
-    } catch {
-        throw new RetryError('Service is unavailable, but it might be back up in a moment')
-    }
-}
-```
-
-At the same time, make sure NOT to use `RetryError` when the problem cannot be intermittent – perhaps an invalid config, an unhandled edge case, or just a random bug in the code of the plugin. Retrying such a case would just put extra load on the system, without any benefit.
-
-```js
-import { RetryError } from '@posthog/plugin-scaffold'
-
-export function setupPlugin({ config }) {
-    let eventsToTrack
-    try {
-        eventsToTrack = config.nonExistentKey.split(',')
-    } catch {
-        throw new RetryError('Retrying this will never help')
-    }
-}
-```
-
-The maximum number of retries is documented with each function, as it might differ across them. However, the mechanism is constant in its use of _exponential backoff_, that is: the wait time between retries is doubled with each attempt. For instance, if the 1st retry takes place 1 s after the initial failure, the gap between the 5th and the 6th will be 32 s (`2^5`).
-
-As of PostHog 1.37+, the following functions are _retriable_:
-- `setupPlugin`
-
 ## `setupPlugin` function
 
 `setupPlugin` is a function you can use to dynamically set app configuration based on the user's inputs at the configuration step. 
@@ -205,29 +157,15 @@ You could, for example, check if an API Key inputted by the user is valid and th
 
 It takes only an object of type `PluginMeta` as a parameter and does not return anything.
 
-Example (from the [PostHog MaxMind app](https://github.com/PostHog/posthog-maxmind-plugin)):
+Example:
 
 ```js
-export function setupPlugin({ attachments, global }) {
-    if (attachments.maxmindMmdb) {
-        global.ipLookup = new Reader(attachments.maxmindMmdb.contents)
-    }
+export function setupPlugin({ global, config }) {
+    global.eventsToTrack = (config.eventsToTrack || '').split(',')
 }
 ```
-
-`setupPlugin` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times disables the plugin. The plugin is disabled immediately if any error other than `RetryError` is thrown in `setupPlugin`.
 
 On PostHog Cloud and [email-enabled](/docs/self-host/configure/email) instances of PostHog, project members are notified by email of the plugin being disabled automatically. This is to ensure that action is taken if the plugin is important for data integrity.
-
-## `teardownPlugin` function
-
-`teardownPlugin` is ran when an app VM is destroyed, because of, for example, a app server shutdown or an update to the app. It can be used to flush/complete any operations that may still be pending, like exporting events to a third-party service.
-
-```js
-async function teardownPlugin({ global }) {
-  await global.buffer.flush()
-}
-```
 
 ## `processEvent` function
 
@@ -256,7 +194,7 @@ async function processEvent(event, { config}) {
 
 As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all apps run).
 
-Note that you cannot use storage nor cache nor external calls in processEvent apps in PostHog cloud. Furthermore you can only define one of `processEvent` or `onEvent` per app.
+Note that you cannot use storage nor cache nor external calls in processEvent apps in PostHog cloud. Furthermore you can only define one of non-async `processEvent` or `onEvent` per app.
 
 ## `onEvent` function
 
