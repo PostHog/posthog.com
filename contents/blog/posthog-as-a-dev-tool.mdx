@@ -12,15 +12,15 @@ tags:
 
 Last year, during a small team offsite in Austin, Texas, [James](/james) and I sat down in a coffee shop and had a discussion about what the future of PostHog could look like.
 
-While nothing is “wrong” with our current UI, we knew we haven't hit the quality bar on the actual *experience*. (We have been focused on building features, without design being a blocker for shipping.) But for long-term success of PostHog, creating an experience that delights our customer base is critical.
+While nothing is “wrong” with our product's UI, we also know the user experience hasn't won any awards. It gets the job done, but it hasn't been particulary delightful.
 
-This is even more important for a product like ours with a largely technical user base. Our ICP (ideal customer profile) is product engineers, an audience a high expectation for quality. They want their tools to “just work” the way they expect them to.
+But our ICP (ideal customer profile) is _product engineers,_ an audience with a high expectation for quality, and for generalist tools that “just work” the way they expect them to.
 
 This means a shift in our design approach: **PostHog should feel less like a generic SaaS app and more like a dev tool.** (I’m using the term “dev tool” to include any product built for people with power users, not just tools where users write code.)
 
 ## SaaS app vs. dev tool
 
-So what’s the difference between a SaaS app and a dev tool? It comes down to the experience.
+So what’s the difference between a SaaS app and a dev tool? In large part, it's  the experience.
 
 | Typical SaaS app 	| Dev tool 	|
 |---	|---	|
@@ -30,11 +30,11 @@ So what’s the difference between a SaaS app and a dev tool? It comes down to t
 | Large buttons, nav menu 	| Keyboard-focused navigation 	|
 | Web 2.0 	| Desktop-like layout 	|
 
-It really comes down to making power users faster and more efficient at their jobs, as well as being flexible in terms of how a user can accomplish a task. Interfaces become less about fluff, more about getting out of the way.
+It really comes down to helping power users be faster and more efficient at their jobs. Dev tools are also flexible in how users can accomplish a task, allowing different workflows rather than forcing users into a single path. Interfaces become less about fluff, more about getting out of the way.
 
 Figma has nailed this for designers. VS Code has squarely accomplished this for engineers. Linear has perfected this for ~~product managers~~ everyone. And we’re going to do this for product engineers.
 
-In essence, we want PostHog to release as much dopamine as when we’re using these other tools.
+In essence, we want PostHog to release as much dopamine as these other tools.
 
 ## Changes coming today
 
@@ -76,7 +76,7 @@ Light mode also uses the highly-~~acclaimed~~ controversial PostHog tan. ([I'm i
 
 The nav menu has now been organized into two main sections: **project & data** and **products**.
 
-**Project & data** includes your dashboards and notebooks, along with the data you're sent to PostHog (like events, people, and properties), and metadata you've added on top (like actions, cohorts, and annotations) – and a live feed of incoming events.
+**Project & data** includes your dashboards and notebooks, along with the data you've sent to PostHog (like events, people, and properties), and metadata you've added on top (like actions, cohorts, and annotations) – and a live feed of incoming events.
 
 **Products** is the ever-growing list of tools built on top of the PostHog platform.
 
@@ -130,7 +130,7 @@ You can `Tab` between filtering options.
 
 ## Our UX roadmap
 
-PostHog 3000 is far from complete. You may find a few things in the UI that don't feel quite perfect... and that's because we're not done yet!
+PostHog 3000 is far from complete. You might find a few things in the UI that don't feel quite perfect... and that's because we're not done yet!
 
 We ship early and often - it's the PostHog way. As a designer, it can be hard not ship the full vision in its entirety (since there are a million small details I'd like to change), but we'll keep iterating over the coming months.
 
@@ -158,7 +158,7 @@ Feedback? Share it [in this GitHub issue](https://github.com/PostHog/posthog/iss
 
 There's currently no way to see a list of events while viewing the detail for one of them. It requires a click from an index view into a detail view.
 
-So what if a side pane could let you jump into details without having to fully commit – then use the back button – or open a new tab?
+So, what if a side pane could let you jump into details without having to fully commit – then use the back button – or open a new tab?
 
 Here's a preview of a concept we built (but aren't releasing quite yet). It works across the app everywhere that there's a list of items.
 
@@ -177,7 +177,7 @@ Seen below with the explorer pane, here's a concept where we explored tabs! Thou
 Also in the above mockup, you'll notice the right column explores a few ideas:
 
 - **Actions:** This pane would provide easy access to explore this event in PostHog products. Think of them like macros.
-- **Info:** Metadata like the event name, description, tags appear here. The same concept would be used in insights, as well.
+- **Info:** Metadata like the event name, description, and tags appear here. The same concept would be used in insights as well.
 - **Associations:** Want to know where an event is used? Quickly jump to insights or dashboards that use it.
 
 Feedback? Share it [in this GitHub issue](https://github.com/PostHog/posthog/issues/19034).
@@ -192,7 +192,7 @@ Rolled into what we're releasing today is slightly better mobile support for vie
 
 ---
 
-There's no shortage of ideas - it all comes down to prioritization, and making sure we're solving real problems.
+There's no shortage of ideas - it all comes down to prioritization and making sure we're solving real problems.
 
 ## Help us decide what to work on next
 
