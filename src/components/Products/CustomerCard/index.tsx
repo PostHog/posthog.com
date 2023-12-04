@@ -28,7 +28,7 @@ export const CustomerCard = ({ outcome, quote, customer }: CustomerCardProps): J
     return (
         <li className=" bg-accent dark:bg-accent-dark p-6 rounded">
             <img
-                className="mb-4 max-h-8 max-w-[200px]"
+                className="mb-4 max-h-8 max-w-[200px] w-full object-contain object-left"
                 src={customer.frontmatter[darkMode ? 'logoDark' : 'logo'].publicURL}
             />
             <p className="text-lg font-semibold m-0 leading-tight mb-1">{outcome}</p>
