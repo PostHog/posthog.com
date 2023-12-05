@@ -5,7 +5,7 @@ author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
 
-A/B tests help you make your Vue app better by enabling you to compare the impact of code changes on key metrics. To show you how to set one up, in this tutorial we will create a basic Vue app, add PostHog, create an A/B test and implement the code for it.
+A/B tests help you make your Vue app better by enabling you to compare the impact of code changes on key metrics. To show you how to set one up, in this tutorial we create a basic Vue app, add PostHog, create an A/B test and implement the code for it.
 
 ## Creating a Vue app
 
@@ -16,7 +16,6 @@ First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-
 ```bash
 npm install -g @vue/cli
 vue create vue-ab-test
-cd vue-ab-test
 ```
 
 Make sure to select `[Vue 3] babel, eslint` as the Vue version.
@@ -26,7 +25,7 @@ Next, replace the code in `App.vue` with a simple heading and button:
 ```vue file=App.vue
 <template>
   <div id="app">
-    <h1>We are testing this button:</h1>
+    <h1>Vue.js A/B test</h1>
     <button @click="handleClick">Click me!</button>
   </div>
 </template>
@@ -45,7 +44,7 @@ export default {
 
 Run `npm run serve` to start your app.
 
-![Basic Vue app](../images/tutorials/nuxtjs-ab-tests/basic-app.png.png)
+![Basic Vue app](../images/tutorials/vue-ab-tests/basic-app.png)
 
 ## Adding PostHog
 
@@ -60,7 +59,7 @@ npm install posthog-js
 Create a new [plugin](https://vuejs.org/guide/reusability/plugins) by first creating a new folder called `plugins` and then a new file `posthog.js`:
 
 ```bash
-mkdir plugins #skip if you already have one
+mkdir plugins
 cd plugins 
 touch posthog.js
 ```
@@ -84,7 +83,7 @@ export default {
 
 Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [PostHog project settings](https://app.posthog.com/settings/project).
 
-Finally, activate your plugin in `main.js` where you initialize your app:
+Finally, activate your plugin in `main.js`:
 
 ```js file=main.js
 import { createApp } from 'vue'
@@ -140,7 +139,7 @@ Update your code in `App.vue` to the following:
 ```vue file=App.vue
 <template>
   <div id="app">
-    <h1>Vue 3 A/B test</h1>
+    <h1>Vue.js A/B test</h1>
     <button @click="handleClick">{{ buttonText }}</button>
   </div>
 </template>
@@ -175,7 +174,6 @@ Now if you refresh your app, you should see the button text updated to either `C
 With this, you’re ready to launch your experiment!
 
 ## Further reading
-https://posthog.com/docs/libraries/vue-js
 
 - [PostHog Vue.js docs](/docs/libraries/vue-js)
 - [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)
