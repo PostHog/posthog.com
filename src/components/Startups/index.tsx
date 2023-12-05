@@ -95,7 +95,7 @@ export default function Startups() {
             <div className="relative lg:hidden -mb-12">
                 <h1 className="max-w-lg mx-auto pb-2 text-center">Apply for PostHog's startup program</h1>
 
-                <div className="max-w-sm rounded p-4 text-left bg-gray-accent-light mx-auto">
+                <div className="max-w-sm rounded p-4 text-left bg-accent dark:bg-accent-dark border border-border dark:border-dark mx-auto">
                     <h3 className="text-lg mb-1">How to apply:</h3>
                     <ol>
                         <li>
