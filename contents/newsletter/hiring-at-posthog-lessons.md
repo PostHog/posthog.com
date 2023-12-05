@@ -1,7 +1,7 @@
 ---
 date: 2023-09-07
 title: "Everything we've learned about hiring for startups (so far)"
-author: ["ian-vanagas"]
+author: ["andy-vandervell"]
 featuredImage: ../images/blog/newsletter-hog.png
 featuredImageType: full
 tags:
@@ -23,7 +23,7 @@ We’ve interviewed 1,400 people in over three years, we hired 62 of them, and w
 
 ## 1. Define your culture before you start hiring
 
-PostHog’s co-founders, Tim and James, wrote [our public handbook](https://posthog.com/handbook/) before they hired their second employee. It helped them:
+PostHog’s co-founders, Tim and James, wrote [our public handbook](/handbook/) before they hired their second employee. It helped them:
 
 1. Figure out what kind of company they wanted to build
 2. The type of people that would thrive in that company
@@ -33,7 +33,7 @@ PostHog’s co-founders, Tim and James, wrote [our public handbook](https://post
 
 ## 2. Your early users could be your best hires
 
-In the early days, PostHog’s CEO, [James Hawkins](https://posthog.com/community/profiles/71), would check out people who starred the repo and sometimes get in touch to gather feedback. One such call resulted in our third hire, [James Greenhill](https://posthog.com/community/profiles/90).
+In the early days, PostHog’s CEO, [James Hawkins](/community/profiles/71), would check out people who starred the repo and sometimes get in touch to gather feedback. One such call resulted in our third hire, [James Greenhill](/community/profiles/90).
 
 On the call, James G explained Uber (where he worked) had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it. He ended up doing a few days of paid work and the rest is history.
 
@@ -49,9 +49,9 @@ Here are three ways to do that:
 
 2. **Be specific about what the job entails:** Don’t list vague responsibilities, list out exactly what kind of tasks successful candidates will work on. We like to list open GitHub issues and completed pull requests as examples.
 
-3. **Include a salary range:** If you can't afford to pay a good salary, then let expensive people self-select out. We built a [compensation calculator](https://posthog.com/handbook/people/compensation/) just for this.
+3. **Include a salary range:** If you can't afford to pay a good salary, then let expensive people self-select out. We built a [compensation calculator](/handbook/people/compensation/) just for this.
 
-Follow these three principles and your ads will stand out from 90% of the competing adverts out there. Here’s [one of ours](https://posthog.com/careers/technical-ex-founder) as an example.
+Follow these three principles and your ads will stand out from 90% of the competing adverts out there. Here’s [one of ours](/careers/technical-ex-founder) as an example.
 
 **Why is this important?** Being transparent demonstrates credibility. It shows you’ve thought about the process, why you’re recruiting that role, and you won’t waste people’s time with lowball offers.
 
@@ -73,7 +73,7 @@ A majority of “soft yes” responses is normally indicative of some deeper une
 
 This is true from day one, but becomes more critical as you grow and use recruiters to manage sourcing and screening candidates.
 
-As Charles Cook, our head of ops and a veteran of multiple startups, [explains](https://posthog.com/blog/early-stage-startup-hiring-strategy#myth-recruiters-are-responsible-for-hiring):
+As Charles Cook, our head of ops and a veteran of multiple startups, [explains](/blog/early-stage-startup-hiring-strategy#myth-recruiters-are-responsible-for-hiring):
 
 > “Managers are responsible for the output of their teams. Output can be increased by hiring more people. Therefore managers are responsible for hiring.
 >
@@ -85,7 +85,7 @@ As Charles Cook, our head of ops and a veteran of multiple startups, [explains](
 
 ## 6. Good people are always in demand
 
-There’s a school of thought that hiring is easier when other, much bigger, companies are cutting people. This hasn’t been our experience. Here’s Charles [again](https://posthog.com/blog/early-stage-startup-hiring-strategy#myth-hiring-gets-easier-when-other-companies-are-making-cuts):
+There’s a school of thought that hiring is easier when other, much bigger, companies are cutting people. This hasn’t been our experience. Here’s Charles [again](/blog/early-stage-startup-hiring-strategy#myth-hiring-gets-easier-when-other-companies-are-making-cuts):
 
 > “The best people are always in demand and will have lined up five interviews within 24 hours of posting on LinkedIn. Often (but not always) the 'cuts' that are being made are in non-core product areas, or in more manager-y type roles that are unlikely to be relevant to your early-stage startup.”
 

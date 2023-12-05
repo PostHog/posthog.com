@@ -24,7 +24,7 @@ In the spirit of transparency (the value of which you’ll see soon), we’re ta
 
 Transparency is critical successful async work.
 
-This means, wherever possible, our [handbook](https://posthog.com/handbook), [strategy](https://posthog.com/handbook/why-does-posthog-exist#our-strategy), [roadmap](https://posthog.com/roadmap), and [work discussions](https://github.com/PostHog/posthog/issues) are all open for anyone to see. It also means, internally, the executive team shares financials, updates on fundraising, board slides, and people decisions.
+This means, wherever possible, our [handbook](/handbook), [strategy](/handbook/why-does-posthog-exist#our-strategy), [roadmap](/roadmap), and [work discussions](https://github.com/PostHog/posthog/issues) are all open for anyone to see. It also means, internally, the executive team shares financials, updates on fundraising, board slides, and people decisions.
 
 ![transp](../images/newsletter/async-work/transparency.png)
 
@@ -32,7 +32,7 @@ Each of these is often private and/or synchronous in other companies. Of course,
 
 Transparency enables everyone to know what is going on with the company without synchronous communication. This creates autonomy and empowerment.
 
-> **Further reading: [How to run a transparent startup](https://posthog.com/founders/how-to-run-a-transparent-company) – James Hawkins**
+> **Further reading: [How to run a transparent startup](/founders/how-to-run-a-transparent-company) – James Hawkins**
 
 ## 2. Context is king
 
@@ -46,7 +46,7 @@ These are opportunities to clarify:
 2. **Quarterly goals**, so small teams can share their specific plans.
 3. **Ownership**, so everyone knows who is delivering those goals / projects.
 
-We use our weekly Monday all-hands meeting to re-emphasize, update and scrutinize our goals, through a combination of announcements, team updates, and James’ topic of the day. Recent topics include how we build an enduring company, reviewing PostHog’s [values](https://posthog.com/handbook/company/values), and how to balance planning vs. collaborating vs. shipping.
+We use our weekly Monday all-hands meeting to re-emphasize, update and scrutinize our goals, through a combination of announcements, team updates, and James’ topic of the day. Recent topics include how we build an enduring company, reviewing PostHog’s [values](/handbook/company/values), and how to balance planning vs. collaborating vs. shipping.
 
 With this context, people are empowered to work async. Teams require less synchronous communication to get their work done throughout the week. Instead, they rely a lot on…
 
@@ -54,7 +54,7 @@ With this context, people are empowered to work async. Teams require less synchr
 
 To make good decisions about what they work on, people need access to the relevant context. In an async environment, this means:
 
-1. [Writing it down](https://posthog.com/handbook/company/culture#we-write-everything-down).
+1. [Writing it down](/handbook/company/culture#we-write-everything-down).
 2. Making it easy to find.
 
 As much as possible, we document things, so people can unblock themselves without asking for help from someone who could be offline or busy. Our priority list for this is:
@@ -69,22 +69,22 @@ We avoid private group chats, internal email threads, and docs in other location
 
 ## 4. Reduce work in progress
 
-Another way we stay autonomous is by reducing [work in progress](https://posthog.com/handbook/engineering/development-process#2-sizing-a-task-and-reducing-wip). Async coordination is hard enough, imagine juggling 10 different projects while doing it. We prevent this with a few principles:
+Another way we stay autonomous is by reducing [work in progress](/handbook/engineering/development-process#2-sizing-a-task-and-reducing-wip). Async coordination is hard enough, imagine juggling 10 different projects while doing it. We prevent this with a few principles:
 
 - PRs should be doable in one day.
 - Start your day by responding to others’ review requests.
 - Merge whenever.
-- Ship behind a feature flag and [test in production](https://posthog.com/product-engineers/testing-in-production).
+- Ship behind a feature flag and [test in production](/product-engineers/testing-in-production).
 
 Each of these reduces the amount of context needed to get work shipped. This makes it less likely people need to communicate at all. They can spend their energy working rather than context juggling.
 
-> **Further reading: [Why we test in production (and you should too)](https://posthog.com/product-engineers/testing-in-production) – Ian Vanagas**
+> **Further reading: [Why we test in production (and you should too)](/product-engineers/testing-in-production) – Ian Vanagas**
 
 ## 5. Our request for comments process
 
 Planning a big project impacting multiple teams?
 
-Instead of a “stakeholder meeting,” we use a [request for comments, AKA RFC](https://posthog.com/handbook/company/communication). This process helps us publicly get feedback and make decisions on big projects. It is a core piece of async communication at PostHog that boils down to a written pull request with:
+Instead of a “stakeholder meeting,” we use a [request for comments, AKA RFC](/handbook/company/communication). This process helps us publicly get feedback and make decisions on big projects. It is a core piece of async communication at PostHog that boils down to a written pull request with:
 
 1. The problem
 2. The recommendation
@@ -114,7 +114,7 @@ What do we get out of all this?
 
 ## Mitigating the downsides of async
 
-Earlier in PostHog’s life, [we made the mistake of being too async](https://posthog.com/founders/asynchronous-remote-companies). This created unclear direction and disconnect within teams which in turn caused unnecessary tension and burnout. We learned from this and now do a lot to prevent it.
+Earlier in PostHog’s life, [we made the mistake of being too async](/founders/asynchronous-remote-companies). This created unclear direction and disconnect within teams which in turn caused unnecessary tension and burnout. We learned from this and now do a lot to prevent it.
 
 We still do syncs, just less often than most companies. They include:
 
@@ -122,14 +122,14 @@ We still do syncs, just less often than most companies. They include:
 - One-on-ones and ad-hoc Slack huddles.
 - In-person onboarding for new hires with their team.
 - Co-working and meeting up budgets.
-- [One small team](https://posthog.com/blog/rome-hackathon) and one [whole company offsite](https://posthog.com/blog/aruba-hackathon) every year.
+- [One small team](/blog/rome-hackathon) and one [whole company offsite](/blog/aruba-hackathon) every year.
 
 ![posthog aruba](../images/blog/aruba/aruba-hackathon-photos.jpeg)
 <Caption>Our most recent company offsite in Aruba</Caption>
 
 This helps build connections, energize, and align the team for our async to work the rest of the time.
 
-> **Further reading: [How to plan a killer company offsite in just 8 weeks](https://posthog.com/founders/planning-a-company-offsite) – Grace McKenzie**
+> **Further reading: [How to plan a killer company offsite in just 8 weeks](/founders/planning-a-company-offsite) – Grace McKenzie**
 
 ## Creating your asynchronous work toolkit
 
