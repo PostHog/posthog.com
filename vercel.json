@@ -561,6 +561,7 @@
         { "source": "/handbook/people/team-structure/marketing", "destination": "/handbook/small-teams/marketing" },
         { "source": "/handbook/people/team-structure/people", "destination": "/handbook/small-teams/people" },
         { "source": "/handbook/people/team-structure/platform", "destination": "/handbook/small-teams/platform" },
+        { "source": "/handbook/small-teams/ops", "destination": "/handbook/small-teams/people" },
         {
             "source": "/handbook/people/team-structure/session-recording",
             "destination": "/handbook/small-teams/replay"
