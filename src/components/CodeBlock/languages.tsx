@@ -194,7 +194,7 @@ const languageMap: LanguageMap = {
         label: 'React',
     },
     vue: {
-        language: 'vue',
+        language: 'html',
         label: 'Vue',
     },
 }
