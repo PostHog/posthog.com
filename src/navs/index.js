@@ -1133,7 +1133,7 @@ export const docsMenu = {
                             url: '/tutorials/angular-analytics',
                         },
                         {
-                            name: 'Angular',
+                            name: 'Astro',
                             url: '/tutorials/astro-analytics',
                         },
                         {
