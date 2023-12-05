@@ -177,14 +177,13 @@ function QuestionFormMain({
                                 </div>
                             </div>
                             <span className="ml-[50px]">
-                                <Button disabled={loading || !isValid} type="submit" className="w-[calc(100%_-_50px)]">
-                                    {loading ? (
-                                        <Spinner className="!text-white mx-auto" />
-                                    ) : user ? (
-                                        'Post'
-                                    ) : (
-                                        'Login & post'
-                                    )}
+                                <Button
+                                    loading={loading}
+                                    disabled={loading || !isValid}
+                                    type="submit"
+                                    className="w-[calc(100%_-_50px)]"
+                                >
+                                    {user ? 'Post' : 'Login & post'}
                                 </Button>
                             </span>
 

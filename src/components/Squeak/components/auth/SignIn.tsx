@@ -15,7 +15,7 @@ const errorMessages: Record<string, string> = {
 }
 
 export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, setMessage }) => {
-    const { isLoading, login } = useUser()
+    const { login } = useUser()
 
     const handleSubmit = async (values: any) => {
         const user = await login({
@@ -51,7 +51,7 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
             }}
             onSubmit={handleSubmit}
         >
-            {({ isValid }) => {
+            {({ isValid, isSubmitting }) => {
                 return (
                     <Form className="m-0">
                         <label className={labelClasses} htmlFor="email">
@@ -78,7 +78,7 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
                             type="password"
                             placeholder="Password..."
                         />
-                        <Button disabled={isLoading || !isValid} type="submit" width="full">
+                        <Button loading={isSubmitting} disabled={isSubmitting || !isValid} type="submit" width="full">
                             {buttonText}
                         </Button>
                     </Form>
