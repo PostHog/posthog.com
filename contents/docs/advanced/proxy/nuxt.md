@@ -22,5 +22,6 @@ Then configure the PostHog client to send requests via your new proxy:
 ```js
 const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: 'https://your-host.com/ingest',
+    ui_host: 'https://app.posthog.com', // or https://eu.posthog.com if your PostHog is hosted in Europe
 });
 ```
