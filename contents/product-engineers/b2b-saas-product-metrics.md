@@ -67,7 +67,7 @@ Think we missed one? Make a suggestion via [our website repo](https://github.com
 
 ### Adoption rate
 
-**What is it?**  Adoption rate is a product health metric that tells you what percentage of total signups turned into active users in any given period. 
+**What is it?**  Adoption rate is a [product health metric](/product-engineers/product-health-metrics) that tells you what percentage of total signups turned into active users in any given period. 
 
 Your adoption rate is `(new active users / signups) x 100`, so 40 new active users and 200 signups equals an adoption rate of 20%.
 
