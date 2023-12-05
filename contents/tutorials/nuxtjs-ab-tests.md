@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Nuxt
-date: 2023-12-04
+date: 2023-12-05
 author: ["lior-neu-ner"]
 tags: ['experimentation', 'feature flags']
 ---
