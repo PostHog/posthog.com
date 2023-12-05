@@ -1,11 +1,13 @@
 import React from 'react'
-import { CallToAction, TrackedCTA } from '../CallToAction'
-import { Link } from 'gatsby'
+import { TrackedCTA } from '../CallToAction'
 import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
 import { SignupCTA } from 'components/SignupCTA'
 import Accordion from './Accordion'
+import './hero.scss'
+
+const heroTitle = 'How engineers build better products'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -45,17 +47,23 @@ export default function Hero() {
         <section className="flex flex-col justify-center items-center">
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative md:!mb-8')}>
-                    <h1 className={heading()}>
-                        How engineers{' '}
-                        <span className="text-red dark:text-yellow inline-block">build better products</span>
+                    <h1 className={`${heading()} overflow-hidden pb-1 home-hero-title`}>
+                        {heroTitle.split(' ').map((word, index) => (
+                            <span
+                                key={word}
+                                className={`${
+                                    index > 1 ? 'text-red dark:text-yellow' : ''
+                                } ml-4 first:ml-0 inline-block`}
+                            >
+                                {word}
+                            </span>
+                        ))}
                     </h1>
-                    <h2 className={heading('subtitle', 'primary', 'my-6')}>
+                    <h2 className={`${heading('subtitle', 'primary', 'mt-0 mb-6')} home-hero-subtitle`}>
                         The single platform to analyze, test, observe, and deploy new features
                     </h2>
-
-                    <div className="flex justify-center items-center gap-2">
-                        <SignupCTA className="" />
-
+                    <div className="flex justify-center items-center gap-2 home-hero-cta">
+                        <SignupCTA />
                         <TrackedCTA
                             event={{ name: `clicked Get a demo` }}
                             href="/book-a-demo"
