@@ -1,4 +1,5 @@
-$wordCount: 5;
+$titleWordCount: 5;
+$ctaCount: 2;
 
 @keyframes staggerInLg {
     0% {
@@ -22,8 +23,18 @@ $wordCount: 5;
     }
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 .home-hero-title {
-    @for $i from 1 through $wordCount {
+    @for $i from 1 through $titleWordCount {
         span:nth-of-type(#{$i}) {
             animation: staggerInLg;
             animation-duration: 0.6s;
@@ -37,6 +48,30 @@ $wordCount: 5;
                 animation-timing-function: ease-out;
                 animation-fill-mode: both;
             }
+        }
+    }
+}
+
+.home-hero-subtitle {
+    opacity: 0;
+    animation: fadeIn;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-delay: 0.8s;
+}
+
+.home-hero-cta {
+    @for $i from 1 through $ctaCount {
+        a:nth-of-type(#{$i}) {
+            animation: fadeIn;
+            animation-duration: 3s;
+            @if $i == 1 {
+                animation-delay: calc(#{$i} * 1500ms);
+            } @else {
+                animation-delay: calc(#{$i} * 1100ms);
+            }
+            animation-timing-function: ease-out;
+            animation-fill-mode: both;
         }
     }
 }
