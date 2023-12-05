@@ -231,7 +231,7 @@ export const CodeBlock = ({
                         </div>
                     ) : null}
 
-                    <div className="shrink-0 ml-auto flex items-center divide-x divide-gray-accent-dark">
+                    <div className="shrink-0 ml-auto flex items-center divide-x divide-border dark:divide-border-dark">
                         {selector === 'dropdown' && languages.length > 1 ? (
                             <div className="relative mr-2">
                                 <Listbox value={currentLanguage} onChange={(language) => onChange(language)}>
@@ -245,12 +245,12 @@ export const CodeBlock = ({
                                         <SelectorIcon className="w-4 h-4" />
                                     </Listbox.Button>
 
-                                    <Listbox.Options className="absolute top-full right-0 mt-1 bg-black px-0 py-2 text-white list-none rounded text-xs focus:outline-none border border-white/10">
+                                    <Listbox.Options className="absolute top-full right-0 m-0 p-0 mt-1 bg-black text-white list-none rounded text-xs focus:outline-none z-50 overflow-hidden border border-border dark:border-border-dark">
                                         {languages.map((option) => (
                                             <Listbox.Option
                                                 key={option.language}
                                                 value={option}
-                                                className="cursor-pointer text-sm hover:bg-gray-accent-dark w-full pl-8 pr-2 py-0.5"
+                                                className="cursor-pointer text-sm hover:bg-gray-accent-dark w-full px-3 py-1"
                                             >
                                                 {option.label || option.language}
                                             </Listbox.Option>
@@ -261,7 +261,7 @@ export const CodeBlock = ({
                         ) : null}
 
                         {showCopy && (
-                            <div className="relative flex items-center justify-center pr-1">
+                            <div className="relative flex items-center justify-center px-1">
                                 <button
                                     onClick={copyToClipboard}
                                     className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
