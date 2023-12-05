@@ -55,9 +55,9 @@ $ctaCount: 2;
 .home-hero-subtitle {
     opacity: 0;
     animation: fadeIn;
-    animation-duration: 1.5s;
+    animation-duration: 2s;
     animation-fill-mode: both;
-    animation-delay: 0.8s;
+    animation-delay: 0.7s;
 }
 
 .home-hero-cta {
@@ -66,11 +66,11 @@ $ctaCount: 2;
             animation: fadeIn;
             animation-duration: 3s;
             @if $i == 1 {
-                animation-delay: calc(#{$i} * 1500ms);
+                animation-delay: calc(#{$i} * 1200ms);
             } @else {
-                animation-delay: calc(#{$i} * 1100ms);
+                animation-delay: calc(#{$i} * 800ms);
             }
-            animation-timing-function: ease-out;
+            animation-timing-function: ease;
             animation-fill-mode: both;
         }
     }
