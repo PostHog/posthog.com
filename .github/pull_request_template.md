@@ -4,7 +4,6 @@
 
 *Add screenshots or screen recordings for visual / UI-focused changes.*
 
-
 ## Checklist
 - [ ] If I moved a page, I added a redirect in `vercel.json`
 - [ ] I've added (at least) 3 to 5 internal links to this new article
