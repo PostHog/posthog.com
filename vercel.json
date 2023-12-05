@@ -1131,6 +1131,7 @@
         { "source": "/handbook/growth/marketing/blog", "destination": "/handbook/growth/marketing/content" },
         { "source": "/handbook/small-teams/website-docs/community", "destination": "/handbook/community" },
         { "source": "/logo", "destination": "/handbook/company/brand-assets" },
-        { "source": "/docs/getting-started/next-steps", "destination": "/tutorials/next-steps-after-installing" }
+        { "source": "/docs/getting-started/next-steps", "destination": "/tutorials/next-steps-after-installing" },
+        { "source": "/data-warehouse", "destination": "/docs/data-warehouse" }
     ]
 }
