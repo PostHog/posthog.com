@@ -29,6 +29,7 @@ type LanguageMap = {
             | 'rust'
             | 'kotlin'
             | 'groovy'
+            | 'vue'
         label: React.ReactNode
     }
 }
@@ -207,6 +208,10 @@ const languageMap: LanguageMap = {
     react: {
         language: 'jsx',
         label: 'React',
+    },
+    vue: {
+        language: 'vue',
+        label: 'Vue',
     },
 }
 

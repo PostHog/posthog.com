@@ -181,7 +181,6 @@ export const button = (
     w-${width}
     ${buttonTypes[type] || ''}    
     ${sizes[size]}
-    group-disabled:hover:!translate-y-0
     ${className}
 `
 
