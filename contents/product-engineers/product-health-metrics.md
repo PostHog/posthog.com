@@ -22,8 +22,6 @@ In this guide, we cover:
 2. Common product health metrics to measure
 3. How to choose the right product health metrics
 
-> **Want to get started fast?** Try our pre-built [product health dashboard template](/templates/health-dashboard) to monitor the most important metrics with one click.
-
 ## What is a product health metric?
 
 If a product is like the human body, then product health metrics are the vital signs. They are the body temperature, blood pressure, and pulse rate of a product. They help you monitor the experience of your product and show the impact of changes, updates, and the competitive environment.
@@ -33,6 +31,8 @@ Product health metrics are usually steady. Dramatic changes are a bad sign. Just
 If a dramatic change doesn't prompt a change in your work, your health metric isn't valuable. A doctor is useless if you never listen to them. A good product health metric is a summary of a product, so it must be abstract enough to remove unnecessary details, but detailed enough to remain actionable.
 
 Beyond, monitoring for dramatic changes, companies aim to improve product health metrics over weeks and months. Like how consistently exercising improves your pulse and respiration rates, enhancements and bug fixes improve your product health.
+
+> **Want to get started fast?** Try our pre-built [product health dashboard template](/templates/health-dashboard) to monitor the most important metrics with one click.
 
 ### What types of companies use product health metrics?
 
@@ -68,7 +68,7 @@ For SaaS or products relying on recurring usage (and revenue), churn might be th
 
 ![Churn rate](../images/blog/product-health-metrics/churn.png)
 
-Some products have a naturally high churn, so having a high churn rate isn’t always a bad sign. A dramatic increase in churn is a bad sign though. It means something has changed significantly with your product and should be investigated.
+Some products have a naturally high churn, so having a high churn rate isn’t always a bad sign. A dramatic increase in churn is a bad sign, though. It means something has changed significantly with your product and should be investigated.
 
 ### Daily, weekly, and monthly active users (engagement)
 
@@ -80,7 +80,7 @@ Consistent growth in active users means:
 - you are keeping users engaged
 - users aren’t leaving
 
-Doing a ratio of these values such as DAU/MAU can be useful. This helps you understand how frequently people are engaging with the product and the "intensity" of this usage. You can use PostHog’s formula mode to calculate this. 
+Doing a ratio of these values such as [DAU/MAU](/tutorials/dau-mau-ratio) can be useful. This helps you understand how frequently people are engaging with the product and the "intensity" of this usage. You can use PostHog’s formula mode to calculate this. 
 
 ![DAU/MAU ratio](../images/blog/product-health-metrics/daumau.png)
 
