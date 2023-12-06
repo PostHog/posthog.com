@@ -130,6 +130,9 @@ rotate-180
 rotate-45
 rotate-90
 sm:hidden
+sm:float-right
+sm:max-w-sm
+sm:-ml-8
 space-x-reverse
 text-blue
 text-green

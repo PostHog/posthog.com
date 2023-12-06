@@ -240,6 +240,7 @@ h4 {
             @apply mt-8;
         }
     }
+
     blockquote:not(.quote) {
         @apply px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
 
@@ -260,12 +261,14 @@ h4 {
             @apply opacity-75 text-sm;
         }
     }
+
     tr:not(:first-child) {
         td,
         th {
             @apply border-t border-light dark:border-dark;
         }
     }
+
     td,
     th {
         @apply pt-2 text-[15px];
@@ -283,6 +286,10 @@ h4 {
     th:last-child,
     td:last-child {
         padding-right: 0;
+    }
+
+    hr {
+        @apply border-t border-b-0 border-solid border-light dark:border-dark my-6 h-0;
     }
 
     /* expandable/collapsible sections */
