@@ -99,7 +99,7 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: IconRetention },
     ]
     return (
-        <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-center h-full">
+        <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-center">
             <div className="relative md:grid grid-cols-16 md:gap-8 w-full">
                 <ImageContainer className="md:pl-8 col-span-10">
                     <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-0 md:-mb-2">
