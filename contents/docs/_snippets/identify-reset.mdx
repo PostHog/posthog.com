@@ -10,12 +10,12 @@ You can do that like so:
 posthog.reset()
 ```
 
-```ios
+```iOS
 posthog.reset()
 ```
-
-```android_kotlin
-PostHog.reset()
+```Android
+PostHog.with(this)
+       .reset();
 ```
 
 </MultiLanguage>
@@ -28,11 +28,12 @@ If you _also_ want to reset the `device_id` so that the device will be considere
 posthog.reset(true)
 ```
 
-```ios
+```iOS
 posthog.reset(true)
 ```
 
-```android_kotlin
-PostHog.reset()
+```Android
+PostHog.with(this)
+       .reset(true);
 ```
 </MultiLanguage>

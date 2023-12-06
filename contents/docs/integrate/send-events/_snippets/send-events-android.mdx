@@ -4,38 +4,33 @@ import Intro from "./intro.mdx"
 
 <Intro />
 
-```kotlin
-PostHog.capture(event = "user_signed_up")
+```java
+PostHog.with(this)
+       .capture("user_signed_up");
 ```
 
 <NamingTip />
 
 <SettingProperties />
 
-```kotlin
-PostHog.capture(
-    event = "user_signed_up",
-    properties = mapOf(
-        "login_type" to "email",
-        "is_free_trial" to true
-    )
-)
+```java
+PostHog.with(this)
+       .capture("user_signed_up", new Properties()
+              .putValue("login_type", "email")
+              .putValue("is_free_trial", true));
 ```
 
 ### Capturing screen views
 
-With [`captureScreenViews = true`](/docs/libraries/android#all-configuration-options), PostHog will try to record all screen changes automatically.
+With [`recordScreenViews()`](/docs/libraries/android#all-configuration-options), PostHog will try to record all screen changes automatically.
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
-This function requires a `screenTitle`. You may also pass in an optional `properties` object.
+This function requires a `name`. You may also pass in an optional `properties` object.
 
-```kotlin
-PostHog.screen(
-    screenTitle = "Dashboard",
-    properties = mapOf(
-        "background" to "blue",
-        "hero" to "superhog"
-    )
-)
+```java
+PostHog.with(this)
+       .screen("Dashboard", new Properties()
+                                  .putValue("background", "blue")
+                                  .putValue("hero", "superhog"));
 ```
