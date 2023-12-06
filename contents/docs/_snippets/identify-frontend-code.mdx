@@ -7,14 +7,18 @@ posthog.identify(
 );
 ```
 
-```Android
-PostHog.with(this)
-     .identify(distinctID, new Properties() // Replace 'distinctID' with your user's unique identifier
-        .putValue("name", "Max Hedgehog") // optional: set additional user properties
-        .putValue("email", "max@hedgehogmail.com));
+```android_kotlin
+PostHog.identify(
+    distinctId = distinctID, // Replace 'distinctID' with your user's unique identifier
+    // optional: set additional user properties
+    userProperties = mapOf(
+        "name" to "Max Hedgehog", 
+        "email" to "max@hedgehogmail.com"
+    )
+)
 ```
 
-```iOS
+```ios
 posthog.identify("distinct_id", // Replace "distinct_id" with your user's unique identifier
   properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"]) // optional: set additional user properties
 ```
