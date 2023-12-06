@@ -64,7 +64,7 @@ In these cases, the process is:
 ### Engineering
 
 We've made dozens of software engineering hires so far at PostHog. This means we know a thing or two about onboarding engineers by now.  
-We got it down to **four rules** for successful onboarding of an engineer:
+We got it down to **four rules for successful onboarding of an engineer**:
 
 1. _On day one_: You got their development environment all set up and shipped something useful together – even if tiny! It feels great to hit the ground running.
 2. _By day two_: You've run at least one 1:1 learning session with the new teammate. Give them all the context they need to succeed. (And by the end of the onboarding, each team member should've run at least one such session.)
@@ -86,7 +86,7 @@ We got it down to **four rules** for successful onboarding of an engineer:
         This is all up to you!
       </p>
     </details>
-3. _By day three_: You've done at least one brainstorming session on topic important for the team, and documented the conclusions. Use the time together to discuss issues and involve the new joiner in decisions.
+3. _By day three_: You've done at least one brainstorming session on a topic important for the team, and documented the conclusions. Use the time together to discuss issues and involve the new joiner in decisions.
 4. _In between_: You've been pairing whenever possible. Everyone's sitting right next to each other, so pick work that can benefit from this!
 
 ## Tools we use
