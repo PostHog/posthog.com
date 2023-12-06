@@ -67,7 +67,7 @@ We've made dozens of software engineering hires so far at PostHog. This means we
 We got it down to **four rules for successful onboarding of an engineer**:
 
 1. Ship something together on day one – even if tiny! It feels great to hit the ground running, with a development environment all ready to go.
-2. Run 1:1 learning sessions with the new teammate and give them all the context they need to succeed. By the end of the onboarding, each team member present should've run at least one such session.
+2. Run 1:1 learning sessions with the new teammate every day. Give them all the context they need to succeed. By the end of the onboarding, each team member present should've run at least one such session.
     <details>
       <summary>Looking for learning session ideas?</summary>
       <p>Here's a non-exhaustive list:</p>
