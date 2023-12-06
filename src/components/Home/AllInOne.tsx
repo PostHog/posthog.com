@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import hogzilla from '../../../static/lotties/hogzilla.json'
-import { useLottie } from 'lottie-react'
 import { useInView } from 'react-intersection-observer'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const HogZilla = () => {
+    const [ready, setReady] = useState(false)
     const [ref, inView] = useInView({ threshold: 0 })
 
     const lottieRef = useRef(null)
@@ -15,21 +15,27 @@ const HogZilla = () => {
         } else {
             lottieRef?.current?.pause()
         }
-    }, [inView])
+    }, [inView, ready])
 
     return (
         <div ref={ref}>
             <DotLottiePlayer
+                style={{ display: ready ? 'block' : 'none' }}
                 lottieRef={lottieRef}
                 src="/lotties/hogzilla.lottie"
                 onEvent={(event: PlayerEvents) => {
                     if (event === PlayerEvents.Complete) {
                         lottieRef?.current?.seek(180)
                         lottieRef?.current?.play()
+                        return
+                    }
+                    if (event === PlayerEvents.Ready) {
+                        setReady(true)
+                        return
                     }
                 }}
-                autoplay
             />
+            {!ready && <StaticImage layout="fullWidth" width={845} alt="Hogzilla" src="./images/hogzilla.png" />}
         </div>
     )
 }
