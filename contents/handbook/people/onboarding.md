@@ -8,13 +8,13 @@ Welcome to PostHog!
 
 Giving a new joiner a great onboarding experience is super important to us. We want new joiners to feel they’ve made the right decision to join us, and that they are excited and committed to what we’re doing as a company. 
 
-> Want to introduce a new joiner to the people team for onboarding, but don't know who on the team does what? Just introduce them to people@posthog.com and a member of the team will jump in and take it from there!
+> Want to introduce a new joiner to the People team for onboarding, but don't know who on the team does what? Just introduce them to people@posthog.com and a member of the team will jump in and take it from there!
 
-Our [team](https://posthog.com/handbook/company/team) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining. 
+Our [team](/team) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining.
 
 ## Onboarding checklist
 
-This is maintained as an issue template in GitHub, [which you can view here](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md). The People team will create a new onboarding Issue for each new joiner. 
+This is maintained as an issue template in GitHub, [which you can view here](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md). The People team will create a new onboarding issue for each new joiner.
 
 ### Onboarding email
 
@@ -51,14 +51,43 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 - Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue. 
 - You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so. 
 
-## In-person Onboarding 
+## In-person onboarding
 
-Occasionally, a new joiner will meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary.
+Usually a new joiner will meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary.
 
 In these cases, the process is:
+
   - Preemptively create the new team member a Google account
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
+
+### Engineering
+
+We've made dozens of software engineering hires so far at PostHog. This means we know a thing or two about onboarding engineers by now.  
+We got it down to **four rules** for successful onboarding of an engineer:
+
+1. _On day one_: You got their development environment all set up and shipped something useful together – even if tiny! It feels great to hit the ground running.
+2. _By day two_: You've run at least one 1:1 learning session with the new teammate. Give them all the context they need to succeed. (And by the end of the onboarding, each team member should've run at least one such session.)
+    <details>
+      <summary>Looking for learning session ideas?</summary>
+      <p>Here's a non-exhaustive list:</p>
+      <ul>
+        <li>How an event gets from a client library all the way to the Live Events view</li>
+        <li>How we turn all our TSX and SCSS files into a fast frontend served from S3</li>
+        <li>The architecture of PostHog Cloud</li>
+        <li>Query nodes and how they're used throughout the app</li>
+        <li>What the dead letter queue is for</li>
+        <li>How PostHog experiment results are calculated</li>
+        <li>What engineering planning looks like at PostHog</li>
+      </ul>
+      <p>
+        Any of these chats can take as little as 15 minutes or as long as 1 hour, depending on the level of detail.
+        You'll also find that some topics apply perfectly in some teams, but not so much in others.
+        This is all up to you!
+      </p>
+    </details>
+3. _By day three_: You've done at least one brainstorming session on topic important for the team, and documented the conclusions. Use the time together to discuss issues and involve the new joiner in decisions.
+4. _In between_: You've been pairing whenever possible. Everyone's sitting right next to each other, so pick work that can benefit from this!
 
 ## Tools we use
 
