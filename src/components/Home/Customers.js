@@ -58,7 +58,7 @@ const Customer = ({ image, imageDark, className = '', url }) => {
 export default function Customers() {
     const { ref, inView, entry } = useInView({ triggerOnce: true })
     return (
-        <section className="md:-mt-[1px] bg-dark pb-8 md:pb-0">
+        <section className="md:-mt-[1px] bg-dark md:pb-0 relative after:absolute after:h-48 after:bottom-0 after:left-0 after:w-full after:bg-gradient-to-b after:from-dark after:to-[#13161B] after:content-[''] -mb-px">
             <div className="py-8 md:pt-12 xl:pt-16 px-4 relative z-20">
                 <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-primary-dark max-w-screen-2xl mx-auto">
                     These folks <span className="text-yellow">build products users want</span> with
@@ -67,10 +67,10 @@ export default function Customers() {
             </div>
             <div
                 ref={ref}
-                className="md:my-4 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row"
+                className="md:mt-4 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row"
             >
                 {inView && (
-                    <ul className="list-none m-0 p-0 pb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4">
+                    <ul className="list-none m-0 p-0 pb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4 z-10 relative">
                         <Customer
                             url="/customers/ycombinator"
                             className="max-h-[44px]"
