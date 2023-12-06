@@ -130,7 +130,7 @@ export const ProductAnalytics = () => {
                 <ContentContainer className="col-span-6">
                     <Content>
                         <Title title={'Product analytics'} />
-                        <FeatureList features={features} className="grid grid-cols-2 2xl:flex" />
+                        <FeatureList features={features} className="grid grid-cols-2" />
                         <CallToAction
                             href="/product-analytics"
                             type="custom"
@@ -166,7 +166,7 @@ export const SessionReplay = () => {
         { title: 'Network requests', Icon: IconPulse },
     ]
     return (
-        <div className="md:bg-[#F2AD46] rounded-md text-primary flex items-end h-full">
+        <div className="md:bg-[#F2AD46] rounded-md text-primary flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2">
@@ -233,9 +233,9 @@ export const FeatureFlags = () => {
         { title: 'Instant rollbacks', Icon: IconRewind },
     ]
     return (
-        <div className=" md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
+        <div className=" md:bg-[#29DBBB] rounded-md text-primary flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
+                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <div className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
                         <StaticImage
                             placeholder="none"
@@ -308,7 +308,7 @@ export const ABTesting = () => {
     ]
 
     return (
-        <div className="md:bg-[#9C19BD] rounded-md text-white flex items-end h-full">
+        <div className="md:bg-[#9C19BD] rounded-md text-white flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px] ">
                     <div className="absolute left-2 top-5 w-[150%] md:w-3/4">
@@ -386,9 +386,9 @@ export const Surveys = () => {
     ]
 
     return (
-        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end h-full">
+        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="pl-8 md:col-span-6 lg:col-span-8 sm:min-h-[300px] lg:min-h-[400px]">
+                <ImageContainer className="pl-8 md:col-span-6 lg:col-span-8 sm">
                     <div className="h-full">
                         <StaticImage
                             alt="A hog analyzing NPS results"
@@ -422,16 +422,16 @@ export const Surveys = () => {
     )
 }
 
-export const Cdp = () => {
+export const DataPipeline = () => {
     const features = [
         { title: 'Sources', Icon: IconDownload },
         { title: 'Destinations', Icon: IconShare },
         { title: 'Transformations', Icon: IconGear },
     ]
     return (
-        <div className="md:bg-[#FCC779] rounded-md text-primary flex items-end h-full">
+        <div className="md:bg-[#FCC779] rounded-md text-primary flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="flex items-center pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
+                <ImageContainer className="flex items-center pl-8 md:col-span-9 lg:col-span-10">
                     <div className="h-full">
                         <StaticImage
                             alt="A hedgehog standing in front of a leaky pipe of data"
@@ -468,7 +468,7 @@ export const Cdp = () => {
 
 export const DataWarehouse = () => {
     return (
-        <div className="md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
+        <div className="md:bg-[#29DBBB] rounded-md text-primary flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <div className="h-full">
@@ -538,9 +538,9 @@ export const Sql = () => {
     ]
 
     return (
-        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end h-full">
+        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
+                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                     <div className="h-full">
                         <StaticImage
                             alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
@@ -574,25 +574,16 @@ export const Sql = () => {
     )
 }
 
-export const Api = () => {
+export const WebAnalytics = () => {
     return (
-        <div className="bg-[#EB9D2A] rounded-md flex items-end h-full">
+        <div className="bg-[#EB9D2A] rounded-md flex items-end">
             <div className="relative grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
                 <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="h-full">
-                        <StaticImage
-                            alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full py-10"
-                            src="../../../../contents/images/products/api/coder-hog.png"
-                        />
-                    </div>
+                    <div className="h-full"></div>
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'API'} />
+                        <Title title={'Web analytics'} />
                         <Subtitle subtitle="Build custom functionality or create bespoke views specific to your business needs." />
 
                         <CallToAction

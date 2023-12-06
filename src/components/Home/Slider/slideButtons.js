@@ -1,13 +1,14 @@
 import {
-    IconGraph,
-    IconRewindPlay,
-    IconToggle,
-    IconFlask,
-    IconMessage,
-    IconPerson,
-    IconServer,
     IconDatabase,
+    IconDecisionTree,
+    IconFlask,
+    IconGraph,
+    IconMessage,
+    IconPieChart,
+    IconRewindPlay,
+    IconServer,
     IconTerminal,
+    IconToggle,
 } from '@posthog/icons'
 
 export const slideButtons = [
@@ -37,20 +38,21 @@ export const slideButtons = [
         color: 'salmon',
     },
     {
-        title: 'CDP',
-        Icon: IconPerson,
+        title: 'Data pipeline',
+        Icon: IconDecisionTree,
         color: 'yellow',
+        label: 'Beta',
     },
     {
         title: 'Data warehouse',
         Icon: IconServer,
         color: 'seagreen',
+        label: 'Beta',
     },
-    /*
     {
-        title: 'API',
-        Icon: Terminal,
+        title: 'Web analytics',
+        Icon: IconPieChart,
         color: 'blue',
+        label: 'Alpha',
     },
-    */
 ]

@@ -1,10 +1,19 @@
 import { IconChevronDown } from '@posthog/icons'
 import React, { useEffect, useState } from 'react'
 import { slideButtons } from './slideButtons'
-import { ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Surveys, Cdp, DataWarehouse } from './Slides'
+import {
+    ProductAnalytics,
+    SessionReplay,
+    FeatureFlags,
+    ABTesting,
+    Surveys,
+    DataPipeline,
+    DataWarehouse,
+    WebAnalytics,
+} from './Slides'
 import { useInView } from 'react-intersection-observer'
 
-const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
+const SlideButton = ({ title, Icon, color, label, activeSlide, index }) => {
     const active = activeSlide === index
 
     const handleClick = () => {
@@ -31,11 +40,29 @@ const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
                 >
                     {title}
                 </p>
+                {label && (
+                    <span
+                        className={`text-[11px] text-primary/60 dark:text-primary-dark/60 font-semibold leading-tight m-0 -mt-1 border border-light dark:border-dark px-1 py-0.5 rounded-sm uppercase ${
+                            active ? '' : ''
+                        }`}
+                    >
+                        {label}
+                    </span>
+                )}
             </button>
         </li>
     )
 }
-const slides = [ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Surveys, Cdp, DataWarehouse]
+const slides = [
+    ProductAnalytics,
+    SessionReplay,
+    FeatureFlags,
+    ABTesting,
+    Surveys,
+    DataPipeline,
+    DataWarehouse,
+    WebAnalytics,
+]
 
 const SlideContainer = ({ children, index, setActiveSlide }) => {
     const [viewRef, inView] = useInView({ threshold: 0.5 })
@@ -67,8 +94,8 @@ export default function Slider() {
 
     return (
         <div className="-mt-8 md:mt-0 hidden md:block">
-            <div className="hidden md:block px-8 lg:px-[50px]">
-                <ul className="m-0 grid grid-cols-7 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
+            <div className="hidden md:block px-8 lg:px-0">
+                <ul className="m-0 grid grid-cols-8 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
                     {slideButtons.map((slide, index) => {
                         return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
                     })}
