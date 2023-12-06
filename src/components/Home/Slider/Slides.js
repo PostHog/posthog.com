@@ -82,6 +82,14 @@ const FeatureList = ({ features, className = '' }) => {
 }
 
 export const ProductAnalytics = () => {
+    const imageProps = {
+        loading: 'eager',
+        alt: 'A funnel insight with 4 steps showing how many users dropped off during a sign-up flow',
+        placeholder: 'none',
+        quality: 100,
+        objectFit: 'contain',
+        className: 'w-full md:max-w-[753px] md:shadow-2xl md:-rotate-1',
+    }
     const features = [
         { title: 'Funnels', Icon: IconFunnels },
         { title: 'Graphs & trends', Icon: IconTrends },
@@ -96,21 +104,13 @@ export const ProductAnalytics = () => {
                 <ImageContainer className="md:pl-8 col-span-10">
                     <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-0 md:-mb-2">
                         <StaticImage
-                            loading="eager"
-                            alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="dark:hidden w-full md:max-w-[753px] md:shadow-2xl md:-rotate-1"
+                            {...imageProps}
                             src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
+                            className={`${imageProps.className} dark:hidden`}
                         />
                         <StaticImage
-                            loading="eager"
-                            alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="hidden dark:block w-full md:max-w-[753px] md:shadow-2xl md:-rotate-1"
+                            {...imageProps}
+                            className={`${imageProps.className} hidden dark:block`}
                             src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
                         />
                     </div>
