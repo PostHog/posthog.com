@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Feature flags are a very powerful piece of functionality that can be used in a wide variety of ways. How you use them will depend on your particular painpoints and internal best practices. 
+Feature flags are a very powerful piece of functionality that can be used in a wide variety of ways. How you use them will depend on your particular painpoints and internal [best practices](/product-engineers/feature-flag-best-practices). 
 
 For us, here are some suggestions of use cases that could fit nicely with feature flags:
 
