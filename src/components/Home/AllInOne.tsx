@@ -1,31 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import hogzilla from '../../../static/lotties/hogzilla.json'
 import { useLottie } from 'lottie-react'
 import { useInView } from 'react-intersection-observer'
+import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 
 const HogZilla = () => {
-    const [ref, inView] = useInView({ threshold: 0, triggerOnce: true })
+    const [ref, inView] = useInView({ threshold: 0 })
 
-    const handleEnd = () => {
-        goToAndPlay(3000)
-    }
-
-    const { View, goToAndPlay, play, pause } = useLottie({
-        animationData: hogzilla,
-        loop: false,
-        autoPlay: false,
-        onComplete: handleEnd,
-    })
+    const lottieRef = useRef(null)
 
     useEffect(() => {
         if (inView) {
-            play()
+            lottieRef?.current?.play()
         } else {
-            pause()
+            lottieRef?.current?.pause()
         }
     }, [inView])
 
-    return <div ref={ref}>{View}</div>
+    return (
+        <div ref={ref}>
+            <DotLottiePlayer
+                lottieRef={lottieRef}
+                src="/lotties/hogzilla.lottie"
+                onEvent={(event: PlayerEvents) => {
+                    if (event === PlayerEvents.Complete) {
+                        lottieRef?.current?.seek(180)
+                        lottieRef?.current?.play()
+                    }
+                }}
+                autoplay
+            />
+        </div>
+    )
 }
 
 export default function AllInOne() {
