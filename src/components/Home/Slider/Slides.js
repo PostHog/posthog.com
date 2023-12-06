@@ -91,18 +91,27 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: IconRetention },
     ]
     return (
-        <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-end h-full">
+        <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-center h-full">
             <div className="relative md:grid grid-cols-16 md:gap-8 w-full">
                 <ImageContainer className="md:pl-8 col-span-10">
-                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 md:-mb-2">
+                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-0 md:-mb-2">
                         <StaticImage
                             loading="eager"
                             alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
                             placeholder="none"
                             quality={100}
                             objectFit="contain"
-                            className=":w-full md:max-w-[1029px] md:shadow-2xl md:-rotate-1"
-                            src="../../../../contents/images/products/product-analytics/product-analytics.png"
+                            className="dark:hidden w-full md:max-w-[753px] md:shadow-2xl md:-rotate-1"
+                            src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
+                        />
+                        <StaticImage
+                            loading="eager"
+                            alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
+                            placeholder="none"
+                            quality={100}
+                            objectFit="contain"
+                            className="hidden dark:block w-full md:max-w-[753px] md:shadow-2xl md:-rotate-1"
+                            src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
                         />
                     </div>
                     <div className="absolute -bottom-2 right-0 md:hidden">
@@ -132,7 +141,7 @@ export const ProductAnalytics = () => {
                             Explore
                         </CallToAction>
                     </Content>
-                    <div className="absolute -bottom-2 right-0 hidden md:block">
+                    <div className="absolute -bottom-8 lg:-bottom-12 right-0 hidden md:block">
                         <div>
                             <StaticImage
                                 loading="eager"
