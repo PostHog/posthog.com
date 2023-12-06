@@ -100,7 +100,6 @@
         "lodash.get": "^4.4.2",
         "lodash.groupby": "^4.6.0",
         "lodash.uniqby": "^4.7.0",
-        "lottie-react": "^2.4.0",
         "mailgun.js": "^4.1.4",
         "markdown-link-extractor": "^4.0.1",
         "markdown-to-jsx": "^7.1.7",
