@@ -19,11 +19,11 @@ export default function Startups() {
     return (
         <section className="overflow-x-hidden pt-12 md:pt-20">
             <div className="max-w-5xl p-8 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded mb-12 lg:mb-20 xl:mb-24 mx-4 xl:mx-auto">
-                <div className="w-[160%] ml-[-30%] mt-[-20%] mb-[-10%] lg:float-right lg:ml-0 lg:-mt-12 lg:-mr-36 lg:mb-0 lg:w-auto relative text-center">
+                <div className="-mt-28 -mx-12 mb-6 lg:float-right lg:ml-4 lg:-mt-40 lg:-mr-20 xl:-mr-32 lg:mb-0 lg:w-auto relative text-center">
                     <StaticImage
                         src="./images/billboard.png"
                         alt="A billboard with Dalton Caldwell extolling how great PostHog is"
-                        className="max-w-[660px]"
+                        className="max-w-[654px]"
                         quality={100}
                         formats={['png']}
                     />
