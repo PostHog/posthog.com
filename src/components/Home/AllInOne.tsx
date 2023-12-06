@@ -1,34 +1,38 @@
 import React, { useEffect, useRef, useState } from 'react'
-import hogzilla from '../../../static/lotties/hogzilla.json'
-import { useLottie } from 'lottie-react'
 import { useInView } from 'react-intersection-observer'
-import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
+import hogzilla from './images/hogzilla.webm'
 
 const HogZilla = () => {
-    const [ref, inView] = useInView({ threshold: 0 })
-
-    const lottieRef = useRef(null)
+    const [ready, setReady] = useState(false)
+    const [conatinerRef, inView] = useInView({ threshold: 0 })
+    const videoRef = useRef<HTMLVideoElement>(null)
 
     useEffect(() => {
         if (inView) {
-            lottieRef?.current?.play()
+            videoRef?.current?.play()
         } else {
-            lottieRef?.current?.pause()
+            videoRef?.current?.pause()
         }
-    }, [inView])
+    }, [inView, ready])
 
     return (
-        <div ref={ref}>
-            <DotLottiePlayer
-                lottieRef={lottieRef}
-                src="/lotties/hogzilla.lottie"
-                onEvent={(event: PlayerEvents) => {
-                    if (event === PlayerEvents.Complete) {
-                        lottieRef?.current?.seek(180)
-                        lottieRef?.current?.play()
+        <div ref={conatinerRef}>
+            <video
+                ref={videoRef}
+                onCanPlay={() => {
+                    setReady(true)
+                }}
+                onEnded={() => {
+                    if (videoRef?.current) {
+                        videoRef.current.currentTime = 3
+                        videoRef?.current?.play()
                     }
                 }}
-                autoplay
+                src={hogzilla}
+                playsInline
+                muted
+                className="w-full"
+                poster="/images/hogzilla.jpg"
             />
         </div>
     )
