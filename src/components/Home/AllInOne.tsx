@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import hogzilla from './images/hogzilla.webm'
 
 const HogZilla = () => {
     const [ready, setReady] = useState(false)
@@ -28,12 +27,14 @@ const HogZilla = () => {
                         videoRef?.current?.play()
                     }
                 }}
-                src={hogzilla}
                 playsInline
                 muted
                 className="w-full"
                 poster="/images/hogzilla.jpg"
-            />
+            >
+                <source src="/images/hogzilla.mp4" type="video/mp4" />
+                <source src="/images/hogzilla.webm" type="video/webm" />
+            </video>
         </div>
     )
 }
