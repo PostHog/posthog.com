@@ -32,12 +32,6 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <td>✔️</td>
 </tr>
 <tr>
-<td><a href="#dedicated-email">Dedicated email</a></td>
-<td></td>
-<td></td>
-<td>✔️</td>
-</tr>
-<tr>
 <td><a href="#training-sessions">Training sessions</a></td>
 <td></td>
 <td></td>
