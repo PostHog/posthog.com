@@ -36,7 +36,7 @@ If a feature flag returns `false` or fails and returns `none`, you want to make 
 
 - If there is a network or PostHog-related problem with the flag, you want to make sure your app continues to function.
 
-To fallback consistently, separate new changes from existing code behind the feature flag. Test that flags returning `false` or `none` falls back to old, functional code. This ensures your app continues to work, even if your flag doesn't.
+To fallback consistently, separate new changes from existing code behind the feature flag. Test that flags returning `false` or `none` fall back to old, functional code. This ensures your app continues to work, even if your flag doesn't.
 
 ## 3. Accurately identify users
 
@@ -178,7 +178,7 @@ This enables you to coordinate and communicate with those groups while rolling o
 
 ## 9. Remove flags at the right time
 
-Leaving flags in your code for too long can confuse future developers and create technical debt, especially if it is already rolled out and integrated. It can confuse those reading the code and the flag’s details in PostHog.
+Leaving flags in your code for too long can confuse future developers and create technical debt, especially if it's already rolled out and integrated. It can confuse those reading the code and the flag’s details in PostHog.
 
 Stale flags are liabilities in code. For example, old flags could hide untested code. If a flag failure causes this code to run, it can cause unexpected issues.
 
