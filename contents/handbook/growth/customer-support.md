@@ -46,4 +46,4 @@ Support =/= community - we consider them to be separate things. [Learn more abou
 
 We want to help teams of all sizes learn how to ask the right product analytics questions to grow their product. To help, we create content in the form of [tutorials](/tutorials), [blog posts](/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
 
-We've also created a [AARRR Pirate Metrics Worksheet](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) that systematically lays out how to define, implement, and track core product and business metrics (Acquisition, Activation, Retention, Referral, Revenue) all within PostHog. Anyone can copy this - even if they're not using PostHog (yet)!
+We've also created a bunch of useful [templates](/templates) that cover many of the most popular PostHog use cases.  
