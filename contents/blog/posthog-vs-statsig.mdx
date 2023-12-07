@@ -1,0 +1,459 @@
+---
+title: "In-depth: PostHog vs Statsig"
+date: 2023-12-06
+author: ["lior-neu-ner"]
+showTitle: true
+rootpage: /blog
+sidebar: Blog
+hideAnchor: true
+featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+Statsig better for growth teams. 
+
+PostHog and Statsig both offer A/B testing, feature flags, and product analytics, but they're different in two important ways:
+
+- **Statsig** offers advance experimentation tools, such as multi-armed bandit, holdout testing
+
+It offers advanced experimentation techniques, such as multi-armed bandit experiments and [holdout testing](/tutorials/holdout-testing), making it well suited for growth teams in startups.
+
+has advanced data features, for users with heavy statisfical background. PostHog for most users 
+
+But how are they different? If you remember nothing else, remember these two points:
+
+1. LaunchDarkly only does feature flags and experiments.
+
+2. PostHog is an all-in-one platform that does flags, experiments and a whole bunch more, including analytics, session replays, and user surveys.
+
+In this post, we'll cover these differences in more detail, comparing features, pricing, reporting, integrations, and frequently asked questions about both.
+
+PostHog and GrowthBook both provide open source, self-serve feature flags and experimentation, but they're different in two important ways:
+
+- GrowthBook is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
+
+- PostHog is an all-in-one product and data platform. Beyond [feature flags](/docs/feature-flags) and [experiments](/docs/experiments), it includes [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [surveys](/docs/surveys), [CDP](/docs/cdp), and more.
+
+In this post, we'll cover these differences in more detail, and answer frequently asked questions about both tools.
+
+
+## How is PostHog different?
+
+### 1. It is an all-in-one platform
+
+PostHog includes all the tools product teams need to test, release, and measure the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
+
+![All in one](../images/blog/posthog-vs-launchdarkly/all.png)
+
+These tools add an extra layer of analysis unavailable in LaunchDarkly. They enable you to make better decisions about features you’ve shipped and what you’re building next. They also enable you to combine data from multiple tools, such as user properties from analytics, for use in flags and experiments.
+
+### 2. We’re transparent (in many ways)
+
+PostHog is open source. Our code, culture, and strategy are public [on GitHub](https://github.com/PostHog/posthog) and our [handbook](/handbook). While LaunchDarkly open sourced some code (like SDKs), most is closed source.
+
+We're also self-serve. No need to "talk to sales" or "schedule a demo" unless you want to – we're always [happy to chat](/book-a-demo). You can sign up and try all the features PostHog offers for free.
+
+Our [pricing](/pricing) is also transparent. It is a two-tier usage-based model, which we make easy to predict. This is simpler than LaunchDarkly’s multi-tier combination of charging for seats, monthly context instances, and add-ons. If you worry about overages, you can set up billing limits in PostHog too.
+
+Statsig pricing is also transparent - https://statsig.com/pricing
+HIPPA eligilbity (enterprise only)
+
+### 3. Built for startups and engineers
+
+PostHog is built for high-growth startups. This means it's simple for engineers to implement themselves. We have many [SDKs](/docs/libraries), [tutorials](/tutorials), and docs to help you get started quickly with any type of app.
+
+After setting up, PostHog aligns with startups as they scale up, providing tools like advanced product analytics, [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse) to combine the tools they need into one. 
+
+LaunchDarkly focuses on enterprise users, managers, and DevOps. This means more focus on governance and integrations. 
+
+## How is PostHog different?
+
+### 1. PostHog is an all-in-one platform
+
+PostHog brings together all the tools engineers need for testing, releasing, and measuring the success of new features. Feature flags and A/B testing are only part of a suite of tools PostHog offers.
+
+![PostHog homepage features](../images/blog/posthog-vs-growthbook/build.png)
+
+PostHog combines usage, performance, and behavioral data with flags and experiments. PostHog’s [data warehouse](/docs/data-warehouse) also enables you to pull in data from external sources.
+
+Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
+
+### 2. PostHog is built for startups and engineers
+
+PostHog is built for high-growth startups. This means it is simple for founders and engineers to implement themselves. There are many [SDKs](/docs/libraries), [tutorials](/tutorials), and [docs](/docs) to help you get started quickly with any type of app.
+
+As startups scale, PostHog also provides the more advanced tools they need to succeed. These include advanced product analytics, [SQL querying](/docs/product-analytics/sql), [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse).
+
+GrowthBook, on the other hand, focuses only on later-stage, larger companies than PostHog. Many of their features, like their analytical A/B testing suite, are great for data teams which also come at a later stage.
+
+### 3. PostHog is easier to setup
+
+GrowthBook requires more setup than PostHog as it relies heavily on external tools and writing SQL:
+
+1. To get data into GrowthBook, you must integrate a data source. 
+2. To track data related to flags and experiments, you connect to an analytics tool.
+3. To configure data sources and track events, you write SQL configurations in GrowthBook.
+4. To set up goals and analysis, you write more SQL.
+
+PostHog needs none of this. You use the same app and SDKs for managing and evaluating feature flags as tracking usage. There is no extra configuration needed. Creating flags, experiments, and insights doesn’t require writing SQL. This makes PostHog faster to get started and easier to use once set up.
+
+
+
+## Comparing PostHog and LaunchDarkly
+
+### Platform
+
+Both PostHog and LaunchDarkly built the infrastructure to use flags and experiments fast and effectively with your current app. PostHog does this more openly, both being open source and self-service. It also has a wider range of product and data tools built in.
+
+Both PostHog and GrowthBook have the infrastructure to use flags and experiments effectively with your current app. PostHog has a wider range of product and data tools built in, while GrowthBook relies on third-party integrations
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Test changes and analyze impact" />
+   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+   <ComparisonRow column1={true} column2={true} feature="Dynamic config" description="Replace hard-coded values in your app with configuration values" />
+   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
+   <ComparisonRow column1={true} column2={false} feature="Session replays" description="Watch real users use your product; debug behaviour" />
+   <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+   <ComparisonRow column1={true} column2={false} feature="Open source" description="Code publicly accessible" />
+</ComparisonTable>
+
+### Experimentation
+
+Experimentation is where PostHog and Statsig's functionality diverges. Both enable you to create [A/B/n](/tutorials/abn-testing) and [multivariate](/product-engineers/what-is-multivariate-testing-examples) tests with custom goals and calculate statistical significance, but:
+
+- GrowthBook’s A/B testing provides more potential statistical depth, such as Bayesian and Frequentist engines, value capping, regression adjustment, and testing corrections. These do require statistics expertise to use reliably, though.
+
+- PostHog provides a simpler interface and no need to write SQL or connect to external services – a better experience for users without a background in data science.
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that a test tracks" />
+  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Statistical significance calculation" description="Calculate if changes make a statistically significant impact" />
+  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
+  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={true} column2={true} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
+  <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
+  <ComparisonRow column1="Partial*" column2={true} feature="Holdout testing" description="Withhold multiple features to measure cumulative impact">
+  <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit tests" description="Optimize tests automatically by allocating traffic to the best performing variant.">
+  <ComparisonRow column1={false} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments">
+  <ComparisonRow column1={false} column2={true} feature="Bonferroni correction" description="Includes α correction when tests are being performed simultaneously" />
+</ComparisonTable>
+
+- **Holdout testing:** It's possible to do this in posthog with a single experiment (or with groups/cohorts), but Statsig offers better support to this. Atuoatmically withholds when creating new holdout .new experiment and holdout. More manual work in PostHog
+
+### Feature management
+
+Both PostHog and LaunchDarkly offer all the functionality you expect for feature management using feature flags.
+
+Scheduled rollouts . . This is particularly useful if, for example, you have a feature launch happening in another timezone (and don’t want to stay up all night!) or you have a standard, company-wide ramp-up schedule you follow with every feature release.
+
+LaunchDarkly’s enterprise plan unlocks advanced workflow features like scheduling, lifecycle management, triggers, and more. PostHog’s [API](/docs/api) enables you to mimic this functionality if needed, but it isn’t built into the UI.
+
+
+PostHog has early access management
+
+No multivariate feature flags in statsig! Is boolean based
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
+  <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
+  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
+  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
+  <ComparisonRow column1={false} column2={true} feature="Scheduling" description="Flags with multiple customizable values" />
+  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
+  <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
+</ComparisonTable>
+
+- **Scheduled** rollouts . . This is particularly useful if, for example, you have a feature launch happening in another timezone (and don’t want to stay up all night!) or you have a standard, company-wide ramp-up schedule you follow with every feature release.
+
+### Product analytics
+
+Posthog focuses on giving you insights on user behaviour, Statsig is more purpose of running experimentation
+PostHog focuses on analyzing user behaviour, understanding where they come from, what actions they perform etc.
+
+Statsig more for experimentation. You create metrics from analytics, which are then used in experiments
+
+In posthog you also A/B test on them
+
+Statsig doesnt automatically log events, like pageviews, clicks etc. Lots of manual set up
+
+Statsig has basic analytics, primiarly for using for with A/B tests. More tightly integrated, you create metrics
+
+Calculates growth metrics out the box, like l28, d1 retention  wau@d14_weekly_retention_rate
+
+Best for teams workign growth teams on Activation on 
+focus on creating "metrics"
+
+posthog has more out the box, like autocapture, pageviews, pageleave
+
+Statsig you need to setup from scratch
+
+https://docs.statsig.com/mex 
+
+Statsig - Select multiple events, group by user properties and apply filters to see how these move together. 
+Retention Analysis - Retention Analysis helps you drive product adoption by showing you how often users return to your product after taking a specific action. 
+Funnel Analysis
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
+  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
+  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at a company level" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={true} feature="Retention analysis" description="Visualize which users stay, for how long" />
+  <ComparisonRow column1={true} column2={false} feature="User paths" description="Track user flows and where they drop-off" />
+  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
+  <ComparisonRow column1={true} column2={false} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
+  <ComparisonRow column1={true} column2={false} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
+  <ComparisonRow column1={true} column2={false} feature="Formulas" description="Use custom formulas to calculate unique insights" />
+  <ComparisonRow column1={true} column2={false} feature="Query editor" description="Write your own queries in SQL" />
+</ComparisonTable>
+
+- **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure. We use transparent, testable statistical models – no phony "AI" here.
+
+- **Lifecycle analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure. We use transparent, testable statistical models – no phony "AI" here.
+
+- **Retention analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure. We use transparent, testable statistical models – no phony "AI" here.
+
+- **Stickiness analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure. We use transparent, testable statistical models – no phony "AI" here.
+
+### Pricing
+
+PostHog and LaunchDarkly are priced significantly different. 
+
+<ComparisonTable column1="PostHog" column2="LaunchDarkly">
+  <ComparisonRow column1="Per-request pricing" column2="Based on MAU + seats + add-ons" feature="Pricing" />
+  <ComparisonRow column1={true} column2="Trial only" feature="Free plan" />
+  <ComparisonRow column1={true} column2={false} feature="Free experiments" />
+  <ComparisonRow column1={true} column2={false} feature="Free collaboration" />
+</ComparisonTable>
+
+PostHog’s [feature flag pricing](/pricing?product=feature-flags) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
+
+![PostHog pricing](../images/blog/posthog-vs-launchdarkly/posthog-price.png)
+
+LaunchDarkly’s pricing is more complicated. They charge by seat starting at $10/seat/month. On top of this, they charge based on "monthly context instances" (MCIs) also known as monthly active users. The pro plan only gets 1,000 frontend MCIs per month. You must upgrade to the $20/seat/month to more than 1,000 MCIs, then pay more beyond 10,000.
+
+![LaunchDarkly pricing](../images/blog/posthog-vs-launchdarkly/launchdarkly-price.png)
+
+As mentioned earlier, many of the security, approval, and workflow features that differentiate them are only available at the opaque "Enterprise" level.
+
+PostHog’s [feature flag pricing](/pricing?product=feature-flags) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
+
+Both are simple and transparent and are usage based pay per request
+
+both offer 
+Volume discounts for large teams and enterprises
+
+
+#### Example scenarios
+
+To give you an idea of what pricing looks like in reality, here are some example situations and their estimated costs for both PostHog and LaunchDarkly.
+
+Link to posthog pricing calcualtor
+
+PostHog
+Each product has separate usage meter and pricing
+
+Feature flags
+
+First 1 million requests
+1-2 million - $0.000100
+2-10 million - $0.000045
+
+10million feature flag requests - $460
+
+Analytics 
+
+First 1 million events
+1-2 million - $0.0003100
+2-15 million -$0.0001300
+
+10 million = $1,350
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+       <tr>
+            <td><strong>A/B testing and feature flag Requests</strong></td>
+            <td><strong>PostHog cost</strong></td>
+            <td><strong>Statsig cost</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+       <tr>
+            <td>1,000,000</td>
+            <td>$0</td>
+            <td>$0</td>
+        </tr>
+       <tr>
+            <td>5,000,000</td>
+            <td>$240</td>
+            <td>$150</td>
+        </tr>
+       <tr>
+            <td>10,000,000</td>
+            <td>$460</td>
+            <td>$400</td>
+        </tr>
+       <tr>
+            <td>20,000,000</td>
+            <td>$720</td>
+            <td>$900</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+> **Notes:** 
+> - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). 
+
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+       <tr>
+            <td><strong>Product analytics events</strong></td>
+            <td><strong>PostHog cost</strong></td>
+            <td><strong>Statsig cost</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+       <tr>
+            <td>1,000,000</td>
+            <td>$0</td>
+            <td>$0</td>
+        </tr>
+       <tr>
+            <td>5,000,000</td>
+            <td>$700</td>
+            <td>$150</td>
+        </tr>
+       <tr>
+            <td>10,000,000</td>
+            <td>$1,350</td>
+            <td>$400</td>
+        </tr>
+       <tr>
+            <td>20,000,000</td>
+            <td>$2,400</td>
+            <td>$900</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+### Integrations
+
+Both PostHog and Statsug have a range of integrations that enable them to import, export, enhance, and make use of data. 
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from source" />
+  <ComparisonRow column1={true} column2={true} feature="Exports" description="Export data to other sources" />
+  <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
+  <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
+    <ComparisonRow column1={false} column2={true} feature="Datadog" description="Capture flag data in Datadog" />
+</ComparisonTable>
+
+https://www.statsig.com/integrations
+
+https://posthog.com/cdp?
+
+Segment posthog yes statsig yes
+
+no zapier integration
+
+Posthog is ope source, so you can build your own!!
+
+See PostHog's full list
+
+LaunchDarkly has more pre-built integrations, but some are only available on higher paid plans, and others replicate functionality built-in to PostHog as standard. These include environments as a service, observability tools, workflow management, and more.
+
+PostHog’s event-based structure enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too.
+
+### Security and compliance
+
+Both PostHog and LaunchDarkly enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
+
+HIPAA-eligibility – statsig is on enterprise
+
+Team-level Permissions
+
+
+Many of LaunchDarkly’s advanced compliance tools are only available on their enterprise plans. PostHog also features SSO and SAML in its enterprise edition.
+
+They are HIPAA
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
+  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={false} column2="Enterprise" feature="HIPAA-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
+  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+  <ComparisonRow column1={true} column2={true} feature="Approvals" description="Require approvals to change flags" />
+  <ComparisonRow column1={true} column2={true} feature="Permissioning" description="Control who can edit and modify flags" />
+</ComparisonTable>
+
+## Frequently asked questions
+
+### Who is PostHog useful for?
+
+PostHog is built for startups and their engineers. It provides all the tools startups need to build successful products. The people who find PostHog most useful are founders, [product engineers](/blog/what-is-a-product-engineer), and growth engineers.
+
+Companies that use PostHog feature flags and experiments include [Y Combinator](/customers/ycombinator), [Vendasta](/customers/vendasta), and [AssemblyAI](/customers/assemblyai).
+
+### Who is LaunchDarkly useful for?
+
+LaunchDarkly is built for enterprises wanting to follow software development best practices. This means managing features, de-risking releases, experimenting with changes, and coordinating deploys. The people who find LaunchDarkly most useful are engineering managers, site reliability engineers, and product managers.
+
+Companies that use LaunchDarkly include IBM, Atlassian, Bayer, and HP.
+
+### How much does PostHog cost?
+
+Feature flags and experiments are free for up to 1M requests per month. Beyond that, it costs $0.0001/request (or $1 per 10,000 requests). There are discounts for high-volume users, non-profits, and [startups](/startups). 
+
+Other products, like product analytics and session replay, have separate but similarly structured pricing. 
+
+### How much does LaunchDarkly cost?
+
+LaunchDarkly starts at $10 per seat per month. This includes unlimited flags, server-side monthly active users, and 1,000 client-side monthly active users. More client-side monthly active users, also known as monthly context instances, cost more. 
+
+Their pro plan doubles the cost to $20 per seat per month. It adds API, unlimited projects, and more integrations. Above that, their enterprise plan requires talking to sales. It includes custom roles, SSO, scheduling, workflows, and more.
+
+### Does LaunchDarkly or PostHog offer free trials?
+
+LaunchDarkly offers a 14-day free trial, but beyond that, all access and features are paid.
+
+PostHog lets you use all its features for free. Once you upgrade to paid, you get 1M flag requests, 1M events, and 15,000 recordings for free each month. This means if you stay below this, PostHog remains free. 
+
+### How long does it take to implement PostHog?
+
+Feature flags and experiments are simple. They are a few lines of code in all of your favorite languages. They can even be set up on no-code site builders like [Framer](/tutorials/framer-analytics) or [Webflow](/tutorials/webflow-ab-tests).
+
+The process requires signing up for PostHog, installing the snippet or SDK in your app, creating the flag in PostHog, and implementing the flag evaluation and relevant logic in your app. In many of the SDKs, we handle important aspects like local evaluation and event capture for you. 
+
+Much of the PostHog implementation, like user identification, is reused across products. Because PostHog is an all-in-one platform, analytics capture for targeting and A/B testing doesn’t need set up or connection either.
+
+### How long does it take to implement LaunchDarkly?
+
+Installing LaunchDarkly is relatively simple, depending on your needs and compliance requirements. The most basic form is starting your LaunchDarkly trial, installing their SDK, setting up a client or provider, identifying users or contexts, calling flags, and capturing events. 
+
+The differences with PostHog are needing to import user context data, set up context identification, capture the flag or A/B test usage, and import analytics into the platform.
+
+### Startup programs
+
+BOth have startup programs
+
+<ArrayCTA />
