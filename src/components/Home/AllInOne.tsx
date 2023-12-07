@@ -46,11 +46,11 @@ export default function AllInOne() {
                 <h2 className="mb-2 text-4xl px-4 lg:text-6xl text-center md:text-left leading-tight md:leading-none text-primary-dark">
                     8+ products in one
                 </h2>
-                <p className="text-center md:text-left px-4 m-0 mt-1 md:font-semibold text-primary-dark/90 text-base sm:text-lg">
+                <p className="text-center md:text-left px-4 m-0 mt-1 md:font-semibold text-primary-dark/90 text-sm sm:text-lg">
                     Trade in your product &amp; data stack for a single platform –<br className="hidden lg:block" />{' '}
                     where everything is built to work together.
                 </p>
-                <p className="text-center md:text-left px-4 m-0 mt-1 md:font-semibold text-primary-dark/90 text-base sm:text-lg">
+                <p className="text-center md:text-left px-4 m-0 mt-1 md:font-semibold text-primary-dark/90 text-sm sm:text-lg">
                     Product engineering has never been so lit.
                 </p>
             </div>
