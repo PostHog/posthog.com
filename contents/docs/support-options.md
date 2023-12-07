@@ -15,7 +15,6 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <th>Support type</th>
 <th>Open Source</th>
 <th>PostHog Cloud</th>
-<th>Self-hosted</th>
 <th>Enterprise</th>
 </tr>
 </thead>
@@ -25,18 +24,15 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <td>✔️</td>
 <td>✔️</td>
 <td>✔️</td>
-<td>✔️</td>
 </tr>
 <tr>
 <td><a href="#dedicated-slack">Dedicated Slack</a></td>
 <td></td>
 <td>Minimum $2k/month spend</td>
-<td>+</td>
 <td>✔️</td>
 </tr>
 <tr>
 <td><a href="#dedicated-email">Dedicated email</a></td>
-<td></td>
 <td></td>
 <td></td>
 <td>✔️</td>
@@ -45,12 +41,10 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <td><a href="#training-sessions">Training sessions</a></td>
 <td></td>
 <td></td>
-<td></td>
 <td>✔️</td>
 </tr>
 <tr>
 <td><a href="#configuration-assistance">Configuration assistance</a></td>
-<td></td>
 <td></td>
 <td></td>
 <td>✔️</td>
@@ -59,12 +53,10 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <td><a href="#terms-and-conditions">Terms and Conditions</a></td>
 <td>MIT Licence</td>
 <td>Standard</td>
-<td>Standard</td>
 <td>MSA</td>
 </tr>
 <tr>
 <td><a href="#security-assessment">Security assessment</a></td>
-<td>Standard assessment provided</td>
 <td>Standard assessment provided</td>
 <td>Standard assessment provided</td>
 <td>✔️</td>
@@ -73,21 +65,17 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <td><a href="#bespoke-pricing">Bespoke pricing</a></td>
 <td></td>
 <td></td>
-<td></td>
 <td>✔️</td>
 </tr>
 <tr>
 <td><a href="#payment-via-invoicing">Payment via invoicing</a></td>
 <td></td>
 <td></td>
-<td>Minimum $2k/month spend</td>
 <td>✔️</td>
 </tr>
 </tbody>
 </table>
 </div>
-
-By default, the Scale plan does not include items marked with a '+'.
 
 ## Community Support
 
