@@ -1,6 +1,6 @@
 ---
 date: 2023-12-06
-title: "Feature flag best practices and tips (with examples)"
+title: "9 essential feature flag best practices (with code examples)"
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
