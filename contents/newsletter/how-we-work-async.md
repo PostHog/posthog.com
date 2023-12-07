@@ -147,16 +147,12 @@ Inspired to become more async? Here are some actions you can take:
 
 ## Good reads for product engineers 📖
 
-**[Five Ways to Address Complexity In Your Product](https://caseyaccidental.com/product-complexity) – Casey Winters**
-When a simple product becomes too complex, users inevitably flow to another simple product instead. Casey Winters, an advisor and ex-Chief Product Officer at Eventbrite, shares ways to break this cycle.
+**[Five Ways to Address Complexity In Your Product](https://caseyaccidental.com/product-complexity) – Casey Winters:** When a simple product becomes too complex, users inevitably flow to another simple product instead. Casey Winters, an advisor and ex-Chief Product Officer at Eventbrite, shares ways to break this cycle.
 
-**[7 types of difficult coworkers and how to deal with them](https://careercutler.substack.com/p/7-types-of-difficult-coworkers-and) – Jordan Cutler**
-Raviraj Achar, a tech lead at Meta, shares his tips for how to work with different types of colleagues (e.g. overwhelmed optimists, stealthy critics, and risk taker).
+**[7 types of difficult coworkers and how to deal with them](https://careercutler.substack.com/p/7-types-of-difficult-coworkers-and) – Jordan Cutler:** Raviraj Achar, a tech lead at Meta, shares his tips for how to work with different types of colleagues (e.g. overwhelmed optimists, stealthy critics, and risk taker).
 
-**[How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt) – Lior Neu-ner**
-A guide to using PostHog survey data in ChatGPT to quickly summarize results.
+**[How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt) – Lior Neu-ner:** A guide to using PostHog survey data in ChatGPT to quickly summarize results.
 
-**[Metrics that cannot even be measured in retrospect](https://longform.asmartbear.com/unmeasurable-metrics) – Jason Cohen**
-Some things are just really hard to measure. It’s useful to know what they are so you don’t waste time trying to over analyzing.
+**[Metrics that cannot even be measured in retrospect](https://longform.asmartbear.com/unmeasurable-metrics) – Jason Cohen:** Some things are just really hard to measure. It’s useful to know what they are so you don’t waste time trying to over analyzing.
 
 _Words by Ian Vanagas, who scored 6/8 on [Dictator or Tech Bro](https://dictatorortechbro.com/)_

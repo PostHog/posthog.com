@@ -41,11 +41,10 @@ Thomas Owers, who ran growth at Let’s Do This, states engineers who run a lot 
 
 He emphasizes two key points:
 
-An experiment isn't a failure if it doesn't produce the results you expected.
+1. An experiment isn't a failure if it doesn't produce the results you expected.
+2. An experiment is only a failure when the team doesn't learn anything from it.
 
-An experiment is only a failure when the team doesn't learn anything from it.
-
-Read about Thomas’ experience in How to start a growth team (as an engineer) on the PostHog blog.
+Read about Thomas’ experience in [How to start a growth team (as an engineer)](/product-engineers/how-to-start-a-growth-team) on the PostHog blog.
 
 ## 2. Good A/B tests have 5 traits ✅
 1. **A specific, measurable goal**
@@ -88,10 +87,8 @@ Monzo, the British online bank, asks four simple questions before running any te
 Answering these questions helps Monzo create consistent hypotheses containing a proposed solution to a problem, and the expected outcome. It also allows anyone to propose a test, including staff who don’t typically run experiments.
 
 📖 **Further reading:**
-
-[How YC's biggest startups run A/B tests (with examples)](/product-engineers/ab-testing-examples) – Ian Vanagas
-
-[How we experiment at Monzo](https://monzo.com/blog/2019/07/31/how-we-experiment-at-monzo) – Monzo blog
+- [How YC's biggest startups run A/B tests (with examples)](/product-engineers/ab-testing-examples) – Ian Vanagas
+- [How we experiment at Monzo](https://monzo.com/blog/2019/07/31/how-we-experiment-at-monzo) – Monzo blog
 
 ## 5. Understanding significance 📊
 There are two moments when you should analyze your goal, secondary, and counter metrics:
@@ -107,15 +104,12 @@ For example, a p-value of 0.05 means that if the null hypothesis is true, there 
 
 Remember: lack of statistical significance does not mean your test is a failure. Other reasons for “failure” include not gathering enough data, too small (or large) a change, or aggregate results hiding significance in individual properties.
 
-📖 Further reading:
-
-[8 annoying A/B testing mistakes engineers should know](/product-engineers/ab-testing-mistakes) – Lior Neu-ner
+**📖 Further reading:**
+- [8 annoying A/B testing mistakes engineers should know](/product-engineers/ab-testing-mistakes) – Lior Neu-ner
 
 *Note for statisticians: please don’t hurt me for simplifying this definition. If you’re really interested, here is a long Wikipedia article for you to read.
 
 > Enjoying this post? We send new ones every two weeks… and they’re free. [Subscribe here](https://newsletter.posthog.com/subscribe). 
-
-
 
 ## 6. Beware false positives ⏳
 It’s tempting to end A/B tests when you first get results. This is the “peeking problem” – where you make decisions based on early, but insignificant, data. Instead, you should run A/B tests to significance.
@@ -172,16 +166,12 @@ Read more about targeting in [When and how to run group-targeted A/B tests](/pro
 
 
 ## Good reads 🤔
-[PostHog's recommended reading for startup teams](/founders/recommended-reading) – Joe Martin
-Great books on leadership, design, venture capital, operations, and sales (pretty much anything to do with startups), as recommended by the PostHog book club!
+**[PostHog's recommended reading for startup teams](/founders/recommended-reading) – Joe Martin:** Great books on leadership, design, venture capital, operations, and sales (pretty much anything to do with startups), as recommended by the PostHog book club!
 
-[How a startup loses its spark](https://blog.johnqian.com/startup-spark) – John Qian
-An interesting read diagnosing the many ways startups can become less enjoyable, and how to avoid them. The easiest one? Hire less. It’s one we believe in.
+**[How a startup loses its spark](https://blog.johnqian.com/startup-spark) – John Qian:** An interesting read diagnosing the many ways startups can become less enjoyable, and how to avoid them. The easiest one? Hire less. It’s one we believe in.
 
-[Stop Making People Make Up Their Mind](https://blog.staysaasy.com/p/stop-making-people-make-up-their) – Stay SaaSy
-A great read on the dangers of a “strong opinion” culture in a startup, and how to foster a culture of thoughtfulness instead. “Being right for the wrong reasons (or by chance) is just as worthless as being wrong.”
+**[Stop Making People Make Up Their Mind](https://blog.staysaasy.com/p/stop-making-people-make-up-their) – Stay SaaSy:** A great read on the dangers of a “strong opinion” culture in a startup, and how to foster a culture of thoughtfulness instead. “Being right for the wrong reasons (or by chance) is just as worthless as being wrong.”
 
-[Beware of Price Cliffs](https://goodbetterbest.substack.com/p/beware-of-price-cliffs) – Good Better Best
-A quick and useful lesson on how mental barriers can impact user behavior.
+**[Beware of Price Cliffs](https://goodbetterbest.substack.com/p/beware-of-price-cliffs) – Good Better Best:** A quick and useful lesson on how mental barriers can impact user behavior.
 
 > _Words by Ian Vanagas, who is A/B testing whether pineapple belongs on pizza._

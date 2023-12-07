@@ -92,16 +92,12 @@ In contrast, potential enterprise deals took months of intense effort, and rarel
 
 ## 📖 Good reads
 
-[11 Misconceptions Held by Early Stage Founders](https://www.focusedchaos.co/p/11-misconceptions-held-by-startups?utm_source=posthog-newsletter&utm_medium=email) – Ben Yoskovitz
-A great piece in Focused Chaos on some of the fashionable points of view that you should question – e.g. everyone is out to steal your idea(s), and copying competitor pricing is a good idea.
+**[11 Misconceptions Held by Early Stage Founders](https://www.focusedchaos.co/p/11-misconceptions-held-by-startups?utm_source=posthog-newsletter&utm_medium=email) – Ben Yoskovitz:** A great piece in Focused Chaos on some of the fashionable points of view that you should question – e.g. everyone is out to steal your idea(s), and copying competitor pricing is a good idea.
 
-[Why you should charge for priority support](https://twitter.com/Patticus/status/1671874697921716224?utm_source=posthog-newsletter&utm_medium=email) – Patrick Campbell
-An interesting thread from Patrick Campbell, who bootstrapped ProfitWell to acquisition by Paddle.
+**[Why you should charge for priority support](https://twitter.com/Patticus/status/1671874697921716224?utm_source=posthog-newsletter&utm_medium=email) – Patrick Campbell:** An interesting thread from Patrick Campbell, who bootstrapped ProfitWell to acquisition by Paddle.
 
-[5 Things I Learned Building Snowpack to 20,000 Stars](https://dev.to/fredkschott/5-things-i-learned-while-building-snowpack-to-20-000-stars-b9d?utm_source=posthog-newsletter&utm_medium=email) – Fred K. Schott
-A great post for anyone interested in open source software. Fred’s best tip? “Ignore your haters, listen to your users”, especially if you hit the front page of HackerNews!
+**[5 Things I Learned Building Snowpack to 20,000 Stars](https://dev.to/fredkschott/5-things-i-learned-while-building-snowpack-to-20-000-stars-b9d?utm_source=posthog-newsletter&utm_medium=email) – Fred K. Schott:** A great post for anyone interested in open source software. Fred’s best tip? “Ignore your haters, listen to your users”, especially if you hit the front page of HackerNews!
 
-[Forming Habits To Improve Retention](https://reidtandy.substack.com/p/forming-habits-to-improve-retention?utm_source=posthog-newsletter&utm_medium=email) – Growth Croissant
-Useful tips on improving retention from Substack’s Reid DeRamus inspired by consumer apps like Strava, Duolingo, and Apple Fitness.
+**[Forming Habits To Improve Retention](https://reidtandy.substack.com/p/forming-habits-to-improve-retention?utm_source=posthog-newsletter&utm_medium=email) – Growth Croissant:** Useful tips on improving retention from Substack’s Reid DeRamus inspired by consumer apps like Strava, Duolingo, and Apple Fitness.
 
 *Words by Andy Vandervell, who optimistically believes England will win The Ashes.*
