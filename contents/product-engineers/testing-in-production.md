@@ -22,6 +22,8 @@ Testing in production *successfully* is a multi-step process, and this post goes
 
 Testing in production checks that new code works with real infrastructure and data, rather than local machines or staging servers and synthetic data.
 
+![Testing in production meme](../images/blog/testing-in-production/meme.jpg)
+
 Testing in production brings to light problems with code not surfaced by local testing. This enables you to discover issues and "fail small" before problems impact the user experience or become outages.
 
 ### Types of production testing
@@ -58,7 +60,9 @@ At PostHog, we test in production. We have three main reasons for doing this:
 
 ### 1. Production is the real world
 
-Ultimately, we want the code we write and the features we build to work in reality. We try to make the development environment as close to production as possible, but it can never be a complete match.
+Ultimately, we want the code we write and the features we build to work in reality. We try to make the development environment as close to production as possible, but it can never be a complete match and there is diminishing returns to trying.
+
+![Theory vs reality](../images/blog/testing-in-production/theory.png)
 
 Some checks aren’t even possible outside of production. For example, we handle massive amounts of data and use big machines to process and query it. Replicating this locally is expensive and unsustainable.
 
