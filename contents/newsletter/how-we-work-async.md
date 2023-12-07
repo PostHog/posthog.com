@@ -153,7 +153,7 @@ When a simple product becomes too complex, users inevitably flow to another simp
 **[7 types of difficult coworkers and how to deal with them](https://careercutler.substack.com/p/7-types-of-difficult-coworkers-and) – Jordan Cutler**
 Raviraj Achar, a tech lead at Meta, shares his tips for how to work with different types of colleagues (e.g. overwhelmed optimists, stealthy critics, and risk taker).
 
-**[How to analyze surveys with ChatGPT](https://posthog.com/tutorials/analyze-surveys-with-chatgpt) – Lior Neu-ner**
+**[How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt) – Lior Neu-ner**
 A guide to using PostHog survey data in ChatGPT to quickly summarize results.
 
 **[Metrics that cannot even be measured in retrospect](https://longform.asmartbear.com/unmeasurable-metrics) – Jason Cohen**
