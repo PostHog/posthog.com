@@ -20,8 +20,8 @@ PostHog provides a free basic level of support to everyone via the community, wi
 </thead>
 <tbody>
 <tr>
-<td><a href="#community-support">Community</a></td>
-<td>✔️</td>
+<td><a href="#official-support">Official Support</a></td>
+<td></td>
 <td>✔️</td>
 <td>✔️</td>
 </tr>
