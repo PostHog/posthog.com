@@ -44,9 +44,12 @@ posthog.group( "company", groupKey: "company_id_in_your_db")
 // For this session, any event captured after calling `posthog.group` will be associated with company `company_id_on_your_db`
 ```
 
-```android
-PostHog.with(this).group("company", "company_id_in_your_db") 
-// For this session, any event captured after calling `posthog.group` will be associated with company `company_id_on_your_db`
+```android_kotlin
+PostHog.group(
+    type = "company", 
+    key = "company_id_in_your_db"
+)
+// For this session, any event captured after calling `PostHog.group` will be associated with company `company_id_on_your_db`
 ```
 
 ```segment

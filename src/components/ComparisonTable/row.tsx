@@ -13,11 +13,7 @@ export const ComparisonRow = ({ feature, description, column1, column2 }) => {
                 {description && <p className="!mb-0 !text-sm text-opacity-75 leading-none">{description}</p>}
             </td>
             <td className="text-center">{typeof column1 === 'string' ? column1 : column1 ? <True /> : <False />}</td>
-            {column2 && (
-                <td className="text-center">
-                    {typeof column2 === 'string' ? column2 : column2 ? <True /> : <False />}
-                </td>
-            )}
+            <td className="text-center">{typeof column2 === 'string' ? column2 : column2 ? <True /> : <False />}</td>
         </tr>
     )
 }

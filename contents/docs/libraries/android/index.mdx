@@ -36,47 +36,45 @@ import AndroidIdentify from './\_snippets/identify.mdx'
 
 ### Setting user properties via an event
 
-To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
 
-##### $set
+##### userProperties
 
 **Example**
 
-```java
-// import java.util.HashMap;
-HashMap<String, Object> userProps = new HashMap<String, Object>();
-userProps.put("string", "value1");
-userProps.put("integer", 2);
-
-PostHog.with(this)
-       .capture("button_b_clicked", new Properties()
-                                        .putValue("color", "blue")
-                                        .putValue("$set", userProps));
+```kotlin
+PostHog.capture(
+    event = "button_b_clicked",
+    properties = mapOf("color" to "blue"),
+    userProperties = mapOf(
+        "string" to "value1",
+        "integer" to 2
+    )
+)
 ```
 
 **Usage**
 
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
+When capturing an event, you can pass a property called `userProperties` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
-##### $set_once
+##### userPropertiesSetOnce
 
 **Example**
 
-```java
-// import java.util.HashMap;
-HashMap<String, Object> userProps = new HashMap<String, Object>();
-userProps.put("string", "value1");
-userProps.put("integer", 2);
-
-PostHog.with(this)
-       .capture("button_b_clicked", new Properties()
-                                        .putValue("color", "blue")
-                                        .putValue("$set_once", userProps));
+```kotlin
+PostHog.capture(
+    event = "button_b_clicked",
+    properties = mapOf("color" to "blue"),
+    userPropertiesSetOnce = mapOf(
+        "string" to "value1",
+        "integer" to 2
+    )
+)
 ```
 
 **Usage**
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+`userPropertiesSetOnce` works just like `userProperties`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ## Flush
 
@@ -86,28 +84,25 @@ Setting this to `1` will send events immediately and will use more battery. The 
 You can also configure the flush interval. By default we flush all events after `30` seconds,
 no matter how many events have been gathered.
 
-```java
-PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
-  .flushQueueSize(20)
-  .flushInterval(30, TimeUnit.SECONDS)
-  .build();
-
+```kotlin
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
+    flushAt = 20
+    flushIntervalSeconds = 30
+}
 ```
 
 You can also manually flush the queue:
 
-```java
-PostHog.with(this)
-       .flush();
+```kotlin
+PostHog.flush() 
 ```
 
 ## Reset
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
-```java
-PostHog.with(this)
-       .reset();
+```kotlin
+PostHog.reset()
 ```
 
 ## Feature Flags
@@ -124,8 +119,8 @@ import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
-```android
-if (PostHog.with(this).getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+```kotlin
+if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
     // do something
 }
 ```
@@ -140,14 +135,22 @@ Group analytics allows you to associate the events for that person's session wit
 
 -   Associate the events for this session with a group
 
-```java
-PostHog.with(this).group("company", "company_id_in_your_db") // organization is the group type, company_id_in_your_db is the group ID
+```kotlin
+// organization is the group type, company_id_in_your_db is the group ID
+PostHog.group(
+    type = "company", 
+    key = "company_id_in_your_db"
+)
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
-```java
-PostHog.with(this).group("company", "company_id_in_your_db", new Properties().putValue("name", "Awesome Inc."));
+```kotlin
+PostHog.group(
+    type = "company", 
+    key = "company_id_in_your_db",
+    groupProperties = mapOf("name" to "Awesome Inc.")
+)
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
@@ -156,29 +159,21 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 When creating the PostHog client, there are many options you can set:
 
-```java
-PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
-    // Record certain application events automatically! (off/false by default)
-    .captureApplicationLifecycleEvents()
+```kotlin
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+    // Record certain application events automatically! (on/true by default)
+    captureApplicationLifecycleEvents = true
 
-     // Record screen views automatically! (off/false by default)
-    .recordScreenViews()
+    // Record screen views automatically! (on/true by default)
+    captureScreenViews = true // (on/true by default)
 
-    // Capture deep links as part of the screen call. (off by default)
-    .captureDeepLinks()
+    // Capture deep links as part of the screen call. (on/true by default)
+    captureDeepLinks = true
 
-     // Maximum number of events to keep in queue before flushing (20)
-    .flushQueueSize(int flushQueueSize)
+    // Maximum number of events to keep in queue before flushing (20 by default)
+    flushAt = 20
 
-    // Max delay before flushing the queue (30 seconds)
-    .flushInterval(long flushInterval, TimeUnit timeUnit)
-
-    // Enable or disable collection of ANDROID_ID (true)
-    .collectDeviceId(boolean collect)
-
-    .build();
+    // Maximum delay before flushing the queue (30 seconds)
+    flushIntervalSeconds = 30
+}
 ```
-
-## Thank you
-
-This library is largely based on the `analytics-android` package.

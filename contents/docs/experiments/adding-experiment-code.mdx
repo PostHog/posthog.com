@@ -86,13 +86,13 @@ const MyComponent = () => {
 }           
 ```
 
-```android
-if (PostHog.with(this).getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+```android_kotlin
+if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
     // do something
 }
 ```
 
-```iOS
+```ios
 // In Swift
 if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
     // do something
