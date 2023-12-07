@@ -1,6 +1,6 @@
 ---
-date: 2023-01-05
-title: "Feature flag best practices and tips (with examples)"
+date: 2023-12-07
+title: "9 essential feature flag best practices (with code examples)"
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
@@ -10,49 +10,51 @@ tags:
   - Product engineers
 ---
 
-Feature flags, aka feature toggles, are awesome. New feature for your beta test group? Use a feature flag. Testing multiple variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say they are [many benefits to feature flags](/blog/feature-flag-benefits-use-cases).
+Feature flags, aka feature toggles, are a simple pattern with many uses. New feature to beta test? Use a feature flag. Testing variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say there are [many benefits to feature flags](/blog/feature-flag-benefits-use-cases).
 
-This post explores feature flag best practices for areas like implementation, usage, naming, and removal. Some are specific to [feature flags in PostHog](/product/feature-flags), but the principles apply no matter what [feature flag tool](/blog/best-open-source-feature-flag-tools) you use.
+A [feature flag service](/blog/feature-flags-as-a-service) like [PostHog](/feature-flags) provides the most important flag functionality like flag management, remote configuration, analytics, edit history, and more. 
 
-## 1. Minimize or group changes behind them
+Beyond this, there are many best practices that services can't handle for you. These include implementation, usage, naming, and removal. To help you with these, we put together this guide.
+
+## 1. Minimize or group changes behind a single flag
 
 It's best to use a single feature flag to control a single component, function, method, class, or other pieces of code.
 
-Having a flag in multiple places can be confusing. Developers expect single-use feature flags, and when they aren’t, this can cause unintended consequences. For example, a developer could remove the flag in one place without removing it in another.
+Developers expect a feature flag to be used in a single location. The more locations a flag is, the more likely it is to cause problems. For example, a developer could remove the flag in one place without removing it in another.
 
-Multiple uses of the same feature flags increase maintenance and overhead. Every time a developer sees a feature flag, they must figure out its status and impact on the code. If active, they must work around it and maintain multiple fallbacks.
+Multiple uses of the same feature flags increase overhead and maintenance. Every time a developer sees a feature flag, they must figure out its status and impact on the code. They also need to maintain all the potential states of the flag, like fallbacks.
 
-Having too many changes behind a feature flag also makes it difficult to maintain. If you are doing experiments, it makes the relevant parts difficult to identify. Parts behind your feature flag are more likely to break when there are many changes. Keeping your flags focused is best.
+Like pull requests, feature flags should be small and focused. This helps ensure they are easy to understand and maintain.
 
 ## 2. Fallback to working code
 
-If a feature flag returns `false` or fails and returns `none`, you want to make sure you fallback to working code. This is a best practice for a few reasons:
+If a feature flag returns `false` or fails and returns `none`, you want to make sure you fall back to functioning code. This is a best practice for a few reasons:
 
-- If there is a PostHog-related problem with the flag, we return `None`. Having a fallback handles this.
+- Knowing you can roll back to working code helps you have the confidence to do it quickly.
 
 - If you use experiments, the fallback is the control the test is comparing against. If your fallback doesn’t work properly, it causes the experiment to be inaccurate.
 
-- If you rollback your code using a feature flag, knowing you are rolling back to working code helps you do it quickly.
+- If there is a network or PostHog-related problem with the flag, you want to make sure your app continues to function.
 
-To fallback consistently, keep new changes separate from existing code and behind a feature flag. Test that flags returning `false` fallback to old code and that the fallback code works. This ensures your apps continue to work, even if the code behind the flag isn’t used.
+To fallback consistently, separate new changes from existing code behind the feature flag. Test that flags returning `false` or `none` fall back to old, functional code. This ensures your app continues to work, even if your flag doesn't.
 
 ## 3. Accurately identify users
 
-Because feature flags evaluate based on the distinct ID of the user, having accurate identification is critical. Not knowing your user limits the flags you can show to them. If you identify users accurately, you can better target your feature flags to them.
+Because PostHog evaluates flags based on the user's distinct ID, having accurate [identification](/docs/getting-started/identify-users) is critical. The more accurately you can identify users, the better you can target your flags.
 
-Having at least a “sticky” ID (like a cookie, which is the default in PostHog) ensures the user gets a consistent flag evaluation in your product. Without identification, PostHog wouldn’t know what feature flags to show them. We default to not showing flags, but if the distinct ID changes often, we could show multiple variants to the same user.
+Having a “sticky” ID (like a cookie, which is the default in PostHog) ensures the user gets a consistent flag evaluation in your product. Without this, PostHog may evaluate the flag differently because the user could fall into a different variant.
 
-Accurate identification includes setting up group analytics and person properties if you use them to rollout feature flags. Users must be a part of groups or have a property before PostHog can decide to show them a feature flag relying on that group or property. 
+If you use group analytics or person properties in your flag rollout, accurate identification includes setting them up properly. Users must be a part of groups or have a property for PostHog to evaluate flags relying on these.
 
 ## 4. Use local evaluation for faster flags
 
-An underrated feature of PostHog’s feature flag tool is the ability to evaluate flags locally. By using the already received feature flag data, your application doesn’t need another request to check if the flag is active. 
+An underrated feature of PostHog’s feature flag functionality is the ability to evaluate flags locally. By polling the PostHog server and/or using cached feature flag data, your app can evaluate flags without waiting for another response from PostHog.
 
-Fewer requests mean feature flags evaluate faster and show to more users. Local evaluation is also useful for speeding up code with multiple flags, such as loops. Instead of waiting for multiple requests, your code can run right away (if the flag is active). 
+Fewer requests mean feature flags evaluate faster. This is especially useful for code with multiple flags, such as loops. Instead of waiting for multiple requests, your code can run right away (if the flag is active). 
 
-If you are using the JavaScript library or the snippet, local evaluation is the default. Once your application receives flag data, they save as cookies for local evaluation. Calling `posthog.reloadFeatureFlags()` refreshes them.
+If you are using the JavaScript Web library or the snippet, flags are locally evaluated by default. Once your application receives flag data, it saves as cookies for local evaluation. Calling `posthog.reloadFeatureFlags()` refreshes them.
 
-If you are using another library, PostHog defaults to making a request when evaluating flags, but you can set it up to use local evaluation. This requires having access to all the person or group properties the flag depends on. Here’s what the local evaluation of a flag looks like for our server libraries:
+If you are using another library, PostHog defaults to making a request when evaluating flags, but you can [set it up to use local evaluation](/docs/feature-flags/local-evaluation). This requires having access to all the person or group properties the flag depends on. Here’s what the local evaluation of a flag looks like for our server libraries:
 
 <MultiLanguage>
 
@@ -108,13 +110,13 @@ enabledVariant, err := client.GetFeatureFlag(
 
 </MultiLanguage>
 
-> **💡 PostHog Tip:** To enable local evaluation of feature flags, you may also need to set a `personal_api_key` in your server-side initialization. Check the [integrations docs](/docs/integrate) for details.
+> **💡 PostHog tip:** To enable local evaluation of feature flags, you may also need to set a `personal_api_key` in your server-side initialization.
 
-## 5. Bootstrap your flags to set them before the library loads
+## 5. Bootstrap your flags to make them available immediately
 
-Bootstrapping your flags makes them available as soon as possible, before the library loads. This is useful if you want your flags to be available when the page first loads, such as on a landing page. 
+Bootstrapping your flags makes them available in the client immediately. This is useful if you want your flags to be available before the page loads, such as for a landing page A/B test or [redirect test](/tutorials/redirect-testing). 
 
-Without bootstrapping, you must wait for the library to load and then make a request. By the time your application gets the flag data, it is too late. Your page loads without the feature flag data and any code behind the flags (after this they save as cookies for easy access).
+Without bootstrapping, you must wait for the library to load and then make a request. By the time your application gets the flag data, it is too late. Your page loads without the feature flag data and any code behind the flags (after this, it saves in cookies for easy access).
 
 To bootstrap your flags, add the relevant distinct ID and feature flag data when initializing. In Javascript, this looks like this:
 
@@ -132,13 +134,15 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-You can get values for the bootstrap object by using a server-side library. Call `getAllFlags` with a server-side library, then add those values as the `featureFlags` object in your client-side initialization. This enables your flags to be available instantly on page load. See more about bootstrapping flags in [our JavaScript docs](/docs/integrate/client/js#bootstrapping-flags).
+You can get values for the bootstrap object by using a server-side library. Call `getAllFlags` with a server-side library, then add those values as the `featureFlags` object in your client-side initialization. 
 
-> Bootstrapping your flags also ensures events have accurate feature flag data. If you capture events before receiving feature flags data, data can be missing. Bootstrapping prevents this.
+Bootstrapping also ensures events have accurate feature flag data. If you capture events before receiving feature flags data, data can be missing.
+
+> You can read more about bootstrapping in [our docs](/docs/feature-flags/bootstrapping) or tutorials for [Next.js](/tutorials/nextjs-bootstrap-flags) or [React and Express](/tutorials/bootstrap-feature-flags-react).
 
 ## 6. Name your feature flags well
 
-Here is some practical advice on naming your feature flags to avoid confusion. None of these are laws and you can create your own conventions, but for us, names should:
+Here is some practical advice on naming your feature flags to avoid confusion. None of these are laws. You can create your own conventions, but consistency is critical. As an example, for us, names should:
 
 - Relate to the feature you are flagging. Make them predictable to the next person who reads them. Their key and name should provide insight into what they do.
 
@@ -150,7 +154,15 @@ Here is some practical advice on naming your feature flags to avoid confusion. N
 
 - Use name “types” if you have a large number of flags. This helps organize them and makes their purpose clear. Types might include experiments, releases, and permissions. For example, instead of `new-billing`, they would be `new-billing-experiment` or `new-billing-release`.
 
-## 7. Roll out for specific groups
+## 7. Roll out progressively
+
+When testing a change behind a feature flag, it is best to roll it out to a small group of users and increase that group over time. This is also known as a [phased rollout](/tutorials/phased-rollout).
+
+At PostHog, a flag often starts rolled out to just the responsible developer. It then moves on to the internal team, then beta users, and finally into a full rollout. This enables us to [test in production](/product-engineers/testing-in-production), get multiple rounds of feedback, identify issues, and polish the feature before the full release.
+
+Throughout the rollout, the responsible developer monitors metrics to ensure the feature is working as expected. If there are issues, they can pause the rollout or roll it back without affecting everyone.
+
+## 8. Roll out for specific groups
 
 Feature flags are usually checked at the person level, but there are other ways. One useful and under-utilized way is rolling out based on groups.
 
@@ -160,15 +172,15 @@ For example, a customer complains about an issue with your product. You create a
 
 Enabling flags for specific groups allows the experience to be consistent for those groups. Members of an organization aren’t seeing different UIs or getting different experiences. They also act as a “permission” to access those changes.
 
-This enables you to coordinate and communicate with those groups while rolling out features. This is especially useful for massive features, organizations, and integrations. It allows you to beta test functionality, do [canary releases](/tutorials/canary-release), and deal with issues before a larger rollout.
+This enables you to coordinate and communicate with those groups while rolling out features. This is especially useful for massive features, organizations, and integrations. It enables you to [beta test functionality](/tutorials/public-beta-program), do [canary releases](/tutorials/canary-release), and deal with issues before a [larger rollout](/tutorials/phased-rollout).
 
-> **💡 PostHog Tip:** Be sure to identify users as part of that group using [group analytics](/manual/group-analytics).
+> **💡 PostHog tip:** Be sure to identify users as part of that group using [group analytics](/docs/product-analytics/group-analytics).
 
-## 8. Remove flags at the right time
+## 9. Remove flags at the right time
 
-Leaving flags in your code for too long can confuse future developers, especially if it is already rolled out and integrated. It can confuse those reading the code and the flag’s detail in PostHog.
+Leaving flags in your code for too long can confuse future developers and create technical debt, especially if it's already rolled out and integrated. It can confuse those reading the code and the flag’s details in PostHog.
 
-Stale flags are also liabilities in code that cause problems if left too long. For example, there could be problems with your feature flags causing them to not trigger or return the wrong value. With a large number of old, stale feature flags, this becomes a major problem. 
+Stale flags are liabilities in code. For example, old flags could hide untested code. If a flag failure causes this code to run, it can cause unexpected issues.
 
 Everyone has different opinions on when to remove their feature flags, but here are some ideas:
 
@@ -184,10 +196,10 @@ Everyone has different opinions on when to remove their feature flags, but here 
 
 - Restrict full rollout to removing the flag, such as limiting rolls out to 95% of users until removed.
 
-Whatever you choose, it should be clear to your team when to remove a feature flag. This limits the overhead and staleness of flags.
+Whatever you choose, it should be clear to your team when to remove a feature flag. This limits the overhead and staleness of flags. It even enables you to scan your code for flags and remove them automatically. 
 
 ## Further reading
 
-- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
-- [Setting up and using feature flags](/manual/feature-flags)
-- [How to do a canary release with feature flags ](/tutorials/canary-release)
+- [What you can learn from how GitHub and GitLab use feature flags](/product-engineers/github-gitlab-feature-flags)
+- [How we build features users love (really fast)](/product-engineers/measuring-feature-success)
+- [Why we test in production (and you should too)](/product-engineers/testing-in-production)

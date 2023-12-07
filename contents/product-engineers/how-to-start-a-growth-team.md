@@ -60,7 +60,7 @@ This created a safe space for engineers to explore, and ultimately resulted in a
 
 Nothing slows a growth team down like running and waiting for pointless experiments – especially if they're never going to lead to significant results.
 
-To ensure their experiments [avoided common mistakes](/blog/ab-testing-mistakes) and followed best practices, their data scientist reviewed each experiment before launch – often pushing back on ones they thought would be too small or not yield significant insights.
+To ensure their experiments [avoided common mistakes](/blog/ab-testing-mistakes) and followed [best practices](/product-engineers/feature-flag-best-practices), their data scientist reviewed each experiment before launch – often pushing back on ones they thought would be too small or not yield significant insights.
 
 > **New to experiments and A/B tests?** Check out our [software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers).
 
