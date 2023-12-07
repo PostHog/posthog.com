@@ -3,6 +3,10 @@ import { useInView } from 'react-intersection-observer'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 import { StaticImage } from 'gatsby-plugin-image'
 
+const HogzillaHolder = () => (
+    <StaticImage placeholder="tracedSVG" layout="fullWidth" width={845} alt="Hogzilla" src="./images/hogzilla.png" />
+)
+
 const HogZilla = () => {
     const [ready, setReady] = useState(false)
     const [ref, inView] = useInView({ threshold: 0 })
@@ -20,6 +24,7 @@ const HogZilla = () => {
     return (
         <div ref={ref}>
             <DotLottiePlayer
+                speed={2.5}
                 style={{ display: ready ? 'block' : 'none' }}
                 lottieRef={lottieRef}
                 src="/lotties/hogzilla.lottie"
@@ -35,12 +40,13 @@ const HogZilla = () => {
                     }
                 }}
             />
-            {!ready && <StaticImage layout="fullWidth" width={845} alt="Hogzilla" src="./images/hogzilla.png" />}
+            {!ready && <HogzillaHolder />}
         </div>
     )
 }
 
 export default function AllInOne() {
+    const [hogzillRef, hogzillaInView] = useInView({ threshold: 0, triggerOnce: true })
     return (
         <section className="bg-[#13161B] relative mb-12">
             <div className="md:absolute top-0 left-0 md:top-0 lg:top-4 xl:top-12 lg:left-0 xl:left-8 max-w-md mx-auto md:mt-4 lg:mx-0 lg:mt-0 lg:max-w-2xl z-50 md:mb-0 mb-8">
@@ -55,7 +61,7 @@ export default function AllInOne() {
                     Product engineering has never been so lit.
                 </p>
             </div>
-            <HogZilla />
+            <div ref={hogzillRef}>{hogzillaInView ? <HogZilla /> : <HogzillaHolder />}</div>
         </section>
     )
 }
