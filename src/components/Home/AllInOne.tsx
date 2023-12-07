@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer'
 
 const HogZilla = () => {
     const [ready, setReady] = useState(false)
-    const [conatinerRef, inView] = useInView({ threshold: 0 })
+    const [containerRef, inView] = useInView({ threshold: 0 })
     const videoRef = useRef<HTMLVideoElement>(null)
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const HogZilla = () => {
     }, [inView, ready])
 
     return (
-        <div ref={conatinerRef}>
+        <div ref={containerRef}>
             <video
                 ref={videoRef}
                 onCanPlay={() => {
