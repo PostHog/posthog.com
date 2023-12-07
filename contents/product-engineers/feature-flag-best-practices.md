@@ -1,5 +1,5 @@
 ---
-date: 2023-12-06
+date: 2023-12-07
 title: "9 essential feature flag best practices (with code examples)"
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/green-blog-image.jpg
