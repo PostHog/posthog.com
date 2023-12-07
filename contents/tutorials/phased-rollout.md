@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-2.png
 tags: ['feature flags', 'cohorts']
 ---
 
-Phased rollouts, also known as phased releases, are a way to roll out new features safely by [testing a feature works in production](/blog/testing-in-production) with a small group before incrementally moving to progressively bigger (and more important) groups. 
+Phased rollouts, also known as phased releases, are a way to roll out new features safely by [testing a feature works in production](/product-engineers/testing-in-production) with a small group before incrementally moving to progressively bigger (and more important) groups. 
 
 This tutorial shows how to set up a phased rollout using feature flags and cohorts in PostHog.
 

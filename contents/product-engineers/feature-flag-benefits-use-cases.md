@@ -76,7 +76,7 @@ If there are problems with a feature, feature flags can act as kill switches. Th
 
 Feature flags enable better testing of changes by testing them closer to reality. When a change ships into production behind a feature flag and people who need access can get access. Instead of needing specific testing environments, you can test in production.
 
-[Testing in production](/blog/testing-in-production) means the usage, data, infrastructure, integration, and environment are closer to what users actually use. The gap between development and production closes. Other team members can test your code and features in production as well. All of this provides validation to engineers that their code works.
+[Testing in production](/product-engineers/testing-in-production) means the usage, data, infrastructure, integration, and environment are closer to what users actually use. The gap between development and production closes. Other team members can test your code and features in production as well. All of this provides validation to engineers that their code works.
 
 Testing changes in production also means you can run experiments. You can test variations against each other to see which provides better results. Product and marketing teams can be involved in the experimentation process. They can design experiments and analyze real results, rather than guessing what the outcomes are.
 

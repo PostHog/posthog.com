@@ -83,7 +83,7 @@ is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_us
 
 Feature flag services also contain features for more complicated use cases, such as: 
 
-- Targeting feature flags for percentage rollouts, [betas](/tutorials/public-beta-program), [testing in production](/blog/testing-in-production), and more.
+- Targeting feature flags for percentage rollouts, [betas](/tutorials/public-beta-program), [testing in production](/product-engineers/testing-in-production), and more.
 - Multi-variant flags that enable A/B testing.
 - Integrations with other external services like product analytics, CDPs, and automations.
 - Speed and resiliency optimizations like local evaluation and caching.
