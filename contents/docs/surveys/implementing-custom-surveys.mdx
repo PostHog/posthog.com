@@ -14,14 +14,16 @@ If you're using PostHog's [survey API](/docs/surveys/creating-surveys#display-mo
 
 ## Step 1: Fetch active surveys
 
-To fetch the surveys currently enabled for a user, call `posthog.getActiveMatchingSurveys()`. 
+To fetch the surveys currently enabled for a user, call `posthog.getActiveMatchingSurveys(callback, forceReload)`.
 
-Alternatively, if you wish to do survey targeting yourself, you can call `posthog.getSurveys()` to return a list of all surveys from PostHog.
+Alternatively, if you wish to do survey targeting yourself, you can call `posthog.getSurveys(callback, forceReload)` to return a list of all surveys from PostHog.
 
-Both methods return a callback with a `surveys` object:
+Surveys are cached by default in the posthog-js library, so you can pass `true` to `forceReload` to force a new surveys api call from PostHog.
+
+Both methods return a callback with an array of `surveys`:
 
 ```json
-// Example surveys object:
+// Example surveys response:
 [{
   "id": "your_survey_id",
   "name": "Your survey name",
