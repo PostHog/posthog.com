@@ -87,7 +87,7 @@ We got it down to **four rules for successful onboarding of an engineer**:
       </p>
     </details>
 3. Do at least one brainstorming session on a topic important for the team, writing down actionable conclusions. Use the time together to discuss issues and involve the new joiner in decisions.
-4. Pair whenever possible. Everyone's sitting right next to each other, so pick work that can benefit from this!
+4. Pair whenever possible. You're all sitting next to each other, so pick work that can benefit from in-person collaboration!
 
 ## Tools we use
 
