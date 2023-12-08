@@ -53,7 +53,7 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 
 ## In-person onboarding
 
-Usually a new joiner will meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary.
+Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary.
 
 In these cases, the process is:
 
