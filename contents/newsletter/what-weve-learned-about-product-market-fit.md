@@ -2,7 +2,7 @@
 date: 2023-06-08
 title: "What we've learned about product-market fit"
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/equity.png
+featuredImage: ../images/newsletter/feature-images/loop.png
 featuredImageType: full
 tags:
   - Founders

@@ -2,7 +2,7 @@
 date: 2023-11-16
 title: "How we work asynchronously"
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/newsletter-hog.png
+featuredImage: ../images/newsletter/feature-images/teacher.png
 featuredImageType: full
 tags:
   - Culture

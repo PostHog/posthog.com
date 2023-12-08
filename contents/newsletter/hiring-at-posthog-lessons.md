@@ -2,7 +2,7 @@
 date: 2023-09-07
 title: "Everything we've learned about hiring for startups (so far)"
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/newsletter-hog.png
+featuredImage: ../images/newsletter/feature-images/hiring.png
 featuredImageType: full
 tags:
   - People

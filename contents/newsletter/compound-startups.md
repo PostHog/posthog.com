@@ -2,7 +2,7 @@
 date: 2023-03-30
 title: "The conformist startup rule you can ignore"
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/newsletter-hog.png
+featuredImage: ../images/newsletter/feature-images/working-out.png
 featuredImageType: full
 tags:
   - Founders

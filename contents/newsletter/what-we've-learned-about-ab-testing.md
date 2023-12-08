@@ -2,7 +2,7 @@
 date: 2023-08-24
 title: "10 things we've learned about A/B testing for startups"
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/newsletter-hog.png
+featuredImage: ../images/newsletter/feature-images/ab-test.png
 featuredImageType: full
 tags:
   - AB testing
