@@ -56,7 +56,6 @@ const Customer = ({ image, imageDark, className = '', url }) => {
 }
 
 export default function Customers() {
-    const { ref, inView, entry } = useInView({ triggerOnce: true })
     return (
         <section className="md:-mt-[1px] bg-dark md:pb-0 relative after:absolute after:h-48 after:bottom-0 after:left-0 after:w-full after:bg-gradient-to-b after:from-dark after:to-[#13161B] after:content-[''] -mb-px">
             <div className="py-8 md:pt-12 xl:pt-16 px-4 relative z-20">
@@ -65,46 +64,36 @@ export default function Customers() {
                     <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
                 </h2>
             </div>
-            <div
-                ref={ref}
-                className="md:mt-4 pb-8 md:pb-0 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row"
-            >
-                {inView && (
-                    <ul className="list-none m-0 p-0 pb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4 z-10 relative">
-                        <Customer
-                            url="/customers/ycombinator"
-                            className="max-h-[44px]"
-                            image={yCombinator}
-                            imageDark={yCombinatorDark}
-                        />
-                        <Customer className="max-h-[36px]" image={staples} imageDark={staplesDark} />
-                        <Customer className="max-h-[36px]" image={airbus} imageDark={airbusDark} />
-                        <Customer className="max-h-[35px]" image={dhl} imageDark={dhlDark} />
-                        <Customer className="max-h-[50px]" image={landmark} imageDark={landmarkDark} />
-                        <Customer className="max-h-[40px]" image={outbrain} imageDark={outbrainDark} />
-                        <Customer className="max-h-[35px]" image={clickhouse} imageDark={clickhouseDark} />
-                        <Customer
-                            url="/customers/hasura"
-                            className="max-h-[51px]"
-                            image={hasura}
-                            imageDark={hasuraDark}
-                        />
-                        <Customer
-                            url="/customers/phantom"
-                            className="max-h-[46px]"
-                            image={phantom}
-                            imageDark={phantomDark}
-                        />
-                        <Customer className="max-h-[50px]" image={joybird} imageDark={joybirdDark} />
-                        <Customer
-                            url="/customers/assemblyai"
-                            className="max-h-[50px]"
-                            image={assemblyai}
-                            imageDark={assemblyaiDark}
-                        />
-                        <Customer url="/blog/posthog-marketing" imageDark="/brand/posthog-logo-white.svg" />
-                    </ul>
-                )}
+            <div className="md:mt-4 pb-8 md:pb-0 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row">
+                <ul className="list-none m-0 p-0 pb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4 z-10 relative">
+                    <Customer
+                        url="/customers/ycombinator"
+                        className="max-h-[44px]"
+                        image={yCombinator}
+                        imageDark={yCombinatorDark}
+                    />
+                    <Customer className="max-h-[36px]" image={staples} imageDark={staplesDark} />
+                    <Customer className="max-h-[36px]" image={airbus} imageDark={airbusDark} />
+                    <Customer className="max-h-[35px]" image={dhl} imageDark={dhlDark} />
+                    <Customer className="max-h-[50px]" image={landmark} imageDark={landmarkDark} />
+                    <Customer className="max-h-[40px]" image={outbrain} imageDark={outbrainDark} />
+                    <Customer className="max-h-[35px]" image={clickhouse} imageDark={clickhouseDark} />
+                    <Customer url="/customers/hasura" className="max-h-[51px]" image={hasura} imageDark={hasuraDark} />
+                    <Customer
+                        url="/customers/phantom"
+                        className="max-h-[46px]"
+                        image={phantom}
+                        imageDark={phantomDark}
+                    />
+                    <Customer className="max-h-[50px]" image={joybird} imageDark={joybirdDark} />
+                    <Customer
+                        url="/customers/assemblyai"
+                        className="max-h-[50px]"
+                        image={assemblyai}
+                        imageDark={assemblyaiDark}
+                    />
+                    <Customer url="/blog/posthog-marketing" imageDark="/brand/posthog-logo-white.svg" />
+                </ul>
             </div>
         </section>
     )
