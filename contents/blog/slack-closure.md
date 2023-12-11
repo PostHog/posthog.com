@@ -33,7 +33,7 @@ In order to ensure users can get the best possible experience, we’ve built our
 
 We strongly recommend all users [create a community account](/questions). You can, of course, continue to use the in-app support for reporting bugs, giving feedback, or asking for support. We’ll also continue to operate the dedicated Slack channels for users who spend over $2,000 per month. 
 
-In the future we plan to add even more to the PostHog community, including the ability to vote on questions and unlock unique benefits — but already it offers a better alternative to the public Slack group. More than XXX users have asked over XXX questions in the last six months of us building it!
+In the future we plan to add even more to the PostHog community, including the ability to vote on questions — but already it offers a better alternative to the public Slack group. More than XXX users have asked over XXX questions in the last six months of us building it!
 
 ## What happens next?
 
