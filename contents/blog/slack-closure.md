@@ -25,7 +25,7 @@ This is a limitation of Slack itself. Message history disappears too quickly and
 
 Over time we’ve tried a number of things to try and offset this, such as reorganizing channels or adding integrations to impose order. We even [built our own AI bot](/blog/aruba-hackathon#maxai-our-friendly-posthog-support-ai) which would answer questions automatically!
 
-We’ve also investigated moving to a paid plan, but the cheapest option is $7.25 USD per user per month. That’s a prohibitive cost for a channel with over 5,000 users and climbing, and would only increase the history to 30 days. 
+We’ve also investigated moving to a paid plan, but the cheapest option is $7.25 USD per user per month. That’s a prohibitive cost for a channel with over 5,000 users and climbing, and would only increase the history to 30 days without solving other issues. 
 
 ## Where will the community go?
 
