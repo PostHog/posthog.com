@@ -88,7 +88,8 @@ Based on this ongoing learning process, here are our **five rules for onboarding
       </p>
     </details>
 3. Do at least one brainstorming session on a topic important for the team, writing down actionable conclusions. Use the time together to discuss issues and involve the new joiner in decisions.
-4. Pair whenever possible. You're all sitting next to each other, so pick work that can benefit from in-person collaboration!
+4. Pair whenever possible. You're all sitting next to each other, so pick work that can benefit from in-person collaboration.
+5. Have fun, because life isn't all work! Do some sightseeing, go out for dinner, or find a fun activity – just hang out together any way you like.
 
 ## Tools we use
 
