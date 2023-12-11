@@ -15,7 +15,7 @@ One of the great things about PostHog being open source is that we’ve grown a 
 
 Now though, we’ve decided to close our public Slack group and focus efforts elsewhere. In this post I’ll explain why we’re doing this, and what comes next for the PostHog community. 
 
-> **Tl;dr:** We’re closing the Slack group on XX/XX/XX and inviting members to join us in the new [PostHog Community](/questions) instead. This decision only impacts the public Slack group, not the private Slack channels for users spending over $2,000 per month.
+> **Tl;dr:** We’re closing the Slack group on XX/XX/XX and inviting members to join us in the thriving [PostHog Community](/questions) instead, where XX users have already asked XX questions in the last six months. This decision only impacts the public Slack group, not the private Slack channels for users spending over $2,000 per month.
 
 ## Why are we closing the PostHog Slack?
 
