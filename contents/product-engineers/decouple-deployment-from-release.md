@@ -34,7 +34,7 @@ By preventing new code from automatically releasing after a deployment, you lowe
 
 Decoupling can lower the risk of issues, increase developer productivity, and improve app reliability. The specific benefits include:
 
-- Improves developer confidence knowing they can [test in production](/blog/testing-in-production) and that there is an easy way to roll back changes without affecting users.
+- Improves developer confidence knowing they can [test in production](/product-engineers/testing-in-production) and that there is an easy way to roll back changes without affecting users.
 
 - Increase deployment frequency by removing the need to wait for a formal release. 
 

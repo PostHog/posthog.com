@@ -102,6 +102,6 @@ Technical debt is the cost both focus the most on, and they built processes for 
 
 ## Further reading
 
-- [Why we test in production (and you should to)](/blog/testing-in-production)
+- [Why we test in production (and you should to)](/product-engineers/testing-in-production)
 - [How we build features users love (really fast)](/blog/measuring-feature-success)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)
