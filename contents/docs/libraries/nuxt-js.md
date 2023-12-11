@@ -5,7 +5,7 @@ icon: ../../images/docs/integrate/frameworks/nuxt.svg
 
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
-This guide walks you through integrating PostHog into your app for both Nuxt.js major versions `2` and `3`. We'll use the [JavaScript](/docs/libraries/js) SDK.
+This guide walks you through integrating PostHog into your app for both Nuxt.js major versions `2` and `3`. We'll use the [PostHog JavaScript web](/docs/libraries/js) SDK.
 
 This tutorial is aimed at Nuxt.js users which run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
 
