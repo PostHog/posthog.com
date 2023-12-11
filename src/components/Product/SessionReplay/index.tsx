@@ -396,7 +396,7 @@ export const ProductSessionReplay = () => {
                         />
                         <CustomerCard
                             outcome="improved registrations by 20-30%"
-                            quote="Even Pry's support team... uses replays to understand how... bug occurred."
+                            quote="Even Pry's support team... uses replays to understand how bugs occurred."
                             customer={pry}
                         />
                     </ul>
