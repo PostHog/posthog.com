@@ -23,7 +23,7 @@ While it's tempting to [build your own tools](/blog/feature-flags-as-a-service),
 > **Changelog:**
 > - **Mar 15, 2023:** Removed DevCycle, added Flipt. Updated copy and screenshots.
 > - **Sep 14, 2023:** Removed Harness, added Flipper and FeatBit, added SDKs
-> - **Dec 8, 2023:** Added FeatureHub
+> - **Dec 11, 2023:** Added FeatureHub
 
 ### 1. PostHog
 
@@ -215,8 +215,8 @@ The open-source version has no usage limits – it even supports SAML and social
 
 FeatureHub offers a hosted option in addition to its open-source edition, though both version offer the same features. The hosted version is $4.99 per user, per month and ~$0.33-0.38 per 10,000 API requests.
 
-## Further reading 
+## Further reading
 
-- [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
+- [Feature flag best practices and tips (with examples)](/product-engineers/feature-flag-best-practices)
 - [Should you build or buy? Feature flags as a service, explained](/blog/feature-flags-as-a-service)
-- [Feature flags vs configuration: Which should you choose?](/blog/feature-flags-vs-configuration)
+- [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
