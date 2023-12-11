@@ -63,8 +63,9 @@ In these cases, the process is:
 
 ### Engineering
 
-We've made dozens of software engineering hires so far at PostHog. This means we know a thing or two about onboarding engineers by now.  
-We got it down to **four rules for successful onboarding of an engineer**:
+We hire engineers on a regular basis, running in-person onboarding practically every time. Over the years, we've learned a lot about doing this efficiently and there's much to gain from sharing the knowledge between teams.
+
+Based on this ongoing learning process, here are our **five rules for onboarding an engineer**:
 
 1. Ship something together on day one – even if tiny! It feels great to hit the ground running, with a development environment all ready to go.
 2. Run 1:1 learning sessions with the new teammate every day. Give them all the context they need to succeed. By the end of the onboarding, each team member present should've run at least one such session.
