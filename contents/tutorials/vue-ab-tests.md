@@ -1,11 +1,11 @@
 ---
 title: How to set up A/B tests in Vue
-date: 2023-12-05
+date: 2023-12-11
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
 
-A/B tests help you make your Vue app better by enabling you to compare the impact of code changes on key metrics. To show you how to set one up, in this tutorial we create a basic Vue app, add PostHog, create an A/B test and implement the code for it.
+A/B tests help you make your Vue app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, in this tutorial we create a basic Vue app, add PostHog, create an A/B test, and implement the code for it.
 
 ## Creating a Vue app
 
@@ -20,7 +20,7 @@ vue create vue-ab-test
 
 Make sure to select `[Vue 3] babel, eslint` as the Vue version.
 
-Next, replace the code in `App.vue` with a simple heading and button:
+Next, replace the code in `src/App.vue` with a simple heading and button:
 
 ```vue file=App.vue
 <template>
@@ -48,15 +48,15 @@ Run `npm run serve` to start your app.
 
 ## Adding PostHog
 
-> For this tutorial, we use `Vue 3`. If you're using `Vue 2`, see [our Vue docs](https://posthog.com/docs/libraries/vue-js) for how to integrate PostHog.
+> This tutorial shows how to integrate PostHog with `Vue 3`. If you're using `Vue 2`, see [our Vue docs](/docs/libraries/vue-js) for how to integrate PostHog.
 
-Next we add PostHog (if you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup)). To do this, first install `posthog-js` .
+Next, we add PostHog (if you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup)). To do this, first install `posthog-js` .
 
 ```bash
 npm install posthog-js
 ```
 
-Create a new [plugin](https://vuejs.org/guide/reusability/plugins) by first creating a new folder called `plugins` and then a new file `posthog.js`:
+Create a new [plugin](https://vuejs.org/guide/reusability/plugins) by first creating a new folder in your base directory called `plugins` and then a new file `posthog.js`:
 
 ```bash
 mkdir plugins
@@ -81,7 +81,7 @@ export default {
 };
 ```
 
-Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [PostHog project settings](https://app.posthog.com/settings/project).
+Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [project settings](https://app.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 
@@ -115,6 +115,7 @@ To measure this, we [capture a custom event](/docs/product-analytics/capture-eve
 <!-- rest of your code -->
 ```
 
+With this set up, refresh your app and click the button a few times to capture the event in PostHog.
 ## Creating an A/B test in PostHog
 
 The next step is to set up an A/B test (we call them experiments in PostHog).
