@@ -87,11 +87,11 @@ const subfeatures = [
 const questions = [
     {
         question: 'Where are people getting stuck in my flow?',
-        url: '/tutorials/funnels',
+        url: '/tutorials/guide-to-funnels',
     },
     {
         question: 'Where are users dropping off?',
-        url: '/tutorials/funnels#step-3-explore-user-paths-between-steps-in-the-funnel',
+        url: '/tutorials/guide-to-funnels#step-3-explore-user-paths-between-steps-in-the-funnel',
     },
     {
         question: 'How do I calculate new vs returning users?',
@@ -186,11 +186,11 @@ const questions = [
     },
     {
         question: 'What events mean users are less likely to complete a funnel?',
-        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
+        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
     },
     {
         question: 'What properties mean users are less likely to complete a funnel?',
-        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
+        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
     },
     {
         question: 'How many users return to use my product each day?',
