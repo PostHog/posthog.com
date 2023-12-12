@@ -143,6 +143,15 @@ Tips:
 * Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
 * Low priority tickets don't send emails to the requester and can be viewed in aggregation and closed without a public reply. High and normal priority tickets send an email about a helpdesk ticket being created, so we should respond publicly there.
 
+#### Content Warnings
+
+We have a clear definition of [who we do business with](/handbook/growth/sales/who-we-do-business-with) which means that customers who track adult or other potentially offensive content aren't automatically excluded.  To avoid team members inadvertently seeing anything offensive when impersonating a customer we will automatically tag tickets from Organizations known to have this type of content with a `content_warning` tag.
+
+This looks at the Content Warning field on the Zendesk Organization, and adds the tag if there is text in that field.  If you see this tag on a ticket and want to understand more then click on the Organization name in the top left corner of the Zendesk UI and scroll down the list of fields on the left.
+
+If you do discover any potentially offensive content in a customer account then please update this field on the Zendesk Organization so that other team members are aware of the content.
+
+
 ### Pylon
 
 Our Customer Success team uses [Pylon](https://app.usepylon.com) to turn Slack threads into Zendesk tickets.  When creating a ticket by adding the :ticket: emoji, the customer or CS team can assign the thread to a team which will route the Zendesk ticket to the correct place.  These will normally be marked as high priority and you can respond to them either in Zendesk or Slack, as there is a two-way sync.
