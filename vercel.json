@@ -1132,6 +1132,8 @@
         { "source": "/handbook/small-teams/website-docs/community", "destination": "/handbook/community" },
         { "source": "/logo", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/getting-started/next-steps", "destination": "/tutorials/next-steps-after-installing" },
-        { "source": "/data-warehouse", "destination": "/docs/data-warehouse" }
+        { "source": "/data-warehouse", "destination": "/docs/data-warehouse" },
+        { "source": "/blog/tags/product-engineer", "destination": "/product-engineers/all" },
+        { "source": "/blog/categories/company-and-culture", "destination": "/founders/culture" }
     ]
 }
