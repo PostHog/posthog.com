@@ -1,5 +1,5 @@
 ---
-title: How to create new events the easy way
+title: How to create an action
 sidebar: Docs
 showTitle: true
 author: ['joe-martin']
