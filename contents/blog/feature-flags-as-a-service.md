@@ -18,7 +18,7 @@ Feature flags are a tool to conditionally turn on or off code and components. Th
 
 The basic functionality of feature flags is simple enough to build yourself. The challenge comes as you scale and your needs become more complex. In this post, we'll cover:
 
-- The functionality of a feature flag service.
+- The functionality of a [feature flag service](/blog/best-open-source-feature-flag-tools).
 - The challenges of building a service in-house.
 - The benefits of feature flags as a service.
 - How to make the build vs. buy decision.
