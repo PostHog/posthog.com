@@ -1,5 +1,5 @@
 ---
-date: 2023-12-10
+date: 2023-12-13
 title: How to harness the power of growth loops
 author:
   - ian-vanagas
@@ -16,13 +16,14 @@ crosspost:
 
 ## What are growth loops?
 
-Growth loops feel like biking downhill. The same effort takes you progressively faster and further until it feels effortless. 
+When they are working, growth loops feel like biking downhill. The same effort takes you progressively faster and further until it feels effortless. 
 
 In business terms, your key metrics grow exponentially, while the average investment to create that growth stays the same or decreases.
 
-They're so powerful because growth loops compound and, unlike biking downhill, can go on forever.
+Growth loops are powerful because they compound and, unlike biking downhill, can go on forever.
 
 In this guide, we cover everything you need to know to harness growth loops for your product, including:
+
 - The different types of growth loops
 - How to choose a growth loop for your product
 - How to measure your growth loop
@@ -136,7 +137,7 @@ There are many creative ways to incentivize users to join your growth loop. Opti
 
 ## How to measure your growth loop
 
-To understand your growth loop and the value it is providing, it is important to measure your chosen growth loop. Measurement usually involves figuring out whether your input leads to increasing amounts of the output you want. What exact metrics to measure depends on the product and the growth loop. Here are examples:
+To understand your how your growth loop is working, you need to measure it. Measurement usually involves figuring out whether your input leads to increasing amounts of the output you want. What exact metrics to measure depends on the product and the growth loop. Here are examples:
 
 ### Virality
 
