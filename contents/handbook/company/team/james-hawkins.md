@@ -54,7 +54,7 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 - Ship :) Lots of things will be on fire in a startup all the time. Make sure you're moving the needle every week.
 - Due to my role, it's easy for me to accidentally steer you. Sometimes this means your team will get confused. Be communicative back to your team if I've changed your direction. And you don't have to listen to me.
 
-### Personal strategy as of Q1 2023
+### Personal strategy as of Q1 2024
 
 - make sure every team reaches an ["Innovating" state](https://danlebrero.com/2022/07/06/an-elegant-puzzle-systems-of-engineer-management-book-summary/)
 - encourage the company to increase overall adoption whilst not harming revenue growth rate
