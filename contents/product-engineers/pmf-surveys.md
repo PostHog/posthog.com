@@ -10,36 +10,13 @@ tags:
   - User research
 ---
 
-https://review.firstround.com/how-superhuman-built-an-engine-to-find-product-market-fit
+"How would you feel if you could no longer use our product", a.k.a the product-market fit survey, is famous in SaaS circles. But how do you actually gain useful insights from it?
 
-In a startup, the only objective that matters before you have product-market fit, is finding product-market fit. (from https://posthog.com/founders/product-market-fit-game)
-
-
-
-
-✔ Can help guide product development in the right direction
-✔ Easy to break down into multiple cohorts to understand your ICP
-✔ Can be systematized to improve product-market fit over time
-✔ Useful for tracking how your product-market fit changes over time	
-✔ Will help you understand why you do or don't have product-market fit
-
-
-If you're familiar with it, jump straight to how to use it section
-
-
-Vohra suggests the following:
-
-**To measure the product/market fit of each new version of the product, you should send the survey to new users who have experienced the key value of the product.**
-
-You need to segment users to understand the portrait of those who are most interested (users who will be very disappointed if the product ceases to exist). It is necessary to deeply explore their needs and understand what attracts them to the product.
-
-You should also work with the feedback from users who have something holding them back from getting the maximum value from the product (users who would be somewhat disappointed if they would no longer be able to use your product). But it is important to listen only to users who share the values ​​and needs of the target audience (see the previous paragraph). If you remove the blocking elements that stop them, you will increase the conversion from new to loyal users.
-Do not pay attention to the feedback of users who won’t be disappointed if they could no longer use your product. Also, do not pay attention to the feedback of users who will be somewhat disappointed if they will no longer be able to use your product but do not share the values and needs of the target audience. This is not your audience, and at this stage, there is no point in further exploring their needs.
-Build a roadmap around investing in the things people already love about your product. Also focus on those people who share the values and needs of your target audience but are faced with barriers to getting the maximum value of your product. Removing those barriers should be part of your roadmap. 
-
-
+In this post we jump into exactly that – and look at two case studies – so that you can learn what your users really want.
 
 ## What is a PMF survey?
+
+> If you're already familiar with PMF surveys, skip to the [next section](#how-to-use-pmf-to-improve-your-app).
 
 ![NPS survey](../images/blog/pmf-surveys/pmf-survey.png)
 
@@ -85,7 +62,6 @@ Here are five follow-up questions you can ask:
 5. How can we improve our product?
 
 You may find answers to these questions surprising since how you view your product might not be how yours users do.
-
 
 ### When to use PMF surveys
 
