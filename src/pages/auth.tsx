@@ -1,10 +1,11 @@
 import usePostHog from 'hooks/usePostHog'
 import { User } from 'hooks/useUser'
 import qs from 'qs'
-import React from 'react'
+import React, { useState } from 'react'
 
 const IndexPage = () => {
     const posthog = usePostHog()
+    const [authFailed, setAuthFailed] = useState(false)
 
     const fetchUser = async (token?: string | null): Promise<User | null> => {
         const meQuery = qs.stringify(
@@ -97,15 +98,13 @@ const IndexPage = () => {
 
     const handleLogin = async () => {
         const urlParams = new URLSearchParams(window.location.search)
-        const userRes = urlParams.get('userRes')
+        const userDataRaw = urlParams.get('userData')
 
-        if (!userRes) {
-            throw new Error('userRes missing')
+        if (!userDataRaw) {
+            throw new Error('userData missing')
         }
 
-        const userData = JSON.parse(userRes)
-
-        console.log(userData)
+        const userData = JSON.parse(userDataRaw)
 
         const user = await fetchUser(userData.jwt)
 
@@ -139,17 +138,31 @@ const IndexPage = () => {
         return user
     }
 
-    handleLogin().then(() => {
-        const urlParams = new URLSearchParams(window.location.search)
-        const userRes = urlParams.get('redirect_url')
+    handleLogin()
+        .then(() => {
+            const urlParams = new URLSearchParams(window.location.search)
+            const redirect = urlParams.get('redirect')
 
-        if (userRes) {
-            window.location.href = userRes
-        }
-    })
+            if (redirect) {
+                window.location.href = redirect
+            }
+        })
+        .catch((err) => {
+            setAuthFailed(true)
+
+            const urlParams = new URLSearchParams(window.location.search)
+            const redirect = urlParams.get('redirect')
+
+            if (redirect) {
+                setTimeout(() => {
+                    window.location.href = redirect
+                }, 2000)
+            }
+        })
 
     return (
-        <div className="w-screen h-screen flex justify-center items-center">
+        <div className="w-screen h-screen flex justify-center items-center flex flex-col">
+            {authFailed && <p className="mb-1">Authentication failed</p>}
             <p>You'll be redirected shortly</p>
         </div>
     )

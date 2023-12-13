@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import Link from 'components/Link'
-import { Authentication, EditProfile } from 'components/Squeak'
+import { EditProfile } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import { CallToAction } from 'components/CallToAction'
@@ -14,7 +14,8 @@ import { User } from '../../hooks/useUser'
 const regions = [
     { domain: 'https://app.posthog.com', label: 'US Cloud' },
     { domain: 'https://eu.posthog.com', label: 'EU Cloud' },
-    { domain: 'http://localhost:3001/auth', label: 'Test Cloud' },
+    { domain: 'http://localhost:3001/auth', label: 'Link Cloud' },
+    { domain: 'http://localhost:8000/link_and_redirect/', label: 'Local Cloud' },
 ]
 
 export const Avatar = (props: { className?: string; src?: string }) => {
@@ -43,7 +44,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
     const [selectedRegion, setSelectedRegion] = useState(regions[0])
 
     const handleLogin = () => {
-        const path = `?redirect_url=${encodeURI(window.location.href)}`
+        const path = `?redirect=${encodeURI(window.location.href)}`
         window.location.href = selectedRegion.domain + path
     }
 
