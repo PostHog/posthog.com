@@ -83,9 +83,9 @@ Be responsive when it comes to re-forecasting – don't just rigidly stick to an
 
 Put it in [Brex](https://www.brex.com) (US only). Brex also makes it incredibly easy to manage virtual credit cards, and the built-in expense management negates the need for something like Expensify. It doesn’t charge you anything. They make distributing your cash between a current account and MMFs (basically low-risk interest bearing funds) very easy too.
 
-> You might want a backup account in case Brex goes down, à la Silicon Valley Bank. In the beginning, Brex _should_ be fine as your deposit is insured up to $6m. Beyond that, you may want an account with a more boring bank as backup. Bear in mind that the onboarding process will be totally horrific, consisting of 70-page forms and onboarding calls. We actually tried this with JP Morgan Chase and then reverted back to [Mercury](https://mercury.com/) because the experience was so bad. 
-
 In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank that gets anywhere near Brex features-wise, although I find its platform a lot buggier. We're basically waiting for Brex to launch in Europe so we can shut down our Revolut account as they're not actually a real bank in the UK (so no deposit protection). 
+
+> **Addendum:** You might want a backup account in case Brex goes down, à la Silicon Valley Bank. In the beginning, Brex _should_ be fine as your deposit is insured up to $6m. Beyond that, you may want an account with a more boring bank as backup. Bear in mind that the onboarding process will be totally horrific, consisting of 70-page forms and onboarding calls. We actually tried this with JP Morgan Chase and then reverted back to [Mercury](https://mercury.com/) because the experience was so bad. 
 
 ## 3. Keeping yourself organized
 
