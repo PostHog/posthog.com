@@ -19,9 +19,9 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog and Statsig both offer A/B testing and feature flags, but they're different in two important ways:
 
-- **Statsig** offers advance experimentation tools, such as multi-armed bandit and holdout testing. It's ideal for data scientists, product managers, and growth teams who need to conduct complex A/B testing.
+- **Statsig** offers advanced statistical methods for running tests. It lets you choose between Bayesian and Frequentist engines, run multi-armed bandit tests, and supports Bonferroni correction. It's ideal for data scientists and growth teams who need to conduct complex A/B testing.
 
-- **PostHog** is an all-in-one platform built to help engineers understand users and create better products. Beyond [feature flags](/feature-flags) and [A/B testing](/ab-testing), it includes [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [surveys](/docs/surveys), and more.
+- **PostHog** is an all-in-one platform built to help engineers understand users and create better products. Beyond [A/B testing](/ab-testing) and [feature flags](/feature-flags), it offers advanced [product analytics](/docs/product-analytics), [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
 
 This post compares their platforms, experimentation features, pricing, and more.
 
@@ -37,15 +37,13 @@ PostHog combines usage, performance, and behavioral data with flags and experime
 
 Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
 
-### 2. PostHog is built for engineers
+### 2. PostHog is open source and transparent
 
-Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing) – but PostHog is designed to meet the needs of engineers. Our goal is to help developers [be better at product](/blog/helping-engineers-to-product).
+PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/blog/how-we-built-an-app-server), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like Statsig can't offer.
 
-### 3. We’re transparent (in many ways)
+### 3. PostHog constantly ships new features
 
-PostHog is open source. Our code, culture, and strategy are public [on GitHub](https://github.com/PostHog/posthog) and our [handbook](/handbook). While Statsig open sourced some code (like SDKs), most is closed source.
-
-We're also self-serve. No need to "talk to sales" or "schedule a demo" unless you want to – we're always [happy to chat](/book-a-demo). You can sign up and try all the features PostHog offers for free.
+At PostHog, we ship weirdly fast. We update [our changelog](https://posthog.com/blog/posthog-changelog) with a recap of new features every week, and often there’s even more in beta testing. And that’s without counting all the apps and integrations submitted by our community! We work hard to keep PostHog on the cutting edge and we’re transparent about the ways we do that.
 
 ## Comparing PostHog and Statsig
 
@@ -58,9 +56,10 @@ We're also self-serve. No need to "talk to sales" or "schedule a demo" unless yo
   <ComparisonRow column1={false} column2={true} feature="Dynamic config" description="Replace hard-coded values in your app with config values" />
   <ComparisonRow column1={true} column2={false} feature="Session replays" description="Watch real users use your product; debug behavior" />
   <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Code publicly accessible" />
   <ComparisonRow column1="In beta" column2={false} feature="Data warehouse storage" description="Store large amounts of analytics data" />
-  <ComparisonRow column1={false} column2={true} feature="Data warehouse experiments" description="Run A/B tests natively in your existing warehouse" />
+  <ComparisonRow column1={false} column2={true} feature="Data warehouse experiments" description="Run A/B tests natively on data in your existing warehouse" />
 </ComparisonTable>
 
 ### Experimentation
@@ -137,97 +136,15 @@ Both PostHog and Statsig offer simple, transparent pricing.
 
 ![Statsig pricing](../images/blog/posthog-vs-statsig/statsig-price.png)
 
-**PostHog’s** prices A/B testing and feature flags separately from product analytics:
-
--  [A/B testing and feature flag pricing](/pricing?product=feature-flags) is: 
-   -  free up to 1 million requests. 
+**PostHog’s** prices for [A/B testing and feature flags](/pricing?product=feature-flags) requests are as follows: 
+   - free up to 1 million requests. 
    - **$0.000100** per request between 1-2 million requests – i.e., $100 for 1 million requests.
    - **$0.000045** from 2-10 million requests – i.e. $45 for 1 million requests
    - Progressively cheaper beyond 10 million requests.
 
--  [Product analytics pricing](/pricing?product-analytics) is: 
-   -  free up to 1 million events. 
-   - **$0.00031** per events between 1-2 million events – i.e., $310 for 1 million events.
-   - **$0.00013** from 2-15 million events – i.e. $130 for 1 million events
-   - Progressively cheaper beyond 15 million events.
+> **Note:** You can significantly lower your number of feature flag and A/B testing requests by using [PostHog's backend local evaluation](/docs/feature-flags/local-evaluation), potentially saving you a considerable amount of money.
 
-So PostHog and Statsig are similarly priced for A/B testing and feature flags, although PostHog is more expensive for product analytics.
-
-![Statsig pricing](../images/blog/posthog-vs-statsig/posthog-price.png)
-
-#### Example scenarios
-
-To give you an idea of what pricing looks like in reality, here are some example situations and their estimated costs for both PostHog and Statsig. 
-
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-       <tr>
-            <td><strong>A/B testing and feature flag requests</strong></td>
-            <td><strong>PostHog cost</strong></td>
-            <td><strong>Statsig cost</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td>**1,000,000**</td>
-            <td>$0</td>
-            <td>$0</td>
-        </tr>
-       <tr>
-            <td>**5,000,000**</td>
-            <td>$240</td>
-            <td>$150</td>
-        </tr>
-       <tr>
-            <td>**10,000,000**</td>
-            <td>$460</td>
-            <td>$400</td>
-        </tr>
-       <tr>
-            <td>20,000,000</td>
-            <td>$720</td>
-            <td>$900</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-> **Notes:** You can significantly lower your number of feature flag and A/B testing requests by using [PostHog's backend local evaluation](/docs/feature-flags/local-evaluation), potentially saving you a good amount of money.
-
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-       <tr>
-            <td><strong>Product analytics events</strong></td>
-            <td><strong>PostHog cost</strong></td>
-            <td><strong>Statsig cost</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td>1,000,000</td>
-            <td>$0</td>
-            <td>$0</td>
-        </tr>
-       <tr>
-            <td>5,000,000</td>
-            <td>$700</td>
-            <td>$150</td>
-        </tr>
-       <tr>
-            <td>10,000,000</td>
-            <td>$1,350</td>
-            <td>$400</td>
-        </tr>
-       <tr>
-            <td>20,000,000</td>
-            <td>$2,400</td>
-            <td>$900</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+> **Note:** Product analytics are billed separately from A/B testing and feature flag requests. See our [analytics pricing](/pricing?product-analytics) for more details.
 
 ### Integrations
 
@@ -273,7 +190,7 @@ Companies that use PostHog feature flags and experiments include [Y Combinator](
 
 ### Who is Statsig useful for?
 
-Statsig is for teams that require advanced experimentation capabilities and more sophisticated statistical methods. It's ideal for data scientists, product managers, and growth teams who need to conduct complex A/B testing.
+Statsig is for teams that require advanced experimentation capabilities and more sophisticated statistical methods. It's ideal for data scientists and growth teams who need to conduct complex A/B testing.
 
 Teams that frequently run multiple experiments on the same surface concurrently will appreciate Statsig's ability to handle mutually exclusive experiments and implement Bonferroni correction.
 
