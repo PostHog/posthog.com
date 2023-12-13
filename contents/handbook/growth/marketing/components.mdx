@@ -23,14 +23,14 @@ We used to create custom HTML tables, but we now have an easier to use component
 
 To use, first import the componenents by adding this code near the start, right after the frontmatter:
 
-```
+```jsx
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 ```
 
 Then, customize the code below to fit your needs.
 
-```
+```jsx
 <ComparisonTable column1="Company name 1" column2="Company name 2">
   <ComparisonHeader category="Optional header row" />
   <ComparisonRow column1={true} column2="Text" feature="Feature name" description="Feature descrpition" />
@@ -76,7 +76,7 @@ Here's an example of what it looks like:
 
 You can add a styled quote component using the following code:
 
-```
+```jsx
 <BorderWrapper>
 <Quote
     imageSource="/images/customers/utku.jpg"

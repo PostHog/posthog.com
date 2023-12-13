@@ -36,6 +36,12 @@ There is also the option to choose a lower tier, high deductible health plan (HD
 
 For people in the UK, [Aviva](https://www.aviva.co.uk/business/health-protection-wellbeing/health-insurance/) offers coverage for therapists that are inaccessible through the NHS alone.
 
+### Nursery
+
+For people in the UK, we offer the [workplace nursery scheme](https://www.workplace-nursery.net/). This enables you to pay for your children's nursery using your pre-tax salary, saving you up to 45% in nursery fees.
+
+Message Kendal to get this set up.
+
 ### Time off
 
 Everyone in the team has [unlimited, permissionless time off](/handbook/people/time-off). 
