@@ -38,9 +38,9 @@ For people in the UK, [Aviva](https://www.aviva.co.uk/business/health-protection
 
 ### Nursery
 
-For people in the UK, we offer the [workplace nursery scheme](https://www.workplace-nursery.net/). This enables you to pay for your children's nursery using your pre-tax salary, saving you up to 45% in nursery fees.
+For people in the UK, we offer the [workplace nursery scheme](https://www.workplace-nursery.net/). This enables you to pay for your children's nursery using your pre-tax salary, saving you up to 45% in nursery fees. 
 
-Message Kendal to get this set up.
+If you are interested in this, first check with your nursery that they are part of the scheme, then message Kendal to get this set up.
 
 ### Time off
 
