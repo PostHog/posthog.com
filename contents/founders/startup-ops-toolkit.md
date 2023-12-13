@@ -1,6 +1,6 @@
 ---
 date: 2023-12-13
-title: The ops toolkit for early-stage startups - 2024 edit
+title: The ops toolkit for early-stage startups (2024 edition)
 author:
   - charles-cook
 featuredImage: ../images/blog/posthog-release-notes-blog.png
