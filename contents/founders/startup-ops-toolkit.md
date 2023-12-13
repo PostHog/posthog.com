@@ -124,4 +124,4 @@ Congrats, you have hopefully saved a bunch of precious time and mental energy th
 
 - You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](/handbook).
 - We've written a step-by-step [guide to startup finance](/founders/startup-finance-without-finance  in detail – without hiring a finance person. 
-- At some point you'll want to make your [first ops hire](/founders/first-ops-hire).
+- At some point you'll want to [make your first ops hire](/founders/first-ops-hire).
