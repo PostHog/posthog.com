@@ -109,7 +109,7 @@ James on his and Tim’s experience in YC:
 
 Most explanations of product-market fit focus on how it feels – “you’ll know it when it happens” etc. But how do you measure product-market fit?
 
-That was the question facing Superhuman CEO [Rahul Vohra](https://www.linkedin.com/in/rahulvohra/) in 2017. His answer was to use the [PMF Survey](https://pmfsurvey.com/) developed by Dropbox, LogMeIn, and Eventbrite alum, [Sean Ellis](https://www.linkedin.com/in/seanellis/).
+That was the question facing Superhuman CEO [Rahul Vohra](https://www.linkedin.com/in/rahulvohra/) in 2017. His answer was to use the [PMF Survey](/product-engineers/pmf-surveys) developed by Dropbox, LogMeIn, and Eventbrite alum, [Sean Ellis](https://www.linkedin.com/in/seanellis/).
 
 The PMF survey asks four questions, including “How would you feel if you could no longer use [Your Product]?
 

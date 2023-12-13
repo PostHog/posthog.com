@@ -112,7 +112,7 @@ Word-of-mouth growth is good for any product-led company – i.e. a product that
 
 Like word of mouth, _consistently_ positive user feedback is an indicator of product-market fit. There's a decent chance you're onto a winner when people tell you they can't live without your product.
 
-The [PMF Survey](https://pmfsurvey.com/) is a twist on the classic [Net Promoter Score (NPS)](/product-engineers/nps-vs-csat-vs-ces), but it's designed _specifically_ for finding product-market fit.
+The [PMF Survey](/product-engineers/pmf-surveys) is a twist on the classic [Net Promoter Score (NPS)](/product-engineers/nps-vs-csat-vs-ces), but it's designed _specifically_ for finding product-market fit.
 
 Created by entrepreneur Sean Ellis, the core question (among others) it asks is:
 

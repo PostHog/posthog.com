@@ -254,7 +254,6 @@ Here's a table summarizing their differences:
 
 ## Further reading 📖
 
+- [How to use product-market fit surveys to actually improve your app (with examples)](/product-engineers/pmf-surveys)
 - [How to create a great user persona (with examples)](/product-engineers/how-to-create-user-personas)
 - [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
-- [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
-

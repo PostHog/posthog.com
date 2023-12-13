@@ -1,6 +1,6 @@
 ---
 date: 2023-11-29
-title: "How product-market fit surveys can ACTUALLY improve your app (with examples)"
+title: "How to use product-market fit surveys to actually improve your app (with examples)"
 author:
   - lior-neu-ner
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
@@ -109,19 +109,21 @@ Rahul Vohra, founder of [Superhuman](https://superhuman.com), famously used PMF 
 
 5. Next, look at your "somewhat disappointed" users that match the same user persona as your best supporters. Of these users, focus only those who say the main benefit from your app is the same as your best supporters. 
 
-  It's clear that your app resonates with them but something is holding them back from *loving* you.
+6. It's clear that your app resonates with them but something is holding them back from *loving* you. Find out what's missing or annoying for them. You can do this by looking at their response to the question `How can we improve our app for you?`. 
 
-1. Find out what's missing or annoying for them. You can do this by looking at their response to the question `How can we improve our app for you?`. By fixing this, you'll be able to turn them from on-the-fence users into fanatics! (rephrase on the fence and fanatics)
+7. Fix it! you'll be able to turn them from on-the-fence users into fanatics! (rephrase on the fence and fanatics)
+
+8. Repeat the process
 
 ![How to improve your app with PMF survey](../images/blog/pmf-surveys/pmf-survey-steps.png)
 
 ### Case study: Superhuman
 
+Superhuman nearly doubled their PMF score from 33% to 58%. More importantly, users became noticeably more vocal about how much they loved the product. Here's how they did it:
 
-Superhuman story?
+First, they sent out a survey with four questions:
 
-
-1. How would you feel if you could no longer use Superhuman? A) Very disappointed B) Somewhat disappointed C) Not disappointed
+1. How would you feel if you could no longer use Superhuman?
 
 2. What type of people do you think would most benefit from Superhuman?
 
@@ -129,31 +131,47 @@ Superhuman story?
 
 4. How can we improve Superhuman for you?
 
-When email app Superhuman started using the survey in 2017, 22% of users answered "very disappointed". 52% answered "somewhat disappointed".4
+Then, they took the responses from this survey and did the following:
 
-After the initial survey, Superhuman created a four-step process to convert the 52% and doubled-down on what the 22% loved.
+1. **Segmented users:** They assigned user personas to everyone who responded (e.g. founder, engineer, customer success) and created an [Ideal Customer Profile](/founders/creating-ideal-customer-profile) based on the users that responded "very disappointed". 
 
-Segmenting users: They assigned user personas to everyone who responded (e.g. founder, engineer, customer success) and created a cohort of those who appeared in the 22%. In this cohort, 32% of people responded "very disappointed", and they created a more detailed Ideal Customer Profile based on these users.
+2. **Doubled down on what their ideal customers love:** People loved how fast Superhuman was and how quickly they could get their work done using shortcuts. So they made sure to keep working on this, and build more features that increase efficiency. They built "Snippets" - the ability to automatically type phrases, paragraphs, or whole emails. 
 
-Gathering feedback: They analyzed feedback from "on-the-fence" users, and asked "how can we improve Superhuman for you?" They ignored users who answered "not disappointed". The most common thing the on-the-fence users wanted? A mobile app. They did the same for their strong supporters.
+3. **Converted on-the-fence users:** They focused on the users who loved Superhuman's speed but still responded with "somewhat disappointed". They learned that these users wanted a mobile app. So they built it – and their users loved them for it!
 
-Building a roadmap: Armed with this feedback, Superhuman built a roadmap of new features. Half dedicated to improvements for their "very disappointed" cohort, the other for the users they wanted to convert.
+4. **Repeated the process:** Superhuman continued to survey users, tracking progress towards the 40% mark. The score became the primary OKR for the product team and, after three quarters, Superhuman increased their score to 58%.
 
-Rinse and repeat: Superhuman continued to survey users, tracking progress towards the 40% mark. The score became the primary OKR for the product team and, after three quarters, Superhuman had doubled the score to 58%.
+<BorderWrapper>
+<Quote
+    imageSource=""
+    size="md"
+    name="Rahul Vohra"
+    title="Founder & CEO, Superhuman"
+    quote={`“If you only double down on what users love, your product-market fit score won’t increase. If you only address what holds users back, your competition will likely overtake you.”`}
+/>
+</BorderWrapper>
+   
+### Case study: Slack
 
+In 2015, co-founder of KISSmetrics [Hiten Shah](https://twitter.com/hnshah) ran an [open research project](https://hitenism.com/slack-product-market-fit-survey/) where he conducted the PMF survey on 731 Slack users. Here's what he learned about Slack's best users:
 
+- They believed it increased productivity and improved collaboration.
+- The key benefit of using Slack is a reduction in email volume.
+- Video conferencing was a must-have feature
+- Most must-have users mentioned integrations as a key benefit and they requested better ones.
+- Search was not commonly mentioned as a benefit.
+- In their opinion, Slack would benefit anyone that works on projects where teamwork and communication is important.
 
-### Slack Example
-https://hitenism.com/slack-product-market-fit-survey/
- 
-An open research project[^3] run by Hiten Shah, co-founder of KISSmetrics, used the PMF Survey on 731 Slack users, the results showed:
+From these points, Hiten recommended the following product and marketing changes:
 
-- 51% responded they would be very disappointed if they couldn't use Slack
-- These users believed it increased productivity and improved collaboration
-- All groups said video conferencing was a must-have addition
-
-It's no coincidence Slack has since added video conferencing.
-
+- Add video conferencing – which they soon did!
+- Make integrations even better, and have Slackbot start recommending the top ones to people.
+- On the homepage, emphasize teamwork, communication and collaboration more. De-emphasize search.
+- Replace marketing site copy with words that must-have users use instead. Specifically, add copy about the benefits of Slack helping reduce company emails. 
 
 
 ## Further reading 📖
+
+- [In-depth: How to measure product-market fit](/founders/measure-product-market-fit)
+- [What we've learned about product-market fit](/newsletter/what-weve-learned-about-product-market-fit)
+- [NPS vs CSAT vs CES: Which is best for SaaS?](/product-engineers/nps-vs-csat-vs-ces)
