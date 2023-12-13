@@ -123,5 +123,5 @@ Annoyingly, dealing with stock options is one of those slightly manual things yo
 Congrats, you have hopefully saved a bunch of precious time and mental energy that can now be used on building the product, talking to customers, recruiting and creating (presumably) massive hype in the AI chatbot space.
 
 - You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](/handbook).
-- We've written a [step-by-step guide](/founders/startup-finance-without-finance) to doing startup finance in detail - without hiring a finance person. 
+- We've written a step-by-step [guide to startup finance](/founders/startup-finance-without-finance  in detail – without hiring a finance person. 
 - At some point you'll want to make your [first ops hire](/founders/first-ops-hire).
