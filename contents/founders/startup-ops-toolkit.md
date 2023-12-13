@@ -75,7 +75,7 @@ Don’t spend _too_ much time making financial forecasts at an early stage – y
 
 [Pry](http://pry.co/) (now part of Brex) has been a game-changer for helping us build our forecasts. Yes, we all know you can “just” do it in Excel (which you will want to do if you have a finance background), but a tool like Pry makes it so much easier to build and share your plan with non-finance people. And you can skip the 2 years chained to your desk at Goldman Sachs! You can start with their cheapest plan at $45/mo. 
 
-Pry connects with your accounting software (Quickbooks, Xero) as well as most banks, and you then just fill out assumptions manually or using simple formulae. It also has neat dashboards for visualizing everything, comparing budget vs. actuals, and scenario modeling. I love Pry so much that I actually [wrote a guide](/founders/startup-finance-without-finance) about how we use it to run finance at PostHog - without a finance person. 
+Pry connects with your accounting software (Quickbooks, Xero) as well as most banks, and you then just fill out assumptions manually or using simple formulae. It also has neat dashboards for visualizing everything, comparing budget vs. actuals, and scenario modeling. I love Pry so much that I actually [wrote a guide](/founders/startup-finance-without-finance) about how we use it to run finance at PostHog – without a finance person. 
 
 Be responsive when it comes to re-forecasting – don't just rigidly stick to an arbitrary annual or quarterly process because it's 'standard practice'. We review budget vs. actuals monthly, and then reforecast as and when it feels appropriate. 
 
