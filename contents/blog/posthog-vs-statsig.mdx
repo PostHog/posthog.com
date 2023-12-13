@@ -47,7 +47,7 @@ PostHog is open source. Our code, culture, and strategy are public [on GitHub](h
 
 We're also self-serve. No need to "talk to sales" or "schedule a demo" unless you want to – we're always [happy to chat](/book-a-demo). You can sign up and try all the features PostHog offers for free.
 
-## Comparing PostHog and LaunchDarkly
+## Comparing PostHog and Statsig
 
 ### Platform
 
@@ -55,7 +55,7 @@ We're also self-serve. No need to "talk to sales" or "schedule a demo" unless yo
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Test changes and analyze impact" />
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
-  <ComparisonRow column1={false} column2={true} feature="Configurator" description="Replace hard-coded values in your app with config values" />
+  <ComparisonRow column1={false} column2={true} feature="Dynamic config" description="Replace hard-coded values in your app with config values" />
   <ComparisonRow column1={true} column2={false} feature="Session replays" description="Watch real users use your product; debug behavior" />
   <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Code publicly accessible" />
@@ -65,11 +65,11 @@ We're also self-serve. No need to "talk to sales" or "schedule a demo" unless yo
 
 ### Experimentation
 
-Experimentation is where PostHog and Statsig's functionality diverges. Both enable you to create [A/B/n](/tutorials/abn-testing) and [multivariate](/product-engineers/what-is-multivariate-testing-examples) tests, set custom goals, and calculate statistical significance, but:
+Both tools enable you to run [A/B/n](/tutorials/abn-testing) and [multivariate](/product-engineers/what-is-multivariate-testing-examples) tests, set custom goals, and calculate statistical significance, but:
 
-- **Statsig** provides more options for statistical depth, such as Bayesian and Frequentist engines, and Bonferroni correction. It also offers advanced testing techniques, like multi-armed bandit, mutually exclusive, and holdout tests. This makes it well-suited for teams who are expect to run dozens of experiments on the same surface concurrently.
+- **Statsig** offers some more advanced testing techniques, such as multi-armed bandit, mutually exclusive, and holdout tests. It also lets you choose between Bayesian and Frequentist engines, and supports Bonferroni correction.
 
-- **PostHog** provides a more intuitive user interface and simpler setup process, making it ideal for teams who prefer a more straightforward approach to experimentation.
+- **PostHog** provides a more intuitive user interface and simpler setup process, making it ideal for teams who prefer a more straightforward approach to experimentation, and tight integration with its other powerful tools.
 
 <ComparisonTable column1="PostHog" column2="Statsig">
   <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that a test tracks" />
