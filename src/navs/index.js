@@ -2086,6 +2086,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Sharing & embedding',
+                    url: '/docs/product-analytics/sharing',
+                    icon: 'IconShare',
+                    color: 'purple',
+                },
+                {
                     name: 'Web analytics',
                     url: '/docs/web-analytics',
                     icon: 'IconPieChart',
@@ -2180,7 +2186,7 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Sharing and embedding',
+                    name: 'Sharing & embedding',
                     url: '/docs/session-replay/sharing',
                     icon: 'IconShare',
                     color: 'purple',
