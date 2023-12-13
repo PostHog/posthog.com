@@ -20,7 +20,7 @@ This guide assumes you work at a US company, but most of it applies to any count
 - [Managing your money](/blog/startup-ops-toolkit#2-managing-your-money)
 - [Keeping yourself organized](/blog/startup-ops-toolkit#3-keeping-yourself-organized)
 
-I won't offer multiple options here – it's not that kind of guide. Just know that these are the tools we use at PostHog after three years or so of trial and error, and more than a few tedious customer demos. Based on my experience at PostHog and other startups, these tools should serve you from making your first hire through to 100 people - it's surprising how little you need to change things up here. 
+I won't offer multiple options here – it's not that kind of guide. Just know that these are the tools we use at PostHog after three years or so of trial and error, and more than a few tedious customer demos. Based on my experience at PostHog and other startups, these tools should serve you from making your first hire through to 100 people – it's surprising how little you need to change things up here. 
 
 So, read on if you want to learn how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
 
