@@ -44,7 +44,8 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 - I can help you get constructive feedback on your performance.
 - I can help you figure out how to build relationships with people.
 - I can help you figure out what to do in your career.
-- I can help be a rubber duck.
+- I can give you design feedback on something you're working on.
+- I can help you figure out how to give feedback to someone.
 - I can help bounce ideas around.
 
 ## How you can help me
@@ -60,20 +61,28 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 
 ### Execution todo
 
-- Clarify product strategy better over the next year
-  - This will make the next round of OKRs smoother and will reduce micromanagement
-  - Get us on the path to overtake our competitors, not to follow them
-- Make sure all teams that report to me reach an innovating state
-  - Encourage better Focus (vision, strategy, all hands, OKRs)
-  - More speed (encourage shipping early and iteration over huge PRs)
-  - Higher quality (design and marketing especially)
+- Push harder on brand through marketing, website and docs, and customer success
+  - Set vision for how to do more with our audience and community
+- Get CS really good at account expansion and activation
+- Assist with keeping the org running smoothly - make sure we've the right people in the right places
 - Personal
-  - 4 exercise (strength or cardio) sessions a week
-  - make sure planting is planned so I grow lots of my own food in the spring and summer
-  
+  - Maintain 4 exercise sessions a week & minimize plate changes when doing bench presses with Tim
+
 ### Archived todo
 
 It makes me feel better crossing stuff out, rather than deleting it, thus:
+
+- ~Make sure every team has strong leadership~ We had to hire into our pipeline team
+- ~~Make sure all teams that report to me reach an innovating state~~ Really pleased this happened. Now we need to figure this out for _all_ teams.
+  - ~~Encourage better Focus (vision, strategy, all hands, OKRs)~~
+  - ~~More speed (encourage shipping early and iteration over huge PRs)~~
+  - ~~Higher quality (design and marketing especially)~~
+- ~~Clarify product strategy better over the next year~~ I think we nailed this - tl;dr lots of products in one place.
+  - ~~This will make the next round of OKRs smoother and will reduce micromanagement~~ It did
+  - ~~Get us on the path to overtake our competitors, not to follow them~~ 100% certain we can do this now
+- ~~Personal~~
+  - ~~4 exercise (strength or cardio) sessions a week~~ Done. Pleased with myself. The key was not drinking and setting up a home gym so I had more energy and could find time.
+  - ~~make sure planting is planned so I grow lots of my own food in the spring and summer~~ Done. This went pretty well. Learned a lot for next year too.
 - ~~2 strength sessions a week~~ did more like 3-4
 - ~~1 bike ride a week. Note: solved this by commuting to pick up my daughter from nursery every week. Double win!~~
 - ~~Experiment with larger order values as opportunities arise. Note: hired someone to do this.~~
