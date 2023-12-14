@@ -47,7 +47,7 @@ Ellis recommend a minimum of 30 responses before the survey becomes directionall
 
 ### Drawbacks of PMF surveys
 
-Calcuating your PMF score is not enough. The *real* insights come from segmenting your users based on their response, and then asking follow-up questions – either in a [survey](/surveys) or by [conducting interviews](/product-engineers/interview-snapshot-guide).
+Calculating your PMF score is not enough. The *real* insights come from segmenting your users based on their response, and then asking follow-up questions – either in a [survey](/surveys) or by [conducting interviews](/product-engineers/interview-snapshot-guide).
 
 Here are five follow-up questions you should ask:
 
