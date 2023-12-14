@@ -19,11 +19,11 @@ Now though, we’re closing our public Slack group in order to create a better, 
 
 ## Why we're changing the way we do community
 
-PostHog has grown incredibly fast but over the last four years, and throughout that time the public Slack group has been the central hub of our community. It's been a place where we chat to users, listen to feature requests, answer questions, and solicit feedback. 
+PostHog has grown incredibly fast over the last four years, and throughout that time the public Slack group has been the central hub of our community. It's been a place where we chat to users, listen to feature requests, answer questions, and solicit feedback. 
 
 However, with over 5,000 members in the community, it's become hard to keep up with the conversations. Messages quickly disappear from the chat history and content isn't indexed by Google, which makes it a particularly bad platform for community support. 
 
-We've explored a few things to fix this, including joining a paid plan ($7.25+ per user, per month) and [building our own AI bot](/blog/aruba-hackathon#maxai-our-friendly-posthog-support-ai), but we don't think the problem is solvable within Slack. Earlier this year we realized a new approach was needed.
+We've explored a few things to fix this, including joining a paid plan ($7.25+ per user, per month) and [building our own AI bot](/blog/aruba-hackathon#maxai-our-friendly-posthog-support-ai), but earlier this year we realized a new approach was needed.
 
 So, we decided to build something better. 
 
@@ -35,13 +35,11 @@ Rather than using an off-the-shelf forum platform, like vBulletin or phpBB, we d
 
 The new forums provide a dedicated area where you can post questions for both the PostHog team and the wider community. Anyone can respond, and answers can be selected as the preferred solution to help guide other users too. All of this content lives permanently on our website and is visible to search engines, which is enough on its own to make the forums a better place for seeking community support.
 
-We've also integrated the forum into other parts of the site. You can, for example, post questions when browsing  the PostHog docs, and we'll automatically aggregate questions into sortable categories. This is especially helpful if you're trying something new and an existing explanation isn't clear enough for you. 
+We've also integrated the forum into other parts of the site. You can, for example, post questions when browsing the PostHog docs, and we'll automatically aggregate questions into sortable categories. This is especially helpful if you're trying something new and an existing explanation isn't clear enough for you. 
 
-Community profiles are also a big part of the forum; a place where you can add info, track discussions you're involved in, and display awards earned through the community. You can even open your profile to function as an Ask Me Anything (AMA) - something [James](https://posthog.com/community/profiles/71), [Cory](https://posthog.com/community/profiles/2), and [myself](https://posthog.com/community/profiles/59) have already done.
+Profiles are also a big part of the forum; a place where you can add info, track discussions you're involved in, and display awards earned through the community. You can even open your profile to function as an Ask Me Anything (AMA) - something [James](https://posthog.com/community/profiles/71), [Cory](https://posthog.com/community/profiles/2), and [myself](https://posthog.com/community/profiles/59) have already done.
 
 > Ready to join the community? You can now [login using your PostHog account](/questions)! 
-
-
 
 ## What happens next?
 
