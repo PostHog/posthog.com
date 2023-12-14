@@ -14,6 +14,7 @@ import { QuestionForm } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
 import Link from 'components/Link'
+import { Helmet } from 'react-helmet'
 
 export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformImageUri }) => {
     return (
@@ -98,6 +99,7 @@ export default function ClientPost({
         }
     }
     const author = authors?.data?.[0]
+    const ogImage = `https://posthog-og.vercel.app/post?slug=${slug}`
 
     return (
         <div className="@container">
@@ -109,6 +111,12 @@ export default function ClientPost({
                         }  md:px-8 2xl:px-12`}
                     >
                         <SEO title={title + ' - PostHog'} />
+                        <Helmet>
+                            <meta name="image" content={ogImage} />
+                            <meta property="og:image" content={ogImage} />
+                            <meta name="twitter:card" content="summary_large_image" />
+                            <meta name="twitter:image" content={ogImage} />
+                        </Helmet>
                         <article>
                             <Post
                                 imageURL={null}

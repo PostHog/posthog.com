@@ -21,6 +21,7 @@ import LikeButton from 'components/Edition/LikeButton'
 import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import qs from 'qs'
+import { Helmet } from 'react-helmet'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -169,15 +170,17 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
             })
     }, [pathname])
 
+    const ogImage = `https://posthog-og.vercel.app/post?slug=${fields.slug}`
+
     return (
         <article className="@container">
-            <SEO
-                title={title + ' - PostHog'}
-                description={description || excerpt}
-                article
-                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
-            />
-
+            <SEO title={title + ' - PostHog'} description={description || excerpt} article />
+            <Helmet>
+                <meta name="image" content={ogImage} />
+                <meta property="og:image" content={ogImage} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:image" content={ogImage} />
+            </Helmet>
             <div className="flex flex-col-reverse @3xl:flex-row">
                 <div className={`article-content flex-1 transition-all md:pt-8 w-full overflow-auto`}>
                     <div
