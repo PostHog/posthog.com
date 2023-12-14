@@ -26,7 +26,7 @@ When request capture is enabled you can also enabled payload and body capture, t
 
 ## Sensitive information
 
-By default we have a deny-list of headers that we will never capture.
+We have a deny-list of headers that we will never capture.
 
 * authorization
 * x-forwarded-for
@@ -55,10 +55,13 @@ posthog.init('<ph_project_api_key>', {
 
             // ... or remove the query string from the URL
             request.name = request.name.split('?')[0]
-            return request
 
             // ... or redact the request body
             request.requestBody = undefined
+
+            // ... and more
+
+            // finally return the request
             return request
         }
     }
