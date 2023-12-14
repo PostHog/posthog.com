@@ -37,7 +37,9 @@ The new forums provide a dedicated area where you can post questions for both th
 
 We've also integrated the forum into other parts of the site. You can, for example, post questions when browsing  the PostHog docs, and we'll automatically aggregate questions into sortable categories. This is especially helpful if you're trying something new and an existing explanation isn't clear enough for you. 
 
-Since soft-launching the community a few months ago we've made several other improvements, such as adding comment threads to articles on our blog (including this one), and adding AMA functionality to community profiles. 
+Community profiles are also a big part of the forum; a place where you can add info, track discussions you're involved in, and display awards earned through the community. You can even open your profile to function as an Ask Me Anything (AMA) - something [James](https://posthog.com/community/profiles/71), [Cory](https://posthog.com/community/profiles/2), and [myself](https://posthog.com/community/profiles/59) have already done.
+
+> Ready to join the community? You can now [login using your PostHog account](/questions)! 
 
 
 
