@@ -10,7 +10,7 @@ import { PostsContext } from './Posts'
 import Title from './Title'
 import { useLayoutData } from 'components/Layout/hooks'
 import Upvote from './Upvote'
-import { QuestionForm } from 'components/Squeak'
+import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
 import Link from 'components/Link'
@@ -146,7 +146,7 @@ export default function ClientPost({
                             />
                             <Upvote slug={slug} id={id} className="mt-6" />
                             <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
-                                <QuestionForm
+                                <Questions
                                     disclaimer={false}
                                     subject={false}
                                     buttonText="Leave a comment"
