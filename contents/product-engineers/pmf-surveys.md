@@ -38,7 +38,6 @@ Your PMF score is the percentage of "very disappointed" responses out of the tot
 
 For example, let's say you survey `100` people. `50` people respond with "very disappointed", your PMF score would be `50 / 100 = 50%`.
 
-
 ### What is a good PMF score?
 
 Based on his research of 100+ startups, Ellis believes 40% answering "very disappointed" is a strong signal of product-market fit. The more responses you get, the more reliable the signal. 
@@ -148,7 +147,6 @@ From these responses, Hiten recommended the following product and marketing chan
 - Make integrations even better, and have Slackbot start recommending the best ones to people.
 - On the homepage, emphasize teamwork, communication, and collaboration more. De-emphasize search.
 - Replace marketing site copy with words that must-have users use instead. Specifically, add copy about the benefits of Slack helping reduce company emails. 
-
 
 ## Further reading 📖
 
