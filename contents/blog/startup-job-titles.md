@@ -44,7 +44,7 @@ Ideally, the best team members are willing to start by themselves, set a world-c
 
 We sometimes have a candidate apply for a certain role then suggest a slightly different title upon hiring them. This happens mostly for roles that we’ve never hired for before.
 
-In engineering, we advertise for “Senior Engineers” mainly because we get so many unqualified or under-experienced applicants - but everyone is referred to as a Software Engineer on our [team page](https://posthog.com/handbook/company/team). We pay people more if they have more experience - per our [transparent salary calculator](https://posthog.com/handbook/people/compensation) - but we don’t use these titles internally.
+In engineering, we advertise for “Senior Engineers” mainly because we get so many unqualified or under-experienced applicants - but everyone is referred to as a Software Engineer on our [team page](/team). We pay people more if they have more experience - per our [transparent salary calculator](/handbook/people/compensation) - but we don’t use these titles internally.
 
 ## Should you set requirements for your job titles?
 

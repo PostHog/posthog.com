@@ -31,7 +31,7 @@ export default function RoadmapPage() {
                         { name: 'Questions', url: '/questions' },
                         { name: 'Roadmap', url: '/roadmap' },
                         { name: 'Contributors', url: '/contributors' },
-                        { name: 'Core team', url: '/handbook/company/team' },
+                        { name: 'Core team', url: '/team' },
                     ]}
                 >
                     <SidecarLogo className="h-20 mb-8 mx-auto" />

@@ -82,7 +82,7 @@ For those candidates that might have other commitments that make a full day impr
 
 These are some of the things we've implemented so far:
 
-* [All remote](/handbook/company/team) - so we can hire people from any country in the world. We have people in ~10 countries, with no office. We also provide everyone  with $200/month to use on a [coworking space](/handbook/people/spending-money/#work-space) of their choice, and $250/month to [meet up with other team members](/handbook/people/spending-money/#meetups). 
+* [All remote](/team) - so we can hire people from any country in the world. We have people in ~10 countries, with no office. We also provide everyone  with $200/month to use on a [coworking space](/handbook/people/spending-money/#work-space) of their choice, and $250/month to [meet up with other team members](/handbook/people/spending-money/#meetups). 
 * [Asynchronous and transparent communication](/handbook/company/communication) - so people can get the context they need to work effectively across multiple time zones and on schedules that suit them.
 * [Unlimited vacation policy](/handbook/people/time-off/#permissionless-time-off) with mandatory minimum time off - so you can fit work around your life.
 * [Flexible hours](/handbook/people/time-off#flexible-working) - so you can do the daily school run, or schedule a dentist appointment. 
