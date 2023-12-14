@@ -1,5 +1,5 @@
 ---
-date: 2023-12-13
+date: 2023-12-14
 title: How to harness the power of growth loops
 author:
   - ian-vanagas
@@ -18,42 +18,52 @@ crosspost:
 
 When they are working, growth loops feel like biking downhill. The same effort takes you progressively faster and further until it feels effortless. 
 
-In business terms, your key metrics grow exponentially, while the average investment to create that growth stays the same or decreases.
+In business terms, your key metrics grow exponentially, while the average investment to create that growth stays the same or decreases. They combine multiple business efforts to create an impact much larger than the sum of its parts.
 
-Growth loops are powerful because they compound and, unlike biking downhill, can go on forever.
-
-In this guide, we cover everything you need to know to harness growth loops for your product, including:
+Growth loops are powerful because they compound and, unlike biking downhill, can go on forever. In this guide, we cover everything you need to know to harness growth loops for your product, including:
 
 - The different types of growth loops
 - How to choose a growth loop for your product
 - How to measure your growth loop
 - Real-world growth loop examples from Substack, Hubspot, and more
 
-## Why should you care about growth loops?
+## Examples of growth loops
 
-Nearly every successful company utilizes growth loops, consciously or not. 
+Nearly every successful company utilizes growth loops, consciously or not.
 
-The newsletter platform Substack, for example, enables writers to easily share and monetize their work. As they do, it gets the attention of other writers, who discover Substack, join, and continue the loop. It's a virtuous circle where everyone involved benefits.
+### Substack
+
+The newsletter platform Substack enables writers to easily share and monetize their work. As they do, it gets the attention of other writers, who discover Substack, join, and continue the loop. It's a virtuous circle where everyone involved benefits.
 
 ![Substack growth loop](../images/blog/growth-loops/substack.png)
 
-Growth loops combine multiple business efforts to create an impact much larger than the sum of its parts. For a loop to succeed, the work of customer-facing teams must align with the work of engineering and product teams.
-
 In our Substack example, the marketing and business development teams must attract popular writers (who often require upfront payments) while the product and engineering teams must deliver a great writing and subscription experience. 
 
-This provides compounding benefits for Substack like bigger writers, better experiences, more readers, and ultimately, more revenue. The same growth loop powers streaming platforms like Twitch, which must both compete with other platforms for popular talent, and ensure they and their viewers have a great experience.
+This provides compounding benefits for Substack like bigger writers, better experiences, more readers, and ultimately, more revenue. 
 
-## Growth loops vs funnels – what's the difference?
+### Twitch
 
-Growth loops are a similar framework to funnels like [AARRR pirate metrics](/product-engineers/aarrr-pirate-funnel). Both are a series of events leading to a desired outcome. 
+Twitch is a streaming platform for gaming. Similar to Substack and writers, streamers are the key driver of their growth as they attract viewers. Those viewers join the platform, generate revenue, and watch other streams. Streamers, new and old, do more to capture that revenue and viewership, and the loop repeats.
 
-The difference is that funnels are linear, while growth loops are cyclical. Funnels are a series of events that lead to an end like a conversion. Growth loops are a series of events that continuously lead to more events.
+![Twitch growth loop](../images/blog/growth-loops/twitch.png)
 
-Companies often use both:
+Twitch's ties its success to its ability to do this better than its competitors. Other streaming platforms like YouTube and Kick compete with them for streamers, often with large exclusive contracts, hurting Twitch's growth loop.
 
-- **Growth loops** are useful for high-level strategy, such as linking your product strategy to how you plan to grow awareness and interest in it.
+### Tripadvisor
 
-- **Funnels** work well for lower-level optimizations, such as optimizing an onboarding flow, or for analyzing the effectiveness of your growth engine and looking for signs of weakness.
+Tripadvisor uses its data on hotels and restaurants to create content that ranks well on search engines. This content attracts users, who review hotels and restaurants, which improves and expands that content.
+
+![Tripadvisor growth loop](../images/blog/growth-loops/tripadvisor.png)
+
+This data was once hidden by travel agents and local knowledge. By making it public, Tripadvisor unlocked massive growth.
+
+### Y Combinator
+
+YC invests in startups. Their advice and network help startups grow and succeed. The prestige this creates attracts investment into YC startups, improves their network, and encourages more startups to apply. As long as their advice and network continue to be valuable, this loop continues.
+
+![YC growth loop](../images/blog/growth-loops/yc.png)
+
+YC differentiates itself from other accelerators by being extremely startup-friendly, focused on San Francisco, and having a strong founder network. Each of these is core to the success of their growth loop.
 
 ## Types of growth loops
 
@@ -69,6 +79,8 @@ This is generally good for two types of products:
 
 - **Products that are fun to share** with others (e.g. TikTok, Instagram, BeReal). Users share the app or content from the app on social media and other communications platforms to drive new users to join and create more shareable content.
 
+> **How to measure virality**: You want to know what drives users to share your product and the referral source of signups. To do this, measure traffic and shareability by looking at occurrences of signing up, getting started, and referring others.
+
 ### 2. The performance marketing growth loop
 
 The performance marketing growth loop is using [paid marketing](/founders/dev-marketing-paid-ads) to acquire customers, then using the new revenue to fund more marketing. It is reliant on connecting marketing to acquire users (performance) with value (revenue) captured. If you see a social media or search ad for a product, that is a product relying on performance marketing.
@@ -78,6 +90,8 @@ For example, with Google Ad Words, companies pay per click on specific keywords 
 ![Performance marketing with Google growth loop](../images/blog/growth-loops/google.png)
 
 Products that use performance marketing growth loops generally have high margins (more money for ads), but low organic demand. Good examples include ecommerce and direct-to-consumer goods (e.g. Casper, Warby Parker, Dollar Shave Club) and SaaS software targeting small-medium businesses (e.g. Shopify, Hubspot, Slack).
+
+> **How to measure performance marketing**: Measure the margin between the cost of customer acquisition (CAC) and how much revenue we receive from them (LTV). To do this, combine the sources of traffic, conversion, and retention with marketing spend and revenue.
 
 ### 3. The organic content loop
 
@@ -89,7 +103,7 @@ Two types of products benefit from this:
 
 - Your product generates a large amount of data, which you use to create content (e.g. Tripadvisor, Zillow, Expedia). These companies rely heavily on programmatic SEO, which is the process of turning data into content that shows up in search engines.
 
-![Tripadvisor growth loop](../images/blog/growth-loops/tripadvisor.png)
+> **How to measure organic content**: Figure out what drive someone to create and share content and what content gets attention. To do this, measure traffic, conversion, and usage events. Read more in [how (and why) our marketing team uses PostHog](/blog/posthog-marketing).
 
 ### 4. The sales-led growth loop
 
@@ -97,13 +111,21 @@ The sales process creates a growth loop where acquired customers grow the compan
 
 Products relying on sales generally pitch for large contracts that need high levels of support, engagement, and customization. Offers are often tailored to the specific customer and require a large amount of time and effort. 
 
-For example, sales is a growth loop for enterprise SaaS companies (e.g. Salesforce, SAP, Oracle) and big consultancies (e.g. McKinsey, Deloitte)
+For example, sales is a growth loop for enterprise SaaS companies (e.g. Salesforce, SAP, Oracle) and big consultancies (e.g. McKinsey, Deloitte).
+
+> **How to measure sales**: Sales has many of its own special metrics unrelated to product and marketing. This doesn’t mean measurement isn’t helpful. Trial usage, lead conversion, usage after conversion, and [account-level analytics](/docs/product-analytics/group-analytics) can help sales teams do a better job.
 
 ### 5. The product-led growth loop
 
-In a product-led company, [user feedback](/tutorials/feedback-interviews-site-apps) can be a growth loop. You ask for feedback and use it to improve your product. Your improved product attracts more users, and all this leads to more feedback.
+In a product-led company, improving the product is the main driver of growth. There are many ways to do this, but we think [talking to users](/product-engineers/10x-engineers-do-user-interviews) is the best one. The loop goes: 
+
+1. You build something and ask for feedback
+2. You use that feedback to improve what you've built and guide what you build next.
+3. Your improved product attracts and retains more users, who provide more feedback (and revenue) to fuel the loop again.
 
 For example, many early-stage startups talk to users to understand their problems, and then build a product that solves them. They repeat this loop to grow towards [product-market fit](/founders/product-market-fit-game).
+
+> **How to measure product-led growth**: There is a simple sign a feedback loop is working: Are users providing feedback? Beyond this, you should measure your core product metrics. For startups, these are likely related to [measuring product-market fit](/founders/measure-product-market-fit), such as user engagement, retention, and their PMF score.
 
 ## How to choose your growth loop
 
@@ -122,7 +144,6 @@ For example, say you are LinkedIn. Your ideal user is a newly graduated business
 
 What you can do is create a connection between their network and content creation. They value their network a lot, and creating content is free. When a user creates and shares content, their network pays attention. With this attention, the user engages with their network, and LinkedIn sells ads. When other users see the benefits of this, they share content, and this cycle repeats.
 
-
 ### 2. What do they get out of it?
 
 A user needs a win-win to repeatedly take an action that fuels a product’s growth loop. They need an incentive, whether it is status, attention, or money. Smart companies build this incentive into the core of their product.
@@ -135,41 +156,28 @@ These freebies get a lot of attention which drives signups, and some turn into c
 
 There are many creative ways to incentivize users to join your growth loop. Optimizing existing win-wins with users, as well as finding new ones, fuels the growth loops that help products succeed.
 
-## How to measure your growth loop
+## Frequently asked questions about growth loops
 
-To understand your how your growth loop is working, you need to measure it. Measurement usually involves figuring out whether your input leads to increasing amounts of the output you want. What exact metrics to measure depends on the product and the growth loop. Here are examples:
+### What is the difference between funnels and growth loops?
 
-### Virality
+Growth loops are a similar framework to funnels like [AARRR pirate metrics](/product-engineers/aarrr-pirate-funnel). Both are a series of events leading to a desired outcome. 
 
-To measure virality, you want to know what drives users to share your product and the referral source of signups. To do this, measure traffic and shareability. You want events for the loop of signing up, getting started, referring others, and repeating. More occurrences of each and better connections between them are good signs for our viral growth loop.
+The difference is that funnels are linear, while growth loops are cyclical. Funnels are a series of events that lead to an end like a conversion. Growth loops are a series of events that continuously lead to more events. Loops focus more on the potential for compounding growth.
 
-### Performance marketing
+Companies often use both:
 
-Performance marketing is about measuring money spent is leading to signups and revenue. The margin between the cost of acquisition (CAC) and how much value we receive from them (LTV) drives the performance marketing growth loop (and the rest of the company).
+- **Growth loops** are useful for high-level strategy, such as linking your product strategy to how you plan to grow awareness and interest in it.
 
-To get data about CAC and LTV, you must understand the sources of our traffic, conversion, and finally, retention. This combined with our marketing spend and revenue enables us to calculate CAC and LTV.
+- **Funnels** work well for lower-level optimizations, such as optimizing an onboarding flow, or for analyzing the effectiveness of your growth engine and looking for signs of weakness.
 
-> **Calculating CAC and LTV**: CAC is sales and marketing spend divided by acquired customers. For example, $100 spent on Facebook ads leads to 10 new customers, which means CAC is $10. LTV is the amount the customer pays multiplied by the time they spent paying. For example, the average customer has a $20 per month subscription and stays subscribed for 5 months. The average customer LTV is $100.
+### What is the difference between network effects and growth loops?
 
-### Content
+Network effects focus on users. With network effects, the value of a product increases as more users join. A network effect can be a part of a growth loop, but it doesn’t have to be.
 
-The key to content growth loops is knowing users interests and what drives traffic. You must understand what motivates someone to create and share a piece of content. If you have a data-driven content creation strategy, you want to understand how data can lead to conversion and what are the best ways to generate more data.
-
-Both versions rely on traffic, conversion, and usage events. Content growth loops are similar to viral ones in this way.
-
-### Sales
-
-Sales has many of its own special metrics unrelated to product and marketing. This doesn’t mean measurement isn’t helpful. Trial usage, lead conversion, usage after conversion, and [account-level analytics](/docs/product-analytics/group-analytics) can help sales teams do a better job.
-
-If the sale involves implementation or customization, usage metrics are useful for optimizing this. Anything that creates a better offering (like building a better product) help the sales process.
-
-### Feedback
-
-Measuring if a feedback loop is working is simple: Are users providing feedback? Beyond this, you should measure it with your core product metrics. For startups, these are likely related to [measuring product-market fit](/founders/measure-product-market-fit), such as user engagement, retention, and their PMF score.
+Growth loops focus on the product or business. They don't necessarily have to do with users. Sales or organic content growth loops are examples of this. Growth loops are more strategic and planned than network effects are. 
 
 ## Further reading
 
 - [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
 - [How to start a growth team (as an engineer)](/product-engineers/how-to-start-a-growth-team)
 - [The most useful product health metrics](/product-engineers/product-health-metrics)
-
