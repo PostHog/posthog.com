@@ -23,7 +23,7 @@ HogQL filters are available on every type of insight from trends to funnels to l
 
 Below is a non-exhaustive list of time properties that are commonly used in HogQL (You can find a full list of events, properties, and types in your [data management tab](https://app.posthog.com/data-management/events)):
 
-- The `timestamp` property indicates what time an event occurred, and is automatically set.
+- The `timestamp` property indicates what time an event occurred, and is generally [automatically set](/docs/data/timestamps).
 - [Persons](/docs/data/persons) have a `created_at` property, which you can access with `person.created_at`.
 - For custom events or person properties, you can access them with `person.properties.{custom_property_name}`.
 
