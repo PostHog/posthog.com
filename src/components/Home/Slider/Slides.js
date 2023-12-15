@@ -332,6 +332,22 @@ export const FeatureFlags = () => {
 }
 
 export const ABTesting = () => {
+    const image1Props = {
+        loading: 'eager',
+        alt: 'A graph depicting an increasing trend line showing improvement in an experiment over time',
+        placeholder: 'none',
+        quality: 100,
+        objectFit: 'contain',
+        className: 'w-full dark:border dark:border-dark rounded md:max-w-[745px] md:shadow-2xl md:-rotate-1',
+    }
+    const image2Props = {
+        loading: 'eager',
+        alt: 'A slider set at 5% showing how long an experiment will need to be run in order to get the specified improvement',
+        placeholder: 'none',
+        quality: 100,
+        objectFit: 'contain',
+        className: 'w-full dark:border dark:border-dark rounded md:max-w-[400px] md:shadow-2xl md:rotate-1',
+    }
     const features = [
         { title: 'Goals & secondary metrics', Icon: IconBadge },
         { title: 'Targeting & exclusion rules ', Icon: IconTarget },
@@ -344,22 +360,26 @@ export const ABTesting = () => {
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px] ">
                     <div className="absolute left-2 top-5 w-[150%] md:w-3/4">
                         <StaticImage
-                            alt="A graph depicting an increasing trend line showing improvement in an experiment over time"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full rotate-1 shadow-2xl"
-                            src="./images/ab-testing-2.png"
+                            {...image1Props}
+                            src="../../../../contents/images/products/ab-testing/ab-testing-1-light.png"
+                            className={`${image1Props.className} dark:hidden`}
+                        />
+                        <StaticImage
+                            {...image1Props}
+                            className={`${image1Props.className} hidden dark:block`}
+                            src="../../../../contents/images/products/ab-testing/ab-testing-1-dark.png"
                         />
                     </div>
-                    <div className="absolute right-0 -top-2 w-[100%] md:w-3/4">
+                    <div className="absolute -right-16 -top-3 w-[100%] md:w-3/4">
                         <StaticImage
-                            alt="A slider set at 20% showing how long an experiment will need to be run in order to get the specified improvement"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full -rotate-1 shadow-2xl"
-                            src="./images/ab-testing-1.png"
+                            {...image2Props}
+                            src="../../../../contents/images/products/ab-testing/ab-testing-2-light.png"
+                            className={`${image2Props.className} dark:hidden`}
+                        />
+                        <StaticImage
+                            {...image2Props}
+                            className={`${image2Props.className} hidden dark:block`}
+                            src="../../../../contents/images/products/ab-testing/ab-testing-2-dark.png"
                         />
                     </div>
                     <div className="absolute bottom-0 right-0 md:hidden">
