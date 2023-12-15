@@ -647,7 +647,7 @@ export const WebAnalytics = () => {
     }
     return (
         <div className="bg-aqua rounded-md text-primary flex items-end">
-            <div className="relative grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
                 <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                     <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-4 -mb-2">
                         <StaticImage
