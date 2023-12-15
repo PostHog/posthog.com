@@ -21,6 +21,7 @@ after:bg-purple
 after:bg-salmon
 after:bg-seagreen
 after:bg-teal
+after:bg-aqua
 bg-blue
 bg-blue/10
 bg-green
@@ -39,6 +40,8 @@ bg-teal
 bg-teal/10
 bg-yellow
 bg-yellow/10
+bg-aqua
+bg-aqua/10
 border-blue
 border-green
 border-opacity-100
@@ -51,6 +54,7 @@ border-red
 border-salmon
 border-seagreen
 border-teal
+border-aqua
 col-span-7
 flex
 flex
@@ -145,6 +149,7 @@ text-purple
 text-salmon
 text-seagreen
 text-teal
+text-aqua
 to-tan/0
 via-tan/85
 w-2/12

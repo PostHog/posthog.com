@@ -1,5 +1,5 @@
 import { IconChevronDown } from '@posthog/icons'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { slideButtons } from './slideButtons'
 import {
     ProductAnalytics,
@@ -12,13 +12,25 @@ import {
     WebAnalytics,
 } from './Slides'
 import { useInView } from 'react-intersection-observer'
+import { DotLottiePlayer } from '@dotlottie/react-player'
 
-const SlideButton = ({ title, Icon, color, label, activeSlide, index }) => {
+const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index }) => {
     const active = activeSlide === index
+    const lottieRef = useRef()
 
     const handleClick = () => {
         document.getElementById(`home-slide-${index}`)?.scrollIntoView({ block: 'nearest', inline: 'start' })
     }
+
+    useEffect(() => {
+        if (active) {
+            lottieRef?.current?.seek(0)
+            lottieRef?.current?.play(0)
+        } else {
+            lottieRef?.current?.pause()
+            lottieRef?.current?.seek(0)
+        }
+    }, [active])
 
     return (
         <li className="h-[calc(100%_-_.25rem)] pb-1 border-b border-primary/25 dark:border-primary-dark/25 relative">
@@ -31,7 +43,7 @@ const SlideButton = ({ title, Icon, color, label, activeSlide, index }) => {
                 }`}
             >
                 <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
-                    <Icon active={active} />
+                    <DotLottiePlayer lottieRef={lottieRef} src={lottieSrc} autoplay={active} />
                 </span>
                 <p
                     className={`leading-tight text-sm lg:text-md m-0 -mt-2 ${

@@ -1,57 +1,44 @@
-import {
-    IconDatabase,
-    IconDecisionTree,
-    IconFlask,
-    IconGraph,
-    IconMessage,
-    IconPieChart,
-    IconRewindPlay,
-    IconServer,
-    IconTerminal,
-    IconToggle,
-} from '@posthog/icons'
-
 export const slideButtons = [
     {
         title: 'Product analytics',
-        Icon: IconGraph,
+        lottieSrc: '/lotties/product-icons/product-analytics.lottie',
         color: 'blue',
     },
     {
         title: 'Web analytics',
-        Icon: IconPieChart,
+        lottieSrc: '/lotties/product-icons/web-analytics.lottie',
         color: 'aqua',
         label: 'Alpha',
     },
     {
         title: 'Session replay',
-        Icon: IconRewindPlay,
+        lottieSrc: '/lotties/product-icons/session-replay.lottie',
         color: 'yellow',
     },
     {
         title: 'Feature flags',
-        Icon: IconToggle,
+        lottieSrc: '/lotties/product-icons/feature-flags.lottie',
         color: 'teal',
     },
     {
         title: 'A/B testing',
-        Icon: IconFlask,
+        lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
     },
     {
         title: 'Surveys',
-        Icon: IconMessage,
+        lottieSrc: '/lotties/product-icons/surveys.lottie',
         color: 'salmon',
     },
     {
         title: 'Data pipeline',
-        Icon: IconDecisionTree,
+        lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
         color: 'yellow',
         label: 'Beta',
     },
     {
         title: 'Data warehouse',
-        Icon: IconServer,
+        lottieSrc: '/lotties/product-icons/data-warehouse.lottie',
         color: 'seagreen',
         label: 'Beta',
     },
