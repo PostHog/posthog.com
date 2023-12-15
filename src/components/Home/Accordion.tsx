@@ -2,10 +2,28 @@ import React, { useState } from 'react'
 import { Disclosure } from '@headlessui/react'
 import { slideButtons } from './Slider/slideButtons'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FeatureFlags, ProductAnalytics, SessionReplay, ABTesting, Surveys, Cdp, DataWarehouse } from './Slider/Slides'
+import {
+    FeatureFlags,
+    ProductAnalytics,
+    SessionReplay,
+    ABTesting,
+    Surveys,
+    DataPipeline,
+    DataWarehouse,
+    WebAnalytics,
+} from './Slider/Slides'
 import { Chevron } from 'components/Icons'
 
-const slideContents = [ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Surveys, Cdp, DataWarehouse]
+const slideContents = [
+    ProductAnalytics,
+    WebAnalytics,
+    SessionReplay,
+    FeatureFlags,
+    ABTesting,
+    Surveys,
+    DataPipeline,
+    DataWarehouse,
+]
 
 export default function Accordion(): JSX.Element {
     const [activeIndex, setActiveIndex] = useState<number | null>(0)
