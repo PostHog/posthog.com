@@ -45,7 +45,7 @@ Conducting surveys with PostHog also enabled Purple Wave to centralize data into
 
 
 ![PostHog surveys](../images/customers/purplewave/purplewave_survey.png)
-<Caption>Every element of a survey can be customized in PostHog, without using any code</Caption>
+<Caption>Survey templates help you get started quickly, or you can build your own from scratch</Caption>
 
 
 ### Collecting NPS scores, organizing interviews, and more
