@@ -236,6 +236,22 @@ export const SessionReplay = () => {
 }
 
 export const FeatureFlags = () => {
+    const image1Props = {
+        loading: 'eager',
+        alt: "A code snippet to check if the feature flag 'nav' is enabled",
+        placeholder: 'none',
+        quality: 100,
+        objectFit: 'contain',
+        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:-rotate-1',
+    }
+    const image2Props = {
+        loading: 'eager',
+        alt: 'A filter for rolling out a feature flag to 50% of organizations in a cohort',
+        placeholder: 'none',
+        quality: 100,
+        objectFit: 'contain',
+        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
+    }
     const features = [
         { title: 'Multivariate flags', Icon: IconTestTube },
         { title: 'JSON payloads', Icon: IconBrackets },
@@ -247,20 +263,26 @@ export const FeatureFlags = () => {
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <div className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
                         <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full -rotate-1 shadow-2xl"
-                            src="./images/feature-flags-1.png"
-                            alt="A code snippet to check if the feature flag 'nav' is enabled"
+                            {...image1Props}
+                            src="../../../../contents/images/products/feature-flags/feature-flags-1-light.png"
+                            className={`${image1Props.className} dark:hidden`}
+                        />
+                        <StaticImage
+                            {...image1Props}
+                            className={`${image1Props.className} hidden dark:block`}
+                            src="../../../../contents/images/products/feature-flags/feature-flags-1-dark.png"
                         />
                     </div>
                     <div className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5">
                         <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full rotate-1 shadow-2xl"
-                            src="./images/feature-flags-2.png"
-                            alt="A filter for rolling out a feature flag to 50% of organizations in a cohort"
+                            {...image2Props}
+                            src="../../../../contents/images/products/feature-flags/feature-flags-2-light.png"
+                            className={`${image2Props.className} dark:hidden`}
+                        />
+                        <StaticImage
+                            {...image2Props}
+                            className={`${image2Props.className} hidden dark:block`}
+                            src="../../../../contents/images/products/feature-flags/feature-flags-2-dark.png"
                         />
                     </div>
                     <div className="absolute bottom-0 right-0 md:hidden z-10">
