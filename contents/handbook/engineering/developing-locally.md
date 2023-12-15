@@ -228,7 +228,7 @@ pnpm i --dir plugin-server
         ```bash
         brew install libxml2 libxmlsec1 pkg-config
         ```
-> If installing xmlsec doesn't work, try updating macOS to the latest version. 
+        > If installing `xmlsec` doesn't work, try updating macOS to the latest version (Sonoma). 
    
     - On Debian-based Linux:
         ```bash
