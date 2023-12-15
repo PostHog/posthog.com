@@ -160,6 +160,14 @@ export const ProductAnalytics = () => {
 }
 
 export const SessionReplay = () => {
+    const imageProps = {
+        loading: 'eager',
+        alt: 'A session recording of a fake application called Hogflix',
+        placeholder: 'none',
+        quality: 100,
+        objectFit: 'contain',
+        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
+    }
     const features = [
         { title: 'Event timeline', Icon: IconClock },
         { title: 'Console logs', Icon: IconTerminal },
@@ -169,15 +177,16 @@ export const SessionReplay = () => {
         <div className="md:bg-[#F2AD46] rounded-md text-primary flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2">
+                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-4 -mb-2">
                         <StaticImage
-                            objectPosition="bottom"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full md:max-w-[1029px] md:shadow-2xl md:rotate-1"
-                            src="../../../../contents/images/products/session-replay/session-replay.png"
-                            alt="A session recording of a fake application called Hogflix"
+                            {...imageProps}
+                            src="../../../../contents/images/products/session-replay/session-replay-light.png"
+                            className={`${imageProps.className} dark:hidden`}
+                        />
+                        <StaticImage
+                            {...imageProps}
+                            className={`${imageProps.className} hidden dark:block`}
+                            src="../../../../contents/images/products/session-replay/session-replay-dark.png"
                         />
                     </div>
                     <div className="absolute bottom-0 right-1 md:hidden">
