@@ -439,15 +439,15 @@ export const Surveys = () => {
     return (
         <div className="md:bg-[#D42F18] rounded-md text-white flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="pl-8 md:col-span-6 lg:col-span-8 sm">
-                    <div className="h-full">
+                <ImageContainer className="md:col-span-6 lg:col-span-8">
+                    <div className="flex items-center justify-center">
                         <StaticImage
-                            alt="A hog analyzing NPS results"
+                            alt="Survey widget example"
                             placeholder="none"
                             quality={100}
                             objectFit="contain"
-                            className="w-full h-full py-4 md:py-10 max-h-96"
-                            src="./images/surveys-hog.png"
+                            className="w-full h-full py-4 max-w-[337px] rotate-1"
+                            src="../../../../contents/images/products/surveys/survey.png"
                         />
                     </div>
                 </ImageContainer>
@@ -467,6 +467,17 @@ export const Surveys = () => {
                             Explore
                         </CallToAction>
                     </Content>
+                    <div className="absolute bottom-0 right-1 hidden md:block">
+                        <div>
+                            <StaticImage
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[200px] mdlg:block lg:max-w-[250px] xl:max-w-[350px]"
+                                src="./images/surveys-hog.png"
+                                alt=""
+                            />
+                        </div>
+                    </div>
                 </ContentContainer>
             </div>
         </div>
