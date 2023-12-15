@@ -261,7 +261,7 @@ export const FeatureFlags = () => {
         <div className=" md:bg-[#29DBBB] rounded-md text-primary flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
+                    <div className="md:absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
                         <StaticImage
                             {...image1Props}
                             src="../../../../contents/images/products/feature-flags/feature-flags-1-light.png"
