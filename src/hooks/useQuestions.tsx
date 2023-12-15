@@ -159,7 +159,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
 
     const questions: Omit<StrapiResult<QuestionData[]>, 'meta'> = React.useMemo(() => {
         return {
-            data: data?.reduce((acc, cur) => [...acc, ...cur.data], [] as StrapiRecord<QuestionData>[]) ?? [],
+            data: data?.reduce((acc, cur) => [...acc, ...(cur.data || [])], [] as StrapiRecord<QuestionData>[]) ?? [],
         }
     }, [size, data])
 

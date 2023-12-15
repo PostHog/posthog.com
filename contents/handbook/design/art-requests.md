@@ -5,11 +5,10 @@ showTitle: true
 hideAnchor: false
 ---
 
-Lottie, PostHog's in-house graphic designer, handles all requests for branding and artwork. Lottie can help you with things like:
+[Lottie](/community/profiles/227), PostHog's in-house graphic designer, handles all requests for branding and artwork. She can help you with things like:
 
-- Custom visuals for paid-ad campaigns
-- Blog and social media art work
-- Landing page concepts
+- Custom visuals for paid ad campaigns
+- Blog and social media artwork
 - New themed hedgehogs
 - Custom CTAs and banners
 - Branded merch 
@@ -17,7 +16,7 @@ Lottie, PostHog's in-house graphic designer, handles all requests for branding a
 
 You can see what Lottie is working on via the [Art & Brand Planning project board](https://github.com/orgs/PostHog/projects/65/views/2).
 
-To search through our current hedgehog assets library go to the [Hoggies file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0%3A1&mode=design&t=kquJnyBOtmHTYUvv-1) in Figma and search for anything you need, all artwork has been tagged with various actions/emotions to make for easier location of your perfect hedgehog. If you can't find what you are looking for, request a new one!
+To search through our current hedgehog assets library go to the [Figma file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0%3A1&mode=design&t=kquJnyBOtmHTYUvv-1) and search for anything you need, all artwork has been tagged with various actions/emotions to make for easier location of your perfect hedgehog. If you can't find what you are looking for, request a new one!
 
 Lottie gets lots of requests for work. To help plan and prioritize this work, please follow this process for requesting work:
 

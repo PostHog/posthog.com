@@ -3,7 +3,6 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
-import decode from 'jwt-decode'
 
 export type User = {
     id: number
@@ -64,15 +63,6 @@ type UserProviderProps = {
     children: React.ReactNode
 }
 
-const jwtValid = (jwt: string) => {
-    try {
-        const jwtDecoded = decode(jwt)
-        return Date.now() <= jwtDecoded?.exp * 1000
-    } catch (err) {
-        return false
-    }
-}
-
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
@@ -80,17 +70,17 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
     const posthog = usePostHog()
 
-    useEffect(() => {
+    const validateUser = async () => {
         const jwt = localStorage.getItem('jwt')
-        const user = localStorage.getItem('user')
-
-        if (jwt && user && jwtValid(jwt)) {
+        if (jwt && (await fetchUser(jwt))) {
             setJwt(jwt)
-            setUser(JSON.parse(user))
         } else {
-            // We shouldn't have a jwt without a user or vice versa. If we do, clear both and reset.
             logout()
         }
+    }
+
+    useEffect(() => {
+        validateUser()
     }, [])
 
     const getJwt = async () => {
@@ -310,7 +300,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
 
         if (!meRes.ok) {
-            throw new Error('Failed to fetch profile data')
+            posthog?.capture('community', {
+                error: 'failed to fetch user',
+            })
+            return null
         }
 
         const meData: User = await meRes.json()

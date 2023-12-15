@@ -90,7 +90,6 @@
         "instantsearch.js": "^4.49.1",
         "is-plain-object": "^5.0.0",
         "jsdom": "^20.0.0",
-        "jwt-decode": "^3.1.2",
         "katex": "^0.12.0",
         "kea": "^3.0.2",
         "kea-loaders": "^3.0.0",

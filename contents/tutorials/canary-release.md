@@ -41,7 +41,7 @@ Beyond testing the flag yourself, here is a recommended step-by-step release wit
 
 1. **Just yourself:** set email to equal to your own, like `email equals ian@posthog.com`. Test it yourself to make sure the feature flag works and the feature works as expected.
 
-2. **Internal team:** set email to contain your domain, like `email contains posthog.com` or `email equals <insert multiple team member emails>`. This enables [testing in production](/blog/testing-in-production). Make sure to communicate with your team about what is being released so they know to test and look out for issues.
+2. **Internal team:** set email to contain your domain, like `email contains posthog.com` or `email equals <insert multiple team member emails>`. This enables [testing in production](/product-engineers/testing-in-production). Make sure to communicate with your team about what is being released so they know to test and look out for issues.
 
 3. **Beta users, organizations:** [use early access management](/docs/feature-flags/early-access-feature-management), set email to contain a company domain, or set the group name to equal theirs, like `email contains twitter.com` or `organization_name equals twitter`. To ensure you are aware of issues, communicate with them and monitor a related usage dashboard.
 

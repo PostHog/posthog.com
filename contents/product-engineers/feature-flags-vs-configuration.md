@@ -46,7 +46,7 @@ The big difference compared to configurations is feature flags’ expanded funct
 - Connects to usage and user data.
 - Provides simplified creation UI and permissioning.
 
-To access these, feature flag services often connect to external services like CDPs, product analytics, and data warehouses. They get data from these sources to customize which users get specific values when calling the flag.
+To access these, [feature flag services](/blog/best-open-source-feature-flag-tools) often connect to external services like CDPs, product analytics, and data warehouses. They get data from these sources to customize which users get specific values when calling the flag.
 
 Feature flags are almost always remotely configurable, and because they use an external service, developers can modify them at run time. No need to reset or recompile, just call the external service again. These services also provide a simplified UI, creating a centralized location for modifying feature flags and enabling quick rollouts and rollbacks.
 

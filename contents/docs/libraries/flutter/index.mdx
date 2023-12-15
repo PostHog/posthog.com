@@ -75,13 +75,13 @@ class MyApp extends StatelessWidget {
                   'foo': 'bar',
                   'number': 1337,
                   'clicked': true,
-                  '$set': {
+                  '\$set': {
                     'userProp': 'value1',
-                    '$groups': {
+                    '\$groups': {
                       'company': 'twitter',
                     },
                   },
-                  '$set_once': {
+                  '\$set_once': {
                     'userProp': 'value2'
                   }
                 },
