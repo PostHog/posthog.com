@@ -106,7 +106,7 @@ export const ProductAnalytics = () => {
                         <StaticImage
                             {...imageProps}
                             src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
-                            className={`${imageProps.className} dark:hidden`}
+                            className={`${imageProps.className} block dark:hidden`}
                         />
                         <StaticImage
                             {...imageProps}
@@ -181,7 +181,7 @@ export const SessionReplay = () => {
                         <StaticImage
                             {...imageProps}
                             src="../../../../contents/images/products/session-replay/session-replay-light.png"
-                            className={`${imageProps.className} dark:hidden`}
+                            className={`${imageProps.className} block dark:hidden`}
                         />
                         <StaticImage
                             {...imageProps}
@@ -265,7 +265,7 @@ export const FeatureFlags = () => {
                         <StaticImage
                             {...image1Props}
                             src="../../../../contents/images/products/feature-flags/feature-flags-1-light.png"
-                            className={`${image1Props.className} dark:hidden`}
+                            className={`${image1Props.className} block dark:hidden`}
                         />
                         <StaticImage
                             {...image1Props}
@@ -277,7 +277,7 @@ export const FeatureFlags = () => {
                         <StaticImage
                             {...image2Props}
                             src="../../../../contents/images/products/feature-flags/feature-flags-2-light.png"
-                            className={`${image2Props.className} dark:hidden`}
+                            className={`${image2Props.className} block dark:hidden`}
                         />
                         <StaticImage
                             {...image2Props}
@@ -362,7 +362,7 @@ export const ABTesting = () => {
                         <StaticImage
                             {...image1Props}
                             src="../../../../contents/images/products/ab-testing/ab-testing-1-light.png"
-                            className={`${image1Props.className} dark:hidden`}
+                            className={`${image1Props.className} block dark:hidden`}
                         />
                         <StaticImage
                             {...image1Props}
@@ -374,7 +374,7 @@ export const ABTesting = () => {
                         <StaticImage
                             {...image2Props}
                             src="../../../../contents/images/products/ab-testing/ab-testing-2-light.png"
-                            className={`${image2Props.className} dark:hidden`}
+                            className={`${image2Props.className} block dark:hidden`}
                         />
                         <StaticImage
                             {...image2Props}
@@ -653,7 +653,7 @@ export const WebAnalytics = () => {
                         <StaticImage
                             {...imageProps}
                             src="../../../../contents/images/products/web-analytics/web-analytics-light.png"
-                            className={`${imageProps.className} dark:hidden`}
+                            className={`${imageProps.className} block dark:hidden`}
                         />
                         <StaticImage
                             {...imageProps}
