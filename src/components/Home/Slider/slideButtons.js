@@ -18,6 +18,12 @@ export const slideButtons = [
         color: 'blue',
     },
     {
+        title: 'Web analytics',
+        Icon: IconPieChart,
+        color: 'aqua',
+        label: 'Alpha',
+    },
+    {
         title: 'Session replay',
         Icon: IconRewindPlay,
         color: 'yellow',
@@ -48,11 +54,5 @@ export const slideButtons = [
         Icon: IconServer,
         color: 'seagreen',
         label: 'Beta',
-    },
-    {
-        title: 'Web analytics',
-        Icon: IconPieChart,
-        color: 'blue',
-        label: 'Alpha',
     },
 ]

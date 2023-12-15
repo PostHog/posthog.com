@@ -55,13 +55,13 @@ const SlideButton = ({ title, Icon, color, label, activeSlide, index }) => {
 }
 const slides = [
     ProductAnalytics,
+    WebAnalytics,
     SessionReplay,
     FeatureFlags,
     ABTesting,
     Surveys,
     DataPipeline,
     DataWarehouse,
-    WebAnalytics,
 ]
 
 const SlideContainer = ({ children, index, setActiveSlide }) => {
