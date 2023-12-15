@@ -1327,6 +1327,10 @@ export const docsMenu = {
                             url: '/docs/data/team-collaboration',
                         },
                         {
+                            name: 'Timestamps',
+                            url: '/docs/data/timestamps',
+                        },
+                        {
                             name: 'User properties',
                             url: '/docs/data/user-properties',
                         },
