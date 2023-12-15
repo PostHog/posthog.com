@@ -38,6 +38,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Ingestion | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Lifecycle | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
 | Messaging (Email, Notifications) | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
+| Notebooks | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Paths | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
