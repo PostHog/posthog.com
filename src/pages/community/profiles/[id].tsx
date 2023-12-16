@@ -328,7 +328,6 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
     const [hidden, setHidden] = useState(other.hidden)
     const [opacity, setOpacity] = useState(hidden ? 0.6 : 1)
     const isCurrentUser = user?.profile?.id === profile.id
-    console.log(id, profile)
     const handleClick = async (hidden: boolean) => {
         if (isCurrentUser) {
             setHidden(hidden)
@@ -370,9 +369,11 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
 
     return (
         <Tooltip
+            contentContainerClassName="!border-none !p-0 !bg-transparent"
+            tooltipClassName="!rounded-none"
             placement="bottom-start"
             content={() => (
-                <div className="max-w-[250px] text-left px-2">
+                <div className="max-w-[250px] text-left px-2 rounded-sm overflow-hidden border border-border dark:border-dark bg-light dark:bg-dark">
                     <div className="mb-4 -mx-4 -mt-2">
                         <img src={image?.data?.attributes?.url} />
                     </div>
