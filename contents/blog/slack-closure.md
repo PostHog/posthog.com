@@ -43,7 +43,7 @@ Profiles are also a big part of the forum; a place where you can add info, track
 
 ## What happens next?
 
-One option for the public Slack would have been to just leaving it running in parallel to the forums, but that would leave Slack users in limbo. Instead, we plan to close the Slack in favour of the PostHog community forum. You don't need to create a new account to join the forum - you can just log in with your normal PostHog Cloud account. 
+One option for the public Slack would have been to just leaving it running in parallel to the forums, but that would leave Slack users in limbo. Instead, we plan to close the Slack in favor of the PostHog community forum. You don't need to create a new account to join the forum - you can just log in with your normal PostHog Cloud account. 
 
 On XX/XX/XX, we'll archive all channels in the public PostHog Slack, so that no new discussion or replies can be posted. This will give you chance to move on-going conversations to a new location, such as the PostHog community, without losing anything. 
 
