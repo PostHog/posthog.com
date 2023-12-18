@@ -18,7 +18,7 @@ Today we’ve released a major change, dubbed PostHog 3000, which updates the lo
 
 Suffice to say that the new version has a lot to offer. It’s got dark mode! It’s got data density! It’s got side panels! It’s got... notebooks?
 
-[Notebooks](https://posthog.com/docs/notebooks) is a brand new feature, available to all users for free. Think of it as an ever-present place to collect data from within PostHog, explore it, add context, and even share with others. 
+[Notebooks](/docs/notebooks) is a brand new feature, available to all users for free. Think of it as an ever-present place to collect data from within PostHog, explore it, add context, and even share with others. 
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B73WnVRi0ko?si=omi18C2GRfattspq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
