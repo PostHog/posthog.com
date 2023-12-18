@@ -1,5 +1,5 @@
 ---
-date: 2023-12-17
+date: 2023-12-19
 title: "Introducing Notebooks for PostHog"
 rootPage: /blog
 sidebar: Blog
