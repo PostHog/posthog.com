@@ -1,6 +1,6 @@
 ---
-date: 2023-12-15
-title: How to harness the power of growth loops
+date: 2023-12-18
+title: How successful startups use growth loops (with examples)
 author:
   - ian-vanagas
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
