@@ -124,5 +124,5 @@ As long as building great products is an important goal for many companies, prod
 ## Further reading
 
 - [Product engineer vs software engineer: what's the difference?](/blog/product-engineer-vs-software-engineer)
-- [How to harness the awesome power of growth loops](/blog/growth-loops)
+- [How to harness the awesome power of growth loops](/product-engineers/growth-loops)
 - [22 ways PostHog makes it easier to build great products](/blog/using-posthog)
