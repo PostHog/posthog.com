@@ -20,7 +20,7 @@ Suffice to say that the new version has a lot to offer. It’s got dark mode! It
 
 [Notebooks](https://posthog.com/docs/notebooks) is a brand new feature, available to all users for free. Think of it as an ever-present place to collect data from within PostHog, explore it, add context, and even share with others. 
 
-<IANS’S VIDEO of NOTEBOOKS TO GO HERE> 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B73WnVRi0ko?si=omi18C2GRfattspq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Notebooks help in a wide variety of typical tasks, or workflows. 
 
