@@ -12,30 +12,30 @@ import {
     WebAnalytics,
 } from './Slides'
 import { useInView } from 'react-intersection-observer'
-import { DotLottiePlayer } from '@dotlottie/react-player'
+import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 
 const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index }) => {
     const active = activeSlide === index
     const lottieRef = useRef()
+    const [playing, setPlaying] = useState(false)
 
     const handleClick = () => {
         document.getElementById(`home-slide-${index}`)?.scrollIntoView({ block: 'nearest', inline: 'start' })
     }
 
-    useEffect(() => {
-        if (active) {
+    const handleMouseEnter = () => {
+        if (!playing) {
+            setPlaying(true)
             lottieRef?.current?.seek(0)
             lottieRef?.current?.play(0)
-        } else {
-            lottieRef?.current?.pause()
-            lottieRef?.current?.seek(0)
         }
-    }, [active])
+    }
 
     return (
         <li className="h-[calc(100%_-_.25rem)] pb-1 border-b border-primary/25 dark:border-primary-dark/25 relative">
             <button
                 onClick={handleClick}
+                onMouseEnter={handleMouseEnter}
                 className={`flex flex-col items-center mt-1 p-2 w-full rounded-md transition-opacity transition-colors border border-b-3 border-transparent space-y-1 h-full ${
                     active
                         ? `after:absolute after:bottom-0 after:h-[3px] after:w-full after:bg-${color} after:rounded-full active after:translate-y-1/2`
@@ -43,7 +43,15 @@ const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index }) => 
                 }`}
             >
                 <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
-                    <DotLottiePlayer lottieRef={lottieRef} src={lottieSrc} autoplay={active} />
+                    <DotLottiePlayer
+                        lottieRef={lottieRef}
+                        src={lottieSrc}
+                        onEvent={(event) => {
+                            if (event === PlayerEvents.Complete) {
+                                setPlaying(false)
+                            }
+                        }}
+                    />
                 </span>
                 <p
                     className={`leading-tight text-sm lg:text-md m-0 -mt-2 ${
