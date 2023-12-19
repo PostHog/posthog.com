@@ -174,6 +174,54 @@ export const ProductAnalytics = () => {
     )
 }
 
+export const WebAnalytics = () => {
+    const imageProps = {
+        loading: 'eager',
+        alt: 'A screenshot of web analytics',
+        placeholder: 'none',
+        quality: 100,
+        objectFit: 'contain',
+        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
+    }
+    return (
+        <div className="bg-aqua rounded-md text-primary flex items-end">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
+                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
+                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-4 -mb-2">
+                        <StaticImage
+                            {...imageProps}
+                            src="../../../../contents/images/products/web-analytics/web-analytics-light.png"
+                            className={`${imageProps.className} block dark:hidden`}
+                        />
+                        <StaticImage
+                            {...imageProps}
+                            className={`${imageProps.className} hidden dark:block`}
+                            src="../../../../contents/images/products/web-analytics/web-analytics-dark.png"
+                        />
+                    </div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content>
+                        <Title title={'Web analytics'} label="Alpha" />
+                        <Subtitle subtitle="Track and monitor many of the most important metrics for your website." />
+
+                        <CallToAction
+                            href="/docs/web-analytics"
+                            type="custom"
+                            size="md"
+                            className="group !border-black/25 !bg-black/10"
+                            childClassName="!bg-[#EB9D2A] border-black !text-black group-hover:text-black
+                    "
+                        >
+                            Read the docs
+                        </CallToAction>
+                    </Content>
+                </ContentContainer>
+            </div>
+        </div>
+    )
+}
+
 export const SessionReplay = () => {
     const imageProps = {
         loading: 'eager',
@@ -663,54 +711,6 @@ export const Sql = () => {
                             childClassName="!bg-[#D42F18]"
                         >
                             Explore
-                        </CallToAction>
-                    </Content>
-                </ContentContainer>
-            </div>
-        </div>
-    )
-}
-
-export const WebAnalytics = () => {
-    const imageProps = {
-        loading: 'eager',
-        alt: 'A screenshot of web analytics',
-        placeholder: 'none',
-        quality: 100,
-        objectFit: 'contain',
-        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
-    }
-    return (
-        <div className="bg-aqua rounded-md text-primary flex items-end">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
-                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-4 -mb-2">
-                        <StaticImage
-                            {...imageProps}
-                            src="../../../../contents/images/products/web-analytics/web-analytics-light.png"
-                            className={`${imageProps.className} block dark:hidden`}
-                        />
-                        <StaticImage
-                            {...imageProps}
-                            className={`${imageProps.className} hidden dark:block`}
-                            src="../../../../contents/images/products/web-analytics/web-analytics-dark.png"
-                        />
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Web analytics'} label="Alpha" />
-                        <Subtitle subtitle="Track and monitor many of the most important metrics for your website." />
-
-                        <CallToAction
-                            href="/docs/web-analytics"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10"
-                            childClassName="!bg-[#EB9D2A] border-black !text-black group-hover:text-black
-                    "
-                        >
-                            Read the docs
                         </CallToAction>
                     </Content>
                 </ContentContainer>
