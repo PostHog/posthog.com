@@ -31,8 +31,19 @@ import React from 'react'
 import { feature } from 'components/Pricing/PricingTable/classes'
 import { CallToAction } from 'components/CallToAction'
 
-const Title = ({ title }) => {
-    return <h3 className="text-lg lg:text-3xl mb-1 md:block hidden">{title}</h3>
+const Title = ({ title, label }) => {
+    return (
+        <>
+            <h3 className="text-lg lg:text-3xl mb-1 md:block hidden">
+                {title}
+                {label && (
+                    <span className="ml-1 relative -top-0.5 text-sm text-primary/60 dark:text-primary/60 font-semibold leading-tight border border-dark dark:border-dark px-1 py-0.5 rounded-sm uppercase">
+                        {label}
+                    </span>
+                )}
+            </h3>
+        </>
+    )
 }
 
 const Subtitle = ({ subtitle, className = '' }) => {
@@ -103,16 +114,20 @@ export const ProductAnalytics = () => {
             <div className="relative md:grid grid-cols-16 md:gap-8 w-full">
                 <ImageContainer className="md:pl-8 col-span-10">
                     <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-0 md:-mb-2">
-                        <StaticImage
-                            {...imageProps}
-                            src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
-                            className={`${imageProps.className} block dark:hidden`}
-                        />
-                        <StaticImage
-                            {...imageProps}
-                            className={`${imageProps.className} hidden dark:block`}
-                            src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
-                        />
+                        <div className="block dark:hidden">
+                            <StaticImage
+                                {...imageProps}
+                                src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
+                                className={`${imageProps.className}`}
+                            />
+                        </div>
+                        <div className="hidden dark:block">
+                            <StaticImage
+                                {...imageProps}
+                                className={`${imageProps.className}`}
+                                src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
+                            />
+                        </div>
                     </div>
                     <div className="absolute -bottom-2 right-0 md:hidden">
                         <div>
@@ -178,16 +193,20 @@ export const SessionReplay = () => {
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-4 -mb-2">
-                        <StaticImage
-                            {...imageProps}
-                            src="../../../../contents/images/products/session-replay/session-replay-light.png"
-                            className={`${imageProps.className} block dark:hidden`}
-                        />
-                        <StaticImage
-                            {...imageProps}
-                            className={`${imageProps.className} hidden dark:block`}
-                            src="../../../../contents/images/products/session-replay/session-replay-dark.png"
-                        />
+                        <div className="block dark:hidden">
+                            <StaticImage
+                                {...imageProps}
+                                src="../../../../contents/images/products/session-replay/session-replay-light.png"
+                                className={`${imageProps.className}`}
+                            />
+                        </div>
+                        <div className="hidden dark:block">
+                            <StaticImage
+                                {...imageProps}
+                                className={`${imageProps.className}`}
+                                src="../../../../contents/images/products/session-replay/session-replay-dark.png"
+                            />
+                        </div>
                     </div>
                     <div className="absolute bottom-0 right-1 md:hidden">
                         <div>
@@ -262,28 +281,36 @@ export const FeatureFlags = () => {
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <div className="md:absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
-                        <StaticImage
-                            {...image1Props}
-                            src="../../../../contents/images/products/feature-flags/feature-flags-1-light.png"
-                            className={`${image1Props.className} block dark:hidden`}
-                        />
-                        <StaticImage
-                            {...image1Props}
-                            className={`${image1Props.className} hidden dark:block`}
-                            src="../../../../contents/images/products/feature-flags/feature-flags-1-dark.png"
-                        />
+                        <div className="block dark:hidden">
+                            <StaticImage
+                                {...image1Props}
+                                src="../../../../contents/images/products/feature-flags/feature-flags-1-light.png"
+                                className={`${image1Props.className}`}
+                            />
+                        </div>
+                        <div className="hidden dark:block">
+                            <StaticImage
+                                {...image1Props}
+                                className={`${image1Props.className}`}
+                                src="../../../../contents/images/products/feature-flags/feature-flags-1-dark.png"
+                            />
+                        </div>
                     </div>
                     <div className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5">
-                        <StaticImage
-                            {...image2Props}
-                            src="../../../../contents/images/products/feature-flags/feature-flags-2-light.png"
-                            className={`${image2Props.className} block dark:hidden`}
-                        />
-                        <StaticImage
-                            {...image2Props}
-                            className={`${image2Props.className} hidden dark:block`}
-                            src="../../../../contents/images/products/feature-flags/feature-flags-2-dark.png"
-                        />
+                        <div className="block dark:hidden">
+                            <StaticImage
+                                {...image2Props}
+                                src="../../../../contents/images/products/feature-flags/feature-flags-2-light.png"
+                                className={`${image2Props.className}`}
+                            />
+                        </div>
+                        <div className="hidden dark:block">
+                            <StaticImage
+                                {...image2Props}
+                                className={`${image2Props.className} `}
+                                src="../../../../contents/images/products/feature-flags/feature-flags-2-dark.png"
+                            />
+                        </div>
                     </div>
                     <div className="absolute bottom-0 right-0 md:hidden z-10">
                         <div>
@@ -359,28 +386,36 @@ export const ABTesting = () => {
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px] ">
                     <div className="absolute left-2 top-5 w-[150%] md:w-3/4">
-                        <StaticImage
-                            {...image1Props}
-                            src="../../../../contents/images/products/ab-testing/ab-testing-1-light.png"
-                            className={`${image1Props.className} block dark:hidden`}
-                        />
-                        <StaticImage
-                            {...image1Props}
-                            className={`${image1Props.className} hidden dark:block`}
-                            src="../../../../contents/images/products/ab-testing/ab-testing-1-dark.png"
-                        />
+                        <div className="block dark:hidden">
+                            <StaticImage
+                                {...image1Props}
+                                src="../../../../contents/images/products/ab-testing/ab-testing-1-light.png"
+                                className={`${image1Props.className} block dark:hidden`}
+                            />
+                        </div>
+                        <div className="hidden dark:block">
+                            <StaticImage
+                                {...image1Props}
+                                className={`${image1Props.className}`}
+                                src="../../../../contents/images/products/ab-testing/ab-testing-1-dark.png"
+                            />
+                        </div>
                     </div>
                     <div className="absolute -right-16 -top-3 w-[100%] md:w-3/4">
-                        <StaticImage
-                            {...image2Props}
-                            src="../../../../contents/images/products/ab-testing/ab-testing-2-light.png"
-                            className={`${image2Props.className} block dark:hidden`}
-                        />
-                        <StaticImage
-                            {...image2Props}
-                            className={`${image2Props.className} hidden dark:block`}
-                            src="../../../../contents/images/products/ab-testing/ab-testing-2-dark.png"
-                        />
+                        <div className="block dark:hidden">
+                            <StaticImage
+                                {...image2Props}
+                                src="../../../../contents/images/products/ab-testing/ab-testing-2-light.png"
+                                className={`${image2Props.className} `}
+                            />
+                        </div>
+                        <div className="hidden dark:block">
+                            <StaticImage
+                                {...image2Props}
+                                className={`${image2Props.className} `}
+                                src="../../../../contents/images/products/ab-testing/ab-testing-2-dark.png"
+                            />
+                        </div>
                     </div>
                     <div className="absolute bottom-0 right-0 md:hidden">
                         <div>
@@ -507,7 +542,7 @@ export const DataPipeline = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'Customer data platform'} />
+                        <Title title={'Customer data platform'} label="Beta" />
                         <Description description="60+ data connections available now. Full CDP coming soon." />
                         <FeatureList features={features} />
 
@@ -557,7 +592,7 @@ export const DataWarehouse = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'Data warehouse'} />
+                        <Title title={'Data warehouse'} label="Beta" />
                         <Subtitle subtitle="Full data warehouse product coming soon" />
                         <Description
                             description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API."
@@ -664,7 +699,7 @@ export const WebAnalytics = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'Web analytics'} />
+                        <Title title={'Web analytics'} label="Alpha" />
                         <Subtitle subtitle="Track and monitor many of the most important metrics for your website." />
 
                         <CallToAction

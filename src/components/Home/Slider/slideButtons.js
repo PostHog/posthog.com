@@ -8,7 +8,6 @@ export const slideButtons = [
         title: 'Web analytics',
         lottieSrc: '/lotties/product-icons/web-analytics.lottie',
         color: 'aqua',
-        label: 'Alpha',
     },
     {
         title: 'Session replay',
@@ -34,12 +33,10 @@ export const slideButtons = [
         title: 'Data pipeline',
         lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
         color: 'yellow',
-        label: 'Beta',
     },
     {
         title: 'Data warehouse',
         lottieSrc: '/lotties/product-icons/data-warehouse.lottie',
         color: 'seagreen',
-        label: 'Beta',
     },
 ]
