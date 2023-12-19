@@ -32,7 +32,7 @@ Planning a launch? Embed the feature flags, events, persons, or cohorts you’ll
 
 ![Using PostHog notebooks](../images/blog/announcing-notebooks/pizza_survey.mp4)
 
-Or, of course, you can use a notebook as just a daily scratchpad. This is actually the default behavior, whereby a freshly opened notebook will persist only in the browser until you save it.
+Or, obviously, you can use a notebook as just a daily scratchpad. This is actually the default behavior, whereby a freshly opened notebook will persist only in the browser until you save it.
 
 There’s no limit to how many notebooks you can create, or how you can share them within your organization. Colleagues can even collaborate with you by adding to a notebook, though we block multiplayer editing to stop things getting too messy.
 
