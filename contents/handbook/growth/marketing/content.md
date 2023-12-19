@@ -41,4 +41,4 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 > - [Guide to writing for PostHog](/handbook/growth/marketing/writing-for-posthog)
 > - [List of tags and categories](/handbook/growth/marketing/tags-and-categories)
 > - [Our internal SEO guide](/handbook/growth/marketing/seo-guide)
-> - [Components you can use in articles](/handbook/growth/components)
+> - [Components you can use in articles](/handbook/growth/marketing/components)

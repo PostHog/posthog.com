@@ -12,7 +12,7 @@ tags:
 
 Feature flags, aka feature toggles, are a simple pattern with many uses. New feature to beta test? Use a feature flag. Testing variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say there are [many benefits to feature flags](/blog/feature-flag-benefits-use-cases).
 
-A [feature flag service](/blog/feature-flags-as-a-service) like [PostHog](/feature-flags) provides the most important flag functionality like flag management, remote configuration, analytics, edit history, and more. 
+A [feature flag service](/blog/best-open-source-feature-flag-tools) like [PostHog](/feature-flags) provides the most important flag functionality like flag management, remote configuration, analytics, edit history, and more. 
 
 Beyond this, there are many best practices that services can't handle for you. These include implementation, usage, naming, and removal. To help you with these, we put together this guide.
 

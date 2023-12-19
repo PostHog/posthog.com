@@ -26,7 +26,7 @@ You can visualize this with a total value bar chart to the sums for the date ran
 
 ![Time of day](../images/tutorials/time-breakdowns/day.png)
 
-> **Note:** Event timestamps default to UTC. You need to adjust your times depending on your local time. For example, if you are in Pacific Daylight Time, subtract 7 hours from UTC timestamps to match your local time.
+> **Note:** Event [timestamps](/docs/data/timestamps) default to UTC. You need to adjust your times depending on your local time. For example, if you are in Pacific Daylight Time, subtract 7 hours from UTC timestamps to match your local time.
 
 ## Hourly breakdown
 

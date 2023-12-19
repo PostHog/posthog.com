@@ -72,19 +72,19 @@ To show survey results in PostHog, you need to capture user interactions with yo
 ```js-web
 // 1. When a user is shown a survey
 posthog.capture("survey shown", {
-    $survey_id: {survey.id} // required
+    $survey_id: survey.id // required
 })
 
 // 2. When a user has dismissed a survey
 posthog.capture("survey dismissed", {
-    $survey_id: {survey.id} // required
+    $survey_id: survey.id // required
 })
 
 // 3. When a user has responded to a survey
 posthog.capture("survey sent", {
-    $survey_id: {survey.id} // required
-    $survey_response: {survey_response} // required. `{survey_response}` must be a text or number value (depending on your question type).
-    // For multiple choice select surveys, `{survey_response}` must be an array of values with the selected choices.
+    $survey_id: survey.id, // required
+    $survey_response: survey_response // required. `survey_response` must be a text or number value (depending on your question type).
+    // For multiple choice select surveys, `survey_response` must be in an array of values with the selected choices.
     // e.g., $survey_response: ["response_1", 8, "response_2"]
 })
 ```
@@ -95,10 +95,10 @@ If you have a survey with multiple questions, you can capture the responses to e
 
 ```js-web
 posthog.capture("survey sent", {
-    $survey_id: {survey.id} // required
-    $survey_response: {survey_response}
-    $survey_response_1: {survey_response_1}
-    $survey_response_2: {survey_response_2}
+    $survey_id: survey.id, // required
+    $survey_response: survey_response,
+    $survey_response_1: survey_response_1,
+    $survey_response_2: survey_response_2
 })
 ```
 

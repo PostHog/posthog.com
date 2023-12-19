@@ -26,6 +26,8 @@ As a result of spreading functionality across multiple tools, Contra also faced 
 
 Switching to PostHog enabled Contra to consolidate feature flags, session replays, product analytics and more into a single tool — but it also enabled the company to come together around a single platform as well. Instead of each team in the company relying on a different software, everyone was able to look at a single source of truth.
 
+“Previously the teams all used different tools,” said Allison. “That led to a lot of confusion, because our feature flag platform didn't integrate with our analytics platform, or our session replay tool. That made it difficult to use feature flag data to build better user journeys or understand drop-offs.”
+
 <BorderWrapper>
 <Quote
     imageSource="/images/customers/allison.jpg"
@@ -36,8 +38,6 @@ Switching to PostHog enabled Contra to consolidate feature flags, session replay
 />
 </BorderWrapper>
 
-“Previously the teams all used different tools,” said Allison. “That led to a lot of confusion, because our feature flag platform didn't integrate with our analytics platform, or our session replay tool. That made it difficult to use feature flag data to build better user journeys or understand drop-offs.”
-
 Feature flags in particular are important because the engineering team deploys all new product features behind flags and follows a careful ‘slow rollout’ strategy. All features are first deployed to beta users, then 20% of all users, followed by 50% of all users and finally 100% of all users. Switching feature flags to PostHog enables Contra to continue testing with this method, while also analyzing feature adoption and performance in the same tool. 
 
 ### Using session replays to improve a product
@@ -45,9 +45,6 @@ Feature flags in particular are important because the engineering team deploys a
 The combination of feature flags and session replays has been especially powerful for Contra, as it enables product managers and designers to directly observe how user behavior changes between variants. In other instances, session replay alone enables the team to identify where to make improvements.
 
 "For example," said Allison, "if we have a notification that a user failed to setup payments, we can view their replays in PostHog and identify the issue ourselves, enabling us to proactively engage with the user. This means faster debugging and a better user experience. This has become foundational to our customer support processes too."
-
-![Contra screenshot](../images/customers/contra/contra_session.gif)
-<Caption>Using PostHog session replays to analyze waitlist joins</Caption>
 
 “We used PostHog to look at our funnel for a waitlist in the insights tool,” said Allison. “From there, we could easily jump to session replays to see the drop-off point. With this analysis, we identified one path where users were not seeing a reminder modal and therefore we were missing out on a large number of waitlist entries.”
 

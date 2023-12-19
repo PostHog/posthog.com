@@ -38,6 +38,7 @@ Once done, configure the PostHog client to send requests via your rewrite.
 
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
- api_host: "https://your-host.com/ingest"
+  api_host: "https://your-host.com/ingest"
+  ui_host: "https://app.posthog.com" // or "https://eu.posthog.com" if your PostHog is hosted in Europe
 })
 ```

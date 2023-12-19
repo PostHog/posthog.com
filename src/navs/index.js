@@ -299,7 +299,7 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/product-design',
             },
             {
-                name: 'Logos and hedgehogs',
+                name: 'Logos, brand, hedgehogs',
                 url: '/handbook/company/brand-assets',
             },
             {
@@ -1325,6 +1325,10 @@ export const docsMenu = {
                         {
                             name: 'Team collaboration',
                             url: '/docs/data/team-collaboration',
+                        },
+                        {
+                            name: 'Timestamps',
+                            url: '/docs/data/timestamps',
                         },
                         {
                             name: 'User properties',
