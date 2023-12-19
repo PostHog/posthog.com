@@ -15,7 +15,7 @@ const AboutPage = () => {
             <SEO
                 title="About PostHog"
                 description="PostHog is building the world's first open source Product OS."
-                image={`/og-images/about.jpeg`}
+                image={`/images/about.png`}
             />
 
             <AboutHero />
