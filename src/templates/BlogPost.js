@@ -117,7 +117,7 @@ const Sidebar = ({ contributors, tableOfContents }) => {
 export default function BlogPost({ data, pageContext, location, mobile = false }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
+    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, tags, seo } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
@@ -172,8 +172,8 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
     return (
         <article className="@container">
             <SEO
-                title={title + ' - PostHog'}
-                description={description || excerpt}
+                title={seo?.metaTitle || title + ' - PostHog'}
+                description={seo?.metaDescription || excerpt}
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
@@ -225,6 +225,13 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
     )
 }
 
+export const SEOFragment = graphql`
+    fragment SEOFragment on FrontmatterSEO {
+        metaTitle
+        metaDescription
+    }
+`
+
 export const query = graphql`
     query BlogPostLayout($id: String!) {
         postData: mdx(id: { eq: $id }) {
@@ -262,6 +269,9 @@ export const query = graphql`
                     name
                     profile_id
                     role
+                }
+                seo {
+                    ...SEOFragment
                 }
             }
             parent {

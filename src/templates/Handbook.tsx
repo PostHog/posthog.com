@@ -196,18 +196,8 @@ export default function Handbook({
         frontmatter,
         fields: { slug, contributors, appConfig },
     } = post
-    const {
-        title,
-        hideAnchor,
-        description,
-        hideLastUpdated,
-        features,
-        github,
-        availability,
-        installUrl,
-        thumbnail,
-        related,
-    } = frontmatter
+    const { title, hideAnchor, hideLastUpdated, features, github, availability, installUrl, thumbnail, related, seo } =
+        frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
@@ -256,8 +246,8 @@ export default function Handbook({
     return (
         <>
             <SEO
-                title={`${title} - ${breadcrumbBase.name} - PostHog`}
-                description={description || excerpt}
+                title={seo?.metaTitle || `${title} - ${breadcrumbBase.name} - PostHog`}
+                description={seo?.metaDescription || excerpt}
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
             />
@@ -403,7 +393,6 @@ export const query = graphql`
             frontmatter {
                 title
                 hideAnchor
-                description
                 hideLastUpdated
                 github
                 isArticle
@@ -438,6 +427,9 @@ export const query = graphql`
                 installUrl
                 featuredImage {
                     publicURL
+                }
+                seo {
+                    ...SEOFragment
                 }
             }
             parent {
