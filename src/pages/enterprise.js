@@ -25,8 +25,8 @@ export default function Enterprise() {
                         </span>
                     ))}
                 </h1>
-                <h2 className={`${heading('subtitle', 'primary', 'mt-0 mb-6')} home-hero-subtitle`}>
-                    The analytics platform <span className="text-red dark:text-yellow">with all the awards</span>
+                <h2 className={`mt-2 mb-6 text-xl font-semibold text-center home-hero-subtitle`}>
+                    The same great product - <span className="text-red dark:text-yellow">just with all the awards</span>
                 </h2>
                 <div className="flex justify-center items-center gap-2 home-hero-cta mb-16">
                     <SignupCTA />
