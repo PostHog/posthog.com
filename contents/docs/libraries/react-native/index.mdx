@@ -207,9 +207,11 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
 
-For iOS, the new React Native SDK will attempt to migrate the previously persisted data which should result in no unexpected changes to tracked data.
+For iOS, the new React Native SDK will attempt to migrate the previously persisted data (such as `distinctId` and `anonymousId`) which should result in no unexpected changes to tracked data.
 
 For Android, it is unfortunately not possible for persisted Android data to be loaded which means stored information such as the randomly generated `anonymousId` or the `distinctId` set by `posthog.identify` will not be present. For identified users, the simple workaround is to ensure that `identify` is called at least once when the app loads. For anonymous users there is unfortunately no straightforward workaround they will show up as new anonymous users in PostHog.
+
+Events such as `Application Installed` and `Application Updated` that require previously persisted data were unable to be migrated, the side effect being that you may see much higher numbers for `Application Installed` events. This is due to the fact that there is no native way of detecting a real "install" and as such, we store a marker the first time the SDK loads and treat that as an install.
 
 ```jsx
 // DEPRECATED V1 Setup
