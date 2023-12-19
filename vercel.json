@@ -624,7 +624,6 @@
         { "source": "/blog/introduction-to-customer-retention", "destination": "/blog/customer-churn-analysis-guide" },
         { "source": "/docs/getting-started/cloud", "destination": "/docs/getting-started/start-here" },
         { "source": "/docs/integrate/ingest-live-data", "destination": "/docs/getting-started/send-events" },
-        { "source": "/enterprise", "destination": "/contact-sales?edition=enterprise" },
         { "source": "/docs/self-host/open-source/deployment", "destination": "/docs/self-host" },
         { "source": "/docs/integrate/android", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrate/api", "destination": "/docs/libraries/api" },
