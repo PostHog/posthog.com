@@ -13,7 +13,7 @@ const heroTitle = 'PostHog for enterprise'
 export default function Enterprise() {
     return (
         <Layout>
-            <SEO title="PostHog for Enterprise" />
+            <SEO title="PostHog for enterprise" />
             <div className={section('z-10 relative md:!mb-8')}>
                 <h1 className={`${heading()} overflow-hidden pb-1 home-hero-title`}>
                     {heroTitle.split(' ').map((word, index) => (
