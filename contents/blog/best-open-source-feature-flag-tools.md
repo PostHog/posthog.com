@@ -36,7 +36,7 @@ In this guide, we’ll explore some of the best open source feature flag tools, 
 
 ## 1. PostHog
 
-![PostHog](../images/blog/open-source-feature-flags/posthog-feature-flags.png)
+![PostHog](../images/posthog-interface/feature-flags.png)
 
 - **License:** MIT
 - **GitHub stars:** 13.3k
