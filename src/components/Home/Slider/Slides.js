@@ -65,7 +65,7 @@ const ContentContainer = ({ children, className = '' }) => {
 }
 
 const Content = ({ children, className = '' }) => {
-    return <div className={`relative z-10 mx-2 md:px-4 xl:px-8 py-4 ${className}`}>{children}</div>
+    return <div className={`@container relative z-10 mx-2 w-full md:px-4 2xl:px-8 py-4 ${className}`}>{children}</div>
 }
 
 const ImageContainer = ({ children, className = '' }) => {
@@ -99,7 +99,7 @@ export const ProductAnalytics = () => {
         placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
-        className: 'w-full md:max-w-[753px] md:shadow-2xl md:-rotate-1',
+        className: 'w-full -mb-2 md:max-w-[753px] md:shadow-2xl md:-rotate-1',
     }
     const features = [
         { title: 'Funnels', Icon: IconFunnels },
@@ -110,65 +110,67 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: IconRetention },
     ]
     return (
-        <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-center">
-            <div className="relative md:grid grid-cols-16 md:gap-8 w-full">
-                <ImageContainer className="md:pl-8 col-span-10">
-                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-0 md:-mb-2">
-                        <div className="block dark:hidden">
-                            <StaticImage
-                                {...imageProps}
-                                src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
-                                className={`${imageProps.className}`}
-                            />
+        <div className="overflow-hidden flex items-end border border-dashed border-red">
+            <div className="md:bg-[#1371FF] rounded-tl-md rounded-tr-md md:text-white flex items-center mt-4 w-full">
+                <div className="relative md:grid grid-cols-16 md:gap-2 w-full">
+                    <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
+                        <div className="pl-4 h-full flex justify-center items-center xl:items-start">
+                            <div className="block dark:hidden">
+                                <StaticImage
+                                    {...imageProps}
+                                    src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
+                                    className={`${imageProps.className}`}
+                                />
+                            </div>
+                            <div className="hidden dark:block">
+                                <StaticImage
+                                    {...imageProps}
+                                    className={`${imageProps.className}`}
+                                    src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
+                                />
+                            </div>
                         </div>
-                        <div className="hidden dark:block">
-                            <StaticImage
-                                {...imageProps}
-                                className={`${imageProps.className}`}
-                                src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
-                            />
+                        <div className="absolute -bottom-2 right-0 md:hidden">
+                            <div>
+                                <StaticImage
+                                    loading="eager"
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
+                                    src="./images/product-analytics-hog.png"
+                                    alt=""
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="absolute -bottom-2 right-0 md:hidden">
-                        <div>
-                            <StaticImage
-                                loading="eager"
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/product-analytics-hog.png"
-                                alt=""
-                            />
+                    </ImageContainer>
+                    <ContentContainer className="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6">
+                        <Content className="mdlg:pb-12 lg:pb-16 xl:pb-28">
+                            <Title title={'Product analytics'} />
+                            <FeatureList features={features} className="@[240px]:grid grid-cols-2" />
+                            <CallToAction
+                                href="/product-analytics"
+                                type="custom"
+                                size="md"
+                                className="md:!w-auto !w-full"
+                                childClassName="!bg-[#1371FF]"
+                            >
+                                Explore
+                            </CallToAction>
+                        </Content>
+                        <div className="hidden md:block absolute right-0 bottom-0">
+                            <div>
+                                <StaticImage
+                                    loading="eager"
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
+                                    src="./images/product-analytics-hog.png"
+                                    alt=""
+                                />
+                            </div>
                         </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="col-span-6">
-                    <Content>
-                        <Title title={'Product analytics'} />
-                        <FeatureList features={features} className="grid grid-cols-2" />
-                        <CallToAction
-                            href="/product-analytics"
-                            type="custom"
-                            size="md"
-                            className="md:!w-auto !w-full"
-                            childClassName="!bg-[#1371FF]"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute -bottom-8 lg:-bottom-12 right-0 hidden md:block">
-                        <div>
-                            <StaticImage
-                                loading="eager"
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/product-analytics-hog.png"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
+                    </ContentContainer>
+                </div>
             </div>
         </div>
     )

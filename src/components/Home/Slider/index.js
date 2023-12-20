@@ -92,7 +92,7 @@ const SlideContainer = ({ children, index, setActiveSlide }) => {
     }, [inView])
 
     return (
-        <div id={`home-slide-${index}`} key={index} className="pt-8 flex-shrink-0 w-full snap-center h-[inherit]">
+        <div id={`home-slide-${index}`} key={index} className="flex-shrink-0 w-full snap-center h-[inherit]">
             <span className="inline-block h-full w-full" ref={viewRef}>
                 {children}
             </span>
