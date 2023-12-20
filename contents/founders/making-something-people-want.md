@@ -70,7 +70,7 @@ Tim (my cofounder and our CTO) dealt with existing users by shipping stuff.
 
 As soon as we had decided to build PostHog, our next phase was to see if anyone would use it.
 
-Before launching on HN, we focused on this loop:
+Before launching on HN, we focused on this [growth loop](/product-engineers/growth-loops):
 
 ### 1. Find someone who is interested in what we are working on
 

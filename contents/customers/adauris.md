@@ -60,5 +60,5 @@ One example of how Adauris tailors the onboarding flow is by limiting which feat
 
 “We’ve been running these sorts of experiments for a couple of months,” says Varun. “We’ve already increased the number of visits to our landing pages by over 500%, widening the top of our funnel dramatically.” 
 
-“A lot of the ideas come from insights we collect in PostHog, and naturally we track success there too — so it becomes a self-fulfilling loop. The results end up deployed everywhere across the web, wherever our audio player is installed!”
+“A lot of the ideas come from insights we collect in PostHog, and naturally we track success there too — so it becomes [a self-fulfilling loop](/product-engineers/growth-loops). The results end up deployed everywhere across the web, wherever our audio player is installed!”
 
