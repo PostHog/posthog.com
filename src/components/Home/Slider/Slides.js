@@ -271,7 +271,7 @@ export const WebAnalytics = () => {
             description="Enable aggregate website analytics with one click if you're already using PostHog."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
-            imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-10"
+            imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-10 lg:pl-4"
             imageClasses="px-4 mdlg:px-0 -mb-3"
             contentColumn="mdlg:col-span-7 lg:col-span-6 xl:col-span-6"
             Images={() => {
@@ -386,12 +386,12 @@ export const SessionReplay = () => {
                     loading="eager"
                     placeholder="none"
                     quality={100}
-                    className="w-full max-w-[180px] 2xl:max-w-[203px]"
+                    className="w-full max-w-[180px] xl:max-w-[220px] 2xl:max-w-[275px]"
                     src="./images/session-recording-hog.png"
                     alt="A hedgehog watching a session recording"
                 />
             )}
-            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-4"
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:px-8 xl:pb-4"
             buttonLabel="Explore"
             buttonUrl="/session-replay"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
@@ -423,84 +423,80 @@ export const FeatureFlags = () => {
         { title: 'Instant rollbacks', Icon: IconRewind },
     ]
     return (
-        <div className=" md:bg-[#29DBBB] rounded-md text-primary flex items-end">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="md:absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
-                        <div className="block dark:hidden">
-                            <StaticImage
-                                {...image1Props}
-                                src="../../../../contents/images/products/feature-flags/feature-flags-1-light.png"
-                                className={`${image1Props.className}`}
-                            />
+        <Slide
+            bgColor="[#29DBBB]"
+            textColor="primary"
+            title="Feature flags"
+            description="Safely roll out features to select users or cohorts."
+            features={features}
+            featureListClasses="sm:grid grid-cols-2 mdlg:flex"
+            imageColumn="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
+            imageClasses="px-4 mdlg:px-0 -mb-1.5"
+            contentColumn="md:col-span-7 lg:col-span-6"
+            Images={() => {
+                return (
+                    <>
+                        <div className="md:absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
+                            <div className="block dark:hidden">
+                                <StaticImage
+                                    {...image1Props}
+                                    src="../../../../contents/images/products/feature-flags/feature-flags-1-light.png"
+                                    className={`${image1Props.className}`}
+                                />
+                            </div>
+                            <div className="hidden dark:block">
+                                <StaticImage
+                                    {...image1Props}
+                                    className={`${image1Props.className}`}
+                                    src="../../../../contents/images/products/feature-flags/feature-flags-1-dark.png"
+                                />
+                            </div>
                         </div>
-                        <div className="hidden dark:block">
-                            <StaticImage
-                                {...image1Props}
-                                className={`${image1Props.className}`}
-                                src="../../../../contents/images/products/feature-flags/feature-flags-1-dark.png"
-                            />
+                        <div className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5">
+                            <div className="block dark:hidden">
+                                <StaticImage
+                                    {...image2Props}
+                                    src="../../../../contents/images/products/feature-flags/feature-flags-2-light.png"
+                                    className={`${image2Props.className}`}
+                                />
+                            </div>
+                            <div className="hidden dark:block">
+                                <StaticImage
+                                    {...image2Props}
+                                    className={`${image2Props.className} `}
+                                    src="../../../../contents/images/products/feature-flags/feature-flags-2-dark.png"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5">
-                        <div className="block dark:hidden">
-                            <StaticImage
-                                {...image2Props}
-                                src="../../../../contents/images/products/feature-flags/feature-flags-2-light.png"
-                                className={`${image2Props.className}`}
-                            />
-                        </div>
-                        <div className="hidden dark:block">
-                            <StaticImage
-                                {...image2Props}
-                                className={`${image2Props.className} `}
-                                src="../../../../contents/images/products/feature-flags/feature-flags-2-dark.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="absolute bottom-0 right-0 md:hidden z-10">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/feature-flags-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Feature flags'} />
-                        <Subtitle className="text-[14px] md:text-[18px]" />
-                        <Description description="Safely roll out features to select users or cohorts." />
-                        <FeatureList features={features} className="" />
-
-                        <CallToAction
-                            href="/feature-flags"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                            childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-0 md:block hidden">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/feature-flags-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
-            </div>
-        </div>
+                    </>
+                )
+            }}
+            HogMobile={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                    src="./images/feature-flags-hog.png"
+                    alt="A hedgehog toggling a feature flag"
+                />
+            )}
+            HogDesktop={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                    src="./images/feature-flags-hog.png"
+                    alt="A hedgehog toggling a feature flag"
+                />
+            )}
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:px-8 xl:pb-4"
+            buttonLabel="Explore"
+            buttonUrl="/feature-flags"
+            buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+            buttonChildClasses="!bg-[#29DBBB] border-black !text-black group-hover:text-black"
+        />
     )
 }
 
@@ -528,84 +524,80 @@ export const ABTesting = () => {
     ]
 
     return (
-        <div className="md:bg-[#9C19BD] rounded-md text-white flex items-end">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px] ">
-                    <div className="absolute left-2 top-5 w-[150%] md:w-3/4">
-                        <div className="block dark:hidden">
-                            <StaticImage
-                                {...image1Props}
-                                src="../../../../contents/images/products/ab-testing/ab-testing-1-light.png"
-                                className={`${image1Props.className} block dark:hidden`}
-                            />
+        <Slide
+            bgColor="[#9C19BD]"
+            textColor="primary-dark"
+            title="A/B testing"
+            description="Run experiments with statistical significance."
+            features={features}
+            featureListClasses="sm:grid grid-cols-2 mdlg:flex"
+            imageColumn="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
+            imageClasses="px-4 mdlg:px-0 -mb-3"
+            contentColumn="md:col-span-7 lg:col-span-6"
+            Images={() => {
+                return (
+                    <>
+                        <div className="absolute left-2 top-5 w-[150%] md:w-3/4">
+                            <div className="block dark:hidden">
+                                <StaticImage
+                                    {...image1Props}
+                                    src="../../../../contents/images/products/ab-testing/ab-testing-1-light.png"
+                                    className={`${image1Props.className} block dark:hidden`}
+                                />
+                            </div>
+                            <div className="hidden dark:block">
+                                <StaticImage
+                                    {...image1Props}
+                                    className={`${image1Props.className}`}
+                                    src="../../../../contents/images/products/ab-testing/ab-testing-1-dark.png"
+                                />
+                            </div>
                         </div>
-                        <div className="hidden dark:block">
-                            <StaticImage
-                                {...image1Props}
-                                className={`${image1Props.className}`}
-                                src="../../../../contents/images/products/ab-testing/ab-testing-1-dark.png"
-                            />
+                        <div className="absolute -right-16 -top-3 w-[100%] md:w-3/4">
+                            <div className="block dark:hidden">
+                                <StaticImage
+                                    {...image2Props}
+                                    src="../../../../contents/images/products/ab-testing/ab-testing-2-light.png"
+                                    className={`${image2Props.className} `}
+                                />
+                            </div>
+                            <div className="hidden dark:block">
+                                <StaticImage
+                                    {...image2Props}
+                                    className={`${image2Props.className} `}
+                                    src="../../../../contents/images/products/ab-testing/ab-testing-2-dark.png"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="absolute -right-16 -top-3 w-[100%] md:w-3/4">
-                        <div className="block dark:hidden">
-                            <StaticImage
-                                {...image2Props}
-                                src="../../../../contents/images/products/ab-testing/ab-testing-2-light.png"
-                                className={`${image2Props.className} `}
-                            />
-                        </div>
-                        <div className="hidden dark:block">
-                            <StaticImage
-                                {...image2Props}
-                                className={`${image2Props.className} `}
-                                src="../../../../contents/images/products/ab-testing/ab-testing-2-dark.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="absolute bottom-0 right-0 md:hidden">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
-                                src="./images/experiment-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'A/B testing'} />
-                        <Description description={'Run tests with statistical significance.'} />
-                        <FeatureList features={features} />
-
-                        <CallToAction
-                            href="/ab-testing"
-                            type="custom"
-                            size="md"
-                            className="md:!w-auto !w-full"
-                            childClassName="!bg-[#9C19BD]
-                    "
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-0 hidden md:block">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
-                                src="./images/experiment-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
-            </div>
-        </div>
+                    </>
+                )
+            }}
+            HogMobile={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
+                    src="./images/experiment-hog.png"
+                    alt="A hedgehog running an experiment"
+                />
+            )}
+            HogDesktop={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
+                    src="./images/experiment-hog.png"
+                    alt="A hedgehog running an experiment"
+                />
+            )}
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
+            buttonLabel="Read the docs"
+            buttonUrl="/docs/web-analytics"
+            buttonClasses="md:!w-auto !w-full"
+            buttonChildClasses="!bg-[#9C19BD]"
+        />
     )
 }
 
