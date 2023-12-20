@@ -11,7 +11,7 @@ type Props = {
 export default function Breadcrumbs({ category, tags }: Props): JSX.Element {
     const hasTags = tags && tags.length > 0
     return (
-        <ul className="m-0 p-0 !mb-1 flex space-x-2 list-none items-center whitespace-nowrap">
+        <ul className="m-0 p-0 !mb-2 flex space-x-2 list-none items-center whitespace-nowrap">
             <li className={`after:content-['→'] after:ml-2`}>
                 <Link className="text-base" to={`https://posthog.com/posts`}>
                     Posts
