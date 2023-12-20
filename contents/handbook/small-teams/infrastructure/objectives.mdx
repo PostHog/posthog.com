@@ -1,22 +1,24 @@
-## Q4 2023 Goals
+## Q1 2024 Goals
 
-1. Continued maintenance of systems
-  - Int -> bigint on postgres EU
-  - EKS 1.28+
+### 💪 Deploy with confidence
+Our deploy speed keeps us moving fast but bigger changes would benefit from better tooling to gradually roll out, validate and roll back if necessary.
+- Auto rollbacks with orchestration / blocking new deploys
+- Canary deployments
+- Load testing
+- Investigate something like envoy perhaps to enable traffic shadowing + canary deploys
+- Finish helm charts work
+- Anomaly detection
 
-2. Controlling costs
-  - Reduce cross AZ traffic
-  - Rust capture
+### 💰 Keep costs under control
+- Keep on top of the great work so far to keep costs under control
+- Tackle remaining clear improvements (Cloudfront costs, reserved instances etc.)
+- Kafka ops work including tiered storage
 
-3. Platform improvements
-  - Better kafka ops 
-  - Try confluent/redpanda/whatever instead of MSK
-  - Figure out how to hotswap clusters quickly if required
-  - Write a guide to take a full stack engineer to confidently make the first debugging steps themselves
-  - Provide a logging + tracing system that engineers want to use
-  - A deploy workflow that every engineer can use
-  - Easy dev deploys
-  - Easy rollbacks using Github Actions
-	
-4. Clickhouse changes	
-  - Migrate to Clickhouse cloud
+### 👀 Yet more Observability  
+- CI/CD times (measuring it to know where the pain points are)
+- Cost of resources per product 
+- Get tracing solution firmly into the hands and minds of teams
+
+### 🎯 Security as a feature
+- Investigate pragmatic parts of SOC 2 type II we could already be moving towards
+
