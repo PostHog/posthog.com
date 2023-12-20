@@ -34,7 +34,7 @@ import { CallToAction } from 'components/CallToAction'
 const Title = ({ title, label }) => {
     return (
         <>
-            <h3 className="text-lg lg:text-3xl mb-1 md:block hidden">
+            <h3 className="text-lg lg:text-3xl mb-1 mdlg:block hidden">
                 {title}
                 {label && (
                     <span className="ml-1 relative -top-0.5 text-sm text-primary/60 dark:text-primary/60 font-semibold leading-tight border border-dark dark:border-dark px-1 py-0.5 rounded-sm uppercase">
@@ -57,7 +57,7 @@ const Description = ({ description, className = '' }) => {
 const ContentContainer = ({ children, className = '' }) => {
     return (
         <div
-            className={`md:flex items-center order-1 md:order-2 md:p-0 p-3 bg-accent md:bg-transparent dark:bg-accent-dark md:dark:bg-transparent z-10 relative text-black dark:text-white md:text-inherit dark:md:text-inherit ${className}`}
+            className={`md:border border-t-0 border-light dark:border-dark mdlg:border-0 mdlg:flex items-center order-1 mdlg:order-2 mdlg:p-0 p-3 bg-accent mdlg:bg-transparent dark:bg-accent-dark mdlg:dark:bg-transparent z-10 relative text-black dark:text-white mdlg:text-inherit dark:mdlg:text-inherit ${className}`}
         >
             {children}
         </div>
@@ -65,21 +65,21 @@ const ContentContainer = ({ children, className = '' }) => {
 }
 
 const Content = ({ children, className = '' }) => {
-    return <div className={`@container relative z-10 mx-2 w-full md:px-4 2xl:px-8 py-4 ${className}`}>{children}</div>
+    return <div className={`@container relative z-10 mx-2 w-full mdlg:px-4 2xl:px-8 py-4 ${className}`}>{children}</div>
 }
 
 const ImageContainer = ({ children, className = '' }) => {
-    return <div className={`relative order-2 md:order-1 ${className}`}>{children}</div>
+    return <div className={`relative order-2 mdlg:order-1 ${className}`}>{children}</div>
 }
 
 const FeatureList = ({ features, className = '' }) => {
     return (
-        <ul className={`list-none m-0 p-0 flex flex-col gap-4 md:gap-1 lg:gap-2 lg:mt-2 pt-2 pb-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 flex flex-col gap-4 mdlg:gap-1 lg:gap-2 lg:mt-2 mdlg:pt-2 pb-4 ${className}`}>
             {features.map(({ title, Icon }) => {
                 return (
                     <li
                         key={title}
-                        className="flex gap-2 items-start md:items-center text-base md:text-sm xl:text-[15px]"
+                        className="flex gap-2 items-start mdlg:items-center text-base mdlg:text-sm xl:text-[15px]"
                     >
                         <span className="inline-flex p-1 rounded-sm bg-dark/10 dark:bg-white/10">
                             <Icon className="w-4 mdlg:w-6" />
@@ -99,7 +99,7 @@ export const ProductAnalytics = () => {
         placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
-        className: 'w-full -mb-2 md:max-w-[753px] md:shadow-2xl md:-rotate-1',
+        className: 'w-full -mb-2 mdlg:max-w-[753px] mdlg:shadow-2xl mdlg:-rotate-1',
     }
     const features = [
         { title: 'Funnels', Icon: IconFunnels },
@@ -110,11 +110,11 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: IconRetention },
     ]
     return (
-        <div className="overflow-hidden flex items-end border border-dashed border-red">
-            <div className="md:bg-[#1371FF] rounded-tl-md rounded-tr-md md:text-white flex items-center mt-4 w-full">
-                <div className="relative md:grid grid-cols-16 md:gap-2 w-full">
+        <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0 -border border-dashed border-red">
+            <div className="bg-[#1371FF] md:rounded-tl-md md:rounded-tr-md mdlg:text-white flex items-center pt-4 mdlg:mt-4 w-full">
+                <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
                     <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
-                        <div className="pl-4 h-full flex justify-center items-center xl:items-start">
+                        <div className="px-4 mdlg:pr-0 h-full flex justify-center items-center xl:items-start">
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...imageProps}
@@ -130,7 +130,7 @@ export const ProductAnalytics = () => {
                                 />
                             </div>
                         </div>
-                        <div className="absolute -bottom-2 right-0 md:hidden">
+                        <div className="absolute -bottom-2 right-0 mdlg:hidden">
                             <div>
                                 <StaticImage
                                     loading="eager"
@@ -151,13 +151,13 @@ export const ProductAnalytics = () => {
                                 href="/product-analytics"
                                 type="custom"
                                 size="md"
-                                className="md:!w-auto !w-full"
+                                className="mdlg:!w-auto !w-full"
                                 childClassName="!bg-[#1371FF]"
                             >
                                 Explore
                             </CallToAction>
                         </Content>
-                        <div className="hidden md:block absolute right-0 bottom-0">
+                        <div className="hidden mdlg:block absolute right-0 bottom-0">
                             <div>
                                 <StaticImage
                                     loading="eager"

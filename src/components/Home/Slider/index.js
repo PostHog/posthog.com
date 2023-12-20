@@ -114,7 +114,7 @@ export default function Slider() {
 
     return (
         <div className="-mt-8 md:mt-0 hidden md:block">
-            <div className="hidden md:block px-8 lg:px-0">
+            <div className="hidden md:block px-4 mdlg:px-8 lg:px-0">
                 <ul className="m-0 grid grid-cols-8 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
                     {slideButtons.map((slide, index) => {
                         return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
@@ -122,10 +122,10 @@ export default function Slider() {
                 </ul>
             </div>
             <div className="flex items-center max-w-screen-2xl mx-auto">
-                <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center  lg:static">
+                <div className="shrink-0 basis-[40px] mdlg:basis-[50px] hidden md:flex justify-center items-center  lg:static">
                     <button
                         onClick={() => handleArrow(activeSlide - 1, slides.length - 1)}
-                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-6"
+                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-4 mdlg:p-6"
                     >
                         <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-r-3 hover:border-light dark:hover:border-dark" />
                     </button>
@@ -137,10 +137,10 @@ export default function Slider() {
                         </SlideContainer>
                     ))}
                 </div>
-                <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center lg:static">
+                <div className="shrink-0  basis-[40px] mdlg:basis-[50px] hidden md:flex justify-center items-center lg:static">
                     <button
                         onClick={() => handleArrow(activeSlide + 1, 0)}
-                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-6 box-border"
+                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-4 mdlg:p-6 box-border"
                     >
                         <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-l-3 hover:border-light dark:hover:border-dark" />
                     </button>
