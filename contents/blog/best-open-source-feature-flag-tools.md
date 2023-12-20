@@ -29,6 +29,8 @@ While it's tempting to [build your own tools](/blog/feature-flags-as-a-service),
 
 ![PostHog](../images/posthog-interface/feature-flags.png)
 
+![PostHog](../images/posthog-interface/feature-flags.png)
+
 - **License:** MIT
 - **GitHub stars:** 14.8k
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
