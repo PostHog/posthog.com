@@ -42,6 +42,8 @@ const Slide = ({
     title,
     description,
     additionalText,
+    flag,
+    flagColor,
     features,
     featureListClasses,
     featureIconBackground,
@@ -77,6 +79,15 @@ const Slide = ({
                     </ImageContainer>
                     <ContentContainer className={contentColumn}>
                         <Content className={contentOffset}>
+                            {flag && (
+                                <div className="absolute -right-2 top-1 font-semibold bg-yellow text-white uppercase text-sm">
+                                    <div
+                                        className={`relative pl-3 pr-4 py-1 before:w-0 before:h-0 before:content-[''] before:border-[1rem] before:border-l-transparent before:border-r-transparent before:border-b-transparent before:border-${flagColor} before:absolute before:top-0 before:-left-4 after:w-0 after:h-0 after:content-[''] after:border-[1rem] after:border-l-transparent after:border-r-transparent after:border-t-transparent after:border-${flagColor} after:absolute after:bottom-0 after:-left-4`}
+                                    >
+                                        {flag}
+                                    </div>
+                                </div>
+                            )}
                             <Title title={title} />
                             {description && <Description description={description} />}
                             {additionalText && <>{additionalText}</>}
@@ -268,6 +279,8 @@ export const WebAnalytics = () => {
             bgColor="lime-green"
             textColor="primary"
             title="Web analytics"
+            flag="Beta"
+            flagColor="yellow"
             description="Enable aggregate website analytics with one click if you're already using PostHog."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
