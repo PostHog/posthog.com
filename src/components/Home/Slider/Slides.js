@@ -43,11 +43,14 @@ const Slide = ({
     description,
     features,
     featureListClasses,
+    imageColumn,
+    contentColumn,
     imageProps,
     imageClasses,
     HogMobile,
     HogDesktop,
     hogAlt,
+    contentOffset,
     buttonLabel,
     buttonUrl,
     buttonClasses,
@@ -57,12 +60,12 @@ const Slide = ({
     Images,
 }) => {
     return (
-        <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0">
+        <div className="overflow-hidden flex items-end mdlg:mt-0">
             <div
                 className={`bg-${bgColor} ${textColor} md:rounded-tl-md md:rounded-tr-md mdlg:${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full`}
             >
                 <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
-                    <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
+                    <ImageContainer className={imageColumn}>
                         <div
                             className={`px-4 mdlg:pr-0 h-full flex justify-center items-center xl:items-start ${imageClasses}`}
                         >
@@ -72,8 +75,8 @@ const Slide = ({
                             <div>{HogMobile && <HogMobile />}</div>
                         </div>
                     </ImageContainer>
-                    <ContentContainer className="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6">
-                        <Content className="mdlg:pb-6 lg:pb-8 xl:pb-20 2xl:pb-16">
+                    <ContentContainer className={contentColumn}>
+                        <Content className={contentOffset}>
                             <Title title={title} />
                             {description && <Description description={description} />}
                             <FeatureList features={features} className={featureListClasses} />
@@ -117,7 +120,7 @@ const Subtitle = ({ subtitle, className = '' }) => {
 }
 
 const Description = ({ description, className = '' }) => {
-    return <p className={`text-sm lg:text-base opacity-70 !leading-5 mb-1 ${className}`}>{description}</p>
+    return <p className={`text-sm lg:text-base opacity-70 !leading-5 mb-4 mdlg:mb-1 ${className}`}>{description}</p>
 }
 
 const ContentContainer = ({ children, className = '' }) => {
@@ -131,7 +134,11 @@ const ContentContainer = ({ children, className = '' }) => {
 }
 
 const Content = ({ children, className = '' }) => {
-    return <div className={`@container relative z-10 mx-2 w-full mdlg:px-4 2xl:px-8 py-4 ${className}`}>{children}</div>
+    return (
+        <div className={`@container relative z-10 mx-2 w-full mdlg:px-4 2xl:px-8 pt-2 mdlg:pt-4 pb-4 ${className}`}>
+            {children}
+        </div>
+    )
 }
 
 const ImageContainer = ({ children, className = '' }) => {
@@ -183,6 +190,8 @@ export const ProductAnalytics = () => {
             title="Product analytics"
             features={features}
             featureListClasses="@[240px]:grid grid-cols-2"
+            imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10"
+            contentColumn="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6"
             Images={() => {
                 return (
                     <>
@@ -225,6 +234,7 @@ export const ProductAnalytics = () => {
                     alt="A hedgehog looking at product analytics"
                 />
             )}
+            contentOffset="mdlg:pb-6 lg:pb-8 xl:pb-20 2xl:pb-16"
             buttonLabel="Explore"
             buttonUrl="/product-analytics"
             buttonClasses="mdlg:!w-auto !w-full"
@@ -255,6 +265,9 @@ export const WebAnalytics = () => {
             title="Web analytics"
             description="Enable aggregate website analytics with one click if you're already using PostHog."
             features={features}
+            featureListClasses="sm:grid grid-cols-2 mdlg:flex"
+            imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-10"
+            contentColumn="mdlg:col-span-7 lg:col-span-6 xl:col-span-6"
             Images={() => {
                 return (
                     <>
@@ -275,7 +288,7 @@ export const WebAnalytics = () => {
                     </>
                 )
             }}
-            imageClasses="-mb-2"
+            imageClasses="-mb-3"
             HogMobile={() => (
                 <StaticImage
                     loading="eager"
@@ -296,6 +309,7 @@ export const WebAnalytics = () => {
                     alt="A hedgehog looking at product analytics"
                 />
             )}
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Read the docs"
             buttonUrl="/docs/web-analytics"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
