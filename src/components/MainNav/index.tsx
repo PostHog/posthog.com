@@ -3,7 +3,16 @@ import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
 import { useSearch } from 'components/Search/SearchContext'
-import { IconApp, IconBrightness, IconChat, IconChevronDown, IconSearch, IconTextWidth, IconUser } from '@posthog/icons'
+import {
+    IconApp,
+    IconBrightness,
+    IconChat,
+    IconChevronDown,
+    IconSearch,
+    IconTextWidth,
+    IconUser,
+    IconTie,
+} from '@posthog/icons'
 import { Placement } from '@popperjs/core'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
@@ -422,7 +431,7 @@ export const Main = () => {
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
                                             >
                                                 <div>
-                                                    <span className="mr-2 w-6 inline-block">🤑</span>
+                                                    <IconTie className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                     <span>Enterprise mode</span>
                                                 </div>
                                                 <Toggle checked={enterpriseMode} />
