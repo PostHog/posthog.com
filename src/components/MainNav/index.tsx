@@ -363,7 +363,16 @@ export const Main = () => {
     const { user } = useUser()
 
     const { open } = useSearch()
-    const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
+    const {
+        menu,
+        parent,
+        internalMenu,
+        activeInternalMenu,
+        fullWidthContent,
+        setFullWidthContent,
+        enterpriseMode,
+        setEnterpriseMode,
+    } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
     const { setWebsiteTheme } = useActions(layoutLogic)
@@ -535,6 +544,18 @@ export const Main = () => {
                                             </button>
                                         </li>
                                         <Orders />
+                                        <li className="px-1">
+                                            <button
+                                                onClick={() => setEnterpriseMode(!enterpriseMode)}
+                                                className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
+                                            >
+                                                <div>
+                                                    <span className="mr-2 w-6 inline-block">🤑</span>
+                                                    <span>Enterprise mode</span>
+                                                </div>
+                                                <Toggle checked={enterpriseMode} />
+                                            </button>
+                                        </li>
                                     </ul>
                                 )
                             }}
