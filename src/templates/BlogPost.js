@@ -21,6 +21,7 @@ import LikeButton from 'components/Edition/LikeButton'
 import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import qs from 'qs'
+import Breadcrumbs from 'components/Edition/Breadcrumbs'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -110,17 +111,14 @@ const ContributorsSmall = ({ contributors }) => {
     ) : null
 }
 
-const Sidebar = ({ contributors, tableOfContents }) => {
-    return <></>
-}
-
 export default function BlogPost({ data, pageContext, location, mobile = false }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
+    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
+    const category = postData?.parent?.category
     const components = {
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),
@@ -185,6 +183,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             fullWidthContent ? 'max-w-full' : 'max-w-3xl'
                         }  md:px-8 2xl:px-12`}
                     >
+                        <Breadcrumbs category={category} tags={tags} />
                         <Intro
                             title={title}
                             featuredImage={featuredImage}
@@ -267,6 +266,7 @@ export const query = graphql`
             parent {
                 ... on File {
                     relativePath
+                    category
                     fields {
                         gitLogLatestDate(formatString: "MMM DD, YYYY")
                     }
