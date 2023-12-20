@@ -111,7 +111,7 @@ export const ProductAnalytics = () => {
     ]
     return (
         <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0 -border border-dashed border-red">
-            <div className="bg-[#1371FF] md:rounded-tl-md md:rounded-tr-md mdlg:text-white flex items-center pt-4 mdlg:mt-4 w-full">
+            <div className="bg-[#1371FF] md:rounded-tl-md md:rounded-tr-md mdlg:text-white flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full">
                 <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
                     <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
                         <div className="px-4 mdlg:pr-0 h-full flex justify-center items-center xl:items-start">

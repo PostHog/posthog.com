@@ -114,7 +114,7 @@ export default function Slider() {
 
     return (
         <div className="-mt-8 md:mt-0 hidden md:block">
-            <div className="hidden md:block px-4 mdlg:px-8 lg:px-0">
+            <div className="hidden md:block px-4 mdlg:px-8 lg:px-4 xl:px-0">
                 <ul className="m-0 grid grid-cols-8 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
                     {slideButtons.map((slide, index) => {
                         return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
