@@ -79,6 +79,7 @@ module.exports = {
             seagreen: '#30ABC6',
             salmon: '#F35454',
             green: '#6AA84F',
+            'light-blue': '#54B6FF',
 
             white: '#fff',
             black: '#000',

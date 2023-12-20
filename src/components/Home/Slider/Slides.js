@@ -41,8 +41,10 @@ const Slide = ({
     textColor,
     title,
     description,
+    additionalText,
     features,
     featureListClasses,
+    featureIconBackground,
     imageColumn,
     contentColumn,
     imageProps,
@@ -60,9 +62,9 @@ const Slide = ({
     Images,
 }) => {
     return (
-        <div className="overflow-hidden flex items-end mdlg:mt-0">
+        <div className="overflow-hidden flex items-end md:mt-3 mb-2 md:mb-6 mdlg:my-0">
             <div
-                className={`bg-${bgColor} ${textColor} md:rounded-tl-md md:rounded-tr-md mdlg:${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full`}
+                className={`bg-${bgColor} text-${textColor} md:rounded-tl-md md:rounded-tr-md mdlg:text-${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full`}
             >
                 <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
                     <ImageContainer className={imageColumn}>
@@ -79,7 +81,12 @@ const Slide = ({
                         <Content className={contentOffset}>
                             <Title title={title} />
                             {description && <Description description={description} />}
-                            <FeatureList features={features} className={featureListClasses} />
+                            {additionalText && <>{additionalText}</>}
+                            <FeatureList
+                                features={features}
+                                className={featureListClasses}
+                                featureIconBackground={textColor}
+                            />
                             <CallToAction
                                 href={buttonUrl}
                                 type="custom"
@@ -90,7 +97,7 @@ const Slide = ({
                                 {buttonLabel}
                             </CallToAction>
                         </Content>
-                        <div className="hidden mdlg:block absolute right-0 bottom-0">
+                        <div className="hidden mdlg:block absolute right-1 bottom-0">
                             <div>{HogDesktop && <HogDesktop />}</div>
                         </div>
                     </ContentContainer>
@@ -135,7 +142,7 @@ const ContentContainer = ({ children, className = '' }) => {
 
 const Content = ({ children, className = '' }) => {
     return (
-        <div className={`@container relative z-10 mx-2 w-full mdlg:px-4 2xl:px-8 pt-2 mdlg:pt-4 pb-4 ${className}`}>
+        <div className={`@container relative z-10 mx-2 w-full mdlg:px-4 2xl:px-8 pt-2 mdlg:pt-4 md:pb-4 ${className}`}>
             {children}
         </div>
     )
@@ -145,7 +152,7 @@ const ImageContainer = ({ children, className = '' }) => {
     return <div className={`relative order-2 mdlg:order-1 ${className}`}>{children}</div>
 }
 
-const FeatureList = ({ features, className = '' }) => {
+const FeatureList = ({ features, featureIconBackground, className = '' }) => {
     return (
         <ul className={`list-none m-0 p-0 flex flex-col gap-4 mdlg:gap-1 lg:gap-2 lg:mt-2 mdlg:pt-2 pb-4 ${className}`}>
             {features.map(({ title, Icon }) => {
@@ -154,7 +161,7 @@ const FeatureList = ({ features, className = '' }) => {
                         key={title}
                         className="flex gap-2 items-start mdlg:items-center text-base mdlg:text-sm xl:text-[15px]"
                     >
-                        <span className="inline-flex p-1 rounded-sm bg-dark/10 dark:bg-white/10">
+                        <span className={`inline-flex p-1 rounded-sm bg-${featureIconBackground}/10`}>
                             <Icon className="w-4 mdlg:w-6" />
                         </span>
                         <span className="opacity-70 font-semibold">{title}</span>
@@ -186,7 +193,7 @@ export const ProductAnalytics = () => {
     return (
         <Slide
             bgColor="[#1371FF]"
-            textColor="text-primary-dark"
+            textColor="primary-dark"
             title="Product analytics"
             features={features}
             featureListClasses="@[240px]:grid grid-cols-2"
@@ -261,7 +268,7 @@ export const WebAnalytics = () => {
     return (
         <Slide
             bgColor="lime-green"
-            textColor="text-primary"
+            textColor="primary"
             title="Web analytics"
             description="Enable aggregate website analytics with one click if you're already using PostHog."
             features={features}
@@ -325,7 +332,7 @@ export const SessionReplay = () => {
         placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
-        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
+        className: 'w-full border border-light dark:border-dark rounded md:max-w-full md:shadow-2xl md:rotate-1',
     }
     const features = [
         { title: 'Event timeline', Icon: IconClock },
@@ -333,68 +340,65 @@ export const SessionReplay = () => {
         { title: 'Network requests', Icon: IconPulse },
     ]
     return (
-        <div className="md:bg-[#F2AD46] rounded-md text-primary flex items-end">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-4 -mb-2">
+        <Slide
+            bgColor="[#F2AD46]"
+            textColor="primary"
+            title="Session replay"
+            description="Watch users interacting with your app or website. Available for web and iOS."
+            additionalText={
+                <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
+            }
+            features={features}
+            featureListClasses="sm:grid grid-cols-2 mdlg:flex"
+            imageColumn="md:pl-8 md:col-span-9 lg:col-span-10"
+            contentColumn="md:col-span-7 lg:col-span-6"
+            Images={() => {
+                return (
+                    <>
                         <div className="block dark:hidden">
                             <StaticImage
                                 {...imageProps}
                                 src="../../../../contents/images/products/session-replay/session-replay-light.png"
-                                className={`${imageProps.className}`}
+                                alt="A screenshot of a session recording"
                             />
                         </div>
                         <div className="hidden dark:block">
                             <StaticImage
                                 {...imageProps}
-                                className={`${imageProps.className}`}
                                 src="../../../../contents/images/products/session-replay/session-replay-dark.png"
+                                alt="A screenshot of a session recording"
                             />
                         </div>
-                    </div>
-                    <div className="absolute bottom-0 right-1 md:hidden">
-                        <div>
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/session-recording-hog.png"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content className="">
-                        <Title title={'Session replay'} />
-                        <Description description="Watch users interacting with your app or website. Available for web and iOS." />
-                        <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
-                        <FeatureList features={features} className="grid md:grid-cols-2 lg:flex" />
-
-                        <CallToAction
-                            href="/session-replay"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                            childClassName="!bg-[#F2AD46] border-black !text-black group-hover:text-black"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-1 hidden md:block">
-                        <div>
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/session-recording-hog.png"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
-            </div>
-        </div>
+                    </>
+                )
+            }}
+            imageClasses="-mb-3"
+            HogMobile={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                    src="./images/session-recording-hog.png"
+                    alt="A hedgehog watching a session recording"
+                />
+            )}
+            HogDesktop={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[180px] 2xl:max-w-[203px]"
+                    src="./images/session-recording-hog.png"
+                    alt="A hedgehog watching a session recording"
+                />
+            )}
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-4"
+            buttonLabel="Explore"
+            buttonUrl="/session-replay"
+            buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+            buttonChildClasses="!bg-[#F2AD46] border-black !text-black group-hover:text-black"
+        />
     )
 }
 

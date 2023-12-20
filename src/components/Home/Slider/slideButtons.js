@@ -7,7 +7,7 @@ export const slideButtons = [
     {
         title: 'Web analytics',
         lottieSrc: '/lotties/product-icons/web-analytics.lottie',
-        color: 'sea-green',
+        color: 'light-blue',
     },
     {
         title: 'Session replay',
