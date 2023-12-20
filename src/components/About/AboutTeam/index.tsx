@@ -33,11 +33,13 @@ const avatarStyles = [
 
 export const AboutTeam = () => {
     const { teamMembers, allTeamMembers } = useStaticQuery(query)
+    const maxTheHedgehog = 1
 
     return (
         <section id="team" className="pt-16 pb-12 px-4">
             <h3 className="text-5xl mb-4 lg:mb-1 text-center">
-                We're a team of <span className="text-blue">{allTeamMembers.count}</span> from all over the world.
+                We're a team of <span className="text-blue">{allTeamMembers.count - maxTheHedgehog}</span> from all over
+                the world.
             </h3>
             <h4 className="font-semibold opacity-70 text-center">
                 Many of us move around a lot. Here's where we're currently shipping code.
