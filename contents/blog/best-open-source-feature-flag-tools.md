@@ -31,7 +31,7 @@ While it's tempting to [build your own tools](/blog/feature-flags-as-a-service),
 - **GitHub stars:** 14.8k
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-![PostHog](../images/blog/best-launchdarkly-alternatives/posthog.png)
+![PostHog](../images/screenshots/feature-flags.png)
 
 #### What is PostHog?
 

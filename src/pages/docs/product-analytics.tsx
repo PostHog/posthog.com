@@ -55,7 +55,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="../../components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
-                        url="/tutorials/funnels"
+                        url="/tutorials/guide-to-funnels"
                     />
                     <ResourceItem
                         type="Guide"
