@@ -42,7 +42,7 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
 ### 1. PostHog
 
-![posthog](../images/posthog-interface/hogflix-dashboard.png)
+![posthog](../images/screenshots/hogflix-dashboard.png)
 
 - **GitHub Stars:** 14.4k
 - **Category:** Product and website analytics

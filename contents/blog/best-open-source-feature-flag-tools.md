@@ -25,17 +25,13 @@ While it's tempting to [build your own tools](/blog/feature-flags-as-a-service),
 > - **Sep 14, 2023:** Removed Harness, added Flipper and FeatBit, added SDKs
 > - **Dec 11, 2023:** Added FeatureHub
 
-## 1. PostHog
-
-![PostHog](../images/posthog-interface/feature-flags.png)
-
-![PostHog](../images/posthog-interface/feature-flags.png)
+### 1. PostHog
 
 - **License:** MIT
 - **GitHub stars:** 14.8k
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-![PostHog](../images/blog/best-launchdarkly-alternatives/posthog.png)
+![PostHog](../images/screenshots/feature-flags.png)
 
 #### What is PostHog?
 

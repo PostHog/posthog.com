@@ -45,7 +45,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 
 ### 1. PostHog
 
-![posthog](../images/posthog-interface/hogflix-dashboard.png)
+![posthog](../images/screenshots/hogflix-dashboard.png)
 
 [PostHog](https://posthog.com) is an all-in-one, [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a single platform. Think [Amplitude](/blog/best-amplitude-alternatives) + Hotjar + [LaunchDarkly](/blog/best-launchdarkly-alternatives) in one.
 

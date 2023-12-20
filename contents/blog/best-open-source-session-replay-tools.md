@@ -33,7 +33,7 @@ Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session re
 > - **Mar 16, 2023:** Removed SessionStack, added Highlight.io. Updated copy and screenshots.
 
 ## 1. PostHog
-![PostHog](../images/posthog-interface/session-replay.png)
+![PostHog](../images/screenshots/session-replay.png)
 
 [PostHog](https://posthog.com/) is an all-in-one, Product OS that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
 
