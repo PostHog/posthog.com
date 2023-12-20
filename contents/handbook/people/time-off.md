@@ -43,11 +43,11 @@ Whether you have an appointment with your doctor, school run with your kids, or 
 
 ### You are sick
 
-If you are sick, you don't need to work and you will be paid. This is assuming you need a day or two off, then just take them.
+If you are sick, you don't need to work and you will be paid. This is assuming you need a day or two off, then just take them. 
 
 Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel.
 
-For extended periods of illness, please speak to James or Tim so we can work out a plan. In some countries, we may be required to request a doctor's note from you. 
+For extended periods of illness (5+ work days), please speak to Charles so we can work out a plan. In some countries, we may be required to request a doctor's note from you. If you have a medical condition you know will take you away from work regularly, please let Charles know so we can work out accommodations with you and your manager. 
 
 ### Bereavements / Child loss 
 
