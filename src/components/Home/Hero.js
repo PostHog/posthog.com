@@ -6,6 +6,7 @@ import Slider from './Slider'
 import { SignupCTA } from 'components/SignupCTA'
 import Accordion from './Accordion'
 import './hero.scss'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const heroTitle = 'How engineers build better products'
 
@@ -43,6 +44,8 @@ const Feature = ({ title, icon, url }) => {
 }
 
 export default function Hero() {
+    const { enterpriseMode } = useLayoutData()
+
     return (
         <section className="flex flex-col justify-center items-center">
             <div className="relative w-full z-10">

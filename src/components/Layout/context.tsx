@@ -37,6 +37,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
+    const [enterpriseMode, setEnterpriseMode] = useState(false)
     const parent =
         other.parent ??
         menu.find(({ children, url }) => {
@@ -124,6 +125,8 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
                 fullWidthContent,
                 setFullWidthContent,
                 compact,
+                enterpriseMode,
+                setEnterpriseMode,
             }}
         >
             {children}
