@@ -80,7 +80,9 @@ const Slide = ({
                     <ContentContainer className={contentColumn}>
                         <Content className={contentOffset}>
                             {flag && (
-                                <div className="absolute -right-2 top-1 font-semibold bg-yellow text-white uppercase text-sm">
+                                <div
+                                    className={`inline-block mb-2 md:absolute -right-2 top-1 font-semibold bg-${flagColor} text-white uppercase text-sm`}
+                                >
                                     <div
                                         className={`relative pl-3 pr-4 py-1 before:w-0 before:h-0 before:content-[''] before:border-[1rem] before:border-l-transparent before:border-r-transparent before:border-b-transparent before:border-${flagColor} before:absolute before:top-0 before:-left-4 after:w-0 after:h-0 after:content-[''] after:border-[1rem] after:border-l-transparent after:border-r-transparent after:border-t-transparent after:border-${flagColor} after:absolute after:bottom-0 after:-left-4`}
                                     >
@@ -683,10 +685,21 @@ export const DataPipeline = () => {
         { title: 'Transformations', Icon: IconGear },
     ]
     return (
-        <div className="md:bg-[#FCC779] rounded-md text-primary flex items-end">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="flex items-center pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="h-full">
+        <Slide
+            bgColor="[#FCC779]"
+            textColor="primary"
+            title="Customer data platform"
+            flag="Beta"
+            flagColor="seagreen"
+            description="60+ data connections available now. Full CDP coming soon."
+            features={features}
+            featureListClasses="sm:grid grid-cols-2 mdlg:flex"
+            imageColumn="flex items-center pl-8 md:col-span-9 lg:col-span-10"
+            imageClasses="px-4 mdlg:px-0 -mb-3"
+            contentColumn="md:col-span-7 lg:col-span-6"
+            Images={() => {
+                return (
+                    <>
                         <StaticImage
                             alt="A hedgehog standing in front of a leaky pipe of data"
                             placeholder="none"
@@ -695,28 +708,15 @@ export const DataPipeline = () => {
                             className="w-full h-full"
                             src="../../../../contents/images/products/cdp/pipeline-hog.png"
                         />
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Customer data platform'} label="Beta" />
-                        <Description description="60+ data connections available now. Full CDP coming soon." />
-                        <FeatureList features={features} />
-
-                        <CallToAction
-                            href="/cdp"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                            childClassName="!bg-[#FCC779] border-black !text-black group-hover:text-black
-                    "
-                        >
-                            Browse connections
-                        </CallToAction>
-                    </Content>
-                </ContentContainer>
-            </div>
-        </div>
+                    </>
+                )
+            }}
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
+            buttonLabel="Browse connections"
+            buttonUrl="/cdp"
+            buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+            buttonChildClasses="!bg-[#FCC779] border-black !text-black group-hover:text-black"
+        />
     )
 }
 
