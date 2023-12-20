@@ -544,18 +544,20 @@ export const Main = () => {
                                             </button>
                                         </li>
                                         <Orders />
-                                        <li className="px-1">
-                                            <button
-                                                onClick={() => setEnterpriseMode(!enterpriseMode)}
-                                                className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
-                                            >
-                                                <div>
-                                                    <IconTie className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                    <span>Enterprise mode</span>
-                                                </div>
-                                                <Toggle checked={enterpriseMode} />
-                                            </button>
-                                        </li>
+                                        {pathname === '/' && (
+                                            <li className="px-1">
+                                                <button
+                                                    onClick={() => setEnterpriseMode(!enterpriseMode)}
+                                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
+                                                >
+                                                    <div>
+                                                        <IconTie className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                        <span>Enterprise mode</span>
+                                                    </div>
+                                                    <Toggle checked={enterpriseMode} />
+                                                </button>
+                                            </li>
+                                        )}
                                     </ul>
                                 )
                             }}
