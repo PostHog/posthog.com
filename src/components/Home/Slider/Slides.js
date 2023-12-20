@@ -36,6 +36,67 @@ import React from 'react'
 import { feature } from 'components/Pricing/PricingTable/classes'
 import { CallToAction } from 'components/CallToAction'
 
+const Slide = ({
+    bgColor,
+    textColor,
+    title,
+    description,
+    features,
+    featureListClasses,
+    imageProps,
+    imageClasses,
+    HogMobile,
+    HogDesktop,
+    hogAlt,
+    buttonLabel,
+    buttonUrl,
+    buttonClasses,
+    buttonChildClasses,
+    children,
+    className = '',
+    Images,
+}) => {
+    return (
+        <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0">
+            <div
+                className={`bg-${bgColor} ${textColor} md:rounded-tl-md md:rounded-tr-md mdlg:${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full`}
+            >
+                <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
+                    <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
+                        <div
+                            className={`px-4 mdlg:pr-0 h-full flex justify-center items-center xl:items-start ${imageClasses}`}
+                        >
+                            {Images && <Images />}
+                        </div>
+                        <div className="absolute -bottom-2 right-0 mdlg:hidden">
+                            <div>{HogMobile && <HogMobile />}</div>
+                        </div>
+                    </ImageContainer>
+                    <ContentContainer className="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6">
+                        <Content className="mdlg:pb-6 lg:pb-8 xl:pb-20 2xl:pb-16">
+                            <Title title={title} />
+                            {description && <Description description={description} />}
+                            <FeatureList features={features} className={featureListClasses} />
+                            <CallToAction
+                                href={buttonUrl}
+                                type="custom"
+                                size="md"
+                                className={buttonClasses}
+                                childClassName={buttonChildClasses}
+                            >
+                                {buttonLabel}
+                            </CallToAction>
+                        </Content>
+                        <div className="hidden mdlg:block absolute right-0 bottom-0">
+                            <div>{HogDesktop && <HogDesktop />}</div>
+                        </div>
+                    </ContentContainer>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 const Title = ({ title, label }) => {
     return (
         <>
@@ -116,69 +177,59 @@ export const ProductAnalytics = () => {
         { title: 'SQL', Icon: IconHogQL },
     ]
     return (
-        <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0">
-            <div className="bg-[#1371FF] md:rounded-tl-md md:rounded-tr-md mdlg:text-white flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full">
-                <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
-                    <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
-                        <div className="px-4 mdlg:pr-0 h-full flex justify-center items-center xl:items-start">
-                            <div className="block dark:hidden">
-                                <StaticImage
-                                    {...imageProps}
-                                    src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
-                                    className={`${imageProps.className}`}
-                                />
-                            </div>
-                            <div className="hidden dark:block">
-                                <StaticImage
-                                    {...imageProps}
-                                    className={`${imageProps.className}`}
-                                    src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
-                                />
-                            </div>
+        <Slide
+            bgColor="[#1371FF]"
+            textColor="text-primary-dark"
+            title="Product analytics"
+            features={features}
+            featureListClasses="@[240px]:grid grid-cols-2"
+            Images={() => {
+                return (
+                    <>
+                        <div className="block dark:hidden">
+                            <StaticImage
+                                {...imageProps}
+                                src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
+                                alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
+                            />
                         </div>
-                        <div className="absolute -bottom-2 right-0 mdlg:hidden">
-                            <div>
-                                <StaticImage
-                                    loading="eager"
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[180px] sm:max-w-[230px] md:max-w-[260px]"
-                                    src="./images/product-analytics-hog.png"
-                                    alt=""
-                                />
-                            </div>
+                        <div className="hidden dark:block">
+                            <StaticImage
+                                {...imageProps}
+                                src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
+                                alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
+                            />
                         </div>
-                    </ImageContainer>
-                    <ContentContainer className="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6">
-                        <Content className="mdlg:pb-6 lg:pb-8 xl:pb-20 2xl:pb-16">
-                            <Title title={'Product analytics'} />
-                            <FeatureList features={features} className="@[240px]:grid grid-cols-2" />
-                            <CallToAction
-                                href="/product-analytics"
-                                type="custom"
-                                size="md"
-                                className="mdlg:!w-auto !w-full"
-                                childClassName="!bg-[#1371FF]"
-                            >
-                                Explore
-                            </CallToAction>
-                        </Content>
-                        <div className="hidden mdlg:block absolute right-0 bottom-0">
-                            <div>
-                                <StaticImage
-                                    loading="eager"
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
-                                    src="./images/product-analytics-hog.png"
-                                    alt=""
-                                />
-                            </div>
-                        </div>
-                    </ContentContainer>
-                </div>
-            </div>
-        </div>
+                    </>
+                )
+            }}
+            imageProps={imageProps}
+            imageClasses=""
+            HogMobile={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[180px] sm:max-w-[230px] md:max-w-[260px]"
+                    src="./images/product-analytics-hog.png"
+                    alt="A hedgehog looking at product analytics"
+                />
+            )}
+            HogDesktop={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
+                    src="./images/product-analytics-hog.png"
+                    alt="A hedgehog looking at product analytics"
+                />
+            )}
+            buttonLabel="Explore"
+            buttonUrl="/product-analytics"
+            buttonClasses="mdlg:!w-auto !w-full"
+            buttonChildClasses="!bg-[#1371FF]"
+        />
     )
 }
 
@@ -198,70 +249,58 @@ export const WebAnalytics = () => {
         { title: 'Channels', Icon: IconMegaphone },
     ]
     return (
-        <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0 border border-dashed border-red">
-            <div className="bg-lime-green text-primary md:rounded-tl-md md:rounded-tr-md flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full">
-                <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
-                    <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
-                        <div className="px-4 mdlg:pr-0 h-full flex justify-center items-center xl:items-start -mb-2">
-                            <div className="block dark:hidden">
-                                <StaticImage
-                                    {...imageProps}
-                                    src="../../../../contents/images/products/web-analytics/web-analytics-light.png"
-                                    className={`${imageProps.className}`}
-                                />
-                            </div>
-                            <div className="hidden dark:block">
-                                <StaticImage
-                                    {...imageProps}
-                                    className={`${imageProps.className}`}
-                                    src="../../../../contents/images/products/web-analytics/web-analytics-dark.png"
-                                />
-                            </div>
+        <Slide
+            bgColor="lime-green"
+            textColor="text-primary"
+            title="Web analytics"
+            description="Enable aggregate website analytics with one click if you're already using PostHog."
+            features={features}
+            Images={() => {
+                return (
+                    <>
+                        <div className="block dark:hidden">
+                            <StaticImage
+                                {...imageProps}
+                                src="../../../../contents/images/products/web-analytics/web-analytics-light.png"
+                                alt="A screenshot of web analytics"
+                            />
                         </div>
-                        <div className="absolute -bottom-2 right-0 mdlg:hidden">
-                            <div>
-                                <StaticImage
-                                    loading="eager"
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[180px] sm:max-w-[203px] md:max-w-[203px]"
-                                    src="./images/web-analytics-hog.png"
-                                    alt="Web analytics hog"
-                                />
-                            </div>
+                        <div className="hidden dark:block">
+                            <StaticImage
+                                {...imageProps}
+                                src="../../../../contents/images/products/web-analytics/web-analytics-dark.png"
+                                alt="A screenshot of web analytics"
+                            />
                         </div>
-                    </ImageContainer>
-                    <ContentContainer className="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6">
-                        <Content className="mdlg:pb-6 lg:pb-8 xl:pb-12 2xl:pb-8">
-                            <Title title={'Web analytics'} />
-                            <Description description="Enable aggregate website analytics with one click if you’re already using PostHog." />
-                            <FeatureList features={features} className="" />
-                            <CallToAction
-                                href="/docs/web-analytics"
-                                type="custom"
-                                size="md"
-                                className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                                childClassName="!bg-lime-green border-primary !text-primary group-hover:text-black"
-                            >
-                                Read the docs
-                            </CallToAction>
-                        </Content>
-                        <div className="hidden mdlg:block absolute right-0 bottom-0">
-                            <div>
-                                <StaticImage
-                                    loading="eager"
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[180px] 2xl:max-w-[203px]"
-                                    src="./images/web-analytics-hog.png"
-                                    alt="Web analytics hog"
-                                />
-                            </div>
-                        </div>
-                    </ContentContainer>
-                </div>
-            </div>
-        </div>
+                    </>
+                )
+            }}
+            imageClasses="-mb-2"
+            HogMobile={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="max-w-[180px] sm:max-w-[203px] md:max-w-[203px]"
+                    src="./images/web-analytics-hog.png"
+                    alt="A hedgehog looking at product analytics"
+                />
+            )}
+            HogDesktop={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[180px] 2xl:max-w-[203px]"
+                    src="./images/web-analytics-hog.png"
+                    alt="A hedgehog looking at product analytics"
+                />
+            )}
+            buttonLabel="Read the docs"
+            buttonUrl="/docs/web-analytics"
+            buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+            buttonChildClasses="!bg-lime-green border-primary !text-primary group-hover:text-black"
+        />
     )
 }
 
