@@ -272,7 +272,7 @@ export const WebAnalytics = () => {
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-10"
-            imageClasses="-mb-3"
+            imageClasses="px-4 mdlg:px-0 -mb-3"
             contentColumn="mdlg:col-span-7 lg:col-span-6 xl:col-span-6"
             Images={() => {
                 return (
@@ -299,7 +299,7 @@ export const WebAnalytics = () => {
                     loading="eager"
                     placeholder="none"
                     quality={100}
-                    className="max-w-[180px] sm:max-w-[203px] md:max-w-[203px]"
+                    className="max-w-[150px] sm:max-w-[203px] md:max-w-[203px]"
                     src="./images/web-analytics-hog.png"
                     alt="A hedgehog looking at product analytics"
                 />
@@ -349,7 +349,7 @@ export const SessionReplay = () => {
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="md:pl-8 md:col-span-9 lg:col-span-10"
-            imageClasses="-mb-1.5"
+            imageClasses="px-4 mdlg:px-0 -mb-1.5"
             contentColumn="md:col-span-7 lg:col-span-6"
             Images={() => {
                 return (
