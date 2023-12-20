@@ -51,6 +51,7 @@ bg-[#F2AD46]
 bg-[#1371FF]
 bg-[#29DBBB]
 bg-[#9C19BD]
+bg-[#D42F18]
 border-blue
 border-green
 border-opacity-100

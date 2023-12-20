@@ -610,50 +610,56 @@ export const Surveys = () => {
     ]
 
     return (
-        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:col-span-6 lg:col-span-8">
-                    <div className="flex items-center justify-center">
+        <Slide
+            bgColor="[#D42F18]"
+            textColor="primary-dark"
+            title="Surveys"
+            description="Collect in-app feedback from your users"
+            features={features}
+            featureListClasses=""
+            imageColumn="md:col-span-6 lg:col-span-7 2xl:col-span-6"
+            imageClasses="px-4"
+            contentColumn="md:col-span-10 lg:col-span-9 2xl:col-span-10"
+            Images={() => {
+                return (
+                    <>
                         <StaticImage
                             alt="Survey widget example"
                             placeholder="none"
                             quality={100}
                             objectFit="contain"
-                            className="w-full h-full py-4 max-w-[337px] rotate-1"
+                            className="w-full h-full pb-8 mdlg:py-4 max-w-[337px] rotate-1"
                             src="../../../../contents/images/products/surveys/survey.png"
                         />
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-10 lg:col-span-8">
-                    <Content>
-                        <Title title={'Surveys'} />
-                        <Subtitle subtitle="Collect in-app feedback from your users" />
-                        <FeatureList features={features} />
-
-                        <CallToAction
-                            href="/surveys"
-                            type="custom"
-                            size="md"
-                            className="md:!w-auto !w-full"
-                            childClassName="!bg-[#D42F18]"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-1 hidden md:block">
-                        <div>
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[250px] xl:max-w-[350px]"
-                                src="./images/surveys-hog.png"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
-            </div>
-        </div>
+                    </>
+                )
+            }}
+            HogMobile={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[180px] sm:max-w-[230px] md:max-w-[260px]"
+                    src="./images/surveys-hog.png"
+                    alt="A hedgehog looking at product analytics"
+                />
+            )}
+            HogDesktop={() => (
+                <StaticImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[200px] mdlg:block lg:max-w-[250px] xl:max-w-[350px]"
+                    src="./images/surveys-hog.png"
+                    alt="A hedgehog looking at product analytics"
+                />
+            )}
+            contentOffset=""
+            buttonLabel="Explore"
+            buttonUrl="/surveys"
+            buttonClasses="md:!w-auto !w-full"
+            buttonChildClasses="!bg-[#D42F18]"
+        />
     )
 }
 
