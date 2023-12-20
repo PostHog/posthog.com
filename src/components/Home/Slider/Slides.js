@@ -62,15 +62,13 @@ const Slide = ({
     Images,
 }) => {
     return (
-        <div className="overflow-hidden flex items-end md:mt-3 mb-2 md:mb-6 mdlg:my-0">
+        <div className="overflow-hidden flex h-full items-end md:mt-3 mb-2 md:mb-6 mdlg:my-0">
             <div
                 className={`bg-${bgColor} text-${textColor} md:rounded-tl-md md:rounded-tr-md mdlg:text-${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full`}
             >
                 <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
                     <ImageContainer className={imageColumn}>
-                        <div
-                            className={`px-4 mdlg:pr-0 h-full flex justify-center items-center xl:items-start ${imageClasses}`}
-                        >
+                        <div className={`h-full flex justify-center items-center xl:items-start ${imageClasses}`}>
                             {Images && <Images />}
                         </div>
                         <div className="absolute -bottom-2 right-0 mdlg:hidden">
@@ -198,6 +196,7 @@ export const ProductAnalytics = () => {
             features={features}
             featureListClasses="@[240px]:grid grid-cols-2"
             imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10"
+            imageClasses="px-4 mdlg:pr-0"
             contentColumn="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6"
             Images={() => {
                 return (
@@ -220,7 +219,6 @@ export const ProductAnalytics = () => {
                 )
             }}
             imageProps={imageProps}
-            imageClasses=""
             HogMobile={() => (
                 <StaticImage
                     loading="eager"
@@ -274,6 +272,7 @@ export const WebAnalytics = () => {
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-10"
+            imageClasses="-mb-3"
             contentColumn="mdlg:col-span-7 lg:col-span-6 xl:col-span-6"
             Images={() => {
                 return (
@@ -295,7 +294,6 @@ export const WebAnalytics = () => {
                     </>
                 )
             }}
-            imageClasses="-mb-3"
             HogMobile={() => (
                 <StaticImage
                     loading="eager"
@@ -351,6 +349,7 @@ export const SessionReplay = () => {
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="md:pl-8 md:col-span-9 lg:col-span-10"
+            imageClasses="-mb-1.5"
             contentColumn="md:col-span-7 lg:col-span-6"
             Images={() => {
                 return (
@@ -372,7 +371,6 @@ export const SessionReplay = () => {
                     </>
                 )
             }}
-            imageClasses="-mb-3"
             HogMobile={() => (
                 <StaticImage
                     loading="eager"
