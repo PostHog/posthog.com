@@ -11,7 +11,7 @@ module.exports = {
             current: 'currentColor',
             white: 'white',
 
-            aqua: '#56B6F7',
+            'lime-green': '#96E5B6',
             blue: '#1D4AFF',
             yellow: '#F7A501',
             red: '#F54E00',
@@ -71,7 +71,7 @@ module.exports = {
             'button-shadow-dark': '#99660E',
             'button-secondary-shadow-dark': '#925D05',
 
-            aqua: '#56B6F7',
+            'lime-green': '#96E5B6',
             blue: '#2F80FA',
             orange: '#EB9D2A',
             teal: '#29DBBB',
@@ -163,7 +163,7 @@ module.exports = {
                 light: '#EEEFE9',
                 dark: '#1D1F27',
 
-                aqua: '#56B6F7',
+                'lime-green': '#96E5B6',
                 blue: '#2F80FA',
                 orange: '#EB9D2A',
                 teal: '#29DBBB',

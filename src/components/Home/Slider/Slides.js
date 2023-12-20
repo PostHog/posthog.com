@@ -1,6 +1,7 @@
 import {
     IconBadge,
     IconBrackets,
+    IconBrowser,
     IconCheckbox,
     IconClock,
     IconColumns,
@@ -8,10 +9,13 @@ import {
     IconFilter,
     IconFunnels,
     IconGear,
+    IconGlobe,
     IconGridMasonry,
     IconHogQL,
     IconLifecycle,
+    IconLineGraph,
     IconMagicWand,
+    IconMegaphone,
     IconPalette,
     IconPeople,
     IconPulse,
@@ -112,7 +116,7 @@ export const ProductAnalytics = () => {
         { title: 'SQL', Icon: IconHogQL },
     ]
     return (
-        <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0 -border border-dashed border-red">
+        <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0">
             <div className="bg-[#1371FF] md:rounded-tl-md md:rounded-tr-md mdlg:text-white flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full">
                 <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
                     <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
@@ -185,42 +189,77 @@ export const WebAnalytics = () => {
         placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
-        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
+        className: 'w-full border border-light dark:border-dark rounded md:max-w-[675px] md:shadow-2xl md:rotate-1',
     }
+    const features = [
+        { title: 'Pageviews, sessions, unique visitors', Icon: IconLineGraph },
+        { title: 'Top pages & paths', Icon: IconBrowser },
+        { title: 'Device & location', Icon: IconGlobe },
+        { title: 'Channels', Icon: IconMegaphone },
+    ]
     return (
-        <div className="bg-aqua rounded-md text-primary flex items-end">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
-                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-4 -mb-2">
-                        <StaticImage
-                            {...imageProps}
-                            src="../../../../contents/images/products/web-analytics/web-analytics-light.png"
-                            className={`${imageProps.className} block dark:hidden`}
-                        />
-                        <StaticImage
-                            {...imageProps}
-                            className={`${imageProps.className} hidden dark:block`}
-                            src="../../../../contents/images/products/web-analytics/web-analytics-dark.png"
-                        />
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Web analytics'} label="Alpha" />
-                        <Subtitle subtitle="Track and monitor many of the most important metrics for your website." />
-
-                        <CallToAction
-                            href="/docs/web-analytics"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10"
-                            childClassName="!bg-[#EB9D2A] border-black !text-black group-hover:text-black
-                    "
-                        >
-                            Read the docs
-                        </CallToAction>
-                    </Content>
-                </ContentContainer>
+        <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0 border border-dashed border-red">
+            <div className="bg-lime-green text-primary md:rounded-tl-md md:rounded-tr-md flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full">
+                <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
+                    <ImageContainer className="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10">
+                        <div className="px-4 mdlg:pr-0 h-full flex justify-center items-center xl:items-start -mb-2">
+                            <div className="block dark:hidden">
+                                <StaticImage
+                                    {...imageProps}
+                                    src="../../../../contents/images/products/web-analytics/web-analytics-light.png"
+                                    className={`${imageProps.className}`}
+                                />
+                            </div>
+                            <div className="hidden dark:block">
+                                <StaticImage
+                                    {...imageProps}
+                                    className={`${imageProps.className}`}
+                                    src="../../../../contents/images/products/web-analytics/web-analytics-dark.png"
+                                />
+                            </div>
+                        </div>
+                        <div className="absolute -bottom-2 right-0 mdlg:hidden">
+                            <div>
+                                <StaticImage
+                                    loading="eager"
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[180px] sm:max-w-[203px] md:max-w-[203px]"
+                                    src="./images/web-analytics-hog.png"
+                                    alt="Web analytics hog"
+                                />
+                            </div>
+                        </div>
+                    </ImageContainer>
+                    <ContentContainer className="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6">
+                        <Content className="mdlg:pb-6 lg:pb-8 xl:pb-12 2xl:pb-8">
+                            <Title title={'Web analytics'} />
+                            <Description description="Enable aggregate website analytics with one click if you’re already using PostHog." />
+                            <FeatureList features={features} className="" />
+                            <CallToAction
+                                href="/docs/web-analytics"
+                                type="custom"
+                                size="md"
+                                className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+                                childClassName="!bg-lime-green border-primary !text-primary group-hover:text-black"
+                            >
+                                Read the docs
+                            </CallToAction>
+                        </Content>
+                        <div className="hidden mdlg:block absolute right-0 bottom-0">
+                            <div>
+                                <StaticImage
+                                    loading="eager"
+                                    placeholder="none"
+                                    quality={100}
+                                    className="w-full max-w-[180px] 2xl:max-w-[203px]"
+                                    src="./images/web-analytics-hog.png"
+                                    alt="Web analytics hog"
+                                />
+                            </div>
+                        </div>
+                    </ContentContainer>
+                </div>
             </div>
         </div>
     )
