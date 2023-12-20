@@ -9,6 +9,7 @@ import {
     IconFunnels,
     IconGear,
     IconGridMasonry,
+    IconHogQL,
     IconLifecycle,
     IconMagicWand,
     IconPalette,
@@ -108,6 +109,7 @@ export const ProductAnalytics = () => {
         { title: 'Stickiness', Icon: IconStickiness },
         { title: 'Lifecycle', Icon: IconLifecycle },
         { title: 'Retention', Icon: IconRetention },
+        { title: 'SQL', Icon: IconHogQL },
     ]
     return (
         <div className="overflow-hidden flex items-end mt-4 mdlg:mt-0 -border border-dashed border-red">
@@ -136,7 +138,7 @@ export const ProductAnalytics = () => {
                                     loading="eager"
                                     placeholder="none"
                                     quality={100}
-                                    className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
+                                    className="w-full max-w-[180px] sm:max-w-[230px] md:max-w-[260px]"
                                     src="./images/product-analytics-hog.png"
                                     alt=""
                                 />
@@ -144,7 +146,7 @@ export const ProductAnalytics = () => {
                         </div>
                     </ImageContainer>
                     <ContentContainer className="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6">
-                        <Content className="mdlg:pb-12 lg:pb-16 xl:pb-28">
+                        <Content className="mdlg:pb-6 lg:pb-8 xl:pb-20 2xl:pb-16">
                             <Title title={'Product analytics'} />
                             <FeatureList features={features} className="@[240px]:grid grid-cols-2" />
                             <CallToAction
