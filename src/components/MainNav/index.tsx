@@ -3,7 +3,6 @@ import Logo from 'components/Logo'
 import { useSearch } from 'components/Search/SearchContext'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
-
 import {
     IconApp,
     IconBrightness,
@@ -13,6 +12,7 @@ import {
     IconTextWidth,
     IconUser,
     IconChevronDown,
+    IconTie,
 } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
@@ -550,7 +550,7 @@ export const Main = () => {
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
                                             >
                                                 <div>
-                                                    <span className="mr-2 w-6 inline-block">🤑</span>
+                                                    <IconTie className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                     <span>Enterprise mode</span>
                                                 </div>
                                                 <Toggle checked={enterpriseMode} />
