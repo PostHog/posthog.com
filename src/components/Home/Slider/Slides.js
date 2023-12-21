@@ -446,12 +446,12 @@ export const FeatureFlags = () => {
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
-            imageClasses="px-4 mdlg:px-0 -mb-1.5"
+            imageClasses="px-4 mdlg:px-0 -mb-1.5 flex-col xl:items-center"
             contentColumn="md:col-span-7 lg:col-span-6"
             Images={() => {
                 return (
                     <>
-                        <div className="md:absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
+                        <div className="-rotate-1 -mr-6 -mt-2 mdlg:-mr-24 lg:-mr-52 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...image1Props}
@@ -467,7 +467,7 @@ export const FeatureFlags = () => {
                                 />
                             </div>
                         </div>
-                        <div className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5">
+                        <div className="rotate-1 -ml-20 mdlg:-ml-28 lg:-ml-60 w-3/4 mdlg:w-3/4 lg:w-3/5">
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...image2Props}
@@ -552,7 +552,7 @@ export const ABTesting = () => {
             Images={() => {
                 return (
                     <>
-                        <div className="absolute left-2 top-5 w-[150%] md:w-3/4">
+                        <div className="-rotate-1 mdlg:ml-4 lg:ml-8 mt-8 md:mt-0 md:mb-8 mdlg:m-0 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...image1Props}
@@ -568,7 +568,7 @@ export const ABTesting = () => {
                                 />
                             </div>
                         </div>
-                        <div className="absolute -right-16 -top-3 w-[100%] md:w-3/4">
+                        <div className="rotate-1 -mt-12 mdlg:mt-0 -ml-24 md:-ml-32 w-5/6 mdlg:w-3/4 lg:w-3/5 z-20">
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...image2Props}
@@ -592,7 +592,7 @@ export const ABTesting = () => {
                     loading="eager"
                     placeholder="none"
                     quality={100}
-                    className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
+                    className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px] z-30"
                     src="./images/experiment-hog.png"
                     alt="A hedgehog running an experiment"
                 />
