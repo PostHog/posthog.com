@@ -42,6 +42,7 @@ const Slide = ({
     textColor,
     title,
     description,
+    descriptionClasses,
     additionalText,
     flag,
     flagColor,
@@ -79,20 +80,58 @@ const Slide = ({
                         </div>
                     </ImageContainer>
                     <ContentContainer className={contentColumn}>
-                        <Content className={contentOffset}>
-                            {flag && (
+                        {flag && (
+                            <div
+                                className={`inline-block mt-2 ml-2 md:m-0 md:absolute right-0 top-4 font-semibold bg-${flagColor} text-white uppercase text-sm`}
+                            >
                                 <div
-                                    className={`inline-block mb-2 md:absolute -right-2 top-1 font-semibold bg-${flagColor} text-white uppercase text-sm`}
+                                    className={`
+                                    relative py-1 
+                                    before:w-0 before:h-0 before:content-[''] before:absolute
+
+                                    pl-3
+                                    md:pl-3
+                                    pr-2
+                                    md:pr-4
+                                    
+                                    before:border-[1rem] 
+                                    before:border-${flagColor} 
+                                    before:bottom-0 
+                                    before:border-t-transparent
+                                    before:border-r-transparent 
+
+                                    md:before:border-b-${flagColor}
+                                    md:before:border-t-transparent
+                                    before:border-l-transparent
+                                    before:-right-4
+                                    md:before:-left-4 
+                                    md:right-initial
+                                    
+                                    after:w-0 after:h-0 after:content-[''] after:absolute
+                                    
+                                    after:border-[1rem] 
+                                    after:border-${flagColor} 
+                                    after:border-r-transparent 
+                                    after:border-b-transparent 
+                                    md:after:border-t-${flagColor} 
+
+                                    md:after:border-b-transparent
+                                    after:border-l-transparent 
+                                    after:top-0 
+                                    after:md:top-initial
+                                    after:md:bottom-0
+                                    after:-right-4
+                                    md:after:-left-4
+                                    md:right-initial
+                                `}
                                 >
-                                    <div
-                                        className={`relative pl-3 pr-4 py-1 before:w-0 before:h-0 before:content-[''] before:border-[1rem] before:border-l-transparent before:border-r-transparent before:border-b-transparent before:border-${flagColor} before:absolute before:top-0 before:-left-4 after:w-0 after:h-0 after:content-[''] after:border-[1rem] after:border-l-transparent after:border-r-transparent after:border-t-transparent after:border-${flagColor} after:absolute after:bottom-0 after:-left-4`}
-                                    >
-                                        {flag}
-                                    </div>
+                                    {flag}
                                 </div>
-                            )}
+                            </div>
+                        )}
+                        <Content className={contentOffset}>
                             <Title title={title} />
-                            {description && <Description description={description} />}
+                            {description && <Description description={description} className={descriptionClasses} />}
                             {additionalText && <>{additionalText}</>}
                             <FeatureList
                                 features={features}
@@ -122,7 +161,7 @@ const Slide = ({
 const Title = ({ title, label }) => {
     return (
         <>
-            <h3 className="text-lg lg:text-3xl mb-1 mdlg:block hidden">
+            <h3 className="text-xl mdlg:text-lg lg:text-3xl mb-1">
                 {title}
                 {label && (
                     <span className="ml-1 relative -top-0.5 text-sm text-primary/60 dark:text-primary/60 font-semibold leading-tight border border-dark dark:border-dark px-1 py-0.5 rounded-sm uppercase">
@@ -154,7 +193,9 @@ const ContentContainer = ({ children, className = '' }) => {
 
 const Content = ({ children, className = '' }) => {
     return (
-        <div className={`@container relative z-10 mx-2 w-full mdlg:px-4 2xl:px-8 pt-2 mdlg:pt-4 md:pb-4 ${className}`}>
+        <div
+            className={`@container relative z-10 mdlg:mx-2 w-full px-2 mdlg:px-4 2xl:px-8 pt-2 mdlg:pt-4 md:pb-4 ${className}`}
+        >
             {children}
         </div>
     )
@@ -285,6 +326,7 @@ export const WebAnalytics = () => {
             flag="Beta"
             flagColor="yellow"
             description="Enable aggregate website analytics with one click if you're already using PostHog."
+            descriptionClasses="mdlg:hidden lg:block"
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-10 lg:pl-4"
@@ -366,7 +408,7 @@ export const SessionReplay = () => {
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="md:pl-8 md:col-span-9 lg:col-span-10"
             imageClasses="px-4 mdlg:px-0 -mb-1.5"
-            contentColumn="md:col-span-7 lg:col-span-6"
+            contentColumn="md:col-span-7 lg:col-span-6 lg:py-4"
             Images={() => {
                 return (
                     <>
@@ -448,7 +490,7 @@ export const FeatureFlags = () => {
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
             imageClasses="px-4 mdlg:px-0 -mb-1.5 flex-col xl:items-center"
-            contentColumn="md:col-span-7 lg:col-span-6"
+            contentColumn="md:col-span-7 lg:col-span-6 lg:py-8"
             Images={() => {
                 return (
                     <>
@@ -549,7 +591,7 @@ export const ABTesting = () => {
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
             imageClasses="px-4 mdlg:px-0 -mb-3"
-            contentColumn="md:col-span-7 lg:col-span-6"
+            contentColumn="md:col-span-7 lg:col-span-6 lg:py-10"
             Images={() => {
                 return (
                     <>
@@ -631,11 +673,12 @@ export const Surveys = () => {
             textColor="primary-dark"
             title="Surveys"
             description="Collect in-app feedback from your users"
+            descriptionClasses="mdlg:hidden lg:block"
             features={features}
             featureListClasses=""
             imageColumn="md:col-span-6 lg:col-span-7 2xl:col-span-6"
             imageClasses="px-4"
-            contentColumn="md:col-span-10 lg:col-span-9 2xl:col-span-10"
+            contentColumn="md:col-span-10 lg:col-span-9 2xl:col-span-10 lg:py-8"
             Images={() => {
                 return (
                     <>
@@ -644,7 +687,7 @@ export const Surveys = () => {
                             placeholder="none"
                             quality={100}
                             objectFit="contain"
-                            className="w-full h-full pb-8 mdlg:py-4 max-w-[337px] rotate-1"
+                            className="w-full h-full pb-8 mdlg:py-4 max-w-[337px] md:max-w-[287px] mdlg:max-w-[337px] rotate-1"
                             src="../../../../contents/images/products/surveys/survey.png"
                         />
                     </>
@@ -697,7 +740,7 @@ export const DataPipeline = () => {
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="flex items-center justify-center pl-8 py-4 md:col-span-9 lg:col-span-10"
             imageClasses="px-4 mdlg:px-0 -mb-3"
-            contentColumn="md:col-span-7 lg:col-span-6"
+            contentColumn="md:col-span-7 lg:col-span-6 lg:py-8"
             Images={() => {
                 return (
                     <>
@@ -739,7 +782,7 @@ export const DataWarehouse = () => {
             }
             imageColumn="flex md:col-span-9 lg:col-span-10"
             imageClasses="px-4 mdlg:px-0 -mb-3"
-            contentColumn="md:col-span-7 lg:col-span-6"
+            contentColumn="md:col-span-7 lg:col-span-6 mdlg:py-8 lg:py-12 xl:py-16"
             features={features}
             Images={() => {
                 return (
