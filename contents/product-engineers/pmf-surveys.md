@@ -140,7 +140,7 @@ Superhuman [nearly doubled their PMF score](https://review.firstround.com/how-su
 
 4. **Repeated the process:** Superhuman continued to survey users, tracking progress towards the 40% mark. The score became the primary OKR for the product team and, after three quarters, Superhuman increased their score to 58%.
 
-### Case study: Slack
+## Case study: Slack
 
 In 2015, co-founder of KISSmetrics [Hiten Shah](https://twitter.com/hnshah) ran an [open research project](https://hitenism.com/slack-product-market-fit-survey/) where he conducted the PMF survey on 731 Slack users. While he didn't follow the exact format we outlined in this post, it's worth diving into research.
 
