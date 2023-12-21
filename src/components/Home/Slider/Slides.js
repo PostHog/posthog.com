@@ -37,6 +37,7 @@ import { feature } from 'components/Pricing/PricingTable/classes'
 import { CallToAction } from 'components/CallToAction'
 
 const Slide = ({
+    containerClasses,
     bgColor,
     textColor,
     title,
@@ -66,7 +67,7 @@ const Slide = ({
     return (
         <div className="overflow-hidden flex h-full items-end md:mt-3 mb-2 md:mb-6 mdlg:my-0">
             <div
-                className={`bg-${bgColor} text-${textColor} md:rounded-tl-md md:rounded-tr-md mdlg:text-${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full`}
+                className={`bg-${bgColor} text-${textColor} md:rounded-tl-md md:rounded-tr-md mdlg:text-${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full ${containerClasses}`}
             >
                 <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
                     <ImageContainer className={imageColumn}>
@@ -694,19 +695,19 @@ export const DataPipeline = () => {
             description="60+ data connections available now. Full CDP coming soon."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
-            imageColumn="flex items-center pl-8 md:col-span-9 lg:col-span-10"
+            imageColumn="flex items-center justify-center pl-8 py-4 md:col-span-9 lg:col-span-10"
             imageClasses="px-4 mdlg:px-0 -mb-3"
             contentColumn="md:col-span-7 lg:col-span-6"
             Images={() => {
                 return (
                     <>
                         <StaticImage
-                            alt="A hedgehog standing in front of a leaky pipe of data"
+                            alt="Some hedgehogs fixing some data pipes"
                             placeholder="none"
                             quality={100}
                             objectFit="contain"
-                            className="w-full h-full"
-                            src="../../../../contents/images/products/cdp/pipeline-hog.png"
+                            className="w-full h-full max-w-[571px]"
+                            src="../../../../contents/images/products/cdp/pipeline-scene.png"
                         />
                     </>
                 )
@@ -724,6 +725,7 @@ export const DataWarehouse = () => {
     const features = []
     return (
         <Slide
+            containerClasses="!pt-0"
             bgColor="[#29DBBB]"
             textColor="primary"
             title="Data warehouse"
@@ -735,7 +737,7 @@ export const DataWarehouse = () => {
                     Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API.
                 </p>
             }
-            imageColumn="flex items-center md:col-span-9 lg:col-span-10"
+            imageColumn="flex md:col-span-9 lg:col-span-10"
             imageClasses="px-4 mdlg:px-0 -mb-3"
             contentColumn="md:col-span-7 lg:col-span-6"
             features={features}
@@ -747,8 +749,8 @@ export const DataWarehouse = () => {
                             placeholder="none"
                             quality={100}
                             objectFit="contain"
-                            className="w-full h-full py-10 max-h-96"
-                            src="../../../../contents/images/products/data-warehouse/data-warehouse.png"
+                            className="w-full h-full max-h-96 max-w-[826px]"
+                            src="../../../../contents/images/products/data-warehouse/warehouse-scene.png"
                         />
                     </>
                 )
