@@ -222,4 +222,4 @@ We hope this look at how we use PostHog will inspire you (and your marketing tea
 
 - [Using the PostHog Toolbar to visualize behavior and create actions](/tutorials/toolbar): The PostHog Toolbar is a useful way to understand how users interact with your website. You can also use it to create actions.
 
-- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels): An in-depth guide to building, analyzing and improving your conversion funnel.
+- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/guide-to-funnels): An in-depth guide to building, analyzing and improving your conversion funnel.

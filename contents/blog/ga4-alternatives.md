@@ -56,7 +56,7 @@ The following GA4 alternatives all solve one or more of these issues. Some provi
 
 ### PostHog
 
-![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+![posthog](../images/screenshots/hogflix-dashboard.png)
 
 - **Best for:** Mobile and web apps
 - **Tracking method:** Event-based

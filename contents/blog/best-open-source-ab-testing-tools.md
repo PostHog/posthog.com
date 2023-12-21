@@ -28,7 +28,7 @@ In this guide, we're looking at the best free and open-source A/B testing tools.
 
 ## 1. PostHog
 
-![PostHog - best open source ab testing tools](../images/blog/open-source-testing-tools/img1_PostHog.png)
+![posthog](../images/screenshots/ab-testing.png)
 
 [PostHog](https://posthog.com) is an [open-source analytics platform](/blog/best-open-source-analytics-tools) that integrates a comprehensive A/B testing suite with numerous other tools, such as product analytics, feature flags, and session recording. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 

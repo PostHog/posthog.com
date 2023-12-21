@@ -12,6 +12,8 @@ If you want control over which sessions to record:
 
 2. Manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
 
+3. **Important** make sure the your domain is added to the [Authorized Domains list](https://app.posthog.com/settings/project-replay#replay-authorized-domains) as otherwise the data will still be ignored as it is ingested by our servers.
+
 You can then achieve even finer control by combining the above methods with [feature flags](/docs/feature-flags). This enables you to control session recordings based on user or group properties. You can also use feature flags to capture a percentage of all sessions.
 
 For example:
