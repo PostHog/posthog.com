@@ -721,11 +721,27 @@ export const DataPipeline = () => {
 }
 
 export const DataWarehouse = () => {
+    const features = []
     return (
-        <div className="md:bg-[#29DBBB] rounded-md text-primary flex items-end">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="h-full">
+        <Slide
+            bgColor="[#29DBBB]"
+            textColor="primary"
+            title="Data warehouse"
+            flag="Beta"
+            flagColor="yellow"
+            description="Full data warehouse product coming soon"
+            additionalText={
+                <p className="text-sm opacity-60 pt-2 mb-1">
+                    Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API.
+                </p>
+            }
+            imageColumn="flex items-center md:col-span-9 lg:col-span-10"
+            imageClasses="px-4 mdlg:px-0 -mb-3"
+            contentColumn="md:col-span-7 lg:col-span-6"
+            features={features}
+            Images={() => {
+                return (
+                    <>
                         <StaticImage
                             alt="An artist's depiction of a data warehouse"
                             placeholder="none"
@@ -734,53 +750,33 @@ export const DataWarehouse = () => {
                             className="w-full h-full py-10 max-h-96"
                             src="../../../../contents/images/products/data-warehouse/data-warehouse.png"
                         />
-                    </div>
-                    <div className="absolute bottom-0 right-4 md:hidden">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                                src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Data warehouse'} label="Beta" />
-                        <Subtitle subtitle="Full data warehouse product coming soon" />
-                        <Description
-                            description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API."
-                            className="!text-sm pb-4"
-                        />
-
-                        <CallToAction
-                            href="/docs/data-warehouse"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                            childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black
-                    "
-                        >
-                            Learn more
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-4 md:block hidden">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                                src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
-            </div>
-        </div>
+                    </>
+                )
+            }}
+            HogMobile={() => (
+                <StaticImage
+                    alt="Just another hedgehog"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
+                    src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                />
+            )}
+            HogDesktop={() => (
+                <StaticImage
+                    alt="Just another hedgehog"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
+                    src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                />
+            )}
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
+            buttonLabel="Learn more"
+            buttonUrl="/docs/data-warehouse"
+            buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+            buttonChildClasses="!bg-[#29DBBB] border-black !text-black group-hover:text-black"
+        />
     )
 }
 
@@ -810,8 +806,7 @@ export const Sql = () => {
                     <Content>
                         <Title title={'SQL'} />
                         <Subtitle subtitle="Directly query data stored in PostHog via SQL." />
-                        <FeatureList features={features} />
-
+                        {features && <FeatureList features={features} />}
                         <CallToAction
                             href="/docs/hogql"
                             type="custom"
