@@ -1,6 +1,6 @@
 ---
 date: 2023-11-29
-title: "How to use product-market fit surveys to actually improve your app (with examples)"
+title: "Step-by-step guide: How to use product-market fit surveys to drive PMF"
 author:
   - lior-neu-ner
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
@@ -10,15 +10,17 @@ tags:
   - User research
 ---
 
-*"How would you feel if you could no longer use our product"*, a.k.a the product-market fit survey, is perhaps the most famous question in SaaS circles. But how do you actually gain useful insights from it?
+*"How would you feel if you could no longer use our product?"* a.k.a the product-market fit survey.
 
-In this post we dive into exactly that – and look at two case studies – so that you can learn how to use it to build the best products.
+This is perhaps the most well-known question in SaaS circles. [Superhuman](https://superhuman.com) famously used it to catapult themselves to over 50,000 paying customers and whopping **$20 million** in revenue. 
 
-## What is the product-market fit survey?
+You might be wondering "How can I do the same?"
 
-> If you're already familiar with PMF surveys, skip to the [next section](#how-to-use-pmf-to-improve-your-app).
+In this post we show you just that. We break down [Superhuman's product-market fit engine](https://review.firstround.com/how-superhuman-built-an-engine-to-find-product-market-fit) into an easy step-by-step guide you can follow, as well as dive into two case studies.
 
-![NPS survey](../images/blog/pmf-surveys/pmf-survey.png)
+## A very brief introduction to PMF surveys
+
+> If you're already familiar with product-market fit surveys, skip to the [next section](#how-to-drive-product-market-fit-with-pmf-surveys).
 
 Created by entrepreneur Sean Ellis, the core question (among others) it asks is:
 
@@ -28,97 +30,68 @@ Created by entrepreneur Sean Ellis, the core question (among others) it asks is:
 - b) Somewhat disappointed
 - c) Not disappointed
 
-Responses from this survey shed light on how vital your product is to your users, and a high percentage of 'Very disappointed' indicates strong product-market. Ellis [asserts](https://blog.growthhackers.com/using-product-market-fit-to-drive-sustainable-growth-58e9124ee8db) that learning everything you can about these users is the key to building the best products.
-
-### How to calculate PMF score
-
-![How to calculate PMF score](../images/blog/pmf-surveys/pmf-score.png)
-
 Your PMF score is the percentage of "very disappointed" responses out of the total number of responses.
 
 For example, let's say you survey `100` people. `50` people respond with "very disappointed", your PMF score would be `50 / 100 = 50%`.
 
-### What is a good PMF score?
+Based on his research of 100+ startups, Ellis believes 40% answering "very disappointed" is a strong signal of product-market fit.
 
-Based on his research of 100+ startups, Ellis believes 40% answering "very disappointed" is a strong signal of product-market fit. The more responses you get, the more reliable the signal. 
+![How to calculate PMF score](../images/blog/pmf-surveys/pmf-score.png)
 
-Ellis recommend a minimum of 30 responses before the survey becomes directionally useful, and that 100+ responses is ideal.
+## How to drive product-market fit with PMF surveys
 
-### Drawbacks of PMF surveys
+### Step 1: Survey informed users
 
-Calculating your PMF score is not enough. The *real* insights come from segmenting your users based on their response, and then asking follow-up questions – either in a [survey](/surveys) or by [conducting interviews](/product-engineers/interview-snapshot-guide).
+The first step is to learn more about your customers and what they think of your app. Do this by creating a [survey](/surveys) with the following questions:
 
-Here are five follow-up questions you should ask:
-
-1. Why did you select this answer? (after responding to the main survey question)
+1. How would you feel if you could no longer use our product?
    
-2. What is the primary benefit that you have received from our product?
+2. What type of people do you think would most benefit from it?
 
-3. What would you use as an alternative to our product?
+3. What is the main benefit you receive from it?
 
-4. What type of person do you think would benefit most from FYI?
+4. How can we improve our app for you?
 
-5. How can we improve our product?
+Each question plays an important and specific role, and in the next steps we'll explain how. 
 
-Answers to these questions is often surprising – how your users view your product might not be the same as how you do.
-
-### Who should answer the PMF survey?
-
-Ellis recommends sending the PMF survey to users that have recently had meaningful interactions with your product. This means users that have:
+In the meantime, to ensure you receive the best feedback, send the survey to users that have recently had meaningful interactions with your app. This means users that have:
 
 - experienced the core value-prop of your product.
 - used your product at least twice.
 - used your product in the last two weeks.
 
-This way, you ensure that the feedback you receive is relevant and accurate.
+### Step 2: Study your best customers
 
-## How to use PMF to improve your app
+Once you have at least 30 responses, you can begin analyzing the results. 
 
-Rahul Vohra, founder of [Superhuman](https://superhuman.com), famously used PMF surveys to build an [engine to find product-market fit](https://review.firstround.com/how-superhuman-built-an-engine-to-find-product-market-fit). This catapulted them to over 50,000 paying customers and whopping **$20 million** in revenue!
+Start by examining the users would be "very disappointed" if they could no longer use your product. There are two things you want to learn about them:
 
-At a high-level, here are the steps you need to follow to do the same for your app (we'll dive a [case study of Superhuman below](#case-study-superhuman)):
+1. Who they are
 
-1. Send the PMF survey to your users.
+2. Why they love your product
 
-2. Identify your best users i.e., those who answered "very disappointed".
+To find the answers, look at their responses to the questions `What is the main benefit you receive from our product` and `What type of people do you think would most benefit from` (happy users will always describe themselves).
 
-3. Paint a clear picture of who these people are by creating a [user persona](/product-engineers/how-to-create-user-personas) of them.
+Then, use this information to create a [user persona](/product-engineers/how-to-create-user-personas) of your best supporters. Users who match this persona are the ones you need to improve your app for, and in the next step you are going to focus your attention solely on them (while ignoring the rest!).
 
-4. Find out why they love your product. Do this by asking `"What is the main benefit you receive from our product"` as follow-up question in your survey.
+![Personas of survey responders](../images/blog/pmf-surveys/personas.png)
 
-5. Next, direct your attention to the "somewhat disappointed" users. Focus only on those who match the user persona you created in `step 3` *and* responded the same to "main benefit" question in `step 4`.
+### Step 3: Find your "on-the-fence" users
 
-6. It's clear that your app resonates with them, but something is holding them back from *loving* it. Find out what's missing or annoying for them. Do this by asking `How can we improve our app for you?`. 
+Next, direct your attention to the users who responded with "somewhat disappointed". In particular, focus on the ones that:
 
-7. Reprioritize your roadmap to address their issues and ship your changes.
+- match the user persona your created in the previous step, and
+- gave similar responses like your best supporters when asked about the main benefit they receive from your app.
 
-8. Repeat the process to convert your "somewhat disappointed" users into your best users.
+It's clear that these users are seeing the value in your app, but something is holding them back from becoming passionate users. There's usually just one or two things in their way, and so these users will be the easiest to convert into fanatics who champion your product.
 
-![How to improve your app with PMF survey](../images/blog/pmf-surveys/pmf-survey-steps.png)
+To find out what their problems are, look at their response to the question `"How can we improve our app for you?"`. Make note of the common themes – the next step is to address them.
 
-### Case study: Superhuman
+### Step 4: Reprioritize your roadmap
 
-Superhuman nearly doubled their PMF score from 33% to 58%. More importantly, users became noticeably more vocal about how much they loved the product. Here's how they did it:
+Now that you have a clear understanding of your app's most important benefits and missing features, the next step is reprioritize your roadmap. 
 
-First, they sent out a survey with four questions:
-
-1. How would you feel if you could no longer use Superhuman?
-
-2. What type of people do you think would most benefit from Superhuman?
-
-3. What is the main benefit you receive from Superhuman?
-
-4. How can we improve Superhuman for you?
-
-Then, they took the responses from this survey and did the following:
-
-1. **Segmented users:** They assigned user personas to everyone who responded (e.g. founder, engineer, customer success) and created an [Ideal Customer Profile](/founders/creating-ideal-customer-profile) based on the users that responded "very disappointed". 
-
-2. **Doubled down on what their ideal customers love:** People loved how fast Superhuman was and how quickly they could get their work done using shortcuts. Superhuman made sure to continue improving these. They built more features to increase email efficiency – like "Snippets", the ability to automatically type phrases, paragraphs, or whole emails. 
-
-3. **Converted on-the-fence users:** They focused on the users who loved Superhuman's speed but still responded with "somewhat disappointed". They learned that these users wanted a mobile app. So they built it – and their users loved them for it!
-
-4. **Repeated the process:** Superhuman continued to survey users, tracking progress towards the 40% mark. The score became the primary OKR for the product team and, after three quarters, Superhuman increased their score to 58%.
+You need to continue focusing on improving the app's main benefits while also addressing the missing features that are holding users back. Rahul Vohra, founder of Superhuman, mentions why this is important:
 
 <BorderWrapper>
 <Quote
@@ -130,9 +103,48 @@ Then, they took the responses from this survey and did the following:
 />
 </BorderWrapper>
 
+When prioritizing your roadmap, you don't need to overthink things. Stack-ranking your projects by assigning each one a `low/medium/high` label for `effort + impact` is sufficient (or you could even [add dollar estimates](/product-engineers/fixing-growth-problems#problem-2-prioritization)). 
+
+This will give you a clear idea of which projects to work on.
+
+### Step 5: Repeat
+
+Keep repeating the process from step 1-4. Each time you do, you'll learn more about what you need to improve and how to prioritize it.
+
+As you start shipping your improvements, continue surveying users to track your product-market fit score over time. It should begin to improve as you gradually convert your on-the-fence users into loyal advocates. 
+
+Lastly, to keep your product team focused on a single goal, consider making your PMF score their primary OKR.
+
+
+### Frequently Asked Questions
+
+#### How many responses do I need?
+
+Ellis recommends a minimum of 30 responses for the survey to become directionally useful. However, he also mentions that 100 or more responses is ideal.
+
+#### What do I do about users who answer "not disappointed"?
+
+Respectfully ignore them! 
+
+It's likely that there are many aspects of your app that is bothering or not benefiting them. Thus they are essentially a lost cause. This is why you should instead focus on the "somewhat disappointed" users mentioned in step 3.
+
+## Case study: Superhuman
+
+Superhuman [nearly doubled their PMF score](https://review.firstround.com/how-superhuman-built-an-engine-to-find-product-market-fit) from 33% to 58%. More importantly, users became noticeably more vocal about how much they loved the product. Here's how they did it:
+
+1. **Segmented users:** They assigned user personas to everyone who responded (e.g. founder, engineer, customer success) and created an [Ideal Customer Profile](/founders/creating-ideal-customer-profile) based on the users that responded "very disappointed". 
+
+2. **Doubled down on what their ideal customers love:** People loved how fast Superhuman was and how quickly they could get their work done using shortcuts. Superhuman made sure to continue improving these. They built more features to increase email efficiency – like "Snippets", the ability to automatically type phrases, paragraphs, or whole emails. 
+
+3. **Converted on-the-fence users:** They focused on the users who loved Superhuman's speed but still responded with "somewhat disappointed". They learned that these users wanted a mobile app. So they built it – and their users loved them for it!
+
+4. **Repeated the process:** Superhuman continued to survey users, tracking progress towards the 40% mark. The score became the primary OKR for the product team and, after three quarters, Superhuman increased their score to 58%.
+
 ### Case study: Slack
 
-In 2015, co-founder of KISSmetrics [Hiten Shah](https://twitter.com/hnshah) ran an [open research project](https://hitenism.com/slack-product-market-fit-survey/) where he conducted the PMF survey on 731 Slack users. Here's what he learned about their best users:
+In 2015, co-founder of KISSmetrics [Hiten Shah](https://twitter.com/hnshah) ran an [open research project](https://hitenism.com/slack-product-market-fit-survey/) where he conducted the PMF survey on 731 Slack users. While he didn't follow the exact format we outlined in this post, it's worth diving into research.
+
+Here's what he learned about Slack's best users:
 
 - They believed it increased productivity and improved collaboration.
 - The key benefit of using Slack is a reduction in email volume.
