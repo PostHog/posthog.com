@@ -9,18 +9,20 @@ export default function InternalSidebar({ tableOfContents }) {
                     On this page
                 </p>
                 <ul className="list-none m-0 p-0 xl:py-0 py-4 flex flex-col xl:max-h-none max-h-64 overflow-auto xl:!bg-transparent bg-accent dark:bg-accent-dark xl:border-none border border-border dark:border-dark rounded-bl-md rounded-br-md">
-                    {tableOfContents?.map((navItem, index) => {
-                        return (
-                            <li key={index}>
-                                <InternalSidebarLink
-                                    url={navItem.url}
-                                    name={navItem.value}
-                                    depth={navItem.depth}
-                                    className="text-sm"
-                                />
-                            </li>
-                        )
-                    })}
+                    {tableOfContents
+                        ?.filter(({ depth }) => depth < 2)
+                        .map((navItem, index) => {
+                            return (
+                                <li key={index}>
+                                    <InternalSidebarLink
+                                        url={navItem.url}
+                                        name={navItem.value}
+                                        depth={navItem.depth}
+                                        className="text-sm"
+                                    />
+                                </li>
+                            )
+                        })}
                 </ul>
             </div>
         )
