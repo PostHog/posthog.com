@@ -214,7 +214,9 @@ const FeatureList = ({ features, featureIconBackground, className = '' }) => {
                         key={title}
                         className="flex gap-2 items-start mdlg:items-center text-base mdlg:text-sm xl:text-[15px]"
                     >
-                        <span className={`inline-flex p-1 rounded-sm bg-${featureIconBackground}/10`}>
+                        <span
+                            className={`inline-flex p-1 rounded-sm bg-primary/10 mdlg:bg-${featureIconBackground}/10`}
+                        >
                             <Icon className="w-4 mdlg:w-6" />
                         </span>
                         <span className="opacity-70 font-semibold">{title}</span>
