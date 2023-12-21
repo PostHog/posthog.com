@@ -24,6 +24,10 @@ after:bg-salmon
 after:bg-seagreen
 after:bg-teal
 after:bg-aqua
+after:border-yellow
+after:border-seagreen
+before:border-yellow
+before:border-seagreen
 bg-primary/10
 bg-primary-dark/10
 bg-blue
