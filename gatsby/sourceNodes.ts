@@ -206,27 +206,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         createNode(node)
     })
 
-    const plugins = await fetch(
-        'https://raw.githubusercontent.com/PostHog/integrations-repository/main/plugins.json'
-    ).then((res) => res.json())
-    plugins.forEach((plugin) => {
-        const { displayOnWebsiteLib, name, ...other } = plugin
-        if (displayOnWebsiteLib) {
-            const node = {
-                id: createNodeId(`plugin-${name}`),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `Plugin`,
-                    contentDigest: createContentDigest(plugin),
-                },
-                name,
-                ...other,
-            }
-            createNode(node)
-        }
-    })
-
     const createRoadmapItems = async (page = 1) => {
         const roadmapQuery = qs.stringify(
             {
