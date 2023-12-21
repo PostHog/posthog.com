@@ -48,21 +48,16 @@ const Slide = ({
     flagColor,
     features,
     featureListClasses,
-    featureIconBackground,
     imageColumn,
     contentColumn,
-    imageProps,
     imageClasses,
     HogMobile,
     HogDesktop,
-    hogAlt,
     contentOffset,
     buttonLabel,
     buttonUrl,
     buttonClasses,
     buttonChildClasses,
-    children,
-    className = '',
     Images,
 }) => {
     return (
@@ -275,7 +270,6 @@ export const ProductAnalytics = () => {
                     </>
                 )
             }}
-            imageProps={imageProps}
             HogMobile={() => (
                 <StaticImage
                     loading="eager"
