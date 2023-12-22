@@ -105,9 +105,6 @@ const Pricing = (): JSX.Element => {
                     <div className="md:order-2">
                         <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80 ">
                             <Lottie
-                                style={{
-                                    cursor: 'default',
-                                }}
                                 options={{
                                     loop: false,
                                     autoplay: true,
