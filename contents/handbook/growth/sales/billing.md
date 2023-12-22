@@ -11,53 +11,6 @@ All PostHog instances talk to a common external **Billing Service**. This servic
 
 The Billing Service is the source of truth for product information, what plans are offered on those products (eg a free vs a paid plan on Session Replay), and feature entitlements on those plans. Our payment provider Stripe is the source of truth for customer information, invoices, and payments. The billing service communicates with Stripe to pull all the relevant information together before responding to customer requests.
 
-### Annual Plan Automation
-
-To ensure consistency in the setup of annual plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
-
-#### Loading contract details
-
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01H9QPTRYEZVGFTJ84XMCYQFSK) with the PandaDoc ID of the document.
-
-In the table you can then click the button to [Load from PandaDoc](https://zapier.com/app/zap/207323516) - this will look up variables from the Order Form and add them to the table including:
-* Reformatting human-readable numbers into Stripe-parsable ones (e.g. 60 million -> 60000000).
-* Setting checkboxes to show whether a product is included
-* Setting drop-down menus to show whether an overage rate is custom
-
-#### Manual Edits Required
-
-After loading the information from PandaDoc, you should review it for correctness as well as update the following:
-1. The Contact Email column will have all signer emails, including the PostHog team.  Select the correct customer email and delete the others as appropriate.
-2. Add the Stripe Customer ID (note you might need to create one and add address information if they've not previously been a customer).
-
-#### Create the Up-Front Invoice and Subscription Prices
-
-You can now click the [Create Annual Subscription](https://zapier.com/app/zap/206913950) button.  Using the data from the table row where the button was clicked this will:
-1. Create a draft Invoice object against the Stripe Customer Object.
-2. Add the ID of the Invoice to the table (for easy review later on).  The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms.  **You might need to manually change this if we have different terms with the customer.**
-3. Add the up-front price for each of Product Analytics, Group Analytics, Session Replay, Feature Flags and Enterprise to the draft invoice.
-4. Where we have custom overages, create a Stripe Price for each of those and populate the table with the Price IDs.  _NOTE: We don't currently do anything here in cases where overage is none or free - need to figure out in future if this is necessary._
-5. Enable the Amortization and Schedule Subscription buttons in the table.
-
-#### Amortize Invoice
-
-As Zapier works asynchronously we need to wait until the table is updated with all of the annual prices (indicating that the invoice is ready).  Clicking the [Amortize Invoice](https://zapier.com/app/zap/207286989) button will set the correct metadata for our revenue tracking on the invoice.
-
-#### Schedule Subscription
-
-Once all of the Price IDs are in place in the table, we can [Schedule the Subscription](https://zapier.com/app/zap/207295029).  Using the data from the table row where the button was clicked this will:
-1. Consolidate all of the Price IDs into a query string which the Stripe API accepts.
-2. Create a Subscription Schedule (as it may start in the future) containing all of the prices.  We calculate the number of iterations based on the term of the contract.  An iteration in this case is 1 year, the maximum allowed by Stripe.
-3. Add the ID of the Subscription Schedule to the table
-
-#### Checks and going live
-
-The invoice will be in a draft state in Stripe.  You'll need to use the Invoice ID in the table to find it in Stripe.  Check it to make sure that everything looks correct, and that you have set up Customer Billing/Shipping addresses and Tax ID on the Customer object correctly.  Once you're happy with all of that you can send the invoice to the customer for payment.
-
-The subscription will go live on the start date.  Once it is live you'll need to update the customer object in the [billing admin server](https://billing.posthog.com/admin) with the relevant Subscription ID.  Don't forget to also sync the customer record in the billing server with Stripe to pick up the new plans.
-
-
-
 ### Stripe Products & Prices
 
 > ⚠️ Modifying products and prices should be done carefully. If you aren't sure at any point contact the #growth team to check what you are doing
