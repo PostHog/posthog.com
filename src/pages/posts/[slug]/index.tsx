@@ -1,4 +1,4 @@
-import ClientPost from 'components/Edition/ClientPost'
+import ClientPost from 'component/Edition/ClientPost'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import qs from 'qs'
 import React, { useEffect, useState } from 'react'
@@ -36,6 +36,5 @@ export default function Post({ params }) {
     useEffect(() => {
         getPost()
     }, [params])
-    console.log(getPost)
     return post ? <ClientPost {...post.attributes} id={post.id} getPost={getPost} /> : <Skeleton />
 }
