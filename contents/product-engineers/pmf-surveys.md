@@ -1,6 +1,6 @@
 ---
 date: 2023-11-29
-title: "Step-by-step guide: How to use product-market fit surveys to drive PMF"
+title: "How to drive growth with product-market fit surveys"
 author:
   - lior-neu-ner
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
@@ -30,7 +30,7 @@ Created by entrepreneur Sean Ellis, the core question (among others) it asks is:
 - b) Somewhat disappointed
 - c) Not disappointed
 
-Your PMF score is the percentage of "very disappointed" responses out of the total number of responses.
+Your PMF score is the percentage of total responses that are "very disappointed".
 
 For example, let's say you survey `100` people. `50` people respond with "very disappointed", your PMF score would be '50 / 100 = 50%`.
 
@@ -64,7 +64,7 @@ You can begin analyzing the results once you have at least 30 responses.
 
 ### Step 2: Study your best customers
 
-Start by examining the users who would be "very disappointed" if they could no longer use your product. There are two things you want to learn about them:
+Start by examining the users who would be "very disappointed" if they could no longer use your product. There are two things you need to learn about them:
 
 1. Who they are
 
@@ -72,9 +72,10 @@ Start by examining the users who would be "very disappointed" if they could no l
 
 To find the answers, look at their responses to the questions `What is the main benefit you receive from our product?` and `What type of people do you think would most benefit from it?`.
 
-Then, use this information to create a [user persona](/product-engineers/how-to-create-user-personas) of your best supporters. Users who match this persona are the ones you need to improve your app for, and in the next step you are going to focus your attention solely on them (while ignoring the rest!).
+Then, use this information to create a [user persona](/product-engineers/how-to-create-user-personas) of your best supporters. Users who match this persona are the ones you need to improve your app for and you should focus your attention solely on them. In the next step we explain how to do this.
 
 ![Personas of survey responders](../images/blog/pmf-surveys/personas.png)
+<Caption>Focus your attention only on users that match your user persona</Caption>
 
 ### Step 3: Find your "on-the-fence" users
 
@@ -85,11 +86,11 @@ Direct your attention to the users who responded with "somewhat disappointed". I
 
 It's clear that these users are seeing the value in your app, but something is holding them back from becoming passionate users. Usually, only one or two things are in their way, so these users will be the easiest to convert into fanatics who champion your product.
 
-To find out what their problems are, look at their response to the question `"How can we improve our app for you?"`. Make a note of the common themes – the next step is to address them.
+To find out what their problems are, look at their response to the question `"How can we improve our app for you?" and make a note of the common themes.
 
 ### Step 4: Reprioritize your roadmap
 
-Now that understand your app's most important benefits and missing features, the next step is to reprioritize your roadmap. 
+Now that you understand your app's most important benefits and missing features, the next step is to reprioritize your roadmap. 
 
 You need to continue improving the app's main benefits while also addressing the problems your users mentioned. Rahul Vohra, founder of Superhuman, explains why this is important:
 
@@ -103,9 +104,7 @@ You need to continue improving the app's main benefits while also addressing the
 />
 </BorderWrapper>
 
-When prioritizing your roadmap, you don't need to overthink things. Stack-ranking your projects by assigning each one a `low/medium/high` label for `effort + impact` is sufficient (or you could even [add dollar estimates](/product-engineers/fixing-growth-problems#problem-2-prioritization)). 
-
-This will give you a clear idea of which projects to work on.
+When prioritizing your roadmap, you don't need to overthink things. Stack-ranking your projects by assigning each one a label of `low/medium/high` for effort and impact is sufficient (or you can even [add dollar estimates](/product-engineers/fixing-growth-problems#problem-2-prioritization)). This will give you a clear idea of which projects to work on first.
 
 ### Step 5: Repeat
 
