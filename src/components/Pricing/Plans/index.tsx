@@ -7,6 +7,7 @@ import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
 import { BillingProductV2Type, BillingV2FeatureType } from 'types'
+import { number, string } from 'yup'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -258,11 +259,11 @@ export default function Plans({
         },
     } = useStaticQuery(allProductsData)
     return (groupsToShow?.length > 0 ? products.filter(({ type }) => groupsToShow.includes(type)) : products).map(
-        ({ type, plans, unit, addons, name, inclusion_only }) => {
+        ({ type, plans, unit, addons, name, inclusion_only }: any) => {
             return (
                 <div className="grid gap-y-2 min-w-[450px] mb-20" key={type}>
                     <div className="border border-light dark:border-dark rounded pb-2">
-                        {plans.some(({ free_allocation }) => free_allocation) && (
+                        {plans.some(({ free_allocation }) => free_allocation) ? (
                             <div>
                                 <Row className="bg-accent dark:bg-accent-dark mb-2">
                                     <div className="flex-grow">
@@ -303,6 +304,14 @@ export default function Plans({
                                             </p>
                                         )
                                     })}
+                                </Row>
+                            </div>
+                        ) : (
+                            <div>
+                                <Row className="bg-accent dark:bg-accent-dark mb-2">
+                                    <div className="flex-grow">
+                                        {showTitle && <h4 className="text-lg mb-0">{planNames[name] || name}</h4>}
+                                    </div>
                                 </Row>
                             </div>
                         )}
