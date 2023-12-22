@@ -669,6 +669,10 @@ export const handbookSidebar = [
                         name: 'Historical import',
                         url: '/handbook/growth/sales/historical-import',
                     },
+                    {
+                        name: 'Automation',
+                        url: '/handbook/growth/sales/automations',
+                    },
                 ],
             },
         ],

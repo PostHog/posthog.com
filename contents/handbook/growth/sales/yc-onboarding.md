@@ -46,11 +46,15 @@ YC companies can either fill in our [dedicated YC Onboarding form](/yc-onboardin
 
 The YC Onboarding form will automatically populate the [YC Plan Applications](https://tables.zapier.com/app/tables/t/01H2896A4Y47C650WK0ZKX9FPE) Zapier table, looking up Stripe and HubSpot data for the company if we have it.  If people email us directly you'll need to update the table yourself.
 
+There's more information on the implementation in the [automations](/handbook/growth/sales/automations) section of the handbook.
+
 When submitting the form users have four options to describe their situation:
-1. "I need a demo" - they will receive an email from Cameron inviting them to sign up and book a demo.
-2. "I just want the YC deal" - they won't receive an email and we just need to Activate them (see below)
-3. "I have a few questions" - they will receive an email from Cameron inviting them to sign up and then email the questions they have.
-4. "I need help with implementation" - they will receive an email from Cameron inviting them to sign up and book a meeting.
+1. "I need a demo" 
+2. "I just want the YC deal"
+3. "I have a few questions" 
+4. "I need help with implementation" 
+
+The Zapier automations ensure an automated email reply from Simon asking them to subscribe to a paid plan and Mark as Using on Bookface, as well as a demo or call booking link.
 
 ### Before the call
 
@@ -89,13 +93,14 @@ Once you click the correct Approve button the [Zap](https://zapier.com/editor/19
 1. Apply the correct credit amount to their Stripe customer object, and also update the plan expiry data metadata
 2. Set up their org on Zendesk and tag them as on the startup plan (meaning their tickets will be tagged with Normal priority)
 3. (Current batch only) Generate a Printfection giveaway link
-4. Email the details of the plan and giveaway link to the customer (from Cameron)
+4. Email the details of the plan and giveaway link to the customer (from Simon)
+5. Invite them to the [posthog-founders-club](https://posthog.slack.com/archives/C04J1TJ11UZ) private Slack channel
 
 ### If we need to send giveaways outside of the Zapier automation
 
-Customers have the following giveaway options. Our default are a choice of AirPods or Timbuk2 rucksack for folks in the US or Canada - if they live outside these countries, you should offer them a choice between $150 merch credit or Open Collective donation.
+Customers have the following giveaway options. Our default is a Timbuk2 rucksack for folks in the US or Canada - if they live outside these countries, you should offer them a choice between $150 merch credit or Open Collective donation.
 
-Please do _not_ send Airpods or Timbuk2 outside of the US and Canada - this creates big customs headaches for us and is a bad experience for the user. If a user outside those countries is desperate for them, then either:
+Please do _not_ send Timbuk2 rucksacks outside of the US and Canada - this creates big customs headaches for us and is a bad experience for the user. If a user outside those countries is desperate for them, then either:
 
 - Suggest they give us a US/Canada postal address they can forward or collect from
 - Send them the item but at their own risk for paying customs fees etc.
@@ -122,11 +127,11 @@ Please do _not_ send Airpods or Timbuk2 outside of the US and Canada - this crea
 </thead>
 <tbody>
 
-<!-- AirPods or Timbuk2 backpack via Printfection -->
+<!-- Timbuk2 backpack via Printfection -->
 <tr>
 <td valign="top">
 
-AirPods or Timbuk2 backpack
+Timbuk2 backpack
 <small>(Depending on stock availability)</small>
 
 </td>
@@ -206,5 +211,5 @@ To create a giftcard in Open Collective:
 ## Responsibilities
 
 - James H and Kendal manage 1-1 comms with YC companies initially
-- Cameron handles YC onboarding calls, billing, and HubSpot
-- Grace manages Printfection, Open Collective, and Shopify
+- Simon handles YC onboarding calls, billing, and HubSpot
+- Joe and Lottie manage Printfection, Open Collective, and Shopify

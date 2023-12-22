@@ -53,7 +53,7 @@ Triggered when an invoice is paid (triggered by the [Non-zero billing spend](htt
 3. Updates the Last payment amount and date, and PostHog Org ID on the HubSpot Company
 4. Uses the Update tags on Zendesk org Sub Zap to ensure that there is a corresponding Zendesk Organization which is tagged accordingly:
    1. `priority_customer` if the MRR is greater than $1666
-   2. `paying customer` if the MRR is less than $1666
+   2. `paying_customer` if the MRR is less than $1666
 
 #### Stripe Subscription cancelled -> Zendesk ([link](https://zapier.com/editor/190426088/published))
 
@@ -77,14 +77,14 @@ in the existing deal (1,2,3 years) and then creates a new deal in the renewal pi
 
 This is to ensure we are tracking pipeline updates as PostHog events, so that we can model our sales pipeline as a funnel.
 
-### Calendly Event Scheduled to PostHog ([link](https://zapier.com/editor/208732730/published))
+#### Calendly Event Scheduled to PostHog ([link](https://zapier.com/editor/208732730/published))
 
 Triggered when a new event is created via Calendly, this:
 
 1. Looks up the PostHog Distinct ID via the email address of the person
 2. Captures a `calendly.event_scheduled` event in PostHog with either the Distinct ID above or email address as the Distinct ID if there wasn't a match.
 
-### HubSpot Deal Stage Changes to PostHog ([link](https://zapier.com/editor/208833861/published))
+#### HubSpot Deal Stage Changes to PostHog ([link](https://zapier.com/editor/208833861/published))
 
 Triggered when a deal stage is updated in HubSpot, this:
 
@@ -140,6 +140,12 @@ If the customer doesn't already have a running monthly subscription you can crea
 Remember to update the Subscription in the Billing Admin Portal
 
 **Note: It has the current default Stripe Price IDs hardcoded in the Zap so if we update those we need to remember to update them in this Zap too.**
+
+### YC Program ([link](https://zapier.com/app/zaps/folder/1685574))
+
+This process is documented in the [YC Onboarding](/handbook/growth/sales/yc-onboarding) section of the handbook.
+
+### PostHog for Startups
 
 ### Sub-Zaps
 
