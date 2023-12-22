@@ -167,6 +167,10 @@ text-salmon
 text-seagreen
 text-teal
 text-aqua
+text-light-blue
+text-[#36C46F]
+text-[#2EA2D3]
+text-[#8567FF]
 to-tan/0
 via-tan/85
 w-2/12
