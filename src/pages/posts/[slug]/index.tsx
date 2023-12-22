@@ -36,6 +36,6 @@ export default function Post({ params }) {
     useEffect(() => {
         getPost()
     }, [params])
-
+    console.log(getPost)
     return post ? <ClientPost {...post.attributes} id={post.id} getPost={getPost} /> : <Skeleton />
 }

@@ -15,13 +15,17 @@ import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
 import Link from 'components/Link'
 
-export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformImageUri }) => {
+export const Post = ({ imageURL, title, category, date, belowTitle, body, cta, transformImageUri }) => {
     return (
         <>
             <div className="mb-4">
                 <div className="mb-4">
                     <Title className="text-primary dark:text-primary-dark">{title}</Title>
-                    <p className="!m-0 opacity-70">{dayjs(date).format('MMM DD, YYYY')}</p>
+
+                    <p className="!m-0 opacity-70">
+                        {category.attributes.label} - {dayjs(date).format('MMM DD, YYYY')}
+                    </p>
+
                     {belowTitle?.()}
                 </div>
                 {imageURL && (
@@ -96,7 +100,6 @@ export default function ClientPost({
     }
     const author = authors?.data?.[0]
     const imageURL = featuredImage?.url
-
     return (
         <div className="@container">
             <div className="flex flex-col-reverse @3xl:flex-row">
@@ -111,6 +114,7 @@ export default function ClientPost({
                             <Post
                                 imageURL={imageURL}
                                 title={title}
+                                category={post_category?.data}
                                 date={date || publishedAt}
                                 belowTitle={() =>
                                     isModerator ? (
