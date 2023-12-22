@@ -1,56 +1,42 @@
-import {
-    IconGraph,
-    IconRewindPlay,
-    IconToggle,
-    IconFlask,
-    IconMessage,
-    IconPerson,
-    IconServer,
-    IconDatabase,
-    IconTerminal,
-} from '@posthog/icons'
-
 export const slideButtons = [
     {
         title: 'Product analytics',
-        Icon: IconGraph,
+        lottieSrc: '/lotties/product-icons/product-analytics.lottie',
         color: 'blue',
     },
     {
+        title: 'Web analytics',
+        lottieSrc: '/lotties/product-icons/web-analytics.lottie',
+        color: 'light-blue',
+    },
+    {
         title: 'Session replay',
-        Icon: IconRewindPlay,
+        lottieSrc: '/lotties/product-icons/session-replay.lottie',
         color: 'yellow',
     },
     {
         title: 'Feature flags',
-        Icon: IconToggle,
+        lottieSrc: '/lotties/product-icons/feature-flags.lottie',
         color: 'teal',
     },
     {
         title: 'A/B testing',
-        Icon: IconFlask,
+        lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
     },
     {
         title: 'Surveys',
-        Icon: IconMessage,
+        lottieSrc: '/lotties/product-icons/surveys.lottie',
         color: 'salmon',
     },
     {
-        title: 'CDP',
-        Icon: IconPerson,
+        title: 'Data pipeline',
+        lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
         color: 'yellow',
     },
     {
         title: 'Data warehouse',
-        Icon: IconServer,
+        lottieSrc: '/lotties/product-icons/data-warehouse.lottie',
         color: 'seagreen',
     },
-    /*
-    {
-        title: 'API',
-        Icon: Terminal,
-        color: 'blue',
-    },
-    */
 ]
