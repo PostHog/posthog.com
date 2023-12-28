@@ -322,7 +322,7 @@ function PostsListing() {
                     </>
                 )}
                 <ul
-                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden mt-4 ${
+                    className={`list-none p-0 m-0 snap-y snap-proximity overflow-x-hidden mt-4 ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
                     }`}
                 >
