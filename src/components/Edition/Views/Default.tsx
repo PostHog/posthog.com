@@ -268,7 +268,7 @@ const Title = () => {
     const { activeMenu, tag, sort, setSort } = useContext(PostsContext)
 
     return (
-        <div className="flex justify-between items-center mb-2 pt-4">
+        <div className="hidden md:flex justify-between items-center mb-2 pt-4">
             <h2 className="m-0 text-xl space-x-2 flex-wrap md:flex hidden">
                 {activeMenu?.name === 'Founders' ? (
                     <>Founder's hub{tag ? `: ${tag}` : null}</>
@@ -374,7 +374,7 @@ export default function Default({ children }) {
                     className={`${
                         articleView
                             ? 'flex-grow'
-                            : 'sticky top-[108px] h-screen basis-[20rem] flex-shrink-0 block pl-4 border-l border-light dark:border-dark'
+                            : 'sticky top-[108px] h-screen basis-[20rem] flex-shrink-0 pl-4 border-l border-light dark:border-dark md:block hidden'
                     }`}
                 >
                     {children}
