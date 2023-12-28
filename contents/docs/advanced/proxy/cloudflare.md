@@ -67,7 +67,7 @@ To use your own domain instead of the basic `*.workers.dev` one, go to the worke
 
 ### 4. Use the new host in SDKs
 
-You can now use your worker's domain (shown under "Preview" on the worker page) as `api_host` in PostHog SDKs! If you've added a custom domain in step 3, use that instead.
+You can now use your worker's domain (shown under "Preview" on the worker page) as `api_host` in PostHog SDKs! If you've added a custom domain in step 3, use that instead. Make sure to set the `ui_host` to your actual PostHog app URL (e.g. app.posthog.com).
 
 ## Method two: Proxy using DNS and Page Rules with Cloudflare Enterprise
 
@@ -83,4 +83,4 @@ The proxy won't work if the Host headers of requests aren't rewritten from your 
 
 ### 3. Use the new host in SDKs
 
-You can now use your CNAME record's domain as `api_host` in PostHog SDKs!
+You can now use your CNAME record's domain as `api_host` in PostHog SDKs! Make sure to set the `ui_host` to your actual PostHog app URL (e.g. app.posthog.com) as well.
