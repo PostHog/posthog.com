@@ -72,7 +72,7 @@ const SlideButton = ({ lottieSrc, color, title, index, activeIndex, setActiveInd
                         }`}
                     />
                 </Disclosure.Button>
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                     {active && (
                         <motion.div
                             initial={{ height: 0 }}
