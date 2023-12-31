@@ -46,11 +46,11 @@ posthog.groupIdentify({
 ```
 
 ```php
-PostHog::groupIdentify(array(
+PostHog::groupIdentify([
     'groupType' => 'company',
     'groupKey' => 'company_id_in_your_db',
-    'properties' => array("name" => "PostHog", "subscription" => "premium", "date_joined": "2020-01-23T00:00:00.000Z")
-));
+    'properties' => ['name' => 'PostHog', 'subscription' => 'premium', 'date_joined' => '2020-01-23T00:00:00.000Z']
+]);
 ```
 
 ```segment
