@@ -77,6 +77,9 @@ border-salmon
 border-seagreen
 border-teal
 border-aqua
+border-[#36C46F]
+border-[#2EA2D3]
+border-[#8567FF]
 col-span-7
 flex
 flex
