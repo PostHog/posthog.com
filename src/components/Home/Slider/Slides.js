@@ -316,7 +316,7 @@ export const WebAnalytics = () => {
     ]
     return (
         <Slide
-            bgColor="lime-green"
+            bgColor="light-blue"
             textColor="primary"
             title="Web analytics"
             flag="Beta"
@@ -372,7 +372,7 @@ export const WebAnalytics = () => {
             buttonLabel="Read the docs"
             buttonUrl="/docs/web-analytics"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-            buttonChildClasses="!bg-lime-green border-primary !text-primary group-hover:text-black"
+            buttonChildClasses="!bg-light-blue border-primary !text-primary group-hover:text-black"
         />
     )
 }
@@ -765,7 +765,7 @@ export const DataWarehouse = () => {
     return (
         <Slide
             containerClasses="!pt-0"
-            bgColor="[#29DBBB]"
+            bgColor="[#8269e7]"
             textColor="primary"
             title="Data warehouse"
             flag="Beta"
@@ -816,7 +816,7 @@ export const DataWarehouse = () => {
             buttonLabel="Learn more"
             buttonUrl="/docs/data-warehouse"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-            buttonChildClasses="!bg-[#29DBBB] border-black !text-black group-hover:text-black"
+            buttonChildClasses="!bg-[#8269e7] border-black !text-black group-hover:text-black"
         />
     )
 }
