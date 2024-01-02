@@ -87,7 +87,7 @@ You can also manually flush the queue:
 ```
 
 ```swift
-posthog.capture('logged_out')
+posthog.capture("logged_out")
 posthog.flush()
 ```
 
@@ -154,7 +154,7 @@ if ([[PHGPosthog sharedPostHog] getFeatureFlag:@"experiment-feature-flag-key"] =
 ```
 
 ```swift
-if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+if (posthog.getFeatureFlag("experiment-feature-flag-key") as? String == "variant-name") {
     // do something
 }
 ```
