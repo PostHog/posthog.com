@@ -2819,25 +2819,25 @@ const menu = [
         icon: 'IconFeatures',
         children: [
             {
-                name: 'Product Analytics',
+                name: 'Product analytics',
                 icon: 'IconGraph',
                 color: 'blue',
                 url: '/product-analytics',
             },
             {
-                name: 'Session Replay',
+                name: 'Session replay',
                 icon: 'IconRewindPlay',
                 color: 'yellow',
                 url: '/session-replay',
             },
             {
-                name: 'Feature Flags',
+                name: 'Feature flags',
                 icon: 'IconToggle',
                 color: 'seagreen',
                 url: '/feature-flags',
             },
             {
-                name: 'A/B Testing',
+                name: 'A/B testing',
                 icon: 'IconFlask',
                 color: 'purple',
                 url: '/ab-testing',
