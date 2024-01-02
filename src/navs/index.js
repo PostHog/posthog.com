@@ -408,7 +408,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'On-call rotation',
-                        url: '/handbook/engineering/oncall-rotation',
+                        url: '/handbook/engineering/on-call-rotation',
                     },
                     {
                         name: 'Bug prioritization',
