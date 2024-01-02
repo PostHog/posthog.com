@@ -263,7 +263,7 @@ Sentry.setTag(PostHogSentryIntegration.POSTHOG_ID_TAG, 'my-nodejs-service');
 // or contextually for example within an api request
 try {
     myFunction()
-} catch(e) {
+} catch(err) {
   Sentry.captureException(err, {
     tags: {
       [PostHogSentryIntegration.POSTHOG_ID_TAG]: request.user.id,
