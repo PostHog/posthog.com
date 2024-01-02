@@ -44,6 +44,8 @@ export type ShopifyProduct = {
 
     featuredMedia: ShopifyMediaImage
 
+    options: ProductVariantOption[]
+
     status: string
 
     variants: ShopifyProductVariant[]
@@ -57,6 +59,7 @@ export type ShopifyProductVariant = {
     sku: string
     selectedOptions: {
         name: string
+        value: string
     }[]
     product: {
         title: string
@@ -64,6 +67,43 @@ export type ShopifyProductVariant = {
     }
     media: ShopifyMediaImage[]
 }
+
+interface Image {
+    altText: string | null
+    height: number
+    id: string
+    originalSrc: string
+    transformedSrc: string
+    width: number
+}
+
+interface PriceV2 {
+    amount: string
+    currencyCode: string
+}
+
+/**
+ * variant options
+ */
+export type ProductVariantSelection = {
+    name: string
+    value: string
+}
+
+export type ProductVariantOption = {
+    shopifyId: string
+    name: string
+    values: string[]
+}
+
+interface SelectedOption {
+    name: string
+    value: string
+}
+
+/**
+ * cart
+ */
 
 export type CartItem = ShopifyProductVariant & {
     count: number
@@ -88,28 +128,11 @@ export type AdjustedLineItem = {
     remove: boolean
 }
 
-// Cart GraphQL response types
+/**
+ * api response
+ */
 
-interface Image {
-    altText: string | null
-    height: number
-    id: string
-    originalSrc: string
-    transformedSrc: string
-    width: number
-}
-
-interface PriceV2 {
-    amount: string
-    currencyCode: string
-}
-
-interface SelectedOption {
-    name: string
-    value: string
-}
-
-interface Product {
+export interface Product {
     id: string
     handle: string
     productType: string

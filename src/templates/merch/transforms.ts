@@ -12,3 +12,7 @@ export function getLineItemImage(variant: ShopifyProductVariant): IGatsbyImageDa
 
     return null
 }
+
+export function shopifyGidToId(gid: string): string {
+    return gid.replace(/gid:\/\/shopify\/\w+\//, '')
+}

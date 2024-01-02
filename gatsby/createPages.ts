@@ -1,9 +1,10 @@
-import { replacePath, flattenMenu } from './utils'
 import { GatsbyNode } from 'gatsby'
+import fetch from 'node-fetch'
 import path from 'path'
 import slugify from 'slugify'
-import fetch from 'node-fetch'
+import { node } from 'webpack'
 import menu from '../src/navs/index'
+import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -336,6 +337,21 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            allShopifyCollection {
+                nodes {
+                    handle
+                    products {
+                        id
+                    }
+                }
+            }
+            allMerchNavigation {
+                nodes {
+                    url
+                    title
+                    handle
+                }
+            }
         }
     `)
 
@@ -343,20 +359,61 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         return Promise.reject(result.errors)
     }
 
-    // Merch
-    const shopifyProducts = result.data.allShopifyProduct.edges
+    /**
+     * Merch pages
+     */
+
     const productsPerPage = 6
-    const numCollectionPages = Math.ceil(shopifyProducts.length / productsPerPage)
-    Array.from({ length: numCollectionPages }).forEach((_, i) => {
-        createPage({
-            path: i === 0 ? `/merch` : `/merch/${i + 1}`,
-            component: path.resolve('./src/templates/merch/index.tsx'),
-            context: {
-                limit: productsPerPage,
-                skip: i * productsPerPage,
-                numCollectionPages,
-                currentPage: i + 1,
-            },
+
+    // all products (aka "/merch/")
+    // const shopifyProducts = result.data.allShopifyProduct.edges
+    // const numPages = Math.ceil(shopifyProducts.length / productsPerPage)
+    // Array.from({ length: numPages }).forEach((_, i) => {
+    //     createPage({
+    //         path: i === 0 ? `/merch` : `/merch/${i + 1}`,
+    //         component: path.resolve('./src/templates/merch/AllProducts.tsx'),
+    //         context: {
+    //             limit: productsPerPage,
+    //             skip: i * productsPerPage,
+    //             numPages,
+    //             currentPage: i + 1,
+    //         },
+    //     })
+    // })
+
+    // collection pages (aka "/merch/collection-handle/")
+    result.data.allShopifyCollection.nodes.forEach(({ handle, products }) => {
+        console.log('🚀 ~ handle:', handle)
+        const merchBasePath = '/merch'
+        const collectionPath = handle === 'all-products' ? '' : `/${handle}`
+        const collectionProductsCount = products.length
+        const numPages = Math.ceil(collectionProductsCount / productsPerPage)
+
+        Array.from({
+            length: numPages,
+        }).forEach((_, i) => {
+            createPage({
+                path: i === 0 ? `${merchBasePath}${collectionPath}` : `${merchBasePath}${collectionPath}/${i + 1}`,
+                component: path.resolve('./src/templates/merch/Collection.tsx'),
+                context: {
+                    merchNav: result.data.allMerchNavigation.nodes?.map((item) => {
+                        if (item.handle === 'all-products') {
+                            return {
+                                url: '/merch',
+                                handle: item.handle,
+                                title: item.title,
+                            }
+                        }
+
+                        return item
+                    }),
+                    handle,
+                    limit: productsPerPage,
+                    skip: i * productsPerPage,
+                    numPages,
+                    currentPage: i + 1,
+                },
+            })
         })
     })
 
