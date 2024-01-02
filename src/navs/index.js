@@ -1951,7 +1951,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Product Analytics',
+            name: 'Product analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/docs/product-analytics',
@@ -2135,7 +2135,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Session Replay',
+            name: 'Session replay',
             url: '/docs/session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
@@ -2221,7 +2221,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Feature Flags',
+            name: 'Feature flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/docs/feature-flags',
@@ -2301,7 +2301,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'A/B Testing',
+            name: 'A/B testing',
             icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
@@ -2719,7 +2719,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Data Warehouse',
+            name: 'Data warehouse',
             url: '/docs/data-warehouse',
             color: 'seagreen',
             icon: 'IconServer',
@@ -2780,25 +2780,25 @@ export const pricingMenu = {
             url: '/pricing',
         },
         {
-            name: 'Product Analytics',
+            name: 'Product analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/pricing?product=product-analytics',
         },
         {
-            name: 'Session Replay',
+            name: 'Session replay',
             url: '/pricing?product=session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
         },
         {
-            name: 'Feature Flags',
+            name: 'Feature flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/pricing?product=feature-flags',
         },
         {
-            name: 'A/B Testing',
+            name: 'A/B testing',
             icon: 'IconFlask',
             color: 'purple',
             url: '/pricing?product=ab-testing',
