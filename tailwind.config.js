@@ -164,6 +164,7 @@ module.exports = {
                 light: '#EEEFE9',
                 dark: '#1D1F27',
 
+                limegreen: '#96E5B6',
                 'lime-green': '#96E5B6',
                 blue: '#2F80FA',
                 orange: '#EB9D2A',

@@ -27,6 +27,7 @@ after:bg-aqua
 after:bg-[#36C46F]
 after:bg-[#43B6E7]
 after:bg-[#8567FF]
+after:bg-[#2EA2D3]
 after:border-yellow
 after:border-seagreen
 before:border-yellow
@@ -76,6 +77,9 @@ border-salmon
 border-seagreen
 border-teal
 border-aqua
+border-[#36C46F]
+border-[#2EA2D3]
+border-[#8567FF]
 col-span-7
 flex
 flex
@@ -163,6 +167,7 @@ sm:-ml-8
 space-x-reverse
 text-blue
 text-green
+text-lime-green
 text-opacity-100
 text-opacity-50
 text-orange
@@ -177,6 +182,7 @@ text-light-blue
 text-[#36C46F]
 text-[#43B6E7]
 text-[#8567FF]
+text-[#2EA2D3]
 to-tan/0
 via-tan/85
 w-2/12

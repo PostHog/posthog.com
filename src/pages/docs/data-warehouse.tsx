@@ -72,9 +72,6 @@ export const Intro = ({ image = true }) => {
                 <div className="p-4 md:p-8">
                     <h1 className="text-4xl mt-0 mb-2 flex items-center space-x-2">
                         <span>Data warehouse</span>
-                        <span className="text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-medium rounded-sm px-1 py-0.5 inline-block uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50">
-                            Beta
-                        </span>
                     </h1>
                     <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                         A single source for all your important data

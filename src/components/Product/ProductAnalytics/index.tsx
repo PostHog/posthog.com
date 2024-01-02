@@ -47,7 +47,7 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'product-analytics',
     lowercase: 'product analytics',
-    capitalized: 'Product Analytics',
+    capitalized: 'Product analytics',
     freeTier: '1,000,000 events',
 }
 
@@ -720,20 +720,20 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconRewindPlay />,
-        product: 'Session Replay',
+        product: 'Session replay',
         description:
             'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
         url: '/session-replay',
     },
     {
         icon: <IconToggle />,
-        product: 'Feature Flags',
+        product: 'Feature flags',
         description: 'See which feature flags were enabled for a user during a session',
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
-        product: 'A/B Testing',
+        product: 'A/B testing',
         description:
             'Filter data down to users within an active experiment, whether part of a control group or a test variant',
         url: '/ab-testing',
@@ -784,7 +784,7 @@ export const ProductProductAnalytics = () => {
                     icon={<IconGraph />}
                     product={product.capitalized}
                     title="Product analytics with autocapture"
-                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>Session Replay</a>, <a href='/feature-flags'>Feature Flags</a>, <a href='/ab-testing'>A/B Testing</a>, and <a href='/surveys'>Surveys</a>."
+                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/ab-testing'>A/B testing</a>, and <a href='/surveys'>surveys</a>."
                 />
 
                 <div className="text-center">

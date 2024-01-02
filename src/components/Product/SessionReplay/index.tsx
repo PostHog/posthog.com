@@ -45,7 +45,7 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'session-replay',
     lowercase: 'session replay',
-    capitalized: 'Session Replay',
+    capitalized: 'Session replay',
     freeTier: '15,000 recordings',
 }
 
@@ -364,7 +364,7 @@ export const ProductSessionReplay = () => {
                     icon={<IconRewindPlay />}
                     product={product.capitalized}
                     title="Watch how users <span class='text-red dark:text-yellow'>experience</span> your app"
-                    description='Session Replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
+                    description='Session replay helps <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
                     website.'
                 />
 
