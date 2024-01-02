@@ -2110,7 +2110,7 @@ export const docsMenu = {
         {
             name: 'Web analytics',
             icon: 'IconPieChart',
-            color: 'lime-green',
+            color: '[#36C46F]',
             url: '/docs/web-analytics',
             children: [
                 {
@@ -2442,8 +2442,8 @@ export const docsMenu = {
         {
             name: 'Data pipeline',
             url: '/docs/cdp',
-            color: 'yellow',
-            icon: 'IconPerson',
+            color: '[#2EA2D3]',
+            icon: 'IconDecisionTree',
             children: [
                 {
                     name: 'Data pipeline (CDP)',
@@ -2721,8 +2721,8 @@ export const docsMenu = {
         {
             name: 'Data warehouse',
             url: '/docs/data-warehouse',
-            color: 'seagreen',
-            icon: 'IconServer',
+            color: '[#8567FF]',
+            icon: 'IconDatabase',
             children: [
                 {
                     name: 'Data warehouse',
