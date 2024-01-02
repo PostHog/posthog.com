@@ -726,11 +726,11 @@ export const DataPipeline = () => {
     ]
     return (
         <Slide
-            bgColor="[#FCC779]"
+            bgColor="[#43B6E7]"
             textColor="primary"
             title="Customer data platform"
             flag="Beta"
-            flagColor="seagreen"
+            flagColor="yellow"
             description="60+ data connections available now. Full CDP coming soon."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
@@ -755,7 +755,7 @@ export const DataPipeline = () => {
             buttonLabel="Browse connections"
             buttonUrl="/cdp"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-            buttonChildClasses="!bg-[#FCC779] border-black !text-black group-hover:text-black"
+            buttonChildClasses="!bg-[#43B6E7] border-black !text-black group-hover:text-black"
         />
     )
 }
@@ -765,14 +765,14 @@ export const DataWarehouse = () => {
     return (
         <Slide
             containerClasses="!pt-0"
-            bgColor="[#29DBBB]"
-            textColor="primary"
+            bgColor="[#8567FF]"
+            textColor="primary-dark"
             title="Data warehouse"
             flag="Beta"
             flagColor="yellow"
             description="Full data warehouse product coming soon"
             additionalText={
-                <p className="text-sm opacity-60 pt-2 mb-1">
+                <p className="text-sm opacity-75 pt-2 mb-1">
                     Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API.
                 </p>
             }
@@ -815,8 +815,8 @@ export const DataWarehouse = () => {
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Learn more"
             buttonUrl="/docs/data-warehouse"
-            buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-            buttonChildClasses="!bg-[#29DBBB] border-black !text-black group-hover:text-black"
+            buttonClasses="group !border-white/25 !bg-white/10 md:!w-auto !w-full"
+            buttonChildClasses="!bg-[#8567FF] border-white !text-white group-hover:text-white"
         />
     )
 }
