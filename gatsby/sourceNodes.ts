@@ -1,8 +1,8 @@
-import fetch from 'node-fetch'
-import { MenuBuilder } from 'redoc'
 import { GatsbyNode } from 'gatsby'
+import fetch from 'node-fetch'
 import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
+import { MenuBuilder } from 'redoc'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -286,6 +286,67 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             },
             ...other,
         }
+        createNode(node)
+    })
+
+    // TODO extract shopify URL to env variable
+    // add types
+    // add error handling
+    const response = await fetch(`https://posthog.myshopify.com/admin/api/2023-07/graphql.json`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Access-Token': process.env.SHOPIFY_APP_PASSWORD,
+        },
+        body: JSON.stringify({
+            query: `
+            {
+                metaobjects(type: "merch_navigation", first: 100) {
+                    edges {
+                      node {
+                        fields {
+                          references(first: 5) {
+                            edges {
+                              node {
+                                __typename
+                                ...on Collection {
+                                  title
+                                  handle
+                                  id
+                                }    
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+              }
+              
+          `,
+        }),
+    })
+
+    const { data } = await response.json()
+    const collections = data.metaobjects.edges[0].node.fields[0].references.edges.map((item) => ({
+        title: item.node.title,
+        handle: item.node.handle,
+    }))
+
+    collections.forEach((collection, i) => {
+        const node = {
+            url: `/merch/${collection.handle}`,
+            title: collection.title,
+            handle: collection.handle,
+            id: createNodeId(`MerchNavigation-${i}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `MerchNavigation`,
+                contentDigest: createContentDigest(collection),
+            },
+        }
+
         createNode(node)
     })
 }
