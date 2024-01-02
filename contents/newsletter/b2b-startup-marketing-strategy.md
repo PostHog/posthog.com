@@ -48,15 +48,11 @@ Above all, don’t get distracted by rivals doing something better than you. Sti
 
 > **Further reading:** [How we spend our marketing budget (with actual $ figures)](https://posthog.com/founders/actual-marketing-budget)
 
---- 
-
 ## 2. Compete on depth, not breadth 👨‍🎓
 
 Trying to go head-to-head with much larger competitors on content output is a losing game, so focus on quality. One great article >>> 25 generic ones. We write approx. ⅓ SEO articles, ⅓ tutorials, ⅓ anything goes.
 
 High quality articles perform better in the long run, especially SEO ones. Treat your SEO portfolio like a VC treats their investments – invest time updating your content, don’t publish and forget.
-
----
 
 ## 3. Build a channel you truly own 💌
 
@@ -73,8 +69,6 @@ Other options include:
 
 Why do this? FWIW, a single *Product for Engineers* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
 
----
-
 ## 4. Make your website genuinely different 🙃
 This means:
 
@@ -87,8 +81,6 @@ This means:
 While our marketing and website teams work closely together, the website team has the final say on what appears on posthog.com. This stops the website becoming too marketing-y and falling foul of marketing ‘best practices’ that most developers (and people in general) despise.
 
 A good (and different) website is a great source of word-of-mouth.
-
----
 
 ## 5. Perfect attribution is a white whale 🐳
 
@@ -113,8 +105,6 @@ Attribution has always been hard, and it’s only getting harder because traditi
 
 Combining all the above will get you a roughly accurate picture. Unless you’re selling mattresses in a box (i.e. direct to consumer), anything more complex can wait.
 
----
-
 ## 6. Paid ads aren’t all bad 💸
 
 Everyone who works at a tech company thinks they’re immune to ads because they’re super-good at internetting, but they’re wrong. We’re still experimenting, but here’s what’s worked for us:
@@ -129,9 +119,7 @@ Everyone who works at a tech company thinks they’re immune to ads because they
 
 > **Further reading:** [Burning money on paid ads for a dev tool – what we've learned](https://posthog.com/founders/dev-marketing-paid-ads)
 
----
-
-7. Invest in SEO after product-market fit 📈
+## 7. Invest in SEO after product-market fit 📈
 
 Really good search-optimized content is highly leveraged – it’s cheaper than paid ads and lasts longer. But it comes with caveats:
 
@@ -143,8 +131,6 @@ Really good search-optimized content is highly leveraged – it’s cheaper than
 
 That said, don’t delay once you do have product-market fit. It’ll be tempting to use AI to scale SEO quickly. This is a great strategy if you want to murder your growth every six months when Google tweaks its algorithm.
 
----
-
 ## 8. Own your branded search 🔍
 
 You really don’t want anyone outranking you for any search that’s “your brand name + another keyword”, such as:
@@ -155,8 +141,6 @@ You really don’t want anyone outranking you for any search that’s “your br
 There’s no shortage of websites that will try. G2 and its many imitators are top of that list, but your competitors will too. You may need to spend some money on defensive Google ads as well.
 
 Once you’ve built this content out, focus on SEO content targeting your rivals – e.g. “alternatives to rival companies”. And make it genuinely useful. Include comparison tables, real data, reviews from users, and up-to-date screenshots.
-
----
 
 ## Good reads for product engineers 📖
 
