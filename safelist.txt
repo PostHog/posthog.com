@@ -157,6 +157,7 @@ sm:-ml-8
 space-x-reverse
 text-blue
 text-green
+text-lime-green
 text-opacity-100
 text-opacity-50
 text-orange

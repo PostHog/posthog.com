@@ -2090,16 +2090,6 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Web analytics',
-                    url: '/docs/web-analytics',
-                    icon: 'IconPieChart',
-                    color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
@@ -2114,6 +2104,33 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                },
+            ],
+        },
+        {
+            name: 'Web analytics',
+            icon: 'IconPieChart',
+            color: 'lime-green',
+            url: '/docs/web-analytics',
+            children: [
+                {
+                    name: 'Web analytics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/web-analytics',
+                    icon: 'IconHome',
+                    color: 'lime-green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/web-analytics/faq',
+                    icon: 'IconQuestion',
+                    color: 'blue',
                 },
             ],
         },
@@ -2423,13 +2440,13 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'CDP',
+            name: 'Data pipeline',
             url: '/docs/cdp',
             color: 'yellow',
             icon: 'IconPerson',
             children: [
                 {
-                    name: 'Customer data platform',
+                    name: 'Data pipeline (CDP)',
                 },
                 {
                     name: 'CDP',
