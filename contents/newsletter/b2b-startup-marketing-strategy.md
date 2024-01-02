@@ -7,7 +7,7 @@ featuredImageType: full
 tags:
   - Marketing
 seo: {
-  metaTitle: B2B Startup Marketing for Noobs: What We've Learned in 3 Years
+  metaTitle: B2B Startup Marketing for Noobs – What We've Learned in 3 Years
   metaDescription: The most valuable B2B marketing strategy lessons from 3 years of growing a B2B startup from nothing to millions in revenue.
 }  
 ---
