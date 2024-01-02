@@ -1,15 +1,15 @@
 ---
 title: "B2B startup marketing for noobs, by noobs – our most valuable lessons"
-seo: {
-  metaTitle: "B2B Startup Marketing for Noobs: What We've Learned in 3 Years"
-  metaDescription: "The most valuable B2B marketing strategy lessons from 3 years of growing a B2B startup from nothing to millions in revenue."
-}
 date: 2023-01-02
 author: ["andy-vandervell", "charles-cook"]
 featuredImage: ../images/blog/prodhog.png
 featuredImageType: full
 tags:
   - Marketing
+seo: {
+  metaTitle: B2B Startup Marketing for Noobs: What We've Learned in 3 Years
+  metaDescription: The most valuable B2B marketing strategy lessons from 3 years of growing a B2B startup from nothing to millions in revenue.
+}  
 ---
 
 In three years, we’ve grown PostHog from nothing in 2020 to tens of thousands of users, millions in revenue, and default alive.
