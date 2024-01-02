@@ -1,7 +1,11 @@
 ---
-title: "Startup marketing for noobs, by noobs – our most valuable lessons"
-date: 2023-12-05
-author: ["andy-vandervell"]
+title: "B2B startup marketing for noobs, by noobs – our most valuable lessons"
+seo: {
+  metaTitle: "B2B Startup Marketing for Noobs: What We've Learned in 3 Years"
+  metaDescription: "The most valuable B2B marketing strategy lessons from 3 years of growing a B2B startup from nothing to millions in revenue."
+}
+date: 2023-01-02
+author: ["andy-vandervell", "charles-cook"]
 featuredImage: ../images/blog/prodhog.png
 featuredImageType: full
 tags:
@@ -21,7 +25,7 @@ How nooby? Well, here’s our team and their marketing “credentials”:
 - [Lottie](/community/profiles/227) – our awesome graphic designer. PostHog is her first proper job.
 - [Joe](/community/profiles/59) – former journalist and, to be fair, has actual marketing experience at previous startups. Way too much experience, probably.
 
-So, yeah. Here’s what we’ve learned about marketing for startups, specifically (but not exclusively) for a B2B devtool startup. Let us know where we’re wrong!
+So, yeah. Here’s what we’ve learned about marketing for startups, specifically for a B2B startup for developers. Let us know where we’re wrong!
 
 > This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
