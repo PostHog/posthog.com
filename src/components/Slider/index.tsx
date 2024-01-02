@@ -63,12 +63,12 @@ export default function Slider({ className = '', activeIndex, children }) {
             )}
             <ul
                 ref={ref}
-                className={`list-none p-0 flex space-x-0.5 snap-x overflow-y-hidden overflow-x-auto justify-start ${className}`}
+                className={`list-none p-0 flex space-x-0.5 snap-x overflow-y-hidden overflow-x-auto justify-start relative after:absolute after:h-px after:bottom-0 after:left-0 after:w-full after:bg-border after:dark:bg-border-dark ${className}`}
             >
                 {children.map((child, index) => {
                     return (
                         <li
-                            className="snap-start"
+                            className="snap-start !mb-0"
                             key={index}
                             ref={(node) => {
                                 const map = getMap()
