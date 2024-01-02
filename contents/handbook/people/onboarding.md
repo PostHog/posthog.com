@@ -108,7 +108,7 @@ We use a number of different tools to organise our work and communicate at PostH
 
 ### Engineering
 - AWS
-- Pagerduty
+- PagerDuty
 - Heroku
 - Grafana
 - Sentry
