@@ -27,6 +27,7 @@ after:bg-aqua
 after:bg-[#36C46F]
 after:bg-[#43B6E7]
 after:bg-[#8567FF]
+after:bg-[#2EA2D3]
 after:border-yellow
 after:border-seagreen
 before:border-yellow
@@ -178,6 +179,7 @@ text-light-blue
 text-[#36C46F]
 text-[#43B6E7]
 text-[#8567FF]
+text-[#2EA2D3]
 to-tan/0
 via-tan/85
 w-2/12

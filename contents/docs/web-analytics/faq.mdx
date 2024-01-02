@@ -2,10 +2,6 @@
 title: FAQs
 sidebar: Docs
 showTitle: true
-availability:
-    free: partial
-    selfServe: partial
-    enterprise: partial
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -13,7 +9,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 Have a question not covered here? [Let us know](http://app.posthog.com/home#supportModal).
 
-### What is the difference between web analytics and product analytics?
+## What is the difference between web analytics and product analytics?
 
 Web analytics is a streamlined experience for tracking and monitoring your most important website metrics. Product analytics is a more powerful and flexible experience for tracking your product.
 
@@ -28,14 +24,14 @@ Web analytics is a streamlined experience for tracking and monitoring your most 
 
 Web analytics relies on a subset of the events and properties used by product analytics. This means you can use both in tandem.
 
-### How much does web analytics cost?
+## How much does web analytics cost?
 
 During beta, web analytics is no additional cost on top of product analytics. Events are used between both, and follow [product analytics' pricing](/pricing?product=product-analytics).
 
-### Where is my world map?
+## Where is my world map?
 
 All good web analytics dashboards need to include a world map. Ours includes it too. If you can't see it, you need to enable the [GeoIP app](https://app.posthog.com/project/apps/74).
 
-### Do stats include bots and crawlers?
+## Do stats include bots and crawlers?
 
 No, we automatically block bots and crawlers. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/master/src/utils/blocked-uas.ts).
