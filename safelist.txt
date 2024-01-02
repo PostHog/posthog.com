@@ -24,6 +24,9 @@ after:bg-salmon
 after:bg-seagreen
 after:bg-teal
 after:bg-aqua
+after:bg-[#36C46F]
+after:bg-[#2EA2D3]
+after:bg-[#8567FF]
 after:border-yellow
 after:border-seagreen
 before:border-yellow
@@ -52,11 +55,14 @@ bg-yellow/10
 bg-aqua
 bg-aqua/10
 bg-[#F2AD46]
+bg-[#36C46F]
 bg-[#1371FF]
 bg-[#29DBBB]
 bg-[#9C19BD]
+bg-[#2EA2D3]
 bg-[#D42F18]
 bg-[#FCC779]
+bg-[#8567FF]
 border-blue
 border-green
 border-opacity-100
