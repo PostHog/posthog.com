@@ -13,8 +13,31 @@ import {
 } from './Slides'
 import { useInView } from 'react-intersection-observer'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
+import * as Icons from '@posthog/icons'
 
-const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index }) => {
+const Lottie = ({ lottieRef, src, onEvent, placeholderIcon }) => {
+    const [ready, setReady] = useState(false)
+    const Icon = Icons[placeholderIcon]
+
+    return (
+        <>
+            <DotLottiePlayer
+                style={{ display: ready ? 'inline-block' : 'none' }}
+                lottieRef={lottieRef}
+                src={src}
+                onEvent={(event) => {
+                    if (event === PlayerEvents.Ready) {
+                        setReady(true)
+                    }
+                    onEvent?.(event)
+                }}
+            />
+            {!ready && <Icon />}
+        </>
+    )
+}
+
+const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index, placeholderIcon }) => {
     const active = activeSlide === index
     const lottieRef = useRef()
     const [playing, setPlaying] = useState(false)
@@ -42,8 +65,8 @@ const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index }) => 
                         : 'group hover:border-light dark:hover:border-dark hover:translate-y-[-2px] active:translate-y-[1px]'
                 }`}
             >
-                <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
-                    <DotLottiePlayer
+                <span className={`w-6 h-6 text-${color} flex justify-center items-center relative`}>
+                    <Lottie
                         lottieRef={lottieRef}
                         src={lottieSrc}
                         onEvent={(event) => {
@@ -51,6 +74,7 @@ const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index }) => 
                                 setPlaying(false)
                             }
                         }}
+                        placeholderIcon={placeholderIcon}
                     />
                 </span>
                 <p

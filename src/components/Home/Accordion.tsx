@@ -13,7 +13,8 @@ import {
     WebAnalytics,
 } from './Slider/Slides'
 import { Chevron } from 'components/Icons'
-import { DotLottiePlayer } from '@dotlottie/react-player'
+import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
+import * as Icons from '@posthog/icons'
 
 const slideContents = [
     ProductAnalytics,
@@ -33,10 +34,13 @@ type SlideButton = {
     index: number
     activeIndex: number | null
     setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>
+    placeholderIcon: string
 }
 
-const SlideButton = ({ lottieSrc, color, title, index, activeIndex, setActiveIndex }: SlideButton) => {
+const SlideButton = ({ lottieSrc, color, title, index, activeIndex, setActiveIndex, placeholderIcon }: SlideButton) => {
     const lottieRef = useRef<null>()
+    const [lottieReady, setLottieReady] = useState(false)
+    const Icon = Icons[placeholderIcon]
 
     useEffect(() => {
         if (active) {
@@ -60,7 +64,18 @@ const SlideButton = ({ lottieSrc, color, title, index, activeIndex, setActiveInd
                 >
                     <span className="flex space-x-4 items-center group-active:top-[0.5px] group-active:scale-[.98] transition-all">
                         <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
-                            <DotLottiePlayer lottieRef={lottieRef} src={lottieSrc} autoplay={active} />
+                            <DotLottiePlayer
+                                style={{ display: lottieReady ? 'inline-block' : 'none' }}
+                                lottieRef={lottieRef}
+                                src={lottieSrc}
+                                autoplay={active}
+                                onEvent={(event) => {
+                                    if (event === PlayerEvents.Ready) {
+                                        setLottieReady(true)
+                                    }
+                                }}
+                            />
+                            {!lottieReady && <Icon />}
                         </span>
                         <p className={`leading-tight text-sm m-0 ${active ? 'font-bold' : 'font-medium opacity/75'}`}>
                             {title}
