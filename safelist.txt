@@ -25,7 +25,7 @@ after:bg-seagreen
 after:bg-teal
 after:bg-aqua
 after:bg-[#36C46F]
-after:bg-[#2EA2D3]
+after:bg-[#43B6E7]
 after:bg-[#8567FF]
 after:border-yellow
 after:border-seagreen
@@ -59,7 +59,7 @@ bg-[#36C46F]
 bg-[#1371FF]
 bg-[#29DBBB]
 bg-[#9C19BD]
-bg-[#2EA2D3]
+bg-[#43B6E7]
 bg-[#D42F18]
 bg-[#FCC779]
 bg-[#8567FF]
@@ -175,7 +175,7 @@ text-teal
 text-aqua
 text-light-blue
 text-[#36C46F]
-text-[#2EA2D3]
+text-[#43B6E7]
 text-[#8567FF]
 to-tan/0
 via-tan/85
