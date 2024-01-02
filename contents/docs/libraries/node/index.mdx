@@ -272,22 +272,6 @@ try {
 }
 ```
 
-### Example implementation with Django
-
-This can be made automatic in Django, by adding the following middleware and settings to `settings.py`:
-
-```python
-
-MIDDLEWARE = [
-    "posthog.sentry.django.PosthogDistinctIdMiddleware"
-]
-
-POSTHOG_DJANGO = {
-    "distinct_id": lambda request: request.user and request.user.distinct_id
-}
-```
-
-
 ## Upgrading from V1 to V2
 
 V2.x.x of the Node.js library is completely rewritten in Typescript and is based on a new JS core shared with other JavaScript based libraries with the goal of ensuring new features and fixes reach the different libraries at the same pace.
