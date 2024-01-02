@@ -191,7 +191,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                 </ul>
                 <CallToAction
-                    to="/tutorials/categories/feature-flags"
+                    to="/docs/feature-flags/tutorials"
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
