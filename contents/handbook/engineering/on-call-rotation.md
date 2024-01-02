@@ -10,7 +10,7 @@ PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. 
 
 ## When is my turn?
 
-We're very lucky that we have an almost-follow-the-sun rotation for service alerts, so nobody gets woken up in the middle of the night. Every engineer at PostHog is expected to be part of the rotation within one of the three Pagerduty schedules:
+We're very lucky that we have an almost-follow-the-sun rotation for service alerts, so nobody gets woken up in the middle of the night. Every engineer at PostHog is expected to be part of the rotation within one of the three PagerDuty schedules:
 
 - [Europe](https://posthog.pagerduty.com/schedules#PF7ZGBT) (08:00 to 16:00 UTC)
 - [Americas East](https://posthog.pagerduty.com/schedules#PW1E9Y4) (16:00 to 00:00 UTC)
@@ -20,7 +20,7 @@ Before going on call, make sure you have the [PagerDuty mobile app](https://supp
 
 ## What if I'm scheduled for a week when I won't be available?
 
-Swap with another engineer in advance! Find a volunteer by asking in Slack, then use Pagerduty schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
+Swap with another engineer in advance! Find a volunteer by asking in Slack, then use PagerDuty schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
 
 ## What do I do on call?
 
