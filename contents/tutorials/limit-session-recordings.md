@@ -172,7 +172,7 @@ This is useful if you want to record specific parts or paths on a page such as:
 - new or updated features
 - smaller, specific components within a larger component.
 
-# Sampling
+## Sampling
 
 You can configure sampling to limit the number of sessions you record for each user. This is useful if you want to record a percentage of sessions for all users. Sampling helps reduce the number of sessions you record, but it doesn’t let you control which sessions are included.
 
