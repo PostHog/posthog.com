@@ -73,7 +73,7 @@ You can then set this flag to enable recordings in your [replay ingestion settin
 
 ![Choosing a flag to enable recordings](../images/docs/session-replay/select-replay-control-flag.png)
 
-Recordings will buffer on the client until the decide response has been received and then only continue recording if the flag is enabled. This means that if the flag is disabled, the recording will stop and no recording data will leave the client's device.
+Recordings buffer on the client until the decide response is received. It only continues recording if the flag is enabled. This means that if the flag is disabled, the recording stops and no recording data leaves the client's device.
 
 ### manually in your code
 
