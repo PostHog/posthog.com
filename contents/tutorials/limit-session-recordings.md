@@ -180,7 +180,7 @@ Our recommendation is to start with no sampling (e.g. 100% - the default) or a l
 
 ![sampling config shown set to 100% i.e. no sampling](../images/tutorials/limit-session-recordings/sampling-config.png)
 
-Whenever a new session starts after you have selected a collection below 100% the browser will generate a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session will be recorded. If it is greater than the sampling rate, the session will not be recorded.
+Whenever a new session starts after you select a collection below 100%, the browser generates a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session is recorded. If it is greater than the sampling rate, the session is not recorded.
 
 ## Minimum duration
 
