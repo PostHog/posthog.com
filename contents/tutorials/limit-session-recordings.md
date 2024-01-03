@@ -189,7 +189,7 @@ You can also set a minimum duration for sessions to be recorded. This is useful 
 
 ![minimum duration config shown set to 2 seconds](../images/tutorials/limit-session-recordings/min-duration.png)
 
-The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. When deciding whether to send recording data to the backend if the minimum duration has passed since the start time, the session data will be sent. If it hasn't, the session will continue to be buffered in-memory. 
+The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory. 
 
 ### Limitations
 
