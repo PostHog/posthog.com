@@ -8,13 +8,23 @@ availability:
 
 If you want control over which sessions to record:
 
+# With PostHog Feature Flags
+
+You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
+
+1. Create a boolean flag that you can use to control whether to record sessions or not.
+2. Visit your replay config page at [US Cloud](https://us.posthog.com/settings/project-replay#replay-ingestion) or [EU Cloud](https://eu.posthog.com/settings/project-replay#replay-ingestion).
+3. Select that flag in the dropdown menu.
+
+![Selecting a feature flag to control session recordings](../../images/docs/session-replay/select-replay-control-flag.png)
+
+# With your own code
+
 1. Set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config).
 
 2. Manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
 
 3. **Important** make sure the your domain is added to the [Authorized Domains list](https://app.posthog.com/settings/project-replay#replay-authorized-domains) as otherwise the data will still be ignored as it is ingested by our servers.
-
-You can then achieve even finer control by combining the above methods with [feature flags](/docs/feature-flags). This enables you to control session recordings based on user or group properties. You can also use feature flags to capture a percentage of all sessions.
 
 For example:
 
@@ -24,12 +34,12 @@ posthog.init('<ph_project_api_key>', {
     disable_session_recording: true,
     // ... other options
 })
-posthog.onFeatureFlags(function () {
-    if (posthog.isFeatureEnabled('your-feature-flag')) {
-        posthog.startSessionRecording()
-    }
+yourCode.eventHandler(function () {
+    posthog.startSessionRecording()
 })
 ```
+
+NB using PostHog feature flags as above will buffer recordings until the flag is enabled. Using your own code will not buffer recordings before the call to `startSessionRecording`.
 
 For more examples of controlling  which sessions you record, see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
 
