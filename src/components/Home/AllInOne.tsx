@@ -31,6 +31,7 @@ const HogZilla = () => {
                 muted
                 className="w-full"
                 poster="/images/hogzilla.jpg"
+                preload="none"
             >
                 <source src="/images/hogzilla.mp4" type="video/mp4" />
                 <source src="/images/hogzilla.webm" type="video/webm" />
