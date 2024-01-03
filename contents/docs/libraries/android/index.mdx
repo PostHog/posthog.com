@@ -81,8 +81,7 @@ PostHog.capture(
 You can set the number of events in the configuration that should queue before flushing.
 Setting this to `1` will send events immediately and will use more battery. The default value for this is `20`.
 
-You can also configure the flush interval. By default we flush all events after `30` seconds,
-no matter how many events have been gathered.
+You can also configure the flush interval. By default we flush events if there are more than the threshold (`flushAt`) after `30` seconds.
 
 ```kotlin
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
