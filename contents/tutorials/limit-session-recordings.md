@@ -178,7 +178,6 @@ You can configure sampling to limit the number of sessions you record for each u
 
 Our recommendation is to start with no sampling (e.g. 100% - the default) or a low sampling rate (e.g. 90% or 95%) and increase it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
 
-
 ![sampling config shown set to 100% i.e. no sampling](../images/tutorials/limit-session-recordings/sampling-config.png)
 
 Whenever a new session starts after you have selected a collection below 100% the browser will generate a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session will be recorded. If it is greater than the sampling rate, the session will not be recorded.
