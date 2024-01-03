@@ -183,7 +183,7 @@ Our recommendation is to start with no sampling (e.g. 100% - the default) or a l
 
 Whenever a new session starts after you have selected a collection below 100% the browser will generate a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session will be recorded. If it is greater than the sampling rate, the session will not be recorded.
 
-# Minimum duration
+## Minimum duration
 
 You can also set a minimum duration for sessions to be recorded. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
 
