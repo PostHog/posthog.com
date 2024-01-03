@@ -193,7 +193,7 @@ The minimum duration is set in seconds. Whenever a new session starts, the brows
 
 ### Limitations
 
-This means that if you set a high minimum duration and your user visits multiple pages each for a short time you will still record the session but will miss the beginning. If the user leaves the site before the minimum duration has passed, the session will not be recorded.
+This means that if you set a high minimum duration and your user visits multiple pages each for a short time, you still record the session but miss the beginning. If the user leaves the site before the minimum duration has passed, the session is not recorded.
 
 If you find you are missing the beginning of sessions, you can reduce the minimum duration or use one of our other methods to reduce the number of sessions you record.
 
