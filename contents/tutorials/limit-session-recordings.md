@@ -69,7 +69,7 @@ For example, if you only want to record 50% of sessions for North American users
 
 ### Using linked feature flags
 
-You can then set this flag to enable recordings in your replay config at [US Cloud - https://us.posthog.com/settings/project-replay#replay-ingestion](https://us.posthog.com/settings/project-replay#replay-ingestion) or [EU Cloud - https://eu.posthog.com/settings/project-replay#replay-ingestion](https://eu.posthog.com/settings/project-replay#replay-ingestion).
+You can then set this flag to enable recordings in your [replay ingestion settings]( https://us.posthog.com/settings/project-replay#replay-ingestion).
 
 ![Choosing a flag to enable recordings](../images/docs/session-replay/select-replay-control-flag.png)
 
