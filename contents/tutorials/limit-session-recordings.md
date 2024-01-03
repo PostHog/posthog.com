@@ -67,7 +67,17 @@ For example, if you only want to record 50% of sessions for North American users
 
 ![Flag](../images/tutorials/limit-session-recordings/flag.png)
 
-You can then check this flag after you initialize PostHog, and start a recording if it is active for the current user. To ensure the correct user and flag details, you can use the `usePostHog` and `useFeatureFlagEnabled` hooks from `posthog-js/react` in a component like this:
+### Using linked feature flags
+
+You can then set this flag to enable recordings in your replay config at [US Cloud - https://us.posthog.com/settings/project-replay#replay-ingestion](https://us.posthog.com/settings/project-replay#replay-ingestion) or [EU Cloud - https://eu.posthog.com/settings/project-replay#replay-ingestion](https://eu.posthog.com/settings/project-replay#replay-ingestion).
+
+![Choosing a flag to enable recordings](../images/docs/session-replay/select-replay-control-flag.png)
+
+Recordings will buffer on the client until the decide response has been received and then only continue recording if the flag is enabled. This means that if the flag is disabled, the recording will stop and no recording data will leave the client's device.
+
+### manually in your code
+
+You can alternatively check this flag after you initialize PostHog, and start a recording if it is active for the current user. To ensure the correct user and flag details, you can use the `usePostHog` and `useFeatureFlagEnabled` hooks from `posthog-js/react` in a component like this:
 
 ```js
 import { useFeatureFlagEnabled, usePostHog } from 'posthog-js/react'
@@ -161,6 +171,31 @@ This is useful if you want to record specific parts or paths on a page such as:
 - signup, checkout funnels
 - new or updated features
 - smaller, specific components within a larger component.
+
+# Sampling
+
+You can configure sampling to limit the number of sessions you record for each user. This is useful if you want to record a percentage of sessions for all users. Sampling helps reduce the number of sessions you record, but it doesn’t let you control which sessions are included.
+
+Our recommendation is to start with no sampling (e.g. 100% - the default) or a low sampling rate (e.g. 90% or 95%) and increase it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
+
+
+![sampling config shown set to 100% i.e. no sampling](../images/tutorials/limit-session-recordings/sampling-config.png)
+
+Whenever a new session starts after you have selected a collection below 100% the browser will generate a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session will be recorded. If it is greater than the sampling rate, the session will not be recorded.
+
+# Minimum duration
+
+You can also set a minimum duration for sessions to be recorded. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
+
+![minimum duration config shown set to 2 seconds](../images/tutorials/limit-session-recordings/min-duration.png)
+
+The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. When deciding whether to send recording data to the backend if the minimum duration has passed since the start time, the session data will be sent. If it hasn't, the session will continue to be buffered in-memory. 
+
+### Limitations
+
+This means that if you set a high minimum duration and your user visits multiple pages each for a short time you will still record the session but will miss the beginning. If the user leaves the site before the minimum duration has passed, the session will not be recorded.
+
+If you find you are missing the beginning of sessions, you can reduce the minimum duration or use one of our other methods to reduce the number of sessions you record.
 
 ## Further reading
 
