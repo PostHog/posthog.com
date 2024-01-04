@@ -44,7 +44,7 @@ PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](
 
 ### How much does PostHog cost?
 
-PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 million events and 15,000 session recordings for free every month. You can calculate your price upfront using [PostHog's pricing calculator](/pricing) and set **billing limits** to avoid surprise bills.
+PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 million events and 5,000 session recordings for free every month. You can calculate your price upfront using [PostHog's pricing calculator](/pricing) and set **billing limits** to avoid surprise bills.
 
 ### Companies that use PostHog
 

@@ -97,8 +97,8 @@ export const PricingCalculator = () => {
                             <div className="pt-4 pb-6">
                                 <LogSlider
                                     stepsInRange={100}
-                                    marks={[15000, 50000, 150000, 500000]}
-                                    min={15000}
+                                    marks={[5000, 25000, 120000, 500000]}
+                                    min={5000}
                                     max={500000}
                                     onChange={(value) => setSessionRecordingSliderValue(value)}
                                     value={sessionRecordingSliderValue}
