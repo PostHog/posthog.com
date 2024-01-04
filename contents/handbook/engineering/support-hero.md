@@ -71,11 +71,10 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel as there will be some urgency needed
-1. Open Zendesk tickets for your team that have `high` priority (high-paying customers)
-1. Open Zendesk tickets for your team that have `normal` priority (paying customers)
-1. [Community questions](https://posthog.com/questions/)
-1. Open Zendesk tickets for your team that have `low` priority (non-paying users)
+1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed.
+1. Open Zendesk tickets for your team that have `high` priority.
+1. Open Zendesk tickets for your team that have `normal` priority.
+1. Open Zendesk tickets for your team that have `low` priority.
 
 ## How should I handle self-hosted setups?
 
