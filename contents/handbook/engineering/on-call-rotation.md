@@ -26,9 +26,11 @@ Swap with another engineer in advance! Find a volunteer by asking in Slack, then
 
 You just go about your day, paying no attention to being on call most of the time! But keep your laptop at hand, because when you do get paged, it's time to switch gears immediately and start investigating the alert.
 
-A chunk of our high-frequency alerts have runbooks attached, most of which live [on the internal runbooks site](http://runbooks/). The runbook should tell you what to look at and easy fixes if there are any. Every alert also has a link to the Grafana graph that triggered the alert.
+A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our Tailscale network – if you don't have access, just ask in #dev.
 
-[If it looks like the alert should be raised as a public incident, go raise an incident.](https://posthog.com/handbook/engineering/incidents)
+When an alert fires, find if there's a runbook for it. A runbook tells you what to look at and what fixes exist. Every alert also has a link to the Grafana graph that triggered the alert.
+
+[If it looks like the alert should be raised as a public incident, go raise an incident.](https://posthog.com/handbook/engineering/incidents) It's that simple.
 
 If you're stumped and no resource is of help, get someone from the relevant team to shadow you while you sort the problem out. The idea is that they can help you understand the issue and where to find how to debug it. The idea is _not_ for them to take over at this point, as otherwise you won't be able to learn from this incident.
 
