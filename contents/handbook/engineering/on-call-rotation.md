@@ -26,11 +26,19 @@ Swap with another engineer in advance! Find a volunteer by asking in Slack, then
 
 You just go about your day, paying no attention to being on call most of the time! But keep your laptop at hand, because when you do get paged, it's time to switch gears immediately and start investigating the alert.
 
-A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our Tailscale network – if you don't have access yet, [follow these steps](https://github.com/PostHog/runbooks/blob/main/docs/vpn.md#tailscale).
+To be ready, make sure you have access to:
+
+- PostHog Cloud admin interfaces ([🇺🇸](https://app.posthog.com/admin/)  / [🇪🇺](https://eu.posthog.com/admin/)) - these require another team member to mark you as a staff user in both regions
+- Metabase ([🇺🇸](http://metabase-prod-us/)  / [🇪🇺](http://metabase-prod-eu/)) – these might require another team member to invite you to both regions
+- Our [tailnet](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network), which gates our internal services (such as Grafana and runbooks)
+- [EKS](http://runbooks/eks/) over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod)
+- [pganalyze](https://app.pganalyze.com/organizations/posthog/)
+
+A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our tailnet, as mentioned above.
 
 When an alert fires, find if there's a runbook for it. A runbook tells you what to look at and what fixes exist. Every alert also has a link to the Grafana graph that triggered the alert.
 
-[If it looks like the alert should be raised as a public incident, go raise an incident.](https://posthog.com/handbook/engineering/incidents) It's that simple.
+[If the alert is starting to have any noticeable impact on users, go raise an incident.](https://posthog.com/handbook/engineering/incidents) It's that simple.
 
 If you're stumped and no resource is of help, get someone from the relevant team to shadow you while you sort the problem out. The idea is that they can help you understand the issue and where to find how to debug it. The idea is _not_ for them to take over at this point, as otherwise you won't be able to learn from this incident.
 
