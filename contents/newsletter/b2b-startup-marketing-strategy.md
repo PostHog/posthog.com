@@ -1,6 +1,6 @@
 ---
 title: "B2B startup marketing for noobs, by noobs – our most valuable lessons"
-date: 2023-01-04
+date: 2024-01-04
 author: ["andy-vandervell"]
 featuredImage: ../images/newsletter/startup-marketing/feature.png
 featuredImageType: full
