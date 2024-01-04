@@ -26,7 +26,7 @@ Swap with another engineer in advance! Find a volunteer by asking in Slack, then
 
 You just go about your day, paying no attention to being on call most of the time! But keep your laptop at hand, because when you do get paged, it's time to switch gears immediately and start investigating the alert.
 
-A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our Tailscale network – if you don't have access, just ask in #dev.
+A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our Tailscale network – if you don't have access yet, [follow these steps](https://github.com/PostHog/runbooks/blob/main/docs/vpn.md#tailscale).
 
 When an alert fires, find if there's a runbook for it. A runbook tells you what to look at and what fixes exist. Every alert also has a link to the Grafana graph that triggered the alert.
 
