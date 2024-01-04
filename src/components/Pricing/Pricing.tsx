@@ -154,12 +154,16 @@ const Pricing = (): JSX.Element => {
                             alt="Cat Li, Y Combinator"
                             src="../../images/cat.jpeg"
                             placeholder="none"
+                            className="rounded-full"
                         />
                     }
                     quote={
                         <span className="text-white">
                             You always need to find ways to improve.{' '}
-                            <span className="text-yellow">PostHog is central to how we do that at Y Combinator.</span>{' '}
+                            <span className="text-yellow">
+                                PostHog is central to how we do that at{' '}
+                                <span className="inline-block">Y Combinator</span>.
+                            </span>{' '}
                             It helps us try ideas, measure results, and build better products.
                         </span>
                     }
