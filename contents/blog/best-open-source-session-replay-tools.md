@@ -58,7 +58,7 @@ PostHog is ideal for [product-minded developers](/blog/what-is-a-product-enginee
 
 ### How much does PostHog cost?
 
-PostHog Cloud is free up to 1 million captured events and 15,000 recordings per month, and you can set billing limits to avoid surprise bills. 
+PostHog Cloud is free up to 1 million captured events and 5,000 recordings per month, and you can set billing limits to avoid surprise bills. 
 
 You can also self-host PostHog Open Source (available under an MIT license) using Docker Compose, though PostHog Cloud is recommended for event volumes exceeding 100k per month.
 

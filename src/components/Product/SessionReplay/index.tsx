@@ -46,7 +46,7 @@ const product = {
     slug: 'session-replay',
     lowercase: 'session replay',
     capitalized: 'Session replay',
-    freeTier: '15,000 recordings',
+    freeTier: '5,000 recordings',
 }
 
 const team = 'Monitoring'
