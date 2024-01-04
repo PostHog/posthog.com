@@ -21,7 +21,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
             <Drawer isOpen={cartIsOpen} onClose={() => setCartIsOpen(false)}>
                 <Cart />
             </Drawer>
-            <div className="space-y-8 sm:space-y-0 sm:grid lg:grid-cols-[repeat(4,minMax(0,1fr))] gap-x-10 gap-y-7 sm:grid-cols-2">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-10 gap-y-6 sm:gap-y-7 items-start">
                 {products.map((product: ShopifyProduct, index) => {
                     /**
                      * We want every other two cards to be large and take up 2 rows and 2 cols
