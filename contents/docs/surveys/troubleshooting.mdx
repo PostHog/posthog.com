@@ -56,10 +56,9 @@ posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
 
 ### Why am I getting a feature flags error on my survey?
 
-```Update survey failed: Cohort with behavioral filters cannot be used in feature flags.
-```
+If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for user property targeting.
 
-Surveys are powered by feature flags for user property targeting. Currently we do not support behavioral cohorts in flags which is why you might see an error if setting a user property that contains a behavioral cohort in your survey.
+Currently we do not support behavioral cohorts in flags which is why you might see an error if setting a user property that contains a behavioral cohort in your survey.
 
 #### Will I be double charged for feature flags if I use surveys?
 
