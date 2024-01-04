@@ -81,7 +81,7 @@ This is generally good for two types of products:
 
 ### 2. The performance marketing growth loop
 
-The performance marketing growth loop is using [paid marketing](/founders/dev-marketing-paid-ads) to acquire customers, then using the new revenue to fund more marketing. It is reliant on connecting marketing to acquire users (performance) with value (revenue) captured. If you see a social media or search ad for a product, that is a product relying on performance marketing.
+The performance marketing growth loop is using [paid marketing](/founders/dev-marketing-paid-ads) to acquire customers, then using the new revenue to fund more marketing. It's reliant on connecting marketing to acquire users (performance) with value (revenue) captured. It's useful for both B2C and [B2B startup marketing][/newsletter/b2b-startup-marketing-strategy].
 
 For example, with Google Ad Words, companies pay per click on specific keywords related to potential customers’ searches. With the correct math figured out (cost of acquisition), this can lead to a growth loop of increasing ad spend and revenue growth.
 

@@ -14,7 +14,7 @@ It really annoys me that no one is willing to talk about how much they _actually
 
 When I’m trying to figure out what a sensible amount is for PostHog to spend, all I can find are articles that talk very generally about marketing budgets in terms of things like % of revenue or general benchmarks. Which is nice, but [the ranges given are wild](https://www.datadab.com/blog/how-much-saas-companies-spend-on-marketing/) and I want _cold, hard numbers_. 
 
-How much does a typical startup [like PostHog](/about) spend on marketing? And why doesn’t anyone talk about it?
+How much does a typical startup [like PostHog](/about) spend on [B2B marketing](/newsletter/b2b-startup-marketing-strategy). And why doesn’t anyone talk about it?
 
 “But Charles, you naive idiot” asked nobody, “surely competitors will use this information against you?”
 
