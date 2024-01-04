@@ -30,7 +30,7 @@ Since then, we've realized that the same reasons that PostHog was appealing to u
 
 After we finished Y Combinator, [we raised a $3.025M seed round](../../blog/raising-3m-for-os). This was from Y Combinator's Continuity Fund, 1984 Ventures. You can learn more about how we raised the money.
 
-As we started raising, we started hiring. We brought on board [Marius, Eric and James G](../../handbook/company/team).
+As we started raising, we started hiring. We brought on board [Marius, Eric and James G](/team).
 
 ## May 2020: First 1,000 users
 

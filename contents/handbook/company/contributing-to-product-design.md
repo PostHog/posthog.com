@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 ## Getting started
-* Design work happens in [Figma](https://figma.com/) in the [App project](https://www.figma.com/files/project/17131046/App?fuid=987006441684352800). If you need access to a Figma project, ask [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) but everyone on the company should have View access.
+* Design work happens in [Figma](https://figma.com/) in the [App project](https://www.figma.com/files/project/17131046/App?fuid=987006441684352800). If you need access to a Figma project, ask [Cory Watilo](/community/profiles/2) but everyone on the company should have View access.
 * All product design work uses the [Inter font](https://fonts.google.com/specimen/Inter).
 * Product does not have a design system at this time. There is some component documentation in progress in the [design system project](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/PostHog-Design-System-One?node-id=576%3A308).
 

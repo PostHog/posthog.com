@@ -23,7 +23,7 @@ Here's what we learned - good and bad...
 
 ## We were disciplined at letting people go, but we got scared to re-hire
 
-We hired [world class people](../handbook/company/team), and we let people go quickly when it wasn't working (paying much greater [severance](../handbook/people/offboarding#involuntary-departure) than industry standard when this happened).
+We hired [world class people](/team), and we let people go quickly when it wasn't working (paying much greater [severance](../handbook/people/offboarding#involuntary-departure) than industry standard when this happened).
 
 Tim and I believed that people working with great people is a huge motivator - [talent compounds](../handbook/company/values#talent-compounds) is one of our [values](../handbook/company/values). Feedback from our team surveys have since confirmed our team agrees. 
 
@@ -35,7 +35,7 @@ The end result? Lost time - and that has a lot of opportunity cost.
 
 It was midway through last year when it clicked.
 
-We had thousands of companies deploying, but some companies just felt like they were a better fit than others. PostHog's platform is exceptionally broad - we have multiple traditional products built in. We had doubled the [team](../handbook/company/team) size too. Those things combined makes knowing where to focus particularly challenging!
+We had thousands of companies deploying, but some companies just felt like they were a better fit than others. PostHog's platform is exceptionally broad - we have multiple traditional products built in. We had doubled the [team](/team) size too. Those things combined makes knowing where to focus particularly challenging!
 
 We were getting a lot of inbound paid demand, so we felt we should figure out how to get product market fit for our paid product. This would force us to have a clear split between our free and paid products.
 

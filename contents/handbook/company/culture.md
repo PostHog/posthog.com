@@ -10,13 +10,13 @@ So, what's it like working at PostHog?
 
 ## All remote
 
-Our [team](/handbook/company/team) is 100% remote, and distributed across over 10 countries.
+Our [team](/team) is 100% remote, and distributed across over 10 countries.
 
 As well as the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space) or to cover the costs of coffees for those who prefer not to work at home.
 
 All remote has a bunch of advantages:
 
-* We can hire [amazing people](/handbook/company/team) from a global talent pool.
+* We can hire [amazing people](/team) from a global talent pool.
 * Being remote encourages a deeper level of personal thought and writing things down.
 * It allows for uninterrupted work.
 * It makes results clearer, which helps us hold people to account for outcomes rather than hours spent in the office.
