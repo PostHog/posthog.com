@@ -27,11 +27,11 @@ Want to know how PostHog and Mixpanel comapare? If you remember nothing else, re
 
 ### 1. It's more than product analytics
 
-PostHog is the only product analytics platform built to natively work with session replay, feature flags, A/B testing, and surveys. This means you get all the tools you need to deploy new features, test their performance, observe and analyze how users interact with them, and gather feedback. Everything you need to truly understand user behavior.
+PostHog is the only product analytics platform built to natively work with session replay, feature flags, A/B testing, and surveys. This means you get all the tools you need to deploy new features, test their performance, observe and analyze how users interact with them, and gather feedback. Everything you need to truly understand user behavior, perfectly integrated.
 
 ### 2. It's built for engineers
 
-We want engineers to engineer their products, not their data. PostHog autocaptures data, so you don't need to waste energy instrumenting basic events – we also offer robust tools for defining custom events. Our pricing is transparent and we're self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, though we have an [awesome customer success team](/contact-sales) if you have questions.
+We want engineers to engineer their products, not their data. PostHog autocaptures data, so you don't need to waste energy instrumenting basic events – we also offer robust tools for defining custom events. You can choose between light and dark mode themes and we cater to power users with a custom SQL query builder, keyboard shortcuts, and a command pallette. Our [customer success team]((/contact-sales)) is always available to answer your questions, but you setup PostHog and start paying us without ever speaking to a sales rep.
 
 ### 3. We're open source and transparent
 
@@ -93,16 +93,16 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 ### Feature flags
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
-  <ComparisonRow column1={true} column2={false} feature="Boolean flags" description="Simple flags returning true or flag" />
-  <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
-  <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
-  <ComparisonRow column1={true} column2={false} feature="Local evalution" description="Store flag definitions locally" />
-  <ComparisonRow column1={true} column2={false} feature="Percentage rollouts" description="Target percentages of a group" />
-  <ComparisonRow column1={true} column2={false} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1="Beta" column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, stage, prod" />
-  <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
+  <ComparisonRow column1={true} column2="n/a" feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2="n/a" feature="Multivariate flags" description="Flags with multiple customizable values" />
+  <ComparisonRow column1={true} column2="n/a" feature="Payloads" description="Flags with string, number, or JSON payloads" />
+  <ComparisonRow column1={true} column2="n/a" feature="Local evalution" description="Store flag definitions locally" />
+  <ComparisonRow column1={true} column2="n/a" feature="Percentage rollouts" description="Target percentages of a group" />
+  <ComparisonRow column1={true} column2="n/a" feature="Custom targeting" description="Target users based on user properties, custom contexts" />
+  <ComparisonRow column1="Beta" column2="n/a" feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1="Partial" column2="n/a" feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1={true} column2="n/a" feature="Bootstrapping" description="Flags available on frontend application load" />
+  <ComparisonRow column1={true} column2="n/a" feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
 > #### Good to know
@@ -129,7 +129,6 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 ### Session replay
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
-  <ComparisonRow column1="5,000 recordings" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
   <ComparisonRow column1={true} column2="n/a" feature="Web app recordings" description="Capture recordings from single-page apps" />
   <ComparisonRow column1="Beta" column2="n/a" feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
   <ComparisonRow column1={true} column2="n/a" feature="Identity detection" description="Link recordings to user IDs" />
@@ -147,12 +146,13 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 > #### Good to know
 >
+> - You get 5,000 recordings for free every month, so you'll pay nothing if you remain below this limit. You can use sampling and feature flags to limit the number of recordings you use. After 5,000 recordings, we charge $0.04 per recording and you'll pay less for each recording the more you use.
+>
 > - Session replays are _not_ video recordings of users. We reconstuct sessions by capturing Document Object Model (DOM) mutations. All private and personal data is masked. 
 
 ### Surveys
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
-  <ComparisonRow column1="250" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
   <ComparisonRow column1={true} column2="n/a" feature="Open text" description="Free text answers and feedback" />
   <ComparisonRow column1={true} column2="n/a" feature="Product rating" description="Rank using emojis or number" />
   <ComparisonRow column1={true} column2="n/a" feature="Single choice" description="Select one answer from multiple" />
@@ -166,222 +166,12 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 </ComparisonTable>
 
 > #### Good to know
-> - Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more – read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which one you should use and when.  
+> - Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more – read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which survey type you should use and when.  
+
+### Integrations
 
 
 
-
-
-### Client libraries
-
-<ComparisonTable column1="Mixpanel" column2="PostHog">
-  <ComparisonRow column1={true} column2={true} feature="JavaScript" description="Recommended for full PostHog functionality" />
-  <ComparisonRow column1={true} column2={true} feature="React Native" description="Session recording not available" />
-  <ComparisonRow column1={true} column2={true} feature="Flutter" description="Event tracking and user identification only" />
-  <ComparisonRow column1={true} column2={true} feature="iOS (Swift)" description="Autocapture and session replays not available" />
-  <ComparisonRow column1={true} column2={true} feature="iOS (Objective-C)" description="Autocapture and session replays not available" />
-  <ComparisonRow column1={true} column2={true} feature="Android" description="Event tracking and user identification only" />
-  <ComparisonRow column1={true} column2={false} feature="Unity" description="" />
-</ComparisonTable>
-
-- **JavaScript snippet:** All client libraries support event tracking and user identification for product analytics, but we recommend using PostHog's JavaScript snippet to enjoy all our features. See our [client library documentation](/docs/getting-started/install?tab=snippet) for more information.
-
-- **Mobile app session replays:** We don't currently support session recording in mobile apps, but it's currently under consideration as a project for our team. See our [public roadmap](/roadmap) for more info.
-
-- **Unity:** We don't have a Unity SDK yet but, as we're open-source, anyone can create one. See our [contribution guidelines](/docs/contribute) for more info.
-
-### Server libraries
-
-Some PostHog features, such as session replays and autocapture, are only available via our client-side libraries.
-
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>Notes for PostHog</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Node.js</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Supports events, feature flags, user ID, and group analytics</td>
-        </tr>
-        <tr>
-            <td><strong>Go</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Supports events, feature flags, user ID, and group analytics</td>
-        </tr>
-        <tr>
-            <td><strong>Python</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Supports events, feature flags, user ID, and group analytics</td>
-        </tr>
-        <tr>
-            <td><strong>Rust</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Alpha</td>
-            <td>Under development, not recommended for production</td>
-        </tr>
-        <tr>
-            <td><strong>Java</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Beta</td>
-            <td>Support events and user ID</td>
-        </tr>
-        <tr>
-            <td><strong>PHP</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Supports events, feature flags, user ID, and group analytics</td>
-        </tr>
-        <tr>
-            <td><strong>Ruby</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Supports events, feature flags, user ID, and group analytics</td>
-        </tr>
-        <tr>
-            <td><strong>Elixir</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Community maintained</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-## Integrations
-
-Mixpanel claims over 50 official integrations covering a wide-range of use cases. Given its focus on product analytics alone, many of these integrations connect to third-party tools for A/B testing, feature flag, and marketing use cases.
-
-The [PostHog App Store](/apps) has over 50 apps as well, though not all of these are integrations with external tools. Some are apps that modify data flows or add components to your frontend. PostHog doesn't natively connect with A/B testing or feature flag tools as these features are built into PostHog itself.
-
-**Categories:**
-
-- [Data Export](#data-export) 
-- [Data Import](#data-import)
-- [Dev Tools & Support](#dev-tools--support) 
-- [Marketing & Sales](#marketing--sales)
-- [Alerts & Automation](#alerts--automation)
-
-### Data Export
-
-<ComparisonTable column1="Mixpanel" column2="PostHog">
-  <ComparisonRow column1={true} column2={true} feature="Export API" description="Export data via API" />
-  <ComparisonRow column1={true} column2={true} feature="Amazon Redshift" description="Export data to Redshift" />
-  <ComparisonRow column1={true} column2={true} feature="Amazon S3" description="Export data to S3 bucket" />
-  <ComparisonRow column1={true} column2={true} feature="Azure Blob Storage" description="Export data to Microsoft Azure" />
-  <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" description="Export data to GCS" />
-  <ComparisonRow column1={true} column2={true} feature="Snowflake" description="Export data to Snowflake database" />
-  <ComparisonRow column1={true} column2={true} feature="BigQuery" description="Export data to Google BigQuery for analysis" />
-  <ComparisonRow column1={true} column2={true} feature="RudderStack" description="Sync event and person data" />
-  <ComparisonRow column1={true} column2={true} feature="Airbyte" description="Extract and load data to external platforms" />
-  <ComparisonRow column1={true} column2={false} feature="Fivetran" description="Extract and load data to external platforms" />
-</ComparisonTable>
-
-### Data Import
-
-<ComparisonTable column1="Mixpanel" column2="PostHog">
-  <ComparisonRow column1={true} column2={true} feature="Import API" description="API for importing data" />
-  <ComparisonRow column1={true} column2={true} feature="Amazon Redshift" description="Import data from Redshift for analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Amazon S3" description="Ingest data from S3 bucket for analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" description="Ingest data from GCS bucket for analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Google Pub/Sub" description="Import events from Pub/Sub topics" />
-  <ComparisonRow column1={true} column2={true} feature="Snowflake" description="Import Snowflake data for analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Snowplow" description="Ingest events from behavioral data platform" />
-  <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events tracked in Segment" />
-  <ComparisonRow column1={true} column2={true} feature="RudderStack" description="Ingest events tracked in RudderStack" />
-  <ComparisonRow column1={true} column2={true} feature="Hightouch" description="Reverse ETL data to multiple platforms" />
-  <ComparisonRow column1={true} column2={true} feature="Census" description="Reverse ETL data to multiple platforms" />
-</ComparisonTable>
-
-### Dev tools & support
-
-As an open source platform designed for technical teams, PostHog integrates with numerous developer tools and platforms. This isn't an area of strong support for Mixpanel.
-
-<ComparisonTable column1="Mixpanel" column2="PostHog">
-  <ComparisonRow column1={false} column2={true} feature="BitBucket Release Tracker" description="Track impact of releases in analytics" />
-  <ComparisonRow column1={false} column2={true} feature="GitHub Release Tracker" description="Track impact of releases in analytics" />
-  <ComparisonRow column1={false} column2={true} feature="GitHub Star Sync" description="Track GitHub star growth" />
-  <ComparisonRow column1={false} column2={true} feature="GitLab Release Tracker" description="Track impact of releases in analytics" />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" description="Connect errors to individual users" />
-  <ComparisonRow column1={false} column2={true} feature="Retool" description="Build internal tools using your usage data" />
-  <ComparisonRow column1={true} column2={true} feature="Zendesk" description="Track tickets as events, add context to tickets" />
-</ComparisonTable>
-
-### Marketing & sales
-
-Both platforms integrate with a wide-range of sales and marketing tools to support automation flows and user data synchronization. 
-
-Mixpanel has a specific advantage in connecting to Google and Facebook's advertising platforms directly, enabling in-product tracking of campaign ROI. 
-
-It's easy to track marketing conversions in PostHog, but you can't currently connect that directly to campaign spending data.
-
-<ComparisonTable column1="Mixpanel" column2="PostHog">
-  <ComparisonRow column1={true} column2={true} feature="Customer.io" description="Sync data and trigger workflows in Customer.io" />
-  <ComparisonRow column1={true} column2={true} feature="Hubspot" description="Sync customer data to and from Hubspot" />
-  <ComparisonRow column1={true} column2={true} feature="Engage" description="Automate onboarding and retention messaging" />
-  <ComparisonRow column1={true} column2={true} feature="Pace" description="Identify enterprise sales leads" />
-  <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync customer data to and from Salesforce" />
-  <ComparisonRow column1={true} column2={true} feature="Sendgrid" description="Automate email workflows" />
-  <ComparisonRow column1={true} column2={true} feature="Twitter" description="Track Twitter follower growth" />
-  <ComparisonRow column1={true} column2={true} feature="Variance" description="Define PQLs with real analytics data" />
-  <ComparisonRow column1={true} column2={false} feature="Facebook Ads" description="Track Facebook ad ROI" />
-  <ComparisonRow column1={true} column2={false} feature="Google Ads" description="Track Google ad ROI" />
-  <ComparisonRow column1={true} column2={false} feature="Mailchimp" description="Automate marketing emails" />
-  <ComparisonRow column1={true} column2={true} feature="Intercom" description="Automate your product comms" />
-</ComparisonTable>
-
-### Alerts & automation
-
-Mixpanel and PostHog both support popular messaging apps and automation platforms, though PostHog also supports Discord and the open-source Zapier alternative, n8n.
-
-<ComparisonTable column1="Mixpanel" column2="PostHog">
-  <ComparisonRow column1={true} column2={true} feature="Slack" description="Send alerts and reports to Slack" />
-  <ComparisonRow column1={false} column2={true} feature="Discord" description="Send alerts and reports to Discord" />
-  <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Send alerts and reports to Teams" />
-  <ComparisonRow column1={false} column2={true} feature="n8n" description="Open source workflow automation" />
-  <ComparisonRow column1={false} column2={true} feature="Twilio" description="Automate SMS alerts on events" />
-  <ComparisonRow column1={true} column2={true} feature="Zapier" description="Automate workflows on events" />
-</ComparisonTable>
-
-## Privacy, admin & security
-
-### Privacy compliance
-
-<ComparisonTable column1="Mixpanel" column2="PostHog">
-  <ComparisonRow column1={true} column2={true} feature="GDPR compliant" description="EU hosting or data residency available" />
-  <ComparisonRow column1={true} column2="Self-host only" feature="HIPAA compliant" description="Business Associate Agreement available" />
-  <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Remove personally identifiable information" />
-  <ComparisonRow column1={false} column2={true} feature="Self-hosting option" description="Self-host and keep complete control of your data" />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use analytics without cookie consent banners" />
-</ComparisonTable>
-
-- **Self-hosting:** While we recommend most customers use PostHog Cloud, PostHog can be self-hosted on your own infrastructure so you keep control of all your data. This is useful for businesses that handle highly sensitive information, such as defense or health data, but it is more expensive than using PostHog Cloud. See: [Who should self-host PostHog?](#who-should-selfhost-posthog)
-
-- **HIPAA compliance:** Mixpanel will sign a Business Associate Agreement if you require HIPAA compliance. At PostHog, we recommend self-hosting PostHog if you require [HIPAA compliance](/docs/privacy/hipaa-compliance). This ensures all sensitive data never leaves your infrastructure, giving you complete control and simplifying compliance processes.
-
-- **Cookie-less tracking:** If you'd rather not serve annoying cookie banners to your users, PostHog can be configured to store data in memory so it doesn't persist beyond a single session. See: [How to use PostHog without cookie banners](/tutorials/cookieless-tracking). Note: some types of user analysis aren't possible with this method.
-
-### Admin & security
-
-<ComparisonTable column1="Mixpanel" column2="PostHog">
-  <ComparisonRow column1={true} column2={true} feature="SOC 2 certification" description="Externally audited security" />
-  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Organization single sign-on" />
-  <ComparisonRow column1={true} column2={true} feature="Access levels" description="Assign access levels to team members" />
-  <ComparisonRow column1={true} column2={true} feature="Multiple organizations" description="Create orgs for all your internal teams" />
-  <ComparisonRow column1={true} column2={true} feature="Multiple projects" description="Track multiple products and domains" />
-  <ComparisonRow column1={false} column2="Enterprise" feature="Private projects" description="Create hidden projects with user permissions" />
-</ComparisonTable>
-
-- **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
 
 ## Frequently asked questions
 
