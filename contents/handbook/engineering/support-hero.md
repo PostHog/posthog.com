@@ -39,6 +39,7 @@ Each engineering team has its own list of tickets in Zendesk:
 - [Pipeline](https://posthoghelp.zendesk.com/agent/filters/14506794017051)
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
+- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027)
 
 Your job is simple: resolve ticket after ticket from your team's list.
 
