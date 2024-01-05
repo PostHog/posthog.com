@@ -2,11 +2,39 @@
 title: Markdown
 ---
 
+## Product screenshots
+
+The `<ProductScreenshot>` component encapsulates an image with a border and background. It's useful since the app's background matches the website background, and without using this component, it can be hard to differentiate between the screenshot and normal page content. ([See an example](/docs/session-replay/how-to-control-which-sessions-you-record) of this component in action.)
+
+It supports dark mode screenshots (optional). Here's how to use it:
+
+1. Import the component and image(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
+
+  ```
+  ---
+
+  import { ProductScreenshot } from 'components/ProductScreenshot'
+  import ImgSampleConfigLight from '../../images/tutorials/limit-session-recordings/sampling-config-light.png'
+  import ImgSampleConfigDark from '../../images/tutorials/limit-session-recordings/sampling-config-dark.png'
+  ```
+1. Use the component wherever you want the image to appear.
+
+  ```
+  <ProductScreenshot
+    imageLight={ImgSampleConfigLight} 
+    imageDark={ImgSampleConfigDark} 
+    alt="Sampling config shown set to 100% i.e. no sampling" 
+    classes="rounded"
+  />
+  ```
+
+  _Note: If you don't have a dark image, just leave out the `imageDark` prop and the light screenshot will be used for both color modes._
+
 ## Codeblocks
 
 The PostHog website has a custom codeblock component that comes with a number of useful features built-in:
 
-- [Syntax highlighting](#adding-syntax-highlighting)
+- [Syntax highDarking](#adding-syntax-highlighting)
 - [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
 - [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
 
