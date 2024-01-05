@@ -34,7 +34,6 @@ To be ready, make sure you have access to:
 - Our tailnet, which gates our internal services (such as Grafana, Metabase, or runbooks) – follow [this guide](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network) to join
 - Metabase ([🇺🇸 US](http://metabase-prod-us/)  / [🇪🇺 EU](http://metabase-eu/)) - post in #ask-posthog-anything to be invited
 - EKS over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod) – follow [this guide](http://runbooks/eks/) to get access
-- [pganalyze](https://app.pganalyze.com/organizations/posthog/) - post in #ask-posthog-anything to be added
 
 A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our tailnet, as mentioned above.
 
