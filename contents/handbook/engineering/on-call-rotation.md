@@ -37,6 +37,9 @@ To be ready, make sure you have access to:
 A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our tailnet, as mentioned above.
 
 When an alert fires, find if there's a runbook for it. A runbook tells you what to look at and what fixes exist. Every alert also has a link to the Grafana graph that triggered the alert.
+In any case, your first priority will be to understand what is going on and the right starting point will almost always be Grafana. 
+
+- Grafana ([🇺🇸](http://grafana-prod-us/))  / [🇪🇺](http://grafana-prod-eu/))
 
 [If the alert is starting to have any noticeable impact on users, go raise an incident.](https://posthog.com/handbook/engineering/incidents) It's that simple.
 
