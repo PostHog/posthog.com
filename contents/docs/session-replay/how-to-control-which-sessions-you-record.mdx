@@ -41,7 +41,7 @@ posthog.startSessionRecording()
 
 If you already use this mechanism to control session recordings using feature flags you can link the feature flag (as above) and delete your manual handling code.
 
-## Sampling
+# Sampling
 
 You can configure sampling to limit the number of sessions you record for each user. This is useful if you want to record a percentage of sessions for all users. Sampling helps reduce the number of sessions you record, but it doesn’t let you control which sessions are included.
 
@@ -51,7 +51,7 @@ Our recommendation is to start with capturing all sessions (e.g. 100% - the defa
 
 Whenever a new session starts after you select a collection below 100%, the browser generates a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session is recorded. If it is greater than the sampling rate, the session is not recorded.
 
-## Minimum duration
+# Minimum duration
 
 You can also set a minimum duration for sessions to be recorded. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
 
@@ -59,13 +59,13 @@ You can also set a minimum duration for sessions to be recorded. This is useful 
 
 The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory. 
 
-### Limitations
+## Limitations
 
 This means that if you set a high minimum duration and your user visits multiple pages each for a short time, you still record the session but miss the beginning. If the user leaves the site before the minimum duration has passed, the session is not recorded.
 
 If you find you are missing the beginning of sessions, you can reduce the minimum duration or use one of our other methods to reduce the number of sessions you record.
 
-## For more examples of controlling which sessions you record 
+# For more examples of controlling which sessions you record 
 
 see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
 
