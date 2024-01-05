@@ -21,7 +21,7 @@ First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodej
 npx create-next-app@latest cookie-banner
 ```
 
-To add PostHog to our app, go into your `app` folder and create a `providers.js` file. Here we create a client-side PostHog provide that initializes in a `useEffect` using the project API key and instance address (get them from your [project settings](https://app.posthog.com/project/settings)). Make sure to include the `use client` directive and the `phInstance` state (for future use). Altogether, this looks like this:
+To add PostHog to our app, go into your `app` folder and create a `providers.js` file. Here we create a client-side PostHog provider that initializes in a `useEffect` using the project API key and instance address (get them from your [project settings](https://app.posthog.com/project/settings)). Make sure to include the `use client` directive and the `phInstance` state (for future use). Altogether, this looks like this:
 
 ```js
 // app/providers.js
