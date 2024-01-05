@@ -9,10 +9,17 @@ import featureFlagsContent from './FeatureFlags'
 import abTestingContent from './ABTesting'
 import { Link } from 'gatsby'
 
-const content = [productOSContent, productAnalyticsContent, sessionReplayContent, featureFlagsContent, abTestingContent]
+const content = {
+    'product os': productOSContent,
+    'product analytics': productAnalyticsContent,
+    'session replay': sessionReplayContent,
+    'feature flags': featureFlagsContent,
+    'a/b testing': abTestingContent,
+}
 
 export default function CodeBlocks() {
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeName, setActiveName] = useState(Object.keys(content)[0])
+    const menu = docsMenu?.children.filter(({ name }) => !!content[name.toLowerCase()])
     return (
         <div className="max-w-screen-2xl mx-auto relative pb-12">
             <h2 className="text-4xl px-4 md:px-0 lg:text-6xl text-center mb-1">Mmmm, code examples</h2>
@@ -29,15 +36,15 @@ export default function CodeBlocks() {
             </p>
             <InternalMenu
                 scrollOnRender={false}
-                activeIndex={activeIndex}
-                menu={docsMenu?.children.slice(0, 5).map((child, index) => ({
+                activeIndex={menu.findIndex(({ name }) => name.toLowerCase() === activeName)}
+                menu={menu.map((child) => ({
                     ...child,
                     url: null,
-                    onClick: () => setActiveIndex(index),
+                    onClick: () => setActiveName(child.name.toLowerCase()),
                 }))}
             />
             <div className="my-6 -mb-4 lg:mb-12 lg:my-12 px-5">
-                <ContentViewer scrollToTop={false} content={content[activeIndex]} />
+                <ContentViewer scrollToTop={false} content={content[activeName]} />
             </div>
         </div>
     )

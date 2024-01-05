@@ -11,6 +11,7 @@ export default function Tooltip({
     tooltipClassName = '',
     placement = 'bottom',
     title,
+    contentContainerClassName = '',
 }: {
     children: JSX.Element
     content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
@@ -19,6 +20,7 @@ export default function Tooltip({
     tooltipClassName?: string
     placement?: Placement
     title?: string
+    contentContainerClassName?: string
 }) {
     const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
@@ -55,7 +57,7 @@ export default function Tooltip({
                                 </h5>
                             )}
                             <div
-                                className={`bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary dark:text-primary-dark px-2 py-2 text-sm z-20`}
+                                className={`bg-accent dark:bg-accent-dark border border-border dark:border-dark text-primary dark:text-primary-dark px-2 py-2 text-sm z-20 ${contentContainerClassName}`}
                             >
                                 {content && (typeof content === 'string' ? content : content(setOpen))}
                             </div>
