@@ -16,7 +16,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 Want to know how PostHog and Amplitude compare? If you remember nothing else, remember these two things:
 
-1. **Amplitude** is a product analytics tool built for non-technical users and enterprise data teams.
+1. **Amplitude** is a product analytics tool built for non-technical users and data analysts.
 
 2. **PostHog** is a comprehensive, all-in-one platform built for engineers that replaces Amplitude _and_ numerous other tools.
 
@@ -36,9 +36,9 @@ Our MIT License isn't just for show. You can read [our source code](https://gith
 
 ## Comparing PostHog and Amplitude
 
-### Platform
-
 ![posthog](../images/screenshots/notebooks-sidebar.png)
+
+### Platform
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion, analyze user behavior" />
@@ -58,9 +58,9 @@ Our MIT License isn't just for show. You can read [our source code](https://gith
 > #### Good to know
 > Entering a credit card unlocks almost all PostHog features and you **only pay for what you use**. You get a generous free allowance _every_ month and you can set billing limits to prevent surprise bills.
 
-### Product analytics
-
 ![posthog](../images/screenshots/hogflix-dashboard.png)
+
+### Product analytics
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million events, unlimited insights" column2="100k monthly tracked users, 10 saved insights" feature="Free usage" description="How much free usage do you get each month?" />
@@ -79,11 +79,11 @@ Our MIT License isn't just for show. You can read [our source code](https://gith
 </ComparisonTable>
 
 > #### Good to know
-> **Autocapture** support means PostHog is much easier to implement than Amplitude. You can signup and start ingesting events within minutes. Both tools support custom event tracking, but you need a comprehensive tracking plan before Amplitude is useful. Don't want autocapture, just [turn it off](/docs/product-analytics/autocapture) – we offer the best of both worlds.
-
-### Feature flags
+> Autocapture support means PostHog is much easier to implement than Amplitude. You can signup and start ingesting events within minutes. Both tools support custom event tracking, but you need a comprehensive tracking plan before Amplitude is useful. Don't want autocapture, just [turn it off](/docs/product-analytics/autocapture) – we offer the best of both worlds.
 
 ![posthog](../images/screenshots/feature-flags.png)
+
+### Feature flags
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million API requests" column2="100k tracked users" feature="Free usage" description="How much free usage do you get each month?" />
@@ -100,11 +100,11 @@ Our MIT License isn't just for show. You can read [our source code](https://gith
 </ComparisonTable>
 
 > #### Good to know
-> - **Local evaluation** enables you to massively reduce the number of API requests you make, improving performance and reducing costs at the same time. See our [local evaluation documentation](/docs/feature-flags/local-evaluation) for more information.
+> Local evaluation enables you to massively reduce the number of API requests you make, improving performance and reducing costs at the same time. See our [local evaluation documentation](/docs/feature-flags/local-evaluation) for more information.
+
+![posthog](../images/screenshots/ab-testing.png)
 
 ### Experimentation
-
-![posthog](contents/images/screenshots/ab-testing.png)
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million API requests" column2="None" feature="Free usage" description="How much free usage do you get each month?" />
@@ -121,9 +121,9 @@ Our MIT License isn't just for show. You can read [our source code](https://gith
 > #### Good to know
 > PostHog's testing features are free when you input a card and you get a generous 1 million API requests for free _every_ month. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact their sales team to use it.
 
-### Session replay
-
 ![posthog](../images/screenshots/session-replay.png)
+
+### Session replay
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="5,000 recordings" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
@@ -145,9 +145,9 @@ Our MIT License isn't just for show. You can read [our source code](https://gith
 > #### Good to know
 > Session replays are _not_ video recordings of users. We reconstuct sessions by capturing Document Object Model (DOM) mutations. All private and personal data is masked. Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't.
 
-### Surveys
-
 ![posthog](../images/screenshots/survey-templates.png)
+
+### Surveys
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="250" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
@@ -211,14 +211,11 @@ Amplitude offers a free Starter plan, but it lacks many important features:
 </ComparisonTable>
 
 > #### Good to know
->
-> - We charge progressively less per event, replay, API request the more you use. You can see a breakdown on [our pricing page](/pricing).
->
-> - Our free tiers are for life, which means you'll always get your first 1 million events (or 5,000 replays and so on) for free every month, no matter how many you end up using.
+> We charge progressively less per event, replay, API request the more you use. You can see a breakdown on [our pricing page](/pricing). Our free tiers are for life, which means you'll always get your first 1 million events (or 5,000 replays and so on) for free every month, no matter how many you end up using.
 
 ### Security and compliance
 
-<ComparisonTable column1="PostHog" column2="Statsig">
+<ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
   <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
   <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
@@ -229,34 +226,21 @@ Amplitude offers a free Starter plan, but it lacks many important features:
 </ComparisonTable>
 
 > #### Good to know
->
-> - We don't currently offer Business Associate Agreements (BAA) for HIPAA compliance, but is in our future roadmap. If you're interested in PostHog but require a BAA, please [contact our sales team](/contact-sales) to register your interest.
+> We don't currently offer Business Associate Agreements (BAA) for HIPAA compliance, but is in our future roadmap. If you're interested in PostHog but require a BAA, please [contact our sales team](/contact-sales) to register your interest.
 
 ## FAQ
 
 ### Can PostHog also replace Google Analytics?
 
-Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using Google Tag Manager, and we're currently building an [easy to use web analytics product](/docs/web-analytics). We don't currently offer integration with Google Ads, however.
-
-Further reading:
-- Our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4)
-- [An intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog)
+Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using Google Tag Manager. See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [An intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
 
 ### Is PostHog easy to deploy?
 
-Yes. Just paste the below snippet within the `<head>` tags your product or website and you're good to go in just a few minutes:
-
-<Snippet />
-
-See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
+Yes. Just paste the below JS snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
 
 ### How can I estimate my usage?
 
-It's simpler than you think. 
-
-The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days.
-
-Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
+The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days. Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
 
 ### Does PostHog block bots by default?
 
@@ -268,8 +252,6 @@ Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 
 ### What about ad blockers?
 
-We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capure the best data possible.
-
-We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capure the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
 
 <ArrayCTA />
