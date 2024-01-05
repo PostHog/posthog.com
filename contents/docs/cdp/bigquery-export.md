@@ -70,7 +70,7 @@ Here is a summary of all the fields that are exported to BigQuery.
 | set                   | `STRING`    | A JSON object with any person properties sent with the `$set` field                     |
 | set_once              | `STRING`    | A JSON object with any person properties sent with the `$set_once` field                |
 | distinct_id           | `STRING`    | The `distinct_id` of the user who sent the event                                        |
-| team_id               | `INT64`    | The `team_id` for the event                                                             |
+| team_id               | `STRING`    | The `team_id` for the event                                                             |
 | ip                    | `STRING`    | The IP address that was sent with the event                                             |
 | site_url              | `STRING`    | This is always set as an empty string for backwards compatibility                       |
 | timestamp             | `TIMESTAMP` | The timestamp when the event was ingested into PostHog                                  |
