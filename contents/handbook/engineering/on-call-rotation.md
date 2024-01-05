@@ -30,11 +30,11 @@ You just go about your day, paying no attention to being on call most of the tim
 
 To be ready, make sure you have access to:
 
-- PostHog Cloud admin interfaces ([🇺🇸 US](https://app.posthog.com/admin/)  / [🇪🇺 EU](https://eu.posthog.com/admin/)) - these require another team member to mark you as a staff user in both regions
-- Metabase ([🇺🇸 US](http://metabase-prod-us/)  / [🇪🇺 EU](http://metabase-prod-eu/)) – these might require another team member to invite you to both regions
-- Our [tailnet](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network), which gates our internal services (such as Grafana and runbooks)
-- [EKS](http://runbooks/eks/) over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod)
-- [pganalyze](https://app.pganalyze.com/organizations/posthog/)
+- PostHog Cloud admin interfaces ([🇺🇸 US](https://us.posthog.com/admin/)  / [🇪🇺 EU](https://eu.posthog.com/admin/)) - post in #ask-posthog-anything to be added
+- Our tailnet, which gates our internal services (such as Grafana, Metabase, or runbooks) – follow [this guide](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network) to join
+- Metabase ([🇺🇸 US](http://metabase-prod-us/)  / [🇪🇺 EU](http://metabase-eu/)) - post in #ask-posthog-anything to be invited
+- EKS over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod) – follow [this guide](http://runbooks/eks/) to get access
+- [pganalyze](https://app.pganalyze.com/organizations/posthog/) - post in #ask-posthog-anything to be added
 
 A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our tailnet, as mentioned above.
 
