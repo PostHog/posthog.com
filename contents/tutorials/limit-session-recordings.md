@@ -176,7 +176,7 @@ This is useful if you want to record specific parts or paths on a page such as:
 
 You can configure sampling to limit the number of sessions you record for each user. This is useful if you want to record a percentage of sessions for all users. Sampling helps reduce the number of sessions you record, but it doesn’t let you control which sessions are included.
 
-Our recommendation is to start with no sampling (e.g. 100% - the default) or a low sampling rate (e.g. 90% or 95%) and increase it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
+Our recommendation is to start with capturing all sessions (e.g. 100% - the default) or a high sampling rate (e.g. 90% or 95%) and decrease it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
 
 ![sampling config shown set to 100% i.e. no sampling](../images/tutorials/limit-session-recordings/sampling-config.png)
 

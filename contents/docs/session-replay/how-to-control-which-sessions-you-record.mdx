@@ -34,10 +34,12 @@ posthog.init('<ph_project_api_key>', {
     disable_session_recording: true,
     // ... other options
 })
-yourCode.eventHandler(function () {
-    posthog.startSessionRecording()
-})
+
+// some time later based on a trigger in your system
+posthog.startSessionRecording()
 ```
+
+If you already use this mechanism to control session recordings using feature flags you can link the feature flag (as above) and delete your manual handling code.
 
 For more examples of controlling  which sessions you record, see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
 
