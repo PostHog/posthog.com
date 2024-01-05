@@ -16,6 +16,8 @@ We're very lucky that we have an almost-follow-the-sun rotation for service aler
 - [Americas East](https://posthog.pagerduty.com/schedules#PW1E9Y4) (16:00 to 00:00 UTC)
 - [Americas West](https://posthog.pagerduty.com/schedules#P3J10CZ) (00:00 to 08:00 UTC)
 
+Because the stability of production systems is critical, on-call involves weekends too (unlike Support Hero). More likely than not, nothing will happen over the weekend – but you never know, so the important thing is to keep your laptop at hand.
+
 Before going on call, make sure you have the [PagerDuty mobile app](https://support.pagerduty.com/docs/mobile-app) installed and configured. This way it'll be harder to miss an alert.
 
 ## What if I'm scheduled for a week when I won't be available?
@@ -24,12 +26,12 @@ Swap with another engineer in advance! Find a volunteer by asking in Slack, then
 
 ## What do I do on call?
 
-You just go about your day, paying no attention to being on call most of the time! But keep your laptop at hand, because when you do get paged, it's time to switch gears immediately and start investigating the alert.
+You just go about your day, paying no attention to being on call most of the time! But the moment you get paged, it's time to switch gears and start investigating the alert.
 
 To be ready, make sure you have access to:
 
-- PostHog Cloud admin interfaces ([🇺🇸](https://app.posthog.com/admin/)  / [🇪🇺](https://eu.posthog.com/admin/)) - these require another team member to mark you as a staff user in both regions
-- Metabase ([🇺🇸](http://metabase-prod-us/)  / [🇪🇺](http://metabase-prod-eu/)) – these might require another team member to invite you to both regions
+- PostHog Cloud admin interfaces ([🇺🇸 US](https://app.posthog.com/admin/)  / [🇪🇺 EU](https://eu.posthog.com/admin/)) - these require another team member to mark you as a staff user in both regions
+- Metabase ([🇺🇸 US](http://metabase-prod-us/)  / [🇪🇺 EU](http://metabase-prod-eu/)) – these might require another team member to invite you to both regions
 - Our [tailnet](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network), which gates our internal services (such as Grafana and runbooks)
 - [EKS](http://runbooks/eks/) over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod)
 - [pganalyze](https://app.pganalyze.com/organizations/posthog/)
@@ -37,9 +39,7 @@ To be ready, make sure you have access to:
 A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our tailnet, as mentioned above.
 
 When an alert fires, find if there's a runbook for it. A runbook tells you what to look at and what fixes exist. Every alert also has a link to the Grafana graph that triggered the alert.
-In any case, your first priority will be to understand what is going on and the right starting point will almost always be Grafana. 
-
-- Grafana ([🇺🇸](http://grafana-prod-us/))  / [🇪🇺](http://grafana-prod-eu/))
+In any case, your first priority will be to understand what's going on, and the right starting point will almost always be Grafana: [🇺🇸 US](http://grafana-prod-us/) / [🇪🇺 EU](http://grafana-prod-eu/).
 
 [If the alert is starting to have any noticeable impact on users, go raise an incident.](https://posthog.com/handbook/engineering/incidents) It's that simple.
 
