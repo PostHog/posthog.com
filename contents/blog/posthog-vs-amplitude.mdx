@@ -1,20 +1,17 @@
 ---
-date: 2024-01-04
 title: "In-depth: PostHog vs Amplitude"
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
+date: 2024-01-05
+author: ["andy-vandervell"]
+rootpage: /blog
 featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg
 featuredImageType: full
-author:
-  - andy-vandervell
 category: General
 tags:
   - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
 Want to know how PostHog and Amplitude compare? If you remember nothing else, remember these two things:
@@ -27,7 +24,7 @@ Want to know how PostHog and Amplitude compare? If you remember nothing else, re
 
 ### 1. We're an all-in-one platform
 
-PostHog is more than a product analytics tool, it's an all-in-one Product OS that replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flags, Hotjar for session recording, [Statsig](/blog/posthog-vs-statsig) for A/B testing, or you could just use PostHog for everything. One platform, one bill: seamless integration.
+PostHog is more than a product analytics tool, it's an all-in-one platform that replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flags, Hotjar for session recording, [Statsig](/blog/posthog-vs-statsig) for A/B testing, or you could just use PostHog for everything. One platform, one bill: seamless integration.
 
 ### 2. We're built for engineers
 
@@ -53,9 +50,11 @@ Our MIT License isn’t just for show. You can read [our source code](https://gi
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app or website" />
   <ComparisonRow column1={true} column2={true} feature="Notebooks" description="Ad-hoc analysis and collaboration" />
   <ComparisonRow column1={true} column2={false} feature="Dark mode" description="Choose between light and dark UI" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
 
 > #### Good to know
+>
 > - Qualatative insights from session replays and surveys are a great way to understand user paint points in a way raw data often can't, which is why we've baked them into our platform.
 > 
 > - Entering a credit card unlocks almost all our features and you **only pay for what you use**. You get a [generous free allowance](#pricing) _every_ month and you can set billing limits to prevent surprise bills.
@@ -81,6 +80,7 @@ Our MIT License isn’t just for show. You can read [our source code](https://gi
 </ComparisonTable>
 
 > #### Good to know
+>
 > - **Autocapture** support means PostHog is much easier to implement than Amplitude. You can signup and start ingesting events within minutes. Both tools support custom event tracking, but you need a comprehensive tracking plan before Amplitude is useful. Read [Is autocapture ‘still’ bad?](/blog/is-autocapture-still-bad) for more on the benefits of autocapture.
 
 ### Feature flags
@@ -99,8 +99,9 @@ Our MIT License isn’t just for show. You can read [our source code](https://gi
   <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
-#### Good to know
-- **Local evaluation** enables you to massively reduce the number of API requests you make, improving performance and reducing costs at the same time. See our [local evaluation documentation](/docs/feature-flags/local-evaluation) for more information.
+> #### Good to know
+>
+> - **Local evaluation** enables you to massively reduce the number of API requests you make, improving performance and reducing costs at the same time. See our [local evaluation documentation](/docs/feature-flags/local-evaluation) for more information.
 
 ### Experimentation
 
@@ -116,8 +117,9 @@ Our MIT License isn’t just for show. You can read [our source code](https://gi
   <ComparisonRow column1="Bayesian" column2="Sequential" feature="Statistics engine" description="How the results of an experiment are calculated" />
 </ComparisonTable>
 
-#### Good to know
-- PostHog's testing features are free when you input a card. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact their sales team to use it.
+> #### Good to know
+>
+> - PostHog's testing features are free when you input a card. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact their sales team to use it.
 
 ### Session replay
 
@@ -138,8 +140,9 @@ Our MIT License isn’t just for show. You can read [our source code](https://gi
   <ComparisonRow column1={true} column2="n/a" feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
 </ComparisonTable>
 
-#### Good to know
-- Session replays are _not_ video recordings of users. We reconstuct sessions by capturing Document Object Model (DOM) mutations. All private and personal data is masked. 
+> #### Good to know
+>
+> - Session replays are _not_ video recordings of users. We reconstuct sessions by capturing Document Object Model (DOM) mutations. All private and personal data is masked. 
 
 ### Surveys
 
@@ -176,6 +179,7 @@ Our MIT License isn’t just for show. You can read [our source code](https://gi
 </ComparisonTable>
 
 > #### Good to know
+>
 > - PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as Sentry, Zapier and Zendesk, while Amplitude has stronger integrations with marketing and advertising platforms.
 
 ### Pricing
@@ -236,13 +240,15 @@ Further reading:
 
 Yes. Just paste the below snippet within the `<head>` tags your product or website and you're good to go in just a few minutes:
 
+<Snippet />
+
 See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
 
 ### How can I estimate my usage?
 
 It's simpler than you think. 
 
-The easiest way is to [sign up to PostHog](https://app.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days.
+The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days.
 
 Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
 
@@ -258,4 +264,6 @@ Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 
 We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capure the best data possible.
 
-We have [reverse proxy setup](/docs/advanced/proxy) guides for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+
+<ArrayCTA />
