@@ -42,6 +42,7 @@
         "@types/styled-components": "^5.1.26",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "@uiw/react-md-editor": "^3.9.5",
+        "ahooks": "^3.7.8",
         "algoliasearch": "^4.14.2",
         "busboy": "^1.6.0",
         "chart.js": "^4.3.3",

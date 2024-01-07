@@ -9,12 +9,12 @@ type CartProps = {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function Cart(props: CartProps) {
+export function Cart(props: CartProps): React.ReactElement {
     const { className } = props
     const cartItems = useCartStore((state) => state.cartItems)
     const isEmpty = cartItems.length === 0
 
-    const classes = cn('text-black h-full', className)
+    const classes = cn('text-black h-full p-8 pt-20', className)
 
     return (
         <div className={classes}>

@@ -1,7 +1,11 @@
 import * as React from 'react'
-import { SVGProps, Ref, forwardRef } from 'react'
+import { Ref, SVGProps, forwardRef } from 'react'
 
-const Loader = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+interface LoaderProps extends SVGProps<SVGSVGElement> {
+    className?: string
+}
+
+const Loader = (props: LoaderProps, ref: Ref<SVGSVGElement>): JSX.Element => (
     <svg width="24px" height="24px" viewBox="0 0 24 24" ref={ref} {...props}>
         <title>loader</title>
         <g id="icon/loader" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

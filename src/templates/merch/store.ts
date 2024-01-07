@@ -10,7 +10,7 @@ type CartStore = {
     cartItems: CartItem[] | []
     setCartItems: (cartItems: CartItem[] | []) => void
     count: () => number
-    add: (variant: ShopifyProductVariant) => void
+    add: (variant: ShopifyProductVariant, count: number) => void
     remove: (variantId: string) => void
     removeAll: () => void
     checkoutUrl: string | null
@@ -34,9 +34,9 @@ export const useCartStore = create<CartStore>(
                 if (cartItems.length) return cartItems.map((item) => item.count).reduce((prev, curr) => prev + curr)
                 return 0
             },
-            add: (variant: ShopifyProductVariant) => {
+            add: (variant: ShopifyProductVariant, count: number) => {
                 const { cartItems } = get()
-                const updatedCart = updateCart(variant, cartItems)
+                const updatedCart = updateCart(variant, count, cartItems)
                 set({ cartItems: updatedCart })
             },
             remove: (variantId: string) => {
@@ -59,8 +59,8 @@ export const useCartStore = create<CartStore>(
     )
 )
 
-function updateCart(variant: ShopifyProductVariant, cartItems: CartItem[]): CartItem[] {
-    const cartItem = { ...variant, count: 1 } as CartItem
+function updateCart(variant: ShopifyProductVariant, count: number, cartItems: CartItem[]): CartItem[] {
+    const cartItem = { ...variant, count: count || 1 } as CartItem
 
     const productOnCart = cartItems.map((item) => item.shopifyId).includes(variant.shopifyId)
 

@@ -296,7 +296,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-Shopify-Access-Token': process.env.SHOPIFY_APP_PASSWORD,
+            'X-Shopify-Access-Token': process.env.SHOPIFY_APP_PASSWORD!,
         },
         body: JSON.stringify({
             query: `
@@ -328,10 +328,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     })
 
     const { data } = await response.json()
-    const collections = data.metaobjects.edges[0].node.fields[0].references.edges.map((item) => ({
-        title: item.node.title,
-        handle: item.node.handle,
-    }))
+
+    // we want the collection "All Products" to always be at the top of the list
+    const collections = data.metaobjects.edges[0].node.fields[0].references.edges
+        .map((item) => ({
+            title: item.node.title,
+            handle: item.node.handle,
+        }))
+        .sort((a, b) => (a.handle === 'all-products' ? -1 : b.handle === 'all-products' ? 1 : 0))
 
     collections.forEach((collection, i) => {
         const node = {

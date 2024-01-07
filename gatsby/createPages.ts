@@ -342,6 +342,77 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     handle
                     products {
                         id
+                        title
+                        handle
+                        shopifyId
+                        description
+                        metafields {
+                            value
+                            key
+                        }
+                        priceRangeV2 {
+                            maxVariantPrice {
+                                amount
+                            }
+                            minVariantPrice {
+                                amount
+                            }
+                        }
+                        status
+                        featuredMedia {
+                            preview {
+                                image {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        options {
+                            shopifyId
+                            name
+                            values
+                        }
+                        tags
+                        totalInventory
+                        variants {
+                            shopifyId
+                            title
+                            sku
+                            price
+                            availableForSale
+                            product {
+                                title
+                                featuredMedia {
+                                    preview {
+                                        image {
+                                            localFile {
+                                                childImageSharp {
+                                                    gatsbyImageData
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            media {
+                                preview {
+                                    image {
+                                        localFile {
+                                            childImageSharp {
+                                                gatsbyImageData
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            selectedOptions {
+                                name
+                                value
+                            }
+                        }
                     }
                 }
             }
@@ -363,27 +434,22 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
      * Merch pages
      */
 
+    const merchNav = result.data.allMerchNavigation.nodes?.map((item) => {
+        if (item.handle === 'all-products') {
+            return {
+                url: '/merch',
+                handle: item.handle,
+                title: item.title,
+            }
+        }
+
+        return item
+    })
+
     const productsPerPage = 6
 
-    // all products (aka "/merch/")
-    // const shopifyProducts = result.data.allShopifyProduct.edges
-    // const numPages = Math.ceil(shopifyProducts.length / productsPerPage)
-    // Array.from({ length: numPages }).forEach((_, i) => {
-    //     createPage({
-    //         path: i === 0 ? `/merch` : `/merch/${i + 1}`,
-    //         component: path.resolve('./src/templates/merch/AllProducts.tsx'),
-    //         context: {
-    //             limit: productsPerPage,
-    //             skip: i * productsPerPage,
-    //             numPages,
-    //             currentPage: i + 1,
-    //         },
-    //     })
-    // })
-
-    // collection pages (aka "/merch/collection-handle/")
-    result.data.allShopifyCollection.nodes.forEach(({ handle, products }) => {
-        console.log('🚀 ~ handle:', handle)
+    result.data.allShopifyCollection.nodes.forEach((collection) => {
+        const { handle, products } = collection
         const merchBasePath = '/merch'
         const collectionPath = handle === 'all-products' ? '' : `/${handle}`
         const collectionProductsCount = products.length
@@ -392,26 +458,22 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         Array.from({
             length: numPages,
         }).forEach((_, i) => {
+            const currentPage = i + 1
+            const startIndex = (currentPage - 1) * productsPerPage
+            const endIndex = startIndex + productsPerPage
+            const productsForCurrentPage = products.slice(startIndex, endIndex)
+
             createPage({
                 path: i === 0 ? `${merchBasePath}${collectionPath}` : `${merchBasePath}${collectionPath}/${i + 1}`,
                 component: path.resolve('./src/templates/merch/Collection.tsx'),
                 context: {
-                    merchNav: result.data.allMerchNavigation.nodes?.map((item) => {
-                        if (item.handle === 'all-products') {
-                            return {
-                                url: '/merch',
-                                handle: item.handle,
-                                title: item.title,
-                            }
-                        }
-
-                        return item
-                    }),
+                    merchNav,
                     handle,
                     limit: productsPerPage,
                     skip: i * productsPerPage,
                     numPages,
                     currentPage: i + 1,
+                    productsForCurrentPage,
                 },
             })
         })

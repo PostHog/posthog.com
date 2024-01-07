@@ -46,7 +46,6 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
 
             const itemsExceedingQuantityAvailable: AdjustedLineItem[] = []
 
-            console.log('🚀 ~ file: Checkout.tsx:71 ~ cartItems.forEach ~ cartItems:', cartItems)
             cartItems.forEach((item) => {
                 // first check if it's available for sale. If not, then add to the list
                 // with flag for removal from cart
@@ -73,10 +72,6 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                 }
             })
 
-            console.log(
-                '🚀 ~ file: Checkout.tsx:73 ~ checkoutMutation ~ itemsExceedingQuantityAvailable:',
-                itemsExceedingQuantityAvailable
-            )
             if (itemsExceedingQuantityAvailable.length > 0) {
                 setAdjustedItems(itemsExceedingQuantityAvailable)
             }
@@ -103,9 +98,8 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                 return
             }
 
-            console.log('🚀 ~ file: Checkout.tsx:104 ~ checkoutMutation ~ newCart:', newCart)
             const checkoutUrl = getCheckoutUrl(newCart)
-            console.log('--- checkoutUrl', checkoutUrl)
+            console.log('🚀 ~ checkoutUrl:', checkoutUrl)
             // if (checkoutUrl) {
             //     window.location.href = checkoutUrl
             // }
