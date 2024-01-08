@@ -114,8 +114,6 @@ const IndexPage = () => {
 
         localStorage.setItem('jwt', userData.jwt)
 
-        return
-
         try {
             const distinctId = posthog?.get_distinct_id?.()
 
@@ -147,7 +145,7 @@ const IndexPage = () => {
                 window.location.href = redirect
             }
         })
-        .catch((err) => {
+        .catch(() => {
             setAuthFailed(true)
 
             const urlParams = new URLSearchParams(window.location.search)

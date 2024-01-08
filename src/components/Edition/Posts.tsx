@@ -25,7 +25,7 @@ import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../navs/posts'
 import { PostFilters } from './Views/Default'
 import { CallToAction } from 'components/CallToAction'
-import { Listbox, Transition } from '@headlessui/react'
+import { Authentication } from 'components/Squeak'
 
 dayjs.extend(relativeTime)
 
@@ -207,36 +207,36 @@ export const getParams = (root, tag, sort) => {
             $and: [
                 ...(root
                     ? [
-                          {
-                              $or: [
-                                  {
-                                      post_category: {
-                                          folder: {
-                                              $eq: root,
-                                          },
-                                      },
-                                  },
-                                  {
-                                      crosspost_categories: {
-                                          folder: {
-                                              $eq: root,
-                                          },
-                                      },
-                                  },
-                              ],
-                          },
-                      ]
+                        {
+                            $or: [
+                                {
+                                    post_category: {
+                                        folder: {
+                                            $eq: root,
+                                        },
+                                    },
+                                },
+                                {
+                                    crosspost_categories: {
+                                        folder: {
+                                            $eq: root,
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                    ]
                     : []),
                 ...(tag
                     ? [
-                          {
-                              post_tags: {
-                                  label: {
-                                      $in: [tag],
-                                  },
-                              },
-                          },
-                      ]
+                        {
+                            post_tags: {
+                                label: {
+                                    $in: [tag],
+                                },
+                            },
+                        },
+                    ]
                     : []),
             ],
         },
@@ -270,13 +270,6 @@ export const sortOptions = [
 const getSortOption = (root?: string) =>
     sortOptions[['blog', 'changelog', 'newsletter', 'spotlight'].includes(root) ? 1 : 0]
 
-const regions = [
-    { domain: 'https://app.posthog.com', label: 'US Cloud' },
-    { domain: 'https://eu.posthog.com', label: 'EU Cloud' },
-    { domain: 'http://localhost:3001/auth', label: 'Link Cloud' },
-    { domain: 'http://localhost:8000/link_and_redirect/', label: 'Local Cloud' },
-]
-
 export default function Posts({
     children,
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
@@ -290,7 +283,6 @@ export default function Posts({
     const [tag, setTag] = useState(initialTag)
     const [prev, setPrev] = useState<string | null>(null)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
-    const [selectedRegion, setSelectedRegion] = useState(regions[0])
     const [layoutMenu, setLayoutMenu] = useState(
         menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
     )
@@ -326,11 +318,6 @@ export default function Posts({
         setParams(getParams(root, tag, sortOptions.find((option) => option.label === sort)?.sort))
     }, [root, tag, sort])
 
-    const handleLogin = () => {
-        const path = `?redirect=${encodeURI(window.location.href)}`
-        window.location.href = selectedRegion.domain + path
-    }
-
     return (
         <Layout parent={layoutMenu.parent} activeInternalMenu={layoutMenu.activeInternalMenu}>
             <PostsContext.Provider
@@ -361,9 +348,9 @@ export default function Posts({
                         menu: (!root
                             ? menu
                             : [
-                                  { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
-                                  ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),
-                              ]
+                                { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
+                                ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),
+                            ]
                         ).map((menuItem) => ({
                             ...menuItem,
                             handleLinkClick: ({ name, url: activeURL, tag }) => {
@@ -383,54 +370,12 @@ export default function Posts({
                 >
                     <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
                         <div className="px-4">
-                            <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-16 border border-border dark:border-dark">
-                                <Listbox value={selectedRegion} onChange={setSelectedRegion}>
-                                    <div className="relative mt-1">
-                                        <Listbox.Button className="border border-light dark:border-dark relative flex w-full cursor-default flex-row items-center justify-start rounded-md bg-white mb-2 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
-                                            <span className="block truncate">
-                                                {selectedRegion?.label ?? 'No region selected'}
-                                            </span>
-                                        </Listbox.Button>
-                                        <Transition
-                                            as={Fragment}
-                                            enter="ease-out duration-300"
-                                            enterFrom="opacity-0"
-                                            enterTo="opacity-100"
-                                            leave="ease-in duration-200"
-                                            leaveFrom="opacity-100"
-                                            leaveTo="opacity-0"
-                                        >
-                                            <Listbox.Options className="bg-white list-none border border-light dark:border-dark pl-0 z-20 mt-[-5px] absolute mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                                {regions.map((region, i) => (
-                                                    <Listbox.Option
-                                                        key={i}
-                                                        className={({ active }) =>
-                                                            `relative cursor-pointer select-none py-2 px-4 hover:bg-accent dark:hover:bg-accent-dark ${
-                                                                active ? 'bg-gray-200' : ''
-                                                            }`
-                                                        }
-                                                        value={region}
-                                                    >
-                                                        {({ selected }) => (
-                                                            <>
-                                                                <span
-                                                                    className={`block truncate ${
-                                                                        selected ? 'font-medium' : 'font-normal'
-                                                                    }`}
-                                                                >
-                                                                    {region.label}
-                                                                </span>
-                                                            </>
-                                                        )}
-                                                    </Listbox.Option>
-                                                ))}
-                                            </Listbox.Options>
-                                        </Transition>
-                                    </div>
-                                </Listbox>
-                                <CallToAction onClick={() => handleLogin()} width="full" size="md">
-                                    Login using Cloud Account
-                                </CallToAction>
+                            <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12 border border-border dark:border-dark">
+                                <Authentication
+                                    onAuth={() => setLoginModalOpen(false)}
+                                    showBanner={false}
+                                    showProfile={false}
+                                />
                             </div>
                         </div>
                     </Modal>

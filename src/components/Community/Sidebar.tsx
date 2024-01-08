@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import Link from 'components/Link'
-import { EditProfile } from 'components/Squeak'
+import { Authentication, EditProfile } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import { CallToAction } from 'components/CallToAction'
@@ -10,13 +10,6 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { User } from '../../hooks/useUser'
-
-const regions = [
-    { domain: 'https://app.posthog.com', label: 'US Cloud' },
-    { domain: 'https://eu.posthog.com', label: 'EU Cloud' },
-    { domain: 'http://localhost:3001/auth', label: 'Link Cloud' },
-    { domain: 'http://localhost:8000/link_and_redirect/', label: 'Local Cloud' },
-]
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -36,64 +29,6 @@ export const Avatar = (props: { className?: string; src?: string }) => {
                 </svg>
             )}
         </div>
-    )
-}
-
-export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void }) => {
-    const [state, setState] = useState<null | 'login' | 'signup'>(null)
-    const [selectedRegion, setSelectedRegion] = useState(regions[0])
-
-    const handleLogin = () => {
-        const path = `?redirect=${encodeURI(window.location.href)}`
-        window.location.href = selectedRegion.domain + path
-    }
-
-    return (
-        <>
-            <Listbox value={selectedRegion} onChange={setSelectedRegion}>
-                <div className="relative mt-1">
-                    <Listbox.Button className="border border-light dark:border-dark relative flex w-full cursor-default flex-row items-center justify-start rounded-md bg-white mb-2 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
-                        <span className="block truncate">{selectedRegion?.label ?? 'No region selected'}</span>
-                    </Listbox.Button>
-                    <Transition
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <Listbox.Options className="bg-white list-none border border-light dark:border-dark pl-0 z-20 mt-[-5px] absolute mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {regions.map((region, i) => (
-                                <Listbox.Option
-                                    key={i}
-                                    className={({ active }) =>
-                                        `relative cursor-pointer select-none py-2 px-4 hover:bg-accent dark:hover:bg-accent-dark ${
-                                            active ? 'bg-gray-200' : ''
-                                        }`
-                                    }
-                                    value={region}
-                                >
-                                    {({ selected }) => (
-                                        <>
-                                            <span
-                                                className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
-                                            >
-                                                {region.label}
-                                            </span>
-                                        </>
-                                    )}
-                                </Listbox.Option>
-                            ))}
-                        </Listbox.Options>
-                    </Transition>
-                </div>
-            </Listbox>
-            <CallToAction onClick={() => handleLogin()} width="full" size="md">
-                Login using Cloud Account
-            </CallToAction>
-        </>
     )
 }
 
@@ -159,7 +94,8 @@ export default function Sidebar() {
                         </button>
                     )}
                 </div>
-                {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
+                {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> :
+                    <Authentication showBanner={false} showProfile={false} />}
             </SidebarSection>
 
             {user?.profile && (
