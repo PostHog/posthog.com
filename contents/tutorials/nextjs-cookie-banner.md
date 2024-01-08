@@ -224,7 +224,7 @@ export default function RootLayout({ children }) {
 
 ## Setting the consent state with the cookie banner
 
-We want the cookie banner to control the consent state so we can use it to initialize PostHog either with or without cookies. We also want to use it to hide the banner when the user makes a decision.
+Depending on the consent state, we want to initialize PostHog either with or without cookies. We also want to use it to hide the banner when the user makes a decision.
 
 To do this:
 
