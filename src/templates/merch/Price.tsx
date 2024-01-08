@@ -5,5 +5,5 @@ type PriceProps = {
 }
 
 export function Price(props: PriceProps): React.ReactElement {
-    return <div className="inline-block">${props.price.toFixed(2)}</div>
+    return <strong>${props.price}</strong>
 }

@@ -39,7 +39,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         }, 500)
     }
 
-    const classes = cn('p-8 pt-20 relative space-y-6 overflow-y-auto', className)
+    const classes = cn('p-8 pt-20 relative space-y-4 overflow-y-auto', className)
 
     return (
         <div className={classes}>
@@ -69,7 +69,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 return (
                     <ProductOptionSelect
                         key={i}
-                        className="my-4"
                         option={so.option}
                         onChange={(val) => setOptionAtIndex(i, so.option, val)}
                         value={so.selectedValue}
