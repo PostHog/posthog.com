@@ -124,7 +124,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-This creates an ugly but functional cookie banner at the bottom of our site you can customize and style how you want.
+This creates an ugly but functional cookie banner at the bottom of our site. You can customize and style it how you want.
 
 ![Banner](../images/tutorials/nextjs-cookie-banner/banner.png)
 
