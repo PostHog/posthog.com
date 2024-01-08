@@ -1,5 +1,5 @@
 ---
-date: 2022-12-22
+date: 2024-01-08
 title: "In-depth: PostHog vs Mixpanel"
 rootPage: /blog
 sidebar: Blog
@@ -31,7 +31,7 @@ PostHog is the only product analytics platform built to natively work with sessi
 
 ### 2. It's built for engineers
 
-We want engineers to engineer their products, not their data. PostHog autocaptures data, so you don't need to waste energy instrumenting basic events – we also offer robust tools for defining custom events. You can choose between light and dark mode themes and we cater to power users with a custom SQL query builder, keyboard shortcuts, and a command pallette. Our [customer success team]((/contact-sales)) is always available to answer your questions, but you setup PostHog and start paying us without ever speaking to a sales rep.
+We want engineers to engineer their products, not their data. PostHog autocaptures data, so you don't need to waste energy instrumenting basic events – we also offer robust tools for defining custom events. You can choose between light and dark mode themes and we cater to power users with a custom SQL query builder, keyboard shortcuts, and a command pallette. Our [customer success team](/contact-sales) is always available to answer your questions, but you can setup PostHog and start paying us without ever speaking to a sales rep.
 
 ### 3. We're open source and transparent
 
@@ -40,6 +40,8 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 ## Comparison PostHog and Mixpanel
 
 ### Platform
+
+Entering a credit card unlocks almost all our features and you **only pay for what you use**. You get a [generous free allowance](#pricing) _every_ month and you can set billing limits to prevent surprise bills.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion, analyze user behavior" />
@@ -56,15 +58,11 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
 
-> #### Good to know
->
-> - Qualatative insights from session replays and surveys are a great way to understand user paint points in a way raw data often can't, which is why we've baked them into our platform.
-> 
-> - Entering a credit card unlocks almost all our features and you **only pay for what you use**. You get a [generous free allowance](#pricing) _every_ month and you can set billing limits to prevent surprise bills.
->
-> - All our products work via our JavaScript snippet, so one small piece of code unlocks a huge range of functionality with no addition integration work required.
-
 ### Product analytics
+
+**Autocapture** support means PostHog is much easier to implement than Mixpanel. You can signup and start ingesting events within minutes. Both tools support custom event tracking, but you need a comprehensive tracking plan before Mixpanel is useful. Read [Is autocapture 'still' bad?](/blog/is-autocapture-still-bad) for more on the benefits of autocapture.
+
+Anyone can use PostHog, but we built a SQL-based query builder specifically for power users, which enables them to generate custom data analyses using PostHog event data. In future, our query builder will work with non-event data sources, enabling you to analyze data as you would in a Business Intelligence tool, like Metabase – see our [HogQL docs](/docs/hogql) for more on this feature.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual logging" />
@@ -79,18 +77,12 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
   <ComparisonRow column1={true} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
   <ComparisonRow column1={true} column2={true} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
   <ComparisonRow column1={true} column2={true} feature="Custom formulas" description="Use formulas to calculate unique insights" />
-  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
+  <ComparisonRow column1={true} column2={true} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
 </ComparisonTable>
 
-#### Good to know
->
-> - **Autocapture** support means PostHog is much easier to implement than Mixpanel. You can signup and start ingesting events within minutes. Both tools support custom event tracking, but you need a comprehensive tracking plan before Mixpanel is useful. Read [Is autocapture 'still' bad?](/blog/is-autocapture-still-bad) for more on the benefits of autocapture.
->
-> - [Correlation analysis](/docs/product-analytics/correlation) automatically suggests events and properties that correlate to success or failure – e.g. "users who converted were 10x more likely to use iOS".
->
->- **Query editor:** NEW COPY HERE
-
 ### Feature flags
+
+Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other tools, meaning you can target session replays, surveys and other features using existing feature flags. See [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2="n/a" feature="Boolean flags" description="Simple flags returning true or flag" />
@@ -105,11 +97,9 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
   <ComparisonRow column1={true} column2="n/a" feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
-> #### Good to know
->
-> - **Local evaluation** enables you to massively reduce the number of API requests you make, improving performance and reducing costs at the same time. See our [local evaluation documentation](/docs/feature-flags/local-evaluation) for more information.
-
 ### Experimentation
+
+PostHog's testing features are free when you enter card details. You get a generous 1 million API requests every month, so you'll pay nothing if you remain below this limit.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2="n/a" feature="Custom goals" description="Customize metrics that a test tracks" />
@@ -122,11 +112,9 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
   <ComparisonRow column1="Bayesian" column2="n/a" feature="Statistics engine" description="How the results of an experiment are calculated" />
 </ComparisonTable>
 
-> #### Good to know
->
-> - PostHog's testing features are free when you enter card details. You get a generous 1 million API requests every month, so you'll pay nothing if you remain below this limit.
-
 ### Session replay
+
+Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. You get 5,000 recordings for free every month, so you'll pay nothing if you remain below this limit, and you can use sampling and feature flags to limit the number of recordings you use.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2="n/a" feature="Web app recordings" description="Capture recordings from single-page apps" />
@@ -144,13 +132,9 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
   <ComparisonRow column1={true} column2="n/a" feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
 </ComparisonTable>
 
-> #### Good to know
->
-> - You get 5,000 recordings for free every month, so you'll pay nothing if you remain below this limit. You can use sampling and feature flags to limit the number of recordings you use. After 5,000 recordings, we charge $0.04 per recording and you'll pay less for each recording the more you use.
->
-> - Session replays are _not_ video recordings of users. We reconstuct sessions by capturing Document Object Model (DOM) mutations. All private and personal data is masked. 
-
 ### Surveys
+
+- Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more – read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which survey type you should use and when.  
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2="n/a" feature="Open text" description="Free text answers and feedback" />
@@ -165,67 +149,72 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
   <ComparisonRow column1={true} column2="n/a" feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
-> #### Good to know
-> - Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more – read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which survey type you should use and when.  
-
 ### Integrations
 
+PostHog and Mixpanel both offer a wide range of integrations, sources and destinations. Mixpanel offers more overall, though many of its integrations cover features like A/B testing and surveys that are built into PostHog already. See our [data pipeline docs](/docs/cdp) for a full list.
 
-
+<ComparisonTable column1="PostHog" column2="Mixpanel">
+   <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from data warehouses and other sources" />
+   <ComparisonRow column1={true} column2={true} feature="Exports" description="Export data to data warehouses other destinations" />
+   <ComparisonRow column1={true} column2={true} feature="Segment" description="Send events via Segment" />
+   <ComparisonRow column1={true} column2={true} feature="Rudderstack" description="Send events via Rudderstack" />
+   <ComparisonRow column1={true} column2={true} feature="Zapier" description="Trigger Zapier automations" />
+   <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
+   <ComparisonRow column1={true} column2={false} feature="Zendesk" description="Two-way integration for customer support" />
+   <ComparisonRow column1={true} column2={true} feature="Customer.io" description="Messaging and marketing automation" />
+   <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
+   <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
+   <ComparisonRow column1={true} column2={false} feature="Community integrations" description="Build your own integration" />
+   <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />   
+</ComparisonTable>
 
 ## Frequently asked questions
 
-- [How long does it take to deploy PostHog?](#how-long-does-it-take-to-deploy-posthog)
-- [How long does it take to deploy Mixpanel](#how-long-does-it-take-to-deploy-mixpanel)
-- [Does PostHog user cookies?](#does-posthog-use-cookies)
-- [How much does PostHog cost?](#how-much-does-posthog-cost)
-- [How much does Mixpanel cost?](#how-much-does-mixpanel-cost)
-- [How do PostHog and Mixpanel compare to Amplitude?](#how-do-posthog-and-mixpanel-compare-to-amplitude)
+### Can PostHog also replace Google Analytics?
 
-### How long does it take to deploy PostHog?
+Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using Google Tag Manager. See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [An intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
 
-Deploying PostHog Cloud takes mere minutes. All you need to do is include a tracking snippet in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session recording via your project settings. 
+### Is PostHog easy to deploy?
 
-See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
-
-### How long does it take to deploy Mixpanel?
-
-Integrating Mixpanel is simple enough – you can embed its snippet within `<head>` or install via package manager – but the lack of autocapture means you need to invest time and resources to instrument events manually before you can start creating insights.
-
-### Does PostHog use cookies?
-
-Yes, PostHog (like Mixpanel) uses cookies. Cookies are necessary to enable common use cases, such as cross-domain tracking and tracking returning visitors.
-
-It is possible, however, to configure PostHog to track users without requiring [without cookie banners](/tutorials/cookieless-tracking) by storing cookies in `memory` so it doesn't persist beyond an individual session.
-
-Both Mixpanel and PostHog also support anonymizing data, while the PostHog [Property Filter app](/apps/property-filter) allows you to limit the types of information collected to protect user privacy.
+Yes. Just paste our JS snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
 
 ### How much does PostHog cost?
 
-We believe in transparent pricing, which is why [our pricing page](/pricing) includes an easy-to-understand pricing calculator.
+You **only pay for what you use** and every PostHog users gets a generous amount of free usage each month:
 
-PostHog Cloud includes a generous 1 million events and 15,000 session replays per month for **free, every month** with **no feature limitations**.
+|                       | **Free usage per month** 
+|-----------------------|--------------------------
+| **Product analytics** | 1 million events        
+| **Session replay**    | 5,000 recordings         
+| **Feature flags**     | 1 million API requests
+| **A/B testing**       | 1 million API requests  
+| **Surveys**           | 250 responses
 
-A typical, medium-size B2B product with 10,000 monthly active users, who generate: 
+You'll never pay anything if you stay within these limits and you can set billing limits to avoid surprise bills.
 
-- 100 events each per month
-- 5 sessions each per month
+We charge progressively less the more you use – e.g. we charge $0.000100 per event up to 2 million events, but all events after 10 million a month only cost 
+$0.000025, 75% less per event.
 
-Would use:
+You can find a full breakdown on [our pricing page](/pricing).
 
-- 1 million events per month
-- 50,000 session replays
+### How can I estimate my usage?
 
-Discounts for annual contracts are available on application.
+The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days. Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
 
-### How much does Mixpanel cost?
+### Does PostHog block bots by default?
 
-Mixpanel prices based on "Monthly Track Users" (MTUs) and applies a limit of 1,000 events per MTU. A company with 10,000 MTUs would pay $190 per month, or £133 per month if you pay annually.
+Yes. See the [full blocklist in our docs](/troubleshooting#does-posthog-block-bots-by-default).
 
-Mixpanel also offers a free tier with a 100k MTU limit, however it applies numerous feature limits – e.g. you can create but **not save** cohorts.
+### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
+
+Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
+
+### What about ad blockers?
+
+We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capure the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
 
 ### How do PostHog and Mixpanel compare to Amplitude?
 
-Amplitude is closer to Mixpanel than PostHog – it doesn't support features session replays or feature flagging, and doesn't offer autocapture. Read our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison for information.
+Amplitude is closer to Mixpanel than PostHog – it doesn't support features session replays or surveys, and doesn't offer autocapture, but it does offer feature flaggs and A/B testing on some paid tiers. Read our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison for information.
 
 <ArrayCTA />

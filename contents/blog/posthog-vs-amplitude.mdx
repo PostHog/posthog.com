@@ -1,6 +1,6 @@
 ---
 title: "In-depth: PostHog vs Amplitude"
-date: 2024-01-05
+date: 2024-01-08
 author: ["andy-vandervell"]
 rootpage: /blog
 featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg
@@ -38,6 +38,8 @@ Our MIT License isn't just for show. You can read [our source code](https://gith
 
 ### Platform
 
+Entering a credit card unlocks almost all PostHog features and you **only pay for what you use**. You get a generous free allowance _every_ month and you can set billing limits to prevent surprise bills.
+
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion, analyze user behavior" />
   <ComparisonRow column1="Beta" column2={false} feature="Web analytics" description="Easy to use analytics for marketing websites" />
@@ -53,12 +55,11 @@ Our MIT License isn't just for show. You can read [our source code](https://gith
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
 
-#### Good to know
-Entering a credit card unlocks almost all PostHog features and you **only pay for what you use**. You get a generous free allowance _every_ month and you can set billing limits to prevent surprise bills.
-
 ### Product analytics
 
-![posthog](../images/screenshots/hogflix-dashboard.png)
+Autocapture support means PostHog is much easier to implement than Amplitude. You can signup and start ingesting events within minutes. Both tools support custom event tracking, but you need a comprehensive tracking plan before Amplitude is useful. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture) – we offer the best of both worlds.
+
+Anyone can use PostHog, but we built a SQL-based query builder specifically for power users, which enables them to generate custom data analyses using PostHog event data. In future, our query builder will work with non-event data sources, enabling you to analyze data as you would in a Business Intelligence tool, like Metabase – see our [HogQL docs](/docs/hogql) for more on this feature.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million events, unlimited insights" column2="100k monthly tracked users, 10 saved insights" feature="Free usage" description="How much free usage do you get each month?" />
@@ -76,10 +77,9 @@ Entering a credit card unlocks almost all PostHog features and you **only pay fo
   <ComparisonRow column1={true} column2={true} feature="Custom formulas" description="Use formulas to calculate unique insights" />
 </ComparisonTable>
 
-#### Good to know
-Autocapture support means PostHog is much easier to implement than Amplitude. You can signup and start ingesting events within minutes. Both tools support custom event tracking, but you need a comprehensive tracking plan before Amplitude is useful. Don't want autocapture, just [turn it off](/docs/product-analytics/autocapture) – we offer the best of both worlds.
-
 ### Feature flags
+
+Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other tools, meaning you can target session replays, surveys and other features using existing feature flags. See [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million API requests" column2="100k tracked users" feature="Free usage" description="How much free usage do you get each month?" />
@@ -95,10 +95,9 @@ Autocapture support means PostHog is much easier to implement than Amplitude. Yo
   <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
-#### Good to know
-Local evaluation enables you to massively reduce the number of API requests you make, improving performance and reducing costs at the same time. See our [local evaluation documentation](/docs/feature-flags/local-evaluation) for more information.
-
 ### Experimentation
+
+PostHog's testing features are free when you input a card and you get a generous 1 million API requests for free _every_ month. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact their sales team to use it.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million API requests" column2="None" feature="Free usage" description="How much free usage do you get each month?" />
@@ -112,10 +111,9 @@ Local evaluation enables you to massively reduce the number of API requests you 
   <ComparisonRow column1="Bayesian" column2="Sequential" feature="Statistics engine" description="How the results of an experiment are calculated" />
 </ComparisonTable>
 
-#### Good to know
-PostHog's testing features are free when you input a card and you get a generous 1 million API requests for free _every_ month. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact their sales team to use it.
-
 ### Session replay
+
+Replays are _not_ video recordings of users. We reconstuct sessions by capturing Document Object Model (DOM) mutations. All private and personal data is masked. Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="5,000 recordings" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
@@ -134,10 +132,9 @@ PostHog's testing features are free when you input a card and you get a generous
   <ComparisonRow column1={true} column2="n/a" feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
 </ComparisonTable>
 
-#### Good to know
-Session replays are _not_ video recordings of users. We reconstuct sessions by capturing Document Object Model (DOM) mutations. All private and personal data is masked. Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't.
-
 ### Surveys
+
+Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more – read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which one you should use and when.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="250" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
@@ -153,10 +150,9 @@ Session replays are _not_ video recordings of users. We reconstuct sessions by c
   <ComparisonRow column1={true} column2="n/a" feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
-#### Good to know
-Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more – read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which one you should use and when.
-
 ### Integrations
+
+PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as Sentry, Zapier and Zendesk, while Amplitude has more integrations with marketing and advertising platforms. See our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
    <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from data warehouses and other sources" />
@@ -170,9 +166,6 @@ Surveys are great for tracking customer satisfaction scores like Net Promoter Sc
    <ComparisonRow column1={true} column2={false} feature="Community integrations" description="Build your own integration" />
    <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />   
 </ComparisonTable>
-
-#### Good to know
-PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as Sentry, Zapier and Zendesk, while Amplitude has more integrations with marketing and advertising platforms.
 
 ### Pricing
 
@@ -200,7 +193,6 @@ Amplitude offers a free Starter plan, but it lacks many important features:
    <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
 </ComparisonTable>
 
-#### Good to know
 We charge progressively less per event, replay, API request the more you use. You can see a breakdown on [our pricing page](/pricing). Our free tiers are for life, which means you'll always get your first 1 million events (or 5,000 replays and so on) for free every month, no matter how many you end up using.
 
 ### Security and compliance
@@ -215,8 +207,6 @@ We charge progressively less per event, replay, API request the more you use. Yo
   <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
 </ComparisonTable>
 
-#### Good to know
-We don't currently offer Business Associate Agreements (BAA) for HIPAA compliance, but is in our future roadmap. If you're interested in PostHog but require a BAA, please [contact our sales team](/contact-sales) to register your interest.
 
 ## FAQ
 
@@ -226,7 +216,7 @@ Yes. PostHog can replace Google Analytics for many use cases – [our marketing 
 
 ### Is PostHog easy to deploy?
 
-Yes. Just paste the below JS snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
+Yes. Just paste our JS snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
 
 ### How can I estimate my usage?
 
