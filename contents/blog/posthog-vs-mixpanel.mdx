@@ -21,7 +21,7 @@ Want to know how PostHog and Mixpanel comapare? If you remember nothing else, re
 
 1. Mixpanel is a product analytics tool only.
 
-2. PostHog is an all-in-one platform that _includes_ product analytics **and** a whole bunch more.
+2. PostHog is an all-in-one platform that _includes_ product analytics and _much_ more.
 
 ## How is PostHog different?
 
@@ -31,11 +31,11 @@ PostHog is the only product analytics platform built to natively work with sessi
 
 ### 2. It's built for engineers
 
-We want engineers to engineer their products, not their data. PostHog autocaptures data, so you don't need to waste energy instrumenting basic events – we also offer robust tools for defining custom events. You can choose between light and dark mode themes and we cater to power users with a custom SQL query builder, keyboard shortcuts, and a command pallette. Our [customer success team](/contact-sales) is always available to answer your questions, but you can setup PostHog and start paying us without ever speaking to a sales rep.
+PostHog autocaptures data, so you don't need to waste energy instrumenting basic events. You can choose between light and dark mode themes. Features like our custom SQL query builder, keyboard shorcuts, and command pallette, cater to power users. You can setup PostHog and start paying us without ever speaking to a sales rep, though our [customer success team](/contact-sales) is always available to answer your questions.
 
 ### 3. We're open source and transparent
 
-PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our product is open source and released under an MIT License. You can read [our source code](https://github.com/PostHog/posthog), raise issues and PRs, and build your own integrations. Anyone can read or comment on our [public roadmap](/roadmap). Got a question? Ask it in our [community forum](/questions).
+PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our product is open source and released under an MIT License. You can read [our source code](https://github.com/PostHog/posthog), raise issues and PRs, build your own integrations, and vote on our [public roadmap](/roadmap). Got a question? Ask it in our [community forum](/questions).
 
 ## Comparison PostHog and Mixpanel
 
@@ -60,9 +60,11 @@ Entering a credit card unlocks almost all our features and you **only pay for wh
 
 ### Product analytics
 
-**Autocapture** support means PostHog is much easier to implement than Mixpanel. You can signup and start ingesting events within minutes. Both tools support custom event tracking, but you need a comprehensive tracking plan before Mixpanel is useful. Read [Is autocapture 'still' bad?](/blog/is-autocapture-still-bad) for more on the benefits of autocapture.
+There are two key differences here:
 
-Anyone can use PostHog, but we built a SQL-based query builder specifically for power users, which enables them to generate custom data analyses using PostHog event data. In future, our query builder will work with non-event data sources, enabling you to analyze data as you would in a Business Intelligence tool, like Metabase – see our [HogQL docs](/docs/hogql) for more on this feature.
+1. PostHog supports autocapture, which makes it much fast to implement as you don't to manually instrument every event. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture) – we offer the best of both worlds.
+
+2. PostHog has a [SQL-based query builder](/docs/hogql) for power users, which enables you to generate custom data analyses using PostHog event data. In future, our query builder will let you analyze data as you would in a Business Intelligence tool, like Metabase.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual logging" />
@@ -85,16 +87,16 @@ Anyone can use PostHog, but we built a SQL-based query builder specifically for 
 Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other tools, meaning you can target session replays, surveys and other features using existing feature flags. See [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
-  <ComparisonRow column1={true} column2="n/a" feature="Boolean flags" description="Simple flags returning true or flag" />
-  <ComparisonRow column1={true} column2="n/a" feature="Multivariate flags" description="Flags with multiple customizable values" />
-  <ComparisonRow column1={true} column2="n/a" feature="Payloads" description="Flags with string, number, or JSON payloads" />
-  <ComparisonRow column1={true} column2="n/a" feature="Local evalution" description="Store flag definitions locally" />
-  <ComparisonRow column1={true} column2="n/a" feature="Percentage rollouts" description="Target percentages of a group" />
-  <ComparisonRow column1={true} column2="n/a" feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1="Beta" column2="n/a" feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1="Partial" column2="n/a" feature="Environments" description="Manage flags for dev, stage, prod" />
-  <ComparisonRow column1={true} column2="n/a" feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2="n/a" feature="Early access" description="Manage betas, test features" />
+  <ComparisonRow column1={true} column2={false} feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
+  <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
+  <ComparisonRow column1={true} column2={false} feature="Local evalution" description="Store flag definitions locally" />
+  <ComparisonRow column1={true} column2={false} feature="Percentage rollouts" description="Target percentages of a group" />
+  <ComparisonRow column1={true} column2={false} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
+  <ComparisonRow column1="Beta" column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
+  <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
 ### Experimentation
@@ -102,14 +104,14 @@ Feature flags make it easy to roll out features to specific users or groups, and
 PostHog's testing features are free when you enter card details. You get a generous 1 million API requests every month, so you'll pay nothing if you remain below this limit.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
-  <ComparisonRow column1={true} column2="n/a" feature="Custom goals" description="Customize metrics that a test tracks" />
-  <ComparisonRow column1={true} column2="n/a"  feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2="n/a"feature="Split testing" description="Split participants into groups" />
-  <ComparisonRow column1={true} column2="n/a"  feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2="n/a"  feature="Statistical significance" description="Automatically checks for statistical significance" />
-  <ComparisonRow column1={true} column2="n/a" feature="Recommended run time" description="Automatically calculate the recommended run time and sample size" />
-  <ComparisonRow column1="Partial" column2="n/a" feature="Holdout testing" description="Withhold multiple features to measure cumulative impact" />
-  <ComparisonRow column1="Bayesian" column2="n/a" feature="Statistics engine" description="How the results of an experiment are calculated" />
+  <ComparisonRow column1={true} column2={false}feature="Custom goals" description="Customize metrics that a test tracks" />
+  <ComparisonRow column1={true} column2={false}  feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
+  <ComparisonRow column1={true} column2={false}feature="Split testing" description="Split participants into groups" />
+  <ComparisonRow column1={true} column2={false}  feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={true} column2={false}  feature="Statistical significance" description="Automatically checks for statistical significance" />
+  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Automatically calculate the recommended run time and sample size" />
+  <ComparisonRow column1="Partial" column2={false} feature="Holdout testing" description="Withhold multiple features to measure cumulative impact" />
+  <ComparisonRow column1="Bayesian" column2={false} feature="Statistics engine" description="How the results of an experiment are calculated" />
 </ComparisonTable>
 
 ### Session replay
@@ -117,19 +119,19 @@ PostHog's testing features are free when you enter card details. You get a gener
 Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. You get 5,000 recordings for free every month, so you'll pay nothing if you remain below this limit, and you can use sampling and feature flags to limit the number of recordings you use.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
-  <ComparisonRow column1={true} column2="n/a" feature="Web app recordings" description="Capture recordings from single-page apps" />
-  <ComparisonRow column1="Beta" column2="n/a" feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
-  <ComparisonRow column1={true} column2="n/a" feature="Identity detection" description="Link recordings to user IDs" />
-  <ComparisonRow column1={true} column2="n/a" feature="Console logs" description="Capture extra content from a users' browser environment" />
-  <ComparisonRow column1={true} column2="n/a" feature="Playlists" description="Sort recordings into static and dynamic playlists" />
-  <ComparisonRow column1={true} column2="n/a" feature="Performance monitoring" description="Track network events within a session" />
-  <ComparisonRow column1={true} column2="n/a" feature="Privacy masking" description="Censor personal information from playback" />
-  <ComparisonRow column1={true} column2="n/a" feature="Conditional recording" description="Only capture the sessions you want" />
-  <ComparisonRow column1={true} column2="n/a" feature="DOM explorer" description="Explore an interactive snapshot of replays" />
-  <ComparisonRow column1={true} column2="n/a" feature="Export recordings" description="Save important recordings offline" />
-  <ComparisonRow column1={true} column2="n/a" feature="Minimum duration" description="Only record sessions longer than the minimum duration" />
-  <ComparisonRow column1={true} column2="n/a" feature="Sample recorded sessions" description="Restrict the percentage of sessions that will be recorded" />
-  <ComparisonRow column1={true} column2="n/a" feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
+  <ComparisonRow column1={true} column2={false} feature="Web app recordings" description="Capture recordings from single-page apps" />
+  <ComparisonRow column1="Beta" column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
+  <ComparisonRow column1={true} column2={false} feature="Identity detection" description="Link recordings to user IDs" />
+  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a users' browser environment" />
+  <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
+  <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
+  <ComparisonRow column1={true} column2={false} feature="Privacy masking" description="Censor personal information from playback" />
+  <ComparisonRow column1={true} column2={false} feature="Conditional recording" description="Only capture the sessions you want" />
+  <ComparisonRow column1={true} column2={false} feature="DOM explorer" description="Explore an interactive snapshot of replays" />
+  <ComparisonRow column1={true} column2={false} feature="Export recordings" description="Save important recordings offline" />
+  <ComparisonRow column1={true} column2={false} feature="Minimum duration" description="Only record sessions longer than the minimum duration" />
+  <ComparisonRow column1={true} column2={false} feature="Sample recorded sessions" description="Restrict the percentage of sessions that will be recorded" />
+  <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
 </ComparisonTable>
 
 ### Surveys
@@ -137,16 +139,16 @@ Replays enable you watch how users experience your app, diagnose issues, improve
 - Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more – read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which survey type you should use and when.  
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
-  <ComparisonRow column1={true} column2="n/a" feature="Open text" description="Free text answers and feedback" />
-  <ComparisonRow column1={true} column2="n/a" feature="Product rating" description="Rank using emojis or number" />
-  <ComparisonRow column1={true} column2="n/a" feature="Single choice" description="Select one answer from multiple" />
-  <ComparisonRow column1={true} column2="n/a" feature="Multiple choice" description="Select more than one answer from multiple" />
-  <ComparisonRow column1={true} column2="n/a" feature="NPS surveys" description="Net Promoter Score survey template" />
-  <ComparisonRow column1={true} column2="n/a" feature="PMF surveys" description="Product-market fit survey template" />
-  <ComparisonRow column1={true} column2="n/a" feature="User property targeting" description="Target users based on any of their user properties" />
-  <ComparisonRow column1={true} column2="n/a" feature="Custom colors & positioning" description="Customize the colors of your surveys to match your brand" />
-  <ComparisonRow column1={true} column2="n/a" feature="Custom HTML" description="Add custom HTML to your survey text" />
-  <ComparisonRow column1={true} column2="n/a" feature="API mode" description="Create surveys via the API" />
+  <ComparisonRow column1={true} column2={false} feature="Open text" description="Free text answers and feedback" />
+  <ComparisonRow column1={true} column2={false} feature="Product rating" description="Rank using emojis or number" />
+  <ComparisonRow column1={true} column2={false} feature="Single choice" description="Select one answer from multiple" />
+  <ComparisonRow column1={true} column2={false} feature="Multiple choice" description="Select more than one answer from multiple" />
+  <ComparisonRow column1={true} column2={false} feature="NPS surveys" description="Net Promoter Score survey template" />
+  <ComparisonRow column1={true} column2={false} feature="PMF surveys" description="Product-market fit survey template" />
+  <ComparisonRow column1={true} column2={false} feature="User property targeting" description="Target users based on any of their user properties" />
+  <ComparisonRow column1={true} column2={false} feature="Custom colors & positioning" description="Customize the colors of your surveys to match your brand" />
+  <ComparisonRow column1={true} column2={false} feature="Custom HTML" description="Add custom HTML to your survey text" />
+  <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
 ### Integrations
