@@ -49,21 +49,22 @@ export function LineItem(props: LineItemsProps): React.ReactElement {
             ) : (
                 <div className="border-2 rounded grid place-content-center text-gray-400">placeholder image</div>
             )}
-            <div className="relative grid grid-cols-[1fr_85px]">
-                <div className="col-span-1">
-                    <div className="font-bold">{item.product.title}d</div>
-                    {item.title !== 'Default Title' && <div className="text-sm">{item.title}</div>}
-                    <Quantity className="mt-2" defaultValue={item.count} onChange={setQuantity} />
+            <div className="relative space-y-2">
+                <div className="flex">
+                    <div className="flex-1">
+                        <div className="font-bold">{item.product.title}</div>
+                        {item.title !== 'Default Title' && <div className="text-[15px]">{item.title}</div>}
+                    </div>
+                    <div className="text-right">
+                        {item.count > 1 && <span>{item.count} x</span>} <Price price={item.price} />
+                    </div>
                 </div>
-                <div className="mb-3 text-sm col-span-1 text-right">
-                    {item.count > 1 && <span className="inline-block mr-2">{item.count} x</span>}{' '}
-                    <Price price={item.price} />
-                </div>
-                <div
-                    className="cursor-pointer absolute bottom-0 right-0 underline text-xs"
-                    onClick={() => void handleRemoveFromCart()}
-                >
-                    Remove
+                <div className="flex items-center gap-4">
+                    <Quantity defaultValue={item.count} onChange={setQuantity} />
+
+                    <div className="cursor-pointer text-sm" onClick={() => void handleRemoveFromCart()}>
+                        Remove
+                    </div>
                 </div>
             </div>
         </div>

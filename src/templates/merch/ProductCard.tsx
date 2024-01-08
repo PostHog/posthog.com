@@ -32,15 +32,15 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
         setCartIsOpen(true)
     }
 
-    const classes = cn('group relative flex flex-col justify-between gap-2', className)
+    const classes = cn('group relative flex flex-col gap-2', className)
 
     return (
         <div className={classes} key={product.shopifyId} onClick={onClick}>
-            <div className="cursor-pointer [&_*]:mb-0 space-y-1 mb-4">
+            <div className="cursor-pointer [&_*]:mb-0 mb-2">
                 <h3 className="text-lg [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
                     {product.title}
                 </h3>
-                <p className="text-sm">{subtitle}</p>
+                <p className="text-[15px] leading-tight mb-1">{subtitle}</p>
                 <p className="text-base font-semibold text-gray-900">${product.priceRangeV2.minVariantPrice.amount}</p>
             </div>
 

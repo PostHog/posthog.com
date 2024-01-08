@@ -39,7 +39,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         }, 500)
     }
 
-    const classes = cn('p-8 pt-20 relative space-y-6 overflow-y-scroll', className)
+    const classes = cn('p-8 pt-20 relative space-y-6 overflow-y-auto', className)
 
     return (
         <div className={classes}>
@@ -80,7 +80,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             <Quantity value={quantity} onChange={setQuantity} />
 
-            <CallToAction onClick={handleAddToCart} type="primary" className="relative">
+            <CallToAction onClick={handleAddToCart} type="primary" className="relative w-full">
                 <span className={cn('', isAdding && 'invisible')}>Add to Cart</span>
                 <LoaderIcon
                     className={cn(

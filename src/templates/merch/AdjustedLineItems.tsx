@@ -19,7 +19,7 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
     return (
         <div className={classes}>
             {qtyAdjustedItems?.length > 0 && (
-                <div className="border rounded-md p-4">
+                <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md p-4">
                     <div className="flex">
                         <div className="flex-shrink-0">
                             <ExclamationCircleOutlined />
@@ -27,9 +27,9 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
                         <div className="ml-3">
                             <div className="text-sm">
                                 {qtyAdjustedItems.length > 1
-                                    ? "Some items' quantities have been adjusted"
-                                    : "An item's quantity has been adjusted"}
-                                to reflect what's available in stock
+                                    ? "Some items' quantities have been adjusted "
+                                    : "An item's quantity has been adjusted "}
+                                to reflect what's available in stock:
                             </div>
 
                             <div className="mt-2 text-sm">
@@ -48,7 +48,7 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
             )}
 
             {removedItems?.length > 0 && (
-                <div className="border rounded-md p-4">
+                <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md p-4">
                     <div className="flex">
                         <div className="flex-shrink-0">
                             <ExclamationCircleOutlined />
@@ -56,14 +56,14 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
                         <div className="ml-3">
                             <div className="mb-1 text-sm font-medium">
                                 The following {removedItems.length > 1 ? 'items have' : 'item has'} been removed because{' '}
-                                {removedItems.length > 1 ? 'they are' : 'it is'} no longer in-stock
+                                {removedItems.length > 1 ? 'they are' : 'it is'} no longer in-stock:
                             </div>
                             <div className="text-sm">
                                 {removedItems.map((item) => {
                                     return (
                                         <div className="font-bold" key={item.item.shopifyId}>
                                             {`${item.item.product.title}${
-                                                item.item.title != 'Default Title' ? `- ${item.item.title}` : ''
+                                                item.item.title != 'Default Title' ? ` - ${item.item.title}` : ''
                                             }`}
                                         </div>
                                     )

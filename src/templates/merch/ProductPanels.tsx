@@ -16,7 +16,12 @@ export function ProductPanels(props: ProductPanelsProps): React.ReactElement {
     }
 
     return (
-        <div className={cn('absolute inset-0 bg-accent dark:bg-accent-dark', isCart && 'overflow-hidden')}>
+        <div
+            className={cn(
+                'absolute inset-0 bg-light dark:bg-dark border-l border-light dark:border-dark shadow-xl',
+                isCart && 'overflow-hidden'
+            )}
+        >
             <div
                 className={cn(
                     'w-[200%] h-full flex [&>*]:[flex-basis:50%] [&>*]:flex-shrink-0 absolute left-0 top-0 transition duration-300 ease-out‘',
