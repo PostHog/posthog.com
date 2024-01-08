@@ -55,12 +55,14 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     alt={product.title}
                 />
             </div>
-            <div className="[&_*]:mb-0 space-y-1 mb-4">
-                <h3 className="text-lg [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
+            <div className="[&_*]:mb-0 space-y-0.5">
+                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
                     {product.title}
                 </h3>
-                <p className="text-sm">{subtitle}</p>
-                <p className="text-base font-semibold text-gray-900">${product.priceRangeV2.minVariantPrice.amount}</p>
+                <p className="leading-tight">{subtitle}</p>
+                <p className="text-lg">
+                    <strong>${product.priceRangeV2.minVariantPrice.amount}</strong>
+                </p>
             </div>
 
             {selectedOptions.map((so, i) => {
@@ -87,7 +89,12 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     )}
                 />
             </CallToAction>
-            <p className="text-sm">{product.description}</p>
+            {product.description && (
+                <div className="border-t border-light dark:border-dark pt-4">
+                    <h3 className="text-lg mb-0">Description</h3>
+                    <p className="text-[15px]">{product.description}</p>
+                </div>
+            )}
         </div>
     )
 }
