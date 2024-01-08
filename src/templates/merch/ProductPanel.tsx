@@ -15,7 +15,7 @@ type ProductPanelProps = {
 
 export function ProductPanel(props: ProductPanelProps): React.ReactElement {
     const { className, product, setIsCart } = props
-    console.log('🚀 ~ product:', product)
+
     const [isAdding, setIsAdding] = useState<boolean>(false)
     const [quantity, setQuantity] = useState<number>(1)
     const addToCart = useCartStore((state) => state.add)
@@ -29,7 +29,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         selections,
         selectedVariant, // use this for add to cart
     ] = useProduct({ product })
-    console.log('🚀 ~ selectedOptions:', selectedOptions)
 
     const handleAddToCart = () => {
         setIsAdding(true)

@@ -15,7 +15,7 @@ interface DrawerProps {
 export const Drawer = (props: DrawerProps): React.ReactElement => {
     const { children, className, isOpen, onClose, animateOpen = true } = props
 
-    const classes = cn('shadow relative min-h-full h-screen w-[600px] max-w-[90%]', className)
+    const classes = cn('shadow relative min-h-full h-screen w-[600px] max-w-full md:max-w-[90%]', className)
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -33,7 +33,7 @@ export const Drawer = (props: DrawerProps): React.ReactElement => {
                 </Transition.Child>
 
                 <div className="fixed inset-0 z-10">
-                    <div className="fixed top-0 right-0 flex min-h-full items-stretch justify-end">
+                    <div className="fixed top-0 right-0 max-w-full flex min-h-full items-stretch justify-end">
                         <Transition.Child
                             as={Fragment}
                             enter={cn('ease-out duration-[0s]', animateOpen && 'duration-300')}

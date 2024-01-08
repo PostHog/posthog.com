@@ -1,3 +1,4 @@
+import { CallToAction } from 'components/CallToAction'
 import React, { useCallback } from 'react'
 import { createCartQuery } from '../../lib/shopify'
 import { cn } from '../../utils'
@@ -74,6 +75,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
 
             if (itemsExceedingQuantityAvailable.length > 0) {
                 setAdjustedItems(itemsExceedingQuantityAvailable)
+                setIsCheckingOut(false)
             }
             setShowAdjustments(itemsExceedingQuantityAvailable.length > 0)
             if (itemsExceedingQuantityAvailable.length > 0) {
@@ -95,6 +97,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                     })
                     .filter(notNull)
                 setCartItems(newCartItems ?? [])
+                setIsCheckingOut(false)
                 return
             }
 
@@ -107,26 +110,34 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
         checkoutMutation()
     }, [setIsCheckingOut, discountCode, cartItems])
 
-    const classes = cn(
-        'rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black',
-        className
-    )
+    const classes = cn('', className)
 
     return (
-        <>
+        <div className={classes}>
             {adjustedItems.length > 0 && <AdjustedLineItems className="my-4" lineItems={adjustedItems} />}
-            <button className={classes} onClick={handleCheckout}>
-                {showAdjustments ? (
-                    'Proceed to checkout'
-                ) : isCheckingOut ? (
-                    <div className="flex gap-2 items-center">
-                        <LoaderIcon className="w-4 h-4" />
-                        Checking out
-                    </div>
-                ) : (
-                    'Checkout'
-                )}
-            </button>
-        </>
+
+            <div className="flex justify-end">
+                <CallToAction onClick={handleCheckout} type="primary" className={cn('relative text-center', className)}>
+                    <span className={cn('mx-16', showAdjustments && 'invisible', isCheckingOut && 'invisible')}>
+                        Checkout
+                    </span>
+                    <span
+                        className={cn(
+                            'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full',
+                            showAdjustments && 'visible',
+                            isCheckingOut && 'invisible'
+                        )}
+                    >
+                        Proceed to Checkout
+                    </span>
+                    <LoaderIcon
+                        className={cn(
+                            'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
+                            !showAdjustments && isCheckingOut && 'visible'
+                        )}
+                    />
+                </CallToAction>
+            </div>
+        </div>
     )
 }

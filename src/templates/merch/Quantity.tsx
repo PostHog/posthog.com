@@ -1,15 +1,18 @@
 import { useControllableValue } from 'ahooks'
 import { CallToAction } from 'components/CallToAction'
 import React from 'react'
+import { cn } from '../../utils'
 
 type QuantityProps = {
     className?: string
     value?: number
+    defaultValue?: number
     onChange?: React.Dispatch<React.SetStateAction<number>>
+    buttonSize?: string
 }
 
 export function Quantity(props: QuantityProps): React.ReactElement {
-    const { className, ...rest } = props
+    const { className, buttonSize, ...rest } = props
     const [quantity, setQuantity] = useControllableValue(rest, { defaultValue: 1 })
 
     const decreaseQuantity = () => {
@@ -30,8 +33,10 @@ export function Quantity(props: QuantityProps): React.ReactElement {
         }
     }
 
+    const classes = cn('', className)
+
     return (
-        <div>
+        <div className={classes}>
             <CallToAction
                 onClick={decreaseQuantity}
                 type="secondary"
@@ -40,7 +45,7 @@ export function Quantity(props: QuantityProps): React.ReactElement {
                 -
             </CallToAction>
             <input
-                className="w-10 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none appearance-textfield focus:outline-none border-none bg-transparent font-bold text-center"
+                className="w-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none appearance-textfield focus:outline-none border-none bg-transparent font-bold text-center"
                 type="number"
                 min="1"
                 value={quantity}

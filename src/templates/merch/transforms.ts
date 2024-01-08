@@ -16,3 +16,20 @@ export function getLineItemImage(variant: ShopifyProductVariant): IGatsbyImageDa
 export function shopifyGidToId(gid: string): string {
     return gid.replace(/gid:\/\/shopify\/\w+\//, '')
 }
+
+export function getProduct(product) {
+    return {
+        ...product,
+        variants: product.variants.map((v) => getVariant(v, product)),
+    }
+}
+
+export function getVariant(variant, product) {
+    return {
+        ...variant,
+        product: {
+            ...variant.product,
+            tags: product.tags,
+        },
+    }
+}

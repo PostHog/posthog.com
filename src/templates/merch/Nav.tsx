@@ -2,6 +2,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { IconCheck, IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import React, { Fragment, useState } from 'react'
+import { useCartStore } from './store'
 
 type NavItem = {
     url: string
@@ -12,11 +13,14 @@ type NavProps = {
     className?: string
     items: NavItem[]
     currentCollectionHandle: string
+    setCartIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function Nav(props: NavProps): React.ReactElement {
     console.log('🚀 ~ props:', props)
-    const { currentCollectionHandle, items } = props
+    const { currentCollectionHandle, items, setCartIsOpen } = props
+    const count = useCartStore((state) => state.count)
+    console.log('🚀 ~ useCartStore:', useCartStore())
 
     // Fall back to the default page if there's a problem with items
     const defaultItem: NavItem = { url: '', title: 'All products', handle: '' }
@@ -87,7 +91,7 @@ export function Nav(props: NavProps): React.ReactElement {
                         </Transition>
                     </Listbox>
                 </div>
-                <div>
+                <div onClick={() => setCartIsOpen(true)}>
                     <div className="group flex px-2 py-0.5 items-center gap-1 cursor-pointer relative border border-transparent hover:border-light dark:hover:border-dark hover:border-b-3 rounded-sm hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99]">
                         {/* switch to this we merge master and update the icon package: <IconCart className="h-5 w-5" aria-hidden="true" /> */}
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current">
@@ -97,7 +101,7 @@ export function Nav(props: NavProps): React.ReactElement {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <span className="font-semibold text-[15px] opacity-75 group-hover:opacity-100">0</span>
+                        <span className="font-semibold text-[15px] opacity-75 group-hover:opacity-100">{count()}</span>
                     </div>
                 </div>
             </div>

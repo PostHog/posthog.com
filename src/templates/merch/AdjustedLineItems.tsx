@@ -62,7 +62,9 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
                                 {removedItems.map((item) => {
                                     return (
                                         <div className="font-bold" key={item.item.shopifyId}>
-                                            {`${item.item.product.title} - ${item.item.title}`}
+                                            {`${item.item.product.title}${
+                                                item.item.title != 'Default Title' ? `- ${item.item.title}` : ''
+                                            }`}
                                         </div>
                                     )
                                 })}
