@@ -17,7 +17,7 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-Want to know how PostHog and Mixpanel comapare? If you remember nothing else, remember these two points:
+Want to know how PostHog and Mixpanel compare? If you remember nothing else, remember these two points:
 
 1. Mixpanel is a product analytics tool only.
 
@@ -90,7 +90,7 @@ Feature flags make it easy to roll out features to specific users or groups, and
   <ComparisonRow column1={true} column2={false} feature="Boolean flags" description="Simple flags returning true or flag" />
   <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
   <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
-  <ComparisonRow column1={true} column2={false} feature="Local evalution" description="Store flag definitions locally" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Store flag definitions locally" />
   <ComparisonRow column1={true} column2={false} feature="Percentage rollouts" description="Target percentages of a group" />
   <ComparisonRow column1={true} column2={false} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
   <ComparisonRow column1="Beta" column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
@@ -225,10 +225,10 @@ Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 
 ### What about ad blockers?
 
-We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capure the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
 
 ### How do PostHog and Mixpanel compare to Amplitude?
 
-Amplitude is closer to Mixpanel than PostHog – it doesn't support features session replays or surveys, and doesn't offer autocapture, but it does offer feature flaggs and A/B testing on some paid tiers. Read our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison for information.
+Amplitude is closer to Mixpanel than PostHog – it doesn't support features session replays or surveys, and doesn't offer autocapture, but it does offer feature flags and A/B testing on some paid tiers. Read our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison for information.
 
 <ArrayCTA />
