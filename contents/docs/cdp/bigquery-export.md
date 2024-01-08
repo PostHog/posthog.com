@@ -6,7 +6,7 @@ tags:
     - bigquery-export
 ---
 
-> **Important:** This app has been deprecated in favor of the [BigQuery batch exports destination](/docs/cdp/batch-exports/bigquery). 
+> **Important:** This app has been deprecated in favor of the [BigQuery batch exports destination](/docs/cdp/batch-exports/bigquery).
 
 This app streams events from PostHog into BigQuery as they are ingested.
 
@@ -134,4 +134,4 @@ We love feature requests and feedback! Please [tell us what you think](http://ap
 
 ### What if my question isn't answered above?
 
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal).

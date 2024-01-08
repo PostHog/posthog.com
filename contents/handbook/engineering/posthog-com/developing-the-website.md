@@ -105,9 +105,7 @@ Our website uses various APIs to pull in data from sites like GitHub (for contri
 
 If you're a core team member and need this data locally, you can:
 
-1. Ask the [Website & Docs team](https://posthog.slack.com/archives/Markdown files located in `/contents/blog``
-
-C01V9AT7DK4) for access to our Vercel account
+1. Ask the [Website & Docs team](https://app.slack.com/client/TSS5W8YQZ/C01V9AT7DK4) files located for access to our Vercel account
 1. Install the Vercel CLI
 1. Run `vercel pull`
 1. Open `.vercel/.env.development.local`

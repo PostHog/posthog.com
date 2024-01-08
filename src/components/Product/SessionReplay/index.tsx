@@ -46,7 +46,7 @@ const product = {
     slug: 'session-replay',
     lowercase: 'session replay',
     capitalized: 'Session replay',
-    freeTier: '15,000 recordings',
+    freeTier: '5,000 recordings',
 }
 
 const team = 'Monitoring'
@@ -202,7 +202,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">On the roadmap</a>',
         },
     },
     {
@@ -212,7 +212,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">On the roadmap</a>',
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
         },
     },
     {
