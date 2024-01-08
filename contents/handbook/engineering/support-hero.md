@@ -136,7 +136,7 @@ Tips:
 
 ## What's Pylon and where does it come in?
 
-Our Customer Success team uses [Pylon](https://app.usepylon.com) to turn Slack threads into Zendesk tickets. When creating a ticket by adding the :ticket: emoji, the customer or CS team can assign the thread to a team which will route the Zendesk ticket to the correct place. These will normally be marked as high priority and you can respond to them either in Zendesk or Slack, as there is a two-way sync.
+Our Customer Success team uses [Pylon](https://usepylon.com) to turn Slack threads into Zendesk tickets. When creating a ticket by adding the :ticket: emoji, the customer or CS team can assign the thread to a team which will route the Zendesk ticket to the correct place. These will normally be marked as high priority and you can respond to them either in Zendesk or Slack, as there is a two-way sync.
 
 ### Community questions
 
