@@ -1,6 +1,6 @@
 ---
 title: "How to create surveys in Bubble with PostHog"
-date: 2023-11-29
+date: 2024-01-09
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
