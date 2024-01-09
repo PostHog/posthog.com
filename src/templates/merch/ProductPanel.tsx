@@ -3,6 +3,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import { cn } from '../../utils'
 import { LoaderIcon } from './LoaderIcon'
+import { Price } from './Price'
 import { ProductOptionSelect } from './ProductOptionSelect'
 import { Quantity } from './Quantity'
 import { useProduct } from './hooks'
@@ -32,8 +33,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     const handleAddToCart = () => {
         setIsAdding(true)
-        addToCart(selectedVariant || product.variants[0], quantity)
         setTimeout(() => {
+            addToCart(selectedVariant || product.variants[0], quantity)
             setIsCart(true)
             setIsAdding(false)
         }, 500)
@@ -61,7 +62,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </h3>
                 <p className="leading-tight">{subtitle}</p>
                 <p className="text-lg">
-                    <strong>${product.priceRangeV2.minVariantPrice.amount}</strong>
+                    <Price price={product.priceRangeV2.minVariantPrice.amount} />
                 </p>
             </div>
 

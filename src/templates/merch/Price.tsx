@@ -5,5 +5,5 @@ type PriceProps = {
 }
 
 export function Price(props: PriceProps): React.ReactElement {
-    return <strong>${props.price}</strong>
+    return <strong>${props.price.toFixed(2)}</strong>
 }
