@@ -1,5 +1,5 @@
 ---
-title: How to create new events the easy way
+title: How to create an action using the PostHog toolbar
 sidebar: Docs
 showTitle: true
 author: ['joe-martin']
@@ -80,5 +80,5 @@ Next, select ‘_Select Element_’ and click the additional element you want to
 Congratulations, you just made a new calculated event using the PostHog toolbar. You can use this event in insights such as funnels, trends or paths — or you can check these tutorials for further inspiration. 
 
 - [How to correlate errors with product performance using Sentry](https://posthog.com/tutorials/sentry-plugin-tutorial)
-- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
+- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/guide-to-funnels)
 - [How and why to build an AARRR pirate funnel in PostHog](https://posthog.com/blog/aarrr-pirate-funnel)

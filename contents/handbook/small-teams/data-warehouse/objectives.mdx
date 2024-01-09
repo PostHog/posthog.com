@@ -1,15 +1,22 @@
-### Objective
+### Goals (Q1)
 
-PostHog users can effortlessly bring their business data to PostHog and analyze it
-
-* **Key Results:**
-    * Be able to import data into data warehouse in one click from most popular SaaS tools (X, Y, Z connectors built)
-    * 5 happy users/teams who have imported external data
-    * Data Warehouse queries are compatible with insights hogQL
-
-PostHog is moved over to whatever CH infrastructure we will be using for the next 1 year (at least)
+5 reference customers of data warehouse and imports
 
 * **Key Results:**
-    * We are either on new infrastructure for EU that we host or on ClickHouse Cloud
-    * Queries for large customers are performing faster
-    * We can scale more easily (without James bespoke effort)
+    * They have the following qualities
+        * Paying a reasonable amount
+        * Tell us they're delighted
+        * Not a big edge case
+        * Using our in house data import pipeline
+        * Weekly queries on a data warehouse connected table
+
+Get EU moved over to the new cluster
+
+* **Key Results:**
+    * Terraform, ansible, data migrated over, backups, housewatch
+    * Deprecate old cluster
+
+Evaluate ByConity as a Clickhouse alternative
+
+* **Key Results:**
+    * Load up with all clickhouse data and benchmark

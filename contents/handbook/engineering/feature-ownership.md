@@ -24,6 +24,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Annotations | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
 | API Structure | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team | <span class="lemon-tag gh-tag">feature/api-structure</span> |
 | Async migrations | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
+| BI | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Billing | [Team Growth][Team Growth]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
@@ -35,9 +36,11 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Feature Flags | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Funnels | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
 | Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
+| HogQL | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Ingestion | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Lifecycle | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
 | Messaging (Email, Notifications) | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
+| Notebooks | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Paths | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |

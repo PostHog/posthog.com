@@ -1,56 +1,50 @@
-import {
-    IconGraph,
-    IconRewindPlay,
-    IconToggle,
-    IconFlask,
-    IconMessage,
-    IconPerson,
-    IconServer,
-    IconDatabase,
-    IconTerminal,
-} from '@posthog/icons'
-
 export const slideButtons = [
     {
         title: 'Product analytics',
-        Icon: IconGraph,
+        lottieSrc: '/lotties/product-icons/product-analytics.lottie',
         color: 'blue',
+        placeholderIcon: 'IconGraph',
+    },
+    {
+        title: 'Web analytics',
+        lottieSrc: '/lotties/product-icons/web-analytics.lottie',
+        color: '[#36C46F]',
+        placeholderIcon: 'IconPieChart',
     },
     {
         title: 'Session replay',
-        Icon: IconRewindPlay,
+        lottieSrc: '/lotties/product-icons/session-replay.lottie',
         color: 'yellow',
+        placeholderIcon: 'IconRewindPlay',
     },
     {
         title: 'Feature flags',
-        Icon: IconToggle,
-        color: 'teal',
+        lottieSrc: '/lotties/product-icons/feature-flags.lottie',
+        color: 'seagreen',
+        placeholderIcon: 'IconToggle',
     },
     {
         title: 'A/B testing',
-        Icon: IconFlask,
+        lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
+        placeholderIcon: 'IconFlask',
     },
     {
         title: 'Surveys',
-        Icon: IconMessage,
+        lottieSrc: '/lotties/product-icons/surveys.lottie',
         color: 'salmon',
+        placeholderIcon: 'IconMessage',
     },
     {
-        title: 'CDP',
-        Icon: IconPerson,
-        color: 'yellow',
+        title: 'Data pipeline',
+        lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
+        color: '[#2EA2D3]',
+        placeholderIcon: 'IconDecisionTree',
     },
     {
         title: 'Data warehouse',
-        Icon: IconServer,
-        color: 'seagreen',
+        lottieSrc: '/lotties/product-icons/data-warehouse.lottie',
+        color: '[#8567FF]',
+        placeholderIcon: 'IconDatabase',
     },
-    /*
-    {
-        title: 'API',
-        Icon: Terminal,
-        color: 'blue',
-    },
-    */
 ]

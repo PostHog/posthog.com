@@ -299,7 +299,7 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/product-design',
             },
             {
-                name: 'Logos and hedgehogs',
+                name: 'Logos, brand, hedgehogs',
                 url: '/handbook/company/brand-assets',
             },
             {
@@ -408,7 +408,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'On-call rotation',
-                        url: '/handbook/engineering/oncall-rotation',
+                        url: '/handbook/engineering/on-call-rotation',
                     },
                     {
                         name: 'Bug prioritization',
@@ -1327,6 +1327,10 @@ export const docsMenu = {
                             url: '/docs/data/team-collaboration',
                         },
                         {
+                            name: 'Timestamps',
+                            url: '/docs/data/timestamps',
+                        },
+                        {
                             name: 'User properties',
                             url: '/docs/data/user-properties',
                         },
@@ -1947,7 +1951,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Product Analytics',
+            name: 'Product analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/docs/product-analytics',
@@ -2086,16 +2090,6 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Web analytics',
-                    url: '/docs/web-analytics',
-                    icon: 'IconPieChart',
-                    color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
@@ -2114,7 +2108,34 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Session Replay',
+            name: 'Web analytics',
+            icon: 'IconPieChart',
+            color: '[#36C46F]',
+            url: '/docs/web-analytics',
+            children: [
+                {
+                    name: 'Web analytics',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/web-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/web-analytics/faq',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                },
+            ],
+        },
+        {
+            name: 'Session replay',
             url: '/docs/session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
@@ -2200,7 +2221,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Feature Flags',
+            name: 'Feature flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/docs/feature-flags',
@@ -2280,7 +2301,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'A/B Testing',
+            name: 'A/B testing',
             icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
@@ -2375,10 +2396,6 @@ export const docsMenu = {
                     url: '/docs/surveys',
                     icon: 'IconHome',
                     color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Installation',
@@ -2419,21 +2436,21 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'CDP',
+            name: 'Data pipeline',
             url: '/docs/cdp',
-            color: 'yellow',
-            icon: 'IconPerson',
+            color: '[#2EA2D3]',
+            icon: 'IconDecisionTree',
             children: [
                 {
-                    name: 'Customer data platform',
-                },
-                {
-                    name: 'CDP',
-                    url: '/docs/cdp',
+                    name: 'Data pipeline (CDP)',
                     badge: {
                         title: 'Preview',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                },
+                {
+                    name: 'CDP',
+                    url: '/docs/cdp',
                 },
                 {
                     name: 'Batch exports',
@@ -2698,13 +2715,17 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Data Warehouse',
+            name: 'Data warehouse',
             url: '/docs/data-warehouse',
-            color: 'seagreen',
-            icon: 'IconServer',
+            color: '[#8567FF]',
+            icon: 'IconDatabase',
             children: [
                 {
                     name: 'Data warehouse',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Overview',
@@ -2717,30 +2738,18 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/setup',
                     icon: 'IconBook',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Query',
                     url: '/docs/data-warehouse/query',
                     icon: 'IconHogQL',
                     color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Views',
                     url: '/docs/data-warehouse/views',
                     icon: 'IconCalculator',
                     color: 'salmon',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
             ],
         },
@@ -2759,25 +2768,25 @@ export const pricingMenu = {
             url: '/pricing',
         },
         {
-            name: 'Product Analytics',
+            name: 'Product analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/pricing?product=product-analytics',
         },
         {
-            name: 'Session Replay',
+            name: 'Session replay',
             url: '/pricing?product=session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
         },
         {
-            name: 'Feature Flags',
+            name: 'Feature flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/pricing?product=feature-flags',
         },
         {
-            name: 'A/B Testing',
+            name: 'A/B testing',
             icon: 'IconFlask',
             color: 'purple',
             url: '/pricing?product=ab-testing',
@@ -2798,25 +2807,25 @@ const menu = [
         icon: 'IconFeatures',
         children: [
             {
-                name: 'Product Analytics',
+                name: 'Product analytics',
                 icon: 'IconGraph',
                 color: 'blue',
                 url: '/product-analytics',
             },
             {
-                name: 'Session Replay',
+                name: 'Session replay',
                 icon: 'IconRewindPlay',
                 color: 'yellow',
                 url: '/session-replay',
             },
             {
-                name: 'Feature Flags',
+                name: 'Feature flags',
                 icon: 'IconToggle',
                 color: 'seagreen',
                 url: '/feature-flags',
             },
             {
-                name: 'A/B Testing',
+                name: 'A/B testing',
                 icon: 'IconFlask',
                 color: 'purple',
                 url: '/ab-testing',

@@ -116,7 +116,7 @@ It's absolutely **essential** to only log the users in your test who would actua
 
 To do so, ensure that checking your feature flag and logging their exposure is the *absolute* last condition you check in your code: 
 
-```
+```js
 // ❌ Incorrect. Will include unaffected users
 function showNewChanges(user) {
   if (posthog.getFeatureFlag('experiment-key') === 'control') {
@@ -133,7 +133,7 @@ function showNewChanges(user) {
 }
 ```
 
-```
+```js
 // ✅ Correct. Will exclude unaffected users
 function showNewChanges(user) {
 

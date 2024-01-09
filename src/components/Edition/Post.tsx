@@ -43,7 +43,7 @@ export default function Post({
     return (
         <li
             ref={containerRef}
-            className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[35px_1fr] items-center' : ''}`}
+            className={`snap-start md:last:pb-24 ${!articleView ? 'grid grid-cols-[35px_1fr] items-center' : ''}`}
         >
             {!articleView && <LikeButton slug={slug} postID={id} />}
             <span className={`flex items-center ${articleView ? 'py-px' : ''}`}>
@@ -78,6 +78,23 @@ export default function Post({
                                 {day.isToday() ? 'Today' : day.fromNow()}
                             </span>
                         </span>
+                        {!articleView && authors?.data?.length > 0 && (
+                            <span className={`ml-1 inline-flex items-center space-x-1 font-medium leading-none`}>
+                                <span className="text-[.933rem]">by</span>
+                                <ul className={`m-0 p-0 list-none flex`}>
+                                    {authors?.data?.map(({ id, attributes: { firstName, lastName } }) => {
+                                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                                        return (
+                                            <li className='even:before:content-[","] even:before:mr-1' key={id}>
+                                                <Link className="text-[.933rem]" to={`/community/profiles/${id}`}>
+                                                    {name}
+                                                </Link>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </span>
+                        )}
                     </div>
                     <div className="hidden sm:w-[100px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
                         <span

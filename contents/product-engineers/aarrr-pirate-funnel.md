@@ -148,7 +148,7 @@ Is there a better validation for your product than someone inviting a colleague,
 
 It's a great sign that people enjoy using what you've built and a powerful driver for word-of-mouth growth – aka, the best kind of growth.
 
-Referral metrics are especially important for products or services that have a [growth loop](/blog/growth-loops) – i.e. when the product experience is improved through multiple users, or when friends are using it together.
+Referral metrics are especially important for products or services that have a [growth loop](/product-engineers/growth-loops) – i.e. when the product experience is improved through multiple users, or when friends are using it together.
 
 Referrals can also be both internal (more users from the same organization) or external.
 

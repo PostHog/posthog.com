@@ -38,9 +38,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       username: String
       teamData: TeamData
     }
+    type FrontmatterSEO {
+      metaTitle: String
+      metaDescription: String
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
+      seo: FrontmatterSEO
     }
     type TeamData {
       name: String

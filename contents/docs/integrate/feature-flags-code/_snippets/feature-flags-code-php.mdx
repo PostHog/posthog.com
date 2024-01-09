@@ -42,7 +42,7 @@ PostHog::capture(array(
 ));
 ```
 
-#### Method 2: Set `sendFeatureFlagEvents` to `true`
+#### Method 2: Set `send_feature_flags` to `true`
 
 The `capture()` method has an optional argument `sendFeatureFlagEvents`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
 
@@ -52,7 +52,7 @@ Note that by doing this, PostHog will make an additional request to fetch featur
 PostHog::capture(array(
   'distinctId' => 'distinct_id_of_your_user',
   'event' => 'event_name',
-  'sendFeatureFlagEvents' => true
+  'send_feature_flags' => true
 ));
 ```
 

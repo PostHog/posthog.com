@@ -27,6 +27,7 @@ import { ProductAnalytics } from './components/Product/ProductAnalytics'
 import { ProductOS } from './components/Product/ProductOS'
 import { SessionReplay } from './components/Product/SessionReplay'
 import { Surveys } from './components/Product/Surveys'
+import { ProductScreenshot } from './components/ProductScreenshot'
 import { Competitor } from './components/Products/Competitor'
 import { CustomerCard } from './components/Products/CustomerCard'
 import { DocsLinks } from './components/Products/DocsLinks'
@@ -78,6 +79,7 @@ export const shortcodes = {
     ProductOS,
     SessionReplay,
     Surveys,
+    ProductScreenshot,
     Competitor,
     CustomerCard,
     DocsLinks,
