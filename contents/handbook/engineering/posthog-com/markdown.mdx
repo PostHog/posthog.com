@@ -198,10 +198,10 @@ cert-manager:
 Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL. Use the `<PrivateLink />` component for this. ([Here's an example.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
 
 ```
-<PrivateLink
-  label="click here" 
-  url="https://path/to/private/link" 
-/>
+<PrivateLink url="https://path/to/private/link">
+  click here
+</PrivateLink>
+
 ```
 
 Private links will always open in a new tab.
