@@ -18,15 +18,15 @@ Want to know how PostHog and Amplitude compare? If you remember nothing else, re
 
 1. **Amplitude** is a product analytics tool built for non-technical users and data analysts.
 
-2. **PostHog** is a comprehensive, all-in-one platform built for engineers that replaces Amplitude _and_ numerous other tools.
+2. **PostHog** is an all-in-one platform built for engineers that replaces Amplitude _and_ numerous other tools.
 
 ## How is PostHog different?
 
 ### 1. We're everything you need in one
 
-PostHog replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flags, Hotjar for session recording, [Statsig](/blog/posthog-vs-statsig) for A/B testing, or you could just use PostHog for everything. One platform, one bill: seamless integration.
+PostHog replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flags and testing, [Hotjar](/blog/posthog-vs-hotjar) for session replays and surveys, or you could just use PostHog for everything. One platform, one bill, and seamless integration.
 
-### 2. It's built for engineers
+### 2. We're built for engineers
 
 PostHog autocaptures data, so you don't need to waste energy instrumenting basic events. You can choose between light and dark mode themes. Features like our custom SQL query builder, keyboard shortcuts, and command palette, cater to power users. You can setup PostHog and start paying us without ever speaking to a sales rep, though our [customer success team](/contact-sales) is always available to answer your questions.
 
@@ -59,9 +59,9 @@ Entering a credit card unlocks almost all PostHog features and you **only pay fo
 
 There are two key differences here:
 
-1. PostHog supports autocapture, which makes it much fast to implement as you don't to manually instrument every event. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture) – we offer the best of both worlds.
+1. PostHog supports autocapture, which makes it much faster to implement if you don't want to manually instrument every event. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture) and use one of our SDKs – we offer the best of both worlds.
 
-2. PostHog has a [SQL-based query builder](/docs/hogql) for power users, which enables you to generate custom data analyses using PostHog event data. In future, our query builder will let you analyze data as you would in a Business Intelligence tool, like Metabase.
+2. PostHog has a [SQL-based query builder](/docs/hogql) for power users, which enables you to generate custom data analyses using PostHog event data. In future, our query builder will let you analyze data as you would in a business intelligence tool, like Metabase, inside PostHog.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million events, unlimited insights" column2="100k monthly tracked users, 10 saved insights" feature="Free usage" description="How much free usage do you get each month?" />
@@ -75,13 +75,13 @@ There are two key differences here:
   <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
   <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at a company and account level" />
   <ComparisonRow column1={true} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
-  <ComparisonRow column1={true} column2={true} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
+  <ComparisonRow column1={true} column2={true} feature="Stickiness" description="Find out what events keep users coming back." />
   <ComparisonRow column1={true} column2={true} feature="Custom formulas" description="Use formulas to calculate unique insights" />
 </ComparisonTable>
 
 ### Feature flags
 
-Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other features, so you can target session replays, surveys and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
+Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million API requests" column2="100k tracked users" feature="Free usage" description="How much free usage do you get each month?" />
@@ -99,7 +99,7 @@ Feature flags make it easy to roll out features to specific users or groups, and
 
 ### Experimentation
 
-PostHog's testing features are free when you input a card and you get a generous 1 million API requests for free _every_ month. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
+PostHog's offers a generous free 1 million A/B testing events. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million API requests" column2="None" feature="Free usage" description="How much free usage do you get each month?" />
@@ -115,7 +115,7 @@ PostHog's testing features are free when you input a card and you get a generous
 
 ### Session replay
 
-Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are _not_ video recordings of users. We reconstruct sessions by capturing Document Object Model (DOM) mutations. All private and personal data is masked. 
+Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are _not_ video recordings of users. We reconstruct sessions by capturing Document Object Model (DOM) mutations. You have complete control over what is captured and all private and personal data is masked. 
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="5,000 recordings" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
@@ -136,10 +136,10 @@ Replays enable you watch how users experience your app, diagnose issues, improve
 
 ### Surveys
 
-Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include survey templates for all these and more – read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which one you should use and when.
+Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include [survey templates](/templates?filter=type&value=survey) for all these and more helping you get started fast. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which one you should use and when.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-  <ComparisonRow column1="250" column2={false} feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1="250" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
   <ComparisonRow column1={true} column2={false} feature="Open text" description="Free text answers and feedback" />
   <ComparisonRow column1={true} column2={false} feature="Product rating" description="Rank using emojis or number" />
   <ComparisonRow column1={true} column2={false} feature="Single choice" description="Select one answer from multiple" />
@@ -181,7 +181,7 @@ PostHog and Amplitude both offer a wide range of integrations, sources and desti
 | **A/B testing**       | 1 million API requests  
 | **Surveys**           | 250 responses            
 
-**Amplitude** charges based on monthly tracked users (MTUs). The cost of add owns, such as A/B testing (not available on self-serve plans), group analytics, and unlimited cohorts (self-serve plans are limited to five), isn't disclosed.
+**Amplitude** charges based on monthly tracked users (MTUs). The cost of add ons, such as A/B testing (not available on self-serve plans), group analytics, and unlimited cohorts (self-serve plans are limited to five) isn't disclosed.
 
 Our free tiers are for life, which means you'll always get your first 1 million events (or 5,000 replays and so on) for free every month, no matter how many you end up using.
 
@@ -216,11 +216,11 @@ $0.000025, 75% less per event.
 
 ### Can PostHog also replace Google Analytics?
 
-Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using Google Tag Manager. See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [An intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
+Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using [Google Tag Manager](/docs/libraries/google-tag-manager). See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [an intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
 
 ### Is PostHog easy to deploy?
 
-Yes. Just paste our JS snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
+Yes. Just paste our web snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. This works for apps, blogs, scripts, no-code site builders, and more. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
 
 ### How can I estimate my usage?
 
