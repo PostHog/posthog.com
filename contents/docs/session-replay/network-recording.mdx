@@ -6,25 +6,71 @@ availability:
     enterprise: full
 ---
 
-PostHog can capture network requests and their performance that occur during the browser session, so you can see the effect of slow network requests or errors on the user experience.
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import ImgReplayConfigLight from '../../images/docs/session-replay/enable-session-replay-in-project-settings.png'
+
+> Note: currently available as [a feature preview](https://us.posthog.com/home#panel=feature-previews).
+
+PostHog can capture network requests that occur during the browser session, so you can see if your application is sending the expected requests and response, and check the effect of slow network requests or errors on the user experience.
 
 You can enable network recording from your [project settings](https://app.posthog.com/project/settings):
 
-![Enable network recording in your PostHog](../../images/docs/session-replay/enable-session-replay-in-project-settings.png)
+<ProductScreenshot
+    imageLight={ImgReplayConfigLight} 
+    alt="Enable network recording in your PostHog" 
+    classes="rounded"
+/>
 
-To remove sensitive information from the URL, these network requests can be modified before being captured like so:
+When enabled PostHog always captures:
+
+* the network request URL, 
+* [performance information](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry) about the request,
+
+When request capture is enabled you can also enabled payload and body capture, this includes:
+
+* the request method
+* the response code
+* request & response headers (if enabled)
+* request & response body (if enabled)
+
+## Sensitive information
+
+We have a deny-list of headers that we will never capture.
+
+* authorization
+* x-forwarded-for
+* authorization
+* cookie
+* set-cookie
+* x-api-key
+* x-real-ip
+* remote-addr
+* forwarded
+* proxy-authorization
+* x-csrf-token
+* x-csrftoken
+* x-xsrf-token
+
+But you can also register a callback to inspect and redact each network request, like so:
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskNetworkRequestFn: (request) => {
+        maskCapturedNetworkRequestFn: (request: CapturedNetworkRequest) => {
             // For example: ignoring a request entirely
-            if (request.url.includes('example.com')) {
+            if (request.name.includes('example.com')) {
                 return null
             }
 
             // ... or remove the query string from the URL
-            request.url = request.url.split('?')[0]
+            request.name = request.name.split('?')[0]
+
+            // ... or redact the request body
+            request.requestBody = undefined
+
+            // ... and more
+
+            // finally return the request
             return request
         }
     }
@@ -36,3 +82,15 @@ posthog.init('<ph_project_api_key>', {
 ## Recording from localhost
 
 Due the very high volume of network requests that some tools can make (for example when running hot-reload during development) PostHog does not capture network requests when running on localhost
+
+## Requests early in the page lifecycle don't capture all information
+
+PostHog has to wrap `fetch` and `xhr` in order to capture network requests. If your application makes network requests before PostHog has had a chance to wrap them, then PostHog will not capture all information about the request.
+
+## PostHog truncated the request or response body
+
+In order to maintain service levels we truncate all request and response bodies at 1MB
+
+## I want to query the network performance data I capture
+
+We'd love that too! It's not possible right now but watch this space.
