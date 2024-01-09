@@ -45,8 +45,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         <div className={classes}>
             <div className="image-wrapper relative bg-white rounded-md border border-light dark:border-dark">
                 {isNew && (
-                    <div className="z-10 uppercase text-xs flex items-center justify-center bg-yellow rounded-full py-2 px-1 font-bold aspect-square absolute top-0 right-0 -translate-y-1/2 translate-x-1/2">
-                        new
+                    <div className="z-10 rotate-12 uppercase text-xs flex items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
+                        New
                     </div>
                 )}
                 <GatsbyImage
