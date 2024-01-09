@@ -4,6 +4,25 @@ sidebar: Handbook
 showTitle: true
 ---
 
+## Operating Cadence
+
+PostHog works on a rolling 12 month outlook, referred to as medium-to-long term, for making tangible decisions that will affect what people are working on. This 12 month outlook is always being evaluated by the exec team who will always be assessing the challenges that the rest of the team will be accountable for solving. The aim here is that the exec team can set the direction and the wider team are able to autonomously solve the challenge of how to get there. 
+
+The decisions made by the exec team on this 12 month direction usually have an immediate impact on:- 
+
+-Product decisions	
+  -What do we develop next 
+-Team decisions
+  -Who do we hire next
+  -Any structural changes (these are less often than hiring)
+  -Internal moves within teams
+Commercial strategy
+  -How do we make more money
+  -How do we spend money differently from how we are currently
+
+There is no set time as to when the exec team can make these decisions. One of PostHog’s biggest strengths is our agility and being overly prescriptive as to when changes can be made to the medium-to-long term direction is punitive. The exec team always aims to avoid changes to this direction, mainly as it’s likely a sign it’s made a wrong move, however they won’t wait until the end of a quarter, month or week to do this. However, given the nature of planning and the need for deeper consideration, the majority of decisions usually come as part of a quarterly planning session. 
+
+
 ## How it works
 
 1. James runs this process every three months.
