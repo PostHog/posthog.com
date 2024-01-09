@@ -71,7 +71,7 @@ Each project should be owned by an individual within a single small team. Howeve
 
 For these projects, we recommend the individual owning it write a "Status update" every 2 weeks on slack and add a link to this update in the "Updates on bigger projects that affect multiple teams" section of the all hands doc. These status updates might include: what's been done since the last update, any blockers, and what are the next steps.
 
-## Small Teams Charters
+## Small Teams Intros
 
 Every small team should have an agreed charter which should include at the very least, but not be limited to: 
 
