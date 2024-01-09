@@ -568,6 +568,10 @@ export const handbookSidebar = [
                 name: 'Pricing principles',
                 url: '/handbook/engineering/feature-pricing',
             },
+            {
+                name: 'Revenue and forecasting',
+                url: '/handbook/engineering/revenue-and-forecasting',
+            },
         ],
     },
     {
