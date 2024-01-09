@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { PrivateLink } from 'components/PrivateLink'
 import { Hero } from 'components/Hero'
 import { Check, Close } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
@@ -33,6 +34,7 @@ export default function Plain({ data }) {
         Section,
         ProductScreenshot,
         FeatureSnapshot,
+        PrivateLink,
         Check,
         Close,
         a: A,
