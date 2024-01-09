@@ -194,3 +194,17 @@ cert-manager:
     enabled: true
 ```
 
+## Private links
+
+Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL. Use the `<PrivateLink />` component for this. ([Here's an example.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
+
+```
+<PrivateLink
+  label="click here" 
+  url="https://path/to/private/link" 
+/>
+```
+
+Private links will always open in a new tab.
+
+_Note: When used within a paragraph, you'll need to convert the paragraph into HTML first (wrap with `<p></p>`) for the component to be recognized by MDX._
