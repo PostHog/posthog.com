@@ -7,11 +7,17 @@ sidebar: Docs
 tags: ['surveys']
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import ImgSurveyTemplatesLight from '../images/tutorials/bubble-surveys/survey-templates.png'
+import ImgSurveyTemplatesDark from '../images/tutorials/bubble-surveys/survey-templates.png'
+import ImgSurveyResultsLight from '../images/tutorials/bubble-surveys/survey-results.png'
+import ImgSurveyResultsDark from '../images/tutorials/bubble-surveys/survey-results.png'
+
 Surveys are a great way to collect feedback from your users. This tutorial shows you how to create surveys for your [Bubble](https://bubble.io/) app or marketing site using PostHog.
 
 ## 1. Add PostHog to your Bubble site
 
-First, [sign up to PostHog](https://app.posthog.com/signup). Then, go to your [project settings](https://app.posthog.com/settings/project) and copy your [web snippet](https://app.posthog.com/settings/project-details#snippet). It looks like this:
+First, [sign up to PostHog](https://us.posthog.com/signup). Then, go to your [project settings](https://us.posthog.com/settings/project) and copy your [web snippet](https://us.posthog.com/settings/project-details#snippet). It looks like this:
 
 ```js
 <script>
@@ -28,9 +34,14 @@ Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in
 
 ## 2. Create and launch your survey
 
-Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." There are a variety of [survey templates](/templates?filter=type&value=survey) to choose from, or you can create your own by clicking "Create blank survey".
+Create a survey in PostHog by going to the [surveys tab](https://us.posthog.com/surveys) and clicking "New survey." There are a variety of [survey templates](/templates?filter=type&value=survey) to choose from, or you can create your own by clicking "Create blank survey".
 
-![PostHog survey templates](../images/tutorials/bubble-surveys/survey-templates.png)
+<ProductScreenshot
+  imageLight={ImgSurveyTemplatesLight} 
+  imageDark={ImgSurveyTemplatesDark} 
+  alt="PostHog survey templates" 
+  classes="rounded"
+/>
 
 Next, you can customize the questions, branding, and targeting as needed. See our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
 
@@ -38,7 +49,7 @@ Then, click "Save as draft" and then "Launch". Your survey is now live and you s
 
 ## 3. View results
 
-After launching your survey and having users interact with it, you can view results by selecting the survey from the [surveys tab](https://app.posthog.com/surveys). You'll see data on:
+After launching your survey and having users interact with it, you can view results by selecting the survey from the [surveys tab](https://us.posthog.com/surveys). You'll see data on:
 
 - How many users have seen the survey.
 - How many users have dismissed the survey.
@@ -46,7 +57,12 @@ After launching your survey and having users interact with it, you can view resu
 
 You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
-![Survey results](../images/tutorials/bubble-surveys/survey-results.png)
+<ProductScreenshot
+  imageLight={ImgSurveyResultsLight} 
+  imageDark={ImgSurveyResultsDark} 
+  alt="Survey results" 
+  classes="rounded"
+/>
 
 ## Further reading
 
