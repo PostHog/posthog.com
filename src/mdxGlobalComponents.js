@@ -12,6 +12,7 @@ import { ContentViewer } from './components/ContentViewer'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
+import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
@@ -64,6 +65,7 @@ export const shortcodes = {
     lib,
     Emoji,
     FeatureAvailability,
+    FormulaScreenshot,
     GDPRForm,
     HiddenSection,
     HubSpotForm,
