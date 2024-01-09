@@ -224,9 +224,14 @@ pnpm i --dir plugin-server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
-    - On macOS:
+    - On macOS (not m2):
         ```bash
         brew install libxml2 libxmlsec1 pkg-config
+        ```
+    - On macOS (m2) - this is a workaround to install `libxmlsec1` in version `1.2.37` to deal with this [issue](https://github.com/xmlsec/python-xmlsec/issues/254):
+        ```bash
+        brew install libxml2 pkg-config
+        git clone git@github.com:Homebrew/homebrew-core.git && cd homebrew-core && git checkout 17a2c4d5bc7603fdf5179a111ecb1aa400d64a14 Formula/libxmlsec1.rb && brew tap-new $USER/local-tap && cp Formula/libxmlsec1.rb /opt/homebrew/Library/Taps/$USER/homebrew-local-tap/Formula/ && brew install $USER/local-tap/libxmlsec1 && brew untap $USER/local-tap
         ```
     - On Debian-based Linux:
         ```bash
