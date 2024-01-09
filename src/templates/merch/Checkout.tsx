@@ -117,7 +117,11 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
             {adjustedItems.length > 0 && <AdjustedLineItems className="my-4" lineItems={adjustedItems} />}
 
             <div className="flex justify-end">
-                <CallToAction onClick={handleCheckout} type="primary" className={cn('relative text-center', className)}>
+                <CallToAction
+                    onClick={handleCheckout}
+                    type="primary"
+                    className={cn('relative text-center w-full', className)}
+                >
                     <span className={cn('mx-16', showAdjustments && 'invisible', isCheckingOut && 'invisible')}>
                         Checkout
                     </span>

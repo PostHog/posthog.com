@@ -39,14 +39,14 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         }, 500)
     }
 
-    const classes = cn('p-8 pt-20 relative space-y-6 overflow-y-scroll', className)
+    const classes = cn('p-8 pt-20 relative space-y-4 overflow-y-auto', className)
 
     return (
         <div className={classes}>
             <div className="image-wrapper relative bg-white rounded-md border border-light dark:border-dark">
                 {isNew && (
-                    <div className="z-10 uppercase text-xs flex items-center justify-center bg-yellow rounded-full py-2 px-1 font-bold aspect-square absolute top-0 right-0 -translate-y-1/2 translate-x-1/2">
-                        new
+                    <div className="z-10 rotate-12 uppercase text-xs flex items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
+                        New
                     </div>
                 )}
                 <GatsbyImage
@@ -55,19 +55,20 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     alt={product.title}
                 />
             </div>
-            <div className="[&_*]:mb-0 space-y-1 mb-4">
-                <h3 className="text-lg [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
+            <div className="[&_*]:mb-0 space-y-0.5">
+                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
                     {product.title}
                 </h3>
-                <p className="text-sm">{subtitle}</p>
-                <p className="text-base font-semibold text-gray-900">${product.priceRangeV2.minVariantPrice.amount}</p>
+                <p className="leading-tight">{subtitle}</p>
+                <p className="text-lg">
+                    <strong>${product.priceRangeV2.minVariantPrice.amount}</strong>
+                </p>
             </div>
 
             {selectedOptions.map((so, i) => {
                 return (
                     <ProductOptionSelect
                         key={i}
-                        className="my-4"
                         option={so.option}
                         onChange={(val) => setOptionAtIndex(i, so.option, val)}
                         value={so.selectedValue}
@@ -78,7 +79,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             <Quantity value={quantity} onChange={setQuantity} />
 
-            <CallToAction onClick={handleAddToCart} type="primary" className="relative">
+            <CallToAction onClick={handleAddToCart} type="primary" className="relative w-full">
                 <span className={cn('', isAdding && 'invisible')}>Add to Cart</span>
                 <LoaderIcon
                     className={cn(
@@ -87,7 +88,12 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     )}
                 />
             </CallToAction>
-            <p className="text-sm">{product.description}</p>
+            {product.description && (
+                <div className="border-t border-light dark:border-dark pt-4">
+                    <h3 className="text-lg mb-0">Description</h3>
+                    <p className="text-[15px]">{product.description}</p>
+                </div>
+            )}
         </div>
     )
 }

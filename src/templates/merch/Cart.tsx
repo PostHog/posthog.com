@@ -21,7 +21,7 @@ export function Cart(props: CartProps): React.ReactElement {
 
     return (
         <div className={classes}>
-            <div className="text-xl fond-bold mb-4">Cart</div>
+            <h3 className="text-xl font-bold mb-4">Cart</h3>
             {isEmpty && <div>Cart is empty</div>}
 
             {!isEmpty && (
@@ -38,13 +38,16 @@ export function Cart(props: CartProps): React.ReactElement {
                 </div>
             )}
 
-            <div className="flex justify-end gap-16 my-4">
-                <span className="">Subtotal</span> <Price price={subtotal} />
+            <div className="flex justify-end gap-3 mt-4 mb-1 pt-4 border-t border-light dark:border-dark">
+                <span className="">Subtotal</span>{' '}
+                <strong>
+                    <Price price={subtotal} />
+                </strong>
             </div>
 
             <div className="text-right italic text-sm">Shipping and taxes calculated at checkout</div>
 
-            <Checkout className="my-4" />
+            <Checkout className="my-2" />
         </div>
     )
 }
