@@ -330,11 +330,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fieldValue
                 }
             }
-            allShopifyProduct(limit: 1000, sort: { order: ASC, fields: title }) {
-                edges {
-                    node {
-                        handle
-                    }
+            allShopifyProduct(limit: 1000) {
+                nodes {
+                    handle
                 }
             }
             allShopifyCollection {
@@ -446,8 +444,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         return item
     })
 
+    /**
+     * Collection pages. Slightly abusing context here and sending all products
+     * per paginated collection page. Gatsby doesn't let you both filter your
+     * Graphql query at collections and then again for the products inside.
+     */
     const productsPerPage = 6
-
     result.data.allShopifyCollection.nodes.forEach((collection) => {
         const { handle, products } = collection
         const merchBasePath = '/merch'
@@ -476,6 +478,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     productsForCurrentPage,
                 },
             })
+        })
+    })
+
+    result.data.allShopifyProduct.nodes.forEach((node) => {
+        createPage({
+            path: `/merch/products/${node.handle}/`,
+            component: path.resolve(`./src/templates/merch/Product.tsx`),
+            context: {
+                handle: node.handle,
+            },
         })
     })
 
