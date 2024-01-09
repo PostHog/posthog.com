@@ -88,7 +88,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Web or iOS (beta) available',
+        description: 'Web or Android (beta) available',
         icon: <IconPhone />,
     },
     {
@@ -498,8 +498,11 @@ export const ProductSessionReplay = () => {
                                                     iOS
                                                 </Link>{' '}
                                                 |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/13267" external>
-                                                    Android
+                                                <Link
+                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
+                                                    external
+                                                >
+                                                    Flutter
                                                 </Link>
                                             </li>
                                         </ul>
