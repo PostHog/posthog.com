@@ -733,7 +733,7 @@
         { "source": "/docs/session-recording", "destination": "/docs/session-replay" },
         { "source": "/docs/session-replay/configure", "destination": "/docs/session-replay/manual" },
         { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
-        { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/monitoring" },
+        { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/replay" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
         { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
         { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" },

@@ -49,8 +49,8 @@ const product = {
     freeTier: '5,000 recordings',
 }
 
-const team = 'Monitoring'
-const teamSlug = '/handbook/small-teams/monitoring'
+const team = 'Replay'
+const teamSlug = '/handbook/small-teams/replay'
 
 const featuresPerRow = 3
 const features = [
