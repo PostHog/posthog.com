@@ -1,5 +1,5 @@
 ---
-title: Shipping & Releasing
+title: Shipping & releasing
 sidebar: Handbook
 showTitle: true
 ---
