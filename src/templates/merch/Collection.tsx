@@ -2,11 +2,11 @@ import { useLocation } from '@reach/router'
 import Layout from 'components/Layout'
 import React from 'react'
 import Pagination from '../../components/Pagination'
+import { communityMenu } from '../../navs'
 import { Nav } from './Nav'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
 import { CollectionPageContext } from './types'
-import { communityMenu } from '../../navs'
 
 type CollectionProps = {
     pageContext: CollectionPageContext

@@ -347,6 +347,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 contentDigest: createContentDigest(collection),
             },
         }
+        console.log('🚀 ~ node:', node)
 
         createNode(node)
     })
