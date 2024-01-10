@@ -30,7 +30,7 @@ With the snippet copied, go to your Bubble site settings by clicking on the icon
 
 Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in the **Script/meta tags in header** section. Then, deploy your site to live.
 
-![How to add PostHog to Bubble](../images/tutorials/bubble-analytics/adding-posthog.mp4)
+![How to add PostHog to Bubble](../images/tutorials/bubble-ab-tests/adding-posthog.mp4)
 
 PostHog will now begin [automatically capturing](/docs/product-analytics/autocapture) events like pageviews, button clicks, and form inputs on your site.
 
@@ -87,7 +87,7 @@ Once enabled, user sessions will begin to appear in the [Recent recordings tab](
 
 To do this, go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog. Click **New feature flag**, enter a key name (for example, `show-signup-button`), fill out the details, set release conditions to roll out to 100% of users, and click **Save**.
 
-Then go back to Bubble. Create a new **Page is loaded** event with an action to run custom JavaScript code (like we did for [capturing custom events](#how-to-capture-custom-events)). Use the following code to hide the button based on the value of the feature flag:
+Then go back to Bubble. Create a new **Page is loaded** workflow event with an action to run custom JavaScript code (like we did for [capturing custom events](#how-to-capture-custom-events)). Use the following code to hide the button based on the value of the feature flag:
 
 ```js
 // Find the button with the text "Sign Up"
@@ -109,5 +109,6 @@ When we save this and publish the site again, the button is still there. When we
 
 ## Further reading
 
+- [How to run A/B tests in Bubble with PostHog](/tutorials/bubble-ab-tests)
 - [How to create surveys in Bubble with PostHog](/tutorials/bubble-surveys)
 - [How to analyze first and last touch attribution](/tutorials/first-last-touch-attribution)

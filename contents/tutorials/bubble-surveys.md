@@ -67,4 +67,5 @@ You can also filter these results based on [user properties](/docs/product-analy
 ## Further reading
 
 - [How to set up Bubble analytics, session replays, and more](/tutorials/bubble-analytics)
+- [How to run A/B tests in Bubble with PostHog](/tutorials/bubble-ab-tests)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
