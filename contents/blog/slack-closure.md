@@ -47,9 +47,9 @@ You can even open your profile to function as an Ask Me Anything (AMA) - somethi
 
 One option for the public Slack would have been to just leaving it running in parallel to the forums, but that would leave Slack users in limbo. Instead, we'll close the Slack in favor of the PostHog community forum. Currently you need to create an account to sign-up to the community, but soon we'll merge this with your normal PostHog account. 
 
-On January 17, we'll archive all channels in the public PostHog Slack, so that no new discussion or replies can be posted. This will give you chance to move on-going conversations to a new location, such as the PostHog community, without losing anything. 
+On January 12, we'll archive all channels in the public PostHog Slack, so that no new discussion or replies can be posted. This will give you chance to move on-going conversations to a new location, such as the PostHog community, without losing anything. 
 
-A week later, on January 24, we'll close the Slack group permanently and delete all existing content. 
+A week later, on January 22, we'll close the Slack group permanently and delete all existing content. 
 
 Private Slack channels for paying users will continue to function as normal via Slack Connect, and we’ll continue to handle the majority of customer support via the in-app help. Obviously, the [GitHub repos](https://github.com/PostHog/) will also continue to function as normal and you can add comments or submit there too.  
 
