@@ -17,7 +17,7 @@ The decisions made by the exec team on this 12 month direction usually have an i
   -Any structural changes (these are less often than hiring)
   -Internal moves within teams
 Commercial strategy
-  -How do we make more money
+  -How do we make money
   -How do we spend money differently from how we are currently
 
 There is no set time as to when the exec team can make these decisions. One of PostHog’s biggest strengths is our agility and being overly prescriptive as to when changes can be made to the medium-to-long term direction is punitive. The exec team always aims to avoid changes to this direction, mainly as it’s likely a sign it’s made a wrong move, however they won’t wait until the end of a quarter, month or week to do this. However, given the nature of planning and the need for deeper consideration, the majority of decisions usually come as part of a quarterly planning session. 
