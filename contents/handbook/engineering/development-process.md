@@ -96,7 +96,7 @@ Not everything directly contributes to a company level goal. It’s important th
 
 Efficient engineering organizations actively [reduce Work In Progress](https://loom.com/share/5efceb288b634a449041918bdba08202) (WIP) to avoid negative feedback loops that drive down productivity. 
 
-Hence, a PR should be optimised for two things: 
+Hence, a PR should be optimized for two things: 
 
 1. Quality of implementation.
 2. The speed with which we can merge it in.
