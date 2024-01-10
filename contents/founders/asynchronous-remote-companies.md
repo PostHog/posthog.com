@@ -39,7 +39,7 @@ The TL;DR?
 
 It transformed the company. People came together and got more comfortable giving direct feedback, we changed our product trajectory (it gave us the idea for apps and for session recording, which led to our philosophy around consolidating a bunch of tools), and we realized we have to do this often. 
 
-We [now mandate](/handbook/company/offsites) an annual all-company offsite where everyone is strongly encouraged to attend, and twice-annual small team offsites for people to work together and socialize. We also provide a $300 monthly budget for co-working, and a $500 monthly budget to cover the cost of travel and meals to meet colleagues.
+We [now mandate](/handbook/company/offsites) an annual all-company offsite where everyone is strongly encouraged to attend, plus annual small team offsites for people to work together and socialize. We also provide a $300 monthly budget for co-working, and a $500 monthly budget to cover the cost of travel and meals to meet colleagues.
 
 ## You can get too asynchronous
 
