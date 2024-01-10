@@ -445,7 +445,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
      * per paginated collection page. Gatsby doesn't let you both filter your
      * Graphql query at collections and then again for the products inside.
      */
-    const productsPerPage = 6
+    const productsPerPage = 50
     result.data.allShopifyCollection.nodes.forEach((collection) => {
         const { handle, products } = collection
         const merchBasePath = '/merch'
