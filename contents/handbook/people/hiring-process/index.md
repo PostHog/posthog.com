@@ -254,7 +254,7 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 
 After a SuperDay, everyone involved in the day leaves their feedback on Ashby. This is hugely important to us in making a final decision so team members should make an effort in compeleting their feedback as soon as possible. If there are wildly different opinions, you should open an issue in `company-internal` to discuss.
 
-If a decision is made to hire, the People & Ops team will open an onboarding issue once the candidate has accepted and James/Tim will share in our Monday All Hands Meeting a breif overview of the following: 
+If a decision is made to hire, the People & Ops team will open an onboarding issue once the candidate has accepted and James/Tim will share in our Monday All Hands Meeting a brief overview of the following: 
 - Who we ended up hiring and their background: what they will be doing, and a summary of the recruitment process (how long open for, no. of applicants etc.)
 - Why we are hiring them: feedback from the interview process, both positive and areas to improve
 - Start date and location
