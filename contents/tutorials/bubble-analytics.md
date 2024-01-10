@@ -57,7 +57,7 @@ To capture PostHog events, add the following code under the **Script** heading:
 window.posthog.capture("your_event_name")
 ```
 
-Optionally, you can also include additional information in the event by including parameters:
+Optionally, you can also include additional information in the event by including parameters as properties:
 
 ```js
 posthog.capture('your_event_name', {
@@ -75,7 +75,7 @@ Finally, deploy your changes to live to begin capturing your custom event.
 
 [Session replays](/docs/session-replay) enable you to record and playback user interactions on your site. 
 
-To enable it, go the [Session replay tab](https://us.posthog.com/replay) in PostHog. Then, click on the **Configure** button in the top right and toggle **Record user sessions** in the menu that opens up. 
+To enable it, go the [Session replay tab](https://us.posthog.com/replay) in PostHog. Then, click on the **Configure** button in the top right and toggle on **Record user sessions** in the menu that opens up. 
 
 Once enabled, user sessions will begin to appear in the [Recent recordings tab](https://us.posthog.com/replay/recent).
 
@@ -85,7 +85,7 @@ Once enabled, user sessions will begin to appear in the [Recent recordings tab](
 
 [Feature flags](/docs/feature-flags) are useful for conditionally showing (or hiding) components based on a rollout percentage and properties. For example, you can use a flag to show or hide a button.
 
-To do this, go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog. Click **New feature flag**, enter a key name (for example, `hide-bubble-button`), fill out the details, set release conditions to roll out to 100% of users, and click **Save**.
+To do this, go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog. Click **New feature flag**, enter a key name (for example, `show-signup-button`), fill out the details, set release conditions to roll out to 100% of users, and click **Save**.
 
 Then go back to Bubble. Create a new **Page is loaded** event with an action to run custom JavaScript code (like we did for [capturing custom events](#how-to-capture-custom-events)). Use the following code to hide the button based on the value of the feature flag:
 
@@ -96,14 +96,14 @@ var signUpButton = Array.from(document.querySelectorAll('button')).find(el => el
 // Hide the button based on the feature flag value
 if (signUpButton) {
     posthog.onFeatureFlags(function () {
-        if (!posthog.isFeatureEnabled('hide-bubble-button')) {
+        if (posthog.isFeatureEnabled('show-signup-button')) {
             signUpButton.style.display = 'none';
         }
     })
 }
 ```
 
-When we save this and publish the site again, the button is still there. When we go back to PostHog and disable the `hide-bubble-button` flag, the button disappears.
+When we save this and publish the site again, the button is still there. When we go back to PostHog and disable the `show-signup-button` flag, the button disappears.
 
 ![Feature flags in bubble](../images/tutorials/bubble-analytics/bubble-feature-flags.png)
 
