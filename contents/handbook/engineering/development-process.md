@@ -89,7 +89,7 @@ Not everything directly contributes to a company level goal. It’s important th
 
 * **Yes, and**: Be encouraging and helpful with others who are innovating. All of our biggest wins have looked like bad ideas early on.
 * **Dogfooding**: Use the product yourself. When you see something that annoys you, fix it.
-* **Sidequests:** Smaller projects you are passionate about but may not shoot up our metrics (e.g. turbo mode).
+* **Side quests:** Smaller projects you are passionate about but may not shoot up our metrics (e.g. turbo mode).
 * **Support hero:** Support hero dedicates all of their time to customers, solving the wild and wonderful issues our customers find each week.
 
 ## Sizing tasks and reducing WIP
