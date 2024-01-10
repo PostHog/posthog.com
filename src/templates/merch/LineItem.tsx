@@ -49,11 +49,13 @@ export function LineItem(props: LineItemsProps): React.ReactElement {
             ) : (
                 <div className="border-2 rounded grid place-content-center text-gray-400">placeholder image</div>
             )}
-            <div className="relative space-y-2">
+            <div className="relative flex flex-col justify-between gap-2">
                 <div className="flex">
                     <div className="flex-1">
                         <div className="font-bold">{item.product.title}</div>
-                        {item.title !== 'Default Title' && <div className="text-[15px]">{item.title}</div>}
+                        {item.title !== 'Default Title' && (
+                            <div className="text-[15px]">{item.title.replace(/\(.*?\)/g, '')}</div>
+                        )}
                     </div>
                     <div className="text-right">
                         {item.count > 1 && <span>{item.count} x</span>} <Price price={item.price} />

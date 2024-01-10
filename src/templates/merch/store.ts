@@ -69,7 +69,6 @@ export const useCartStore = create<CartStore>(
 
 function updateCart(variant: ShopifyProductVariant, count: number, cartItems: CartItem[]): CartItem[] {
     const cartItem = { ...variant, count: count || 1 } as CartItem
-    console.log('🚀 ~ cartItem:', cartItem)
 
     const productOnCart = cartItems.map((item) => item.shopifyId).includes(cartItem.shopifyId)
 
@@ -96,7 +95,6 @@ function removeCart(variantId: string, cartItems: CartItem[]): CartItem[] {
 const unsubCartItemsChange = useCartStore.subscribe(
     (state) => state.cartItems, // Listen to the change
     (cartItems) => {
-        console.log('🚀 ~ cartItems:', cartItems)
         const subtotal = cartItems.reduce((prev, curr) => {
             return prev + curr.price * curr.count
         }, 0)

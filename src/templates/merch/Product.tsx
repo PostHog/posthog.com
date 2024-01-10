@@ -18,7 +18,6 @@ type ProductPageProps = {
 }
 
 export default function Product(props: ProductPageProps): React.ReactElement {
-    console.log('🚀 ~ props:', props)
     const { data, pageContext } = props
     const product = data.shopifyProduct
     const [cartIsOpen, setCartIsOpen] = useState<boolean>(false)
@@ -75,17 +74,18 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                             <Price price={product.priceRangeV2.minVariantPrice.amount} />
                         </p>
 
-                        {selectedOptions.map((so, i) => {
-                            return (
-                                <ProductOptionSelect
-                                    key={i}
-                                    option={so.option}
-                                    onChange={(val) => setOptionAtIndex(i, so.option, val)}
-                                    value={so.selectedValue}
-                                    selections={selections}
-                                />
-                            )
-                        })}
+                        {selectedOptions.length > 1 &&
+                            selectedOptions.map((so, i) => {
+                                return (
+                                    <ProductOptionSelect
+                                        key={i}
+                                        option={so.option}
+                                        onChange={(val) => setOptionAtIndex(i, so.option, val)}
+                                        value={so.selectedValue}
+                                        selections={selections}
+                                    />
+                                )
+                            })}
 
                         <Quantity value={quantity} onChange={setQuantity} />
 
