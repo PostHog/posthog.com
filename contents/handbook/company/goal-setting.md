@@ -11,7 +11,7 @@ PostHog works on a rolling 12 month outlook, referred to as medium-to-long term,
 The decisions made by the exec team on this 12 month direction usually have an immediate impact on:- 
 
 -Product decisions	
-  -What do we develop next 
+  -What product do we build next 
 -Team decisions
   -Who do we hire next
   -Any structural changes (these are less often than hiring)
