@@ -98,8 +98,8 @@ Efficient engineering organizations actively [reduce Work In Progress](https://l
 
 Hence, a PR should be optimized for two things: 
 
-1. Quality of implementation.
-2. The speed with which we can merge it in.
+1. Quality of implementation
+2. The speed with which we can merge it in
 
 PRs should ideally be sized to be doable in one day, including code review and QA. If it's not, you should break it down into smaller chunks until it fits into a day. Tasks of this size are easy to test, easy to deploy, easy to review and less likely to cause merge conflicts. 
 
