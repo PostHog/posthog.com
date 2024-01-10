@@ -66,17 +66,18 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </p>
             </div>
 
-            {selectedOptions.map((so, i) => {
-                return (
-                    <ProductOptionSelect
-                        key={i}
-                        option={so.option}
-                        onChange={(val) => setOptionAtIndex(i, so.option, val)}
-                        value={so.selectedValue}
-                        selections={selections}
-                    />
-                )
-            })}
+            {selectedOptions.length > 1 &&
+                selectedOptions.map((so, i) => {
+                    return (
+                        <ProductOptionSelect
+                            key={i}
+                            option={so.option}
+                            onChange={(val) => setOptionAtIndex(i, so.option, val)}
+                            value={so.selectedValue}
+                            selections={selections}
+                        />
+                    )
+                })}
 
             <Quantity value={quantity} onChange={setQuantity} />
 

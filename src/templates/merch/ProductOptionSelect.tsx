@@ -51,7 +51,7 @@ export function ProductOptionSelect(props: ProductOptionSelectProps): React.Reac
                                 return (
                                     <>
                                         <RadioGroup.Label as="span" className="z-10">
-                                            {optionValue}
+                                            {optionValue.replace(/\(.*?\)/g, '')}
                                         </RadioGroup.Label>
                                         {!isDisabled ? (
                                             <span
