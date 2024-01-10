@@ -1,5 +1,5 @@
 ---
-date: 2023-11-29
+date: 2024-01-09
 title: "How to drive growth with product-market fit surveys"
 author:
   - lior-neu-ner
@@ -12,7 +12,7 @@ tags:
 
 *"How would you feel if you could no longer use our product?"* a.k.a the product-market fit survey.
 
-This is perhaps the most well-known question in SaaS circles. [Superhuman](https://superhuman.com) famously used it to catapult themselves to over 50,000 paying customers and a whopping **$20 million** in revenue. 
+This is perhaps the most well-known survey question in startup circles. [Superhuman](https://superhuman.com) famously used it to catapult themselves to over 50,000 paying customers and a whopping **$20 million** in revenue. 
 
 You might be wondering, "How can I do the same?"
 
@@ -62,7 +62,7 @@ In the meantime, to receive the best feedback, send the survey to users who have
 
 You can begin analyzing the results once you have at least 30 responses. 
 
-### Step 2: Study your best customers
+### Step 2: Create a user persona of your best users
 
 Start by examining the users who would be "very disappointed" if they could no longer use your product. There are two things you need to learn about them:
 
@@ -79,14 +79,14 @@ Then, use this information to create a [user persona](/product-engineers/how-to-
 
 ### Step 3: Find your "on-the-fence" users
 
-Direct your attention to the users who responded with "somewhat disappointed". In particular, focus on the ones that:
+Next, direct your attention to the users who responded with "somewhat disappointed". In particular, focus on the ones that:
 
 - match the user persona you created in the previous step, and
 - gave similar responses like your best supporters when asked about the main benefit they receive from your app.
 
 It's clear that these users are seeing the value in your app, but something is holding them back from becoming passionate users. Usually, only one or two things are in their way, so these users will be the easiest to convert into fanatics who champion your product.
 
-To find out what their problems are, look at their response to the question `"How can we improve our app for you?" and make a note of the common themes.
+To find out what their problems are, look at their response to the question `How can we improve our app for you?` and make a note of the common themes.
 
 ### Step 4: Reprioritize your roadmap
 
@@ -113,7 +113,6 @@ Keep repeating the process from steps 1-4. Each time you do, you'll learn more a
 As you start shipping your improvements, continue tracking your PMF survey score. It should begin to improve as you gradually convert your on-the-fence users into loyal advocates. 
 
 Lastly, to keep your product team focused on a single goal, consider making your PMF score their primary OKR.
-
 
 ### Frequently Asked Questions
 
