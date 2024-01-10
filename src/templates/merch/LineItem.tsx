@@ -30,7 +30,7 @@ export function LineItem(props: LineItemsProps): React.ReactElement {
         remove(item.shopifyId)
     }
 
-    const classes = cn('text-black grid grid-cols-[50px_1fr] sm:grid-cols-[100px_1fr] gap-4', className)
+    const classes = cn('grid grid-cols-[50px_1fr] sm:grid-cols-[100px_1fr] gap-4', className)
     return (
         <div className={classes}>
             {image ? (

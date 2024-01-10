@@ -17,7 +17,7 @@ export function Cart(props: CartProps): React.ReactElement {
 
     const isEmpty = cartItems.length === 0
 
-    const classes = cn('text-black h-full p-8 pt-20', className)
+    const classes = cn('text-primary dark:text-primary-dark h-full p-8 pt-20', className)
 
     return (
         <div className={classes}>
