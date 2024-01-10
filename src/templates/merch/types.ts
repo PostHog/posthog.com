@@ -1,4 +1,5 @@
 import type { IGatsbyImageData } from 'gatsby-plugin-image'
+import { GraphQLError } from 'graphql'
 
 export type MerchPageContext = {
     currentPage: number
@@ -11,6 +12,21 @@ export type ImageLocalFile = {
     childImageSharp: {
         gatsbyImageData: IGatsbyImageData
     }
+}
+
+/**
+ * Shopify
+ */
+type Metafield = {
+    value: string
+    key: string
+}
+type Metafields = Metafield[]
+type ShopifyCollection = {
+    handle: string
+    id: string
+    products: ShopifyProduct[]
+    title: string
 }
 
 export type AllShopifyProduct = {
@@ -28,11 +44,11 @@ export type ShopifyMediaImage = {
 }
 
 export type ShopifyProduct = {
-    shopifyId: string
-    title: string
-    handle: string
     description: string
-
+    featuredMedia: ShopifyMediaImage
+    handle: string
+    id: string
+    metafields: Metafields
     priceRangeV2: {
         minVariantPrice: {
             amount: number
@@ -41,31 +57,30 @@ export type ShopifyProduct = {
             amount: number
         }
     }
-
-    featuredMedia: ShopifyMediaImage
-
     options: ProductVariantOption[]
-
+    shopifyId: string
     status: string
-
+    tags: string[]
+    title: string
+    totalInventory: number
     variants: ShopifyProductVariant[]
 }
 
 export type ShopifyProductVariant = {
-    shopifyId: string
-    title: string
-    price: number
     availableForSale: boolean
-    sku: string
-    selectedOptions: {
-        name: string
-        value: string
-    }[]
+    media: ShopifyMediaImage[]
+    price: number
     product: {
         title: string
         featuredMedia: ShopifyMediaImage
     }
-    media: ShopifyMediaImage[]
+    selectedOptions: {
+        name: string
+        value: string
+    }[]
+    shopifyId: string
+    sku: string
+    title: string
 }
 
 interface Image {
@@ -129,7 +144,7 @@ export type AdjustedLineItem = {
 }
 
 /**
- * api response
+ * Cart API
  */
 
 export interface Product {
@@ -186,4 +201,58 @@ export type CreateCartResponse = {
         }
         userErrors?: CreateCartResponseError
     }
+}
+
+/**
+ * Gatsby source nodes
+ */
+
+export type MetaobjectsCollection = Pick<ShopifyCollection, 'handle' | 'title'>
+
+export interface MetaobjectsReferencesEdge {
+    node: MetaobjectsCollection
+}
+
+interface MetaobjectsFields {
+    references: {
+        edges: MetaobjectsReferencesEdge[]
+    }
+}
+
+interface MetaobjectsNode {
+    fields: MetaobjectsFields
+}
+
+interface MetaobjectsEdge {
+    node: MetaobjectsNode
+}
+
+interface Metaobjects {
+    edges: MetaobjectsEdge[]
+}
+
+export interface MetaobjectsResponseData {
+    data: { metaobjects: Metaobjects }
+}
+
+/**
+ * Gatsby page creation
+ */
+export interface MerchNavItems extends MetaobjectsCollection {
+    url: string
+}
+
+export interface GatsbyContentResponse {
+    data: {
+        allMerchNavigation: {
+            nodes: MetaobjectsCollection[]
+        }
+        allShopifyCollection: {
+            nodes: ShopifyCollection[]
+        }
+        allShopifyProduct: {
+            nodes: Pick<ShopifyProduct, 'handle'>[]
+        }
+    }
+    error: GraphQLError[]
 }

@@ -3,6 +3,11 @@ import fetch from 'node-fetch'
 import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
 import { MenuBuilder } from 'redoc'
+import type {
+    MetaobjectsCollection,
+    MetaobjectsReferencesEdge,
+    MetaobjectsResponseData,
+} from '../src/templates/merch/types'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -289,53 +294,64 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         createNode(node)
     })
 
-    // TODO extract shopify URL to env variable
-    // add types
-    // add error handling
-    const response = await fetch(`https://posthog.myshopify.com/admin/api/2023-07/graphql.json`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Access-Token': process.env.SHOPIFY_APP_PASSWORD!,
-        },
-        body: JSON.stringify({
-            query: `
-            {
-                metaobjects(type: "merch_navigation", first: 100) {
-                    edges {
-                      node {
-                        fields {
-                          references(first: 5) {
-                            edges {
-                              node {
-                                __typename
-                                ...on Collection {
-                                  title
-                                  handle
-                                  id
-                                }    
+    /**
+     * Source a list of metaobjects from shopify representing the nav list of collections
+     * and create new Gatsby nodes
+     */
+    const shopifyURL = process.env.GATSBY_MYSHOPIFY_URL
+    const shopifyStorefrontAPIVersion = process.env.GATSBY_SHOPIFY_STOREFRONT_API_VERSION
+    const shopifyStorefrontAPIPassword = process.env.SHOPIFY_APP_PASSWORD
+
+    let responseData: MetaobjectsResponseData | undefined
+
+    try {
+        const response = await fetch(`https://${shopifyURL}/admin/api/${shopifyStorefrontAPIVersion}/graphql.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Access-Token': shopifyStorefrontAPIPassword!,
+            },
+            body: JSON.stringify({
+                query: `
+                {
+                    metaobjects(type: "merch_navigation", first: 100) {
+                        edges {
+                          node {
+                            fields {
+                              references(first: 5) {
+                                edges {
+                                  node {
+                                    ...on Collection {
+                                      title
+                                      handle
+                                    }    
+                                  }
+                                }
                               }
                             }
                           }
                         }
                       }
-                    }
                   }
-              }
-              
-          `,
-        }),
-    })
+                  
+              `,
+            }),
+        })
 
-    const { data } = await response.json()
+        responseData = (await response.json()) as MetaobjectsResponseData
+    } catch (error) {
+        throw new Error(error)
+    }
 
     // we want the collection "All Products" to always be at the top of the list
-    const collections = data.metaobjects.edges[0].node.fields[0].references.edges
-        .map((item) => ({
+    const collections: MetaobjectsCollection[] = responseData.data.metaobjects.edges[0].node.fields[0].references.edges
+        .map((item: MetaobjectsReferencesEdge) => ({
             title: item.node.title,
             handle: item.node.handle,
         }))
-        .sort((a, b) => (a.handle === 'all-products' ? -1 : b.handle === 'all-products' ? 1 : 0))
+        .sort((a: MetaobjectsCollection, b: MetaobjectsCollection) =>
+            a.handle === 'all-products' ? -1 : b.handle === 'all-products' ? 1 : 0
+        )
 
     collections.forEach((collection, i) => {
         const node = {

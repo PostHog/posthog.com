@@ -4,6 +4,7 @@ import path from 'path'
 import slugify from 'slugify'
 import { node } from 'webpack'
 import menu from '../src/navs/index'
+import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
@@ -34,7 +35,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
-    const result = await graphql(`
+    const result = (await graphql(`
         {
             allMdx(
                 filter: {
@@ -339,24 +340,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 nodes {
                     handle
                     products {
-                        id
-                        title
-                        handle
-                        shopifyId
                         description
-                        metafields {
-                            value
-                            key
-                        }
-                        priceRangeV2 {
-                            maxVariantPrice {
-                                amount
-                            }
-                            minVariantPrice {
-                                amount
-                            }
-                        }
-                        status
                         featuredMedia {
                             preview {
                                 image {
@@ -368,19 +352,44 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                 }
                             }
                         }
+                        handle
+                        id
+                        metafields {
+                            value
+                            key
+                        }
                         options {
                             shopifyId
                             name
                             values
                         }
+                        priceRangeV2 {
+                            maxVariantPrice {
+                                amount
+                            }
+                            minVariantPrice {
+                                amount
+                            }
+                        }
+                        shopifyId
+                        status
+                        title
                         tags
                         totalInventory
                         variants {
-                            shopifyId
-                            title
-                            sku
-                            price
                             availableForSale
+                            media {
+                                preview {
+                                    image {
+                                        localFile {
+                                            childImageSharp {
+                                                gatsbyImageData
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            price
                             product {
                                 title
                                 featuredMedia {
@@ -395,44 +404,35 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                     }
                                 }
                             }
-                            media {
-                                preview {
-                                    image {
-                                        localFile {
-                                            childImageSharp {
-                                                gatsbyImageData
-                                            }
-                                        }
-                                    }
-                                }
-                            }
                             selectedOptions {
                                 name
                                 value
                             }
+                            shopifyId
+                            sku
+                            title
                         }
                     }
                 }
             }
             allMerchNavigation {
                 nodes {
-                    url
                     title
                     handle
                 }
             }
         }
-    `)
+    `)) as GatsbyContentResponse
 
-    if (result.errors) {
-        return Promise.reject(result.errors)
+    if (result.error) {
+        return Promise.reject(result.error)
     }
 
     /**
-     * Merch pages
+     * Merch
      */
 
-    const merchNav = result.data.allMerchNavigation.nodes?.map((item) => {
+    const merchNav = result.data.allMerchNavigation.nodes?.map((item: MetaobjectsCollection) => {
         if (item.handle === 'all-products') {
             return {
                 url: '/merch',
