@@ -1,7 +1,7 @@
 import { RadioGroup } from '@headlessui/react'
-import React, { type Dispatch, type SetStateAction } from 'react'
+import React from 'react'
 import { cn } from '../../utils'
-import { ProductVariantOption } from './types'
+import { ProductVariantOption, ProductVariantSelection } from './types'
 
 const colorClasses: Record<string, string> = {
     white: 'bg-[#FFF]',
@@ -9,10 +9,11 @@ const colorClasses: Record<string, string> = {
 }
 
 type ProductOptionSelectProps = {
-    onChange: Dispatch<SetStateAction<string | null>>
+    onChange: (val: string) => void
     className?: string
     option: ProductVariantOption
     value: string | null
+    selections: ProductVariantSelection[]
 }
 
 export function ProductOptionSelect(props: ProductOptionSelectProps): React.ReactElement | null {

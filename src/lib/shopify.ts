@@ -6,13 +6,17 @@ type ShopifyHeaders = {
     'X-Shopify-Storefront-Access-Token': string
 }
 
-const SHOPIFY_GRAPHQL_URL = `https://${process.env.GATSBY_MYSHOPIFY_URL}/api/2022-10/graphql.json`
+const shopifyURL = process.env.GATSBY_MYSHOPIFY_URL
+const shopifyStorefrontAPIVersion = process.env.GATSBY_SHOPIFY_STOREFRONT_API_VERSION
+const shopifyStorefrontAPIPassword = process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN
 
-const SHOPIFY_HEADERS: ShopifyHeaders = {
+const shopifyStorefrontUrl = `https://${shopifyURL}/api/${shopifyStorefrontAPIVersion}/graphql.json`
+
+const shopifyHeaders: ShopifyHeaders = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    'X-Shopify-Storefront-Access-Token': process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN!,
+    'X-Shopify-Storefront-Access-Token': shopifyStorefrontAPIPassword!,
 }
 
 /**
@@ -86,9 +90,9 @@ export const CREATE_CART = `
 `
 
 export const createCartQuery = (variables: CreateCartVariables): Promise<CreateCartResponse | void> =>
-    fetch(SHOPIFY_GRAPHQL_URL, {
+    fetch(shopifyStorefrontUrl, {
         method: 'POST',
-        headers: SHOPIFY_HEADERS,
+        headers: shopifyHeaders,
         body: JSON.stringify({
             query: CREATE_CART,
             variables,

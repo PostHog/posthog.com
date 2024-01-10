@@ -10,22 +10,26 @@ type ProductGridProps = {
     products: ShopifyProduct[]
 }
 
-function getProductFromHandle(products, handle) {
-    return products.find((p) => p.handle === handle)
+function getProductFromHandle(products: ShopifyProduct[], handle: string) {
+    return products.find((p) => p.handle === handle) || null
 }
 
 export default function ProductGrid(props: ProductGridProps): React.ReactElement {
     const { className, products } = props
-    const [sidePanels, setSidePanels] = useState({ isOpen: false, product: null, animateOpen: true })
+    const [sidePanels, setSidePanels] = useState<{
+        isOpen: boolean
+        product: ShopifyProduct | null
+        animateOpen?: boolean
+    }>({ isOpen: false, product: null, animateOpen: true })
 
     /**
      * when clicking a product card, add its handle to the URL and open
      * the product drawer
      */
-    const updateURL = (product) => {
+    const updateURL = (product: ShopifyProduct) => {
         if (typeof window !== 'undefined') {
-            const url = new URL(window.location)
-            url.searchParams.set('product', product.handle) // replace 'param' and 'value' with your query parameter and value
+            const url: URL = new URL(window.location.href)
+            url.searchParams.set('product', product.handle)
             window.history.pushState({}, '', url)
         }
         setSidePanels({ product, isOpen: true })
@@ -39,7 +43,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const urlParams = new URLSearchParams(window.location.search)
-            const paramName = urlParams.get('product') // replace 'param' with your query parameter
+            const paramName = urlParams.get('product')
             if (paramName) {
                 setSidePanels({ product: getProductFromHandle(products, paramName), isOpen: true, animateOpen: false })
             }
@@ -77,10 +81,13 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
             <Drawer
                 removeScroll
                 isOpen={sidePanels.isOpen}
-                // for when we have a query param for "product" in the URL, we just want it to be open and not animate
+                /**
+                 * for when we have a query param for "product" in the URL, we want it to be
+                 * already open and not animate in
+                 */
                 animateOpen={sidePanels.animateOpen}
                 onClose={() => {
-                    const url = new URL(window.location)
+                    const url: URL = new URL(window.location.href)
                     url.searchParams.delete('product')
                     window.history.pushState({}, '', url)
                     setSidePanels((prev) => ({ ...prev, isOpen: false, animateOpen: true }))

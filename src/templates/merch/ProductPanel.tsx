@@ -1,6 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
+import { ShopifyProduct } from 'templates/merch/types'
 import { cn } from '../../utils'
 import { LoaderIcon } from './LoaderIcon'
 import { Price } from './Price'
@@ -12,6 +13,9 @@ import { getProductMetafield } from './utils'
 
 type ProductPanelProps = {
     className?: string
+    product: ShopifyProduct
+    setIsCart: React.Dispatch<React.SetStateAction<boolean>>
+    onClick: () => void
 }
 
 export function ProductPanel(props: ProductPanelProps): React.ReactElement {
@@ -19,17 +23,12 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     const [isAdding, setIsAdding] = useState<boolean>(false)
     const [quantity, setQuantity] = useState<number>(1)
-    const addToCart = useCartStore((state) => state.add)
+    const addToCart = useCartStore((state) => state.update)
 
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
 
-    const [
-        selectedOptions,
-        setOptionAtIndex,
-        selections,
-        selectedVariant, // use this for add to cart
-    ] = useProduct({ product })
+    const [selectedOptions, setOptionAtIndex, selections, selectedVariant] = useProduct({ product })
 
     const handleAddToCart = () => {
         setIsAdding(true)
@@ -66,8 +65,10 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </p>
             </div>
 
-            {selectedOptions.length > 1 &&
-                selectedOptions.map((so, i) => {
+            {selectedOptions
+                .map((so, i) => {
+                    if (so.selectedValue === 'Default Title') return null
+
                     return (
                         <ProductOptionSelect
                             key={i}
@@ -77,18 +78,21 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                             selections={selections}
                         />
                     )
-                })}
+                })
+                .filter(Boolean)}
 
             <Quantity value={quantity} onChange={setQuantity} />
 
             <CallToAction onClick={handleAddToCart} type="primary" className="relative w-full">
-                <span className={cn('', isAdding && 'invisible')}>Add to Cart</span>
-                <LoaderIcon
-                    className={cn(
-                        'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
-                        isAdding && 'visible'
-                    )}
-                />
+                <>
+                    <span className={cn('', isAdding && 'invisible')}>Add to Cart</span>
+                    <LoaderIcon
+                        className={cn(
+                            'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
+                            isAdding && 'visible'
+                        )}
+                    />
+                </>
             </CallToAction>
             {product.description && (
                 <div className="border-t border-light dark:border-dark pt-4">

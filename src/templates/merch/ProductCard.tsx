@@ -1,8 +1,6 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { cn } from '../../utils'
-import { useProduct } from './hooks'
-import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 
@@ -14,23 +12,9 @@ type ProductCardProps = {
 
 export function ProductCard(props: ProductCardProps): React.ReactElement {
     const { className, product, onClick } = props
-    const addToCart = useCartStore((state) => state.add)
-    const setCartIsOpen = useCartStore((state) => state.setIsOpen)
 
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
-
-    const [
-        selectedOptions,
-        setOptionAtIndex,
-        selections,
-        selectedVariant, // use this for add to cart
-    ] = useProduct({ product })
-
-    const handleAddToCart = (product: ShopifyProduct) => {
-        addToCart(product.variants[0])
-        setCartIsOpen(true)
-    }
 
     const classes = cn('group relative flex flex-col gap-2', className)
 
@@ -58,26 +42,6 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                     />
                 </div>
             </div>
-
-            {/* {selectedOptions.map((so, i) => {
-                return (
-                    <ProductOptionSelect
-                        key={i}
-                        className="my-4"
-                        option={so.option}
-                        onChange={(val) => setOptionAtIndex(i, so.option, val)}
-                        value={so.selectedValue}
-                        selections={selections}
-                    />
-                )
-            })} */}
-
-            {/* <button
-                className="rounded bg-black px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                onClick={() => handleAddToCart(product)}
-            >
-                Add to cart
-            </button> */}
         </div>
     )
 }

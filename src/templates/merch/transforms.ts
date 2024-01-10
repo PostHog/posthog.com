@@ -1,5 +1,5 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image'
-import { ShopifyProductVariant } from './types'
+import { ShopifyProduct, ShopifyProductVariant } from './types'
 
 export function getLineItemImage(variant: ShopifyProductVariant): IGatsbyImageData | null {
     if (variant.media.length) {
@@ -17,14 +17,14 @@ export function shopifyGidToId(gid: string): string {
     return gid.replace(/gid:\/\/shopify\/\w+\//, '')
 }
 
-export function getProduct(product) {
+export function getProduct(product: ShopifyProduct): ShopifyProduct {
     return {
         ...product,
         variants: product.variants.map((v) => getVariant(v, product)),
     }
 }
 
-export function getVariant(variant, product) {
+export function getVariant(variant: ShopifyProductVariant, product: ShopifyProduct): ShopifyProductVariant {
     return {
         ...variant,
         product: {

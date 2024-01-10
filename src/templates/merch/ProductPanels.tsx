@@ -2,18 +2,22 @@ import React, { useState } from 'react'
 import { cn } from '../../utils'
 import { Cart } from './Cart'
 import { ProductPanel } from './ProductPanel'
+import { ShopifyProduct } from './types'
 
 type ProductPanelsProps = {
     className?: string
+    product: ShopifyProduct | null
 }
 
-export function ProductPanels(props: ProductPanelsProps): React.ReactElement {
+export function ProductPanels(props: ProductPanelsProps): React.ReactElement | null {
     const { className, product } = props
-    const [isCart, setIsCart] = useState(false)
+    const [isCart, setIsCart] = useState<boolean>(false)
 
     function handle() {
         setIsCart((prev) => !prev)
     }
+
+    if (!product) return null
 
     return (
         <div

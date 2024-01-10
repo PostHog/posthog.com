@@ -1,11 +1,14 @@
 import type { IGatsbyImageData } from 'gatsby-plugin-image'
 import { GraphQLError } from 'graphql'
 
-export type MerchPageContext = {
+export type CollectionPageContext = {
     currentPage: number
     limit: number
-    numCollectionPages: number
+    numPages: number
     skip: number
+    merchNav: MerchNavItems
+    handle: string
+    productsForCurrentPage: ShopifyProduct[]
 }
 
 export type ImageLocalFile = {
@@ -17,12 +20,14 @@ export type ImageLocalFile = {
 /**
  * Shopify
  */
-type Metafield = {
-    value: string
-    key: string
+export type MetafieldValue = string | number | Record<'string', unknown>
+export type MetafieldKey = string
+export type Metafield = {
+    value: MetafieldValue
+    key: MetafieldKey
 }
 type Metafields = Metafield[]
-type ShopifyCollection = {
+export type ShopifyCollection = {
     handle: string
     id: string
     products: ShopifyProduct[]
@@ -70,10 +75,7 @@ export type ShopifyProductVariant = {
     availableForSale: boolean
     media: ShopifyMediaImage[]
     price: number
-    product: {
-        title: string
-        featuredMedia: ShopifyMediaImage
-    }
+    product: Pick<ShopifyProduct, 'title' | 'featuredMedia' | 'tags'>
     selectedOptions: {
         name: string
         value: string
@@ -111,10 +113,13 @@ export type ProductVariantOption = {
     values: string[]
 }
 
-interface SelectedOption {
-    name: string
-    value: string
+export type SelectedOption = {
+    selectedValue: string
+    selected: ProductVariantSelection | null
+    option: ProductVariantOption
 }
+
+export type SelectedOptions = SelectedOption[]
 
 /**
  * cart
@@ -238,7 +243,7 @@ export interface MetaobjectsResponseData {
 /**
  * Gatsby page creation
  */
-export interface MerchNavItems extends MetaobjectsCollection {
+export type MerchNavItems = MetaobjectsCollection & {
     url: string
 }
 

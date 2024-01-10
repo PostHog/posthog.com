@@ -1,19 +1,17 @@
+import { IconMinus, IconPlus } from '@posthog/icons'
 import { useControllableValue } from 'ahooks'
-import { CallToAction } from 'components/CallToAction'
 import React from 'react'
 import { cn } from '../../utils'
-import { IconPlus, IconMinus } from '@posthog/icons'
 
 type QuantityProps = {
     className?: string
     value?: number
     defaultValue?: number
     onChange?: React.Dispatch<React.SetStateAction<number>>
-    buttonSize?: string
 }
 
 export function Quantity(props: QuantityProps): React.ReactElement {
-    const { className, buttonSize, ...rest } = props
+    const { className, ...rest } = props
     const [quantity, setQuantity] = useControllableValue(rest, { defaultValue: 1 })
 
     const decreaseQuantity = () => {
@@ -26,7 +24,7 @@ export function Quantity(props: QuantityProps): React.ReactElement {
         setQuantity(quantity + 1)
     }
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = Number(event.target.value)
 
         if (newValue >= 1) {

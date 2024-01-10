@@ -7,6 +7,7 @@ import { navigate } from 'gatsby'
 import React, { Fragment, useState } from 'react'
 import { Cart } from './Cart'
 import { useCartStore } from './store'
+import type { ShopifyCollection } from './types'
 
 type NavItem = {
     url: string
@@ -17,11 +18,12 @@ type NavProps = {
     className?: string
     items?: NavItem[]
     currentCollectionHandle?: string
-    setCartIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setCartIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
     cartIsOpen?: boolean
 }
 
 export function Nav(props: NavProps): React.ReactElement {
+    console.log('🚀 ~ props:', props)
     const { currentCollectionHandle, items = [], ...rest } = props
     const count = useCartStore((state) => state.count)
     const [cartIsOpen, setCartIsOpen] = useControllableValue<boolean>(rest, {
@@ -49,10 +51,10 @@ export function Nav(props: NavProps): React.ReactElement {
                      * If you're on a product page
                      */}
                     {!currentCollectionHandle && <Link to="/merch">&lt; Collections</Link>}
+
                     {/**
                      * If you're on a collection page
                      */}
-
                     {currentCollectionHandle && (
                         <div>
                             <Listbox value={currentCollection} onChange={handleChange}>
@@ -87,7 +89,7 @@ export function Nav(props: NavProps): React.ReactElement {
                                                 }
                                                 value={collection}
                                             >
-                                                {({ currentCollection }) => (
+                                                {({ currentCollection }: { currentCollection: ShopifyCollection }) => (
                                                     <>
                                                         <span
                                                             className={`block truncate ${
@@ -125,7 +127,7 @@ export function Nav(props: NavProps): React.ReactElement {
                                 />
                             </svg>
                             <span className="font-semibold text-[15px] opacity-75 group-hover:opacity-100">
-                                {count()}
+                                {count || 0}
                             </span>
                         </div>
                     </div>

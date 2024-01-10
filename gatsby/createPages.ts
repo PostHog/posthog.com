@@ -433,15 +433,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
      */
 
     const merchNav = result.data.allMerchNavigation.nodes?.map((item: MetaobjectsCollection) => {
-        if (item.handle === 'all-products') {
-            return {
-                url: '/merch',
-                handle: item.handle,
-                title: item.title,
-            }
+        return {
+            url: item.handle === 'all-products' ? '/merch' : `/merch/${item.handle}`,
+            handle: item.handle,
+            title: item.title,
         }
-
-        return item
     })
 
     /**

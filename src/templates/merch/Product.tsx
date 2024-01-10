@@ -11,20 +11,28 @@ import { ProductOptionSelect } from './ProductOptionSelect'
 import { Quantity } from './Quantity'
 import { useProduct } from './hooks'
 import { useCartStore } from './store'
+import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 
 type ProductPageProps = {
     className?: string
+    data: {
+        shopifyProduct: ShopifyProduct
+    }
+    pageContext: {
+        handle: Pick<ShopifyProduct, 'handle'>
+    }
 }
 
 export default function Product(props: ProductPageProps): React.ReactElement {
-    const { data, pageContext } = props
+    console.log('🚀 ~ props:', props)
+    const { data } = props
     const product = data.shopifyProduct
     const [cartIsOpen, setCartIsOpen] = useState<boolean>(false)
 
     const [isAdding, setIsAdding] = useState<boolean>(false)
     const [quantity, setQuantity] = useState<number>(1)
-    const addToCart = useCartStore((state) => state.add)
+    const addToCart = useCartStore((state) => state.update)
 
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
@@ -90,13 +98,15 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                         <Quantity value={quantity} onChange={setQuantity} />
 
                         <CallToAction onClick={handleAddToCart} type="primary" className="relative w-full">
-                            <span className={cn('', isAdding && 'invisible')}>Add to Cart</span>
-                            <LoaderIcon
-                                className={cn(
-                                    'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
-                                    isAdding && 'visible'
-                                )}
-                            />
+                            <>
+                                <span className={cn('', isAdding && 'invisible')}>Add to Cart</span>
+                                <LoaderIcon
+                                    className={cn(
+                                        'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
+                                        isAdding && 'visible'
+                                    )}
+                                />
+                            </>
                         </CallToAction>
                         {product.description && (
                             <div className="border-t border-light dark:border-dark pt-4">

@@ -1,34 +1,35 @@
 import { useState } from 'react'
-import type { ProductVariantOption, ProductVariantSelection, ShopifyProduct, ShopifyProductVariant } from './types'
+import type {
+    ProductVariantOption,
+    ProductVariantSelection,
+    SelectedOptions,
+    ShopifyProduct,
+    ShopifyProductVariant,
+} from './types'
 
 type getVariantOptionArgs = {
     name: string
-    variant: ShopifyProductVariant | undefined
+    variant: ShopifyProductVariant
     options: ProductVariantOption[]
 }
 
-function getVariantOption({ name, variant, options }: getVariantOptionArgs):
-    | { selectedValue: null; selected: null; option: null }
-    | {
-          selectedValue: string
-          selected: ProductVariantSelection | undefined
-          option: ProductVariantOption | undefined
-      } {
-    if (!variant) {
-        return { selectedValue: null, selected: null, option: null }
-    }
+function getVariantOption({ name, variant, options }: getVariantOptionArgs): {
+    selectedValue: string
+    selected: ProductVariantSelection | null
+    option: ProductVariantOption
+} {
+    const variantOption = options.find((opt) => opt.name.toLowerCase() === name.toLowerCase()) || options[0]
 
-    const variantOption = options.find((opt) => opt.name.toLowerCase() === name.toLowerCase() || null)
-
-    const initialVariantOptionValue = variant?.selectedOptions?.find(
+    const initialVariantOptionValue = variant.selectedOptions.find(
         (o) => o.name.toLowerCase() === name?.toLowerCase()
     )?.value
 
-    const initialVariantOption = variantOption?.values.find((value) => value === initialVariantOptionValue)
+    const initialVariantOption = variantOption.values.find((value) => value === initialVariantOptionValue) || ''
 
-    const selectedValue = initialVariantOption === 'Default Title' ? null : initialVariantOption ?? null
+    const selectedValue = initialVariantOption
 
-    let selected
+    let selected: ProductVariantSelection | null = null
+
     if (name && selectedValue) {
         selected = { name, value: selectedValue }
     }
@@ -36,19 +37,21 @@ function getVariantOption({ name, variant, options }: getVariantOptionArgs):
     return { selectedValue, selected, option: variantOption }
 }
 
+type setOptionAtIndexArgs = [index: number, option: ProductVariantOption, val: string]
+
 export function useProduct({
     product,
 }: {
     product: ShopifyProduct
-}): [ProductVariantOption[], void, ProductVariantSelection, ShopifyProductVariant] {
+}): [SelectedOptions, (...args: setOptionAtIndexArgs) => void, ProductVariantSelection[], ShopifyProductVariant] {
     const { options, variants } = product
 
-    const initialVariant = variants.find((v) => v.availableForSale)
+    const initialVariant = variants.find((v) => v.availableForSale) || variants[0]
 
     const [selectedOptions, setSelectedOptions] = useState(
         options.map((_, index) =>
             getVariantOption({
-                name: options[index]?.name,
+                name: options[index].name,
                 variant: initialVariant,
                 options: options,
             })
@@ -57,14 +60,14 @@ export function useProduct({
 
     const [selectedVariant, setSelectedVariant] = useState(initialVariant)
 
-    const selections = selectedOptions.map((so) => so.selected).filter(Boolean)
+    const selections = selectedOptions.map((so) => so.selected).filter(Boolean) as ProductVariantSelection[]
 
-    const setOptionAtIndex = (index: number, option: ProductVariantOption, val: string) => {
-        const newVariant = selections.length
-            ? variants.find(
-                  (variant) => variant.selectedOptions.findIndex((o) => o.name === option.name && o.value === val) > -1
-              )
-            : product.variants[0]
+    const setOptionAtIndex = (...args: setOptionAtIndexArgs) => {
+        const [index, option, val] = args
+        const newVariant =
+            variants.find(
+                (variant) => variant.selectedOptions.findIndex((o) => o.name === option.name && o.value === val) > -1
+            ) || product.variants[0]
 
         setSelectedVariant(newVariant)
 
@@ -81,6 +84,5 @@ export function useProduct({
         )
     }
 
-    // return the selected options and the function to modify an option at a specific index
     return [selectedOptions, setOptionAtIndex, selections, selectedVariant]
 }

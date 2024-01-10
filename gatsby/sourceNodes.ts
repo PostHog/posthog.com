@@ -299,17 +299,17 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
      * and create new Gatsby nodes
      */
     const shopifyURL = process.env.GATSBY_MYSHOPIFY_URL
-    const shopifyStorefrontAPIVersion = process.env.GATSBY_SHOPIFY_STOREFRONT_API_VERSION
-    const shopifyStorefrontAPIPassword = process.env.SHOPIFY_APP_PASSWORD
+    const shopifyAdminAPIVersion = process.env.GATSBY_SHOPIFY_ADMIN_API_VERSION
+    const shopifyAdminAPIAPIPassword = process.env.SHOPIFY_APP_PASSWORD
 
     let responseData: MetaobjectsResponseData | undefined
 
     try {
-        const response = await fetch(`https://${shopifyURL}/admin/api/${shopifyStorefrontAPIVersion}/graphql.json`, {
+        const response = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-Shopify-Access-Token': shopifyStorefrontAPIPassword!,
+                'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
             },
             body: JSON.stringify({
                 query: `
@@ -320,12 +320,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                             fields {
                               references(first: 5) {
                                 edges {
-                                  node {
-                                    ...on Collection {
-                                      title
-                                      handle
-                                    }    
-                                  }
+                                    node {
+                                        __typename
+                                        ...on Collection {
+                                          title
+                                          handle
+                                          id
+                                        }    
+                                    }
                                 }
                               }
                             }
@@ -366,6 +368,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 contentDigest: createContentDigest(collection),
             },
         }
+        console.log('🚀 ~ node:', node)
 
         createNode(node)
     })
