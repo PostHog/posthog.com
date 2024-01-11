@@ -13,7 +13,7 @@ import EventsInPostHogDark from '../images/tutorials/bubble-ab-tests/events-in-p
 import TestSetupLight from '../images/tutorials/bubble-ab-tests/test-setup-light.png'
 import TestSetupDark from '../images/tutorials/bubble-ab-tests/test-setup-dark.png'
 
-[Bubble](https://bubble.io/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change will actually improve your conversion rate. This is where [A/B testing](/ab-testing) is helpful. It enables you to test and compare the results of your changes.
+[Bubble](https://bubble.io/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change actually improves your conversion rate. This is where [A/B testing](/ab-testing) is helpful. It enables you to test and compare the results of your changes.
 
 This tutorial shows you how to set up A/B tests with Bubble and PostHog to get the most out of your website.
 
@@ -36,9 +36,9 @@ Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in
 
 ## 2. Capture a custom event
 
-We're going to create an A/B test comparing how the text of a button affects it's click-through rate. To compare the results, we first capture a custom event and then set it as our [goal metric](/product-engineers/ab-testing-guide-for-engineers#1-a-clear-measurable-goal) for our A/B test. 
+We're going to create an A/B test comparing how a button's text affects its click-through rate. To compare the results, we first capture a custom event and then set it as our [goal metric](/product-engineers/ab-testing-guide-for-engineers#1-a-clear-measurable-goal) for our A/B test. 
 
-Here are the steps to follow to capture this event:
+To capture this event:
 
 1. Install the [Bubble Toolbox plugin](https://bubble.io/plugin/toolbox-1488796042609x768734193128308700). This enables us to run custom JavaScript code when the button is pressed.
 
@@ -65,13 +65,13 @@ Finally, deploy your changes to live and then click your new button to [see the 
 
 ## 3. Create an A/B test in PostHog
 
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card details, but don't worry, we have a [generous free tier](/pricing) of 1 million free requests – so you won't be charged anything yet.
+If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card details, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 
 1. Name it "Bubble button experiment".
 2. Set "Feature flag key" to `bubble-button-experiment`.
-3. Under the experiment goal, select the `ab_test_button_clicked` we created in the previous step.
+3. Under the experiment goal, select the `ab_test_button_clicked` event we created in the previous step.
 4. Use the default values for all other fields.
 
 Click "Save as draft" and then click "Launch".
@@ -85,7 +85,7 @@ Click "Save as draft" and then click "Launch".
 
 ## 4. Implement the A/B test in Bubble
 
-The final step is to add the experiment code in Bubble. Here we'll add code that does the following:
+The final step is to add the experiment code in Bubble. We need to add code that does the following:
 
 1. Fetch the `bubble-button-experiment` flag.
 2. Change the title of the button based on whether the value of the flag is `control` or `test`.
@@ -114,7 +114,7 @@ Finally, deploy your changes to live.
 
 ![Add script in Framer](../images/tutorials/bubble-ab-tests/add-flag-code.mp4)
 
-That's it! Your A/B test is now live. Half your users will see the updated button text and PostHog will track whether it has an impact on your click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
+That's it! Your A/B test is now live. PostHog will split your users so half see the updated button text and tracks whether it has an impact on your click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
 
 If you want to test each variant of your experiment to make sure it is working correctly, add the line `posthog.featureFlags.override({'bubble-button-experiment': 'variant_name'})` to your code:
 
