@@ -13,7 +13,7 @@ featuredImageType: full
 
 One of the great things about being open source is that we’ve grown a vibrant community around the project. Since launch we’ve accepted code from over 500 contributors and swapped ideas with thousands of users in our public Slack group. 
 
-Now though, we’re closing that Slack group to create a better, stronger, and more helpful PostHog community [here on our site](/questions). In this post, I’ll explain why we’re doing this, and what comes next. 
+Now, though, we’re closing that Slack group in favor of creating a better, more scalable, and helpful PostHog community [here on our site](/questions). In this post, I’ll explain why we’re doing this, and what comes next. 
 
 > **TL;DR:** We’re closing the Slack group on Jan 24 2024 and inviting members to join the 1,500 users who have already moved to the [new community forum](/questions). As thanks you'll receive a unique community achievement when you create an account. This decision only impacts the public Slack group, not private Slack channels for users who pay for additional support.
 
