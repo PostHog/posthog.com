@@ -1,4 +1,5 @@
 import { Placement } from '@popperjs/core'
+import * as icons from '@posthog/icons'
 import {
     IconApp,
     IconBrightness,
@@ -26,6 +27,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { usePopper } from 'react-popper'
 import { layoutLogic } from '../../logic/layoutLogic'
+import { DarkModeToggle } from 'components/DarkModeToggle'
 
 export default function Orders() {
     const { user, getJwt } = useUser()
