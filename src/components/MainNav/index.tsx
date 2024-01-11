@@ -1,33 +1,31 @@
-import Logo from 'components/Logo'
-import { useActions, useValues } from 'kea'
-import { layoutLogic } from '../../logic/layoutLogic'
-import Link from 'components/Link'
-import { useSearch } from 'components/Search/SearchContext'
+import { Placement } from '@popperjs/core'
 import {
     IconApp,
     IconBrightness,
     IconChat,
-    IconExternal,
     IconChevronDown,
+    IconExternal,
     IconSearch,
     IconTextWidth,
     IconUser,
 } from '@posthog/icons'
-import { Placement } from '@popperjs/core'
-import React, { useEffect, useRef, useState } from 'react'
-import { usePopper } from 'react-popper'
-import { useLayoutData } from 'components/Layout/hooks'
 import { useLocation } from '@reach/router'
-import Toggle from 'components/Toggle'
-import usePostHog from 'hooks/usePostHog'
-import HoverTooltip from 'components/Tooltip'
-import { SignupCTA } from 'components/SignupCTA'
 import { CallToAction } from 'components/CallToAction'
-import { useInView } from 'react-intersection-observer'
+import { useLayoutData } from 'components/Layout/hooks'
+import Link from 'components/Link'
+import Logo from 'components/Logo'
+import { useSearch } from 'components/Search/SearchContext'
+import { SignupCTA } from 'components/SignupCTA'
+import Toggle from 'components/Toggle'
+import HoverTooltip from 'components/Tooltip'
 import dayjs from 'dayjs'
+import usePostHog from 'hooks/usePostHog'
 import { useUser } from 'hooks/useUser'
-import Icon from 'components/Home/Icon'
-import * as icons from '@posthog/icons'
+import { useActions, useValues } from 'kea'
+import React, { useEffect, useRef, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { usePopper } from 'react-popper'
+import { layoutLogic } from '../../logic/layoutLogic'
 
 export default function Orders() {
     const { user, getJwt } = useUser()
@@ -67,8 +65,8 @@ export default function Orders() {
                                         <p className="m-0 text-sm font-bold opacity-60">#{orderNumber}</p>
                                         <p className="m-0 text-xs">{dayjs(date).format('MM/DD/YYYY')}</p>
                                     </span>
+                                    <IconExternal className="w-4 opacity-50" />
                                 </Link>
-                                <IconExternal className="opacity-50 inline-block w-6" />
                             </li>
                         )
                     })}
