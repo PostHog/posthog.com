@@ -15,11 +15,11 @@ interface DrawerProps {
 export const Drawer = (props: DrawerProps): React.ReactElement => {
     const { children, className, isOpen, onClose, animateOpen = true } = props
 
-    const classes = cn('relative min-h-full h-screen w-[600px] max-w-full md:max-w-[90%]', className)
+    const classes = cn('scrollbar-hide relative min-h-full h-screen w-[600px] max-w-full md:max-w-[90%]', className)
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
-            <Dialog as="div" className="relative z-[9999999]" onClose={onClose}>
+            <Dialog as="div" className="drawer relative z-[9999999]" onClose={onClose}>
                 <Transition.Child
                     as={Fragment}
                     enter={cn('ease-out duration-[0s]', animateOpen && 'duration-300')}

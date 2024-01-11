@@ -1339,6 +1339,18 @@ div:not(.default-scrollbar)::-webkit-scrollbar-thumb:hover {
     background: #b0bec5;
 }
 
+/* Remove scrollbars inside of merch drawer */
+.drawer div::-webkit-scrollbar-track {
+    background: rgb(35, 36, 41);
+}
+.drawer div::-webkit-scrollbar-thumb {
+    background: black;
+}
+.drawer div::-webkit-scrollbar {
+    margin-left: none;
+    width: 0px;
+}
+
 @media screen and (max-width: 834px) {
     li {
         font-size: 16px;
