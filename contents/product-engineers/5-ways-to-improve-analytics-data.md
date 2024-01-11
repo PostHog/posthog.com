@@ -61,7 +61,7 @@ Now, you must remember all these differences when looking at your data! Annoying
 
   - `object` is a noun that refers to the component or location the event took place in, like `forget_password_button` or `pricing_page`.
 
-  - `action` is a verb that describes what happened, like `click`, `submitted`, or `create`
+  - `action` is a verb that describes what happened, like `click`, `submit`, or `create`
 
   - Putting all of these together, you get `account_settings:forget_password_button_click` or `signup_flow:pricing_page_view` – The order is important as it makes it easier to find a specific event within a long list.
 

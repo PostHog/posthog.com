@@ -12,15 +12,7 @@ import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 
 export const TeamMember = (teamMember) => {
-    const {
-        avatar: { url: avatar },
-        lastName,
-        firstName,
-        companyRole,
-        country,
-        squeakId,
-        location,
-    } = teamMember
+    const { avatar, lastName, firstName, companyRole, country, squeakId, location } = teamMember
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     return (
@@ -46,7 +38,13 @@ export const TeamMember = (teamMember) => {
                 </div>
 
                 <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
-                    <img src={avatar} className="w-[200px]" />
+                    <img
+                        src={
+                            avatar?.url ||
+                            'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+                        }
+                        className="w-[200px]"
+                    />
                 </figure>
             </Link>
         </li>

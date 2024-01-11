@@ -103,7 +103,7 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
                             type="password"
                             placeholder="Password..."
                         />
-                        <Button width="full" disabled={isSubmitting || !isValid} type="submit">
+                        <Button width="full" loading={isSubmitting} disabled={isSubmitting || !isValid} type="submit">
                             {buttonText}
                         </Button>
                     </Form>

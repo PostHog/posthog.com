@@ -22,8 +22,8 @@ export default function RoadmapItem({ params }) {
         )
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query}`)
             .then((res) => res.json())
-            .then((post) => setPost(post?.data?.[0]?.attributes))
+            .then((post) => setPost(post?.data?.[0]))
     }, [params])
 
-    return post ? <ClientPost {...post} /> : <Skeleton />
+    return post ? <ClientPost {...post.attributes} id={post.id} /> : <Skeleton />
 }

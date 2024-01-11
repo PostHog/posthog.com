@@ -17,7 +17,7 @@ In this tutorial, we will:
 2. add PostHog to it
 3. set up the features of PostHog like custom event capture, user identification, and feature flags
 
-> Already know how to build a Next.js app? [Click here to skip to the PostHog installation](#adding-posthog).
+> For a more detailed implementation tutorial for Next.js using the **app** router, check out our [Next.js app router analytics tutorial](/tutorials/nextjs-app-directory-analytics).
 
 ## Creating our Next.js app
 
@@ -29,7 +29,7 @@ npx create-next-app@latest
 
 Press "y" to install `create-next-app` if needed, name your app (I chose `tutorial`), select "No" for using TypeScript using the arrow keys, select "No" for using the app router, and then press enter to select the defaults for the rest. 
 
-> If you want to use the latest version of Next.js with the app router, check out "[How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)."
+> If you want to use the latest version of Next.js with the app router, check out "[How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)."
 
 Once installed and created, use the terminal go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
 
@@ -641,6 +641,6 @@ You now have a basic Next.js app with user authentication and many of the featur
 
 ## Further reading
 
-- [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)

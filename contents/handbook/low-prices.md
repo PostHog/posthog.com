@@ -24,10 +24,10 @@ We aim to be the source of truth for customer and product data. The products we 
 
 ## A technical audience who need _docs_, not technical support
 
-Many of our products are traditionally sold to non-technical people. They need more help setting up SDKs or snippets. We work with engineers, who simply need good docs. Write and maintaining those (and an open-source codebase that people can inspect or even fix bugs in themselves) saves thousands of support questions each year.
+Many of our products are traditionally sold to non-technical people. They need more help setting up SDKs or snippets. We work with engineers, who simply need good docs. Writing and maintaining those (and an open-source codebase that people can inspect or even fix bugs in themselves) saves thousands of support questions each year.
 
 ## Using open-source technology
 
 We've often had second-mover advantages.
 
-One of these is that we could use the latest open-source technologies, like ClickHouse. Many of our competitors have had to build their own databases. You can guess which is more efficient for storing tens of billions of events and serving millions of analytics queries. Sooner them than us!
+One of these is that we could use the latest open-source technologies, like ClickHouse. Many of our competitors have had to build their own databases. You can guess which is more efficient for storing tens of billions of events and serving millions of analytics queries. Better them than us!

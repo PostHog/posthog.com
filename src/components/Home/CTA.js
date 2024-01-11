@@ -48,7 +48,7 @@ export default function CTA() {
                             className="m-0"
                             width="100%"
                             height="400"
-                            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q"
+                            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
                         />
                     </div>
                 </div>
@@ -57,9 +57,9 @@ export default function CTA() {
                 {inView && (
                     <motion.div
                         transition={{ delay: 1, duration: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: '-2rem' }}
-                        className="absolute bottom-0 right-0 xl:block hidden"
+                        initial={{ translateX: '100%', opacity: 0 }}
+                        animate={{ translateX: '-2rem', opacity: 1 }}
+                        className="absolute bottom-0 right-0 xl:block hidden -z-10"
                     >
                         <StaticImage loading="eager" placeholder="none" width={300} src="./images/conversion-hog.png" />
                     </motion.div>

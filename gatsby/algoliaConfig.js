@@ -67,6 +67,10 @@ module.exports = {
             retrievePages('customers', '/^customers/'),
             retrievePages('apps', '/^apps/'),
             retrievePages('cdp', '/^cdp/'),
+            retrievePages('founders', '/^founders/'),
+            retrievePages('newsletter', '/^newsletter/'),
+            retrievePages('product-engineers', '/^product-engineers/'),
+            retrievePages('templates', '/^templates/'),
             {
                 query: `
                             {

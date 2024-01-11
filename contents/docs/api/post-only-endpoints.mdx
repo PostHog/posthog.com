@@ -74,6 +74,8 @@ Captures a group event. Read more in our [group analytics docs](/docs/product-an
 
 > **Note:** `company` is a [group type](/docs/product-analytics/group-analytics#groups-vs-group-types). You can set it to the value you want such as `organization`, `project`, or `channel`.
 
+> **Note:** This event will **NOT** create a new group if a new key being used. To create a group, see the [Group identify](/docs/api/post-only-endpoints#group-identify) event.
+
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",

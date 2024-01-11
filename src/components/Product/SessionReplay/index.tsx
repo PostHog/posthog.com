@@ -20,7 +20,6 @@ import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { Marquee } from 'components/Products/Marquee'
 import { graphql, useStaticQuery } from 'gatsby'
-import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
 import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'
@@ -41,16 +40,17 @@ import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import Plans from 'components/Pricing/Plans'
 
 const product = {
     slug: 'session-replay',
     lowercase: 'session replay',
-    capitalized: 'Session Replay',
-    freeTier: '15,000 recordings',
+    capitalized: 'Session replay',
+    freeTier: '5,000 recordings',
 }
 
-const team = 'Monitoring'
-const teamSlug = '/handbook/small-teams/monitoring'
+const team = 'Replay'
+const teamSlug = '/handbook/small-teams/replay'
 
 const featuresPerRow = 3
 const features = [
@@ -88,7 +88,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Web or iOS (beta) available',
+        description: 'Web or Android (beta) available',
         icon: <IconPhone />,
     },
     {
@@ -202,7 +202,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">On the roadmap</a>',
         },
     },
     {
@@ -212,7 +212,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">On the roadmap</a>',
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
         },
     },
     {
@@ -364,7 +364,7 @@ export const ProductSessionReplay = () => {
                     icon={<IconRewindPlay />}
                     product={product.capitalized}
                     title="Watch how users <span class='text-red dark:text-yellow'>experience</span> your app"
-                    description='Session Replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
+                    description='Session replay helps <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
                     website.'
                 />
 
@@ -396,7 +396,7 @@ export const ProductSessionReplay = () => {
                         />
                         <CustomerCard
                             outcome="improved registrations by 20-30%"
-                            quote="Even Pry's support team... uses replays to understand how... bug occurred."
+                            quote="Even Pry's support team... uses replays to understand how bugs occurred."
                             customer={pry}
                         />
                     </ul>
@@ -446,10 +446,11 @@ export const ProductSessionReplay = () => {
                     </div>
                 </div>
 
-                <div className="md:flex justify-between items-start gap-12">
-                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
-
-                    <div className="md:w-96 md:mt-4">
+                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
+                    <div className="flex-grow overflow-auto px-5 md:px-0">
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
+                    </div>
+                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
                         {faqs.map((faq, index) => {
                             return <FAQ {...faq} key={index} />
@@ -497,8 +498,11 @@ export const ProductSessionReplay = () => {
                                                     iOS
                                                 </Link>{' '}
                                                 |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/13267" external>
-                                                    Android
+                                                <Link
+                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
+                                                    external
+                                                >
+                                                    Flutter
                                                 </Link>
                                             </li>
                                         </ul>

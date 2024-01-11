@@ -195,7 +195,7 @@ export async function middleware(request) {
   const data = await ph_request.json();
 
   const bootstrapData = {
-    distinctId: distinct_id,
+    distinctID: distinct_id,
     featureFlags: data.featureFlags
   }
 
@@ -281,6 +281,9 @@ export default function Home() {
 Once you restart your app to reinitialize PostHog, your flags load instantly.
 
 > **When to bootstrap vs use cookies?** You might think to use cookies directly, but they don’t update when properties change. You should use bootstrapping and the `posthog-js` library when you want flags to update over time in the user session. For example, when they do something that updates properties like opt into a beta.
+
+> **Note:** When using Next.js v12, there's a [bug in 12.3.0](https://github.com/vercel/next.js/issues/39262) that can cause session recording not to work when using this method. To fix this, use a version of Next.js v12 at least at v12.3.4.
+
 
 ## Further reading
 

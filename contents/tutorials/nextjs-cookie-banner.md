@@ -205,4 +205,4 @@ Now we have a banner controlling tracking cookies for our app that renders condi
 
 - [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
-- [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)

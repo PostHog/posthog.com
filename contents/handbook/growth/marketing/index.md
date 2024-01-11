@@ -42,10 +42,10 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 - **Social media:** Specifically Twitter, where we've seen good traction posting on James' personal account and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
 
 - **Paid ads:** An agency should keep handling this for us, but we shouldn’t get better at it internally. This includes out of home, should we ever decide to do this. We see paid ads as a hygiene factor. 
- 
-- **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.
 
 ### Things we might want to be good at but haven't tested yet
+
+- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (i.e. not our target audience). We tried this with an agency and didn't get traction, but have seen some early promising signs going to developers directly. 
 
 - **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
  
@@ -55,9 +55,9 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 - **Big, highly coordinated marketing campaigns:** We can do them, but our reactive, short turnaround campaigns have been far more successful. 
 
-- **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch. 
+- **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch.
 
-- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (ie. not our target audience). We tried this and didn't get traction. 
+- **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.
 
 ## How marketing works
 

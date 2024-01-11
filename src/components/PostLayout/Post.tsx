@@ -14,6 +14,7 @@ import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import SidebarAction from './SidebarAction'
 import { Edit, ExpandDocument, Issue } from 'components/Icons'
 import { DarkModeToggle } from 'components/DarkModeToggle'
+import { useLayoutData } from 'components/Layout/hooks'
 
 export default function Post({ children }: { children: React.ReactNode }) {
     const {
@@ -34,6 +35,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         searchFilter,
         fullWidthContent,
     } = usePost()
+    const { compact } = useLayoutData()
 
     const handleArticleTransitionEnd = (e) => {
         const hash = window?.location?.hash
@@ -44,13 +46,13 @@ export default function Post({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="">
-            {menu && mobileMenu && <MobileNav className="flex md:hidden" menu={menu} />}
+            {menu && mobileMenu && <MobileNav className={`flex ${compact ? '' : 'md:hidden'}`} menu={menu} />}
             <div
                 className={`w-full relative md:flex justify-between mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
                 }`}
             >
-                {menu && (
+                {!compact && menu && (
                     <div
                         style={{ maxWidth: menuWidth?.left ?? defaultMenuWidth.left }}
                         className="w-full flex-shrink-0 md:block hidden relative z-20"

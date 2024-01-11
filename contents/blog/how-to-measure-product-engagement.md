@@ -44,7 +44,7 @@ Product engagement also makes a great [North Star Metric](https://posthog.com/bl
 The engagement metrics you need to track will depend on what your business looks like and what your product is.
 
 In order to use the right product engagement metric for your organization you need a strong understanding of your customer personas. What does your ideal user look like? How do they interact with your platform? What are the revenue drivers attached to them?
-By examining your personas and how their individual actions influence revenue and growth, you can select the most appropriate engagement metrics for your product.
+By examining [your user personas](/product-engineers/how-to-create-user-personas) and how their individual actions influence revenue and growth, you can select the most appropriate engagement metrics for your product.
 
 ### Common engagement metrics
 If your product is an online service which users engage with regularly then **interactions** are a key metric. Social media platforms, for example, look at numbers of likes, comments and shares.

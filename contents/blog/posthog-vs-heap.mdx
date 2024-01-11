@@ -35,19 +35,17 @@ In this guide, we'll cover:
 
 ### 1. PostHog is an all-in-one platform
 
-Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt additional tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform. PostHog is like mission control for your product.
+Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt additional tools for things like session replay, feature management, and A/B testing. PostHog integrates all these features into one platform. PostHog is like mission control for your product.
 
 ### 2. PostHog's built for engineers
 
-Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing) – but our goal is to [help engineers be better at product](/blog/helping-engineers-to-product) by giving them the insights and tools they need to ship impactful features at pace. 
+We support all popular (and some unpopular) [SDKs](/docs/libraries), have [extensively documented APIs](/docs/api), and a [powerful SQL query builder](/docs/hogql), so you can analyze data how you want. We make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
 
 ### 3. Self-serve vs talk to sales
 
-Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate) to your site or app. That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No sales calls. No paid add-ons. No confusing product tiers. Just sign up and start building.
+Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate) to your site or app. That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No mandatory sales calls.
 
-## Feature comparison
-
-PostHog has three plans (Free, Scale and Enterprise) to Heap's four (Free, Growth, Pro and Premier). In this guide, we'll compare PostHog's Scale plan to Heap Pro as they're the most comparable plans for a typical, mid-market business.
+## Comparing PostHog and Heap
 
 ### Core features
 
@@ -64,17 +62,17 @@ PostHog integrates several normally separate tools, such as product analytics, s
   <ComparisonRow column1="Paid add-on" column2={true} feature="Sync with data warehouse" description="Sync data to and from your data warehouse" />
 </ComparisonTable>
 
-- **Session replays:** Heap offers basic session replays in addition to its core product analytics product, but it's a bolt-on option on all plans. Session replays are built-in to PostHog and you get 15,000 free recordings every month. **Jump to:** [Session recording comparison](#session-recording)
+- **Session replays:** Heap offers basic session replays in addition to its core product analytics product, but it's a bolt-on option on all plans. Session replays are built-in to PostHog and you get 5,000 free recordings every month. **Jump to:** [Session recording comparison](#session-recording)
 
 - **Sync to data warehouse:** The ability to sync with your data warehouse is part of Heap Connect, a paid add-on on to Heap's Pro plan – it's included on Heap's Premier plan. Data warehouse sync is available in PostHog at no additional cost because we believe companies should own their data.
 
-- **Experiments:** Heap doesn't have a built-in testing feature, though it does integrate with a number of popular A/B testing tools, such as AB Tasty and Optimizely. PostHog has a [built-in experimentation suite](/product/experimentation-suite) for running A/B and multivariate experiments.
+- **Experiments:** Heap doesn't have a built-in testing feature, though it does integrate with a number of popular A/B testing tools, such as AB Tasty and [Optimizely](/blog/posthog-vs-optimizely). PostHog has a [built-in experimentation suite](/product/experimentation-suite) for running A/B and multivariate experiments.
 
 - **Feature flagging:** The [benefits of feature flags](/blog/feature-flag-benefits-use-cases) include the ability to stagger new feature releases, ship to test groups or specific cohorts, manage feature access, and more. PostHog's feature flag product is built-in and tightly integrated with all other products.
 
 - **Open source:** PostHog is open source and self-hostable via Docker Compose for small event volumes of ~100k events per month. See our [open source deployment docs](/docs/self-host/open-source/deployment) for more.
 
-**Related:** Our in-depth guide to the best Heap alternatives
+**Related:** Our in-depth [guide to the best Heap alternatives](/blog/best-heap-alternatives)
 
 ### Product analytics
 
@@ -100,7 +98,7 @@ Heap and PostHog offer similar product analytics features with a slight differen
 Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
 
 <ComparisonTable column1="Heap" column2="PostHog">
-  <ComparisonRow column1="None (free trial)" column2="15,000/mo" feature="Free recording allowance" description="Free recordings before being charged" />
+  <ComparisonRow column1="None (free trial)" column2="5,000/mo" feature="Free recording allowance" description="Free recordings before being charged" />
   <ComparisonRow column1={true} column2={true} feature="Browser app recording" description="Watch real users use your product; diagnose bugs" />
   <ComparisonRow column1={true} column2="In beta" feature="iOS app recording" description="Record user sessions in iOS apps" />
   <ComparisonRow column1={true} column2="Planned 2023" feature="Android app recording" description="Record user sessions in Android apps" />
@@ -112,8 +110,6 @@ Session replays are an essential tool for understanding how people use your prod
 </ComparisonTable>
 
 - **Recording retention:** Heap keeps all recordings for 90 days, but retains any **viewed recordings** for 10 years. PostHog retains all recordings for three weeks, but retains recordings saved to a playlist forever. PostHog also allows you to download recordings as a `.json` file for safe keeping.
-
-<ArrayCTA />
 
 ## Integrations
 
@@ -248,7 +244,7 @@ Unlike PostHog, Heap doesn't share its pricing publicly, but its free tier is le
 
 Heap's free tier allows for only 10,000 sessions per month, "limited analysis", six months of data history, and limited access to data sources and integrations.
 
-In comparison, PostHog offers 1 million events per month and 15,000 session recordings for free on all plans with no limits on data integrations – a typical medium-size B2B product with 10,000 monthly active users will generate ~500k events each month.
+In comparison, PostHog offers 1 million events per month and 5,000 session recordings for free even on a paid plan with no limits on data integrations – a typical medium-size B2B product with 10,000 monthly active users will generate ~500k events each month.
 
 PostHog users who input their card unlock more features and can use billing limits to avoid surprise bills.
 

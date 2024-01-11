@@ -72,7 +72,7 @@ export function load() {
 Finally, create the actual page by creating a `+page.svelte` file. This file loads the posts and loops through them to display their title and link.
 
 ```js
-// src/routes/blog/+page.svelte
+<!-- src/routes/blog/+page.svelte -->
 <script>
   export let data;
 </script>
@@ -89,7 +89,7 @@ Next, we create the pages for those posts. To do this, we create a `[slug]` fold
 
 ```js
 // src/routes/blog/[slug]/+page.server.js
-import { posts } from '../data.js';
+import { posts } from '../blog.js';
 import { error } from '@sveltejs/kit';
 
 export function load({ params }) {
@@ -106,7 +106,7 @@ export function load({ params }) {
 Again, we create a `+page.svelte` file in the `[slug]` folder to display the individual posts.
 
 ```js
-// src/routes/blog/[slug]/+page.server.js
+<!-- src/routes/blog/[slug]/+page.svelte -->
 <script>
 	export let data;
 </script>
@@ -118,7 +118,7 @@ Again, we create a `+page.svelte` file in the `[slug]` folder to display the ind
 Finally, back in the `+page.svelte` in our base routes folder, we add a link to the blog index page.
 
 ```js
-// src/routes/+page.svelte
+<!-- src/routes/+page.svelte -->
 <h1>Welcome to my cool site</h1>
 <a href="/blog">Go to Blog</a>
 ```
@@ -175,7 +175,7 @@ export const load = async (event) => {
 Next, we set up signing in and out. To do this, go back to our home page at `src/routes/+page.svelte`. Here we import the `signIn` and `signOut` functions from `@auth/sveltekit/client` as well as use the `page` store from `$apps/stores` to get data on the session.
 
 ```js
-// src/routes/+page.svelte
+<!-- src/routes/+page.svelte -->
 <script>
   import { signIn, signOut } from "@auth/sveltekit/client"
   import { page } from "$app/stores"
@@ -232,26 +232,73 @@ After restarting your app and going back to your site, you should start to see e
 
 ![Autocaptured events](../images/tutorials/svelte-analytics/events.png)
 
-## Capturing pageviews
+## Capturing pageviews and pageleaves
 
-For your app, PostHog only captures the initial page load as a pageview. This is because Svelte acts as a [single page app](/tutorials/single-page-app-pageviews). To capture pageviews for each page, we check for the page change and then capture a custom event.
+For your app, PostHog only captures the initial page load as a pageview and the final pageleave. This is because Svelte acts as a [single page app](/tutorials/single-page-app-pageviews). To capture every pageviews and pageleaves, we check for the page change and then capture custom events.
 
-We can set this up by creating one more file, a `+layout.svelte` file in `src/routes`. In this file, we set up a check on every page to see if the page changed, and capture a `$pageview` event if so.
+We can set this up by creating one more file, a `+layout.svelte` file in `src/routes`. In this file, we set up a subscription to the `page` store that runs `onMount`. It checks if it is running in the browser, and if so, captures a `$pageview` and `$pageleave` event on mount and unmount.
 
 ```js
-// src/routes/+layout.svelte
+<!-- src/routes/+layout.svelte -->
 <script>
+  import { onMount } from 'svelte';
   import { page } from "$app/stores";
-  import { browser } from "$app/environment";
   import posthog from 'posthog-js'
+
+  let currentPath = '';
   
-  $: $page.url.pathname, browser && posthog.capture('$pageview')
+  onMount(() => {
+		if (typeof window !== 'undefined') {
+			const unsubscribePage = page.subscribe(($page) => {
+				if (currentPath && currentPath !== $page.url.pathname) {
+          console.log('leaving')
+					posthog.capture('$pageleave');
+				}
+        console.log('entering')
+				currentPath = $page.url.pathname;
+				posthog.capture('$pageview');
+			});
+
+			const handleBeforeUnload = () => {
+				posthog.capture('$pageleave');
+			};
+			window.addEventListener('beforeunload', handleBeforeUnload);
+
+			return () => {
+				unsubscribePage();
+				window.removeEventListener('beforeunload', handleBeforeUnload);
+			};
+		}
+	});
 </script>
 
 <slot></slot>
 ```
 
-Save this. Now when we navigate between pages, we get pageviews for each of them.
+To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.svelte` to set `capture_pageview` and `capture_pageleave` to false.
+
+```js
+// src/routes/+layout.js
+import posthog from 'posthog-js'
+import { browser } from '$app/environment';
+
+export const load = async () => {
+
+  if (browser) {
+    posthog.init(
+      '<ph_project_api_key>',
+      {
+        api_host:'<ph_instance_address>',
+        capture_pageview: false,
+        capture_pageleave: false
+      }
+    )
+  }
+  return
+};
+```
+
+Once you save and relaunch, you get pageviews and pageleaves for all the navigation between pages in your app.
 
 ![Pageviews](../images/tutorials/svelte-analytics/pageviews.png)
 
@@ -260,7 +307,7 @@ Save this. Now when we navigate between pages, we get pageviews for each of them
 You might notice even though you are logged in, your events are still captured from an anonymous person in PostHog. This is because users aren’t identified by PostHog. We can fix this by using `posthog.identify()` when users redirect back to our app from GitHub. We set a param in the call back URL, then check for that param, and use the email from GitHub to identify the user. We can add this to our home `src/routes/+page.svelte` file.
 
 ```js
-// src/routes/+page.svelte
+<!-- src/routes/+page.svelte -->
 <script>
   import { signIn, signOut } from "@auth/sveltekit/client"
   import { page } from "$app/stores"
@@ -300,7 +347,7 @@ Now, when we sign in again, we are identified with the email we use with GitHub.
 To avoid having multiple users identified as one, make sure to call `posthog.reset()` when a user signs out. We can use the same callback URL check as signing in, but for signing out.
 
 ```js
-// src/routes/+page.svelte
+<!-- src/routes/+page.svelte -->
 //...
   if ($page.url.searchParams.get("signedOut") === "True") {
     posthog.reset()
@@ -335,7 +382,7 @@ To set this up, create the feature flag. In PostHog, go to the feature flags tab
 Next, in the `src/routes/blog/[slug]` folder, go to the `+page.svelte` file. Add the `posthog.onFeatureFlags()` function to check the `main-cta` flag once they load. The `posthog.isFeatureEnabled()` controls a variable to display a call-to-action link below our post.
 
 ```js
-// src/routes/blog/[slug]/+page.svelte
+<!-- src/routes/blog/[slug]/+page.svelte -->
 <script>
 	export let data;
   import posthog from 'posthog-js'

@@ -122,12 +122,12 @@ export const Sidebar = () => {
                         </p>
                         <span>
                             {isModerator && (
-                                <button
+                                <Link
                                     className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
-                                    onClick={() => setNewPostModalOpen(!newPostModalOpen)}
+                                    to="/posts/new"
                                 >
                                     New post
-                                </button>
+                                </Link>
                             )}
                             <button
                                 className="text-sm dark:text-yellow text-red font-semibold"
@@ -167,8 +167,6 @@ export const Sidebar = () => {
 
 export const PostsContext = createContext({})
 
-export const PostContext = createContext({})
-
 const menusByRoot = {
     tutorials: { parent: communityMenu, activeInternalMenu: communityMenu.children[2] },
     blog: { parent: companyMenu, activeInternalMenu: companyMenu.children[5] },
@@ -178,61 +176,33 @@ const menusByRoot = {
 const Router = ({ children, prev }: { children: React.ReactNode; prev: string | null }) => {
     const { fullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
-    const [postID, setPostID] = useState()
-
-    useEffect(() => {
-        fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${qs.stringify(
-                {
-                    fields: ['id'],
-                    filters: {
-                        slug: {
-                            $eq: pathname,
-                        },
-                    },
-                },
-                { encodeValuesOnly: true }
-            )}`
-        )
-            .then((res) => res.json())
-            .then((posts) => {
-                if (posts?.data?.length > 0) {
-                    setPostID(posts.data[0].id)
-                }
-            })
-    }, [pathname])
 
     return (
-        <PostContext.Provider
-            value={{
-                postID,
-            }}
+        <div
+            className={`px-4 md:px-0 2xl:px-5 md:mt-0 mb-12 md:mb-0 mx-auto transition-all ${
+                fullWidthContent ? 'max-w-full -mx-5' : 'max-w-screen-3xl box-content'
+            }`}
         >
-            <div
-                className={`px-4 md:px-0 2xl:px-5 md:mt-0 mb-12 md:mb-0 mx-auto transition-all ${
-                    fullWidthContent ? 'max-w-full -mx-5' : 'max-w-screen-3xl box-content'
-                }`}
-            >
-                {prev ? (
-                    <Default>{children}</Default>
-                ) : (
-                    {
-                        '/product-engineers': <Blog title="Product engineers" />,
-                        '/features': <Blog title="Features" />,
-                        '/founders': <Blog title="Founders" />,
-                        '/blog': <Blog />,
-                        '/newsletter': <Newsletter />,
-                        '/spotlight': <Blog title="Spotlight" />,
-                        '/customers': <Customers />,
-                    }[pathname] || <Default>{children}</Default>
-                )}
-            </div>
-        </PostContext.Provider>
+            {prev ? (
+                <Default>{children}</Default>
+            ) : (
+                {
+                    '/product-engineers': <Blog title="Product engineers" />,
+                    '/features': <Blog title="Features" />,
+                    '/founders': <Blog title="Founders" />,
+                    '/blog': <Blog />,
+                    '/newsletter': <Newsletter />,
+                    '/spotlight': <Blog title="Spotlight" />,
+                    '/customers': <Customers />,
+                }[pathname] || <Default>{children}</Default>
+            )}
+        </div>
     )
 }
 
-export const getParams = (root, tag) => {
+export const getParams = (root, tag, sort) => {
     return {
+        sort,
         filters: {
             $and: [
                 ...(root
@@ -273,6 +243,33 @@ export const getParams = (root, tag) => {
     }
 }
 
+const Filters = () => {
+    const { compact } = useLayoutData()
+    return (
+        <div
+            className={`sticky top-0 reasonable:top-[57px] md:hidden lg:top-[108px] bg-light dark:bg-dark pt-2 mb-0 z-10 lg:hidden ${
+                compact ? '!top-[69px] mb-4' : ''
+            }`}
+        >
+            <PostFilters />
+        </div>
+    )
+}
+
+export const sortOptions = [
+    {
+        sort: ['score:desc', 'date:desc'],
+        label: 'Popularity',
+    },
+    {
+        sort: ['date:desc'],
+        label: 'Newest',
+    },
+]
+
+const getSortOption = (root?: string) =>
+    sortOptions[['blog', 'changelog', 'newsletter', 'spotlight'].includes(root) ? 1 : 0]
+
 export default function Posts({
     children,
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
@@ -282,6 +279,7 @@ export default function Posts({
     const { pathname } = useLocation()
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)
     const [root, setRoot] = useState(pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
+    const [sort, setSort] = useState(getSortOption(root).label)
     const [tag, setTag] = useState(initialTag)
     const [prev, setPrev] = useState<string | null>(null)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
@@ -289,7 +287,7 @@ export default function Posts({
         menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
     )
 
-    const [params, setParams] = useState(getParams(root, initialTag))
+    const [params, setParams] = useState(getParams(root, initialTag, getSortOption(root).sort))
 
     const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
 
@@ -313,8 +311,12 @@ export default function Posts({
     }, [pathname])
 
     useEffect(() => {
-        setParams(getParams(root, tag))
-    }, [root, tag])
+        setSort(getSortOption(root).label)
+    }, [root])
+
+    useEffect(() => {
+        setParams(getParams(root, tag, sortOptions.find((option) => option.label === sort)?.sort))
+    }, [root, tag, sort])
 
     return (
         <Layout parent={layoutMenu.parent} activeInternalMenu={layoutMenu.activeInternalMenu}>
@@ -336,20 +338,28 @@ export default function Posts({
                     tag,
                     activeMenu,
                     setActiveMenu,
+                    sort,
+                    setSort,
                 }}
             >
                 <PostProvider
                     value={{
                         title: title || 'Posts',
-                        menu: menu.map((menuItem) => ({
+                        menu: (!root
+                            ? menu
+                            : [
+                                  { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
+                                  ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),
+                              ]
+                        ).map((menuItem) => ({
                             ...menuItem,
-                            handleLinkClick: ({ name, url: activeURL, topLevel, tag }) => {
-                                if (topLevel) {
+                            handleLinkClick: ({ name, url: activeURL, tag }) => {
+                                if (root && name !== 'All') {
+                                    setTag(tag || name)
+                                } else {
                                     setRoot(activeURL === '/posts' ? undefined : activeURL?.split('/')[1])
                                     setTag(undefined)
                                     setActiveMenu(menu.find(({ url }) => url === activeURL))
-                                } else {
-                                    setTag(tag || name)
                                 }
                             },
                             children: undefined,
@@ -379,9 +389,7 @@ export default function Posts({
                     <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
-                    <div className="sticky top-0 reasonable:top-[57px] md:hidden lg:top-[108px] bg-light dark:bg-dark pt-2 mb-0 z-10 lg:hidden">
-                        <PostFilters />
-                    </div>
+                    <Filters />
                     {articleView && (
                         <button
                             onClick={() => navigate(prev ? -1 : '/posts')}

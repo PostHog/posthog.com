@@ -90,7 +90,7 @@ export const postsMenu: IMenu[] = [
             {
                 name: 'A/B testing',
                 url: '/product-engineers/ab-testing',
-                icon: 'Flask',
+                icon: 'IconFlask',
                 color: 'green',
                 tag: 'AB testing',
             },
@@ -109,7 +109,7 @@ export const postsMenu: IMenu[] = [
             {
                 name: 'Product analytics',
                 url: '/product-engineers/product-analytics',
-                icon: 'Graph',
+                icon: 'IconGraph',
                 color: 'blue',
             },
             {
@@ -208,6 +208,13 @@ export const postsMenu: IMenu[] = [
                 color: 'seagreen',
             },
             {
+                name: 'A/B testing',
+                url: '/tutorials/experimentation',
+                icon: 'IconFlask',
+                color: 'purple',
+                tag: 'Experimentation',
+            },
+            {
                 name: 'Surveys',
                 url: '/tutorials/surveys',
                 icon: 'IconMessage',
@@ -223,15 +230,15 @@ export const postsMenu: IMenu[] = [
         ],
     },
     {
-        name: 'Newsletter',
-        url: '/newsletter',
-        icon: 'IconLetter',
-        color: 'green',
-    },
-    {
         name: 'Spotlight',
         url: '/spotlight',
         icon: 'IconSpotlight',
         color: 'blue',
+    },
+    {
+        name: 'Newsletter',
+        icon: 'IconNewspaper',
+        color: 'green',
+        url: '/newsletter',
     },
 ]

@@ -38,7 +38,7 @@ You then run your A/B test to gather data (usually over a few days or weeks) and
 
 ![How A/B testing works](../images/blog/ab-testing-guide-for-engineers/ab-test-illustration.jpg)
 
-There are a few different types of A/B test, such as multivariate (where you're testing more than one variation) and multi-page "funnel" tests (where you're testing different user paths), but this guide is focused traditional A/B tests. 
+There are a few different types of A/B test, such as [multivariate](/product-engineers/what-is-multivariate-testing-examples) (where you're testing more than one variation) and multi-page "funnel" tests (where you're testing different user paths), but this guide is focused traditional A/B tests. 
 
 ## What makes a good A/B test?
 
@@ -116,7 +116,7 @@ It's absolutely **essential** to only log the users in your test who would actua
 
 To do so, ensure that checking your feature flag and logging their exposure is the *absolute* last condition you check in your code: 
 
-```
+```js
 // ❌ Incorrect. Will include unaffected users
 function showNewChanges(user) {
   if (posthog.getFeatureFlag('experiment-key') === 'control') {
@@ -133,7 +133,7 @@ function showNewChanges(user) {
 }
 ```
 
-```
+```js
 // ✅ Correct. Will exclude unaffected users
 function showNewChanges(user) {
 

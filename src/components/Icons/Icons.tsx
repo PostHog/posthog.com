@@ -677,6 +677,27 @@ export const ThumbsUp = ({ className = '' }: { className: string }): JSX.Element
     )
 }
 
+export const ThumbsUpOutline = ({ className = '' }: { className: string }): JSX.Element => {
+    return (
+        <svg
+            className={className}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M6.75 10.75H3.75C3.19772 10.75 2.75 11.1977 2.75 11.75V19.25C2.75 19.8023 3.19772 20.25 3.75 20.25H6.75M6.75 20.25V11L10.7208 3.29204C10.8922 2.95918 11.2365 2.75 11.611 2.75C12.8384 2.75 13.7808 3.84535 13.5917 5.0581L13.0161 8.75H18.2589C20.0956 8.75 21.5011 10.3856 21.2248 12.2013L20.3878 17.7013C20.1648 19.167 18.9046 20.25 17.422 20.25H6.75Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    )
+}
+
 export const ThumbsDown = ({ className = '' }: { className: string }): JSX.Element => {
     return (
         <svg
@@ -694,6 +715,26 @@ export const ThumbsDown = ({ className = '' }: { className: string }): JSX.Eleme
             <path
                 d="M15.1881 10.2503H18V0.687034H15.187C14.2304 0.687034 13.4995 1.47493 13.4995 2.3746L13.5005 8.56271C13.5005 9.51936 14.2314 10.2503 15.1881 10.2503H15.1881Z"
                 fill="#F54E00"
+            />
+        </svg>
+    )
+}
+
+export const ThumbsDownOutline = ({ className = '' }: { className: string }): JSX.Element => {
+    return (
+        <svg
+            className={className}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M17.2521 13.25H20.25C20.8023 13.25 21.25 12.8023 21.25 12.25V4.75C21.25 4.19772 20.8023 3.75 20.25 3.75H17.2521M17.2521 3.75V13L13.2835 20.7078C13.112 21.0407 12.7635 21.25 12.389 21.25V21.25C11.1622 21.25 10.2249 20.1546 10.4139 18.9419L10.9892 15.25H5.74908C3.91335 15.25 2.50859 13.6144 2.78476 11.7987L3.62128 6.29867C3.84421 4.83298 5.1038 3.75 6.5856 3.75H17.2521Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
             />
         </svg>
     )
@@ -2343,3 +2384,24 @@ export const YC = ({ className = '' }: { className?: string }): JSX.Element => (
         />
     </svg>
 )
+
+export const PaperPlaneArrow = ({ className = '' }: { className: string }): JSX.Element => {
+    return (
+        <svg
+            className={className}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M13.5512 21.7065C13.6891 22.1776 14.3525 22.1886 14.506 21.7223L20.1934 4.44133C20.3217 4.05162 19.9519 3.68182 19.5622 3.81008L2.28119 9.49749C1.81488 9.65096 1.8259 10.3144 2.29705 10.4523L10.7405 12.9236C10.9041 12.9714 11.0321 13.0994 11.0799 13.263L13.5512 21.7065Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    )
+}

@@ -18,13 +18,11 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-Want to understand how PostHog and Google Analytics 4 (GA4) are different? Here's the short answer:
+Want to know how PostHog and Google Analytics 4 (GA4) compare? If you remember nothing else, remember these two things:
 
-- **Google Analytics** is primarily designed for marketers who want to analyze landing pages, compare marketing channels, and return on ad spend.
+1. **Google Analytics** is primarily designed for marketers who want to analyze landing pages, compare marketing channels, and return on ad spend.
 
-- **PostHog** is an all-in-one platform built to help engineers understand users and create better products. It includes analytics and a whole bunch more, such as session replays, feature flags, A/B testing, and surveys.
-
-In this article we’ll explore these differences in more detail, and take a deep dive into the analytics features of both.
+2. **PostHog** is an all-in-one platform built to help engineers understand users and create better products. It includes analytics and a whole bunch more.
 
 ## How is PostHog different to Google Analytics?
 
@@ -34,7 +32,7 @@ In this article we’ll explore these differences in more detail, and take a dee
 
 ### 2. PostHog is built for engineers
 
-Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing) – but PostHog is designed to meet the needs of engineers. Our goal is to help developers [be better at product](/blog/helping-engineers-to-product).
+We support all popular (and some unpopular) [SDKs](/docs/libraries), have [extensively documented APIs](/docs/api), and a [powerful SQL query builder](/docs/hogql), so you can analyze data how you want. We make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
 
 ### 3. PostHog is open source and transparent
 
@@ -100,8 +98,6 @@ In contrast, it's hard to import data into GA4 because:
 However, GA4 is well integrated into the Google ecosystem, making it easy to transfer data between it and other Google products.
 
 Below is a comparison of some of the most popular apps. For a full list of PostHog’s available integrations, [check our app directory](/cdp).
-
-
 
 <ComparisonTable column1="GA" column2="PostHog">
   <ComparisonRow column1={true} column2={true} feature="Zapier" description="Trigger Zaps with events" />

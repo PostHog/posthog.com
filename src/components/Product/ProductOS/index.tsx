@@ -25,7 +25,6 @@ import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
-import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
 import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'
@@ -205,7 +204,7 @@ export const ProductOS = () => {
                         </ul>
                     </div>
 
-                    <div className="flex flex-col-reverse items-center md:flex-row md:gap-8 mb-20">
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
                         <div className="flex-1">
                             <h2 className="text-4xl">
                                 A unified way to <span className="text-red dark:text-yellow">query</span> product usage
@@ -223,7 +222,7 @@ export const ProductOS = () => {
 
                             <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
                         </div>
-                        <aside className="shrink-0 basis-[500px]">
+                        <aside className="shrink-0 md:basis-[500px]">
                             <StaticImage src="./images/sql-hog.png" alt="" className="w-full max-w-[562px]" />
                         </aside>
                     </div>
@@ -264,7 +263,7 @@ export const ProductOS = () => {
                                 <ProductIcon name="CDP" url="/cdp" color="yellow" icon={<IconPerson />} />
                                 <ProductIcon
                                     name="Data warehouse"
-                                    url="/data-warehouse"
+                                    url="/docs/data-warehouse"
                                     color="seagreen"
                                     icon={<IconServer />}
                                 />
@@ -287,7 +286,7 @@ export const ProductOS = () => {
                     </div>
                 </section>
 
-                <section className="max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
+                <section className="overflow-x-hidden max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
                     <div className="grid md:grid-cols-12 md:gap-8 items-center">
                         <div className="order-2 md:order-1 col-span-5">
                             <h2 className="text-4xl mb-2">Site widgets</h2>
@@ -322,7 +321,7 @@ export const ProductOS = () => {
                 </section>
 
                 <section className="max-w-7xl mx-auto px-5 md:mb-20">
-                    <div className="flex flex-col-reverse items-center md:flex-row md:gap-8 mb-20">
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
                         <div className="flex-1">
                             <h2 className="text-4xl">
                                 This bit is boring, but <span className="text-red dark:text-yellow">important</span>
@@ -333,7 +332,7 @@ export const ProductOS = () => {
                                 publicly. Check <a href="/handbook/company/security">our security docs</a> for more!
                             </p>
                         </div>
-                        <aside className="shrink-0 basis-[500px]">
+                        <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
                             <StaticImage src="./images/alert.png" alt="" className="w-full max-w-[262px]" />
                         </aside>
                     </div>
@@ -383,10 +382,10 @@ export const ProductOS = () => {
                     </ul>
                 </section>
 
-                <section className="max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
-                    <div className="grid md:grid-cols-2 md:gap-8 items-center">
+                <section className="overflow-x-hidden max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
+                    <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div className="order-2 md:order-1">
-                            <h2 className="text-4xl mb-2">Toolbar</h2>
+                            <h2 className="text-4xl mb-2 relative z-10">Toolbar</h2>
                             <p className="max-w-2xl">
                                 If you use PostHog on a website or web app, the Product OS Toolbar can run on your site,
                                 letting you:
@@ -402,11 +401,11 @@ export const ProductOS = () => {
                                 </CallToAction>
                             </div>
                         </div>
-                        <div className="order-1 md:order-2">
+                        <div className="order-1 md:order-2 text-center">
                             <StaticImage
                                 src="./images/toolbar.png"
                                 alt=""
-                                className="relative w-[125%] left-[-12.5%] md:left-0 md:w-full max-w-[614px] top-12 md:top-16"
+                                className="relative w-[110%] left-[-5%] sm:left-0 md:w-full max-w-[614px] top-12 md:top-16"
                             />
                         </div>
                     </div>

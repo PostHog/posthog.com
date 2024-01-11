@@ -17,7 +17,7 @@ date: 2023-09-15
 
 Now, the team plans to 3x that growth — something it can only do by adopting more scalable systems for collecting and handling user feedback about the platform. 
 
-“Previously a lot of teams operated on gut decisions and intuition,” says Purple Wave’s Product Owner, Matt Amick. “We had data, but it wasn’t mobilized well because it was accessed through Tableau, which isn’t the easiest to use. We started looking around for something that could help us make decisions based on data — and that’s when we found PostHog!”
+“Previously a lot of teams operated on gut decisions and intuition,” says Purple Wave’s Product Owner, Matt Amick. “We had data, but it wasn’t mobilized well because it was accessed through a business intelligence tool which wasn’t the easiest to use. We started looking around for something that could help us make decisions based on data — and that’s when we found PostHog!”
 
 “A lot of the other companies we spoke to were using tools that try to get you in and then charge you a million dollars once you’re set up... Our team is all about just being honest and not hiding stuff, so we preferred PostHog.”
 
@@ -45,7 +45,7 @@ Conducting surveys with PostHog also enabled Purple Wave to centralize data into
 
 
 ![PostHog surveys](../images/customers/purplewave/purplewave_survey.png)
-<Caption>Every element of a survey can be customized in PostHog, without using any code</Caption>
+<Caption>Survey templates help you get started quickly, or you can build your own from scratch</Caption>
 
 
 ### Collecting NPS scores, organizing interviews, and more

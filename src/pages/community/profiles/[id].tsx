@@ -21,6 +21,12 @@ import usePostHog from 'hooks/usePostHog'
 import Logomark from 'components/Home/images/Logomark'
 import { communityMenu } from '../../../navs'
 import useTopicsNav from '../../../navs/useTopicsNav'
+import { usePosts } from 'components/Edition/hooks/usePosts'
+import PostsTable from 'components/Edition/PostsTable'
+import { SortDropdown } from 'components/Edition/Views/Default'
+import { sortOptions } from 'components/Edition/Posts'
+import { AnimatePresence, motion } from 'framer-motion'
+import Tooltip from 'components/Tooltip'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -45,12 +51,47 @@ const Avatar = (props: { className?: string; src?: string }) => {
     )
 }
 
+const LikedPosts = ({ profileID }) => {
+    const posts = usePosts({
+        params: {
+            filters: {
+                likes: {
+                    id: {
+                        $eq: profileID,
+                    },
+                },
+            },
+        },
+    })
+
+    return (
+        <ul className="list-none m-0 p-0">
+            <PostsTable {...posts} />
+        </ul>
+    )
+}
+
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const [view, setView] = useState('discussions')
     const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
     const nav = useTopicsNav()
+    const { user } = useUser()
+    const [sort, setSort] = useState(sortOptions[0].label)
+    const posts = usePosts({
+        params: {
+            sort: sortOptions.find((option) => option.label === sort)?.sort,
+            filters: {
+                authors: {
+                    id: {
+                        $eq: id,
+                    },
+                },
+            },
+        },
+    })
+    const isCurrentUser = user?.profile?.id === id
 
     const profileQuery = qs.stringify(
         {
@@ -58,6 +99,25 @@ export default function ProfilePage({ params }: PageProps) {
                 avatar: true,
                 role: {
                     select: ['type'],
+                },
+                achievements: {
+                    ...(!isCurrentUser
+                        ? {
+                              filters: {
+                                  hidden: {
+                                      $ne: true,
+                                  },
+                              },
+                          }
+                        : null),
+                    populate: {
+                        achievement: {
+                            populate: {
+                                image: true,
+                                icon: true,
+                            },
+                        },
+                    },
                 },
                 teams: {
                     populate: {
@@ -134,6 +194,7 @@ export default function ProfilePage({ params }: PageProps) {
                             handleEditProfile={handleEditProfile}
                             setEditModalOpen={setEditModalOpen}
                             profile={{ ...profile, id }}
+                            mutate={mutate}
                         />
                     }
                     hideSurvey
@@ -179,16 +240,16 @@ export default function ProfilePage({ params }: PageProps) {
                             </div>
 
                             <div className="mt-12">
-                                {profile?.amaEnabled ? (
-                                    <div className="grid grid-cols-2 relative max-w-xs mb-6 font-semibold border-b border-border dark:border-dark text-base">
-                                        <button
-                                            className={`${
-                                                view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
-                                            } p-4 transition-opacity`}
-                                            onClick={() => setView('discussions')}
-                                        >
-                                            Discussions
-                                        </button>
+                                <div className="flex items-center relative mb-6 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
+                                    <button
+                                        className={`${
+                                            view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                        } p-4 transition-opacity`}
+                                        onClick={() => setView('discussions')}
+                                    >
+                                        Discussions
+                                    </button>
+                                    {profile?.amaEnabled && (
                                         <button
                                             className={`${
                                                 view !== 'ama' ? 'opacity-60 hover:opacity-80' : 'font-bold'
@@ -197,22 +258,55 @@ export default function ProfilePage({ params }: PageProps) {
                                         >
                                             Ask me anything
                                         </button>
-                                        <span
-                                            className={`transition-all absolute bottom-0 translate-y-1/2 border-b-2 border-red dark:border-yellow w-1/2 left-0 rounded ${
-                                                view === 'discussions' ? '' : 'translate-x-full'
-                                            }`}
-                                        />
+                                    )}
+                                    {user?.profile?.id === id && (
+                                        <button
+                                            className={`${
+                                                view !== 'liked-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('liked-posts')}
+                                        >
+                                            Upvoted posts
+                                        </button>
+                                    )}
+                                    <div className="flex items-center">
+                                        <button
+                                            className={`${
+                                                view !== 'user-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('user-posts')}
+                                        >
+                                            Posts
+                                        </button>
+                                        <AnimatePresence>
+                                            {view === 'user-posts' && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, translateY: '100%' }}
+                                                    animate={{ opacity: 1, translateY: 0 }}
+                                                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                                                    className={`-ml-4 z-50`}
+                                                >
+                                                    <SortDropdown sort={sort} setSort={setSort} />
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </div>
-                                ) : (
-                                    <h3>Discussions</h3>
+                                </div>
+                                {(view === 'discussions' || view === 'ama') && (
+                                    <Questions
+                                        initialView={view === 'ama' ? 'question-form' : undefined}
+                                        slug={view === 'ama' ? window?.location?.pathname : undefined}
+                                        profileId={view === 'discussions' ? id : undefined}
+                                        showForm={view === 'ama'}
+                                        disclaimer={false}
+                                    />
                                 )}
-                                <Questions
-                                    initialView={view === 'ama' ? 'question-form' : undefined}
-                                    slug={view === 'ama' ? window?.location?.pathname : undefined}
-                                    profileId={view === 'discussions' ? id : undefined}
-                                    showForm={view === 'ama'}
-                                    disclaimer={false}
-                                />
+                                {view === 'liked-posts' && user?.profile?.id === id && <LikedPosts profileID={id} />}
+                                {view === 'user-posts' && (
+                                    <ul className="list-none m-0 p-0">
+                                        <PostsTable {...posts} />
+                                    </ul>
+                                )}
                             </div>
                         </>
                     ) : null}
@@ -226,10 +320,82 @@ type ProfileSidebarProps = {
     profile: ProfileData
     setEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>
     handleEditProfile: () => void
+    mutate: () => void
 }
 
-const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile }) => {
-    const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
+const Achievement = ({ title, description, image, icon, id, mutate, profile, ...other }) => {
+    const { user, getJwt } = useUser()
+    const [hidden, setHidden] = useState(other.hidden)
+    const [opacity, setOpacity] = useState(hidden ? 0.6 : 1)
+    const isCurrentUser = user?.profile?.id === profile.id
+    const handleClick = async (hidden: boolean) => {
+        if (isCurrentUser) {
+            setHidden(hidden)
+            try {
+                const jwt = await getJwt()
+                const body = {
+                    data: {
+                        achievements: [
+                            ...profile.achievements
+                                .filter((achievement) => achievement.id !== id)
+                                .map(({ id, hidden }) => ({ id, hidden })),
+                            {
+                                id,
+                                hidden,
+                            },
+                        ],
+                    },
+                }
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user.profile.id}?populate=avatar`, {
+                    method: 'PUT',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+                await mutate()
+            } catch (err) {
+                console.error(err)
+            }
+        }
+    }
+
+    useEffect(() => {
+        setOpacity(hidden ? 0.6 : 1)
+    }, [hidden])
+
+    const ImageContainer = isCurrentUser ? 'button' : 'span'
+
+    return (
+        <Tooltip
+            contentContainerClassName="!border-none !p-0 !bg-transparent"
+            tooltipClassName="!rounded-none"
+            placement="bottom-start"
+            content={() => (
+                <div className="max-w-[250px] text-left px-2 rounded-sm overflow-hidden border border-border dark:border-dark bg-light dark:bg-dark">
+                    <div className="mb-4 -mx-4 -mt-2">
+                        <img src={image?.data?.attributes?.url} />
+                    </div>
+                    <h4 className="text-lg m-0">{title}</h4>
+                    <p className="m-0 mt-1 text-sm mb-2">{description}</p>
+                </div>
+            )}
+        >
+            <ImageContainer
+                onClick={isCurrentUser ? () => handleClick(!hidden) : undefined}
+                onMouseEnter={isCurrentUser ? () => setOpacity(0.8) : undefined}
+                onMouseOut={isCurrentUser ? () => setOpacity(hidden ? 0.6 : 1) : undefined}
+                style={{ opacity }}
+                className={`relative transition-opacity`}
+            >
+                <img className="w-full" src={icon?.data?.attributes?.url} />
+            </ImageContainer>
+        </Tooltip>
+    )
+}
+
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile, mutate }) => {
     const [editProfile, setEditProfile] = useState(false)
     const { user } = useUser()
     const breakpoints = useBreakpoint()
@@ -287,6 +453,28 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                 </SidebarSection>
             ) : null}
 
+            {profile.achievements?.length > 0 && (
+                <SidebarSection title="Achievements">
+                    <ul className="list-none m-0 p-0 grid grid-cols-5 gap-2">
+                        {profile.achievements
+                            .sort((a, b) => a.id - b.id)
+                            .map(({ achievement, hidden, id }) => {
+                                return (
+                                    <li key={id}>
+                                        <Achievement
+                                            {...achievement.data.attributes}
+                                            id={id}
+                                            hidden={hidden}
+                                            profile={profile}
+                                            mutate={mutate}
+                                        />
+                                    </li>
+                                )
+                            })}
+                    </ul>
+                </SidebarSection>
+            )}
+
             {profile.teams
                 ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
                       return (
@@ -333,6 +521,17 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                     >
                         Edit profile
                     </button>
+                </SidebarSection>
+            )}
+            {user?.role?.type === 'moderator' && (
+                <SidebarSection>
+                    <Link
+                        external
+                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::profile.profile/${profile.id}`}
+                        className="text-base text-red dark:text-yellow font-semibold"
+                    >
+                        View in Strapi
+                    </Link>
                 </SidebarSection>
             )}
         </>

@@ -1,22 +1,5 @@
 @import '../../vars';
 
-.posthog-scrollbars::-webkit-scrollbar {
-    width: 10px !important;
-    height: 10px !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-thumb {
-    background: #bfbfbc !important;
-    border-radius: 30px !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-thumb:hover {
-    background: #878387 !important;
-}
-.posthog-scrollbars::-webkit-scrollbar-track {
-    background: #fff !important;
-    border-radius: 0px !important;
-    box-shadow: inset 0px 0px 0px 0px #f0f0f0 !important;
-}
-
 body {
     font-variant-numeric: proportional-nums !important;
     font-feature-settings: unset !important;

@@ -162,7 +162,13 @@ export default function Menu({
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden py-[1px] ml-4 ${className}`}>
             <li>
                 {(url === undefined || url === null) && name ? (
-                    <p className="text-sm font-semibold opacity-25 mt-3 mx-3 mb-1">{name}</p>
+                    <p className="flex gap-2 items-baseline text-sm font-semibold mt-3 mx-3 mb-1">
+                        <span className="opacity-25">{name}</span>
+
+                        {badge?.title && (
+                            <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>
+                        )}
+                    </p>
                 ) : name && url ? (
                     <MenuLink
                         onClick={() => {

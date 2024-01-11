@@ -8,13 +8,13 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
 import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
+import Plans, { CTA } from './Plans'
 
 export const section = cntl`
     max-w-6xl
@@ -103,7 +103,7 @@ const Pricing = (): JSX.Element => {
                     className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
                     <div className="md:order-2">
-                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80">
+                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80 ">
                             <Lottie
                                 options={{
                                     loop: false,
@@ -122,11 +122,12 @@ const Pricing = (): JSX.Element => {
                         <p className="text-base font-medium opacity-60 leading-tight">
                             Each product is priced separately.
                         </p>
+                        <CTA />
                     </div>
                 </div>
             </section>
-            <section className={`${section} mb-12 mt-8 md:px-4`}>
-                <PlanComparison groupsToShow={groupsToShow} />
+            <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                <Plans showTitle groupsToShow={groupsToShow} />
             </section>
 
             <PricingCalculator />
@@ -144,22 +145,26 @@ const Pricing = (): JSX.Element => {
             <section className="bg-primary my-12 md:px-4">
                 <Quote
                     className="py-12 md:py-16 px-5 bg-primary"
-                    name={<span className="text-white">Jonathan Hyde</span>}
-                    title={<span className="text-white">Former Head of Product, Legl</span>}
+                    name={<span className="text-white">Cat Li</span>}
+                    title={<span className="text-white">Product & Engineering Lead, Y Combinator</span>}
                     image={
                         <StaticImage
                             width={100}
                             height={100}
-                            alt="Jonathan Hyde - Former Head of Product, Legl"
-                            src="../../images/jonathan-hyde-plain.png"
+                            alt="Cat Li, Y Combinator"
+                            src="../../images/cat.jpeg"
                             placeholder="none"
+                            className="rounded-full"
                         />
                     }
                     quote={
                         <span className="text-white">
-                            PostHog is the first analytics platform where{' '}
-                            <span className="text-yellow">I can be 100% confident in the data.</span> I've finally got
-                            the data insight platform I've always wanted as a Product person.
+                            You always need to find ways to improve.{' '}
+                            <span className="text-yellow">
+                                PostHog is central to how we do that at{' '}
+                                <span className="inline-block">Y Combinator</span>.
+                            </span>{' '}
+                            It helps us try ideas, measure results, and build better products.
                         </span>
                     }
                 />

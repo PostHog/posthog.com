@@ -12,7 +12,6 @@ import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { Marquee } from 'components/Products/Marquee'
 import { graphql, useStaticQuery } from 'gatsby'
-import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
 import AbTesting from 'components/Home/CodeBlocks/ABTesting/index'
 import Install from '../Install'
@@ -33,11 +32,12 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import Plans from 'components/Pricing/Plans'
 
 const product = {
     slug: 'ab-testing',
     lowercase: 'A/B testing',
-    capitalized: 'A/B Testing',
+    capitalized: 'A/B testing',
     freeTier: '1,000,000 requests',
 }
 
@@ -292,7 +292,7 @@ export const ProductAbTesting = () => {
                     icon={<IconFlask />}
                     product={product.capitalized}
                     title='Test changes with <span class="text-red dark:text-yellow">statistical significance</span>'
-                    description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
+                    description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
                 />
 
                 <div className="text-center">
@@ -325,7 +325,7 @@ export const ProductAbTesting = () => {
                 </section>
             </div>
 
-            <SmoothScroll className="" />
+            <SmoothScroll />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
@@ -373,10 +373,11 @@ export const ProductAbTesting = () => {
                     </div>
                 </div>
 
-                <div className="md:flex justify-between items-start gap-12">
-                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
-
-                    <div className="md:w-96 md:mt-4">
+                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
+                    <div className="flex-grow overflow-auto px-5 md:px-0">
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
+                    </div>
+                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
                         {faqs.map((faq, index) => {
                             return <FAQ {...faq} key={index} />

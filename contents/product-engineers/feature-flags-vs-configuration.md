@@ -46,7 +46,7 @@ The big difference compared to configurations is feature flags’ expanded funct
 - Connects to usage and user data.
 - Provides simplified creation UI and permissioning.
 
-To access these, feature flag services often connect to external services like CDPs, product analytics, and data warehouses. They get data from these sources to customize which users get specific values when calling the flag.
+To access these, [feature flag services](/blog/best-open-source-feature-flag-tools) often connect to external services like CDPs, product analytics, and data warehouses. They get data from these sources to customize which users get specific values when calling the flag.
 
 Feature flags are almost always remotely configurable, and because they use an external service, developers can modify them at run time. No need to reset or recompile, just call the external service again. These services also provide a simplified UI, creating a centralized location for modifying feature flags and enabling quick rollouts and rollbacks.
 
@@ -121,7 +121,7 @@ Another key part of the decision is figuring out what works well with the stack 
 
 - If you are relying on many Google-related products, [Firebase Remote Config](https://firebase.google.com/docs/remote-config) might be best.
 
-- If you implemented the modern data stack with a data warehouse, you might use a feature flag tool like [LaunchDarkly](/feature-flags/comparisons).
+- If you implemented the modern data stack with a data warehouse, you might use a feature flag tool like [LaunchDarkly](/blog/best-launchdarkly-alternatives).
 
 - If you’re just starting up and want an all-in-one platform with analytics, A/B tests, and session replays, [PostHog](https://app.posthog.com/signup) is your choice.
 

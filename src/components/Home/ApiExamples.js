@@ -1,8 +1,45 @@
-import { StaticImage } from 'gatsby-plugin-image'
-import React from 'react'
-import { AppLibrary, EventPipelines, SQL } from 'components/ProductIcons'
+import React, { useEffect, useRef, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
+
+const WelderHog = () => {
+    const [ready, setReady] = useState(false)
+    const [containerRef, inView] = useInView({ threshold: 0 })
+    const videoRef = useRef(null)
+
+    useEffect(() => {
+        if (inView) {
+            videoRef?.current?.play()
+        } else {
+            videoRef?.current?.pause()
+        }
+    }, [inView, ready])
+
+    return (
+        <div ref={containerRef}>
+            <video
+                ref={videoRef}
+                onCanPlay={() => {
+                    setReady(true)
+                }}
+                onEnded={() => {
+                    if (videoRef?.current) {
+                        videoRef.current.currentTime = 3
+                        videoRef?.current?.play()
+                    }
+                }}
+                playsInline
+                muted
+                preload="none"
+                className="w-full"
+            >
+                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/welder-hog.webm`} type="video/webm" />
+                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/welder-hog.mp4`} type="video/mp4" />
+            </video>
+        </div>
+    )
+}
 
 const examples = [
     {
@@ -89,11 +126,9 @@ export default function ApiExamples() {
                     </CallToAction>
                 </div>
                 <div className="col-span-3 order-1 md:order-2 text-center">
-                    <StaticImage
-                        src="./images/api.png"
-                        alt="A hog welding a motherboard"
-                        className="max-w-[371px] md:ml-8"
-                    />
+                    <div className="max-w-[371px] md:ml-8 relative after:bg-gradient-to-t after:from-tan after:via-tan/70 dark:after:from-dark dark:after:via-dark/70 after:to-transparent after:absolute after:bottom-0 after:left-0 after:h-10 after:w-full">
+                        <WelderHog />
+                    </div>
                 </div>
             </div>
         </section>

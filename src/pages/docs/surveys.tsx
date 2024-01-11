@@ -7,6 +7,8 @@ import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
+import { useLayoutData } from 'components/Layout/hooks'
+import QuickLinks from 'components/QuickLinks'
 
 type SurveysProps = {
     data: {
@@ -43,8 +45,10 @@ export const Intro = ({ image = true }) => (
 )
 
 export const Content = ({ quickLinks = false }) => {
+    const { compact } = useLayoutData()
     return (
         <>
+            {compact && <QuickLinks items={docsMenu.children[5].children} />}
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
@@ -81,6 +85,22 @@ export const Content = ({ quickLinks = false }) => {
                             />
                         }
                         url="/tutorials/survey"
+                    />
+                    <ResourceItem
+                        type="Guide"
+                        title="How to show a survey after a delay"
+                        description="Delay the display of your survey to improve user experience"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="../../components/Home/Slider/images/surveys-hog.png"
+                            />
+                        }
+                        url="/tutorials/delayed-survey"
                     />
                 </ul>
             </section>

@@ -14,7 +14,7 @@ const OpenSourceDescription = () => {
                 Great for internal tools or evaluating without vendor approvals.
             </li>
             <li className={descriptionItemClassName}>
-                <strong>MIT licensed, BYOEngineers!</strong>
+                <strong>MIT licensed, no support provided - BYOEngineers!</strong>
             </li>
         </ul>
     )

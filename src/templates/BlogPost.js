@@ -8,19 +8,20 @@ import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { useLayoutData } from 'components/Layout/hooks'
-import { PostContext } from 'components/Edition/Posts'
 import Title from 'components/Edition/Title'
 import Upvote from 'components/Edition/Upvote'
 import LikeButton from 'components/Edition/LikeButton'
-import { QuestionForm } from 'components/Squeak'
+import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
+import qs from 'qs'
+import Breadcrumbs from 'components/Edition/Breadcrumbs'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -34,8 +35,6 @@ export const Intro = ({
     tags,
     imageURL,
 }) => {
-    const { postID } = useContext(PostContext)
-
     return (
         <div className="mb-6">
             <div>
@@ -112,17 +111,14 @@ const ContributorsSmall = ({ contributors }) => {
     ) : null
 }
 
-const Sidebar = ({ contributors, tableOfContents }) => {
-    return <></>
-}
-
 export default function BlogPost({ data, pageContext, location, mobile = false }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
+    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, tags, seo } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
+    const category = postData?.parent?.category
     const components = {
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),
@@ -147,12 +143,35 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
     const { tableOfContents } = pageContext
     const { fullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
+    const [postID, setPostID] = useState()
+
+    useEffect(() => {
+        fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${qs.stringify(
+                {
+                    fields: ['id'],
+                    filters: {
+                        slug: {
+                            $eq: pathname,
+                        },
+                    },
+                },
+                { encodeValuesOnly: true }
+            )}`
+        )
+            .then((res) => res.json())
+            .then((posts) => {
+                if (posts?.data?.length > 0) {
+                    setPostID(posts.data[0].id)
+                }
+            })
+    }, [pathname])
 
     return (
         <article className="@container">
             <SEO
-                title={title + ' - PostHog'}
-                description={description || excerpt}
+                title={seo?.metaTitle || title + ' - PostHog'}
+                description={seo?.metaDescription || excerpt}
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
@@ -164,6 +183,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             fullWidthContent ? 'max-w-full' : 'max-w-3xl'
                         }  md:px-8 2xl:px-12`}
                     >
+                        <Breadcrumbs category={category} tags={tags} />
                         <Intro
                             title={title}
                             featuredImage={featuredImage}
@@ -183,7 +203,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         </MDXProvider>
                         <Upvote className="mt-6" />
                         <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
-                            <QuestionForm
+                            <Questions
                                 disclaimer={false}
                                 subject={false}
                                 buttonText="Leave a comment"
@@ -195,7 +215,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 <aside
                     className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-dark pt-4 xl:block hidden`}
                 >
-                    <Upvote className="mx-2 mb-4" />
+                    <Upvote id={postID} slug={fields.slug} className="px-4 mb-4" />
                     <Contributors contributors={contributors} />
                     <MobileSidebar tableOfContents={tableOfContents} />
                 </aside>
@@ -203,6 +223,13 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         </article>
     )
 }
+
+export const SEOFragment = graphql`
+    fragment SEOFragment on FrontmatterSEO {
+        metaTitle
+        metaDescription
+    }
+`
 
 export const query = graphql`
     query BlogPostLayout($id: String!) {
@@ -242,10 +269,14 @@ export const query = graphql`
                     profile_id
                     role
                 }
+                seo {
+                    ...SEOFragment
+                }
             }
             parent {
                 ... on File {
                     relativePath
+                    category
                     fields {
                         gitLogLatestDate(formatString: "MMM DD, YYYY")
                     }

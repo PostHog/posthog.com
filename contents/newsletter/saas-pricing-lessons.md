@@ -11,8 +11,6 @@ crosspost:
   - Founders   
 ---
 
-> Originally published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. Don't miss out... [subscribe here](https://newsletter.posthog.com/subscribe).
-
 We build PostHog for [product engineers](/blog/what-is-a-product-engineer). We define product engineers as full-stack engineers who:
 
 - Write full-stack code with a focus on the front end.
@@ -24,6 +22,8 @@ The TL;DR is product engineers care about customer value.
 And, that being the case, good product engineers have to care about pricing because **perceived value** and **what customers pay** are **inextricably linked**.
 
 **This week’s theme is:** Pricing for SaaS products
+
+> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Talk to your customers about pricing
 

@@ -112,7 +112,7 @@ Word-of-mouth growth is good for any product-led company – i.e. a product that
 
 Like word of mouth, _consistently_ positive user feedback is an indicator of product-market fit. There's a decent chance you're onto a winner when people tell you they can't live without your product.
 
-The [PMF Survey](https://pmfsurvey.com/) is a twist on the classic Net Promoter Score (NPS), but it's designed _specifically_ for finding product-market fit.
+The [PMF Survey](https://pmfsurvey.com/) is a twist on the classic [Net Promoter Score (NPS)](/product-engineers/nps-vs-csat-vs-ces), but it's designed _specifically_ for finding product-market fit.
 
 Created by entrepreneur Sean Ellis, the core question (among others) it asks is:
 
@@ -142,7 +142,7 @@ When email app Superhuman started using the survey in 2017, 22% of users answere
 
 After the initial survey, Superhuman created a four-step process to convert the 52% and doubled-down on what the 22% loved.
 
-1. **Segmenting users:** They assigned personas to everyone who responded (e.g. founder, engineer, customer success) and created a cohort of those who appeared in the 22%. In this cohort, 32% of people responded "very disappointed", and they created a more detailed Ideal Customer Profile based on these users.
+1. **Segmenting users:** They assigned [user personas](/product-engineers/how-to-create-user-personas) to everyone who responded (e.g. founder, engineer, customer success) and created a cohort of those who appeared in the 22%. In this cohort, 32% of people responded "very disappointed", and they created a more detailed Ideal Customer Profile based on these users.
 
 2. **Gathering feedback:** They analyzed feedback from "on-the-fence" users, and asked "how can we improve Superhuman for you?" They ignored users who answered "not disappointed". The most common thing the on-the-fence users wanted? A mobile app. They did the same for their strong supporters.
 
