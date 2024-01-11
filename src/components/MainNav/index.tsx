@@ -27,6 +27,7 @@ import { useInView } from 'react-intersection-observer'
 import dayjs from 'dayjs'
 import { useUser } from 'hooks/useUser'
 import Icon from 'components/Home/Icon'
+import * as icons from '@posthog/icons'
 
 export default function Orders() {
     const { user, getJwt } = useUser()
