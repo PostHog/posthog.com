@@ -21,7 +21,7 @@ Now, though, we’re closing that Slack group in favor of creating a better, mor
 
 PostHog has grown incredibly fast over the last four years, and throughout that time the public Slack group has been the central hub of our community. It's been a place where we chat to users, listen to feature requests, answer questions, and solicit feedback. 
 
-However, with over 5,000 members in the community, it's become hard to keep up with the conversations. Messages quickly disappear from the chat history, it is disconnected from our main support flow, and content isn't indexed by Google, which makes it a particularly bad platform for providing support. 
+However, with over 5,000 members in the community, it's become clear we've outgrown Slack as a platform. Messages quickly disappear from the chat history, it is disconnected from our main support flow, and useful solutions aren't searchable on our site or via Google. 
 
 We've explored a few things to fix this, including joining a paid plan ($7.25+ per user, per month) and [building our own AI bot](/blog/aruba-hackathon#maxai-our-friendly-posthog-support-ai), but earlier this year we realized a new approach was needed.
 
