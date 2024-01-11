@@ -34,8 +34,8 @@ const WelderHog = () => {
                 preload="none"
                 className="w-full"
             >
-                <source src="/images/welder-hog.webm" type="video/webm" />
-                <source src="/images/welder-hog.mp4" type="video/mp4" />
+                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/welder-hog.webm`} type="video/webm" />
+                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/welder-hog.mp4`} type="video/mp4" />
             </video>
         </div>
     )
