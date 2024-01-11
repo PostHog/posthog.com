@@ -748,7 +748,7 @@
         { "source": "/roadmap/changelog", "destination": "/changelog/2023" },
         { "source": "/blog/posthog-changelog", "destination": "/changelog/2023" },
         { "source": "/roadmap/changelog/2023", "destination": "/changelog/2023" },
-        { "source": "/changelog", "destination": "/changelog/2023" },
+        { "source": "/changelog", "destination": "/changelog/2024" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
