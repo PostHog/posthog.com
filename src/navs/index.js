@@ -399,10 +399,6 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/feature-ownership',
                     },
                     {
-                        name: 'Releasing a new version',
-                        url: '/handbook/engineering/release-new-version',
-                    },
-                    {
                         name: 'Handling incidents',
                         url: '/handbook/engineering/incidents',
                     },
@@ -525,7 +521,7 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Shipping things, step by step',
+                name: 'Shipping & releasing',
                 url: '/handbook/engineering/development-process',
             },
             {
