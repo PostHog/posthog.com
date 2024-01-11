@@ -28,9 +28,10 @@ export function getCheckoutUrl(response?: CreateCartResponse | null): string | n
 export function Checkout(props: CheckoutProps): React.ReactElement {
     const { className } = props
     const [adjustedItems, setAdjustedItems] = React.useState<AdjustedLineItem[]>([])
-    const { cartItems, setCartItems } = useCartStore((state) => ({
+    const { cartItems, setCartItems, removeAll } = useCartStore((state) => ({
         cartItems: state.cartItems,
         setCartItems: state.setCartItems,
+        removeAll: state.removeAll,
     }))
     const [isCheckingOut, setIsCheckingOut] = React.useState(false)
     const [showAdjustments, setShowAdjustments] = React.useState(false)
@@ -103,9 +104,10 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
 
             const checkoutUrl = getCheckoutUrl(newCart)
             console.log('🚀 ~ checkoutUrl:', checkoutUrl)
-            // if (checkoutUrl) {
-            //     window.location.href = checkoutUrl
-            // }
+            if (checkoutUrl) {
+                removeAll()
+                window.location.href = checkoutUrl
+            }
         }
         checkoutMutation()
     }, [setIsCheckingOut, discountCode, cartItems])
@@ -122,24 +124,26 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                     type="primary"
                     className={cn('relative text-center w-full', className)}
                 >
-                    <span className={cn('mx-16', showAdjustments && 'invisible', isCheckingOut && 'invisible')}>
-                        Checkout
-                    </span>
-                    <span
-                        className={cn(
-                            'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full',
-                            showAdjustments && 'visible',
-                            isCheckingOut && 'invisible'
-                        )}
-                    >
-                        Proceed to Checkout
-                    </span>
-                    <LoaderIcon
-                        className={cn(
-                            'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
-                            !showAdjustments && isCheckingOut && 'visible'
-                        )}
-                    />
+                    <>
+                        <span className={cn('mx-16', showAdjustments && 'invisible', isCheckingOut && 'invisible')}>
+                            Checkout
+                        </span>
+                        <span
+                            className={cn(
+                                'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full',
+                                showAdjustments && 'visible',
+                                isCheckingOut && 'invisible'
+                            )}
+                        >
+                            Proceed to Checkout
+                        </span>
+                        <LoaderIcon
+                            className={cn(
+                                'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
+                                !showAdjustments && isCheckingOut && 'visible'
+                            )}
+                        />
+                    </>
                 </CallToAction>
             </div>
         </div>
