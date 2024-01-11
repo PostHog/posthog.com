@@ -1,33 +1,26 @@
-import { Placement } from '@popperjs/core'
-import * as icons from '@posthog/icons'
-import {
-    IconApp,
-    IconBrightness,
-    IconChat,
-    IconChevronDown,
-    IconExternal,
-    IconSearch,
-    IconTextWidth,
-    IconUser,
-} from '@posthog/icons'
-import { useLocation } from '@reach/router'
-import { CallToAction } from 'components/CallToAction'
-import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { useSearch } from 'components/Search/SearchContext'
+import { useActions, useValues } from 'kea'
+import { layoutLogic } from '../../logic/layoutLogic'
+
+import { IconApp, IconBrightness, IconChat, IconSearch, IconTextWidth, IconUser } from '@posthog/icons'
+
+import { Placement } from '@popperjs/core'
+import * as icons from '@posthog/icons'
+import { IconExternal } from '@posthog/icons'
+import { useLocation } from '@reach/router'
+import { CallToAction } from 'components/CallToAction'
+import { useLayoutData } from 'components/Layout/hooks'
 import { SignupCTA } from 'components/SignupCTA'
 import Toggle from 'components/Toggle'
 import HoverTooltip from 'components/Tooltip'
 import dayjs from 'dayjs'
 import usePostHog from 'hooks/usePostHog'
 import { useUser } from 'hooks/useUser'
-import { useActions, useValues } from 'kea'
 import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { usePopper } from 'react-popper'
-import { layoutLogic } from '../../logic/layoutLogic'
-import { DarkModeToggle } from 'components/DarkModeToggle'
 
 export default function Orders() {
     const { user, getJwt } = useUser()
@@ -233,26 +226,20 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
     return menu?.length > 0 ? (
         <div className="relative">
             {overflowing && (
-                <div
-                    className={`absolute top-0 left-0 w-12 pl-1 h-[calc(100%_-_2px)] flex justify-start items-center bg-gradient-to-l from-transparent to-light via-light via-70% dark:via-dark dark:to-dark ${
-                        firstInView ? '-z-10 opacity-25' : 'z-10'
+                <button
+                    onDoubleClick={(e) => e.preventDefault()}
+                    onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
+                    className={`absolute top-0 left-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${
+                        firstInView ? '-z-10' : 'z-10'
                     }`}
                 >
-                    <button
-                        onDoubleClick={(e) => e.preventDefault()}
-                        onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
-                        className={`w-8 h-8 flex justify-end items-center rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]`}
-                    >
-                        <IconChevronDown className="w-8 h-8" />
-                    </button>
-                </div>
+                    <icons.ChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                </button>
             )}
             <ul
                 style={{ justifyContent: overflowing ? 'start' : 'center' }}
                 ref={ref}
-                className={`flex space-x-4 list-none m-0 !pt-1.5 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${
-                    overflowing ? 'px-12' : 'px-4'
-                } ${className}`}
+                className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
             >
                 {menu.map((menuItem, index) => {
                     const { url, color, icon, name, onClick } = menuItem
@@ -309,19 +296,15 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                 })}
             </ul>
             {overflowing && (
-                <div
-                    className={`absolute top-0 right-0 w-12 pr-1 h-[calc(100%_-_2px)] flex justify-end items-center bg-gradient-to-r from-transparent to-light via-light via-30% dark:via-dark dark:to-dark ${
-                        lastInView ? '-z-10 opacity-25' : 'z-10'
+                <button
+                    onDoubleClick={(e) => e.preventDefault()}
+                    onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
+                    className={`absolute top-0 right-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pr-2 bg-gradient-to-r from-transparent to-light via-light dark:via-dark dark:to-dark ${
+                        lastInView ? '-z-10' : 'z-10'
                     }`}
                 >
-                    <button
-                        onDoubleClick={(e) => e.preventDefault()}
-                        onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
-                        className={`w-8 h-8 flex justify-end items-center rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]`}
-                    >
-                        <IconChevronDown className="w-8 h-8" />
-                    </button>
-                </div>
+                    <icons.ChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                </button>
             )}
         </div>
     ) : null
@@ -368,7 +351,7 @@ export const Main = () => {
 
     return (
         <div>
-            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
+            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
                         fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
