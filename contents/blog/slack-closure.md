@@ -1,5 +1,5 @@
 ---
-date: 2024-11-01
+date: 2024-01-11
 title: "We're building a better PostHog community by closing our public Slack"
 rootPage: /blog
 category: PostHog news
