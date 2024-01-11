@@ -51,6 +51,6 @@ On January 12, we'll archive all channels in the public PostHog Slack, so that n
 
 A week later, on January 22, we'll close the Slack group permanently and delete all existing content. 
 
-Private Slack channels for paying users will continue to function as normal via Slack Connect, and we’ll continue to handle the majority of customer support via the in-app help. Obviously, the [GitHub repos](https://github.com/PostHog/) will also continue to function as normal and you can add comments or submit there too.  
+**Important:** Private Slack channels for paying users will continue to function as normal via Slack Connect, and we’ll continue to handle the majority of customer support via the in-app help. Obviously, the [GitHub repos](https://github.com/PostHog/) will also continue to function as normal and you can add comments or submit there too.  
 
 We’d like to thank everyone who participated in the Slack group over the last four years. Your support and feedback has helped us immensely, and we’ve deeply enjoyed speaking with you. We very much hope that all of you will [join us in the new community soon](/questions)!
