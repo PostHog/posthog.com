@@ -1,6 +1,6 @@
 ---
-title: How to set up surveys in Vue.js
-date: 2023-10-18
+title: How to set up surveys in Vue
+date: 2024-01-15
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
@@ -13,6 +13,8 @@ import EventsLight from '../images/tutorials/vue-surveys/events-light.png'
 import EventsDark from '../images/tutorials/vue-surveys/events-dark.png'
 import ImgSurveyResultsLight from '../images/tutorials/vue-surveys/survey-results-light.png'
 import ImgSurveyResultsDark from '../images/tutorials/vue-surveys/survey-results-dark.png'
+import ImgSurveyTemplatesLight from '../images/tutorials/vue-surveys/survey-templates-light.png'
+import ImgSurveyTemplatesDark from '../images/tutorials/vue-surveys/survey-templates-dark.png'
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Vue.js app.
 
@@ -49,13 +51,13 @@ export default {
 
 Run `npm run serve` to start your app.
 
-![Basic Vue app](../images/tutorials/vue-ab-tests/basic-app.png)
+![Basic Vue app](../images/tutorials/vue-surveys/basic-app.png)
 
 ## 2. Add PostHog
 
 > This tutorial shows how to integrate PostHog with `Vue 3`. If you're using `Vue 2`, see [our Vue docs](/docs/libraries/vue-js) for how to integrate PostHog.
 
-We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup). 
+We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup). 
 
 First install `posthog-js`:
 
@@ -88,7 +90,7 @@ export default {
 };
 ```
 
-Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [project settings](https://app.posthog.com/settings/project).
+Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 
@@ -102,7 +104,7 @@ app.use(posthogPlugin);
 app.mount('#app')
 ```
 
-Once you’ve done this, reload your app. You should begin seeing events in the [PostHog events explorer](https://app.posthog.com/events).
+Once you’ve done this, reload your app. You should begin seeing events in the [PostHog events explorer](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsLight} 
@@ -124,7 +126,7 @@ This tutorial will cover how to implement both options:
 
 This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, and handles all the display logic and response capture for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
  
-To create a survey with a prebuilt UI, go to the [surveys tab](https://app.posthog.com/surveys) and click "New survey". 
+To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
 
 <ProductScreenshot
   imageLight={ImgSurveyTemplatesLight} 
@@ -139,7 +141,7 @@ Select any template, or you can create your own by clicking "Create blank survey
 2. Set the targeting to `All users`.
 3. Use the default values for everything else.
 
-Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app!  After submitting responses, you can [view results in PostHog](#4-view-results).
+Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
 
 ![Popover survey in app](../images/tutorials/vue-surveys/popover-survey.png)
 
@@ -147,9 +149,7 @@ Then, click "Save as draft" and then "Launch". Your survey is now live and you s
 
 If you prefer to have complete control of your survey UI and logic, you can still use PostHog to keep track of and analyze your results.
 
-First, create a survey in PostHog like in option 1 above, except set `Presentation` to **API** (For this tutorial, we use a Net promoter score survey template).
-
-![Custom survey set up](../images/tutorials/nextjs-surveys/create-api-survey.png)
+First, create a survey in PostHog like in option 1 above (for this tutorial, we use a Net promoter score survey template). The only difference is you must set `Presentation` to **API**.
 
 Then, there are four parts to adding code for our custom survey:
 
@@ -162,7 +162,7 @@ Then, there are four parts to adding code for our custom survey:
 
 We've created a sample survey UI for this tutorial. To use it, create a new file in `components` folder called `CustomSurvey.vue` and paste the following code:
 
-```vue filename=components/CustomSurvey.vue
+```vue file=components/CustomSurvey.vue
 <template>
   <div class="survey">
     <h2>{{ title }}</h2>
@@ -227,7 +227,7 @@ export default {
 
 Then, integrate the component into `App.vue`:
 
-```vue filename=App.vue
+```vue file=App.vue
 <template>
   <main>
     <div class="App">
@@ -274,12 +274,11 @@ This shows a survey popup every time you visit your app's homepage.
 
 #### 2. Fetch the survey from PostHog
 
-PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
+PostHog keeps track of all active surveys for a user (this is especially helpful if you set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
 
 To fetch the active surveys, we use `this.$posthog.getActiveMatchingSurveys()`:
 
-```vue filename=App.vue
-<!-- src/App.vue -->
+```vue file=App.vue
 <template>
   <!-- ... rest of your template ... -->
 </template>
@@ -344,8 +343,7 @@ export default {
 
 We can use this survey object to configure our `CustomSurvey` component:
 
-```vue filename=App.vue
-<!-- src/App.vue -->
+```vue file=App.vue
 <template>
   <main>
     <div class="App">
@@ -402,8 +400,7 @@ export default {
 
 We want to make sure we don't show the survey again to users who have either submitted or dismissed it. We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data and use it to check whether to show the survey or not.
 
-```vue filename=App.vue
-<!-- src/App.vue -->
+```vue file=App.vue
 <template>
   <!-- ... rest of your template ... -->
 </template>
@@ -418,17 +415,17 @@ export default {
   },
   data() {
     return {
-      showSurvey: false,
+      showSurvey: false, // updated 
       surveyTitle: '',
       surveyID: ''
     };
   },
   mounted() {
-    this.fetchSurvey();
+    this.fetchActiveSurveys();
     this.checkSurveyInteraction();
   },
   methods: {
-    fetchSurvey() {
+    fetchActiveSurveys() {
       this.$posthog.getActiveMatchingSurveys((surveys) => {
         // ... existing survey logic ...
       });
@@ -442,7 +439,7 @@ export default {
       localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
     },
     handleSubmit(value) {
-      console.log("Submitted value:", value); // Or any other submit logic
+      console.log("Submitted value:", value);
       this.showSurvey = false;
       localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
     }
@@ -465,10 +462,9 @@ There are 3 events to capture:
 2. `"survey dismissed"`
 3. `"survey sent"` (for responses)
 
-You can capture these events using `posthog.capture()`:
+You can capture these events using `this.$posthog.capture()`:
 
-```vue filename=App.vue
-<!-- src/App.vue -->
+```vue file=App.vue
 <template>
   <!-- ... rest of your template ... -->
 </template>
@@ -482,11 +478,10 @@ export default {
     CustomSurvey
   },
   data() {
-    // existing data object
+    // existing code
   },
   mounted() {
-    this.fetchSurvey();
-    this.checkSurveyInteraction();
+    // existing code
   },
   methods: {
     fetchActiveSurveys() {
@@ -530,7 +525,7 @@ export default {
 
 Altogether, your code should look like this:
 
-```vue filename=App.vue
+```vue file=App.vue
 <template>
   <main>
     <div class="App">
@@ -585,7 +580,6 @@ export default {
       this.showSurvey = !hasInteractedWithSurvey;
     },
     handleDismiss() {
-      console.log('dismiss clicked')
       this.showSurvey = false;
       localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
       this.$posthog.capture("survey dismissed", {
@@ -609,7 +603,7 @@ Our survey is now ready to go! The next step is ship the changes, get responses,
 
 ## 4. View results
 
-After interacting with your survey, you can view results by selecting the survey from the [surveys tab](https://app.posthog.com/surveys). You'll see data on:
+After interacting with your survey, you can view results by selecting the survey from the [surveys tab](https://us.posthog.com/surveys). You'll see data on:
 
 - How many users have seen the survey.
 - How many users have dismissed the survey.
@@ -628,3 +622,4 @@ You can also filter these results based on [user properties](/docs/product-analy
 
 - [How to write great product survey questions (with examples)](/blog/product-survey-questions)
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
+- [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
