@@ -25,7 +25,6 @@ type ProductPageProps = {
 }
 
 export default function Product(props: ProductPageProps): React.ReactElement {
-    console.log('🚀 ~ props:', props)
     const { data } = props
     const product = data.shopifyProduct
     const [cartIsOpen, setCartIsOpen] = useState<boolean>(false)

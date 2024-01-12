@@ -10,9 +10,13 @@ type AdjustedLineItemsProps = {
 export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactElement {
     const { className, lineItems } = props
 
-    const qtyAdjustedItems = lineItems.filter((item) => item.newCount !== null)
-
     const removedItems = lineItems.filter((item) => item.remove)
+
+    const qtyAdjustedItems = lineItems.filter(
+        (item) =>
+            item.newCount !== null &&
+            !removedItems.some((x: AdjustedLineItem) => x.item.shopifyId === item.item.shopifyId)
+    )
 
     const classes = cn('space-y-4', className)
 

@@ -1,4 +1,4 @@
-import type { CreateCartResponse, CreateCartVariables } from 'templates/merch/types'
+import type { CartResponse, CreateCartResponse, CreateCartVariables } from 'templates/merch/types'
 
 type ShopifyHeaders = {
     Accept: string
@@ -33,6 +33,7 @@ export const CREATE_CART = `
         cartCreate(input: $input) {
             cart {
                 checkoutUrl
+                id
                 lines(first: 250) {
                     edges {
                         node {
@@ -89,6 +90,66 @@ export const CREATE_CART = `
     }
 `
 
+export const GET_CART = `
+  query getCart($id: ID!) {
+    cart(id: $id) {
+        checkoutUrl
+      id
+      lines(first: 250) {
+        edges {
+            node {
+                quantity
+                merchandise {
+                    ... on ProductVariant {
+                        availableForSale
+                        compareAtPriceV2 {
+                            amount
+                            currencyCode
+                        }
+                        currentlyNotInStock
+                        id
+                        image {
+                            altText
+                            height
+                            id
+                            originalSrc
+                            transformedSrc
+                            width
+                        }
+                        priceV2 {
+                            amount
+                            currencyCode
+                        }
+                        product {
+                            id
+                            handle
+                            productType
+                            title
+                            vendor
+                        }
+                        quantityAvailable
+                        selectedOptions {
+                            name
+                            value
+                        }
+                        sku
+                        title
+                        weight
+                        weightUnit
+                        }
+                  }
+            }
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+
+        }
+    }
+    }
+  }
+  `
+
 export const createCartQuery = (variables: CreateCartVariables): Promise<CreateCartResponse | void> =>
     fetch(shopifyStorefrontUrl, {
         method: 'POST',
@@ -105,7 +166,7 @@ export const createCartQuery = (variables: CreateCartVariables): Promise<CreateC
             return res.json()
         })
         .then((res) => {
-            const { cartCreate } = res.data as CreateCartResponse
+            const cartCreate = res.data as CreateCartResponse
             if (cartCreate.userErrors) {
                 const error = new Error(res.userErrors[0].message)
                 error.name = 'Shopify ApiError'
@@ -113,7 +174,7 @@ export const createCartQuery = (variables: CreateCartVariables): Promise<CreateC
                 throw error
             }
 
-            return res.data
+            return cartCreate.cartCreate.cart
         })
         .catch((e) => {
             if (e.name === 'ApiError') {
@@ -121,4 +182,33 @@ export const createCartQuery = (variables: CreateCartVariables): Promise<CreateC
             } else {
                 // Fetch request or Some other error
             }
+        })
+
+export const getCartQuery = async (id) =>
+    await fetch(shopifyStorefrontUrl, {
+        method: 'POST',
+        headers: shopifyHeaders,
+        body: JSON.stringify({
+            query: GET_CART,
+            variables: { id },
+        }),
+    })
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`)
+            }
+            return res.json()
+        })
+        .then((res) => {
+            const cart = res.data as CartResponse
+            if (cart?.userErrors) {
+                const error = new Error(res.userErrors[0].message)
+                error.name = 'Shopify ApiError'
+
+                throw error
+            }
+            return cart.cart
+        })
+        .catch((e) => {
+            throw new Error(e)
         })

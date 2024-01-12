@@ -193,19 +193,25 @@ export type CreateCartResponseError = {
     }[]
 }
 
-export type CreateCartResponse = {
-    cartCreate: {
-        cart: {
-            checkoutUrl: string
-            lines: {
-                edges: {
-                    node: { merchandise: CartProductVariant }
-                    quantity: number
-                }[]
-            }
-        }
-        userErrors?: CreateCartResponseError
+export type Cart = {
+    id: string
+    checkoutUrl: string
+    lines: {
+        edges: {
+            node: { merchandise: CartProductVariant }
+            quantity: number
+        }[]
     }
+}
+
+export type CartResponse = {
+    cart: Cart | null
+    userErrors?: CreateCartResponseError
+}
+
+export type CartCreateReponse = {
+    cartCreate: Cart
+    userErrors?: CreateCartResponseError
 }
 
 /**

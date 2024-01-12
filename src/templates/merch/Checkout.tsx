@@ -1,22 +1,23 @@
 import { CallToAction } from 'components/CallToAction'
 import React, { useCallback } from 'react'
-import { createCartQuery } from '../../lib/shopify'
+import { createCartQuery, getCartQuery } from '../../lib/shopify'
 import { cn } from '../../utils'
 import { AdjustedLineItems } from './AdjustedLineItems'
 import { LoaderIcon } from './LoaderIcon'
 import { useCartStore } from './store'
-import type { AdjustedLineItem, CreateCartResponse } from './types'
+import type { AdjustedLineItem, Cart } from './types'
 import { getCartVariables } from './utils'
 
 type CheckoutProps = {
     className?: string
+    isEmpty?: boolean
 }
 function notNull<TValue>(value: TValue | null | undefined): value is TValue {
     return value !== null && value !== undefined
 }
 
-export function getCheckoutUrl(response?: CreateCartResponse | null): string | null {
-    const checkoutUrl = response?.cartCreate?.cart?.checkoutUrl
+export function getCheckoutUrl(cart: Cart | null): string | null {
+    const checkoutUrl = cart?.checkoutUrl
 
     if (!checkoutUrl) {
         return null
@@ -26,12 +27,14 @@ export function getCheckoutUrl(response?: CreateCartResponse | null): string | n
 }
 
 export function Checkout(props: CheckoutProps): React.ReactElement {
-    const { className } = props
+    const { className, isEmpty } = props
     const [adjustedItems, setAdjustedItems] = React.useState<AdjustedLineItem[]>([])
-    const { cartItems, setCartItems, removeAll } = useCartStore((state) => ({
+    const { cartItems, setCartItems, removeAll, cartId, setCartId } = useCartStore((state) => ({
         cartItems: state.cartItems,
         setCartItems: state.setCartItems,
         removeAll: state.removeAll,
+        cartId: state.cartId,
+        setCartId: state.setCartId,
     }))
     const [isCheckingOut, setIsCheckingOut] = React.useState(false)
     const [showAdjustments, setShowAdjustments] = React.useState(false)
@@ -42,11 +45,23 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
         setShowAdjustments(false)
         async function checkoutMutation() {
             setIsCheckingOut(true)
-            const createCartVariables = getCartVariables(cartItems)
-            const newCart = (await createCartQuery(createCartVariables)) as CreateCartResponse
-            console.log('--- newCart', newCart)
+
+            let cart: Cart | null = null
+
+            if (cartId) {
+                cart = (await getCartQuery(cartId)) as Cart
+            }
+
+            if (!cart) {
+                const createCartVariables = getCartVariables(cartItems)
+                cart = (await createCartQuery(createCartVariables)) as Cart
+                const newCartId = cart.id
+                setCartId(newCartId)
+            }
 
             const itemsExceedingQuantityAvailable: AdjustedLineItem[] = []
+
+            if (cart === null) return
 
             cartItems.forEach((item) => {
                 // first check if it's available for sale. If not, then add to the list
@@ -62,15 +77,25 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
 
                 // if it is available for sale, then check if the quantity available is less than
                 // the quantity in the cart. If so, then add to the list with the new quantity
-                const matchingItem = newCart.cartCreate?.cart?.lines?.edges?.find((edge) => {
+                const matchingItem = cart?.lines?.edges?.find((edge) => {
                     return edge?.node?.merchandise?.id === item.shopifyId
                 })
                 if (!!matchingItem && matchingItem.node.merchandise.quantityAvailable < item.count) {
-                    itemsExceedingQuantityAvailable.push({
-                        item,
-                        remove: false,
-                        newCount: matchingItem.node.merchandise.quantityAvailable,
-                    })
+                    const quantityAvailable = matchingItem.node.merchandise.quantityAvailable
+                    if (quantityAvailable <= 0) {
+                        // if the new quantity available is zero, remove
+                        itemsExceedingQuantityAvailable.push({
+                            item,
+                            remove: true,
+                            newCount: matchingItem.node.merchandise.quantityAvailable,
+                        })
+                    } else {
+                        itemsExceedingQuantityAvailable.push({
+                            item,
+                            remove: false,
+                            newCount: matchingItem.node.merchandise.quantityAvailable,
+                        })
+                    }
                 }
             })
 
@@ -102,10 +127,8 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                 return
             }
 
-            const checkoutUrl = getCheckoutUrl(newCart)
-            console.log('🚀 ~ checkoutUrl:', checkoutUrl)
+            const checkoutUrl = getCheckoutUrl(cart)
             if (checkoutUrl) {
-                removeAll()
                 window.location.href = checkoutUrl
             }
         }
@@ -118,34 +141,36 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
         <div className={classes}>
             {adjustedItems.length > 0 && <AdjustedLineItems className="my-4" lineItems={adjustedItems} />}
 
-            <div className="flex justify-end">
-                <CallToAction
-                    onClick={handleCheckout}
-                    type="primary"
-                    className={cn('relative text-center w-full', className)}
-                >
-                    <>
-                        <span className={cn('mx-16', showAdjustments && 'invisible', isCheckingOut && 'invisible')}>
-                            Checkout
-                        </span>
-                        <span
-                            className={cn(
-                                'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full',
-                                showAdjustments && 'visible',
-                                isCheckingOut && 'invisible'
-                            )}
-                        >
-                            Proceed to Checkout
-                        </span>
-                        <LoaderIcon
-                            className={cn(
-                                'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
-                                !showAdjustments && isCheckingOut && 'visible'
-                            )}
-                        />
-                    </>
-                </CallToAction>
-            </div>
+            {!isEmpty && (
+                <div className="flex justify-end">
+                    <CallToAction
+                        onClick={handleCheckout}
+                        type="primary"
+                        className={cn('relative text-center w-full', className)}
+                    >
+                        <>
+                            <span className={cn('mx-16', showAdjustments && 'invisible', isCheckingOut && 'invisible')}>
+                                Checkout
+                            </span>
+                            <span
+                                className={cn(
+                                    'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full',
+                                    showAdjustments && 'visible',
+                                    isCheckingOut && 'invisible'
+                                )}
+                            >
+                                Proceed to Checkout
+                            </span>
+                            <LoaderIcon
+                                className={cn(
+                                    'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
+                                    !showAdjustments && isCheckingOut && 'visible'
+                                )}
+                            />
+                        </>
+                    </CallToAction>
+                </div>
+            )}
         </div>
     )
 }

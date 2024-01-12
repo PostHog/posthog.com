@@ -1,10 +1,13 @@
 import { create } from 'zustand'
 import { persist, subscribeWithSelector } from 'zustand/middleware'
-import type { CartItem, ShopifyProductVariant } from './types'
+import { getCartQuery } from '../../lib/shopify'
+import type { Cart, CartItem, ShopifyProductVariant } from './types'
 
 type CartItems = CartItem[] | []
 
 interface CartStore {
+    cartId: string | null
+    setCartId: (id: string) => void
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
     discountCode: string | null
@@ -23,6 +26,8 @@ interface CartStore {
 export const useCartStore = create<CartStore>()(
     persist(
         subscribeWithSelector((set, get) => ({
+            cartId: null,
+            setCartId: (id: string) => set({ cartId: id }),
             isOpen: false,
             setIsOpen: (isOpen: boolean) => set({ isOpen }),
             discountCode: null,
@@ -40,7 +45,14 @@ export const useCartStore = create<CartStore>()(
                 const updatedCart = removeCart(variantId, cartItems)
                 set({ cartItems: updatedCart })
             },
-            removeAll: () => set({ cartItems: [] }),
+            removeAll: () =>
+                set({
+                    cartItems: [],
+                    cartId: null,
+                    count: null,
+                    discountCode: null,
+                    subtotal: null,
+                }),
             // TODO: this will hold the checkout url produced at time of checkout. The next time
             // the user visits the site, this url should be in local storage and we need to ping
             // Shopify again because if their checkout (at this specific checkout url) was completed
@@ -91,3 +103,22 @@ const unsubCartItemsChange = useCartStore.subscribe(
         useCartStore.setState({ subtotal, count: cartCount })
     }
 )
+
+/**
+ * On a full reload, grab the initial cart
+ */
+const initialFire = useCartStore.subscribe(
+    (state) => state.cartId,
+    async (cartId) => {
+        if (cartId) {
+            const cart = (await getCartQuery(cartId)) as Cart
+            if (!cart) {
+                useCartStore.getState().removeAll()
+            }
+        }
+    },
+    {
+        fireImmediately: true,
+    }
+)
+initialFire()
