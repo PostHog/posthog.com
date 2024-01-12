@@ -41,7 +41,7 @@ We have a tiny exec team - this is what they are responsible for:
 
 For _everything else_, you and/or your small team should be able to decide this or talk directly to the teams involved. This includes deciding which feature to build next within a particular product. We trust you to bring in the right people as you think is appropriate, relative to the scale of what you're doing. 
 
-PostHog is _not_ a good place for managers who (i) are territorial and (ii) prefer for all communication to go through them for 'efficiency'. Over time, doing this, would undermine autonomy and cause our best people to quit!
+PostHog is _not_ a good place for managers who (i) are territorial and (ii) prefer for all communication to go through them for 'efficiency'. Over time, doing this would undermine autonomy and cause our best people to quit!
 
 ## Goal setting
 
