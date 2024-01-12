@@ -1169,6 +1169,8 @@
         { "source": "/docs/runbook/services/zookeeper", "destination": "/docs/self-host" },
         { "source": "/docs/runbook/disaster-recovery", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/configure/monitoring-with-grafana", "destination": "/docs/self-host" },
-        { "source": "/docs/self-host/configure/using-altinity-cloud", "destination": "/docs/self-host" }
+        { "source": "/docs/self-host/configure/using-altinity-cloud", "destination": "/docs/self-host" },
+        { "source": "/docs/cdp/first-time-event-tracker", "destination": "/docs/cdp" },
+        { "source": "/cdp/first-time-event-tracker", "destination": "/docs/cdp" }
     ]
 }
