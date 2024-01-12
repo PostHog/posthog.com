@@ -73,7 +73,7 @@ For these projects, we recommend the individual owning it write a "Status update
 
 ## Small Teams Intros
 
-Every small team should have an agreed charter which should include at the very least, but not be limited to: 
+Every small team should have an agreed charter which should include: 
 
 * Mission
 * Long term goals
