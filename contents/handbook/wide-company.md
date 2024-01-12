@@ -27,6 +27,22 @@ As with any startup, the principles that govern these small teams are:
 - Should work directly with its own users (until it has hit product-market fit within PostHog's platform)
 - Should be small
 
+## Minimal hierarchy
+
+We deliberately keep the number of levels and people managers at PostHog to the absolute minimum we can get away with. This maximizes team member autononomy _and_ increases shipping speed, as you don't need to run things past a manager or wait to get something signed off the vast majority of the time. 
+
+This means that, if you need something or need to flag an issue, you are strongly encouraged to communicate _directly_ with the person or team working on the thing you care about. We want to avoid people going up and down the org chart via managers as much as possible. 90% of the time, this approach means you'll get what you need faster. 10% of the time, this might cause a tiny bit of confusion if what you are asking for doesn't beautifully align with that team's objectives. We believe that trade-off is ok - we'll figure it out. 
+
+We have a tiny exec team - this is what they are responsible for:
+- Set the overall direction and strategy for PostHog
+- Decide which products to build
+- Make key people decisions (ie. who to hire, pay, disciplinary issues)
+- Ensure complicated cross-team initiatives run smoothly (e.g. pricing)
+
+For _everything else_, you and/or your small team should be able to decide this or talk directly to the teams involved. This includes deciding which feature to build next within a particular product. We trust you to bring in the right people as you think is appropriate, relative to the scale of what you're doing. 
+
+PostHog is _not_ a good place for managers who (i) are territorial and (ii) prefer for all communication to go through them for 'efficiency'. Over time, doing this would undermine autonomy and cause our best people to quit!
+
 ## Goal setting
 
 When you build a startup from scratch, you are in an existential crisis. One day you might be building a gym, the next day a software product for accountants. The problem changes. At PostHog, we give each small team a product to build. (James and Tim focus on _which_ products we should build, as they often need sequencing.)

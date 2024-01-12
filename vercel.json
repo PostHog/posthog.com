@@ -1169,6 +1169,12 @@
         { "source": "/docs/runbook/services/zookeeper", "destination": "/docs/self-host" },
         { "source": "/docs/runbook/disaster-recovery", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/configure/monitoring-with-grafana", "destination": "/docs/self-host" },
-        { "source": "/docs/self-host/configure/using-altinity-cloud", "destination": "/docs/self-host" }
+        { "source": "/docs/self-host/configure/using-altinity-cloud", "destination": "/docs/self-host" },
+        { "source": "/docs/cdp/first-time-event-tracker", "destination": "/docs/cdp" },
+        { "source": "/cdp/first-time-event-tracker", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/bigquery-export", "destination": "/docs/cdp/batch-exports/bigquery" },
+        { "source": "/docs/cdp/postgres-export", "destination": "/docs/cdp/batch-exports/postgres" },
+        { "source": "/docs/cdp/s3-export", "destination": "/docs/cdp/batch-exports/s3" },
+        { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" }
     ]
 }
