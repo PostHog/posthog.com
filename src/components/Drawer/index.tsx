@@ -1,6 +1,6 @@
-import { Dialog, Transition, Transition } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import { IconX } from '@posthog/icons'
-import { Fragment, default as React, default as React } from 'react'
+import { Fragment, default as React } from 'react'
 import { cn } from '../../utils'
 
 interface DrawerProps {
