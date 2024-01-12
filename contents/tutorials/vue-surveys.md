@@ -145,8 +145,7 @@ Then, click "Save as draft" and then "Launch". Your survey is now live and you s
 
 If you prefer to have complete control of your survey UI and logic, you can still use PostHog to keep track of and analyze your results.
 
-p
-First, create a Rating survey in PostHog like in option 1 above, except set the display mode to `API`.
+First, create a survey in PostHog like in option 1 above, except set `Presentation` to **API** (For this tutorial, we use a Net promoter score survey template).
 
 ![Custom survey set up](../images/tutorials/nextjs-surveys/create-api-survey.png)
 
@@ -159,55 +158,52 @@ Then, there are four parts to adding code for our custom survey:
 
 #### 1. Create the survey UI
 
-We've created a sample survey UI for this tutorial. To use it, create a new file in `app` folder called `Survey.js` and paste the following code:
+We've created a sample survey UI for this tutorial. To use it, create a new file in `components` folder called `CustomSurvey.vue` and paste the following code:
 
-```js-web
-// app/Survey.js
-import { useState } from 'react'
-import styles from './page.module.css'
-
-function Survey({ title, onDismiss, onSubmit }) {
-  const [selectedValue, setSelectedValue] = useState(null);
-
-  const handleSelect = (value) => {
-    setSelectedValue(value);
-  }
-
-  const handleSubmit = () => {
-    onSubmit(selectedValue);
-  }
-
-  return (
-    <div className={styles.survey}>
-      <h2>{title}</h2>
-      <div>
-        {[...Array(10)].map((_, i) => (
-          <button className={styles.button} key={i + 1} onClick={() => handleSelect(i + 1)}>{i + 1}</button>
-        ))}
-      </div>
-      <div>
-        <button className={styles.button} onClick={onDismiss}>Dismiss</button>
-        <button className={styles.button} onClick={handleSubmit}>Submit</button>
-      </div>
+```vue filename=components/CustomSurvey.vue
+<template>
+  <div class="survey">
+    <h2>{{ title }}</h2>
+    <div>
+      <button v-for="i in 10" :key="i" class="button" @click="handleSelect(i)">
+        {{ i }}
+      </button>
     </div>
-  );
+    <div>
+      <button class="button" @click="emitDismiss">Dismiss</button>
+      <button class="button" @click="emitSubmit">Submit</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'CustomSurvey',
+  props: {
+    title: String,
+    onDismiss: Function,
+    onSubmit: Function
+  },
+  data() {
+    return {
+      selectedValue: null
+    };
+  },
+  methods: {
+    handleSelect(value) {
+      this.selectedValue = value;
+    },
+    emitDismiss() {
+      this.$emit('onDismiss');
+    },
+    emitSubmit() {
+      this.$emit('onSubmit', this.selectedValue);
+    }
+  }
 }
+</script>
 
-export default Survey;
-```
-
-Then, replace the CSS code in `page.module.css` with the following:
-
-```css
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
-}
-
+<style scoped>
 .survey {
   position: fixed;
   bottom: 20px;
@@ -224,43 +220,50 @@ Then, replace the CSS code in `page.module.css` with the following:
   margin: 5px;
   padding: 5px;
 }
+</style>
 ```
 
-Finally, integrate the component into `page.js`:
+Then, integrate the component into `App.vue`:
 
-```js-web
-// app/page.js
-'use client'
+```vue filename=App.vue
+<template>
+  <main>
+    <div class="App">
+      <h1>This is our Vue.js survey tutorial</h1>
+      <CustomSurvey
+        v-if="showSurvey"
+        title="Survey title"
+        @onDismiss="handleDismiss"
+        @onSubmit="handleSubmit"
+      />
+    </div>
+  </main>
+</template>
 
-import { useState } from 'react'
-import styles from './page.module.css'
-import Survey from './Survey';
+<script>
+import CustomSurvey from './components/CustomSurvey.vue'
 
-export default function Home() {
-  const [showSurvey, setShowSurvey] = useState(true);
-
-  const handleDismiss = () => {
-    setShowSurvey(false);
-  };
-
-  const handleSubmit = (value) => {
-    setShowSurvey(false);
-  };
-
-  return (
-    <main className={styles.main}>
-      <div className="App">
-        <h1>This is our Next.js survey tutorial</h1>
-        {showSurvey && (
-        <Survey
-          title={"Rate our service"}
-          onDismiss={handleDismiss}
-          onSubmit={handleSubmit}
-        />)}
-      </div>
-    </main>
-  )
+export default {
+  name: 'App',
+  components: {
+    CustomSurvey
+  },
+  data() {
+    return {
+      showSurvey: true
+    };
+  },
+  methods: {
+    handleDismiss() {
+      this.showSurvey = false;
+    },
+    handleSubmit(value) {
+      console.log("Submitted value:", value);
+      this.showSurvey = false;
+    }
+  }
 }
+</script>
 ```
 
 This shows a survey popup every time you visit your app's homepage.
@@ -271,28 +274,41 @@ This shows a survey popup every time you visit your app's homepage.
 
 PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
 
-To fetch the active surveys, we use the `usePostHog` hook to call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
+To fetch the active surveys, we use `this.$posthog.getActiveMatchingSurveys()`:
 
-```js-web
-// app/page.js
-'use client'
+```vue filename=App.vue
+<!-- src/App.vue -->
+<template>
+  <!-- ... rest of your template ... -->
+</template>
 
-import { useState, useEffect } from 'react'
-import styles from './page.module.css'
-import Survey from './Survey';
-import { usePostHog } from 'posthog-js/react';
+<script>
+import CustomSurvey from './components/CustomSurvey.vue'
 
-export default function Home() {
-  // ... rest of your code ...
-
-  const posthog = usePostHog()
-  useEffect(() => {
-    posthog.getActiveMatchingSurveys((surveys) => {
-    }); 
-  }, [posthog]);
-  
-  // ... rest of your code ...
+export default {
+  name: 'App',
+  components: {
+    CustomSurvey
+  },
+  data() {
+    return {
+      showSurvey: true,
+    };
+  },
+  mounted() {
+    this.$posthog.getActiveMatchingSurveys((surveys) => {
+    });
+  },
+  methods: {
+    // ... rest of your methods ...
+  }
 }
+</script>
+
+<style>
+  /* ... rest of your styles ... */
+</style>
+
 ```
 
 `posthog.getActiveMatchingSurveys()` returns a surveys object that looks like this:
@@ -300,97 +316,141 @@ export default function Home() {
 ```JSON
 [
    {
-      "id":"018ad0e0-0de6-0000-6a56-033975bd0c68",
-      "name":"my-first-survey",
-      "description":"",
-      "type":"api",
-      "questions":[
-         {
-            "type":"rating",
-            "scale":10,
-            "display":"number",
-            "question":"How likely are you to recommend us to a friend?",
-            "description":"",
-            "lowerBoundLabel":"Unlikely",
-            "upperBoundLabel":"Very likely"
-         }
-      ],
-      "conditions":null,
-      "appearance":{
-         "textColor":"black",
-         "whiteLabel":false,
-         "backgroundColor":"white",
-         "submitButtonText":"Submit",
-         "ratingButtonColor":"#e0e2e8",
-         "submitButtonColor":"#2c2c2c",
-         "descriptionTextColor":"#4b4b52",
-         "thankYouMessageHeader":"Thank you for your feedback!",
-         "displayThankYouMessage":true
-      },
-      "start_date":"2023-09-26T09:44:31.844000Z",
-      "end_date":null
+     "id": "018cfcd5-107e-0000-49a1-8e7c6b825947",
+     "name": "Net promoter score (NPS) API Survey",
+     "description": "",
+     "type": "api",
+     "linked_flag_key": null,
+     "targeting_flag_key": null,
+     "questions": [
+       {
+         "type": "rating",
+         "scale": 10,
+         "display": "number",
+         "question": "How likely are you to recommend us to a friend?",
+         "description": "",
+         "lowerBoundLabel": "Unlikely",
+         "upperBoundLabel": "Very likely"
+       }
+     ],
+     "conditions": null,
+     "start_date": "2024-01-12T08:41:20.614000Z",
+     "end_date": null
    }
 ]
 ```
 
-We can use this survey object to configure our `Survey` component:
+We can use this survey object to configure our `CustomSurvey` component:
 
-```js-web
-  // ... rest of your code ...
-  const [surveyTitle, setSurveyTitle] = useState(false);
-  const [surveyID, setSurveyID] = useState(false);
-  useEffect(() => {
-    posthog.getActiveMatchingSurveys((surveys) => {
-      if (surveys.length > 0) {
-        const survey = surveys[0];
-        setSurveyID(survey.id);
-        setSurveyTitle(survey.questions[0].question)
-      }
-    }); 
-  }, [posthog])
-  
-  // ... rest of your code ...
-  return (
-    <main className={styles.main}>
-      <div className="App">
-        <h1>This is our Next.js survey tutorial</h1>
-        {showSurvey && (
-        <Survey
-          title={surveyTitle}
-          onDismiss={handleDismiss}
-          onSubmit={handleSubmit}
-        />)}
-      </div>
-    </main>
-  )
+```vue filename=App.vue
+<!-- src/App.vue -->
+<template>
+  <main>
+    <div class="App">
+      <h1>This is our Vue.js survey tutorial</h1>
+      <CustomSurvey
+        v-if="showSurvey"
+        :title="surveyTitle"
+        @onDismiss="handleDismiss"
+        @onSubmit="handleSubmit"
+      />
+    </div>
+  </main>
+</template>
+
+<script>
+import CustomSurvey from './components/CustomSurvey.vue'
+
+export default {
+  name: 'App',
+  components: {
+    CustomSurvey
+  },
+  data() {
+    return {
+      showSurvey: true,
+      surveyTitle: '',
+      surveyID: ''
+    };
+  },
+  mounted() {
+    this.fetchActiveSurveys();
+  },
+  methods: {
+    fetchActiveSurveys() {
+      this.$posthog.getActiveMatchingSurveys((surveys) => {
+        if (surveys.length > 0) {
+          const survey = surveys[0];
+          this.surveyID = survey.id;
+          this.surveyTitle = survey.questions[0].question;
+        }
+      });
+    },
+    // ... rest of your methods ...
+  }
+}
+</script>
+
+<style>
+  /* ... rest of your styles ... */
+</style>
 ```
 
 #### 3. Add the logic for displaying and hiding it.
 
 We want to make sure we don't show the survey again to users who have either submitted or dismissed it. We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data and use it to check whether to show the survey or not.
 
-```js-web
-  // ... rest of your code ...
+```vue filename=App.vue
+<!-- src/App.vue -->
+<template>
+  <!-- ... rest of your template ... -->
+</template>
 
-  const [showSurvey, setShowSurvey] = useState(false);
+<script>
+import CustomSurvey from './components/CustomSurvey.vue'
 
-  useEffect(() => {
-    // Check local storage to see if the user has already seen this particular survey
-    const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${surveyID}`);
-    setShowSurvey(!hasInteractedWithSurvey);
-  }, [surveyID]);
+export default {
+  name: 'App',
+  components: {
+    CustomSurvey
+  },
+  data() {
+    return {
+      showSurvey: false,
+      surveyTitle: '',
+      surveyID: ''
+    };
+  },
+  mounted() {
+    this.fetchSurvey();
+    this.checkSurveyInteraction();
+  },
+  methods: {
+    fetchSurvey() {
+      this.$posthog.getActiveMatchingSurveys((surveys) => {
+        // ... existing survey logic ...
+      });
+    },
+    checkSurveyInteraction() {
+      const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${this.surveyID}`);
+      this.showSurvey = !hasInteractedWithSurvey;
+    },
+    handleDismiss() {
+      this.showSurvey = false;
+      localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
+    },
+    handleSubmit(value) {
+      console.log("Submitted value:", value); // Or any other submit logic
+      this.showSurvey = false;
+      localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
+    }
+  }
+}
+</script>
 
-  const handleDismiss = () => {
-    setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
-  };
-
-  const handleSubmit = (value) => {
-    setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
-  };
-
-  // ... rest of your code ...
+<style>
+  /* ... rest of your styles ... */
+</style>
 ```
 
 #### 4. Capture interactions from it.
@@ -405,36 +465,65 @@ There are 3 events to capture:
 
 You can capture these events using `posthog.capture()`:
 
-```js-web
-  // ... rest of your code ...
+```vue filename=App.vue
+<!-- src/App.vue -->
+<template>
+  <!-- ... rest of your template ... -->
+</template>
 
-  const handleDismiss = () => {
-    setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
-    posthog.capture("survey dismissed", {
-      $survey_id: surveyID // required
-    })
-  };
+<script>
+import CustomSurvey from './components/CustomSurvey.vue'
 
-  const handleSubmit = (value) => {
-    setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
-    posthog.capture("survey sent", {
-      $survey_id: surveyID, // required
-      $survey_response: value // required
-    })
-  };
-
-  useEffect(() => {
-    if (posthog && surveyID && showSurvey) {
-      posthog.capture("survey seen", {
-        $survey_id: surveyID // required
+export default {
+  name: 'App',
+  components: {
+    CustomSurvey
+  },
+  data() {
+    // existing data object
+  },
+  mounted() {
+    this.fetchSurvey();
+    this.checkSurveyInteraction();
+  },
+  methods: {
+    fetchActiveSurveys() {
+      this.$posthog.getActiveMatchingSurveys((surveys) => {
+        if (surveys.length > 0) {
+          const survey = surveys[0];
+          this.surveyID = survey.id;
+          this.surveyTitle = survey.questions[0].question;
+          this.checkSurveyInteraction();
+          if (this.showSurvey) {
+            this.$posthog.capture("survey seen", {
+              $survey_id: this.surveyID // required
+            })
+          }
+        }
+      });
+    },
+    checkSurveyInteraction() {
+      const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${this.surveyID}`);
+      this.showSurvey = !hasInteractedWithSurvey;
+    },
+    handleDismiss() {
+      this.showSurvey = false;
+      localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
+      this.$posthog.capture("survey dismissed", {
+        $survey_id: this.surveyID // required
+      })
+    },
+    handleSubmit(value) {
+      this.showSurvey = false;
+      localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
+      this.$posthog.capture("survey sent", {
+        $survey_id: this.surveyID, // required
+        $survey_response: value // required
       })
     }
-  }, [showSurvey, surveyID, posthog])
-
- // ... rest of your code ...
-```
+  }
+}
+</script>
 
 Altogether, your code should look like this:
 
