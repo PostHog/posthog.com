@@ -23,7 +23,6 @@ type NavProps = {
 }
 
 export function Nav(props: NavProps): React.ReactElement {
-    console.log('🚀 ~ props:', props)
     const { currentCollectionHandle, items = [], ...rest } = props
     const count = useCartStore((state) => state.count)
     const [cartIsOpen, setCartIsOpen] = useControllableValue<boolean>(rest, {
