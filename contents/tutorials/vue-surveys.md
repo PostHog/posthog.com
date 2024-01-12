@@ -11,6 +11,8 @@ tags: ['surveys']
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import EventsLight from '../images/tutorials/vue-surveys/events-light.png'
 import EventsDark from '../images/tutorials/vue-surveys/events-dark.png'
+import ImgSurveyResultsLight from '../images/tutorials/vue-surveys/survey-results-light.png'
+import ImgSurveyResultsDark from '../images/tutorials/vue-surveys/survey-results-dark.png'
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Vue.js app.
 
@@ -524,79 +526,83 @@ export default {
   }
 }
 </script>
+```
 
 Altogether, your code should look like this:
 
-```js-web
-// app/page.js
-'use client'
+```vue filename=App.vue
+<template>
+  <main>
+    <div class="App">
+      <h1>This is our Vue.js survey tutorial</h1>
+    <CustomSurvey
+      v-if="showSurvey"
+      :title="surveyTitle"
+      @onDismiss="handleDismiss"
+      @onSubmit="handleSubmit"
+    />
+    </div>
+  </main>
+</template>
 
-import { useState, useEffect } from 'react'
-import styles from './page.module.css'
-import Survey from './Survey';
-import { usePostHog } from 'posthog-js/react';
+<script>
+import CustomSurvey from './components/CustomSurvey.vue'
 
-export default function Home() {
-  const [showSurvey, setShowSurvey] = useState(false);
-
-  const posthog = usePostHog()
-  const [surveyTitle, setSurveyTitle] = useState(false);
-  const [surveyID, setSurveyID] = useState(false);
-  useEffect(() => {
-    posthog.getActiveMatchingSurveys((surveys) => {
-      if (surveys.length > 0) {
-        const survey = surveys[0];
-        setSurveyID(survey.id);
-        setSurveyTitle(survey.questions[0].question)
-      }
-    }); 
-  }, [posthog])
-
-  useEffect(() => {
-    // Check local storage to see if the user has already seen this particular survey
-    const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${surveyID}`);
-    setShowSurvey(!hasInteractedWithSurvey);
-  }, [surveyID]);
-
-  const handleDismiss = () => {
-    setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
-    posthog.capture("survey dismissed", {
-      $survey_id: surveyID // required
-    })
-  };
-
-  const handleSubmit = (value) => {
-    setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
-    posthog.capture("survey sent", {
-      $survey_id: surveyID, // required
-      $survey_response: value // required
-    })
-  };
-
-  useEffect(() => {
-    if (posthog && surveyID && showSurvey) {
-      posthog.capture("survey seen", {
-        $survey_id: surveyID // required
+export default {
+  name: 'App',
+  components: {
+    CustomSurvey
+  },
+  data() {
+    return {
+      showSurvey: false,
+      surveyTitle: '',
+      surveyID: ''
+    };
+  },
+  mounted() {
+    this.fetchActiveSurveys();
+    this.checkSurveyInteraction();
+  },
+  methods: {
+    fetchActiveSurveys() {
+      this.$posthog.getActiveMatchingSurveys((surveys) => {
+        if (surveys.length > 0) {
+          const survey = surveys[0];
+          this.surveyID = survey.id;
+          this.surveyTitle = survey.questions[0].question;
+          this.checkSurveyInteraction();
+          if (this.showSurvey) {
+            this.$posthog.capture("survey seen", {
+              $survey_id: this.surveyID // required
+            })
+          }
+        }
+      });
+    },
+    checkSurveyInteraction() {
+      const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${this.surveyID}`);
+      this.showSurvey = !hasInteractedWithSurvey;
+    },
+    handleDismiss() {
+      console.log('dismiss clicked')
+      this.showSurvey = false;
+      localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
+      this.$posthog.capture("survey dismissed", {
+        $survey_id: this.surveyID // required
+      })
+    },
+    handleSubmit(value) {
+      this.showSurvey = false;
+      localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
+      this.$posthog.capture("survey sent", {
+        $survey_id: this.surveyID, // required
+        $survey_response: value // required
       })
     }
-  }, [showSurvey, surveyID, posthog])
-
-  return (
-    <main className={styles.main}>
-      <div className="App">
-        <h1>This is our Next.js survey tutorial</h1>
-        {showSurvey && (
-        <Survey
-          title={surveyTitle}
-          onDismiss={handleDismiss}
-          onSubmit={handleSubmit}
-        />)}
-      </div>
-    </main>
-  )
+  }
 }
+</script>
 ```
 
 Our survey is now ready to go! The next step is ship the changes, get responses, and view your results.
@@ -611,7 +617,12 @@ After interacting with your survey, you can view results by selecting the survey
 
 You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
-![Viewing survey results](../images/tutorials/nextjs-surveys/survey-results.png)
+<ProductScreenshot
+  imageLight={ImgSurveyResultsLight} 
+  imageDark={ImgSurveyResultsDark} 
+  alt="Survey results" 
+  classes="rounded"
+/>
 
 ## Further reading
 
