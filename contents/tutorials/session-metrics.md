@@ -10,7 +10,7 @@ tags: ['trends', 'sessions', 'product analytics']
 
 Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is tracking metrics like time on site, average session duration, and pages per session. 
 
-PostHog defines a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event. We get session data from our [snippet](/docs/getting-started/install?tab=snippet), [JavaScript library](/docs/libraries/js), or ][mobile SDKs](/docs/libraries/ios). For more information about sessions, see our [docs](/docs/data/sessions). 
+PostHog defines a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event. We get session data from our [snippet](/docs/getting-started/install?tab=snippet), [JavaScript library](/docs/libraries/js), or [mobile SDKs](/docs/libraries/ios). For more information about sessions, see our [docs](/docs/data/sessions). 
 
 In this tutorial, we will use sessions to calculate and visualize a variety of session and time-based metrics like time on site and average session duration.
 
