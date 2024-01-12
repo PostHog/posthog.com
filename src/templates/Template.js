@@ -46,26 +46,23 @@ export default function Template({ data }) {
                         </article>
                         <article>
                             {type.includes('dashboard') && (
-                                <div className="m-6 mb-12">
+                                <div className="m-6 mb-12 text-center">
                                     <p className="m-0 text-[15px]">
-                                        To use this template,{' '}
-                                        <Link to="https://app.posthog.com/dashboard"> go to the Dashboards tab</Link>,
-                                        click the "New dashboard" button, and select "{title}" from the modal.
+                                        <Link to="https://us.posthog.com/dashboard#newDashboard">
+                                            Get started with this template now
+                                        </Link>{' '}
+                                        or <Link to="https://us.posthog.com/dashboard">create your own</Link>
                                     </p>
-                                    <img className="w-full mt-6" src={CreateDashboardImage} alt="" />
                                 </div>
                             )}
                             {type.includes('survey') && (
-                                <div className="m-6 mb-12">
+                                <div className="m-6 mb-12 text-center">
                                     <p className="m-0 text-[15px]">
-                                        To use this template,{' '}
                                         <Link to="https://app.posthog.com/survey_templates">
-                                            {' '}
-                                            go to the Surveys tab
-                                        </Link>
-                                        , click the "New survey" button, and select the {title} from the page.
+                                            Get started with this template now
+                                        </Link>{' '}
+                                        or <Link to="https://us.posthog.com/surveys">create your own</Link>
                                     </p>
-                                    <img className="w-full mt-6" src={CreateSurveyImage} alt="" />
                                 </div>
                             )}
                         </article>
