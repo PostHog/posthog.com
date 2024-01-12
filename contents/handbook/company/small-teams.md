@@ -82,7 +82,7 @@ Every small team should have an agreed charter which should include at the very 
 * Who is on the team
 * Key metrics
 
-These should all be visible on the website, updated when changes are made & confirmed ahead of each quarter so everyone is on the same page. 
+These should all be visible in the Handbook, updated when changes are made & confirmed ahead of each quarter so everyone is on the same page. 
 
 ## Small Teams list
 
