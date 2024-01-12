@@ -2131,8 +2131,14 @@ export const docsMenu = {
                 {
                     name: 'Multi-project feature flags',
                     url: '/docs/feature-flags/multi-project-feature-flags',
-                    icon: 'IconCalculator',
+                    icon: 'IconStack',
                     color: 'blue',
+                },
+                {
+                    name: 'Scheduled flag changes',
+                    url: '/docs/feature-flags/scheduled-flag-changes',
+                    icon: 'IconClock',
+                    color: 'seagreen',
                 },
             ],
         },
