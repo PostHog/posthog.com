@@ -188,7 +188,8 @@ import { PostHogProvider } from 'posthog-js/react'
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }
 
@@ -205,7 +206,7 @@ export function PHProvider({
 
 Once created, you can import the `PostHogPageView` and `PHProvider` components into your `app/layout` file, then wrap your app in the provider component.
 
-We need to dynamically import the `PostHogPageview` component as it contains the [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) hook. Using this hook [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if it is not dynamically imported.
+We need to dynamically import the `PostHogPageView` component before including it as it contains the [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) hook. Using this hook [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if it is not dynamically imported.
 
 <MultiLanguage>
 
@@ -214,10 +215,9 @@ We need to dynamically import the `PostHogPageview` component as it contains the
 
 import './globals.css'
 import { PHProvider } from './providers'
-
 import dynamic from 'next/dynamic'
 
-const PostHogPageview = dynamic(() => import('./PostHogPageView'), {
+const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
   ssr: false,
 })
 
@@ -226,7 +226,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <PHProvider>
         <body>
-          <PostHogPageview /> 
+          <PostHogPageView /> 
           {children}
         </body>
       </PHProvider>
@@ -243,7 +243,7 @@ import { PHProvider } from './providers'
 
 import dynamic from 'next/dynamic'
 
-const PostHogPageview = dynamic(() => import('./PostHogPageView'), {
+const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
   ssr: false,
 })
 
