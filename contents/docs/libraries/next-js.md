@@ -90,7 +90,53 @@ export default function App({ Component, pageProps }) {
 
 ### App router
 
-If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `PostHogPageview` component and a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components).
+If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components).
+
+<MultiLanguage>
+
+```js
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
+  })
+}
+
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+```ts
+// app/providers.tsx
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
+  })
+}
+
+export function PHProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+</MultiLanguage>
+
+Then, to capture pageviews, we set up a `PostHogPageView` component to listen to url path changes:
 
 <MultiLanguage>
 
@@ -161,52 +207,9 @@ export default function PostHogPageView() {
 </MultiLanguage>
 
 
-<MultiLanguage>
+Then, import the `PHProvider` component into your `app/layout` file and wrap your app with it. We also dynamically import the `PostHogPageView` component and include it as a child of `PHProvider`.
 
-```js
-// app/providers.js
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
-  })
-}
-
-export function PHProvider({ children }) {
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-```ts
-// app/providers.tsx
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    capture_pageview: false // Disable automatic pageview capture, as we capture manually
-  })
-}
-
-export function PHProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-</MultiLanguage>
-
-Once created, you can import the `PostHogPageView` and `PHProvider` components into your `app/layout` file, then wrap your app in the provider component.
-
-We need to dynamically import the `PostHogPageView` component before including it as it contains the [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) hook. Using this hook [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if it is not dynamically imported.
+> **Why is `PostHogPageView` dynamically imported?** It contains the [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) hook, which [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if it is not dynamically imported.
 
 <MultiLanguage>
 
@@ -267,7 +270,7 @@ export default function RootLayout({
 
 </MultiLanguage>
 
-Files and components accessing PostHog on the client-side need the `'use client'` directive.
+PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
 
 ### Accessing PostHog using the provider
 
