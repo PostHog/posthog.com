@@ -1,14 +1,14 @@
 import { CallToAction } from 'components/CallToAction'
-import { GatsbyImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
-import { ShopifyProduct } from 'templates/merch/types'
 import { cn } from '../../utils'
 import { LoaderIcon } from './LoaderIcon'
 import { Price } from './Price'
+import { ProductCarousel } from './ProductCarousel'
 import { ProductOptionSelect } from './ProductOptionSelect'
 import { Quantity } from './Quantity'
 import { useProduct } from './hooks'
 import { useCartStore } from './store'
+import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 
 type ProductPanelProps = {
@@ -49,11 +49,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         New
                     </div>
                 )}
-                <GatsbyImage
-                    className="w-full rounded-md overflow-hidden aspect-square"
-                    image={product.featuredMedia.preview.image.localFile.childImageSharp.gatsbyImageData}
-                    alt={product.title}
-                />
+
+                <ProductCarousel product={product} />
             </div>
             <div className="[&_*]:mb-0 space-y-0.5">
                 <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">

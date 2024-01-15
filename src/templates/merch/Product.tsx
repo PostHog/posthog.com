@@ -1,12 +1,12 @@
 import { CallToAction } from 'components/CallToAction'
 import Layout from 'components/Layout'
 import { graphql } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import { cn } from '../../utils'
 import { LoaderIcon } from './LoaderIcon'
 import { Nav } from './Nav'
 import { Price } from './Price'
+import { ProductCarousel } from './ProductCarousel'
 import { ProductOptionSelect } from './ProductOptionSelect'
 import { Quantity } from './Quantity'
 import { useProduct } from './hooks'
@@ -65,11 +65,7 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                                     New
                                 </div>
                             )}
-                            <GatsbyImage
-                                className="w-full rounded-md overflow-hidden aspect-square"
-                                image={product.featuredMedia.preview.image.localFile.childImageSharp.gatsbyImageData}
-                                alt={product.title}
-                            />
+                            <ProductCarousel product={product} />
                         </div>
                     </div>
                     <div className="[&_*]:mb-0 space-y-4">
@@ -128,6 +124,18 @@ export const query = graphql`
             handle
             shopifyId
             description
+            media {
+                mediaContentType
+                preview {
+                    image {
+                        localFile {
+                            childImageSharp {
+                                gatsbyImageData
+                            }
+                        }
+                    }
+                }
+            }
             metafields {
                 value
                 key

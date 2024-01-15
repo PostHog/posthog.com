@@ -48,11 +48,18 @@ export type ShopifyMediaImage = {
     }
 }
 
+export type ShopifyMediaItem = ShopifyMediaImage & {
+    mediaContentType: 'IMAGE'
+}
+
+export type ShopifyMedia = ShopifyMediaItem[]
+
 export type ShopifyProduct = {
     description: string
     featuredMedia: ShopifyMediaImage
     handle: string
     id: string
+    media: ShopifyMedia
     metafields: Metafields
     priceRangeV2: {
         minVariantPrice: {
