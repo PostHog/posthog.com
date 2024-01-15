@@ -22,9 +22,7 @@ We'll create a basic Vue app, add PostHog, create a survey, and then show you ho
 
 ## 1. Create a Vue app
 
-For this tutorial, we create a basic `Vue 3` app with a simple button to run our test on.
-
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then install `@vue/cli` and create a new Vue app:
+For this tutorial, we create a basic `Vue 3` app. First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then install `@vue/cli` and create a new Vue app:
 
 ```bash
 npm install -g @vue/cli
