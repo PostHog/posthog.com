@@ -26,12 +26,12 @@ Tim and James are responsible for making any final decision to let someone go.
 
 We use the following general process for managing people whose performance isn't up to the right standard. We modify this slightly depending on the specific nature of the role and how long they have been at PostHog, so the process isn't identical in every case:
 
-- A member of the exec team will raise that a team member isn't meeting our performance expectations. They discuss what the issues are and a plan to improve. 
-- The relevant person on the exec team has a meeting with the team member to let them know explicitly that their performance is not meeting expectations, and and that if it continues then they will not be able to continue at PostHog. This meeting may include the person's manager, depending on role. 
+- A member of the exec team will raise that a team member isn't meeting our performance expectations. They discuss what the issues are and a plan to improve. The relevant exec team member follows up with the person's manager. 
+- The person's manager has a meeting with the team member to let them know explicitly that their performance is not meeting expectations, and and that if it continues then they will not be able to continue at PostHog. This meeting may include a member of the exec team, depending on role. 
   - If the person is a manager, we usually collect feedback from their team beforehand. 
-- We outline to the team member exactly what good performance looks like (e.g. specific things to ship), and a timeline for improvement. Usually this is a few weeks for someone new to PostHog, but may be longer if the person has been at PostHog for a while. We schedule a time for a follow up conversation at the end of this period.
+- We outline to the team member exactly what good performance looks like. We collaborate with them to come up with a plan (e.g. specific things to ship), and a timeline for improvement. Usually this is a few weeks for someone new to PostHog, but may be longer if the person has been at PostHog for a while. We schedule a time for a follow up conversation at the end of this period.
   - If the person doesn't accept the feedback at the time and/or we don't feel like there is a realistic path to them improving, we may follow up to let them go sooner than this. 
-- At the follow up meeting, we either confirm that performance has improved and they are on the right track, or that we have decided to let them go.
+- At the follow up meeting, we either confirm that performance has improved and they are on the right track, or that we have decided to let them go right away. 
 
 In cases where a team member's role can no longer be justified, we usually make a decision as an exec team and then let the team member know straight away - unfortunately it is not feasible to let someone know that we are thinking of getting rid of their role.
 
