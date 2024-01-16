@@ -178,4 +178,4 @@ With this, you’re ready to launch your experiment!
 
 - [How to set up surveys in Vue](/tutorials/vue-surveys)
 - [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+- [How to set up analytics in Vue with PostHog](/tutorials/vue-analytics)
