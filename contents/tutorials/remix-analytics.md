@@ -161,9 +161,9 @@ import { hydrateRoot } from "react-dom/client";
 import posthog from "posthog-js";
 
 posthog.init(
-  'phc_zr8PzJVYWUgq47uTjJ8Cp7uCXfkGRppRbIUYlHe5w09',
+  '<ph_project_api_key>',
   {
-    api_host:'https://app.posthog.com',
+    api_host:'<ph_instance_address>',
   }
 )
 
