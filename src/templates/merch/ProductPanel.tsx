@@ -1,6 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import React, { useState } from 'react'
 import { cn } from '../../utils'
+import { BackInStockForm } from './BackInStockForm'
 import { LoaderIcon } from './LoaderIcon'
 import { Price } from './Price'
 import { ProductCarousel } from './ProductCarousel'
@@ -28,12 +29,22 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
 
-    const [selectedOptions, setOptionAtIndex, selections, selectedVariant] = useProduct({ product })
+    const [selectedOptions, setOptionAtIndex, selections, selectedVariant, loading, outOfStock] = useProduct(
+        product.shopifyId
+    )
+
+    /**
+     * The product.variant option from props is a different shape from the
+     * slectedVariant (which comes directly from the Storefront API). We
+     * only want the ID from selectedVariant and will add the corresponding
+     * variant in product.variants.
+     */
+    const variantForCart = product.variants.find((v) => v.shopifyId === selectedVariant?.id)
 
     const handleAddToCart = () => {
         setIsAdding(true)
         setTimeout(() => {
-            addToCart(selectedVariant || product.variants[0], quantity)
+            addToCart(variantForCart || product.variants[0], quantity)
             setIsCart(true)
             setIsAdding(false)
         }, 500)
@@ -52,37 +63,52 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
                 <ProductCarousel product={product} />
             </div>
-            <div className="[&_*]:mb-0 space-y-0.5">
+            <div className="space-y-0.5">
                 <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
                     {product.title}
                 </h3>
                 <p className="leading-tight">{subtitle}</p>
-                <p className="text-lg">
-                    <Price price={product.priceRangeV2.minVariantPrice.amount} />
-                </p>
+                {selectedVariant && (
+                    <p className="text-lg">
+                        <Price price={selectedVariant.price.amount} />
+                    </p>
+                )}
             </div>
 
-            {selectedOptions
-                .map((so, i) => {
-                    if (so.selectedValue === 'Default Title') return null
+            {loading && (
+                <div role="status" className="max-w-sm animate-pulse">
+                    <div className="h-7 bg-gray-accent rounded-md dark:bg-gray-accent-dark w-32"></div>
+                    {product.variants.length > 1 && (
+                        <div className="h-9 bg-gray-accent rounded-md dark:bg-gray-accent-dark mt-4"></div>
+                    )}
+                    <span className="sr-only">Loading...</span>
+                </div>
+            )}
 
-                    return (
-                        <ProductOptionSelect
-                            key={i}
-                            option={so.option}
-                            onChange={(val) => setOptionAtIndex(i, so.option, val)}
-                            value={so.selectedValue}
-                            selections={selections}
-                        />
-                    )
-                })
-                .filter(Boolean)}
+            {selectedOptions?.length &&
+                selectedOptions
+                    .map((so, i) => {
+                        if (so.selectedValue === 'Default Title') return null
+
+                        return (
+                            <ProductOptionSelect
+                                key={i}
+                                option={so.option}
+                                onChange={(val) => setOptionAtIndex(i, so.option, val)}
+                                value={so.selectedValue}
+                                selections={selections}
+                            />
+                        )
+                    })
+                    .filter(Boolean)}
 
             <Quantity value={quantity} onChange={setQuantity} />
 
-            <CallToAction onClick={handleAddToCart} type="primary" className="relative w-full">
+            <CallToAction disabled={outOfStock} onClick={handleAddToCart} type="primary" className="relative w-full">
                 <>
-                    <span className={cn('', isAdding && 'invisible')}>Add to Cart</span>
+                    <span className={cn('', isAdding && 'invisible')}>
+                        {outOfStock ? 'Out of Stock' : 'Add to Cart'}
+                    </span>
                     <LoaderIcon
                         className={cn(
                             'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
@@ -91,6 +117,9 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     />
                 </>
             </CallToAction>
+
+            {outOfStock && <BackInStockForm />}
+
             {product.description && (
                 <div className="border-t border-light dark:border-dark pt-4">
                     <h3 className="text-lg mb-0">Description</h3>

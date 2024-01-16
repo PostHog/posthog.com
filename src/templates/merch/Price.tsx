@@ -1,11 +1,10 @@
 import React from 'react'
 
 type PriceProps = {
-    price: number | null
+    price: string | number | null
 }
 
-export function Price(props: PriceProps): React.ReactElement | null {
-    if (!props.price) return null
-
-    return <strong>${props.price.toFixed(2)}</strong>
+export const Price = ({ price }: PriceProps): React.ReactElement | null => {
+    const validPrice = typeof price === 'string' ? parseFloat(price) : price
+    return validPrice !== null && !isNaN(validPrice) ? <strong>${validPrice.toFixed(2)}</strong> : null
 }

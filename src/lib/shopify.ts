@@ -1,4 +1,4 @@
-import type { CartResponse, CreateCartResponse, CreateCartVariables } from 'templates/merch/types'
+import type { CartCreateReponse, CartResponse, CreateCartVariables } from 'templates/merch/types'
 
 type ShopifyHeaders = {
     Accept: string
@@ -10,9 +10,9 @@ const shopifyURL = process.env.GATSBY_MYSHOPIFY_URL
 const shopifyStorefrontAPIVersion = process.env.GATSBY_SHOPIFY_STOREFRONT_API_VERSION
 const shopifyStorefrontAPIPassword = process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN
 
-const shopifyStorefrontUrl = `https://${shopifyURL}/api/${shopifyStorefrontAPIVersion}/graphql.json`
+export const shopifyStorefrontUrl = `https://${shopifyURL}/api/${shopifyStorefrontAPIVersion}/graphql.json`
 
-const shopifyHeaders: ShopifyHeaders = {
+export const shopifyHeaders: ShopifyHeaders = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -150,7 +150,7 @@ export const GET_CART = `
   }
   `
 
-export const createCartQuery = (variables: CreateCartVariables): Promise<CreateCartResponse | void> =>
+export const createCartQuery = (variables: CreateCartVariables): Promise<CartCreateReponse | void> =>
     fetch(shopifyStorefrontUrl, {
         method: 'POST',
         headers: shopifyHeaders,
@@ -166,7 +166,7 @@ export const createCartQuery = (variables: CreateCartVariables): Promise<CreateC
             return res.json()
         })
         .then((res) => {
-            const cartCreate = res.data as CreateCartResponse
+            const cartCreate = res.data as CartCreateReponse
             if (cartCreate.userErrors) {
                 const error = new Error(res.userErrors[0].message)
                 error.name = 'Shopify ApiError'
