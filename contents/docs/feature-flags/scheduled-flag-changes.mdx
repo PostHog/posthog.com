@@ -1,0 +1,37 @@
+---
+title: Scheduled flag changes
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import ScheduledFlagChangesLight from '../../images/docs/feature-flags/scheduled-flag-changes-light.png'
+import ScheduledFlagChangesDark from '../../images/docs/feature-flags/scheduled-flag-changes-dark.png'
+
+Scheduling feature flag changes allows you to automatically change flag properties at a future point in time. For example, you can schedule an initial release of the flag for internal testing, then enable it to the beta users group 2 days later, and finally roll it out to 100% of the users in 2 weeks.
+
+This is also useful if your releases fall outside normal working hours (for example, a ticket sale starting at midnight).
+
+## How to schedule a change:
+
+Follow these steps to schedule a change to a feature flag:
+
+1. Navigate to the relevant feature flag.
+2. Select the `Schedule` tab.
+3. Under `Change type`:
+  - Select `Change status` if you want to enable or disable your flag at the scheduled time
+  - Select `Add condition` if you want to specify the rollout conditions of your flag at the scheduled time
+4. Select the `Date and time` of your scheduled change from the date picker.
+5. Click `Schedule`
+
+You can view the scheduled changes in the table at the bottom of the page.
+
+<ProductScreenshot
+    imageLight={ScheduledFlagChangesLight}
+    imageDark={ScheduledFlagChangesDark}
+    alt="Scheduled flag changes"
+    classes="rounded"
+/>
