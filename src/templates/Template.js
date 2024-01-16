@@ -4,6 +4,7 @@ import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
+import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
@@ -46,23 +47,23 @@ export default function Template({ data }) {
                         </article>
                         <article>
                             {type.includes('dashboard') && (
-                                <div className="m-6 mb-12 text-center">
-                                    <p className="m-0 text-[15px]">
-                                        <Link to="https://us.posthog.com/dashboard#newDashboard">
-                                            Get started with this template now
-                                        </Link>{' '}
-                                        or <Link to="https://us.posthog.com/dashboard">create your own</Link>
-                                    </p>
+                                <div className="flex justify-center gap-2 mb-12">
+                                    <CallToAction href="https://us.posthog.com/dashboard#newDashboard" type="primary">
+                                        Get started with this template
+                                    </CallToAction>
+                                    <CallToAction href="https://us.posthog.com/dashboard" type="secondary">
+                                        Create your own
+                                    </CallToAction>
                                 </div>
                             )}
                             {type.includes('survey') && (
-                                <div className="m-6 mb-12 text-center">
-                                    <p className="m-0 text-[15px]">
-                                        <Link to="https://app.posthog.com/survey_templates">
-                                            Get started with this template now
-                                        </Link>{' '}
-                                        or <Link to="https://us.posthog.com/surveys">create your own</Link>
-                                    </p>
+                                <div className="flex justify-center gap-2 mb-12">
+                                    <CallToAction href="https://us.posthog.com/survey_templates" type="primary">
+                                        Get started with this template
+                                    </CallToAction>
+                                    <CallToAction href="https://us.posthog.com/surveys" type="secondary">
+                                        Create your own
+                                    </CallToAction>
                                 </div>
                             )}
                         </article>
