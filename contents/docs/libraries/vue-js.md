@@ -206,7 +206,7 @@ export default {
 }
 ```
 
-## Capturing page views
+## Capturing pageviews
 
 While PostHog will automatically capture paths, you can optionally bind it to Vue’s built-in router using the `afterEach` function. Additionally, you can mount PostHog inside `nextTick` so that the capture event fires after the page is mounted. 
 
@@ -215,12 +215,13 @@ While PostHog will automatically capture paths, you can optionally bind it to Vu
 ```js
 //router.js #might be in your app.js
 
-router.afterEach((to) => {
-  nextTick(() => {
-    posthog.capture("$pageview", {
-      $current_url: to.fullPath,
+router.afterEach((to, from, failure) => {
+  if (!failure && router.app) {
+    const posthog = router.app.config.globalProperties.$posthog;
+    nextTick(() => {
+      posthog.capture('$pageview', { path: to.path });
     });
-  });
+  }
 });
 ```
 
