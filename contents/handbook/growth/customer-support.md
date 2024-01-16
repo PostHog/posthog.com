@@ -22,6 +22,49 @@ These are the ways in which customers can currently reach us:
 
 > Sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them on GitHub. We don't consider GitHub to be a proper 'support' channel, but it is a useful place to gauge the popularity of feature requests or the prevalence of issues. 
 
+### Response Targets
+
+We have a high volume of tickets created, and some require more attention than others.  Here we have our targets for _initial_ response/acknowledgement to issues by Customer Priority and Issue [Severity](/docs/support-options#severity-levels), along with an indication of who is responsible for the initial response (CS = Customer Success, SH = designated Support Hero for the impacted team)
+
+<table>
+  <tr>
+    <th colspan="2"></th><th colspan="3"> Customer Priority</th>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+    <th>High</th>
+    <th>Medium</th>
+    <th>Low</th>
+  </tr>
+<tr>
+    <th rowspan="4">Issue Severity</th>
+    <th>Critical</th>
+    <td>1 hour (CS)</td>
+    <td>1 hour (CS)</td>
+    <td>1 day (CS)</td>
+  </tr>
+<tr>
+    <th>High</th>
+    <td>1 hour (SH)</td>
+    <td>1 day (SH)</td>
+    <td>1 day (SH)</td>
+  </tr>
+<tr>
+    <th>Medium</th>
+    <td>1 day (SH)</td>
+    <td>1 day (SH)</td>
+    <td>2 days (SH)</td>
+  </tr>
+<tr>
+    <th>Low</th>
+    <td>1 day (SH)</td>
+    <td>2 days (SH)</td>
+    <td>Automated Response (See below)</td>
+  </tr>
+</table>
+
+Note for Low Priority/Low Severity tickets we should auto-respond letting customers know that they can ask questions in Community Questions
+
 ### Support Engineers
 
 We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, Marcus is our only support engineer, and he covers:
