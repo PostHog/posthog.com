@@ -1,7 +1,7 @@
 import { RadioGroup } from '@headlessui/react'
 import React from 'react'
 import { cn } from '../../utils'
-import { ProductVariantOption, ProductVariantSelection } from './types'
+import { ProductVariantOption } from './types'
 
 const colorClasses: Record<string, string> = {
     white: 'bg-[#FFF]',
@@ -13,7 +13,6 @@ type ProductOptionSelectProps = {
     className?: string
     option: ProductVariantOption
     value: string | null
-    selections: ProductVariantSelection[]
 }
 
 export function ProductOptionSelect(props: ProductOptionSelectProps): React.ReactElement | null {

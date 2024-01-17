@@ -29,9 +29,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
 
-    const [selectedOptions, setOptionAtIndex, selections, selectedVariant, loading, outOfStock] = useProduct(
-        product.shopifyId
-    )
+    const { selectedOptions, setOptionAtIndex, selectedVariant, loading, outOfStock } = useProduct(product.shopifyId)
 
     /**
      * The product.variant option from props is a different shape from the
@@ -96,7 +94,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                                 option={so.option}
                                 onChange={(val) => setOptionAtIndex(i, so.option, val)}
                                 value={so.selectedValue}
-                                selections={selections}
                             />
                         )
                     })

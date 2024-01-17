@@ -1,23 +1,40 @@
 import { shopifyHeaders, shopifyStorefrontUrl } from 'lib/shopify'
 import { useEffect, useState } from 'react'
-import type { ProductVariantOption, ProductVariantSelection, SelectedOptions, ShopifyProductVariant } from './types'
+import type {
+    ProductVariantOption,
+    SelectedOption,
+    SelectedOptions,
+    StorefrontProduct,
+    StorefrontProductOption,
+    StorefrontProductVariant,
+    StorefrontProductVariantEdge,
+    StorefrontProductVariantNode,
+    StorefrontProductVariantsEdges,
+    StorefrontShopRequestBody,
+    StorefrontShopResponse,
+    VariantSelectedOption,
+} from './types'
 
 type getVariantOptionArgs = {
     name: string
-    variant: ShopifyProductVariant
-    options: ProductVariantOption[]
+    value: string
+    options: StorefrontProductOption[]
 }
 
 type setOptionAtIndexArgs = [index: number, option: ProductVariantOption, val: string]
 
-export function useProduct(
-    id: string
-): [SelectedOptions, (...args: setOptionAtIndexArgs) => void, ProductVariantSelection[], ShopifyProductVariant] {
+export function useProduct(id: string): {
+    selectedOptions: SelectedOptions | null | undefined
+    setOptionAtIndex: (...args: setOptionAtIndexArgs) => void
+    selectedVariant: StorefrontProductVariant | null | undefined
+    loading: boolean
+    outOfStock: boolean
+} {
     const { product, loading } = useFetchProductOptions(id)
 
-    const [selectedVariant, setSelectedVariant] = useState()
+    const [selectedVariant, setSelectedVariant] = useState<StorefrontProductVariant | null>()
 
-    const [selectedOptions, setSelectedOptions] = useState([])
+    const [selectedOptions, setSelectedOptions] = useState<SelectedOptions | null>()
 
     useEffect(() => {
         if (!product) return
@@ -37,8 +54,8 @@ export function useProduct(
     useEffect(() => {
         if (!product) return
         const newVariant = product.variants.find((v) => {
-            return v.selectedOptions.every((o) => {
-                return selectedOptions.some((so) => {
+            return v.selectedOptions.every((o: VariantSelectedOption) => {
+                return selectedOptions?.some((so: SelectedOption) => {
                     return so.option.name === o.name && so.selectedValue === o.value
                 })
             })
@@ -46,29 +63,28 @@ export function useProduct(
         setSelectedVariant(newVariant)
     }, [selectedOptions])
 
-    if (!product) return [null, null, null, null, loading]
-
-    const selections = selectedOptions.map((so) => so.selected).filter(Boolean) as ProductVariantSelection[]
-
     const setOptionAtIndex = (...args: setOptionAtIndexArgs) => {
+        if (!product) return
         const [index, option, value] = args
 
         setSelectedOptions((prev) => {
-            return prev.map((opt, i) => {
+            return prev?.map((opt, i) => {
                 return i === index
                     ? getVariantOption({
                           name: option.name,
                           value,
-                          options: product.options,
+                          options: product?.options,
                       })
                     : opt
             })
         })
     }
 
-    const outOfStock = selectedVariant?.quantityAvailable <= 0 && !selectedVariant?.currentlyNotInStock
+    const outOfStock = selectedVariant
+        ? selectedVariant?.quantityAvailable <= 0 && !selectedVariant?.currentlyNotInStock
+        : false
 
-    return [selectedOptions, setOptionAtIndex, selections, selectedVariant, loading, outOfStock]
+    return { selectedOptions, setOptionAtIndex, selectedVariant, loading, outOfStock }
 }
 
 function getVariantOption({ name, value, options }: getVariantOptionArgs): {
@@ -80,10 +96,10 @@ function getVariantOption({ name, value, options }: getVariantOptionArgs): {
     return { selectedValue: value, option: variantOption }
 }
 
-function useFetchProductOptions(id: string) {
-    const [productData, setProductData] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
+function useFetchProductOptions(id: string): { product: StorefrontProduct | null; loading: boolean } {
+    const [productData, setProductData] = useState<StorefrontProduct | null>(null)
+    const [loading, setLoading] = useState<boolean>(true)
+    const [error, setError] = useState<unknown>()
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -133,9 +149,9 @@ function useFetchProductOptions(id: string) {
                     body: JSON.stringify(requestBody),
                 })
 
-                const json = await response.json()
-                const product = getProduct(json.data)
-                setProductData(product)
+                const json = (await response.json()) as StorefrontShopRequestBody
+                const responseData = getProduct(json.data)
+                setProductData(responseData)
                 setLoading(false)
             } catch (err) {
                 setError(err)
@@ -148,13 +164,13 @@ function useFetchProductOptions(id: string) {
     return { product: productData, loading }
 }
 
-function getProduct(product) {
+function getProduct(responseData: StorefrontShopResponse): StorefrontProduct {
     return {
-        ...product.node,
-        variants: getVariants(product.node.variants),
+        ...responseData.node,
+        variants: getVariants(responseData.node.variants),
     }
 }
 
-function getVariants(variants) {
-    return variants.edges.map((e) => e.node)
+function getVariants(variants: StorefrontProductVariantsEdges): StorefrontProductVariantNode[] {
+    return variants.edges.map((e: StorefrontProductVariantEdge) => e.node)
 }

@@ -115,18 +115,78 @@ export type ProductVariantSelection = {
 }
 
 export type ProductVariantOption = {
-    shopifyId: string
+    id: string
     name: string
     values: string[]
 }
 
 export type SelectedOption = {
     selectedValue: string
-    selected: ProductVariantSelection | null
     option: ProductVariantOption
 }
 
 export type SelectedOptions = SelectedOption[]
+
+export type VariantSelectedOption = {
+    value: string
+    name: string
+}
+
+export type VariantSelectedOptions = VariantSelectedOption[]
+
+/**
+ * Storefront API objects (for variant options)
+ */
+
+export interface StorefrontProductVariantNode {
+    availableForSale: boolean
+    currentlyNotInStock: boolean
+    id: string
+    price: {
+        amount: number
+    }
+    product: {
+        tags: string[]
+    }
+    quantityAvailable: number
+    selectedOptions: VariantSelectedOption[]
+}
+
+export type StorefrontProductVariant = StorefrontProductVariantNode
+
+export interface StorefrontProductVariantEdge {
+    node: StorefrontProductVariantNode
+}
+
+export type StorefrontProductOption = {
+    id: string
+    name: string
+    values: string[]
+}
+
+export interface StorefrontProductVariantsEdges {
+    edges: StorefrontProductVariantEdge[]
+}
+
+export interface StorefrontProductNode {
+    availableForSale: boolean
+    options: StorefrontProductOption[]
+    tags: string[]
+    totalInventory: number
+    variants: StorefrontProductVariantsEdges
+}
+
+export interface StorefrontProduct extends Omit<StorefrontProductNode, 'variants'> {
+    variants: StorefrontProductVariantNode[]
+}
+
+export interface StorefrontShopResponse {
+    node: StorefrontProductNode
+}
+
+export interface StorefrontShopRequestBody {
+    data: StorefrontShopResponse
+}
 
 /**
  * cart

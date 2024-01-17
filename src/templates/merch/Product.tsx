@@ -37,14 +37,13 @@ export default function Product(props: ProductPageProps): React.ReactElement {
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
 
-    const [
+    const {
         selectedOptions,
         setOptionAtIndex,
-        selections,
         selectedVariant, // use this for add to cart
         loading,
         outOfStock,
-    ] = useProduct(product.shopifyId)
+    } = useProduct(product.shopifyId)
 
     /**
      * The product.variant option from props is a different shape from the
@@ -111,7 +110,6 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                                             option={so.option}
                                             onChange={(val) => setOptionAtIndex(i, so.option, val)}
                                             value={so.selectedValue}
-                                            selections={selections}
                                         />
                                     )
                                 })
