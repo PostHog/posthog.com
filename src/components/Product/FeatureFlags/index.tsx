@@ -221,7 +221,7 @@ const comparison = [
             Optimizely: false,
             Flagsmith: false,
             GrowthBook: false,
-            PostHog: false,
+            PostHog: true,
         },
     },
     {
@@ -502,7 +502,6 @@ export const ProductFeatureFlags = () => {
                                 }
                             >
                                 <ul>
-                                    <li>Flag scheduling</li>
                                     <li>Triggers and workflows to enable/disable flags on other events</li>
                                     <li>Enterprise-level support</li>
                                 </ul>
