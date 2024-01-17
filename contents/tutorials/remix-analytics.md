@@ -354,7 +354,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   let distinctId;
 
-  if (cookieMatch) {
+  if (!!cookieMatch) {
     const parsedValue = JSON.parse(decodeURIComponent(cookieMatch[1]));
     if (parsedValue && parsedValue.distinct_id) {
       distinctId = parsedValue.distinct_id;

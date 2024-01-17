@@ -5,13 +5,13 @@ icon: ../../images/docs/integrate/frameworks/nuxt.svg
 
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
-These docs are aimed at Nuxt.js users which run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
+These docs are aimed at Nuxt.js users who run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
 
 ## Nuxt v3.0 and above
 
 ### Setting up PostHog on the client side
 
-1. Install posthog-js using your package manager:
+1. Install `posthog-js` using your package manager:
 
 ```shell
 yarn add posthog-js
@@ -83,7 +83,7 @@ See the [JavaScript SDK docs](/docs/libraries/js) for all usable functions, such
 
 ### Setting up PostHog on the server side
 
-1. Install posthog-node using your package manager:
+1. Install `posthog-node` using your package manager:
 
 ```shell
 yarn add posthog-node
@@ -104,7 +104,7 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Initialize PostHog Node where you'd like to use it on the server side. For example, in `[useAsyncData](https://nuxt.com/docs/api/composables/use-async-data)`:
+3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in `[useAsyncData](https://nuxt.com/docs/api/composables/use-async-data)`:
 
 ```vue file=app.vue
 <!-- ...rest of code -->

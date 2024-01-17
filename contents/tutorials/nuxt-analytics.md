@@ -2,7 +2,7 @@
 title: How to set up analytics in Nuxt with PostHog
 date: 2024-01-16
 author: ["lior-neu-ner"]
-tags: ['experimentation']
+tags: ['product analytics']
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -77,7 +77,7 @@ The basic setup is now complete. Run `npm run dev` to see your app.
 
 > This tutorial shows how to integrate PostHog with `Nuxt 3`. If you're using `Nuxt 2`, see [our Nuxt docs](/docs/libraries/nuxt-js) for how to integrate.
 
-With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup). 
+With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). 
 
 First install `posthog-js`:
 
@@ -89,8 +89,7 @@ Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can f
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
-  // ...rest of your config
-  
+ devtools: { enabled: true },
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
@@ -139,7 +138,7 @@ Once you’ve done this, reload your app. You should begin seeing events in the 
 
 ### Capturing pageviews
 
-You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Nuxt creates a single-page app, this only happens once, and the Nuxt router handles subsequent page changes.
+You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Nuxt creates a single-page app, this only happens once, and the Nuxt router handles subsequent page changes.
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
@@ -178,7 +177,7 @@ Beyond pageviews, there might be more events you want to capture. You can do thi
 
 To showcase this, we add a button to the home page and capture a custom event whenever it is clicked. Update the code in `index.vue`:
 
-```vue file=HomePage.vue
+```vue file=index.vue
 <template>
   <div>
     <h1>Home</h1>
@@ -188,7 +187,7 @@ To showcase this, we add a button to the home page and capture a custom event wh
 </template>
 
 <script setup>
-import { usePostHog } from 'path-to-your-posthog-plugin';
+import { usePostHog } from '../plugins/posthog.client.js';
 
 const postHog = usePostHog();
 
@@ -248,12 +247,13 @@ If you run your app again, you should begin to see `in_the_middleware` events in
 
 ### Handling `distinctId` on the server
 
-You may have noticed that we set `distinctId: placeholder_distinct_id_of_the_user` in our event above. To attribute events to the correct user, `distinctId` should be set to your user's unique id. For logged-in users, we typically use their email as their `distinctId`. However, for logged-out users, you can use the `distinct_id` property from their PostHog cookie:
+You may have noticed that we set `distinctId: placeholder_distinct_id_of_the_user` in our event above. To attribute events to the correct user, `distinctId` should be set to your user's unique ID. For logged-in users, we typically use their email as their `distinctId`. However, for logged-out users, you can use the `distinct_id` property from their PostHog cookie:
 
 ```js file=server/middleware/analytics.js
 import { PostHog } from 'posthog-node';
 
 export default defineEventHandler(async (event) => {
+  const runtimeConfig = useRuntimeConfig();
   const cookieString = event.req.headers.cookie || '';  
   const cookieName =`ph_${runtimeConfig.public.posthogPublicKey}_posthog`;
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
@@ -263,7 +263,6 @@ export default defineEventHandler(async (event) => {
     const parsedValue = JSON.parse(decodeURIComponent(cookieMatch[1]));
     if (parsedValue && parsedValue.distinct_id) {
       distinctId = parsedValue.distinct_id;
-      const runtimeConfig = useRuntimeConfig();
       const posthog = new PostHog(
         runtimeConfig.public.posthogPublicKey,
         { host: runtimeConfig.public.posthogHost }
