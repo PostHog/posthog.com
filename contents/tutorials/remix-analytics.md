@@ -151,55 +151,31 @@ npm i posthog-js
 
 Once done, you need your project API key and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
 
-With these, go to `routes/root.tsx` and set up a `useEffect` to initialize PostHog. 
+With these, go to `entry.client.tsx` and initialize PostHog. 
 
 ```ts
-// routes/root.tsx
-import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration
-} from "@remix-run/react";
-import posthog from "posthog-js"; // new
-import { useEffect } from "react"; // new
+// app/entry.client.tsx
+import { RemixBrowser } from "@remix-run/react";
+import { startTransition, StrictMode } from "react";
+import { hydrateRoot } from "react-dom/client";
+import posthog from "posthog-js";
 
-export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
-
-export default function App() {
-  useEffect(() => {
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host:'<ph_instance_address>'
-      }
-    )
+posthog.init(
+  '<ph_project_api_key>',
+  {
+    api_host:'<ph_instance_address>',
   }
-  , [])
+)
 
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
+startTransition(() => {
+  hydrateRoot(
+    document,
+    <StrictMode>
+        <RemixBrowser />
+    </StrictMode>
   );
-}
+});
+
 ```
 
 After relaunching your app, PostHog begins autocapturing initial pageviews, clicks, [session replays](/docs/session-replay) (if [you enable them](https://app.posthog.com/settings/project#replay)), and more.
@@ -210,7 +186,7 @@ After relaunching your app, PostHog begins autocapturing initial pageviews, clic
 
 You might notice we captured only one pageview even though we navigated between multiple pages. This is because Remix is a [single-page app](/tutorials/single-page-app-pageviews) and only triggers an initial page load event. PostHog uses the page load event for pageviews, so to fix this, we must implement pageview capture ourselves.
 
-Again, we do this in `routes/root.tsx`. We import and set up `useLocation`, and then trigger another `useEffect` to capture a `$pageview` event. We also set the `capture_pageview` PostHog property to `false` so we don’t double capture the initial pageview.
+We do this in `routes/root.tsx`. We import `useLocation`, `useEffect`, and `posthog`. We set up `useLocation`, and then use a `useEffect` to capture a `$pageview` event.
 
 ```ts
 // routes/root.tsx
@@ -226,17 +202,6 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
-  useEffect(() => {
-    posthog.init(
-      '<ph_project_api_key',
-      {
-        api_host:'<ph_instance_address>',
-        capture_pageview: false // new
-      }
-    )
-  }
-  , [])
-
   const location = useLocation();
   useEffect(() => {
     posthog.capture('$pageview');
@@ -251,7 +216,7 @@ When you relaunch your app and navigate between pages, you now capture `$pagevie
 
 ![Pageview events](../images/tutorials/remix-analytics/pageview.png)
 
-> **Why is it double capturing the initial pageview?** In strict mode, React renders twice, triggering two pageview events. This doesn’t happen in production mode. You can also remove the `<StrictMode>` component in `routes/entry.client.tsx` to stop it in development.
+> **Why is it double capturing the pageviews?** There are two reasons this might happen. First, you need to set the `capture_pageview` [config option](/docs/libraries/js#config) in the PostHog initialization to `false` so we don’t double capture the initial pageview. Second, in strict mode, React renders twice. This triggers two pageview events, but doesn’t happen in production mode. You can also remove the `<StrictMode>` component in `app/entry.client.tsx` to stop it in development.
 
 ## Capturing custom events
 
