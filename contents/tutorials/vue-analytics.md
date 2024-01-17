@@ -2,7 +2,7 @@
 title: How to set up analytics in Vue with PostHog
 date: 2024-01-16
 author: ["lior-neu-ner"]
-tags: ['experimentation']
+tags: ['product analytics']
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -137,9 +137,9 @@ The basic setup is now complete. Run `npm run serve` to see your app.
 
 > This tutorial shows how to integrate PostHog with `Vue 3`. If you're using `Vue 2`, see [our Vue docs](/docs/libraries/vue-js) for how to integrate PostHog.
 
-With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup). 
+With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). 
 
-First install `posthog-js` .
+First install `posthog-js`.
 
 ```bash
 npm install posthog-js
@@ -197,7 +197,7 @@ Once you’ve done this, reload your app and click the buttons a few times. You 
 
 ## Capturing pageviews
 
-You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Vue creates a single-page app, this only happens once, and the Vue router handles subsequent page changes.
+You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Vue creates a single-page app, this only happens once, and the Vue router handles subsequent page changes.
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
@@ -206,8 +206,7 @@ In `router/index.js`, set up PostHog to capture pageviews in the `router.afterEa
 ```js router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import { nextTick } from 'vue';
-
-// rest of your code
+// ...rest of your imports and code
 
 router.afterEach((to, from, failure) => {
   if (!failure && router.app) {
@@ -270,7 +269,7 @@ export default {
 </script>
 ```
 
-Now when you click the button, PostHog captures the custom `home_button_clicked` event. Notice that we also added a property `user_name` to the event. This is helpful for filtering events in the PostHog dashboard.
+Now when you click the button, PostHog captures the custom `home_button_clicked` event. Notice that we also added a property `user_name` to the event. This is helpful for filtering events in PostHog.
 
 ## Further reading
 
