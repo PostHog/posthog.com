@@ -293,7 +293,7 @@ Our post page now shows the updated button, which you can toggle remotely with t
 
 ## Adding PostHog on the server side
 
-Remix is a full stack framework, parts of it run on both the client and server side. So far, we’ve only used PostHog on the client side and the JavaScript Web library we installed won’t work on the server side. Instead, we must use the `[posthog-node` SDK](/docs/libraries/node). We can start by installing it:
+Remix is a full stack framework, parts of it run on both the client and server side. So far, we’ve only used PostHog on the client side and the [JavaScript Web library](/docs/libraries/js) we installed won’t work on the server side. Instead, we must use the [`posthog-node` SDK](/docs/libraries/node). We can start by installing it:
 
 ```bash
 npm i posthog-node
@@ -354,7 +354,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   let distinctId;
 
-  if (!!cookieMatch) {
+  if (cookieMatch) {
     const parsedValue = JSON.parse(decodeURIComponent(cookieMatch[1]));
     if (parsedValue && parsedValue.distinct_id) {
       distinctId = parsedValue.distinct_id;
