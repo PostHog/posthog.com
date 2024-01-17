@@ -1,7 +1,13 @@
 import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
 import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
-import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import {
+    FIFTY_MILLION,
+    MAX_PRODUCT_ANALYTICS,
+    MILLION,
+    TEN_MILLION,
+    pricingSliderLogic,
+} from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { Analytics, SessionRecording, FeatureFlags, Surveys } from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
 import React, { useEffect } from 'react'
@@ -19,7 +25,7 @@ export const PricingCalculator = () => {
     const {
         productAnalyticsCost,
         sessionRecordingCost,
-        sliderValue,
+        productAnalyticsSliderValue,
         sessionRecordingSliderValue,
         monthlyTotal,
         sessionRecordingEventNumber,
@@ -27,16 +33,26 @@ export const PricingCalculator = () => {
         featureFlagSliderValue,
         featureFlagNumber,
         featureFlagCost,
+        productAnalyticsEventsMaxed,
         surveyResponseSliderValue,
         surveyResponseNumber,
+        enterpriseLevelSpend,
         surveyResponseCost,
+        showAnnualBilling,
     } = useValues(pricingSliderLogic)
-    const { setSessionRecordingSliderValue, setSliderValue, setFeatureFlagSliderValue, setSurveyResponseSliderValue } =
-        useActions(pricingSliderLogic)
+    const {
+        toggleAnnualBilling,
+        setSessionRecordingSliderValue,
+        setProductAnalyticsSliderValue,
+        setFeatureFlagSliderValue,
+        setSurveyResponseSliderValue,
+    } = useActions(pricingSliderLogic)
 
     useEffect(() => {
-        setSliderValue(13.815510557964274)
+        setProductAnalyticsSliderValue(13.815510557964274)
     }, [])
+
+    const anyProductMaxed = productAnalyticsEventsMaxed
 
     return (
         <section className={`${section} mb-12`}>
@@ -72,16 +88,20 @@ export const PricingCalculator = () => {
                             <div className="pt-4 pb-6">
                                 <LogSlider
                                     stepsInRange={100}
-                                    marks={[1000000, 10000000, 100000000, 1000000000]}
-                                    min={1000000}
-                                    max={1000000000}
-                                    onChange={(value) => setSliderValue(value)}
-                                    value={sliderValue}
+                                    marks={[MILLION, TEN_MILLION, FIFTY_MILLION]}
+                                    min={MILLION}
+                                    max={MAX_PRODUCT_ANALYTICS}
+                                    onChange={(value) => setProductAnalyticsSliderValue(value)}
+                                    value={productAnalyticsSliderValue}
                                 />
                             </div>
                         </div>
                         <div className="border-b border-border dark:border-dark p-2 text-center">
-                            <span className="text-lg font-bold">${productAnalyticsCost.toLocaleString()}</span>
+                            <span className="text-lg font-bold">
+                                {productAnalyticsEventsMaxed
+                                    ? 'Contact us'
+                                    : `$${productAnalyticsCost.toLocaleString()}`}{' '}
+                            </span>
                         </div>
                         <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
                             <span className="w-5 h-5 flex absolute top-3 left-3">{<SessionRecording />}</span>
@@ -154,15 +174,58 @@ export const PricingCalculator = () => {
                         <div className="border-b border-border dark:border-dark p-2 text-center">
                             <span className="text-lg font-bold">${surveyResponseCost.toLocaleString()}</span>
                         </div>
-                        <div className="col-span-3 p-4">
-                            <strong>Monthly estimate</strong>
-                            <br />
-                            <p className="opacity-60 text-sm mb-0">Cost with billing limits set at your selections</p>
-                        </div>
-                        <div className="p-4 text-center">
-                            <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
-                            <span className="opacity-60">/mo</span>
-                        </div>
+                        {anyProductMaxed ? (
+                            <>
+                                <div className="col-span-3 p-4">
+                                    <strong>
+                                        We've got special deals for customers who require larger volumes.{' '}
+                                        <Link to="mailto:sales@posthog.com">Get in touch</Link>.
+                                    </strong>
+                                </div>
+                                <div className="text-center">
+                                    <button className="text-sm">Show me the price!</button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="col-span-3 p-4">
+                                    <strong>
+                                        <button>
+                                            {enterpriseLevelSpend && showAnnualBilling ? 'Annual' : 'Monthly'}
+                                        </button>{' '}
+                                        estimate{' '}
+                                        {enterpriseLevelSpend &&
+                                            showAnnualBilling &&
+                                            `(20% savings of $${(monthlyTotal * 2.4).toLocaleString()} included)`}
+                                    </strong>
+                                    <br />
+                                    <p className="opacity-60 text-sm mb-0">
+                                        Cost with billing limits set at your selections
+                                    </p>
+                                </div>
+                                <div className="p-4 text-center">
+                                    {enterpriseLevelSpend ? (
+                                        <>
+                                            <span className="text-lg font-bold">
+                                                $
+                                                {showAnnualBilling
+                                                    ? (monthlyTotal * 9.6).toLocaleString()
+                                                    : monthlyTotal.toLocaleString()}
+                                            </span>
+                                            <span className="opacity-60">{showAnnualBilling ? '/yr' : '/mo'}</span>
+                                            <button className="text-sm" onClick={() => toggleAnnualBilling()}>
+                                                Switch to {showAnnualBilling ? 'monthly' : 'annual'} billing
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
+                                            <span className="opacity-60">/mo</span>
+                                        </>
+                                    )}
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div>
@@ -188,6 +251,20 @@ export const PricingCalculator = () => {
                             <Link to="/startups">startup program</Link>.
                         </p>
                     </div>
+
+                    {enterpriseLevelSpend && (
+                        <div className="pl-10 relative mb-4">
+                            <span className="w-6 h-6 absolute top-0 left-1">
+                                <Discount />
+                            </span>
+
+                            <h5 className="text-base mb-0">Annual plan</h5>
+                            <p className="text-[15px] mb-1">
+                                Take 20% off your bill by switching to up-front annual billing.{' '}
+                                <Link to="mailto:sales@posthog.com"> Contact us</Link> to learn more.
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
