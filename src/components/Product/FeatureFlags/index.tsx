@@ -503,7 +503,7 @@ export const ProductFeatureFlags = () => {
                             >
                                 <ul>
                                     <li>Triggers and workflows to enable/disable flags on other events</li>
-                                    <li>Enterprise-level support</li>
+                                    <li>Data exports</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
