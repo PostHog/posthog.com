@@ -59,6 +59,7 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
         setSurveyResponseSliderValue: (value: number) => ({ value }),
         setSurveyResponseInputValue: (value: number) => ({ value }),
         toggleAnnualBilling: true,
+        toggleHighVolCTA: true,
     },
     reducers: {
         surveyResponseNumber: [
@@ -163,6 +164,7 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 toggleAnnualBilling: (state) => !state,
             },
         ],
+        showHighVolCTA: [true, { toggleHighVolCTA: (state) => !state }],
     },
     selectors: ({ actions, values }) => ({
         finalCost: [

@@ -39,6 +39,7 @@ export const PricingCalculator = () => {
         enterpriseLevelSpend,
         surveyResponseCost,
         showAnnualBilling,
+        showHighVolCTA,
     } = useValues(pricingSliderLogic)
     const {
         toggleAnnualBilling,
@@ -46,6 +47,7 @@ export const PricingCalculator = () => {
         setProductAnalyticsSliderValue,
         setFeatureFlagSliderValue,
         setSurveyResponseSliderValue,
+        toggleHighVolCTA,
     } = useActions(pricingSliderLogic)
 
     useEffect(() => {
@@ -179,11 +181,29 @@ export const PricingCalculator = () => {
                                 <div className="col-span-3 p-4">
                                     <strong>
                                         We've got special deals for customers who require larger volumes.{' '}
-                                        <Link to="mailto:sales@posthog.com">Get in touch</Link>.
+                                        <div>
+                                            <Link to="mailto:sales@posthog.com">Get in touch</Link>
+                                        </div>
                                     </strong>
                                 </div>
-                                <div className="text-center">
-                                    <button className="text-sm">Show me the price!</button>
+                                <div className="p-4 text-center self-center">
+                                    {showHighVolCTA ? (
+                                        <button className="text-sm" onClick={() => toggleHighVolCTA()}>
+                                            Show me the price!
+                                        </button>
+                                    ) : (
+                                        <>
+                                            <span className="text-lg font-bold">
+                                                $
+                                                {showAnnualBilling
+                                                    ? (monthlyTotal * 0.8).toLocaleString()
+                                                    : monthlyTotal.toLocaleString()}
+                                            </span>
+                                            <span className="opacity-60">
+                                                /mo <p className="text-sm mb-0">paid annually</p>
+                                            </span>
+                                        </>
+                                    )}
                                 </div>
                             </>
                         ) : (
