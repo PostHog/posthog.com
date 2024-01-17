@@ -29,7 +29,7 @@ npx nuxi@latest init <project-name>
 
 Name it whatever you like (we call ours `nuxt-surveys`), select `npm` as the package manager, and use the defaults for the remaining options.
 
-Replace the code in `app.vue` with a simple heading and button:
+Replace the code in `app.vue` with a simple heading:
 
 ```vue file=app.vue
 <template>
@@ -49,7 +49,7 @@ Run `npm run dev` to start your app.
 
 We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup). 
 
-First install `posthog-js`:
+To set it up with your Nuxt app, first install `posthog-js`:
 
 ```bash
 npm install posthog-js
@@ -90,13 +90,6 @@ export default defineNuxtPlugin(nuxtApp => {
     api_host: runtimeConfig.public.posthogHost,
   })
 
-  // Make sure that pageviews are captured with each route change
-  const router = useRouter();
-  router.afterEach((to) => {
-    posthog.capture('$pageview', {
-      current_url: to.fullPath
-    });
-  });
   
   return {
     provide: {
@@ -151,7 +144,7 @@ Then, click "Save as draft" and then "Launch". Your survey is now live and you s
 
 If you prefer to have complete control of your survey UI and logic, you can still use PostHog to keep track of and analyze your results.
 
-First, create a survey in PostHog like in option 1 above (for this tutorial, we use a Net promoter score survey template). The only difference is you must set `Presentation` to **API**.
+First, create a survey in PostHog like in option 1 above (for this tutorial, we use a Net Promoter Score survey template). The only difference is you must set `Presentation` to **API**.
 
 Then, there are four parts to adding code for our custom survey:
 
@@ -162,7 +155,7 @@ Then, there are four parts to adding code for our custom survey:
 
 #### 1. Create the survey UI
 
-We've created a sample survey UI for this tutorial. To use it, create a new file in `components` folder called `CustomSurvey.vue` and paste the following code:
+We've created a sample survey UI for this tutorial. To use it, create a new folder `components` in your base directory and then create a new file `CustomSurvey.vue` in it. Paste the following code in this file:
 
 ```vue file=components/CustomSurvey.vue
 <template>
@@ -258,7 +251,6 @@ const handleSubmit = (value) => {
   console.log("Submitted value:", value);
   showSurvey.value = false;
 };
-
 </script>
 ```
 
