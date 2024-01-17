@@ -45,7 +45,7 @@ We have a high volume of tickets created, and some require more attention than o
   </tr>
 <tr>
     <th>High</th>
-    <td>1 hour (SH)</td>
+    <td>1 hour (CS)</td>
     <td>1 day (SH)</td>
     <td>1 day (SH)</td>
   </tr>
