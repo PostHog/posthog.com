@@ -29,11 +29,11 @@ If these costs don't scare you away, A/B tests are a great way to measure the im
 
 Specific benefits for these types of changes include:
 
-- **Significant improvements to your most important metrics.** Ideally, A/B tests aim to improve and optimize your metrics like signups, conversion, subscriptions, and revenue. Every successful test directly makes your company more successful.
+1. **Significant improvements to your most important metrics.** Ideally, A/B tests aim to improve and optimize your metrics like signups, conversion, subscriptions, and revenue. Every successful test directly makes your company more successful.
 
-- **Clarity on the impact of your changes.** A/B tests provide precise stats on a change's impact on your goal metrics. Rather than looking at a range of feedback and metrics to understand the impact of a change, you can look at one test.
+2. **Clarity on the impact of your changes.** A/B tests provide precise stats on a change's impact on your goal metrics. Rather than looking at a range of feedback and metrics to understand the impact of a change, you can look at one test.
 
-- **Protection from the downside.** Changes always come with risks. They can negatively impact all the same metrics you are trying to improve. By tracking a specific change's impact, ****A/B tests help prevent you from shipping changes that make your product worse.
+3. **Protection from the downside.** Changes always come with risks. They can negatively impact all the same metrics you are trying to improve. By tracking a specific change's impact, A/B tests help prevent you from shipping changes that make your product worse.
 
 ## When to run your first A/B test?
 
