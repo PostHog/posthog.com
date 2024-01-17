@@ -21,7 +21,7 @@ We'll create a basic Nuxt app, add PostHog, create a survey, and then show you h
 
 ## 1. Create a Nuxt app
 
-For this tutorial, we create a basic `Nuxt 3` app. First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then run the following command:
+For this tutorial, we create a basic `Nuxt 3` app. First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0.0 or newer). Then run the following command:
 
 ```bash
 npx nuxi@latest init <project-name>

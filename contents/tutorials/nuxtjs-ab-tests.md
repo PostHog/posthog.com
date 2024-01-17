@@ -14,7 +14,7 @@ We'll cover creating a basic Nuxt app, integrating PostHog, and setting up the A
 
 For this tutorial, we create a basic `Nuxt 3` app with a simple button to run our test on. 
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then create a Nuxt.js app:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0.0 or newer). Then create a Nuxt.js app:
 
 ```bash
 npx nuxi@latest init <project-name>
