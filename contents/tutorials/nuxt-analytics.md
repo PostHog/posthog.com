@@ -13,9 +13,9 @@ import EventsDark from '../images/tutorials/nuxt-surveys/events-dark.png'
 
 ## Creating a Nuxt app
 
-To demonstrate the basics of PostHog analytics, we'll create a simple Nuxt 3 app with two pages and a link to navigate between them.
+To demonstrate the basics of PostHog analytics, we create a simple Nuxt 3 app with two pages and a link to navigate between them.
 
-For this tutorial, we create a basic `Nuxt 3` app. First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0.0 or newer). Then run the following command:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0.0 or newer). Then run the following command:
 
 ```bash
 npx nuxi@latest init <project-name>
@@ -27,7 +27,7 @@ Name it whatever you like (we call ours `nuxt-analytics`), select `npm` as the p
 
 Next, create a new directory `pages` and two new files `index.vue` and `about.vue` in it:
 
-```
+```bash
 cd ./nuxt-analytics # replace "nuxt-analytics" with your project name
 mkdir pages
 cd ./pages
@@ -75,7 +75,7 @@ The basic setup is now complete. Run `npm run dev` to see your app.
 
 ## Adding PostHog on the client side
 
-> This tutorial shows how to integrate PostHog with `Nuxt 3`. If you're using `Nuxt 2`, see [our Nuxt docs](/docs/libraries/nuxt-js) for how to integrate PostHog.
+> This tutorial shows how to integrate PostHog with `Nuxt 3`. If you're using `Nuxt 2`, see [our Nuxt docs](/docs/libraries/nuxt-js) for how to integrate.
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup). 
 
@@ -100,7 +100,7 @@ export default defineNuxtConfig({
 })
 ```
 
-Create a new [plugin](https://nuxt.com/docs/guide/directory-structure/plugins) by first creating a new folder called `plugins` in your base directory and then a new file `posthog.client.js`:
+Create a new [plugin](https://nuxt.com/docs/guide/directory-structure/plugins) by creating a new folder called `plugins` in your base directory and then a new file `posthog.client.js`:
 
 ```bash
 mkdir plugins
@@ -174,9 +174,9 @@ Make sure to set `capture_pageview` in the PostHog initialization config to `fal
 
 ### Capturing custom events
 
-Beyond pageviews, there might be more events you want to capture. To do this, you can capture custom events with PostHog. To showcase this, we add a button to the home page and capture a custom event whenever it is clicked. 
+Beyond pageviews, there might be more events you want to capture. You can do this by capturing custom events with PostHog. 
 
-To do this, update the code in `index.vue`:
+To showcase this, we add a button to the home page and capture a custom event whenever it is clicked. Update the code in `index.vue`:
 
 ```vue file=HomePage.vue
 <template>
@@ -210,7 +210,7 @@ Nuxt is a full stack framework, parts of it run on both the client and server si
 npm install posthog-node
 ```
 
-Next, initialize `posthog-node` wherever you'd like to capture events server-side, such as in your [server routes](https://nuxt.com/docs/guide/directory-structure/server) or in the [middleware](https://nuxt.com/docs/guide/directory-structure/server#server-middleware). For this tutorial, we'll show you how to capture an event in the useAsyncData:
+Next, initialize `posthog-node` wherever you'd like to capture events server-side, such as in your [server routes](https://nuxt.com/docs/guide/directory-structure/server) or in the [middleware](https://nuxt.com/docs/guide/directory-structure/server#server-middleware). For this tutorial, we'll show you how to capture an event in the middleware:
 
 Create a folder `middleware` in `server` directory and then a new file `analytics.js` in it:
 
@@ -248,7 +248,7 @@ If you run your app again, you should begin to see `in_the_middleware` events in
 
 ### Handling `distinctId` on the server
 
-You may have noticed that we set `distinctId: placeholder_distinct_id_of_the_user` in our event above. To attribute events to the correct user, `distinctId` should be set to the user's unique id. For logged-in users, we typically use their email as their `distinctId`. However, for logged-out users, you can use the `distinct_id` from their PostHog cookie:
+You may have noticed that we set `distinctId: placeholder_distinct_id_of_the_user` in our event above. To attribute events to the correct user, `distinctId` should be set to your user's unique id. For logged-in users, we typically use their email as their `distinctId`. However, for logged-out users, you can use the `distinct_id` property from their PostHog cookie:
 
 ```js file=server/middleware/analytics.js
 import { PostHog } from 'posthog-node';
