@@ -68,8 +68,8 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                     title={
                         index === 0
                             ? `First ${formatCompactNumber(up_to)} ${unit}s`
-                            : !up_to
-                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)} +`
+                            : !up_to || index === plans[plans.length - 1]?.tiers.length - 1 // Temp override
+                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)}+`
                             : `${
                                   formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |k/)[0]
                               }-${formatCompactNumber(up_to)}`
@@ -86,6 +86,8 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                     title={
                         plans[0].free_allocation === up_to
                             ? 'Free'
+                            : index === plans[plans.length - 1].tiers.length - 1
+                            ? 'Contact us'
                             : `$${parseFloat(unit_amount_usd).toFixed(
                                   Math.max(
                                       ...plans[plans.length - 1].tiers.map(
@@ -260,6 +262,10 @@ export default function Plans({
     } = useStaticQuery(allProductsData)
     return (groupsToShow?.length > 0 ? products.filter(({ type }) => groupsToShow.includes(type)) : products).map(
         ({ type, plans, unit, addons, name, inclusion_only }: any) => {
+            if (type === 'product_analytics') {
+                plans = [plans[plans.length - 1]]
+                plans[0].tiers = plans[0].tiers?.slice(0, -1)
+            }
             return (
                 <div className="grid gap-y-2 min-w-[450px] mb-20" key={type}>
                     <div className="border border-light dark:border-dark rounded pb-2">

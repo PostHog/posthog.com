@@ -72,7 +72,7 @@ const pricingGroupsToShowOverride: {
 const Pricing = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const { search } = useLocation()
-    const [groupsToShow, setGropsToShow] = useState<undefined | string[]>()
+    const [groupsToShow, setGroupsToShow] = useState<undefined | string[]>()
     const [currentProduct, setCurrentProduct] = useState<string | null>()
 
     const getGroupsToShow = (): string[] | undefined => {
@@ -84,7 +84,7 @@ const Pricing = (): JSX.Element => {
     }
 
     useEffect(() => {
-        setGropsToShow(getGroupsToShow())
+        setGroupsToShow(getGroupsToShow())
     }, [search])
 
     return (
