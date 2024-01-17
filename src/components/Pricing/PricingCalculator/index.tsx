@@ -196,7 +196,9 @@ export const PricingCalculator = () => {
                                         estimate{' '}
                                         {enterpriseLevelSpend &&
                                             showAnnualBilling &&
-                                            `(20% savings of $${(monthlyTotal * 2.4).toLocaleString()} included)`}
+                                            `(20% annual savings of $${(
+                                                monthlyTotal * 2.4
+                                            ).toLocaleString()} included)`}
                                     </strong>
                                     <br />
                                     <p className="opacity-60 text-sm mb-0">
@@ -209,10 +211,12 @@ export const PricingCalculator = () => {
                                             <span className="text-lg font-bold">
                                                 $
                                                 {showAnnualBilling
-                                                    ? (monthlyTotal * 9.6).toLocaleString()
+                                                    ? (monthlyTotal * 0.8).toLocaleString()
                                                     : monthlyTotal.toLocaleString()}
                                             </span>
-                                            <span className="opacity-60">{showAnnualBilling ? '/yr' : '/mo'}</span>
+                                            <span className="opacity-60">
+                                                /mo {showAnnualBilling && <p className="text-sm mb-0">paid annually</p>}
+                                            </span>
                                             <button className="text-sm" onClick={() => toggleAnnualBilling()}>
                                                 Switch to {showAnnualBilling ? 'monthly' : 'annual'} billing
                                             </button>
