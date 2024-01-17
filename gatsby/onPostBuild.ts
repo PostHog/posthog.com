@@ -156,8 +156,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
         }
         const authorIDs = authorData?.map(({ profile_id }) => profile_id)?.filter((id) => id) || []
         const data = {
-            slug,
-            path,
+            ...(existingPost?.id ? null : { slug, path }),
             title,
             date,
             featuredImage: {
