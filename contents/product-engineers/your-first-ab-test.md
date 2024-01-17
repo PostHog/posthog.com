@@ -1,6 +1,6 @@
 ---
-title: How to think about your first A/B test (why, when, and where)
-date: 2024-01-11
+title: How to think about running your first A/B test (why, when, and where)
+date: 2024-01-17
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/experiment-hog.jpg
 featuredImageType: full
