@@ -1,6 +1,6 @@
 ---
 title: How to set up surveys in Vue
-date: 2024-01-15
+date: 2024-01-17
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
@@ -31,7 +31,7 @@ vue create vue-surveys
 
 Make sure to select `[Vue 3] babel, eslint` as the Vue version.
 
-Next, replace the code in `src/App.vue` with the following:
+Once the new app is created, replace the code in `src/App.vue` with the following:
 
 ```vue file=App.vue
 <template>
@@ -57,7 +57,7 @@ Run `npm run serve` to start your app.
 
 We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup). 
 
-First install `posthog-js`:
+First, install `posthog-js`:
 
 ```bash
 npm install posthog-js
@@ -147,7 +147,7 @@ Then, click "Save as draft" and then "Launch". Your survey is now live and you s
 
 If you prefer to have complete control of your survey UI and logic, you can still use PostHog to keep track of and analyze your results.
 
-First, create a survey in PostHog like in option 1 above (for this tutorial, we use a Net promoter score survey template). The only difference is you must set `Presentation` to **API**.
+First, create a survey in PostHog like in option 1 above (for this tutorial, we use a Net Promoter Score survey template). The only difference is you must set `Presentation` to **API**.
 
 Then, there are four parts to adding code for our custom survey:
 
@@ -295,19 +295,18 @@ export default {
     };
   },
   mounted() {
-    this.$posthog.getActiveMatchingSurveys((surveys) => {
-    });
+    this.fetchActiveSurveys();
   },
   methods: {
-    // ... rest of your methods ...
+    fetchActiveSurveys() {
+      this.$posthog.getActiveMatchingSurveys((surveys) => {
+      });
+    },    // ... rest of your methods ...
   }
+  
+  
 }
 </script>
-
-<style>
-  /* ... rest of your styles ... */
-</style>
-
 ```
 
 `posthog.getActiveMatchingSurveys()` returns a surveys object that looks like this:
@@ -388,10 +387,6 @@ export default {
   }
 }
 </script>
-
-<style>
-  /* ... rest of your styles ... */
-</style>
 ```
 
 #### 3. Add the logic for displaying and hiding it.
