@@ -9,9 +9,9 @@ tags: ['surveys']
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import ImgSurveyTemplatesLight from '../images/tutorials/bubble-surveys/survey-templates.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/bubble-surveys/survey-templates.png'
+import ImgSurveyTemplatesDark from '../images/tutorials/bubble-surveys/survey-templates-dark.png'
 import ImgSurveyResultsLight from '../images/tutorials/bubble-surveys/survey-results.png'
-import ImgSurveyResultsDark from '../images/tutorials/bubble-surveys/survey-results.png'
+import ImgSurveyResultsDark from '../images/tutorials/bubble-surveys/survey-results-dark.png'
 
 Surveys are a great way to collect feedback from your users. This tutorial shows you how to create surveys for your [Bubble](https://bubble.io/) app or marketing site using PostHog.
 
