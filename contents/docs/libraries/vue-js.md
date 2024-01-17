@@ -219,7 +219,7 @@ router.afterEach((to, from, failure) => {
   if (!failure && router.app) {
     const posthog = router.app.config.globalProperties.$posthog;
     nextTick(() => {
-      posthog.capture('$pageview', { path: to.path });
+      posthog.capture('$pageview', { path: to.fullPath });
     });
   }
 });
