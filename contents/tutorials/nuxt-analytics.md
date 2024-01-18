@@ -187,12 +187,10 @@ To showcase this, we add a button to the home page and capture a custom event wh
 </template>
 
 <script setup>
-import { usePostHog } from '../plugins/posthog.client.js';
-
-const postHog = usePostHog();
+const { $posthog } = useNuxtApp()
 
 const captureCustomEvent = () => {
-  postHog.capture('home_button_clicked', {
+  $posthog().capture('home_button_clicked', {
     'user_name': 'Max the Hedgehog' 
   });
 };
