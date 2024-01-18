@@ -90,7 +90,9 @@ after_fork do |server, worker|
 end
 ```
 
-If you use puma with multiple workers, you can use the `on_worker_boot` hook (which is part of the puma's configuration) to enable the feature flag cache to receive the updates from posthog dashboard.
+#### Evaluating feature flags locally in a Puma server
+
+If you use Puma with multiple workers, you can use the `on_worker_boot` hook (which is part of the Puma's configuration) to enable the feature flag cache to receive the updates from PostHog.
 
 ```ruby
 on_worker_boot do
