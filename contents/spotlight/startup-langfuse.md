@@ -13,7 +13,7 @@ category: Startups
 
 > Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work. This time, we spoke to [Langfuse](https://langfuse.com/), an open source observability platform for LLMs, about their Y Combinator experience.  
 
-For the team at Langfuse, the past 12 months have been a blur of activity and highlights. After completing Y Combinator’s W23 batch they’ve earned over 1.5k [GitHub stars](/spotlight/startup-documenso), won Product of the Day on [Product Hunt](/spotlight/startup-before-sunset-ai) and raised a $4M seed round backed by Lightspeed Venture Partners. 
+For the team at Langfuse, the past 12 months have been a blur of activity and highlights. After completing Y Combinator’s W23 batch they’ve earned over [1.5k GitHub stars](https://github.com/langfuse/langfuse/), won Product of the Day on [Product Hunt](https://www.producthunt.com/products/langfuse#langfuse) and raised a $4M seed round backed by Lightspeed Venture Partners. 
 
 “We’ve been very lucky,” says Langfuse co-founder Marc Klingen. “Not only have we had the support and encouragement of [Y Combinator](/customers/ycombinator), but we’ve also benefited from the surging popularity of the LLM community too. There are so many teams solving problems with AI at the moment — it’s been a big plus for us.”
 
