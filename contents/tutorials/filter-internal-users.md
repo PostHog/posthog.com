@@ -2,7 +2,6 @@
 title: How to filter out internal users
 sidebar: Docs
 showTitle: true
-featuredVideo: https://www.youtube-nocookie.com/embed/2bptTniYPGc
 featuredTutorial: false
 author: ["joe-martin"]
 tags: ['filters', 'settings', 'product os']
@@ -19,15 +18,11 @@ To make it easier to get accurate insights, PostHog includes tools to filter int
 
 ## Step 1: Navigate to Project Settings
 
-![Filter Internal Users Step 1](../images/tutorials/internal-users/step1.png)
-
-PostHog identifies internal users on a project-by-project basis, so head to Project Setting in the navigation to get started. If your PostHog instance spans multiple projects then you will have to repeat this tutorial for each project. 
+PostHog identifies internal users on a project-by-project basis, so head to Project Settings in the navigation to get started. If your PostHog instance spans multiple projects then you will have to repeat this tutorial for each project. 
 
 Any internal users you identify for a project will apply for _all_ users on that project. 
 
 ## Step 2: Add an internal user filter
-
-![Filter Internal Users Step 2](../images/tutorials/internal-users/step2.png)
 
 In Project Settings, scroll down to the ‘_Filter out internal and test users_’ section and click ‘_+ Add filter_’ to begin. 
 
@@ -50,7 +45,5 @@ You can create filters which include more than one value by separating values wi
 You can also create filters based on pre-prepared cohorts of users, which is especially useful if you’re using cohorts with [Feature Flags](/docs/user-guides/feature-flags) or to run [Experiments](/docs/user-guides/experimentation). To do this, simply select the cohort you wish to add to your internal and test user list. 
 
 ## Step 4: Apply the filter to an insight
-
-![Filter Internal Users Step 3](../images/tutorials/internal-users/step3.png)
 
 The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together. Simple!
