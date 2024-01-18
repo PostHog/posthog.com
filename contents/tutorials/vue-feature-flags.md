@@ -162,7 +162,7 @@ When you run your app now, you should see the updated text.
 
 ### Bootstrapping feature flags
 
-You may notice flickering when you load your app. This is because PostHog is making an asynchronous request to fetch the flag value and so the text is only updated when the request returns. To have your feature flags available immediately, you can initialize PostHog with precomputed values until PostHog has had a chance to fetch them. This is called [bootstrapping](/docs/feature-flags/bootstrapping).
+You may notice the text flickers when you load your app while PostHog makes a request to fetch the flag value. To prevent this and have your feature flags available immediately, you can initialize PostHog with precomputed flag values to use until it has a chance to fetch them. This is called [bootstrapping](/docs/feature-flags/bootstrapping).
 
 To do this, use the `bootstrap` key in PostHog's initialization config and add feature flag values to it:
 
@@ -186,7 +186,9 @@ export default {
 };
 ```
 
-Now when you reload your app, the flicker is gone. See our [docs](/docs/feature-flags/bootstrapping) for more information on bootstrapping best practices.
+Now when you reload your app, the flicker is gone. 
+
+To ensure you are bootstrapping PostHog with the correct flag values, we recommend fetching the flags values from your server alongside the page load request, and then passing them to your frontend. See our [docs](/docs/feature-flags/bootstrapping) for more information on how to do this.
 
 ## Further reading
 
