@@ -15,7 +15,7 @@ import EventsDark from '../images/tutorials/vue-surveys/events-dark.png'
 
 To demonstrate the basics of PostHog analytics, we'll create a simple Vue 3 app with two pages and a link to navigate between them.
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then install `@vue/cli` and create a new Vue app:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then install `@vue/cli` and create a new Vue app:
 
 ```bash
 npm install -g @vue/cli
@@ -276,6 +276,6 @@ Now when you click the button, PostHog captures the custom `home_button_clicked`
 
 ## Further reading
 
-- [PostHog Vue.js docs](/docs/libraries/vue-js)
+- [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
 - [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
 - [How to set up surveys in Vue](/tutorials/vue-surveys)
