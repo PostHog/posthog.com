@@ -614,5 +614,5 @@ You can also filter these results based on [user properties](/docs/product-analy
 ## Further reading
 
 - [How to write great product survey questions (with examples)](/blog/product-survey-questions)
-- [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
+- [How to set up analytics in Vue with PostHog](/tutorials/vue-analytics)
 - [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
