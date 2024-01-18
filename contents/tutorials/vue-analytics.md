@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in Vue with PostHog
-date: 2024-01-16
+date: 2024-01-18
 author: ["lior-neu-ner"]
 tags: ['product analytics']
 ---
@@ -9,7 +9,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import EventsLight from '../images/tutorials/vue-surveys/events-light.png'
 import EventsDark from '../images/tutorials/vue-surveys/events-dark.png'
 
-[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Vue.js app. To show you how to set up analytics, in this tutorial we create a basic Vue app, add PostHog, and show you have to capture pageviews and custom events.
+[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Vue.js app. To show you how to set up analytics, in this tutorial we create a basic Vue app, add PostHog, and use it to capture pageviews and custom events.
 
 ## Creating a Vue app
 
@@ -245,9 +245,9 @@ export default {
 
 ## Capturing custom events
 
-Beyond pageviews, there might be more events you want to capture. To do this, you can capture custom events with PostHog. To showcase this, we add a button to the home page and capture a custom event whenever it is clicked. 
+Beyond pageviews, there might be more events you want to capture. To do this, you can capture custom events with PostHog. 
 
-To do this, update the code in `HomePage.vue`:
+To showcase this, update the code in `HomePage.vue` with a button and `captureCustomEvent` method that uses PostHog to capture a `home_button_clicked` event:
 
 ```vue file=HomePage.vue
 <template>
