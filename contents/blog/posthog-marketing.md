@@ -9,7 +9,6 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/xWyDI4R-JR4
 category: Using PostHog
 tags:
   - Guides
