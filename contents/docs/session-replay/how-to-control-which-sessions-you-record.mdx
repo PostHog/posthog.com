@@ -14,21 +14,9 @@ import ImgMinDurationLight from '../../images/tutorials/limit-session-recordings
 
 If you want control over which sessions to record:
 
-# With feature flags
+# Available on all plans
 
-You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
-
-1. Create a boolean flag that you can use to control whether to record sessions or not.
-2. Visit your [replay ingestion settings page](https://us.posthog.com/settings/project-replay#replay-ingestion).
-3. Select that flag in the "Enable recordings using feature flag" dropdown menu.
-
-<ProductScreenshot
-    imageLight={ImgFeatureFlagControlLight} 
-    alt="Selecting a feature flag to control session recordings" 
-    classes="rounded"
-/>
-
-# With your own code
+## With your own code
 
 1. Set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config).
 
@@ -49,9 +37,29 @@ posthog.init('<ph_project_api_key>', {
 posthog.startSessionRecording()
 ```
 
-If you already use this mechanism to control session recordings using feature flags you can link the feature flag (as above) and delete your manual handling code.
+## Billing Limits
 
-# Sampling
+You can set a billing limit [using these instructions](https://posthog.com/docs/billing/limits-alerts). We'll stop ingesting recordings when you reach your limit. 
+
+# Available on plans released Jan 2024
+
+We're currently testing these new controls and will release them more widely once those tests are complete. [Contact support to request access to these plans.](https://us.posthog.com/project/2#panel=support%3Asupport%3Asession_replay)
+
+## With feature flags
+
+You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
+
+1. Create a boolean flag that you can use to control whether to record sessions or not.
+2. Visit your [replay ingestion settings page](https://us.posthog.com/settings/project-replay#replay-ingestion).
+3. Select that flag in the "Enable recordings using feature flag" dropdown menu.
+
+<ProductScreenshot
+    imageLight={ImgFeatureFlagControlLight} 
+    alt="Selecting a feature flag to control session recordings" 
+    classes="rounded"
+/>
+
+## Sampling
 
 You can configure sampling to limit the number of sessions you record for each user. This is useful if you want to record a percentage of sessions for all users. Sampling helps reduce the number of sessions you record, but it doesn’t let you control which sessions are included.
 
@@ -65,7 +73,7 @@ Our recommendation is to start with capturing all sessions (e.g. 100% - the defa
 
 Whenever a new session starts after you select a collection below 100%, the browser generates a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session is recorded. If it is greater than the sampling rate, the session is not recorded.
 
-# Minimum duration
+## Minimum duration
 
 You can also set a minimum duration for sessions to be recorded. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
 
@@ -77,7 +85,7 @@ You can also set a minimum duration for sessions to be recorded. This is useful 
 
 The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory. 
 
-## Limitations
+### Limitations
 
 This means that if you set a high minimum duration and your user visits multiple pages each for a short time, you still record the session but miss the beginning. If the user leaves the site before the minimum duration has passed, the session is not recorded.
 
