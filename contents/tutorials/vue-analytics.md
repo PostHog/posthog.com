@@ -201,23 +201,26 @@ You might notice that moving between pages only captures a single pageview event
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
-In `router/index.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that the capture event fires only after the page is mounted.
+In `main.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that the capture event fires only after the page is mounted.
 
-```js router/index.js
-import { createRouter, createWebHistory } from 'vue-router'
-import { nextTick } from 'vue';
-// ...rest of your imports and code
+```js main.js
+import { createApp, nextTick } from 'vue'
+import App from './App.vue'
+import router from './router'
+import posthogPlugin from '../plugins/posthog';
+
+const app = createApp(App);
+app.use(posthogPlugin)
+.use(router)
+.mount('#app');
 
 router.afterEach((to, from, failure) => {
-  if (!failure && router.app) {
-    const posthog = router.app.config.globalProperties.$posthog;
+  if (!failure) {
     nextTick(() => {
-      posthog.capture('$pageview', { path: to.fullPath });
+      app.config.globalProperties.$posthog.capture('$pageview', { path: to.fullPath });
     });
   }
 });
-
-export default router
 ```
 
 Now, every time a user moves between pages, PostHog captures a `$pageview` event, not just the first page load.
