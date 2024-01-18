@@ -1,6 +1,6 @@
 ---
 title: How to set up surveys in Nuxt
-date: 2024-01-15
+date: 2024-01-18
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
