@@ -53,7 +53,7 @@ Moving away from Silicon Valley may sound like an odd move for a tech startup, b
 
 One of the best early decisions the team made was to make Langfuse completely open source where possible. This helped the team not only benefit from external code contributions, but also avoid scaling up sales functions prematurely. 
 
-“Open source is a great way to get more enterprise adoption,” says Marc. “We wouldn’t have expected to reach large Fortune 5000 companies without a dedicated sales team, but we’ve since realized that teams in those companies frequently adopt open source tools because they give them more visibility and control over data.”
+“Open source is a great way to get more enterprise adoption,” says Marc. “We wouldn’t have expected to reach large Fortune 500 companies without a dedicated sales team, but we’ve since realized that teams in those companies frequently adopt open source tools because they give them more visibility and control over data.”
 
 When it comes to tracking their own data, Langfuse is similar. They use PostHog because it too is open source and gives the team all the information they need to build better products — and they recommend it to other startups regularly.
 
