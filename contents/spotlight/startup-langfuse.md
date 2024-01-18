@@ -17,7 +17,7 @@ For the team at Langfuse, the past 12 months have been a blur of activity and hi
 
 “We’ve been very lucky,” says Langfuse co-founder Marc Klingen. “Not only have we had the support and encouragement of [Y Combinator](/customers/ycombinator), but we’ve also benefited from the surging popularity of the LLM community too. There are so many teams solving problems with AI at the moment — it’s been a big plus for us.”
 
-Langfuses’ success is attributable to more than just good luck and the raise of AI, however. They’ve also succeeded by taking advantage of the opportunities available to them and applying some hard-learned lessons from their time in Y Combinator...
+Langfuse's success is attributable to more than just good luck and the rise of AI, however. They’ve also succeeded by taking advantage of the opportunities available to them and applying some hard-learned lessons from their time in Y Combinator...
 
 ### Know when, why, and how to pivot
 
