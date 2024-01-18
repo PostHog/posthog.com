@@ -9,7 +9,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import EventsLight from '../images/tutorials/nuxt-surveys/events-light.png'
 import EventsDark from '../images/tutorials/nuxt-surveys/events-dark.png'
 
-[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Nuxt.js app. To show you how to set up analytics, in this tutorial we create a basic Nuxt app, add PostHog on both the client and server, and show you have to capture pageviews and custom events.
+[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Nuxt.js app. To show you how to set up analytics, in this tutorial we create a basic Nuxt app, add PostHog on both the client and server, and use it to capture pageviews and custom events.
 
 ## Creating a Nuxt app
 
@@ -142,7 +142,7 @@ You might notice that moving between pages only captures a single pageview event
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
-In `posthog.client.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that the capture event fires only after the page is mounted.
+In `posthog.client.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that you capture the event after the page is mounted.
 
 ```js plugins/posthog.client.js
 import { defineNuxtPlugin } from '#app'
@@ -197,7 +197,7 @@ const captureCustomEvent = () => {
 </script>
 ```
 
-Now when you click the button, PostHog captures the custom `home_button_clicked` event. Notice that we also added a property `user_name` to the event. This is helpful for filtering events in the PostHog dashboard.
+When you click the button now, PostHog captures a custom `home_button_clicked` event. Notice that we also added a property `user_name` to the event. This is helpful for filtering events in the PostHog dashboard.
 
 ## Adding PostHog on the server side
 
