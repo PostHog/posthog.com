@@ -8,6 +8,7 @@ import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
 import { BillingProductV2Type, BillingV2FeatureType } from 'types'
 import { number, string } from 'yup'
+import { product_type_to_max_events } from '../pricingLogic'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -59,8 +60,13 @@ const InclusionOnlyRow = ({ plans }) => (
     </Row>
 )
 
-const PricingTiers = ({ plans, unit, compact = false }) =>
-    plans[plans.length - 1]?.tiers?.map(({ up_to, unit_amount_usd }, index) => {
+const PricingTiers = ({ plans, unit, compact = false, type }) => {
+    // Filter out tiers above the max number of units we want to display
+    const truncated_tiers = plans[plans.length - 1]?.tiers?.filter(
+        ({ up_to }) => up_to <= product_type_to_max_events[type]
+    )
+
+    return truncated_tiers.map(({ up_to, unit_amount_usd }, index) => {
         return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
             <Row className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''}`} key={`type-${index}`}>
                 <Title
@@ -68,8 +74,8 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                     title={
                         index === 0
                             ? `First ${formatCompactNumber(up_to)} ${unit}s`
-                            : !up_to || index === plans[plans.length - 1]?.tiers.length - 1 // Temp override
-                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)}+`
+                            : !up_to
+                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)} +`
                             : `${
                                   formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |k/)[0]
                               }-${formatCompactNumber(up_to)}`
@@ -86,7 +92,7 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                     title={
                         plans[0].free_allocation === up_to
                             ? 'Free'
-                            : index === plans[plans.length - 1].tiers.length - 1
+                            : index === truncated_tiers.length - 1
                             ? 'Contact us'
                             : `$${parseFloat(unit_amount_usd).toFixed(
                                   Math.max(
@@ -100,6 +106,7 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
             </Row>
         )
     })
+}
 
 const formatCompactNumber = (number) => {
     const formatter = Intl.NumberFormat('en', {
@@ -262,10 +269,6 @@ export default function Plans({
     } = useStaticQuery(allProductsData)
     return (groupsToShow?.length > 0 ? products.filter(({ type }) => groupsToShow.includes(type)) : products).map(
         ({ type, plans, unit, addons, name, inclusion_only }: any) => {
-            if (type === 'product_analytics') {
-                plans = [plans[plans.length - 1]]
-                plans[0].tiers = plans[0].tiers?.slice(0, -1)
-            }
             return (
                 <div className="grid gap-y-2 min-w-[450px] mb-20" key={type}>
                     <div className="border border-light dark:border-dark rounded pb-2">
@@ -405,7 +408,7 @@ export default function Plans({
                                 {inclusion_only ? (
                                     <InclusionOnlyRow plans={plans} />
                                 ) : (
-                                    <PricingTiers plans={plans} unit={unit} />
+                                    <PricingTiers plans={plans} unit={unit} type={type} />
                                 )}
                             </div>
                         </div>

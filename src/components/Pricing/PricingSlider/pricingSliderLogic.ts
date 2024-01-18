@@ -1,6 +1,13 @@
 import { kea } from 'kea'
 import { inverseCurve, sliderCurve } from './LogSlider'
-import { pricingLogic } from '../pricingLogic'
+import {
+    MAX_FEATURE_FLAGS,
+    MAX_PRODUCT_ANALYTICS,
+    MAX_SESSION_REPLAY,
+    MAX_SURVEYS,
+    MILLION,
+    pricingLogic,
+} from '../pricingLogic'
 
 import type { pricingSliderLogicType } from './pricingSliderLogicType'
 
@@ -32,13 +39,6 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
 
     return Math.round(finalCost)
 }
-
-export const MILLION = 1000000
-export const TEN_MILLION = 10000000
-export const FIFTY_MILLION = 50000000
-export const HUNDRED_MILLION = 100000000
-export const BILLION = 1000000000
-export const MAX_PRODUCT_ANALYTICS = FIFTY_MILLION
 
 export type PricingOptionType = 'product_analytics' | 'session_replay' | 'feature_flags' | 'surveys'
 
@@ -225,6 +225,24 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 return eventNumber >= MAX_PRODUCT_ANALYTICS
             },
         ],
+        sessionReplayRecordingsMaxed: [
+            (s) => [s.sessionRecordingEventNumber],
+            (recordings: number) => {
+                return recordings >= MAX_SESSION_REPLAY
+            },
+        ],
+        featureFlagsRequestsMaxed: [
+            (s) => [s.featureFlagNumber],
+            (requests: number) => {
+                return requests >= MAX_FEATURE_FLAGS
+            },
+        ],
+        surveyResponsesMaxed: [
+            (s) => [s.surveyResponseNumber],
+            (responses: number) => {
+                return responses >= MAX_SURVEYS
+            },
+        ],
         finalMonthlyCost: [
             (s) => [s.finalCost],
             (finalCost: number) => {
@@ -245,3 +263,4 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
         },
     }),
 })
+export { MAX_FEATURE_FLAGS, MAX_PRODUCT_ANALYTICS, MAX_SESSION_REPLAY, MAX_SURVEYS, MILLION }
