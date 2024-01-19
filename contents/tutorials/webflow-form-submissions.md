@@ -9,7 +9,7 @@ tags: ["configuration", 'surveys']
 
 With PostHog, you can autocapture events and record sessions on your Webflow site. With a bit more setup, you can also use it to capture form submissions. In this tutorial, we show how to do this with a basic Webflow site, PostHog, and some JavaScript.
 
-> Want a full tutorial on how to set up PostHog for Webflow? Check out "[How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)."
+> Want a full tutorial on how to set up PostHog for Webflow? Check out "[How to set up Webflow analytics and session recordings](/tutorials/webflow)."
 
 ## Initial Webflow and PostHog setup
 
@@ -78,6 +78,6 @@ With this, you can set up alerts in Slack for email submissions with a [webhook]
 
 ## Further reading
 
-- [How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)
-- [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
+- [How to run A/B tests in Webflow](/tutorials/webflow-ab-tests)
+- [How to set up Webflow analytics and session recordings](/tutorials/webflow)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)

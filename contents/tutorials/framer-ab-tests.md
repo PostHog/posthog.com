@@ -1,5 +1,5 @@
 ---
-title: "How to run A/B tests in Framer with PostHog"
+title: "How to run A/B tests in Framer"
 date: 2023-11-15
 author: ["lior-neu-ner"]
 showTitle: true
@@ -127,5 +127,5 @@ If you want to view both variants of your experiment to make sure they are worki
 ## Further reading
 
 - [How to set up Framer analytics, session replay, and more](/tutorials/framer-analytics)
-- [How to create surveys in Framer with PostHog](/tutorials/framer-surveys)
+- [How to create surveys in Framer](/tutorials/framer-surveys)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)

@@ -109,6 +109,6 @@ When we save this and publish the site again, the button is still there. When we
 
 ## Further reading
 
-- [How to run A/B tests in Bubble with PostHog](/tutorials/bubble-ab-tests)
-- [How to create surveys in Bubble with PostHog](/tutorials/bubble-surveys)
+- [How to run A/B tests in Bubble](/tutorials/bubble-ab-tests)
+- [How to create surveys in Bubble](/tutorials/bubble-surveys)
 - [How to analyze first and last touch attribution](/tutorials/first-last-touch-attribution)

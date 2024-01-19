@@ -1,5 +1,5 @@
 ---
-title: "How to run A/B tests in Bubble with PostHog"
+title: "How to run A/B tests in Bubble"
 date: 2024-01-11
 author: ["lior-neu-ner"]
 showTitle: true
@@ -130,5 +130,5 @@ posthog.onFeatureFlags(() => {
 ## Further reading
 
 - [How to set up Bubble analytics, session replays, and more](/tutorials/bubble-analytics)
-- [How to create surveys in Bubble with PostHog](/tutorials/bubble-surveys)
+- [How to create surveys in Bubble](/tutorials/bubble-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
