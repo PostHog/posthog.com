@@ -22,7 +22,7 @@ We'll create a basic Vue app, add PostHog, create a survey, and then show you ho
 
 ## 1. Create a Vue app
 
-For this tutorial, we create a basic `Vue 3` app. First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then install `@vue/cli` and create a new Vue app:
+For this tutorial, we create a basic `Vue 3` app. First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then install `@vue/cli` and create a new Vue app:
 
 ```bash
 npm install -g @vue/cli
@@ -613,6 +613,6 @@ You can also filter these results based on [user properties](/docs/product-analy
 
 ## Further reading
 
-- [How to write great product survey questions (with examples)](/blog/product-survey-questions)
-- [How to set up analytics in Vue with PostHog](/tutorials/vue-analytics)
+- [How to set up analytics in Vue](/tutorials/vue-analytics)
+- [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
 - [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
