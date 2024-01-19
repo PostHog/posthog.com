@@ -77,12 +77,12 @@ export function Nav(props: NavProps): React.ReactElement {
                                     leaveFrom="opacity-100"
                                     leaveTo="opacity-0"
                                 >
-                                    <Listbox.Options className="absolute z-10 list-none mt-1 max-h-60 overflow-auto rounded-md bg-white text-sm shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm p-0">
+                                    <Listbox.Options className="absolute z-10 list-none mt-1 max-h-60 overflow-auto rounded-md bg-white dark:bg-accent-dark dark:text-primary-dark text-sm shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm p-0">
                                         {items.map((collection, i) => (
                                             <Listbox.Option
                                                 key={i}
                                                 className={({ active }) =>
-                                                    `relative select-none py-2 px-4 text-sm hover:bg-accent dark:hover:bg-accent-dark ${
+                                                    `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark ${
                                                         active ? 'font-bold' : 'opacity-75'
                                                     }`
                                                 }
