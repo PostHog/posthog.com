@@ -1,5 +1,4 @@
 import { MDXProvider } from '@mdx-js/react'
-import { useLocation } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
@@ -15,8 +14,7 @@ import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useEffect } from 'react'
-import { animateScroll as scroll } from 'react-scroll'
+import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import LibraryFeatures from 'components/LibraryFeatures'
@@ -36,6 +34,7 @@ import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
 import { TutorialTags } from 'components/Tutorials/constants/tags'
 import { Emoji } from 'components/Emoji'
+import RoadmapHighlights from 'components/RoadmapHighlights'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -240,6 +239,7 @@ export default function Handbook({
         CategoryData,
         TutorialTags,
         Emoji,
+        RoadmapHighlights: (props) => RoadmapHighlights({ team: title?.replace(/team/gi, '').trim(), ...props }),
         ...shortcodes,
     }
 

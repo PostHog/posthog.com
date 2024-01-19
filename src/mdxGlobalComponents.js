@@ -9,6 +9,7 @@ import { Images } from './components/Careers/Images'
 import { ComparisonTable } from './components/ComparisonTable'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
+import { DateTable } from './components/DateTable'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
@@ -45,6 +46,7 @@ import { TextCard } from './components/Products/TextCard'
 import { TutorialCard } from './components/Products/TutorialCard'
 import { QuickLinks } from './components/QuickLinks'
 import { Quote2 } from './components/Quote2'
+import { RoadmapHighlights } from './components/RoadmapHighlights'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
 import { Squeak } from './components/Squeak'
@@ -63,6 +65,7 @@ export const shortcodes = {
     ComparisonTable,
     CompensationCalculator,
     ContentViewer,
+    DateTable,
     lib,
     Emoji,
     FeatureAvailability,
@@ -99,6 +102,7 @@ export const shortcodes = {
     TutorialCard,
     QuickLinks,
     Quote2,
+    RoadmapHighlights,
     Signatures,
     SlackPage,
     Squeak,
