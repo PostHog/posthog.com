@@ -100,7 +100,7 @@ const unsubCartItemsChange = useCartStore.subscribe(
         const cartCount = cartItems?.length
             ? cartItems.map((item) => item.count).reduce((prev, curr) => prev + curr)
             : 0
-        useCartStore.setState({ subtotal, count: cartCount })
+        useCartStore.setState({ subtotal, count: cartCount, cartId: null })
     }
 )
 
