@@ -25,6 +25,7 @@ export const prettyInt = (x: number): string => {
 // change these to whatever curve function you need!
 export const sliderCurve = Math.exp
 export const inverseCurve = Math.log
+export const identityCurve = (x: number): number => x
 
 const SI_SYMBOL = ['', 'k', 'M', 'B']
 

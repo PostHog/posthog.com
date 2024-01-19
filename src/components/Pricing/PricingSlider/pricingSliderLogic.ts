@@ -48,11 +48,17 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
     actions: {
         setEventNumber: (value: number) => ({ value }),
         setInputValue: (value: number) => ({ value }),
-        setProductAnalyticsSliderValue: (value: number) => ({ value }),
+        setProductAnalyticsSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({
+            value,
+            sliderCurve,
+        }),
         setPricingOption: (option: PricingOptionType) => ({ option }),
-        setSessionRecordingSliderValue: (value: number) => ({ value }),
-        setSessionRecordingInputValue: (value: number) => ({ value }),
-        setFeatureFlagSliderValue: (value: number) => ({ value }),
+        setSessionRecordingSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({
+            value,
+            sliderCurve,
+        }),
+        setSessionRecordingInputValue: (value: number, sliderCurve?: (x: number) => number) => ({ value, sliderCurve }),
+        setFeatureFlagSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({ value, sliderCurve }),
         setFeatureFlagInputValue: (value: number) => ({ value }),
         setSurveyResponseSliderValue: (value: number) => ({ value }),
         setSurveyResponseInputValue: (value: number) => ({ value }),
@@ -63,30 +69,40 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
         surveyResponseNumber: [
             250,
             {
-                setSurveyResponseSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
+                setSurveyResponseSliderValue: (
+                    _: null,
+                    { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
+                ) => Math.round(sliderCurve ? sliderCurve(value) : value),
                 setSurveyResponseInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
         featureFlagNumber: [
             1000000,
             {
-                setFeatureFlagSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
+                setFeatureFlagSliderValue: (
+                    _: null,
+                    { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
+                ) => Math.round(sliderCurve ? sliderCurve(value) : value),
                 setFeatureFlagInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
         sessionRecordingEventNumber: [
             5000,
             {
-                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) =>
-                    Math.round(sliderCurve(value)),
+                setSessionRecordingSliderValue: (
+                    _: null,
+                    { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
+                ) => Math.round(sliderCurve ? sliderCurve(value) : value),
                 setSessionRecordingInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
         eventNumber: [
             MILLION,
             {
-                setProductAnalyticsSliderValue: (_: null, { value }: { value: number }) =>
-                    Math.round(sliderCurve(value)),
+                setProductAnalyticsSliderValue: (
+                    _: null,
+                    { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
+                ) => Math.round(sliderCurve ? sliderCurve(value) : value),
                 setInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],

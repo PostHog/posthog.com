@@ -1,6 +1,6 @@
 import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
-import { LinearSlider, LogSlider } from 'components/Pricing/PricingSlider/Slider'
+import { LinearSlider, LogSlider, identityCurve, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { Analytics, SessionRecording, FeatureFlags, Surveys } from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
@@ -121,7 +121,7 @@ export const PricingCalculator = () => {
                                         marks={[MILLION, TEN_MILLION, TWENTY_FIVE_MILLION, FIFTY_MILLION]}
                                         min={MILLION}
                                         max={MAX_PRODUCT_ANALYTICS}
-                                        onChange={(value) => setProductAnalyticsSliderValue(value)}
+                                        onChange={(value) => setProductAnalyticsSliderValue(value, (x: number) => x)}
                                         value={productAnalyticsSliderValue}
                                     />
                                 ) : (
@@ -130,7 +130,7 @@ export const PricingCalculator = () => {
                                         marks={[MILLION, TEN_MILLION, HUNDRED_MILLION, BILLION]}
                                         min={MILLION}
                                         max={BILLION}
-                                        onChange={(value) => setProductAnalyticsSliderValue(value)}
+                                        onChange={(value) => setProductAnalyticsSliderValue(value, sliderCurve)}
                                         value={productAnalyticsSliderValue}
                                     />
                                 )}
@@ -140,7 +140,7 @@ export const PricingCalculator = () => {
                             <span className="text-lg font-bold">
                                 {productAnalyticsEventsMaxed && enterprise_flag_enabled
                                     ? 'Contact us'
-                                    : `$${productAnalyticsCost.toLocaleString()}`}{' '}
+                                    : `$${productAnalyticsCost.toLocaleString()}`}
                             </span>
                         </div>
                         <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
@@ -167,10 +167,10 @@ export const PricingCalculator = () => {
                                 ) : (
                                     <LogSlider
                                         stepsInRange={100}
-                                        marks={[5000, 25000, MAX_SESSION_REPLAY]}
+                                        marks={[5000, 25000, 120000, 500000]}
                                         min={5000}
-                                        max={MAX_SESSION_REPLAY}
-                                        onChange={(value) => setSessionRecordingSliderValue(value)}
+                                        max={500000}
+                                        onChange={(value) => setSessionRecordingSliderValue(value, sliderCurve)}
                                         value={sessionRecordingSliderValue}
                                     />
                                 )}
@@ -205,10 +205,10 @@ export const PricingCalculator = () => {
                                 ) : (
                                     <LogSlider
                                         stepsInRange={100}
-                                        marks={[MILLION, FIVE_MILLION, MAX_FEATURE_FLAGS]}
-                                        min={MILLION}
-                                        max={MAX_FEATURE_FLAGS}
-                                        onChange={(value) => setFeatureFlagSliderValue(value)}
+                                        marks={[1000000, 10000000, 100000000, 1000000000]}
+                                        min={1000000}
+                                        max={1000000000}
+                                        onChange={(value) => setFeatureFlagSliderValue(value, sliderCurve)}
                                         value={featureFlagSliderValue}
                                     />
                                 )}
@@ -243,10 +243,10 @@ export const PricingCalculator = () => {
                                 ) : (
                                     <LogSlider
                                         stepsInRange={100}
-                                        marks={[250, 2000, MAX_SURVEYS]}
+                                        marks={[250, 2000, 15000, 100000]}
                                         min={250}
-                                        max={MAX_SURVEYS}
-                                        onChange={(value) => setSurveyResponseSliderValue(value)}
+                                        max={100000}
+                                        onChange={(value) => setSurveyResponseSliderValue(value, sliderCurve)}
                                         value={surveyResponseSliderValue}
                                     />
                                 )}
@@ -269,10 +269,10 @@ export const PricingCalculator = () => {
                                         </div>
                                     </strong>
                                 </div>
-                                <div className="p-3 text-center">
+                                <div className="p-3 text-center self-center">
                                     {showHighVolCTA ? (
                                         <button
-                                            className={`${button('secondary', 'auto', '', 'md')}`}
+                                            className={`${button('secondary', 'auto', '', 'md')} self-center`}
                                             onClick={() => toggleHighVolCTA()}
                                         >
                                             Show me the price!
@@ -289,12 +289,10 @@ export const PricingCalculator = () => {
                                                 /mo
                                                 <div className="text-sm mb-0 flex justify-evenly ">
                                                     paid annually
-                                                    {enterpriseLevelSpend && (
-                                                        <Toggle
-                                                            checked={showAnnualBilling}
-                                                            onChange={() => toggleAnnualBilling()}
-                                                        />
-                                                    )}
+                                                    <Toggle
+                                                        checked={showAnnualBilling}
+                                                        onChange={() => toggleAnnualBilling()}
+                                                    />
                                                 </div>
                                             </span>
                                         </>
