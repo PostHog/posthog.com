@@ -540,6 +540,6 @@ You can also filter these results based on [user properties](/docs/product-analy
 
 ## Further reading
 
-- [How to write great product survey questions (with examples)](/blog/product-survey-questions)
-- [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
+- [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)
+- [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
 - [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
