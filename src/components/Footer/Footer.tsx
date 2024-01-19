@@ -167,7 +167,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Merch',
-                url: 'https://merch.posthog.com',
+                url: '/merch',
             },
             {
                 title: 'Contributors',
