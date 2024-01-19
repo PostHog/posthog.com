@@ -4,6 +4,7 @@ import { Checkout } from './Checkout'
 import { LineItem } from './LineItem'
 import { Price } from './Price'
 import { useCartStore } from './store'
+import { StaticImage } from 'gatsby-plugin-image'
 
 type CartProps = {
     className?: string
@@ -22,7 +23,14 @@ export function Cart(props: CartProps): React.ReactElement {
     return (
         <div className={classes}>
             <h3 className="text-xl font-bold mb-4">Cart</h3>
-            {isEmpty && <div>Cart is empty</div>}
+            {isEmpty && (
+                <div className="border border-light bg-tan rounded p-8 text-center flex flex-col gap-8">
+                    <p className="font-medium mb-0">This cart would look better with something in it.</p>
+                    <div className="w-64 mx-auto">
+                        <StaticImage src="../../images/shopahogic.png" alt="Empty cart" />
+                    </div>
+                </div>
+            )}
 
             <>
                 <div>
