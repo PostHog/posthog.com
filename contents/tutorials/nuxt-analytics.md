@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in Nuxt with PostHog
-date: 2024-01-18
+date: 2024-01-19
 author: ["lior-neu-ner"]
 tags: ['product analytics']
 ---
