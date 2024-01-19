@@ -11,7 +11,7 @@ A/B tests help you make your Vue app better by enabling you to compare the impac
 
 For this tutorial, we create a basic `Vue 3` app with a simple button to run our test on.
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then install `@vue/cli` and create a new Vue app:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then install `@vue/cli` and create a new Vue app:
 
 ```bash
 npm install -g @vue/cli
@@ -176,6 +176,6 @@ With this, you’re ready to launch your experiment!
 
 ## Further reading
 
-- [PostHog Vue.js docs](/docs/libraries/vue-js)
-- [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+- [How to set up surveys in Vue](/tutorials/vue-surveys)
+- [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
+- [How to set up analytics in Vue](/tutorials/vue-analytics)

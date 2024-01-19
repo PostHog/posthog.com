@@ -14,7 +14,7 @@ We'll cover creating a basic Nuxt app, integrating PostHog, and setting up the A
 
 For this tutorial, we create a basic `Nuxt 3` app with a simple button to run our test on. 
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then create a Nuxt.js app:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0.0 or newer). Then create a Nuxt.js app:
 
 ```bash
 npx nuxi@latest init <project-name>
@@ -260,5 +260,5 @@ Now, when you refresh the page, the button text is already set when the page loa
 ## Further reading
 
 - [PostHog Nuxt.js docs](/docs/libraries/nuxt-js)
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
+- [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
+- [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)
