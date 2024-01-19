@@ -71,7 +71,7 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                     <div>
                         <div className="image-wrapper relative bg-white rounded-md border border-light dark:border-dark ">
                             {isNew && (
-                                <div className="z-10 rotate-12 uppercase text-xs flex items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
+                                <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
                                     New
                                 </div>
                             )}

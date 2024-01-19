@@ -45,7 +45,7 @@ export function Nav(props: NavProps): React.ReactElement {
     return (
         <>
             <div className="mb-6 px-2 sticky top-[57px] md:top-[-1px] md:reasonable:top-[107px] z-50 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
-                <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-3 py-1">
+                <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-3 py-1 min-h-[40px]">
                     {/**
                      * If you're on a product page
                      */}
@@ -54,62 +54,77 @@ export function Nav(props: NavProps): React.ReactElement {
                     {/**
                      * If you're on a collection page
                      */}
-                    {currentCollectionHandle && (
-                        <div>
-                            <Listbox value={currentCollection} onChange={handleChange}>
-                                <Listbox.Button
-                                    className="group relative inline-flex w-full cursor-pointer rounded-l py-1 pl-2 pr-1 
-                        hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99] 
-                        [data-headlessui-state='open']:border [data-headlessui-state='open']:border-b-3
-                        rounded-sm text-left border border-transparent border-b-3 hover:border-light dark:hover:border-dark focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-                                >
-                                    <span className="block truncate font-semibold">{currentCollection.title}</span>
-                                    <span className="pointer-events-none flex items-center">
-                                        <IconChevronDown
-                                            className="h-5 w-5 opacity-60 group-hover:opacity-75"
-                                            aria-hidden="true"
-                                        />
-                                    </span>
-                                </Listbox.Button>
-                                <Transition
-                                    as={Fragment}
-                                    leave="transition ease-in duration-100"
-                                    leaveFrom="opacity-100"
-                                    leaveTo="opacity-0"
-                                >
-                                    <Listbox.Options className="absolute z-10 list-none mt-1 max-h-60 overflow-auto rounded-md bg-white dark:bg-accent-dark dark:text-primary-dark text-sm shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm p-0">
-                                        {items.map((collection, i) => (
-                                            <Listbox.Option
-                                                key={i}
-                                                className={({ active }) =>
-                                                    `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark ${
-                                                        active ? 'font-bold' : 'opacity-75'
-                                                    }`
-                                                }
-                                                value={collection}
-                                            >
-                                                {({ currentCollection }: { currentCollection: ShopifyCollection }) => (
-                                                    <>
-                                                        <span
-                                                            className={`block truncate ${
-                                                                currentCollection ? 'font-bold' : 'font-normal'
-                                                            }`}
-                                                        >
-                                                            {collection.title}
-                                                        </span>
-                                                        {currentCollection ? (
-                                                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                                                <IconCheck className="h-5 w-5" aria-hidden="true" />
-                                                            </span>
-                                                        ) : null}
-                                                    </>
-                                                )}
-                                            </Listbox.Option>
-                                        ))}
-                                    </Listbox.Options>
-                                </Transition>
-                            </Listbox>
-                        </div>
+                    {items.length > 1 ? (
+                        <>
+                            {currentCollectionHandle && (
+                                <div>
+                                    <Listbox value={currentCollection} onChange={handleChange}>
+                                        <Listbox.Button
+                                            className="group relative inline-flex w-full cursor-pointer rounded-l py-1 pl-2 pr-1 
+                            hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99] 
+                            [data-headlessui-state='open']:border [data-headlessui-state='open']:border-b-3
+                            rounded-sm text-left border border-transparent border-b-3 hover:border-light dark:hover:border-dark focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+                                        >
+                                            <span className="block truncate font-semibold">
+                                                {currentCollection.title}
+                                            </span>
+                                            <span className="pointer-events-none flex items-center">
+                                                <IconChevronDown
+                                                    className="h-5 w-5 opacity-60 group-hover:opacity-75"
+                                                    aria-hidden="true"
+                                                />
+                                            </span>
+                                        </Listbox.Button>
+                                        <Transition
+                                            as={Fragment}
+                                            leave="transition ease-in duration-100"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                        >
+                                            <Listbox.Options className="absolute z-10 list-none mt-1 max-h-60 overflow-auto rounded-md bg-white dark:bg-accent-dark dark:text-primary-dark text-sm shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm p-0">
+                                                {items.map((collection, i) => (
+                                                    <Listbox.Option
+                                                        key={i}
+                                                        className={({ active }) =>
+                                                            `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark ${
+                                                                active ? 'font-bold' : 'opacity-75'
+                                                            }`
+                                                        }
+                                                        value={collection}
+                                                    >
+                                                        {({
+                                                            currentCollection,
+                                                        }: {
+                                                            currentCollection: ShopifyCollection
+                                                        }) => (
+                                                            <>
+                                                                <span
+                                                                    className={`block truncate ${
+                                                                        currentCollection ? 'font-bold' : 'font-normal'
+                                                                    }`}
+                                                                >
+                                                                    {collection.title}
+                                                                </span>
+                                                                {currentCollection ? (
+                                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                                                        <IconCheck
+                                                                            className="h-5 w-5"
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                    </span>
+                                                                ) : null}
+                                                            </>
+                                                        )}
+                                                    </Listbox.Option>
+                                                ))}
+                                            </Listbox.Options>
+                                        </Transition>
+                                    </Listbox>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <span className="text-sm font-medium opacity-75">Merch store</span>
                     )}
                     <div className="ml-auto" onClick={() => setCartIsOpen(true)}>
                         <div className="group flex px-2 py-0.5 items-center gap-1 cursor-pointer relative border border-transparent hover:border-light dark:hover:border-dark hover:border-b-3 rounded-sm hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99]">
