@@ -117,7 +117,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
 
 You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
-## Implementing feature flag code on the client side
+## Implementing flag code on the client side
 
 Once created, we can add our feature flag to our app. We do this using the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback.
 
@@ -152,7 +152,7 @@ When you run your app now, you should see the updated text.
 
 ![New app after adding the flag](../images/tutorials/nuxt-feature-flags/flag-enabled-in-app.png)
 
-## Adding PostHog on the server side feature flags
+## Implementing flag code on the server side
 
 You may notice the text flickers when you load your app. This is because PostHog is making a request on the client side to fetch the flag value. To prevent this, there are two alternatives:
 
