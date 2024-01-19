@@ -1,13 +1,12 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Check2, Close } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
 import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
 import { BillingProductV2Type, BillingV2FeatureType } from 'types'
-import { number, string } from 'yup'
 import { product_type_to_max_events } from '../pricingLogic'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
@@ -60,13 +59,27 @@ const InclusionOnlyRow = ({ plans }) => (
     </Row>
 )
 
-const PricingTiers = ({ plans, unit, compact = false, type }) => {
-    // Filter out tiers above the max number of units we want to display
-    const truncated_tiers = plans[plans.length - 1]?.tiers?.filter(
-        ({ up_to }) => up_to <= product_type_to_max_events[type]
-    )
+const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
 
-    return truncated_tiers.map(({ up_to, unit_amount_usd }, index) => {
+const PricingTiers = ({ plans, unit, compact = false, type }) => {
+    const posthog = usePostHog()
+    const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
+
+    const [tiers, set_tiers] = useState(plans[plans.length - 1]?.tiers)
+
+    useEffect(() => {
+        posthog?.onFeatureFlags(() => {
+            if (posthog.isFeatureEnabled(ENTERPRISE_PRICING_TABLE)) {
+                set_enterprise_flag_enabled(true)
+                // Filter out tiers above the max number of units we want to display
+                set_tiers(
+                    plans[plans.length - 1]?.tiers?.filter(({ up_to }) => up_to <= product_type_to_max_events[type])
+                )
+            }
+        })
+    }, [posthog])
+
+    return tiers.map(({ up_to, unit_amount_usd }, index) => {
         return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
             <Row className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''}`} key={`type-${index}`}>
                 <Title
@@ -75,7 +88,7 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                         index === 0
                             ? `First ${formatCompactNumber(up_to)} ${unit}s`
                             : !up_to
-                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)} +`
+                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)}+`
                             : `${
                                   formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |k/)[0]
                               }-${formatCompactNumber(up_to)}`
@@ -92,7 +105,7 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                     title={
                         plans[0].free_allocation === up_to
                             ? 'Free'
-                            : index === truncated_tiers.length - 1
+                            : index === tiers.length - 1 && enterprise_flag_enabled
                             ? 'Contact us'
                             : `$${parseFloat(unit_amount_usd).toFixed(
                                   Math.max(

@@ -1,5 +1,5 @@
 import { kea } from 'kea'
-import { inverseCurve, sliderCurve } from './LogSlider'
+import { inverseCurve, sliderCurve } from './Slider'
 import {
     MAX_FEATURE_FLAGS,
     MAX_PRODUCT_ANALYTICS,
@@ -14,8 +14,6 @@ import type { pricingSliderLogicType } from './pricingSliderLogicType'
 const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) => {
     let finalCost = 0
     let alreadyCountedEvents = 0
-
-    console.log(pricingSliderLogic.values.availableProducts)
 
     const tiers = pricingSliderLogic.values.availableProducts
         .find((product) => product.type === pricingOption)

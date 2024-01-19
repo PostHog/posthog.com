@@ -1,10 +1,10 @@
 import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
-import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
+import { LinearSlider, LogSlider } from 'components/Pricing/PricingSlider/Slider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { Analytics, SessionRecording, FeatureFlags, Surveys } from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import { ExternalLink } from 'components/Icons'
 import Toggle from 'components/Toggle'
@@ -17,8 +17,12 @@ import {
     MAX_SESSION_REPLAY,
     MAX_SURVEYS,
     MILLION,
+    TEN_MILLION,
+    HUNDRED_MILLION,
+    BILLION,
 } from '../pricingLogic'
 import { button } from 'components/CallToAction'
+import usePostHog from 'hooks/usePostHog'
 
 export const section = cntl`
     max-w-6xl
@@ -26,6 +30,8 @@ export const section = cntl`
     mx-auto
     px-4
 `
+
+const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
 
 export const PricingCalculator = () => {
     const {
@@ -59,12 +65,23 @@ export const PricingCalculator = () => {
         toggleHighVolCTA,
     } = useActions(pricingSliderLogic)
 
+    const posthog = usePostHog()
+    const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
+
     useEffect(() => {
-        setProductAnalyticsSliderValue(13.815510557964274)
-    }, [])
+        posthog?.onFeatureFlags(() => {
+            if (posthog.isFeatureEnabled(ENTERPRISE_PRICING_TABLE)) {
+                set_enterprise_flag_enabled(true)
+            }
+        })
+    }, [posthog])
 
     const anyProductMaxed =
-        productAnalyticsEventsMaxed || sessionReplayRecordingsMaxed || featureFlagsRequestsMaxed || surveyResponsesMaxed
+        enterprise_flag_enabled &&
+        (productAnalyticsEventsMaxed ||
+            sessionReplayRecordingsMaxed ||
+            featureFlagsRequestsMaxed ||
+            surveyResponsesMaxed)
 
     return (
         <section className={`${section} mb-12`}>
@@ -98,19 +115,30 @@ export const PricingCalculator = () => {
                                 </span>
                             </div>
                             <div className="pt-4 pb-6">
-                                <LogSlider
-                                    stepsInRange={100}
-                                    marks={[MILLION, FIVE_MILLION, TWENTY_FIVE_MILLION, FIFTY_MILLION]}
-                                    min={MILLION}
-                                    max={MAX_PRODUCT_ANALYTICS}
-                                    onChange={(value) => setProductAnalyticsSliderValue(value)}
-                                    value={productAnalyticsSliderValue}
-                                />
+                                {enterprise_flag_enabled ? (
+                                    <LinearSlider
+                                        stepsInRange={100}
+                                        marks={[MILLION, TEN_MILLION, TWENTY_FIVE_MILLION, FIFTY_MILLION]}
+                                        min={MILLION}
+                                        max={MAX_PRODUCT_ANALYTICS}
+                                        onChange={(value) => setProductAnalyticsSliderValue(value)}
+                                        value={productAnalyticsSliderValue}
+                                    />
+                                ) : (
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={[MILLION, TEN_MILLION, HUNDRED_MILLION, BILLION]}
+                                        min={MILLION}
+                                        max={BILLION}
+                                        onChange={(value) => setProductAnalyticsSliderValue(value)}
+                                        value={productAnalyticsSliderValue}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="border-b border-border dark:border-dark p-2 text-center">
                             <span className="text-lg font-bold">
-                                {productAnalyticsEventsMaxed
+                                {productAnalyticsEventsMaxed && enterprise_flag_enabled
                                     ? 'Contact us'
                                     : `$${productAnalyticsCost.toLocaleString()}`}{' '}
                             </span>
@@ -127,19 +155,30 @@ export const PricingCalculator = () => {
                                 </span>
                             </div>
                             <div className="pt-4 pb-6">
-                                <LogSlider
-                                    stepsInRange={100}
-                                    marks={[5000, 25000, MAX_SESSION_REPLAY]}
-                                    min={5000}
-                                    max={MAX_SESSION_REPLAY}
-                                    onChange={(value) => setSessionRecordingSliderValue(value)}
-                                    value={sessionRecordingSliderValue}
-                                />
+                                {enterprise_flag_enabled ? (
+                                    <LinearSlider
+                                        stepsInRange={100}
+                                        marks={[5000, 50000, 100000, MAX_SESSION_REPLAY]}
+                                        min={5000}
+                                        max={MAX_SESSION_REPLAY}
+                                        onChange={(value) => setSessionRecordingSliderValue(value)}
+                                        value={sessionRecordingSliderValue}
+                                    />
+                                ) : (
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={[5000, 25000, MAX_SESSION_REPLAY]}
+                                        min={5000}
+                                        max={MAX_SESSION_REPLAY}
+                                        onChange={(value) => setSessionRecordingSliderValue(value)}
+                                        value={sessionRecordingSliderValue}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="border-b border-border dark:border-dark p-2 text-center">
                             <span className="text-lg font-bold">
-                                {sessionReplayRecordingsMaxed
+                                {sessionReplayRecordingsMaxed && enterprise_flag_enabled
                                     ? 'Contact us'
                                     : `$${sessionRecordingCost.toLocaleString()}`}
                             </span>
@@ -154,19 +193,32 @@ export const PricingCalculator = () => {
                                 </span>
                             </div>
                             <div className="pt-4 pb-6">
-                                <LogSlider
-                                    stepsInRange={100}
-                                    marks={[MILLION, FIVE_MILLION, MAX_FEATURE_FLAGS]}
-                                    min={MILLION}
-                                    max={MAX_FEATURE_FLAGS}
-                                    onChange={(value) => setFeatureFlagSliderValue(value)}
-                                    value={featureFlagSliderValue}
-                                />
+                                {enterprise_flag_enabled ? (
+                                    <LinearSlider
+                                        stepsInRange={100}
+                                        marks={[MILLION, FIVE_MILLION, MAX_FEATURE_FLAGS]}
+                                        min={MILLION}
+                                        max={MAX_FEATURE_FLAGS}
+                                        onChange={(value) => setFeatureFlagSliderValue(value)}
+                                        value={featureFlagSliderValue}
+                                    />
+                                ) : (
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={[MILLION, FIVE_MILLION, MAX_FEATURE_FLAGS]}
+                                        min={MILLION}
+                                        max={MAX_FEATURE_FLAGS}
+                                        onChange={(value) => setFeatureFlagSliderValue(value)}
+                                        value={featureFlagSliderValue}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="border-b border-border dark:border-dark p-2 text-center">
                             <span className="text-lg font-bold">
-                                {featureFlagsRequestsMaxed ? 'Contact us ' : `$${featureFlagCost.toLocaleString()}`}
+                                {featureFlagsRequestsMaxed && enterprise_flag_enabled
+                                    ? 'Contact us '
+                                    : `$${featureFlagCost.toLocaleString()}`}
                             </span>
                         </div>
                         <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
@@ -179,19 +231,32 @@ export const PricingCalculator = () => {
                                 </span>
                             </div>
                             <div className="pt-4 pb-6">
-                                <LogSlider
-                                    stepsInRange={100}
-                                    marks={[250, 2000, MAX_SURVEYS]}
-                                    min={250}
-                                    max={MAX_SURVEYS}
-                                    onChange={(value) => setSurveyResponseSliderValue(value)}
-                                    value={surveyResponseSliderValue}
-                                />
+                                {enterprise_flag_enabled ? (
+                                    <LinearSlider
+                                        stepsInRange={100}
+                                        marks={[250, 5000, MAX_SURVEYS]}
+                                        min={250}
+                                        max={MAX_SURVEYS}
+                                        onChange={(value) => setSurveyResponseSliderValue(value)}
+                                        value={surveyResponseSliderValue}
+                                    />
+                                ) : (
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={[250, 2000, MAX_SURVEYS]}
+                                        min={250}
+                                        max={MAX_SURVEYS}
+                                        onChange={(value) => setSurveyResponseSliderValue(value)}
+                                        value={surveyResponseSliderValue}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="border-b border-border dark:border-dark p-2 text-center">
                             <span className="text-lg font-bold">
-                                {surveyResponsesMaxed ? 'Contact us' : `$${surveyResponseCost.toLocaleString()}`}
+                                {surveyResponsesMaxed && enterprise_flag_enabled
+                                    ? 'Contact us'
+                                    : `$${surveyResponseCost.toLocaleString()}`}
                             </span>
                         </div>
                         {anyProductMaxed ? (
@@ -204,7 +269,7 @@ export const PricingCalculator = () => {
                                         </div>
                                     </strong>
                                 </div>
-                                <div className="p-4 text-center self-center">
+                                <div className="p-3 text-center">
                                     {showHighVolCTA ? (
                                         <button
                                             className={`${button('secondary', 'auto', '', 'md')}`}
@@ -221,7 +286,16 @@ export const PricingCalculator = () => {
                                                     : monthlyTotal.toLocaleString()}
                                             </span>
                                             <span className="opacity-60">
-                                                /mo <p className="text-sm mb-0">paid annually</p>
+                                                /mo
+                                                <div className="text-sm mb-0 flex justify-evenly ">
+                                                    paid annually
+                                                    {enterpriseLevelSpend && (
+                                                        <Toggle
+                                                            checked={showAnnualBilling}
+                                                            onChange={() => toggleAnnualBilling()}
+                                                        />
+                                                    )}
+                                                </div>
                                             </span>
                                         </>
                                     )}
@@ -233,28 +307,25 @@ export const PricingCalculator = () => {
                                     <div className="flex gap-2">
                                         <strong>
                                             <button>
-                                                {enterpriseLevelSpend && showAnnualBilling ? 'Annual' : 'Monthly'}
+                                                {enterpriseLevelSpend && showAnnualBilling && enterprise_flag_enabled
+                                                    ? 'Annual'
+                                                    : 'Monthly'}
                                             </button>{' '}
                                             estimate{' '}
                                             {enterpriseLevelSpend &&
                                                 showAnnualBilling &&
+                                                enterprise_flag_enabled &&
                                                 `(20% annual savings of $${(
                                                     monthlyTotal * 2.4
                                                 ).toLocaleString()} included)`}
                                         </strong>
-                                        {enterpriseLevelSpend && (
-                                            <Toggle
-                                                checked={showAnnualBilling}
-                                                onChange={() => toggleAnnualBilling()}
-                                            />
-                                        )}
                                     </div>
                                     <p className="opacity-60 text-sm mb-0">
                                         Cost with billing limits set at your selections
                                     </p>
                                 </div>
-                                <div className="p-4 text-center">
-                                    {enterpriseLevelSpend ? (
+                                <div className="p-3 text-center">
+                                    {enterpriseLevelSpend && enterprise_flag_enabled ? (
                                         <>
                                             <span className="text-lg font-bold">
                                                 $
@@ -263,7 +334,18 @@ export const PricingCalculator = () => {
                                                     : monthlyTotal.toLocaleString()}
                                             </span>
                                             <span className="opacity-60">
-                                                /mo {showAnnualBilling && <p className="text-sm mb-0">paid annually</p>}
+                                                /mo
+                                                {enterprise_flag_enabled && (
+                                                    <div className="text-sm mb-0 flex justify-evenly ">
+                                                        paid annually
+                                                        {enterpriseLevelSpend && (
+                                                            <Toggle
+                                                                checked={showAnnualBilling}
+                                                                onChange={() => toggleAnnualBilling()}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                )}
                                             </span>
                                         </>
                                     ) : (
@@ -301,7 +383,7 @@ export const PricingCalculator = () => {
                         </p>
                     </div>
 
-                    {enterpriseLevelSpend && (
+                    {enterpriseLevelSpend && enterprise_flag_enabled && (
                         <div className="pl-10 relative mb-4">
                             <span className="w-6 h-6 absolute top-0 left-1">
                                 <Discount />

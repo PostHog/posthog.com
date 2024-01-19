@@ -15,6 +15,7 @@ import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA } from './Plans'
+import { RenderInClient } from 'components/RenderInClient'
 
 export const section = cntl`
     max-w-6xl
@@ -130,7 +131,7 @@ const Pricing = (): JSX.Element => {
                 <Plans showTitle groupsToShow={groupsToShow} />
             </section>
 
-            <PricingCalculator />
+            <RenderInClient render={() => <PricingCalculator />} waitForFlags={true} />
 
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-light dark:border-dark pb-4">
