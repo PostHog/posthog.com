@@ -1,6 +1,6 @@
 ---
 date: 2024-01-20
-title: Learnings from Elon
+title: Learnings from Elon Musk
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -10,7 +10,7 @@ hideAnchor: true
 category: Startups
 ---
 
-People hate or love him. Regardless, I read his book over Christmas and here are some lessons that we can take from his work.
+People hate or love him. Regardless, I read the Elon Musk biography by Walter Isaacson over Christmas and here are some lessons that we can take from his work.
 
 ## The power (or not) of artificial deadlines and urgency
 
