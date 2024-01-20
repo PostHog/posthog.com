@@ -36,7 +36,7 @@ We grow primarily through word of mouth. Long term, we think this is a winning s
 
 You can see this from the mind blowing specification of the Teslas, for example - they are incredibly powerful, superb value and very cool. There’s really no major compromise. Hence they rocketed in popularity.
 
-In the details but not the day to day running
+## In the details but not the day to day running
 
 Elon attends very detailed design review sessions for many of the major projects he cares about. The book explains how he is regularly attending sessions to design a robot’s hands, for example. However, it goes on to describe him having 30+ direct reports. That is simply too many to be meaningful for daily progress.
 
