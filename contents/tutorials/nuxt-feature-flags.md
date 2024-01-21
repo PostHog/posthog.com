@@ -154,10 +154,10 @@ When you run your app now, you should see the updated text.
 
 ## Implementing flag code on the server side
 
-You may notice the text flickers when you load your app. This is because PostHog is making a request on the client side to fetch the flag value. To prevent this, there are two alternatives:
+You may notice the text flickers when you load your app. This is because PostHog is making a request on the client side to fetch the flag value. There are two ways to prevent this:
 
 1. Fetch the flag on the server side.
-2. [Bootstrap](/docs/feature-flags/bootstrapping) PostHog on the client side (not covered in this tutorial).
+2. [Bootstrap](/docs/feature-flags/bootstrapping) flags on the client side (not covered in this tutorial).
 
 We'll show you how to fetch the flag on the server side. First, install the [`posthog-node` SDK](/docs/libraries/node):
 
@@ -204,7 +204,7 @@ Now when you reload your app, the flicker is gone.
 
 ### Setting the correct `distinctId`
 
-You may have noticed that we set `distinctId = 'placeholder-user-id'` in our flag call above. In production apps, to ensure you fetch the correct flag value for your user, `distinctId` should be set to their unique ID. 
+You may notice that we set `distinctId = 'placeholder-user-id'` in our flag call above. In production apps, to ensure you fetch the correct flag value for your user, `distinctId` should be set to their unique ID. 
 
 For logged-in users, you typically use their email as their `distinctId`. However, for logged-out users, you can use the `distinct_id` property from their PostHog cookie:
 
