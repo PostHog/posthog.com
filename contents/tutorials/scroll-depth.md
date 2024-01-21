@@ -253,6 +253,6 @@ Once you’ve done this, you have scroll depth tracked and basic insights to ana
 
 ## Further reading
 
-- [How to set up a React app heatmap with PostHog](/tutorials/react-heatmap)
+- [How to set up a React app heatmap](/tutorials/react-heatmap)
 - [How to use session recordings to improve your support experience](/tutorials/session-recordings-for-support)
 - [How to use session recordings to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)

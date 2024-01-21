@@ -1,5 +1,5 @@
 ---
-title: "How to run A/B tests in Android with PostHog"
+title: "How to run A/B tests in Android"
 date: 2023-11-22
 author: ["lior-neu-ner"]
 tags: ['experimentation']
@@ -271,4 +271,4 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
-- [How to run A/B tests in iOS with PostHog](/tutorials/ios-ab-tests)
+- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
