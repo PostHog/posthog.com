@@ -227,4 +227,65 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             },
         }),
     ])
+    createTypes(
+        `
+      type ShopifySelectedOption {
+        name: String!
+        value: String!
+      }
+      type ShopifyProductOption {
+        name: String!
+        shopifyId: String!
+        values: [String!]!
+      }
+      type ShopifyMetafield implements Node {
+        key: String!
+        value: String!
+      }
+      type ShopifyProductVariant implements Node {
+        availableForSale: Boolean!
+        id: ID!
+        media: [ShopifyMedia!]!
+        price: Float!
+        product: ShopifyProduct!
+        sku: String
+        shopifyId: String!
+        title: String!
+        selectedOptions: [ShopifySelectedOption!]!
+      }
+      type ShopifyImage {
+        localFile: File
+      }
+      type ShopifyMediaPreviewImage {
+        image: ShopifyImage
+      }
+      type ShopifyMedia {
+        preview: ShopifyMediaPreviewImage
+        mediaContentType: String!
+      }
+      type ShopifyMoneyV2 {
+        amount: Float!
+      }
+      type ShopifyProductPriceRangeV2 {
+        maxVariantPrice: ShopifyMoneyV2!
+        minVariantPrice: ShopifyMoneyV2!
+      }
+      type ShopifyProduct implements Node {
+        description: String!
+        featuredMedia: ShopifyMedia
+        handle: String!
+        id: ID!
+        priceRangeV2: ShopifyProductPriceRangeV2!
+        shopifyId: String!
+        status: String!
+        title: String!
+        variants: [ShopifyProductVariant!]!
+        media: [ShopifyMedia!]!
+        metafields: [ShopifyMetafield!]!
+        options: [ShopifyProductOption!]!
+        tags: [String!]!
+        totalInventory: Int!
+      }
+      `
+    )
 }
