@@ -1,6 +1,6 @@
 ---
 date: 2024-01-20
-title: Learnings from Elon Musk
+title: Learnings from Elon
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -14,9 +14,11 @@ People hate or love him. Regardless, I read the Elon Musk biography by Walter Is
 
 ## The power (or not) of artificial deadlines and urgency
 
-There are many examples of Elon setting a ridiculous seeming artificial deadline to create urgency. This clearly works for him - look at all the progress he has made.
+There are many examples of Elon setting a ridiculous seeming artificial deadline to create urgency. For example, with the Tesla model 3 - in 2016, Elon announced it would advance its 500,000 unit plan to 2018, two years earlier than previously planned.
 
-There are other companies in our space doing the same - Supabase, for example, are known for their launch weeks.
+This clearly works for him - look at all the progress he has made. Getting to space, totally disrupting the automative industry world wide, and so on!
+
+There are other companies in our space doing the same - Supabase, for example, are known for their [launch weeks](https://supabase.com/blog/supabase-how-we-launch).
 
 At PostHog, artificial deadlines have not worked. We even tried doing a launch week once. We’ve considered why this is the case quite carefully. We think it comes down to a particularly intrinsically motivated team. Let me explain.
 
@@ -30,7 +32,7 @@ To broaden this lesson, to find startup success, I think you need to either be a
 
 ## Product drives marketing and sales
 
-There is a very product-first approach - many of his companies put something so cool on the internet, that it generates an extreme amount of word of mouth growth.
+There is a very product-first approach - many of his companies put something so cool on the internet, that it generates an extreme amount of word of mouth growth. Just [look at the robot doing the laundry](https://twitter.com/elonmusk/status/1746964887949934958)!
 
 We grow primarily through word of mouth. Long term, we think this is a winning strategy as it’s more efficient than a sales led model - you can reinvest everything back into the product, to build a bigger and bigger long term advantage.
 
@@ -56,7 +58,7 @@ The key to making a split like this work is happily spending a lot of time toget
 
 ## Likes the taste of his own blood
 
-Clickbait subtitle. You got me. Elon gives very direct feedback and makes painful decisions rapidly and doesn’t dwell on any of this stuff. For example, he 
+Clickbait subtitle. You got me. Elon gives very direct feedback and makes painful decisions rapidly and doesn’t dwell on any of this stuff. For example, he went through a [very public process to buy Twitter](https://www.nbcnews.com/business/business-news/twitter-elon-musk-timeline-what-happened-so-far-rcna57532), then [laid off 80% of the workforce](https://www.cnn.com/2023/04/12/tech/elon-musk-bbc-interview-twitter-intl-hnk/index.html). 
 
 We describe PostHog as a team for this reason. We have performance managed - letting people go decisively - throughout our time and it has been one of the most important things we’ve ever done.
 
@@ -66,7 +68,7 @@ We try to balance this by being as kind as possible for people who depart under 
 
 ## Fun is a serious business
 
-There’s very little written in startup lore about the importance of having fun. Elon seems to get a clear kick of out what he does.
+There’s very little written in startup lore about the importance of having fun. Elon seems to [get a clear kick](https://www.youtube.com/watch?v=rWdavYiwh0I) of out what he does.
 
 We often make decisions at PostHog based on what will be the most entertaining. This can lead to remarkable things happening with our website, marketing, customer success and product. The reason we do this is that we have a lot of products to build which will take a long time. We need to consider PostHog a marathon, and fun keeps people’s spirits up.
 
