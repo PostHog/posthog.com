@@ -1,6 +1,6 @@
 ---
 title: How to set up feature flags in Nuxt
-date: 2024-01-22
+date: 2024-01-23
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
@@ -221,7 +221,7 @@ const { data: titleData, error } = await useAsyncData('titleData', async () => {
     runtimeConfig.public.posthogPublicKey,
     { host: runtimeConfig.public.posthogHost }
   );
-  let returnedValue = '';
+  let returnedValue = 'No cookie';
 
   const cookies = useCookie(`ph_${runtimeConfig.public.posthogPublicKey}_posthog`);
   if (cookies && cookies.value) {
