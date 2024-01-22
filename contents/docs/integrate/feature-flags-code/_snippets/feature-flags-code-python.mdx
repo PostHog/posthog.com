@@ -58,6 +58,20 @@ posthog.capture(
 )
 ```
 
+
+### Sending `$feature_flag_called` events
+
+By default, we send a `$feature_flag_called` event whenever you call `posthog.get_feature_flag()` or `posthog.is_feature_enabled()` and it's a new user, or the value of the flag has changed. This is useful for analytics, and knowing when a flag was accessed for a user.
+
+> *Note:* Tracking whether it's a new user, or whether the flag value is changed happens in a local cache, which means if you reinitialise the PostHog client, this cache will reset as well, and can end up sending events again for old users as well. This is not a problem. 
+
+You can disable this by setting the `send_feature_flag_events` in your function call, like so:
+
+```python
+is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user', send_feature_flag_events=False)
+# will not send `$feature_flag_called` events
+```
+
 ### Fetching all flags for a user
 
 You can fetch all flag values for a single user by calling `get_all_flags()` or `get_all_flags_and_payloads()`.
