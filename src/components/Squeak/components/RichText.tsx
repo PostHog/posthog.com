@@ -228,7 +228,7 @@ export default function RichText({
                             <p className="m-0 font-semibold">Drop image here</p>
                         </div>
                     )}
-                    <span className="bg-white dark:bg-black absolute right-4 bottom-2 px-1 rounded-sm">
+                    <span className="bg-white dark:bg-accent-dark absolute right-4 bottom-2 px-1 rounded-sm">
                         <span className="text-xs opacity-70">
                             {values.body.length} / {maxLength}
                         </span>
