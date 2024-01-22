@@ -32,7 +32,7 @@ I'm talking about startups with a reasonable degree of brand recognition (ie. no
 
 Let’s get into it. 
 
-## So happens to my application after I hit send?
+## So what happens to my application after I hit send?
 
 If you're applying for a job at a startup, chances are they are using an applicant tracking system (ATS) like Ashby, Greenhouse, Lever, or Workable. We use Ashby, but the process a recruiter follows generally doesn't vary massively between these systems. This is what a typical application looks like:
 
