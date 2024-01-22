@@ -15,8 +15,6 @@ A/B tests help you make your Angular app better by enabling you to compare the i
 
 ## 1. Create an Angular app
 
-For this tutorial, we create a basic `Vue 3` app with a simple button to run our test on.
-
 First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.20.0 or newer). Then, install the Angular CLI and create a new Angular app:
 
 ```bash
@@ -37,7 +35,6 @@ Next, Replace the code in `src/app/app.component.html` with a simple heading and
 
 Then, edit the `app.component.ts` file to include the click handler:
 
-
 ```typescript file=app.component.ts
 import { Component } from '@angular/core';
 
@@ -48,8 +45,6 @@ import { Component } from '@angular/core';
   standalone: true 
 })
 export class AppComponent {
-  title = 'angular-ab-test';
-
   handleClick() {
     // Event handling logic will go here
   }
@@ -91,9 +86,9 @@ Once you’ve done this, reload your app and click the button a few times. You s
 
 ## 3. Capture a custom event
 
-The first part of setting up our A/B test in PostHog is setting up the goal. We'll use the number of clicks on the button as our goal.
+The first part of setting up our A/B test in PostHog is setting up the goal metric. We'll use the number of clicks on the button as our goal.
 
-To measure this, we [capture a custom event](/docs/product-analytics/capture-events) `home_button_clicked` when the button is clicked. To do this, update the `handleClick()` function in `app.component.ts` to the following:
+To measure this, we [capture a custom event](/docs/product-analytics/capture-events) `home_button_clicked` when the button is clicked. To do this, import `posthog-js` into `app.component.ts` and capture an event in `handleClick()`:
 
 ```typescript file=app.component.ts
 import { Component } from '@angular/core';
@@ -103,8 +98,6 @@ import posthog from 'posthog-js'
  // existing component code
 })
 export class AppComponent {
-  title = 'angular-ab-test';
-
   handleClick() {
     posthog.capture(
       'home_button_clicked', 
@@ -114,7 +107,7 @@ export class AppComponent {
 
 ```
 
-With this set up, refresh your app and click the button a few times to capture the event in PostHog.
+With this set up, refresh your app and click the button a few times to see the event captured in PostHog.
 
 <ProductScreenshot
   imageLight={EventsInPostHogLight} 
@@ -147,7 +140,7 @@ Click "Save as draft" and then click "Launch".
 
 To implement the A/B test, we fetch the `my-cool-experiment` feature flag and update the button text based on whether the user is in the `control` or `test` variant of the experiment.
 
-Update your code in `app.component.ts` to use the [`ngOnInit`](https://angular.io/api/core/OnInit) lifecycle hook to implement the [`posthog.onFeatureFlags`](https://posthog.com/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback. Then, we'll update the button text using [`ChangeDetectorRef`](https://angular.io/api/core/ChangeDetectorRef):
+To do this, update your code in `app.component.ts` to use the [`ngOnInit`](https://angular.io/api/core/OnInit) lifecycle hook to implement the [`posthog.onFeatureFlags`](https://posthog.com/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback. Then, we'll update the button text using [`ChangeDetectorRef`](https://angular.io/api/core/ChangeDetectorRef):
 
 ```typescript file=app.component.ts
 import { Component, ChangeDetectorRef } from '@angular/core';
@@ -196,7 +189,7 @@ Now if you refresh your app, you should see the button text updated to either `C
 With this, you’re ready to launch your A/B test! PostHog will randomly split your users into the each variant and track whether it has an impact on the button click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
 
 
-> **💡 PostHog Tip:** You may notice a "flickering" of the button text while the page loads and PostHog fetches the feature flag value. To fix this, you can [bootstrap the flag values](/docs/feature-flags/bootstrapping).
+> **💡 PostHog Tip:** You may notice the button text "flicker" while the page loads and PostHog fetches the feature flag. To fix this, you can [bootstrap the flag value](/docs/feature-flags/bootstrapping).
 
 ## Further reading
 
