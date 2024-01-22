@@ -36,7 +36,7 @@ Let’s get into it.
 
 If you're applying for a job at a startup, chances are they are using an applicant tracking system (ATS) like Ashby, Greenhouse, Lever, or Workable. We use Ashby, but the process a recruiter follows generally doesn't vary massively between these systems. This is what a typical application looks like:
 
-![Ashby screenshot](../images/blog/posthog-as-a-dev-tool/dark-mode.png)
+![Ashby screenshot](../images/ashby-screenshot.png)
 
 ## How do I maximize my chances of getting through?
 
