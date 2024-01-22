@@ -88,7 +88,7 @@ As we got more direct with this strategy - putting it everywhere on the website,
 
 Take the example of SpaceX - despite a very futuristic vision, that extends so far, Elon may not live to really see it, their heads are firmly out of the clouds. They created a mission and then figured out a business model - shipping things into space for money, which could fuel the mission.
 
-At PostHog, are disciplined with each product we ship - we care about performance, margins, and revenue  by product. Many venture capitalists will tell you to hire like crazy when you have product market fit. We have product market fit, but we don’t do this at all. We take pride in our individual products being real businesses - potentially profitable, with revenue and with sane margins.
+At PostHog, are disciplined with each product we ship - for each one, we care about performance, margins, and revenue. Many venture capitalists will tell you to hire like crazy when you have [product market fit](/founders/product-market-fit-game). We have product market fit, but we don’t do this at all. We take pride in our individual products being real businesses - potentially profitable, with revenue and with sane margins.
 
 ## The principles are what matter
 
