@@ -20,7 +20,7 @@ There are other companies in our space doing the same - Supabase, for example, a
 
 At PostHog, artificial deadlines have not worked. We even tried doing a launch week once. We’ve considered why this is the case quite carefully. We think it comes down to a particularly intrinsically motivated team. Let me explain.
 
-Part of our strategy is to ship all the tools developers need. This means we’ve a lot of surface area - too much for one person or team to hold it all in their heads. We need to decentralize control of our products to our small teams. This means we need each team to decide what to build proactively. So we hire proactive, intrinsically motivated people.
+Part of our strategy is to ship all the tools developers need. This means we’ve a lot of surface area - too much for one person or team to hold it all in their heads. We need to decentralize control of our products to our small teams. This means each team decide what to build proactively. So we hire proactive, intrinsically motivated people.
 
 Second, we think more experienced people are usually better at working proactively - since they get stuck less often and need less help. These people generally do not want to work until midnight on a weekend, as they usually, but not always, have families because they’re normally older. We’ve gone so far as to have an all remote environment, which is particularly well suited to people like this (amongst many other benefits, such as long, uninterrupted blocks of time to just build cool stuff).
 
