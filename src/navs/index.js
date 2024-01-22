@@ -915,7 +915,7 @@ export const companyMenu = {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
-            url: '/changelog'/2024,
+            url: '/changelog/2024',
         },
         { name: 'Team', icon: 'IconProfile', color: 'blue', url: '/team' },
         { name: 'Handbook', icon: 'IconBook', color: 'seagreen', url: '/handbook', children: handbookSidebar },
