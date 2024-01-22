@@ -26,7 +26,7 @@ Second, we think more experienced people are usually better at working proactive
 
 Third, we grow by shipping, not by hiring salespeople. This means we need to optimize for long term shipping speed. If we set artificial feature-focused deadlines, we’ll speed up in the short run, but will incur technical debt and hurt our long term growth rate.
 
-To broaden this lesson, I think you need to either be all in on working 28 hours a day, 9 days a week with a bunch of 20 year olds, or you should focus on a smaller, more experienced team. The former suits artificial deadlines, the latter sees them as a bad thing.
+To broaden this lesson, to find startup success, I think you need to either be all in on working 28 hours a day, 9 days a week with a bunch of 20 year olds, or you should focus on a smaller, more experienced team. The former suits artificial deadlines, the latter sees them as a bad thing.
 
 ## Product drives marketing and sales
 
