@@ -38,13 +38,13 @@ We grow primarily through word of mouth. Long term, we think this is a winning s
 
 You can see this from the mind blowing specification of the Teslas, for example - they are incredibly powerful, superb value and very cool. There’s really no major compromise. Hence they rocketed in popularity.
 
-## In the details but not the day to day running
+## At scale, be in the details but not the day to day running
 
 Elon attends very detailed design review sessions for many of the major projects he cares about. The book explains how he is regularly attending sessions to design a robot’s hands, for example. However, it goes on to describe him having 30+ direct reports. That is simply too many to be meaningful for daily progress.
 
 Tim and I are trying to work like this more and more - to go deep on the projects we can help out, and to “build the org” to cover the daily execution. Charles, in our exec team, makes sure our ops, marketing and customer success teams all function smoothly (each has a leader that reports to him), and we’re starting to do the same in engineering. Giving away some responsibility means you can add more value to the specific things you are uniquely good at (or which you love).
 
-## He’s erratic
+## Being erratic is good or bad
 
 Elon has had a string of weird stuff on social media. Whilst this probably brings more awareness and a strange kind of marketing benefit, we think it’s a symptom of a very top down culture where things change based on the leader’s mood.
 
@@ -56,7 +56,7 @@ Whilst Tim and I technically are the CTO and CEO respectively, we more or less s
 
 The key to making a split like this work is happily spending a lot of time together. This (and being ok sometimes missing out on decisions) is the only way to be decisive when two of you are paired like this. We talk a lot (several hours a week, minimum) - which can feel inefficient, but the reality is we need to optimize for organizational effectiveness, not our own schedules.
 
-## Likes the taste of his own blood
+## Learn to enjoy the taste of your own blood
 
 Clickbait subtitle. You got me. Elon gives very direct feedback and makes painful decisions rapidly and doesn’t dwell on any of this stuff. For example, he went through a [very public process to buy Twitter](https://www.nbcnews.com/business/business-news/twitter-elon-musk-timeline-what-happened-so-far-rcna57532), then [laid off 80% of the workforce](https://www.cnn.com/2023/04/12/tech/elon-musk-bbc-interview-twitter-intl-hnk/index.html). 
 
@@ -66,13 +66,13 @@ We do this because we’re optimizing for our strongest performers, who want to 
 
 We try to balance this by being as kind as possible for people who depart under these circumstances - we pay four months’ severance once someone has been here more than a couple of months. Beyond pay, we talk directly and honesty to people - we avoid doing PIP (Performance Improvement Program) type processes as we think they are dehumanizing on both sides and cause more legal cases than they solve.
 
-## Fun is a serious business
+## Take fun seriously
 
 There’s very little written in startup lore about the importance of having fun. Elon seems to [get a clear kick](https://www.youtube.com/watch?v=rWdavYiwh0I) of out what he does.
 
 We often make decisions at PostHog based on what will be the most entertaining. This can lead to remarkable things happening with our website, marketing, customer success and product. The reason we do this is that we have a lot of products to build which will take a long time. We need to consider PostHog a marathon, and fun keeps people’s spirits up.
 
-## It’s easier when it’s harder
+## Harder missions are easier to achieve
 
 Elon’s companies are wildly ambitious - to make humans a multi-planetary species, for example.
 
@@ -86,7 +86,7 @@ Yes, our strategy is to build a ton of potential products. We have built 8 alrea
 
 As we got more direct with this strategy - putting it everywhere on the website, in our job ads, and in our all hands, it became self fulfilling. Engineers spotted how challenging it looks to do this, and this draws the very best people in. We now get hundreds or even thousands of applicants for every job role, and the product itself is so impressive that our main way of growing is word of mouth. 
 
-## His businesses are real companies
+## No matter how wild the mission, you need a real business to get there
 
 Take the example of SpaceX - despite a very futuristic vision, that extends so far, Elon may not live to really see it, their heads are firmly out of the clouds. They created a mission and then figured out a business model - shipping things into space for money, which could fuel the mission.
 
