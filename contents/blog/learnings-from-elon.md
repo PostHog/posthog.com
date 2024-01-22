@@ -24,7 +24,7 @@ Part of our strategy is to ship all the tools developers need. This means we’v
 
 Second, we think more experienced people are usually better at working proactively - since they get stuck less often and need less help. These people generally do not want to work until midnight on a weekend, as they usually, but not always, have families because they’re normally older. We’ve gone so far as to have an all remote environment, which is particularly well suited to people like this (amongst many other benefits, such as long, uninterrupted blocks of time to just build cool stuff).
 
-Third, we grow by shipping, not by hiring salespeople. This means we need to optimize for long term shipping speed. If we set artificial feature-focused deadlines, we’ll incur technical debt, which will speed us up in the short run, but will hurt our long term growth rate.
+Third, we grow by shipping, not by hiring salespeople. This means we need to optimize for long term shipping speed. If we set artificial feature-focused deadlines, we’ll speed up in the short run, but will incur technical debt and hurt our long term growth rate.
 
 To broaden this lesson, I think you need to either be all in on working 28 hours a day, 9 days a week with a bunch of 20 year olds, or you should focus on a smaller, more experienced team. The former suits artificial deadlines, the latter sees them as a bad thing.
 
