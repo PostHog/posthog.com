@@ -57,7 +57,7 @@ One of the best early decisions the team made was to make Langfuse completely op
 
 When it comes to tracking their own data, Langfuse is similar. They use PostHog because it too is open source and gives the team all the information they need to build better products — and they recommend it to other startups regularly.
 
-> **Putting it into practice:** Want to try PostHog for your startup? If you’re less than two years old and have raised under $5M in funding then you’ll qualify for [$50,000 of free credit[(/startups)!
+> **Putting it into practice:** Want to try PostHog for your startup? If you’re less than two years old and have raised under $5M in funding then you’ll qualify for [$50,000 of free credit](/startups)!
 
 **More success stories from PostHog for Startups**
 - [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](/spotlight/startup-before-sunset-ai)
