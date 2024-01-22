@@ -68,7 +68,7 @@ We try to balance this by being as kind as possible for people who depart under 
 
 There’s very little written in startup lore about the importance of having fun. Elon seems to get a clear kick of out what he does.
 
-We often make decisions at PostHog based on what will be the most entertaining. This can lead to remarkable things happening with our website, marketing, customer success and product. The reason we do this is that we want to build all the products in one. That will take a long time as it’s a lot of products, so we need to consider PostHog a marathon, and fun keeps people’s spirits up.
+We often make decisions at PostHog based on what will be the most entertaining. This can lead to remarkable things happening with our website, marketing, customer success and product. The reason we do this is that we have a lot of products to build which will take a long time. We need to consider PostHog a marathon, and fun keeps people’s spirits up.
 
 ## It’s easier when it’s harder
 
