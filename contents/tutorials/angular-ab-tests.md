@@ -11,7 +11,7 @@ import EventsInPostHogDark from '../images/tutorials/angular-ab-tests/events-dar
 import TestSetupLight from '../images/tutorials/angular-ab-tests/experiment-setup-light.png'
 import TestSetupDark from '../images/tutorials/angular-ab-tests/experiment-setup-dark.png'
 
-A/B tests help you make your Angular app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, in this tutorial we create a basic Angular app, add PostHog, create an A/B test, and implement the code for it.
+A/B tests help you make your Angular app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Angular app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create an Angular app
 
@@ -63,7 +63,7 @@ With our app set up, it’s time to install and set up PostHog. To start, instal
 npm i posthog-js
 ```
 
-In `main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).  
+In `src/main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).  
 
 ```ts file=main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -118,7 +118,7 @@ With this set up, refresh your app and click the button a few times to see the e
 
 ## 3. Create an A/B test in PostHog
 
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card details, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
+If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 
@@ -140,7 +140,7 @@ Click "Save as draft" and then click "Launch".
 
 To implement the A/B test, we fetch the `my-cool-experiment` feature flag and update the button text based on whether the user is in the `control` or `test` variant of the experiment.
 
-To do this, update your code in `app.component.ts` to use the [`ngOnInit`](https://angular.io/api/core/OnInit) lifecycle hook to implement the [`posthog.onFeatureFlags`](https://posthog.com/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback. Then, we'll update the button text using [`ChangeDetectorRef`](https://angular.io/api/core/ChangeDetectorRef):
+To do this, update your code in `app.component.ts` to use the [`ngOnInit`](https://angular.io/api/core/OnInit) lifecycle hook to implement the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback. Then, we'll update the button text using [`ChangeDetectorRef`](https://angular.io/api/core/ChangeDetectorRef):
 
 ```typescript file=app.component.ts
 import { Component, ChangeDetectorRef } from '@angular/core';
@@ -187,7 +187,6 @@ Lastly, update `app.component.html` to use the `buttonText` state variable.
 Now if you refresh your app, you should see the button text updated to either `Control variant` or `Test variant`. 
 
 With this, you’re ready to launch your A/B test! PostHog will randomly split your users into the each variant and track whether it has an impact on the button click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
-
 
 > **💡 PostHog Tip:** You may notice the button text "flicker" while the page loads and PostHog fetches the feature flag. To fix this, you can [bootstrap the flag value](/docs/feature-flags/bootstrapping).
 
