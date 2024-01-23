@@ -8,6 +8,8 @@ import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
 import { BillingProductV2Type, BillingV2FeatureType } from 'types'
 import { product_type_to_max_events } from '../pricingLogic'
+import { Discount } from 'components/NotProductIcons'
+import Link from 'components/Link'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -100,22 +102,40 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                         title={plans[0].free_allocation === up_to ? 'Free' : '-'}
                     />
                 )}
-                <Title
-                    className={`font-bold max-w-[25%] w-full min-w-[105px] ${compact ? 'text-sm' : ''}`}
-                    title={
-                        plans[0].free_allocation === up_to
-                            ? 'Free'
-                            : index === tiers.length - 1 && enterprise_flag_enabled
-                            ? 'Contact us'
-                            : `$${parseFloat(unit_amount_usd).toFixed(
-                                  Math.max(
-                                      ...plans[plans.length - 1].tiers.map(
-                                          (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
-                                      )
-                                  )
-                              )}`
-                    }
-                />
+                <div className="flex max-w-[25%] w-full min-w-[105px]">
+                    <Title
+                        className={`font-bold  ${compact ? 'text-sm' : ''}`}
+                        title={
+                            plans[0].free_allocation === up_to ? (
+                                'Free'
+                            ) : enterprise_flag_enabled && index === tiers.length - 1 ? (
+                                <s>
+                                    $
+                                    {parseFloat(unit_amount_usd).toFixed(
+                                        Math.max(
+                                            ...plans[plans.length - 1].tiers.map(
+                                                (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                            )
+                                        )
+                                    )}
+                                </s>
+                            ) : (
+                                `$${parseFloat(unit_amount_usd).toFixed(
+                                    Math.max(
+                                        ...plans[plans.length - 1].tiers.map(
+                                            (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                        )
+                                    )
+                                )}`
+                            )
+                        }
+                    />
+                    {!up_to && enterprise_flag_enabled && (
+                        <Link to="/contact-sales">
+                            <Label className="ml-2 !font-bold" text="Volume discounts available" color="orange" />
+                        </Link>
+                    )}
+                </div>
             </Row>
         )
     })
@@ -149,7 +169,7 @@ const AddonTooltipContent = ({ addon }) => {
                 </span>
             </p>
             {showDiscounts ? (
-                <PricingTiers compact unit={addon.unit} plans={addon.plans} />
+                <PricingTiers compact unit={addon.unit} plans={addon.plans} type={addon.type} />
             ) : (
                 <button onClick={() => setShowDiscounts(true)} className="text-red dark:text-yellow font-bold">
                     Show volume discounts

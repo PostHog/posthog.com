@@ -1,6 +1,6 @@
 import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
-import { LinearSlider, LogSlider, identityCurve, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
+import { LinearSlider, LogSlider, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { Analytics, SessionRecording, FeatureFlags, Surveys } from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
@@ -381,7 +381,7 @@ export const PricingCalculator = () => {
                         </p>
                     </div>
 
-                    {enterpriseLevelSpend && enterprise_flag_enabled && (
+                    {(enterpriseLevelSpend || anyProductMaxed) && enterprise_flag_enabled && (
                         <div className="pl-10 relative mb-4">
                             <span className="w-6 h-6 absolute top-0 left-1">
                                 <Discount />

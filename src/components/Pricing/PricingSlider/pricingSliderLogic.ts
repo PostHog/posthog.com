@@ -57,10 +57,10 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
             value,
             sliderCurve,
         }),
-        setSessionRecordingInputValue: (value: number, sliderCurve?: (x: number) => number) => ({ value, sliderCurve }),
+        setSessionRecordingInputValue: (value: number) => ({ value }),
         setFeatureFlagSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({ value, sliderCurve }),
         setFeatureFlagInputValue: (value: number) => ({ value }),
-        setSurveyResponseSliderValue: (value: number) => ({ value }),
+        setSurveyResponseSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({ value, sliderCurve }),
         setSurveyResponseInputValue: (value: number) => ({ value }),
         toggleAnnualBilling: true,
         toggleHighVolCTA: true,
@@ -72,7 +72,10 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 setSurveyResponseSliderValue: (
                     _: null,
                     { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
-                ) => Math.round(sliderCurve ? sliderCurve(value) : value),
+                ) => {
+                    console.log('yes', value, sliderCurve)
+                    return Math.round(sliderCurve ? sliderCurve(value) : value)
+                },
                 setSurveyResponseInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
