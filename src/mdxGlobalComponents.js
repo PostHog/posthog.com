@@ -46,7 +46,6 @@ import { TextCard } from './components/Products/TextCard'
 import { TutorialCard } from './components/Products/TutorialCard'
 import { QuickLinks } from './components/QuickLinks'
 import { Quote2 } from './components/Quote2'
-import { RoadmapHighlights } from './components/RoadmapHighlights'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
 import { Squeak } from './components/Squeak'
@@ -102,7 +101,6 @@ export const shortcodes = {
     TutorialCard,
     QuickLinks,
     Quote2,
-    RoadmapHighlights,
     Signatures,
     SlackPage,
     Squeak,
