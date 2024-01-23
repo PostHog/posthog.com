@@ -344,7 +344,7 @@ To check flag status for a different group, first switch the active group by cal
 
 ## Surveys
 
-[Surveys](/docs/surveys) presented as popovers are automatically handled depending on your customization and targeting.
+[Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#display-mode) are automatically shown to users matching the targeting you set up.
 
 Surveys in API mode must be implemented manually. This starts by fetching active surveys using the following methods with a callback function:
 
@@ -356,7 +356,33 @@ posthog.getActiveMatchingSurveys(callback, forceReload)
 posthog.getSurveys(callback, forceReload)
 ```
 
-This returns an array of survey objects with keys like `id`, `name`, `description`, `linked_flag_key`, `questions`, and more. Surveys are also cached by default. To force a reload, pass `true` as the second parameter.
+
+The response is cached by default. To force a reload, pass `true` as the `forceReload` argument.
+
+The response an array of survey objects that look like this:
+
+```json
+[{
+  "id": "your_survey_id",
+  "name": "Your survey name",
+  "description": "Metadata describing your survey",
+  "type": "api", // can be either "api" or "popover"
+  "linked_flag_key": null, //Linked feature flag key, if any.
+  "targeting_flag_key": "your_survey_targeting_flag_key",
+  "questions": [
+    {
+      "type": "single_choice",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "question": "Are you enjoying PostHog?"
+    }
+  ],
+  "conditions": null,
+  "start_date": "2023-09-19T13:10:49.505000Z",
+  "end_date": null
+}]
 
 ### Capturing survey events
 
