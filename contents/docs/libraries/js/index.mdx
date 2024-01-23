@@ -342,6 +342,46 @@ if (posthog.isFeatureEnabled('new-groups-feature')) {
 
 To check flag status for a different group, first switch the active group by calling `posthog.group()`.
 
+## Surveys
+
+[Surveys](/docs/surveys) presented as popovers are automatically handled depending on your customization and targeting.
+
+Surveys in API mode must be implemented manually. This starts by fetching active surveys using the following methods with a callback function:
+
+```js-web
+// Fetch enabled surveys for the current user
+posthog.getActiveMatchingSurveys(callback, forceReload) 
+
+// Fetch all surveys
+posthog.getSurveys(callback, forceReload)
+```
+
+This returns an array of survey objects with keys like `id`, `name`, `description`, `linked_flag_key`, `questions`, and more. Surveys are also cached by default. To force a reload, pass `true` as the second parameter.
+
+### Capturing survey events
+
+To display survey results in PostHog, you need to capture 3 types of events:
+
+```js-web
+// 1. When a user is shown a survey
+posthog.capture("survey shown", {
+    $survey_id: survey.id // required
+})
+
+// 2. When a user has dismissed a survey
+posthog.capture("survey dismissed", {
+    $survey_id: survey.id // required
+})
+
+// 3. When a user has responded to a survey
+posthog.capture("survey sent", {
+    $survey_id: survey.id, // required
+    $survey_response: survey_response // required. `survey_response` must be a text or number value (depending on your question type).
+    // For multiple choice select surveys, `survey_response` must be in an array of values with the selected choices.
+    // e.g., $survey_response: ["response_1", 8, "response_2"]
+})
+```
+
 ## Persistence
 
 In order for PostHog to work optimally, we require storing a small amount of information about the user on the user's browser. This ensures that if the user navigates away, and comes back to your site at a later time, we will still identify them properly. We store the following information in the user's browser:
