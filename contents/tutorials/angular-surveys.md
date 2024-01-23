@@ -31,7 +31,7 @@ ng new angular-surveys
 
 Select `CSS` as your stylesheet and `No` for server side rendering and static site generation.
 
-Next, Replace the code in `src/app/app.component.html` with a simple heading and button:
+Next, Replace the code in `src/app/app.component.html` with a simple heading:
 
 ```html file=app.component.html
 <div id="app">
@@ -72,7 +72,7 @@ bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
 ```
 
-Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog events explorer](https://us.posthog.com/events).
+Once you’ve done this, reload your app. You should see events appearing in the [PostHog events explorer](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsLight} 
@@ -111,7 +111,7 @@ Select any template, or you can create your own by clicking "Create blank survey
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
 
-![Popover survey in app](../images/tutorials/vue-surveys/popover-survey.png)
+![Popover survey in app](../images/tutorials/angular-surveys/popover-survey.png)
 
 ### Option 2: Implement your own survey UI
 
@@ -228,6 +228,7 @@ Then, in `app.component.ts`, import `CustomSurveyComponent` and define the metho
 
 ```typescript file=app.component.ts
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CustomSurveyComponent } from './components/custom-survey/custom-survey.component';
 
@@ -349,7 +350,6 @@ export class AppComponent {
 
   private fetchActiveSurveys(): void {
     posthog.getActiveMatchingSurveys((surveys) => {
-      console.log(surveys)
       if (surveys.length > 0) {
         const survey = surveys[0];
         this.surveyID = survey.id;
