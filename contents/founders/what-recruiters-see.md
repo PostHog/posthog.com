@@ -42,7 +42,7 @@ If you're applying for a job at a startup, chances are they are using an applica
 
 This stuff is subjective, but generally these are the things that can increase the chances of a good application making it through:
 
-- Write a short and actually personalized proper cover note
+- Write a short and _obviously_ personalized proper cover note
   - A few sentences about why you are interested in this role specifically is fine
   - You don't need 5 paragraphs that are just your resumé slightly reworded - it's just more text we will skim over
   - Our ATS will wreck your formatting beyond line breaks
