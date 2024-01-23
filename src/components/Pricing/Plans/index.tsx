@@ -71,7 +71,7 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
 
     useEffect(() => {
         posthog?.onFeatureFlags(() => {
-            if (posthog.isFeatureEnabled(ENTERPRISE_PRICING_TABLE)) {
+            if (posthog.getFeatureFlag(ENTERPRISE_PRICING_TABLE) === 'test') {
                 set_enterprise_flag_enabled(true)
                 // Filter out tiers above the max number of units we want to display
                 set_tiers(

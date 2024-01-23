@@ -73,7 +73,6 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                     _: null,
                     { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
                 ) => {
-                    console.log('yes', value, sliderCurve)
                     return Math.round(sliderCurve ? sliderCurve(value) : value)
                 },
                 setSurveyResponseInputValue: (_: null, { value }: { value: number }) => value * 1000000,
