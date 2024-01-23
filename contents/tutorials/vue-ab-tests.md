@@ -116,6 +116,7 @@ To measure this, we [capture a custom event](/docs/product-analytics/capture-eve
 ```
 
 With this set up, refresh your app and click the button a few times to capture the event in PostHog.
+
 ## Creating an A/B test in PostHog
 
 The next step is to set up an A/B test (we call them experiments in PostHog).
