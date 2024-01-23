@@ -1,13 +1,15 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Check2, Close } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
 import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
 import { BillingProductV2Type, BillingV2FeatureType } from 'types'
-import { number, string } from 'yup'
+import { product_type_to_max_events } from '../pricingLogic'
+import { Discount } from 'components/NotProductIcons'
+import Link from 'components/Link'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -59,8 +61,27 @@ const InclusionOnlyRow = ({ plans }) => (
     </Row>
 )
 
-const PricingTiers = ({ plans, unit, compact = false }) =>
-    plans[plans.length - 1]?.tiers?.map(({ up_to, unit_amount_usd }, index) => {
+const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
+
+const PricingTiers = ({ plans, unit, compact = false, type }) => {
+    const posthog = usePostHog()
+    const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
+
+    const [tiers, set_tiers] = useState(plans[plans.length - 1]?.tiers)
+
+    useEffect(() => {
+        posthog?.onFeatureFlags(() => {
+            if (posthog.isFeatureEnabled(ENTERPRISE_PRICING_TABLE)) {
+                set_enterprise_flag_enabled(true)
+                // Filter out tiers above the max number of units we want to display
+                set_tiers(
+                    plans[plans.length - 1]?.tiers?.filter(({ up_to }) => up_to <= product_type_to_max_events[type])
+                )
+            }
+        })
+    }, [posthog])
+
+    return tiers.map(({ up_to, unit_amount_usd }, index) => {
         return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
             <Row className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''}`} key={`type-${index}`}>
                 <Title
@@ -69,7 +90,7 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                         index === 0
                             ? `First ${formatCompactNumber(up_to)} ${unit}s`
                             : !up_to
-                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)} +`
+                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)}+`
                             : `${
                                   formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |k/)[0]
                               }-${formatCompactNumber(up_to)}`
@@ -81,23 +102,44 @@ const PricingTiers = ({ plans, unit, compact = false }) =>
                         title={plans[0].free_allocation === up_to ? 'Free' : '-'}
                     />
                 )}
-                <Title
-                    className={`font-bold max-w-[25%] w-full min-w-[105px] ${compact ? 'text-sm' : ''}`}
-                    title={
-                        plans[0].free_allocation === up_to
-                            ? 'Free'
-                            : `$${parseFloat(unit_amount_usd).toFixed(
-                                  Math.max(
-                                      ...plans[plans.length - 1].tiers.map(
-                                          (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
-                                      )
-                                  )
-                              )}`
-                    }
-                />
+                <div className="flex max-w-[25%] w-full min-w-[105px]">
+                    <Title
+                        className={`font-bold  ${compact ? 'text-sm' : ''}`}
+                        title={
+                            plans[0].free_allocation === up_to ? (
+                                'Free'
+                            ) : enterprise_flag_enabled && index === tiers.length - 1 ? (
+                                <s>
+                                    $
+                                    {parseFloat(unit_amount_usd).toFixed(
+                                        Math.max(
+                                            ...plans[plans.length - 1].tiers.map(
+                                                (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                            )
+                                        )
+                                    )}
+                                </s>
+                            ) : (
+                                `$${parseFloat(unit_amount_usd).toFixed(
+                                    Math.max(
+                                        ...plans[plans.length - 1].tiers.map(
+                                            (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                        )
+                                    )
+                                )}`
+                            )
+                        }
+                    />
+                    {!up_to && enterprise_flag_enabled && (
+                        <Link to="/contact-sales">
+                            <Label className="ml-2 !font-bold" text="Volume discounts available" style="orangeNoBg" />
+                        </Link>
+                    )}
+                </div>
             </Row>
         )
     })
+}
 
 const formatCompactNumber = (number) => {
     const formatter = Intl.NumberFormat('en', {
@@ -127,7 +169,7 @@ const AddonTooltipContent = ({ addon }) => {
                 </span>
             </p>
             {showDiscounts ? (
-                <PricingTiers compact unit={addon.unit} plans={addon.plans} />
+                <PricingTiers compact unit={addon.unit} plans={addon.plans} type={addon.type} />
             ) : (
                 <button onClick={() => setShowDiscounts(true)} className="text-red dark:text-yellow font-bold">
                     Show volume discounts
@@ -399,7 +441,7 @@ export default function Plans({
                                 {inclusion_only ? (
                                     <InclusionOnlyRow plans={plans} />
                                 ) : (
-                                    <PricingTiers plans={plans} unit={unit} />
+                                    <PricingTiers plans={plans} unit={unit} type={type} />
                                 )}
                             </div>
                         </div>

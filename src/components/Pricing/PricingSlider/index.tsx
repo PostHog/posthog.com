@@ -1,7 +1,7 @@
 import React from 'react'
 import { useActions, useValues } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
-import { LogSlider } from './LogSlider'
+import { LogSlider } from './Slider'
 
 interface PricingSliderProps {
     marks?: number[]
