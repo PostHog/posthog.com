@@ -268,7 +268,7 @@ export default {
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/nextjs-surveys/sample-survey-ui.png)
+![Custom survey UI](../images/tutorials/vue-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 

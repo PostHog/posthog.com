@@ -193,4 +193,5 @@ With this, you’re ready to launch your A/B test! PostHog will randomly split y
 ## Further reading
 
 - [How to set up Angular analytics, feature flags, and more](/tutorials/angular-analytics)
+- [How to set up surveys in Angular](/tutorials/angular-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
