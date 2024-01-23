@@ -10,7 +10,7 @@ const OpenSourceDescription = () => {
     return (
         <ul className={descriptionClassName}>
             <li className={descriptionItemClassName}>Deploy with Docker on your own server.</li>
-            <li className={descriptionItemClassName}>Great for hobby projects, but no upgrade to paid features.</li>
+            <li className={descriptionItemClassName}>Great for internal tools or evaluating without vendor approvals.</li>
             <li className={descriptionItemClassName}>
                 <strong>MIT license, no support, BYOEngineers!</strong>
             </li>
