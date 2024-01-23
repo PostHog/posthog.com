@@ -92,7 +92,7 @@ This tutorial will cover how to implement both options:
 
 ### Option 1: Use PostHog's prebuilt survey UI
 
-This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, and handles all the display logic and response capture for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
+This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
  
 To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
 
@@ -135,9 +135,9 @@ We've created a sample survey UI for this tutorial. To use it, first generate a 
 ng generate component components/custom-survey
 ```
 
-This creates a new component in the `src/app/components/custom-survey` directory. You'll have four files: `custom-survey.component.ts`, `custom-survey.component.html`, `custom-survey.component.css`, and `custom-survey.component.spec.ts`. Replace the code in each file with the following:
+This creates a new component in the `src/app/components/custom-survey` directory. You'll have four files: `custom-survey.component.ts`, `custom-survey.component.html`, `custom-survey.component.css`, and `custom-survey.component.spec.ts`. You need to replace the code in three of them.
 
-In `custom-survey.component.html`:
+First, in `custom-survey.component.html`:
 
 ```html file=custom-survey.component.html
 <div class="survey">
@@ -154,7 +154,7 @@ In `custom-survey.component.html`:
 </div>
 ```
 
-In `custom-survey.component.ts`:
+Second, in `custom-survey.component.ts`:
 
 ```typescript file=custom-survey.component.ts
 import { Component, EventEmitter, Input, Output } from '@angular/core';
@@ -189,7 +189,7 @@ export class CustomSurveyComponent {
 }
 ```
 
-In `custom-survey.component.css`:
+Third, in `custom-survey.component.css`:
 
 ```css file=custom-survey.component.css
 .survey {
@@ -215,7 +215,7 @@ Now we integrate our new `CustomSurveyComponent` into our `AppComponent`. First,
 ```html file=app.component.html
 <div id="app">
   <h1>Angular Surveys</h1>
-      <app-custom-survey
+    <app-custom-survey
       *ngIf="showSurvey"
       [title]="surveyTitle"
       (onDismiss)="handleDismiss()"
@@ -228,14 +228,14 @@ Then, in `app.component.ts`, import `CustomSurveyComponent` and define the metho
 
 ```typescript file=app.component.ts
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { CustomSurveyComponent } from './components/custom-survey/custom-survey.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CustomSurveyComponent], 
+  imports: [RouterOutlet, CustomSurveyComponent, CommonModule], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -263,7 +263,7 @@ This shows a survey popup every time you visit your app's homepage.
 
 PostHog keeps track of all active surveys for a user (this is especially helpful if you set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
 
-To fetch the active surveys, we use `posthog.getActiveMatchingSurveys()`. This returns a surveys object that looks like this:
+To fetch the active surveys, we use `posthog.getActiveMatchingSurveys()`. This returns an array of survey objects that looks like this:
 
 ```JSON
 [
@@ -292,20 +292,20 @@ To fetch the active surveys, we use `posthog.getActiveMatchingSurveys()`. This r
 ]
 ```
 
-To fetch this object and integrate it with your survey UI, update your code in `app.component.ts`:
+To fetch this array and integrate it with your survey UI, update your code in `app.component.ts`:
 
 ```typescript file=app.component.ts
+// your existing imports...
 import { Component, ChangeDetectorRef } from '@angular/core';
 import posthog from 'posthog-js'
-// rest of your imports
 
 @Component({
   // your existing config
 })
 export class AppComponent implements OnInit {
   title = 'angular-surveys';
-  showSurvey = true;
   surveyTitle = 'Survey title';
+  showSurvey = true;
   surveyID = '';
 
   constructor(private changeDetector: ChangeDetectorRef) {}
@@ -500,7 +500,7 @@ export class AppComponent {
 }
 ```
 
-Our survey is now ready to go! The next step is ship the changes, get responses, and view your results.
+Our survey is now ready to go! The next step is to ship the changes, get responses, and view your results.
 
 ## 4. View results
 
