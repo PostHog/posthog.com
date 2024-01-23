@@ -132,7 +132,7 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                     />
                     {!up_to && enterprise_flag_enabled && (
                         <Link to="/contact-sales">
-                            <Label className="ml-2 !font-bold" text="Volume discounts available" color="orange" />
+                            <Label className="ml-2 !font-bold" text="Volume discounts available" style="orangeNoBg" />
                         </Link>
                     )}
                 </div>
