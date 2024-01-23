@@ -30,6 +30,8 @@ I'm talking about startups with a reasonable degree of brand recognition (ie. no
 - Team is 70% engineers
 - 1 in-house recruiter, no agencies
 
+In the last 12 months, we received over 9000 applications, or an average of **460 applicants per role**. So that's a lot of applications to sift through! Many of which are automated/no-effort one click applications - hence the need to be able to say no quickly. 
+
 Let’s get into it. 
 
 ## So what happens to my application after I hit send?
@@ -46,7 +48,7 @@ This stuff is subjective, but generally these are the things that can increase t
   - A few sentences about why you are interested in this role specifically is fine
   - You don't need 5 paragraphs that are just your resumé slightly reworded - it's just more text we will skim over
   - Our ATS will wreck your formatting beyond line breaks
-  - Don't introduce yourself (we know who you are)
+  - Writing 'hi I'm X' is a waste of words (we know who you are!)
   - Match the tone of the company - for example, we are informal so please no 'Dear Sir/Madam'
   - If you can figure out what the company cares about, or who is in it - talk about how you think you could help them achieve their goals and why
   - Write _something_ - if it's too much hassle, that's ok, you're probably not that interested!
@@ -60,7 +62,7 @@ This stuff is subjective, but generally these are the things that can increase t
 
 ## I did all this and it didn't work - where's my feedback, you assholes?
 
-When you apply for a job at a startup and don't get past the first stage, you'll either get nothing back (booo) or an automated email saying you have been unsuccessful. Applicants who felt they were a great fit might, quite reasonably, ask for feedback as to why they weren't successful. 
+When you apply for a job at a startup and don't get past the first stage, you'll either get nothing back (booo) or an automated email saying you have been unsuccessful. Applicants who felt they were a great fit might, quite reasonably, ask for feedback as to why they weren't successful. And we say no to a lot of candidates who actually meet the spec on paper - this doesn't mean you are a bad candidate, it just means that _relatively speaking_ you were not as strong as other candidates who applied this time. 
 
 We find ~5% of candidates ask for feedback - if we replied to each one and spent ~5min writing each email, we'd be spending 30-60min on a typical day sending people feedback. This is why we tell people to only expect feedback after any interview stage. I expect this picture is similar for most startups.
 
@@ -68,7 +70,7 @@ We find ~5% of candidates ask for feedback - if we replied to each one and spent
 
 Get a proper, warm referral. Annoying, right? But it works. Of the 12 people who got an interview for our recent marketing role, 4 were enthusiastic referrals from an existing member of the PostHog team. We trust our existing team's judgement incredibly highly - they already met the bar to join our team _and_ they help us pre-filter applicants. 
 
-_Please_ don't be a bogus referral though - if you say you've been "chatting" to someone on the team when in reality you just sent them a LinkedIn message, we will find out. Because we'll ask. 
+This doesn't mean "randomly hassle X who works at PostHog for an intro to Y" - work hard wherever you are to leave a good impression on everyone you talk to at the company. We do talk to each other!
 
 ## Moar reading
 
