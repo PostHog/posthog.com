@@ -72,6 +72,8 @@ export const PricingCalculator = () => {
         posthog?.onFeatureFlags(() => {
             if (posthog.getFeatureFlag(ENTERPRISE_PRICING_TABLE) === 'test') {
                 set_enterprise_flag_enabled(true)
+            } else {
+                set_enterprise_flag_enabled(false)
             }
         })
     }, [posthog])

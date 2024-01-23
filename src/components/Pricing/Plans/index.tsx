@@ -77,6 +77,8 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                 set_tiers(
                     plans[plans.length - 1]?.tiers?.filter(({ up_to }) => up_to <= product_type_to_max_events[type])
                 )
+            } else {
+                set_enterprise_flag_enabled(false)
             }
         })
     }, [posthog])
