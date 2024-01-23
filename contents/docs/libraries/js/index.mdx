@@ -346,7 +346,9 @@ To check flag status for a different group, first switch the active group by cal
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#display-mode) are automatically shown to users matching the targeting you set up.
 
-Surveys in API mode must be implemented manually. This starts by fetching active surveys using the following methods with a callback function:
+Surveys using the **API** presentation enable you to implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
+
+This starts by fetching active surveys using the following methods with a callback function:
 
 ```js-web
 // Fetch enabled surveys for the current user
