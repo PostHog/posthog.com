@@ -84,6 +84,8 @@ Implementing this philosophy (and trunk-based development) means:
 
 - Merging whenever. Our testing, reviewing, and build processes should be good enough that we are confident doing this.
 
+As proof of this, our median pull request age when merged is **just under 8 hours**. On an average day, we merge around 20 pull requests in our main repo.
+
 All of this helps us get the benefits trunk-based development provides. It might seem like a lot. Pushing code early and merging whenever may seem especially scary, but we have two tools that help us:
 
 ### 1. Test-driven development
