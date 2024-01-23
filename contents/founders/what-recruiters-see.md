@@ -48,6 +48,7 @@ This stuff is subjective, but generally these are the things that can increase t
   - Our ATS will wreck your formatting beyond line breaks
   - Don't introduce yourself (we know who you are)
   - Match the tone of the company - for example, we are informal so please no 'Dear Sir/Madam'
+  - If you can figure out what the company cares about, or who is in it - talk about how you think you could help them achieve their goals and why
   - Write _something_ - if it's too much hassle, that's ok, you're probably not that interested!
   - No ChatGPT - they're really obvious
 - No profile pictures - this isn't social media, and you're wasting the space
