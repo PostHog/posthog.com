@@ -1175,6 +1175,7 @@
         { "source": "/docs/cdp/bigquery-export", "destination": "/docs/cdp/batch-exports/bigquery" },
         { "source": "/docs/cdp/postgres-export", "destination": "/docs/cdp/batch-exports/postgres" },
         { "source": "/docs/cdp/s3-export", "destination": "/docs/cdp/batch-exports/s3" },
-        { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" }
+        { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" },
+        { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" }
     ]
 }
