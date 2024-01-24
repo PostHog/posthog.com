@@ -13,7 +13,7 @@ Love or loathe him, Elon is one of most opinionated business leaders out there. 
 
 ## The power (or not) of artificial deadlines and urgency
 
-There are many examples of Elon setting a ridiculous seeming artificial deadline to create urgency. In 2016 with the Tesla Model 3, for example, Elon announced it would advance its 500,000 unit plan to 2018, two years earlier than previously planned.
+There are many examples of Elon setting a ridiculous seeming artificial deadline to create urgency. In 2016 with the Tesla Model 3, for example, Elon announced he was advancing Tesla's 500,000 unit plan to 2018, two years earlier than previously planned.
 
 This clearly works for him – look at all the progress he has made. Getting to space, totally disrupting the automative industry worldwide, and so on!
 
@@ -23,7 +23,7 @@ At PostHog, artificial deadlines have not worked. We even tried doing a launch w
 
 Part of our strategy is to ship all the tools developers need. This means we’ve a lot of surface area - too much for one person or team to hold it all in their heads. We need to decentralize control of our products to our small teams. This means each team decide what to build proactively. So we hire proactive, intrinsically motivated people.
 
-Second, we think more experienced people are usually better at working proactively, since they get stuck less often and need less help. These people generally do not want to work until midnight on a weekend, as they usually, but not always, have families because they’re normally older. We’ve gone so far as to have an all remote environment, which is particularly well suited to people like this (amongst many other benefits, such as long, uninterrupted blocks of time to just build cool stuff).
+Second, we think more experienced people are usually better at working proactively, since they get stuck less often and need less help. These people generally do not want to work until midnight on a weekend as they usually, but not always, have families. We’ve gone so far as to have an all remote environment, which is particularly well suited to people like this (amongst many other benefits, such as long, uninterrupted blocks of time to just build cool stuff).
 
 Third, we grow by shipping, not by hiring salespeople. This means we need to optimize for long term shipping speed. If we set artificial feature-focused deadlines, we’ll speed up in the short run, but will incur technical debt and hurt our long term growth.
 
