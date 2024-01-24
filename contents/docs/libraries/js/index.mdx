@@ -348,7 +348,7 @@ To check flag status for a different group, first switch the active group by cal
 
 Surveys using the **API** presentation enable you to implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
 
-This starts by fetching active surveys using the following methods with a callback function:
+To implement **API** surveys, start by fetching active surveys for a user using either of the methods below:
 
 ```js-web
 // Fetch enabled surveys for the current user
@@ -358,9 +358,9 @@ posthog.getActiveMatchingSurveys(callback, forceReload)
 posthog.getSurveys(callback, forceReload)
 ```
 
-The response is cached by default. To force a reload, pass `true` as the `forceReload` argument.
+The response returns an array of survey objects and is cached by default. To force a reload, pass `true` as the `forceReload` argument.
 
-The response an array of survey objects that look like this:
+The survey objects look like this:
 
 ```json
 [{
