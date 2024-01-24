@@ -6,8 +6,11 @@ showTitle: true
 
 To use Cloudflare for reverse proxying, make sure that you're logged into your Cloudflare account, and that you've added your domain (called "website" in Cloudflare) to the account.
 
+There are two ways to do this:
+1. Using [Cloudflare Workers](https://developers.cloudflare.com/workers/). This is a bit more setup, but can be used on all Cloudflare plans. 
+2. Using DNS and [Page Rules](https://developers.cloudflare.com/support/page-rules/understanding-and-configuring-cloudflare-page-rules-page-rules-tutorial/). This is simplest method, but requires the Cloudflare Enterprise plan.
 
-## Proxy using Cloudflare Workers
+## Method one: Proxy using Cloudflare Workers
 
 Workers are really powerful and allow up to 100,000 requests per day on the free plan ([see Cloudflare pricing](https://developers.cloudflare.com/workers/platform/pricing/)). Follow these steps to set up a reverse proxy worker:
 
@@ -66,10 +69,6 @@ To use your own domain instead of the basic `*.workers.dev` one, go to the worke
 
 You can now use your worker's domain (shown under "Preview" on the worker page) as `api_host` in PostHog SDKs! If you've added a custom domain in step 3, use that instead.
 
-<!--
-! Temporarily remove this method while we transition to using Cloudflare. See https://posthog.slack.com/archives/C0113360FFV/p1704971900975469 for details
-
-
 ## Method two: Proxy using DNS and Page Rules with Cloudflare Enterprise
 
 Proxying traffic using DNS is relatively straight-forward. However, it requires correcting the Host headers for proxied requests, which is only available on the Cloudflare Enterprise plan. If your domain is on this plan, follow these steps:
@@ -85,4 +84,3 @@ The proxy won't work if the Host headers of requests aren't rewritten from your 
 ### 3. Use the new host in SDKs
 
 You can now use your CNAME record's domain as `api_host` in PostHog SDKs!
--->
