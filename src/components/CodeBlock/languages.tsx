@@ -30,6 +30,7 @@ type LanguageMap = {
             | 'kotlin'
             | 'groovy'
             | 'vue'
+            | 'svelte'
         label: React.ReactNode
     }
 }
@@ -212,6 +213,10 @@ const languageMap: LanguageMap = {
     vue: {
         language: 'html',
         label: 'Vue',
+    },
+    svelte: {
+        language: 'html',
+        label: 'Svelte',
     },
 }
 
