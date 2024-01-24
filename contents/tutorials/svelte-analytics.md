@@ -411,6 +411,6 @@ With this done, you built a Svelte app with all the basics of PostHog set up. To
 
 ## Further reading
 
-- [Get feedback and book user interviews with site apps](/tutorials/feedback-interviews-site-apps)
+- [How to set up A/B tests in Svelte](/tutorials/svelte-ab-tests)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)
