@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Svelte
-date: 2023-01-25
+date: 2023-01-24
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
@@ -11,7 +11,7 @@ import EventsInPostHogDark from '../images/tutorials/svelte-ab-tests/events-dark
 import TestSetupLight from '../images/tutorials/svelte-ab-tests/experiment-setup-light.png'
 import TestSetupDark from '../images/tutorials/svelte-ab-tests/experiment-setup-dark.png'
 
-A/B tests help you make your Svelte app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic SvelteKit app , add PostHog, create an A/B test, and implement the code for it.
+A/B tests help you make your Svelte app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic SvelteKit app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create a Svelte app
 
@@ -30,7 +30,7 @@ cd my-svelte-ab-testing-app
 npm install
 ```
 
-Next, replace the code in `routes/+page.svelte` with a simple heading and button:
+Next, replace the code in `src/routes/+page.svelte` with a simple heading and button:
 
 ```svelte file=+page.svelte
 <script>
@@ -51,7 +51,7 @@ Run `npm run dev` and navigate to http://localhost:5173 to see your app in actio
 
 ## 2. Add PostHog to your app
 
-With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup).
+With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
@@ -84,7 +84,7 @@ Once you’ve done this, reload your app and click the button a few times. You s
 
 The first part of setting up our A/B test in PostHog is setting up the goal metric. We'll use the number of clicks on the button as our goal.
 
-To measure this, we [capture a custom event](/docs/product-analytics/capture-events) called `home_button_clicked` when the button is clicked. To do this, update the script in your `+page.svelte` file::
+To measure this, we [capture a custom event](/docs/product-analytics/capture-events) called `home_button_clicked` when the button is clicked. To do this, update the script in your `+page.svelte` file:
 
 ```svelte file=+page.svelte
 <script>
