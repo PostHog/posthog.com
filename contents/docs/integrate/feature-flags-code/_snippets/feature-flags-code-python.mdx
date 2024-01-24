@@ -61,11 +61,16 @@ posthog.capture(
 
 ### Sending `$feature_flag_called` events
 
-By default, we send a `$feature_flag_called` event whenever you call `posthog.get_feature_flag()` or `posthog.is_feature_enabled()` and it's a new user, or the value of the flag has changed. This is useful for analytics, and knowing when a flag was accessed for a user.
+Capturing`$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
 
-> *Note:* Tracking whether it's a new user, or whether the flag value is changed happens in a local cache, which means if you reinitialise the PostHog client, this cache will reset as well, and can end up sending events again for old users as well. This is not a problem. 
+1. You call `posthog.get_feature_flag()` or `posthog.is_feature_enabled()`, AND 
+2. It's a new user, or the value of the flag has changed. 
 
-You can disable this by setting the `send_feature_flag_events` in your function call, like so:
+> *Note:* Tracking whether it's a new user, or whether the flag value is changed happens in a local cache, which means if you reinitialize the PostHog client, this cache will reset as well, and can end up sending events again for old users as well. This is not a problem though and it won't affect your analytics.
+
+You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
+
+To disable it, set the `send_feature_flag_events` argument in your function call, like so:
 
 ```python
 is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user', send_feature_flag_events=False)
