@@ -593,19 +593,19 @@ ul {
     -moz-appearance: none;
 }
 
-.rc-slider.log-slider .rc-slider-track {
+.rc-slider.slider .rc-slider-track {
     @apply bg-black;
 }
 
-.rc-slider.log-slider .rc-slider-handle {
+.rc-slider.slider .rc-slider-handle {
     @apply bg-red border-3 border-white h-[21px] w-[21px] shadow-md -mt-[7px];
 }
 
-.rc-slider.log-slider .rc-slider-handle:active {
+.rc-slider.slider .rc-slider-handle:active {
     @apply shadow-none;
 }
 
-.rc-slider.log-slider .rc-slider-tooltip {
+.rc-slider.slider .rc-slider-tooltip {
     display: none;
 }
 
