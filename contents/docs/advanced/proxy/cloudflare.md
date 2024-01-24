@@ -75,7 +75,7 @@ Proxying traffic using DNS is relatively straight-forward. However, it requires 
 
 ### 1. Add a DNS record
 
-Select your website in the Cloudflare dashboard, go to the "DNS" page, and there click "Add record". Make sure this is a CNAME record, and choose a name for it, which will be the PostHog proxy subdomain. The subdomain can be anything, even `watermelon.yourdomain.com` – just remember to avoid terms like "tracking" or "analytics", as they may be blanket-blocked. The record should point to `app.posthog.com` or `eu.posthog.com` (depending on your PostHog region), and have proxy enabled (e.g. `CNAME, e, app.posthog.com, proxied`).
+Select your website in the Cloudflare dashboard, go to the "DNS" page, and there click "Add record". Make sure this is a CNAME record, and choose a name for it, which will be the PostHog proxy subdomain. The subdomain can be anything, even `watermelon.yourdomain.com` – just remember to avoid terms like "tracking" or "analytics", as they may be blanket-blocked. The record should point to `us-proxy-direct.i.posthog.com` or `eu-proxy-direct.i.posthog.com` (depending on your PostHog region), and have proxy enabled (e.g. `CNAME, e, us-proxy-direct.i.posthog.com, proxied`).
 
 ### 2. Correct Host headers
 
