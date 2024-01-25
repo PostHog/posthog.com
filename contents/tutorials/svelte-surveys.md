@@ -229,7 +229,6 @@ Then, integrate the component into `src/routes/+page.svelte`:
     />
   {/if}
 </div>
-</script>
 ```
 
 This shows a survey popup every time you visit your app's homepage.
@@ -310,7 +309,7 @@ We want to make sure we don't show the survey again to users who have either sub
 
   // rest of your code
 
-    const fetchActiveSurveys = async () => {
+  const fetchActiveSurveys = async () => {
     posthog.getActiveMatchingSurveys((surveys) => {
       if (surveys.length > 0) {
         const survey = surveys[0];
