@@ -157,11 +157,11 @@ Add the following code to `CustomSurvey.svelte`:
   };
 
   const emitDismiss = () => {
-    dispatch('dismiss'); // Dispatching 'dismiss' event
+    dispatch('dismiss');
   };
 
   const emitSubmit = () => {
-    dispatch('submit', { selectedValue }); // Dispatching 'submit' event with data
+    dispatch('submit', { selectedValue });
   };
 </script>
 
@@ -205,6 +205,7 @@ Then, integrate the component into `src/routes/+page.svelte`:
 ```svelte file=+page.svelte
 <script>
   import CustomSurvey from '../components/CustomSurvey.svelte';
+
   let showSurvey = true;
   let surveyTitle = 'Survey title';
 
@@ -268,8 +269,6 @@ To fetch the active surveys, we use [`posthog.getActiveMatchingSurveys()`](/docs
 
 To fetch this array and integrate it with your survey UI, we call `posthog.getActiveMatchingSurveys()` when our page is mounted:
 
-`posthog.getActiveMatchingSurveys()` returns a surveys object that looks like this:
-
 ```svelte file=+page.svelte
 <script>
   import CustomSurvey from '../components/CustomSurvey.svelte';
@@ -296,6 +295,7 @@ To fetch this array and integrate it with your survey UI, we call `posthog.getAc
   };
 
   // rest of your code
+</script>
 ```
 
 #### 3. Add the logic for displaying and hiding it.
@@ -352,7 +352,7 @@ There are 3 events to capture:
 2. `"survey dismissed"`
 3. `"survey sent"` (for responses)
 
-You can capture these events using `this.$posthog.capture()`:
+You can capture these events using `posthog.capture()`:
 
 ```svelte file=+page.svelte
 <script>
