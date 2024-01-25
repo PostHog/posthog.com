@@ -267,4 +267,5 @@ export async function load({ request }) {
 ## Further reading
 
 - [How to set up Svelte analytics, feature flags, and more](/tutorials/svelte-analytics)
+- [How to set up surveys in Svelte](/tutorials/svelte-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
