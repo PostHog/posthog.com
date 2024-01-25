@@ -1,0 +1,465 @@
+---
+title: The best Pendo alternatives & competitors, compared*
+date: 2024-01-25
+author: ["ian-vanagas"]
+rootpage: /blog
+featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImageType: full
+tags:
+ - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+The most popular Pendo alternatives in 2023 are:
+
+1. **PostHog:** An all-in-one platform combining comprehensive analytics with session replay, user surveys, A/B testing, and feature flags. Ideal for B2B SaaS apps.
+
+2. **Whatfix:** A digital adoption and product analytics platform for enterprises providing onboarding, guidance, and training. 
+
+3. **Hotjar:** Connects heatmaps, recordings, and feedback to generate behavioral insights on users.
+
+4. **WalkMe:** A digital adoption tool focused on helping track, automate, and optimize the software use of large teams internally.
+
+5. **Heap:** A digital insights platform for understanding the end-to-end journey including analytics, autocapture, and session replay.
+
+6. **Appcues:** A focused product onboarding and surveying tool for boosting product adoption.
+
+7. **Smartlook:** Comprehensive user insight platform with analytics, session replay, heatmaps, and crash reports.
+
+This guide covers:
+
+- How these tools compare to Pendo.
+- Which key Pendo features they support.
+- What kind of users and companies use them, and why.
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Most similar to:** Heap, Pendo, Smartlook
+- **Typical users:** Engineers, product, and growth teams
+- **Typical customers:** Mid-size product-focused B2Bs and startups
+
+![PostHog](../images/blog/best-pendo-alternatives/posthog.png)
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is an open-source platform combining product analytics, session replay, user surveys, feature flags, and A/B testing into one product. This means it's not just an alternative to Pendo, but also tools like [LaunchDarkly](/blog/best-launchdarkly-alternatives) and [Amplitude](/blog/best-amplitude-alternatives).
+
+Typical PostHog users are engineers, founders, and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
+
+### Key features
+
+- 📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports [SQL insights](/docs/product-analytics/sql) for power users.
+
+- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+
+- 📺 **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
+
+- 🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+
+- 🚩 **Feature flags:** Rollout features safely with local evaluation (for faster performance) and JSON payloads.
+
+### How does PostHog compare to Pendo?
+
+Both PostHog and Pendo are multi-product companies covering many use cases. Pendo focuses on in-app guides and internal tools. PostHog focuses on tools engineering and growth teams need like feature flags and A/B testing.
+
+<ComparisonTable column1="PostHog" column2="Pendo">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="In-app guides" description="Communicate with users through product tours, tooltips, and popups" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback" description="Get qualitative feedback from your users via feedback and surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Self-serve with free tier" description="Free to use, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={true} column2={"Enterprise"} feature="EU hosting" description="Store your data in the EU to comply with privacy regulations" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to the roadmap, and build integrations" />
+</ComparisonTable>
+
+### How popular is PostHog?
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of January 2024, 4,732 (0.5%) of the top 1 million websites deploy PostHog. This is ~1,000 more than Pendo's 3,711.
+
+### Why do companies use PostHog?
+
+According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It replaces multiple tools:** PostHog replaces [Mixpanel](/blog/posthog-vs-mixpanel) (analytics), [Statsig](/blog/posthog-vs-statsig) (feature flags and A/B testing), and Pendo (feedback and surveys). This simplifies workflows and ensures all their data is in one place.
+
+2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as their company (and usage) grows. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+3. **They need a complete picture of users:** PostHog includes the necessary tools to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with [A/B/n tests](/tutorials/abn-testing), and [gathering feedback](/templates/in-app-feedback-survey) with user surveys.
+
+> #### Bottom line
+> For teams looking for all the features of Pendo minus in-app guidance, PostHog makes a great alternative. Being free, self-serve, and open source makes it easy to explore and try out. PostHog is especially good for engineering-focused startups and scale-ups looking for tools for build a great product.
+
+<ArrayCTA />
+
+## 2. Whatfix
+
+- **Founded:** 2014
+- **Most similar to:** WalkMe, Appcues
+- **Typical users:** Enterprise healthcare, financial services, and HR companies
+- **Typical customers:** Education and training teams, HR
+
+![Whatfix](../images/blog/best-pendo-alternatives/whatfix.png)
+
+### What is Whatfix?
+
+Whatfix is a digital adoption and product analytics platform built for enterprises. It has guidance, feedback, and content tools to help with transformation, training, and onboarding. Teams can create and manage content, deliver it to specific users in-app, and measure its impact.
+
+Whatfix also includes personalizations, automation, and integrations to help optimize your workflows and app. 
+
+### Key features
+
+- 🧳 **Guidance:** Add interactive in-app guidance, contextual support, and announcements to your app easily.
+
+- 📈 **Product analytics:** Autocapture user behavior and analyze with trend, funnel, and retention graphs.
+
+- 📝 **Content management:** Create and manage support content like e-learning materials and product announcements, no coding required.
+
+- 🗣️ **In-app messaging:** Make announcements, drive adoption of new features, and help users when they get stuck.
+
+- 📋 **Surveys:** Collect feedback and NPS responses through in-app surveys.
+
+### How does Whatfix compare to Pendo?
+
+While Pendo focuses both on internal and external use cases, Whatfix focuses almost entirely on internal use cases. It has more content tools but misses out on the tools tracking user behavior like session replay.  
+
+<ComparisonTable column1="Whatfix" column2="Pendo">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="In-app guides" description="Communicate with users through product tours, tooltips, and popups" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback" description="Get qualitative feedback from your users via feedback and surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={false} column2={true} feature="Self-serve with free tier" description="Free to use, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={true} column2={"Enterprise"} feature="EU hosting" description="Store your data in the EU to comply with privacy regulations" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to the roadmap, and build integrations" />
+</ComparisonTable>
+
+### How popular is Whatfix?
+
+According to [BuiltWith](https://trends.builtwith.com/widgets/WhatFix), as of January 2024, 231 of the top million sites use Whatfix. This is much less than Pendo's 3,711 but doesn't reflect their internal usage. For context, Ahrefs puts Whatfix's organic traffic at 301k, while Pendo's is only 35.9k.
+
+### Why do companies use Whatfix?
+
+Looking at G2 reviews, users are fans of the following features of Whatfix:
+
+1. **Easy guidance tools:** Whatfix enables teams to easily drive product adoption through onboarding flows, tooltips, and widgets. All of which reviewers find they can use from the start. 
+
+2. **Help managing complexity:** Reviewers often mention using Whatfix on their complicated pages. It helps them effectively guide users on these pages and adapts well to complex sites.
+
+3. **Support:** Whatfix provides a collaborative, responsive support team. Reviewers appreciate that this helps them get a solution tailored to their needs. 
+
+> #### Bottom line
+> Whatfix is a solid alternative for teams looking for internal analytics and user guidance, but doesn't have a free tier or self-serve. Teams looking to interact with or understand external users or avoid a sales process should look elsewhere though.
+
+## 3. Hotjar
+
+- **Founded:** 2014
+- **Most similar to:** Pendo, PostHog
+- **Typical users:** Product designers, researchers, and marketers
+- **Typical customers:** Ecommerce and content-driven sites
+
+![Hotjar](../images/blog/best-pendo-alternatives/hotjar.png)
+
+### What is Hotjar?
+
+[Hotjar](/blog/posthog-vs-hotjar) is a tool for understanding user behavior. It provides heatmaps, replays, feedback, and interviews to capture and display the qualitative aspects of your site and app. Teams use it to discover and address pain points on their site and app, which helps them improve customer experiences.
+
+### Key features
+
+- 🔥 **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
+
+- 🎥 **Recordings:** Replay real user sessions and see what they see; discover hidden friction.
+
+- 🗣️ **Feedback:** Learn what your users are thinking. Find out their likes, dislikes, and satisfaction.
+
+- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+
+- 👔 **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
+
+### How does Hotjar compare to Pendo?
+
+Hotjar has a similar focus on Pendo, helping users create better digital experiences. Hotjar tools on tools for capturing and displaying qualitative data. It doesn't have the product adoption or the quantitative analytics features of Pendo. 
+
+<ComparisonTable column1="Hotjar" column2="Pendo">
+  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="In-app guides" description="Communicate with users through product tours, tooltips, and popups" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback" description="Get qualitative feedback from your users via feedback and surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Self-serve with free tier" description="Free to use, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={true} column2={"Enterprise"} feature="EU hosting" description="Store your data in the EU to comply with privacy regulations" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to the roadmap, and build integrations" />
+</ComparisonTable>
+
+### How popular is Hotjar?
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as of January 2024, Hotjar is much more popular than Pendo. A massive 73,874 of the top 1 million sites use Hotjar. Pendo is only used on 3,711.
+
+### Why do companies use Hotjar?
+
+According to G2 reviews, users are fans of Hotjar because:
+
+1. **Insights on user behavior:** Hotjar captures what users are doing, where their attention is going, and how they are spending their time. Users love the insights they get with Hotjar's tools.
+
+2. **Simple for non-technical users:** Hotjar is easy to set up. Non-technical roles like designers, marketers, and product managers find it simple to use. The visuals do a good job of making data clear.
+
+3. **Heatmaps and scrollmaps:** Seeing clicks and scroll depth down works well and creates actionable insights for design, marketing, and content teams. Helps improve UX and page designs.
+
+> #### Bottom line
+> Hotjar and Pendo are both tools for building better user experiences. Hotjar does this by capturing qualitative data but misses out on the adoption tools for actually improving those experiences. Still, by being self-serve and free to try, it makes a solid alternative to Pendo.
+
+## 4. WalkMe
+
+- **Founded:** 2011
+- **Most similar to:** Whatfix, Appcues
+- **Typical users:** HR, IT, and training teams.
+- **Typical customers:** Enterprises with large staffs like consultancies, healthcare, and sales.
+
+![WalkMe](../images/blog/best-pendo-alternatives/walkme.png)
+
+### What is WalkMe?
+
+WalkMe is a leading digital adoption platform that overlays any application. It tracks usage of internal software, automates repetitive tasks, and provides guidance to onboarding or lost users. It is used by sales teams to navigate a CRM like Salesfore, HR teams to onboard with Workday, or support teams to resolve issues with ServiceNow.
+
+### Key features
+
+- 🙋‍♂️**Guidance:** Create guidance for workflows that resolve friction. Provide content, notifications, and support at the right time.
+- 🏗️ **Workflows:** Automate common tasks, and help employees save time with repetitive tasks.
+- 🤝 **Integrations:** Integrate with Salesforce, Workday, ServiceNow, and more to speed up adoption and automate workflows.
+- 📈 **Analytics:** Monitor application, workflow, and form analytics to get insights on how employees are using software.
+
+### How does WalkMe compare to Pendo?
+
+Like Whatfix, WalkMe focuses on internal analytics and use cases. Its integrations with tools like Salesforce and Workday are particularly strong, but it doesn't have the same external-facing analytics features as Pendo.
+
+<ComparisonTable column1="WalkMe" column2="Pendo">
+  <ComparisonRow column1={"Trends, funnels only"} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="In-app guides" description="Communicate with users through product tours, tooltips, and popups" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback" description="Get qualitative feedback from your users via feedback and surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={false} column2={true} feature="Self-serve with free tier" description="Free to use, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={"Limited"} column2={"Enterprise"} feature="EU hosting" description="Store your data in the EU to comply with privacy regulations" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to the roadmap, and build integrations" />
+</ComparisonTable>
+
+### How popular is WalkMe?
+
+According to [BuiltWith](https://trends.builtwith.com/widgets/WalkMe), as of January 2024, 1,006 of the top million sites used WalkMe. This is roughly a quarter of Pendo's 3,711 but doesn't reflect WalkMe's focus on internal apps. Ahrefs has WalkMe's organic traffic at 85.9k, which is nearly double Pendo's 35.9k.
+
+### Why do companies use WalkMe?
+
+Looking at G2 reviews, users like WalkMe the most for:
+
+1. **A strong support team**: Quick-to-reply support team helps reviewers solve their problems fast.  
+
+2. **Easy content creation:** The basics of WalkMe are quick to get started with. Reviewers like that they can set up customized guidance content quickly. 
+
+3. **Analytics:** Support and HR teams value the metrics WalkMe provides about interactions with applications and the time it saves. This enables them to know what applications are important, confusing, or underused.
+
+> #### Bottom line
+> WalkMe is a solid alternative for large enterprises using complicated software and looking for digital adoption tools. It is especially good for support and HR who use applications integrated with WalkMe. Teams looking to understand user behavior in external-facing apps should look elsewhere.
+
+## 5. Heap
+
+- **Founded:** 2013
+- **Most similar to:** PostHog, Smartlook
+- **Typical users:** Product and marketing teams
+- **Typical customers:** B2C SaaS and ecommerce companies with a user experience focus.
+
+![Heap](../images/blog/best-pendo-alternatives/heap.png)
+
+### What is Heap?
+
+[Heap](/blog/posthog-vs-heap) describes itself as a digital insights platform. This means it offers product analytics, session replay, and multi-touch attribution. This makes especially strong for marketing teams.
+
+Contentsquare, a marketing and ecommerce analytics firm that also owns Hotjar, [acquired Heap in September 2023](https://contentsquare.com/heap/) and announced plans to integrate the products.
+
+### Key features
+
+- ✅ **Event autocapture:** Frees product teams from relying on engineers to instrument events. Heap offers a visual editor for enables teams to tag on-page events for analysis.
+
+- 📺 **Session replay:** Get qualitative insights about user behavior by replaying their session (although this lacks the debugging tools typical of most replay tools).
+
+- 🔥 **Heatmaps:** See where users click, what point they scroll to, and the areas that get the most attention.
+
+- 🤖 **Analysis suggestions**: Advanced data science capabilities discover hidden interactions, friction points, and knowledge about key paths.
+
+- 🔁 **Managed ETL:** Connect to data warehouses, so you can combine your analytics with other sources and get a fuller picture of the entire user journey.
+
+### How does Heap compare to Pendo?
+
+Heap entirely focuses on analytics. Although the feature sets between the two look similar, Heap includes complex, deeper visualizations and AI support for discovering insights. It does not include the feedback tools or in-app guides of Pendo though.
+
+<ComparisonTable column1="Heap" column2="Pendo">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="In-app guides" description="Communicate with users through product tours, tooltips, and popups" />
+  <ComparisonRow column1={false} column2={true} feature="Feedback" description="Get qualitative feedback from your users via feedback and surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={"Trial"} column2={true} feature="Self-serve with free tier" description="Free to use, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={"Beta"} column2={"Enterprise"} feature="EU hosting" description="Store your data in the EU to comply with privacy regulations" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to the roadmap, and build integrations" />
+</ComparisonTable>
+
+### How popular is Heap?
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Heap), 4,221 of the top one million sites use Heap as of January 2024. This is similar to Pendo's 3,711.
+
+### Why do companies use Heap?
+
+According to G2 reviews, companies like these three areas of Heap:
+
+1. **Autocapture:** Non-technical users love how easy autocapture makes tracking on their site. The clicks, pageviews, and element data provide a huge amount of useful analytics data with little setup.
+
+2. **Simple setup:** It does not take a big technical effort to set Heap up. Users can add a single script and begin collecting data. They then make it easy to visualize that data through user paths, funnels, and session replays.
+
+3. **Streamlining analysis:** By having analytics and session replay data in one place, Heap makes it easy to understand the usage of their app or site. This replaces interviews or user testing and makes the development cycle faster.
+
+> #### Bottom line
+> For product analytics and session replay, Heap is a good alternative to Pendo as it has greater focus and depth for those features. If you need, in-app guides and surveys, it is better to look elsewhere. 
+
+## 6. Appcues
+
+- **Founded:** 2013
+- **Most similar to:** WalkMe, Whatfix
+- **Typical users:** Product marketing and growth teams, product managers
+- **Typical customers:** Product-led B2B SaaS companies
+
+![Appcues](../images/blog/best-pendo-alternatives/appcues.png)
+
+### What is Appcues?
+
+Appcues is a product adoption platform helping teams build better onboarding. It provides no-code component builder, announcements, and personalization to help improve activation, conversion, and stickiness. Also includes analytics to help track your progress improving onboarding flows.
+
+### Key features
+
+- 🆘 **In-app guides:** Help users and drive feature adoption with slideouts, tooltips, and hotspots.
+
+- 🧑‍💻 **No-code builder:** Create and customize onboarding components without needing to write code.
+
+- 📋 **Feedback:** Run in-app surveys to capture feedback and NPS scores**.**
+
+- 🤹 **Personalization:** Segment users and show unique, custom onboarding for each.
+
+- 📈 **Analytics:** Understand how your onboarding flows are performing with event capture, trends, and funnels.
+
+### How does Appcues compare to Pendo?
+
+Appcues focuses on features helping improve the product onboarding experience. They miss out on features of Pendo that capture the broader user experience like product analytics and session replay.
+
+<ComparisonTable column1="Appcues" column2="Pendo">
+  <ComparisonRow column1={"Limited"} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="In-app guides" description="Communicate with users through product tours, tooltips, and popups" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback" description="Get qualitative feedback from your users via feedback and surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={"Only trial"} column2={true} feature="Self-serve with free tier" description="Free to use, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={false} column2={"Enterprise"} feature="EU hosting" description="Store your data in the EU to comply with privacy regulations" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to the roadmap, and build integrations" />
+</ComparisonTable>
+
+### How popular is Appcues?
+
+According to [BuiltWith](https://trends.builtwith.com/widgets/Appcues), as of January 2024, 1,966 of the top 1 million sites use Appcues. This is just over half of Pendo's 3,711.
+
+### Why do companies use Appcues?
+
+Looking at G2 reviews, they appreciate the following about Appcues:
+
+1. **Great onboarding:** As you'd expect from an onboarding-focused tool, reviewers think Appcues is simple to set up and get started with.
+
+2. **User-friendly:** Their intuitive interface and no-code component builder make building a customized onboarding flow simple.
+
+3. **Support:** Appcues' combination of custom support, training, and webinars helps reviewers solve issues and get the most out of the platform.
+
+> #### Bottom line
+> If you're looking to improve your product onboarding and adoption, Appcues makes a great alternative. Their focused approach is distinct among alternatives on this list. Teams looking for internal adoption or external analytics tools won't find them in Appcues though.
+
+## 7. Smartlook
+
+- **Founded:** 2016
+- **Most similar to:** PostHog, Heap
+- **Typical users:** Engineers, business analysts, product managers
+- **Typical customers:** Enterprise retail and ecommerce websites and apps
+
+![Smartlook](../images/blog/best-pendo-alternatives/smartlook.png)
+
+### What is Smartlook?
+
+Smartlook combines session replays, product analytics, visualizations, and crash reports to generate an overall understanding of user experience. It focuses more on mobile apps with specific tools like mobile heatmaps, native rendering, and wireframe mode.
+
+### Key features
+
+- 📊 **Event-based analytics:** See how often users behave in ways important to you such as URL visits, form submits, and clicks.
+
+- 🛣️ **Funnels and paths:** See how users move through your app with custom visuals for key flows.
+
+- 📹 **Session recordings:** Understand how users are actually using your app and where issues occur.
+
+- 🔥 **Heatmaps:** Figure out what parts of the page users click on, move their mouse over, and scroll to. Overlay all this on your actual site.
+
+- 📉 **Crash reports:** Learn what happens before a crash without reproduction. Watch related session replay and manage crash triaging in Smartlook.
+
+### How does Smartlook compare to Pendo?
+
+Smartlook is entirely focused on user experience analytics, but lacks the adoption tools and surveys of Pendo. Heatmaps, crash reports, and their features built for mobile shows this focus.
+
+<ComparisonTable column1="Smartlook" column2="Pendo">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="In-app guides" description="Communicate with users through product tours, tooltips, and popups" />
+  <ComparisonRow column1={false} column2={true} feature="Feedback" description="Get qualitative feedback from your users via feedback and surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Self-serve with free tier" description="Free to use, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={true} column2={"Enterprise"} feature="EU hosting" description="Store your data in the EU to comply with privacy regulations" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to the roadmap, and build integrations" />
+</ComparisonTable>
+
+### How popular is Smartlook?
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Smartlook), as of January 2024, 3,186 of the top 1 million websites use Smartlook. This is a bit less than Pendo's 3,711 but doesn't account for their focus on mobile apps.
+
+### Why do companies use Smartlook?
+
+According to G2 reviewers, Smartlook users benefit from:
+
+1. **The integration between replays and events:** Smartlook connects event-based analytics and real user sessions. This enables users to dive deeper into user behavior than a single tool  provides.
+
+2. **Understanding visitor pain points:** The analytics and visualizations make it easy to understand where users are running into trouble or where crashes happen. Fixing these areas improves user experience and conversion.
+
+3. **Real user monitoring:** See how real users are using your app and monitor the quality of their experiences. Figure out what areas are confusing or not used properly.
+
+> #### Bottom line
+> For companies only wanting user analytics, replays, and analytics, Smartlook is a solid alternative to Pendo. This is especially true for mobile-focused companies.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect Pendo replacement if:
+
+- You value transparency (we're open source and open core).
+- You want tools to help you build a better product (like feature flags and A/B testing).
+- You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
+
+Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
+
+<ArrayCTA />
