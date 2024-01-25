@@ -6,7 +6,7 @@ showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/comparisons/optimizely.jpeg
 featuredImageType: full
 category: General
 tags:
@@ -180,7 +180,7 @@ The core web experimentation features like traffic allocation, preview mode, cro
       </tr>
       <tr>
         <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Scheduling</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Schedule experiments to run at specific times</p></td>
-        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
       </tr>
       <tr>
