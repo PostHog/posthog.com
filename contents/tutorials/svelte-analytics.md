@@ -71,8 +71,7 @@ export function load() {
 
 Finally, create the actual page by creating a `+page.svelte` file. This file loads the posts and loops through them to display their title and link.
 
-```js
-<!-- src/routes/blog/+page.svelte -->
+```svelte file=+page.svelte
 <script>
   export let data;
 </script>
@@ -105,8 +104,7 @@ export function load({ params }) {
 
 Again, we create a `+page.svelte` file in the `[slug]` folder to display the individual posts.
 
-```js
-<!-- src/routes/blog/[slug]/+page.svelte -->
+```svelte file=+page.svelte
 <script>
 	export let data;
 </script>
@@ -115,10 +113,9 @@ Again, we create a `+page.svelte` file in the `[slug]` folder to display the ind
 <p>{data.post.content}</p>
 ```
 
-Finally, back in the `+page.svelte` in our base routes folder, we add a link to the blog index page.
+Finally, back in the `+page.svelte` in our base `routes` folder, we add a link to the blog index page.
 
-```js
-<!-- src/routes/+page.svelte -->
+```svelte file=+page.svelte
 <h1>Welcome to my cool site</h1>
 <a href="/blog">Go to Blog</a>
 ```
@@ -154,9 +151,9 @@ To fill out all the secrets we use in this file, we need a GitHub OAuth app. To 
 Keep the application creation page open and head back to your app. In the base `my-app` folder, create a `.env` file. In this file, add the Client ID and Client secret you generated from GitHub as well as an Auth secret (a 32-character string, [you can generate one here](https://generate-secret.vercel.app/32)). Once done, your .`env` file should look like this:
 
 ```
-GITHUB_ID=c6c022a4494ecf3fef0d (from GitHub Client ID)
-GITHUB_SECRET=ez5fa33a2252d26d42236ee024330d450cc3a910 (from GitHub client secret)
-AUTH_SECRET=d3fe411d34da3133244393a4b0245a5a (32-character string)
+GITHUB_ID=c6c022a494ecf3fef0d (from GitHub Client ID)
+GITHUB_SECRET=ez5fa33a2252d26d4236ee024330d450cc3a910 (from GitHub client secret)
+AUTH_SECRET=d3fe411d34da313244393a4b0245a5a (32-character string)
 ```
 
 ### Setting up sign in and out
@@ -174,8 +171,7 @@ export const load = async (event) => {
 
 Next, we set up signing in and out. To do this, go back to our home page at `src/routes/+page.svelte`. Here we import the `signIn` and `signOut` functions from `@auth/sveltekit/client` as well as use the `page` store from `$apps/stores` to get data on the session.
 
-```js
-<!-- src/routes/+page.svelte -->
+```svelte file=+page.svelte
 <script>
   import { signIn, signOut } from "@auth/sveltekit/client"
   import { page } from "$app/stores"
@@ -234,42 +230,20 @@ After restarting your app and going back to your site, you should start to see e
 
 ## Capturing pageviews and pageleaves
 
-For your app, PostHog only captures the initial page load as a pageview and the final pageleave. This is because Svelte acts as a [single page app](/tutorials/single-page-app-pageviews). To capture every pageviews and pageleaves, we check for the page change and then capture custom events.
+For your app, PostHog only captures the initial page load as a pageview and the final pageleave. This is because Svelte acts as a [single page app](/tutorials/single-page-app-pageviews). To capture every pageviews and pageleaves, we check for navigation and then capture custom events.
 
-We can set this up by creating one more file, a `+layout.svelte` file in `src/routes`. In this file, we set up a subscription to the `page` store that runs `onMount`. It checks if it is running in the browser, and if so, captures a `$pageview` and `$pageleave` event on mount and unmount.
+We can set this up by creating one more file, a `+layout.svelte` file in `src/routes`. In this file, we set up a browser check then use the `beforeNavigate` and `afterNavigate` interceptors to capture a `$pageleave` or `$pageview` event.
 
-```js
-<!-- src/routes/+layout.svelte -->
+```svelte file=+layout.svelte
 <script>
-  import { onMount } from 'svelte';
-  import { page } from "$app/stores";
   import posthog from 'posthog-js'
+  import { browser } from '$app/environment';
+  import { beforeNavigate, afterNavigate } from '$app/navigation';
 
-  let currentPath = '';
-  
-  onMount(() => {
-		if (typeof window !== 'undefined') {
-			const unsubscribePage = page.subscribe(($page) => {
-				if (currentPath && currentPath !== $page.url.pathname) {
-          console.log('leaving')
-					posthog.capture('$pageleave');
-				}
-        console.log('entering')
-				currentPath = $page.url.pathname;
-				posthog.capture('$pageview');
-			});
-
-			const handleBeforeUnload = () => {
-				posthog.capture('$pageleave');
-			};
-			window.addEventListener('beforeunload', handleBeforeUnload);
-
-			return () => {
-				unsubscribePage();
-				window.removeEventListener('beforeunload', handleBeforeUnload);
-			};
-		}
-	});
+  if (browser) {
+		beforeNavigate(() => posthog.capture('$pageleave'));
+		afterNavigate(() => posthog.capture('$pageview'));
+	}
 </script>
 
 <slot></slot>
@@ -306,8 +280,7 @@ Once you save and relaunch, you get pageviews and pageleaves for all the navigat
 
 You might notice even though you are logged in, your events are still captured from an anonymous person in PostHog. This is because users aren’t identified by PostHog. We can fix this by using `posthog.identify()` when users redirect back to our app from GitHub. We set a param in the call back URL, then check for that param, and use the email from GitHub to identify the user. We can add this to our home `src/routes/+page.svelte` file.
 
-```js
-<!-- src/routes/+page.svelte -->
+```svelte file=+page.svelte
 <script>
   import { signIn, signOut } from "@auth/sveltekit/client"
   import { page } from "$app/stores"
@@ -346,8 +319,7 @@ Now, when we sign in again, we are identified with the email we use with GitHub.
 
 To avoid having multiple users identified as one, make sure to call `posthog.reset()` when a user signs out. We can use the same callback URL check as signing in, but for signing out.
 
-```js
-<!-- src/routes/+page.svelte -->
+```svelte file=+page.svelte
 //...
   if ($page.url.searchParams.get("signedOut") === "True") {
     posthog.reset()
@@ -381,8 +353,7 @@ To set this up, create the feature flag. In PostHog, go to the feature flags tab
 
 Next, in the `src/routes/blog/[slug]` folder, go to the `+page.svelte` file. Add the `posthog.onFeatureFlags()` function to check the `main-cta` flag once they load. The `posthog.isFeatureEnabled()` controls a variable to display a call-to-action link below our post.
 
-```js
-<!-- src/routes/blog/[slug]/+page.svelte -->
+```svelte file=+page.svelte
 <script>
 	export let data;
   import posthog from 'posthog-js'
