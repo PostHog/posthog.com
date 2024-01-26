@@ -32,7 +32,7 @@ I'm talking about startups with a reasonable degree of brand recognition – i.e
 - Team is 70% engineers
 - 1 in-house recruiter, no agencies
 
-In the last 12 months, we received over 9000 applications, or an average of **460 applicants per role**. So that's a lot of applications to sift through! Many of which are automated/no-effort one click applications - hence the need to be able to say no quickly. 
+In the last 12 months, we received over 9,000 applications, or an average of **460 applicants per role**. That's a lot of applications to sift through, many of which are automated/no-effort one click applications.
 
 Let’s get into it. 
 
