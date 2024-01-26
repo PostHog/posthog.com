@@ -10,6 +10,7 @@ import { useRoadmap } from 'hooks/useRoadmap'
 import { useNav } from 'components/Community/useNav'
 import { CallToAction } from 'components/CallToAction'
 import RoadmapForm from 'components/RoadmapForm'
+import { useUser } from 'hooks/useUser'
 
 interface IGitHubPage {
     title: string
@@ -114,7 +115,7 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 export default function Roadmap() {
     const nav = useNav()
     const teams = useRoadmap()
-
+    const { user } = useUser()
     const underConsideration: ITeam[] = teams
         .map((team) => {
             return {
@@ -181,7 +182,7 @@ export default function Roadmap() {
                                         </Card>
                                     )
                                 })}
-                                <AddRoadmapItem status="under-consideration" />
+                                {user?.role?.type === 'moderator' && <AddRoadmapItem status="under-consideration" />}
                             </CardContainer>
                         </Section>
 
@@ -214,7 +215,7 @@ export default function Roadmap() {
                                             </Card>
                                         )
                                     })}
-                                <AddRoadmapItem status="in-progress" />
+                                {user?.role?.type === 'moderator' && <AddRoadmapItem status="in-progress" />}
                             </CardContainer>
                         </Section>
 
@@ -227,7 +228,7 @@ export default function Roadmap() {
                                 Check out <Link to="/changelog">our changelog</Link> on our blog to see what we've
                                 shipped recently.
                             </p>
-                            <AddRoadmapItem status="complete" />
+                            {user?.role?.type === 'moderator' && <AddRoadmapItem status="complete" />}
                             {/*
                             hidden until we have more historical content loaded
                             <CardContainer>
