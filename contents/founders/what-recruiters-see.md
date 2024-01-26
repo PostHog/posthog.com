@@ -1,12 +1,11 @@
 ---
-date: 2024-01-23
+date: 2024-01-26
 title: What startup recruiters actually see when you apply for a job
 author:
   - charles-cook
 featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
 tags:
-  - Founders
   - Culture
   - People  
 ---
@@ -34,7 +33,7 @@ In the last 12 months, we received over 9000 applications, or an average of **46
 
 Let’s get into it. 
 
-## So what happens to my application after I hit send?
+## So, what happens to my application after I hit send?
 
 If you're applying for a job at a startup, chances are they are using an applicant tracking system (ATS) like Ashby, Greenhouse, Lever, or Workable. We use Ashby, but the process a recruiter follows generally doesn't vary massively between these systems. This is what a typical application looks like:
 
