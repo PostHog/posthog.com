@@ -46,21 +46,24 @@ If you're applying for a job at a startup, chances are they are using an applica
 
 This stuff is subjective, but generally these are the things that can increase the chances of a good application making it through:
 
-- Write a short and _obviously_ personalized proper cover note
-  - A few sentences about why you are interested in this role specifically is fine
-  - You don't need 5 paragraphs that are just your resumé slightly reworded - it's just more text we will skim over
-  - Our ATS will wreck your formatting beyond line breaks
-  - Writing 'hi I'm X' is a waste of words (we know who you are!)
-  - Match the tone of the company - for example, we are informal so please no 'Dear Sir/Madam'
-  - If you can figure out what the company cares about, or who is in it - talk about how you think you could help them achieve their goals and why
-  - Write _something_ - if it's too much hassle, that's ok, you're probably not that interested!
-  - No ChatGPT - they're really obvious
-- No profile pictures - this isn't social media, and you're wasting the space
-- Stick to boring formatted CVs - prioritize clarity over design
-  - I'd go so far as to say that exporting your LinkedIn profile as a PDF is totally fine, but...
-- Keep your LinkedIn up to date - it makes us suspicious when there are big discrepancies between the two
-- Don't have your CV end in 2021 or whenever, we don't have time to contact you to query it - we don't care if you had a career break, just put that
-- Emailing the recruiter/hiring manager directly causes more stress because we then have to add you to our ATS - please apply directly, we are dying here
+### Write a short and _obviously_ personalized cover note
+
+- A few sentences about why you are interested in this role specifically is fine.
+- You don't need 5 paragraphs that are just your resumé slightly reworded – it's just more text we will skim over.
+- Our ATS will wreck your formatting beyond line breaks, so keep it simple.
+- Writing 'hi I'm X' is a waste of words (we know who you are!)
+- Match the tone of the company – e.g. we are informal, so please no 'Dear Sir/Madam'.
+- If you can figure out what the company cares about, or who is in it, talk about how you think you could help them achieve their goals and why.
+- Write _something_ – if it's too much hassle, that's ok, you're probably not that interested!
+- No ChatGPT, it's they're really obvious.
+
+### Keep your CV simple and up-to-date
+
+- No profile pictures. This isn't social media, and you're wasting the space
+- Stick to boring formatted CVs – prioritize clarity over design. I'd go so far as to say that exporting your LinkedIn profile as a PDF is totally fine, but...
+- Keep your LinkedIn up to date – it makes us suspicious when there are big discrepancies between the two.
+- Don't have your CV end in 2021 or whenever, we don't have time to contact you to query it. We don't care if you had a career break, just put that.
+- Emailing the recruiter/hiring manager directly causes more stress because we then have to add you to our ATS – please apply directly, we are dying here.
 
 ## I did all this and it didn't work – where's my feedback, you assholes?
 
