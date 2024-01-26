@@ -62,7 +62,7 @@ This stuff is subjective, but generally these are the things that can increase t
 - Don't have your CV end in 2021 or whenever, we don't have time to contact you to query it - we don't care if you had a career break, just put that
 - Emailing the recruiter/hiring manager directly causes more stress because we then have to add you to our ATS - please apply directly, we are dying here
 
-## I did all this and it didn't work - where's my feedback, you assholes?
+## I did all this and it didn't work – where's my feedback, you assholes?
 
 When you apply for a job at a startup and don't get past the first stage, you'll either get nothing back (booo) or an automated email saying you have been unsuccessful. Applicants who felt they were a great fit might, quite reasonably, ask for feedback as to why they weren't successful. 
 
