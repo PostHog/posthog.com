@@ -64,7 +64,9 @@ This stuff is subjective, but generally these are the things that can increase t
 
 ## I did all this and it didn't work - where's my feedback, you assholes?
 
-When you apply for a job at a startup and don't get past the first stage, you'll either get nothing back (booo) or an automated email saying you have been unsuccessful. Applicants who felt they were a great fit might, quite reasonably, ask for feedback as to why they weren't successful. And we say no to a lot of candidates who actually meet the spec on paper - this doesn't mean you are a bad candidate, it just means that _relatively speaking_ you were not as strong as other candidates who applied this time. 
+When you apply for a job at a startup and don't get past the first stage, you'll either get nothing back (booo) or an automated email saying you have been unsuccessful. Applicants who felt they were a great fit might, quite reasonably, ask for feedback as to why they weren't successful. 
+
+But, here's the thing... we say no to a lot of candidates who actually meet the spec on paper. This doesn't mean you are a bad candidate, it just means that _relatively speaking_ you were not as strong as other candidates who applied this time. 
 
 We find ~5% of candidates ask for feedback - if we replied to each one and spent ~5min writing each email, we'd be spending 30-60min on a typical day sending people feedback. This is why we tell people to only expect feedback after any interview stage. I expect this picture is similar for most startups.
 
