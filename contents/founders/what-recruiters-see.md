@@ -14,8 +14,9 @@ Last week we opened a new marketing role at PostHog, and we got 300 applicants i
 
 As I sifted through these, I realized a very obvious thing - there is a _much_ bigger gap between what applicants and recruiter experience than either group realizes:
 
-- What applicants and recruiters see on their screens are _completely_ different. This leads to some needlessly funky looking applications - luckily this is easy to solve. 
-- You may spend 30min+ researching a company, crafting a cover letter and applying. At these numbers, I was able to spend **less than 1min** reviewing each application.  And this is just an average - some applications took me 5s(!) to realize they were a no, so I could spend 5min+ reading good ones carefully.
+- What applicants and recruiters see on their screens are _completely_ different. This leads to some needlessly funky looking applications – luckily this is easy to solve. 
+
+- You may spend 30min+ researching a company, crafting a cover letter and applying. At these numbers, I was able to spend **less than 1min** reviewing each application. And this is just an average – some applications took me 5s(!) to realize they were a no, so I could spend 5min+ reading good ones carefully.
 
 Remember, actual professional recruiters don't just spend their time reviewing applications - they are conducting and scheduling interviews, collating feedback, negotiating offers, onboarding new hires, creating headcount plans, putting up job ads, etc. While it may seem extremely harsh that your application only gets a quick review, bear in mind that we're trying to figure out whether to invest dozens of people hours putting you through the full hiring process. 
 
