@@ -66,12 +66,39 @@ export interface IRoadmap {
 
 const AddRoadmapItem = ({ status }: { status: 'in-progress' | 'complete' | 'under-consideration' }) => {
     const [adding, setAdding] = useState(false)
+    const [roadmapID, setRoadmapID] = useState(null)
+
     return (
-        <div className="pt-4 !mt-4 border-t border-border">
+        <div className="pt-4 !mt-4 border-t border-border pb-4">
+            {roadmapID && (
+                <div className="p-2 mb-4">
+                    <h4 className="m-0">Success!</h4>
+                    <p className="m-0">Roadmap item will be appear on next build</p>
+                    <Link
+                        external
+                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::roadmap.roadmap/${roadmapID}`}
+                        className="mt-2 text-sm"
+                    >
+                        View in Strapi
+                    </Link>
+                </div>
+            )}
             {adding ? (
-                <RoadmapForm status={status} onSubmit={() => setAdding(false)} />
+                <RoadmapForm
+                    status={status}
+                    onSubmit={(roadmap) => {
+                        setAdding(false)
+                        setRoadmapID(roadmap.id)
+                    }}
+                />
             ) : (
-                <CallToAction width="full" onClick={() => setAdding(true)}>
+                <CallToAction
+                    width="full"
+                    onClick={() => {
+                        setAdding(true)
+                        setRoadmapID(null)
+                    }}
+                >
                     Add
                 </CallToAction>
             )}

@@ -88,7 +88,7 @@ export default function RoadmapForm({
     ...other
 }: {
     status?: 'in-progress' | 'complete' | 'under-consideration'
-    onSubmit?: () => void
+    onSubmit?: (roadmap: any) => void
 }): JSX.Element {
     const [status, setStatus] = useState(other.status)
     const [loading, setLoading] = useState(false)
@@ -164,7 +164,7 @@ export default function RoadmapForm({
                         category,
                     },
                 })
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps`, {
+                const { data: roadmap } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps`, {
                     body: data,
                     method: 'POST',
                     headers: {
@@ -172,11 +172,12 @@ export default function RoadmapForm({
                         Authorization: `Bearer ${await getJwt()}`,
                     },
                 }).then((res) => res.json())
-                onSubmit?.()
+                setLoading(false)
+                onSubmit?.(roadmap)
             } catch (err) {
                 console.error(err)
+                setLoading(false)
             }
-            setLoading(false)
         },
     })
 
