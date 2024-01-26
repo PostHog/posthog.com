@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -8,6 +8,8 @@ import { InProgress } from './InProgress'
 import { StaticImage } from 'gatsby-plugin-image'
 import { useRoadmap } from 'hooks/useRoadmap'
 import { useNav } from 'components/Community/useNav'
+import { CallToAction } from 'components/CallToAction'
+import RoadmapForm from 'components/RoadmapForm'
 
 interface IGitHubPage {
     title: string
@@ -60,6 +62,21 @@ export interface IRoadmap {
         </li>
     )
 }*/
+
+const AddRoadmapItem = ({ status }: { status: 'in-progress' | 'complete' | 'under-consideration' }) => {
+    const [adding, setAdding] = useState(false)
+    return (
+        <div className="pt-4 !mt-4 border-t border-border">
+            {adding ? (
+                <RoadmapForm status={status} onSubmit={() => setAdding(false)} />
+            ) : (
+                <CallToAction width="full" onClick={() => setAdding(true)}>
+                    Add
+                </CallToAction>
+            )}
+        </div>
+    )
+}
 
 export const Section = ({
     title,
@@ -164,6 +181,7 @@ export default function Roadmap() {
                                         </Card>
                                     )
                                 })}
+                                <AddRoadmapItem status="under-consideration" />
                             </CardContainer>
                         </Section>
 
@@ -196,6 +214,7 @@ export default function Roadmap() {
                                             </Card>
                                         )
                                     })}
+                                <AddRoadmapItem status="in-progress" />
                             </CardContainer>
                         </Section>
 
@@ -208,6 +227,7 @@ export default function Roadmap() {
                                 Check out <Link to="/changelog">our changelog</Link> on our blog to see what we've
                                 shipped recently.
                             </p>
+                            <AddRoadmapItem status="complete" />
                             {/*
                             hidden until we have more historical content loaded
                             <CardContainer>
