@@ -26,7 +26,7 @@ By sharing a bit of insight into how the _application_ bit of the hiring process
 
 ## But first, some context
 
-I'm talking about startups with a reasonable degree of brand recognition (ie. not a startup founded last week). In PostHog's case, we are:
+I'm talking about startups with a reasonable degree of brand recognition – i.e. not a startup founded last week). In PostHog's case, we are:
 
 - 42 people, $27m raised
 - Team is 70% engineers
