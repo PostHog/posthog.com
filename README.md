@@ -77,6 +77,10 @@ docker run -it --rm \
 2. Run `gatsby clean && yarn start` or delete `node_modules` and `.cache`
 3. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
 
+#### Issues with `sharp`?
+
+Try `brew install vips`
+
 ### Working on `/docs/api`?
 
 1. Create a [personal API key](https://posthog.com/docs/api#how-to-obtain-a-personal-api-key) in PostHog
@@ -93,9 +97,9 @@ We <3 contributions big and small. In priority order (although everything is app
 
 - Ask a [question in our community](https://posthog.com/questions)
 - Submit [bug reports and give us feedback in the app](https://app.posthog.com/home#supportModal)! 
-- Vote on features or get early access to beta functionality in our [roadmap](https://posthog.com/roadmap)
+- Vote on features or get early access to beta functionality in our [roadmap](https://posthog.com/roadmap)
 - Open a PR
-    - Read [our instructions above](#quick-start) on developing PostHog.com locally
+    - Read [our instructions above](#quick-start) on developing PostHog.com locally
     - Read more [detailed instructions in our manual](https://posthog.com/handbook/engineering/posthog-com/developing-the-website)
     - For basic edits, go to the file in GitHub and click the edit button (pencil icon)
 - Open [an issue](https://github.com/PostHog/posthog.com/issues/new) or [content idea](https://github.com/PostHog/posthog.com/issues/new?assignees=andyvan-ph&labels=content&template=blog-post-idea-template.md&title=%7BContent+type%7D+-+%7Btitle%7D)
