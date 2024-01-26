@@ -26,7 +26,7 @@ The fact that Phil builds in public made him naturally curious about PostHog.
 
 ### Increasing conversions with social proof and A/B testing
 
-Phil was familiar with the _concept_ of A/B testing, but had never tried running a test before. Thankfully, with a little help from ChatGPT and [PostHog’s documentation](/tutorials/categories/experimentation), he quickly got up to speed and began planning [how to run A/B tests](/product-engineers/your-first-ab-test) that could make 4DayWeek even more successful.  
+Phil was familiar with the _concept_ of A/B testing, but had never tried running a test before. Thankfully, with a little help from ChatGPT and [PostHog’s documentation](/tutorials/categories/experimentation), he quickly got up to speed and began planning [how to run A/B tests](/product-engineers/how-to-do-ab-testing) that could make 4DayWeek even more successful.  
 
 “Every test has to begin with a hypothesis,” says Phil. “In my case, I wanted to test if social proofs would help increase the number of newsletter signups. My hypothesis was that users would be more likely to convert if they had an indication that the service was popular and trusted by lots of people.”
 

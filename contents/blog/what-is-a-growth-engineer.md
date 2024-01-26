@@ -84,7 +84,7 @@ So what do growth engineers apply their skills to? We already covered that they 
 
 - Developing a growth strategy, experiment framework, and measurement for both.
 - Doing SEO optimization on the marketing site. Building landing pages. Optimizing the signup funnels.
-- [Running A/B tests](/product-engineers/your-first-ab-test) on specific parts of the signup and activation funnel. Trying to improve the conversion rate and time to value.
+- [Running A/B tests](/product-engineers/how-to-do-ab-testing) on specific parts of the signup and activation funnel. Trying to improve the conversion rate and time to value.
 - Setting up in-app and push notification messaging systems. Building tools and systems for better product onboarding.
 - Developing features to access new markets such as localization and support for new types of payments.
 
