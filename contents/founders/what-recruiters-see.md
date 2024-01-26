@@ -68,7 +68,7 @@ When you apply for a job at a startup and don't get past the first stage, you'll
 
 But, here's the thing... we say no to a lot of candidates who actually meet the spec on paper. This doesn't mean you are a bad candidate, it just means that _relatively speaking_ you were not as strong as other candidates who applied this time. 
 
-We find ~5% of candidates ask for feedback - if we replied to each one and spent ~5min writing each email, we'd be spending 30-60min on a typical day sending people feedback. This is why we tell people to only expect feedback after any interview stage. I expect this picture is similar for most startups.
+We find ~5% of candidates ask for feedback. If we replied to each one and spent ~5min writing each email, we'd be spending 30-60min on a typical day sending people feedback. This is why we tell people to only expect feedback after any interview stage. I expect this picture is similar for most startups.
 
 ## Recruiters love this - one weird hack to bypass all of this
 
