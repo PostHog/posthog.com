@@ -48,11 +48,11 @@ This stuff is subjective, but generally these are the things that can increase t
 
 ### Write a short and _obviously_ personalized cover letter
 
-- A few sentences about why you are interested in this role specifically is fine.
-- You don't need 5 paragraphs that are just your resumé slightly reworded – it's just more text we will skim over. 5-10 sentences is fine. 
+- 5-10 sentences about why you are interested in this role specifically is fine.
+- You don't need multiple paragraphs that are just your resumé slightly reworded – it's just more text we will skim over. 
 - Our ATS will wreck your formatting beyond line breaks, so keep it simple.
 - Writing 'hi I'm X' is a waste of words (we know who you are!)
-- Match the tone of the company – e.g. we are informal, so please no 'Dear Sir/Madam'.
+- Match the tone of the company – e.g. we are informal, so please no 'Dear Sir/Madam'. 
 - If you can figure out what the company cares about, or who is in it, talk about how you think you could help them achieve their goals and why.
 - Write _something_ – if it's too much hassle, that's ok, you're probably not that interested!
 - No ChatGPT, they're really obvious.
