@@ -70,7 +70,7 @@ But, here's the thing... we say no to a lot of candidates who actually meet the 
 
 We find ~5% of candidates ask for feedback. If we replied to each one and spent ~5min writing each email, we'd be spending 30-60min on a typical day sending people feedback. This is why we tell people to only expect feedback after any interview stage. I expect this picture is similar for most startups.
 
-## Recruiters love this - one weird hack to bypass all of this
+## Recruiters love this one, weird hack to bypass all of this
 
 Get a proper, warm referral. Annoying, right? But it works. 
 
