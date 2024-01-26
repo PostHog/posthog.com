@@ -72,9 +72,11 @@ We find ~5% of candidates ask for feedback. If we replied to each one and spent 
 
 ## Recruiters love this - one weird hack to bypass all of this
 
-Get a proper, warm referral. Annoying, right? But it works. Of the 12 people who got an interview for our recent marketing role, 4 were enthusiastic referrals from an existing member of the PostHog team. We trust our existing team's judgement incredibly highly - they already met the bar to join our team _and_ they help us pre-filter applicants. 
+Get a proper, warm referral. Annoying, right? But it works. 
 
-This doesn't mean "randomly hassle X who works at PostHog for an intro to Y" - work hard wherever you are to leave a good impression on everyone you talk to at the company. We do talk to each other!
+Of the 12 people who got an interview for our recent marketing role, four were enthusiastic referrals from an existing member of the PostHog team. We trust our existing team's judgement. They already met the bar to join our team _and_ they help us pre-filter applicants. 
+
+This doesn't mean "randomly hassle X who works at PostHog for an intro to Y" – work hard wherever you are to leave a good impression on everyone you talk to at the company. We do talk to each other!
 
 ## Moar reading
 
