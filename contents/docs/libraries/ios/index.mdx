@@ -36,31 +36,31 @@ This library uses an internal queue to make calls fast and non-blocking. It also
 
 ### Setting user properties via an event
 
-To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
 
-#### $set
+#### userProperties
 
 **Example**
 
 ```swift
-PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++", "$set": ["user_property_name": "your_value"] ])
+PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userProperties: ["user_property_name": "your_value"])
 ```
 
 **Usage**
 
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
-#### $set_once
+#### userPropertiesSetOnce
 
 **Example**
 
 ```swift
-PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++", "$set_once": ["user_property_name": "your_value"] ])
+PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userPropertiesSetOnce: ["user_property_name": "your_value"] )
 ```
 
 **Usage**
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+`userPropertiesSetOnce` works just like `userProperties`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ## Flush
 
