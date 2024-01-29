@@ -202,6 +202,10 @@ const languageMap: LanguageMap = {
         language: 'objectivec',
         label: 'iOS',
     },
+    ios_swift: {
+        language: 'swift',
+        label: 'iOS',
+    },
     'react-native': {
         language: 'jsx',
         label: 'React Native',

@@ -10,8 +10,8 @@ You can do that like so:
 posthog.reset()
 ```
 
-```ios
-posthog.reset()
+```ios_swift
+PostHogSDK.shared.reset()
 ```
 
 ```android_kotlin
@@ -28,11 +28,5 @@ If you _also_ want to reset the `device_id` so that the device will be considere
 posthog.reset(true)
 ```
 
-```ios
-posthog.reset(true)
-```
-
-```android_kotlin
-PostHog.reset()
-```
+Android and iOS don't store the `device_id` by default.
 </MultiLanguage>

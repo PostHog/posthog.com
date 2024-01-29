@@ -42,12 +42,8 @@ To set [properties](/docs/data/user-properties) on your users via an event, you 
 
 **Example**
 
-```objectivec
-[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"user_property_name": "your_value" } }];
-```
-
 ```swift
-posthog.capture("signed_up", properties: ["plan": "Pro++", "$set": ["user_property_name": "your_value"] ])
+PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++", "$set": ["user_property_name": "your_value"] ])
 ```
 
 **Usage**
@@ -58,12 +54,8 @@ When capturing an event, you can pass a property called `$set` as an event prope
 
 **Example**
 
-```objectivec
-[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"user_property_name": "your_value" } }];
-```
-
 ```swift
-posthog.capture("signed_up", properties: ["plan": "Pro++", "$set_once": ["user_property_name": "your_value"] ])
+PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++", "$set_once": ["user_property_name": "your_value"] ])
 ```
 
 **Usage**
@@ -75,32 +67,23 @@ posthog.capture("signed_up", properties: ["plan": "Pro++", "$set_once": ["user_p
 You can set the number of events in the configuration that should queue before flushing.
 Setting this to `1` will send events immediately and will use more battery. This is set to `20` by default.
 
-```objectivec
-configuration.flushAt = 1;
+```swift
+configuration.flushAt = 1
 ```
 
 You can also manually flush the queue:
 
-```objectivec
-[[PHGPostHog sharedPostHog] capture:@"logged_out"];
-[[PHGPostHog sharedPostHog] flush]
-```
-
 ```swift
-posthog.capture("logged_out")
-posthog.flush()
+PostHogSDK.shared.capture("logged_out")
+PostHogSDK.shared.flush()
 ```
 
 ## Reset
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
-```objectivec
-[[PHGPostHog sharedPostHog] reset]
-```
-
 ```swift
-posthog.reset()
+PostHogSDK.shared.reset()
 ```
 
 ## Group analytics
@@ -111,22 +94,14 @@ Group analytics allows you to associate the events for that person's session wit
 
 -   Associate the events for this session with a group
 
-```objectivec
-[[PHGPostHog sharedPostHog] group:@"company" groupKey:@"company_id_in_your_db"];
-```
-
 ```swift
-posthog.group( "company", groupKey: "company_id_in_your_db")
+PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
-```objectivec
-[[PHGPostHog sharedPostHog] group:@"company" groupKey:@"company_id_in_your_db" properties:@{ @"name": @"Awesome Inc." }];
-```
-
 ```swift
-posthog.group( "company", groupKey: "company_id_in_your_db", properties: [
+PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db", groupProperties: [
     "name": "ACME Corp"
 ])
 ```
@@ -147,14 +122,8 @@ import IOSFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/fe
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
-```objectivec
-if ([[PHGPosthog sharedPostHog] getFeatureFlag:@"experiment-feature-flag-key"] == @"variant-name") {
-    // do something
-}
-```
-
 ```swift
-if (posthog.getFeatureFlag("experiment-feature-flag-key") as? String == "variant-name") {
+if (PostHogSDK.shared.getFeatureFlag("experiment-feature-flag-key") as? String == "variant-name") {
     // do something
 }
 ```
@@ -171,16 +140,7 @@ Hence **starting with posthog-ios version 1.2.0** we have removed all references
 
 The `configuration` element contains several other settings you can toggle:
 
-```objectivec
-/**
- * Whether the posthog client should use location services.
- * If `YES` and the host app hasn't asked for permission to use location services then the user will be
- * presented with an alert view asking to do so. `NO` by default. If `YES`, please make sure to add a
- * description for `NSLocationAlwaysUsageDescription` in your `Info.plist` explaining why your app is
- * accessing Location APIs.
- */
-configuration.shouldUseLocationServices = NO;
-
+```swift
 /**
  * The number of queued events that the posthog client should flush at. Setting this to `1` will not queue
  * any events and will use more battery. `20` by default.
@@ -193,7 +153,7 @@ configuration.flushAt = 20;
  * A value smaller than 10 seconds will seriously degrade overall performance.
  * 30 seconds by default.
  */
-configuration.flushInterval = 30;
+configuration.flushIntervalSeconds = 30;
 
 /**
  * The maximum number of items to queue before starting to drop old ones. This should be a value greater
@@ -205,14 +165,7 @@ configuration.maxQueueSize = 1000;
  * Whether the posthog client should automatically make a capture call for application lifecycle events,
  * such as "Application Installed", "Application Updated" and "Application Opened".
  */
-configuration.captureApplicationLifecycleEvents = NO;
-
-/**
- * Whether the posthog client should record bluetooth information. If `YES`, please make sure to add a
- * description for `NSBluetoothPeripheralUsageDescription` in your `Info.plist` explaining explaining why
- * your app is accessing Bluetooth APIs. `NO` by default.
- */
-configuration.shouldUseBluetooth = NO;
+configuration.captureApplicationLifecycleEvents = true;
 
 /**
  * Whether the posthog client should automatically make a screen call when a view controller is added to
@@ -220,33 +173,5 @@ configuration.shouldUseBluetooth = NO;
  * the posthog client as early as possible (before any screens are displayed), ideally during the
  * Application delegate's applicationDidFinishLaunching method.
  */
-configuration.recordScreenViews = NO;
-
-/**
- * Whether the posthog client should automatically capture in-app purchases from the App Store.
- */
-configuration.captureInAppPurchases = NO;
-
-/**
- * Whether the posthog client should automatically capture push notifications.
- */
-configuration.capturePushNotifications = NO;
-
-/**
- * Whether the posthog client should automatically capture deep links. You'll still need to call the
- * continueUserActivity and openURL methods on the posthog client.
- */
-configuration.captureDeepLinks = NO;
-
-/**
- * Whether the posthog client should include the `$device_id` property when sending events.
- * When enabled, `UIDevice`'s `identifierForVendor` property is used. Changing the value of
- * of this property after initializing the client will have no effect.
- * The default value is `YES`.
- */
-configuration.shouldSendDeviceID = YES;
+configuration.captureScreenViews = true;
 ```
-
-## Thank you
-
-This library is largely based on the `analytics-ios` package.
