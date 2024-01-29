@@ -21,14 +21,8 @@ First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-
 npm create astro@latest
 ```
 
-When prompted in the command line, name your app (we chose `astro-ab-test`), start your new project `Empty`, install dependencies, choose `No` for TypeScript, and `No` for git repository.
+When prompted in the command line, name your new project directory (we chose `astro-ab-test`), start your new project `Empty`, choose `No` for TypeScript, install dependencies, and `No` for git repository.
 
-Once created, go into your newly created `astro-ab-test` folder and install the packages:
-
-```bash
-cd astro-ab-test
-npm install
-```
 
 Next, replace the code in `src/pages/index.astro` with a simple heading and button:
 
@@ -59,7 +53,6 @@ Run `npm run dev` and navigate to http://localhost:4321 to see your app in actio
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-You'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
 Once done, go back to your Astro project and create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file
 
@@ -82,12 +75,6 @@ In this file, add your `Web snippet` which you can find in [your project setting
     '<ph_project_api_key>',
     {
       api_host:'<ph_instance_address>',
-      loaded: function(posthog) {
-        const distinctId = document.querySelector('.did').innerHTML;
-        if (posthog.get_distinct_id() && posthog.get_distinct_id() !== distinctId) {
-          posthog.identify(distinctId);
-        }
-      }
     }
   )
 </script>
@@ -209,7 +196,7 @@ When it comes to implementing our experiment code, there are two options:
 1. Client-side rendering
 2. Server-side rendering
 
-We'll show you how to implement both options.
+We'll show you how to implement both.
 
 ### Client-side rendering
 
@@ -253,7 +240,7 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 ```
 
-Now if you refresh your app, you should see the button text updated to either `Control variant` or `Test variant`. 
+Now if you refresh your app, you should see the button text updated to either `Control variant` or `Test variant`.  Users are automatically split between the two, PostHog continues to track button clicks, and you can view the results of the A/B test in PostHog.
 
 ### Server-side rendering
 
@@ -372,7 +359,6 @@ export default defineConfig({
   output: "server",
 });
 ```
-
 
 ## Further reading
 
