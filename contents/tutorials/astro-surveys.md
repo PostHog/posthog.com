@@ -490,14 +490,14 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 				function toggleSurveyDisplay(show) {
 				  const surveyElement = document.querySelector('.survey');
 				  if (surveyElement) {
-				    surveyElement.style.display = show ? 'block' : 'none';
+						surveyElement.style.display = show ? 'block' : 'none';
 
 						if (show) {
-							window.posthog.capture("survey seen", {
-              	$survey_id: surveyID // required
-            	})
+						  window.posthog.capture("survey seen", {
+						    $survey_id: surveyID // required
+						  })
 						}
-				  }
+					}
 				}
 
 				function handleDismiss() {
@@ -568,8 +568,8 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 
 						if (show) {
 							window.posthog.capture("survey seen", {
-              	$survey_id: surveyID // required
-            	})
+							  $survey_id: surveyID // required
+							})
 						}
 				  }
 				}
