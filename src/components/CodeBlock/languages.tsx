@@ -31,6 +31,7 @@ type LanguageMap = {
             | 'groovy'
             | 'vue'
             | 'svelte'
+            | 'astro'
         label: React.ReactNode
     }
 }
@@ -217,6 +218,10 @@ const languageMap: LanguageMap = {
     svelte: {
         language: 'html',
         label: 'Svelte',
+    },
+    astro: {
+        language: 'javascript',
+        label: 'Astro',
     },
 }
 

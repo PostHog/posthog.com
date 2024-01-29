@@ -110,7 +110,7 @@ With this set up, refresh your app and click the button a few times to see the e
   classes="rounded"
 />
 
-## 3. Create an A/B test in PostHog
+## 4. Create an A/B test in PostHog
 
 If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
@@ -130,7 +130,7 @@ Click "Save as draft" and then click "Launch".
   classes="rounded"
 />
 
-## 4. Implement the A/B test code
+## 5. Implement the A/B test code
 
 When it comes to implementing our experiment code, there are two options:
 
