@@ -145,7 +145,7 @@ The `configuration` element contains several other settings you can toggle:
  * The number of queued events that the posthog client should flush at. Setting this to `1` will not queue
  * any events and will use more battery. `20` by default.
  */
-configuration.flushAt = 20;
+configuration.flushAt = 20
 
 /**
  * The amount of time to wait before each tick of the flush timer.
@@ -153,19 +153,19 @@ configuration.flushAt = 20;
  * A value smaller than 10 seconds will seriously degrade overall performance.
  * 30 seconds by default.
  */
-configuration.flushIntervalSeconds = 30;
+configuration.flushIntervalSeconds = 30
 
 /**
  * The maximum number of items to queue before starting to drop old ones. This should be a value greater
  * than zero, the behaviour is undefined otherwise. `1000` by default.
  */
-configuration.maxQueueSize = 1000;
+configuration.maxQueueSize = 1000
 
 /**
  * Whether the posthog client should automatically make a capture call for application lifecycle events,
  * such as "Application Installed", "Application Updated" and "Application Opened".
  */
-configuration.captureApplicationLifecycleEvents = true;
+configuration.captureApplicationLifecycleEvents = true
 
 /**
  * Whether the posthog client should automatically make a screen call when a view controller is added to
@@ -173,5 +173,5 @@ configuration.captureApplicationLifecycleEvents = true;
  * the posthog client as early as possible (before any screens are displayed), ideally during the
  * Application delegate's applicationDidFinishLaunching method.
  */
-configuration.captureScreenViews = true;
+configuration.captureScreenViews = true
 ```
