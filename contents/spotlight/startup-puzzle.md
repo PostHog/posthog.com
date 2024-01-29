@@ -33,7 +33,7 @@ Armed with this qualitative and quantitative data, you can start to establish yo
 
 For Puzzle, this was critical for differentiating them from other products in the market. Every company needs an accounting platform, but not all founders feel the same about this need — and by focusing on users’ unaddressed needs Puzzle can identify a strong, unique position for the product.
 
-“Founders don’t sign up to Puzzle because they just can’t wait to do their accounting,” says Scott. “They sign up because they know they need to be tax compliant and to be ready for investor reporting...We learned that they care about efficiency, accuracy and, as they generate more revenue, delaying hires in the finance department.”
+“Founders don’t sign up to Puzzle because they just can’t wait to do their accounting,” says Scott. “They sign up because they know they need to be tax compliant and to be ready for investor reporting... We learned that they care about efficiency, accuracy and, as they generate more revenue, delaying hires in the finance department.”
 
 All of this is reflected in Puzzle’s online messaging, with language which directly addresses founders ahead of accountants and emphasizes how the product integrates simply with other tools which founders already use. 
 
