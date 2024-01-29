@@ -609,7 +609,6 @@
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
         { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
-        { "source": "/tutorials/feature-flags", "destination": "/manual/feature-flags" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
         { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },
         { "source": "/blog/categories/guides", "destination": "/blog/tags/guides" },
