@@ -47,7 +47,7 @@ Next, you can delve into the quantitative data by looking at how users can be se
 
 Each plan also reflects the pain points a user would deal with at that stage too and addresses it with a product feature. Monthly compliance checklists in the free plan, for example, help formation-stage founders get started quickly — but give way in the scale-up plan to AI automation and new processes.
 
-> **Putting it into practice:** If you aren’t using delineated pricing plans then it can still be helpful to think of your broader [pricing principles](/handbook/engineering/feature-pricing). Ask yourself: how do these principles work for your different user segments? 
+> **Putting it into practice:** If you aren’t using tiered pricing plans then it can still be helpful to think of your broader [pricing principles](/handbook/engineering/feature-pricing). Ask yourself: how do these principles work for your different user segments? 
 
 ## 4. Reinforce your ICP with internal teams
 
