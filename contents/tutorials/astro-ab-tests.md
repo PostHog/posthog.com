@@ -53,7 +53,6 @@ Run `npm run dev` and navigate to http://localhost:4321 to see your app in actio
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-
 Once done, go back to your Astro project and create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file
 
 ```bash
@@ -363,4 +362,5 @@ export default defineConfig({
 ## Further reading
 
 - [How to set up Astro analytics, feature flags, and more](/tutorials/astro-analytics)
+- [How to set up surveys in Astro](/tutorials/astro-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)

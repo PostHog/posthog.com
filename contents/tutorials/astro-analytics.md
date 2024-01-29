@@ -383,4 +383,4 @@ Now when you refresh your page, your flag won’t flicker because the content is
 
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to set up A/B tests in Astro](/tutorials/astro-ab-tests)
-- [How to set up React A/B testing](/tutorials/react-ab-testing)
+- [How to set up surveys in Astro](/tutorials/astro-surveys)
