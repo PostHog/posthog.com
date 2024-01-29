@@ -51,7 +51,7 @@ Each plan also reflects the pain points a user would deal with at that stage too
 
 ## 4. Reinforce your ICP with internal teams
 
-As you grow it’s important not to drift from your ICP or to let teams’ understanding of it become corrupted. You need to constantly remind everyone in your company who you are building for and how your product meets their needs — otherwise you risk diluting your offering. 
+As you grow, it’s important not to drift from your ICP or to let teams’ understanding of it become corrupted. You need to constantly remind everyone in your company who you are building for and how your product meets their needs — otherwise you risk diluting your offering. 
 
 “When I joined Puzzle I was very happy to hear people talking about our ICP,” says Scott. “Then I saw there was some confusion and some of what was said was incorrect. Some people thought our ICP is a company, while others thought it was a person, and there were some different ideas floating around.”
 
