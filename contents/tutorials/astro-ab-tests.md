@@ -128,9 +128,9 @@ Once you’ve done this, reload your app and click the button a few times. You s
 
 ## 3. Capture a custom event
 
-With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
+The first part of setting up our A/B test in PostHog is setting up the goal metric. We'll use the number of clicks on the button as our goal.
 
-To start, create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file
+To measure this, we [capture a custom event](/docs/product-analytics/capture-events) `home_button_clicked` when the button is clicked. To do this, update the code in `posthog.astro` to add a `<script>` and call `posthog.capture()` when the button is clicked.
 
 ```astro file=index.astro
 ---
