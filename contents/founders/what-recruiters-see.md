@@ -18,7 +18,7 @@ As I sifted through these, I realized an obvious thing - there is a _much_ bigge
 
 - You may spend 30min+ researching a company, crafting a cover letter and applying. At these numbers, I was able to spend **less than 1min** reviewing each application. And this is just an average – some applications took me 5s(!) to realize they were a no, so I could spend 5min+ reading good ones carefully.
 
-Professional recruiters (that are not me) don't just spend their time reviewing applications. They're also conducting and scheduling interviews, collating feedback, negotiating offers, onboarding new hires, creating headcount plans, putting up job ads, etc.
+Professional recruiters (that are not me) don't _just_ spend their time reviewing applications. They're also conducting and scheduling interviews, collating feedback, negotiating offers, onboarding new hires, creating headcount plans, putting up job ads, etc. 
 
 By sharing a bit of insight into how the _application_ bit of the hiring process actually works at a startup like PostHog, hopefully I can help increase your chances of landing a first round interview at least! I am going to say a bunch of things that will probably irritate people who are frustrated with the job application process, but my goal is to help you actually win here... 
 
@@ -40,11 +40,11 @@ If you're applying for a job at a startup, chances are they are using an applica
 
 ![Ashby screenshot](../images/ashby-screenshot.png)
 
-You'll see that the UI is designed to maximize the speed with which a recruiter can process applications. It is not designed to make you look good. Most applicants do not consider about information density, so you end up with a weird combo of really padded CVs with lots of white space, and cover letter that either a) don't exist, or b) are longer than this article.
+You'll see that the UI is designed to maximize the speed with which a recruiter can process applications. It is not designed to make you look good. Most applicants do not think about information density, so you end up with a weird combo of really padded CVs with lots of white space, and cover letter that either a) don't exist, or b) are longer than this article.
 
 ## How do I maximize my chances of getting through?
 
-This stuff is subjective, but generally these are the things that can increase the chances of a good application making it through:
+This stuff is totally subjective, but generally these are the things I think increase the chances of a good application making it through:
 
 ### Write a short and _obviously_ personalized cover letter
 
@@ -67,7 +67,7 @@ If you don't believe a cover letter should be necessary to land an interview, th
 - Don't have your CV end in 2021 or whenever, we don't have time to contact you to query it. We don't care if you had a career break, just put that.
 - Emailing the recruiter/hiring manager directly causes more stress because we then have to add you to our ATS – please apply directly, we are dying here.
 
-Again, information density is key here - make it as easy as possible for the recruiter to figure out 'can this person do the job I'm hiring for'.
+Again, information density is key here - make it as easy as possible for the recruiter to figure out 'can this person do the job I'm hiring for'. Don't list every language you've ever used then make me do the work to figure out which one you are expert in vs. the one you are just ok at. 
 
 ## I did all this and it didn't work – where's my feedback, you assholes?
 
@@ -89,5 +89,5 @@ This doesn't mean "randomly hassle X who works at PostHog for an intro to Y" –
 
 - Got the interview? [Here are the questions](/founders/what-to-ask-in-interviews) you should be asking. 
 - [Literally everything](/newsletter/hiring-at-posthog-lessons) we've learned about hiring at PostHog
-- How do you make your [first ops hire](/founders/first-ops-hire)?
 - A bunch of [myths and truths](/founders/early-stage-startup-hiring-strategy) I've learned about startup hiring in the last 10 years
+- How do you make your [first ops hire](/founders/first-ops-hire)?
