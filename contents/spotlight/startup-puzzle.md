@@ -1,5 +1,5 @@
 ---
-title: "How Puzzle defined its ICP and built a product around it"
+title: "How Puzzle defined a buyer persona and built around it"
 date: 2024-02-01
 author: ["joe-martin"]
 showTitle: true
@@ -11,15 +11,15 @@ featuredImageType: full
 category: Startups
 ---
 
-> Each month, we speak to a team enrolled in PostHog for Startups about the way they work. This time, we spoke to [Puzzle](https://puzzle.io/), an accountancy platform for early-stage startups, about how they define and use their Ideal Customer Persona (ICP). 
+> Each month, we speak to a team enrolled in PostHog for Startups about the way they work. This time, we spoke to [Puzzle](https://puzzle.io/), an accountancy platform for early-stage startups, about how they define and use their buyer persona. 
 
-Building an Ideal Customer Persona (sometimes known as an Ideal Buyer Profile) is one of the most challenging but essential steps for growing your product. Not only will it help you make product and pricing decisions, it will also clarify your value proposition and dictate how you judge successes and failures.
+Building a persona for your ideal or target customers is one of the most challenging but essential steps for growing your product. Not only will it help you make product and pricing decisions, it will also clarify your value proposition and dictate how you judge successes and failures.
 
-We’ve previously documented [how we defined our ICP](/founders/creating-ideal-customer-profile), but not all companies approach the task in the same way. So, we spoke to the team at [Puzzle](https://puzzle.io/) about how they defined their ICP, what impact the definition had, and what recommendations they had for others...
+We’ve previously documented [how we defined our personas](/founders/creating-ideal-customer-profile), but not all companies approach the task in the same way. So, we spoke to the team at [Puzzle](https://puzzle.io/) about how they defined their persona, what impact the definition had, and what recommendations they had for others...
 
 ## 1. Collect both qualitative and quantitative data
 
-An ICP is, fundamentally, a snapshot of your ideal customer based on a broad understanding of many customers. In order to define your ICP you therefore need to start by speaking to your existing users directly and building an intuitive understanding of their needs.
+A persona is, fundamentally, a snapshot of your ideal customer based on a broad understanding of many customers. In order to define your persona you therefore need to start by speaking to your existing users directly and building an intuitive understanding of their needs.
 
 Once you’ve done that, says Scott, you need to pair that intuitive understanding with quantitative data, so you can understand if these behaviors exist in isolation or at scale. 
 
@@ -49,25 +49,25 @@ Each plan also reflects the pain points a user would deal with at that stage too
 
 > **Putting it into practice:** If you aren’t using tiered pricing plans then it can still be helpful to think of your broader [pricing principles](/handbook/engineering/feature-pricing). Ask yourself: how do these principles work for your different user segments? 
 
-## 4. Reinforce your ICP with internal teams
+## 4. Reinforce your persona to internal teams
 
-As you grow, it’s important not to drift from your ICP or to let teams’ understanding of it become corrupted. You need to constantly remind everyone in your company who you are building for and how your product meets their needs — otherwise you risk diluting your offering. 
+As you grow, it’s important not to drift from targeting your persona or to let teams’ understanding of it become corrupted. You need to constantly remind everyone in your company who you are building for and how your product meets their needs — otherwise you risk diluting your offering. 
 
-“When I joined Puzzle I was very happy to hear people talking about our ICP,” says Scott. “Then I saw there was some confusion and some of what was said was incorrect. Some people thought our ICP is a company, while others thought it was a person, and there were some different ideas floating around.”
+“When I joined Puzzle I was very happy to hear people talking about our persona,” says Scott. “Then I saw there was some confusion and some of what was said was incorrect. Some people thought our persona was a company, while others thought it was a person, and there were some different ideas floating around.”
 
-At PostHog, we’ve solved this issue with [a public handbook](/handbook) which documents [our ICP](/handbook/who-we-are-building-for) — but Puzzle took a different approach.  
+At PostHog, we’ve solved this issue with [a public handbook](/handbook) which documents [who we are building for](/handbook/who-we-are-building-for) — but Puzzle took a different approach.  
 
-“We have these all-hands meetings where everybody has to put their hand up and swear that our ICP is a founder and not an accountant,” says Scott. 
+“We have these all-hands meetings where everybody has to put their hand up and swear that our persona is a founder and not an accountant,” says Scott. 
 
 > **Putting it into practice:** There are lots of ways to disseminate information internally, from intranets to incorporating it into employee onboarding. Whichever route you take though, the key is consistency. 
 
 ## 5. Once you start, don’t stop
 
-Once you’ve established your ICP you must constantly maintain it. You need to always be speaking to users, working to understand their concerns, and analyzing the data behind their usage. In doing so you can find new segments to target, new needs to address, and new product improvements to make.
+Once you’ve created your buyer persona you must constantly maintain it. You need to always be speaking to users, working to understand their concerns, and analyzing the data behind their usage. In doing so you can find new segments to target, new needs to address, and new product improvements to make.
 
-“We started looking at our biggest user drop-offs and found many ICP users were dropping off when they had to connect their bank,” says Scott. “We reached out to these users directly and talked to them. We had to try and understand their concerns.”
+“We started looking at our biggest user drop-offs and found many users that fit our persona were dropping off when they had to connect their bank,” says Scott. “We reached out to these users directly and talked to them. We had to try and understand their concerns.”
 
-Scott’s team learned that customers were becoming frustrated by delays during this connection step. As a result they improved the content on the page, added new loading animations, and surfacing data more quickly — an ICP-informed change which had an immediate impact on overall activation. 
+Scott’s team learned that customers were becoming frustrated by delays during this connection step. As a result they improved the content on the page, added new loading animations, and surfacing data more quickly — a persona-informed change which had an immediate impact on overall activation. 
 
 > **Putting it into practice:** Data gathering and user interviews should be on-going processes for many teams. Otherwise how else can you know if [your new interface design](/blog/introducing-notebooks) is a good idea, or if your upcoming changes will be well received?
 
