@@ -1,20 +1,10 @@
-PostHog is available through [CocoaPods](http://cocoapods.org) and [Carthage](https://github.com/Carthage/Carthage) or you can add it as a Swift Package Manager based dependency.
+PostHog is available through [CocoaPods](http://cocoapods.org) or you can add it as a Swift Package Manager based dependency.
 
 ### CocoaPods
 
 ```ruby file=Podfile
-pod "PostHog", "~> 2.0.0"
+pod "PostHog", "~> 3.0.0"
 ```
-
-### Carthage
-
-```ruby file=Cartfile
-github "posthog/posthog-ios"
-```
-
-<blockquote class="warning-note">
-    ℹ️  Run "pod install" within the "$Your_Project/Carthage/Checkouts/posthog-ios" folder after "carthage update".
-</blockquote>
 
 ### Swift Package Manager
 
@@ -24,7 +14,7 @@ For a Swift Package Manager based project, add PostHog as a dependency in your "
 
 ```swift file=Package.swift
 dependencies: [
-  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "2.0.0")
+  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "3.0.0")
 ],
 ```
 
@@ -38,35 +28,21 @@ and then as a dependency for the Package target utilizing PostHog:
 
 ### Configuration
 
-#### With Objective-C
-
-```objectivec
-#import <PostHog/PHGPostHog.h>
-#import <PostHog/PHGPostHogConfiguration.h>
-
-// cloud-hosted
-PHGPostHogConfiguration *configuration = [PHGPostHogConfiguration configurationWithApiKey:@"<ph_project_api_key>"];
-
-// self-hosted
-PHGPostHogConfiguration *configuration = [PHGPostHogConfiguration configurationWithApiKey:@"<ph_project_api_key>" 
-                                                                          host:@"https://your-posthog-domain.com"];
-
-configuration.captureApplicationLifecycleEvents = YES; // Record certain application events automatically!
-configuration.recordScreenViews = YES; // Record screen views automatically!
-
-[PHGPostHog setupWithConfiguration:configuration];
-```
-
-#### With Swift
-
 ```swift
+import Foundation
 import PostHog
+import UIKit
 
-let configuration = PHGPostHogConfiguration(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>") // TIP: `host` is optional if you use app.posthog.com
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        let POSTHOG_HOST = "<ph_instance_address>"
+        
+        // TIP: `host` is optional if you use https://app.posthog.com
+        let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+        PostHogSDK.shared.setup(config)
 
-configuration.captureApplicationLifecycleEvents = true; // Record certain application events automatically!
-configuration.recordScreenViews = true; // Record screen views automatically!
-
-PHGPostHog.setup(with: configuration)
-let posthog = PHGPostHog.shared()
+        return true
+    }
+}
 ```
