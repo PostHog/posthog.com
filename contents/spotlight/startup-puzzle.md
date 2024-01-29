@@ -19,7 +19,7 @@ We’ve previously documented [how we defined our ICP](/founders/creating-ideal-
 
 ## 1. Collect both qualitative and quantitative data
 
-An ICP is, fundamentally, a snapshot of your ideal customer based on a gestalt of many customers. In order to define your ICP you therefore need to start by speaking to your existing users directly and building an intuitive understanding of their needs.
+An ICP is, fundamentally, a snapshot of your ideal customer based on a broad understanding of many customers. In order to define your ICP you therefore need to start by speaking to your existing users directly and building an intuitive understanding of their needs.
 
 Once you’ve done that, says Scott, you need to pair that intuitive understanding with quantitative data, so you can understand if these behaviors exist in isolation or at scale. 
 
