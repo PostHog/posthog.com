@@ -360,19 +360,8 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 					});
 				});
 
-				function toggleSurveyDisplay(show) {
-					// your existing code
-				}
-
-				function handleDismiss() {
-					// your existing code
-				}
-
-				function handleSubmit(event) {
-					// your existing code
-				}
-
 				// your existing code
+				
 			</script>
 
 		</body>
