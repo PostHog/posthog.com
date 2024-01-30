@@ -7,6 +7,7 @@ import { Nav } from './Nav'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
 import { CollectionPageContext } from './types'
+import SEO from 'components/seo'
 
 type CollectionProps = {
     pageContext: CollectionPageContext
@@ -35,6 +36,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 parent={communityMenu}
                 activeInternalMenu={communityMenu.children[5]}
             >
+                <SEO title="Merch - PostHog" image="/images/merch.png" />
                 <Nav currentCollectionHandle={pageContext.handle} items={pageContext.merchNav} />
                 <div className="w-full px-4 mx-auto max-w-7xl">
                     <ProductGrid products={transformedProducts} />
