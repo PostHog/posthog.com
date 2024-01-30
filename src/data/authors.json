@@ -2,7 +2,7 @@
     {
         "handle": "james-hawkins",
         "name": "James Hawkins",
-        "role": "Co-founder/CEO of PostHog",
+        "role": "Co-founder/CEO",
         "image": "../../static/images/authors/james-hawkins-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/james406",
@@ -232,7 +232,7 @@
     {
         "handle": "tim-glaser",
         "name": "Tim Glaser",
-        "role": "Co-founder/CTO of PostHog",
+        "role": "Co-founder/CTO",
         "image": "../../static/images/authors/tim-glaser.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/timgl/",
