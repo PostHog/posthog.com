@@ -1,5 +1,5 @@
 ---
-title: How to set up Webflow analytics and session recordings with PostHog
+title: How to set up Webflow analytics and session recordings
 sidebar: Docs
 showTitle: true
 author: ["ian-vanagas"]
