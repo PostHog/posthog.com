@@ -1,6 +1,6 @@
 ---
 title: How to set up surveys in Astro
-date: 2024-01-29
+date: 2024-01-30
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
@@ -87,8 +87,7 @@ In this file, add your PostHog `Web snippet`. You can find this in [your project
 The next step is to a create a [Layout](https://docs.astro.build/en/core-concepts/layouts/) where we will use `posthog.astro`. Create a new folder `layouts` in `src` and then a new file `Layout.astro`:
 
 ```bash
-cd .. && cd .. # move back to your base directory if you're still in src/components/posthog.astro
-cd ./src
+cd ../../src
 mkdir layouts
 cd ./layouts
 touch Layout.astro
@@ -188,8 +187,7 @@ To show you how to do this, we've created a sample survey UI for this tutorial. 
 First create a new file in your `components` directory called `CustomSurvey.astro`:
 
 ```bash
-cd .. # move back to your base directory if you're still in src/layouts
-cd ./components
+cd ../components
 touch CustomSurvey.astro
 ```
 
@@ -253,7 +251,7 @@ Paste the following code into `CustomSurvey.astro`
 
 Then, in `src/pages/index.astro`, import your new component and add the button event handlers in a `<script>` in the body:
 
-```typescript file=index.astro
+```astro file=index.astro
 ---
 import Layout from '../layouts/Layout.astro';
 import CustomSurvey from '../components/CustomSurvey.astro';
@@ -427,10 +425,6 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 				function handleSubmit(event) {
 					toggleSurveyDisplay(false);
 					localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
-					window.posthog.capture("survey sent", {
-						$survey_id: surveyID, // required
-						$survey_response: event.detail // required. Convert numbers to string
-					})
 				}
 
 				// your existing code
