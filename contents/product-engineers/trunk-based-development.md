@@ -68,21 +68,23 @@ The smaller branches of trunk-based development create more reviewable pull requ
 
 ## Why and how PostHog does trunk-based development
 
-PostHog does trunk-based development. The big reason why is to **minimize work-in-progress**. This is a [core philosophy of our development process](/handbook/engineering/development-process#sizing-tasks-and-reducing-wip) at PostHog and relates to all three of the benefits of the last section.
+Our main goal is to **minimize work-in-progress**. 
+
+This is a [core philosophy of our development process](/handbook/engineering/development-process#sizing-tasks-and-reducing-wip) at PostHog and relates to all the key benefits of trunk-based development.
 
 Implementing this philosophy (and trunk-based development) means:
 
-- Optimizing pull requests for quality of implementation *and* the speed of merge.
+1. Optimizing pull requests for quality of implementation *and* the speed of merge.
 
-- Keeping changes doable in one day, including code review and QA.
+2. Keeping changes doable in one day, including code review and QA.
 
-- If not, split them into smaller changes until they fit into one day.
+3. If not, split them into smaller changes until they fit into one day.
 
-- Responding to colleagues' review requests early in your day to help unblock them.
+4. Responding to colleagues' review requests early in your day to help unblock them.
 
-- Pushing code out early. PRs are better than issues, even if they are half-done. This enables more concrete feedback on the approach.
+5. Pushing code out early. PRs are better than issues, even if they are half-done. This enables more concrete feedback on the approach.
 
-- Merging whenever. Our testing, reviewing, and build processes should be good enough that we are confident doing this.
+6. Merging whenever. Our testing, reviewing, and build processes should be good enough that we are confident doing this.
 
 As proof of this, our median pull request age when merged is **just under 8 hours**. On an average day, we merge around 20 pull requests in our main repo.
 
@@ -90,7 +92,7 @@ All of this helps us get the benefits trunk-based development provides. It might
 
 ### 1. Test-driven development
 
-PostHog expects engineers to write tests for their code as they are working on it and before they merge it. They run these locally then add them to our test suite that runs on every PR.
+We expect engineers to write tests for their code as they are working on it and before they merge it. They run these locally then add them to our test suite that runs on every PR.
 
 ![Checks](../images/blog/trunk-based-development/checks.png)
 
@@ -98,13 +100,15 @@ You can look at [a pull request on our repo](https://github.com/PostHog/posthog/
 
 ### 2. Feature flags
 
-[Feature flags](/feature-flags) enable us to include code in the "trunk" but not release it to users. This [decouples deployment from release](/product-engineers/decouple-deployment-from-release). 
+[Feature flags](/feature-flags) enable us to include code in the "trunk" without immediately releasing it to users. This [decouples deployment from release](/product-engineers/decouple-deployment-from-release). 
 
-Once deployed, we can then test in production, dogfood, beta test, get feedback, and progressively roll out the feature. We currently have [67 feature flags](https://github.com/PostHog/posthog/blob/249d82043bcd70bb3e95a0553551246998d0d160/frontend/src/lib/constants.tsx#L125C1-L198C3) in various stages of release in our main PostHog repo.
+Once deployed, we can then test in production, dogfood, beta test, get feedback, and progressively roll out the feature. 
+
+We currently have [67 feature flags](https://github.com/PostHog/posthog/blob/249d82043bcd70bb3e95a0553551246998d0d160/frontend/src/lib/constants.tsx#L125C1-L198C3) in various stages of release in our main PostHog repo.
 
 ## How you can implement trunk-based development
 
-Implementing trunk-based development starts with a philosophy shift. Teams must encourage (or force) developers towards short-lived branches rather than long-lived ones. This means breaking up PRs into smaller changes, prioritizing reviews, and pushing code out earlier. 
+Implementing trunk-based development starts with a philosophy shift. Teams must encourage (or force) developers towards short-lived branches, rather than long-lived ones. This means breaking up PRs into smaller changes, prioritizing reviews, and pushing code out earlier. 
 
 Along with this shift, the right tools can help break a team's reliance on long-lived branches. These often happen for two reasons tools can help with:
 
