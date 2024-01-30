@@ -9,7 +9,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import EventsLight from '../images/tutorials/react-analytics/events-light.png'
 import EventsDark from '../images/tutorials/react-analytics/events-dark.png'
 
-[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Reactapp. To show you how to set up analytics, in this tutorial we create a basic React app, add PostHog, and use it to capture pageviews and custom events.
+[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your React app. To show you how to set up analytics, in this tutorial we create a basic React app, add PostHog, and use it to capture pageviews and custom events.
 
 ## Creating a React app
 
@@ -33,8 +33,6 @@ touch AboutPage.js
 In `HomePage.js`, add the following the code:
 
 ```js file=src/HomePage.js
-import React from 'react';
-
 function HomePage() {
   return <h1>Home Page</h1>;
 }
@@ -45,8 +43,6 @@ export default HomePage;
 In `AboutPage.js`, add the following the code:
 
 ```js file=src/AboutPage.js
-import React from 'react';
-
 function AboutPage() {
   return <h1>About Page</h1>;
 }
@@ -54,7 +50,7 @@ function AboutPage() {
 export default AboutPage;
 ```
 
-Next we set up the routing. First install React Router in your project:
+Next, we set up the routing. First, install React Router in your project:
 
 ```bash
 npm install react-router-dom
@@ -144,7 +140,7 @@ Once you’ve done this, reload your app and click the links a few times. You sh
 
 ## Capturing pageviews
 
-You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since React creates a single-page app, this only happens once, and the React router handles subsequent page changes.
+You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since React creates a single-page app, this only happens once and the React router handles subsequent page changes.
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
@@ -212,7 +208,6 @@ Beyond pageviews, there might be more events you want to capture. To do this, yo
 To showcase this, update the code in `HomePage.js` to include a button that uses PostHog to capture a `home_button_clicked` event:
 
 ```js file=HomePage.js
-import React from 'react';
 import { usePostHog } from 'posthog-js/react'
 
 function HomePage() {
