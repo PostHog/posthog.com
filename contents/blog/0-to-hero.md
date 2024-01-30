@@ -1,5 +1,5 @@
 ---
-date: 2024-01-25
+date: 2024-01-30
 title: "How to get your first 10, 50, 100, 1000 and 100,000 users"
 rootPage: /blog
 category: PostHog news
@@ -34,18 +34,20 @@ If you fast forward today, 900 companies a week now sign up to PostHog, from hob
 * If you want to go fast, go alone. If you want to go far, go together. You are going to have to handle a literally-endless series of problems. Find a friend! 
 * The ability to ship websites and products very fast. If you're doing software, you must be very, very good at shipping and marketing software quickly. Some people seem to be able to do this naturally, I wound up working for other software companies for a few years first.
 
-
-## Getting to 10 users - does anyone care
+## Getting to 10 users - does the product actually function
 
 This was the hardest part.
 
-* Pivots
+For every stage of a startup, the earlier you are, the higher the chance of failure. With this in mind, you must be totally geared around failing fast. Hence the prerequisites above.
 
+So, we set off doing this... We wound up pivoting (ie failing) five times before we landed on PostHog. We met the prerequisites!
 
-To test this, we went through these steps
-* get friends up and running first
-* see if people can get up and running by themselves
-* then do a bigger launch - hacker news
+For PostHog specifically, we wanted to quickly figure out if anyone cared.
+
+To test this, we had a plan, that was designed to take one month:
+1. we got friends up and running first
+1. see if people can get up and running by themselves
+1. then do a bigger launch - hacker news
 
 There were a lot of things we did to make this possible
 * open source (we started with Heroku one click deployment but later realized this was a mistake, I'd have had a cloud product to start with next time)
@@ -54,9 +56,22 @@ There were a lot of things we did to make this possible
 * build trust
 * pricing gets out the way
 
+To get our first 10 users, I asked my friends.
 
-## Getting to 50 users - can you get people you don't know, to use it
+To find your friends that might be relevant:
 
+* whoever springs to mind first
+* go through your whatsapp / texts
+* go through your linkedin, searching for people who are your first degree connections
+* go through your linkedin, looking for people who've ever worked at the same places you've worked
+
+You are unlikely to be self serve at this stage - if you are being very fast, you probably don't have the ability to create a new user without manually editing the database.
+
+## Getting to 50 users - can people self serve (if doing product led growth) and does anyone care
+
+Righty, so your app works - people can log in and use it.
+
+Now you need to figure out if someone who _doesn't know you_ cares enough to use it, and if they 
 
 ## Getting to 100 users - figure out what is driving people to use it
 
