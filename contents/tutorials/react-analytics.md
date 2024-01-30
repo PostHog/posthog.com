@@ -6,8 +6,8 @@ tags: ['product analytics']
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/react-surveys/events-light.png'
-import EventsDark from '../images/tutorials/react-surveys/events-dark.png'
+import EventsLight from '../images/tutorials/react-analytics/events-light.png'
+import EventsDark from '../images/tutorials/react-analytics/events-dark.png'
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Reactapp. To show you how to set up analytics, in this tutorial we create a basic React app, add PostHog, and use it to capture pageviews and custom events.
 
@@ -60,13 +60,13 @@ Next we set up the routing. First install React Router in your project:
 npm install react-router-dom
 ```
 
-Then, set up the router in your by replacing the code in `App.js` with the following:
+Then, set up the router by replacing the code in `App.js` with the following:
 
 ```js file=App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
-import AboutPage from './AboutPage';
+import AboutPage from './AboutPage'; 
 
 function App() {
   return (
@@ -78,19 +78,15 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/analytics">Analytics</Link>
+              <Link to="/about">About</Link>
             </li>
           </ul>
         </nav>
 
-        <Switch>
-          <Route path="/analytics">
-            <AboutPage />
-          </Route>
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
+        <Routes> 
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
       </div>
     </Router>
   );
@@ -113,9 +109,9 @@ First install `posthog-js`:
 npm install posthog-js
 ```
 
-Next, import PostHog into `src/index.js` and set up a client using your project API key and instance address. You can find these in [your project settings](https://app.posthog.com/project/settings). Then we wrap our app in the React `PostHogProvider` to access PostHog in any component.
+Next, import PostHog into `src/index.js` and set up a client using your project API key and instance address. You can find these in [your project settings](https://app.posthog.com/project/settings). Then we wrap our app with `PostHogProvider` to access PostHog in any component.
 
-```js
+```js file=src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -137,7 +133,7 @@ root.render(
 );
 ```
 
-Once you’ve done this, reload your app and click the buttons a few times. You should see events appearing in the [PostHog events explorer](https://us.posthog.com/events).
+Once you’ve done this, reload your app and click the links a few times. You should see events appearing in the [PostHog events explorer](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsLight} 
