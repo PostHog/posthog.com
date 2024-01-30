@@ -32,7 +32,8 @@ If you fast forward today, 900 companies a week now sign up to PostHog, from hob
 ## Prerequisites
 
 * If you want to go fast, go alone. If you want to go far, go together. You are going to have to handle a literally-endless series of problems. Find a friend! 
-* The ability to ship websites and products very fast. If you're doing software, you must be very, very good at shipping and marketing software quickly. Some people seem to be able to do this naturally, I wound up working for other software companies for a few years first.
+* The ability to ship and get users for new products very fast, from scratch. If you're doing software, you must be very, very good at shipping and marketing software quickly. Frankly, this took me working at a couple of other companies first to get the hang of, it came more quickly for my cofounder.
+* An [idea](https://www.ycombinator.com/library/8g-how-to-get-startup-ideas) of what to work on
 
 ## Getting to 10 users - does the product actually function
 
@@ -40,32 +41,33 @@ This was the hardest part.
 
 For every stage of a startup, the earlier you are, the higher the chance of failure. With this in mind, you must be totally geared around failing fast. Hence the prerequisites above.
 
-So, we set off doing this... We wound up pivoting (ie failing) five times before we landed on PostHog. We met the prerequisites!
+So, we set off doing this... We wound up [pivoting (ie failing) five times](pivot-to-posthog) before we landed on PostHog. We met the prerequisites!
 
 For PostHog specifically, we wanted to quickly figure out if anyone cared.
 
-To test this, we had a plan, that was designed to take one month:
+To test this, we had a plan, that was designed to take one month (so we wouldn't waste longer):
 1. we got friends up and running first
-1. see if people can get up and running by themselves
-1. then do a bigger launch - hacker news
+1. we checked people can get up and running by themselves and if other people would use it
+1. then do a bigger launch - hacker news, to see if our target audience really cared
 
-There were a lot of things we did to make this possible
-* open source (we started with Heroku one click deployment but later realized this was a mistake, I'd have had a cloud product to start with next time)
-  * we picked a permissive license - we didnd't want to stop enterprises adopting and felt we'd still be able to make money / why weren't worried about competitors
-* we had trust we wouldn't need to focus on revenue - but this doesn't apply universally
-* build trust
-* pricing gets out the way
+There were a lot of things we did that made getting through the above easier:
 
-To get our first 10 users, I asked my friends.
+On the product side, we decided to focus on open source adoption and not revenue. I researched multi billion dollar open source companies and couldn't find a single example where they monetized in the first five years. I did this by cold messaging founders asking for advice and from what I could gather online. This meant we didn't have to worry about building a payment flow, we'd have slightly lower user expectations, or how to convert people to paying us from an open source product. However, this wouldn't be good advice universally. We were going to compete in a very crowded market of tools - with multiple competitors doing around $100M in revenue. That meant we could be confident we'd find a way to monetize. Had we been building into a new market, with less validation from competitors, then charging money sooner would have been important. Our challenge was _standing out_ enough, and being developer focused / open source we felt was enough.
 
-To find your friends that might be relevant:
+We set the product up to be quick to deploy - we created a Heroku one click deployment. Later on, we realized this was a mistake - we wound up eventually focusing on cloud adoption for most users. If I started again, I'd have a cloud product too even if it took a week or two longer. Finally, we picked a permissive license (MIT) because we wanted to see if enterprises would use it, and we felt they'd have rules around using non-permissive open source licenses, so we wanted to get rid of any risk they wouldn't use it.
 
-* whoever springs to mind first
+On the marketing side, we knew it was important to build trust. The foundation of trust is transparency, so we built a public handbook (and it has been a joy to maintain and expand as we've gotten a lot bigger). We ran a Hacker News premortem too.
+
+Marketing didn't need to be scalable to get the first 10 users. I asked my friends, only with the goal of building it _for_ someone with a real product (as we felt this would surface lots of edge cases etc, instead of us building it all locally at first).
+
+To find _your_ friends that might be relevant, start at the top and work you way down until you get 10 people to use your product:
+
+* whoever springs to mind first, as you likely know them the best
 * go through your whatsapp / texts
 * go through your linkedin, searching for people who are your first degree connections
 * go through your linkedin, looking for people who've ever worked at the same places you've worked
 
-You are unlikely to be self serve at this stage - if you are being very fast, you probably don't have the ability to create a new user without manually editing the database.
+You are unlikely to be self serve at this stage - if you are being very fast, you probably don't have the ability to create a new user without manually editing the database, so we would set people up over Slack / Whatsapp or physically with them. We did as much in person as we could.
 
 ## Getting to 50 users - can people self serve (if doing product led growth) and does anyone care
 
@@ -78,10 +80,9 @@ Now you need to figure out if someone who _doesn't know you_ cares enough to use
 We asked people why they signed up. It's important you don't pre-fill their responses.
 We did a little marketing. We just tried to be helpful on the internet and to write about things we really understood. This worked.
 
-
 ## Getting to 1,000 users - do more of what is working, and clarify your ICP
 
-
+Figured out business model too - kept pricing out the way of adoption
 
 ## Bonus: Getting to 100,000 users - scale the business to match your demand
 
