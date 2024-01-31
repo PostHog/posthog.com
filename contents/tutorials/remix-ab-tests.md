@@ -59,7 +59,6 @@ Then, go to `app/entry.client.tsx` and initialize PostHog. You'll need both your
 
 
 ```js file=entry.client.tsx
-// app/entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
@@ -138,7 +137,7 @@ When it comes to implementing our experiment code, there are two options:
 1. Client-side rendering
 2. Server-side rendering
 
-We'll show you how to implement both options.
+We'll show you how to implement both.
 
 ### Client-side rendering
 
@@ -204,7 +203,7 @@ export default function PostHogNodeClient() {
 }
 ```
 
-Next, we implement server-side rendering by adding the [loader function](https://remix.run/docs/en/main/route/loader) to our component. We fetch the feature flag using our PostHog node client in this function and return the text for our button.
+Next, we implement server-side rendering by adding the [loader function](https://remix.run/docs/en/main/route/loader) to our `_index.tsx` component. We fetch the feature flag using our PostHog node client in this function and return the text for our button.
 
 Replace your code in `_index.tsx` with the following:
 
@@ -273,7 +272,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   if (cookies[cookieKey]) {
     try {
       const distinctId = JSON.parse(cookies[cookieKey]).distinct_id;
-      console.log(distinctId)
       const enabledVariant = await posthogNode.getFeatureFlag('my-cool-experiment', distinctId);
       if (enabledVariant === 'control') {
         buttonText = 'Control Variant';
