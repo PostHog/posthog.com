@@ -50,13 +50,26 @@ export const YCOnboarding = () => {
                                 )
                             })}
                         </ul>
-
                         <p className="text-sm">
                             <sup>1</sup> Applicants from previous batches receive $25,000 for 6 months instead.
                             <br />
                             <sup>2</sup> Boring international customs reasons mean users outside US/Canada get a $150
                             PostHog merch voucher instead.
                         </p>
+                        <div>
+                            <h3>See if PostHog is right for you</h3>
+                            <div className="video-container">
+                                <iframe
+                                    width="560"
+                                    height="315"
+                                    src="https://www.youtube.com/embed/BPDmpepEwSY"
+                                    title="YouTube video player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                ></iframe>
+                            </div>
+                        </div>
                     </div>
                     <div className="order-2 md:order-2 mb-12">
                         <h3 className="mb-1">How to apply</h3>
