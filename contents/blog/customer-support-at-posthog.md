@@ -42,7 +42,7 @@ Its core UX is delightful and straightforward to use, making it easy to onboard 
 It syncs all support tickets to Slack so our team can respond directly from the platform. Customer support teams are exempt from our [meeting-free days](https://posthog.com/blog/meetings) policy.
 It tracks stats around the number and types of tickets we receive (about 30 a day), how long it takes us to close each ticket (about an hour on average, accounting for complexity and time zones), and other useful analytics.
 
-Beyond Papercups and our [external Slack channel](https://posthog.com/slack), we also receive support queries via email (sent to hey@posthog.com), GitHub (where our team spends most of their time), and very rarely via [social media](https://twitter.com/PostHog). We’ve found that within the context of businesses like ours, social media queries are usually a sign that normal communication or helpdesk channels have failed - and startups should avoid this as much as possible.
+Beyond Papercups and our [community](https://posthog.com/questions), we also receive support queries via email (sent to hey@posthog.com), GitHub (where our team spends most of their time), and very rarely via [social media](https://twitter.com/PostHog). We’ve found that within the context of businesses like ours, social media queries are usually a sign that normal communication or helpdesk channels have failed - and startups should avoid this as much as possible.
 
 ## Are open-source support models expensive?
 

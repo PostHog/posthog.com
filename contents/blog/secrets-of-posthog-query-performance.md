@@ -177,6 +177,6 @@ Some projects currently in the pipeline are:
 -   **Smart caching time-series queries** - PostHog dashboards continually refresh data to show up-to-date graphs. However this results in a lot of repeated work, slowing down queries. By changing semantics around user properties and identifying users, we will be able to start smartly re-using past results when re-calculating queries.
 -   **Better JSON support in ClickHouse** - [This feature](https://github.com/ClickHouse/ClickHouse/issues/23516) has been experimentally released in ClickHouse 22.3 and will unlock the benefits of materialized columns with much less complexity.
 
-> Interested in chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com) or join [our community page](/posts).
+> Interested in chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com) or join our [community](/questions).
 
 <ArrayCTA />

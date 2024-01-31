@@ -78,7 +78,7 @@ We always welcome contributions from our community and this time we want to than
 - [Thebigbignooby](https://github.com/Thebigbignooby) for correcting an error in our documentation.
 - [Klamas1](https://github.com/klamas1) for adding nodeSelector and tolerations to hooks. 
 
-Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our community page](/posts). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our community](/questions). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 
 ## Open roles at PostHog
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:
