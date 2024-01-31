@@ -1,13 +1,11 @@
 import React from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
-import './log-slider.scss'
-import { pricingSliderLogic } from './pricingSliderLogic'
-import { useValues } from 'kea'
+import './slider.scss'
 
 // Thanks to https://codesandbox.io/s/rc-slider-log-demo-forked-xffr0
 
-interface LogSliderProps {
+interface SliderProps {
     min: number
     max: number
     marks: number[]
@@ -27,6 +25,7 @@ export const prettyInt = (x: number): string => {
 // change these to whatever curve function you need!
 export const sliderCurve = Math.exp
 export const inverseCurve = Math.log
+export const identityCurve = (x: number): number => x
 
 const SI_SYMBOL = ['', 'k', 'M', 'B']
 
@@ -46,7 +45,14 @@ const makeMarks = (marks: number[]): Record<number, string> => {
     }, {} as Record<number, string>)
 }
 
-export const LogSlider = ({ min, max, marks, stepsInRange, onChange, value }: LogSliderProps): JSX.Element => {
+const makeLinearMarks = (marks: number[]): Record<number, string> => {
+    return marks.reduce((acc, cur) => {
+        acc[cur] = abbreviateNumber(cur)
+        return acc
+    }, {} as Record<number, string>)
+}
+
+export const LogSlider = ({ min, max, marks, stepsInRange, onChange, value }: SliderProps): JSX.Element => {
     return (
         <MySlider
             min={inverseCurve(min)}
@@ -55,7 +61,21 @@ export const LogSlider = ({ min, max, marks, stepsInRange, onChange, value }: Lo
             step={(inverseCurve(max) - inverseCurve(min)) / stepsInRange}
             tipFormatter={(value) => prettyInt(sliderCurve(value))}
             onChange={onChange}
-            className="log-slider center"
+            className="slider center"
+            value={value}
+        />
+    )
+}
+
+export const LinearSlider = ({ min, max, marks, stepsInRange, onChange, value }: SliderProps): JSX.Element => {
+    return (
+        <MySlider
+            min={min}
+            max={max}
+            marks={makeLinearMarks(marks)}
+            step={(max - min) / stepsInRange}
+            onChange={onChange}
+            className="slider center"
             value={value}
         />
     )

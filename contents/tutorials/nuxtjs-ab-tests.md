@@ -259,6 +259,6 @@ Now, when you refresh the page, the button text is already set when the page loa
 
 ## Further reading
 
-- [PostHog Nuxt.js docs](/docs/libraries/nuxt-js)
+- [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
 - [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
 - [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)

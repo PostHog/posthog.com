@@ -1,6 +1,6 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { inverseCurve } from 'components/Pricing/PricingSlider/LogSlider'
+import { inverseCurve } from 'components/Pricing/PricingSlider/Slider'
 import { useActions } from 'kea'
 import queryString from 'query-string'
 import React, { useEffect, useState } from 'react'

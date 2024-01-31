@@ -32,6 +32,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const merchStore =
+        process.env.SHOPIFY_APP_PASSWORD && process.env.GATSBY_MYSHOPIFY_URL && process.env.GATBSY_SHOPIFY_SALES_CHANNEL
 
     const result = (await graphql(`
         {
@@ -323,7 +325,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fieldValue
                 }
             }
-            allShopifyProduct(limit: 1000) {
+            ${
+                merchStore
+                    ? `allShopifyProduct(limit: 1000) {
                 nodes {
                     handle
                 }
@@ -424,6 +428,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     title
                     handle
                 }
+            }`
+                    : ''
             }
         }
     `)) as GatsbyContentResponse
@@ -435,61 +441,62 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     /**
      * Merch
      */
+    if (merchStore) {
+        const merchNav = result.data.allMerchNavigation.nodes?.map((item: MetaobjectsCollection) => {
+            return {
+                url: item.handle === 'all-products' ? '/merch' : `/merch/${item.handle}`,
+                handle: item.handle,
+                title: item.title,
+            }
+        })
 
-    const merchNav = result.data.allMerchNavigation.nodes?.map((item: MetaobjectsCollection) => {
-        return {
-            url: item.handle === 'all-products' ? '/merch' : `/merch/${item.handle}`,
-            handle: item.handle,
-            title: item.title,
-        }
-    })
+        /**
+         * Collection pages. Slightly abusing context here and sending all products
+         * per paginated collection page. Gatsby doesn't let you both filter your
+         * Graphql query at collections and then again for the products inside.
+         */
+        const productsPerPage = 50
+        result.data.allShopifyCollection.nodes.forEach((collection) => {
+            const { handle, products } = collection
+            const merchBasePath = '/merch'
+            const collectionPath = handle === 'all-products' ? '' : `/${handle}`
+            const collectionProductsCount = products.length
+            const numPages = Math.ceil(collectionProductsCount / productsPerPage)
 
-    /**
-     * Collection pages. Slightly abusing context here and sending all products
-     * per paginated collection page. Gatsby doesn't let you both filter your
-     * Graphql query at collections and then again for the products inside.
-     */
-    const productsPerPage = 50
-    result.data.allShopifyCollection.nodes.forEach((collection) => {
-        const { handle, products } = collection
-        const merchBasePath = '/merch'
-        const collectionPath = handle === 'all-products' ? '' : `/${handle}`
-        const collectionProductsCount = products.length
-        const numPages = Math.ceil(collectionProductsCount / productsPerPage)
+            Array.from({
+                length: numPages,
+            }).forEach((_, i) => {
+                const currentPage = i + 1
+                const startIndex = (currentPage - 1) * productsPerPage
+                const endIndex = startIndex + productsPerPage
+                const productsForCurrentPage = products.slice(startIndex, endIndex)
 
-        Array.from({
-            length: numPages,
-        }).forEach((_, i) => {
-            const currentPage = i + 1
-            const startIndex = (currentPage - 1) * productsPerPage
-            const endIndex = startIndex + productsPerPage
-            const productsForCurrentPage = products.slice(startIndex, endIndex)
+                createPage({
+                    path: i === 0 ? `${merchBasePath}${collectionPath}` : `${merchBasePath}${collectionPath}/${i + 1}`,
+                    component: path.resolve('./src/templates/merch/Collection.tsx'),
+                    context: {
+                        merchNav,
+                        handle,
+                        limit: productsPerPage,
+                        skip: i * productsPerPage,
+                        numPages,
+                        currentPage: i + 1,
+                        productsForCurrentPage,
+                    },
+                })
+            })
+        })
 
+        result.data.allShopifyProduct.nodes.forEach((node) => {
             createPage({
-                path: i === 0 ? `${merchBasePath}${collectionPath}` : `${merchBasePath}${collectionPath}/${i + 1}`,
-                component: path.resolve('./src/templates/merch/Collection.tsx'),
+                path: `/merch/products/${node.handle}/`,
+                component: path.resolve(`./src/templates/merch/Product.tsx`),
                 context: {
-                    merchNav,
-                    handle,
-                    limit: productsPerPage,
-                    skip: i * productsPerPage,
-                    numPages,
-                    currentPage: i + 1,
-                    productsForCurrentPage,
+                    handle: node.handle,
                 },
             })
         })
-    })
-
-    result.data.allShopifyProduct.nodes.forEach((node) => {
-        createPage({
-            path: `/merch/products/${node.handle}/`,
-            component: path.resolve(`./src/templates/merch/Product.tsx`),
-            context: {
-                handle: node.handle,
-            },
-        })
-    })
+    }
 
     const menuFlattened = flattenMenu(menu)
 

@@ -609,7 +609,6 @@
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
         { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
-        { "source": "/tutorials/feature-flags", "destination": "/manual/feature-flags" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
         { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },
         { "source": "/blog/categories/guides", "destination": "/blog/tags/guides" },
@@ -745,10 +744,10 @@
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/community", "destination": "/questions", "statusCode": 302 },
-        { "source": "/roadmap/changelog", "destination": "/changelog/2023" },
-        { "source": "/blog/posthog-changelog", "destination": "/changelog/2023" },
-        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2023" },
-        { "source": "/changelog", "destination": "/changelog/2023" },
+        { "source": "/roadmap/changelog", "destination": "/changelog/2024" },
+        { "source": "/blog/posthog-changelog", "destination": "/changelog/2024" },
+        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2024" },
+        { "source": "/changelog", "destination": "/changelog/2024" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
@@ -1175,6 +1174,7 @@
         { "source": "/docs/cdp/bigquery-export", "destination": "/docs/cdp/batch-exports/bigquery" },
         { "source": "/docs/cdp/postgres-export", "destination": "/docs/cdp/batch-exports/postgres" },
         { "source": "/docs/cdp/s3-export", "destination": "/docs/cdp/batch-exports/s3" },
-        { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" }
+        { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" },
+        { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" }
     ]
 }

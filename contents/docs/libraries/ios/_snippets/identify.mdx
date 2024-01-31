@@ -7,21 +7,13 @@ like segment users by these properties.
 An identify call requires:
 
 * `distinct_id` which uniquely identifies your user in your database
-* `properties` with a dictionary of key:value pairs
+* `userProperties` with a dictionary of key:value pairs
 
 For example:
 
-```objectivec
-// in objective-c
-[[PHGPostHog sharedPostHog] identify:@"distinct_id_from_your_database"
-                          properties:@{ @"name": @"Peter Griffin",
-                                       @"email": @"peter@familyguy.com" }];
-```
-
 ```swift
-// in swift
-posthog.identify("user_id_from_your_database", 
-          properties: ["name": "Peter Griffin", "email": "peter@familyguy.com"])
+PostHogSDK.shared.identify("user_id_from_your_database",
+                            userProperties: ["name": "Peter Griffin", "email": "peter@familyguy.com"])
 ```
 
 The most obvious place to make this call is whenever a user signs up, or when they update their information.

@@ -342,6 +342,74 @@ if (posthog.isFeatureEnabled('new-groups-feature')) {
 
 To check flag status for a different group, first switch the active group by calling `posthog.group()`.
 
+## Surveys
+
+[Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [targeting](/docs/surveys/creating-surveys#targeting) you set up.
+
+Surveys using the **API** presentation enable you to implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
+
+To implement **API** surveys, start by fetching active surveys for a user using either of the methods below:
+
+```js-web
+// Fetch enabled surveys for the current user
+posthog.getActiveMatchingSurveys(callback, forceReload) 
+
+// Fetch all surveys
+posthog.getSurveys(callback, forceReload)
+```
+
+The response returns an array of survey objects and is cached by default. To force a reload, pass `true` as the `forceReload` argument.
+
+The survey objects look like this:
+
+```json
+[{
+  "id": "your_survey_id",
+  "name": "Your survey name",
+  "description": "Metadata describing your survey",
+  "type": "api", // either "api", "popover", or "widget"
+  "linked_flag_key": null, // linked feature flag key, if any.
+  "targeting_flag_key": "your_survey_targeting_flag_key",
+  "questions": [
+    {
+      "type": "single_choice",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "question": "Are you enjoying PostHog?"
+    }
+  ],
+  "conditions": null,
+  "start_date": "2023-09-19T13:10:49.505000Z",
+  "end_date": null
+}]
+```
+
+### Capturing survey events
+
+To display survey results in PostHog, you need to capture 3 types of events:
+
+```js-web
+// 1. When a user is shown a survey
+posthog.capture("survey shown", {
+    $survey_id: survey.id // required
+})
+
+// 2. When a user has dismissed a survey
+posthog.capture("survey dismissed", {
+    $survey_id: survey.id // required
+})
+
+// 3. When a user has responded to a survey
+posthog.capture("survey sent", {
+    $survey_id: survey.id, // required
+    $survey_response: survey_response // required. `survey_response` must be a text or number value (depending on your question type).
+    // For multiple choice select surveys, `survey_response` must be in an array of values with the selected choices.
+    // e.g., $survey_response: ["response_1", 8, "response_2"]
+})
+```
+
 ## Persistence
 
 In order for PostHog to work optimally, we require storing a small amount of information about the user on the user's browser. This ensures that if the user navigates away, and comes back to your site at a later time, we will still identify them properly. We store the following information in the user's browser:

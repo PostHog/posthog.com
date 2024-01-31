@@ -277,6 +277,6 @@ export default defineEventHandler(async (event) => {
 
 ## Further reading
 
-- [PostHog Nuxt.js docs](/docs/libraries/nuxt-js)
+- [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
 - [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
 - [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
