@@ -101,7 +101,7 @@ You can further customize how PostHog works through its configuration on initial
 ```ts
 export const posthog = await PostHog.initAsync("<ph_project_api_key>", {
     // PostHog API host, usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-    host?: string = "https://app.posthog.com", // TIP: `host` is optional if you use https://app.posthog.com
+    host?: string = "<ph_instance_address>", // TIP: `host` is optional if you use https://app.posthog.com
     // The number of events to queue before sending to PostHog (flushing)
     flushAt?: number = 20,
     // The interval in milliseconds between periodic flushes
