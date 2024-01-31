@@ -85,7 +85,7 @@ Due the very high volume of network requests that some tools can make (for examp
 
 PostHog has to wrap `fetch` and `xhr` in order to capture network requests. If your application makes network requests before PostHog has had a chance to wrap them, then PostHog will not capture all information about the request.
 
-## PostHog truncated the request or response body
+## PostHog truncated the request or response body
 
 In order to maintain service levels we truncate all request and response bodies at 1MB
 
