@@ -1,6 +1,6 @@
 ---
 title: How we do trunk-based development (and why you should too)
-date: 2024-01-19
+date: 2024-01-30
 author: ["ian-vanagas"]
 rootpage: /blog
 featuredImage: ../images/blog/posthog-engineering-blog.png
@@ -11,11 +11,13 @@ tags:
  - Feature management
 ---
 
-What do trees, elephants, and successful software all have in common? They all have strong trunks helping them grow big and strong. In the case of software, the trunk is the main codebase engineers make changes to and that deploys to users. 
+What do trees, elephants, and successful software all have in common? They rely on their trunks to help them grow big and strong. In the case of software, the trunk is the main codebase engineers make changes to and that deploys to users.
 
-There are many strategies for branching off and making changes to this trunk. The one we use at PostHog is trunk-based development. It helps us reduce work-in-progress, ship faster, keep momentum, and ultimately, build a more successful product. 
+At PostHog, we make a lot of changes to our trunk. In 2023, we merged [4,344 pull requests](https://github.com/PostHog/posthog/pulls?q=is%3Apr+created%3A2023-01-01..2023-12-31+is%3Amerged) to our main app. This was a conscious choice. It follows our branching strategy known as trunk-based development.
 
-This post covers what trunk-based development is, its benefits, why we do it at PostHog, and how you can implement it for yourself.
+While other companies choose strategies focused on polish and perfection, trunk-based development helps us ship fast, reduce work-in-progress, and keep momentum. Ultimately, we feel this helps us build a better product and can help you do the same.
+
+To help you learn about and implement trunk-based development, we created this guide covering what it is, its benefits, why we do it at PostHog, and tips for doing it for yourself.
 
 ## What is trunk-based development?
 
