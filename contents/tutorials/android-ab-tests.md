@@ -137,6 +137,7 @@ import com.posthog.android.PostHog
 class MyABTestApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
+        // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
         private const val POSTHOG_HOST = "<ph_instance_address>"
     }
 
