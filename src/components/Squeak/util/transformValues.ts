@@ -11,6 +11,7 @@ export default async function transformValues(
     if (values.images.length <= 0) return values
     if (!jwt || !profileID) return values
     let transformedBody = values.body
+    const uploadedImages = []
     for (const image of values.images) {
         const { file, fakeImagePath, objectURL } = image
         URL.revokeObjectURL(objectURL)
@@ -23,6 +24,7 @@ export default async function transformValues(
                 })
                 if (uploadedImage?.url) {
                     transformedBody = transformedBody.replaceAll(fakeImagePath, uploadedImage.url)
+                    uploadedImages.push(uploadedImage)
                 }
             } catch (err) {
                 console.error(err)
@@ -31,5 +33,5 @@ export default async function transformValues(
         }
     }
 
-    return { ...values, body: transformedBody }
+    return { ...values, body: transformedBody, uploadedImages }
 }

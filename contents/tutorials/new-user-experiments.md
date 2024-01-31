@@ -52,7 +52,7 @@ Finally, we’ll set the minimum acceptable improvement to 20%. This is a lot, b
 
 We’ll add our new experiment feature flags to our codebase on a page with the file upload many new users see. We’ll need to create the two changes and add them behind feature flags. 
 
-It’s best practice to ensure we fall back on the standard component. The standard component is the "control" (default) for the experiment. We want to only make changes if the feature flags are active and working.
+It’s [best practice](/product-engineers/feature-flag-best-practices) to ensure we fall back on the standard component. The standard component is the "control" (default) for the experiment. We want to only make changes if the feature flags are active and working.
 
 Here’s what a standard React component looks like before implementing feature flags:
 

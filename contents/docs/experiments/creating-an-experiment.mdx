@@ -18,7 +18,9 @@ Here's a breakdown of each field in the form:
 
 ## Feature flag key
 
-Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In your code, you use this feature flag key to check which experiment variant the user has been assigned to. 
+Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In your code, you use this feature flag key to check which experiment variant the user has been assigned to.
+
+The feature flag will be created for you automatically. Therefore, you must add a feature flag key which does not exist yet.
 
 > **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you you're a different library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags) 
 

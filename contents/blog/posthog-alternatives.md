@@ -155,7 +155,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 - "I do feel amplitude makes it difficult to parse out nuanced information on data. For more technical people, like myself, SQL is better for really digging into data."
 
-**Read more:** [The best alternatives to Mixpanel compared](/blog/best-mixpanel-alternatives)
+**Read more: [The best Amplitude alternatives, compared](/blog/best-amplitude-alternatives)
 
 ## Mixpanel
 
@@ -252,6 +252,8 @@ Mixpanel is purely focused on product analytics, going so far as to shut down ot
 	</tbody>
 </table>
 </div>
+
+**Read more:** [The best alternatives to Mixpanel compared](/blog/best-mixpanel-alternatives)
 
 ### Key differences
 

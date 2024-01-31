@@ -37,7 +37,7 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'ab-testing',
     lowercase: 'A/B testing',
-    capitalized: 'A/B Testing',
+    capitalized: 'A/B testing',
     freeTier: '1,000,000 requests',
 }
 
@@ -292,7 +292,7 @@ export const ProductAbTesting = () => {
                     icon={<IconFlask />}
                     product={product.capitalized}
                     title='Test changes with <span class="text-red dark:text-yellow">statistical significance</span>'
-                    description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
+                    description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
                 />
 
                 <div className="text-center">

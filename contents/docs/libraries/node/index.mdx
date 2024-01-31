@@ -235,6 +235,40 @@ export const handler() {
 }
 ```
 
+## Sentry integration
+
+When using [Sentry in Node.js](https://docs.sentry.io/platforms/node/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
+
+### Example implementation
+
+See the [`posthog-node`](https://github.com/PostHog/posthog-js-lite/blob/main/examples/example-node/server.ts) project for a complete example.
+
+```node
+import { PostHog, PostHogSentryIntegration } from 'posthog-node'
+import * as Sentry from '@sentry/node'
+
+const posthog = new PostHog(PH_API_KEY, { host: PH_HOST })
+
+Sentry.init({
+  dsn: 'https://examplePublicKey@o0.ingest.sentry.io/0',
+  integrations: [new PostHogSentryIntegration(posthog)],
+})
+
+// Set the PostHog distinctId for the relevant session either globally for all events
+Sentry.setTag(PostHogSentryIntegration.POSTHOG_ID_TAG, 'my-nodejs-service');
+
+// or contextually for example within an api request
+try {
+    myFunction()
+} catch(err) {
+  Sentry.captureException(err, {
+    tags: {
+      [PostHogSentryIntegration.POSTHOG_ID_TAG]: request.user.id,
+    },
+  })
+}
+```
+
 ## Upgrading from V1 to V2
 
 V2.x.x of the Node.js library is completely rewritten in Typescript and is based on a new JS core shared with other JavaScript based libraries with the goal of ensuring new features and fixes reach the different libraries at the same pace.

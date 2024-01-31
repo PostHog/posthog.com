@@ -35,7 +35,7 @@ In this post, we explore four benefits to using these feature flag types, such a
 
 Feature flags disconnect deployment from release, enabling developers to ship code faster. Instead of releasing code for use by everyone once deployed, it lives behind a feature flag and releases separately. This frees developers from worrying as much about releases.
 
-Using feature flags improves the deployment and integration process. Feature flags help developers merge and integrate their changes more often. Because developers aren’t waiting to deploy, metrics like deployment frequency and time improve. You avoid stale branches and code because it isn’t sitting dormant. All of these benefit DevOps teams especially. 
+Using [feature flags services](/blog/best-open-source-feature-flag-tools) improves the deployment and integration process. Feature flags help developers merge and integrate their changes more often. Because developers aren’t waiting to deploy, metrics like deployment frequency and time improve. You avoid stale branches and code because it isn’t sitting dormant. All of these benefit DevOps teams especially. 
 
 Engineers can also use feature flags to hand off the release to other members of their team, such as product managers and marketers. This can be especially useful for features requiring slow rollouts, communication, and usage analysis. Instead of a developer babysitting the release, a non-technical team member can do the release, and any related work, themselves.
 
@@ -76,7 +76,7 @@ If there are problems with a feature, feature flags can act as kill switches. Th
 
 Feature flags enable better testing of changes by testing them closer to reality. When a change ships into production behind a feature flag and people who need access can get access. Instead of needing specific testing environments, you can test in production.
 
-[Testing in production](/blog/testing-in-production) means the usage, data, infrastructure, integration, and environment are closer to what users actually use. The gap between development and production closes. Other team members can test your code and features in production as well. All of this provides validation to engineers that their code works.
+[Testing in production](/product-engineers/testing-in-production) means the usage, data, infrastructure, integration, and environment are closer to what users actually use. The gap between development and production closes. Other team members can test your code and features in production as well. All of this provides validation to engineers that their code works.
 
 Testing changes in production also means you can run experiments. You can test variations against each other to see which provides better results. Product and marketing teams can be involved in the experimentation process. They can design experiments and analyze real results, rather than guessing what the outcomes are.
 

@@ -167,4 +167,4 @@ You can automatically enable filtering in all new insights with the toggle at th
 
 - [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [Setting up Django analytics, feature flags, and more with PostHog](/tutorials/django-analytics)
+- [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)

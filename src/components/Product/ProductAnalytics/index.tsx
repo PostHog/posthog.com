@@ -47,7 +47,7 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'product-analytics',
     lowercase: 'product analytics',
-    capitalized: 'Product Analytics',
+    capitalized: 'Product analytics',
     freeTier: '1,000,000 events',
 }
 
@@ -87,11 +87,11 @@ const subfeatures = [
 const questions = [
     {
         question: 'Where are people getting stuck in my flow?',
-        url: '/tutorials/funnels',
+        url: '/tutorials/guide-to-funnels',
     },
     {
         question: 'Where are users dropping off?',
-        url: '/tutorials/funnels#step-3-explore-user-paths-between-steps-in-the-funnel',
+        url: '/tutorials/guide-to-funnels#step-3-explore-user-paths-between-steps-in-the-funnel',
     },
     {
         question: 'How do I calculate new vs returning users?',
@@ -186,11 +186,11 @@ const questions = [
     },
     {
         question: 'What events mean users are less likely to complete a funnel?',
-        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
+        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
     },
     {
         question: 'What properties mean users are less likely to complete a funnel?',
-        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
+        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
     },
     {
         question: 'How many users return to use my product each day?',
@@ -720,20 +720,20 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconRewindPlay />,
-        product: 'Session Replay',
+        product: 'Session replay',
         description:
             'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
         url: '/session-replay',
     },
     {
         icon: <IconToggle />,
-        product: 'Feature Flags',
+        product: 'Feature flags',
         description: 'See which feature flags were enabled for a user during a session',
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
-        product: 'A/B Testing',
+        product: 'A/B testing',
         description:
             'Filter data down to users within an active experiment, whether part of a control group or a test variant',
         url: '/ab-testing',
@@ -784,7 +784,7 @@ export const ProductProductAnalytics = () => {
                     icon={<IconGraph />}
                     product={product.capitalized}
                     title="Product analytics with autocapture"
-                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>Session Replay</a>, <a href='/feature-flags'>Feature Flags</a>, <a href='/ab-testing'>A/B Testing</a>, and <a href='/surveys'>Surveys</a>."
+                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/ab-testing'>A/B testing</a>, and <a href='/surveys'>surveys</a>."
                 />
 
                 <div className="text-center">

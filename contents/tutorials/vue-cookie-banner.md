@@ -293,6 +293,6 @@ Once we’ve done that, our cookie consent banner is fully functional. Try it ou
 
 ## Further reading
 
+- [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
+- [How to set up surveys in Vue](/tutorials/vue-surveys)
 - [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
-- [Building a tracking cookies consent banner in React](/tutorials/react-cookie-banner)
-- [PostHog for VueJS users – a code-snippet walkthrough](/tutorials/posthog-for-vuejs)

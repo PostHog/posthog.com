@@ -17,7 +17,7 @@ Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-con
 }
 ```
 
-Some frameworks, like **SvelteKit** and **Astro**, require a hungrier regex pattern like:
+Some frameworks, like **SvelteKit** and [Astro](/tutorials/astro-analytics), require a hungrier regex pattern like:
 
 ```json
 {
@@ -38,6 +38,7 @@ Once done, set the `/ingest` route of your domain as the API host in your PostHo
 posthog.init('<ph_project_api_key>',
   {
     api_host: 'https://www.your-domain.com/ingest',
+    ui_host: 'https://app.posthog.com' // or 'https://eu.posthog.com' if your PostHog is hosted in Europe
   }
 )
 ```

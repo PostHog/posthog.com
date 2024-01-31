@@ -108,6 +108,6 @@ When we save this and publish the site again, the button is still there. When we
 
 ## Further reading
 
+- [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
+- [How to create surveys in Framer](/tutorials/framer-surveys)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
-- [How to track performance marketing in PostHog](/tutorials/performance-marketing)
-- [How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)

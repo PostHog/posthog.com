@@ -306,7 +306,7 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
                 } peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0`}
                 {...props}
                 onFocus={() => setType(props.type ?? 'text')}
-                type={type}
+                type={props.type === 'date' ? 'date' : type}
             />
             <span className="relative -top-3 peer-placeholder-shown:top-0 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
                 {placeholder}

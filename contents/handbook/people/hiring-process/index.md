@@ -28,7 +28,6 @@ This has resulted in the highest number of qualified and motivated candidates re
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Ops & Finance Lead     | GMT -5:00 to 0:00                  | People & Ops  | Charles | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles<br/> 3) Small Team Screen - James<br/> 4) SuperDay - Charles, Tim & James H. | Live Task (link not available) |
 | Customer Success Manager    | GMT -8:00 to 0:00                  | Customer Success  | Simon | 1) Culture Screen - Coua<br/> 2) Technical Screen - Simon<br/> 3) Small Team Screen - James<br/> 4) Small Team Screen - Tim<br/> 5) SuperDay - Cameron, Charles, Simon, Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
@@ -74,7 +73,6 @@ As we keep iterating on our specs, the best approach is to copy our most recentl
 
 Once the hiring manager has signed off on the spec, we will publish it on Ashby - [instructions on how to do this are here](/handbook/engineering/posthog-com/jobs). 
 
-
 #### Job boards
 
 Ashby will automatically add the role on our [careers page](https://posthog.com/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Ashby and LinkedIn. [AngelList](https://angel.co/company/posthoghq/jobs) will need to be posted manually. 
@@ -100,11 +98,11 @@ Ashby also had a partnership with YC's job board so all roles to YC's [Work at a
 *   [Lenny's Job Board](https://lennys-jobs.pallet.com/jobs)
 
 
-#### Referrals
+### Referrals
 
 Every time we open a new role, we will share the details and ideal profile with the team during All Hands.
 
-**Personal referral** 
+#### Personal referral
 
 If you know someone who would be a great addition to the team, please submit them as a personal referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice where we will match the amount! You can also split the amount between you and the charity.
 
@@ -114,13 +112,13 @@ We occasionally open up short term contracts, and you'll receive a $1,000 referr
 
 Unfortunately people who actively work on recruitment in the People & Ops team at PostHog are not eligible for referral bonuses, to mitigate the risk that they influence the process unfairly. If you would like to refer someone and are not sure if this applies to you, speak to Charles. 
 
-**What's the process?**
+#### What's the process?
 
 *   If there is an ongoing conversation, please cc careers@ into the email thread with the referred candidate and we will take it over from there.
 *   Otherwise, please upload the profile to the [Ashby referral page](https://app.ashbyhq.com/referrals). 
 *   If they have applied themselves already, let careers@ know within 48 hours of them applying.
 
-**Social referral** 
+#### Social referral
 
 The [Getting started for interviewers page](https://www.notion.so/Getting-Started-for-Interviewers-4b6bd7cc94834e1ebe8d63345030696f) makes it super easy to share referrals and track their applications as a social referral throughout the interview process. 
 
@@ -128,11 +126,11 @@ If you have other referrals in your network (e.g. 2nd degree connections), who h
 
 The referral bonus for social referrals is $500, and we again match any amount you choose to give this to charity.  
 
-**Referral payouts** 
+#### Referral payouts
 
 You'll get paid the bonus 3 months from the new team member's start date, and it will be processed as part of payroll. Bear in mind that you might be liable for income tax on the bonus. 
 
-**Non-team referrals** 
+#### Non-team referrals
 
 We also welcome external referrals, e.g. from:
 
@@ -156,32 +154,13 @@ Ashby is a pretty intuitive platform to use, but here are a few helpful tips to 
 
 If you receive an application via email or some other non-Ashby channel like Slack, pass it on to careers@posthog.com. 
 
-## Sourcing
-
-For most roles, we don’t just rely on incoming applications. Direct outreach is a great way to influence the hiring pipeline, and enables us to:
-
-*   Approach people with very specific or relevant experience, even when they are not currently looking for a new role
-*   Encourage candidates from a wider range of backgrounds to apply
-*   Build our employer brand and general awareness
-
-Good places to look for people include:
-
-*   Ashby - People search and tags
-*   LinkedIn - [Boolean searches](https://www.talentlyft.com/en/blog/article/306/boolean-search-a-simple-guide-for-recruiters) are your friend!
-*   Twitter
-*   GitHub
-*   YCombinator
-*   AngelList
-
-Sourcing isn't just something the People & Ops team do! If you want to get involved, get a LinkedIn Recruiter Lite license (~$80/month) and then send them an invitation to connect with a message. You'll find this is a better approach than using InMail. 
-
 ### Booking interviews through Ashby
 
 **Schedule interviews through Ashby itself.** Do not use Google Calendar, otherwise the event won't be populated with useful candidate info and we won't have a record of the meeting anywhere. 
 
 When we book a meeting, we have the option of selecting a Google Meet or Zoom call.  Zoom should be the default, unless we are scheduling a meeting where the organizer is not attending themselves, in which case use Google Meet (as Zoom will requires the host to attend).
 
-## Hiring process overview
+## Hiring stage overview
 
 > A good rule of thumb when deciding whether not to progress at any stage - if the candidate doesn't get a _definite yes_ then assume it's a _no_. It's almost never worth putting through someone who is a 'maybe'! We provide lots of information about PostHog to enable candidates to put their best application forward.
 
@@ -191,13 +170,11 @@ The People & Ops team reviews applications and resumes/portfolios carefully and 
 
 If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
 
-Candidates who are unsuccessful at this stage will receive an automated rejection email, unless they personalized their application, in which we will try to send a personalized reply.
+Candidates who are unsuccessful at this stage will receive an automated rejection email. Due to the volume of applications we receive, we usually don't provide personalized feedback. 
 
-### Speculative Application
+We also review every single speculative application weekly and if there is a possible fit for future openings, we will place the applicant into the appropriate [Ashby talent project](https://app.ashbyhq.com/projects) (i.e. full stack engineers, platform, product, website & docs, customer success, people & ops, and marketing) and notify the applicant of this via email. 
 
-We stand by what we say, and we do take speculative applications seriously. The People and Ops team reviews every single speculative application weekly and if there is a possible fit for future openings, we will place the applicant into the appropriate [Ashby talent project](https://app.ashbyhq.com/projects) (i.e. full stack engineers, platform, product, website & docs, customer success, PlOps, and marketing) and notify the applicant of this via email. 
-
-### First interview - culture interview with People & Ops 
+### 1. Culture interview with People & Ops 
 
 We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are. A template scorecard has been created for this stage in Ashby.
 
@@ -212,7 +189,7 @@ This round is loosely structured into 4 different sections:
 
 Candidates who are unsuccessful at this stage should receive a short personalized email with feedback. 
 
-### Second interview - technical interview with the Hiring Manager
+### 2. Technical interview with the Hiring Manager
 
 In this round, the candidate will meet a 1-2 future team members. This round is usually 45-60 minutes and will focus on a mix of experience and technical skills. Please check the specific hiring process for each team for more details.  
 
@@ -220,7 +197,11 @@ As a rule of thumb, everyone interviewing must feel a genuine sense of excitemen
 
 Candidates who are unsuccessful at this stage should receive a personalized email with feedback, including a few bullets that are quite specific. 
 
-### Final round - PostHog SuperDay
+### 3. Small Team interview with James or Tim
+
+This is a call with either James or Tim, depending on which Small Team they are being hired into. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values. 
+
+### 4. PostHog SuperDay
 
 The final stage of our interview process is what we call a PostHog SuperDay. This is a paid full day of work with us, which we can flexibly arrange around the candidate's schedule.
 
@@ -246,6 +227,8 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
 *   (One day after the SuperDay) Pay the candidate using the bank details they provided.
 
+> For some roles, we may occasionally set a task that goes over multiple days. For example, we have set Content Marketer tasks that last 3 days in order to create a piece of content. 
+
 ### Decide if we will hire
 
 > We aim to make a decision within 48 hours of SuperDay - being decisive is important at this stage, as great candidates will probably be fielding multiple job offers. 
@@ -266,9 +249,9 @@ If we don't make an offer, it's important to clearly outline to the candidate wh
 
 Hooray!
 
-The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate and the hiring manager. 
+The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate and James or Tim. 
 
-During the offer call, the Hiring Manager will share feedback from the interview process, and will sell the role and opportunity here at PostHog. They will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. 
+During the offer call, James or Tim will share feedback from the interview process, and will sell the role and opportunity here at PostHog. They will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. 
 
 The People & Ops team will then follow up with an offer email, outlining all details. 
 
@@ -278,7 +261,7 @@ Once the candidate accepts, the People & Ops team will kick off the [onboarding 
 
 Building a diverse team is at the heart of our culture at PostHog and we are proud to be hiring internationally. In some cases, this includes the need for visa sponsorship. We are currently only able to provide visas in the UK.
 
-*   If the candidate is already in the country on a visa (e.g. employed, youth mobility), or require a new visa to remain in the country (e.g. student converting to employed), we will cover the costs for any employee, new or current.
+*   If the candidate is already in the UK on a visa (e.g. employed, youth mobility), or require a new visa to remain in the country (e.g. student converting to employed), we will cover the costs for any employee, new or current.
 *   If they wish to relocate and need a visa, we unfortunately will not cover the cost for obtaining the visa or any relocation costs.
 
 For employees where PostHog covers the costs related to obtaining a visa, the employee agrees to reimburse PostHog if they voluntarily terminate their employment prior to the completion of 12 months of service. The costs will be calculated on a monthly basis, so when the employee decides to leave after 10 months, they will have to repay 2/12 of the costs related to the visa.

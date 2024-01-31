@@ -71,7 +71,15 @@ If events are indeed visible in webhook.site, these means that you have configur
 
 ![Events visible on webhook.site](../../images/docs/product-analytics/events-in-webhook.site.png)
 
-### 2. There is a bug the library
+### 2. An app has been configured incorrectly
+
+Another common reason for missing events is that certain plugins have been configured to drop certain or all events. To debug if this is the case, follow the below steps in order:
+
+1. If you're using the [Filter Out](/cdp/filter-out) plugin, ensure that it is configured correctly.
+2. Try to temporarily disable the Filter Out plugin.
+3. Try to temporarily disable all other enabled plugins.
+
+### 3. There is a bug the PostHog library
 
 Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite uncommon.
 
@@ -86,7 +94,7 @@ If you're using the [JavaScript web](/docs/libraries/js) library, you can identi
 
 ![network request being sent to posthog](../../images/docs/product-analytics/network-request-to-posthog.png)
 
-### 3. Events are not ingested after being received by PostHog.
+### 4. Events are not ingested after being received by PostHog
 
 If your library is configured correctly and successfully sending events to PostHog, events may get lost in the ingestion pipeline – e.g. if there is an [active incident](https://status.posthog.com).
 

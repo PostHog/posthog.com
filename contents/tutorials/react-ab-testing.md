@@ -107,7 +107,7 @@ With PostHog set up, your React app is ready for the A/B test. To create one, go
 
 ![A/B test set up](../images/tutorials/react-ab-testing/ab-test.png)
 
-You can customize it further with a description, secondary metrics, or more variants (for [multivariate testing](/tutorials/abn-testing)). 
+You can customize it further with a description, secondary metrics, or more variants (for [multivariate testing](/product-engineers/what-is-multivariate-testing-examples)). 
 
 ## Implementing the experiment
 
@@ -161,4 +161,4 @@ After confirming it works, remove the `featureFlags.override` call, go back to y
 
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to do holdout testing](/tutorials/holdout-testing)
-- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+- [How to set up analytics in React](/tutorials/react-analytics)

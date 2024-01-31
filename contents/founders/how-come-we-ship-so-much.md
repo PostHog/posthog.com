@@ -1,6 +1,6 @@
 ---
 date: 2023-11-01
-title: "We like to ship fast. Here's how we designed our company to do it"
+title: "How we designed our company for speed"
 author:
   - james-hawkins
 featuredImage: ../images/blog/super-hog-pink.png
@@ -33,11 +33,13 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 
 All the above are being used a lot, too. We're ingesting 10s of billions of events a month, have 10s of thousands of companies regularly using our service, and over 100k user signups.
 
-I often get asked how we build so much, so quickly. The answer is simple: we deliberately designed our company for speed.  We did this because we want to build [lots of products in one](/handbook/why-does-posthog-exist) – it's a lot to ship!
+I often get asked how we build so much, so quickly. 
 
-## How we designed PostHog for speed
+The answer is simple: we deliberately designed our company for speed.  
 
-### 1. No design by default
+We did this because we want to build [lots of products in one](/handbook/why-does-posthog-exist) – it's a lot to ship!
+
+## 1. No design by default
 
 When we started, we felt the best engineers would eventually quit if they felt dictated by product designers. [Product engineers](/blog/what-is-a-product-engineer) need autonomy and freedom to enjoy their work.
 
@@ -49,7 +51,7 @@ Today, we have people that can help engineers with design, but they are very hap
 
 For example, we've redesigned this entire website ~5 times.
 
-### 2. No product management by default
+## 2. No product management by default
 
 The responsibilities of a product manager still exist, but our engineers:
 
@@ -63,15 +65,21 @@ We have one product manager who steps in reactively if a small team needs more s
 
 The above requires a lot of context setting from the company. To that end, we're *unusually transparent*. There are two main ways we do this.
 
-First, we make clear what we're trying to achieve. To do this we have a clear, simple [mission and strategy](/handbook/why-does-posthog-exist). We communicate this repeatedly through our handbook, during everyone's onboarding, repeatedly in our all hands and when we plan each quarter of work. 
+### i) We make clear what we're trying to achieve.
+
+To do this, we have a clear, simple [mission and strategy](/handbook/why-does-posthog-exist). We communicate this repeatedly through our handbook, during everyone's onboarding, repeatedly in our all hands and when we plan each quarter of work.
+
+![company strat](../images/hubs/how-we-designed-our-company-for-speed/posthog-strat.png)
 
 Our mission and strategy have both been refined as the company has made progress – they have felt more meaningful as a result as we've gotten further along. We've gradually gone from something hypothetical to these things feeling like an obvious label for what we do.
 
-Second, when it comes to the _output_ of our work, and our progress towards these goals, we share all our metrics (for each product and in total), financial information, fundraising progress (before, during and after it happens), and pretty much anything else people ask for.
+### ii) We share all our metrics
+
+When it comes to the _output_ of our work, and our progress towards these goals, we share all our metrics (for each product and in total), financial information, fundraising progress (before, during and after it happens), and pretty much anything else people ask for.
 
 We've written an entire post on [how to run a transparent company](/founders/how-to-run-a-transparent-company) that goes into more detail.
 
-### 3. Hiring with intention
+## 3. Hiring for autonomy
 
 I think 90%+ of an organization's problems are solved by hiring right – see [what we've learned about hiring](https://newsletter.posthog.com/p/everything-weve-learned-about-hiring) in our newsletter.
 
@@ -79,29 +87,31 @@ We've found it invaluable to pay people during our hiring process to do some act
 
 We tend to hire people with more experience, who we find work better with more autonomy. I think this is the magic combo when you're an all remote company, though we're working on ways to get better at growing people who are earlier in their careers.
 
-### 4. Each team is a mini startup
+## 4. Each team is a mini startup
 
 I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel), who runs [Twilio](https://twilio.com/). He described how the greatest innovation at Amazon was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
 
 PostHog works like a group of startups with lots of [small teams](/handbook/company/small-teams). Each of our products has a team of up to 6 who can ship with minimal interference from the rest of the company. They make their own product decisions, own their pricing, and are responsible for co-ordinating with our marketing and growth teams. We hire a lot of former technical founders to help here.
 
-### 5. Nearly everyone is an engineer
+## 5. Nearly everyone is an engineer
 
 It's simple, but if you have lots of spending and focus outside of engineering, you won't get as much built.
 
 At the time of writing, [we are 37 people](/team), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
 
+![company composition](../images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
+
 We don't do outbound sales, our [marketing team](/handbook/small-teams/marketing) is very small, we only have one product manager, and our [exec team](/handbook/small-teams/exec) is only 3 people. These things are all by design. 
 
 We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 
-### 6. No meeting Tuesdays and Thursdays
+## 6. No meeting Tuesdays and Thursdays
 
 We want a culture where people can deep work. We push back on unnecessary meetings. If a meeting is booked for 45 minutes but frequently only takes 25, we'll rebook it so it's shorter by default – something we did recently with our engineering sprint meetings.```
 
 We have learned, often painfully, that some meetings are necessary, but we default to asynchronous communication and adapt where needed.
 
-### 7. We are a late mover
+## 7. We are a late mover
 
 I've had lots of founders tell me that they can't pursue idea X because some other startups are tackling it.
 
@@ -111,7 +121,7 @@ The magic in our platform (after an individual product is working well for our u
 
 For non-God tier product people, such as me, I think it's easier to build a better version of X than it is to create something entirely new.
 
-### 8. We raised venture capital
+## 8. We raised venture capital
 
 Obviously, this matters. 
 
@@ -119,7 +129,7 @@ We didn't raise or spend a ridiculous amount compared to other companies we comp
 
 Raising money does let you build more stuff, but whether you should is very questionable and [a topic for another time](/blog/vc-or-bootstrap).
 
-### 9. Trust and feedback over process
+## 9. Trust and feedback over process
 
 This is one of [our values](/handbook/company/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
 

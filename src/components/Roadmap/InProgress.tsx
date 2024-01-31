@@ -231,7 +231,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
             </div>
 
             {githubPages && (
-                <div className="mt-4 mb-4">
+                <div className="hidden mt-4 mb-4">
                     <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
                     <div className="h-2 flex-grow bg-border dark:bg-border-dark rounded-md relative overflow-hidden">
                         <div

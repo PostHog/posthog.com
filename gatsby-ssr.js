@@ -21,7 +21,8 @@ export const wrapPageElement = ({ element, props }) => {
         <UserProvider>
             {wrapElement({
                 element:
-                    props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug) ? (
+                    !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
+                    (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
                         <Posts {...props}>{element}</Posts>
                     ) : props.custom404 || !props.data ? (
                         element

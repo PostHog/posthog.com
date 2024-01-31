@@ -48,7 +48,7 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'feature-flags',
     lowercase: 'feature flags',
-    capitalized: 'Feature Flags',
+    capitalized: 'Feature flags',
     freeTier: '1,000,000 requests',
 }
 
@@ -221,7 +221,7 @@ const comparison = [
             Optimizely: false,
             Flagsmith: false,
             GrowthBook: false,
-            PostHog: false,
+            PostHog: true,
         },
     },
     {
@@ -320,7 +320,7 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
-        product: 'Product Analytics',
+        product: 'Product analytics',
         description:
             "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
         url: '/product-analytics',
@@ -333,14 +333,14 @@ const PairsWithArray = [
     },
     {
         icon: <IconRewindPlay />,
-        product: 'Session Replay',
+        product: 'Session replay',
         description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         url: '/session-replay',
     },
 ]
 
 export const ProductFeatureFlags = () => {
-    const { phantom, contra, speakeasy } = useStaticQuery(graphql`
+    const { phantom, contra, speakeasy, carvertical } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -364,13 +364,16 @@ export const ProductFeatureFlags = () => {
             speakeasy: mdx(slug: { eq: "customers/speakeasy" }) {
                 ...ProductCustomerFragment
             }
+            carvertical: mdx(slug: { eq: "customers/carvertical" }) {
+                ...ProductCustomerFragment
+            }
         }
     `)
     const { fullWidthContent } = useLayoutData()
     return (
         <>
             <SEO
-                title="Feature Flags - PostHog"
+                title="Feature flags - PostHog"
                 description="Safely roll out features to specific users or groups."
                 image={`/images/og/feature-flags.jpg`}
             />
@@ -380,7 +383,7 @@ export const ProductFeatureFlags = () => {
                     icon={<IconToggle />}
                     product={product.capitalized}
                     title='<span class="text-red dark:text-yellow">Safely roll out features</span> to specific users or groups'
-                    description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
+                    description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
                 />
 
                 <div className="text-center">
@@ -393,7 +396,7 @@ export const ProductFeatureFlags = () => {
                 </div>
 
                 <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="cut failure rates by 90%"
                             quote="Feature flags are crucial for us. We use them as kill switches for all our features."
@@ -408,6 +411,11 @@ export const ProductFeatureFlags = () => {
                             outcome="improved feature roll-out with flags"
                             quote="The integrated insights and feature flags help us monitor how users with specific flags enabled are using features"
                             customer={speakeasy}
+                        />
+                        <CustomerCard
+                            outcome="switched from an in-house tool"
+                            quote="Feature flags immediately bought a lot of value. What’s really elegant is how flags interlink with product analytics."
+                            customer={carvertical}
                         />
                     </ul>
                 </section>
@@ -451,7 +459,7 @@ export const ProductFeatureFlags = () => {
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> Feature Flags and A/B Testing are currently packaged together and
+                            <strong>Note:</strong> Feature flags and A/B testing are currently packaged together and
                             share volume limits.
                         </div>
                     </div>
@@ -494,9 +502,8 @@ export const ProductFeatureFlags = () => {
                                 }
                             >
                                 <ul>
-                                    <li>Flag scheduling</li>
                                     <li>Triggers and workflows to enable/disable flags on other events</li>
-                                    <li>Enterprise-level support</li>
+                                    <li>Data exports</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>

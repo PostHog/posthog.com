@@ -15,15 +15,13 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <th>Support type</th>
 <th>Open Source</th>
 <th>PostHog Cloud</th>
-<th>Self-hosted</th>
 <th>Enterprise</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="#community-support">Community</a></td>
-<td>✔️</td>
-<td>✔️</td>
+<td><a href="#official-support">Official Support</a></td>
+<td></td>
 <td>✔️</td>
 <td>✔️</td>
 </tr>
@@ -31,19 +29,10 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <td><a href="#dedicated-slack">Dedicated Slack</a></td>
 <td></td>
 <td>Minimum $2k/month spend</td>
-<td>+</td>
-<td>✔️</td>
-</tr>
-<tr>
-<td><a href="#dedicated-email">Dedicated email</a></td>
-<td></td>
-<td></td>
-<td></td>
 <td>✔️</td>
 </tr>
 <tr>
 <td><a href="#training-sessions">Training sessions</a></td>
-<td></td>
 <td></td>
 <td></td>
 <td>✔️</td>
@@ -52,19 +41,16 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <td><a href="#configuration-assistance">Configuration assistance</a></td>
 <td></td>
 <td></td>
-<td></td>
 <td>✔️</td>
 </tr>
 <tr>
 <td><a href="#terms-and-conditions">Terms and Conditions</a></td>
 <td>MIT Licence</td>
 <td>Standard</td>
-<td>Standard</td>
 <td>MSA</td>
 </tr>
 <tr>
 <td><a href="#security-assessment">Security assessment</a></td>
-<td>Standard assessment provided</td>
 <td>Standard assessment provided</td>
 <td>Standard assessment provided</td>
 <td>✔️</td>
@@ -73,62 +59,62 @@ PostHog provides a free basic level of support to everyone via the community, wi
 <td><a href="#bespoke-pricing">Bespoke pricing</a></td>
 <td></td>
 <td></td>
-<td></td>
 <td>✔️</td>
 </tr>
 <tr>
 <td><a href="#payment-via-invoicing">Payment via invoicing</a></td>
 <td></td>
 <td></td>
-<td>Minimum $2k/month spend</td>
 <td>✔️</td>
 </tr>
 </tbody>
 </table>
 </div>
 
-By default, the Scale plan does not include items marked with a '+'.
+## Official Support
 
-## Community Support
+There are three ways to get official support:
 
-There are four ways to get free support:
+* Open a ticket through our [in-app support modal](https://app.posthog.com/home#supportModal).
+* Ask a community question directly in the Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions.
+* Open an bug report on [our main Github repo](https://github.com/posthog/posthog).
 
-* Ask a question directly in these Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions. We try to respond to as many of these as we can!
-* [Send a support ticket via the app](https://app.posthog.com/home#supportModal) to send it to the relevant team. We try to respond to as many of these as we can. 
-* Join >1,500 developers in [our public Slack group](/slack) to ask other PostHog users, or our AI support bot Max-AI. 
-* Open an issue in our [main project's GitHub repo](https://github.com/posthog/posthog)
+We are very grateful to people that do this the other way around and help answer others' questions. You may just end up with some [merch](https://merch.posthog.com/) for particularly good answers :)
 
-We are very grateful for folks that do this the other way around and help answer others' questions. You may just end up with some [merch](https://merch.posthog.com/) for particularly good answers :)
+## In-app Support
 
+Anybody using PostHog Cloud can raise a bug, submit feedback or otherwise ask for help via the help menu in the top right hand corner of the UI. Your request will be routed to the correct team and we'll get back to you via email for further help if needed.
+
+### Severity Levels
+
+In order to prioritise our responses we ask you to indicate the impact an issue is having for you.  When creating a ticket you'll be asked to choose a severity level from one of the following:
+
+| **Level** | **Impact**                                                                                        | **Examples**                                                                                                                                         |
+|-----------|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Critical  | PostHog is completely unavailable or or other significant business impact                         | <ul> <li>PostHog Cloud UI is unavailable</li> <li>Feature Flags API not responding</li> <li>Data loss</li> <li>Security breach</li> </ul>            |
+| High      | Key features of the product are unavailable, causing major inconvenience or limited functionality | <ul><li>Dashboards not loading</li><li>Session Replays not loading</li><li>Data Ingestion is delayed</li><li>Feature Flag targeting issues</li></ul> |
+| Medium    | There are issues with the product, but the impact is limited                                      | <ul><li>Insights are slow to load</li><li>Session replays have missing information</li></ul>                                                         |
+| Low       | Requests that have minimal impact on the usability of the product                                 | <ul><li>Feature requests</li><li>Usage questions</li></ul>                                                                                           |                                                                                                                                           |                                                                        |                                                                                                 |
 ## Dedicated Slack
 
-Our preference for paid customers is to support them through a private Slack channel. This is because it helps teams realize they're on the same side - it's just more fun for everyone, which helps drive engagement.
+For certain paid customers we support you through a private Slack channel. This helps us all get on the same side - and it's just more fun for everyone.
 
-We will select the right team for you at PostHog. This typically includes:
+We will select the right team for you at PostHog. This typically includes the Customer Success and Engineering teams.
 
-* _Customer Success contact_ - usually the person you first spoke to before becoming a paying customer
-* _Support Hero engineer_ - we have an on call engineer between 2am PT / 9am GMT and 5pm PT / 12am GMT
-* _Platform engineer_ - help with deeper infrastructure or ingestion questions for self-host customers
-* _Product Manager_ - helps us to understand feature requests, or can clarify current and future feature set
-
-[These are the kinds of people](/handbook/company/team) you'd be working with!
+[These are the kinds of people](/team) you'd be working with!
 
 We do *not* have non-technical support people who triage issues. We directly connect you to people who are building PostHog. This has scaled to support thousands of companies very effectively, and we always aim to productize solutions to problems.
 
 From your side, it's important you bring your A team. We recommend you add:
 
 * A stakeholder from engineering
-* A stakeholder from data engineering / data analysis (if self-hosting)
+* A stakeholder from data engineering / data analysis
 * A stakeholder from product management
 * 2-3 power users
 * A stakeholder from customer success (if relevant)
 * A stakeholder from sales (if relevant)
 
-It's best not to let your group get much bigger as it can create a lot of noise. We don't support you adding several end users of PostHog to this group - you will need to triage your own issues first.
-
-## Dedicated email
-
-For Enterprise customers that can't use Slack easily, we can offer priority email support instead. 
+It's best not to let your group get much bigger as it can create a lot of noise.
 
 ## Training sessions
 
@@ -152,7 +138,7 @@ We ask to be a user in your PostHog team so we can suggest ways to get more valu
 
 PostHog Open Source is [MIT-licensed](https://github.com/PostHog/posthog-foss/blob/master/LICENSE).
 
-PostHog Cloud, PostHog Scale and PostHog Enterprise have [standard terms](/terms).
+PostHog Cloud Editions have [standard terms](/terms).
 
 ### Master Services Agreement (MSA)
 
@@ -169,7 +155,7 @@ While we do not automatically accept all product changes and requests, we are wi
 
 We have an extensive range of robust internal [security policies](/handbook/company/security) that apply to all products and cover several requirements around GDPR, SOC 2, HIPAA and CCPA. 
 
-For Enterprise customers, we are happy to complete your own security assessment. This can take the form of us enabling your team internally (who are responsible for information security since they are hosting the data), or it can mean us just answering questions and adapting our policies if needed.
+For Paid customers, we are happy to complete your own security assessment. This can take the form of us enabling your team internally (who are responsible for information security since they are hosting the data), or it can mean us just answering questions and adapting our policies if needed.
 
 ## Bespoke pricing
 
@@ -181,4 +167,4 @@ For example, we have been asked if we can offer a set fee with a large usage cap
 
 We only take payments via credit or debit card, processed via Stripe. 
 
-For companies with invoices over $2,000/month, we are able to support manual invoicing if needed. Just email billing@posthog.com and we'll set this up.
+For companies with invoices over $2,000/month, we are able to support manual invoicing if needed. Just email sales@posthog.com and we'll set this up.

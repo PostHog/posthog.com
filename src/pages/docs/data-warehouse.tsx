@@ -12,6 +12,8 @@ import HubSpotForm from 'components/HubSpotForm'
 import { Close2 } from 'components/Icons'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
+import { useLayoutData } from 'components/Layout/hooks'
+import QuickLinks from 'components/QuickLinks'
 
 const AccessForm = () => {
     return (
@@ -70,9 +72,6 @@ export const Intro = ({ image = true }) => {
                 <div className="p-4 md:p-8">
                     <h1 className="text-4xl mt-0 mb-2 flex items-center space-x-2">
                         <span>Data warehouse</span>
-                        <span className="text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-medium rounded-sm px-1 py-0.5 inline-block uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50">
-                            Beta
-                        </span>
                     </h1>
                     <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                         A single source for all your important data
@@ -97,19 +96,10 @@ export const Intro = ({ image = true }) => {
 }
 
 export const Content = ({ quickLinks = false }) => {
+    const { compact } = useLayoutData()
     return (
         <>
-            {quickLinks && (
-                <section>
-                    <h3 className="mt-0 text-xl">Quick links</h3>
-                    <List
-                        className="grid grid-cols-3 gap-2 mb-6"
-                        items={docsMenu.children[3].children
-                            .filter(({ url }) => url)
-                            .map(({ url, name, icon, color }) => ({ label: name, url, icon, iconColor: color }))}
-                    />
-                </section>
-            )}
+            {(quickLinks || compact) && <QuickLinks items={docsMenu.children[7].children} />}
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>

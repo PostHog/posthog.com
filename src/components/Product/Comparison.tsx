@@ -23,7 +23,7 @@ const companies = {
         comparisonURL: '/blog/posthog-vs-hotjar',
     },
     Optimizely: {
-        comparisonURL: '',
+        comparisonURL: '/blog/posthog-vs-optimizely',
     },
     LaunchDarkly: {
         comparisonURL: '/blog/posthog-vs-launchdarkly',

@@ -5,22 +5,13 @@ icon: ../../images/docs/integrate/frameworks/nuxt.svg
 
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
-This guide walks you through integrating PostHog into your app for both Nuxt.js major versions `2` and `3`. We'll use the [JavaScript](/docs/libraries/js) SDK.
-
-This tutorial is aimed at Nuxt.js users which run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
+These docs are aimed at Nuxt.js users who run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
 
 ## Nuxt v3.0 and above
 
-### Prerequisites
+### Setting up PostHog on the client side
 
-To follow this guide along, you need:
-
-1. A PostHog instance ([signup for free](https://app.posthog.com/signup)])
-2. a running Nuxt.js application running version `3.0` or above.
-
-### Setting up PostHog
-
-1. Install posthog-js using your package manager:
+1. Install `posthog-js` using your package manager:
 
 ```shell
 yarn add posthog-js
@@ -43,13 +34,14 @@ export default defineNuxtConfig({
 
 3. Create a new plugin by creating a new file `posthog.client.js` in your [plugins directory](https://nuxt.com/docs/guide/directory-structure/plugins).
 
-```react file=plugins/posthog.client.js
+```js file=plugins/posthog.client.js
 import { defineNuxtPlugin } from '#app'
 import posthog from 'posthog-js'
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost || 'https://app.posthog.com',
+    capture_pageview: false, // we add manual pageview capturing below
     loaded: (posthog) => {
       if (import.meta.env.MODE === 'development') posthog.debug();
     }
@@ -58,11 +50,13 @@ export default defineNuxtPlugin(nuxtApp => {
   // Make sure that pageviews are captured with each route change
   const router = useRouter();
   router.afterEach((to) => {
-    posthog.capture('$pageview', {
-      current_url: to.fullPath
+    nextTick(() => {
+      posthog.capture('$pageview', {
+        current_url: to.fullPath
+      });
     });
   });
-  
+
   return {
     provide: {
       posthog: () => posthogClient
@@ -74,11 +68,11 @@ export default defineNuxtPlugin(nuxtApp => {
 PostHog can then be accessed throughout your Nuxt.js using the provider accessor, for example:
 
 ```vue filename=index.vue
-<script setup lang="ts">
+<script setup>
    const { $posthog } = useNuxtApp()
    if ($posthog) {
-      const posthog =$posthog()
-      posthog?.capture('<event_name>')
+      const posthog = $posthog()
+      posthog.capture('<event_name>')
    }
 </script>
 ```
@@ -86,6 +80,71 @@ PostHog can then be accessed throughout your Nuxt.js using the provider accessor
 See the [JavaScript SDK docs](/docs/libraries/js) for all usable functions, such as:
 - [Capture custom event capture, identify users, and more.](/docs/libraries/js#send-custom-events-with-posthogcapture)
 - [Feature flags including variants and payloads.](/docs/libraries/js#feature-flags)
+
+### Setting up PostHog on the server side
+
+1. Install `posthog-node` using your package manager:
+
+```shell
+yarn add posthog-node
+# or
+npm install --save posthog-node
+```
+
+2. Add your PostHog API key and host to your `nuxt.config.js` file. If you've already done this when adding PostHog to the client side, you can skip this step.
+
+```js file=nuxt.config.js
+export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      posthogPublicKey: '<ph_project_api_key>',
+      posthogHost: '<ph_instance_address>'
+    }
+  }
+})
+```
+
+3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in `[useAsyncData](https://nuxt.com/docs/api/composables/use-async-data)`:
+
+```vue file=app.vue
+<!-- ...rest of code -->
+
+<script setup>
+import { useAsyncData, useCookie, useRuntimeConfig } from 'nuxt/app';
+import { PostHog } from 'posthog-node';
+
+const { data: someData, error } = await useAsyncData('ctaText', async () => {
+  const runtimeConfig = useRuntimeConfig();
+  const posthog = new PostHog(
+    runtimeConfig.public.posthogPublicKey,
+    { host: runtimeConfig.public.posthogHost }
+  );
+
+  const cookies = useCookie(`ph_${runtimeConfig.public.posthogPublicKey}_posthog`);
+  if (cookies && cookies.value) {
+    try {
+      const distinctId = cookies.value.distinct_id; // or you can use your user's email, for example.
+      posthog.capture({
+        distinctId: distinctId,
+        event: 'user_did_something"',
+      })
+      await posthog.shutdownAsync()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  return "Some data";
+});
+
+</script>
+```
+
+> **Note**: Make sure to _always_ call `posthog.shutdownAsync()` after capturing events from the server-side.
+> PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+
+See the [Node SDK docs](/docs/libraries/node) for all usable functions, such as:
+- [Capture custom event capture, identify users, and more.](/docs/libraries/node#capturing-events)
+- [Feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
 
 ## Nuxt v2.16 and below
 
@@ -170,6 +229,7 @@ Let's say for example the user makes a purchase you could track an event like th
 
 ## Further reading
 
+- [How to set up A/B tests in Nuxt](tutorials/nuxtjs-ab-tests)
 - [PostHog for VueJS users](/docs/libraries/vue-js)
 - [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
 - [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)

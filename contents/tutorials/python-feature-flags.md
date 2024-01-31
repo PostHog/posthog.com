@@ -4,7 +4,7 @@ date: 2023-09-05
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-tags: ["feature-flags"]
+tags: ["feature flags"]
 ---
 
 Feature flags make it easy to conditionally run code and show content based on users or conditions. In this tutorial, we show how to create a basic Python Flask app, add PostHog, and set up [feature flags](/feature-flags) to conditionally show content in the app.

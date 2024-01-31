@@ -12,17 +12,14 @@ availability:
 
 The toolbar is like "Inspect Element" for PostHog features and data. When enabled, the toolbar appears as an overlay **on your product or website** (it's not visible to your users). With it, you can interact with elements to [create actions](/tutorials/how-to-capture-events-the-easy-way), visualize heatmaps, override feature flags, and more.
 
-![PostHog toolbar](./toolbar.png)
-
 ## How to launch the toolbar
 
 1. In your PostHog instance, go to '[Launch Toolbar](https://app.posthog.com/toolbar)' in the left-hand menu
-2. Click 'Enable the PostHog toolbar'
-3. Add the URLs you wish to enable the toolbar for. Only you will be able to see it – not your users.
-4. Click Save and then Launch.    
-5. A new window will open with toolbar on your website. Click on the toolbar to interact with it.
+2. Add the URLs you wish to enable the toolbar for. Only you will be able to see it – not your users.
+3. Click Save and then Launch.    
+4. A new window will open with toolbar on your website. Click on the toolbar to interact with it.
 
-![How to setup the PostHog toolbar](./toolbar-setup.mp4)
+![How to setup the PostHog toolbar](./setup-toolbar.mp4)
 
 ## Troubleshooting and FAQ
 
@@ -43,4 +40,38 @@ if (toolbarJSON) {
 
 We are also working on other solutions. Go to [the related issue](https://github.com/PostHog/posthog/issues/9100) to see progress updates (and encourage us to get it done faster!).
 
-> **Warning for Nuxt users:** The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`. If you have a solution, [please let us know](https://app.posthog.com/home#supportModal=feedback%3A).
+### Toolbar not working with Nuxt
+
+The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`. If you have a solution, [please let us know](https://app.posthog.com/home#supportModal=feedback%3A).
+
+### Toolbar disppearing on transition with Astro
+
+[Astro](/tutorial/astro-analytics) with [view transitions enabled](https://docs.astro.build/en/guides/view-transitions/) can cause the toolbar to disappear on transition. To prevent this, you can: 
+
+1. Retrieve the `__posthog` JSON from the URL on `astro:page-load`.
+2. Prevent the toolbar from loading on `astro:before-swap`.
+3. Load the toolbar from JSON on `astro:after-swap`.
+
+```html
+<script>
+    document.addEventListener('astro:page-load', () => {
+        if (!window.posthog) {
+            // Initialize PostHog here...
+        }
+        var toolbarJSON = new URLSearchParams(window.location.hash.substring(1)).get('__posthog');
+        if (toolbarJSON) {
+            window.toolbarJSON = toolbarJSON;
+        }
+    }, { once: true });
+
+    document.addEventListener('astro:before-swap', ev => {
+        window._postHogToolbarLoaded = false;
+    });
+
+    document.addEventListener('astro:after-swap', () => {
+        if (window.toolbarJSON) {
+            window.posthog.loadToolbar(JSON.parse(window.toolbarJSON));
+        }
+    });
+</script>
+```

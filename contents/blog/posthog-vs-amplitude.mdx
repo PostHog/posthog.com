@@ -1,143 +1,247 @@
 ---
-date: 2022-05-13
 title: "In-depth: PostHog vs Amplitude"
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg
+date: 2024-01-08
+author: ["andy-vandervell"]
+rootpage: /blog
+featuredImage: ../images/blog/comparisons/amplitude.jpeg
 featuredImageType: full
-author:
-  - andy-vandervell
-  - joe-martin
 category: General
 tags:
   - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
+import { ComparisonRow } from 'components/ComparisonTable/row'
 
-**Contents:**
+Want to know how PostHog and Amplitude compare? If you remember nothing else, remember these two things:
 
-- [How is PostHog different to Amplitude?](#how-is-posthog-different-from-amplitude)
-- [PostHog vs Amplitude feature comparison](#feature-comparison)
-- [Integrations and data sources](#integrations-and-data-sources)
-- [Strengths of PostHog](#strengths-of-posthog)
-- [Strengths of Amplitude](#strengths-of-amplitude)
+1. **Amplitude** is a product analytics tool built for non-technical users and data analysts.
 
-## How is PostHog different from Amplitude?
+2. **PostHog** is an all-in-one platform built for engineers that replaces Amplitude _and_ numerous other tools.
 
-Over 10,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
+## How is PostHog different?
 
-### 1. It's an all-in-one platform
-PostHog is more than a product analytics tool, it's an all-in-one Product OS that replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flagging, Hotjar for session recording, and [Optimizely](/blog/posthog-vs-optimizely) for A/B testing, or you could just use PostHog for everything. One platform, one price: seamless integration.
+### 1. We're everything you need in one
 
-### 2. It's built for engineers
-Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures data, so you don't have to spend time instrumenting events every time you update your app or website – we also offer robust tools for capturing custom events and actions when you need to. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/contact-sales) if you have questions.
+PostHog replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flags and testing, [Hotjar](/blog/posthog-vs-hotjar) for session replays and surveys, or you could just use PostHog for everything. One platform, one bill, and seamless integration.
 
-### 3. It's open source
-Our MIT License isn’t just for show. You can access [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and use it to [build your own apps](/docs/apps/build) or even add extra functionality. You also benefit from the work of other teams who build their own apps. And we're not just an open-source tool; we're an open-source company. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation).
+### 2. We're built for engineers
 
-> **Further reading:** [How Amplitude compares to other PostHog alternatives](/blog/posthog-alternatives)
+We support all popular (and some unpopular) [SDKs](/docs/libraries), have [extensively documented APIs](/docs/api), and a [powerful SQL query builder](/docs/hogql), so you can analyze data how you want. We make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
 
-## Feature comparison
+### 3. We're open source and transparent
 
-This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our fully-managed SaaS offering.
+Our MIT License isn't just for show. You can read [our source code](https://github.com/PostHog/posthog), raise issues and PRs, and build your own integrations. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation), [our strategy](/handbook/why-does-posthog-exist), and our [product roadmap](/roadmap). Got a question about anything? Ask in [our online community](/questions).
 
-<ComparisonTable column1="Amplitude Analytics" column2="PostHog">
-  <ComparisonRow column1={false} column2={true} feature="Transparent pricing" />
-  <ComparisonRow column1={false} column2={true} feature="Self-serve" />
-  <ComparisonRow column1={true} column2={true} feature="Multi-site" />
-  <ComparisonRow column1={false} column2={true} feature="Event autocapture" />
-  <ComparisonRow column1={true} column2={true} feature="Funnel analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Cohort analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Conversion tracking" />
-  <ComparisonRow column1={true} column2={true} feature="Retention tracking" />
-  <ComparisonRow column1={true} column2={true} feature="Revenue tracking" />
-  <ComparisonRow column1={true} column2={true} feature="UTM tracking" />
-  <ComparisonRow column1={true} column2={true} feature="Event tracking" />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" />
-  <ComparisonRow column1={false} column2={true} feature="Experimentation" />
-  <ComparisonRow column1={true} column2={true} feature="Predictive analytics" />
-  <ComparisonRow column1={false} column2={true} feature="User surveys" />
-  <ComparisonRow column1={false} column2={true} feature="Hedgehogs" />
+## Comparing PostHog and Amplitude
+
+### Platform
+
+Entering a credit card unlocks almost all PostHog features and you **only pay for what you use**. You get a generous free allowance _every_ month and you can set billing limits to prevent surprise bills.
+
+<ComparisonTable column1="PostHog" column2="Amplitude">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion, analyze user behavior" />
+  <ComparisonRow column1="Beta" column2={false} feature="Web analytics" description="Easy to use analytics for marketing websites" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={true} feature="Experiments" description="Run tests on new features, optimize conversion funnels" />
+  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Collect and analyze feedback, run NPS and PMF surveys " />
+  <ComparisonRow column1="Beta" column2={true} feature="Customer data platform" description="Sync data with third-party tools" />
+  <ComparisonRow column1="Beta" column2={false} feature="Data warehouse" description="A single source for all your important data" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app or website" />
+  <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Ad-hoc analysis and collaboration" />
+  <ComparisonRow column1={true} column2={false} feature="Dark mode" description="Choose between light and dark UI" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
 
-## Integrations and data sources
+### Product analytics
 
-Both Amplitude and PostHog integrate with a large number of data sources. The table below is a snapshot of what each platform offers – check out the [PostHog App Store](/apps) for a full list of what's available.
+There are two key differences here:
 
+1. PostHog supports autocapture, which makes it much faster to implement if you don't want to manually instrument every event. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture) and use one of our SDKs – we offer the best of both worlds.
 
-<ComparisonTable column1="Amplitude Analytics" column2="PostHog">
-  <ComparisonHeader category="Export" />
-  <ComparisonRow column1={true} column2={true} feature="Redshift" />
-  <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" />
-  <ComparisonRow column1={true} column2={true} feature="Snowflake" />
-  <ComparisonRow column1={true} column2={true} feature="Amazon S3" />
-  <ComparisonRow column1={true} column2={true} feature="Google BigQuery" />
-  <ComparisonRow column1={false} column2={true} feature="Google Pub/Sub" />
-  <ComparisonRow column1={false} column2={true} feature="RudderStack" />
-  <ComparisonRow column1={true} column2={true} feature="Hubspot" />
-  <ComparisonRow column1={true} column2={true} feature="Salesforce" />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" />
-  <ComparisonRow column1={true} column2={true} feature="API" />
-  </ComparisonTable>
-  
-<ComparisonTable column1="Amplitude Analytics" column2="PostHog">
-  <ComparisonHeader category="Import" />
-  <ComparisonRow column1={true} column2={true} feature="Redshift" />
-  <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" />
-  <ComparisonRow column1={true} column2={true} feature="Snowflake" />
-  <ComparisonRow column1={true} column2={true} feature="Amazon S3" />
-  <ComparisonRow column1={true} column2={true} feature="Segment" />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" />
-  <ComparisonRow column1={true} column2={true} feature="Zendesk" />
-  <ComparisonRow column1={true} column2={true} feature="API" />
+2. PostHog has a [SQL-based query builder](/docs/hogql) for power users, which enables you to generate custom data analyses using PostHog event data. In future, our query builder will let you analyze data as you would in a business intelligence tool, like Metabase, inside PostHog.
+
+<ComparisonTable column1="PostHog" column2="Amplitude">
+  <ComparisonRow column1="1 million events, unlimited insights" column2="100k monthly tracked users, 10 saved insights" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual logging" />
+  <ComparisonRow column1={true} column2="Add on" feature="Query editor" description="Write your own queries in SQL" />
+  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
+  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={true} feature="Retention" description="Visualize which users stay, for how long" />
+  <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
+  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at a company and account level" />
+  <ComparisonRow column1={true} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
+  <ComparisonRow column1={true} column2={true} feature="Stickiness" description="Find out what events keep users coming back." />
+  <ComparisonRow column1={true} column2={true} feature="Custom formulas" description="Use formulas to calculate unique insights" />
 </ComparisonTable>
 
-## Strengths of PostHog
+### Feature flags
 
-![PostHog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
-### Integrated session recording
-While Amplitude and PostHog share many features, PostHog has [Session Recording](/product/session-recording) built in as standard.
+<ComparisonTable column1="PostHog" column2="Amplitude">
+  <ComparisonRow column1="1 million API requests" column2="100k tracked users" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2={true} feature="Multivariate flags" description="Flags with multiple customizable values" />
+  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
+  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Store flag definitions locally" />
+  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
+  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
+  <ComparisonRow column1={true} column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
+  <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
+</ComparisonTable>
 
-Session recording is an incredibly powerful tool for understanding what people are actually doing in your product. The tight integration within PostHog means you can go from viewing a funnel insight to watching real users interact with the funnel, making it easy to diagnose problems and find solutions.
+### Experimentation
 
-Amplitude doesn't have session recording, so you have to run a third-party tool [like Hotjar or FullStory](/blog/best-open-source-session-replay-tools) as well – an added expense that lacks the tight integration afforded by a built-in app.
+PostHog's offers a generous free 1 million A/B testing events. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
 
-### Experimentation and Feature Flags
+<ComparisonTable column1="PostHog" column2="Amplitude">
+  <ComparisonRow column1="1 million API requests" column2="None" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that a test tracks" />
+  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
+  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={true} column2={true} feature="Statistical significance" description="Automatically checks for statistical significance" />
+  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculates the recommended run time and sample size" />
+  <ComparisonRow column1="Partial" column2={true} feature="Holdout testing" description="Withhold multiple features to measure cumulative impact" />
+  <ComparisonRow column1="Bayesian" column2="Sequential" feature="Statistics engine" description="How the results of an experiment are calculated" />
+</ComparisonTable>
 
-Feature Flags and Experimentation (A/B testing and multivariate tests) are core PostHog features, available for free for anyone generating fewer than 1 million events per month. Feature Flags are also free as part of [PostHog Open Source](/docs/self-host)
+### Session replay
 
-Amplitude Analytics doesn't include feature flags or experimentation by default, instead bundling them as part of a separate product, Amplitude Experiment, an additional cost on top of its core analytics product.
+Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are _not_ video recordings of users. We reconstruct sessions by capturing Document Object Model (DOM) mutations. You have complete control over what is captured and all private and personal data is masked. 
 
-### Transparent pricing
+<ComparisonTable column1="PostHog" column2="Amplitude">
+  <ComparisonRow column1="5,000 recordings" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={false} feature="Web app recordings" description="Capture recordings from single-page apps" />
+  <ComparisonRow column1="Beta" column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
+  <ComparisonRow column1={true} column2={false} feature="Identity detection" description="Link recordings to user IDs" />
+  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a users' browser environment" />
+  <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
+  <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
+  <ComparisonRow column1={true} column2={false} feature="Privacy masking" description="Censor personal information from playback" />
+  <ComparisonRow column1={true} column2={false} feature="Conditional recording" description="Only capture the sessions you want" />
+  <ComparisonRow column1={true} column2={false} feature="DOM explorer" description="Explore an interactive snapshot of replays" />
+  <ComparisonRow column1={true} column2={false} feature="Export recordings" description="Save important recordings offline" />
+  <ComparisonRow column1={true} column2={false} feature="Minimum duration" description="Only record sessions longer than the minimum duration" />
+  <ComparisonRow column1={true} column2={false} feature="Sample recorded sessions" description="Restrict the percentage of sessions that will be recorded" />
+  <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
+</ComparisonTable>
 
-All versions of PostHog are transparently priced – even the [Enterprise version](/pricing), which adds single sign-on (SAML), team training, instance monitoring, and more. Paid tiers (excluding Enterprise) are free up to 1 million events per month, and pricing calculators show exactly how much you'll pay when you go over 1 million. The more you use, the cheaper it gets per event.
+### Surveys
 
-Amplitude doesn't share its pricing publibly, so you have to speak to their sales team to get up and running, and negotiate a price based on your usage. It's a bit like a really expensive restaurant. It looks fancy and expensive from the outside, but you only find out just how expensive it is when you're already sat at your table.
+Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES). We include [survey templates](/templates?filter=type&value=survey) for all these and more helping you get started fast. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which one you should use and when.
 
-## Strengths of Amplitude
+<ComparisonTable column1="PostHog" column2="Amplitude">
+  <ComparisonRow column1="250" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={false} feature="Open text" description="Free text answers and feedback" />
+  <ComparisonRow column1={true} column2={false} feature="Product rating" description="Rank using emojis or number" />
+  <ComparisonRow column1={true} column2={false} feature="Single choice" description="Select one answer from multiple" />
+  <ComparisonRow column1={true} column2={false} feature="Multiple choice" description="Select more than one answer from multiple" />
+  <ComparisonRow column1={true} column2={false} feature="NPS surveys" description="Net Promoter Score survey template" />
+  <ComparisonRow column1={true} column2={false} feature="PMF surveys" description="Product-market fit survey template" />
+  <ComparisonRow column1={true} column2={false} feature="User property targeting" description="Target users based on any of their user properties" />
+  <ComparisonRow column1={true} column2={false} feature="Custom colors & positioning" description="Customize the colors of your surveys to match your brand" />
+  <ComparisonRow column1={true} column2={false} feature="Custom HTML" description="Add custom HTML to your survey text" />
+  <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
+</ComparisonTable>
 
-![Amplitude](../images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
+### Integrations
 
-### Personalization engine and machine learning
+PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as Sentry, Zapier and Zendesk, while Amplitude has more integrations with marketing and advertising platforms. See our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
 
-In addition to its analytics product, Amplitude offers Amplitude Recommend, a personalization engine powered by machine learning. It allows teams to create custom experiences, such as product recommendations or priority ordering, based on machine learning predictions. This is a potentially powerful tool for large e-commerce businesses who are looking to create an Amazon-style shopping experience.
+<ComparisonTable column1="PostHog" column2="Amplitude">
+   <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from data warehouses and other sources" />
+   <ComparisonRow column1={true} column2={true} feature="Exports" description="Export data to data warehouses other destinations" />
+   <ComparisonRow column1={true} column2={true} feature="Segment" description="Send events via Segment" />   
+   <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
+   <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
+   <ComparisonRow column1={true} column2={false} feature="Zendesk" description="Two-way integration for customer support" />
+   <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
+   <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
+   <ComparisonRow column1={true} column2={false} feature="Community integrations" description="Build your own integration" />
+   <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />   
+</ComparisonTable>
 
-Amplitude also uses machine learning to power what it calls predictive analytics, which estimates future outcomes (e.g. future conversion rate) based on current and historical data. This could be useful for performance forecasting, especially for marketing teams.
+### Pricing
 
-### Free up to 10 million events per month
+**PostHog** charges for actual usage – i.e. product analytics events, feature flag API requests, and so on. No credit card is required to signup and use PostHog, but entering a credit card unlocks almost all features and **you'll pay nothing** if you stay within our **generous free tier** limits:
 
-Amplitude's entry-level tier is free to use up to 10 million events per month, which compares very favorably to rivals like Mixpanel (up to 100k monthly users), Pendo (up to 1,000 monthly users) and Heap (up to 10,000 sessions per month). Once you exceed 10 million events, you'll need to speak to Amplitude's sales team to proceed further.
+|                       | **Free usage per month** 
+|-----------------------|--------------------------
+| **Product analytics** | 1 million events        
+| **Session replay**    | 5,000 recordings         
+| **Feature flags**     | 1 million API requests
+| **A/B testing**       | 1 million API requests  
+| **Surveys**           | 250 responses            
 
-PostHog Cloud and PostHog Self-Hosted are free up to 1 million events per month, but unlike Amplitude you get premium features like Experimentation, Correlation Analysis, Group Analytics and user permissions for free when you're under this limit.
+**Amplitude** charges based on monthly tracked users (MTUs). The cost of add owns, such as A/B testing (not available on self-serve plans), group analytics, and unlimited cohorts (self-serve plans are limited to five) isn't disclosed.
 
-PostHog Open Source is free for life, but is limited to one project. It includes all the core analytics features, such as Funnels, Trends, Cohorts, Paths, Feature Flags, and Session Recording, but doesn't have Experimentation or Correlation Analysis.
+Our free tiers are for life, which means you'll always get your first 1 million events (or 5,000 replays and so on) for free every month, no matter how many you end up using.
 
-<ArrayCTA /> 
+Amplitude offers a free Starter plan, but it lacks many important features:
+
+<ComparisonTable column1="PostHog" column2="Amplitude">
+   <ComparisonRow column1="1 million events" column2="50k tracked users" feature="Free usage" description="Free tier usage each month" />
+   <ComparisonRow column1="Users" column2="Unlimited" feature="Unlimited" description="Active accounts" />
+   <ComparisonRow column1="Unlimited" column2="10 only" feature="Saved insights" description="Number of you charts you can create" />   
+   <ComparisonRow column1={true} column2={false} feature="Custom events" description="Create custom tracking events" />
+   <ComparisonRow column1={true} column2={false} feature="Formulas" description="Create custom insights using formulas" />
+   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Release and control features" />
+   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
+   <ComparisonRow column1={true} column2={false} feature="Billing limits" description="Set limits to avoid surprise bills" />
+</ComparisonTable>
+
+We charge progressively less per event, replay, API request the more you use – e.g. we charge $0.000100 per event up to 2 million events, but all events after 10 million a month only cost $0.000025, 75% less.
+
+Eligible companies can also get $50,000 in credit in our [PostHog for Startups program](/startups). 
+
+### Security and compliance
+
+<ComparisonTable column1="PostHog" column2="Amplitude">
+  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
+  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={false} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
+  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+</ComparisonTable>
+
+## FAQ
+
+### Can PostHog also replace Google Analytics?
+
+Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using [Google Tag Manager](/docs/libraries/google-tag-manager). See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [an intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
+
+### Is PostHog easy to deploy?
+
+Yes. Just paste our web snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. This works for apps, blogs, scripts, no-code site builders, and more. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
+
+### How can I estimate my usage?
+
+The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days. Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
+
+### Does PostHog block bots by default?
+
+Yes. See the [full blocklist in our docs](/troubleshooting#does-posthog-block-bots-by-default).
+
+### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
+
+Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
+
+### What about ad blockers?
+
+We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+
+### How does PostHog compare to other Amplitude alternatives?
+
+Still need some convincing? See our guide to the [most popular Amplitude alternatives](/blog/best-amplitude-alternatives).
+
+<ArrayCTA />

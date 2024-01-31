@@ -99,7 +99,7 @@ ClickHouse utilizes Shared-Nothing Architecture by default. But ClickHouse also 
 
 ClickHouse has three significant optimizations that make querying aggregate computations efficient: (i) materialized views, (ii) specialized engines, and (iii) vectorized query execution.
 
-- **Materialized views:** Materialized views are independent tables derived from other table data generated at some specific point in time. Unlike databases like Postgres, ClickHouse's materialized views are constantly re-generated in the background after new data is inserted. While materialized views are delayed because most of ClickHouse's use cases involve aggregate, analytical data, the delay doesn’t pose a problem.
+- **Materialized views:** Materialized views are independent tables derived from other table data generated at some specific point in time. Unlike databases like Postgres, ClickHouse's materialized views are constantly re-generated in the background as new data is inserted. While materialized views are delayed because most of ClickHouse's use cases involve aggregate, analytical data, the delay doesn’t pose a problem.
 
 - **Specialized engines:** Materialized views are aided by ClickHouse's specialized engines, which can do anything from storing aggregates more efficiently on disk (AggregatingMergeTree) to allowing you to make HTTP calls to fetch data. This is one of the useful features we leverage extensively at PostHog – watch our [video on them](https://youtu.be/6IwLWEx_mg4?t=804) if you're curious. 
 
@@ -123,7 +123,7 @@ Part of Snowflake’s value prop is the broad appeal to both technical and non-t
 
 ClickHouse and Snowflake are both used for analytics, but ClickHouse is more focused on analytical queries. 
 
-ClickHouse is a great fit for PostHog because we are an analytics platform – we need to be able to answer questions like “what is the average time to convert for users who saw a certain feature?” or “what is the average time to convert for users who saw a certain feature?” in *real time* and *at speed of click*.
+ClickHouse is a great fit for PostHog because we are an analytics platform – we need to be able to answer questions like “what is the average time to convert for users who saw a certain feature?” in *real time* and *at speed of click*.
 
 Traditionally, Snowflake can be considered more of a standard data warehouse or data lake where you can store all your data and then query it. This is a great fit for companies that want to store all their data in one place and then query it.
 

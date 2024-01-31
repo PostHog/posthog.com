@@ -1,0 +1,205 @@
+---
+title: "In-depth: PostHog vs Statsig"
+date: 2023-12-14
+author: ["lior-neu-ner"]
+showTitle: true
+rootpage: /blog
+sidebar: Blog
+hideAnchor: true
+featuredImage: ../images/blog/comparisons/statsig.jpeg
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+PostHog and Statsig both offer A/B testing and feature flags, but they're different in two important ways:
+
+- **Statsig** is a dedicated testing platform that offers advanced statistical methods for running tests. It's ideal for data scientists and growth teams in large enterprises who need to conduct complex A/B testing.
+
+- **PostHog** is an all-in-one platform for engineers and product teams who want a more straightforward approach to experimentation. In addition to A/B testing, it offers [feature flags](/feature-flags), advanced [product analytics](/docs/product-analytics), [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
+
+This post compares their platforms, experimentation features, pricing, and more.
+
+## How is PostHog different?
+
+### 1. We're an all-in-one platform
+
+PostHog brings together all the tools engineers need for testing, releasing, and measuring the success of new features. Feature flags and A/B testing are only part of a suite of tools PostHog offers.
+
+![PostHog homepage features](../images/blog/posthog-vs-statsig/all.png)
+
+PostHog combines usage, performance, and behavioral data with flags and experiments. Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
+
+### 2. We're open source and transparent
+
+PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/blog/how-we-built-an-app-server), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like Statsig can't offer.
+
+### 3. We ship weirdly fast
+
+We update [our changelog](/changelog) with a recap of new features every week, and often there’s even more in beta testing. We work hard to keep PostHog on the cutting edge and respond quickly to feedback from our users.
+
+## Comparing PostHog and Statsig
+
+### Platform
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Test changes and analyze impact" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
+  <ComparisonRow column1={false} column2={true} feature="Dynamic config" description="Replace hard-coded values in your app with config values" />
+  <ComparisonRow column1={true} column2={false} feature="Session replays" description="Watch real users use your product; debug behavior" />
+  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Code publicly accessible" />
+  <ComparisonRow column1="In beta" column2={false} feature="Data warehouse storage" description="Store large amounts of analytics data" />
+  <ComparisonRow column1={false} column2={true} feature="Data warehouse experiments" description="Run A/B tests natively on data in your existing warehouse" />
+</ComparisonTable>
+
+### Experimentation
+
+Both tools enable you to run [A/B/n](/tutorials/abn-testing) and [multivariate](/product-engineers/what-is-multivariate-testing-examples) tests, set custom goals, and calculate statistical significance, but:
+
+- **Statsig** offers some more advanced testing techniques, such as multi-armed bandit, mutually exclusive, and holdout tests. It also lets you choose between Bayesian and Frequentist engines, and supports Bonferroni correction.
+
+- **PostHog** provides a more intuitive user interface and simpler setup process, making it ideal for teams who prefer a more straightforward approach to experimentation, and tight integration with its other powerful tools.
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that a test tracks" />
+  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Statistical significance calculation" description="Calculate if changes make a statistically significant impact" />
+  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
+  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={true} column2={true} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
+  <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
+  <ComparisonRow column1="Partial" column2={true} feature="Holdout testing" description="Withhold multiple features to measure cumulative impact" />
+  <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." />
+  <ComparisonRow column1={false} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments" />
+  <ComparisonRow column1={false} column2={true} feature="Bonferroni correction" description="Includes α correction when tests are being performed simultaneously" />
+</ComparisonTable>
+
+- **Holdout testing:** It's possible to run a [holdout test](/tutorials/holdout-testing) across multiple A/B tests in PostHog. However, the process is more manual than Statsig's, which has built-in functionality to do this.
+  
+### Feature management
+
+While both offer the core features you need, Statsig's feature flags are boolean-based, while PostHog supports [multivariate flags with JSON payloads](/docs/feature-flags/creating-feature-flags#served-value) _and_ boolean flags. This provides greater flexibility in testing and deploying different variations of a feature, making them more suitable for complex rollouts.
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
+  <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
+  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
+  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
+  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
+  <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
+</ComparisonTable>
+
+### Product analytics
+
+Both PostHog and Statsig offer the functionality you expect from product analytics tools, such as dashboards, graphs, and funnels. However:
+
+- **PostHog** provides deep insights into how users are interacting with your product. It includes features such as lifecycle, stickiness, correlation, and retention analysis.
+
+- **Statsig** does provide some additional insights, such as retention analysis, but its main focus is to use product analytics to set up metrics to run A/B tests on. 
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual logging" />
+  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
+  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
+  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at a company level" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={true} feature="Retention analysis" description="Visualize which users stay, for how long" />
+  <ComparisonRow column1={true} column2="In beta" feature="User paths" description="Track user flows and where they drop-off" />
+  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
+  <ComparisonRow column1={true} column2={false} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
+  <ComparisonRow column1={true} column2={false} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
+  <ComparisonRow column1={true} column2={true} feature="Formulas" description="Use custom formulas to calculate unique insights" />
+  <ComparisonRow column1={true} column2={false} feature="Query editor" description="Write your own queries in SQL" />
+</ComparisonTable>
+
+### Pricing
+
+Both PostHog and Statsig offer simple, transparent pricing.
+
+**Statsig** has a free plan for up to 1 million *metered events* (a metered event is any feature flag, A/B testing, or logging event). Thereafter, it's $150 per month for up to 5 million metered events, and then $50 per every 1 million events. 
+
+**PostHog’s** prices for [A/B testing and feature flags](/pricing?product=feature-flags) requests are as follows: 
+   - Free up to 1 million requests. 
+   - **$0.000100** per request between 1-2 million requests – i.e., $100 for 1 million requests.
+   - **$0.000045** from 2-10 million requests – i.e. $45 for 1 million requests
+   - Progressively cheaper beyond 10 million requests.
+
+You can, however, significantly reduce feature flag and A/B testing requests by using [PostHog's backend local evaluation](/docs/feature-flags/local-evaluation), potentially saving you a considerable amount of money.
+
+> **Note:** Product analytics are billed separately from A/B testing and feature flag requests. See our [analytics pricing](/pricing?product-analytics) for more details.
+
+### Integrations
+
+Both PostHog and Statsig have a range of integrations that enable them to import, export, enhance, and make use of data, but PostHog being open source means you can [create your own integration](/docs/apps/build).
+
+Below is a sample comparison of PostHog and Statsig's integrations. Be sure to checkout [PostHog's full list of integrations](/cdp).
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+   <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from source" />
+   <ComparisonRow column1={true} column2={true} feature="Exports" description="Export data to other sources" />
+   <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
+   <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
+   <ComparisonRow column1={false} column2={true} feature="Datadog" description="Capture flag data in Datadog" />
+   <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
+   <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
+</ComparisonTable>
+
+### Security and compliance
+
+Both PostHog and LaunchDarkly enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
+
+An advantage of Statsig is that it can be made HIPAA-compliant, while PostHog cannot. This makes Statsig better suited for healthcare companies.
+
+<ComparisonTable column1="PostHog" column2="Statsig">
+  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
+  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={false} column2="Enterprise" feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
+  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+  <ComparisonRow column1={true} column2={true} feature="Approvals" description="Require approvals to change flags" />
+  <ComparisonRow column1={true} column2={true} feature="Permissioning" description="Control who can edit and modify flags" />
+</ComparisonTable>
+
+## Frequently asked questions
+
+### Who is PostHog useful for?
+
+PostHog is built for startups and their engineers. It provides all the tools startups need to build successful products. The people who find PostHog most useful are founders, [product engineers](/blog/what-is-a-product-engineer), and growth engineers.
+
+Companies that use PostHog feature flags and experiments include [Y Combinator](/customers/ycombinator), [Vendasta](/customers/vendasta), and [AssemblyAI](/customers/assemblyai).
+
+### Who is Statsig useful for?
+
+Statsig is for teams that require advanced experimentation capabilities and more sophisticated statistical methods. It's ideal for data scientists and growth teams who need to conduct complex A/B testing.
+
+Teams that frequently run multiple experiments on the same surface concurrently will appreciate Statsig's ability to handle mutually exclusive experiments and implement Bonferroni correction.
+
+### How much does PostHog cost?
+
+Feature flags and experiments are free for up to 1M requests per month. Beyond that, it costs $0.0001/request (or $1 per 10,000 requests). There are discounts for high-volume users, non-profits, and [startups](/startups). 
+
+Other products, like product analytics and session replay, have separate but similarly structured [pricing](/pricing). 
+
+### How much does Statsig cost?
+
+Statsig is free up to 1M requests per month. Thereafter, it's $150 per month for up to 5 million metered events, and then $50 per every 1 million events thereafter.
+
+### Does PostHog offer discounts for nonprofits and startups?
+
+Yes, PostHog offers both. Nonprofit organizations can contact our team and are usually eligible for a 50% discount, while startups can sign up for $50,000 of free credit (and a host of other perks) in the [PostHog for Startups program](/startups).
+
+<ArrayCTA />

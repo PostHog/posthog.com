@@ -11,8 +11,6 @@ crosspost:
   - Product engineers  
 ---
 
-> This post is from our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. We send it (roughly) every two weeks.
-
 What is the meaning of life?
 
 How can someone achieve happiness?
@@ -22,6 +20,8 @@ What does it mean to be successful?
 These are some of life’s greatest questions, and in this issue, we answer one of them (sort of).
 
 **This week’s theme is:** Launching successful new features
+
+> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 🛠️ How we build new features users love
 At PostHog, a new feature is successful if it:

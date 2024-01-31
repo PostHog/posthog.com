@@ -44,6 +44,12 @@ A good question to ask yourself here is, "If I were to switch away from PostHog,
 
 For example, if someone were to consider moving from PostHog to some other provider, cohorts would need to be manually recreated in the other provider, which would be tedious. However, something like Web Performance just happens and doesn't require any user involvement, so isn't sticky.
 
+### Product pricing should include everything required to use that product
+
+When one of our products has a dependency on another of our products, we should bundle the cost of the dependencies in with the product's pricing so customers only pay once for using a given product.
+
+For example, when someone calls a feature flag, we send a $feature_flag_called event so we can have stats. In this case, we don't charge for those events, as the events are solely related to feature flags.
+
 ### Other guidelines
 
 - We should always ask ourselves how newly release features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
@@ -57,7 +63,5 @@ For example, if someone were to consider moving from PostHog to some other provi
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
 
 - Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers to avoid unexpected pricing changes.
-
-
 
 

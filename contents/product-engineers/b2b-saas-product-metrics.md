@@ -67,7 +67,7 @@ Think we missed one? Make a suggestion via [our website repo](https://github.com
 
 ### Adoption rate
 
-**What is it?**  Adoption rate is a product health metric that tells you what percentage of total signups turned into active users in any given period. 
+**What is it?**  Adoption rate is a [product health metric](/product-engineers/product-health-metrics) that tells you what percentage of total signups turned into active users in any given period. 
 
 Your adoption rate is `(new active users / signups) x 100`, so 40 new active users and 200 signups equals an adoption rate of 20%.
 
@@ -107,7 +107,7 @@ We view this figure as more important than the number of active users. If the nu
 
 ### Net Promoter Score (NPS)
 
-**What is it?**  NPS is a well-known customer satisfaction metric, and a good indicator for future customer retention and [product-market fit](/blog/product-market-fit-game). 
+**What is it?**  [NPS](/product-engineers/nps-vs-csat-vs-ces) is a well-known customer satisfaction metric, and a good indicator for future customer retention and [product-market fit](/blog/product-market-fit-game). 
 
 On a scale of 1 to 10, users who select 9 or 10 when asked "how likely are you to recommend us to a friend of colleague" are promoters. Those who vote 0 to 6 are detractors.
 

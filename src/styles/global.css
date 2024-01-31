@@ -38,7 +38,7 @@ code {
 }
 
 ::-webkit-scrollbar {
-    @apply h-3 w-3;
+    @apply h-2.5 w-2.5;
 }
 
 ::-webkit-scrollbar-track {
@@ -192,7 +192,7 @@ h4 {
     }
 
     code:not('.article-content-ignore') {
-        @apply font-code font-medium text-sm border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm px-1 py-0.5;
+        @apply font-code font-medium text-sm border border-light dark:border-dark bg-accent dark:bg-accent-dark  rounded-sm px-1 py-0.5;
     }
 
     blockquote {
@@ -240,6 +240,7 @@ h4 {
             @apply mt-8;
         }
     }
+
     blockquote:not(.quote) {
         @apply px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
 
@@ -260,12 +261,14 @@ h4 {
             @apply opacity-75 text-sm;
         }
     }
+
     tr:not(:first-child) {
         td,
         th {
             @apply border-t border-light dark:border-dark;
         }
     }
+
     td,
     th {
         @apply pt-2 text-[15px];
@@ -283,6 +286,10 @@ h4 {
     th:last-child,
     td:last-child {
         padding-right: 0;
+    }
+
+    hr {
+        @apply border-t border-b-0 border-solid border-light dark:border-dark my-6 h-0;
     }
 
     /* expandable/collapsible sections */
@@ -586,19 +593,19 @@ ul {
     -moz-appearance: none;
 }
 
-.rc-slider.log-slider .rc-slider-track {
+.rc-slider.slider .rc-slider-track {
     @apply bg-black;
 }
 
-.rc-slider.log-slider .rc-slider-handle {
+.rc-slider.slider .rc-slider-handle {
     @apply bg-red border-3 border-white h-[21px] w-[21px] shadow-md -mt-[7px];
 }
 
-.rc-slider.log-slider .rc-slider-handle:active {
+.rc-slider.slider .rc-slider-handle:active {
     @apply shadow-none;
 }
 
-.rc-slider.log-slider .rc-slider-tooltip {
+.rc-slider.slider .rc-slider-tooltip {
     display: none;
 }
 
@@ -971,9 +978,25 @@ ul {
 }
 
 .mermaid {
+    .messageText {
+        @apply dark:!fill-white;
+    }
+    .loopText {
+        @apply dark:!fill-gray-accent-light !stroke-gray-accent-light;
+    }
+    path,
+    line {
+        @apply dark:!stroke-gray-accent;
+    }
+    tspan {
+        @apply dark:!fill-white;
+    }
+    g rect {
+        @apply dark:!fill-gray-accent-dark;
+    }
+
     line-height: 1;
 }
-
 @keyframes fade {
     0% {
         opacity: 0;

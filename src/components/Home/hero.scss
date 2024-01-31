@@ -1,0 +1,77 @@
+$titleWordCount: 5;
+$ctaCount: 2;
+
+@keyframes staggerInLg {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes staggerInSm {
+    0% {
+        opacity: 0;
+        transform: translateY(80%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.home-hero-title {
+    @for $i from 1 through $titleWordCount {
+        span:nth-of-type(#{$i}) {
+            animation: staggerInLg;
+            animation-duration: 0.6s;
+            animation-delay: calc(#{$i} * 100ms);
+            animation-timing-function: ease-out;
+            animation-fill-mode: both;
+            @media (max-width: 1200px) {
+                animation: staggerInSm;
+                animation-duration: 0.6s;
+                animation-delay: calc(#{$i} * 100ms);
+                animation-timing-function: ease-out;
+                animation-fill-mode: both;
+            }
+        }
+    }
+}
+
+.home-hero-subtitle {
+    opacity: 0;
+    animation: fadeIn;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-delay: 0.7s;
+}
+
+.home-hero-cta {
+    @for $i from 1 through $ctaCount {
+        a:nth-of-type(#{$i}) {
+            animation: fadeIn;
+            animation-duration: 3s;
+            @if $i == 1 {
+                animation-delay: calc(#{$i} * 1200ms);
+            } @else {
+                animation-delay: calc(#{$i} * 800ms);
+            }
+            animation-timing-function: ease;
+            animation-fill-mode: both;
+        }
+    }
+}

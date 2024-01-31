@@ -9,9 +9,11 @@ import { Images } from './components/Careers/Images'
 import { ComparisonTable } from './components/ComparisonTable'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
+import { Drawer } from './components/Drawer'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
+import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
@@ -21,12 +23,14 @@ import { Label } from './components/Label'
 import { List } from './components/List'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
+import { PrivateLink } from './components/PrivateLink'
 import { AbTesting } from './components/Product/AbTesting'
 import { FeatureFlags } from './components/Product/FeatureFlags'
 import { ProductAnalytics } from './components/Product/ProductAnalytics'
 import { ProductOS } from './components/Product/ProductOS'
 import { SessionReplay } from './components/Product/SessionReplay'
 import { Surveys } from './components/Product/Surveys'
+import { ProductScreenshot } from './components/ProductScreenshot'
 import { Competitor } from './components/Products/Competitor'
 import { CustomerCard } from './components/Products/CustomerCard'
 import { DocsLinks } from './components/Products/DocsLinks'
@@ -40,6 +44,7 @@ import { SmoothScroll } from './components/Products/SmoothScroll'
 import { Subfeature } from './components/Products/Subfeature'
 import { TextCard } from './components/Products/TextCard'
 import { TutorialCard } from './components/Products/TutorialCard'
+import { QuickLinks } from './components/QuickLinks'
 import { Quote2 } from './components/Quote2'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
@@ -59,9 +64,11 @@ export const shortcodes = {
     ComparisonTable,
     CompensationCalculator,
     ContentViewer,
+    Drawer,
     lib,
     Emoji,
     FeatureAvailability,
+    FormulaScreenshot,
     GDPRForm,
     HiddenSection,
     HubSpotForm,
@@ -71,12 +78,14 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
+    PrivateLink,
     AbTesting,
     FeatureFlags,
     ProductAnalytics,
     ProductOS,
     SessionReplay,
     Surveys,
+    ProductScreenshot,
     Competitor,
     CustomerCard,
     DocsLinks,
@@ -90,6 +99,7 @@ export const shortcodes = {
     Subfeature,
     TextCard,
     TutorialCard,
+    QuickLinks,
     Quote2,
     Signatures,
     SlackPage,
