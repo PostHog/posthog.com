@@ -17,14 +17,14 @@ hideAnchor: false
 
 ## Responsibilities
 
-Team Ingestion owns our ingestion pipeline end-to-end. That means we own:
-- Django server ingestion API
+Our team owns our ingestion pipeline end-to-end. That means we own:
+- Capture APIs
 - Ingestion app server
-- Exports and webhooks
-- Transformation apps
+- Data pipelines, including:
+  - Transformation apps
+  - Data Export and webhooks
 - Client libraries, where it pertains to event ingestion
 - Kafka and ClickHouse setup, where it pertains to event ingestion
-- Async migrations
 
 Our work generally falls into one of three categories, in order of priority:
 
@@ -51,15 +51,15 @@ In short, a core responsibility of our team is to enable other teams to be succe
 
 ### Pipelines
 
-We're building the most extensible and integrated data pipeline, which we treat as a separate product just like product analytics and feature flags, for example. The PostHog data warehouse is one destination, and the most important, but we care about getting data into all the places where it is valuable.
+We're building a flexible and integrated data pipeline, which we treat as a separate product just like product analytics and feature flags, for example. The PostHog data warehouse is one destination, and the most important, but we care about getting data into all the places where it is valuable.
 
 ## How do we work?
 
-We run a 30 minute standup on Monday, Wednesdays, and Fridays, and extend the slot if we feel the need to have a longer synchronous discussion about a specific topic. We look at [the Pipeline Team GitHub Board](https://github.com/orgs/PostHog/projects/46/views/1), and we document every standup in [this doc](https://docs.google.com/document/d/1iHeef4lWQ4rSBXmaM6A9_GHmARXax7If4B0duo8gFSE/edit?usp=sharing).
+We run a 30 minute sync meeting on Monday, Wednesdays, and Fridays, and extend the slot if we feel the need to have a longer synchronous discussion about a specific topic. We look at [the Pipeline Team GitHub Board](https://github.com/orgs/PostHog/projects/46/views/1), and we document every sync in [this doc](https://docs.google.com/document/d/1iHeef4lWQ4rSBXmaM6A9_GHmARXax7If4B0duo8gFSE/edit?usp=sharing).
 
 We are happy to sync anytime if we feel it is important to do so. This is generally coordinated on Slack where someone will start a Slack huddle. Some of the reasons we sync include: debugging outages, sharing context (including shadowing), making decisions when there's been a deadlock, and pairing sessions.
 
-We have a single owner assigned to each priority and sprint goal, but we work together on goals as a team. We try to avoid lone-wolfing, so in general we'll have 2 sprint goals per sprint.
+We have a single owner assigned to each priority and sprint goal, but we work together on goals as a team. We try to avoid lone-wolfing, so in general we'll have 3 sprint goals per sprint.
 
 ## Secondary (a.k.a. Luigi)
 

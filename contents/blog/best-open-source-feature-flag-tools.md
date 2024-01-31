@@ -31,7 +31,7 @@ While it's tempting to [build your own tools](/blog/feature-flags-as-a-service),
 - **GitHub stars:** 14.8k
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-![PostHog](../images/blog/best-launchdarkly-alternatives/posthog.png)
+![PostHog](../images/screenshots/feature-flags.png)
 
 #### What is PostHog?
 
@@ -67,7 +67,7 @@ There are no limits on feature flag usage in the open-source edition, though A/B
 
 [Unleash](https://www.getunleash.io/) is open-source feature flag service with a public roadmap and a strong community. Official SDK support is comprehensive and there's a large selection of community maintained SDKs for less popular frameworks, too.
 
-### Supported SDKs
+#### Supported SDKs
 
 - **Client-side:** JavaScript, Android, Flutter, iOS, React, Svelte, Vue.
 
@@ -147,7 +147,7 @@ Flagsmith is free up to 50,000 requests per month when you choose the cloud feat
 
 - **Server-side:** C#, .NET, C++, Dart, Go, Java, Node, PHP, Python, Ruby.
 
-### How much does it cost?
+#### How much does it cost?
 
 Nothing. There is no paid version of Flipt. It's distributed under a GPL-3.0 license.
 
@@ -181,7 +181,7 @@ In addition to the free open-source edition, Flipper also offers a cloud-hosted 
 
 FeatBit is an open-source feature flag and A/B testing tool that's available in Standard (for small businesses) and Professional (for enterprises) flavors – the Standard edition is easier deploy due to fewer dependencies. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like Datadog, Grafana, and Amplitude.
 
-### Supported SDKs
+#### Supported SDKs
 
 - **Client-side:** JavaScript, React, Vue.
 

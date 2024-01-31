@@ -40,7 +40,7 @@ The most straightforward and safe operation to perform is to trigger a "restart"
 Example:
 
 ```shell
-kubectl rollout restart deployment/plugins-jobs -n posthog
+kubectl rollout restart deployment/ingestion-plugins-jobs -n posthog
 ```
 
 If this doesn't fix the issue, you should try to establish the health of both Kafka and the jobs database. Provided they look healthy, we've likely shipped a bug and should look at Git history and revert any suspicious changes.

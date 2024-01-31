@@ -30,7 +30,7 @@ To use them, select the "HogQL" tab when filtering or breaking down and add your
 
 ## Event explorer
 
-The event explorer replaces the "Live Events" tab in PostHog. It provides more functionality including date filtering, event counts, HogQL queries, [aggregations](#supported-aggregations) and column configuration.
+The [event explorer](https://app.posthog.com/events) replaces the "Live Events" tab in PostHog. It provides more functionality including date filtering, event counts, HogQL queries, [aggregations](#supported-aggregations) and column configuration.
 
 ![Event Explorer](../../images/features/hogql/event-explorer.png)
 
@@ -46,7 +46,7 @@ We're working hard on making all these public. Follow along in the [relevant Git
 
 > **Will there be API pricing?** The HogQL API is free to use while it's in the public beta, and we work out the details. After we launch for real, we plan to charge a competitive rate for heavy usage. Stay tuned.
 
-To access HogQL via the [PostHog API](/docs/api), make a POST request to `/api/project/:project_id/query` with the following JSON payload:
+To access HogQL via the [PostHog API](/docs/api), make a POST request to `/api/projects/:project_id/query` with the following JSON payload:
 
 ```json
 {"query": {"kind": "HogQLQuery", "query": "select * from events limit 100"}}

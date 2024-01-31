@@ -240,11 +240,11 @@ PostHog.identify(distinctId = "distinct_id_two")
 // so we cannot identify them again with a different distinct ID "distinct_id_two"
 ```
 
-```ios
-posthog.identify("distinct_id_one", 
-          properties: [])
-posthog.identify("distinct_id_two", 
-          properties: [])
+```ios_swift
+PostHogSDK.shared.identify("distinct_id_one",
+                           userProperties: [:])
+PostHogSDK.shared.identify("distinct_id_two",
+                           userProperties: [:])
 // ❌ Not possible, since we already identified this user with "distinct_id_one"
 // so we cannot identify them again with a different distinct ID "distinct_id_two"
 ```

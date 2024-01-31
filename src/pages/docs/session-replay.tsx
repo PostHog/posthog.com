@@ -190,7 +190,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                 </ul>
                 <CallToAction
-                    to="/tutorials/categories/session-replay"
+                    to="/docs/session-replay/tutorials"
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"

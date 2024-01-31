@@ -126,7 +126,7 @@ To set up Google SSO please follow these instructions:
 2. Navigate to the [Credentials](https://console.cloud.google.com/projectselector2/apis/credentials) section.
 3. Click on "Create credentials" and select "OAuth client ID" to generate your credentials.
     - On Application Type select "Web application" and enter a meaningful name (e.g. PostHog Self-hosted).
-    - On the "Authorized JavaScript origins" section add the root domain (with protocol) for your PostHog instance (e.g. `https://app.posthog.com`)
+    - On the "Authorized JavaScript origins" section add the root domain (with protocol) for your PostHog instance (e.g. `https://us.posthog.com`)
     - On the "Authorized redirect URIs" section add the following URI (**replace with your hostname**): `https://{hostname}/complete/google-oauth2/`.
     - Click on Save.
 4. You will now get a "Client ID" and "Client secret". Set those as [environment variables](/docs/self-host/configure/environment-variables) `SOCIAL_AUTH_GOOGLE_OAUTH2_KEY` and `SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET` respectively.
@@ -158,8 +158,8 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
 1. If you are on self-hosted, make sure you have properly set up your `SITE_URL` [environment variable][env-vars] configuration.
 2. If you are on self-hosted, you will need to be running your PostHog instance over TLS.
 3. Register a new SAML 2.0 application with your IdP. If you need to pass PostHog's information to your provider first, set the following values below (alternatively if your IdP supports it, you can obtain our XML metadata from `<yourdomain>/api/saml/metadata/`)
-    - **Single Sign On URL** (also called ACS Consumer URL): `<yourdomain>/complete/saml/` or `https://app.posthog.com/complete/saml/` for PostHog Cloud US or `https://eu.posthog.com/complete/saml/` for PostHog Cloud EU.
-    - **Audience or Entity ID**: _Your Site URL_ value (verbatim), on PostHog Cloud this is `https://app.posthog.com` or `https://eu.posthog.com`
+    - **Single Sign On URL** (also called ACS Consumer URL): `<yourdomain>/complete/saml/` or `https://us.posthog.com/complete/saml/` for PostHog Cloud US or `https://eu.posthog.com/complete/saml/` for PostHog Cloud EU.
+    - **Audience or Entity ID**: _Your Site URL_ value (verbatim), on PostHog Cloud this is `https://us.posthog.com` or `https://eu.posthog.com`
     - **RelayState**: On PostHog cloud, get your RelayState value from the SAML configuration modal in your PostHog Organization settings. For self hosted, _empty or default_ (will be set on every request).
 4. For SAML to work properly with PostHog, we need to receive at least the following information from your IdP in the SAML assertion payload: ID, email and first name. Optionally, you can also pass the last name. By default, PostHog expects these attributes with a certain name.
 
@@ -237,11 +237,11 @@ Use this option if you want to add additional configurations to your app that ar
 1. In OneLogin admin, go to Applications and click on "Add App".
 2. Search for "SAML" and select "SAML Custom Connector (Advanced)". Set name to "PostHog".
 3. Go to the "Configuration" tab and edit the following attributes (leave everything else as default)
-    - Audience (EntityID): enter `https://app.posthog.com`.
+    - Audience (EntityID): enter `https://us.posthog.com`.
       - If you are using our EU deployment, use `https://eu.posthog.com`.
       - If you are self-hosting, enter the exact same value as your `SITE_URL` [environment variable][env-vars].
-    - ACS (Consumer) URL Validator: Set to a regex that only matches `<yourdomain>/complete/saml/`. For instance: `^https:\/\/app.posthog.com\/complete\/saml\/$` (or use `eu` for an EU instance)
-    - ACS (Consumer) URL: Set to `https://app.posthog.com/complete/saml/`.
+    - ACS (Consumer) URL Validator: Set to a regex that only matches `<yourdomain>/complete/saml/`. For instance: `^https:\/\/us.posthog.com\/complete\/saml\/$` (or use `eu` for an EU instance)
+    - ACS (Consumer) URL: Set to `https://us.posthog.com/complete/saml/`.
       - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
       - If you are self-hosting, use `<yourdomain>/complete/saml/`.
 4. Go to the "Parameters" tab. You will add the following parameters. **Be sure to check "Include in SAML assertion"**.
@@ -259,13 +259,13 @@ Use this option if you want to add additional configurations to your app that ar
 1. In Okta admin, go to Applications and click on "Create App Integration".
 2. Select the "SAML 2.0" option. In the next step, set "PostHog" as the name.
 3. Fill in the following attributes in the SAML settings. Do not click next yet.
-    - In "Single sign on URL" enter `https://app.posthog.com/complete/saml/`.
+    - In "Single sign on URL" enter `https://us.posthog.com/complete/saml/`.
       - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
       - If you are self-hosting, use `<yourdomain>/complete/saml/`.
-    - In "Audience URI (SP Entity ID)" enter `https://app.posthog.com`.
+    - In "Audience URI (SP Entity ID)" enter `https://us.posthog.com`.
       - If you are using our EU deployment, use `https://eu.posthog.com`.
       - If you are self-hosting, enter the exact same value as your `SITE_URL` environment variable.
-4. In the Default Relay State field, enter the RelayState value you obtain from your [PostHog Organization Settings page](https://app.posthog.com/organization/settings) in the SAML configuration modal.
+4. In the Default Relay State field, enter the RelayState value you obtain from your [PostHog Organization Settings page](https://us.posthog.com/organization/settings) in the SAML configuration modal.
 5. In the "Attribute Statements" section, add the following attributes:
     - `email` with value `user.email`
     - `first_name` with value `user.firstName`
@@ -274,7 +274,7 @@ Use this option if you want to add additional configurations to your app that ar
 6. In the final step select the option "I'm an Okta customer adding an internal app".
 7. Navigate now to the "Sign On" tab of the application and click on "View Setup Instructions". This is where you'll obtain the information you need to pass to PostHog.
     - "Identity Provider Single Sign-on URL" needs to be set as SAML ACS URL.
-    - "Identity Provider Issuer" needs to be set as SAML Entity ID.
+    - "Identity Provider Issuer" needs to be set as SAML Entity ID (use the complete URL).
     - "X.509 Certificate" needs to be set as SAML X.509 certificate.
 8. You're good to go! Click on "Login with SSO" in the login page.
 

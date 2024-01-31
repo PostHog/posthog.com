@@ -48,7 +48,7 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'feature-flags',
     lowercase: 'feature flags',
-    capitalized: 'Feature Flags',
+    capitalized: 'Feature flags',
     freeTier: '1,000,000 requests',
 }
 
@@ -221,7 +221,7 @@ const comparison = [
             Optimizely: false,
             Flagsmith: false,
             GrowthBook: false,
-            PostHog: false,
+            PostHog: true,
         },
     },
     {
@@ -320,7 +320,7 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
-        product: 'Product Analytics',
+        product: 'Product analytics',
         description:
             "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
         url: '/product-analytics',
@@ -333,7 +333,7 @@ const PairsWithArray = [
     },
     {
         icon: <IconRewindPlay />,
-        product: 'Session Replay',
+        product: 'Session replay',
         description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         url: '/session-replay',
     },
@@ -373,7 +373,7 @@ export const ProductFeatureFlags = () => {
     return (
         <>
             <SEO
-                title="Feature Flags - PostHog"
+                title="Feature flags - PostHog"
                 description="Safely roll out features to specific users or groups."
                 image={`/images/og/feature-flags.jpg`}
             />
@@ -383,7 +383,7 @@ export const ProductFeatureFlags = () => {
                     icon={<IconToggle />}
                     product={product.capitalized}
                     title='<span class="text-red dark:text-yellow">Safely roll out features</span> to specific users or groups'
-                    description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
+                    description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
                 />
 
                 <div className="text-center">
@@ -459,7 +459,7 @@ export const ProductFeatureFlags = () => {
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> Feature Flags and A/B Testing are currently packaged together and
+                            <strong>Note:</strong> Feature flags and A/B testing are currently packaged together and
                             share volume limits.
                         </div>
                     </div>
@@ -502,9 +502,8 @@ export const ProductFeatureFlags = () => {
                                 }
                             >
                                 <ul>
-                                    <li>Flag scheduling</li>
                                     <li>Triggers and workflows to enable/disable flags on other events</li>
-                                    <li>Enterprise-level support</li>
+                                    <li>Data exports</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>

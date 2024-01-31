@@ -26,19 +26,11 @@ Internally, the team relies on PostHog for both product development and marketin
 
 "The reason for the switch was that we wanted to use some of the features and templates available only on the cloud version," Sullivan continues. "Running on PostHog Cloud has been fantastic, it's enabled us to move twice as fast.
 
-​
-![PostHog dashboard templates](../images/customers/speakeasy/landing-page-report.png)
-<Caption>PostHog's dashboard templates helped Speakeasy replicate Google Analytics with ease</Caption>
-
 ### Replicating Google Analytics with PostHog Dashboard Templates
 
 By moving to the cloud and deploying PostHog on both their core product and marketing site, Speakeasy can track website traffic and marketing metrics as well as product interactions. This combined approach offers a top-to-bottom view of conversion rates and user paths, without requiring extra setup time.
 
 "One feature of PostHog I love is the dashboard templates," Nolan says. "I wanted to recreate a Google Analytics dashboard for our marketing efforts but didn't have the time to set up everything the way I wanted. The templates got me 80% of the way there with just a few clicks."
-
-PostHog's dashboard templates, created during the [Aruba hackathon](/blog/aruba-hackathon), cover more than just website metrics. They also offer [templates for tracking AARRR funnels](/templates), retention, and more.
-
-"I'd recommend the dashboard templates to anyone starting with PostHog," Nolan advises. "If you make setting up the initial event capture a team activity and carefully consider the custom events you track, the dashboards will provide a strong foundation for success."
 
 <BorderWrapper>
 <Quote
@@ -49,6 +41,10 @@ PostHog's dashboard templates, created during the [Aruba hackathon](/blog/aruba-
     quote={`“I love that PostHog is an all-in-one tool, with all the features of LaunchDarkly and all those other enterprise platforms. It is just so nice not having to go into multiple UIs to make changes and manage things.”`}
 />
 </BorderWrapper>
+
+PostHog's dashboard templates, created during the [Aruba hackathon](/blog/aruba-hackathon), cover more than just website metrics. They also offer [templates for tracking AARRR funnels](/templates), retention, and more.
+
+"I'd recommend the dashboard templates to anyone starting with PostHog," Nolan advises. "If you make setting up the initial event capture a team activity and carefully consider the custom events you track, the dashboards will provide a strong foundation for success."
 
 ### Improving onboarding and feature roll-out with flags
 Speakeasy also employs PostHog within its product. At the time of our conversation, Nolan and his team were actively refining their product's onboarding process, using insights directly from PostHog.

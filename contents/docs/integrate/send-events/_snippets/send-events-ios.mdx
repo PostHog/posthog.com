@@ -4,42 +4,38 @@ import Intro from "./intro.mdx"
 
 <Intro />
 
-```objectivec
-[[PHGPostHog sharedPostHog] capture:@"user_signed_up"];
-```
-
 ```swift
-posthog.capture("user_signed_up")
+PostHogSDK.shared.capture("user_signed_up")
 ```
 
 <NamingTip />
 
 <SettingProperties />
 
-```objectivec
-[[PHGPostHog sharedPostHog] capture:@"user_signed_up" 
-    properties:@{ @"login_type": @"email", 
-                  @"$is_free_trial": @YES }
-];
-```
-
 ```swift
-posthog.capture(
+PostHogSDK.shared.capture(
     "user_signed_up", 
     properties: ["login_type": "email", "$set": ["is_free_trial": true] 
 ])
 ```
 
+### Autocapture 
+
+PostHog autocapture automatically tracks the following events for you:
+
+-   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+-   **Deep Link Opened** - when the app is opened from a deep link.
+-   **Application Backgrounded** - when the app is sent to the background by the user
+-   **Application Installed** - when the app is installed.
+-   **Application Updated** - when the app is updated.
+-   **$screen** - when the user navigates (if using `UIViewController`)
+
 ### Capturing screen views
 
-With [`configuration.recordScreenViews`](/ios#all-configuration-options) set as `YES`, PostHog will try to record all screen changes automatically.
+With [`configuration.recordScreenViews`](/ios#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
-```objectivec
-[[PHGPostHog sharedPostHog] screen:@"Dashboard" properties:@{ @"fromIcon": @"bottom" }];
-```
-
 ```swift
-posthog.screen("Dashboard", properties: ["fromIcon": "bottom"])
+PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
 ```

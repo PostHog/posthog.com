@@ -1,21 +1,75 @@
+import Link from 'components/Link'
 import Logo from 'components/Logo'
+import { useSearch } from 'components/Search/SearchContext'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
-import Link from 'components/Link'
-import { useSearch } from 'components/Search/SearchContext'
-import { IconApp, IconBrightness, IconChat, IconChevronDown, IconSearch, IconTextWidth, IconUser } from '@posthog/icons'
+
+import { IconApp, IconBrightness, IconChat, IconSearch, IconTextWidth, IconUser, IconChevronDown } from '@posthog/icons'
+
 import { Placement } from '@popperjs/core'
-import React, { useEffect, useRef, useState } from 'react'
-import { usePopper } from 'react-popper'
-import { useLayoutData } from 'components/Layout/hooks'
-import { useLocation } from '@reach/router'
-import Toggle from 'components/Toggle'
-import usePostHog from 'hooks/usePostHog'
-import HoverTooltip from 'components/Tooltip'
-import { SignupCTA } from 'components/SignupCTA'
-import { CallToAction } from 'components/CallToAction'
-import { useInView } from 'react-intersection-observer'
 import * as icons from '@posthog/icons'
+import { IconExternal } from '@posthog/icons'
+import { useLocation } from '@reach/router'
+import { CallToAction } from 'components/CallToAction'
+import { useLayoutData } from 'components/Layout/hooks'
+import { SignupCTA } from 'components/SignupCTA'
+import Toggle from 'components/Toggle'
+import HoverTooltip from 'components/Tooltip'
+import dayjs from 'dayjs'
+import usePostHog from 'hooks/usePostHog'
+import { useUser } from 'hooks/useUser'
+import React, { useEffect, useRef, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { usePopper } from 'react-popper'
+
+export default function Orders() {
+    const { user, getJwt } = useUser()
+    const [orders, setOrders] = useState([])
+
+    const fetchOrders = async () => {
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
+            headers: {
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        }).then((res) => res.json())
+        setOrders(data)
+    }
+
+    useEffect(() => {
+        if (user) {
+            fetchOrders()
+        }
+    }, [user])
+
+    return user && orders?.length > 0 ? (
+        <>
+            <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
+                Merch orders
+            </li>
+            <li className="px-1">
+                <ul className="m-0 p-0 list-none px-1 max-h-[130px] overflow-auto">
+                    {orders.map(({ id, orderNumber, date, statusURL }) => {
+                        return (
+                            <li key={id}>
+                                <Link
+                                    externalNoIcon
+                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center"
+                                    to={statusURL}
+                                >
+                                    <span>
+                                        <p className="m-0 text-sm font-bold opacity-60">#{orderNumber}</p>
+                                        <p className="m-0 text-xs">{dayjs(date).format('MM/DD/YYYY')}</p>
+                                    </span>
+                                    <IconExternal className="w-4 opacity-50" />
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </li>
+        </>
+    ) : null
+}
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -407,6 +461,7 @@ export const Main = () => {
                                                 <Toggle checked={fullWidthContent} />
                                             </button>
                                         </li>
+                                        <Orders />
                                     </ul>
                                 )
                             }}

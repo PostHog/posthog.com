@@ -10,7 +10,7 @@ import { PostsContext } from './Posts'
 import Title from './Title'
 import { useLayoutData } from 'components/Layout/hooks'
 import Upvote from './Upvote'
-import { QuestionForm } from 'components/Squeak'
+import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
 import Link from 'components/Link'
@@ -18,8 +18,13 @@ import Link from 'components/Link'
 export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformImageUri }) => {
     return (
         <>
-            {imageURL && (
-                <div className="rounded bg-accent dark:bg-accent-dark leading-none max-h-96 text-center">
+            <div className="mb-4">
+                <div className="mb-4">
+                    <Title className="text-primary dark:text-primary-dark">{title}</Title>
+                    <p className="!m-0 opacity-70">{dayjs(date).format('MMM DD, YYYY')}</p>
+                    {belowTitle?.()}
+                </div>
+                {imageURL && (
                     <ZoomImage>
                         {imageURL?.endsWith('.mp4') ? (
                             <video className="max-w-full max-h-96 rounded-md" autoPlay src={imageURL} />
@@ -27,15 +32,7 @@ export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformIm
                             <img className="max-w-full max-h-96 rounded-md" src={imageURL} />
                         )}
                     </ZoomImage>
-                </div>
-            )}
-            <div className={`flex flex-col`}>
-                <Title>{title}</Title>
-                <p className="!mb-0">
-                    <span className="opacity-70">{dayjs(date).format('MMM DD, YYYY')}</span>
-
-                    {belowTitle?.()}
-                </p>
+                )}
             </div>
             <div className="my-2 article-content">
                 <ClientPostMarkdown transformImageUri={transformImageUri}>{body}</ClientPostMarkdown>
@@ -98,6 +95,7 @@ export default function ClientPost({
         }
     }
     const author = authors?.data?.[0]
+    const imageURL = featuredImage?.url
 
     return (
         <div className="@container">
@@ -111,12 +109,12 @@ export default function ClientPost({
                         <SEO title={title + ' - PostHog'} />
                         <article>
                             <Post
-                                imageURL={null}
+                                imageURL={imageURL}
                                 title={title}
                                 date={date || publishedAt}
                                 belowTitle={() =>
                                     isModerator ? (
-                                        <div className="ml-3 text-sm inline-flex space-x-2 text-primary/50 dark:text-primary-dark/50">
+                                        <div className="mt-2 text-sm inline-flex space-x-2 text-primary/50 dark:text-primary-dark/50">
                                             <Link
                                                 state={{
                                                     id,
@@ -146,7 +144,7 @@ export default function ClientPost({
                             />
                             <Upvote slug={slug} id={id} className="mt-6" />
                             <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
-                                <QuestionForm
+                                <Questions
                                     disclaimer={false}
                                     subject={false}
                                     buttonText="Leave a comment"

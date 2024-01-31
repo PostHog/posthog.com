@@ -1,5 +1,5 @@
 ---
-title: "How to run A/B tests in Webflow with PostHog"
+title: "How to run A/B tests in Webflow"
 date: 2023-01-26
 author: ["ian-vanagas"]
 showTitle: true
@@ -68,6 +68,6 @@ Now that you set up an A/B test in Webflow with PostHog, you can use this same p
 
 ## Further reading
 
-- [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
-- [How to create surveys in Webflow with PostHog](/tutorials/webflow-surveys)
+- [How to set up Webflow analytics and session recordings](/tutorials/webflow)
+- [How to create surveys in Webflow](/tutorials/webflow-surveys)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)

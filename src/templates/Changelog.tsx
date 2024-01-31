@@ -107,6 +107,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}
                         values={[
+                            { label: 2024, value: '/changelog/2024' },
                             { label: 2023, value: '/changelog/2023' },
                             { label: 2022, value: '/changelog/2022' },
                             { label: 2021, value: '/changelog/2021' },

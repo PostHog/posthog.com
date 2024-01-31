@@ -228,6 +228,8 @@ pnpm i --dir plugin-server
         ```bash
         brew install libxml2 libxmlsec1 pkg-config
         ```
+        > If installing `xmlsec` doesn't work, try updating macOS to the latest version (Sonoma). 
+   
     - On Debian-based Linux:
         ```bash
         sudo apt install -y libxml2 libxmlsec1-dev pkg-config
@@ -419,6 +421,6 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
    - "Frontend" and click on run
    - "Plugin server" and click on run
 
-## Extra: Adding an enterprise license (PostHog employees only)
+## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can add an enterprise license to your local instance by following this [internal guide](https://github.com/PostHog/billing/blob/main/docs/running-posthog-with-billing.md). This is particularly useful if developing enterprise features or testing billing-related functionality.
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. Learn how to do so [here](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).

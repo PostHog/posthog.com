@@ -299,7 +299,7 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/product-design',
             },
             {
-                name: 'Logos and hedgehogs',
+                name: 'Logos, brand, hedgehogs',
                 url: '/handbook/company/brand-assets',
             },
             {
@@ -399,16 +399,12 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/feature-ownership',
                     },
                     {
-                        name: 'Releasing a new version',
-                        url: '/handbook/engineering/release-new-version',
-                    },
-                    {
                         name: 'Handling incidents',
                         url: '/handbook/engineering/incidents',
                     },
                     {
                         name: 'On-call rotation',
-                        url: '/handbook/engineering/oncall-rotation',
+                        url: '/handbook/engineering/on-call-rotation',
                     },
                     {
                         name: 'Bug prioritization',
@@ -525,7 +521,7 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Shipping things, step by step',
+                name: 'Shipping & releasing',
                 url: '/handbook/engineering/development-process',
             },
             {
@@ -567,6 +563,10 @@ export const handbookSidebar = [
             {
                 name: 'Pricing principles',
                 url: '/handbook/engineering/feature-pricing',
+            },
+            {
+                name: 'Revenue and forecasting',
+                url: '/handbook/engineering/revenue-and-forecasting',
             },
         ],
     },
@@ -894,7 +894,7 @@ export const communityMenu = {
             name: 'Merch',
             icon: 'IconStore',
             color: 'seagreen',
-            url: 'https://merch.posthog.com',
+            url: '/merch',
         },
     ],
 }
@@ -915,7 +915,7 @@ export const companyMenu = {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
-            url: '/changelog/2023',
+            url: '/changelog/2024',
         },
         { name: 'Team', icon: 'IconProfile', color: 'blue', url: '/team' },
         { name: 'Handbook', icon: 'IconBook', color: 'seagreen', url: '/handbook', children: handbookSidebar },
@@ -1327,6 +1327,10 @@ export const docsMenu = {
                             url: '/docs/data/team-collaboration',
                         },
                         {
+                            name: 'Timestamps',
+                            url: '/docs/data/timestamps',
+                        },
+                        {
                             name: 'User properties',
                             url: '/docs/data/user-properties',
                         },
@@ -1603,20 +1607,6 @@ export const docsMenu = {
                             url: '/docs/self-host',
                         },
                         {
-                            name: 'Upgrading PostHog',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/runbook/upgrading-posthog',
-                                },
-                                {
-                                    name: 'Upgrade notes',
-                                    url: '/docs/runbook/upgrade-notes',
-                                },
-                            ],
-                        },
-                        {
                             name: 'Configure',
                             url: '',
                             children: [
@@ -1633,10 +1623,6 @@ export const docsMenu = {
                                     url: '/docs/self-host/configure/securing-posthog',
                                 },
                                 {
-                                    name: 'Monitoring with Grafana',
-                                    url: '/docs/self-host/configure/monitoring-with-grafana',
-                                },
-                                {
                                     name: 'Running behind a proxy',
                                     url: '/docs/self-host/configure/running-behind-proxy',
                                 },
@@ -1645,154 +1631,8 @@ export const docsMenu = {
                                     url: '/docs/self-host/configure/email',
                                 },
                                 {
-                                    name: 'Helm chart configuration',
-                                    url: '/docs/self-host/deploy/configuration',
-                                },
-                                {
-                                    name: 'Deploying ClickHouse using Altinity.Cloud',
-                                    url: '/docs/self-host/configure/using-altinity-cloud',
-                                },
-                                {
                                     name: 'Configuring Slack',
                                     url: '/docs/self-host/configure/slack',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Runbook',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/runbook',
-                                },
-                                {
-                                    name: 'Async migrations',
-                                    url: '',
-                                    children: [
-                                        {
-                                            name: 'Overview',
-                                            url: '/docs/runbook/async-migrations',
-                                        },
-                                        {
-                                            name: '0001-events-sample-by',
-                                            url: '/docs/runbook/async-migrations/0001-events-sample-by',
-                                        },
-                                        {
-                                            name: '0002_events_sample_by',
-                                            url: '/docs/runbook/async-migrations/0002-events-sample-by',
-                                        },
-                                        {
-                                            name: '0003_fill_person_distinct_id2',
-                                            url: '/docs/runbook/async-migrations/0003-fill-person-distinct-id2',
-                                        },
-                                    ],
-                                },
-                                {
-                                    name: 'Services',
-                                    url: '',
-                                    children: [
-                                        {
-                                            name: 'ClickHouse',
-                                            url: '/docs/runbook/services/clickhouse',
-                                            children: [
-                                                {
-                                                    name: 'Backup',
-                                                    url: '/docs/runbook/services/clickhouse/backup',
-                                                },
-                                                {
-                                                    name: 'Debug hanging / freezing process',
-                                                    url: '/docs/runbook/services/clickhouse/debug-hanging-freezing-process',
-                                                },
-                                                {
-                                                    name: 'Horizontal scaling (Sharding & replication)',
-                                                    url: '/docs/runbook/services/clickhouse/sharding-and-replication',
-                                                },
-                                                {
-                                                    name: 'Kafka Engine',
-                                                    url: '/docs/runbook/services/clickhouse/kafka-engine',
-                                                },
-                                                {
-                                                    name: 'Resize disk',
-                                                    url: '/docs/runbook/services/clickhouse/resize-disk',
-                                                },
-                                                {
-                                                    name: 'Restore',
-                                                    url: '/docs/runbook/services/clickhouse/restore',
-                                                },
-                                                {
-                                                    name: 'Vertical scaling',
-                                                    url: '/docs/runbook/services/clickhouse/vertical-scaling',
-                                                },
-                                                {
-                                                    name: 'Debugging load',
-                                                    url: '/docs/runbook/services/clickhouse/debugging-load',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            name: 'Kafka',
-                                            url: '/docs/runbook/services/kafka',
-                                            children: [
-                                                {
-                                                    name: 'Resize disk',
-                                                    url: '/docs/runbook/services/kafka/resize-disk',
-                                                },
-                                                {
-                                                    name: 'Log retention',
-                                                    url: '/docs/runbook/services/kafka/log-retention',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            name: 'PostgreSQL',
-                                            url: '/docs/runbook/services/postgresql',
-                                            children: [
-                                                {
-                                                    name: 'Resize disk',
-                                                    url: '/docs/runbook/services/postgresql/resize-disk',
-                                                },
-                                                {
-                                                    name: 'Troubleshooting long-running migrations',
-                                                    url: '/docs/runbook/services/postgresql/long-migrations',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            name: 'Plugin server',
-                                            url: '/docs/runbook/services/plugin-server',
-                                            children: [
-                                                {
-                                                    name: 'Overview',
-                                                    url: '/docs/runbook/services/plugin-server',
-                                                },
-                                                {
-                                                    name: 'Jobs not executing',
-                                                    url: '/docs/runbook/services/plugin-server/jobs',
-                                                },
-                                                {
-                                                    name: 'Scheduled tasks not executing',
-                                                    url: '/docs/runbook/services/plugin-server/scheduled-tasks',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            name: 'MinIO',
-                                            url: '/docs/runbook/services/minio',
-                                        },
-                                        {
-                                            name: 'Redis',
-                                            url: '/docs/runbook/services/redis',
-                                        },
-                                        {
-                                            name: 'Zookeeper',
-                                            url: '/docs/runbook/services/zookeeper',
-                                        },
-                                    ],
-                                },
-                                {
-                                    name: 'Disaster recovery',
-                                    url: '/docs/runbook/disaster-recovery',
                                 },
                             ],
                         },
@@ -1947,7 +1787,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Product Analytics',
+            name: 'Product analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/docs/product-analytics',
@@ -2086,16 +1926,6 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Web analytics',
-                    url: '/docs/web-analytics',
-                    icon: 'IconPieChart',
-                    color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
@@ -2114,7 +1944,34 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Session Replay',
+            name: 'Web analytics',
+            icon: 'IconPieChart',
+            color: '[#36C46F]',
+            url: '/docs/web-analytics',
+            children: [
+                {
+                    name: 'Web analytics',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/web-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/web-analytics/faq',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                },
+            ],
+        },
+        {
+            name: 'Session replay',
             url: '/docs/session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
@@ -2200,7 +2057,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Feature Flags',
+            name: 'Feature flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/docs/feature-flags',
@@ -2274,13 +2131,19 @@ export const docsMenu = {
                 {
                     name: 'Multi-project feature flags',
                     url: '/docs/feature-flags/multi-project-feature-flags',
-                    icon: 'IconCalculator',
+                    icon: 'IconStack',
                     color: 'blue',
+                },
+                {
+                    name: 'Scheduled flag changes',
+                    url: '/docs/feature-flags/scheduled-flag-changes',
+                    icon: 'IconClock',
+                    color: 'seagreen',
                 },
             ],
         },
         {
-            name: 'A/B Testing',
+            name: 'A/B testing',
             icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
@@ -2375,10 +2238,6 @@ export const docsMenu = {
                     url: '/docs/surveys',
                     icon: 'IconHome',
                     color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Installation',
@@ -2419,21 +2278,21 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'CDP',
+            name: 'Data pipeline',
             url: '/docs/cdp',
-            color: 'yellow',
-            icon: 'IconPerson',
+            color: '[#2EA2D3]',
+            icon: 'IconDecisionTree',
             children: [
                 {
-                    name: 'Customer data platform',
-                },
-                {
-                    name: 'CDP',
-                    url: '/docs/cdp',
+                    name: 'Data pipeline (CDP)',
                     badge: {
                         title: 'Preview',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                },
+                {
+                    name: 'CDP',
+                    url: '/docs/cdp',
                 },
                 {
                     name: 'Batch exports',
@@ -2698,13 +2557,17 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Data Warehouse',
+            name: 'Data warehouse',
             url: '/docs/data-warehouse',
-            color: 'seagreen',
-            icon: 'IconServer',
+            color: '[#8567FF]',
+            icon: 'IconDatabase',
             children: [
                 {
                     name: 'Data warehouse',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Overview',
@@ -2717,30 +2580,18 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/setup',
                     icon: 'IconBook',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Query',
                     url: '/docs/data-warehouse/query',
                     icon: 'IconHogQL',
                     color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Views',
                     url: '/docs/data-warehouse/views',
                     icon: 'IconCalculator',
                     color: 'salmon',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
             ],
         },
@@ -2759,25 +2610,25 @@ export const pricingMenu = {
             url: '/pricing',
         },
         {
-            name: 'Product Analytics',
+            name: 'Product analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/pricing?product=product-analytics',
         },
         {
-            name: 'Session Replay',
+            name: 'Session replay',
             url: '/pricing?product=session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
         },
         {
-            name: 'Feature Flags',
+            name: 'Feature flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/pricing?product=feature-flags',
         },
         {
-            name: 'A/B Testing',
+            name: 'A/B testing',
             icon: 'IconFlask',
             color: 'purple',
             url: '/pricing?product=ab-testing',
@@ -2798,25 +2649,25 @@ const menu = [
         icon: 'IconFeatures',
         children: [
             {
-                name: 'Product Analytics',
+                name: 'Product analytics',
                 icon: 'IconGraph',
                 color: 'blue',
                 url: '/product-analytics',
             },
             {
-                name: 'Session Replay',
+                name: 'Session replay',
                 icon: 'IconRewindPlay',
                 color: 'yellow',
                 url: '/session-replay',
             },
             {
-                name: 'Feature Flags',
+                name: 'Feature flags',
                 icon: 'IconToggle',
                 color: 'seagreen',
                 url: '/feature-flags',
             },
             {
-                name: 'A/B Testing',
+                name: 'A/B testing',
                 icon: 'IconFlask',
                 color: 'purple',
                 url: '/ab-testing',

@@ -59,7 +59,7 @@ const linklist: IProps[] = [
     },
     {
         title: 'Product OS',
-        url: '/docs',
+        url: '/docs/product-os',
         items: [
             {
                 title: 'New? Start here.',
@@ -167,7 +167,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Merch',
-                url: 'https://merch.posthog.com',
+                url: '/merch',
             },
             {
                 title: 'Contributors',
