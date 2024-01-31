@@ -68,7 +68,7 @@ Large feature branches can often have hundreds or thousands of lines of changes.
 
 The smaller branches of trunk-based development create more reviewable pull requests. They require less overhead for someone to review. Merging regularly also creates opportunities for teams to collaborate. Every PR is a chance to interact with each other, get feedback earlier, and see what others are working on. 
 
-## Why and how PostHog does trunk-based development
+## The philosophy behind trunk-based development at PostHog
 
 Our main goal is to **minimize work-in-progress**. 
 
@@ -88,9 +88,11 @@ Implementing this philosophy (and trunk-based development) means:
 
 6. Merging whenever. Our testing, reviewing, and build processes should be good enough that we are confident doing this.
 
-As proof of this, our median pull request age when merged is **just under 8 hours**. On an average day, we merge around 20 pull requests in our main repo.
+As proof we take this seriously, our median pull request is **just under 8 hours** old when merged. On an average day, our team merges around 20 pull requests in our main repo.
 
-All of this helps us get the benefits trunk-based development provides. It might seem like a lot. Pushing code early and merging whenever may seem especially scary, but we have two tools that help us:
+## The tools of trunk-based development
+
+For someone coming from a different branching strategy, this philosophy may seem intimidating. Pushing code early and merging whenever may seem especially scary, but to help alleviate this fear, we recommend (and use) two key tools:
 
 ### 1. Test-driven development
 
