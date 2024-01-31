@@ -50,7 +50,6 @@ const Roadmap = () => {
                             Under consideration
                         </div>
                         <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
-                            <RoadmapItem>Feature flags for iOS, Android, Flutter</RoadmapItem>
                             <RoadmapItem>Interlinking session recording & analytics</RoadmapItem>
                             <RoadmapItem>SQL insights</RoadmapItem>
                             <RoadmapItem>SOC 2 compliance</RoadmapItem>

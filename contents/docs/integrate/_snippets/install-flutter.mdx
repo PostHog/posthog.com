@@ -15,6 +15,7 @@ Remember that the application lifecycle events won't have any special context se
             [...]
         </activity>
         <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_api_key>" />
+        <!-- usually 'https://app.posthog.com' or 'https://eu.posthog.com' -->
         <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_instance_address>" />
         <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="false" />
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="false" />
@@ -33,6 +34,7 @@ Remember that the application lifecycle events won't have any special context se
 	<key>com.posthog.posthog.API_KEY</key>
 	<string><ph_project_api_key></string>
 	<key>com.posthog.posthog.POSTHOG_HOST</key>
+	<!-- usually 'https://app.posthog.com' or 'https://eu.posthog.com' -->
 	<string><ph_instance_address></string>
 	<key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
 	<false/>
@@ -68,4 +70,4 @@ Remember that the application lifecycle events won't have any special context se
 </html>
 ```
 
-For more information please check: https://posthog.com/docs/integrate/client/js
+For more information please check: https://posthog.com/docs/libraries/js

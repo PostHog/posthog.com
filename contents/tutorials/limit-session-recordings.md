@@ -75,7 +75,7 @@ You can then set this flag to enable recordings in your [replay ingestion settin
 
 Recordings buffer on the client until the decide response is received. It only continues recording if the flag is enabled. This means that if the flag is disabled, the recording stops and no recording data leaves the client's device.
 
-### Manually in your code
+### Manually in your code
 
 You can alternatively check this flag after you initialize PostHog, and start a recording if it is active for the current user. To ensure the correct user and flag details, you can use the `usePostHog` and `useFeatureFlagEnabled` hooks from `posthog-js/react` in a component like this:
 

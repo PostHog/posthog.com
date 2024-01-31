@@ -1,5 +1,5 @@
 ---
-title: Batch exports (beta)
+title: Batch exports
 sidebar: Docs
 showTitle: true
 availability:
@@ -15,8 +15,6 @@ The key features offered by this platform are:
 * **Efficient data transfers:** Processing data in batches reduces the number of data transfers required (less `INSERT` queries or file uploads).
 
 Batch exports are designed to power any complimentary analytics use cases outside of PostHog.
-
-> Batch exports are currently in **public beta**. This means that we offer data exports to a subset of all the planned destinations, some features will be missing, and you will encounter UI elements still in development. You can follow and comment on the progress [in this GitHub issue](https://github.com/PostHog/posthog/issues/15997).
 
 ## Destinations
 

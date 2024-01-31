@@ -33,8 +33,8 @@ const HogZilla = () => {
                 poster="/images/hogzilla.jpg"
                 preload="none"
             >
-                <source src="/images/hogzilla.webm" type="video/webm" />
-                <source src="/images/hogzilla.mp4" type="video/mp4" />
+                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/hogzilla.webm`} type="video/webm" />
+                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/hogzilla.mp4`} type="video/mp4" />
             </video>
         </div>
     )

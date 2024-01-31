@@ -30,6 +30,8 @@ type LanguageMap = {
             | 'kotlin'
             | 'groovy'
             | 'vue'
+            | 'svelte'
+            | 'astro'
         label: React.ReactNode
     }
 }
@@ -201,6 +203,10 @@ const languageMap: LanguageMap = {
         language: 'objectivec',
         label: 'iOS',
     },
+    ios_swift: {
+        language: 'swift',
+        label: 'iOS',
+    },
     'react-native': {
         language: 'jsx',
         label: 'React Native',
@@ -212,6 +218,14 @@ const languageMap: LanguageMap = {
     vue: {
         language: 'html',
         label: 'Vue',
+    },
+    svelte: {
+        language: 'html',
+        label: 'Svelte',
+    },
+    astro: {
+        language: 'javascript',
+        label: 'Astro',
     },
 }
 

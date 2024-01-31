@@ -108,6 +108,6 @@ When we save this and publish the site again, the button is still there. When we
 
 ## Further reading
 
-- [How to run A/B tests in Framer with PostHog](/tutorials/framer-ab-tests)
-- [How to create surveys in Framer with PostHog](/tutorials/framer-surveys)
+- [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
+- [How to create surveys in Framer](/tutorials/framer-surveys)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)

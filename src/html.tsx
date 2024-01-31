@@ -41,7 +41,6 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                 capture_pageview: false,
                                 persistence: 'localStorage+cookie',
                                 uuid_version:'v7',
-                                __preview_measure_pageview_stats: true, 
                                 __preview_send_client_session_params: true,
                                 session_recording: {
                                     maskAllInputs: false,

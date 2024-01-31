@@ -40,10 +40,10 @@ export default function Pagination({
                 {pagination?.items.map(({ label, url }) => {
                     return url ? (
                         <Link
-                            className={`w-[35px] h-[35px] bg-white dark:bg-gray-accent-dark rounded-sm p-1 flex items-center justify-center relative hover:top-[-.5px] active:top-[.5px] active:scale-[.98] shadow-sm font-bold ${
+                            className={`w-[35px] h-[35px] border border-transparent border-b-3 rounded-sm p-1 flex items-center justify-center ${
                                 label === currentPage
-                                    ? 'bg-transparent text-primary dark:text-primary-dark shadow-none'
-                                    : ''
+                                    ? 'font-bold text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark border-transparent'
+                                    : 'font-semibold hover:border-light hover:dark:border-dark text-primary/60 hover:text-primary/90 dark:text-primary-dark/60 hover:dark:text-primary-dark/90 relative hover:top-[-.5px] hover:scale-[1.01] active:top-[1px] active:scale-[.99]'
                             }`}
                             to={url}
                         >

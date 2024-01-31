@@ -10,7 +10,7 @@ module.exports = {
         title: 'PostHog',
         titleTemplate: '%s',
         description:
-            'Open-source product analytics built for developers. Automate the collection of every event on your website or app, without sending data to third-parties. Quickly deploy on your own infrastructure, with full access to the underlying data.',
+            'The single platform for engineers to analyze, test, observe, and deploy new features. Product analytics, session replay, feature flags, A/B testing, CDP, and more.',
         url: 'https://posthog.com', // No trailing slash allowed!
         image: '/banner.png', // Path to your image you placed in the 'static' folder
         twitterUsername: '@PostHog',
@@ -327,6 +327,24 @@ module.exports = {
                 ],
             },
         },
+        ...(process.env.SHOPIFY_APP_PASSWORD &&
+        process.env.GATSBY_MYSHOPIFY_URL &&
+        process.env.GATBSY_SHOPIFY_SALES_CHANNEL
+            ? [
+                  {
+                      resolve: 'gatsby-source-shopify',
+                      options: {
+                          password: process.env.SHOPIFY_APP_PASSWORD,
+                          storeUrl: process.env.GATSBY_MYSHOPIFY_URL,
+                          shopifyConnections: ['collections'],
+                          salesChannel: process.env.GATBSY_SHOPIFY_SALES_CHANNEL,
+                          downloadImages: true,
+
+                          // salesChannel: process.env.SHOPIFY_APP_ID, // Optional but recommended
+                      },
+                  },
+              ]
+            : []),
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),

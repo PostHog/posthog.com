@@ -1,5 +1,5 @@
 ---
-title: "How to create surveys in Bubble with PostHog"
+title: "How to create surveys in Bubble"
 date: 2024-01-09
 author: ["lior-neu-ner"]
 showTitle: true
@@ -9,9 +9,9 @@ tags: ['surveys']
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import ImgSurveyTemplatesLight from '../images/tutorials/bubble-surveys/survey-templates.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/bubble-surveys/survey-templates.png'
+import ImgSurveyTemplatesDark from '../images/tutorials/bubble-surveys/survey-templates-dark.png'
 import ImgSurveyResultsLight from '../images/tutorials/bubble-surveys/survey-results.png'
-import ImgSurveyResultsDark from '../images/tutorials/bubble-surveys/survey-results.png'
+import ImgSurveyResultsDark from '../images/tutorials/bubble-surveys/survey-results-dark.png'
 
 Surveys are a great way to collect feedback from your users. This tutorial shows you how to create surveys for your [Bubble](https://bubble.io/) app or marketing site using PostHog.
 
@@ -66,4 +66,6 @@ You can also filter these results based on [user properties](/docs/product-analy
 
 ## Further reading
 
+- [How to set up Bubble analytics, session replays, and more](/tutorials/bubble-analytics)
+- [How to run A/B tests in Bubble](/tutorials/bubble-ab-tests)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)

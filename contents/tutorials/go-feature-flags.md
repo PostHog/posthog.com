@@ -4,7 +4,7 @@ date: 2023-09-27
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-tags: ["feature-flags"]
+tags: ["feature flags"]
 ---
 
 [Feature flags](/docs/feature-flags) are a critical part of delivering code safely. This tutorial shows you how to use them in Go (Golang). We'll create a basic HTTP server, add PostHog, create a feature flag, and implement it in our app to change the response content.

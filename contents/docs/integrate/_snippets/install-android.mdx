@@ -14,10 +14,15 @@ dependencies {
 The best place to initialize the client is in your `Application` subclass.
 
 ```kotlin
+import android.app.Application
+import com.posthog.android.PostHogAndroid
+import com.posthog.android.PostHogAndroidConfig
+
 class SampleApp : Application() {
 
     companion object {
         const val POSTHOG_API_KEY = "<ph_project_api_key>"
+        // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
         const val POSTHOG_HOST = "<ph_instance_address>"
     }
 
@@ -26,7 +31,7 @@ class SampleApp : Application() {
 
         val config = PostHogAndroidConfig(
             apiKey = POSTHOG_API_KEY,
-            host = POSTHOG_HOST
+            host = POSTHOG_HOST // TIP: `host` is optional if you use https://app.posthog.com
         )
         PostHogAndroid.setup(this, config)
     }

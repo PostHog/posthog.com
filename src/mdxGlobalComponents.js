@@ -9,6 +9,7 @@ import { Images } from './components/Careers/Images'
 import { ComparisonTable } from './components/ComparisonTable'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
+import { Drawer } from './components/Drawer'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
@@ -63,6 +64,7 @@ export const shortcodes = {
     ComparisonTable,
     CompensationCalculator,
     ContentViewer,
+    Drawer,
     lib,
     Emoji,
     FeatureAvailability,
