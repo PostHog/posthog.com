@@ -11,7 +11,7 @@ import EventsInPostHogDark from '../images/tutorials/remix-ab-tests/events-dark.
 import TestSetupLight from '../images/tutorials/remix-ab-tests/experiment-setup-light.png'
 import TestSetupDark from '../images/tutorials/remix-ab-tests/experiment-setup-dark.png'
 
-A/B tests help you make your Remix app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Remix app, add PostHog, create an A/B test, and implement the code for it.
+A/B tests help you improve your Remix by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Remix app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create a Remix app
 
@@ -26,7 +26,6 @@ When prompted in the command line, name it what you like (we chose `remix-ab-tes
 Next, replace the code in `app/routes/_index.tsx` with a simple heading and button:
 
 ```ts file=_index.tsx
-
 export default function Index() {
   const handleClick = () => {
     // Event handling logic will go here
@@ -58,7 +57,7 @@ npm i posthog-js
 Then, go to `app/entry.client.tsx` and initialize PostHog. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).  
 
 
-```js file=entry.client.tsx
+```ts file=entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
@@ -104,7 +103,12 @@ export default function Index() {
     posthog.capture('home_button_clicked');
   };
   
-  // rest of your code
+  return (
+    <div id="app">
+      <h1>Remix A/B Test</h1>
+      <button onClick={handleClick}>Click me!</button>
+    </div>
+  );
 }
 ```
 
@@ -186,7 +190,7 @@ To set this up, we must install and use [PostHog’s Node library](/libraries/no
 npm install posthog-node
 ```
 
-Next, we create a `posthog.js` file in the `app` folder. In it, we initialize the `posthog-node` client. We also set up logic to return the existing client if it is already initialized. Once again, you need your project API key and instance address from [your project settings](https://app.posthog.com/settings/project).
+Next, we create a `posthog.js` file in the `app` folder. In it, we initialize the `posthog-node` client. We also set up logic to return the existing client if it is already initialized. Once again, you need your project API key and instance address from [your project settings](https://us.posthog.com/settings/project).
 
 ```js file=app/posthog.js
 import { PostHog } from 'posthog-node';
@@ -203,7 +207,7 @@ export default function PostHogNodeClient() {
 }
 ```
 
-Next, we implement server-side rendering by adding the [loader function](https://remix.run/docs/en/main/route/loader) to our `_index.tsx` component. We fetch the feature flag using our PostHog node client in this function and return the text for our button.
+Next, we implement server-side rendering by adding the [loader function](https://remix.run/docs/en/main/route/loader) to our `_index.tsx` component. We fetch the feature flag using our PostHog Node client in this function and return the text for our button.
 
 Replace your code in `_index.tsx` with the following:
 
