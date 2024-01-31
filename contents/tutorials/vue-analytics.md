@@ -1,5 +1,5 @@
 ---
-title: How to set up analytics in Vue with PostHog
+title: How to set up analytics in Vue
 date: 2024-01-18
 author: ["lior-neu-ner"]
 tags: ['product analytics']
