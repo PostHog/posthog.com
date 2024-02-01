@@ -157,3 +157,17 @@ We use GitHub Projects to track the status of Issues in an easily viewable way. 
 You can also assign an Issue to a specific person, and tag it with a relevant label - use these to help people filter more easily.
 
 Each Small Team has its own Project for tracking their Issues - [full list here](https://github.com/orgs/PostHog/projects). Most teams run two week sprints - as part of onboarding, you will be invited to the relevant planning meetings. 
+
+## 60 & 90 day Check-ins
+
+The first 3 months of your time at PostHog is a probationary period, which for the vast majority of people will be plain sailing. However, to make sure you are being supported correctly, and setup for success we have two check-ins to make sure everything is going well. 
+
+## 60 day Check-in 
+
+The 60 day check-in will be put in a new-starts manager's calendar as an all-day event by the Ops team. This serves as a reminder to the manager that their new report has been at the business for 60 days and there is 30 days left before their probation period ends. The assumed state here is that everything is going well, however it is a good chance for the manager to receive informal feedback from the report themselves on how things are going and if they need any more support. It is also a good chance to deliver any feedback the report might need to work on before the end of their probation, or just in general. This does not need to be a formal meeting, it can be part of an already scheduled 1-1 or asynchronous, however the manager best sees fit. 
+
+The manager should also give an informal update to their manager (and to the exec team, if their manager is not on the exec team) on how the new start is progressing. 
+
+## 90 day check-in 
+
+The 90 day check-in will be a more formal meeting put in the calendar by Ops and will include:- The new employee, their manager, relevant member of the exec team. Before the meeting the manager will have collected 360 feedback about the new employee and will be ready to give that to the employee. There will also be a formal discussion about passing probation and any feedback that the new employee can use to keep progressing at PostHog. 
