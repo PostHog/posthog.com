@@ -334,7 +334,7 @@
         "handle": "annika-schmid",
         "name": "Annika Schmid",
         "role": "Product Manager",
-        "image": "../../contents/images/team/annika.png",
+        "image": "../../static/images/authors/annika-schmid-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/annikaze_",
         "profile_id": 221
@@ -343,7 +343,7 @@
         "handle": "lior-neu-ner",
         "name": "Lior Neu-ner",
         "role": "Technical Content Marketer",
-        "image": "../../contents/images/team/lior.png",
+        "image": "../../static/images/authors/lior-neu-ner-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/liornn",
         "profile_id": 684
@@ -360,6 +360,6 @@
         "handle": "tomas-farias",
         "name": "Tomás Farías Santana",
         "role": "Software Engineer",
-        "image": "../../contents/images/team/tomas.png"
+        "image": "../../static/images/authors/tomas-farias-posthog.png"
     }
 ]
