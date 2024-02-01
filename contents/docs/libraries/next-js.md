@@ -172,7 +172,7 @@ export default function PostHogPageView() {
 }
 ```
 
-```ts
+```tsx
 // app/PostHogPageView.tsx
 'use client'
 
@@ -238,7 +238,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-```ts
+```tsx
 // app/layout.tsx
 
 import './globals.css'
@@ -259,7 +259,7 @@ export default function RootLayout({
     <html lang="en">
       <PHProvider>
         <body>
-          <PostHogPageview /> 
+          <PostHogPageView /> 
           {children}
         </body>
       </PHProvider>
