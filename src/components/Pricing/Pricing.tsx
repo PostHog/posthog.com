@@ -312,6 +312,7 @@ const Pricing = (): JSX.Element => {
                                                 smooth: 'easeInOutQuart',
                                             })
                                         }}
+                                        className="cursor-pointer text-red dark:text-yellow font-semibold"
                                     >
                                         See full plan comparison{' '}
                                         <IconArrowRight className="w-4 h-4 rotate-90 inline-block" />
@@ -429,6 +430,10 @@ const Pricing = (): JSX.Element => {
             {!currentProduct && (
                 <section id="plan-comparison" className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
                     <h3>Compare platform features by plan</h3>
+
+                    <div className="border border-light dark:border-dark rounded p-8 bg-accent dark:bg-accent-dark text-center">
+                        Table placeholder
+                    </div>
                 </section>
             )}
 
