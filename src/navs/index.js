@@ -1141,7 +1141,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Flask',
-                            url: '/tutorials/flask-analytics',
+                            url: '/tutorials/python-feature-flags',
                         },
                         {
                             name: 'Framer',
