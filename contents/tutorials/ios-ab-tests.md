@@ -127,7 +127,7 @@ Button("Click Me!") {
 // ...rest of code
 ```
 
-To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [PostHog event explorer](https://app.posthog.com/events).
+To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [activity tab](https://app.posthog.com/events).
 
 ![iOS events captured](../images/tutorials/ios-ab-tests/event-captured.png)
 

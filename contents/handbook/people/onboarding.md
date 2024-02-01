@@ -73,7 +73,7 @@ Based on this ongoing learning process, here are our **five rules for onboarding
       <summary>Looking for learning session ideas?</summary>
       <p>Here's a non-exhaustive list:</p>
       <ul>
-        <li>How an event gets from a client library all the way to the Live Events view</li>
+        <li>How an event gets from a client library all the way to the Activity view</li>
         <li>How we turn all our TSX and SCSS files into a fast frontend served from S3</li>
         <li>The architecture of PostHog Cloud</li>
         <li>Query nodes and how they're used throughout the app</li>

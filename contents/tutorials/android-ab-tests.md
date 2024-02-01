@@ -207,7 +207,7 @@ fun SecondScreen() {
 }
 ```
 
-To check your setup, build and run your app. Click your button a few times and you should start seeing events in the [PostHog event explorer](https://app.posthog.com/events).
+To check your setup, build and run your app. Click your button a few times and you should start seeing events in the [activity tab](https://app.posthog.com/events).
 
 ![Android events captured](../images/tutorials/android-ab-tests/android-events.png)
 
