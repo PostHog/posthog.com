@@ -16,14 +16,24 @@ import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA } from './Plans'
 import Link from 'components/Link'
-import { IconGraph, IconChevronDown, IconRewindPlay, IconToggle, IconFlask, IconMessage } from '@posthog/icons'
+import {
+    IconGraph,
+    IconChevronDown,
+    IconRewindPlay,
+    IconToggle,
+    IconFlask,
+    IconMessage,
+    IconInfo,
+    IconArrowRight,
+} from '@posthog/icons'
+import Tooltip from 'components/Tooltip'
 
 interface PlanData {
     title: string
     subtitle: string
     price: string
     priceSubtitle: string | JSX.Element
-    features: string[]
+    features: React.ReactNode[]
 }
 
 const plans: PlanData[] = [
@@ -33,31 +43,55 @@ const plans: PlanData[] = [
         price: 'Free',
         priceSubtitle: (
             <span>
-                Usage limits vary by product
+                Limited usage (varies by product)
                 <br />
                 <br />
             </span>
         ),
-        features: ['Community support', '1 project', '1 year data retention'],
+        features: [
+            'Unlimited tracked users',
+            'Unlimited team members',
+            'Community support',
+            '1 project',
+            '1 year data retention',
+        ],
     },
     {
         title: 'Free with card',
-        subtitle: 'Enter card to unlock extra features',
+        subtitle: 'Enter a card to unlock extra features',
         price: '$0',
         priceSubtitle: 'Use our generous free tier, then usage-based pricing',
-        features: ['Email support', '2 projects', '7 year data retention', 'Set billing limits', 'Team features (?)'],
+        features: [
+            'Unlimited tracked users',
+            'Unlimited team members',
+            'Email support',
+            '2 projects',
+            '7 year data retention',
+            'Set billing limits',
+        ],
     },
     {
         title: 'Pro',
-        subtitle: 'Advanced security & compliance',
+        subtitle: 'Features for teams',
         price: '$450/mo',
         priceSubtitle: '+ usage-based pricing by product after monthly free allotment',
         features: [
+            'Unlimited tracked users',
+            'Unlimited team members',
             'Slack-based support',
             'Unlimited projects',
             '7 year data retention',
             'Set billing limits',
-            'Team features (?)',
+            <>
+                <span className="relative">
+                    Team features{' '}
+                    <Tooltip content="Verified events, comments and taxonomy (tags and descriptions) on insights, events, properties">
+                        <span className="relative -top-px">
+                            <IconInfo className="inline-block w-4 h-4" />
+                        </span>
+                    </Tooltip>
+                </span>
+            </>,
             'SSO, MFA + enforcement',
             'Audit logs',
             'Remove PostHog branding',
@@ -263,9 +297,25 @@ const Pricing = (): JSX.Element => {
                         <div className="xl:grid grid-cols-5 gap-8 pb-8 md:pb-0">
                             <div>
                                 <h3 className="mt-8 mb-1 text-xl">1. Pick a plan</h3>
-                                <p className="text-sm opacity-75">
+                                <p className="text-sm opacity-75 mb-2">
                                     The PostHog platform (Product OS) is free to use, or upgrade for extra features that
                                     work across our suite of products.
+                                </p>
+                                <p className="text-sm">
+                                    <span
+                                        onClick={() => {
+                                            const element = document.getElementById('plan-comparison')
+                                            const headerHeight = document.getElementById('header').offsetHeight // replace 'header' with the id of your header
+                                            scroll.scrollTo(element.offsetTop - 20 - headerHeight, {
+                                                duration: 800,
+                                                delay: 0,
+                                                smooth: 'easeInOutQuart',
+                                            })
+                                        }}
+                                    >
+                                        See full plan comparison{' '}
+                                        <IconArrowRight className="w-4 h-4 rotate-90 inline-block" />
+                                    </span>
                                 </p>
                             </div>
                             <div className="col-span-4 overflow-x">
@@ -286,7 +336,7 @@ const Pricing = (): JSX.Element => {
                         <div className="xl:grid grid-cols-5 gap-8 pb-8 md:pb-0">
                             <div>
                                 <h3 className="mt-8 mb-1 text-xl">2. Choose products</h3>
-                                <div className="space-x-1 mb-8 xl:mb-0">
+                                <div className="space-x-1 xl:space-x-0 mb-8 xl:mb-0">
                                     <p className="inline xl:block text-sm opacity-75 mb-2">
                                         Usage-based pricing after a generous free tier.
                                     </p>
@@ -294,7 +344,7 @@ const Pricing = (): JSX.Element => {
                                         Set a billing limit so you never pay more than expected.
                                     </p>
                                     <p className="inline xl:block text-sm opacity-75 mb-2">
-                                        Choose a product to see a feature breakdown by plan.
+                                        Choose a product to see a feature breakdown and volume pricing discounts.
                                     </p>
                                 </div>
                             </div>
@@ -375,6 +425,12 @@ const Pricing = (): JSX.Element => {
             )}
 
             <PricingCalculator />
+
+            {!currentProduct && (
+                <section id="plan-comparison" className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                    <h3>Compare platform features by plan</h3>
+                </section>
+            )}
 
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-light dark:border-dark pb-4">
