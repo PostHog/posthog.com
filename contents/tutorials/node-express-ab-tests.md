@@ -53,7 +53,7 @@ app.listen(port, () => {
 })
 ```
 
-Run `npm start` and navigate to `http://localhost:3000` to see your app in action.
+Run `node server.js` and navigate to `http://localhost:3000` to see your app in action.
 
 ![Basic Express app](../images/tutorials/node-express-ab-tests/basic-app.png)
 
