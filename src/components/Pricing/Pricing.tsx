@@ -15,6 +15,75 @@ import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA } from './Plans'
+import Link from 'components/Link'
+
+interface PlanData {
+    title: string
+    subtitle: string
+    price: string
+    priceSubtitle: string | JSX.Element
+    features: string[]
+}
+
+const plans: PlanData[] = [
+    {
+        title: 'Totally free',
+        subtitle: 'No credit card required',
+        price: 'Free',
+        priceSubtitle: (
+            <span>
+                Usage limits vary by product
+                <br />
+                <br />
+            </span>
+        ),
+        features: ['Community support', '1 project', '1 year data retention'],
+    },
+    {
+        title: 'Free with card',
+        subtitle: 'Enter card to unlock extra features',
+        price: '$0',
+        priceSubtitle: 'Free up to product usage limits, then billed per use by product',
+        features: ['Email support', '2 projects', '7 year data retention', 'Set billing limits', 'Team features (?)'],
+    },
+    {
+        title: 'Pro',
+        subtitle: 'Advanced security & compliance',
+        price: '$450/mo',
+        priceSubtitle: '+ usage-based pricing by product after monthly free allotment',
+        features: [
+            'Slack-based support',
+            'Unlimited projects',
+            '7 year data retention',
+            'Set billing limits',
+            'Team features (?)',
+            'SSO, MFA + enforcement',
+            'Audit logs',
+            'Remove PostHog branding',
+        ],
+    },
+]
+
+const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
+    <div className="flex flex-col border border-light dark:border-dark bg-white dark:bg-accent-dark text-center rounded shrink-0 basis-[80vw]">
+        <div className="bg-light/50 dark:bg-dark/50 px-8 py-4">
+            <h4 className="mb-1">{planData.title}</h4>
+            <p className="opacity-75 text-sm mb-0">{planData.subtitle}</p>
+        </div>
+        <div className="flex flex-col h-full pt-4 px-8 pb-8">
+            <h4 className="mb-1">{planData.price}</h4>
+            <p className="opacity-75 text-sm">{planData.priceSubtitle}</p>
+            <ul className="p-0 pb-8 list-none flex flex-col gap-2 [&_li]:text-[15px]">
+                {planData.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                ))}
+            </ul>
+            <div className="mt-auto">
+                <CTA />
+            </div>
+        </div>
+    </div>
+)
 
 export const section = cntl`
     max-w-6xl
@@ -115,14 +184,58 @@ const Pricing = (): JSX.Element => {
                     </div>
                     <div className="md:order-1">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Pricing</h1>
-                        <p className="text-base font-medium opacity-60 leading-tight mb-4">
-                            Use PostHog free forever (with generous usage limits). <br className="hidden lg:block" />
-                            Or pay per use and get unrestricted access to everything.
-                        </p>
-                        <p className="text-base font-medium opacity-60 leading-tight">
-                            Each product is priced separately.
+                        <p className="text-base font-medium opacity-60 leading-tight mb-4">It's as easy as 1, 2.</p>
+                        <p className="text-base font-medium opacity-60 leading-tight text-balance pr-12">
+                            PostHog products carry usage-based pricing. Each product is billed separately. Pick a plan
+                            and choose the products you want to use.
                         </p>
                         <CTA />
+                    </div>
+                </div>
+            </section>
+            <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                <div className="md:grid grid-cols-5 gap-4 pb-8 md:pb-0">
+                    <div>
+                        <h3 className="mt-8 mb-1 text-xl">1. Pick a plan</h3>
+                        <p className="text-sm opacity-75">
+                            The PostHog platform (Product OS) is free to use, or upgrade for extra features that work
+                            across our suite of products.
+                        </p>
+                    </div>
+                    <div className="col-span-4 overflow-x">
+                        <div className="flex mr-8 md:mr-0 md:grid grid-cols-3 gap-4 mb-8">
+                            {plans.map((plan, index) => (
+                                <Plan key={index} planData={plan} />
+                            ))}
+                        </div>
+                        <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
+                            Need a custom MSA, SAML, priority support, and training? Do you have an in-house legal team?{' '}
+                            <Link to="/contact-sales">Talk to a human</Link>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                <div className="md:grid grid-cols-5 gap-4 pb-8 md:pb-0">
+                    <div>
+                        <h3 className="mt-8 mb-1 text-xl">2. Choose products</h3>
+                        <p className="text-sm opacity-75">
+                            Usage-based pricing after a generous free tier. Set a billing limit so you never pay more
+                            than expected.
+                        </p>
+                    </div>
+                    <div className="col-span-4">
+                        <div className="grid grid-cols-12 items-center">
+                            <div className="col-span-5"></div>
+                            <div className="col-span-3">Monthly free allowance</div>
+                            <div className="col-span-3">Then pricing starts at...</div>
+                            <div className="col-span-1"></div>
+
+                            <div className="col-span-5">Product analytics</div>
+                            <div className="col-span-3">1,000,000 events/mo</div>
+                            <div className="col-span-3">$0.00031/event</div>
+                            <div className="col-span-1">&rarr;</div>
+                        </div>
                     </div>
                 </div>
             </section>
