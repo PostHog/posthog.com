@@ -2,11 +2,10 @@ import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
 import { LinearSlider, LogSlider, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { IconGraph, IconRewindPlay, IconToggle, IconMessage } from '@posthog/icons'
+import { IconGraph, IconRewindPlay, IconToggle, IconMessage, IconExternal, IconPercentage } from '@posthog/icons'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
-import { ExternalLink } from 'components/Icons'
 import Toggle from 'components/Toggle'
 import {
     FIVE_MILLION,
@@ -96,7 +95,7 @@ export const PricingCalculator = () => {
                             external={true}
                             className="flex items-center gap-x-1"
                         >
-                            How do I estimate my usage? <ExternalLink className="!h-4 !w-4" />
+                            How do I estimate my usage? <IconExternal className="w-4 h-4" />
                         </Link>
                     </p>
 
@@ -371,8 +370,8 @@ export const PricingCalculator = () => {
                     <h4 className="border-b border-border dark:border-dark pb-2 mb-3">Discounts</h4>
 
                     <div className="pl-10 relative mb-4">
-                        <span className="w-6 h-6 absolute top-0 left-1">
-                            <Discount />
+                        <span className="w-6 h-6 absolute top-0 left-1 opacity-50">
+                            <IconPercentage />
                         </span>
 
                         <h5 className="text-base mb-0">Non-profits</h5>
@@ -380,8 +379,8 @@ export const PricingCalculator = () => {
                     </div>
 
                     <div className="pl-10 relative mb-4">
-                        <span className="w-6 h-6 absolute top-0 left-1">
-                            <Discount />
+                        <span className="w-6 h-6 absolute top-0 left-1 opacity-50">
+                            <IconPercentage />
                         </span>
 
                         <h5 className="text-base mb-0">Startups</h5>
