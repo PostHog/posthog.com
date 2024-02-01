@@ -115,7 +115,10 @@ function UpdateWrapper({ id, children, status }: { id: number; children: JSX.Ele
             {success && <RoadmapSuccess description="Roadmap will update on next build" id={id} />}
             <div className="relative">
                 {initialValues && (
-                    <button className="absolute top-4 right-4 font-bold text-red" onClick={() => setEditing(true)}>
+                    <button
+                        className="absolute bottom-4 right-4 z-10 font-bold text-red"
+                        onClick={() => setEditing(true)}
+                    >
                         Edit
                     </button>
                 )}
