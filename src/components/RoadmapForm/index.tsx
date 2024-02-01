@@ -69,7 +69,7 @@ const GitHubURLs = ({
     )
 }
 
-type Status = 'in-progress' | 'complete' | 'under-consideration'
+export type Status = 'in-progress' | 'complete' | 'under-consideration'
 
 const ValidationSchema = (status?: Status) =>
     Yup.object().shape({
@@ -96,18 +96,25 @@ const statusLabels = {
 
 export default function RoadmapForm({
     onSubmit,
+    hideStatusSelector = true,
+    buttonText = 'Publish',
+    id,
     ...other
 }: {
     status?: Status
     onSubmit?: (roadmap: any) => void
+    initialValues?: any
+    hideStatusSelector?: boolean
+    buttonText?: string
+    id?: number
 }): JSX.Element {
     const [status, setStatus] = useState(other.status)
     const [loading, setLoading] = useState(false)
     const { getJwt, user } = useUser()
-    const { handleSubmit, handleChange, values, setFieldValue, initialValues, errors } = useFormik({
+    const { handleSubmit, handleChange, values, setFieldValue, initialValues } = useFormik({
         validateOnMount: false,
         validationSchema: ValidationSchema(status),
-        initialValues: {
+        initialValues: other.initialValues ?? {
             title: '',
             body: '',
             images: [],
@@ -179,14 +186,17 @@ export default function RoadmapForm({
                         category,
                     },
                 })
-                const { data: roadmap } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps`, {
-                    body: data,
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                        Authorization: `Bearer ${await getJwt()}`,
-                    },
-                }).then((res) => res.json())
+                const { data: roadmap } = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id ?? ''}`,
+                    {
+                        body: data,
+                        method: id ? 'PUT' : 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            Authorization: `Bearer ${await getJwt()}`,
+                        },
+                    }
+                ).then((res) => res.json())
                 setLoading(false)
                 onSubmit?.(roadmap)
             } catch (err) {
@@ -208,7 +218,7 @@ export default function RoadmapForm({
                         />
                     </div>
                 )}
-                {!status && (
+                {!hideStatusSelector && (
                     <Select
                         placeholder="Status"
                         options={Object.keys(statusLabels).map((key) => ({
@@ -299,7 +309,7 @@ export default function RoadmapForm({
                 )}
             </div>
             <CallToAction disabled={loading} onClick={handleSubmit} className="mt-2 w-full">
-                {loading ? <Spinner className="text-white mx-auto !w-6 !h-6" /> : 'Publish'}
+                {loading ? <Spinner className="text-white mx-auto !w-6 !h-6" /> : buttonText}
             </CallToAction>
         </form>
     )
