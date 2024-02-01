@@ -16,6 +16,7 @@ import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA } from './Plans'
 import Link from 'components/Link'
+import { IconGraph, IconChevronDown, IconRewindPlay, IconToggle, IconFlask, IconMessage } from '@posthog/icons'
 
 interface PlanData {
     title: string
@@ -61,6 +62,50 @@ const plans: PlanData[] = [
             'Audit logs',
             'Remove PostHog branding',
         ],
+    },
+]
+
+const products = [
+    {
+        icon: <IconGraph className="w-6 h-6 text-blue" />,
+        name: 'Product analytics',
+        freeLimit: '1,000,000',
+        denomination: 'event',
+        price: '0.00031',
+        link: '/pricing?product=product-analytics',
+    },
+    {
+        icon: <IconRewindPlay className="w-6 h-6 text-yellow" />,
+        name: 'Session replay',
+        freeLimit: '15,000',
+        denomination: 'recording',
+        price: '0.0050',
+        link: '/pricing?product=session-replay',
+    },
+    {
+        icon: <IconToggle className="w-6 h-6 text-green" />,
+        name: 'Feature flags',
+        freeLimit: '1,000,000',
+        denomination: 'request',
+        price: '0.0001',
+        link: '/pricing?product=feature-flags',
+    },
+    {
+        icon: <IconFlask className="w-6 h-6 text-purple" />,
+        name: 'A/B testing',
+        freeLimit: '',
+        denomination: '',
+        price: '',
+        link: '/pricing?product=ab-testing',
+        message: <em className="font-normal opacity-75">Billed with feature flags</em>,
+    },
+    {
+        icon: <IconMessage className="w-6 h-6 text-red" />,
+        name: 'Surveys',
+        freeLimit: '250',
+        denomination: 'response',
+        price: '0.2000',
+        link: '/pricing?product=surveys',
     },
 ]
 
@@ -193,55 +238,97 @@ const Pricing = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-            <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
-                <div className="md:grid grid-cols-5 gap-4 pb-8 md:pb-0">
-                    <div>
-                        <h3 className="mt-8 mb-1 text-xl">1. Pick a plan</h3>
-                        <p className="text-sm opacity-75">
-                            The PostHog platform (Product OS) is free to use, or upgrade for extra features that work
-                            across our suite of products.
-                        </p>
-                    </div>
-                    <div className="col-span-4 overflow-x">
-                        <div className="flex mr-8 md:mr-0 md:grid grid-cols-3 gap-4 mb-8">
-                            {plans.map((plan, index) => (
-                                <Plan key={index} planData={plan} />
-                            ))}
-                        </div>
-                        <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
-                            Need a custom MSA, SAML, priority support, and training? Do you have an in-house legal team?{' '}
-                            <Link to="/contact-sales">Talk to a human</Link>
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
-                <div className="md:grid grid-cols-5 gap-4 pb-8 md:pb-0">
-                    <div>
-                        <h3 className="mt-8 mb-1 text-xl">2. Choose products</h3>
-                        <p className="text-sm opacity-75">
-                            Usage-based pricing after a generous free tier. Set a billing limit so you never pay more
-                            than expected.
-                        </p>
-                    </div>
-                    <div className="col-span-4">
-                        <div className="grid grid-cols-12 items-center">
-                            <div className="col-span-5"></div>
-                            <div className="col-span-3">Monthly free allowance</div>
-                            <div className="col-span-3">Then pricing starts at...</div>
-                            <div className="col-span-1"></div>
 
-                            <div className="col-span-5">Product analytics</div>
-                            <div className="col-span-3">1,000,000 events/mo</div>
-                            <div className="col-span-3">$0.00031/event</div>
-                            <div className="col-span-1">&rarr;</div>
+            {!currentProduct && (
+                <>
+                    <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                        <div className="md:grid grid-cols-5 gap-4 pb-8 md:pb-0">
+                            <div>
+                                <h3 className="mt-8 mb-1 text-xl">1. Pick a plan</h3>
+                                <p className="text-sm opacity-75">
+                                    The PostHog platform (Product OS) is free to use, or upgrade for extra features that
+                                    work across our suite of products.
+                                </p>
+                            </div>
+                            <div className="col-span-4 overflow-x">
+                                <div className="flex mr-8 md:mr-0 md:grid grid-cols-3 gap-4 mb-8">
+                                    {plans.map((plan, index) => (
+                                        <Plan key={index} planData={plan} />
+                                    ))}
+                                </div>
+                                <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
+                                    Need a custom MSA, SAML, priority support, and training? Do you have an in-house
+                                    legal team? <Link to="/contact-sales">Talk to a human</Link>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
-                <Plans showTitle groupsToShow={groupsToShow} />
-            </section>
+                    </section>
+
+                    <section className={`${section} mb-24 mt-8 md:px-4 overflow-auto`}>
+                        <div className="md:grid grid-cols-5 gap-4 pb-8 md:pb-0">
+                            <div>
+                                <h3 className="mt-8 mb-1 text-xl">2. Choose products</h3>
+                                <p className="text-sm opacity-75">
+                                    Usage-based pricing after a generous free tier. Set a billing limit so you never pay
+                                    more than expected.
+                                </p>
+                            </div>
+                            <div className="col-span-4">
+                                <div className="grid grid-cols-10 items-center text-sm opacity-60 mb-2">
+                                    <div className="col-span-3"></div>
+                                    <div className="col-span-3">Monthly free allowance</div>
+                                    <div className="col-span-3">Then pricing starts at...</div>
+                                    <div className="col-span-1"></div>
+                                </div>
+
+                                <div className="divide-y space-y-0.5 divide-light dark:divide-dark">
+                                    {products.map((product, index) => (
+                                        <Link
+                                            to={product.link}
+                                            key={index}
+                                            className="group grid grid-cols-10 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
+                                        >
+                                            <div className="col-span-3 flex gap-2 items-center pl-1">
+                                                {product.icon}
+                                                <span className="font-semibold text-[15px]">{product.name}</span>
+                                            </div>
+                                            <div className="col-span-3 text-sm ">
+                                                {product.freeLimit ? (
+                                                    <>
+                                                        {product.freeLimit} {product.denomination}s
+                                                        <span className="opacity-50 font-medium text-[13px]">/mo</span>
+                                                    </>
+                                                ) : (
+                                                    <>{product.message}</>
+                                                )}
+                                            </div>
+                                            <div className="col-span-3 text-sm">
+                                                {product.price && (
+                                                    <>
+                                                        ${product.price}
+                                                        <span className="opacity-50 font-medium text-[13px]">
+                                                            /{product.denomination}
+                                                        </span>
+                                                    </>
+                                                )}
+                                            </div>
+                                            <div className="col-span-1 flex justify-end">
+                                                <IconChevronDown className="w-8 h-8 -rotate-90 opacity-50 group-hover:opacity-75" />
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </>
+            )}
+
+            {currentProduct && (
+                <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                    <Plans showTitle groupsToShow={groupsToShow} />
+                </section>
+            )}
 
             <PricingCalculator />
 

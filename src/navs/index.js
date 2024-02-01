@@ -2604,7 +2604,7 @@ export const pricingMenu = {
     icon: 'IconReceipt',
     children: [
         {
-            name: 'All products',
+            name: 'Plans',
             icon: 'IconReceipt',
             color: 'red',
             url: '/pricing',
