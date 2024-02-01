@@ -111,7 +111,7 @@ const products = [
 
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     <div className="flex flex-col border border-light dark:border-dark bg-white dark:bg-accent-dark text-center rounded shrink-0 basis-[80vw] xs:basis-[55vw] sm:basis-[40vw]">
-        <div className="bg-light/50 dark:bg-dark/50 px-4 xl:px-8 py-4">
+        <div className="bg-light/50 dark:bg-dark/50 px-4 xl:px-8 py-4 rounded-tl rounded-tr">
             <h4 className="text-lg mb-0">{planData.title}</h4>
             <p className="opacity-75 text-sm mb-0">{planData.subtitle}</p>
         </div>
@@ -231,13 +231,28 @@ const Pricing = (): JSX.Element => {
                         </div>
                     </div>
                     <div className="md:order-1">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Pricing</h1>
-                        <p className="text-base font-medium opacity-60 leading-tight mb-4">It's as easy as 1, 2.</p>
-                        <p className="text-base font-medium opacity-60 leading-tight text-balance pr-12">
-                            PostHog products carry usage-based pricing. Each product is billed separately. Pick a plan
-                            and choose the products you want to use.
-                        </p>
-                        <CTA />
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
+                            {currentProduct ? '{product name} pricing' : 'Plans & pricing'}
+                        </h1>
+                        {currentProduct ? (
+                            <>
+                                <p className="text-base font-medium text-primary/60 dark:text-primary-dark/60 leading-tight text-balance pr-12">
+                                    PostHog products offer usage-based pricing. Each product is billed separately.{' '}
+                                    <Link to="/pricing">Pick a plan</Link> and choose the products you want to use.
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <p className="text-base font-medium opacity-60 leading-tight mb-4">
+                                    It's as easy as 1, 2.
+                                </p>
+                                <p className="text-base font-medium opacity-60 leading-tight text-balance pr-12">
+                                    PostHog products offer usage-based pricing. Each product is billed separately. Pick
+                                    a plan and choose the products you want to use.
+                                </p>
+                                <CTA />
+                            </>
+                        )}
                     </div>
                 </div>
             </section>
@@ -267,7 +282,7 @@ const Pricing = (): JSX.Element => {
                         </div>
                     </section>
 
-                    <section className={`${section} mb-24 mt-8 md:px-4 overflow-auto`}>
+                    <section className={`${section} mb-12 md:mb-24 mt-8 md:px-4 overflow-auto`}>
                         <div className="xl:grid grid-cols-5 gap-8 pb-8 md:pb-0">
                             <div>
                                 <h3 className="mt-8 mb-1 text-xl">2. Choose products</h3>
@@ -284,7 +299,7 @@ const Pricing = (): JSX.Element => {
                                 </div>
                             </div>
                             <div className="col-span-4">
-                                <div className="grid grid-cols-16 items-center text-sm opacity-60 mb-2">
+                                <div className="hidden md:grid grid-cols-16 items-center text-sm opacity-60 mb-2">
                                     <div className="col-span-6"></div>
                                     <div className="col-span-5">Monthly free allowance</div>
                                     <div className="col-span-4">Then pricing starts at...</div>
@@ -293,39 +308,58 @@ const Pricing = (): JSX.Element => {
 
                                 <div className="divide-y space-y-0.5 divide-light dark:divide-dark">
                                     {products.map((product, index) => (
-                                        <Link
-                                            to={product.link}
-                                            key={index}
-                                            className="group grid grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
-                                        >
-                                            <div className="col-span-6 flex gap-2 items-center pl-1">
-                                                {product.icon}
-                                                <span className="font-semibold text-[15px]">{product.name}</span>
-                                            </div>
-                                            <div className="col-span-5 text-sm ">
-                                                {product.freeLimit ? (
-                                                    <>
-                                                        {product.freeLimit} {product.denomination}s
-                                                        <span className="opacity-50 font-medium text-[13px]">/mo</span>
-                                                    </>
-                                                ) : (
-                                                    <>{product.message}</>
-                                                )}
-                                            </div>
-                                            <div className="col-span-4 text-sm">
-                                                {product.price && (
-                                                    <>
-                                                        ${product.price}
-                                                        <span className="opacity-50 font-medium text-[13px]">
-                                                            /{product.denomination}
-                                                        </span>
-                                                    </>
-                                                )}
-                                            </div>
-                                            <div className="col-span-1 flex justify-end">
-                                                <IconChevronDown className="w-8 h-8 -rotate-90 opacity-50 group-hover:opacity-75" />
-                                            </div>
-                                        </Link>
+                                        <div key={index}>
+                                            <Link
+                                                to={product.link}
+                                                className="group grid grid-cols-8 md:grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
+                                            >
+                                                <div className="col-span-7 md:col-span-6 flex gap-2 items-center md:pl-1 mb-1 md:mb-0">
+                                                    {product.icon}
+                                                    <span className="font-semibold text-[15px]">{product.name}</span>
+                                                </div>
+                                                <div
+                                                    className={`col-span-4 md:col-span-5 text-sm order-3 2xs:ml-8 md:ml-0 ${
+                                                        product.price &&
+                                                        'rounded-tl rounded-bl bg-accent dark:bg-accent-dark md:bg-transparent dark:md:bg-transparent p-2 md:p-0'
+                                                    } md:order-none`}
+                                                >
+                                                    {product.freeLimit ? (
+                                                        <>
+                                                            <div className="text-xs font-normal opacity-60 md:hidden">
+                                                                Monthly free allowance
+                                                            </div>
+                                                            {product.freeLimit} {product.denomination}s
+                                                            <span className="opacity-50 font-medium text-[13px]">
+                                                                /mo
+                                                            </span>
+                                                        </>
+                                                    ) : (
+                                                        <>{product.message}</>
+                                                    )}
+                                                </div>
+                                                <div
+                                                    className={`col-span-4 text-sm order-4 2xs:mr-8 h-full md:h-auto md:mr-0 md:order-none ${
+                                                        product.price &&
+                                                        'rounded-tr rounded-br bg-accent dark:bg-accent-dark md:bg-transparent dark:md:bg-transparent p-2 md:p-0'
+                                                    }`}
+                                                >
+                                                    {product.price && (
+                                                        <>
+                                                            <div className="text-xs font-normal opacity-60 md:hidden">
+                                                                Then pricing starts at
+                                                            </div>
+                                                            ${product.price}
+                                                            <span className="opacity-50 font-medium text-[13px]">
+                                                                /{product.denomination}
+                                                            </span>
+                                                        </>
+                                                    )}
+                                                </div>
+                                                <div className="col-span-1 flex justify-end">
+                                                    <IconChevronDown className="w-8 h-8 -rotate-90 opacity-50 group-hover:opacity-75" />
+                                                </div>
+                                            </Link>
+                                        </div>
                                     ))}
                                 </div>
                             </div>

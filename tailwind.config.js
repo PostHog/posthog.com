@@ -25,6 +25,7 @@ module.exports = {
             'gray-accent-light-hover': '#C5C6C2',
         },
         screens: {
+            '2xs': '400px',
             xs: '482px',
             sm: '640px',
             // => @media (min-width: 640px) { ... }
