@@ -293,6 +293,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 // rest of your code
 ```
 
+In the scenario where your PostHog cookie is not available on the server side, you can fall back to the client side rendering approach of feature flags
 ## Further reading
 
 - [How to set up Remix analytics, feature flags, and more](/tutorials/remix-analytics)
