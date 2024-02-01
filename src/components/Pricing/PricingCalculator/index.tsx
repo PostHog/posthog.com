@@ -2,7 +2,7 @@ import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
 import { LinearSlider, LogSlider, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { Analytics, SessionRecording, FeatureFlags, Surveys } from 'components/ProductIcons'
+import { IconGraph, IconRewindPlay, IconToggle, IconMessage } from '@posthog/icons'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
@@ -108,7 +108,9 @@ export const PricingCalculator = () => {
                             Subtotal
                         </div>
                         <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
-                            <span className="w-5 h-5 flex absolute top-3 left-3">{<Analytics />}</span>
+                            <span className="flex absolute top-3 left-3 opacity-50">
+                                {<IconGraph className="w-5 h-5" />}
+                            </span>
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                 <strong>Product analytics + data stack</strong>
                                 <span>
@@ -146,7 +148,9 @@ export const PricingCalculator = () => {
                             </span>
                         </div>
                         <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
-                            <span className="w-5 h-5 flex absolute top-3 left-3">{<SessionRecording />}</span>
+                            <span className="flex absolute top-3 left-3 opacity-50">
+                                {<IconRewindPlay className="w-5 h-5" />}
+                            </span>
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                 <strong>Session replay</strong>
                                 <span>
@@ -186,7 +190,9 @@ export const PricingCalculator = () => {
                             </span>
                         </div>
                         <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
-                            <span className="w-5 h-5 flex absolute top-3 left-3">{<FeatureFlags />}</span>
+                            <span className="flex absolute top-3 left-3 opacity-50">
+                                {<IconToggle className="w-5 h-5" />}
+                            </span>
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                 <strong>Feature flags</strong>
                                 <span>
@@ -224,7 +230,9 @@ export const PricingCalculator = () => {
                             </span>
                         </div>
                         <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
-                            <span className="w-5 h-5 flex absolute top-3 left-3">{<Surveys />}</span>
+                            <span className="flex absolute top-3 left-3 opacity-50">
+                                {<IconMessage className="w-5 h-5" />}
+                            </span>
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                 <strong>Surveys</strong>
                                 <span>
