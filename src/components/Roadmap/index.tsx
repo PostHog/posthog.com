@@ -155,7 +155,7 @@ const AddRoadmapItem = ({ status }: { status: 'in-progress' | 'complete' | 'unde
     const [roadmapID, setRoadmapID] = useState(null)
 
     return (
-        <div className="pt-4 !mt-4 border-t border-border pb-4">
+        <div className="pt-4 !mt-4 border-t border-border dark:border-dark pb-4">
             {roadmapID && <RoadmapSuccess id={roadmapID} />}
             {adding ? (
                 <RoadmapForm
