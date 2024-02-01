@@ -189,7 +189,7 @@ const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: B
     )
 }
 
-export const CTA = () => {
+export const CTA = ({ width }) => {
     const posthog = usePostHog()
     return (
         <TrackedCTA
@@ -199,7 +199,8 @@ export const CTA = () => {
             }}
             type="primary"
             size="md"
-            className="shadow-md !w-auto"
+            width={width}
+            className="shadow-md"
             to={`https://${
                 posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
             }.posthog.com/signup`}

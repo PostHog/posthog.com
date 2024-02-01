@@ -44,7 +44,7 @@ const plans: PlanData[] = [
         title: 'Free with card',
         subtitle: 'Enter card to unlock extra features',
         price: '$0',
-        priceSubtitle: 'Free up to product usage limits, then billed per use by product',
+        priceSubtitle: 'Use our generous free tier, then usage-based pricing',
         features: ['Email support', '2 projects', '7 year data retention', 'Set billing limits', 'Team features (?)'],
     },
     {
@@ -110,21 +110,24 @@ const products = [
 ]
 
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
-    <div className="flex flex-col border border-light dark:border-dark bg-white dark:bg-accent-dark text-center rounded shrink-0 basis-[80vw]">
-        <div className="bg-light/50 dark:bg-dark/50 px-8 py-4">
-            <h4 className="mb-1">{planData.title}</h4>
+    <div className="flex flex-col border border-light dark:border-dark bg-white dark:bg-accent-dark text-center rounded shrink-0 basis-[80vw] xs:basis-[55vw] sm:basis-[40vw]">
+        <div className="bg-light/50 dark:bg-dark/50 px-4 xl:px-8 py-4">
+            <h4 className="text-lg mb-0">{planData.title}</h4>
             <p className="opacity-75 text-sm mb-0">{planData.subtitle}</p>
         </div>
-        <div className="flex flex-col h-full pt-4 px-8 pb-8">
-            <h4 className="mb-1">{planData.price}</h4>
-            <p className="opacity-75 text-sm">{planData.priceSubtitle}</p>
-            <ul className="p-0 pb-8 list-none flex flex-col gap-2 [&_li]:text-[15px]">
+        <div className="flex flex-col h-full pt-4 px-4 xl:px-8 pb-8">
+            <h4 className="text-lg mb-1">
+                {planData.price != 'Free' && <span className="text-sm opacity-60 font-normal">Starts at</span>}{' '}
+                {planData.price}
+            </h4>
+            <p className="opacity-75 text-sm text-balance">{planData.priceSubtitle}</p>
+            <ul className="p-0 pb-8 list-none flex flex-col gap-2 [&_li]:text-sm xl:[&_li]:text-[15px]">
                 {planData.features.map((feature, index) => (
                     <li key={index}>{feature}</li>
                 ))}
             </ul>
             <div className="mt-auto">
-                <CTA />
+                <CTA width="full" />
             </div>
         </div>
     </div>
@@ -242,7 +245,7 @@ const Pricing = (): JSX.Element => {
             {!currentProduct && (
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
-                        <div className="md:grid grid-cols-5 gap-4 pb-8 md:pb-0">
+                        <div className="xl:grid grid-cols-5 gap-8 pb-8 md:pb-0">
                             <div>
                                 <h3 className="mt-8 mb-1 text-xl">1. Pick a plan</h3>
                                 <p className="text-sm opacity-75">
@@ -265,19 +268,26 @@ const Pricing = (): JSX.Element => {
                     </section>
 
                     <section className={`${section} mb-24 mt-8 md:px-4 overflow-auto`}>
-                        <div className="md:grid grid-cols-5 gap-4 pb-8 md:pb-0">
+                        <div className="xl:grid grid-cols-5 gap-8 pb-8 md:pb-0">
                             <div>
                                 <h3 className="mt-8 mb-1 text-xl">2. Choose products</h3>
-                                <p className="text-sm opacity-75">
-                                    Usage-based pricing after a generous free tier. Set a billing limit so you never pay
-                                    more than expected.
-                                </p>
+                                <div className="space-x-1 mb-8 xl:mb-0">
+                                    <p className="inline xl:block text-sm opacity-75 mb-2">
+                                        Usage-based pricing after a generous free tier.
+                                    </p>
+                                    <p className="inline xl:block text-sm opacity-75 mb-2">
+                                        Set a billing limit so you never pay more than expected.
+                                    </p>
+                                    <p className="inline xl:block text-sm opacity-75 mb-2">
+                                        Choose a product to see a feature breakdown by plan.
+                                    </p>
+                                </div>
                             </div>
                             <div className="col-span-4">
-                                <div className="grid grid-cols-10 items-center text-sm opacity-60 mb-2">
-                                    <div className="col-span-3"></div>
-                                    <div className="col-span-3">Monthly free allowance</div>
-                                    <div className="col-span-3">Then pricing starts at...</div>
+                                <div className="grid grid-cols-16 items-center text-sm opacity-60 mb-2">
+                                    <div className="col-span-6"></div>
+                                    <div className="col-span-5">Monthly free allowance</div>
+                                    <div className="col-span-4">Then pricing starts at...</div>
                                     <div className="col-span-1"></div>
                                 </div>
 
@@ -286,13 +296,13 @@ const Pricing = (): JSX.Element => {
                                         <Link
                                             to={product.link}
                                             key={index}
-                                            className="group grid grid-cols-10 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
+                                            className="group grid grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
                                         >
-                                            <div className="col-span-3 flex gap-2 items-center pl-1">
+                                            <div className="col-span-6 flex gap-2 items-center pl-1">
                                                 {product.icon}
                                                 <span className="font-semibold text-[15px]">{product.name}</span>
                                             </div>
-                                            <div className="col-span-3 text-sm ">
+                                            <div className="col-span-5 text-sm ">
                                                 {product.freeLimit ? (
                                                     <>
                                                         {product.freeLimit} {product.denomination}s
@@ -302,7 +312,7 @@ const Pricing = (): JSX.Element => {
                                                     <>{product.message}</>
                                                 )}
                                             </div>
-                                            <div className="col-span-3 text-sm">
+                                            <div className="col-span-4 text-sm">
                                                 {product.price && (
                                                     <>
                                                         ${product.price}
