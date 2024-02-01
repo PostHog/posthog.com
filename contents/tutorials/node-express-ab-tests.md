@@ -135,7 +135,12 @@ Click "Save as draft" and then click "Launch".
 
 ## 5. Implement the A/B test code
 
-To implement the A/B test, we fetch the `my-cool-experiment` flag using [`posthog.getFeatureFlag()`](/docs/libraries/node#feature-flags). Then, we update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment:
+To implement the A/B test, we: 
+
+1. Change our request handler to `async`.
+2. Fetch the `my-cool-experiment` flag using [`posthog.getFeatureFlag()`](/docs/libraries/node#feature-flags). 
+3. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
+
 
 ```js file=server.js
 // rest of your code
