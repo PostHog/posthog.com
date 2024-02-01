@@ -17,6 +17,7 @@ import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
+import { ImageDrop } from './components/ImageDrop'
 import { KeyboardShortcut } from './components/KeyboardShortcut'
 import { LPCTA } from './components/LPCTA'
 import { Label } from './components/Label'
@@ -46,11 +47,14 @@ import { TextCard } from './components/Products/TextCard'
 import { TutorialCard } from './components/Products/TutorialCard'
 import { QuickLinks } from './components/QuickLinks'
 import { Quote2 } from './components/Quote2'
+import { RoadmapForm } from './components/RoadmapForm'
+import { Select } from './components/Select'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
 import { Startups } from './components/Startups'
+import { TeamSelect } from './components/TeamSelect'
 import { TracksCTA } from './components/TracksCTA'
 import { ZendeskTicket } from './components/ZendeskTicket'
 
@@ -72,6 +76,7 @@ export const shortcodes = {
     GDPRForm,
     HiddenSection,
     HubSpotForm,
+    ImageDrop,
     KeyboardShortcut,
     LPCTA,
     Label,
@@ -101,11 +106,14 @@ export const shortcodes = {
     TutorialCard,
     QuickLinks,
     Quote2,
+    RoadmapForm,
+    Select,
     Signatures,
     SlackPage,
     Squeak,
     StarRepoButton,
     Startups,
+    TeamSelect,
     TracksCTA,
     ZendeskTicket,
 }
