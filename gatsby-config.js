@@ -57,14 +57,14 @@ module.exports = {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `images`,
-                path: `${__dirname}/src/images`,
+                path: `${__dirname}/src/images/`,
             },
         },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `contents`,
-                path: `${__dirname}/contents`,
+                path: `${__dirname}/contents/`,
             },
         },
         {
@@ -93,14 +93,14 @@ module.exports = {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `menuItems`,
-                path: `${__dirname}/src/menuItems`,
+                path: `${__dirname}/src/menuItems/`,
             },
         },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `navs`,
-                path: `${__dirname}/src/navs`,
+                path: `${__dirname}/src/navs/`,
             },
         },
         {
@@ -121,7 +121,7 @@ module.exports = {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `authorImages`,
-                path: `${__dirname}/static/images/authors`,
+                path: `${__dirname}/static/images/authors/`,
             },
         },
         {
