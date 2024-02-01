@@ -69,13 +69,24 @@ const GitHubURLs = ({
     )
 }
 
-const ValidationSchema = Yup.object().shape({
-    title: Yup.string().required('Please enter a title'),
-    body: Yup.string().required('Please enter a description'),
-    topic: Yup.object().required('Please select a topic'),
-    team: Yup.number().required('Please select a team'),
-    category: Yup.string().required('Please select a type'),
-})
+type Status = 'in-progress' | 'complete' | 'under-consideration'
+
+const ValidationSchema = (status?: Status) =>
+    Yup.object().shape({
+        title: Yup.string().required('Please enter a title'),
+        body: Yup.string().required('Please enter a description'),
+        topic: Yup.object().when([], {
+            is: () => status === 'complete',
+            then: Yup.object().required('Please select a topic'),
+            otherwise: Yup.object().notRequired(),
+        }),
+        team: Yup.number().required('Please select a team'),
+        category: Yup.string().when([], {
+            is: () => status === 'complete',
+            then: Yup.string().required('Please select a type'),
+            otherwise: Yup.string().notRequired(),
+        }),
+    })
 
 const statusLabels = {
     'in-progress': 'In progress',
@@ -87,7 +98,7 @@ export default function RoadmapForm({
     onSubmit,
     ...other
 }: {
-    status?: 'in-progress' | 'complete' | 'under-consideration'
+    status?: Status
     onSubmit?: (roadmap: any) => void
 }): JSX.Element {
     const [status, setStatus] = useState(other.status)
@@ -95,7 +106,7 @@ export default function RoadmapForm({
     const { getJwt, user } = useUser()
     const { handleSubmit, handleChange, values, setFieldValue, initialValues, errors } = useFormik({
         validateOnMount: false,
-        validationSchema: ValidationSchema,
+        validationSchema: ValidationSchema(status),
         initialValues: {
             title: '',
             body: '',
@@ -137,9 +148,13 @@ export default function RoadmapForm({
                     data: {
                         title,
                         description: transformedValues?.body,
-                        topic: {
-                            connect: [topic.id],
-                        },
+                        ...(topic?.id
+                            ? {
+                                  topic: {
+                                      connect: [topic.id],
+                                  },
+                              }
+                            : null),
                         ...(status === 'complete'
                             ? {
                                   complete: true,
@@ -184,13 +199,15 @@ export default function RoadmapForm({
     return (
         <form onSubmit={handleSubmit} className="m-0">
             <div className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark overflow-hidden">
-                <div className="border-b border-border dark:border-dark">
-                    <ImageDrop
-                        image={values.featuredImage}
-                        onDrop={(image) => setFieldValue('featuredImage', image)}
-                        onRemove={() => setFieldValue('featuredImage', undefined)}
-                    />
-                </div>
+                {status === 'complete' && (
+                    <div className="border-b border-border dark:border-dark">
+                        <ImageDrop
+                            image={values.featuredImage}
+                            onDrop={(image) => setFieldValue('featuredImage', image)}
+                            onRemove={() => setFieldValue('featuredImage', undefined)}
+                        />
+                    </div>
+                )}
                 {!status && (
                     <Select
                         placeholder="Status"
@@ -203,20 +220,24 @@ export default function RoadmapForm({
                     />
                 )}
                 <TeamSelect value={values.team} onChange={(teamID) => setFieldValue('team', teamID)} />
-                <TopicSelect label="Topic" value={values.topic} setFieldValue={setFieldValue} />
-                <Select
-                    placeholder="Type"
-                    options={[
-                        { value: 'Major new feature' },
-                        { value: 'New feature' },
-                        { value: 'Company news' },
-                        { value: 'Something cool happened' },
-                        { value: 'Beta' },
-                        { value: 'Improvement' },
-                    ]}
-                    onChange={(type) => setFieldValue('category', type)}
-                    value={values.category}
-                />
+                {status === 'complete' && (
+                    <TopicSelect label="Topic" value={values.topic} setFieldValue={setFieldValue} />
+                )}
+                {status === 'complete' && (
+                    <Select
+                        placeholder="Type"
+                        options={[
+                            { value: 'Major new feature' },
+                            { value: 'New feature' },
+                            { value: 'Company news' },
+                            { value: 'Something cool happened' },
+                            { value: 'Beta' },
+                            { value: 'Improvement' },
+                        ]}
+                        onChange={(type) => setFieldValue('category', type)}
+                        value={values.category}
+                    />
+                )}
                 <input
                     name="title"
                     value={values.title}
@@ -243,32 +264,36 @@ export default function RoadmapForm({
                 {status !== 'under-consideration' && (
                     <div className="py-2 border-t border-border dark:border-dark px-2">
                         <Slider className="space-x-1">
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setFieldValue('betaAvailable', !values.betaAvailable)
-                                }}
-                                className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
-                                    values.betaAvailable
-                                        ? 'font-bold border-black/90 dark:border-white/90'
-                                        : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
-                                }`}
-                            >
-                                Beta available
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setFieldValue('milestone', !values.milestone)
-                                }}
-                                className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
-                                    values.milestone
-                                        ? 'font-bold border-black/90 dark:border-white/90'
-                                        : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
-                                }`}
-                            >
-                                Show on homepage
-                            </button>
+                            {status === 'in-progress' && (
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setFieldValue('betaAvailable', !values.betaAvailable)
+                                    }}
+                                    className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
+                                        values.betaAvailable
+                                            ? 'font-bold border-black/90 dark:border-white/90'
+                                            : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
+                                    }`}
+                                >
+                                    Beta available
+                                </button>
+                            )}
+                            {status === 'complete' && (
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setFieldValue('milestone', !values.milestone)
+                                    }}
+                                    className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
+                                        values.milestone
+                                            ? 'font-bold border-black/90 dark:border-white/90'
+                                            : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
+                                    }`}
+                                >
+                                    Show on homepage
+                                </button>
+                            )}
                         </Slider>
                     </div>
                 )}
