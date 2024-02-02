@@ -16,7 +16,7 @@ import ImgSurveyResultsDark from '../images/tutorials/remix-surveys/survey-resul
 import ImgSurveyTemplatesLight from '../images/tutorials/remix-surveys/survey-templates-light.png'
 import ImgSurveyTemplatesDark from '../images/tutorials/remix-surveys/survey-templates-dark.png'
 
-[Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Astro app.
+[Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Remix app.
 
 We'll create a basic Remix app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.
 
@@ -240,7 +240,7 @@ export default function Index() {
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/remix-surveys/survey-ui.png)
+![Custom survey UI](../images/tutorials/remix-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 
@@ -393,7 +393,7 @@ import Survey from '../components/Survey';
 import posthog from 'posthog-js';
 
 export default function Index() {
-  const [showSurvey, setShowSurvey] = useState(false); // update this to be false by default
+  const [showSurvey, setShowSurvey] = useState(false);
   const [surveyTitle, setSurveyTitle] = useState('Survey title')
   const [surveyID, setSurveyID] = useState<string | null>(null);
 
