@@ -482,4 +482,4 @@ Now, when you reload your page, the button doesn’t flicker. This is especially
 
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to set up A/B tests in Remix](/tutorials/remix-ab-tests)
-- [How to set up surveys in React](/tutorials/react-surveys)
+- [How to set up surveys in Remix](/tutorials/remix-surveys)
