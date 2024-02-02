@@ -70,6 +70,8 @@ export default function TeamUpdates() {
         fetchUpdates()
     }, [])
 
+    const hasUpdates = updates && Object.keys(updates).length > 0
+
     return (
         <Layout parent={companyMenu}>
             <SEO title="Team updates - PostHog" noindex />
@@ -81,7 +83,7 @@ export default function TeamUpdates() {
                             Week of {dayjs().startOf('week').format('MM/DD/YYYY')}
                         </p>
                     </div>
-                    {user?.role.type === 'moderator' && (
+                    {user?.role.type === 'moderator' && hasUpdates && (
                         <div>
                             {copied ? (
                                 <strong className="opacity-80 text-sm">Copied!</strong>
@@ -94,7 +96,7 @@ export default function TeamUpdates() {
                     )}
                 </div>
                 <div className="pb-12">
-                    {updates && Object.keys(updates).length > 0 ? (
+                    {hasUpdates ? (
                         <ul className="list-none m-0 p-0 pb-4 grid gap-y-8">
                             {Object.keys(updates).map((teamName) => {
                                 return (
