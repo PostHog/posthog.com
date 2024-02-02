@@ -37,6 +37,32 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
                 if (!profileID || !jwt) return
+
+                const {
+                    data: { id: updateID },
+                } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                    body: JSON.stringify({
+                        data: {
+                            thingOfTheWeek,
+                            team: {
+                                connect: [teamID],
+                            },
+                            ...(roadmap && roadmapID
+                                ? {
+                                      roadmap: {
+                                          connect: [roadmapID],
+                                      },
+                                  }
+                                : null),
+                        },
+                    }),
+                }).then((res) => res.json())
+
                 const transformedValues = await transformValues({ body, images: images ?? [] }, profileID, jwt)
                 const {
                     data: { id: questionID },
@@ -52,32 +78,9 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                             body: transformedValues?.body,
                             slugs: [],
                             permalink: '',
-                        },
-                    }),
-                }).then((res) => res.json())
-
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                    body: JSON.stringify({
-                        data: {
-                            thingOfTheWeek,
-                            question: {
-                                connect: [questionID],
+                            update: {
+                                connect: [updateID],
                             },
-                            team: {
-                                connect: [teamID],
-                            },
-                            ...(roadmap && roadmapID
-                                ? {
-                                      roadmap: {
-                                          connect: [roadmapID],
-                                      },
-                                  }
-                                : null),
                         },
                     }),
                 }).then((res) => res.json())
