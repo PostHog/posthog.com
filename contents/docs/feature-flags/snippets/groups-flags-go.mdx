@@ -1,8 +1,10 @@
-Using groups with go requires the latest version of [posthog-go](https://posthog.com/docs/integrate/server/go). Update dependencies via:
+Using groups with Go requires the latest version of [posthog-go](https://posthog.com/docs/integrate/server/go). Update dependencies via:
 
 ```shell
 go get -u github.com/posthog/posthog-go
 ```
+
+Then, to check feature flags using groups, add the `Groups` key to your payload:
 
 ```go
 isMyFlagEnabled, err := client.IsFeatureEnabled(
