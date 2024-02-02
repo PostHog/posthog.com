@@ -134,7 +134,7 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                 team: team?.data?.id,
             }
         })
-        setUpdates(updates)
+        setUpdates(updates ?? [])
     }
 
     useEffect(() => {
