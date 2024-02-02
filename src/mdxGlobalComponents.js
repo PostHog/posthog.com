@@ -48,6 +48,7 @@ import { TutorialCard } from './components/Products/TutorialCard'
 import { QuickLinks } from './components/QuickLinks'
 import { Quote2 } from './components/Quote2'
 import { RoadmapForm } from './components/RoadmapForm'
+import { RoadmapSelect } from './components/RoadmapSelect'
 import { Select } from './components/Select'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
@@ -55,6 +56,7 @@ import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
 import { Startups } from './components/Startups'
 import { TeamSelect } from './components/TeamSelect'
+import { TeamUpdate } from './components/TeamUpdate'
 import { TracksCTA } from './components/TracksCTA'
 import { ZendeskTicket } from './components/ZendeskTicket'
 
@@ -107,6 +109,7 @@ export const shortcodes = {
     QuickLinks,
     Quote2,
     RoadmapForm,
+    RoadmapSelect,
     Select,
     Signatures,
     SlackPage,
@@ -114,6 +117,7 @@ export const shortcodes = {
     StarRepoButton,
     Startups,
     TeamSelect,
+    TeamUpdate,
     TracksCTA,
     ZendeskTicket,
 }

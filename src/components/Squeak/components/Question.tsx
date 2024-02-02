@@ -26,6 +26,8 @@ type QuestionProps = {
     question?: StrapiRecord<QuestionData>
     expanded?: boolean
     showSlug?: boolean
+    buttonText?: string
+    showActions?: boolean
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -191,7 +193,7 @@ const EscalateButton = ({ escalate, escalated }) => {
 }
 
 export const Question = (props: QuestionProps) => {
-    const { id, question, showSlug } = props
+    const { id, question, showSlug, buttonText, showActions = true } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const { user } = useUser()
 
@@ -254,7 +256,7 @@ export const Question = (props: QuestionProps) => {
                         />
                         <Days created={questionData.attributes.createdAt} />
                         <div className="!ml-auto flex space-x-2">
-                            {user?.role?.type === 'moderator' && (
+                            {user?.role?.type === 'moderator' && showActions && (
                                 <>
                                     {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
                                     <EscalateButton escalate={escalate} escalated={escalated} />
@@ -319,7 +321,13 @@ export const Question = (props: QuestionProps) => {
                             archived ? 'opacity-25' : ''
                         }`}
                     >
-                        <QuestionForm archived={archived} questionId={questionData.id} formType="reply" reply={reply} />
+                        <QuestionForm
+                            archived={archived}
+                            questionId={questionData.id}
+                            buttonText={buttonText}
+                            formType="reply"
+                            reply={reply}
+                        />
                     </div>
                 </div>
             </div>
