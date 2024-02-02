@@ -56,7 +56,6 @@ import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
 import { Startups } from './components/Startups'
 import { TeamSelect } from './components/TeamSelect'
-import { TeamUpdate } from './components/TeamUpdate'
 import { TracksCTA } from './components/TracksCTA'
 import { ZendeskTicket } from './components/ZendeskTicket'
 
@@ -117,7 +116,6 @@ export const shortcodes = {
     StarRepoButton,
     Startups,
     TeamSelect,
-    TeamUpdate,
     TracksCTA,
     ZendeskTicket,
 }
