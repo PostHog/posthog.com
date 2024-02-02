@@ -1,3 +1,19 @@
-[posthog-go](https://posthog.com/docs/integrate/server/go) does not yet support feature flags with groups.
+Using groups with go requires the latest version of [posthog-go](https://posthog.com/docs/integrate/server/go). Update dependencies via:
 
-Missing this? [Let us know](https://github.com/PostHog/posthog/issues)
+```shell
+go get -u github.com/posthog/posthog-go
+```
+
+```go
+isMyFlagEnabled, err := client.IsFeatureEnabled(
+            FeatureFlagPayload{
+                Key:        "flag-key",
+                DistinctId: "distinct_id_of_your_user",
+                Groups: posthog.NewGroups().
+                  Set("company", "id:5"),
+            })
+
+if isMyFlagEnabled == true {
+    // Do something differently for this user
+}
+```
