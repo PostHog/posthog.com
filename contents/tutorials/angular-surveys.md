@@ -20,7 +20,7 @@ import ImgSurveyTemplatesDark from '../images/tutorials/angular-surveys/survey-t
 
 We'll create a basic Angular app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.
 
-## 1. Create a Vue app
+## 1. Create an Angular app
 
 First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.20.0 or newer). Then, install the Angular CLI and create a new Angular app:
 
