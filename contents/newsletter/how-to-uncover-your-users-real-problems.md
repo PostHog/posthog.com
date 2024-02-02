@@ -128,7 +128,7 @@ All this discovery work is wasted if it doesn't benefit you and your team. Once 
 ### Share discoveries with those who can benefit
 - Build insights, dashboards, [notebooks](/docs/notebooks) to combine responses and analytics.
 
-- Create [sharable interview cards](https://posthog.com/blog/interview-snapshot-guide) to make feedback easy to digest for your team and encourage debate about improvements.
+- Create [shareable interview cards](https://posthog.com/blog/interview-snapshot-guide) to make feedback easy to digest for your team and encourage debate about improvements.
 
 ### Decide on next steps
 - Use [weighted scoring](https://medium.com/walmartglobaltech/product-management-101-8-steps-to-design-better-products-b3a4436da27b) to evaluate impact, reach, effort, risk, and confidence in potential new features and prioritize accordingly.
