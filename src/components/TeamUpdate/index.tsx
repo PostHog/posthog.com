@@ -22,7 +22,7 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
     const [teamID, setTeamID] = useState<number | null>(null)
     const [updates, setUpdates] = useState<Update[]>([])
     const { getJwt, user } = useUser()
-    const { handleSubmit, values, setFieldValue, initialValues, submitForm, isSubmitting } = useFormik({
+    const { handleSubmit, values, setFieldValue, initialValues, submitForm, isSubmitting, resetForm } = useFormik({
         validateOnMount: false,
         initialValues: {
             body: '',
@@ -86,6 +86,7 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                 }).then((res) => res.json())
 
                 setUpdates([{ thingOfTheWeek, question: questionID, team: teamID, roadmap, roadmapID }, ...updates])
+                resetForm()
             } catch (err) {
                 console.error(err)
             }
@@ -149,6 +150,7 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                         <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
                             <div className="leading-[0]">
                                 <RichText
+                                    key={updates.length}
                                     onSubmit={submitForm}
                                     autoFocus
                                     setFieldValue={setFieldValue}
