@@ -1,6 +1,6 @@
 ### Boolean feature flags
 
-```kotlin
+```android
 if (PostHog.isFeatureEnabled("flag-key") ) {
     // do something
 }
@@ -8,7 +8,7 @@ if (PostHog.isFeatureEnabled("flag-key") ) {
 
 ### Multivariate feature flags
 
-```kotlin
+```android
 if (PostHog.getFeatureFlag("flag-key")  == "variant-key") { // replace 'variant-key' with the key of your variant
     // do something
 }
@@ -18,6 +18,6 @@ if (PostHog.getFeatureFlag("flag-key")  == "variant-key") { // replace 'variant-
 
 Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call the `reloadFeatureFlags` method.
 
-```kotlin
+```android
 PostHog.reloadFeatureFlags()
 ```

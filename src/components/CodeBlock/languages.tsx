@@ -73,9 +73,9 @@ const languageMap: LanguageMap = {
         language: 'swift',
         label: 'Swift',
     },
-    dart: {
+    flutter: {
         language: 'dart',
-        label: 'Dart',
+        label: 'Flutter',
     },
     node: {
         language: 'javascript',
@@ -156,14 +156,6 @@ const languageMap: LanguageMap = {
         ),
     },
     android: {
-        language: 'java',
-        label: 'Android',
-    },
-    kotlin: {
-        language: 'kotlin',
-        label: 'Kotlin',
-    },
-    android_kotlin: {
         language: 'kotlin',
         label: 'Android',
     },
@@ -174,10 +166,6 @@ const languageMap: LanguageMap = {
     gradle_groovy: {
         language: 'groovy',
         label: 'Gradle',
-    },
-    objectivec: {
-        language: 'objectivec',
-        label: 'Objective-C',
     },
     html: {
         language: 'html',
@@ -200,10 +188,6 @@ const languageMap: LanguageMap = {
         label: 'SQL',
     },
     ios: {
-        language: 'objectivec',
-        label: 'iOS',
-    },
-    ios_swift: {
         language: 'swift',
         label: 'iOS',
     },

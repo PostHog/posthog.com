@@ -42,6 +42,33 @@ On the client-side, we can use the `capture` method, with the first argument bei
 posthog.capture('user_signed_up')
 ```
 
+```react-native
+posthog.capture('user_signed_up')
+```
+
+```flutter
+Posthog().capture(
+  eventName: 'user_signed_up',
+);
+```
+
+```android
+PostHog.capture(
+    event = "user_signed_up",
+    properties = mapOf(
+        "login_type" to "email",
+        "is_free_trial" to true
+    )
+)
+```
+
+```ios
+PostHogSDK.shared.capture(
+    "user_signed_up", 
+    properties: ["login_type": "email", "$set": ["is_free_trial": true] 
+])
+```
+
 </MultiLanguage>
 
 > **Tip**: We recommend adding custom events for the most important actions in your product that are unlikely to change, such as user sign-ups, purchases, and when features are used.

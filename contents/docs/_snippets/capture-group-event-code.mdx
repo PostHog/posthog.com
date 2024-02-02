@@ -39,12 +39,12 @@ PostHog::capture(array(
 ));
 ```
 
-```ios_swift
+```ios
 PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
 // For this session, any event captured after calling `posthog.group` will be associated with company `company_id_on_your_db`
 ```
 
-```android_kotlin
+```android
 PostHog.group(
     type = "company", 
     key = "company_id_in_your_db"

@@ -1,6 +1,6 @@
 ### Boolean feature flags
 
-```dart
+```flutter
 Posthog().isFeatureEnabled('flag-key');
 ```
 
@@ -8,7 +8,7 @@ Posthog().isFeatureEnabled('flag-key');
 
 Available from version [4.0.0-alpha.1](https://github.com/PostHog/posthog-flutter/releases/tag/4.0.0-alpha.1) and above.
 
-```dart
+```flutter
 if (await Posthog().getFeatureFlag('flag-key') == 'variant-key') { // replace 'variant-key' with the key of your variant
     // do something
 }

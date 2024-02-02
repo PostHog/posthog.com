@@ -20,7 +20,7 @@ The first step is to create a new app. Open [Android Studio](https://developer.a
 
 Then, replace your code in `MainActivity.kt` to set up a basic UI with a button to navigate to a new screen.
 
-```kotlin
+```android
 package com.example.my_ab_test
 
 import android.os.Bundle
@@ -127,7 +127,7 @@ Sync your project with your Gradle file changes.
 
 Next, we create a Kotlin class where we can configure our PostHog instance. In the `src/main/java/com.example.my_ab_test` folder, add a new file `MyABTestApplication.kt`, add the following code:
 
-```kotlin
+```android
 // in MyABTestApplication.kt
 package com.example.my_ab_test
 
@@ -180,7 +180,7 @@ Finally, we [capture a custom event](/docs/libraries/android#capturing-events) w
 
 Update the `SecondScreen` function in `MainActivity.kt` to the following:
 
-```kotlin
+```android
 // in MainActivity.kt
 
 import com.posthog.android.PostHog
@@ -235,7 +235,7 @@ The final step is to add the experiment code that does the following:
 
 To do this, update the code in `MainActivity.kt` with the following:
 
-```kotlin
+```android
 // in MainActivity.kt
 
 import androidx.compose.runtime.LaunchedEffect

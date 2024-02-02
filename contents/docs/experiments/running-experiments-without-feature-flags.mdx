@@ -47,7 +47,7 @@ posthog.capture('event_name_of_your_goal_metric', {
 })
 ```
 
-```android_kotlin
+```android
 PostHog.capture(
     event = "event_name_of_your_goal_metric",
     properties = mapOf(
@@ -56,7 +56,7 @@ PostHog.capture(
 )
 ```
 
-```ios_swift
+```ios
 PostHogSDK.shared.capture("event_name_of_your_goal_metric", properties: ["$feature/experiment-feature-flag-key": "variant-name"])
 ```
 
@@ -159,7 +159,7 @@ posthog.capture('$feature_flag_called', {
 })
 ```
 
-```android_kotlin
+```android
 PostHog.capture(
     event = "\$feature_flag_called",
     properties = mapOf(
@@ -169,7 +169,7 @@ PostHog.capture(
 )
 ```
 
-```ios_swift
+```ios
 PostHogSDK.shared.capture("$feature_flag_called", properties: [
     "$feature_flag_response": "variant-name",
     "$feature_flag": "feature-flag-key"
