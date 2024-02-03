@@ -235,5 +235,5 @@ Now when you click the button, PostHog captures the custom `home_button_clicked`
 ## Further reading
 
 - [How to set up surveys in React](/tutorials/react-surveys)
-- [How to set up A/B tests in React](/tutorials/react-ab-tests)
+- [How to set up A/B tests in React](/tutorials/react-ab-testing)
 - [How to set up feature flags in React](/tutorials/react-feature-flags)
