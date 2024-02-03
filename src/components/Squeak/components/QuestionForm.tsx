@@ -40,12 +40,14 @@ type QuestionFormMainProps = {
     disclaimer?: boolean
 }
 
-const Select = ({
+export const Select = ({
     value,
     setFieldValue,
+    label = 'Please select a topic',
 }: {
     value?: Topic
     setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void
+    label?: string
 }) => {
     const [topicGroups, setTopicGroups] = useState([])
 
@@ -58,14 +60,14 @@ const Select = ({
     }, [])
 
     return (
-        <div className="relative border-b border-black/30 dark:border-primary-dark/30">
+        <div className="relative border-b border-border dark:border-dark">
             <Listbox value={value || {}} onChange={handleChange}>
                 <Listbox.Button
                     className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left flex items-center justify-between ${
                         !value?.attributes?.label ? 'opacity-60' : ''
                     }`}
                 >
-                    <span>{value?.attributes?.label || 'Please select a topic'}</span>
+                    <span>{value?.attributes?.label || label}</span>
                     <Chevron className="w-2.5" />
                 </Listbox.Button>
                 {topicGroups?.length > 0 && (

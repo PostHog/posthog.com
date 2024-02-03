@@ -85,9 +85,11 @@ export const Contributor = ({
             className="flex bg-accent dark:bg-accent-dark border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
         >
             <div className="pr-20">
-                <div className="flex flex-col justify-between px-4 py-2 w-full">
+                <div className="flex flex-col justify-between px-4 py-2 w-full gap-0.5">
                     <h3 className="mb-0 text-base leading-tight">{text && <span>{name}</span>}</h3>
-                    {role && <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{role}</p>}
+                    {role && (
+                        <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0 leading-tight">{role}</p>
+                    )}
                 </div>
             </div>
             <ContributorImage
