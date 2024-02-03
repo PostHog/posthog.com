@@ -504,3 +504,4 @@ You can also filter these results based on [user properties](/docs/product-analy
 
 - [How to write great product survey questions (with examples)](/blog/product-survey-questions)
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
+- [How to set up analytics in React](/tutorials/react-analytics)

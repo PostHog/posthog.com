@@ -14,6 +14,7 @@ import { useProduct } from './hooks'
 import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
+import SEO from 'components/seo'
 
 type ProductPageProps = {
     className?: string
@@ -64,6 +65,7 @@ export default function Product(props: ProductPageProps): React.ReactElement {
 
     return (
         <Layout className="[&_main]:pb-[80px]">
+            <SEO title="Merch - PostHog" image="/images/merch.png" />
             <Nav cartIsOpen={cartIsOpen} setCartIsOpen={setCartIsOpen} />
 
             <div className="w-full px-4 mx-auto max-w-7xl">

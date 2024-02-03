@@ -410,6 +410,36 @@ posthog.capture("survey sent", {
 })
 ```
 
+## Session replay
+
+To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
+
+For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can set the `disable_session_recording` [config option](#config) and use the following methods:
+
+```js-web
+// Turns session recording on
+posthog.startSessionRecording()
+
+// Turns session recording off
+posthog.stopSessionRecording()
+
+// Check if session recording is currently running
+posthog.sessionRecordingStarted()
+```
+
+To get the playback URL of the current session replay, you can use the following method:
+
+```js-web
+posthog.get_session_replay_url(
+    { withTimestamp: true, timestampLookBack: 30 }
+)
+```
+
+It has two optional parameters:
+
+-  `withTimestamp` (default: `false`): When set to `true`, the URL includes a timestamp that takes you to the session at the time of the event.
+-  `timestampLookBack` (default: `10`): The number of seconds back the timestamp links to.
+
 ## Persistence
 
 In order for PostHog to work optimally, we require storing a small amount of information about the user on the user's browser. This ensures that if the user navigates away, and comes back to your site at a later time, we will still identify them properly. We store the following information in the user's browser:
