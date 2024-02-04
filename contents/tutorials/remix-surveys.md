@@ -58,7 +58,6 @@ npm i posthog-js
 
 Then, go to `app/entry.client.tsx` and initialize PostHog. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).  
 
-
 ```ts file=entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
@@ -98,11 +97,11 @@ There are two options for displaying a survey using PostHog:
 1. Use PostHog's prebuilt survey UI.
 2. Implement your own survey UI.
 
-This tutorial will cover how to implement both options:
+This tutorial covers how to implement both options:
 
 ### Option 1: Use PostHog's prebuilt survey UI
 
-This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
+This is the simplest option. PostHog has many [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
  
 To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
 
@@ -125,7 +124,7 @@ Then, click "Save as draft" and then "Launch". Your survey is now live and you s
 
 ### Option 2: Implement your own survey UI
 
-If you prefer to have complete control of your survey UI and logic, you can still use PostHog to keep track of and analyze your results.
+If you prefer to have complete control of your survey UI and logic, you can still use PostHog to handle targeting as well as tracking and analyzing your results.
 
 First, create a survey in PostHog like in option 1 above (for this tutorial, we use a Net Promoter Score survey template). The only difference is you must set `Presentation` to **API**.
 
@@ -302,7 +301,7 @@ export default function Index() {
 ```
 
 
-#### 3. Add the logic for displaying and hiding it.
+#### 3. Add the display logic
 
 We want to make sure we don't show the survey again to users who have either submitted or dismissed it. We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data and use it to check whether to show the survey or not.
 
@@ -338,11 +337,11 @@ export default function Index() {
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
   };
 
-	// rest of your code
+  // rest of your code
 }
 ```
 
-#### 4. Capture interactions from it.
+#### 4. Capture survey interactions
 
 The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog. 
 
