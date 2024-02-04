@@ -8,6 +8,8 @@ featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 ---
 
+*This is oriented towards people doing product led growth / self serve heavy businesses, but hopefully is interesting for all*
+
 One of my greatest weeks at PostHog was an offsite in [Aruba](aruba-hackathon). As much as I love a Caribbean paradise, it wasn't for the reason you expect.
 
 In 2023, we were having a great year in the face of most of [tech struggling](https://www.theatlantic.com/ideas/archive/2023/01/tech-recession-layoffs-google-facebook-microsoft/672798/), and we wanted something to celebrate. We knew there wouldn't be any big external milestones - like a fundraise for example - to break up the year, and we had a _ton_ of stuff we expected our team to build. We therefore wanted to have a celebration of how things were going. So we increased the offsite budget, opting for a fairly fancy hotel in the Caribbean.
@@ -23,7 +25,7 @@ As any right-minded founder would:
 
 Our growth had been consistently increasing each month, and it turned out that the month of our offsite was no exception. It turned out that within ~2 days we'd increased our annual recurring revenue enough to pay for the _entire_ trip. I didn't feel guilty at all. 
 
-This so clearly demonstrated to me the efficiency of our business model - the entire team can be relaxing on a beach and making money whilst not working. Passive income baby! The reason this happens is that PostHog is a 100% inbound company - we've consistently put useful and cool stuff online (like our products or our content), and because we've done a remarkable-enough job of those things, we now just need to keep building on these to grow through word of mouth. It means we don't need people constantly cold emailing or calling to find more business.
+This so clearly demonstrated to me the efficiency of our business model - the entire team can be relaxing on a beach, doing a hackathon, talking abut our values and making money whilst not working on anything day-to-day. If we just chilled on the beach, we'd have achieved passive income baby! The reason this happens is that PostHog is a 100% inbound company - we've consistently put useful and cool stuff online (like our products or our content), and because we've done a remarkable-enough job of those things, we now just need to keep building on these to grow through word of mouth. It means we don't need people constantly cold emailing or calling to find more business.
 
 If you fast forward today, >900 companies a week now sign up to PostHog, from hobbyists to Fortune 500s.
 
@@ -43,7 +45,7 @@ This was the hardest part even though it looks like the least significant.
 
 For every stage of a startup, the earlier you are, the higher the chance of failure. With this in mind, you must be totally geared around failing fast. Hence the prerequisites above.
 
-So, we set off doing this... We wound up [pivoting (ie failing) five times](pivot-to-posthog) before we landed on PostHog, most frequently failing at this stage. We met the prerequisites!
+So, we set off doing this... We wound up [pivoting (ie failing) five times](pivot-to-posthog) before we landed on PostHog, most frequently failing at this stage - finding it very hard to get 10 companies to use it. We met the prerequisites!
 
 For PostHog specifically, we wanted to quickly figure out if anyone cared.
 
