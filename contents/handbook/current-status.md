@@ -79,3 +79,26 @@ We’ve got multiple products that are early:
   - Helping teams with their per product onboarding and growth experiments, infra, ingestion, dev tooling, sales, support and marketing.
   - Promoting each product in its own right (i.e. through what we cover in marketing).
   - Keep nurturing the content / community growth, i.e. newsletter, and the /posts concept.
+
+### Q1 2024 - "Double Down"
+
+We have a bunch of awesome products generating revenue. Since last quarter:
+
+- feature flags and experiments has got product market fit
+- we've got a warehouse with early meaningful usage
+- we figued out notebooks vs PostHog 3000 and have shipped a new UX for everyone
+- web analytics has been shipped and is getting plenty of usage
+- stability has remained excellent
+
+A lot of new user-facing things got shipped last quarter. However, every product could be improved a lot.
+
+This is a quarter of caring about the craft of your product.
+- Major missing features vs competitors
+- Scalability/stability
+- Developer UX
+- Talking to users and incorporating their feedback
+- Nailing support for your product - fixing things
+
+Products are not limited to people working on the app - it includes what customer success / marketing / ops are working on. Everything can be considered a product.
+
+Each team should be aiming to feel proud of what they've built by the end of the quarter.
