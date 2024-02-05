@@ -30,7 +30,7 @@ Because GitHub and GitLab share similar reasons for using feature flags, they al
 
 - **Restrictions and externalities:** Security, permission restrictions, and third-party dependencies.
 
-- **Working incrementally on new features:** Developers collaborate with flags instead of branches. This keeps changes small, makes reviewers easier, and prevents merge conflicts.
+- **Working incrementally on new features:** Developers collaborate with flags instead of branches, [following trunk-based development](/product-engineers/trunk-based-development). This keeps changes small, makes reviewers easier, and prevents merge conflicts.
 
 This means areas **that might not use flags** include brand-new features or APIs, low-traffic areas, and non-invasive frontend changes.
 
