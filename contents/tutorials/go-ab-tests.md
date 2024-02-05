@@ -64,7 +64,7 @@ Run `go run main.go` and navigate to `http://localhost:8080` to see your app in 
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, run `go mod init go-ab-tests` to intialize our project and then install [PostHog’s Go library](docs/libraries/go):
+To start, run `go mod init go-ab-tests` to initialize our project and then install [PostHog’s Go library](docs/libraries/go):
 
 ```bash
 go mod init go-ab-tests
