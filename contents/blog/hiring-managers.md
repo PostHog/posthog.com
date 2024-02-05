@@ -1,6 +1,6 @@
 ---
 date: 2024-01-04
-title: How to hire managers
+title: How we find and hire managers
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -47,7 +47,7 @@ Whilst the manager needs to have a lot of individual contributor skill, if the t
 
 If we are hiring someone internal, it'll be a matter of talking to the person and the team around them to get a sense of if we can change their role - from a skills and desire perspective.
 
-If we are hiring externally - we should aim to hire lots of potential managers into individual contributor roles at first, and get them to work on challenging technical projects
+If we are hiring externally - we should aim to hire lots of potential managers into individual contributor roles at first, and get them to work on challenging technical projects. In general, we aim to have lots of people like this all the time so it's easy to add more teams as we build more products. Often this is ex CTOs or technical founders who have lead teams but just love to code.
 
 ## Don't treat managers as superior
 
