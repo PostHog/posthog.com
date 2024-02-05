@@ -105,7 +105,7 @@ Our website uses various APIs to pull in data from sites like GitHub (for contri
 
 If you're a core team member and need this data locally, you can:
 
-1. Ask the [Website & Docs team](https://posthog.slack.com/archives/C01V9AT7DK4) for access to our Vercel account
+1. Ask the [Website & Docs team](https://app.slack.com/client/TSS5W8YQZ/C01V9AT7DK4) files located for access to our Vercel account
 1. Install the Vercel CLI
 1. Run `vercel pull`
 1. Open `.vercel/.env.development.local`
@@ -174,6 +174,10 @@ featuredImage: ../images/blog/running-content.png
 featuredImageType: full
 category: Guides
 tags: ["Using PostHog", "Privacy"]
+seo: {
+    metaTitle: Overview of PostHog Plugins
+    metaDescription: Learn about the current state of plugins on PostHog and get valuable insights into their functionality and performance.
+}
 ---
 ```
 
@@ -188,6 +192,9 @@ tags: ["Using PostHog", "Privacy"]
   - <CategoryData />
 - `tags`: the more specific tag(s) the post belongs to. an array containing any number of the following:
   - <CategoryData type="tags" />
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 ##### Tutorials
 
@@ -212,6 +219,9 @@ tags: ['filters', 'settings']
 - `featuredImage`: the URL of the image that appears at the top of the tutorial and on the tutorial listing page
 - `tags`: the tag(s) the tutorial belongs to. an array containing any number of the following:
   - <TutorialTags />
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 
 
@@ -226,6 +236,9 @@ title: Contribute to the website: documentation, handbook, and blog
 ```
 
 - `title`: the title that appears at the top of the handbook / doc page
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 ##### Comparison pages
 
@@ -283,6 +296,9 @@ toolsUsed:
 - `industries`: a list of industries that apply to the company
 - `users`: a list of user types that use the company's product
 - `toolsUsed`: a list of highlighted PostHog tools used by the company
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 ##### Plain
 
@@ -301,6 +317,9 @@ noindex: true
 - `showTitle`: `true` | `false` - determines whether to show / hide the title at the top of the page
 - `width`: `sm` | `md` | `lg` | `full` - determines the width of the page
 - `noindex`: `true` | `false` - determines whether to index the page or not
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 
 You can often refer to the source of existing pages for more examples, but if in doubt, you can always [ask for help](https://app.posthog.com/home#supportModal).

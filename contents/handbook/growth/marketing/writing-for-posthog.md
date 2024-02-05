@@ -52,7 +52,7 @@ New posts should be:
 
 > **Useful resources:** 
 > - [List of tags for each section](/handbook/growth/marketing/tags-and-categories)
-> - [Embeddable components you can use](/handbook/growth/components) (tables, CTAs, etc.)
+> - [Embeddable components you can use](/handbook/growth/marketing/components) (tables, CTAs, etc.)
 > - [Andy's guide to SEO best practices](/handbook/growth/marketing/seo-guide)
 
 ### Frontmatter

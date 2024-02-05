@@ -259,6 +259,7 @@ Now when you go to your app, a PostHog feature flag controls the button text.
 
 ## Further reading
 
-- [Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)
+- [How to set up A/B tests in Angular](/tutorials/angular-ab-tests)
+- [How to set up surveys in Angular](/tutorials/angular-surveys)
 - [How to set up A/B/n testing](/tutorials/abn-testing)
 - [How to create custom surveys](/tutorials/survey)

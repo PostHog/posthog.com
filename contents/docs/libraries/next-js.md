@@ -92,8 +92,6 @@ export default function App({ Component, pageProps }) {
 
 If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components).
 
-We need to export the `PostHogPageview` component containing [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) as [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if not wrapped in a `<Suspense>`.
-
 <MultiLanguage>
 
 ```js
@@ -101,33 +99,12 @@ We need to export the `PostHogPageview` component containing [`useSearchParams`]
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
-}
-
-export function PostHogPageview() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  // Track pageviews
-  useEffect(() => {
-    if (pathname) {
-      let url = window.origin + pathname
-      if (searchParams.toString()) {
-        url = url + `?${searchParams.toString()}`
-      }
-      posthog.capture(
-        '$pageview',
-        {
-          '$current_url': url,
-        }
-      )
-    }
-  }, [pathname, searchParams])
 }
 
 export function PHProvider({ children }) {
@@ -140,33 +117,12 @@ export function PHProvider({ children }) {
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
-}
-
-export function PostHogPageview(): JSX.Element {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    if (pathname) {
-      let url = window.origin + pathname;
-      if (searchParams && searchParams.toString()) {
-        url = url + `?${searchParams.toString()}`;
-      }
-      posthog.capture("$pageview", {
-        $current_url: url,
-      });
-    }
-  }, [pathname, searchParams]);
-
-  return <></>;
 }
 
 export function PHProvider({
@@ -180,48 +136,132 @@ export function PHProvider({
 
 </MultiLanguage>
 
-Once created, you can import the `PostHogPageview` and `PHProvider` components into your `app/layout` file, then wrap your app in the provider component and your pageview in a suspense.
+Then, to capture pageviews, we set up a `PostHogPageView` component to listen to url path changes:
+
+<MultiLanguage>
+
+```js
+// app/PostHogPageView.jsx
+'use client'
+
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { usePostHog } from 'posthog-js/react';
+
+export default function PostHogPageView() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const posthog = usePostHog();
+  // Track pageviews
+  useEffect(() => {
+    if (pathname && posthog) {
+      let url = window.origin + pathname
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`
+      }
+      posthog.capture(
+        '$pageview',
+        {
+          '$current_url': url,
+        }
+      )
+    }
+  }, [pathname, searchParams, posthog])
+  
+  return null
+}
+```
+
+```tsx
+// app/PostHogPageView.tsx
+'use client'
+
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { usePostHog } from 'posthog-js/react';
+
+export default function PostHogPageView() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const posthog = usePostHog();
+  // Track pageviews
+  useEffect(() => {
+    if (pathname && posthog) {
+      let url = window.origin + pathname
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`
+      }
+      posthog.capture(
+        '$pageview',
+        {
+          '$current_url': url,
+        }
+      )
+    }
+  }, [pathname, searchParams, posthog])
+  
+  return null
+}
+```
+
+</MultiLanguage>
+
+
+Then, import the `PHProvider` component into your `app/layout` file and wrap your app with it. We also dynamically import the `PostHogPageView` component and include it as a child of `PHProvider`.
+
+> **Why is `PostHogPageView` dynamically imported?** It contains the [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) hook, which [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if it is not dynamically imported.
 
 <MultiLanguage>
 
 ```js
 // app/layout.js
+
 import './globals.css'
-import { PHProvider, PostHogPageview } from './providers'
-import { Suspense } from 'react'
+import { PHProvider } from './providers'
+import dynamic from 'next/dynamic'
+
+const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
+  ssr: false,
+})
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Suspense>
-        <PostHogPageview />
-      </Suspense>
       <PHProvider>
-        <body>{children}</body>
+        <body>
+          <PostHogPageView /> 
+          {children}
+        </body>
       </PHProvider>
     </html>
   )
 }
 ```
 
-```ts
+```tsx
 // app/layout.tsx
+
 import './globals.css'
-import { ReactNode, Suspense } from 'react';
-import { PHProvider, PostHogPageview } from './providers';
+import { PHProvider } from './providers'
+
+import dynamic from 'next/dynamic'
+
+const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
+  ssr: false,
+})
 
 export default function RootLayout({
   children,
 }: {
-  children: ReactNode
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      <Suspense>
-        <PostHogPageview />
-      </Suspense>
       <PHProvider>
-        <body>{children}</body>
+        <body>
+          <PostHogPageView /> 
+          {children}
+        </body>
       </PHProvider>
     </html>
   )
@@ -230,7 +270,7 @@ export default function RootLayout({
 
 </MultiLanguage>
 
-Files and components accessing PostHog on the client-side need the `'use client'` directive.
+PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
 
 ### Accessing PostHog using the provider
 

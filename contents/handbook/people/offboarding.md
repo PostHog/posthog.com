@@ -22,7 +22,20 @@ In this case, we are letting the team member go.
 
 This is generally for performance reasons or because the company's needs have changed and the role can no longer be justified. If the decision is down to performance issues, we will have already communicated feedback to the individual and given them time to take the feedback on board. However, performance issues sadly can't always be resolved, which means we might ultimately need to end someone's employment. 
 
-We will usually ask you to stop working immediately. If you have been with us for at least 3 months, you will be paid 4 months of salary as [severance](/handbook/people/compensation#severance). Otherwise, you will be paid 1 month of salary as severance. 
+Tim and James are responsible for making any final decision to let someone go. 
+
+We use the following general process for managing people whose performance isn't up to the right standard. We modify this slightly depending on the specific nature of the role and how long they have been at PostHog, so the process isn't identical in every case:
+
+- Typically, a manager or member of the exec team will raise that a team member isn't meeting our performance expectations. They discuss what the issues are and a plan to improve. The relevant exec team member follows up with the person's manager. 
+- The person's manager has a meeting with the team member to let them know explicitly that their performance is not meeting expectations, and that if it continues then they will not be able to continue at PostHog. This meeting may include a member of the exec team, depending on role. 
+  - If the person is a manager, we usually collect feedback from their team beforehand. 
+- We outline to the team member exactly what good performance looks like. We collaborate with them to come up with a plan (e.g. specific things to ship), and a timeline for improvement. Usually this is a few weeks for someone new to PostHog, but may be longer if the person has been at PostHog for a while. We schedule a time for a follow up conversation at the end of this period.
+  - If the person doesn't accept the feedback at the time and/or we don't feel like there is a realistic path to them improving, we may follow up to let them go sooner than this. 
+- At the follow up meeting, we either confirm that performance has improved and they are on the right track, or that we have decided to let them go right away. 
+
+In cases where a team member's role can no longer be justified, we usually make a decision as an exec team and then let the team member know straight away - unfortunately it is not feasible to let someone know that we are thinking of getting rid of their role.
+
+We will usually ask the team member to stop working immediately. If they have been with us for at least 3 months, they will be paid 4 months of salary as [severance](/handbook/people/compensation#severance). Otherwise, they will be paid 1 month of salary as severance. 
 
 ## Communicating departures
 
@@ -42,7 +55,7 @@ We will then send over an email covering the following points with the team memb
 2. Share options vested
 3. Company property
 4. Business expenses
-5. Personal email to the company
+5. Personal email to the company (optional)
 
 For voluntary leavers, the people team will schedule an [Exit interview](https://forms.gle/DaNGRhmvQJcLGfpa9) to hear more about the team member's experience working at PostHog, their reasons for leaving and to identify areas for improvement. This will usually happen in their last week. 
 
@@ -50,9 +63,9 @@ For voluntary leavers, the people team will schedule an [Exit interview](https:/
 
 Final pay will be determined based on length of service and the reasons for leaving:
 
-* If the offboarding is voluntary, you will be paid up until your last day. We will look at the amount of holiday taken in the last 12 months and will pay any "unused" vacation pay assuming you would have taken 25 days (since we offer unlimited vacation periods).
-* If the offboarding is involuntary and due to performance reasons or a change in business needs, you will receive 4 months of pay, provided you have been at PostHog for at least 3 months. If you have been with PostHog for less time, you will receive 1 month of pay. 
-* If the offboarding is involuntary and for gross misconduct or breach of contract, you may be paid nothing and receive no notice.
+* If the offboarding is voluntary, they will be paid up until their last day. We will look at the amount of holiday taken in the last 12 months and will pay any "unused" vacation pay assuming they would have taken 25 days (since we offer unlimited vacation periods).
+* If the offboarding is involuntary and due to performance reasons or a change in business needs, they will receive 4 months of pay, provided they have been at PostHog for at least 3 months. If they have been with PostHog for less time, they will receive 1 month of pay. 
+* If the offboarding is involuntary and for gross misconduct or breach of contract, they may be paid nothing and receive no notice.
 
 We ask departing team members to sign a post-termination certificate in order to receive payments beyond their final day of work.
 
@@ -60,15 +73,7 @@ Please note that if there are local laws which are applicable, we will pay the g
 
 ### Share options vested
 
-If you have been allocated share options, we will confirm how many have vested and the process by which you may wish to exercise them. We have a team-friendly post-departure exercise window of 10 years, and most team members who leave will be deemed a 'good leaver' unless you have been terminated due to misconduct or negligence. 
-
-### Company property
-
-You will be required to return any company property to us. PostHog will cover the cost of shipping this.
-
-### Business expenses
-
-We will pay any expenses in line with our policy that are still unpaid.
+If a team member has been allocated share options, we will confirm how many have vested and the process by which they may wish to exercise them. We have a team-friendly post-departure exercise window of 10 years, and most team members who leave will be deemed a 'good leaver' unless they have been terminated due to misconduct or negligence. 
 
 ## Offboarding checklist
 

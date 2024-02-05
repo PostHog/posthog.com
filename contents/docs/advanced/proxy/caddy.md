@@ -37,7 +37,7 @@ Run `caddy start` from the same folder as your `Caddyfile`. Once running, you ca
   posthog.init('<ph_project_api_key>',
     {
       api_host:`${YOUR_TRACKING_DOMAIN}`,
-      ui_host:'app.posthog.com'
+      ui_host: 'https://app.posthog.com' // or 'https://eu.posthog.com' if your PostHog is hosted in Europe
     }
   )
 </script>

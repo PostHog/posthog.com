@@ -78,13 +78,23 @@ func main() {
 }
 ```
 
-```python
+```php
 PostHog::init("<ph_project_api_key>",
   array('host' => '<ph_instance_address>',
         'personal_api_key' => 'your personal API key from step 1'),
         'poll_interval' => 30 # Optional. Measured in seconds. Defaults to 30.
 );
 ```
+
+```python
+from posthog import Posthog
+
+posthog = Posthog('<ph_project_api_key>', 
+    host='<ph_instance_address>',
+    poll_interval=30 # Optional. Measured in seconds. Defaults to 30.
+)
+```
+
 </MultiLanguage>
 
 ## Step 3: Evaluate your feature flag

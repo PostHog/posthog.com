@@ -102,11 +102,12 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                         <em>"All the updates that are fit to print"</em>
                     </p>
                 </div>
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-2 items-center relative z-50">
                     <Select
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}
                         values={[
+                            { label: 2024, value: '/changelog/2024' },
                             { label: 2023, value: '/changelog/2023' },
                             { label: 2022, value: '/changelog/2022' },
                             { label: 2021, value: '/changelog/2021' },

@@ -67,7 +67,7 @@ To use your own domain instead of the basic `*.workers.dev` one, go to the worke
 
 ### 4. Use the new host in SDKs
 
-You can now use your worker's domain (shown under "Preview" on the worker page) as `api_host` in PostHog SDKs! If you've added a custom domain in step 3, use that instead.
+You can now use your worker's domain (shown under "Preview" on the worker page) as `api_host` in PostHog SDKs! If you've added a custom domain in step 3, use that instead. Make sure to set the `ui_host` to your actual PostHog app URL (e.g. app.posthog.com).
 
 ## Method two: Proxy using DNS and Page Rules with Cloudflare Enterprise
 
@@ -75,12 +75,12 @@ Proxying traffic using DNS is relatively straight-forward. However, it requires 
 
 ### 1. Add a DNS record
 
-Select your website in the Cloudflare dashboard, go to the "DNS" page, and there click "Add record". Make sure this is a CNAME record, and choose a name for it, which will be the PostHog proxy subdomain. The subdomain can be anything, even `watermelon.yourdomain.com` – just remember to avoid terms like "tracking" or "analytics", as they may be blanket-blocked. The record should point to `app.posthog.com` or `eu.posthog.com` (depending on your PostHog region), and have proxy enabled (e.g. `CNAME, e, app.posthog.com, proxied`).
+Select your website in the Cloudflare dashboard, go to the "DNS" page, and there click "Add record". Make sure this is a CNAME record, and choose a name for it, which will be the PostHog proxy subdomain. The subdomain can be anything, even `watermelon.yourdomain.com` – just remember to avoid terms like "tracking" or "analytics", as they may be blanket-blocked. The record should point to `us-proxy-direct.i.posthog.com` or `eu-proxy-direct.i.posthog.com` (depending on your PostHog region), and have proxy enabled (e.g. `CNAME, e, us-proxy-direct.i.posthog.com, proxied`).
 
 ### 2. Correct Host headers
 
-The proxy won't work if the Host headers of requests aren't rewritten from your domain to the PostHog domain. To fix this, [add a Page Rules to change the Host header](https://support.cloudflare.com/hc/en-us/articles/206652947-Using-Page-Rules-to-rewrite-Host-Headers) to `app.posthog.com` or `eu.posthog.com` (depending on your PostHog region).
+The proxy won't work if the Host headers of requests aren't rewritten from your domain to the PostHog domain. To fix this, [add a Page Rules to change the Host header](https://support.cloudflare.com/hc/en-us/articles/206652947-Using-Page-Rules-to-rewrite-Host-Headers) to `us-proxy-direct.i.posthog.com` or `eu-proxy-direct.i.posthog.com` (depending on your PostHog region).
 
 ### 3. Use the new host in SDKs
 
-You can now use your CNAME record's domain as `api_host` in PostHog SDKs!
+You can now use your CNAME record's domain as `api_host` in PostHog SDKs! Make sure to set the `ui_host` to your actual PostHog app URL (e.g. app.posthog.com) as well.

@@ -1,5 +1,5 @@
 ---
-title: How to set up Webflow analytics and session recordings with PostHog
+title: How to set up Webflow analytics and session recordings
 sidebar: Docs
 showTitle: true
 author: ["ian-vanagas"]
@@ -47,6 +47,6 @@ From here, you can analyze data from your Webflow site with our suite of product
 
 ## Further reading
 
-- [How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)
-- [How to create surveys in Webflow with PostHog](/tutorials/webflow-surveys)
+- [How to run A/B tests in Webflow](/tutorials/webflow-ab-tests)
+- [How to create surveys in Webflow](/tutorials/webflow-surveys)
 - [How to track performance marketing in PostHog](/tutorials/performance-marketing)

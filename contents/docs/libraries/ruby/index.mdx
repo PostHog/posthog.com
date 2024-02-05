@@ -38,7 +38,7 @@ import RubySendEvents from '../../integrate/send-events/_snippets/send-events-ru
 
 To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
-```php
+```ruby
 posthog.capture({
     distinct_id: 'distinct_id',
     event: 'event_name',
@@ -89,6 +89,20 @@ after_fork do |server, worker|
   )
 end
 ```
+
+#### Evaluating feature flags locally in a Puma server
+
+If you use Puma with multiple workers, you can use the `on_worker_boot` hook (which is part of the Puma's configuration) to enable the feature flag cache to receive the updates from PostHog.
+
+```ruby
+on_worker_boot do
+  $posthog = PostHog::Client.new(
+    api_key: '<ph_project_api_key>',
+    personal_api_key: '<ph_personal_api_key>'
+    host: '<ph_instance_address>',
+    on_error: Proc.new { |status, msg| print msg }
+  )
+end
 
 ## Experiments (A/B tests)
 

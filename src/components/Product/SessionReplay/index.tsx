@@ -45,12 +45,12 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'session-replay',
     lowercase: 'session replay',
-    capitalized: 'Session Replay',
-    freeTier: '15,000 recordings',
+    capitalized: 'Session replay',
+    freeTier: '5,000 recordings',
 }
 
-const team = 'Monitoring'
-const teamSlug = '/handbook/small-teams/monitoring'
+const team = 'Replay'
+const teamSlug = '/handbook/small-teams/replay'
 
 const featuresPerRow = 3
 const features = [
@@ -88,7 +88,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Web or iOS (beta) available',
+        description: 'Web or Android (beta) available',
         icon: <IconPhone />,
     },
     {
@@ -202,7 +202,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">On the roadmap</a>',
         },
     },
     {
@@ -212,7 +212,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">On the roadmap</a>',
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
         },
     },
     {
@@ -364,7 +364,7 @@ export const ProductSessionReplay = () => {
                     icon={<IconRewindPlay />}
                     product={product.capitalized}
                     title="Watch how users <span class='text-red dark:text-yellow'>experience</span> your app"
-                    description='Session Replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
+                    description='Session replay helps <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
                     website.'
                 />
 
@@ -498,8 +498,11 @@ export const ProductSessionReplay = () => {
                                                     iOS
                                                 </Link>{' '}
                                                 |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/13267" external>
-                                                    Android
+                                                <Link
+                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
+                                                    external
+                                                >
+                                                    Flutter
                                                 </Link>
                                             </li>
                                         </ul>

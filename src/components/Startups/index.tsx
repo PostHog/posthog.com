@@ -30,7 +30,7 @@ const validationSchema = Yup.object().shape({
 
 const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { slug } }) => {
     return (
-        <div className="p-4 border border-gray-accent-light rounded-md max-w-sm">
+        <div className="p-4 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md md:max-w-sm">
             <h4>{title}</h4>
             <GatsbyImage className="rounded-md" image={getImage(featuredImage)} />
             <p className="my-4 text-[15px]">{excerpt}</p>
@@ -93,10 +93,12 @@ export default function Startups() {
             </section>
 
             <div className="relative lg:hidden -mb-12">
-                <h1 className="max-w-lg mx-auto pb-2 text-center">Apply for PostHog's startup program</h1>
+                <h1 className="max-w-lg mx-auto pb-2 text-center leading-tight px-4">
+                    Apply for PostHog's startup program
+                </h1>
 
-                <div className="max-w-sm rounded p-4 text-left bg-accent dark:bg-accent-dark border border-border dark:border-dark mx-auto">
-                    <h3 className="text-lg mb-1">How to apply:</h3>
+                <div className="text-left mx-4">
+                    <h4>How to apply:</h4>
                     <ol>
                         <li>
                             <Link to="https://app.posthog.com/signup" externalNoIcon>

@@ -67,7 +67,7 @@ const otherLinks = [
             { name: 'Developing locally', to: '/handbook/engineering/developing-locally' },
             { name: 'Support hero', to: '/handbook/engineering/support-hero' },
             { name: 'Feature ownership', to: '/handbook/engineering/feature-ownership' },
-            { name: 'Releasing a new version', to: '/handbook/engineering/release-new-version' },
+            { name: 'Shipping and releasing', to: '/handbook/engineering/development-process' },
         ],
     },
     {

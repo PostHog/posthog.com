@@ -10,7 +10,7 @@ module.exports = {
         title: 'PostHog',
         titleTemplate: '%s',
         description:
-            'Open-source product analytics built for developers. Automate the collection of every event on your website or app, without sending data to third-parties. Quickly deploy on your own infrastructure, with full access to the underlying data.',
+            'The single platform for engineers to analyze, test, observe, and deploy new features. Product analytics, session replay, feature flags, A/B testing, CDP, and more.',
         url: 'https://posthog.com', // No trailing slash allowed!
         image: '/banner.png', // Path to your image you placed in the 'static' folder
         twitterUsername: '@PostHog',
@@ -144,84 +144,6 @@ module.exports = {
                 theme_color: '#E5E7E0',
                 display: 'minimal-ui',
                 icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
-            },
-        },
-        {
-            resolve: `gatsby-transformer-remark`,
-            options: {
-                plugins: [
-                    {
-                        resolve: `gatsby-remark-copy-linked-files`,
-                        options: {
-                            destinationDir: `images`,
-                        },
-                    },
-                    {
-                        resolve: `gatsby-remark-katex`,
-                        options: {
-                            throwOnError: false,
-                        },
-                    },
-                    {
-                        resolve: `gatsby-remark-autolink-headers`,
-                        options: {
-                            className: 'post-toc-anchor',
-                        },
-                    },
-                    'gatsby-remark-static-images',
-                    {
-                        resolve: './plugins/gasby-remark-lazy-imgix',
-                        options: {
-                            imgixHost: process.env.CONTEXT === 'production' ? 'posthog.imgix.net' : null,
-                            maxWidth: 700,
-                        },
-                    },
-                    {
-                        resolve: `gatsby-remark-prismjs`,
-                        options: {
-                            // Class prefix for <pre> tags containing syntax highlighting;
-                            // defaults to 'language-' (e.g. <pre class="language-js">).
-                            // If your site loads Prism into the browser at runtime,
-                            // (e.g. for use with libraries like react-live),
-                            // you may use this to prevent Prism from re-processing syntax.
-                            // This is an uncommon use-case though;
-                            // If you're unsure, it's best to use the default value.
-                            classPrefix: 'language-',
-                            // This is used to allow setting a language for inline code
-                            // (i.e. single backticks) by creating a separator.
-                            // This separator is a string and will do no white-space
-                            // stripping.
-                            // A suggested value for English speakers is the non-ascii
-                            // character '›'.
-                            inlineCodeMarker: null,
-                            // This lets you set up language aliases. For example,
-                            // setting this to '{ sh: "bash" }' will let you use
-                            // the language "sh" which will highlight using the
-                            // bash highlighter.
-                            aliases: {},
-                            // This toggles the display of line numbers globally alongside the code.
-                            // To use it, add the following line in gatsby-browser.js
-                            // right after importing the prism color scheme:
-                            //  require("prismjs/plugins/line-numbers/prism-line-numbers.css")
-                            // Defaults to false.
-                            // If you wish to only show line numbers on certain code blocks,
-                            // leave false and use the {numberLines: true} syntax below
-                            showLineNumbers: false,
-                            // If setting this to true, the parser won't handle and highlight inline
-                            // code used in markdown i.e. single backtick code like `this`.
-                            noInlineHighlight: true,
-                            // Customize the prompt used in shell output
-                            // Values below are default
-                            prompt: {
-                                user: 'root',
-                                host: 'localhost',
-                                global: false,
-                            },
-                            escapeEntities: {},
-                        },
-                    },
-                    `gatsby-remark-mermaid`,
-                ],
             },
         },
         `gatsby-plugin-postcss`,
@@ -405,6 +327,24 @@ module.exports = {
                 ],
             },
         },
+        ...(process.env.SHOPIFY_APP_PASSWORD &&
+        process.env.GATSBY_MYSHOPIFY_URL &&
+        process.env.GATBSY_SHOPIFY_SALES_CHANNEL
+            ? [
+                  {
+                      resolve: 'gatsby-source-shopify',
+                      options: {
+                          password: process.env.SHOPIFY_APP_PASSWORD,
+                          storeUrl: process.env.GATSBY_MYSHOPIFY_URL,
+                          shopifyConnections: ['collections'],
+                          salesChannel: process.env.GATBSY_SHOPIFY_SALES_CHANNEL,
+                          downloadImages: true,
+
+                          // salesChannel: process.env.SHOPIFY_APP_ID, // Optional but recommended
+                      },
+                  },
+              ]
+            : []),
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),

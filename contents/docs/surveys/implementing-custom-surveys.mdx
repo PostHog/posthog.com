@@ -8,9 +8,9 @@ availability:
     enterprise: full
 ---
 
-> **Note:** This is **not required** for [popover surveys](/docs/surveys/creating-surveys#display-mode).
+> **Note:** This is **not required** for [popover surveys](/docs/surveys/creating-surveys#presentation).
 
-If you're using PostHog's [survey API](/docs/surveys/creating-surveys#display-mode) to create a custom survey UI, there are 2 steps to integrating with PostHog:
+If you're using PostHog's [survey API](/docs/surveys/creating-surveys#presentation) to create a custom survey UI, there are 2 steps to integrating with PostHog:
 
 ## Step 1: Fetch active surveys
 
@@ -53,7 +53,7 @@ Thus you can use show your user a survey using code like this:
 posthog.getActiveMatchingSurveys((surveys) => {
     // Make sure you filter for surveys that are of type `"api"`. 
     // This prevents accidentally showing popover surveys to your users.
-    const filteredSurveys = surveys.filter(survey => survey.type === 'api'));
+    const filteredSurveys = surveys.filter(survey => survey.type === 'api');
     if (filteredSurveys.length > 0) {
         // show the survey using your custom UI
         showSurvey(filteredSurveys[0]);
@@ -82,7 +82,7 @@ posthog.capture("survey dismissed", {
 
 // 3. When a user has responded to a survey
 posthog.capture("survey sent", {
-    $survey_id: survey.id // required
+    $survey_id: survey.id, // required
     $survey_response: survey_response // required. `survey_response` must be a text or number value (depending on your question type).
     // For multiple choice select surveys, `survey_response` must be in an array of values with the selected choices.
     // e.g., $survey_response: ["response_1", 8, "response_2"]
@@ -95,9 +95,9 @@ If you have a survey with multiple questions, you can capture the responses to e
 
 ```js-web
 posthog.capture("survey sent", {
-    $survey_id: survey.id // required
-    $survey_response: survey_response
-    $survey_response_1: survey_response_1
+    $survey_id: survey.id, // required
+    $survey_response: survey_response,
+    $survey_response_1: survey_response_1,
     $survey_response_2: survey_response_2
 })
 ```

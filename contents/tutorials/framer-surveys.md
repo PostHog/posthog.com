@@ -1,5 +1,5 @@
 ---
-title: "How to create surveys in Framer with PostHog"
+title: "How to create surveys in Framer"
 date: 2023-11-29
 author: ["lior-neu-ner"]
 showTitle: true
@@ -54,6 +54,6 @@ You can also filter these results based on [user properties](/docs/product-analy
 
 ## Further reading
 
-- [How to set up Framer analytics and session recordings with PostHog](/tutorials/framer-analytics)
-- [How to run A/B tests in Framer with PostHog](/tutorials/framer-ab-tests)
+- [How to set up Framer analytics and session recordings](/tutorials/framer-analytics)
+- [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)

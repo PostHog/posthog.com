@@ -60,7 +60,7 @@ There's no single reason, but typically it's motivated by a desire to ship produ
 
 At larger companies, product engineers are seen as a way to drive innovation, sometimes through the creation of smaller teams that have the freedom to ideate and execute product ideas. Software engineers and multidiscipline teams are still important, but product engineers can inject urgency where it's needed.
 
-Elon Musk's Twitter is a good example of company that could benefit from product engineers, whether he's aware of it or not. Elon wants to make dramatic changes to the product, but in his opinion, the organization he inherited was too large and unwieldy to achieve this. 
+[Elon Musk](/blog/learnings-from-elon)'s Twitter is a good example of company that could benefit from product engineers, whether he's aware of it or not. Elon wants to make dramatic changes to the product, but in his opinion, the organization he inherited was too large and unwieldy to achieve this. 
 
 In other words, he doesn't need software engineers to maintain or optimize the existing codebase; he needs product engineers who can identify problems and opportunities, and execute solutions quickly and independently. 
 

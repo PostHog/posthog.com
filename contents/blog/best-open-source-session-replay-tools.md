@@ -33,7 +33,7 @@ Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session re
 > - **Mar 16, 2023:** Removed SessionStack, added Highlight.io. Updated copy and screenshots.
 
 ## 1. PostHog
-![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
+![PostHog](../images/screenshots/session-replay.png)
 
 [PostHog](https://posthog.com/) is an all-in-one, Product OS that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
 
@@ -58,7 +58,7 @@ PostHog is ideal for [product-minded developers](/blog/what-is-a-product-enginee
 
 ### How much does PostHog cost?
 
-PostHog Cloud is free up to 1 million captured events and 15,000 recordings per month, and you can set billing limits to avoid surprise bills. 
+PostHog Cloud is free up to 1 million captured events and 5,000 recordings per month, and you can set billing limits to avoid surprise bills. 
 
 You can also self-host PostHog Open Source (available under an MIT license) using Docker Compose, though PostHog Cloud is recommended for event volumes exceeding 100k per month.
 

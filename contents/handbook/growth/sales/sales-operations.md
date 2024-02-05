@@ -32,7 +32,7 @@ For customers that sign up themselves, and begin using the product, we provide a
 1. [Docs](/docs)
 1. [Tutorials](/tutorials)
 1. [Pre-recorded demo](/book-a-demo)
-1. [Slack community](/slack)
+1. [Community page](/posts)
 
 Additionally, all users can contact us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
 
@@ -42,7 +42,7 @@ Additionally, all users can contact us for support/bugs/feedback using the `?` i
 Most potential customers will show up because they want to replace an existing analytics product, or start doing product 
 analytics from scratch.  In either case, we should show them the power of PostHog as quickly as possible.  To that end, 
 getting live **production** data through our pipeline and available for analysis should be our top priority.
-1. Help them get set up with tracking their production site/app one of our client or server [libraries](/docs/getting-started/install).
+1. Help them get set up with tracking their production site/app using one of our client or server [libraries](/docs/getting-started/install).
    1. JavaScript / Autocapture is the easiest - also make sure to turn on Session Replay.
 1. If people aren't sure what they want to track, AARRR is a great framework to use and will give people a good taster on the types on insight they can see.  We have a number of supporting resources:
    1. A [blog post](/blog/aarrr-pirate-funnel) on getting started with the framework.

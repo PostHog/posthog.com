@@ -36,6 +36,7 @@ Once created, copy the distribution domain name, and set it as your API host in 
 posthog.init('<ph_project_api_key>',
   {
     api_host: 'https://<distribution_domain_name>.cloudfront.net',
+    ui_host: 'https://app.posthog.com' // or 'https://eu.posthog.com' if your PostHog is hosted in Europe
   }
 )
 ```

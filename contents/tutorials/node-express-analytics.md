@@ -404,6 +404,6 @@ Once confirming this works, you’ve got a basic Express app working with the ke
 
 ## Further reading
 
-- For more details, read our [full Node.js documentation](/docs/integrate/server/node)
-- After you’ve set this up, learn [what to do after installing PostHog](/tutorials/next-steps-after-installing)
-- [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
+- [PostHog Node.js docs](/docs/integrate/server/node)
+- [How to set up A/B tests in Node.js (Express)](/tutorials/frontend-vs-backend-group-analytics)
+- [What to do after installing PostHog](/tutorials/next-steps-after-installing)

@@ -1,7 +1,7 @@
 ### Boolean feature flags
 
 ```swift
-if (posthog.isFeatureEnabled('flag-key')) {
+if (PostHogSDK.shared.isFeatureEnabled("flag-key")) {
     // Do something differently for this user
 }
 ```
@@ -9,11 +9,11 @@ if (posthog.isFeatureEnabled('flag-key')) {
 ### Multivariate feature flags
 
 ```swift
-if (posthog.getFeatureFlag('my-flag') == "variant-key") { // replace 'variant-key' with the key of your variant
+if (PostHogSDK.shared.getFeatureFlag("my-flag") as? String == "variant-key") { // replace "variant-key" with the key of your variant
     // do something
 }
 ```
 
 ### Reloading feature flags
 
-Feature flag values are cached. If something has change with your user and you'd like to refetch their flag values, call `posthog.reloadFeatureFlags()`.
+Feature flag values are cached. If something has change with your user and you'd like to refetch their flag values, call `PostHogSDK.shared.reloadFeatureFlags()`.
