@@ -57,7 +57,7 @@ As you grow, it’s important not to drift from targeting your persona or to let
 
 At PostHog, we’ve solved this issue with [a public handbook](/handbook) which documents [who we are building for](/handbook/who-we-are-building-for) — but Puzzle took a different approach.  
 
-“We have these all-hands meetings where everybody has to put their hand up and swear that our persona is a founder and not an accountant,” says Scott. 
+“We reinforce who we're building for constantly," says Scott. "We bring it up in all-hands regularly, for example, and will often reference it in other meetings. Internally, we're always trying to be clear that we're building primarily for founders." 
 
 > **Putting it into practice:** There are lots of ways to disseminate information internally, from intranets to incorporating it into employee onboarding. Whichever route you take though, the key is consistency. 
 
