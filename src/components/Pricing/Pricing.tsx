@@ -74,61 +74,42 @@ const products = [
 
 interface PlanData {
     title: string
-    subtitle: string
     price: string
-    priceSubtitle: string | JSX.Element
+    priceSubtitle?: string | JSX.Element
     features: React.ReactNode[]
 }
 
 const plans: PlanData[] = [
     {
         title: 'Totally free',
-        subtitle: 'No credit card required',
         price: 'Free',
-        priceSubtitle: (
-            <span>
-                Limited usage (varies by product)
-                <br />
-                <br />
-            </span>
-        ),
+        priceSubtitle: '- no credit card required',
         features: [
-            'Usage capped at free tier limits',
-            'Unlimited tracked users',
-            'Unlimited team members',
             'Basic product features',
             '1 project',
             '1 year data retention',
             'Community support',
+            'Usage capped at free tier limits',
         ],
     },
     {
         title: 'Usage-based',
-        subtitle: 'Enter a card to unlock extra features',
         price: '$0',
-        priceSubtitle: 'Use our generous free tier, then usage-based pricing',
         features: [
-            'Usage-based pricing after free tier',
-            'Unlimited tracked users',
-            'Unlimited team members',
-            'All product features',
+            'Advanced product features',
             '2 projects',
             '7 year data retention',
             'Email support',
+            'Usage-based pricing after free tier',
         ],
     },
     {
         title: 'Usage based for teams',
-        subtitle: 'Features for teams',
-        price: '$450/mo',
-        priceSubtitle: '+ usage-based pricing by product after monthly free allotment',
+        price: '$450',
         features: [
-            'Usage-based pricing after free tier',
-            'Unlimited tracked users',
-            'Unlimited team members',
             <>
                 <span className="relative">
-                    Team features{' '}
+                    Includes team features{' '}
                     <Tooltip content="Verified events, comments and taxonomy (tags and descriptions) on insights, events, properties">
                         <span className="relative -top-px">
                             <IconInfo className="inline-block w-4 h-4" />
@@ -139,43 +120,49 @@ const plans: PlanData[] = [
             'Unlimited projects',
             '7 year data retention',
             'Priority support',
+            'Usage-based pricing after free tier',
         ],
     },
     {
         title: 'Enterprise',
-        subtitle: 'Features for teams',
-        price: '$450/mo',
-        priceSubtitle: '+ usage-based pricing by product after monthly free allotment',
+        price: 'Custom pricing',
+        priceSubtitle: 'with fixed terms',
         features: [
-            'Usage-based pricing',
-            'Unlimited tracked users',
-            'Unlimited team members',
-            'Custom MSA',
+            'Unlimited everything',
             'SAML enforcement',
-            'Priority support & training',
+            'Custom MSA',
+            'Slack-based support',
+            'Personalized onboarding & training',
         ],
     },
 ]
 
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
-    <div className="flex flex-col border border-light dark:border-dark bg-white dark:bg-accent-dark text-center rounded shrink-0 basis-[80vw] xs:basis-[55vw] sm:basis-[40vw]">
-        <div className="bg-light/50 dark:bg-dark/50 px-4 xl:px-8 py-4 rounded-tl rounded-tr">
-            <h4 className="text-lg mb-0">{planData.title}</h4>
-            <p className="opacity-75 text-sm mb-0">{planData.subtitle}</p>
-        </div>
-        <div className="flex flex-col h-full pt-4 px-4 xl:px-8 pb-8">
-            <h4 className="text-lg mb-1">
-                {planData.price != 'Free' && <span className="text-sm opacity-60 font-normal">Starts at</span>}{' '}
-                {planData.price}
-            </h4>
-            <p className="opacity-75 text-sm text-balance">{planData.priceSubtitle}</p>
-            <ul className="p-0 pb-8 list-none flex flex-col gap-2 [&_li]:text-sm xl:[&_li]:text-[15px]">
-                {planData.features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                ))}
-            </ul>
-            <div className="mt-auto">
-                <CTA width="full" />
+    <div>
+        <h4 className="text-lg mb-2">{planData.title}</h4>
+        <div className="flex flex-col border border-light dark:border-dark bg-white dark:bg-accent-dark rounded shrink-0 basis-[80vw] xs:basis-[55vw] sm:basis-[40vw]">
+            <div className="flex flex-col h-full pt-3 px-4 xl:px-4 pb-6">
+                <div className="mb-4">
+                    <h4 className="inline text-lg">
+                        {planData.price != 'Free' && planData.price != 'Custom pricing' && (
+                            <span className="text-sm opacity-60 font-normal">Starts at</span>
+                        )}{' '}
+                        {planData.price}
+                        {planData.price != 'Free' && planData.price != 'Custom pricing' && (
+                            <span className="text-sm opacity-60 font-normal">/mo</span>
+                        )}
+                    </h4>
+                    &nbsp;
+                    <p className="inline opacity-75 text-sm">{planData.priceSubtitle}</p>
+                </div>
+                <ul className="p-0 pb-8 list-none flex flex-col gap-2 [&_li]:text-sm xl:[&_li]:text-[15px]">
+                    {planData.features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                    ))}
+                </ul>
+                <div className="mt-auto">
+                    <CTA width="full" />
+                </div>
             </div>
         </div>
     </div>
@@ -407,15 +394,18 @@ const Pricing = (): JSX.Element => {
             {!currentProduct && (
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                        <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Plans</h3>
                         <div className="col-span-4 overflow-x">
-                            <div className="flex mr-8 md:mr-0 md:grid grid-cols-4 gap-4 mb-8">
+                            <div className="flex mr-8 md:mr-0 md:grid grid-cols-4 gap-4 mb-8 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
                                 {plans.map((plan, index) => (
                                     <Plan key={index} planData={plan} />
                                 ))}
                             </div>
                             <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
-                                Need a custom MSA, SAML, priority support, and training? Do you have an in-house legal
-                                team? <Link to="/contact-sales">Talk to a human</Link>
+                                All plans include unlimited team members, and unlimited tracked users.{' '}
+                                <span className="text-red dark:text-yellow font-semibold">
+                                    See full plan comparison
+                                </span>
                             </p>
                         </div>
                     </section>
