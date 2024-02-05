@@ -67,7 +67,7 @@ Once you’ve created your buyer persona you must constantly maintain it. You ne
 
 “While we knew we had some drop-off within our onboarding funnel, we wanted to ensure that we weren’t bringing high-intent new customers into a ‘leaky bucket’. We needed to ensure that people who completed onboarding could quickly see the value of Puzzle and activate. After digging into our data in Posthog we could see that our activation rate wasn’t what we needed it to be”, says Scott. “We reached out to these users directly and talked to them. We had to try and understand their concerns.”
 
-Scott’s team learned that customers were becoming frustrated by delays during this connection step. As a result they improved the content on the page, added new loading animations, and surfacing data more quickly — a persona-informed change which had an immediate impact on overall activation. 
+Scott’s team learned that customers were becoming frustrated by delays before they could see their dashboard after completing onboarding. As a result they brought users into the app as it was loading so they could quickly see what they were waiting for. This reduced time to value dramatically and was a clear example of an ICP-informed change which had an immediate impact on overall activation.
 
 > **Putting it into practice:** Data gathering and user interviews should be on-going processes for many teams. Otherwise how else can you know if [your new interface design](/blog/introducing-notebooks) is a good idea, or if your upcoming changes will be well received?
 
