@@ -15,6 +15,62 @@ import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA } from './Plans'
+import Link from 'components/Link'
+import {
+    IconGraph,
+    IconChevronDown,
+    IconRewindPlay,
+    IconToggle,
+    IconFlask,
+    IconMessage,
+    IconInfo,
+    IconArrowRight,
+} from '@posthog/icons'
+import Tooltip from 'components/Tooltip'
+
+const products = [
+    {
+        icon: <IconGraph className="w-5 h-6 text-blue" />,
+        name: 'Product analytics',
+        freeLimit: '1,000,000',
+        denomination: 'event',
+        price: '0.00031',
+        link: '/pricing?product=product-analytics',
+    },
+    {
+        icon: <IconRewindPlay className="w-5 h-6 text-yellow" />,
+        name: 'Session replay',
+        freeLimit: '15,000',
+        denomination: 'recording',
+        price: '0.0050',
+        link: '/pricing?product=session-replay',
+    },
+    {
+        icon: <IconToggle className="w-5 h-6 text-green" />,
+        name: 'Feature flags',
+        freeLimit: '1,000,000',
+        denomination: 'request',
+        price: '0.0001',
+        link: '/pricing?product=feature-flags',
+    },
+    {
+        icon: <IconFlask className="w-5 h-6 text-purple" />,
+        name: 'A/B testing',
+        freeLimit: '',
+        denomination: '',
+        price: '',
+        link: '/pricing?product=ab-testing',
+        message: <em className="font-normal opacity-75">Billed with feature flags</em>,
+    },
+    {
+        icon: <IconMessage className="w-5 h-5 text-red" />,
+        name: 'Surveys',
+        freeLimit: '250',
+        denomination: 'response',
+        price: '0.2000',
+        link: '/pricing?product=surveys',
+    },
+]
 
 export const section = cntl`
     max-w-6xl
@@ -100,29 +156,125 @@ const Pricing = (): JSX.Element => {
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section className="w-screen overflow-x-hidden">
                 <div
-                    className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
+                    className={`grid md:grid-cols-12 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
-                    <div className="md:order-2">
-                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80 ">
-                            <Lottie
-                                options={{
-                                    loop: false,
-                                    autoplay: true,
-                                    animationData: tractorHog,
-                                }}
-                            />
-                        </div>
-                    </div>
-                    <div className="md:order-1">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Pricing</h1>
+                    <div className="col-span-5">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Plans &amp; pricing</h1>
                         <p className="text-base font-medium opacity-60 leading-tight mb-4">
-                            Use PostHog free forever (with generous usage limits). <br className="hidden lg:block" />
-                            Or pay per use and get unrestricted access to everything.
+                            PostHog offers usage-based pricing, not{' '}
+                            <Tooltip
+                                content={() => (
+                                    <div className="max-w-sm">
+                                        <strong className="block">Why not value-based pricing?</strong>
+                                        <p className="mb-0">
+                                            Value-based pricing tries to see how much money you're willing to pay.
+                                            Usage-based pricing is like a utility - where we continually seek to lower
+                                            costs and make money through volume.
+                                        </p>
+                                    </div>
+                                )}
+                            >
+                                <span className="border-b border-dashed border-primary/50 dark:primary-dark/50">
+                                    value-based pricing
+                                </span>
+                            </Tooltip>
+                            .
                         </p>
                         <p className="text-base font-medium opacity-60 leading-tight">
-                            Each product is priced separately.
+                            Starts at $0/mo with a generous free tier.
                         </p>
                         <CTA />
+                    </div>
+                    <div className="col-span-7">
+                        <div className="border border-light dark:border-dark p-4 bg-white dark:bg-accent-dark">
+                            <div>
+                                <div className="col-span-4">
+                                    <div className="hidden md:grid grid-cols-16 items-center text-sm opacity-60 mb-2">
+                                        <div className="col-span-6">Products</div>
+                                        <div className="col-span-5">Monthly free allowance</div>
+                                        <div className="col-span-4">
+                                            Then starts at...{' '}
+                                            <Tooltip content="Price decreases exponentially with greater volume. Click a product to see the full price breakdown.">
+                                                <span className="relative">
+                                                    <IconInfo className="w-4 h-4 inline-block -top-px" />
+                                                </span>
+                                            </Tooltip>
+                                        </div>
+                                        <div className="col-span-1"></div>
+                                    </div>
+
+                                    <div className="divide-y space-y-0.5 divide-light dark:divide-dark">
+                                        {products.map((product, index) => (
+                                            <div key={index}>
+                                                <Link
+                                                    to={product.link}
+                                                    className="group grid grid-cols-8 md:grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
+                                                >
+                                                    <div className="col-span-7 md:col-span-6 flex gap-2 items-center md:pl-1 mb-1 md:mb-0">
+                                                        {product.icon}
+                                                        <span className="font-semibold text-[15px]">
+                                                            {product.name}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        className={`col-span-4 md:col-span-5 text-sm order-3 2xs:ml-8 md:ml-0 ${
+                                                            product.price &&
+                                                            'rounded-tl rounded-bl bg-accent dark:bg-accent-dark md:bg-transparent dark:md:bg-transparent p-2 md:p-0'
+                                                        } md:order-none`}
+                                                    >
+                                                        {product.freeLimit ? (
+                                                            <>
+                                                                <div className="text-xs font-normal opacity-60 md:hidden">
+                                                                    Monthly free allowance
+                                                                </div>
+                                                                {product.freeLimit} {product.denomination}s
+                                                                <span className="opacity-50 font-medium text-[13px]">
+                                                                    /mo
+                                                                </span>
+                                                            </>
+                                                        ) : (
+                                                            <>{product.message}</>
+                                                        )}
+                                                    </div>
+                                                    <div
+                                                        className={`col-span-4 text-sm order-4 2xs:mr-8 h-full md:h-auto md:mr-0 md:order-none ${
+                                                            product.price &&
+                                                            'rounded-tr rounded-br bg-accent dark:bg-accent-dark md:bg-transparent dark:md:bg-transparent p-2 md:p-0'
+                                                        }`}
+                                                    >
+                                                        {product.price && (
+                                                            <>
+                                                                <div className="text-xs font-normal opacity-60 md:hidden">
+                                                                    Then pricing starts at
+                                                                </div>
+                                                                ${product.price}
+                                                                <span className="opacity-50 font-medium text-[13px]">
+                                                                    /{product.denomination}
+                                                                </span>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                    <div className="col-span-1 flex justify-end">
+                                                        <IconChevronDown className="w-8 h-8 -rotate-90 opacity-50 group-hover:opacity-75" />
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="hidden md:grid grid-cols-16 items-center text-sm opacity-60 mb-2">
+                                        <div className="col-span-6">
+                                            <strong>Every month</strong>
+                                        </div>
+                                        <div className="col-span-5">
+                                            <strong>Free</strong>
+                                        </div>
+                                        <div className="col-span-4">Estimate your monthly bill</div>
+                                        <div className="col-span-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
