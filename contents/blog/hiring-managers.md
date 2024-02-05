@@ -26,7 +26,7 @@ So, managers that can get entire teams to love focusing on the work, and taking 
 
 We are, of course, biased - PostHog is small. We're around 42 people at the moment. We are split in small teams, each of which often owns an entire product. That means each small team has so few people, than every individual has a huge influence over each product's success. Therefore, instead of creating an arbitrary list of boxes to check as a career path, the way to progress is to get your product to be more successful. Larger businesses put in place checkboxes, which creates a culture of individuals acting in a self-interested way. We don't think that's right for us - hopefully it never will be.
 
-## How we find people
+## How we find people
 
 The best source of leads for managers is those people already working within the company. There are a bunch of advantages:
 
