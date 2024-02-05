@@ -72,6 +72,115 @@ const products = [
     },
 ]
 
+interface PlanData {
+    title: string
+    subtitle: string
+    price: string
+    priceSubtitle: string | JSX.Element
+    features: React.ReactNode[]
+}
+
+const plans: PlanData[] = [
+    {
+        title: 'Totally free',
+        subtitle: 'No credit card required',
+        price: 'Free',
+        priceSubtitle: (
+            <span>
+                Limited usage (varies by product)
+                <br />
+                <br />
+            </span>
+        ),
+        features: [
+            'Usage capped at free tier limits',
+            'Unlimited tracked users',
+            'Unlimited team members',
+            'Basic product features',
+            '1 project',
+            '1 year data retention',
+            'Community support',
+        ],
+    },
+    {
+        title: 'Usage-based',
+        subtitle: 'Enter a card to unlock extra features',
+        price: '$0',
+        priceSubtitle: 'Use our generous free tier, then usage-based pricing',
+        features: [
+            'Usage-based pricing after free tier',
+            'Unlimited tracked users',
+            'Unlimited team members',
+            'All product features',
+            '2 projects',
+            '7 year data retention',
+            'Email support',
+        ],
+    },
+    {
+        title: 'Usage based for teams',
+        subtitle: 'Features for teams',
+        price: '$450/mo',
+        priceSubtitle: '+ usage-based pricing by product after monthly free allotment',
+        features: [
+            'Usage-based pricing after free tier',
+            'Unlimited tracked users',
+            'Unlimited team members',
+            <>
+                <span className="relative">
+                    Team features{' '}
+                    <Tooltip content="Verified events, comments and taxonomy (tags and descriptions) on insights, events, properties">
+                        <span className="relative -top-px">
+                            <IconInfo className="inline-block w-4 h-4" />
+                        </span>
+                    </Tooltip>
+                </span>
+            </>,
+            'Unlimited projects',
+            '7 year data retention',
+            'Priority support',
+        ],
+    },
+    {
+        title: 'Enterprise',
+        subtitle: 'Features for teams',
+        price: '$450/mo',
+        priceSubtitle: '+ usage-based pricing by product after monthly free allotment',
+        features: [
+            'Usage-based pricing',
+            'Unlimited tracked users',
+            'Unlimited team members',
+            'Custom MSA',
+            'SAML enforcement',
+            'Priority support & training',
+        ],
+    },
+]
+
+const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
+    <div className="flex flex-col border border-light dark:border-dark bg-white dark:bg-accent-dark text-center rounded shrink-0 basis-[80vw] xs:basis-[55vw] sm:basis-[40vw]">
+        <div className="bg-light/50 dark:bg-dark/50 px-4 xl:px-8 py-4 rounded-tl rounded-tr">
+            <h4 className="text-lg mb-0">{planData.title}</h4>
+            <p className="opacity-75 text-sm mb-0">{planData.subtitle}</p>
+        </div>
+        <div className="flex flex-col h-full pt-4 px-4 xl:px-8 pb-8">
+            <h4 className="text-lg mb-1">
+                {planData.price != 'Free' && <span className="text-sm opacity-60 font-normal">Starts at</span>}{' '}
+                {planData.price}
+            </h4>
+            <p className="opacity-75 text-sm text-balance">{planData.priceSubtitle}</p>
+            <ul className="p-0 pb-8 list-none flex flex-col gap-2 [&_li]:text-sm xl:[&_li]:text-[15px]">
+                {planData.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                ))}
+            </ul>
+            <div className="mt-auto">
+                <CTA width="full" />
+            </div>
+        </div>
+    </div>
+)
+
 export const section = cntl`
     max-w-6xl
     xl:max-w-7xl
@@ -269,7 +378,23 @@ const Pricing = (): JSX.Element => {
                                         <div className="col-span-5">
                                             <strong>Free</strong>
                                         </div>
-                                        <div className="col-span-4">Estimate your monthly bill</div>
+                                        <div className="col-span-4">
+                                            <span
+                                                onClick={() => {
+                                                    const element = document.getElementById('plan-comparison')
+                                                    const headerHeight = document.getElementById('header').offsetHeight // replace 'header' with the id of your header
+                                                    scroll.scrollTo(element.offsetTop - 20 - headerHeight, {
+                                                        duration: 800,
+                                                        delay: 0,
+                                                        smooth: 'easeInOutQuart',
+                                                    })
+                                                }}
+                                                className="cursor-pointer text-red dark:text-yellow font-semibold"
+                                            >
+                                                Estimate your monthly bill{' '}
+                                                <IconArrowRight className="w-4 h-4 rotate-90 inline-block" />
+                                            </span>
+                                        </div>
                                         <div className="col-span-1"></div>
                                     </div>
                                 </div>
@@ -278,9 +403,30 @@ const Pricing = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-            <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
-                <Plans showTitle groupsToShow={groupsToShow} />
-            </section>
+
+            {!currentProduct && (
+                <>
+                    <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                        <div className="col-span-4 overflow-x">
+                            <div className="flex mr-8 md:mr-0 md:grid grid-cols-4 gap-4 mb-8">
+                                {plans.map((plan, index) => (
+                                    <Plan key={index} planData={plan} />
+                                ))}
+                            </div>
+                            <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
+                                Need a custom MSA, SAML, priority support, and training? Do you have an in-house legal
+                                team? <Link to="/contact-sales">Talk to a human</Link>
+                            </p>
+                        </div>
+                    </section>
+                </>
+            )}
+
+            {currentProduct && (
+                <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                    <Plans showTitle groupsToShow={groupsToShow} />
+                </section>
+            )}
 
             <PricingCalculator />
 
