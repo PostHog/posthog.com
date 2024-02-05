@@ -68,6 +68,9 @@ class SampleApp : Application() {
 Add the OkHttp Interceptor.
 
 ```android_kotlin
+import com.posthog.PostHogOkHttpInterceptor
+import okhttp3.OkHttpClient
+
 private val client = OkHttpClient.Builder()
     .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
     .build()
