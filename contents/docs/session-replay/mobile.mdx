@@ -11,19 +11,19 @@ Mobile Session Recording allows you to record user sessions on mobile devices. T
 
 ## How it works
 
-We have taken our time to make sure that we can provide a useful and detailed recording experience whilst keeping the performance and security of your app as a top priority. By default the configuration is somewhat resritive with automatic masking.
+We have taken our time to make sure that we can provide a useful and detailed recording experience whilst keeping the performance and security of your app as a top priority. By default the configuration is resritive with automatic masking.
 
 #### Screen recording
 
 Mobile Recording is primarily done using native APIs to grab the view hierarchy state when the screen is drawn. This is done carefully so as not to affect performance in any way a user may notice.
 
-The view hierarchy is transformed to a JSON data structure and later rendered as a HTML wireframe, since it is a wireframe the UI won't have the original look and feel but it should be close enough to understand the user's behaviour.
+The view hierarchy is transformed to a JSON data structure and later rendered as a HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/), since it is a wireframe the UI won't have the original look and feel but it should be close enough to understand the user's behaviour.
 
 There are 4 possible configurations:
 * `maskAllTextInputs` - all texts will be masked (e.g. `**** ***`).
 * `maskAllImages` - all images will be a place holder.
 * `captureLogcat` - logs will be captured automatically.
-* `android:tag="ph-no-capture"` - setting the `ph-no-capture` means the view will be masked or be a place holder.
+* `android:tag="ph-no-capture"` - setting the `ph-no-capture` tag means the view will be masked or be a place holder.
 
 #### Network recording
 
@@ -79,9 +79,13 @@ The SDK configurations.
 
 ```android_kotlin
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
+    // enable session recording, requires enabling on the project configuration as well.
     sessionReplay = true
+    // all texts are masked (default is enabled)
     sessionReplayConfig.maskAllTextInputs = false
+    // all images are placeholders (default is enabled)
     sessionReplayConfig.maskAllImages = false
+    // capture logs automatically (default is enabled)
     sessionReplayConfig.captureLogcat = true
 }
 ```
@@ -90,17 +94,16 @@ The View declaration tag.
 
 ```xml
 <ImageView
-    android:id="@+id/imvAndroid"
-    android:layout_width="230dp"
-    android:layout_height="391dp"
-    android:src="@drawable/android_logo"
+    android:id="@+id/imvProfilePhoto"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
     android:tag="ph-no-capture"
 />
 ```
 
 # Limitations
 
-* Requires the Android SDK version >= [3.1.0](https://github.com/PostHog/posthog-android/releases/tag/3.1.0).
+* Requires the PostHog Android SDK version >= [3.1.0](https://github.com/PostHog/posthog-android/releases/tag/3.1.0) - use the latest version.
 * Requires Android API >= 26, otherwise it's a NoOp.
 * Not compatible with Jetpack Compose.
 * It's a user's screen wireframe, not a video recording nor a screenshot.
