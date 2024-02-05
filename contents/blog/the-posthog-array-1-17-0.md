@@ -100,7 +100,7 @@ A roadmap for various retention improvements that will significantly increase th
 
 ## PostHog News
 
-Our community continues to be as awesome as ever, providing valuable feedback and helping out with issues, pull requests, and discussions on our [Slack group](/slack).
+Our community continues to be as awesome as ever, providing valuable feedback and helping out with issues, pull requests, and discussions on [our community page](/posts).
 
 This week, we want to give a special shoutout to [Adam](https://github.com/adamb70), who got 2 PRs merged and wrote an article about integrating PostHog on their website. 
 
