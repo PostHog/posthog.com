@@ -32,8 +32,8 @@ Next, import `fmt` and `net/http` into `main.go`. We use them to run an HTTP ser
 package main
 
 import (
-    "fmt"
-    "net/http"
+  "fmt"
+  "net/http"
 )
 
 func main() {
@@ -71,9 +71,6 @@ go mod init go-ab-tests
 go get github.com/posthog/posthog-go
 ```
 
-Next, set up the PostHog client in your `main.go` file. To do this, you need your project API key and instance address from [your project settings](https://app.posthog.com/project/settings). You also need to create a personal API key which is done in [your personal settings](https://app.posthog.com/me/settings). Use these values to create a `posthog.Config` to initialize `posthog.NewWithConfig()`.
-
-
 Next, we set up the PostHog client in `main.go`. To do this, you need your project API key and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize `posthog.NewWithConfig()`. Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event in our HTTP function handler. 
 
 Altogether, the code looks like this:
@@ -82,10 +79,10 @@ Altogether, the code looks like this:
 package main
 
 import (
-	"fmt"
-	"net/http"
+  "fmt"
+  "net/http"
 
-	"github.com/posthog/posthog-go"
+  "github.com/posthog/posthog-go"
 )
 
 func main() {
@@ -100,7 +97,7 @@ func main() {
 
   http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
     paragraphText := "Placeholder text"
-    userID := "placeholder-user-id"
+    distinctId := "placeholder-user-id"
 
     htmlContent := fmt.Sprintf(`
       <!DOCTYPE html>
@@ -113,7 +110,7 @@ func main() {
     `, paragraphText)
 
     client.Enqueue(posthog.Capture{
-      DistinctId: userID,
+      DistinctId: distinctId,
       Event:      "$pageview",
     })
     fmt.Fprintf(w, htmlContent)
@@ -164,12 +161,12 @@ To implement the A/B test, we:
 
   http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
     paragraphText := "Placeholder text"
-    userID := "placeholadsaasdsadsdder-user-id"
+    distinctId := "placeholder-user-id"
 
     enabledVariant, err := client.GetFeatureFlag(
       posthog.FeatureFlagPayload{
         Key:        "my-cool-experiment",
-        DistinctId: userID,
+        DistinctId: distinctId,
     })
 
     if enabledVariant == "control" {
@@ -191,7 +188,7 @@ To implement the A/B test, we:
     `, paragraphText)
 
     client.Enqueue(posthog.Capture{
-      DistinctId: userID,
+      DistinctId: distinctId,
       Event:      "$pageview",
     })
     fmt.Fprintf(w, htmlContent)
@@ -220,7 +217,7 @@ To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/node#step
 
   // update your capture call to include the feature flag information
     client.Enqueue(posthog.Capture{
-      DistinctId: userID,
+      DistinctId: distinctId,
       Event:      "$pageview",
       Properties: posthog.NewProperties().
         Set("$feature/my-cool-experiment", enabledVariant),  
