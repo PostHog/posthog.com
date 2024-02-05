@@ -87,6 +87,17 @@ docker run -it --rm \
 
 You’ll need to set environment variables for these. [See (private) instructions](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md) for this.
 
+### Developing the posts section
+To see your local version of the posts section, `/posts` needs to be visited directly (`http://localhost:8001/posts`)
+
+### Developing the merch store
+Additional environment variables are needed to develop the merch store:
+- `SHOPIFY_APP_PASSWORD`
+- `GATSBY_MYSHOPIFY_URL`
+- `GATSBY_SHOPIFY_STOREFRONT_TOKEN`
+
+Currently, these environment variables are excluded from Vercel preview builds to disable merch store node creation and speed up build times on non-merch related PRs.
+
 ## Contributing
 
 We <3 contributions big and small. In priority order (although everything is appreciated) with the most helpful first:
