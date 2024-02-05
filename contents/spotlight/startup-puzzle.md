@@ -23,7 +23,7 @@ A persona is, fundamentally, a snapshot of your ideal customer based on a broad 
 
 Once you’ve done that, says Scott, you need to pair that intuitive understanding with quantitative data, so you can understand if these behaviors exist in isolation or at scale. 
 
-“We’re constantly standing next to founders who are just starting out and I do a healthy amount of interviews,” says Scott. “But it’s one thing for a customer to say they want, need, or plan to do X, Y, or Z — and another thing if they actually do it. That’s where quantitative data is useful. You need both to create your ICP.”
+“We’re constantly standing next to founders at each stage of the startup journey interviewing and learning about their experience,” says Scott. “But it’s one thing for a customer to say they want, need, or plan to do X, Y, or Z — and another thing if they actually do it. That’s where quantitative data is useful. You need both to create your ICP.”
 
 > **Putting it into practice:** It can help to [define a small number of reference customers](/founders/creating-ideal-customer-profile#5-reference-customers). Spend time with them to gather subjective data, while using a tool such as [PostHog](/startups) to collect hard facts.
 
@@ -33,7 +33,7 @@ Armed with this qualitative and quantitative data, you can start to establish yo
 
 For Puzzle, this was critical for differentiating them from other products in the market. Every company needs an accounting platform, but not all founders feel the same about this need — and by focusing on users’ unaddressed needs Puzzle can identify a strong, unique position for the product.
 
-“Founders don’t sign up to Puzzle because they just can’t wait to do their accounting,” says Scott. “They sign up because they know they need to be tax compliant and to be ready for investor reporting... We learned that they care about efficiency, accuracy and, as they generate more revenue, delaying hires in the finance department.”
+“More often than not, founders aren’t signing up to Puzzle because they’re excited to do their accounting,” says Scott. “They sign up because they know they need to be tax compliant, gain a deeper understanding of their company’s finances, and be ready for things like investor reporting. While the needs of founders often change or mature at each stage of their journey, what’s common is that they care about compliance, efficiency, and accuracy.”
 
 All of this is reflected in Puzzle’s online messaging, with language which directly addresses founders ahead of accountants and emphasizes how the product integrates simply with other tools which founders already use. 
 
@@ -43,9 +43,9 @@ All of this is reflected in Puzzle’s online messaging, with language which dir
 
 Next, you can delve into the quantitative data by looking at how users can be segmented into different groups based on criteria such as size or industry. Puzzle used this information to structure its pricing model, for example. 
 
-“On [our pricing page](https://puzzle.io/pricing) we make this pretty clear,” says Scott. “We have a plan for formation-stage founders, a plan for startups who have raised a little funding, and a scale plan for companies which are generating revenue.
+“On [our pricing page](https://puzzle.io/pricing) we make this pretty clear,” says Scott. “We have a plan for formation-stage founders, a plan for startups who have raised a little funding, and an automation plan for companies which are a little more mature and prioritize efficiency, accuracy, and not waiting weeks to close their books."
 
-Each plan also reflects the pain points a user would deal with at that stage too and addresses it with a product feature. Monthly compliance checklists in the free plan, for example, help formation-stage founders get started quickly — but give way in the scale-up plan to AI automation and new processes.
+Each plan also reflects the pain points a user would deal with at that stage too and addresses it with a product feature. Monthly compliance checklists in the free plan, for example, help formation-stage founders get started quickly — but give way in the Automation plan to AI and streamlined workflows.
 
 > **Putting it into practice:** If you aren’t using tiered pricing plans then it can still be helpful to think of your broader [pricing principles](/handbook/engineering/feature-pricing). Ask yourself: how do these principles work for your different user segments? 
 
