@@ -2086,12 +2086,6 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Sharing & embedding',
-                    url: '/docs/product-analytics/sharing',
-                    icon: 'IconShare',
-                    color: 'purple',
-                },
-                {
                     name: 'Web analytics',
                     url: '/docs/web-analytics',
                     icon: 'IconPieChart',
@@ -2100,6 +2094,12 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                },
+                {
+                    name: 'Sharing & embedding',
+                    url: '/docs/product-analytics/sharing',
+                    icon: 'IconShare',
+                    color: 'purple',
                 },
                 {
                     name: 'Data management',
