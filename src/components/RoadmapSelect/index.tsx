@@ -6,7 +6,7 @@ import Select from 'components/Select'
 dayjs.extend(relativeTime)
 
 type RoadmapOptions = {
-    teamID: number
+    teamID?: number
     onChange: (value: number) => void
     value: number | null
 }
@@ -19,11 +19,15 @@ export default function RoadmapSelect({ teamID, onChange, value }: RoadmapOption
             {
                 sort: ['updatedAt:desc'],
                 filters: {
-                    teams: {
-                        id: {
-                            $eq: teamID,
-                        },
-                    },
+                    ...(teamID
+                        ? {
+                              teams: {
+                                  id: {
+                                      $eq: teamID,
+                                  },
+                              },
+                          }
+                        : null),
                     complete: {
                         $ne: true,
                     },

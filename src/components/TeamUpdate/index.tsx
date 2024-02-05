@@ -173,7 +173,6 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                             {values.roadmap && teamID && (
                                 <div className="border border-border dark:border-dark rounded-md mt-4">
                                     <RoadmapSelect
-                                        teamID={teamID}
                                         onChange={(value) => setFieldValue('roadmapID', value)}
                                         value={values.roadmapID}
                                     />
