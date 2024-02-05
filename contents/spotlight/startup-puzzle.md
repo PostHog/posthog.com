@@ -53,7 +53,7 @@ Each plan also reflects the pain points a user would deal with at that stage too
 
 As you grow, it’s important not to drift from targeting your persona or to let teams’ understanding of it become corrupted. You need to constantly remind everyone in your company who you are building for and how your product meets their needs — otherwise you risk diluting your offering. 
 
-“When I joined Puzzle I was very happy to hear people talking about our persona,” says Scott. “Then I saw there was some confusion and some of what was said was incorrect. Some people thought our persona was a company, while others thought it was a person, and there were some different ideas floating around.”
+“When I joined Puzzle I was very happy to hear people talking about our ICP,” says Scott. “While there were still debates about some of the finer details and who some of the buyer personas may be, it was clear that our ICP was our guiding light.”
 
 At PostHog, we’ve solved this issue with [a public handbook](/handbook) which documents [who we are building for](/handbook/who-we-are-building-for) — but Puzzle took a different approach.  
 
@@ -65,7 +65,7 @@ At PostHog, we’ve solved this issue with [a public handbook](/handbook) which 
 
 Once you’ve created your buyer persona you must constantly maintain it. You need to always be speaking to users, working to understand their concerns, and analyzing the data behind their usage. In doing so you can find new segments to target, new needs to address, and new product improvements to make.
 
-“We started looking at our biggest user drop-offs and found many users that fit our persona were dropping off when they had to connect their bank,” says Scott. “We reached out to these users directly and talked to them. We had to try and understand their concerns.”
+“While we knew we had some drop-off within our onboarding funnel, we wanted to ensure that we weren’t bringing high-intent new customers into a ‘leaky bucket’. We needed to ensure that people who completed onboarding could quickly see the value of Puzzle and activate. After digging into our data in Posthog we could see that our activation rate wasn’t what we needed it to be”, says Scott. “We reached out to these users directly and talked to them. We had to try and understand their concerns.”
 
 Scott’s team learned that customers were becoming frustrated by delays during this connection step. As a result they improved the content on the page, added new loading animations, and surfacing data more quickly — a persona-informed change which had an immediate impact on overall activation. 
 
