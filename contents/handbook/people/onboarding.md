@@ -73,9 +73,10 @@ Based on this ongoing learning process, here are our **five rules for onboarding
       <summary>Looking for learning session ideas?</summary>
       <p>Here's a non-exhaustive list:</p>
       <ul>
-        <li>How an event gets from a client library all the way to the Live Events view</li>
+        <li>The <a href="/handbook/engineering/databases/event-ingestion">lifecycle of an event</a>, from a client library all the way to query results</li>
         <li>How we turn all our TSX and SCSS files into a fast frontend served from S3</li>
         <li>The architecture of PostHog Cloud</li>
+        <li>Trunk-based development - how we make use of feature flags</li>
         <li>Query nodes and how they're used throughout the app</li>
         <li>What the dead letter queue is for</li>
         <li>How PostHog experiment results are calculated</li>

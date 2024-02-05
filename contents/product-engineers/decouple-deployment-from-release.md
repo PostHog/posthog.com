@@ -38,7 +38,7 @@ Decoupling can lower the risk of issues, increase developer productivity, and im
 
 - Increase deployment frequency by removing the need to wait for a formal release. 
 
-- Developers can follow [trunk-based development](https://trunkbaseddevelopment.com/) and merge to `main` more often instead of waiting on branches. This increases shipping velocity and reduces merge conflicts.
+- Developers can follow [trunk-based development](/product-engineers/trunk-based-development) and merge to `main` more often instead of waiting on branches. This increases shipping velocity and reduces merge conflicts.
 
 - Developers can pass off releases to product managers and marketers once they deploy. They can coordinate elaborate launches and stakeholders without holding up development.
 
