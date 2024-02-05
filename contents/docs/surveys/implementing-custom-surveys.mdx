@@ -53,7 +53,7 @@ Thus you can use show your user a survey using code like this:
 posthog.getActiveMatchingSurveys((surveys) => {
     // Make sure you filter for surveys that are of type `"api"`. 
     // This prevents accidentally showing popover surveys to your users.
-    const filteredSurveys = surveys.filter(survey => survey.type === 'api'));
+    const filteredSurveys = surveys.filter(survey => survey.type === 'api');
     if (filteredSurveys.length > 0) {
         // show the survey using your custom UI
         showSurvey(filteredSurveys[0]);
