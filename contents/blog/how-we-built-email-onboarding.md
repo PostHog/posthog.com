@@ -8,54 +8,47 @@ featuredImage: ../images/blog/blog_onboarding.jpg
 featuredImageType: full
 ---
 
-At PostHog there's a lot of room for people to build things they have a personal interest in, even if it's outside their normal purview. That’s how I ended up owning PostHog’s email onboarding: I thought it was interesting and impactful, so I got involved. 
+Email is a powerful tool for getting users to engage with your product, but it can be really difficult to know how the best companies structure their onboarding email flows. You end up having to sign up to a bunch of them, then waiting and letting your inbox get flooded. 
 
-Now, with our email onboarding flow in its fifth iteration, I want to explain all the different versions we’ve been through and reflect on what we’ve learned.
+Often, you end up getting awful sales rep outreach emails from them _months_ later too. 
 
-## Onboarding 1.0 to Onboarding 1.5
-**RFC:** [Emails, Newsletters and Email Lists](https://github.com/PostHog/posthog.com/issues/3202)
-**RFC:** [Onboarding 1.5 emails](https://github.com/PostHog/posthog/issues/9784)
+We don’t do those sort of outreach emails. This is what we do instead, and how the email onboarding has changed over the last five iterations. 
 
-Back in 2022 we used Mailchimp to power email announcements and a monthly changelog email. We didn’t do much email onboarding for new users outside of transactional emails, and our changelog email was opt-in only, with just 660 people signed up. Internally nobody really knew what the email experience looked like, so I mapped it in Miro.
+## Onboarding 1.0: The one where it started costing lots
+
+Back in 2022 our onboarding flow was powered by Mailchimp and was very, _very_ simple. In fact, nobody actually knew what it looked like. So, I mapped it in [an RFC](https://github.com/PostHog/posthog.com/issues/3202).
 
 ![Onboarding 1.0](../images/blog/onboarding/onboarding_1.png)
 <caption>The first map we did of what our email onboarding flow looked like</caption>
 
-Turns out we only had basic re-engagement emails which were sent if we detected a user hadn’t ingested any data – nothing else, not even a welcome email.
+We didn’t do welcome emails for new users, and even our monthly changelog emails were only sent to 660 opted-in users. I decided to change this, imported 30,000+ users into that email list, and sent our Mailchimp costs skyrocketing. Whoops.
 
-The first change was to start sending monthly changelog emails to _all_ users and letting them opt-out instead. That meant bringing more than 30,000 users into the system overnight though and our Mailchimp costs skyrocketed. We started to look for alternative tooling.
+## Onboarding 2.0: The one where we chose a new email tool
 
-> **What we learned:**  It was important firstly to understand how other similar products handle onboarding. I signed up to Amplitude, LogRocket, and others and mapped their email flows too. We decided we would take a different approach to these products however, as many of them involved sales outreach from various business representatives. 
+Towards the end of 2022 we finally moved off of Mailchimp and on to Customer.io – a purchasing path which took several painful weeks and almost ten separate meetings.
 
-## Onboarding 2.0
-**RFC:** [Onboarding 2.0](https://github.com/PostHog/meta/issues/64)
+I’d observed from other companies that we needed to at least a welcome email for new users, and I wanted to add checks after 24, 96, and 168 hours to see if users had ingested events. If yes, we’d send them some basic usage advice. If no, we’d offer them help. 
 
 ![Onboarding 2.0](../images/blog/onboarding/onboarding_2.png)
 <caption>Onboarding 2.0 added more checks to try and validate ingestion and three simple introductory emails</caption>
 
-The goal for this flow was to lay a simple best-practice foundation. That would involve a welcome email and checks for successful ingestion after 24, 96, and 168 hours. After each check we’d send different advice to try and resolve issues – focusing on enabling users, rather than selling to them or offering demos.
+This didn’t perform as well as you’d think, mainly because the ingestion checks were unreliable. Users kept complaining about getting the wrong emails, so we threw this all out and moved to a new plan.
 
-We also sent different email content depending on if recipients were engineers or not, which is an idea we returned to again later. 
+> **Tip:** Something we learned for our welcome email was not to send it immediately after sign-up. The email is meant to give users some initial direction, but first they need to set up ingestion – we added a one hour delay so that users can get data to work with first. 
 
-Onboarding 2.0 took a while to launch and didn’t go live until December 2022. Part of this was due to a long sales process with our new provider – Customer.io is a fantastic tool, but the purchasing process took many weeks longer than we would have liked despite our efforts to force it along!
+## Onboarding 3.0: The one where we started tracking data
 
-> **What we learned:** An important thing about our welcome email is that we don’t send it immediately after sign-up. This email gives users tips on how to get started with PostHog, but we learned that they first need time to set up ingestion and send us some data – so we added a one hour delay before we send.
-
-## Onboarding 3.0
-**RFC:** [Messaging: Cloud Onboarding Emails 3.0](https://github.com/PostHog/meta/issues/123)
-
-There were countless small tweaks and changes in the interim, but in August 2023 I decided that we needed to overhaul the entire flow. Among the changes I introduced were…
-
-- Abandoning the logic around validating ingestion, which never worked as intended
-- Targeting users based on their role to give them recommendations focused on either [PostHog for Startups](/startups) or [Product for Engineers](https://newsletter.posthog.com/)
-- Adding checks to see if users were subscribed to products before we sent new emails that told them about them
-
-At this time PostHog offered two paid products – analytics and replays. I was worried sending one email for each would feel spammy, but this proved to be unfounded based on the performance data. 
+By Q3 2023, we were adding more and more new products to PostHog. We wanted to feature these in our email flow, but we were also worried about becoming spammy. Thankfully, now that we had Customer.io in place, we were able to judge this based on the data. 
 
 ![Onboarding 3.0](../images/blog/onboarding/onboarding_3.png)
 <caption>New emails for 3.0 tried to emphasize what was possible with PostHog, directing users to helpful blog content</caption>
 
-Performance data, which we could track in Customer.io, was becoming increasingly important. What was nice though was that, because the personalized recommendations were sent from [my email](mailto:joe@posthog.com), we also got a steady trickle of direct feedback to fuel further improvements. 
+Here’s what the data looked like. Our conversion event was a user log-in within one week of opening an email. We hadn’t yet thought of anything better. 
+
+- **Open rate:** 56%
+- **Click-through-rate:** 7.4%
+- **Conversion rate:** 3%
+- **Unsubscribe rate:** 0.6%
 
 > What does good look like for an email onboarding flow?
 > Benchmarks vary wildly by industry, implementation, and product. As a rule though, the guideline benchmarks I use from my experience in other startups are:
@@ -65,50 +58,40 @@ Performance data, which we could track in Customer.io, was becoming increasingly
 > - **Conversion rate:** Anything above 3% is OK. 5% is the goal. 
 > - **Unsubscribe rate:** Anything below 1% is OK. 0% is the goal.
 
-At this point our conversion event was a simple user login within 1 day of opening an email in the campaign and Onboarding 3.0 was performing roughly as follows:
+## Onboarding 3.1: The one where we added personalization
 
-- **Open rate:** 56%
-- **Click-through-rate:** 7.4%
-- **Conversion rate:** 3%
-- **Unsubscribe rate:** 0.6%
+Data is important, but I strongly believe it doesn’t tell the whole story. You also need feedback and intuition. Most of the feedback on our emails came in [3.1](https://github.com/PostHog/meta/issues/127), when we started sending personalized recommendations to users from [my personal email](mailto:joe@posthog.com).
 
-## Onboarding 3.1 - 3.3
-**RFCs:** [Messaging: Onboarding 3.1](https://github.com/PostHog/meta/issues/127) and [Onboarding 3.3: Tweaks & Experiments](https://github.com/PostHog/meta/issues/140)
-
-We removed the email which invited founders to join PostHog for Startups because it was _too_ successful and cannibalising teams into a free program. However, with a strong conversion rate proven for this personal approach, I wanted to expand the idea in other ways.
+How this works is simple: when a user signs up, they can optionally tell us what their role is. If their `role_at_organization` = `engineer` then it would trigger an email from me telling them about [our Product for Engineers newsletter](https://newsletter.posthog.com/). 
 
 ![Onboarding 3.1](../images/blog/onboarding/onboarding_31.png)
 <caption>Onboarding 3.1 was when we really started tailoring emails based on what we knew about users</caption>
 
-My hypothesis was that less technical users might struggle to get the most out of PostHog and would appreciate some friendly direction. [Actions](/docs/data/actions) fit the bill because they can be created without code. So, I added a `role_at_organization` check 12 hours after sign-up. This field is based on an optional field users can complete at sign-up.
+This email performed very well, with a 68% open rate and a 16% CTR. Best of all though, because it was personalized and came from me directly, it also earned a steady trickle of replies. I responded in kind and was able to collect feed in further improvements, including adding another option for `role_at_organization` = `founder`. 
 
-- If a user was a `founder` or `engineer` they still got a personal email from me inviting them to subscribe to [Product for Engineers]( ttps://newsletter.posthog.com/)
-- If they were `marketing`, `sales`, `product`, or ‘unknown’ they got tailored advice about how to create actions _unless_ they had already created an action 
+## Onboarding 3.3: The one where we added experiments
 
-This experiment bore immediate fruit, with a 6% click-through-rate and a steady trickle of user thank yous in my inbox. I admit, it was this thank yous that I found most persuasive.
+In [3.3](https://github.com/PostHog/meta/issues/140) we started running a series of tests and experiments. We also removed the `founder` targeted email, which invited teams to join [PostHog for Startups](/startups) because it was _too_ successful and cannibalising revenue.
 
-> **What we learned:** Other experiments included changing up subject lines and copy, as well as a personal email inviting users to try session replays. None performed well, though we did learn users prefer [Lottie’s](https://posthog.com/community/profiles/227) hedgehog art over screenshots of the app!
+Most of the tests we ran proved inconclusive, or outright failed. Subtle changes to subject lines or body copy had no noticeable impact. We learned that users did _slightly_ prefer [Lottie’s](https://posthog.com/community/profiles/227) hedgehog art over screenshots of the app – but the difference was a negligible 2-3% in CTR. 
 
-## Onboarding 4.0
-**RFC:** [Onboarding Emails 4.0](https://github.com/PostHog/meta/pull/150)
+One successful experiment we did roll out was adding more personalized emails for non-technical users. If `role_at_organization` = `marketing`, `sales` or `product` _and_ a user had not created an [action](/docs/data/actions) within 12 hours, I’d send them another personal tip. These emails averaged a steady 6% CTR and 54% open rate, so we kept them in, but again it was the steady trickle of thank yous that were most persuasive. 
 
-4.0 represented a _massive_ step up in the complexity of our flow, bringing in new logic that reflected the greater variety of products we offered by late 2023. It also built on top of the previous email flows, resulting in an onboarding experience that involved 28 separate emails – though the logic meant each user only got a fraction of that.
+## Onboarding 4.0: The one where we filtered by ICP
+
+[4.0](https://github.com/PostHog/meta/pull/150/) was a massive step up in complexity as a result of our growing number of features. By late 2023 the flow had 28 separate emails, of which users would get a maximum of 6 over several weeks. We worried this would be too many, but the data suggests users don’t mind getting emails which offer actual value.
 
 ![Onboarding 4.0](../images/blog/onboarding/onboarding_31.png)
 <caption>Onboarding 4.0 split high-ICP users out into their own email flow because our CS team would reach out directly</caption>
 
-The intent of Onboarding 4.0 was to increase the number of emails we sent and begin driving awareness of other tools in the PostHog suite. For this reason I changed the conversion event to mean a new subscription to any product within one week of opening an email in the flow. 
-
-However, because we had no way to gauge which product users were primarily interested in, Onboarding 4.0 takes the approach of assuming a specific order for upsell emails: analytics, replays, flags, surveys. I tried to stop these emails becoming too salesy, but it was still the case that a user who was interested mostly in surveys might not get an email about it for four weeks. This impacted performance significantly. 
+By this point we’d also changed our conversion event to mean if a user enabled billing for a new product within one week of opening an email. 
 
 - **Open rate:** 52%
 - **Click-through-rate:** 4%
-- **Conversion rate:** 6%
 - **Unsubscribe rate:** 0.4%
+- **Conversion rate:** 6%
 
-The good news, I felt, was that the low unsubscribe rate and high open rate reflected that the emails weren’t too salesy – and the conversion rate was healthy too! However the open rate and click-through rate were still down on the previous version.
-
-**What we learned:** An important step for 4.0 was using a scoring system, called `hubspot_score` to filter out users who seemed especially close to [our Ideal Customer Persona (ICP)](/founders/creating-ideal-customer-profile). High-scoring users would be filtered out of the standard flow so [our customer success team](/handbook/small-teams/customer-success) could give them high-touch support. 
+Around this point we also started filtering out [ICP](/founders/creating-ideal-customer-profile) teams using a scoring system implemented in Hubspot. If a user scored over a certain threshold they’d be moved out of the usual flow so [our customer success team](/handbook/small-teams/customer-success) could reach out directly. We’ve since removed this check because it felt too salesy and didn’t perform well, however. 
 
 ## Onboarding 5.0
 **RFC:** [Messaging: Onboarding 5.0](https://github.com/PostHog/meta/issues/172)
