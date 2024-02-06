@@ -65,26 +65,24 @@ export const PricingCalculator = () => {
 
     return (
         <section id="calculator" className={`${section} mb-12`}>
-            <h4 className="mb-1">Estimate your bill</h4>
+            <h4 className="mb-0">Estimate your bill</h4>
             <div className="flex justify-between">
-                <p>You can set a billing limit so you never get a surprise bill.</p>
-                <p>Subscribe to products individually after creating an account.</p>
+                <p className="text-sm opacity-75">You can set a billing limit so you never get a surprise bill.</p>
+                <p className="text-sm opacity-75">Subscribe to products individually after creating an account.</p>
             </div>
 
             <div className="grid grid-cols-16">
-                <div className="col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tl rounded-bl">
-                    name
-                </div>
-                <div className="col-span-4 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
+                <div className="col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tl rounded-bl"></div>
+                <div className="col-span-4 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
                     Pricing starts at...
                 </div>
-                <div className="col-span-4 !border-t-0 p-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
+                <div className="col-span-4 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
                     Calculate your price
                 </div>
-                <div className="col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
+                <div className="col-span-3 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
                     Estimated usage
                 </div>
-                <div className="col-span-2 text-right !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tr rounded-br">
+                <div className="col-span-2 text-right !border-t-0 py-1 pr-2 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tr rounded-br">
                     Subtotal
                 </div>
             </div>
@@ -115,7 +113,7 @@ export const PricingCalculator = () => {
                             <strong>{product.calcValue}</strong>{' '}
                             <span className="opacity-60 text-sm">{product.denomination}s/mo</span>
                         </div>
-                        <div className="col-span-2 pt-4 pb-4 text-right">
+                        <div className="col-span-2 pt-4 pr-2 pb-4 text-right">
                             <span className="font-bold">${product.calcValue}</span>
                         </div>
                     </React.Fragment>

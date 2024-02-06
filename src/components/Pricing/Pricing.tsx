@@ -242,7 +242,7 @@ const Pricing = (): JSX.Element => {
                     </div>
                     <div className="col-span-7">
                         <div className="@container border border-light dark:border-dark @lg:p-4 rounded-md bg-white dark:bg-accent-dark">
-                            <div>
+                            <div className="@lg:px-2">
                                 <div className="col-span-4">
                                     <div className="hidden @lg:grid grid-cols-16 items-center text-sm opacity-60 pt-2 px-3 pb-1">
                                         <div className="col-span-6">Products</div>
@@ -272,10 +272,13 @@ const Pricing = (): JSX.Element => {
 
                                     <div className="">
                                         {products.map((product, index) => (
-                                            <div key={index}>
+                                            <div
+                                                key={index}
+                                                className="py-1 px-2 @lg:!p-0 border-b border-light dark:border-dark @lg:border-transparent"
+                                            >
                                                 <Link
                                                     to={product.link}
-                                                    className="group grid grid-cols-8 @lg:grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark border-b border-light dark:border-dark @lg:border-transparent pt-3 px-4 pb-4 @lg:px-2 @lg:py-1 @lg:rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
+                                                    className="group grid grid-cols-8 @lg:grid-cols-16 items-center text-primary dark:text-primary-dark rounded hover:text-primary dark:hover:text-primary-dark p-2 @lg:px-2 @lg:py-1 @lg:rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
                                                 >
                                                     <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center @lg:pl-1 mb-1 @lg:mb-0">
                                                         {product.icon}
