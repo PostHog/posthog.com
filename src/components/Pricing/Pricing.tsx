@@ -440,7 +440,7 @@ const Pricing = (): JSX.Element => {
                         } transition duration-500 ease-in-out transform`}
                     >
                         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
-                            <div className="grid grid-cols-16 mb-1 w-[1000px]">
+                            <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
                                 <div className="col-span-4 px-3 py-1">&nbsp;</div>
                                 <div className="col-span-3 px-3 py-1">
                                     <strong className="text-sm opacity-75">Totally free</strong>
@@ -456,7 +456,7 @@ const Pricing = (): JSX.Element => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark w-[1000px]">
+                            <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
                                 {planBreakdown.map((row, index) =>
                                     row.sectionHeader ? (
                                         <div
