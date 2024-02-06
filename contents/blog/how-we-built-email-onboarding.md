@@ -12,7 +12,7 @@ Email is a powerful tool for getting users to engage with your product, but it c
 
 Often, you end up getting awful sales rep outreach emails from them _months_ later too. 
 
-We don’t do those sort of outreach emails. This is what we do instead, and how the email onboarding has changed over the last five iterations. 
+We don’t do those sort of outreach emails. This is what we do instead, and how the email onboarding has changed over the last five iterations. We think it performs pretty well and defies the idea that developers don't like email marketing - but we've included performance data so you can judge for yourself. 
 
 ## Onboarding 1.0: The one where it started costing lots
 
