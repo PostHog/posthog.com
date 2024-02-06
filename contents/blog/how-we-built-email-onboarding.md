@@ -54,7 +54,7 @@ Our conversion event was a user log-in within one week of opening an email. We h
 
 Based on this high open rate and low unsubscribe rate we felt that users didn't mind getting the emails, and the click-through rate suggested they liked what they read. So, we continued adding more messages. 
 
-> What does good look like for an email onboarding flow?
+> **What does good look like for an email onboarding flow?**
 > Benchmarks vary wildly by industry, implementation, and product. As a rule though, the guideline benchmarks I use from my experience in other startups are:
 >
 > - **Open rate:** Anything above 40% is OK. 50% is the goal.
