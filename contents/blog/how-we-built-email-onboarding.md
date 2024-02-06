@@ -21,7 +21,9 @@ Back in 2022 our onboarding flow was powered by Mailchimp and was very, _very_ s
 ![Onboarding 1.0](../images/blog/onboarding/onboarding_1.png)
 <caption>The first map we did of what our email onboarding flow looked like</caption>
 
-We didn’t do welcome emails for new users, and even our monthly changelog emails were only sent to 660 opted-in users. I decided to change this, imported 30,000+ users into that email list (covered by our T&Cs), and sent our Mailchimp costs skyrocketing. Whoops.
+We didn’t do welcome emails for new users, and even our monthly changelog emails were only sent to 660 opted-in users. I decided to change this and imported 30,000+ users into that email list. The move was covered by our T&Cs and, because it was one email a month about actual product updates, we figured nobody would mind. The good news was that we were right and didn't get a single complaint and only a handful of unsubscribes.
+
+The bad news is that it sent our Mailchimp costs skyrocketing. 
 
 ## Onboarding 2.0: The one where we chose a new email tool
 
