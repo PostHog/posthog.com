@@ -11,11 +11,11 @@ featuredImageType: full
 category: Startups
 ---
 
-> Each month, we speak to a team enrolled in PostHog for Startups about the way they work. This time, we spoke to [Puzzle](https://puzzle.io/), an accountancy platform for early-stage startups, about how they define and use their buyer persona. 
+> Each month, we speak to a team enrolled in PostHog for Startups about the way they work. This time, we spoke to [Puzzle](https://puzzle.io/?utm_medium=newsletter&utm_source=posthog_newsletter&utm_campaign=posthog_startupfeature), an accountancy platform for early-stage startups, about how they define and use their buyer persona. 
 
 Building a persona for your ideal or target customers is one of the most challenging but essential steps for growing your product. Not only will it help you make product and pricing decisions, it will also clarify your value proposition and dictate how you judge successes and failures.
 
-We’ve previously documented [how we defined our personas](/founders/creating-ideal-customer-profile), but not all companies approach the task in the same way. So, we spoke to the team at [Puzzle](https://puzzle.io/) about how they defined their persona, what impact the definition had, and what recommendations they had for others...
+We’ve previously documented [how we defined our personas](/founders/creating-ideal-customer-profile), but not all companies approach the task in the same way. So, we spoke to [Puzzle's](https://puzzle.io/?utm_medium=newsletter&utm_source=posthog_newsletter&utm_campaign=posthog_startupfeature) Scott Cormnier, Head of Product (Growth & Monetization) about how the team defined their persona, what impact the definition had, and what recommendations they had for others...
 
 ## 1. Collect both qualitative and quantitative data
 
