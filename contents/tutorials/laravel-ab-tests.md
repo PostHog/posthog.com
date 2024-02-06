@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Laravel
-date: 2024-02-06
+date: 2024-02-07
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
@@ -36,7 +36,7 @@ Next, replace the code in `resources/views/welcome.blade.php` with a simple head
 </html>
 ```
 
-Lastly, replace the code in `routes/web.php` with a route to return our view:
+Replace the code in `routes/web.php` with a route to return our view:
 
 ```php file=routes/web.php
 <?php
@@ -57,7 +57,7 @@ Run `php artisan serve` and navigate to `http://127.0.0.1:8000` to see our app i
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, run `composer require posthog/posthog-php` to install [PostHog’s PHP SDK](docs/libraries/php).
+To start, run `composer require posthog/posthog-php` to install [PostHog’s PHP SDK](/docs/libraries/php).
 
 Next, we initialize PostHog in the `boot` method of `app/Providers/AppServiceProvider.php`. Replace the existing code in that file with the following:
 
