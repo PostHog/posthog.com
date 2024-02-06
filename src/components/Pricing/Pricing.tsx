@@ -140,9 +140,9 @@ const plans: PlanData[] = [
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     <div>
         <h4 className="text-lg mb-2">{planData.title}</h4>
-        <div className="flex flex-col border border-light dark:border-dark bg-white dark:bg-accent-dark rounded shrink-0 basis-[80vw] xs:basis-[55vw] sm:basis-[40vw]">
-            <div className="flex flex-col h-full pt-3 px-4 xl:px-4 pb-6">
-                <div className="mb-4">
+        <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded shrink-0 basis-[80vw] xs:basis-[55vw] sm:basis-[40vw]">
+            <div className="flex flex-col h-full gap-4 pt-3 px-4 xl:px-4 pb-6">
+                <div>
                     <h4 className="inline text-lg">
                         {planData.price != 'Free' && planData.price != 'Custom pricing' && (
                             <span className="text-sm opacity-60 font-normal">Starts at</span>
@@ -155,7 +155,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
                     &nbsp;
                     <p className="inline opacity-75 text-sm">{planData.priceSubtitle}</p>
                 </div>
-                <ul className="p-0 pb-8 list-none flex flex-col gap-2 [&_li]:text-sm xl:[&_li]:text-[15px]">
+                <ul className="p-0 list-none flex flex-col gap-2 [&_li]:text-sm xl:[&_li]:text-[15px]">
                     {planData.features.map((feature, index) => (
                         <li key={index}>{feature}</li>
                     ))}
@@ -299,12 +299,12 @@ const Pricing = (): JSX.Element => {
                                         <div className="col-span-1"></div>
                                     </div>
 
-                                    <div className="divide-y space-y-0.5 divide-light dark:divide-dark">
+                                    <div className="">
                                         {products.map((product, index) => (
                                             <div key={index}>
                                                 <Link
                                                     to={product.link}
-                                                    className="group grid grid-cols-8 md:grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
+                                                    className="group grid grid-cols-8 md:grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
                                                 >
                                                     <div className="col-span-7 md:col-span-6 flex gap-2 items-center md:pl-1 mb-1 md:mb-0">
                                                         {product.icon}
@@ -358,31 +358,22 @@ const Pricing = (): JSX.Element => {
                                         ))}
                                     </div>
 
-                                    <div className="hidden md:grid grid-cols-16 items-center text-sm opacity-60 mb-2">
-                                        <div className="col-span-6">
-                                            <strong>Every month</strong>
-                                        </div>
-                                        <div className="col-span-5">
-                                            <strong>Free</strong>
-                                        </div>
-                                        <div className="col-span-4">
-                                            <span
-                                                onClick={() => {
-                                                    const element = document.getElementById('plan-comparison')
-                                                    const headerHeight = document.getElementById('header').offsetHeight // replace 'header' with the id of your header
-                                                    scroll.scrollTo(element.offsetTop - 20 - headerHeight, {
-                                                        duration: 800,
-                                                        delay: 0,
-                                                        smooth: 'easeInOutQuart',
-                                                    })
-                                                }}
-                                                className="cursor-pointer text-red dark:text-yellow font-semibold"
-                                            >
-                                                Estimate your monthly bill{' '}
-                                                <IconArrowRight className="w-4 h-4 rotate-90 inline-block" />
-                                            </span>
-                                        </div>
-                                        <div className="col-span-1"></div>
+                                    <div className="hidden md:grid border-t border-light dark:border-dark items-center text-sm text-right mt-1 pt-3">
+                                        <span
+                                            onClick={() => {
+                                                const element = document.getElementById('plan-comparison')
+                                                const headerHeight = document.getElementById('header').offsetHeight // replace 'header' with the id of your header
+                                                scroll.scrollTo(element.offsetTop - 20 - headerHeight, {
+                                                    duration: 800,
+                                                    delay: 0,
+                                                    smooth: 'easeInOutQuart',
+                                                })
+                                            }}
+                                            className="cursor-pointer text-red dark:text-yellow font-semibold"
+                                        >
+                                            Estimate your monthly bill{' '}
+                                            <IconArrowRight className="w-4 h-4 rotate-90 inline-block" />
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -396,7 +387,7 @@ const Pricing = (): JSX.Element => {
                     <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
                         <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Plans</h3>
                         <div className="col-span-4 overflow-x">
-                            <div className="flex mr-8 md:mr-0 md:grid grid-cols-4 gap-4 mb-8 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
+                            <div className="flex mr-8 md:mr-0 md:grid grid-cols-4 gap-4 mb-16 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
                                 {plans.map((plan, index) => (
                                     <Plan key={index} planData={plan} />
                                 ))}
