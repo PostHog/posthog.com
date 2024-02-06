@@ -8,6 +8,8 @@ tags:
   - Feature management
   - Feature flags
   - Product engineers
+crosspost:
+  - Blog  
 ---
 
 ## What is a feature flag?

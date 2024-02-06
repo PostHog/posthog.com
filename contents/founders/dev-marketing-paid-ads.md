@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Marketing
+crosspost:
+  - Blog  
 ---
 
 Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to [marketing to engineers](/blog/dev-marketing-for-startups). Paid ads is a slightly scary area because it is _very_ easy to waste a bunch of money doing stuff that doesn't work. And a lot of it doesn't work. 

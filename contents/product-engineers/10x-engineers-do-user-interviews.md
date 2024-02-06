@@ -11,7 +11,8 @@ tags:
   - Culture
   - People
 crosspost:
-  - Founders  
+  - Founders
+  - Blog  
 ---
 
 I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand and care about their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems.

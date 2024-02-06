@@ -9,6 +9,8 @@ tags:
   - Revenue
   - Product
   - Founders
+crosspost:
+  - Blog  
 ---
 
 PostHog started as a single product company. We just sold product analytics with a bunch of large extra features thrown in – session replay, feature flagging, experimentation, and even a Customer Data Platform.

@@ -8,6 +8,8 @@ tags:
   - Founders
   - Product
   - Product-market fit
+crosspost:
+  - Blog  
 ---
 
 In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. 

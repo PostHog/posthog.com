@@ -8,6 +8,8 @@ tags:
  - Feature flags
  - Product engineers
  - Feature management
+crosspost:
+  - Blog 
 ---
 
 In their simplest form, feature flags enable you to turn on or off features or code paths for certain users. But you can do so much more if you apply some careful planning and implementation.

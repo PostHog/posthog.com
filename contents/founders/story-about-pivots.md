@@ -8,7 +8,9 @@ featuredImageType: full
 tags:
   - Founders
   - Product-market fit
-  - Product  
+  - Product
+crosspost:
+  - Blog    
 ---
 
 PostHog has pivoted _a lot_.

@@ -7,7 +7,9 @@ featuredImageType: full
 tags:
  - Product engineers
  - Engineering
- - Feature management
+ - Feature managemen
+crosspost:
+  - Blog 
 ---
 
 Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break your app, or cause other issues. Without the right processes in place, the safety of your releases is a big question mark.

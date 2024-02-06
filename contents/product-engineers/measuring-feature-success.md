@@ -12,6 +12,7 @@ tags:
  - Product
 crosspost:
   - Founders
+  - Blog
 ---
 
 Is my new feature working? It's the question PostHog exists to answer – we even have [an entire team dedicated to it](/handbook/small-teams/feature-success). 

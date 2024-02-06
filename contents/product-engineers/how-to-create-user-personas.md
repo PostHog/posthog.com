@@ -9,6 +9,8 @@ tags:
   - User research
   - Product engineers
   - Product
+crosspost:
+  - Blog  
 ---
 
 ## What is a user persona? 
