@@ -59,9 +59,9 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 To start, run `composer require posthog/posthog-php` to install [PostHog’s PHP SDK](docs/libraries/php).
 
-Next, we initialize PostHog in the `boot` method of `Providers/AppServiceProvider.php`. Replace the existing code in that file with the following:
+Next, we initialize PostHog in the `boot` method of `app/Providers/AppServiceProvider.php`. Replace the existing code in that file with the following:
 
-```php file=Providers/AppServiceProvider.php
+```php file=app/Providers/AppServiceProvider.php
 <?php
 
 namespace App\Providers;
@@ -85,7 +85,7 @@ class AppServiceProvider extends ServiceProvider
 
 You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings). 
 
-Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event in our route: 
+Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event with PostHog in our route: 
 
 ```php file=routes/web.php
 <?php
@@ -106,7 +106,7 @@ Route::get('/', function () {
 });
 ```
 
-With this set up, restart your app and then refresh your browser a few times. You should now see the event captured in your [PostHog activity tab](https://us.posthog.com/events).
+With this set up, restart your app and then refresh your browser a few times. You should now see the captured event in your [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsInPostHogLight} 
