@@ -68,7 +68,8 @@ export const useProducts = () => {
             denomination: 'event',
             price: '0.00031',
             link: '/pricing?product=product-analytics',
-            calcValue: <>{eventNumber.toLocaleString()}</>,
+            calcVolume: <>{eventNumber.toLocaleString()}</>,
+            calcCost: <>{productAnalyticsCost.toLocaleString()}</>,
             slider: (
                 <LogSlider
                     stepsInRange={100}
@@ -87,7 +88,8 @@ export const useProducts = () => {
             denomination: 'recording',
             price: '0.0050',
             link: '/pricing?product=session-replay',
-            calcValue: <>{sessionRecordingEventNumber.toLocaleString()}</>,
+            calcVolume: <>{sessionRecordingEventNumber.toLocaleString()}</>,
+            calcCost: <>{sessionRecordingCost.toLocaleString()}</>,
             slider: (
                 <LogSlider
                     stepsInRange={100}
@@ -106,7 +108,8 @@ export const useProducts = () => {
             denomination: 'request',
             price: '0.0001',
             link: '/pricing?product=feature-flags',
-            calcValue: <>{featureFlagNumber.toLocaleString()}</>,
+            calcVolume: <>{featureFlagNumber.toLocaleString()}</>,
+            calcCost: <>{featureFlagCost.toLocaleString()}</>,
             slider: (
                 <LogSlider
                     stepsInRange={100}
@@ -125,6 +128,8 @@ export const useProducts = () => {
             denomination: '',
             price: '',
             link: '/pricing?product=ab-testing',
+            calcVolume: '',
+            calcCost: '',
             message: <em className="font-normal opacity-75">Billed with feature flags</em>,
             slider: '',
         },
@@ -135,7 +140,8 @@ export const useProducts = () => {
             denomination: 'response',
             price: '0.2000',
             link: '/pricing?product=surveys',
-            calcValue: <>{surveyResponseNumber.toLocaleString()}</>,
+            calcVolume: <>{surveyResponseNumber.toLocaleString()}</>,
+            calcCost: <>{surveyResponseCost.toLocaleString()}</>,
             slider: (
                 <LogSlider
                     stepsInRange={100}

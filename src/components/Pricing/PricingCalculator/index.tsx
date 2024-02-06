@@ -76,13 +76,13 @@ export const PricingCalculator = () => {
                 <div className="col-span-4 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
                     Pricing starts at...
                 </div>
-                <div className="col-span-4 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
+                <div className="col-span-4 xl:col-span-5 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
                     Calculate your price
                 </div>
                 <div className="col-span-3 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
                     Estimated usage
                 </div>
-                <div className="col-span-2 text-right !border-t-0 py-1 pr-2 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tr rounded-br">
+                <div className="col-span-2 xl:col-span-1 text-right !border-t-0 py-1 pr-2 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tr rounded-br">
                     Subtotal
                 </div>
             </div>
@@ -90,31 +90,36 @@ export const PricingCalculator = () => {
             <div className="grid grid-cols-16 [&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light">
                 {products.map((product, index) => (
                     <React.Fragment key={index}>
-                        <div className="col-span-3 pt-4 pb-4">
+                        <div className="col-span-3 pt-4 pb-4 pr-4">
                             <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center pl-2 mb-1 @lg:mb-0">
                                 {product.icon}
                                 <span className="font-semibold text-[15px]">{product.name}</span>
                             </div>
                         </div>
-                        <div className="col-span-4 pt-4 pb-4">
+                        <div className="col-span-4 pt-4 pb-4 pr-8">
                             {product.price && (
                                 <>
-                                    <strong>${product.price}</strong>
-                                    <span className="opacity-50 font-medium text-[13px]">/{product.denomination}s</span>
-                                    <br />
-                                    <em className="opacity-70 font-medium text-[13px]">
-                                        First {product.freeLimit} {product.denomination}s free every month
-                                    </em>
+                                    <p className="mb-0.5">
+                                        <strong>${product.price}</strong>
+                                        <span className="opacity-50 font-medium text-[13px]">
+                                            /{product.denomination}s
+                                        </span>
+                                    </p>
+                                    <p className="opacity-70 leading-tight font-medium text-[13px] mb-0">
+                                        <em>
+                                            First {product.freeLimit} {product.denomination}s free every month
+                                        </em>
+                                    </p>
                                 </>
                             )}
                         </div>
-                        <div className="col-span-4 pt-4 pb-4 pr-8">{product.slider}</div>
+                        <div className="col-span-4 xl:col-span-5 pt-5 pb-4 pr-8">{product.slider}</div>
                         <div className="col-span-3 pt-4 pb-4">
-                            <strong>{product.calcValue}</strong>{' '}
+                            <strong>{product.calcVolume}</strong>{' '}
                             <span className="opacity-60 text-sm">{product.denomination}s/mo</span>
                         </div>
-                        <div className="col-span-2 pt-4 pr-2 pb-4 text-right">
-                            <span className="font-bold">${product.calcValue}</span>
+                        <div className="col-span-2 xl:col-span-1 pt-4 px-2 pb-4 text-right">
+                            <span className="font-bold">${product.calcCost}</span>
                         </div>
                     </React.Fragment>
                 ))}
