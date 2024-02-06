@@ -27,7 +27,6 @@ touch main.go
 
 Next, import `fmt` and `net/http` into `main.go`. We use them to run an HTTP server that returns a basic HTML page on `localhost:8080`:
 
-
 ```go file=main.go
 package main
 
@@ -43,7 +42,7 @@ func main() {
       <!DOCTYPE html>
       <html>
       <body>
-        <h1>Node A/B testing tutorial</h1>
+        <h1>Go A/B testing tutorial</h1>
         <p>%s</p>
       </body>
       </html>
@@ -177,22 +176,7 @@ To implement the A/B test, we:
       paragraphText = "Error"
     }
 
-    htmlContent := fmt.Sprintf(`
-      <!DOCTYPE html>
-      <html>
-      <body>
-        <h1>Go A/B testing tutorial</h1>
-        <p>%s</p>
-      </body>
-      </html>
-    `, paragraphText)
-
-    client.Enqueue(posthog.Capture{
-      DistinctId: distinctId,
-      Event:      "$pageview",
-    })
-    fmt.Fprintf(w, htmlContent)
-  })
+    // rest of your code
 
 // rest of your code
 ```
