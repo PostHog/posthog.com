@@ -17,6 +17,7 @@ import Lottie from 'react-lottie'
 import Plans, { CTA } from './Plans'
 import Link from 'components/Link'
 import {
+    IconCheck,
     IconGraph,
     IconChevronDown,
     IconRewindPlay,
@@ -37,7 +38,7 @@ interface PlanData {
     features: React.ReactNode[]
 }
 
-const plans: PlanData[] = [
+const planSummary: PlanData[] = [
     {
         title: 'Totally free',
         price: 'Free',
@@ -126,6 +127,43 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     </div>
 )
 
+const planBreakdown = [
+    {
+        key: 'Base price',
+        tooltip: 'Tooltip content',
+        freePlan: 'Free forever',
+        payPerUsePlan: '$0',
+        teamsPlan: '$450/mo',
+        enterprisePlan: 'Contact us',
+    },
+    {
+        key: 'Usage-based pricing',
+        tooltip: 'Tooltip content',
+        freePlan: '',
+        payPerUsePlan: 'Yes',
+        teamsPlan: 'Yes',
+        enterprisePlan: 'Volume discounts available',
+    },
+    {
+        sectionHeader: 'Support & training',
+    },
+    {
+        key: 'Community support',
+        freePlan: true,
+        payPerUsePlan: true,
+        teamsPlan: true,
+        enterprisePlan: true,
+    },
+    {
+        key: 'Slack-based support',
+        tooltip: 'Dedicated channel',
+        freePlan: false,
+        payPerUsePlan: '$2k+/mo spend',
+        teamsPlan: '$2k+/mo spend',
+        enterprisePlan: true,
+    },
+]
+
 export const section = cntl`
     max-w-6xl
     xl:max-w-7xl
@@ -197,6 +235,8 @@ const Pricing = (): JSX.Element => {
     useEffect(() => {
         setGroupsToShow(getGroupsToShow())
     }, [search])
+
+    const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
     return (
         <Layout
@@ -371,15 +411,109 @@ const Pricing = (): JSX.Element => {
                         <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Plans</h3>
                         <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
                             <div className="grid grid-cols-[repeat(4,_minmax(260px,_1fr))] lg:grid-cols-4 gap-4 mb-12 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
-                                {plans.map((plan, index) => (
+                                {planSummary.map((plan, index) => (
                                     <Plan key={index} planData={plan} />
                                 ))}
                             </div>
                         </div>
                         <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
-                            All plans include unlimited team members, and unlimited tracked users.{' '}
-                            <span className="text-red dark:text-yellow font-semibold">See full plan comparison</span>
+                            All plans include unlimited team members and no limited on tracked users.{' '}
+                            <span
+                                className="text-red dark:text-yellow font-semibold cursor-pointer"
+                                onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
+                            >
+                                {isPlanComparisonVisible ? 'Hide full plan comparison' : 'Show full plan comparison'}
+                            </span>
                         </p>
+                    </section>
+
+                    <section
+                        className={`${section} ${
+                            isPlanComparisonVisible
+                                ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
+                                : 'overflow-y-hidden invisible max-h-0 opacity-0'
+                        } transition duration-500 ease-in-out transform`}
+                    >
+                        <div className="grid grid-cols-16 mb-1">
+                            <div className="col-span-4 px-3 py-1">&nbsp;</div>
+                            <div className="col-span-3 px-3 py-1">
+                                <strong className="text-sm opacity-75">Totally free</strong>
+                            </div>
+                            <div className="col-span-3 px-3 py-1">
+                                <strong className="text-sm opacity-75">Usage-based</strong>
+                            </div>
+                            <div className="col-span-3 px-3 py-1">
+                                <strong className="text-sm opacity-75">Usage-based for teams</strong>
+                            </div>
+                            <div className="col-span-3 px-3 py-1">
+                                <strong className="text-sm opacity-75">Enterprise</strong>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark">
+                            {planBreakdown.map((row, index) =>
+                                row.sectionHeader ? (
+                                    <div
+                                        key={index}
+                                        className="col-span-full bg-accent dark:bg-accent-dark font-bold px-3 py-1 text-sm"
+                                    >
+                                        {row.sectionHeader}
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                            <Tooltip content={row.tooltip}>
+                                                <strong>{row.key}</strong>
+                                            </Tooltip>
+                                        </div>
+                                        <div className="col-span-3 px-3 py-2 text-sm">
+                                            {typeof row.freePlan === 'boolean' ? (
+                                                row.freePlan ? (
+                                                    <IconCheck className="w-5 h-5 text-green" />
+                                                ) : (
+                                                    ''
+                                                )
+                                            ) : (
+                                                row.freePlan
+                                            )}
+                                        </div>
+                                        <div className="col-span-3 px-3 py-2 text-sm">
+                                            {typeof row.payPerUsePlan === 'boolean' ? (
+                                                row.payPerUsePlan ? (
+                                                    <IconCheck className="w-5 h-5 text-green" />
+                                                ) : (
+                                                    ''
+                                                )
+                                            ) : (
+                                                row.payPerUsePlan
+                                            )}
+                                        </div>
+                                        <div className="col-span-3 px-3 py-2 text-sm">
+                                            {typeof row.teamsPlan === 'boolean' ? (
+                                                row.teamsPlan ? (
+                                                    <IconCheck className="w-5 h-5 text-green" />
+                                                ) : (
+                                                    ''
+                                                )
+                                            ) : (
+                                                row.teamsPlan
+                                            )}
+                                        </div>
+                                        <div className="col-span-3 px-3 py-2 text-sm">
+                                            {typeof row.enterprisePlan === 'boolean' ? (
+                                                row.enterprisePlan ? (
+                                                    <IconCheck className="w-5 h-5 text-green" />
+                                                ) : (
+                                                    ''
+                                                )
+                                            ) : (
+                                                row.enterprisePlan
+                                            )}
+                                        </div>
+                                    </>
+                                )
+                            )}
+                        </div>
                     </section>
                 </>
             )}
