@@ -77,7 +77,7 @@ Best of all though, because it was personalized and came from me directly, it al
 
 ## Onboarding 3.3: The one where we added experiments
 
-In [3.3](https://github.com/PostHog/meta/issues/140) we started running a series of tests and experiments. We added and then removed a `founder` targeted email, which invited teams to join [PostHog for Startups](/startups), because it was _too_ successful and cannibalised revenue.
+In [3.3](https://github.com/PostHog/meta/issues/140) we started running a series of tests and experiments. We  removed the `founder` targeted email, which invited teams to join [PostHog for Startups](/startups), because it was _too_ successful and cannibalised revenue.
 
 Most of the tests we ran proved inconclusive, or outright failed. Subtle changes to subject lines or body copy had no noticeable impact. We learned that users did _slightly_ prefer [Lottie’s](https://posthog.com/community/profiles/227) hedgehog art over screenshots of the app – but the difference was a negligible 1-2% in CTR. 
 
