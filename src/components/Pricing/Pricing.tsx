@@ -209,12 +209,23 @@ const Pricing = (): JSX.Element => {
         >
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
+            <div className="max-w-screen overflow-x-hidden">
+                <div className="scale-[1.75] sm:scale-[1.4] md:scale-[.75] lg:hidden py-8 pl-24 my-4 xs:pl-32 sm:pl-28 md:py-0 md:pl-0 -mr-0 md:-ml-[12.5%] md:my-0">
+                    <Lottie
+                        options={{
+                            loop: false,
+                            autoplay: true,
+                            animationData: tractorHog,
+                        }}
+                    />
+                </div>
+            </div>
             <section className="w-screen overflow-x-hidden">
                 <div
-                    className={`grid md:grid-cols-12 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
+                    className={`grid lg:grid-cols-12 lg:mt-8  lg:gap-x-8 xl:gap-x-4 gap-y-8 lg:gap-y-0 mb-4 lg:px-4 items-center ${section}`}
                 >
                     <div className="col-span-5">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Plans &amp; pricing</h1>
+                        <h1 className="text-4xl sm:text-4xl md:text-5xl mt-0 mb-4">Plans &amp; pricing</h1>
                         <p className="text-base font-medium opacity-60 leading-tight mb-4">
                             PostHog offers usage-based pricing, not{' '}
                             <Tooltip
@@ -330,7 +341,7 @@ const Pricing = (): JSX.Element => {
                                         ))}
                                     </div>
 
-                                    <div className="hidden @lg:grid border-t border-light dark:border-dark items-center text-sm text-right mt-1 px-4 py-3">
+                                    <div className=" @lg:grid @lg:border-t border-light dark:border-dark items-center text-sm text-right @lg:mt-1 px-4 py-3">
                                         <span
                                             onClick={() => {
                                                 const element = document.getElementById('calculator')
