@@ -158,3 +158,14 @@ We use GitHub Projects to track the status of Issues in an easily viewable way. 
 You can also assign an Issue to a specific person, and tag it with a relevant label - use these to help people filter more easily.
 
 Each Small Team has its own Project for tracking their Issues - [full list here](https://github.com/orgs/PostHog/projects). Most teams run two week sprints - as part of onboarding, you will be invited to the relevant planning meetings. 
+
+## 30/60/90 day check-ins
+
+As part of the onboarding checklist the ops team will schedule reminders for a new employees manager at the 30, 60 & 90 day mark to serve as a reminder that these checkpoints have arrived. There is no formal requirement for a manager to do anything different at this stage but there are a few helpful suggestions below to help the employee experience and to make sure everything is on track with the onboarding and the [first 3 months probationary period](https://posthog.com/handbook/people/compensation#notice-period) will be passed.
+
+- Around the 30 day mark it's good for the manager to provide initial feedback especially if there is constructive feedback that needs to be given to ensure the person passes probation. Separately, it's also a good time to reinforce the positive work that has been done by somebody on the right track.
+- Around the 60 day mark if things are going well, the manager might want to give an indication of this as it can ease any looming fears. A member of the Ops team will reach out at this time to seek clarity with the manager on whether there are any concerns of the new employee not passing their probation.
+- The 60 day mark is likely the latest point a manager should be flagging any issues in performance with a new starter, if there are concerns it's best to raise this with the exec team as soon as possible to come up with a plan on how to move forward.
+- Feedback is a really important part of the onboarding process and as a manager it's a good idea to ensure the new employee receives feedback from their peers, either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a manager how best to approach that. As a manager you can also have blind spots on performance so checking in with their peers can be helpful and can be done during your normal 1-1s.
+
+These check-ins are designed to ensure every new start is setup for success and every manager will deal with that slightly differently but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on if anything. 
