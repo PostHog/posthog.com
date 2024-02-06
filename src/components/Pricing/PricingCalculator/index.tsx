@@ -87,22 +87,22 @@ export const PricingCalculator = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-16 [&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light">
+            <div className="grid grid-cols-16 md:[&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light">
                 {products.map((product, index) => (
                     <React.Fragment key={index}>
-                        <div className="col-span-3 pt-4 pb-4 pr-4">
-                            <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center pl-2 mb-1 @lg:mb-0">
+                        <div className="col-span-16 border-t md:border-t-0 border-light dark:border-dark md:col-span-3 pt-4 md:pb-4 md:pr-4">
+                            <div className="col-span-7 @md:col-span-6 flex gap-2 items-center pl-2 mb-1 @md:mb-0">
                                 {product.icon}
                                 <span className="font-semibold text-[15px]">{product.name}</span>
                             </div>
                         </div>
-                        <div className="col-span-4 pt-4 pb-4 pr-8">
+                        <div className="col-span-16 md:col-span-4 pl-9 pb-6 md:pl-0 md:pt-4 md:pb-4 md:pr-8">
                             {product.price && (
                                 <>
                                     <p className="mb-0.5">
                                         <strong>${product.price}</strong>
                                         <span className="opacity-50 font-medium text-[13px]">
-                                            /{product.denomination}s
+                                            /{product.denomination}
                                         </span>
                                     </p>
                                     <p className="opacity-70 leading-tight font-medium text-[13px] mb-0">
@@ -113,12 +113,14 @@ export const PricingCalculator = () => {
                                 </>
                             )}
                         </div>
-                        <div className="col-span-4 xl:col-span-5 pt-5 pb-4 pr-8">{product.slider}</div>
-                        <div className="col-span-3 pt-4 pb-4">
+                        <div className="col-span-16 md:col-span-4 xl:col-span-5 pl-9 pb-8 md:pt-5 md:pb-4 md:pr-8 md:pl-0">
+                            {product.slider}
+                        </div>
+                        <div className="col-span-12 md:col-span-3 pl-9 md:pl-0 md:pt-4 pb-4">
                             <strong>{product.calcVolume}</strong>{' '}
                             <span className="opacity-60 text-sm">{product.denomination}s/mo</span>
                         </div>
-                        <div className="col-span-2 xl:col-span-1 pt-4 px-2 pb-4 text-right">
+                        <div className="col-span-4 md:col-span-2 xl:col-span-1 pl-9 md:pt-4 md:px-2 md:pb-4 md:pl-0 text-right">
                             <span className="font-bold">${product.calcCost}</span>
                         </div>
                     </React.Fragment>
@@ -149,7 +151,7 @@ export const PricingCalculator = () => {
                 <div>
                     <h4 className="border-b border-border dark:border-dark pb-2 mb-3">Discounts</h4>
 
-                    <div className="pl-10 relative mb-4">
+                    <div className="pl-9 relative mb-4">
                         <span className="w-6 h-6 absolute top-0 left-1 opacity-50">
                             <IconPercentage />
                         </span>
@@ -158,7 +160,7 @@ export const PricingCalculator = () => {
                         <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
                     </div>
 
-                    <div className="pl-10 relative mb-4">
+                    <div className="pl-9 relative mb-4">
                         <span className="w-6 h-6 absolute top-0 left-1 opacity-50">
                             <IconPercentage />
                         </span>

@@ -154,6 +154,9 @@ module.exports = {
             gridTemplateColumns: {
                 16: 'repeat(16, minmax(0, 1fr))',
             },
+            gridColumn: {
+                'span-16': 'span 16 / span 16',
+            },
             colors: {
                 primary: '#151515',
                 'primary-dark': '#EEEFE9',
