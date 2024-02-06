@@ -283,10 +283,10 @@ const Pricing = (): JSX.Element => {
                         <CTA />
                     </div>
                     <div className="col-span-7">
-                        <div className="border border-light dark:border-dark p-4 bg-white dark:bg-accent-dark">
+                        <div className="@container border border-light dark:border-dark @lg:p-4 rounded-md bg-white dark:bg-accent-dark">
                             <div>
                                 <div className="col-span-4">
-                                    <div className="hidden md:grid grid-cols-16 items-center text-sm opacity-60 mb-2">
+                                    <div className="hidden @lg:grid grid-cols-16 items-center text-sm opacity-60 pt-2 px-3 pb-1">
                                         <div className="col-span-6">Products</div>
                                         <div className="col-span-5">Monthly free allowance</div>
                                         <div className="col-span-4">
@@ -317,23 +317,22 @@ const Pricing = (): JSX.Element => {
                                             <div key={index}>
                                                 <Link
                                                     to={product.link}
-                                                    className="group grid grid-cols-8 md:grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark p-1 rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
+                                                    className="group grid grid-cols-8 @lg:grid-cols-16 items-center text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark border-b border-light dark:border-dark @lg:border-transparent pt-3 px-4 pb-4 @lg:px-2 @lg:py-1 @lg:rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
                                                 >
-                                                    <div className="col-span-7 md:col-span-6 flex gap-2 items-center md:pl-1 mb-1 md:mb-0">
+                                                    <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center @lg:pl-1 mb-1 @lg:mb-0">
                                                         {product.icon}
                                                         <span className="font-semibold text-[15px]">
                                                             {product.name}
                                                         </span>
                                                     </div>
                                                     <div
-                                                        className={`col-span-4 md:col-span-5 text-sm order-3 2xs:ml-8 md:ml-0 ${
-                                                            product.price &&
-                                                            'rounded-tl rounded-bl bg-accent dark:bg-accent-dark md:bg-transparent dark:md:bg-transparent p-2 md:p-0'
-                                                        } md:order-none`}
+                                                        className={`col-span-4 @lg:col-span-5 text-sm order-3 2xs:ml-8 @lg:ml-0 ${
+                                                            product.price && 'pr-2 @lg:p-0'
+                                                        } @lg:order-none`}
                                                     >
                                                         {product.freeLimit ? (
                                                             <>
-                                                                <div className="text-xs font-normal opacity-60 md:hidden">
+                                                                <div className="text-xs font-normal opacity-60 @lg:hidden">
                                                                     Monthly free allowance
                                                                 </div>
                                                                 {product.freeLimit} {product.denomination}s
@@ -346,14 +345,13 @@ const Pricing = (): JSX.Element => {
                                                         )}
                                                     </div>
                                                     <div
-                                                        className={`col-span-4 text-sm order-4 2xs:mr-8 h-full md:h-auto md:mr-0 md:order-none ${
-                                                            product.price &&
-                                                            'rounded-tr rounded-br bg-accent dark:bg-accent-dark md:bg-transparent dark:md:bg-transparent p-2 md:p-0'
+                                                        className={`col-span-4 text-sm order-4 2xs:mr-8 h-full @lg:h-auto @lg:mr-0 @lg:order-none ${
+                                                            product.price && 'pl-2 @lg:p-0'
                                                         }`}
                                                     >
                                                         {product.price && (
                                                             <>
-                                                                <div className="text-xs font-normal opacity-60 md:hidden">
+                                                                <div className="text-xs font-normal opacity-60 @lg:hidden">
                                                                     Then pricing starts at
                                                                 </div>
                                                                 ${product.price}
@@ -371,7 +369,7 @@ const Pricing = (): JSX.Element => {
                                         ))}
                                     </div>
 
-                                    <div className="hidden md:grid border-t border-light dark:border-dark items-center text-sm text-right mt-1 pt-3">
+                                    <div className="hidden @lg:grid border-t border-light dark:border-dark items-center text-sm text-right mt-1 px-4 py-3">
                                         <span
                                             onClick={() => {
                                                 const element = document.getElementById('calculator')
