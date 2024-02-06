@@ -177,8 +177,7 @@ To implement the A/B test, we:
     }
 
     // rest of your code
-
-// rest of your code
+}
 ```
 
 When you restart your app and refresh the page, you should see the text updated to either `Control variant!` or `Test variant!`. 
