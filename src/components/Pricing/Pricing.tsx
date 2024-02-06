@@ -84,7 +84,7 @@ const plans: PlanData[] = [
     {
         title: 'Enterprise',
         price: 'Custom pricing',
-        priceSubtitle: 'with fixed terms',
+        priceSubtitle: 'w/ fixed terms',
         features: [
             'Unlimited everything',
             'SAML enforcement',

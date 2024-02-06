@@ -106,7 +106,7 @@ export const PricingCalculator = () => {
                                 <span className="font-semibold text-[15px]">{product.name}</span>
                             </div>
                         </div>
-                        <div className="col-span-16 sm:col-span-8 sm:border-t border-light dark:border-dark md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-4 md:pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8">
+                        <div className="col-span-16 sm:col-span-8 sm:border-t border-light dark:border-dark md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8">
                             {product.price && (
                                 <>
                                     <p className="mb-0.5">
@@ -127,12 +127,20 @@ export const PricingCalculator = () => {
                             {product.slider}
                         </div>
                         <div className="col-span-10 md:col-span-3 pl-7 sm:pl-0 md:pt-4 pb-4">
-                            <strong>{product.calcVolume}</strong>{' '}
-                            <span className="opacity-60 text-sm">{product.denomination}s/mo</span>
+                            {product.price && (
+                                <>
+                                    <strong>{product.calcVolume}</strong>{' '}
+                                    <span className="opacity-60 text-sm">{product.denomination}s/mo</span>
+                                </>
+                            )}
                         </div>
                         <div className="col-span-6 md:col-span-2 xl:col-span-1 pl-7 pr-2 sm:pl-0 md:pt-4 md:px-2 md:pb-4 md:pl-0 text-right">
-                            <span className="opacity-75 text-sm md:hidden">Subtotal: </span>
-                            <span className="font-bold">${product.calcCost}</span>
+                            {product.price && (
+                                <>
+                                    <span className="opacity-75 text-sm md:hidden">Subtotal: </span>
+                                    <span className="font-bold">${product.calcCost}</span>
+                                </>
+                            )}
                         </div>
                     </React.Fragment>
                 ))}
