@@ -28,50 +28,7 @@ import {
     IconArrowRightDown,
 } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-
-const products = [
-    {
-        icon: <IconGraph className="w-5 h-6 text-blue" />,
-        name: 'Product analytics',
-        freeLimit: '1,000,000',
-        denomination: 'event',
-        price: '0.00031',
-        link: '/pricing?product=product-analytics',
-    },
-    {
-        icon: <IconRewindPlay className="w-5 h-6 text-yellow" />,
-        name: 'Session replay',
-        freeLimit: '15,000',
-        denomination: 'recording',
-        price: '0.0050',
-        link: '/pricing?product=session-replay',
-    },
-    {
-        icon: <IconToggle className="w-5 h-6 text-green" />,
-        name: 'Feature flags',
-        freeLimit: '1,000,000',
-        denomination: 'request',
-        price: '0.0001',
-        link: '/pricing?product=feature-flags',
-    },
-    {
-        icon: <IconFlask className="w-5 h-6 text-purple" />,
-        name: 'A/B testing',
-        freeLimit: '',
-        denomination: '',
-        price: '',
-        link: '/pricing?product=ab-testing',
-        message: <em className="font-normal opacity-75">Billed with feature flags</em>,
-    },
-    {
-        icon: <IconMessage className="w-5 h-5 text-red" />,
-        name: 'Surveys',
-        freeLimit: '250',
-        denomination: 'response',
-        price: '0.2000',
-        link: '/pricing?product=surveys',
-    },
-]
+import useProducts from './Products'
 
 interface PlanData {
     title: string
@@ -227,6 +184,7 @@ const Pricing = (): JSX.Element => {
     const { search } = useLocation()
     const [groupsToShow, setGroupsToShow] = useState<undefined | string[]>()
     const [currentProduct, setCurrentProduct] = useState<string | null>()
+    const products = useProducts()
 
     const getGroupsToShow = (): string[] | undefined => {
         const product = new URLSearchParams(search).get('product')

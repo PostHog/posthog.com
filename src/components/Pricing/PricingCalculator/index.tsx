@@ -7,6 +7,7 @@ import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import Toggle from 'components/Toggle'
+import useProducts from './../Products'
 import {
     FIVE_MILLION,
     TWENTY_FIVE_MILLION,
@@ -33,6 +34,7 @@ export const section = cntl`
 const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
 
 export const PricingCalculator = () => {
+    const products = useProducts()
     const {
         productAnalyticsCost,
         sessionRecordingCost,
@@ -44,25 +46,9 @@ export const PricingCalculator = () => {
         featureFlagSliderValue,
         featureFlagNumber,
         featureFlagCost,
-        productAnalyticsEventsMaxed,
-        surveyResponseSliderValue,
         surveyResponseNumber,
-        enterpriseLevelSpend,
         surveyResponseCost,
-        showAnnualBilling,
-        showHighVolCTA,
-        sessionReplayRecordingsMaxed,
-        featureFlagsRequestsMaxed,
-        surveyResponsesMaxed,
     } = useValues(pricingSliderLogic)
-    const {
-        toggleAnnualBilling,
-        setSessionRecordingSliderValue,
-        setProductAnalyticsSliderValue,
-        setFeatureFlagSliderValue,
-        setSurveyResponseSliderValue,
-        toggleHighVolCTA,
-    } = useActions(pricingSliderLogic)
 
     const posthog = usePostHog()
     const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
@@ -77,295 +63,86 @@ export const PricingCalculator = () => {
         })
     }, [posthog])
 
-    const anyProductMaxed =
-        enterprise_flag_enabled &&
-        (productAnalyticsEventsMaxed ||
-            sessionReplayRecordingsMaxed ||
-            featureFlagsRequestsMaxed ||
-            surveyResponsesMaxed)
-
     return (
         <section id="calculator" className={`${section} mb-12`}>
-            <div className="grid lg:grid-cols-3 gap-8 xl:gap-12">
-                <div className="col-span-2">
-                    <h4 className="mb-1">Pricing calculator</h4>
-                    <p className="text-sm">
-                        <Link
-                            to="/docs/billing/estimating-usage-costs"
-                            external={true}
-                            className="flex items-center gap-x-1"
-                        >
-                            How do I estimate my usage? <IconExternal className="w-4 h-4" />
-                        </Link>
-                    </p>
+            <h4 className="mb-1">Estimate your bill</h4>
+            <div className="flex justify-between">
+                <p>You can set a billing limit so you never get a surprise bill.</p>
+                <p>Subscribe to products individually after creating an account.</p>
+            </div>
 
-                    <div className="rounded-md bg-accent dark:bg-accent-dark border border-light dark:border-dark grid grid-cols-4">
-                        <div className="font-semibold opacity-70 text-sm border-b border-border dark:border-dark col-span-3 px-4 py-2">
-                            Product
-                        </div>
-                        <div className="font-semibold opacity-70 text-sm border-b border-border dark:border-dark px-4 py-2 text-center">
-                            Subtotal
-                        </div>
-                        <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
-                            <span className="flex absolute top-3 left-3 opacity-50">
-                                {<IconGraph className="w-5 h-5" />}
-                            </span>
-                            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-                                <strong>Product analytics + data stack</strong>
-                                <span>
-                                    <span className="text-lg font-bold">{eventNumber.toLocaleString()}</span>{' '}
-                                    <span className="opacity-60 text-sm">events</span>
-                                </span>
-                            </div>
-                            <div className="pt-4 pb-6">
-                                {enterprise_flag_enabled ? (
-                                    <LinearSlider
-                                        stepsInRange={100}
-                                        marks={[MILLION, TEN_MILLION, TWENTY_FIVE_MILLION, FIFTY_MILLION]}
-                                        min={MILLION}
-                                        max={MAX_PRODUCT_ANALYTICS}
-                                        onChange={(value) => setProductAnalyticsSliderValue(value, (x: number) => x)}
-                                        value={productAnalyticsSliderValue}
-                                    />
-                                ) : (
-                                    <LogSlider
-                                        stepsInRange={100}
-                                        marks={[MILLION, TEN_MILLION, HUNDRED_MILLION, BILLION]}
-                                        min={MILLION}
-                                        max={BILLION}
-                                        onChange={(value) => setProductAnalyticsSliderValue(value, sliderCurve)}
-                                        value={productAnalyticsSliderValue}
-                                    />
-                                )}
-                            </div>
-                        </div>
-                        <div className="border-b border-border dark:border-dark p-2 text-center">
-                            <span className="text-lg font-bold">
-                                {productAnalyticsEventsMaxed && enterprise_flag_enabled
-                                    ? 'Contact us'
-                                    : `$${productAnalyticsCost.toLocaleString()}`}
-                            </span>
-                        </div>
-                        <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
-                            <span className="flex absolute top-3 left-3 opacity-50">
-                                {<IconRewindPlay className="w-5 h-5" />}
-                            </span>
-                            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-                                <strong>Session replay</strong>
-                                <span>
-                                    <span className="text-lg font-bold">
-                                        {sessionRecordingEventNumber.toLocaleString()}
-                                    </span>{' '}
-                                    <span className="opacity-60 text-sm">recordings</span>
-                                </span>
-                            </div>
-                            <div className="pt-4 pb-6">
-                                {enterprise_flag_enabled ? (
-                                    <LinearSlider
-                                        stepsInRange={100}
-                                        marks={[5000, 50000, 100000, MAX_SESSION_REPLAY]}
-                                        min={5000}
-                                        max={MAX_SESSION_REPLAY}
-                                        onChange={(value) => setSessionRecordingSliderValue(value)}
-                                        value={sessionRecordingSliderValue}
-                                    />
-                                ) : (
-                                    <LogSlider
-                                        stepsInRange={100}
-                                        marks={[5000, 25000, 120000, 500000]}
-                                        min={5000}
-                                        max={500000}
-                                        onChange={(value) => setSessionRecordingSliderValue(value, sliderCurve)}
-                                        value={sessionRecordingSliderValue}
-                                    />
-                                )}
-                            </div>
-                        </div>
-                        <div className="border-b border-border dark:border-dark p-2 text-center">
-                            <span className="text-lg font-bold">
-                                {sessionReplayRecordingsMaxed && enterprise_flag_enabled
-                                    ? 'Contact us'
-                                    : `$${sessionRecordingCost.toLocaleString()}`}
-                            </span>
-                        </div>
-                        <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
-                            <span className="flex absolute top-3 left-3 opacity-50">
-                                {<IconToggle className="w-5 h-5" />}
-                            </span>
-                            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-                                <strong>Feature flags</strong>
-                                <span>
-                                    <span className="text-lg font-bold">{featureFlagNumber.toLocaleString()}</span>{' '}
-                                    <span className="opacity-60 text-sm">requests</span>
-                                </span>
-                            </div>
-                            <div className="pt-4 pb-6">
-                                {enterprise_flag_enabled ? (
-                                    <LinearSlider
-                                        stepsInRange={100}
-                                        marks={[MILLION, FIVE_MILLION, MAX_FEATURE_FLAGS]}
-                                        min={MILLION}
-                                        max={MAX_FEATURE_FLAGS}
-                                        onChange={(value) => setFeatureFlagSliderValue(value)}
-                                        value={featureFlagSliderValue}
-                                    />
-                                ) : (
-                                    <LogSlider
-                                        stepsInRange={100}
-                                        marks={[1000000, 10000000, 100000000, 1000000000]}
-                                        min={1000000}
-                                        max={1000000000}
-                                        onChange={(value) => setFeatureFlagSliderValue(value, sliderCurve)}
-                                        value={featureFlagSliderValue}
-                                    />
-                                )}
-                            </div>
-                        </div>
-                        <div className="border-b border-border dark:border-dark p-2 text-center">
-                            <span className="text-lg font-bold">
-                                {featureFlagsRequestsMaxed && enterprise_flag_enabled
-                                    ? 'Contact us '
-                                    : `$${featureFlagCost.toLocaleString()}`}
-                            </span>
-                        </div>
-                        <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
-                            <span className="flex absolute top-3 left-3 opacity-50">
-                                {<IconMessage className="w-5 h-5" />}
-                            </span>
-                            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-                                <strong>Surveys</strong>
-                                <span>
-                                    <span className="text-lg font-bold">{surveyResponseNumber.toLocaleString()}</span>{' '}
-                                    <span className="opacity-60 text-sm">responses</span>
-                                </span>
-                            </div>
-                            <div className="pt-4 pb-6">
-                                {enterprise_flag_enabled ? (
-                                    <LinearSlider
-                                        stepsInRange={100}
-                                        marks={[250, 5000, MAX_SURVEYS]}
-                                        min={250}
-                                        max={MAX_SURVEYS}
-                                        onChange={(value) => setSurveyResponseSliderValue(value)}
-                                        value={surveyResponseSliderValue}
-                                    />
-                                ) : (
-                                    <LogSlider
-                                        stepsInRange={100}
-                                        marks={[250, 2000, 15000, 100000]}
-                                        min={250}
-                                        max={100000}
-                                        onChange={(value) => setSurveyResponseSliderValue(value, sliderCurve)}
-                                        value={surveyResponseSliderValue}
-                                    />
-                                )}
-                            </div>
-                        </div>
-                        <div className="border-b border-border dark:border-dark p-2 text-center">
-                            <span className="text-lg font-bold">
-                                {surveyResponsesMaxed && enterprise_flag_enabled
-                                    ? 'Contact us'
-                                    : `$${surveyResponseCost.toLocaleString()}`}
-                            </span>
-                        </div>
-                        {anyProductMaxed ? (
-                            <>
-                                <div className="col-span-3 p-4">
-                                    <strong>
-                                        We've got special deals for customers who require larger volumes.{' '}
-                                        <div className="text-sm">
-                                            <Link to="/contact-sales">Get in touch</Link>
-                                        </div>
-                                    </strong>
-                                </div>
-                                <div className="p-3 text-center self-center">
-                                    {showHighVolCTA ? (
-                                        <button
-                                            className={`${button('secondary', 'auto', '', 'md')} self-center`}
-                                            onClick={() => toggleHighVolCTA()}
-                                        >
-                                            Show me the price!
-                                        </button>
-                                    ) : (
-                                        <>
-                                            <span className="text-lg font-bold">
-                                                $
-                                                {showAnnualBilling
-                                                    ? (monthlyTotal * 0.8).toLocaleString()
-                                                    : monthlyTotal.toLocaleString()}
-                                            </span>
-                                            <span className="opacity-60">
-                                                /mo
-                                                <div className="text-sm mb-0 flex justify-evenly ">
-                                                    paid annually
-                                                    <Toggle
-                                                        checked={showAnnualBilling}
-                                                        onChange={() => toggleAnnualBilling()}
-                                                    />
-                                                </div>
-                                            </span>
-                                        </>
-                                    )}
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="col-span-3 p-4">
-                                    <div className="flex gap-2">
-                                        <strong>
-                                            <button>
-                                                {enterpriseLevelSpend && showAnnualBilling && enterprise_flag_enabled
-                                                    ? 'Annual'
-                                                    : 'Monthly'}
-                                            </button>{' '}
-                                            estimate{' '}
-                                            {enterpriseLevelSpend &&
-                                                showAnnualBilling &&
-                                                enterprise_flag_enabled &&
-                                                `(20% annual savings of $${(
-                                                    monthlyTotal * 2.4
-                                                ).toLocaleString()} included)`}
-                                        </strong>
-                                    </div>
-                                    <p className="opacity-60 text-sm mb-0">
-                                        Cost with billing limits set at your selections
-                                    </p>
-                                </div>
-                                <div className="p-3 text-center">
-                                    {enterpriseLevelSpend && enterprise_flag_enabled ? (
-                                        <>
-                                            <span className="text-lg font-bold">
-                                                $
-                                                {showAnnualBilling
-                                                    ? (monthlyTotal * 0.8).toLocaleString()
-                                                    : monthlyTotal.toLocaleString()}
-                                            </span>
-                                            <span className="opacity-60">
-                                                /mo
-                                                {enterprise_flag_enabled && (
-                                                    <div className="text-sm mb-0 flex justify-evenly ">
-                                                        paid annually
-                                                        {enterpriseLevelSpend && (
-                                                            <Toggle
-                                                                checked={showAnnualBilling}
-                                                                onChange={() => toggleAnnualBilling()}
-                                                            />
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
-                                            <span className="opacity-60">/mo</span>
-                                        </>
-                                    )}
-                                </div>
-                            </>
-                        )}
-                    </div>
+            <div className="grid grid-cols-16">
+                <div className="col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tl rounded-bl">
+                    name
                 </div>
+                <div className="col-span-4 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
+                    Pricing starts at...
+                </div>
+                <div className="col-span-4 !border-t-0 p-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
+                    Calculate your price
+                </div>
+                <div className="col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
+                    Estimated usage
+                </div>
+                <div className="col-span-2 text-right !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tr rounded-br">
+                    Subtotal
+                </div>
+            </div>
+
+            <div className="grid grid-cols-16 [&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light">
+                {products.map((product, index) => (
+                    <React.Fragment key={index}>
+                        <div className="col-span-3 pt-4 pb-4">
+                            <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center pl-2 mb-1 @lg:mb-0">
+                                {product.icon}
+                                <span className="font-semibold text-[15px]">{product.name}</span>
+                            </div>
+                        </div>
+                        <div className="col-span-4 pt-4 pb-4">
+                            {product.price && (
+                                <>
+                                    <strong>${product.price}</strong>
+                                    <span className="opacity-50 font-medium text-[13px]">/{product.denomination}s</span>
+                                    <br />
+                                    <em className="opacity-70 font-medium text-[13px]">
+                                        First {product.freeLimit} {product.denomination}s free every month
+                                    </em>
+                                </>
+                            )}
+                        </div>
+                        <div className="col-span-4 pt-4 pb-4 pr-8">{product.slider}</div>
+                        <div className="col-span-3 pt-4 pb-4">
+                            <strong>{product.calcValue}</strong>{' '}
+                            <span className="opacity-60 text-sm">{product.denomination}s/mo</span>
+                        </div>
+                        <div className="col-span-2 pt-4 pb-4 text-right">
+                            <span className="font-bold">${product.calcValue}</span>
+                        </div>
+                    </React.Fragment>
+                ))}
+            </div>
+            <div className="grid grid-cols-16">
+                <div className="col-span-8 p-1 text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tl rounded-bl">
+                    <strong>Monthly estimate based on usage-based plans</strong>
+                    <br />
+                    if you set billing limits at your selections
+                </div>
+                <div className="col-span-8 p-1 text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br text-right">
+                    <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
+                    <span className="opacity-60">/mo</span>
+                </div>
+            </div>
+
+            <Link to="/docs/billing/estimating-usage-costs" external={true} className="flex items-center gap-x-1">
+                How do I estimate my usage? <IconExternal className="w-4 h-4" />
+            </Link>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div className="grid lg:grid-cols-3 gap-8 xl:gap-12">
                 <div>
                     <h4 className="border-b border-border dark:border-dark pb-2 mb-3">Discounts</h4>
 
@@ -389,20 +166,6 @@ export const PricingCalculator = () => {
                             <Link to="/startups">startup program</Link>.
                         </p>
                     </div>
-
-                    {(enterpriseLevelSpend || anyProductMaxed) && enterprise_flag_enabled && (
-                        <div className="pl-10 relative mb-4">
-                            <span className="w-6 h-6 absolute top-0 left-1">
-                                <Discount />
-                            </span>
-
-                            <h5 className="text-base mb-0">Annual plan</h5>
-                            <p className="text-[15px] mb-1">
-                                Take 20% off your bill by switching to up-front annual billing.{' '}
-                                <Link to="/contact-sales"> Contact us</Link> to learn more.
-                            </p>
-                        </div>
-                    )}
                 </div>
             </div>
         </section>
