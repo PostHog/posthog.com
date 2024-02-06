@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Astro
-date: 2023-01-29
+date: 2024-01-29
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
