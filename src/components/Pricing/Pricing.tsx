@@ -98,7 +98,7 @@ const plans: PlanData[] = [
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     <div>
         <h4 className="text-lg mb-2">{planData.title}</h4>
-        <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded shrink-0 basis-[80vw] xs:basis-[55vw] sm:basis-[40vw]">
+        <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded">
             <div className="flex flex-col h-full gap-4 pt-3 px-4 xl:px-4 pb-6">
                 <div>
                     <h4 className="inline text-lg">
@@ -356,21 +356,19 @@ const Pricing = (): JSX.Element => {
 
             {!currentProduct && (
                 <>
-                    <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
+                    <section className={`${section} mb-12 mt-8 md:px-4`}>
                         <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Plans</h3>
-                        <div className="col-span-4 overflow-x">
-                            <div className="flex mr-8 md:mr-0 md:grid grid-cols-4 gap-4 mb-16 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
+                        <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
+                            <div className="flex md:grid grid-cols-[repeat(4,_minmax(260px,_1fr))] lg:grid-cols-4 gap-4 mb-12 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
                                 {plans.map((plan, index) => (
                                     <Plan key={index} planData={plan} />
                                 ))}
                             </div>
-                            <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
-                                All plans include unlimited team members, and unlimited tracked users.{' '}
-                                <span className="text-red dark:text-yellow font-semibold">
-                                    See full plan comparison
-                                </span>
-                            </p>
                         </div>
+                        <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
+                            All plans include unlimited team members, and unlimited tracked users.{' '}
+                            <span className="text-red dark:text-yellow font-semibold">See full plan comparison</span>
+                        </p>
                     </section>
                 </>
             )}
