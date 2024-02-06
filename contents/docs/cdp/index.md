@@ -19,7 +19,7 @@ Pipelines can be used for a wide variety of use cases, such as:
 
 ## Enabling connections
 
-Head to 'Project' -> 'Apps' on the left sidebar in the PostHog app.
+Head to "Data pipeline" on the left sidebar in the PostHog app. For batch exports or destinations, you also need to subscribe to the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
 
 If you're self-hosting, you can install a data connection by pasting a link to its public repository, or write your own app directly in PostHog.
 

@@ -11,7 +11,7 @@ This app exports PostHog data to Variance in real-time and formats it for use by
 
 ## Requirements
 
-This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.31.0](https://posthog.com/blog/the-posthog-array-1-31-0) or later. The app supports `capture`, `page`, `identify`, and `alias` calls.
+This requires either PostHog Cloud with the data pipeline add-on, or a self-hosted PostHog instance running [version 1.31.0](https://posthog.com/blog/the-posthog-array-1-31-0) or later. The app supports `capture`, `page`, `identify`, and `alias` calls.
 
 Not running 1.31.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
