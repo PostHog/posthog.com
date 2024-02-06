@@ -66,23 +66,33 @@ export const PricingCalculator = () => {
     return (
         <section id="calculator" className={`${section} mb-12`}>
             <h4 className="mb-0">Estimate your bill</h4>
-            <div className="flex justify-between">
-                <p className="text-sm opacity-75">You can set a billing limit so you never get a surprise bill.</p>
-                <p className="text-sm opacity-75">Subscribe to products individually after creating an account.</p>
+            <div className="md:flex flex-col md:flex-row justify-between pb-4 md:pb-0">
+                <p className="inline md:inline-flex text-sm opacity-75 mb-2 md:mb-0">
+                    You can set a billing limit so you never get a surprise bill.
+                </p>{' '}
+                <p className="inline md:inline-flex text-sm opacity-75">
+                    Subscribe to products individually after creating an account.
+                </p>
+                <p className="md:hidden mt-4 text-sm bg-accent dark:bg-accent-dark p-4 rounded mb-0">
+                    <strong>To estimate your bill,</strong> drag the sliders to your estimated volume for each product,
+                    then scroll down to see the total.
+                </p>
             </div>
 
             <div className="grid grid-cols-16">
-                <div className="col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tl rounded-bl"></div>
-                <div className="col-span-4 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
+                <div className="col-span-16 md:col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tl rounded-bl">
+                    <strong className="md:hidden">Products</strong>
+                </div>
+                <div className="hidden md:block md:col-span-4 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
                     Pricing starts at...
                 </div>
-                <div className="col-span-4 xl:col-span-5 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
+                <div className="hidden md:block md:col-span-4 xl:col-span-5 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
                     Calculate your price
                 </div>
-                <div className="col-span-3 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
+                <div className="hidden md:block md:col-span-3 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
                     Estimated usage
                 </div>
-                <div className="col-span-2 xl:col-span-1 text-right !border-t-0 py-1 pr-2 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tr rounded-br">
+                <div className="hidden md:block md:col-span-2 xl:col-span-1 text-right !border-t-0 py-1 pr-2 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tr rounded-br">
                     Subtotal
                 </div>
             </div>
@@ -90,13 +100,13 @@ export const PricingCalculator = () => {
             <div className="grid grid-cols-16 md:[&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light">
                 {products.map((product, index) => (
                     <React.Fragment key={index}>
-                        <div className="col-span-16 border-t md:border-t-0 border-light dark:border-dark md:col-span-3 pt-4 md:pb-4 md:pr-4">
-                            <div className="col-span-7 @md:col-span-6 flex gap-2 items-center pl-2 mb-1 @md:mb-0">
+                        <div className="col-span-16 sm:col-span-8 border-t md:border-t-0 border-light dark:border-dark md:col-span-3 pt-4 md:pb-4 md:pr-4">
+                            <div className="col-span-7 @md:col-span-6 flex md:flex-col mdlg:flex-row gap-2 md:gap-1 mdlg:gap-2 mdlg:items-center sm:pl-0 md:pl-2 mb-1 @md:mb-0">
                                 {product.icon}
                                 <span className="font-semibold text-[15px]">{product.name}</span>
                             </div>
                         </div>
-                        <div className="col-span-16 md:col-span-4 pl-9 pb-6 md:pl-0 md:pt-4 md:pb-4 md:pr-8">
+                        <div className="col-span-16 sm:col-span-8 sm:border-t border-light dark:border-dark md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-4 md:pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8">
                             {product.price && (
                                 <>
                                     <p className="mb-0.5">
@@ -113,26 +123,27 @@ export const PricingCalculator = () => {
                                 </>
                             )}
                         </div>
-                        <div className="col-span-16 md:col-span-4 xl:col-span-5 pl-9 pb-8 md:pt-5 md:pb-4 md:pr-8 md:pl-0">
+                        <div className="col-span-16 pr-2 md:col-span-4 xl:col-span-5 pl-7 sm:pl-0 pb-8 md:pt-5 md:pb-4 md:pr-8 md:pl-0">
                             {product.slider}
                         </div>
-                        <div className="col-span-12 md:col-span-3 pl-9 md:pl-0 md:pt-4 pb-4">
+                        <div className="col-span-10 md:col-span-3 pl-7 sm:pl-0 md:pt-4 pb-4">
                             <strong>{product.calcVolume}</strong>{' '}
                             <span className="opacity-60 text-sm">{product.denomination}s/mo</span>
                         </div>
-                        <div className="col-span-4 md:col-span-2 xl:col-span-1 pl-9 md:pt-4 md:px-2 md:pb-4 md:pl-0 text-right">
+                        <div className="col-span-6 md:col-span-2 xl:col-span-1 pl-7 pr-2 sm:pl-0 md:pt-4 md:px-2 md:pb-4 md:pl-0 text-right">
+                            <span className="opacity-75 text-sm md:hidden">Subtotal: </span>
                             <span className="font-bold">${product.calcCost}</span>
                         </div>
                     </React.Fragment>
                 ))}
             </div>
-            <div className="grid grid-cols-16">
-                <div className="col-span-8 p-1 text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tl rounded-bl">
+            <div className="grid grid-cols-16 p-2 bg-accent dark:bg-accent-dark md:bg-transparent md:p-0">
+                <div className="col-span-13 md:col-span-8 p-1 text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tl rounded-bl">
                     <strong>Monthly estimate based on usage-based plans</strong>
                     <br />
                     if you set billing limits at your selections
                 </div>
-                <div className="col-span-8 p-1 text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br text-right">
+                <div className="col-span-3 md:col-span-8 p-1 text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br text-right">
                     <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
                     <span className="opacity-60">/mo</span>
                 </div>
@@ -151,7 +162,7 @@ export const PricingCalculator = () => {
                 <div>
                     <h4 className="border-b border-border dark:border-dark pb-2 mb-3">Discounts</h4>
 
-                    <div className="pl-9 relative mb-4">
+                    <div className="pl-7 relative mb-4">
                         <span className="w-6 h-6 absolute top-0 left-1 opacity-50">
                             <IconPercentage />
                         </span>
@@ -160,7 +171,7 @@ export const PricingCalculator = () => {
                         <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
                     </div>
 
-                    <div className="pl-9 relative mb-4">
+                    <div className="pl-7 relative mb-4">
                         <span className="w-6 h-6 absolute top-0 left-1 opacity-50">
                             <IconPercentage />
                         </span>
