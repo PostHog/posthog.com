@@ -306,11 +306,12 @@ const Pricing = (): JSX.Element => {
                                         <div className="col-span-4">
                                             <Tooltip
                                                 content={() => (
-                                                    <div className="max-w-xs">
+                                                    <div className="max-w-sm">
                                                         <p className="mb-0 text-sm">
                                                             <strong>
                                                                 Prices decrease exponentially with greater volume.
-                                                            </strong>{' '}
+                                                            </strong>
+                                                            <br />
                                                             Click a product to see the full price breakdown.
                                                         </p>
                                                     </div>
@@ -330,7 +331,7 @@ const Pricing = (): JSX.Element => {
                                         {products.map((product, index) => (
                                             <div
                                                 key={index}
-                                                className="py-1 px-2 @lg:!p-0 border-b border-light dark:border-dark @lg:border-transparent"
+                                                className="py-1 px-2 @lg:!p-0 border-b border-light dark:border-dark @lg:border-transparent dark:@lg:border-transparent"
                                             >
                                                 <Link
                                                     to={product.link}

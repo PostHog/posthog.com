@@ -103,7 +103,7 @@ export const PricingCalculator = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-16 md:[&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light mb-2">
+            <div className="grid grid-cols-16 md:[&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light dark:[&>div]:border-dark mb-2">
                 {products.map((product, index) => (
                     <React.Fragment key={index}>
                         <div className="col-span-16 sm:col-span-8 border-t md:border-t-0 border-light dark:border-dark md:col-span-3 pt-4 md:pb-4 md:pr-4">
@@ -117,7 +117,11 @@ export const PricingCalculator = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className="col-span-16 sm:col-span-8 sm:border-t border-light dark:border-dark md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8">
+                        <div
+                            className={`col-span-16 sm:col-span-8 sm:border-t border-light dark:border-dark md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8 ${
+                                !product.price && 'flex items-center'
+                            }`}
+                        >
                             {product.price ? (
                                 <>
                                     <p className="mb-0.5">
