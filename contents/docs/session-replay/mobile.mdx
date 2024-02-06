@@ -19,12 +19,6 @@ Mobile recording is primarily done using native APIs to grab the view hierarchy 
 
 The view hierarchy is transformed to a JSON data structure and later rendered as a HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behaviour.
 
-There are 4 possible configurations:
-* `maskAllTextInputs` - all texts will be masked (e.g. `**** ***`).
-* `maskAllImages` - all images will be a place holder.
-* `captureLogcat` - logs will be captured automatically.
-* `android:tag="ph-no-capture"` - setting the `ph-no-capture` tag means the view will be masked or be a place holder.
-
 #### Network recording
 
 Network requests are recorded using the `PostHogOkHttpInterceptor` interceptor ([OkHttp only](https://github.com/square/okhttp/)). Only metric-like data is currently gathered to give a picture of speed, size and response code. No data is captured from the request or response body.
@@ -90,7 +84,7 @@ private val client = OkHttpClient.Builder()
 
 # Recording specific configuration
 
-The SDK configurations.
+SDK configurations during the SDK initialization.
 
 ```android_kotlin
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
@@ -105,7 +99,7 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
 }
 ```
 
-The View declaration tag, the image will be a placeholder if the tag is set.
+[View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the image will be a placeholder.
 
 ```xml
 <ImageView
