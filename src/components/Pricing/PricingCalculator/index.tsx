@@ -85,7 +85,7 @@ export const PricingCalculator = () => {
             surveyResponsesMaxed)
 
     return (
-        <section className={`${section} mb-12`}>
+        <section id="calculator" className={`${section} mb-12`}>
             <div className="grid lg:grid-cols-3 gap-8 xl:gap-12">
                 <div className="col-span-2">
                     <h4 className="mb-1">Pricing calculator</h4>

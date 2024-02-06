@@ -25,6 +25,7 @@ import {
     IconMessage,
     IconInfo,
     IconArrowRight,
+    IconArrowRightDown,
 } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 
@@ -289,10 +290,22 @@ const Pricing = (): JSX.Element => {
                                         <div className="col-span-6">Products</div>
                                         <div className="col-span-5">Monthly free allowance</div>
                                         <div className="col-span-4">
-                                            Then starts at...{' '}
-                                            <Tooltip content="Price decreases exponentially with greater volume. Click a product to see the full price breakdown.">
+                                            <Tooltip
+                                                content={() => (
+                                                    <div className="max-w-xs">
+                                                        <p className="mb-0 text-sm">
+                                                            <strong>
+                                                                Prices decrease exponentially with greater volume.
+                                                            </strong>{' '}
+                                                            Click a product to see the full price breakdown.
+                                                        </p>
+                                                    </div>
+                                                )}
+                                                placement="top"
+                                            >
                                                 <span className="relative">
-                                                    <IconInfo className="w-4 h-4 inline-block -top-px" />
+                                                    Then starts at...{' '}
+                                                    <IconInfo className="w-4 h-4 inline-block relative -top-px" />
                                                 </span>
                                             </Tooltip>
                                         </div>
@@ -361,8 +374,8 @@ const Pricing = (): JSX.Element => {
                                     <div className="hidden md:grid border-t border-light dark:border-dark items-center text-sm text-right mt-1 pt-3">
                                         <span
                                             onClick={() => {
-                                                const element = document.getElementById('plan-comparison')
-                                                const headerHeight = document.getElementById('header').offsetHeight // replace 'header' with the id of your header
+                                                const element = document.getElementById('calculator')
+                                                const headerHeight = document.getElementById('header').offsetHeight
                                                 scroll.scrollTo(element.offsetTop - 20 - headerHeight, {
                                                     duration: 800,
                                                     delay: 0,
@@ -372,7 +385,7 @@ const Pricing = (): JSX.Element => {
                                             className="cursor-pointer text-red dark:text-yellow font-semibold"
                                         >
                                             Estimate your monthly bill{' '}
-                                            <IconArrowRight className="w-4 h-4 rotate-90 inline-block" />
+                                            <IconArrowRightDown className="w-4 h-4 inline-block -top-px" />
                                         </span>
                                     </div>
                                 </div>
