@@ -8,7 +8,7 @@ featuredImage: ../images/blog/blog_onboarding.jpg
 featuredImageType: full
 ---
 
-Email is a powerful tool for getting users to engage with your product, but it can be  difficult to know how the best companies structure their onboarding email flows. You end up having to sign up to a bunch of them, then waiting and letting your inbox get flooded. 
+Email is a powerful tool for getting users to engage with your product, but it can be difficult to know how the best companies structure their onboarding email flows. You end up having to sign up to a bunch of them, then waiting and letting your inbox get flooded. 
 
 Often, you end up getting awful sales rep outreach emails from them _months_ later too. That's important because it's probably the root cause for the conventional wisdom that developers do not respond well to email marketing. Turns out, they just don't respond well to _bad_ email marketing. 
 
