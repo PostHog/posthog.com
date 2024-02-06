@@ -2,26 +2,20 @@ import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
 import { LinearSlider, LogSlider, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { IconGraph, IconRewindPlay, IconToggle, IconMessage, IconExternal, IconPercentage } from '@posthog/icons'
+import {
+    IconGraph,
+    IconRewindPlay,
+    IconToggle,
+    IconMessage,
+    IconExternal,
+    IconPercentage,
+    IconInfo,
+} from '@posthog/icons'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
-import Toggle from 'components/Toggle'
+import Tooltip from 'components/Tooltip'
 import useProducts from './../Products'
-import {
-    FIVE_MILLION,
-    TWENTY_FIVE_MILLION,
-    FIFTY_MILLION,
-    MAX_FEATURE_FLAGS,
-    MAX_PRODUCT_ANALYTICS,
-    MAX_SESSION_REPLAY,
-    MAX_SURVEYS,
-    MILLION,
-    TEN_MILLION,
-    HUNDRED_MILLION,
-    BILLION,
-} from '../pricingLogic'
-import { button } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 
 export const section = cntl`
@@ -31,41 +25,37 @@ export const section = cntl`
     px-4
 `
 
-const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
-
 export const PricingCalculator = () => {
     const products = useProducts()
-    const {
-        productAnalyticsCost,
-        sessionRecordingCost,
-        productAnalyticsSliderValue,
-        sessionRecordingSliderValue,
-        monthlyTotal,
-        sessionRecordingEventNumber,
-        eventNumber,
-        featureFlagSliderValue,
-        featureFlagNumber,
-        featureFlagCost,
-        surveyResponseNumber,
-        surveyResponseCost,
-    } = useValues(pricingSliderLogic)
+    const { monthlyTotal } = useValues(pricingSliderLogic)
 
     const posthog = usePostHog()
-    const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
-
-    useEffect(() => {
-        posthog?.onFeatureFlags(() => {
-            if (posthog.getFeatureFlag(ENTERPRISE_PRICING_TABLE) === 'test') {
-                set_enterprise_flag_enabled(true)
-            } else {
-                set_enterprise_flag_enabled(false)
-            }
-        })
-    }, [posthog])
 
     return (
         <section id="calculator" className={`${section} mb-12`}>
-            <h4 className="mb-0">Estimate your bill</h4>
+            <h4 className="mb-0">
+                Estimate your bill
+                <span>
+                    <Tooltip
+                        content={() => (
+                            <>
+                                Learn how to{' '}
+                                <Link
+                                    to="/docs/billing/estimating-usage-costs"
+                                    external={true}
+                                    className="inline-flex items-center gap-x-1 font-semibold text-red dark:text-yellow"
+                                >
+                                    estimate your usage <IconExternal className="w-4 h-4" />
+                                </Link>
+                            </>
+                        )}
+                    >
+                        <span className="relative -top-px">
+                            <IconInfo className="w-5 h-5 ml-1 inline-block opacity-75" />
+                        </span>
+                    </Tooltip>
+                </span>
+            </h4>
             <div className="md:flex flex-col md:flex-row justify-between pb-4 md:pb-0">
                 <p className="inline md:inline-flex text-sm opacity-75 mb-2 md:mb-0">
                     You can set a billing limit so you never get a surprise bill.
@@ -97,7 +87,7 @@ export const PricingCalculator = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-16 md:[&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light">
+            <div className="grid grid-cols-16 md:[&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light mb-2">
                 {products.map((product, index) => (
                     <React.Fragment key={index}>
                         <div className="col-span-16 sm:col-span-8 border-t md:border-t-0 border-light dark:border-dark md:col-span-3 pt-4 md:pb-4 md:pr-4">
@@ -107,7 +97,7 @@ export const PricingCalculator = () => {
                             </div>
                         </div>
                         <div className="col-span-16 sm:col-span-8 sm:border-t border-light dark:border-dark md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8">
-                            {product.price && (
+                            {product.price ? (
                                 <>
                                     <p className="mb-0.5">
                                         <strong>${product.price}</strong>
@@ -121,12 +111,14 @@ export const PricingCalculator = () => {
                                         </em>
                                     </p>
                                 </>
+                            ) : (
+                                <p className="text-sm mb-0">{product.message}</p>
                             )}
                         </div>
-                        <div className="col-span-16 pr-2 md:col-span-4 xl:col-span-5 pl-7 sm:pl-0 pb-8 md:pt-5 md:pb-4 md:pr-8 md:pl-0">
+                        <div className="col-span-16 pr-2 md:col-span-4 xl:col-span-5 pl-7 sm:pl-0 pb-8 md:pt-5 md:pb-4 md:pr-8 md:pl-0 empty:py-0">
                             {product.slider}
                         </div>
-                        <div className="col-span-10 md:col-span-3 pl-7 sm:pl-0 md:pt-4 pb-4">
+                        <div className="col-span-10 md:col-span-3 pl-7 sm:pl-0 md:pt-4 pb-4 empty:py-0">
                             {product.price && (
                                 <>
                                     <strong>{product.calcVolume}</strong>{' '}
@@ -146,49 +138,14 @@ export const PricingCalculator = () => {
                 ))}
             </div>
             <div className="grid grid-cols-16 p-2 bg-accent dark:bg-accent-dark md:bg-transparent md:p-0">
-                <div className="col-span-13 md:col-span-8 p-1 text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tl rounded-bl">
-                    <strong>Monthly estimate based on usage-based plans</strong>
-                    <br />
-                    if you set billing limits at your selections
+                <div className="col-span-13 flex flex-col justify-center md:col-span-8 p-3 opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tl rounded-bl h-full text-balance">
+                    <strong>Monthly estimate for usage-based plans</strong>
+                    <span className="text-sm">with billing limits at your selections</span>
                 </div>
-                <div className="col-span-3 md:col-span-8 p-1 text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br text-right">
-                    <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
-                    <span className="opacity-60">/mo</span>
-                </div>
-            </div>
-
-            <Link to="/docs/billing/estimating-usage-costs" external={true} className="flex items-center gap-x-1">
-                How do I estimate my usage? <IconExternal className="w-4 h-4" />
-            </Link>
-
-            <br />
-            <br />
-            <br />
-            <br />
-
-            <div className="grid lg:grid-cols-3 gap-8 xl:gap-12">
-                <div>
-                    <h4 className="border-b border-border dark:border-dark pb-2 mb-3">Discounts</h4>
-
-                    <div className="pl-7 relative mb-4">
-                        <span className="w-6 h-6 absolute top-0 left-1 opacity-50">
-                            <IconPercentage />
-                        </span>
-
-                        <h5 className="text-base mb-0">Non-profits</h5>
-                        <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
-                    </div>
-
-                    <div className="pl-7 relative mb-4">
-                        <span className="w-6 h-6 absolute top-0 left-1 opacity-50">
-                            <IconPercentage />
-                        </span>
-
-                        <h5 className="text-base mb-0">Startups</h5>
-                        <p className="text-[15px] mb-1">
-                            If your startup is under two years old and has raised less than $5m, check out our{' '}
-                            <Link to="/startups">startup program</Link>.
-                        </p>
+                <div className="col-span-3 md:col-span-8 p-1 pr-4 flex justify-end items-center text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br text-right h-full">
+                    <div className="flex items-baseline">
+                        <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
+                        <span className="opacity-60">/mo</span>
                     </div>
                 </div>
             </div>
