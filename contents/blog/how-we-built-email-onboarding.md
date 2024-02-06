@@ -45,7 +45,7 @@ By Q3 2023, we were adding more and more new products to PostHog. We wanted to f
 ![Onboarding 3.0](../images/blog/onboarding/onboarding_3.png)
 <caption>New emails for 3.0 tried to emphasize what was possible with PostHog, directing users to helpful blog content</caption>
 
-Here’s what the data looked like. Our conversion event was a user log-in within one week of opening an email. We hadn’t yet thought of anything better. 
+Our conversion event was a user log-in within one week of opening an email. We hadn’t yet thought of anything better. 
 
 - **Open rate:** 56%
 - **Click-through-rate:** 7.4%
