@@ -74,7 +74,23 @@ export const PricingCalculator = () => {
                     <strong className="md:hidden">Products</strong>
                 </div>
                 <div className="hidden md:block md:col-span-4 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
-                    Pricing starts at...
+                    <Tooltip
+                        content={() => (
+                            <div className="max-w-sm">
+                                <p className="mb-0 text-sm">
+                                    <strong>Prices decrease exponentially with greater volume.</strong>
+                                    <br />
+                                    Click a product name to see the full price breakdown and feature availability broken
+                                    down by plan.
+                                </p>
+                            </div>
+                        )}
+                        placement="top"
+                    >
+                        <span className="relative">
+                            Pricing starts at... <IconInfo className="w-4 h-4 inline-block relative -top-px" />
+                        </span>
+                    </Tooltip>
                 </div>
                 <div className="hidden md:block md:col-span-4 xl:col-span-5 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
                     Calculate your price
@@ -91,9 +107,14 @@ export const PricingCalculator = () => {
                 {products.map((product, index) => (
                     <React.Fragment key={index}>
                         <div className="col-span-16 sm:col-span-8 border-t md:border-t-0 border-light dark:border-dark md:col-span-3 pt-4 md:pb-4 md:pr-4">
-                            <div className="col-span-7 @md:col-span-6 flex md:flex-col mdlg:flex-row gap-2 md:gap-1 mdlg:gap-2 mdlg:items-center sm:pl-0 md:pl-2 mb-1 @md:mb-0">
-                                {product.icon}
-                                <span className="font-semibold text-[15px]">{product.name}</span>
+                            <div className="col-span-7 @md:col-span-6 sm:pl-0 md:pl-2 mb-1 @md:mb-0">
+                                <Link
+                                    to={product.link}
+                                    className="inline-flex md:flex-col mdlg:flex-row gap-2 md:gap-1 mdlg:gap-2 mdlg:items-center hover:bg-accent dark:bg-accent-dark rounded p-1 text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
+                                >
+                                    {product.icon}
+                                    <span className="font-semibold text-[15px]">{product.name}</span>
+                                </Link>
                             </div>
                         </div>
                         <div className="col-span-16 sm:col-span-8 sm:border-t border-light dark:border-dark md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8">

@@ -274,8 +274,11 @@ const Pricing = (): JSX.Element => {
                                 content={() => (
                                     <div className="max-w-sm">
                                         <strong className="block">Why not value-based pricing?</strong>
-                                        <p className="mb-0">
-                                            Value-based pricing tries to see how much money you're willing to pay.
+                                        <p className="mb-2 text-sm">
+                                            Value-based pricing is geared around testing how much money you're willing
+                                            to pay.
+                                        </p>
+                                        <p className="mb-0 text-sm">
                                             Usage-based pricing is like a utility - where we continually seek to lower
                                             costs and make money through volume.
                                         </p>
@@ -555,7 +558,7 @@ const Pricing = (): JSX.Element => {
                                 <CallToAction
                                     size="sm"
                                     type="secondary"
-                                    className="mt-auto self-start sm:w-auto !w-full"
+                                    className="mt-auto self-start sm:w-auto"
                                     to="/docs/self-host"
                                 >
                                     Read the docs
@@ -579,7 +582,7 @@ const Pricing = (): JSX.Element => {
                                             <CallToAction
                                                 size="sm"
                                                 type="secondary"
-                                                className="mt-auto self-start sm:w-auto !w-full"
+                                                className="mt-auto self-start sm:w-auto"
                                                 to="/startups"
                                             >
                                                 Learn about our startups program
