@@ -17,7 +17,7 @@ A/B tests help you improve your PHP app by enabling you to compare the impact of
 
 ## 1. Create a basic PHP app
 
-First, ensure [PHP](https://www.php.net/manual/en/install.php). Then, create a new folder for project called `php-ab-tests`. In this folder, create an `index.php`:
+First, ensure [PHP](https://www.php.net/manual/en/install.php) is installed. Then, create a new folder for your project called `php-ab-tests`. In this folder, create an `index.php`:
 
 ```bash
 mkdir php-ab-tests
@@ -25,11 +25,10 @@ cd ./php-ab-tests
 touch index.php
 ```
 
-Next, add the following code to `index.php` to set up a basic page with a simple heading and paragraph:
+Next, add the following code to `index.php` to set up a basic page with a heading and paragraph:
 
 ```php file=index.php
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
 $paragraphText = 'Placeholder text';
 ?>
 
@@ -52,7 +51,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 To start, make sure [Composer](https://getcomposer.org/) is installed. Then run `composer require posthog/posthog-php` to install [PostHog’s PHP SDK](/docs/libraries/php).
 
-Then, we initialize PostHog at the top of `index.php` using our project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
+Then, initialize PostHog at the top of `index.php` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 
 ```php file=index.php
 <?php
@@ -67,7 +66,7 @@ PostHog::init(
 // rest of your code
 ```
 
-Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event: 
+Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event using `PostHog::capture()`. We also call `PostHog::flush()` to ensure PostHog sends the event before the request is closed: 
 
 ```php file=index.php
 <?php
@@ -94,7 +93,7 @@ PostHog::capture([
 PostHog::flush();
 ?>
 
-// your html code
+<!-- your existing html code -->
 ```
 
 With this set up, restart your app and then refresh your browser a few times. You should now see the captured event in your [PostHog activity tab](https://us.posthog.com/events).
@@ -130,7 +129,7 @@ Click "Save as draft" and then click "Launch".
 
 To implement the A/B test, we: 
 
-1. Fetch the `my-cool-experiment` flag using [`PostHog::getFeatureFlag()`](/docs/libraries/php#feature-flags). 
+1. fetch the `my-cool-experiment` flag using [`PostHog::getFeatureFlag()`](/docs/libraries/php#feature-flags). 
 2. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 ```php file=index.php
@@ -146,6 +145,7 @@ PostHog::init(
 $paragraphText = 'Placeholder text';
 $distinctId = 'placeholder-user-id';
 
+// fetch the feature flag
 $enabledVariant = PostHog::getFeatureFlag(
   'my-cool-experiment',
   $distinctId
