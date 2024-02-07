@@ -406,20 +406,19 @@ h4 {
     transition: none;
 }
 
-.tooltip > div.placement-top:before {
-    clip-path: polygon(100% 0, 0 100%, 100% 100%);
-}
-
-.tooltip > div.placement-right:before {
-    clip-path: polygon(100% 100%, 0 0, 0 100%);
-}
-
-.tooltip > div.placement-bottom:before {
-    clip-path: polygon(100% 0, 0 0, 0 100%);
-}
-
-.tooltip > div.placement-left:before {
-    clip-path: polygon(100% 100%, 100% 0, 0 0);
+.tooltip {
+    .placement-top:before {
+        clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    }
+    .placement-right:before {
+        clip-path: polygon(100% 100%, 0 0, 0 100%);
+    }
+    .placement-bottom:before {
+        clip-path: polygon(100% 0, 0 0, 0 100%);
+    }
+    .placement-left:before {
+        clip-path: polygon(100% 100%, 100% 0, 0 0);
+    }
 }
 
 /* timeline key */
