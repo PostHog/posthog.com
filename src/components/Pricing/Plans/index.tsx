@@ -183,7 +183,7 @@ const AddonTooltipContent = ({ addon }) => {
 
 const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: BillingProductV2Type }) => {
     return (
-        <Tooltip placement="right-end" content={() => <AddonTooltipContent addon={addon} />}>
+        <Tooltip placement="right" content={() => <AddonTooltipContent addon={addon} />}>
             <span className="relative">{children}</span>
         </Tooltip>
     )
@@ -371,7 +371,7 @@ export default function Plans({
                                     >
                                         <div className="flex-grow">
                                             <Tooltip
-                                                placement="right-end"
+                                                placement="right"
                                                 content={() => (
                                                     <div className="p-2 max-w-sm">
                                                         <p className="font-bold text-[15px] mb-1">{feature.name}</p>
