@@ -4,6 +4,9 @@ date: 2023-12-05
 author: ["lior-neu-ner"]
 tags: ['experimentation', 'feature flags']
 ---
+
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/nuxtjs-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 A/B tests are crucial for optimizing your Nuxt.js app. PostHog's experimentation tool simplifies this process. This tutorial will show you how to set up and run an A/B test in Nuxt using PostHog.
 
 We'll cover creating a basic Nuxt app, integrating PostHog, and setting up the A/B test.

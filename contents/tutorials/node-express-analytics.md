@@ -9,6 +9,8 @@ featuredVideo: https://www.youtube-nocookie.com/embed/aYRzmDP-Mwc
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/node-express-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Node.js is a JavaScript runtime and server environment. Express.js is a web application framework for Node.js. Express is the most popular backend JavaScript framework and one of the most popular web frameworks across all languages.
 
 This tutorial covers installing Node and Express, building a basic app with them, adding PostHog, and setting up all the tools PostHog offers. This includes feature flags, session recordings, event capture, user identification, and more.

@@ -8,6 +8,8 @@ featuredVideo: https://www.youtube-nocookie.com/embed/cKaQ2mR4sSc
 tags: ["feature flags"]
 --- 
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/test-frontend-feature-flags" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Combining both testing and feature flags can be a bit tricky. Tests generally check only one variant of the feature flag and leave other code untested. If you want to test the code behind feature flags, you must set up your tests to do so.
 
 To do this, you need to mock the flags to access the other variations. This tutorial shows you how to do that by creating a React app with Jest tests, adding PostHog, then setting up tests that work with feature flags by mocking PostHog.

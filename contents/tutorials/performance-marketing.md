@@ -8,6 +8,8 @@ featuredVideo: https://www.youtube-nocookie.com/embed/ExaQmFuaSyo
 tags: ['funnels', 'insights', 'product analytics']
 --- 
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/performance-marketing" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Performance marketing is paying for ads, attention, and clicks to your site where you try to convert them into users and customers. Companies use channels like Google, Facebook, other social media, ad networks, and sponsorships to do this. 
 
 In this tutorial, we’ll cover how to track your performance marketing campaigns, channels, traffic, and conversion using PostHog's product analytics suite.

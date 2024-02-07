@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['feature flags', 'configuration']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/track-high-volume-apis" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Tracking high-volume APIs is a balancing act. You want to keep them as efficient as possible, while still capturing data to improve them. This tutorial aims to help you find this balance. 
 
 We'll build an API in Express, add PostHog, and then implement two solutions for tracking:

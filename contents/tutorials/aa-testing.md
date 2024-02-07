@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['experimentation', 'feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/aa-testing" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 An A/A test is the same as an [A/B test](/docs/experiments) except both groups receive the same code or components. Since both groups get identical functionality, the goal is to **not** see a statistical difference between the variants by the end of the experiment. 
 
 Teams run A/A tests to ensure their A/B test service, functionality, and implementation work as expected and provides accurate results. A/A tests are a way to discover broken parts of this process, and this tutorial shows you how to run one in PostHog.

@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["configuration", "feature flags"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/nextjs-bootstrap-flags" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) enables you to run functions between requests and responses. We can use this to [bootstrap feature flags](/docs/feature-flags/bootstrapping-and-local-evaluation) on page load and make them available immediately without making an additional requests. This is useful for redirecting, showing components without flickering, avoiding layout changes, and more.
 
 In this tutorial, we create a basic Next.js app, set up [feature flags](/docs/feature-flags) with PostHog, write middleware to get those feature flags, and bootstrap them in the client. 

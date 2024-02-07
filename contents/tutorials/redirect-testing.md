@@ -8,6 +8,8 @@ featuredImage: ../images/tutorials/banners/tutorial-16.png
 tags: ['experimentation', 'feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/redirect-testing" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Redirect testing is a way to [A/B test](/ab-testing) web pages by redirecting users to one or the other.
 
 To show you how to do a redirect test with PostHog, we set up a two-page Next.js app, create an A/B test in PostHog, and then implement it in our app using middleware and feature flags. 

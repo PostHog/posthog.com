@@ -8,6 +8,8 @@ featuredTutorial: true
 tags: ["surveys"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/feedback-interviews-site-apps" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Getting feedback is critical to building a successful product. Metrics and analytics are key pieces of feedback, but at an early stage, written feedback and interviews are even better. To maximize the amount of feedback you get, you need processes, but these are often time-consuming.
 
 PostHog’s [surveys](/docs/surveys/manual) help automate the process of getting feedback and booking interviews. In this tutorial, we show how to set up surveys to do both.

@@ -7,6 +7,8 @@ date: 2023-01-26
 tags: ["apps", "site-apps", 'cdp']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/laudspeaker-posthog" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Laudspeaker is a cross-channel customer messaging platform and an open source alternative to platforms such as Customer.io, Braze, or Iterable. It enables you to create automated customer journeys so your users receive messages when they complete specific actions on your site. 
 
 Given that Laudspeaker and PostHog are both open source, and both track events across your product, integrating them can be especially powerful. Using the [Laudspeaker Connector](/apps/laudspeaker-connector), you can trigger a wide variety of customer journeys based on PostHog events including:

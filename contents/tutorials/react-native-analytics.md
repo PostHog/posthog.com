@@ -8,6 +8,8 @@ featuredTutorial: false
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/react-native-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 React Native is a popular mobile app framework for writing native mobile apps using React.
 
 In this tutorial, we show how to create a basic React Native app using Expo (a suite of dev tools for React Native). We then add PostHog to that app and set up tools like autocapture, user identification, and feature flags.

@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["insights", "trends", 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/dau-mau-ratio" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 The ratio of daily active users over monthly active users, or DAU/MAU ratio, is a popular engagement metric measuring stickiness. It shows what percentage of your users are active and use your product every day.
 
 Products with high DAU/MAU ratios get users to return often. It shows a deep, repeated desire to use the product. Facebook popularized the DAU/MAU ratio, which they used to judge the success of their products (and still do).

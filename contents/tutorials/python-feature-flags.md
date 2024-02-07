@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["feature flags"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/python-feature-flags" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Feature flags make it easy to conditionally run code and show content based on users or conditions. In this tutorial, we show how to create a basic Python Flask app, add PostHog, and set up [feature flags](/feature-flags) to conditionally show content in the app.
 
 ## Creating a Flask app and adding PostHog

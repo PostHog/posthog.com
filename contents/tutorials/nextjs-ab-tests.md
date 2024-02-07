@@ -8,6 +8,8 @@ featuredVideo: https://www.youtube-nocookie.com/embed/QfTMREUEc18
 tags: ['experimentation', 'feature flags', 'actions']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/nextjs-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Many of the features of Next.js optimize for creating the best possible user experience. It automates and abstracts functionality like static page generation, image loading optimization, and optional server-side rendering, allowing you to focus on the content of your app.
 
 A/B tests are a way to make sure this content performs as well as possible. A/B tests involve comparing two or more variations against a goal. The winner is the one which achieves the goal best and is then used to improve everyone's experience.

@@ -16,6 +16,8 @@ import ImgSurveyResultsDark from '../images/tutorials/angular-surveys/survey-res
 import ImgSurveyTemplatesLight from '../images/tutorials/angular-surveys/survey-templates-light.png'
 import ImgSurveyTemplatesDark from '../images/tutorials/angular-surveys/survey-templates-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/angular-surveys" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Angular.js app.
 
 We'll create a basic Angular app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.

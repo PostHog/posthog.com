@@ -16,6 +16,8 @@ import ImgSurveyResultsDark from '../images/tutorials/remix-surveys/survey-resul
 import ImgSurveyTemplatesLight from '../images/tutorials/remix-surveys/survey-templates-light.png'
 import ImgSurveyTemplatesDark from '../images/tutorials/remix-surveys/survey-templates-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/remix-surveys" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Remix app.
 
 We'll create a basic Remix app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.

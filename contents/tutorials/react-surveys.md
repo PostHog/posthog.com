@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['surveys']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/react-surveys" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Surveys](/docs/surveys) are a great tool to collect qualitative feedback from your users. This tutorial shows you how to implement a survey in a React app. 
 
 We'll create a basic React app, add PostHog, create a survey, and then add the code to show the survey in-app and collect responses.

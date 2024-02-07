@@ -9,7 +9,7 @@ tags: ['filters', 'settings', 'product os']
 date: 2022-02-14
 ---
 
-_Estimated reading time: 4 minutes_ ☕
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/filter-internal-users" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 When you’re investigating an insight, it’s important to make sure you’re looking at the best possible data and that your findings aren’t skewed. That means checking you understand the definition of events or actions you’re using and, if need be, filtering out groups such as internal users, beta testers and contractors or agencies. 
 

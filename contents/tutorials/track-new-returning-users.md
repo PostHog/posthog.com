@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["trends", "cohorts", 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/track-new-returning-users" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Understanding user growth is critical to building a successful product. A lack of new users or existing users churning is a bad sign. This tutorial goes over the different ways to calculate new and returning users in PostHog, as well as insights you can create using these calculations.
 
 > **How does Google Analytics calculate new vs returning users?** When you first visit a site, Google Analytics generates a client ID for your device and sets it in your cookies. GA uses this client ID cookie to calculate if a user is new (didn’t have cookie set) or returning (had cookie set). This, like any tracking, isn’t 100% accurate.

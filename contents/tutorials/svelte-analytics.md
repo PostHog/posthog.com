@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/svelte-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Svelte is a popular frontend JavaScript framework, similar to [Next.js](/tutorials/nextjs-analytics) and [Vue](/tutorials/posthog-for-vuejs). Svelte shifts much of the work for processing the app from the browser, to a compile step when you build your app.
 
 In this tutorial, we'll build a basic Svelte blog app with user authentication, add PostHog, and set up the features of PostHog including custom event capture, session recordings, user identification, feature flags, and more.

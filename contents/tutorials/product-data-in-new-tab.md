@@ -7,6 +7,7 @@ date: 2022-11-04
 tags: ['apps', 'product os']
 ---
 
+
 Keeping product analytics top of mind keeps you focused on what matters to your product and customers. It reminds you about the state of the product, and what you need to do to improve it.
 
 When you spend lots of time on a computer, one of the areas you see the most is the new tab page in your browser. There are many extensions for changing and customizing the new tab page, but one of the most popular (and one of our favorites) is [Momentum Dash](https://momentumdash.com/). It transforms the new tab into a focused, productive, and inspiring dashboard. 

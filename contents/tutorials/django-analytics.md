@@ -9,6 +9,8 @@ featuredVideo: https://www.youtube-nocookie.com/embed/QB-PI_ZXkwo
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/django-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Django is a popular Python web framework. It’s used by thousands of teams and developers around the world, including PostHog, to build apps, websites, APIs, and more.
 
 In this tutorial, we go from nothing to a full Django app with all of the PostHog tools setup. These include [autocapture](/docs/data/autocapture), [session recordings](/manual/recordings), custom event capture, connecting frontend and backend user identification, and [feature flags](/manual/feature-flags).

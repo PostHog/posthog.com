@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['events', 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/rss-item-capture" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 RSS is a popular format for providing feeds of content. For example, GitHub uses it to provide feeds of releases, blogs provide feeds of new posts, and status pages provide feeds of incidents
 
 We can capture events from these feeds by polling them, checking for new entries, and then capturing them into PostHog. This is exactly what we do in this tutorial, with the help of [Val Town](https://www.val.town/), a platform for writing, running, and scheduling JavaScript functions in your browser. 

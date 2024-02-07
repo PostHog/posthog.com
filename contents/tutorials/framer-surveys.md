@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['surveys']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/framer-surveys" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Surveys are a great way to conduct market research and collect qualitative data from your users. This tutorial shows you how to do exactly that by using PostHog on your [Framer](https://framer.com/) website.
 
 We'll show you to add PostHog to your Framer site and then create beautiful surveys in just a few clicks.

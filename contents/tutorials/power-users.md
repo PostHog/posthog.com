@@ -7,6 +7,8 @@ date: 2022-10-31
 tags: ['trends', 'cohorts', 'session replay', 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/power-users" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.
 
 They care more about new features and upgrades. They have different needs and usage patterns than average users. They notice changes (positive or negative) average users won't. 

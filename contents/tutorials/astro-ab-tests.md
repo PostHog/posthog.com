@@ -11,6 +11,8 @@ import EventsInPostHogDark from '../images/tutorials/astro-ab-tests/events-dark.
 import TestSetupLight from '../images/tutorials/astro-ab-tests/experiment-setup-light.png'
 import TestSetupDark from '../images/tutorials/astro-ab-tests/experiment-setup-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/astro-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 A/B tests help you make your Astro app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Astro app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create an Astro app

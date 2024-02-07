@@ -9,6 +9,8 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import EventsLight from '../images/tutorials/react-analytics/events-light.png'
 import EventsDark from '../images/tutorials/react-analytics/events-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/react-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your React app. To show you how to set up analytics, in this tutorial we create a basic React app, add PostHog, and use it to capture pageviews and custom events.
 
 ## Creating a React app

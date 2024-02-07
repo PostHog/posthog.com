@@ -8,6 +8,8 @@ featuredTutorial: false
 tags: ['configuration', 'persons', 'sessions', 'product analytics', 'product os']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/cross-domain-tracking" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Many companies use multiple domains for different parts of their products. A common structures include one domain for the marketing website and another (subdomain) for the app, multiple connected domains, and separate domains for documentation and community sections. This is great for having different content and ensuring no conflicts but causes issues when it comes to tracking.
 
 The jump from one domain to another causes problems with the tracking. The first site identifies a user and tracks them, but the second site doesn’t always have access to that user and the related tracking information. To help solve this problem, there are some ways to set up cross domain tracking.

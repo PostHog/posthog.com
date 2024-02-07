@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['events', 'persons', 'product analytics', 'product os']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/api-capture-events" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 PostHog provides [libraries](/docs/integrate?tab=sdks) that make it easy to capture events in popular languages. These libraries are basically wrappers around the API. They handle and automate common tasks like capturing pageviews.
 
 Using the API directly allows for any language that can send requests to capture events, or completely customize your implementation. Using the API to capture events directly also gives you a better understanding of PostHog’s event-based data structures which is abstracted if you use a library. 

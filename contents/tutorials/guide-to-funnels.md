@@ -8,8 +8,7 @@ tags: ["funnels", "correlation analysis", "paths", 'product analytics']
 date: 2022-04-20
 ---
 
-- **Level:** Intermediate 🦔🦔
-- **Estimated reading time:** 9 minutes ☕️☕️
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/guide-to-funnels" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 A user landing on a page is just the beginning. You want users to sign up, use the product, pay you, or complete a series of steps in your product to make full use of a key feature.
 

@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/location-based-banner" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Many sites want to set up banners to display information for different users, such as regional announcements or country-based alerts. Doing this with [feature flags](/docs/feature-flags) is simple and this tutorial shows you how to set it up for a Next.js app (but it can be done with any framework).
 
 ## Create a Next.js app

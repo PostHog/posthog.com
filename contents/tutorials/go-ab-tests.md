@@ -13,6 +13,8 @@ import TestSetupDark from '../images/tutorials/go-ab-tests/experiment-setup-dark
 import ResultsLight from '../images/tutorials/go-ab-tests/results-light.png'
 import ResultsDark from '../images/tutorials/go-ab-tests/results-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/go-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 A/B tests help you improve your Go app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Go app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create a basic Go app

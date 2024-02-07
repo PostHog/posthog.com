@@ -8,6 +8,8 @@ featuredImage: ../images/tutorials/banners/tutorial-14.png
 tags: ["configuration", "feature flags", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/angular-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Angular is one of the original JavaScript web app frameworks and remains a popular choice for building them. To make your Angular app as good as possible, you need tools like [analytics](/docs/product-analytics), [session replay](/docs/session-replay), and [feature flags](/docs/feature-flags). PostHog provides these tools and is easy to set up in Angular.
 
 This tutorial shows you how to set up the tools PostHog provides by creating a basic Angular app, adding PostHog, and then using it to capture events and manage feature flags.

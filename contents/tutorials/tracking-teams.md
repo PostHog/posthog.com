@@ -7,7 +7,7 @@ date: 2021-04-08
 tags: ['configuration', 'product analytics']
 ---
 
-_Estimated reading time: 12 minutes_ ☕☕☕
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/tracking-teams" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 When using PostHog or any other product analytics tool, there are two key entities that underpin all of your analytics: events and users.
 

@@ -10,6 +10,8 @@ author: ['joe-martin']
 tags: ['configuration', 'product os']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/cookieless-tracking" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 - **Level:** Medium 🦔🦔
 - **Estimated reading time:** 5 minutes ☕️
 

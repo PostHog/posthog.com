@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['insights', 'hogql', 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/bounce-rate" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Bounce rate is the percentage of users who leave your page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors.  
 
 This tutorial shows you how to calculate bounce rate in PostHog. To get started, you need to install the [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript SDK](/docs/libraries/js) and enable "record user sessions"  in [project settings](https://app.posthog.com/project/settings).

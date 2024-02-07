@@ -8,8 +8,7 @@ author: ['joe-martin']
 tags: ['apps', 'sentry', 'product os', 'cdp']
 ---
 
-- *Level:* Easy 🦔
-- *Estimated reading time:* 5 minutes ☕️
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/sentry-plugin-tutorial" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 PostHog offers a variety of tools which are useful for [real user monitoring](/blog/real-user-monitoring) and debugging errors, such as [Session Recording](/docs/user-guides/recordings), [Paths](/docs/user-guides/paths) and [Trends](/docs/user-guides/trends) — yet it is not a bespoke error monitoring tool. 
 

@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/group-page-machine-flags" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 To decide what value to return, PostHog’s feature flag service uses a flag key and an entity. Which entity to use it up to you, and these don't necessarily need to be _users_ – you can also target organizations, pages, machines, and more. 
 
 This tutorial shows you how to target these non-user entities in your use of feature flags.

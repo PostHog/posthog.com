@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['experimentation']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/react-ab-testing" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 A/B tests help you make your React app better by comparing changes for their impact on key metrics. To show you how to set one up, we will create a basic React app, add PostHog, create an experiment, and implement it to A/B test content in our app.
 
 ## Creating a React app

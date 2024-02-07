@@ -5,6 +5,8 @@ author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/android-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [A/B tests](/ab-testing) enables you to compare the impact of your changes on key metrics. 
 
 PostHog makes [A/B testing on Android](/docs/experiments/installation?tab=android) simple. To show you how, this tutorial will guide you on how to run an A/B test with PostHog on an app built with Kotlin and Jetpack Compose. We will create a simple A/B test to see how the background color of a screen affects the click-through rate of a button.

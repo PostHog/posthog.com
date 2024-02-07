@@ -8,7 +8,7 @@ featuredVideo: https://www.youtube-nocookie.com/embed/C_zNykBHlTI
 tags: ["actions", "toolbar", 'product os']
 ---
 
-**Estimated reading time:** 6 minutes ☕☕
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/how-to-capture-events-the-easy-way" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 Events are the bedrock of PostHog and can basically be summed up as ‘anything your users do’. If a user clicks a registration button, that’s an event. If a user loads a webpage, that’s an event. If a user subscribes to a newsletter, that’s an event. And PostHog can capture them all.
 

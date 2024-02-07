@@ -13,6 +13,8 @@ import EventsDark from '../images/tutorials/vue-feature-flags/events-dark.png'
 import CreateFlagLight from '../images/tutorials/vue-feature-flags/create-flag-light.png'
 import CreateFlagDark from '../images/tutorials/vue-feature-flags/create-flag-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/vue-feature-flags" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Feature flags](/feature-flags) help you release features and conditionally show content. This tutorial shows you how integrate them in your Vue.js app using PostHog. 
 
 We'll create a basic Vue app, add PostHog, create a feature flag, and then implement the flag to control content in your app.

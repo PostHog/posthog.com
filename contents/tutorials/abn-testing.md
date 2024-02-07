@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['experimentation', 'feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/abn-testing" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 A/B/n testing is like an A/B test where you compare multiple (n) variants instead of just two. It can be especially useful for small but impactful changes where many options are available like copy, styles, or pages.
 
 This tutorial will show you how to create and implement an A/B/n test in PostHog.

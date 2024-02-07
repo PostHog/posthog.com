@@ -13,6 +13,8 @@ import EventsInPostHogDark from '../images/tutorials/bubble-ab-tests/events-in-p
 import TestSetupLight from '../images/tutorials/bubble-ab-tests/test-setup-light.png'
 import TestSetupDark from '../images/tutorials/bubble-ab-tests/test-setup-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/bubble-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Bubble](https://bubble.io/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change actually improves your conversion rate. This is where [A/B testing](/ab-testing) is helpful. It enables you to test and compare the results of your changes.
 
 This tutorial shows you how to set up A/B tests with Bubble and PostHog to get the most out of your website.

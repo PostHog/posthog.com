@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['hogql', 'insights', 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/time-on-page" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Understanding how users spend their time on your site helps you understand your site’s strengths and weaknesses. Calculating the time spent on a page is the key metric for doing this. In this tutorial, we show you how to calculate time on page and related metrics using PostHog.
 
 The challenge with time on page is measuring activity. Because of the event-driven structure of PostHog, we can’t be 100% sure a session is active at any point. Instead, we can estimate time spent by getting the time between a first pageview event and a subsequent pageview or pageleave event, filtering out extreme values, and averaging these together.

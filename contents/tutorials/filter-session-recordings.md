@@ -5,9 +5,9 @@ showTitle: true
 featuredTutorial: false
 author: ['joe-martin']
 tags: ['session replay']
-featuredVideo: https://www.youtube-nocookie.com/embed/3BS5h2gkz90
 date: 2022-11-03
 ---
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/filter-session-recordings" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 Funnels may tell you _where_ users are experiencing friction within your product, but only session replays can show you _why_.
 

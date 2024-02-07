@@ -8,6 +8,8 @@ featuredVideo: https://www.youtube-nocookie.com/embed/trk8LM2FQKw
 tags: ["configuration", "feature flags", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/nextjs-app-directory-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Next.js release 13 added many improvements including the Turbopack bundler, an improved `next/image` component, changes to the `Link` component, and more. One of the big ones was the move from the `pages` to the `app` directory and router.
 
 The `app` router includes support for layouts, server components, streaming, and component-level data fetching. These are all upgrades to the Next.js `pages` directory, but change the implementation of a Next.js app, including setting up PostHog. This tutorial goes over how to implement PostHog on the client and server side when using the Next.js app router. 

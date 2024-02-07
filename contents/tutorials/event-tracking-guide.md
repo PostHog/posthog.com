@@ -8,8 +8,7 @@ featuredVideo: https://www.youtube-nocookie.com/embed/LIJ_TuyMq74
 tags: ['actions', 'events', 'product os', 'product analytics']
 ---
 
-- **Level:** Medium 🦔🦔
-- **Estimated reading time:** 12 minutes ☕️☕️
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/event-tracking-guide" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 Event tracking is the first step in making a product better (after building the product). Event tracking gathers the data you need to understand the usage of your product, do analysis, and make improvement decisions. Ideally, every time a user takes action, an event can be captured that helps deepen your understanding of the usage of your product.
 

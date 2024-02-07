@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/ruby-on-rails-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Ruby on Rails is a popular fullstack web framework used by companies like Shopify, GitHub, Twitch, and more.
 
 In this tutorial, we build a basic [Ruby on Rails](https://rubyonrails.org/) app, add PostHog to it, and then set up some of the key features of PostHog, such as custom event capture, user identification, and feature flags.

@@ -7,7 +7,7 @@ date: 2022-07-06
 tags: ["actions", "toolbar", 'product analytics']
 ---
 
-_Estimated reading time: 7 minutes_ ☕
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/css-selectors-for-actions" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 PostHog supports different methods for creating [actions](/docs/user-guides/actions): autocapturing, using the [toolbar](/docs/user-guides/toolbar) and via CSS selectors. 
 

@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['events']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/calendly-webhooks" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Webhooks enable you to send data from one platform to another when an event happens. This enables you to run workflows and code to handle those events.
 
 To showcase the power of webhooks, we are going to capture [Calendly](https://calendly.com/) meeting data into PostHog using [Val Town](https://www.val.town/), a platform for writing and running JavaScript functions in your browser. 

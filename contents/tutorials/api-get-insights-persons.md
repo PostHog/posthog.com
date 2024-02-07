@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['insights', 'persons', 'product os']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/api-get-insights-persons" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 An API or application programming interface is how computers talk to each other. They are powerful access points to applications, data, and processing.
 
 This tutorial shows you the basics of the PostHog API. We focus on `GET` requests to retrieve information on insights and persons from your project

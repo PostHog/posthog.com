@@ -7,6 +7,8 @@ date: 2022-10-10
 tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions', 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/churn-rate" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 - **Level:** Easy 🦔
 - **Estimated reading time:** 6 minutes ☕️
 

@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['surveys', 'actions']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/fake-door-test" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building. When users interact with it, you tell them it isn't available (yet). This enables you determine if your users would actually be interested in your new feature.
 
 This tutorial shows you how to set up a fake door test with PostHog. We'll build a basic app, set up a fake door test, and then implement surveys to get more feedback.

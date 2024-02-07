@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['insights', 'hogql', 'user paths', 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/first-last-touch-attribution" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Understanding where users are coming from helps prioritize future development and marketing efforts. To analyze this, companies do "attribution", which is the process of figuring out what caused a conversion. 
 
 Two common ways of doing attribution are:

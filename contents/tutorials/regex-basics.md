@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["insights", 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/regex-basics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Regular expressions or regex is a way to search text for patterns. It is a structure of symbols that finds text matching what you want. In doing so, it is a powerful way to filter and validate strings of text.
 
 PostHog provides the ability to use regex to filter properties in many tools from insights to cohorts to feature flags. This tutorial explains the basics of regex, as well as PostHog-specific use cases to take advantage of.

@@ -7,7 +7,9 @@ sidebar: Docs
 featuredVideo: https://www.youtube-nocookie.com/embed/T9MbFiDU6hY
 tags: ["configuration", "insights", 'product analytics']
 ---
-    
+
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/scroll-depth" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 You can waste a lot of effort on parts of pages people never see. While [session replay](/tutorials/explore-insights-session-recordings) is great for understanding individual sessions, an aggregate understanding of how much of a page is viewed is valuable too. This is where tracking scroll depth can be helpful. 
 
 In this tutorial, we go over the different ways of measuring scroll depth, calculating and tracking them with PostHog, then creating insights with the data captured.

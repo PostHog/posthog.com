@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['insights', 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/customer-facing-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 If you are a host, content platform, or some other type of B2B2C product, your users might want to know their traffic or usage metrics. To put it another way: if your users have their own users, sometimes your users want analytics about their users. Customer-facing analytics are analytics you capture and display to your users to fulfill this need.
 
 This tutorial shows you how to set up customer-facing analytics using PostHog and its API, Next.js, and Tremor (a React visualization library). You need a PostHog instance ([sign up for free](https://app.posthog.com/signup)) as well as a way to filter your analytics for an individual user, such as a user or group property (like name, domain, ID).

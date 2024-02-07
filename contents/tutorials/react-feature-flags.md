@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/react-feature-flags" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Feature flags](/docs/feature-flags) help you release features and conditional show content in your React apps. This tutorial shows you how to create a basic React app, add PostHog, create a feature flag, and then implement the flag to control content in your app.
 
 ## Create your React app

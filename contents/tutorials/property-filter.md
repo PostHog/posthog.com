@@ -7,7 +7,7 @@ tags: ["apps", "configuration", "data management", 'product os']
 date: 2022-07-01
 ---
 
-_Estimated reading time: 2 minutes_ ☕
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/property-filter size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 By default, PostHog has the ability to gather IP data on users to determine their location, via the [GeoIP Enricher app](/apps/geoip-enrichment). 
 

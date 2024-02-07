@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['surveys']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/webflow-surveys" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Surveys are a great way to collect feedback from your users. This tutorial shows you how to create surveys for your [Webflow](https://webflow.com/) marketing site using PostHog.
 
 ## Adding PostHog to your Webflow site

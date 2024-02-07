@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['experimentation', 'feature flags']
 ---    
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/holdout-testing" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Holdout testing is a type of [A/B testing](/docs/experiments) that measures the long term effects of product changes. In holdout testing, a small group of users is not shown your changes for a long period of time, typically weeks or months after your experiment ends.
 
 Holdout testing enables you to ensure that the experiment doesn’t have negative long term effects or interaction with other experiments.

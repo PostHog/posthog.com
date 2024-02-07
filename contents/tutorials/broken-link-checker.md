@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['actions', 'configuration', 'product os']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/broken-link-checker" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Broken links and 404s are frustrating for users. Without a way to check for them, you might not realize they exist and can’t fix them. 
 
 This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist.

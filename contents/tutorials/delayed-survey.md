@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['surveys']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/delayed-survey" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 When asking for feedback, timing is everything. You want users to **actually use your app** before asking them about it. A survey that pops up immediately can annoy users and receive worse responses.
 
 To help you get feedback at the right time, this tutorial shows you how to set up a [PostHog survey](/docs/surveys) that shows after a delay.

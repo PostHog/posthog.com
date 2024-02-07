@@ -8,6 +8,8 @@ featuredVideo: https://www.youtube-nocookie.com/embed/E9QA0xPDpUk
 tags: ['feature flags', 'experimentation']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/react-popups" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Popups are a way to highlight features in your app. This tutorial shows how to add them to a React app and control them using [React feature flags](/tutorials/react-feature-flags) and JSON payloads. Feature flag payloads are an ideal tool for this because they enable you to send arbitrary data that controls the popup location and content without needing to redeploy. 
 
 ## Creating a React app

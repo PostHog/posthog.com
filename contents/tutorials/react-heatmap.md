@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["heatmaps", "toolbar", 'product os']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/react-heatmap" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Understanding where users click your site or app shows you what interests them. A heatmap can visualize these clicks to make this analysis easier.
 
 Setting up a heatmap for a React app with PostHog is simple. This tutorial will walk through setting up a basic React app, adding PostHog, accessing the heatmap, and customizing the heatmap to your needs.

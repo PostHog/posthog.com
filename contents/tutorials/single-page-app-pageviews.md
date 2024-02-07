@@ -8,7 +8,7 @@ featuredVideo: https://www.youtube-nocookie.com/embed/I_WJc8T5lL8
 tags: ['configuration', 'events', 'product analytics']
 ---
 
-_Estimated reading time: 12 minutes_ ☕☕
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/single-page-app-pageviews" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 A single page application (or SPA) is an app that lives on a single page. Users can navigate around the app and change the content without having to load new pages. Single page apps rely heavily on caching and components like loading screens compared to other types of apps like progressive web apps.
 

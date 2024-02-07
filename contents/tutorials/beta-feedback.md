@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['surveys', 'feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/beta-feedback" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 The goal of a beta is to get a feature ready for release. This means improving what works well and fixing what doesn't. Using surveys to collect feedback from your users is an easy and scalable way to do this.
 
 This tutorial shows you how to combine PostHog’s [early access management](/docs/feature-flags/early-access-feature-management) and [survey](/docs/surveys) features to set up a beta and get feedback on it.

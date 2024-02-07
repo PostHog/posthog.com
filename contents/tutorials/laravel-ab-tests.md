@@ -13,6 +13,8 @@ import TestSetupDark from '../images/tutorials/laravel-ab-tests/experiment-setup
 import ResultsLight from '../images/tutorials/laravel-ab-tests/results-light.png'
 import ResultsDark from '../images/tutorials/laravel-ab-tests/results-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/laravel-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 A/B tests help you improve your Laravel app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Laravel app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create a basic Laravel app

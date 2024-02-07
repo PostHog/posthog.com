@@ -11,6 +11,8 @@ import EventsInPostHogDark from '../images/tutorials/angular-ab-tests/events-dar
 import TestSetupLight from '../images/tutorials/angular-ab-tests/experiment-setup-light.png'
 import TestSetupDark from '../images/tutorials/angular-ab-tests/experiment-setup-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/angular-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 A/B tests help you make your Angular app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Angular app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create an Angular app

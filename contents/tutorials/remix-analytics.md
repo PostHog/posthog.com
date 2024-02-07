@@ -5,6 +5,8 @@ author: ["ian-vanagas"]
 tags: ["configuration", "feature flags", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/remix-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Remix is a full stack web framework built on [React](/docs/libraries/react) with a specific focus on following web standards. 
 
 In this tutorial, we show you how to add PostHog to your Remix app (on both the client and server side), implement custom event capture, capture pageviews, and use feature flags.

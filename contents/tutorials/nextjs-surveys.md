@@ -8,6 +8,8 @@ featuredImage: ../images/tutorials/banners/tutorial-12.png
 tags: ['surveys']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/nextjs-surveys" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Surveys](/docs/surveys) are an excellent way to get feedback from your users. In this guide, we show you how to add a survey to your Next.js app.
 
 We'll create a basic Next.js app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.

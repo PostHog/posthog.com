@@ -9,6 +9,8 @@ featuredVideo: https://www.youtube-nocookie.com/embed/nSBjr1Sz18o
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/nextjs-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Next.js is a popular web framework built on React. It provides optimizations and abstractions to help developers build fast and performant apps and sites.
 
 In this tutorial, we will:

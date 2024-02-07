@@ -7,6 +7,8 @@ date: 2022-12-23
 tags: ['insights', 'session replay']
 --- 
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/explore-insights-session-recordings" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 One of the biggest benefits of PostHog is the connections from all your product data and tools being in one place. You don’t need to link together multiple products, find ways to connect the right data, and hop between them to create insights. PostHog builds in these links. For example, going from product data to visualizations to session replays is literally three clicks.
 
 In this tutorial, we focus on the connections session replays have with insights and visualizations. These connections enable deeper exploration and understanding of user behavior.

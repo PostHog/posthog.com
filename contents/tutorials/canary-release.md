@@ -7,6 +7,8 @@ date: 2023-09-12
 tags: ["feature flags", "persons"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/canary-release" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Few things are worse than shipping a new feature, having it unexpectedly break, and then scrambling to fix it. To mitigate problems like this, teams often roll out changes to a subset of users before releasing them to everyone. This is known as a canary release or deployment.
 
 This tutorial explains what a canary release is, and how to set one up and monitor it in PostHog.

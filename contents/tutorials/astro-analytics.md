@@ -5,6 +5,8 @@ author: ["ian-vanagas"]
 tags: ["configuration", "feature flags", "events"]
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/astro-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Astro](https://astro.build/) is a frontend JavaScript framework focused on performance and simplifying the creation of content-based sites. It has seen a rapid increase in interest and usage since its release in 2022.
 
 PostHog provides the tools you need to create the best possible Astro app. In this tutorial, we show you how to set them up. We create a basic Astro blog app, add PostHog on both the client and server, [capture custom events](/docs/product-analytics/capture-events), and set up [feature flags](/docs/feature-flags).

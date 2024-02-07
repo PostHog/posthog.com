@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['hogql', 'insights', 'product analytics']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/time-breakdowns" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 By default, PostHog provides an easy way to group events by week, day, and even hour. Sometimes, smaller, more specific breakdowns are required. With [HogQL](/docs/hogql), you can break down events by time of day, hourly, and even minute-by-minute to help you do a detailed analysis of when they happen, and this tutorial shows you how to do that.
 
 ## Time of day breakdown

@@ -7,7 +7,7 @@ date: 2022-10-20
 tags: ['events', 'apps', 'data management', 'product os', 'product analytics']
 ---
 
-**Estimated reading time:** 5 minutes ☕
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/fewer-unwanted-events" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 For some users, cost is a big concern. Too many events can cause unexpected costs when first trying a product analytics platform like PostHog. We want to make sure we are providing value to you as a customer, and if that means capturing fewer events, we’ll do it.
 

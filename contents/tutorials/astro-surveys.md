@@ -16,6 +16,8 @@ import ImgSurveyResultsDark from '../images/tutorials/astro-surveys/survey-resul
 import ImgSurveyTemplatesLight from '../images/tutorials/astro-surveys/survey-templates-light.png'
 import ImgSurveyTemplatesDark from '../images/tutorials/astro-surveys/survey-templates-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/astro-surveys" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Astro app.
 
 We'll create a basic Astro app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.

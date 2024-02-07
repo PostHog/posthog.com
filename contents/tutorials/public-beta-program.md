@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/public-beta-program" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Public betas are a way to get new features into the hands of users and get valuable feedback and analytics. In this tutorial, we show you how to add a basic public beta program to your app with PostHog’s [early access management feature](/docs/feature-flags/early-access-feature-management).
 
 Our example uses Next.js, but this also works for other frameworks and languages.

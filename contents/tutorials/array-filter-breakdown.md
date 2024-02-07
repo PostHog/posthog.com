@@ -8,6 +8,8 @@ featuredImage: ../images/tutorials/banners/tutorial-17.png
 tags: ['hogql', 'insights']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/array-filter-breakdown" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. Although arrays can be a bit tricky to utilize with standard PostHog filters, [HogQL expressions](/docs/hogql/expressions) unlock the ability to make full use of them. 
 
 This tutorial shows you how to access arrays in your data, use them in breakdowns, and set up filters with and for them.

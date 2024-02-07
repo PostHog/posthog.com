@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['session replay', 'product analytics', 'feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/framer-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Framer](https://www.framer.com/) is a popular no-code site builder that makes it easy to design a high-quality site. 
 
 To maximize the effectiveness of your Framer site, you need analytics to see how users are using it. Data like pageviews, button clicks, and session replays are critical to improving your site. 

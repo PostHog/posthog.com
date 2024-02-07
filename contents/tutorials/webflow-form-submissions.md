@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ["configuration", 'surveys']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/webflow-form-submission" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 With PostHog, you can autocapture events and record sessions on your Webflow site. With a bit more setup, you can also use it to capture form submissions. In this tutorial, we show how to do this with a basic Webflow site, PostHog, and some JavaScript.
 
 > Want a full tutorial on how to set up PostHog for Webflow? Check out "[How to set up Webflow analytics and session recordings](/tutorials/webflow)."

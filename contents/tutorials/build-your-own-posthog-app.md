@@ -7,6 +7,8 @@ date: 2022-10-04
 tags: ["apps", 'product os']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/build-your-own-posthog-app" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 **Estimated reading time:** 10 minutes ☕☕☕
 
 Apps are an incredibly powerful part of the PostHog platform, capable of doing almost anything. Apps can alter events as they are ingested, sync data with other platforms, perform scheduled chores and a lot more besides. Almost anything you may want to do with PostHog, you can do with an app.

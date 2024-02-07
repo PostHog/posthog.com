@@ -7,8 +7,7 @@ date: 2022-10-10
 tags: ['experimentation', 'feature flags']
 ---
 
-- **Level:** Medium 🦔🦔
-- **Estimated reading time:** 10 minutes ☕️☕️
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/new-user-experiments" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 Optimizing the initial experience of new users is critical for turning them into existing users. Products have a limited amount of time and attention from new users before they leave and churn. 
 

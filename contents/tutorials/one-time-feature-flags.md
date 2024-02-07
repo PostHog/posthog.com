@@ -7,6 +7,8 @@ sidebar: Docs
 tags: ['feature flags']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/one-time-feature-flags" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 Sometimes you want to show users a component or some content only once. You can use a field in their user model or store it locally, but this gets messy fast. It also might prevent you from changing it remotely. A better way to do this is a feature flag that changes once a user completes what you want.
 
 In this tutorial, we show how to set up a one-time feature flag using PostHog by building a basic Express.js API that provides one response on the first request, and a different one on subsequence requests.

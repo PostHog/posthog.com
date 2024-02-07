@@ -5,6 +5,8 @@ author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/ios-ab-tests" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [A/B tests](/ab-testing) help you make your iOS app better by comparing the impact of changes on key metrics. 
 
 PostHog makes [A/B testing on iOS](/docs/experiments/installation?tab=iOS) simple. To show you how, this tutorial will guide you on how to add PostHog to your iOS app and run an A/B test. We'll create a basic A/B test to see how the background color of a screen affects the click-through rate of a button. 

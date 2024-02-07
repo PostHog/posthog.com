@@ -7,6 +7,8 @@ date: 2022-11-21
 tags: ["configuration", "persons", 'product os']
 ---
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/identifying-users-guide" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 To understand your product’s usage, you must know **who** did **what.** Many of the most valuable insights require an accurate understanding of the user using your product. To make sure user data and events are as accurate as possible, it is critical to identify users properly.
 
 PostHog relies on your implementation of identification to connect event data to specific users. We require events to have a related user ID (even if it is anonymous). It is users who create events after all.

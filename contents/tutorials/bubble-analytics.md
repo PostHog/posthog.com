@@ -11,6 +11,8 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import ImgAutocaptureLight from '../images/tutorials/bubble-analytics/autocapture-light.png'
 import ImgAutocaptureDark from '../images/tutorials/bubble-analytics/autocapture-dark.png'
 
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/bubble-analytics" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
+
 [Bubble](https://bubble.io/) is a popular no-code site builder that makes it easy to design a high-quality websites and apps. Combined with tools like [analytics](/product-analytics), [session replays](/session-replay), and [feature flags](/feature-flags), you can build the best site possible.
 
 This tutorial shows you how to set up PostHog on your Bubble site for capturing events, session replays, and implementing feature flags.

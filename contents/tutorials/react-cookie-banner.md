@@ -9,8 +9,7 @@ author: ['ian-vanagas']
 tags: ['configuration', 'product os']
 ---
 
-- **Level:** Medium 🦔🦔
-- **Estimated reading time:** 12 minutes ☕️☕️
+> <p align="center">Open this tutorial in PostHog and follow along step-by-step!</p> <CallToAction href="https://app.posthog.com/#panel=docs:/tutorials/react-cookie-banner" size="sm" className="mt-auto self-start sm:w-auto !w-full">Launch tutorial</CallToAction>
 
 If you’ve spent any time online, you’ve seen a cookie consent banner. Because of GDPR and other worldwide internet privacy regulations, some sites need to get consent to track users and use cookies. Providing visitors an easy way to opt in or out of tracking and cookies is often required.
 
