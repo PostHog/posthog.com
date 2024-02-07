@@ -2039,7 +2039,7 @@ export const docsMenu = {
                 {
                     name: 'Mobile recording',
                     url: '/docs/session-replay/mobile',
-                    icon: 'IconApps',
+                    icon: 'IconPhone',
                     color: 'blue',
                     badge: {
                         title: 'Beta',
@@ -2229,7 +2229,7 @@ export const docsMenu = {
                 {
                     name: 'Under the hood',
                     url: '/docs/experiments/under-the-hood',
-                    icon: 'IconCalculator',
+                    icon: 'IconMagicWand',
                     color: 'purple',
                 },
                 {
