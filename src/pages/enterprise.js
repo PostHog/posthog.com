@@ -429,7 +429,7 @@ export default function Enterprise() {
                 </section>
 
                 <section className="text-center mb-12">
-                    <h3>And check out all the flare we've been collecting</h3>
+                    <h3>And check out all the flair we've been collecting</h3>
 
                     <div className="flex justify-center items-center gap-4">
                         <StaticImage
