@@ -37,31 +37,28 @@ There are downsides to these two solutions:
 
 PostHog offers a third approach without either of these downsides: hosting the product analytics systems yourself.
 
-## How to set PostHog up for HIPAA compliant analytics
-
-PostHog enables you to self-host on your own infrastructure and maintain full control of the data. This means you don't need to anonymize the data, nor do you need to set up a Business Associate Agreement with PostHog because you never need to send any Protected Health Information (PHI) to us in the first place. The data stays on your systems, in its original form. 
-
-You may need to sign a BAA with your hosting provider, but major providers such as Google and AWS offer these for free.
-
-### Step 1: Choose a hosting provider
-
-We recommend hosting PostHog on your own infrastructure. If you’re leveraging a private cloud you will need a Business Associate Agreement with your provider first. These are commonly and easily available with services such as [Amazon Web Services](https://aws.amazon.com/compliance/hipaa-compliance/), [Google Cloud Platform](https://cloud.google.com/security/compliance/hipaa), [Microsoft Azure](https://docs.microsoft.com/en-us/azure/compliance/offerings/offering-hipaa-us) and many more, often for free.
-
-### Step 2: Deploy PostHog
-
-Deploying PostHog onto your own infrastructure is straightforward and we provide support to solve any issues you encounter. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started, or [arrange a demo](https://posthog.com/book-a-demo) to see it in action first.
-
-### Step 3: Security configuration
-
-When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
-
-We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain PHI, it may be possible for malicious users to infer PHI unless it is evaluated thoroughly via expert determination.
-
-Finally, we advise caution when installing, building and enabling [apps](/docs/apps) for your PostHog instance. Apps are a great way to share and augment data from your instance with other systems, but it’s essential to ensure you have the proper controls (e.g. BAA, anonymization or self-hosting) in place when sharing PHI outside of your self-hosted PostHog instance.
-
 ## Does PostHog offer a BAA for PostHog Cloud?
 
-We believe the most effective solution to HIPAA-compliant product analytics is to control the data yourself. That's why we recommend using the self-hosted versions of PostHog. As such, we do not offer a [Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) for PostHog Cloud - we recommend you self host PostHog instead. 
+Yes. If you're interested in a BAA for HIPAA compliance, please contact [sales@posthog.com](mailto:sales@posthog.com) with information about your requirements.  
+
+## How to set PostHog up for HIPAA compliance
+
+> We strongly recommend teams which need HIPAA compliance use PostHog Cloud under a BAA, rather than the legacy self-hosted product or Hobby versions. 
+
+The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. 
+
+However, it is possible to host PostHog yourself using either our legacy self-hosted product, or our open-source hobby deployment. It is important to note that the legacy product is no longer supported, and that the hobby deployment is only suitable for smaller event volumes and provided without guarantee. Both versions lack many of the advanced features available under PostHog Cloud. 
+
+If you wish to attempt self-hosting PostHog in a HIPAA compliant manner despite the limitations, please follow the steps below. 
+
+**Step 1: Choose a hosting provider**
+We recommend hosting PostHog on your own infrastructure. If you’re leveraging a private cloud you will need a Business Associate Agreement with your provider first. 
+
+**Step 2: Deploy PostHog**
+Follow our [standard deployment guides](/docs/self-host) to get started deploying PostHog. This is a technical task which requires some engineering knowledge. 
+
+**Step 3: Security configuration**
+We strongly recommend that you use HTTPS to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance. We recommend you limit access to your self-hosted deployment, including shared dashboard links and subscriptions, as well as caution when installing, building and enabling [apps](/docs/apps).
 
 ### Further reading
 
