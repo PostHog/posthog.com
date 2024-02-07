@@ -52,6 +52,14 @@ const Layout = ({
             posthog.setPersonProperties({ preferred_theme: (window as any).__theme })
         }
         if (hash) scroll.scrollMore(-108)
+
+        posthog?.register_once({
+            utm_source: null,
+            utm_medium: null,
+            utm_campaign: null,
+            utm_content: null,
+            utm_term: null,
+        })
     }, [])
 
     return (

@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Remix
-date: 2023-02-01
+date: 2024-02-01
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---

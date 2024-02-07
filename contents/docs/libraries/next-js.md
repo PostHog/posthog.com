@@ -136,7 +136,7 @@ export function PHProvider({
 
 </MultiLanguage>
 
-Then, to capture pageviews, we set up a `PostHogPageView` component to listen to url path changes:
+Then, to capture pageviews, we set up a `PostHogPageView` component to listen to URL path changes:
 
 <MultiLanguage>
 
@@ -172,7 +172,7 @@ export default function PostHogPageView() {
 }
 ```
 
-```tsx
+```ts
 // app/PostHogPageView.tsx
 'use client'
 
@@ -180,7 +180,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { usePostHog } from 'posthog-js/react';
 
-export default function PostHogPageView() {
+export default function PostHogPageView() : null {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const posthog = usePostHog();
@@ -238,12 +238,11 @@ export default function RootLayout({ children }) {
 }
 ```
 
-```tsx
+```ts
 // app/layout.tsx
 
 import './globals.css'
 import { PHProvider } from './providers'
-
 import dynamic from 'next/dynamic'
 
 const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
