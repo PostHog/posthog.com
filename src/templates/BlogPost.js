@@ -230,25 +230,21 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 <aside
                     className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-dark pt-4 xl:block hidden`}
                 >
-                    {category === 'Tutorials' && (
-                        <>
-                            <div className="border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark p-4 mx-4 mb-4">
-                                <h3 className="text-[15px] mb-1 flex items-center gap-1">
-                                    <IconMap className="w-6 h-6 opacity-75" /> <span>Follow along in the app</span>
-                                </h3>
-                                <p className="mb-2 text-sm">
-                                    Open this guide in PostHog and follow along step-by-step.
-                                </p>
-                                <CallToAction
-                                    to={`https://app.posthog.com/#panel=docs:${fields.slug}`}
-                                    size="sm"
-                                    externalNoIcon
-                                >
-                                    {posthogInstance ? 'Open in app' : 'Login and open in app'}
-                                    <IconOpenSidebar className="w-4 h-4 inline-block ml-2" />
-                                </CallToAction>
-                            </div>
-                        </>
+                    {category === 'Tutorials' && posthogInstance && (
+                        <div className="border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark p-4 mx-4 mb-4">
+                            <h3 className="text-[15px] mb-1 flex items-center gap-1">
+                                <IconMap className="w-6 h-6 opacity-60" /> <span>Follow along in the app</span>
+                            </h3>
+                            <p className="mb-2 text-sm">Open this guide in PostHog and follow along step-by-step.</p>
+                            <CallToAction
+                                to={`https://app.posthog.com/#panel=docs:${fields.slug}`}
+                                size="sm"
+                                externalNoIcon
+                            >
+                                Open in app
+                                <IconOpenSidebar className="w-4 h-4 inline-block ml-2" />
+                            </CallToAction>
+                        </div>
                     )}
                     <Upvote id={postID} slug={fields.slug} className="px-4 mb-4" />
                     <Contributors contributors={contributors} />
