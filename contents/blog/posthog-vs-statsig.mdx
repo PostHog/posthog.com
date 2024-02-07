@@ -160,13 +160,11 @@ Below is a sample comparison of PostHog and Statsig's integrations. Be sure to c
 
 Both PostHog and LaunchDarkly enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
 
-An advantage of Statsig is that it can be made HIPAA-compliant, while PostHog cannot. This makes Statsig better suited for healthcare companies.
-
 <ComparisonTable column1="PostHog" column2="Statsig">
   <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
   <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
   <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={false} column2="Enterprise" feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+  <ComparisonRow column1={true} column2="Enterprise" feature="HIPAA-ready" description="Can be compliant with HIPAA" />
   <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
   <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
   <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
