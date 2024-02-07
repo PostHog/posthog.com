@@ -378,7 +378,7 @@ const Pricing = (): JSX.Element => {
                                                         className="py-1 px-2 @lg:!p-0 border-b border-light dark:border-dark @lg:border-transparent dark:@lg:border-transparent"
                                                     >
                                                         <Link
-                                                            to={product.link}
+                                                            to={product.slug}
                                                             className="group grid grid-cols-8 @lg:grid-cols-16 items-center text-primary dark:text-primary-dark rounded hover:text-primary dark:hover:text-primary-dark p-2 @lg:px-2 @lg:py-1 @lg:rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
                                                         >
                                                             <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center @lg:pl-1 mb-1 @lg:mb-0">

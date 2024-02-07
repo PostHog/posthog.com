@@ -109,7 +109,7 @@ export const PricingCalculator = () => {
                         <div className="col-span-16 sm:col-span-8 border-t md:border-t-0 border-light dark:border-dark md:col-span-3 pt-4 md:pb-4 md:pr-4">
                             <div className="col-span-7 @md:col-span-6 sm:pl-0 md:pl-2 mb-1 @md:mb-0">
                                 <Link
-                                    to={product.link}
+                                    to={`/pricing?product=${product.slug}`}
                                     className="inline-flex md:flex-col mdlg:flex-row gap-2 md:gap-1 mdlg:gap-2 mdlg:items-center hover:bg-accent dark:bg-accent-dark rounded p-1 text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
                                 >
                                     {product.icon}
@@ -140,7 +140,9 @@ export const PricingCalculator = () => {
                                 <p className="text-sm mb-0">{product.message}</p>
                             )}
                         </div>
-                        <div className="col-span-16 pr-2 md:col-span-4 xl:col-span-5 pl-7 sm:pl-0 pb-8 md:pt-5 md:pb-4 md:pr-8 md:pl-0 empty:py-0">
+                        <div
+                            className={`col-span-16 pr-2 md:col-span-4 xl:col-span-5 pl-7 sm:pl-0 pb-8 md:pt-5 md:pb-4 md:pr-8 md:pl-0 empty:py-0 product-${product.slug}`}
+                        >
                             {product.slider}
                         </div>
                         <div className="col-span-10 md:col-span-3 pl-7 sm:pl-0 md:pt-4 pb-4 empty:py-0">
