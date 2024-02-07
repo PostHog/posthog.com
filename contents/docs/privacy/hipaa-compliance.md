@@ -47,7 +47,7 @@ Yes. If you're interested in a BAA for HIPAA compliance, please [contact us with
 
 The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. 
 
-However, it is possible to host PostHog yourself using either our open-source hobby deployment. It is important to note that the hobby deployment is only suitable for smaller event volumes and provided without guarantee. It also lacks many of the advanced features available under PostHog Cloud. 
+However, it is possible to host PostHog yourself using our open-source hobby deployment. It is important to note that the hobby deployment is **only suitable for smaller event volumes** and provided without guarantee. It also lacks many of the advanced features available under PostHog Cloud. 
 
 If you wish to attempt self-hosting PostHog in a HIPAA compliant manner despite the limitations, please follow the steps below. 
 
