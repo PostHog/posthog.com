@@ -516,9 +516,17 @@ const Pricing = (): JSX.Element => {
                                     ) : (
                                         <>
                                             <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                                <Tooltip content={row.tooltip}>
-                                                    <strong>{row.key}</strong>
-                                                </Tooltip>
+                                                {row.tooltip ? (
+                                                    <Tooltip content={row.tooltip}>
+                                                        <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                            {row.key}
+                                                        </strong>
+                                                    </Tooltip>
+                                                ) : (
+                                                    <strong className="text-primary/75 dark:text-primary-dark/75">
+                                                        {row.key}
+                                                    </strong>
+                                                )}
                                             </div>
                                             <div className="col-span-3 px-3 py-2 text-sm">
                                                 {typeof row.freePlan === 'boolean' ? (
