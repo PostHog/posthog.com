@@ -23,7 +23,7 @@ From the root of the Cloudflare dashboard, go to "Workers & Pages" > "Overview" 
 Click "Edit code" once the new worker has been saved following "Deploy". (And if you're already on the worker page, click "Quick edit".) You should now be seeing a code editor for the worker. Just replace all the existing content with this proxying code:
 
 ```JavaScript
-const API_HOST = "app.posthog.com" // Change to "eu.posthog.com" for the EU region
+const API_HOST = "us-proxy-direct.i.posthog.com" // Change to "eu.posthog.com" for the EU region
 
 async function handleRequest(event) {
     const url = new URL(event.request.url)
