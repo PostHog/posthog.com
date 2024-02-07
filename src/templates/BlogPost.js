@@ -232,11 +232,9 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 <aside
                     className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-dark pt-4 xl:block hidden`}
                 >
+                    <OpenGuide slug={fields.slug} />
                     <Upvote id={postID} slug={fields.slug} className="px-4 mb-4" />
                     <Contributors contributors={contributors} />
-
-                    <OpenGuide slug={fields.slug} />
-
                     <MobileSidebar tableOfContents={tableOfContents} />
                 </aside>
             </div>
