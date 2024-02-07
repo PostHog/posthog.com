@@ -132,7 +132,7 @@ export default function Contributors({
                         <li className="first:-ml-0 -ml-2" key={name}>
                             {multiple ? (
                                 <Tooltip
-                                    placement="top-end"
+                                    placement="top"
                                     className="whitespace-nowrap"
                                     content={() => (
                                         <div className="flex space-x-1 items-center">

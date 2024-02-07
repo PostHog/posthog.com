@@ -75,7 +75,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                             >
                                 <Link to={`/community/profiles/${squeakId}`}>
                                     <Tooltip
-                                        placement="top-end"
+                                        placement="top"
                                         className="whitespace-nowrap"
                                         content={() => (
                                             <div className="flex space-x-1 items-center">
