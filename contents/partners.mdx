@@ -1,0 +1,114 @@
+---
+title: PostHog partners directory
+showTitle: false
+showSidebar: true
+width: lg
+images: 
+    - './images/builds_hog.png'
+    - './images/smart_hog.png'
+    - './images/partner2_hog.png'
+    - './images/talenodigital_logo.jpg'
+    - './images/mentat_analytics_logo.jpg'
+    - './images/marketing_engineers_logo.jpg'
+---
+
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+
+<Hero
+    title="Partners of PostHog"
+    subtitle="We offer dedicated and community support, but you may want to team up with an external partner to get help on an on-going or project-basis. That's where our partners can help!"
+/>
+
+<section class="my-24 px-5">
+  <div class="max-w-screen-2xl mx-auto">
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-3 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[1])} alt="Implementation support" objectFit="contain" style={{ maxHeight: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Implementation support</h5>
+          <p class="m-0 text-[15px]">Struggling to get started? Partners can help you get the most out of your data by creating bespoke queries, dashboards, and more.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[2])} alt="App creation" objectFit="contain" style={{ maxHeight: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Apps and integrations</h5>
+          <p class="m-0 text-[15px]">Need to build a connection to another tool? We have plenty of ready-made integrations, but partners can help make more.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[0])} alt="Self-hosted deployments" objectFit="contain" style={{ maxHeight: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Self-hosted deployments</h5>
+          <p class="m-0 text-[15px]">Need to self-host? We no longer support Kubernetes deployments, but a partner may be able to help fill the gap instead.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<Section title="Our partners" className="@container">
+                    <div className="flex flex-col @3xl:grid md:grid-cols-3 gap-4 mb-8">
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                         <GatsbyImage image={getImage(props?.images[3])} alt="Taleno Digital" objectFit="contain" style={{ maxHeight: 100 }} />
+                            <h3 className="text-xl mb-2">Taleno Digital</h3>
+                            <p className="text-[15px]">
+                                Joey Taleno can help you deploy PostHog projects, create visualizations, and setup suitable data architectures. 
+                            </p>
+                            <CallToAction to="https://taleno.digital/" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Contact
+                            </CallToAction>
+                        </div>
+                        <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                         <GatsbyImage image={getImage(props?.images[4])} alt="Mentat Analytics" objectFit="contain" style={{ maxHeight: 100 }} />
+                            <h3 className="text-xl mb-2">Mentat Analytics</h3>
+                            <p className="text-[15px]">
+                                Specializing in helping tech startups, Mentat can help you build your data stack, implement PostHog, and scale your data.
+                            </p>
+                            <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
+                                <CallToAction to="https://www.mentatanalytics.co/" type="outline" size="md" className="!w-full sm:!w-auto">
+                                    Contact
+                                </CallToAction>
+                            </div>
+                        </div>
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                         <GatsbyImage image={getImage(props?.images[5])} alt="Marketing Engineers" objectFit="contain" style={{ maxHeight: 100 }} />
+                            <h3 className="text-xl mb-2">Marketing Engineers</h3>
+                            <p className="text-[15px]">
+                                An international team of engineers that can help you with deployment and configuring PostHog for marketing purpose. 
+                            </p>
+                            <CallToAction to="https://marketingengineers.nl/" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Contact
+                            </CallToAction>
+                        </div>
+                    </div>
+  <div className="max-w-[849px] mx-auto text-center">
+  <CallToAction href="/contact-sales">Become a partner</CallToAction>
+  </div>
+</Section>
+
+<section class="my-24 px-5">
+<div class="max-w-screen-md mx-auto space-y-1">
+<details>
+<summary>How do I add myself as a partner?</summary>
+<p>If you'd like to become a partner, simply <a href="/contact-sales">get in touch</a> and let us know how you intend to work with us. We'll get back to you.</p>
+</details>
+
+<details> 
+<summary>Are partners accredited?</summary>
+<p>No. We don't currently offer any sort of certification or accreditation for partners. We've worked with all of the partners above and believe that they're capable to providing assistance, but we offer no guarantees. </p>
+</details>
+
+<details>
+<summary>Do I have to be on a Paid or Enterprise plan to work with a partner?</summary>
+<p>No, we enforce no such restrictions. You can work with partners using self-hosted, free, or hobby deployments. </p>
+</details>
+
+<details>
+<summary>Can you help me with my self-hosted instance?</summary>
+<p>Unfortunately not. We <a href="/blog/sunsetting-helm-support-posthog">sunset</a> and no longer provide any support for self-hosted deployments. </p>
+</details>
+
+<details>
+<summary>Do you have special deals for startups?</summary>
+<p>Yes! Apply to our <a href="/startups">PostHog for startups program</a> to unlock a wealth of benefits for eligible teams, including over $50,000 in PostHog credit! </p>
+</details>
+</div>
+</section>
+

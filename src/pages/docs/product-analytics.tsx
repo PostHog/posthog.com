@@ -8,6 +8,8 @@ import { CallToAction } from 'components/CallToAction'
 import ResourceItem from 'components/Docs/ResourceItem'
 import List from 'components/List'
 import { docsMenu } from '../../navs'
+import { useLayoutData } from 'components/Layout/hooks'
+import QuickLinks from 'components/QuickLinks'
 
 type ProductAnalyticsProps = {
     data: {
@@ -29,20 +31,11 @@ export const Intro = () => (
 )
 
 export const Content = ({ quickLinks = false }) => {
+    const { compact } = useLayoutData()
     return (
         <>
             <Intro />
-            {quickLinks && (
-                <section>
-                    <h3 className="mt-0 text-xl">Quick links</h3>
-                    <List
-                        className="grid grid-cols-3 gap-2 mb-6"
-                        items={docsMenu.children[1].children
-                            .filter(({ url }) => url)
-                            .map(({ url, name, icon, color }) => ({ label: name, url, icon, iconColor: color }))}
-                    />
-                </section>
-            )}
+            {(quickLinks || compact) && <QuickLinks items={docsMenu.children[1].children} />}
             <section className="mb-12">
                 <h3 className="mb-1 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
@@ -62,7 +55,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="../../components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
-                        url="/tutorials/funnels"
+                        url="/tutorials/guide-to-funnels"
                     />
                     <ResourceItem
                         type="Guide"
@@ -146,7 +139,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                 </ul>
                 <CallToAction
-                    to="/tutorials"
+                    to="/docs/product-analytics/tutorials"
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"

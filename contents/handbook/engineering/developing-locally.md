@@ -78,7 +78,7 @@ This is a faster alternative to get up and running. If you don't want to or can'
 2. Install the `build-essential` package:
 
     ```bash
-    sudo apt install -y build-essential optipng
+    sudo apt install -y build-essential
     ```
 
 ## Common prerequisites for both macOS & Linux
@@ -228,6 +228,8 @@ pnpm i --dir plugin-server
         ```bash
         brew install libxml2 libxmlsec1 pkg-config
         ```
+        > If installing `xmlsec` doesn't work, try updating macOS to the latest version (Sonoma). 
+   
     - On Debian-based Linux:
         ```bash
         sudo apt install -y libxml2 libxmlsec1-dev pkg-config

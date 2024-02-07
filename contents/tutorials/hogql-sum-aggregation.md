@@ -4,8 +4,7 @@ date: 2023-06-06
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-8.png
-tags: ['hogql', 'trends', 'insights']
+tags: ['hogql', 'trends', 'insights', 'product analytics']
 ---
 
 PostHog provides multiple options for aggregating data series including total count, count per user, unique sessions, property values, and more. HogQL unlocks a new level of aggregation customization, enabling you to use [expressions](/docs/hogql/expressions) to aggregate your data however you want. To showcase this, this tutorial goes over one of the most powerful aggregations: `sum()`.

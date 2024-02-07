@@ -4,8 +4,7 @@ date: 2023-03-07
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/toolbar.png
-tags: ["heatmaps", "toolbar"]
+tags: ["heatmaps", "toolbar", 'product os']
 ---
 
 Understanding where users click your site or app shows you what interests them. A heatmap can visualize these clicks to make this analysis easier.
@@ -17,7 +16,7 @@ Setting up a heatmap for a React app with PostHog is simple. This tutorial will 
 First, [install Node](https://nodejs.dev/en/learn/how-to-install-nodejs/), then create a React app in your terminal, and name it whatever (we name ours `heatmap`).
 
 ```bash
-npm create-react-app heatmap
+npx create-react-app heatmap
 ```
 
 Next, in `src/App.js`, replace the existing code with buttons, inputs, and links we can click like this:
@@ -93,7 +92,7 @@ Click the "Launch Toolbar" tab on the left menu, then add `localhost:3000` (or w
 
 ![Toolbar](../images/tutorials/react-heatmap/toolbar.png)
 
-To activate the heatmap, click the PostHog toolbar icon, then the "🔥 Heatmap" option. This highlights the elements users are clicking on in your React app.
+To activate the heatmap, click the heatmap icon in the toolbar. This highlights the elements users are clicking on in your React app.
 
 ![Heatmap](../images/tutorials/react-heatmap/heatmap.png)
 
@@ -102,8 +101,7 @@ To activate the heatmap, click the PostHog toolbar icon, then the "🔥 Heatmap"
 With the heatmap open, you see elements highlighted in shades of yellow to red. Here’s what the numbers mean:
 
 - The numbers over the elements are how many times they were clicked over the last 7 days.
-- The number next to the 😡 emoji is the number of rage clicks for that element.
-- The number next to the 🔥 emoji is the number of clicked elements on the page.
+- The number next to the 😡 emoji is the number of rage clicks for that element.
 
 When you click an element, you get a modal with different options:
 
@@ -113,7 +111,7 @@ When you click an element, you get a modal with different options:
 
 ## Changing the heatmap settings
 
-You can also change the settings for your heatmap by clicking on the number next to the 🔥 emoji. This enables you to:
+You can also change the settings for your heatmap by using the menu that appears when you click the heatmap icon. This enables you to:
 
 - Change the events list to contain more pages using wildcards (`*`). For example, if you wanted to see the heatmap for the same elements across all blog pages, you could use `/blog/*`.
 - Change the length of time the heatmap generates from. The default is 7 days.

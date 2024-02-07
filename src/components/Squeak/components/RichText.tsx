@@ -6,6 +6,7 @@ import Markdown from './Markdown'
 import slugify from 'slugify'
 import { Edit } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
+import { isURL } from 'lib/utils'
 
 const buttons = [
     {
@@ -77,7 +78,15 @@ const buttons = [
     },
 ]
 
-export default function RichText({ initialValue = '', setFieldValue, autoFocus, values, onSubmit }: any) {
+export default function RichText({
+    initialValue = '',
+    setFieldValue,
+    autoFocus,
+    values,
+    onSubmit,
+    maxLength = 2000,
+    preview = true,
+}: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
     const [cursor, setCursor] = useState<number | null>(null)
@@ -109,8 +118,15 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
         accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
     })
 
-    const replaceSelection = (selectionStart: number, selectionEnd: number, text: string) => {
+    const replaceSelection = (selectionStart?: number, selectionEnd?: number, text = '') => {
         return value.substring(0, selectionStart) + text + value.substring(selectionEnd, value.length)
+    }
+
+    const getTextSelection = () => {
+        const selectionStart = textarea?.current?.selectionStart
+        const selectionEnd = textarea?.current?.selectionEnd
+        const selectedText = textarea?.current?.value.slice(selectionStart, selectionEnd)
+        return { selectedText, selectionStart, selectionEnd }
     }
 
     const handleClick = (
@@ -120,21 +136,29 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
     ) => {
         e.preventDefault()
 
-        if (textarea.current) {
-            const selectionStart = textarea.current.selectionStart
-            const selectionEnd = textarea.current.selectionEnd
-            const selectedText = textarea.current.value.slice(selectionStart, selectionEnd)
-            textarea.current.focus()
-            setValue(replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText)))
-            setCursor(cursor)
-        }
+        const { selectionStart, selectionEnd, selectedText } = getTextSelection()
+        textarea?.current?.focus()
+        setValue(replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText)))
+        setCursor(cursor)
     }
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.target.value)
     }
 
+    const replaceSelectionWithLink = (url: string) => {
+        const { selectionStart, selectionEnd, selectedText } = getTextSelection()
+        if (selectedText) {
+            textarea?.current?.focus()
+            setValue(replaceSelection(selectionStart, selectionEnd, `[${selectedText}](${url})`))
+        }
+    }
+
     const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+        const text = e.clipboardData.getData('text')
+        if (text && isURL(text)) {
+            replaceSelectionWithLink(text)
+        }
         const images = Array.from(e.clipboardData.items).filter((item) =>
             ['image/jpeg', 'image/png'].includes(item.type)
         )
@@ -196,7 +220,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                         required
                         id="body"
                         placeholder={'Type more details...'}
-                        maxLength={2000}
+                        maxLength={maxLength}
                         onKeyDown={handleKeyDown}
                     />
                     {isDragActive && (
@@ -244,50 +268,58 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                             </button>
                         </Tooltip>
                     </li>
-                    <li className="!ml-auto">
-                        <Tooltip content="Edit">
-                            <button
-                                onClick={() => setShowPreview(false)}
-                                type="button"
-                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
-                                    showPreview ? '' : '!border border-light dark:border-dark bg-light dark:bg-dark'
-                                }`}
-                            >
-                                <Edit />
-                            </button>
-                        </Tooltip>
-                    </li>
-                    <li>
-                        <Tooltip content="Preview">
-                            <button
-                                onClick={() => setShowPreview(true)}
-                                type="button"
-                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
-                                    showPreview ? 'border border-light dark:border-dark bg-light dark:bg-dark' : ''
-                                }`}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-5 h-5"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
-                                    />
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                    />
-                                </svg>
-                            </button>
-                        </Tooltip>
-                    </li>
+                    {preview && (
+                        <>
+                            <li className="!ml-auto">
+                                <Tooltip content="Edit">
+                                    <button
+                                        onClick={() => setShowPreview(false)}
+                                        type="button"
+                                        className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
+                                            showPreview
+                                                ? ''
+                                                : '!border border-light dark:border-dark bg-light dark:bg-dark'
+                                        }`}
+                                    >
+                                        <Edit />
+                                    </button>
+                                </Tooltip>
+                            </li>
+                            <li>
+                                <Tooltip content="Preview">
+                                    <button
+                                        onClick={() => setShowPreview(true)}
+                                        type="button"
+                                        className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
+                                            showPreview
+                                                ? 'border border-light dark:border-dark bg-light dark:bg-dark'
+                                                : ''
+                                        }`}
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-5 h-5"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                                            />
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </Tooltip>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </div>
             {imageLoading && (

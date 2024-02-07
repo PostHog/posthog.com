@@ -9,7 +9,6 @@ const React = require('react')
 
 import { initKea, wrapElement } from './kea'
 import HandbookLayout from './src/templates/Handbook'
-import Product from './src/templates/Product'
 import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
 import Posts from './src/components/Edition/Posts'
@@ -22,12 +21,9 @@ export const wrapPageElement = ({ element, props }) => {
         <UserProvider>
             {wrapElement({
                 element:
-                    /^library|^blog\/(?!categories)(?!all)(?!tags)|^tutorials\/(?!categories)(?!all)|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(
-                        slug
-                    ) ? (
-                        <Posts {...props} articleView={!/^posts$/.test(slug)}>
-                            {element}
-                        </Posts>
+                    !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
+                    (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
+                        <Posts {...props}>{element}</Posts>
                     ) : props.custom404 || !props.data ? (
                         element
                     ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&

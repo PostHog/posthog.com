@@ -5,8 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-08
 featuredTutorial: false
-featuredImage: ../images/tutorials/banners/tutorial-3.png
-tags: ['configuration', 'persons', 'sessions']
+tags: ['configuration', 'persons', 'sessions', 'product analytics', 'product os']
 ---
 
 Many companies use multiple domains for different parts of their products. A common structures include one domain for the marketing website and another (subdomain) for the app, multiple connected domains, and separate domains for documentation and community sections. This is great for having different content and ensuring no conflicts but causes issues when it comes to tracking.
@@ -91,4 +90,4 @@ This effectively makes it a third-party cookie, which many browsers, sites, and 
 
 - [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
 - [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
-- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
+- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/guide-to-funnels)

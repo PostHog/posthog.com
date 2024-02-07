@@ -7,6 +7,7 @@ showTitle: true
 You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
 1. You can create a pull request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
+
 2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a pull request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
 
 Below, we'll explain how to set up option two.
@@ -20,6 +21,7 @@ In order to run the PostHog website locally, you need the following installed:
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) – version control system
 - [Node.js](https://nodejs.org/en/download/) – server runtime
 - [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x) – package manager for Node.js
+- [Apple Rosetta](https://support.apple.com/en-gb/HT211861) (version 2) – dynamic binary translator for Apple silicon
 
 If you are unfamiliar with using Git from the command line (or just prefer graphical interfaces), use the [GitHub Desktop app](https://desktop.github.com/).
 
@@ -93,7 +95,7 @@ Once this command has finished executing, run the following:
 yarn start
 ```
 
-The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8001` in your web browser.
+This runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8001` in your web browser.
 
 Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8001` in your web browser.
 
@@ -103,7 +105,7 @@ Our website uses various APIs to pull in data from sites like GitHub (for contri
 
 If you're a core team member and need this data locally, you can:
 
-1. Ask the [Website & Docs team](https://posthog.slack.com/archives/C01V9AT7DK4) for access to our Vercel account
+1. Ask the [Website & Docs team](https://app.slack.com/client/TSS5W8YQZ/C01V9AT7DK4) files located for access to our Vercel account
 1. Install the Vercel CLI
 1. Run `vercel pull`
 1. Open `.vercel/.env.development.local`
@@ -159,7 +161,7 @@ Most PostHog pages utilize frontmatter as a way of providing additional data to 
 
 ##### Blog
 
-Markdown files located in /contents/blog
+Markdown files located in `/contents/blog``
 
 ```markdown
 ---
@@ -172,6 +174,10 @@ featuredImage: ../images/blog/running-content.png
 featuredImageType: full
 category: Guides
 tags: ["Using PostHog", "Privacy"]
+seo: {
+    metaTitle: Overview of PostHog Plugins
+    metaDescription: Learn about the current state of plugins on PostHog and get valuable insights into their functionality and performance.
+}
 ---
 ```
 
@@ -186,6 +192,9 @@ tags: ["Using PostHog", "Privacy"]
   - <CategoryData />
 - `tags`: the more specific tag(s) the post belongs to. an array containing any number of the following:
   - <CategoryData type="tags" />
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 ##### Tutorials
 
@@ -198,19 +207,21 @@ title: How to filter out internal users
 author: ["joe-martin"]
 featuredTutorial: false
 featuredVideo: https://www.youtube-nocookie.com/embed/2bptTniYPGc
-featuredImage: ../images/tutorials/banners/tutorial-17.png
 tags: ['filters', 'settings']
 ---
 ```
 
 - `date`: the date the tutorial was posted
 - `title`: the title that appears at the top of the tutorial and on the tutorial listing page
-- `author`: the author(s) of the tutorial. correlates to your handle located in /src/data/authors.json
+- `author`: the author(s) of the tutorial. Ccrrelates to your handle located in /src/data/authors.json
 - `featuredTutorial`: determines if tutorial should be featured on the homepage
 - `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
 - `featuredImage`: the URL of the image that appears at the top of the tutorial and on the tutorial listing page
 - `tags`: the tag(s) the tutorial belongs to. an array containing any number of the following:
   - <TutorialTags />
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 
 
@@ -225,10 +236,38 @@ title: Contribute to the website: documentation, handbook, and blog
 ```
 
 - `title`: the title that appears at the top of the handbook / doc page
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
+
+##### Comparison pages
+
+Create a table on a "PostHog vs..." page with the following components. (You can see examples of how this is used [in this pull request](https://github.com/PostHog/posthog.com/pull/7001).)
+
+**Import the components at the top of the post content (after frontmatter):**
+
+```
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
+```
+
+**Create a table like:**
+
+```
+<ComparisonTable column1="Company name 1" column2="Company name 2">
+  <ComparisonHeader category="Optional header row" />
+  <ComparisonRow column1={true} column2="Text" feature="Feature name" description="Feature descrpition" />
+</ComparisonTable>
+```
+
+In `ComparisonRow`:
+- Values for `column1` and `column2` can be: `{true}` | `{false}` | `"Text string"`
+- `feature` is required but `description` can be omitted (only if not using that column for the entire table)
 
 ##### Customers
 
-Markdown files located in /contents/customers
+Markdown files located in `/contents/customers`
 
 ```markdown
 ---
@@ -257,95 +296,9 @@ toolsUsed:
 - `industries`: a list of industries that apply to the company
 - `users`: a list of user types that use the company's product
 - `toolsUsed`: a list of highlighted PostHog tools used by the company
-
-##### Team
-
-Markdown files located in /contents/team
-
-```markdown
----
-name: James Hawkins
-jobTitle: Co-Founder & CEO
-headshot: ../images/team/James.png
-github: jamesefhawkins
-country: GB
-startDate: 2019-07-03
----
-```
-
-- `name`: the name of the team member
-- `jobTitle`: the role of the team member
-- `headshot`: the relative path to the team member's headshot
-- `github`: the team member's GitHub handle
-- `country`: the country the team member resides in
-- `startDate`: the team member's date of hire
-
-##### HostHog
-
-Markdown files located in /contents/hosthog
-
-```markdown
----
-date: 2022-02-24
-city: London
-venue: { name: Cobalance, address: Shoreditch High Street, London }
-from: '18:00'
-to: '20:30'
-agenda:
-    [
-        {
-            from: '18:00',
-            to: '18:30',
-            description: 'Sign in, grab some exclusive merch and meet the PostHog team over a cocktail in the Cellar Bar.',
-            emoji: '👋🏼',
-        },
-        {
-            from: '18:30',
-            to: '19:00',
-            description: 'After a welcome from CEO James Hawkins, hear how Mention Me uses PostHog to build better products in a fireside chat with Head of Product Anca Filip, hosted by PostHog’s Marcus Hyett.',
-            emoji: '💬',
-        },
-        {
-            from: '19:15',
-            to: '20:30',
-            description: 'Chat to the team and other PostHog users over a cocktail and slice of pizza. We’d love to hear your ideas and feedback!',
-            emoji: '🍺',
-        },
-    ]
-speakers:
-    [
-        {
-            name: 'James Hawkins',
-            title: 'Co-founder & CEO',
-            company: 'PostHog',
-            linkedIn: 'https://www.linkedin.com/in/j-hawkins',
-            image: '../images/hosthog/london/speakers/james.png',
-        },
-        {
-            name: 'Anca Filip',
-            title: 'Head of Product',
-            company: 'Mention Me',
-            linkedIn: 'https://www.linkedin.com/in/ancafilip',
-            image: '../images/hosthog/london/speakers/anca.png',
-        },
-        {
-            name: 'Marcus Hyett',
-            title: 'VP of Product',
-            company: 'PostHog',
-            linkedIn: '',
-            image: '../images/hosthog/london/speakers/marcus.png',
-        },
-    ]
----
-```
-
-- `date`: date of the event
-- `city`: city where the event takes place
-- `venue`: venue details
-- `from`: event start time
-- `to`: event end time
-- `agenda`: event timeline
-- `speakers`: list of event speakers
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 ##### Plain
 
@@ -364,6 +317,9 @@ noindex: true
 - `showTitle`: `true` | `false` - determines whether to show / hide the title at the top of the page
 - `width`: `sm` | `md` | `lg` | `full` - determines the width of the page
 - `noindex`: `true` | `false` - determines whether to index the page or not
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 
 You can often refer to the source of existing pages for more examples, but if in doubt, you can always [ask for help](https://app.posthog.com/home#supportModal).
@@ -532,7 +488,7 @@ If you know who you would like to review the pull request, select them in the **
 
 ## Preview branch
 
-After a series of checks are run (to ensure nothing in your pull request breaks the website), Vercel will generate a preview link available in the Vercel bot comment. This includes all of your changes so you can preview before your pull request is merged.
+After a series of checks are run (to ensure nothing in your pull request breaks the website), Vercel will generate a preview link available in the Vercel bot comment. This includes all of your changes, so you can preview before your pull request is merged.
 
 ![Preview branch](../../../images/docs/contribute/preview-branch.png)
 

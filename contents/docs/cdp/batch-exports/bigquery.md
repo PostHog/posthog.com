@@ -64,20 +64,20 @@ Navigate to IAM and click on Grant Access to arrive at this screen:
 
 This is the schema of all the fields that are exported to BigQuery.
 
-| Field                 | Type        | Description                                                                                                         |
-|-----------------------|-------------|---------------------------------------------------------------------------------------------------------------------|
-| uuid                  | `STRING`    | The unique ID of the event within PostHog                                                                           |
-| event                 | `STRING`    | The name of the event that was sent                                                                                 |
-| properties            | `STRING`    | A JSON object with all the properties sent along with an event                                                      |
-| elements              | `STRING`    | A string of elements surrounding an [autocaptured](/docs/data/autocapture) event                                    |
-| set                   | `STRING`    | A JSON object with any person properties sent with the `$set` field                                                 |
-| set_once              | `STRING`    | A JSON object with any person properties sent with the `$set_once` field                                            |
-| distinct_id           | `STRING`    | The `distinct_id` of the user who sent the event                                                                    |
-| team_id               | `STRING`    | The `team_id` for the event                                                                                         |
-| ip                    | `STRING`    | The IP address that was sent with the event                                                                         |
-| site_url              | `STRING`    | The $current_url property of the event. This field has been kept for backwards compatibility and will be deprecated |
-| timestamp             | `TIMESTAMP` | The timestamp associated with an event                                                                              |
-| bq_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was sent to BigQuery                                                                   |
+| Field                 | Type        | Description                                                               |
+|-----------------------|-------------|---------------------------------------------------------------------------|
+| uuid                  | `STRING`    | The unique ID of the event within PostHog                                 |
+| event                 | `STRING`    | The name of the event that was sent                                       |
+| properties            | `STRING`    | A JSON object with all the properties sent along with an event            |
+| elements              | `STRING`    | This field is present for backwards compatibility but has been deprecated |
+| set                   | `STRING`    | A JSON object with any person properties sent with the `$set` field       |
+| set_once              | `STRING`    | A JSON object with any person properties sent with the `$set_once` field  |
+| distinct_id           | `STRING`    | The `distinct_id` of the user who sent the event                          |
+| team_id               | `INT64`     | The `team_id` for the event                                               |
+| ip                    | `STRING`    | The IP address that was sent with the event                               |
+| site_url              | `STRING`    | This field is present for backwards compatibility but has been deprecated |
+| timestamp             | `TIMESTAMP` | The timestamp associated with an event                                    |
+| bq_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was sent to BigQuery                         |
 
 ## Creating the batch export
 
@@ -92,5 +92,5 @@ This is the schema of all the fields that are exported to BigQuery.
 
 Configuring a batch export targeting BigQuery requires the following BigQuery-specific configuration values:
 * **Table ID:** The ID of the destination BigQuery table. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable`, use only `MyExportTable` as the table ID.
-* **Dataset ID:** The ID of the BigQuery dataset which contains the destination table. Only the dataset ID is required, so omit the project ID if present. For example for the dataset `project-123:my-dataset`, use only `my-dataset` as the dataset ID.
+* **Dataset ID:** The ID of the BigQuery dataset which contains the destination table. Only the dataset ID is required, so omit the project ID if present. For example for the fully-qualified dataset `project-123:my-dataset`, use only `my-dataset` as the dataset ID.
 * **Google Cloud JSON key file:** The JSON key file for your BigQuery Service Account to access your instance. Generated on Service Account creation. See [here](#setting-up-bigquery-access) for more information.

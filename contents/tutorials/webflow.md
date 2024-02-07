@@ -4,9 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ["ian-vanagas"]
 date: 2023-01-12
-featuredImage: ../images/tutorials/banners/webflow.png
 featuredVideo: https://www.youtube-nocookie.com/embed/2dNSr93N5Ns
-tags: ["configuration"]
+tags: ["configuration", 'product analytics', 'session replay']
 ---
 
 Webflow is one of the most popular no-code site builders. It makes building high-quality marketing sites, blogs, landing pages, and ecommerce stores a breeze. 
@@ -48,6 +47,6 @@ From here, you can analyze data from your Webflow site with our suite of product
 
 ## Further reading
 
+- [How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)
+- [How to create surveys in Webflow with PostHog](/tutorials/webflow-surveys)
 - [How to track performance marketing in PostHog](/tutorials/performance-marketing)
-- [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
-- [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)

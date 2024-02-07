@@ -4,9 +4,8 @@ date: 2023-01-20
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/posthog-for-vuejs.png
 featuredVideo: https://www.youtube-nocookie.com/embed/uxkaYnX78_o
-tags: ['configuration']
+tags: ['configuration', 'product os']
 ---
 
 With internet privacy regulations, like GDPR, coming into effect, managing cookies is becoming increasingly important. Cookies are pieces of information apps set in users’ browsers to help them store information and identity. It’s possible to use [PostHog without cookies](/tutorials/cookieless-tracking), but it’s simpler to use them.
@@ -294,6 +293,6 @@ Once we’ve done that, our cookie consent banner is fully functional. Try it ou
 
 ## Further reading
 
+- [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
 - [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
 - [Building a tracking cookies consent banner in React](/tutorials/react-cookie-banner)
-- [PostHog for VueJS users – a code-snippet walkthrough](/tutorials/posthog-for-vuejs)

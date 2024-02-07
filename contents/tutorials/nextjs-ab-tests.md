@@ -4,7 +4,6 @@ date: 2023-03-06
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-2.png
 featuredVideo: https://www.youtube-nocookie.com/embed/QfTMREUEc18
 tags: ['experimentation', 'feature flags', 'actions']
 ---
@@ -265,6 +264,6 @@ Now, when you refresh the page, the call to action loads faster.
 
 ## Further reading
 
-- [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)

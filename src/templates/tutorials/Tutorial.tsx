@@ -26,6 +26,7 @@ import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
 import TutorialsSlider from 'components/TutorialsSlider'
 import { communityMenu, docsMenu } from '../../navs'
+import { useLayoutData } from 'components/Layout/hooks'
 
 export const ViewButton = ({ title, view, setView }) => {
     return (
@@ -67,44 +68,51 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     }
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
+    const { fullWidthContent } = useLayoutData()
 
     return (
-        <>
+        <article className="@container">
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
-            <Intro
-                contributors={contributors}
-                featuredImage={featuredImage}
-                title={title}
-                featuredImageType="full"
-                titlePosition="top"
-                date={date}
-            />
-            {featuredVideo && (
-                <div className="mb-6 flex space-x-2">
-                    <ViewButton view={view} title="Article" setView={setView} />
-                    <ViewButton view={view} title="Video" setView={setView} />
+            <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
+                <div className="flex-1 transition-all pt-8 w-full">
+                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
+                        <Intro
+                            contributors={contributors}
+                            featuredImage={featuredImage}
+                            title={title}
+                            featuredImageType="full"
+                            titlePosition="top"
+                            date={date}
+                        />
+                        {featuredVideo && (
+                            <div className="mb-6 flex space-x-2">
+                                <ViewButton view={view} title="Article" setView={setView} />
+                                <ViewButton view={view} title="Video" setView={setView} />
+                            </div>
+                        )}
+                        {view === 'Article' ? (
+                            <div className="article-content">
+                                <MDXProvider components={components}>
+                                    <MDXRenderer>{body}</MDXRenderer>
+                                </MDXProvider>
+                            </div>
+                        ) : (
+                            <iframe src={featuredVideo} />
+                        )}
+                    </div>
                 </div>
-            )}
-            {view === 'Article' && (
-                <div className="xl:float-right xl:max-w-[350px] xl:ml-4 xl:mb-4">
-                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
-                </div>
-            )}
-            {view === 'Article' ? (
-                <div className="article-content">
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{body}</MDXRenderer>
-                    </MDXProvider>
-                </div>
-            ) : (
-                <iframe src={featuredVideo} />
-            )}
-        </>
+                {view === 'Article' && (
+                    <aside className="shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-dark pt-4">
+                        <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+                    </aside>
+                )}
+            </div>
+        </article>
     )
 }
 

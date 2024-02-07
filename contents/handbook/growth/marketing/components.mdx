@@ -1,0 +1,103 @@
+---
+title: Content components
+sidebar: Handbook
+showTitle: true
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+This page details frequently used code components you can add to articles. There are additional components demonstrated at `posthog.com/example-components`.
+
+## Call to action
+
+Adding `<ArrayCTA />` to any article will add this simple CTA:
+
+<ArrayCTA />
+
+Don't overuse it, but it's useful for high intent pages, like comparisons.
+
+## Comparison tables
+
+We used to create custom HTML tables, but we now have an easier to use component that allows us to change the styling of any table.
+
+To use, first import the componenents by adding this code near the start, right after the frontmatter:
+
+```jsx
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+```
+
+Then, customize the code below to fit your needs.
+
+```jsx
+<ComparisonTable column1="Company name 1" column2="Company name 2">
+  <ComparisonHeader category="Optional header row" />
+  <ComparisonRow column1={true} column2="Text" feature="Feature name" description="Feature descrpition" />
+</ComparisonTable>
+```
+
+In `ComparisonRow`:
+
+- Values for `column1` and `column2` can be: `{true}` | `{false}` | `"Text string"`
+- `feature` is required but `description` can be omitted (only if not using that column for the entire table)
+
+Here's what a comparison table looks like:
+
+<ComparisonTable column1="PostHog" column2="LogRocket">
+  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={true} column2={true} feature="Performance monitoring" description="Track core web vitals, server usage, and network performance." />
+  <ComparisonRow column1={false} column2={true} feature="Error monitoring" description="Capture exceptions and failures automatically" />
+  <ComparisonRow column1={false} column2={true} feature="Issue management" description="Score issues, triage, monitor app health" />
+  <ComparisonRow column1={false} column2={true} feature="Alerting" description="Set alerts on metric thresholds or anomalies" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
+</ComparisonTable>
+
+**Important:** You can only use the table components in `mdx` files – an extension to Markdown that lets you use JSX code in a markdown file.
+
+## Captions
+
+You can add captions below images using the following code:
+
+`<Caption>Add you caption copy here</Caption>`
+
+Here's an example of what it looks like:
+
+![PostHog webshare pricing experiment](../../images/customers/webshare/webshare-pricing.png)
+<Caption>Adding the 'Buy Now' call to action and adjusting the text enabled Webshare to boost conversion by 26%</Caption>
+
+## Quotation
+
+You can add a styled quote component using the following code:
+
+```jsx
+<BorderWrapper>
+<Quote
+    imageSource="/images/customers/utku.jpg"
+    size="md"
+    name="Utku Zihnioglu"
+    title="Founder & CEO, Webshare "
+    quote={`“We saw PostHog, and saw that it does everything that we needed, and had all these syncing capabilities too. We just knew right away that it was the right tool for us. We started using all of its capabilities.”`}
+/>
+</BorderWrapper>
+```
+
+It looks like this:
+
+<BorderWrapper>
+<Quote
+    imageSource="/images/customers/utku.jpg"
+    size="md"
+    name="Utku Zihnioglu"
+    title="Founder & CEO, Webshare "
+    quote={`“We saw PostHog, and saw that it does everything that we needed, and had all these syncing capabilities too. We just knew right away that it was the right tool for us. We started using all of its capabilities.”`}
+/>
+</BorderWrapper>
+
+We mainly use them in customer stories and some product pages.

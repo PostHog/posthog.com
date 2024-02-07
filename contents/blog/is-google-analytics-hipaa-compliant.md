@@ -19,7 +19,7 @@ HIPAA, which stands for the Health Insurance Portability and Accountability Act,
 
 Put simply, you should not use Google Analytics if your business is a 'Covered Entity' or 'Business Associate' under HIPAA: **Google Analytics is not HIPAA compliant** and using it could result in a breach and substantial fines. 
 
-This means other tools which rely on Google Analytics, such as the experimentation platform Google Optimize, are also not HIPAA compliant. Read our guide to [HIPAA-compliant split testing tools](/blog/best-hipaa-compliant-ab-testing-tools) if you need an alternative to Opimize as well.
+This means other tools which rely on Google Analytics, such as the experimentation platform [Google Optimize](/blog/optimize-to-posthog), are also not HIPAA compliant. Read our guide to [HIPAA-compliant split testing tools](/blog/best-hipaa-compliant-ab-testing-tools) if you need an alternative to Opimize as well.
 
 In this article, we'll explain:
 
@@ -61,7 +61,7 @@ If you want to find [product market fit](https://posthog.com/blog/how-to-product
 
 While there are lots options out there, we think **PostHog is the most HIPAA-compliant product analytics platform** out there.
 
-Unlike third-party analytics options like Mixpanel or Amplitude, **PostHog is the only comprehensive product analytics platform you can self-host** on your own infrastructure. 
+Unlike third-party analytics options like Mixpanel or [Amplitude](/blog/best-amplitude-alternatives), **PostHog is the only comprehensive product analytics platform you can self-host** on your own infrastructure. 
 
 This is important because:
 

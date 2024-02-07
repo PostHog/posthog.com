@@ -4,33 +4,49 @@ import Intro from "./intro.mdx"
 
 <Intro />
 
-```java
-PostHog.with(this)
-       .capture("User signed up");
+```kotlin
+PostHog.capture(event = "user_signed_up")
 ```
 
 <NamingTip />
 
 <SettingProperties />
 
-```java
-PostHog.with(this)
-       .capture("User signed up", new Properties()
-              .putValue("login_type", "email")
-              .putValue("is_free_trial", true));
+```kotlin
+PostHog.capture(
+    event = "user_signed_up",
+    properties = mapOf(
+        "login_type" to "email",
+        "is_free_trial" to true
+    )
+)
 ```
+
+### Autocapture 
+
+PostHog autocapture automatically tracks the following events for you:
+
+-   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+-   **Deep Link Opened** - when the app is opened from a deep link.
+-   **Application Backgrounded** - when the app is sent to the background by the user
+-   **Application Installed** - when the app is installed.
+-   **Application Updated** - when the app is updated.
+-   **$screen** - when the user navigates (if using `android.app.Activity`)
 
 ### Capturing screen views
 
-With [`recordScreenViews()`](/docs/libraries/android#all-configuration-options), PostHog will try to record all screen changes automatically.
+With [`captureScreenViews = true`](/docs/libraries/android#all-configuration-options), PostHog will try to record all screen changes automatically.
 
 If you want to manually send a new screen capture event, use the `screen` function.
 
-This function requires a `name`. You may also pass in an optional `properties` object.
+This function requires a `screenTitle`. You may also pass in an optional `properties` object.
 
-```java
-PostHog.with(this)
-       .screen("Dashboard", new Properties()
-                                  .putValue("background", "blue")
-                                  .putValue("hero", "superhog"));
+```kotlin
+PostHog.screen(
+    screenTitle = "Dashboard",
+    properties = mapOf(
+        "background" to "blue",
+        "hero" to "superhog"
+    )
+)
 ```

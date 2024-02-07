@@ -67,6 +67,10 @@ module.exports = {
             retrievePages('customers', '/^customers/'),
             retrievePages('apps', '/^apps/'),
             retrievePages('cdp', '/^cdp/'),
+            retrievePages('founders', '/^founders/'),
+            retrievePages('newsletter', '/^newsletter/'),
+            retrievePages('product-engineers', '/^product-engineers/'),
+            retrievePages('templates', '/^templates/'),
             {
                 query: `
                             {
@@ -239,7 +243,7 @@ module.exports = {
             // Note: by supplying settings, you will overwrite all existing settings on the index
         },*/
         mergeSettings: false, // optional, defaults to false. See notes on mergeSettings below
-        concurrentQueries: true, // default: true
+        concurrentQueries: false, // default: true
         dryRun: false, // default: false, only calculate which objects would be indexed, but do not push to Algolia
         continueOnFailure: false, // default: false, don't fail the build if Algolia indexing fails
         algoliasearchOptions: undefined, // default: { timeouts: { connect: 1, read: 30, write: 30 } }, pass any different options to the algoliasearch constructor

@@ -110,14 +110,14 @@ function App() {
     }, [posthog, user.id, user.email, user.company_id])
 
     const loginClicked = () => {
-        posthog?.capture('Clicked Log In')
+        posthog?.capture('clicked_log_in')
         login()
     }
 
     return (
         <div className="App">
             {/* Fire a custom event when the button is clicked */}
-            <button onClick={() => posthog?.capture('button clicked')}>Click me</button>
+            <button onClick={() => posthog?.capture('button_clicked')}>Click me</button>
             {/* This button click event is autocaptured by default */}
             <button data-attr="autocapture-button">Autocapture buttons</button>
             {/* This button click event is not autocaptured */}
@@ -138,10 +138,10 @@ To fix this error, add a check that posthog has been initialized such as:
 
 ```react
 useEffect(() => {
-  posthog?.capture('Test') // using optional chaining (recommended)
+  posthog?.capture('test') // using optional chaining (recommended)
 
   if (posthog) {
-    posthog.capture('Test') // using an if statement
+    posthog.capture('test') // using an if statement
   }
 }, [posthog])
 ```

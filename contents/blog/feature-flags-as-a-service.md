@@ -18,7 +18,7 @@ Feature flags are a tool to conditionally turn on or off code and components. Th
 
 The basic functionality of feature flags is simple enough to build yourself. The challenge comes as you scale and your needs become more complex. In this post, we'll cover:
 
-- The functionality of a feature flag service.
+- The functionality of a [feature flag service](/blog/best-open-source-feature-flag-tools).
 - The challenges of building a service in-house.
 - The benefits of feature flags as a service.
 - How to make the build vs. buy decision.
@@ -83,7 +83,7 @@ is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_us
 
 Feature flag services also contain features for more complicated use cases, such as: 
 
-- Targeting feature flags for percentage rollouts, [betas](/tutorials/public-beta-program), [testing in production](/blog/testing-in-production), and more.
+- Targeting feature flags for percentage rollouts, [betas](/tutorials/public-beta-program), [testing in production](/product-engineers/testing-in-production), and more.
 - Multi-variant flags that enable A/B testing.
 - Integrations with other external services like product analytics, CDPs, and automations.
 - Speed and resiliency optimizations like local evaluation and caching.
@@ -103,7 +103,7 @@ With feature flags as a service, you gain more confidence in:
 
 In fewer words, you pass your potential problems off to them. 
 
-![Problems](../images/blog/feature-flags-as-a-service/problems.png)
+![Problems](../images/blog/feature-flags-as-a-service/problems.jpg)
 
 ## Deciding whether to build or buy
 

@@ -1,12 +1,11 @@
 ---
-title: How to create new events the easy way
+title: How to create an action using the PostHog toolbar
 sidebar: Docs
 showTitle: true
 author: ['joe-martin']
 date: 2022-10-04
-featuredImage: ../images/tutorials/banners/create-new-events-the-easy-way.png
 featuredVideo: https://www.youtube-nocookie.com/embed/C_zNykBHlTI
-tags: ["actions", "toolbar"]
+tags: ["actions", "toolbar", 'product os']
 ---
 
 **Estimated reading time:** 6 minutes ☕☕
@@ -45,15 +44,15 @@ If the URL you want isn’t listed, select ‘_+ Add authorized URL_’ and ente
 
 ## Using the toolbar to create new events
 
-![Using the toolbar](../images/tutorials/custom-events-the-easy-way/create-events-easy-way-posthog.png)
+![Using the toolbar](../images/tutorials/custom-events-the-easy-way/toolbar.png)
 
 When the toolbar is launched, you’ll see a floating PostHog logo in your browser. You can drag the logo to reveal obscured elements of the page as needed, and on click it will reveal a pop-out menu, as pictured above.
 
-![Using the toolbar overlay](../images/tutorials/toolbar/inspect-toolbar.png)
+![Using the toolbar overlay](../images/tutorials/custom-events-the-easy-way/toolbar-actions.png)
 
 Click ‘_Actions_’ to start creating a new action. This will create a blue overlay that highlights selectable elements. You can select any of these elements to summon a modal which gives you more information about the element. In this modal, click ‘_+ Create a new action_’ to continue.
 
-![create actions the easy way with posthog](../images/tutorials/toolbar/toolbar-create-action.png)
+![create actions the easy way with posthog](../images/tutorials/custom-events-the-easy-way/toolbar-create-action.png)
 
 Most information in the next modal will be auto-populated with relevant information — that’s why we call this the easy way! However, it’s important to give your new event a descriptive name. Enter this in the ‘_What did your user do?_’ field. A good example of an event name would be '_Clicked Get Started on homepage_' or '_New user signed up_'. 
 
@@ -81,5 +80,5 @@ Next, select ‘_Select Element_’ and click the additional element you want to
 Congratulations, you just made a new calculated event using the PostHog toolbar. You can use this event in insights such as funnels, trends or paths — or you can check these tutorials for further inspiration. 
 
 - [How to correlate errors with product performance using Sentry](https://posthog.com/tutorials/sentry-plugin-tutorial)
-- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
+- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/guide-to-funnels)
 - [How and why to build an AARRR pirate funnel in PostHog](https://posthog.com/blog/aarrr-pirate-funnel)

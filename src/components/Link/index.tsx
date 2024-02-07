@@ -6,6 +6,7 @@ import usePostHog from '../../hooks/usePostHog'
 import type { GatsbyLinkProps } from 'gatsby'
 import Tooltip from 'components/Tooltip'
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
+import { useLayoutData } from 'components/Layout/hooks'
 
 export interface Props {
     to: string
@@ -38,14 +39,8 @@ export default function Link({
     glossary,
     ...other
 }: Props) {
+    const { compact } = useLayoutData()
     const posthog = usePostHog()
-
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
-        if (event && posthog) {
-            posthog.capture(event)
-        }
-        onClick && onClick(e)
-    }
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
     const preview =
@@ -53,6 +48,28 @@ export default function Link({
         glossary?.find((glossaryItem) => {
             return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com/gi, '')
         })
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
+        if (compact && url && !internal) {
+            e.preventDefault()
+            if (/(eu|app)\.posthog\.com/.test(url)) {
+                window.parent.postMessage(
+                    {
+                        type: 'external-navigation',
+                        url,
+                    },
+                    '*'
+                )
+            } else {
+                window.open(url, '_blank', 'noopener,noreferrer')
+            }
+        }
+        if (event && posthog) {
+            posthog.capture(event)
+        }
+        onClick && onClick(e)
+    }
+
     return onClick && !url ? (
         <button onClick={handleClick} className={className}>
             {children}
@@ -83,12 +100,12 @@ export default function Link({
         )
     ) : (
         <a
-            target={external || externalNoIcon ? '_blank' : ''}
             rel="noopener noreferrer"
             onClick={handleClick}
             {...other}
             href={url}
             className={`${className} group`}
+            target={external || externalNoIcon ? '_blank' : ''}
         >
             {external ? (
                 <span className="inline-flex justify-center items-center space-x-1 group">

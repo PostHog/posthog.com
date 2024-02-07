@@ -1,46 +1,50 @@
-import { Graph, RewindPlay, Toggle, Flask, Person, Server, Database, Terminal } from '@posthog/icons'
-
 export const slideButtons = [
     {
         title: 'Product analytics',
-        Icon: Graph,
+        lottieSrc: '/lotties/product-icons/product-analytics.lottie',
         color: 'blue',
+        placeholderIcon: 'IconGraph',
+    },
+    {
+        title: 'Web analytics',
+        lottieSrc: '/lotties/product-icons/web-analytics.lottie',
+        color: '[#36C46F]',
+        placeholderIcon: 'IconPieChart',
     },
     {
         title: 'Session replay',
-        Icon: RewindPlay,
+        lottieSrc: '/lotties/product-icons/session-replay.lottie',
         color: 'yellow',
+        placeholderIcon: 'IconRewindPlay',
     },
     {
         title: 'Feature flags',
-        Icon: Toggle,
-        color: 'teal',
+        lottieSrc: '/lotties/product-icons/feature-flags.lottie',
+        color: 'seagreen',
+        placeholderIcon: 'IconToggle',
     },
     {
         title: 'A/B testing',
-        Icon: Flask,
+        lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
+        placeholderIcon: 'IconFlask',
     },
     {
-        title: 'CDP',
-        Icon: Person,
-        color: 'yellow',
+        title: 'Surveys',
+        lottieSrc: '/lotties/product-icons/surveys.lottie',
+        color: 'salmon',
+        placeholderIcon: 'IconMessage',
+    },
+    {
+        title: 'Data pipeline',
+        lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
+        color: '[#2EA2D3]',
+        placeholderIcon: 'IconDecisionTree',
     },
     {
         title: 'Data warehouse',
-        Icon: Server,
-        color: 'seagreen',
+        lottieSrc: '/lotties/product-icons/data-warehouse.lottie',
+        color: '[#8567FF]',
+        placeholderIcon: 'IconDatabase',
     },
-    {
-        title: 'SQL',
-        Icon: Database,
-        color: 'salmon',
-    },
-    /*
-    {
-        title: 'API',
-        Icon: Terminal,
-        color: 'blue',
-    },
-    */
 ]

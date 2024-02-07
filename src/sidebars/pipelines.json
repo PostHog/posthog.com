@@ -20,10 +20,6 @@
         "url": "/cdp/amazon-kinesis"
     },
     {
-        "name": "Automatic Cohort Creator",
-        "url": "/cdp/automatic-cohort-creator"
-    },
-    {
         "name": "BigQuery",
         "url": "/cdp/bigquery-export"
     },
@@ -114,10 +110,6 @@
     {
         "name": "Redshift (Export)",
         "url": "/cdp/redshift-export"
-    },
-    {
-        "name": "Redshift (Import)",
-        "url": "/cdp/redshift-import"
     },
     {
         "name": "Replicator",

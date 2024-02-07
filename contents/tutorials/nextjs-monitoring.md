@@ -4,7 +4,6 @@ date: 2023-05-30
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ['configuration', 'session replay', 'insights']
 ---
 

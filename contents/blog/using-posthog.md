@@ -11,9 +11,6 @@ author:
   - andy-vandervell
 category: Using PostHog
 tags:
-  - Product analytics
-  - Session recording
-  - Feature flags
   - Guides
 ---
 
@@ -29,7 +26,7 @@ The answer? A lot.
 
 Let's start with a big one.
 
-You could use Amplitude for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, Optimizely for testing, and Redshift for your data warehouse – these are sensible choices.
+You could use [Amplitude](/blog/best-amplitude-alternatives) for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, Optimizely for testing, and Redshift for your data warehouse – these are sensible choices.
 
 But you can replace some (or even all) of them with just PostHog.
 

@@ -37,6 +37,22 @@ code {
     }
 }
 
+::-webkit-scrollbar {
+    @apply h-2.5 w-2.5;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-accent dark:bg-accent-dark shadow-[inset_1px_0_0_#D0D1C9] dark:shadow-[inset_1px_0_0_#4A4C52];
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-black/20 dark:bg-white/20 rounded-full;
+
+    &:hover {
+        @apply bg-black/30 dark:bg-white/30;
+    }
+}
+
 /* links and text */
 
 *,
@@ -108,7 +124,7 @@ h3 {
 }
 
 h4 {
-    @apply text-base leading-normal mb-3;
+    @apply text-[1.25rem] leading-normal mb-3;
 
     code {
         @apply !font-bold !text-xl;
@@ -132,10 +148,20 @@ h4 {
 
     h2 {
         @apply text-[1.75rem];
+
+        code {
+            @apply !text-[1.75rem];
+        }
     }
 
     h2 + h3 {
         @apply mt-4;
+    }
+
+    h3 {
+        code {
+            @apply !text-xl;
+        }
     }
 
     p,
@@ -172,6 +198,13 @@ h4 {
     blockquote {
         letter-spacing: initial;
 
+        h2,
+        h3,
+        h4,
+        h5 {
+            @apply mt-0 mb-0.5;
+        }
+
         code {
             @apply bg-gray-accent dark:bg-gray-accent-dark;
         }
@@ -207,6 +240,7 @@ h4 {
             @apply mt-8;
         }
     }
+
     blockquote:not(.quote) {
         @apply px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
 
@@ -227,12 +261,14 @@ h4 {
             @apply opacity-75 text-sm;
         }
     }
+
     tr:not(:first-child) {
         td,
         th {
             @apply border-t border-light dark:border-dark;
         }
     }
+
     td,
     th {
         @apply pt-2 text-[15px];
@@ -250,6 +286,10 @@ h4 {
     th:last-child,
     td:last-child {
         padding-right: 0;
+    }
+
+    hr {
+        @apply border-t border-b-0 border-solid border-light dark:border-dark my-6 h-0;
     }
 
     /* expandable/collapsible sections */
@@ -397,6 +437,18 @@ h4 {
 
     &:hover:before {
         opacity: 1;
+    }
+}
+
+.footnotes {
+    @apply border-t border-border dark:border-dark pt-4;
+
+    hr {
+        @apply hidden;
+    }
+
+    li {
+        @apply text-sm;
     }
 }
 
@@ -830,6 +882,18 @@ ul {
         position: absolute;
         top: 4px;
         width: 4px;
+    }
+}
+
+.active-sidebar-item {
+    &:before {
+        @apply bg-red absolute;
+        bottom: 2px;
+        border-radius: 2px;
+        content: '';
+        left: 0px;
+        top: 2px;
+        width: 2px;
     }
 }
 

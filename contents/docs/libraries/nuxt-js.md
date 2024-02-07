@@ -5,7 +5,7 @@ icon: ../../images/docs/integrate/frameworks/nuxt.svg
 
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
-This guide walks you through integrating PostHog into your app for both Nuxt.js major versions `2` and `3`. We'll use the [JavaScript](/docs/libraries/js) SDK.
+This guide walks you through integrating PostHog into your app for both Nuxt.js major versions `2` and `3`. We'll use the [PostHog JavaScript web](/docs/libraries/js) SDK.
 
 This tutorial is aimed at Nuxt.js users which run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
 
@@ -74,11 +74,11 @@ export default defineNuxtPlugin(nuxtApp => {
 PostHog can then be accessed throughout your Nuxt.js using the provider accessor, for example:
 
 ```vue filename=index.vue
-<script setup lang="ts">
+<script setup>
    const { $posthog } = useNuxtApp()
    if ($posthog) {
-      const posthog =$posthog()
-      posthog?.capture('<event_name>')
+      const posthog = $posthog()
+      posthog.capture('<event_name>')
    }
 </script>
 ```
@@ -170,6 +170,7 @@ Let's say for example the user makes a purchase you could track an event like th
 
 ## Further reading
 
+- [How to set up A/B tests in Nuxt](tutorials/nuxtjs-ab-tests)
 - [PostHog for VueJS users](/docs/libraries/vue-js)
 - [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
 - [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)

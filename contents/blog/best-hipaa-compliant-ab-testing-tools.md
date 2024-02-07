@@ -14,7 +14,7 @@ tags:
   - Privacy
 ---
 
-What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee have in common?
+What do Google Optimize, [Optimizely](/blog/posthog-vs-optimizely), Convert, Webtrends Optimize and Splitbee have in common?
 
 1. They're popular A/B testing tools
 2. None of them are HIPAA compliant
@@ -45,7 +45,7 @@ These are the broad principles, but **please consult an expert** before making a
 
 ![kameleoon](../images/blog/hipaa-compliant-ab-testing/kameleoon.png)
 
-Kameleoon is an A/B testing and personalization platform. It supports A/B and multivariate testing, and feature flags for managing the rollout of new features and running tests. In addition to testing, it features a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
+Kameleoon is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), and feature flags for managing the rollout of new features and running tests. In addition to testing, it features a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
 
 #### Kameleoon and HIPAA compliance
 

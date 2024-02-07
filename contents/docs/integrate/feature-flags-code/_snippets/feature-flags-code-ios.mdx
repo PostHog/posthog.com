@@ -1,7 +1,7 @@
 ### Boolean feature flags
 
 ```swift
-if (posthog.isFeatureEnabled('flag-key')) {
+if (posthog.isFeatureEnabled("flag-key")) {
     // Do something differently for this user
 }
 ```
@@ -9,7 +9,7 @@ if (posthog.isFeatureEnabled('flag-key')) {
 ### Multivariate feature flags
 
 ```swift
-if (posthog.getFeatureFlag('my-flag') == "variant-key") { // replace 'variant-key' with the key of your variant
+if (posthog.getFeatureFlag("my-flag") as? String == "variant-key") { // replace "variant-key" with the key of your variant
     // do something
 }
 ```

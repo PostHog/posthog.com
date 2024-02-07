@@ -2,6 +2,18 @@
 title: Experiments under the hood
 ---
 
+import { FormulaScreenshot } from 'components/FormulaScreenshot'
+import LehrEquationLight from '../../images/docs/user-guides/experimentation/lehr-equation-light.png'
+import LehrEquationDark from '../../images/docs/user-guides/experimentation/lehr-equation-dark.png'
+import SampleSizeDeterminationLight from '../../images/docs/user-guides/experimentation/sample-size-determination-light.png'
+import SampleSizeDeterminationDark from '../../images/docs/user-guides/experimentation/sample-size-determination-dark.png'
+import TrendExperimentCalculationLight from '../../images/docs/user-guides/experimentation/trend-experiment-calculation-light.png'
+import TrendExperimentCalculationDark from '../../images/docs/user-guides/experimentation/trend-experiment-calculation-dark.png'
+import FunnelExperimentCalculationLight from '../../images/docs/user-guides/experimentation/funnel-experiment-calculation-light.png'
+import FunnelExperimentCalculationDark from '../../images/docs/user-guides/experimentation/funnel-experiment-calculation-dark.png'
+import FunnelSignificanceLight from '../../images/docs/user-guides/experimentation/funnel-significance-light.png'
+import FunnelSignificanceDark from '../../images/docs/user-guides/experimentation/funnel-significance-dark.png'
+
 Below are all formulas and calculations we go through when recommending sample sizes and determining significance.
 
 ## How we ensure distribution of people
@@ -19,9 +31,12 @@ When you're creating an experiment, we show you recommended running times and sa
 
 For trend experiments, we use Lehr's equation [as explained here](http://www.columbia.edu/~cjd11/charles_dimaggio/DIRE/styled-4/code-12/#poisson-distributed-or-count-data) to determine sample sizes.
 
-```
-exposure = 4 / (sqrt(lambda1) - sqrt(lambda2))^2
-```
+<FormulaScreenshot
+  imageLight={LehrEquationLight}
+  imageDark={LehrEquationDark} 
+  alt="Lehr equation" 
+  classes="rounded"
+/>
 
 where lambda1 is the baseline count data we've seen for the past two weeks,
 and lambda2 is `baseline count + mde*(baseline count)`.
@@ -30,9 +45,12 @@ and lambda2 is `baseline count + mde*(baseline count)`.
 
 For funnel experiments, we use the general [Sample Size Determination](https://en.wikipedia.org/wiki/Sample_size_determination) formula, with 80% power and 5% significance. The formula then becomes:
 
-```
-sample size per variant = 16 * conversion_rate * (1 - conversion_rate) / (mde)^2
-```
+<FormulaScreenshot
+  imageLight={SampleSizeDeterminationLight}
+  imageDark={SampleSizeDeterminationDark} 
+  alt="Sample size determination" 
+  classes="rounded"
+/>
 
 where `mde` is again the minimum detectable effect chosen in the UI.
 
@@ -56,7 +74,12 @@ Then, for each variant, we can sample from their distributions and get a count v
 
 The probability of a variant being the best is given by:
 
-![Probability](../../images/docs/user-guides/experimentation/count_data_probability.png)
+<FormulaScreenshot
+  imageLight={TrendExperimentCalculationLight}
+  imageDark={TrendExperimentCalculationDark}
+  alt="Trend experiment calculation" 
+  classes="rounded"
+/>
 
 For calculating significance, we currently measure p-values using a poisson means test. [Here's a good primer of the formula](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
 
@@ -76,13 +99,23 @@ Then, for each variant, we can sample from their distributions and get a convers
 
 The probability of a variant being the best is given by:
 
-![Probability](../../images/docs/user-guides/experimentation/conversion_probability.png)
+<FormulaScreenshot
+  imageLight={FunnelExperimentCalculationLight}
+  imageDark={FunnelExperimentCalculationDark}
+  alt="Funnel experiment calculation" 
+  classes="rounded"
+/>
 
 To calculate significance, we calculate the expected loss, as first mentioned in [VWO's SmartStats whitepaper](https://vwo.com/downloads/VWO_SmartStats_technical_whitepaper.pdf).
 
 To do this, we again run a monte carlo simulation, and calculate loss as:
 
-![Loss](../../images/docs/user-guides/experimentation/loss-calculation.png)
+<FormulaScreenshot
+  imageLight={FunnelSignificanceLight}
+  imageDark={FunnelSignificanceDark}
+  alt="Funnel significance" 
+  classes="rounded"
+/>
 
 This represents the expected loss in conversion rate if you chose any other variant. If this is below 1%, we declare results as significant.
 

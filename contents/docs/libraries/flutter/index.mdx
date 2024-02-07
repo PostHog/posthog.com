@@ -57,9 +57,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Posthog.screen(
-      screenName: 'Example Screen',
-    );
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -69,19 +66,19 @@ class MyApp extends StatelessWidget {
           child: FlatButton(
             child: Text('TRACK ACTION WITH POSTHOG'),
             onPressed: () {
-              Posthog.capture(
-                eventName: 'ButtonClicked',
+              Posthog().capture(
+                eventName: 'button_clicked',
                 properties: {
                   'foo': 'bar',
                   'number': 1337,
                   'clicked': true,
-                  '$set': {
+                  '\$set': {
                     'userProp': 'value1',
-                    '$groups': {
+                    '\$groups': {
                       'company': 'twitter',
                     },
                   },
-                  '$set_once': {
+                  '\$set_once': {
                     'userProp': 'value2'
                   }
                 },
@@ -91,6 +88,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       navigatorObservers: [
+        // PosthogObserver captures Posthog().screen(...) automatically
         PosthogObserver(),
       ],
     );

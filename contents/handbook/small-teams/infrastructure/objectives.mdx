@@ -1,35 +1,25 @@
-## Q3 2023 Goals
+## Q1 2024 Goals
 
-1. Make CI/CD spark joy
-- Deploying components separately
-- Better controls, allow people to roll back. UI to manage deploy.
-- Make CI faster/have more capacity
+### 💪 Deploy with confidence
+Our deploy speed keeps us moving fast but bigger changes would benefit from better tooling to gradually roll out, validate and roll back if necessary.
 
-2. Empower teams to own their stack
-- Help teams self-serve observability/alerting/paging
-- Give teams insight and control over their costs
-- Help teams figure out how to provision infrastructure
+- Auto rollbacks with orchestration / blocking new deploys
+- Canary deployments
+- Load testing
+- Investigate something like envoy perhaps to enable traffic shadowing + canary deploys
+- Finish helm charts work
+- Anomaly detection
 
-3. Ongoing maintenance
-- Upgrade Postgres
-- Terraform state/controls
-- Any other interruptions that come up
+### 💰 Keep costs under control
+- Keep on top of the great work so far to keep costs under control
+- Tackle remaining clear improvements (Cloudfront costs, reserved instances etc.)
+- Kafka ops work including tiered storage
 
-## Roadmap
+### 👀 Yet more Observability  
+- CI/CD times (measuring it to know where the pain points are)
+- Cost of resources per product 
+- Get tracing solution firmly into the hands and minds of teams
 
-#### 3-year
+### 🎯 Security as a feature
+- Investigate pragmatic parts of SOC 2 type II we could already be moving towards
 
-- All infrastructure is managed as code
-- Cloud is global
-- Best in class security and privacy compliance
-- Scale beyond 1 Trillion events / month
-- Support non-k8s Deploys 🤖
-- Painless developer/contributor experience
-
-#### 6 month
-
-- No Heroku
-- 5 Billion / month events
-- SOC 2 Ready
-- All infra is managed as code on prod / staging + EU Ready 🎈
-- Rock solid, reliable infrastructure with regular production load testing to inform scaling plans

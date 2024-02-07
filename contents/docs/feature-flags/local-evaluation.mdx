@@ -89,12 +89,11 @@ PostHog::init("<ph_project_api_key>",
 
 ## Step 3: Evaluate your feature flag
 
-To evaluate the feature flag, call `getFeatureFlag` or `getAllFlags` as you normally would. The only difference is that you must provide any `person properties`, `groups` or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
+To evaluate the feature flag, call any of the flag related methods, like `getFeatureFlag` or `getAllFlags`, as you normally would. The only difference is that you must provide any `person properties`, `groups` or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
 
-Then, by default, PostHog attempts to evaluate the flag locally. If this fails, PostHog then makes a server request fetch the flag value.
+Then, by default, PostHog attempts to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request fetch the flag value. 
 
-You can disable this behavior by setting `onlyEvaluateLocally` to `true`. In this case, PostHog will only attempt to evaluate the flag locally, and return `undefined` / `None` / `nil` if it was unable to.
-
+You can disable this behavior by setting `onlyEvaluateLocally` to `true`. In this case, PostHog will **only** attempt to evaluate the flag locally, and return `undefined` / `None` / `nil` if it was unable to. 
 
 <MultiLanguage>
 

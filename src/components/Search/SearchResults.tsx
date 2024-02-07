@@ -61,6 +61,10 @@ const categories = [
         name: 'Questions',
     },
     {
+        type: 'post',
+        name: 'Posts',
+    },
+    {
         type: 'handbook',
         name: 'Handbook',
     },

@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['laudspeaker']
 date: 2023-01-26
-featuredImage: ../images/tutorials/banners/tutorial-1.png
-tags: ["apps", "site-apps"]
+tags: ["apps", "site-apps", 'cdp']
 ---
 
 Laudspeaker is a cross-channel customer messaging platform and an open source alternative to platforms such as Customer.io, Braze, or Iterable. It enables you to create automated customer journeys so your users receive messages when they complete specific actions on your site. 

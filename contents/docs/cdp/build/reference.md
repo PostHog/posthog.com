@@ -109,53 +109,6 @@ export async function processEvent(event, { config }) {
 }
 ```
 
-### `cache`
-
-A way to cache values globally across plugin reloads. The values are stored in [Redis](https://redis.io/), an in-memory store. This storage is not persistent, so values _can_ be dropped by the system.
-
-The `cache` type is defined as follows:
-
-```js
-interface CacheExtension {
-    set: (key: string, value: unknown, ttlSeconds?: number, options?: CacheOptions) => Promise<void>
-    get: (key: string, defaultValue: unknown, options?: CacheOptions) => Promise<unknown>
-    incr: (key: string) => Promise<number>
-    expire: (key: string, ttlSeconds: number) => Promise<boolean>
-    lpush: (key: string, elementOrArray: unknown[]) => Promise<number>
-    lrange: (key: string, startIndex: number, endIndex: number) => Promise<string[]>
-    llen: (key: string) => Promise<number>
-}
-```
-
-Storing values is done via `cache.set`, which takes a key and a value, as well as an optional value in seconds after which the key will expire.
-
-Retrieving values uses `cache.get`, which takes the key of the value to be retrieved, as well as a default value in case the key does not exist.
-
-You can also use `cache.incr` to increment numerical values by 1, and `cache.expire` to make keys _volatile_, meaning they will expire after the specified number of seconds.
-
-Methods `cache.lpush`, `cache.lrange`, and `cache.llen` enable operations on Redis lists.
-
-All the above methods represent their equivalent Redis commands – see Redis documentation:
-
-- [SET](https://redis.io/commands/set)
-- [GET](https://redis.io/commands/get)
-- [INCR](https://redis.io/commands/incr)
-- [EXPIRE](https://redis.io/commands/expire)
-- [LPUSH](https://redis.io/commands/lpush)
-- [LRANGE](https://redis.io/commands/lrange)
-- [LLEN](https://redis.io/commands/llen)
-
-Example:
-```js
-export function processEvent(event, { config, cache }) {
-    const counterValue = (await cache.get('greeting_counter', 0))
-    await cache.set('greeting_counter', counterValue + 1)
-    if (!event.properties) event.properties = {}
-    event.properties['greeting_counter'] = counterValue
-    return event
-}
-```
-
 ### `global`
 
 The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog apps. `global` is not shared across worker threads
@@ -195,18 +148,6 @@ export function setupPlugin({ attachments, global }: Meta) {
     }
 }
 ```
-
-### `jobs`
-
-The `jobs` object gives you access to the jobs you specified in your app. See [Jobs](/docs/apps/build/jobs) for more information.
-
-### `geoip`
-
-`geoip` provides a way to interface with a [MaxMind](https://www.maxmind.com/en/home) database running in the app server to get location data for an IP address. It is [primarily used for the PostHog GeoIP plugin](https://github.com/PostHog/posthog-plugin-geoip/blob/6412763f70a80cf3e1895e8a559a470d80abc9d5/index.ts#L12).
-
-It has a `locate` method that takes an IP address and returns an object possibly containing `city`, `location`, `postal`, and `subdivisions`.
-
-Read more about the response from `geoip.locate` [here](https://github.com/maxmind/GeoIP2-node/blob/af20a9681c85445a73d3446e2a682f64d3b673db/src/models/City.ts).
 
 ## Maximizing reliability with `RetryError`
 
@@ -248,7 +189,6 @@ The maximum number of retries is documented with each function, as it might diff
 As of PostHog 1.37+, the following functions are _retriable_:
 - `setupPlugin`
 - `onEvent`
-- `exportEvents`
 
 ## `setupPlugin` function
 
@@ -283,8 +223,6 @@ async function teardownPlugin({ global }) {
 ```
 
 ## `processEvent` function
-
-> If you were using `processEventBatch` before, you should now use `processEvent`. `processEventBatch` has been **deprecated**.
 
 `processEvent` is the juice of your app. 
 
@@ -338,63 +276,7 @@ async function onEvent(event) {
 
 `onEvent` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times is ignored.
 
-## Scheduled tasks
-
-Apps can also run scheduled tasks through the functions:
-
-- `runEveryMinute`
-- `runEveryHour`
-- `runEveryDay`
-
-These functions only take an object of type `PluginMeta` as a parameter and do not return anything.
-
-Example usage:
-
-```js
-async function runEveryMinute({ config }) {
-    const url = `https://api.github.com/repos/PostHog/posthog`
-    const response = await fetch(url)
-    const metrics = await response.json()
-
-  // posthog.capture is also available in apps by default
-    posthog.capture('github metrics', { 
-        stars: metrics.stargazers_count,
-        open_issues: metrics.open_issues_count,
-        forks: metrics.forks_count,
-        subscribers: metrics.subscribers_count
-    })
-}
-```
-
-It's worth noting that scheduled tasks are _debounced_, meaning that only a single run of a given task can be in progress at any given time. For example, if a `runEveryMinute` run takes more than a minute, it will make the system skip each following run until that current one has finished – then, the schedule will resume normally.
-
-## `exportEvents`
-
-`exportEvents` was built to make exporting PostHog events to third-party services (like data warehouses) extremely easy. 
-
-Example:
-
-```js
-async function exportEvents(events, meta) {
-  try {
-    // send events somewhere
-  } catch {
-    throw new RetryError('Service is down')
-  }
-}
-```
-
-In the background, `exportEvents` sets up asynchronous processing of batches and ensures the events in the batch have already been processed by all enabled apps. `exportEvents` can be retried up to 3 times (first retry after 6 s, then 12 s after that, 24 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 3 times is ignored.
-
-## Using the PostHog API
-
-All apps have access to the PostHog API which can be used to read and create almost anything within PostHog, as well as send additional events.
-
-For more information on using the API, take a look at [this guide](/docs/apps/build/api).
-
 ## Available packages and imports
-
-Apps have access to some special objects in the global scope, as well as a variety of libraries for importing. Scheduling functions (`setInterval`, `setTimeout` and `setImmediate`) are not available. Use jobs instead.
 
 ### Global
 
@@ -416,34 +298,16 @@ Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch).
 | `url`    | [Node.js standard lib's `url` module](https://nodejs.org/api/url.html) |
 | `zlib`    | [Node.js standard lib's `zlib` module](https://nodejs.org/api/zlib.html) |
 | `generic-pool`    | [`npm` package `generic-pool`](https://www.npmjs.com/package/generic-pool) |
-| `pg`    | [`npm` package `node-postgres`](https://www.npmjs.com/package/pg) |
-| `snowflake-sdk`    | [`npm` package `snowflake-sdk`](https://www.npmjs.com/package/snowflake-sdk) |
-| `aws-sdk`    | [`npm` package `aws-sdk`](https://www.npmjs.com/package/aws-sdk) |
-| `@google-cloud/bigquery`    | [`npm` package `@google-cloud/bigquery`](https://www.npmjs.com/package/@google-cloud/bigquery) |
-| `@google-cloud/storage`    | [`npm` package `@google-cloud/storage`](https://www.npmjs.com/package/@google-cloud/storage) |
-| `@google-cloud/pubsub`    | [`npm` package `@google-cloud/pubsub`](https://www.npmjs.com/package/@google-cloud/pubsub) |
 | `node-fetch`    | [`npm` package `node-fetch`](https://www.npmjs.com/package/node-fetch) |
 | `@posthog/plugin-scaffold`    | Types for PostHog plugins. [`npm` package `@posthog/plugin-scaffold`](https://www.npmjs.com/package/@posthog/plugin-scaffold) |
 | `@posthog/plugin-contrib`    | Helpers for plugin devs maintained by PostHog. [`npm` package `@posthog/plugin-contrib`](https://www.npmjs.com/package/@posthog/plugin-contrib) |
 
-
-#### Example 
-
-Here's an example of the use of imports from the BigQuery plugin:
-
+For example:
 ```js
-import { createBuffer } from '@posthog/plugin-contrib'
-import { Plugin, PluginMeta, PluginEvent, RetryError } from '@posthog/plugin-scaffold'
-import { BigQuery, Table, TableField, TableMetadata } from '@google-cloud/bigquery'
+import { Plugin, PluginMeta } from '@posthog/plugin-scaffold'
 ```
 
 You can also use `require` for imports.
-
-## Jobs
-
-Apps can schedule tasks in PostHog that run asynchronously on a given schedule. These can be used to import or export data, as well as creating other resources in PostHog such as annotations and cohorts.
-
-For more information on jobs, check out [this guide](/docs/apps/build/jobs).
 
 ## Testing
 

@@ -5,7 +5,6 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-12
 featuredTutorial: false
-featuredImage: ../images/tutorials/banners/react-native-analytics.png
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 

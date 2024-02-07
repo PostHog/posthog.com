@@ -1,9 +1,9 @@
 ```php
 PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
+  'distinctId' => 'distinct_id_of_the_user',
+  'event' => 'movie_played',
   'properties' => array(
-    'movieId' => '123',
+    'movie_id' => '123',
     'category' => 'romcom'
   )
 ));

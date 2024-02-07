@@ -1,0 +1,65 @@
+---
+title: Troubleshooting and FAQs
+---
+
+Having trouble with surveys? Below are some tips for getting past some common issues
+
+The most common solution is...
+
+### Update the PostHog snippet or JavaScript Web SDK
+
+Surveys requires either the latest version of the [PostHog snippet](/docs/libraries/js#option-1-add-the-javascript-snippet-to-your-html) or version 1.81.3 or greater of `posthog-js` to be installed on your website.
+
+We're always making improvements to the surveys feature, so you'll want to make sure that you're running the latest version.
+
+To check the version that you're using, you can run the following in your browser console:
+
+```js
+window.posthog.LIB_VERSION
+```
+
+## Surveys still not showing up
+
+If updating PostHog doesn't solve your problem, there are a few reasons why your survey might not be showing up:
+
+### 1. Configuration is off
+
+Surveys are enabled through the surveys opt in toggle in the [app](https://app.posthog.com/surveys). If you're not seeing any surveys, make sure that this toggle is enabled.
+
+You can read more about [`posthog-js` configurations here](/docs/integrate/client/js#config).
+
+### 2. Content security policy
+
+When surveys are enabled, `posthog-js` will fetch a `survey.js` script from the PostHog server. It is not included in the default `posthog-js` installation to minimize the default bundle size.
+
+Depending on your content security policy, this script may be blocked. If it is, you should see an error message in your developer console with more details.
+
+You may need to add `https://app.posthog.com`, `https://eu.posthog.com`, (or your host URL if you are self hosted) to your allow list.
+
+### 3. Proxies
+
+If you're running behind a proxy, the `/static/survey.js` endpoint may be blocked. Read more about [how to configure your proxy to allow this endpoint](/docs/self-host/configure/running-behind-proxy#public-endpoints).
+
+### 4. Ad or tracking blockers
+
+Some ad or tracking blockers block PostHog from fetching `posthog-js`. If you're testing your app locally, you may need to disable any ad/tracking blockers that you're running in your browser.
+
+In production, using a [reverse proxy](/docs/advanced/proxy) can help prevent this.
+
+## Debugging surveys in console
+
+You can call `getActiveMatchingSurveys` in your browser console to see which surveys are currently active for the user. If the method doesn't exist, it means that you're not running the latest version of `posthog-js`.  
+
+```js
+posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
+```
+
+### Why am I getting a feature flags error on my survey?
+
+If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for user property targeting.
+
+Currently we do not support behavioral cohorts in flags which is why you might see an error if setting a user property that contains a behavioral cohort in your survey.
+
+#### Will I be double charged for feature flags if I use surveys?
+
+No, you will not.

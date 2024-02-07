@@ -1,6 +1,5 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { DemoScheduler } from 'components/DemoScheduler'
 import usePostHog from '../../hooks/usePostHog'
 import queryString from 'query-string'
 import React, { useEffect, useState } from 'react'
@@ -21,7 +20,7 @@ export default function Contact(props) {
     useEffect(() => {
         const tab = location.hash.replace('#', '')
         const demo = queryString.parse(location.search)?.demo
-        if (tab === 'contact' || tab === 'demo' || tab === 'qa') {
+        if (tab === 'contact' || tab === 'demo') {
             setActiveTab(tab)
         }
     }, [location])
@@ -35,9 +34,6 @@ export default function Contact(props) {
                     </Chip>
                     <Chip active={activeTab === 'contact'} onClick={() => handleChipClick('contact')}>
                         Contact sales
-                    </Chip>
-                    <Chip active={activeTab === 'qa'} onClick={() => handleChipClick('qa')}>
-                        15-min chat
                     </Chip>
                 </div>
             )}
@@ -57,12 +53,6 @@ export default function Contact(props) {
                             onSubmit={() => setSubmitted(true)}
                         />
                     </div>
-                ) : null}
-                {activeTab === 'qa' ? (
-                    <DemoScheduler
-                        type="qa"
-                        iframeSrc="https://calendly.com/d/hxx-tx7-qrs/posthog-15-minute-quick-chat"
-                    />
                 ) : null}
             </div>
         </>

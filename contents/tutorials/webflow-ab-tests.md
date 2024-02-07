@@ -4,7 +4,6 @@ date: 2023-01-26
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-2.png
 featuredVideo: https://www.youtube-nocookie.com/embed/rwP2leifdNk
 tags: ['experimentation', 'feature flags']
 ---
@@ -69,6 +68,6 @@ Now that you set up an A/B test in Webflow with PostHog, you can use this same p
 
 ## Further reading
 
-- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
+- [How to create surveys in Webflow with PostHog](/tutorials/webflow-surveys)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)

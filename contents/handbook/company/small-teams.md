@@ -71,6 +71,19 @@ Each project should be owned by an individual within a single small team. Howeve
 
 For these projects, we recommend the individual owning it write a "Status update" every 2 weeks on slack and add a link to this update in the "Updates on bigger projects that affect multiple teams" section of the all hands doc. These status updates might include: what's been done since the last update, any blockers, and what are the next steps.
 
+## Small Teams Intros
+
+Every small team should have an agreed charter which should include: 
+
+* Mission
+* Long term goals
+* Description of what the team does
+* Target customer
+* Who is on the team
+* Key metrics
+
+These should all be visible in the Handbook, updated when changes are made & confirmed ahead of each quarter so everyone is on the same page. 
+
 ## Small Teams list
 
 See [team structure](/handbook/small-teams/team-structure).
@@ -132,11 +145,11 @@ James and Tim will meet every hire we make - it's a standard startup failure for
 
 #### Does a Small Team have a budget?
 
-Spend money when it makes sense to do so. See our general policy on spending money.
+Spend money when it makes sense to do so. See our [general policy on spending money](/handbook/people/spending-money).
 
 #### How do you keep the product together as a company?
 
-Luke is ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
+James and Tim are ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
 
 #### How do you stop duplicate work?
 

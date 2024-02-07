@@ -4,7 +4,6 @@ date: 2023-07-04
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ["configuration", "feature flags"]
 ---
 
@@ -14,7 +13,7 @@ In this tutorial, we create a basic Next.js app, set up [feature flags](/docs/fe
 
 ## Create Next.js app and add PostHog
 
-First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest middle-bootstrap
@@ -196,7 +195,7 @@ export async function middleware(request) {
   const data = await ph_request.json();
 
   const bootstrapData = {
-    distinctId: distinct_id,
+    distinctID: distinct_id,
     featureFlags: data.featureFlags
   }
 
@@ -282,6 +281,9 @@ export default function Home() {
 Once you restart your app to reinitialize PostHog, your flags load instantly.
 
 > **When to bootstrap vs use cookies?** You might think to use cookies directly, but they don’t update when properties change. You should use bootstrapping and the `posthog-js` library when you want flags to update over time in the user session. For example, when they do something that updates properties like opt into a beta.
+
+> **Note:** When using Next.js v12, there's a [bug in 12.3.0](https://github.com/vercel/next.js/issues/39262) that can cause session recording not to work when using this method. To fix this, use a version of Next.js v12 at least at v12.3.4.
+
 
 ## Further reading
 

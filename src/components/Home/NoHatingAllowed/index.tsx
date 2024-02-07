@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from '@posthog/icons'
+import { IconChevronDown } from '@posthog/icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef } from 'react'
 import Link from 'components/Link'
@@ -179,6 +179,13 @@ const cards = [
         Image: <StaticImage quality={100} placeholder="none" src="./images/loop-hole.png" />,
         ImageSize: 'w-full',
     },
+    {
+        top: 'Your CRM is a Rolodex',
+        bottom: <>We don't even use phones, though we do have a fax number for legal and compliance reasons.</>,
+        color: '#D9E1FC',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/rolodex.png" />,
+        ImageSize: 'w-[230px] -mt-4',
+    },
 ]
 
 const Card = ({ top, bottom, Image, ImageSize, color }) => {
@@ -210,7 +217,7 @@ export default function NoHatingAllowed() {
                     onClick={() => listRef?.current?.scrollBy({ left: -300, behavior: 'smooth' })}
                     className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                 >
-                    <ArrowLeft className="w-10" />
+                    <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
                 </button>
             </div>
             <ul
@@ -227,7 +234,7 @@ export default function NoHatingAllowed() {
                     onClick={() => listRef?.current?.scrollBy({ left: 300, behavior: 'smooth' })}
                     className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                 >
-                    <ArrowRight className="w-10" />
+                    <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
                 </button>
             </div>
         </div>

@@ -4,8 +4,7 @@ date: 2023-08-01
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-14.png
-tags: ['hogql', 'insights']
+tags: ['hogql', 'insights', 'product analytics']
 ---
 
 Understanding how users spend their time on your site helps you understand your site’s strengths and weaknesses. Calculating the time spent on a page is the key metric for doing this. In this tutorial, we show you how to calculate time on page and related metrics using PostHog.

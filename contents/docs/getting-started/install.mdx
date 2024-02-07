@@ -5,39 +5,15 @@ featuredImage: ./images/docs-install.png
 hideAnchor: true
 ---
 
-Once your PostHog instance is up and running, the next step is to get PostHog installed.
 
-> **Tip**: Even if you have multiple customer-facing products e.g. a marketing website + iOS app + web app, it works best to have them share the same project to track the user across their journey. See: [Organizations & projects docs](/manual/organizations-and-projects)
-
-import Tab from "components/Tab"
-
-import SnippetInstructions from "../integrate/\_snippets/install-js-snippet.mdx"
-import SDKs from "../integrate/\_snippets/sdks.mdx"
-import Frameworks from "../integrate/\_snippets/frameworks.mdx"
-import API from "../integrate/\_snippets/api.mdx"
+> **Tip**: If you have multiple customer-facing products (e.g. a marketing website + iOS app + web app), it's best to install PostHog on them all and [group them in one project](/docs/data/organizations-and-projects). This way you can track the user across their entire journey.
 
 <h3 class="mb-0 mt-6">Installation</h3>
 
-<!-- prettier-ignore -->
-<Tab.Group tabs={['snippet', 'sdks', 'guides', 'api']}>
-    <Tab.List>
-        <Tab>JS snippet</Tab>
-        <Tab count="13">Libraries</Tab>
-        <Tab count="11">Framework guides</Tab>
-        <Tab>API</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <SnippetInstructions />
-        </Tab.Panel>
-        <Tab.Panel>
-            <SDKs />
-        </Tab.Panel>
-        <Tab.Panel>
-            <Frameworks />
-        </Tab.Panel>
-        <Tab.Panel>
-            <API />
-        </Tab.Panel>
-    </Tab.Panels>
-</Tab.Group>
+import Install from "./\_snippets/install.mdx"
+
+<Install />
+
+#### Set up a reverse proxy (optional)
+
+We recommend setting up a reverse proxy to send events to PostHog using your domain, so they're less likely to be intercepted by tracking blockers. There are several [options for creating a reverse proxy](/docs/advanced/proxy), including using [Cloudflare](/docs/advanced/proxy/cloudflare), [AWS Cloudfront](/docs/advanced/proxy/cloudfront), and [Vercel](/docs/advanced/proxy/vercel). 

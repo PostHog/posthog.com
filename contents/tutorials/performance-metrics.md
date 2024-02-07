@@ -5,7 +5,6 @@ showTitle: true
 author: ['lior-neu-ner']
 date: 2023-04-13
 featuredTutorial: true
-featuredImage: ../images/tutorials/banners/sessions.png
 tags: ["session replay"]
 ---
 
@@ -18,7 +17,7 @@ In this tutorial, we'll show you:
 
 ## Setting up performance monitoring
 
-First, ensure that session replays are [enabled](/docs/session-replay/manual). Next, navigate to the Recordings tab in PostHog. Finally, click on the Network tab in the sidebar next to or below the replay.
+First, ensure that session replays are [enabled](/docs/session-replay/manual). Next, navigate to the Session Replay tab in PostHog. Finally, click on the Network tab in the sidebar next to or below the replay.
 
 ![A screenshot showing where to find the performance monitoring in the session replays tool](../images/tutorials/performance-metrics/performance-tool.png)
 

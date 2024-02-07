@@ -29,7 +29,7 @@ const PopularPage = ({ icon, label, url }: PopularPageProps) => {
                 
                 "
                 >
-                    <div className="w-8 h-8 box-border">{icon}</div>
+                    <div className="w-8 h-8 box-border text-white">{icon}</div>
                 </div>
                 <h4 className="text-center text-base leading-tight font-semibold">{label}</h4>
             </Link>
@@ -97,7 +97,7 @@ export const AboutTransparency = () => {
                             url="/handbook/strategy/business-model"
                         />
                     </ul>
-                    <CallToAction to="/handbook/getting-started/start-here" type="outline" className="!w-full">
+                    <CallToAction to="/handbook/" type="outline" className="!w-full">
                         Browse the handbook
                     </CallToAction>
                 </div>

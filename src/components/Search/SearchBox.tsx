@@ -6,9 +6,10 @@ type SearchBoxProps = {
     placeholder?: string
     location: SearchLocation
     filter?: SearchResultType
+    className?: string
 }
 
-export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, location, filter }) => {
+export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, location, filter, className }) => {
     const { open } = useSearch()
 
     const handleSearchBoxClick = (event: React.MouseEvent) => {
@@ -33,7 +34,9 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, location, fil
                     </defs>
                 </svg>
             </div>
-            <div className="pl-10 py-3 text-base text-left text-primary/40 hover:text-primary/60 dark:text-white/30 dark:hover:text-white/40 bg-white dark:bg-gray-accent-dark dark:text-white rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg">
+            <div
+                className={`pl-10 py-3 text-base text-left text-black/40 hover:text-black/60 dark:text-white/40 dark:hover:text-white/60 bg-white dark:bg-accent-dark dark:text-white rounded-md w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] border border-border dark:border-dark border-b-3 active:border-[#aaa] ${className}`}
+            >
                 {placeholder || 'Search...'}
             </div>
         </button>

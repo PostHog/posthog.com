@@ -4,8 +4,7 @@ date: 2023-07-27
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-6.png
-tags: ['hogql', 'insights']
+tags: ['hogql', 'insights', 'product analytics']
 ---
 
 By default, PostHog provides an easy way to group events by week, day, and even hour. Sometimes, smaller, more specific breakdowns are required. With [HogQL](/docs/hogql), you can break down events by time of day, hourly, and even minute-by-minute to help you do a detailed analysis of when they happen, and this tutorial shows you how to do that.
@@ -27,7 +26,7 @@ You can visualize this with a total value bar chart to the sums for the date ran
 
 ![Time of day](../images/tutorials/time-breakdowns/day.png)
 
-> **Note:** Event timestamps default to UTC. You need to adjust your times depending on your local time. For example, if you are in Pacific Daylight Time, subtract 7 hours from UTC timestamps to match your local time.
+> **Note:** Event [timestamps](/docs/data/timestamps) default to UTC. You need to adjust your times depending on your local time. For example, if you are in Pacific Daylight Time, subtract 7 hours from UTC timestamps to match your local time.
 
 ## Hourly breakdown
 

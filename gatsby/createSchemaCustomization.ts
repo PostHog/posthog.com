@@ -38,9 +38,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       username: String
       teamData: TeamData
     }
+    type FrontmatterSEO {
+      metaTitle: String
+      metaDescription: String
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
+      seo: FrontmatterSEO
     }
     type TeamData {
       name: String
@@ -178,6 +183,36 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       url: String
       title: String
       number: Int
+    }
+    type PostTagAttributes {
+        label: String
+        folder: String
+    }
+    type PostTagData {
+      attributes: PostTagAttributes
+    }
+    type PostTags {
+        data: [PostTagData]
+    }
+    type PostCategoryAttributes {
+        label: String
+        folder: String
+        post_tags: PostTags
+    }
+    type PostCategory implements Node {
+      attributes: PostCategoryAttributes
+    }
+    type ProductSectionsSectionsFeatures {
+      title: String
+      description: String
+      icon: String
+    }
+    type ProductSectionsSections {
+      featuresType: String
+      features: [ProductSectionsSectionsFeatures]
+    }
+    type MdxFrontmatterProductSections implements Node {
+      sections: [ProductSectionsSections]
     }
   `)
     createTypes([

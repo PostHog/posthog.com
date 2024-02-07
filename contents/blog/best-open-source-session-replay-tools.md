@@ -14,10 +14,10 @@ author:
 category: General
 tags:
   - Open source
-  - Session recording
+  - Guides
 ---
 
-Analytics is great when you need hard numbers, but hard numbers don't give you the full picture. What else do you need to do? [Talk to users](/blog/10x-engineers-do-user-interviews)? Sure. Gather feedback? That's useful, too. But, for us, there's nothing better than watching session replays for understanding a user's pain points.
+[Open-source analytics](/blog/best-open-source-analytics-tools) is great when you need hard numbers, but hard numbers don't give you the full picture. What else do you need to do? [Talk to users](/blog/10x-engineers-do-user-interviews)? Sure. Gather feedback? That's useful, too. But, for us, there's nothing better than watching session replays for understanding a user's pain points.
 
 Replays (aka session recordings) are a great way to understand:
 
@@ -26,14 +26,14 @@ Replays (aka session recordings) are a great way to understand:
 - Hesitation at different stages of your funnel.
 - How your users are interacting with individual elements of your product.
 
-Hotjar and Fullstory are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
+Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
 
 > **Changelog:**
 >
 > - **Mar 16, 2023:** Removed SessionStack, added Highlight.io. Updated copy and screenshots.
 
 ## 1. PostHog
-![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
+![PostHog](../images/screenshots/session-replay.png)
 
 [PostHog](https://posthog.com/) is an all-in-one, Product OS that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
 
@@ -58,7 +58,7 @@ PostHog is ideal for [product-minded developers](/blog/what-is-a-product-enginee
 
 ### How much does PostHog cost?
 
-PostHog Cloud is free up to 1 million captured events and 15,000 recordings per month, and you can set billing limits to avoid surprise bills. 
+PostHog Cloud is free up to 1 million captured events and 5,000 recordings per month, and you can set billing limits to avoid surprise bills. 
 
 You can also self-host PostHog Open Source (available under an MIT license) using Docker Compose, though PostHog Cloud is recommended for event volumes exceeding 100k per month.
 

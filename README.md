@@ -32,7 +32,7 @@ This is the repository for the PostHog website. It contains:
 
 1. **Pre-installation**
 
-    Install [Node](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/).
+    Install [Node](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).)
     ```bash
     npm install --global yarn
     ```
@@ -91,7 +91,7 @@ You’ll need to set environment variables for these. [See (private) instruction
 
 We <3 contributions big and small. In priority order (although everything is appreciated) with the most helpful first:
 
-- Join our [Slack community](https://posthog.com/slack)
+- Ask a [question in our community](https://posthog.com/questions)
 - Submit [bug reports and give us feedback in the app](https://app.posthog.com/home#supportModal)! 
 - Vote on features or get early access to beta functionality in our [roadmap](https://posthog.com/roadmap)
 - Open a PR

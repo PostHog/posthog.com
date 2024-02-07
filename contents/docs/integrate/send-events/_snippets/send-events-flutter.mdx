@@ -7,8 +7,8 @@ import Intro from "./intro.mdx"
 ```dart
 import 'package:posthog_flutter/posthog_flutter.dart';
 
-Posthog.capture(
-  eventName: 'user signed up',
+Posthog().capture(
+  eventName: 'user_signed_up',
 );
 ```
 
@@ -16,12 +16,22 @@ Posthog.capture(
 
 <SettingProperties />
 
-```
-Posthog.capture(
-  eventName: 'user signed up',
+```dart
+Posthog().capture(
+  eventName: 'user_signed_up',
   properties: {
     'login_type': 'email',
     'is_free_trial': true
   }
 );
 ```
+
+### Autocapture 
+
+PostHog autocapture automatically tracks the following events for you:
+
+-   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+-   **Application Backgrounded** - when the app is sent to the background by the user
+-   **Application Installed** - when the app is installed.
+-   **Application Updated** - when the app is updated.
+-   **$screen** - when the user navigates (if using [navigatorObservers](https://docs.flutter.dev/ui/navigation) or [go_router](https://pub.dev/packages/go_router))

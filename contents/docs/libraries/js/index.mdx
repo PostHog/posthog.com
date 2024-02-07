@@ -312,7 +312,7 @@ Group analytics allows you to associate the events for that person's session wit
 ```js-web
 posthog.group('company', 'company_id_in_your_db')
 
-posthog.capture('upgraded plan') // this event is associated with company ID `company_id_in_your_db`
+posthog.capture('upgraded_plan') // this event is associated with company ID `company_id_in_your_db`
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
@@ -359,11 +359,12 @@ If you would like to change how PostHog stores this information, you can do so w
 -   `persistence: "cookie"` (default). Everything is stored in a cookie.
 -   `persistence: "localStorage+cookie"`. User's distinct ID is stored in a cookie and everything else is stored in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">localStorage</a>.
 -   `persistence: "localStorage"`. Everything is stored in localStorage.
+-   `persistence: "sessionStorage"`. Everything is stored in sessionStorage.
 -   `persistence: "memory"`. Stores in page memory, which means data is only persisted for the duration of the page view.
 
 As a note, due to the size limitation of cookies you may run into `431 Request Header Fields Too Large` errors (e.g. if you have a lot of feature flags). In that case, use `localStorage+cookie`.
 
-> **Note: ** Please be aware that localStorage can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider the <code>cookie</code> option or make sure to set all super properties across each subdomain.
+> **Note: ** Please be aware that localStorage and sessionStorage can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider the <code>cookie</code> option or make sure to set all super properties across each subdomain.
 
 If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only, or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config.
 **Warning:** Remember to call `posthog.identify` every time your app loads or every page refresh will be treated as a different user.
@@ -393,7 +394,7 @@ Some of the most relevant options are:
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `api_host`<br/><br/>**Type:** String<br/>**Default:** `https://app.posthog.com`                                                                                                           | URL of your PostHog instance.                                                                                                  |
 | `ui_host`<br/><br/>**Type:** String<br/>**Default:** undefined                                                                                                                            | If using a [reverse proxy](/docs/advanced/proxy) for `api_host` then this should be the actual PostHog app URL (e.g. app.posthog.com) |
-| `autocapture`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                          | Determines if PostHog should [autocapture](#autocapture) events. This setting does not affect capturing pageview events (see `capture_pageview`).            |
+| `autocapture`<br/><br/>**Type:** Boolean or AutocaptureConfig<br/>**Default:** `true`                                                                                                                          | Determines if PostHog should [autocapture](#autocapture) events. This setting does not affect capturing pageview events (see `capture_pageview`).  [See below for `AutocaptureConfig`](#autocaptureconfig))          |
 | `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                       | An object containing the `distinctID`, `isIdentifiedID`, and `featureFlags` keys, where `distinctID` is a string, and `featureFlags` is an object of key-value pairs |
 | `capture_pageview`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if PostHog should automatically capture pageview events.                                                            |
 | `capture_pageleave`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if PostHog should automatically capture pageleave events.                                                            |
@@ -405,7 +406,7 @@ Some of the most relevant options are:
 | `mask_all_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                       | Prevent PostHog autocapture from capturing any text from your elements.                                                        |
 | `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                         | Prevent PostHog autocapture from capturing any attributes from your elements.                                                  |
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
-| `persistence`<br/><br/>**Type:** `localStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
+| `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
 | `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                       | A list of properties that should never be sent with `capture` calls.                                                           |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |
@@ -454,9 +455,22 @@ The `/decide` endpoint can be disabled by setting `advanced_disable_decide = tru
 -   **Session recording**. The endpoint contains information on where to send relevant session recording events.
 -   **Compression**. The endpoint contains information on what compression methods are supported on the backend (e.g. LZ64, gzip) for event payloads.
 -   **Feature flags**. The endpoint contains the feature flags enabled for the current person.
+-   **Surveys**. The endpoint contains information on whether surveys should be enabled or not.
 -   **Toolbar**. The endpoint contains authentication information and other toolbar capabilities information required to run it.
 
 Any custom event capturing (`posthog.capture`), `$identify`, `$set`, `$set_once` and basically any other calls not detailed above will work as expected when `/decide` is disabled.
+
+## AutocaptureConfig
+
+The `autocapture` config takes an object providing full control of autocapture's behavior.
+
+| Attribute                                                                                                                                                                                 | Description                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `url_allowlist`<br/><br/>**Type:** Array of Strings or Regexp<br/>**Default:** `undefined`                                                                                                          | List of URLs to enable autocapture on, can be string or regex matches e.g. `['https://example.com', 'test.com/.*']`. An empty list means no URLs are allowed for capture, `undefined` means all URLs are.                                                                                                 |
+| `dom_event_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of DOM events, like 'click', 'change', 'submit',  to enable autocapture on. An empty array means no events are enable for capture, `undefined` means all are.                                                                                            |
+| `element_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of DOM elements, like 'a', 'button', 'form', 'input', 'select', 'textarea', or 'label', to allow autocapture on. An empty array means no elements are enabled for capture, `undefined` means all elements are enabled.                                                                                            |
+| `css_selector_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of CSS selectors to enable autocapture on. An empty array means no CSS selectors are allowed for capture, `undefined` means all CSS selectors are.                                                                                            |
+| `element_attribute_ignorelist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined` |  An array of element attributes that autocapture will not capture. Both an empty array and `undefined` mean any of the attributes from the element are captured. |
 
 ## Debugging
 

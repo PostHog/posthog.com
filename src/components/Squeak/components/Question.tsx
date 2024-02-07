@@ -10,7 +10,7 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { Archive, Pin, Undo } from 'components/NotProductIcons'
+import { IconArchive, IconPin, IconUndo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
@@ -61,7 +61,7 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                 <Listbox.Button className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold">
                     <Tooltip content={() => <div style={{ maxWidth: 320 }}>Pin thread</div>}>
                         <span className="flex items-center h-6 justify-center">
-                            <Pin className="w-5 h-5" />
+                            <IconPin className="w-5 h-5" />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -267,7 +267,7 @@ export const Question = (props: QuestionProps) => {
                                                 content={() => <div style={{ maxWidth: 320 }}>Archive thread</div>}
                                             >
                                                 <span className="flex w-6 h-6">
-                                                    <Archive />
+                                                    <IconArchive />
                                                 </span>
                                             </Tooltip>
                                         ) : (
@@ -275,7 +275,7 @@ export const Question = (props: QuestionProps) => {
                                                 content={() => <div style={{ maxWidth: 320 }}>Restore thread</div>}
                                             >
                                                 <span className="flex w-6 h-6">
-                                                    <Undo />
+                                                    <IconUndo />
                                                 </span>
                                             </Tooltip>
                                         )}

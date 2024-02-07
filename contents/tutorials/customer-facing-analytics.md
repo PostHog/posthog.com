@@ -4,8 +4,7 @@ date: 2023-04-04
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-9.png
-tags: ['insights']
+tags: ['insights', 'product analytics']
 ---
 
 If you are a host, content platform, or some other type of B2B2C product, your users might want to know their traffic or usage metrics. To put it another way: if your users have their own users, sometimes your users want analytics about their users. Customer-facing analytics are analytics you capture and display to your users to fulfill this need.
@@ -368,4 +367,4 @@ From here, you can add other charts and metrics. See the [PostHog API](/docs/api
 
 - [How to add popups to your React app with feature flags](/tutorials/react-popups)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
-- [Get feedback and book user interviews with site apps](/tutorials/feedback-interviews-site-apps)
+- [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)

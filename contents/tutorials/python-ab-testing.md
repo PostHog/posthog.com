@@ -4,7 +4,6 @@ date: 2023-09-12
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-14.png
 tags: ['experimentation', 'feature flags']
 ---
 
@@ -12,9 +11,9 @@ A/B testing enables you to experiment with how changes to your app affect metric
 
 ## Creating a basic Flask app
 
-To demonstrate how to implement A/B testing, we'll create an app using [Flask](https://flask.palletsprojects.com/), a Python web framework. 
+To demonstrate how to implement A/B testing, we'll create an app using [Flask](https://flask.palletsprojects.com/), a Python web framework. 
 
-To start, create a folder for our app named `ab-test-demo` and a file named `hello.py` in that folder.
+To start, create a folder for our app named `ab-test-demo` and a file named `hello.py` in that folder.
 
 ```bash
 mkdir ab-test-demo
@@ -68,19 +67,19 @@ def blog(slug):
     return f"<p>Thanks for liking {slug}</p>"
 ```
 
-Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see your basic app running.
+Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see your basic app running.
 
 ![Hello World!](../images/tutorials/python-ab-testing//hello.png)
 
 ## Setting up PostHog
 
-Next, we install PostHog [Python SDK](/docs/libraries/python) and the `uuid` package to generate user IDs.
+Next, we install PostHog [Python SDK](/docs/libraries/python) and the `uuid` package to generate user IDs.
 
 ```bash
 pip install posthog uuid
 ```
 
-We import both into our `hello.py` file then use your project API key and instance address from [your project settings](https://app.posthog.com/project/settings) to initialize a PostHog client.
+We import both into our `hello.py` file then use your project API key and instance address from [your project settings](https://app.posthog.com/project/settings) to initialize a PostHog client.
 
 ```python
 # ab-test-demo/hello.py
@@ -125,7 +124,7 @@ def blog(slug):
   elif request.method == "POST":
     posthog.capture(
       user_id, 
-      "liked post", 
+      "liked_post", 
       {
         'slug': slug
       }
@@ -199,7 +198,7 @@ Lastly, we must capture the experiment details in our event. Do this by adding `
 elif request.method == "POST":
     posthog.capture(
       user_id, 
-      "liked post", 
+      "liked_post", 
       {
         'slug': slug,
         f'$feature/{flag_key}': flag
