@@ -142,7 +142,7 @@ Now it's time to dive into some of the more practical stuff - these are the most
 
 ### Working in GitHub
 
-We use [GitHub](https://github.com/PostHog) for _everything_, including non-engineering task management. This might take some getting used to if you are non-technical. If that is the case, we have [this intro video](https://www.youtube.com/watch?v=2BB4Nkc0uVM) that will teach you the basics and [a detailed guide on how to set up a local version of Posthog.com so that you can make changes to the docs, handbook and website](/handbook/engineering/posthog-com/developing-the-website). 
+We use [GitHub](https://github.com/PostHog) for _everything_, including non-engineering task management. This might take some getting used to if you are non-technical. If that is the case, we have [a detailed guide on how to set up a local version of Posthog.com so that you can make changes to the docs, handbook and website](/handbook/engineering/posthog-com/developing-the-website) and a blog about [why we use GitHub as our CMS](/blog/github-cms) to help you out.
 
 Our most active repositories (aka 'repos') are:
 
