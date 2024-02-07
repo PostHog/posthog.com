@@ -347,25 +347,23 @@ const Pricing = (): JSX.Element => {
                                                 <div className="col-span-6">Products</div>
                                                 <div className="col-span-5">Monthly free allowance</div>
                                                 <div className="col-span-4">
+                                                    Then starts at...{' '}
                                                     <Tooltip
+                                                        contentContainerClassName="max-w-[220px]"
+                                                        placement="bottom"
                                                         content={() => (
-                                                            <div className="max-w-sm">
-                                                                <p className="mb-0 text-sm">
-                                                                    <strong>
-                                                                        Prices decrease exponentially with greater
-                                                                        volume.
-                                                                    </strong>
-                                                                    <br />
-                                                                    Click a product to see the full price breakdown.
-                                                                </p>
-                                                            </div>
+                                                            <p className="mb-0 text-sm">
+                                                                <strong>
+                                                                    Prices decrease exponentially with greater volume.
+                                                                </strong>
+                                                                <br />
+                                                                Click a product to see the full price breakdown.
+                                                            </p>
                                                         )}
-                                                        placement="top"
                                                     >
-                                                        <span className="relative">
-                                                            Then starts at...{' '}
-                                                            <IconInfo className="w-4 h-4 inline-block relative -top-px" />
-                                                        </span>
+                                                        <div className="inline-block relative top-0.5">
+                                                            <IconInfo className="w-4 h-4" />
+                                                        </div>
                                                     </Tooltip>
                                                 </div>
                                                 <div className="col-span-1"></div>

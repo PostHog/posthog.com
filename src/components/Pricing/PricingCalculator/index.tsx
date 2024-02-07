@@ -37,6 +37,7 @@ export const PricingCalculator = () => {
                 Estimate your bill
                 <span>
                     <Tooltip
+                        placement="top"
                         content={() => (
                             <>
                                 Learn how to{' '}
@@ -74,23 +75,25 @@ export const PricingCalculator = () => {
                     <strong className="md:hidden">Products</strong>
                 </div>
                 <div className="hidden md:block md:col-span-4 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
-                    <Tooltip
-                        content={() => (
-                            <div className="max-w-sm">
+                    <span className="relative">
+                        Pricing starts at...{' '}
+                        <Tooltip
+                            contentContainerClassName="max-w-[360px]"
+                            placement="top"
+                            content={() => (
                                 <p className="mb-0 text-sm">
                                     <strong>Prices decrease exponentially with greater volume.</strong>
                                     <br />
                                     Click a product name to see the full price breakdown and feature availability broken
                                     down by plan.
                                 </p>
-                            </div>
-                        )}
-                        placement="top"
-                    >
-                        <span className="relative">
-                            Pricing starts at... <IconInfo className="w-4 h-4 inline-block relative -top-px" />
-                        </span>
-                    </Tooltip>
+                            )}
+                        >
+                            <span className="inline-block relative top-0.5">
+                                <IconInfo className="w-4 h-4" />
+                            </span>
+                        </Tooltip>
+                    </span>
                 </div>
                 <div className="hidden md:block md:col-span-4 xl:col-span-5 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
                     Calculate your price
