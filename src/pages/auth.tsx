@@ -1,11 +1,12 @@
 import usePostHog from 'hooks/usePostHog'
 import { User } from 'hooks/useUser'
 import qs from 'qs'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const IndexPage = () => {
     const posthog = usePostHog()
     const [authFailed, setAuthFailed] = useState(false)
+    const [message, setMessage] = useState("You'll be redirected shortly")
 
     const fetchUser = async (token?: string | null): Promise<User | null> => {
         const meQuery = qs.stringify(
@@ -136,32 +137,40 @@ const IndexPage = () => {
         return user
     }
 
-    handleLogin()
-        .then(() => {
-            const urlParams = new URLSearchParams(window.location.search)
-            const redirect = urlParams.get('redirect')
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search)
+        if (urlParams.get('error') === 'emailIsTaken') {
+            setAuthFailed(false)
+            setMessage('An account with that email already exists. Make sure to login with the existing Cloud account.')
+        }
 
-            if (redirect) {
-                window.location.href = redirect
-            }
-        })
-        .catch(() => {
-            setAuthFailed(true)
+        handleLogin()
+            .then(() => {
+                const urlParams = new URLSearchParams(window.location.search)
+                const redirect = urlParams.get('redirect')
 
-            const urlParams = new URLSearchParams(window.location.search)
-            const redirect = urlParams.get('redirect')
-
-            if (redirect) {
-                setTimeout(() => {
+                if (redirect) {
                     window.location.href = redirect
-                }, 2000)
-            }
-        })
+                }
+            })
+            .catch(() => {
+                setAuthFailed(true)
+
+                const urlParams = new URLSearchParams(window.location.search)
+                const redirect = urlParams.get('redirect')
+
+                if (redirect) {
+                    setTimeout(() => {
+                        window.location.href = redirect
+                    }, 2000)
+                }
+            })
+    }, [])
 
     return (
         <div className="w-screen h-screen flex justify-center items-center flex flex-col">
             {authFailed && <p className="mb-1">Authentication failed</p>}
-            <p>You'll be redirected shortly</p>
+            <p className="text-center max-w-[80%]">{message}</p>
         </div>
     )
 }
