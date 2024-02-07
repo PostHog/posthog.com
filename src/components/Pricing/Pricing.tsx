@@ -71,7 +71,19 @@ const planSummary: PlanData[] = [
             <>
                 <span className="relative">
                     Includes team features{' '}
-                    <Tooltip content="Verified events, comments and taxonomy (tags and descriptions) on insights, events, properties">
+                    <Tooltip
+                        content={() => (
+                            <>
+                                <h3 className="mb-1 text-base">Team features</h3>
+                                <ul className="list-none p-0 divide-y divide-light dark:divide-dark">
+                                    <li className="py-1.5 text-sm">Verified events</li>
+                                    <li className="py-1.5 text-sm">Comments on dashboards and insights</li>
+                                    <li className="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li>
+                                </ul>
+                            </>
+                        )}
+                        tooltipClassName="max-w-sm"
+                    >
                         <span className="relative -top-px">
                             <IconInfo className="inline-block w-4 h-4" />
                         </span>
@@ -251,165 +263,200 @@ const Pricing = (): JSX.Element => {
         >
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
-            <div className="max-w-screen overflow-x-hidden">
-                <div className="scale-[1.75] sm:scale-[1.4] md:scale-[.75] lg:hidden py-8 pl-24 my-4 xs:pl-32 sm:pl-28 md:py-0 md:pl-0 -mr-0 md:-ml-[12.5%] md:my-0">
-                    <Lottie
-                        options={{
-                            loop: false,
-                            autoplay: true,
-                            animationData: tractorHog,
-                        }}
-                    />
-                </div>
-            </div>
-            <section className="w-screen overflow-x-hidden">
-                <div
-                    className={`grid lg:grid-cols-12 lg:mt-8  lg:gap-x-8 xl:gap-x-4 gap-y-8 lg:gap-y-0 mb-4 lg:px-4 items-center ${section}`}
-                >
-                    <div className="col-span-5">
-                        <h1 className="text-4xl sm:text-4xl md:text-5xl mt-0 mb-4">Plans &amp; pricing</h1>
-                        <p className="text-base font-medium opacity-60 leading-tight mb-4">
-                            PostHog offers usage-based pricing, not{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-sm">
-                                        <strong className="block">Why not value-based pricing?</strong>
-                                        <p className="mb-2 text-sm">
-                                            Value-based pricing is geared around testing how much money you're willing
-                                            to pay.
-                                        </p>
-                                        <p className="mb-0 text-sm">
-                                            Usage-based pricing is like a utility - where we continually seek to lower
-                                            costs and make money through volume.
-                                        </p>
-                                    </div>
-                                )}
-                            >
-                                <span className="border-b border-dashed border-primary/50 dark:primary-dark/50">
-                                    value-based pricing
-                                </span>
-                            </Tooltip>
-                            .
-                        </p>
-                        <p className="text-base font-medium opacity-60 leading-tight">
-                            Starts at $0/mo with a generous free tier.
-                        </p>
-                        <CTA />
+
+            {currentProduct ? (
+                <section className="w-screen overflow-x-hidden">
+                    <div
+                        className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
+                    >
+                        <div className="md:order-2">
+                            <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80 ">
+                                <Lottie
+                                    options={{
+                                        loop: false,
+                                        autoplay: true,
+                                        animationData: tractorHog,
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        <div className="md:order-1">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">product.name pricing</h1>
+                            <p className="text-base font-medium opacity-60 leading-tight mb-4">
+                                Use PostHog free forever (with generous usage limits).{' '}
+                                <br className="hidden lg:block" />
+                                Or add a card and get unrestricted access to everything.
+                            </p>
+                            <CTA />
+                        </div>
                     </div>
-                    <div className="col-span-7">
-                        <div className="@container border border-light dark:border-dark @lg:p-4 rounded-md bg-white dark:bg-accent-dark">
-                            <div className="@lg:px-2">
-                                <div className="col-span-4">
-                                    <div className="hidden @lg:grid grid-cols-16 items-center text-sm opacity-60 pt-2 px-3 pb-1">
-                                        <div className="col-span-6">Products</div>
-                                        <div className="col-span-5">Monthly free allowance</div>
-                                        <div className="col-span-4">
-                                            <Tooltip
-                                                content={() => (
-                                                    <div className="max-w-sm">
-                                                        <p className="mb-0 text-sm">
-                                                            <strong>
-                                                                Prices decrease exponentially with greater volume.
-                                                            </strong>
-                                                            <br />
-                                                            Click a product to see the full price breakdown.
-                                                        </p>
-                                                    </div>
-                                                )}
-                                                placement="top"
-                                            >
-                                                <span className="relative">
-                                                    Then starts at...{' '}
-                                                    <IconInfo className="w-4 h-4 inline-block relative -top-px" />
-                                                </span>
-                                            </Tooltip>
-                                        </div>
-                                        <div className="col-span-1"></div>
-                                    </div>
+                </section>
+            ) : (
+                <>
+                    <div className="max-w-screen overflow-x-hidden">
+                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[.75] lg:hidden py-8 pl-24 my-4 xs:pl-32 sm:pl-28 md:py-0 md:pl-0 -mr-0 md:-ml-[12.5%] md:my-0">
+                            <Lottie
+                                options={{
+                                    loop: false,
+                                    autoplay: true,
+                                    animationData: tractorHog,
+                                }}
+                            />
+                        </div>
+                    </div>
 
-                                    <div className="">
-                                        {products.map((product, index) => (
-                                            <div
-                                                key={index}
-                                                className="py-1 px-2 @lg:!p-0 border-b border-light dark:border-dark @lg:border-transparent dark:@lg:border-transparent"
-                                            >
-                                                <Link
-                                                    to={product.link}
-                                                    className="group grid grid-cols-8 @lg:grid-cols-16 items-center text-primary dark:text-primary-dark rounded hover:text-primary dark:hover:text-primary-dark p-2 @lg:px-2 @lg:py-1 @lg:rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
-                                                >
-                                                    <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center @lg:pl-1 mb-1 @lg:mb-0">
-                                                        {product.icon}
-                                                        <span className="font-semibold text-[15px]">
-                                                            {product.name}
-                                                        </span>
-                                                    </div>
-                                                    <div
-                                                        className={`col-span-4 @lg:col-span-5 text-sm order-3 2xs:ml-8 @lg:ml-0 ${
-                                                            product.price && 'pr-2 @lg:p-0'
-                                                        } @lg:order-none`}
-                                                    >
-                                                        {product.freeLimit ? (
-                                                            <>
-                                                                <div className="text-xs font-normal opacity-60 @lg:hidden">
-                                                                    Monthly free allowance
-                                                                </div>
-                                                                {product.freeLimit} {product.denomination}s
-                                                                <span className="opacity-50 font-medium text-[13px]">
-                                                                    /mo
-                                                                </span>
-                                                            </>
-                                                        ) : (
-                                                            <>{product.message}</>
-                                                        )}
-                                                    </div>
-                                                    <div
-                                                        className={`col-span-4 text-sm order-4 2xs:mr-8 h-full @lg:h-auto @lg:mr-0 @lg:order-none ${
-                                                            product.price && 'pl-2 @lg:p-0'
-                                                        }`}
-                                                    >
-                                                        {product.price && (
-                                                            <>
-                                                                <div className="text-xs font-normal opacity-60 @lg:hidden">
-                                                                    Then pricing starts at
-                                                                </div>
-                                                                ${product.price}
-                                                                <span className="opacity-50 font-medium text-[13px]">
-                                                                    /{product.denomination}
-                                                                </span>
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                    <div className="col-span-1 flex justify-end">
-                                                        <IconChevronDown className="w-8 h-8 -rotate-90 opacity-50 group-hover:opacity-75" />
-                                                    </div>
-                                                </Link>
+                    <section className="w-screen overflow-x-hidden">
+                        <div
+                            className={`grid lg:grid-cols-12 lg:mt-8  lg:gap-x-8 xl:gap-x-4 gap-y-8 lg:gap-y-0 mb-4 lg:px-4 items-center ${section}`}
+                        >
+                            <div className="col-span-5">
+                                <h1 className="text-4xl sm:text-4xl md:text-5xl mt-0 mb-4">Plans &amp; pricing</h1>
+                                <p className="text-base font-medium opacity-60 leading-tight mb-4">
+                                    PostHog offers usage-based pricing, not{' '}
+                                    <Tooltip
+                                        content={() => (
+                                            <div className="max-w-sm">
+                                                <strong className="block">Why not value-based pricing?</strong>
+                                                <p className="mb-2 text-sm">
+                                                    Value-based pricing is geared around testing how much money you're
+                                                    willing to pay.
+                                                </p>
+                                                <p className="mb-0 text-sm">
+                                                    Usage-based pricing is like a utility - where we continually seek to
+                                                    lower costs and make money through volume.
+                                                </p>
                                             </div>
-                                        ))}
-                                    </div>
-
-                                    <div className=" @lg:grid @lg:border-t border-light dark:border-dark items-center text-sm text-right @lg:mt-1 px-4 py-3">
-                                        <span
-                                            onClick={() => {
-                                                const element = document.getElementById('calculator')
-                                                const headerHeight = document.getElementById('header').offsetHeight
-                                                scroll.scrollTo(element.offsetTop - 20 - headerHeight, {
-                                                    duration: 800,
-                                                    delay: 0,
-                                                    smooth: 'easeInOutQuart',
-                                                })
-                                            }}
-                                            className="cursor-pointer text-red dark:text-yellow font-semibold"
-                                        >
-                                            Estimate your monthly bill{' '}
-                                            <IconArrowRightDown className="w-4 h-4 inline-block -top-px" />
+                                        )}
+                                    >
+                                        <span className="border-b border-dashed border-primary/50 dark:primary-dark/50">
+                                            value-based pricing
                                         </span>
+                                    </Tooltip>
+                                    .
+                                </p>
+                                <p className="text-base font-medium opacity-60 leading-tight">
+                                    Starts at $0/mo with a generous free tier.
+                                </p>
+                                <CTA />
+                            </div>
+                            <div className="col-span-7">
+                                <div className="@container border border-light dark:border-dark @lg:p-4 rounded-md bg-white dark:bg-accent-dark">
+                                    <div className="@lg:px-2">
+                                        <div className="col-span-4">
+                                            <div className="hidden @lg:grid grid-cols-16 items-center text-sm opacity-60 pt-2 px-3 pb-1">
+                                                <div className="col-span-6">Products</div>
+                                                <div className="col-span-5">Monthly free allowance</div>
+                                                <div className="col-span-4">
+                                                    <Tooltip
+                                                        content={() => (
+                                                            <div className="max-w-sm">
+                                                                <p className="mb-0 text-sm">
+                                                                    <strong>
+                                                                        Prices decrease exponentially with greater
+                                                                        volume.
+                                                                    </strong>
+                                                                    <br />
+                                                                    Click a product to see the full price breakdown.
+                                                                </p>
+                                                            </div>
+                                                        )}
+                                                        placement="top"
+                                                    >
+                                                        <span className="relative">
+                                                            Then starts at...{' '}
+                                                            <IconInfo className="w-4 h-4 inline-block relative -top-px" />
+                                                        </span>
+                                                    </Tooltip>
+                                                </div>
+                                                <div className="col-span-1"></div>
+                                            </div>
+
+                                            <div className="">
+                                                {products.map((product, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="py-1 px-2 @lg:!p-0 border-b border-light dark:border-dark @lg:border-transparent dark:@lg:border-transparent"
+                                                    >
+                                                        <Link
+                                                            to={product.link}
+                                                            className="group grid grid-cols-8 @lg:grid-cols-16 items-center text-primary dark:text-primary-dark rounded hover:text-primary dark:hover:text-primary-dark p-2 @lg:px-2 @lg:py-1 @lg:rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
+                                                        >
+                                                            <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center @lg:pl-1 mb-1 @lg:mb-0">
+                                                                {product.icon}
+                                                                <span className="font-semibold text-[15px]">
+                                                                    {product.name}
+                                                                </span>
+                                                            </div>
+                                                            <div
+                                                                className={`col-span-4 @lg:col-span-5 text-sm order-3 2xs:ml-8 @lg:ml-0 ${
+                                                                    product.price && 'pr-2 @lg:p-0'
+                                                                } @lg:order-none`}
+                                                            >
+                                                                {product.freeLimit ? (
+                                                                    <>
+                                                                        <div className="text-xs font-normal opacity-60 @lg:hidden">
+                                                                            Monthly free allowance
+                                                                        </div>
+                                                                        {product.freeLimit} {product.denomination}s
+                                                                        <span className="opacity-50 font-medium text-[13px]">
+                                                                            /mo
+                                                                        </span>
+                                                                    </>
+                                                                ) : (
+                                                                    <>{product.message}</>
+                                                                )}
+                                                            </div>
+                                                            <div
+                                                                className={`col-span-4 text-sm order-4 2xs:mr-8 h-full @lg:h-auto @lg:mr-0 @lg:order-none ${
+                                                                    product.price && 'pl-2 @lg:p-0'
+                                                                }`}
+                                                            >
+                                                                {product.price && (
+                                                                    <>
+                                                                        <div className="text-xs font-normal opacity-60 @lg:hidden">
+                                                                            Then pricing starts at
+                                                                        </div>
+                                                                        ${product.price}
+                                                                        <span className="opacity-50 font-medium text-[13px]">
+                                                                            /{product.denomination}
+                                                                        </span>
+                                                                    </>
+                                                                )}
+                                                            </div>
+                                                            <div className="col-span-1 flex justify-end">
+                                                                <IconChevronDown className="w-8 h-8 -rotate-90 opacity-50 group-hover:opacity-75" />
+                                                            </div>
+                                                        </Link>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            <div className=" @lg:grid @lg:border-t border-light dark:border-dark items-center text-sm text-right @lg:mt-1 px-4 py-3">
+                                                <span
+                                                    onClick={() => {
+                                                        const element = document.getElementById('calculator')
+                                                        const headerHeight =
+                                                            document.getElementById('header').offsetHeight
+                                                        scroll.scrollTo(element.offsetTop - 20 - headerHeight, {
+                                                            duration: 800,
+                                                            delay: 0,
+                                                            smooth: 'easeInOutQuart',
+                                                        })
+                                                    }}
+                                                    className="cursor-pointer text-red dark:text-yellow font-semibold"
+                                                >
+                                                    Estimate your monthly bill{' '}
+                                                    <IconArrowRightDown className="w-4 h-4 inline-block -top-px" />
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
+                </>
+            )}
 
             {!currentProduct && (
                 <>
