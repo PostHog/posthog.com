@@ -423,7 +423,7 @@ const Pricing = (): JSX.Element => {
                             </div>
                         </div>
                         <p className="text-center text-[15px] text-primary/75 dark:text-primary-dark/75">
-                            All plans include unlimited team members and no limited on tracked users.{' '}
+                            All plans include unlimited team members and no limits on tracked users.{' '}
                             <span
                                 className="text-red dark:text-yellow font-semibold cursor-pointer inline-block"
                                 onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
