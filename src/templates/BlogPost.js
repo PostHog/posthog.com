@@ -22,6 +22,8 @@ import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import qs from 'qs'
 import Breadcrumbs from 'components/Edition/Breadcrumbs'
+import { CallToAction } from 'components/CallToAction'
+import { IconMap, IconOpenSidebar } from '@posthog/icons'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -109,6 +111,21 @@ const ContributorsSmall = ({ contributors }) => {
             </div>
         </div>
     ) : null
+}
+
+export const OpenGuide = ({ slug }) => {
+    return (
+        <div className="border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark p-4 mx-4 mb-4">
+            <h3 className="text-base mb-1 flex items-center gap-1">
+                <IconMap className="w-6 h-6 opacity-75" /> <span>Follow along in the app</span>
+            </h3>
+            <p className="mb-2 text-sm">Open this guide in PostHog and follow along step-by-step.</p>
+            <CallToAction to={`https://app.posthog.com/#panel=docs:/tutorials/${slug}`} size="sm" externalNoIcon>
+                Open in app
+                <IconOpenSidebar className="w-4 h-4 inline-block ml-2" />
+            </CallToAction>
+        </div>
+    )
 }
 
 export default function BlogPost({ data, pageContext, location, mobile = false }) {
@@ -217,6 +234,9 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 >
                     <Upvote id={postID} slug={fields.slug} className="px-4 mb-4" />
                     <Contributors contributors={contributors} />
+
+                    <OpenGuide slug={fields.slug} />
+
                     <MobileSidebar tableOfContents={tableOfContents} />
                 </aside>
             </div>
