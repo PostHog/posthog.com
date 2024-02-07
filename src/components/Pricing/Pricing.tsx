@@ -54,7 +54,7 @@ const planSummary: PlanData[] = [
         ],
     },
     {
-        title: 'Usage-based',
+        title: 'Ridiculously cheap',
         price: '$0',
         features: [
             'Advanced product features',
@@ -65,7 +65,7 @@ const planSummary: PlanData[] = [
         ],
     },
     {
-        title: 'Usage based for teams',
+        title: 'Teams',
         price: '$450',
         features: [
             <>
@@ -92,7 +92,7 @@ const planSummary: PlanData[] = [
             'Unlimited everything',
             'SAML enforcement',
             'Custom MSA',
-            'Slack-based support',
+            'Dedicated Slack support channel',
             'Personalized onboarding & training',
         ],
     },
@@ -447,10 +447,10 @@ const Pricing = (): JSX.Element => {
                                     <strong className="text-sm opacity-75">Totally free</strong>
                                 </div>
                                 <div className="col-span-3 px-3 py-1">
-                                    <strong className="text-sm opacity-75">Usage-based</strong>
+                                    <strong className="text-sm opacity-75">Ridiculously cheap</strong>
                                 </div>
                                 <div className="col-span-3 px-3 py-1">
-                                    <strong className="text-sm opacity-75">Usage-based for teams</strong>
+                                    <strong className="text-sm opacity-75">Teams</strong>
                                 </div>
                                 <div className="col-span-3 px-3 py-1">
                                     <strong className="text-sm opacity-75">Enterprise</strong>
