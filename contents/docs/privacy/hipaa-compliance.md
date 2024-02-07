@@ -39,7 +39,7 @@ PostHog offers a third approach without either of these downsides: hosting the p
 
 ## Does PostHog offer a BAA for PostHog Cloud?
 
-Yes. If you're interested in a BAA for HIPAA compliance, please contact [sales@posthog.com](mailto:sales@posthog.com) with information about your requirements.  
+Yes. If you're interested in a BAA for HIPAA compliance, please [contact us with information about your requirements](/contact-sales).  
 
 ## How to set PostHog up for HIPAA compliance
 
