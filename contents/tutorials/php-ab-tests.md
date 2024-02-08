@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in PHP
-date: 2024-02-07
+date: 2024-02-08
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
@@ -17,7 +17,7 @@ A/B tests help you improve your PHP app by enabling you to compare the impact of
 
 ## 1. Create a basic PHP app
 
-First, ensure [PHP](https://www.php.net/manual/en/install.php) is installed. Then, create a new folder for your project called `php-ab-tests`. In this folder, create an `index.php`:
+First, ensure [PHP](https://www.php.net/manual/en/install.php) is installed. Then, create a new folder for your project called `php-ab-tests`. In this folder, create an `index.php` file:
 
 ```bash
 mkdir php-ab-tests
@@ -129,7 +129,7 @@ Click "Save as draft" and then click "Launch".
 
 To implement the A/B test, we: 
 
-1. fetch the `my-cool-experiment` flag using [`PostHog::getFeatureFlag()`](/docs/libraries/php#feature-flags). 
+1. Fetch the `my-cool-experiment` flag using [`PostHog::getFeatureFlag()`](/docs/libraries/php#feature-flags). 
 2. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 ```php file=index.php
