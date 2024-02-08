@@ -894,6 +894,10 @@ ul {
         content: '';
         width: 3px;
     }
+
+    &.post:before {
+        @apply -left-0;
+    }
 }
 
 .images-slider > li {
