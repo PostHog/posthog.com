@@ -1,6 +1,6 @@
 ---
 title: How to add session replays to Zendesk
-date: 2024-02-07
+date: 2024-02-08
 author: ["ian-vanagas"]
 tags: ['session replay']
 ---
@@ -54,7 +54,9 @@ Once done, run `npm run dev` and go `http://localhost:3000`  to see your app.
 
 ## 2. Add PostHog
 
-To set up session replays, we need to install PostHog in our app. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). Also, make sure to enable "Record user sessions" [your project settings](https://us.posthog.com/settings/project#replay).
+To set up session replays, we need to install PostHog in our app. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). 
+
+> **Important:** Make sure to enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project#replay).
 
 After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 
@@ -210,7 +212,7 @@ Now, when you check your ticket in Zendesk, you'll see a session replay link to 
 
 ![Zendesk to session replay video](../images/tutorials/zendesk-session-replays/zendesk.mp4)
 
-> **Bonus:** Beyond a session replay link, you can customize this pattern with information like:
+> **Bonus:** Beyond a session replay link, you can customize the content for the ticket with information like:
 > - User ID
 > - Report event ID
 > - Admin links
