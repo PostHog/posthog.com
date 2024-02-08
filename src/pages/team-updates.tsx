@@ -97,12 +97,12 @@ export default function TeamUpdates() {
                 </div>
                 <div className="pb-12">
                     {hasUpdates ? (
-                        <ul className="list-none m-0 p-0 pb-4 grid gap-y-8">
+                        <ul className="list-none m-0 p-0 pb-4 grid gap-y-4">
                             {Object.keys(updates).map((teamName) => {
                                 return (
                                     <li key={teamName}>
-                                        <h1>{teamName}</h1>
-                                        <ul className="list-none m-0 p-0 grid gap-y-4">
+                                        <h2>{teamName}</h2>
+                                        <ul>
                                             {updates[teamName].map((update) => {
                                                 const {
                                                     id,
@@ -115,10 +115,7 @@ export default function TeamUpdates() {
                                                     },
                                                 } = update
                                                 return (
-                                                    <li
-                                                        key={id}
-                                                        className="p-5 flex-shrink-0 bg-accent dark:bg-accent-dark border border-border dark:border-dark rounded-md"
-                                                    >
+                                                    <li key={id}>
                                                         <Markdown>{body}</Markdown>
                                                     </li>
                                                 )
