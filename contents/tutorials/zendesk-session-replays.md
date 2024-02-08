@@ -5,11 +5,11 @@ author: ["ian-vanagas"]
 tags: ['session replay']
 ---
 
-Session replays can be a useful support tool for debugging and recreating issues. The errors, console, and network data along with the rest of PostHog's tools make PostHog a powerful support platform.
+[Session replays](/session-replay) can be a useful support tool for debugging and recreating issues. The errors, console, and network data along with the rest of PostHog's tools make PostHog a powerful support platform.
 
-To get easy access to session replays in Zendesk, you can add a link to them when users submit them. To show you how to do this, we build a basic Next.js app with a form, add PostHog, connect the form to Zendesk, and setup the session replay link in the submitted ticket.
+To get easy access to session replays in Zendesk, you can link to them when users submit tickets. To show you how to do this, we build a basic Next.js app with a form, add PostHog, connect the form to Zendesk, and setup the session replay link in the submitted ticket.
 
-## Creating a basic Next.js app with a form
+## 1. Create a basic Next.js app with a form
 
 First, make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (18.17 or newer), and then create a Next.js app:
 
@@ -30,7 +30,6 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(content)
   }
 
   return (
@@ -49,15 +48,15 @@ export default function Home() {
 }
 ```
 
-Once done, run `npm run dev` and go `http://localhost:3000`  to see your page.
+Once done, run `npm run dev` and go `http://localhost:3000`  to see your app.
 
 ![Next.js app](../images/tutorials/zendesk-session-replays/app.png)
 
-## Adding PostHog
+## 2. Add PostHog
 
 To set up session replays, we need to install PostHog in our app. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). Also, make sure to enable "Record user sessions" [your project settings](https://us.posthog.com/settings/project#replay).
 
-After doing this, install the `posthog-js` SDK:
+After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 
 ```bash
 npm i posthog-js
@@ -85,7 +84,7 @@ export function PHProvider({ children }) {
 
 Once created, you can import `PHProvider` into your `layout.js` file and wrap your app in it:
 
-```js
+```js file=layout.js
 import "./globals.css";
 import { PHProvider } from './providers'
 
@@ -100,7 +99,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-## Connecting the form to Zendesk
+## 3. Connect the form to Zendesk
 
 Connecting the form to Zendesk requires you to have access to your admin center at `your-subdomain.zendesk.com/admin/home`. Once here, click "Apps and integrations" in the sidebar and then select "Zendesk API." Enable token access, add a new API token, copy its value, and head back to your app.
 
@@ -180,9 +179,9 @@ Now when we go to our app and submit a value, it creates a ticket in Zendesk.
 
 ![Ticket in Zendesk](../images/tutorials/zendesk-session-replays/ticket.png)
 
-## Adding the session replay link to the ticket
+## 4. Add the session replay link to the ticket
 
-The final piece to set up is adding a link to the session replay in PostHog. The JavaScript SDK makes the easy with the `get_session_replay_url()` method. We just add PostHog and slightly modify the content value we pass to `submitTicket` .
+The final piece is including a link to the session replay in the ticket. The JavaScript SDK makes this easy with the [`get_session_replay_url()`](/docs/libraries/js#session-replay) method. We just add PostHog and then modify the content value we pass to `submitTicket` .
 
 ```js
 "use client"
@@ -207,7 +206,7 @@ export default function Home() {
 // ... rest of your code 
 ```
 
-Now, when you check your ticket in Zendesk, you'll see a session replay link to take you to that session in PostHog.
+Now, when you check your ticket in Zendesk, you'll see a session replay link to watch the replay in PostHog.
 
 ![Zendesk to session replay video](../images/tutorials/zendesk-session-replays/zendesk.mp4)
 
