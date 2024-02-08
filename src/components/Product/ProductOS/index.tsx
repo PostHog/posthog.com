@@ -328,8 +328,9 @@ export const ProductOS = () => {
                             </h2>
                             <p>
                                 We poke fun at a lot of things, but we take security seriously. We're{' '}
-                                <b>SOC 2 Type-1 certified</b>, GDPR compliant, and we share our security reports
-                                publicly. Check <a href="/handbook/company/security">our security docs</a> for more!
+                                <b>SOC 2 Type-1 certified, GDPR ready, HIPAA compliant</b>, and we share our security
+                                reports publicly. Check <a href="/handbook/company/security">our security docs</a> for
+                                more!
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
