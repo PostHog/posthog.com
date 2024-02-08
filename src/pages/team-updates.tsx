@@ -7,8 +7,10 @@ import Markdown from 'components/Squeak/components/Markdown'
 import SEO from 'components/seo'
 import { companyMenu } from '../navs'
 import { useUser } from 'hooks/useUser'
+import { Skeleton } from 'components/Questions/QuestionsTable'
 
 export default function TeamUpdates() {
+    const [loading, setLoading] = useState(true)
     const [copied, setCopied] = useState(false)
     const [updates, setUpdates] = useState<any>(null)
     const { user } = useUser()
@@ -34,6 +36,7 @@ export default function TeamUpdates() {
 
         const updates = groupBy(data, (update) => update?.attributes?.team?.data?.attributes?.name)
         setUpdates(updates)
+        setLoading(false)
     }
 
     const handleCopy = () => {
@@ -96,7 +99,9 @@ export default function TeamUpdates() {
                     )}
                 </div>
                 <div className="pb-12">
-                    {hasUpdates ? (
+                    {loading ? (
+                        <Skeleton />
+                    ) : hasUpdates ? (
                         <ul className="list-none m-0 p-0 pb-4 grid gap-y-4">
                             {Object.keys(updates).map((teamName) => {
                                 return (
