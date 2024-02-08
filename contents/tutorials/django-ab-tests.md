@@ -57,7 +57,7 @@ urlpatterns = [
 ]
 ```
 
-Run `python3 manage.py migrate` to migrate the database (you only need to run this once) and then `python manage.py runserver` to see our app in action at `http://127.0.0.1:8000`.
+Run `python3 manage.py migrate` to migrate the database (you only need to run this once) and then `python3 manage.py runserver` to see our app in action at `http://127.0.0.1:8000`.
 
 ![Basic Django app](../images/tutorials/django-ab-tests/basic-app.png)
 
@@ -81,7 +81,7 @@ def home(request):
 
 Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`. We also call `posthog.flush()` to ensure PostHog sends the event before the request is closed: 
 
-```python file=index.php
+```python file=views.py
 from django.http import HttpResponse
 from posthog import Posthog
 
@@ -176,7 +176,7 @@ When you restart your app and refresh the page, you should see the text updated 
 
 To ensure our goal metric is correctly calculated for each experiment variant, we need to include our feature flag information when capturing our `$pageview` event.
 
-To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/php#step-2-include-feature-flag-information-when-capturing-events) key to our event properties:
+To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/python#step-2-include-feature-flag-information-when-capturing-events) key to our event properties:
 
 ```python file=views.py
 
