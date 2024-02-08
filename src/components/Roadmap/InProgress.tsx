@@ -206,9 +206,8 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
 
     return (
         <li
-            className={`px-4 py-4 sm:py-2 xl:pb-4 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm ${
-                props?.className ?? ''
-            }`}
+            className={`px-4 py-4 sm:py-2 xl:pb-4 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm ${props?.className ?? ''
+                }`}
         >
             <div className="sm:mt-2 flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4">
                 <div className="sm:flex-grow">
@@ -265,26 +264,12 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
             <div className="sm:flex-[0_0_250px] xl:flex-1 flex sm:justify-end xl:justify-start">
                 <div className="mt-2 w-full">
                     {showAuth ? (
-                        <>
-                            <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
-                            <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                                <p className="text-sm mb-2">
-                                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                                </p>
-
-                                <p className="text-sm mb-0">
-                                    We suggest signing up with your personal email. Soon you'll be able to link your
-                                    PostHog app account.
-                                </p>
-                            </div>
-
-                            <Authentication
-                                initialView="sign-in"
-                                onAuth={() => subscribe()}
-                                showBanner={false}
-                                showProfile={false}
-                            />
-                        </>
+                        <Authentication
+                            initialView="sign-in"
+                            onAuth={() => subscribe()}
+                            showBanner={false}
+                            showProfile={false}
+                        />
                     ) : (
                         <button
                             disabled={loading}
@@ -305,8 +290,8 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                                 {subscribed
                                     ? 'Unsubscribe'
                                     : betaAvailable
-                                    ? 'Get early access'
-                                    : 'Subscribe for updates'}
+                                        ? 'Get early access'
+                                        : 'Subscribe for updates'}
                             </span>
                         </button>
                     )}

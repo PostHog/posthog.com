@@ -29,7 +29,7 @@
         "@ant-design/icons": "^4.1.0",
         "@dotlottie/react-player": "^1.6.6",
         "@fontsource/source-code-pro": "^4.5.4",
-        "@headlessui/react": "^1.7.13",
+        "@headlessui/react": "^1.7.17",
         "@headlessui/tailwindcss": "^0.1.1",
         "@heroicons/react": "^1.0.6",
         "@hubspot/api-client": "^7.1.2",

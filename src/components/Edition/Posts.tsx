@@ -1,10 +1,9 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
+import React, { createContext, useContext, useEffect, useRef, useState, Fragment } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'components/Link'
 import { usePosts } from './hooks/usePosts'
 import { useUser } from 'hooks/useUser'
-import { Login } from 'components/Community/Sidebar'
 import Layout from 'components/Layout'
 import Modal from 'components/Modal'
 import { IconChat } from '@posthog/icons'
@@ -15,8 +14,6 @@ import { useLocation } from '@reach/router'
 import { communityMenu, companyMenu } from '../../navs'
 import NewPost from './NewPost'
 import { PostProvider } from 'components/PostLayout/context'
-import { IMenu } from 'components/PostLayout/types'
-import MobileNav from 'components/PostLayout/MobileNav'
 import Default from './Views/Default'
 import Blog from './Views/Blog'
 import Newsletter from './Views/Newsletter'
@@ -26,9 +23,9 @@ import qs from 'qs'
 import { RightArrow } from 'components/Icons'
 import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../navs/posts'
-import { Authentication } from 'components/Squeak'
 import { PostFilters } from './Views/Default'
-import { CallToAction, child, container } from 'components/CallToAction'
+import { CallToAction } from 'components/CallToAction'
+import { Authentication } from 'components/Squeak'
 
 dayjs.extend(relativeTime)
 
@@ -210,36 +207,36 @@ export const getParams = (root, tag, sort) => {
             $and: [
                 ...(root
                     ? [
-                          {
-                              $or: [
-                                  {
-                                      post_category: {
-                                          folder: {
-                                              $eq: root,
-                                          },
-                                      },
-                                  },
-                                  {
-                                      crosspost_categories: {
-                                          folder: {
-                                              $eq: root,
-                                          },
-                                      },
-                                  },
-                              ],
-                          },
-                      ]
+                        {
+                            $or: [
+                                {
+                                    post_category: {
+                                        folder: {
+                                            $eq: root,
+                                        },
+                                    },
+                                },
+                                {
+                                    crosspost_categories: {
+                                        folder: {
+                                            $eq: root,
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                    ]
                     : []),
                 ...(tag
                     ? [
-                          {
-                              post_tags: {
-                                  label: {
-                                      $in: [tag],
-                                  },
-                              },
-                          },
-                      ]
+                        {
+                            post_tags: {
+                                label: {
+                                    $in: [tag],
+                                },
+                            },
+                        },
+                    ]
                     : []),
             ],
         },
@@ -351,9 +348,9 @@ export default function Posts({
                         menu: (!root
                             ? menu
                             : [
-                                  { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
-                                  ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),
-                              ]
+                                { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
+                                ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),
+                            ]
                         ).map((menuItem) => ({
                             ...menuItem,
                             handleLinkClick: ({ name, url: activeURL, tag }) => {
@@ -374,13 +371,6 @@ export default function Posts({
                     <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
                         <div className="px-4">
                             <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12 border border-border dark:border-dark">
-                                <p className="m-0 text-sm font-bold dark:text-white">
-                                    Note: PostHog.com authentication is separate from your PostHog app.
-                                </p>
-                                <p className="text-sm my-2 dark:text-white">
-                                    We suggest signing up with your personal email. Soon you'll be able to link your
-                                    PostHog app account.
-                                </p>
                                 <Authentication
                                     onAuth={() => setLoginModalOpen(false)}
                                     showBanner={false}
