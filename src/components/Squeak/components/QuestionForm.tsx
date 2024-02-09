@@ -244,9 +244,7 @@ export const QuestionForm = ({
         (formType === 'question' ? (
             <span className="font-bold">Ask a question</span>
         ) : (
-            <span className="squeak-reply-label">
-                <strong className="underline">Reply</strong> to question
-            </span>
+            <span className="squeak-reply-label">Reply</span>
         ))
 
     const createQuestion = async ({ subject, body, topic }: QuestionFormValues) => {

@@ -236,7 +236,7 @@ export default function RichText({
                 </div>
             )}
             <div className="flex items-center justify-between py-1">
-                <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full">
+                <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full !mb-0">
                     {buttons.map((button, index) => {
                         return (
                             <li key={index}>

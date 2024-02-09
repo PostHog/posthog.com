@@ -219,34 +219,40 @@ export default function RoadmapForm({
                     </div>
                 )}
                 {!hideStatusSelector && (
-                    <Select
-                        placeholder="Status"
-                        options={Object.keys(statusLabels).map((key) => ({
-                            label: statusLabels[key],
-                            value: key,
-                        }))}
-                        onChange={(status) => setStatus(status)}
-                        value={status}
-                    />
+                    <div className="border-b border-border dark:border-dark">
+                        <Select
+                            placeholder="Status"
+                            options={Object.keys(statusLabels).map((key) => ({
+                                label: statusLabels[key],
+                                value: key,
+                            }))}
+                            onChange={(status) => setStatus(status)}
+                            value={status}
+                        />
+                    </div>
                 )}
-                <TeamSelect value={values.team} onChange={(teamID) => setFieldValue('team', teamID)} />
+                <div className="border-b border-border dark:border-dark">
+                    <TeamSelect value={values.team} onChange={(teamID) => setFieldValue('team', teamID)} />
+                </div>
                 {status === 'complete' && (
                     <TopicSelect label="Topic" value={values.topic} setFieldValue={setFieldValue} />
                 )}
                 {status === 'complete' && (
-                    <Select
-                        placeholder="Type"
-                        options={[
-                            { value: 'Major new feature' },
-                            { value: 'New feature' },
-                            { value: 'Company news' },
-                            { value: 'Something cool happened' },
-                            { value: 'Beta' },
-                            { value: 'Improvement' },
-                        ]}
-                        onChange={(type) => setFieldValue('category', type)}
-                        value={values.category}
-                    />
+                    <div className="border-b border-border dark:border-dark">
+                        <Select
+                            placeholder="Type"
+                            options={[
+                                { value: 'Major new feature' },
+                                { value: 'New feature' },
+                                { value: 'Company news' },
+                                { value: 'Something cool happened' },
+                                { value: 'Beta' },
+                                { value: 'Improvement' },
+                            ]}
+                            onChange={(type) => setFieldValue('category', type)}
+                            value={values.category}
+                        />
+                    </div>
                 )}
                 <input
                     name="title"
