@@ -29,7 +29,7 @@ Finding product-market fit in a startup is tough, but the only sure way to fail 
 
 ## 3. You need a specific ideal customer profile
 
-Defining our ideal customer profile (ICP) was a turning point for PostHog. You can see it in our revenue growth:
+Defining our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) was a turning point for PostHog. You can see it in our revenue growth:
 
 ![revenue](../images/newsletter/product-market-fit/rev.png)
 

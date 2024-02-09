@@ -2,13 +2,15 @@
 title: "How we decide what to build"
 date: 2024-01-10
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/prodhog.png
+featuredImage: ../images/newsletter/how-we-decide-what-to-build/how-we-decide.png
 featuredImageType: full
 tags:
   - Product engineers
   - Engineering
+  - Product  
 crosspost:
-  - Product engineers  
+  - Product engineers
+  - Founders
 ---
 
 There is a point in your product journey where what to build next goes from obvious to unclear. The options seem endless and choosing correctly can be the difference between a thriving product and a failing one.

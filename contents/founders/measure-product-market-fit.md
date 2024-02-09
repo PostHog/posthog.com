@@ -215,7 +215,7 @@ Everyone. It's basically impossible to measure product-market fit without it. Th
 
 It's tempting to treat revenue as a measure of product-market fit, but it's imperfect. It's easily skewed by one or two big contracts, selling promises, or "design partners" who guide your product to solve their very specific needs.
 
-Instead, create an [Ideal Customer Profile](/blog/creating-ideal-customer-profile) (ICP) and track growth among paying customers who fit your ICP. Your ICP should be specific, and include needs, haves, and common attributes. 
+Instead, create an [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) (ICP) and track growth among paying customers who fit your ICP. Your ICP should be specific, and include needs, haves, and common attributes. 
 
 Here's PostHog's first ICP:
 
