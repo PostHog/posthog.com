@@ -14,20 +14,18 @@ tags:
   - Privacy
 ---
 
-What do Google Optimize, [Optimizely](/blog/posthog-vs-optimizely), Convert, Webtrends Optimize and Splitbee have in common?
+What do Google Optimize, [Optimizely](/blog/posthog-vs-optimizely), Convert, and Webtrends Optimize have in common?
 
 1. They're popular A/B testing tools
-2. None of them are HIPAA compliant
+2. None of them are HIPAA-compliant
 
 Anyone who develops a healthcare product or app will be painfully familiar with this problem. Most of the mainstream tools either won't support you, or will charge you a fortune to agree to signing a BAA (Business Associate Agreement).
 
 While it's tempting to make do without experimentation capability in your stack, that's a mistake. It's nearly impossible to eliminate second- and third-order effects without a robust testing system, and a good testing product will allow you to target specific user properties, so you get actionable results.
 
-In this guide we'll outline your best options for HIPAA-compliant A/B testing, and the requirements for remaining HIPAA-compliant while using these and other analytics tools. 
+## HIPAA explained
 
-## HIPAA compliance in A/B testing
-
-Within HIPAA, you need to follow the [Privacy Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/privacyrule/index.html) and the [Security Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/securityrule/index.html). Breaching either can result in hefty financial penalties, but for the sake of this guide we're mostly interested in the how the Privacy Rule impacts analytics and A/B testing.
+HIPAA requires you to comply with the [Privacy Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/privacyrule/index.html) and the [Security Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/securityrule/index.html). Breaching either can result in hefty financial penalties, but for the sake of this guide we're mostly interested in how the Privacy Rule impacts analytics and A/B testing.
 
 Within the Privacy Rule framework, there are three different ways to comply with HIPAA when adopting user analytics and experimentation tools:
 
@@ -35,7 +33,7 @@ Within the Privacy Rule framework, there are three different ways to comply with
 
 2. **Sign a BAA with a third-party tool:** You must sign a BAA with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also _any_ tools you use for importing and exporting data from your data warehouse.
 
-3. **Self-host and keep control of all your data:** The less common, but arguably most powerful option, is to self-host tools for analytics and experimentation on your own infrastructure. This reduces the number of BAAs and general legal wrangling needed to generate user insights. The only downside is you'll need the expertise to manage self-hosted instances, or third-party support to do so.
+3. **Self-host and keep control of all your data:** The less common is to self-host tools for analytics and experimentation on your own infrastructure. This reduces the number of BAAs and general legal wrangling needed to generate user insights. The only downside is you'll need the expertise to manage self-hosted instances, or third-party support to do so, and you are wholly liable for any security breaches.
 
 These are the broad principles, but **please consult an expert** before making any final decision on how to implement tools in compliance with HIPAA. 
 
@@ -106,11 +104,25 @@ Adobe doesn't publish pricing for Adobe Target, but suffice it to say it probabl
 
 ## FAQ
 
-### What are the password requirements under HIPAA?
+### Who does HIPAA apply to?
 
-HIPAA requires Covered Entities and Business Associates to have policies for "creating, changing, and safeguarding passwords". Kameleoon and VWO state this means you must force users to update their passwords every 90 days, but this is based on [out of date advice](https://www.hipaajournal.com/what-are-the-hipaa-password-expiration-requirements/) first published in 2004. [Updated advice](https://www.hipaajournal.com/what-are-the-hipaa-password-expiration-requirements/) published by the National Institute of Standards and Technology in 2017 states "Verifiers SHOULD NOT require memorized secrets [passwords] to be changed arbitrarily (e.g., periodically)."
+HIPAA applies to "covered entities," such as healthcare providers who transmit any health information in electronic form, health plans, and healthcare clearinghouses. Mobile apps fall under HIPAA if they store protected health information (PHI), and share it with any covered entity. 
 
-Why? It's logical, really. Research shows that, when required to change passwords frequently, users are more likely to use weaker, easy to remember passwords and make small, predictable changes than use a strong one. Anyone who's had to change their password every 30 days knows this is true already.
+HIPAA also applies to "business associates," which, according to the [US Department of Health and Human Services](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html), are "a subcontractor that creates, receives, maintains, or transmits protected health information on behalf of another business associate."
+
+Under HIPAA, the A/B testing tools in this guide would all be considered business associates.
+
+### What is PHI (Protected Health Information)?
+
+Protected Health Information (PHI) is any information about health status, provision of healthcare, or payment for healthcare that can be linked to an individual. 
+
+This includes medical records, laboratory results, billing information, and any other information that identifies an individual and relates to their past, present, or future physical or mental health condition, treatment, or payment for healthcare services.
+
+### Is self-hosting better than signing a BAA?
+
+There's no objective correct answer here. In theory, self-hosting is preferable as it means you don't share any data with third-parties (business associates), and thus you don't need to sign a BAA.
+
+But self-hosting also presents additional risks. You're wholly liable for ensuring your A/B testing infrastructure is secure, which can be challenging if you don't have the internal expertise to manage this. If this is the case, it may be better to rely on a HIPAA-compliant business associate who has experience hosting analytics at scale.
 
 ### What's the difference between A/B and multivariate testing?
 
