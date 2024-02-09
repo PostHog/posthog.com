@@ -242,7 +242,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                         transition={{ type: 'tween' }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="bg-accent-dark z-10 absolute right-0 top-0 border-l border-border dark:border-dark h-full max-w-[500px] w-full p-5 flex flex-col overflow-auto"
+                        className="bg-accent dark:bg-accent-dark z-10 absolute right-0 top-0 border-l border-border dark:border-dark h-full max-w-[500px] w-full p-5 flex flex-col overflow-auto"
                     >
                         <div className="flex justify-between items-center mb-4 pb-4 border-b border-border dark:border-dark -mx-5 px-5">
                             <h2 className="m-0">{title}</h2>
