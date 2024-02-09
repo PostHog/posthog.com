@@ -16,6 +16,8 @@ The key features offered by this platform are:
 
 Batch exports are designed to power any complimentary analytics use cases outside of PostHog.
 
+> **Note:** Batch exports require a subscription to the data pipeline add-on which you can enable in [your billing settings](https://us.posthog.com/organization/billing).
+
 ## Destinations
 
 Every batch export exports data to a destination using the configuration parameters provided when creating a batch export. The following destinations are currently supported:
