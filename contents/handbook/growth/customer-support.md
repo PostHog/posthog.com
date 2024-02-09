@@ -20,6 +20,14 @@ These are the ways in which customers can currently reach us:
 - **Community questions** - users can also search [previously answered questions](/questions) that have been asked anywhere on posthog.com in our Docs. This is a great way to help us improve our Docs for simpler use-case type questions, but more complex questions should be re-routed via a support ticket. 
 - **Dedicated Slack channels** - For higher-paying (or potential higher-paying) customers, we offer a dedicated channel on our main company Slack.
 
+Sometimes people reach out to us on Twitter/X. If this happens, you should:
+
+1. Check first if they already have a ticket in Zendesk (either in-app or via /questions). There is nothing more annoying for a user than being asked to create a support ticket if they already have. 
+2. If no, ask them to create a support ticket within the app - this is _much_ better than trying to solve their problem over Twitter as Zendesk pulls in a bunch of contextual information and is easier to collaborate in. Do this from the **PostHog** Twitter account - otherwise you will get personally contacted every time this user wants help. 
+3. If yes, nudge CS even if it's a low priority ticket - CS are responsible for following up. Let the user know that you've done this. Again, use the PostHog Twitter account.
+
+Generally with Twitter, your objective should be to get the conversation into Zendesk asap, because it's easier to help the person there. An exception to this rule is if you are an engineer engaging with someone who has provided general feedback about PostHog - feel free to use your PostHog account if someone has a feature request or similar. 
+
 > Sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them on GitHub. We don't consider GitHub to be a proper 'support' channel, but it is a useful place to gauge the popularity of feature requests or the prevalence of issues. 
 
 ### Response Targets
