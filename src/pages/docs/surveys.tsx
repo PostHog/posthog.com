@@ -104,6 +104,68 @@ export const Content = ({ quickLinks = false }) => {
                     />
                 </ul>
             </section>
+            <section>
+                <h3 className="mb-1 text-xl">Survey templates</h3>
+                <p className="text-[15px]">Choose from many common survey types and launch them in a few clicks!</p>
+
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                    <ResourceItem
+                        title="Net Promoter Score (NPS)"
+                        description="The benchmark for judging what users think of you"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="./images/nps-survey.png"
+                            />
+                        }
+                        url="/templates/nps-survey"
+                    />
+                    <ResourceItem
+                        title="Customer Satisfaction (CSAT)"
+                        description="Get a vibe check on your product"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="./images/csat-survey.png"
+                            />
+                        }
+                        url="/templates/csat-survey"
+                    />
+                    <ResourceItem
+                        title="Customer Churn Rate (CCR)"
+                        description="Find out why your users are saying goodbye"
+                        Image={
+                            <StaticImage
+                                alt=""
+                                className="h-full"
+                                placeholder="none"
+                                objectFit="contain"
+                                quality={100}
+                                src="./images/ccr-survey.png"
+                            />
+                        }
+                        url="/templates/churn-survey"
+                    />
+                </ul>
+                <CallToAction
+                    to="/templates?filter=type&value=survey"
+                    type="custom"
+                    size="md"
+                    className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
+                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    width="[calc(100%_+_3px)]"
+                >
+                    Browse templates
+                </CallToAction>
+            </section>
         </>
     )
 }
