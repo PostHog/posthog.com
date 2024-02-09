@@ -49,7 +49,7 @@ There should be some supporting positioning that explains why someone may want t
 
 Or, maybe you're just wrong. People don't agree with your reasoning why they should use your thing!
 
-If this is universal feedback, you don't have product market fit. If it's from time to time, factor this into your Ideal Customer Profile ([see ours](../handbook/strategy/overview#target-customers-for-2022) for reference).
+If this is universal feedback, you don't have product market fit. If it's from time to time, factor this into your [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) ([see ours](../handbook/strategy/overview#target-customers-for-2022) for reference).
 
 [Example](https://news.ycombinator.com/item?id=30640487) | [Example 2](https://news.ycombinator.com/item?id=27503930) | [Example 3](https://news.ycombinator.com/item?id=27884669).
 

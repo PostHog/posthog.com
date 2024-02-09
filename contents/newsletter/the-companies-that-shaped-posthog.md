@@ -2,7 +2,7 @@
 title: "The companies that shaped PostHog"
 date: 2023-12-20
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/prodhog.png
+featuredImage: ../images/newsletter/the-companies-that-shaped-posthog/big-buidler.png
 featuredImageType: full
 tags:
   - Product engineers

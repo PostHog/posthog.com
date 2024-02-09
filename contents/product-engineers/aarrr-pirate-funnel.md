@@ -92,7 +92,7 @@ Acquisition is probably the easiest metric to define, but what you track will de
 
 For an e-commerce website, overall unique users is an important metric, but user signups is better for B2B products.
 
-It may also be prudent to add a quality metric here, too. Tracking signups based on an ideal customer profile (ICP) can be important to avoid over optimizing for the wrong kind of new users.
+It may also be prudent to add a quality metric here, too. Tracking signups based on an [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) can be important to avoid over optimizing for the wrong kind of new users.
 
 > 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate what you should optimize first. Most B2B SaaS products should prioritize retention – it's a great indicator of [product-market fit](/blog/product-market-fit-game).
  

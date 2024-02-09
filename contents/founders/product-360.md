@@ -66,7 +66,7 @@ PostHog still sends financial and revenue data each time, and has modelling to c
 
 Specifically, this is the list we currently care about:
 
-* Quality sign ups (we look for signups that match our [Ideal Customer Profile](../handbook/strategy/overview#target-customers-for-2022))
+* Quality sign ups (we look for signups that match our [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework))
 * Conversion rate of high quality sign ups to paid
 * Deployment conversion rate
 * Number of discoveries inside PostHog (this is people creating a data visualization with filtering - the more users do this, the better we retain them)
