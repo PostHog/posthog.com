@@ -79,7 +79,7 @@ def home(request):
     # rest of your code
 ```
 
-Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`. We also call `posthog.flush()` to ensure PostHog sends the event before the request is closed: 
+Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`:
 
 ```python file=views.py
 from django.http import HttpResponse
@@ -92,12 +92,6 @@ def home(request):
     paragraphText = 'Placeholder text'
     
     posthog.capture(distinct_id, '$pageview')
-
-    # Call posthog.flush() to ensure all pending events are sent before the request closes.
-    #
-    # If your server is always-on and does not shutdown after each request, 
-    # then this is not needed as PostHog automatically flushes events at regular intervals.
-    posthog.flush()
 
     return HttpResponse(f"""
     <!DOCTYPE html>
