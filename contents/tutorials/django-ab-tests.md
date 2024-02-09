@@ -35,16 +35,16 @@ def home(request):
     
     return HttpResponse(f"""
     <!DOCTYPE html>
-    <html>
-    <body>
-      <h1>Django A/B Testing Tutorial</h1>
-      <p>{paragraphText}</p>
-    </body>
+   <html>
+      <body>
+        <h1>Django A/B Testing Tutorial</h1>
+        <p>{paragraphText}</p>
+      </body>
     </html>
     """)
 ```
 
-Then, map a url to your view by adding a path to `urlpatterns` in `django_ab_tests/urls.py`. Replace the code in that file with the following:
+Then, map a URL to your view by adding a path to `urlpatterns` in `django_ab_tests/urls.py`. Replace the code in that file with the following:
 
 ```python file=django_ab_tests/urls.py
 from django.contrib import admin
@@ -102,15 +102,15 @@ def home(request):
     return HttpResponse(f"""
     <!DOCTYPE html>
     <html>
-    <body>
-      <h1>Django A/B Testing Tutorial</h1>
-      <p>{paragraphText}</p>
-    </body>
+      <body>
+        <h1>Django A/B Testing Tutorial</h1>
+        <p>{paragraphText}</p>
+      </body>
     </html>
     """)
 ```
 
-With this set up, restart your app and then refresh your browser a few times. You should now see the captured event in your [PostHog activity tab](https://us.posthog.com/events).
+With this set up, restart your app and then refresh your browser a few times. You should now see captured events in your [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsInPostHogLight} 
@@ -151,7 +151,7 @@ from django.http import HttpResponse
 from posthog import Posthog
 
 def home(request):
-    posthog = Posthog('phc_Is2364QKW0QKHbXWVtgh8Yugx8xAvdfL71JmBaKD8mG', host='https://app.posthog.com')
+    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
     distinct_id = 'placeholder-user-id' 
     enabled_variant = posthog.get_feature_flag('my-cool-experiment', distinct_id)
     
@@ -204,6 +204,6 @@ Now PostHog is able to calculate our goal metric for our experiment results:
 
 ## Further reading
 
-- [Setting up Django analytics, feature flags, and more with PostHog](/tutorials/django-analytics)
+- [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
