@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Important:** At present, we don't offer the option to sign a BAA to use PostHog Cloud with HIPAA compliance. This page covers how to use [PostHog Open Source](https://posthog.com/docs/self-host), which is available [without guarantee](/docs/self-host/open-source/disclaimer) under an MIT license, within HIPAA rules. 
+> **Important:** PostHog only offers Business Associate Agreements (BAAs) for PostHog Cloud to users on [an Enterprise plan](pricing). To enquire about BAAs, HIPAA compliance, or an Enterprise plan, please [contact us directly](/contact-sales). 
 
 HIPAA is the Health Insurance Portability and Accountability Act. It’s a piece of legislation that applies to certain [covered entities](https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html) operating in the United States of America (e.g. healthcare providers).
 
@@ -45,7 +45,7 @@ Yes. If you're interested in a BAA for HIPAA compliance, please [contact us with
 
 > We strongly recommend teams which need HIPAA compliance use PostHog Cloud under a BAA, rather than the legacy self-hosted product or Hobby versions. 
 
-The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. 
+The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. BAAs are only available to users on an [Enterprise plan](/pricing).
 
 However, it is possible to host PostHog yourself using our open-source hobby deployment. It is important to note that the hobby deployment is **only suitable for smaller event volumes** and provided without guarantee. It also lacks many of the advanced features available under PostHog Cloud. 
 
