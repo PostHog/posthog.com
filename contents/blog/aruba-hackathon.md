@@ -57,7 +57,7 @@ On the whole, Max gives useful answers – even when dealing with complex questi
 
 ![maxai](../images/blog/aruba/max-ai.jpeg)
 
-That said, Max isn't immune to hallucinating solutions – or even URLs for docs that don't exist – if it doesn't know the answer. It's a work in progress, but we've released Max in our community as a beta. Drop him a DM! 
+That said, Max isn't immune to hallucinating solutions – or even URLs for docs that don't exist – if it doesn't know the answer. It's a work in progress, but we've released Max in our community as a beta.
 
 Check out the [MaxAI repo](https://github.com/PostHog/max-ai) for more info.
 

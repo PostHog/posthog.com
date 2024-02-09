@@ -64,8 +64,7 @@ export default function RoadmapPage() {
                         <h3 className="font-bold text-5xl mb-8 xl:mt-0">How to install</h3>
                         <ol>
                             <li>
-                                Join our <Link to="/questions">community chat</Link>, and join the
-                                #team-website-and-docs channel - the zip file is pinned in the channel.
+                                Join our <Link to="/questions">community</Link>, and ask us for it.
                             </li>
                             <li>Download the zip file and unzip it.</li>
                             <li>
@@ -112,8 +111,7 @@ export default function RoadmapPage() {
                         </h3>
 
                         <p>
-                            For feedback, please join our <Link to="/questions">community chat</Link>, and post it in
-                            the #team-website-and-docs channel.
+                            For feedback, please join our <Link to="/questions">community</Link>, and post it there.
                         </p>
                         <p>
                             For bugs, <Link to="https://github.com/PostHog/sidecar/issues/new">create an issue</Link> in

@@ -89,8 +89,8 @@ export const InstallingPostHog = () => {
                     <h5>Hosting or deployment questions?</h5>
                     <p>
                         Join our{' '}
-                        <Link to="/community" event="next steps - installing posthog: Slack">
-                            forum
+                        <Link to="/questions" event="next steps - installing posthog: forum">
+                            community
                         </Link>{' '}
                         to ask questions directly to the PostHog team - or search for similar questions from others in
                         the community.
