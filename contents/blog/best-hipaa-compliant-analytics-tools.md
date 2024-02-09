@@ -1,6 +1,6 @@
 ---
 date: 2024-02-09
-title: The 6 best HIPAA-compliant analytics tools
+title: The 7 best HIPAA-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
