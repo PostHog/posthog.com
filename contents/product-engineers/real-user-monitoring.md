@@ -8,6 +8,8 @@ tags:
   - Product engineers
   - User research
   - Session replay
+crosspost:
+  - Blog  
 ---
 
 Before anyone can use your product, you must make sure it actually works as expected. Figuring this out is trickier than just running it locally. Changes often have unintended consequences on other parts of the app or create non-obvious issues. 

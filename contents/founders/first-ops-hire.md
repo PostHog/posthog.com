@@ -9,6 +9,8 @@ tags:
   - Founders
   - People
   - Ops & finance
+crosspost:
+  - Blog  
 ---
 
 Most founders I talk to approach their first ops hire in a totally sensible but wrong way. Their typical approach is to look at the long list of admin debt they have accumulated, cry a bit, and then look for someone who has done those tasks before, plus a bit extra. However, the reality is that _attributes_ >>> technical expertise when it comes to your _first_ ops hire.

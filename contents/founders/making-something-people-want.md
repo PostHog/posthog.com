@@ -9,6 +9,8 @@ tags:
   - Founders
   - Product
   - Product-market fit
+crosspost:
+  - Blog  
 ---
 
 It's one thing to build _something_, it's another to build something that _people want_.

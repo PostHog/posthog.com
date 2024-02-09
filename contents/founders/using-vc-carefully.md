@@ -9,6 +9,8 @@ tags:
   - Founders
   - Fundraising
   - Being a founder
+crosspost:
+  - Blog  
 ---
 
 We raised over $27,000,000 then realized we should be growing out of our own revenue instead.

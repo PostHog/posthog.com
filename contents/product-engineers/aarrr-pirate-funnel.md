@@ -11,6 +11,7 @@ tags:
   - Growth
 crosspost:
   - Founders
+  - Blog
 ---
 
 > **Want to build an AARRR funnel in PostHog?** Use our [AARRR dashboard template](/templates/aarrr-dashboard) to set one up quickly and easily.

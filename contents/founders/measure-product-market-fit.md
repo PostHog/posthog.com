@@ -11,7 +11,8 @@ tags:
   - Product-market fit
   - Product engineers
 crosspost:
-  - Product engineers  
+  - Product engineers
+  - Blog  
 ---
 
 Startups can't succeed without [achieving product-market fit](/blog/product-market-fit-game) – it's one of the few things startup gurus agree on. It's often described as a feeling – a palpable excitement from users, or a sense you can't keep up with demand. You either have _it_, or you don't.

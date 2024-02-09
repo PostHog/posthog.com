@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Ops & finance
+crosspost:
+  - Blog
 ---
 
 Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but what are all the boring admin things that are actually going to drain 40% of your time which no one has told you about?

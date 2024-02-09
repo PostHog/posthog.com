@@ -9,6 +9,8 @@ tags:
   - Marketing
   - Founders
   - Growth
+crosspost:
+  - Blog  
 ---
 
 Imagine you're working on something for other developers that you really, _really_ want to be great.

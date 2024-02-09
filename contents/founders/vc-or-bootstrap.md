@@ -9,6 +9,8 @@ tags:
   - Founders
   - Fundraising
   - Being a founder
+crosspost:
+  - Blog  
 ---
 
 Since PostHog raised Venture Capital (VC), we've had far less stress, and far more fun.

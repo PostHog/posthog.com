@@ -13,6 +13,7 @@ tags:
   - Growth Engineering
 crosspost:
   - Product engineers
+  - Blog
 
 ---
 "Pricing is important" is common knowledge – price determines profit margin, which directly or indirectly determines nearly everything else. 

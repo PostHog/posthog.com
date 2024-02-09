@@ -12,6 +12,7 @@ tags:
   - Growth
 crosspost:
   - Founders
+  - Blog
 ---
 
 Here's what you need to know about churn rate and retention rate:

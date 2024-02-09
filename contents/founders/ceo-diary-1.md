@@ -10,6 +10,8 @@ author:
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
+crosspost:
+  - Blog
 ---
 
 _We are open source_ is [literally our top value](../handbook/company/values)... and what better way to be transparent than to share a diary?
