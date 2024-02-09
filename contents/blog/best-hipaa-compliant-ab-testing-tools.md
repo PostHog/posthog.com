@@ -1,5 +1,5 @@
 ---
-date: 2022-09-07
+date: 2024-02-09
 title: The best HIPAA-compliant A/B testing tools
 rootPage: /blog
 sidebar: Blog
@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
 featuredImageType: full
 category: General
 tags:

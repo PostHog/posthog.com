@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
 featuredImageType: full
 category: General
 tags:
