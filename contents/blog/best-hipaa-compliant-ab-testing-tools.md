@@ -14,12 +14,12 @@ tags:
   - Privacy
 ---
 
-What do Google Optimize, [Optimizely](/blog/posthog-vs-optimizely), Convert, and Webtrends Optimize have in common?
+What do [Optimizely](/blog/posthog-vs-optimizely), Convert, and Webtrends Optimize have in common?
 
 1. They're popular A/B testing tools
 2. None of them are HIPAA-compliant
 
-Anyone who develops a healthcare product or app will be painfully familiar with this problem. And, while it's tempting to make do without A/B testing for your product, that's a mistake. It's nearly impossible to eliminate second- and third-order effects without a robust testing system, and a good testing product will allow you to target specific user properties, so you get actionable results.
+And, while it's tempting to live without A/B testing for your healthcare product, doing so is like trying to navigate an ocean by sailing in a random direction. You'll probably arrive somewhere, but it won't be where you intended.
 
 ## What you need for HIPAA compliance
 
@@ -48,7 +48,7 @@ These are the broad principles, but **please consult an expert** before making a
 - **Self-hostable:** <span className="text-green text-lg">✔</span>
 - **BAA available:** <span className="text-green text-lg">✔</span>
 
-![PostHog](../images/screenshots/hogflix-dashboard.png)
+![PostHog](../images/screenshots/ab-testing.png)
 
 [PostHog](https://posthog.com/) is an open source all-in-one platform that combines A/B testing with product analytics, session replay, feature management, and user surveys – everything you need to understand user behavior. All these tools are seamlessly integrated and, because you get everything in one, you only need to sign one BAA for all your analytics needs.
 
@@ -67,11 +67,28 @@ PostHog offers a BAA on its Teams plan, which starts at $450 and includes [gener
 
 ![kameleoon](../images/blog/hipaa-compliant-ab-testing/kameleoon.png)
 
-Kameleoon is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), and feature flags for managing the rollout of new features and running tests. In addition to testing, it features a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
+[Kameleoon](https://vwo.com/) is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), and feature flags for managing the rollout of new features and running tests. In addition to testing, it features a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
 
 Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [state](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume.  
 
 ### 3. VWO
+
+- **Product analytics:** <span className="text-red text-lg">✖</span>
+- **Web analytics:** <span className="text-green text-lg">✔</span>
+- **Session replay:** <span className="text-green text-lg">✔</span>
+- **Feature flags:** <span className="text-green text-lg">✔</span>
+- **A/B testing:** <span className="text-green text-lg">✔</span>
+- **Surveys:** <span className="text-green text-lg">✔</span>
+- **Self-hostable:** <span className="text-red text-lg">✖</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
+
+![vwo testing](../images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
+
+[VWO](https://vwo.com/) is best known as an A/B testing platform for e-commerce websites and mobile apps, though it also offers basic session replay and analytics tools as part of its myriad pricing tiers. A/B testing features includes support for multi-armed bandit, a visual editor, and advanced targeting options, such as targeting based on screen resolution.
+
+Unlike most tools in this list, VWO charges separately for website and mobile apps based on monthly tracked users (MTUs) for both, so it can get expensive quickly if you need both. VWO will sign a BAA, but only if you pay for the Security Plus Add-on ($529 per month), which is on top of your MTUs.
+
+### 4. LaunchDarkly
 
 - **Product analytics:** <span className="text-red text-lg">✖</span>
 - **Web analytics:** <span className="text-red text-lg">✖</span>
@@ -82,45 +99,11 @@ Kameleoon doesn't publish pricing publicly, but conversion optimization consulta
 - **Self-hostable:** <span className="text-red text-lg">✖</span>
 - **BAA available:** <span className="text-green text-lg">✔</span>
 
-![vwo testing](../images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
+![LaunchDarkly mobile app A/B tests](../images/blog/best-mobile-app-ab-testing-tools/launch-darkly.png)
 
-VWO offers a range of different products. Its testing product, VWO Testing, includes visual and code editors. You can run both A/B and multivariate tests, though the latter is limited to its Pro and Enterprise plans.
+LaunchDarkly is primarily a feature management platform for controlling what users see and when, and managing the rollout of new features. However, it also offers an experimentation suite, albeit as a paid add-on.
 
-#### VWO and HIPAA compliance
-
-- **Self-Hosting:** No
-- **BAA Available**: Yes
-
-VWO is a cloud-hosted platform only and will enter into a BAA with its users.
-
-What [VWO says](https://vwo.com/compliance/hipaa/):
-
->"VWO customers who are subject to HIPAA and wish to use the VWO products with PHI must sign a BAA with VWO. Customers are responsible for ensuring that they achieve compliance with HIPAA and HITECH Act requirements. 
->
->"We adhere to the HIPAA obligations by leveraging appropriate security configuration options for all VWO products. Additionally, we make our Business Associate Agreement (BAA) available for execution by subscribers."
-
-#### How much does VWO cost?
-
-VWO doesn't publish its pricing publicly, but it does offer a 14-day free trial.
-
-### Adobe Target
-
-![adobe target](../images/blog/hipaa-compliant-ab-testing/adobe.png)
-
-Adobe Target is part of Adobe's Experience Cloud, though it can be bought and used on its own. It supports A/B and multivariate tests, though unlike Kameleoon it doesn't offer feature flagging as it's primarily aimed at marketing teams rather than product developers. To this end, it includes a visual editor, so marketing teams can easily make changes to pages and run tests on conversion independently.
-
-#### Adobe Target and HIPAA compliance
-
-- **Self-Hosting:** No
-- **BAA Available**: Yes
-
-What [Adobe says](https://www.adobe.com/trust/compliance/hipaa-ready.html):
-
-> "Adobe provides health care customers with services that are ready to accept PHI, referring to these services as HIPAA-Ready Services. These HIPAA-Ready Services have additional features and functionalities that allow for both customers, who are Covered Entities or Business Associates, and Adobe to comply with their respective HIPAA obligations. These additional features may increase your license or subscription costs."
-
-#### How much does Adobe Target cost?
-
-Adobe doesn't publish pricing for Adobe Target, but suffice it to say it probably won't be cheap given its typical clients are multinational corporations. As noted in its T&Cs, using its "HIPAA-Ready Service" may incur an additional cost above a normal subscription plan.
+As a tool designed for engineers, LaunchDarkly supports running experiments on the front and back end. This enables engineers to run experiments to measure the performance impact of API and infrastructure changes, for example. 
 
 ## FAQ
 
@@ -143,9 +126,3 @@ This includes medical records, laboratory results, billing information, and any 
 There's no objective correct answer here. In theory, self-hosting is preferable as it means you don't share any data with third-parties (business associates), and thus you don't need to sign a BAA.
 
 But self-hosting also presents additional risks. You're wholly liable for ensuring your A/B testing infrastructure is secure, which can be challenging if you don't have the internal expertise to manage this. If this is the case, it may be better to rely on a HIPAA-compliant business associate who has experience hosting analytics at scale.
-
-### What's the difference between A/B and multivariate testing?
-
-**A/B testing** involves comparing the conversion rates of two or more different versions of the same page or user experience. Users are sent to one version or the other, and the outcomes are compared until a large enough sample has been achieved to measure the statistical significance of the results. A/B testing is sometimes called 'split testing' and you can test more than two pages, a process sometimes referred to as A/B/n testing.
-
-**Multivariate testing** is similar to A/B testing, but it tests more page elements together to understand how they interact with each other. One would, for example, use a multivariate test to compare all the possible combinations of three different page headlines and three different CTAs (call to actions) to see which performs best. The basic process is similar to an A/B test, but instead of comparing whole page designs, you're comparing specific elements to each other.
