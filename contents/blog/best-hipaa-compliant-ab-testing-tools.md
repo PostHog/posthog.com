@@ -19,17 +19,15 @@ What do Google Optimize, [Optimizely](/blog/posthog-vs-optimizely), Convert, and
 1. They're popular A/B testing tools
 2. None of them are HIPAA-compliant
 
-Anyone who develops a healthcare product or app will be painfully familiar with this problem. Most of the mainstream tools either won't support you, or will charge you a fortune to agree to signing a BAA (Business Associate Agreement).
+Anyone who develops a healthcare product or app will be painfully familiar with this problem. And, while it's tempting to make do without A/B testing for your product, that's a mistake. It's nearly impossible to eliminate second- and third-order effects without a robust testing system, and a good testing product will allow you to target specific user properties, so you get actionable results.
 
-While it's tempting to make do without experimentation capability in your stack, that's a mistake. It's nearly impossible to eliminate second- and third-order effects without a robust testing system, and a good testing product will allow you to target specific user properties, so you get actionable results.
-
-## HIPAA explained
+## What you need for HIPAA compliance
 
 HIPAA requires you to comply with the [Privacy Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/privacyrule/index.html) and the [Security Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/securityrule/index.html). Breaching either can result in hefty financial penalties, but for the sake of this guide we're mostly interested in how the Privacy Rule impacts analytics and A/B testing.
 
-Within the Privacy Rule framework, there are three different ways to comply with HIPAA when adopting user analytics and experimentation tools:
+There are three ways to comply with the Privacy rule when adopting analytics and testing tools:
 
-1. **Anonymize all PHI and identifiers:** This is an obvious starting point. There are two so-called '[De-identification Standards](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard)' – 'Expert Determination', where an expert verifies that data isn't personally identifiable; and 'Safe Harbor' where all 18 types of identifier are removed. The former is preferable simply because applying the Safe Harbor approach can render data effectively useless for analytical purposes.
+1. **Anonymize all PHI and identifiers:** There are two so-called "[De-identification Standards](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard)" – "Expert Determination," where an expert verifies that data isn't personally identifiable, and "Safe Harbor" where all 18 types of identifier are removed. The former is preferable simply because applying the Safe Harbor approach can render data effectively useless for analytical purposes.
 
 2. **Sign a BAA with a third-party tool:** You must sign a BAA with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also _any_ tools you use for importing and exporting data from your data warehouse.
 
@@ -39,28 +37,50 @@ These are the broad principles, but **please consult an expert** before making a
 
 ## The best HIPAA-compliant A/B testing tools
 
-### Kameleoon
+### 1. PostHog
+
+- **Product analytics:** <span className="text-green text-lg">✔</span>
+- **Web analytics:** <span className="text-green text-lg">✔</span>
+- **Session replay:** <span className="text-green text-lg">✔</span>
+- **Feature flags:** <span className="text-green text-lg">✔</span>
+- **A/B testing:** <span className="text-green text-lg">✔</span>
+- **Surveys:** <span className="text-green text-lg">✔</span>
+- **Self-hostable:** <span className="text-green text-lg">✔</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
+
+![PostHog](../images/screenshots/hogflix-dashboard.png)
+
+[PostHog](https://posthog.com/) is an open source all-in-one platform that combines A/B testing with product analytics, session replay, feature management, and user surveys – everything you need to understand user behavior. All these tools are seamlessly integrated and, because you get everything in one, you only need to sign one BAA for all your analytics needs.
+
+PostHog offers a BAA on its Teams plan, which starts at $450 and includes [generous monthly free allowances](/pricing), such as 1 million analytics events every month. You can also self-host the open-source edition for free, though this isn't recommended as it's provided without support or guarentee. 
+
+### 2. Kameleoon
+
+- **Product analytics:** <span className="text-red text-lg">✖</span>
+- **Web analytics:** <span className="text-red text-lg">✖</span>
+- **Session replay:** <span className="text-red text-lg">✖</span>
+- **Feature flags:** <span className="text-green text-lg">✔</span>
+- **A/B testing:** <span className="text-green text-lg">✔</span>
+- **Surveys:** <span className="text-red text-lg">✖</span>
+- **Self-hostable:** <span className="text-red text-lg">✖</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
 
 ![kameleoon](../images/blog/hipaa-compliant-ab-testing/kameleoon.png)
 
 Kameleoon is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), and feature flags for managing the rollout of new features and running tests. In addition to testing, it features a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
 
-#### Kameleoon and HIPAA compliance
+Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [state](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume.  
 
-- **Self-Hosting:** No
-- **BAA Available**: Yes
+### 3. VWO
 
-Kameleoon is a cloud-only service, but it will sign a BAA for use in healthcare products.
-
-What [Kameleoon says](https://www.kameleoon.com/en/health-insurance-portability-and-accountability-act-hipaa):
-
-> "Our technology platform is designed to meet the Act’s requirements in areas such as password expiry rules, secure data transfer and automatic logouts. We follow clear, transparent processes in how we handle and protect data and will sign Business Associate Agreements (BAA) as part of any agreement with clients."
-
-#### How much does Kameleoon cost?
-
-Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [state](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on depending on traffic volume.    
-
-### VWO
+- **Product analytics:** <span className="text-red text-lg">✖</span>
+- **Web analytics:** <span className="text-red text-lg">✖</span>
+- **Session replay:** <span className="text-red text-lg">✖</span>
+- **Feature flags:** <span className="text-green text-lg">✔</span>
+- **A/B testing:** <span className="text-green text-lg">✔</span>
+- **Surveys:** <span className="text-red text-lg">✖</span>
+- **Self-hostable:** <span className="text-red text-lg">✖</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
 
 ![vwo testing](../images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
 
@@ -129,4 +149,3 @@ But self-hosting also presents additional risks. You're wholly liable for ensuri
 **A/B testing** involves comparing the conversion rates of two or more different versions of the same page or user experience. Users are sent to one version or the other, and the outcomes are compared until a large enough sample has been achieved to measure the statistical significance of the results. A/B testing is sometimes called 'split testing' and you can test more than two pages, a process sometimes referred to as A/B/n testing.
 
 **Multivariate testing** is similar to A/B testing, but it tests more page elements together to understand how they interact with each other. One would, for example, use a multivariate test to compare all the possible combinations of three different page headlines and three different CTAs (call to actions) to see which performs best. The basic process is similar to an A/B test, but instead of comparing whole page designs, you're comparing specific elements to each other.
-
