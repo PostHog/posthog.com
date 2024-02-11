@@ -12,6 +12,7 @@ tags:
   - Growth  
 crosspost:
   - Founders
+  - Blog
 seo: {
   metaTitle: "Creating an Ideal Customer Profile transformed our company",
   metaDescription: "Learning how to create an ideal customer profile will transform every part of your business for the better. This is everything you need to know about the ICP framework."
