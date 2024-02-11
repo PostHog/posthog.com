@@ -8,7 +8,8 @@ tags:
   - Product engineers
   - Engineering
 crosspost:
-  - Product engineers  
+  - Product engineers
+  - Blog  
 ---
 
 PostHog was not created in a vacuum. The companies we admire shaped PostHog as a product, company, and organization. Looking at their journeys, and what they did differently, guided us to where we are today and continues to guide where we’re heading.

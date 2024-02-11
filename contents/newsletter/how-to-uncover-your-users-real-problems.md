@@ -8,7 +8,8 @@ tags:
   - Product engineers
   - Engineering
 crosspost:
-  - Product engineers  
+  - Product engineers 
+  - Blog 
 ---
 
 Users are like kids at Christmas. They say they really want this one thing, but that one thing won't keep them happy for long. 

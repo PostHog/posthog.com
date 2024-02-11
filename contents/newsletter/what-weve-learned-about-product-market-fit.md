@@ -8,7 +8,8 @@ tags:
   - Founders
   - Product-market fit
 crosspost:
-  - Founders   
+  - Founders
+  - Blog   
 ---
 
 It’s “the only thing that matters” according to Marc Andreessen, who [coined the term](https://pmarchive.com/guide_to_startups_part4.html).

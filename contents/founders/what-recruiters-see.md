@@ -7,7 +7,9 @@ featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
 tags:
   - Culture
-  - People  
+  - People
+crosspost:
+  - Blog      
 ---
 
 Last week we opened a new marketing role at PostHog, and we got 300 applicants in the first 2 days. This was high, but not unusual for a startup – my record is 900 in a day, but I bet folks working at giant companies like Google see way way more. Of these 300, 12 got an interview. 
