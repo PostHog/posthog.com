@@ -196,8 +196,21 @@ export default function Handbook({
         frontmatter,
         fields: { slug, contributors, appConfig },
     } = post
-    const { title, hideAnchor, hideLastUpdated, features, github, availability, installUrl, thumbnail, related, seo } =
-        frontmatter
+    const {
+        title,
+        description,
+        showTitle,
+        hideAnchor,
+        hideLastUpdated,
+        features,
+        github,
+        availability,
+        installUrl,
+        thumbnail,
+        crest,
+        related,
+        seo,
+    } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
@@ -281,9 +294,48 @@ export default function Handbook({
                     <section>
                         <div className="mb-8 relative">
                             <div className="flex items-center mt-0 flex-wrap justify-between">
-                                <div className="flex items-center space-x-2 mb-1">
+                                <div className="flex items-center space-x-2 mb-1 w-full">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
-                                    <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{title}</h1>
+                                    {showTitle && (
+                                        <div className="flex-1">
+                                            <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{title}</h1>
+                                            {description && (
+                                                <p className="italic opacity-75 leading-tight mt-1 mb-0">
+                                                    {description}
+                                                </p>
+                                            )}
+                                            {(!hideLastUpdated || filePath) && (
+                                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
+                                                    {!hideLastUpdated && (
+                                                        <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
+                                                            Last updated: <time>{lastUpdated}</time>
+                                                        </p>
+                                                    )}
+                                                    {!hideLastUpdated && filePath && (
+                                                        <span className="text-primary/30 dark:text-primary-dark/30">
+                                                            |
+                                                        </span>
+                                                    )}
+                                                    {filePath && (
+                                                        <Link
+                                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
+                                                            to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                                        >
+                                                            Edit this page
+                                                        </Link>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {crest ? (
+                                        <div className="w-64">
+                                            <GatsbyImage image={getImage(crest)} className="mix-blend-multiply" />
+                                        </div>
+                                    ) : (
+                                        ''
+                                    )}
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     {github && (
@@ -298,26 +350,6 @@ export default function Handbook({
                                     )}
                                 </div>
                             </div>
-                            {(!hideLastUpdated || filePath) && (
-                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
-                                    {!hideLastUpdated && (
-                                        <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
-                                            Last updated: <time>{lastUpdated}</time>
-                                        </p>
-                                    )}
-                                    {!hideLastUpdated && filePath && (
-                                        <span className="text-primary/30 dark:text-primary-dark/30">|</span>
-                                    )}
-                                    {filePath && (
-                                        <Link
-                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
-                                            to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                        >
-                                            Edit this page
-                                        </Link>
-                                    )}
-                                </div>
-                            )}
                         </div>
                         <div className="lg:hidden">
                             {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
@@ -393,6 +425,8 @@ export const query = graphql`
             }
             frontmatter {
                 title
+                description
+                showTitle
                 hideAnchor
                 hideLastUpdated
                 github
@@ -413,6 +447,11 @@ export const query = graphql`
                 thumbnail {
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE, width: 36)
+                    }
+                }
+                crest {
+                    childImageSharp {
+                        gatsbyImageData(placeholder: NONE, width: 512)
                     }
                 }
                 related {

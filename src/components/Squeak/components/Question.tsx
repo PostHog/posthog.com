@@ -249,7 +249,9 @@ export const Question = (props: QuestionProps) => {
                     </div>
                 )}
                 <div className={`flex flex-col w-full`}>
-                    <div className="flex items-center space-x-2 w-full">
+                    <div
+                        className={`flex items-center space-x-2 w-full ${!questionData.attributes.subject && '-mb-2'}`}
+                    >
                         <Profile
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
@@ -290,14 +292,16 @@ export const Question = (props: QuestionProps) => {
 
                     <div className={archived ? 'opacity-50' : ''}>
                         <div className="ml-5 pl-[30px] border-l border-light dark:border-dark">
-                            <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
-                                <Link
-                                    to={`/questions/${questionData.attributes.permalink}`}
-                                    className="no-underline font-semibold text-black dark:text-white hover:text-black dark:hover:text-white"
-                                >
-                                    {questionData.attributes.subject}
-                                </Link>
-                            </h3>
+                            {questionData.attributes.subject && (
+                                <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
+                                    <Link
+                                        to={`/questions/${questionData.attributes.permalink}`}
+                                        className="no-underline font-semibold text-black dark:text-white hover:text-black dark:hover:text-white"
+                                    >
+                                        {questionData.attributes.subject}
+                                    </Link>
+                                </h3>
+                            )}
 
                             <Markdown className="question-content">{questionData.attributes.body}</Markdown>
 

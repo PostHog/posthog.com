@@ -270,11 +270,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     </motion.div>
                 </div>
             </Modal>
-            <li
-                className={`px-4 py-4 sm:py-2 xl:pb-4 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm ${
-                    props?.className ?? ''
-                }`}
-            >
+            <li className={` ${props?.className ?? ''}`}>
                 <div className="sm:mt-2 flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4">
                     <div className="sm:flex-grow">
                         <h4 className="text-lg flex space-x-1 items-center !m-0">{title}</h4>
@@ -300,44 +296,71 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     )}
                 </div>
 
-                {githubPages && (
-                    <div className="hidden mt-4 mb-4">
-                        <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
-                        <div className="h-2 flex-grow bg-border dark:bg-border-dark rounded-md relative overflow-hidden">
-                            <div
-                                style={{ width: `${percentageComplete}%` }}
-                                className={`bg-[#3FB950] absolute inset-0 h-full`}
-                            />
+                <div className="px-4 py-4 sm:py-2 xl:pb-4 bg-accent dark:bg-accent-dark rounded-sm">
+                    {githubPages && (
+                        <div className="hidden mt-4 mb-4">
+                            <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
+                            <div className="h-2 flex-grow bg-border dark:bg-border-dark rounded-md relative overflow-hidden">
+                                <div
+                                    style={{ width: `${percentageComplete}%` }}
+                                    className={`bg-[#3FB950] absolute inset-0 h-full`}
+                                />
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {githubPages && more && (
-                    <ul className="list-none m-0 p-0 pb-4 grid gap-y-2 mt-4">
-                        {githubPages.map((page) => {
-                            return (
-                                <li key={page.title}>
-                                    <Link
-                                        to={page.html_url}
-                                        className="text-[14px] flex items-start font-semibold space-x-1 text-black dark:text-white leading-tight cta"
-                                    >
-                                        <span className="inline-block mt-.5">
-                                            {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
-                                        </span>
-                                        <span>{page.title}</span>
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                )}
-                {updates?.length > 0 ? (
-                    <button onClick={() => setModalOpen(true)} className="text-red dark:text-yellow font-bold my-2">
-                        {updates.length} team update{updates.length === 1 ? '' : 's'}
-                    </button>
-                ) : null}
+                    {githubPages && more && (
+                        <>
+                            <h6>Milestones</h6>
+                            <ul className="list-none m-0 p-0 pb-2 grid gap-y-2 mt-4">
+                                {githubPages.map((page) => {
+                                    return (
+                                        <li key={page.title}>
+                                            <Link
+                                                to={page.html_url}
+                                                className="text-[14px] flex items-start font-semibold space-x-1 text-black dark:text-white leading-tight cta"
+                                            >
+                                                <span className="inline-block mt-.5">
+                                                    {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
+                                                </span>
+                                                <span>{page.title}</span>
+                                            </Link>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </>
+                    )}
+                    {updates?.length > 0 ? (
+                        <>
+                            <h6>Project updates</h6>
+                            <ul className="list-none m-0 p-0 mb-6">
+                                {updates.map(
+                                    ({
+                                        attributes: {
+                                            question: {
+                                                data: { id },
+                                            },
+                                        },
+                                    }) => {
+                                        return (
+                                            <li className="mb-4 last:mb-0" key={id}>
+                                                <Question id={id} />
+                                            </li>
+                                        )
+                                    }
+                                )}
+                            </ul>
+                        </>
+                    ) : null}
+                </div>
                 <div className="sm:flex-[0_0_250px] xl:flex-1 flex sm:justify-end xl:justify-start">
                     <div className="mt-2 w-full">
+                        <h6 className="mb-0">Get updates</h6>
+                        <p className="!text-[15px] opacity-75 !leading-normal">
+                            Get email notifications when the team shares updates about this project, releases a beta, or
+                            ships this feature.
+                        </p>
                         {showAuth ? (
                             <>
                                 <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
