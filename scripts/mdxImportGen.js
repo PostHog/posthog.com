@@ -38,7 +38,7 @@ const generateFile = () => {
         componentNames.push(componentName)
     }
     imports += '\nexport const shortcodes = {\n\t' + componentNames.join(',\n\t') + '\n}'
-    fs.writeFileSync('./src/mdxGlobalComponents.js', imports)
+    fs.writeFileSync('./src/mdxGlobalComponents.ts', imports)
 }
 
 generateFile()
