@@ -53,7 +53,7 @@ Each plan also reflects the pain points a user would deal with at that stage too
 
 As you grow, it’s important not to drift from targeting your persona or to let teams’ understanding of it become corrupted. You need to constantly remind everyone in your company who you are building for and how your product meets their needs — otherwise you risk diluting your offering. 
 
-“When I joined Puzzle I was very happy to hear people talking about our ICP,” says Scott. “While there were still debates about some of the finer details and who some of the buyer personas may be, it was clear that our ICP was our guiding light.”
+“When I joined Puzzle I was very happy to hear people talking about our target persona,” says Scott. “While there were still debates about some of the finer details and who some of the buyer personas may be, it was clear that our target persona was our guiding light.”
 
 At PostHog, we’ve solved this issue with [a public handbook](/handbook) which documents [who we are building for](/handbook/who-we-are-building-for) — but Puzzle took a different approach.  
 
@@ -67,7 +67,7 @@ Once you’ve created your buyer persona you must constantly maintain it. You ne
 
 “While we knew we had some drop-off within our onboarding funnel, we wanted to ensure that we weren’t bringing high-intent new customers into a ‘leaky bucket’. We needed to ensure that people who completed onboarding could quickly see the value of Puzzle and activate. After digging into our data in Posthog we could see that our activation rate wasn’t what we needed it to be”, says Scott. “We reached out to these users directly and talked to them. We had to try and understand their concerns.”
 
-Scott’s team learned that customers were becoming frustrated by delays between completing onboarding and seeing their dashboard. As a result they brought users into the app as it was loading so they could quickly see what they were waiting for. This reduced time to value dramatically and was a clear example of an ICP-informed change which had an immediate impact on overall activation.
+Scott’s team learned that customers were becoming frustrated by delays between completing onboarding and seeing their dashboard. As a result they brought users into the app as it was loading so they could quickly see what they were waiting for. This reduced time to value dramatically and was a clear example of an persona-informed change which had an immediate impact on overall activation.
 
 > **Putting it into practice:** Data gathering and user interviews should be on-going processes for many teams. Otherwise how else can you know if [your new interface design](/blog/introducing-notebooks) is a good idea, or if your upcoming changes will be well received?
 
