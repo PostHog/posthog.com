@@ -865,9 +865,6 @@ export const companyMenu = {
             children: [
                 {
                     name: 'Small teams',
-                },
-                {
-                    name: 'Why small teams?',
                     url: '/teams',
                 },
                 {

@@ -145,26 +145,24 @@ export const Handbook: React.FC = () => {
             <SEO image="/images/handbook.png" title="Handbook - PostHog" />
 
             <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
-                <section className="max-w-4xl mx-auto">
+                <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
-                            <h1 className="font-bold text-5xl mb-6">Teams</h1>
+                            <h1 className="font-bold text-5xl mb-6">Small teams</h1>
                             <p className="opacity-60 ">
                                 We've organized the team into small teams that are multi-disciplinary and as
                                 self-sufficient as possible.
                             </p>
                             <p className="">
-                                <Link to="/handbook/company/small-teams)">
-                                    Learn more about why we have small teams
-                                </Link>
+                                <Link to="/handbook/company/small-teams">Learn more about why we have small teams</Link>
                             </p>
 
-                            <div className="grid grid-cols-3 gap-8 text-center">
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-6 text-center">
                                 {teams.map((team, index) => (
                                     <Link
                                         to={team.url}
                                         key={index}
-                                        className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px"
+                                        className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-2 md:p-4 hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px"
                                     >
                                         {/* <StaticImage src={team.image} alt={team.name} className="mix-blend-multiply" /> */}
                                         <StaticImage
@@ -172,7 +170,7 @@ export const Handbook: React.FC = () => {
                                             alt={team.name}
                                             className="mix-blend-multiply mb-2"
                                         />
-                                        <h3 className="text-lg">{team.name}</h3>
+                                        <h3 className="text-base md:text-lg">{team.name}</h3>
                                         <div className="flex justify-center">
                                             {team.people.map((person, personIndex) => (
                                                 <div
