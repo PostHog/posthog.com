@@ -247,6 +247,25 @@ function Parameters({ item, objects }) {
     )
 }
 
+function Security({ item }) {
+    const personaApiKeyScopes = item.security?.[0]?.['PersonalAPIKeyAuth']
+
+    return (
+        <>
+            {personaApiKeyScopes?.length && (
+                <div>
+                    <h4>Required API key scopes</h4>
+                    <div className='flex items-center gap-2'>
+                        {personaApiKeyScopes.map((x) => (
+                            <code key={x}>{x}</code>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </>
+    )
+}
+
 function RequestBody({ item, objects }) {
     const objectKey =
         item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
@@ -532,6 +551,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                             ? pathDescription(item)
                                             : item.description}
                                     </ReactMarkdown>
+                                    <Security item={item} objects={objects} />
                                     <Parameters item={item} objects={objects} />
 
                                     <RequestBody item={item} objects={objects} />
