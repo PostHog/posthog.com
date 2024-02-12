@@ -210,7 +210,7 @@ export const Card = ({ team, children }: { team: string; children: React.ReactNo
 }
 
 export const CardContainer = ({ children }: { children: React.ReactNode }) => {
-    return <ul className="list-none m-0 p-0 grid space-y-2">{children}</ul>
+    return <ul className="list-none m-0 p-0 flex flex-col gap-4 ">{children}</ul>
 }
 
 export default function Roadmap() {

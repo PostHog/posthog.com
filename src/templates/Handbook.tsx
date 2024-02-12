@@ -294,7 +294,7 @@ export default function Handbook({
                     <section>
                         <div className="mb-8 relative">
                             <div className="flex items-center mt-0 flex-wrap justify-between">
-                                <div className="flex items-center space-x-2 mb-1 w-full">
+                                <div className="flex flex-col-reverse md:flex-row md:items-center space-x-2 mb-1 w-full">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     {showTitle && (
                                         <div className="flex-1">

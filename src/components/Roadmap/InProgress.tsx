@@ -10,8 +10,9 @@ import useSWR from 'swr'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
 import Modal from 'components/Modal'
-import { IconX } from '@posthog/icons'
+import { IconInfo, IconX } from '@posthog/icons'
 import { motion } from 'framer-motion'
+import Tooltip from 'components/Tooltip'
 
 type RoadmapSubscriptions = {
     data: {
@@ -250,31 +251,32 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                                 <IconX className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
                             </button>
                         </div>
-                        <ul className="list-none m-0 p-0 mb-6">
-                            {updates.map(
-                                ({
-                                    attributes: {
-                                        question: {
-                                            data: { id },
-                                        },
-                                    },
-                                }) => {
-                                    return (
-                                        <li className="mb-4 last:mb-0" key={id}>
-                                            <Question id={id} />
-                                        </li>
-                                    )
-                                }
-                            )}
-                        </ul>
+                        <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
+                        <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                            <p className="text-sm mb-2">
+                                <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                            </p>
+
+                            <p className="text-sm mb-0">
+                                We suggest signing up with your personal email. Soon you'll be able to link your PostHog
+                                app account.
+                            </p>
+                        </div>
+
+                        <Authentication
+                            initialView="sign-in"
+                            onAuth={() => subscribe()}
+                            showBanner={false}
+                            showProfile={false}
+                        />
                     </motion.div>
                 </div>
             </Modal>
-            <li className={` ${props?.className ?? ''}`}>
-                <div className="sm:mt-2 flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4">
+            <li className={`py-2 ${props?.className ?? ''}`}>
+                <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 border border-light dark:border-dark rounded-md bg-accent dark:bg-accent-dark">
                     <div className="sm:flex-grow">
                         <h4 className="text-lg flex space-x-1 items-center !m-0">{title}</h4>
-                        <p className="m-0 text-[15px] opacity-80 inline">
+                        <p className="m-0 !text-[15px] !leading-none opacity-80 inline">
                             {more
                                 ? description
                                 : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
@@ -296,7 +298,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     )}
                 </div>
 
-                <div className="px-4 py-4 sm:py-2 xl:pb-4 bg-accent dark:bg-accent-dark rounded-sm">
+                <div className="px-4">
                     {githubPages && (
                         <div className="hidden mt-4 mb-4">
                             <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
@@ -312,7 +314,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     {githubPages && more && (
                         <>
                             <h6>Milestones</h6>
-                            <ul className="list-none m-0 p-0 pb-2 grid gap-y-2 mt-4">
+                            <ul className="list-none m-0 p-0 grid gap-y-2 mt-4">
                                 {githubPages.map((page) => {
                                     return (
                                         <li key={page.title}>
@@ -331,85 +333,77 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                             </ul>
                         </>
                     )}
-                    {updates?.length > 0 ? (
-                        <>
-                            <h6>Project updates</h6>
-                            <ul className="list-none m-0 p-0 mb-6">
-                                {updates.map(
-                                    ({
-                                        attributes: {
-                                            question: {
-                                                data: { id },
-                                            },
-                                        },
-                                    }) => {
-                                        return (
-                                            <li className="mb-4 last:mb-0" key={id}>
-                                                <Question id={id} />
-                                            </li>
-                                        )
+
+                    <div className="flex justify-between items-center">
+                        <h6>Project updates</h6>
+
+                        <div>
+                            {showAuth ? (
+                                <div onClick={() => setModalOpen(true)}>Get updates</div>
+                            ) : (
+                                <button
+                                    disabled={loading}
+                                    onClick={() => (subscribed ? unsubscribe() : subscribe())}
+                                    className="text-sm font-semibold flex gap-2 items-center"
+                                    data-attr={
+                                        subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`
                                     }
-                                )}
-                            </ul>
-                        </>
-                    ) : null}
-                </div>
-                <div className="sm:flex-[0_0_250px] xl:flex-1 flex sm:justify-end xl:justify-start">
-                    <div className="mt-2 w-full">
-                        <h6 className="mb-0">Get updates</h6>
-                        <p className="!text-[15px] opacity-75 !leading-normal">
-                            Get email notifications when the team shares updates about this project, releases a beta, or
-                            ships this feature.
-                        </p>
-                        {showAuth ? (
-                            <>
-                                <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
-                                <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                                    <p className="text-sm mb-2">
-                                        <strong>
-                                            Note: PostHog.com authentication is separate from your PostHog app.
-                                        </strong>
-                                    </p>
-
-                                    <p className="text-sm mb-0">
-                                        We suggest signing up with your personal email. Soon you'll be able to link your
-                                        PostHog app account.
-                                    </p>
-                                </div>
-
-                                <Authentication
-                                    initialView="sign-in"
-                                    onAuth={() => subscribe()}
-                                    showBanner={false}
-                                    showProfile={false}
-                                />
-                            </>
-                        ) : (
-                            <button
-                                disabled={loading}
-                                onClick={() => (subscribed ? unsubscribe() : subscribe())}
-                                className="flex border border-b-3 border-light dark:border-dark rounded gap-2 p-2 font-bold bg-white dark:bg-accent-dark text-red dark:text-yellow"
-                                data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
-                            >
-                                <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
-                                    {loading ? (
-                                        <Spinner className="w-[14px] h-[14px] !text-blue" />
-                                    ) : subscribed ? (
-                                        <Check className="w-[14px] h-[14px]" />
-                                    ) : (
-                                        <Plus className="w-[14px] h-[14px]" />
-                                    )}
-                                </span>
-                                <span>
-                                    {subscribed
-                                        ? 'Unsubscribe'
-                                        : betaAvailable
-                                        ? 'Get early access'
-                                        : 'Subscribe for updates'}
-                                </span>
-                            </button>
-                        )}
+                                >
+                                    <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
+                                        {loading ? (
+                                            <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                        ) : subscribed ? (
+                                            <Check className="w-[14px] h-[14px]" />
+                                        ) : (
+                                            <Plus className="w-[14px] h-[14px]" />
+                                        )}
+                                    </span>
+                                    <span>
+                                        {subscribed
+                                            ? 'Unsubscribe'
+                                            : betaAvailable
+                                            ? 'Get early access'
+                                            : 'Get updates about this project'}
+                                        {!subscribed && !betaAvailable && (
+                                            <Tooltip
+                                                content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                            ships this feature."
+                                                contentContainerClassName="max-w-xs"
+                                            >
+                                                <div className="inline-block relative">
+                                                    <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                                </div>
+                                            </Tooltip>
+                                        )}
+                                    </span>
+                                </button>
+                            )}
+                        </div>
                     </div>
+
+                    {updates?.length > 0 ? (
+                        <ul className="list-none m-0 p-0 mb-6">
+                            {updates.map(
+                                ({
+                                    attributes: {
+                                        question: {
+                                            data: { id },
+                                        },
+                                    },
+                                }) => {
+                                    return (
+                                        <li className="mb-4 last:mb-0" key={id}>
+                                            <Question id={id} />
+                                        </li>
+                                    )
+                                }
+                            )}
+                        </ul>
+                    ) : (
+                        <p className="!text-sm italic -mt-2">
+                            No updates yet. Engineers are currently hard at work, so check back soon!
+                        </p>
+                    )}
                 </div>
             </li>
         </>
