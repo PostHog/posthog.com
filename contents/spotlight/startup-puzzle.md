@@ -1,6 +1,6 @@
 ---
 title: "How Puzzle defined a buyer persona and built around it"
-date: 2024-02-01
+date: 2024-02-12
 author: ["joe-martin"]
 showTitle: true
 rootpage: /blog
