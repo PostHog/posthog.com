@@ -220,7 +220,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.ts && lint-staged"
+            "pre-commit": "lint-staged"
         }
     },
     "workspaces": [
