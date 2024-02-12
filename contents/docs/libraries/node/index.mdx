@@ -212,7 +212,7 @@ client.debug()
 
 ## Using in a short-lived process like AWS Lambda
 
-PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method .shutdownAsync which can be awaited and ensures the queued events are all flushed to the API.
+PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method `shutdownAsync()` which can be awaited and ensures the queued events are all flushed to the API.
 
 For example:
 
@@ -231,7 +231,7 @@ export const handler() {
   // So far 2 events are queued but not sent
 
   // Calling shutdown, flushed the queue but batched into 1 API call for maximum efficiency
-  await posthog.shutdownAsync()
+  await client.shutdownAsync()
 }
 ```
 
