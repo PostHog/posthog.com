@@ -2,7 +2,7 @@ import { GatsbyNode } from 'gatsby'
 import fetch from 'node-fetch'
 import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
-import { MenuBuilder } from 'redoc'
+import { ApiInfoModel, MenuBuilder, OpenAPIParser } from 'redoc'
 import type {
     MetaobjectsCollection,
     MetaobjectsReferencesEdge,
@@ -13,14 +13,17 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const { createNode } = actions
 
     const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
-    const api_endpoints = await fetch(openApiSpecUrl, {
+    const spec = await fetch(openApiSpecUrl, {
         headers: {
             'Accept': 'application/json',
         }
     }).then((res) => res.json())
 
-    console.log(api_endpoints)
-    const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
+    console.log(spec)
+
+    const parser = new OpenAPIParser(spec)
+    const menu = MenuBuilder.buildStructure(parser, {} as any)
+
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
     all_endpoints.forEach((endpoint) => {
         const node = {
@@ -45,10 +48,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         internal: {
             type: `ApiComponents`,
             contentDigest: createContentDigest({
-                components: api_endpoints.components,
+                components: spec.components,
             }),
         },
-        components: JSON.stringify(api_endpoints.components),
+        components: JSON.stringify(spec.components),
     })
 
     const postHogIssues = await fetch(
