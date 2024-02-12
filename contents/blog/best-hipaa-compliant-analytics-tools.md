@@ -51,6 +51,8 @@ Some analytics tools, such as Google Analytics, don't offer BAAs and are therefo
 - **Surveys:** <span className="text-green text-lg">✔</span>
 - **Customer data platform:** <span className="text-green text-lg">✔</span>
 
+#### Overview
+
 [PostHog](https://posthog.com/) is an open-source platform that combines product analytics, web analytics, session replay, feature flags, A/B testing, and user surveys into one platform. It gives you every tool you need to understand user behavior and, unlike typical analytics tools that rely on third-party integrations, all these tools work together seamlessly.
 
 Being an all-in-one platform has two further benefits:
@@ -69,6 +71,8 @@ A BAA is available on PostHog's [Teams plan](/pricing), which also includes prio
 
 ![Mixpanel - hipaa analytics tools](../images/blog/open-source-analytics-tools/mixpanel.png)
 
+#### Overview
+
 - **Product analytics:** <span className="text-green text-lg">✔</span>
 - **Web analytics:** <span className="text-green text-lg">✔</span>
 - **Session replay:** <span className="text-red text-lg">✖</span>
@@ -77,7 +81,7 @@ A BAA is available on PostHog's [Teams plan](/pricing), which also includes prio
 - **Surveys:** <span className="text-red text-lg">✖</span>
 - **Customer data platform:** <span className="text-red text-lg">✖</span>
 
-[Mixpanel](https://mixpanel.com/) is a pure product analytics tool for analyzing user funnels and behavior. It doesn't offer built-in tools for things like session replay, feature management, A/B testing, or user surveys, but it does have extensive integrations with third-party tools for these.
+[Mixpanel](https://mixpanel.com/) is a pure product analytics tool for analyzing user funnels and behavior. It doesn't offer built-in tools for things like session replay, feature management, A/B testing, or user surveys, but it does have extensive integrations with third-party tools for these. 
 
 #### Mixpanel and HIPAA compliance
 
@@ -92,6 +96,8 @@ A BAA is available on Mixpanel's Growth plan, which starts at $20 per month for 
 
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
+#### Overview
+
 - **Product analytics:** <span className="text-green text-lg">✔</span>
 - **Web analytics:** <span className="text-green text-lg">✔</span>
 - **Session replay:** <span className="text-red text-lg">✖</span>
@@ -100,7 +106,7 @@ A BAA is available on Mixpanel's Growth plan, which starts at $20 per month for 
 - **Surveys:** <span className="text-green text-lg">✔</span>
 - **Customer data platform:** <span className="text-red text-lg">✖</span>
 
-[Countly](https://countly.com) is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys.
+[Countly](https://countly.com) is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to mobile app analytics.
 
 #### Countly and HIPAA compliance
 
@@ -126,6 +132,8 @@ This makes Countly a good option if you'd prefer to self-host your analytics.
 - **Surveys:** <span className="text-red text-lg">✖</span>
 - **Customer data platform:** <span className="text-green text-lg">✔</span>
 
+#### Overview
+
 [Freshpaint](https://www.freshpaint.io/) isn't an analytics tool per se, it's more of an analytics event tracker and customer data platform (CDP) that's specifically designed for healthcare companies. 
 
 Freshpaint sits between data sources (e.g data warehouses) and third-party data destinations and ensures no PHI is passed between them. This means you can continue to use non-HIPAA compliant tools, such as Google Analytics, safe in the knowledge you're not accidentally passing PHI into them.
@@ -137,7 +145,7 @@ Freshpaint sits between data sources (e.g data warehouses) and third-party data 
 
 Freshpaint is a cloud-only product specifically designed for healthcare companies, so offers a BAA for HIPAA compliance.
 
-### 5. PiwikPRO
+### 5. Piwik PRO
 
 ![piwik pro](../images/blog/ga4-alternatives/piwik-pro.png)
 
@@ -149,18 +157,22 @@ Freshpaint is a cloud-only product specifically designed for healthcare companie
 - **Surveys:** <span className="text-red text-lg">✖</span>
 - **Customer data platform:** <span className="text-green text-lg">✔</span>
 
-PiwikPRO is a commercial analytics and customer data platform spun out of the open-source analytics tool, Matomo. As such, it's more a web analytics tool than other options in this list, though you can use it on mobile and web apps. Because it's based on Europe, PIWIKPro is popular among companies also seeking GDPR compliance – it has a built-in compliance manager to assist with this. 
+#### Overview
+
+Piwik PRO is a commercial analytics and customer data platform spun out of the open-source analytics tool, Matomo. As such, it's more a web analytics tool than other options in this list, though you can use it on mobile and web apps. Because it's based on Europe, Piwik PRO is popular among companies also seeking GDPR compliance – it has a built-in compliance manager to assist with this, too.
 
 #### PiwikPRO and HIPAA compliance
 
 - **Self-hostable:** <span className="text-green text-lg">✔</span>
 - **BAA available:** <span className="text-green text-lg">✔</span>
 
-It offers HIPAA compliance as part of its PRO Enterprise plan, either by signing a BAA or by self-hosting, giving you maximum flexibility.
+PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by signing a BAA or by self-hosting, giving you maximum flexibility.
 
 ### 6. Amplitude
 
 ![amplitude](../images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
+
+#### Overview
 
 - **Product analytics:** <span className="text-green text-lg">✔</span>
 - **Web analytics:** <span className="text-red text-lg">✖</span>
@@ -170,7 +182,7 @@ It offers HIPAA compliance as part of its PRO Enterprise plan, either by signing
 - **Surveys:** <span className="text-red text-lg">✖</span>
 - **Customer data platform:** <span className="text-green text-lg">✔</span>
 
-[Amplitude](https://amplitude.com) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but it also offers extras such as session replay, feature flags, and A/B testing.
+[Amplitude](https://amplitude.com) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but it also offers extras such as session replay, feature flags, and A/B testing. It also offers anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days".   
 
 #### Amplitude and HIPAA compliance
 
@@ -192,6 +204,8 @@ Amplitude offers a BAA, but doesn't stipulate the minimum terms for signing one 
 - **A/B testing:** <span className="text-red text-lg">✖</span>
 - **Surveys:** <span className="text-red text-lg">✖</span>
 - **Customer data platform:** <span className="text-red text-lg">✖</span>
+
+#### Overview
 
 [Heap](https://heap.io) is a product analytics tool that, like PostHog, Mixpanel and Amplitude, helps you understand user behavior using trends and funnel analysis. It also offers a basic session replay tool. Like Amplitude, it caters more to non-technical users, such as marketing and e-commerce teams focused on optimizing conversions.
 

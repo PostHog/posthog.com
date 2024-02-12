@@ -41,6 +41,8 @@ These are the broad principles, but **please consult an expert** before making a
 
 ![PostHog](../images/screenshots/ab-testing.png)
 
+#### Features
+
 - **Product analytics:** <span className="text-green text-lg">✔</span>
 - **Web analytics:** <span className="text-green text-lg">✔</span>
 - **Session replay:** <span className="text-green text-lg">✔</span>
@@ -50,6 +52,8 @@ These are the broad principles, but **please consult an expert** before making a
 - **Self-hostable:** <span className="text-green text-lg">✔</span>
 - **BAA available:** <span className="text-green text-lg">✔</span>
 
+#### Summary
+
 [PostHog](https://posthog.com/) is an open source all-in-one platform that combines A/B testing with product analytics, session replay, feature management, and user surveys – everything you need to understand user behavior. All these tools are seamlessly integrated and, because you get everything in one, you only need to sign one BAA for all your analytics needs.
 
 PostHog offers a BAA on its Teams plan, which starts at $450 and includes [generous monthly free allowances](/pricing), such as 1 million analytics events every month. You can also self-host the open-source edition for free, though this isn't recommended as it's provided without support or guarantee. 
@@ -57,6 +61,8 @@ PostHog offers a BAA on its Teams plan, which starts at $450 and includes [gener
 ### 2. Kameleoon
 
 ![kameleoon](../images/blog/hipaa-compliant-ab-testing/kameleoon.png)
+
+#### Features
 
 - **Product analytics:** <span className="text-red text-lg">✖</span>
 - **Web analytics:** <span className="text-red text-lg">✖</span>
@@ -67,6 +73,8 @@ PostHog offers a BAA on its Teams plan, which starts at $450 and includes [gener
 - **Self-hostable:** <span className="text-red text-lg">✖</span>
 - **BAA available:** <span className="text-green text-lg">✔</span>
 
+#### Summary
+
 [Kameleoon](https://vwo.com/) is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), and feature flags for managing the rollout of new features and running tests. In addition to testing, it has a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
 
 Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [reports](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume, making it a premium option.  
@@ -74,6 +82,8 @@ Kameleoon doesn't publish pricing publicly, but conversion optimization consulta
 ### 3. VWO
 
 ![vwo testing](../images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
+
+#### Features
 
 - **Product analytics:** <span className="text-red text-lg">✖</span>
 - **Web analytics:** <span className="text-green text-lg">✔</span>
@@ -84,6 +94,8 @@ Kameleoon doesn't publish pricing publicly, but conversion optimization consulta
 - **Self-hostable:** <span className="text-red text-lg">✖</span>
 - **BAA available:** <span className="text-green text-lg">✔</span>
 
+#### Summary
+
 [VWO](https://vwo.com/) is best known as an A/B testing platform for e-commerce websites and mobile apps, though it also offers basic session replay and analytics tools as part of its myriad pricing tiers. A/B testing features includes support for multi-armed bandit, a visual editor, and advanced targeting options, such as targeting based on screen resolution.
 
 Unlike most tools in this list, VWO charges separately for website and mobile apps based on monthly tracked users (MTUs) for both, so it can get expensive quickly if you need both. VWO offers a BAA when you pay for the Security Plus Add-on ($529 per month).
@@ -91,6 +103,8 @@ Unlike most tools in this list, VWO charges separately for website and mobile ap
 ### 4. LaunchDarkly
 
 ![LaunchDarkly mobile app A/B tests](../images/blog/best-mobile-app-ab-testing-tools/launch-darkly.png)
+
+#### Features
 
 - **Product analytics:** <span className="text-red text-lg">✖</span>
 - **Web analytics:** <span className="text-red text-lg">✖</span>
@@ -100,6 +114,8 @@ Unlike most tools in this list, VWO charges separately for website and mobile ap
 - **Surveys:** <span className="text-red text-lg">✖</span>
 - **Self-hostable:** <span className="text-red text-lg">✖</span>
 - **BAA available:** <span className="text-green text-lg">✔</span>
+
+#### Summary
 
 LaunchDarkly is primarily a feature management platform for controlling what users see and when, and managing the rollout of new features. However, it also offers an experimentation suite, albeit as a paid add-on.
 
