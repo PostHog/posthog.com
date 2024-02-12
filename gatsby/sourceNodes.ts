@@ -13,8 +13,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const { createNode } = actions
 
     const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
-    const api_endpoints = await fetch(openApiSpecUrl).then((res) => res.json())
+    const api_endpoints = await fetch(openApiSpecUrl, {
+        headers: {
+            'Accept': 'application/json',
+        }
+    }).then((res) => res.json())
 
+    console.log(api_endpoints)
     const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
     all_endpoints.forEach((endpoint) => {

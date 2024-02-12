@@ -82,7 +82,7 @@ docker run -it --rm \
 By default the app will load the schema from US cloud. You can override this to use your local `posthog` with an env var:
 
 ```
-POSTHOG_OPEN_API_SPEC_URL="http://localhost:8000/api/schema/" yarn start
+POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" yarn start
 ```
 
 
