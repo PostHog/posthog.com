@@ -1270,6 +1270,29 @@ export const docsMenu = {
                     icon: 'IconInfo',
                 },
                 {
+                    name: 'Admin',
+                    url: '/docs/admin',
+                    icon: 'IconHardDrive',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/admin',
+                        },
+                        {
+                            name: 'Organizations & projects',
+                            url: '/docs/admin/organizations-and-projects',
+                        },
+                        {
+                            name: 'Role-based access',
+                            url: '/docs/admin/role-based-access',
+                        },
+                        {
+                            name: 'SSO & SAML',
+                            url: '/docs/admin/sso',
+                        },
+                    ],
+                },
+                {
                     name: 'Data',
                     url: '/docs/data',
                     icon: 'IconHardDrive',
@@ -1313,10 +1336,6 @@ export const docsMenu = {
                         {
                             name: 'Sessions',
                             url: '/docs/data/sessions',
-                        },
-                        {
-                            name: 'Settings',
-                            url: '/docs/data/application-settings',
                         },
                         {
                             name: 'SSO & SAML',
