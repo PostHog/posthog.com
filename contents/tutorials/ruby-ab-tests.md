@@ -11,7 +11,9 @@ import EventsInPostHogDark from '../images/tutorials/ruby-ab-tests/events-dark.p
 import TestSetupLight from '../images/tutorials/ruby-ab-tests/experiment-setup-light.png'
 import TestSetupDark from '../images/tutorials/ruby-ab-tests/experiment-setup-dark.png'
 
-A/B tests help you improve your Ruby on Rails app by enabling you to compare the impact of changes on key metrics. To show you how to set one up on both the client and server side, we create a basic Rails app, add PostHog, create an A/B test, and implement the code for it.
+A/B tests help you improve your Ruby on Rails app by enabling you to compare the impact of changes on key metrics. 
+
+To show you how to set one up on both the client and server side, we create a basic Rails app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create a Rails app
 
@@ -45,7 +47,7 @@ Rails.application.routes.draw do
 end
 ```
 
-Run `rails server` and navigate to `http://localhost:3000` to see your app in action.
+Run `rails server` and navigate to `http://localhost:3000` to see our app in action.
 
 ![Basic Ruby app](../images/tutorials/ruby-ab-tests/basic-app.png)
 
@@ -103,7 +105,7 @@ To measure this, we [capture a custom event](/docs/product-analytics/capture-eve
 </script>
 
 <main>
-  <h1>Ruby A/B Tests</h1>
+  <h1>Rails A/B Tests</h1>
   <button id="main-cta" onclick="handleClick()">Click me</button>
 </main>
 ```
@@ -141,7 +143,7 @@ We'll show you how to implement both.
 
 ### Client-side rendering
 
-To implement the A/B test, we fetch the `my-cool-experiment` flag using [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) on a `DOMContentLoaded` event listener. Then, we update the button text based on whether the user is in the `control` or `test` variant of the experiment:
+To implement the A/B test, we fetch the `my-cool-experiment` flag using [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) in a `DOMContentLoaded` event listener. Then, we update the button text based on whether the user is in the `control` or `test` variant of the experiment:
 
 ```html file=app/views/pages/home.html.erb
 <script>
@@ -164,7 +166,7 @@ To implement the A/B test, we fetch the `my-cool-experiment` flag using [`postho
 </script>
 
 <main>
-  <h1>Ruby A/B Tests</h1>
+  <h1>Rails A/B Tests</h1>
   <button id="main-cta" onclick="handleClick()">Click me</button>
 </main>
 ```
@@ -183,6 +185,8 @@ To set this up, we must install and use [PostHog’s Ruby SDK](/libraries/ruby) 
 gem "posthog-ruby"
 ```
 
+Then `bundle install` to install the gem.
+
 Next, we create an initializer for our PostHog client. Create a new file in `config/initializers` called `posthog.rb`. Then, initialize PostHog in this file using your project API key and host:
 
 ```ruby file=config/initializers/posthog.rb
@@ -194,7 +198,7 @@ POSTHOG_CLIENT = PostHog::Client.new({
 })
 ```
 
-Then, we implement fetching the feature flag in our controller `app/controllers/pages_controller.rb` and pass the button text to the view:
+Then, we fetch the feature flag in our controller `app/controllers/pages_controller.rb` and set the button text using the value from it:
 
 ```ruby file=app/controllers/pages_controller.rb
 class PagesController < ApplicationController
@@ -226,7 +230,7 @@ Lastly, update our view to use the `@button_text` variable from the controller:
 </script>
 
 <main>
-  <h1>Ruby A/B Test</h1>
+  <h1>Rails A/B Test</h1>
   <button id="main-cta" onclick="handleClick()"><%= @button_text %></button>
 </main>
 ```
@@ -253,9 +257,9 @@ class PagesController < ApplicationController
         distinct_id = JSON.parse(cookies[cookie_key])['distinct_id']
         enabled_variant = POSTHOG_CLIENT.get_feature_flag('my-cool-experiment', distinct_id)
         if enabled_variant == 'control'
-          @button_text = 'Control Variant'
+          @button_text = 'Control variant'
         elsif enabled_variant == 'test'
-          @button_text = 'Test Variant'
+          @button_text = 'Test variant'
         end
       rescue => e
         @button_text = 'Error'
