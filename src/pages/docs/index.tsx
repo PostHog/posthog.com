@@ -15,7 +15,7 @@ const quickLinks = [
         icon: 'IconGraph',
         name: 'Product analytics',
         to: '/docs/product-analytics',
-        description: 'Better understand your users and build better products',
+        description: 'Understand your users and build better products',
         color: 'blue',
     },
     {
@@ -59,6 +59,13 @@ const quickLinks = [
         to: '/docs/data-warehouse',
         description: 'Extend PostHog by adding your own functionality',
         color: 'seagreen',
+    },
+    {
+        icon: 'IconGraph',
+        name: 'Web analytics',
+        to: '/docs/web-analytics',
+        description: 'Easily track the most common web metrics',
+        color: 'blue',
     },
 ]
 
