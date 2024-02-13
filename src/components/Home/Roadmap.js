@@ -52,7 +52,6 @@ const Roadmap = () => {
                         <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
                             <RoadmapItem>Interlinking session recording & analytics</RoadmapItem>
                             <RoadmapItem>SQL insights</RoadmapItem>
-                            <RoadmapItem>SOC 2 compliance</RoadmapItem>
                             <RoadmapItem>Dashboard templates</RoadmapItem>
                         </ul>
                     </RoadmapColumn>
