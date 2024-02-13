@@ -14,6 +14,7 @@ import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
+import Link from 'components/Link'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -130,6 +131,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
             <section className="grid article-content">
                 {Object.keys(changesByDate).map((date) => {
                     const nodes = changesByDate[date]
+                    console.log(nodes)
                     return (
                         <div key={date} id={slugify(dayjs(date).format('MMMM'))} className="flex gap-4">
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
@@ -155,8 +157,14 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                     </span>
                                                 </p>
                                             )}
-                                            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
-                                                {title}
+                                            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0 ">
+                                                <Link
+                                                    to={`./${dayjs(date).format('YYYY')}/${slugify(title, {
+                                                        lower: true,
+                                                    })}`}
+                                                >
+                                                    <h1 className="text-primary dark:text-white">{title}</h1>
+                                                </Link>
                                             </Heading>
                                             {teamName && (
                                                 <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>
