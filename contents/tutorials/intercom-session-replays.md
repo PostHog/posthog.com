@@ -51,7 +51,7 @@ To set up session replays, we install PostHog in our app. If you don't have a Po
 
 > **Important:** Make sure to enable "Record user sessions" in [your project settings](https://us.posthog.com/project/settings/project-replay).
 
-After doing this, install the `[posthog-js](https://www.posthog.com/docs/libraries/js)` SDK:
+After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 
 ```bash
 npm i posthog-js
