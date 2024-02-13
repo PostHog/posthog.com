@@ -53,7 +53,7 @@ export default function UpdateWrapper({
                     title,
                     body: description,
                     images: [],
-                    topic: topic?.id || undefined,
+                    topic: topic?.data || undefined,
                     team: teams?.data?.[0]?.id || undefined,
                     featuredImage: image?.data ? { file: null, objectURL: image.data.attributes.url } : undefined,
                     betaAvailable,
