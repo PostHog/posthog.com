@@ -46,11 +46,11 @@ class MyApp extends StatelessWidget {
       ],
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Posthog example app'),
+          title: Text('PostHog example app'),
         ),
         body: Center(
           child: FlatButton(
-            child: Text('TRACK ACTION WITH POSTHOG'),
+            child: Text('TRACK ACTION WITH PostHog'),
             onPressed: () async {
               await Posthog().capture(
                 eventName: 'ButtonClicked',
