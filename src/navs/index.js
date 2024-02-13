@@ -2501,10 +2501,6 @@ export const docsMenu = {
                             name: 'Filter Out',
                         },
                         {
-                            url: '/docs/cdp/first-time-event-tracker',
-                            name: 'First Time Event Tracker',
-                        },
-                        {
                             url: '/docs/cdp/property-filter',
                             name: 'Property Filter',
                         },
