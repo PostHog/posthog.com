@@ -39,6 +39,8 @@ posthog.onFeatureFlags(function () {
 
 ### Reloading feature flags
 
-Feature flag values are cached. If something changed with your user and you want to refetch their flag values, call `posthog.reloadFeatureFlags()`.
+Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
 
-
+```js-web
+posthog.reloadFeatureFlags()
+```
