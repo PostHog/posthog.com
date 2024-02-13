@@ -1,7 +1,6 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
-import { quickLinks as productAnalyticsLinks } from '../../pages/docs/product-analytics'
 import { quickLinks as featureFlagsLinks } from '../../pages/docs/feature-flags'
 import { quickLinks as experimentsLinks } from '../../pages/docs/experiments'
 import { quickLinks as sessionRecordingLinks } from '../../pages/docs/session-replay'
@@ -45,7 +44,7 @@ export const NextStep: React.FC<NextStepProps> = ({ title, url, links, children 
 
 export const ProductAnalytics = () => {
     return (
-        <NextStep title="Product Analytics" url="/docs/product-analytics" links={productAnalyticsLinks}>
+        <NextStep title="Product Analytics" url="/docs/product-analytics" links={[]}>
             <StaticImage
                 alt=""
                 placeholder="none"
