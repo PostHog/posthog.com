@@ -26,7 +26,7 @@ Every time a user loads a screen, we send a request in the background to fetch t
 
 This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
 
-To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
+To handle this, you can use the `didReceiveFeatureFlags` notification to wait for the feature flag request to finish:
 
 ```swift
 // Before SDK initialization
