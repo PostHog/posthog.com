@@ -1357,6 +1357,30 @@ li.squeak-left-border {
     pre {
         @apply text-base my-3 overflow-scroll p-4 text-[15px];
     }
+
+    h1 {
+        @apply text-xl;
+    }
+
+    h2 {
+        @apply text-lg;
+    }
+
+    h3 {
+        @apply text-base;
+    }
+
+    h4 {
+        @apply text-[15px];
+    }
+
+    h5 {
+        @apply text-sm;
+    }
+
+    h6 {
+        @apply text-[13px];
+    }
 }
 
 .question-table-body-container {
