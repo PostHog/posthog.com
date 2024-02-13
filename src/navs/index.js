@@ -1379,10 +1379,6 @@ export const docsMenu = {
                     name: 'Notebooks',
                     url: '/docs/notebooks',
                     icon: 'IconBook',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Toolbar',
