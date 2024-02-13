@@ -14,6 +14,7 @@ import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
+import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -32,7 +33,6 @@ const Select = ({ onChange, values, ...other }) => {
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                             {({ selected }) => {
-                                console.log(other.value, value.label)
                                 return (
                                     <li
                                         className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
@@ -139,7 +139,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                 </div>
                             </div>
                             <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
-                                {nodes.map(({ description, media, topic, teams, title, cta }) => {
+                                {nodes.map(({ description, media, topic, teams, title, cta, strapiID }) => {
                                     const team = teams?.data[0]
                                     const topicName = topic?.data?.attributes.label
                                     const teamName = team?.attributes?.name
@@ -155,40 +155,49 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                     </span>
                                                 </p>
                                             )}
-                                            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
-                                                {title}
-                                            </Heading>
-                                            {teamName && (
-                                                <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>
-                                            )}
-                                            {mediaURL && (
-                                                <div className="my-4">
-                                                    {media?.data?.attributes?.mime === 'video/mp4' ? (
-                                                        <ZoomImage>
-                                                            <video
-                                                                className="max-w-2xl w-full"
-                                                                src={mediaURL}
-                                                                autoPlay
-                                                                loop
-                                                                muted
-                                                                playsInline
-                                                            />
-                                                        </ZoomImage>
-                                                    ) : (
-                                                        <ZoomImage>
-                                                            <img src={mediaURL} className="max-w-2xl w-full" />
-                                                        </ZoomImage>
-                                                    )}
+                                            <UpdateWrapper
+                                                status="complete"
+                                                formClassName="mt-8"
+                                                editButtonClassName="absolute bottom-0 right-0"
+                                                id={strapiID}
+                                            >
+                                                <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
+                                                    {title}
+                                                </Heading>
+                                                {teamName && (
+                                                    <p className="m-0 text-sm opacity-60 font-semibold">
+                                                        {teamName} Team
+                                                    </p>
+                                                )}
+                                                {mediaURL && (
+                                                    <div className="my-4">
+                                                        {media?.data?.attributes?.mime === 'video/mp4' ? (
+                                                            <ZoomImage>
+                                                                <video
+                                                                    className="max-w-2xl w-full"
+                                                                    src={mediaURL}
+                                                                    autoPlay
+                                                                    loop
+                                                                    muted
+                                                                    playsInline
+                                                                />
+                                                            </ZoomImage>
+                                                        ) : (
+                                                            <ZoomImage>
+                                                                <img src={mediaURL} className="max-w-2xl w-full" />
+                                                            </ZoomImage>
+                                                        )}
+                                                    </div>
+                                                )}
+                                                <div className="mt-2">
+                                                    <Markdown>{description}</Markdown>
                                                 </div>
-                                            )}
-                                            <div className="mt-2">
-                                                <Markdown>{description}</Markdown>
-                                            </div>
-                                            {cta && (
-                                                <CallToAction type="secondary" size="md" to={cta.url}>
-                                                    {cta.label}
-                                                </CallToAction>
-                                            )}
+                                                {cta && (
+                                                    <CallToAction type="secondary" size="md" to={cta.url}>
+                                                        {cta.label}
+                                                    </CallToAction>
+                                                )}
+                                            </UpdateWrapper>
                                         </li>
                                     )
                                 })}
@@ -205,6 +214,7 @@ export const query = graphql`
     query ChangelogQuery($year: Int!) {
         allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year }, complete: { eq: true } }) {
             nodes {
+                strapiID
                 date
                 description
                 media {

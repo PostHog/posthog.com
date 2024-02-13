@@ -235,6 +235,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             const date = dateCompleted || projectedCompletion
 
             const data = {
+                strapiID: id,
                 date,
                 media: image,
                 type: category,
