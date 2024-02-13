@@ -119,17 +119,14 @@ export const DocsIndex = () => {
                             </CallToAction>
                         </div>
                         <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                            <h3 className="text-xl mb-2">Apps</h3>
+                            <h3 className="text-xl mb-2">Templates</h3>
                             <p className="text-[15px]">
-                                Extend functionality with third-party apps that integrate into the PostHog ecosystem.
+                                Instantly collect data and feedback with dashboard and survey templates.
                             </p>
                             <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
-                                <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
-                                    Explore
+                                <CallToAction to="/templates" type="outline" size="md" className="!w-full sm:!w-auto">
+                                    Browse templates
                                 </CallToAction>
-                                <Link to="/apps" className="text-sm">
-                                    Browse apps
-                                </Link>
                             </div>
                         </div>
                         <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
