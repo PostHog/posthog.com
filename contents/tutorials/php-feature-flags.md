@@ -157,7 +157,7 @@ When you restart your app and refresh the page, you should see the text updated 
 
 ## 5. Include the flag when capturing your event
 
-To ensure any captured events are associated with the correct flag value, we need to [include our flag information when capturing](/docs/libraries/php#step-2-include-feature-flag-information-when-capturing-events) them. This enables us to breakdown [insights](https://posthog.com/docs/product-analytics/insights) by feature flag value.
+To ensure any captured events are associated with the correct flag value, we need to [include our flag information when capturing](/docs/libraries/php#step-2-include-feature-flag-information-when-capturing-events) them. This enables us to breakdown [insights](/docs/product-analytics/insights) by feature flag value.
 
 To do this for our `$pageview` event, we add the [`$feature/my-cool-flag`](/docs/libraries/php#step-2-include-feature-flag-information-when-capturing-events) key to our event properties when capturing:
 
