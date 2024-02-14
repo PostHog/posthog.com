@@ -26,44 +26,55 @@ availability:
             enterprise: true
 ---
 
-If you want to make it really easy for your users to log in, or have some compliance requirements around user access/provisioning, you can add one-click login with single sign-on (SSO). We also allow just-in-time provisioning of users, which means that your team members can create their account self-serve (see below), and enforcing log in through an SSO provider to fit all your compliance / IT needs.
+SSO makes loggin in easier for users to log and compliance easier for administrators.
 
-Some SSO features may not be available in all plans, please review each section below for details.
+We also allow support just-in-time provisioning of users, which means that team members can self-serve creating their account self-serve, while still enforcing log in through a specified SSO provider. 
 
-### Authentication domains
+Some SSO features are add ons. Please review each section below for details.
+
+## Authentication domains
 
 SSO configuration mostly occurs in your Organization settings and is based on authentication domains. You need to have a verified authentication domain in order to set Just-in-time provisioning, SSO enforcement and [SAML](#saml) configuration.
 
-Authentication domains need to be verified if you are on PostHog Cloud. If you are self-hosting you don't need to worry about domain verification.
+Authentication domains need to be verified if you are on PostHog Cloud.
 
-To add an Authentication domain, go to your Organization settings (`/organization/settings#authentication-domains`).
+To add an Authentication domain, go to your [Organization settings](https://us.posthog.com/settings/organization-authentication).
 
-![Screenshot: Authentication domains](../../images/features/sso/authentication-domains.png)
+Authentication domains must be verified in PostHog Cloud. We do this through DNS verification. You will have to add a `TXT` record to your DNS zone with a specific value to prove you have authority over the domain. Verification only needs to be done once, but **the record must be kept at all times,** as we do periodic DNS verification.
 
-For security purposes and to prevent misuse, Authentication domains must be verified in PostHog Cloud. We do this through DNS verification. You will have to add a `TXT` record to your DNS zone with a specific value so you can prove you have authority over the domain. Verification only needs to be done once, but **the record must be kept at all times,** as we do periodic DNS verification.
-
-Adding a TXT record depends on your DNS provider (e.g. Cloudflare, Google Domains, ...) and your provider should provide simple instructions on how to add the required record. The record should look as follows:
+Adding a `TXT` record depends on your DNS provider (e.g. Cloudflare, Google Domains, ...) and your provider should provide simple instructions on how to add the required record. The record should look as follows:
 
 1. Select **TXT** for the record type.
+
 2. The Name/Host/Alias field should be `_posthog-challenge.yourdomain.com.` where `yourdomain.com` is your actual domain name. Some DNS providers may require the dot in the end or not, and some providers may auto-populate your domain name.
+
 3. The value of the record is provided in the domain verification screen (e.g. `lRk16Vtg7PJdcltYlCPq07vd7vwu7t`)
+
 4. The time-to-live (TTL) should be the default or `3600`.
 
-### Just-in-time user provisioning
+## Just-in-time user provisioning
 
 <FeatureAvailability availability={_frontmatter.availability.features.jitUserProvisioning} />
 
-When enabled, just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. For self-hosted, this is any provider you configured; for Cloud this is GitHub, GitLab, Google, and SAML if you configured it.
+Just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. PostHog Cloud supports GitHub, GitLab, Google, and SAML if you have configured it.
 
-To enable just-in-time user provisioning, navigate to 'Authentication domains' in your Organization settings (accessible via the account settings menu in the top-right) and use the 'Enable automatic provisioning' toggle.
+To enable just-in-time user provisioning, navigate to Authentication domains in your Organization settings and use the 'Enable automatic provisioning' toggle.
 
-### SSO enforcement
+## SSO enforcement
 
 <FeatureAvailability availability={_frontmatter.availability.features.ssoEnforcement} />
 
-You may want to force users log in and/or sign up to your organization using a specific SSO provider. When this is enabled, users will not be able to log in using a password, nor request password resets, and will only be able to use the provider you specified. This will apply for administrators and organization owners too. Please be sure your SSO configuration works correctly before enabling this.
+You may want to force users log in and/or sign up to your organization using a specific SSO provider. 
 
-Please be aware if you enable SSO enforcement for a particular domain, any user who signs up or logs in with an email address on that domain will be required to use the SSO provider you enforced. This applies to existing users too and users not in your organization.
+When SSO enforcement is enabled, users cannot:
+
+1. Log in using a password
+2. Request password resets
+3. Use any SSO provider other than the one specified
+
+This applies to administrators and organization owners, too. Please be sure your SSO configuration works correctly before enabling this.
+
+If you enable SSO enforcement for a particular domain, any user who signs up or logs in with an email address on that domain will be required to use the SSO provider you enforced. This applies to existing users too and users not in your organization.
 
 You can enable SSO enforcement through Authentication domains in your Organization settings.
 
@@ -71,7 +82,7 @@ You can enable SSO enforcement through Authentication domains in your Organizati
 
 PostHog currently supports GitHub, GitLab and Google as SSO providers. All providers are available and readily configured on PostHog Cloud.
 
-This section contains instructions on how to configure each provider in your self-hosted instance. All the providers in this section (i.e. everything except SAML) is **configured instance-based**. SAML is configured domain-based (see [SAML](#saml) below).
+This section contains instructions on how to configure each provider in your self-hosted instance. All the providers in this section (i.e. everything except SAML) is **configured instance-based**. SAML is configured domain-based.
 
 Looking for a provider that's not here? [Reach out to us](https://posthog.com/support), we might be able to help.
 
@@ -123,13 +134,17 @@ Looking for a provider that's not here? [Reach out to us](https://posthog.com/su
 To set up Google SSO please follow these instructions:
 
 1. Go to the "Google Developer Console" at <a href="https://console.cloud.google.com/apis/dashboard" target="_blank" rel="noopener noreferrer">https://console.cloud.google.com/apis/dashboard</a>. Be sure to select the proper Google account and the right project for your app (or create one if you don't have it).
+
 2. Navigate to the [Credentials](https://console.cloud.google.com/projectselector2/apis/credentials) section.
+
 3. Click on "Create credentials" and select "OAuth client ID" to generate your credentials.
     - On Application Type select "Web application" and enter a meaningful name (e.g. PostHog Self-hosted).
     - On the "Authorized JavaScript origins" section add the root domain (with protocol) for your PostHog instance (e.g. `https://us.posthog.com`)
     - On the "Authorized redirect URIs" section add the following URI (**replace with your hostname**): `https://{hostname}/complete/google-oauth2/`.
     - Click on Save.
+
 4. You will now get a "Client ID" and "Client secret". Set those as [environment variables](/docs/self-host/configure/environment-variables) `SOCIAL_AUTH_GOOGLE_OAUTH2_KEY` and `SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET` respectively.
+
 5. **Additional**. If this is your first time setting SSO for this project, you may need to set up some additional configuration for your OAuth Consent Screen. We **highly recommend you only enable internal access** (if it makes sense for you), as it'll make things more secure and the verification process faster. Check out <a href="https://support.google.com/cloud/answer/10311615" target="_blank" rel="noopener noreferrer">Google's official docs</a> to learn more.
 
 ## SAML
@@ -147,8 +162,11 @@ PostHog supports multi-tenant SAML, which means you can have multiple SAML authe
 When using SAML to authenticate your users in PostHog there are a few considerations to keep in mind. Please make sure to read them to avoid any security issues.
 
 1. **Only use SAML with identity providers that validate the user's email address** or in a context where you control a user's email address. When first logging in, we use the email address that the IdP passes to associate with a user. If a user can spoof their email address with your IdP, they'll be able to impersonate your users.
+
 2. Enabling or enforcing **SAML login will not disable Personal API Key usage**. This means that even users can always create a Personal API Key and use it instead of SAML authentication (API-only, not for the app).
+
 3. Our SAML integration only handles authentication and automatic user provisioning. If you remove a user from your IdP, their account will not be removed or disabled from PostHog, they might just be unable to log in (depending on your configuration).
+
 4. When you enable or enforce SAML, any existing user passwords are preserved. This means if you ever want to go back (or something breaks down with your authentication), you can just stop enforcing SAML and you'll be able to log in with your existing credentials.
 
 ### Setting up SAML
@@ -156,11 +174,14 @@ When using SAML to authenticate your users in PostHog there are a few considerat
 For SAML to work your IdP and PostHog (SP) need to exchange information. To do this, you need to configure some settings in your IdP and on PostHog. Depending on your IdP you might need to pass PostHog information first, or the other way around. We provide complete examples for OneLogin and Okta below, but the general flow is:
 
 1. If you are on self-hosted, make sure you have properly set up your `SITE_URL` [environment variable][env-vars] configuration.
+
 2. If you are on self-hosted, you will need to be running your PostHog instance over TLS.
+
 3. Register a new SAML 2.0 application with your IdP. If you need to pass PostHog's information to your provider first, set the following values below (alternatively if your IdP supports it, you can obtain our XML metadata from `<yourdomain>/api/saml/metadata/`)
     - **Single Sign On URL** (also called ACS Consumer URL): `<yourdomain>/complete/saml/` or `https://us.posthog.com/complete/saml/` for PostHog Cloud US or `https://eu.posthog.com/complete/saml/` for PostHog Cloud EU.
     - **Audience or Entity ID**: _Your Site URL_ value (verbatim), on PostHog Cloud this is `https://us.posthog.com` or `https://eu.posthog.com`
     - **RelayState**: On PostHog cloud, get your RelayState value from the SAML configuration modal in your PostHog Organization settings. For self hosted, _empty or default_ (will be set on every request).
+
 4. For SAML to work properly with PostHog, we need to receive at least the following information from your IdP in the SAML assertion payload: ID, email and first name. Optionally, you can also pass the last name. By default, PostHog expects these attributes with a certain name.
 
 <table>
@@ -223,19 +244,24 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
 You can quickly connect OneLogin and PostHog by using the prebuilt integration.
 
 1. In OneLogin admin, go to Applications and click on "Add App". Search for "PostHog" and create your app.
-1. Go to the "Configuration" tab and where it says "PostHog domain name" enter your PostHog's instance domain (as it's also specified in the `SITE_URL` [environment variable][env-vars]), **but don't include any protocol or trailing slashes.** Examples: `playground.posthog.com`, `myposthog.mydomain.com`, `myposthogdomain.com`.
-1. Go to the "SSO" tab. This is where you'll obtain the information you need to pass to PostHog.
+
+2. Go to the "Configuration" tab and where it says "PostHog domain name" enter your PostHog's instance domain (as it's also specified in the `SITE_URL` [environment variable][env-vars]), **but don't include any protocol or trailing slashes.** Examples: `playground.posthog.com`, `myposthog.mydomain.com`, `myposthogdomain.com`.
+
+3. Go to the "SSO" tab. This is where you'll obtain the information you need to pass to PostHog.
     - "Issuer URL" needs to be set as SAML Entity ID.
     - "SAML 2.0 Endpoint (HTTP)" needs to be set as SAML ACS URL.
     - On "X.509 Certificate" click on "View Details". Copy the full certificate and set it as SAML X.509 certificate.
-1. You're good to go! Click on the "Login with SSO" in PostHog's login page.
+
+4. You're good to go! Click on the "Login with SSO" in PostHog's login page.
 
 #### OneLogin advanced
 
 Use this option if you want to add additional configurations to your app that are not supported with the default app catalog.
 
 1. In OneLogin admin, go to Applications and click on "Add App".
+
 2. Search for "SAML" and select "SAML Custom Connector (Advanced)". Set name to "PostHog".
+
 3. Go to the "Configuration" tab and edit the following attributes (leave everything else as default)
     - Audience (EntityID): enter `https://us.posthog.com`.
       - If you are using our EU deployment, use `https://eu.posthog.com`.
@@ -244,20 +270,25 @@ Use this option if you want to add additional configurations to your app that ar
     - ACS (Consumer) URL: Set to `https://us.posthog.com/complete/saml/`.
       - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
       - If you are self-hosting, use `<yourdomain>/complete/saml/`.
+
 4. Go to the "Parameters" tab. You will add the following parameters. **Be sure to check "Include in SAML assertion"**.
     - `email` to match the user's email ("Email")
     - `first_name` to match the user's first name ("First Name")
     - `last_name` to match the user's last name ("Last Name")
+
 5. Go to the "SSO" tab. This is where you'll obtain the information you need to pass to PostHog.
     - "Issuer URL" needs to be set as SAML Entity ID.
     - "SAML 2.0 Endpoint (HTTP)" needs to be set as SAML ACS URL.
     - On "X.509 Certificate" click on "View Details". Copy the full certificate, removing the first and last lines and set it as SAML X.509 certificate.
+
 6. You're good to go! Click on "Login with SSO" in the login page.
 
 ### Example: Okta
 
 1. In Okta admin, go to Applications and click on "Create App Integration".
+
 2. Select the "SAML 2.0" option. In the next step, set "PostHog" as the name.
+
 3. Fill in the following attributes in the SAML settings. Do not click next yet.
     - In "Single sign on URL" enter `https://us.posthog.com/complete/saml/`.
       - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
@@ -266,16 +297,20 @@ Use this option if you want to add additional configurations to your app that ar
       - If you are using our EU deployment, use `https://eu.posthog.com`.
       - If you are self-hosting, enter the exact same value as your `SITE_URL` environment variable.
 4. In the Default Relay State field, enter the RelayState value you obtain from your [PostHog Organization Settings page](https://us.posthog.com/organization/settings) in the SAML configuration modal.
+
 5. In the "Attribute Statements" section, add the following attributes:
     - `email` with value `user.email`
     - `first_name` with value `user.firstName`
     - `last_name` with value `user.lastName`
     - Permanent ID is not required as Okta sends this automatically.
+
 6. In the final step select the option "I'm an Okta customer adding an internal app".
+
 7. Navigate now to the "Sign On" tab of the application and click on "View Setup Instructions". This is where you'll obtain the information you need to pass to PostHog.
     - "Identity Provider Single Sign-on URL" needs to be set as SAML ACS URL.
     - "Identity Provider Issuer" needs to be set as SAML Entity ID (use the complete URL).
     - "X.509 Certificate" needs to be set as SAML X.509 certificate.
+    
 8. You're good to go! Click on "Login with SSO" in the login page.
 
 [env-vars]: /docs/self-host/configure/environment-variables

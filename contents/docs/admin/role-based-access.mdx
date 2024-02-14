@@ -1,5 +1,5 @@
 ---
-title: Role based access
+title: Role-based access
 sidebar: Docs
 showTitle: true
 availability:
@@ -8,20 +8,21 @@ availability:
     enterprise: full
 ---
 
-PostHog gives you tools for feature access control and team member groupings with role based access inside of PostHog.
+> Roles-based access is only available on our Enterprise plan. See the [pricing page](/pricing) for more details.
 
-## Organizational defaults
+## Organization defaults
 
-By default, team members in your organization have view and edit access to all resource features (feature flags, experiments, session recordings).
+By default, team members in your organization have view and edit access to all resource features – i.e. feature flags, experiments, session recordings.
 
-These can be changed under organization settings -> role based access tab. You can set organizational defaults to just "view only" and restrict edit access to certain features.
+These can be changed on the [role-based access settings page](https://us.posthog.com/settings/organization-rbac). You can set organizational defaults to just "view only" and restrict edit access to certain features.
 
 ## Roles
 
-Roles are groupings of team members. You can assign a member to multiple roles. 
+Roles are groupings of team members. You can assign a member to multiple roles.
+
 For more granularity, you can also define whether a role has view or edit access per resource.
 
-Only organization members with admin+ access level can create or edit roles.
+Only organization members with admin or owner level access can create or edit roles.
 
 ## Resources
 
@@ -29,12 +30,6 @@ Resources are PostHog features. These include but are not limited to feature fla
 
 Resources that you create will always be viewable and editable. Access control restricts editing for resources that you don't own.
 
-## Custom edit access per resource
+### Editing access per resource
 
-For even more granularity, you may set only certain individual resources to be editable by certain roles. You can set these on the resource itself.
-
-For example, say I have a feature flag "top-secret" that I only want the "product" team role to have edit access for. By default the product team role only has view access to feature flags.
-
-In this case, I'll set the organization default to "view only", and then add the product team role to top-secret flag, which ensures they can edit the flag, despite having only view access as the role default for all feature flags.
-
-> **Note:** Roles based access is an enterprise offering. To use this feature, [the enterprise package should be added on.](/pricing).
+You can also override the default access settings for a specific resource. This allows you to give edit access to a specific feature flag, for example, to a team role that normally has "view only"

@@ -24,20 +24,17 @@ availability:
             enterprise: true
 ---
 
-PostHog gives you tools for data access control and logical separation of data: organizations and projects.
+> Multiple organizations and projects aren't available on open source hobby deployments
 
 ## Organizations
 
 An organization is the highest abstraction level within a PostHog instance. It's made up of projects (see more on them [below](#projects)) and members.
+
 Most commonly a PostHog organization represents a real-world company or other type of isolated grouping.
 
 To switch between organizations, to open the current organization's settings, or to create a new organization, use the account dropdown on the right of the top bar.
 
-### Multiple organizations
-
-As a PostHog Cloud user, you can create, manage, and join organizations without limits. For self-hosted see details below.
-
-<FeatureAvailability availability={_frontmatter.availability.features.multipleOrgs} />
+PostHog Cloud users can create, manage, and join organizations without limits.
 
 ### Notifications
 
@@ -64,7 +61,7 @@ Every new organization (including the one created for you on account creation) c
 
 To switch between projects, navigate to project settings, or create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
 
-### Ways of organizing projects
+### How to organize projects
 
 For most companies, we recommend creating **three projects**:
 1. Local Development - when you're running the app on your own device
@@ -73,40 +70,34 @@ For most companies, we recommend creating **three projects**:
 
 This way you can test out analytics in development and staging environments, while keeping that test data separate from production.
 
-Even if you have multiple customer-facing products e.g. a marketing website + iOS app + web app, it works best to have them share the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place. 
+We also **strongly recommend** keeping your apps and marketing website on the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place.
 
-However, if have products that are fully siloed with unliked authentication systems you will likely want to create separate projects for them. For example, if you have an admin app that should be a separate project from your customer-facing products.
-
-### Multiple projects
-
-<FeatureAvailability availability={_frontmatter.availability.features.multipleProjects} />
+It's best to use separate projects for:
+- Apps that are entirely separate products with unlinked authentication systems
+- Admin apps that aren't customer-facing products
+- Internal websites and services
 
 ## Permissions
 
 By default all organization members have access to all its projects. Their permissions are then dictated by their organization-wide access level.
 
-This makes for the smoothest collaboration. However, if you require access to data to be more granular, see [private projects](#private-projects).
+This is best for collaboration, but see [private projects](#private-projects) if you require more granular control.
 
 ### Access levels
 
-<FeatureAvailability availability={_frontmatter.availability.features.accessLevels} />
-
-There are three access levels in PostHog: Member, Administrator, and Owner.
-Please note that an organization must have one and only one Owner.
-
-See permissions at each level below:
+There are three access levels in PostHog: Member, Administrator, and Owner. An organization must have one and only one Owner.
 
 |                                                                                       | Member (base level) | Administrator | Owner |
 | ------------------------------------------------------------------------------------- | ------------------- | ------------- | ----- |
-| Viewing and querying project data                                                     | ✅                  | ✅            | ✅    |
-| Inviting new members                                                                  | ✅                  | ✅            | ✅    |
-| Billing management                                                                    | ✅                  | ✅            | ✅    |
-| Project creation and deletion                                                         | ❌                  | ✅            | ✅    |
-| Project settings management (incl. [project-specific memberships](#private-projects)) | ❌                  | ✅            | ✅    |
-| Organization settings management (incl. memberships)                                  | ❌                  | ✅            | ✅    |
-| Leaving the organization                                                              | ✅                  | ✅            | ❌    |
-| Transferring ownership                                                                | ❌                  | ❌            | ✅    |
-| Organization deletion                                                                 | ❌                  | ❌            | ✅    |
+| Viewing and querying project data                                                     | <span className="text-green text-lg">✔</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Inviting new members                                                                  | <span className="text-green text-lg">✔</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Billing management                                                                    | <span className="text-green text-lg">✔</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Project creation and deletion                                                         | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Project settings management (incl. [project-specific memberships](#private-projects)) | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Organization settings management (incl. memberships)                                  | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Leaving the organization                                                              | <span className="text-green text-lg">✔</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-red text-lg">✖</span>    |
+| Transferring ownership                                                                | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
+| Organization deletion                                                                 | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
 
 Access levels can be viewed and changed in the Members section of organization settings.
 
@@ -114,10 +105,8 @@ Access levels can be viewed and changed in the Members section of organization s
 
 <FeatureAvailability availability={_frontmatter.availability.features.privateProjects} />
 
-If you'd like to restrict access to data within the organization to only those who need it, you can make a project _private_. Projects with this setting enabled become **private by default and invite-only** (except for Administrators and the Owner, who get access implicitly). For members who don't have access to a project, that project is hidden completely, as if it didn't exist.
+Private projects let you control exactly who in your organization can see it. Projects with this setting enabled become **private by default and invite-only** except for Administrators and the Owner, who get access implicitly. Private projects are invisible to anyone who doesn't have access.
 
-Any Administrator or Owner can make a project private or open at any time in the Access Control section of project settings.
+Any Administrator or Owner can make a project private at any time in the Access Control section of project settings.
 
 Regular organization Members can be made project Administrators, giving them elevated permissions just inside the project.
-
-> **Note:** Private projects belong to our premium team-oriented offering. To use this feature, [set up PostHog Cloud billing](https://app.posthog.com/organization/billing) or [contact us for a self-hosted license](/pricing).
