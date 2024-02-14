@@ -29,14 +29,20 @@ export const Items = ({ items }) => {
             }`}
         >
             <ul ref={ref} className={`m-0 p-0 h-[110px] overflow-auto ${isOverflowing ? 'pb-[30px]' : ''}`}>
-                {items?.map(({ title, category }) => {
+                {items?.map(({ title, category, cta }) => {
                     return (
                         <li
                             key={title}
                             className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
                             data-type={categories[category]}
                         >
-                            {title}
+                            {cta ? (
+                                <a href={cta.url} className="hover:underline">
+                                    {title}
+                                </a>
+                            ) : (
+                                title
+                            )}
                         </li>
                     )
                 })}
@@ -58,6 +64,9 @@ export default function Timeline() {
                     title
                     projectedCompletion(formatString: "YYYY-MM-DD")
                     category
+                    cta {
+                        url
+                    }
                 }
             }
         }
