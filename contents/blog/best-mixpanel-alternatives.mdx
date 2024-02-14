@@ -18,14 +18,17 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 The four most popular alternatives to Mixpanel are:
 
-- **[PostHog](#posthog)** – An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2024.
-- **[Google Analytics 4](#google-analytics-4-ga4)** – Google's latest, which now offers more for product teams.
-- **[Amplitude](#amplitude)** – Mixpanel's long-time rival and a popular choice for large enterprises.
-- **[Heap](#heap)** – A mid-market alternative that also offers session replay, and event autocapture.
+1. **[PostHog](#posthog)** – An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2024.
+
+2. **[Google Analytics 4](#google-analytics-4-ga4)** – Google's latest, which now offers more for product teams.
+
+3. **[Amplitude](#amplitude)** – Mixpanel's long-time rival and a popular choice for large enterprises.
+
+4. **[Heap](#heap)** – A mid-market alternative that also offers session replay, and event autocapture.
 
 In this guide, we explore how they compare to Mixpanel, who uses them, and how to select an alternative depending on your needs.
 
-## PostHog
+1. ## PostHog
 
 ![posthog](../images/screenshots/hogflix-dashboard.png)
 
@@ -61,13 +64,13 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
   <ComparisonRow column1={true} column2={false} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={true} column2="Analysis only" feature="Experiments" description="Test changes and analyze their impact" />
   <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Track where users click and why" />
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={true} column2={false} feature="SQL insight builder" description="Write your own insights using SQL" />
-  <ComparisonRow column1="Public beta" column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
+  <ComparisonRow column1={true} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
 </ComparisonTable>
 
 PostHog is the only choice if you like the idea of consolidating around one platform. Mixpanel offers third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
@@ -195,7 +198,7 @@ While it offers a limited free tier for startups, high prices are a barrier. As 
 
 <ComparisonTable column1="Amplitude" column2="Mixpanel">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Collaborate on analysis in shareable notebooks" />
+  <ComparisonRow column1={true} column2="Analysis only" feature="A/B testing" description="Collaborate on analysis in shareable notebooks" />
   <ComparisonRow column1={true} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
   <ComparisonRow column1={true} column2={false} feature="Natural language insights" description="Fetch insights using natural language queries" />
   <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
@@ -258,7 +261,7 @@ Customers include Amway, Eventbrite, and Freshworks.
 
 <ComparisonTable column1="Heap" column2="Mixpanel">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2="Pageviews only" feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
   <ComparisonRow column1={false} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
   <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
