@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IconChevronDown } from '@posthog/icons'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import Link from 'components/Link'
+import dayjs from 'dayjs'
+import slugify from 'slugify'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const categories = {
@@ -30,16 +32,18 @@ export const Items = ({ items }) => {
             }`}
         >
             <ul ref={ref} className={`m-0 p-0 h-[110px] overflow-auto ${isOverflowing ? 'pb-[30px]' : ''}`}>
-                {items?.map(({ title, category, cta }) => {
+                {items?.map(({ title, category, dateCompleted }) => {
                     return (
                         <li
                             key={title}
                             className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
                             data-type={categories[category]}
                         >
-                            {cta ? (
+                            {dateCompleted ? (
                                 <Link
-                                    to={cta.url}
+                                    to={`/changelog/${dayjs(dateCompleted).format('YYYY')}#${slugify(title, {
+                                        lower: true,
+                                    })}`}
                                     className="text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
                                 >
                                     {title}
