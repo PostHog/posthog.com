@@ -1,6 +1,6 @@
 ---
 title: An engineer's guide to behaviorial analytics
-date: 2024-02-12
+date: 2024-02-14
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
@@ -11,7 +11,7 @@ tags:
 crosspost:
   - Blog
 seo: {
-    metaTitle: Behavioral Analytics for Engineers
+    metaTitle: Behavioral Analytics for Engineers,
     metaDescription: Engineers can use behavioral analytics tools like product analytics and session replay to understand everything about their users, fix problems, and measure the true impact of their work.
 }  
 ---
@@ -20,11 +20,11 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import ReplayLight from '../images/product-engineers/behavioral-analytics/replay.png'
 import ReplayDark from '../images/product-engineers/behavioral-analytics/replay-dark.png'
 
-Back in the day, companies could see how people were interacting with their products. They could talk to them, knock on their door, and give them a firm handshake. Now, many companies have no direct interactions with their users. Instead, they rely on behavioral analytics. 
+The measurement and analysis of user behavior, AKA behavioral analytics, is critical to building  successful products. This has long been a responsibility of product managers, marketers, and analysts, but that is changing. Many engineers are [taking on product responsibilities](/blog/what-is-a-product-engineer), and with that, are developing a need for behavioral analytics.
 
-Behavioral analytics is the data about the usage of your site or app. It is a combination of a user and an action. Looking at this data, both individually and in aggregate, enables you to monitor the experience you are providing, identify popular features, and discover areas needing improvement.
+We know because we build behavioral analytics tools, like [product analytics](/product-analytics) and [session replay](/session-replay), for these engineers. We've seen a growing trend of engineers using analytics to track user experience, measure the impact of their work, and discover areas needing improvement.
 
-As an engineer, you might not think of this data as important to you, but you should. An app is shaped by its users, whether they are external or internal. Everything you build is in service to better help users (at some point), and analytics is core to understanding what they want. To help you do this, this post goes over how to get started and use behavioral analytics as an engineer. 
+We also know that engineers are busy and behaivoral analytics is, at most, a small part of their job. To help you get the most value out of behavioral analytics as fast as possible, this guide covers the most practical and relevant parts of behavioral analytics for engineers.
 
 ## 1. Start small
 
@@ -36,13 +36,13 @@ Because striving for a "perfect" plan is just a recipe for frustration. There's 
 
 ![Real behavior](../images/product-engineers/behavioral-analytics/real_behavior.png)
 
-Start by tracking one specific area and expanding from there – e.g. track the usage of a specific feature. If you're using PostHog you can either:
+Start by tracking one specific area and expanding from there — e.g. track the usage of a specific feature. If you're using PostHog you can either:
 
 1. Rely on PostHog's [autocapture](/docs/product-analytics/autocapture) and create an [action](/docs/data/actions) representing usage.
 
 2. Capture a [custom event](/docs/getting-started/send-events#2-capture-custom-events). Customer events we track include `insight analyzed`, `dashboard created`, and `survey launched`.
 
-3. A bit of both – we recommend this.  
+3. A bit of both — we recommend this.  
 
 Starting small enables you to get the basics implemented and begin to develop a sense of the value of data. You can create [trends](/docs/product-analytics/trends), breakdowns, [retention charts](/docs/product-analytics/retention), and more with just a single data point. Once you grasp this, it reveals other data points you'd like to include and you can build on what you've done.
 
@@ -50,7 +50,7 @@ Starting small enables you to get the basics implemented and begin to develop a 
 
 It's hard to retroactively change user data on large volumes of historical events, so it pays to nail [user identification](/docs/getting-started/identify-users) early.
 
-To ensure you set up accurate user identification, start by understanding how user data works. In PostHog, user data – known as [persons](/docs/data/persons) – is included in all events. With the [JavaScript web library](/docs/libraries/js), users are anonymous until you identify them with a distinct ID. Other libraries and the API require a distinct ID for event capture. 
+To ensure you set up accurate user identification, start by understanding how user data works. In PostHog, user data — known as [persons](/docs/data/persons) — is included in all events. With the [JavaScript web library](/docs/libraries/js), users are anonymous until you identify them with a distinct ID. Other libraries and the API require a distinct ID for event capture. 
 
 Beyond this, it is important to:
 
@@ -106,7 +106,7 @@ We've already covered some, but here are three more ways:
 
 2. **Dive deeper into hunches.** If some area is underperforming, behavioral analytics can provide evidence. For example, you might get feedback saying onboarding is too complicated. You can research this by checking for behavior across the onboarding funnel and use those insights to test improvements. [Notebooks](/docs/notebooks) are a great tool for this.
 
-3. **Fit functionality to user behavior.** Behavioral analytics enables you to predict and plan for different scenarios. For example, what performance levels do we need to support? By understanding the average, minimum, and maximum use cases, you get more guidance on what you need the system to do and make better tradeoffs.
+3. **Fit functionality to user behavior.** Behavioral analytics enables you to predict and plan for different scenarios. For example, what performance levels do you need to support? By understanding the average, minimum, and maximum use cases, you get more guidance on what you need your system to do and make better tradeoffs.
 
 The use cases beyond these likely are beyond the scope of your work as an engineer. If you can use all of these, you likely grasp behavioral analytics better than 95% of engineers, and are well on your way to becoming a [product engineer](/blog/what-is-a-product-engineer).
 
