@@ -130,7 +130,7 @@ You can customize your [release conditions](/docs/feature-flags/creating-feature
 
 ## 4. Implement the flag code
 
-To implement the A/B test, we: 
+To implement the feature flag, we: 
 
 1. Fetch the `my-cool-flag` flag using [`PostHog::isFeatureEnabled()`](/docs/libraries/php#feature-flags). 
 2. Update the paragraph text based on whether the flag is enabled or not.
