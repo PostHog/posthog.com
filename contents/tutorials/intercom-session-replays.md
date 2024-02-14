@@ -100,7 +100,7 @@ Start by going to your [installation settings page](https://app.intercom.com/a/a
 
 To install Intercom in the `app/page.js` file, we:
 
-1. Set `APP_ID` as a variable, but you can use the pre-filled URL Intercom provides as well. 
+1. Set `APP_ID` as a variable, but you can use the pre-filled URL Intercom provides as well. You can get this value from your `app.intercom.com` URL, it is after `apps/`.
 2. Add the first script to a `useEffect` to run on load.
 3. Add the `boot` call to the `handleSubmit` function where the email is available.
 
@@ -113,7 +113,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
 	const [email, setEmail] = useState('');
-  const APP_ID = "q0wg4mi9"; // replace this
+  const APP_ID = "q0wg4mi9"; // replace this with value from Intercom URL
 
   useEffect(() => {
     (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/'+APP_ID;var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
