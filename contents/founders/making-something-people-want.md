@@ -98,7 +98,7 @@ The reason they were willing to let us implement something with so little value,
 
 ### 3. User uses it and gives feedback
 
-We set up a [community Slack](../slack) group.
+We set up a [community](/questions) group.
 
 When new customers joined, we'd create a private channel. In the early days when we were a team of two, this is where users went from my responsibility, to Tim's.
 

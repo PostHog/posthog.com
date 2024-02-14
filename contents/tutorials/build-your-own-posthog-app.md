@@ -143,7 +143,7 @@ Finally, however you create your app, [let us know that it's ready for review](h
 
 ### Further reading
 
-Want to know more about building your own apps? Join [our community page](/posts), where thousands of developers share ideas and app-building advice. 
+Want to know more about building your own apps? Join [the PostHog community](/questions), where thousands of developers share ideas and app-building advice. 
 
 Alternatively, check out the following tutorials for more information in the mean time…
 
