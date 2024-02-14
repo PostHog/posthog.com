@@ -164,8 +164,13 @@ configuration.flushIntervalSeconds = 30
 configuration.maxQueueSize = 1000
 
 /**
+ * Number of maximum events in a batch call. (50 by default)
+ */
+configuration.maxBatchSize = 50
+
+/**
  * Whether the posthog client should automatically make a capture call for application lifecycle events,
- * such as "Application Installed", "Application Updated" and "Application Opened".
+ * such as "Application Installed", "Application Updated" and "Application Opened". (on/true by default)
  */
 configuration.captureApplicationLifecycleEvents = true
 
@@ -173,7 +178,27 @@ configuration.captureApplicationLifecycleEvents = true
  * Whether the posthog client should automatically make a screen call when a view controller is added to
  * a view hierarchy. Because the underlying implementation uses method swizzling, we recommend initializing
  * the posthog client as early as possible (before any screens are displayed), ideally during the
- * Application delegate's applicationDidFinishLaunching method.
+ * Application delegate's applicationDidFinishLaunching method. (on/true by default)
  */
 configuration.captureScreenViews = true
+
+/**
+ * Send a `$feature_flag_called` event when a feature flag is used automatically. (on/true by default)
+ */
+configuration.sendFeatureFlagEvent = true
+
+/**
+ * Preload feature flags automatically. (on/true by default)
+ */
+configuration.preloadFeatureFlags = true
+
+/**
+ * Logs the SDK messages into Logcat. (off/false by default)
+ */
+configuration.debug = false
+
+/**
+ * Prevents capturing any data if enabled. (off/false by default)
+ */
+configuration.optOut = false
 ```
