@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 tags: ['session replay']
 ---
 
-Session replays are a useful support tool for debugging and recreating issues. The errors, console, and network data along with the rest of PostHog's tools make it a powerful support platform.
+[Session replays](/session-replay) are a useful support tool for debugging and recreating issues. The errors, console, and network data along with the rest of PostHog's tools make it a powerful support platform.
 
 To get easy access to session replays in Intercom, you can add them as either user data or events. To show you how to do this, we build a basic Next.js app, add PostHog, add Intercom, and set up the session replay link to show in both places in Intercom.
 
@@ -49,7 +49,7 @@ Once done, run `npm run dev` and go `http://localhost:3000`  to see your app.
 
 To set up session replays, we install PostHog in our app. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-> **Important:** Make sure to enable "Record user sessions" in [your project settings](https://us.posthog.com/project/settings/project-replay).
+> **Important:** Make sure to enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
 
 After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 
@@ -57,7 +57,7 @@ After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 npm i posthog-js
 ```
 
-Next, create a `providers.js`  file in your `app`  folder. In it, initialize PostHog with your project API key and instance address (from [your project settings](https://us.posthog.com/project/settings/project-details)) and export a provider component. If you use a US Cloud instance, also make sure your `ui_host` config option is set to `https://us.posthog.com`.
+Next, create a `providers.js`  file in your `app`  folder. In it, initialize PostHog with your project API key and instance address (from [your project settings](https://us.posthog.com/settings/project-details)) and export a provider component. If you use a US Cloud instance, also make sure your `ui_host` config option is set to `https://us.posthog.com`.
 
 ```js
 // app/providers.js
@@ -152,7 +152,7 @@ Now when you submit an email, Intercom launches with your email connected.
 
 ## 4. Adding session replays to Intercom
 
-The final piece is adding PostHog's session replays to Intercom. Since PostHog automatically captures session replay, all that is left to do is get the link and add it somewhere in Intercom. There are two spots we can add it.
+The final piece is adding PostHog's session replays to Intercom. Since PostHog automatically captures session replay, all that is left to do is get the link and add it in Intercom. There are two spots we can add it.
 
 ### Recent session replay as people data attribute
 
