@@ -85,7 +85,7 @@ One successful experiment we did roll out was adding more personalized emails fo
 
 ## Onboarding 4.0: The one where we filtered by ICP
 
-[4.0](https://github.com/PostHog/meta/pull/150/) was a massive step up in complexity as a result of our growing number of features. By late 2023 the flow had 28 separate emails, of which users would get a maximum of 6 over several weeks. We still worried this would be too many, but the data suggests otherwise.
+[4.0](https://github.com/PostHog/meta/pull/150/) was a massive step up in complexity as a result of our growing number of features. By late 2023 the flow had 28 separate emails, of which users would get a maximum of 6 over several weeks. We still worried this would be too many, but the low (0.4%) unsubscribe rate suggested otherwise.
 
 ![Onboarding 4.0](../images/blog/onboarding/onboarding_31.png)
 <Caption>Onboarding 4.0 split high-ICP users out into their own email flow because our CS team would reach out directly</Caption>
