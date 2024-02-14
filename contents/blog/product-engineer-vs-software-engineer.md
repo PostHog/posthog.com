@@ -19,7 +19,7 @@ Want proof? Look at this graph:
 
 ![product-engineer-trends](../images/blog/product-engineer-trend.png)
 
-Online searches for product engineers saw a big and sustained jump in 2022.
+Online searches for product engineers have grown by 80% since 2021 as startups like [ourselves](https://newsletter.posthog.com/p/beyond-the-10x-engineer), [incident.io](http://incident.io/), and [Ghost](https://ghost.org/), prioritize engineers who are customer obsessed, talk to them directly, and comfortable working autonomously. 
 
 Product engineers are changing the way companies think about engineering. To help explain why, we’ll compare the role of product engineer with the traditional (and still very necessary) role of full-stack software engineer.
 
@@ -46,7 +46,7 @@ Software engineers are more idealistic. They look for the best solution to the p
 
 Product engineers still spend the majority of their time coding, but they have responsibilities outside of coding that software engineers don't.
 
-Product engineers also spend their time talking to customers, digging into usage data, and researching the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better. They use this research to prioritize a roadmap that they own. Along with this is responsibility to explain the roadmap and get feedback from users and the company.
+Product engineers also spend their time talking to customers, digging into usage data, and researching the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better. They use this research to prioritize a roadmap that they own, and take responsibility for explaining the roadmap and gathering feedback from users and the company.
 
 Software engineers focus on writing code, testing it, and maintaining it. They look for ways to optimize code, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether that is databases, data pipelines, backend APIs, or client-side app frameworks. This means researching and reading documentation, updates, and code.
 
