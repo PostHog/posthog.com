@@ -29,7 +29,7 @@ The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://
 
 ![Logo usage examples](/brand/logo-usage.png)
 
-If you have any questions or need clarification about which version to use, ask Cory, or reach out in the [PostHog community](/questions) and we'll be happy to help.
+If you have any questions or need clarification about which version to use, ask Cory, or reach out in [our community page](/posts) and we'll be happy to help.
 
 ## Typography
 
