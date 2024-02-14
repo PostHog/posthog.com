@@ -194,7 +194,7 @@ Now when your event is captured, you should see the flag value in the event deta
 <ProductScreenshot
   imageLight={FlagCaptureLight} 
   imageDark={FlagCaptureDark} 
-  alt="Experiment results in PostHog" 
+  alt="Flag details in event in PostHog" 
   classes="rounded"
 />
 
