@@ -4,6 +4,7 @@ import groupBy from 'lodash.groupby'
 import React, { useEffect, useRef, useState } from 'react'
 import { IconChevronDown } from '@posthog/icons'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import Link from 'components/Link'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const categories = {
@@ -37,9 +38,12 @@ export const Items = ({ items }) => {
                             data-type={categories[category]}
                         >
                             {cta ? (
-                                <a href={cta.url} className="hover:underline">
+                                <Link
+                                    to={cta.url}
+                                    className="text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                >
                                     {title}
-                                </a>
+                                </Link>
                             ) : (
                                 title
                             )}
