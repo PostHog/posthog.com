@@ -153,7 +153,7 @@ Referral metrics are especially important for products or services that have a [
 
 Referrals can also be both internal (more users from the same organization) or external.
 
-> 💡 **PostHog Tip:** At PostHog, we automatically invite active paying users to review PostHog using official the [Customer.io integration](/apps/customer-io). There are also marketing automation apps for Engage, Sendgrid, Intercom, and Zapier.
+> 💡 **PostHog Tip:** At PostHog, we automatically invite active paying users to review PostHog using official the [Customer.io integration](/apps/customer-io). There are also marketing automation apps for Engage, Sendgrid, [Intercom](/tutorials/intercom-session-replays), and Zapier.
 
 ## How to use pirate metrics in your product
 
