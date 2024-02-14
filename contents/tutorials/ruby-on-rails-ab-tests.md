@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Ruby on Rails
-date: 2024-02-13
+date: 2024-02-14
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
@@ -320,7 +320,7 @@ Then update the client side code to `identify` the user using the `distinct_id`:
 </main>
 ```
 
-To verify you've done this correctly, you should see an `Identify` event in your [activities tab](https://us.posthog.com/events). You should also see that future client side events are assigned to the `distinct_id` you used (see the value in the `Person` tab).
+To verify you've done this correctly, you should see an `Identify` event in your [activities tab](https://us.posthog.com/events). You should also see that future client side events are assigned to the `distinct_id` in the `Person` column.
 
 <ProductScreenshot
   imageLight={IdentifyLight} 
