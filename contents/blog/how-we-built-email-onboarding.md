@@ -27,7 +27,7 @@ The bad news is that it sent our Mailchimp costs skyrocketing.
 
 ## Onboarding 2.0: The one where we chose a new email tool
 
-Towards the end of 2022 we finally moved off of Mailchimp and on to Customer.io – a purchasing path which took several painful weeks and almost ten separate meetings. I don't know why Customer.io wanted so many meetings before they took our money, but at least they didn't send any awful sales outreach emails.
+Towards the end of 2022, we finally moved off of Mailchimp and on to Customer.io – a purchasing path which took several painful weeks and almost ten separate meetings. I don't know why Customer.io wanted so many meetings before they took our money, but at least they didn't send any awful sales outreach emails.
 
 I’d observed from other companies that we needed to at least add a welcome email for new users, and I wanted to add checks after 24, 96, and 168 hours to see if users had ingested events. If yes, we’d send them some basic usage advice. If no, we’d offer them help. This was the very least I felt we could do. 
 
