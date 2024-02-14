@@ -36,7 +36,7 @@ There’s no dress code, but we will expect everyone to adhere to [our standard 
 
 ## I don’t live in London. Where will the next HostHog be?
 
-We definitely plan to host more events in the future, but we don’t yet know when or where they will be. If you’d like to suggest a location, or have any other feedback then just let us know in [our community page](/posts). 
+We definitely plan to host more events in the future, but we don’t yet know when or where they will be. If you’d like to suggest a location, or have any other feedback then just let us know in [the PostHog community](/questions). 
 
 ## Do I need to RSVP?
 
@@ -44,7 +44,7 @@ This is a free event with limited capacity, so we very strongly encourage that y
 
 ## Did you say free drinks and pizza?
 
-Yes! The offers a great selection of beers, wines and cocktails, as well as non-alcoholic options and tasty food. We can’t guarantee we can accommodate for any allergies or intolerances, but let us know in [our community page](/posts) and we’ll try our best.
+Yes! The offers a great selection of beers, wines and cocktails, as well as non-alcoholic options and tasty food. We can’t guarantee we can accommodate for any allergies or intolerances, but let us know in [the community](/questions) and we’ll try our best.
 
 ## I have another question...
 

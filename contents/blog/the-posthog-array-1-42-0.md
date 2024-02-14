@@ -107,7 +107,7 @@ We always welcome contributions from our community and this time we want to than
 - @Demivan for [fixing a broken URL](https://github.com/PostHog/posthog.com/pull/4682)
 - @DavidODonovan for [fixing social sharing](https://github.com/PostHog/posthog.com/issues/4669)
 
-Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our community page](/posts). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our community](/questions). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 
 ## Open roles at PostHog
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in the following role:

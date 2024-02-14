@@ -7,7 +7,7 @@
 <p align="center">
   <a href='http://makeapullrequest.com'><img alt='PRs Welcome' src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields'/></a>
   <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/posthog/posthog.com"/>
-  <a href='https://posthog.com/slack'><img alt="Join Slack Community" src="https://img.shields.io/badge/slack%20community-join-blue"/></a>
+  <a href='https://posthog.com/questions'><img alt="Join Community" src="https://img.shields.io/badge/slack%20community-join-blue"/></a>
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/posthog/posthog.com"/>
   <img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed/posthog/posthog.com"/>
 </p>
