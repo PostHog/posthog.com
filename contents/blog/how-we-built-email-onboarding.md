@@ -121,12 +121,9 @@ To avoid annoying users, we added a time block based on our activation criteria 
 
 At the time of writing, Onboarding 5.0 has been live just one week – it’s too early to judge any of the metrics because users will have only received the first email. The plan, however, is to keep an eye on the data (and user feedback) and find new ways to improve the flow even further. 
 
-One way we’re already experimenting with this is by bringing back checks to see if users are ingesting events or not. We’re testing this with the session replay product by running the following flow for the first email after the welcome email: 
+![Onboarding 5.0](../images/blog/onboarding/onboarding_6.png)
+<Caption>An active experiment within the current version of our email flow</Caption>
 
-1. Check if a user has activated with session replays
-    1. If YES, we invite them to subscribe to our newsletter
-    1. If NO we check if they have ingested 10+ recordings since signing up
-        1. If YES we know they have product configured, so we email them some tips about getting value out of session replays
-        1. If NO we know they haven’t managed to install PostHog correctly and we send them one of two emails to help them get started
+One way we’re already experimenting with this is by bringing back checks to see if users are ingesting events or not. We’re testing this with the session replay product by running the flow you can see above for the first email after the welcome email. 
 
 Hopefully we’ll see this test prove successful and we’ll be able to replicate these secondary checks across all products soon – in Onboarding 6.0!
