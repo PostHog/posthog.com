@@ -44,7 +44,7 @@ export const Items = ({ items }) => {
                                     to={`/changelog/${dayjs(dateCompleted).format('YYYY')}#${slugify(title, {
                                         lower: true,
                                     })}`}
-                                    className="text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                    className="font-normal text-primary/80 dark:text-primary-dark/80 hover:text-red dark:hover:text-yellow"
                                 >
                                     {title}
                                 </Link>

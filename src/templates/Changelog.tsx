@@ -148,7 +148,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                     return (
                                         <li id={slugify(title, { lower: true })} key={title}>
                                             {topicName && (
-                                                <p className="font-bold flex mt-3 !-mb-4 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
+                                                <p className="font-bold flex mt-3 !-mb-2 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
                                                     <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
                                                         {Icon && <Icon className="w-5" />}
                                                         <span>{topicName}</span>
