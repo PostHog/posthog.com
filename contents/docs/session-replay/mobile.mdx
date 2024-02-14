@@ -75,11 +75,10 @@ private val client = OkHttpClient.Builder()
 * Requires the PostHog Android SDK version >= [3.1.0](https://github.com/PostHog/posthog-android/releases/tag/3.1.0) - use the latest version.
 * Requires Android API >= 26, otherwise it's a NoOp.
 * Not compatible with Jetpack Compose.
-* Generates wireframe representations of a users screen, not a video recording or a screenshot.
-  * Custom views are not fully supported.
+* Custom views are not fully supported.
 * WebView is not supported, a placeholder will be shown.
+* Keyboard is not supported, a placeholder will be shown.
 * React Native and Flutter for Android aren't supported.
-* [Authorized Domains for Replay](https://us.posthog.com/settings/project-replay#replay-authorized-domains) has to be disabled, for now, or create a new testing project to not disrupt your current project configuration.
 * Let us know when you're ready to view the recordings. While replay is in beta there's still some setup on our side before you can playback the sessions. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options)
 
 # Recording specific configuration

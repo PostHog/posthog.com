@@ -107,7 +107,7 @@ As part of our work on HogQL, we've reworked all our insights as JSON objects, w
 
 ![view source](../images/blog/array/view-source.mp4)
 
-You can also create custom table insights directly from the Events Explorer (previously "Live Events") and Person & Groups tabs. 
+You can also create custom table insights directly from Activity (previously "Live Events") and Person & Groups tabs. 
 
 ![custom insights](../images/blog/array/custom_insights.mp4)
 
@@ -123,7 +123,7 @@ It started with a small idea and just got bigger.
 
 We originally started thinking about HogQL back in January, while thinking about [a concept for universal search within PostHog](https://github.com/PostHog/posthog/issues/7963). 
 
-Over time, that plan evolved into creating [new ways for users to explore data](https://github.com/PostHog/meta/issues/86) via direct queries. We wanted to enable to run formulas in what was then called the Live Events view, but is now the Event Explorer. 
+Over time, that plan evolved into creating [new ways for users to explore data](https://github.com/PostHog/meta/issues/86) via direct queries. We wanted to enable to run formulas in what was then called the Live Events view, but is now "Activity." 
 
 However, while this work was underway we realized we could potentially take it a step further and build full SQL support directly into PostHog as a new insight type... so we did! It was a short conversation. 
 

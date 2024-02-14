@@ -161,10 +161,10 @@ When creating the PostHog client, there are many options you can set:
 
 ```kotlin
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
-    // Record certain application events automatically! (on/true by default)
+    // Capture certain application events automatically. (on/true by default)
     captureApplicationLifecycleEvents = true
 
-    // Record screen views automatically! (on/true by default)
+    // Capture screen views automatically. (on/true by default)
     captureScreenViews = true // (on/true by default)
 
     // Capture deep links as part of the screen call. (on/true by default)
@@ -173,7 +173,31 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Maximum number of events to keep in queue before flushing (20 by default)
     flushAt = 20
 
+    // Number of maximum events in memory and disk, when the maximum is exceed, the oldest event is deleted and the new one takes place. (1000 by default)
+    maxQueueSize = 1000
+
+    // Number of maximum events in a batch call. (50 by default)
+    maxBatchSize = 50
+
     // Maximum delay before flushing the queue (30 seconds)
     flushIntervalSeconds = 30
+
+    // Logs the SDK messages into Logcat. (off/false by default)
+    debug = false
+
+    // Prevents capturing any data if enabled. (off/false by default)
+    optOut = false
+
+    // Send a `$feature_flag_called` event when a feature flag is used automatically. (on/true by default)
+    sendFeatureFlagEvent = true
+
+    // Preload feature flags automatically. (on/true by default)
+    preloadFeatureFlags = true
+
+    // Callback that is called when feature flags are loaded (not set by default)
+    onFeatureFlags = { ... }
+
+    // Callback that allows to sanitize the event properties (not set by default)
+    propertiesSanitizer = { properties -> ... }
 }
 ```
