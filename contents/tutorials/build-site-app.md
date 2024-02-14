@@ -11,7 +11,7 @@ Site apps make it quick and easy to add features such as forms and banners to yo
 
 In this tutorial, we’ll teach you how to build a site app. If you're looking for a broader overview of apps, you can find it [in our docs](/docs/apps). Our app will show up on our product site as button users can click to send us a customizable message captured as a PostHog event. To complete this tutorial, you only need [Node installed](https://nodejs.org/en/download/) to build and run the app.
 
-> PostHog Cloud users cannot currently add custom or third-party apps for security reasons. Have an app you want to add to PostHog? [Let us know](/questions)!
+> PostHog Cloud users cannot currently add custom or third-party apps for security reasons. Have an app you want to add to PostHog? [Let us know](/posts)!
 
 ## Basic setup
 

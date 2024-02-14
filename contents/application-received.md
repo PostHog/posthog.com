@@ -20,4 +20,4 @@ We will email you within 48 hours to confirm your application is accepted.
 
 ## Questions?
 
-Feel free to [send us feedback](https://app.posthog.com/home#supportModal), [ask questions](/questions), or join [our community](/questions).
+Feel free to [send us feedback](https://app.posthog.com/home#supportModal), [ask questions](/questions), or join [our community page](/posts).

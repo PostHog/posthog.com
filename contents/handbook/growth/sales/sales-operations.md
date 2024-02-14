@@ -32,7 +32,7 @@ For customers that sign up themselves, and begin using the product, we provide a
 1. [Docs](/docs)
 1. [Tutorials](/tutorials)
 1. [Pre-recorded demo](/book-a-demo)
-1. [Community](/questions)
+1. [Community page](/posts)
 
 Additionally, all users can contact us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
 
