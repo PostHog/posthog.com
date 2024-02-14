@@ -1,27 +1,27 @@
 ---
-title: How to set up A/B tests in Laravel
-date: 2024-02-07
+title: How to set up feature flags in Laravel
+date: 2024-02-15
 author: ["lior-neu-ner"]
-tags: ['experimentation']
+tags: ['feature flags']
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/laravel-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/laravel-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/laravel-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/laravel-ab-tests/experiment-setup-dark.png'
-import ResultsLight from '../images/tutorials/laravel-ab-tests/results-light.png'
-import ResultsDark from '../images/tutorials/laravel-ab-tests/results-dark.png'
+import EventsInPostHogLight from '../images/tutorials/laravel-feature-flags/events-light.png'
+import EventsInPostHogDark from '../images/tutorials/laravel-feature-flags/events-dark.png'
+import FlagCaptureLight from '../images/tutorials/laravel-feature-flags/flag-capture-light.png'
+import FlagCaptureDark from '../images/tutorials/laravel-feature-flags/flag-capture-dark.png'
 
-A/B tests help you improve your Laravel app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Laravel app, add PostHog, create an A/B test, and implement the code for it.
+[Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in Laravel using PostHog. 
+
+We'll create a basic Laravel app, add PostHog, create a feature flag, and then implement the flag to control content in our app.
 
 ## 1. Create a basic Laravel app
 
-First, ensure [PHP](https://www.php.net/manual/en/install.php) and [Composer](https://getcomposer.org/) are installed. Then, create a new Laravel project called `laravel-ab-tests`:
+First, ensure [PHP](https://www.php.net/manual/en/install.php) and [Composer](https://getcomposer.org/) are installed. Then, create a new Laravel project called `laravel-feature-flags`:
 
 ```bash
-composer create-project laravel/laravel laravel-ab-tests
-cd laravel-ab-tests
+composer create-project laravel/laravel laravel-feature-flags
+cd laravel-feature-flags
 ```
 
 Next, replace the code in `resources/views/welcome.blade.php` with a simple heading and paragraph:
@@ -30,7 +30,7 @@ Next, replace the code in `resources/views/welcome.blade.php` with a simple head
 <!DOCTYPE html>
 <html>
 <body>
-  <h1>Laravel A/B testing tutorial</h1>
+  <h1>Laravel feature flags tutorial</h1>
   <p>{{ $paragraphText }}</p>
 </body>
 </html>
@@ -51,7 +51,7 @@ Route::get('/', function () {
 
 Run `php artisan serve` and navigate to `http://127.0.0.1:8000` to see our app in action.
 
-![Basic Laravel app](../images/tutorials/laravel-ab-tests/basic-app.png)
+![Basic Laravel app](../images/tutorials/laravel-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -115,31 +115,24 @@ With this set up, restart your app and then refresh your browser a few times. Yo
   classes="rounded"
 />
 
-## 3. Create an A/B test in PostHog
+## 3. Create a feature flag in PostHog
 
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
-
-Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
-
-1. Name it "My cool experiment".
-2. Set "Feature flag key" to `my-cool-experiment`.
-3. Under the experiment goal, select the `pageview` event we captured in the previous step.
-4. Use the default values for all other fields.
-
-Click "Save as draft" and then click "Launch".
+With PostHog set up, your app is ready for feature flags. To create one, go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog and click **New feature flag**. Enter a flag key (like `my-cool-flag`), set the release condition to roll out to 100% of users, and press "Save."
 
 <ProductScreenshot
-  imageLight={TestSetupLight} 
-  imageDark={TestSetupDark} 
-  alt="Experiment setup in PostHog" 
+  imageLight={CreateFlagLight} 
+  imageDark={CreateFlagDark} 
+  alt="Feature flag created in PostHog" 
   classes="rounded"
 />
 
-## 4. Implement the A/B test code
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+
+## 4. Implement the flag code
 
 To implement the A/B test, we: 
 
-1. Fetch the `my-cool-experiment` flag using [`PostHog::getFeatureFlag()`](/docs/libraries/php#feature-flags). 
+1. Fetch the `my-cool-flag` flag using [`PostHog::getFeatureFlag()`](/docs/libraries/php#feature-flags). 
 2. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 ```php file=routes/web.php
@@ -149,34 +142,33 @@ Route::get('/', function () {
     $paragraphText = 'Placeholder text';
     $distinctId = 'placeholder-user-id'; 
 
-    $enabledVariant = PostHog::getFeatureFlag(
-        'my-cool-experiment',
-        $distinctId
+    $isFlagEnabled = PostHog::isFeatureEnabled(
+        'my-cool-flag',
+        $distinctId,
     );
-    if ($enabledVariant === "control") {
-        $paragraphText = "Control variant!";
-    } else if ($enabledVariant === "test") {
-        $paragraphText = "Test variant!";
+    if ($isFlagEnabled) {
+        $paragraphText = "Flag enabled!";
+    } else {
+        $paragraphText = "Flag disabled!";
     }
 
     // rest of your code
-
 });
 ```
 
-When you restart your app and refresh the page, you should see the text updated to either `Control variant!` or `Test variant!`. 
+When you restart your app and refresh the page, you should see the text updated to `Flag enabled!`. 
 
 > **💡 Setting the correct `distinctId`:**
 > 
-> You may notice that we set `distinctId = 'placeholder-user-id'` in our flag call above. In production apps, to ensure you fetch the correct flag value for your user, `distinctId` should be set to their unique ID. 
+> You may notice that we set `$distinctId = 'placeholder-user-id'` in our flag call above. In production apps, to ensure you fetch the correct flag value for your user, `distinctId` should be set to their unique ID. 
 > 
 > For logged-in users, you typically use their email or user ID as their `distinctId`. For logged-out users, assuming they made their request from a browser, you can use values from their request cookies. See an example of this in our [Nuxt feature flags tutorial](/tutorials/nuxt-feature-flags#setting-the-correct-distinctid).
 
-## 5. Include the feature flag when capturing your event
+## 5. Include the flag when capturing your event
 
-To ensure our goal metric is correctly calculated for each experiment variant, we need to include our feature flag information when capturing our `$pageview` event.
+To ensure any captured events are associated with the correct flag value, we need to include our flag information when capturing them. This enables us to breakdown [insights](https://posthog.com/docs/product-analytics/insights) by feature flag value.
 
-To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/php#step-2-include-feature-flag-information-when-capturing-events) key to our event properties:
+To do this for our `$pageview` event, we add the [`$feature/my-cool-flag`](/docs/libraries/php#step-2-include-feature-flag-information-when-capturing-events) key to our event properties when capturing:
 
 ```php file=routes/web.php
 // rest of your code
@@ -189,7 +181,7 @@ Route::get('/', function () {
         'distinctId' => $distinctId,
         'event' => '$pageview',
         'properties' => [
-            '$feature/my-cool-experiment' => $enabledVariant
+            '$feature/my-cool-flag' => $isFlagEnabled
         ]
     ]);
 
@@ -197,17 +189,16 @@ Route::get('/', function () {
 });
 ```
 
-Now PostHog is able to calculate our goal metric for our experiment results.
+Now when your event is captured, you should see the flag value in the event details in PostHog:
 
 <ProductScreenshot
-  imageLight={ResultsLight} 
-  imageDark={ResultsDark} 
+  imageLight={FlagCaptureLight} 
+  imageDark={FlagCaptureDark} 
   alt="Experiment results in PostHog" 
   classes="rounded"
 />
 
 ## Further reading
 
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [How to set up feature flags in Laravel](/tutorials/laravel-feature-flags)
-- [How to set up A/B tests in PHP](/tutorials/php-ab-tests)
+- [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
+- [How to set up A/B tests in Laravel](/tutorials/laravel-ab-tests)
