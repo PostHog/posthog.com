@@ -10,6 +10,8 @@ import EventsInPostHogLight from '../images/tutorials/ruby-ab-tests/events-light
 import EventsInPostHogDark from '../images/tutorials/ruby-ab-tests/events-dark.png'
 import TestSetupLight from '../images/tutorials/ruby-ab-tests/experiment-setup-light.png'
 import TestSetupDark from '../images/tutorials/ruby-ab-tests/experiment-setup-dark.png'
+import IdentifyLight from '../images/tutorials/ruby-ab-tests/identify-light.png'
+import IdentifyDark from '../images/tutorials/ruby-ab-tests/identify-dark.png'
 
 A/B tests help you improve your Ruby on Rails app by enabling you to compare the impact of changes on key metrics. 
 
@@ -55,13 +57,13 @@ Run `rails server` and navigate to `http://localhost:3000` to see our app in act
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, we install the [PostHog Web SDK](/docs/libraries/js) on the client side using the `Web snippet`. Copy the snippet from [your project settings](https://us.posthog.com/settings/project#snippet) and paste it in the `<head>` tag of `views/layouts/application.html.erb`:
+To start, we install the [PostHog Web SDK](/docs/libraries/js) on the client side using the `Web snippet`. Copy the snippet from [your project settings](https://us.posthog.com/settings/project#snippet) and paste it in the `<head>` tag of `app/views/layouts/application.html.erb`:
 
-```html views/layouts/application.html.erb
+```html app/views/layouts/application.html.erb
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RubyAbTests2</title>
+    <title>RubyAbTests</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -72,7 +74,7 @@ To start, we install the [PostHog Web SDK](/docs/libraries/js) on the client sid
     <!-- PostHog Snippet --> 
     <script>
       !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-      posthog.init('<ph_project_api_key>',{api_host:'ph_instance_address})
+      posthog.init('<ph_project_api_key>',{api_host:'<ph_instance_address>})
     </script>
   </head>
 
@@ -243,7 +245,6 @@ You may notice that we set `distinctId = 'placeholder-user-id'` in our flag call
 
 For logged-in users, you typically use their email as their `distinctId`. However, for logged-out users, you can use the `distinct_id` property from their PostHog cookie:
 
-
 ```ruby file=app/controllers/pages_controller.rb
 class PagesController < ApplicationController
   def home
@@ -269,7 +270,64 @@ class PagesController < ApplicationController
 end
 ```
 
-In the scenario where your PostHog cookie is not available on the server side, you can fall back to the client side rendering approach of feature flags
+In the scenario where your PostHog cookie is not available on the server side, you can fall back to the client side evaluation of the flag.
+
+#### Linking the `distinct_id` on the client side
+
+If you're using `email` or `user id` for the `distinct_id` (and not the ID from the PostHog cookie), you'll need to link `distinct_id` to the PostHog instance on the client side. This ensures PostHog correctly assigns events (like our goal metric) to the user. This is done using [`posthog.identify()`](/docs/product-analytics/identify).
+
+First update the code on the server side to return the `distinct_id` to the client:
+
+```ruby file=app/controllers/pages_controller.rb
+class PagesController < ApplicationController
+  def home
+    @button_text = 'No variant'
+    @distinct_id = 'max@hedgehog.com' # in production, set this to your user's email or database id.
+    begin
+      enabled_variant = POSTHOG_CLIENT.get_feature_flag('my-cool-experiment', @distinct_id)
+      if enabled_variant == 'control'
+        @button_text = 'Control Variant'
+      elsif enabled_variant == 'test'
+        @button_text = 'Test Variant'
+      end
+    rescue => e
+      @button_text = 'Error'
+    end
+  end
+end
+```
+
+Then update the client side code to `identify` the user using the `distinct_id`:
+
+```html file=app/views/pages/home.html.erb
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const distinctId = "<%= @distinct_id %>";
+    if (distinctId) {
+      posthog.identify(distinctId);
+    }
+  });
+
+  function handleClick() {
+    posthog.capture('home_button_clicked');
+  }
+</script>
+
+<main>
+  <h1>Rails A/B Test</h1>
+  <button id="main-cta" onclick="handleClick()"><%= @button_text %></button>
+</main>
+```
+
+To verify you've done this correctly, you should see an `Identify` event in your [activities tab](https://us.posthog.com/events). You should also see that future client side events are assigned to the `distinct_id` you used (see the value in the `Person` tab).
+
+<ProductScreenshot
+  imageLight={IdentifyLight} 
+  imageDark={IdentifyDark} 
+  alt="Identified events in PostHog" 
+  classes="rounded"
+/>
 
 ## Further reading
 
