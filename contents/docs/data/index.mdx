@@ -76,9 +76,12 @@ See our [identify docs](/docs/product-analytics/identify#how-to-handle-duplicate
 
 PostHog drops events with invalid UUIDs.
 
-There are very few cases where it would be good to provide an event UUID. PostHog generates these for you. 
+There are very few cases where it would be good to manually provide an event UUID. PostHog generates these for you, and that should be sufficient in almost all cases. The valid use cases for sending your own UUID are:
 
-When generating UUIDs, there are many gotchas to be aware of. For example, deduping based on event UUID is not guaranteed due to how merges work in ClickHouse.
+- unreliable connections (transparently implemented in our web and mobile SDKs)
+- an event source that does not guarantee idempotency (webhook, kafka), and only if a [valid UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) is available: not all 128-bit words are valid UUIDs.
+
+Beyond the above officially supported cases, we do not support supplying a UUID for deduplication or event mutation. There are many potential unintended consequences, and we cannot support recovery in cases where data is lost or corrupted as a result of this process.
 
 ### Ignored an invalid timestamp, event was still ingested
 
