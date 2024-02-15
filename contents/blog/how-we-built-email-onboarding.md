@@ -8,9 +8,9 @@ featuredImage: ../images/blog/blog_onboarding.jpg
 featuredImageType: full
 ---
 
-Email is a powerful tool for getting users to engage with your product, but it can be difficult to know how the best companies structure their onboarding email flows. You end up having to sign up to a bunch of them, then waiting and letting your inbox get flooded. 
+Marketers believe onboarding emails are a powerful tool for driving engagement. Everyone else thinks they're annoying and ineffective. The truth, as always, is a little more complicated.
 
-Often, you end up getting awful sales rep outreach emails from them _months_ later too. That's important because it's probably the root cause for the conventional wisdom that developers do not respond well to email marketing. Turns out, they just don't respond well to _bad_ email marketing. 
+People, and developers in particular, hate onboarding campaigns because the bad ones are so memorable. And how would you know what "good" looks like without signing up and risking a flood of tedious outreach emails from sales reps?
 
 We don’t do those sort of outreach emails. This is what we do instead, and how we got there over 5 major iterations. We think it works and we've included performance data so you can judge for yourself.
 
