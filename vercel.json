@@ -1183,12 +1183,6 @@
             "destination": "/docs/settings/organizations-and-projects"
         },
         { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
-        { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
-        { "source": "/docs/apps/build", "destination": "/docs/cdp/build" },
-        { "source": "/docs/apps/build/tutorial", "destination": "/docs/cdp/tutorial" },
-        { "source": "/docs/apps", "destination": "/docs/cdp/enabling" },
-        { "source": "/docs/apps/build/reference", "destination": "/docs/cdp/build/reference" },
-        { "source": "/docs/apps/build/testing", "destination": "/docs/cdp/build/testing" },
-        { "source": "/docs/apps/build/types", "destination": "/docs/cdp/build/types" }
+        { "source": "/docs/data/sso", "destination": "/docs/settings/sso" }
     ]
 }
