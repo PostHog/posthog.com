@@ -234,10 +234,19 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
             const date = dateCompleted || projectedCompletion
 
+            const cloudinaryMedia = {
+                ...image,
+                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                publicId: image?.data?.attributes?.provider_metadata?.public_id,
+                originalHeight: image?.data?.attributes?.height,
+                originalWidth: image?.data?.attributes?.width,
+                originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
+            }
+
             const data = {
                 strapiID: id,
                 date,
-                media: image,
+                media: cloudinaryMedia,
                 type: category,
                 year: date && new Date(date)?.getFullYear(),
                 ...other,
