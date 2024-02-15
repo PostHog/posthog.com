@@ -15,6 +15,7 @@ import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
 import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
+import { Image, Video, Placeholder } from 'cloudinary-react'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -143,7 +144,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                     const team = teams?.data[0]
                                     const topicName = topic?.data?.attributes.label
                                     const teamName = team?.attributes?.name
-                                    const mediaURL = media?.data?.attributes?.url
+                                    const cloudinaryID = media?.data?.attributes?.provider_metadata?.public_id
                                     const Icon = topicIcons[topicName?.toLowerCase()]
                                     return (
                                         <li id={slugify(title, { lower: true })} key={title}>
@@ -169,13 +170,14 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                         {teamName} Team
                                                     </p>
                                                 )}
-                                                {mediaURL && (
+                                                {cloudinaryID && (
                                                     <div className="my-4">
                                                         {media?.data?.attributes?.mime === 'video/mp4' ? (
                                                             <ZoomImage>
-                                                                <video
+                                                                <Video
+                                                                    publicId={cloudinaryID}
+                                                                    cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
                                                                     className="max-w-2xl w-full"
-                                                                    src={mediaURL}
                                                                     autoPlay
                                                                     loop
                                                                     muted
@@ -184,7 +186,14 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                             </ZoomImage>
                                                         ) : (
                                                             <ZoomImage>
-                                                                <img src={mediaURL} className="max-w-2xl w-full" />
+                                                                <Image
+                                                                    publicId={cloudinaryID}
+                                                                    cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                                                                    loading="lazy"
+                                                                    className="max-w-2xl w-full"
+                                                                >
+                                                                    <Placeholder />
+                                                                </Image>
                                                             </ZoomImage>
                                                         )}
                                                     </div>
@@ -222,6 +231,9 @@ export const query = graphql`
                         attributes {
                             url
                             mime
+                            provider_metadata {
+                                public_id
+                            }
                         }
                     }
                 }

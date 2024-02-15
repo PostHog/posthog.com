@@ -49,6 +49,7 @@
         "busboy": "^1.6.0",
         "chart.js": "^4.3.3",
         "chrome-aws-lambda": "^10.1.0",
+        "cloudinary-react": "^1.8.1",
         "clsx": "^2.0.0",
         "cntl": "^1.0.0",
         "core-js": "^3.21.1",
