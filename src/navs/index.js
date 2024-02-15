@@ -1270,7 +1270,7 @@ export const docsMenu = {
                     icon: 'IconInfo',
                 },
                 {
-                    name: 'Administration',
+                    name: 'Admin',
                     url: '/docs/admin/organizations-and-projects',
                     icon: 'IconInfo',
                     children: [
@@ -1434,24 +1434,16 @@ export const docsMenu = {
                             url: '/docs/data/events',
                         },
                         {
-                            name: 'Organizations & projects',
-                            url: '/docs/data/organizations-and-projects',
+                            name: 'Ingestion warnings',
+                            url: '/docs/data/ingestion-warnings',
                         },
                         {
                             name: 'Persons',
                             url: '/docs/data/persons',
                         },
                         {
-                            name: 'Role-based access',
-                            url: '/docs/data/role-based-access',
-                        },
-                        {
                             name: 'Sessions',
                             url: '/docs/data/sessions',
-                        },
-                        {
-                            name: 'SSO & SAML',
-                            url: '/docs/data/sso',
                         },
                         {
                             name: 'Timestamps',
