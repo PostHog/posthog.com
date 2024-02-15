@@ -166,8 +166,10 @@ function Tooltip({
             <button
                 ref={setReferenceElement}
                 onClick={() => setOpen(!open)}
-                className={`my-1 p-2 flex items-center rounded hover:bg-border dark:hover:bg-border-dark ${
-                    open ? 'bg-border dark:bg-border-dark' : ''
+                className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:top-[1px] active:scale-[.99] ${
+                    open
+                        ? 'border-primary/50 dark:border-primary-dark/50'
+                        : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
                 }`}
             >
                 {children}
@@ -527,7 +529,7 @@ export const Main = () => {
                             {user?.profile ? (
                                 <Avatar
                                     src={getAvatarURL(user?.profile)}
-                                    className="w-6 h-6 inline-block bg-tan border border-light dark:border-dark p-px rounded-full dark:bg-dark"
+                                    className="w-9 h-9 inline-block bg-tan p-px rounded-full dark:bg-dark"
                                 />
                             ) : (
                                 <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
