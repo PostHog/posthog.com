@@ -272,8 +272,8 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     </motion.div>
                 </div>
             </Modal>
-            <li className={`py-2 ${props?.className ?? ''}`}>
-                <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 border border-light dark:border-dark rounded-md bg-accent dark:bg-accent-dark">
+            <li className={`pb-4 border border-light dark:border-dark rounded-md ${props?.className ?? ''}`}>
+                <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 bg-accent dark:bg-accent-dark rounded-t-md">
                     <div className="sm:flex-grow">
                         <h4 className="text-lg flex space-x-1 items-center !m-0">{title}</h4>
                         <p className="m-0 !text-[15px] !leading-none opacity-80 inline">
@@ -289,6 +289,41 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                                 more
                             </button>
                         )}
+
+                        {githubPages && (
+                            <div className="hidden mt-4 mb-4">
+                                <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
+                                <div className="h-2 flex-grow bg-border dark:bg-border-dark rounded-md relative overflow-hidden">
+                                    <div
+                                        style={{ width: `${percentageComplete}%` }}
+                                        className={`bg-[#3FB950] absolute inset-0 h-full`}
+                                    />
+                                </div>
+                            </div>
+                        )}
+
+                        {githubPages && more && (
+                            <>
+                                <h6 className="opacity-75 text-sm">Milestones</h6>
+                                <ul className="list-none m-0 p-0 grid gap-y-2 mt-4">
+                                    {githubPages.map((page) => {
+                                        return (
+                                            <li key={page.title}>
+                                                <Link
+                                                    to={page.html_url}
+                                                    className="text-[14px] flex items-start font-semibold space-x-1 text-black dark:text-white leading-tight cta"
+                                                >
+                                                    <span className="inline-block mt-.5">
+                                                        {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
+                                                    </span>
+                                                    <span>{page.title}</span>
+                                                </Link>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </>
+                        )}
                     </div>
                     {image && (
                         <div className="sm:flex-shrink-0">
@@ -299,41 +334,6 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                 </div>
 
                 <div className="px-4">
-                    {githubPages && (
-                        <div className="hidden mt-4 mb-4">
-                            <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
-                            <div className="h-2 flex-grow bg-border dark:bg-border-dark rounded-md relative overflow-hidden">
-                                <div
-                                    style={{ width: `${percentageComplete}%` }}
-                                    className={`bg-[#3FB950] absolute inset-0 h-full`}
-                                />
-                            </div>
-                        </div>
-                    )}
-
-                    {githubPages && more && (
-                        <>
-                            <h6>Milestones</h6>
-                            <ul className="list-none m-0 p-0 grid gap-y-2 mt-4">
-                                {githubPages.map((page) => {
-                                    return (
-                                        <li key={page.title}>
-                                            <Link
-                                                to={page.html_url}
-                                                className="text-[14px] flex items-start font-semibold space-x-1 text-black dark:text-white leading-tight cta"
-                                            >
-                                                <span className="inline-block mt-.5">
-                                                    {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
-                                                </span>
-                                                <span>{page.title}</span>
-                                            </Link>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </>
-                    )}
-
                     <div className="flex justify-between items-center">
                         <h6>Project updates</h6>
 
