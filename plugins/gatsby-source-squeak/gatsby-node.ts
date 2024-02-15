@@ -257,6 +257,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 image: {
                     fields: ['id', 'url'],
                 },
+                cta: true,
             },
         })
 

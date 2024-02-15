@@ -34,6 +34,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         stickySidebar,
         searchFilter,
         fullWidthContent,
+        hashSpy,
     } = usePost()
     const { compact } = useLayoutData()
 
@@ -112,6 +113,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                             {tableOfContents.map((navItem, index) => (
                                                 <li className="relative leading-none m-0" key={navItem.url}>
                                                     <InternalSidebarLink
+                                                        hashSpy={hashSpy}
                                                         url={navItem.url}
                                                         name={navItem.value}
                                                         depth={navItem.depth}

@@ -4,7 +4,16 @@ import { useSearch } from 'components/Search/SearchContext'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
-import { IconApp, IconBrightness, IconChat, IconSearch, IconTextWidth, IconUser, IconChevronDown } from '@posthog/icons'
+import {
+    IconApp,
+    IconBrightness,
+    IconChat,
+    IconMessage,
+    IconSearch,
+    IconTextWidth,
+    IconUser,
+    IconChevronDown,
+} from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
 import * as icons from '@posthog/icons'
@@ -466,23 +475,34 @@ export const Main = () => {
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
                                                 to="/questions"
                                             >
-                                                <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                <IconMessage className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                 Forums
                                             </Link>
                                         </li>
                                         {user?.profile && (
-                                            <li className="px-1">
-                                                <Link
-                                                    className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
-                                                    to={`/community/profiles/${user?.profile.id}`}
-                                                >
-                                                    <Avatar
-                                                        src={getAvatarURL(user?.profile)}
-                                                        className="w-6 h-6 inline-block mr-2 bg-light dark:bg-dark"
-                                                    />
-                                                    My profile
-                                                </Link>
-                                            </li>
+                                            <>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
+                                                        to="/community/dashboard"
+                                                    >
+                                                        <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                        My discussions
+                                                    </Link>
+                                                </li>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
+                                                        to={`/community/profiles/${user?.profile.id}`}
+                                                    >
+                                                        <Avatar
+                                                            src={getAvatarURL(user?.profile)}
+                                                            className="w-6 h-6 inline-block mr-2 bg-light dark:bg-dark"
+                                                        />
+                                                        My profile
+                                                    </Link>
+                                                </li>
+                                            </>
                                         )}
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
                                             Site settings
