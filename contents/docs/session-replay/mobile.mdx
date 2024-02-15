@@ -51,7 +51,7 @@ class SampleApp : Application() {
 
         val config = PostHogAndroidConfig(
             apiKey = POSTHOG_API_KEY,
-            host = POSTHOG_HOST // TIP: `host` is optional if you use https://app.posthog.com
+            host = POSTHOG_HOST // TIP: host is optional if you use https://app.posthog.com
         )
         config.sessionReplay = true
         PostHogAndroid.setup(this, config)
