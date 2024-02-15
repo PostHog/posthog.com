@@ -1385,7 +1385,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Settings',
-                    url: '/docs/setting/organizations-and-projects',
+                    url: '/docs/settings/organizations-and-projects',
                     icon: 'IconGear',
                     children: [
                         {
