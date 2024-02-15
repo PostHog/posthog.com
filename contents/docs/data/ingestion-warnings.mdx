@@ -8,11 +8,17 @@ availability:
     enterprise: full
 ---
 
+import IngestionWarningsLight from '../../images/features/data-management/warnings.png'
+
 Sometimes PostHog runs into problems during ingestion due to incorrect or suboptimal usage of PostHog. For example, if you capture an event with a generic ID like `null`, PostHog doesn't ingest it.
 
 If this happens, we do our best to still ingest the event and we log an ingestion warning. 
 
-![Ingestion warnings](../../images/features/data-management/warnings.png)
+<ProductScreenshot
+    imageLight={IngestionWarningsLight}
+    alt="Ingestion warnings" 
+    classes="rounded"
+/>
 
 **Note:** These warnings are sampled. The actual number of events affected may exceed the total displayed.
 

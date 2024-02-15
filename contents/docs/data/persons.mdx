@@ -9,6 +9,8 @@ availability:
 
 ---
 
+import PersonProfile from '../../images/docs/data/people/people-profile.png'
+
 Clicking on [People](https://us.posthog.com/persons) in the left-hand navigation opens a list containing all users, which you can then search.
 
 All users have a alphanumeric ID. Identified users have a distinct ID, normally `email`.
@@ -19,7 +21,11 @@ PostHog tracks user behavior, whether or not the user is logged in and identifia
 
 Clicking on a user opens their profile and shows all their properties.
 
-![people](../../images/docs/data/people/people-profile.png)
+<ProductScreenshot
+    imageLight={PersonProfile}
+    alt="Person profile" 
+    classes="rounded"
+/>
 
 - **Events** shows all the events a user has triggered, which you can search and filter to find specific events.
 
