@@ -145,6 +145,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                     const topicName = topic?.data?.attributes.label
                                     const teamName = team?.attributes?.name
                                     const cloudinaryID = media?.data?.attributes?.provider_metadata?.public_id
+                                    const { width, height } = media?.data?.attributes || {}
                                     const Icon = topicIcons[topicName?.toLowerCase()]
                                     return (
                                         <li id={slugify(title, { lower: true })} key={title}>
@@ -182,6 +183,8 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                                     loop
                                                                     muted
                                                                     playsInline
+                                                                    width={width}
+                                                                    height={height}
                                                                 />
                                                             </ZoomImage>
                                                         ) : (
@@ -191,6 +194,8 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                                     cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
                                                                     loading="lazy"
                                                                     className="max-w-2xl w-full"
+                                                                    width={width}
+                                                                    height={height}
                                                                 >
                                                                     <Placeholder />
                                                                 </Image>
@@ -231,6 +236,8 @@ export const query = graphql`
                         attributes {
                             url
                             mime
+                            width
+                            height
                             provider_metadata {
                                 public_id
                             }
