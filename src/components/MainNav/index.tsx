@@ -166,7 +166,7 @@ function Tooltip({
             <button
                 ref={setReferenceElement}
                 onClick={() => setOpen(!open)}
-                className={`my-1 p-2 rounded hover:bg-border dark:hover:bg-border-dark ${
+                className={`my-1 p-2 flex items-center rounded hover:bg-border dark:hover:bg-border-dark ${
                     open ? 'bg-border dark:bg-border-dark' : ''
                 }`}
             >
@@ -483,7 +483,7 @@ export const Main = () => {
                                             <>
                                                 <li className="px-1">
                                                     <Link
-                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
                                                         to="/community/dashboard"
                                                     >
                                                         <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
@@ -492,13 +492,10 @@ export const Main = () => {
                                                 </li>
                                                 <li className="px-1">
                                                     <Link
-                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
                                                         to={`/community/profiles/${user?.profile.id}`}
                                                     >
-                                                        <Avatar
-                                                            src={getAvatarURL(user?.profile)}
-                                                            className="w-6 h-6 inline-block mr-2 bg-light dark:bg-dark"
-                                                        />
+                                                        <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75 mr-2" />
                                                         My profile
                                                     </Link>
                                                 </li>
@@ -527,7 +524,14 @@ export const Main = () => {
                                 )
                             }}
                         >
-                            <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
+                            {user?.profile ? (
+                                <Avatar
+                                    src={getAvatarURL(user?.profile)}
+                                    className="w-6 h-6 inline-block bg-tan border border-light dark:border-dark p-px rounded-full dark:bg-dark"
+                                />
+                            ) : (
+                                <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
+                            )}
                         </Tooltip>
                     </div>
                 </div>
