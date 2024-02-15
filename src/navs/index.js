@@ -1295,6 +1295,10 @@ export const docsMenu = {
                             url: '/docs/data/events',
                         },
                         {
+                            name: 'Ingestion warnings',
+                            url: '/docs/data/ingestion-warnings',
+                        },
+                        {
                             name: 'People',
                             url: '/docs/data/persons',
                         },
@@ -1313,10 +1317,6 @@ export const docsMenu = {
                         {
                             name: 'UTM segmentation',
                             url: '/docs/data/utm-segmentation',
-                        },
-                        {
-                            name: 'Ingestion warnings',
-                            url: '/docs/data/ingestion-warnings',
                         },
                     ],
                 },
