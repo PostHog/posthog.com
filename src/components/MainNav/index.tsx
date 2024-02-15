@@ -36,7 +36,7 @@ export const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div className={`overflow-hidden rounded-full ${props.className}`}>
             {props.src ? (
-                <img className="w-full h-full" alt="" src={props.src} />
+                <img className="w-full object-cover" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -168,7 +168,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:top-[1px] active:scale-[.99] ${
+                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
                         open
                             ? 'border-primary/50 dark:border-primary-dark/50'
                             : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
@@ -540,10 +540,12 @@ export const Main = () => {
                             }}
                         >
                             {user?.profile ? (
-                                <Avatar
-                                    src={getAvatarURL(user?.profile)}
-                                    className="w-9 h-9 inline-block bg-tan p-px rounded-full dark:bg-dark"
-                                />
+                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex">
+                                    <Avatar
+                                        src={getAvatarURL(user?.profile)}
+                                        className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
+                                    />
+                                </div>
                             ) : (
                                 <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
                             )}
