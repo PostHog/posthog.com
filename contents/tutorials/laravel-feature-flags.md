@@ -8,6 +8,8 @@ tags: ['feature flags']
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import EventsInPostHogLight from '../images/tutorials/laravel-feature-flags/events-light.png'
 import EventsInPostHogDark from '../images/tutorials/laravel-feature-flags/events-dark.png'
+import CreateFlagLight from '../images/tutorials/laravel-feature-flags/create-flag-light.png'
+import CreateFlagDark from '../images/tutorials/laravel-feature-flags/create-flag-dark.png'
 import FlagCaptureLight from '../images/tutorials/laravel-feature-flags/flag-capture-light.png'
 import FlagCaptureDark from '../images/tutorials/laravel-feature-flags/flag-capture-dark.png'
 

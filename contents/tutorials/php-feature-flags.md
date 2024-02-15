@@ -8,6 +8,8 @@ tags: ['feature flags']
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import EventsInPostHogLight from '../images/tutorials/php-feature-flags/events-light.png'
 import EventsInPostHogDark from '../images/tutorials/php-feature-flags/events-dark.png'
+import CreateFlagLight from '../images/tutorials/php-feature-flags/events-light.png'
+import CreateFlagDark from '../images/tutorials/php-feature-flags/events-dark.png'
 import FlagCaptureLight from '../images/tutorials/php-feature-flags/flag-capture-light.png'
 import FlagCaptureDark from '../images/tutorials/php-feature-flags/flag-capture-dark.png'
 
