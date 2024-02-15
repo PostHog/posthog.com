@@ -136,6 +136,7 @@ function Tooltip({
     placement?: Placement
     className?: string
 }) {
+    const { user } = useUser()
     const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
@@ -163,17 +164,29 @@ function Tooltip({
 
     return (
         <span ref={containerEl} className={className}>
-            <button
-                ref={setReferenceElement}
-                onClick={() => setOpen(!open)}
-                className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:top-[1px] active:scale-[.99] ${
-                    open
-                        ? 'border-primary/50 dark:border-primary-dark/50'
-                        : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
-                }`}
-            >
-                {children}
-            </button>
+            {user?.profile ? (
+                <button
+                    ref={setReferenceElement}
+                    onClick={() => setOpen(!open)}
+                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:top-[1px] active:scale-[.99] ${
+                        open
+                            ? 'border-primary/50 dark:border-primary-dark/50'
+                            : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
+                    }`}
+                >
+                    {children}
+                </button>
+            ) : (
+                <button
+                    ref={setReferenceElement}
+                    onClick={() => setOpen(!open)}
+                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
+                        open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
+                    }`}
+                >
+                    {children}
+                </button>
+            )}
             {open && (
                 <div
                     className="z-[10000] pt-1"
