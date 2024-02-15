@@ -1907,7 +1907,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Notifications',
+                    name: 'Subscriptions',
                     url: '/docs/product-analytics/subscriptions',
                     icon: 'IconBell',
                     color: 'red',
