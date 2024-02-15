@@ -859,7 +859,7 @@ export const companyMenu = {
         { name: 'People', icon: 'IconProfile', color: 'blue', url: '/team' },
         {
             name: 'Teams',
-            icon: 'IconProfile',
+            icon: 'IconPeople',
             color: 'purple',
             url: '/teams',
             children: [
