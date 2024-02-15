@@ -1351,7 +1351,11 @@ li.squeak-left-border {
 
     ol,
     ul {
-        @apply pb-0 mb-2 text-[15px];
+        @apply pb-0 mb-2;
+
+        li {
+            @apply text-[15px];
+        }
     }
 
     pre {
