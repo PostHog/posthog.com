@@ -150,7 +150,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                         <li
                                             id={slugify(title, { lower: true })}
                                             className="scroll-mt-[108px]"
-                                            key={title}
+                                            key={strapiID}
                                         >
                                             {topicName && (
                                                 <p className="font-bold flex mt-3 !-mb-2 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
