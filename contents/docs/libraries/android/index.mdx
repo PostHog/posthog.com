@@ -43,6 +43,8 @@ To set [properties](/docs/data/user-properties) on your users via an event, you 
 **Example**
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.capture(
     event = "button_b_clicked",
     properties = mapOf("color" to "blue"),
@@ -62,6 +64,8 @@ When capturing an event, you can pass a property called `userProperties` as an e
 **Example**
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.capture(
     event = "button_b_clicked",
     properties = mapOf("color" to "blue"),
@@ -85,6 +89,8 @@ You can also configure the flush interval. By default we flush all events after 
 no matter how many events have been gathered.
 
 ```kotlin
+import com.posthog.android.PostHogAndroidConfig
+
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
     flushAt = 20
     flushIntervalSeconds = 30
@@ -94,6 +100,8 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 You can also manually flush the queue:
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.flush() 
 ```
 
@@ -102,6 +110,8 @@ PostHog.flush()
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.reset()
 ```
 
@@ -120,6 +130,8 @@ import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```kotlin
+import com.posthog.PostHog
+
 if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
     // do something
 }
@@ -136,6 +148,8 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```kotlin
+import com.posthog.PostHog
+
 // organization is the group type, company_id_in_your_db is the group ID
 PostHog.group(
     type = "company", 
@@ -146,6 +160,8 @@ PostHog.group(
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.group(
     type = "company", 
     key = "company_id_in_your_db",
