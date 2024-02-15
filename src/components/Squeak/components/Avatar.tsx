@@ -3,7 +3,7 @@ import React from 'react'
 
 const Image = ({ src, className = '' }: { src: string | null | undefined; className?: '' }) => {
     return src ? (
-        <img className={`rounded-full ${className}`} src={src} />
+        <img className={`object-fill ${className}`} src={src} />
     ) : (
         <svg
             className={`bg-gray-accent-light rounded-full ${className}`}
