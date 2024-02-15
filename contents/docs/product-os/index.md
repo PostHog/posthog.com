@@ -20,9 +20,7 @@ It ties all your user and product data together, so you can focus on improving y
 
 Product OS comprises things like:
 
-- Our infrastructure, which is built upon [ClickHouse](/handbook/engineering/clickhouse), an ultra-fast open-source database system built specifically for real-time data analysis.
-
-- Our easy to implement `posthog-js` client library, which [autocaptures](/docs/product-analytics/autocapture) frontend events, so you don't have to waste time manually instrumenting every button and simple interaction.  
+- Our easy to implement [client and server SDKs](/docs/getting-started/install?tab=sdks) like `posthog-js` client library, which [autocaptures](/docs/product-analytics/autocapture) frontend events, so you don't have to waste time manually instrumenting every button and simple interaction. 
 
 - Our [APIs](/docs/api), which enable you to capture, evaluate, create, update, and delete nearly all of your information in PostHog, and [pull information into your app](/tutorials/customer-facing-analytics).
 
@@ -32,6 +30,8 @@ Product OS comprises things like:
 
 - [Data pipelines](/docs/cdp), which enable you to enrich your PostHog data from other sources, and integrate PostHog with other tools for marketing automation, sales, and support.
 
-- The [PostHog toolbar](/docs/toolbar), which lets you easily toggle feature flags, inspect elements, create [Actions](/docs/data/actions), and see where users click.
-
 - [HogQL](/docs/hogql), which grants you unrestricted access to your data via custom SQL queries for advanced, custom analysis.
+
+- Our infrastructure, which is built upon [ClickHouse](/handbook/engineering/clickhouse), an ultra-fast open-source database system built specifically for real-time data analysis.
+
+- The [PostHog toolbar](/docs/toolbar), which lets you easily toggle feature flags, inspect elements, create [Actions](/docs/data/actions), and see where users click.

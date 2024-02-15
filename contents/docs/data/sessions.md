@@ -18,7 +18,7 @@ This helps you to understand which of your features drive the most engagement.
 
 ## How does PostHog define a session?
 
-We group incoming events into a single session until there's **no activity for more than 30 minutes**. Subsequent events are grouped into a new session.
+We group incoming events from our [JavaScript Web library](/docs/libraries/js) into a single session until there's **no activity for more than 30 minutes**. Subsequent events are grouped into a new session.
 
 ### Common questions
 
