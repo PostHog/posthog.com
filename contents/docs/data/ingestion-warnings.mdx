@@ -7,6 +7,15 @@ availability:
     selfServe: full
     enterprise: full
 ---
+
+Sometimes PostHog runs into problems during ingestion due to incorrect or suboptimal usage of PostHog. For example, if you capture an event with a generic ID like `null`, PostHog doesn't ingest it.
+
+If this happens, we do our best to still ingest the event and we log an ingestion warning. 
+
+![Ingestion warnings](../../images/features/data-management/warnings.png)
+
+**Note:** These warnings are sampled. The actual number of events affected may exceed the total displayed.
+
 List of ingestion warnings:
 - [Refused to merge with an illegal distinct ID](#refused-to-merge-with-an-illegal-distinct-id)
 - [Refused to merge an already identified user](#refused-to-merge-an-already-identified-user)
@@ -15,8 +24,6 @@ List of ingestion warnings:
 - [An event was sent more than 23 hours in the future](#an-event-was-sent-more-than-23-hours-in-the-future)
 - [Discarded event exceeding 1MB limit](#discarded-event-exceeding-1mb-limit)
 - [Event ingestion has overflowed capacity](#event-ingestion-has-overflowed-capacity)
-
-**Note:** These warnings are sampled. The actual number of events affected may exceed the total displayed.
 
 ## Refused to merge with an illegal distinct ID
 

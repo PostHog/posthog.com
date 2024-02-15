@@ -1178,9 +1178,12 @@
         { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" },
         { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" },
         { "source": "/docs/data/application-settings", "destination": "/docs" },
-        { "source": "/docs/data/organizations-and-projects", "destination": "/docs/admin/organizations-and-projects" },
-        { "source": "/docs/data/role-based-access", "destination": "/docs/admin/role-based-access" },
-        { "source": "/docs/data/sso", "destination": "/docs/admin/sso" },
+        {
+            "source": "/docs/data/organizations-and-projects",
+            "destination": "/docs/settings/organizations-and-projects"
+        },
+        { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
+        { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
         { "source": "/docs/apps/build", "destination": "/docs/cdp/build" },
         { "source": "/docs/apps/build/tutorial", "destination": "/docs/cdp/tutorial" },
         { "source": "/docs/apps", "destination": "/docs/cdp/enabling" },
