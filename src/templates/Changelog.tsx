@@ -53,18 +53,17 @@ const Select = ({ onChange, values, ...other }) => {
     )
 }
 
-export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
-    const [changes, setChanges] = useState(allRoadmap.nodes)
-    const [filters, setFilters] = useState({})
-
-    const changesByDate = groupBy(changes, (node) => {
+const getChangesByDate = (changes) => {
+    return groupBy(changes, (node) => {
         const date = new Date(node.date)
         return dayjs().month(date.getMonth()).year(date.getFullYear())
     })
-    const tableOfContents = Object.keys(changesByDate).map((date) => {
-        const month = dayjs(date).format('MMMM')
-        return { url: month, value: month, depth: 0 }
-    })
+}
+
+export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
+    const [changes, setChanges] = useState(allRoadmap.nodes)
+    const [filters, setFilters] = useState({})
+    const [changesByDate, setChangesByDate] = useState(getChangesByDate(changes))
 
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
@@ -88,7 +87,13 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                       })
                   )
         setChanges(newChanges)
+        setChangesByDate(getChangesByDate(newChanges))
     }, [filters])
+
+    const tableOfContents = Object.keys(changesByDate).map((date) => {
+        const month = dayjs(date).format('MMMM')
+        return { url: month, value: month, depth: 0 }
+    })
 
     return (
         <CommunityLayout
