@@ -98,7 +98,7 @@ import PostHog
 @main
 struct posthog_feature_flagsApp: App {
     init() {
-        let configuration = PostHogConfig(apiKey: "phc_Is2364QKW0QKHbXWVtgh8Yugx8xAvdfL71JmBaKD8mG", host: "https://app.posthog.com")
+        let configuration = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
         configuration.captureApplicationLifecycleEvents = true
         PostHogSDK.shared.setup(configuration)
     }
