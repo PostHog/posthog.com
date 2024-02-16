@@ -102,7 +102,6 @@ struct posthog_feature_flagsApp: App {
         // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
         let POSTHOG_HOST = "<ph_instance_address>"
         let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) // TIP: host is optional if you use https://app.posthog.com
-        configuration.captureApplicationLifecycleEvents = true
         PostHogSDK.shared.setup(configuration)
     }
     
