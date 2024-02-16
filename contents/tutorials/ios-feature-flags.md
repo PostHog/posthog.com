@@ -17,7 +17,7 @@ We'll create a basic iOS app, add PostHog, create a feature flag, and then imple
 
 ## 1. Create a new iOS app
 
-Our app will have two screens. The first screen will have a button which will take you to a second screen. The second screen will either have a `red` or `green` background color depending on whether our feature flag is enabled or not.
+Our app will have two screens. The first screen will have a button which takes you to a second screen. The second screen will either have a `red` or `green` background color depending on whether our feature flag is enabled or not.
 
 The first step is to create a new app. Open XCode and click "Create new project". Select iOS as your platform, then "App" and press next. Give your app a name, select `SwiftUI` as the interface, and the defaults for everything else. Click next and then "Create".
 
@@ -81,7 +81,9 @@ Our basic set up is now complete. Build and run your app to see it in action.
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods) or [Carthage](/docs/libraries/ios#carthage)). To add the package dependency to your Xcode project, select `File > Add Package Dependency` and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
+First, add [`posthog-ios`](/docs/libraries/ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods) or [Carthage](/docs/libraries/ios#carthage)). 
+
+To add the package dependency to your Xcode project, select `File > Add Package Dependency` and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
 Note that for this tutorial we use version `3.1.3` of the SDK.
 
@@ -176,5 +178,5 @@ That's it! When you restart your app and click the button, you should see the gr
 ## Further reading
 
 - [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
-- [How to run A/B tests in iOS](/tutorials/android-ab-tests)
-- [How to run A/B tests in Android](/tutorials/ios-ab-tests)
+- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
+- [How to run A/B tests in Android](/tutorials/android-ab-tests)
