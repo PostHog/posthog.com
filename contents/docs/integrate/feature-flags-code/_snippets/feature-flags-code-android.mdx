@@ -1,7 +1,15 @@
 ### Boolean feature flags
 
 ```kotlin
+<<<<<<< HEAD
 if (PostHog.isFeatureEnabled("flag-key")) {
+||||||| 1c2fb482f
+if (PostHog.isFeatureEnabled("flag-key") ) {
+=======
+import com.posthog.PostHog
+
+if (PostHog.isFeatureEnabled("flag-key") ) {
+>>>>>>> master
     // Do something differently for this user
 
     // Optional: fetch the payload
@@ -12,6 +20,8 @@ if (PostHog.isFeatureEnabled("flag-key")) {
 ### Multivariate feature flags
 
 ```kotlin
+import com.posthog.PostHog
+
 if (PostHog.getFeatureFlag("flag-key") == "variant-key") { // replace 'variant-key' with the key of your variant
     // Do something differently for this user
 
@@ -29,6 +39,10 @@ This means that for most screens, the feature flags are available immediately â€
 To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
 
 ```kotlin
+import com.posthog.PostHog
+import com.posthog.android.PostHogAndroidConfig
+import com.posthog.PostHogOnFeatureFlags
+
 // During SDK initialization
 val config = PostHogAndroidConfig(apiKey).apply {
     onFeatureFlags = PostHogOnFeatureFlags {
@@ -51,5 +65,7 @@ PostHog.reloadFeatureFlags {
 Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.reloadFeatureFlags()
 ```

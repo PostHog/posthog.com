@@ -15,14 +15,14 @@ const quickLinks = [
         icon: 'IconGraph',
         name: 'Product analytics',
         to: '/docs/product-analytics',
-        description: 'Better understand your users and build better products',
+        description: 'Understand your users and build better products',
         color: 'blue',
     },
     {
         icon: 'IconRewindPlay',
         name: 'Session replay',
         to: '/docs/session-replay',
-        description: 'Play back sessions to diagnose UI issues and get inspired',
+        description: 'Play back sessions to diagnose UI issues',
         color: 'yellow',
     },
     {
@@ -59,6 +59,13 @@ const quickLinks = [
         to: '/docs/data-warehouse',
         description: 'Extend PostHog by adding your own functionality',
         color: 'seagreen',
+    },
+    {
+        icon: 'IconPieChart',
+        name: 'Web analytics',
+        to: '/docs/web-analytics',
+        description: 'Easily track the most common web metrics',
+        color: 'green',
     },
 ]
 

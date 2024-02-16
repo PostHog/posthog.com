@@ -8,19 +8,19 @@ availability:
     enterprise: full
 ---
 
-Below are the different types of data you'll come across in your PostHog instance. 
-
-## Events
-
-The [event tab](https://app.posthog.com/data-management/events) contains a list of all the [events](/docs/data/events) captured into your PostHog instance. They are sortable by name, last seen, and type (custom vs default).
-
-Each event also contains the top custom properties for that event including their type, tags, and an example.
+You can manage all your PostHog data on the [Data](https://us.posthog.com/data-management/events) and [People](https://us.posthog.com/persons) pages.
 
 ![Data management events](../../images/features/data-management/events.png)
 
+## Events
+
+The [Events tab](https://app.posthog.com/data-management/events) contains a list of all the events captured into your PostHog instance. They are sortable by name, last seen, and type (custom vs default).
+
+Each event also contains the top custom properties for that event including their type, tags, and an example.
+
 ### Event details
 
-Clicking on an event from this list shows more details about it such as:
+Clicking on an event from this list shows more details about it, such as:
 
 - An editable description
 - The raw event name
@@ -28,15 +28,17 @@ Clicking on an event from this list shows more details about it such as:
 - Top custom properties
 - Matching events
 
-Clicking the edit button enables you to edit the description along with the event's tags and verification status. You can see and edit the description, tags, and verification status wherever you use this in PostHog, such as insights. This is useful for keeping track of what data is up-to-date and relevant.
+Clicking the edit button enables you to edit the description along with the event's tags and verification status. You can see and edit the description, tags, and verification status wherever you use this in PostHog, such as insights. 
+
+This is useful for keeping track of what data is up-to-date and relevant.
 
 ![Definition card edit](../../images/features/data-management/definition-card-edit.png)
 
 ## Actions
 
-The [actions tab](https://app.posthog.com/data-management/actions) contains a list of all the [actions](/docs/data/actions) created. They are sortable by name, who created them, creation date, and whether they post to a webhook. The actions list also contains the type of action such as an event, autocapture, or pageview URL along with a description and tags.
+The [actions tab](https://app.posthog.com/data-management/actions) contains a list of all the [actions](/docs/data/actions) created. They are sortable by name, who created them, creation date, and whether they post to a webhook. 
 
-Clicking on an action takes you to that action's details page where you can edit it. 
+The actions list also contains the type of action such as an event, autocapture, or pageview URL along with a description and tags. Clicking on an action takes you to that action's details page where you can edit it. 
 
 ## Properties 
 
@@ -60,47 +62,7 @@ If this happens, we do our best to still ingest the event and we log an ingestio
 
 ![Ingestion warnings](../../images/features/data-management/warnings.png)
 
-Below are all the warnings we currently log and what they mean.
-
-> **Note:** These warnings are sampled. The actual number of events affected may exceed the total displayed.
-
-### Refused to merge with an illegal distinct ID
-
-See our [identify docs](/docs/product-analytics/identify) for what happens when you call `identify` or `alias` with an illegal distinct ID like `guest` or `null`.
-
-### Refused to merge an already identified user
-
-See our [identify docs](/docs/product-analytics/identify#how-to-handle-duplicates-of-the-same-user) for details on how we handle duplicate users.
-
-### Refused to process event with invalid UUID
-
-PostHog drops events with invalid UUIDs.
-
-There are very few cases where it would be good to provide an event UUID. PostHog generates these for you. 
-
-When generating UUIDs, there are many gotchas to be aware of. For example, deduping based on event UUID is not guaranteed due to how merges work in ClickHouse.
-
-### Ignored an invalid timestamp, event was still ingested
-
-When capturing events, the `timestamp` and `sent_at` fields should be in `ISO 8601` format. When parsing fails, PostHog ignores these fields and [computes them itself](/docs/data/timestamps) as if omitted. These events are still ingested, but their timestamp might be different than the one you intended.
-
-### An event was sent more than 23 hours in the future
-
-This warning indicates a bug in your instrumentation, as we don't expect events from the future. Read about [how we compute event timestamps](/docs/data/timestamps) and review your instrumentation code (the `sent_at` or the `offset` values might be wrong).
-
-These events are ingested and stored, but will not show up in the UI. If these events create new persons, these persons will have a "first seen" property in the future.
-
-### Discarded event exceeding 1MB limit
-
-PostHog discards events exceeding 1 megabyte in size after processing. The two common ways this happens are:
-
-1. An event is captured with an exceptionally large number of properties (including person properties)
-
-2. One or more installed apps transformed the event and enriched it with a large amount of additional property data.
-
-### Event ingestion has overflowed capacity
-
-This warning indicates PostHog is receiving more events for a single `distinct_id` than it can process in the main ingestion pipeline. These events are still safe and ingested but through a slower overflow pipeline that is slower. This is often a sign of an instrumentation bug such as a loop sending the same event. 
+See [ingestion warnings docs](/docs/data/ingestion-warnings) for a complete list.
 
 ## Database (beta)
 
