@@ -18,9 +18,9 @@ import InsightDark from '../images/tutorials/laravel-analytics/insight-dark.png'
 To show you the basics of using PostHog analytics in your backend, we create a simple Laravel app that has two pages:
 
 1. A `login` page where a user can enter their name, email, and company name in form.
-2. After submitting the form, they are navigated to a `home` page that has some text and a button.
+2. A `home` page that has some text and a button.
 
-To do this, first ensure [PHP](https://www.php.net/manual/en/install.php) and [Composer](https://getcomposer.org/) are installed. Then, create a new Laravel project called `laravel-analytics`:
+First ensure [PHP](https://www.php.net/manual/en/install.php) and [Composer](https://getcomposer.org/) are installed. Then, create a new Laravel project called `laravel-analytics`:
 
 ```bash
 composer create-project laravel/laravel laravel-analytics
@@ -30,6 +30,8 @@ cd laravel-analytics
 Next, replace the code in `routes/web.php` to define our app routes:
 
 ```php file=routes/web.php
+<?php
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/log-in', function () {
@@ -43,7 +45,7 @@ Route::get('/home', function () {
 });
 ```
 
-Then we create two new views `login.blade.php` and `home.blade.php` in the `resources/views` directory:
+Then, create two new views `login.blade.php` and `home.blade.php` in the `resources/views` directory:
 
 ```php file=resources/views/login.blade.php
 <!DOCTYPE html>
@@ -76,7 +78,6 @@ Then we create two new views `login.blade.php` and `home.blade.php` in the `reso
 ```
 
 ```php file=resources/views/home.blade.php
-<!-- resources/views/home.blade.php -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,7 +111,7 @@ Then we create two new views `login.blade.php` and `home.blade.php` in the `reso
 </html>
 ```
 
-Then we set up a controller for our `login` page. This controller will save the user inputs to our `Session`:
+Then set up a controller for our `login` page. This controller will save the user inputs to our `Session`:
 
 ```bash
 php artisan make:controller AuthController
@@ -183,7 +184,7 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-With this set up, we're ready to begin capturing events.
+With this set up, we're ready to capture events.
 
 ## 3. Implement the event capture code
 
@@ -219,7 +220,7 @@ With this set up, refresh your browser and click the button on the home page a f
 > 
 > When calling `PostHog::capture`, you need to provide a `distinctID` argument. This is a unique identifier for your user and enables you to correctly attribute events to specific users. 
 >
-> For logged-in users, you typically use their email or database ID for the `distinctId` argument. For logged-out or anonymous users, you should use a unique identifer from their request body or cookies.
+> For logged-in users, you typically use their email or database ID for the `distinctId` argument. For logged-out or anonymous users, you should use a unique identifer from their request cookies or body.
 
 ### Setting event properties
 
@@ -289,6 +290,15 @@ Next, go the [Product analytics](https://us.posthog.com/insights) in PostHog and
 In this tutorial we create a simple trend insight. Select the **Trends** tab and under the **Series** header select the `home_api_called` event. You can then click on the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
 
 For example, in the image below we set our insight to show number of unique users that captured the `home_api_called` event where the `user_name` property is equal to `Max`:
+
+<ProductScreenshot
+  imageLight={EventsInPostHogLight} 
+  imageDark={EventsInPostHogDark} 
+  alt="Feature flag created in PostHog" 
+  classes="rounded"
+/>
+
+That's it! Feel free to play around in your dashboard and explore the different kinds of insights you can create in PostHog.
 
 ## Further reading
 
