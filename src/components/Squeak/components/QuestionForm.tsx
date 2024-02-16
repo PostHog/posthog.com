@@ -14,6 +14,8 @@ import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import Spinner from 'components/Spinner'
+import usePostHog from 'hooks/usePostHog'
+import { navigate } from 'gatsby'
 
 type QuestionFormValues = {
     subject: string
@@ -118,6 +120,7 @@ function QuestionFormMain({
     showTopicSelector,
     disclaimer = true,
 }: QuestionFormMainProps) {
+    const posthog = usePostHog()
     const { user, logout } = useUser()
 
     return (
@@ -129,6 +132,7 @@ function QuestionFormMain({
                     body: '',
                     images: [],
                     topic: undefined,
+                    url: undefined,
                     ...initialValues,
                 }}
                 validate={(values) => {
@@ -144,7 +148,13 @@ function QuestionFormMain({
                     }
                     return errors
                 }}
-                onSubmit={(values) => onSubmit(values, user)}
+                onSubmit={(values) => {
+                    if (values.url) {
+                        posthog?.capture('community honeypot rejection')
+                        return navigate('/')
+                    }
+                    onSubmit(values, user)
+                }}
             >
                 {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
@@ -179,6 +189,14 @@ function QuestionFormMain({
                                         values={values}
                                     />
                                 </div>
+                                <Field
+                                    className="opacity-0 absolute left-0 top-0 h-0 w-0 -z-50 border-0 p-0"
+                                    name="url"
+                                    id="url"
+                                    type="text"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                />
                             </div>
                             <span className="ml-[50px]">
                                 <Button
