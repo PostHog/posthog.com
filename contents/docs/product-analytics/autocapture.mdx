@@ -18,7 +18,7 @@ Autocapture is **enabled by default**.
 
  ## Disabling autocapture
 
-You can also disable autocapture in your [project settings](https://app.posthog.com/project/settings), or by setting `autocapture: false` in the [config](/docs/libraries/js#config). If _one_ of these is disabled, autocapture is disabled.
+You can also disable autocapture in your [project settings](https://us.posthog.com/project/settings), or by setting `autocapture: false` in the [config](/docs/libraries/js#config). If _one_ of these is disabled, autocapture is disabled.
 
 > Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings), or using `disable_session_recording`.
 
@@ -47,7 +47,7 @@ Allowlists only filter autocapture events – they don't affect the data collect
 
 ### Preventing sensitive data capture
 
-For security reasons and to prevent sensitive data being captured, PostHog is conservative regarding `input` tags. We specifically only collect the `name`, `id`, and `class` attributes from `input` tags. If you need to collect more data from inputs, you should use [custom events](/tutorials/event-tracking-guide).
+For security reasons and to prevent sensitive data being captured, PostHog is conservative regarding `input` tags. We specifically only collect the `name`, `id`, and `class` attributes from `input` tags. If you need to collect more data from inputs, you should use [custom events](/docs/product-analytics/capture-events).
 
 If there are specific elements you _don't_ want captured, add the `ph-no-capture` class name.
 
