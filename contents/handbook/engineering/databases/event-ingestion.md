@@ -83,6 +83,6 @@ Read more in the [ClickHouse manual](/handbook/engineering/clickhouse/data-inges
 
 Persons ingestion works similarly to events, except there's two tables involved: `person` and `person_distinct_id`.
 
-Note that querying both tables _requires_ handling duplicated rows. Check out [PersonQuery code](https://github.com/PostHog/posthog/blob/master/ee/clickhouse/queries/person_query.py) for an example of how it's done.
+Note that querying both tables _requires_ handling duplicated rows. Check out [PersonQuery code](https://github.com/PostHog/posthog/blob/master/posthog/queries/person_query.py) for an example of how it's done.
 
 In sharded setups, `person` and `person_distinct_id` tables are not sharded and instead replicated onto each node to avoid JOINs over the network.
