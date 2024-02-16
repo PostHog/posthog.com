@@ -11,7 +11,7 @@ import EventsInPostHogDark from '../images/tutorials/android-feature-flags/event
 import CreateFlagLight from '../images/tutorials/android-feature-flags/create-flag-light.png'
 import CreateFlagDark from '../images/tutorials/android-feature-flags/create-flag-dark.png'
 
-[Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in iOS using PostHog. 
+[Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in Android using PostHog. 
 
 We'll create a basic Android app, add PostHog, create a feature flag, and then implement the flag to control content in our app.
 
@@ -19,8 +19,8 @@ We'll create a basic Android app, add PostHog, create a feature flag, and then i
 
 Our app will have two screens: 
 
-- The first screen will have a button which will take you to a second screen. 
-- The second screen will either have a `red` or `green` background color color depending on whether our feature flag is enabled or not.
+- The first screen has a button which takes you to a second screen. 
+- The second screen either has a `red` or `green` background color depending on whether our feature flag is enabled or not.
 
 The first step is to create a new app. Open [Android Studio](https://developer.android.com/studio) and create a new project. Select `Empty Activity`, name your project `Android-Feature-Flags`, and use the defaults for everything else.
 
@@ -154,7 +154,7 @@ class MyFeatureFlagsApplication : Application() {
 }
 ```
 
-To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project).
+To get your PostHog API key and host, [sign up to PostHog](https://us.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://us.posthog.com/settings/project).
 
 We now need to register our custom application class. Go to `app/manifests/AndroidManifest.xml` and add `android:name=".MyFeatureFlagsApplication"` within the `<application` tag:
 
@@ -203,23 +203,20 @@ To do this, update the code in `MainActivity.kt` with the following:
 
 ```kt file=MainActivity.kt
 import androidx.compose.runtime.LaunchedEffect
+import com.posthog.PostHog
 // ... [Rest of your imports and MainActivity code]
 
 
 @Composable
 fun SecondScreen() {
-    val context = LocalContext.current
-    val isTestVariant = remember { mutableStateOf(false) }
+    val isFlagEnabled = remember { mutableStateOf(false) }
 
-    // LaunchedEffect to call PostHog.getFeatureFlag() once when the composable is initialized
+    // LaunchedEffect to call PostHog.isFeatureEnabled() once when the composable is initialized
     LaunchedEffect(key1 = Unit) {
-        isFlagEnabled.value = PostHogAndroid.with(context, PostHogAndroidConfig(
-            apiKey = "phc_Is2364QKW0QKHbXWVtgh8Yugx8xAvdfL71JmBaKD8mG",
-            host = "https://app.posthog.com"
-        )).isFeatureEnabled("my-cool-flag")
+        isFlagEnabled.value = PostHog.isFeatureEnabled("my-cool-flag")
     }
 
-    val backgroundColor = if (isTestVariant.value) Color.Green else Color.Red
+    val backgroundColor = if (isFlagEnabled.value) Color.Green else Color.Red
 
     Surface(modifier = Modifier.fillMaxSize(), color = backgroundColor) {
         // ... [rest of SecondScreen code remains unchanged]
@@ -234,5 +231,5 @@ That's it! When you restart your app and click the button, you should see the gr
 ## Further reading
 
 - [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
-- [How to run A/B tests in Android](/tutorials/ios-ab-tests)
-- [How to run A/B tests in iOS](/tutorials/android-ab-tests)
+- [How to run A/B tests in Android](/tutorials/android-ab-tests)
+- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
