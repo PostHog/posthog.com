@@ -439,7 +439,7 @@ export const HogQL = () => {
         {
             name: 'Filters',
             description:
-                'Use filters nearly everywhere data exists, like in dashboards, data series, breakdowns, funnels, and the event explorer',
+                'Use filters nearly everywhere data exists, like in dashboards, data series, breakdowns, funnels, and the activity tab',
         },
         {
             name: 'Aggregations',

@@ -8,7 +8,8 @@ tags:
   - Product engineers
   - User research
 crosspost:
-  - Product engineers  
+  - Product engineers
+  - Blog  
 ---
 
 Welcome to our new newsletter, Product for Engineers. We launched it because (1) there’s a real dearth of resources for engineers (and technical founders) who want to level-up their product skills; and (2) we believe embracing product engineering (i.e. engineers who do product) is a vital ingredient for successful startups.

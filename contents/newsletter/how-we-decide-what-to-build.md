@@ -2,13 +2,16 @@
 title: "How we decide what to build"
 date: 2024-01-10
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/prodhog.png
+featuredImage: ../images/newsletter/how-we-decide-what-to-build/how-we-decide.png
 featuredImageType: full
 tags:
   - Product engineers
   - Engineering
+  - Product  
 crosspost:
-  - Product engineers  
+  - Product engineers
+  - Founders
+  - Blog
 ---
 
 There is a point in your product journey where what to build next goes from obvious to unclear. The options seem endless and choosing correctly can be the difference between a thriving product and a failing one.
@@ -138,7 +141,7 @@ The metrics you need to see if what you’re building is working. I break down m
 
 **[Prioritising Features: Who’ll Use It & How Often?](https://www.intercom.com/blog/prioritising-features-wholl-use-it-how-often/) – Des Traynor**
 
-The Co-founder and Chief Strategy Officer of Intercom goes over how to avoid your product becoming a collection of useless tools by prioritizing features used by everyone all the time.
+The Co-founder and Chief Strategy Officer of [Intercom](/tutorials/intercom-session-replays) goes over how to avoid your product becoming a collection of useless tools by prioritizing features used by everyone all the time.
 
 **[How to prioritize features](https://www.ycombinator.com/library/8p-how-to-prioritize-features) – Emmett Shear**
 

@@ -70,6 +70,9 @@ export type ProfileData = {
     pronouns?: string | null
     country: string | null
     amaEnabled: boolean | null
+    teams?: {
+        id: number
+    }[]
 }
 
 export type UserData = {

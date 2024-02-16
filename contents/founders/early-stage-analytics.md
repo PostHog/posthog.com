@@ -11,6 +11,7 @@ tags:
  - Product analytics
 crosspost:
  - Product engineers
+ - Blog
 ---
 
 Building a startup is like trying to find the exit of a dark cave. Sometimes you hear sounds leading you somewhere, but it's mostly dark and hard to understand. In this cave, analytics is like a flashlight. It doesn’t automatically point you to the exit, but it shows you where you're going. You stumble less and spend less time moving in the wrong direction.

@@ -8,7 +8,8 @@ tags:
   - Founders
   - Revenue
 crosspost:
-  - Founders   
+  - Founders
+  - Blog   
 ---
 
 We build PostHog for [product engineers](/blog/what-is-a-product-engineer). We define product engineers as full-stack engineers who:

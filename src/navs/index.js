@@ -1287,10 +1287,6 @@ export const docsMenu = {
                             url: '/docs/data/annotations',
                         },
                         {
-                            name: 'Autocapture',
-                            url: '/docs/data/autocapture',
-                        },
-                        {
                             name: 'Cohorts',
                             url: '/docs/data/cohorts',
                         },
@@ -1299,32 +1295,16 @@ export const docsMenu = {
                             url: '/docs/data/events',
                         },
                         {
-                            name: 'Organizations & projects',
-                            url: '/docs/data/organizations-and-projects',
+                            name: 'Ingestion warnings',
+                            url: '/docs/data/ingestion-warnings',
                         },
                         {
-                            name: 'Persons',
+                            name: 'People',
                             url: '/docs/data/persons',
-                        },
-                        {
-                            name: 'Role-based access',
-                            url: '/docs/data/role-based-access',
                         },
                         {
                             name: 'Sessions',
                             url: '/docs/data/sessions',
-                        },
-                        {
-                            name: 'Settings',
-                            url: '/docs/data/application-settings',
-                        },
-                        {
-                            name: 'SSO & SAML',
-                            url: '/docs/data/sso',
-                        },
-                        {
-                            name: 'Team collaboration',
-                            url: '/docs/data/team-collaboration',
                         },
                         {
                             name: 'Timestamps',
@@ -1376,15 +1356,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Notebooks',
-                    url: '/docs/notebooks',
-                    icon: 'IconBook',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Toolbar',
                     url: '/docs/toolbar',
                     icon: 'IconToolbar',
@@ -1408,52 +1379,26 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Command palette',
-                    url: '/docs/cmd-k',
-                    icon: 'IconSearch',
+                    name: 'Notebooks',
+                    url: '/docs/notebooks',
+                    icon: 'IconBook',
                 },
                 {
-                    name: 'Apps',
-                    url: '/docs/apps',
-                    icon: 'IconApps',
+                    name: 'Settings',
+                    url: '/docs/settings/organizations-and-projects',
+                    icon: 'IconGear',
                     children: [
                         {
-                            url: '/docs/apps/notification-bar',
-                            name: 'Notification Bar',
+                            name: 'Organizations & projects',
+                            url: '/docs/settings/organizations-and-projects',
                         },
                         {
-                            url: '/docs/apps/pineapple-mode',
-                            name: 'Pineapple Mode',
+                            name: 'Role-based access',
+                            url: '/docs/settings/role-based-access',
                         },
                         {
-                            name: 'Build an app',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/apps/build',
-                                },
-                                {
-                                    name: 'Tutorial',
-                                    url: '/docs/apps/build/tutorial',
-                                },
-                                {
-                                    name: 'Troubleshooting',
-                                    url: '/docs/apps/enabling',
-                                },
-                                {
-                                    name: 'Developer reference',
-                                    url: '/docs/apps/build/reference',
-                                },
-                                {
-                                    name: 'Testing',
-                                    url: '/docs/apps/build/testing',
-                                },
-                                {
-                                    name: 'TypeScript types',
-                                    url: '/docs/apps/build/types',
-                                },
-                            ],
+                            name: 'SSO & SAML',
+                            url: '/docs/settings/sso',
                         },
                     ],
                 },
@@ -1571,6 +1516,11 @@ export const docsMenu = {
                             url: '/docs/data-model',
                         },
                     ],
+                },
+                {
+                    name: 'Command palette',
+                    url: '/docs/cmd-k',
+                    icon: 'IconSearch',
                 },
                 {
                     name: 'Webhooks',
@@ -2499,10 +2449,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/filter-out',
                             name: 'Filter Out',
-                        },
-                        {
-                            url: '/docs/cdp/first-time-event-tracker',
-                            name: 'First Time Event Tracker',
                         },
                         {
                             url: '/docs/cdp/property-filter',

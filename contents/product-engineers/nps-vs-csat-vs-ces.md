@@ -10,6 +10,8 @@ tags:
   - Product engineers
   - User research
   - Growth engineering
+crosspost:
+  - Blog  
 ---
 
 The two most important metrics in SaaS are growth and retention. [User surveys](/surveys) are a great way to unlock insights into how to improve them, but which survey type gives you the best insights? 

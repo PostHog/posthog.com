@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Marketing
   - Founders
+crosspost:
+  - Blog  
 ---
 
 As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [Hacker News](https://news.ycombinator.com).

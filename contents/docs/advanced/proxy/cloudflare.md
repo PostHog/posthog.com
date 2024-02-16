@@ -23,39 +23,42 @@ From the root of the Cloudflare dashboard, go to "Workers & Pages" > "Overview" 
 Click "Edit code" once the new worker has been saved following "Deploy". (And if you're already on the worker page, click "Quick edit".) You should now be seeing a code editor for the worker. Just replace all the existing content with this proxying code:
 
 ```JavaScript
-const API_HOST = "app.posthog.com" // Change to "eu.posthog.com" for the EU region
+const API_HOST = "us-proxy-direct.i.posthog.com" // Change to "eu-proxy-direct.i.posthog.com" for the EU region
 
-async function handleRequest(event) {
-    const url = new URL(event.request.url)
-    const pathname = url.pathname
-    const search = url.search
-    const pathWithParams = pathname + search
-    if (pathname.startsWith("/static/")) {
-        return retrieveStatic(event, pathWithParams)
-    } else {
-        return forwardRequest(event, pathWithParams)
-    }
+async function handleRequest(request, ctx) {
+  const url = new URL(request.url)
+  const pathname = url.pathname
+  const search = url.search
+  const pathWithParams = pathname + search
+
+  if (pathname.startsWith("/static/")) {
+      return retrieveStatic(request, pathWithParams, ctx)
+  } else {
+      return forwardRequest(request, pathWithParams)
+  }
 }
 
-async function retrieveStatic(event, pathname) {
-    let response = await caches.default.match(event.request)
-    if (!response) {
-        response = await fetch(`https://${API_HOST}${pathname}`)
-        event.waitUntil(caches.default.put(event.request, response.clone()))
-    }
-    return response
+async function retrieveStatic(request, pathname, ctx) {
+  let response = await caches.default.match(request)
+  if (!response) {
+      response = await fetch(`https://${API_HOST}${pathname}`)
+      ctx.waitUntil(caches.default.put(request, response.clone()))
+  }
+  return response
 }
 
-async function forwardRequest(event, pathWithSearch) {
-    const request = new Request(event.request)
-    request.headers.delete("cookie")
-    return await fetch(`https://${API_HOST}${pathWithSearch}`, request)
+async function forwardRequest(request, pathWithSearch) {
+  const originRequest = new Request(request)
+  originRequest.headers.delete("cookie")
+  return await fetch(`https://${API_HOST}${pathWithSearch}`, originRequest)
 }
 
-addEventListener("fetch", (event) => {
-    event.passThroughOnException()
-    event.respondWith(handleRequest(event))
-})
+export default {
+  async fetch(request, env, ctx) {
+    return handleRequest(request, ctx);
+  }
+};
+
 ```
 
 When done, click "Save and deploy".

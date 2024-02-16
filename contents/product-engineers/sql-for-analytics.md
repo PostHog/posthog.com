@@ -8,6 +8,8 @@ category: Engineering
 tags:
   - Product engineers
   - Product analytics
+crosspost:
+  - Blog  
 ---
 
 Analytics is one of SQL's most important use cases. There are many ways to slice, modify, and interpret analytics data. SQL provides the depth and customizability to get insights from it, answer questions, and make data-driven decisions.

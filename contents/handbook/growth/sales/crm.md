@@ -70,7 +70,7 @@ You can also just manually add a user to HubSpot under 'Contacts'. When creating
 
 ## How we calculate Ideal Customer Profile (ICP)
 
-Aligned with our Strategic [Ideal Customer Persona](/handbook/strategy/ideal-customer-persona), ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly.
+Aligned with our Strategic [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework), ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly.
 We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 24 in [HubSpot](https://app.hubspot.com/property-settings/6958578/properties?action=edit&property=hubspotscore&search=hubspot&type=0-1) based on the following parameters:
 
 - *Employee count* - we use this as a strong indicator for product market fit.  Smaller companies are less likely to have achieved this so our highest score here goes to companies in the 15-500 employee range.  We score companies over 500 employees lower as they will generally be slower to deal with.

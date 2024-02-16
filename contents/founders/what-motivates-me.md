@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Being a founder
+crosspost:
+  - Blog  
 ---
 
 PostHog got pretty far (17k customers across all our products, went through Y Combinator, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.

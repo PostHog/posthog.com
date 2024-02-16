@@ -12,6 +12,7 @@ tags:
   - Growth
 crosspost:
   - Founders
+  - Blog
 ---
 
 Here's what you need to know about churn rate and retention rate:
@@ -159,7 +160,7 @@ Involuntary churn typically means billing problems – e.g. expired cards, out-o
 
 ### 2. Target different users
 
-Sometimes poor retention comes from acquiring the wrong users. This could be a marketing problem, or you might have the wrong [ideal customer profile](/blog/creating-ideal-customer-profile) for your product.
+Sometimes poor retention comes from acquiring the wrong users. This could be a marketing problem, or you might have the wrong [ideal customer profile](/newsletter/ideal-customer-profile-framework) for your product.
 
 ### 3. Learn about your power users
 
@@ -233,7 +234,7 @@ To conclude, here are five takeaways:
 
 If you're interested in early-stage startups and product-led growth, you may find these articles useful: 
 
-- PostHog CEO, James Hawkins, on [how we found our Ideal Customer Profile](/blog/creating-ideal-customer-profile)
+- PostHog CEO, James Hawkins, on [how we found our Ideal Customer Profile](/newsletter/ideal-customer-profile-framework)
 
 - My guide to [building an AARRR pirate funnel](/blog/aarrr-pirate-funnel) for tracking your most important metrics
 

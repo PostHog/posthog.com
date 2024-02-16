@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Being a founder
+crosspost:
+  - Blog  
 ---
 
 Last week we had an offsite in the beautiful Portuguese countryside, an hour's bus journey from Porto. We uploaded a highlight reel of the retreat to [TikTok](https://vm.tiktok.com/ZMRUGX4XW/).
