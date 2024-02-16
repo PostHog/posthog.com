@@ -136,10 +136,14 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                 </div>
             </section>
             <section className="grid article-content">
-                {Object.keys(changesByDate).map((date) => {
+                {Object.keys(changesByDate).map((date, index) => {
                     const nodes = changesByDate[date]
                     return (
-                        <div key={date} id={slugify(dayjs(date).format('MMMM'))} className="flex gap-4">
+                        <div
+                            key={`${dayjs(date).format('MMM')}-${index}`}
+                            id={slugify(dayjs(date).format('MMMM'))}
+                            className="flex gap-4"
+                        >
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
                                 <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
                                     <h2 className="!text-sm font-bold uppercase !m-0">{dayjs(date).format('MMM')}</h2>
