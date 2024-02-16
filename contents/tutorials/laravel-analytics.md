@@ -220,7 +220,7 @@ With this set up, refresh your browser and click the button on the home page a f
 > 
 > When calling `PostHog::capture`, you need to provide a `distinctID` argument. This is a unique identifier for your user and enables you to correctly attribute events to specific users. 
 >
-> For logged-in users, you typically use their email or database ID for the `distinctId` argument. For logged-out or anonymous users, you should use a unique identifer from their request cookies or body.
+> For logged-in users, you typically use their email or database ID for the `distinctId` argument. For logged-out or anonymous users, you should use a unique identifier from their request cookies or body.
 
 ### Setting event properties
 
