@@ -62,33 +62,34 @@ const getChangesByDate = (changes) => {
 
 export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
     const [changes, setChanges] = useState(allRoadmap.nodes)
-    const [filters, setFilters] = useState({})
+    // const [filters, setFilters] = useState({})
     const [changesByDate, setChangesByDate] = useState(getChangesByDate(changes))
 
-    const handleChange = (key, { value }, field) => {
-        const newFilters = { ...filters }
-        if (value === null) {
-            delete newFilters[key]
-        } else {
-            newFilters[key] = { value, field }
-        }
-        setFilters(newFilters)
-    }
+    // const handleChange = (key, { value }, field) => {
+    //     const newFilters = { ...filters }
+    //     if (value === null) {
+    //         delete newFilters[key]
+    //     } else {
+    //         newFilters[key] = { value, field }
+    //     }
+    //     setFilters(newFilters)
+    // }
 
-    useEffect(() => {
-        const filterKeys = Object.keys(filters)
-        const newChanges =
-            filterKeys.length <= 0
-                ? allRoadmap.nodes
-                : allRoadmap.nodes.filter((change) =>
-                      filterKeys.every((filter) => {
-                          const { value, field } = filters[filter]
-                          return get(change, field) === value
-                      })
-                  )
-        setChanges(newChanges)
-        setChangesByDate(getChangesByDate(newChanges))
-    }, [filters])
+    // useEffect(() => {
+    //     const filterKeys = Object.keys(filters)
+    //     const newChanges = [
+    //         ...(filterKeys.length <= 0
+    //             ? allRoadmap.nodes
+    //             : allRoadmap.nodes.filter((change) =>
+    //                   filterKeys.every((filter) => {
+    //                       const { value, field } = filters[filter]
+    //                       return get(change, field) === value
+    //                   })
+    //               )),
+    //     ]
+    //     setChanges(newChanges)
+    //     setChangesByDate(getChangesByDate(newChanges))
+    // }, [filters])
 
     const tableOfContents = Object.keys(changesByDate).map((date) => {
         const month = dayjs(date).format('MMMM')
@@ -121,7 +122,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                             { label: 2020, value: '/changelog/2020' },
                         ]}
                     />
-                    {Object.keys(filterOptions).map((filter) => {
+                    {/* {Object.keys(filterOptions).map((filter) => {
                         const { field } = filterOptions[filter][0] ?? {}
                         if (!field) return null
                         return (
@@ -131,7 +132,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                 values={[{ label: `All ${filter}`, value: null }, ...filterOptions[filter]]}
                             />
                         )
-                    })}
+                    })} */}
                 </div>
             </section>
             <section className="grid article-content">
