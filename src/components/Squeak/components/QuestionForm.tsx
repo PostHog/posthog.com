@@ -149,7 +149,9 @@ function QuestionFormMain({
                 {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
                         <Form className="mb-0">
-                            <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
+                            <div className="w-[40px] h-[40px] mr-[10px] float-left rounded-full overflow-hidden">
+                                <Avatar className="w-[40px] aspect-fill" image={getAvatarURL(user?.profile)} />
+                            </div>
 
                             <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
                                 {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
@@ -393,7 +395,9 @@ export const QuestionForm = ({
                 }[view]
             ) : (
                 <div className="flex flex-1 space-x-2">
-                    <Avatar className="w-[40px]" image={getAvatarURL(user?.profile)} />
+                    <div className="rounded-full overflow-hidden w-[40px] h-[40px]">
+                        <Avatar className="w-[40px]" image={getAvatarURL(user?.profile)} />
+                    </div>
                     <Button
                         disabled={archived}
                         onClick={() => setView('question-form')}

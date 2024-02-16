@@ -335,7 +335,7 @@ export default function RichText({
             {!value && (
                 <div className="absolute top-4 right-4">
                     <a
-                        className="text-primary/30 hover:text-primary/50 dark:text-primary-dark/30 dark:hover:text-primary-dark/50"
+                        className="!text-primary/30 hover:!text-primary/50 dark:!text-primary-dark/30 dark:hover:!text-primary-dark/50"
                         href="https://www.markdownguide.org/cheat-sheet/"
                         target="_blank"
                         rel="noreferrer"
