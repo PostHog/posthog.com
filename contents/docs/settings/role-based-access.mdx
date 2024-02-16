@@ -1,0 +1,35 @@
+---
+title: Role-based access
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: none
+    enterprise: full
+---
+
+> Roles-based access is only available on our Enterprise plan. See the [pricing page](/pricing) for more details.
+
+## Organization defaults
+
+By default, team members in your organization have view and edit access to all resource features – i.e. feature flags, experiments, session recordings.
+
+These can be changed on the [role-based access settings page](https://us.posthog.com/settings/organization-rbac). You can set organizational defaults to just "view only" and restrict edit access to certain features.
+
+## Roles
+
+Roles are groupings of team members. You can assign a member to multiple roles.
+
+For more granularity, you can also define whether a role has view or edit access per resource.
+
+Only organization members with admin or owner level access can create or edit roles.
+
+## Resources
+
+Resources are PostHog features. These include but are not limited to feature flags, experiments, session recordings, and cohorts.
+
+Resources that you create will always be viewable and editable. Access control restricts editing for resources that you don't own.
+
+### Editing access per resource
+
+You can also override the default access settings for a specific resource. This allows you to give edit access to a specific feature flag, for example, to a team role that normally has "view only"
