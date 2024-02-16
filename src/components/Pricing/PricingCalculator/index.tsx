@@ -307,9 +307,7 @@ export const PricingCalculator = () => {
                                     <div className="flex gap-2">
                                         <strong>
                                             <button>
-                                                {enterpriseLevelSpend && showAnnualBilling && enterprise_flag_enabled
-                                                    ? 'Annual'
-                                                    : 'Monthly'}
+                                                {enterpriseLevelSpend && showAnnualBilling ? 'Annual' : 'Monthly'}
                                             </button>{' '}
                                             estimate{' '}
                                             {enterpriseLevelSpend &&
@@ -325,7 +323,7 @@ export const PricingCalculator = () => {
                                     </p>
                                 </div>
                                 <div className="p-3 text-center">
-                                    {enterpriseLevelSpend && enterprise_flag_enabled ? (
+                                    {enterpriseLevelSpend ? (
                                         <>
                                             <span className="text-lg font-bold">
                                                 $
@@ -335,17 +333,15 @@ export const PricingCalculator = () => {
                                             </span>
                                             <span className="opacity-60">
                                                 /mo
-                                                {enterprise_flag_enabled && (
-                                                    <div className="text-sm mb-0 flex justify-evenly ">
-                                                        paid annually
-                                                        {enterpriseLevelSpend && (
-                                                            <Toggle
-                                                                checked={showAnnualBilling}
-                                                                onChange={() => toggleAnnualBilling()}
-                                                            />
-                                                        )}
-                                                    </div>
-                                                )}
+                                                <div className="text-sm mb-0 flex justify-evenly ">
+                                                    paid annually
+                                                    {enterpriseLevelSpend && (
+                                                        <Toggle
+                                                            checked={showAnnualBilling}
+                                                            onChange={() => toggleAnnualBilling()}
+                                                        />
+                                                    )}
+                                                </div>
                                             </span>
                                         </>
                                     ) : (
@@ -383,7 +379,7 @@ export const PricingCalculator = () => {
                         </p>
                     </div>
 
-                    {(enterpriseLevelSpend || anyProductMaxed) && enterprise_flag_enabled && (
+                    {enterpriseLevelSpend && (
                         <div className="pl-10 relative mb-4">
                             <span className="w-6 h-6 absolute top-0 left-1">
                                 <Discount />
