@@ -140,6 +140,7 @@ import com.posthog.android.PostHogAndroidConfig
 class MyFeatureFlagsApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
+        // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
         private const val POSTHOG_HOST = "<ph_instance_address>"
     }
 
@@ -147,7 +148,7 @@ class MyFeatureFlagsApplication : Application() {
         super.onCreate()
         val config = PostHogAndroidConfig(
             apiKey = POSTHOG_API_KEY,
-            host = POSTHOG_HOST
+            host = POSTHOG_HOST // TIP: host is optional if you use https://app.posthog.com
         )
         PostHogAndroid.setup(this, config)
     }
