@@ -17,6 +17,7 @@ import { navigate } from 'gatsby'
 import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import GithubSlugger from 'github-slugger'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -61,9 +62,9 @@ const getChangesByDate = (changes) => {
 }
 
 export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
-    const [changes, setChanges] = useState(allRoadmap.nodes)
+    const [changes, setChanges] = useState()
     // const [filters, setFilters] = useState({})
-    const [changesByDate, setChangesByDate] = useState(getChangesByDate(changes))
+    const [changesByDate, setChangesByDate] = useState(getChangesByDate(allRoadmap.nodes))
 
     // const handleChange = (key, { value }, field) => {
     //     const newFilters = { ...filters }
@@ -156,12 +157,10 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                     const topicName = topic?.data?.attributes.label
                                     const teamName = team?.attributes?.name
                                     const Icon = topicIcons[topicName?.toLowerCase()]
+                                    const slugger = new GithubSlugger()
+                                    const id = slugger.slug(title)
                                     return (
-                                        <li
-                                            id={slugify(title, { lower: true })}
-                                            className="scroll-mt-[108px]"
-                                            key={strapiID}
-                                        >
+                                        <li className="scroll-mt-[108px]" key={strapiID}>
                                             {topicName && (
                                                 <p className="font-bold flex mt-3 !-mb-2 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
                                                     <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
@@ -176,7 +175,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                 editButtonClassName="absolute bottom-0 right-0"
                                                 id={strapiID}
                                             >
-                                                <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
+                                                <Heading as="h3" id={id} className="m-0">
                                                     {title}
                                                 </Heading>
                                                 {teamName && (
