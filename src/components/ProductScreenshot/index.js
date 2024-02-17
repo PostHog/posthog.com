@@ -9,8 +9,7 @@ export const ProductScreenshot = ({ imageLight, imageDark, alt, classes }) => {
                 <img
                     src={imageLight}
                     alt={alt}
-                    className={`dark:hidden ${classes}`}
-                    style={{ maxWidth: '100%', height: 'auto' }}
+                    className={`dark:hidden max-w-full  ${classes}`}
                 />
             )}
             {imageDark && (
