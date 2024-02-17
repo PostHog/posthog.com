@@ -16,8 +16,7 @@ export const ProductScreenshot = ({ imageLight, imageDark, alt, classes }) => {
                 <img
                     src={imageDark}
                     alt={alt}
-                    className={`hidden dark:block ${classes}`}
-                    style={{ maxWidth: '100%', height: 'auto' }}
+                    className={`hidden dark:block max-w-full ${classes}`}
                 />
             )}
         </div>
