@@ -1,8 +1,6 @@
 ---
-title: n8n
-thumbnail: ../../cdp/thumbnails/n8n.png
-tags:
-    - n8n
+title: Sentry
+icon: ../../cdp/thumbnails/n8n.png
 ---
 
 This n8n app enables you to automate PostHog workflows and create workflows using other services, using n8n.

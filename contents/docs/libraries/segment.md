@@ -3,25 +3,26 @@ title: Segment
 icon: ../../images/docs/integrate/frameworks/segment.svg
 ---
 
-Segment is a Customer Data Platform (CDP) that allows you to easily manage data and integrations with services across your growth, product, and marketing stack. By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
+Segment is a Customer Data Platform (CDP) that allows you to easily manage data and integrations with services across your growth, product, and marketing stack. 
+
+By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
 
 > Before integrating with Segment, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
 
 ## Setting up Segment
 
-Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, using [PostHog Cloud](https://app.posthog.com/signup) or self-hosting.
+Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, using [PostHog Cloud](https://us.posthog.com/signup) or a self-hosted instance running [version 1.30.0](/blog/the-posthog-array-1-30-0) or later.
 
-1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment
-2. Grab the PostHog API key from the 'Project Settings' page in PostHog
-3. Use one of Segment's libraries to send events
-4. See the events coming into PostHog
-
+1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a [destination on Segment](https://segment.com/docs/connections/destinations/catalog/posthog/).
+2. Grab the PostHog API key from [your project settings](https://us.posthog.com/settings/project).
+3. Use one of Segment's libraries to send events.
+4. See the events coming into PostHog.
 
 ### Enabling all features via Segment with your website
 
 The simple Segment destination only supports tracking of **pageviews**, **custom events** and **identifying users**.
 
-In order to use the full feature set of PostHog (**autocapture**, **session recording**, **feature flags**, **heatmaps** or the **toolbar**) we need to load our own Javascript snippet directly.
+In order to use the full feature set of PostHog (**autocapture**, **session recording**, **feature flags**, **heatmaps**, **surveys** or the **toolbar**) we need to load our own Javascript snippet directly.
 
 1. In addition to Segment, install your [PostHog JS snippet](/docs/integrate/client/js#installation)
 2. Modify the initialization as documented below to pass the segment `analytics` through for PostHog JS to sync with:
