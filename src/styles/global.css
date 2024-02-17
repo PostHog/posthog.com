@@ -996,20 +996,41 @@ ul {
 }
 
 .mermaid {
-    .messageText {
+    .messageText,
+    tspan {
         @apply dark:!fill-white;
+    }
+    .sgraph rect {
+        stroke-dasharray: 5;
+        stroke: #000 !important;
+        fill-opacity: 0 !important;
+        stroke-width: 3px !important;
+    }
+    .label,
+    .label .nodeLabel,
+    .cluster .cluster-label .nodeLabel {
+        @apply dark:!text-white;
+    }
+    .nodes .table span {
+        @apply dark:!text-gray-accent-dark;
     }
     .loopText {
         @apply dark:!fill-gray-accent-light !stroke-gray-accent-light;
     }
-    path,
+    #flowchart-pointStart,
+    #flowchart-pointEnd,
+    .arrowheadPath {
+        @apply dark:!fill-gray-accent-light dark:!stroke-gray-accent;
+    }
+    path.flowchart-link,
+    path.path,
+    .root .clusters .cluster rect,
     line {
         @apply dark:!stroke-gray-accent;
     }
-    tspan {
-        @apply dark:!fill-white;
-    }
-    g rect {
+    g rect,
+    g polygon,
+    g.node path {
         @apply dark:!fill-gray-accent-dark;
     }
 
