@@ -234,7 +234,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             } = roadmap
 
             const date = dateCompleted || projectedCompletion
-            const year = date && dayjs(date).format('YYYY')
+            const year = date && Number(dayjs(date).format('YYYY'))
 
             const cloudinaryMedia = {
                 ...image,
