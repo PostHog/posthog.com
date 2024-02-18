@@ -92,7 +92,7 @@ One successful experiment we did roll out was adding more personalized emails fo
 ![Onboarding 4.0](../images/blog/onboarding/onboarding_31.png)
 <Caption>Onboarding 4.0 split high-ICP users out into their own email flow because our CS team would reach out directly</Caption>
 
-By this point we’d also changed our conversion event to mean a user enabling billing for a new product within one week of opening an email. 
+By this point we’d also changed our conversion event to mean a user enabling billing for a product within one week of opening an email - a far better indicator of if the emails are delivering value than simply measuring logins. 
 
 - **Open rate:** 52%
 - **Click-through-rate:** 4%
@@ -118,6 +118,34 @@ The hope was that this would improve in-app activation, which we roughly define 
 **Surveys:** 1 survey launched
 
 To avoid annoying users, we added a time block based on our activation criteria – if a user hasn’t activated after two emails, we stop sending them emails for six weeks. We also use an unsubscribe notice that tells users how many emails they can typically expect: one email per week, for six weeks. 
+
+## What we learned
+
+Across the five major versions (and many other smaller iterations) of our email onboarding, there are a few definite things we've learned. 
+
+### Email works for engineers too
+As I said at the start, the conventional wisdom is that engineers are particularly skeptical of any marketing activity, and likely to unsubscribe to emails. However, our unsubscribe rates have been consistently low enough to disprove this. If the emails add value for engineers and are [well-written for that audience](/founders/writing-for-developers), they can still be effective. 
+
+### You can send more emails than you think
+One of our consistent worries has been that we send too many emails. Again though, the low unsubscribe rate suggests that users aren't getting annoyed by this. The current email flow gives users approximately six emails, yet we've not heard any complaints about this. 
+
+We think the reason for this is...
+
+1. We space emails out quite conservatively. Users will typically only get one email per week, and we are defensive about deviating from this schedule. 
+
+2. We tell users how many emails they'll get. It's added to the welcome email, right next to the unsubscribe button. This means users know we value their time and can unsubscribe _before_ they get annoyed.
+ 
+3. Our emails are actually worth reading. We don't send those awful outreach emails from sales reps, we don't run limited-time discounts, and we don't beg users to pay more. We just tell them how to get more out of PostHog. 
+
+### Users prefer fun visual art to screenshots
+I mean, who _wouldn't_ want to look at a cute hedgehog instead of a graph? 
+
+We've run tests on this several times and [Lottie's](https://posthog.com/community/profiles/227) art is victorious by a small margin every time. 
+
+### Personalization matters
+Personalization doesn't mean calling users by their first name using a [liquid](https://customer.io/docs/journeys/using-liquid/) tag and pretending to be best buds. It means providing the right content, at the right time, in the right way. 
+
+We do this in several ways in the latest version – delaying our welcome email, tailoring the emails users receive based on their choices, and sending newsletter invites from my personal address. If nothing else, the replies I frequently receive from users are a testament to how effective this is. 
 
 ## What’s next?
 
