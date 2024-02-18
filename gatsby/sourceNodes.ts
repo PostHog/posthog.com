@@ -8,6 +8,7 @@ import type {
     MetaobjectsReferencesEdge,
     MetaobjectsResponseData,
 } from '../src/templates/merch/types'
+import dayjs from 'dayjs'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -233,6 +234,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             } = roadmap
 
             const date = dateCompleted || projectedCompletion
+            const year = date && Number(dayjs(date).format('YYYY'))
 
             const cloudinaryMedia = {
                 ...image,
@@ -248,7 +250,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 date,
                 media: cloudinaryMedia,
                 type: category,
-                year: date && new Date(date)?.getFullYear(),
+                year,
                 ...other,
             }
             const roadmapNode = {
