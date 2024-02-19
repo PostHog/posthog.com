@@ -86,7 +86,7 @@ We have a bunch of awesome products generating revenue. Since last quarter:
 
 - feature flags and experiments has got product market fit
 - we've got a warehouse with early meaningful usage
-- we figued out notebooks vs PostHog 3000 and have shipped a new UX for everyone
+- we figured out notebooks vs PostHog 3000 and have shipped a new UX for everyone
 - web analytics has been shipped and is getting plenty of usage
 - stability has remained excellent
 
