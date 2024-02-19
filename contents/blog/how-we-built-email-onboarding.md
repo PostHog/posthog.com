@@ -107,7 +107,7 @@ At the time of writing this is the current onboarding flow. It contains over 53 
 
 The goal of this flow is to focus on improving activation, and build on some parallel improvements to our in-app onboarding flow. Now when a user signs up to PostHog we ask them to select a product to setup first: analytics, replays, flags, or surveys. [Onboarding 5.0](https://github.com/PostHog/meta/issues/172) builds off that selection by encouraging users to use that product, and then showing how other features can combine with it.
 
-![Onboarding 5.0](../images/blog/onboarding/onboarding_31.png)
+![Onboarding 5.0](../images/blog/onboarding/onboarding_5.png)
 <Caption>Onboarding 5.0: Messy, complex, and highly personalized to user interests</Caption>
 
 The hope was that this would improve in-app activation, which we roughly define as: 
