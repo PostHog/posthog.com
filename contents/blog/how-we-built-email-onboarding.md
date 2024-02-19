@@ -71,7 +71,7 @@ Data is important, but I strongly believe it doesn’t tell the whole story. You
 How this works is simple: when a user signs up, they can optionally tell us what their role is. If their `role_at_organization` = `engineer` we trigger an email from me telling them about [our Product for Engineers newsletter](https://newsletter.posthog.com/). 
 
 ![Onboarding 3.1](../images/blog/onboarding/onboarding_31.png)
-<caption>Onboarding 3.1 was when we really started tailoring emails based on what we knew about users</caption>
+<Caption>Onboarding 3.1 was when we really started tailoring emails based on what we knew about users</Caption>
 
 This email performed very well, with a 68% open rate and a 16% CTR. Two emails into the flow and developers were already opting in to _more_ emails! 
 
