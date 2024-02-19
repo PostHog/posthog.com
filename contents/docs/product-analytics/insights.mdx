@@ -1,0 +1,125 @@
+---
+title: Creating insights
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+
+---
+
+---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+import ImgTrendsLight from '../../images/docs/product-analytics/trends-light.png'
+import ImgTrendsDark from '../../images/docs/product-analytics/trends-dark.png'
+import ImgFunnelLight from '../../images/docs/product-analytics/funnel-light.png'
+import ImgFunnelDark from '../../images/docs/product-analytics/funnel-dark.png'
+import ImgRetentionLight from '../../images/docs/product-analytics/retention-light.png'
+import ImgRetentionDark from '../../images/docs/product-analytics/retention-dark.png'
+import ImgUserPathsLight from '../../images/docs/product-analytics/user-paths-light.png'
+import ImgUserPathsDark from '../../images/docs/product-analytics/user-paths-dark.png'
+import ImgStickinessLight from '../../images/docs/product-analytics/stickiness-light.png'
+import ImgStickinessDark from '../../images/docs/product-analytics/stickiness-dark.png'
+import ImgLifecycleLight from '../../images/docs/product-analytics/lifecycle-light.png'
+import ImgLifecycleDark from '../../images/docs/product-analytics/lifecycle-dark.png'
+import ImgSQLLight from '../../images/docs/product-analytics/sql-light.png'
+import ImgSQLDark from '../../images/docs/product-analytics/sql-dark.png'
+
+Insights are the main building blocks of product analytics. 
+
+They enable you visualize your [events](/docs/data/events) and [actions](/docs/data/actions) and analyze how people use your products.
+
+## Types of insight
+
+### Trends
+
+<ProductScreenshot
+  imageLight={ImgTrendsLight} 
+  imageDark={ImgTrendsDark} 
+  alt="Trends insight" 
+  classes="rounded"
+/>
+
+[Trends](/docs/user-guides/trends) enable you to track how metrics change over time and use formulas to create custom metrics.
+
+### Funnels
+
+<ProductScreenshot
+  imageLight={ImgFunnelLight} 
+  imageDark={ImgFunnelDark} 
+  alt="Funnels insight" 
+  classes="rounded"
+/>
+
+Use [Funnels](/docs/user-guides/funnels) to understand how often people convert between steps, identify possible causes of success or failure, and track how conversion changes over time.
+
+### Retention
+
+<ProductScreenshot
+  imageLight={ImgRetentionLight} 
+  imageDark={ImgRetentionDark} 
+  alt="Retention insight" 
+  classes="rounded"
+/>
+
+[Retention](/docs/user-guides/retention) insights enable you to see how often users return and compare retention for different cohorts.
+
+### User Paths
+
+<ProductScreenshot
+  imageLight={ImgUserPathsLight} 
+  imageDark={ImgUserPathsDark} 
+  alt="User paths insight" 
+  classes="rounded"
+/>
+
+[Users paths](/docs/user-guides/paths) help you understand how users navigate your app or website, where they get stuck, or why they aren't discovering new features.
+
+### Stickiness
+
+<ProductScreenshot
+  imageLight={ImgStickinessLight} 
+  imageDark={ImgStickinessDark} 
+  alt="Stickiness insight" 
+  classes="rounded"
+/>
+
+Use [stickiness](/docs/product-analytics/stickiness) insights to analyze how deeply users are engaging with your product, identify your most engaged users, and which features drive the most engagement.
+
+### Lifecycle
+
+<ProductScreenshot
+  imageLight={ImgLifecycleLight} 
+  imageDark={ImgLifecycleDark} 
+  alt="Lifecycle insight" 
+  classes="rounded"
+/>
+
+[Lifecycle](/docs/user-guides/lifecycle) insighs are helpful for checking your product's health by breaking users down by new, returning, resurrecting, and dormant.
+
+### SQL (beta)
+
+<ProductScreenshot
+  imageLight={ImgSQLLight} 
+  imageDark={ImgSQLDark} 
+  alt="SQL insight" 
+  classes="rounded"
+/>
+
+Use [SQL](/docs/product-analytics/hogql#sql-insights) insights to create custom tables based on your data using SQL.
+
+## How to create an insight
+
+To create a new insight, navigate to the [product analytics tab](https://us.posthog.com/insights) and click on `New insight`. You can also select the type of insight you'd like to create from the dropdown.
+
+VIDEO HERE
+
+You can then customize the insight and save it. You can change the type of insight you're creating by clicking on the tabs at the top.
+
+### Other ways to create new insights
+
+1. By clicking the "+" symbol next to "Product analytics" in the sidebar
+2. By clicking "Add insight" in the top right of any [dashboard](/docs/product-analytics/dashboards). Insights you create this way are automatically added to the dashboard
+3. Inside any Notebook. Insights created in a Notebook aren't saved to 'Your Insights' automatically – see our Notebook docs for more.
