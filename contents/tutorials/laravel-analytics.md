@@ -15,7 +15,7 @@ import InsightDark from '../images/tutorials/laravel-analytics/insight-dark.png'
 
 ## 1. Create a basic Laravel app
 
-To show you the basics of using PostHog analytics in your backend, we create a simple Laravel app that has two pages:
+We start by creating a simple Laravel app that has two pages:
 
 1. A `login` page where a user can enter their name, email, and company name in form.
 2. A `home` page that has some text and a button.
@@ -111,7 +111,7 @@ Then, create two new views `login.blade.php` and `home.blade.php` in the `resour
 </html>
 ```
 
-Then set up a controller for our `login` page. This controller will save the user inputs to our `Session`:
+Set up a controller for our `login` page. This controller saves the user inputs to our `Session`:
 
 ```bash
 php artisan make:controller AuthController
@@ -150,7 +150,7 @@ Route::post('/home', function (Request $request) {
 });
 ```
 
-Run `php artisan serve` and navigate to `http://127.0.0.1:8000/log-in` to see our app in action.
+Run `php artisan serve` and navigate to `http://127.0.0.1:8000/log-in` to see our app in action. Enter anything in the `log-in` page to save some session details.
 
 ![Basic Laravel app](../images/tutorials/laravel-analytics/basic-laravel-app.mp4)
 
@@ -218,7 +218,7 @@ With this set up, refresh your browser and click the button on the home page a f
 
 > 💡 **PostHog tip: Setting the correct `distinctId`** 
 > 
-> When calling `PostHog::capture`, you need to provide a `distinctID` argument. This is a unique identifier for your user and enables you to correctly attribute events to specific users. 
+> When calling `PostHog::capture`, you need to provide a `distinctID` argument. This is a unique identifier for your user and enables you to correctly attribute events to them. 
 >
 > For logged-in users, you typically use their email or database ID for the `distinctId` argument. For logged-out or anonymous users, you should use a unique identifier from their request cookies or body.
 
@@ -287,7 +287,11 @@ Restart your app and capture events using different inputs in the `login` page. 
 
 Next, go the [Product analytics](https://us.posthog.com/insights) in PostHog and click the **+ New insight** button. PostHog supports many different types of insights, such as [trends](/docs/user-guides/trends), [funnels](/docs/user-guides/funnels), [paths](/docs/user-guides/paths) and more.
 
-In this tutorial we create a simple trend insight. Select the **Trends** tab and under the **Series** header select the `home_api_called` event. You can then click on the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
+In this tutorial, we create a simple trend insight:
+
+1. Select the **Trends** tab.
+2. Under the **Series** header select the `home_api_called` event. 
+3. You can then click on the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
 
 For example, in the image below we set our insight to show number of unique users that captured the `home_api_called` event where the `user_name` property is equal to `Max`:
 
