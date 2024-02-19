@@ -112,10 +112,10 @@ The goal of this flow is to focus on improving activation, and build on some par
 
 The hope was that this would improve in-app activation, which we roughly define as: 
 
-**Product analytics:** Events ingested, 1 insight created, 1 dashboard created
-**Session replay:** 5 recordings viewed
-**Feature flags:** 1 feature flag created
-**Surveys:** 1 survey launched
+- **Product analytics:** Events ingested, 1 insight created, 1 dashboard created
+- **Session replay:** 5 recordings viewed
+- **Feature flags:** 1 feature flag created
+- **Surveys:** 1 survey launched
 
 To avoid annoying users, we added a time block based on our activation criteria – if a user hasn’t activated after two emails, we stop sending them emails for six weeks. We also use an unsubscribe notice that tells users how many emails they can typically expect: one email per week, for six weeks. 
 
