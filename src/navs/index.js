@@ -898,7 +898,7 @@ export const communityMenu = {
             name: 'Merch',
             icon: 'IconStore',
             color: 'seagreen',
-            url: 'https://merch.posthog.com/collections/all',
+            url: '/merch',
         },
     ],
 }
@@ -919,7 +919,7 @@ export const companyMenu = {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
-            url: '/changelog/2023',
+            url: '/changelog/2024',
         },
         { name: 'Team', icon: 'IconProfile', color: 'blue', url: '/team' },
         { name: 'Handbook', icon: 'IconBook', color: 'seagreen', url: '/handbook', children: handbookSidebar },
@@ -1145,7 +1145,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Flask',
-                            url: '/tutorials/flask-analytics',
+                            url: '/tutorials/python-feature-flags',
                         },
                         {
                             name: 'Framer',
@@ -1291,10 +1291,6 @@ export const docsMenu = {
                             url: '/docs/data/annotations',
                         },
                         {
-                            name: 'Autocapture',
-                            url: '/docs/data/autocapture',
-                        },
-                        {
                             name: 'Cohorts',
                             url: '/docs/data/cohorts',
                         },
@@ -1303,32 +1299,16 @@ export const docsMenu = {
                             url: '/docs/data/events',
                         },
                         {
-                            name: 'Organizations & projects',
-                            url: '/docs/data/organizations-and-projects',
+                            name: 'Ingestion warnings',
+                            url: '/docs/data/ingestion-warnings',
                         },
                         {
-                            name: 'Persons',
+                            name: 'People',
                             url: '/docs/data/persons',
-                        },
-                        {
-                            name: 'Role-based access',
-                            url: '/docs/data/role-based-access',
                         },
                         {
                             name: 'Sessions',
                             url: '/docs/data/sessions',
-                        },
-                        {
-                            name: 'Settings',
-                            url: '/docs/data/application-settings',
-                        },
-                        {
-                            name: 'SSO & SAML',
-                            url: '/docs/data/sso',
-                        },
-                        {
-                            name: 'Team collaboration',
-                            url: '/docs/data/team-collaboration',
                         },
                         {
                             name: 'Timestamps',
@@ -1380,15 +1360,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Notebooks',
-                    url: '/docs/notebooks',
-                    icon: 'IconBook',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Toolbar',
                     url: '/docs/toolbar',
                     icon: 'IconToolbar',
@@ -1412,52 +1383,26 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Command palette',
-                    url: '/docs/cmd-k',
-                    icon: 'IconSearch',
+                    name: 'Notebooks',
+                    url: '/docs/notebooks',
+                    icon: 'IconBook',
                 },
                 {
-                    name: 'Apps',
-                    url: '/docs/apps',
-                    icon: 'IconApps',
+                    name: 'Settings',
+                    url: '/docs/settings/organizations-and-projects',
+                    icon: 'IconGear',
                     children: [
                         {
-                            url: '/docs/apps/notification-bar',
-                            name: 'Notification Bar',
+                            name: 'Organizations & projects',
+                            url: '/docs/settings/organizations-and-projects',
                         },
                         {
-                            url: '/docs/apps/pineapple-mode',
-                            name: 'Pineapple Mode',
+                            name: 'Role-based access',
+                            url: '/docs/settings/role-based-access',
                         },
                         {
-                            name: 'Build an app',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/apps/build',
-                                },
-                                {
-                                    name: 'Tutorial',
-                                    url: '/docs/apps/build/tutorial',
-                                },
-                                {
-                                    name: 'Troubleshooting',
-                                    url: '/docs/apps/enabling',
-                                },
-                                {
-                                    name: 'Developer reference',
-                                    url: '/docs/apps/build/reference',
-                                },
-                                {
-                                    name: 'Testing',
-                                    url: '/docs/apps/build/testing',
-                                },
-                                {
-                                    name: 'TypeScript types',
-                                    url: '/docs/apps/build/types',
-                                },
-                            ],
+                            name: 'SSO & SAML',
+                            url: '/docs/settings/sso',
                         },
                     ],
                 },
@@ -1575,6 +1520,11 @@ export const docsMenu = {
                             url: '/docs/data-model',
                         },
                     ],
+                },
+                {
+                    name: 'Command palette',
+                    url: '/docs/cmd-k',
+                    icon: 'IconSearch',
                 },
                 {
                     name: 'Webhooks',
@@ -1930,6 +1880,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Sharing & embedding',
+                    url: '/docs/product-analytics/sharing',
+                    icon: 'IconShare',
+                    color: 'purple',
+                },
+                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
@@ -2035,13 +1991,23 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Mobile recording',
+                    url: '/docs/session-replay/mobile',
+                    icon: 'IconPhone',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Privacy controls',
                     url: '/docs/session-replay/privacy',
                     icon: 'IconShield',
                     color: 'orange',
                 },
                 {
-                    name: 'Sharing and embedding',
+                    name: 'Sharing & embedding',
                     url: '/docs/session-replay/sharing',
                     icon: 'IconShare',
                     color: 'purple',
@@ -2217,7 +2183,7 @@ export const docsMenu = {
                 {
                     name: 'Under the hood',
                     url: '/docs/experiments/under-the-hood',
-                    icon: 'IconCalculator',
+                    icon: 'IconMagicWand',
                     color: 'purple',
                 },
                 {
@@ -2487,10 +2453,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/filter-out',
                             name: 'Filter Out',
-                        },
-                        {
-                            url: '/docs/cdp/first-time-event-tracker',
-                            name: 'First Time Event Tracker',
                         },
                         {
                             url: '/docs/cdp/property-filter',

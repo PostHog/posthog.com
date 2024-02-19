@@ -4,7 +4,7 @@ date: 2023-09-27
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-tags: ["feature-flags"]
+tags: ["feature flags"]
 ---
 
 [Feature flags](/docs/feature-flags) are a critical part of delivering code safely. This tutorial shows you how to use them in Go (Golang). We'll create a basic HTTP server, add PostHog, create a feature flag, and implement it in our app to change the response content.
@@ -199,6 +199,6 @@ Now, when we visit our app running locally, we see the flag enabled response. Th
 
 ## Further reading
 
+- [How to set up A/B tests in Go](/tutorials/go-ab-tests)
 - [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
 - [How to do holdout testing](/tutorials/holdout-testing)
-- [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)

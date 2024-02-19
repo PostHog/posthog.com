@@ -1,5 +1,5 @@
 ---
-title: "How to create surveys in Webflow with PostHog"
+title: "How to create surveys in Webflow"
 date: 2023-11-29
 author: ["lior-neu-ner"]
 showTitle: true
@@ -50,6 +50,6 @@ You can also filter these results based on [user properties](/docs/product-analy
 
 ## Further reading
 
-- [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
-- [How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)
+- [How to set up Webflow analytics and session recordings](/tutorials/webflow)
+- [How to run A/B tests in Webflow](/tutorials/webflow-ab-tests)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)

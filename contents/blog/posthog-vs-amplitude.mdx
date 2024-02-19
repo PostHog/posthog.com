@@ -3,7 +3,7 @@ title: "In-depth: PostHog vs Amplitude"
 date: 2024-01-08
 author: ["andy-vandervell"]
 rootpage: /blog
-featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg
+featuredImage: ../images/blog/comparisons/amplitude.jpeg
 featuredImageType: full
 category: General
 tags:
@@ -91,7 +91,7 @@ Feature flags make it easy to roll out features to specific users or groups, and
   <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Store flag definitions locally" />
   <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
   <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1="Beta" column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1={true} column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
   <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, stage, prod" />
   <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
   <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
@@ -154,7 +154,7 @@ Surveys are great for tracking customer satisfaction scores like Net Promoter Sc
 
 ### Integrations
 
-PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as Sentry, Zapier and Zendesk, while Amplitude has more integrations with marketing and advertising platforms. See our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
+PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as Sentry, Zapier and [Zendesk](/tutorials/zendesk-session-replays), while Amplitude has more integrations with marketing and advertising platforms. See our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
    <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from data warehouses and other sources" />
@@ -208,7 +208,7 @@ Eligible companies can also get $50,000 in credit in our [PostHog for Startups p
   <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
   <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
   <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={false} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+  <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
   <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
   <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
   <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
@@ -230,7 +230,7 @@ The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integ
 
 ### Does PostHog block bots by default?
 
-Yes. See the [full blocklist in our docs](/troubleshooting#does-posthog-block-bots-by-default).
+Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
 
 ### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
 
@@ -239,5 +239,9 @@ Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 ### What about ad blockers?
 
 We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+
+### How does PostHog compare to other Amplitude alternatives?
+
+Still need some convincing? See our guide to the [most popular Amplitude alternatives](/blog/best-amplitude-alternatives).
 
 <ArrayCTA />

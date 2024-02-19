@@ -30,7 +30,8 @@ export default function Enterprise() {
                     ))}
                 </h1>
                 <h2 className={`mt-2 mb-6 text-xl font-semibold text-center home-hero-subtitle`}>
-                    The same great product - <span className="text-red dark:text-yellow">just with all the awards</span>
+                    The same great product -{' '}
+                    <span className="text-red dark:text-yellow">just with all the awards. And badges.</span>
                 </h2>
                 <div className="flex justify-center items-center gap-2 home-hero-cta mb-16">
                     <SignupCTA />
@@ -425,6 +426,20 @@ export default function Enterprise() {
                         alt=""
                     />
                     <img src="/images/g2/SessionReplay_MomentumLeader_Leader.svg" width={94} height={106} alt="" />
+                </section>
+
+                <section className="text-center mb-12">
+                    <h3>And check out all the flair we've been collecting</h3>
+
+                    <div className="flex justify-center items-center gap-4">
+                        <StaticImage
+                            src="../images/enterprise/soc-2type2.webp"
+                            height={140}
+                            alt="Soc 2 Type 2 certified"
+                        />
+                        <StaticImage src="../images/enterprise/hipaa.webp" height={120} alt="HIPAA compliant" />
+                        <StaticImage src="../images/enterprise/gdpr-ready.png" height={66.5} alt="GDPR ready" />
+                    </div>
                 </section>
 
                 <section className="text-center mb-24">

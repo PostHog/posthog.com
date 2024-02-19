@@ -92,9 +92,8 @@ if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
 }
 ```
 
-```ios
-// In Swift
-if (posthog.getFeatureFlag("experiment-feature-flag-key") as? String == "variant-name") {
+```ios_swift
+if (PostHogSDK.shared.getFeatureFlag("experiment-feature-flag-key") as? String == "variant-name") {
     // do something
 }
 ```

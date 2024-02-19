@@ -192,7 +192,7 @@ h4 {
     }
 
     code:not('.article-content-ignore') {
-        @apply font-code font-medium text-sm border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm px-1 py-0.5;
+        @apply font-code font-medium text-sm border border-light dark:border-dark bg-accent dark:bg-accent-dark  rounded-sm px-1 py-0.5;
     }
 
     blockquote {
@@ -406,6 +406,21 @@ h4 {
     transition: none;
 }
 
+.tooltip {
+    .placement-top:before {
+        clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    }
+    .placement-right:before {
+        clip-path: polygon(100% 100%, 0 0, 0 100%);
+    }
+    .placement-bottom:before {
+        clip-path: polygon(100% 0, 0 0, 0 100%);
+    }
+    .placement-left:before {
+        clip-path: polygon(100% 100%, 100% 0, 0 0);
+    }
+}
+
 /* timeline key */
 
 .timeline-entry li[data-type='feature']:before {
@@ -593,19 +608,19 @@ ul {
     -moz-appearance: none;
 }
 
-.rc-slider.log-slider .rc-slider-track {
+.rc-slider.slider .rc-slider-track {
     @apply bg-black;
 }
 
-.rc-slider.log-slider .rc-slider-handle {
+.rc-slider.slider .rc-slider-handle {
     @apply bg-red border-3 border-white h-[21px] w-[21px] shadow-md -mt-[7px];
 }
 
-.rc-slider.log-slider .rc-slider-handle:active {
+.rc-slider.slider .rc-slider-handle:active {
     @apply shadow-none;
 }
 
-.rc-slider.log-slider .rc-slider-tooltip {
+.rc-slider.slider .rc-slider-tooltip {
     display: none;
 }
 
@@ -886,14 +901,17 @@ ul {
 }
 
 .active-sidebar-item {
+    @apply font-bold opacity-100;
+
     &:before {
-        @apply bg-red absolute;
-        bottom: 2px;
+        @apply bg-red absolute -left-3.5 bottom-px top-px;
         border-radius: 2px;
         content: '';
-        left: 0px;
-        top: 2px;
-        width: 2px;
+        width: 3px;
+    }
+
+    &.post:before {
+        @apply -left-0;
     }
 }
 
@@ -978,9 +996,25 @@ ul {
 }
 
 .mermaid {
+    .messageText {
+        @apply dark:!fill-white;
+    }
+    .loopText {
+        @apply dark:!fill-gray-accent-light !stroke-gray-accent-light;
+    }
+    path,
+    line {
+        @apply dark:!stroke-gray-accent;
+    }
+    tspan {
+        @apply dark:!fill-white;
+    }
+    g rect {
+        @apply dark:!fill-gray-accent-dark;
+    }
+
     line-height: 1;
 }
-
 @keyframes fade {
     0% {
         opacity: 0;
@@ -1317,7 +1351,11 @@ li.squeak-left-border {
 
     ol,
     ul {
-        @apply pb-0 mb-2 text-[15px];
+        @apply pb-0 mb-2;
+
+        li {
+            @apply text-[15px];
+        }
     }
 
     pre {

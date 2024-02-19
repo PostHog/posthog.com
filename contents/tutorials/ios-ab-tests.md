@@ -1,5 +1,5 @@
 ---
-title: "How to run A/B tests in iOS with PostHog"
+title: "How to run A/B tests in iOS"
 date: 2023-11-16
 author: ["lior-neu-ner"]
 tags: ['experimentation']
@@ -127,7 +127,7 @@ Button("Click Me!") {
 // ...rest of code
 ```
 
-To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [PostHog event explorer](https://app.posthog.com/events).
+To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [activity tab](https://app.posthog.com/events).
 
 ![iOS events captured](../images/tutorials/ios-ab-tests/event-captured.png)
 
@@ -202,4 +202,4 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
-- [How to run A/B tests in Android with PostHog](/tutorials/android-ab-tests)
+- [How to run A/B tests in Android](/tutorials/android-ab-tests)

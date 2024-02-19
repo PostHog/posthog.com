@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Growth
+crosspost:
+  - Blog  
 ---
 
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 
@@ -23,7 +25,7 @@ If you're looking for more startup advice or support, don't forget to check out 
 
 Former games journalist Joe has repeatedly recommended this collection of essays by Satoro Iwata in our book club Slack group. It’s one of the only books about management that he’s ever been able to finish. 
 
-**Joe's review:** “I love Iwata's humble approach. He doesn’t gussy things up into a rigid framework for the sake of seeming like an expert, he just lays out his personal philosophy plainly and with plenty of examples. Iwata wasn’t a forceful idealogue; he wasn’t like Steve Jobs or Elon Musk. He believed in empathetic leadership, kindness and providing space for others. I really respect and respond well to that. 
+**Joe's review:** “I love Iwata's humble approach. He doesn’t gussy things up into a rigid framework for the sake of seeming like an expert, he just lays out his personal philosophy plainly and with plenty of examples. Iwata wasn’t a forceful idealogue; he wasn’t like Steve Jobs or [Elon Musk](/blog/learnings-from-elon). He believed in empathetic leadership, kindness and providing space for others. I really respect and respond well to that. 
 
 "I don’t agree about the importance of a dress code, though.”
 

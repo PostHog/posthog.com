@@ -1,5 +1,5 @@
 ---
-title: Batch exports (beta)
+title: Batch exports
 sidebar: Docs
 showTitle: true
 availability:
@@ -16,7 +16,7 @@ The key features offered by this platform are:
 
 Batch exports are designed to power any complimentary analytics use cases outside of PostHog.
 
-> Batch exports are currently in **public beta**. This means that we offer data exports to a subset of all the planned destinations, some features will be missing, and you will encounter UI elements still in development. You can follow and comment on the progress [in this GitHub issue](https://github.com/PostHog/posthog/issues/15997).
+> **Note:** Batch exports require a subscription to the data pipeline add-on which you can enable in [your billing settings](https://us.posthog.com/organization/billing).
 
 ## Destinations
 

@@ -22,6 +22,8 @@ import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import qs from 'qs'
 import Breadcrumbs from 'components/Edition/Breadcrumbs'
+import { CallToAction } from 'components/CallToAction'
+import { IconMap, IconOpenSidebar } from '@posthog/icons'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -144,6 +146,19 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
     const { fullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
     const [postID, setPostID] = useState()
+    const [posthogInstance, setPosthogInstance] = useState()
+
+    useEffect(() => {
+        if (window) {
+            const instanceCookie = document.cookie
+                .split('; ')
+                ?.filter((row) => row.startsWith('ph_current_instance='))
+                ?.map((c) => c.split('=')?.[1])?.[0]
+            if (instanceCookie) {
+                setPosthogInstance(instanceCookie)
+            }
+        }
+    }, [])
 
     useEffect(() => {
         fetch(
@@ -215,6 +230,22 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 <aside
                     className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-dark pt-4 xl:block hidden`}
                 >
+                    {category === 'Tutorials' && posthogInstance && (
+                        <div className="border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark p-4 mx-4 mb-4">
+                            <h3 className="text-[15px] mb-1 flex items-center gap-1">
+                                <IconMap className="w-6 h-6 opacity-60" /> <span>Follow along in the app</span>
+                            </h3>
+                            <p className="mb-2 text-sm">Open this guide in PostHog and follow along step-by-step.</p>
+                            <CallToAction
+                                to={`https://app.posthog.com/#panel=docs:${fields.slug}`}
+                                size="sm"
+                                externalNoIcon
+                            >
+                                Open in app
+                                <IconOpenSidebar className="w-4 h-4 inline-block ml-2" />
+                            </CallToAction>
+                        </div>
+                    )}
                     <Upvote id={postID} slug={fields.slug} className="px-4 mb-4" />
                     <Contributors contributors={contributors} />
                     <MobileSidebar tableOfContents={tableOfContents} />

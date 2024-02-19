@@ -48,13 +48,9 @@ We have [in-depth GDPR guidance documentation](/docs/privacy/gdpr-compliance) fo
 
 We also offer [PostHog Cloud EU](https://eu.posthog.com/signup) – a managed version of PostHog with servers hosted in Frankfurt, ensuring user data never leaves EU jurisdiction. 
 
-### Can I use PostHog to collect user data under HIPAA?
-
-Yes. You can [self-host PostHog](/docs/self-host) on your own infrastructure and maintain full control of your data, making it an excellent solution for analytics in healthcare settings. Because you maintain full control, you don't need to sign a Business Associate Agreement with us. Read our [HIPAA guidance](/docs/privacy/hipaa-compliance) for more information.
-
 ### Can I use PostHog Cloud under HIPAA?
 
-No. We believe self-hosting is the best solution for HIPAA compliance. Read our documentation for more on [how to self-host PostHog](https://posthog.com/docs/self-host).
+Yes, we can provide a Business Associate Agreement (BAA) to enable HIPAA-compliant usage of PostHog Cloud. Please [contact us to arrange a BAA and discuss your requirements](/contact-sales). 
 
 ### Is Google Analytics HIPAA compliant?
 

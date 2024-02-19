@@ -353,6 +353,7 @@
         { "source": "/codu", "destination": "/?utm_campaign=codu" },
         { "source": "/peterelbaum", "destination": "/?utm_campaign=peterelbaum" },
         { "source": "/theo", "destination": "/?utm_source=theo&utm_campaign=theo" },
+        { "source": "/morningmaker", "destination": "/?utm_source=morningmaker&utm_campaign=morningmaker" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -609,7 +610,6 @@
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
         { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
-        { "source": "/tutorials/feature-flags", "destination": "/manual/feature-flags" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
         { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },
         { "source": "/blog/categories/guides", "destination": "/blog/tags/guides" },
@@ -745,10 +745,10 @@
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/community", "destination": "/questions", "statusCode": 302 },
-        { "source": "/roadmap/changelog", "destination": "/changelog/2023" },
-        { "source": "/blog/posthog-changelog", "destination": "/changelog/2023" },
-        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2023" },
-        { "source": "/changelog", "destination": "/changelog/2023" },
+        { "source": "/roadmap/changelog", "destination": "/changelog/2024" },
+        { "source": "/blog/posthog-changelog", "destination": "/changelog/2024" },
+        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2024" },
+        { "source": "/changelog", "destination": "/changelog/2024" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
@@ -1175,6 +1175,14 @@
         { "source": "/docs/cdp/bigquery-export", "destination": "/docs/cdp/batch-exports/bigquery" },
         { "source": "/docs/cdp/postgres-export", "destination": "/docs/cdp/batch-exports/postgres" },
         { "source": "/docs/cdp/s3-export", "destination": "/docs/cdp/batch-exports/s3" },
-        { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" }
+        { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" },
+        { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" },
+        { "source": "/docs/data/application-settings", "destination": "/docs" },
+        {
+            "source": "/docs/data/organizations-and-projects",
+            "destination": "/docs/settings/organizations-and-projects"
+        },
+        { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
+        { "source": "/docs/data/sso", "destination": "/docs/settings/sso" }
     ]
 }

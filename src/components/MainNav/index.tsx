@@ -1,21 +1,106 @@
+import Link from 'components/Link'
 import Logo from 'components/Logo'
+import { useSearch } from 'components/Search/SearchContext'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
-import Link from 'components/Link'
-import { useSearch } from 'components/Search/SearchContext'
-import { IconApp, IconBrightness, IconChat, IconChevronDown, IconSearch, IconTextWidth, IconUser } from '@posthog/icons'
+
+import {
+    IconApp,
+    IconBrightness,
+    IconChat,
+    IconMessage,
+    IconSearch,
+    IconTextWidth,
+    IconUser,
+    IconChevronDown,
+} from '@posthog/icons'
+
 import { Placement } from '@popperjs/core'
-import React, { useEffect, useRef, useState } from 'react'
-import { usePopper } from 'react-popper'
-import { useLayoutData } from 'components/Layout/hooks'
-import { useLocation } from '@reach/router'
-import Toggle from 'components/Toggle'
-import usePostHog from 'hooks/usePostHog'
-import HoverTooltip from 'components/Tooltip'
-import { SignupCTA } from 'components/SignupCTA'
-import { CallToAction } from 'components/CallToAction'
-import { useInView } from 'react-intersection-observer'
 import * as icons from '@posthog/icons'
+import { IconExternal } from '@posthog/icons'
+import { useLocation } from '@reach/router'
+import { CallToAction } from 'components/CallToAction'
+import { useLayoutData } from 'components/Layout/hooks'
+import { SignupCTA } from 'components/SignupCTA'
+import Toggle from 'components/Toggle'
+import HoverTooltip from 'components/Tooltip'
+import dayjs from 'dayjs'
+import usePostHog from 'hooks/usePostHog'
+import { useUser } from 'hooks/useUser'
+import React, { useEffect, useRef, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { usePopper } from 'react-popper'
+import getAvatarURL from 'components/Squeak/util/getAvatar'
+
+export const Avatar = (props: { className?: string; src?: string }) => {
+    return (
+        <div className={`overflow-hidden rounded-full ${props.className}`}>
+            {props.src ? (
+                <img className="w-full object-cover" alt="" src={props.src} />
+            ) : (
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
+                        fill="#BFBFBC"
+                    />
+                    <path
+                        d="M19.8359 27.0625C17.0859 26.9687 14.8047 25.6094 13.1251 23.1953C10.3751 19.2344 10.7032 13.6093 13.8516 10.0001C17.2735 6.08599 22.9452 6.10943 26.336 10.0469C29.9376 14.2345 29.711 20.8437 25.8126 24.6405C24.2188 26.1952 22.3126 27.0312 19.8362 27.0624L19.8359 27.0625Z"
+                        fill="#BFBFBC"
+                    />
+                </svg>
+            )}
+        </div>
+    )
+}
+
+export default function Orders() {
+    const { user, getJwt } = useUser()
+    const [orders, setOrders] = useState([])
+
+    const fetchOrders = async () => {
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
+            headers: {
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        }).then((res) => res.json())
+        setOrders(data)
+    }
+
+    useEffect(() => {
+        if (user) {
+            fetchOrders()
+        }
+    }, [user])
+
+    return user && orders?.length > 0 ? (
+        <>
+            <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
+                Merch orders
+            </li>
+            <li className="px-1">
+                <ul className="m-0 p-0 list-none px-1 max-h-[130px] overflow-auto">
+                    {orders.map(({ id, orderNumber, date, statusURL }) => {
+                        return (
+                            <li key={id}>
+                                <Link
+                                    externalNoIcon
+                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center"
+                                    to={statusURL}
+                                >
+                                    <span>
+                                        <p className="m-0 text-sm font-bold opacity-60">#{orderNumber}</p>
+                                        <p className="m-0 text-xs">{dayjs(date).format('MM/DD/YYYY')}</p>
+                                    </span>
+                                    <IconExternal className="w-4 opacity-50" />
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </li>
+        </>
+    ) : null
+}
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -51,6 +136,7 @@ function Tooltip({
     placement?: Placement
     className?: string
 }) {
+    const { user } = useUser()
     const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
@@ -78,15 +164,29 @@ function Tooltip({
 
     return (
         <span ref={containerEl} className={className}>
-            <button
-                ref={setReferenceElement}
-                onClick={() => setOpen(!open)}
-                className={`my-1 p-2 rounded hover:bg-border dark:hover:bg-border-dark ${
-                    open ? 'bg-border dark:bg-border-dark' : ''
-                }`}
-            >
-                {children}
-            </button>
+            {user?.profile ? (
+                <button
+                    ref={setReferenceElement}
+                    onClick={() => setOpen(!open)}
+                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
+                        open
+                            ? 'border-primary/50 dark:border-primary-dark/50'
+                            : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
+                    }`}
+                >
+                    {children}
+                </button>
+            ) : (
+                <button
+                    ref={setReferenceElement}
+                    onClick={() => setOpen(!open)}
+                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
+                        open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
+                    }`}
+                >
+                    {children}
+                </button>
+            )}
             {open && (
                 <div
                     className="z-[10000] pt-1"
@@ -172,26 +272,20 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
     return menu?.length > 0 ? (
         <div className="relative">
             {overflowing && (
-                <div
-                    className={`absolute top-0 left-0 w-12 pl-1 h-[calc(100%_-_2px)] flex justify-start items-center bg-gradient-to-l from-transparent to-light via-light via-70% dark:via-dark dark:to-dark ${
-                        firstInView ? '-z-10 opacity-25' : 'z-10'
+                <button
+                    onDoubleClick={(e) => e.preventDefault()}
+                    onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
+                    className={`absolute top-0 left-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${
+                        firstInView ? '-z-10' : 'z-10'
                     }`}
                 >
-                    <button
-                        onDoubleClick={(e) => e.preventDefault()}
-                        onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
-                        className={`w-8 h-8 flex justify-end items-center rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]`}
-                    >
-                        <IconChevronDown className="w-8 h-8" />
-                    </button>
-                </div>
+                    <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                </button>
             )}
             <ul
                 style={{ justifyContent: overflowing ? 'start' : 'center' }}
                 ref={ref}
-                className={`flex space-x-4 list-none m-0 !pt-1.5 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${
-                    overflowing ? 'px-12' : 'px-4'
-                } ${className}`}
+                className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
             >
                 {menu.map((menuItem, index) => {
                     const { url, color, icon, name, onClick } = menuItem
@@ -248,19 +342,15 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                 })}
             </ul>
             {overflowing && (
-                <div
-                    className={`absolute top-0 right-0 w-12 pr-1 h-[calc(100%_-_2px)] flex justify-end items-center bg-gradient-to-r from-transparent to-light via-light via-30% dark:via-dark dark:to-dark ${
-                        lastInView ? '-z-10 opacity-25' : 'z-10'
+                <button
+                    onDoubleClick={(e) => e.preventDefault()}
+                    onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
+                    className={`absolute top-0 right-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pr-2 bg-gradient-to-r from-transparent to-light via-light dark:via-dark dark:to-dark ${
+                        lastInView ? '-z-10' : 'z-10'
                     }`}
                 >
-                    <button
-                        onDoubleClick={(e) => e.preventDefault()}
-                        onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
-                        className={`w-8 h-8 flex justify-end items-center rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]`}
-                    >
-                        <IconChevronDown className="w-8 h-8" />
-                    </button>
-                </div>
+                    <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                </button>
             )}
         </div>
     ) : null
@@ -270,6 +360,8 @@ const keyboardShortcut =
     'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs'
 
 export const Main = () => {
+    const { user } = useUser()
+
     const { open } = useSearch()
     const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
@@ -307,7 +399,7 @@ export const Main = () => {
 
     return (
         <div>
-            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
+            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
                         fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
@@ -390,15 +482,40 @@ export const Main = () => {
                                                 PostHog app
                                             </Link>
                                         </li>
+                                        <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
+                                            Community
+                                        </li>
                                         <li className="px-1">
                                             <Link
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
                                                 to="/questions"
                                             >
-                                                <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                Community
+                                                <IconMessage className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                Forums
                                             </Link>
                                         </li>
+                                        {user?.profile && (
+                                            <>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
+                                                        to="/community/dashboard"
+                                                    >
+                                                        <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                        My discussions
+                                                    </Link>
+                                                </li>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
+                                                        to={`/community/profiles/${user?.profile.id}`}
+                                                    >
+                                                        <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75 mr-2" />
+                                                        My profile
+                                                    </Link>
+                                                </li>
+                                            </>
+                                        )}
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
                                             Site settings
                                         </li>
@@ -417,11 +534,21 @@ export const Main = () => {
                                                 <Toggle checked={fullWidthContent} />
                                             </button>
                                         </li>
+                                        <Orders />
                                     </ul>
                                 )
                             }}
                         >
-                            <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
+                            {user?.profile ? (
+                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex">
+                                    <Avatar
+                                        src={getAvatarURL(user?.profile)}
+                                        className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
+                                    />
+                                </div>
+                            ) : (
+                                <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
+                            )}
                         </Tooltip>
                     </div>
                 </div>

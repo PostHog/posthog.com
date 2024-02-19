@@ -9,6 +9,8 @@ tags:
   - Culture
   - Founders
   - People
+crosspost:
+  - Blog  
 ---
 
 Even when Tim (my cofounder) and I were doing a [Y Combinator](https://ycombinator.com) (YC) batch in 2020, we realized we got more work done when we worked asynchronously. 

@@ -1,8 +1,14 @@
-import fetch from 'node-fetch'
-import { MenuBuilder } from 'redoc'
 import { GatsbyNode } from 'gatsby'
+import fetch from 'node-fetch'
 import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
+import { MenuBuilder } from 'redoc'
+import type {
+    MetaobjectsCollection,
+    MetaobjectsReferencesEdge,
+    MetaobjectsResponseData,
+} from '../src/templates/merch/types'
+import dayjs from 'dayjs'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -228,12 +234,23 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             } = roadmap
 
             const date = dateCompleted || projectedCompletion
+            const year = date && Number(dayjs(date).format('YYYY'))
+
+            const cloudinaryMedia = {
+                ...image,
+                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                publicId: image?.data?.attributes?.provider_metadata?.public_id,
+                originalHeight: image?.data?.attributes?.height,
+                originalWidth: image?.data?.attributes?.width,
+                originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
+            }
 
             const data = {
+                strapiID: id,
                 date,
-                media: image,
+                media: cloudinaryMedia,
                 type: category,
-                year: date && new Date(date)?.getFullYear(),
+                year,
                 ...other,
             }
             const roadmapNode = {
@@ -267,4 +284,85 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
         createNode(node)
     })
+
+    /**
+     * Source a list of metaobjects from shopify representing the nav list of collections
+     * and create new Gatsby nodes
+     */
+    const shopifyURL = process.env.GATSBY_MYSHOPIFY_URL
+    const shopifyAdminAPIVersion = process.env.GATSBY_SHOPIFY_ADMIN_API_VERSION
+    const shopifyAdminAPIAPIPassword = process.env.SHOPIFY_APP_PASSWORD
+
+    if (shopifyURL && shopifyAdminAPIVersion && shopifyAdminAPIAPIPassword) {
+        let responseData: MetaobjectsResponseData | undefined
+
+        try {
+            const response = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
+                },
+                body: JSON.stringify({
+                    query: `
+                    {
+                        metaobjects(type: "merch_navigation", first: 100) {
+                            edges {
+                              node {
+                                fields {
+                                  references(first: 5) {
+                                    edges {
+                                        node {
+                                            __typename
+                                            ...on Collection {
+                                              title
+                                              handle
+                                              id
+                                            }    
+                                        }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                      }
+                      
+                  `,
+                }),
+            })
+
+            responseData = (await response.json()) as MetaobjectsResponseData
+        } catch (error) {
+            throw new Error(error)
+        }
+
+        // we want the collection "All Products" to always be at the top of the list
+        const collections: MetaobjectsCollection[] =
+            responseData.data.metaobjects.edges[0].node.fields[0].references.edges
+                .map((item: MetaobjectsReferencesEdge) => ({
+                    title: item.node.title,
+                    handle: item.node.handle,
+                }))
+                .sort((a: MetaobjectsCollection, b: MetaobjectsCollection) =>
+                    a.handle === 'all-products' ? -1 : b.handle === 'all-products' ? 1 : 0
+                )
+
+        collections.forEach((collection, i) => {
+            const node = {
+                url: `/merch/${collection.handle}`,
+                title: collection.title,
+                handle: collection.handle,
+                id: createNodeId(`MerchNavigation-${i}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `MerchNavigation`,
+                    contentDigest: createContentDigest(collection),
+                },
+            }
+
+            createNode(node)
+        })
+    }
 }

@@ -13,6 +13,8 @@ tags:
   - Product updates
 ---
 
+> We [no longer support paid, open-source deployments](/blog/sunsetting-helm-support-posthog) and it is **no longer possible to buy licenses for self-hosted versions** - we instead recommend [migrating to PostHog Cloud](/docs/migrate/migrate-to-cloud). We continue to develop for our open source Docker Compose ("Hobby") deployment, which is still available under an MIT license without guarantee. 
+
 We're sunsetting support for our Kubernetes deployment for PostHog. Because we're an open source company, I want to be transparent about what this change means, and why we're making it. 
 
 In this blog post I'll explain:
@@ -21,7 +23,7 @@ In this blog post I'll explain:
 2. How this impacts existing self-hosted customers
 3. The steps we're taking to support impacted customers
 
-> **Important:** Right now, _about 3.5% of our users use Kubernetes_, so this change only affects a small subsection of our users. This decision **doesn't impact open source users** on Docker Compose deployments (also known as the "hobby" deployment). We remain totally committed to being open source and are actively exploring ways to make that experience even better.
+Right now, _about 3.5% of our users use Kubernetes_, so this change only affects a small subsection of our users. This decision **doesn't impact open source users on Docker Compose deployments** (also known as the "hobby" deployment). We remain totally committed to being open source and are actively exploring ways to make that experience even better.
 
 ## Why are we doing this?
 

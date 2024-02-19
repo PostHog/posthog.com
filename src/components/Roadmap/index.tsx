@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -8,6 +8,10 @@ import { InProgress } from './InProgress'
 import { StaticImage } from 'gatsby-plugin-image'
 import { useRoadmap } from 'hooks/useRoadmap'
 import { useNav } from 'components/Community/useNav'
+import { CallToAction } from 'components/CallToAction'
+import RoadmapForm, { Status } from 'components/RoadmapForm'
+import { useUser } from 'hooks/useUser'
+import UpdateWrapper, { RoadmapSuccess } from './UpdateWrapper'
 
 interface IGitHubPage {
     title: string
@@ -61,6 +65,36 @@ export interface IRoadmap {
     )
 }*/
 
+const AddRoadmapItem = ({ status }: { status: 'in-progress' | 'complete' | 'under-consideration' }) => {
+    const [adding, setAdding] = useState(false)
+    const [roadmapID, setRoadmapID] = useState(null)
+
+    return (
+        <div className="pt-4 !mt-4 border-t border-border dark:border-dark pb-4">
+            {roadmapID && <RoadmapSuccess id={roadmapID} />}
+            {adding ? (
+                <RoadmapForm
+                    status={status}
+                    onSubmit={(roadmap) => {
+                        setAdding(false)
+                        setRoadmapID(roadmap.id)
+                    }}
+                />
+            ) : (
+                <CallToAction
+                    width="full"
+                    onClick={() => {
+                        setAdding(true)
+                        setRoadmapID(null)
+                    }}
+                >
+                    Add
+                </CallToAction>
+            )}
+        </div>
+    )
+}
+
 export const Section = ({
     title,
     description,
@@ -97,7 +131,7 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 export default function Roadmap() {
     const nav = useNav()
     const teams = useRoadmap()
-
+    const { user } = useUser()
     const underConsideration: ITeam[] = teams
         .map((team) => {
             return {
@@ -158,12 +192,23 @@ export default function Roadmap() {
                                         <Card key={team.name} team={team.name}>
                                             <CardContainer>
                                                 {team.roadmaps.map((node) => {
-                                                    return <UnderConsideration key={node.title} {...node} />
+                                                    return (
+                                                        <UpdateWrapper
+                                                            key={node.title}
+                                                            id={node.squeakId}
+                                                            status="under-consideration"
+                                                            formClassName="mb-4"
+                                                            editButtonClassName="absolute bottom-4 right-4 z-10"
+                                                        >
+                                                            <UnderConsideration {...node} />
+                                                        </UpdateWrapper>
+                                                    )
                                                 })}
                                             </CardContainer>
                                         </Card>
                                     )
                                 })}
+                                {user?.role?.type === 'moderator' && <AddRoadmapItem status="under-consideration" />}
                             </CardContainer>
                         </Section>
 
@@ -190,12 +235,23 @@ export default function Roadmap() {
                                             <Card key={team.name} team={team.name}>
                                                 <CardContainer>
                                                     {team.roadmaps.map((node) => {
-                                                        return <InProgress stacked key={node.title} {...node} />
+                                                        return (
+                                                            <UpdateWrapper
+                                                                key={node.title}
+                                                                id={node.squeakId}
+                                                                status="in-progress"
+                                                                formClassName="mb-4"
+                                                                editButtonClassName="absolute bottom-4 right-4 z-10"
+                                                            >
+                                                                <InProgress stacked {...node} />
+                                                            </UpdateWrapper>
+                                                        )
                                                     })}
                                                 </CardContainer>
                                             </Card>
                                         )
                                     })}
+                                {user?.role?.type === 'moderator' && <AddRoadmapItem status="in-progress" />}
                             </CardContainer>
                         </Section>
 
@@ -208,6 +264,7 @@ export default function Roadmap() {
                                 Check out <Link to="/changelog">our changelog</Link> on our blog to see what we've
                                 shipped recently.
                             </p>
+                            {user?.role?.type === 'moderator' && <AddRoadmapItem status="complete" />}
                             {/*
                             hidden until we have more historical content loaded
                             <CardContainer>

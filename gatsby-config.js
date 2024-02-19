@@ -327,6 +327,30 @@ module.exports = {
                 ],
             },
         },
+        {
+            resolve: `gatsby-transformer-cloudinary`,
+            options: {
+                transformTypes: [`RoadmapMedia`],
+            },
+        },
+        ...(process.env.SHOPIFY_APP_PASSWORD &&
+        process.env.GATSBY_MYSHOPIFY_URL &&
+        process.env.GATBSY_SHOPIFY_SALES_CHANNEL
+            ? [
+                  {
+                      resolve: 'gatsby-source-shopify',
+                      options: {
+                          password: process.env.SHOPIFY_APP_PASSWORD,
+                          storeUrl: process.env.GATSBY_MYSHOPIFY_URL,
+                          shopifyConnections: ['collections'],
+                          salesChannel: process.env.GATBSY_SHOPIFY_SALES_CHANNEL,
+                          downloadImages: true,
+
+                          // salesChannel: process.env.SHOPIFY_APP_ID, // Optional but recommended
+                      },
+                  },
+              ]
+            : []),
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),

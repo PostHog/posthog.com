@@ -8,9 +8,9 @@ availability:
     enterprise: full
 ---
 
-> **Note:** This is **not required** for [popover surveys](/docs/surveys/creating-surveys#display-mode).
+> **Note:** This is **not required** for [popover surveys](/docs/surveys/creating-surveys#presentation).
 
-If you're using PostHog's [survey API](/docs/surveys/creating-surveys#display-mode) to create a custom survey UI, there are 2 steps to integrating with PostHog:
+If you're using PostHog's [survey API](/docs/surveys/creating-surveys#presentation) to create a custom survey UI, there are 2 steps to integrating with PostHog:
 
 ## Step 1: Fetch active surveys
 
@@ -53,7 +53,7 @@ Thus you can use show your user a survey using code like this:
 posthog.getActiveMatchingSurveys((surveys) => {
     // Make sure you filter for surveys that are of type `"api"`. 
     // This prevents accidentally showing popover surveys to your users.
-    const filteredSurveys = surveys.filter(survey => survey.type === 'api'));
+    const filteredSurveys = surveys.filter(survey => survey.type === 'api');
     if (filteredSurveys.length > 0) {
         // show the survey using your custom UI
         showSurvey(filteredSurveys[0]);

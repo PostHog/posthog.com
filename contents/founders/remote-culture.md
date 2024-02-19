@@ -9,6 +9,8 @@ tags:
   - Founders
   - Culture
   - People
+crosspost:
+  - Blog  
 ---
 
 Many companies are currently having to adjust to remote work, but what about the ones that started this way from scratch?

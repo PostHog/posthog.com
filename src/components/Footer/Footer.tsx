@@ -59,7 +59,7 @@ const linklist: IProps[] = [
     },
     {
         title: 'Product OS',
-        url: '/docs',
+        url: '/docs/product-os',
         items: [
             {
                 title: 'New? Start here.',
@@ -167,7 +167,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Merch',
-                url: 'https://merch.posthog.com',
+                url: '/merch',
             },
             {
                 title: 'Contributors',
@@ -416,6 +416,14 @@ export function Footer(): JSX.Element {
                                 className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
                             >
                                 SOC 2
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/docs/privacy/hipaa-compliance"
+                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                            >
+                                HIPAA
                             </Link>
                         </li>
                         <li>

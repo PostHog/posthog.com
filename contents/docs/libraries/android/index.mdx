@@ -9,7 +9,7 @@ features:
     eventCapture: true
     userIdentification: true
     autoCapture: false
-    sessionRecording: false
+    sessionRecording: true
     featureFlags: true
     groupAnalytics: true
 ---
@@ -43,6 +43,8 @@ To set [properties](/docs/data/user-properties) on your users via an event, you 
 **Example**
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.capture(
     event = "button_b_clicked",
     properties = mapOf("color" to "blue"),
@@ -62,6 +64,8 @@ When capturing an event, you can pass a property called `userProperties` as an e
 **Example**
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.capture(
     event = "button_b_clicked",
     properties = mapOf("color" to "blue"),
@@ -85,6 +89,8 @@ You can also configure the flush interval. By default we flush all events after 
 no matter how many events have been gathered.
 
 ```kotlin
+import com.posthog.android.PostHogAndroidConfig
+
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
     flushAt = 20
     flushIntervalSeconds = 30
@@ -94,6 +100,8 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 You can also manually flush the queue:
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.flush() 
 ```
 
@@ -102,6 +110,8 @@ PostHog.flush()
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.reset()
 ```
 
@@ -120,6 +130,8 @@ import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```kotlin
+import com.posthog.PostHog
+
 if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
     // do something
 }
@@ -136,6 +148,8 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```kotlin
+import com.posthog.PostHog
+
 // organization is the group type, company_id_in_your_db is the group ID
 PostHog.group(
     type = "company", 
@@ -146,6 +160,8 @@ PostHog.group(
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.group(
     type = "company", 
     key = "company_id_in_your_db",
@@ -161,10 +177,10 @@ When creating the PostHog client, there are many options you can set:
 
 ```kotlin
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
-    // Record certain application events automatically! (on/true by default)
+    // Capture certain application events automatically. (on/true by default)
     captureApplicationLifecycleEvents = true
 
-    // Record screen views automatically! (on/true by default)
+    // Capture screen views automatically. (on/true by default)
     captureScreenViews = true // (on/true by default)
 
     // Capture deep links as part of the screen call. (on/true by default)
@@ -173,7 +189,31 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Maximum number of events to keep in queue before flushing (20 by default)
     flushAt = 20
 
+    // Number of maximum events in memory and disk, when the maximum is exceed, the oldest event is deleted and the new one takes place. (1000 by default)
+    maxQueueSize = 1000
+
+    // Number of maximum events in a batch call. (50 by default)
+    maxBatchSize = 50
+
     // Maximum delay before flushing the queue (30 seconds)
     flushIntervalSeconds = 30
+
+    // Logs the SDK messages into Logcat. (off/false by default)
+    debug = false
+
+    // Prevents capturing any data if enabled. (off/false by default)
+    optOut = false
+
+    // Send a `$feature_flag_called` event when a feature flag is used automatically. (on/true by default)
+    sendFeatureFlagEvent = true
+
+    // Preload feature flags automatically. (on/true by default)
+    preloadFeatureFlags = true
+
+    // Callback that is called when feature flags are loaded (not set by default)
+    onFeatureFlags = { ... }
+
+    // Callback that allows to sanitize the event properties (not set by default)
+    propertiesSanitizer = { properties -> ... }
 }
 ```

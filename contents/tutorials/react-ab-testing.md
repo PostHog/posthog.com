@@ -161,4 +161,4 @@ After confirming it works, remove the `featureFlags.override` call, go back to y
 
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to do holdout testing](/tutorials/holdout-testing)
-- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+- [How to set up analytics in React](/tutorials/react-analytics)

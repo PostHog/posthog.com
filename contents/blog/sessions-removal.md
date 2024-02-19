@@ -47,10 +47,10 @@ From the context above, we decided to take the following actions:
 In addition to the changes above, we're also significantly improving recordings ingestion and the playback experience. This will make sure more sessions are captured and that you can seamlessly find the relevant parts of a recording.
 
 
-> 💡 **Not seeing these changes yet?** We're A/B testing some of these changes in PostHog Cloud, you may still not be in the release group. Please [contact us](/slack) if you'd like to be included. If you're on a self-hosted deployment of PostHog please keep an eye out for the next release.
+> 💡 **Not seeing these changes yet?** We're A/B testing some of these changes in PostHog Cloud, you may still not be in the release group. Please [contact us](/posts) if you'd like to be included. If you're on a self-hosted deployment of PostHog please keep an eye out for the next release.
 
 ## What's next?
-We are considering full support for session-based behavioral analytics and want to gather more context on the use cases for this. In particular, we want to make sure users have flexibility around their own concept of sessions, support a full range of analytics (e.g. session count, duration, multi-device sessions), etc.
+We are considering full support for session-based [behavioral analytics](/product-engineers/behavioral-analytics) and want to gather more context on the use cases for this. In particular, we want to make sure users have flexibility around their own concept of sessions, support a full range of analytics (e.g. session count, duration, multi-device sessions), etc.
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

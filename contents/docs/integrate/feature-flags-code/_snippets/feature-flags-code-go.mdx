@@ -11,7 +11,7 @@ isMyFlagEnabled, err := client.IsFeatureEnabled(
                 DistinctId: "distinct_id_of_your_user",
             })
 
-if isMyFlagEnabled {
+if isMyFlagEnabled == true {
     // Do something differently for this user
 }
 ```

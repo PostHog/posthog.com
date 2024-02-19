@@ -81,7 +81,7 @@ export default function Community() {
                         <StaticImage src="./images/community-dark.png" className="w-[150%] md:w-full" />
                     </div>
                     <CommunityStat
-                        count="81k+"
+                        count="110k+"
                         label={
                             <>
                                 Developer <br className="xl:hidden" />

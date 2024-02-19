@@ -8,6 +8,8 @@ tags:
   - Feature management
   - Feature flags
   - Product engineers
+crosspost:
+  - Blog  
 ---
 
 Feature flags, aka feature toggles, are a simple pattern with many uses. New feature to beta test? Use a feature flag. Testing variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say there are [many benefits to feature flags](/blog/feature-flag-benefits-use-cases).

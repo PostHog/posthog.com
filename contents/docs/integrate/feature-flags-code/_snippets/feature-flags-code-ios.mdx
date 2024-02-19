@@ -1,19 +1,52 @@
 ### Boolean feature flags
 
 ```swift
-if (posthog.isFeatureEnabled("flag-key")) {
+if (PostHogSDK.shared.isFeatureEnabled("flag-key")) {
     // Do something differently for this user
+
+    // Optional: fetch the payload
+    let matchedFlagPayload = PostHogSDK.shared.getFeatureFlagPayload("flag-key")
 }
 ```
 
 ### Multivariate feature flags
 
 ```swift
-if (posthog.getFeatureFlag("my-flag") as? String == "variant-key") { // replace "variant-key" with the key of your variant
-    // do something
+if (PostHogSDK.shared.getFeatureFlag("flag-key") as? String == "variant-key") { // replace "variant-key" with the key of your variant
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    let matchedFlagPayload = PostHogSDK.shared.getFeatureFlagPayload("flag-key")
+}
+```
+
+### Ensuring flags are loaded before usage
+
+Every time a user loads a screen, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
+
+This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
+
+To handle this, you can use the `didReceiveFeatureFlags` notification to wait for the feature flag request to finish:
+
+```swift
+// Before SDK initialization
+NotificationCenter.default.addObserver(self, selector: #selector(receiveFeatureFlags), name: PostHogSDK.didReceiveFeatureFlags, object: nil)
+PostHogSDK.shared.setup(config)
+
+// The "receiveFeatureFlags" method will be called when the SDK receives the feature flags from the server.
+
+// And/Or manually the SDK is initialized
+PostHogSDK.shared.reloadFeatureFlags {
+    if PostHogSDK.shared.isFeatureEnabled("flag-key") {
+        // do something
+    }
 }
 ```
 
 ### Reloading feature flags
 
-Feature flag values are cached. If something has change with your user and you'd like to refetch their flag values, call `posthog.reloadFeatureFlags()`.
+Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
+
+```swift
+PostHogSDK.shared.reloadFeatureFlags()
+```

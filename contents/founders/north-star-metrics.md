@@ -14,6 +14,7 @@ tags:
   - Product metrics
 crosspost: 
   - Product engineers
+  - Blog
 ---
 
 Successful products need actionable metrics and for many businesses this starts with identifying what many refer to as a 'North Star' metric.
