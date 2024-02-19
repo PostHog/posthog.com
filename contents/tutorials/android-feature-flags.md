@@ -1,6 +1,6 @@
 ---
 title: "How to set up feature flags in Android"
-date: 2024-02-16
+date: 2024-02-19
 author: ["lior-neu-ner"]
 tags: ['feature flags']
 ---
