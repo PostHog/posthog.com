@@ -296,9 +296,9 @@ In this tutorial, we create a simple trend insight:
 For example, in the image below we set our insight to show number of unique users that captured the `home_api_called` event where the `user_name` property is equal to `Max`:
 
 <ProductScreenshot
-  imageLight={EventsInPostHogLight} 
-  imageDark={EventsInPostHogDark} 
-  alt="Feature flag created in PostHog" 
+  imageLight={InsightLight} 
+  imageDark={InsightDark} 
+  alt="Insight created in PostHog" 
   classes="rounded"
 />
 
