@@ -89,7 +89,7 @@ One successful experiment we did roll out was adding more personalized emails fo
 
 [4.0](https://github.com/PostHog/meta/pull/150/) was a massive step up in complexity as a result of our growing number of features. By late 2023 the flow had 28 separate emails, of which users would get a maximum of 6 over several weeks. We still worried this would be too many, but the low (0.4%) unsubscribe rate suggested otherwise.
 
-![Onboarding 4.0](../images/blog/onboarding/onboarding_31.png)
+![Onboarding 4.0](../images/blog/onboarding/onboarding_4.png)
 <Caption>Onboarding 4.0 split high-ICP users out into their own email flow because our CS team would reach out directly</Caption>
 
 By this point we’d also changed our conversion event to mean a user enabling billing for a product within one week of opening an email - a far better indicator of if the emails are delivering value than simply measuring logins. 
