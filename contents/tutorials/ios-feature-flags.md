@@ -75,7 +75,7 @@ struct FeatureScreenView: View {
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the iOS app](../images/tutorials/ios-feature-flags/basic-app.mp4)
+![Basic setup of the iOS app](../images/tutorials/ios-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
