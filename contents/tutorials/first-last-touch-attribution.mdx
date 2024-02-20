@@ -7,6 +7,14 @@ sidebar: Docs
 tags: ['insights', 'hogql', 'user paths', 'product analytics']
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import InitialDark from '../images/tutorials/first-last-touch-attribution/initial-dark.png'
+import InitialLight from '../images/tutorials/first-last-touch-attribution/initial-light.png'
+import ReferrerDark from '../images/tutorials/first-last-touch-attribution/referrer-dark.png'
+import ReferrerLight from '../images/tutorials/first-last-touch-attribution/referrer-light.png'
+import PathDark from '../images/tutorials/first-last-touch-attribution/path-dark.png'
+import PathLight from '../images/tutorials/first-last-touch-attribution/path-light.png'
+
 Understanding where users are coming from helps prioritize future development and marketing efforts. To analyze this, companies do "attribution", which is the process of figuring out what caused a conversion. 
 
 Two common ways of doing attribution are:
@@ -26,7 +34,12 @@ PostHog automatically captures multiple properties related to the source of a us
 
 Analyzing these values is relatively easy. Create a [new insight](https://app.posthog.com/insights/new), choose your signup event as your series, breakdown by the person properties "Initial UTM Source" or "Initial Referrer Domain," and select the total value bar chart for your visualization. You can also filter out `None` values by filtering for events where the property you are using `is set`.
 
-![Initial properties](../images/tutorials/first-last-touch-attribution/initial.png)
+<ProductScreenshot
+  imageLight={InitialLight} 
+  imageDark={InitialDark} 
+  alt="Initial properties"
+  classes="rounded"
+/>
 
 ### First pageview
 
@@ -63,7 +76,12 @@ To do this, we can [create an insight](https://app.posthog.com/insights/new), ch
 
 Again, you can filter out `none` by filtering for events where your property `is set`.
 
-![Referrer property](../images/tutorials/first-last-touch-attribution/referrer.png)
+<ProductScreenshot
+  imageLight={ReferrerLight} 
+  imageDark={ReferrerDark} 
+  alt="Referrer property"
+  classes="rounded"
+/>
 
 ### Last pageview event
 
@@ -112,7 +130,12 @@ To create this:
 
 This creates a path diagram to help you understand where your newly converted users are coming from.
 
-![User path](../images/tutorials/first-last-touch-attribution/path.png)
+<ProductScreenshot
+  imageLight={PathLight} 
+  imageDark={PathDark} 
+  alt="User path"
+  classes="rounded"
+/>
 
 ## Further reading
 

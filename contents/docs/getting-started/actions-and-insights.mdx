@@ -4,6 +4,25 @@ nextPage: ./group-analytics.mdx
 featuredImage: ./images/docs-actions.png
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import CreateNewActionLight from './images/create-new-action-light-mode.png'
+import CreateNewActionDark from './images/create-new-action-dark-mode.png'
+
+import NamingTheActionLight from './images/naming-the-action-light-mode.png'
+import NamingTheActionDark from './images/naming-the-action-dark-mode.png'
+
+import MatchGroupDark from './images/match-group-dark-mode.png'
+import MatchGroupLight from './images/match-group-light-mode.png'
+
+import NewInsightDark from './images/new-insight-dark-mode.png'
+import NewInsightLight from './images/new-insight-light-mode.png'
+
+import FilterReferrerAndBreakdownDark from './images/filter-referrer-and-breakdown-dark-mode.png'
+import FilterReferrerAndBreakdownLight from './images/filter-referrer-and-breakdown-light-mode.png'
+
+import BrokenDownTrendBarDark from './images/broken-down-trend-bar-dark-mode.png'
+import BrokenDownTrendBarLight from './images/broken-down-trend-bar-light-mode.png'
+
 Actions and insights are the two foundational analysis tools within PostHog.
 They're easy to get started with, and tricky to fully master, but getting a good idea of all the features they offer will make analysis feel much, much smoother.
 
@@ -18,18 +37,33 @@ Actions are perhaps most powerful when paired with autocapture events, and offer
 Let's create an action from an autocaptured event for when a user clicks a 'Sign up' button like we talked about in the [Sending events](/docs/getting-started/send-events) guide.
 First, navigate to the 'Data management' section in your PostHog dashboard and then to the 'Actions' tab, where you should then see a 'New action' button that we'll click.
 
-![modal with two buttons: 'Inspect element on your site' and 'From event or pageview'](./images/create-new-action.png)
+<ProductScreenshot
+  imageLight={CreateNewActionLight} 
+  imageDark={CreateNewActionDark} 
+  alt="Modal with two buttons: 'Inspect element on your site' and 'From event or pageview'"
+  classes="rounded"
+/>
 
 In our case, we'll use the second option to create an action from an existing event. We'll then fill out the name of the new action we want to create - in this case, something like 'Sign up button clicked'.
 
-![form to create a new action, with 'Sign up button clicked' set as the name](./images/naming-the-action.png)
+<ProductScreenshot
+  imageLight={NamingTheActionLight} 
+  imageDark={NamingTheActionDark} 
+  alt="Form to create a new action, with 'Sign up button clicked' set as the name" 
+  classes="rounded"
+/>
 
 > **Tip**: Make sure to set a description for all your actions so you don't forget what they refer to - your team members and your future self will thank you!
 
 Next, we'll describe which raw autocapture events we want to include in this action.
-We'll select 'Autocapture' as our event type and then fill out the 'Link target equals' and 'Text equals' fields.
+We'll select 'Autocapture' as our event type and then fill out the 'Element text matches exactly' and 'Element link target matches exactly' fields.
 
-![form with the field 'Link target equals' and 'Text equals' set to '/sign-up' and 'Sign up' respectively](./images/match-group.png)
+<ProductScreenshot
+  imageLight={MatchGroupLight} 
+  imageDark={MatchGroupDark} 
+  alt="Form with the field 'Link target equals' and 'Text equals' set to '/sign-up' and 'Sign up' respectively" 
+  classes="rounded"
+/>
 
 With these filters, we'll only include autocapture elements where the user clicked on a link pointing to `/sign-up` that also contained the text 'Sign up'.
 
@@ -55,7 +89,12 @@ In this guide, we'll be covering just the Trends insight, which is one of the mo
 
 To start, let's create a new trends insight from the "Insights" section in our PostHog dashboard using the 'New insight' button.
 
-![newly created trends insight with the 'Sign up button clicked' event](./images/new-insight.png)
+<ProductScreenshot
+  imageLight={NewInsightLight} 
+  imageDark={NewInsightDark} 
+  alt="Newly created trends insight with the 'Sign up button clicked' event" 
+  classes="rounded"
+/>
 
 In this case, we'll use the 'Sign up button clicked' action we just created, but feel free to substitute this for whichever event you'd like.
 
@@ -65,14 +104,24 @@ Now that we have our insight, let's start drilling down a bit more.
 
 First, let's start by seeing which browsers our users are using and how that correlates with our number of sign-ups.
 
-![filter group for only direct referrers and breaking down by the browser](./images/filter-referrer-and-breakdown.png)
+<ProductScreenshot
+  imageLight={FilterReferrerAndBreakdownLight} 
+  imageDark={FilterReferrerAndBreakdownDark} 
+  alt="Filter group for only direct referrers and breaking down by the browser" 
+  classes="rounded"
+/>
 
 We can do this with a [Breakdown](/manual/trends#breaking-down-by-properties), which splits our graph based on the value of an event or person property, in this case, the 'Browser' property.
 Let's also add a [Filter Group](/manual/trends#filter-groups) so we're only at users who visited our site from a direct URL.
 
 This works well, but let's try changing the display of our graph to make it easier to analyze.
 
-![filter group for only direct referrers and breaking down by the browser](./images/broken-down-trend-bar.png)
+<ProductScreenshot
+  imageLight={BrokenDownTrendBarLight} 
+  imageDark={BrokenDownTrendBarDark} 
+  alt="Brokend down trend in bar chart over last 7 days" 
+  classes="rounded"
+/>
 
 Great, we now have our insight all set up!
 Of course, there are still tons of powerful features within trends and other insight types, but even with just actions, filtering, and breakdowns you'll be able to answer a lot.
