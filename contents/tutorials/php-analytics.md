@@ -161,7 +161,7 @@ With this set up, we're ready to capture events.
 
 ## 3. Implement the event capture code
 
-To show how to capture events with PostHog, we capture an event when the button on the home page is clicked. To do this, we call [`PostHog::capture()`](/docs/libraries/php#capturing-events):
+To show how to capture events with PostHog, we capture an event when the button on the `dashboard` page is clicked. To do this, we call [`PostHog::capture()`](/docs/libraries/php#capturing-events):
 
 ```php file=api/dashboard.php
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -179,7 +179,7 @@ PostHog::capture([
 ]);
 ```
 
-With this set up, refresh your app and click the button on the home page a few times. You should now see the captured event in your [PostHog activity tab](https://us.posthog.com/events).
+With this set up, refresh your app and click the button on the `dashboard` page a few times. You should now see the captured event in your [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsInPostHogLight} 
