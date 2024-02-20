@@ -10,9 +10,10 @@ import phantom from './images/phantom.svg'
 import phantomDark from './images/phantom_dark.svg'
 import landmark from './images/landmark.svg'
 import landmarkDark from './images/landmark_dark.svg'
-import Contact from './Contact'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import HubSpotForm from 'components/HubSpotForm'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const features = [
     'SSO SAML',
@@ -100,11 +101,35 @@ export default function ContactSales({ location }) {
                     </div>
                     <div className="order-1 md:order-2">
                         <h3 className="mb-1">Contact us</h3>
-                        <Contact
-                            initialValues={{
-                                product: params.has('edition')
-                                    ? params.get('edition') === 'enterprise' && 'PostHog Cloud Enterprise'
-                                    : undefined,
+                        <p className="text-sm">
+                            <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
+                            form at a breakneck pace!
+                        </p>
+                        <HubSpotForm
+                            formID="21de475a-af2c-47c2-ae02-414aefdfdeb4"
+                            customFields={{
+                                maus: {
+                                    type: 'radioGroup',
+                                    options: [
+                                        { label: 'Under 10k/mo', value: 10_000 },
+                                        { label: '10k-50k/mo', value: 50_000 },
+                                        { label: '50k-100k/mo', value: 100_000 },
+                                        { label: '100k-500k/mo', value: 500_000 },
+                                        { label: '500k-1m/mo', value: 100_000_000 },
+                                        { label: 'More than 1m/mo', value: 100_000_000_000 },
+                                    ],
+                                },
+                                monthly_events: {
+                                    type: 'radioGroup',
+                                    options: [
+                                        { label: 'Under 1m/mo', value: 1_000_000 },
+                                        { label: '1m-2m/mo', value: 2_000_000 },
+                                        { label: '2m-10m/mo', value: 10_000_000 },
+                                        { label: '10m-100m/mo', value: 100_000_000 },
+                                        { label: 'More than 100m/mo', value: 100_000_000_000 },
+                                        { label: "I'm not sure!", value: 0 },
+                                    ],
+                                },
                             }}
                         />
                     </div>
