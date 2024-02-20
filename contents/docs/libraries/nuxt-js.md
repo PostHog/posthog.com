@@ -3,6 +3,8 @@ title: Nuxt.js
 icon: ../../images/docs/integrate/frameworks/nuxt.svg
 ---
 
+> ✨ **New**: A Nuxt module maintened by the Nuxt community has been released, handling PostHog's configuration and providing some DX improvements. Check out [nuxt-posthog](https://nuxt-posthog.cmitjans.dev) for more information.
+
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
 These docs are aimed at Nuxt.js users who run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
