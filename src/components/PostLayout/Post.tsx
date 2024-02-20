@@ -108,12 +108,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                         <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
                                             Jump to:
                                         </h4>
-                                        <Scrollspy
-                                            offset={-50}
-                                            className="list-none m-0 p-0 flex flex-col"
-                                            items={tableOfContents?.map((navItem) => navItem.url)}
-                                            currentClassName="active-product"
-                                        >
+                                        <ul className="list-none m-0 p-0 flex flex-col">
                                             {tableOfContents.map((navItem, index) => (
                                                 <li className="relative leading-none m-0" key={navItem.url}>
                                                     <InternalSidebarLink
@@ -124,7 +119,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                     />
                                                 </li>
                                             ))}
-                                        </Scrollspy>
+                                        </ul>
                                     </div>
                                 )}
                             </div>

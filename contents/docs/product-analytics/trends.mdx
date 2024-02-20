@@ -12,7 +12,8 @@ export const CopyIcon = () => <svg class="inline-block w-5 h-5 text-gray" fill="
 
 ## Overview
 
-Trends are a type of [Insight](/docs/product-analytics/insights) that allow you to plot data from people, events, and properties.
+Trends are a type of [insight](/docs/product-analytics/insights) that enable you to plot data from people, events, and properties.
+
 Trends are an incredibly powerful part of PostHog's analytics toolbox, and are useful for finding patterns in your data, as well as monitoring your product to ensure everything is running smoothly.
 
 ### What can you learn from trends?
@@ -28,7 +29,7 @@ Trends are an incredibly powerful part of PostHog's analytics toolbox, and are u
 
 #### Creating a new trend
 
-Using the side menu, navigate to the **Insights** tab where you'll be able to see a list of all your saved insights. You can then create a new Insight by clicking on the New insight button in the top right. By default, new insights will default to Trends.
+Using the side menu, navigate to the [Product Analytics](https://us.posthog.com/insights) tab where you'll be able to see a list of all your saved insights. You can then create a new trends insight by clicking on the **New insight** button in the top right. By default, new insights will default to Trends.
 
 You should now see a screen that looks like this
 
@@ -36,7 +37,7 @@ You should now see a screen that looks like this
 
 #### Adding events
 
-Now that we've created our Trends insight, the next thing we want to do is select the events we would like to see. This can be done by clicking the dropdown to the right of the <div class="inline-flex items-center justify-center rounded-full border-2 font-semibold" style="width: 20px; height: 20px; border-color: rgb(29, 74, 255); color: rgb(29, 74, 255); background-color: rgba(29, 74, 255, 0.15);">A</div> icon.
+Now that you've created a Trends insight, the next thing is select the events you would like to see. Click the dropdown to the right of the <div class="inline-flex items-center justify-center rounded-full border-2 font-semibold" style="width: 20px; height: 20px; border-color: rgb(29, 74, 255); color: rgb(29, 74, 255); background-color: rgba(29, 74, 255, 0.15);">A</div> icon.
 
 ![selecting our event](../../images/docs/user-guides/trends/select-event.png)
 
@@ -47,9 +48,11 @@ By default, the total number of events (Total count) that occurred within a spec
 #### Filtering events based on properties
 
 Oftentimes, we don't want to see a graph of _all_ the events with a certain name, but we may only want to look at a subset of these events.
+
 [Filters](#filtering-events) allow us to only plot data for a subset of events based on their properties. For example, we might only want to see `$pageview` events for a specific URL, or only see events from users within specific countries, which can all be done using filters!
 
 To add a filter to an event series, click on the <FilterIcon /> icon next to the event name, and then click the 'Add filter' button.
+
 This will bring up a dropdown where you can search through all event properties and choose the one you would like to filter based on. For this example, we'll choose the 'Device Type' event so that we can plot data only for Desktop users.
 
 ![a filter that only shows events from desktop users](../../images/docs/user-guides/trends/basic-filter.png)
@@ -59,9 +62,10 @@ Read more about filters in the [filtering events](#filtering-events) section.
 #### Changing the time range
 
 When you first create an insight, PostHog will default to only plotting data from the last 7 days. This is great for getting a short term snapshot or digging in deeply to a specific time period, but oftentimes you'll want to see how your metrics change over the long term.
+
 This can be done using the [display options at the top of the chart](#changing-the-display-options) and setting the 'Date range' to `Last 90 days`.
 
-> **Note: ** Keep in mind that if you set your date range to be very large, it may severely impact your query performance as the number of events we need to process can increase dramatically
+> **Note: ** Setting a very large time scale may severely impact your query performance as the number of events can increase dramatically
 
 ![showing a chart over a longer date range (90 days)](../../images/docs/user-guides/trends/longer-date-range.png)
 
@@ -69,9 +73,9 @@ This can be done using the [display options at the top of the chart](#changing-t
 
 #### Saving and editing a trend
 
-Now that we have our insight set up, the last step is to give it a name and save it so we can view it later! To give this Insight a name, you can click on the pencil icon next to the title, and then click the 'Save' button.
+Now that you have your insight set up, the last step is to give it a name and save it so you can view it later! To give the insight a name, click on the pencil icon next to the title, then click the 'Save' button.
 
-If you ever want to go back and modify a trend, you can do so by clicking on its name in the 'Insight' tab, and then clicking the 'Edit' button in the top right.
+If you ever want to go back and modify a trend, you can do so by clicking on its name in the [Product Analytics](https://us.posthog.com/insights) tab, and then clicking the 'Edit' button in the top right.
 
 Now that you've mastered the basics of the trends insight, we'd encourage you to read through following sections to get a better idea of all the features that trends have to offer.
 
@@ -98,7 +102,7 @@ By default, the dropdown will only show properties that have been seen on a spec
 
 **Example: _(equals, contains, etc)_**
 
-This is what PostHog will use to compare the property value to determine whether an event passes the filter or not. Note that the options for this will change based on the type of the property you've selected (e.g. whether a property is a `Number` or `String`).
+This is what PostHog uses to compare the property value to determine whether an event passes the filter or not. Note that the options for this will change based on the type of the property you've selected (e.g. whether a property is a `Number` or `String`).
 
 ##### All operations
 
@@ -321,7 +325,9 @@ One of the most powerful tools when creating a new trend is using custom formula
 ![formula map chart](../../images/docs/user-guides/trends/formula.png)
 
 To add a formula, open the 'Advanced Options' dropdown and click the 'Add formula' button. Then within the input box, type out the expression you would like to evaluate.
+
 This expression can contain any number of basic mathematical operators (+, -, \*, /) along with variables (`A`, `B`, `C`, ...) which correspond to the series with that letter.
+
 For example, if you have two series A and B, then the formula A / B will plot the value of series A divided by the value of series B at each point in time.
 
 > **Note: ** When using a formula, only one series will be displayed on the chart, which will show the output of the formula at each point in time.
@@ -332,4 +338,4 @@ Insight filters follow a declarative format that you can view and edit. Open the
 
 ![view insight configuration source](../../images/docs/user-guides/trends/insights-source.png)
 
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).
+Want more? Check our [full list of PostHog tutorials](/tutorials).

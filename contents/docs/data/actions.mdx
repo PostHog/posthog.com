@@ -8,33 +8,53 @@ availability:
     enterprise: full
 ---
 
-Often a single event is not specific enough to represent a behavior. For example, to track signups from Google Ads, a pageview or button click isn't enough. You need a valid signup submission where the user has properties showing they came from a Google Ad.
+## What is an action?
 
-Also, multiple events might represent the same behavior. For example, "trying a feature" could include visiting its page, enabling it, or generating a related backend event.
+Actions are a way of combining several related events into one, which you can then analyze in [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards) as if it were a single event.
 
-Actions are a collection of events fitting event types and filters that represent a single behavior. They are created using a combination of autocapture events, custom events, or pageviews, along with filters. They can then be analyzed in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and more.
+Actions can include autocapture events, custom events, or pageviews, and support filters for:
 
-You can create and view actions by going to [Data Management](https://app.posthog.com/data-management/events) in the left-hand navigation sidebar, and then click on the [Actions tab](https://app.posthog.com/data-management/actions).
+- Event properties (e.g. UTM tags)
+- Person properties (e.g. location, operating system)
+- Feature flags (e.g. beta test groups and feature toggles)
+- Cohorts (e.g. groups of users with related properties)
+- Autocapture elements (e.g. text and CSS selectors)
+
+You can also use actions to "rename" events by creating an action based on a single event and giving it easy to understand name.
+
+## How are actions useful?
+
+Actions are great for analzying related events as if they were one.
+
+At PostHog, for example, we track custom events like `insight created`, `insight analyzed`, and `dashboard created`. These are all different ways to interacting with product analytics.
+
+We then combine these and similar events into an action called `Product Analytics Interactions`, which gives us an aggregate view of product analytics usage.
+
+Actions are also useful for tracking conversions on your website. Our website homepage, for example, has several call to actions (CTAs) to signup to PostHog. We combine all these events into a single `Homepage CTA` action, so we can track all clicks from the signup page in a trends insight and run A/B tests with this action as a goal.
 
 ## How to create an action
 
-Actions can be created by either:
-1. Clicking the "New action" button in the Actions tab, or
-2. Using the [PostHog Toolbar](/docs/toolbar) to tag the elements that are relevant. We have a step-by-step tutorial on [creating actions using the toolbar](/tutorials/toolbar#using-inspect-and-creating-actions).
+You can create new actions by either: 
 
-> Note: Actions are retroactive, meaning they also apply to past events, not only events that happen after the action was created.
+1. Clicking the "New action" button in the "Actions" tab in [Data Management](https://us.posthog.com/data-management/actions).
+
+2. Using the [PostHog Toolbar](/docs/toolbar) to tag the elements that are relevant – see our step-by-step tutorial on [creating actions using the toolbar](/tutorials/how-to-capture-events-the-easy-way).
+
+Actions are retroactive, meaning they also apply to past events, not only events that happen after the action was created.
 
 You can create actions using events from three sources:
 
 ### 1. Autocapture
 
-[Autocapture](/docs/data/autocapture) actions are based on frontend elements from your website, such as a button or an input. The easiest way to select them is [using the toolbar](/tutorials/toolbar#using-inspect-and-creating-actions). However, you can also set them manually if you wish by providing something to identify the element, like a selector.
+[Autocapture](/docs/product-analytics/autocapture) actions are based on frontend elements from your website, such as a button or an input. 
+
+The easiest way to select them is [using the toolbar](/tutorials/how-to-capture-events-the-easy-way), but you can also set them manually by providing something to identify the element, like a selector.
 
 Our autocapture functionality captures a lot of frontend elements by default, but you'll need to manually set anything else you want to be captured. 
  
-Currently, autocapture captures any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
+Autocapture captures any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This is important to remember if you deviate from established HTML practices, such as using a `div` as a button.
 
-> Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/data/autocapture) for more details.
+Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [our Autocapture docs](/docs/product-analytics/autocapture) for more details.
 
 There are three ways to match your elements:
 
@@ -44,7 +64,7 @@ There are three ways to match your elements:
 
 3. **Matching selectors:** details below.
 
-> _You can have more than one match type selected_. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
+You can have more than one match type selected_. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
 
 #### Matching selectors
 
@@ -89,22 +109,16 @@ The following patterns _are not_ currently supported:
 - Combining multiple attribute selectors
 - [Non-alphanumeric classes](https://github.com/PostHog/posthog/issues/15480) (like clases containing `-`, `[]`, `.`)
 
-### 2. Page views
+### 2. Pageviews
 
-Actions can be creating using page view events that match urls containing a string, based on a regex or match exactly.
+Actions can be creating using pageview events that match urls containing a string, based on a regex or match exactly.
 
 Regex matching is commonly used for URLs containing IDs like `/some/path/123/view`, which could be matched by a regex like `/some/path/\d+/view` into a single action.
 
 ### 3. Custom events
 
-Custom events can be sent to your PostHog instance via our [API](/docs/api), or one of our [SDKs](/docs/getting-started/install?tab=sdks).
-
-> It is possible for an action to match multiple events. To do this, click `Add another match group` when you are creating your action. Actions with multiple events work based on `OR` operations. That means that an action like "Clicked Read More Button" OR "Clicked More Information Button" will trigger as soon as the user clicks either of the buttons. Both clicks are not required for the action.
+Custom events can be sent to your PostHog instance via our [API](/docs/api), or one of our [SDKs](/docs/getting-started/install).
 
 ### Further reading
 
-Want to know more about what's possible with Actions in PostHog? Try these tutorials:
-
-- [How to trigger Discord notifications when an action is detected in PostHog](/tutorials/how-to-connect-discord-to-posthog-with-zapier)
-- [How to automatically organize PostHog actions in Notion](/tutorials/how-to-connect-posthog-and-notion-with-zapier)
 - [The complete guide to event tracking](/tutorials/event-tracking-guide)

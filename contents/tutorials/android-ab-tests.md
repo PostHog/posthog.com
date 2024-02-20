@@ -207,7 +207,7 @@ fun SecondScreen() {
 }
 ```
 
-To check your setup, build and run your app. Click your button a few times and you should start seeing events in the [PostHog event explorer](https://app.posthog.com/events).
+To check your setup, build and run your app. Click your button a few times and you should start seeing events in the [activity tab](https://app.posthog.com/events).
 
 ![Android events captured](../images/tutorials/android-ab-tests/android-events.png)
 
@@ -271,5 +271,5 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 ## Further reading
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
+- [How to set up feature flags in Android](/tutorials/android-feature-flags)
 - [How to run A/B tests in iOS](/tutorials/ios-ab-tests)

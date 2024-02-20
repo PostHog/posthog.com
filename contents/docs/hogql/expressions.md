@@ -14,7 +14,7 @@ HogQL expressions enable you to directly access, modify, and aggregate data in P
 - Data series
 - Breakdowns
 - [Funnels](/docs/product-analytics/funnels)
-- Event explorer
+- The activity tab
 
 ![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
 
