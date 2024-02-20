@@ -262,7 +262,7 @@ When you reload the app, you see our app still needs to wait for PostHog to load
 
 We can use the same `getBootstrapData` function in a server-rendered page and access the data directly. Next.js [caches the response](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data), meaning it is consistent with the bootstrapped data.
 
-To set up the A/B test, we change the `app/page.js` component to be server-rendered and await the `bootstrapData` then use it to control the button text.
+To set up the A/B test, we change the `app/page.js` component to be server-rendered and await the `bootstrapData` to use it to set the button text.
 
 ```js
 // app/page.js
