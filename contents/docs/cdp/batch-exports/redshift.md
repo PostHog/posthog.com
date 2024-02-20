@@ -38,8 +38,8 @@ Configuring a batch export targeting Redshift requires the following Redshift-sp
 
 - **Table name:** The name of the table where the data will be inserted.
 
-- **Properties data type:** The data type configurations for the properties column in the table,either `VARCHAR(65535)` or `SUPER`.
+- **Properties data type:** The data type configurations for the `properties`, `set`, and `set_once` columns, either `VARCHAR(65535)` or `SUPER`.
 
 - **Events to exclude:** A list of events to omit from the exported data.
 
-- **Events to include:** A list of events to include from the exported data. If added, only these events will be exported.
+- **Events to include:** A list of events to include in the exported data. If added, only these events will be exported.
