@@ -5,11 +5,9 @@ author: ["ian-vanagas"]
 tags: ['experimentation', 'feature flags', 'actions']
 ---
 
-Next.js optimizes for creating the best possible user experience. It automates functionality like static page generation, image optimization, and server-side rendering, enabling you to focus on the content of your app.
+[A/B tests](/ab-testing) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
 
-[A/B tests](/ab-testing) are a way to make sure this content performs as well as possible. They compare two or more variations on their impact on a goal.
-
-PostHog's experimentation tool makes this entire process simple. This tutorial shows you how to build a basic Next.js app (with the app router), add PostHog to it, bootstrap feature flag data, and set up the A/B test in the app.
+PostHog's experimentation tool makes it easy to set up A/B tests. This tutorial shows you how to build a basic Next.js app (with the app router), add PostHog to it, bootstrap feature flag data, and set up the A/B test in the app.
 
 ## 1. Create a Next.js app
 
@@ -86,7 +84,7 @@ export default function RootLayout({ children }) {
 
 When you reload your app, you should see events captured in [your activity tab](https://us.posthog.com/events) in PostHog.
 
-## 3. **Creating an action for our experiment goal**
+## 3. Creating an action for our experiment goal
 
 To measure the impact of our change, we need a goal metric. To set this up, we can create an [action](/docs/data/actions) from the events PostHog [autocaptures](/docs/product-analytics/autocapture) using the toolbar.
 
@@ -118,8 +116,8 @@ A/B testing in PostHog relies on feature flag data. To ensure that feature flag 
 Set up a function in `layout.js` that:
 
 1. Checks for the user `distinct_id` in the cookies.
-2. If it doesn't exist, creates one using `uuidv7`.
-3. Uses the `posthog-node` library and the `distinct_id` to `getAllFlags`.
+2. If it doesn't exist, creates one using [`uuidv7`](https://github.com/LiosK/uuidv7).
+3. Uses the [`posthog-node`](/docs/libraries/node) library and the `distinct_id` to [`getAllFlags`](https://posthog.com/docs/libraries/node#fetching-all-flags-for-a-user).
 4. Passes the flags and `distinct_id` to the `PHProvider`.
 
 Start by installing `uuidv7` and `posthog-node`:
@@ -141,7 +139,12 @@ export const generateId = cache(() => {
 })
 ```
 
-Next, import PostHog (from Node), the Next `cookies` function, and the `generateId` utility, set up a `getBootstrapData` function in `layout.js`, call it from the `RootLayout`, and pass the data to the `PHProvider`.
+After this, we are ready to set up the `getBootstrapData` function in `layout.js`:
+
+1. Import PostHog (from Node), the Next `cookies` function, and the `generateId` utility.
+2. Add the `getBootstrapData` function and logic.
+3. Call it from the `RootLayout`.
+4. Pass the data to the `PHProvider`.
 
 ```js
 // app/layout.js
@@ -191,7 +194,7 @@ export async function getBootstrapData() {
 }
 ```
 
-Next, in `providers.js`, we handle the `bootstrapData` and add it to the PostHog initialization.
+Finally, in `providers.js`, we handle the `bootstrapData` and add it to the PostHog initialization.
 
 ```js
 // app/providers.js
@@ -222,7 +225,12 @@ The final part is to implement the A/B test in our component. There are two ways
 
 ### Client-side implementation
 
-To set up our A/B test in `app/page.js`, we change it to a client-side rendered component, set up PostHog, use a `useEffect` to check the feature flag, and change the button text based on the value.
+To set up our A/B test in `app/page.js`:
+
+1. Change it to a client-side rendered component.
+2. Set up PostHog using the `usePostHog` hook.
+3. Use a `useEffect` to check the feature flag.
+4. Change the button text based on the flag value.
 
 ```js
 // app/page.js
@@ -248,7 +256,7 @@ export default function Home() {
 }
 ```
 
-When you reload the app, you see our app still needs to wait for PostHog to load even though we are loading flags as fast as possible with bootstrapping. This is what is causing the "flicker." To prevent this, we can use the bootstrap data directly.
+When you reload the app, you see our app still needs to wait for PostHog to load even though we are loading flags as fast as possible with bootstrapping. This causes the "flicker," but is solvable if we server-render the component.
 
 ### Server-side implementation
 
