@@ -28,18 +28,18 @@ export default function BookADemo() {
                 <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <span className="bg-blue rounded-full leading-none flex h-12 w-12 overflow-hidden shrink-0 basis-12">
                         <StaticImage
-                            src="../images/simon.png"
+                            src="../images/mine.png"
                             width={60}
                             height={60}
-                            alt="Simon"
+                            alt="Mine Kansu"
                             className="h-full w-full"
                         />
                     </span>
 
                     <div className="md:flex items-center md:space-x-4">
                         <p className="mb-2 md:mb-0 text-[15px]">
-                            <Link to="/community/profiles/49">Simon Fisher</Link>, our Customer Success Lead, made this
-                            demo video. If you have bespoke needs that aren't covered here, he's happy to chat.
+                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from our Customer Success team, made
+                            this video. If you have needs that aren't covered here, she's happy to chat!
                         </p>
 
                         <CallToAction type="secondary" to="/contact-sales" className="whitespace-nowrap">
