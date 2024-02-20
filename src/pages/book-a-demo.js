@@ -38,8 +38,8 @@ export default function BookADemo() {
 
                     <div className="md:flex items-center md:space-x-4">
                         <p className="mb-2 md:mb-0 text-[15px]">
-                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from our Customer Success team, made
-                            this video. If you have needs that aren't covered here, she's happy to chat!
+                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from Customer Success, made this demo
+                            video. If you have needs that aren't covered here, she's happy to chat!
                         </p>
 
                         <CallToAction type="secondary" to="/contact-sales" className="whitespace-nowrap">
