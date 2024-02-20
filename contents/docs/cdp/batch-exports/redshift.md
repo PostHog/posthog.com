@@ -43,3 +43,21 @@ Configuring a batch export targeting Redshift requires the following Redshift-sp
 - **Events to exclude:** A list of events to omit from the exported data.
 
 - **Events to include:** A list of events to include in the exported data. If added, only these events will be exported.
+
+## Event schema
+
+This is the schema of all the fields that are exported to Redshift.
+
+| Field        | Type                          | Description                                                               |
+|--------------|-------------------------------|---------------------------------------------------------------------------|
+| uuid         | `VARCHAR(200)`                | The unique ID of the event within PostHog                                 |
+| event        | `VARCHAR(200)`                | The name of the event that was sent                                       |
+| properties   | `SUPER` or `VARCHAR(65535)`   | A JSON object with all the properties sent along with an event            |
+| elements     | `VARCHAR(65535)`              | This field is present for backwards compatibility but has been deprecated |
+| set          | `SUPER` or `VARCHAR(65535)`   | A JSON object with any person properties sent with the `$set` field       |
+| set_once     | `SUPER` or `VARCHAR(65535)`   | A JSON object with any person properties sent with the `$set_once` field  |
+| distinct_id  | `VARCHAR(200)`                | The `distinct_id` of the user who sent the event                          |
+| team_id      | `INTEGER`                     | The `team_id` for the event                                               |
+| ip           | `VARCHAR(200)`                | The IP address that was sent with the event                               |
+| site_url     | `VARCHAR(200)`                | This field is present for backwards compatibility but has been deprecated |
+| timestamp    | `TIMESTAMP WITH TIME ZONE`    | The timestamp associated with an event                                    |
