@@ -98,6 +98,8 @@ Name the action "Clicked Main CTA" and then click "Create action."
 
 ![Action](../images/tutorials/nextjs-ab-tests/action.png)
 
+> **Note:** You can also use a custom event as a goal metric. See our [full Next.js analytics tutorial](/tutorials/nextjs-app-directory-analytics#capturing-custom-events) for how to set up custom event capture.
+
 ## 4. Creating an experiment
 
 With PostHog installed and our action set up, we're ready to create our experiment. To do so, go to the [A/B testing tab](https://us.posthog.com/experiments) in PostHog, click "New experiment," and then: 
