@@ -17,7 +17,7 @@ import InsightDark from '../images/tutorials/go-analytics/insight-dark.png'
 
 We start by creating a simple Go app that has two pages:
 
-1. A `login` page where a user can enter their name, email, and company name in form.
+1. A `login` page where a user can enter their name, email, and company name in a form.
 2. A `home` page that has some text and a button.
 
 First, ensure [Go is installed](https://go.dev/doc/install). Then, create a new folder for our project called `go-analytics` and initialize a new module. We also create files `login.html` and `dashboard.html` for our pages, as well as a `main.go`:
@@ -166,7 +166,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 Run `go get github.com/posthog/posthog-go` to add [PostHog's Go SDK](/docs/libraries/php) as a dependency. Then, initialize PostHog in the `main()` method in `main.go`.
 
-To do this, you need your project API key and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize `posthog.NewWithConfig()`. 
+To do this, you need your project API key and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize your client using `posthog.NewWithConfig()`: 
 
 ```go file=main.go
 var (
@@ -176,7 +176,7 @@ var (
 )
 
 func main() {
-     client, _ := posthog.NewWithConfig(
+     client, _ = posthog.NewWithConfig(
        "<ph_project_api_key",
        posthog.Config{
            PersonalApiKey: "<ph_personal_api_key>",
@@ -256,6 +256,7 @@ To create groups in PostHog, simply include them in your code when capturing eve
 func apiDashboardHandler(w http.ResponseWriter, r *http.Request) {
     email := r.FormValue("email")
     name := r.FormValue("name")
+    companyName := r.FormValue("company_name")
     client.Enqueue(posthog.Capture{
         DistinctId: email,
         Event:      "home_api_called",
