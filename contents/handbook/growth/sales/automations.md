@@ -149,7 +149,7 @@ This [Zap](https://zapier.com/editor/198072630/published) is triggered when a tr
 
 1. Looks up the associated email in Clearbit
 2. Continues only if there is an associated Company in the Clearbit payload
-3. Calls the Update tags on Zendesk org Sub Zap to create/update a Zendesk org with the Name and Domain from Clearbit and Organizaion ID as the Zendesk External ID (so that it will link the Zendesk org to the Vitally Account)
+3. Calls the Update tags on Zendesk org Sub Zap to create/update a Zendesk org with the Name and Domain from Clearbit and Organization ID as the Zendesk External ID (so that it will link the Zendesk org to the Vitally Account)
 4. Finds the Company by name in HubSpot 
 5. Sets the Organization ID and Trial end date in HubSpot.
 6. Creates an engagement (Task) in HubSpot for Simon reminding him of the trial end date.
