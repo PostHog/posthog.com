@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in Laravel
-date: 2024-02-19
+date: 2024-02-20
 author: ["lior-neu-ner"]
 tags: ['product analytics']
 ---
