@@ -79,7 +79,7 @@ docker run -it --rm \
 
 ### Working on `/docs/api`?
 
-By default the app will load the schema from US cloud. You can override this to use your local `posthog` with an env var:
+The site will load the API schema from US Cloud by default. You can override this to use your local PostHog instance with an env var:
 
 ```
 POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" yarn start
