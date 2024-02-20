@@ -24,7 +24,7 @@ It is recommended to start by importing PostHog users into Laudspeaker via the e
 After configuring PostHog within Laudspeaker, you can install the Laudspeaker Connector in PostHog by following these steps...
 
 1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
+2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Laudspeaker'
 4. Select the app, press 'Install'
 

@@ -21,7 +21,7 @@ You'll also need access to the relevant Pace account.
 
 ### Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Pace' and select the app, press Install.
 3. Enable the app enter your Pace API key to authenticate with Pace.
 

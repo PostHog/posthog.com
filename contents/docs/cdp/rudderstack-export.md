@@ -23,7 +23,7 @@ First, create a PostHog source in your RudderStack dashboard. Need help? Check [
 
 Once you've added PostHog as a source, make a note of the `write-key` field and your RudderStack server URL (also called the Data Planer URL).
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Rudderstack' and select the app, press Install.
 3. Follow the on-screen steps to configure the app, entering your `write-key` and server URL information.
 

@@ -37,7 +37,7 @@ To install this app, you will need your Engage secret key and public key to send
 
 Once you have made a note of your keys, log in to your PostHog instance and follow the steps below.
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Engage' and select the app, press Install.
 3. Enter configuration by selecting the blue gear icon.
 4. Enter the API information as requested, select save.

@@ -1,7 +1,5 @@
 ---
 title: Data pipeline
-sidebarTitle: Overview
-sidebar: Docs
 showTitle: true
 ---
 
@@ -18,9 +16,3 @@ Pipelines can be used for a wide variety of use cases, such as:
 - **Labeling events.** In order to facilitate sorting through your events, apps can be used to determine arbitrary logic that can label an event (e.g. by setting a `label` property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data somewhere else.
 
 - **Enforcing event schemas.** By default, PostHog does not enforce schemas on events it receives. However, an app could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.
-
-## Self-host app troubleshooting
-
-If you're self-hosting, you can install a data connection by pasting a link to its public repository, or write your own app directly in PostHog.
-
-If you're having issues getting apps to work on your self-hosted instance of PostHog, check out our [troubleshooting guide](/docs/cdp/enabling).
