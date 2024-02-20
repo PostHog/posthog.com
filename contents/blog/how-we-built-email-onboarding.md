@@ -71,7 +71,7 @@ Data is important, but I strongly believe it doesn’t tell the whole story. You
 How this works is simple: when a user signs up, they can optionally tell us what their role is. If their `role_at_organization` = `engineer` we trigger an email from me telling them about [our Product for Engineers newsletter](https://newsletter.posthog.com/). 
 
 ![Onboarding 3.1](../images/blog/onboarding/onboarding_31.png)
-<caption>Onboarding 3.1 was when we really started tailoring emails based on what we knew about users</caption>
+<Caption>Onboarding 3.1 was when we really started tailoring emails based on what we knew about users</Caption>
 
 This email performed very well, with a 68% open rate and a 16% CTR. Two emails into the flow and developers were already opting in to _more_ emails! 
 
@@ -89,7 +89,7 @@ One successful experiment we did roll out was adding more personalized emails fo
 
 [4.0](https://github.com/PostHog/meta/pull/150/) was a massive step up in complexity as a result of our growing number of features. By late 2023 the flow had 28 separate emails, of which users would get a maximum of 6 over several weeks. We still worried this would be too many, but the low (0.4%) unsubscribe rate suggested otherwise.
 
-![Onboarding 4.0](../images/blog/onboarding/onboarding_31.png)
+![Onboarding 4.0](../images/blog/onboarding/onboarding_4.png)
 <Caption>Onboarding 4.0 split high-ICP users out into their own email flow because our CS team would reach out directly</Caption>
 
 By this point we’d also changed our conversion event to mean a user enabling billing for a product within one week of opening an email - a far better indicator of if the emails are delivering value than simply measuring logins. 
@@ -107,15 +107,15 @@ At the time of writing this is the current onboarding flow. It contains over 53 
 
 The goal of this flow is to focus on improving activation, and build on some parallel improvements to our in-app onboarding flow. Now when a user signs up to PostHog we ask them to select a product to setup first: analytics, replays, flags, or surveys. [Onboarding 5.0](https://github.com/PostHog/meta/issues/172) builds off that selection by encouraging users to use that product, and then showing how other features can combine with it.
 
-![Onboarding 5.0](../images/blog/onboarding/onboarding_31.png)
+![Onboarding 5.0](../images/blog/onboarding/onboarding_5.png)
 <Caption>Onboarding 5.0: Messy, complex, and highly personalized to user interests</Caption>
 
 The hope was that this would improve in-app activation, which we roughly define as: 
 
-**Product analytics:** Events ingested, 1 insight created, 1 dashboard created
-**Session replay:** 5 recordings viewed
-**Feature flags:** 1 feature flag created
-**Surveys:** 1 survey launched
+- **Product analytics:** Events ingested, 1 insight created, 1 dashboard created
+- **Session replay:** 5 recordings viewed
+- **Feature flags:** 1 feature flag created
+- **Surveys:** 1 survey launched
 
 To avoid annoying users, we added a time block based on our activation criteria – if a user hasn’t activated after two emails, we stop sending them emails for six weeks. We also use an unsubscribe notice that tells users how many emails they can typically expect: one email per week, for six weeks. 
 

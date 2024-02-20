@@ -148,7 +148,11 @@ if variant == "variant-name" {
 
 For any server-side events that are also goal metrics for your experiment, you need to include a property `$feature/experiment_feature_flag_name: variant_name` when capturing those events. This ensures that the event is attributed to the correct experiment variant (e.g., test or control).
 
-This step is not required for events that are submitted via our client-side SDKs (e.g., JavaScript web, iOS, Android, React, React Native).
+> This step is not required for events that are submitted via our client-side SDKs (e.g., JavaScript web, iOS, Android, React, React Native).
+
+> For our backend SDKs, with the exception of the Go library, this step is not required if the server has [local evaluation](/docs/feature-flags/local-evaluation) enabled and the flag in question has no property filters. In these cases, flag information is automatically appended to every event sent to PostHog.
+
+
 
 <MultiLanguage>
 

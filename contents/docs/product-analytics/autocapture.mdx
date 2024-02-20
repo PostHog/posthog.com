@@ -12,23 +12,21 @@ availability:
 
 PostHog can capture frontend events automatically using autocapture, such as any `click`, `change of input`, or submission associated with a `button`, `form`, `input`, `select`, or `textarea`.
 
-This means you do not need to manually instrument tracking for individual components, links, buttons, or other parts of your product.
+This means you don't need to manually instrument tracking for individual components, links, buttons, or other parts of your product.
 
 Autocapture is **enabled by default**. 
 
  ## Disabling autocapture
 
-You can disable autocapture completely by setting `autocapture: false` in the [config](/docs/libraries/js#config). You can also disable autocapture in your [project settings](https://app.posthog.com/project/settings). 
+You can also disable autocapture in your [project settings](https://us.posthog.com/project/settings), or by setting `autocapture: false` in the [config](/docs/libraries/js#config). If _one_ of these is disabled, autocapture is disabled.
 
-Please note, autocapture is only enabled if _neither_ of these options are disabled.
-
-> Disabling autocapture **will not disable [session recording](/docs/session-replay/manual)**. You can disable session recording using `disable_session_recording` or by turning it off in your [project settings](https://app.posthog.com/project/settings).
+> Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings), or using `disable_session_recording`.
 
 ## Configuring autocapture
 
 > This section covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
 
-### Reducing events
+### Reducing events with an allowlist
 
 Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using allowlists. Allowlists are an array of allowed events – any events for elements not matching an item in the array are dropped.
 
@@ -45,11 +43,13 @@ posthog.init('<ph_project_api_key>', {
     },
 })
 ```
-Allowlists only filter autocapture events – they won't affect the data collected by session recordings or custom events.
+Allowlists only filter autocapture events – they don't affect the data collected by session recordings or custom events.
 
 ### Preventing sensitive data capture
 
-PostHog tries to not capture any sensitive data from your website. If there are elements you don't want captured, add the `ph-no-capture` class name.
+For security reasons and to prevent sensitive data being captured, PostHog is conservative regarding `input` tags. We specifically only collect the `name`, `id`, and `class` attributes from `input` tags. If you need to collect more data from inputs, you should use [custom events](/docs/product-analytics/capture-events).
+
+If there are specific elements you _don't_ want captured, add the `ph-no-capture` class name.
 
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>
@@ -78,7 +78,7 @@ The autocapture event for clicks on the bell will include the unread count.
 
 ### Example 2: Tracking ecommerce metadata
 
-You can also track metadata when a customer performs a transaction (like adding an item to a cart or completing a purchase). Going beyond just knowing _User clicked 'Add to cart'_ is valuable in understanding _what_ users are interested in, even if they don't complete a transaction. It can also shed light onto which products users are interested in, when correlated with other information like marketing campaigns, regionality, or device type.
+You can also track metadata when a customer performs a transaction (such as adding an item to a cart or completing a purchase). Going beyond just knowing _User clicked 'Add to cart'_ is valuable in understanding _what_ users are interested in, even if they don't complete a transaction. It can also shed light onto which products users are interested in, when correlated with other information like marketing campaigns, regionality, or device type.
 
 You can attach metadata to autocapture events by adding data attributes to the element that triggers the event. Below we'll record some metadata when a user adds an item to their cart, based on content available in the DOM.
 
@@ -102,14 +102,6 @@ properties: {
     "product-quantity": "1"
 }
 ```
-
-## Limitations of autocapture
-
-While autocapture tracks the majority of general events on your site, it is important to note that, for security reasons, PostHog is conservative regarding `input` tags. To prevent passwords or other sensitive data from being collected, little data is collected from inputs with autocapture.
-
-Specifically, PostHog autocapture only grabs the `name`, `id`, and `class` attributes from `input` tags.
-
-If you need to collect more data from inputs, you should use [custom events](/tutorials/event-tracking-guide).
 
 ## Autocaptured properties
 
