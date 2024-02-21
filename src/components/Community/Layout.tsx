@@ -27,7 +27,6 @@ const Community = ({ children, title, tableOfContents, menu, contentWidth }: IPr
             menuWidth={{ right: 320 }}
             menu={menu}
             contentWidth={contentWidth}
-            hashSpy={false}
         >
             {children}
         </PostLayout>
