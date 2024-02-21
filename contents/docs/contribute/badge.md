@@ -4,9 +4,9 @@ title: PostHog badges
 
 ## Add a badge to your website's footer
 
-Why? Since PostHog is the trendy new thing, your startup will be more hip by jumping on the <em>badge</em>wagon. Plus we hope you appreciate our free tier enough to show your support.
+Want to jump on the PostHog <em>badge</em>wagon?
 
-If that's not enough, we might even shoot you some free [merch](/merch) if you email merch@posthog.com and show us where you added the badge that links back to us!
+Now you can garnish your website footer with a tasteful PostHog logo - it's like being in a super secret club, except if everything was open source. And if you add the badge and link back to us, [let us know](mailto:merch@posthog.com?subject=PostHog%20logo%20spotted%20on%20%7Byoursitehere.com%7D) and we might send some exclusive [merch](/merch) your way...
 
 <OverflowXSection>
 
