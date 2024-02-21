@@ -6,7 +6,7 @@ title: PostHog badges
 
 Why? Since PostHog is the trendy new thing, your startup will be more hip by jumping on the <em>badge</em>wagon. Plus we hope you appreciate our free tier enough to show your support.
 
-If that's not enough, we might even shoot you some free merch if you email merch@posthog.com and show us where you added the badge that links back to us!
+If that's not enough, we might even shoot you some free [merch](/merch) if you email merch@posthog.com and show us where you added the badge that links back to us!
 
 <OverflowXSection>
 
