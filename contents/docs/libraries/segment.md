@@ -56,3 +56,21 @@ For the full list of functions see the relevant SDK docs e.g. the [Javascript SD
 ### Using group analytics
 
 If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "company_id_in_your_db" }`
+
+## FAQ
+
+### Where can I find out more?
+
+Further information is available in [Segment's integration catalog](https://segment.com/catalog/integrations/posthog/).
+
+### Who maintains this app?
+
+This app is maintained by Segment. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+
+### What if I have feedback on this app?
+
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
+
+### What if my question isn't answered above?
+
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
