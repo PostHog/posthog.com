@@ -11,7 +11,7 @@ import EventsInPostHogDark from '../images/tutorials/python-analytics/events-dar
 import InsightLight from '../images/tutorials/python-analytics/insight-light.png'
 import InsightDark from '../images/tutorials/python-analytics/insight-dark.png'
 
-[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Go app. To show you how to set up analytics, in this tutorial we create a basic Python app with [Flask](https://flask.palletsprojects.com/), add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
+[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Python app. To show you how to set up analytics, in this tutorial we create a basic Python app with [Flask](https://flask.palletsprojects.com/), add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 
 ## 1. Create a basic Flask app
 
@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
 Lastly, we set up the basic layout for our HTML pages:
 
-```html file=login.html
+```html file=templates/login.html
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,7 +104,7 @@ Lastly, we set up the basic layout for our HTML pages:
 </html>
 ```
 
-```html file=dashboard.html
+```html file=templates/dashboard.html
 <!DOCTYPE html>
 <html>
 <head>
