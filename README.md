@@ -79,9 +79,12 @@ docker run -it --rm \
 
 ### Working on `/docs/api`?
 
-1. Create a [personal API key](https://posthog.com/docs/api#how-to-obtain-a-personal-api-key) in PostHog
-1. `export POSTHOG_APP_API_KEY=key`
-1. `yarn start`
+The site will load the API schema from US Cloud by default. You can override this to use your local PostHog instance with an env var:
+
+```
+POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" yarn start
+```
+
 
 ### Want Ashby job listings or GitHub contributors to load?
 

@@ -1861,7 +1861,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Notifications',
+                    name: 'Subscriptions',
                     url: '/docs/product-analytics/subscriptions',
                     icon: 'IconBell',
                     color: 'red',
@@ -2288,6 +2288,10 @@ export const docsMenu = {
                             name: 'Postgres',
                             url: '/docs/cdp/batch-exports/postgres',
                         },
+                        {
+                            name: 'Redshift',
+                            url: '/docs/cdp/batch-exports/redshift',
+                        },
                     ],
                 },
                 {
@@ -2383,14 +2387,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/postgres-export',
                             name: 'PostgreSQL',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            url: '/docs/cdp/redshift-export',
-                            name: 'Redshift',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',

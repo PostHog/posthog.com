@@ -1,0 +1,117 @@
+---
+title: An engineer's guide to behaviorial analytics
+date: 2024-02-15
+author: ["ian-vanagas"]
+featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImageType: full
+tags:
+ - Guides
+ - Product analytics
+ - Product
+crosspost:
+  - Blog
+seo: {
+    metaTitle: "Behavioral Analytics for Engineers",
+    metaDescription: "Engineers can use behavioral analytics tools like product analytics and session replay to understand everything about their users, fix problems, and measure the true impact of their work"
+}  
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReplayLight from '../images/product-engineers/behavioral-analytics/replay.png'
+import ReplayDark from '../images/product-engineers/behavioral-analytics/replay-dark.png'
+
+The measurement and analysis of user behavior, AKA behavioral analytics, is critical to building  successful products. This has long been a responsibility of product managers, marketers, and analysts, but that is changing. Many engineers are [taking on product responsibilities](/blog/what-is-a-product-engineer), and with that, are developing a need for behavioral analytics.
+
+We know because we build behavioral analytics tools, like [product analytics](/product-analytics) and [session replay](/session-replay), for these engineers. We've seen a growing trend of engineers using analytics to track user experience, measure the impact of their work, and discover areas needing improvement.
+
+We also know that engineers are busy and behaivoral analytics is, at most, a small part of their job. To help you get the most value out of behavioral analytics as fast as possible, this guide covers the most practical and relevant parts of behavioral analytics for engineers.
+
+## 1. Start small
+
+Most guides recommend doing a lot of planning before implementing behavioral analytics. They encourage you to "map your customer journey" and develop a foolproof "tracking plan". We disagree. Strongly, in fact.
+
+Why?
+
+Because striving for a "perfect" plan is just a recipe for frustration. There's so much you _can_ track and often the most the most valuable things are the least predictable. We're in the "[jump off the cliff and build an airplane on the way down](https://twitter.com/reidhoffman/status/1481071139221049345?lang=en)" camp. You'll just learn faster this way.
+
+![Real behavior](../images/product-engineers/behavioral-analytics/real_behavior.png)
+
+Start by tracking one specific area and expanding from there — e.g. track the usage of a specific feature. If you're using PostHog you can either:
+
+1. Rely on PostHog's [autocapture](/docs/product-analytics/autocapture) and create an [action](/docs/data/actions) representing usage.
+
+2. Capture a [custom event](/docs/getting-started/send-events#2-capture-custom-events). Customer events we track include `insight analyzed`, `dashboard created`, and `survey launched`.
+
+3. A bit of both — we recommend this.  
+
+Starting small enables you to get the basics implemented and begin to develop a sense of the value of data. You can create [trends](/docs/product-analytics/trends), breakdowns, [retention charts](/docs/product-analytics/retention), and more with just a single data point. Once you grasp this, it reveals other data points you'd like to include and you can build on what you've done.
+
+## 2. Get user identification right
+
+It's hard to retroactively change user data on large volumes of historical events, so it pays to nail [user identification](/docs/getting-started/identify-users) early.
+
+To ensure you set up accurate user identification, start by understanding how user data works. In PostHog, user data — known as [persons](/docs/data/persons) — is included in all events. With the [JavaScript web library](/docs/libraries/js), users are anonymous until you identify them with a distinct ID. Other libraries and the API require a distinct ID for event capture. 
+
+Beyond this, it is important to:
+
+- Use a unique distinct ID.
+- Avoid using many different `distinct_id` values for the same user.
+- On the frontend, call identify as soon as possible (on load or login).
+- Reset on logout or when a user changes.
+
+As an engineer, it is up to you to get user identification right. Everyone relying on behavioral analytics (both technical and not) will assume the data is right, and from our experience, this goes wrong more than you think. Double-check and test your identification code. To be even more careful, tie it to your authorization code.
+
+> **Tip:** For examples of what "right" looks like, check out [our logic for identifying users](https://github.com/PostHog/posthog/blob/6b258dcaf67c03d31b72a3916a72fc893f0c883a/frontend/src/scenes/userLogic.ts#L124), look for other examples of `posthog.identify()` on [GitHub](https://github.com/search?q=posthog.identify+NOT+language%3APHP+NOT+language%3APython&type=code), or integrate with an auth provider like [PropelAuth](https://www.propelauth.com/post/posthog-propelauth).
+
+## 3. Utilize session replay
+
+[Session replay](/session-replay) is one of the fastest time-to-insight analytics tools you can set up. It's not just a tool of marketers and product managers. In fact, it's arguably _more useful_ to engineers than anyone else.
+
+Replays focus on the behavior of an individual user. This gives them a high density of information. It isn't only a single event or an aggregate of events, rather all of their behavior visualized as they do it. This reveals gaps between expected experience and reality. 
+
+<ProductScreenshot
+  imageLight={ReplayLight} 
+  imageDark={ReplayDark} 
+  alt="Session replay in PostHog" 
+  classes="rounded"
+/>
+
+A unique benefit to engineers is that session replays are a great tool for debugging user issues. Instead of asking for information, you can see where the issue happened, its recreation, and get important context like person information, network performance, and console logs.
+
+> **Tip:** Add session replay links to your support tickets for easy access. We have a tutorial for how to do this with [Zendesk](/tutorials/zendesk-session-replays).
+
+## 4. Track releases and measure success
+
+Analytics can be addictive, especially if it's heading in the right direction, but it's most powerful when monitoring new feature launches.
+
+Whatever you build, users always find ways to break or use features in unintended ways. Behavioral analytics enables you to monitor launches, visualize if something unexpected is happening, and pinpoint potential areas needing fixes. 
+
+PostHog is an especially good tool for this because it combines behavioral analytics tools, such as product analytics and session replay, with developer tools like:
+
+- **A/B testing** to ensure the changes make a statistically significant impact on the behavioral metrics you care about.
+
+- **Feature flags** to target users based on properties and safely rollback features when data looks bad.
+
+When you use either of these, you can easily filter insights, dashboards (including [web analytics](/docs/web-analytics)), and replays for users interacting with that feature.
+
+> **Tip:** Check out our guide on [how we build features users love](/product-engineers/measuring-feature-success) for more on tracking feature success.
+
+## 5. Weave data into your decision-making
+
+When writing about behavioral analytics, other guides tell you to use the data to "make better decisions." They just tell you to "analyze your data" but rarely provide details about where, when, and how. 
+
+We've already covered some, but here are three more ways:
+
+1. **Monitor your direction.** Track metrics over the long term and make changes if heading in the wrong direction. Look at [product health](/product-engineers/product-health-metrics), [product-market fit](/founders/measure-product-market-fit), and [north star](/founders/north-star-metrics) metrics. This helps you prioritize and tweak what you're focusing on. [Dashboards](/templates?filter=type&value=dashboard) are a great tool for this.  
+
+2. **Dive deeper into hunches.** If some area is underperforming, behavioral analytics can provide evidence. For example, you might get feedback saying onboarding is too complicated. You can research this by checking for behavior across the onboarding funnel and use those insights to test improvements. [Notebooks](/docs/notebooks) are a great tool for this.
+
+3. **Fit functionality to user behavior.** Behavioral analytics enables you to predict and plan for different scenarios. For example, what performance levels do you need to support? By understanding the average, minimum, and maximum use cases, you get more guidance on what you need your system to do and make better tradeoffs.
+
+The use cases beyond these likely are beyond the scope of your work as an engineer. If you can use all of these, you likely grasp behavioral analytics better than 95% of engineers, and are well on your way to becoming a [product engineer](/blog/what-is-a-product-engineer).
+
+## Further reading
+
+- [The 80/20 of early-stage startup analytics](/founders/early-stage-analytics)
+- [How successful startups use growth loops (with examples)](/product-engineers/growth-loops)
+- [How, when, and where to run your first A/B test](/product-engineers/how-to-do-ab-testing)

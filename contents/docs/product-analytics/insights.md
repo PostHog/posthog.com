@@ -21,8 +21,10 @@ availability:
 
 ## How to create an insight
 
-To create a new Insight, navigate to the [insights tab](https://app.posthog.com/insights) and click on `New insight`. Then select the type of insight you'd like to create, customize it, and press save.
+To create a new Insight, navigate to [Product Analytics](https://app.posthog.com/insights) and click on `New insight`. Then select the type of insight you'd like to create, customize it, and press save.
 
-You can then create [dashboards](/docs/product-analytics/dashboards) to collect and present multiple insights in one place.
+You can also [create dashboards](/docs/product-analytics/dashboards) to present multiple insights in one place.
 
 ![How to create a new insight](../../images/products/product-analytics/create-new-insight.mp4)
+
+> 💡 **Tip:** Just getting started? We recommend [creating an AARRR funnel](/product-engineers/aarrr-pirate-funnel) to get a high-level view of your entire customer journey.

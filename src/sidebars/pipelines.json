@@ -104,10 +104,6 @@
         "url": "/cdp/property-filter"
     },
     {
-        "name": "Redshift (Export)",
-        "url": "/cdp/redshift-export"
-    },
-    {
         "name": "Replicator",
         "url": "/cdp/replicator"
     },
