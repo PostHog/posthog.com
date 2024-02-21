@@ -2303,7 +2303,6 @@ export const docsMenu = {
                 {
                     name: 'Destinations',
                     url: '',
-                    icon: 'IconArrowUpRight',
                     children: [
                         {
                             url: '/docs/cdp/airbyte-export',
@@ -2374,7 +2373,6 @@ export const docsMenu = {
                 {
                     name: 'Filtering',
                     url: '',
-                    icon: 'IconUserPaths',
                     children: [
                         {
                             url: '/docs/cdp/downsampling',
@@ -2405,7 +2403,6 @@ export const docsMenu = {
                 {
                     name: 'Transformation',
                     url: '',
-                    icon: 'IconFeatures',
                     children: [
                         {
                             url: '/docs/cdp/geoip-enrichment',
