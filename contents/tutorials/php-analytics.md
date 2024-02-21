@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in PHP
-date: 2024-02-20
+date: 2024-02-21
 author: ["lior-neu-ner"]
 tags: ['product analytics']
 ---
@@ -11,7 +11,7 @@ import EventsInPostHogDark from '../images/tutorials/php-analytics/events-dark.p
 import InsightLight from '../images/tutorials/php-analytics/insight-light.png'
 import InsightDark from '../images/tutorials/php-analytics/insight-dark.png'
 
-[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your PHP backend. To show you how to set up analytics, in this tutorial we create a basic PHP app, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
+[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your PHP app. To show you how to set up analytics, in this tutorial we create a basic PHP app, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 
 ## 1. Create a basic PHP app
 
@@ -62,7 +62,7 @@ Next, add the following code to `index.php` to set up a basic `login` page:
 
 Then, set up the dashboard page:
 
-```php file=api/dashboard.php
+```php file=dashboard.php
 <?php
 session_start();
 ?>
@@ -212,7 +212,7 @@ PostHog::capture([
 
 ### Capturing group events
 
-[Groups](/docs/product-analytics/group-analytics) are a powerful feature in PostHog that aggregate events based on entities, such as organizations or companies. They enable you to analyze insights at a entity-level, as opposed to a user-level. This is especially helpful for B2B SaaS apps, where often you want to view insights such as `number of active companies` or `company churn rate`.
+[Groups](/docs/product-analytics/group-analytics) are a powerful feature in PostHog that aggregate events based on entities, such as organizations or companies. This is especially helpful for B2B SaaS apps, where often you want to view insights such as `number of active companies` or `company churn rate`.
 
 To enable group analytics, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include them. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million events per month – so you won't be charged anything yet.
 
@@ -231,19 +231,19 @@ PostHog::capture([
 ]);
 ```
 
-In the above example, we create a group type `company`. Then we set the value as the unique identifier for that specific company. This enables us to breakdown insights by company (in the next section we show you how to do this).
+In the above example, we create a group type `company`, and then we set the value as the unique identifier for that specific company. This enables us to breakdown insights by company (we show you how to do this in the next section).
 
 ## 4. Create an insight in PostHog
 
 Restart your app and capture events using different inputs in the `login` page. This will capture events for different users and companies and enable us to show the power of PostHog insights.
 
-Next, go to the [Product analytics](https://us.posthog.com/insights) tab in PostHog and click the **+ New insight** button. PostHog supports many different types of insights, such as [trends](/docs/user-guides/trends), [funnels](/docs/user-guides/funnels), [paths](/docs/user-guides/paths) and more.
+Next, go to the [product analytics](https://us.posthog.com/insights) tab in PostHog and click the **+ New insight** button. PostHog supports many different types of insights, such as [trends](/docs/user-guides/trends), [funnels](/docs/user-guides/funnels), [paths](/docs/user-guides/paths) and more.
 
 In this tutorial, we create a simple trend insight:
 
 1. Select the **Trends** tab.
 2. Under the **Series** header select the `home_api_called` event. 
-3. You can then click on the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
+3. Click on the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
 
 For example, in the image below we set our insight to show number of unique users that captured the `home_api_called` event where the `user_name` property is equal to `Max`:
 
