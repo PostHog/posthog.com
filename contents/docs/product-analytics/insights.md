@@ -9,6 +9,11 @@ availability:
 
 ---
 
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=440"
+    className="rounded shadow-xl"
+/>
+
 [Insights](https://app.posthog.com/insights) enable you to visualize your events and [actions](/docs/data/actions). There are several different types of insights:
 
 -   [Trends](/docs/user-guides/trends)

@@ -221,5 +221,6 @@ Now PostHog is able to calculate our goal metric for our experiment results.
 
 ## Further reading
 
+- [How to set up analytics in Go](/tutorials/go-analytics)
 - [How to set up Go feature flags](/tutorials/go-feature-flags)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
