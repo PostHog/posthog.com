@@ -57,7 +57,7 @@ client.Enqueue(posthog.Capture{
     DistinctId: "static_string_for_group_events",
     Event: "group_event_name",
     Groups: posthog.NewGroups().
-    Set("company", "company_id_in_your_db").
+        Set("company", "company_id_in_your_db"),
 })
 ```
 
