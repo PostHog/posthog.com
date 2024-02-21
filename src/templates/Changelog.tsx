@@ -53,46 +53,37 @@ const Select = ({ onChange, values, ...other }) => {
     )
 }
 
-const getChangesByDate = (changes) => {
-    return groupBy(changes, (node) => {
-        const date = new Date(node.date)
-        return dayjs().month(date.getMonth()).year(date.getFullYear())
-    })
-}
-
 export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
     const [changes, setChanges] = useState(allRoadmap.nodes)
-    // const [filters, setFilters] = useState({})
-    const [changesByDate, setChangesByDate] = useState(getChangesByDate(changes))
+    const [filters, setFilters] = useState({})
 
-    // const handleChange = (key, { value }, field) => {
-    //     const newFilters = { ...filters }
-    //     if (value === null) {
-    //         delete newFilters[key]
-    //     } else {
-    //         newFilters[key] = { value, field }
-    //     }
-    //     setFilters(newFilters)
-    // }
+    const handleChange = (key, { value }, field) => {
+        const newFilters = { ...filters }
+        if (value === null) {
+            delete newFilters[key]
+        } else {
+            newFilters[key] = { value, field }
+        }
+        setFilters(newFilters)
+    }
 
-    // useEffect(() => {
-    //     const filterKeys = Object.keys(filters)
-    //     const newChanges = [
-    //         ...(filterKeys.length <= 0
-    //             ? allRoadmap.nodes
-    //             : allRoadmap.nodes.filter((change) =>
-    //                   filterKeys.every((filter) => {
-    //                       const { value, field } = filters[filter]
-    //                       return get(change, field) === value
-    //                   })
-    //               )),
-    //     ]
-    //     setChanges(newChanges)
-    //     setChangesByDate(getChangesByDate(newChanges))
-    // }, [filters])
+    useEffect(() => {
+        const filterKeys = Object.keys(filters)
+        const newChanges =
+            filterKeys.length <= 0
+                ? allRoadmap.nodes
+                : allRoadmap.nodes.filter((change) =>
+                      filterKeys.every((filter) => {
+                          const { value, field } = filters[filter]
+                          return get(change, field) === value
+                      })
+                  )
+        setChanges([...newChanges])
+    }, [filters])
 
-    const tableOfContents = Object.keys(changesByDate).map((date) => {
-        const month = dayjs(date).format('MMMM')
+    const changesByMonth = groupBy(changes, (node) => node.monthShort)
+
+    const tableOfContents = Object.keys(groupBy(changes, (node) => node.monthLong)).map((month) => {
         return { url: month, value: month, depth: 0 }
     })
 
@@ -122,7 +113,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                             { label: 2020, value: '/changelog/2020' },
                         ]}
                     />
-                    {/* {Object.keys(filterOptions).map((filter) => {
+                    {Object.keys(filterOptions).map((filter) => {
                         const { field } = filterOptions[filter][0] ?? {}
                         if (!field) return null
                         return (
@@ -132,22 +123,18 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                 values={[{ label: `All ${filter}`, value: null }, ...filterOptions[filter]]}
                             />
                         )
-                    })} */}
+                    })}
                 </div>
             </section>
             <section className="grid article-content">
-                {Object.keys(changesByDate).map((date, index) => {
-                    const nodes = changesByDate[date]
+                {Object.keys(changesByMonth).map((month, index) => {
+                    const nodes = changesByMonth[month]
                     return (
-                        <div
-                            key={`${dayjs(date).format('MMM')}-${index}`}
-                            id={slugify(dayjs(date).format('MMMM'))}
-                            className="flex gap-4"
-                        >
+                        <div key={`${month}-${index}`} id={tableOfContents[index].url} className="flex gap-4">
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
                                 <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
-                                    <h2 className="!text-sm font-bold uppercase !m-0">{dayjs(date).format('MMM')}</h2>
-                                    <div className="text-xs font-semibold">{dayjs(date).format('YYYY')}</div>
+                                    <h2 className="!text-sm font-bold uppercase !m-0">{month}</h2>
+                                    <div className="text-xs font-semibold">{pageContext.year}</div>
                                 </div>
                             </div>
                             <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
@@ -231,7 +218,8 @@ export const query = graphql`
         allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year }, complete: { eq: true } }) {
             nodes {
                 strapiID
-                date
+                monthShort: date(formatString: "MMM")
+                monthLong: date(formatString: "MMMM")
                 description
                 media {
                     gatsbyImageData

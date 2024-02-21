@@ -1869,7 +1869,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Notifications',
+                    name: 'Subscriptions',
                     url: '/docs/product-analytics/subscriptions',
                     icon: 'IconBell',
                     color: 'red',
@@ -2293,6 +2293,10 @@ export const docsMenu = {
                         {
                             name: 'Postgres',
                             url: '/docs/cdp/batch-exports/postgres',
+                        },
+                        {
+                            name: 'Redshift',
+                            url: '/docs/cdp/batch-exports/redshift',
                         },
                     ],
                 },

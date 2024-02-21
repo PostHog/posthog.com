@@ -46,7 +46,7 @@ const MyComponent = () => {
     const posthog = usePostHog()
 
     useEffect(() => {
-        posthog.capture("mycomponent_loaded", { foo: "bar" })
+        posthog?.capture("mycomponent_loaded", { foo: "bar" })
     }, [])
 }
 ```
@@ -106,9 +106,9 @@ export const posthog = await PostHog.initAsync("<ph_project_api_key>", {
     flushAt?: number = 20,
     // The interval in milliseconds between periodic flushes
     flushInterval?: number = 10000
-    // If set to false, tracking will be disabled until `optIn` is called
+    // If set to false, tracking will be disabled until 'optIn' is called
     enable?: boolean = true,
-    // Whether to track that `getFeatureFlag` was called (used by Experiments)
+    // Whether to track that 'getFeatureFlag' was called (used by Experiments)
     sendFeatureFlagEvent?: boolean = true,
     // Whether to load feature flags when initialised or not
     preloadFeatureFlags?: boolean = true,
