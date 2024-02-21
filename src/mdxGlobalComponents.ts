@@ -13,6 +13,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import { PrivateLink } from './components/PrivateLink'
 import { ProductScreenshot } from './components/ProductScreenshot'
+import { ProductVideo } from './components/ProductVideo'
 import { StarRepoButton } from './components/StarRepoButton'
 
 export const shortcodes = {
@@ -31,5 +32,6 @@ export const shortcodes = {
     Quote,
     PrivateLink,
     ProductScreenshot,
+    ProductVideo,
     StarRepoButton,
 }
