@@ -1167,6 +1167,10 @@ export const docsMenu = {
                             url: '/docs/libraries/nuxt-js',
                         },
                         {
+                            name: 'n8n',
+                            url: '/docs/libraries/n8n',
+                        },
+                        {
                             name: 'Remix',
                             url: '/tutorials/remix-analytics',
                         },
@@ -1209,6 +1213,10 @@ export const docsMenu = {
                         {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/libraries/zendesk',
                         },
                     ],
                 },
@@ -2289,40 +2297,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Sources',
-                    url: '',
-                    children: [
-                        {
-                            url: '/docs/cdp/segment',
-                            name: 'Segment',
-                        },
-                        {
-                            url: '/docs/cdp/replicator',
-                            name: 'Event Replicator',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            url: '/docs/cdp/n8n',
-                            name: 'n8n',
-                        },
-                        {
-                            url: '/docs/cdp/rudderstack-import',
-                            name: 'Rudderstack',
-                        },
-                        {
-                            url: '/docs/cdp/sentry-connector',
-                            name: 'Sentry',
-                        },
-                        {
-                            url: '/docs/cdp/zendesk-connector',
-                            name: 'Zendesk',
-                        },
-                    ],
-                },
-                {
                     name: 'Destinations',
                     url: '',
                     icon: 'IconArrowUpRight',
@@ -2364,22 +2338,6 @@ export const docsMenu = {
                             name: 'Intercom',
                         },
                         {
-                            url: '/docs/cdp/postgres-export',
-                            name: 'PostgreSQL',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            url: '/docs/cdp/redshift-export',
-                            name: 'Redshift',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/rudderstack-export',
                             name: 'RudderStack',
                         },
@@ -2410,7 +2368,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Ingestion filtering',
+                    name: 'Filtering',
                     url: '',
                     icon: 'IconUserPaths',
                     children: [
@@ -2441,7 +2399,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Event transformation',
+                    name: 'Transformation',
                     url: '',
                     icon: 'IconFeatures',
                     children: [
