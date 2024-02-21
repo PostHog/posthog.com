@@ -10,7 +10,7 @@ Now you can garnish your website footer with a tasteful PostHog logo - it's like
 
 <OverflowXSection>
 
-| <div class="text-center">Preview</div> | Version          | <div class="text-center">Use on (backgrounds)</div> | <div class="text-center">Get code</div> |
+| <div class="text-center">Preview</div> | Version          | <div class="text-center">Use on (backgrounds)</div> |  |
 |---------|---------------|--------|-----------------------|--------------------------------|
 | <img src="/brand/badge/posthog-badge-white-bg-color.svg" />     | Color logo, white background | <div class="text-center">Any</div> |  <div class="text-center"><CopyCode code='<a href="https://posthog.com?utm_source=badge" title="Built with PostHog analytics + more" target="_blank"><img src="https://d1hovhsvet4m1p.cloudfront.net/badges/posthog-badge-white-bg-color.svg" /></a>' /></div> |
 | <img src="/brand/badge/posthog-badge-transparent-bg-color.svg" />  | Color logo, transparent background | <div class="text-center">Light</div> |  <div class="text-center"><CopyCode code='<a href="https://posthog.com?utm_source=badge" title="Built with PostHog analytics + more" target="_blank"><img src="https://d1hovhsvet4m1p.cloudfront.net/badges/posthog-badge-transparent-bg-color.svg" /></a>' /></div> |
