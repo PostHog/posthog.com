@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in Go
-date: 2024-02-20
+date: 2024-02-21
 author: ["lior-neu-ner"]
 tags: ['product analytics']
 ---
@@ -31,7 +31,7 @@ touch dashboard.html
 touch main.go
 ```
 
-Then, add the basic layout for to our html files:
+Then, add the basic layout for to our HTML files:
 
 ```html file=login.html
 <!DOCTYPE html>
@@ -156,7 +156,7 @@ func apiDashboardHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-Run `go run main.go` and navigate to `http://localhost:8000` to see our app in action. Enter anything in the `log-in` page to save some session details.
+Run `go run main.go` and navigate to `http://localhost:8000` to see our app in action. Enter anything on the login page to save some session details.
 
 ![Basic Go app](../images/tutorials/go-analytics/basic-go-app.mp4)
 
@@ -164,20 +164,30 @@ Run `go run main.go` and navigate to `http://localhost:8000` to see our app in a
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-Run `go get github.com/posthog/posthog-go` to add [PostHog's Go SDK](/docs/libraries/php) as a dependency. Then, initialize PostHog in the `main()` method in `main.go`.
+Run `go get github.com/posthog/posthog-go` to add [PostHog's Go SDK](/docs/libraries/go) as a dependency. Then, initialize PostHog in the `main()` method in `main.go`.
 
 To do this, you need your project API key and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize your client using `posthog.NewWithConfig()`: 
 
 ```go file=main.go
+package main
+
+import (
+	"html/template"
+	"net/http"
+
+	"github.com/gorilla/sessions"
+	"github.com/posthog/posthog-go"
+)
+
 var (
     store = sessions.NewCookieStore([]byte("your-secret-key"))
     templates = template.Must(template.ParseGlob("*.html"))
-	client posthog.Client // declare the PostHog client as a global variable
+    client posthog.Client // declare the PostHog client as a global variable
 )
 
 func main() {
      client, _ = posthog.NewWithConfig(
-       "<ph_project_api_key",
+       "<ph_project_api_key>",
        posthog.Config{
            PersonalApiKey: "<ph_personal_api_key>",
            Endpoint: "<ph_instance_address>",
@@ -229,7 +239,7 @@ With this set up, refresh your app and click the button on the `dashboard` page 
 
 When capturing events, you can optionally include additional information by setting the `properties` argument. This is helpful for breaking down or filtering events when creating [insights](/docs/product-analytics/insights).
 
-To show an example, we add the user's name as an event property:
+As an example, we can add the user's name as an event property:
 
 ```go file=main.go
 func apiDashboardHandler(w http.ResponseWriter, r *http.Request) {
@@ -246,7 +256,7 @@ func apiDashboardHandler(w http.ResponseWriter, r *http.Request) {
 
 ### Capturing group events
 
-[Groups](/docs/product-analytics/group-analytics) are a powerful feature in PostHog that aggregate events based on entities, such as organizations or companies. They enable you to analyze insights at a entity-level, as opposed to a user-level. This is especially helpful for B2B SaaS apps, where often you want to view insights such as `number of active companies` or `company churn rate`.
+[Groups](/docs/product-analytics/group-analytics) are a powerful feature in PostHog that aggregate events based on entities, such as organizations or companies. This is especially helpful for B2B SaaS apps, where often you want to view insights such as `number of active companies` or `company churn rate`.
 
 To enable group analytics, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include them. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million events per month – so you won't be charged anything yet.
 
@@ -268,7 +278,7 @@ func apiDashboardHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-In the above example, we create a group type `company`. Then we set the value as the unique identifier for that specific company. This enables us to breakdown insights by company (in the next section we show you how to do this).
+In the above example, we create a group type `company`, and then set the value as the unique identifier for that specific company. This enables us to breakdown insights by company (we show you how to do this in the next section).
 
 ## 4. Create an insight in PostHog
 
@@ -280,7 +290,7 @@ In this tutorial, we create a simple trend insight:
 
 1. Select the **Trends** tab.
 2. Under the **Series** header select the `home_api_called` event. 
-3. You can then click on the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
+3. Click the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
 
 For example, in the image below we set our insight to show number of unique users that captured the `home_api_called` event where the `user_name` property is equal to `Max`:
 
