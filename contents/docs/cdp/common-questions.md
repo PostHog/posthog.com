@@ -2,9 +2,17 @@
 title: Troubleshooting and FAQs
 ---
 
+## My app isn't working, what do I do?
+
+1. Checking that the app is enabled with the correct configuration options in the [data pipeline tab](https://us.posthog.com/apps).
+2. Click "Logs & metrics" and go to the `processEvent metrics` tab to check that the app is processing events without errors.
+3. Check the `Logs` tab to see if there are any errors.
+4. Go to the data management tab to check if there any [ingestion warnings](https://us.posthog.com/data-management/ingestion-warnings).
+5. If the app relates to an external service, check that the external service is working correctly. Make a request to the relevant API endpoint or use a tool like [webhook.site](https://webhook.site/).
+
 ## How do I capture data from another application?
 
-We depreciated the functionality of apps that enabled you to capture data from other tools. Functionally, these apps were similar to a cron which ran every minute (or more) and pulled data from another tool.
+We depreciated the functionality of PostHog apps that enabled you to capture data from other tools. Functionally, these apps were a cron which ran every minute (or more) and pulled data from another tool.
 
 There are two options for recreating these functionality:
 
@@ -28,7 +36,11 @@ See [our migration docs](/docs/migrate/ingest-historic-data) for more informatio
 
 ## How do I do real time exports?
 
-We don't currently support real time exports. If you need more than the hourly interval [batch exports](/docs/cdp/batch-exports) provide, check out and support our [webhook issue](https://github.com/PostHog/posthog/issues/16976) on GitHub and let us know via the [in-app support modal](https://us.posthog.com/#panel=support%3Asupport%3Adata_management%3Alow).
+We don't currently support real time exports. 
+
+If you need more than the hourly interval [batch exports](/docs/cdp/batch-exports) and are on the enterprise plan, please contact our team (or email [sales@posthog.com](mailto:sales@posthog.com)). 
+
+If you're not on the enterprise plan, check out our [webhook issue](https://github.com/PostHog/posthog/issues/16976) on GitHub.
 
 ## Self-host app troubleshooting
 
