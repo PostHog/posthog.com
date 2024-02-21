@@ -106,6 +106,7 @@ export default function ContactSales({ location }) {
                             form at a breakneck pace!
                         </p>
                         <HubSpotForm
+                            autoValidate
                             formID="21de475a-af2c-47c2-ae02-414aefdfdeb4"
                             customFields={{
                                 maus: {
