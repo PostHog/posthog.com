@@ -26,7 +26,9 @@ type RoadmapSubscriptions = {
     }
 }
 
-export function InProgress(props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean }) {
+export function InProgress(
+    props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean; modalOpen?: boolean }
+) {
     const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const posthog = usePostHog()
@@ -212,6 +214,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     useEffect(() => {
         const query = qs.stringify(
             {
+                sort: ['createdAt:desc'],
                 populate: 'question.profile.avatar',
                 filters: {
                     roadmap: {
@@ -229,10 +232,13 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates?${query}`)
             .then((res) => res.json())
             .then(({ data: updates }) => {
-                console.log(updates)
                 setUpdates(updates)
             })
     }, [])
+
+    useEffect(() => {
+        setModalOpen(props.modalOpen ?? false)
+    }, [props.modalOpen])
 
     return (
         <>
