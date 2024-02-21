@@ -46,7 +46,7 @@ const MyComponent = () => {
     const posthog = usePostHog()
 
     useEffect(() => {
-        posthog.capture("mycomponent_loaded", { foo: "bar" })
+        posthog?.capture("mycomponent_loaded", { foo: "bar" })
     }, [])
 }
 ```
