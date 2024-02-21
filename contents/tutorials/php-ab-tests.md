@@ -197,4 +197,4 @@ Now PostHog is able to calculate our goal metric for our experiment results:
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [How to set up feature flags in PHP](/tutorials/php-feature-flags)
-- [How to set up A/B tests in Laravel](/tutorials/laravel-ab-tests)
+- [How to set up analytics in PHP](/tutorials/php-analytics)
