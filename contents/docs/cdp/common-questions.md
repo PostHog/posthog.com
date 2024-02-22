@@ -4,7 +4,7 @@ title: Troubleshooting and FAQs
 
 ## My app isn't working, what do I do?
 
-1. Checking that the app is enabled with the correct configuration options in the [data pipeline tab](https://us.posthog.com/apps).
+1. Checking that the app is enabled with the correct configuration options in the [data pipeline tab](https://us.posthog.com/apps). You can find the correct configuration options in the [app's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
 2. Click "Logs & metrics" and go to the `processEvent metrics` tab to check that the app is processing events without errors.
 3. Check the `Logs` tab to see if there are any errors.
 4. Go to the data management tab to check if there any [ingestion warnings](https://us.posthog.com/data-management/ingestion-warnings).
@@ -24,9 +24,9 @@ There are two options for recreating this functionality:
 
 There are a few ways to capture a user doing an event for the first time. We cover a few of these in our tutorials on [tracking new and returning users](/tutorials/track-new-returning-users) and [first touch attribution](/tutorials/first-last-touch-attribution).
 
-- Create a cohort matching users who have done an event for the first time recently.
-- Use a custom event to set a person or event property. For example, you can set a `first_seen` property with the `$set_once` option.
-- Use HogQL to query for the `min(timestamp)` of an event.
+- Create a [cohort](/docs/data/cohorts) matching users who have done an event for the first time recently.
+- Use a custom event to set a [person](/docs/getting-started/user-properties) or [event property](/docs/data/events). For example, you can set a `first_seen` property with the `$set_once` option.
+- Use [HogQL](/docs/product-analytics/sql) to query for the `min(timestamp)` of an event.
 
 ## How do I migrate 20M+ events or rows into PostHog?
 
