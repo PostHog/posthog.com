@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
-> <em>This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com.</em>
+> Want to add the [PostHog badge](/docs/contribute/badge) to your website? (Did we mention free merch?)
 
 ## Logo
 
