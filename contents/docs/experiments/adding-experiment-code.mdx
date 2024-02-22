@@ -153,7 +153,6 @@ For any server-side events that are also goal metrics for your experiment, you n
 > For our backend SDKs, with the exception of the Go library, this step is not required if the server has [local evaluation](/docs/feature-flags/local-evaluation) enabled and the flag in question has no property filters. In these cases, flag information is automatically appended to every event sent to PostHog.
 
 
-
 <MultiLanguage>
 
 ```node
@@ -218,3 +217,5 @@ posthog.capture(
 ```
 
 </MultiLanguage>
+
+> Most SDKs have a send_feature_flags option that automatically does the above for you, without having to recalculate the flag variants. For example, see [posthog-python](https://posthog.com/docs/libraries/python#method-2-set-send_feature_flags-to-true)
