@@ -2534,19 +2534,19 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Setup',
+                    name: 'Link a source',
                     url: '/docs/data-warehouse/setup',
                     icon: 'IconBook',
                     color: 'blue',
                 },
                 {
-                    name: 'Query',
+                    name: 'Query your sources',
                     url: '/docs/data-warehouse/query',
                     icon: 'IconHogQL',
                     color: 'purple',
                 },
                 {
-                    name: 'Views',
+                    name: 'Save views',
                     url: '/docs/data-warehouse/views',
                     icon: 'IconCalculator',
                     color: 'salmon',
