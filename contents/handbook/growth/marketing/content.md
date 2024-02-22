@@ -12,9 +12,9 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 - **Product engineers:** Software engineers who want to improve their product skills, understand users, and build successful new products. We share what we've learned and curate useful advice in the [product engineers hub](/product-engineers).
 
-- **PostHog users:** Existing PostHog users how want to develop their skills and learn how to get the most out of PostHog.
+- **PostHog users:** Existing PostHog users who want to develop their skills and learn how to get the most out of PostHog.
 
-- **B2B SaaS companies:** Our ideal customers are B2B SaaS companies who need reliable user data and simplified data stack. Most of our output is tailored toward B2B uses cases.
+- **B2B SaaS companies:** Our ideal customers are B2B SaaS companies who need reliable user data and a simplified data stack. Most of our output is tailored toward B2B use cases.
 
 ## What kind of content do we produce?
 
