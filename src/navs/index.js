@@ -2551,6 +2551,12 @@ export const docsMenu = {
                     icon: 'IconCalculator',
                     color: 'salmon',
                 },
+                {
+                    name: 'Under the hood',
+                    url: '/docs/data-warehouse/under-the-hood',
+                    icon: 'IconMagicWand',
+                    color: 'seagreen',
+                },
             ],
         },
     ],
