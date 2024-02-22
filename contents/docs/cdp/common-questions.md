@@ -12,15 +12,15 @@ title: Troubleshooting and FAQs
 
 ## How do I capture data from another application?
 
-We depreciated the functionality of PostHog apps that enabled you to capture data from other tools. Functionally, these apps were a cron which ran every minute (or more) and pulled data from another tool.
+We deprecated the functionality of PostHog apps that enable you to capture data from other tools. Functionally, these apps were a cron which ran every minute (or more) and pulled data from another tool.
 
-There are two options for recreating these functionality:
+There are two options for recreating this functionality:
 
 1. **Set up a cron of your own**. You can use a tool like [val.town](https://val.town/) to easily set up scheduled tasks that capture data from other tools and send it to PostHog. Our tutorials on [capturing new RSS items](/tutorials/rss-item-capture) and [events from Calendly webhooks](/tutorials/calendly-webhooks) are examples of this.
 
 2. **Use our data warehouse**. PostHog's data warehouse enables you to import and use data from apps like Stripe, Hubspot, and Postgres natively in PostHog. See our [docs](/docs/data-warehouse) for more information.
 
-## How do track when users do an event for the first time?
+## How do I track when users do an event for the first time?
 
 There are a few ways to capture a user doing an event for the first time. We cover a few of these in our tutorials on [tracking new and returning users](/tutorials/track-new-returning-users) and [first touch attribution](/tutorials/first-last-touch-attribution).
 
