@@ -253,15 +253,15 @@ client.ReloadFeatureFlags()
 
 Local evaluation is not possible for flags that:
 
-1. Have experience continuity enabled, which is set when you check 'persist flag across authentication steps' on your feature flag.
-2. Are linked to an early access feature
-3. Depend on static cohorts
+1. Have experience continuity enabled, which is set when you check ['persist flag across authentication steps'](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps) on your feature flag.
+2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
+3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
 
 ### Dynamic cohort restrictions
 
 > **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](https://posthog.com/docs/libraries/python) SDK.
 
-To enable local evaluation of feature flags that depend on dynamic [cohorts](/docs/data/cohorts), we translate the cohort definition into person properties.
+To enable local evaluation of feature flags that depend on [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts), we translate the cohort definition into person properties.
 
 However, there are a few constraints, and cohorts cannot be evaluated locally if:
 
