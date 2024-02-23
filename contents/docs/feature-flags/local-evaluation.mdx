@@ -247,7 +247,16 @@ client.ReloadFeatureFlags()
 
 </MultiLanguage>
 
-## Restriction on local evaluation and cohorts
+## Restriction on local evaluation
+
+### General restrictions
+
+Local evaluation is not possible for flags that:
+
+1. Have experience continuity enabled, which is set when you check 'persist flag across authentication steps' on your feature flag.
+2. Are linked to an early access feature
+
+### Cohorts
 
 > **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](https://posthog.com/docs/libraries/python) SDK.
 
