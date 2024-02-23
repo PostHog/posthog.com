@@ -141,7 +141,7 @@ The metrics you need to see if what you’re building is working. I break down m
 
 **[Prioritising Features: Who’ll Use It & How Often?](https://www.intercom.com/blog/prioritising-features-wholl-use-it-how-often/) – Des Traynor**
 
-The Co-founder and Chief Strategy Officer of Intercom goes over how to avoid your product becoming a collection of useless tools by prioritizing features used by everyone all the time.
+The Co-founder and Chief Strategy Officer of [Intercom](/tutorials/intercom-session-replays) goes over how to avoid your product becoming a collection of useless tools by prioritizing features used by everyone all the time.
 
 **[How to prioritize features](https://www.ycombinator.com/library/8p-how-to-prioritize-features) – Emmett Shear**
 

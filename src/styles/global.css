@@ -901,14 +901,17 @@ ul {
 }
 
 .active-sidebar-item {
+    @apply font-bold opacity-100;
+
     &:before {
-        @apply bg-red absolute;
-        bottom: 2px;
+        @apply bg-red absolute -left-3.5 bottom-px top-px;
         border-radius: 2px;
         content: '';
-        left: 0px;
-        top: 2px;
-        width: 2px;
+        width: 3px;
+    }
+
+    &.post:before {
+        @apply -left-0;
     }
 }
 
@@ -1348,11 +1351,39 @@ li.squeak-left-border {
 
     ol,
     ul {
-        @apply pb-0 mb-2 text-[15px];
+        @apply pb-0 mb-2;
+
+        li {
+            @apply text-[15px];
+        }
     }
 
     pre {
         @apply text-base my-3 overflow-scroll p-4 text-[15px];
+    }
+
+    h1 {
+        @apply text-xl;
+    }
+
+    h2 {
+        @apply text-lg;
+    }
+
+    h3 {
+        @apply text-base;
+    }
+
+    h4 {
+        @apply text-[15px];
+    }
+
+    h5 {
+        @apply text-sm;
+    }
+
+    h6 {
+        @apply text-[13px];
     }
 }
 

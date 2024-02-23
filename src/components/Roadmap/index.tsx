@@ -11,6 +11,8 @@ import { useNav } from 'components/Community/useNav'
 import { CallToAction } from 'components/CallToAction'
 import RoadmapForm, { Status } from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
+import UpdateWrapper, { RoadmapSuccess } from './UpdateWrapper'
+import { useLocation } from '@reach/router'
 
 interface IGitHubPage {
     title: string
@@ -63,92 +65,6 @@ export interface IRoadmap {
         </li>
     )
 }*/
-
-function UpdateWrapper({ id, children, status }: { id: number; children: JSX.Element; status: Status }) {
-    const { user } = useUser()
-    const [editing, setEditing] = useState(false)
-    const [initialValues, setInitialValues] = useState<any>(null)
-    const [success, setSuccess] = useState(false)
-
-    const fetchRoadmapItem = () =>
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}?populate=*`)
-            .then((res) => res.json())
-            .then(({ data: { attributes } }) => {
-                const { title, description, topic, teams, image, betaAvailable, milestone, category, githubUrls } =
-                    attributes
-                setInitialValues({
-                    title,
-                    body: description,
-                    images: [],
-                    topic: topic?.id || undefined,
-                    team: teams?.data?.[0]?.id || undefined,
-                    featuredImage: image?.data ? { file: null, objectURL: image.data.attributes.url } : undefined,
-                    betaAvailable,
-                    milestone,
-                    category: category || undefined,
-                    githubUrls: githubUrls?.length > 0 ? githubUrls : [''],
-                })
-            })
-
-    useEffect(() => {
-        if (user?.role?.type !== 'moderator') return
-        fetchRoadmapItem()
-    }, [user])
-
-    return editing ? (
-        <div className="mb-4">
-            <RoadmapForm
-                status={status}
-                hideStatusSelector={false}
-                initialValues={initialValues}
-                buttonText="Update"
-                id={id}
-                onSubmit={() => {
-                    fetchRoadmapItem()
-                    setSuccess(true)
-                    setEditing(false)
-                }}
-            />
-        </div>
-    ) : (
-        <>
-            {success && <RoadmapSuccess description="Roadmap will update on next build" id={id} />}
-            <div className="relative">
-                {initialValues && (
-                    <button
-                        className="absolute bottom-4 right-4 z-10 font-bold text-red"
-                        onClick={() => setEditing(true)}
-                    >
-                        Edit
-                    </button>
-                )}
-                <span>{children}</span>
-            </div>
-        </>
-    )
-}
-
-const RoadmapSuccess = ({
-    id,
-    description = 'Roadmap item will be appear on next build',
-}: {
-    id: number
-    description?: string
-}) => {
-    return (
-        <div className="p-2 mb-4">
-            <h4 className="m-0">Success!</h4>
-            <p className="m-0">{description}</p>
-            <Link
-                external
-                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::roadmap.roadmap/${id}`}
-                className="mt-2 text-sm"
-            >
-                View in Strapi
-            </Link>
-        </div>
-    )
-}
 
 const AddRoadmapItem = ({ status }: { status: 'in-progress' | 'complete' | 'under-consideration' }) => {
     const [adding, setAdding] = useState(false)
@@ -214,6 +130,7 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function Roadmap() {
+    const { search } = useLocation()
     const nav = useNav()
     const teams = useRoadmap()
     const { user } = useUser()
@@ -240,6 +157,9 @@ export default function Roadmap() {
             }
         })
         .filter((team) => team.roadmaps.length > 0)
+
+    const params = new URLSearchParams(search)
+    const roadmapID = params.get('id')
 
     return (
         <Layout>
@@ -282,6 +202,8 @@ export default function Roadmap() {
                                                             key={node.title}
                                                             id={node.squeakId}
                                                             status="under-consideration"
+                                                            formClassName="mb-4"
+                                                            editButtonClassName="absolute bottom-4 right-4 z-10"
                                                         >
                                                             <UnderConsideration {...node} />
                                                         </UpdateWrapper>
@@ -323,8 +245,14 @@ export default function Roadmap() {
                                                                 key={node.title}
                                                                 id={node.squeakId}
                                                                 status="in-progress"
+                                                                formClassName="mb-4"
+                                                                editButtonClassName="absolute bottom-4 right-4 z-10"
                                                             >
-                                                                <InProgress stacked {...node} />
+                                                                <InProgress
+                                                                    stacked
+                                                                    {...node}
+                                                                    modalOpen={roadmapID == node.squeakId}
+                                                                />
                                                             </UpdateWrapper>
                                                         )
                                                     })}

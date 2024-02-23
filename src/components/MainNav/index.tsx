@@ -4,7 +4,16 @@ import { useSearch } from 'components/Search/SearchContext'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 
-import { IconApp, IconBrightness, IconChat, IconSearch, IconTextWidth, IconUser, IconChevronDown } from '@posthog/icons'
+import {
+    IconApp,
+    IconBrightness,
+    IconChat,
+    IconMessage,
+    IconSearch,
+    IconTextWidth,
+    IconUser,
+    IconChevronDown,
+} from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
 import * as icons from '@posthog/icons'
@@ -27,7 +36,7 @@ export const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div className={`overflow-hidden rounded-full ${props.className}`}>
             {props.src ? (
-                <img className="w-full h-full" alt="" src={props.src} />
+                <img className="w-full object-cover" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -127,6 +136,7 @@ function Tooltip({
     placement?: Placement
     className?: string
 }) {
+    const { user } = useUser()
     const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
@@ -154,15 +164,29 @@ function Tooltip({
 
     return (
         <span ref={containerEl} className={className}>
-            <button
-                ref={setReferenceElement}
-                onClick={() => setOpen(!open)}
-                className={`my-1 p-2 rounded hover:bg-border dark:hover:bg-border-dark ${
-                    open ? 'bg-border dark:bg-border-dark' : ''
-                }`}
-            >
-                {children}
-            </button>
+            {user?.profile ? (
+                <button
+                    ref={setReferenceElement}
+                    onClick={() => setOpen(!open)}
+                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
+                        open
+                            ? 'border-primary/50 dark:border-primary-dark/50'
+                            : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
+                    }`}
+                >
+                    {children}
+                </button>
+            ) : (
+                <button
+                    ref={setReferenceElement}
+                    onClick={() => setOpen(!open)}
+                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
+                        open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
+                    }`}
+                >
+                    {children}
+                </button>
+            )}
             {open && (
                 <div
                     className="z-[10000] pt-1"
@@ -466,23 +490,31 @@ export const Main = () => {
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
                                                 to="/questions"
                                             >
-                                                <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                <IconMessage className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                 Forums
                                             </Link>
                                         </li>
                                         {user?.profile && (
-                                            <li className="px-1">
-                                                <Link
-                                                    className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
-                                                    to={`/community/profiles/${user?.profile.id}`}
-                                                >
-                                                    <Avatar
-                                                        src={getAvatarURL(user?.profile)}
-                                                        className="w-6 h-6 inline-block mr-2 bg-light dark:bg-dark"
-                                                    />
-                                                    My profile
-                                                </Link>
-                                            </li>
+                                            <>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
+                                                        to="/community/dashboard"
+                                                    >
+                                                        <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                        My discussions
+                                                    </Link>
+                                                </li>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
+                                                        to={`/community/profiles/${user?.profile.id}`}
+                                                    >
+                                                        <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75 mr-2" />
+                                                        My profile
+                                                    </Link>
+                                                </li>
+                                            </>
                                         )}
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
                                             Site settings
@@ -507,7 +539,16 @@ export const Main = () => {
                                 )
                             }}
                         >
-                            <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
+                            {user?.profile ? (
+                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex">
+                                    <Avatar
+                                        src={getAvatarURL(user?.profile)}
+                                        className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
+                                    />
+                                </div>
+                            ) : (
+                                <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
+                            )}
                         </Tooltip>
                     </div>
                 </div>

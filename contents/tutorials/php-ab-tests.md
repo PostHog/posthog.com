@@ -66,7 +66,7 @@ PostHog::init(
 // rest of your code
 ```
 
-Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event using `PostHog::capture()`. We also call `PostHog::flush()` to ensure PostHog sends the event before the request is closed: 
+Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event using `PostHog::capture()`: 
 
 ```php file=index.php
 <?php
@@ -86,11 +86,6 @@ PostHog::capture([
     'event' => '$pageview'
 ]);
 
-// Call PostHog::flush() to ensure all pending events are sent before the request closes.
-//
-// If your server is always-on and does not shutdown after each request, 
-// then this is not needed as PostHog automatically flushes events at regular intervals.
-PostHog::flush();
 ?>
 
 <!-- your existing html code -->
@@ -201,4 +196,5 @@ Now PostHog is able to calculate our goal metric for our experiment results:
 ## Further reading
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [How to set up A/B tests in Laravel](/tutorials/laravel-ab-tests)
+- [How to set up feature flags in PHP](/tutorials/php-feature-flags)
+- [How to set up analytics in PHP](/tutorials/php-analytics)

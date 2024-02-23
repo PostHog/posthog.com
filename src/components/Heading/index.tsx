@@ -71,7 +71,7 @@ export const Heading = ({
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             id={id}
-            className={`relative group ${className}`}
+            className={`relative group scroll-mt-[108px] ${className}`}
             {...other}
         >
             {!hideCopy && <CopyAnchor hovered={hovered} id={id} />}

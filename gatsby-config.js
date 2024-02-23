@@ -327,6 +327,12 @@ module.exports = {
                 ],
             },
         },
+        {
+            resolve: `gatsby-transformer-cloudinary`,
+            options: {
+                transformTypes: [`RoadmapMedia`],
+            },
+        },
         ...(process.env.SHOPIFY_APP_PASSWORD &&
         process.env.GATSBY_MYSHOPIFY_URL &&
         process.env.GATBSY_SHOPIFY_SALES_CHANNEL

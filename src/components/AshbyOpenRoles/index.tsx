@@ -38,7 +38,9 @@ export default function AshbyOpenRoles() {
                                         fields: { title, slug },
                                         parent,
                                     } = job
-                                    const team = parent?.customFields?.find(({ title }) => title === 'Team')?.value
+                                    const teams = JSON.parse(
+                                        parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]'
+                                    )
                                     const [jobTitle] = title.split(' - ')
                                     return (
                                         <li className="" key={title}>
@@ -48,11 +50,9 @@ export default function AshbyOpenRoles() {
                                             >
                                                 <div>
                                                     <div>{jobTitle}</div>
-                                                    {team && (
-                                                        <div className="text-sm font-normal opacity-70 text-black dark:text-white">
-                                                            {team}
-                                                        </div>
-                                                    )}
+                                                    <div className="text-sm font-normal opacity-70 text-black dark:text-white">
+                                                        {teams.length > 1 ? 'Multiple teams' : teams[0]}
+                                                    </div>
                                                 </div>
 
                                                 <RightArrow className="w-[24px] h-[24px] opacity-50 group-hover:opacity-100 transition-opacity bounce" />

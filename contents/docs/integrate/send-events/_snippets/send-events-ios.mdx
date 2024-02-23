@@ -13,10 +13,7 @@ PostHogSDK.shared.capture("user_signed_up")
 <SettingProperties />
 
 ```swift
-PostHogSDK.shared.capture(
-    "user_signed_up", 
-    properties: ["login_type": "email", "$set": ["is_free_trial": true] 
-])
+PostHogSDK.shared.capture("user_signed_up", properties: ["login_type": "email"], userProperties: ["is_free_trial": true])
 ```
 
 ### Autocapture 

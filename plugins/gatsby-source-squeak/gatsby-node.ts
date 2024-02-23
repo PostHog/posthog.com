@@ -14,6 +14,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     while (true) {
         let profileQuery = qs.stringify(
             {
+                filters: {
+                    teams: {
+                        id: {
+                            $notNull: true,
+                        },
+                    },
+                },
                 pagination: {
                     page,
                     pageSize: 100,
@@ -209,6 +216,12 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 roadmaps: {
                     fields: ['id'],
                 },
+                profiles: {
+                    populate: '*',
+                },
+                leadProfiles: {
+                    fields: 'id',
+                },
             },
         },
         {
@@ -250,6 +263,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 image: {
                     fields: ['id', 'url'],
                 },
+                cta: true,
             },
         })
 
@@ -381,7 +395,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             id: ID!
             squeakId: Int!
             name: String!
-            profiles: [SqueakProfile!] @link(by: "id", from: "profiles.id")
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
         }
 
