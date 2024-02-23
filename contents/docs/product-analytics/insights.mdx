@@ -11,6 +11,7 @@ availability:
 
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductVideo } from 'components/ProductVideo'
 
 import ImgTrendsLight from '../../images/docs/product-analytics/trends-light.png'
 import ImgTrendsDark from '../../images/docs/product-analytics/trends-dark.png'
@@ -26,6 +27,8 @@ import ImgLifecycleLight from '../../images/docs/product-analytics/lifecycle-lig
 import ImgLifecycleDark from '../../images/docs/product-analytics/lifecycle-dark.png'
 import ImgSQLLight from '../../images/docs/product-analytics/sql-light.png'
 import ImgSQLDark from '../../images/docs/product-analytics/sql-dark.png'
+import NewInsightLight from '../../images/docs/product-analytics/creating-an-insight-light.mp4'
+import NewInsightDark from '../../images/docs/product-analytics/creating-an-insight-dark.mp4'
 
 Insights are the main building blocks of product analytics. 
 
@@ -114,7 +117,11 @@ Use [SQL](/docs/product-analytics/hogql#sql-insights) insights to create custom 
 
 To create a new insight, navigate to the [product analytics tab](https://us.posthog.com/insights) and click on `New insight`. You can also select the type of insight you'd like to create from the dropdown.
 
-![create an insight](../../images/docs/product-analytics/creating-an-insight.mp4)
+<ProductVideo
+  videoLight={NewInsightLight} 
+  videoDark={NewInsightDark} 
+  classes="rounded"
+/>
 
 You can then customize the insight and save it. You can change the type of insight you're creating by clicking on the tabs at the top.
 
