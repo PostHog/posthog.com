@@ -255,8 +255,9 @@ To enable local evaluation of feature flags that depend on [cohorts](/docs/data/
 
 However, there are a few constraints, and cohorts cannot be evaluated locally if:
 
+1. The cohort is static.
 1. There is a variant override on the condition with the cohort.
-2. They have non-person properties
+2. They have non-person properties.
 3. There's more than one cohort in the feature flag definition.
 4. The cohort in the feature flag is in the same group as another condition.
 5. The cohort has nested AND-OR filters. Only simple cohorts that have a top level OR group, and inner level ANDs will be evaluated locally.
