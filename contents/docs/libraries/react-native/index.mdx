@@ -203,6 +203,36 @@ posthog.group('company', 'company_id_in_your_db', {
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
+## Disabling for local development
+
+You may want to disable PostHog when working locally or in a test environment. You can do this by setting the `disable` option to `true` when initializing PostHog. Helpfully this allows you to continue using `usePostHog` and safely calling it without anything actually happening.
+
+```react-native
+// App.(js|ts)
+import { usePostHog, PostHogProvider } from 'posthog-react-native'
+...
+
+export function MyApp() {
+    return (
+        <PostHogProvider apiKey="<ph_project_api_key>" options={{
+            // Disable PostHog in development (or whatever other logic you choose)
+            disabled: __DEV__,
+        }}>
+            <MyComponent />
+        </PostHogProvider>
+    )
+}
+
+const MyComponent = () => {
+    const posthog = usePostHog()
+
+    useEffect(() => {
+        // Safe to call even when disabled!
+        posthog.capture("mycomponent_loaded", { foo: "bar" })
+    }, [])
+}
+```
+
 ## Upgrading from V1 or V2 to V3
 
 V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
