@@ -109,6 +109,8 @@ The following patterns _are not_ currently supported:
 - Combining multiple attribute selectors
 - [Non-alphanumeric classes](https://github.com/PostHog/posthog/issues/15480) (like clases containing `-`, `[]`, `.`)
 
+Note that webhooks matching is stricter than query matching, see [issue](https://github.com/PostHog/posthog/issues/20492)
+
 ### 2. Pageviews
 
 Actions can be creating using pageview events that match urls containing a string, based on a regex or match exactly.
