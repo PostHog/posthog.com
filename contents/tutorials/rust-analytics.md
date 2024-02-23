@@ -13,7 +13,7 @@ import InsightDark from '../images/tutorials/rust-analytics/insight-dark.png'
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Rust app. To show you how to set up analytics, in this tutorial we create a basic Rust app, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 
-## 1. Create a basic Ruyst app
+## 1. Create a basic Rust app
 
 We start by creating a simple Rust app that has two pages:
 
@@ -192,17 +192,17 @@ use posthog_rs::Event;
 use tokio::task;
 ```
 
-Then update our `api_dashboard()` to initialize a PostHog client and capture an event. You'll need your project API key for this, which you can find in [your project settings](https://us.posthog.com/project/settings):
+Then update our `api_dashboard()` function to initialize a PostHog client and capture an event. You'll need your project API key for this, which you can find in [your project settings](https://us.posthog.com/project/settings):
 
 ```rust file=main.rs
-async fn api_dashboard() -> impl Responder {
-    let Some(user_email) = session.get::<String>("email").unwrap()
-    let _result = task::spawn_blocking(move || {
-        let client: posthog_rs::Client = posthog_rs::client("<ph_project_api_key>");
-        let event = Event::new("dashboard_api_called", &user_email);
-        client.capture(event).unwrap();
-    }).await;
-
+async fn api_dashboard(session: Session) -> impl Responder {
+    if let Some(user_email) = session.get::<String>("email").unwrap() {
+        let _result = task::spawn_blocking(move || {
+            let client: posthog_rs::Client = posthog_rs::client("<ph_project_api_key>");
+            let event = Event::new("dashboard_api_called", &user_email);
+            client.capture(event).unwrap();
+        }).await;
+    }
     HttpResponse::Ok().body("API endpoint reached")
 }
 ```
@@ -234,7 +234,7 @@ async fn api_dashboard(session: Session) -> impl Responder {
         session.get::<String>("email").unwrap(),
         session.get::<String>("name").unwrap()
     ) {
-            let _result = task::spawn_blocking(move || {
+        let _result = task::spawn_blocking(move || {
             let client: posthog_rs::Client = posthog_rs::client("<ph_project_api_key>");
             let mut event = Event::new("dashboard_api_called", &user_email);
             event.insert_prop("user_name", user_name).unwrap();
