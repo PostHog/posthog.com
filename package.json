@@ -83,7 +83,7 @@
         "gatsby-remark-katex": "^6.20.0",
         "gatsby-remark-prismjs": "^6.0.0",
         "gatsby-remark-static-images": "^1.2.1",
-        "gatsby-source-ashby": "^1.0.3",
+        "gatsby-source-ashby": "^1.0.4",
         "gatsby-source-filesystem": "^4.20.0",
         "gatsby-source-shopify": "^8.12.3",
         "gatsby-transformer-cloudinary": "^4.5.0",

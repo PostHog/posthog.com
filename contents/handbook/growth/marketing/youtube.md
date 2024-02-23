@@ -16,7 +16,7 @@ We also were starting to run out of obvious tutorial and SEO blog content to tur
 - Title and thumbnail matter more than video content. 
 - YouTube growth compounds heavily, but it requires multiple years and 100s of videos to reach the scale we'd need for a meaningful impact.
 - Lighting is what makes the most difference in video quality.
-- The [PostHog demo](https://www.youtube.com/watch?v=BPDmpepEwSY) is the most important and popular video we have. It should be updated at some point.
+- The [PostHog demo](https://www.youtube.com/watch?v=2jQco8hEvTI) is the most important and popular video we have. It should be updated at some point.
 - [OBS](https://obsproject.com/) works well to manage the recording of videos (screen, audio, webcam).
 - Only 2.5% of video traffic came from `posthog.com`. 60% came from YouTube features like search, channel pages, or recommendations.
 

@@ -63,7 +63,7 @@ module.exports = {
             retrievePages('docs', '/^docs/'),
             retrievePages('handbook', '/^handbook/'),
             retrievePages('tutorial', '/^tutorials/'),
-            retrievePages('blog', '/^blog/'),
+            retrievePages('blog', '/^blog|^spotlight/'),
             retrievePages('customers', '/^customers/'),
             retrievePages('apps', '/^apps/'),
             retrievePages('cdp', '/^cdp/'),

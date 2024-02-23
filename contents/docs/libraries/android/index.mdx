@@ -132,7 +132,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 ```kotlin
 import com.posthog.PostHog
 
-if (PostHog.getFeatureFlag("experiment-feature-flag-key")  == "variant-name") {
+if (PostHog.getFeatureFlag("experiment-feature-flag-key") == "variant-name") {
     // do something
 }
 ```
@@ -204,7 +204,7 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Prevents capturing any data if enabled. (off/false by default)
     optOut = false
 
-    // Send a `$feature_flag_called` event when a feature flag is used automatically. (on/true by default)
+    // Send a '$feature_flag_called' event when a feature flag is used automatically. (on/true by default)
     sendFeatureFlagEvent = true
 
     // Preload feature flags automatically. (on/true by default)

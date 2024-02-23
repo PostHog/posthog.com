@@ -57,7 +57,10 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     to={`/community/profiles/${profile.data.id}`}
                 >
                     <div className="mr-2 relative">
-                        <Avatar className="w-[25px] h-[25px]" image={getAvatarURL(profile?.data?.attributes)} />
+                        <Avatar
+                            className="w-[25px] h-[25px] rounded-full"
+                            image={getAvatarURL(profile?.data?.attributes)}
+                        />
                         {isTeamMember && (
                             <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
                                 <Logomark className="w-[16px]" />

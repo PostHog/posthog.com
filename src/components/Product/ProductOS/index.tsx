@@ -286,7 +286,7 @@ export const ProductOS = () => {
                     </div>
                 </section>
 
-                <section className="overflow-x-hidden max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
+                <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
                     <div className="grid md:grid-cols-12 md:gap-8 items-center">
                         <div className="order-2 md:order-1 col-span-5">
                             <h2 className="text-4xl mb-2">Site widgets</h2>
@@ -383,7 +383,7 @@ export const ProductOS = () => {
                     </ul>
                 </section>
 
-                <section className="overflow-x-hidden max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
+                <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div className="order-2 md:order-1">
                             <h2 className="text-4xl mb-2 relative z-10">Toolbar</h2>
@@ -402,11 +402,11 @@ export const ProductOS = () => {
                                 </CallToAction>
                             </div>
                         </div>
-                        <div className="order-1 md:order-2 text-center">
+                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center">
                             <StaticImage
                                 src="./images/toolbar.png"
                                 alt=""
-                                className="relative w-[110%] left-[-5%] sm:left-0 md:w-full max-w-[614px] top-12 md:top-16"
+                                className="relative rounded w-[110%] left-[-5%] sm:left-0 md:w-full max-w-[614px] top-12 md:top-16"
                             />
                         </div>
                     </div>

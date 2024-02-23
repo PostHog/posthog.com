@@ -233,14 +233,33 @@ function Parameters({ item, objects }) {
         <>
             {pathParams?.length > 0 && (
                 <div>
-                    <h4>Path Parameters</h4>
+                    <h4>Path parameters</h4>
                     <Params params={pathParams} objects={objects} />
                 </div>
             )}
             {queryParams?.length > 0 && (
                 <div>
-                    <h4>Query Parameters</h4>
+                    <h4>Query parameters</h4>
                     <Params params={queryParams} objects={objects} />
+                </div>
+            )}
+        </>
+    )
+}
+
+function Security({ item }) {
+    const personaApiKeyScopes = item.security?.[0]?.['PersonalAPIKeyAuth']
+
+    return (
+        <>
+            {personaApiKeyScopes?.length && (
+                <div>
+                    <h4>Required API key scopes</h4>
+                    <div className='flex items-center gap-2'>
+                        {personaApiKeyScopes.map((x) => (
+                            <code key={x}>{x}</code>
+                        ))}
+                    </div>
                 </div>
             )}
         </>
@@ -256,7 +275,7 @@ function RequestBody({ item, objects }) {
 
     return (
         <div>
-            <h4>Request Parameters</h4>
+            <h4>Request parameters</h4>
             <Params
                 params={Object.entries(object.properties)
                     .map(([name, schema]) => {
@@ -532,6 +551,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                             ? pathDescription(item)
                                             : item.description}
                                     </ReactMarkdown>
+                                    <Security item={item} objects={objects} />
                                     <Parameters item={item} objects={objects} />
 
                                     <RequestBody item={item} objects={objects} />
