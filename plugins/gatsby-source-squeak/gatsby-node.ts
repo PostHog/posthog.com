@@ -216,6 +216,12 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 roadmaps: {
                     fields: ['id'],
                 },
+                profiles: {
+                    populate: '*',
+                },
+                leadProfiles: {
+                    fields: 'id',
+                },
             },
         },
         {
@@ -389,7 +395,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             id: ID!
             squeakId: Int!
             name: String!
-            profiles: [SqueakProfile!] @link(by: "id", from: "profiles.id")
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
         }
 

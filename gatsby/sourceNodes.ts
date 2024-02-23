@@ -2,7 +2,7 @@ import { GatsbyNode } from 'gatsby'
 import fetch from 'node-fetch'
 import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
-import { MenuBuilder } from 'redoc'
+import { ApiInfoModel, MenuBuilder, OpenAPIParser } from 'redoc'
 import type {
     MetaobjectsCollection,
     MetaobjectsReferencesEdge,
@@ -13,45 +13,45 @@ import dayjs from 'dayjs'
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
-    if (process.env.POSTHOG_APP_API_KEY) {
-        const api_endpoints = await fetch('https://app.posthog.com/api/schema/', {
-            headers: {
-                Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
-                accept: 'application/json',
-            },
-        }).then((res) => res.json())
+    const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
+    const spec = await fetch(openApiSpecUrl, {
+        headers: {
+            Accept: 'application/json',
+        },
+    }).then((res) => res.json())
 
-        const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
-        let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
-        all_endpoints.forEach((endpoint) => {
-            const node = {
-                id: createNodeId(`api_endpoint-${endpoint.name}`),
-                internal: {
-                    type: `api_endpoint`,
-                    contentDigest: createContentDigest({
-                        items: endpoint.items,
-                    }),
-                },
-                items: JSON.stringify(
-                    endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
-                ),
-                schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
-                url: '/docs/api/' + endpoint.name.replace('_', '-'),
-                name: endpoint.name,
-            }
-            createNode(node)
-        })
-        createNode({
-            id: createNodeId(`api_endpoint-components`),
+    const parser = new OpenAPIParser(spec)
+    const menu = MenuBuilder.buildStructure(parser, {} as any)
+
+    let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
+    all_endpoints.forEach((endpoint) => {
+        const node = {
+            id: createNodeId(`api_endpoint-${endpoint.name}`),
             internal: {
-                type: `ApiComponents`,
+                type: `api_endpoint`,
                 contentDigest: createContentDigest({
-                    components: api_endpoints.components,
+                    items: endpoint.items,
                 }),
             },
-            components: JSON.stringify(api_endpoints.components),
-        })
-    }
+            items: JSON.stringify(
+                endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
+            ),
+            schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
+            url: '/docs/api/' + endpoint.name.replace('_', '-'),
+            name: endpoint.name,
+        }
+        createNode(node)
+    })
+    createNode({
+        id: createNodeId(`api_endpoint-components`),
+        internal: {
+            type: `ApiComponents`,
+            contentDigest: createContentDigest({
+                components: spec.components,
+            }),
+        },
+        components: JSON.stringify(spec.components),
+    })
 
     const postHogIssues = await fetch(
         'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'

@@ -271,6 +271,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/billing',
                     },
                     {
+                        name: 'Automations',
+                        url: '/handbook/growth/sales/automations',
+                    },
+                    {
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
@@ -1975,12 +1979,6 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Console log recording',
-                    url: '/docs/session-replay/console-log-recording',
-                    icon: 'IconCode',
-                    color: 'red',
-                },
-                {
                     name: 'Network performance',
                     url: '/docs/session-replay/network-recording',
                     icon: 'IconDashboard',
@@ -2019,6 +2017,18 @@ export const docsMenu = {
                     url: '/docs/session-replay/iframes',
                     icon: 'IconCode',
                     color: 'salmon',
+                },
+                {
+                    name: 'Console log recording',
+                    url: '/docs/session-replay/console-log-recording',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Canvas recording',
+                    url: '/docs/session-replay/canvas-recording',
+                    icon: 'IconPalette',
+                    color: 'blue',
                 },
             ],
         },
@@ -2288,6 +2298,10 @@ export const docsMenu = {
                             name: 'Postgres',
                             url: '/docs/cdp/batch-exports/postgres',
                         },
+                        {
+                            name: 'Redshift',
+                            url: '/docs/cdp/batch-exports/redshift',
+                        },
                     ],
                 },
                 {
@@ -2383,14 +2397,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/postgres-export',
                             name: 'PostgreSQL',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            url: '/docs/cdp/redshift-export',
-                            name: 'Redshift',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',

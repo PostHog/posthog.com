@@ -59,7 +59,7 @@ For large companies, this is critical. These promises are often solidified in a 
 
 Setup happens over three stages: capture, analyze, and action. PostHog, as an all-in-one product OS, has the tools to do all three.
 
-> Not a PostHog user? [Get started for free](https://app.posthog.com/signup?utm_source=real-user-monitoring-blog) – all users get 1 million events and 15k recordings free every month, no card required.
+> Not a PostHog user? [Get started for free](https://app.posthog.com/signup?utm_source=real-user-monitoring-blog) – all users get 1 million events and 5k recordings free every month, no card required.
 
 ### 1. Capture
 

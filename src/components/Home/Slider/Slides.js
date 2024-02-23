@@ -647,8 +647,8 @@ export const ABTesting = () => {
                 />
             )}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
-            buttonLabel="Read the docs"
-            buttonUrl="/docs/web-analytics"
+            buttonLabel="Explore"
+            buttonUrl="/ab-testing"
             buttonClasses="md:!w-auto !w-full"
             buttonChildClasses="!bg-[#9C19BD]"
         />

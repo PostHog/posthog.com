@@ -38,7 +38,8 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
-            host: '<ph_instance_address>',
+            // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+            host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
             bootstrap: {
                 featureFlags: {
                     'flag-1': true,
@@ -99,7 +100,8 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
-            host: '<ph_instance_address>',
+            // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+            host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
             bootstrap: {
                 distinctID: 'distinct_id_of_your_user',
                 isIdentifiedID: true,
