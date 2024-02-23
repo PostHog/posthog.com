@@ -1975,12 +1975,6 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Console log recording',
-                    url: '/docs/session-replay/console-log-recording',
-                    icon: 'IconCode',
-                    color: 'red',
-                },
-                {
                     name: 'Network performance',
                     url: '/docs/session-replay/network-recording',
                     icon: 'IconDashboard',
@@ -2019,6 +2013,18 @@ export const docsMenu = {
                     url: '/docs/session-replay/iframes',
                     icon: 'IconCode',
                     color: 'salmon',
+                },
+                {
+                    name: 'Console log recording',
+                    url: '/docs/session-replay/console-log-recording',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Canvas recording',
+                    url: '/docs/session-replay/canvas-recording',
+                    icon: 'IconPalette',
+                    color: 'blue',
                 },
             ],
         },
