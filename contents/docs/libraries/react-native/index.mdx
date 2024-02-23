@@ -203,7 +203,7 @@ posthog.group('company', 'company_id_in_your_db', {
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
-## Upgrading from V1 to V2
+## Upgrading from V1 or V2 to V3
 
 V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
 
@@ -218,7 +218,7 @@ Events such as `Application Installed` and `Application Updated` that require pr
 
 import PostHog from 'posthog-react-native'
 
-await PostHog.setup('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
+await PostHog.setup('<ph_project_api_key>', {
     // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
     host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
     captureApplicationLifecycleEvents: false, // Replaced by 'PostHogProvider'
@@ -236,7 +236,19 @@ PostHog.capture("foo")
 // V2 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = await Posthog.initAsync('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
+const posthog = await Posthog.initAsync('<ph_project_api_key>', {
+    // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+    host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+    // Add any other options here.
+})
+
+// Use created instance rather than the PostHog class
+posthog.capture("foo")
+
+// V3 Setup difference
+import PostHog from 'posthog-react-native'
+
+const posthog = new PostHog('<ph_project_api_key>', {
     // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
     host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
     // Add any other options here.
