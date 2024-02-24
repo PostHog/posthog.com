@@ -242,17 +242,15 @@ export const CallToAction = ({
 }: CTAPropsType): JSX.Element => {
     const url = to || href
     return (
-        <Link
-            disabled={disabled}
-            state={state}
-            external={external}
-            externalNoIcon={externalNoIcon}
-            onClick={onClick}
-            to={url}
-            event={event}
-            className={`${container(type, size, width)} ${className}`}
-        >
-            <span
+        <span className={`${container(type, size, width)} ${className}`}>
+            <Link
+                disabled={disabled}
+                state={state}
+                external={external}
+                externalNoIcon={externalNoIcon}
+                onClick={onClick}
+                to={url}
+                event={event}
                 className={`${button(
                     type,
                     width,
@@ -261,8 +259,8 @@ export const CallToAction = ({
                     color
                 )} ${childClassName}`}
             >
-                {children}
-            </span>
-        </Link>
+                <span className="font-bold">{children}</span>
+            </Link>
+        </span>
     )
 }
