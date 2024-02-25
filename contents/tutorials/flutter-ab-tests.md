@@ -1,6 +1,6 @@
 ---
 title: "How to run A/B tests in Flutter"
-date: 2023-11-16
+date: 2024-02-27
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
