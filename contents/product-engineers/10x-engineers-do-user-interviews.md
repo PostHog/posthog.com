@@ -11,7 +11,8 @@ tags:
   - Culture
   - People
 crosspost:
-  - Founders  
+  - Founders
+  - Blog  
 ---
 
 I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand and care about their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems.
@@ -40,7 +41,7 @@ Companies still need product managers, but it's easier to ship faster and better
 
 Automation is crucial here. Too much friction and you’ll ride an initial burst of motivation followed by regression to the old way of heads-down coding.
 
-Step one is to find users to talk to. You can define your segment using company traits, user traits, and behavioral information. A data warehouse or analytics platform like PostHog can be helpful here.
+Step one is to find users to talk to. You can define your segment using company traits, user traits, and [behavioral information](/product-engineers/behavioral-analytics). A data warehouse or analytics platform like PostHog can be helpful here.
 
 Next, it's time to bulk email your segment. The simplest way is to email out a Calendly link in batches via bcc’ed using a message like this:
 

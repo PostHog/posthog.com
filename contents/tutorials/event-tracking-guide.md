@@ -35,7 +35,7 @@ Autocapture can also be set up by installing the **[posthog-js](https://github.c
 
 Although we are proud of our autocapture feature, we know it isn’t enough for more advanced product analytics. This is for two reasons.
 
-First, event autocapture can be overwhelming. In high-volume instances, where events come in at a high rate, the live events table can contain so much information it can be difficult to determine exactly what you care about. Remember that every click, change of input, or submission is tracked here. Without proper filters, actions, and insights set up, this data can be overwhelming.
+First, event autocapture can be overwhelming. In high-volume instances, where events come in at a high rate, the activity tab can contain so much information it can be difficult to determine exactly what you care about. Remember that every click, change of input, or submission is tracked here. Without proper filters, actions, and insights set up, this data can be overwhelming.
 
 Second, autocapture is a general solution that provides value to many users. To get the most out of PostHog, you should be using custom events. Custom events let you track *exactly* the behavior you care about, ranging from a user hovering an input, to a function call in your backend.
 

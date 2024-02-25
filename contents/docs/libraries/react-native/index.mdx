@@ -220,10 +220,10 @@ import PostHog from 'posthog-react-native'
 
 await PostHog.setup('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
     // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-    host: '<ph_instance_address>', // TIP: `host` is optional if you use https://app.posthog.com
-    captureApplicationLifecycleEvents: false, // Replaced by `PostHogProvider`
+    host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+    captureApplicationLifecycleEvents: false, // Replaced by 'PostHogProvider'
     captureDeepLinks: false, // No longer supported
-    recordScreenViews: false, // Replaced by `PostHogProvider` supporting @react-navigation/native
+    recordScreenViews: false, // Replaced by 'PostHogProvider' supporting @react-navigation/native
     flushInterval: 30, // Stays the same
     flushAt: 20, // Stays the same
     android: {...}, // No longer needed
@@ -238,7 +238,7 @@ import PostHog from 'posthog-react-native'
 
 const posthog = await Posthog.initAsync('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
     // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-    host: '<ph_instance_address>', // TIP: `host` is optional if you use https://app.posthog.com
+    host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
     // Add any other options here.
 })
 

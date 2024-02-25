@@ -14,6 +14,9 @@ import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
+import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
+import { Video } from 'cloudinary-react'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -32,7 +35,6 @@ const Select = ({ onChange, values, ...other }) => {
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                             {({ selected }) => {
-                                console.log(other.value, value.label)
                                 return (
                                     <li
                                         className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
@@ -55,15 +57,6 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
 
-    const changesByDate = groupBy(changes, (node) => {
-        const date = new Date(node.date)
-        return dayjs().month(date.getMonth()).year(date.getFullYear())
-    })
-    const tableOfContents = Object.keys(changesByDate).map((date) => {
-        const month = dayjs(date).format('MMMM')
-        return { url: month, value: month, depth: 0 }
-    })
-
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
         if (value === null) {
@@ -85,8 +78,14 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                           return get(change, field) === value
                       })
                   )
-        setChanges(newChanges)
+        setChanges([...newChanges])
     }, [filters])
+
+    const changesByMonth = groupBy(changes, (node) => node.monthShort)
+
+    const tableOfContents = Object.keys(groupBy(changes, (node) => node.monthLong)).map((month) => {
+        return { url: month, value: month, depth: 0 }
+    })
 
     return (
         <CommunityLayout
@@ -102,7 +101,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                         <em>"All the updates that are fit to print"</em>
                     </p>
                 </div>
-                <div className="flex space-x-2 items-center">
+                <div className="flex space-x-2 items-center relative z-50">
                     <Select
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}
@@ -128,67 +127,80 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                 </div>
             </section>
             <section className="grid article-content">
-                {Object.keys(changesByDate).map((date) => {
-                    const nodes = changesByDate[date]
+                {Object.keys(changesByMonth).map((month, index) => {
+                    const nodes = changesByMonth[month]
                     return (
-                        <div key={date} id={slugify(dayjs(date).format('MMMM'))} className="flex gap-4">
+                        <div key={`${month}-${index}`} id={tableOfContents[index].url} className="flex gap-4">
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
                                 <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
-                                    <h2 className="!text-sm font-bold uppercase !m-0">{dayjs(date).format('MMM')}</h2>
-                                    <div className="text-xs font-semibold">{dayjs(date).format('YYYY')}</div>
+                                    <h2 className="!text-sm font-bold uppercase !m-0">{month}</h2>
+                                    <div className="text-xs font-semibold">{pageContext.year}</div>
                                 </div>
                             </div>
                             <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
-                                {nodes.map(({ description, media, topic, teams, title, cta }) => {
+                                {nodes.map(({ description, media, topic, teams, title, cta, strapiID }) => {
                                     const team = teams?.data[0]
                                     const topicName = topic?.data?.attributes.label
                                     const teamName = team?.attributes?.name
-                                    const mediaURL = media?.data?.attributes?.url
                                     const Icon = topicIcons[topicName?.toLowerCase()]
                                     return (
-                                        <li key={title}>
+                                        <li
+                                            id={slugify(title, { lower: true })}
+                                            className="scroll-mt-[108px]"
+                                            key={strapiID}
+                                        >
                                             {topicName && (
-                                                <p className="font-bold flex mt-3 !-mb-4 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
+                                                <p className="font-bold flex mt-3 !-mb-2 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
                                                     <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
                                                         {Icon && <Icon className="w-5" />}
                                                         <span>{topicName}</span>
                                                     </span>
                                                 </p>
                                             )}
-                                            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
-                                                {title}
-                                            </Heading>
-                                            {teamName && (
-                                                <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>
-                                            )}
-                                            {mediaURL && (
-                                                <div className="my-4">
-                                                    {media?.data?.attributes?.mime === 'video/mp4' ? (
-                                                        <ZoomImage>
-                                                            <video
-                                                                className="max-w-2xl w-full"
-                                                                src={mediaURL}
-                                                                autoPlay
-                                                                loop
-                                                                muted
-                                                                playsInline
-                                                            />
-                                                        </ZoomImage>
-                                                    ) : (
-                                                        <ZoomImage>
-                                                            <img src={mediaURL} className="max-w-2xl w-full" />
-                                                        </ZoomImage>
-                                                    )}
+                                            <UpdateWrapper
+                                                status="complete"
+                                                formClassName="mt-8"
+                                                editButtonClassName="absolute bottom-0 right-0"
+                                                id={strapiID}
+                                            >
+                                                <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
+                                                    {title}
+                                                </Heading>
+                                                {teamName && (
+                                                    <p className="m-0 text-sm opacity-60 font-semibold">
+                                                        {teamName} Team
+                                                    </p>
+                                                )}
+                                                {media?.data?.attributes?.mime && (
+                                                    <div className="my-4">
+                                                        {media?.data?.attributes?.mime === 'video/mp4' ? (
+                                                            <ZoomImage>
+                                                                <Video
+                                                                    publicId={media.publicId}
+                                                                    cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                                                                    className="max-w-2xl w-full"
+                                                                    autoPlay
+                                                                    loop
+                                                                    muted
+                                                                    playsInline
+                                                                />
+                                                            </ZoomImage>
+                                                        ) : (
+                                                            <ZoomImage>
+                                                                <GatsbyImage image={getImage(media)} />
+                                                            </ZoomImage>
+                                                        )}
+                                                    </div>
+                                                )}
+                                                <div className="mt-2">
+                                                    <Markdown>{description}</Markdown>
                                                 </div>
-                                            )}
-                                            <div className="mt-2">
-                                                <Markdown>{description}</Markdown>
-                                            </div>
-                                            {cta && (
-                                                <CallToAction type="secondary" size="md" to={cta.url}>
-                                                    {cta.label}
-                                                </CallToAction>
-                                            )}
+                                                {cta && (
+                                                    <CallToAction type="secondary" size="md" to={cta.url}>
+                                                        {cta.label}
+                                                    </CallToAction>
+                                                )}
+                                            </UpdateWrapper>
                                         </li>
                                     )
                                 })}
@@ -205,12 +217,15 @@ export const query = graphql`
     query ChangelogQuery($year: Int!) {
         allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year }, complete: { eq: true } }) {
             nodes {
-                date
+                strapiID
+                monthShort: date(formatString: "MMM")
+                monthLong: date(formatString: "MMMM")
                 description
                 media {
+                    gatsbyImageData
+                    publicId
                     data {
                         attributes {
-                            url
                             mime
                         }
                     }

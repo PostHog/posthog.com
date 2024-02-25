@@ -41,6 +41,23 @@ These are the broad principles, but **please consult an expert** before making a
 
 ## The best HIPAA-compliant A/B testing tools
 
+### PostHog
+
+![posthog](../images/blog/hipaa-compliant-ab-testing/posthog.png)
+
+PostHog is an all-in-one open-source product stack which includes A/B testing capabilities. It supports a wide variety of test types, including hold-out tests, A/B tests, and multivariate testing, as well as a built-in prediction engine for forecasting sample sizes and durations.
+
+Best of all though, PostHog's A/B testing combines seamlessly with other features in the platform - such as session replay and surveys. You can, for example, jump straight to recorded sessions of users within a particular variant, or send feedback surveys to them to ask what they think. 
+
+We're obviously biased, but we think that's pretty good - and teams such as [Y Combinator](/customers/ycombinator), [Vendasta](/customers/vendasta), and [AssemblyAI](/customers/assemblyai) all agree!
+
+#### PostHog and HIPAA compliance
+
+- **Self-Hosting:** 'Hobby' version only ([Read more](/blog/sunsetting-helm-support-posthog))
+- **BAA Available:** Yes
+
+PostHog has an open-source, free version which can be self-hosted, but this lacks premium features and is only suitable for smaller scales. The Cloud product, however, is available with US or EU hosting, is SOC 2 certified and both GDPR and HIPAA compliant.
+
 ### Kameleoon
 
 ![kameleoon](../images/blog/hipaa-compliant-ab-testing/kameleoon.png)

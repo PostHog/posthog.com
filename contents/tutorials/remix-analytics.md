@@ -337,7 +337,7 @@ type Post = {
 };
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
-	 const filePath = path.join(process.cwd(), 'json', 'data.json');
+	const filePath = path.join(process.cwd(), 'json', 'data.json');
 
   const fileContents = await fs.readFile(filePath, 'utf8');
   const posts: Post[] = JSON.parse(fileContents).posts;
@@ -349,7 +349,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   }	
 
   const cookieString = request.headers.get('Cookie') || '';  
-	const projectAPIKey = '<ph_project_api_key>';
+  const projectAPIKey = '<ph_project_api_key>';
   const cookieName = `ph_${projectAPIKey}_posthog`;
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   let distinctId;
@@ -481,5 +481,5 @@ Now, when you reload your page, the button doesn’t flicker. This is especially
 ## Further reading
 
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [How to set up React A/B testing](/tutorials/react-ab-testing)
-- [How to set up surveys in React](/tutorials/react-surveys)
+- [How to set up A/B tests in Remix](/tutorials/remix-ab-tests)
+- [How to set up surveys in Remix](/tutorials/remix-surveys)

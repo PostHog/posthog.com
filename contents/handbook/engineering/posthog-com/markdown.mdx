@@ -12,7 +12,6 @@ It supports dark mode screenshots (optional). Here's how to use it:
 
   ```
   ---
-
   import ImgSampleConfigLight from '../../images/tutorials/limit-session-recordings/sampling-config-light.png'
   import ImgSampleConfigDark from '../../images/tutorials/limit-session-recordings/sampling-config-dark.png'
   ```
@@ -27,7 +26,34 @@ It supports dark mode screenshots (optional). Here's how to use it:
   />
   ```
 
+  Optionally pass `zoom={false}` if you don't want the image to be zoomable, otherwise it will be zoomable by default.
+
   _Note: If you don't have a dark image, just leave out the `imageDark` prop and the light screenshot will be used for both color modes._
+
+## Product videos
+
+Th `<ProductVideo />` component works the same as product screenshots (above) but supports light and dark videos.
+
+1. Import the video(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
+
+  ```
+  ---
+  import NewFunnelLight from '../../images/docs/user-guides/funnels/new-funnel.mp4'
+  import NewFunnelDark from '../../images/docs/user-guides/funnels/new-funnel-dark.mp4'
+
+  ```
+
+1. Use the component wherever you want the video(s) to appear.
+
+  ```
+  <ProductVideo
+    videoLight={NewFunnelLight} 
+    videoDark={NewFunnelDark} 
+    classes="rounded"
+  />
+  ```
+
+  _Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
 
 ## Codeblocks
 

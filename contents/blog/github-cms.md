@@ -55,7 +55,7 @@ The one thing it lacks is a content calendar, but it's not something we miss muc
 
 ## 3. GitHub keeps us engineering-focused
 
-At PostHog, [everybody codes](/handbook/company/values#everyone-codes), and our [ideal customers](/blog/creating-ideal-customer-profile) are developers. Using GitHub and combining content and code keeps this top of mind. GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages non-technical people to be more technical.
+At PostHog, [everybody codes](/handbook/company/values#everyone-codes), and our [ideal customers](/newsletter/ideal-customer-profile-framework) are developers. Using GitHub and combining content and code keeps this top of mind. GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages non-technical people to be more technical.
 
 Developers don’t want to spend time in a CMS. They want to use tools they already know and spend time in. Trying to get a busy developer to contribute on GitHub is easier than trying to get them to contribute in a CMS they aren’t familiar with. This means they make more changes to our site and review content more often. **~40% of [merged pull requests in the posthog.com repo](https://github.com/PostHog/posthog.com/pulls?q=is%3Aclosed) are from people outside of marketing, website, and docs.**
 

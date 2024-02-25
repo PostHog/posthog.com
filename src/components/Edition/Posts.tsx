@@ -77,6 +77,9 @@ export const Sidebar = () => {
         limit: 5,
         sortBy: 'activity',
         filters: {
+            subject: {
+                $ne: '',
+            },
             resolved: {
                 $ne: true,
             },

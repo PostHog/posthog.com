@@ -8,6 +8,8 @@ tags:
   - Founders
   - Product
   - Product-market fit
+crosspost:
+  - Blog  
 ---
 
 In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. 
@@ -196,7 +198,7 @@ Closing the loop above is the way to cement your product-market fit because:
 
 ![pmf-guide](../images/blog/pmf-game-guide/pmf-level-5.png)
 
-Start by figuring out your [Ideal Customer Profile](/blog/creating-ideal-customer-profile).
+Start by figuring out your [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework).
 
 Write down needs, haves, and attributes you think your Ideal Customer Profile users might have in common. These should be _very_ specific. They could be individual-level and/or company-level things.
 

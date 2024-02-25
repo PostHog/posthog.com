@@ -7,6 +7,8 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags: 
  - Being a founder
+crosspost:
+  - Blog 
 ---
 
 Love or loathe him, Elon is one of most opinionated business leaders out there. That makes him worth studying as a founder, no matter what politics he gets into. I read Walter Isaacson's biography of him over Christmas. These are some lessons that we can take from his work.

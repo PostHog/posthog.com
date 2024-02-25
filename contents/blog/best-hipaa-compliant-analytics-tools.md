@@ -30,7 +30,30 @@ It's worth noting that, because BAAs expose third-parties to increased risk and 
 
 > If your business operates inside the EU, it’s worth checking out our article about [GDPR compliant analytics](/blog/best-gdpr-compliant-analytics-tools) to ensure you comply with both sets of regulations. 
 
-## 1. [Mixpanel](https://mixpanel.com/)
+## 1 [PostHog](/product-analytics)
+
+![posthog](../images/blog/hipaa-compliant-ab-testing/posthog.png)
+
+PostHog is an all-in-one platform for building better products. Unlike other tools on this list, it offers a robust suite of tools, including product analytics, feature flags, A/B testing, user surveys, data pipelines, session replays, and more. 
+
+We're biased, but we think it's pretty great - not least because you only need a single BAA to cover usages across all 8+ features. That means there's less risk, less overhead, and it's quicker to get setup. 
+
+PostHog's product analytics suite offers a wide selection of tools, from funnel and path analysis to an SQL input for more advanced queries. Best of all, product analytics combines brilliantly with other parts of PostHog - you can, for example, jump straight from a funnel view to a list of session replays illustrating that journey. 
+
+### Features & benefits
+
+- All-in-one product stack with 8+ functions
+- Only one BAA needed to cover multiple products
+- Self-serve, no SQL required
+- SOC 2 certified, GDPR-ready
+- US & EU hosting available
+- Open source
+
+### Is PostHog HIPAA compliant?
+
+PostHog offers Business Associate Agreements (BAA) to teams which need HIPAA complaince, enabling those teams to use all of PostHog's features until a single agreement. 
+
+## 2. [Mixpanel](https://mixpanel.com/)
 
 ![Mixpanel - hipaa analytics tools](../images/blog/open-source-analytics-tools/mixpanel.png)
 
@@ -40,7 +63,7 @@ Mixpanel isn’t open source and can’t be deployed into a users’ own infrast
 
 ### Features & benefits
 
-- All-in-one product analytics suite
+- Product analytics suite
 - Group Analytics, for B2B organizations
 - Self-serve, no SQL required
 - SOC 2 certified
@@ -59,7 +82,7 @@ According to [Google’s own disclaimers](https://support.google.com/analytics/a
 
 Although [Google does offer a BAA for some services](https://support.google.com/a/answer/3407054?hl=en), such as Google Calendar and Google Keep, Google Analytics is not included on this list. In fact, [Google Analytics may even be illegal](https://isgoogleanalyticsillegal.com/) to use in some countries due to the way it collects and stores data.
 
-## 2. [Countly](https://count.ly/)
+## 3. [Countly](https://count.ly/)
 
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
@@ -78,7 +101,7 @@ Yes. Countly can be deployed on to your own infrastructure, so that data doesn�
 
 > Looking for HIPAA-compliant session recording tools as well? Read our guide to [best self-hosted session recording tools](/blog/best-open-source-session-replay-tools)
 
-## 3. [Plausible](https://plausible.io/)
+## 4. [Plausible](https://plausible.io/)
 
 ![Plausible Analytics - plausible hipaa analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 

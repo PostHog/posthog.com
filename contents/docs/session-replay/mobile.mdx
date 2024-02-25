@@ -2,7 +2,7 @@
 title: Mobile Recording
 ---
 
-> 🚧 **NOTE:** Mobile Recording is currently **only available on iOS** and is considered `alpha`. We are keen to gather as much feedback as possible so if you try this out please let us know and reach out in our [Slack Community](/slack) to share your experience with it.
+> 🚧 **NOTE:** Mobile recording is currently **only available on Android** and is considered `beta`. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
 
 
 # Overview
@@ -11,134 +11,100 @@ Mobile Session Recording allows you to record user sessions on mobile devices. T
 
 ## How it works
 
-We have taken our time to make sure that we can provide a useful and detailed recording experience whilst keeping the performance and security of your app as a top priority. By default the configuration is somewhat resritive with automatic masking and wifi-only uploads to ensure that we don't negatively impact the user experience. This can then be configured to be more or less restrictive depending on your needs.
+We have taken our time to make sure we provide a useful and detailed recording experience whilst keeping the performance and security of your app as a top priority. By default, the configuration is restrictive with automatic masking.
 
 #### Screen recording
 
-Mobile Recording is primarily done using native APIs to grab an image copy of the primary View in the app. This is done carefully so as not to affect performance in any way a user may notice and at a rate of 1 frame per second, so as not to generate too much data. The image is compressed and uploaded to PostHog, by default only over wifi to ensure we aren't negatively impacting the users data plan. 
+Mobile recording is primarily done using native APIs to grab the view hierarchy state when the screen is drawn. This is done carefully so as not to affect performance in any way a user may notice.
 
-If a `redactionMode` is specified, the image is then processed to remove sensitive information. The different modes work as follows:
-* `selective` (default) - Only redact views with an accessibilityId matching what is specified in `redactionTags`.
-* `automatic` - Redact all views with the name matching `redactionViews` and all classes matching `redactionClasses`. Some sensible defaults are provided to capture anything Text like.
-* `wireframe` - Renders a "wireframe" representation of the views instead of an captured image. This is great for highly sensitive environments where you still wan't to get a sense of user behaviour but don't want to capture any sensitive information.
+The view hierarchy is transformed to a JSON data structure and later rendered as a HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behaviour.
 
 #### Network recording
 
-Network requests are recorded using the "swizzling" technique to intercept all `UrlSession` requests - the basis of all network requests in iOS. Only metric-like data is currently gathered to give a picture of speed, size and response code. No data is captured from the request or response body.
+Network requests are recorded using the `PostHogOkHttpInterceptor` interceptor ([OkHttp only](https://github.com/square/okhttp/)). Only metric-like data is currently gathered to give a picture of speed, size and response code. No data is captured from the request or response body.
 
 # Installation
 
-### Via Swift Package Manager
+Add the dependency.
 
-Currently the only way to install the `beta` of the PostHog Recording iOS SDK is via Swift Package Manager. To do so, follow these steps:
-
-1. In Xcode, select File > Add Packages.
-2. Enter `https://github.com/posthog/posthog-ios` in the search bar.
-3. Select the dependency rule `branch` and enter `feat/mobile-recordings` as the value.
-4. Select the your project to add it to and click **Add Package**
-
-
-### Setup with Objective C
-
-
-In your AppDelegate file add the following:
-
-```objc
-#import "AppDelegate.h"
-// ...
-
-@import PostHog; // Add this import
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // ...other code
-
-    PHGPostHogConfiguration *configuration = [PHGPostHogConfiguration configurationWithApiKey:@"YOUR_API_KEY" host:@"https://app.posthog.com"];
-
-    // Any standard PostHog config options
-    configuration.captureApplicationLifecycleEvents = YES; // Record certain application events automatically!
-    configuration.captureScreenViews = YES; // Capture screen views automatically!
-    
-    // Any Recording specific config options
-    configuration.recording.screenRecordingEnabled = YES; // Record the screen
-    configuration.recording.networkRecordingEnabled = YES; // Record network requests
-    configuration.recording.redactionMode = ScreenRecorderMaskingModeAutomatic; // Mask screen recordings automatically
-
-    [PHGPostHog setupWithConfiguration:configuration];
-}
-
-
+```gradle_kotlin file=app/build.gradle.kts
+implementation("com.posthog:posthog-android:$latestVersion")
 ```
 
-### Setup with Swift
+Initialize the SDK in the `Application` class.
 
+```android_kotlin
+import android.app.Application
+import com.posthog.android.PostHogAndroid
+import com.posthog.android.PostHogAndroidConfig
 
-```swift
-// AppDelegate.swift
-import Foundation
-import UIKit
-import PostHog
+class SampleApp : Application() {
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        let configuration = PHGPostHogConfiguration(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+    companion object {
+        const val POSTHOG_API_KEY = "<ph_project_api_key>"
+        // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        const val POSTHOG_HOST = "<ph_instance_address>"
+    }
 
-        configuration.captureApplicationLifecycleEvents = true; // Record certain application events automatically!
-        configuration.captureScreenViews = true; // Capture screen views automatically!
-        
-        configuration.recording.screenRecordingEnabled = true
-        configuration.recording.logRecordingEnabled = true
-        configuration.recording.networkRecordingEnabled = true
-        configuration.recording.redactionMode = .automatic
+    override fun onCreate() {
+        super.onCreate()
 
-        return true
+        val config = PostHogAndroidConfig(
+            apiKey = POSTHOG_API_KEY,
+            host = POSTHOG_HOST // TIP: host is optional if you use https://app.posthog.com
+        )
+        config.sessionReplay = true
+        PostHogAndroid.setup(this, config)
     }
 }
 ```
 
+Add the OkHttp Interceptor.
 
-#### SwiftUI
-If you haven't already, crate the `AppDelegate.swift` file mentioned above and then in your `App` file add the following:
+```android_kotlin
+import com.posthog.PostHogOkHttpInterceptor
+import okhttp3.OkHttpClient
 
-```swift
-import SwiftUI
-
-@main
-struct AboutMeApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate // Add this if not already there
-    
-    var body: some Scene {
-        WindowGroup {
-            ...
-        }
-    }
-}
+private val client = OkHttpClient.Builder()
+    .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
+    .build()
 ```
 
+# Limitations
+
+* Requires the PostHog Android SDK version >= [3.1.0](https://github.com/PostHog/posthog-android/releases/tag/3.1.0) - use the latest version.
+* Requires Android API >= 26, otherwise it's a NoOp.
+* Not compatible with Jetpack Compose.
+* Custom views are not fully supported.
+* WebView is not supported, a placeholder will be shown.
+* Keyboard is not supported, a placeholder will be shown.
+* React Native and Flutter for Android aren't supported.
+* Let us know when you're ready to view the recordings. While replay is in beta there's still some setup on our side before you can playback the sessions. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options)
 
 # Recording specific configuration
 
-```swift
-// The values shown are the defaults
-let config = PostHogRecorderConfig(
-    // Whether to enable recording. If false, all other options are ignored
-    screenRecordingEnabled: true,
-    // Whether to enable log recording. Logs with OSLog will be automatically recorded or you can log directly with PostHog.shared.recorder.log()
-    logRecordingEnabled: true,
-    // Records network requests via swizzling of NsUrlSession.
-    networkRecordingEnabled: true,
-    // What level of redcaction to perform
-    // -> .selective = only redact manually specified views with an accessibilityId matching what is specified in `redactionTags`.
-    // -> .automatic = redact all views with the name matching `redactionViews` and all classes matching `redactionClasses`
-    // -> .wireframe = renders a "wireframe" of the view, without any text or images
-    redactionMode: .selective,
-    redactionTags: ["ph-no-capture"],
-    redactionViews: PostHogRecorderConfig.DefaultRedactionViews,
-    redactionClasses: PostHogRecorderConfig.DefaultRedactionClasses,
-    // Hosts to ignore when recording network requests. By default the PostHog API host is ignored
-    ignoreNetworkHosts: []
-)
+SDK configurations during the SDK initialization.
+
+```android_kotlin
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
+    // enable session recording, requires enabling on the project configuration as well.
+    sessionReplay = true
+    // all texts are masked (default is enabled)
+    sessionReplayConfig.maskAllTextInputs = false
+    // all images are placeholders (default is enabled)
+    sessionReplayConfig.maskAllImages = false
+    // capture logs automatically (default is enabled)
+    sessionReplayConfig.captureLogcat = true
+}
 ```
 
+[View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the image will be a placeholder.
 
+```xml
+<ImageView
+    android:id="@+id/imvProfilePhoto"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:tag="ph-no-capture"
+/>
+```

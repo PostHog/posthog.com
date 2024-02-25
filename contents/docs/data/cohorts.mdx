@@ -25,16 +25,17 @@ availability:
 import {ProductScreenshot} from 'components/ProductScreenshot'
 import cohortsPageLight from '../../images/features/cohorts/cohorts-page-light-mode.png'
 import cohortsPageDark from '../../images/features/cohorts/cohorts-page-dark-mode.png'
-import staticAndDynamicLight from '../../images/features/cohorts/static-and-dynamic-cohorts-light-mode.png'
-import staticAndDynamicDark from '../../images/features/cohorts/static-and-dynamic-cohorts-dark-mode.png'
-import createDynamicCohortsLight from '../../images/features/cohorts/creating-dynamic-cohorts-light-mode.png'
-import createDynamicCohortsDark from '../../images/features/cohorts/creating-dynamic-cohorts-light-mode.png'
 
 import {ProductVideo} from 'components/ProductVideo'
 import createCohortLight from '../../images/features/cohorts/create-cohort-from-trend-light-mode.mp4'
 import createCohortDark from '../../images/features/cohorts/create-cohort-from-trend-dark-mode.mp4'
 
+## What are cohorts?
 
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=375"
+    className="rounded shadow-xl"
+/>
 
 Cohorts enable you to easily create a list of users who have something in common, such as completing an action or having the same property.
 
@@ -46,20 +47,35 @@ Here are a few examples of the cohorts you can create:
 - Users who signed up recently.
 - Users who viewed the signup page, but didn't convert.
 
-You can also use cohorts in [trends](/docs/product-analytics/trends), [insights](/docs/product-analytics/insights), and [dashboards](/docs/product-analytics/dashboards). This enables you to understand:
+You list of cohorts are accessible from the [People](https://us.posthog.com/persons) page.
+
+## Where can you use cohorts?
+
+You can use cohorts in many different ways, such as:
+- In [trends](/docs/product-analytics/trends), funnels, retention, user paths, stickiness, and lifecycle insights
+- As a filter on any product analytics dashboard
+- To target feature flags, experiments, and user surveys
+- To filter the session replay list and create playlists
+- Filter live events on the Activity page
+- Filter users on the People page
+
+You can use cohorts to answer questions like:
 
 - "Are people at company X using our app frequently?"
 - "What percentage of the users who signed up last week are still using our app?"
-- "Which features are our power users using?"
+- "Which features are power users using?"
 
-## Cohorts vs. groups
+## How are cohorts different from groups?
 
-Cohorts are often confused with [groups](/docs/product-analytics/group-analytics), but they each serve different purposes:
+Cohorts are sometimes confused with [groups](/docs/product-analytics/group-analytics), but they each serve different purposes:
 
-- Cohorts represent a specific set of users – e.g., a list of users that all belong to the same company.
-- Groups aggregate events based on entities, such as organizations or companies, and do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level, as opposed to a user-level.
+- **Cohorts** represent a specific set of users – e.g., a list of users who's email contains a certain string (like a company's domain).
+
+- **Groups** aggregate events based on entities, such as organizations or companies, but do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level, as opposed to a user-level.
  
-Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
+Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. 
+
+If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
 
 ## How to create a cohort
 
@@ -69,9 +85,9 @@ There are two methods to create a new cohort:
 
 You can create cohorts using data from insights such as trends, [funnels](/docs/product-analytics/funnels), [user paths](/docs/product-analytics/paths) and [lifecycles](/docs/product-analytics/lifecycle).
 
-**Step 1:** Go to [insights](https://app.posthog.com/insights) and open any insight. Click a data point on the visualization to view the [persons](/docs/data/persons) represented in the underlying data.
+1. Go to [insights](https://us.posthog.com/insights) and open any insight that's aggregated by users – i.e. `unique users`, `weekly active user`, etc. Click a data point on the visualization to view the [persons](/docs/data/persons) represented in the underlying data.
 
-**Step 2:** In the modal popup, click 'Save as cohort' in the bottom right.
+2. In the modal popup, click 'Save as cohort' at the bottom.
 
 The video below shows how to create a new cohort from a trend, although you can similarly create a cohort from a funnel, user path, or any other insight.
 
@@ -84,9 +100,9 @@ The video below shows how to create a new cohort from a trend, although you can 
 
 ### Method 2: Create a new cohort from the cohorts page
 
-**Step 1:** Navigate to the [Persons](https://app.posthog.com/persons) page within the sidebar, then click on the [Cohorts tab](https://app.posthog.com/cohorts):
+1. Navigate to the [Persons](https://us.posthog.com/persons) page within the sidebar, then click on the [Cohorts tab](https://us.posthog.com/cohorts).
 
-**Step 2:** Click '+ New Cohort' on the top right.
+2. Click '+ New Cohort' on the top right.
 
 <ProductScreenshot
     imageLight={cohortsPageLight} 
@@ -95,47 +111,66 @@ The video below shows how to create a new cohort from a trend, although you can 
     classes="rounded"
 />
 
-## Static vs. dynamic cohorts
+## Static and dynamic cohorts
 
-When creating a cohort, you'll choose between a static or dynamic cohort:
+You have two options when creating a cohort:
 
-<ProductScreenshot
-    imageLight={staticAndDynamicLight} 
-    imageDark={staticAndDynamicDark}
-    alt="two types of cohorts: static and dynamic" 
-    classes="rounded"
-/>
+1. **Static cohorts**, lists of users that don't change over time (e.g. all the users who signed up to your app in January 2024) or you update manually.
+
+2. **Dynamic cohorts**, which are automatically updated based on a specific condition – e.g. all users who have performed a specific event or action in your app.
 
 ### Static cohorts
-Static cohorts are lists of users that do not change over time. For example, all users who signed up for your app in January 2023. 
+Static cohorts are created from insights, by uploading a CSV of users, or by duplicating a dynamic cohort.
 
-Static cohorts are created from insights, or by uploading a csv of users. The CSV file only requires a single column with the user’s distinct ID. The very first row (the header) will be skipped during import.
+The CSV file only requires a single column with the user's distinct ID. The very first row (the header) will be skipped during import.
 
 To update the list, you can either upload another CSV to add more users, or use the interface to remove users.
 
 ### Dynamic cohorts
-Dynamic cohorts are defined by a continuously evaluated condition. This means that the members of the cohort can change over time. For example, a dynamic cohort could be all users who have have used a certain feature in your app.
 
-Dynamic cohorts are created by matching users who meet a certain criteria. You can define this criteria by combining any number of the following conditions:
+Dynamic cohorts can be based on existing cohorts, and support the following criteria:
 
-- Users who have performed a specific event or [action](/docs/user-guides/actions) within a certain time frame.
-- Users who have certain properties.
-- Users based on their lifecycle event. For example, users who have recently stopped performing an event.
-- Users matching other cohorts.
+#### Behavioral
 
-<ProductScreenshot
-    imageLight={createDynamicCohortsLight} 
-    imageDark={createDynamicCohortsDark}
-    alt="Different criteria options for creating a dynamic cohort" 
-    classes="rounded"
-/>
+| **Event or action**                                             | **Example**                                                                                                        |
+|------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| **Completed event or action**                        | Completed `user signed up` in the last 30 days                                                                     |
+| **Did not complete event or action**                 | Did not complete `user signed up` in the last 2 months                                                             |
+| **Completed event or action multiple times**         | Completed `watched video` 5 times in the last 2 weeks                                                              |
+| **Completed a sequence of events or actions**        | Completed `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event        |
+| **Did not complete a sequence of events or actions** | Did not complete `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event |
 
+You can select `days`, `weeks`, `months` or `years` time ranges here.
+> **Can use a dynamic behavioral cohort as a feature flag target?** No. To use a cohort based on their behaviors as a target for a feature flag, A/B test, or survey, you must duplicate the dynamic cohort to a static one and use it.
 
+#### Person properties
+
+Has or doesn't have a person property with the following operators:
+
+| **Operator**                                 | **Example**                                           |
+|----------------------------------------------|-------------------------------------------------------|
+| `equals` or `does not equal`                 | `Pineapple on pizza` property `does not equal` "true" |
+| `contains` or `does not contain`             | `email` property `does not contain` "gmail"           |
+| `matches regex` or `does not match regex`    | `Country code` property `matches regex` "us|uk|aus"   |
+| `greater than` or `greater than or equal to` | `Age` property is `greater than` "21"                 |
+| `less than` or `less than or equal to`       | `Age property is `less than or equal to` "21"         |
+| `is set` or `is not set`                     | `UTM Source` property `is not set`                    |
+| `between` or `not between`                   | `Age` property is between "18" and "30"               |
+| `minimum` or `maximum` value                 | `Organization size` property `minimum` of "5"         |
+
+#### Lifecycle
+
+| **Criteria**                       | **Example**                                                                                         |
+|----------------------------------------|-----------------------------------------------------------------------------------------------------|
+| **Completed and event for first time** | Completed `shared insight` event for the first time in the "last 30 days"                           |
+| **Completed an event regularly**       | Completed `shared insight` at least "3 times per week" for at least "3 of the last 5 periods"       |
+| **Stopped doing an event**             | Stopped doing `shared insight` event in the "last 5 days" but had done it in the "5 days prior"     |
+| **Started doing event again**          | Started doing `shared insight` event in the "last 5 days" but had not done it in the "5 days prior" |
+
+You can select `days`, `weeks`, `months` or `years` time ranges here.
 
 ### Further reading
 
-Want to know more about what's possible with Cohorts in PostHog? Try these tutorials:
-
--   [How to filter our internal users](/tutorials/filter-internal-users)
-
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).
+- [How to track new and returning users in PostHog](/tutorials/track-new-returning-users)
+- [How to identify and analyze power users](/tutorials/power-users)
+- [How to filter out internal users](/tutorials/filter-internal-users)

@@ -18,7 +18,7 @@ export default function InternalSidebar({ tableOfContents }) {
                                         url={navItem.url}
                                         name={navItem.value}
                                         depth={navItem.depth}
-                                        className="text-sm"
+                                        className="text-sm post"
                                     />
                                 </li>
                             )

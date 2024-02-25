@@ -7,22 +7,11 @@ import { ContributorImageSmall } from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 
 import { IconPineapple, IconPizza, IconThumbsDown, IconThumbsUp } from '@posthog/icons'
-
-interface ITeam {
-    frontmatter: {
-        headshot: string
-        name: string
-        country: string
-        jobTitle: string
-        pineappleOnPizza: boolean
-    }
-}
+import { Accordion } from 'components/Products/Accordion'
+import slugify from 'slugify'
 
 interface ISidebarProps {
-    team?: ITeam[]
-    teamLead?: ITeam
-    teamName?: string
-    teamSlug: string
+    teams: any
 }
 
 export const pineappleText = (percentage: number) => {
@@ -35,33 +24,34 @@ export const pineappleText = (percentage: number) => {
     )
 }
 
-export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebarProps) {
-    const teamLength = team?.length
-    if (!team || !teamLength) return null
+const Team = ({ profiles, leadProfiles, className = '' }) => {
+    const teamLength = profiles?.data?.length
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
-        Math.round((team.filter(({ pineappleOnPizza }) => pineappleOnPizza).length / teamLength) * 100)
-    const teamLeadName = teamLead && [teamLead.firstName, teamLead.lastName].filter(Boolean).join(' ')
+        Math.round(
+            (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
+                100
+        )
+    const teamLead = profiles?.data?.find(({ id }) => leadProfiles?.data?.[0]?.id === id)
+    const teamLeadName = [teamLead?.attributes.firstName, teamLead?.attributes.lastName].filter(Boolean).join(' ')
     return (
-        <>
-            <SidebarSection title="Meet your team" className="-mt-2">
-                <h3 className="font-semibold text-sm m-0 mb-2">
-                    <Link
-                        to={teamSlug}
-                        className="flex w-full justify-between items-center group leading-none rounded p-2 -mx-2 -my-1 hover:bg-gray-accent/50 
-                    relative
-                    active:top-[0.5px]
-                    active:scale-[.98]"
-                    >
-                        <span>Team {teamName}</span>
-                        <span className="opacity-0 group-hover:opacity-100 text-black/30 dark:text-white text-lg leading-none">
-                            &rarr;
-                        </span>
-                    </Link>
-                </h3>
-                <ul className="list-none m-0 p-0 flex flex-wrap">
-                    {team.map(({ avatar: { url: avatar }, firstName, lastName, country, companyRole, squeakId }) => {
+        <div className={`${className} my-4`}>
+            <ul className="list-none m-0 p-0 flex flex-wrap">
+                {profiles?.data?.map(
+                    ({
+                        attributes: {
+                            avatar: {
+                                data: {
+                                    attributes: { url: avatar },
+                                },
+                            },
+                            firstName,
+                            lastName,
+                            country,
+                        },
+                        id,
+                    }) => {
                         const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
                             <li
@@ -73,9 +63,9 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                 [&:nth-child(4n+4)]:bg-yellow 
                                 "
                             >
-                                <Link to={`/community/profiles/${squeakId}`}>
+                                <Link to={`/community/profiles/${id}`}>
                                     <Tooltip
-                                        placement="top-end"
+                                        placement="top"
                                         className="whitespace-nowrap"
                                         content={() => (
                                             <div className="flex space-x-1 items-center">
@@ -98,14 +88,14 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                 </Link>
                             </li>
                         )
-                    })}
-                </ul>
-            </SidebarSection>
+                    }
+                )}
+            </ul>
 
             {teamLead && (
-                <SidebarSection title="Team lead" className="-mt-2">
+                <SidebarSection title="Team lead">
                     <Link
-                        to={`/community/profiles/${teamLead?.squeakId}`}
+                        to={`/community/profiles/${teamLead.id}`}
                         className="flex space-x-2 items-center rounded p-1 -mx-1 -mt-1 hover:bg-gray-accent/50 
                     relative
                     active:top-[0.5px]
@@ -113,16 +103,16 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                     >
                         <ContributorImageSmall
                             className="w-[40px] h-[40px] bg-orange border-2 border-white dark:border-primary border-solid"
-                            image={teamLead?.avatar?.url}
+                            image={teamLead.attributes.avatar?.data?.attributes?.url}
                             name={teamLeadName}
                         />
                         <p className="author text-base font-semibold m-0 text-[15px]">{teamLeadName}</p>
-                        <ReactCountryFlag svg countryCode={teamLead?.country} />
+                        <ReactCountryFlag svg countryCode={teamLead.attributes.country} />
                     </Link>
                 </SidebarSection>
             )}
 
-            <SidebarSection title="Pineapple on pizza?" className="-mt-2">
+            <SidebarSection title="Pineapple on pizza?">
                 <div className="space-x-2 flex items-center mb-4 text-lg font-semibold">
                     <span className="w-8 h-8 relative top-[-1px] -mr-1">
                         <IconPineapple />
@@ -145,6 +135,43 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                         className={`${pineapplePercentage >= 50 ? 'bg-[#6AA84F]' : 'bg-red'} absolute inset-0 h-full`}
                     />
                 </div>
+            </SidebarSection>
+        </div>
+    )
+}
+
+export default function Sidebar({ teams }: ISidebarProps) {
+    if (!teams || teams.length <= 0) return null
+    const multipleTeams = teams.length > 1
+
+    return (
+        <>
+            <SidebarSection title={multipleTeams ? 'Teams hiring for this role' : 'Meet your team'} className="-mt-2">
+                {multipleTeams ? (
+                    teams.map((team) => (
+                        <Accordion key={team.id} label={team.name}>
+                            <Team {...team} className="space-y-4" />
+                        </Accordion>
+                    ))
+                ) : (
+                    <>
+                        <h3 className="font-semibold text-sm m-0 mb-2">
+                            <Link
+                                to={`/handbook/small-teams/${slugify(teams[0].name, { lower: true })}`}
+                                className="flex w-full justify-between items-center group leading-none rounded p-2 -mx-2 -my-1 hover:bg-gray-accent/50 
+                    relative
+                    active:top-[0.5px]
+                    active:scale-[.98] -mb-3"
+                            >
+                                <span>Team {teams[0].name}</span>
+                                <span className="opacity-0 group-hover:opacity-100 text-black/30 dark:text-white text-lg leading-none">
+                                    &rarr;
+                                </span>
+                            </Link>
+                        </h3>
+                        <Team {...teams[0]} className="space-y-8" />
+                    </>
+                )}
             </SidebarSection>
         </>
     )
