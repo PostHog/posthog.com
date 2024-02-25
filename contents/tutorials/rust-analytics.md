@@ -44,7 +44,7 @@ serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
 ```
 
-Then, we set up our routes and HTML pages. Replace the code in `main.rs` with the following:
+Then, we set up our routes and HTML pages. Replace the code in `src/main.rs` with the following:
 
 ```rust file=main.rs
 use actix_session::{CookieSession, Session};
@@ -207,7 +207,7 @@ async fn api_dashboard(session: Session) -> impl Responder {
 }
 ```
 
-With this set up, refresh your app and click the button on the `dashboard` page a few times. You should now see the captured event in your [PostHog activity tab](https://us.posthog.com/events).
+With this set up, re-run your app and click the button on the `dashboard` page a few times. You should now see the captured event in your [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsInPostHogLight} 
@@ -228,7 +228,7 @@ When capturing events, you can optionally include additional information by sett
 
 As an example, we add the user's name as an event property:
 
-```python file=app.py
+```rust file=main.rs
 async fn api_dashboard(session: Session) -> impl Responder {
     if let (Some(user_email), Some(user_name)) = (
         session.get::<String>("email").unwrap(),
