@@ -20,7 +20,7 @@ Our app will have two screens:
 1. The first screen will have a button which takes you to a second screen.
 2. The second screen will either have a `red` or `green` background color, depending on whether the user is in the `control` or `test` variant of our A/B test. This screen will also have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
 
-To set this up, first ensure [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) is installed. Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
+To set this up, first ensure the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) is installed. Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
 
 Select `Empty Application` and name your app `flutter_ab_tests`. Then, replace your code in `lib/main.dart` with the following:
 
@@ -137,8 +137,6 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 </manifest>
 ```
 
-/Users/lior/Desktop/flutter_ab_tests_2/flutter_ab_tests_2/
-
 You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
 
 ```js file=android/app/build.gradle
@@ -222,7 +220,7 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 
 The first part of setting up our A/B test in PostHog is setting up the goal metric. We'll use the number of clicks on the button on `FeatureScreenView` as our goal.
 
-To measure this, we [capture a custom event](/docs/product-analytics/capture-events) `feature_button_clicked` when the button is clicked. To do this, update the code in `feature_screen_view.dart` to call `Posthog().capture` in `onPressed`:
+To measure this, we [capture a custom event](/docs/product-analytics/capture-events) `feature_button_clicked` when the button is clicked. To do this, update the code in `feature_screen_view.dart` to call [`Posthog().capture`](/docs/libraries/flutter#capturing-events) in `onPressed`:
 
 ```dart file=feature_screen_view.dart
 import 'package:flutter/material.dart';
