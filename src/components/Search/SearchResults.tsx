@@ -437,7 +437,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                             <h4 className="text-2xl mb-3 leading-[1.125]">{activeOption.title}</h4>
                             <p className="text-black/70 dark:text-white/80 text-[15px] mb-0">{activeOption.excerpt}</p>
                             {activeOption.resolved && (
-                                <div className="mt-4 bg-accent/40 dark:bg-accent-dark rounded-md p-4 border border-border dark:border-dark">
+                                <div className="mt-4 bg-accent/40 dark:bg-accent-dark/40 rounded-md p-4 border border-border dark:border-dark">
                                     <h5 className="text-green flex space-x-1 m-0 mb-2">
                                         <IconCheckCircle className="w-5 flex-shrink-0" />
                                         <span>Answer</span>
