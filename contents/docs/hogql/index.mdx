@@ -7,6 +7,17 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import trendsbreakdownDark from '../../images/features/hogql/trends-breakdown-dark-mode.png'
+import trendsbreakdownLight from '../../images/features/hogql/trends-breakdown-light-mode.png'
+import insightsDark from '../../images/features/hogql/insights-sql-dark-mode.png'
+import insightsLight from '../../images/features/hogql/insights-sql-light-mode.png'
+import databaseDark from '../../images/features/hogql/database-dark-mode.png'
+import databaseLight from '../../images/features/hogql/database-light-mode.png'
+
+import {ProductVideo} from 'components/ProductVideo'
+import activityDark from '../../images/features/hogql/activity-dark-mode.mp4'
+import activityLight from '../../images/features/hogql/activity-light-mode.mp4'
 
 HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. HogQL is effectively a wrapper around [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference), with a few tweaks, such as simplified event and person property access.
 
@@ -20,25 +31,45 @@ HogQL is our take on SQL (Structured Query Language), a language used to manage 
 
 To use them, select the "HogQL" tab when filtering or breaking down and add your expression.
 
-![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
+<ProductScreenshot
+    imageLight={trendsbreakdownLight} 
+    imageDark={trendsbreakdownDark}
+    alt="HogQL trends breakdown filter" 
+    classes="rounded"
+/>
 
 ## SQL insights
 
 [SQL insights](/docs/product-analytics/sql) enable you to create and edit insights using full SQL queries instead of the UI. Clicking the `{}` button in the top right corner of an insight shows you the SQL schema used to generate the insight which you can edit.
 
-![HogQL SQL insight](../../images/features/hogql/insights-sql.png)
+<ProductScreenshot
+    imageLight={insightsLight} 
+    imageDark={insightsDark}
+    alt="HogQL SQL insight" 
+    classes="rounded"
+/>
 
 ## Event explorer
 
 The [event explorer](https://app.posthog.com/events) replaces the "Live Events" tab in PostHog. It provides more functionality including date filtering, event counts, HogQL queries, [aggregations](#supported-aggregations) and column configuration.
 
-![Event Explorer](../../images/features/hogql/event-explorer.png)
+<ProductVideo
+    videoLight={activityLight} 
+    videoDark={activityDark}
+    alt="Activity" 
+    classes="rounded"
+/>
 
 ## Database
 
 To display all the tables you can query, check out the new "[Database](https://app.posthog.com/data-management/database)" tab under "Data Management".
 
-![Database](../../images/features/hogql/database.png)
+<ProductScreenshot
+    imageLight={databaseLight} 
+    imageDark={databaseDark}
+    alt="Database" 
+    classes="rounded"
+/>
 
 We're working hard on making all these public. Follow along in the [relevant Github issue](https://github.com/PostHog/meta/issues/81), or [send us a support ticket](https://app.posthog.com/home#supportModal) if you want to get access.
 

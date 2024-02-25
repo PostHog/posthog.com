@@ -22,6 +22,20 @@ availability:
             enterprise: true
 ---
 
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import cohortsPageLight from '../../images/features/cohorts/cohorts-page-light-mode.png'
+import cohortsPageDark from '../../images/features/cohorts/cohorts-page-dark-mode.png'
+import staticAndDynamicLight from '../../images/features/cohorts/static-and-dynamic-cohorts-light-mode.png'
+import staticAndDynamicDark from '../../images/features/cohorts/static-and-dynamic-cohorts-dark-mode.png'
+import createDynamicCohortsLight from '../../images/features/cohorts/creating-dynamic-cohorts-light-mode.png'
+import createDynamicCohortsDark from '../../images/features/cohorts/creating-dynamic-cohorts-light-mode.png'
+
+import {ProductVideo} from 'components/ProductVideo'
+import createCohortLight from '../../images/features/cohorts/create-cohort-from-trend-light-mode.mp4'
+import createCohortDark from '../../images/features/cohorts/create-cohort-from-trend-dark-mode.mp4'
+
+
+
 Cohorts enable you to easily create a list of users who have something in common, such as completing an action or having the same property.
 
 Here are a few examples of the cohorts you can create:
@@ -61,7 +75,12 @@ You can create cohorts using data from insights such as trends, [funnels](/docs/
 
 The video below shows how to create a new cohort from a trend, although you can similarly create a cohort from a funnel, user path, or any other insight.
 
-![How to create a cohort from a trend](../../images/features/cohorts/create-cohort-from-trend.mp4)
+<ProductVideo
+    videoLight={createCohortLight} 
+    videoDark={createCohortDark}
+    alt="How to create a cohort from a trend" 
+    classes="rounded"
+/>
 
 ### Method 2: Create a new cohort from the cohorts page
 
@@ -69,13 +88,23 @@ The video below shows how to create a new cohort from a trend, although you can 
 
 **Step 2:** Click '+ New Cohort' on the top right.
 
-![left hand navigation for cohorts](../../images/features/cohorts/cohorts-page.png)
+<ProductScreenshot
+    imageLight={cohortsPageLight} 
+    imageDark={cohortsPageDark}
+    alt="left hand navigation for cohorts" 
+    classes="rounded"
+/>
 
 ## Static vs. dynamic cohorts
 
 When creating a cohort, you'll choose between a static or dynamic cohort:
 
-![two types of cohorts: static and dynamic](../../images/features/cohorts/static-and-dynamic-cohorts.png)
+<ProductScreenshot
+    imageLight={staticAndDynamicLight} 
+    imageDark={staticAndDynamicDark}
+    alt="two types of cohorts: static and dynamic" 
+    classes="rounded"
+/>
 
 ### Static cohorts
 Static cohorts are lists of users that do not change over time. For example, all users who signed up for your app in January 2023. 
@@ -94,7 +123,14 @@ Dynamic cohorts are created by matching users who meet a certain criteria. You c
 - Users based on their lifecycle event. For example, users who have recently stopped performing an event.
 - Users matching other cohorts.
 
-![Different criteria options for creating a dynamic cohort](../../images/features/cohorts/creating-dynamic-cohorts.png)
+<ProductScreenshot
+    imageLight={createDynamicCohortsLight} 
+    imageDark={createDynamicCohortsDark}
+    alt="Different criteria options for creating a dynamic cohort" 
+    classes="rounded"
+/>
+
+
 
 ### Further reading
 

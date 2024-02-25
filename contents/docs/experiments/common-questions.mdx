@@ -1,6 +1,13 @@
 ---
 title: Troubleshooting and FAQs
 ---
+import {ProductVideo} from 'components/ProductVideo'
+import AssignAnOverrideLight from '../../images/features/experiments/assigning-an-override-light-mode.mp4'
+import AssignAnOverrideDark from '../../images/features/experiments/assigning-an-override-dark-mode.mp4'
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReuseFeatureFlagLight from '../../images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png'
+import ReuseFeatureFlagDark from '../../images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png'
 
 ## How do I use an existing feature flag in an experiment?
 
@@ -12,7 +19,12 @@ However, if you insist on doing this (for example, you don't want to make code c
 2. Create a new experiment and give your feature flag the same key as the feature flag you deleted in step 1.
 3. Name the first variant in your new feature flag 'control'.
 
-![Reuse an existing feature flag for an experiment](../../images/features/experiments/reuse-feature-flag-for-experiment.png)
+<ProductScreenshot
+    imageLight = {ReuseFeatureFlagLight}
+    imageDark = {ReuseFeatureFlagDark}
+    alt = "Reuse an existing feature flag for an experiment"
+    classes = "rounded"
+/>
 
 > **Note:** Deleting a flag is equivalent to disabling it, so it is off for however long it takes you to create the draft experiment. The flag is enabled as soon as you create the experiment (not launched).
 
@@ -28,7 +40,12 @@ See our docs on [how to run an experiment without using feature flags](/docs/exp
 
 Once you create the experiment, go to the feature flag, scroll down to "Release Conditions". For each condition, there is an "Optional Override". This enables you to choose a release condition and force all people in this release condition to have the variant chosen in the optional override.
 
-![How to assign an experiment override](../../images/features/experiments/assigning-an-override.mp4)
+<ProductVideo
+    videoLight = {AssignAnOverrideLight}
+    videoDark = {AssignAnOverrideDark}
+    alt = "How to assign an experiment override"
+    classes = "rounded"
+/>
 
 import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx"
 

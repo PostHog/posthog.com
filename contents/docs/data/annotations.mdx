@@ -7,6 +7,12 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import annotationLight from '../../images/features/annotations/annotation-hn-light-mode.png'
+import annotationDark from '../../images/features/annotations/annotation-hn-dark-mode.png'
+import {ProductVideo} from 'components/ProductVideo'
+import createAnnotationLight from '../../images/features/annotations/create-annotation-light-mode.mp4'
+import createAnnotationDark from '../../images/features/annotations/create-annotation-dark-mode.mp4'
 
 Annotations enable you to add written notes to a particular day or time on all your insights and dashboards so you can see how changes or incidents impact your metrics.
 
@@ -16,7 +22,12 @@ You can use annotations to mark things like feature updates, version releases, a
 
 The chart below shows a large spike in website traffic, which has been annotated to explain why that spike occurs. Annotations can be viewed by hovering over them.
 
-![PostHog Annotations](../../images/features/annotations/annotation-hn.png)
+<ProductScreenshot
+    imageLight={annotationLight} 
+    imageDark={annotationDark}
+    alt="PostHog Annotations" 
+    classes="rounded"
+/>
 
 Annotations can be written _after_ the fact, which makes them useful for future reference, or _before_ an event if you want to analyze the future impact of a particular marketing initiative, for example.
 
@@ -26,4 +37,9 @@ When editing a chart in Trends, Sessions or in a Dashboard, hover your cursor ov
 
 With your annotation created, it will now be available at the bottom of your chart, and you can also view all of your existing annotations in `/annotations`.
 
-![How to create an annotation in PostHog](../../images/features/annotations/create-annotation.mp4)
+<ProductVideo
+    videoLight={createAnnotationLight} 
+    videoDark={createAnnotationDark}
+    alt="How to create an annotation in PostHog" 
+    classes="rounded"
+/>

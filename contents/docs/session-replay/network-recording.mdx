@@ -7,14 +7,16 @@ availability:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import ImgReplayConfigLight from '../../images/docs/session-replay/enable-session-replay-in-project-settings.png'
+import ImgSampleConfigLight from '../../images/tutorials/limit-session-recordings/sampling-config-light-mode.png'
+import ImgSampleConfigDark from '../../images/tutorials/limit-session-recordings/sampling-config-dark-mode.png'
 
 PostHog can capture network requests that occur during the browser session, so you can see if your application is sending the expected requests and response, and check the effect of slow network requests or errors on the user experience.
 
 You can enable network recording from your [project settings](https://app.posthog.com/project/settings):
 
 <ProductScreenshot
-    imageLight={ImgReplayConfigLight} 
+    imageLight={ImgSampleConfigLight} 
+    imageDark={ImgSampleConfigDark}
     alt="Enable network recording in your PostHog" 
     classes="rounded"
 />
