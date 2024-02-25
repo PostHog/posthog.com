@@ -15,9 +15,12 @@ import TestSetupDark from '../images/tutorials/flutter-ab-tests/experiment-setup
 
 ## 1. Create a new Flutter app
 
-Our app will have two screens. The first screen will have a button which will take you to a second screen. The second screen will either have a `red` or `green` background color, depending on if the user is in the `control` or `test` variant of our A/B test. The second screen will also have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
+Our app will have two screens:
 
-First, ensure [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) is installed. Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
+1. The first screen will have a button which takes you to a second screen.
+2. The second screen will either have a `red` or `green` background color, depending on whether the user is in the `control` or `test` variant of our A/B test. This screen will also have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
+
+To set this up, first ensure [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) is installed. Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
 
 Select `Empty Application` and name your app `flutter_ab_tests`. Then, replace your code in `lib/main.dart` with the following:
 
@@ -56,7 +59,7 @@ class MainScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FeatureScreenView(isTestVariant: false)), // We update this later
+                  MaterialPageRoute(builder: (context) => const FeatureScreenView(isTestVariant: false)), // We update this later
                 );
               },
             ),
@@ -86,7 +89,7 @@ class FeatureScreenView extends StatelessWidget {
         child: ElevatedButton(
           child: const Text('Click Me!'),
           onPressed: () {
-            // Event capturing will go goe here
+            // Event capturing will go here
           },
         ),
       ),
@@ -111,12 +114,14 @@ To start, install [PostHog’s Flutter SDK](/libraries/flutter) by adding `posth
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^3.3.0
+  posthog_flutter: ^4.0.1
 
 # rest of your code
 ```
 
 Next, we configure PostHog using our project API key and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
+
+### Android setup
 
 For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
 
@@ -127,12 +132,14 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
         <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_api_key>" />
         <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_instance_address>" />
         <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
-        <meta-data android:name="com.posthog.posthog.DEBUG" android:value="false" />
+        <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
     </application>
 </manifest>
 ```
 
-You'll also need to update the minimum Android SDK version to `21` in your `build.gradle`:
+/Users/lior/Desktop/flutter_ab_tests_2/flutter_ab_tests_2/
+
+You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
 
 ```js file=android/app/build.gradle
 // rest of your config
@@ -145,7 +152,17 @@ You'll also need to update the minimum Android SDK version to `21` in your `buil
 // rest of your config
 ```
 
-For iOS, add your PostHog configuration to the `Info.plist file` located in the `ios/Runner` directory:
+You may also need to ensure you're running on the latest Kotlin version. To do this, go to the [Kotlin website](https://kotlinlang.org/docs/releases.html#release-details) to find the latest version number. Then set this version number in the `build.gradle` in the root of your `android` directory (and not the `build.gradle` located in `android/app`):
+
+```js file=android/build.gradle
+buildscript {
+    ext.kotlin_version = '1.9.22' // use the latest Kotlin version number here
+    // rest of config
+```
+
+### iOS setup
+
+For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist file` located in the `ios/Runner` directory:
 
 ```xml ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -163,12 +180,15 @@ For iOS, add your PostHog configuration to the `Info.plist file` located in the 
 </plist>
 ```
 
-Then run `pod init` in your `ios` directory (you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed):
+Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
 
-```bash
-cd ./ios
-pod init
+```yaml ios/Podfile
+platform :ios, '13.0'
+
+# rest of your config
 ```
+
+### Web setup
 
 For Web, add your `Web snippet` (which you can find in [your project settings](https://us.posthog.com/settings/project#snippet)) in the `<body>` of your `web/index.html` file:
 
@@ -265,27 +285,76 @@ Click "Save as draft" and then click "Launch".
 
 The final step is to add the experiment code. We'll add code that does the following:
 
-1. Fetch the `my-cool-experiment` flag.
+1. Fetch the `my-cool-experiment` flag using [`await Posthog().getFeatureFlag('my-cool-experiment')`](/docs/libraries/flutter#multivariate-feature-flags).
 2. Change the background color of `FeatureScreenView` based on the value of the flag (`control` or `test`).
 
-To do this, update the code in `ContentView.swift` with the following:
+To do this, update the code in `main.dart` to the following:
 
 ```dart
 import 'package:flutter/material.dart';
 import 'feature_screen_view.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
+void main() {
+  runApp(const MyApp());
+}
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Flutter A/B Test App',
+      home: MainScreen(),
+    );
+  }
+}
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
+  void _getFeatureFlagAndNavigate(BuildContext context) {
+    _fetchFeatureFlagValue((isTestVariant) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FeatureScreenView(isTestVariant: isTestVariant)),
+      );
+    });
+  }
+
+ void _fetchFeatureFlagValue(Function(bool) onFlagFetched) async {
+    String featureFlagValue = await Posthog().getFeatureFlag('my-cool-experiment') as String;
+    bool isTestVariant = featureFlagValue == 'test';
+    onFlagFetched(isTestVariant);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Main Screen')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('Hello, world!'),
+            ElevatedButton(
+              child: const Text('Go to Next Screen'),
+              onPressed: () => _getFeatureFlagAndNavigate(context),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 ```
 
 That's it! Your A/B test is now ready. When you run your app, you see either green or red as the background color of `FeatureScreenView` and PostHog will capture button clicks for each variant to calculate if changing the color has a statistically significant impact.
-
-If you want to test both variants of your experiment to make sure they are working correctly, you can add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag.
 
 Lastly, you can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
 
 ## Further reading
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
+- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
