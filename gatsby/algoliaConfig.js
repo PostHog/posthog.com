@@ -112,6 +112,7 @@ module.exports = {
                                   resolvedBy {
                                     body
                                   }
+                                  resolved
                                   permalink
                                   internal {
                                     contentDigest
