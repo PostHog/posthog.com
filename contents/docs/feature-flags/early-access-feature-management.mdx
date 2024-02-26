@@ -53,7 +53,8 @@ You can fully customize your early access management experience using `getEarlyA
 
 - `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, and documentation link. You can use this to build a UI for users to opt in or out of features.
 
-> *Note:* The list of available rarly access features is cached per browser load, so if you have a browser open and create a new one, you wouldn't see it in your list until you refresh. However, if you want the latest early access features always available, `getEarlyAccessFeatures` takes a second force_reload parameter which makes a network request to get the list. You generally don't want this because it can slow down opening the features list, and the cached value persists only until browser reload, so it refreshes automatically on browser refresh.
+> *Note:* Available early access features are cached per browser load. This means if you have a browser open and create a new early access feature, you wouldn't see it until you refresh. 
+> If you want the latest values always available, include the `force_reload` parameter in your `getEarlyAccessFeatures` call. This makes a network request to get the updated list instead of using the cache. The downside is that this can delay when early access features are available on load.
 
 
 ```react
