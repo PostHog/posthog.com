@@ -8,33 +8,52 @@ availability:
     enterprise: full
 ---
 
-HogQL expressions enable you to directly access, modify, and aggregate data in PostHog using SQL. You can use them nearly everywhere where event filters exist, including:
+HogQL expressions enable you to directly access, modify, and aggregate data in many places in PostHog including:
 
-- [Dashboards](/docs/product-analytics/dashboards)
-- Data series
+- Filters
+- Trends series
 - Breakdowns
-- [Funnels](/docs/product-analytics/funnels)
+- [Funnel](/docs/product-analytics/funnels) aggregations
+- [User paths](/docs/product-analytics/paths)
+- Session replays
+- [Dashboards](/docs/product-analytics/dashboards)
 - The activity tab
 
 ![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
+
+## Accessible data
 
 HogQL expressions can access data like:
 
 - event properties
 - [person properties](/docs/product-analytics/user-properties)
 - `event`
-- `elements_chain`
+- `elements_chain` (from autocapture)
 - `timestamp`
 - `distinct_id`
 - `person_id`
 
-They then use SQL functions to access, filter, modify, or aggregate the data. A full list of SQL functions are found in our [supported ClickHouse functions](/docs/hogql/clickhouse-functions) and [supported aggregations](/docs/hogql/aggregations) docs.
+Properties can be accessed with dot notation like `person.properties.$initial_browser` which also work on nested or JSON properties. 
+
+> **Note:** PostHog's properties include always include `$` as a prefix, while custom properties do not (unless you add it).
+
+Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.
+
+### Types
+
+All the types for event and person properties are listed beside them in your [data warehouse tab](https://us.posthog.com/data-warehouse). By default, properties are strings (and might require conversion). For example, the expression works because `$screen_width` and `$screen_height` are both defined as numeric properties, and therefore, you can multiply them:
+
+```sql
+round(properties.$screen_width * properties.$screen_height / 1000000, 2)
+```
+
+To cast a string property into a different type, use type conversion functions, such as `toFloat()`.
+
+## Functions and aggregations
+
+You can filter, modify, or aggreate accessed data with [supported ClickHouse functions](/docs/hogql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
 
 > **Tip:** If you're having trouble getting results from your expression, try debugging by using a different visualization (trends table often works best as it shows all values returned) or breaking down your expression into pieces and testing each one.
-
-## Useful functions
-
-To help you get the most out of HogQL expressions, here are some of the most popular functions.
 
 ### Comparisons
 
