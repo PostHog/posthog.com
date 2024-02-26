@@ -14,7 +14,7 @@ import DataWarehouseDark from '../../images/features/data-warehouse/dw-dark.png'
 import QueryLight from '../../images/features/data-warehouse/query-light.png'
 import QueryDark from '../../images/features/data-warehouse/query-dark.png'
 
-To see all of the sourcs available to query, go to the [data warehouse tab](https://us.posthog.com/data-warehouse). This page shows all the external and PostHog tables you can query through [SQL insights](/docs/product-analytics/sql) along with saved views. Click on any of the tables, and then click "Query" to open an SQL insight.
+To see all of the sources available to query, go to the [data warehouse tab](https://us.posthog.com/data-warehouse). This page shows all the external and PostHog tables you can query through [SQL insights](/docs/product-analytics/sql) along with saved views. Click on any of the tables, and then click "Query" to open an SQL insight.
 
 <ProductScreenshot
   imageLight={DataWarehouseLight} 
@@ -55,7 +55,7 @@ GROUP BY distinct_id
 ORDER BY event_count DESC
 ```
 
-You can also use an `JOIN` such as `INNER JOIN` or `LEFT JOIN` to combine data. For example, to get a count of events for your Stripe customers you can `INNER JOIN` on `distinct_id` and `email` like this:
+You can also use a `JOIN` such as `INNER JOIN` or `LEFT JOIN` to combine data. For example, to get a count of events for your Stripe customers you can `INNER JOIN` on `distinct_id` and `email` like this:
 
 ```SQL
 SELECT events.distinct_id, COUNT() AS event_count
