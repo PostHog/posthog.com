@@ -51,7 +51,7 @@ To cast a string property into a different type, use type conversion functions, 
 
 ## Functions and aggregations
 
-You can filter, modify, or aggreate accessed data with [supported ClickHouse functions](/docs/hogql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
+You can filter, modify, or aggregate accessed data with [supported ClickHouse functions](/docs/hogql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
 
 > **Tip:** If you're having trouble getting results from your expression, try debugging by using a different visualization (trends table often works best as it shows all values returned) or breaking down your expression into pieces and testing each one.
 
