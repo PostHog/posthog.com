@@ -54,6 +54,15 @@ You can call `getActiveMatchingSurveys` in your browser console to see which sur
 posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
 ```
 
+### How are users responding multiple times to the same survey, despite setting wait period?
+
+The survey wait period is set locally on the client. This means, if they clear cookies / local storage, or change browsers, the same user can see the survey multiple times.
+
+Whenever someone responds to, or dismisses a survey, we add a user property. For now, you can use this property to exclude users from targeting by adding these properties to your existing conditions, like so:
+
+
+
+
 ### Why am I getting a feature flags error on my survey?
 
 If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for user property targeting.
