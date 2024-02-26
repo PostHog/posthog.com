@@ -15,7 +15,7 @@ The PostHog data warehouse enables you to link your most important data into Pos
 
 You can link a source to PostHog by either using one of our pre-built connectors or by creating a custom source.
 
-> The data warehouse is current in beta. To access it, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your instance. It is free to use during the beta period.
+> The data warehouse is currently in beta. To access it, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your instance. It is free to use during the beta period.
 
 ## Stripe
 
@@ -54,9 +54,9 @@ To link Postgres:
 2. Click "Link Source" and select Postgres
 3. Enter your database connection details:
     - **Host:** The hostname or IP your database server like `db.example.com` or `192.168.1.100`.
-    - **Port:** The port your database server is listening. The default is `5432`.
+    - **Port:** The port your database server is listening to. The default is `5432`.
     - **Database:** The name of the database you want like `analytics_db`.
-    - **User:** The username with the necessary permissions toa access the database.
+    - **User:** The username with the necessary permissions to access the database.
     - **Password:** The password for the user.
     - **Schema:** The schema for your database where your tables are located. The default is `public`.
 4. Click "Link"
@@ -105,7 +105,7 @@ Next, we need to create a new user in our AWS console with programmatic access t
 6. Click "Next" until you end up on the "Review Policy" page
 7. Give your policy a name and click "Create policy"
 
-The final step to create a new user and give them access to our bucket by attaching our newly created policy.
+The final step is to create a new user and give them access to our bucket by attaching our newly created policy.
 
 1. Open [IAM](https://console.aws.amazon.com/iam/home) and navigate to "Users" on the left
 2. Click "Add Users"
