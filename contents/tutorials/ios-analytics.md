@@ -22,7 +22,7 @@ Our app will have two screens:
 - a `login` screen with a form to enter in your name, email, and company name.
 - a `home` screen with submit button, toggle, and logout button.
 
-The first step is to create a new app. Open XCode and click "Create new project". Select iOS as your platform, then "App" and press next. Give your app a name, select `SwiftUI` as the interface, and the defaults for everything else. Click next and then "Create".
+The first step is to create a new app. Open Xcode and click "Create new project". Select iOS as your platform, then "App" and press next. Give your app a name (we chose `ios_analytics`), select `SwiftUI` as the interface, and the defaults for everything else. Click next and then "Create".
 
 Then, replace your code in `ContentView.swift` with the following:
 
@@ -103,6 +103,10 @@ struct HomeView: View {
         }
         .padding()
     }
+}
+
+#Preview {
+    ContentView()
 }
 ```
 
@@ -225,7 +229,11 @@ To test this, press logout, fill the form in and press login. Then, in the home 
 />
 
 Lastly, when the user logs out, you should call [`PostHogSDK.shared.reset()`](https://posthog.com/docs/libraries/ios#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
-
+```swift file=ContentView.swift
+     Button("Logout") {
+                isAuthenticated = false
+                PostHogSDK.shared.reset()
+            }
 ### Capturing group analytics
 
 [Groups](/docs/product-analytics/group-analytics) are a powerful feature in PostHog that aggregate events based on entities, such as organizations or companies. This is especially helpful for B2B SaaS apps, where often you want to view insights such as `number of active companies` or `company churn rate`.
