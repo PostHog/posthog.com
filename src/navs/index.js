@@ -271,6 +271,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/billing',
                     },
                     {
+                        name: 'Automations',
+                        url: '/handbook/growth/sales/automations',
+                    },
+                    {
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
@@ -1811,7 +1815,7 @@ export const docsMenu = {
                     name: 'Analysis views',
                 },
                 {
-                    name: 'Graphs & trends',
+                    name: 'Trends',
                     url: '/docs/product-analytics/trends',
                     icon: 'IconGraph',
                     color: 'blue',
@@ -1983,12 +1987,6 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Console log recording',
-                    url: '/docs/session-replay/console-log-recording',
-                    icon: 'IconCode',
-                    color: 'red',
-                },
-                {
                     name: 'Network performance',
                     url: '/docs/session-replay/network-recording',
                     icon: 'IconDashboard',
@@ -2027,6 +2025,18 @@ export const docsMenu = {
                     url: '/docs/session-replay/iframes',
                     icon: 'IconCode',
                     color: 'salmon',
+                },
+                {
+                    name: 'Console log recording',
+                    url: '/docs/session-replay/console-log-recording',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Canvas recording',
+                    url: '/docs/session-replay/canvas-recording',
+                    icon: 'IconPalette',
+                    color: 'blue',
                 },
             ],
         },

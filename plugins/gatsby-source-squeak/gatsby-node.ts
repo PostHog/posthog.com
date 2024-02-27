@@ -93,13 +93,16 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 topics: {
                     fields: ['id'],
                 },
+                resolvedBy: {
+                    fields: ['id'],
+                },
             },
         })
 
         const questions = await fetch(`${apiHost}/api/questions?${questionQuery}`).then((res) => res.json())
 
         for (let question of questions.data) {
-            const { topics, replies, profile, ...rest } = question.attributes
+            const { topics, replies, profile, resolvedBy, ...rest } = question.attributes
 
             if (!profile.data?.id) {
                 console.warn(`Question ${question.id} has no profile`)
@@ -124,6 +127,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     id: createNodeId(`squeak-topic-${topic.id}`),
                 })),
                 ...rest,
+                resolvedBy: createNodeId(`squeak-reply-${resolvedBy?.data?.id}`),
             })
 
             for (let reply of filteredReplies) {
@@ -215,6 +219,12 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             populate: {
                 roadmaps: {
                     fields: ['id'],
+                },
+                profiles: {
+                    populate: '*',
+                },
+                leadProfiles: {
+                    fields: 'id',
                 },
             },
         },
@@ -359,6 +369,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             profile: SqueakProfile! @link(by: "id", from: "profile.id")
             replies: [SqueakReply!] @link(by: "id", from: "replies.id")
             topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
+            resolvedBy: SqueakReply @link(by: "id")
         }
 
         type SqueakReply implements Node {
@@ -389,7 +400,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             id: ID!
             squeakId: Int!
             name: String!
-            profiles: [SqueakProfile!] @link(by: "id", from: "profiles.id")
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
         }
 
