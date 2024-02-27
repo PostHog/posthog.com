@@ -215,7 +215,7 @@ export default function Apply({ id, info }) {
         }, 3000)
     }
 
-    return !submitted ? (
+    return submitted ? (
         <>
             <Modal open={modalOpen} setOpen={setModalOpen}>
                 <div className="fixed inset-0">
@@ -223,7 +223,7 @@ export default function Apply({ id, info }) {
                 </div>
                 <div onClick={() => setModalOpen(false)} className="flex flex-start justify-center absolute w-full p-4">
                     <div
-                        className="max-w-xl bg-white dark:bg-black rounded-md relative"
+                        className="max-w-xl bg-white dark:bg-dark rounded-md relative"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -275,7 +275,7 @@ export default function Apply({ id, info }) {
                             <p className="m-0 mb-3 text-sm">
                                 This code is our token of appreciation for taking the time to apply.
                             </p>
-                            <div className="rounded-md bg-tan dark:bg-primary  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
+                            <div className="rounded-md bg-tan dark:bg-accent-dark border border-light dark:border-dark  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}
