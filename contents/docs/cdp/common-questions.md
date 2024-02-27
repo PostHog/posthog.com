@@ -5,7 +5,7 @@ title: Troubleshooting and FAQs
 ## My app isn't working, what do I do?
 
 1. Checking that the app is enabled with the correct configuration options in the [data pipeline tab](https://us.posthog.com/apps). You can find the correct configuration options in the [app's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
-2. Click "Logs & metrics" and go to the `processEvent metrics` tab to check that the app is processing events without errors.
+2. Click "Logs & metrics" and go to the `Metrics` tab to check that the app is processing events without errors.
 3. Check the `Logs` tab to see if there are any errors.
 4. Go to the data management tab to check if there any [ingestion warnings](https://us.posthog.com/data-management/ingestion-warnings).
 5. If the app relates to an external service, check that the external service is working correctly. Make a request to the relevant API endpoint or use a tool like [webhook.site](https://webhook.site/).
@@ -28,9 +28,28 @@ There are a few ways to capture a user doing an event for the first time. We cov
 - Use a custom event to set a [person](/docs/getting-started/user-properties) or [event property](/docs/data/events). For example, you can set a `first_seen` property with the `$set_once` option.
 - Use [HogQL](/docs/product-analytics/sql) to query for the `min(timestamp)` of an event.
 
-## How do I migrate 20M+ events or rows into PostHog?
+## How do I migrate events or rows into PostHog?
 
 If you're migrating a large amount of data (20 million rows or 10k requests per minute), please contact [sales@posthog.com](mailto:sales@posthog.com) to make sure you aren't rate limited.
+
+When you do a migration, be sure to set the `historical_migration` value to `true` like this:
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "historical_migration": true,
+  "batch": [
+    {
+      "event": "batched_event_name_1",
+      "properties": {
+        "distinct_id": "user distinct id",
+      },
+      "timestamp": "[optional timestamp in ISO 8601 format]"
+    }
+    # ...
+  ]
+}' https://app.posthog.com/batch/ 
+\```
 
 See [our migration docs](/docs/migrate/ingest-historic-data) for more information.
 
