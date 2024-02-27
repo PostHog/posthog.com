@@ -420,6 +420,14 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
+                                to="/docs/privacy/hipaa-compliance"
+                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                            >
+                                HIPAA
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
                                 to="/privacy"
                                 className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
                             >

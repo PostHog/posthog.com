@@ -10,7 +10,8 @@ tags:
   - Growth engineering
   - Growth
 crosspost:
-  - Founders  
+  - Founders
+  - Blog  
 ---
 
 Stuck metrics. Missed KPIs. Burnt out engineers. These are the telltale signs of a growth team in crisis. But how do you fix it?

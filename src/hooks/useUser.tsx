@@ -277,6 +277,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             roadmapLikes: {
                                 fields: ['id'],
                             },
+                            teams: {
+                                fields: ['id'],
+                            },
                         },
                     },
                     role: {

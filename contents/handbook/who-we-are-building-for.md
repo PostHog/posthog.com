@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-AKA our 'ideal customer profile' or ICP.
+AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework) or ICP.
 
 We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most loved products** at **high-growth startups**. We focus specifically on the **product-engineers** (full-stack engineers skewed towards the frontend), but it should be usable by everyone in the product team.
 

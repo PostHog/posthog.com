@@ -8,6 +8,8 @@ tags:
  - Feature flags
  - Feature management
  - Product engineers
+crosspost:
+  - Blog 
 ---
 
 Sometimes you want to change the behavior of your app without changing the code. Both feature flags and configurations are options for doing this. This guide explains each method, and how to choose the right one for your use case.

@@ -12,6 +12,7 @@ tags:
   - Culture
 crosspost:
   - Product engineers
+  - Blog
 ---
 
 Clearly there are exceptions, but we ship a lot faster than the average company.
