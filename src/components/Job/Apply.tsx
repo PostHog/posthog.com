@@ -11,6 +11,7 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import { Close } from 'components/NotProductIcons'
 import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
+import { IconExternal } from '@posthog/icons'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -222,7 +223,7 @@ export default function Apply({ id, info }) {
                 </div>
                 <div onClick={() => setModalOpen(false)} className="flex flex-start justify-center absolute w-full p-4">
                     <div
-                        className="max-w-xl bg-white dark:bg-black rounded-md relative"
+                        className="max-w-xl bg-white dark:bg-dark rounded-md relative"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -274,7 +275,7 @@ export default function Apply({ id, info }) {
                             <p className="m-0 mb-3 text-sm">
                                 This code is our token of appreciation for taking the time to apply.
                             </p>
-                            <div className="rounded-md bg-tan dark:bg-primary  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
+                            <div className="rounded-md bg-tan dark:bg-accent-dark border border-light dark:border-dark  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}
@@ -321,12 +322,13 @@ export default function Apply({ id, info }) {
                                 </button>
                             </div>
                             <CallToAction
-                                external
+                                externalNoIcon
                                 to="https://merch.posthog.com/discount/X7DABDB33723?redirect=%2Fproducts%2Fposthog-sticker"
                                 size="sm"
                                 className="!w-full"
                             >
-                                Visit merch store
+                                <span>Visit merch store</span>
+                                <IconExternal className="w-5 h-5 inline-block ml-1" />
                             </CallToAction>
                         </div>
 
