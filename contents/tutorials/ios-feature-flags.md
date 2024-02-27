@@ -180,4 +180,4 @@ That's it! When you restart your app and click the button, you should see the gr
 
 - [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
 - [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
-- [How to run A/B tests in Android](/tutorials/android-ab-tests)
+- [How to set up analytics in iOS](/tutorials/ios-analytics)
