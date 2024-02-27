@@ -209,7 +209,7 @@ export const CTA = () => {
     )
 }
 
-const allProductsData = graphql`
+export const allProductsData = graphql`
     query GetAllProductData {
         allProductData {
             nodes {

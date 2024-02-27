@@ -13,25 +13,15 @@ import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
-import Plans, { CTA } from './Plans'
+import Plans, { CTA as PlanCTA, allProductsData } from './Plans'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
-import { GitHub } from 'components/Icons'
-import {
-    IconCheck,
-    IconGraph,
-    IconChevronDown,
-    IconRewindPlay,
-    IconToggle,
-    IconFlask,
-    IconMessage,
-    IconInfo,
-    IconArrowRight,
-    IconShield,
-    IconArrowRightDown,
-} from '@posthog/icons'
+import CTA from 'components/Home/CTA.js'
+import { IconCheck, IconChevronDown, IconInfo, IconShield, IconArrowRightDown } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
+import { useStaticQuery } from 'gatsby'
+import { BillingProductV2Type } from 'types'
 
 interface PlanData {
     title: string
@@ -134,7 +124,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
                     ))}
                 </ul>
                 <div className="mt-auto">
-                    <CTA width="full" />
+                    <PlanCTA width="full" />
                 </div>
             </div>
         </div>
@@ -237,6 +227,11 @@ const Pricing = (): JSX.Element => {
     const [groupsToShow, setGroupsToShow] = useState<undefined | string[]>()
     const [currentProduct, setCurrentProduct] = useState<string | null>()
     const products = useProducts()
+    const {
+        allProductData: {
+            nodes: [{ products: billingProducts }],
+        },
+    } = useStaticQuery(allProductsData)
 
     const getGroupsToShow = (): string[] | undefined => {
         const product = new URLSearchParams(search).get('product')
@@ -281,13 +276,16 @@ const Pricing = (): JSX.Element => {
                             </div>
                         </div>
                         <div className="md:order-1">
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">product.name pricing</h1>
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
+                                {billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct).name}{' '}
+                                pricing
+                            </h1>
                             <p className="text-base font-medium opacity-60 leading-tight mb-4">
                                 Use PostHog free forever (with generous usage limits).{' '}
                                 <br className="hidden lg:block" />
                                 Or add a card and get unrestricted access to everything.
                             </p>
-                            <CTA />
+                            <PlanCTA />
                         </div>
                     </div>
                 </section>
@@ -337,7 +335,7 @@ const Pricing = (): JSX.Element => {
                                 <p className="text-base font-medium opacity-60 leading-tight">
                                     Starts at $0/mo with a generous free tier.
                                 </p>
-                                <CTA />
+                                <PlanCTA />
                             </div>
                             <div className="col-span-7">
                                 <div className="@container border border-light dark:border-dark @lg:p-4 rounded-md bg-white dark:bg-accent-dark">
@@ -376,7 +374,7 @@ const Pricing = (): JSX.Element => {
                                                         className="py-1 px-2 @lg:!p-0 border-b border-light dark:border-dark @lg:border-transparent dark:@lg:border-transparent"
                                                     >
                                                         <Link
-                                                            to={product.slug}
+                                                            to={`/pricing?product=${product.slug}`}
                                                             className="group grid grid-cols-8 @lg:grid-cols-16 items-center text-primary dark:text-primary-dark rounded hover:text-primary dark:hover:text-primary-dark p-2 @lg:px-2 @lg:py-1 @lg:rounded hover:bg-light dark:hover:bg-dark relative hover:scale-[1.005] active:scale-[.995] active:top-[.0125px]"
                                                         >
                                                             <div className="col-span-7 @lg:col-span-6 flex gap-2 items-center @lg:pl-1 mb-1 @lg:mb-0">
@@ -591,38 +589,21 @@ const Pricing = (): JSX.Element => {
 
                     <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                         <div className="grid md:grid-cols-2 gap-6 md:gap-12">
-                            <div className="bg-accent dark:bg-accent-dark rounded p-8">
-                                <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
-                                    <span>
-                                        <GitHub />
-                                    </span>
-                                    <span>PostHog open source</span>
-                                </h2>
-                                <p className="mb-3">
-                                    <em>The project that started it all...</em>
-                                </p>
-                                <ul className="pb-4 flex flex-col gap-2">
-                                    <li className="text-[15px]">Deploy with Docker on your own server</li>
-                                    <li className="text-[15px]">Made for hobby projects with &lt;100k events/month</li>
-                                    <li className="text-[15px]">
-                                        Great for internal tools or evaluating without vendor approvals
-                                    </li>
-                                    <li className="text-[15px]">MIT license, no support, BYOEngineers!</li>
-                                </ul>
-                                <CallToAction
-                                    size="sm"
-                                    type="secondary"
-                                    className="mt-auto self-start sm:w-auto"
-                                    to="/docs/self-host"
-                                >
-                                    Read the docs
-                                </CallToAction>
-                            </div>
                             <div className="p-8">
                                 <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
                                     <span>Discounts</span>
                                 </h2>
                                 <ul className="list-none pl-2 flex flex-col gap-8">
+                                    <li>
+                                        <div className="flex items-center gap-2">
+                                            <IconShield className="w-7 h-7 opacity-75" />
+                                            <strong>Annual payment</strong>
+                                        </div>
+                                        <p className="pl-9 text-[15px] mb-2">
+                                            <b>20% off</b> for customers who pay annually. Available for customers
+                                            spending over $2k/mo. Get in touch through the app after signing up.
+                                        </p>
+                                    </li>
                                     <li>
                                         <div className="flex items-center gap-2">
                                             <IconShield className="w-7 h-7 opacity-75" />
@@ -655,6 +636,9 @@ const Pricing = (): JSX.Element => {
                                 </ul>
                             </div>
                         </div>
+                    </section>
+                    <section>
+                        <CTA />
                     </section>
 
                     <section className={`${section} mb-12 mt-12 md:px-4`}>
