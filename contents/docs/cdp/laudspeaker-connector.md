@@ -26,25 +26,25 @@ After configuring PostHog within Laudspeaker, you can install the Laudspeaker Co
 1. Log in to your PostHog instance
 2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Laudspeaker'
-4. Select the app, press 'Install'
+4. Select the destination, press 'Install'
 
-To configure the app, you must provide the app with your API for `write-key`. This can be found in the 'Settings' section of Laudspeaker and should be copied into the Laudspeaker configuration in PostHog. 
+To configure the destination, you must provide the destination with your API for `write-key`. This can be found in the 'Settings' section of Laudspeaker and should be copied into the Laudspeaker configuration in PostHog. 
 
-Finally, you must provide (in PostHog) `[your_server's_url]/events/posthog` for `Lauspeaker URL` (or, if using a Laudspeaker hosted plan, `app.laudspeaker.com/events/posthog`). When this is entered, enable the app in PostHog. 
+Finally, you must provide (in PostHog) `[your_server's_url]/events/posthog` for `Lauspeaker URL` (or, if using a Laudspeaker hosted plan, `app.laudspeaker.com/events/posthog`). When this is entered, enable the destination in PostHog. 
 
 Other fields (email, phone number, custom) are optional and can be specified if you want to be able to message people from PostHog through those channels with Laudspeaker
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this destination available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-laudspeaker-app) is available on GitHub.
+PostHog is open-source and so are all destinations on the platform. The [source code](https://github.com/PostHog/posthog-laudspeaker-app) is available on GitHub.
 
-### Who maintains this app?
+### Who maintains this destination?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this destination?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

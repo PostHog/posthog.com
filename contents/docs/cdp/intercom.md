@@ -18,8 +18,8 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Intercom' and select the app, press 'Install'.
-3. Follow the steps below to configure the app.
+2. Search for 'Intercom' and select the destination, press 'Install'.
+3. Follow the steps below to configure the destination.
 
 > **Important:** Only events that have an `email` property will be sent to Intercom. For more information on how to configure this, take a look at [this section](#setting-up-tracking).
 
@@ -56,15 +56,15 @@ If you are using a different SDK, you'll need to manually the `email` property f
 
 ## FAQ
 
-### Who created this app?
+### Who created this destination?
 
-We'd like to thank PostHog team member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this app. Thank you, Emanuele!
+We'd like to thank PostHog team member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this destination. Thank you, Emanuele!
 
-### Who maintains this app?
+### Who maintains this destination?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this destination?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

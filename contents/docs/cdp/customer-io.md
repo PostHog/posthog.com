@@ -51,19 +51,19 @@ posthog.capture(
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this destination available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/customerio-plugin) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/customerio-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this destination?
 
 We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), [Michael Matloka](https://github.com/Twixes) and community members [Angela Purcell](https://github.com/purcell3a), [Conrad Kurth](https://github.com/ConradKurth) and [Alberto S](https://github.com/albtsantos) for creating this.
 
-### Who maintains this app?
+### Who maintains this destination?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This destination is maintained by PostHog. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this destination?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

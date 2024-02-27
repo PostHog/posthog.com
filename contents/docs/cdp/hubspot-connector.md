@@ -30,7 +30,7 @@ Currently, this integration supports sending the following data to Hubspot:
 
 This information can be sent whenever an `$identify` event occurs in PostHog.
 
-No other information can currently be sent to PostHog using this app. If this app exists in a chain where the above information would be filtered out (for example, by using the Property Filter app) then filtered information cannot be sent to Hubspot.
+No other information can currently be sent to PostHog using this destination. If this destination exists in a chain where the above information would be filtered out (for example, by using the Property Filter app) then filtered information cannot be sent to Hubspot.
 
 ## Configuration
 
@@ -38,20 +38,20 @@ No other information can currently be sent to PostHog using this app. If this ap
 
 ## FAQ
 
-### How do I install the Hubspot app on PostHog?
+### How do I install the Hubspot destination on PostHog?
 
 1. Log in to your PostHog instance
 2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Hubspot'
-4. Select the app, press 'Install' and follow the on-screen instructions
+4. Select the destination, press 'Install' and follow the on-screen instructions
 
-### Is the source code for this app available?
+### Is the source code for this destination available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/hubspot-plugin) is available on GitHub.
+PostHog is open-source and so are all destinations on the platform. The [source code](https://github.com/PostHog/hubspot-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this destination?
 
-A lot of people contributed to this app! We'd like to thank...
+A lot of people contributed to this destination! We'd like to thank...
 
 -   [Kunal](https://github.com/kpthatsme)
 -   [Yakko Majuri](https://github.com/yakkomajuri)
@@ -63,11 +63,11 @@ A lot of people contributed to this app! We'd like to thank...
 
 For creating this. Thanks, all!
 
-### Who maintains this app?
+### Who maintains this destination?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This destination is maintained by PostHog. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this destination?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 
