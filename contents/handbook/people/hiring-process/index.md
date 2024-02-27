@@ -25,9 +25,7 @@ This has resulted in the highest number of qualified and motivated candidates re
 ## Hiring Process
 
 ### Summary of process for current live roles
-*There are no current openings at the moment, feel free to check back in. 
-
-Tasks are only available internally - please do not share these publicly. 
+Please check [our careers page](/careers) for any live roles. 
 
 ### External recruiters
 
