@@ -11,6 +11,7 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import { Close } from 'components/NotProductIcons'
 import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
+import { IconExternal } from '@posthog/icons'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -214,7 +215,7 @@ export default function Apply({ id, info }) {
         }, 3000)
     }
 
-    return submitted ? (
+    return !submitted ? (
         <>
             <Modal open={modalOpen} setOpen={setModalOpen}>
                 <div className="fixed inset-0">
@@ -321,12 +322,13 @@ export default function Apply({ id, info }) {
                                 </button>
                             </div>
                             <CallToAction
-                                external
+                                externalNoIcon
                                 to="https://merch.posthog.com/discount/X7DABDB33723?redirect=%2Fproducts%2Fposthog-sticker"
                                 size="sm"
                                 className="!w-full"
                             >
-                                Visit merch store
+                                <span>Visit merch store</span>
+                                <IconExternal className="w-5 h-5 inline-block ml-1" />
                             </CallToAction>
                         </div>
 
