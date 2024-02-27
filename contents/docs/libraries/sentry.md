@@ -11,10 +11,7 @@ Our Sentry integration is a two-way integration which works on Javascript & Pyth
 
 This way, debugging issues becomes a lot easier, and you can also correlate error data with your product metrics.
 
-
-If you're looking for the PostHog + Sentry integration for Python, please check out the [Python docs](/docs/integrate/server/python#sentry).
-
-# Javascript integration
+> If you're looking for the PostHog + Sentry integration for Python, please check out the [Python docs](/docs/integrate/server/python#sentry).
 
 ## Installation
 
@@ -35,7 +32,7 @@ Sentry.init({
 })
 ```
 
-## Usage
+### Usage
 
 In PostHog, you'll now have `$exception` events, which have a "Sentry URL" link to take you to the exception:
 
@@ -43,5 +40,5 @@ In PostHog, you'll now have `$exception` events, which have a "Sentry URL" link 
 
 From Sentry you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.
 
-
 ![PostHog user profile URL in Sentry](../../images/sentry_exception.png)
+

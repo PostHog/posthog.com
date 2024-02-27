@@ -1171,6 +1171,10 @@ export const docsMenu = {
                             url: '/docs/libraries/nuxt-js',
                         },
                         {
+                            name: 'n8n',
+                            url: '/docs/libraries/n8n',
+                        },
+                        {
                             name: 'Remix',
                             url: '/tutorials/remix-analytics',
                         },
@@ -1213,6 +1217,10 @@ export const docsMenu = {
                         {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/libraries/zendesk',
                         },
                     ],
                 },
@@ -2267,21 +2275,19 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'CDP',
+                    name: 'Overview',
                     url: '/docs/cdp',
+                    icon: 'IconHome',
                 },
                 {
                     name: 'Batch exports',
-                    url: '',
+                    url: '/docs/cdp/batch-exports',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                    icon: 'IconShare',
                     children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/batch-exports',
-                        },
                         {
                             name: 'Amazon S3',
                             url: '/docs/cdp/batch-exports/s3',
@@ -2305,40 +2311,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Sources',
-                    url: '',
-                    children: [
-                        {
-                            url: '/docs/cdp/segment',
-                            name: 'Segment',
-                        },
-                        {
-                            url: '/docs/cdp/replicator',
-                            name: 'Event Replicator',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            url: '/docs/cdp/n8n',
-                            name: 'n8n',
-                        },
-                        {
-                            url: '/docs/cdp/rudderstack-import',
-                            name: 'Rudderstack',
-                        },
-                        {
-                            url: '/docs/cdp/sentry-connector',
-                            name: 'Sentry',
-                        },
-                        {
-                            url: '/docs/cdp/zendesk-connector',
-                            name: 'Zendesk',
-                        },
-                    ],
-                },
-                {
                     name: 'Destinations',
                     url: '',
                     children: [
@@ -2347,24 +2319,8 @@ export const docsMenu = {
                             name: 'Airbyte',
                         },
                         {
-                            url: '/docs/cdp/s3-export',
-                            name: 'Amazon S3',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/avo-inspector',
                             name: 'Avo',
-                        },
-                        {
-                            url: '/docs/cdp/bigquery-export',
-                            name: 'BigQuery',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
                         },
                         {
                             url: '/docs/cdp/customer-io',
@@ -2395,14 +2351,6 @@ export const docsMenu = {
                             name: 'Intercom',
                         },
                         {
-                            url: '/docs/cdp/postgres-export',
-                            name: 'PostgreSQL',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/rudderstack-export',
                             name: 'RudderStack',
                         },
@@ -2419,14 +2367,6 @@ export const docsMenu = {
                             name: 'Sentry',
                         },
                         {
-                            url: '/docs/cdp/snowflake-export',
-                            name: 'Snowflake',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/twilio',
                             name: 'Twilio',
                         },
@@ -2441,7 +2381,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Ingestion filtering',
+                    name: 'Filtering',
                     url: '',
                     children: [
                         {
@@ -2471,7 +2411,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Event transformation',
+                    name: 'Transformation',
                     url: '',
                     children: [
                         {
@@ -2493,13 +2433,10 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Build a data connection',
-                    url: '',
+                    name: 'Build an app',
+                    url: '/docs/cdp/build',
+                    icon: 'IconGraduationCap',
                     children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/build',
-                        },
                         {
                             name: 'Tutorial',
                             url: '/docs/cdp/build/tutorial',

@@ -28,3 +28,17 @@ For more information see the [RudderStack guide for setting up PostHog](https://
 Once you have set up RudderStack and PostHog, you can use RudderStack to send events to PostHog. You can send events through the RudderStack API, or one of the RudderStack libraries. For example, with javascript you can use the `analytics.track('Event Name')` function which will send the events to your RudderStack destinations including PostHog.
 
 For the full list of functions see the relevant SDK docs e.g. the [Javascript SDK](https://www.rudderstack.com/docs/sources/event-streams/sdks/rudderstack-javascript-sdk/supported-api/#track).
+
+## FAQ
+
+### Who maintains this app?
+
+This app is maintained by Rudderstack. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+
+### What if I have feedback on this app?
+
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
+
+### What if my question isn't answered above?
+
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 

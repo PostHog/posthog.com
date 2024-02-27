@@ -1179,6 +1179,11 @@
         { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" },
         { "source": "/docs/cdp/redshift-export", "destination": "/docs/cdp/batch-exports/redshift" },
         { "source": "/cdp/redshift-export", "destination": "/docs/cdp/batch-exports/redshift" },
+        { "source": "/docs/cdp/segment", "destination": "/docs/libraries/segment" },
+        { "source": "/docs/cdp/sentry-connector", "destination": "/docs/libraries/sentry" },
+        { "source": "/docs/cdp/n8n", "destination": "/docs/libraries/n8n" },
+        { "source": "/docs/cdp/zendesk", "destination": "/docs/libraries/zendesk" },
+        { "source": "/docs/cdp/rudderstack-import", "destination": "/docs/libraries/rudderstack" },
         { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" },
         { "source": "/docs/data/application-settings", "destination": "/docs" },
         {
