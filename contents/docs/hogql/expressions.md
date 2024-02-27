@@ -21,6 +21,8 @@ HogQL expressions enable you to directly access, modify, and aggregate data in m
 
 ![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
 
+> **Tip:** If you're having trouble getting results from your expression, try debugging by using a different visualization (trends table often works best as it shows all values returned) or breaking down your expression into pieces and testing each one.
+
 ## Accessible data
 
 HogQL expressions can access data like:
@@ -33,7 +35,7 @@ HogQL expressions can access data like:
 - `distinct_id`
 - `person_id`
 
-Properties can be accessed with dot notation like `person.properties.$initial_browser` which also work on nested or JSON properties. 
+Properties can be accessed with dot notation like `person.properties.$initial_browser` which also works for nested or JSON properties. 
 
 > **Note:** PostHog's properties include always include `$` as a prefix, while custom properties do not (unless you add it).
 
@@ -41,7 +43,7 @@ Property identifiers must be known at query time. For dynamic access, use the JS
 
 ### Types
 
-All the types for event and person properties are listed beside them in your [data warehouse tab](https://us.posthog.com/data-warehouse). By default, properties are strings (and might require conversion). For example, the expression works because `$screen_width` and `$screen_height` are both defined as numeric properties, and therefore, you can multiply them:
+The types for event and person properties are listed in your [data warehouse tab](https://us.posthog.com/data-warehouse). By default, properties are strings (and might require conversion). For example, the expression works because `$screen_width` and `$screen_height` are both defined as numeric properties, and therefore, you can multiply them:
 
 ```sql
 round(properties.$screen_width * properties.$screen_height / 1000000, 2)
@@ -53,12 +55,12 @@ To cast a string property into a different type, use type conversion functions, 
 
 You can filter, modify, or aggregate accessed data with [supported ClickHouse functions](/docs/hogql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
 
-> **Tip:** If you're having trouble getting results from your expression, try debugging by using a different visualization (trends table often works best as it shows all values returned) or breaking down your expression into pieces and testing each one.
+Here are some of the most common and useful ones:
 
 ### Comparisons
 
 - `if`: Checks a condition, and if true (or non-zero), and then returns the result of an expression.
-- `multiIf`: Enables chaining multiple `if` statements together, each a condition and return expression.
+- `multiIf`: Enables chaining multiple `if` statements together, each with a condition and return expression.
 - `in`: Checks if an array or string contains a value.
 - `match`: Checks whether a string matches a regular expression pattern.
 - `like`: Checks if string matches pattern that contain string(s) and symbols `%` (arbitrary number of arbitrary characters), `_` (single arbitrary character), `\` (escaped literals).
@@ -98,3 +100,4 @@ You can filter, modify, or aggregate accessed data with [supported ClickHouse fu
 - Creating percentages by calculating the sum of one property over the sum of all related properties with `sum()`, `/`, `+`, and `*`.
 - Getting unique values with `uniq()`.
 - Binning events based on time of day, week, and month with `toHour`, `toDayOfWeek`, `toStartOfWeek`, `toMonth`.
+- Breaking down by multiple properties using `concat()`.

@@ -35,7 +35,7 @@ For example, to group pageviews into "desktop" or "mobile," you can breakdown wi
 
 ## SQL insights
 
-[SQL insights](/docs/product-analytics/sql) enable you to directly query your data with SQL commands like `SELECT`, `FROM`, `JOIN`, `WHERE`, `GROUP BY` along with many of ClickHouse SQL's function. This enables more complex and customizable queries and results than other insights.
+[SQL insights](/docs/product-analytics/sql) enable you to directly query your data with SQL commands like `SELECT`, `FROM`, `JOIN`, `WHERE`, `GROUP BY` along with many of [ClickHouse SQL's function](/docs/hogql/clickhouse-functions). This enables more complex and customizable queries and results than other insights.
 
 For example, to get a count of the most popular first pageview `current_url` values, we can use an SQL query like this:
 
@@ -145,9 +145,4 @@ To get a list of all the sources you can query with HogQL, enable the [data ware
   alt="Data warehouse example"
 />
 
-## Further reading
-
-- [Guide to using HogQL](/docs/hogql/guide)
-- [Supported ClickHouse functions](/docs/hogql/clickhouse-functions)
-- [Supported aggregations](/docs/hogql/aggregations)
-- [Tutorials](/docs/hogql/tutorials)
+The data warehouse also enables you to add external sources, like Stripe and Hubspot, and query them alongside your PostHog data.
