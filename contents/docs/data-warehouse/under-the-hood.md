@@ -11,4 +11,4 @@ This also means data freshness is determined by you. Data is as up-to-date as yo
 
 ## Connectors
 
-Connectors use a combination of Temporal and [dlt](https://dlthub.com/) to sync data from your source to PostHog's storage in S3.  
+Connectors use a combination of [Temporal](https://temporal.io/) and the open source data loading tool, [dlt](https://dlthub.com/) to sync data from your source to PostHog's storage in S3.  
