@@ -1807,7 +1807,7 @@ export const docsMenu = {
                     name: 'Analysis views',
                 },
                 {
-                    name: 'Graphs & trends',
+                    name: 'Trends',
                     url: '/docs/product-analytics/trends',
                     icon: 'IconGraph',
                     color: 'blue',
