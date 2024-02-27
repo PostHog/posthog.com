@@ -251,6 +251,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/sales/icp',
+                    },
+                    {
                         name: 'New customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
                     },
