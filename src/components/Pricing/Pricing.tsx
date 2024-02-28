@@ -13,14 +13,14 @@ import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
-import Plans, { CTA as PlanCTA, allProductsData } from './Plans'
+import Plans, { CTA as PlanCTA } from './Plans'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
 import { IconCheck, IconChevronDown, IconInfo, IconShield, IconArrowRightDown } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
-import { useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type } from 'types'
 
 interface PlanData {
@@ -220,6 +220,83 @@ const pricingGroupsToShowOverride: {
 } = {
     'ab-testing': ['feature_flags'],
 }
+
+const allProductsData = graphql`
+    query GetAllProductData {
+        allProductData {
+            nodes {
+                products {
+                    description
+                    docs_url
+                    image_url
+                    inclusion_only
+                    contact_support
+                    addons {
+                        contact_support
+                        description
+                        docs_url
+                        image_url
+                        inclusion_only
+                        name
+                        type
+                        unit
+                        plans {
+                            description
+                            docs_url
+                            image_url
+                            name
+                            plan_key
+                            product_key
+                            unit
+                            features {
+                                description
+                                key
+                                name
+                            }
+                            tiers {
+                                current_amount_usd
+                                current_usage
+                                flat_amount_usd
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
+                    }
+                    name
+                    type
+                    unit
+                    usage_key
+                    plans {
+                        description
+                        docs_url
+                        features {
+                            description
+                            key
+                            limit
+                            name
+                            note
+                            unit
+                        }
+                        free_allocation
+                        image_url
+                        included_if
+                        name
+                        plan_key
+                        product_key
+                        tiers {
+                            current_amount_usd
+                            current_usage
+                            flat_amount_usd
+                            unit_amount_usd
+                            up_to
+                        }
+                        unit
+                    }
+                }
+            }
+        }
+    }
+`
 
 const Pricing = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
