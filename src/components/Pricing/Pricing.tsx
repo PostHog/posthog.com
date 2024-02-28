@@ -304,11 +304,6 @@ const Pricing = (): JSX.Element => {
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
-    // throws error!
-    if (posthog.getFeatureFlag('teams-pricing-page') !== 'test') {
-        return <PricingControl />
-    }
-
     return (
         <Layout
             parent={pricingMenu}
