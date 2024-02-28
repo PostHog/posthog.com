@@ -39,15 +39,18 @@ export default function Team({
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
                     <div className="max-w-xl">
                         <h1 className="m-0">{teamName}</h1>
-                        <p className="my-4">{description}</p>
-                        <CallToAction>See what we're building</CallToAction>
+                        <p className="my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
+
+                        <CallToAction type="secondary" size="md">
+                            See what we're building
+                        </CallToAction>
                     </div>
                 </div>
             </section>
             <section className="max-w-screen-xl mx-auto px-5 my-12">
                 <h4>People</h4>
-                <div className="flex space-x-12">
-                    <ul className="list-none p-0 m-0 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div className="flex space-x-12 w-full">
+                    <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {profiles.data.map(
                             ({
                                 id,
@@ -58,7 +61,7 @@ export default function Team({
                                     <li key={id} className="bg-border rounded-md">
                                         <Link
                                             to={`/community/profiles/${id}`}
-                                            className="border border-border rounded-md h-full bg-accent flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden"
+                                            className="border border-border rounded-md h-full bg-accent flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
                                         >
                                             <div className="mb-auto">
                                                 <h3
@@ -98,7 +101,7 @@ export default function Team({
                             }
                         )}
                     </ul>
-                    <div className="max-w-[340px] w-full flex-shrink-0">
+                    <div className="w-full md:max-w-sm shrink-1 basis-sm">
                         <SidebarSection title="Small team FAQ">
                             <p className="font-bold m-0">Q: Does pineapple belong on pizza?</p>
                             <p className="font-bold m-0 mt-2">{PineappleText(pineapplePercentage)}</p>
