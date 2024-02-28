@@ -329,7 +329,9 @@ const Pricing = (): JSX.Element => {
                         </div>
                         <div className="md:order-1">
                             <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
-                                {billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct).name}{' '}
+                                {billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct)?.name ||
+                                    (currentProduct == 'ab_testing' && 'A/B testing') ||
+                                    'Product'}{' '}
                                 pricing
                             </h1>
                             <p className="text-base font-medium opacity-60 leading-tight mb-4">
