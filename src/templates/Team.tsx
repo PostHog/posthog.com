@@ -55,10 +55,10 @@ export default function Team({
                             }) => {
                                 const name = [firstName, lastName].filter(Boolean).join(' ')
                                 return (
-                                    <li key={id}>
+                                    <li key={id} className="bg-border rounded-md">
                                         <Link
                                             to={`/community/profiles/${id}`}
-                                            className="border border-border rounded-md bg-accent flex flex-col p-4 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] overflow-hidden"
+                                            className="border border-border rounded-md h-full bg-accent flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden"
                                         >
                                             <div className="mb-auto">
                                                 <h3
