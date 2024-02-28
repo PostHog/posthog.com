@@ -53,7 +53,7 @@ export default function Team({
             </section>
             <section className="max-w-screen-xl mx-auto px-5 my-12">
                 <h4>People</h4>
-                <div className="flex space-x-12 w-full">
+                <div className="flex gap-6 md:gap-12 w-full flex-col md:flex-row">
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {profiles.data.map(
                             ({
