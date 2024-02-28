@@ -22,6 +22,8 @@ import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
+import posthog from 'posthog-js'
+import { Pricing as PricingControl } from 'components/Pricing/experiment-control/Pricing'
 
 interface PlanData {
     title: string
@@ -298,6 +300,11 @@ const Pricing = (): JSX.Element => {
     }, [search])
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
+
+    // throws error!
+    if (posthog.getFeatureFlag('teams-pricing-page') !== 'test') {
+        return <PricingControl />
+    }
 
     return (
         <Layout
