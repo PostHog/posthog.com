@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import useProducts from './../Products'
-import usePostHog from 'hooks/usePostHog'
 import Toggle from 'components/Toggle'
 
 export const section = cntl`
@@ -21,7 +20,8 @@ export const PricingCalculator = () => {
     const { monthlyTotal } = useValues(pricingSliderLogic)
     const [annualPriceAvailable, setAnnualPriceAvailable] = useState(false)
     const [showAnnualPrice, setShowAnnualPrice] = useState(true)
-    const [annualTotal, setAnnualTotal] = useState(0)
+    const [annualTotal, setAnnualTotal] = useState<string | null>(null)
+    const [annualTotalPaidMonthly, setAnnualTotalPaidMonthly] = useState<string | null>(null)
 
     useEffect(() => {
         if (monthlyTotal > 2000) {
@@ -29,10 +29,13 @@ export const PricingCalculator = () => {
         } else {
             setAnnualPriceAvailable(false)
         }
-        setAnnualTotal(monthlyTotal * 0.8)
+        const annualTotal = Math.round(monthlyTotal * 0.8 * 12)
+        const annualTotalPaidMonthly = Math.round(monthlyTotal * 0.8)
+        const formattedAnnualTotal = new Intl.NumberFormat('en-US').format(annualTotal)
+        const formattedAnnualTotalPaidMonthly = new Intl.NumberFormat('en-US').format(annualTotalPaidMonthly)
+        setAnnualTotal(formattedAnnualTotal)
+        setAnnualTotalPaidMonthly(formattedAnnualTotalPaidMonthly)
     }, [monthlyTotal])
-
-    const posthog = usePostHog()
 
     return (
         <section id="calculator" className={`${section} mb-12`}>
@@ -180,7 +183,16 @@ export const PricingCalculator = () => {
                         {annualPriceAvailable && showAnnualPrice ? (
                             <div>
                                 <div className="flex items-baseline">
-                                    <span className={`text-lg font-bold`}>${annualTotal.toLocaleString()}</span>
+                                    <Tooltip
+                                        content={() => (
+                                            <>
+                                                <b>${annualTotal}</b> paid yearly
+                                            </>
+                                        )}
+                                        placement="left"
+                                    >
+                                        <span className={`text-lg font-bold`}>${annualTotalPaidMonthly}</span>
+                                    </Tooltip>
                                     <span className="opacity-60 mr-1">/mo</span>
                                     <span className="opacity-60">paid yearly</span>
                                 </div>
