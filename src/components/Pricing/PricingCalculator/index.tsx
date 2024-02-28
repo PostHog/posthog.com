@@ -1,22 +1,13 @@
 import cntl from 'cntl'
-import { Discount } from 'components/NotProductIcons'
-import { LinearSlider, LogSlider, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import {
-    IconGraph,
-    IconRewindPlay,
-    IconToggle,
-    IconMessage,
-    IconExternal,
-    IconPercentage,
-    IconInfo,
-} from '@posthog/icons'
-import { useActions, useValues } from 'kea'
+import { IconExternal, IconInfo } from '@posthog/icons'
+import { useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import useProducts from './../Products'
 import usePostHog from 'hooks/usePostHog'
+import Toggle from 'components/Toggle'
 
 export const section = cntl`
     max-w-6xl
@@ -28,6 +19,18 @@ export const section = cntl`
 export const PricingCalculator = () => {
     const products = useProducts()
     const { monthlyTotal } = useValues(pricingSliderLogic)
+    const [annualPriceAvailable, setAnnualPriceAvailable] = useState(false)
+    const [showAnnualPrice, setShowAnnualPrice] = useState(true)
+    const [annualTotal, setAnnualTotal] = useState(0)
+
+    useEffect(() => {
+        if (monthlyTotal > 2000) {
+            setAnnualPriceAvailable(true)
+        } else {
+            setAnnualPriceAvailable(false)
+        }
+        setAnnualTotal(monthlyTotal * 0.8)
+    }, [monthlyTotal])
 
     const posthog = usePostHog()
 
@@ -172,11 +175,32 @@ export const PricingCalculator = () => {
                     <strong>Monthly estimate for usage-based plans</strong>
                     <span className="text-sm">with billing limits at your selections</span>
                 </div>
-                <div className="col-span-3 md:col-span-8 p-1 pr-4 flex justify-end items-center text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br text-right h-full">
-                    <div className="flex items-baseline">
-                        <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
-                        <span className="opacity-60">/mo</span>
+                <div className="col-span-3 md:col-span-8 p-1 pr-4 flex flex-col items-end justify-center text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br text-right h-full gap-x-4">
+                    <div className="flex justify-end items-center">
+                        {annualPriceAvailable && showAnnualPrice ? (
+                            <div>
+                                <div className="flex items-baseline">
+                                    <span className={`text-lg font-bold`}>${annualTotal.toLocaleString()}</span>
+                                    <span className="opacity-60 mr-1">/mo</span>
+                                    <span className="opacity-60">paid yearly</span>
+                                </div>
+                            </div>
+                        ) : (
+                            <div>
+                                <div className="flex items-baseline">
+                                    <span className={`text-lg font-bold`}>${monthlyTotal.toLocaleString()}</span>
+                                    <span className="opacity-60 mr-1">/mo</span>
+                                    {annualPriceAvailable && <span className="opacity-60">paid monthly</span>}
+                                </div>
+                            </div>
+                        )}
                     </div>
+                    {annualPriceAvailable && (
+                        <div className="flex gap-x-4 shrink-0">
+                            <p className="text-sm opacity-75 m-0">With 20% annual discount</p>
+                            <Toggle checked={showAnnualPrice} onChange={() => setShowAnnualPrice(!showAnnualPrice)} />
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
