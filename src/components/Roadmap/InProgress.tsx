@@ -218,11 +218,22 @@ export function InProgress(
                 sort: ['createdAt:desc'],
                 populate: 'question.profile.avatar',
                 filters: {
-                    roadmap: {
-                        id: {
-                            $eq: squeakId,
+                    $and: [
+                        {
+                            roadmap: {
+                                id: {
+                                    $eq: squeakId,
+                                },
+                            },
                         },
-                    },
+                        {
+                            question: {
+                                archived: {
+                                    $null: true,
+                                },
+                            },
+                        },
+                    ],
                 },
             },
             {

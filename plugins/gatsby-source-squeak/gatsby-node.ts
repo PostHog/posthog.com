@@ -273,7 +273,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     fields: ['id'],
                 },
                 image: {
-                    fields: ['id', 'url'],
+                    fields: '*',
                 },
                 cta: true,
             },
@@ -284,6 +284,15 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         for (const roadmap of roadmaps.data) {
             const { teams, githubUrls, image, ...rest } = roadmap.attributes
 
+            const cloudinaryMedia = {
+                ...image,
+                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                publicId: image?.data?.attributes?.provider_metadata?.public_id,
+                originalHeight: image?.data?.attributes?.height,
+                originalWidth: image?.data?.attributes?.width,
+                originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
+            }
+
             const node = {
                 squeakId: roadmap.id,
                 internal: {
@@ -291,6 +300,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     contentDigest: createContentDigest(roadmap.attributes),
                 },
                 ...rest,
+                media: cloudinaryMedia,
                 ...(image.data && {
                     id: createNodeId(`squeak-image-${image.data.id}`),
                     url: image.data.attributes.url,
