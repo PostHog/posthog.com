@@ -43,7 +43,7 @@ Property identifiers must be known at query time. For dynamic access, use the JS
 
 ### Types
 
-The types for event and person properties are listed in your [data warehouse tab](https://us.posthog.com/data-warehouse). By default, properties are strings (and might require conversion). For example, the expression works because `$screen_width` and `$screen_height` are both defined as numeric properties, and therefore, you can multiply them:
+The types for event and person properties are listed in your [data warehouse tab](https://us.posthog.com/data-warehouse). By default, properties are strings (and might require conversion). For example, the expression below works because `$screen_width` and `$screen_height` are both defined as numeric properties so you can multiply them:
 
 ```sql
 round(properties.$screen_width * properties.$screen_height / 1000000, 2)
