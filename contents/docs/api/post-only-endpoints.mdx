@@ -53,7 +53,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 }' https://app.posthog.com/batch/ 
 ```
 
-The `historical_migration` field must be set to `true` when running imports from other systems. This will ensure that they are processed in order without triggering our spike detection systems.
+The `historical_migration` field is optional and must be set to `true` when running imports from other systems. This will ensure that they are processed in order without triggering our spike detection systems.
 
 ### Alias
 
