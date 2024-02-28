@@ -21,7 +21,7 @@ import { IconCheck, IconChevronDown, IconInfo, IconShield, IconArrowRightDown } 
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
-import { BillingProductV2Type } from 'types'
+import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 
 interface PlanData {
     title: string
@@ -130,43 +130,6 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
         </div>
     </div>
 )
-
-const planBreakdown = [
-    {
-        key: 'Base price',
-        tooltip: 'Tooltip content',
-        freePlan: 'Free forever',
-        payPerUsePlan: '$0',
-        teamsPlan: '$450/mo',
-        enterprisePlan: 'Contact us',
-    },
-    {
-        key: 'Usage-based pricing',
-        tooltip: 'Tooltip content',
-        freePlan: '',
-        payPerUsePlan: 'Yes',
-        teamsPlan: 'Yes',
-        enterprisePlan: 'Volume discounts available',
-    },
-    {
-        sectionHeader: 'Support & training',
-    },
-    {
-        key: 'Community support',
-        freePlan: true,
-        payPerUsePlan: true,
-        teamsPlan: true,
-        enterprisePlan: true,
-    },
-    {
-        key: 'Slack-based support',
-        tooltip: 'Dedicated channel',
-        freePlan: false,
-        payPerUsePlan: '$2k+/mo spend',
-        teamsPlan: '$2k+/mo spend',
-        enterprisePlan: true,
-    },
-]
 
 export const section = cntl`
     max-w-6xl
@@ -283,6 +246,8 @@ const allProductsData = graphql`
                         name
                         plan_key
                         product_key
+                        contact_support
+                        unit_amount_usd
                         tiers {
                             current_amount_usd
                             current_usage
@@ -317,6 +282,13 @@ const Pricing = (): JSX.Element => {
         const groupsToShowOverride = product ? pricingGroupsToShowOverride[product] : undefined
         return groupsToShowOverride || defaultGroupsToShow
     }
+
+    const platformAndSuppportProduct = billingProducts.find(
+        (product: BillingProductV2Type) => product.type === 'platform_and_support'
+    )
+    const highestSupportPlan = platformAndSuppportProduct?.plans?.slice(-1)[0]
+
+    console.log('platformAndSuppportProduct', platformAndSuppportProduct)
 
     useEffect(() => {
         setGroupsToShow(getGroupsToShow())
@@ -563,91 +535,76 @@ const Pricing = (): JSX.Element => {
                         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                             <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
                                 <div className="col-span-4 px-3 py-1">&nbsp;</div>
-                                <div className="col-span-3 px-3 py-1">
-                                    <strong className="text-sm opacity-75">Totally free</strong>
-                                </div>
-                                <div className="col-span-3 px-3 py-1">
-                                    <strong className="text-sm opacity-75">Ridiculously cheap</strong>
-                                </div>
-                                <div className="col-span-3 px-3 py-1">
-                                    <strong className="text-sm opacity-75">Teams</strong>
-                                </div>
-                                <div className="col-span-3 px-3 py-1">
-                                    <strong className="text-sm opacity-75">Enterprise</strong>
-                                </div>
+                                {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => (
+                                    <div className="col-span-3 px-3 py-1" key={plan.key}>
+                                        <strong className="text-sm opacity-75">{plan.name}</strong>
+                                    </div>
+                                ))}
                             </div>
 
                             <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                                {planBreakdown.map((row, index) =>
-                                    row.sectionHeader ? (
-                                        <div
-                                            key={index}
-                                            className="col-span-full bg-accent dark:bg-accent-dark font-bold px-3 py-1 text-sm"
-                                        >
-                                            {row.sectionHeader}
+                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                    <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
+                                </div>
+                                {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
+                                    return (
+                                        <div className="col-span-3 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
+                                            {plan.included_if === 'no_active_subscription' ? (
+                                                <span>Free forever</span>
+                                            ) : plan.included_if === 'has_subscription' ? (
+                                                <span>$0</span>
+                                            ) : plan.unit_amount_usd ? (
+                                                `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
+                                            ) : plan.contact_support ? (
+                                                'Contact us'
+                                            ) : (
+                                                'Contact us'
+                                            )}
                                         </div>
-                                    ) : (
-                                        <>
-                                            <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                                {row.tooltip ? (
-                                                    <Tooltip content={row.tooltip}>
-                                                        <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                            {row.key}
-                                                        </strong>
-                                                    </Tooltip>
-                                                ) : (
-                                                    <strong className="text-primary/75 dark:text-primary-dark/75">
-                                                        {row.key}
-                                                    </strong>
-                                                )}
-                                            </div>
-                                            <div className="col-span-3 px-3 py-2 text-sm">
-                                                {typeof row.freePlan === 'boolean' ? (
-                                                    row.freePlan ? (
-                                                        <IconCheck className="w-5 h-5 text-green" />
-                                                    ) : (
-                                                        ''
-                                                    )
-                                                ) : (
-                                                    row.freePlan
-                                                )}
-                                            </div>
-                                            <div className="col-span-3 px-3 py-2 text-sm">
-                                                {typeof row.payPerUsePlan === 'boolean' ? (
-                                                    row.payPerUsePlan ? (
-                                                        <IconCheck className="w-5 h-5 text-green" />
-                                                    ) : (
-                                                        ''
-                                                    )
-                                                ) : (
-                                                    row.payPerUsePlan
-                                                )}
-                                            </div>
-                                            <div className="col-span-3 px-3 py-2 text-sm">
-                                                {typeof row.teamsPlan === 'boolean' ? (
-                                                    row.teamsPlan ? (
-                                                        <IconCheck className="w-5 h-5 text-green" />
-                                                    ) : (
-                                                        ''
-                                                    )
-                                                ) : (
-                                                    row.teamsPlan
-                                                )}
-                                            </div>
-                                            <div className="col-span-3 px-3 py-2 text-sm">
-                                                {typeof row.enterprisePlan === 'boolean' ? (
-                                                    row.enterprisePlan ? (
-                                                        <IconCheck className="w-5 h-5 text-green" />
-                                                    ) : (
-                                                        ''
-                                                    )
-                                                ) : (
-                                                    row.enterprisePlan
-                                                )}
-                                            </div>
-                                        </>
                                     )
-                                )}
+                                })}
+                                {highestSupportPlan?.features?.map((feature: BillingV2FeatureType) => (
+                                    <>
+                                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                            {feature.description ? (
+                                                <Tooltip content={feature.description}>
+                                                    <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                        {feature.name}
+                                                    </strong>
+                                                </Tooltip>
+                                            ) : (
+                                                <strong className="text-primary/75 dark:text-primary-dark/75">
+                                                    {feature.name}
+                                                </strong>
+                                            )}
+                                        </div>
+                                        {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
+                                            const planFeature = plan?.features?.find((f) => f.key === feature.key)
+
+                                            return (
+                                                <div
+                                                    className="col-span-3 px-3 py-2 text-sm"
+                                                    key={`${plan.key}-${feature.key}`}
+                                                >
+                                                    {planFeature ? (
+                                                        <div className="flex gap-x-2">
+                                                            {planFeature.note ?? (
+                                                                <IconCheck className="w-5 h-5 text-green" />
+                                                            )}
+                                                            {planFeature.limit && (
+                                                                <span className="opacity-75">
+                                                                    {planFeature.limit} {planFeature.unit}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </>
+                                ))}
                             </div>
                         </div>
                     </section>
