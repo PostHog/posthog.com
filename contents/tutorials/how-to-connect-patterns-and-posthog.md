@@ -25,7 +25,7 @@ To install and setup the Patterns Connector, follow the steps below...
 2. Add a webhook node to your graph
 3. Copy the webhook URL from the sidebar
 4. Log in to your PostHog instance
-5. Click 'Apps' on the left-hand tool bar
+5.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 6. Search for 'Patterns'
 7. Select the app, press 'Install', then select the blue gear icon to begin configuration
 8. Paste the URL in "Patterns Webhook URL" during app configuration.

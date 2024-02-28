@@ -54,45 +54,45 @@ Kubit, on the other hand, is _incredibly_ closed source. There's no public prici
 ## PostHog and Kubit feature comparison
 As explained above, PostHog offers a wider selection of feature than Kubit, which focuses solely on product analytics.
 
-<ComparisonTable column1="Kubit" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Kubit">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
-  <ComparisonRow column1={false} column2={true} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={true} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={false} column2={true} feature="Experiments" description="Test changes and analyze impact" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Track where users click" />
-  <ComparisonRow column1={false} column2={true} feature="Event pipelines" description="Push and pull data to enrich customer profiles" />
-  <ComparisonRow column1={false} column2={true} feature="Open source" description="Build your own apps and contribute code" />
+  <ComparisonRow column1={true} column2={false} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Test changes and analyze impact" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Track where users click" />
+  <ComparisonRow column1={true} column2={false} feature="Event pipelines" description="Push and pull data to enrich customer profiles" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
 
 ## Product analytics comparison
 
-<ComparisonTable column1="Kubit" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Kubit">
   <ComparisonRow column1={true} column2={true} feature="Funnel analysis" description="Track users through a sequence of events" />
   <ComparisonRow column1={true} column2={true} feature="Path analysis" description="Chart how users get from A to B" />
   <ComparisonRow column1={true} column2={true} feature="Retention analysis" description="Visualize which users stay, for how long" />
-  <ComparisonRow column1={false} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
-  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Identify predictors and shared commonalities" />
+  <ComparisonRow column1={true} column2={false} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
+  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Identify predictors and shared commonalities" />
   <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Save insights into a shared workspace" />
   <ComparisonRow column1={true} column2={true} feature="Formulas" description="Calculate unique insights, with math" />
-  <ComparisonRow column1={false} column2={true} feature="SQL access" description="Use code to directly query the data" />
-  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Gather individual users into larger organizations" />
-  <ComparisonRow column1={true} column2={false} feature="Predictive analytics" description="Extrapolate from now, into the future" />
+  <ComparisonRow column1={true} column2={false} feature="SQL access" description="Use code to directly query the data" />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Gather individual users into larger organizations" />
+  <ComparisonRow column1={false} column2={true} feature="Predictive analytics" description="Extrapolate from now, into the future" />
 </ComparisonTable>
 
 ## Collaboration tools 
 
-<ComparisonTable column1="Kubit" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Kubit">
   <ComparisonRow column1={true} column2={true} feature="User permissions" description="Control user roles and levels of access" />
   <ComparisonRow column1={true} column2={true} feature="Notebooks" description="A built-in scratch pad for making notes, and more" />
   <ComparisonRow column1={true} column2={true} feature="Public insights" description="Make insights available without login" />
-  <ComparisonRow column1={false} column2={true} feature="Public dashboards" description="Make dashboards available without login" />
+  <ComparisonRow column1={true} column2={false} feature="Public dashboards" description="Make dashboards available without login" />
   <ComparisonRow column1={true} column2={true} feature="Export dashboards" description="Export dashboards as reports" />
-  <ComparisonRow column1={false} column2={true} feature="Dashboard subscriptions" description="Receive regular alerts about new data" />
-  <ComparisonRow column1={false} column2={true} feature="Embeddable dashboards" description="Embed dashboards in other pages" />
-  <ComparisonRow column1={false} column2={true} feature="Slack integration" description="Receive notifications about new data" />
-  <ComparisonRow column1={false} column2={true} feature="Discord integration" description="Receive notifications about new data" />
-  <ComparisonRow column1={false} column2={true} feature="MS Teams integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={true} column2={false} feature="Dashboard subscriptions" description="Receive regular alerts about new data" />
+  <ComparisonRow column1={true} column2={false} feature="Embeddable dashboards" description="Embed dashboards in other pages" />
+  <ComparisonRow column1={true} column2={false} feature="Slack integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={true} column2={false} feature="Discord integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={true} column2={false} feature="MS Teams integration" description="Receive notifications about new data" />
   <ComparisonRow column1={true} column2={true} feature="Data management suite" description="Categorize and define a list of events and properties" />
 </ComparisonTable>
 
@@ -107,14 +107,14 @@ PostHog supports a wide range of client and server libraries, but not all featur
 
 Kubit, on the other hand, is a closed-source, no-code product. Because it's designed to work on top of a data warehouse, it doesn't use SDKs or libraries in the traditional sense. You can only use it if you have your event data in a data warehouse already.
 
-<ComparisonTable column1="Kubit" column2="PostHog">
-  <ComparisonRow column1={false} column2={true} feature="JavaScript" />
-  <ComparisonRow column1={false} column2={true} feature="React Native" />
-  <ComparisonRow column1={false} column2={true} feature="React" />
-  <ComparisonRow column1={false} column2={true} feature="Flutter" />
-  <ComparisonRow column1={false} column2={true} feature="iOS" />
-  <ComparisonRow column1={false} column2={true} feature="Android" />
-  <ComparisonRow column1={false} column2={true} feature="Ruby" />
+<ComparisonTable column1="PostHog" column2="Kubit">
+  <ComparisonRow column1={true} column2={false} feature="JavaScript" />
+  <ComparisonRow column1={true} column2={false} feature="React Native" />
+  <ComparisonRow column1={true} column2={false} feature="React" />
+  <ComparisonRow column1={true} column2={false} feature="Flutter" />
+  <ComparisonRow column1={true} column2={false} feature="iOS" />
+  <ComparisonRow column1={true} column2={false} feature="Android" />
+  <ComparisonRow column1={true} column2={false} feature="Ruby" />
 </ComparisonTable>
 
 
@@ -124,13 +124,13 @@ Compliance can be a bit of a regulatory headache, especially for international o
 
 Kubit is similar on most fronts, but lacks the option for EU hosting (despite claiming to be GDPR ready) and doesn’t offer two-factor authentication itself (it’s offered exclusively via an integration with Google OAuth).
 
-<ComparisonTable column1="Kubit" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Kubit">
   <ComparisonRow column1={true} column2={true} feature="GDPR ready" />
-  <ComparisonRow column1={false} column2={true} feature="Data anonymization" />
-  <ComparisonRow column1={false} column2={true} feature="Cookie-less tracking option" />
+  <ComparisonRow column1={true} column2={false} feature="Data anonymization" />
+  <ComparisonRow column1={true} column2={false} feature="Cookie-less tracking option" />
   <ComparisonRow column1={true} column2={true} feature="SOC 2 certified" />
   <ComparisonRow column1={true} column2={true} feature="SAML/SSO available" />
-  <ComparisonRow column1={false} column2={true} feature="2FA available" />
+  <ComparisonRow column1={true} column2={false} feature="2FA available" />
 </ComparisonTable>
 
 > ### To cookie, or not to cookie?

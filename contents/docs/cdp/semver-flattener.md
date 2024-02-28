@@ -53,7 +53,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'SemVer Flattener' and select the app, press Install.
 
 That's it!

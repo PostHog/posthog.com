@@ -12,7 +12,7 @@ Webflow is one of the most popular no-code site builders. It makes building high
 
 To ensure your [Webflow](https://webflow.com/) site is as good as possible, you need data about its usage. PostHog provides tools to capture and analyze this data. This tutorial goes over how to add PostHog to your Webflow site to capture pageviews, events like button clicks, session recordings, and more.
 
-It requires both a PostHog and Webflow account, along with a Webflow paid site plan (PostHog is free up to 1M events and 15k session recordings per month).
+It requires both a PostHog and Webflow account, along with a Webflow paid site plan (PostHog is free up to 1M events and 5k session recordings per month).
 
 ## Create a Webflow site
 

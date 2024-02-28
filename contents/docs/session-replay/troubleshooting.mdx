@@ -79,8 +79,6 @@ Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to c
 
 Due to the complexity of browser rendering and replay, some web resources are unable to be recordered or playedback. These include:
 
-- **Canvas** - Technically this is currently recordable but playback is not possible without introducing security issues. [This issue](https://github.com/PostHog/posthog/issues/14555) tracks the progress if this could change in the future.
-- **WebGL**
 - **Object elements** - Most object elements cannot be played back. Non-HTML native plugins such as Flash or Silverlight cannot be recorded
 - **Heavy animations** - Some heavier animations such as SVG or Lottie animations may be _throttled_ or ignored entirely due to the performance overhead in recording and replaying
 - **Iframes** - iframes from the origins under your control **can** be recorded and played back. See [iframe recording](/docs/session-replay/iframes) for more info.
