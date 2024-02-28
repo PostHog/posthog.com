@@ -170,13 +170,13 @@ export const PricingCalculator = () => {
                     </React.Fragment>
                 ))}
             </div>
-            <div className="grid grid-cols-16 p-2 bg-accent dark:bg-accent-dark md:bg-transparent md:p-0">
-                <div className="col-span-13 flex flex-col justify-center md:col-span-8 p-3 opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tl rounded-bl h-full text-balance">
+            <div className="grid grid-cols-16 p-2 px-4 md:px-2 bg-accent dark:bg-accent-dark md:bg-transparent md:p-0">
+                <div className="col-span-16 flex flex-col justify-center md:col-span-8 md:p-3 opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tl rounded-bl h-full text-balance">
                     <strong>Monthly estimate for usage-based plans</strong>
                     <span className="text-sm">with billing limits at your selections</span>
                 </div>
-                <div className="col-span-3 md:col-span-8 p-1 pr-4 flex flex-col items-end justify-center text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br text-right h-full gap-x-4">
-                    <div className="flex justify-end items-center">
+                <div className="col-span-16 md:col-span-8 p-1 md:pr-4 flex flex-col md:items-end justify-center text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br md:text-right h-full gap-x-4">
+                    <div className="flex md:justify-end items-center">
                         {annualPriceAvailable && showAnnualPrice ? (
                             <div>
                                 <div className="flex items-baseline">
@@ -196,7 +196,7 @@ export const PricingCalculator = () => {
                         )}
                     </div>
                     {annualPriceAvailable && (
-                        <div className="flex gap-x-4 shrink-0">
+                        <div className="flex justify-between gap-x-4 shrink-0 border border-light dark:border-dark rounded p-2 pr-4 mt-2 md:mt-1">
                             <p className="text-sm opacity-75 m-0">With 20% annual discount</p>
                             <Toggle checked={showAnnualPrice} onChange={() => setShowAnnualPrice(!showAnnualPrice)} />
                         </div>
