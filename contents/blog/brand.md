@@ -10,7 +10,7 @@ author:
 category: CEO diaries
 ---
 
-The world would be a lot more fun if most startups didn't seem to have experineced a personality vasectomy.
+The world would be a lot more fun if most startups didn't seem to have experienced a personality vasectomy.
 
 Alas, I think we've evolved to conform - you used to take part in the tribe to survive, after all.
 
