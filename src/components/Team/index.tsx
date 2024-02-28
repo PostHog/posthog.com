@@ -12,7 +12,7 @@ import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 
 export const TeamMember = (teamMember) => {
-    const { avatar, lastName, firstName, companyRole, country, squeakId, location } = teamMember
+    const { avatar, lastName, firstName, companyRole, country, squeakId, location, compact } = teamMember
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     return (
