@@ -317,7 +317,7 @@ export default function Plans({
                                     {plans.map(({ free_allocation, plan_key }) => {
                                         return (
                                             <Heading
-                                                title={free_allocation ? 'Free' : 'Unlimited'}
+                                                title={free_allocation ? 'Free' : 'All other plans'}
                                                 subtitle={
                                                     free_allocation
                                                         ? 'No credit card required'

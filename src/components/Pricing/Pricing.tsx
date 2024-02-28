@@ -40,18 +40,19 @@ const planSummary: PlanData[] = [
             '1 project',
             '1 year data retention',
             'Community support',
-            'Usage capped at free tier limits',
+            'Generous usage limits on all products',
         ],
     },
     {
-        title: 'Ridiculously cheap',
+        title: 'With product subscription',
         price: '$0',
         features: [
             'Advanced product features',
             '2 projects',
             '7 year data retention',
             'Email support',
-            'Usage-based pricing after free tier',
+            'Usage-based pricing on products, charged separately',
+            'Generous free tier on all products',
         ],
     },
     {
@@ -83,7 +84,8 @@ const planSummary: PlanData[] = [
             'Unlimited projects',
             '7 year data retention',
             'Priority support',
-            'Usage-based pricing after free tier',
+            'Usage-based pricing on products, charged separately',
+            'Generous free tier on all products',
         ],
     },
     {
@@ -92,10 +94,11 @@ const planSummary: PlanData[] = [
         priceSubtitle: 'w/ fixed terms',
         features: [
             'Unlimited everything',
-            'SAML enforcement',
+            'SAML SSO',
             'Custom MSA',
             'Dedicated Slack support channel',
             'Personalized onboarding & training',
+            'Advanced permissions & audit logs',
         ],
     },
 ]
@@ -563,48 +566,53 @@ const Pricing = (): JSX.Element => {
                                         </div>
                                     )
                                 })}
-                                {highestSupportPlan?.features?.map((feature: BillingV2FeatureType) => (
-                                    <>
-                                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                            {feature.description ? (
-                                                <Tooltip content={feature.description}>
-                                                    <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                {highestSupportPlan?.features
+                                    ?.filter(
+                                        (f: BillingV2FeatureType) =>
+                                            !['role_based_access', 'project_based_permissions'].includes(f.key)
+                                    )
+                                    .map((feature: BillingV2FeatureType) => (
+                                        <>
+                                            <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                                {feature.description ? (
+                                                    <Tooltip content={feature.description}>
+                                                        <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                            {feature.name}
+                                                        </strong>
+                                                    </Tooltip>
+                                                ) : (
+                                                    <strong className="text-primary/75 dark:text-primary-dark/75">
                                                         {feature.name}
                                                     </strong>
-                                                </Tooltip>
-                                            ) : (
-                                                <strong className="text-primary/75 dark:text-primary-dark/75">
-                                                    {feature.name}
-                                                </strong>
-                                            )}
-                                        </div>
-                                        {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
-                                            const planFeature = plan?.features?.find((f) => f.key === feature.key)
+                                                )}
+                                            </div>
+                                            {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
+                                                const planFeature = plan?.features?.find((f) => f.key === feature.key)
 
-                                            return (
-                                                <div
-                                                    className="col-span-3 px-3 py-2 text-sm"
-                                                    key={`${plan.key}-${feature.key}`}
-                                                >
-                                                    {planFeature ? (
-                                                        <div className="flex gap-x-2">
-                                                            {planFeature.note ?? (
-                                                                <IconCheck className="w-5 h-5 text-green" />
-                                                            )}
-                                                            {planFeature.limit && (
-                                                                <span className="opacity-75">
-                                                                    {planFeature.limit} {planFeature.unit}
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    ) : (
-                                                        <></>
-                                                    )}
-                                                </div>
-                                            )
-                                        })}
-                                    </>
-                                ))}
+                                                return (
+                                                    <div
+                                                        className="col-span-3 px-3 py-2 text-sm"
+                                                        key={`${plan.key}-${feature.key}`}
+                                                    >
+                                                        {planFeature ? (
+                                                            <div className="flex gap-x-2">
+                                                                {planFeature.note ?? (
+                                                                    <IconCheck className="w-5 h-5 text-green" />
+                                                                )}
+                                                                {planFeature.limit && (
+                                                                    <span className="opacity-75">
+                                                                        {planFeature.limit} {planFeature.unit}
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })}
+                                        </>
+                                    ))}
                             </div>
                         </div>
                     </section>
