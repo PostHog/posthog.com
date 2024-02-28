@@ -35,7 +35,7 @@ export default function Team({
     return (
         <Layout>
             <section className="max-w-screen-xl mx-auto px-5 my-12">
-                <div className="flex space-x-4 items-center">
+                <div className="flex flex-col md:flex-row space-x-4 items-center">
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
                     <div className="max-w-xl">
                         <h1 className="m-0">{teamName}</h1>
@@ -45,6 +45,10 @@ export default function Team({
                             See what we're building
                         </CallToAction>
                     </div>
+                    <figure className="rotate-2 w-72 flex flex-col gap-2 mt-8 md:mt-0">
+                        <div className="bg-accent aspect-video rounded-md flex justify-center items-center">image</div>
+                        <div className="text-right text-sm">Caption</div>
+                    </figure>
                 </div>
             </section>
             <section className="max-w-screen-xl mx-auto px-5 my-12">
