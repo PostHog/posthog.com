@@ -54,27 +54,30 @@ To start, install the [JavaScript web SDK](/docs/libraries/js):
 npm i posthog-js
 ```
 
-Then, go to `app/entry.client.tsx` and initialize PostHog. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).  
-
+Then, go to `app/entry.client.tsx` and initialize PostHog as a component. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
 
 ```ts file=entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
-import { startTransition, StrictMode } from "react";
+import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
 import posthog from "posthog-js";
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_instance_address>',
-  }
-)
+function PosthogInit() {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_instance_address>',
+    });
+  }, []);
+
+  return null;
+}
 
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
         <RemixBrowser />
+        <PosthogInit/>
     </StrictMode>
   );
 });
