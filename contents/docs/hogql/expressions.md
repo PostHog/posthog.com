@@ -15,9 +15,9 @@ HogQL expressions enable you to directly access, modify, and aggregate data in m
 - Breakdowns
 - [Funnel](/docs/product-analytics/funnels) aggregations
 - [User paths](/docs/product-analytics/paths)
-- Session replays
+- [Session replays](/docs/session-replay)
 - [Dashboards](/docs/product-analytics/dashboards)
-- The activity tab
+- The [activity tab](https://us.posthog.com/events)
 
 ![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
 
