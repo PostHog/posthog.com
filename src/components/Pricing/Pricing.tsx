@@ -548,7 +548,7 @@ const Pricing = (): JSX.Element => {
                             <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
                                 <div className="col-span-4 px-3 py-1">&nbsp;</div>
                                 {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => (
-                                    <div className="col-span-6 px-3 py-1" key={plan.key}>
+                                    <div className="col-span-3 px-3 py-1" key={plan.key}>
                                         <strong className="text-sm opacity-75">{plan.name}</strong>
                                     </div>
                                 ))}
@@ -560,7 +560,7 @@ const Pricing = (): JSX.Element => {
                                 </div>
                                 {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
                                     return (
-                                        <div className="col-span-6 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
+                                        <div className="col-span-3 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
                                             {plan.included_if === 'no_active_subscription' ? (
                                                 <span>Free forever</span>
                                             ) : plan.included_if === 'has_subscription' ? (
@@ -600,7 +600,7 @@ const Pricing = (): JSX.Element => {
 
                                                 return (
                                                     <div
-                                                        className="col-span-6 px-3 py-2 text-sm"
+                                                        className="col-span-3 px-3 py-2 text-sm"
                                                         key={`${plan.key}-${feature.key}`}
                                                     >
                                                         {planFeature ? (
