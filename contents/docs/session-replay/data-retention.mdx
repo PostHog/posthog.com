@@ -33,7 +33,7 @@ You can also edit your docker-compose file to replace `image: posthog/posthog:$P
 
 ### Managing storage
 
-Self-hosted installations, pinned to earlier versions, 
+Self-hosted installations pinned to earlier versions can control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
 
 Please note that you need to manage the available capacity for versions of PostHog that rely on Clickhouse storage. 
 Ensure you increase volume capacity before changing the `RECORDINGS_TTL_WEEKS` value (even if you're decreasing the value). 
