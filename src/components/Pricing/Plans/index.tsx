@@ -189,7 +189,7 @@ const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: B
     )
 }
 
-export const CTA = () => {
+export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): JSX.Element => {
     const posthog = usePostHog()
     return (
         <TrackedCTA
@@ -197,7 +197,7 @@ export const CTA = () => {
                 name: `clicked Get started - free`,
                 type: 'cloud',
             }}
-            type="primary"
+            type={type}
             size="md"
             className="shadow-md !w-auto"
             to={`https://${

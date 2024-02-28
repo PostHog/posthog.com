@@ -127,7 +127,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
                     ))}
                 </ul>
                 <div className="mt-auto">
-                    <PlanCTA width="full" />
+                    <PlanCTA type={planData.title === 'With product subscription' ? 'primary' : 'secondary'} />
                 </div>
             </div>
         </div>
@@ -509,7 +509,7 @@ const Pricing = (): JSX.Element => {
             {!currentProduct && (
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4`}>
-                        <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Plans</h3>
+                        <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Platform Plans</h3>
                         <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
                             <div className="grid grid-cols-[repeat(4,_minmax(260px,_1fr))] lg:grid-cols-4 gap-4 mb-12 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
                                 {planSummary.map((plan, index) => (
