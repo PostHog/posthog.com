@@ -112,19 +112,19 @@ struct HomeView: View {
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the iOS app](../images/tutorials/ios-feature-flags/basic-app.png)
+![Basic setup of the iOS app](../images/tutorials/ios-analytics/basic-app.png)
 
 ## 2. Add PostHog to your app
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-First, add [`posthog-ios`](/docs/libraries/ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods).
+First, add [`posthog-ios`](/docs/libraries/ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods)).
 
 To add the package dependency to your Xcode project, select `File > Add Package Dependency` and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
 Note that for this tutorial we use version `3.1.3` of the SDK.
 
-![Add PostHog from Swift Package Manager](../images/tutorials/ios-feature-flags/swift-npm.png)
+![Add PostHog from Swift Package Manager](../images/tutorials/ios-analytics/swift-npm.png)
 
 Next, configure your PostHog instance in `App.swift` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 
@@ -234,6 +234,8 @@ Lastly, when the user logs out, you should call [`PostHogSDK.shared.reset()`](ht
                 isAuthenticated = false
                 PostHogSDK.shared.reset()
             }
+```
+
 ### Capturing group analytics
 
 [Groups](/docs/product-analytics/group-analytics) are a powerful feature in PostHog that aggregate events based on entities, such as organizations or companies. This is especially helpful for B2B SaaS apps, where often you want to view insights such as `number of active companies` or `company churn rate`.
