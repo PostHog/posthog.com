@@ -210,7 +210,7 @@ export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): J
 }
 
 const allProductsData = graphql`
-    query GetAllProductData {
+    query {
         allProductData {
             nodes {
                 products {

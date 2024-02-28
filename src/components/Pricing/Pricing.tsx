@@ -190,7 +190,7 @@ const pricingGroupsToShowOverride: {
 }
 
 const allProductsData = graphql`
-    query GetAllProductData {
+    query {
         allProductData {
             nodes {
                 products {
