@@ -660,17 +660,7 @@ const Pricing = (): JSX.Element => {
                                 </div>
                                 <p className="pl-9 text-[15px] mb-3">
                                     If your startup has rasied less than $5 million and is less than 2 years old, you
-                                    may be interested in our startup program.
-                                </p>
-                                <p className="pl-9">
-                                    <CallToAction
-                                        size="sm"
-                                        type="secondary"
-                                        className="mt-auto self-start sm:w-auto"
-                                        to="/startups"
-                                    >
-                                        Learn about our startups program
-                                    </CallToAction>
+                                    may be interested in our startup program. <Link to="/startups">Learn more.</Link>
                                 </p>
                             </li>
                             <li>
