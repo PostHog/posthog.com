@@ -23,7 +23,7 @@ Some recordings are stored for 1 year:
 
 ## Self-hosted installations
 
-The original version of Session replay stored recordings in ClickHouse. At a higher scale, this was impractical and expensive. In order to make PostHog cheaper and easier to run and maintain we have deprecated storing recordings in ClickHouse. We now only support blob storage backed recordings. In PostHog cloud we use AWS S3 as a blob store. Self-hosted versions include [MINIO](https://min.io/) to allow you to use whichever blob storage you prefer.
+The original version of session replay stored recordings in ClickHouse. At a higher scale, this was impractical and expensive. To make PostHog cheaper and easier to run and maintain, we have deprecated storing recordings in ClickHouse. We now only support blob storage backed recordings. In PostHog Cloud, we use AWS S3 as a blob store. Self-hosted versions include [MINIO](https://min.io/) to enable you to use whichever blob storage you prefer.
 
 ### I want to keep using ClickHouse for recording storage...
 
