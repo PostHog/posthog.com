@@ -75,7 +75,44 @@ We sometimes make business decisions based on who we are, and what we want to do
 
 For example, we set out initially expecting to have an open core model. We'd offer open source software, and some people in big enterprises, would self host and pay for the party for everyone else. We felt this would work as there was no real competition, whereas in cloud, we had lots of unicorn competitors. However, we just love shipping new features, and after our first hackathon, we wound up with session replay (ie a new feature, big enough to be its own product), which took off and this resulted in a multi-product approach. As a result, we could compete in cloud by being way wider than everyone else. Eventually, we removed our paid self hosted offering entirely, went all in on multi product in cloud, focused on "getting in first" with earlier stage companies instead of the largest enterprises, and our motivation, ambition and growth all took off as a result.
 
+## Brand isn't just your website...
+
+... it is instead how your company is experienced by others.
+
+Here is a non-exhaustive list, there are dozens more examples than this though:
+
+* it's how much you invest in each function in your company relative to each other
+* it's what you look for when you hire people, and it's the process you use to hire with
+* how you decide what to build - do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing
+* how much you are design vs engineering vs product led
+* how you email your customers
+* the kind of people you hire into Customer Success or Sales
+* the tone of voice on your website
+* who is on your board
+* how your pricing works
+* how frequently you email customers in your activation flow
+* how your social media works
+* the marketing channels you pick
+
 ## You can't 80:20 everything
 
-* What this looks like in practise
-* How 
+A lot of design / brand work has an _increasing_ marginal return. This is because a great brand's purpose is that you stand out. You do _not_ stand out by being average!
+
+So, if you're serious, go nuts on your brand. Go weirdly hard.
+
+To give you an example, we built a merch store:
+
+* we started with me emailing users for their address and size, manually ordering merch, it arriving at my house, and me then posting it internationally to them
+* then we set up a store on shopify, I just threw our logo onto an amusingly wide selection of items (PostHog shower curtain, anyone?) - it was cool to just have merch for sale and a way of giving it
+* then created custom components and built it into our website directly so it's perfectly integrated
+* then we booked a photo shoot, got a bunch of our team to it, and took custom photos of our team wearing everything
+* who knows what happens next!
+
+To give a second example:
+
+* a founder I know has a product with 300,000 users
+* he has redone his website and is _very_ pleased with, that he should launch. It is way clearer than what he has now.
+* however, I pushed him for how to make it less _boring_. Something most people do not ask.
+* he talked about how his product helps people explore data, so an exploration theme could give it more personality.
+* he can now get a graphic designer to work with him
+* and so on - just don't stop pushing the things that matter to you
