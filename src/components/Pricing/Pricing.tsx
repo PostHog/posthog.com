@@ -584,7 +584,13 @@ const Pricing = (): JSX.Element => {
                                 {highestSupportPlan?.features
                                     ?.filter(
                                         (f: BillingV2FeatureType) =>
-                                            !['role_based_access', 'project_based_permissions'].includes(f.key)
+                                            ![
+                                                // TODO: this shouldn't be necessary, update billing products api to include entitlement_only info
+                                                'role_based_access',
+                                                'project_based_permissioning',
+                                                'ingestion_taxonomy',
+                                                'tagging',
+                                            ].includes(f.key)
                                     )
                                     .map((feature: BillingV2FeatureType) => (
                                         <>
