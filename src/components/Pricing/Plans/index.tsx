@@ -271,6 +271,8 @@ const allProductsData = graphql`
                         name
                         plan_key
                         product_key
+                        contact_support
+                        unit_amount_usd
                         tiers {
                             current_amount_usd
                             current_usage
