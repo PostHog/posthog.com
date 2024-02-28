@@ -638,55 +638,51 @@ const Pricing = (): JSX.Element => {
                 <>
                     <PricingCalculator />
 
-                    <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                        <div className="grid md:grid-cols-2 gap-6 md:gap-12">
-                            <div className="p-8">
-                                <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
-                                    <span>Discounts</span>
-                                </h2>
-                                <ul className="list-none pl-2 flex flex-col gap-8">
-                                    <li>
-                                        <div className="flex items-center gap-2">
-                                            <IconShield className="w-7 h-7 opacity-75" />
-                                            <strong>Annual payment</strong>
-                                        </div>
-                                        <p className="pl-9 text-[15px] mb-2">
-                                            <b>20% off</b> for customers who pay annually. Available for customers
-                                            spending over $2k/mo. Get in touch through the app after signing up.
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <div className="flex items-center gap-2">
-                                            <IconShield className="w-7 h-7 opacity-75" />
-                                            <strong>Startups</strong>
-                                        </div>
-                                        <p className="pl-9 text-[15px] mb-2">
-                                            If your startup has rasied less than $5 million and is less than 2 years
-                                            old, you may be interested in our startup program.
-                                        </p>
-                                        <div className="pl-9">
-                                            <CallToAction
-                                                size="sm"
-                                                type="secondary"
-                                                className="mt-auto self-start sm:w-auto"
-                                                to="/startups"
-                                            >
-                                                Learn about our startups program
-                                            </CallToAction>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="flex items-center gap-2">
-                                            <IconShield className="w-7 h-7 opacity-75" />
-                                            <strong>Non-profits</strong>
-                                        </div>
-                                        <p className="pl-9 text-[15px]">
-                                            50% off in most cases. Get in touch through the app after signing up.
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                    <section className={`${section} my-12 md:my-24 md:px-4`}>
+                        <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
+                            <span>Available discounts</span>
+                        </h2>
+                        <ul className="list-none p-0 grid md:grid-cols-3 gap-6 md:gap-12">
+                            <li>
+                                <div className="flex items-center gap-2">
+                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <strong>Annual payment</strong>
+                                </div>
+                                <p className="pl-9 text-[15px]">
+                                    <b>20% off</b> for customers who pay annually. Available for customers spending over
+                                    $2k/mo. Get in touch through the app after signing up.
+                                </p>
+                            </li>
+                            <li>
+                                <div className="flex items-center gap-2">
+                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <strong>Startups</strong>
+                                </div>
+                                <p className="pl-9 text-[15px] mb-3">
+                                    If your startup has rasied less than $5 million and is less than 2 years old, you
+                                    may be interested in our startup program.
+                                </p>
+                                <p className="pl-9">
+                                    <CallToAction
+                                        size="sm"
+                                        type="secondary"
+                                        className="mt-auto self-start sm:w-auto"
+                                        to="/startups"
+                                    >
+                                        Learn about our startups program
+                                    </CallToAction>
+                                </p>
+                            </li>
+                            <li>
+                                <div className="flex items-center gap-2">
+                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <strong>Non-profits</strong>
+                                </div>
+                                <p className="pl-9 text-[15px]">
+                                    50% off in most cases. Get in touch through the app after signing up.
+                                </p>
+                            </li>
+                        </ul>
                     </section>
                     <section>
                         <CTA />
