@@ -255,7 +255,7 @@ function Security({ item }) {
             {personaApiKeyScopes?.length && (
                 <div>
                     <h4>Required API key scopes</h4>
-                    <div className='flex items-center gap-2'>
+                    <div className="flex items-center gap-2">
                         {personaApiKeyScopes.map((x) => (
                             <code key={x}>{x}</code>
                         ))}

@@ -11,9 +11,9 @@ Import new and historic ticket events to PostHog. However, only the Date Type Us
 
 ## Requirements
 
-This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
 
 You'll also need a Zendesk account, with admin access.
 
@@ -44,7 +44,13 @@ Next, Head to the Admin section -> Manage -> User Fields. Click Add Fields and f
 
 ## Configuration
 
-<AppParameters />
+| Name                  | Type   | Required | Hint                                                                                                  |
+|-----------------------|--------|----------|-------------------------------------------------------------------------------------------------------|
+| Host name             | string | true     | The subdomain name you chose when setting up your account, e.g., `mycompany` in `mycompany.zendesk.com`. |
+| Host Email            | string | true     | The email for the admin of your Zendesk account.                                                      |
+| API token             | string | true     | Your Zendesk API Token.                                                                               |
+| Triggering events     | string | true     | Comma-separated list of PostHog events to trigger profile updates in Zendesk, e.g. 'pageview,track'. |
+| Email domains to skip | string | false    | Comma-separated list of email domains to exclude from updates in Zendesk.                             |
 
 ## FAQ
 

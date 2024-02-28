@@ -16,8 +16,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
     const spec = await fetch(openApiSpecUrl, {
         headers: {
-            'Accept': 'application/json',
-        }
+            Accept: 'application/json',
+        },
     }).then((res) => res.json())
 
     const parser = new OpenAPIParser(spec)

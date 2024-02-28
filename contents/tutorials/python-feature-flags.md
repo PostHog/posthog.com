@@ -163,6 +163,6 @@ This is the basic implementation of Python feature flags in Flask set up. From h
 
 ## Further reading
 
-- [How to set up A/B/n testing](/tutorials/abn-testing)
+- [How to set up analytics in Python and Flask](/tutorials/python-analytics)
+- [How to set up A/B tests in Python and Flask](/tutorials/python-ab-testing)
 - [How to do holdout testing](/tutorials/holdout-testing)
-- [How to set up one-time feature flags](/tutorials/one-time-feature-flags)

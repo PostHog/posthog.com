@@ -23,7 +23,7 @@ Both versions of PostHog should ideally be running the same version.
 ## Using the Replicator app
 
 1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
+2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Replicator'
 4. Select the app, press 'Install' and follow the on-screen instructions
 5. See events come into another PostHog instance, identically to the originals

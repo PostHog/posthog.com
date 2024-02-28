@@ -18,6 +18,8 @@ PostHog's Product OS is the foundation on which they're built.
 
 It ties all your user and product data together, so you can focus on improving your product instead of engineering your data.
 
+## Product OS features
+
 Product OS comprises things like:
 
 - Our easy to implement [client and server SDKs](/docs/getting-started/install?tab=sdks) like `posthog-js` client library, which [autocaptures](/docs/product-analytics/autocapture) frontend events, so you don't have to waste time manually instrumenting every button and simple interaction

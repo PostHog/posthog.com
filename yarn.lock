@@ -11652,10 +11652,10 @@ gatsby-sharp@^1.13.0:
   dependencies:
     sharp "^0.32.6"
 
-gatsby-source-ashby@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/gatsby-source-ashby/-/gatsby-source-ashby-1.0.3.tgz#a2a38d881827af028c05e997ada38bac8694c2f7"
-  integrity sha512-/tsvodeb0kuPHr1kGblDIEdLiAWhgX7rr60VvJBcqF6swBcm73CiI/XYJBJY7TFH4nFw/c9KrqliZ0j14Ohx7w==
+gatsby-source-ashby@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ashby/-/gatsby-source-ashby-1.0.4.tgz#bebd3973f2fa4df8dd28784335dd405b98b08064"
+  integrity sha512-mSVGdT6X7BB9gRZW/Lmq+vmCnA/4nqAnnGoNkxN2QIJtvQw9r4/+YwDwgicyLJPudUOAL81iCUSTqV9vktcAiA==
   dependencies:
     axios "^0.27.2"
 

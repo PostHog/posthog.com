@@ -247,16 +247,26 @@ client.ReloadFeatureFlags()
 
 </MultiLanguage>
 
-## Restriction on local evaluation and cohorts
+## Restriction on local evaluation
 
-> **Note:** This restriction **does not apply** to v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](https://posthog.com/docs/libraries/python) SDK.
+### General restrictions
 
-To enable local evaluation of feature flags that depend on [cohorts](/docs/data/cohorts), we translate the cohort definition into person properties.
+Local evaluation is not possible for flags that:
+
+1. Have experience continuity enabled, which is set when you check ['persist flag across authentication steps'](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps) on your feature flag.
+2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
+3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
+
+### Dynamic cohort restrictions
+
+> **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](https://posthog.com/docs/libraries/python) SDK.
+
+To enable local evaluation of feature flags that depend on [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts), we translate the cohort definition into person properties.
 
 However, there are a few constraints, and cohorts cannot be evaluated locally if:
 
 1. There is a variant override on the condition with the cohort.
-2. They have non-person properties
+2. They have non-person properties.
 3. There's more than one cohort in the feature flag definition.
 4. The cohort in the feature flag is in the same group as another condition.
 5. The cohort has nested AND-OR filters. Only simple cohorts that have a top level OR group, and inner level ANDs will be evaluated locally.

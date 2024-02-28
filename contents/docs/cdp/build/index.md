@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Build an app
 sidebar: Docs
 showTitle: true
 ---

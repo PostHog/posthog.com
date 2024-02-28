@@ -358,6 +358,9 @@ h4 {
 
 /* applies to question and reply content */
 .question-content {
+    a {
+        @apply text-red dark:text-yellow;
+    }
     h3 {
         @apply text-xl;
 

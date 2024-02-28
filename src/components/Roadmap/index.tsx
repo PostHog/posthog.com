@@ -12,6 +12,7 @@ import { CallToAction } from 'components/CallToAction'
 import RoadmapForm, { Status } from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
 import UpdateWrapper, { RoadmapSuccess } from './UpdateWrapper'
+import { useLocation } from '@reach/router'
 
 interface IGitHubPage {
     title: string
@@ -129,6 +130,7 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function Roadmap() {
+    const { search } = useLocation()
     const nav = useNav()
     const teams = useRoadmap()
     const { user } = useUser()
@@ -155,6 +157,9 @@ export default function Roadmap() {
             }
         })
         .filter((team) => team.roadmaps.length > 0)
+
+    const params = new URLSearchParams(search)
+    const roadmapID = params.get('id')
 
     return (
         <Layout>
@@ -243,7 +248,11 @@ export default function Roadmap() {
                                                                 formClassName="mb-4"
                                                                 editButtonClassName="absolute bottom-4 right-4 z-10"
                                                             >
-                                                                <InProgress stacked {...node} />
+                                                                <InProgress
+                                                                    stacked
+                                                                    {...node}
+                                                                    modalOpen={roadmapID == node.squeakId}
+                                                                />
                                                             </UpdateWrapper>
                                                         )
                                                     })}
