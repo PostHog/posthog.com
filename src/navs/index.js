@@ -2433,6 +2433,11 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/cdp/common-questions',
+                    icon: 'IconQuestion',
+                },
+                {
                     name: 'Build an app',
                     url: '/docs/cdp/build',
                     icon: 'IconGraduationCap',
