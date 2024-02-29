@@ -24,21 +24,21 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an open-source platform that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to Microsoft Clarity, but also tools like [Statsig](/blog/posthog-vs-statsig) and [Mixpanel](/blog/posthog-vs-mixpanel).
+[PostHog](/) (that's us 👋) is an open-source platform that combines session replay, product analytics, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to Microsoft Clarity, but also tools like [Statsig](/blog/posthog-vs-statsig) and [Mixpanel](/blog/posthog-vs-mixpanel).
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of Feb 2024 PostHog is used on 5,169 (0.52%) of the top 1 million websites. Microsoft Clarity is used by [45,820 of the top 1 million websites](https://trends.builtwith.com/analytics/Microsoft-Clarity). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [Webshare](/customers/webshare), [AssemblyAI](/customers/assemblyai), and [Purplewave](/customers/purplewave).
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of Feb 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. Microsoft Clarity is used by [45,820 of the top 1 million websites](https://trends.builtwith.com/analytics/Microsoft-Clarity). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [Webshare](/customers/webshare), [AssemblyAI](/customers/assemblyai), and [Purplewave](/customers/purplewave).
 
 #### Key features
 
 - **Session replays:** Including event timelines, console logs, network activity.
-- **Heatmaps:** See where users click and detect rage clicks.
+- **Heatmaps:** Visualize user and rage clicks anywhere on your site.
 - **Product analytics:** Analyze funnels, user paths, retention, trends, create user cohorts.
 - **Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests.
-- **Surveys:** Run customer satisfaction, NPS and PMF surveys.
+- **Surveys:** Run customer satisfaction, NPS, and PMF surveys.
 
 ### How does PostHog compare to Microsoft Clarity?
 
-PostHog offers more features for engineers, such as console logs and network monitoring on session replays, but doesn't currently offer scroll maps. PostHog isn't totally free like Clarity, though you can use it without inputting a credit card. All users get 5,000 replays for free every month and 1 million analytics events.
+PostHog offers more features for engineers, such as console logs and network monitoring on session replays, but doesn't currently offer scroll maps. PostHog isn't totally free like Clarity, but still has a generous free plan. All users get 5,000 replays and 1 million analytics events for free every month.
 
 <ComparisonTable column1="PostHog" column2="Clarity">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
@@ -62,9 +62,9 @@ PostHog offers more features for engineers, such as console logs and network mon
 
 According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
 
-1. **It replaces multiple tools:** PostHog can replace Microsoft Clarity (session replay), Google Analytics, LaunchDarkly (feature flags and A/B testing), and Hotjar (feedback and surveys). This simplifies workflows and ensures all their data is in one place.
+1. **It replaces multiple tools:** PostHog can replace Microsoft Clarity (session replay), [Google Analytics](/blog/posthog-vs-ga4), [LaunchDarkly](/blog/posthog-vs-launchdarkly) (feature flags and A/B testing), and [Hotjar](/blog/posthog-vs-hotjar) (feedback and surveys). This simplifies workflows and ensures all their data is in one place.
 
-2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get an additional $50k in credits.
 
 3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
 
@@ -103,7 +103,7 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/LogRocket), 1,132 
 
 LogRocket offers more features for engineers who want to investigate performance issues and bugs. It also adds some basic analytics features for analyzing conversion funnels and user paths. LogRocket's free plan includes 1,000 sessions per month.
 
-<ComparisonTable column1="PostHog" column2="Clarity">
+<ComparisonTable column1="LogRocket" column2="Clarity">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
   <ComparisonRow column1={true} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
@@ -125,9 +125,9 @@ Reviews on G2.com suggest companies use LogRocket because it:
 
 1. **Helps them identify problems:** LogRocket's combination of error tracking, performance monitoring, and session replay makes it uniquely powerful at finding bugs and issues. Unlike other tools, it uncovers both user and software issues.
 
-2. **Improves user experience:** LogRocket seems to succeed at their goal of helping users fix issues. Reviewers find it provides all the tools to improve their user experience.
+2. **Improves user experience:** LogRocket seems to succeed at their goal of helping fix issues. Reviewers find tools like session replay, error tracking, and rage clicks help them identify and improve UX problems and bugs.
 
-3. **Does everything the need:** LogRocket provides a lot of functionality out of the box. It captures the details users need, provides useful visualizations, and automatically triages some issues.
+3. **Does everything they need:** LogRocket provides a lot of functionality out of the box. It captures the details users need, provides useful visualizations, and automatically triages some issues.
 
 > #### Bottom line
 > LogRocket is an excellent Clarity alternative for companies that need more comprehensive bug tracking and error monitoring tools. Less technical users, such as marketers and designers, might find it overwhelming, but there's something here for everyone.
@@ -147,7 +147,7 @@ Reviews on G2.com suggest companies use LogRocket because it:
 
 [FullStory](/blog/best-fullstory-alternatives) describes itself as Digital Experience Intelligence, which is code for session replay and mobile app analytics, with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
 
-According to data from [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as of January 2024, 8,141 of the top 1 million websites in the world deploy FullStory. This makes it less popular than Clarity (45,820), but more popular than PostHog (5,169) and Mouseflow (5,555). Customers tend to be product managers and support teams at larger e-commerce websites and enterprises.
+According to data from [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as of February 2024, 8,141 of the top 1 million websites in the world deploy FullStory. This makes it less popular than Clarity (45,820), but more popular than PostHog (5,169) and Mouseflow (5,555). Customers tend to be product managers and support teams at larger e-commerce websites and B2C enterprises.
 
 #### Key features
 
@@ -184,13 +184,13 @@ According to reviews on G2, companies use FullStory for:
 
 1. **Easier collaboration:** As an accessible tool for non-technical users, FullStory facilitates collaboration between product, UX, and engineering teams by allowing all teams to access useful, reliable data.
 
-2. **Viewing user issues:** Support teams use FullStory to replay sessions to understand user hard-to-replicate problems, and identify bugs that need fixing.
+2. **Viewing user issues:** Support teams use FullStory to replay sessions to understand user hard-to-replicate problems and identify bugs that need fixing.
 
 3. **Improving conversion:** FullStory users like to combine funnel insights with replays of user sessions to understand pain points and improve conversion.
 
 > #### Bottom line
 >
-> FullStory is a big step up from Clarity, which is reflected in the cost. It's a good choice for large companies, especially those in the e-commerce space, but it might be over kill for smaller ones who want an inexpensive tool that does the basics well.
+> FullStory is a big step up from Clarity, which is reflected in the cost. It's a good choice for large companies, especially those in the e-commerce space, but it might be overkill for smaller ones who want an inexpensive tool that does the basics well.
 
 <br />
 
@@ -265,7 +265,7 @@ According to G2 reviews, UXCam helps companies:
 
 Lucky Orange is a simple analytics tool designed to analyze user behavior on small e-commerce websites using session replays and heatmaps. It also offers a range of other useful features for store owners, such as built-in form analytics, live chat, surveys, and announcements widgets.
 
-Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [according to Built With](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Clarity's 45,000+. Lucky Orange customers are often small online stores or freelance CRO consultants.
+Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [according to BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Clarity's 45,000+. Lucky Orange customers are often small online stores or freelance CRO consultants.
 
 #### Key features
 
@@ -277,9 +277,9 @@ Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [ac
 
 ### How does Lucky Orange compare to Clarity?
 
-Lucky Orange is a simplified, focused take on Clarity. It does many of the same things, but it's designed specifically for optimizing conversion on e-commerce websites. It offers enough analytics features to make it useful for small businesses, but isn't comprehensive enough for product analytics.
+Lucky Orange is a simplified, focused take on Clarity. It does many of the same things, but it's designed specifically for optimizing conversion on e-commerce websites. It offers enough analytics features to make it useful for small businesses, but isn't comprehensive enough for more complicated SaaS apps.
 
-While it doesn't offer full product analytics, it includes 
+While it doesn't offer full product analytics, it includes:
 
 <ComparisonTable column1="Lucky Orange" column2="Clarity">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
@@ -304,7 +304,7 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 
 1. **It's easy to use:** Lucky Orange has a simple UI compared to popular analytics tools, which makes it easy for users analyze user behavior and identify issues with their websites.
 
-2. **It helps them improve conversion:** Customers are mostly using Lucky Orange to optimize landing pages and e-commerce checkout flows, which Lucky Orange makes easy.
+2. **It helps them improve conversion:** Customers are mostly using Lucky Orange to optimize landing pages and e-commerce checkout flows, which it makes easy.
 
 3. **It doesn't impact page speed:** Users report Lucky Orange has negligible impact on website performance, which they value highly.
 
@@ -325,7 +325,7 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 
 ### What is Hotjar?
 
-Hotjar focuses on user behavior rather than analytics. This means using heatmaps, replays, feedback, and interviews to understand the qualitative aspects of your site and app. It's popular among product designers and marketers, but not so useful for software engineers.
+[Hotjar](/blog/posthog-vs-hotjar) focuses on user behavior rather than analytics. This means using heatmaps, replays, feedback, and interviews to understand the qualitative aspects of your site and app. It's popular among product designers and marketers, but not so useful for software engineers.
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as Feb 2024 Hotjar is used by 72,048 of the top 1 million websites, compared to Clarity's 45,820. This makes Hotjar the most popular tool in this guide, though usage has declined considerably from a peak of ~125k in 2021.  
 
@@ -339,7 +339,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as Feb 
 
 ### How does Hotjar compare to Clarity?
 
-In many ways, Hotjar is a more mature version of Clarity. It lacks the depth of analysis of PostHog or LogRocket, but it offers a few useful enhancements compared to Clarity, and it supports both Android and iOS mobile apps. Hotjar's free plan includes 35 daily session (~1,000 per month) for free and basic features.
+In many ways, Hotjar is a more mature version of Clarity. It lacks the depth of analysis of PostHog or LogRocket, but it offers a few useful enhancements compared to Clarity. For example, it supports both Android and iOS mobile apps. Hotjar's free plan includes 35 daily session (~1,000 per month) for free and basic features.
 
 <ComparisonTable column1="Hotjar" column2="Clarity">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
