@@ -37,7 +37,7 @@ HogQL expressions can access data like:
 
 Properties can be accessed with dot notation like `person.properties.$initial_browser` which also works for nested or JSON properties. 
 
-> **Note:** PostHog's properties include always include `$` as a prefix, while custom properties do not (unless you add it).
+> **Note:** PostHog's properties always include `$` as a prefix, while custom properties do not (unless you add it).
 
 Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.
 
