@@ -65,7 +65,7 @@ You can also self-host PostHog Open Source (available under an MIT license) usin
 ## 2. OpenReplay
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
-[OpenReplay](https://openreplay.com/) is an open-source session replay stack that provides insights into user actions inside web apps. Its tooling is particularly effective for application state and customer support. It has some basic analytics features, such as funnel analysis, though it falls some way short of feature-complete product analytics tools.
+[OpenReplay](https://openreplay.com/) is an open-source [alternative to Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) that offers more advanced, technical features for engineers on top of basic session replay. Its tooling is particularly effective for application state and customer support. It has some basic analytics features, such as funnel analysis, though it falls some way short of feature-complete product analytics tools.
 
 ### Who is OpenReplay for?
 
