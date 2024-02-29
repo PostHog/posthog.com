@@ -680,7 +680,7 @@ const Pricing = (): JSX.Element => {
                             </li>
                         </ul>
                     </section>
-                    <section>
+                    <section className="relative">
                         <CTA />
                     </section>
 
