@@ -10,25 +10,28 @@ This guide might be helpful in working with me.
 
 As a manager (60%), I am the exec responsible for ops, finance, people, marketing, and customer success at PostHog
 
-As an individual contributor (40%), in order of priority for Q1 2024:
+This is where I'm spending my time in 2024. This is my latest order of priority, though I change this up every ~3 months:
 
-- Marketing
-  - Setting overall strategy
-  - Maintaining good attribution habits
-  - Updating all our paid ads copy
-  - Getting the billboard project going with Brex
-- CS
-  - Making sure we have the processes and systems in place to hit 3x growth
-  - Keeping CS well-connected to other teams, especially marketing and ops
-  - Seeing if our funnel from marketing all the way to revenue actually works
-- People
-  - Doing regular 1-1s with all managers and new joiners
-  - Figuring out how to support managers better at PostHog
-- Finance
-  - Supporting Fraser (he now owns the financial model, I help with context and validating assumptions)
-  - Attending board meetings, presenting the numbers, and getting grilled on them
-- Personal
-  - Trying to _not_ jump in and be one of the first people to give feedback on an issue/RFC/question
+- CS - 50%
+  - Quarterly goal setting (with Simon)
+  - Figure out our strategy to scale to $50m ARR
+  - Input on CS systems, inc. how we do support
+  - Do more IC work, e.g. doing more analysis
+  - Set revenue targets for the model and check how we're tracking
+- Ops & people - 30%
+  - Quarterly goal setting (with Fraser)
+  - Monthly 1-1s with all managers; run monthly management chats
+  - Run pay review process (James and Tim make the decisions)
+  - Run grievance/complaints process when needed
+  - Run any fundraising processes when needed
+- Marketing - 20%
+  - Quarterly goal setting (with Andy)
+  - Oversee the budget
+  - Do billboards (for the first time - hand it over if it works)
+  - Generate weird ideas, 90% of which don't land
+  - Write some content, for fun
+- Spend lots of time connecting the dots between the above 3 areas
+- I am the manager for Simon, Andy, Fraser, Lottie, and Joe
 
 ## Quirks
 
