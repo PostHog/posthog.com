@@ -3,7 +3,7 @@ title: The best Microsoft Clarity alternatives & competitors, compared
 date: 2024-02-29
 author: ["andy-vandervell"]
 rootpage: /blog
-featuredImage: ../images/blog/posthog-alternatives/posthog-alternatives.jpeg
+featuredImage: ../images/blog/clarity-alternatives/clarity-alternatives.png
 featuredImageType: full
 category: General
 tags:
