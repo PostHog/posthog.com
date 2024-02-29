@@ -10,7 +10,12 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { kebabCase } from 'lib/utils'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import { StickerPineappleYes, StickerPineappleNo, StickerPineappleUnknown } from 'components/Stickers/Index'
+import {
+    StickerMayor,
+    StickerPineappleYes,
+    StickerPineappleNo,
+    StickerPineappleUnknown,
+} from 'components/Stickers/Index'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
 import { MDXProvider } from '@mdx-js/react'
@@ -180,6 +185,9 @@ export default function Team({
                                                         ) : (
                                                             <StickerPineappleNo className="w-8 h-8" />
                                                         )}
+                                                    </span>
+                                                    <span>
+                                                        <StickerMayor className="w-8 h-8" />
                                                     </span>
                                                 </div>
                                             </div>
