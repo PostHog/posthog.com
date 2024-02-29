@@ -152,7 +152,6 @@
         { "source": "/features", "destination": "/product" },
         { "source": "/docs/integrate/overview", "destination": "/docs/integrate" },
         { "source": "/docs/integrations", "destination": "/docs/integrate" },
-        { "source": "/docs/libraries", "destination": "/docs/integrate" },
         { "source": "/signup", "destination": "/pricing" },
         { "source": "/docs/self-host/deploy/render", "destination": "/docs/self-host/deploy/other" },
         { "source": "/docs/self-host/deploy/qovery", "destination": "/docs/self-host/deploy/other" },
@@ -332,7 +331,6 @@
             "source": "/tutorials/free-hotjar-alternative",
             "destination": "/blog/best-open-source-session-replay-tools"
         },
-        { "source": "/docs/privacy/hipaa-compliance", "destination": "/blog/hipaa-compliant-analytics" },
         { "source": "/docs/plugins/build/reference", "destination": "/docs/apps/build/reference" },
         { "source": "/docs/plugins/build/types", "destination": "/docs/apps/build/types" },
         { "source": "/docs/plugins/enabling", "destination": "/docs/apps/enabling" },
