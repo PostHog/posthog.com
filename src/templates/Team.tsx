@@ -31,6 +31,7 @@ import { Change } from './Changelog'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
+import Tooltip from 'components/Tooltip'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -52,7 +53,7 @@ const Section = ({ children, title, id = '' }) => {
 
 export default function Team({
     data: {
-        team: { crest, name, description, profiles, roadmaps, teamImage },
+        team: { crest, name, description, profiles, roadmaps, teamImage, leadProfiles },
         objectives,
     },
 }) {
@@ -158,6 +159,7 @@ export default function Team({
                                 attributes: { avatar, firstName, lastName, country, companyRole, pineappleOnPizza },
                             }) => {
                                 const name = [firstName, lastName].filter(Boolean).join(' ')
+                                const isTeamLead = leadProfiles.data.some(({ id: leadID }) => leadID === id)
                                 return (
                                     <li key={id} className="bg-border rounded-md">
                                         <Link
@@ -196,9 +198,17 @@ export default function Team({
                                                             <StickerPineappleNo className="w-8 h-8" />
                                                         )}
                                                     </span>
-                                                    <span>
-                                                        <StickerMayor className="w-8 h-8" />
-                                                    </span>
+                                                    {isTeamLead ? (
+                                                        <span>
+                                                            <Tooltip content="Team lead">
+                                                                <span>
+                                                                    <StickerMayor className="w-8 h-8" />
+                                                                </span>
+                                                            </Tooltip>
+                                                        </span>
+                                                    ) : (
+                                                        ''
+                                                    )}
                                                 </div>
                                             </div>
                                             <div className="ml-auto -mb-4 -mr-4 mt-2">
@@ -361,6 +371,11 @@ export const query = graphql`
                         location
                         pineappleOnPizza
                     }
+                }
+            }
+            leadProfiles {
+                data {
+                    id
                 }
             }
         }
