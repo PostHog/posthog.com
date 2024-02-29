@@ -22,9 +22,11 @@ import {
     StickerFlagPL,
     StickerFlagUnknown,
     StickerFlagUS,
+    StickerPineapple,
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
+    StickerPizza,
 } from 'components/Stickers/Index'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
@@ -42,10 +44,15 @@ const SidebarSection = ({ title, children }) => {
     )
 }
 
-const Section = ({ children, title, id = '' }) => {
+const Section = ({ children, cta, title, id = '' }) => {
     return (
         <section id={id} className="max-w-screen-xl mx-auto px-5 my-12">
-            {title && <h4>{title}</h4>}
+            {title && (
+                <div className="flex justify-between items-baseline w-full">
+                    <h4>{title}</h4>
+                    {cta && <aside>{cta}</aside>}
+                </div>
+            )}
             <div>{children}</div>
         </section>
     )
@@ -109,11 +116,11 @@ export default function Team({
                         </CallToAction>
                     </div>
                     {teamImage?.caption && (
-                        <figure className="rotate-2 w-72 flex flex-col gap-2 mt-8 md:mt-0">
-                            <div className="bg-accent aspect-video rounded-md flex justify-center items-center">
-                                <GatsbyImage image={getImage(teamImage)} />
+                        <figure className="rotate-2 max-w-sm flex flex-col gap-2 mt-8 md:mt-0">
+                            <div className="bg-accent aspect-video rounded-md flex justify-center items-center shadow-xl">
+                                <GatsbyImage image={getImage(teamImage)} className="border-8 border-white rounded-md" />
                             </div>
-                            <div className="text-right text-sm">{teamImage.caption}</div>
+                            <div className="text-right text-[13px] mr-2">{teamImage.caption}</div>
                         </figure>
                     )}
                 </div>
@@ -150,9 +157,13 @@ export default function Team({
                         : []),
                 ]}
             />
-            <Section title="People" id="people">
+            <Section
+                title="People"
+                cta={<span className="text-sm">{PineappleText(pineapplePercentage)}</span>}
+                id="people"
+            >
                 <div className="flex space-x-12">
-                    <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
                         {profiles.data.map(
                             ({
                                 id,
@@ -226,7 +237,7 @@ export default function Team({
                             }
                         )}
                     </ul>
-                    <div className="w-full md:max-w-sm shrink-1 basis-sm">
+                    <div className="hidden w-full md:max-w-sm shrink-1 basis-sm">
                         <SidebarSection title="Small team FAQ">
                             <p className="font-bold m-0">Q: Does pineapple belong on pizza?</p>
                             <p className="font-bold m-0 mt-2">{PineappleText(pineapplePercentage)}</p>

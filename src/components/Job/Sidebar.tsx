@@ -19,7 +19,7 @@ export const PineappleText = (percentage: number) => {
     if (percentage < 50) return 'Shockingly, this team prefers their pizza without pineapple'
     return (
         <>
-            <strong>{percentage}%</strong> of this team prefer pineapple on pizza
+            <strong>{percentage}%</strong> of this team (correctly) agree pineapple belongs on pizza
         </>
     )
 }
