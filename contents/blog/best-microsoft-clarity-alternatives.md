@@ -433,3 +433,17 @@ Based on reviews from G2.com, customers use Mouseflow because they:
 > Mouseflow is worth considering if you want session replay and funnel analysis in one tool, but its session replay features are very similar to Clarity's, and it doesn't support mobile apps at all.
 
 <br />
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect Clarity replacement if:
+
+- You value transparency (we're open source and open core)
+- You want more than basic session replay and analysis tools. We offer everything in one.
+- You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
+
+Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
+
+<ArrayCTA />
