@@ -302,7 +302,7 @@ export default function Team({
             </div>
             {objectives?.body && (
                 <Section title="Goals" id="goals">
-                    <div className="article-content">
+                    <div className="article-content max-w-2xl">
                         <MDXProvider components={{}}>
                             <MDXRenderer>{objectives.body}</MDXRenderer>
                         </MDXProvider>
