@@ -342,7 +342,14 @@ SELECT * FROM events WHERE properties.`$browser` = 'Chrome'
 
 ### Types
 
-Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database), [properties](https://us.posthog.com/data-management/properties) tabs in data management as well as in the [data warehouse tab](https://us.posthog.com/data-warehouse) for external sources. 
+Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database), [properties](https://us.posthog.com/data-management/properties) tabs in data management as well as in the [data warehouse tab](https://us.posthog.com/data-warehouse) for external sources. They include:
+
+- `STRING` (default)
+- `JSON` (accessible with dot or bracket notation)
+- `DATETIME`(in `ISO-8601`, [read more in our data docs](/docs/data/timestamps))
+- `INTEGER`
+- `NUMERIC`(AKA float)
+- `BOOLEAN`
 
 For example:
 
