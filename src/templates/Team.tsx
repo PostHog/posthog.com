@@ -10,13 +10,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { kebabCase } from 'lib/utils'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import {
-    StickerFlagBE,
-    StickerFlagUS,
-    StickerPineappleYes,
-    StickerPineappleNo,
-    StickerPineappleUnknown,
-} from 'components/Stickers/Index'
+import { StickerPineappleYes, StickerPineappleNo, StickerPineappleUnknown } from 'components/Stickers/Index'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
 import { MDXProvider } from '@mdx-js/react'
@@ -146,7 +140,7 @@ export default function Team({
                         {profiles.data.map(
                             ({
                                 id,
-                                attributes: { avatar, firstName, lastName, country, companyRole, location, ...other },
+                                attributes: { avatar, firstName, lastName, country, companyRole, pineappleOnPizza },
                             }) => {
                                 const name = [firstName, lastName].filter(Boolean).join(' ')
                                 return (
@@ -166,16 +160,27 @@ export default function Team({
                                                     {companyRole}
                                                 </p>
 
-                                                <div className="mt-2">
-                                                    {country === 'world' ? (
-                                                        '🌎'
-                                                    ) : (
-                                                        <ReactCountryFlag
-                                                            className="!w-7 !h-7"
-                                                            svg
-                                                            countryCode={country}
-                                                        />
-                                                    )}
+                                                <div className="mt-2 flex space-x-1 items-center">
+                                                    <span>
+                                                        {country === 'world' ? (
+                                                            '🌎'
+                                                        ) : (
+                                                            <ReactCountryFlag
+                                                                className="!w-8 !h-8"
+                                                                svg
+                                                                countryCode={country}
+                                                            />
+                                                        )}
+                                                    </span>
+                                                    <span>
+                                                        {pineappleOnPizza === null ? (
+                                                            <StickerPineappleUnknown className="w-8 h-8" />
+                                                        ) : pineappleOnPizza ? (
+                                                            <StickerPineappleYes className="w-8 h-8" />
+                                                        ) : (
+                                                            <StickerPineappleNo className="w-8 h-8" />
+                                                        )}
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div className="ml-auto -mb-4 -mr-4 mt-2">
@@ -197,14 +202,6 @@ export default function Team({
                         <SidebarSection title="Small team FAQ">
                             <p className="font-bold m-0">Q: Does pineapple belong on pizza?</p>
                             <p className="font-bold m-0 mt-2">{PineappleText(pineapplePercentage)}</p>
-
-                            <div className="flex gap-1">
-                                <StickerFlagBE className="w-8 h-8" />
-                                <StickerFlagUS className="w-8 h-8" />
-                                <StickerPineappleYes className="w-8 h-8" />
-                                <StickerPineappleNo className="w-8 h-8" />
-                                <StickerPineappleUnknown className="w-8 h-8" />
-                            </div>
                         </SidebarSection>
                     </div>
                 </div>
