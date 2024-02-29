@@ -180,3 +180,34 @@ This assumes you are adding a data attribute to every "safe" element like `<p da
     maskTextSelector: ":not([data-record='true'])",
 }
 ```
+
+### Network capture
+
+Session replay also allows you to capture network requests and responses. Headers and bodies can include sensitive information. We scrub some headers automatically, but if your network requests and responses include sensitive information you can provide a function to scrub them. [Read more in our network capture docs](https://posthog.com/docs/session-replay/network-recording#sensitive-information)
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        maskCapturedNetworkRequestFn: (request: CapturedNetworkRequest) => {
+            // For example: ignoring a request entirely
+            if (request.name.includes('example.com')) {
+                return null
+            }
+
+            // ... or remove the query string from the URL
+            request.name = request.name.split('?')[0]
+
+            // ... or redact the request body
+            request.requestBody = '[redacted]'
+
+            // ... or remove the response body
+            request.responseBody = undefined
+
+            // ... and more
+
+            // finally return the request
+            return request
+        }
+    }
+})
+```
