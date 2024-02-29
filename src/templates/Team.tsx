@@ -35,7 +35,7 @@ const Section = ({ children, title }) => {
 
 export default function Team({
     data: {
-        team: { crest, name, description, profiles, roadmaps },
+        team: { crest, name, description, profiles, roadmaps, teamImage },
         objectives,
     },
 }) {
@@ -87,10 +87,14 @@ export default function Team({
                             See what we're building
                         </CallToAction>
                     </div>
-                    <figure className="rotate-2 w-72 flex flex-col gap-2 mt-8 md:mt-0">
-                        <div className="bg-accent aspect-video rounded-md flex justify-center items-center">image</div>
-                        <div className="text-right text-sm">Caption</div>
-                    </figure>
+                    {teamImage?.caption && (
+                        <figure className="rotate-2 w-72 flex flex-col gap-2 mt-8 md:mt-0">
+                            <div className="bg-accent aspect-video rounded-md flex justify-center items-center">
+                                <GatsbyImage image={getImage(teamImage)} />
+                            </div>
+                            <div className="text-right text-sm">{teamImage.caption}</div>
+                        </figure>
+                    )}
                 </div>
             </Section>
             <Section title="People">
@@ -217,6 +221,10 @@ export const query = graphql`
         team: squeakTeam(name: { eq: $teamName }) {
             name
             description
+            teamImage {
+                caption
+                gatsbyImageData(width: 380)
+            }
             crest {
                 gatsbyImageData(width: 227)
             }

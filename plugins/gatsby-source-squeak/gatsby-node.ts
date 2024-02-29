@@ -223,6 +223,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     fields: 'id',
                 },
                 crest: true,
+                teamImage: {
+                    populate: {
+                        image: true,
+                    },
+                },
             },
         },
         {
@@ -233,7 +238,16 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
 
     for (const team of teams.data) {
-        const { roadmaps, crest, ...rest } = team.attributes
+        const { roadmaps, crest, teamImage, ...rest } = team.attributes
+
+        const cloudinaryTeamImage = {
+            ...teamImage,
+            cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+            publicId: teamImage?.image?.data?.attributes?.provider_metadata?.public_id,
+            originalHeight: teamImage?.image?.data?.attributes?.height,
+            originalWidth: teamImage?.image?.data?.attributes?.width,
+            originalFormat: (teamImage?.image?.data?.attributes?.ext || '').replace('.', ''),
+        }
 
         const cloudinaryCrest = {
             ...crest,
@@ -251,6 +265,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 type: `SqueakTeam`,
                 contentDigest: createContentDigest(team),
             },
+            teamImage: cloudinaryTeamImage,
             crest: cloudinaryCrest,
             ...rest,
             roadmaps: roadmaps.data.map((roadmap) => ({
