@@ -16,7 +16,7 @@ This is where I'm spending my time in 2024. This is my latest order of priority,
   - Quarterly goal setting (with Simon)
   - Figure out our strategy to scale to $50m ARR
   - Input on CS systems, inc. how we do support
-  - Do more IC work, e.g. doing more analysis
+  - Do more IC work, e.g. doing more analysis, getting or doing calls
   - Set revenue targets for the model and check how we're tracking
 - Ops & people - 30%
   - Quarterly goal setting (with Fraser)
