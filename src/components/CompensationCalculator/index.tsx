@@ -157,7 +157,7 @@ export const CompensationCalculator = ({
                         options={locationFactor
                             .filter((location) => location.country === country)
                             .map((location) => location.area)}
-                        display={(area) => (area ? `${area} ${findLocation(country, area)?.locationFactor}` : '')}
+                        display={(area) => (area ? area : '')}
                     />
                 </div>
             </Section>
