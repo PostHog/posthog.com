@@ -107,13 +107,6 @@ export default function Team({
                         </figure>
                     )}
                 </div>
-                <div className="flex gap-1">
-                    <StickerFlagBE className="w-8 h-8" />
-                    <StickerFlagUS className="w-8 h-8" />
-                    <StickerPineappleYes className="w-8 h-8" />
-                    <StickerPineappleNo className="w-8 h-8" />
-                    <StickerPineappleUnknown className="w-8 h-8" />
-                </div>
             </Section>
             <SmoothScroll
                 menuItems={[
@@ -204,6 +197,14 @@ export default function Team({
                         <SidebarSection title="Small team FAQ">
                             <p className="font-bold m-0">Q: Does pineapple belong on pizza?</p>
                             <p className="font-bold m-0 mt-2">{PineappleText(pineapplePercentage)}</p>
+
+                            <div className="flex gap-1">
+                                <StickerFlagBE className="w-8 h-8" />
+                                <StickerFlagUS className="w-8 h-8" />
+                                <StickerPineappleYes className="w-8 h-8" />
+                                <StickerPineappleNo className="w-8 h-8" />
+                                <StickerPineappleUnknown className="w-8 h-8" />
+                            </div>
                         </SidebarSection>
                     </div>
                 </div>
