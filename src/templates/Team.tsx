@@ -12,6 +12,16 @@ import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import {
     StickerMayor,
+    StickerFlagAT,
+    StickerFlagBE,
+    StickerFlagCA,
+    StickerFlagCO,
+    StickerFlagDE,
+    StickerFlagFR,
+    StickerFlagNL,
+    StickerFlagPL,
+    StickerFlagUnknown,
+    StickerFlagUS,
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
@@ -211,6 +221,19 @@ export default function Team({
                             <p className="font-bold m-0">Q: Does pineapple belong on pizza?</p>
                             <p className="font-bold m-0 mt-2">{PineappleText(pineapplePercentage)}</p>
                         </SidebarSection>
+
+                        <div className="flex gap-1 flex-wrap">
+                            <StickerFlagAT className="w-7 h-7" />
+                            <StickerFlagBE className="w-7 h-7" />
+                            <StickerFlagCA className="w-7 h-7" />
+                            <StickerFlagCO className="w-7 h-7" />
+                            <StickerFlagDE className="w-7 h-7" />
+                            <StickerFlagFR className="w-7 h-7" />
+                            <StickerFlagNL className="w-7 h-7" />
+                            <StickerFlagPL className="w-7 h-7" />
+                            <StickerFlagUnknown className="w-7 h-7" />
+                            <StickerFlagUS className="w-7 h-7" />
+                        </div>
                     </div>
                 </div>
             </Section>
