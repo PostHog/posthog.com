@@ -1,5 +1,5 @@
 ---
-title: Set up a data warehouse
+title: Link a source
 sidebar: Docs
 showTitle: true
 availability:
@@ -7,28 +7,72 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import SettingsLight from '../../images/features/data-warehouse/settings-light.png'
+import SettingsDark from '../../images/features/data-warehouse/settings-dark.png'
 
-The PostHog data warehouse gives you a place to put all of your most important data, query across these datasets, and combined with the product analytics data already in PostHog. Powered by Clickhouse, the data warehouse enables you to query across big datasets quickly. 
+The PostHog data warehouse enables you to link your most important data into PostHog from sources like your CRM, payment processor, or database. Once linked, you can combine this data with the product analytics data already in PostHog and query across all of it.
 
-## How to access the data warehouse beta
+You can link a source to PostHog by either using one of our pre-built connectors below or by [creating a custom source](#linking-a-custom-source).
 
-Data warehouse is currently in **feature preview**. To get access, log in to PostHog, click on the top right menu, click on "Feature previews" and enable data warehouse. There should now be a "Data Warehouse" menu item on the left.
+> The data warehouse is currently in beta. To access it, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your instance. It is free to use during the beta period.
 
-## How does it work?
+## Stripe
 
-Each table in the warehouse is backed by one or more files in your object storage system (i.e. S3, GCS). We never "ingest" your data into our systems. Instead, on every query, we'll read directly from your object storage system. This means you can query as much data as you want. We'll only charge you for the data we actually query.
+The Stripe connector can link charges, customers, invoices, prices, products, subscriptions, and balance transactions to PostHog. 
 
-> Data warehouse is free to use while in private beta. After that, you'll be charged for each GB of data read while querying.
+To link Stripe:
 
-## Creating a table
+1. Go to the [data warehouse tab](https://us.posthog.com/data-warehouse) in PostHog
+2. Click "Link Source" and select Stripe
+3. Get your Account ID from your [Stripe user settings](https://dashboard.stripe.com/settings/user) under Accounts then ID
+4. Get your Client Secret from your [Stripe API keys](https://dashboard.stripe.com/apikeys) under Standard keys then Secret key
+5. Add both of these to PostHog (and optionally a table name prefix) and click "Link"
 
-To create a new table, you'll need to:
-1. Create a bucket in your object storage system like S3 or GCS
+The data warehouse then starts syncing your Stripe data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
+
+## Hubspot
+
+The Hubspot connector can link contacts, companies, deals, emails, meetings, quotes, and tickets to PostHog.
+
+To link Hubspot:
+
+1. Go to the [data warehouse tab](https://us.posthog.com/data-warehouse) in PostHog
+2. Click "Link Source" and select Hubspot
+3. Select the Hubspot account you want to link and click "Connect app"
+4. *Optional:* Add a prefix to your table names
+
+The data warehouse then starts syncing your Hubspot data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
+
+## Postgres
+
+The Postgres connector can link your database tables to PostHog.
+
+To link Postgres:
+
+1. Go to the [data warehouse tab](https://us.posthog.com/data-warehouse) in PostHog
+2. Click "Link Source" and select Postgres
+3. Enter your database connection details:
+    - **Host:** The hostname or IP your database server like `db.example.com` or `192.168.1.100`.
+    - **Port:** The port your database server is listening to. The default is `5432`.
+    - **Database:** The name of the database you want like `analytics_db`.
+    - **User:** The username with the necessary permissions to access the database.
+    - **Password:** The password for the user.
+    - **Schema:** The schema for your database where your tables are located. The default is `public`.
+4. Click "Link"
+
+The data warehouse then starts syncing your Postgres data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
+
+## Linking a custom source
+
+The data warehouse can also link to data in your object storage system like S3 or GCS. To start, you'll need to:
+
+1. Create a bucket in your object storage system
 2. Set up an access key and secret
 3. Add data to the bucket (we'll use Airbyte)
 4. Create the table in PostHog
 
-> These docs are written for AWS S3, but you can also use Google Cloud Storage (GCS).
+> These docs are written for AWS S3 using Airbyte, but you can also use Google Cloud Storage (GCS) and Fivetran, Stitch, or other ETL tools.
 
 ### Step 1: Creating a bucket in S3
 
@@ -61,7 +105,7 @@ Next, we need to create a new user in our AWS console with programmatic access t
 6. Click "Next" until you end up on the "Review Policy" page
 7. Give your policy a name and click "Create policy"
 
-The final step to create a new user and give them access to our bucket by attaching our newly created policy.
+The final step is to create a new user and give them access to our bucket by attaching our newly created policy.
 
 1. Open [IAM](https://console.aws.amazon.com/iam/home) and navigate to "Users" on the left
 2. Click "Add Users"
@@ -112,4 +156,22 @@ The final step to create a new user and give them access to our bucket by attach
 
 ### Step 5: Query the table.
 
-Amazing! You can now query your new table in any [HogQL query](/docs/product-analytics/hogql).
+Amazing! You can now [query](/docs/data-warehouse/query) your new table.
+
+## Syncing
+
+Once you add a source, you can see its status, sync frequency, and last successful run in the [data warehouse settings page](https://us.posthog.com/data-warehouse/settings). You can also reload or delete sources here.
+
+When you expand each source, you can see:
+
+- Schema name
+- Enable or disable syncing for that table
+- Synced table name in PostHog
+- Time the table was last synced
+
+<ProductScreenshot
+    imageLight={SettingsLight} 
+    imageDark={SettingsDark} 
+    alt="Data warehouse settings in PostHog" 
+    classes="rounded"
+  />
