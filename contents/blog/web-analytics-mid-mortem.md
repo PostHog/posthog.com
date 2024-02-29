@@ -8,9 +8,9 @@ featuredImage: ../images/blog/web-analytics-mid-mortem.jpg
 featuredImageType: full
 ---
 
-[Our web analytics beta](http://app.posthog.com/home#panel=feature-previews) started simple — a dashboard of some stats, plus the top site paths. We wanted to grow it into...
+[Our web analytics beta](http://us.posthog.com/home#panel=feature-previews) started simple — a dashboard of some stats, plus the top site paths. We wanted to grow it into...
 
-1. A Google Analytics alternative..
+1. A Google Analytics alternative...
 1. Which was low cost...
 1. Simple to use...
 1. Could be built quickly...
@@ -25,7 +25,7 @@ We didn’t put a lot of resources behind the idea. The ‘web analytics team’
 
 Google was already migrating users to the less-than-popular Google Analytics 4 (GA4) when we started this project last year. Predictably, there was a scramble among competitors to grab fleeing users and we thought about launching early to do the same. Instead, we waited until November. 
 
-While we arguably missed out on an early opportunity to establish PostHog as a GA alternative, we knew it was more important to take our time and build a credible MVP. Only then could we  [validate it with actual users](/founders/product-market-fit-game#level-3---validate-your-mvp-by-recruiting-real-users). 
+While we arguably missed out on an early opportunity to establish PostHog as a GA alternative, we knew it was more important to take our time and build a credible MVP. Only then could we [validate it with actual users](/founders/product-market-fit-game#level-3---validate-your-mvp-by-recruiting-real-users). 
 
 It’s a good thing we did too. We anticipated new feature requests during the beta, but were surprised to learn that _performance_ mattered far more than we expected. Users view traffic data as simple and therefore want to get it very quickly. Rushing a full launch without doing the work to make web analytics performant would have been a disaster!
 
