@@ -33,9 +33,13 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 #### Key features
 
 - **Session replays:** Including event timelines, console logs, network activity.
+
 - **Heatmaps:** See where users click and detect rage clicks.
+
 - **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts.
+
 - **Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests on new features.
+
 - **Surveys:** Run customer satisfaction, Net Promoter Score (NPS) and Product-Market Fit (PMF) surveys.
 
 ### How does PostHog compare to Microsoft Clarity?
@@ -97,9 +101,13 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/LogRocket), 1,132 
 #### Key features
 
 - **Session replay:** See what users do, debug issues with console and network logs, errors, and performance data.
+
 - **Error tracking:** Identify and triage the most impactful issues with JavaScript, network errors, and stack traces.
+
 - **Product analytics:** Analyze behavior with conversion funnels, path analysis, and retention charts.
+
 - **Performance monitoring:** Monitor frontend performance, CPU and memory usage, and network speed.
+
 - **Heatmaps:** See what users are clicking on and how far they scroll.
 
 ### How does LogRocket compare to Clarity?
@@ -158,9 +166,13 @@ According to data from [BuiltWith](https://trends.builtwith.com/analytics/FullSt
 #### Key features
 
 -  **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+
 -  **Product analytics:** Understand user paths and struggle points.
+
 -  **Event autocapture:** Tagless event capture that ensures the tracking of all events.
+
 -  **Heatmaps:** Find out where users click and frustration points.
+
 -  **Mobile app analytics:** Crash analytics and user path analysis.
 
 ### How does FullStory compare to Clarity?
@@ -215,11 +227,15 @@ UXCam is designed specifically for mobile apps rather than websites. It combines
 
 #### Key features
 
-- **Session replay:** Replay videos of users using your app and analyze their behavior
-- **Crash analytics:** Match crashes and freezes to sessions and replay the crashed sessions
-- **Funnel analysis:** See where users drop off, optimize conversion
-- **Retention analysis:** Detect churn patterns and improve retention
-- **Heatmaps:** Analyze where people interact and use gestures
+- **Session replay:** Replay videos of users using your app and analyze their behavior.
+
+- **Crash analytics:** Match crashes and freezes to sessions and replay the crashed sessions.
+
+- **Funnel analysis:** See where users drop off, optimize conversion.
+
+- **Retention analysis:** Detect churn patterns and improve retention.
+
+- **Heatmaps:** Analyze where people interact and use gestures.
 
 ### How does UXCam compare to Clarity?
 
@@ -275,11 +291,15 @@ Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [ac
 
 #### Key features
 
-- **Session replay:** Watch how real users navigate your website
-- **Heatmaps** See where users click and scroll to on pages
-- **Conversion funnels:** Basic funnel analysis for tracking conversions
-- **Dashboards:** Create simple dashboards using pre-defined reports
-- **Visitor profiles:** See everything a user has done 
+- **Session replay:** Watch how real users navigate your website.
+
+- **Heatmaps** See where users click and scroll to on pages.
+
+- **Conversion funnels:** Basic funnel analysis for tracking conversions.
+
+- **Dashboards:** Create simple dashboards using pre-defined reports.
+
+- **Visitor profiles:** See everything a user has done.
 
 ### How does Lucky Orange compare to Clarity?
 
@@ -336,9 +356,13 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as Feb 
 #### Key features
 
 - **Heatmaps:** See what parts of your pages get attention and how far they scroll
+
 - **Recordings:** Replay real user sessions and see what they see.
+
 - **Feedback:** Learn what your users are thinking. Find out their likes and dislikes.
+
 - **Surveys:** Gather info on user preferences using questionnaires.  
+
 - **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
 
 ### How does Hotjar compare to Clarity?
@@ -396,9 +420,13 @@ According to data from BuiltWith, 5,555 of the top 1 million websites use Mousef
 #### Key features
 
 - **Session replay:** Watch user sessions to learn what helps and hurts.
+
 - **Friction scores:** Identify visits where users experience frustration.
+
 - **Heatmaps:** See where users click and scroll on your website.
+
 - **User feedback:** Gather feedback and ratings from users.
+
 - **Form analytics:** Reduce abandonment on signup forms.
 
 ### How does Mouseflow compare to Clarity?
