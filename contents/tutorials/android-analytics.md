@@ -13,7 +13,7 @@ import IdentifyDark from '../images/tutorials/android-analytics/identify-dark.pn
 import InsightLight from '../images/tutorials/android-analytics/create-insights-light.png'
 import InsightsDark from '../images/tutorials/android-analytics/create-insights-dark.png'
 
-[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Android app. To show you how to set up analytics, in this tutorial we create a basic Android app, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
+[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Android app. To show you how to set up analytics, in this tutorial we create a basic Android app with Kotlin, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 
 ## 1. Create a new Android app
 
@@ -183,16 +183,6 @@ Similarly to the `HomeActivity`, we define the layout for our `MainActivity`. Cr
 Add the following dependencies to your `app/build.gradle (Module: app)` and then sync your project with the changes:
 
 ```js file=app/build.gradle
-dependencies {
-    // existing dependencies...
-
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
-}
-```
-
 Lastly, update the `themes.xml` file located in the `res/values` folder to ensure our theme extends `Theme.AppCompat`. We also define the app colors here:
 
 ```xml themes.xml
@@ -212,7 +202,7 @@ Our basic set up is now complete. Build and run your app to see it in action.
 
 ## 2. Add PostHog to your app
 
-First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `Gradle Scripts/build.gradle.kts (Module: app)` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). For this tutorial, we use version `3.1.7`.
+First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `Gradle Scripts/build.gradle.kts (Module: app)` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/). For this tutorial, we use version `3.1.7`.
 
 
 ```gradle_kotlin
@@ -334,6 +324,8 @@ Linking events to specific users enables you to build a full picture of how they
 To show you an example, update the code for the login button to the following:
 
 ```kotlin file=MainActivity.kt
+// rest of your imports
+import com.posthog.PostHog
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
