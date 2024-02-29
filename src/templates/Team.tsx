@@ -14,6 +14,7 @@ import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { SmoothScroll } from 'components/Products/SmoothScroll'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -24,9 +25,9 @@ const SidebarSection = ({ title, children }) => {
     )
 }
 
-const Section = ({ children, title }) => {
+const Section = ({ children, title, id = '' }) => {
     return (
-        <section className="max-w-screen-xl mx-auto px-5 my-12">
+        <section id={id} className="max-w-screen-xl mx-auto px-5 my-12">
             {title && <h4>{title}</h4>}
             <div>{children}</div>
         </section>
@@ -74,6 +75,9 @@ export default function Team({
         },
     })
 
+    const hasUnderConsideration = underConsideration.length > 0
+    const hasInProgress = inProgress.length > 0
+
     return (
         <Layout>
             <Section>
@@ -83,7 +87,7 @@ export default function Team({
                         <h1 className="m-0">{teamName}</h1>
                         <p className="my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
 
-                        <CallToAction type="secondary" size="md">
+                        <CallToAction type="secondary" size="md" to="#in-progress">
                             See what we're building
                         </CallToAction>
                     </div>
@@ -97,7 +101,39 @@ export default function Team({
                     )}
                 </div>
             </Section>
-            <Section title="People">
+            <SmoothScroll
+                menuItems={[
+                    {
+                        label: 'People',
+                        id: 'people',
+                    },
+                    ...(hasInProgress
+                        ? [
+                              {
+                                  label: "What we're building",
+                                  id: 'in-progress',
+                              },
+                          ]
+                        : []),
+                    ...(hasUnderConsideration || !!recentlyShipped
+                        ? [
+                              {
+                                  label: 'Roadmap & recently shipped',
+                                  id: 'roadmap',
+                              },
+                          ]
+                        : []),
+                    ...(objectives?.body
+                        ? [
+                              {
+                                  label: 'Goals',
+                                  id: 'goals',
+                              },
+                          ]
+                        : []),
+                ]}
+            />
+            <Section title="People" id="people">
                 <div className="flex space-x-12">
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {profiles.data.map(
@@ -158,8 +194,8 @@ export default function Team({
                     </div>
                 </div>
             </Section>
-            {inProgress.length > 0 && (
-                <Section title="What we're building">
+            {hasInProgress && (
+                <Section title="What we're building" id="in-progress">
                     <div className="flex space-x-12 items-start">
                         <ul className="list-none m-0 p-0 grid grid-cols-2 gap-4">
                             {inProgress.map((roadmap) => (
@@ -176,30 +212,32 @@ export default function Team({
                     </div>
                 </Section>
             )}
-            {underConsideration.length > 0 && (
-                <Section title="Roadmap">
-                    <p className="-mt-2">
-                        Here’s what we’re considering building next. Vote for your favorites or share a new idea on{' '}
-                        <Link to="https://github.com/PostHog/posthog">GitHub</Link>.
-                    </p>
-                    <div>
-                        <ul className="list-none m-0 p-0 space-y-4">
-                            {underConsideration.map((roadmap) => (
-                                <UnderConsideration key={roadmap.squeakId} {...roadmap} />
-                            ))}
-                        </ul>
-                    </div>
-                </Section>
-            )}
-            {recentlyShipped && (
-                <Section title="Recently shipped">
-                    <div className="max-w-2xl">
-                        <Change {...recentlyShipped} />
-                    </div>
-                </Section>
-            )}
+            <div id="roadmap">
+                {hasUnderConsideration && (
+                    <Section title="Roadmap">
+                        <p className="-mt-2">
+                            Here’s what we’re considering building next. Vote for your favorites or share a new idea on{' '}
+                            <Link to="https://github.com/PostHog/posthog">GitHub</Link>.
+                        </p>
+                        <div>
+                            <ul className="list-none m-0 p-0 space-y-4">
+                                {underConsideration.map((roadmap) => (
+                                    <UnderConsideration key={roadmap.squeakId} {...roadmap} />
+                                ))}
+                            </ul>
+                        </div>
+                    </Section>
+                )}
+                {recentlyShipped && (
+                    <Section title="Recently shipped">
+                        <div className="max-w-2xl">
+                            <Change {...recentlyShipped} />
+                        </div>
+                    </Section>
+                )}
+            </div>
             {objectives?.body && (
-                <Section title="Goals">
+                <Section title="Goals" id="goals">
                     <div className="article-content">
                         <MDXProvider components={{}}>
                             <MDXRenderer>{objectives.body}</MDXRenderer>
