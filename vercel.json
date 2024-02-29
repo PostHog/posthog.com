@@ -675,6 +675,7 @@
         { "source": "/manual/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/manual/hogql", "destination": "/docs/hogql" },
         { "source": "/docs/product-analytics/hogql", "destination": "/docs/hogql" },
+        { "source": "/docs/hogql/guide", "destination": "/docs/product-analytics/sql" },
         { "source": "/manual/insights", "destination": "/docs/product-analytics/insights" },
         { "source": "/manual/lifecycle", "destination": "/docs/product-analytics/lifecycle" },
         { "source": "/manual/paths", "destination": "/docs/product-analytics/paths" },

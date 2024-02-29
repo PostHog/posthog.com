@@ -1346,10 +1346,6 @@ export const docsMenu = {
                             url: '/docs/hogql',
                         },
                         {
-                            name: 'Guide',
-                            url: '/docs/hogql/guide',
-                        },
-                        {
                             name: 'Expressions',
                             url: '/docs/hogql/expressions',
                         },

@@ -57,9 +57,8 @@ WHERE event = '$pageview'
         WHERE event = '$pageview'
         GROUP BY distinct_id
     )
-    AND timestamp > toDateTime('2023-01-01 00:00:00')
 GROUP BY current_url
-ORDER BY url_count DESC;
+ORDER BY url_count DESC
 ```
 
 We can change `properties.$current_url` to whatever property we care about such as UTM source, referring domain, or device to get those values.

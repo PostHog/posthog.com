@@ -8,38 +8,62 @@ availability:
     enterprise: full
 ---
 
-HogQL expressions enable you to directly access, modify, and aggregate data in PostHog using SQL. You can use them nearly everywhere where event filters exist, including:
+HogQL expressions enable you to directly access, modify, and aggregate data in many places in PostHog including:
 
-- [Dashboards](/docs/product-analytics/dashboards)
-- Data series
+- Filters
+- Trends series
 - Breakdowns
-- [Funnels](/docs/product-analytics/funnels)
-- The activity tab
+- [Funnel](/docs/product-analytics/funnels) aggregations
+- [User paths](/docs/product-analytics/paths)
+- [Session replays](/docs/session-replay)
+- [Dashboards](/docs/product-analytics/dashboards)
+- The [activity tab](https://us.posthog.com/events)
 
 ![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
+
+> **Tip:** If you're having trouble getting results from your expression, try debugging by using a different visualization (trends table often works best as it shows all values returned) or breaking down your expression into pieces and testing each one.
+
+## Accessible data
 
 HogQL expressions can access data like:
 
 - event properties
 - [person properties](/docs/product-analytics/user-properties)
 - `event`
-- `elements_chain`
+- `elements_chain` (from autocapture)
 - `timestamp`
 - `distinct_id`
 - `person_id`
 
-They then use SQL functions to access, filter, modify, or aggregate the data. A full list of SQL functions are found in our [supported ClickHouse functions](/docs/hogql/clickhouse-functions) and [supported aggregations](/docs/hogql/aggregations) docs.
+Properties can be accessed with dot notation like `person.properties.$initial_browser` which also works for nested or JSON properties. They can also be accessed with bracket notation like `properties['$feature/cool-flag']`.
 
-> **Tip:** If you're having trouble getting results from your expression, try debugging by using a different visualization (trends table often works best as it shows all values returned) or breaking down your expression into pieces and testing each one.
+> **Note:** PostHog's properties always include `$` as a prefix, while custom properties do not (unless you add it).
 
-## Useful functions
+Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.
 
-To help you get the most out of HogQL expressions, here are some of the most popular functions.
+### Types
+
+Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database) and [properties](https://us.posthog.com/data-management/properties) tabs in data management. They include:
+
+- `STRING` (default)
+- `JSON` (accessible with dot or bracket notation)
+- `DATETIME`(in `ISO-8601`, [read more in our data docs](/docs/data/timestamps))
+- `INTEGER`
+- `NUMERIC`(AKA float)
+- `BOOLEAN`
+
+Types can be converted using functions like `toString`, `toDate`, `toFloat`, `JSONExtractString`, `JSONExtractInt`, and more.
+
+## Functions and aggregations
+
+You can filter, modify, or aggregate accessed data with [supported ClickHouse functions](/docs/hogql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
+
+Here are some of the most common and useful ones:
 
 ### Comparisons
 
 - `if`: Checks a condition, and if true (or non-zero), and then returns the result of an expression.
-- `multiIf`: Enables chaining multiple `if` statements together, each a condition and return expression.
+- `multiIf`: Enables chaining multiple `if` statements together, each with a condition and return expression.
 - `in`: Checks if an array or string contains a value.
 - `match`: Checks whether a string matches a regular expression pattern.
 - `like`: Checks if string matches pattern that contain string(s) and symbols `%` (arbitrary number of arbitrary characters), `_` (single arbitrary character), `\` (escaped literals).
@@ -79,3 +103,4 @@ To help you get the most out of HogQL expressions, here are some of the most pop
 - Creating percentages by calculating the sum of one property over the sum of all related properties with `sum()`, `/`, `+`, and `*`.
 - Getting unique values with `uniq()`.
 - Binning events based on time of day, week, and month with `toHour`, `toDayOfWeek`, `toStartOfWeek`, `toMonth`.
+- Breaking down by multiple properties using `concat()`.
