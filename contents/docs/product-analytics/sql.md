@@ -340,19 +340,9 @@ For example:
 SELECT * FROM events WHERE properties.`$browser` = 'Chrome'
 ```
 
-### Property access
+### Types
 
-To access a property stored on an event or person, just use dot notation. For example `properties.$browser` or `person.properties.$initial_browser`.  
-
-Nested property or JSON access, such as `properties.$some.nested.property`, works as well.
-
-> PostHog's properties include always include `$` as a prefix, while custom properties do not (unless you add it).
-
-Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.
-
-### Property types
-
-You can find a full list of properties and their types in your [data warehouse tab](https://us.posthog.com/data-warehouse). By default, properties are returned as strings.
+Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database), [properties](https://us.posthog.com/data-management/properties) tabs in data management as well as in the [data warehouse tab](https://us.posthog.com/data-warehouse) for external sources. 
 
 For example:
 
@@ -362,4 +352,14 @@ SELECT round(properties.$screen_width * properties.$screen_height / 1000000, 2) 
 
 This works because `$screen_width` and `$screen_height` are both defined as numeric properties. Thus you can multiply them.
 
-To cast a string property into a different type, use type conversion functions, such as `toFloat()`.
+To cast a string property into a different type, use type conversion functions, such as`toString`, `toDate`, `toFloat`, `JSONExtractString`, `JSONExtractInt`, and more.
+
+### Property access
+
+To access a property stored on an event or person, just use dot notation. For example `properties.$browser` or `person.properties.$initial_browser`. You can also use bracket notation like `properties['$feature/cool-flag']`.
+
+Nested property or JSON access, such as `properties.$some.nested.property`, works as well.
+
+> PostHog's properties include always include `$` as a prefix, while custom properties do not (unless you add it).
+
+Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.

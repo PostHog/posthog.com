@@ -35,7 +35,7 @@ HogQL expressions can access data like:
 - `distinct_id`
 - `person_id`
 
-Properties can be accessed with dot notation like `person.properties.$initial_browser` which also works for nested or JSON properties. 
+Properties can be accessed with dot notation like `person.properties.$initial_browser` which also works for nested or JSON properties. They can also be accessed with bracket notation like `properties['$feature/cool-flag']`.
 
 > **Note:** PostHog's properties always include `$` as a prefix, while custom properties do not (unless you add it).
 
@@ -43,13 +43,16 @@ Property identifiers must be known at query time. For dynamic access, use the JS
 
 ### Types
 
-The types for event and person properties are listed in your [data warehouse tab](https://us.posthog.com/data-warehouse). By default, properties are strings (and might require conversion). For example, the expression below works because `$screen_width` and `$screen_height` are both defined as numeric properties so you can multiply them:
+Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database) and [properties](https://us.posthog.com/data-management/properties) tabs in data management. They include:
 
-```sql
-round(properties.$screen_width * properties.$screen_height / 1000000, 2)
-```
+- `STRING` (default)
+- `JSON` (accessible with dot or bracket notation)
+- `DATETIME`(in `ISO-8601`, [read more in our data docs](/docs/data/timestamps))
+- `INTEGER`
+- `NUMERIC`(AKA float)
+- `BOOLEAN`
 
-To cast a string property into a different type, use type conversion functions, such as `toFloat()`.
+Types can be converted using functions like `toString`, `toDate`, `toFloat`, `JSONExtractString`, `JSONExtractInt`, and more.
 
 ## Functions and aggregations
 
