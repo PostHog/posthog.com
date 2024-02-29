@@ -327,7 +327,7 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 
 [Hotjar](/blog/posthog-vs-hotjar) focuses on user behavior rather than analytics. This means using heatmaps, replays, feedback, and interviews to understand the qualitative aspects of your site and app. It's popular among product designers and marketers, but not so useful for software engineers.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as Feb 2024 Hotjar is used by 72,048 of the top 1 million websites, compared to Clarity's 45,820. This makes Hotjar the most popular tool in this guide, though usage has declined considerably from a peak of ~125k in 2021.  
+According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as Feb 2024, Hotjar is used by 72,048 of the top 1 million websites, compared to Clarity's 45,820. This makes Hotjar the most popular tool in this guide, though usage has declined considerably from a peak of ~125k in 2021.  
 
 #### Key features
 
@@ -392,7 +392,7 @@ According to data from BuiltWith, 5,555 of the top 1 million websites use Mousef
 #### Key features
 
 - **Session replay:** Watch user sessions to learn what helps and hurts.
-- **Friction scores:** Identify visits where users experience frustration.
+- **Friction scores:** Identify sessions where users experience frustration.
 - **Heatmaps:** See where users click and scroll on your website.
 - **User feedback:** Gather feedback and ratings from users.
 - **Form analytics:** Reduce abandonment on signup forms.
