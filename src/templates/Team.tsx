@@ -7,6 +7,13 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { kebabCase } from 'lib/utils'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
+import {
+    StickerFlagBE,
+    StickerFlagUS,
+    StickerPineappleYes,
+    StickerPineappleNo,
+    StickerPineappleUnknown,
+} from 'components/Stickers/Index'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -53,6 +60,13 @@ export default function Team({
             </section>
             <section className="max-w-screen-xl mx-auto px-5 my-12">
                 <h4>People</h4>
+                <div className="flex gap-1">
+                    <StickerFlagBE className="w-8 h-8" />
+                    <StickerFlagUS className="w-8 h-8" />
+                    <StickerPineappleYes className="w-8 h-8" />
+                    <StickerPineappleNo className="w-8 h-8" />
+                    <StickerPineappleUnknown className="w-8 h-8" />
+                </div>
                 <div className="flex gap-6 md:gap-12 w-full flex-col md:flex-row">
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {profiles.data.map(
