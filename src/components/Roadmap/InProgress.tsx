@@ -37,7 +37,6 @@ export function InProgress(
     const [modalOpen, setModalOpen] = useState(false)
 
     const [more, setMore] = useState(props.more ?? false)
-    const [showAuth, setShowAuth] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const { title, githubPages, description, betaAvailable, image, squeakId } = props
@@ -94,7 +93,7 @@ export function InProgress(
             const token = await getJwt()
 
             if (!token) {
-                setShowAuth(true)
+                setModalOpen(true)
                 return
             }
 
@@ -109,7 +108,7 @@ export function InProgress(
             })
 
             if (res.ok) {
-                setShowAuth(false)
+                setModalOpen(false)
                 addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
                 mutate({
                     data: {
@@ -162,7 +161,7 @@ export function InProgress(
             const token = await getJwt()
 
             if (!token) {
-                setShowAuth(true)
+                setModalOpen(true)
                 return
             }
 
@@ -177,7 +176,7 @@ export function InProgress(
             })
 
             if (res.ok) {
-                setShowAuth(false)
+                setModalOpen(false)
                 addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
                 mutate({
                     data: {
@@ -218,11 +217,22 @@ export function InProgress(
                 sort: ['createdAt:desc'],
                 populate: 'question.profile.avatar',
                 filters: {
-                    roadmap: {
-                        id: {
-                            $eq: squeakId,
+                    $and: [
+                        {
+                            roadmap: {
+                                id: {
+                                    $eq: squeakId,
+                                },
+                            },
                         },
-                    },
+                        {
+                            question: {
+                                archived: {
+                                    $null: true,
+                                },
+                            },
+                        },
+                    ],
                 },
             },
             {
@@ -340,51 +350,43 @@ export function InProgress(
                 </div>
 
                 <div className="px-4">
-                    <div className="flex justify-between items-center">
-                        <h6>Project updates</h6>
+                    <div className="flex justify-between items-center my-4">
+                        <h6 className="m-0">Project updates</h6>
 
-                        <div>
-                            {showAuth ? (
-                                <div onClick={() => setModalOpen(true)}>Get updates</div>
-                            ) : (
-                                <button
-                                    disabled={loading}
-                                    onClick={() => (subscribed ? unsubscribe() : subscribe())}
-                                    className="text-sm font-semibold flex gap-2 items-center"
-                                    data-attr={
-                                        subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`
-                                    }
-                                >
-                                    <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
-                                        {loading ? (
-                                            <Spinner className="w-[14px] h-[14px] !text-blue" />
-                                        ) : subscribed ? (
-                                            <Check className="w-[14px] h-[14px]" />
-                                        ) : (
-                                            <Plus className="w-[14px] h-[14px]" />
-                                        )}
-                                    </span>
-                                    <span>
-                                        {subscribed
-                                            ? 'Unsubscribe'
-                                            : betaAvailable
-                                            ? 'Get early access'
-                                            : 'Get updates about this project'}
-                                        {!subscribed && !betaAvailable && (
-                                            <Tooltip
-                                                content="Get email notifications when the team shares updates about this project, releases a beta, or
+                        <button
+                            disabled={loading}
+                            onClick={() => (subscribed ? unsubscribe() : subscribe())}
+                            className="text-sm font-semibold flex gap-2 items-center"
+                            data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
+                        >
+                            <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
+                                {loading ? (
+                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                ) : subscribed ? (
+                                    <Check className="w-[14px] h-[14px]" />
+                                ) : (
+                                    <Plus className="w-[14px] h-[14px]" />
+                                )}
+                            </span>
+                            <span>
+                                {subscribed
+                                    ? 'Unsubscribe'
+                                    : betaAvailable
+                                    ? 'Get early access'
+                                    : 'Get updates about this project'}
+                                {!subscribed && !betaAvailable && (
+                                    <Tooltip
+                                        content="Get email notifications when the team shares updates about this project, releases a beta, or
                                             ships this feature."
-                                                contentContainerClassName="max-w-xs"
-                                            >
-                                                <div className="inline-block relative">
-                                                    <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
-                                                </div>
-                                            </Tooltip>
-                                        )}
-                                    </span>
-                                </button>
-                            )}
-                        </div>
+                                        contentContainerClassName="max-w-xs"
+                                    >
+                                        <div className="inline-block relative">
+                                            <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                        </div>
+                                    </Tooltip>
+                                )}
+                            </span>
+                        </button>
                     </div>
 
                     {updates?.length > 0 ? (
@@ -399,7 +401,7 @@ export function InProgress(
                                 }) => {
                                     return (
                                         <li className="mb-4 last:mb-0" key={id}>
-                                            <Question id={id} />
+                                            <Question showActions={false} id={id} />
                                         </li>
                                     )
                                 }

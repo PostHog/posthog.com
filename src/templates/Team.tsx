@@ -2,6 +2,9 @@ import { CallToAction } from 'components/CallToAction'
 import { PineappleText } from 'components/Job/Sidebar'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
+import { InProgress } from 'components/Roadmap/InProgress'
+import { Question } from 'components/Squeak'
+import useTeamUpdates from 'hooks/useTeamUpdates'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { kebabCase } from 'lib/utils'
@@ -14,6 +17,11 @@ import {
     StickerPineappleNo,
     StickerPineappleUnknown,
 } from 'components/Stickers/Index'
+import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
+import { Change } from './Changelog'
+import { MDXProvider } from '@mdx-js/react'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { SmoothScroll } from 'components/Products/SmoothScroll'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -24,9 +32,19 @@ const SidebarSection = ({ title, children }) => {
     )
 }
 
+const Section = ({ children, title, id = '' }) => {
+    return (
+        <section id={id} className="max-w-screen-xl mx-auto px-5 my-12">
+            {title && <h4>{title}</h4>}
+            <div>{children}</div>
+        </section>
+    )
+}
+
 export default function Team({
     data: {
-        team: { crest, name, description, profiles },
+        team: { crest, name, description, profiles, roadmaps, teamImage },
+        objectives,
     },
 }) {
     const teamName = `${name} Team`
@@ -39,27 +57,56 @@ export default function Team({
                 100
         )
 
+    const underConsideration = roadmaps.filter(
+        (roadmap) =>
+            !roadmap.dateCompleted &&
+            !roadmap.projectedCompletion &&
+            roadmap.githubPages &&
+            roadmap.githubPages.length > 0
+    )
+
+    const inProgress = roadmaps.filter((roadmap) => !roadmap.complete && roadmap.projectedCompletion)
+
+    const [recentlyShipped] = roadmaps
+        .filter((roadmap) => roadmap.complete)
+        .sort((a, b) => (new Date(a.dateCompleted).getTime() > new Date(b.dateCompleted).getTime() ? -1 : 1))
+
+    const { updates } = useTeamUpdates({
+        teamName: name,
+        filters: {
+            roadmap: {
+                id: {
+                    $null: true,
+                },
+            },
+        },
+    })
+
+    const hasUnderConsideration = underConsideration.length > 0
+    const hasInProgress = inProgress.length > 0
+
     return (
         <Layout>
-            <section className="max-w-screen-xl mx-auto px-5 my-12">
+            <Section>
                 <div className="flex flex-col md:flex-row space-x-4 items-center">
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
                     <div className="max-w-xl">
                         <h1 className="m-0">{teamName}</h1>
                         <p className="my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
 
-                        <CallToAction type="secondary" size="md">
+                        <CallToAction type="secondary" size="md" to="#in-progress">
                             See what we're building
                         </CallToAction>
                     </div>
-                    <figure className="rotate-2 w-72 flex flex-col gap-2 mt-8 md:mt-0">
-                        <div className="bg-accent aspect-video rounded-md flex justify-center items-center">image</div>
-                        <div className="text-right text-sm">Caption</div>
-                    </figure>
+                    {teamImage?.caption && (
+                        <figure className="rotate-2 w-72 flex flex-col gap-2 mt-8 md:mt-0">
+                            <div className="bg-accent aspect-video rounded-md flex justify-center items-center">
+                                <GatsbyImage image={getImage(teamImage)} />
+                            </div>
+                            <div className="text-right text-sm">{teamImage.caption}</div>
+                        </figure>
+                    )}
                 </div>
-            </section>
-            <section className="max-w-screen-xl mx-auto px-5 my-12">
-                <h4>People</h4>
                 <div className="flex gap-1">
                     <StickerFlagBE className="w-8 h-8" />
                     <StickerFlagUS className="w-8 h-8" />
@@ -67,7 +114,41 @@ export default function Team({
                     <StickerPineappleNo className="w-8 h-8" />
                     <StickerPineappleUnknown className="w-8 h-8" />
                 </div>
-                <div className="flex gap-6 md:gap-12 w-full flex-col md:flex-row">
+            </Section>
+            <SmoothScroll
+                menuItems={[
+                    {
+                        label: 'People',
+                        id: 'people',
+                    },
+                    ...(hasInProgress
+                        ? [
+                              {
+                                  label: "What we're building",
+                                  id: 'in-progress',
+                              },
+                          ]
+                        : []),
+                    ...(hasUnderConsideration || !!recentlyShipped
+                        ? [
+                              {
+                                  label: 'Roadmap & recently shipped',
+                                  id: 'roadmap',
+                              },
+                          ]
+                        : []),
+                    ...(objectives?.body
+                        ? [
+                              {
+                                  label: 'Goals',
+                                  id: 'goals',
+                              },
+                          ]
+                        : []),
+                ]}
+            />
+            <Section title="People" id="people">
+                <div className="flex space-x-12">
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {profiles.data.map(
                             ({
@@ -126,13 +207,64 @@ export default function Team({
                         </SidebarSection>
                     </div>
                 </div>
-            </section>
+            </Section>
+            {hasInProgress && (
+                <Section title="What we're building" id="in-progress">
+                    <div className="flex space-x-12 items-start">
+                        <ul className="list-none m-0 p-0 grid grid-cols-2 gap-4">
+                            {inProgress.map((roadmap) => (
+                                <InProgress key={roadmap.squeakId} {...roadmap} />
+                            ))}
+                        </ul>
+                        {updates.length > 0 && (
+                            <div className="max-w-[340px] w-full flex-shrink-0">
+                                <SidebarSection title="Latest update">
+                                    <Question key={updates[0].question} id={updates[0].question} />
+                                </SidebarSection>
+                            </div>
+                        )}
+                    </div>
+                </Section>
+            )}
+            <div id="roadmap">
+                {hasUnderConsideration && (
+                    <Section title="Roadmap">
+                        <p className="-mt-2">
+                            Here’s what we’re considering building next. Vote for your favorites or share a new idea on{' '}
+                            <Link to="https://github.com/PostHog/posthog">GitHub</Link>.
+                        </p>
+                        <div>
+                            <ul className="list-none m-0 p-0 space-y-4">
+                                {underConsideration.map((roadmap) => (
+                                    <UnderConsideration key={roadmap.squeakId} {...roadmap} />
+                                ))}
+                            </ul>
+                        </div>
+                    </Section>
+                )}
+                {recentlyShipped && (
+                    <Section title="Recently shipped">
+                        <div className="max-w-2xl">
+                            <Change {...recentlyShipped} />
+                        </div>
+                    </Section>
+                )}
+            </div>
+            {objectives?.body && (
+                <Section title="Goals" id="goals">
+                    <div className="article-content">
+                        <MDXProvider components={{}}>
+                            <MDXRenderer>{objectives.body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                </Section>
+            )}
         </Layout>
     )
 }
 
 export const query = graphql`
-    query TeamTemplateQuery($id: String!, $teamName: String!) {
+    query TeamTemplateQuery($id: String!, $teamName: String!, $objectives: String) {
         body: mdx(id: { eq: $id }) {
             frontmatter {
                 title
@@ -141,8 +273,46 @@ export const query = graphql`
         team: squeakTeam(name: { eq: $teamName }) {
             name
             description
+            teamImage {
+                caption
+                gatsbyImageData(width: 380)
+            }
             crest {
                 gatsbyImageData(width: 227)
+            }
+            roadmaps {
+                squeakId
+                betaAvailable
+                complete
+                dateCompleted
+                title
+                description
+                media {
+                    gatsbyImageData
+                    publicId
+                    data {
+                        attributes {
+                            mime
+                        }
+                    }
+                }
+                githubPages {
+                    title
+                    html_url
+                    number
+                    closed_at
+                    reactions {
+                        hooray
+                        heart
+                        eyes
+                        plus1
+                    }
+                }
+                projectedCompletion
+                cta {
+                    label
+                    url
+                }
             }
             profiles {
                 data {
@@ -164,6 +334,9 @@ export const query = graphql`
                     }
                 }
             }
+        }
+        objectives: mdx(fields: { slug: { eq: $objectives } }) {
+            body
         }
     }
 `

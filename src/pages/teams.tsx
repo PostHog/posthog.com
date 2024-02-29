@@ -63,7 +63,7 @@ const Teams: React.FC = () => {
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-6 text-center">
                                 {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (
                                     <Link
-                                        to={`/handbook/small-teams/${slugify(name, { lower: true })}`}
+                                        to={`/handbook/small-teams/${slugify(name, { lower: true, remove: /and/ })}`}
                                         key={id}
                                         className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-2 md:p-4 hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px"
                                     >
