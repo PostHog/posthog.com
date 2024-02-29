@@ -149,14 +149,16 @@ export const CompensationCalculator = ({
                 description={descriptions['location'] && descriptions['location']}
             >
                 <div className="grid grid-cols-2 gap-x-4">
-                    <Combobox label="Country" value={country} onChange={setItem('country')} options={countries} />
+                    <Combobox label="Country" value={country} onChange={setItem('country')} options={countries.sort()} />
                     <Combobox
                         label="Region"
                         value={region}
                         onChange={setItem('region')}
                         options={locationFactor
                             .filter((location) => location.country === country)
-                            .map((location) => location.area)}
+                            .map((location) => location.area)
+                            .sort()
+                        }
                         display={(area) => (area ? area : '')}
                     />
                 </div>
