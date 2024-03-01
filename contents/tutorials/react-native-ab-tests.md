@@ -13,7 +13,7 @@ import TestSetupDark from '../images/tutorials/react-native-ab-tests/experiment-
 
 [A/B tests](/ab-testing) helps you improve your React Native app by enabling you to compare the impact of changes on key metrics. 
 
-PostHog makes [A/B testing on React Native](/docs/experiments/installation?tab=React+Native) simple. To show you how to set one up, we create a basic app with Expo, add PostHog, create an A/B test, and implement the code for it.
+PostHog makes [A/B testing in React Native](/docs/experiments/installation?tab=React+Native) simple. To show you how to set it up, we create a basic app with Expo, add PostHog, create an A/B test, and implement the code for it.
 
 > This tutorial focuses on React Native apps built with [Expo](https://expo.dev/). However, PostHog also supports non-Expo apps. See our [React Native docs](/docs/libraries/react-native) for details.
 
@@ -88,7 +88,7 @@ Next we set up the code for our screens:
 ```js file=FirstScreen.js
 import { View, Button, StyleSheet } from 'react-native';
 
-function FirstScreen({ navigation }) {
+export default function FirstScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Button
@@ -106,14 +106,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default FirstScreen;
 ```
 
 ```js file=SecondScreen.js
 import { View, Button, StyleSheet } from 'react-native';
 
-function SecondScreen() {
+export default function SecondScreen() {
   const backgroundColor = 'red';
   const onButtonPress = () => {
     // We add code here later
@@ -133,8 +131,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default SecondScreen;
 ```
 
 Our basic set up is now complete. Re-run `npx expo start` to see our app in action.
@@ -185,7 +181,7 @@ function SecondScreen() {
   // rest of your code
 ```
 
-To check your setup, re-run your app. Click your button a few times. You should start seeing events in the [activity tab](https://app.posthog.com/events).
+To check your setup, re-run your app. Click your button a few times. You should start seeing events in the [activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsInPostHogLight} 
@@ -202,7 +198,7 @@ Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create
 
 1. Name it "My cool experiment".
 2. Set "Feature flag key" to `my-cool-experiment`.
-3. Under the experiment goal, select the `pageview` event we captured in the previous step.
+3. Under the experiment goal, select the `second_screen_button_clicked` event we captured in the previous step.
 4. Use the default values for all other fields.
 
 Click "Save as draft" and then click "Launch".
@@ -240,7 +236,7 @@ If you want to test both variants of your experiment to make sure they are worki
 
 ```js file=SecondScreen.js
 const posthog = usePostHog()
-posthog.overrideFeatureFlag({'my-cool-experiment': 'control'} ) 
+posthog.overrideFeatureFlag({'my-cool-experiment': 'control'}) 
 ```
 
 Lastly, you can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
