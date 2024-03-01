@@ -98,9 +98,13 @@ Don't forget to disable the in-app banner too.
 
 24-48 hours after an incident, we should have a quick sync meeting with a small group of people involved in the incident, plus Tim. If you raised the incident, you can schedule this. If you don’t want to or can’t, Tim is happy to take over at this point, just let him know.
 
-Incident.io will automatically create an incident analysis doc that you can paste into a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis). It'll have a timeline of everything that happened.
+Incident.io will automatically create an incident analysis doc that you can paste into a PR. 
+
+- If the post-mortem involves confidential information, such as customer data, it should go in the private [incidents analysis repository](https://github.com/PostHog/incidents-analysis).
+- In most other situations we should be as transparent as possible and document post-mortems in the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
 During the incident analysis session, we’ll walk through the entire timeline as it happened. While doing that, we want to answer the following types of questions:
+
 - In what ways did our systems surprise us?
 - How did it make sense for someone to do what they did?
 
