@@ -98,7 +98,7 @@ Don't forget to disable the in-app banner too.
 
 24-48 hours after an incident, we should have a quick sync meeting with a small group of people involved in the incident, plus Tim. If you raised the incident, you can schedule this. If you don’t want to or can’t, Tim is happy to take over at this point, just let him know.
 
-Incident.io will automatically create an incident analysis doc that you can paste into a PR. 
+Before this meeting you should create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis). You can use Incident.io's automatic analysis as a starting point. In general it is advised to post short point in time summaries of actions taken in the incident Slack channel so that you can more easily fill this out after the fact.
 
 - If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
