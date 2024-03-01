@@ -1,6 +1,6 @@
 ---
 title: "How to set up analytics in Android"
-date: 2024-02-29
+date: 2024-03-01
 author: ["lior-neu-ner"]
 tags: ['feature flags']
 ---
