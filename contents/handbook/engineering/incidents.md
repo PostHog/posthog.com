@@ -100,8 +100,7 @@ Don't forget to disable the in-app banner too.
 
 Incident.io will automatically create an incident analysis doc that you can paste into a PR. 
 
-- If the post-mortem involves confidential information, such as customer data, it should go in the private [incidents analysis repository](https://github.com/PostHog/incidents-analysis).
-- In most other situations we should be as transparent as possible and document post-mortems in the public [post-mortems repository](https://github.com/PostHog/post-mortems)
+- If a post-mortem had significant impact on customers (like flags not being available or where we caused data loss for a large majority of customers), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
 During the incident analysis session, we’ll walk through the entire timeline as it happened. While doing that, we want to answer the following types of questions:
 
