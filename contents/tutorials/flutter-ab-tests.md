@@ -321,7 +321,7 @@ class MainScreen extends StatelessWidget {
   }
 
  void _fetchFeatureFlagValue(Function(bool) onFlagFetched) async {
-    String featureFlagValue = await Posthog().getFeatureFlag('my-cool-experiment') as String;
+    String featureFlagValue = await Posthog().getFeatureFlag('my-cool-experiment') as? String;
     bool isTestVariant = featureFlagValue == 'test';
     onFlagFetched(isTestVariant);
   }
