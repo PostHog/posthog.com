@@ -140,7 +140,7 @@ You can customize your [release conditions](/docs/feature-flags/creating-feature
 To implement the feature flag, we: 
 
 1. Fetch the `my-cool-flag` flag using [`PostHogSDK.shared.isFeatureEnabled()`](/docs/libraries/ios#feature-flags).
-2. Change the background color of `FeatureScreenView` based on the value of the flag (`control` or `test`).
+2. Change the background color of `FeatureScreenView` based on the value of the flag.
 
 To do this, update the code in `ContentView.swift` with the following:
 
