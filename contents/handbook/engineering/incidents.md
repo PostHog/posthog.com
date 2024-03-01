@@ -100,7 +100,7 @@ Don't forget to disable the in-app banner too.
 
 Incident.io will automatically create an incident analysis doc that you can paste into a PR. 
 
-- If a post-mortem had significant impact on customers (like flags not being available or where we caused data loss for a large majority of customers), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
+- If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
 During the incident analysis session, we’ll walk through the entire timeline as it happened. While doing that, we want to answer the following types of questions:
 
