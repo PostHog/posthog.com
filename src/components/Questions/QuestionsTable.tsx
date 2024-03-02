@@ -7,7 +7,7 @@ import Markdown from 'components/Squeak/components/Markdown'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { useInView } from 'react-intersection-observer'
-import { IconCheckCircle, IconClock, IconPin, IconX } from '@posthog/icons'
+import { IconCheckCircle, IconClock, IconMessage, IconPin, IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 dayjs.extend(relativeTime)
 
@@ -49,12 +49,14 @@ export const Skeleton = () => {
 }
 
 const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor, sortBy, pinned, fetchMore }) => {
-    const { isModerator } = useUser()
+    const { isModerator, user } = useUser()
     const {
         attributes: { profile, subject, permalink, replies, createdAt, resolved, topics, activeAt, body },
     } = question
 
-    const latestAuthor = replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
+    const latestReply = replies?.data?.[replies.data.length - 1]
+    const latestAuthor = latestReply?.attributes?.profile || profile
+    const isUnread = user?.profile?.repliesUnread?.some(({ id }) => id === latestReply?.id)
     const numReplies = replies?.data?.length || 0
 
     const { ref, inView } = useInView({
@@ -131,7 +133,12 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
                         </div>
                     </div>
                     <div className="hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
-                        {numReplies}
+                        <span className="relative">
+                            {numReplies}
+                            {isUnread && (
+                                <span className="bg-red dark:bg-yellow w-2 h-2 rounded-full absolute -left-4 top-1/2 -translate-y-1/2" />
+                            )}
+                        </span>
                     </div>
                     <div className="hidden md:block md:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                         <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-2">

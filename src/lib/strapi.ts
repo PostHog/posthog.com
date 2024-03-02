@@ -73,6 +73,7 @@ export type ProfileData = {
     teams?: {
         id: number
     }[]
+    repliesUnread: { id: number }[]
 }
 
 export type UserData = {

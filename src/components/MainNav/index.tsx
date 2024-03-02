@@ -53,6 +53,16 @@ export const Avatar = (props: { className?: string; src?: string }) => {
     )
 }
 
+const NotificationCount = ({ count, className = '' }: { count?: React.ReactNode; className?: string }) => {
+    return count ? (
+        <span
+            className={`w-4 h-4 text-[10px] bg-red dark:bg-yellow text-white dark:text-black flex justify-center items-center rounded-full ${className}`}
+        >
+            {count}
+        </span>
+    ) : null
+}
+
 export default function Orders() {
     const { user, getJwt } = useUser()
     const [orders, setOrders] = useState([])
@@ -361,6 +371,7 @@ const keyboardShortcut =
 
 export const Main = () => {
     const { user } = useUser()
+    const unreadReplyCount = user?.profile?.repliesUnread?.length
 
     const { open } = useSearch()
     const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
@@ -503,6 +514,10 @@ export const Main = () => {
                                                     >
                                                         <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                         My discussions
+                                                        <NotificationCount
+                                                            count={unreadReplyCount}
+                                                            className="ml-auto w-5 h-5 !text-xs"
+                                                        />
                                                     </Link>
                                                 </li>
                                                 <li className="px-1">
@@ -539,16 +554,22 @@ export const Main = () => {
                                 )
                             }}
                         >
-                            {user?.profile ? (
-                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex">
-                                    <Avatar
-                                        src={getAvatarURL(user?.profile)}
-                                        className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
-                                    />
-                                </div>
-                            ) : (
-                                <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
-                            )}
+                            <>
+                                {user?.profile ? (
+                                    <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex">
+                                        <Avatar
+                                            src={getAvatarURL(user?.profile)}
+                                            className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
+                                        />
+                                    </div>
+                                ) : (
+                                    <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
+                                )}
+                                <NotificationCount
+                                    count={unreadReplyCount}
+                                    className="absolute right-0 top-0 translate-x-1/2"
+                                />
+                            </>
                         </Tooltip>
                     </div>
                 </div>

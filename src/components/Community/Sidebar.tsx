@@ -131,7 +131,7 @@ export default function Sidebar() {
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
                     {user?.profile && (
-                        <button onClick={logout} className="text-red font-bold text-sm">
+                        <button onClick={logout} className="text-red dark:text-yellow font-bold text-sm">
                             Logout
                         </button>
                     )}

@@ -9,6 +9,7 @@ import Link from 'components/Link'
 export default function CommunityPage() {
     const { user, fetchUser } = useUser()
     const { questions, isLoading, fetchMore } = useQuestions({
+        sortBy: 'activity',
         filters: {
             subject: {
                 $ne: '',
@@ -72,6 +73,7 @@ export default function CommunityPage() {
 
             {questions?.data?.length > 0 ? (
                 <QuestionsTable
+                    sortBy="activity"
                     showTopic
                     showAuthor={false}
                     fetchMore={fetchMore}

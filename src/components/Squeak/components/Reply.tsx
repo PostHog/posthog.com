@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useUser } from 'hooks/useUser'
 import Days from './Days'
 import Markdown from './Markdown'
@@ -29,7 +29,9 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     } = useContext(CurrentQuestionContext)
 
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const { user } = useUser()
+    const { user, getJwt, fetchUser } = useUser()
+    const [unread, setUnread] = useState(false)
+    const [markedRead, setMarkedRead] = useState(false)
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
@@ -47,11 +49,50 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         setConfirmDelete(false)
     }
 
+    const markRead = async () => {
+        try {
+            const jwt = await getJwt()
+            const body = {
+                data: {
+                    repliesUnread: {
+                        disconnect: [id],
+                    },
+                },
+            }
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user.profile.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+            }).then((res) => res.json())
+            fetchUser()
+            setMarkedRead(true)
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+            if (!markedRead) {
+                markRead()
+            }
+            if (!unread) {
+                setUnread(user?.profile?.repliesUnread?.some(({ id: unreadID }) => unreadID === id))
+            }
+        }
+    }, [user])
+
     const pronouns = profile?.data?.attributes?.pronouns
 
     return profile?.data ? (
         <div onClick={handleContainerClick}>
-            <div className="pb-1 flex items-center space-x-2">
+            <div className="pb-1 flex items-center space-x-2 relative">
+                {unread && (
+                    <span className="bg-red dark:bg-yellow w-2 h-2 rounded-full absolute left-[-30px] -translate-x-1/2" />
+                )}
                 <Link
                     className="flex items-center !text-black dark:!text-white"
                     to={`/community/profiles/${profile.data.id}`}

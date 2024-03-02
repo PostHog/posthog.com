@@ -360,7 +360,7 @@ export const QuestionForm = ({
             }
 
             if (formType === 'reply' && questionId) {
-                reply(transformedValues.body)
+                await reply(transformedValues.body)
             }
 
             if (onSubmit) {
