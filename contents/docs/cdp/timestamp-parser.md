@@ -36,7 +36,7 @@ Once the app has been enabled, it will automatically start parsing all new event
 > The Timestamp Parser requires a PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 > Not running 1.30.0? Find out [how to update](https://posthog.com/docs/runbook/upgrading-posthog).
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Timestamp Parser'.
 3. Click on the toggle to enable the app.
 

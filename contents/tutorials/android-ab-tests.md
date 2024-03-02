@@ -272,4 +272,4 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [How to set up feature flags in Android](/tutorials/android-feature-flags)
-- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
+- [How to set up analytics in Android](/tutorials/android-analytics)

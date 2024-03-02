@@ -12,6 +12,8 @@ As console logs can contain sensitive information, we do not capture these logs 
 
 > **Important:** Console logs are recorded if _either_ the project setting **or** the client-side config is set to `true`. Console logs are not recorded if session replay is not enabled.
 
+> **Important:** Individual console logs are truncated at 2000 characters. The rest of the log is not sent to PostHog. When truncating a log message we add `...[Truncated]` to the message
+
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_instance_address>',
