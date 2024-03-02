@@ -7,6 +7,13 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import propertiesLight from '../../images/docs/user-guides/utm-segmentation/properties-light-mode.png'
+import propertiesDark from '../../images/docs/user-guides/utm-segmentation/properties-dark-mode.png'
+import filtersLight from '../../images/docs/user-guides/utm-segmentation/filters-light-mode.png'
+import filtersDark from '../../images/docs/user-guides/utm-segmentation/filters-dark-mode.png'
+import breakdownLight from '../../images/docs/user-guides/utm-segmentation/breakdown-light-mode.png'
+import breakdownDark from '../../images/docs/user-guides/utm-segmentation/breakdown-dark-mode.png'
+
 
 UTM parameters are a set 5 five parameters that allow you to track the effectiveness of marketing
 campaigns across traffic sources. These parameters were first introduced by Google Analytics, but are
@@ -34,7 +41,12 @@ PostHog supports all 5 parameters:
 
 Here's an example of what an event looks like when all 5 UTM parameters are set.
 
-![Sample UTM properties](../../images/docs/user-guides/utm-segmentation/properties.png)
+<ProductScreenshot
+    imageLight = {propertiesLight} 
+    imageDark = {propertiesDark}
+    alt="Sample UTM properties" 
+    classes="rounded"
+/>
 
 > **Note: ** Along with being set on events, these UTM properties will also be added to the profile of the user who sent the event.
 
@@ -56,7 +68,12 @@ One of the most common uses for UTM parameters is to filter down page views to o
 
 As an example, let's say we want to use UTM parameters to track the conversion rate of traffic from a particular campaign. In order to do this, we'll create a [funnel](/docs/user-guides/funnels) insight with the following filter applied.
 
-![Filtering UTM properties](../../images/docs/user-guides/utm-segmentation/filters.png)
+<ProductScreenshot
+    imageLight = {filtersLight} 
+    imageDark = {filtersDark}
+    alt="Filtering UTM properties" 
+    classes="rounded"
+/>
 
 > **Note: ** You can only filter by UTM properties once they have been set on _at least one_ event. If you don't see them as an option, it probably means that you haven't yet received an event where that parameter was set.
 
@@ -64,7 +81,12 @@ This filter means that we only want to see events where the `utm_campaign` was s
 
 Next, we can get a better idea of which platforms are giving us the best result by breaking down based on the UTM Source.
 
-![Breakdown by UTM Source](../../images/docs/user-guides/utm-segmentation/breakdown.png)
+<ProductScreenshot
+    imageLight = {breakdownLight} 
+    imageDark = {breakdownDark}
+    alt="Breakdown by UTM Source" 
+    classes="rounded"
+/>
 
 This will allow us to see how our conversion rate compares across platforms where we're running our ad campaign, and figure out where we're getting the highest-quality traffic from.
 

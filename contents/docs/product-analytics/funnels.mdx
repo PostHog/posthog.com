@@ -17,7 +17,8 @@ availability:
             enterprise: true
 ---
 
-import NewFunnelLight from '../../images/docs/user-guides/funnels/new-funnel.mp4'
+import newFunnelLight from '../../images/docs/user-guides/funnels/new-funnel-light-mode.mp4'
+import newFunnelDark from '../../images/docs/user-guides/funnels/new-funnel-dark-mode.mp4'
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=573"
@@ -44,11 +45,13 @@ For every flow throughout your product, more people will start it than complete 
 
 1. Click [Product Analytics](https://us.posthog.com/insights) on the left sidebar
 1. Click the **+ New Insights** tab
-1. Select the **Lifecycle** tab
+1. Select the **Funnel** option in the dropdown 
 
 <ProductVideo
-videoLight={NewFunnelLight} 
-classes="rounded"
+    videoLight = {newFunnelLight} 
+    videoDark = {newFunnelDark}
+    classes="rounded"
+    alt="Create a new funnel insight."
 />
 
 ### Adding and refining steps in your funnel

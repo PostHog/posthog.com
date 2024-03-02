@@ -8,14 +8,16 @@ availability:
     enterprise: full
 ---
 
-import IngestionWarningsLight from '../../images/features/data-management/warnings.png'
+import warningsLight from '../../images/features/data-management/warnings-light-mode.png'
+import warningsDark from '../../images/features/data-management/warnings-right-mode.png'
 
 Sometimes PostHog runs into problems during ingestion due to incorrect or suboptimal usage of PostHog. For example, if you capture an event with a generic ID like `null`, PostHog doesn't ingest it.
 
 If this happens, we do our best to still ingest the event and we log an ingestion warning. 
 
 <ProductScreenshot
-    imageLight={IngestionWarningsLight}
+    imageLight = {warningsLight} 
+    imageDark = {warningsDark}
     alt="Ingestion warnings" 
     classes="rounded"
 />
