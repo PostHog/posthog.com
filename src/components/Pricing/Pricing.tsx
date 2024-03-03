@@ -32,25 +32,25 @@ const planSummary: PlanData[] = [
         price: 'Free',
         priceSubtitle: '- no credit card required',
         features: [
+            'Generous usage limits on all products',
             'Basic product features',
             '1 project',
             '1 year data retention',
             'Community support',
-            'Generous usage limits on all products',
         ],
     },
     {
         title: 'Ridiculously cheap',
         price: '$0',
         features: [
+            'Generous free tier on all products',
             'Advanced product features',
             '2 projects',
             '7 year data retention',
             'Email support',
-            'Usage-based pricing on products, charged separately',
-            'Generous free tier on all products',
+            'Pay only for what you use',
             <>
-                <span className="opacity-60 text-sm">* Included with any product subscription!</span>
+                <span className="opacity-60 text-sm">* Included with any product subscription</span>
             </>,
         ],
     },
@@ -58,6 +58,7 @@ const planSummary: PlanData[] = [
         title: 'Teams',
         price: '$450',
         features: [
+            'Generous free tier on all products',
             <>
                 <span className="relative">
                     Includes team features{' '}
@@ -83,8 +84,7 @@ const planSummary: PlanData[] = [
             'Unlimited projects',
             '7 year data retention',
             'Priority support',
-            'Usage-based pricing on products, charged separately',
-            'Generous free tier on all products',
+            'Pay only for what you use',
         ],
     },
     {
@@ -95,7 +95,7 @@ const planSummary: PlanData[] = [
             'Unlimited everything',
             'SAML SSO',
             'Custom MSA',
-            'Dedicated Slack support channel',
+            'Dedicated support',
             'Personalized onboarding & training',
             'Advanced permissions & audit logs',
         ],
@@ -478,7 +478,7 @@ const Pricing = ({
             {!currentProduct && (
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4`}>
-                        <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Platform Plans</h3>
+                        <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Platform plans</h3>
                         <p className="text-[15px] text-primary/75 dark:text-primary-dark/75">
                             All plans include unlimited team members and no limits on tracked users.
                         </p>
