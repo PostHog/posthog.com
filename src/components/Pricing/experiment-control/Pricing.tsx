@@ -1,6 +1,5 @@
-import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -10,8 +9,6 @@ import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import OtherOptions from '../OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
-import { useLocation } from '@reach/router'
-import { pricingMenu } from '../../../navs'
 import tractorHog from '../../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA } from './Plans'
@@ -53,49 +50,11 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-const internalProductNames: {
-    [key: string]: string
-} = {
-    'product-analytics': 'product_analytics',
-    'session-replay': 'session_replay',
-    'feature-flags': 'feature_flags',
-    'ab-testing': 'ab_testing',
-    surveys: 'surveys',
-}
-
-const pricingGroupsToShowOverride: {
-    [key: keyof typeof internalProductNames]: string[]
-} = {
-    'ab-testing': ['feature_flags'],
-}
-
-export const Pricing = (): JSX.Element => {
+export const Pricing = ({ groupsToShow }: { groupsToShow: undefined | string[] }): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const { search } = useLocation()
-    const [groupsToShow, setGroupsToShow] = useState<undefined | string[]>()
-    const [currentProduct, setCurrentProduct] = useState<string | null>()
-
-    const getGroupsToShow = (): string[] | undefined => {
-        const product = new URLSearchParams(search).get('product')
-        setCurrentProduct(product ? internalProductNames[product] : null)
-        const defaultGroupsToShow = product ? [internalProductNames[product]] : undefined
-        const groupsToShowOverride = product ? pricingGroupsToShowOverride[product] : undefined
-        return groupsToShowOverride || defaultGroupsToShow
-    }
-
-    useEffect(() => {
-        setGroupsToShow(getGroupsToShow())
-    }, [search])
 
     return (
-        <Layout
-            parent={pricingMenu}
-            activeInternalMenu={
-                pricingMenu.children[
-                    Object.values(internalProductNames).findIndex((name) => name === currentProduct) + 1
-                ]
-            }
-        >
+        <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section className="w-screen overflow-x-hidden">
@@ -216,7 +175,7 @@ export const Pricing = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-        </Layout>
+        </>
     )
 }
 

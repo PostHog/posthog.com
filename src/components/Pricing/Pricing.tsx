@@ -1,6 +1,5 @@
-import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -9,12 +8,9 @@ import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { PricingCalculator } from './PricingCalculator'
-import { useLocation } from '@reach/router'
-import { pricingMenu } from '../../navs'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA } from './Plans'
-import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
 import { IconCheck, IconChevronDown, IconInfo, IconShield, IconArrowRightDown } from '@posthog/icons'
@@ -22,8 +18,6 @@ import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
-import posthog from 'posthog-js'
-import { Pricing as PricingControl } from 'components/Pricing/experiment-control/Pricing'
 
 interface PlanData {
     title: string
@@ -176,22 +170,6 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-const internalProductNames: {
-    [key: string]: string
-} = {
-    'product-analytics': 'product_analytics',
-    'session-replay': 'session_replay',
-    'feature-flags': 'feature_flags',
-    'ab-testing': 'ab_testing',
-    surveys: 'surveys',
-}
-
-const pricingGroupsToShowOverride: {
-    [key: keyof typeof internalProductNames]: string[]
-} = {
-    'ab-testing': ['feature_flags'],
-}
-
 const allProductsData = graphql`
     query {
         allProductData {
@@ -271,25 +249,20 @@ const allProductsData = graphql`
     }
 `
 
-const Pricing = (): JSX.Element => {
+const Pricing = ({
+    groupsToShow,
+    currentProduct,
+}: {
+    groupsToShow: undefined | string[]
+    currentProduct?: string | null
+}): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const { search } = useLocation()
-    const [groupsToShow, setGroupsToShow] = useState<undefined | string[]>()
-    const [currentProduct, setCurrentProduct] = useState<string | null>()
     const products = useProducts()
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
         },
     } = useStaticQuery(allProductsData)
-
-    const getGroupsToShow = (): string[] | undefined => {
-        const product = new URLSearchParams(search).get('product')
-        setCurrentProduct(product ? internalProductNames[product] : null)
-        const defaultGroupsToShow = product ? [internalProductNames[product]] : undefined
-        const groupsToShowOverride = product ? pricingGroupsToShowOverride[product] : undefined
-        return groupsToShowOverride || defaultGroupsToShow
-    }
 
     const platformAndSuppportProduct = billingProducts.find(
         (product: BillingProductV2Type) => product.type === 'platform_and_support'
@@ -298,21 +271,10 @@ const Pricing = (): JSX.Element => {
 
     console.log('platformAndSuppportProduct', platformAndSuppportProduct)
 
-    useEffect(() => {
-        setGroupsToShow(getGroupsToShow())
-    }, [search])
-
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
     return (
-        <Layout
-            parent={pricingMenu}
-            activeInternalMenu={
-                pricingMenu.children[
-                    Object.values(internalProductNames).findIndex((name) => name === currentProduct) + 1
-                ]
-            }
-        >
+        <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
 
@@ -686,7 +648,7 @@ const Pricing = (): JSX.Element => {
                             </li>
                         </ul>
                     </section>
-                    <section>
+                    <section className="relative">
                         <CTA />
                     </section>
 
@@ -771,7 +733,7 @@ const Pricing = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-        </Layout>
+        </>
     )
 }
 
