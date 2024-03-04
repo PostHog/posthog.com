@@ -84,10 +84,10 @@ function IdentifyUser() {
                     <code className="inline-block mb-2">identify</code>
                     <CodeBlock
                         code={`{
-  "id": 123,
+  "id": 'distinct_id',
   "email": "max@hedgehogmail.com",
   "name": "Max Hedgehog",
-  "createdAt": "2019-01- 01T00:00:00.000Z",
+  "createdAt": '2023-06-28T10:12:38.789-07:00',
   "completedOnboarding": false
 }`}
                         language="js"
