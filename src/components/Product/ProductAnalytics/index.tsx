@@ -988,7 +988,9 @@ export const ProductProductAnalytics = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[1].children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'product analytics').children}
+                    />
                 </section>
 
                 <section id="team" className="mb-20 px-5">
