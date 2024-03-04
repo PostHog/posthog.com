@@ -27,6 +27,6 @@ Our client SDKs (where appropriate) will take care of selecting the correct doma
 | `us-assets.i.posthog.com` | US CDN for client SDK assets (such as `array.js`) |
 | `eu.i.posthog.com` | EU ingestion endpoint for client SDK API calls |
 | `eu-assets.i.posthog.com` | EU CDN for client SDK assets (such as `array.js`) |
-| `eu.posthog.com` | EU PostHog app domain (used by the Toolbar)  |
+| `eu.posthog.com` | EU PostHog app domain (used by the Toolbar) and also legacy ingestion  |
 | `us.posthog.com` | US PostHog app domain (used by the Toolbar) |
 | `app.posthog.com` | Legacy ingestion endpoint |
