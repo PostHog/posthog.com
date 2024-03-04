@@ -11,7 +11,7 @@ Session replays help you get a deep understanding of how users are using your pr
 
 Instead of turning session replays off entirely, you can use PostHog’s configuration options to only record the sessions you want. This tutorial shows you three ways to do this. 
 
-> **Note:** This tutorial shows you ways you can control recordings with your own code. To learn about the built-in controls available to you see our docs page: [how to control which sessions you record](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record).
+> **Note:** This tutorial shows you ways you can control recordings with your own code. To learn about the built-in controls available, check our docs page: [how to control which sessions you record](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record).
 
 ## Configuration and basic session replay controls
 
