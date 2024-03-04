@@ -1268,6 +1268,10 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Using Content Security Policies',
+                            url: '/docs/advanced/content-security-policy',
+                        },
+                        {
                             name: 'Browser extensions',
                             url: '/docs/advanced/browser-extension',
                         },
