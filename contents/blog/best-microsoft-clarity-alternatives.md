@@ -442,5 +442,3 @@ We're biased, obviously, but we think PostHog is the perfect Clarity replacement
 Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
 
 <ArrayCTA />
-
- 

@@ -140,7 +140,7 @@ Based on reviews from G2.com, customers use Mouseflow because:
 - **Typical users:** Product teams and UX researchers
 - **Typical customers:** Medium and large B2C and B2B products
 
-IMAGE HERE
+![sprig](../images/blog/hotjar-alternatives/sprig.png)
 
 ### What is Sprig?
 
@@ -254,7 +254,7 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 - **Typical users:** Marketers and UX designers
 - **Typical customers:** Small and medium size businesses and agencies
 
-IMAGE HERE
+![crazy egg](../images/blog/hotjar-alternatives/crazy-egg.png)
 
 ### What is Crazy Egg?
 
@@ -366,7 +366,7 @@ According to G2 reviews, customers use Pendo for:
 - **Typical users:** Marketing and content teams
 - **Typical customers:** Small businesses
 
-IMAGE HERE
+![clarity](../images/blog/hotjar-alternatives/microsoft-clarity.png)
 
 ### What is Microsoft Clarity?
 
