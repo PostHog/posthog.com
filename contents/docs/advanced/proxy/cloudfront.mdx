@@ -15,7 +15,7 @@ By default, CloudFront doesn't forward headers, cookies, or query parameters rec
 ## Create a distribution
 
 1. On the AWS dashboard, search for CloudFront, then create a new CloudFront distribution
-2. Set the origin domain to your PostHog instance `app.posthog.com` or `eu.posthog.com` for PostHog Cloud).
+2. Set the origin domain to your PostHog instance `us.i.posthog.com` or `eu.i.posthog.com` for PostHog Cloud).
 3. Select HTTPS only.
 4. Under Default cache behavior, go to Viewer. “Under Allowed HTTP methods,” select “GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE,” and check OPTIONS under “Cache HTTP methods.” This allows all HTTP methods.
 5. Under [Cache policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy), click “Create policy.” On the “Create cache policy” page:
