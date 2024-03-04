@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Growth
+crosspost:
+  - Blog  
 ---
 
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 

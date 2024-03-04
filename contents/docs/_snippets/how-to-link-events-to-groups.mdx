@@ -54,7 +54,7 @@ client.Enqueue(posthog.Capture{
     Event: "user_signed_up",
     Groups: posthog.NewGroups().
         Set("company", "company_id_in_your_db").
-        Set("company", "another_company_id_in_your_db").
+        Set("company", "another_company_id_in_your_db"),
 })
 
 // ✅ Allowed
@@ -63,7 +63,7 @@ client.Enqueue(posthog.Capture{
     Event: "user_signed_up",
     Groups: posthog.NewGroups().
         Set("company", "company_id_in_your_db").
-        Set("channel", "channel_id_in_your_db").
+        Set("channel", "channel_id_in_your_db"),
 ```
 
 ```node

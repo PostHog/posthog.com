@@ -42,7 +42,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
                     frontmatter: { title: { ne: "" } }
                 }
-                limit: 1000
             ) {
                 nodes {
                     id
@@ -860,9 +859,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         for (node of result.data.jobs.nodes) {
             const { id, parent } = node
             const slug = node.fields.slug
-            const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
-            const issues = parent?.customFields?.find(({ title, value }) => title === 'Issues')?.value?.split(',')
-            const repo = parent?.customFields?.find(({ title, value }) => title === 'Repo')?.value
+            const issues = parent?.customFields?.find(({ title }) => title === 'Issues')?.value?.split(',')
+            const repo = parent?.customFields?.find(({ title }) => title === 'Repo')?.value
+            const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
             let gitHubIssues = []
             if (issues) {
                 for (const issue of issues) {
@@ -889,11 +888,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id,
                     slug,
-                    teamName: team,
-                    teamNameInfo: `${team} Team`,
-                    objectives: `/handbook/small-teams/${slugify(team, { lower: true })}/objectives`,
-                    mission: `/handbook/small-teams/${slugify(team, { lower: true })}/mission`,
+                    objectives: `/handbook/small-teams/${slugify(teams[0], { lower: true })}/objectives`,
+                    mission: `/handbook/small-teams/${slugify(teams[0], { lower: true })}/mission`,
                     gitHubIssues,
+                    teams,
                 },
             })
         }

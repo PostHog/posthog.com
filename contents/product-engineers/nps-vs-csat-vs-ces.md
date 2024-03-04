@@ -10,6 +10,8 @@ tags:
   - Product engineers
   - User research
   - Growth engineering
+crosspost:
+  - Blog  
 ---
 
 The two most important metrics in SaaS are growth and retention. [User surveys](/surveys) are a great way to unlock insights into how to improve them, but which survey type gives you the best insights? 
@@ -221,7 +223,7 @@ Good questions to dig into are:
  
 Here's what we recommend:
 
-- **Use CSAT before before product-market fit.** Your app is constantly changing at this stage as you figure out what to build, so it makes sense to focus on the short term only. CSAT surveys enable to you quickly determine if your changes are meeting expectations, so you can iterate further. Also consider [measuring product-market fit](/founders/measure-product-market-fit) using a PMF survey.
+- **Use CSAT before product-market fit.** Your app is constantly changing at this stage as you figure out what to build, so it makes sense to focus on the short term only. CSAT surveys enable to you quickly determine if your changes are meeting expectations, so you can iterate further. Also consider [measuring product-market fit](/founders/measure-product-market-fit) using a PMF survey.
 
 - **Use NPS after you've achieved product-market fit.** At this stage, you're looking to grow and maintain a loyal user base. NPS provides a clearer picture than CSAT of which of your users are likely to retain or churn.
 

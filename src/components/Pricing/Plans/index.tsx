@@ -183,13 +183,13 @@ const AddonTooltipContent = ({ addon }) => {
 
 const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: BillingProductV2Type }) => {
     return (
-        <Tooltip placement="right-end" content={() => <AddonTooltipContent addon={addon} />}>
+        <Tooltip placement="right" content={() => <AddonTooltipContent addon={addon} />}>
             <span className="relative">{children}</span>
         </Tooltip>
     )
 }
 
-export const CTA = () => {
+export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): JSX.Element => {
     const posthog = usePostHog()
     return (
         <TrackedCTA
@@ -197,7 +197,7 @@ export const CTA = () => {
                 name: `clicked Get started - free`,
                 type: 'cloud',
             }}
-            type="primary"
+            type={type}
             size="md"
             className="shadow-md !w-auto"
             to={`https://${
@@ -210,7 +210,7 @@ export const CTA = () => {
 }
 
 const allProductsData = graphql`
-    query GetAllProductData {
+    query {
         allProductData {
             nodes {
                 products {
@@ -271,6 +271,8 @@ const allProductsData = graphql`
                         name
                         plan_key
                         product_key
+                        contact_support
+                        unit_amount_usd
                         tiers {
                             current_amount_usd
                             current_usage
@@ -317,7 +319,7 @@ export default function Plans({
                                     {plans.map(({ free_allocation, plan_key }) => {
                                         return (
                                             <Heading
-                                                title={free_allocation ? 'Free' : 'Unlimited'}
+                                                title={free_allocation ? 'Free' : 'All other plans'}
                                                 subtitle={
                                                     free_allocation
                                                         ? 'No credit card required'
@@ -371,7 +373,7 @@ export default function Plans({
                                     >
                                         <div className="flex-grow">
                                             <Tooltip
-                                                placement="right-end"
+                                                placement="right"
                                                 content={() => (
                                                     <div className="p-2 max-w-sm">
                                                         <p className="font-bold text-[15px] mb-1">{feature.name}</p>

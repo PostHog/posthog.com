@@ -9,13 +9,15 @@ tags:
   - User research
   - Product engineers
   - Product
+crosspost:
+  - Blog  
 ---
 
 ## What is a user persona? 
 
 User personas are a generalized way of understanding and talking about the people using your product. This enables you to empathize with them and focus on their needs while you're building for them.
 
-Users personas are not the same as buyer personas or ideal customer profiles (ICPs), who may not actually use your product. 
+Users personas are not the same as buyer personas or [ideal customer profiles](/newsletter/ideal-customer-profile-framework) (ICPs), who may not actually use your product. 
 
 Here's a quick comparison:
 

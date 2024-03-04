@@ -16,6 +16,8 @@ features:
 
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
+PostHog supports the iOS, macOS, Android and Web platforms.
+
 ## Installation
 
 import FlutterInstall from '../../integrate/_snippets/install-flutter.mdx'
@@ -24,27 +26,7 @@ import FlutterInstall from '../../integrate/_snippets/install-flutter.mdx'
 
 ## Usage
 
-To use this, add `posthog_flutter` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
-
-### Supported methods
-
-| Method               | Android | iOS | Web |
-| ---------------------| ------- | --- | --- |
-| `identify`           | X       | X   | X   |
-| `capture`            | X       | X   | X   |
-| `screen`             | X       | X   | X   |
-| `alias`              | X       | X   | X   |
-| `getAnonymousId`     | X       | X   | X   |
-| `reset`              | X       | X   | X   |
-| `disable`            | X       | X   |     |
-| `enable`             | X       | X   |     |
-| `debug`              | X\*     | X   | X   |
-| `setContext`         | X       | X   |     |
-| `isFeatureEnabled`   | X       | X   | X   |
-| `reloadFeatureFlags` | X       | X   | X   |
-| `groups`             | X       | X   | X   |
-
-> Debugging must be set as a configuration parameter in `AndroidManifest.xml` (see below). The Official PostHog Library does not offer the debug method for Android.
+To use this, add `posthog_flutter` as a [dependency in your pubspec.yaml file](https://pub.dev/packages/posthog_flutter/install).
 
 ### Example
 
@@ -58,39 +40,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorObservers: [
+        // The PosthogObserver records screen views automatically
+        PosthogObserver(),
+      ],
       home: Scaffold(
         appBar: AppBar(
           title: Text('PostHog example app'),
         ),
         body: Center(
           child: FlatButton(
-            child: Text('TRACK ACTION WITH POSTHOG'),
-            onPressed: () {
-              Posthog().capture(
-                eventName: 'button_clicked',
+            child: Text('TRACK ACTION WITH PostHog'),
+            onPressed: () async {
+              await Posthog().capture(
+                eventName: 'ButtonClicked',
                 properties: {
                   'foo': 'bar',
                   'number': 1337,
                   'clicked': true,
-                  '\$set': {
-                    'userProp': 'value1',
-                    '\$groups': {
-                      'company': 'twitter',
-                    },
-                  },
-                  '\$set_once': {
-                    'userProp': 'value2'
-                  }
                 },
               );
             },
           ),
         ),
-      ),
-      navigatorObservers: [
-        // PosthogObserver captures Posthog().screen(...) automatically
-        PosthogObserver(),
-      ],
+      )
     );
   }
 }

@@ -8,7 +8,8 @@ tags:
   - Product engineers
   - Engineering
 crosspost:
-  - Product engineers  
+  - Product engineers 
+  - Blog 
 ---
 
 Users are like kids at Christmas. They say they really want this one thing, but that one thing won't keep them happy for long. 
@@ -29,7 +30,7 @@ Emmett Shear, former CEO of Twitch 👾, [recommends tailoring your approach](ht
 
 - **When you're forming a product**, expand your circle. Talk to the broadest group you possibly can. For example, if you're creating a product for college students, you should talk to college IT administrators and parents as well. Students might be the user, but they probably won't be the buyer (because they have no money 😔).
 
-- **As the product develops**, figure out your target user (aka [ideal customer profile](https://posthog.com/blog/creating-ideal-customer-profile)) and ask them. Asking the wrong user can lead you in the wrong direction. Twitch, for example, focused on talking to and building for streamers rather than viewers because they realized streamers were their real customers.
+- **As the product develops**, figure out your target user (aka [ideal customer profile](/newsletter/ideal-customer-profile-framework)) and ask them. Asking the wrong user can lead you in the wrong direction. Twitch, for example, focused on talking to and building for streamers rather than viewers because they realized streamers were their real customers.
 
 If you think you're asking the right questions but getting poor answers, reconsider who you're talking to.
 

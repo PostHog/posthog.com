@@ -13,10 +13,7 @@ PostHogSDK.shared.capture("user_signed_up")
 <SettingProperties />
 
 ```swift
-PostHogSDK.shared.capture(
-    "user_signed_up", 
-    properties: ["login_type": "email", "$set": ["is_free_trial": true] 
-])
+PostHogSDK.shared.capture("user_signed_up", properties: ["login_type": "email"], userProperties: ["is_free_trial": true])
 ```
 
 ### Autocapture 
@@ -32,7 +29,7 @@ PostHog autocapture automatically tracks the following events for you:
 
 ### Capturing screen views
 
-With [`configuration.recordScreenViews`](/ios#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
+With [`configuration.captureScreenViews`](/docs/libraries/ios#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
 
 If you want to manually send a new screen capture event, use the `screen` function.
 

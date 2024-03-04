@@ -8,6 +8,8 @@ tags:
   - Growth engineering
   - Product engineers
   - AB testing
+crosspost:
+  - Blog  
 ---
 
 ## What is multivariate testing?

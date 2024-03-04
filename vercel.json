@@ -152,7 +152,6 @@
         { "source": "/features", "destination": "/product" },
         { "source": "/docs/integrate/overview", "destination": "/docs/integrate" },
         { "source": "/docs/integrations", "destination": "/docs/integrate" },
-        { "source": "/docs/libraries", "destination": "/docs/integrate" },
         { "source": "/signup", "destination": "/pricing" },
         { "source": "/docs/self-host/deploy/render", "destination": "/docs/self-host/deploy/other" },
         { "source": "/docs/self-host/deploy/qovery", "destination": "/docs/self-host/deploy/other" },
@@ -332,7 +331,6 @@
             "source": "/tutorials/free-hotjar-alternative",
             "destination": "/blog/best-open-source-session-replay-tools"
         },
-        { "source": "/docs/privacy/hipaa-compliance", "destination": "/blog/hipaa-compliant-analytics" },
         { "source": "/docs/plugins/build/reference", "destination": "/docs/apps/build/reference" },
         { "source": "/docs/plugins/build/types", "destination": "/docs/apps/build/types" },
         { "source": "/docs/plugins/enabling", "destination": "/docs/apps/enabling" },
@@ -353,6 +351,8 @@
         { "source": "/codu", "destination": "/?utm_campaign=codu" },
         { "source": "/peterelbaum", "destination": "/?utm_campaign=peterelbaum" },
         { "source": "/theo", "destination": "/?utm_source=theo&utm_campaign=theo" },
+        { "source": "/morningmaker", "destination": "/?utm_source=morningmaker&utm_campaign=morningmaker" },
+        { "source": "/enggirlfriend", "destination": "/?utm_source=enggirlfriend&utm_campaign=enggirlfriend" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -675,6 +675,7 @@
         { "source": "/manual/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/manual/hogql", "destination": "/docs/hogql" },
         { "source": "/docs/product-analytics/hogql", "destination": "/docs/hogql" },
+        { "source": "/docs/hogql/guide", "destination": "/docs/product-analytics/sql" },
         { "source": "/manual/insights", "destination": "/docs/product-analytics/insights" },
         { "source": "/manual/lifecycle", "destination": "/docs/product-analytics/lifecycle" },
         { "source": "/manual/paths", "destination": "/docs/product-analytics/paths" },
@@ -1175,6 +1176,20 @@
         { "source": "/docs/cdp/postgres-export", "destination": "/docs/cdp/batch-exports/postgres" },
         { "source": "/docs/cdp/s3-export", "destination": "/docs/cdp/batch-exports/s3" },
         { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" },
-        { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" }
+        { "source": "/docs/cdp/redshift-export", "destination": "/docs/cdp/batch-exports/redshift" },
+        { "source": "/cdp/redshift-export", "destination": "/docs/cdp/batch-exports/redshift" },
+        { "source": "/docs/cdp/segment", "destination": "/docs/libraries/segment" },
+        { "source": "/docs/cdp/sentry-connector", "destination": "/docs/libraries/sentry" },
+        { "source": "/docs/cdp/n8n", "destination": "/docs/libraries/n8n" },
+        { "source": "/docs/cdp/zendesk", "destination": "/docs/libraries/zendesk" },
+        { "source": "/docs/cdp/rudderstack-import", "destination": "/docs/libraries/rudderstack" },
+        { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" },
+        { "source": "/docs/data/application-settings", "destination": "/docs" },
+        {
+            "source": "/docs/data/organizations-and-projects",
+            "destination": "/docs/settings/organizations-and-projects"
+        },
+        { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
+        { "source": "/docs/data/sso", "destination": "/docs/settings/sso" }
     ]
 }

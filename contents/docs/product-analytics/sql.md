@@ -23,7 +23,7 @@ SELECT *
 FROM events
 ```
 
-Common values to select are `*` (representing all), `event`, `timestamp`, `properties`, and functions. These values can be found in the data management [properties tab](https://app.posthog.com/data-management/properties) or inside tables in the [database tab](https://app.posthog.com/data-management/database). 
+Common values to select are `*` (representing all), `event`, `timestamp`, `properties`, and functions like `count()`. You can access properties using dot notation like `person.properties.$initial_browser`. These values can be found in the data management [properties tab](https://app.posthog.com/data-management/properties) or inside tables in the [database warehouse tab](https://us.posthog.com/data-warehouse). 
 
 Add the `DISTINCT` clause to `SELECT` commands to keep only unique rows in query results.
 
@@ -41,12 +41,24 @@ SELECT session_id, min_first_timestamp, click_count
 FROM raw_session_replay_events
 ```
 
-You can join multiple tables together using the `LEFT JOIN` command which takes one table before the command and another after the command and combines them based on the join condition using the `ON` keyword.
+### JOIN
+
+You can query over multiple tables together using the `LEFT JOIN` or `INNER JOIN` commands which takes one table before the command and another after the command and combines them based on the join condition using the `ON` keyword.
 
 ```sql
 SELECT events.event, persons.is_identified
 FROM events
 LEFT JOIN persons ON events.person_id = persons.id
+```
+
+This is especially useful when querying using the [data warehouse](/docs/data-warehouse) and querying external sources. For example, once you set up the Stripe connector, you can query for a count of events from your customers like this:
+
+```sql
+SELECT events.distinct_id, COUNT() AS event_count
+FROM events
+INNER JOIN prod_stripe_customer ON events.distinct_id = prod_stripe_customer.email
+GROUP BY events.distinct_id
+ORDER BY event_count DESC
 ```
 
 ### WHERE
@@ -64,6 +76,16 @@ FROM events
 WHERE event = '$pageview'
    AND toDate(timestamp) = today()
    AND properties.$current_url LIKE '%/blog%'
+```
+
+`WHERE` is also useful for querying across multiple tables. For example, if you have the Hubspot connector set up, you can get a count of events for contacts with a query like this:
+
+```sql
+SELECT COUNT() AS event_count, distinct_id
+FROM events
+WHERE distinct_id IN (SELECT email FROM hubspot_contacts)
+GROUP BY distinct_id
+ORDER BY event_count DESC
 ```
 
 ### GROUP BY
@@ -221,6 +243,8 @@ GROUP BY flag
 ORDER BY count() desc
 ```
 
+> Read more in [How to filter and breakdown arrays with HogQL](/tutorials/array-filter-breakdown).
+
 #### Date and time
 
 - `now()`, `today()`, `yesterday()`: Returns the current time, date, or yesterday’s date respectively.
@@ -258,6 +282,8 @@ select
 from events
 where event = '$autocapture'
 ```
+
+> Read more in [How to analyze autocapture events with HogQL](/tutorials/hogql-autocapture).
 
 #### Sparkline
 
@@ -298,3 +324,49 @@ select
     sparkline(arrayMap(a -> cos(toSecond(timestamp) + a/4), range(100 + 5 * toSecond(timestamp)))) 
 from events
 ```
+
+## Accessing data
+
+### Strings and quotes
+
+Quotation symbols work the same way they would work with ClickHouse, which inherits from ANSI SQL:
+
+- **S**ingle quotes (`'`) for **S**trings literals.
+- **D**ouble quotes (`"`) and **B**ackticks (\`) for **D**ata**B**ase identifiers.
+
+For example:
+
+```sql
+SELECT * FROM events WHERE properties.`$browser` = 'Chrome'
+```
+
+### Types
+
+Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database), [properties](https://us.posthog.com/data-management/properties) tabs in data management as well as in the [data warehouse tab](https://us.posthog.com/data-warehouse) for external sources. They include:
+
+- `STRING` (default)
+- `JSON` (accessible with dot or bracket notation)
+- `DATETIME`(in `ISO-8601`, [read more in our data docs](/docs/data/timestamps))
+- `INTEGER`
+- `NUMERIC`(AKA float)
+- `BOOLEAN`
+
+For example:
+
+```sql
+SELECT round(properties.$screen_width * properties.$screen_height / 1000000, 2) as `Screen MegaPixels` FROM events LIMIT 100
+```
+
+This works because `$screen_width` and `$screen_height` are both defined as numeric properties. Thus you can multiply them.
+
+To cast a string property into a different type, use type conversion functions, such as`toString`, `toDate`, `toFloat`, `JSONExtractString`, `JSONExtractInt`, and more.
+
+### Property access
+
+To access a property stored on an event or person, just use dot notation. For example `properties.$browser` or `person.properties.$initial_browser`. You can also use bracket notation like `properties['$feature/cool-flag']`.
+
+Nested property or JSON access, such as `properties.$some.nested.property`, works as well.
+
+> PostHog's properties include always include `$` as a prefix, while custom properties do not (unless you add it).
+
+Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.

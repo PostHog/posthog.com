@@ -17,6 +17,13 @@ availability:
             enterprise: true
 ---
 
+import NewFunnelLight from '../../images/docs/user-guides/funnels/new-funnel.mp4'
+
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=573"
+    className="rounded shadow-xl"
+/>
+
 ## Why do funnels matter?
 
 For every flow throughout your product, more people will start it than complete it successfully. The primary value of funnels comes from the ability to inspect the journey of everyone going through that flow and understanding where the bottlenecks and friction points are in it. Once you can isolate these bottlenecks and understand what's causing them, you'll be able to significantly improve the success of your users.
@@ -33,15 +40,18 @@ For every flow throughout your product, more people will start it than complete 
 
 ## Getting started
 
-### Setting up a funnel
+### Creating a funnels insight
 
-**Step 1: Open up the funnels insight**
+1. Click [Product Analytics](https://us.posthog.com/insights) on the left sidebar
+1. Click the **+ New Insights** tab
+1. Select the **Lifecycle** tab
 
-Using the side menu, navigate to **Insights**, click the dropdown on the **New insight** button, and then select **Funnel**. This will present you with a blank funnel screen.
+<ProductVideo
+videoLight={NewFunnelLight} 
+classes="rounded"
+/>
 
-![Blank funnel screen](../../images/docs/user-guides/funnels/new-funnel.mp4)
-
-**Step 2: Add and refine steps in your funnel**
+### Adding and refining steps in your funnel
 
 Select the steps you wish to include in your funnel, ideally starting with the first event/action a user will trigger in the flow you wish to measure. Next, add intermediate events you believe users need to go through to be successful and finish with the event you consider to be the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew valuable results.
 
@@ -51,7 +61,7 @@ You may wish to refine your steps further, filtering out certain types of users 
 
 ![Global filters](../../images/docs/user-guides/funnels/global-filters.png)
 
-**Step 3: Set your time range**
+### Setting a time range
 
 You now have a basic funnel showing in the main analysis pane and can modify the time range you would like to look at. A good place to start is to look at a time range of 30 days to ensure the effects of any day to day variations will be reduced.
 

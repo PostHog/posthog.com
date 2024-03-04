@@ -271,6 +271,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/billing',
                     },
                     {
+                        name: 'Automations',
+                        url: '/handbook/growth/sales/automations',
+                    },
+                    {
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
@@ -1167,6 +1171,10 @@ export const docsMenu = {
                             url: '/docs/libraries/nuxt-js',
                         },
                         {
+                            name: 'n8n',
+                            url: '/docs/libraries/n8n',
+                        },
+                        {
                             name: 'Remix',
                             url: '/tutorials/remix-analytics',
                         },
@@ -1209,6 +1217,10 @@ export const docsMenu = {
                         {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/libraries/zendesk',
                         },
                     ],
                 },
@@ -1287,10 +1299,6 @@ export const docsMenu = {
                             url: '/docs/data/annotations',
                         },
                         {
-                            name: 'Autocapture',
-                            url: '/docs/data/autocapture',
-                        },
-                        {
                             name: 'Cohorts',
                             url: '/docs/data/cohorts',
                         },
@@ -1299,32 +1307,16 @@ export const docsMenu = {
                             url: '/docs/data/events',
                         },
                         {
-                            name: 'Organizations & projects',
-                            url: '/docs/data/organizations-and-projects',
+                            name: 'Ingestion warnings',
+                            url: '/docs/data/ingestion-warnings',
                         },
                         {
-                            name: 'Persons',
+                            name: 'People',
                             url: '/docs/data/persons',
-                        },
-                        {
-                            name: 'Role-based access',
-                            url: '/docs/data/role-based-access',
                         },
                         {
                             name: 'Sessions',
                             url: '/docs/data/sessions',
-                        },
-                        {
-                            name: 'Settings',
-                            url: '/docs/data/application-settings',
-                        },
-                        {
-                            name: 'SSO & SAML',
-                            url: '/docs/data/sso',
-                        },
-                        {
-                            name: 'Team collaboration',
-                            url: '/docs/data/team-collaboration',
                         },
                         {
                             name: 'Timestamps',
@@ -1354,10 +1346,6 @@ export const docsMenu = {
                             url: '/docs/hogql',
                         },
                         {
-                            name: 'Guide',
-                            url: '/docs/hogql/guide',
-                        },
-                        {
                             name: 'Expressions',
                             url: '/docs/hogql/expressions',
                         },
@@ -1374,15 +1362,6 @@ export const docsMenu = {
                             url: '/docs/hogql/tutorials',
                         },
                     ],
-                },
-                {
-                    name: 'Notebooks',
-                    url: '/docs/notebooks',
-                    icon: 'IconBook',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Toolbar',
@@ -1408,52 +1387,26 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Command palette',
-                    url: '/docs/cmd-k',
-                    icon: 'IconSearch',
+                    name: 'Notebooks',
+                    url: '/docs/notebooks',
+                    icon: 'IconBook',
                 },
                 {
-                    name: 'Apps',
-                    url: '/docs/apps',
-                    icon: 'IconApps',
+                    name: 'Settings',
+                    url: '/docs/settings/organizations-and-projects',
+                    icon: 'IconGear',
                     children: [
                         {
-                            url: '/docs/apps/notification-bar',
-                            name: 'Notification Bar',
+                            name: 'Organizations & projects',
+                            url: '/docs/settings/organizations-and-projects',
                         },
                         {
-                            url: '/docs/apps/pineapple-mode',
-                            name: 'Pineapple Mode',
+                            name: 'Role-based access',
+                            url: '/docs/settings/role-based-access',
                         },
                         {
-                            name: 'Build an app',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/apps/build',
-                                },
-                                {
-                                    name: 'Tutorial',
-                                    url: '/docs/apps/build/tutorial',
-                                },
-                                {
-                                    name: 'Troubleshooting',
-                                    url: '/docs/apps/enabling',
-                                },
-                                {
-                                    name: 'Developer reference',
-                                    url: '/docs/apps/build/reference',
-                                },
-                                {
-                                    name: 'Testing',
-                                    url: '/docs/apps/build/testing',
-                                },
-                                {
-                                    name: 'TypeScript types',
-                                    url: '/docs/apps/build/types',
-                                },
-                            ],
+                            name: 'SSO & SAML',
+                            url: '/docs/settings/sso',
                         },
                     ],
                 },
@@ -1571,6 +1524,11 @@ export const docsMenu = {
                             url: '/docs/data-model',
                         },
                     ],
+                },
+                {
+                    name: 'Command palette',
+                    url: '/docs/cmd-k',
+                    icon: 'IconSearch',
                 },
                 {
                     name: 'Webhooks',
@@ -1853,7 +1811,7 @@ export const docsMenu = {
                     name: 'Analysis views',
                 },
                 {
-                    name: 'Graphs & trends',
+                    name: 'Trends',
                     url: '/docs/product-analytics/trends',
                     icon: 'IconGraph',
                     color: 'blue',
@@ -1911,7 +1869,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Notifications',
+                    name: 'Subscriptions',
                     url: '/docs/product-analytics/subscriptions',
                     icon: 'IconBell',
                     color: 'red',
@@ -2025,12 +1983,6 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Console log recording',
-                    url: '/docs/session-replay/console-log-recording',
-                    icon: 'IconCode',
-                    color: 'red',
-                },
-                {
                     name: 'Network performance',
                     url: '/docs/session-replay/network-recording',
                     icon: 'IconDashboard',
@@ -2039,7 +1991,7 @@ export const docsMenu = {
                 {
                     name: 'Mobile recording',
                     url: '/docs/session-replay/mobile',
-                    icon: 'IconApps',
+                    icon: 'IconPhone',
                     color: 'blue',
                     badge: {
                         title: 'Beta',
@@ -2069,6 +2021,18 @@ export const docsMenu = {
                     url: '/docs/session-replay/iframes',
                     icon: 'IconCode',
                     color: 'salmon',
+                },
+                {
+                    name: 'Console log recording',
+                    url: '/docs/session-replay/console-log-recording',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Canvas recording',
+                    url: '/docs/session-replay/canvas-recording',
+                    icon: 'IconPalette',
+                    color: 'blue',
                 },
             ],
         },
@@ -2229,7 +2193,7 @@ export const docsMenu = {
                 {
                     name: 'Under the hood',
                     url: '/docs/experiments/under-the-hood',
-                    icon: 'IconCalculator',
+                    icon: 'IconMagicWand',
                     color: 'purple',
                 },
                 {
@@ -2307,21 +2271,19 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'CDP',
+                    name: 'Overview',
                     url: '/docs/cdp',
+                    icon: 'IconHome',
                 },
                 {
                     name: 'Batch exports',
-                    url: '',
+                    url: '/docs/cdp/batch-exports',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                    icon: 'IconShare',
                     children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/batch-exports',
-                        },
                         {
                             name: 'Amazon S3',
                             url: '/docs/cdp/batch-exports/s3',
@@ -2338,39 +2300,9 @@ export const docsMenu = {
                             name: 'Postgres',
                             url: '/docs/cdp/batch-exports/postgres',
                         },
-                    ],
-                },
-                {
-                    name: 'Sources',
-                    url: '',
-                    children: [
                         {
-                            url: '/docs/cdp/segment',
-                            name: 'Segment',
-                        },
-                        {
-                            url: '/docs/cdp/replicator',
-                            name: 'Event Replicator',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            url: '/docs/cdp/n8n',
-                            name: 'n8n',
-                        },
-                        {
-                            url: '/docs/cdp/rudderstack-import',
-                            name: 'Rudderstack',
-                        },
-                        {
-                            url: '/docs/cdp/sentry-connector',
-                            name: 'Sentry',
-                        },
-                        {
-                            url: '/docs/cdp/zendesk-connector',
-                            name: 'Zendesk',
+                            name: 'Redshift',
+                            url: '/docs/cdp/batch-exports/redshift',
                         },
                     ],
                 },
@@ -2383,24 +2315,8 @@ export const docsMenu = {
                             name: 'Airbyte',
                         },
                         {
-                            url: '/docs/cdp/s3-export',
-                            name: 'Amazon S3',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/avo-inspector',
                             name: 'Avo',
-                        },
-                        {
-                            url: '/docs/cdp/bigquery-export',
-                            name: 'BigQuery',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
                         },
                         {
                             url: '/docs/cdp/customer-io',
@@ -2431,22 +2347,6 @@ export const docsMenu = {
                             name: 'Intercom',
                         },
                         {
-                            url: '/docs/cdp/postgres-export',
-                            name: 'PostgreSQL',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            url: '/docs/cdp/redshift-export',
-                            name: 'Redshift',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/rudderstack-export',
                             name: 'RudderStack',
                         },
@@ -2463,14 +2363,6 @@ export const docsMenu = {
                             name: 'Sentry',
                         },
                         {
-                            url: '/docs/cdp/snowflake-export',
-                            name: 'Snowflake',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/twilio',
                             name: 'Twilio',
                         },
@@ -2485,7 +2377,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Ingestion filtering',
+                    name: 'Filtering',
                     url: '',
                     children: [
                         {
@@ -2499,10 +2391,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/filter-out',
                             name: 'Filter Out',
-                        },
-                        {
-                            url: '/docs/cdp/first-time-event-tracker',
-                            name: 'First Time Event Tracker',
                         },
                         {
                             url: '/docs/cdp/property-filter',
@@ -2519,7 +2407,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Event transformation',
+                    name: 'Transformation',
                     url: '',
                     children: [
                         {
@@ -2541,13 +2429,15 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Build a data connection',
-                    url: '',
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/cdp/common-questions',
+                    icon: 'IconQuestion',
+                },
+                {
+                    name: 'Build an app',
+                    url: '/docs/cdp/build',
+                    icon: 'IconGraduationCap',
                     children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/build',
-                        },
                         {
                             name: 'Tutorial',
                             url: '/docs/cdp/build/tutorial',
@@ -2592,22 +2482,28 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Setup',
+                    name: 'Link a source',
                     url: '/docs/data-warehouse/setup',
                     icon: 'IconBook',
                     color: 'blue',
                 },
                 {
-                    name: 'Query',
+                    name: 'Query your sources',
                     url: '/docs/data-warehouse/query',
                     icon: 'IconHogQL',
                     color: 'purple',
                 },
                 {
-                    name: 'Views',
+                    name: 'Save views',
                     url: '/docs/data-warehouse/views',
                     icon: 'IconCalculator',
                     color: 'salmon',
+                },
+                {
+                    name: 'Under the hood',
+                    url: '/docs/data-warehouse/under-the-hood',
+                    icon: 'IconMagicWand',
+                    color: 'seagreen',
                 },
             ],
         },
@@ -2620,7 +2516,7 @@ export const pricingMenu = {
     icon: 'IconReceipt',
     children: [
         {
-            name: 'All products',
+            name: 'Plans',
             icon: 'IconReceipt',
             color: 'red',
             url: '/pricing',

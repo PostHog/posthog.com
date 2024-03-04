@@ -12,7 +12,8 @@ tags:
   - Growth engineering
   - Growth
 crosspost:
-  - Founders  
+  - Founders
+  - Blog  
 ---
 
 So, you're building a B2B SaaS product.

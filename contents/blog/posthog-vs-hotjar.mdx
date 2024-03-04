@@ -53,16 +53,16 @@ Because we build for engineers first, we're also open source. You can check out 
 
 ## Core features
 
-<ComparisonTable column1="Hotjar" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Session replays" description="Watch real users use your product." />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website." />
-  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior." />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals." />
-  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Test changes and analyze impact." />
-  <ComparisonRow column1={false} column2={true} feature="In-app prompts and messages" description="Send messages to users in your app." />
+  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Track events and conversion; analyze user behavior." />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals." />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze impact." />
+  <ComparisonRow column1={true} column2={false} feature="In-app prompts and messages" description="Send messages to users in your app." />
   <ComparisonRow column1={true} column2={true} feature="Surveys" description="Capture user feedback with surveys." />
   <ComparisonRow column1={true} column2={true} feature="Customer interview scheduling" description="In-app widget for requesting customer interviews" />
-  <ComparisonRow column1={true} column2={false} feature="User interview recordings and transcriptions" />
+  <ComparisonRow column1={false} column2={true} feature="User interview recordings and transcriptions" />
   <ComparisonRow column1={true} column2={true} feature="Apps" description="Push and pull data to other destinations" />
 </ComparisonTable>
 
@@ -74,26 +74,24 @@ Because we build for engineers first, we're also open source. You can check out 
 
 ### Session replays
 
-Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. 
+Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clarity alternative](/blog/best-microsoft-clarity-alternatives).
 
-> **Ready to learn more?** Find out [how Contra used PostHog's session replays](/customers/contra) to increase registrations by 30%. 
-
-Both Hotjar and PostHog offer session replays:
-
-<ComparisonTable column1="Hotjar" column2="PostHog">
-  <ComparisonRow column1="~1k per month (max 35 per day) on Basic plan" column2="5,000/mo" feature="Free replay allowance" />
-  <ComparisonRow column1="~$200 per month (max 1.5k sessions per day)" column2="$175/mo" feature="Price for first 50k sessions" />
+<ComparisonTable column1="PostHog" column2="Hotjar">
+  <ComparisonRow column1="5,000/mo" column2="~1k per month (max 35 per day) on Basic plan" feature="Free replay allowance" />
+  <ComparisonRow column1="$175/mo" column2="~$200 per month (max 1.5k sessions per day)" feature="Price for first 50k sessions" />
   <ComparisonRow column1={true} column2={true} feature="Browser app replays" description="Watch real users use your product." />
-  <ComparisonRow column1={false} column2={true} feature="Connected to product analytics" description="View replays for specific users and events." />
-  <ComparisonRow column1="Only in Scale plan" column2={true} feature="Console logs" description="Debug user problems and app errors." />
-  <ComparisonRow column1={false} column2={true} feature="Performance monitoring" description="Monitor network activity and performance" />
-  <ComparisonRow column1={false} column2="Alpha" feature="iOS app replays" description="Record user sessions in iOS apps." />
-  <ComparisonRow column1={false} column2="Planned Q1 2024" feature="Android app replays" description="Record user sessions in Android apps." />
-  <ComparisonRow column1={false} column2={true} feature="Custom playlists" description="Create playlists of related replays." />
+  <ComparisonRow column1={true} column2={false} feature="Connected to product analytics" description="View replays for specific users and events." />
+  <ComparisonRow column1={true} column2="Only in Scale plan" feature="Console logs" description="Debug user problems and app errors." />
+  <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Monitor network activity and performance" />
+  <ComparisonRow column1="Alpha" column2={false} feature="iOS app replays" description="Record user sessions in iOS apps." />
+  <ComparisonRow column1="Planned Q1 2024" column2={false} feature="Android app replays" description="Record user sessions in Android apps." />
+  <ComparisonRow column1={true} column2={false} feature="Custom playlists" description="Create playlists of related replays." />
   <ComparisonRow column1={true} column2={true} feature="Download replays" description="Save replay files offline for storage." />
 </ComparisonTable>
 
 - **Recording retention:** Hotjar keeps all replays for 365 days. PostHog retains all replays for up to three months, but retains replays saved to a playlist forever. PostHog also enables you to download replays as a `.json` file for safe keeping.
+
+> **Ready to learn more?** Find out [how Contra used PostHog's session replays](/customers/contra) to increase registrations by 30%. 
 
 ### Heatmaps
 
@@ -113,18 +111,18 @@ Heatmaps visualize user activity in your app. They use colors or numbers to show
 Although product analytics is not a core focus for Hotjar, they do offer basic features, such as event tracking, funnels, and trend insights. However, these are **only available on Hotjar's Observe Scale plan**, and their offering is more limited than PostHog's:
 
 
-<ComparisonTable column1="Hotjar" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Log page views, clicks and other custom events." />
   <ComparisonRow column1={true} column2={true} feature="Trends" description="Track your data over time and visualize in charts." />
   <ComparisonRow column1={true} column2={true} feature="Funnels" description="Visualize conversion rates and drop-offs." />
   <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Display a collection of insights and trends." />
-  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Automatically highlight factors affecting funnel conversion rates." />
-  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Group events by users in the same company, project, or any other attribute." />
-  <ComparisonRow column1={false} column2={true} feature="Lifecycle insights" description="Break down events from new, returning, resurrecting, and dormant users." />
-  <ComparisonRow column1={false} column2={true} feature="Retention insights" description="Understand churn with returning user actions." />
-  <ComparisonRow column1={false} column2={true} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
-  <ComparisonRow column1={false} column2={true} feature="Path insights" description="Inspect how users journey through your product." />
-  <ComparisonRow column1={false} column2={true} feature="Toolbar" description="View insights on your live website or app with an overlay." />
+  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Automatically highlight factors affecting funnel conversion rates." />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Group events by users in the same company, project, or any other attribute." />
+  <ComparisonRow column1={true} column2={false} feature="Lifecycle insights" description="Break down events from new, returning, resurrecting, and dormant users." />
+  <ComparisonRow column1={true} column2={false} feature="Retention insights" description="Understand churn with returning user actions." />
+  <ComparisonRow column1={true} column2={false} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
+  <ComparisonRow column1={true} column2={false} feature="Path insights" description="Inspect how users journey through your product." />
+  <ComparisonRow column1={true} column2={false} feature="Toolbar" description="View insights on your live website or app with an overlay." />
 </ComparisonTable>
 
 ### In-app messages and user research
@@ -137,14 +135,14 @@ The main difference is, because Hotjar is designed for less technical users, it 
 
 Below, we've listed the different methods for communicating with and collecting user feedback in Hotjar and PostHog.
 
-<ComparisonTable column1="Hotjar" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Collect text input" description="Suggestion box on your site where users can express frustration or delight." />
   <ComparisonRow column1={true} column2={true} feature="Schedule customer interviews" description="Send users a link to schedule a feedback meeting." />
-  <ComparisonRow column1={false} column2={true} feature="Custom user targeting" description="Define who should see your widgets with your own data." />
+  <ComparisonRow column1={true} column2={false} feature="Custom user targeting" description="Define who should see your widgets with your own data." />
   <ComparisonRow column1={true} column2={true} feature="Surveys" description="Capture user feedback with surveys." />
-  <ComparisonRow column1={true} column2={false} feature="User interview recordings and transcriptions" />
-  <ComparisonRow column1={false} column2={true} feature="Notification bar" description="Display a customized banner on your site." />
-  <ComparisonRow column1={false} column2={true} feature="In-app popups" description="Highlight features in your app." />
+  <ComparisonRow column1={false} column2={true} feature="User interview recordings and transcriptions" />
+  <ComparisonRow column1={true} column2={false} feature="Notification bar" description="Display a customized banner on your site." />
+  <ComparisonRow column1={true} column2={false} feature="In-app popups" description="Highlight features in your app." />
 </ComparisonTable>
 
 ### Apps and integrations
@@ -156,17 +154,17 @@ One unique advantage of PostHog is that, because it is open source, it’s easy 
 Below, we've listed a few of the most popular integrations used across PostHog and HotJar. PostHog offers more than 50 apps, so for a full list of PostHog's integrations, please [check the app library](/apps).
 
 
-<ComparisonTable column1="Hotjar" column2="PostHog">
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" description="Sync event and person data." />
+<ComparisonTable column1="PostHog" column2="Hotjar">
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Sync event and person data." />
   <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync event and person data." />
   <ComparisonRow column1={true} column2={true} feature="Zapier" description="Export events for use in Zaps." />
-  <ComparisonRow column1={false} column2={true} feature="Stripe" description="Sync customer and invoice data." />
+  <ComparisonRow column1={true} column2={false} feature="Stripe" description="Sync customer and invoice data." />
   <ComparisonRow column1={true} column2={true} feature="Slack" description="Receive notifications about new data." />
-  <ComparisonRow column1={false} column2={true} feature="Discord" description="Receive notifications about new data." />
+  <ComparisonRow column1={true} column2={false} feature="Discord" description="Receive notifications about new data." />
   <ComparisonRow column1={true} column2={true} feature="MS Teams" description="Receive notifications about new data." />
-  <ComparisonRow column1={false} column2={true} feature="Intercom" description="Extract and load data to external platforms." />
-  <ComparisonRow column1={false} column2={true} feature="Customer.io" description="Sync data between platforms." />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" description="Ingest Sentry errors for analysis." />
+  <ComparisonRow column1={true} column2={false} feature="Intercom" description="Extract and load data to external platforms." />
+  <ComparisonRow column1={true} column2={false} feature="Customer.io" description="Sync data between platforms." />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Ingest Sentry errors for analysis." />
   <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events from Segment." />
 </ComparisonTable>
 
@@ -175,13 +173,12 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 ## Privacy, compliance, and security
 
 Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways. 
-
-<ComparisonTable column1="Hotjar" column2="PostHog">
-  <ComparisonRow column1={false} column2={true} feature="SOC 2 certified" description="Information security process audited" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR compliant" description="EU hosting or data residency available." />
-  <ComparisonRow column1={false} column2={false} feature="HIPAA compliant" description="Business Associate Agreement available." />
+<ComparisonTable column1="PostHog" column2="Hotjar">
+  <ComparisonRow column1={true} column2={false} feature="SOC 2 certified" description="Information security process audited" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="EU hosting or data residency available." />
+  <ComparisonRow column1={false} column2={true} feature="HIPAA-ready" description="Business Associate Agreement available." />
   <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Remove personally identifiable information." />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
+  <ComparisonRow column1={true} column2={false} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
 </ComparisonTable>
 
 ## Frequently asked questions

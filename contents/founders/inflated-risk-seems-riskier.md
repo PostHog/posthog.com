@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Being a founder
   - Founders
+crosspost:
+  - Blog  
 ---
 
 Let me tell you a story of the financial pressures that face new founders and how that pressure motivated Tim and me to make an epic ~~pivot~~ [leap](https://posthog.com/blog/story-about-pivots), from bootstrapping to a VC-backed startup.

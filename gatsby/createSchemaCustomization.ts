@@ -214,6 +214,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type MdxFrontmatterProductSections implements Node {
       sections: [ProductSectionsSections]
     }
+    type Roadmap implements Node {
+      year: Int
+    }
+    type ProductDataProductsPlans {
+      contact_support: Boolean
+      unit_amount_usd: Float
+    }
   `)
     createTypes([
         schema.buildObjectType({

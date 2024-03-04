@@ -24,20 +24,20 @@ You'll also need an account with [Patterns](https://www.patterns.app/).
 
 ## Installation
 
-This app requires PostHog 1.30.0 or above, or PostHog Cloud. You also need a Patterns account. 
+This destination requires PostHog 1.30.0 or above, or PostHog Cloud. You also need a Patterns account. 
 
 1. Log in to your Patterns account and create a graph 
 2. Add a webhook node to your graph
 3. Copy the webhook URL from the sidebar
 4. Log in to your PostHog instance
-5. Click 'Apps' on the left-hand tool bar
+5.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 6. Search for 'Patterns'
-7. Select the app, press 'Install', then select the blue gear icon to begin configuration
-8. Paste the URL in "Patterns Webhook URL" during app configuration.
+7. Select the destination, press 'Install', then select the blue gear icon to begin configuration
+8. Paste the URL in "Patterns Webhook URL" during destination configuration.
 
 You can install the connector via [the GitHub repo](https://github.com/PostHog/posthog-patterns-app). 
 
-Once you’ve installed the app and configured the webhook, data will begin streaming into Patterns in real-time. Here is [an example app](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/nffx8k2ox23r0h5i6f6o/3evx4hiottnqeb0229ig?view=graph) you can clone that can be used to enrich, score, and prioritize new leads to your website —- this is common for optimizing a customer conversion funnel.
+Once you’ve installed the destination and configured the webhook, data will begin streaming into Patterns in real-time. Here is [an example app](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/nffx8k2ox23r0h5i6f6o/3evx4hiottnqeb0229ig?view=graph) you can clone that can be used to enrich, score, and prioritize new leads to your website —- this is common for optimizing a customer conversion funnel.
 
 ## Are there other ways to connect PostHog and Patterns?
 
@@ -45,19 +45,19 @@ Yes. You can also use the PostHog data extractor within Patterns to extract a fu
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this destination available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-patterns-appn) is available on GitHub.
+PostHog is open-source and so are all destinations on the platform. The [source code](https://github.com/PostHog/posthog-patterns-app) is available on GitHub.
 
-### Who created this app?
+### Who created this destination?
 
-We'd like to thank the team at Patterns for creating this app. Thank you!
+We'd like to thank the team at Patterns for creating this destination. Thank you!
 
-### Who maintains this app?
+### Who maintains this destination?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this destination?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

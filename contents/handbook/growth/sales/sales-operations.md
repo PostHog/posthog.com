@@ -53,7 +53,7 @@ getting live **production** data through our pipeline and available for analysis
 
 ## Free trials?
 
-Generally speaking we don't need to do anything around free trials as our free tier has a generous 1m events, 1m feature flag calls, and 15K sessions.  If a customer is going to go over this limit pretty quickly then we can agree to give them 2 weeks of free usage - this can be done in the billing service.  See the [billing](/handbook/growth/sales/billing) page for more info (and the latest on this).
+Generally speaking we don't need to do anything around free trials as our free tier has a generous 1m events, 1m feature flag calls, and 5k sessions.  If a customer is going to go over this limit pretty quickly then we can agree to give them 2 weeks of free usage - this can be done in the billing service.  See the [billing](/handbook/growth/sales/billing) page for more info (and the latest on this).
 
 
 ### Figuring out the best solution for a customer

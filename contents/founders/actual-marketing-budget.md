@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Marketing
+crosspost:
+  - Blog  
 ---
 
 It really annoys me that no one is willing to talk about how much they _actually_ spend on marketing in startup-land. 
