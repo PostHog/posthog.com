@@ -11,7 +11,7 @@ import EventsInPostHogDark from '../images/tutorials/flutter-ab-tests/events-dar
 import TestSetupLight from '../images/tutorials/flutter-ab-tests/experiment-setup-light.png'
 import TestSetupDark from '../images/tutorials/flutter-ab-tests/experiment-setup-dark.png'
 
-[A/B tests](/ab-testing) help you improve your Flutter by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Flutter app, add PostHog, create an A/B test, and implement the code for it.
+[A/B tests](/ab-testing) help you improve your Flutter app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Flutter app, add PostHog, create an A/B test, and implement the code for it.
 
 ## 1. Create a new Flutter app
 
@@ -20,7 +20,7 @@ Our app will have two screens:
 1. The first screen will have a button which takes you to a second screen.
 2. The second screen will either have a `red` or `green` background color, depending on whether the user is in the `control` or `test` variant of our A/B test. This screen will also have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
 
-To set this up, first ensure the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) is installed. Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
+To set this up, install the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
 
 Select `Empty Application` and name your app `flutter_ab_tests`. Then, replace your code in `lib/main.dart` with the following:
 
@@ -160,7 +160,7 @@ buildscript {
 
 ### iOS setup
 
-For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist file` located in the `ios/Runner` directory:
+For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration with your project API key and instance address to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -171,7 +171,7 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
   <key>com.posthog.posthog.API_KEY</key>
   <string><ph_project_api_key></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
-  <string><ph_instance_address></string>
+  <string><ph_instance_address></string>  <!--  https://app.posthog.com or https://eu.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
   <true/>
 </dict>
