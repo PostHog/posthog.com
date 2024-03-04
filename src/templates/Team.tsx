@@ -172,8 +172,10 @@ export default function Team({
                 cta={<span className="text-sm">{PineappleText(pineapplePercentage)}</span>}
                 id="people"
             >
+                {/*
                 <StickerPineapple className="w-8 h-8" />
                 <StickerThumbsUp className="w-8 h-8" />
+                */}
                 <div className="flex space-x-12">
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
                         {profiles.data.map(
