@@ -42,7 +42,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
                     frontmatter: { title: { ne: "" } }
                 }
-                limit: 1000
             ) {
                 nodes {
                     id
