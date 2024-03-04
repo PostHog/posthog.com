@@ -1,5 +1,5 @@
 ---
-date: 2024-02-09
+date: 2024-03-04
 title: The best HIPAA-compliant A/B testing tools
 rootPage: /blog
 sidebar: Blog
