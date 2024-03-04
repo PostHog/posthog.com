@@ -16,9 +16,34 @@ availability:
             selfServe: true
             enterprise: true
 ---
-
 import newFunnelLight from '../../images/docs/user-guides/funnels/new-funnel-light-mode.mp4'
 import newFunnelDark from '../../images/docs/user-guides/funnels/new-funnel-dark-mode.mp4'
+import funnelStepsLight from '../../images/docs/user-guides/funnels/funnel-steps-light-mode.png'
+import funnelStepsDark from '../../images/docs/user-guides/funnels/funnel-steps-dark-mode.png'
+import globalFiltersLight from '../../images/docs/user-guides/funnels/global-filters-light-mode.png'
+import globalFiltersDark from '../../images/docs/user-guides/funnels/global-filters-dark-mode.png'
+import setFunnelTimeRangeLight from '../../images/docs/user-guides/funnels/set-funnel-time-range-light-mode.png'
+import setFunnelTimeRangeDark from '../../images/docs/user-guides/funnels/set-funnel-time-range-dark-mode.png'
+import saveAFunnelLight from '../../images/docs/user-guides/funnels/save-a-funnel-light-mode.mp4'
+import saveAFunnelDark from '../../images/docs/user-guides/funnels/save-a-funnel-dark-mode.mp4'
+import personsModalLight from '../../images/docs/user-guides/funnels/persons-modal-light-mode.png'
+import personsModalDark from '../../images/docs/user-guides/funnels/persons-modal-dark-mode.png'
+import identifyingLight from '../../images/docs/user-guides/funnels/identifying-drop-offs-light-mode.png'
+import identifyingDark from '../../images/docs/user-guides/funnels/identifying-drop-offs-dark-mode.png'
+import switchToRelativeLight from '../../images/docs/user-guides/funnels/switch-to-relative-drop-off-light-mode.png'
+import switchToRelativeDark from '../../images/docs/user-guides/funnels/switch-to-relative-drop-off-dark-mode.png'
+import averageTimeToConvertLight from '../../images/docs/user-guides/funnels/average-time-to-convert-light-mode.png'
+import averageTimeToConvertDark from '../../images/docs/user-guides/funnels/average-time-to-convert-dark-mode.png'
+import distributionHistogramLight from '../../images/docs/user-guides/funnels/distribution-histogram-time-to-convert-light-mode.png'
+import distributionHistogramDark from '../../images/docs/user-guides/funnels/distribution-histogram-time-to-convert-dark-mode.png'
+import granularConversionLight from '../../images/docs/user-guides/funnels/granular-conversion-time-distribution-light-mode.png'
+import granularConversionDark from '../../images/docs/user-guides/funnels/granular-conversion-time-distribution-dark-mode.png'
+import breakdownByOSLight from '../../images/docs/user-guides/funnels/breakdown-by-operating-system-light-mode.png'
+import breakdownByOSDark from '../../images/docs/user-guides/funnels/breakdown-by-operating-system-dark-mode.png'
+import funnelStepBreakdownLight from '../../images/docs/user-guides/funnels/funnel-steps-breakdown-light-mode.png'
+import funnelStepBreakdownDark from '../../images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png'
+import converstionOverTimeLight from '../../images/docs/user-guides/funnels/conversion-over-time-using-trends-light-mode.png'
+import converstionOverTimeDark from '../../images/docs/user-guides/funnels/conversion-over-time-using-trends-dark-mode.png'
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=573"
@@ -60,15 +85,32 @@ Select the steps you wish to include in your funnel, ideally starting with the f
 
 ![Funnel steps](../../images/docs/user-guides/funnels/funnel-steps.png)
 
-You may wish to refine your steps further, filtering out certain types of users or event properties (e.g. country of a user). Click the "filter" icon next to the step you wish to refine further and select the filter you would like to add or set a global filter under the filters section on the right.
+<ProductScreenshot
+    imageLight = {funnelStepsLight} 
+    imageDark = {funnelStepsDark}
+    classes="rounded"
+    alt="Funnel steps"
+/>
 
-![Global filters](../../images/docs/user-guides/funnels/global-filters.png)
+You may wish to refine your steps further, filtering out certain types of users or event properties (e.g. country of a user). Click the "Show filter" icon next to the step you wish to refine further and select the filter you would like to add, or set a global filter in the filters section in the bottom.
+
+<ProductScreenshot
+    imageLight = {globalFiltersLight} 
+    imageDark = {globalFiltersDark}
+    classes="rounded"
+    alt="Global filters"
+/>
 
 ### Setting a time range
 
 You now have a basic funnel showing in the main analysis pane and can modify the time range you would like to look at. A good place to start is to look at a time range of 30 days to ensure the effects of any day to day variations will be reduced.
 
-![Set funnel time range](../../images/docs/user-guides/funnels/set-funnel-time-range.png)
+<ProductScreenshot
+    imageLight = {setFunnelTimeRangeLight} 
+    imageDark = {setFunnelTimeRangeDark}
+    classes="rounded"
+    alt="Set funnel time range"
+/>
 
 You should now see where people are struggling in your flow by seeing where the drop-offs are. In the example above, we can see that the biggest drop-off is between the 'Add to cart' and 'Checkout' stages of the funnel.
 
@@ -76,17 +118,24 @@ You should now see where people are struggling in your flow by seeing where the 
 
 **Step 1: Click save**
 
-If you're measuring something recurrently, you'd like to share it with others, or easily return to it again in the future, hit the "disk" icon in the top left of the configuration pane.
+If you're measuring something recurrently, you'd like to share it with others, or easily return to it again in the future, hit the "Save" button located at the top right corner. 
 
-**Step 2: Naming funnel and selecting dashboard**
+You can rename the automatically generated insight name by clicking on the pencil icon beside the name. 
 
-Select a dashboard where you would like to save the funnel and give it a name.
+**Step 2: Add a saved funnel to a dashboard or a notebook **
 
-**Step 3: Finding a saved funnel**
+You can add a saved funnel to a dashboard or a notebook by clicking on the "Add to dashboard" or the "Add to notebook" button beside the "Edit" button located at the top right corner of the page.
 
-You can find your funnel any time by navigating to the dashboard you've saved it in.
+**Step 3: Find a saved funnel**
 
-Recently saved funnels are also available within the funnel configuration screen.
+You can find your funnel any time by navigating to the dashboard or notebook you've saved it in. You can also find it by visiting Product Analytics tab and filtering the insights by type "Funnel".
+
+<ProductVideo
+    videoLight = {saveAFunnelLight}
+    videoDark = {saveAFunnelDark}
+    classes="rounded"
+    alt="Save a funnel"
+/>
 
 ### Modifying a funnel
 
@@ -98,11 +147,21 @@ Once you have your funnel setup, you may like to tweak the step ordering or filt
 
 The most common use case for funnels is understanding where people are getting stuck or dropping off in your flow.
 
-![Identifying drop-offs in a funnel](../../images/docs/user-guides/funnels/identifying-drop-offs.png)
+<ProductScreenshot
+    imageLight = {identifyingLight} 
+    imageDark = {identifyingDark}
+    classes="rounded"
+    alt="Identifying drop-offs in a funnel"
+/>
 
-Quickly looking at this funnel, we can see there are several drop-offs between steps. Absolute drop-off is a great way to understand where you're losing the most people. If you want to identify the areas that have the greatest negative impact on your overall conversion rate, you'll want to understand the relative drop-off. Switch to relative drop-off by clicking "% Overall conversion" and switching to "% Relative to previous step"
+Quickly looking at this funnel, we can see there are several drop-offs between steps. Absolute drop-off is a great way to understand where you're losing the most people. If you want to identify the areas that have the greatest negative impact on your overall conversion rate, you'll want to understand the relative drop-off. Switch to relative drop-off by clicking "Overall conversion" and switching to "Relative to previous step" under the Conversion Rate Calculcation field on the left funnel configuration pane.
 
-![Switching to relative to previous step drop-off in funnel](../../images/docs/user-guides/funnels/switch-to-relative-drop-off.png)
+<ProductScreenshot
+    imageLight = {switchToRelativeLight} 
+    imageDark = {switchToRelativeDark}
+    classes="rounded"
+    alt="Switching to relative to previous step drop-off in funnel"
+/>
 
 You can use this to see where the biggest opportunity for improvement is, usually on the step with the lowest relative conversion rate.
 
@@ -110,11 +169,14 @@ You can use this to see where the biggest opportunity for improvement is, usuall
 
 Once you have a funnel drop-off you'd like to explore further, the first step is to identify whether it's a specific client or users that are having the problem and find out why they were struggling. There are many ways to get this information, from reaching out to them directly to [replaying their session](/docs/user-guides/sessions).
 
-![Links to open persons modal in table](../../images/docs/user-guides/funnels/average-time-to-convert.png)
+Click on the bars in the chart or the linked numbers in the column values of table below the funnel to see the people who **COMPLETED** or **DROPPED** this step of your funnel.
 
-Click on the linked numbers in the column values of table below the funnel to see the people who **COMPLETED** or **DROPPED** this step of your funnel.
-
-![Persons modal](../../images/docs/user-guides/funnels/persons-modal.png)
+<ProductScreenshot
+    imageLight = {personsModalLight} 
+    imageDark = {personsModalDark}
+    classes="rounded"
+    alt="Persons modal"
+/>
 
 From here, you can explore the individual people further by viewing session recordings to see exactly what they were doing when they dropped off. You can also use this feature to watch a successful user go through your funnel. Understanding what successful users do can also help you identify improvement points for those who aren't successful.
 
@@ -122,17 +184,32 @@ From here, you can explore the individual people further by viewing session reco
 
 One reason users may drop-off can be the raw effort required to complete the step. Perhaps it includes a complex form or requires them to go to their emails or another tool to get the information required to complete the step.
 
-A fast way to get a feel for whether or not a step has high friction is to look at the average time to convert. Steps with a long time to convert are likely much harder than steps with a short time to convert.
+A fast way to get a feel for whether or not a step has high friction is to look at the average time to convert. Steps with a long time to convert are likely much harder than steps with a short time to convert. Click on 
 
-![Average time to convert in a funnel](../../images/docs/user-guides/funnels/average-time-to-convert.png)
+<ProductScreenshot
+    imageLight = {averageTimeToConvertLight} 
+    imageDark = {averageTimeToConvertDark}
+    classes="rounded"
+    alt="Average time to convert in a funnel"
+/>
 
 However, it might not be so simple as just looking at the average conversion time between steps. To dig deeper, click on the conversion time, and you will be presented with a distribution histogram of time to convert.
 
-![Distributed histogram of time to convert](../../images/docs/user-guides/funnels/distribution-histogram-time-to-convert.png)
+<ProductScreenshot
+    imageLight = {distributionHistogramLight} 
+    imageDark = {distributionHistogramDark}
+    classes="rounded"
+    alt="Distributed histogram of time to convert"
+/>
 
 If all the data is grouped in one bar (known as a bin - in histogram speak), you can increase the number of bins to get a more granular view of the conversion time distribution.
 
-![Granular converstion time distribution](../../images/docs/user-guides/funnels/granular-conversion-time-distribution.png)
+<ProductScreenshot
+    imageLight = {granularConversionLight} 
+    imageDark = {granularConversionDark}
+    classes="rounded"
+    alt="Granular converstion time distribution"
+/>
 
 This graph illustrates how common it is to go through these steps at different paces. If your graph is skewed towards the left, this means most people are going through this step very fast. If the graph is skewed towards the right, people are going through this step slowly.
 
@@ -142,15 +219,25 @@ You may see other patterns in the graph, including a double hump where you have 
 
 Now you have a funnel and can see people are struggling on certain steps, you should work out why. We have a tool designed specifically for this use case - to start, you'll want to think of a hypothesis of what might be causing the issue. A common one is people often struggle to use a web-based product on a mobile device since it's not optimized fully.
 
-Click on the breakdown in the configuration pane and select OS (Operating System).
+Click on "Show advanced options" link on the funnel configuration pane. Then click on the "+ Add breakdown" button and select OS (Operating System) from Person Properties.
 
-![Breakdown funnel steps by Operating System](../../images/docs/user-guides/funnels/breakdown-by-operating-system.png)
+<ProductScreenshot
+    imageLight = {breakdownByOSLight} 
+    imageDark = {breakdownByOSDark}
+    classes="rounded"
+    alt="Breakdown funnel steps by Operating System"
+/>
 
 This will break down the funnel by OS.
 
-![Funnel steps broken down by property](../../images/docs/user-guides/funnels/funnel-steps-breakdown.png)
+<ProductScreenshot
+    imageLight = {funnelStepBreakdownLight} 
+    imageDark = {funnelStepBreakdownDark}
+    classes="rounded"
+    alt="Funnel steps broken down by property"
+/>
 
-You can instantly see that the conversion rate is lower on Linux; this indicates that it could be a cause of drop-off in this funnel. To validate it, click through to the persons modal to watch a session recording (if enabled on your instance) or try the flow yourself on the mobile device.
+You can instantly see that the conversion rate is lower on Mac OS X; this indicates that it could be a cause of drop-off in this funnel. To validate it, click through to the persons modal to watch a session recording (if enabled on your instance) or try the flow yourself on the mobile device.
 
 You can break down by a number of user and event properties (e.g. browser, country, etc.) to help quickly validate the initial hypothesis you may have.
 
@@ -160,9 +247,14 @@ The above process depends on thinking up a hypothesis to test. PostHog can also 
 
 There are multiple ways to understand how your changes, fixes, and new features affect your funnel success rate - the simplest and most common is to look at how the conversion rate changes over time.
 
-In the configuration pane, switch to the **Trends** tab to show you how your conversion rate has changed over time. For example, if you launched a new feature a few weeks ago and expect it to have improved your conversion rate, you should see this through a change in the trend on the graph. You may wish to change the granularity and time range to focus on what happened after specific changes.
+In the configuration pane, switch graph type to the **Historical trends** to show you how your conversion rate has changed over time. For example, if you launched a new feature a few weeks ago and expect it to have improved your conversion rate, you should see this through a change in the trend on the graph. You may wish to change the granularity and time range to focus on what happened after specific changes.
 
-![Conversion over time using Trends](../../images/docs/user-guides/funnels/conversion-over-time-using-trends.png)
+<ProductScreenshot
+    imageLight = {converstionOverTimeLight} 
+    imageDark = {converstionOverTimeDark}
+    classes="rounded"
+    alt="Conversion over time using Trends"
+/>
 
 A more advanced approach is to use [experimentation](/docs/experiments) to run a simple A/B test. You can create an experiment and assign 50% of people to the test group and 50% to the control group.
 
