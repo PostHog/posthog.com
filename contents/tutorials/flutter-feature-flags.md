@@ -113,7 +113,7 @@ dependencies:
 # rest of your code
 ```
 
-Next, we configure PostHog using our project API key and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
+Next, we configure PostHog in each platform using our project API key and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
 ### Android setup
 
