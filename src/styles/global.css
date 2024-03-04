@@ -424,6 +424,24 @@ h4 {
     }
 }
 
+/* pricing page: unique slider bar colors */
+
+.rc-slider-handle,
+.rc-slider-track {
+    .product-product-analytics & {
+        @apply !bg-blue;
+    }
+    .product-session-replay & {
+        @apply !bg-yellow;
+    }
+    .product-feature-flags & {
+        @apply !bg-green;
+    }
+    .product-surveys & {
+        @apply !bg-red;
+    }
+}
+
 /* timeline key */
 
 .timeline-entry li[data-type='feature']:before {
@@ -612,7 +630,7 @@ ul {
 }
 
 .rc-slider.slider .rc-slider-track {
-    @apply bg-black;
+    @apply bg-black/60 dark:bg-white/50;
 }
 
 .rc-slider.slider .rc-slider-handle {
@@ -625,6 +643,14 @@ ul {
 
 .rc-slider.slider .rc-slider-tooltip {
     display: none;
+}
+
+.rc-slider.slider .rc-slider-mark-text {
+    @apply text-primary/60 dark:text-primary-dark/60;
+
+    &.rc-slider-mark-text-active {
+        @apply text-primary/75 dark:text-primary-dark/75 font-bold;
+    }
 }
 
 /* Slider base styles */

@@ -7,8 +7,7 @@ import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
 import { BillingProductV2Type, BillingV2FeatureType } from 'types'
-import { product_type_to_max_events } from '../pricingLogic'
-import { Discount } from 'components/NotProductIcons'
+import { product_type_to_max_events } from '../../pricingLogic'
 import Link from 'components/Link'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
@@ -189,7 +188,7 @@ const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: B
     )
 }
 
-export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): JSX.Element => {
+export const CTA = () => {
     const posthog = usePostHog()
     return (
         <TrackedCTA
@@ -197,7 +196,7 @@ export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): J
                 name: `clicked Get started - free`,
                 type: 'cloud',
             }}
-            type={type}
+            type="primary"
             size="md"
             className="shadow-md !w-auto"
             to={`https://${
@@ -271,8 +270,6 @@ const allProductsData = graphql`
                         name
                         plan_key
                         product_key
-                        contact_support
-                        unit_amount_usd
                         tiers {
                             current_amount_usd
                             current_usage
@@ -306,20 +303,21 @@ export default function Plans({
     } = useStaticQuery(allProductsData)
     return (groupsToShow?.length > 0 ? products.filter(({ type }) => groupsToShow.includes(type)) : products).map(
         ({ type, plans, unit, addons, name, inclusion_only }: any) => {
+            const filteredPlans = plans.filter((p, i) => (type === 'platform_and_support' ? i < 2 : true))
             return (
                 <div className="grid gap-y-2 min-w-[450px] mb-20" key={type}>
                     <div className="border border-light dark:border-dark rounded pb-2">
-                        {plans.some(({ free_allocation }) => free_allocation) ? (
+                        {filteredPlans.some(({ free_allocation }) => free_allocation) ? (
                             <div>
                                 <Row className="bg-accent dark:bg-accent-dark mb-2">
                                     <div className="flex-grow">
                                         {showTitle && <h4 className="text-lg mb-0">{planNames[name] || name}</h4>}
                                     </div>
 
-                                    {plans.map(({ free_allocation, plan_key }) => {
+                                    {filteredPlans.map(({ free_allocation, plan_key }) => {
                                         return (
                                             <Heading
-                                                title={free_allocation ? 'Free' : 'All other plans'}
+                                                title={free_allocation ? 'Free' : 'Unlimited'}
                                                 subtitle={
                                                     free_allocation
                                                         ? 'No credit card required'
@@ -333,7 +331,7 @@ export default function Plans({
                                 </Row>
                                 <Row>
                                     <Title className="flex-grow" title={capitalize(`${unit}s`)} />
-                                    {plans.map(({ free_allocation, plan_key }) => {
+                                    {filteredPlans.map(({ free_allocation, plan_key }) => {
                                         return (
                                             <p
                                                 key={`${type}-${plan_key}`}
@@ -365,7 +363,7 @@ export default function Plans({
                             <Row className="bg-accent dark:bg-accent-dark my-2">
                                 <Heading title="Features" />
                             </Row>
-                            {plans[plans.length - 1].features.map((feature, index) => {
+                            {filteredPlans[filteredPlans.length - 1].features.map((feature, index) => {
                                 return (
                                     <Row
                                         className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
@@ -389,7 +387,7 @@ export default function Plans({
                                                 </span>
                                             </Tooltip>
                                         </div>
-                                        {plans.map((plan, i) => (
+                                        {filteredPlans.map((plan, i) => (
                                             <div
                                                 key={`${feature.key}-${type}-${i}`}
                                                 className="max-w-[25%] w-full min-w-[105px]"
@@ -414,7 +412,7 @@ export default function Plans({
                                                 <Label className="ml-2" text="Addon" />
                                             </AddonTooltip>
                                         </div>
-                                        {plans.map((plan) => {
+                                        {filteredPlans.map((plan) => {
                                             return (
                                                 <div
                                                     className="max-w-[25%] w-full min-w-[105px]"
@@ -452,7 +450,7 @@ export default function Plans({
                     </div>
                     <Row>
                         <div className="flex-grow" />
-                        {plans.map((plan, index) => (
+                        {filteredPlans.map((plan, index) => (
                             <div className="max-w-[25%] w-full min-w-[105px]" key={`cta-${plan.product_key}-${index}`}>
                                 <CTA />
                             </div>
