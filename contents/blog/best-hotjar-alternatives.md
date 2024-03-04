@@ -26,7 +26,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 [PostHog](/) (that's us 👋) is an all-in-one platform for session replay, product analytics, feature flags, A/B testing, and user surveys – everything you need to understand your users. This means it's not just an alternative to Hotjar, but also tools like [Mixpanel](/blog/best-mixpanel-alternatives) and [LaunchDarkly](/blog/best-launchdarkly-alternatives).
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of Feb 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. Hotjar is used by [72,048 of the top 1 million websites](https://trends.builtwith.com/analytics/Microsoft-Clarity). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [Webshare](/customers/webshare), [AssemblyAI](/customers/assemblyai), and [Purplewave](/customers/purplewave).
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of February 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. Hotjar is used by [72,048 of the top 1 million websites](https://trends.builtwith.com/analytics/Microsoft-Clarity). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [Webshare](/customers/webshare), [AssemblyAI](/customers/assemblyai), and [Purplewave](/customers/purplewave).
 
 #### Key features
 
@@ -38,7 +38,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 ### How does PostHog compare to Hotjar?
 
-According to BuiltWith, many companies use Hotjar alongside an analytics tool like Mixpanel or FullStory. PostHog can replace them all and has a [generous free tier](/pricing) of 5,000 monthly sessions and 1 million analytics events.
+According to BuiltWith, 27% of sites using Hotjar also use an analytics tool like FullStory (21% of sites use Mixpanel). PostHog can replace them all and has a [generous free tier](/pricing) of 5,000 sessions and 1 million analytics events per month.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
@@ -52,7 +52,7 @@ According to BuiltWith, many companies use Hotjar alongside an analytics tool li
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
 </ComparisonTable>
 
 *iOS replays are under development.
@@ -61,7 +61,7 @@ According to BuiltWith, many companies use Hotjar alongside an analytics tool li
 
 According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
 
-1. **It replaces multiple tools:** PostHog can replace Hotjar (session replay & surveys), [Google Analytics](/blog/posthog-vs-ga4), and [LaunchDarkly](/blog/posthog-vs-launchdarkly) (feature flags and A/B testing). This simplifies workflows and ensures all their data is in one place.
+1. **It replaces multiple tools:** PostHog can replace [Hotjar](/blog/posthog-vs-hotjar) (session replay & surveys), [Google Analytics](/blog/posthog-vs-ga4), and [LaunchDarkly](/blog/posthog-vs-launchdarkly) (feature flags and A/B testing). This simplifies workflows and ensures all their data is in one place.
 
 2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get an additional $50k in credits.
 
@@ -86,7 +86,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Mouseflow?
 
-Mouseflow is a behavioral analytics tool that offers session replay, heatmap, and basic funnel analysis features. It's designed mainly for use on marketing and e-commerce websites. It's very similar to Hotjar, making it a direct rip and replace solution.
+Mouseflow is a behavioral analytics tool that offers session replays, heatmaps, and basic funnel analysis. It's designed mainly for marketing and e-commerce websites. It's very similar to Hotjar, making it a direct rip and replace solution.
 
 According to data from BuiltWith, 5,555 of the top 1 million websites use Mouseflow (correct as of Feb 2024), considerably less than Hotjar's 72,048.
 
@@ -129,14 +129,14 @@ Based on reviews from G2.com, customers use Mouseflow because:
 
 > #### Bottom line
 >
-> Mouselfow is a good alternative to Hotjar for companies who just want a similar tool with slight differences in execution and pricing.
+> Mouseflow is a good alternative to Hotjar for companies who just want a similar tool with slight differences in execution and pricing.
 
 <br />
 
 ## 3. Sprig
 
 - **Founded:** 2017
-- **Most similar to:** Hojar
+- **Most similar to:** Hotjar
 - **Typical users:** Product teams and UX researchers
 - **Typical customers:** Medium and large B2C and B2B products
 
@@ -144,13 +144,13 @@ Based on reviews from G2.com, customers use Mouseflow because:
 
 ### What is Sprig?
 
-Sprig is a survey and user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis, heatmaps or other basic analytics, focusing solely on in-product user research.
+Sprig is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis, heatmaps, or other basic analytics, focusing solely on in-product user research.
 
-According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (Mar 2024), Sprig is used on 521 or the top 1 million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used large, B2C companies such as PayPal, Coinbase, and Robinhood.
+According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (Mar 2024), Sprig is used on 521 of the top 1 million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used large, B2C companies such as PayPal, Coinbase, and Robinhood.
 
 #### Key features
 
-- **Surveys:** Run targeted Surveys right in your product and capture real-time insights.
+- **Surveys:** Run targeted surveys right in your product and capture real-time insights.
 - **Session replay:** Capture targeted user journey clips to see what’s working.
 - **AI analysis:** Surface product issues and opportunities in real time.
 
@@ -179,7 +179,7 @@ According to [reviews on G2](https://www.g2.com/products/sprig/reviews), custome
 
 1. **It gives them real-time feedback:** Sprig makes it easy for product teams to engage with users while they were actively using the product. This real-time feedback helps them make informed decisions, iterate features faster, and improve the overall user experience.
 
-2. **It's easy to use:** Numerous reviewers note how easy Sprig is to set up and use. This means they can go from idea to actionable learnings very quickly.
+2. **It's easy to use:** Reviewers note how easy Sprig is to set up and use. This means they can go from idea to actionable learnings quickly.
 
 3. **It has pre-built reports and templates:** Users like the comprehensive documentation and the fact there are numerous templates they can immediately apply and adapt to their needs.
 
@@ -202,7 +202,7 @@ According to [reviews on G2](https://www.g2.com/products/sprig/reviews), custome
 
 Lucky Orange is a simple analytics tool designed to analyze user behavior on small e-commerce websites using session replays and heatmaps. It also offers built-in form analytics, live chat, surveys, and announcements widgets that are useful for store owners.
 
-Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [according to BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Hotjar's 72,048. Lucky Orange customers are often small online stores or freelance CRO consultants.
+Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [according to BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Hotjar's 72,048. Lucky Orange customers are often small online stores or freelance conversion optimization consultants.
 
 #### Key features
 
@@ -235,9 +235,9 @@ Lucky Orange is a natural alternative to Hotjar as it covers most of the same fe
 
 According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.html), because:
 
-1. **It's easy to use:** Lucky Orange has a simple UI compared to popular analytics tools, which makes it easy for users analyze user behavior and identify issues with their websites.
+1. **It's easy to use:** Lucky Orange has a simple UI compared to popular analytics tools, which makes it easy to analyze user behavior and identify issues with websites.
 
-2. **It helps them improve conversion:** Customers are mostly using Lucky Orange to optimize landing pages and e-commerce checkout flows, which it makes easy.
+2. **It helps them improve conversion:** Customers are mostly using Lucky Orange to optimize landing pages and e-commerce checkout flows.
 
 3. **It doesn't impact page speed:** Users report Lucky Orange has negligible impact on website performance, which they value highly.
 
@@ -295,7 +295,7 @@ According to reviews on G2, people use Crazy Egg because:
 
 2. **They want to improve content and conversions:** Crazy Egg's heatmaps and session replay features enable them to gather valuable insights for optimizing their content, increasing conversions, and understanding how users navigate their websites.
 
-3. **Gathering feedback** Users like that they can combine data with the qualitative feedback from users, and customer CTAs.
+3. **Gathering feedback** Users like that they can combine data with the qualitative feedback from users and customer CTAs.
 
 > #### Bottom line
 > Crazy Egg is strong alternative to Hotjar, especially if you'd like to run basic A/B tests to help improve conversions, something Hotjar doesn't offer.
@@ -319,10 +319,10 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo)
 
 #### Key features
 
-- **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
 - **Session replay:** Watch real users use your product. 
 - **In-app guides:** Deliver personalized guidance to customers inside your app.
 - **User feedback:** Capture and analyze customer feedback at scale.
+- **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
 - **Product validation and roadmaps:** Plan product improvements and roadmaps.
 
 ### How does Pendo compare to Hotjar?
@@ -350,7 +350,7 @@ According to G2 reviews, customers use Pendo for:
 
 1. **Customer support and feedback:** Users value Pendo as a useful tool for customer support and feedback collection. They use Pendo's feedback features to gather qualitative data and feed that into Pendo's validation and roadmap features.
 
-2. **Improving onboarding:** Combining Pendo's in-app guides and analytics features makes it easy for non-technical users to experiment with new onboarding flows, improving user adoption.
+2. **Improving onboarding:** Combining Pendo's in-app guides and analytics features makes it easy for non-technical users to experiment with new onboarding flows and improve user adoption.
 
 3. **Product planning:** Customers use Pendo's data tools, product validation, and roadmap features to align internal teams and stakeholders on product development.
 
@@ -370,9 +370,9 @@ According to G2 reviews, customers use Pendo for:
 
 ### What is Microsoft Clarity?
 
-[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports basic replay features and heatmaps. It also records rage clicks and dead clicks, and integrates with Google Analytics 4, so you can view your GA data from within Clarity.
+[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports basic replay features and heatmaps. It also records rage clicks and dead clicks, and integrates with Google Analytics 4, so you can view your GA data in Clarity.
 
-Unsurprisingly, given it's free, Clarity is very popular. [BuiltWith estimates](https://trends.builtwith.com/analytics/Microsoft-Clarity) over 45,000 of the top 1 million websites use Clarity, making it one of the most popular Hotjar alternatives.
+Unsurprisingly, given it's free, Clarity is very popular. [BuiltWith estimates](https://trends.builtwith.com/analytics/Microsoft-Clarity) over 45,000 of the top 1 million websites use Clarity, making it one of the most popular alternatives, but still well below Hotjar's 72,048. 
 
 #### Key features
 
@@ -407,12 +407,12 @@ According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-cla
 
 1. **It's easy to set up and use:** Setting up Clarity doesn't require much technical knowledge and users mostly like the simple user interface.
 
-2. **It helps understand how users navigate:** Clarity users are mostly using it to understand how people navigate their websites, and identify opportunities for improvement.
+2. **It helps uncover how users navigate:** Clarity users are mostly using it to understand how people navigate their websites and identify opportunities for improvement.
 
-3. **It's free:** The short 30-day retention limit, and lack of funnel analysis, are easy to forgive when it's free.
+3. **It's free:** The short 30-day retention limit and lack of funnel analysis are easy to forgive when it's free.
 
 > #### Bottom line
-> Being free forever has made Clarity a very popular alternative to Hotjar. While it has some limitations, it covers most bases for small businesses provided you don't need survey and feedback features.
+> Being free forever has made Clarity a very popular alternative to Hotjar. While it has some limitations, it covers most bases for small businesses provided you don't need surveys, feedback, or more advanced analytics features.
 
 <br />
 
