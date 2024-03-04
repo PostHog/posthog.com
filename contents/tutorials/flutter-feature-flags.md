@@ -146,7 +146,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 ### iOS setup
 
-For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist file` located in the `ios/Runner` directory:
+For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -157,7 +157,7 @@ For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting
   <key>com.posthog.posthog.API_KEY</key>
   <string><ph_project_api_key></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
-  <string><ph_instance_address></string>
+  <string><ph_instance_address></string>  <!--  https://app.posthog.com or https://eu.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
   <true/>
 </dict>
@@ -197,7 +197,6 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 <!-- ... other elements ... -->
 
 </html>
-
 ```
 
 ## 3. Create a feature flag in PostHog
