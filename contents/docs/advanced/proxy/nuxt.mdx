@@ -4,6 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
 Nuxt 3 uses [Nitro](https://nuxt.com/docs/guide/concepts/server-engine) under the hood, which provides the [routeRules](https://nitro.unjs.io/config#routerules) config that can be used to proxy requests from one route to another. 
 
 To do this, add the following `routeRules` to your `nuxt.config.ts` file:
@@ -12,7 +16,8 @@ To do this, add the following `routeRules` to your `nuxt.config.ts` file:
 // nuxt.config.ts
 export default defineNuxtConfig({
     routeRules: {
-        '/ingest/**': { proxy: 'https://app.posthog.com/**' },
+        '/ingest/static/**': { proxy: 'https://us-assets.i.posthog.com/static/**' },
+        '/ingest/**': { proxy: 'https://us.i.posthog.com/**' },
     },
 });
 ```

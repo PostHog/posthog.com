@@ -4,15 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
+
 Caddy makes setting up a [reverse proxy](https://caddyserver.com/docs/quick-starts/reverse-proxy) with TLS simple. For these examples:
 
 1. Sub out `YOUR_TRACKING_DOMAIN` for the domain you use for proxying to PostHog. We'd suggest something like `e.yourdomain.com`. 
-
 2. Make sure your DNS records point to the server where Caddy is running. 
-
 3. Make sure ports 80 and 443 are open and directed toward Caddy.
-
-4. If you're using an EU Cloud instance, replace `app.posthog.com` with `eu.posthog.com`.
 
 ## Basic setup
 
@@ -22,9 +23,17 @@ Next, create a `Caddyfile` that listens for incoming requests and proxies them t
 
 ```
 ${YOUR_TRACKING_DOMAIN} {
-  reverse_proxy https://app.posthog.com:443 {
-    header_up Host app.posthog.com
-    header_down -Access-Control-Allow-Origin
+  handle /static {
+    reverse_proxy https://us-assets.i.posthog.com:443 {
+      header_up Host us-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+  handle {
+    reverse_proxy https://us.i.posthog.com:443 {
+      header_up Host us.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
   }
 }
 ```
@@ -52,13 +61,22 @@ To showcase this, create a folder, and then a `Caddyfile` in it like this:
 
 ```
 :2015 {
-  handle_path /phproxy* {
-    rewrite * {path}
-    reverse_proxy https://app.posthog.com:443 {
-      header_up Host app.posthog.com
+  handle_path /phproxy/static* {
+    rewrite * /static/{path}
+    reverse_proxy https://us-assets.i.posthog.com:443 {
+      header_up Host us-assets.i.posthog.com
       header_down -Access-Control-Allow-Origin
     }
   }
+
+  handle_path /phproxy* {
+    rewrite * {path}
+    reverse_proxy https://us.i.posthog.com:443 {
+      header_up Host us.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+
   file_server browse
 }
 
@@ -90,9 +108,18 @@ ${YOUR_TRACKING_DOMAIN} {
   header {
     Access-Control-Allow-Origin https://${YOUR_TRACKING_DOMAIN}
   }
-  reverse_proxy https://app.posthog.com:443 {
-    header_up Host app.posthog.com
-    header_down -Access-Control-Allow-Origin
+
+  handle /static {
+    reverse_proxy https://us-assets.i.posthog.com:443 {
+      header_up Host us-assets.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
+  }
+  handle {
+    reverse_proxy https://us.i.posthog.com:443 {
+      header_up Host us.i.posthog.com
+      header_down -Access-Control-Allow-Origin
+    }
   }
 }
 ```

@@ -4,13 +4,24 @@ sidebar: Docs
 showTitle: true
 ---
 
-Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) which we can use as a reverse proxy from an `/ingest` route to `https://app.posthog.com` or `https://eu.posthog.com`. In your `netlify.toml` file, add a redirect like this:
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
+Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) which we can use as a reverse proxy from an `/ingest` route. In your `netlify.toml` file, add a redirect like this:
 
 ```js
 [[redirects]]
+  from = "/ingest/static/*"
+  to = "https://us-assets.i.posthog.com/static/:splat"
+  host = "us-assets.i.posthog.com"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/ingest/*"
-  to = "https://app.posthog.com/:splat"
-  host = "app.posthog.com"
+  to = "https://us.i.posthog.com/:splat"
+  host = "us.i.posthog.com"
   status = 200
   force = true
 ```

@@ -4,6 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
+
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
 CloudFront can be used as a reverse proxy. Although [there are multiple other options if you're using AWS](https://aws.amazon.com/blogs/architecture/serving-content-using-fully-managed-reverse-proxy-architecture/).
 
 By default, CloudFront doesn't forward headers, cookies, or query parameters received from the origin that PostHog uses. To set these up, you need an "origin request policy" as in the instructions below.
