@@ -35,6 +35,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import Tooltip from 'components/Tooltip'
+import SEO from 'components/seo'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -65,7 +66,9 @@ export default function Team({
         team: { crest, name, description, profiles, roadmaps, teamImage, leadProfiles },
         objectives,
     },
+    pageContext,
 }) {
+    console.log(pageContext)
     const teamName = `${name} Team`
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
@@ -103,9 +106,11 @@ export default function Team({
 
     const hasUnderConsideration = underConsideration.length > 0
     const hasInProgress = inProgress.length > 0
+    const hasBody = !['/handbook/small-teams/exec', '/handbook/small-teams/data-warehouse'].includes(pageContext.slug)
 
     return (
         <Layout>
+            <SEO title={`${teamName} - PostHog`} />
             <Section>
                 <div className="flex flex-col md:flex-row space-x-4 items-center">
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
@@ -159,7 +164,7 @@ export default function Team({
                               },
                           ]
                         : []),
-                    ...(body
+                    ...(hasBody
                         ? [
                               {
                                   label: 'Handbook',
@@ -345,7 +350,7 @@ export default function Team({
                     </div>
                 </Section>
             )}
-            {body && (
+            {hasBody && (
                 <Section title="Handbook" id="handbook">
                     <div className="article-content max-w-2xl team-page-content">
                         <MDXProvider components={{}}>
