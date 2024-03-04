@@ -208,7 +208,6 @@ export default function Handbook({
         availability,
         installUrl,
         thumbnail,
-        crest,
         related,
         seo,
     } = frontmatter
@@ -330,14 +329,6 @@ export default function Handbook({
                                             )}
                                         </div>
                                     )}
-
-                                    {crest ? (
-                                        <div className="w-64">
-                                            <GatsbyImage image={getImage(crest)} className="mix-blend-multiply" />
-                                        </div>
-                                    ) : (
-                                        ''
-                                    )}
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     {github && (
@@ -449,11 +440,6 @@ export const query = graphql`
                 thumbnail {
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE, width: 36)
-                    }
-                }
-                crest {
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE, width: 512)
                     }
                 }
                 related {

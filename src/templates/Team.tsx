@@ -22,11 +22,9 @@ import {
     StickerFlagPL,
     StickerFlagUnknown,
     StickerFlagUS,
-    StickerPineapple,
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
-    StickerPizza,
 } from 'components/Stickers/Index'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
@@ -58,8 +56,15 @@ const Section = ({ children, cta, title, id = '' }) => {
     )
 }
 
+const MDX = ({ body }) => (
+    <MDXProvider components={{}}>
+        <MDXRenderer>{body}</MDXRenderer>
+    </MDXProvider>
+)
+
 export default function Team({
     data: {
+        mdx: { body },
         team: { crest, name, description, profiles, roadmaps, teamImage, leadProfiles },
         objectives,
     },
@@ -111,9 +116,11 @@ export default function Team({
                         <h1 className="m-0">{teamName}</h1>
                         <p className="my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
 
-                        <CallToAction type="secondary" size="md" to="#in-progress">
-                            See what we're building
-                        </CallToAction>
+                        {hasInProgress && (
+                            <CallToAction type="secondary" size="md" to="#in-progress">
+                                See what we're building
+                            </CallToAction>
+                        )}
                     </div>
                     {teamImage?.caption && (
                         <figure className="rotate-2 max-w-sm flex flex-col gap-2 mt-8 md:mt-0">
@@ -147,11 +154,11 @@ export default function Team({
                               },
                           ]
                         : []),
-                    ...(objectives?.body
+                    ...(body
                         ? [
                               {
-                                  label: 'Goals',
-                                  id: 'goals',
+                                  label: 'Handbook',
+                                  id: 'handbook',
                               },
                           ]
                         : []),
@@ -300,11 +307,15 @@ export default function Team({
                     </Section>
                 )}
             </div>
-            {objectives?.body && (
-                <Section title="Goals" id="goals">
+            {body && (
+                <Section title="Handbook" id="handbook">
                     <div className="article-content max-w-2xl">
-                        <MDXProvider components={{}}>
-                            <MDXRenderer>{objectives.body}</MDXRenderer>
+                        <MDXProvider
+                            components={{
+                                Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
+                            }}
+                        >
+                            <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>
                 </Section>
@@ -315,10 +326,11 @@ export default function Team({
 
 export const query = graphql`
     query TeamTemplateQuery($id: String!, $teamName: String!, $objectives: String) {
-        body: mdx(id: { eq: $id }) {
+        mdx: mdx(id: { eq: $id }) {
             frontmatter {
                 title
             }
+            body
         }
         team: squeakTeam(name: { eq: $teamName }) {
             name

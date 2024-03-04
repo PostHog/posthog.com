@@ -1186,6 +1186,7 @@
             "destination": "/docs/settings/organizations-and-projects"
         },
         { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
-        { "source": "/docs/data/sso", "destination": "/docs/settings/sso" }
+        { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
+        { "source": "/handbook/small-teams/people-ops", "destination": "/handbook/small-teams/people" }
     ]
 }
