@@ -59,12 +59,6 @@ const Section = ({ children, cta, title, id = '' }) => {
     )
 }
 
-const MDX = ({ body }) => (
-    <MDXProvider components={{}}>
-        <MDXRenderer>{body}</MDXRenderer>
-    </MDXProvider>
-)
-
 export default function Team({
     data: {
         mdx: { body },
@@ -154,6 +148,14 @@ export default function Team({
                               {
                                   label: 'Roadmap & recently shipped',
                                   id: 'roadmap',
+                              },
+                          ]
+                        : []),
+                    ...(objectives?.body
+                        ? [
+                              {
+                                  label: 'Goals',
+                                  id: 'goals',
                               },
                           ]
                         : []),
@@ -332,15 +334,11 @@ export default function Team({
                     </Section>
                 )}
             </div>
-            {objectives && (
-                <Section title="Handbook" id="handbook">
+            {objectives?.body && (
+                <Section title="Goals" id="goals">
                     <div className="article-content max-w-2xl">
-                        <MDXProvider
-                            components={{
-                                Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
-                            }}
-                        >
-                            <MDXRenderer>{body}</MDXRenderer>
+                        <MDXProvider components={{}}>
+                            <MDXRenderer>{objectives?.body}</MDXRenderer>
                         </MDXProvider>
                     </div>
                 </Section>
@@ -348,11 +346,7 @@ export default function Team({
             {body && (
                 <Section title="Handbook" id="handbook">
                     <div className="article-content max-w-2xl">
-                        <MDXProvider
-                            components={{
-                                Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
-                            }}
-                        >
+                        <MDXProvider components={{}}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>
