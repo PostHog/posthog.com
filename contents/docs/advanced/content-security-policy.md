@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-
-
 # Using Content Security Policies
 
 > NOTE: This only applies to PostHog Cloud.
