@@ -1,5 +1,5 @@
 ---
-date: 2024-02-09
+date: 2024-03-04
 title: The 7 best HIPAA-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
@@ -31,7 +31,7 @@ There are two ways to be HIPAA-compliant while using analytics tools:
 
 ## What is a Business Associate Agreement (BAA)?
 
-Some services enable HIPAA compliance through the creation of a [Business Associate Agreement](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html)(US Department of Health). This is a contract with a service provider to ensure that they are jointly compliant and liable for services they provide. 
+Some services enable HIPAA compliance through the creation of a [Business Associate Agreement](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) (US Department of Health). This is a contract with a service provider to ensure that they are jointly compliant and liable for services they provide. 
 
 It's worth noting that, because BAAs expose third-parties to increased risk and scrutiny, they are often an expensive option and/or require users to purchase a higher tier of license. 
 
@@ -43,6 +43,8 @@ Some analytics tools, such as Google Analytics, don't offer BAAs and are therefo
 
 ![PostHog](../images/screenshots/hogflix-dashboard.png)
 
+#### Overview
+
 - **Product analytics:** <span className="text-green text-lg">✔</span>
 - **Web analytics:** <span className="text-green text-lg">✔</span>
 - **Session replay:** <span className="text-green text-lg">✔</span>
@@ -50,8 +52,6 @@ Some analytics tools, such as Google Analytics, don't offer BAAs and are therefo
 - **A/B testing:** <span className="text-green text-lg">✔</span>
 - **Surveys:** <span className="text-green text-lg">✔</span>
 - **Customer data platform:** <span className="text-green text-lg">✔</span>
-
-#### Overview
 
 [PostHog](https://posthog.com/) is an open-source platform that combines product analytics, web analytics, session replay, feature flags, A/B testing, and user surveys into one platform. It gives you every tool you need to understand user behavior and, unlike typical analytics tools that rely on third-party integrations, all these tools work together seamlessly.
 
