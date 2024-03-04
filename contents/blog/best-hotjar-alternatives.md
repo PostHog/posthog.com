@@ -32,7 +32,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 - **Session replays:** Including event timelines, console logs, network activity.
 - **Heatmaps:** Visualize user and rage clicks anywhere on your site.
-- **Product analytics:** Analyze funnels, user paths, retention, trends, create user cohorts.
+- **Product analytics:** Analyze funnels, user paths, retention, and trends.
 - **Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests.
 - **Surveys:** Run customer satisfaction, NPS, and PMF surveys.
 
@@ -320,10 +320,10 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo)
 #### Key features
 
 - **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
-- **Session replay:** Watch real users use your product 
-- **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
+- **Session replay:** Watch real users use your product. 
+- **In-app guides:** Deliver personalized guidance to customers inside your app.
 - **User feedback:** Capture and analyze customer feedback at scale.
-- **Product validation and roadmaps:** Plan product improvements and roadmap using Pendo data.
+- **Product validation and roadmaps:** Plan product improvements and roadmaps.
 
 ### How does Pendo compare to Hotjar?
 
