@@ -49,9 +49,9 @@ const Section = ({ children, cta, title, id = '' }) => {
     return (
         <section id={id} className="max-w-screen-xl mx-auto px-5 my-12">
             {title && (
-                <div className="flex justify-between items-baseline w-full">
-                    <h4>{title}</h4>
-                    {cta && <aside>{cta}</aside>}
+                <div className="flex justify-between items-baseline w-full mb-4 relative after:h-px after:bg-border after:absolute after:top-1/2 after:left-0 after:w-full">
+                    <h4 className="m-0 bg-light dark:bg-dark relative z-10 pr-2">{title}</h4>
+                    {cta && <aside className="bg-light dark:bg-dark relative z-10 pl-2">{cta}</aside>}
                 </div>
             )}
             <div>{children}</div>
@@ -328,15 +328,17 @@ export default function Team({
                 )}
                 {recentlyShipped && (
                     <Section title="Recently shipped">
-                        <div className="max-w-2xl">
-                            <Change {...recentlyShipped} />
+                        <div className="max-w-2xl team-page-content">
+                            <div className="border border-light dark:border-dark rounded bg-white dark:bg-accent p-6">
+                                <Change {...recentlyShipped} />
+                            </div>
                         </div>
                     </Section>
                 )}
             </div>
             {objectives?.body && (
                 <Section title="Goals" id="goals">
-                    <div className="article-content max-w-2xl">
+                    <div className="article-content max-w-2xl team-page-content">
                         <MDXProvider components={{}}>
                             <MDXRenderer>{objectives?.body}</MDXRenderer>
                         </MDXProvider>
@@ -345,7 +347,7 @@ export default function Team({
             )}
             {body && (
                 <Section title="Handbook" id="handbook">
-                    <div className="article-content max-w-2xl">
+                    <div className="article-content max-w-2xl team-page-content">
                         <MDXProvider components={{}}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>

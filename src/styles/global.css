@@ -393,6 +393,15 @@ h4 {
     container-type: inline-size;
 }
 
+.team-page-content {
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-[17px];
+    }
+}
+
 /* scope to left nav */
 .z-20 {
     /* make active nav item full strength */
