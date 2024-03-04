@@ -11,6 +11,8 @@ Session replays help you get a deep understanding of how users are using your pr
 
 Instead of turning session replays off entirely, you can use PostHog’s configuration options to only record the sessions you want. This tutorial shows you three ways to do this. 
 
+> **Note:** This tutorial shows you ways you can control recordings with your own code. To learn about the built-in controls available to you see our docs page: [how to control which sessions you record](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record).
+
 ## Configuration and basic session replay controls
 
 In order to follow this tutorial, you need to set `disable_session_recording` to `true` in PostHog's initialization. For example, in a Next.js app, this looks like this:
@@ -171,30 +173,6 @@ This is useful if you want to record specific parts or paths on a page such as:
 - signup, checkout funnels
 - new or updated features
 - smaller, specific components within a larger component.
-
-## Sampling
-
-You can configure sampling to limit the number of sessions you record for each user. This is useful if you want to record a percentage of sessions for all users. Sampling helps reduce the number of sessions you record, but it doesn’t let you control which sessions are included.
-
-Our recommendation is to start with capturing all sessions (e.g. 100% - the default) or a high sampling rate (e.g. 90% or 95%) and decrease it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
-
-![sampling config shown set to 100% i.e. no sampling](../images/tutorials/limit-session-recordings/sampling-config.png)
-
-Whenever a new session starts after you select a collection below 100%, the browser generates a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session is recorded. If it is greater than the sampling rate, the session is not recorded.
-
-## Minimum duration
-
-You can also set a minimum duration for sessions to be recorded. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
-
-![minimum duration config shown set to 2 seconds](../images/tutorials/limit-session-recordings/min-duration.png)
-
-The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory. 
-
-### Limitations
-
-This means that if you set a high minimum duration and your user visits multiple pages each for a short time, you still record the session but miss the beginning. If the user leaves the site before the minimum duration has passed, the session is not recorded.
-
-If you find you are missing the beginning of sessions, you can reduce the minimum duration or use one of our other methods to reduce the number of sessions you record.
 
 ## Further reading
 
