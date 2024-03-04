@@ -3,7 +3,7 @@ title: The best Hotjar alternatives & competitors, compared
 date: 2024-03-04
 author: ["andy-vandervell"]
 rootpage: /blog
-featuredImage: ../images/blog/clarity-alternatives/clarity-alternatives.png
+featuredImage: ../images/blog/hotjar-alternatives/hotjar-alternatives.png
 featuredImageType: full
 category: General
 tags:
