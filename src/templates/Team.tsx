@@ -187,7 +187,7 @@ export default function Team({
                                         >
                                             <div className="mb-auto">
                                                 <h3
-                                                    className="mb-0 text-lg leading-tight"
+                                                    className="mb-0 text-base leading-tight"
                                                     id={kebabCase(name) + '-' + kebabCase(companyRole)}
                                                 >
                                                     {name}
@@ -196,7 +196,7 @@ export default function Team({
                                                     {companyRole}
                                                 </p>
 
-                                                <div className="mt-2 flex space-x-1 items-center">
+                                                <div className="mt-1 flex space-x-1 items-center">
                                                     <span>
                                                         {country === 'BE' ? (
                                                             <StickerFlagBE className="w-8 h-8" />
@@ -226,9 +226,13 @@ export default function Team({
                                                         {pineappleOnPizza === null ? (
                                                             <StickerPineappleUnknown className="w-8 h-8" />
                                                         ) : pineappleOnPizza ? (
-                                                            <StickerPineappleYes className="w-8 h-8" />
+                                                            <Tooltip content="Prefers pineapple on pizza!">
+                                                                <StickerPineappleYes className="w-8 h-8" />
+                                                            </Tooltip>
                                                         ) : (
-                                                            <StickerPineappleNo className="w-8 h-8" />
+                                                            <Tooltip content="Does not believe pineapple belongs on pizza">
+                                                                <StickerPineappleNo className="w-8 h-8" />
+                                                            </Tooltip>
                                                         )}
                                                     </span>
                                                     {isTeamLead ? (

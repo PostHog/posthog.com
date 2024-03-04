@@ -60,15 +60,15 @@ const Teams: React.FC = () => {
                                 <Link to="/handbook/company/small-teams">Learn more about why we have small teams</Link>
                             </p>
 
-                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-6 text-center">
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-5 text-center">
                                 {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (
                                     <Link
                                         to={`/handbook/small-teams/${slugify(name, { lower: true, remove: /and/ })}`}
                                         key={id}
                                         className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-2 md:p-4 hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px"
                                     >
-                                        <GatsbyImage image={getImage(crest)} alt={`Team ${name}`} />
-                                        <h3 className="text-base md:text-lg">{name}</h3>
+                                        <GatsbyImage image={getImage(crest)} alt={`${name} Team`} />
+                                        <h3 className="text-base my-2">{name} Team</h3>
                                         <div className="flex justify-center">
                                             {profiles.data.map(
                                                 ({ id, attributes: { firstName, lastName, avatar } }, index) => {
@@ -80,7 +80,7 @@ const Teams: React.FC = () => {
                                                         <Link
                                                             key={`${name}-${index}`}
                                                             to={`/community/profiles/${id}`}
-                                                            className="-ml-3 relative hover:z-10"
+                                                            className="-ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
                                                         >
                                                             <Tooltip
                                                                 content={`${name} ${isTeamLead ? '(Team lead)' : ''}`}
@@ -88,7 +88,7 @@ const Teams: React.FC = () => {
                                                             >
                                                                 <img
                                                                     src={avatar?.data?.attributes?.url}
-                                                                    className="w-12 h-12 rounded-full bg-white border border-light dark:border-dark"
+                                                                    className="w-10 h-10 rounded-full bg-white border border-light dark:border-dark"
                                                                     alt={name}
                                                                 />
                                                             </Tooltip>
