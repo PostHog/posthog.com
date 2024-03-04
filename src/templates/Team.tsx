@@ -18,6 +18,7 @@ import {
     StickerFlagCO,
     StickerFlagDE,
     StickerFlagFR,
+    StickerFlagGB,
     StickerFlagNL,
     StickerFlagPL,
     StickerFlagUnknown,
@@ -197,14 +198,28 @@ export default function Team({
 
                                                 <div className="mt-2 flex space-x-1 items-center">
                                                     <span>
-                                                        {country === 'world' ? (
-                                                            '🌎'
+                                                        {country === 'BE' ? (
+                                                            <StickerFlagBE className="w-8 h-8" />
+                                                        ) : country === 'US' ? (
+                                                            <StickerFlagUS className="w-8 h-8" />
+                                                        ) : country === 'GB' ? (
+                                                            <StickerFlagGB className="w-8 h-8" />
+                                                        ) : country === 'DE' ? (
+                                                            <StickerFlagDE className="w-8 h-8" />
+                                                        ) : country === 'FR' ? (
+                                                            <StickerFlagFR className="w-8 h-8" />
+                                                        ) : country === 'NL' ? (
+                                                            <StickerFlagNL className="w-8 h-8" />
+                                                        ) : country === 'AT' ? (
+                                                            <StickerFlagAT className="w-8 h-8" />
+                                                        ) : country === 'CA' ? (
+                                                            <StickerFlagCA className="w-8 h-8" />
+                                                        ) : country === 'CO' ? (
+                                                            <StickerFlagCO className="w-8 h-8" />
+                                                        ) : country === 'PL' ? (
+                                                            <StickerFlagPL className="w-8 h-8" />
                                                         ) : (
-                                                            <ReactCountryFlag
-                                                                className="!w-8 !h-8"
-                                                                svg
-                                                                countryCode={country}
-                                                            />
+                                                            <StickerFlagUnknown className="w-8 h-8" />
                                                         )}
                                                     </span>
                                                     <span>
