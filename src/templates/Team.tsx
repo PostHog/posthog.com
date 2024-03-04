@@ -23,9 +23,11 @@ import {
     StickerFlagPL,
     StickerFlagUnknown,
     StickerFlagUS,
+    StickerPineapple,
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
+    StickerThumbsUp,
 } from 'components/Stickers/Index'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
@@ -170,6 +172,8 @@ export default function Team({
                 cta={<span className="text-sm">{PineappleText(pineapplePercentage)}</span>}
                 id="people"
             >
+                <StickerPineapple className="w-8 h-8" />
+                <StickerThumbsUp className="w-8 h-8" />
                 <div className="flex space-x-12">
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
                         {profiles.data.map(
@@ -326,6 +330,19 @@ export default function Team({
                     </Section>
                 )}
             </div>
+            {objectives && (
+                <Section title="Handbook" id="handbook">
+                    <div className="article-content max-w-2xl">
+                        <MDXProvider
+                            components={{
+                                Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
+                            }}
+                        >
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                </Section>
+            )}
             {body && (
                 <Section title="Handbook" id="handbook">
                     <div className="article-content max-w-2xl">
