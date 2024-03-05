@@ -65,7 +65,14 @@ const Section = ({ children, cta, title, id = '' }) => {
     )
 }
 
-const Stickers = ({ country, pineappleOnPizza, isTeamLead }) => {
+const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, handleTeamLead }) => {
+    const TeamLeadContainer = isModerator && handleTeamLead ? 'span' : 'button'
+
+    const handleTeamLeadClick = (e) => {
+        e.stopPropagation()
+        handleTeamLead(id, isTeamLead)
+    }
+
     return (
         <>
             <span>
@@ -108,14 +115,14 @@ const Stickers = ({ country, pineappleOnPizza, isTeamLead }) => {
                     </Tooltip>
                 )}
             </span>
-            {isTeamLead ? (
-                <span>
+            {isTeamLead || isModerator ? (
+                <TeamLeadContainer {...(isModerator && handleTeamLead ? { onClick: handleTeamLeadClick } : {})}>
                     <Tooltip content="Team lead">
                         <span>
-                            <StickerMayor className="w-8 h-8" />
+                            <StickerMayor active={isTeamLead} className="w-8 h-8" />
                         </span>
                     </Tooltip>
-                </span>
+                </TeamLeadContainer>
             ) : (
                 ''
             )}
@@ -160,14 +167,15 @@ const Profile = (profile) => {
 export default function Team({
     data: {
         mdx: { body },
-        team: { crest, name, description, profiles, roadmaps, teamImage, leadProfiles },
+        team: { crest, name, description, profiles, roadmaps, teamImage },
         objectives,
     },
     pageContext,
 }) {
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
-    const { team, addTeamMember, removeTeamMember } = useTeam({ teamName: name })
+    const { team, addTeamMember, removeTeamMember, handleTeamLead } = useTeam({ teamName: name })
+    const leadProfiles = team?.attributes?.leadProfiles
     const teamName = `${name} Team`
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
@@ -204,7 +212,7 @@ export default function Team({
     })
 
     function isTeamLead(id) {
-        return leadProfiles.data.some(({ id: leadID }) => leadID === id)
+        return leadProfiles?.data?.some(({ id: leadID }) => leadID === id)
     }
 
     const hasUnderConsideration = underConsideration.length > 0
@@ -286,10 +294,6 @@ export default function Team({
                 cta={<span className="text-sm">{PineappleText(pineapplePercentage)}</span>}
                 id="people"
             >
-                {/*
-                <StickerPineapple className="w-8 h-8" />
-                <StickerThumbsUp className="w-8 h-8" />
-                */}
                 <div className="flex space-x-12">
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
                         {team?.attributes?.profiles?.data
@@ -336,7 +340,9 @@ export default function Team({
                                                               country={country}
                                                               isTeamLead={isTeamLead(id)}
                                                               pineappleOnPizza={pineappleOnPizza}
-                                                              className="w-8 h-8"
+                                                              handleTeamLead={handleTeamLead}
+                                                              isModerator={isModerator}
+                                                              id={id}
                                                           />
                                                       </div>
                                                   </div>
