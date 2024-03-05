@@ -1,28 +1,30 @@
 ---
-title: "How to set up A/B tests in Flutter"
+title: "How to set up feature flags in Flutter"
 date: 2024-03-05
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/flutter-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/flutter-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/flutter-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/flutter-ab-tests/experiment-setup-dark.png'
+import EventsInPostHogLight from '../images/tutorials/flutter-feature-flags/events-light.png'
+import EventsInPostHogDark from '../images/tutorials/flutter-feature-flags/events-dark.png'
+import CreateFlagLight from '../images/tutorials/flutter-feature-flags/create-flag-light.png'
+import CreateFlagDark from '../images/tutorials/flutter-feature-flags/create-flag-dark.png'
 
-[A/B tests](/ab-testing) help you improve your Flutter app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Flutter app, add PostHog, create an A/B test, and implement the code for it.
+[Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them into your Flutter app using PostHog. 
+
+We'll create a basic Flutter app, add PostHog, create a feature flag, and then implement the flag to control content in our app.
 
 ## 1. Create a new Flutter app
 
 Our app will have two screens:
 
 1. The first screen will have a button which takes you to a second screen.
-2. The second screen will either have a `red` or `green` background color, depending on whether the user is in the `control` or `test` variant of our A/B test. This screen will also have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
+2. The second screen will either have a `red` or `green` background color, depending on whether our feature flag is enabled or not.
 
-To set this up, install the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
+To set this up, first ensure the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) is installed. Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
 
-Select `Empty Application` and name your app `flutter_ab_tests`. Then, replace your code in `lib/main.dart` with the following:
+Select `Empty Application` and name your app `flutter_feature_flags`. Then, replace your code in `lib/main.dart` with the following:
 
 ```dart file=lib/main.dart
 import 'package:flutter/material.dart';
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Flutter A/B Test App',
+      title: 'Flutter Feature Flags App',
       home: MainScreen(),
     );
   }
@@ -59,7 +61,7 @@ class MainScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FeatureScreenView(isTestVariant: false)), // We update this later
+                  MaterialPageRoute(builder: (context) => const FeatureScreenView(isFlagEnabled: false)), // We update this later
                 );
               },
             ),
@@ -77,22 +79,14 @@ Lastly, in the `lib` directory, create a new file for our second screen called `
 import 'package:flutter/material.dart';
 
 class FeatureScreenView extends StatelessWidget {
-  final bool isTestVariant;
+  final bool isFlagEnabled;
 
-  const FeatureScreenView({super.key, required this.isTestVariant});
+  const FeatureScreenView({Key? key, required this.isFlagEnabled}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: isTestVariant ? Colors.green : Colors.red,
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('Click Me!'),
-          onPressed: () {
-            // Event capturing will go here
-          },
-        ),
-      ),
+      backgroundColor: isFlagEnabled ? Colors.green : Colors.red,
     );
   }
 }
@@ -100,13 +94,13 @@ class FeatureScreenView extends StatelessWidget {
 
 Press **F5** and run the app in any emulator (we chose Android) to see your app in action.
 
-![Basic setup of the Flutter app](../images/tutorials/flutter-ab-tests/basic-app.mp4)
+![Basic setup of the Flutter app](../images/tutorials/flutter-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, install [PostHog’s Flutter SDK](/libraries/flutter) by adding `posthog_flutter` to your `pubspec.yaml`:
+To start, install [PostHog’s Flutter SDK](/docs/libraries/flutter) by adding `posthog_flutter` to your `pubspec.yaml`:
 
 ```yaml file=pubspec.yaml
 # rest of your code
@@ -119,11 +113,11 @@ dependencies:
 # rest of your code
 ```
 
-Next, we configure PostHog using our project API key and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
+Next, we configure PostHog in each platform using our project API key and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
 ### Android setup
 
-For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main` directory:
+For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
 
 ```xml file=android/app/src/main/AndroidManifest.xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
@@ -152,7 +146,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 ### iOS setup
 
-For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration with your project API key and instance address to the `Info.plist` file located in the `ios/Runner` directory:
+For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -165,8 +159,8 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
   <key>com.posthog.posthog.POSTHOG_HOST</key>
   <string><ph_instance_address></string>  <!--  https://app.posthog.com or https://eu.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
-  <key>com.posthog.posthog.DEBUG</key>
   <true/>
+  <key>com.posthog.posthog.DEBUG</key>
   <true/>
 </dict>
 </plist>
@@ -205,78 +199,27 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 <!-- ... other elements ... -->
 
 </html>
-
 ```
 
-## 3. Capture a custom event
+## 3. Create a feature flag in PostHog
 
-The first part of setting up our A/B test in PostHog is setting up the goal metric. We'll use the number of clicks on the button on `FeatureScreenView` as our goal.
-
-To measure this, we [capture a custom event](/docs/product-analytics/capture-events) `feature_button_clicked` when the button is clicked. To do this, update the code in `feature_screen_view.dart` to call [`Posthog().capture`](/docs/libraries/flutter#capturing-events) in `onPressed`:
-
-```dart file=feature_screen_view.dart
-import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
-
-class FeatureScreenView extends StatelessWidget {
-  final bool isTestVariant;
-
-  const FeatureScreenView({Key? key, required this.isTestVariant}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: isTestVariant ? Colors.green : Colors.red,
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('Click Me!'),
-          onPressed: () async {
-            await Posthog().capture(
-              eventName: 'feature_button_clicked',
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-```
-
-Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog events explorer](https://us.posthog.com/events).
+With PostHog set up, your app is ready for feature flags. To create one, go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog and click **New feature flag**. Enter a flag key (like `my-cool-flag`), set the release condition to roll out to 100% of users, and press "Save."
 
 <ProductScreenshot
-  imageLight={EventsInPostHogLight} 
-  imageDark={EventsInPostHogDark} 
-  alt="Events captured in PostHog" 
+  imageLight={CreateFlagLight} 
+  imageDark={CreateFlagDark} 
+  alt="Feature flag created in PostHog" 
   classes="rounded"
 />
 
-## 4. Create an A/B test in PostHog
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
+## 4. Implement the flag code
 
-Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
+To implement the feature flag, we: 
 
-1. Name it "My cool experiment".
-2. Set "Feature flag key" to `my-cool-experiment`.
-3. Under the experiment goal, select the `feature_button_clicked` event we created in the previous step.
-4. Use the default values for all other fields.
-
-Click "Save as draft" and then click "Launch".
-
-<ProductScreenshot
-  imageLight={TestSetupLight} 
-  imageDark={TestSetupDark} 
-  alt="Experiment setup in PostHog" 
-  classes="rounded"
-/>
-
-## 5. Implement the A/B test code
-
-The final step is to add the experiment code. We'll add code that does the following:
-
-1. Fetch the `my-cool-experiment` flag using [`await Posthog().getFeatureFlag('my-cool-experiment')`](/docs/libraries/flutter#multivariate-feature-flags).
-2. Change the background color of `FeatureScreenView` based on the value of the flag (`control` or `test`).
+1. Fetch the `my-cool-flag` flag using [`await Posthog().isFeatureEnabled('my-cool-flag')`](/docs/libraries/flutter#feature-flags).
+2. Change the background color of `FeatureScreenView` based on the value of the flag.
 
 To do this, update the code in `main.dart` to the following:
 
@@ -294,7 +237,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Flutter A/B Test App',
+      title: 'Flutter Feature Flags App',
       home: MainScreen(),
     );
   }
@@ -315,15 +258,14 @@ class MainScreen extends StatelessWidget {
             ElevatedButton(
               child: const Text('Go to Next Screen'),
               onPressed: () async { 
-                final featureFlagValue = await Posthog().getFeatureFlag('my-cool-experiment');
-                bool isTestVariant = featureFlagValue == 'test';
+                bool isFlagEnabled =  await Posthog().isFeatureEnabled('my-cool-flag'); 
                 if (context.mounted) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => FeatureScreenView(isTestVariant: isTestVariant)),
+                    MaterialPageRoute(builder: (context) => FeatureScreenView(isFlagEnabled: isFlagEnabled)),
                   );
                 }
-              }
+              }            
             ),
           ],
         ),
@@ -333,12 +275,10 @@ class MainScreen extends StatelessWidget {
 }
 ```
 
-That's it! Your A/B test is now ready. When you run your app, you see either green or red as the background color of `FeatureScreenView` and PostHog will capture button clicks for each variant to calculate if changing the color has a statistically significant impact.
-
-Lastly, you can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
+That's it! When you restart your app and click the button, you should see the green background color on the second screen. 
 
 ## Further reading
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
-- [How to set up feature flags in Flutter](/tutorials/flutter-feature-flags)
+- [How to run A/B tests in Flutter](/tutorials/flutter-ab-tests)
+- [How to run A/B tests in Android](/tutorials/android-ab-tests)
