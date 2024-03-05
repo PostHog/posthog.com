@@ -50,7 +50,7 @@ const product = {
 }
 
 const team = 'Replay'
-const teamSlug = '/handbook/small-teams/replay'
+const teamSlug = '/teams/replay'
 
 const featuresPerRow = 3
 const features = [

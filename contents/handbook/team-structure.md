@@ -7,23 +7,23 @@ hideAnchor: false
 
 ## Small teams
 
-We've organized the team into small teams that are multi-disciplinary and as self-sufficient as possible. [You can read about why we've done it this way](/handbook/company/small-teams).
+We've organized the team into small teams that are multi-disciplinary and as self-sufficient as possible. [You can read about why we've done it this way](/handbook/company/small-teams), or [browse the small teams](/teams).
 
 Our small teams are:
 
-- [Customer Success](/handbook/small-teams/customer-success)
-- [Data Warehouse](/handbook/small-teams/dw)
-- [Exec](/handbook/small-teams/exec)
-- [Feature Success](/handbook/small-teams/feature-success)
-- [Growth](/handbook/small-teams/growth)
-- [Infrastructure](/handbook/small-teams/infrastructure)
-- [Marketing](/handbook/small-teams/marketing)
-- [People & Ops](/handbook/small-teams/people)
-- [Pipeline](/handbook/small-teams/pipeline)
-- [Product Analytics](/handbook/small-teams/product-analytics)
-- [Replay](/handbook/small-teams/replay)
-- [Web Analytics](/handbook/small-teams/web-analytics)
-- [Website & Docs](/handbook/small-teams/website-docs)
+- [Customer Success](/teams/customer-success)
+- [Data Warehouse](/teams/data-warehouse)
+- [Exec](/teams/exec)
+- [Feature Success](/teams/feature-success)
+- [Growth](/teams/growth)
+- [Infrastructure](/teams/infrastructure)
+- [Marketing](/teams/marketing)
+- [People & Ops](/teams/people)
+- [Pipeline](/teams/pipeline)
+- [Product Analytics](/teams/product-analytics)
+- [Replay](/teams/replay)
+- [Web Analytics](/teams/web-analytics)
+- [Website & Docs](/teams/website-docs)
 
 ## Reporting lines
 

@@ -212,8 +212,8 @@ const linklist: IProps[] = [
                 url: '/handbook/help',
             },
             {
-                title: 'Small teams',
-                url: '/handbook/small-teams/team-structure',
+                title: 'Team structure',
+                url: '/handbook/team-structure',
             },
             {
                 title: 'People & Ops',
@@ -255,7 +255,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Small teams',
-                url: '/team',
+                url: '/teams',
             },
             {
                 title: 'Blog',
@@ -337,7 +337,7 @@ export function Footer(): JSX.Element {
     const social: Social[] = [
         {
             Icon: <Twitter className="w-5 h-5 box-border fill-current" />,
-            url: 'https://twitter.com/posthog',
+            url: 'https://x.com/posthog',
         },
         {
             Icon: (
