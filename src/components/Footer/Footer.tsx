@@ -250,7 +250,11 @@ const linklist: IProps[] = [
                 url: '/changelog',
             },
             {
-                title: 'Team',
+                title: 'People',
+                url: '/people',
+            },
+            {
+                title: 'Small teams',
                 url: '/team',
             },
             {

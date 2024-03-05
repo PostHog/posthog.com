@@ -90,7 +90,7 @@ const Teams: React.FC = () => {
                                                             >
                                                                 <img
                                                                     src={avatar?.data?.attributes?.url}
-                                                                    className="w-10 h-10 rounded-full bg-white border border-light dark:border-dark"
+                                                                    className="w-10 h-10 rounded-full bg-white dark:bg-accent-dark border border-light dark:border-dark"
                                                                     alt={name}
                                                                 />
                                                             </Tooltip>
