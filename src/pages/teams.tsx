@@ -51,7 +51,7 @@ const Teams: React.FC = () => {
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
-                            <h1 className="font-bold text-5xl mb-6">Small teams</h1>
+                            <h1 className="font-bold text-3xl md:text-4xl mb-6">Small teams</h1>
                             <p className="opacity-60 ">
                                 We've organized the team into small teams that are multi-disciplinary and as
                                 self-sufficient as possible.
@@ -63,14 +63,14 @@ const Teams: React.FC = () => {
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 xl:gap-5 text-center">
                                 {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (
                                     <Link
-                                        to={`/handbook/small-teams/${slugify(name.toLowerCase().replace('ops', ''), {
+                                        to={`/teams/${slugify(name.toLowerCase().replace('ops', ''), {
                                             remove: /and/,
                                         })}`}
                                         key={id}
                                         className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-2 md:p-4 hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px"
                                     >
                                         <GatsbyImage image={getImage(crest)} alt={`${name} Team`} />
-                                        <h3 className="text-base my-2">{name} Team</h3>
+                                        <h3 className="text-base my-2 leading-snug">{name} Team</h3>
                                         <div className="flex justify-center -mr-3">
                                             {profiles.data.map(
                                                 ({ id, attributes: { firstName, lastName, avatar } }, index) => {
@@ -79,10 +79,9 @@ const Teams: React.FC = () => {
                                                         ({ id: leadID }) => leadID === id
                                                     )
                                                     return (
-                                                        <Link
+                                                        <span
                                                             key={`${name}-${index}`}
-                                                            to={`/community/profiles/${id}`}
-                                                            className="-ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
+                                                            className="cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
                                                         >
                                                             <Tooltip
                                                                 content={`${name} ${isTeamLead ? '(Team lead)' : ''}`}
@@ -94,7 +93,7 @@ const Teams: React.FC = () => {
                                                                     alt={name}
                                                                 />
                                                             </Tooltip>
-                                                        </Link>
+                                                        </span>
                                                     )
                                                 }
                                             )}

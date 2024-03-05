@@ -157,7 +157,7 @@ export default function Sidebar({ teams }: ISidebarProps) {
                     <>
                         <h3 className="font-semibold text-sm m-0 mb-2">
                             <Link
-                                to={`/handbook/small-teams/${slugify(teams[0].name, { lower: true })}`}
+                                to={`/teams/${slugify(teams[0].name, { lower: true })}`}
                                 className="flex w-full justify-between items-center group leading-none rounded p-2 -mx-2 -my-1 hover:bg-gray-accent/50 
                     relative
                     active:top-[0.5px]
