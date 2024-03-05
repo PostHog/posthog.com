@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
+featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 category: General
 tags:
