@@ -1,6 +1,6 @@
 ---
 title: "How to set up A/B tests in Flutter"
-date: 2024-02-27
+date: 2024-03-05
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
@@ -79,7 +79,7 @@ import 'package:flutter/material.dart';
 class FeatureScreenView extends StatelessWidget {
   final bool isTestVariant;
 
-  const FeatureScreenView({Key? key, required this.isTestVariant}) : super(key: key);
+  const FeatureScreenView({super.key, required this.isTestVariant});
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +123,7 @@ Next, we configure PostHog using our project API key and instance address. You c
 
 ### Android setup
 
-For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
+For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main` directory:
 
 ```xml file=android/app/src/main/AndroidManifest.xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
@@ -152,7 +152,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 You may also need to ensure you're running on the latest Kotlin version. To do this, go to the [Kotlin website](https://kotlinlang.org/docs/releases.html#release-details) to find the latest version number. Then set this version number in the `build.gradle` in the root of your `android` directory (and not the `build.gradle` located in `android/app`):
 
-```js file=android/build.gradle
+```gradle_kotlin file=android/build.gradle
 buildscript {
     ext.kotlin_version = '1.9.22' // use the latest Kotlin version number here
     // rest of config
@@ -236,8 +236,8 @@ class FeatureScreenView extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           child: const Text('Click Me!'),
-          onPressed: () {
-            Posthog().capture(
+          onPressed: () async {
+            await Posthog().capture(
               eventName: 'feature_button_clicked',
             );
           },
@@ -309,21 +309,6 @@ class MyApp extends StatelessWidget {
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
-  void _getFeatureFlagAndNavigate(BuildContext context) {
-    _fetchFeatureFlagValue((isTestVariant) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => FeatureScreenView(isTestVariant: isTestVariant)),
-      );
-    });
-  }
-
- void _fetchFeatureFlagValue(Function(bool) onFlagFetched) async {
-    String featureFlagValue = await Posthog().getFeatureFlag('my-cool-experiment') as? String;
-    bool isTestVariant = featureFlagValue == 'test';
-    onFlagFetched(isTestVariant);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -335,7 +320,16 @@ class MainScreen extends StatelessWidget {
             const Text('Hello, world!'),
             ElevatedButton(
               child: const Text('Go to Next Screen'),
-              onPressed: () => _getFeatureFlagAndNavigate(context),
+              onPressed: () async { 
+                final featureFlagValue = await Posthog().getFeatureFlag('my-cool-experiment');
+                bool isTestVariant = featureFlagValue == 'test';
+                if (context.mounted) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FeatureScreenView(isTestVariant: isTestVariant)),
+                  );
+                }
+            }
             ),
           ],
         ),

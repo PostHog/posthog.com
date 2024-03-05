@@ -52,7 +52,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 You may also need to ensure you're running on the latest Kotlin version. To do this, go to the [Kotlin website](https://kotlinlang.org/docs/releases.html#release-details) to find the latest version number. Then set this version number in the `build.gradle` in the root of your `android` directory (and not the `build.gradle` located in `android/app`):
 
-```js file=android/build.gradle
+```gradle_kotlin file=android/build.gradle
 buildscript {
     ext.kotlin_version = '1.9.22' // use the latest Kotlin version number here
     // rest of config
