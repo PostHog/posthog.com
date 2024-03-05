@@ -261,7 +261,7 @@ According to G2 reviews, UXCam helps companies:
 
 ### What is Lucky Orange?
 
-Lucky Orange is a simple analytics tool designed to analyze user behavior on small e-commerce websites using session replays and heatmaps. It also offers a range of other useful features for store owners, such as built-in form analytics, live chat, surveys, and announcements widgets.
+Lucky Orange is popular [alternative to Hotjar](/blog/best-hotjar-alternatives) – it's simple and designed to analyze user behavior on small e-commerce websites using session replays and heatmaps. It also offers a range of other useful features for store owners, such as built-in form analytics, live chat, surveys, and announcements widgets.
 
 Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [according to BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Clarity's 45,000+. Lucky Orange customers are often small online stores or freelance CRO consultants.
 

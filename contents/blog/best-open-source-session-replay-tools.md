@@ -26,7 +26,7 @@ Replays (aka session recordings) are a great way to understand:
 - Hesitation at different stages of your funnel.
 - How your users are interacting with individual elements of your product.
 
-Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
+Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at [Hotjar alternatives](/blog/best-hotjar-alternatives) that are either free or open source, particularly session replay tools. 
 
 > **Changelog:**
 >
