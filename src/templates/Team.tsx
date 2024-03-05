@@ -8,7 +8,7 @@ import useTeamUpdates from 'hooks/useTeamUpdates'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { kebabCase } from 'lib/utils'
-import React from 'react'
+import React, { useState } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import {
     StickerMayor,
@@ -23,11 +23,9 @@ import {
     StickerFlagPL,
     StickerFlagUnknown,
     StickerFlagUS,
-    StickerPineapple,
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
-    StickerThumbsUp,
 } from 'components/Stickers/Index'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
@@ -36,6 +34,10 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import Tooltip from 'components/Tooltip'
 import SEO from 'components/seo'
+import SideModal from 'components/Modal/SideModal'
+import { Avatar } from 'components/MainNav'
+import getAvatarURL from 'components/Squeak/util/getAvatar'
+import Markdown from 'markdown-to-jsx'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -57,6 +59,98 @@ const Section = ({ children, cta, title, id = '' }) => {
             )}
             <div>{children}</div>
         </section>
+    )
+}
+
+const Stickers = ({ country, pineappleOnPizza, isTeamLead }) => {
+    return (
+        <>
+            <span>
+                {country === 'BE' ? (
+                    <StickerFlagBE className="w-8 h-8" />
+                ) : country === 'US' ? (
+                    <StickerFlagUS className="w-8 h-8" />
+                ) : country === 'GB' ? (
+                    <StickerFlagGB className="w-8 h-8" />
+                ) : country === 'DE' ? (
+                    <StickerFlagDE className="w-8 h-8" />
+                ) : country === 'FR' ? (
+                    <StickerFlagFR className="w-8 h-8" />
+                ) : country === 'NL' ? (
+                    <StickerFlagNL className="w-8 h-8" />
+                ) : country === 'AT' ? (
+                    <StickerFlagAT className="w-8 h-8" />
+                ) : country === 'CA' ? (
+                    <StickerFlagCA className="w-8 h-8" />
+                ) : country === 'CO' ? (
+                    <StickerFlagCO className="w-8 h-8" />
+                ) : country === 'PL' ? (
+                    <StickerFlagPL className="w-8 h-8" />
+                ) : (
+                    <StickerFlagUnknown className="w-8 h-8" />
+                )}
+            </span>
+            <span>
+                {pineappleOnPizza === null ? (
+                    <Tooltip content="We're not sure if they like pineapple on pizza (yet)!">
+                        <StickerPineappleUnknown className="w-8 h-8" />
+                    </Tooltip>
+                ) : pineappleOnPizza ? (
+                    <Tooltip content="Prefers pineapple on pizza!">
+                        <StickerPineappleYes className="w-8 h-8" />
+                    </Tooltip>
+                ) : (
+                    <Tooltip content="Does not believe pineapple belongs on pizza">
+                        <StickerPineappleNo className="w-8 h-8" />
+                    </Tooltip>
+                )}
+            </span>
+            {isTeamLead ? (
+                <span>
+                    <Tooltip content="Team lead">
+                        <span>
+                            <StickerMayor className="w-8 h-8" />
+                        </span>
+                    </Tooltip>
+                </span>
+            ) : (
+                ''
+            )}
+        </>
+    )
+}
+
+const Profile = (profile) => {
+    const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id } = profile
+    const name = [firstName, lastName].filter(Boolean).join(' ')
+    return (
+        <div>
+            <div className="flex space-x-2">
+                <Avatar
+                    className="w-24 h-24 bg-tan rounded-full dark:bg-dark border border-border dark:border-dark"
+                    src={getAvatarURL(profile)}
+                />
+                <div>
+                    <h2 className="m-0">{name}</h2>
+                    <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{companyRole}</p>
+                    <div className="flex space-x-1 items-center mt-1">
+                        <Stickers
+                            className="w-8 h-8"
+                            country={country}
+                            pineappleOnPizza={pineappleOnPizza}
+                            isTeamLead={isTeamLead}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className="mt-6 pt-6 border-t border-border dark:border-dark">
+                {biography ? <Markdown>{biography}</Markdown> : <p>{firstName} hasn't added their bio yet!</p>}
+            </div>
+            <CallToAction to={`/community/profiles/${id}`} type="secondary" size="sm">
+                View full profile
+            </CallToAction>
+        </div>
     )
 }
 
@@ -110,10 +204,14 @@ export default function Team({
     const hasUnderConsideration = underConsideration.length > 0
     const hasInProgress = inProgress.length > 0
     const hasBody = !['/handbook/small-teams/exec', '/handbook/small-teams/data-warehouse'].includes(pageContext.slug)
+    const [activeProfile, setActiveProfile] = useState(false)
 
     return (
         <Layout>
             <SEO title={`${teamName} - PostHog`} />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                <Profile {...activeProfile} />
+            </SideModal>
             <Section>
                 <div className="flex flex-col md:flex-row space-x-4 items-center">
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
@@ -190,97 +288,57 @@ export default function Team({
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
                         {[...profiles.data]
                             .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
-                            .map(
-                                ({
+                            .map((profile) => {
+                                const {
                                     id,
                                     attributes: { avatar, firstName, lastName, country, companyRole, pineappleOnPizza },
-                                }) => {
-                                    const name = [firstName, lastName].filter(Boolean).join(' ')
-                                    return (
-                                        <li key={id} className="bg-border dark:bg-border-dark rounded-md">
-                                            <Link
-                                                to={`/community/profiles/${id}`}
-                                                className="border border-border dark:border-border-dark rounded-md h-full bg-accent dark:bg-accent-dark flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
-                                            >
-                                                <div className="mb-auto">
-                                                    <h3
-                                                        className="mb-0 text-base leading-tight"
-                                                        id={kebabCase(name) + '-' + kebabCase(companyRole)}
-                                                    >
-                                                        {name}
-                                                    </h3>
-                                                    <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">
-                                                        {companyRole}
-                                                    </p>
+                                } = profile
+                                const name = [firstName, lastName].filter(Boolean).join(' ')
+                                return (
+                                    <li key={id} className="bg-border dark:bg-border-dark rounded-md">
+                                        <button
+                                            onClick={() =>
+                                                setActiveProfile({
+                                                    ...profile.attributes,
+                                                    isTeamLead: isTeamLead(id),
+                                                    id,
+                                                })
+                                            }
+                                            className="text-left w-full border border-border dark:border-border-dark rounded-md h-full bg-accent dark:bg-accent-dark flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
+                                        >
+                                            <div className="mb-auto">
+                                                <h3
+                                                    className="mb-0 text-base leading-tight"
+                                                    id={kebabCase(name) + '-' + kebabCase(companyRole)}
+                                                >
+                                                    {name}
+                                                </h3>
+                                                <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">
+                                                    {companyRole}
+                                                </p>
 
-                                                    <div className="mt-1 flex space-x-1 items-center">
-                                                        <span>
-                                                            {country === 'BE' ? (
-                                                                <StickerFlagBE className="w-8 h-8" />
-                                                            ) : country === 'US' ? (
-                                                                <StickerFlagUS className="w-8 h-8" />
-                                                            ) : country === 'GB' ? (
-                                                                <StickerFlagGB className="w-8 h-8" />
-                                                            ) : country === 'DE' ? (
-                                                                <StickerFlagDE className="w-8 h-8" />
-                                                            ) : country === 'FR' ? (
-                                                                <StickerFlagFR className="w-8 h-8" />
-                                                            ) : country === 'NL' ? (
-                                                                <StickerFlagNL className="w-8 h-8" />
-                                                            ) : country === 'AT' ? (
-                                                                <StickerFlagAT className="w-8 h-8" />
-                                                            ) : country === 'CA' ? (
-                                                                <StickerFlagCA className="w-8 h-8" />
-                                                            ) : country === 'CO' ? (
-                                                                <StickerFlagCO className="w-8 h-8" />
-                                                            ) : country === 'PL' ? (
-                                                                <StickerFlagPL className="w-8 h-8" />
-                                                            ) : (
-                                                                <StickerFlagUnknown className="w-8 h-8" />
-                                                            )}
-                                                        </span>
-                                                        <span>
-                                                            {pineappleOnPizza === null ? (
-                                                                <Tooltip content="We're not sure if they like pineapple on pizza (yet)!">
-                                                                    <StickerPineappleUnknown className="w-8 h-8" />
-                                                                </Tooltip>
-                                                            ) : pineappleOnPizza ? (
-                                                                <Tooltip content="Prefers pineapple on pizza!">
-                                                                    <StickerPineappleYes className="w-8 h-8" />
-                                                                </Tooltip>
-                                                            ) : (
-                                                                <Tooltip content="Does not believe pineapple belongs on pizza">
-                                                                    <StickerPineappleNo className="w-8 h-8" />
-                                                                </Tooltip>
-                                                            )}
-                                                        </span>
-                                                        {isTeamLead(id) ? (
-                                                            <span>
-                                                                <Tooltip content="Team lead">
-                                                                    <span>
-                                                                        <StickerMayor className="w-8 h-8" />
-                                                                    </span>
-                                                                </Tooltip>
-                                                            </span>
-                                                        ) : (
-                                                            ''
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div className="ml-auto -mb-4 -mr-4 mt-2">
-                                                    <img
-                                                        src={
-                                                            avatar?.data?.attributes?.url ||
-                                                            'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                                                        }
-                                                        className="w-[165px]"
+                                                <div className="mt-1 flex space-x-1 items-center">
+                                                    <Stickers
+                                                        country={country}
+                                                        isTeamLead={isTeamLead(id)}
+                                                        pineappleOnPizza={pineappleOnPizza}
+                                                        className="w-8 h-8"
                                                     />
                                                 </div>
-                                            </Link>
-                                        </li>
-                                    )
-                                }
-                            )}
+                                            </div>
+                                            <div className="ml-auto -mb-4 -mr-4 mt-2">
+                                                <img
+                                                    src={
+                                                        avatar?.data?.attributes?.url ||
+                                                        'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+                                                    }
+                                                    className="w-[165px]"
+                                                />
+                                            </div>
+                                        </button>
+                                    </li>
+                                )
+                            })}
                     </ul>
                     <div className="hidden w-full md:max-w-sm shrink-1 basis-sm">
                         <SidebarSection title="Small team FAQ">
@@ -438,6 +496,7 @@ export const query = graphql`
                         country
                         location
                         pineappleOnPizza
+                        biography
                     }
                 }
             }
