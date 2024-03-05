@@ -52,7 +52,7 @@ const Section = ({ children, cta, title, id = '' }) => {
             {title && (
                 <div className="flex flex-col md:flex-row justify-between items-baseline w-full mb-4 relative after:h-px after:bg-border dark:after:bg-border-dark after:absolute after:top-1/2 after:left-0 after:w-full">
                     <h4 className="m-0 bg-light dark:bg-dark relative z-10 pr-2">{title}</h4>
-                    {cta && <aside className="bg-light dark:bg-dark relative z-10 md:pl-2 leading-tight">{cta}</aside>}
+                    {cta && <aside className="bg-light dark:bg-dark relative z-10 md:pl-2 leading-tight -top-1">{cta}</aside>}
                 </div>
             )}
             <div>{children}</div>
@@ -237,7 +237,9 @@ export default function Team({
                                                     </span>
                                                     <span>
                                                         {pineappleOnPizza === null ? (
-                                                            <StickerPineappleUnknown className="w-8 h-8" />
+                                                            <Tooltip content="We're not sure if they like pineapple on pizza (yet)!">
+                                                                <StickerPineappleUnknown className="w-8 h-8" />
+                                                            </Tooltip>
                                                         ) : pineappleOnPizza ? (
                                                             <Tooltip content="Prefers pineapple on pizza!">
                                                                 <StickerPineappleYes className="w-8 h-8" />

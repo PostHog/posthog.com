@@ -60,7 +60,7 @@ const Teams: React.FC = () => {
                                 <Link to="/handbook/company/small-teams">Learn more about why we have small teams</Link>
                             </p>
 
-                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-5 text-center">
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 xl:gap-5 text-center">
                                 {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (
                                     <Link
                                         to={`/handbook/small-teams/${slugify(name.toLowerCase().replace('ops', ''), {
@@ -71,7 +71,7 @@ const Teams: React.FC = () => {
                                     >
                                         <GatsbyImage image={getImage(crest)} alt={`${name} Team`} />
                                         <h3 className="text-base my-2">{name} Team</h3>
-                                        <div className="flex justify-center">
+                                        <div className="flex justify-center -mr-3">
                                             {profiles.data.map(
                                                 ({ id, attributes: { firstName, lastName, avatar } }, index) => {
                                                     const name = [firstName, lastName].filter(Boolean).join(' ')
