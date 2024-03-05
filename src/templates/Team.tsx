@@ -41,6 +41,7 @@ import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
 import { IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
+import { useFormik } from 'formik'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -164,17 +165,47 @@ const Profile = (profile) => {
     )
 }
 
+const DescriptionForm = ({ onSubmit, initialValues = { description: '' } }) => {
+    const [loading, setLoading] = useState(false)
+    const { handleChange, values, submitForm, handleSubmit } = useFormik({
+        enableReinitialize: true,
+        initialValues,
+        onSubmit: (values) => {
+            setLoading(true)
+            onSubmit(values)
+        },
+    })
+    return (
+        <form onSubmit={handleSubmit} className="grid mt-4 max-w-md">
+            <textarea
+                rows={5}
+                name="description"
+                onChange={handleChange}
+                placeholder="Description"
+                value={values.description}
+                className="w-full p-2 text-[15px] rounded-md bg-white border border-border dark:border-dark mb-2 resize-none"
+            />
+            <CallToAction disabled={loading} onClick={submitForm} size="sm">
+                Update
+            </CallToAction>
+        </form>
+    )
+}
+
 export default function Team({
     data: {
         mdx: { body },
-        team: { crest, name, description, profiles, roadmaps, teamImage },
+        team: { crest, name, roadmaps, teamImage },
         objectives,
     },
     pageContext,
 }) {
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
-    const { team, addTeamMember, removeTeamMember, handleTeamLead } = useTeam({ teamName: name })
+    const { team, addTeamMember, removeTeamMember, handleTeamLead, updateDescription } = useTeam({ teamName: name })
+    const [editingDescription, setEditingDescription] = useState(false)
+    const description = team?.attributes?.description
+    const profiles = team?.attributes?.profiles
     const leadProfiles = team?.attributes?.leadProfiles
     const teamName = `${name} Team`
     const teamLength = profiles?.data?.length
@@ -229,11 +260,30 @@ export default function Team({
             <Section>
                 <div className="flex flex-col md:flex-row space-x-4 items-center">
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
-                    <div className="max-w-xl">
+                    <div className="max-w-xl w-full">
                         <h1 className="m-0">{teamName}</h1>
-                        <p className="my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
-
-                        {hasInProgress && (
+                        {editingDescription ? (
+                            <DescriptionForm
+                                initialValues={{ description }}
+                                onSubmit={async ({ description }) => {
+                                    await updateDescription(description)
+                                    setEditingDescription(false)
+                                }}
+                            />
+                        ) : description ? (
+                            <p className="my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
+                        ) : (
+                            <div className="my-4 h-[22px] max-w-md bg-accent dark:bg-accent-dark animate-pulse rounded-md" />
+                        )}
+                        {isModerator && !editingDescription && (
+                            <button
+                                className="text-red dark:text-yellow block -mt-2 mb-4 text-sm font-bold"
+                                onClick={() => setEditingDescription(true)}
+                            >
+                                Edit
+                            </button>
+                        )}
+                        {hasInProgress && !editingDescription && (
                             <CallToAction type="secondary" size="md" to="#in-progress">
                                 See what we're building
                             </CallToAction>
@@ -296,8 +346,8 @@ export default function Team({
             >
                 <div className="flex space-x-12">
                     <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
-                        {team?.attributes?.profiles?.data
-                            ? [...team.attributes.profiles.data]
+                        {profiles?.data
+                            ? [...profiles.data]
                                   .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
                                   .map((profile) => {
                                       const {
@@ -513,32 +563,6 @@ export const query = graphql`
                 cta {
                     label
                     url
-                }
-            }
-            profiles {
-                data {
-                    id
-                    attributes {
-                        avatar {
-                            data {
-                                attributes {
-                                    url
-                                }
-                            }
-                        }
-                        lastName
-                        firstName
-                        companyRole
-                        country
-                        location
-                        pineappleOnPizza
-                        biography
-                    }
-                }
-            }
-            leadProfiles {
-                data {
-                    id
                 }
             }
         }

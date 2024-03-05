@@ -86,9 +86,27 @@ export default function useTeam({ teamName }: { teamName: string }) {
         fetchTeam()
     }
 
+    const updateDescription = async (description: string) => {
+        const jwt = await getJwt()
+        const body = JSON.stringify({
+            data: {
+                description,
+            },
+        })
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
+            method: 'PUT',
+            body,
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+                'content-type': 'application/json',
+            },
+        })
+        fetchTeam()
+    }
+
     useEffect(() => {
         fetchTeam().then(() => setLoading(false))
     }, [])
 
-    return { loading, fetchTeam, team, addTeamMember, removeTeamMember, handleTeamLead }
+    return { loading, fetchTeam, team, addTeamMember, removeTeamMember, handleTeamLead, updateDescription }
 }
