@@ -213,7 +213,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Small teams',
-                url: '/handbook/small-teams/team-structure',
+                url: '/handbook/team-structure',
             },
             {
                 title: 'People & Ops',

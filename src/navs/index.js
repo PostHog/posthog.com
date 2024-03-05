@@ -224,7 +224,7 @@ export const handbookSidebar = [
     },
     {
         name: 'Team structure',
-        url: '/handbook/small-teams/team-structure',
+        url: '/handbook/team-structure',
     },
     {
         name: 'Customer success',

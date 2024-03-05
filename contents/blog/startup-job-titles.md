@@ -72,6 +72,6 @@ Ex-founders or early employees make for brilliant generalists. They’re less li
 
 Before PostHog started, James had to sell to get Tim to join. After the company launched, he had to get early users on board, which meant a mix of selling and building our website. His role then cycled through getting investors to take part in our funding rounds (from seed to [Series B](https://twitter.com/posthog/status/1402988140332154888)), hiring people, and talking to customers.
 
-On the ops and product side, it involves thinking about how the company and our business model should work - including our [product](https://posthog.com/handbook/strategy/roadmap), financing, [deployment](https://posthog.com/docs/self-host), [team structure](https://posthog.com/handbook/small-teams/team-structure), and [pricing](https://posthog.com/pricing) strategies.
+On the ops and product side, it involves thinking about how the company and our business model should work - including our [product](https://posthog.com/handbook/strategy/roadmap), financing, [deployment](https://posthog.com/docs/self-host), [team structure](https://posthog.com/handbook/team-structure), and [pricing](https://posthog.com/pricing) strategies.
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_

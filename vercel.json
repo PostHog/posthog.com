@@ -596,7 +596,11 @@
         { "source": "/docs/self-host/postgres-vs-clickhouse", "destination": "/blog/clickhouse-vs-postgres" },
         {
             "source": "/handbook/people/team-structure/team-structure",
-            "destination": "/handbook/small-teams/team-structure"
+            "destination": "/handbook/team-structure"
+        },
+        {
+            "source": "/handbook/small-teams/team-structure",
+            "destination": "/handbook/team-structure"
         },
         { "source": "/eu-cloud", "destination": "/eu" },
         { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },

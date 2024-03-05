@@ -71,7 +71,7 @@ We're big believers in the importance of the [maker's schedule](http://www.paulg
 
 One of the benefits of hiring high-performing, self-sufficient, empowered team members is that we don't need to put in place some of the typical corporate structures and processes that can slow teams down. 
 
-We have optimised for this by introducing [Small Teams](/handbook/small-teams/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
+We have optimised for this by introducing [Small Teams](/handbook/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
 
 Right now, our [management approach](/handbook/company/management) is super simple - James H, Tim and the team leaders are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 

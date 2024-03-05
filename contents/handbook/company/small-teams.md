@@ -86,7 +86,7 @@ These should all be visible in the Handbook, updated when changes are made & con
 
 ## Small Teams list
 
-See [team structure](/handbook/small-teams/team-structure).
+See [team structure](/handbook/team-structure).
 
 ## FAQ
 

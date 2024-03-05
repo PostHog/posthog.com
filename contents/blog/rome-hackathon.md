@@ -80,6 +80,6 @@ Many of the projects related to this objective (on top of being fun and sparking
 
 ![Rome offsite team](../images/blog/rome-hackathon/rome-hackathon.jpeg)
 
-We like to be transparent with what we build. The details are found in the linked PRs as well as more expansively on the teams page in [our handbook](/handbook/small-teams/team-structure). We do this because we value feedback a lot. For example, users have been asking for better data exploration tools, which helped it become a priority. 
+We like to be transparent with what we build. The details are found in the linked PRs as well as more expansively on the teams page in [our handbook](/handbook/team-structure). We do this because we value feedback a lot. For example, users have been asking for better data exploration tools, which helped it become a priority. 
 
 If you have more feedback about your use cases or what we're planning to build, let us know on [get in touch](https://app.posthog.com/home#supportModal) or [raise an issue](https://github.com/PostHog/posthog/issues) on our repo. 
