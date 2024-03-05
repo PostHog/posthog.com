@@ -12,7 +12,7 @@ We've organized the team into small teams that are multi-disciplinary and as sel
 Our small teams are:
 
 - [Customer Success](/teams/customer-success)
-- [Data Warehouse](/handbook/small-teams/dw)
+- [Data Warehouse](/teams/data-warehouse)
 - [Exec](/teams/exec)
 - [Feature Success](/teams/feature-success)
 - [Growth](/teams/growth)
