@@ -54,7 +54,7 @@ export const TeamMember = (teamMember) => {
     )
 }
 
-export default function TeamNew() {
+export default function People() {
     const {
         team: { teamMembers },
     } = useStaticQuery(teamQuery)

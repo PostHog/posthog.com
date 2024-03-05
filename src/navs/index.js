@@ -860,7 +860,7 @@ export const companyMenu = {
             color: 'red',
             url: '/changelog/2024',
         },
-        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/team' },
+        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/people' },
         {
             name: 'Teams',
             icon: 'IconPeople',

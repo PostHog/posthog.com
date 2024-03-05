@@ -7,8 +7,8 @@ hideAnchor: true
 
 ## People
 
-- [Jane Doe (Team Lead, Full Stack Engineer)](/handbook/company/team/#jane-doe-software-engineer)
-- [Max Mustermann (Full Stack Engineer)](/handbook/company/team/#max-mustermann-software-engineer)
+- [Jane Doe (Team Lead, Full Stack Engineer)](/people/#jane-doe-software-engineer)
+- [Max Mustermann (Full Stack Engineer)](/people/#max-mustermann-software-engineer)
 
 ## Mission
 

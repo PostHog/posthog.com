@@ -121,7 +121,7 @@ Zendesk will get populated with new issues from people outside the PostHog organ
 
 You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com).
 
-The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting with!
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/people) so our users know who they are chatting with!
 
 ### Using Zendesk
 
