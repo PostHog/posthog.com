@@ -188,7 +188,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 }
 
 export default function Handbook({
-    data: { post, nextPost, glossary, mission, objectives },
+    data: { post, nextPost, glossary },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
@@ -246,8 +246,6 @@ export default function Handbook({
         a: A,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
-        Mission: (_props) => (mission?.body ? MDX({ body: mission.body }) : null),
-        Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -361,7 +359,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!, $mission: String, $objectives: String) {
+    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {
@@ -382,12 +380,6 @@ export const query = graphql`
             fields {
                 slug
             }
-        }
-        mission: mdx(fields: { slug: { eq: $mission } }) {
-            body
-        }
-        objectives: mdx(fields: { slug: { eq: $objectives } }) {
-            body
         }
         post: mdx(id: { eq: $id }) {
             id
