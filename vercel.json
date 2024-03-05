@@ -47,6 +47,7 @@
         { "source": "/docs/integrations/slack", "destination": "/docs/libraries/slack" },
         { "source": "/handbook/company/structure", "destination": "/handbook/people/team-structure/why-small-teams" },
         { "source": "/handbook/people/team", "destination": "/people" },
+        { "source": "/handbook/company/team", "destination": "/people" },
         { "source": "/team", "destination": "/people" },
         { "source": "/handbook/growth/customer-success", "destination": "/handbook/growth/customer-support" },
         { "source": "/handbook/getting-started", "destination": "/handbook" },

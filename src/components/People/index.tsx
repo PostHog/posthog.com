@@ -1,6 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { kebabCase } from 'lib/utils'
 import React from 'react'
@@ -10,6 +9,7 @@ import Link from 'components/Link'
 import Layout from 'components/Layout'
 import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
+import { StaticImage } from 'gatsby-plugin-image'
 
 export const TeamMember = (teamMember) => {
     const { avatar, lastName, firstName, companyRole, country, squeakId, location, compact } = teamMember
@@ -59,6 +59,8 @@ export default function People() {
         team: { teamMembers },
     } = useStaticQuery(teamQuery)
 
+    const teamSize = teamMembers.length
+
     // Some Stats were used as fallback until the actual data is added to the GraphlQL Server
     const teamStats = [
         {
@@ -87,27 +89,62 @@ export default function People() {
         <Layout>
             <SEO title="Team - PostHog" />
 
-            <div className="flex flex-col text-center pt-10 pb-3 px-8 2xl:px-4 3xl:p-0">
-                <h3 className="mb-[5px] text-lg leading-tight">Team members who... </h3>
-                <div className="flex justify-start md:justify-center gap-x-[53px] overflow-x-auto">
-                    {teamStats.map((teamStat, index) => {
-                        return (
-                            <TeamStat
-                                key={index}
-                                teamStatData={teamStat.data}
-                                caption={teamStat.caption}
-                                icon={teamStat.icon}
-                            />
-                        )
-                    })}
+            <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
+                <div className="flex-1">
+                    <h2 className="text-4xl">People</h2>
+
+                    <div className="float-right">
+                        <StaticImage
+                            src="../../images/explorer-hog.png"
+                            alt="Hiking hog"
+                            width="250"
+                            height="250"
+                            className="w-[200px] sm:w-64 md:w-72 lg:w-auto lg:max-w-auto -mr-8 md:mr-0 -mt-4 md:mt-0"
+                        />
+                    </div>
+
+                    <p>
+                        We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
+                    </p>
+
+                    <p>Building an unusually great company starts with an unusual team.</p>
+
+                    <p>
+                        We don't care if you haven't finished (or attended) school, if you were super important at a
+                        "Big Tech" company, or if you ran a startup that crashed and burned.
+                    </p>
+
+                    <p>
+                        What we <em>do</em> care about is your ability to learn, iterate, and ship.
+                    </p>
+
+                    <p>
+                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, England, France,
+                        Germany, Poland, and Colombia (among other places).
+                    </p>
+
+                    <p className="mb-1">
+                        Interested in a hand-drawn sketch of your face? <Link to={`/careers`}>We're hiring.</Link>
+                    </p>
                 </div>
-                <p className="mt-10 text-primary/75 text-sm dark:text-primary-dark/75">
-                    (Want to help budge these numbers?{' '}
-                    <Link to={`/careers`} className="">
-                        We're hiring
-                    </Link>
-                    )
-                </p>
+
+                <aside className="xl:border-l border-light dark:border-dark xl:pl-4">
+                    <h3 className="text-base md:text-[15px] lg:text-base mb-0 leading-tight bg-accent dark:bg-accent-dark rounded p-2 text-center">
+                        Team members who...{' '}
+                    </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-2 justify-start md:justify-center overflow-x-auto">
+                        {teamStats.map((teamStat, index) => {
+                            return (
+                                <TeamStat
+                                    key={index}
+                                    teamStatData={teamStat.data}
+                                    caption={teamStat.caption}
+                                    icon={teamStat.icon}
+                                />
+                            )
+                        })}
+                    </div>
+                </aside>
             </div>
             <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
                 {teamMembers.map((teamMember, index) => {
