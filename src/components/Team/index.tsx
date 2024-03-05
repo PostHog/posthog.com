@@ -12,7 +12,7 @@ import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 
 export const TeamMember = (teamMember) => {
-    const { avatar, lastName, firstName, companyRole, country, squeakId, location } = teamMember
+    const { avatar, lastName, firstName, companyRole, country, squeakId, location, compact } = teamMember
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     return (
@@ -23,7 +23,10 @@ export const TeamMember = (teamMember) => {
             >
                 <div className="flex flex-col justify-between px-6 py-4 w-full mr-32 xl:mr-40">
                     <div>
-                        <h3 className="mb-0 text-lg leading-tight" id={kebabCase(name) + '-' + kebabCase(companyRole)}>
+                        <h3
+                            className="mb-0 text-[15px] leading-tight"
+                            id={kebabCase(name) + '-' + kebabCase(companyRole)}
+                        >
                             {name}
                         </h3>
                         <p className="text-primary/50 text-sm dark:text-primary-dark/50">{companyRole}</p>

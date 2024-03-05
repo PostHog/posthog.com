@@ -16,7 +16,7 @@ I happened to go to an excellent talk by Jeff Lawson (Twilio CEO). It made me re
 
 ## Small teams
 
-We decided that we should split PostHog into a series of small teams, each working like its own startup, fully owning (at least) one of our products.
+We decided that we should split PostHog into a series of [small teams](/teams), each working like its own startup, fully owning (at least) one of our products.
 
 As with any startup, the principles that govern these small teams are:
 

@@ -2,7 +2,12 @@ import Slider from 'components/Slider'
 import React, { useState } from 'react'
 import { Link } from 'react-scroll'
 
-const menuItems: { label: string; id: string }[] = [
+type MenuItem = {
+    label: string
+    id: string
+}
+
+const menuItems: MenuItem[] = [
     {
         label: 'Features',
         id: 'features',
@@ -23,13 +28,13 @@ const menuItems: { label: string; id: string }[] = [
     { label: 'Questions', id: 'questions' },
 ]
 
-export const SmoothScroll = ({ exclude = [] }): JSX.Element => {
+export const SmoothScroll = ({ exclude = [], ...other }: { menuItems: MenuItem[] }): JSX.Element => {
     const [activeTab, setActiveTab] = useState(0)
     return (
         <div className="hidden md:block sticky top-[-1px] reasonable:top-[107px] z-50 bg-accent dark:bg-accent-dark mb-12">
             <section>
                 <Slider className="list-none flex gap-4 pt-1 ![justify-content:_safe_center] border-t border-border dark:border-dark">
-                    {menuItems
+                    {(other?.menuItems ?? menuItems)
                         .filter(({ label }) => !exclude.includes(label))
                         .map(({ label, id }, index) => {
                             return (

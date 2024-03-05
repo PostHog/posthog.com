@@ -14,12 +14,12 @@ interface ISidebarProps {
     teams: any
 }
 
-export const pineappleText = (percentage: number) => {
+export const PineappleText = (percentage: number) => {
     if (percentage === 50) return 'This team is evenly split on whether pineapple belongs on pizza'
     if (percentage < 50) return 'Shockingly, this team prefers their pizza without pineapple'
     return (
         <>
-            <strong>{percentage}%</strong> of this team prefer pineapple on pizza
+            <strong>{percentage}%</strong> of this team (correctly) agree pineapple belongs on pizza
         </>
     )
 }
@@ -128,7 +128,7 @@ const Team = ({ profiles, leadProfiles, className = '' }) => {
                         <IconThumbsDown className="w-8 h-8 fill-red" />
                     )}
                 </div>
-                <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">{pineappleText(pineapplePercentage)}</p>
+                <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">{PineappleText(pineapplePercentage)}</p>
                 <div className="h-2 w-full bg-white dark:bg-gray-accent-dark rounded-md relative overflow-hidden">
                     <div
                         style={{ width: `${pineapplePercentage}%` }}

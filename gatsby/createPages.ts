@@ -23,6 +23,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
+    const TeamTemplate = path.resolve(`src/templates/Team.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -324,6 +325,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fieldValue
                 }
             }
+            teams:  allMdx(filter: {frontmatter: {template: {eq: "team"}}}) {
+                nodes {
+                  id
+                  fields {
+                    slug
+                  }
+                  frontmatter {
+                    title
+                  }
+                }
+              }
             ${
                 merchStore
                     ? `allShopifyProduct(limit: 1000) {
@@ -903,6 +915,20 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: ChangelogTemplate,
             context: {
                 year: Number(year),
+            },
+        })
+    })
+
+    result.data.teams.nodes.forEach(({ id, frontmatter: { title }, fields: { slug } }) => {
+        createPage({
+            path: slug,
+            component: TeamTemplate,
+            context: {
+                id,
+                slug,
+                teamName: title,
+                ignoreWrapper: true,
+                objectives: `${slug}/objectives`,
             },
         })
     })

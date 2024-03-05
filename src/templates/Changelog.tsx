@@ -53,6 +53,46 @@ const Select = ({ onChange, values, ...other }) => {
     )
 }
 
+export const Change = ({ title, teamName, media, description, cta }) => {
+    return (
+        <>
+            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
+                {title}
+            </Heading>
+            {teamName && <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>}
+            {media?.data?.attributes?.mime && (
+                <div className="my-4">
+                    {media?.data?.attributes?.mime === 'video/mp4' ? (
+                        <ZoomImage>
+                            <Video
+                                publicId={media.publicId}
+                                cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                                className="max-w-2xl w-full"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                            />
+                        </ZoomImage>
+                    ) : (
+                        <ZoomImage>
+                            <GatsbyImage image={getImage(media)} />
+                        </ZoomImage>
+                    )}
+                </div>
+            )}
+            <div className="mt-2">
+                <Markdown>{description}</Markdown>
+            </div>
+            {cta && (
+                <CallToAction type="secondary" size="md" to={cta.url}>
+                    {cta.label}
+                </CallToAction>
+            )}
+        </>
+    )
+}
+
 export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
@@ -163,43 +203,13 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                 editButtonClassName="absolute bottom-0 right-0"
                                                 id={strapiID}
                                             >
-                                                <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
-                                                    {title}
-                                                </Heading>
-                                                {teamName && (
-                                                    <p className="m-0 text-sm opacity-60 font-semibold">
-                                                        {teamName} Team
-                                                    </p>
-                                                )}
-                                                {media?.data?.attributes?.mime && (
-                                                    <div className="my-4">
-                                                        {media?.data?.attributes?.mime === 'video/mp4' ? (
-                                                            <ZoomImage>
-                                                                <Video
-                                                                    publicId={media.publicId}
-                                                                    cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
-                                                                    className="max-w-2xl w-full"
-                                                                    autoPlay
-                                                                    loop
-                                                                    muted
-                                                                    playsInline
-                                                                />
-                                                            </ZoomImage>
-                                                        ) : (
-                                                            <ZoomImage>
-                                                                <GatsbyImage image={getImage(media)} />
-                                                            </ZoomImage>
-                                                        )}
-                                                    </div>
-                                                )}
-                                                <div className="mt-2">
-                                                    <Markdown>{description}</Markdown>
-                                                </div>
-                                                {cta && (
-                                                    <CallToAction type="secondary" size="md" to={cta.url}>
-                                                        {cta.label}
-                                                    </CallToAction>
-                                                )}
+                                                <Change
+                                                    cta={cta}
+                                                    description={description}
+                                                    media={media}
+                                                    teamName={teamName}
+                                                    title={title}
+                                                />
                                             </UpdateWrapper>
                                         </li>
                                     )
