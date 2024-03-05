@@ -64,7 +64,7 @@ Our typical monthly marketing spend looks like this:
 
 - We do all of our content in-house. We have very occasionally worked with freelancers in the past, but we haven’t done this for a long time.
 
-- Technically our frontend developer is not part of the marketing team ([Website & Docs](/handbook/small-teams/website-docs) is its own team at PostHog), but I appreciate at most companies your website will be considered a marketing expense.
+- Technically our frontend developer is not part of the marketing team ([Website & Docs](/teams/website-docs) is its own team at PostHog), but I appreciate at most companies your website will be considered a marketing expense.
 
 - The 50-50 split is coincidental. 
 

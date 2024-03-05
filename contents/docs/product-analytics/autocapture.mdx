@@ -8,6 +8,10 @@ availability:
     enterprise: full
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import ImgClipboardAuocaptureLight from '../../images/docs/autocapture/clipboard-activity-light.png'
+import ImgClipboardAuocaptureDark from '../../images/docs/autocapture/clipboard-activity-dark.png'
+
 > **Note:** Autocapture is available for our [JavaScript Web](/docs/libraries/js), [React](/docs/libraries/react), and [React Native](/docs/libraries/react-native) SDKs.
 
 PostHog can capture frontend events automatically using autocapture, such as any `click`, `change of input`, or submission associated with a `button`, `form`, `input`, `select`, or `textarea`.
@@ -140,3 +144,31 @@ Autocaptured properties include:
 - IP Address (`$ip`)
 
 If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties. 
+
+## Autocapture for copied/cut data
+
+Since v1.111.0 you can configure posthog-js to autocapture information that users copy or cut when on your page. 
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    autocapture: {
+        capture_copied_text: true,
+        // any other autocapture config
+    },
+})
+```
+
+We then report the copied or cut text as a "Clipboard autocapture" event. You can use the `$selected_content` property in analysis. Or use the Activity page to view the copied content in context.
+
+<ProductScreenshot
+  imageLight={ImgClipboardAuocaptureLight} 
+  imageDark={ImgClipboardAuocaptureDark} 
+  alt="The activity view showing the copied content highlighted in context" 
+  classes="rounded"
+/>
+
+Clipboard autocapture respects other privacy settings. So, for example, won't capture content from a password field.
+
+> **Note:** browsers don't directly allow access to copied data for privacy reasons. So, when posthog-js sees a clipboard event we capture any text currently selected in the browser.
+

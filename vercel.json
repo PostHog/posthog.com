@@ -46,7 +46,9 @@
         { "source": "/docs/integrations/sentry-integration", "destination": "/docs/libraries/sentry" },
         { "source": "/docs/integrations/slack", "destination": "/docs/libraries/slack" },
         { "source": "/handbook/company/structure", "destination": "/handbook/people/team-structure/why-small-teams" },
-        { "source": "/handbook/people/team", "destination": "/handbook/company/team" },
+        { "source": "/handbook/people/team", "destination": "/people" },
+        { "source": "/handbook/company/team", "destination": "/people" },
+        { "source": "/team", "destination": "/people" },
         { "source": "/handbook/growth/customer-success", "destination": "/handbook/growth/customer-support" },
         { "source": "/handbook/getting-started", "destination": "/handbook" },
         { "source": "/handbook/getting-started/start-here", "destination": "/handbook" },
@@ -595,7 +597,11 @@
         { "source": "/docs/self-host/postgres-vs-clickhouse", "destination": "/blog/clickhouse-vs-postgres" },
         {
             "source": "/handbook/people/team-structure/team-structure",
-            "destination": "/handbook/small-teams/team-structure"
+            "destination": "/handbook/team-structure"
+        },
+        {
+            "source": "/handbook/small-teams/team-structure",
+            "destination": "/handbook/team-structure"
         },
         { "source": "/eu-cloud", "destination": "/eu" },
         { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },
@@ -1191,6 +1197,20 @@
         },
         { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
         { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
-        { "source": "/handbook/small-teams/people-ops", "destination": "/handbook/small-teams/people" }
+
+        { "source": "/handbook/small-teams/product-analytics", "destination": "/teams/product-analytics" },
+        { "source": "/handbook/small-teams/replay", "destination": "/teams/replay" },
+        { "source": "/handbook/small-teams/website-docs", "destination": "/teams/website-docs" },
+        { "source": "/handbook/small-teams/people", "destination": "/teams/people" },
+        { "source": "/handbook/small-teams/marketing", "destination": "/teams/marketing" },
+        { "source": "/handbook/small-teams/exec", "destination": "/teams/exec" },
+        { "source": "/handbook/small-teams/feature-success", "destination": "/teams/feature-success" },
+        { "source": "/handbook/small-teams/customer-success", "destination": "/teams/customer-success" },
+        { "source": "/handbook/small-teams/growth", "destination": "/teams/growth" },
+        { "source": "/handbook/small-teams/data-warehouse", "destination": "/teams/data-warehouse" },
+        { "source": "/handbook/small-teams/infrastructure", "destination": "/teams/infrastructure" },
+        { "source": "/handbook/small-teams/pipeline", "destination": "/teams/pipeline" },
+        { "source": "/handbook/small-teams/web-analytics", "destination": "/teams/web-analytics" },
+        { "source": "/handbook/small-teams/people-ops", "destination": "/teams/people" }
     ]
 }

@@ -52,13 +52,17 @@ const SidebarSection = ({ title, children }) => {
     )
 }
 
-const Section = ({ children, cta, title, id = '' }) => {
+const Section = ({ children, cta, title, className = '', id = '' }) => {
     return (
-        <section id={id} className="max-w-screen-xl mx-auto px-5 my-12">
+        <section id={id} className={`max-w-screen-xl mx-auto px-5 mt-6 mb-12 ${className}`}>
             {title && (
-                <div className="flex justify-between items-baseline w-full mb-4 relative after:h-px after:bg-border dark:after:bg-border-dark after:absolute after:top-1/2 after:left-0 after:w-full">
+                <div className="flex flex-col md:flex-row justify-between items-baseline w-full mb-6 md:mb-8 relative after:h-px after:bg-border dark:after:bg-border-dark after:absolute after:top-1/2 after:left-0 after:w-full">
                     <h4 className="m-0 bg-light dark:bg-dark relative z-10 pr-2">{title}</h4>
-                    {cta && <aside className="bg-light dark:bg-dark relative z-10 pl-2 -top-1">{cta}</aside>}
+                    {cta && (
+                        <aside className="bg-light dark:bg-dark relative z-10 md:pl-2 leading-tight -top-1">
+                            {cta}
+                        </aside>
+                    )}
                 </div>
             )}
             <div>{children}</div>
@@ -248,7 +252,7 @@ export default function Team({
 
     const hasUnderConsideration = underConsideration.length > 0
     const hasInProgress = inProgress.length > 0
-    const hasBody = !['/handbook/small-teams/exec', '/handbook/small-teams/data-warehouse'].includes(pageContext.slug)
+    const hasBody = !['/teams/exec', '/teams/data-warehouse'].includes(pageContext.slug)
     const [activeProfile, setActiveProfile] = useState(false)
 
     return (
@@ -257,7 +261,7 @@ export default function Team({
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 <Profile {...activeProfile} />
             </SideModal>
-            <Section>
+            <Section className="mb-6">
                 <div className="flex flex-col md:flex-row space-x-4 items-center">
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
                     <div className="max-w-xl w-full">
@@ -271,7 +275,7 @@ export default function Team({
                                 }}
                             />
                         ) : description ? (
-                            <p className="my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
+                            <p className="my-2 md:mb-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
                         ) : (
                             <div className="my-4 h-[22px] max-w-md bg-accent dark:bg-accent-dark animate-pulse rounded-md" />
                         )}
@@ -290,7 +294,7 @@ export default function Team({
                         )}
                     </div>
                     {teamImage?.caption && (
-                        <figure className="rotate-2 max-w-sm flex flex-col gap-2 mt-8 md:mt-0">
+                        <figure className="rotate-2 max-w-sm flex flex-col gap-2 mt-8 md:mt-0 ml-auto">
                             <div className="bg-accent aspect-video rounded-md flex justify-center items-center shadow-xl">
                                 <GatsbyImage image={getImage(teamImage)} className="border-8 border-white rounded-md" />
                             </div>
@@ -472,7 +476,7 @@ export default function Team({
                             Here’s what we’re considering building next. Vote for your favorites or share a new idea on{' '}
                             <Link to="https://github.com/PostHog/posthog">GitHub</Link>.
                         </p>
-                        <div>
+                        <div className="max-w-2xl">
                             <ul className="list-none m-0 p-0 space-y-4">
                                 {underConsideration.map((roadmap) => (
                                     <UnderConsideration key={roadmap.squeakId} {...roadmap} />
@@ -526,10 +530,10 @@ export const query = graphql`
             description
             teamImage {
                 caption
-                gatsbyImageData(width: 380)
+                gatsbyImageData(width: 380, placeholder: BLURRED)
             }
             crest {
-                gatsbyImageData(width: 227)
+                gatsbyImageData(width: 227, placeholder: BLURRED)
             }
             roadmaps {
                 squeakId

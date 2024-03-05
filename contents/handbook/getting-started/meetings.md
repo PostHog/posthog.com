@@ -33,7 +33,7 @@ If ad-hoc meetings are regularly happening, consider improving the agenda of ano
 
 ### Sprint planning
 
-This is a longer 45min meeting every other Friday where we review the previous two week sprint and then outline what we want to achieve in the next 2 weeks. We split into [Small Teams](/handbook/small-teams/team-structure) for this. Not all small teams follow this exact schedule, but you'll find they usually do these types of meetings on a Friday. 
+This is a longer 45min meeting every other Friday where we review the previous two week sprint and then outline what we want to achieve in the next 2 weeks. We split into [Small Teams](/handbook/team-structure) for this. Not all small teams follow this exact schedule, but you'll find they usually do these types of meetings on a Friday. 
 
 All sprint planning meetings are open to anyone to attend - if you are not a member of that small team, then we ask that you sit in as a non-speaking observer only. 
 

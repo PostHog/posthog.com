@@ -99,7 +99,7 @@ By this point we’d also changed our conversion event to mean a user enabling b
 - **Unsubscribe rate:** 0.4%
 - **Conversion rate:** 6%
 
-Around this point we also started filtering out teams in our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) using a scoring system implemented in Hubspot. If a user scored over a certain threshold they’d be moved out of the usual flow so [our customer success team](/handbook/small-teams/customer-success) could reach out directly. We’ve since removed this check because it felt too salesy and didn’t perform well, however. 
+Around this point we also started filtering out teams in our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) using a scoring system implemented in Hubspot. If a user scored over a certain threshold they’d be moved out of the usual flow so [our customer success team](/teams/customer-success) could reach out directly. We’ve since removed this check because it felt too salesy and didn’t perform well, however. 
 
 ## Onboarding 5.0: The current one
 

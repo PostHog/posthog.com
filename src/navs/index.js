@@ -224,7 +224,7 @@ export const handbookSidebar = [
     },
     {
         name: 'Team structure',
-        url: '/handbook/small-teams/team-structure',
+        url: '/handbook/team-structure',
     },
     {
         name: 'Customer success',
@@ -860,7 +860,7 @@ export const companyMenu = {
             color: 'red',
             url: '/changelog/2024',
         },
-        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/team' },
+        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/people' },
         {
             name: 'Teams',
             icon: 'IconPeople',
@@ -876,58 +876,58 @@ export const companyMenu = {
                 },
                 {
                     name: 'Data Warehouse',
-                    url: '/handbook/small-teams/data-warehouse',
+                    url: '/teams/data-warehouse',
                 },
                 {
                     name: 'Feature Success',
-                    url: '/handbook/small-teams/feature-success',
+                    url: '/teams/feature-success',
                 },
                 {
                     name: 'Infrastructure',
-                    url: '/handbook/small-teams/infrastructure',
+                    url: '/teams/infrastructure',
                 },
                 {
                     name: 'Replay',
-                    url: '/handbook/small-teams/replay',
+                    url: '/teams/replay',
                 },
                 {
                     name: 'Pipeline',
-                    url: '/handbook/small-teams/pipeline',
+                    url: '/teams/pipeline',
                 },
                 {
                     name: 'Product Analytics',
-                    url: '/handbook/small-teams/product-analytics',
+                    url: '/teams/product-analytics',
                 },
                 {
                     name: 'Web Analytics',
-                    url: '/handbook/small-teams/web-analytics',
+                    url: '/teams/web-analytics',
                 },
                 {
                     name: 'Not engineering',
                 },
                 {
                     name: 'Customer Success',
-                    url: '/handbook/small-teams/customer-success',
+                    url: '/teams/customer-success',
                 },
                 {
                     name: 'Exec',
-                    url: '/handbook/small-teams/exec',
+                    url: '/teams/exec',
                 },
                 {
                     name: 'Growth',
-                    url: '/handbook/small-teams/growth',
+                    url: '/teams/growth',
                 },
                 {
                     name: 'Marketing',
-                    url: '/handbook/small-teams/marketing',
+                    url: '/teams/marketing',
                 },
                 {
                     name: 'People & Ops',
-                    url: '/handbook/small-teams/people',
+                    url: '/teams/people',
                 },
                 {
                     name: 'Website & Docs',
-                    url: '/handbook/small-teams/website-docs',
+                    url: '/teams/website-docs',
                 },
             ],
         },

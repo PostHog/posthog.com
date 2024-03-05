@@ -20,7 +20,7 @@ We simply won't make this mistake.
 
 ## Marketing for us is producing useful content
 
-Our [marketing team](/handbook/small-teams/marketing) is small. Way, _way_ smaller than our competitors'. Winning on volume of content is out of the question. So we'd better win on quality.
+Our [marketing team](/teams/marketing) is small. Way, _way_ smaller than our competitors'. Winning on volume of content is out of the question. So we'd better win on quality.
 
 This constraint has worked out pretty well for us. Distribution is pretty easy when the thing you're working on is good enough to generate word of mouth growth... and this helps build an enduring developer brand.
 

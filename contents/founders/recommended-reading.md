@@ -134,7 +134,7 @@ PostHog doesn’t have a sales team, but if we did then this book by Daniel Kaza
 
 **Simon's review:** “Founding Sales is written primarily for Founders and CEOs, and covers all of the bases when it comes to sales. I personally skipped some of the founder-centric stuff and focused on the advice for scaling Customer Success teams, which I found really useful.”
 
-> **Putting it into practice:** We don’t have a Sales team, but [our Customer Success team](/handbook/small-teams/customer-success#mission) is very successful!
+> **Putting it into practice:** We don’t have a Sales team, but [our Customer Success team](/teams/customer-success#mission) is very successful!
 
 
 ![saas playbook](../images/tracks/saas-playbook.jpg)
