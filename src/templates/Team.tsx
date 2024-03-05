@@ -46,13 +46,17 @@ const SidebarSection = ({ title, children }) => {
     )
 }
 
-const Section = ({ children, cta, title, id = '' }) => {
+const Section = ({ children, cta, title, className = '', id = '' }) => {
     return (
-        <section id={id} className="max-w-screen-xl mx-auto px-5 my-6">
+        <section id={id} className={`max-w-screen-xl mx-auto px-5 mt-6 mb-12 ${className}`}>
             {title && (
-                <div className="flex flex-col md:flex-row justify-between items-baseline w-full mb-4 relative after:h-px after:bg-border dark:after:bg-border-dark after:absolute after:top-1/2 after:left-0 after:w-full">
+                <div className="flex flex-col md:flex-row justify-between items-baseline w-full mb-6 md:mb-8 relative after:h-px after:bg-border dark:after:bg-border-dark after:absolute after:top-1/2 after:left-0 after:w-full">
                     <h4 className="m-0 bg-light dark:bg-dark relative z-10 pr-2">{title}</h4>
-                    {cta && <aside className="bg-light dark:bg-dark relative z-10 md:pl-2 leading-tight -top-1">{cta}</aside>}
+                    {cta && (
+                        <aside className="bg-light dark:bg-dark relative z-10 md:pl-2 leading-tight -top-1">
+                            {cta}
+                        </aside>
+                    )}
                 </div>
             )}
             <div>{children}</div>
@@ -76,7 +80,7 @@ export default function Team({
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-            100
+                100
         )
 
     const underConsideration = roadmaps.filter(
@@ -111,12 +115,12 @@ export default function Team({
     return (
         <Layout>
             <SEO title={`${teamName} - PostHog`} />
-            <Section>
+            <Section className="mb-6">
                 <div className="flex flex-col md:flex-row space-x-4 items-center">
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
-                    <div className="max-w-xl">
+                    <div className="max-w-xl flex-1">
                         <h1 className="m-0">{teamName}</h1>
-                        <p className="my-2 md:my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
+                        <p className="my-2 md:mb-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
 
                         {hasInProgress && (
                             <CallToAction type="secondary" size="md" to="#in-progress">
@@ -142,35 +146,35 @@ export default function Team({
                     },
                     ...(hasInProgress
                         ? [
-                            {
-                                label: "What we're building",
-                                id: 'in-progress',
-                            },
-                        ]
+                              {
+                                  label: "What we're building",
+                                  id: 'in-progress',
+                              },
+                          ]
                         : []),
                     ...(hasUnderConsideration || !!recentlyShipped
                         ? [
-                            {
-                                label: 'Roadmap & recently shipped',
-                                id: 'roadmap',
-                            },
-                        ]
+                              {
+                                  label: 'Roadmap & recently shipped',
+                                  id: 'roadmap',
+                              },
+                          ]
                         : []),
                     ...(objectives?.body
                         ? [
-                            {
-                                label: 'Goals',
-                                id: 'goals',
-                            },
-                        ]
+                              {
+                                  label: 'Goals',
+                                  id: 'goals',
+                              },
+                          ]
                         : []),
                     ...(hasBody
                         ? [
-                            {
-                                label: 'Handbook',
-                                id: 'handbook',
-                            },
-                        ]
+                              {
+                                  label: 'Handbook',
+                                  id: 'handbook',
+                              },
+                          ]
                         : []),
                 ]}
             />
