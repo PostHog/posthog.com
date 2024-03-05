@@ -140,7 +140,7 @@ When responding to a ticket you should also choose an appropriate status accordi
 * **Open** - The ticket is still awaiting a response/further investigation from someone in PostHog (if it's not you make sure the other person/team knows about it).
 * **On-Hold** - We have enough information from the customer but a resolution is blocked by something internal to PostHog (e.g. query performance, PoE).  You should let them know that this is the case.
 * **Pending** - The problem isn't solved and you have asked for further information from the customer.
-* **Solved** - The problem is solved, and you don't expect to do any further work on the ticket.  If it's related to a feature request then you should provide the customer a link to GitHub so that they can follow along with development.
+* **Solved** - You've provided a solution and don't expect to do any further work on the ticket.  If it's related to a feature request then you should provide the customer a link to GitHub so that they can follow along with development.
 
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. 
 
