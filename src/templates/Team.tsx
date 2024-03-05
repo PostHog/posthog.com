@@ -328,7 +328,7 @@ export default function Team({
                             Here’s what we’re considering building next. Vote for your favorites or share a new idea on{' '}
                             <Link to="https://github.com/PostHog/posthog">GitHub</Link>.
                         </p>
-                        <div>
+                        <div className="max-w-2xl">
                             <ul className="list-none m-0 p-0 space-y-4">
                                 {underConsideration.map((roadmap) => (
                                     <UnderConsideration key={roadmap.squeakId} {...roadmap} />
