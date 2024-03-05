@@ -12,6 +12,10 @@ import ImgSampleConfigLight from '../images/tutorials/limit-session-recordings/s
 import ImgSampleConfigDark from '../images/tutorials/limit-session-recordings/sampling-config-dark-mode.png'
 import ImgMinDurationLight from '../images/tutorials/limit-session-recordings/min-duration-light-mode.png'
 import ImgMinDurationDark from '../images/tutorials/limit-session-recordings/min-duration-dark-mode.png'
+import selectReplayControlDark from '../images/tutorials/limit-session-recordings/select-replay-control-flag-dark-mode.png'
+import selectReplayControlLight from '../images/tutorials/limit-session-recordings/select-replay-control-flag-light-mode.png'
+import flagDark from '../images/tutorials/limit-session-recordings/feature-flag-to-control-sessions-dark-mode.png'
+import flagLight from '../images/tutorials/limit-session-recordings/feature-flag-to-control-sessions-light-mode.png'
 
 Session replays help you get a deep understanding of how users are using your product. We strongly recommend them for [early-stage startups](/blog/early-stage-analytics), but as you scale, the number of recordings can go beyond what you need.
 
@@ -69,15 +73,25 @@ Alternatively, you can use feature flags to control what sessions you record. Th
 - cohorts
 - percentages of each of these (or all users)
 
-For example, if you only want to record 50% of sessions for North American users, set up a feature flag where the continent code equals "NA" and roll it out to 50% of matching users like this:
+For example, if you only want to record 50% of sessions for users in United States, set up a feature flag where the country code equals "US" and roll it out to 50% of matching users like this:
 
-![Flag](../images/tutorials/limit-session-recordings/flag.png)
+<ProductScreenshot
+    imageLight={flagLight} 
+    imageDark={flagDark}
+    alt="Feature flag to control session recordings" 
+    classes="rounded"
+/>
 
 ### Using linked feature flags
 
 You can then set this flag to enable recordings in your [replay ingestion settings]( https://us.posthog.com/settings/project-replay#replay-ingestion).
 
-![Choosing a flag to enable recordings](../images/docs/session-replay/select-replay-control-flag.png)
+<ProductScreenshot
+    imageLight={selectReplayControlLight} 
+    imageDark={selectReplayControlDark}
+    alt="Choosing a flag to enable recordings" 
+    classes="rounded"
+/>
 
 Recordings buffer on the client until the decide response is received. It only continues recording if the flag is enabled. This means that if the flag is disabled, the recording stops and no recording data leaves the client's device.
 
