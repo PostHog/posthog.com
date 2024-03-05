@@ -48,11 +48,11 @@ const SidebarSection = ({ title, children }) => {
 
 const Section = ({ children, cta, title, id = '' }) => {
     return (
-        <section id={id} className="max-w-screen-xl mx-auto px-5 my-12">
+        <section id={id} className="max-w-screen-xl mx-auto px-5 my-6">
             {title && (
-                <div className="flex justify-between items-baseline w-full mb-4 relative after:h-px after:bg-border dark:after:bg-border-dark after:absolute after:top-1/2 after:left-0 after:w-full">
+                <div className="flex flex-col md:flex-row justify-between items-baseline w-full mb-4 relative after:h-px after:bg-border dark:after:bg-border-dark after:absolute after:top-1/2 after:left-0 after:w-full">
                     <h4 className="m-0 bg-light dark:bg-dark relative z-10 pr-2">{title}</h4>
-                    {cta && <aside className="bg-light dark:bg-dark relative z-10 pl-2">{cta}</aside>}
+                    {cta && <aside className="bg-light dark:bg-dark relative z-10 md:pl-2 leading-tight">{cta}</aside>}
                 </div>
             )}
             <div>{children}</div>
@@ -116,7 +116,7 @@ export default function Team({
                     <GatsbyImage image={getImage(crest)} alt={teamName} />
                     <div className="max-w-xl">
                         <h1 className="m-0">{teamName}</h1>
-                        <p className="my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
+                        <p className="my-2 md:my-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
 
                         {hasInProgress && (
                             <CallToAction type="secondary" size="md" to="#in-progress">
@@ -125,7 +125,7 @@ export default function Team({
                         )}
                     </div>
                     {teamImage?.caption && (
-                        <figure className="rotate-2 max-w-sm flex flex-col gap-2 mt-8 md:mt-0">
+                        <figure className="rotate-2 max-w-sm flex flex-col gap-2 mt-8 md:mt-0 ml-auto">
                             <div className="bg-accent aspect-video rounded-md flex justify-center items-center shadow-xl">
                                 <GatsbyImage image={getImage(teamImage)} className="border-8 border-white rounded-md" />
                             </div>
@@ -376,10 +376,10 @@ export const query = graphql`
             description
             teamImage {
                 caption
-                gatsbyImageData(width: 380)
+                gatsbyImageData(width: 380, placeholder: BLURRED)
             }
             crest {
-                gatsbyImageData(width: 227)
+                gatsbyImageData(width: 227, placeholder: BLURRED)
             }
             roadmaps {
                 squeakId
