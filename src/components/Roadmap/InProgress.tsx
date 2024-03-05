@@ -355,7 +355,7 @@ export function InProgress(
                 </div>
 
                 <div className="px-4">
-                    <div className="flex justify-between items-center my-4">
+                    <div className="flex flex-col md:flex-row justify-between md:items-center my-4">
                         <h6 className="m-0">Project updates</h6>
 
                         <button
@@ -377,8 +377,8 @@ export function InProgress(
                                 {subscribed
                                     ? 'Unsubscribe'
                                     : betaAvailable
-                                    ? 'Get early access'
-                                    : 'Get updates about this project'}
+                                        ? 'Get early access'
+                                        : 'Get updates about this project'}
                                 {!subscribed && !betaAvailable && (
                                     <Tooltip
                                         content="Get email notifications when the team shares updates about this project, releases a beta, or

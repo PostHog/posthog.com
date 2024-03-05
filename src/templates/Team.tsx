@@ -50,7 +50,7 @@ const Section = ({ children, cta, title, id = '' }) => {
     return (
         <section id={id} className="max-w-screen-xl mx-auto px-5 my-12">
             {title && (
-                <div className="flex justify-between items-baseline w-full mb-4 relative after:h-px after:bg-border after:absolute after:top-1/2 after:left-0 after:w-full">
+                <div className="flex justify-between items-baseline w-full mb-4 relative after:h-px after:bg-border dark:after:bg-border-dark after:absolute after:top-1/2 after:left-0 after:w-full">
                     <h4 className="m-0 bg-light dark:bg-dark relative z-10 pr-2">{title}</h4>
                     {cta && <aside className="bg-light dark:bg-dark relative z-10 pl-2">{cta}</aside>}
                 </div>
@@ -76,7 +76,7 @@ export default function Team({
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-                100
+            100
         )
 
     const underConsideration = roadmaps.filter(
@@ -142,35 +142,35 @@ export default function Team({
                     },
                     ...(hasInProgress
                         ? [
-                              {
-                                  label: "What we're building",
-                                  id: 'in-progress',
-                              },
-                          ]
+                            {
+                                label: "What we're building",
+                                id: 'in-progress',
+                            },
+                        ]
                         : []),
                     ...(hasUnderConsideration || !!recentlyShipped
                         ? [
-                              {
-                                  label: 'Roadmap & recently shipped',
-                                  id: 'roadmap',
-                              },
-                          ]
+                            {
+                                label: 'Roadmap & recently shipped',
+                                id: 'roadmap',
+                            },
+                        ]
                         : []),
                     ...(objectives?.body
                         ? [
-                              {
-                                  label: 'Goals',
-                                  id: 'goals',
-                              },
-                          ]
+                            {
+                                label: 'Goals',
+                                id: 'goals',
+                            },
+                        ]
                         : []),
                     ...(hasBody
                         ? [
-                              {
-                                  label: 'Handbook',
-                                  id: 'handbook',
-                              },
-                          ]
+                            {
+                                label: 'Handbook',
+                                id: 'handbook',
+                            },
+                        ]
                         : []),
                 ]}
             />
@@ -193,10 +193,10 @@ export default function Team({
                                 const name = [firstName, lastName].filter(Boolean).join(' ')
                                 const isTeamLead = leadProfiles.data.some(({ id: leadID }) => leadID === id)
                                 return (
-                                    <li key={id} className="bg-border rounded-md">
+                                    <li key={id} className="bg-border dark:bg-border-dark rounded-md">
                                         <Link
                                             to={`/community/profiles/${id}`}
-                                            className="border border-border rounded-md h-full bg-accent flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
+                                            className="border border-border dark:border-border-dark rounded-md h-full bg-accent dark:bg-accent-dark flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
                                         >
                                             <div className="mb-auto">
                                                 <h3
@@ -300,7 +300,7 @@ export default function Team({
             {hasInProgress && (
                 <Section title="What we're building" id="in-progress">
                     <div className="flex space-x-12 items-start">
-                        <ul className="list-none m-0 p-0 grid grid-cols-2 gap-4">
+                        <ul className="list-none m-0 p-0 grid md:grid-cols-2 gap-4">
                             {inProgress.map((roadmap) => (
                                 <InProgress key={roadmap.squeakId} {...roadmap} />
                             ))}
@@ -334,7 +334,7 @@ export default function Team({
                 {recentlyShipped && (
                     <Section title="Recently shipped">
                         <div className="max-w-2xl team-page-content">
-                            <div className="border border-light dark:border-dark rounded bg-white dark:bg-accent p-6">
+                            <div className="border border-light dark:border-dark rounded bg-white dark:bg-accent-dark p-6">
                                 <Change {...recentlyShipped} />
                             </div>
                         </div>
