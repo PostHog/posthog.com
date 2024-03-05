@@ -1,6 +1,6 @@
 ---
 title: "How to set up feature flags in Flutter"
-date: 2024-03-04
+date: 2024-03-05
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
