@@ -16,7 +16,7 @@ export const TeamMember = (teamMember) => {
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     return (
-        <li className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded h-40 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px]">
+        <li className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded h-40 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] @container">
             <Link
                 to={`/community/profiles/${squeakId}`}
                 className="flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
@@ -24,12 +24,14 @@ export const TeamMember = (teamMember) => {
                 <div className="flex flex-col justify-between px-6 py-4 w-full mr-32 xl:mr-40">
                     <div>
                         <h3
-                            className="mb-0 text-[15px] leading-tight"
+                            className="mb-0 text-[15px] @sm:text-base @md:text-[17px] leading-tight"
                             id={kebabCase(name) + '-' + kebabCase(companyRole)}
                         >
                             {name}
                         </h3>
-                        <p className="text-primary/50 text-sm dark:text-primary-dark/50">{companyRole}</p>
+                        <p className="text-primary/50 text-sm @md:text-[15px] @lg:text-base dark:text-primary-dark/50">
+                            {companyRole}
+                        </p>
                     </div>
 
                     <span className="flex items-center gap-2">
@@ -99,6 +101,7 @@ export default function People() {
                             alt="Hiking hog"
                             width="250"
                             height="250"
+                            placeholder="blurred"
                             className="w-[200px] sm:w-64 md:w-72 lg:w-auto lg:max-w-auto -mr-8 md:mr-0 -mt-4 md:mt-0"
                         />
                     </div>
