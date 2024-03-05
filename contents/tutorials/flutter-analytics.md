@@ -279,8 +279,8 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
   <key>com.posthog.posthog.POSTHOG_HOST</key>
   <string><ph_instance_address></string>  <!--  https://app.posthog.com or https://eu.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
-  <key>com.posthog.posthog.DEBUG</key>
   <true/>
+  <key>com.posthog.posthog.DEBUG</key>
   <true/>
 </dict>
 </plist>
@@ -324,7 +324,7 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 
 ## 3. Implement the event capture code
 
-To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [PostHogSDK.shared.capture()](/docs/libraries/flutter#capturing-events):
+To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [Posthog().capture()](/docs/libraries/flutter#capturing-events):
 
 ```dart file=main.dart
 import 'package:flutter/material.dart';
@@ -409,7 +409,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`PostHogSDK.shared.reset()`](https://posthog.com/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`Posthog().reset()`](https://posthog.com/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
 ```dart file=main.dart
 class _HomePageState extends State<HomePage> {
     // ...
