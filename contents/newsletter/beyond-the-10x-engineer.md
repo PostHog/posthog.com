@@ -2,7 +2,7 @@
 title: "Beyond the 10x engineer"
 date: 2024-02-08
 author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/icp/icp-feat.png
+featuredImage: ../images/newsletter/beyond-10x-engineer/super-hog.png
 featuredImageType: full
 tags:
   - Engineering
