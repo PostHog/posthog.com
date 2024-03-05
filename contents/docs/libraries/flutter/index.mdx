@@ -14,6 +14,8 @@ features:
     groupAnalytics: true
 ---
 
+import FlutterIdentify from './\_snippets/identify.mdx'
+
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
 PostHog supports the iOS, macOS, Android and Web platforms.
@@ -74,6 +76,37 @@ class MyApp extends StatelessWidget {
 import FlutterSendEvents from '../../integrate/send-events/_snippets/send-events-flutter.mdx'
 
 <FlutterSendEvents />
+
+## Identify
+
+> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+
+<FlutterIdentify />
+
+## Group analytics
+
+Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Associate the events for this session with a group
+
+```dart
+await Posthog().group(groupType: "company", groupKey: "company_id_in_your_db");
+```
+
+-   Associate the events for this session with a group AND update the properties of that group
+
+```swift
+await Posthog().group(
+  groupType: "company", 
+  groupKey: "company_id_in_your_db", 
+  groupProperties: {
+    "name": "ACME Corp"
+});
+```
+
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Feature Flags
 

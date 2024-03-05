@@ -1,0 +1,23 @@
+When you start tracking events with PostHog, each user gets an anonymous ID that is used to identify them in the system.
+In order to link this anonymous user with someone from your database, use the `identify` call. 
+
+Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
+like segment users by these properties.
+
+An identify call requires:
+
+* `userId` which uniquely identifies your user in your database
+* `userProperties` with a dictionary of key:value pairs
+
+For example:
+
+```dart
+await Posthog().identify(
+  userId: emailController.text, 
+  userProperties: {"name": "Peter Griffin", "email": "peter@familyguy.com"}
+);
+```
+
+The most obvious place to make this call is whenever a user signs up, or when they update their information.
+
+When you call `identify`, all previously tracked anonymous events will be linked to the user.
