@@ -114,7 +114,7 @@ Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog
 
 ## PostHog News
 
-Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/handbook/small-teams/infrastructure).
+Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/teams/infrastructure).
 
 ## Community
 ### Community MVP 🏆

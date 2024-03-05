@@ -1196,6 +1196,20 @@
         },
         { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
         { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
-        { "source": "/handbook/small-teams/people-ops", "destination": "/handbook/small-teams/people" }
+
+        { "source": "/handbook/small-teams/product-analytics", "destination": "/teams/product-analytics" },
+        { "source": "/handbook/small-teams/replay", "destination": "/teams/replay" },
+        { "source": "/handbook/small-teams/website-docs", "destination": "/teams/website-docs" },
+        { "source": "/handbook/small-teams/people", "destination": "/teams/people" },
+        { "source": "/handbook/small-teams/marketing", "destination": "/teams/marketing" },
+        { "source": "/handbook/small-teams/exec", "destination": "/teams/exec" },
+        { "source": "/handbook/small-teams/feature-success", "destination": "/teams/feature-success" },
+        { "source": "/handbook/small-teams/customer-success", "destination": "/teams/customer-success" },
+        { "source": "/handbook/small-teams/growth", "destination": "/teams/growth" },
+        { "source": "/handbook/small-teams/data-warehouse", "destination": "/teams/data-warehouse" },
+        { "source": "/handbook/small-teams/infrastructure", "destination": "/teams/infrastructure" },
+        { "source": "/handbook/small-teams/pipeline", "destination": "/teams/pipeline" },
+        { "source": "/handbook/small-teams/web-analytics", "destination": "/teams/web-analytics" },
+        { "source": "/handbook/small-teams/people-ops", "destination": "/teams/people" }
     ]
 }

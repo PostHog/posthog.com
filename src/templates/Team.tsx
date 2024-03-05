@@ -110,7 +110,7 @@ export default function Team({
 
     const hasUnderConsideration = underConsideration.length > 0
     const hasInProgress = inProgress.length > 0
-    const hasBody = !['/handbook/small-teams/exec', '/handbook/small-teams/data-warehouse'].includes(pageContext.slug)
+    const hasBody = !['/teams/exec', '/teams/data-warehouse'].includes(pageContext.slug)
 
     return (
         <Layout>

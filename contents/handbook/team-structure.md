@@ -11,19 +11,19 @@ We've organized the team into small teams that are multi-disciplinary and as sel
 
 Our small teams are:
 
-- [Customer Success](/handbook/small-teams/customer-success)
+- [Customer Success](/teams/customer-success)
 - [Data Warehouse](/handbook/small-teams/dw)
-- [Exec](/handbook/small-teams/exec)
-- [Feature Success](/handbook/small-teams/feature-success)
-- [Growth](/handbook/small-teams/growth)
-- [Infrastructure](/handbook/small-teams/infrastructure)
-- [Marketing](/handbook/small-teams/marketing)
-- [People & Ops](/handbook/small-teams/people)
-- [Pipeline](/handbook/small-teams/pipeline)
-- [Product Analytics](/handbook/small-teams/product-analytics)
-- [Replay](/handbook/small-teams/replay)
-- [Web Analytics](/handbook/small-teams/web-analytics)
-- [Website & Docs](/handbook/small-teams/website-docs)
+- [Exec](/teams/exec)
+- [Feature Success](/teams/feature-success)
+- [Growth](/teams/growth)
+- [Infrastructure](/teams/infrastructure)
+- [Marketing](/teams/marketing)
+- [People & Ops](/teams/people)
+- [Pipeline](/teams/pipeline)
+- [Product Analytics](/teams/product-analytics)
+- [Replay](/teams/replay)
+- [Web Analytics](/teams/web-analytics)
+- [Website & Docs](/teams/website-docs)
 
 ## Reporting lines
 

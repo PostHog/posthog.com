@@ -15,7 +15,7 @@ crosspost:
   - Blog
 ---
 
-Is my new feature working? It's the question PostHog exists to answer – we even have [an entire team dedicated to it](/handbook/small-teams/feature-success). 
+Is my new feature working? It's the question PostHog exists to answer – we even have [an entire team dedicated to it](/teams/feature-success). 
 
 We define a successful new feature as one that:
 
@@ -39,7 +39,7 @@ Measuring feature success at PostHog is a multi-step process that goes hand-in-h
 3. **Personal experience** – Dog fooding is old advice, but good advice.
 
 In this case, Yakko decided to work on data sampling because:
-1. Slow results on complex queries were causing frustrations for large customers. This ties to the product analytics team objective of "[make PostHog performance frustration free for our 10 largest customers](/handbook/small-teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
+1. Slow results on complex queries were causing frustrations for large customers. This ties to the product analytics team objective of "[make PostHog performance frustration free for our 10 largest customers](/teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
 
 2. Sampling felt like a simple solution that could be implemented quickly.
 
@@ -127,7 +127,7 @@ You may have noticed that this process is relatively fluid. We don’t enforce m
 
 This is because we bias for impact, and believe that ownership is key to building successful features. Without people or teams owning features, there is little incentive to make them successful. No process can make ownerless features successful.
 
-We know that every team, inside and outside of PostHog, has different ways of evaluating success, it's a [key focus of ours](/handbook/strategy/overview#strategy) to build tools to help them do this. If you're curious exactly what that looks like, you can check out what the feature success team is up to on [their small team page](/handbook/small-teams/feature-success).
+We know that every team, inside and outside of PostHog, has different ways of evaluating success, it's a [key focus of ours](/handbook/strategy/overview#strategy) to build tools to help them do this. If you're curious exactly what that looks like, you can check out what the feature success team is up to on [their small team page](/teams/feature-success).
 
 ## Further reading
 

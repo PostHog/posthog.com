@@ -46,7 +46,7 @@ const product = {
 }
 
 const team = 'Feature Success'
-const teamSlug = '/handbook/small-teams/feature-success'
+const teamSlug = '/teams/feature-success'
 
 const featuresPerRow = 3
 const features = [
