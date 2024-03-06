@@ -1,6 +1,6 @@
 ---
 title: "How to set up analytics in Flutter"
-date: 2024-02-27
+date: 2024-03-06
 author: ["lior-neu-ner"]
 tags: ['feature flags']
 ---
