@@ -121,8 +121,8 @@ Many VCs will tell you to hire like crazy when you have [product-market fit](/fo
 
 - **[The state of SaaS pricing](https://www.growthunhinged.com/p/the-state-of-usage-based-pricing) – Kyle Poyar:** A comprehensive look at the current state of pricing for SaaS products, trends around usage-based pricing, and a potential new model for SaaS pricing.
 
-- **[How we built our onboarding email flow (with actual performance data)](https://posthog.com/blog/how-we-built-email-onboarding) – Joe Martin**: ”Marketers believe onboarding emails are a powerful. Everyone else thinks they're annoying and ineffective. The truth, as always, is a little more complicated.”
+- **[How we built our onboarding email flow (with actual performance data)](/blog/how-we-built-email-onboarding) – Joe Martin**: ”Marketers believe onboarding emails are a powerful. Everyone else thinks they're annoying and ineffective. The truth, as always, is a little more complicated.”
 
-- **[My Sixth Year as a Bootstrapped Founder](https://mtlynch.io/solo-developer-year-6/) – Michael Lynch** Lessons from Lynch in his sixth year bootstrapping, where he finally reached $1 million in revenue.
+- **[My Sixth Year as a Bootstrapped Founder](https://mtlynch.io/solo-developer-year-6/) – Michael Lynch:** Lessons from Lynch in his sixth year bootstrapping, where he finally reached $1 million in revenue.
 
 - **[How to fix broken teams](https://blog.staysaasy.com/p/how-to-fix-broken-teams) – Stay SaaSy:** StaySaaSy shares some actionable tips on how to fix to failing teams.

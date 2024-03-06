@@ -57,9 +57,9 @@ Being a [remote and async company](https://newsletter.posthog.com/p/how-we-work-
 
 Good writing is vital for all the above. It demonstrates clear thinking and enables us to document what’s important, have fewer meetings, and [stay fast](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
 
-[Team Pipeline](https://posthog.com/handbook/small-teams/pipeline), for example, has been investigating how to efficiently split events between person IDs and adding overrides to resolve data quality issues. This requires gathering feedback on the design of storage, write path, read path, backfill, and more.
+[Team Pipeline](/handbook/small-teams/pipeline), for example, has been investigating how to efficiently split events between person IDs and adding overrides to resolve data quality issues. This requires gathering feedback on the design of storage, write path, read path, backfill, and more.
 
-To do this async with multiple teams involved, [Ted](https://posthog.com/community/profiles/1421) wrote two 1,500+ word RFCs, which the team followed up with 2,000+ words of comments. Few decisions are as complex as this, but it’s a textbook example of why we look for people who can write.
+To do this async with multiple teams involved, [Ted](/community/profiles/1421) wrote two 1,500+ word RFCs, which the team followed up with 2,000+ words of comments. Few decisions are as complex as this, but it’s a textbook example of why we look for people who can write.
 
 > **What to look for:** People who communicate well throughout the hiring process, have a blog, or come from a writing-heavy culture.
 
@@ -70,7 +70,7 @@ There are two types of engineers:
 1. Those who do it because it makes money.
 2. Those who do it because they love it.
 
-We don’t think there’s anything wrong with the first person. Money is a motivator and that is why we make our [compensation transparent](https://posthog.com/handbook/people/compensation), so applicants can see their approximate starting salary before they even apply, but…
+We don’t think there’s anything wrong with the first person. Money is a motivator and that is why we make our [compensation transparent](/handbook/people/compensation), so applicants can see their approximate starting salary before they even apply, but…
 
 We look for the second type of person, who is motivated by the work and the mission of PostHog. These people are more likely to:
 
@@ -109,7 +109,7 @@ Our teams have a lot of autonomy. They decide on their roadmap, goals, and imple
 - Choosing the right metrics to [measure the success of new features](https://newsletter.posthog.com/p/how-to-build-new-features-users-love).
 - Understanding the infrastructure requirements and scalability.
 
-To guide the development of mobile replay, [Manoel](https://posthog.com/community/profiles/1166) researched competitors and feedback about them. He and [Paul](https://posthog.com/community/profiles/69) also developed a spec for mobile replay that included details about the client lifecycle, API request, data structure, and compatibility with [rrweb](https://github.com/rrweb-io/rrweb). This research and planning helps them build a feature that makes business sense while also being scalable and maintainable.
+To guide the development of mobile replay, [Manoel](/community/profiles/1166) researched competitors and feedback about them. He and [Paul](/community/profiles/69) also developed a spec for mobile replay that included details about the client lifecycle, API request, data structure, and compatibility with [rrweb](https://github.com/rrweb-io/rrweb). This research and planning helps them build a feature that makes business sense while also being scalable and maintainable.
 
 The ability to see the bigger picture enables us to make better long-term decisions. If we’re too tunnel-visioned, we can miss opportunities or build things that break in the long run.
 
@@ -143,4 +143,4 @@ Because we believe talent compounds, it is worth the extra work to find someone 
 
 - **[What Distinguishes Great Software Engineers?](https://newsletter.getdx.com/p/great-engineers) – Abi Noda:** Beyond being a component coder, maximizing the current value of work, making good decisions, and learning continuously set great engineers apart.
 
-- **[What startup recruiters actually see when you apply for a job](https://posthog.com/founders/what-recruiters-see) - Charles Cook:** We had 9,000 people apply for roles at PostHog in the last 12 months. Charles goes over how we evaluate them and how to set yourself apart.
+- **[What startup recruiters actually see when you apply for a job](/founders/what-recruiters-see) - Charles Cook:** We had 9,000 people apply for roles at PostHog in the last 12 months. Charles goes over how we evaluate them and how to set yourself apart.
