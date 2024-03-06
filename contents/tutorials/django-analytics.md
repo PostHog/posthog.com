@@ -253,7 +253,7 @@ We can add all this functionality with the PostHog Python library, and this star
 pip install posthog
 ```
 
-In your `tutorial` project settings page, add your `project_api_key` (found in project settings) and your `instance_address` (like `https://app.posthog.com` or `https://eu.posthog.com` if you’re on Cloud).
+In your `tutorial` project settings page, add your `project_api_key` (found in project settings) and your `api_host` (like `https://us.i.posthog.com` or `https://eu.i.posthog.com` if you’re on Cloud).
 
 ```python
 # tutorials/settings.py

@@ -204,7 +204,7 @@ Specifically, we evaluate the flag by making a POST request to the `[https://app
   
   // Evaluate experiment flag
   const ph_request = await fetch(
-    'https://app.posthog.com/decide?v=3', // or eu.posthog.com
+    'https://us.i.posthog.com/decide?v=3', // or eu.i.posthog.com
     requestOptions
   );
   const data = await ph_request.json();
@@ -249,7 +249,7 @@ const eventOptions = {
 };
 
 const eventRequest = await fetch(
-  'https://app.posthog.com/capture',
+  'https://us.i.posthog.com/capture',
   eventOptions
 );
 
@@ -298,7 +298,7 @@ export async function middleware(request) {
   };
   
   const ph_request = await fetch(
-    'https://app.posthog.com/decide?v=3', // or eu
+    'https://us.i.posthog.com/decide?v=3', // or eu
     requestOptions
   );
   const data = await ph_request.json();
@@ -323,7 +323,7 @@ export async function middleware(request) {
   };
 
   const eventRequest = await fetch(
-    'https://app.posthog.com/capture',
+    'https://us.i.posthog.com/capture',
     eventOptions
   );
 

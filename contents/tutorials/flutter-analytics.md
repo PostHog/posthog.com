@@ -277,7 +277,7 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
   <key>com.posthog.posthog.API_KEY</key>
   <string><ph_project_api_key></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
-  <string><ph_instance_address></string>  <!--  https://app.posthog.com or https://eu.posthog.com -->
+  <string><ph_instance_address></string>  <!--  https://us.i.posthog.com or https://eu.i.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
   <true/>
   <key>com.posthog.posthog.DEBUG</key>

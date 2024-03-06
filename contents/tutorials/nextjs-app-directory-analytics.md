@@ -35,7 +35,7 @@ This opens a new page showing we are running Next.js.
 
 ## Setting up PostHog on the client side
 
-First, we need a PostHog instance ([signup for free](https://app.posthog.com/signup)). From this instance, we need a project API key, which is in project settings, and an instance address (`http://app.posthog.com`, `http://eu.posthog.com`, or a custom address). Add both of these to a `.env.local` file in our base directory.
+First, we need a PostHog instance ([signup for free](https://app.posthog.com/signup)). From this instance, we need a project API key, which is in project settings, and an the relevant ingestion address (`http://us.i.posthog.com`, `http://eu.i.posthog.com`, or a custom address). Add both of these to a `.env.local` file in our base directory.
 
 ```
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>

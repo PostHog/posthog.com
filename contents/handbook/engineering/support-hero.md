@@ -107,7 +107,7 @@ Best,
 [your name]
 ```
 
-2. After the user responded and confirmed the change, delete their [TOTP device](https://app.posthog.com/admin/otp_totp/totpdevice/) ([EU link](https://eu.posthog.com/admin/otp_totp/totpdevice/)).
+2. After the user responded and confirmed the change, delete their [TOTP device](https://us.posthog.com/admin/otp_totp/totpdevice/) ([EU link](https://eu.posthog.com/admin/otp_totp/totpdevice/)).
 
 ## How do I use Zendesk?
 

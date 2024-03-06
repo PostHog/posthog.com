@@ -29,7 +29,7 @@ Next, get the details for PostHog.
 
 1. Get your **project API key** from the getting started flow or your project settings. 
 2. Create a **personal API key**. Go to your account settings (click the photo in the top right corner, then the gear next to your email), click the "Create personal API key" button, add a name, and press save.
-3. Finally, note your **instance address** (either `https://app.posthog.com` or `https://eu.posthog.com` or a custom domain)
+3. Finally, note your **API host** (either `https://us.i.posthog.com` or `https://eu.i.posthog.com` or a custom domain)
 
 With all this, we are ready to set up the migration tool.
 

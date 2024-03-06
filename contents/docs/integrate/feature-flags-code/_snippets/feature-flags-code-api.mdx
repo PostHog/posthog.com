@@ -15,7 +15,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     },
     "person_properties": {"<personProp1>": "<personVal1>"}, # Optional. Include any properties used to calculate the value of the feature flag.
     "group_properties": {"group type": {"<groupProp1>":"<groupVal1>"}} # Optional. Include any properties used to calculate the value of the feature flag.
-}' https://app.posthog.com/decide?v=3 # or https://eu.posthog.com/decide?v=3
+}' https://us.posthog.com/decide?v=3 # or https://eu.posthog.com/decide?v=3
 ```
 
 > **Note:** `person_properties` and `group_properties` are optional. 
@@ -67,7 +67,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
         "$feature/feature-flag-key": "variant-key", # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
     },
     "event": "your_event_name"
-}' https://app.posthog.com/capture/ # or https://eu.posthog.com/capture/
+}' https://us.posthog.com/capture/ # or https://eu.posthog.com/capture/
 ```
 
 ### Step 3: Send a `$feature_flag_called` event
@@ -88,7 +88,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
         "$feature_flag_response": "variant-name"
     },
    "event": "$feature_flag_called"
-}' https://app.posthog.com/capture/ # or https://eu.posthog.com/capture/
+}' https://us.posthog.com/capture/ # or https://eu.posthog.com/capture/
 ```
 
 import APIOverrideServerProperties from './override-server-properties/api.mdx'
