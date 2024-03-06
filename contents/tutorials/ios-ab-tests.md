@@ -82,7 +82,7 @@ Our basic set up is now complete. Build and run your app to test that it's worki
 
 First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods) or [Carthage](/docs/libraries/ios#carthage)). To add the package dependency to your Xcode project, select File > Add Package Dependency and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
-Note that for this tutorial we use version `2.1.0` of the SDK.
+Note that for this tutorial we use version `3.1.0` of the SDK.
 
 ![Add PostHog from Swift Package Manager](../images/tutorials/ios-ab-tests/swift-npm.png)
 
@@ -96,10 +96,10 @@ import PostHog
 @main
 struct App: App {
     init() {
-        let configuration = PHGPostHogConfiguration(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
-        configuration.captureApplicationLifecycleEvents = true
-        configuration.recordScreenViews = true
-        PHGPostHog.setup(with: configuration)
+        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        let POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) 
+        PostHogSDK.shared.setup(configuration)
     }
     
     var body: some Scene {
@@ -121,7 +121,7 @@ import PostHog
 // ...rest of code
 
 Button("Click Me!") {
-    PHGPostHog.shared()?.capture("feature_button_clicked")
+    PostHogSDK.shared.capture("feature_button_clicked")
 }
 
 // ...rest of code
@@ -175,7 +175,7 @@ import PostHog
 
                Button("Go to Next Screen") {
                     // Fetch feature flag here
-                    let flagValue = PHGPostHog.shared()?.getFeatureFlag("ios-background-color-experiment") as? String
+                    let flagValue = PostHogSDK.shared.getFeatureFlag("ios-background-color-experiment") as? String
                     if flagValue == "test" {
                         isTestVariant = true
                     }

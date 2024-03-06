@@ -220,20 +220,16 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Departments & teams',
+        name: 'Resources',
     },
     {
         name: 'Team structure',
-        url: '/handbook/small-teams/team-structure',
+        url: '/handbook/team-structure',
     },
     {
         name: 'Customer success',
         url: '',
         children: [
-            {
-                name: 'Team',
-                url: '/handbook/small-teams/customer-success',
-            },
             {
                 name: 'Customer support',
                 url: '/handbook/growth/customer-support',
@@ -320,37 +316,6 @@ export const handbookSidebar = [
         name: 'Engineering',
         url: '',
         children: [
-            {
-                name: 'Small teams',
-            },
-            {
-                name: 'Data Warehouse',
-                url: '/handbook/small-teams/data-warehouse',
-            },
-            {
-                name: 'Feature Success',
-                url: '/handbook/small-teams/feature-success',
-            },
-            {
-                name: 'Infrastructure',
-                url: '/handbook/small-teams/infrastructure',
-            },
-            {
-                name: 'Replay',
-                url: '/handbook/small-teams/replay',
-            },
-            {
-                name: 'Pipeline',
-                url: '/handbook/small-teams/pipeline',
-            },
-            {
-                name: 'Product Analytics',
-                url: '/handbook/small-teams/product-analytics',
-            },
-            {
-                name: 'Web Analytics',
-                url: '/handbook/small-teams/web-analytics',
-            },
             {
                 name: 'Resources',
             },
@@ -543,23 +508,9 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Exec',
-        url: '',
-        children: [
-            {
-                name: 'Team',
-                url: '/handbook/small-teams/exec',
-            },
-        ],
-    },
-    {
         name: 'Growth',
         url: '',
         children: [
-            {
-                name: 'Team',
-                url: '/handbook/small-teams/growth',
-            },
             {
                 name: 'Growth reviews',
                 url: '/handbook/growth/growth-engineering/growth-sessions',
@@ -578,10 +529,6 @@ export const handbookSidebar = [
         name: 'Marketing',
         url: '',
         children: [
-            {
-                name: 'Team',
-                url: '/handbook/small-teams/marketing',
-            },
             {
                 name: 'Overview',
                 url: '/handbook/growth/marketing',
@@ -673,10 +620,6 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
-                name: 'Team',
-                url: '/handbook/small-teams/people',
-            },
-            {
                 name: 'Finance',
                 url: '/handbook/people/finance',
             },
@@ -716,10 +659,6 @@ export const handbookSidebar = [
         name: 'Website & Docs',
         url: '',
         children: [
-            {
-                name: 'Team',
-                url: '/handbook/small-teams/website-docs',
-            },
             {
                 name: 'Community',
                 url: '',
@@ -921,7 +860,77 @@ export const companyMenu = {
             color: 'red',
             url: '/changelog/2024',
         },
-        { name: 'Team', icon: 'IconProfile', color: 'blue', url: '/team' },
+        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/people' },
+        {
+            name: 'Teams',
+            icon: 'IconPeople',
+            color: 'purple',
+            url: '/teams',
+            children: [
+                {
+                    name: 'Small teams',
+                    url: '/teams',
+                },
+                {
+                    name: 'Engineering',
+                },
+                {
+                    name: 'Data Warehouse',
+                    url: '/teams/data-warehouse',
+                },
+                {
+                    name: 'Feature Success',
+                    url: '/teams/feature-success',
+                },
+                {
+                    name: 'Infrastructure',
+                    url: '/teams/infrastructure',
+                },
+                {
+                    name: 'Replay',
+                    url: '/teams/replay',
+                },
+                {
+                    name: 'Pipeline',
+                    url: '/teams/pipeline',
+                },
+                {
+                    name: 'Product Analytics',
+                    url: '/teams/product-analytics',
+                },
+                {
+                    name: 'Web Analytics',
+                    url: '/teams/web-analytics',
+                },
+                {
+                    name: 'Not engineering',
+                },
+                {
+                    name: 'Customer Success',
+                    url: '/teams/customer-success',
+                },
+                {
+                    name: 'Exec',
+                    url: '/teams/exec',
+                },
+                {
+                    name: 'Growth',
+                    url: '/teams/growth',
+                },
+                {
+                    name: 'Marketing',
+                    url: '/teams/marketing',
+                },
+                {
+                    name: 'People & Ops',
+                    url: '/teams/people',
+                },
+                {
+                    name: 'Website & Docs',
+                    url: '/teams/website-docs',
+                },
+            ],
+        },
         { name: 'Handbook', icon: 'IconBook', color: 'seagreen', url: '/handbook', children: handbookSidebar },
         {
             name: 'Blog',
@@ -2516,7 +2525,7 @@ export const pricingMenu = {
     icon: 'IconReceipt',
     children: [
         {
-            name: 'All products',
+            name: 'Plans',
             icon: 'IconReceipt',
             color: 'red',
             url: '/pricing',

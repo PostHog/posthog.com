@@ -18,14 +18,7 @@ export default function TeamRoadmap({ team }: { team?: string }) {
     ) : (
         <CardContainer>
             {futureRoadmaps?.map((node: IRoadmap) => {
-                return (
-                    <InProgress
-                        more
-                        className="border border-light dark:border-dark rounded-md !border-t !mb-4"
-                        key={node.title}
-                        {...node}
-                    />
-                )
+                return <InProgress more className="" key={node.title} {...node} />
             })}
         </CardContainer>
     )

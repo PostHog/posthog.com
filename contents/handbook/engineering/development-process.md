@@ -161,7 +161,7 @@ Always request a review on your pull request by a fellow team member (or leave u
 
 If you build it, [document it](https://posthog.com/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either [Website & Docs](/handbook/small-teams/website-docs) or [Marketing](/handbook/small-teams/marketing) to document features.
+It's not the responsibility of either [Website & Docs](/teams/website-docs) or [Marketing](/teams/marketing) to document features.
 
 ## Releasing
 

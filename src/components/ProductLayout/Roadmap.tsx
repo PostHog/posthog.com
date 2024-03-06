@@ -1,5 +1,5 @@
 import { CallToAction } from 'components/CallToAction'
-import { pineappleText } from 'components/Job/Sidebar'
+import { PineappleText } from 'components/Job/Sidebar'
 import { ContributorImageSmall } from 'components/PostLayout/Contributors'
 import TeamRoadmap from 'components/TeamRoadmap'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -62,7 +62,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
         teamLength &&
         teamLength > 0 &&
         Math.round((teamMembers.filter(({ pineappleOnPizza }: any) => pineappleOnPizza).length / teamLength) * 100)
-    const teamURL = `/handbook/small-teams/${slugify(team, { lower: true })}`
+    const teamURL = `/teams/${slugify(team, { lower: true })}`
     return (
         <div id="roadmap">
             <SectionWrapper>
@@ -77,7 +77,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
 
                         <p className="text-sm mb-2">Here are the people bringing you {team.toLowerCase()}. </p>
 
-                        <p className="text-xs mb-4 opacity-75">{pineappleText(pineapplePercentage)}</p>
+                        <p className="text-xs mb-4 opacity-75">{PineappleText(pineapplePercentage)}</p>
                         <ul className="list-none m-0 mb-4 p-0 space-y-2 md:space-y-0">
                             {teamMembers.map((member: any) => {
                                 const {

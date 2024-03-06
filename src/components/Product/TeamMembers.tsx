@@ -1,4 +1,4 @@
-import { TeamMember, teamQuery } from 'components/Team'
+import { TeamMember, teamQuery } from 'components/People'
 import { useStaticQuery } from 'gatsby'
 import React from 'react'
 

@@ -170,7 +170,6 @@ FullStory is a more complex and mature product than Clarity, going way beyond ba
   <ComparisonRow column1={true} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Dead clicks" description="Detect when users click but nothing happens" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
@@ -228,7 +227,6 @@ UXCam offers similar core session replay features, but it only works on mobile a
   <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Dead clicks" description="Detect when users click but nothing happens" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
@@ -263,7 +261,7 @@ According to G2 reviews, UXCam helps companies:
 
 ### What is Lucky Orange?
 
-Lucky Orange is a simple analytics tool designed to analyze user behavior on small e-commerce websites using session replays and heatmaps. It also offers a range of other useful features for store owners, such as built-in form analytics, live chat, surveys, and announcements widgets.
+Lucky Orange is popular [alternative to Hotjar](/blog/best-hotjar-alternatives) – it's simple and designed to analyze user behavior on small e-commerce websites using session replays and heatmaps. It also offers a range of other useful features for store owners, such as built-in form analytics, live chat, surveys, and announcements widgets.
 
 Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [according to BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Clarity's 45,000+. Lucky Orange customers are often small online stores or freelance CRO consultants.
 
@@ -290,7 +288,6 @@ While it doesn't offer full product analytics, it includes:
   <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={false} column2={true} feature="Dead clicks" description="Detect when users click but nothing happens" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
@@ -343,14 +340,13 @@ In many ways, Hotjar is a more mature version of Clarity. It lacks the depth of 
 
 <ComparisonTable column1="Hotjar" column2="Clarity">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={true} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={false} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={true} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Dead clicks" description="Detect when users click but nothing happens" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
@@ -385,7 +381,7 @@ According to G2 reviews, users are fans of Hotjar because:
 
 ### What is Mouseflow?
 
-Mouseflow is a behavioral analytics tool that offers session replay, heatmap, and basic funnel analysis features. It's designed mainly for use on marketing and e-commerce websites. Unlike UXCam and Hotjar, for example, it doesn't support replay in mobile apps. It also integrates with several popular A/B testing tools.
+Mouseflow is a behavioral analytics tool that offers session replay, heatmap, and basic funnel analysis features. It's designed mainly for use on marketing and e-commerce websites. It also integrates with several popular A/B testing tools.
 
 According to data from BuiltWith, 5,555 of the top 1 million websites use Mouseflow – correct as of Feb 2024. This makes it more popular than Lucky Orange, but much less popular than Hotjar (72,048) and Clarity (45,820). 
 
@@ -410,7 +406,6 @@ Mouseflow offers one or two features Clarity doesn't, such as funnel analysis an
   <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={true} column2={true} feature="Dead clicks" description="Detect when users click but nothing happens" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
