@@ -122,9 +122,9 @@ const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, hand
             </span>
             {isTeamLead || isModerator ? (
                 <TeamLeadContainer {...(isModerator && handleTeamLead ? { onClick: handleTeamLeadClick } : {})}>
-                    <Tooltip content="Team lead">
+                    <Tooltip content={isTeamLead ? 'Team lead' : 'Make team lead?'}>
                         <span>
-                            <StickerMayor active={isTeamLead} className="w-8 h-8" />
+                            <StickerMayor active={isTeamLead} className={`w-8 h-8 ${isTeamLead ? '' : 'opacity-40 hover:opacity-75'}`} />
                         </span>
                     </Tooltip>
                 </TeamLeadContainer>
@@ -140,9 +140,9 @@ const Profile = (profile) => {
     const name = [firstName, lastName].filter(Boolean).join(' ')
     return (
         <div>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 mb-6">
                 <Avatar
-                    className="w-24 h-24 bg-tan rounded-full dark:bg-dark border border-border dark:border-dark"
+                    className="w-24 h-24 bg-accent dark:bg-dark rounded-full border border-border dark:border-dark"
                     src={getAvatarURL(profile)}
                 />
                 <div>
@@ -159,9 +159,7 @@ const Profile = (profile) => {
                 </div>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-border dark:border-dark">
-                {biography ? <Markdown>{biography}</Markdown> : <p>{firstName} hasn't added their bio yet!</p>}
-            </div>
+            {biography ? <Markdown>{biography}</Markdown> : <p>{firstName} has been too busy writing code to fill out a bio!</p>}
             <CallToAction to={`/community/profiles/${id}`} type="secondary" size="sm">
                 View full profile
             </CallToAction>
@@ -218,7 +216,7 @@ export default function Team({
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-                100
+            100
         )
 
     const underConsideration = roadmaps.filter(
@@ -311,35 +309,35 @@ export default function Team({
                     },
                     ...(hasInProgress
                         ? [
-                              {
-                                  label: "What we're building",
-                                  id: 'in-progress',
-                              },
-                          ]
+                            {
+                                label: "What we're building",
+                                id: 'in-progress',
+                            },
+                        ]
                         : []),
                     ...(hasUnderConsideration || !!recentlyShipped
                         ? [
-                              {
-                                  label: 'Roadmap & recently shipped',
-                                  id: 'roadmap',
-                              },
-                          ]
+                            {
+                                label: 'Roadmap & recently shipped',
+                                id: 'roadmap',
+                            },
+                        ]
                         : []),
                     ...(objectives?.body
                         ? [
-                              {
-                                  label: 'Goals',
-                                  id: 'goals',
-                              },
-                          ]
+                            {
+                                label: 'Goals',
+                                id: 'goals',
+                            },
+                        ]
                         : []),
                     ...(hasBody
                         ? [
-                              {
-                                  label: 'Handbook',
-                                  id: 'handbook',
-                              },
-                          ]
+                            {
+                                label: 'Handbook',
+                                id: 'handbook',
+                            },
+                        ]
                         : []),
                 ]}
             />
@@ -349,86 +347,87 @@ export default function Team({
                 id="people"
             >
                 <div className="flex space-x-12">
-                    <ul className="flex-1 list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
-                        {profiles?.data
-                            ? [...profiles.data]
-                                  .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
-                                  .map((profile) => {
-                                      const {
-                                          id,
-                                          attributes: {
-                                              avatar,
-                                              firstName,
-                                              lastName,
-                                              country,
-                                              companyRole,
-                                              pineappleOnPizza,
-                                          },
-                                      } = profile
-                                      const name = [firstName, lastName].filter(Boolean).join(' ')
-                                      return (
-                                          <li key={id} className="bg-border dark:bg-border-dark rounded-md relative">
-                                              <button
-                                                  onClick={() =>
-                                                      setActiveProfile({
-                                                          ...profile.attributes,
-                                                          isTeamLead: isTeamLead(id),
-                                                          id,
-                                                      })
-                                                  }
-                                                  className="text-left w-full border border-border dark:border-border-dark rounded-md h-full bg-accent dark:bg-accent-dark flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
-                                              >
-                                                  <div className="mb-auto">
-                                                      <h3
-                                                          className="mb-0 text-base leading-tight"
-                                                          id={kebabCase(name) + '-' + kebabCase(companyRole)}
-                                                      >
-                                                          {name}
-                                                      </h3>
-                                                      <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">
-                                                          {companyRole}
-                                                      </p>
+                    <div className="flex-1">
+                        <ul className="list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+                            {profiles?.data
+                                ? [...profiles.data]
+                                    .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
+                                    .map((profile) => {
+                                        const {
+                                            id,
+                                            attributes: {
+                                                avatar,
+                                                firstName,
+                                                lastName,
+                                                country,
+                                                companyRole,
+                                                pineappleOnPizza,
+                                            },
+                                        } = profile
+                                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                                        return (
+                                            <li key={id} className="bg-border dark:bg-border-dark rounded-md relative">
+                                                <button
+                                                    onClick={() =>
+                                                        setActiveProfile({
+                                                            ...profile.attributes,
+                                                            isTeamLead: isTeamLead(id),
+                                                            id,
+                                                        })
+                                                    }
+                                                    className="text-left w-full border border-border dark:border-border-dark rounded-md h-full bg-accent dark:bg-accent-dark flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
+                                                >
+                                                    <div className="mb-auto">
+                                                        <h3
+                                                            className="mb-0 text-base leading-tight"
+                                                            id={kebabCase(name) + '-' + kebabCase(companyRole)}
+                                                        >
+                                                            {name}
+                                                        </h3>
+                                                        <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">
+                                                            {companyRole}
+                                                        </p>
 
-                                                      <div className="mt-1 flex space-x-1 items-center">
-                                                          <Stickers
-                                                              country={country}
-                                                              isTeamLead={isTeamLead(id)}
-                                                              pineappleOnPizza={pineappleOnPizza}
-                                                              handleTeamLead={handleTeamLead}
-                                                              isModerator={isModerator}
-                                                              id={id}
-                                                          />
-                                                      </div>
-                                                  </div>
-                                                  <div className="ml-auto -mb-4 -mr-4 mt-2">
-                                                      <img
-                                                          src={
-                                                              avatar?.data?.attributes?.url ||
-                                                              'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                                                          }
-                                                          className="w-[165px]"
-                                                      />
-                                                  </div>
-                                              </button>
-                                              {isModerator && (
-                                                  <button
-                                                      onClick={() => removeTeamMember(id)}
-                                                      className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
-                                                  >
-                                                      <IconX className="w-4 h-4" />
-                                                  </button>
-                                              )}
-                                          </li>
-                                      )
-                                  })
-                            : new Array(4).fill(0).map((_, i) => (
-                                  <li key={i}>
-                                      <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                  </li>
-                              ))}
-
+                                                        <div className="mt-1 flex space-x-1 items-center">
+                                                            <Stickers
+                                                                country={country}
+                                                                isTeamLead={isTeamLead(id)}
+                                                                pineappleOnPizza={pineappleOnPizza}
+                                                                handleTeamLead={handleTeamLead}
+                                                                isModerator={isModerator}
+                                                                id={id}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="ml-auto -mb-4 -mr-4 mt-2">
+                                                        <img
+                                                            src={
+                                                                avatar?.data?.attributes?.url ||
+                                                                'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+                                                            }
+                                                            className="w-[165px]"
+                                                        />
+                                                    </div>
+                                                </button>
+                                                {isModerator && (
+                                                    <button
+                                                        onClick={() => removeTeamMember(id)}
+                                                        className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
+                                                    >
+                                                        <IconX className="w-4 h-4" />
+                                                    </button>
+                                                )}
+                                            </li>
+                                        )
+                                    })
+                                : new Array(4).fill(0).map((_, i) => (
+                                    <li key={i}>
+                                        <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                    </li>
+                                ))}
+                        </ul>
                         {isModerator && <AddTeamMember handleChange={(user) => addTeamMember(user.profile.id)} />}
-                    </ul>
+                    </div>
 
                     <div className="hidden w-full md:max-w-sm shrink-1 basis-sm">
                         <SidebarSection title="Small team FAQ">

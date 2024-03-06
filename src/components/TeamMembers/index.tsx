@@ -6,6 +6,7 @@ import { useUser } from 'hooks/useUser'
 import { Close, Plus } from 'components/Icons'
 import { Combobox } from '@headlessui/react'
 import { Skeleton } from 'components/Questions/QuestionsTable'
+import { CallToAction } from 'components/CallToAction'
 
 const teamQuery = (name: string) =>
     qs.stringify(
@@ -54,12 +55,12 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
         query === ''
             ? moderators
             : moderators.filter((mod) => {
-                  const name = [mod?.profile?.firstName, mod?.profile?.lastName].filter(Boolean).join(' ')
-                  return name?.toLowerCase().includes(query.toLowerCase())
-              })
+                const name = [mod?.profile?.firstName, mod?.profile?.lastName].filter(Boolean).join(' ')
+                return name?.toLowerCase().includes(query.toLowerCase())
+            })
 
     return (
-        <div className="relative w-full">
+        <div className="relative w-full mt-4">
             <Combobox onChange={handleChange}>
                 <div className="rounded-md bg-accent dark:bg-accent-dark border border-border dark:border-dark w-full flex justify-between items-center overflow-hidden relative">
                     <Combobox.Input
@@ -80,9 +81,8 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
                             <Combobox.Option key={mod.id} value={mod} className="!m-0">
                                 {({ active }) => (
                                     <div
-                                        className={`bg-accent dark:bg-accent-dark p-3 py-2 text-base flex space-x-3 items-center cursor-pointer border-border dark:border-dark ${
-                                            active ? 'bg-border dark:bg-border-dark' : ''
-                                        }`}
+                                        className={`bg-accent dark:bg-accent-dark p-3 py-2 text-base flex space-x-3 items-center cursor-pointer border-border dark:border-dark ${active ? 'bg-border dark:bg-border-dark' : ''
+                                            }`}
                                     >
                                         <img
                                             className="rounded-full w-[32px] h-[32px] bg-border dark:bg-border-dark border border-border dark:border-dark"
@@ -104,27 +104,15 @@ export const AddTeamMember = ({ handleChange }) => {
     const [showMods, setShowMods] = useState(false)
 
     return showMods ? (
-        <li>
-            <TeamMemberSelect
-                setShowMods={setShowMods}
-                handleChange={(mod) => {
-                    handleChange(mod)
-                    setShowMods(false)
-                }}
-            />
-        </li>
+        <TeamMemberSelect
+            setShowMods={setShowMods}
+            handleChange={(mod) => {
+                handleChange(mod)
+                setShowMods(false)
+            }}
+        />
     ) : (
-        <li className="relative active:top-[1px] active:scale-[.99] transition-transform h-full group">
-            <button
-                onClick={() => setShowMods(true)}
-                className="flex items-center space-x-2 w-full p-2 hover:bg-accent dark:hover:bg-accent-dark rounded"
-            >
-                <span className=" w-[32px] h-[32px] flex justify-center items-center p-1 rounded-full bg-accent dark:bg-accent-dark border group-hover:border-border dark:group-hover:border-dark border-transparent transition-colors">
-                    <Plus className="w-full h-full" />
-                </span>
-                <span className="font-semibold text-sm">Add team member</span>
-            </button>
-        </li>
+        <CallToAction onClick={() => setShowMods(true)} type="secondary" size="sm" className="mt-4">Add team member</CallToAction>
     )
 }
 
@@ -297,8 +285,8 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                         )
                     })
                 )}
-                {isModerator && <AddTeamMember handleChange={addTeamMember} />}
             </ul>
+            {isModerator && <AddTeamMember handleChange={addTeamMember} />}
         </section>
     )
 }
