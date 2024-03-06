@@ -143,8 +143,8 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
 
     return (
         <div>
-            {user?.role?.type === 'moderator' && user?.profile?.teams?.some(({ id }) => id === teamID) && (
-                <form onSubmit={handleSubmit} className="m-0 mb-8 pb-8 border-b border-border dark:border-dark">
+            {user?.role?.type === 'moderator' && (
+                <form onSubmit={handleSubmit} className="m-0">
                     <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
                     <div className="ml-[50px]">
                         <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
@@ -191,20 +191,6 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                         </Button>
                     </span>
                 </form>
-            )}
-            {updates?.length > 0 && (
-                <div className="mb-8 pb-2 border-b border-border dark:border-dark">
-                    <h3>Team updates</h3>
-                    <ul className="m-0 p-0 list-none mb-6">
-                        {updates.map(({ question }) => {
-                            return (
-                                <li key={question} className="py-4 first:pt-0">
-                                    <Question showActions={false} buttonText="Reply" id={question} />
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
             )}
         </div>
     )
