@@ -61,7 +61,7 @@ export default function People() {
         team: { teamMembers },
     } = useStaticQuery(teamQuery)
 
-    const teamSize = teamMembers.length
+    const teamSize = teamMembers.length - 1
 
     // Some Stats were used as fallback until the actual data is added to the GraphlQL Server
     const teamStats = [
