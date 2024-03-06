@@ -84,7 +84,7 @@ You can disable automatically capturing `$feature_flag_called` events. For examp
 
 To disable it, set the `send_feature_flag_events` argument in your function call, like so:
 
-```node
+```ruby
 is_my_flag_enabled = posthog.is_feature_enabled(
     'flag-key', 
     'distinct_id_of_your_user', 

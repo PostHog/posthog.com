@@ -77,7 +77,7 @@ Capturing `$feature_flag_called` events enable PostHog to know when a flag was a
 
 You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
 
-To disable it, set the `send_feature_flag_events` argument in your function call, like so:
+To disable it, set the `sendFeatureFlagEvents` argument in your function call, like so:
 
 ```php
 $isMyFlagEnabledForUser = PostHog::isFeatureEnabled(
