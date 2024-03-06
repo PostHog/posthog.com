@@ -35,7 +35,11 @@ export const Content = ({ quickLinks = false }) => {
     return (
         <>
             <Intro />
-            {(quickLinks || compact) && <QuickLinks items={docsMenu.children[1].children} />}
+            {(quickLinks || compact) && (
+                <QuickLinks
+                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'product analytics')?.children}
+                />
+            )}
             <section className="mb-12">
                 <h3 className="mb-1 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
