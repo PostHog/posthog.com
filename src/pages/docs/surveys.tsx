@@ -48,7 +48,9 @@ export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
         <>
-            {compact && <QuickLinks items={docsMenu.children[5].children} />}
+            {compact && (
+                <QuickLinks items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'surveys')?.children} />
+            )}
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
