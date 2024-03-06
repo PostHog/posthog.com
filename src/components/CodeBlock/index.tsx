@@ -148,6 +148,7 @@ export const CodeBlock = ({
 
     const [projectName, setProjectName] = React.useState<string | null>(null)
     const [projectToken, setProjectToken] = React.useState<string | null>(null)
+    const [projectInstance, setProjectInstance] = React.useState<string | null>(null)
 
     const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
 
@@ -158,6 +159,7 @@ export const CodeBlock = ({
         if (document) {
             setProjectName(getCookie('ph_current_project_name'))
             setProjectToken(getCookie('ph_current_project_token'))
+            setProjectInstance(getCookie('ph_current_instance'))
         }
     }, [])
 
@@ -375,7 +377,7 @@ export const CodeBlock = ({
                                                                     ? `'${projectToken}'`
                                                                     : children === "'<ph_instance_address>'" &&
                                                                       projectToken
-                                                                    ? `'https://app.posthog.com'`
+                                                                    ? projectInstance || `'https://app.posthog.com'`
                                                                     : children}
                                                             </span>
                                                         </span>
