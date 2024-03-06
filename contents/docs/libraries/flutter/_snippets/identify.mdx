@@ -9,7 +9,7 @@ An `identify` call has the following arguments:
 ```dart
 await Posthog().identify(
   userId: emailController.text, 
-  userProperties: {"name": "Peter Griffin", "email": "peter@familyguy.com"}
+  userProperties: {"name": "Peter Griffin", "email": "peter@familyguy.com"},
   userPropertiesSetOnce: {"date_of_first_log_in": "2024-03-01"}
 );
 ```
