@@ -84,7 +84,7 @@ after_fork do |server, worker|
   $posthog = PostHog::Client.new(
     api_key: '<ph_project_api_key>',
     personal_api_key: '<ph_personal_api_key>'
-    host: '<ph_instance_address>',
+    host: '<ph_client_api_host>',
     on_error: Proc.new { |status, msg| print msg }
   )
 end
@@ -99,7 +99,7 @@ on_worker_boot do
   $posthog = PostHog::Client.new(
     api_key: '<ph_project_api_key>',
     personal_api_key: '<ph_personal_api_key>'
-    host: '<ph_instance_address>',
+    host: '<ph_client_api_host>',
     on_error: Proc.new { |status, msg| print msg }
   )
 end

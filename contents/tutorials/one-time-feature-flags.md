@@ -60,7 +60,7 @@ Add `posthog-node` to your Express app and set up the PostHog client with your p
 const { PostHog } = require('posthog-node');
 const client = new PostHog(
     '<ph_project_api_key>',
-    { host: '<ph_instance_address>'}
+    { host: '<ph_client_api_host>'}
 )
 //...
 ```

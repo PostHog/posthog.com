@@ -36,7 +36,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 if (typeof window !== 'undefined') {
   posthog.init("<ph_project_api_key>", {
-    api_host: "<ph_instance_address>"
+    api_host: "<ph_client_api_host>"
   })
 }
 
@@ -151,7 +151,7 @@ const requestOptions = {
 };
 
 const ph_request = await fetch(
-	'<ph_instance_address>/decide?v=3',
+	'<ph_client_api_host>/decide?v=3',
 	requestOptions
 );
 const data = await ph_request.json();
@@ -189,7 +189,7 @@ export async function middleware(request) {
   };
   
   const ph_request = await fetch(
-		'<ph_instance_address>/decide?v=3', // or eu
+		'<ph_client_api_host>/decide?v=3', // or eu
 		requestOptions
 	);
   const data = await ph_request.json();
@@ -238,7 +238,7 @@ if (typeof window !== 'undefined') {
   }
 
   posthog.init("<ph_project_api_key>", {
-    api_host: "<ph_instance_address>",
+    api_host: "<ph_client_api_host>",
     bootstrap: bootstrapData
   })
 }

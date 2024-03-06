@@ -376,9 +376,11 @@ export const CodeBlock = ({
                                                             >
                                                                 {children === "'<ph_project_api_key>'" && projectToken
                                                                     ? `'${projectToken}'`
-                                                                    : children === "'<ph_instance_address>'" &&
-                                                                      projectToken
+                                                                    : children === "'<ph_client_api_host>'" &&
+                                                                      clientApiHost
                                                                     ? clientApiHost
+                                                                    : children === "'<ph_app_host>'" && appHost
+                                                                    ? appHost
                                                                     : children}
                                                             </span>
                                                         </span>

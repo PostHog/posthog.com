@@ -188,7 +188,7 @@ Once you've done that, the final step is getting the app set up on your site. Go
 
 ```js
 posthog.init("<ph_project_api_key>", { 
-    "api_host": "<ph_instance_address>",
+    "api_host": "<ph_client_api_host>",
     "opt_in_site_apps": true 
 })
 ```

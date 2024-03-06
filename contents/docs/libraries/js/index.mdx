@@ -476,7 +476,7 @@ To configure these options, pass them as an object to the `posthog.init` call, l
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     loaded: function (posthog) {
         posthog.identify('[user unique id]')
     },

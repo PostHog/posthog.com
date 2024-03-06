@@ -67,8 +67,8 @@ import { PostHogProvider } from 'posthog-js/react'
 
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    ui_host: 'https://us.posthog.com' // remove if EU
+    api_host: '<ph_client_api_host>',
+    ui_host: '<ph_app_host>' // remove if EU
  })
 }
 

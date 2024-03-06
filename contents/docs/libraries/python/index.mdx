@@ -155,7 +155,7 @@ import posthog
 class YourAppConfig(AppConfig):
     def ready(self):
         posthog.api_key = '<ph_project_api_key>'
-        posthog.host = '<ph_instance_address>' # You can remove this line if you're using app.posthog.com
+        posthog.host = '<ph_client_api_host>' # You can remove this line if you're using app.posthog.com
 
 ```
 

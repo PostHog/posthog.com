@@ -76,7 +76,7 @@ Feature flags as a service integrate with your app like other external services.
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
 
 is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')
 ```

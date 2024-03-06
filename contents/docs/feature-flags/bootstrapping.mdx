@@ -20,7 +20,7 @@ To bootstrap PostHog with feature flags, use the `bootstrap` key in the initiali
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
         featureFlags: {
             'flag-1': true,
@@ -39,7 +39,7 @@ export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
             // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-            host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+            host: '<ph_client_api_host>', // TIP: host is optional if you use https://app.posthog.com
             bootstrap: {
                 featureFlags: {
                     'flag-1': true,
@@ -80,7 +80,7 @@ The `bootstrap` object has two optional arguments: `distinctID` and `isIdentifie
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
         distinctID: 'distinct_id_of_your_user',
         isIdentifiedID: true,
@@ -101,7 +101,7 @@ export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
             // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-            host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+            host: '<ph_client_api_host>', // TIP: host is optional if you use https://app.posthog.com
             bootstrap: {
                 distinctID: 'distinct_id_of_your_user',
                 isIdentifiedID: true,

@@ -57,7 +57,7 @@ import { PostHogProvider } from 'posthog-js/react'
 export function PHProvider({ children }) {
 	if (typeof window !== 'undefined') {
 	  posthog.init('<ph_project_api_key>', {
-	    api_host: '<ph_instance_address>'
+	    api_host: '<ph_client_api_host>'
 	  })
 	}
 
@@ -185,7 +185,7 @@ export async function getBootstrapData() {
 
   const client = new PostHog(
     phProjectAPIKey,
-    { host: "<ph_instance_address>" })
+    { host: "<ph_client_api_host>" })
   const flags = await client.getAllFlags(distinct_id)
   const bootstrap = {
     distinctID: distinct_id,
@@ -207,7 +207,7 @@ import { PostHogProvider } from 'posthog-js/react'
 export default function PHProvider({ children, bootstrapData }) {
   if (typeof window !== 'undefined') {
     posthog.init("<ph_project_api_key>", {
-      api_host: "<ph_instance_address>",
+      api_host: "<ph_client_api_host>",
       bootstrap: bootstrapData
     })
   }

@@ -24,7 +24,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     disable_session_recording: true,
   })
 }
@@ -46,7 +46,7 @@ You can then use PostHog’s `startSessionRecording()` method to trigger a sessi
 //...
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     disable_session_recording: true,
     loaded: (posthog) => {
       if (process.env.NODE_ENV != 'development') posthog.startSessionRecording()
@@ -107,7 +107,7 @@ If you want to evaluate flags as soon as PostHog loads, you can use the `loaded`
 // pages/_app.js
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     disable_session_recording: true,
     loaded: (posthog) => {
       posthog.onFeatureFlags((flags) => {

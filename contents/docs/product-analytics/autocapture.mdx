@@ -38,7 +38,7 @@ For example, to only capture clicks on buttons on the docs section of the websit
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     autocapture: {
         dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
         url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
@@ -151,7 +151,7 @@ Since v1.111.0 you can configure posthog-js to autocapture information that user
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     autocapture: {
         capture_copied_text: true,
         // any other autocapture config

@@ -227,7 +227,7 @@ class MyAndroidAnalyticsApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
         // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-        private const val POSTHOG_HOST = "<ph_instance_address>"
+        private const val POSTHOG_HOST = "<ph_client_api_host>"
     }
 
     override fun onCreate() {

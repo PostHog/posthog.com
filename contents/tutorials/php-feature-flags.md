@@ -62,7 +62,7 @@ use PostHog\PostHog;
 
 PostHog::init(
   '<ph_project_api_key>',
-  ['host' => '<ph_instance_address>']
+  ['host' => '<ph_client_api_host>']
 );
 
 // rest of your code
@@ -77,7 +77,7 @@ use PostHog\PostHog;
 
 PostHog::init(
   '<ph_project_api_key>',
-  ['host' => '<ph_instance_address>']
+  ['host' => '<ph_client_api_host>']
 );
 
 $paragraphText = 'Placeholder text';
@@ -129,7 +129,7 @@ use PostHog\PostHog;
 
 PostHog::init(
   '<ph_project_api_key>',
-  ['host' => '<ph_instance_address>']
+  ['host' => '<ph_client_api_host>']
 );
 
 $paragraphText = 'Placeholder text';

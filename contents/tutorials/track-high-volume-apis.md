@@ -82,7 +82,7 @@ const port = 3000
 const client = new PostHog(
   '<ph_project_api_key>',
   { 
-    host: '<ph_instance_address>',
+    host: '<ph_client_api_host>',
     personalApiKey: '<ph_personal_api_key>'
   }
 )

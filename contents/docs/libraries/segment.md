@@ -37,7 +37,7 @@ In order to use the full feature set of PostHog (**autocapture**, **session reco
 
     analytics.ready(() => {
         window.posthog.init("<your-posthog-key>", {
-            api_host: '<ph_instance_address>', // Use eu.i.posthog.com for EU instances
+            api_host: '<ph_client_api_host>', // Use eu.i.posthog.com for EU instances
             segment: window.analytics, // Pass window.analytics here - NOTE: `window.` is important
             capture_pageview: false, // You want this false if you are going to use segment's `analytics.page()` for pageviews
             // When the posthog library has loaded, call `analytics.page()` explicitly.

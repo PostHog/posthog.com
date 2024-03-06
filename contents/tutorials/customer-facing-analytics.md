@@ -36,7 +36,7 @@ These sample insights help us figure out the params to make API requests to filt
 
 ## Getting the params for our API request
 
-Next, we need to set up the API requests to get the data from PostHog for our customer-facing insights. To do this, we will use the `<ph_instance_address>/api/projects/<project_id>/insights/trend` endpoint with `events`, `display`, and `properties` params, but we need to figure out these params first.
+Next, we need to set up the API requests to get the data from PostHog for our customer-facing insights. To do this, we will use the `<ph_app_host>/api/projects/<project_id>/insights/trend` endpoint with `events`, `display`, and `properties` params, but we need to figure out these params first.
 
 To quickly figure out the params for our request, we can make a different request to each of the insights individually. To do this, get the "short ID" from the URL of each of the insights. It is an eight character value like `HmKFweHR`:
 
@@ -51,10 +51,10 @@ To make the API request to get the data about this insight, you need the insight
 5. Add a name and click "Create key."  
 6. Copy your personal API key.
 
-With your personal API key, project ID, and insight short ID, you can make a request to the `<ph_instance_address>/api/projects/<project_id>/insights` endpoint (different from the one we’ll use later) to get all the data about that insight like this: 
+With your personal API key, project ID, and insight short ID, you can make a request to the `<ph_app_host>/api/projects/<project_id>/insights` endpoint (different from the one we’ll use later) to get all the data about that insight like this: 
 
 ```bash
-curl --location '<ph_instance_address>/api/projects/<project_id>/insights/?short_id=<short_id>' \
+curl --location '<ph_app_host>/api/projects/<project_id>/insights/?short_id=<short_id>' \
 --header 'Authorization: Bearer <ph_personal_api_key>'
 ```
 
@@ -93,7 +93,7 @@ In the `pages` folder, create a new file named `insights.js` and add a `getServe
 
 1. gets group or user property to filter from the URL (context)
 2. sets our `events`, `display`, and `properties` params 
-3. formats the `fetch` `GET` request to `<ph_instance_address>/api/projects/<project_id>/insights/trend?${params}`
+3. formats the `fetch` `GET` request to `<ph_app_host>/api/projects/<project_id>/insights/trend?${params}`
 4. passes the response data as a prop to our component
 
 For our "insights created" insight, this looks like this:
@@ -139,7 +139,7 @@ export async function getServerSideProps(context) {
   ));
 	
 	// Make fetch request
-  const url = `<ph_instance_address>/api/projects/<project_id>/insights/trend?${params}`;
+  const url = `<ph_app_host>/api/projects/<project_id>/insights/trend?${params}`;
   
   const request = await fetch(url, {
     method: 'GET',

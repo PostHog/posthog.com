@@ -39,7 +39,7 @@ First, we need a PostHog instance ([signup for free](https://app.posthog.com/sig
 
 ```
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
 Using the Next.js app router requires us to initialize PostHog differently than with the [pages directory](/tutorials/nextjs-analytics). Specifically, the app router server-side renders components by default, and the `posthog-js` library is a client-side library. To make these work together, create a `providers.js` file and set up the `PostHogProvider` with the `'use client'`  directive.

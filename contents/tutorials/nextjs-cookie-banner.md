@@ -39,7 +39,7 @@ export function PHProvider({ children }) {
     const ph = posthog.init(
       ph_project_api_key,
       {
-        api_host: '<ph_instance_address>',
+        api_host: '<ph_client_api_host>',
       }
     );
     setPhInstance(ph || null);
@@ -330,7 +330,7 @@ export function PHProvider({ children }) {
         '<ph_project_api_key>',
         {
           persistence: mode === 'memory' ? 'memory' : 'localStorage+cookie',
-          api_host: '<ph_instance_address>',
+          api_host: '<ph_client_api_host>',
           ...(mode !== 'memory' && { bootstrap: { distinctID: phInstance?.get_distinct_id() } }),
         },
         mode

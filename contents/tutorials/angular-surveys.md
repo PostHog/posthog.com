@@ -64,7 +64,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_instance_address>'
+    api_host:'<ph_client_api_host>'
   }
 )
 

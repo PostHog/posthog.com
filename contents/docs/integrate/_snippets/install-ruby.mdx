@@ -9,7 +9,7 @@ In your app, set your API key **before** making any calls. If setting a custom `
 ```ruby
 posthog = PostHog::Client.new({
   api_key: "<ph_project_api_key>",
-  host: "<ph_instance_address>", # TIP: You can remove this line if you're using https://app.posthog.com
+  host: "<ph_client_api_host>", # TIP: You can remove this line if you're using https://app.posthog.com
   on_error: Proc.new { |status, msg| print msg }
 })
 ```

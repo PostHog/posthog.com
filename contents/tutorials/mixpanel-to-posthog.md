@@ -46,7 +46,7 @@ MIXPANEL_PASSWORD=fCPFrpZYdzB9nlZ9kqabZcXuxSLKhjld
 MIXPANEL_PROJECT_ID=2880604
 POSTHOG_PROJECT_KEY=<ph_project_api_key>
 POSTHOG_API_KEY=phx_lz19ZGZWrVcwZol6qLmIvHBBHzc9lQbvN8b3U2zVufZ
-POSTHOG_ENDPOINT=<ph_instance_address>
+POSTHOG_ENDPOINT=<ph_client_api_host>
 ```
 
 Next, in the terminal, make sure you have [installed Go](https://go.dev/doc/install), then run the tool in the folder location.

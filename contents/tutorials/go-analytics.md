@@ -190,7 +190,7 @@ func main() {
        "<ph_project_api_key>",
        posthog.Config{
            PersonalApiKey: "<ph_personal_api_key>",
-           Endpoint: "<ph_instance_address>",
+           Endpoint: "<ph_client_api_host>",
        },
      )
      defer client.Close()

@@ -124,7 +124,7 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
     <application>
         <!-- ... other configuration ... -->
         <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_api_key>" />
-        <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_instance_address>" /> <!-- usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com' -->
+        <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_client_api_host>" /> <!-- usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com' -->
         <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
     </application>
@@ -157,7 +157,7 @@ For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting
   <key>com.posthog.posthog.API_KEY</key>
   <string><ph_project_api_key></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
-  <string><ph_instance_address></string>  <!--  https://us.i.posthog.com or https://eu.i.posthog.com -->
+  <string><ph_client_api_host></string>  <!--  https://us.i.posthog.com or https://eu.i.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
   <true/>
   <key>com.posthog.posthog.DEBUG</key>
@@ -190,7 +190,7 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
     posthog.init(
       '<ph_project_api_key>',
       {
-        api_host:'<ph_instance_address>',
+        api_host:'<ph_client_api_host>',
       }
     )
   </script>
