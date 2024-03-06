@@ -2584,6 +2584,12 @@ const menu = [
                 url: '/product-analytics',
             },
             {
+                name: 'Web analytics',
+                icon: 'IconPieChart',
+                color: '[#36C46F]',
+                url: '/web-analytics',
+            },
+            {
                 name: 'Session replay',
                 icon: 'IconRewindPlay',
                 color: 'yellow',
