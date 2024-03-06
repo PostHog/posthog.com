@@ -59,7 +59,7 @@ function ConsoleLogs() {
                     <h4 className="text-lg">Your code</h4>
                     <CodeBlock
                         code={`posthog.init('<ph_project_api_key>', {
-  api_host: 'https://app.posthog.com',
+  api_host: '<ph_instance_address>',
   enable_recording_console_log: true,
 });`}
                         language="js"
@@ -85,8 +85,8 @@ function EnableCohortRecordings() {
             <div>
                 <h4 className="text-lg">Your code</h4>
                 <CodeBlock
-                    code={`posthog.init('phc_WT9INNU1hKNKiDySGa393eW93NhkHzbzPzyFVa2DKhk', {
-  api_host: 'https://app.posthog.com',
+                    code={`posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_instance_address>',
   disable_session_recording: true,
 });
 window.posthog.onFeatureFlags(function () {

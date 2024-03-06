@@ -153,7 +153,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <PostHogProvider apiKey="<ph_project_api_key>" options={{
-        host: "<ph_instance_address>", // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        host: "<ph_instance_address>", // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
       }}>
         <AppNavigator />
       </PostHogProvider>

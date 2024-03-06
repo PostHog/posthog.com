@@ -103,7 +103,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_instance_address>' // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+    api_host:'<ph_instance_address>' // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
   }
 )
 

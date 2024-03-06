@@ -226,7 +226,7 @@ import com.posthog.android.PostHogAndroidConfig
 class MyAndroidAnalyticsApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
-        // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         private const val POSTHOG_HOST = "<ph_instance_address>"
     }
 

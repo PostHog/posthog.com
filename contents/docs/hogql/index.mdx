@@ -71,12 +71,12 @@ To query events using HogQL via the [PostHog API](/docs/api/query), get [your pr
 {"query": {"kind": "HogQLQuery", "query": "select * from events"}}
 ```
 
-For example, to get a count of the most common `event` values, you can make a request like this (change `app.posthog.com` to `eu.posthog.com` if you're on EU cloud):
+For example, to get a count of the most common `event` values, you can make a request like this (change `us.posthog.com` to `eu.posthog.com` if you're on EU cloud):
 
 <MultiLanguage>
 
 ```bash
-curl -X POST "https://app.posthog.com/api/projects/:project_id/query" \
+curl -X POST "https://us.posthog.com/api/projects/:project_id/query" \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer <personal_api_key>" \
      -d '{

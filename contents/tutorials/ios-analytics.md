@@ -136,7 +136,7 @@ import PostHog
 struct ios_analyticsApp: App {
     init() {
         let POSTHOG_API_KEY = "<ph_project_api_key>"
-        let POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        let POSTHOG_HOST = "<ph_instance_address>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
         PostHogSDK.shared.setup(configuration)
     }
