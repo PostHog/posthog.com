@@ -4,6 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
 If your team is already using Kubernetes, you may prefer to use Kubernetes resources to setup a proxy to PostHog Cloud rather than deploying a new tool. This method requires one ingress resource for the proxy and one service resource to direct traffic externally to PostHog Cloud.
 
 Different Ingress controllers support different annotations for configuration. The example below uses ingress-nginx.
@@ -16,12 +20,12 @@ metadata:
   name: posthog-proxy
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/upstream-vhost: app.posthog.com # Change to eu.posthog.com if needed.
+    nginx.ingress.kubernetes.io/upstream-vhost: us.i.posthog.com # Change to eu.posthog.com if needed.
     nginx.ingress.kubernetes.io/backend-protocol: https
     # Why configuration-snippet: https://github.com/kubernetes/ingress-nginx/issues/6728
     # Change to eu.posthog.com if needed.
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_ssl_name "app.posthog.com";
+      proxy_ssl_name "us.i.posthog.com";
       proxy_ssl_server_name "on";
 spec:
   tls:
@@ -38,6 +42,14 @@ spec:
             name: posthog-proxy
             port:
               name: https
+      - pathType: Prefix
+        path: /static
+        backend:
+          service:
+            name: posthog-assets-proxy
+            port:
+              name: https
+
 ---
 apiVersion: v1
 kind: Service
@@ -45,7 +57,20 @@ metadata:
   name: posthog-proxy
 spec:
   type: ExternalName
-  externalName: app.posthog.com # Change to eu.posthog.com if needed.
+  externalName: us.i.posthog.com # Change to eu.i.posthog.com if needed.
+  ports:
+  - name: https
+    protocol: TCP
+    port: 443
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posthog-assets-proxy
+spec:
+  type: ExternalName
+  externalName: us-assets.i.posthog.com # Change to eu-assets.i.posthog.com if needed.
   ports:
   - name: https
     protocol: TCP
