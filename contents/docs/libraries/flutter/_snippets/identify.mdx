@@ -2,20 +2,16 @@ Using `identify`, you can associate events with specific users. This enables you
 
 An `identify` call has the following arguments:
 
-- **distinctId:** Required. A unique identifier for your user. Typically either their email or database ID.
+- **userId:** Required. A unique identifier for your user. Typically either their email or database ID.
 - **userProperties:** Optional. A dictionary with key:value pairs to set the [user properties](/docs/product-analytics/user-properties)
 - **userPropertiesSetOnce:** Optional. Similar to `userProperties`. [See the difference between `userProperties` and `userPropertiesSetOnce`](/docs/product-analytics/user-properties#what-is-the-difference-between-set-and-set_once)
-  
-```react-native
-posthog.identify('distinctID', 
-  { // userProperties:
-      email: 'user@posthog.com',
-      name: 'My Name'
-  },
-  { // userPropertiesSetOnce:
-      date_of_first_log_in: '2024-03-01'
-  }
-)
+
+```dart
+await Posthog().identify(
+  userId: emailController.text, 
+  userProperties: {"name": "Peter Griffin", "email": "peter@familyguy.com"},
+  userPropertiesSetOnce: {"date_of_first_log_in": "2024-03-01"}
+);
 ```
 
 You should call `identify` as soon as you're able to. Typically, this is every time your app loads for the first time as well as directly after your user logs in. This ensures that events sent during your user's sessions are correctly associated with them.
