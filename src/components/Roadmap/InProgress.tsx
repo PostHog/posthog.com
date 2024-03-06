@@ -377,8 +377,8 @@ export function InProgress(
                                 {subscribed
                                     ? 'Unsubscribe'
                                     : betaAvailable
-                                        ? 'Get early access'
-                                        : 'Get updates about this project'}
+                                    ? 'Get early access'
+                                    : 'Get updates about this project'}
                                 {!subscribed && !betaAvailable && (
                                     <Tooltip
                                         content="Get email notifications when the team shares updates about this project, releases a beta, or
