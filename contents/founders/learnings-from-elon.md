@@ -61,9 +61,7 @@ We tried this approach, but it didn’t work. We think it’s because:
 
 2. **We (mostly) bias to experience** because we give people autonomy, but they’re more likely to have families and not want to work until midnight on weekends.
 
-3. **Artificial deadlines generate more technical debt**, which slows us down in the long term. We grow by shipping, not by hiring salespeople, so optimizing for lon
-
-g-term speed is better for us.
+3. **Artificial deadlines generate more technical debt**, which slows us down in the long term. We grow by shipping, not by hiring salespeople, so optimizing for long-term speed is better for us.
 
 > **Takeaway:** Artificial deadlines are great for focusing large organizations. In startups, I think you need to either be all in on working 28 hours a day, 9 days a week with mostly younger team, or build a smaller, more experienced team. Artificial deadlines work for the former, not the latter.
 
