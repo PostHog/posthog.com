@@ -855,6 +855,12 @@ export const companyMenu = {
             url: '/roadmap',
         },
         {
+            name: 'WIP',
+            icon: 'IconSpinner',
+            color: 'seagreen',
+            url: '/wip',
+        },
+        {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
