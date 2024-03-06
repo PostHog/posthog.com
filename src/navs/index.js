@@ -1247,6 +1247,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy',
                             children: [
                                 {
+                                    name: 'AWS CloudFront',
+                                    url: '/docs/advanced/proxy/cloudfront',
+                                },
+                                {
                                     name: 'Caddy',
                                     url: '/docs/advanced/proxy/caddy',
                                 },
@@ -1255,24 +1259,24 @@ export const docsMenu = {
                                     url: '/docs/advanced/proxy/cloudflare',
                                 },
                                 {
-                                    name: 'AWS CloudFront',
-                                    url: '/docs/advanced/proxy/cloudfront',
+                                    name: 'Netlify',
+                                    url: '/docs/advanced/proxy/netlify',
                                 },
                                 {
                                     name: 'Next.js',
                                     url: '/docs/advanced/proxy/nextjs',
                                 },
                                 {
-                                    name: 'Netlify',
-                                    url: '/docs/advanced/proxy/netlify',
-                                },
-                                {
-                                    name: 'Vercel',
-                                    url: '/docs/advanced/proxy/vercel',
+                                    name: 'Next.js Middleware',
+                                    url: '/docs/advanced/proxy/nextjs-middleware',
                                 },
                                 {
                                     name: 'Nuxt',
                                     url: '/docs/advanced/proxy/nuxt',
+                                },
+                                {
+                                    name: 'Vercel',
+                                    url: '/docs/advanced/proxy/vercel',
                                 },
                             ],
                         },
