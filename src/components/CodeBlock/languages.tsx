@@ -227,6 +227,10 @@ const languageMap: LanguageMap = {
         language: 'javascript',
         label: 'Astro',
     },
+    flutter: {
+        language: 'dart',
+        label: 'Flutter',
+    },
 }
 
 export default languageMap
