@@ -282,7 +282,7 @@ export default function Team({
                                 className="text-red dark:text-yellow block -mt-2 mb-4 text-sm font-bold"
                                 onClick={() => setEditingDescription(true)}
                             >
-                                Edit
+                                Edit mission
                             </button>
                         )}
                         {hasInProgress && !editingDescription && (
