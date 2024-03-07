@@ -80,7 +80,7 @@ const ValidationSchema = (status?: Status) =>
             then: Yup.object().required('Please select a topic'),
             otherwise: Yup.object().notRequired(),
         }),
-        team: Yup.number().required('Please select a team'),
+        team: Yup.object().required('Please select a team'),
         category: Yup.string().when([], {
             is: () => status === 'complete',
             then: Yup.string().required('Please select a type'),
@@ -178,7 +178,7 @@ export default function RoadmapForm({
                               }
                             : null),
                         teams: {
-                            connect: [team],
+                            connect: [team.id],
                         },
                         betaAvailable,
                         milestone,
@@ -232,7 +232,7 @@ export default function RoadmapForm({
                     </div>
                 )}
                 <div className="border-b border-border dark:border-dark">
-                    <TeamSelect value={values.team} onChange={(teamID) => setFieldValue('team', teamID)} />
+                    <TeamSelect value={values.team} onChange={(team) => setFieldValue('team', team)} />
                 </div>
                 {status === 'complete' && (
                     <TopicSelect label="Topic" value={values.topic} setFieldValue={setFieldValue} />

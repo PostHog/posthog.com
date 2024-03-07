@@ -12,7 +12,7 @@ import qs from 'qs'
 import TeamSelect from 'components/TeamSelect'
 
 export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; onSubmit?: () => void }) {
-    const [teamID, setTeamID] = useState<number | null>(null)
+    const [team, setTeam] = useState<any>(null)
     const { getJwt, user } = useUser()
     const [updateCount, setUpdateCount] = useState(0)
     const { handleSubmit, values, setFieldValue, initialValues, submitForm, isSubmitting, resetForm } = useFormik({
@@ -23,9 +23,10 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
             roadmap: false,
             roadmapID: null,
             images: [],
+            impersonate: false,
         },
-        onSubmit: async ({ body, thingOfTheWeek, roadmap, roadmapID, images }) => {
-            if (!teamID) return
+        onSubmit: async ({ body, thingOfTheWeek, roadmap, roadmapID, images, impersonate }) => {
+            if (!team) return
             try {
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
@@ -43,7 +44,7 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
                         data: {
                             thingOfTheWeek,
                             team: {
-                                connect: [teamID],
+                                connect: [team.id],
                             },
                             ...(roadmap && roadmapID
                                 ? {
@@ -72,6 +73,11 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
                             update: {
                                 connect: [updateID],
                             },
+                            ...(impersonate
+                                ? {
+                                      profile: team.attributes.leadProfiles.data[0].id,
+                                  }
+                                : null),
                         },
                     }),
                 }).then((res) => res.json())
@@ -86,7 +92,7 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
 
     const fetchTeam = async () => {
         const {
-            data: [{ id: teamID }],
+            data: [team],
         } = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${qs.stringify(
                 {
@@ -99,7 +105,7 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
                 { encodeValuesOnly: true }
             )}`
         ).then((res) => res.json())
-        setTeamID(teamID)
+        setTeam(team)
     }
 
     useEffect(() => {
@@ -115,7 +121,7 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
                 <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
                     {!teamName && (
                         <div className="border-b border-border dark:border-dark">
-                            <TeamSelect value={teamID} onChange={(teamID) => setTeamID(teamID)} />
+                            <TeamSelect value={team} onChange={(team) => setTeam(team)} />
                         </div>
                     )}
                     <div className="leading-[0]">
@@ -134,23 +140,32 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
                     onChange={(checked) => setFieldValue('thingOfTheWeek', checked)}
                     label="Thing of the week"
                 />
-                <div className="mt-4 mb-6">
-                    <Toggle
-                        checked={values.roadmap}
-                        onChange={(checked) => setFieldValue('roadmap', checked)}
-                        label="This is connected to a roadmap item"
-                    />
-                    {values.roadmap && teamID && (
-                        <div className="border border-border dark:border-dark rounded-md mt-4">
-                            <RoadmapSelect
-                                onChange={(value) => setFieldValue('roadmapID', value)}
-                                value={values.roadmapID}
+                {team && (
+                    <>
+                        <div className="my-4">
+                            <Toggle
+                                checked={values.impersonate}
+                                onChange={(checked) => setFieldValue('impersonate', checked)}
+                                label="Post as team lead"
                             />
                         </div>
-                    )}
-                </div>
+                        <Toggle
+                            checked={values.roadmap}
+                            onChange={(checked) => setFieldValue('roadmap', checked)}
+                            label="This is connected to a roadmap item"
+                        />
+                        {values.roadmap && (
+                            <div className="border border-border dark:border-dark rounded-md mt-4">
+                                <RoadmapSelect
+                                    onChange={(value) => setFieldValue('roadmapID', value)}
+                                    value={values.roadmapID}
+                                />
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
-            <span className="ml-[50px]">
+            <span className="ml-[50px] mt-6 inline-block">
                 <Button loading={isSubmitting} disabled={isSubmitting} type="submit" className="w-[calc(100%_-_50px)]">
                     Post update
                 </Button>
