@@ -56,13 +56,13 @@ const featuresPerRow = 3
 const features = [
     {
         title: 'Top paths',
-        description: "See the most visited pages on your site",
+        description: 'See the most visited pages on your site',
         image: <StaticImage src="../../../../static/images/products/web-analytics/top-paths.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Top referrers',
-        description: "Discover where traffic is coming from",
+        description: 'Discover where traffic is coming from',
         image: <StaticImage src="../../../../static/images/products/web-analytics/top-referrers.jpg" width={420} />,
         border: true,
     },
@@ -118,7 +118,7 @@ const subfeatures = [
 const questions = [
     { question: 'Question #1?' },
     {
-        question: "Question #2?",
+        question: 'Question #2?',
         url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
     },
 ]
@@ -341,7 +341,7 @@ export const ProductWebAnalytics = () => {
                     icon={<IconPieChart />}
                     product={product.capitalized}
                     title="Monitor your website traffic"
-                    description='Finally the Google Analytics replacement – done the PostHog way'
+                    description="Finally the Google Analytics replacement – done the PostHog way"
                 />
 
                 <div className="text-center -mb-24">
@@ -458,46 +458,18 @@ export const ProductWebAnalytics = () => {
                                 }
                             >
                                 <ul>
-                                    <li>
-                                        You need heatmaps or scrollmaps
-                                        <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                        </ul>
-                                    </li>
-                                    <li>Error tracking and alerting</li>
-                                    <li>
-                                        Mobile SDKs (in progress...)
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                    React Native
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                    iOS
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link
-                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
-                                                    external
-                                                >
-                                                    Flutter
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    <li>You _only_ need website analytics</li>
+                                    <li>You don’t need any integrations other than with Google</li>
+                                    <li>You need to migrate data from GA4</li>
+                                    <li>You actually really like GA4 😱</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>
-                                        Interlinking with feature flags and insights
-                                        <ul className="pl-6">
-                                            <li className="text-sm">Jump between them easily</li>
-                                        </ul>
-                                    </li>
-                                    <li>Collaboration, sharing, and embedding exporting recordings</li>
-                                    <li>No limits on how many recordings captured</li>
+                                    <li>You want to do more than just website analytics</li>
+                                    <li>You don't want to spend weeks setting up dashboards</li>
+                                    <li>You need to comply with HIPAA</li>
+                                    <li>It's not GA4</li>
                                 </ul>
                             </VsPostHog>
                         </div>
