@@ -49,17 +49,9 @@ client.capture({
 
 #### Method 2: Set `sendFeatureFlags` to `true`
 
-The `capture()` method has an optional argument `sendFeatureFlags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
+import NodeSetSendFeatureFlagsTrue from "./feature-flags-code-node-set-send-feature-flags-to-true.mdx" 
 
-Note that by doing this, PostHog will make an additional request to fetch feature flag information before capturing the event. So this method is only recommended if you don't mind the extra API call and delay.
-
-```node
-client.capture({
-    distinctId: 'distinct_id_of_your_user',
-    event: 'event_name',
-    sendFeatureFlags: true,
-})
-```
+<NodeSetSendFeatureFlagsTrue />
 
 ### Fetching all flags for a user
 
