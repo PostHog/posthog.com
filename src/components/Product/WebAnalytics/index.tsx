@@ -279,21 +279,22 @@ const PairsWithArray = [
     {
         icon: <IconGraph />,
         product: 'Product analytics',
-        description: 'Jump into a playlist of session recordings directly from any time series in a graph',
+        description: 'Need to go deeper than a dashboard? Building your own insights and HogQL queries from scratch!',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
-        product: 'Feature flags',
-        description: "See which feature flags are enabled for a user's session",
-        url: '/feature-flags',
+        product: 'Session replays',
+        description:
+            "Get more context by watching what users actually do on your site. It's not creepy if you have permission.",
+        url: '/session-replays',
     },
     {
         icon: <IconFlask />,
-        product: 'A/B testing',
+        product: 'Surveys',
         description:
-            'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-        url: '/ab-testing',
+            'Get _even more context_ by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
+        url: '/surveys',
     },
 ]
 
