@@ -458,7 +458,7 @@ export const ProductWebAnalytics = () => {
                                 }
                             >
                                 <ul>
-                                    <li>You _only_ need website analytics</li>
+                                    <li>You _only_ need web analytics, nothing else</li>
                                     <li>You don’t need any integrations other than with Google</li>
                                     <li>You need to migrate data from GA4</li>
                                     <li>You actually really like GA4 😱</li>
@@ -466,7 +466,7 @@ export const ProductWebAnalytics = () => {
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>You want to do more than just website analytics</li>
+                                    <li>You want to do more than just web analytics</li>
                                     <li>You don't want to spend weeks setting up dashboards</li>
                                     <li>You need to comply with HIPAA</li>
                                     <li>It's not GA4</li>
