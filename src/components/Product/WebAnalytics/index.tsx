@@ -160,116 +160,102 @@ const faqs = [
     },
 ]
 
-const comparisonColumnCount = 6
+const comparisonColumnCount = 4
 const comparison = [
     {
-        feature: 'Single-page app support',
+        feature: 'Pre-configured dashboards',
         companies: {
-            Hotjar: true,
-            LogRocket: true,
             Matomo: true,
-            FullStory: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'iOS recordings',
+        feature: 'Visitor and view tracking',
         companies: {
-            Hotjar: false,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">On the roadmap</a>',
-        },
-    },
-    {
-        feature: 'Android recordings',
-        companies: {
-            Hotjar: false,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
-        },
-    },
-    {
-        feature: 'Identity detection',
-        companies: {
-            Hotjar: false,
-            LogRocket: true,
             Matomo: true,
-            FullStory: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Target recordings by URL',
+        feature: 'Session and duration tracking',
         companies: {
-            Hotjar: true,
-            LogRocket: true,
             Matomo: true,
-            FullStory: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Target by sample size',
+        feature: 'Bounce rate tracking',
         companies: {
-            Hotjar: true,
-            LogRocket: false,
             Matomo: true,
-            FullStory: false,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Filter recordings by user or event',
+        feature: 'Breakdown by GeoIP',
         companies: {
-            Hotjar: true,
-            LogRocket: true,
             Matomo: true,
-            FullStory: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Rage-click detection',
+        feature: 'Breakdown by device and browser',
         companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Privacy masking for sensitive content',
-        companies: {
-            Hotjar: true,
-            LogRocket: true,
             Matomo: true,
-            FullStory: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Export recordings',
+        feature: 'Real-time reporting',
         companies: {
-            Hotjar: true,
-            LogRocket: false,
             Matomo: true,
-            FullStory: true,
+            GA4: true,
+            PostHog: false,
+        },
+    },
+    {
+        feature: 'Open source',
+        companies: {
+            Matomo: true,
+            GA4: false,
             PostHog: true,
         },
     },
     {
-        feature: 'Recording retention policy',
+        feature: '1st party cookies',
         companies: {
-            Hotjar: '12 months',
-            LogRocket: '1 month',
-            Matomo: '24 months',
-            FullStory: '1 month',
-            PostHog: 'Up to 3 months',
+            Matomo: true,
+            GA4: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'No-cookie option',
+        companies: {
+            Matomo: true,
+            GA4: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'HIPAA compliance',
+        companies: {
+            Matomo: true,
+            GA4: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'GDPR compliance',
+        companies: {
+            Matomo: true,
+            GA4: false,
+            PostHog: true,
         },
     },
 ]
