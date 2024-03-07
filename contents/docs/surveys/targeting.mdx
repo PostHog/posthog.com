@@ -1,6 +1,9 @@
 ---
 title: Targeting
 ---
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import targetingLight from '../../images/docs/surveys/targeting-options-light-mode.png'
+import targetingDark from '../../images/docs/surveys/targeting-options-dark-mode.png'
 
 ## Survey targeting
 
@@ -13,4 +16,9 @@ When you create a survey, it'll save as a draft until you're ready to launch it.
 
 > All targeting properties behave in a "AND" manner, meaning that a survey will only be shown to a user if _all_ of the above conditions are met.
 
-![Survey targeting](../../images/docs/surveys/targeting-options.png)
+<ProductScreenshot
+    imageLight={targetingLight} 
+    imageDark={targetingDark}
+    alt="Survey targeting" 
+    classes="rounded"
+/>

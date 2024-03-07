@@ -6,10 +6,10 @@ availability:
     free: full
     selfServe: full
     enterprise: full
-
 ---
 
-import PersonProfile from '../../images/docs/data/people/people-profile.png'
+import personProfileLight from '../../images/docs/data/people/person-profile-light-mode.png'
+import personProfileDark from '../../images/docs/data/people/person-profile-dark-mode.png'
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=295"
@@ -27,7 +27,8 @@ PostHog tracks user behavior, whether or not the user is logged in and identifia
 Clicking on a user opens their profile and shows all their properties.
 
 <ProductScreenshot
-    imageLight={PersonProfile}
+    imageLight={personProfileLight}
+    imageDark = {personProfileDark}
     alt="Person profile" 
     classes="rounded"
 />
