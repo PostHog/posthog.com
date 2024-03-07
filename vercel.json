@@ -1212,6 +1212,6 @@
         { "source": "/handbook/small-teams/pipeline", "destination": "/teams/pipeline" },
         { "source": "/handbook/small-teams/web-analytics", "destination": "/teams/web-analytics" },
         { "source": "/handbook/small-teams/people-ops", "destination": "/teams/people" },
-        { "source": "/self-host", "destination": "/blog/sunsetting-helm-support-posthog" }
+        { "source": "/self-host", "destination": "/docs/self-host" }
     ]
 }
