@@ -46,17 +46,9 @@ posthog.capture(
 
 #### Method 2: Set `send_feature_flags` to `true`
 
-The `capture()` method has an optional argument `send_feature_flags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
+import PythonSetSendFeatureFlagsTrue from "./feature-flags-code-python-set-send-feature-flags-to-true.mdx" 
 
-Note that by doing this, PostHog will make an additional request to fetch feature flag information before capturing the event. So this method is only recommended if you don't mind the extra API call and delay.
-
-```python
-posthog.capture(
-    'distinct_id_of_your_user',
-    'event_name',
-    send_feature_flags=True
-)
-```
+<PythonSetSendFeatureFlagsTrue />
 
 ### Fetching all flags for a user
 
