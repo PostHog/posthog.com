@@ -1,0 +1,555 @@
+---
+title: The best Smartlook alternatives & competitors, compared
+date: 2024-03-07
+author: ["andy-vandervell"]
+rootpage: /blog
+featuredImage: ../images/blog/hotjar-alternatives/hotjar-alternatives.png
+featuredImageType: full
+category: General
+tags:
+ - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+## The best Smartlook alternatives & competitors, compared
+
+### 1. PostHog
+
+**Founded:** 2020
+**Similar to:** LogRocket, Mixpanel
+**Typical users:** Engineers and product teams
+**Typical customers:** Mid-size B2B/B2C companies and startups
+
+### What is PostHog?
+
+[**PostHog**](https://posthog.com/) (that's us :wave:) is an all-in-one platform for session replay, product analytics, feature flags, A/B testing, and user surveys – everything you need to understand your users. This means it's not just an alternative to Smartlook, but also tools like [**Hotjar**](https://posthog.com/blog/best-hotjar-alternatives) and [**LaunchDarkly**](https://posthog.com/blog/best-launchdarkly-alternatives).
+
+According to [**BuiltWith**](https://trends.builtwith.com/analytics/PostHog), as of February 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. [**Smartlook**](https://trends.builtwith.com/analytics/Smartlook) is used by 3,099 of the top 1 million websites (0.31%). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as Webshare, AssemblyAI, and Purplewave.
+
+#### Key features
+
+**Session replays:** Including event timelines, console logs, network activity.
+**Heatmaps:** Visualize user and rage clicks anywhere on your site.
+**Product analytics:** Analyze funnels, user paths, retention, and trends.
+**Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests.
+**Surveys:** Run customer satisfaction, NPS, and PMF surveys.
+
+## How does PostHog compare to Smartlook?
+
+PostHog has more features than Smartlook. Both have key features like single snippet installation, user segmentation, and user privacy options, but PosHog has A/B testing, feature flags, and surveys.
+
+TABLE GOES HERE
+
+## Why do companies use PostHog?
+
+According to [**reviews on G2**](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It replaces multiple tools:** PostHog can replace Smartlook (session replay and surveys), [**Google Analytics**](https://posthog.com/blog/posthog-vs-ga4), and [**LaunchDarkly**](https://posthog.com/blog/posthog-vs-launchdarkly) (feature flags and A/B testing). This simplifies workflows and ensures all their data is in one place.
+
+2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [**generous free tier**](https://posthog.com/pricing). Companies eligible for [**PostHog for Startups**](https://posthog.com/startups) also get an additional $50k in credits.
+
+3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
+
+## Bottom line
+
+PostHog has more features and more powerful tools than Smartlink. And being self-serve with a generous free tier makes it an ideal alternative to try out. Sure, there’s some extra complexity, but having all your data in one place, with powerful analytics tools, is a major advantage.
+
+# 2. Amplitude
+
+**Founded:** 2012
+**Most similar to:** PostHog, LogRocket
+**Typical users:** Product managers, data analysts, marketing teams
+**Typical customers:** Mid-size and large enterprises
+
+## What is Amplitude?
+
+[**Amplitude**](https://posthog.com/blog/posthog-vs-amplitude) was one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it’s also added A/B testing and a customer data platform.
+
+## Key features
+
+**Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+**A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
+**Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
+**AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
+
+## How does Amplitude compare to Smartlook?
+
+One of the biggest downsides of Amplitude is its lack of autocapture. It also doesn’t have heatmaps though recently added session replay.
+
+
+
+
+Amplitude
+Smartlook
+Self-serve
+Y
+Y
+Fast implementation
+Y
+Y
+Product analytics
+Y
+Y
+Autocapture
+N
+Y
+Funnels and journey maps
+Y
+Y
+Group analytics
+Y
+N
+User segmenting
+Y
+Y
+Session replay
+Y
+Y
+Heatmaps
+N
+Y
+A/B testing
+Y
+N
+User privacy options
+Y
+Y
+Open source
+N
+N
+
+
+## How popular is Amplitude?
+
+According to [**BuiltWith**](https://trends.builtwith.com/analytics/Amplitude), as of March 2024, 10,591 of the top million sites use Amplitude. 3,099 of the top 1 million websites use Smartlook.
+
+## Why do companies use Amplitude?
+
+According to G2 reviews, people who use Amplitude appreciate three key aspects:
+
+1. **Simple to use:** Amplitude makes it easy for non-technical users to get insights about their product and make improvements. Amplitude is built for users like product managers and marketers, making it a popular choice for them.
+
+2. **Built-in A/B testing:** Unlike FullStory, Amplitude offers integrated experimentation features. This enables companies to run experiments on existing cohorts, and then analyze the data in a single place.
+
+3. **Become data-driven:** Amplitude users appreciate it helps them become data-driven. It becomes easy to add data, visualize it, and make decisions. It makes data accessible to them.
+
+## Bottom line
+
+Amplitude is popular, especially among large enterprise customers, but it lacks several key features, including autocapture, heatmaps, and session replay.
+
+# 3. Heap
+
+**Founded:** 2013
+**Most similar to:** FullStory, PostHog
+**Typical users:** Product and marketing teams
+**Typical customers:** B2C SaaS and ecommerce companies who want to monitor and improve user experience.
+
+## What is Heap?
+
+[**Heap**](https://posthog.com/blog/best-heap-alternatives) describes itself as a digital insights platform. This means Heap offers both product analytics and session replay, and supports marketing use cases with multi-touch attribution.
+
+Contentsquare, a marketing and ecommerce analytics firm, [**acquired Heap in September**](https://contentsquare.com/heap/) 2023 and announced plans to integrate the two products.
+
+## Key features
+
+**Event autocapture:** Frees product teams from relying on engineers to instrument all events. Heap also has a visual editor that lets teams tag on-page events for analysis.
+**Session replay:** This lacks the debugging tools typical in most replay tools, but Heap still lets you replay sessions for qualitative insights.
+**Heatmaps:** See where users click, what point they scroll to, and the areas that get the most attention.
+**Analysis suggestions:** Advanced data science tools help uncover hidden interactions, friction points, and paths.
+**Managed ETL:** Connect to data warehouses so you can combine your analytics with other sources and get a fuller picture of the entire user journey.
+
+## How does Heap compare to Smartlook?
+
+
+
+
+Heap
+Smartlook
+Self-serve
+Y
+Y
+Fast implementation
+Y
+Y
+Product analytics
+Y
+Y
+Autocapture
+Y
+Y
+Funnels and journey maps
+Y
+Y
+Group analytics
+Y
+N
+User segmenting
+Y
+Y
+Session replay
+Y
+Y
+Heatmaps
+Y
+Y
+A/B testing
+N
+N
+User privacy options
+Y
+Y
+Open source
+N
+N
+
+
+## How popular is Heap?
+
+According to [**BuiltWith**](https://trends.builtwith.com/analytics/Heap), as of March 2024, 4,016 of the top million websites use Heap. 3,099 use Smartlook.
+
+## Why do companies use Heap?
+
+According to G2 reviews, companies enjoy these three areas of Heap:
+
+**Autocapture:** Non-technical users love how easy autocapture makes tracking on their site. Along with the element data included, this provides loads of useful analytics data.
+**Simple setup:** Heap does not take a big technical effort to set up. Users can add a single script, begin collecting data, and easily visualize that data through user paths, funnels, and session replays.
+**Streamlining analysis:** By having analytics and session replay data in one place, Heap makes it easy to understand the app and site usage. This replaces interviews or user testing and makes the development cycle faster.
+
+## Bottom line
+
+Heap and Smartlook have similar feature sets. Both are self-serve, though neither are open source. Heap’s acquisition by ContentSquare has its future up in the air.
+
+# 4. Glassbox
+
+**Founded:** 2010
+**Most similar to:** FullStory, PostHog
+**Typical users:** Business analysts, product support, marketers
+**Typical customers:** Enterprise B2C companies, retail, and financial services
+
+## What is Glassbox?
+
+Glassbox is a session replay and analytics platform with a particular focus on mobile apps and ecommerce use cases. Customers include Danone, Air Canada, and UK retailer Sainsbury's. 
+
+The company predominantly provides "digital experience intelligence" to business analysts and support teams in enterprise B2C companies.
+
+## Key features
+
+**Session replay: Watch and analyze user sessions on web and mobile apps.
+**Product analytics:** Understand user paths and pain points.
+**Performance analytics:** Track app performance and its impact on conversion rates.
+**Click, scroll, and heatmaps:** Understand where and how users interact with your app.
+**User feedback:** Collect satisfaction and user feedback on the app experience.
+
+## How does Glassbox compare to Smartlook?
+
+Glassbox and Smartlook share many of the same features, but Glassbox is not self-serve and implementation isn’t as straightforward as it should be.
+
+
+
+
+Glassbox
+Smartlook
+Self-serve
+N
+Y
+Fast implementation
+N
+Y
+Product analytics
+Y
+Y
+Autocapture
+Y
+Y
+Funnels and journey maps
+Y
+Y
+Group analytics
+N
+N
+User segmenting
+Y
+Y
+Session replay
+Y
+Y
+Heatmaps
+Y
+Y
+A/B testing
+N
+N
+User privacy options
+Y
+Y
+Open source
+N
+N
+
+
+## How popular is Glassbox?
+
+As of March 2024, just 393 of the top 1 million websites use Glassbox according to [**BuiltWith**](https://trends.builtwith.com/analytics/GlassBox), though the company’s focus on mobile apps isn’t reflected in this number. 3,099 use Smartlook.
+
+## Why do companies use Glassbox?
+
+According to G2 reviews, customers use Glassbox for:
+
+**Session replay and error analysis:** Glassbox is best known for its session replay features, so this is the most popular use case. Customers use Glassbox to analyze user journeys and identify app-breaking bugs.
+**Heatmap and funnel analysis:** Users like the heatmaps feature, which lets them see user preferences on key pages. They combine this with paths and funnels to see the entire journey.
+**Fixing low conversion and abandonment:** Glassbox is popular with online retailers, who use it to solve issues with conversion and basket abandonment.
+
+## Bottom line
+
+Glassbox has many of the same features as Smartlook and has a deeper focus on mobile apps. The lack of self-serve might put some people off.
+
+# 5. Pendo
+
+**Founded:** 2013
+**Most similar to:** PostHog, Hotjar
+**Typical users:** Product managers and customer success teams
+**Typical customers:** Small and mid-market B2C apps
+
+## What is Pendo?
+
+Pendo describes itself as a product experience platform. In addition to product analytics, it has session replay, in-app guides, user feedback, and product validation tools.
+
+## Key features
+
+**Product analytics:** Funnels, trends, and retention analysis with event autocapture.
+**In-app guides:** Deliver personalized guidance to customers right inside your app.
+**User feedback:** Capture and analyze customer feedback at scale.
+**Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
+
+## How does Pendo compare to Smartlook?
+
+Pendo’s lack of autocapture is a major drawback, though its focus on qualitative feedback through in-app guides and product planning will appeal to many.
+
+
+
+Pendo
+Smartlook
+Self-serve
+Y
+Y
+Fast implementation
+Y
+Y
+Product analytics
+Y
+Y
+Autocapture
+N
+Y
+Funnels and journey maps
+Y
+Y
+Group analytics
+N
+N
+User segmenting
+Y
+Y
+Session replay
+Y
+Y
+Heatmaps
+Y
+Y
+A/B testing
+N
+N
+User privacy options
+Y
+Y
+Open source
+N
+N
+
+
+## How popular is Pendo?
+
+According to data from BuiltWith, as of March 2024, 3,400 of the top million websites use Pendo. 3,099 use Smartlook.
+
+## Why do companies use Pendo?
+
+According to G2 reviews, customers use Pendo for:
+
+**Customer support and feedback:** Users value Pendo as a tool for customer support and feedback collection. They use Pendo's feedback features to gather qualitative data and feed that into Pendo's validation and roadmap features.
+**Improving onboarding:** Combining Pendo's in-app guides and analytics features makes it easy for non-technical users to experiment with new onboarding flows, improving user adoption.
+**Product planning:** Customers use Pendo's data tools, product validation, and roadmap features to align internal teams and stakeholders on product development.
+
+## Bottom line
+
+Pedro and Smartlook have many of the same features, but the lack of autocapture is a big downside. Pendo might be a good alternative if you specifically want its customer feedback features.
+
+# 6. LogRocket
+
+**Founded:** 2016
+**Similar to:** PostHog, Smartlook
+**Typical users:** Product managers, engineers, support teams
+**Typical customers:** B2B SaaS, B2C retailers
+
+## What is LogRocket?
+
+LogRocket combines product analytics, error tracking, session replay, and performance monitoring into one platform. It focuses on helping product managers, engineers, and support teams identify and fix issues.
+
+## Key features
+
+**Session replay:** Understand exactly what people are doing on your site. See the screens they visit, places they click, as well as console and network logs, errors, and performance data.
+**Error tracking:** Identify and triage the most impactful issues with JavaScript and network errors as well as stack traces.
+**Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+**Heatmaps:** See what people are clicking on, where they are spending their time, and how far they scroll.
+**Performance monitoring:** Monitor frontend performance such as web vitals, CPU and memory usage, and network speed.
+
+## How does LogRocket compare to Smartlook?
+
+LogRocket matches many of Smartlook's features and has a strong focus on error and performance tracking.
+
+
+
+
+LogRocket
+Smartlook
+Self-serve
+Y
+Y
+Fast implementation
+Y
+Y
+Product analytics
+Y
+Y
+Autocapture
+Y
+Y
+Funnels and journey maps
+Y
+Y
+Group analytics
+N
+N
+User segmenting
+Y
+Y
+Session replay
+Y
+Y
+Heatmaps
+Y
+Y
+A/B testing
+N
+N
+User privacy options
+Y
+Y
+Open source
+N
+N
+
+
+According to [**BuiltWith**](https://trends.builtwith.com/widgets/LogRocket), as of March 2024, 1,132 of the top million sites use LogRocket. 3,099 use Smartlook.
+
+Why do companies use LogRocket?
+
+According to G2 reviews, customers use LogRocket for:
+
+**Identifying problems:** LogRocket's combination of error tracking, performance monitoring, and session replay makes it uniquely powerful at finding bugs and issues. Unlike other tools, it uncovers both user and software issues.
+**Improves user experience:** LogRocket seems to succeed at their goal of helping users fix issues. Reviewers find it provides all the tools to improve their user experience.
+**High usability:** LogRocket provides a lot of functionality out of the box. It captures the details users need, provides useful visualizations, and automatically triages some issues.
+
+## Bottom line
+
+LogRocket and Smartlook have very similar feature sets. Both offer self-serve and have a range of tools to try out. They’re both good choices for companies looking for comprehensive analytics tools.
+
+# 7. OpenReplay
+
+**Founded:** 2017
+**Similar to:** LogRocket, Hotjar
+**Typical users:** Developers
+**Typical customers:** Privacy-conscious companies
+
+# 8. Hotjar
+
+**Founded:** 2014
+**Most similar to:** Pendo, PostHog
+**Typical users:** Product designers, researchers, and marketers
+**Typical customers:** Ecommerce and content-driven sites
+
+## What is Hotjar?
+
+Hotjar is a tool for understanding user behavior. It provides heatmaps, replays, feedback, and interviews to capture and display the qualitative aspects of your site and app. Teams use it to discover and address pain points on their site and app, which helps them improve customer experiences.
+
+## Key features
+
+**Heatmaps:** See what parts of your pages get attention and how far down the page users get.
+**Recordings:** Replay real user sessions and see what they see; discover hidden friction.
+**Feedback:** Learn what your users are thinking. Find out their likes, dislikes, and satisfaction.
+**Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+**Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
+
+## How does Hotjar compare to Smartlook?
+
+Smartlook has a lot more features than Hotjar and, as it’s free to try, could be a great alternative to try out if you’re looking for more than Hotjar offers.
+
+
+
+Hotjar
+Smartlook
+Self-serve
+Y
+Y
+Fast implementation
+Y
+Y
+Product analytics
+N
+Y
+Autocapture
+N
+Y
+Funnels and journey maps
+N
+Y
+Group analytics
+N
+N
+User segmenting
+Y
+Y
+Session replay
+Y
+Y
+Heatmaps
+Y
+Y
+A/B testing
+N
+N
+User privacy options
+Y
+Y
+Open source
+N
+N
+
+
+
+## How popular is Hotjar?
+
+According to BuiltWith, as of March 2024, Hotjar is used by 72,048 of the top 1 million websites. 3,099 use Smartlook.
+
+## Why do companies use Hotjar?
+
+According to G2 reviews, people like Hotjar because:
+
+**Insights on user behavior:** Hotjar captures what people are doing, where their attention is going, and how they are spending their time. Users love the insights they get with Hotjar's tools.
+**Simple for non-technical users:** Hotjar is easy to set up. Non-technical roles like designers, marketers, and product managers find it simple to use. The interface helps make data clear.
+**Heatmaps and scrollmaps:** Seeing clicks and scroll depth works well and creates actionable insights for design, marketing, and content teams. Helps improve UX and page designs.
+
+## Bottom line
+
+Hotjar is easy to use, and a good option for non-technical users, but lacks features that are commonplace amongst its competitors.
