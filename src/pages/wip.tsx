@@ -13,6 +13,9 @@ import RichText from 'components/Squeak/components/RichText'
 import { useFormik } from 'formik'
 import { CallToAction } from 'components/CallToAction'
 import transformValues from 'components/Squeak/util/transformValues'
+import { Question } from 'components/Squeak'
+import Link from 'components/Link'
+import slugify from 'slugify'
 
 const Update = ({ body, questionID, fetchUpdates }) => {
     const { getJwt, user } = useUser()
@@ -44,7 +47,7 @@ const Update = ({ body, questionID, fetchUpdates }) => {
         },
     })
     return (
-        <li className={editing ? 'list-none' : ''}>
+        <li>
             {editing ? (
                 <div>
                     <form onSubmit={handleSubmit}>
@@ -69,9 +72,9 @@ const Update = ({ body, questionID, fetchUpdates }) => {
                 </div>
             ) : (
                 <>
-                    <Markdown>{body}</Markdown>
+                    <Question id={questionID} />
                     {user?.role?.type === 'moderator' && (
-                        <button onClick={() => setEditing(true)} className="block text-red font-bold">
+                        <button onClick={() => setEditing(true)} className="block text-red font-bold mt-4">
                             Edit
                         </button>
                     )}
@@ -144,8 +147,17 @@ export default function TeamUpdates() {
                             {Object.keys(updates).map((teamName) => {
                                 return (
                                     <li key={teamName}>
-                                        <h2>{teamName}</h2>
-                                        <ul>
+                                        <h2>
+                                            <Link
+                                                className="text-inherit"
+                                                to={`/teams/${slugify(teamName.toLowerCase().replace('ops', ''), {
+                                                    remove: /and/,
+                                                })}`}
+                                            >
+                                                {teamName}
+                                            </Link>
+                                        </h2>
+                                        <ul className="list-none m-0 p-0">
                                             {updates[teamName].map((update) => {
                                                 const {
                                                     id,
