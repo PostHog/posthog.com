@@ -26,7 +26,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 [**PostHog**](https://posthog.com/) (that's us :wave:) is an all-in-one platform for session replay, product analytics, feature flags, A/B testing, and user surveys – everything you need to understand your users. This means it's not just an alternative to Smartlook, but also tools like [**Hotjar**](https://posthog.com/blog/best-hotjar-alternatives) and [**LaunchDarkly**](https://posthog.com/blog/best-launchdarkly-alternatives).
 
-According to [**BuiltWith**](https://trends.builtwith.com/analytics/PostHog), as of February 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. [**Smartlook**](https://trends.builtwith.com/analytics/Smartlook) is used by 3,099 of the top 1 million websites (0.31%). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as Webshare, AssemblyAI, and Purplewave.
+According to [**BuiltWith**](https://trends.builtwith.com/analytics/PostHog), as of February 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. [**Smartlook**](https://trends.builtwith.com/analytics/Smartlook) is used by 3,099 of the top 1 million websites (0.31%). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as Hasura and Assembly AI.
 
 #### Key features
 
@@ -34,7 +34,7 @@ According to [**BuiltWith**](https://trends.builtwith.com/analytics/PostHog), as
 **Heatmaps:** Visualize user and rage clicks anywhere on your site.
 **Product analytics:** Analyze funnels, user paths, retention, and trends.
 **Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests.
-**Surveys:** Run customer satisfaction, NPS, and PMF surveys.
+**Surveys:** Run customer satisfaction, NPS, and PMF surveys
 
 ## How does PostHog compare to Smartlook?
 
