@@ -307,7 +307,7 @@ LogRocket combines product analytics, error tracking, session replay, and perfor
 
 LogRocket matches many of Smartlook's features and has a strong focus on error and performance tracking.
 
-<ComparisonTable column1="PostHog" column2="Smartlook">
+<ComparisonTable column1="LogRocket" column2="Smartlook">
   <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Fast implementation" description="Single snippet installed to get started fast" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
@@ -338,7 +338,60 @@ According to G2 reviews, people use LogRocket for:
 
 LogRocket and Smartlook have very similar feature sets. Both offer self-serve and have a range of tools to try out. They’re both good choices for companies looking for comprehensive analytics tools.
 
-## 7. Hotjar
+## 7. Contentsquare
+
+**Founded:** 2012
+**Most similar to:** Heap, Glassbox
+**Typical users:** Product managers, ecommerce teams, and marketers
+**Typical customers:** Ecommerce, retail, and finance
+
+### What is Contentsquare?
+
+Contentsquare is an analytics platform that combines heatmaps, customer journey analysis, and frustration scoring to help find and fix issues and friction points. 
+
+### Key features
+
+**Zone-based heatmaps:** Visualize how well each page element is performing based on metrics like attractiveness, engagement, click rate, and conversion.
+**Journey analysis:** See how users move through your website page by page from start to finish and zero in on where people get lost and where drop-offs happen.
+**Session replays:** See how people experience your site or app by capturing every click and scroll.
+**User segmentation:** Segment users into different groups based on demographics and behaviors. Using this data you can then tailor what you're building for specific user groups.
+
+### How does Contentsquare compare to Smartlook?
+
+Contentsquare is popular with large enterprises and has more advanced features, insluding AI-powered analytics reccomendations. Smartlook is a good choice for smaller businesses.
+
+<ComparisonTable column1="Contentsquare" column2="Smartlook">
+  <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Fast implementation" description="Single snippet installed to get started fast" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="User segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize, mask, and block data you don't want or need" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### How popular is Contentsquare?
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Content-Square), as of March 2024, Contentsquare is used by 2,171 of the top 1 million websites. 3,099 use Smartlook.
+
+### Why do companies use Contentsquare?
+
+According to G2 reviews, people like Contentsquare because:
+
+**Data visualization and analysis:** Users like that Contentsquare makes it easy to visualize and analyze large data sets. Advanced features make it easier to identify and fix problems big and small.
+**Improve your UI and UX:** Contentsquare makes it easy to understand the impact of various design elements on a page. This helps developers understand te impact of elements on conversion rate, revenue, and user journeys.
+**Detailed session replays:** Users appreciate being able to match quantitative data with qualitative data, giving them a better understanding of how best to solve problems.
+
+#### Bottom line
+
+From data visualizations, to behavior analysis, and detailed session replays, Contentsquare has a lot to offer, especially for larger companies. Smartlook has a more user-friendly interface, which might appeal to smaller organizations.
+
+## 8. Hotjar
 
 **Founded:** 2014
 **Most similar to:** Pendo, PostHog
