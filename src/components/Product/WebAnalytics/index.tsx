@@ -490,24 +490,24 @@ export const ProductWebAnalytics = () => {
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to use session replays to get a deeper understanding of user behavior"
-                            description="In this tutorial, we focus on the connections session replays have with insights and visualizations. These connections enable deeper exploration and understanding of user behavior."
-                            url="/tutorials/explore-insights-session-recordings"
+                            title="How to create a broken link (404) checker"
+                            description="This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist."
+                            url="/tutorials/broken-link-checker"
                         />
                         <TutorialCard
-                            title="How to use filters + session replays to understand user friction"
-                            description="We’ll explain how to use PostHog’s various filters and features to find relevant session replays quickly."
-                            url="/tutorials/filter-session-recordings"
+                            title="Building a Vue cookie consent banner"
+                            description="To ensure you are compliant with regulations such as GDPR, your app must receive consent to use cookies. One way to do this is with a cookie consent banner, and this tutorial shows you how to build one in Vue, a popular JavaScript framework."
+                            url="/tutorials/vue-cookie-banner"
                         />
                         <TutorialCard
-                            title="How to only record the sessions you want"
-                            description="As you scale, the number of recordings can go beyond what you need. Use PostHog’s configuration options to only record the sessions you want."
-                            url="/tutorials/limit-session-recordings"
+                            title="An introduction to identifying users"
+                            description="Many of the most valuable insights require an accurate understanding of the user using your product. This tutorial goes over the different ways to identify users and recommendations on how to do it better."
+                            url="/tutorials/identifying-users-guide"
                         />
                         <TutorialCard
-                            title="Improve web app performance using PostHog session replays"
-                            description="Learn the important metrics for measuring page load speed and how to identify opportunities to improve performance."
-                            url="/tutorials/performance-metrics"
+                            title="A non-technical guide to PostHog data"
+                            description="You don’t need to be an engineer, but knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user."
+                            url="/tutorials/non-technical-guide-to-data"
                         />
                     </ul>
                 </section>
