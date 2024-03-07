@@ -116,10 +116,26 @@ const subfeatures = [
 ]
 
 const questions = [
-    { question: 'Question #1?' },
     {
-        question: 'Question #2?',
-        url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
+        question: 'How many visitors have I had this week?',
+    },
+    {
+        question: "What's my average bounce rate?",
+    },
+    {
+        question: 'Where in the world are my visitors coming from?',
+    },
+    {
+        question: 'Are my users mostly on mobile, tablet, or desktop?',
+    },
+    {
+        question: "What's my most popular blog post from the last month?",
+    },
+    {
+        question: 'What other websites are sending me the most traffic?',
+    },
+    {
+        question: 'How many visitors are coming back to my site regularly?',
     },
 ]
 
