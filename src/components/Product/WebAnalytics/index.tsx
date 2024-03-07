@@ -514,7 +514,7 @@ export const ProductWebAnalytics = () => {
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
                     <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'session replay').children}
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics').children}
                     />
                 </section>
 
@@ -558,7 +558,7 @@ export const ProductWebAnalytics = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[20]} />
+                    <Questions topicIds={[65]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>
