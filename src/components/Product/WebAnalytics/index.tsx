@@ -482,9 +482,9 @@ export const ProductWebAnalytics = () => {
                             url="/tutorials/broken-link-checker"
                         />
                         <TutorialCard
-                            title="Building a Vue cookie consent banner"
-                            description="To ensure you are compliant with regulations such as GDPR, your app must receive consent to use cookies. One way to do this is with a cookie consent banner, and this tutorial shows you how to build one in Vue, a popular JavaScript framework."
-                            url="/tutorials/vue-cookie-banner"
+                            title="How to use PostHog without cookie banners"
+                            description="Normally, PostHog collects information about your users and stores it in a cookie in the users’ browser. This tutorial explains how to use page memory instead."
+                            url="/tutorials/cookieless-tracking"
                         />
                         <TutorialCard
                             title="An introduction to identifying users"
