@@ -86,32 +86,27 @@ const features = [
     },
 ]
 
-const subfeaturesItemCount = 5
+const subfeaturesItemCount = 4
 const subfeatures = [
     {
-        title: 'Capture sessions without extra code',
-        description: 'Works with PostHog.js',
+        title: 'UTM tracking',
+        description: 'See which campaigns perform best',
         icon: <IconBolt />,
     },
     {
-        title: 'Automatic playlists',
-        description: 'Filter by user behavior or time',
+        title: 'Scroll tracking',
+        description: 'Discover how much users actually read',
         icon: <IconPlaylist />,
     },
     {
-        title: 'Web or mobile session recording',
-        description: 'Web or Android (beta) available',
+        title: 'Bounce tracking',
+        description: 'Find out when users immediately get out of dodge',
         icon: <IconPhone />,
     },
     {
-        title: 'Download recordings',
-        description: 'Retain recordings beyond data retention limits',
-        icon: <IconDownload />,
-    },
-    {
-        title: 'Block sensitive data',
-        description: 'Disable capturing data from any DOM element with CSS',
-        icon: <IconPassword />,
+        title: 'Duration tracking',
+        description: 'Monitor how long users are hanging around',
+        icon: <IconPhone />,
     },
 ]
 
