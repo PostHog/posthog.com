@@ -9,6 +9,77 @@ import { companyMenu } from '../navs'
 import { useUser } from 'hooks/useUser'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import TeamUpdate from 'components/TeamUpdate'
+import RichText from 'components/Squeak/components/RichText'
+import { useFormik } from 'formik'
+import { CallToAction } from 'components/CallToAction'
+import transformValues from 'components/Squeak/util/transformValues'
+
+const Update = ({ body, questionID, fetchUpdates }) => {
+    const { getJwt, user } = useUser()
+    const [editing, setEditing] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const { setFieldValue, values, handleSubmit, submitForm } = useFormik({
+        initialValues: { body: '', images: [] },
+        onSubmit: async ({ body, images }) => {
+            const profileID = user?.profile.id
+            const jwt = await getJwt()
+            if (!profileID || !jwt) return
+            setLoading(true)
+            const transformedValues = await transformValues({ body, images: images ?? [] }, profileID, jwt)
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
+                body: JSON.stringify({
+                    data: {
+                        body: transformedValues.body,
+                    },
+                }),
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+            await fetchUpdates()
+            setLoading(false)
+            setEditing(false)
+        },
+    })
+    return (
+        <li className={editing ? 'list-none' : ''}>
+            {editing ? (
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
+                            <RichText
+                                onSubmit={submitForm}
+                                autoFocus
+                                setFieldValue={setFieldValue}
+                                initialValue={body}
+                                values={values}
+                            />
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <CallToAction disabled={loading} onClick={submitForm} size="md">
+                                Update
+                            </CallToAction>
+                            <button onClick={() => setEditing(false)} className="text-red font-bold text-sm">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            ) : (
+                <>
+                    <Markdown>{body}</Markdown>
+                    {user?.role?.type === 'moderator' && (
+                        <button onClick={() => setEditing(true)} className="block text-red font-bold">
+                            Edit
+                        </button>
+                    )}
+                </>
+            )}
+        </li>
+    )
+}
 
 export default function TeamUpdates() {
     const [loading, setLoading] = useState(true)
@@ -81,15 +152,19 @@ export default function TeamUpdates() {
                                                     attributes: {
                                                         question: {
                                                             data: {
+                                                                id: questionID,
                                                                 attributes: { body },
                                                             },
                                                         },
                                                     },
                                                 } = update
                                                 return (
-                                                    <li key={id}>
-                                                        <Markdown>{body}</Markdown>
-                                                    </li>
+                                                    <Update
+                                                        key={id}
+                                                        questionID={questionID}
+                                                        body={body}
+                                                        fetchUpdates={fetchUpdates}
+                                                    />
                                                 )
                                             })}
                                         </ul>
