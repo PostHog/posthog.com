@@ -56,13 +56,13 @@ const featuresPerRow = 3
 const features = [
     {
         title: 'Top paths',
-        description: "See the most visited pages on your site",
+        description: 'See the most visited pages on your site',
         image: <StaticImage src="../../../../static/images/products/web-analytics/top-paths.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Top referrers',
-        description: "Discover where traffic is coming from",
+        description: 'Discover where traffic is coming from',
         image: <StaticImage src="../../../../static/images/products/web-analytics/top-referrers.jpg" width={420} />,
         border: true,
     },
@@ -118,7 +118,7 @@ const subfeatures = [
 const questions = [
     { question: 'Question #1?' },
     {
-        question: "Question #2?",
+        question: 'Question #2?',
         url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
     },
 ]
@@ -279,21 +279,22 @@ const PairsWithArray = [
     {
         icon: <IconGraph />,
         product: 'Product analytics',
-        description: 'Jump into a playlist of session recordings directly from any time series in a graph',
+        description: 'Need to go deeper than a dashboard? Building your own insights and HogQL queries from scratch!',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
-        product: 'Feature flags',
-        description: "See which feature flags are enabled for a user's session",
-        url: '/feature-flags',
+        product: 'Session replays',
+        description:
+            "Get more context by watching what users actually do on your site. It's not creepy if you have permission.",
+        url: '/session-replays',
     },
     {
         icon: <IconFlask />,
-        product: 'A/B testing',
+        product: 'Surveys',
         description:
-            'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-        url: '/ab-testing',
+            'Get _even more context_ by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
+        url: '/surveys',
     },
 ]
 
@@ -341,7 +342,7 @@ export const ProductWebAnalytics = () => {
                     icon={<IconPieChart />}
                     product={product.capitalized}
                     title="Monitor your website traffic"
-                    description='Finally the Google Analytics replacement – done the PostHog way'
+                    description="Finally the Google Analytics replacement – done the PostHog way"
                 />
 
                 <div className="text-center -mb-24">
@@ -458,46 +459,18 @@ export const ProductWebAnalytics = () => {
                                 }
                             >
                                 <ul>
-                                    <li>
-                                        You need heatmaps or scrollmaps
-                                        <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                        </ul>
-                                    </li>
-                                    <li>Error tracking and alerting</li>
-                                    <li>
-                                        Mobile SDKs (in progress...)
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                    React Native
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                    iOS
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link
-                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
-                                                    external
-                                                >
-                                                    Flutter
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    <li>You _only_ need web analytics, nothing else</li>
+                                    <li>You don’t need any integrations other than with Google</li>
+                                    <li>You need to migrate data from GA4</li>
+                                    <li>You actually really like GA4 😱</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>
-                                        Interlinking with feature flags and insights
-                                        <ul className="pl-6">
-                                            <li className="text-sm">Jump between them easily</li>
-                                        </ul>
-                                    </li>
-                                    <li>Collaboration, sharing, and embedding exporting recordings</li>
-                                    <li>No limits on how many recordings captured</li>
+                                    <li>You want to do more than just web analytics</li>
+                                    <li>You don't want to spend weeks setting up dashboards</li>
+                                    <li>You need to comply with HIPAA</li>
+                                    <li>It's not GA4</li>
                                 </ul>
                             </VsPostHog>
                         </div>
@@ -518,24 +491,24 @@ export const ProductWebAnalytics = () => {
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to use session replays to get a deeper understanding of user behavior"
-                            description="In this tutorial, we focus on the connections session replays have with insights and visualizations. These connections enable deeper exploration and understanding of user behavior."
-                            url="/tutorials/explore-insights-session-recordings"
+                            title="How to create a broken link (404) checker"
+                            description="This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist."
+                            url="/tutorials/broken-link-checker"
                         />
                         <TutorialCard
-                            title="How to use filters + session replays to understand user friction"
-                            description="We’ll explain how to use PostHog’s various filters and features to find relevant session replays quickly."
-                            url="/tutorials/filter-session-recordings"
+                            title="Building a Vue cookie consent banner"
+                            description="To ensure you are compliant with regulations such as GDPR, your app must receive consent to use cookies. One way to do this is with a cookie consent banner, and this tutorial shows you how to build one in Vue, a popular JavaScript framework."
+                            url="/tutorials/vue-cookie-banner"
                         />
                         <TutorialCard
-                            title="How to only record the sessions you want"
-                            description="As you scale, the number of recordings can go beyond what you need. Use PostHog’s configuration options to only record the sessions you want."
-                            url="/tutorials/limit-session-recordings"
+                            title="An introduction to identifying users"
+                            description="Many of the most valuable insights require an accurate understanding of the user using your product. This tutorial goes over the different ways to identify users and recommendations on how to do it better."
+                            url="/tutorials/identifying-users-guide"
                         />
                         <TutorialCard
-                            title="Improve web app performance using PostHog session replays"
-                            description="Learn the important metrics for measuring page load speed and how to identify opportunities to improve performance."
-                            url="/tutorials/performance-metrics"
+                            title="A non-technical guide to PostHog data"
+                            description="You don’t need to be an engineer, but knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user."
+                            url="/tutorials/non-technical-guide-to-data"
                         />
                     </ul>
                 </section>
