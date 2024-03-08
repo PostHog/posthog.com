@@ -115,6 +115,7 @@ const query = graphql`
                     slug: {
                         in: [
                             "/docs/libraries/angular"
+                            "/docs/libraries/astro"
                             "/docs/libraries/docusaurus"
                             "/docs/libraries/gatsby"
                             "/docs/libraries/google-tag-manager"

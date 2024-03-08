@@ -1139,7 +1139,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Astro',
-                            url: '/tutorials/astro-analytics',
+                            url: '/docs/libraries/astro',
                         },
                         {
                             name: 'Django',

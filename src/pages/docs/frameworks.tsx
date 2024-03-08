@@ -15,7 +15,7 @@ export const quickLinks = [
     },
     {
         name: 'Astro',
-        to: '/tutorials/astro-analytics',
+        url: '/docs/libraries/astro',
     },
     {
         name: 'Django',
