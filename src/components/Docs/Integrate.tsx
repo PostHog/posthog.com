@@ -122,6 +122,7 @@ const query = graphql`
                             "/docs/libraries/google-tag-manager"
                             "/docs/libraries/next-js"
                             "/docs/libraries/nuxt-js"
+                            "/docs/libraries/remix"
                             "/docs/libraries/retool"
                             "/docs/libraries/rudderstack"
                             "/docs/libraries/segment"

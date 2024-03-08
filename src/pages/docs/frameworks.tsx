@@ -55,7 +55,7 @@ export const quickLinks = [
     },
     {
         name: 'Remix',
-        to: '/tutorials/remix-analytics',
+        to: '/docs/libraries/remix',
     },
     {
         name: 'Retool',
