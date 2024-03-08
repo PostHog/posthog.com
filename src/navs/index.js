@@ -1185,7 +1185,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Remix',
-                            url: '/docs/libraries/remix-analytics',
+                            url: '/docs/libraries/remix',
                         },
                         {
                             name: 'Retool',
