@@ -117,6 +117,7 @@ const query = graphql`
                             "/docs/libraries/angular"
                             "/docs/libraries/astro"
                             "/docs/libraries/docusaurus"
+                            "/docs/libraries/framer"
                             "/docs/libraries/gatsby"
                             "/docs/libraries/google-tag-manager"
                             "/docs/libraries/next-js"

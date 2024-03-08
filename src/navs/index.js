@@ -1158,7 +1158,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Framer',
-                            url: '/tutorials/framer-analytics',
+                            url: '/docs/libraries/framer',
                         },
                         {
                             name: 'Gatsby',

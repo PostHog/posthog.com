@@ -31,7 +31,7 @@ export const quickLinks = [
     },
     {
         name: 'Framer',
-        to: '/tutorials/framer-analytics',
+        url: '/docs/libraries/framer',
     },
     {
         name: 'Gatsby',
