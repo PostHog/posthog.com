@@ -114,6 +114,7 @@ const query = graphql`
                 fields: {
                     slug: {
                         in: [
+                            "/docs/libraries/angular"
                             "/docs/libraries/docusaurus"
                             "/docs/libraries/gatsby"
                             "/docs/libraries/google-tag-manager"
@@ -131,7 +132,7 @@ const query = graphql`
                     }
                 }
             }
-            sort: { fields: fields___pageViews, order: DESC }
+            sort: { fields: slug, order: ASC }
         ) {
             nodes {
                 ...framework

@@ -11,7 +11,7 @@ import List from 'components/List'
 export const quickLinks = [
     {
         name: 'Angular',
-        to: '/tutorials/angular-analytics',
+        to: '/docs/libraries/angular',
     },
     {
         name: 'Astro',
