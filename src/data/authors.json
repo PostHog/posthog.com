@@ -26,6 +26,15 @@
         "profile_id": 56
     },
     {
+        "handle": "james-temperton",
+        "name": "James Temperton",
+        "role": "Content Marketer",
+        "image": "https://res.cloudinary.com/dmukukwp6/image/upload/v1709846457/jamest_ae48f6c8c0.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/jtemperton",
+        "profile_id": 2303
+    },
+    {
         "handle": "joe-martin",
         "name": "Joe Martin",
         "role": "Product Marketer",
