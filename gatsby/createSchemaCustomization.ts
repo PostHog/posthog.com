@@ -3,6 +3,9 @@ import { GatsbyNode } from 'gatsby'
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const { createTypes } = actions
     createTypes(`
+	type ShopifyProduct implements Node {
+		imageProducts: [ShopifyProduct]
+	}
     type Mdx implements Node {
       frontmatter: Frontmatter
       avatar: File @link(from: "avatar___NODE")

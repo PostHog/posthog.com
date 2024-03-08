@@ -91,6 +91,16 @@ export const query = graphql`
                         }
                     }
                     status
+                    imageProducts {
+                        handle
+                        featuredImage {
+                            localFile {
+                                childImageSharp {
+                                    gatsbyImageData
+                                }
+                            }
+                        }
+                    }
                     featuredMedia {
                         preview {
                             image {
