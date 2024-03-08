@@ -4,6 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
 To use Cloudflare for reverse proxying, make sure that you're logged into your Cloudflare account, and that you've added your domain (called "website" in Cloudflare) to the account.
 
 There are two ways to do this:
@@ -23,7 +27,8 @@ From the root of the Cloudflare dashboard, go to "Workers & Pages" > "Overview" 
 Click "Edit code" once the new worker has been saved following "Deploy". (And if you're already on the worker page, click "Quick edit".) You should now be seeing a code editor for the worker. Just replace all the existing content with this proxying code:
 
 ```JavaScript
-const API_HOST = "us-proxy-direct.i.posthog.com" // Change to "eu-proxy-direct.i.posthog.com" for the EU region
+const API_HOST = "us.i.posthog.com" // Change to "eu.i.posthog.com" for the EU region
+const ASSET_HOST = "us-assets.i.posthog.com" // Change to "eu-assets.i.posthog.com" for the EU region
 
 async function handleRequest(request, ctx) {
   const url = new URL(request.url)
@@ -41,7 +46,7 @@ async function handleRequest(request, ctx) {
 async function retrieveStatic(request, pathname, ctx) {
   let response = await caches.default.match(request)
   if (!response) {
-      response = await fetch(`https://${API_HOST}${pathname}`)
+      response = await fetch(`https://${ASSET_HOST}${pathname}`)
       ctx.waitUntil(caches.default.put(request, response.clone()))
   }
   return response
