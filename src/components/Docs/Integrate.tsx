@@ -129,6 +129,7 @@ const query = graphql`
                             "/docs/libraries/sentry"
                             "/docs/libraries/slack"
                             "/docs/libraries/shopify"
+                            "/docs/libraries/svelte"
                             "/docs/libraries/vue-js"
                             "/docs/libraries/wordpress"
                         ]

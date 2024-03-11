@@ -249,7 +249,7 @@ We can set this up by creating one more file, a `+layout.svelte` file in `src/ro
 <slot></slot>
 ```
 
-To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.svelte` to set `capture_pageview` and `capture_pageleave` to false.
+To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.js` to set `capture_pageview` and `capture_pageleave` to false.
 
 ```js
 // src/routes/+layout.js

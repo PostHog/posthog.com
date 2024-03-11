@@ -1213,7 +1213,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Svelte',
-                            url: '/tutorials/svelte-analytics',
+                            url: '/docs/libraries/svelte',
                         },
                         {
                             name: 'Vue.js',

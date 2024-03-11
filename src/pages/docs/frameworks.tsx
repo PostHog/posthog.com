@@ -83,7 +83,7 @@ export const quickLinks = [
     },
     {
         name: 'Svelte',
-        to: '/tutorials/svelte-analytics',
+        to: '/docs/libraries/svelte',
     },
     {
         name: 'Vue.js',

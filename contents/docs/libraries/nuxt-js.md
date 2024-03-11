@@ -104,7 +104,7 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in `[useAsyncData](https://nuxt.com/docs/api/composables/use-async-data)`:
+3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in [`useAsyncData(https://nuxt.com/docs/api/composables/use-async-data)]`:
 
 ```vue file=app.vue
 <!-- ...rest of code -->
