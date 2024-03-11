@@ -1,12 +1,14 @@
 ---
-title: "Startup Spotlight: Inlang"
+title: 'Startup Spotlight: Inlang'
 date: 2023-05-26
-author: ["joe-martin"]
+author:
+  - joe-martin
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/startup_inlang.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/startup_inlang.jpg
 featuredImageType: full
 category: Startups
 ---

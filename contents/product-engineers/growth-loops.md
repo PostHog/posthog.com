@@ -3,7 +3,8 @@ date: 2023-12-18
 title: How successful startups use growth loops (with examples)
 author:
   - ian-vanagas
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 tags:
   - Product analytics

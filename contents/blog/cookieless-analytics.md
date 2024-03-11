@@ -9,7 +9,8 @@ showTitle: true
 hideAnchor: true
 author:
   - marcus-hyett
-featuredImage: ../images/blog/cookieless-analytics.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/cookieless-analytics.png
 featuredImageType: full
 category: General
 tags:

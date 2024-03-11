@@ -1,9 +1,10 @@
 ---
 date: 2024-02-13
-title: "Product engineer vs software engineer: How are they different?"
+title: 'Product engineer vs software engineer: How are they different?'
 author:
   - ian-vanagas
-featuredImage: ../images/blog/product-engineer.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer.jpg
 featuredImageType: full
 category: Engineering
 tags:

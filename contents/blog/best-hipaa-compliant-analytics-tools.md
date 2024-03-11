@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
 featuredImageType: full
 category: General
 tags:

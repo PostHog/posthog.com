@@ -1,9 +1,10 @@
 ---
 date: 2023-05-09
-title: "Retention rate vs churn rate: An intro to churn analysis"
+title: 'Retention rate vs churn rate: An intro to churn analysis'
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 tags:
   - Product analytics

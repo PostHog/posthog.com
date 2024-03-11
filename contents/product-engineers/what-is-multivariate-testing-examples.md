@@ -1,15 +1,17 @@
 ---
-title: "Multivariate testing, explained (with examples)"
+title: 'Multivariate testing, explained (with examples)'
 date: 2023-11-16
-author: ['lior-neu-ner']
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 tags:
   - Growth engineering
   - Product engineers
   - AB testing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 ## What is multivariate testing?

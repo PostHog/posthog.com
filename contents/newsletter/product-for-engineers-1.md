@@ -1,15 +1,17 @@
 ---
 date: 2023-03-14
-title: "What we've learned about talking to users"
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/newsletter-hog.png
+title: What we've learned about talking to users
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/newsletter-hog.png
 featuredImageType: full
 tags:
   - Product engineers
   - User research
 crosspost:
   - Product engineers
-  - Blog  
+  - Blog
 ---
 
 Welcome to our new newsletter, Product for Engineers. We launched it because (1) there’s a real dearth of resources for engineers (and technical founders) who want to level-up their product skills; and (2) we believe embracing product engineering (i.e. engineers who do product) is a vital ingredient for successful startups.

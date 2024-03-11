@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - lottie-coxon
-featuredImage: ../images/blog/blog-hedgehog-design.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/blog-hedgehog-design.png
 featuredImageType: full
 category: Inside PostHog
 tags:

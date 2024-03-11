@@ -1,16 +1,18 @@
 ---
 date: 2023-08-09
-title: "How to start a growth team (as an engineer)"
-author: ['lior-neu-ner']
-featuredImage: ../images/blog/athlete-hog.jpeg
+title: How to start a growth team (as an engineer)
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/athlete-hog.jpeg
 featuredImageType: full
-tags: 
+tags:
   - Product metrics
   - Growth engineering
   - Product engineers
   - AB testing
 crosspost:
-  - Blog  
+  - Blog
 ---
 [Thomas Owers](https://www.linkedin.com/in/thomasowers/) knew nothing about [growth engineering](/blog/what-is-a-growth-engineer) when he started the first growth team at [Let's Do This](https://www.letsdothis.com/) – a Y Combinator startup with $80M in funding.
 

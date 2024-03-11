@@ -3,14 +3,15 @@ date: 2022-06-30
 title: The magic of a Hacker News Pre-Mortem
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Marketing
   - Founders
   - Growth
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Imagine you're working on something for other developers that you really, _really_ want to be great.

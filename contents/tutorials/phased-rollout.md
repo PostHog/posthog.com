@@ -1,11 +1,15 @@
 ---
 title: How to do a phased rollout
 date: 2023-10-06
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-2.png
-tags: ['feature flags', 'cohorts']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/banners/tutorial-2.png
+tags:
+  - feature flags
+  - cohorts
 ---
 
 Phased rollouts, also known as phased releases, are a way to roll out new features safely by [testing a feature works in production](/product-engineers/testing-in-production) with a small group before incrementally moving to progressively bigger (and more important) groups. 

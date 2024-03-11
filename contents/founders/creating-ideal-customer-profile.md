@@ -3,7 +3,8 @@ date: 2022-11-14
 title: How we found our Ideal Customer Profile
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
@@ -11,7 +12,7 @@ tags:
   - Sales & CS
   - Marketing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 [Creating an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) is one of the most important things we've ever done at PostHog.

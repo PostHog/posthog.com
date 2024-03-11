@@ -1,18 +1,21 @@
 ---
-title: "B2B startup marketing for noobs, by noobs – our most valuable lessons"
+title: 'B2B startup marketing for noobs, by noobs – our most valuable lessons'
 date: 2024-01-04
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/startup-marketing/feature.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/startup-marketing/feature.png
 featuredImageType: full
 tags:
   - Marketing
 crosspost:
   - Founders
-  - Blog  
-seo: {
-  metaTitle: "B2B Startup Marketing for Noobs: What We've Learned in 3 Years",
-  metaDescription: "The most valuable B2B marketing strategy lessons from 3 years of growing a B2B startup from nothing to millions in revenue."
-}  
+  - Blog
+seo:
+  metaTitle: 'B2B Startup Marketing for Noobs: What We''ve Learned in 3 Years'
+  metaDescription: >-
+    The most valuable B2B marketing strategy lessons from 3 years of growing a
+    B2B startup from nothing to millions in revenue.
 ---
 
 In three years, we’ve grown PostHog from nothing in 2020 to tens of thousands of users, millions in revenue, and default alive.

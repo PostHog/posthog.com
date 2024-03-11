@@ -3,14 +3,15 @@ date: 2022-09-12
 title: 'Startups, stop treating engineers like a different species'
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
   - Founders
   - People
   - Culture
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Today I’d like to ~~rant~~ talk about how non-engineering people at startups – especially execs – treat engineers like a fundamentally different type of human being. A whole new species, with a different set of personal motivations, goals, frustrations, and passions to the rest of the company.

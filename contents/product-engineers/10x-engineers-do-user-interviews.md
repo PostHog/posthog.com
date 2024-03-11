@@ -1,9 +1,10 @@
 ---
 date: 2023-03-06
-title: "10x engineers talk to users"
+title: 10x engineers talk to users
 author:
   - luke-harries
-featuredImage: ../images/blog/super-hog-pink.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
   - User research
@@ -12,7 +13,7 @@ tags:
   - People
 crosspost:
   - Founders
-  - Blog  
+  - Blog
 ---
 
 I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand and care about their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems.

@@ -1,8 +1,10 @@
 ---
-title: "Beyond the 10x engineer"
+title: Beyond the 10x engineer
 date: 2024-02-08
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/beyond-10x-engineer/super-hog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/super-hog.png
 featuredImageType: full
 tags:
   - Engineering

@@ -1,15 +1,17 @@
 ---
-title: "Feature flags vs configuration: Which should you choose?"
+title: 'Feature flags vs configuration: Which should you choose?'
 date: 2023-06-30
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
- - Feature flags
- - Feature management
- - Product engineers
+  - Feature flags
+  - Feature management
+  - Product engineers
 crosspost:
-  - Blog 
+  - Blog
 ---
 
 Sometimes you want to change the behavior of your app without changing the code. Both feature flags and configurations are options for doing this. This guide explains each method, and how to choose the right one for your use case.

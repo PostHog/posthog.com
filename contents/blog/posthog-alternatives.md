@@ -1,12 +1,14 @@
 ---
-title: "The most popular PostHog alternatives, compared"
+title: 'The most popular PostHog alternatives, compared'
 date: 2023-06-23
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/posthog-alternatives/posthog-alternatives.jpeg
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
 category: General
 tags:

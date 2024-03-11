@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - yakko-majuri
-featuredImage: ../images/blog/migrating-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/migrating-hog.png
 featuredImageType: full
 category: Engineering
 tags:

@@ -3,14 +3,15 @@ date: 2022-08-16
 title: What we learned about hiring from our first five employees
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-first-five/first-five.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
 tags:
   - Founders
   - People
   - Culture
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Our CEO and co-founder, James Hawkins, [recently joined Y Combinator](https://www.youtube.com/watch?v=gF1NGUsjxLU) to talk about the first five hires PostHog ever made, how we made them, and why. This is the story behind each hire, and the lessons we learned along the way.

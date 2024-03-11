@@ -1,11 +1,16 @@
 ---
-title: How to set up Angular analytics, feature flags, and more
+title: 'How to set up Angular analytics, feature flags, and more'
 date: 2023-10-17
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-14.png
-tags: ["configuration", "feature flags", "events"]
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/banners/tutorial-14.png
+tags:
+  - configuration
+  - feature flags
+  - events
 ---
 
 Angular is one of the original JavaScript web app frameworks and remains a popular choice for building them. To make your Angular app as good as possible, you need tools like [analytics](/docs/product-analytics), [session replay](/docs/session-replay), and [feature flags](/docs/feature-flags). PostHog provides these tools and is easy to set up in Angular.

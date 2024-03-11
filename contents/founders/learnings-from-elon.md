@@ -3,13 +3,14 @@ date: 2024-03-05
 title: Pragmatic startup lessons from Elon Musk
 author:
   - james-hawkins
-featuredImage: ../images/newsletter/beyond-10x-engineer/elon.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon.jpg
 featuredImageType: full
-tags: 
- - Being a founder
+tags:
+  - Being a founder
 crosspost:
   - Blog
-  - Newsletter 
+  - Newsletter
 ---
 
 Elon Musk is many things. Erratic. Uncompromising. A prolific shitposter.

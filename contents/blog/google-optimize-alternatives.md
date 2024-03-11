@@ -7,9 +7,10 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/rooOi7rxi8Y
+featuredVideo: 'https://www.youtube-nocookie.com/embed/rooOi7rxi8Y'
 category: General
 tags:
   - Guides

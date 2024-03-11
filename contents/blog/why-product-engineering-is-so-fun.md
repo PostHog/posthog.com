@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - raquel-m-smith
-featuredImage: ../images/blog/happy-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
 category: Engineering
 ---

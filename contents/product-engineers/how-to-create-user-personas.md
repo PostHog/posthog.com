@@ -1,8 +1,10 @@
 ---
 title: How to create a great user persona (with examples)
 date: 2023-11-08
-author: ["lior-neu-ner"]
-featuredImage: ../images/blog/experiment-hog.jpg
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
   - Surveys
@@ -10,7 +12,7 @@ tags:
   - Product engineers
   - Product
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 ## What is a user persona? 

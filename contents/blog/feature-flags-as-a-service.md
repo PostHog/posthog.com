@@ -1,17 +1,19 @@
 ---
-title: "Feature flags as a service: Should you build or buy?"
+title: 'Feature flags as a service: Should you build or buy?'
 date: 2023-09-12
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/green-blog-image.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 category: Engineering
 tags:
- - Feature flags
- - Explainers
+  - Feature flags
+  - Explainers
 ---
 
 Feature flags are a tool to conditionally turn on or off code and components. They enable you to safely deploy or roll back new features, which helps you follow the [best practice of disconnecting deployment from release](/blog/github-gitlab-feature-flags#why-do-github-and-gitlab-use-feature-flags).

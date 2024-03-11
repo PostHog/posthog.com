@@ -1,12 +1,14 @@
 ---
-title: "How Documenso got 4,000 stars and grew an active GitHub community"
+title: 'How Documenso got 4,000 stars and grew an active GitHub community'
 date: 2023-10-11
-author: ["joe-martin"]
+author:
+  - joe-martin
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/startup_documenso.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/startup_documenso.jpg
 featuredImageType: full
 category: Startups
 ---

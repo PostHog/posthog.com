@@ -3,13 +3,14 @@ date: 2021-05-20
 title: Writing for developers
 author:
   - james-hawkins
-featuredImage: ../images/blog/writing-for-developers/writing-for-developers.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/writing-for-developers/writing-for-developers.png
 featuredImageType: full
 tags:
   - Marketing
   - Founders
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [Hacker News](https://news.ycombinator.com).

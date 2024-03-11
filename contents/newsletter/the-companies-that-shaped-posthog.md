@@ -1,15 +1,17 @@
 ---
-title: "The companies that shaped PostHog"
+title: The companies that shaped PostHog
 date: 2023-12-20
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/the-companies-that-shaped-posthog/big-buidler.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/big-buidler.png
 featuredImageType: full
 tags:
   - Product engineers
   - Engineering
 crosspost:
   - Product engineers
-  - Blog  
+  - Blog
 ---
 
 PostHog was not created in a vacuum. The companies we admire shaped PostHog as a product, company, and organization. Looking at their journeys, and what they did differently, guided us to where we are today and continues to guide where we’re heading.

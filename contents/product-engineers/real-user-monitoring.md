@@ -1,15 +1,17 @@
 ---
-title: "What is real user monitoring (and how to set it up)"
+title: What is real user monitoring (and how to set it up)
 date: 2023-06-13
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/happy-hog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
 tags:
   - Product engineers
   - User research
   - Session replay
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Before anyone can use your product, you must make sure it actually works as expected. Figuring this out is trickier than just running it locally. Changes often have unintended consequences on other parts of the app or create non-obvious issues. 

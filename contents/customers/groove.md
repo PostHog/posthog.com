@@ -3,17 +3,18 @@ title: How Groove uses A/B testing and surveys to test new pricing models
 customer: Groove
 logo: ../images/customers/groove/logo.png
 logoDark: ../images/customers/groove/logo-dark.png
-featuredImage: ../images/customers/groove/featured.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/groove/featured.png
 industries:
-    - Helpdesk
+  - Helpdesk
 users:
-    - Engineering
-    - Leadership
-    - Founder
+  - Engineering
+  - Leadership
+  - Founder
 toolsUsed:
-    - Experimentation
-    - Product analytics
-    - Surveys
+  - Experimentation
+  - Product analytics
+  - Surveys
 date: 2023-09-15
 ---
 

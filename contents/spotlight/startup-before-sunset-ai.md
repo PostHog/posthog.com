@@ -1,12 +1,14 @@
 ---
-title: "How BeforeSunset AI achieved 'Product of the Month' on Product Hunt"
+title: How BeforeSunset AI achieved 'Product of the Month' on Product Hunt
 date: 2023-08-31
-author: ["joe-martin"]
+author:
+  - joe-martin
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/startup_beforesunset.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/startup_beforesunset.png
 featuredImageType: full
 category: Startups
 ---

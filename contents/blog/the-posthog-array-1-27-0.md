@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/1-27-0.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-27-0.png
 excerpt: >-
   PostHog 1.27.0 is here! Completely redesigned funnels experience will help you
   dive deeper to understand why your users aren't converting. Plus 400+

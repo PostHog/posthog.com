@@ -308,7 +308,7 @@
         "handle": "laudspeaker",
         "name": "Abe Basu",
         "role": "CEO of Laudspeaker",
-        "image": "../../contents/apps/thumbnails/laudspeaker-connector.png",
+        "image": "../../static/images/authors/laudspeaker-connector.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/laudspeaker"
     },

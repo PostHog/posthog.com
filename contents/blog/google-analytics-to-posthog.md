@@ -1,16 +1,19 @@
 ---
-title: "An intro to PostHog for Google Analytics users"
+title: An intro to PostHog for Google Analytics users
 date: 2023-07-04
-author: ["ian-vanagas", "andy-vandervell"]
+author:
+  - ian-vanagas
+  - andy-vandervell
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
 featuredImageType: full
 category: Using PostHog
 tags:
- - Guides
+  - Guides
 ---
 
 With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 

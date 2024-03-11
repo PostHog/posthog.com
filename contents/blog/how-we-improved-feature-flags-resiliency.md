@@ -1,13 +1,14 @@
 ---
 date: 2023-09-08
-title: "How we made feature flags faster and more reliable"
+title: How we made feature flags faster and more reliable
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
   - neil-kakkar
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 hideLastUpdated: false

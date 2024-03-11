@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/hipaa-compliant-product-analytics.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-product-analytics.png
 featuredImageType: full
 author:
   - andy-vandervell

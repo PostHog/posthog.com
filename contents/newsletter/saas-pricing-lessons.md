@@ -1,15 +1,17 @@
 ---
 date: 2023-04-27
-title: "10 things we've learned about pricing for SaaS startups"
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/equity.png
+title: 10 things we've learned about pricing for SaaS startups
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/equity.png
 featuredImageType: full
 tags:
   - Founders
   - Revenue
 crosspost:
   - Founders
-  - Blog   
+  - Blog
 ---
 
 We build PostHog for [product engineers](/blog/what-is-a-product-engineer). We define product engineers as full-stack engineers who:

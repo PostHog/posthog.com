@@ -1,11 +1,14 @@
 ---
 title: How to set up surveys in Angular
 date: 2024-01-24
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+tags:
+  - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'

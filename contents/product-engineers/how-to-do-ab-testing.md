@@ -1,16 +1,20 @@
 ---
-title: How, when, and where to run your first A/B test
+title: 'How, when, and where to run your first A/B test'
 date: 2024-01-26
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/experiment-hog.jpg
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
-tags: 
+tags:
   - AB testing
   - Product engineers
-seo: {
-  metaTitle: "How to do A/B testing – a beginner's guide",
-  metaDescription: "When is the right time to do run an A/B test? What should you test and how to do you run A/B tests? This is everything you need to know about running your first A/B test."
-} 
+seo:
+  metaTitle: How to do A/B testing – a beginner's guide
+  metaDescription: >-
+    When is the right time to do run an A/B test? What should you test and how
+    to do you run A/B tests? This is everything you need to know about running
+    your first A/B test.
 ---
 
 Most A/B testing products won't tell you this, but everyone doesn't need to be A/B testing all of the time. Because of this, it can be tricky to figure out why, when, and where you should run one, especially if you haven't run one before. To help you make these decisions, we've put together this guide on running your first A/B test.

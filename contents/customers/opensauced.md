@@ -3,23 +3,24 @@ title: How OpenSauced is moving to product-market fit with PostHog for Startups
 customer: OpenSauced
 logo: ../images/customers/opensauced/logo.svg
 logoDark: ../images/customers/opensauced/logo_dark.svg
-featuredImage: ../images/customers/opensauced/featured.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/featured.png
 featuredCustomer: false
 industries:
-    - SaaS, Devtool
+  - 'SaaS, Devtool'
 users:
-    - Leadership
-    - Investors
-    - Founder
-    - Leadership
-    - Marketing
-    - Design
-    - Engineering
+  - Leadership
+  - Investors
+  - Founder
+  - Leadership
+  - Marketing
+  - Design
+  - Engineering
 toolsUsed:
-    - Analytics
-    - Cohorts
-    - PostHog Cloud
-    - Insights
+  - Analytics
+  - Cohorts
+  - PostHog Cloud
+  - Insights
 date: 2023-09-03
 ---
 

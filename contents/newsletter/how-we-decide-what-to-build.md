@@ -1,13 +1,15 @@
 ---
-title: "How we decide what to build"
+title: How we decide what to build
 date: 2024-01-10
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/how-we-decide-what-to-build/how-we-decide.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/how-we-decide.png
 featuredImageType: full
 tags:
   - Product engineers
   - Engineering
-  - Product  
+  - Product
 crosspost:
   - Product engineers
   - Founders

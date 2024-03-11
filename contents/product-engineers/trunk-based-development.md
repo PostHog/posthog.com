@@ -1,13 +1,15 @@
 ---
 title: How we do trunk-based development (and why you should too)
 date: 2024-02-05
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 rootpage: /blog
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
- - Engineering
- - Feature management
+  - Engineering
+  - Feature management
 ---
 
 What do trees, elephants, and successful software all have in common? They rely on their trunks to help them grow big and strong. In the case of software, the trunk is the main codebase engineers make changes to and that deploys to users.

@@ -330,7 +330,13 @@ module.exports = {
         {
             resolve: `gatsby-transformer-cloudinary`,
             options: {
-                transformTypes: [`RoadmapMedia`, `SqueakTeamCrest`, `SqueakRoadmapMedia`, `SqueakTeamTeamImage`],
+                transformTypes: [
+                    `RoadmapMedia`,
+                    `SqueakTeamCrest`,
+                    `SqueakRoadmapMedia`,
+                    `SqueakTeamTeamImage`,
+                    `MdxFrontmatterFeaturedImageChildImageSharp`,
+                ],
             },
         },
         ...(process.env.SHOPIFY_APP_PASSWORD &&

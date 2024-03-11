@@ -1,6 +1,6 @@
 ---
 date: 2023-06-12
-title: "Introducing HouseWatch: An open-source toolkit for ClickHouse"
+title: 'Introducing HouseWatch: An open-source toolkit for ClickHouse'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -13,7 +13,8 @@ tags:
   - Product updates
   - Release notes
   - ClickHouse
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 

@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - neil-kakkar
-featuredImage: ../images/blog/experiments.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/experiments.jpeg
 featuredImageType: full
 category: Product growth
 tags:

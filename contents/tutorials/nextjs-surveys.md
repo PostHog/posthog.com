@@ -1,11 +1,14 @@
 ---
 title: How to set up surveys in Next.js
 date: 2023-10-18
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+tags:
+  - surveys
 ---
 
 [Surveys](/docs/surveys) are an excellent way to get feedback from your users. In this guide, we show you how to add a survey to your Next.js app.

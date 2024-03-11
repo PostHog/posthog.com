@@ -1,17 +1,19 @@
 ---
-title: "Product engineer vs product manager: What's the difference?"
+title: 'Product engineer vs product manager: What''s the difference?'
 date: 2023-01-24
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/product-engineer.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer.jpg
 featuredImageType: full
 category: Engineering
-tags: 
-    - Explainers
-    - Product engineers
+tags:
+  - Explainers
+  - Product engineers
 ---
 
 Are [product engineers](/blog/what-is-a-product-engineer) a better choice for your startup than product managers are, or do you need both? To answer that, this post compares the approaches they take to product development, like we recently did with [product engineers and software engineers](/blog/product-engineer-vs-software-engineer), if you're interested.

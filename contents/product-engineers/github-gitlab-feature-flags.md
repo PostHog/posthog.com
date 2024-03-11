@@ -1,15 +1,17 @@
 ---
 title: What you can learn from how GitHub and GitLab use feature flags
 date: 2023-08-22
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/gitlab-github-flags.jpeg
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gitlab-github-flags.jpeg
 featuredImageType: full
 tags:
- - Feature flags
- - Product engineers
- - Feature management
+  - Feature flags
+  - Product engineers
+  - Feature management
 crosspost:
-  - Blog 
+  - Blog
 ---
 
 In their simplest form, feature flags enable you to turn on or off features or code paths for certain users. But you can do so much more if you apply some careful planning and implementation.

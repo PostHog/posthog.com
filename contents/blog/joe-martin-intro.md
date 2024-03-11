@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mo-shehu
-featuredImage: ../images/blog/joe-martin-intro.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/joe-martin-intro.png
 featuredImageType: full
 category: Inside PostHog
 ---

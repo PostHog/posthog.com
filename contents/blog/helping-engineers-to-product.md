@@ -1,13 +1,15 @@
 ---
 date: 2023-02-17
-title: "Our simpler goal: Help engineers to be better at product"
+title: 'Our simpler goal: Help engineers to be better at product'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: CEO diaries
-author: ["james-hawkins"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+author:
+  - james-hawkins
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 

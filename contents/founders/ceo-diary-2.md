@@ -3,13 +3,14 @@ date: 2021-09-10
 title: Optimize for not breaking up with your co-founder
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Being a founder
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Last week we had an offsite in the beautiful Portuguese countryside, an hour's bus journey from Porto. We uploaded a highlight reel of the retreat to [TikTok](https://vm.tiktok.com/ZMRUGX4XW/).

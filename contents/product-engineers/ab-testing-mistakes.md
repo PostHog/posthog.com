@@ -1,14 +1,16 @@
 ---
 date: 2023-05-02
-title: "8 annoying A/B testing mistakes every engineer should know"
-author: ['lior-neu-ner']
-featuredImage: ../images/blog/experiment-hog.jpg
+title: 8 annoying A/B testing mistakes every engineer should know
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
-tags: 
+tags:
   - Product engineers
   - AB testing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 

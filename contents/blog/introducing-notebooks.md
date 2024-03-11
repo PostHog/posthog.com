@@ -1,16 +1,17 @@
 ---
 date: 2023-12-19
-title: "Introducing Notebooks for PostHog"
+title: Introducing Notebooks for PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/announcing-notebooks/notebooks.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/announcing-notebooks/notebooks.jpg
 featuredImageType: full
 author:
   - joe-martin
 category: PostHog news
-tags: 
+tags:
   - Product updates
 ---
 

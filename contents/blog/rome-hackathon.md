@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - ian-vanagas
-featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
 category: Inside PostHog
 tags:

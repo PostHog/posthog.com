@@ -5,8 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/hogmail.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail.png
 featuredImageType: full
 category: General
 ---

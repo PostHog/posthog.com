@@ -3,13 +3,14 @@ title: How Purplewave reached a 25% response rate with PostHog surveys
 customer: Purplewave
 logo: ../images/customers/purplewave/purplewave_logo.png
 logoDark: ../images/customers/purplewave/purplewave_logo_dark.png
-featuredImage: ../images/customers/purplewave/purplewave.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/purplewave/purplewave.jpg
 industries:
-    - ECommerce
+  - ECommerce
 users:
-    - Product
+  - Product
 toolsUsed:
-    - Surveys
+  - Surveys
 date: 2023-09-15
 ---
 

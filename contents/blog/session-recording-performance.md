@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mathew-pregasen
-featuredImage: ../images/blog/session-recording-performance/session-recording.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/session-recording-performance/session-recording.jpg
 featuredImageType: full
 category: Engineering
 ---

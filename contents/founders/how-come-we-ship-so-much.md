@@ -1,9 +1,10 @@
 ---
 date: 2023-11-01
-title: "How we designed our company for speed"
+title: How we designed our company for speed
 author:
   - james-hawkins
-featuredImage: ../images/blog/super-hog-pink.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
   - Founders

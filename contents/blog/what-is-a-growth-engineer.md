@@ -2,16 +2,17 @@
 title: What is a growth engineer? (And why they're awesome)
 date: 2023-04-26
 author:
-    - ian-vanagas
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Startups
 tags:
- - Explainers
+  - Explainers
 ---
 
 Every startup loves to see its growth metrics – signups, subscriptions, and revenue, etc. – go up, yet most engineers work on things that don't directly impact those metrics. Growth engineers are different. They focus entirely on projects dedicated to driving as much growth as possible, no matter where they build those projects.

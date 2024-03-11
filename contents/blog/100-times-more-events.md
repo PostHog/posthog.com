@@ -1,16 +1,17 @@
 ---
 date: 2021-05-17
-title: "Why we're giving away 100 times more cloud usage, free"
+title: 'Why we''re giving away 100 times more cloud usage, free'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/100x/100x.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/100x/100x.png
 featuredImageType: full
 author:
   - james-hawkins
 category: PostHog news
-tags: 
+tags:
   - Product updates
 ---
 

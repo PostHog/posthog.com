@@ -3,18 +3,19 @@ title: How Speakeasy manages features and developer relations using PostHog
 customer: Speakeasy
 logo: ../images/customers/speakeasy/speakeasy-logo.png
 logoDark: ../images/customers/speakeasy/speakeasy-logo-dark.png
-featuredImage: ../images/customers/speakeasy/speakeasy-featured.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/speakeasy/speakeasy-featured.png
 industries:
-    - Devtool
+  - Devtool
 users:
-    - Product
-    - Engineering
-    - Growth
-    - Developer Relations
+  - Product
+  - Engineering
+  - Growth
+  - Developer Relations
 toolsUsed:
-    - Feature flags
-    - Product analytics
-    - Templates
+  - Feature flags
+  - Product analytics
+  - Templates
 date: 2023-08-31
 ---
 ​

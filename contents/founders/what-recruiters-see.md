@@ -3,13 +3,14 @@ date: 2024-01-26
 title: What startup recruiters actually see when you apply for a job
 author:
   - charles-cook
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 tags:
   - Culture
   - People
 crosspost:
-  - Blog      
+  - Blog
 ---
 
 Last week we opened a new marketing role at PostHog, and we got 300 applicants in the first 2 days. This was high, but not unusual for a startup – my record is 900 in a day, but I bet folks working at giant companies like Google see way way more. Of these 300, 12 got an interview. 

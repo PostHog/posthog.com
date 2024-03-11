@@ -3,7 +3,8 @@ date: 2023-04-19
 title: How (and why) we treat pricing like a product
 author:
   - raquel-m-smith
-featuredImage: ../images/blog/happy-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
 tags:
   - Founders
@@ -14,7 +15,6 @@ tags:
 crosspost:
   - Product engineers
   - Blog
-
 ---
 "Pricing is important" is common knowledge – price determines profit margin, which directly or indirectly determines nearly everything else. 
 

@@ -1,16 +1,19 @@
 ---
-title: "How to safely test in production (and why you should)"
+title: How to safely test in production (and why you should)
 date: 2023-12-07
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 tags:
- - Product engineers
- - Engineering
- - Feature management
+  - Product engineers
+  - Engineering
+  - Feature management
 crosspost:
-  - Blog 
---- 
+  - Blog
+---
+ 
 
 At PostHog, we test in production. There are many misconceptions about doing this. It **does not** mean:
 

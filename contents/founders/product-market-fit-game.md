@@ -1,15 +1,17 @@
 ---
 date: 2023-06-08
 title: The Product-Market Fit Game
-author: ["james-hawkins"]
-featuredImage: ../images/blog/pmf-game-guide/pmf-guide.png
+author:
+  - james-hawkins
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-guide.png
 featuredImageType: full
 tags:
   - Founders
   - Product
   - Product-market fit
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. 

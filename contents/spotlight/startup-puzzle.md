@@ -1,12 +1,14 @@
 ---
-title: "How Puzzle defined a buyer persona and built around it"
+title: How Puzzle defined a buyer persona and built around it
 date: 2024-02-12
-author: ["joe-martin"]
+author:
+  - joe-martin
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/startup_puzzle.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/startup_puzzle.jpg
 featuredImageType: full
 category: Startups
 ---

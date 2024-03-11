@@ -1,13 +1,15 @@
 ---
-title: The best Microsoft Clarity alternatives & competitors, compared
+title: 'The best Microsoft Clarity alternatives & competitors, compared'
 date: 2024-02-29
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 rootpage: /blog
-featuredImage: ../images/blog/clarity-alternatives/clarity-alternatives.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/clarity-alternatives.png
 featuredImageType: full
 category: General
 tags:
- - Comparisons
+  - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'

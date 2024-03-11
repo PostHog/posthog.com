@@ -1,6 +1,6 @@
 ---
 date: 2023-01-16
-title: "Array 1.43.0: Massive performance improvements!"
+title: 'Array 1.43.0: Massive performance improvements!'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -9,8 +9,9 @@ category: PostHog news
 tags:
   - Product updates
   - Release notes
-featuredVideo: https://www.youtube-nocookie.com/embed/TCyCryTiTbQ
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredVideo: 'https://www.youtube-nocookie.com/embed/TCyCryTiTbQ'
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
 ---
 

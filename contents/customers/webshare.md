@@ -1,18 +1,19 @@
 ---
-title: How Webshare replaced Mixpanel, Hotjar, and FullStory with PostHog
+title: 'How Webshare replaced Mixpanel, Hotjar, and FullStory with PostHog'
 customer: Webshare
 logo: ../images/customers/webshare/webshare_logo.png
 logoDark: ../images/customers/webshare/webshare-logo-dark.png
-featuredImage: ../images/customers/webshare/featured.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/webshare/featured.png
 industries:
-    - Devtool
+  - Devtool
 users:
-    - Marketing
-    - Leadership
-    - Customer Success
+  - Marketing
+  - Leadership
+  - Customer Success
 toolsUsed:
-    - Experimentation
-    - Product analytics
+  - Experimentation
+  - Product analytics
 date: 2023-10-01
 ---
 

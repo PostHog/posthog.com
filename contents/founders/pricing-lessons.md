@@ -3,14 +3,15 @@ date: 2022-03-17
 title: Counterintuitive lessons about our pricing
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Revenue
   - Sales & CS
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Imagine being able to grow twice as fast with just a few hours of work. Changing your pricing has a real chance to get you there. 

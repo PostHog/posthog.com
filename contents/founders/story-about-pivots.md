@@ -3,14 +3,15 @@ date: 2021-01-21
 title: A story about pivots
 author:
   - james-hawkins
-featuredImage: ../images/blog/story-about-pivots.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/story-about-pivots.png
 featuredImageType: full
 tags:
   - Founders
   - Product-market fit
   - Product
 crosspost:
-  - Blog    
+  - Blog
 ---
 
 PostHog has pivoted _a lot_.

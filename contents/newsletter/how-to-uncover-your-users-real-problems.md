@@ -1,15 +1,17 @@
 ---
-title: "How to uncover your users' real problems"
+title: How to uncover your users' real problems
 date: 2023-09-27
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/prodhog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/prodhog.png
 featuredImageType: full
 tags:
   - Product engineers
   - Engineering
 crosspost:
-  - Product engineers 
-  - Blog 
+  - Product engineers
+  - Blog
 ---
 
 Users are like kids at Christmas. They say they really want this one thing, but that one thing won't keep them happy for long. 

@@ -1,9 +1,10 @@
 ---
 date: 2023-11-29
-title: "NPS vs CSAT vs CES: Which is best for SaaS?"
+title: 'NPS vs CSAT vs CES: Which is best for SaaS?'
 author:
   - lior-neu-ner
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 tags:
   - Product analytics
@@ -11,7 +12,7 @@ tags:
   - User research
   - Growth engineering
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 The two most important metrics in SaaS are growth and retention. [User surveys](/surveys) are a great way to unlock insights into how to improve them, but which survey type gives you the best insights? 

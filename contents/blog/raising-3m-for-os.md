@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/how-we-raised-3-million-open-source-project.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-we-raised-3-million-open-source-project.png
 featuredImageType: full
 author:
   - james-hawkins

@@ -1,8 +1,10 @@
 ---
 date: 2023-11-16
-title: "How we work asynchronously"
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/feature-images/teacher.png
+title: How we work asynchronously
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/feature-images/teacher.png
 featuredImageType: full
 tags:
   - Culture

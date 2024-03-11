@@ -1,17 +1,19 @@
 ---
-title: "The modern data stack sucks"
+title: The modern data stack sucks
 date: 2023-04-12
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Startups
 tags:
- - Guides
- - Explainers
+  - Guides
+  - Explainers
 ---
 
 Every startup needs data to build a better product. This isn't up for debate. But, as we've found from working with hundreds of startups at all stages, the "startup data stack" can quickly devolve into a mess of tools slowing you down.

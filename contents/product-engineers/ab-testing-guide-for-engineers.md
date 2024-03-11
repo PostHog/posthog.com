@@ -1,14 +1,16 @@
 ---
 date: 2023-07-13
-title: "A software engineer's guide to A/B testing"
-author: ['lior-neu-ner']
-featuredImage: ../images/blog/experiment-hog.jpg
+title: A software engineer's guide to A/B testing
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
-tags: 
+tags:
   - AB testing
   - Product engineers
 crosspost:
-  - Blog   
+  - Blog
 ---
 
 As a software engineer, you have two options:

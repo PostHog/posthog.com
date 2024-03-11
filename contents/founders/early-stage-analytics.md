@@ -1,17 +1,19 @@
 ---
-title: "The 80/20 of early-stage startup analytics"
+title: The 80/20 of early-stage startup analytics
 date: 2023-02-09
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/posthog-blog-image.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 tags:
- - Founders
- - Growth
- - Product
- - Product analytics
+  - Founders
+  - Growth
+  - Product
+  - Product analytics
 crosspost:
- - Product engineers
- - Blog
+  - Product engineers
+  - Blog
 ---
 
 Building a startup is like trying to find the exit of a dark cave. Sometimes you hear sounds leading you somewhere, but it's mostly dark and hard to understand. In this cave, analytics is like a flashlight. It doesn’t automatically point you to the exit, but it shows you where you're going. You stumble less and spend less time moving in the wrong direction.

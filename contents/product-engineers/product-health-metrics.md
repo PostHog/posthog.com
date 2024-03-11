@@ -1,19 +1,21 @@
 ---
 title: The most useful product health metrics
 date: 2023-12-06
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 category: Product growth
 tags:
- - Guides
- - Product metrics
+  - Guides
+  - Product metrics
 crosspost:
-  - Blog 
+  - Blog
 ---
 
 ## What is a product health metric?

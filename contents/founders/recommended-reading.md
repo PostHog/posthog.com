@@ -1,15 +1,16 @@
 ---
 date: 2023-08-22
-title: "PostHog's recommended reading for startup teams"
+title: PostHog's recommended reading for startup teams
 author:
   - joe-martin
-featuredImage: ../images/blog/super-hog-pink.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
   - Founders
   - Growth
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 

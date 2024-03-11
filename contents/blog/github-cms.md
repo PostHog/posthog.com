@@ -1,14 +1,16 @@
 ---
 title: Why we use GitHub as our CMS
 date: 2023-03-23
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y
+featuredVideo: 'https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y'
 category: Inside PostHog
 ---
 

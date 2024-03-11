@@ -1,15 +1,17 @@
 ---
 date: 2023-04-24
-title: "What we built at our sun-kissed Aruba hackathon"
+title: What we built at our sun-kissed Aruba hackathon
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/aruba/beach-hog.jpg
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/beach-hog.jpg
 featuredImageType: full
 category: Inside PostHog
-tags: 
+tags:
   - Offsites
 ---
 

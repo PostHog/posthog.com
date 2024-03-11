@@ -1,10 +1,12 @@
 ---
 date: 2024-02-19
-title: "How we built our onboarding email flow (with actual performance data)"
+title: How we built our onboarding email flow (with actual performance data)
 rootPage: /blog
 category: Inside PostHog
-author: ["joe-martin"]
-featuredImage: ../images/blog/blog_onboarding.jpg
+author:
+  - joe-martin
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/blog_onboarding.jpg
 featuredImageType: full
 ---
 

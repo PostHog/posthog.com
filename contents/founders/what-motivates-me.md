@@ -3,13 +3,14 @@ date: 2022-10-07
 title: What motivates me as a CEO
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Being a founder
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 PostHog got pretty far (17k customers across all our products, went through Y Combinator, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.

@@ -1,11 +1,15 @@
 ---
 title: How to do redirect testing
 date: 2023-11-01
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-16.png
-tags: ['experimentation', 'feature flags']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/banners/tutorial-16.png
+tags:
+  - experimentation
+  - feature flags
 ---
 
 Redirect testing is a way to [A/B test](/ab-testing) web pages by redirecting users to one or the other.

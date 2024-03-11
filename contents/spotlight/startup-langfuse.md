@@ -1,12 +1,14 @@
 ---
-title: "How Langfuse pivoted and raised $4M after leaving Y Combinator "
+title: 'How Langfuse pivoted and raised $4M after leaving Y Combinator '
 date: 2024-01-22
-author: ["joe-martin"]
+author:
+  - joe-martin
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/startup_langfuse.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/startup_langfuse.jpg
 featuredImageType: full
 category: Startups
 ---

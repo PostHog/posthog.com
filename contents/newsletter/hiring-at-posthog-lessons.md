@@ -1,8 +1,10 @@
 ---
 date: 2023-09-07
-title: "Everything we've learned about hiring for startups (so far)"
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/feature-images/hiring.png
+title: Everything we've learned about hiring for startups (so far)
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/feature-images/hiring.png
 featuredImageType: full
 tags:
   - People

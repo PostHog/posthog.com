@@ -1,8 +1,10 @@
 ---
 date: 2023-08-24
-title: "10 things we've learned about A/B testing for startups"
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/feature-images/ab-test.png
+title: 10 things we've learned about A/B testing for startups
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/feature-images/ab-test.png
 featuredImageType: full
 tags:
   - AB testing

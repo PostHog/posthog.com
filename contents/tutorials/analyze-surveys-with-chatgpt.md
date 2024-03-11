@@ -1,11 +1,14 @@
 ---
 title: How to analyze surveys with ChatGPT
 date: 2023-11-08
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-14.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/banners/tutorial-14.png
+tags:
+  - surveys
 ---
 
 Surveys are a great way of collecting feedback from your users, especially if you ask your users like "How can we improve our product?". However, they can be hard to analyze if you receive hundreds or more answers. Fortunately, [OpenAI's ChatGPT](https://openai.com/chatgpt) is great at doing this.

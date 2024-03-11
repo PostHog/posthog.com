@@ -3,14 +3,15 @@ date: 2022-11-02
 title: 'Tell me about features, not benefits'
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
- - Marketing
- - Sales & CS
- - Founders
+  - Marketing
+  - Sales & CS
+  - Founders
 crosspost:
-  - Blog 
+  - Blog
 ---
 
 Features tell, benefits sell. Well, they used to.

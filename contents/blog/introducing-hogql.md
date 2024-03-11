@@ -1,6 +1,6 @@
 ---
 date: 2023-06-08
-title: "Introducing HogQL: Direct SQL access for PostHog"
+title: 'Introducing HogQL: Direct SQL access for PostHog'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -12,7 +12,8 @@ author:
 tags:
   - Product updates
   - Release notes
-featuredImage: ../images/blog/hog_ql.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
 ---
 

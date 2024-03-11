@@ -3,7 +3,8 @@ date: 2020-08-18
 title: Why you may not need a sales team
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
@@ -11,7 +12,7 @@ tags:
   - Growth
   - Revenue
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 You will need sales, but do you need a sales team to achieve revenue?

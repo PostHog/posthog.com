@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - paolodamico
-featuredImage: ../images/blog/generic-release-notes.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/generic-release-notes.png
 featuredImageType: full
 category: PostHog news
 tags:

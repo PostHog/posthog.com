@@ -1,22 +1,26 @@
 ---
-title: "Defining our ICP is the most important thing we ever did"
+title: Defining our ICP is the most important thing we ever did
 date: 2024-01-25
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/icp/icp-feat.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/icp/icp-feat.png
 featuredImageType: full
 tags:
   - Product
   - Marketing
   - Product-market fit
   - Sales & CS
-  - Growth  
+  - Growth
 crosspost:
   - Founders
   - Blog
-seo: {
-  metaTitle: "Creating an Ideal Customer Profile transformed our company",
-  metaDescription: "Learning how to create an ideal customer profile will transform every part of your business for the better. This is everything you need to know about the ICP framework."
-}    
+seo:
+  metaTitle: Creating an Ideal Customer Profile transformed our company
+  metaDescription: >-
+    Learning how to create an ideal customer profile will transform every part
+    of your business for the better. This is everything you need to know about
+    the ICP framework.
 ---
 
 Defining our ideal customer profile (ICP) is one of the most important things we’ve ever done. We wish we’d done it sooner. Most startup founders say the same.

@@ -3,13 +3,14 @@ date: 2023-04-28
 title: When and how to run group-targeted A/B tests
 author:
   - lior-neu-ner
-featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
-tags: 
+tags:
   - Product engineers
   - AB testing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 A/B tests are a powerful tool for measuring how product changes impact user behavior. However, sometimes changing how one user interacts with your product will affect how others use it too. For example, a change in the Uber app for drivers likely affects riders' experience too. In these scenarios, group-targeted experiments enable us to measure the impact of changes beyond an individual user and across a group of users.

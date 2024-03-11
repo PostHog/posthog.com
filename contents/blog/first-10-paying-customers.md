@@ -9,7 +9,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mo-shehu
-featuredImage: ../images/blog/first-10-customers.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/first-10-customers.png
 featuredImageType: full
 category: Product growth
 tags:

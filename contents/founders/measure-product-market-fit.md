@@ -1,8 +1,10 @@
 ---
 date: 2023-08-14
-title: "In-depth: How to measure product-market fit"
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/how-to-measure-product-market-fit/pmf-guide.png
+title: 'In-depth: How to measure product-market fit'
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/pmf-guide.png
 featuredImageType: full
 tags:
   - Founders
@@ -12,7 +14,7 @@ tags:
   - Product engineers
 crosspost:
   - Product engineers
-  - Blog  
+  - Blog
 ---
 
 Startups can't succeed without [achieving product-market fit](/blog/product-market-fit-game) – it's one of the few things startup gurus agree on. It's often described as a feeling – a palpable excitement from users, or a sense you can't keep up with demand. You either have _it_, or you don't.

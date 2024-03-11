@@ -7,7 +7,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/non-coders-thoughts/non-coders-thoughts.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/non-coders-thoughts/non-coders-thoughts.jpg
 featuredImageType: full
 category: Inside PostHog
 ---

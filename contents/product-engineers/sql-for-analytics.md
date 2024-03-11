@@ -1,15 +1,17 @@
 ---
 date: 2023-09-08
 title: The basics of SQL for analytics
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/hog_ql.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
 category: Engineering
 tags:
   - Product engineers
   - Product analytics
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Analytics is one of SQL's most important use cases. There are many ways to slice, modify, and interpret analytics data. SQL provides the depth and customizability to get insights from it, answer questions, and make data-driven decisions.

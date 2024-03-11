@@ -1,12 +1,14 @@
 ---
 date: 2023-06-30
-title: "In-depth: ClickHouse vs Redshift"
+title: 'In-depth: ClickHouse vs Redshift'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mathew-pregasen"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+author:
+  - mathew-pregasen
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:

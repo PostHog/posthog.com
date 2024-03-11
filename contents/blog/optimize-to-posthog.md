@@ -1,16 +1,18 @@
 ---
 title: An intro to PostHog for Google Optimize users
 date: 2023-10-20
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-blog-at-desk.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
 category: Using PostHog
 tags:
- - Guides
+  - Guides
 ---
 
 As is the case with many fan-favorite Google products, their A/B testing platform, Optimize, was recently sunset. 

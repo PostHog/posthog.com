@@ -3,16 +3,17 @@ title: How Contra used session replays to increase registrations by 30%
 customer: Contra
 logo: ../images/customers/contra/contra_logo.svg
 logoDark: ../images/customers/contra/contra_logo_dark.svg
-featuredImage: ../images/customers/contra/contra_featured.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/contra/contra_featured.png
 industries:
-    - Saas
+  - Saas
 users:
-    - Product
-    - Engineering
+  - Product
+  - Engineering
 toolsUsed:
-    - Feature flags
-    - Session replays
-    - Product analytics
+  - Feature flags
+  - Session replays
+  - Product analytics
 date: 2023-03-06
 ---
 

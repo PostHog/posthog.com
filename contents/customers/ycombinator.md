@@ -3,19 +3,20 @@ title: How Y Combinator used PostHog experiments to boost engagement by 40%
 customer: Y Combinator
 logo: ../images/customers/ycombinator/logo.svg
 logoDark: ../images/customers/ycombinator/logo_dark.svg
-featuredImage: ../images/customers/ycombinator/featured.svg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/ycombinator/featured.svg
 featuredCustomer: true
 industries:
-    - SaaS, Education
+  - 'SaaS, Education'
 users:
-    - Leadership
-    - Engineering
-    - Product
+  - Leadership
+  - Engineering
+  - Product
 toolsUsed:
-    - Experiments
-    - Autocapture
-    - PostHog Cloud
-    - Insights
+  - Experiments
+  - Autocapture
+  - PostHog Cloud
+  - Insights
 date: 2022-10-05
 ---
 

@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mathew-pregasen
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:

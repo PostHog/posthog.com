@@ -1,8 +1,10 @@
 ---
 date: 2023-03-30
-title: "The conformist startup rule you can ignore"
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/feature-images/working-out.png
+title: The conformist startup rule you can ignore
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/feature-images/working-out.png
 featuredImageType: full
 tags:
   - Founders

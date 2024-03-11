@@ -1,13 +1,15 @@
 ---
-title: "How YC's biggest startups run A/B tests (with examples)"
+title: How YC's biggest startups run A/B tests (with examples)
 date: 2023-07-28
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/experiment-hog.jpg
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
- - AB testing
- - Y Combinator
- - Product engineers
+  - AB testing
+  - Y Combinator
+  - Product engineers
 ---
 
 [A/B testing](/ab-testing) is powerful when used correctly, but it's easily misused. Only comparing the old version with a new feature, copy change, or query does not create success.

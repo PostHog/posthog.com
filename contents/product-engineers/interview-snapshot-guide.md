@@ -1,9 +1,10 @@
 ---
 date: 2023-03-08
-title: "How to turn user interviews into actionable snapshots"
+title: How to turn user interviews into actionable snapshots
 author:
   - annika-schmid
-featuredImage: ../images/blog/posthog-blog-at-desk.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
 tags:
   - Product engineers

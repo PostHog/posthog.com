@@ -1,17 +1,19 @@
 ---
 title: The most common growth team failure modes (and how to fix them)
 date: 2023-10-17
-author: ["lior-neu-ner"]
-featuredImage: ../images/blog/athlete-hog.jpeg
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/athlete-hog.jpeg
 featuredImageType: full
-tags: 
+tags:
   - Product engineers
   - Founders
   - Growth engineering
   - Growth
 crosspost:
   - Founders
-  - Blog  
+  - Blog
 ---
 
 Stuck metrics. Missed KPIs. Burnt out engineers. These are the telltale signs of a growth team in crisis. But how do you fix it?

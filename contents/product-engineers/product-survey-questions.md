@@ -1,17 +1,19 @@
 ---
-title: "How to write great product survey questions (with examples)"
+title: How to write great product survey questions (with examples)
 date: 2023-08-23
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/posthog-blog-image.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 tags:
   - Surveys
   - User research
   - Product engineers
   - Product
-crosspost: 
-  - Founders 
-  - Blog 
+crosspost:
+  - Founders
+  - Blog
 ---
 
 Product surveys help you understand what users are thinking and feeling, but they're useless if you don't ask the right questions. In this guide, we'll cover:

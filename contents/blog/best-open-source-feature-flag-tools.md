@@ -5,12 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author:
   - andy-vandervell
 category: General
-tags: 
+tags:
   - Open source
 ---
 

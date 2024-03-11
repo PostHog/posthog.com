@@ -5,9 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/open-source-hotjar-alternatives/replayhog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/replayhog.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/mWW3lJw81LE
+featuredVideo: 'https://www.youtube-nocookie.com/embed/mWW3lJw81LE'
 author:
   - hanna-crombie
   - andy-vandervell

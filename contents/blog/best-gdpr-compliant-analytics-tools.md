@@ -8,9 +8,10 @@ hideAnchor: true
 author:
   - joe-martin
   - andy-vandervell
-featuredImage: ../images/blog/posthog-blog-at-desk.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/o_1AmP_-HPs
+featuredVideo: 'https://www.youtube-nocookie.com/embed/o_1AmP_-HPs'
 category: General
 tags:
   - Privacy

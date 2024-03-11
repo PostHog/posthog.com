@@ -1,15 +1,17 @@
 ---
 date: 2023-06-08
-title: "What we've learned about product-market fit"
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/feature-images/loop.png
+title: What we've learned about product-market fit
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/feature-images/loop.png
 featuredImageType: full
 tags:
   - Founders
   - Product-market fit
 crosspost:
   - Founders
-  - Blog   
+  - Blog
 ---
 
 It’s “the only thing that matters” according to Marc Andreessen, who [coined the term](https://pmarchive.com/guide_to_startups_part4.html).
