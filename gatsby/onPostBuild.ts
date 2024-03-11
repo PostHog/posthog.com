@@ -233,4 +233,338 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     )
 }
 
-export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {}
+export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
+    const { data } = await graphql(`
+        query {
+            allRoadmap(filter: { complete: { ne: false } }) {
+                nodes {
+                    title
+                    description
+                    date
+                    cta {
+                        url
+                        label
+                    }
+                    media {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+            allMDXPosts: allMdx(
+                filter: {
+                    fields: {
+                        slug: {
+                            regex: "/^/blog|^/tutorials|^/customers|^/spotlight|^/founders|^/product-engineers|^/features|^/newsletter/"
+                        }
+                    }
+                    frontmatter: { date: { ne: null } }
+                }
+            ) {
+                nodes {
+                    parent {
+                        ... on File {
+                            relativePath
+                        }
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        date
+                        category
+                        tags
+                        authorData {
+                            name
+                        }
+                        featuredImage {
+                            childImageSharp {
+                                gatsbyImageData(width: 650, height: 350, quality: 100)
+                            }
+                        }
+                        authorData {
+                            profile_id
+                        }
+                        crosspost
+                    }
+                    rawBody
+                    excerpt(pruneLength: 250)
+                }
+            }
+            blog: allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/blog|^/spotlight/" } }
+                    frontmatter: { featuredImageType: { eq: "full" } }
+                }
+            ) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        featuredImage {
+                            publicURL
+                        }
+                        authorData {
+                            name
+                            role
+                            image {
+                                publicURL
+                            }
+                        }
+                    }
+                }
+            }
+            docsHandbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook|^/docs/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                        contributors {
+                            username
+                            avatar {
+                                absolutePath
+                            }
+                        }
+                    }
+                    frontmatter {
+                        title
+                    }
+                    parent {
+                        ... on File {
+                            fields {
+                                lastUpdated: gitLogLatestDate(formatString: "MMM D, YYYY")
+                            }
+                        }
+                    }
+                    timeToRead
+                    excerpt(pruneLength: 500)
+                }
+            }
+            tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        featuredImage {
+                            publicURL
+                        }
+                    }
+                }
+            }
+            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        featuredImage {
+                            publicURL
+                        }
+                        logo {
+                            publicURL
+                        }
+                        title
+                    }
+                }
+            }
+            careers: allAshbyJobPosting {
+                nodes {
+                    title
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            id
+                            customFields {
+                                title
+                                value
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    if (process.env.VERCEL_GIT_COMMIT_REF === 'master') {
+        await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+    }
+
+    const dir = path.resolve(__dirname, '../public/og-images')
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+    const fontDir = path.resolve(__dirname, '../fonts')
+    if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
+    const res = await fetch('https://d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff', {
+        headers: {
+            Origin: 'https://posthog.com',
+        },
+    })
+    await new Promise((resolve, reject) => {
+        const fileStream = fs.createWriteStream(path.resolve(__dirname, '../fonts/matter.woff'))
+        res.body.pipe(fileStream)
+        res.body.on('error', (err) => {
+            reject(err)
+        })
+        fileStream.on('finish', function () {
+            resolve()
+        })
+    })
+
+    const font = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'), {
+        encoding: 'base64',
+    })
+
+    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
+    const revisionInfo = await browserFetcher.download('982053')
+
+    const browser = await chromium.puppeteer.launch({
+        args: await chromium.args,
+        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: true,
+    })
+    const page = await browser.newPage()
+    await page.setViewport({
+        width: 1200,
+        height: 630,
+    })
+
+    async function createOG({ html, slug }) {
+        await page.setContent(html, {
+            waitUntil: ['domcontentloaded'],
+        })
+
+        await page.evaluateHandle('document.fonts.ready')
+
+        await page.screenshot({
+            type: 'jpeg',
+            path: `${dir}/${slug.replace(/\//g, '')}.jpeg`,
+            quality: 100,
+        })
+    }
+
+    // Blog post OG
+    for (const post of data.blog.nodes) {
+        const { title, authorData, featuredImage } = post.frontmatter
+        const image = featuredImage?.publicURL
+        const author =
+            authorData &&
+            authorData.map((author) => {
+                const image = fs.readFileSync(author.image.absolutePath, {
+                    encoding: 'base64',
+                })
+                return {
+                    ...author,
+                    image,
+                }
+            })[0]
+        await createOG({
+            html: blogTemplate({ title, authorData: author, image, font }),
+            slug: post.fields.slug,
+        })
+    }
+
+    const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
+
+    // Docs and Handbook OG
+    for (const post of [...data.docsHandbook.nodes, ...data.tutorials.nodes]) {
+        const { title } = post.frontmatter
+        const { timeToRead, excerpt, fields, parent } = post
+        const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
+        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
+        const contributors = fields?.contributors.map((contributor) => {
+            const { avatar, username } = contributor
+            return {
+                username,
+                avatar:
+                    avatar?.absolutePath &&
+                    fs.readFileSync(avatar.absolutePath, {
+                        encoding: 'base64',
+                    }),
+            }
+        })
+        let breadcrumbs = null
+        docsHandbookMenus.some((item) => {
+            if (item.url === fields.slug) {
+                breadcrumbs = item.breadcrumb
+                return true
+            }
+        })
+        await createOG({
+            html: docsHandbookTemplate({
+                font,
+                title,
+                timeToRead,
+                excerpt,
+                lastUpdated,
+                contributors,
+                breadcrumbs: [
+                    {
+                        name: fields.slug.startsWith('/docs')
+                            ? 'Docs'
+                            : fields.slug.startsWith('/tutorials')
+                            ? 'Tutorials'
+                            : 'Handbook',
+                    },
+                    ...(breadcrumbs || []),
+                ],
+            }),
+            slug: fields.slug,
+        })
+    }
+
+    // Customers OG
+    for (const post of data.customers.nodes) {
+        const { frontmatter } = post
+        const featuredImage = frontmatter.featuredImage?.publicURL
+        const logo = frontmatter.logo?.publicURL
+        await createOG({
+            html: customerTemplate({
+                title: frontmatter.title,
+                featuredImage,
+                logo,
+                font,
+            }),
+            slug: post.fields.slug,
+        })
+    }
+
+    // Careers OG
+    await createOG({
+        html: careersTemplate({ jobs: (data.careers && data.careers.nodes) || [], font }),
+        slug: 'careers',
+    })
+
+    for (const job of data.careers.nodes) {
+        const {
+            title,
+            parent,
+            fields: { slug },
+        } = job
+        const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
+        await createOG({
+            html: jobTemplate({ role: title, font, timezone }),
+            slug,
+        })
+    }
+
+    // Tutorials OG
+    // for (const post of data.tutorials.nodes) {
+    //     const { featuredImage } = post.frontmatter
+    //     const image = fs.readFileSync(featuredImage.absolutePath, {
+    //         encoding: 'base64',
+    //     })
+    //     await createOG({
+    //         html: tutorialTemplate({ image }),
+    //         slug: post.fields.slug,
+    //     })
+    // }
+
+    await browser.close()
+}
