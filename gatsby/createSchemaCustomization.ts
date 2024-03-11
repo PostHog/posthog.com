@@ -285,6 +285,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               maxVariantPrice: ShopifyMoneyV2!
               minVariantPrice: ShopifyMoneyV2!
             }
+            type ShopifyFeaturedImage {
+              localFile: File
+            }
             type ShopifyProduct implements Node {
               description: String!
               featuredMedia: ShopifyMedia
@@ -300,6 +303,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               options: [ShopifyProductOption!]!
               tags: [String!]!
               totalInventory: Int!
+              featuredImage: ShopifyFeaturedImage
             }
           `
         )
