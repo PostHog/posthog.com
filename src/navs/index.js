@@ -1221,7 +1221,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Webflow',
-                            url: '/tutorials/webflow',
+                            url: '/docs/libraries/webflow',
                         },
                         {
                             name: 'WordPress',

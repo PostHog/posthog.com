@@ -3,7 +3,7 @@ title: Framer
 icon: ../../images/docs/integrate/frameworks/framer.svg
 ---
 
-PostHog makes it easy to get data about traffic and usage of your [Framer](https://astro.build/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+PostHog makes it easy to get data about traffic and usage of your [Framer](https://www.framer.com/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your Framer app using the [JavaScript Web SDK](/docs/libraries/js).
 

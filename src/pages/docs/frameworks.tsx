@@ -91,7 +91,7 @@ export const quickLinks = [
     },
     {
         name: 'Webflow',
-        to: '/tutorials/webflow',
+        to: '/docs/libraries/webflow',
     },
     {
         name: 'WordPress',
