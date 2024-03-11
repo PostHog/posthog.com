@@ -1,5 +1,5 @@
 ---
-date: 2023-04-24
+date: 2023-04-24T00:00:00.000Z
 title: 'In-depth: ClickHouse vs BigQuery'
 rootPage: /blog
 sidebar: Blog
@@ -52,11 +52,11 @@ One of the reasons that BigQuery touts a feature-rich and friendly user-interfac
 
 BigQuery’s serverless architecture was novel at the time of its 2010 debut. Every BigQuery instance has variable storage units (distributed replicas) connected to variable compute units (calling slots); as an instance’s demands grow, so does its utilization of the storage and compute slots. Even today, this approach stands out — most databases parallelize compute, but not storage. 
 
-![BigQuery Architecture.png](../images/blog/clickhouse-vs-bigquery/bigquery-architecture.png)
+![BigQuery Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/bigquery-architecture.png)
 
 BigQuery extends many Google projects to make this happen. Specifically, BigQuery uses Colossus, Google’s file storage system; Borg, Google’s job scheduler; Dremel, a multi-tenant cluster that executes the queries; and Jupiter, Google’s pentabit network. BigQuery works because Google has a massive general-purpose infrastructure designed for isolated storage and compute.
 
-![Google Infra.png](../images/blog/clickhouse-vs-bigquery/google-infra.png)
+![Google Infra.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/google-infra.png)
 
 Amid being built on titanic infrastructure, BigQuery usually returns results in the order of _seconds_, not _milliseconds_, because it focuses on scalability, not per-query performance. 
 
@@ -64,11 +64,11 @@ Amid being built on titanic infrastructure, BigQuery usually returns results in 
 
 ClickHouse utilizes a shared-nothing architecture where CPU, Storage, and Memory are stored in a single, beefy machine. While ClickHouse *does* support sharding databases across many physical instances managed under Apache Zookeeper, its fundamental design is monolithic. When you use ClickHouse (traditionally), everything is happening in the same place. 
 
-![Shared Nothing Architecture.png](../images/blog/clickhouse-vs-bigquery/shared-nothing-architecture.png)
+![Shared Nothing Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/shared-nothing-architecture.png)
 
 Accordingly, ClickHouse can scale in all three dimensions (storage, memory, and compute) by simply upgrading the machine. However, scaling isn't as straightforward compared to BigQuery — compute cannot be added on a whim to the same instance, though you can add additional disks to an instance to scale capacity.
 
-![Clickhouse_ 3 Dimensions.png](../images/blog/clickhouse-vs-bigquery/clickhouse-3-dimensions.png)
+![Clickhouse_ 3 Dimensions.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/clickhouse-3-dimensions.png)
 
 ClickHouse’s magic happens in the way it compresses data, pre-aggregates data, and uses specialized engines accessing a device’s full compute potential. If BigQuery is a commercial airliner, then ClickHouse is a fighter jet. 
 
@@ -76,7 +76,7 @@ ClickHouse’s magic happens in the way it compresses data, pre-aggregates data,
 
 ClickHouse Cloud flips ClickHouse’s monolithic architecture on its head. ClickHouse Cloud is ClickHouse Inc.’s paid offering that helps bridge the gap between ClickHouse and BigQuery. Not only does ClickHouse Cloud provide a UI for interfacing with ClickHouse like BigQuery, it deploys ClickHouse on decoupled storage and compute on AWS. 
 
-![ClickHouse Cloud Architecture.png](../images/blog/clickhouse-vs-bigquery/clickhouse-cloud-architecture.png)
+![ClickHouse Cloud Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/clickhouse-cloud-architecture.png)
 
 ClickHouse Cloud is unquestionably modeled after BigQuery and GCP. It offers similar features, such as out-of-the-box integrations with ELT providers, an interactive SQL console, automated backups, caching, and automatic replication. 
 
@@ -103,7 +103,7 @@ Most databases store data indexed via primary keys. When searching for that data
 
 ClickHouse achieves a magnificent speed boost by using granulated storage. Each ClickHouse table has a primary key defined as a tuple of multiple columns. Data is then sorted by those columns, first by the first entry, then by the second, and onwards. Afterwards, sorted entries are broken into granules, which are fixed length mini-tables, by default 8192 entries long. ClickHouse’s big advancement is that it exclusively saves just the **first** entry to each granule. 
 
-![Granulated Storage.png](../images/blog/clickhouse-vs-bigquery/granulated-storage.png)
+![Granulated Storage.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/granulated-storage.png)
 
 Because data is sorted by primary key columns — and those columns are typically chosen based on what’s used to index data — ClickHouse needs to scan ***significantly*** less data for most queries. 
 
@@ -134,7 +134,7 @@ However, a tuned ClickHouse instance is faster. If analytical queries need to be
 
 With this arrangement, BigQuery can act as a business’s core data warehouse with ClickHouse operating as a tuned execution runtime. 
 
-![Data FLow.png](../images/blog/clickhouse-vs-bigquery/data-flow.png)
+![Data FLow.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/data-flow.png)
 
 In order to effectively connect ClickHouse and BigQuery, data needs to be streamed from BigQuery to ClickHouse. This can happen through Google Cloud Storage, or using Google DataFlow + Apache Beam. This does take some serious setup work (the ClickHouse + BigQuery connection is hardly “one-click”), but ClickHouse has a well-documented [process](https://clickhouse.com/blog/clickhouse-bigquery-migrating-data-for-realtime-queries) on it. 
 

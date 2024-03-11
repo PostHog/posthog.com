@@ -1,10 +1,14 @@
 ---
-title: How to do time-based breakdowns (hour, minute, real time)
-date: 2023-07-27
-author: ["ian-vanagas"]
+title: 'How to do time-based breakdowns (hour, minute, real time)'
+date: 2023-07-27T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['hogql', 'insights', 'product analytics']
+tags:
+  - hogql
+  - insights
+  - product analytics
 ---
 
 By default, PostHog provides an easy way to group events by week, day, and even hour. Sometimes, smaller, more specific breakdowns are required. With [HogQL](/docs/hogql), you can break down events by time of day, hourly, and even minute-by-minute to help you do a detailed analysis of when they happen, and this tutorial shows you how to do that.
@@ -24,7 +28,7 @@ multiIf(
 
 You can visualize this with a total value bar chart to the sums for the date range or time series bar to see how they change day to day.
 
-![Time of day](../images/tutorials/time-breakdowns/day.png)
+![Time of day](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/time-breakdowns/day.png)
 
 > **Note:** Event [timestamps](/docs/data/timestamps) default to UTC. You need to adjust your times depending on your local time. For example, if you are in Pacific Daylight Time, subtract 7 hours from UTC timestamps to match your local time.
 
@@ -32,7 +36,7 @@ You can visualize this with a total value bar chart to the sums for the date ran
 
 PostHog enables you to group data by hour for single-day date ranges. If you want to sum these values across ranges longer than one day, you can break it down by `toHour(timestamp)` and, once again, use a total value or time series bar chart to visualize.
 
-![Hourly breakdowns](../images/tutorials/time-breakdowns/hour.png)
+![Hourly breakdowns](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/time-breakdowns/hour.png)
 
 ## Minute-by-minute breakdown
 
@@ -74,7 +78,7 @@ dateDiff('minute', timestamp, now()) < 5
 
 You can use this filter on specific insights or on an entire dashboard. As example, below we use the filter to get the number of unique sessions in the last 5 minutes:
 
-![Real time filter](../images/tutorials/time-breakdowns/filter.png)
+![Real time filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/time-breakdowns/filter.png)
 
 To help you get set up faster with this, you can use our [real time dashboard template](/templates/real-time-dashboard) which has basic insights and real time filters set up for you.
 

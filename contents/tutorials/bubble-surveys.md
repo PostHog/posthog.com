@@ -32,7 +32,7 @@ With the snippet copied, go to your Bubble site settings by clicking on the icon
 
 Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in the **Script/meta tags in header** section. Then, deploy your site to live.
 
-![How to add PostHog to Bubble](../images/tutorials/bubble-surveys/adding-posthog.mp4)
+![How to add PostHog to Bubble](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-surveys/adding-posthog.mp4)
 
 ## 2. Create and launch your survey
 

@@ -1,8 +1,10 @@
 ---
 title: How to add session replays to Zendesk
-date: 2024-02-08
-author: ["ian-vanagas"]
-tags: ['session replay']
+date: 2024-02-08T00:00:00.000Z
+author:
+  - ian-vanagas
+tags:
+  - session replay
 ---
 
 [Session replays](/session-replay) can be a useful support tool for debugging and recreating issues. The errors, console, and network data along with the rest of PostHog's tools make PostHog a powerful support platform.
@@ -50,7 +52,7 @@ export default function Home() {
 
 Once done, run `npm run dev` and go `http://localhost:3000`  to see your app.
 
-![Next.js app](../images/tutorials/zendesk-session-replays/app.png)
+![Next.js app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/zendesk-session-replays/app.png)
 
 ## 2. Add PostHog
 
@@ -105,7 +107,7 @@ export default function RootLayout({ children }) {
 
 Connecting the form to Zendesk requires you to have access to your admin center at `your-subdomain.zendesk.com/admin/home`. Once here, click "Apps and integrations" in the sidebar and then select "Zendesk API." Enable token access, add a new API token, copy its value, and head back to your app.
 
-![API key](../images/tutorials/zendesk-session-replays/api.png)
+![API key](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/zendesk-session-replays/api.png)
 
 In `app/pages.js`, we set up a server-side function to submit a ticket to Zendesk. In it, we set up a POST request with a subject, body content, requester, and authorization. Ideally, you would have their real name and email, but we will use my own as a placeholder for now.
 
@@ -179,7 +181,7 @@ async function submitTicket(content) {
 
 Now when we go to our app and submit a value, it creates a ticket in Zendesk.
 
-![Ticket in Zendesk](../images/tutorials/zendesk-session-replays/ticket.png)
+![Ticket in Zendesk](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/zendesk-session-replays/ticket.png)
 
 ## 4. Add the session replay link to the ticket
 
@@ -210,7 +212,7 @@ export default function Home() {
 
 Now, when you check your ticket in Zendesk, you'll see a session replay link to watch the replay in PostHog.
 
-![Zendesk to session replay video](../images/tutorials/zendesk-session-replays/zendesk.mp4)
+![Zendesk to session replay video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/zendesk-session-replays/zendesk.mp4)
 
 > **Bonus:** Beyond a session replay link, you can customize the content for the ticket with information like:
 > - User ID

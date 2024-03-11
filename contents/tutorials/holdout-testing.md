@@ -1,11 +1,15 @@
 ---
 title: How to do holdout testing
-date: 2023-07-06
-author: ["ian-vanagas"]
+date: 2023-07-06T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['experimentation', 'feature flags']
----    
+tags:
+  - experimentation
+  - feature flags
+---
+    
 
 Holdout testing is a type of [A/B testing](/docs/experiments) that measures the long term effects of product changes. In holdout testing, a small group of users is not shown your changes for a long period of time, typically weeks or months after your experiment ends.
 
@@ -25,7 +29,7 @@ To create a holdout test, first, [create an experiment](/docs/experiments/manual
 
 Once saved, go to [your feature flags](https://app.posthog.com/feature_flags) and edit the flag (you can find it with the key you set in your experiment). Here, set the variant rollout percentages for the "test" and "control" to 45% each, and the rollout for "holdout" to 10%. Once done, press save.
 
-![Original split feature flags](../images/tutorials/holdout-testing/split.png)
+![Original split feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/holdout-testing/split.png)
 
 ## Implement the experiment
 
@@ -57,11 +61,11 @@ The real holdout test begins once your experiment reaches significance.
 - If the "control" variant wins, you can edit the feature flag to roll out that variant to 100% because the test "failed" and the holdout is the same as the control. You can stop the experiment, remove the testing code, and archive the experiment.
 - If the "test" variant wins, you can edit the feature flag to rollout that variant to 90% of users and keep "holdout" at 10%. Let the experiment continue to run to collect data.
 
-![Holdout split feature flags](../images/tutorials/holdout-testing/holdout.png)
+![Holdout split feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/holdout-testing/holdout.png)
 
 If the "test" variant wins, keep the code unchanged and continue to monitor the metrics. On top of your experiment goals, you can filter for insights, dashboard, or session replay about the two flag variants. In do so, filter for events where the feature flag "cta-test" value is equal to either "test" or "holdout." 
 
-![Filter for flag analytics](../images/tutorials/holdout-testing/filter.png)
+![Filter for flag analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/holdout-testing/filter.png)
 
 Unlike when rollout percentages are equal, absolute numbers here aren’t super useful or informative. 90% of users are getting the test making total event counts like pageviews or signups a lot higher. Instead, look at metrics like:
 

@@ -200,7 +200,7 @@ Lastly, update the `themes.xml` file located in the `res/values` folder to ensur
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the Android app](../images/tutorials/android-analytics/basic-app.png)
+![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-analytics/basic-app.png)
 
 ## 2. Add PostHog to your app
 

@@ -1,5 +1,5 @@
 ---
-date: 2023-05-02
+date: 2023-05-02T00:00:00.000Z
 title: 8 annoying A/B testing mistakes every engineer should know
 author:
   - lior-neu-ner
@@ -96,7 +96,7 @@ Alternatively, if you don't have enough statistical power (i.e., not enough user
 
 The solution is to use an A/B test running time calculator to determine if you have the required statistical power to run your experiment and for how long you should run your experiment. This is built into PostHog.
 
-![Setting up a new experiment in PostHog includes a recommended running time calculator](../images/blog/ab-testing-mistakes/minimum-acceptable-improvement.png)
+![Setting up a new experiment in PostHog includes a recommended running time calculator](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-mistakes/minimum-acceptable-improvement.png)
 <Caption>Setting up a new experiment in PostHog includes a recommended running time calculator</Caption>
 
 ## 4. Running an experiment without testing it first

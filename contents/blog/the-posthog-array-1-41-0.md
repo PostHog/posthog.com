@@ -1,5 +1,5 @@
 ---
-date: 2022-11-02
+date: 2022-11-02T00:00:00.000Z
 title: 'Array 1.41.0: Improving performance by up to 400%'
 rootPage: /blog
 sidebar: Blog
@@ -54,7 +54,7 @@ You won’t see any UI changes as a result of this change — persons will still
 
 ### New: Count of events per user
 
-![count events per user](../images/blog/array/1-41-0-count-events-per-user.png)
+![count events per user](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-count-events-per-user.png)
 
 Have you ever asked yourself '*What's the average average number of purchases per user?*' or '*What's the maximum number of forms submitted per user?'* 
 
@@ -64,7 +64,7 @@ Questions like these used to be hard to answer with PostHog, but no more! Use th
 
 ### Improved: Recordings interface
 
-![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
+![recordings interface](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-recordings-interface.png)
 
 We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
 
@@ -72,13 +72,13 @@ We think session recording feels like an entirely new experience now, so check i
 
 ### New: Text cards on dashboards
 
-![text cards on dashboards](../images/blog/array/1-41-0-text-card-on-dashboard.png)
+![text cards on dashboards](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-text-card-on-dashboard.png)
 
 Previously there was no easy way to add context or links to a dashboard, meaning you may have to send long explanations when sharing a dashboard with teammates. That's why we've added the option for users on paid plans to add text cards where they can add any information they want, including metadata, images or gifs!
 
 ### New: Ingestion warnings
 
-![ingestion warnings](../images/blog/array/1-41-0-ingestion.png)
+![ingestion warnings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-ingestion.png)
 
 We've added a new page to the Data Management section which lists warnings related to data ingestion from the past 30 days. If you still try to merge identified users into others, the Ingestion Warning page is where we'll remind you that the merge got blocked.
 
@@ -86,7 +86,7 @@ We've added a new page to the Data Management section which lists warnings relat
 
 ### New: App metrics
 
-![app metrics](../images/blog/array/1-41-0-app-metrics-insight.png)
+![app metrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-app-metrics-insight.png)
 
 Curious how well your apps are doing? Previously, you may have had to pour over the AWS logs, but now you can head to the new app metrics page to find out how many events an app has processed, how many retries were attempted and what errors may have occured. Very handy. Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
 
@@ -96,9 +96,9 @@ App metrics are only available for users on Scale or Enterprise plans.
 
 ### New: View recordings from anywhere
 
-![view recordings from anywhere1](../images/blog/array/1-41-0-view-recordings-anywhere1.png)
+![view recordings from anywhere1](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-view-recordings-anywhere1.png)
 
-![view recordings from anywhere2](../images/blog/array/1-41-0-view-recordings-anywhere2.png)
+![view recordings from anywhere2](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-view-recordings-anywhere2.png)
 
 You can now view session recordings from lots of different places within PostHog, making it easier to find relevant recordings.
 
@@ -106,13 +106,13 @@ Curious about how a specific person is interacting with your app? Navigate to a 
 
 ### New: Change your own email
 
-![change your password](../images/blog/array/1-41-0-password.png)
+![change your password](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-password.png)
 
 Finally, we can release one of our most requested features: the ability to change the email address attached to your account, without contacting support. All you have to do is select your profile picture in the top right and access your account settings. 
 
 ### New: Hedgehog mode
 
-![hedgehog mode](../images/blog/array/1-41-0-hedgehog-mode.png)
+![hedgehog mode](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-hedgehog-mode.png)
 
 For a while now, we've been having a hard time explaining to our families what we do for a living. This makes it even harder.
 
@@ -124,7 +124,7 @@ We've seen that the relationship between Trends series and formula was a bit uni
 
 ### One more thing: Site apps 
 
-![site-apps](../images/blog/array/1-41-0-site-apps.gif)
+![site-apps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-site-apps.gif)
 
 We're testing a new big (beta) thing: site apps. You need to **manually opt in** to enable this feature by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Once you do, PostHog will be able to inject code onto your website through `posthog-js`. We've put together [a tutorial that explains how to make a site app](/tutorials/build-site-app) if you're interested. 
 

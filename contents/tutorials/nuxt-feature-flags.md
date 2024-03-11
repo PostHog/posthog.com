@@ -41,7 +41,7 @@ Replace the code in `app.vue` with a simple heading:
 
 Run `npm run dev` to start your app.
 
-![Basic app](../images/tutorials/nuxt-surveys/basic-app.png)
+![Basic app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/basic-app.png)
 
 ## Adding PostHog on the client side
 
@@ -152,7 +152,7 @@ onMounted(() => {
 
 When you run your app now, you should see the updated text.
 
-![New app after adding the flag](../images/tutorials/nuxt-feature-flags/flag-enabled-in-app.png)
+![New app after adding the flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-feature-flags/flag-enabled-in-app.png)
 
 ## Implementing flag code on the server side
 

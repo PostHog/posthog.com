@@ -1,5 +1,5 @@
 ---
-date: 2021-05-20
+date: 2021-05-20T00:00:00.000Z
 title: Writing for developers
 author:
   - james-hawkins
@@ -17,7 +17,7 @@ As a founder, one of the most surprisingly important skills I've realized I have
 
 Out of five posts that I hoped would get there, four did. Look mom, lots of traffic:
 
-![Blog traffic for PostHog](../images/blog/writing-for-developers/posthog-blog-traffic.jpg)
+![Blog traffic for PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/writing-for-developers/posthog-blog-traffic.jpg)
 
 I don't claim to be a well-established writer. Amongst other things, I'm inconsistent with publishing and being British means I wrestle with US English. On the flipside, I've spent an embarrassingly large amount of time reading content that engineers find engaging.
 

@@ -73,7 +73,7 @@ Lastly, replace the code in `app.vue` with:
 
 The basic setup is now complete. Run `npm run dev` to see your app.
 
-![Basic Nuxt app](../images/tutorials/nuxt-analytics/basic-app.png)
+![Basic Nuxt app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-analytics/basic-app.png)
 
 ## Adding PostHog on the client side
 

@@ -47,7 +47,7 @@ export default function Index() {
 
 Run `npm run dev` and navigate to `http://localhost:3000` to see your app in action.
 
-![Basic Remix app](../images/tutorials/remix-surveys/basic-app.png)
+![Basic Remix app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -127,7 +127,7 @@ Select any template, or you can create your own by clicking "Create blank survey
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
 
-![Popover survey in app](../images/tutorials/remix-surveys/popover-survey.png)
+![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/popover-survey.png)
 
 ### Option 2: Implement your own survey UI
 
@@ -246,7 +246,7 @@ export default function Index() {
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/remix-surveys/sample-survey-ui.png)
+![Custom survey UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 

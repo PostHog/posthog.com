@@ -2,9 +2,12 @@
 title: Tracking how teams use your product
 sidebar: Docs
 showTitle: true
-author: ['yakko-majuri']
-date: 2021-04-08
-tags: ['configuration', 'product analytics']
+author:
+  - yakko-majuri
+date: 2021-04-08T00:00:00.000Z
+tags:
+  - configuration
+  - product analytics
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
@@ -123,7 +126,7 @@ Once we have this event set up, we can now tackle 3 of our metrics:
 
 To get the answers for points 1 and 2, we can use the following table:
 
-![Chart Image](../images/tutorials/user-model/user-totals.png)
+![Chart Image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/user-model/user-totals.png)
 
 Given that our event `account_created` is fired for each new member of an organization, we can get the total number of persons using our platform by just looking at the total volume on that event.
 
@@ -131,7 +134,7 @@ As for the number of organizations, we can simply select 'Active Users' instead 
 
 Finally, to get the average number of users per organization, we can then use a formula, dividing the total volume of the `account_created` event by the number of organizations (active users):
 
-![Chart Image](../images/tutorials/user-model/user-average.png)
+![Chart Image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/user-model/user-average.png)
 
 This `account_created` event can also work as a basis for other valuable metrics, such as number of new organizations per month.
 
@@ -171,13 +174,13 @@ For aggregate "all time" numbers, we could once more use tables as shown with `a
 
 However, we can also track the number of new projects per month, alongside the number of organizations that created a project that month:
 
-![Chart Image](../images/tutorials/user-model/projects-per-org-1.png)
+![Chart Image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/user-model/projects-per-org-1.png)
 
 If we were to average this, it would give us the average number of projects per organization that created a project during the time period.
 
 Another thing we can do is get the maximum number of projects any organization has created:
 
-![Chart image](../images/tutorials/user-model/project_max.png)
+![Chart image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/user-model/project_max.png)
 
 This could be useful in informing architectural decisions, as you can have an idea of what the limits of your platform should be.
 
@@ -207,7 +210,7 @@ posthog.capture('purchase', {
 
 Now, we can find our total revenue by selecting the 'sum' operation on the `purchase_value` property of the `purchase` event, like so:
 
-![Chart Image](../images/tutorials/user-model/revenue-breakdown.png)
+![Chart Image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/user-model/revenue-breakdown.png)
 
 <small class='centered'>Disclaimer: The data shown above is **demo data**.</small>
 
@@ -227,13 +230,13 @@ Now, to find the average purchase value, there are two approaches in this case:
 
 #### 1. Average of the `purchase_value` property
 
-![Chart Image](../images/tutorials/user-model/average-revenue.png)
+![Chart Image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/user-model/average-revenue.png)
 
 With the graph above, we're using PostHog's built-in mathematical operations to get the average purchase value per month.
 
 #### 2. Sum of purchases divided by total purchases
 
-![Chart Image](../images/tutorials/user-model/average-revenue-2.png)
+![Chart Image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/user-model/average-revenue-2.png)
 
 In this case, we are doing the same as above, but with an extra step. We first calculate the sum of purchases, and then divide it by the total number of purchases.
 

@@ -1,10 +1,13 @@
 ---
 title: Building a Next.js cookie consent banner
-date: 2024-01-05
-author: ["ian-vanagas"]
+date: 2024-01-05T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['configuration', 'product os']
+tags:
+  - configuration
+  - product os
 ---
 
 To ensure compliance with privacy regulations like GDPR, you may need to ask for consent from users to track them using cookies. PostHog enables you to track users with or without cookies, but you need to set up the logic to ensure you are compliant both ways.
@@ -68,7 +71,7 @@ export default function RootLayout({ children }) {
 
 After setting this up and running `npm run dev`, PostHog starts autocapturing events, but a PostHog-related cookie is set for the user without their consent.
 
-![Cookie set](../images/tutorials/nextjs-cookie-banner/cookie.png)
+![Cookie set](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-cookie-banner/cookie.png)
 
 ## Creating a cookie banner
 
@@ -126,7 +129,7 @@ export default function RootLayout({ children }) {
 
 This creates an ugly but functional cookie banner at the bottom of our site. You can customize and style it how you want.
 
-![Banner](../images/tutorials/nextjs-cookie-banner/banner.png)
+![Banner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-cookie-banner/banner.png)
 
 ## Adding the consent context
 
@@ -300,7 +303,7 @@ export function Banner() {
 
 Once done, the banner hides when a user makes a decision and their consent state is saved in local storage.
 
-![Tracking granted](../images/tutorials/nextjs-cookie-banner/granted.png)
+![Tracking granted](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-cookie-banner/granted.png)
 
 ## Initializing PostHog based on consent state
 
@@ -354,7 +357,7 @@ export function PHProvider({ children }) {
 
 Now, when users accept cookies, PostHog is initialized with data in cookies and local storage. When they decline, it is initialized without cookies (memory).
 
-![Tracking granted](../images/tutorials/nextjs-cookie-banner/localstorage.png)
+![Tracking granted](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-cookie-banner/localstorage.png)
 
 ## Further reading
 

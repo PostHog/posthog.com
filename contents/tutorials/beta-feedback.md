@@ -1,10 +1,13 @@
 ---
 title: How to collect feedback from beta users
-date: 2023-11-14
-author: ["ian-vanagas"]
+date: 2023-11-14T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['surveys', 'feature flags']
+tags:
+  - surveys
+  - feature flags
 ---
 
 The goal of a beta is to get a feature ready for release. This means improving what works well and fixing what doesn't. Using surveys to collect feedback from your users is an easy and scalable way to do this.
@@ -17,7 +20,7 @@ To create a beta feature in PostHog, go to the [early access management tab](htt
 
 On the draft page, click "Implement public opt-in" and go to the [opt-in app page](https://app.posthog.com/project/apps/574). Enable the app and set "Show features button on the page" to "Yes." This adds a modal to control early access features with no extra setup.
 
-![Creating beta feature video](../images/tutorials/beta-feedback/beta.mp4)
+![Creating beta feature video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/beta-feedback/beta.mp4)
 
 ## Creating our app
 
@@ -116,7 +119,7 @@ export default function Beta() {
 
 Now, when users opt into the "new beta page" feature, a button shows on the homepage linking to the beta page.
 
-![Opting into beta video](../images/tutorials/beta-feedback/opt-in.mp4)
+![Opting into beta video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/beta-feedback/opt-in.mp4)
 
 ## Adding a survey to the beta feature page
 
@@ -124,11 +127,11 @@ Lastly, we want to get feedback on our new beta page from the users in our beta.
 
 To create a survey, go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and click "New survey." Choose the [open feedback template](/templates/in-app-feedback-survey), fill out any details, and open the targeting section. In this section, we target the `new-beta-page` feature flag and the `/beta` URL. This prevents non-beta users from getting the survey. Once done, click save and launch.
 
-![Creating survey video](../images/tutorials/beta-feedback/survey.mp4)
+![Creating survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/beta-feedback/survey.mp4)
 
 Now when users opt-in to the beta and go to `/beta`, they see a survey asking for their feedback. 
 
-![Survey in-app](../images/tutorials/beta-feedback/survey.png)
+![Survey in-app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/beta-feedback/survey.png)
 
 This is an easy, targeted, and scalable way to learn users' thoughts and problems with your beta feature.
 

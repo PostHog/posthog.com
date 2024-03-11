@@ -1,5 +1,5 @@
 ---
-date: 2023-06-08
+date: 2023-06-08T00:00:00.000Z
 title: The Product-Market Fit Game
 author:
   - james-hawkins
@@ -40,7 +40,7 @@ Let's press start...
 
 ### Level 1 - Find a significant problem to work on
 
-![pmf-guide](../images/blog/pmf-game-guide/pmf-level-1.png)
+![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-1.png)
 
 Start by solving a problem you've had yourself. It needs to be a problem you've _both had, and actually tried to solve_, otherwise it can't be a significant problem.
 
@@ -62,7 +62,7 @@ Many people spend months or years attempting to validate their idea in advance, 
 
 ### Level 2 - Validate the problem really exists by talking to users
 
-![pmf-guide](../images/blog/pmf-game-guide/pmf-level-2.png)
+![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-2.png)
 
 Now that you _think_ there is a problem, you should figure out if others see the same issue. To do this, talk to them.
 
@@ -72,7 +72,7 @@ It's too late to tell you this, but the more helpful you've been to other people
 
 Here are a list of ways to get meetings, ranked from easiest to hardest:
 
-![6 ways to get meetings](../images/blog/pmf-game-guide/ways-to-get-meetings.png)
+![6 ways to get meetings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/ways-to-get-meetings.png)
 
 Some tips for getting meetings:
 
@@ -122,7 +122,7 @@ Work your way from top to bottom:
 
 ### Level 3 - Validate your MVP by recruiting real users
 
-![pmf-guide](../images/blog/pmf-game-guide/pmf-level-3.png)
+![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-3.png)
 
 You should start level 3 as soon as you have something for users to use. You _must_ keep talking to users throughout this level, but now you can validate better because you have a product they can see.
 
@@ -146,7 +146,7 @@ These are all the reasons why users may not use your product:
 
 * **Users cannot access your solution.** Here's what happened with the very first PostHog users. Triple check it's possible to start using your product.
 
-![a whatsapp screenshot of our first potential user telling us the login page was broken](../images/02/Screenshot-2020-02-25-at-21.52.15.png)
+![a whatsapp screenshot of our first potential user telling us the login page was broken](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/Screenshot-2020-02-25-at-21.52.15.png)
 
 * **Users are worried about using your solution.** Does your solution require, for example, personal or private company data to operate? Seek feedback: "Hey, I saw you've not used it yet – could I get some really blunt feedback. Did something put you off?" Can you reduce how much data you need access to? Can you make your product, website and approach feel more mature to signify competence? If the perceived security risk doesn't outweigh the benefit of solving the problem, the problem may not be big enough.
 
@@ -156,7 +156,7 @@ These are all the reasons why users may not use your product:
 
 ### Level 4 – Validate your product by retaining users
 
-![pmf-guide](../images/blog/pmf-game-guide/pmf-level-4.png)
+![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-4.png)
 
 Hooray, so people are showing up. Now you need to see if they're coming back or not. Figure out what your expected frequency is for usage, and check if that's roughly how often users are using your product. Users will return if you can repeatedly solve a problem for them. If you haven't already, [setup analytics to track retention](/blog/early-stage-analytics). 
 
@@ -168,7 +168,7 @@ If they're willing, ask them to perform tasks live in front of you, and ask them
 
 Start "closing the loop" with users. This is a simple process to improve your product:
 
-![product improvement loop](../images/blog/pmf-game-guide/product-loop.png)
+![product improvement loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/product-loop.png)
 
 Closing the loop above is the way to cement your product-market fit because:
 
@@ -198,7 +198,7 @@ Closing the loop above is the way to cement your product-market fit because:
 
 ### Level 5 - Onboard your first 5 reference paying customers
 
-![pmf-guide](../images/blog/pmf-game-guide/pmf-level-5.png)
+![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-5.png)
 
 Start by figuring out your [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework).
 
@@ -206,7 +206,7 @@ Write down needs, haves, and attributes you think your Ideal Customer Profile us
 
 Do not just assume one or two things like "engineers in startups with over 100 staff". Definitely do not just list an industry. The specific things we considered at PostHog were:
 
-![posthog icp](../images/blog/pmf-game-guide/posthog-icp.png)
+![posthog icp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/posthog-icp.png)
 
 Feel free to include some anti-needs and haves too – i.e. things your Ideal Customer Profile _doesn't_ need or have.
 

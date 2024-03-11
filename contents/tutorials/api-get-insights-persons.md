@@ -1,10 +1,14 @@
 ---
 title: How to use the PostHog API to get insights and persons
-date: 2023-02-01
-author: ["ian-vanagas"]
+date: 2023-02-01T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['insights', 'persons', 'product os']
+tags:
+  - insights
+  - persons
+  - product os
 ---
 
 An API or application programming interface is how computers talk to each other. They are powerful access points to applications, data, and processing.
@@ -17,7 +21,7 @@ Like most APIs, we must authenticate ourselves before we can access our data in 
 
 To create a personal API key in PostHog, click your avatar icon in the bottom left corner of your PostHog instance, then click the gear icon to go to "My settings." 
 
-![Profile](../images/tutorials/api-get-insights-persons/profile.png)
+![Profile](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-get-insights-persons/profile.png)
 
 In "My settings," go to the ["Personal API Keys" tab](https://us.posthog.com/settings/user-api-keys) click "Create personal API key," add a name, and click "Create key." This creates a key and value in the table below. Make sure to save the value as it is only shown once, and you must create a new key if you lose it. The value looks like this:
 
@@ -284,7 +288,7 @@ This is just scratching the surface. API routes exist for all types of data in y
 
 One of the best ways to explore the API is to use PostHog normally, but with the browser network tab open to the `Fetch/XHR` tab. This gives you an idea of what requests PostHog is sending to generate the data you are seeing. It can be useful if you are trying to recreate a request to see how we do it in PostHog.
 
-![Inspect requests](../images/tutorials/api-get-insights-persons/inspect.png)
+![Inspect requests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-get-insights-persons/inspect.png)
 
 Also, check out our [our API documentation](/docs/api) for all the information about the API and its possibilities.
 

@@ -1,5 +1,5 @@
 ---
-date: 2022-10-10
+date: 2022-10-10T00:00:00.000Z
 title: 'Permissions and projects in PostHog, explained'
 rootPage: /blog
 sidebar: Blog
@@ -27,7 +27,7 @@ Starting at the top, organizations are the highest level of abstraction within P
 Apart from the FOSS version, all versions of PostHog enable you to belong to and create multiple organizations. To collaborate with someone on PostHog, it’s best to invite them to join your organization. If you’ve joined multiple organizations, you can switch between them using the user setting menu accessed by clicking your profile picture in the top right corner of your PostHog instance.
 
 ### How to invite a colleague to your organization in PostHog
-![how to invite someone to posthog](../images/blog/activation-checklist-images/posthog-invite.png)
+![how to invite someone to posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/posthog-invite.png)
 
 Everyone in an organization has the ability to add new members to that organization by sending them an invitation. To send an invitation to a colleague, simply log into your PostHog instance, select your user settings by clicking your profile picture in the top right and select ‘_+ Invite members_’. We’ll send them an email automatically.
 
@@ -62,7 +62,7 @@ Each organization can only have one owner, and new users are added as members by
 
 ### How to alter permissions and remove users in PostHog
 
-![how to remove users posthog](../images/blog/activation-checklist-images/how-to-remove-users.png)
+![how to remove users posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/how-to-remove-users.png)
 
 Whether someone has left your (actual) organization or joined your (PostHog) organization, sometimes you’ll undoubtedly need to change access rights — or remove a user entirely. In such cases, just head to the _Project settings_ page of your PostHog instance, via the main menu. 
 

@@ -136,7 +136,7 @@ touch dashboard.php
 
 Run `php -S localhost:8000` and navigate to `http://localhost:8000` to see our app in action. Enter anything in the `login` page to save some session details.
 
-![Basic PHP app](../images/tutorials/php-analytics/basic-php-app.mp4)
+![Basic PHP app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/php-analytics/basic-php-app.mp4)
 
 ## 2. Add PostHog to your app
 

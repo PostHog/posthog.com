@@ -1,10 +1,14 @@
 ---
 title: How to create a broken link (404) checker
-date: 2023-06-01
-author: ["ian-vanagas"]
+date: 2023-06-01T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['actions', 'configuration', 'product os']
+tags:
+  - actions
+  - configuration
+  - product os
 ---
 
 Broken links and 404s are frustrating for users. Without a way to check for them, you might not realize they exist and can’t fix them. 
@@ -102,7 +106,7 @@ npm start
 
 When you go to a route that doesn’t exist, like [http://localhost:3000/test](http://localhost:3000/test), your app captures a `not found` event and return the component.
 
-![Not found event](../images/tutorials/broken-link-checker/not-found.mp4)
+![Not found event](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/broken-link-checker/not-found.mp4)
 
 ## Setting up our Slack webhook
 
@@ -128,7 +132,7 @@ With our Slack webhook, we can set up an action that triggers the webhook when s
 
 4. Visit [http://localhost:3000/test](http://localhost:3000/test) again, and you’ll see a message in your Slack channel.
 
-![Slack](../images/tutorials/broken-link-checker/slack.mp4)
+![Slack](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/broken-link-checker/slack.mp4)
 
 > **Note:** you can only send actions to one webhook. If you have multiple destinations you want to send to, you can use [Zapier](/docs/apps/zapier-connector).
 

@@ -44,7 +44,7 @@ export default function Index() {
 
 Run `npm run dev` and navigate to `http://localhost:3000` to see your app in action.
 
-![Basic Remix app](../images/tutorials/remix-ab-tests/basic-app.png)
+![Basic Remix app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 

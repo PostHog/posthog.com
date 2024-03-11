@@ -1,5 +1,5 @@
 ---
-date: 2023-01-16
+date: 2023-01-16T00:00:00.000Z
 title: 'Array 1.43.0: Massive performance improvements!'
 rootPage: /blog
 sidebar: Blog
@@ -40,31 +40,31 @@ Nobody likes waiting for results, so we've put a renewed focus into performance 
 Last but not least, we now also have a [ClickHouse manual](/handbook/engineering/clickhouse) where we gather information about the database powering PostHog.
 
 ### New: Feature flag variant overrides
-![flag overrides](../images/blog/array/1-43-0-feature-override.gif)
+![flag overrides](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-43-0-feature-override.gif)
 
 Ever created a multivariate feature flag, and wanted to show the control variant to specific users? Or, maybe you found a new cohort you'd like to add to the test variant? Now you can!
 
 1.43.0 adds the ability to manually override variants via the flag edit screen. It's great for ensuring users get the intended experience, but is also useful for testing as it enables you to deterministically choose a variant, and test across client-side and server-side feature flags.
 
 ### New: Export recordings to file
-![export recordings](../images/blog/array/1-43-0-export.gif)
+![export recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-43-0-export.gif)
 
 Sometimes a recording can be so insightful, so important, that you think - "I want to keep a record of this forever." Well, now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commemorate your first sale or for compliance reasons, the tools are now in your hands.
 
 ### New: Role-based access for feature flags
-![ff-roles](../images/blog/array/1-43-0-ff-roles.gif)
+![ff-roles](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-43-0-ff-roles.gif)
 
 You can now create roles and group team members together, along with customizing feature flags access for team members! Having access control helps reduce accidental changes and ensures confidence when shipping a new feature.
 
 ### New: Better insight searching
-![insight searching](../images/blog/array/1-43-0-search.gif)
+![insight searching](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-43-0-search.gif)
 
 We don't want searching for insights to be just functional. We want it to be a world-class, joy-sparking event! So, we've updated search to include the description field and any tags which have been applied.
 
 This sounds like a small change, but it makes a massive difference for teams that organize data well and generate a lot of insights!
 
 ### New: Show event/property counts in persons modal
-![persons modal](../images/blog/array/1-43-0-modal.gif)
+![persons modal](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-43-0-modal.gif)
 
 We've updated the persons modal that appears when you select a data point on a query to show event and property counts on that person. This is especially helpful for finding out who your power users are, as you can quickly scan to see which users have completed an event the most!
 

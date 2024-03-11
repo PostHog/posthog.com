@@ -1,5 +1,5 @@
 ---
-date: 2023-09-07
+date: 2023-09-07T00:00:00.000Z
 title: Everything we've learned about hiring for startups (so far)
 author:
   - andy-vandervell
@@ -58,7 +58,7 @@ Follow these three principles and your ads will stand out from 90% of the compet
 
 **Why is this important?** Being transparent demonstrates credibility. It shows you’ve thought about the process, why you’re recruiting that role, and you won’t waste people’s time with lowball offers.
 
-![comp calculator](../images/newsletter/hiring/comp-calc.png)
+![comp calculator](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/hiring/comp-calc.png)
 
 ## 4. A “soft yes” is actually a no
 
@@ -111,7 +111,7 @@ We’re as flexible as possible with SuperDays. They can be split over more than
 
 **Why is this important?** Real work filters out people who are just good at interviews, and gives you a stronger signal on how they work, communicate, and solve problems.
 
-![hiring process](../images/newsletter/hiring/hiring-process.png)
+![hiring process](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/hiring/hiring-process.png)
 
 ## 8. Make your own mind up
 

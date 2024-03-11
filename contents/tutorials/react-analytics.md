@@ -95,7 +95,7 @@ export default App;
 
 The basic setup is now complete. Run `npm start` to see your app in action.
 
-![Basic React app](../images/tutorials/react-analytics/basic-app.png)
+![Basic React app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-analytics/basic-app.png)
 
 ## Adding PostHog
 

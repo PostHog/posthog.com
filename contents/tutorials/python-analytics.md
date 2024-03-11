@@ -140,7 +140,7 @@ Lastly, we set up the basic layout for our HTML pages:
 
 Run `python3 app.py` and navigate to `http://localhost:8000` to see our app in action. Enter anything on the login page to save some session details.
 
-![Basic Python app](../images/tutorials/python-analytics/basic-python-app.mp4)
+![Basic Python app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/python-analytics/basic-python-app.mp4)
 
 ## 2. Add PostHog to your app
 

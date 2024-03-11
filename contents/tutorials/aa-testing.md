@@ -1,10 +1,13 @@
 ---
 title: How to do A/A testing
-date: 2023-07-07
-author: ["ian-vanagas"]
+date: 2023-07-07T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['experimentation', 'feature flags']
+tags:
+  - experimentation
+  - feature flags
 ---
 
 An A/A test is the same as an [A/B test](/docs/experiments) except both groups receive the same code or components. Since both groups get identical functionality, the goal is to **not** see a statistical difference between the variants by the end of the experiment. 
@@ -17,7 +20,7 @@ Teams run A/A tests to ensure their A/B test service, functionality, and impleme
 
 The first step in running an A/A test is creating an experiment. You do this going to the [experiments tab](https://app.posthog.com/experiments) and clicking the "New experiment" button. Set a name, key, and experiment goal. Make sure to clarify in the name or description that it is an A/A test.
 
-![Create an experiment](../images/tutorials/aa-testing/experiment.png)
+![Create an experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/aa-testing/experiment.png)
 
 If you use an absolute goal, like total pageviews, make sure to use an equal variant split (which is the default). If you use a relative goal like conversion, you can test non-equal variant splits like 25-75. To do this, edit the feature flag with the same key as your experiment, change the variant rollout, and press save.
 

@@ -1,5 +1,5 @@
 ---
-date: 2023-06-08
+date: 2023-06-08T00:00:00.000Z
 title: What we've learned about product-market fit
 author:
   - andy-vandervell
@@ -34,13 +34,13 @@ Finding product-market fit in a startup is tough, but the only sure way to fail 
 
 Defining our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) was a turning point for PostHog. You can see it in our revenue growth:
 
-![revenue](../images/newsletter/product-market-fit/rev.png)
+![revenue](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/product-market-fit/rev.png)
 
 Your ICP should comprise very specific, individual needs, and haves – maybe even some anti-needs/haves. “Engineers with more than 100 staff” is not an ICP, nor is “enterprises who need [your product / solution]” or an industry.
 
 Here’s what our first ICP looked like:
 
-![icp](../images/newsletter/product-market-fit/icp.png)
+![icp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/product-market-fit/icp.png)
 
 If you don’t have an ICP, you almost certainly don’t have product-market fit. Note: you need users who are retaining before defining your ICP.
 
@@ -98,7 +98,7 @@ Reaching $1 million ARR is still a serious milestone, but only if it’s backed 
 
 Listening to users compounds. Use this simple loop to accelerate your progress to product-market fit:
 
-![loop](../images/newsletter/product-market-fit/product-loop.png)
+![loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/product-market-fit/product-loop.png)
 
 The more you listen and act on their feedback, the more users will share useful feedback. Your product will get better fast, and you’ll generate great word of mouth growth.
 

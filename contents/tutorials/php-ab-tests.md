@@ -45,7 +45,7 @@ $paragraphText = 'Placeholder text';
 
 Run `php -S localhost:8000` and navigate to `http://localhost:8000` to see our app in action.
 
-![Basic PHP app](../images/tutorials/php-ab-tests/basic-app.png)
+![Basic PHP app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/php-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 

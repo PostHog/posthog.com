@@ -2,10 +2,12 @@
 title: How to improve web app performance using PostHog session replays
 sidebar: Docs
 showTitle: true
-author: ['lior-neu-ner']
-date: 2023-04-13
+author:
+  - lior-neu-ner
+date: 2023-04-13T00:00:00.000Z
 featuredTutorial: true
-tags: ["session replay"]
+tags:
+  - session replay
 ---
 
 Waiting for slow web apps is like watching paint dry. It's the bane of productivity, the destroyer of efficiency, and a leading cause of [customer churn](/blog/customer-churn-analysis-guide).
@@ -19,11 +21,11 @@ In this tutorial, we'll show you:
 
 First, ensure that session replays are [enabled](/docs/session-replay/manual). Next, navigate to the Session Replay tab in PostHog. Finally, click on the Network tab in the sidebar next to or below the replay.
 
-![A screenshot showing where to find the performance monitoring in the session replays tool](../images/tutorials/performance-metrics/performance-tool.png)
+![A screenshot showing where to find the performance monitoring in the session replays tool](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-metrics/performance-tool.png)
 
 Here you'll see all the network requests that are made during the page load and user session, as well as how long they took. You'll also see the time taken for First Contentful Paint, DOM interactive, and Page Loaded. 
 
-![A screenshot of the network tab showing example values for First Contentful Paint, DOM interactive, and Page Loaded](../images/tutorials/performance-metrics/network-tab.png)
+![A screenshot of the network tab showing example values for First Contentful Paint, DOM interactive, and Page Loaded](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-metrics/network-tab.png)
 
 Next, we'll go through what each one of these three metrics mean and how to improve them.
 
@@ -101,20 +103,20 @@ Combine this with the cheat sheet above and you'll be able to pinpoint what are 
 ### **Examples**
 
 #### 1. Large Images
-![A screenshot of the network tab showing the download of a large that is slowing down performance](../images/tutorials/performance-metrics/slow-image-download.png)
+![A screenshot of the network tab showing the download of a large that is slowing down performance](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-metrics/slow-image-download.png)
 Here we see a large image download that is delaying Page Loaded. It may also be delaying FCP if it's part of the initial content.
 
 #### 2. JS requests**
 
-![A screenshot of the network tab showing a list of JavaScript downloads that are delaying the performance metrics](../images/tutorials/performance-metrics/downloading-javascript-delay.png)
+![A screenshot of the network tab showing a list of JavaScript downloads that are delaying the performance metrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-metrics/downloading-javascript-delay.png)
 
 In this example we see high Page Loaded time caused by downloading many JavaScript packages. However, downloading JavaScript may not always impact our three core metrics. Consider the following example: 
 
-![A screenshot of the network tab filtered to show JavaScript requests only](../images/tutorials/performance-metrics/javascript-requests.png)
+![A screenshot of the network tab filtered to show JavaScript requests only](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-metrics/javascript-requests.png)
 Here we see fast times for downloading JavaScript. Expanding into one of the requests, we can also see that the request is not blocking the render of the screen. Thus we can conclude that this JS download is not contributing significantly to any of our metrics.
 
 #### 3. Latency delays
-![A screenshot of the network tab filtered to show image requests only. The list shows small images that are taking more than one second each to download.](../images/tutorials/performance-metrics/image-requests.png)
+![A screenshot of the network tab filtered to show image requests only. The list shows small images that are taking more than one second each to download.](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-metrics/image-requests.png)
 
 This example shows tiny images that are taking in excess of one second to download. This may be caused by server or network latency.
 
@@ -149,7 +151,7 @@ Once you have identified which factors are affected your page load times, here a
 
 * Use compression algorithms like [Gzip](https://www.gnu.org/software/gzip/) or [Brotli](https://www.brotli.org/) to reduce file sizes and API responses.
 
-![A screenshot showing the time saved downloading gzip-compressed API responses versus uncompressed responses](../images/tutorials/performance-metrics/gzip-compression.png)
+![A screenshot showing the time saved downloading gzip-compressed API responses versus uncompressed responses](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-metrics/gzip-compression.png)
 <Caption>Notice the big difference in time taken between network requests returning uncompressed responses (red) and gzip-compressed responses (green)</Caption>
 
 ## Further reading

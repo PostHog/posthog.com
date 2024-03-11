@@ -1,6 +1,6 @@
 ---
 title: What is a growth engineer? (And why they're awesome)
-date: 2023-04-26
+date: 2023-04-26T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -25,7 +25,7 @@ In this post, we'll explain the benefits of growth engineers, the type of people
 
 To start, it is useful to understand who growth engineers are as people. When comparing them to software engineers, here are the characteristics that stand out:
 
-![Characteristics](../images/blog/what-is-a-growth-engineer/characteristics.png)
+![Characteristics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/characteristics.png)
 
 1. **Entrepreneurial**. Growth engineers, especially at PostHog, have an interest in the business as a whole as well as the hustle to find ways to improve it. They find areas they can make a large impact on the growth metrics, and develop solutions themselves to improve those metrics. Like an entrepreneur, they are independent and scrappy.
 
@@ -75,7 +75,7 @@ As [Terra](https://www.workatastartup.com/jobs/59415), a YC and Samsung-backed h
 
 If all this sounds like a unicorn, you aren’t wrong. This is again why we find former technical founders as a good fit for this role. They have the business and product knowledge to develop growth ideas and strategies, the practical technical knowledge to implement them, as well as a familiarity with the data a product produces.
 
-![Growth engineers' power](../images/blog/what-is-a-growth-engineer/thanos.png)
+![Growth engineers' power](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/thanos.png)
 
 > **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/blog/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
 
@@ -103,7 +103,7 @@ It includes creating a [billing service](https://github.com/PostHog/posthog/pull
 
 Our growth team are improving the signup funnel by running A/B tests of options like [single sign on buttons](https://github.com/PostHog/posthog/pull/13234), [verifying emails](https://github.com/PostHog/posthog/pull/13632), and adding two-factor authentication.
 
-![Experiment example](../images/blog/what-is-a-growth-engineer/experiment.png)
+![Experiment example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/experiment.png)
 <Caption>An example of the pricing call to action experiment.</Caption>
 
 The results of this include:

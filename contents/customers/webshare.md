@@ -31,7 +31,7 @@ In the early days, the team used a mix of tools to facilitate this customer-cent
 
 “That’s when we found PostHog, and realized it does everything we needed all at once, including feature flags!”
 
-![PostHog webshare pricing experiment](../images/customers/webshare/webshare-pricing.png)
+![PostHog webshare pricing experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/webshare/webshare-pricing.png)
 <Caption>Adding the 'Buy Now' call to action and adjusting the text enabled Webshare to boost conversion by 26%</Caption>
 
 ### How Webshare increased conversion rates by 26% with experiments

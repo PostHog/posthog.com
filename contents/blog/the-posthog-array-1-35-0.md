@@ -1,5 +1,5 @@
 ---
-date: 2022-04-25
+date: 2022-04-25T00:00:00.000Z
 title: 'Array 1.35.0: Introducing SAML, world map view and new plugins'
 rootPage: /blog
 sidebar: Blog
@@ -46,7 +46,7 @@ Ever wondered who deleted that feature flag, or merged those two people? Wonder 
 You can now view changes to feature flags and persons made in the UI and see who made them, when. Watch out for the activity log being added to more pages in future releases. Or [tell us](https://app.posthog.com/home#supportModal) where we should add it next!
 
 ### New: World map
-![PostHog - World Map](../images/blog/array/1_35_0_map.png)
+![PostHog - World Map](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1_35_0_map.png)
 
 A staple request of every PostHog hackathon has finally been realized, with the introduction of **world map** – a new Trends chart type which visualizes breakdowns by country (based on [GeoIP](https://posthog.com/integrations/geoip) data). Intuitively compare how your traffic and usage differ across countries of the world!
 
@@ -61,14 +61,14 @@ You can configure up to one SAML provider per organization, but check out our [S
 </blockquote>
 
 ### Improvement: Project homepage updates
-![PostHog - Project Homepages](../images/blog/array/1_34_0-homepage.png)
+![PostHog - Project Homepages](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1_34_0-homepage.png)
 
 In the last update, we introduced [project homepages](/blog/the-posthog-array-1-34-0#new-homepage) to help you find information quickly. Now, we've made them even better!
 
 We've added a new homepage card which lists your recently viewed insights to the project homepage, as well as lists of recent recordings and newly identified persons. All of this is to help give you quick access to commonly-visited pages and recent insights.
 
 ### New: Avo plugin
-![PostHog - Avo plugin](../images/blog/array/1_35_0_avo.png)
+![PostHog - Avo plugin](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1_35_0_avo.png)
 
 We're big fans of [the Avo data governance platform](https://www.avo.app/) and were lucky enough to meet the team in person at our recent Iceland offsite. Now, we've launched a new plugin too!
 

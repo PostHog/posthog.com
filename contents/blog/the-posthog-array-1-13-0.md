@@ -1,5 +1,5 @@
 ---
-date: 2020-08-13
+date: 2020-08-13T00:00:00.000Z
 title: Array 1.13.0
 rootPage: /blog
 sidebar: Blog
@@ -27,7 +27,7 @@ If you're self-hosting and want to upgrade for a better experience with nicer fe
 
 ### [PostHog is now available on Segment!](/blog/posthog-segment-integration)
 
-![](../images/posthog-segment.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/posthog-segment.png)
 
 We're happy to announce that PostHog is now available as a destination on Segment.
 
@@ -52,7 +52,7 @@ The integration used to be very basic - but now you can edit the message format 
 
 ### [Toolbars for all!](https://github.com/PostHog/posthog/pull/1326)
 
-![](../images/casts/inspect.gif)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/casts/inspect.gif)
 
 PostHog provides an irrefutably awesome toolbar. This lets you interact with your site or app and understand who is doing what. We've been in Beta for a few weeks, and spent a lot of time interviewing early users - thank you to everyone that took part!
 

@@ -1,10 +1,13 @@
 ---
-title: Running experiments on new users 
+title: Running experiments on new users
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2022-10-10
-tags: ['experimentation', 'feature flags']
+author:
+  - ian-vanagas
+date: 2022-10-10T00:00:00.000Z
+tags:
+  - experimentation
+  - feature flags
 ---
 
 - **Level:** Medium 🦔🦔
@@ -32,19 +35,19 @@ This is all we need to start setting up our experiment.
 
 To start setting up our experiment, go to the Experiments tab, and start entering basic info like a name, key, and description. We are going to test two design and copy changes so we’ll create variant keys for both. One is named `upload-prompt`, and the other is `upload-instructions`.
 
-![New experiment](../images/tutorials/new-user-experiments/new-experiment.png)
+![New experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/new-user-experiments/new-experiment.png)
 
 For our participants, we will choose users, and then use regex to filter for ones who joined recently. We’ll use the regex equation `2022-09.+` to filter all the users who joined in September (because that was last month).
 
 > **Note:** You can change `2022` or `09` to whatever years or months you want. You could also add a specific day (`2022-09-18.+`) or a range of days (`2022-09-1([1-8]).+`). There is a lot you can do with regex basically, we are only scratching the surface here.
 
-![Select participants](../images/tutorials/new-user-experiments/select-participant.png)
+![Select participants](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/new-user-experiments/select-participant.png)
 
 We could also choose organizations or other groups here (if they are set up). This would allow us to provide a consistent experience to every member of an organization and see how their usage differed at an organizational level. To learn more about group analytics, see our [product manual](/manual/group-analytics).
 
 Next, for goal type, we’ll choose funnel. We want the number of new users uploading files (getting further in the funnel) to increase significantly. 
 
-![Goal funnel](../images/tutorials/new-user-experiments/goal-funnel.png)
+![Goal funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/new-user-experiments/goal-funnel.png)
 
 Finally, we’ll set the minimum acceptable improvement to 20%. This is a lot, but (hypothetically) we have a lot of room to improve here. This means that out of all the new users who sign up, we want to raise the percentage who upload a file to go from 23.9% to 43.9%. PostHog calculated (and recommends) a sample size of 219 and a recommended running time of 33 days. This is long, but it’s required because we have a small number of new users coming in.
 

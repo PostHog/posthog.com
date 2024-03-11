@@ -1,12 +1,17 @@
 ---
-title: How to set up Node.js (Express) analytics, feature flags, and more
+title: 'How to set up Node.js (Express) analytics, feature flags, and more'
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2023-01-05
+author:
+  - ian-vanagas
+date: 2023-01-05T00:00:00.000Z
 featuredTutorial: false
-featuredVideo: https://www.youtube-nocookie.com/embed/aYRzmDP-Mwc
-tags: ["configuration", "feature flags", "persons", "events"]
+featuredVideo: 'https://www.youtube-nocookie.com/embed/aYRzmDP-Mwc'
+tags:
+  - configuration
+  - feature flags
+  - persons
+  - events
 ---
 
 Node.js is a JavaScript runtime and server environment. Express.js is a web application framework for Node.js. Express is the most popular backend JavaScript framework and one of the most popular web frameworks across all languages.
@@ -68,7 +73,7 @@ app.listen(port, () => {
 
 This is enough for a basic HTML page. After this, you can run `node server.js` in the terminal to start the server. Going to `http://localhost:3000/` gives you a basic page like this:
 
-![Basic page](../images/tutorials/node-express-analytics/basic.png)
+![Basic page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/basic.png)
 
 This is a great start, but we want something with *pizazz.*
 
@@ -125,7 +130,7 @@ In our `index.ejs` file, loop through the posts and display the title and conten
 
 This gives us a page like this:
 
-![Blog](../images/tutorials/node-express-analytics/posts.png)
+![Blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/posts.png)
 
 ### Adding a form
 
@@ -216,7 +221,7 @@ You can find your snippet when you start a new project or in your project settin
 
 Reload the page, click around, and you should start to see some events in your PostHog instance.
 
-![Autocapture events](../images/tutorials/node-express-analytics/autocapture.png)
+![Autocapture events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/autocapture.png)
 
 > If you have multiple pages (others besides `index.ejs`), use partials or `include`. This adds the header on every page so that the PostHog snippet loads everywhere. 
 
@@ -284,7 +289,7 @@ app.post('/email', (req, res) => {
 
 Submit an email to the form in your app and it shows up as an event in PostHog (see that it comes from the `posthog-node` library).
 
-![Custom event](../images/tutorials/node-express-analytics/custom-event.png)
+![Custom event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/custom-event.png)
 
 > Add the `groups` param to a capture call, like `groups: { company: 'posthog' }`), to add a user to a group.
 
@@ -332,7 +337,7 @@ app.post('/email', (req, res) => {
 
 This shows up as an alias event in PostHog and you should see the two persons combined into one, under the same email.
 
-![Alias](../images/tutorials/node-express-analytics/alias.png)
+![Alias](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/alias.png)
 
 From here, you can use `client.identify` to add details about the person. You can do this whenever you want, but now that you combined the person, it is a good time.
 
@@ -350,7 +355,7 @@ client.identify({
 
 The final tool to implement is feature flags. This feature flag shows a call-to-action (CTA) to go to the PostHog site below each blog post. To do this, start by creating a feature flag in PostHog named “blog-cta” and set the release condition to 100% for testing.
 
-![Feature flag](../images/tutorials/node-express-analytics/feature-flag.png)
+![Feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/feature-flag.png)
 
 Once done, we can copy the Node code PostHog provides and add it to our `app.get` route. In `server.js`, get the distinct ID from cookies again to evaluate the flag. Make the route `async` so we can `await` the feature flag evaluation. Finally, enable the CTA if the feature flag evaluates to `true`. With these changes, the `app.get` route looks like this:
 
@@ -396,7 +401,7 @@ Finally, in `index.ejs`, add the code to show the CTA that activates when the fe
 
 Once saved, reload the server and webpage. You see an extra CTA pointing to the site.
 
-![CTA](../images/tutorials/node-express-analytics/cta.png)
+![CTA](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/cta.png)
 
 The CTA should disappear if you turn the feature flag off or clear your cookies (but the site will still work). 
 

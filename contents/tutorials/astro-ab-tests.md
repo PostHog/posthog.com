@@ -49,7 +49,7 @@ Next, replace the code in `src/pages/index.astro` with a simple heading and butt
 
 Run `npm run dev` and navigate to http://localhost:4321 to see your app in action.
 
-![Basic Astro app](../images/tutorials/astro-ab-tests/basic-app.png)
+![Basic Astro app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 

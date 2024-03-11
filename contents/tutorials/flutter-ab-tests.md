@@ -102,7 +102,7 @@ class FeatureScreenView extends StatelessWidget {
 
 Press **F5** and run the app in any emulator (we chose Android) to see your app in action.
 
-![Basic setup of the Flutter app](../images/tutorials/flutter-ab-tests/basic-app.mp4)
+![Basic setup of the Flutter app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-ab-tests/basic-app.mp4)
 
 ## 2. Add PostHog to your app
 

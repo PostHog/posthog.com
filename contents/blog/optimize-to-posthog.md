@@ -1,6 +1,6 @@
 ---
 title: An intro to PostHog for Google Optimize users
-date: 2023-10-20
+date: 2023-10-20T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -155,11 +155,11 @@ The equivalent of Google Optimize’s reporting tab is PostHog’s experiment re
 
 First, a summary of the experiment details, including its progress, goals, results, and impact on secondary metrics.
 
-![Summary](../images/blog/optimize-to-posthog/summary.png)
+![Summary](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/optimize-to-posthog/summary.png)
 
 Second, the experiment results. This includes a side-by-side comparison of test variants, the winning variant probabilities, your goal metric visualization, and detailed results.
 
-![Detailed results](../images/blog/optimize-to-posthog/results.png)
+![Detailed results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/optimize-to-posthog/results.png)
 
 Beyond the preset experiment results, you can analyze related events with PostHog’s full suite of product analytics tools. Like how you can use variant ID and test names to analyze Optimize tests in Google Analytics, you can use feature flag properties to filter for relevant data in multi-insight dashboards, retention insights, and session replays.
 

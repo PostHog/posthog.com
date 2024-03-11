@@ -1,6 +1,6 @@
 ---
 title: How BeforeSunset AI achieved 'Product of the Month' on Product Hunt
-date: 2023-08-31
+date: 2023-08-31T00:00:00.000Z
 author:
   - joe-martin
 showTitle: true
@@ -21,7 +21,7 @@ category: Startups
 
 After rebuilding the product around this AI-powered vision, the team wanted to relaunch in earnest — and in June 2023 debuted on Product Hunt, going on to win [Product of the Day, Week, and Month](https://www.producthunt.com/products/beforesunset). Here’s how:
 
-![BeforeSunset AI Launch on Product Hunt](../images/blog/before-sunset-ai.png)
+![BeforeSunset AI Launch on Product Hunt](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/before-sunset-ai.png)
 
 ### 1. Don't leave launch planning to the last minute
 
@@ -55,7 +55,7 @@ One example of this came from BeforeSunset's 'Plan my day' AI feature, where use
 
 ### 3. Move fast. Ask for support personally.
 
-![BeforeSunset AI outreach](../images/blog/before-sunset-outreach.png)
+![BeforeSunset AI outreach](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/before-sunset-outreach.png)
 <Caption>An example of a community outreach message sent by BeforeSunset's team</Caption>
 
 With Product Hunt, you only have a short amount of time in order to get traction and galvanize the community. Take too long and you’ll fall off the daily page, and into the archives. So, you need a strategy to continue currying favor and votes throughout the day.

@@ -18,12 +18,12 @@ In this guide, we'll:
 1. Go to 'Online Store' -> 'Themes' (see image below)
 1. On your theme, click 'Actions' -> 'Edit code' (see image below)
 
-    ![Shopify Dashboard](../../images/tutorials/shopify/shopify-dashboard.png)
+    ![Shopify Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/shopify-dashboard.png)
 
 1. You should now be seeing a code editor. Click on `theme.liquid` under 'Layout' on the left sidebar (see image below)
 1. Navigate until you see the closing `</head>` tag. Paste your snippet there, before that tag, like in the image below:
 
-    ![Shopify Dashboard](../../images/tutorials/shopify/snippet.png)
+    ![Shopify Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/snippet.png)
 
 1. Click the green save button on the top right and you're good to go - PostHog should now be working on your Shopify store!
 
@@ -51,7 +51,7 @@ For example, capturing the product title and price (divided by 100) looks like t
 
 Once set up, the _Add to cart_ button autocapture event in PostHog will include the properties for each of the attributes prefixed with `data-ph-capture-attribute-` and their values.
 
-![Data attributes in an autocaptured event](../../images/tutorials/shopify/autocapture-data-attributes.png)
+![Data attributes in an autocaptured event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/autocapture-data-attributes.png)
 
 ### 3. Order details (using properties on a custom event)
 
@@ -90,7 +90,7 @@ To add a custom event to your Shopify checkout page, add a script like this to y
 
 Once setup, you can see the order's total price including taxes (`value`) and the array of products that were ordered with specific info about the variants in PostHog:
 
-![Order details sent from Shopify as properties on a custom event](../../images/tutorials/shopify/shopify-order-details.png)
+![Order details sent from Shopify as properties on a custom event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/shopify-order-details.png)
 
 ## What can you do with this data?
 

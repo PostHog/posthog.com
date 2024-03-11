@@ -2,9 +2,13 @@
 title: How to build a site app
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2022-11-02
-tags: ["apps", "site-apps", 'product os']
+author:
+  - ian-vanagas
+date: 2022-11-02T00:00:00.000Z
+tags:
+  - apps
+  - site-apps
+  - product os
 ---
 
 Site apps make it quick and easy to add features such as forms and banners to your site through our JavaScript library. This enables you to do things like capture feedback, add notifications, provide support, and more. These apps can then capture data for analysis in PostHog. You can learn 
@@ -59,11 +63,11 @@ npx @posthog/app-dev-server
 
 After running this, open `localhost:3040` to see the app in debug mode. When we open up our console, we’ll see our configured message.
 
-![Basic app debug](../images/tutorials/build-site-app/basic-debug.png)
+![Basic app debug](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/build-site-app/basic-debug.png)
 
 We can update the config file on the page to get a new message. In our case, we changed `“Howdy from the console!”` to `“I’m a newly updated message!”`.
 
-![Updated config](../images/tutorials/build-site-app/update-config.png)
+![Updated config](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/build-site-app/update-config.png)
 
 This is the basics of what we need to set up and we can start adding more functionality, starting with showing a button on the page for users to click.
 
@@ -134,7 +138,7 @@ function createShadow(style?: string): ShadowRoot {
 
 If you set it up correctly, you’ll see a button with a thumbs-up emoji in the bottom right. Clicking on it logs the message you configured to the console again.
 
-![Thumbs-up button](../images/tutorials/build-site-app/button.png)
+![Thumbs-up button](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/build-site-app/button.png)
 
 ## Connecting to PostHog
 
@@ -162,7 +166,7 @@ export function inject({ config, posthog }) {
 
 Once added, we can test if it's working by clicking the button on our `localhost` page. We’ll see the event show up under “Captured Events.”
 
-![Captured event](../images/tutorials/build-site-app/captured-event.png)
+![Captured event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/build-site-app/captured-event.png)
 
 You now have a basic app to get feedback from users. From here, you can take the component where you like. You can provide more information, encourage different actions, or add more complex components. We built a few apps that can serve as inspiration:
 
@@ -182,7 +186,7 @@ If you have a cloud instance, you can search for available apps in “Browse App
 
 Once added, you can configure your app by searching for it and then clicking on the "Configure" button (blue gear). The configuration menu has all the details from the `plugin.json` file such as instructions or customization. Once configured, click "Save" and enable the app (by clicking the toggle). Our example site app has a simple configuration, but this is customizable and can provide many options.
 
-![Configuring app](../images/tutorials/build-site-app/config.png)
+![Configuring app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/build-site-app/config.png)
 
 Once you've done that, the final step is getting the app set up on your site. Go to where you initialize `posthog-js` in your code, and add `opt_in_site_apps: true`. This enable your site apps to inject into your site through the `posthog-js` library. It should look like this:
 
@@ -194,7 +198,7 @@ posthog.init("<ph_project_api_key>", {
 ```
 Now that opt-in is added and the app activated, the thumbs-up button should appear on your site. This is what it looks like on a very basic site:
 
-![App on site](../images/tutorials/build-site-app/app-on-site.png)
+![App on site](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/build-site-app/app-on-site.png)
 
 You now have a basic site app added to your site you can continue to customize and improve for your needs.
 

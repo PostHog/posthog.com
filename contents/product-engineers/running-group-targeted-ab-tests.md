@@ -1,5 +1,5 @@
 ---
-date: 2023-04-28
+date: 2023-04-28T00:00:00.000Z
 title: When and how to run group-targeted A/B tests
 author:
   - lior-neu-ner
@@ -21,7 +21,7 @@ In group-targeted experiments, the test applies to an entire group rather than i
 
 Groups can be companies, geographic locations, or any other set of users with common characteristics.
 
-![Screenshot of setting the participant type in an experiment](../images/blog/running-group-targeted-ab-tests/user-vs-group-a-b-tests.png)
+![Screenshot of setting the participant type in an experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/running-group-targeted-ab-tests/user-vs-group-a-b-tests.png)
 
 ## When to run group-targeted experiments
 
@@ -85,13 +85,13 @@ First, ensure you have [set up a group](/docs/product-analytics/group-analytics#
 
 In the New Experiment screen, select the Participant type. By default, it will show `Persons` (i.e. a user-targeted experiment). Click on the drop-down and select your new group.
 
-![Screenshot of setting the participant type in an experiment](../images/blog/running-group-targeted-ab-tests/participant-type.png)
+![Screenshot of setting the participant type in an experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/running-group-targeted-ab-tests/participant-type.png)
 
 Next, set your experiment goal and secondary metrics as usual. 
 
 A handy feature especially useful for group-targeted experiments is the Minimum Acceptable Improvement calculator at the bottom of the page. Since group-targeted experiments have lower statistical power, this will recommend a time for how long you should run your experiment in order to see results.
 
-![Screenshot of the Minimum Acceptable Improvement calculator](../images/blog/running-group-targeted-ab-tests/minimum-acceptable-improvement.png)
+![Screenshot of the Minimum Acceptable Improvement calculator](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/running-group-targeted-ab-tests/minimum-acceptable-improvement.png)
 
 ## Summary
 

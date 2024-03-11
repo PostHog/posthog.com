@@ -1,10 +1,13 @@
 ---
-title: How to set up customer-facing analytics with PostHog, Next.js, and Tremor
-date: 2023-04-04
-author: ["ian-vanagas"]
+title: 'How to set up customer-facing analytics with PostHog, Next.js, and Tremor'
+date: 2023-04-04T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['insights', 'product analytics']
+tags:
+  - insights
+  - product analytics
 ---
 
 If you are a host, content platform, or some other type of B2B2C product, your users might want to know their traffic or usage metrics. To put it another way: if your users have their own users, sometimes your users want analytics about their users. Customer-facing analytics are analytics you capture and display to your users to fulfill this need.
@@ -24,13 +27,13 @@ First, create insights to act as a reference for your customer-facing dashboard.
 
 These must all be filterable by a group or person property so you can show each user the insights relevant to them. As an example, we will create two insights, a pageview line graph and an "insights created" number. We filter them for the group named "PostHog" as an example of a filter. 
 
-![Insight](../images/tutorials/customer-facing-analytics/insight.png)
+![Insight](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/customer-facing-analytics/insight.png)
 
 > **Note:** if you are testing your sample insight filter with your own company (like for me and PostHog), make sure to uncheck "Filter out internal and test users."
 
 Together on a dashboard, they look like this:
 
-![Dashboard](../images/tutorials/customer-facing-analytics/dashboard.png)
+![Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/customer-facing-analytics/dashboard.png)
 
 These sample insights help us figure out the params to make API requests to filter and get this data for all the different users.
 
@@ -40,7 +43,7 @@ Next, we need to set up the API requests to get the data from PostHog for our cu
 
 To quickly figure out the params for our request, we can make a different request to each of the insights individually. To do this, get the "short ID" from the URL of each of the insights. It is an eight character value like `HmKFweHR`:
 
-![Short ID](../images/tutorials/customer-facing-analytics/short-id.png)
+![Short ID](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/customer-facing-analytics/short-id.png)
 
 To make the API request to get the data about this insight, you need the insight short ID, your project ID (found in project settings), and a personal API key. To create a personal API key:
 
@@ -60,7 +63,7 @@ curl --location '<ph_instance_address>/api/projects/<project_id>/insights/?short
 
 The objects and arrays we want are under `results` → `filters` → `events`, `properties`, `display`. Copy them to use them in the next step.
 
-![Request](../images/tutorials/customer-facing-analytics/request.png)
+![Request](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/customer-facing-analytics/request.png)
 
 ## Creating our customer-facing analytics Next.js app
 
@@ -79,7 +82,7 @@ npm run dev
 
 This creates a basic Next app for our customer-facing analytics.
 
-![Next app](../images/tutorials/customer-facing-analytics/next.png)
+![Next app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/customer-facing-analytics/next.png)
 
 ### Getting the data into our app using the PostHog API
 
@@ -235,7 +238,7 @@ export default function Insights({ count }) {
 
 This gives us a nice-looking start to our customer-facing dashboard.
 
-![Customer-facing dashboard start](../images/tutorials/customer-facing-analytics/face.png)
+![Customer-facing dashboard start](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/customer-facing-analytics/face.png)
 
 Next is setting up and displaying a trend.
 
@@ -357,7 +360,7 @@ export default function Insights({ count, chartData }) {
 
 This gives us a line chart of the pageviews from unique users from PostHog over the week.
 
-![Line chart](../images/tutorials/customer-facing-analytics/line.png)
+![Line chart](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/customer-facing-analytics/line.png)
 
 From here, you can add other charts and metrics. See the [PostHog API](/docs/api) for what data you can get from PostHog, and [Tremor](https://www.tremor.so/components) for the ways you can display it.
 

@@ -1,6 +1,6 @@
 ---
 title: The companies that shaped PostHog
-date: 2023-12-20
+date: 2023-12-20T00:00:00.000Z
 author:
   - ian-vanagas
 featuredImage: >-
@@ -26,7 +26,7 @@ GitLab is the shining example of an open-core company. It is transparent and ope
 
 It also solved a big challenge for open-core companies: making money and building a successful business. Making this possible is its innovation in project structure and [licensing](https://gitlab.com/gitlab-org/gitlab/-/blob/master/ee/LICENSE). Specifically, splitting out enterprise edition features and licensing them differently from its core, free app.
 
-![Gitlab](../images/newsletter/the-companies-that-shaped-posthog/gitlab.jpeg)
+![Gitlab](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/gitlab.jpeg)
 
 ### Our takeaways
 
@@ -44,7 +44,7 @@ Its ability to do this comes down to two things:
 
 2. **It focused on inbound.** Instead of relying on outbound sales like its competitors, HubSpot developed free tools and informative content to bring customers to it. Their team realized people don’t want marketers to interrupt them or salespeople to harass them. Creating genuinely helpful content is a more effective strategy.
 
-![Hubspot](../images/newsletter/the-companies-that-shaped-posthog/hubspot.jpeg)
+![Hubspot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/hubspot.jpeg)
 
 ### Our takeaways
 
@@ -60,7 +60,7 @@ It has done this all while being self-serve and fully remote. At its size, even 
 
 A key to Zapier’s success is SEO. Its programmatic SEO, which drives organic traffic through its apps and integrations pages, is world-class. Similar to HubSpot, this enables it to be self-serve and less reliant on paid acquisition.
 
-![Zapier](../images/newsletter/the-companies-that-shaped-posthog/zapier.jpeg)
+![Zapier](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/zapier.jpeg)
 
 ### Our takeaways
 
@@ -74,7 +74,7 @@ GitHub defined what it means to be developer-friendly. On top of its open-source
 
 This makes its enterprise go-to-market basically “have 200 developers force their company to buy us.” This massive bottoms-up adoption enables monetization with enterprise-targeted features that free users don’t need.
 
-![GitHub](../images/newsletter/the-companies-that-shaped-posthog/github.jpeg)
+![GitHub](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/github.jpeg)
 
 ### Our takeaways
 
@@ -90,7 +90,7 @@ Lower prices generally mean less revenue, but Atlassian makes this back through 
 
 Helping all of this was the lack of [a traditional sales team](https://www.wsj.com/articles/BL-DGB-34171) for most of its life. It relied heavily on its website and word-of-mouth to do sales for them and still does.
 
-![Atlassian](../images/newsletter/the-companies-that-shaped-posthog/atlassian.jpeg)
+![Atlassian](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/atlassian.jpeg)
 
 ### Our takeaways
 
@@ -110,7 +110,7 @@ Beyond its advice, YC showed how valuable startups are as a market. A lot of YC 
 
 Compared to other investors and accelerators, YC also has a differentiated brand. Its built something startups want, and because of this, it is the default and top choice for early teams everywhere.
 
-![YC](../images/newsletter/the-companies-that-shaped-posthog/yc.jpeg)
+![YC](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/yc.jpeg)
 
 ### Our takeaways
 

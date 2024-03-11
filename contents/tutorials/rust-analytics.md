@@ -163,7 +163,7 @@ async fn main() -> std::io::Result<()> {
 
 Run `cargo run` and navigate to `http://localhost:8000` to see our app in action. Enter anything on the login page to save some session details.
 
-![Basic Rust app](../images/tutorials/rust-analytics/basic-rust-app.mp4)
+![Basic Rust app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/rust-analytics/basic-rust-app.mp4)
 
 ## 2. Add PostHog to your app
 

@@ -1,6 +1,6 @@
 ---
 title: 'Feature flags as a service: Should you build or buy?'
-date: 2023-09-12
+date: 2023-09-12T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -105,7 +105,7 @@ With feature flags as a service, you gain more confidence in:
 
 In fewer words, you pass your potential problems off to them. 
 
-![Problems](../images/blog/feature-flags-as-a-service/problems.jpg)
+![Problems](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/feature-flags-as-a-service/problems.jpg)
 
 ## Deciding whether to build or buy
 

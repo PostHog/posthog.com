@@ -2,11 +2,16 @@
 title: How to track performance marketing in PostHog
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2022-12-08
-featuredVideo: https://www.youtube-nocookie.com/embed/ExaQmFuaSyo
-tags: ['funnels', 'insights', 'product analytics']
---- 
+author:
+  - ian-vanagas
+date: 2022-12-08T00:00:00.000Z
+featuredVideo: 'https://www.youtube-nocookie.com/embed/ExaQmFuaSyo'
+tags:
+  - funnels
+  - insights
+  - product analytics
+---
+ 
 
 Performance marketing is paying for ads, attention, and clicks to your site where you try to convert them into users and customers. Companies use channels like Google, Facebook, other social media, ad networks, and sponsorships to do this. 
 
@@ -36,17 +41,17 @@ Once you’ve set up UTMs, you can use them to analyze data based on the differe
 
 To view pageviews broken down by UTM source, create an insight, filter pageview where `UTM Source` is set, and then breakdown by `UTM Source`. This gives you a breakdown of traffic from specific sources. 
 
-![UTM source set](../images/tutorials/performance-marketing/utm-source-set.png)
+![UTM source set](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-marketing/utm-source-set.png)
 
 The problem with this is that UTM sources might not be ads you are running. Any site or link can set a UTM source, so you might have sources other than ads.
 
 To fix this, add another filter that explicitly calls out the channels you use. For example, if you run ads on Facebook and LinkedIn, you can set `UTM Source` to equal “facebook” or “linkedin.” 
 
-![Specific UTMs](../images/tutorials/performance-marketing/utm-source-breakdown.png)
+![Specific UTMs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-marketing/utm-source-breakdown.png)
 
 Even better, use the UTM campaign, content, medium, or check for a specific click ID being set. PostHog captures any Google `gclid`, Facebook `fbclid`, or Microsoft `msclkid` parameters in the URL. Change your filter from UTM source to campaign (or one of the others) and pick your campaign. 
 
-![UTM campaign and click ID](../images/tutorials/performance-marketing/utm-campaign.png)
+![UTM campaign and click ID](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-marketing/utm-campaign.png)
 
 Doing a combination of these to fit the performance marketing you are doing helps you track the total traffic from individual campaigns. 
 
@@ -62,7 +67,7 @@ To filter, you can again use a UTM attribute. If you included it as a property i
 
 In this example, we’ve chosen the unique number of users who completed the “user signed up” event, then filtered the group of users for those with the initial UTM source being set. 
 
-![Signup with UTM](../images/tutorials/performance-marketing/signup-utm.png)
+![Signup with UTM](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-marketing/signup-utm.png)
 
 You can use other UTM filters from the prior section to get the signup numbers (or whatever your goal is) from your performance marketing.
 
@@ -74,15 +79,15 @@ Now that we have information on traffic and our key metric (signups), we can als
 
 In insights, go to the funnels tab. We’ll want our first step to be a pageview with a filter of an initial UTM value of some sort (like we’ve done before). Our second step is a visit to our signup page. Our third, and final, step is our key metric (signups). Altogether, this will look something like this:
 
-![Performance marketing funnel](../images/tutorials/performance-marketing/funnel-basic.png)
+![Performance marketing funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-marketing/funnel-basic.png)
 
 After creating this funnel, we can change this in a bunch of ways. First, we can break conversion down by our UTM properties to see conversion for different channels, sources, and more.
 
-![Breakdown funnel](../images/tutorials/performance-marketing/funnel-breakdown.png)
+![Breakdown funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-marketing/funnel-breakdown.png)
 
 Second, we can change the graph type to “Historical trends” to give us a better idea of how our conversion is doing over time.
 
-![Historical trends type funnel](../images/tutorials/performance-marketing/funnel-type.png)
+![Historical trends type funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-marketing/funnel-type.png)
 
 On top of these, there are lots of settings to tweak your funnel such as “Conversion rate calculation,” “Conversion window limit,” and “Date range” to match your desired insights. 
 

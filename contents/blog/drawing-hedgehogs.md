@@ -1,5 +1,5 @@
 ---
-date: 2021-10-07
+date: 2021-10-07T00:00:00.000Z
 title: How we designed the PostHog mascot
 rootPage: /blog
 sidebar: Blog
@@ -20,7 +20,7 @@ Creating mascots goes beyond just putting iPencil to iPad. It’s a long, confus
 
 A successful mascot should go beyond representing what a company does. It should build and strengthen a brand's identity by representing its tone of voice and overall vibe. Think about GitHub's octocat mascot, which is now a familiar figure in memes, merch, and even statues. 
 
-![GitHub - Octocat](../images/blog/drawing-hedgehogs/github-octocat.jpeg)
+![GitHub - Octocat](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/github-octocat.jpeg)
 
 ## Think before you ink
 
@@ -61,35 +61,35 @@ Using a tablet also lets me share unfinished ideas quickly, so I can expand on t
 
 What really sets digital drawing apart from traditional design practice is that it comes with _layers_. Layers change lives. Long gone are the days of linear painting - now I can select a layer and work in isolation on that, or cut out a small section and reuse it later (because I love to recycle). It has sped up my work while giving me so much freedom to work with my creations. Would 10/10 recommend to a friend.
 
-![PostHog - Hairy Thumb](../images/blog/drawing-hedgehogs/hairy-thumb-logo.jpeg)
+![PostHog - Hairy Thumb](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/hairy-thumb-logo.jpeg)
 
 This was our initial logo, made by our CEO James. Since this humble beginning the hedgehog has had many faces, some of which were better than others. 
 
-![PostHog - Square Hedgehog](../images/blog/drawing-hedgehogs/square-hedgehog-logo.jpeg)
+![PostHog - Square Hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/square-hedgehog-logo.jpeg)
 
 Take this square, dead-eyed creature, for example. To be honest I quite liked him and felt he gave off a quirky vibe. But he lacked character, and he had a cold, hard stare, which when looking back onto the brief it wasn’t what we wanted.
 
-![PostHog - Sun Hedgehog](../images/blog/drawing-hedgehogs/sun-hedgehog.jpeg)
+![PostHog - Sun Hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/sun-hedgehog.jpeg)
 
 Injecting a bit more character into the mix, I created this fella. He gave off a happier, friendlier vibe - maybe because he can’t see and wears glasses. This was progress. But something didn’t quite feel right. He felt old and out of touch - once again I found myself not quite sending the right message. It was time for something different.
 
-![PostHog - 3D Hedgehog](../images/blog/drawing-hedgehogs/3d-hedgehog.jpeg)
+![PostHog - 3D Hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/3d-hedgehog.jpeg)
 
 Next, I dabbled in 3D. I created a hedgehog in Blender to break the mould of what a mascot could look like - but this backfired and the little guy just felt cold and robotic. I was chasing something warmer, with character, something friendly. Something like...
 
-![PostHog - Final Hedghehog](../images/blog/drawing-hedgehogs/pastel-hedgehog.jpeg)
+![PostHog - Final Hedghehog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/pastel-hedgehog.jpeg)
 
 This guy, with his texture and silly, frumpy round body, just makes me happy. He reminds me of the kawaii character Gudetama, except this hog doesn't have his bum out.
 
-![PostHog - Working Hedgehog](../images/blog/drawing-hedgehogs/work-hedgehog.png)
+![PostHog - Working Hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/work-hedgehog.png)
 
 I liked the idea of this hedgehog as a relatable character, who sits at his desk tapping away at keys just like us. I think that is key for a successful mascot,; something the team can get behind.
 
-![PostHog - Police Hedgehog](../images/blog/drawing-hedgehogs/police-hedgehog.jpeg)
+![PostHog - Police Hedgehog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/police-hedgehog.jpeg)
 
 From here the character grew and grew, taking up new hobbies and professions, such as the police hog, who stops our users  making mistakes when filling in forms. Helpful, yet stern.
 
-![PostHog - Hedgehog Evolution](../images/blog/drawing-hedgehogs/hedgehog-evolution.gif)
+![PostHog - Hedgehog Evolution](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/drawing-hedgehogs/hedgehog-evolution.gif)
 
 As you can see, the hedgehog went through about 18 different variations before I knew which one suited the brand best - including large, small, angry, 3D and even square versions. 
 

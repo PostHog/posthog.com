@@ -1,5 +1,5 @@
 ---
-date: 2020-12-15
+date: 2020-12-15T00:00:00.000Z
 title: Array 1.19.0
 rootPage: /blog
 sidebar: Blog
@@ -24,7 +24,7 @@ Once again, we were heavily driven by feedback, having done a bunch of calls wit
 
 ### [Scheduled Apps and Editor](https://github.com/PostHog/posthog/pull/2743)
 
-![App Editor Screenshot](../images/blog/array/plugin-editor.png)
+![App Editor Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/plugin-editor.png)
 
 We now support scheduled apps that run periodically on a specified time cycle (e.g. minute, hour, day), as well as have a built-in code editor for apps right into the PostHog UI.
 
@@ -55,7 +55,7 @@ You can learn more about scheduled apps on the [PR that created them](https://gi
 
 ### [Lifecycle Analysis](https://github.com/PostHog/posthog/pull/2460)
 
-![Lifecycle Screenshot](../images/blog/array/lifecycle.png)
+![Lifecycle Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/lifecycle.png)
 
 Our 'Trends' tab just got an awesome new feature: lifecycle graphs!
 
@@ -65,7 +65,7 @@ To use it, select 'Shown As' -> 'Lifecycle' when in the 'Trends' tab.
 
 ### [New Session Recording Compression Scheme](https://github.com/PostHog/posthog/pull/2578)
 
-![Gzip Session Recording Screenshot](../images/blog/array/session-recording-gzip.png)
+![Gzip Session Recording Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/session-recording-gzip.png)
 
 See the image above? That's our event processing time before and after the new compression scheme!
 
@@ -78,7 +78,7 @@ Also, while on the topic of session recording, have you been keeping up with the
 
 ### [New Actions UX](https://github.com/PostHog/posthog/pull/2615)
 
-![New Actions UX Screenshot](../images/blog/array/actions-ux.png)
+![New Actions UX Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/actions-ux.png)
 
 This might not be news to all of you, since we have been experimenting with our actions UX using [feature flags](/docs/user-guides/feature-flags). However, we're now rolling out a new UX for creating actions to all PostHog users, so try it out let us know what you think!
 

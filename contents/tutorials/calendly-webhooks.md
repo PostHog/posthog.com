@@ -1,10 +1,12 @@
 ---
 title: How to capture events from Calendly webhooks
-date: 2023-09-28
-author: ["ian-vanagas"]
+date: 2023-09-28T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['events']
+tags:
+  - events
 ---
 
 Webhooks enable you to send data from one platform to another when an event happens. This enables you to run workflows and code to handle those events.
@@ -21,7 +23,7 @@ To get started, we'll create a secret in Val Town with your PostHog API key.
 
 You can get your project API key from your [project settings](https://app.posthog.com/project/settings). Next, go to the [secrets page in Val Town](https://www.val.town/settings/secrets), set the key as phProjectAPIKey, the value as your API key from PostHog, and click "Add." This saves the value for us to  reference as `@me.secrets.phProjectAPIKey` later.
 
-![Project API key Val secret](../images/tutorials/calendly-webhooks/secret.png)
+![Project API key Val secret](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/calendly-webhooks/secret.png)
 
 Next, we create our function to capture a Calendly webhook. In it, we parse the JSON and modify the data then call the `capturePostHogEvent` function which looks like this:
 
@@ -41,7 +43,7 @@ Once you upgrade your Calendly account to "Professional," you can create a webho
 
 To start, you need a personal access token which you can create on the [API webhooks integration page](https://calendly.com/integrations/api_webhooks). 
 
-![Token](../images/tutorials/calendly-webhooks/token.png)
+![Token](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/calendly-webhooks/token.png)
 
 Next, use your access token to get your organization (`current_organization` key) and user (`uri` key) values. They are URLs starting with `https://api.calendly.com/`. You can do this on [their API page](https://developer.calendly.com/api-docs/005832c83aeae-get-current-user) or in a cURL request like this:
 
@@ -73,7 +75,7 @@ curl --request POST \
 
 Once done, create a test event using your booking URL. You should see it trigger your webhook handler in Val Town and then create an event in your PostHog account.
 
-![Event in PostHog](../images/tutorials/calendly-webhooks/event.png)
+![Event in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/calendly-webhooks/event.png)
 
 Now, every time someone creates (or cancels) a meeting using Calendly, you capture an event with details for your PostHog instance. You can use this event in your insights like signup funnels. You can also use a similar setup for other webhooks you want to capture into PostHog.
 

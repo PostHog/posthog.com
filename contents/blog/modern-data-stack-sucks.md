@@ -1,6 +1,6 @@
 ---
 title: The modern data stack sucks
-date: 2023-04-12
+date: 2023-04-12T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -20,11 +20,11 @@ Every startup needs data to build a better product. This isn't up for debate. Bu
 
 In this article, I'll explain how and why the startup data stack begins like this...
 
-![MVP](../images/blog/modern-data-stack-sucks/mvp.png)
+![MVP](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/mvp.png)
 
 devolves into this...
 
-![Modern data sith](../images/blog/modern-data-stack-sucks/modern-data-sith.png)
+![Modern data sith](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/modern-data-sith.png)
 
 ...and what we're building at PostHog to make this mess less painful for growing startups.
 
@@ -45,7 +45,7 @@ To do this, they use:
 - A customer relationship manager (CRM)
 - Revenue, payments, subscription tracking
 
-![MVP](../images/blog/modern-data-stack-sucks/mvp.png)
+![MVP](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/mvp.png)
 
 At this stage, startups usually go with the most popular tools because they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for others. Complicated solutions aren’t needed, and teams can spend their time building.
 
@@ -62,7 +62,7 @@ To answer these questions, you need to pull data from a growing number of source
 
 This is where customer data platforms (CDPs) like Segment or RudderStack come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and revenue data from Stripe, and send it back to those same tools or a warehouse for use with a business intelligence tool like Hex.
 
-![Seed](../images/blog/modern-data-stack-sucks/seed.png)
+![Seed](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/seed.png)
 
 The goal of the stack at this stage is to use data to make better decisions about all aspects of the product. This includes:
 - Feature prioritization
@@ -91,7 +91,7 @@ Whoever gets the thankless responsibility of maintaining the data stack sees the
 
 5. A potential assortment of other tools such as reverse ETL, data orchestration, and data governance.
 
-![Series A](../images/blog/modern-data-stack-sucks/series-a.png)
+![Series A](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/series-a.png)
 
 Startups need this stack because managing and accessing individual sources of data becomes unsustainable. Tools like analytics and the CDP don't give complete insight into performance. Teams need a reliable, single source of truth they trust. They hope the modern data stack gives them that.
 
@@ -119,7 +119,7 @@ To change this, we are improving PostHog as a [customer data platform (CDP)](htt
 
 Improving reliability, integrations, and UX is critical for success here. Being a CDP gives startups access to their data and tools in one place with PostHog. More data also improves the depth of insights engineers can get from PostHog without having to use other tools such as BI or visualization.
 
-![PostHog CDP](../images/blog/modern-data-stack-sucks/posthog-cdp.png)
+![PostHog CDP](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/posthog-cdp.png)
 
 ### Building a data warehouse
 

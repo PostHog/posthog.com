@@ -1,5 +1,5 @@
 ---
-date: 2020-02-24
+date: 2020-02-24T00:00:00.000Z
 title: Moving to San Francisco
 rootPage: /blog
 sidebar: Blog
@@ -20,13 +20,13 @@ First, we had to choose a location. YC’s main office is in Mountain View, but 
 
 We decided if we moved to Mountain View, we’d need a car and we’d be more likely to get cabin fever, so we went for the city instead. I think we’re all glad we made that decision. This is what our house looked like, before we rearranged all the furniture – we work at the dining room table, and there are monitors everywhere. It’s now like a WeWork, without the multibillion dollar collapse and with a lot less free beer:
 
-![The PostHog YC house](../images/02/house-scaled.jpg)
+![The PostHog YC house](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/house-scaled.jpg)
 
 We are in the Castro area of the City – it’s only 25 mins from most meetings, and has lots of cool coffee shops that we try to avoid as we are on a budget.
 
 It’s within walking distance of the Twin Peaks – if you walk up at night, you can get a beautiful view of the city lights, which makes up for walking along a curvy road in the dark, just about:
 
-![Twin Peaks](../images/02/IMG_4294-scaled.jpg)
+![Twin Peaks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/IMG_4294-scaled.jpg)
 
 For the first week, YC give a full on induction.
 
@@ -40,7 +40,7 @@ Fun fact – the batch has lots of Whatsapp groups. You can ask pretty much anyt
 
 The other exciting news was that our first ever near-customer, Aaron, joined us full time. We’d worked together for four years, so it was really lovely to be on the same team again.
 
-![Aaron joined us](../images/02/aaron-scaled.jpg)
+![Aaron joined us](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/aaron-scaled.jpg)
 
 Aaron joined us to help get us in front of more users, and to help us manage the ever increasing number of deals in our pipeline. He’s the organized one.
 
@@ -54,7 +54,7 @@ They know we’ll probably miss these targets, but that’s not the point. Some 
 
 We started working long hours, but we made time to go out to walk, think and decompress.  We ended up on some really long walks. The weather in San Francisco looks pretty average online, but when you realize it’s rarely windy and usually sunny, going outside is a lot more inviting than London in January. We walked to the Golden Gate bridge from Castro, and back.
 
-![The Golden Gate Bridge](../images/02/golden-gate-scaled.jpg)
+![The Golden Gate Bridge](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/golden-gate-scaled.jpg)
 
 When we were working, it sounds fluffy, but being surrounded by ambitious and impressive people has probably been the most important part of being here so far. Being in San Francisco with YC gave us easy real life access to many of the real thought leaders in technology.
 

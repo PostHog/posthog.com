@@ -1,5 +1,5 @@
 ---
-date: 2023-03-14
+date: 2023-03-14T00:00:00.000Z
 title: What we've learned about talking to users
 author:
   - andy-vandervell
@@ -24,7 +24,7 @@ Welcome to our new newsletter, Product for Engineers. We launched it because (1)
 
 In traditional tech companies, product managers (PMs) talk to users, and write tickets for engineers to ship. It looks something like this:
 
-![PM to engineer](../images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
+![PM to engineer](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
 
 As Luke Harries explains in [10x engineers talk to users](/blog/10x-engineers-do-user-interviews), this is an anti-pattern for any successful startup:
 
@@ -46,7 +46,7 @@ Luke’s tips for engineers who want to talk to users:
 
 If you’re talking to users, you need a quick and repeatable way to share what you learn. Annika Schmid shares our solution, [interview snapshots](/blog/interview-snapshot-guide):
 
-![interview-snapshot](../images/interview-snapshots/interview-snapshot-filled-out.jpg)
+![interview-snapshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/interview-snapshots/interview-snapshot-filled-out.jpg)
 
 Why do we like interview snapshots? 3 simple reasons:
 

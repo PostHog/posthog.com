@@ -1,5 +1,5 @@
 ---
-date: 2022-10-10
+date: 2022-10-10T00:00:00.000Z
 title: 5 essential PostHog apps for new users
 rootPage: /blog
 sidebar: Blog
@@ -24,7 +24,7 @@ Want to insert the word `hedgehog` into your personIDs randomly? There... well, 
 Not sure where to get started with apps? One easy tip is to look for connectors which enable you to sync PostHog with other tools in your stack — but otherwise here are some essential apps we recommend new PostHog users consider.
 
 ## 1. [GeoIP enricher](/apps/geoip-enrichment)
-![PostHog geoip enricher](../images/blog/activation-checklist-images/geo-ip.png)
+![PostHog geoip enricher](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/geo-ip.png)
 
 The GeoIP enrichment app is so useful we actually enable it by default for all new PostHog instances, meaning you won’t even need to set it up if you like the sound of it. 
 
@@ -41,7 +41,7 @@ Zapier enables you to easily and codelessly connect PostHog to over 4,000 other 
 > 💡**PostHog Tip:** Looking for inspiration on what to do with Zapier? Check out these tutorials on how to use Zapier to [connect PostHog with Discord](/tutorials/how-to-connect-discord-to-posthog-with-zapier) or [Notion](/tutorials/how-to-connect-posthog-and-notion-with-zapier)!
 
 ## 3. [URL normalizer](/apps/url-normalizer)
-![PostHog url normalizer](../images/blog/activation-checklist-images/url-normalizer.png)
+![PostHog url normalizer](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/url-normalizer.png)
 
 OK, so this app isn’t truly essential for all teams — but if you’re fussy about trailing slashes (or if other tools in your stack are case sensitive), the URL normalizer is a lifesaver. It enables you to customize how URLs are formatted, converting them all to lower case and stripping all trailing slashes by default. 
 
@@ -50,7 +50,7 @@ Another reason to love the URL normalizer is that it wasn’t built by the PostH
 > 💡**PostHog Tip:** Interested in seeing how this app was made? Check [the source code](https://github.com/PostHog/posthog-url-normalizer-plugin) to get ideas about building your own apps!
 
 ## 4. [BigQuery](/apps/bigquery-export)
-![PostHog bigquery export](../images/blog/activation-checklist-images/bigquery-export.png)
+![PostHog bigquery export](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/bigquery-export.png)
 
 Exporting information from PostHog into your data warehouse (or data lake) is a common use-case for apps, which is why we have a small library of data-out apps for such platforms. Of these, BigQuery is the most popular. 
 

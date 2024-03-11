@@ -79,7 +79,7 @@ The data warehouse can also link to data in your object storage system like S3 o
 1. Log in to [AWS](https://console.aws.amazon.com/).
 2. Open [S3](https://s3.console.aws.amazon.com/) in the AWS console and create a new bucket. We suggest `us-east-1` if you're using PostHog Cloud US, or `eu-central-1` if you're using PostHog Cloud EU.
 
-![created bucket](../../images/docs/apps/s3-export/bucket.png)
+![created bucket](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/s3-export/bucket.png)
 
 > Make sure to note both the name and region of your bucket, we'll need these later.
 
@@ -96,11 +96,11 @@ Next, we need to create a new user in our AWS console with programmatic access t
 5. Under "Resources," select "Specific," and click "object" -> "Add ARN"
 6. Specify your bucket name and choose "any" for the object name. In the example below, replace `posthog-s3-export` with the bucket name you chose in the previous section
 
-![bucket arn config](../../images/docs/apps/s3-export/bucket-arn.png)
+![bucket arn config](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/s3-export/bucket-arn.png)
 
 7. Your config should now look like the following
 
-![policy overview](../../images/docs/apps/s3-export/policy-config.png)
+![policy overview](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/s3-export/policy-config.png)
 
 6. Click "Next" until you end up on the "Review Policy" page
 7. Give your policy a name and click "Create policy"
@@ -111,18 +111,18 @@ The final step is to create a new user and give them access to our bucket by att
 2. Click "Add Users"
 3. Specify a name and make sure to choose "Access key - Programmatic access"
 
-![create user](../../images/docs/apps/s3-export/create-user.png)
+![create user](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/s3-export/create-user.png)
 
 4. Click "Next"
 5. At the top, select "Attach existing policies directly"
 6. Search for the policy you just created and click the checkbox on the far left to attach it to this user
 
-![attaching the policy to our newly created user](../../images/docs/apps/s3-export/attach-policy.png)
+![attaching the policy to our newly created user](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/s3-export/attach-policy.png)
 
 6. Click "Next" until you reach the "Create user" button. Click that as well.
 7. **Make sure to copy your "Access key" and "Secret access key". The latter will not be shown again.**
 
-![showing our newly created api key and secret key](../../images/docs/apps/s3-export/access-keys.png)
+![showing our newly created api key and secret key](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/s3-export/access-keys.png)
 
 ### Step 3: Add data to the bucket
 
@@ -140,7 +140,7 @@ The final step is to create a new user and give them access to our bucket by att
 10. In the next step, pick the streams you want to fill. Given you'll manually need to create a table for each stream, we suggest being selective.
 11. Wait for the sync to finish
 
-![creating the s3 destination](../../images/features/data-warehouse/airbyte-destination.png)
+![creating the s3 destination](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/data-warehouse/airbyte-destination.png)
 
 ### Step 4: Create the table in PostHog
 
@@ -152,7 +152,7 @@ The final step is to create a new user and give them access to our bucket by att
 
 > You'll want to repeat this step for each "stream" or folder that Airbyte created in your S3 bucket.
 
-![creating table in posthog](../../images/features/data-warehouse/create-table.png)
+![creating table in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/data-warehouse/create-table.png)
 
 ### Step 5: Query the table.
 

@@ -154,7 +154,7 @@ Route::post('/home', function (Request $request) {
 
 Run `php artisan serve` and navigate to `http://127.0.0.1:8000/log-in` to see our app in action. Enter anything in the `log-in` page to save some session details.
 
-![Basic Laravel app](../images/tutorials/laravel-analytics/basic-laravel-app.mp4)
+![Basic Laravel app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-analytics/basic-laravel-app.mp4)
 
 ## 2. Add PostHog to your app
 

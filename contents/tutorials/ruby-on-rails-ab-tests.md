@@ -53,7 +53,7 @@ end
 
 Run `rails server` and navigate to `http://localhost:3000` to see our app in action.
 
-![Basic Ruby app](../images/tutorials/ruby-ab-tests/basic-app.png)
+![Basic Ruby app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ruby-ab-tests/basic-app.png)
 
 ## 2. Add PostHog on the client side
 

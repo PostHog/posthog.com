@@ -1,11 +1,16 @@
 ---
 title: Using HogQL for advanced breakdowns
-date: 2023-05-16
-author: ["ian-vanagas"]
+date: 2023-05-16T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['hogql', 'trends', 'product analytics']
----    
+tags:
+  - hogql
+  - trends
+  - product analytics
+---
+    
 
 HogQL opens limitless possibilities for how you can breakdown your trends, funnels, and more. This tutorial showcases some of the advanced breakdowns you can create using HogQL.
 
@@ -19,7 +24,7 @@ HogQL includes the "All events" series, which can break down in many ways, inclu
 
 To do this, search for the "All events" trend, then breakdown with the HogQL expression `event`.
 
-![Events](../images/tutorials/hogql-breakdowns/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-breakdowns/events.png)
 
 You could also breakdown all events by `person_id` to find your most active users.
 
@@ -144,7 +149,7 @@ arrayJoin(
 
 With the total value bar chart, this breakdown looks like this:
 
-![Array](../images/tutorials/hogql-breakdowns/array.png)
+![Array](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-breakdowns/array.png)
 
 ## Further reading
 

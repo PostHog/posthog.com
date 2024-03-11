@@ -1,5 +1,5 @@
 ---
-date: 2020-01-01
+date: 2020-01-01T00:00:00.000Z
 title: The YC Interview
 rootPage: /blog
 sidebar: Blog
@@ -14,7 +14,7 @@ tags:
 
 We submitted the application, then got back to work. We couldn't work out how long it'd take to hear back, but then we did.
 
-![](../images/02/Screenshot-2020-02-24-at-08.48.36.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/Screenshot-2020-02-24-at-08.48.36.png)
 
 It was now October 16th. The interview was going to be November 7th.
 
@@ -50,11 +50,11 @@ Tim and I got the Eurostar from Kings Cross to France the night before. That eve
 
 November the 7th swung around before we knew it. We did a final run through in the morning, wrote out some key stats on a notepad to take into the interview in case we needed them, and tried to catch each other out - we, finally, felt like we had a good shot at this.
 
-![](../images/02/last-min-prep-scaled.jpg)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/last-min-prep-scaled.jpg)
 
 We began the blustery but bright walk from our hotel to Front's offices, who were hosting it.
 
-![](../images/02/6A029EAF-FA8D-4C78-867B-55F6732830CB-scaled.jpg)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/6A029EAF-FA8D-4C78-867B-55F6732830CB-scaled.jpg)
 
 We walked in, got our badges and did our best to ignore everyone else. We were led into the room by Dalton Cadwell. He was the first person I'd met in real life that I already recognized from YouTube. Geoff Ralston, who also interviewed us, was the second. There was one other person who remained quiet.
 
@@ -70,7 +70,7 @@ We walked out thinking it's 50:50, we did a good job but got that question wrong
 
 We grabbed a quick lunch then went to the nearest WeWork and got back to working. Tim found a guitar, the latest way to distract people who are coworking, it seems:
 
-![](../images/02/guitar-scaled.jpg)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/guitar-scaled.jpg)
 
 For this interview, we knew in advance we wouldn't find out for a few days, so we decided to assume we had failed. We met with friends again and got the train back to London.
 

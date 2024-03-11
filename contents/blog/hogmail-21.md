@@ -1,5 +1,5 @@
 ---
-date: 2023-02-13
+date: 2023-02-13T00:00:00.000Z
 title: 'HogMail #21: Avoiding the "Product Death Cycle"'
 rootPage: /blog
 sidebar: Blog
@@ -37,11 +37,11 @@ If [product-market fit](/blog/product-market-fit-game) isn't enough to succeed, 
 
 He goes on to argue this mentality can lead to what he calls the Product Death Cycle:
 
-![product death cycle](../images/blog/hogmail/death-cycle.png)
+![product death cycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail/death-cycle.png)
   
 In this model, the answer to "how do we grow?" is always launch new feature, but every new launch is slightly less successful than the last, and doesn't lead to lasting growth:  
 
-![product death cycle](../images/blog/hogmail/death-cycle-1.png)
+![product death cycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail/death-cycle-1.png)
   
 Instead, he suggests successful startups ($100M+ in his reckoning) should seek four fits:
 

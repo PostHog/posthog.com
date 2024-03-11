@@ -34,7 +34,7 @@ While seeking funding, Brian applied to [PostHog for Startups](/startups) — a 
 
 “I spoke to Anna Debenham at [boldstart](https://boldstart.vc/) and told her: I’m an engineer, not a product manager,” says Brian. “I explained that we had all this data, but I didn’t know how to slice and dice it. She taught me how to start picking metrics and building insights so we could track things in line with our bottom-up strategy.”
 
-![OpenSauced](../images/customers/opensauced/opensauced-pizza.png)
+![OpenSauced](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/opensauced-pizza.png)
 <Caption>OpenSauced joined PostHog for Startups and claimed $50,000 in free credits</Caption>
 
 ### PostHog for startups (and designers, and developer relations)

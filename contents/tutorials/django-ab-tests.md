@@ -61,7 +61,7 @@ urlpatterns = [
 
 Run `python3 manage.py migrate` to migrate the database (you only need to run this once) and then `python3 manage.py runserver` to see our app in action at `http://127.0.0.1:8000`.
 
-![Basic Django app](../images/tutorials/django-ab-tests/basic-app.png)
+![Basic Django app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 

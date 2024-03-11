@@ -1,10 +1,13 @@
 ---
-title: "How to run A/B tests in Framer"
-date: 2023-11-15
-author: ["lior-neu-ner"]
+title: How to run A/B tests in Framer
+date: 2023-11-15T00:00:00.000Z
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['experimentation', 'feature flags']
+tags:
+  - experimentation
+  - feature flags
 ---
 
 [Framer](https://www.framer.com/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change will actually improve your conversion rate. This is where [A/B testing](/ab-testing) is helpful. It enables you to test and compare your changes to systemically improve your site.
@@ -15,13 +18,13 @@ This tutorial shows you how to set up A/B tests with Framer and PostHog to get t
 
 First, [sign up to PostHog](https://app.posthog.com/signup). Then, go to your [project settings](https://app.posthog.com/settings/project) and copy your web snippet:
 
-![PostHog web snippet](../images/tutorials/framer-ab-tests/web-snippet.png)
+![PostHog web snippet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-ab-tests/web-snippet.png)
 
 With the snippet copied, go to your Framer project settings by clicking the gear in the top right. If you haven’t already, sign up for the "Mini" site plan. This enables you to add custom code.
 
 Go to the "General" tab in site settings and scroll down to the "Custom Code" section. Under "End of `<head>` tag", paste your PostHog snippet. Make sure to press "Save" next to custom code.
 
-![Script](../images/tutorials/framer-analytics/script.mp4)
+![Script](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/framer-analytics/script.mp4)
 
 ## Adding a custom event
 
@@ -52,11 +55,11 @@ export default function CaptureButton() {
 Press `Cmd/Ctrl + s` to save your changes. Then press the "Home" button to go back to the home page. Add your new 
 `CaptureButton` to your page by dragging it from the Code tab.
 
-![Create a code snippet in Framer](../images/tutorials/framer-ab-tests/create-code-component.mp4)
+![Create a code snippet in Framer](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/framer-ab-tests/create-code-component.mp4)
 
 Publish your site and then click your new button to [see the event in PostHog](https://app.posthog.com/events).
 
-![View captured events in PostHog](../images/tutorials/framer-ab-tests/event-captured.png)
+![View captured events in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-ab-tests/event-captured.png)
 
 ## Create an A/B test in PostHog
 
@@ -71,7 +74,7 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![View captured events in PostHog](../images/tutorials/framer-ab-tests/experiment-setup.png)
+![View captured events in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-ab-tests/experiment-setup.png)
 
 ## Implement the A/B test in Framer
 
@@ -100,7 +103,7 @@ To do this, we'll add another script. Go to your Framer settings and under the s
 
 Click "Save" and then publish your site.
 
-![Add script in Framer](../images/tutorials/framer-ab-tests/add-experiment-code.mp4)
+![Add script in Framer](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/framer-ab-tests/add-experiment-code.mp4)
 
 That's it! Your A/B test is now live. Half your users will see the updated button text and PostHog will track whether it has an impact on your clickthrough rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
 

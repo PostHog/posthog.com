@@ -1,10 +1,13 @@
 ---
 title: How to set up Python A/B testing
-date: 2023-09-12
-author: ["ian-vanagas"]
+date: 2023-09-12T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['experimentation', 'feature flags']
+tags:
+  - experimentation
+  - feature flags
 ---
 
 A/B testing enables you to experiment with how changes to your app affect metrics you care about. PostHog makes it easy to set up [A/B tests](/ab-testing) in Python. This tutorial shows you how to create a basic Python app with Flask, add PostHog to it, and then set up an A/B test to compare button variants.
@@ -69,7 +72,7 @@ def blog(slug):
 
 Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see your basic app running.
 
-![Hello World!](../images/tutorials/python-ab-testing//hello.png)
+![Hello World!](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-ab-testing/hello.png)
 
 ## Setting up PostHog
 
@@ -134,13 +137,13 @@ def blog(slug):
 
 Rerun your app with `flask --app hello run`, go to a blog route like `http://127.0.0.1:5000/cool`, click the like button, and you see an event captured in PostHog.
 
-![Event in PostHog](../images/tutorials/python-ab-testing/event.png)
+![Event in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-ab-testing/event.png)
 
 ## Creating an A/B test
 
 We are now ready to create and set up our A/B test. To do this, go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." Enter a name, feature flag key (we use `blog-like`), and set the "Experiment goal" to a trend of the "liked post" event. Edit any more details and click "Save as draft." Because we are just testing locally, click "Launch" right away on the next screen. 
 
-![A/B test in PostHog](../images/tutorials/python-ab-testing/ab-test.png)
+![A/B test in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-ab-testing/ab-test.png)
 
 ## Implementing our A/B test
 
@@ -189,7 +192,7 @@ def blog(slug):
 
 Restart your app and check a few pages for the new component. You can also add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag to show a value to users with specific properties (like `intial_slug` if you set that up). 
 
-![A/B test in app](../images/tutorials/python-ab-testing/test.png)
+![A/B test in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-ab-testing/test.png)
 
 Lastly, we must capture the experiment details in our event. Do this by adding `$feature/blog-like` with the variant key to the `liked post` event’s properties. This enables us to track and analyze our new button’s impact on our goal metric. 
 

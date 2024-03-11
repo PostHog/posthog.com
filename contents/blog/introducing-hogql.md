@@ -1,5 +1,5 @@
 ---
-date: 2023-06-08
+date: 2023-06-08T00:00:00.000Z
 title: 'Introducing HogQL: Direct SQL access for PostHog'
 rootPage: /blog
 sidebar: Blog
@@ -45,7 +45,7 @@ Too much to list in one blog post, but here are a few examples:
 
 Want to break down signups by both pricing tier _and_ overall usage? No problem. HogQL does that. With HogQL, you can add as many breakdown properties as you like. Go nuts.
 
-![HogQL breakdowns](../images/blog/array/hog_breakdown.mp4)
+![HogQL breakdowns](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/array/hog_breakdown.mp4)
 
 > **🎓 Related tutorial:** [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 
@@ -53,7 +53,7 @@ Want to break down signups by both pricing tier _and_ overall usage? No problem.
 
 Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple properties!
 
-![HogQL filter](../images/blog/array/hog_filters.mp4)
+![HogQL filter](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/array/hog_filters.mp4)
 
 > **🎓 Related tutorial** [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 
@@ -61,7 +61,7 @@ Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple p
 
 _And_ you can use HogQL to aggregate results in a funnel, too. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
 
-![HogQL aggregations](../images/blog/array/hog_aggregate.mp4)
+![HogQL aggregations](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/array/hog_aggregate.mp4)
 
 > **🎓 Related tutorial** [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
 
@@ -75,7 +75,7 @@ We're confident SQL insights will unlock deep analysis into how users use your p
 
 To get a flavor, here's an example query summarizing survey data. It's purpose? Determining which countries prefer pineapple on a pizza. This is serious analysis:[^1]
 
-![PostHog SQL insights](../images/blog/array/pineapple_sql.mp4)
+![PostHog SQL insights](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/array/pineapple_sql.mp4)
 
 ```
    select properties.$geoip_country_name,
@@ -106,11 +106,11 @@ There. Is. Mooooorrrre.
 
 As part of our work on HogQL, we've reworked all our insights as JSON objects, which you can customize. Just click the 'View source' button in the top right (see below), and tweak the code directly.
 
-![view source](../images/blog/array/view-source.mp4)
+![view source](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/array/view-source.mp4)
 
 You can also create custom table insights directly from Activity (previously "Live Events") and Person & Groups tabs. 
 
-![custom insights](../images/blog/array/custom_insights.mp4)
+![custom insights](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/array/custom_insights.mp4)
 
 Just hit that 'Open as a new insight' button (see above), tweak the JSON (if you want), and save your table to a dashboard or [notebook](/docs/notebooks).
 

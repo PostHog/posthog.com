@@ -14,11 +14,11 @@ Make sure you have a RudderStack account **and** a PostHog account, using [PostH
 1. From your RudderStack dashboard, add each source and select PostHog from the list of destinations.
 2. Assign a name to your destination (e.g. PostHog production) and click Continue.
 3. Add your PostHog 'Project API Key' as the Team API key (**Do not use a Personal API key**) and your host url as `Your-Instance` ('<ph_instance_address>' if you're on PostHog Cloud):
-    ![RudderStack Dashboard](../../images/rs-posthog-config.png)
+    ![RudderStack Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/rs-posthog-config.png)
     - If it's a website or web app:
       1. In the rudderstack console set `Use device-mode to send events` to `true` so that the events originate from the client side. Additionally, this will enable the toolbar and heatmaps.
       2. Set `Enable autocapture with PostHog` to `true`. This will automatically capture events from your website or web app  
-        ![RudderStack Dashboard](../../images/rs-device-mode.png)
+        ![RudderStack Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/rs-device-mode.png)
     - If it's not a website or web app (e.g. a mobile app or server), to use the full set of features such as feature flags and session recordings manually install the [PostHog SDK docs](/docs/integrate) in addition to adding PostHog as the event destination in RudderStack.
 
 For more information see the [RudderStack guide for setting up PostHog](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/setting-up-posthog/)

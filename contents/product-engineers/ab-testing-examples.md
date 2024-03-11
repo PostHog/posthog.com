@@ -1,6 +1,6 @@
 ---
 title: How YC's biggest startups run A/B tests (with examples)
-date: 2023-07-28
+date: 2023-07-28T00:00:00.000Z
 author:
   - ian-vanagas
 featuredImage: >-
@@ -33,7 +33,7 @@ These proposals also include data on impact and scale. Data informs success metr
 
 After completing the proposal, experiments launch as small, quick-to-build, low-risk "pellets" rather than large, slow "cannonballs." "Pellet" experiments wrap faster, enabling Monzo to trigger new experiments and retain momentum.
 
-![Monzo A/B test](../images/blog/ab-testing-examples/monzo.png)
+![Monzo A/B test](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-examples/monzo.png)
 
 > ✅ **Takeaways:**
 >
@@ -55,7 +55,7 @@ Instacart, a grocery delivery service, shows a more complicated example of A/B t
 
 For each order, Instacart's routing algorithm tries to create a handoff trip, and if it isn't possible, creates a full service trip. The team wanted to test a new algorithm splitting orders into handoff or full service depending on which was more efficient from the start, rather than successively. 
 
-![Instacart optimizer](../images/blog/ab-testing-examples/optimizer.png)
+![Instacart optimizer](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-examples/optimizer.png)
 
 When planning the test, they realized they couldn’t just split by customer or shopper because those were interdependent. For example, deliveries from both algorithms might dispatch to the same shopper. Instead, they experimented and analyzed the new algorithm in three ways:
 
@@ -69,7 +69,7 @@ None of these options proved the change **caused** an improvement, only that cha
 
 To solve this, Instacart's team had to figure out a new way to split samples. They realized since orders happen locally, they don’t have to optimize everywhere at once. They can split by geographical regions (called "zones") and day (because their delivery system "clears" overnight).
 
-![Zones and days](../images/blog/ab-testing-examples/zones.png)
+![Zones and days](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-examples/zones.png)
 
 Running an A/B test of the new and old algorithms split by zone and day showed an increased average efficiency. A simple regression of the response variable `efficiency` on the group variable `variant` showed it. It also showed a p-value was 0.079 which was higher than the 0.05 threshold, meaning it wasn’t significant.
 
@@ -134,7 +134,7 @@ Interleaving is a framework for blending results from both variants to get a dir
 3. Creating a "competitive pair" from dissimilar listings.
 4. Judging success based on what listing drives more bookings (conversion).
 
-![Interleaving](../images/blog/ab-testing-examples/interleaving.png)
+![Interleaving](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-examples/interleaving.png)
 
 Airbnb’s interleaving framework requires 6% of the traffic of a regular A/B test and 1/3 the running length. This led to a 50x speed up while providing results that are 82% consistent with regular A/B tests.
 
@@ -146,7 +146,7 @@ In Airbnb’s case, they found a pattern of hitting "significance," and then con
 
 For example, they tested changing the max price filter value to $1,000. In it, the test variant had a positive effect and p-value below 0.05 on days 7 and 13; however, as the experiment went on, the p-value increased to 0.4 and the effect became neutral. If they concluded the experiment on day 13, they would ship a change with no long-term positive impact.
 
-![Static p-value problem](../images/blog/ab-testing-examples/static.png)
+![Static p-value problem](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-examples/static.png)
 
 To solve this, Airbnb calculated a dynamic p-value curve starting at 0 and then curving up towards 0.05 on day 30 to determine whether an early result is worth investigating. This creates enforced skepticism about early experiment results and helps reduce false positives.
 
@@ -175,7 +175,7 @@ The Bayesian approach:
 
 This requires some statistical math too complicated to do here, but Convoy followed [Chris Stucchio’s guide](https://www.chrisstucchio.com/pubs/slides/gilt_bayesian_ab_2015/slides.html) to set it up.
 
-![Bayesian](../images/blog/ab-testing-examples/bayesian.png)
+![Bayesian](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-examples/bayesian.png)
 
 The Bayesian approach focuses more on the average magnitude of wrong decisions over many experiments. This limits making the product worse while maintaining a bias for action. When they stop an experiment, they can be confident they are making a decision that won’t decrease a metric more than a known value, while seeing improvements to the product. By doing this, A/B tests at Convoy can have the highest impact over the long run.
 

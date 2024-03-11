@@ -1,5 +1,5 @@
 ---
-date: 2023-04-24
+date: 2023-04-24T00:00:00.000Z
 title: What we built at our sun-kissed Aruba hackathon
 rootPage: /blog
 sidebar: Blog
@@ -17,15 +17,15 @@ tags:
 
 Every year, Team PostHog congregates for our [annual all-company offsite](/handbook/company/offsites). In previous years we've been to Italy, Portugal and Iceland. This year, we went to Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
 
-![posthog aruba](../images/blog/aruba/aruba-vibes.jpeg)
+![posthog aruba](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/aruba-vibes.jpeg)
 
 As a remote company, our offsites are a hugely important part of our culture. We encourage everyone to meet up when they can, be that through co-working, ad-hoc visits ([which we pay for](/handbook/people/spending-money#budget-for-socializing)), or [small team offsites](/handbook/company/offsites#small-team-offsites), but we only get the whole company together once a year.
 
-![posthog aruba](../images/blog/aruba/people-shots.jpeg)
+![posthog aruba](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/people-shots.jpeg)
 
 When we do, we like to plan a mixture of fun social activities, strategic sessions and workshops, culture exercises, and (the most important bit) a 24-hour hackathon.
 
-![posthog aruba](../images/blog/aruba/aruba-hackathon-photos.jpeg)
+![posthog aruba](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/aruba-hackathon-photos.jpeg)
 
 Here's what we built during our Aruba hackathon.
 
@@ -57,7 +57,7 @@ flowchart TD
 
 On the whole, Max gives useful answers – even when dealing with complex questions. Max is also dead handy for summarizing long support threads in Slack or GitHub issues. 
 
-![maxai](../images/blog/aruba/max-ai.jpeg)
+![maxai](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/max-ai.jpeg)
 
 That said, Max isn't immune to hallucinating solutions – or even URLs for docs that don't exist – if it doesn't know the answer. It's a work in progress, but we've released Max on [our community page](/posts) as a beta. Drop him a DM! 
 
@@ -69,11 +69,11 @@ Check out the [MaxAI repo](https://github.com/PostHog/max-ai) for more info.
 
 The marketing team worked together to build (and ship) a [public library of pre-built dashboards](/templates), including an [AARRR pirate metrics dashboard](/templates/aarrr-dashboard), [templates for B2C](/templates/b2c-dashboard) and [B2B products](/templates/b2c-dashboard), and a [landing page report](/templates/landing-dashboard) for marketers transitioning from Google Analytics.
 
-![dashboard templates](../images/blog/aruba/templates.png)
+![dashboard templates](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/templates.png)
 
 These dashboards are accessible from the 'New Dashboard' modal in PostHog. Some templates require custom events, which you'll be asked to configure before creating the dashboard – you can also change the events you track later.
 
-![dashboard templates](../images/blog/aruba/setup-events.png)
+![dashboard templates](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/setup-events.png)
 
 Got a request for a dashboard? DM the team on our community Slack!
 
@@ -93,7 +93,7 @@ The team name is a reference to a hackathon project Joe is especially passionate
 
 Dubbed DataBeach because Frank and Harry started building the feature while sipping Piña Coladas by the beach, DataBeach is all about our long-term vision of [simplifying the modern data stack](/blog/modern-data-stack-sucks) for startups. Less time spent wrangling data = more time shipping products. 
 
-![databeach](../images/blog/aruba/data-beach.png)
+![databeach](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/data-beach.png)
 
 They teamed up with Marius to an build MVP consisting of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources such as Stripe, Hubspot (see above), Intercom, and more, along with data from PostHog.
 
@@ -111,17 +111,17 @@ Anecdotally, our direct-to-an-engineer support is a big reason why people love u
 
 Enter team Arubug, who decided there had to be a better way.
 
-![bug report](../images/blog/aruba/bug-report.gif)
+![bug report](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/bug-report.gif)
 
 The team started by [building a site app](/tutorials/build-site-app) for bug reports which sends a `$bug_report` event to PostHog.
 
 These reports feed into a dashboard that tracks bug reports, helping us to identity trends. Bugs can be broken down as tables with relevant properties, and session replays, attached.
 
-![bug table](../images/blog/aruba/arubug-table.png)
+![bug table](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/arubug-table.png)
 
 The team also built a communication tab into bug reports, so support can send emails and leave notes on tickets with additional context without leaving the app. Every email is a ClickHouse event tied to the initial UUID of the report event, with emails (for now) sent and received via Zapier.
 
-![communication-tab](../images/blog/aruba/conversation-tab.png)
+![communication-tab](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/conversation-tab.png)
 
 After the hackathon, we reviewed the plan and realized: 
 
@@ -139,11 +139,11 @@ Now, instead of our single support hero, each team will handle support requests 
 
 Hedgehog mode is one of PostHog's most powerful features – who wouldn't want to play with our adorable mascot? 
 
-![hats](../images/blog/aruba/hats.gif)
+![hats](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/hats.gif)
 
 Currently, Max – accessible via the help menu in PostHog – can jump around, spin, wave, dance, and wave. For their hackathon, the team worked on accessories for Max, such as hats, glasses, and costumes, that PostHog users could unlock by completing certain tasks – e.g. watching a certain number of replays.
 
-![toolbar](../images/blog/aruba/toolbar.gif)
+![toolbar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/toolbar.gif)
 
 They also set about revamping the PostHog Toolbar, replacing the dull but functional PostHog icon with an animated Max whose status changes when you select different toolbar features.
 
@@ -153,7 +153,7 @@ They also set about revamping the PostHog Toolbar, replacing the dull but functi
 
 We're constantly building new features, but we have to invite users personally to try them out. It's inefficient and not cool. James, Michael and Annika thought it would be better if PostHog users could join PostHog betas themselves. So, they built it. That is cool.
 
-![feature previews](../images/blog/aruba/feature-previews.png)
+![feature previews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/feature-previews.png)
 <Caption>Interface for creating feature preview entries, including screenshots and docs options</Caption>
 
 Feature previews is pretty simple. It's a list of features we're testing, including screenshots and basic information, that users can simply enable or disable whenever they like. When they do, they're either automatically added to, or removed from, the relevant feature flag.
@@ -174,7 +174,7 @@ In June they've planned a virtual engraving workshop, in July a virtual escape r
 
 Luke, Thomas, Ben and Cory built an MVP for automations in PostHog. In the MVP, automations have a source (event, action or cron job), logic (pause for / pause until), and sources (e.g. send a Slack message, create a GitHub Issue, add to cohort, add to feature flag, send an in-app message etc.).
 
-![automations](../images/blog/aruba/automation-posthog.png)
+![automations](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/automation-posthog.png)
 
 Even this basic functionality has numerous helpful use cases, but long-term we expect to add more sources and destinations, and the ability to create automations based on event thresholds.
 
@@ -184,7 +184,7 @@ Even this basic functionality has numerous helpful use cases, but long-term we e
 
 PostHog uses ClickHouse as our main event database, but we end up using a huge range of tools (Grafana, Metabase, pganalyze etc.) to monitor and manage it. Team HouseWatch built a centralized dashboard, so we can eliminate all this bloat and have everything in one place.
 
-![housewatch](../images/blog/aruba/housewatch.png)
+![housewatch](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/housewatch.png)
 
 The homepage enables us to monitor things like execution count (queries per hour), and memory usage. There's also a slow queries view, which will allow the team to proactively identify problematic queries and reach out to customers to help.
 

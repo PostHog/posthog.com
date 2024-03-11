@@ -1,5 +1,5 @@
 ---
-date: 2022-05-09
+date: 2022-05-09T00:00:00.000Z
 title: >-
   Using Google Analytics was deemed 'illegal' in some EU countries. We built a
   microsite in 48 hours to capitalize on the news.
@@ -26,23 +26,23 @@ Within five days, we launched [IsGoogleAnalyticsIllegal.com](https://isgoogleana
 
 ### It all started when our CTO shared the news on Slack
 
-![The Netherlends also likely to declare Google Analytics illegal](../images/blog/is-ga-illegal-microsite/illegal-in-austria.png)
+![The Netherlends also likely to declare Google Analytics illegal](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/illegal-in-austria.png)
 
 ### Then our VP of Ops came up with an idea to launch a microsite
 
-![Is this idea funny or just really dumb?](../images/blog/is-ga-illegal-microsite/is-this-funny-or-just-really-dumb.png)
+![Is this idea funny or just really dumb?](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/is-this-funny-or-just-really-dumb.png)
 
 ### Obviously this felt like a fun idea, so I put together a quick joke of a wireframe
 
-![Is GA illegal?](../images/blog/is-ga-illegal-microsite/is-it-illegal-probably.png)
+![Is GA illegal?](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/is-it-illegal-probably.png)
 
 ### Soon we had a gimmicky domain name and the idea was born
 
-![Greatest domain name ever](../images/blog/is-ga-illegal-microsite/is-google-analytics-illegal.png)
+![Greatest domain name ever](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/is-google-analytics-illegal.png)
 
 ### I remember being on a flight at the time. What better way to spend a couple hours in coach than to whip up a mock?
 
-![1 hour mockup](../images/blog/is-ga-illegal-microsite/mockup.png)
+![1 hour mockup](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/mockup.png)
 
 ## How we positioned the site
 
@@ -80,13 +80,13 @@ There’s also a giant scrolling news-style ticker posing the question, “Is Go
 
 We tried to find the balance between providing real value without trying to look like we’re scaring people into needing to use PostHog.
 
-![Now France too?!](../images/blog/is-ga-illegal-microsite/france-too.png)
+![Now France too?!](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/france-too.png)
 
 ### 3. Make it abundantly clear who’s behind this
 
 Like a cigarette pack that has to include a giant health warning, we tried to go over the top to disclose who was behind the site. (You can’t demonize a *little* self-promotion, right?)
 
-![PostHog is clearly behind this](../images/blog/is-ga-illegal-microsite/we-not-hiding-it-bro.png)
+![PostHog is clearly behind this](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/we-not-hiding-it-bro.png)
 
 ## The response
 
@@ -115,7 +115,7 @@ We see a differentiation between:
 
 We were very specific in saying *product analytics* and not *website analytics*. Unfortunately some mistook our statement as the latter, and the claim we’re the only open source website analytics platform would be false!
 
-![6EF42A7B-3EED-4852-884C-DEAA407A701E.jpeg](../images/blog/is-ga-illegal-microsite/6EF42A7B-3EED-4852-884C-DEAA407A701E.jpeg)
+![6EF42A7B-3EED-4852-884C-DEAA407A701E.jpeg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/6EF42A7B-3EED-4852-884C-DEAA407A701E.jpeg)
 
 ### Some people liked the design, others didn’t (typical Hacker News!)
 
@@ -123,7 +123,7 @@ As the designer on this microsite, I’d like to extend a shout out to melissalo
 
 It was quickly followed up by the contrarian opinion, followed by a discussion about said opinions. (Would it really be a Hacker News thread if it *didn’t* go down this rabbit hole?)
 
-![7BCF2377-DE39-4B1F-8019-1180C49D55CC.jpeg](../images/blog/is-ga-illegal-microsite/7BCF2377-DE39-4B1F-8019-1180C49D55CC.jpeg)
+![7BCF2377-DE39-4B1F-8019-1180C49D55CC.jpeg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/7BCF2377-DE39-4B1F-8019-1180C49D55CC.jpeg)
 
 ### Consider how people will interpret what you’re *not* actually saying
 
@@ -133,7 +133,7 @@ Countries required to follow GDPR can still use Google Analytics if they don’t
 
 Unfortunately, not everyone understood this distinction.
 
-![D99263DC-C425-4D0D-989D-48C57C899C82.jpeg](../images/blog/is-ga-illegal-microsite/D99263DC-C425-4D0D-989D-48C57C899C82.jpeg)
+![D99263DC-C425-4D0D-989D-48C57C899C82.jpeg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/D99263DC-C425-4D0D-989D-48C57C899C82.jpeg)
 
 Given the fact that one of our values is to not use sneaky marketing tactics, I won't deny we pushed the boundaries here.
 

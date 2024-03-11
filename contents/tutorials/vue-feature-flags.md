@@ -48,7 +48,7 @@ export default {
 
 Run `npm run serve` to start your app.
 
-![Basic Vue app](../images/tutorials/vue-feature-flags/basic-app.png)
+![Basic Vue app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/basic-app.png)
 
 ## Adding PostHog
 
@@ -160,7 +160,7 @@ export default {
 
 When you run your app now, you should see the updated text.
 
-![New app after adding the flag](../images/tutorials/vue-feature-flags/flag-enabled-in-app.png)
+![New app after adding the flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/flag-enabled-in-app.png)
 
 ### Bootstrapping feature flags
 

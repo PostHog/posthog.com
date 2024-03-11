@@ -55,7 +55,7 @@ Route::get('/', function () {
 
 Run `php artisan serve` and navigate to `http://127.0.0.1:8000` to see our app in action.
 
-![Basic Laravel app](../images/tutorials/laravel-feature-flags/basic-app.png)
+![Basic Laravel app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 

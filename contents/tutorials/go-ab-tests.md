@@ -59,7 +59,7 @@ func main() {
 
 Run `go run main.go` and navigate to `http://localhost:8080` to see your app in action.
 
-![Basic Express app](../images/tutorials/go-ab-tests/basic-app.png)
+![Basic Express app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 

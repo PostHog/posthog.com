@@ -1,5 +1,5 @@
 ---
-date: 2020-03-01
+date: 2020-03-01T00:00:00.000Z
 title: After the HN launch
 rootPage: /blog
 sidebar: Blog
@@ -29,13 +29,13 @@ We write down everything we learn internally on the same doc we started with in 
 
 The second thing we try to do well is to set up informal communication with the customer – we often us Slack or WhatsApp groups. They let people feel safer just sending a couple of sentences because they lose the formality of email. And, they can just be quite good fun.
 
-![](../images/02/Screenshot-2020-02-25-at-21.52.15.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/Screenshot-2020-02-25-at-21.52.15.png)
 
 Throughout YC, we’ve split our roles pretty clearly. As my former boss used to say “don’t be like 5 year olds playing football”.
 
 Even when there were just two of us, Tim and I quickly saw how important it was to write tickets for features and issues. This meant that Tim could code uninterrupted, with notifications disabled. I would do everything else. We tend to work with our headphones on almost all day to help stay focused. Occasionally we take them off, and one day we may treat ourselves to a new lightbulb for the office (updated - we never did):
 
-![](../images/02/working.jpeg)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/working.jpeg)
 
 Since Aaron joined, he has focused on getting feedback from users, Tim has kept working on the product, and I’ve focused on product, marketing and anything else. Aaron and I share the QA for features and we try to get them done immediately, so it doesn’t cause Tim to have to multitask.
 

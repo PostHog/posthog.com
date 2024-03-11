@@ -1,8 +1,10 @@
 ---
 title: How to add session replays to Intercom
-date: 2024-02-13
-author: ["ian-vanagas"]
-tags: ['session replay']
+date: 2024-02-13T00:00:00.000Z
+author:
+  - ian-vanagas
+tags:
+  - session replay
 ---
 
 [Session replays](/session-replay) are a useful support tool for debugging and recreating issues. The errors, console, and network data along with the rest of PostHog's tools make it a powerful support platform.
@@ -43,7 +45,7 @@ export default function Home() {
 
 Once done, run `npm run dev` and go `http://localhost:3000`  to see your app.
 
-![App running](../images/tutorials/intercom-session-replays/app.png)
+![App running](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/intercom-session-replays/app.png)
 
 ## 2. Add PostHog
 
@@ -148,7 +150,7 @@ export default function Home() {
 
 Now when you submit an email, Intercom launches with your email connected.
 
-![Intercom launched](../images/tutorials/intercom-session-replays/intercom.png)
+![Intercom launched](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/intercom-session-replays/intercom.png)
 
 ## 4. Adding session replays to Intercom
 
@@ -158,7 +160,7 @@ The final piece is adding PostHog's session replays to Intercom. Since PostHog a
 
 The first way is to add the session replay link is as a people data attribute. To do this, go to the [people data settings](https://app.intercom.com/a/apps/_/settings/people-data) and click "Create attribute." Name the attribute "Recent replay," click the toggle to enable updates via the Messenger, and click "Save."
 
-![Adding an attribute](../images/tutorials/intercom-session-replays/attribute.png)
+![Adding an attribute](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/intercom-session-replays/attribute.png)
 
 Back in your app, add PostHog to your component in `app/page.js`, call the `[get_session_replay_url()](/docs/libraries/js#session-replay)` method, and add the link as `recent_replay` in your `boot` call like this:
 
@@ -192,7 +194,7 @@ export default function Home() {
 
 Now, when a user sends a message, you can see a link to their most recent replay in PostHog.
 
-![Replay link](../images/tutorials/intercom-session-replays/replay.png)
+![Replay link](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/intercom-session-replays/replay.png)
 
 The only downside with this method is that it will only show the most recent replay. You lose the history of replays across sessions you might need for solving older issues.
 
@@ -222,7 +224,7 @@ const handleSubmit = (e) => {
 
 After running this, when you go to the user in Intercom, you see events connected to them with links to different sessions. 
 
-![Event in Intercom](../images/tutorials/intercom-session-replays/event.png)
+![Event in Intercom](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/intercom-session-replays/event.png)
 
 > **Bonus:** Beyond a session replay link, you can add information like:
 > - User ID (with `posthog.get_distinct_id()`)

@@ -1,10 +1,13 @@
 ---
 title: How to set up A/B/n testing
-date: 2023-08-21
-author: ["ian-vanagas"]
+date: 2023-08-21T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['experimentation', 'feature flags']
+tags:
+  - experimentation
+  - feature flags
 ---
 
 A/B/n testing is like an A/B test where you compare multiple (n) variants instead of just two. It can be especially useful for small but impactful changes where many options are available like copy, styles, or pages.
@@ -19,7 +22,7 @@ To create an A/B/n, go [experiments tab in PostHog](https://app.posthog.com/expe
 3. Add feature flag key. In your code, you use this feature flag key to check which experiment variant the user has been assigned to.
 4. Under "Experiment variants," click "Add test variant" twice to add two new variants. Rename the three variants if you want. 
 
-![A/B/n experiment](../images/tutorials/abn-testing//experiment.png)
+![A/B/n experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/abn-testing/experiment.png)
 
 Fill out the rest of your details like participants, goal type, secondary metrics, and minimum acceptable improvement. Once done, click "Save as draft".
 
@@ -74,7 +77,7 @@ export default function Home() {
 
 When we reload our page, we get a title based on the flag key variant. 
 
-![Epic webpage](../images/tutorials/abn-testing/epic.png)
+![Epic webpage](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/abn-testing/epic.png)
 
 ### Testing the other variants
 
@@ -82,7 +85,7 @@ We can check the other variants by going to the [feature flag page](https://app.
 
 If you want the optional override to apply to only you, you can create another condition set and set the condition like `utm_source = awesome` then use use the link `http://localhost:3000/?utm_source=awesome` or [identify](/docs/product-analytics/identify) your user with an email and use `email = your_email@domain.com` . Finally, press save and when you go back to your app, you see the overridden flag value.
 
-![Overriding our variant](../images/tutorials/abn-testing/override.png)
+![Overriding our variant](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/abn-testing/override.png)
 
 > **Note:** Make sure to remove the optional override before rolling out your A/B/n test to real users.
 
@@ -92,7 +95,7 @@ Once your experiment has concluded, you can stop it and roll out the winning var
 
 To do this, click the "stop" button on your experiment details page, go to your [feature flag page](https://app.posthog.com/feature_flags), search for the key related to your experiment, and click to edit it. Under variant keys, edit the rollout value to 100 for the winning variant and 0 for the losing ones, and press save. When you’re ready, you can remove the experiment-related code from your app too.
 
-![Rolling out our winner](../images/tutorials/abn-testing/rollout.png)
+![Rolling out our winner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/abn-testing/rollout.png)
 
 ## Further reading
 

@@ -1,10 +1,12 @@
 ---
-title: "How to create surveys in Framer"
-date: 2023-11-29
-author: ["lior-neu-ner"]
+title: How to create surveys in Framer
+date: 2023-11-29T00:00:00.000Z
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['surveys']
+tags:
+  - surveys
 ---
 
 Surveys are a great way to conduct market research and collect qualitative data from your users. This tutorial shows you how to do exactly that by using PostHog on your [Framer](https://framer.com/) website.
@@ -28,13 +30,13 @@ Go to the "General" tab in site settings and scroll down to the "Custom Code" se
 
 Finally, publish your site.
 
-![How to add PostHog to Framer](../images/tutorials/framer-surveys/add-posthog-to-framer.mp4)
+![How to add PostHog to Framer](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/framer-surveys/add-posthog-to-framer.mp4)
 
 ## Create your survey
 
 Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." There are a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, or you can create your own by clicking "Create blank survey".
 
-![PostHog survey templates](../images/tutorials/framer-surveys/survey-templates.png)
+![PostHog survey templates](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-surveys/survey-templates.png)
 
 Next, customize your survey as needed. You can customize the questions, branding, and targeting. See our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
 
@@ -50,7 +52,7 @@ After interacting with your survey, you can view results by selecting the survey
 
 You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
-![Survey results](../images/tutorials/framer-surveys/survey-results.png)
+![Survey results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-surveys/survey-results.png)
 
 ## Further reading
 

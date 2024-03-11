@@ -2,9 +2,15 @@
 title: How to capture fewer unwanted events
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2022-10-20
-tags: ['events', 'apps', 'data management', 'product os', 'product analytics']
+author:
+  - ian-vanagas
+date: 2022-10-20T00:00:00.000Z
+tags:
+  - events
+  - apps
+  - data management
+  - product os
+  - product analytics
 ---
 
 **Estimated reading time:** 5 minutes ☕
@@ -115,7 +121,7 @@ The second app you can use to keep fewer events is the [Downsampler](/docs/apps/
 
 To configure it, search for the “Downsampling Plugin” in Apps, click the blue gear, pick a percentage of events you want to keep, and click the toggle to activate.
 
-![Downsampler app](../images/tutorials/fewer-unwanted-events/downsampler.png)
+![Downsampler app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/fewer-unwanted-events/downsampler.png)
 
 The problem with downsampling (compared to the other methods covered) is that you have less control over event ingestion. The app drops a random selection of all events. For example, if you have a funnel that goes from pageview to signup to paid. The downsampler could drop the signup event breaking a funnel, or worse, it could drop a paid subscription making your customer data inaccurate.
 

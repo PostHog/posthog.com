@@ -55,7 +55,7 @@ export class AppComponent {
 
 Run `ng serve` and navigate to http://localhost:4200 to see your app in action.
 
-![Basic Angular app](../images/tutorials/angular-ab-tests/basic-app.png)
+![Basic Angular app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your Angular app
 

@@ -1,6 +1,6 @@
 ---
 title: What is real user monitoring (and how to set it up)
-date: 2023-06-13
+date: 2023-06-13T00:00:00.000Z
 author:
   - ian-vanagas
 featuredImage: >-
@@ -27,7 +27,7 @@ Because it tracks real user behavior, it is a closer representation of reality. 
 - Performance: loading, page, and query speed, core web vitals
 - Usability: errors, confusion, bugs, rageclicks, unclear UI
 
-![Types](../images/blog/real-user-monitoring/classes.png)
+![Types](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/classes.png)
 
 The ideal real user monitoring system captures data about these issues, provides details, supports planning of fixes, and ultimately, supports creating a better user experience.
 
@@ -35,7 +35,7 @@ The ideal real user monitoring system captures data about these issues, provides
 
 By helping you understand your current user experience, real user monitoring helps you discover ways to improve it and manage the risk of future issues.
 
-![Why](../images/blog/real-user-monitoring/why.png)
+![Why](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/why.png)
 
 ### 1. Improve experience
 
@@ -69,7 +69,7 @@ To capture data for real user monitoring in PostHog, we rely on [session replays
 
 Session replays capture a visual of exactly how users are interacting with your product. To enable session replays, install and initialize the [JavaScript Web SDK](/docs/libraries/js) or add the [snippet](/docs/getting-started/install?tab=snippet) to your site. After, make sure to enable the options related to "Recordings" in your [project settings](https://app.posthog.com/project/settings#recordings).
 
-![Recordings](../images/blog/real-user-monitoring/recordings.png)
+![Recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/recordings.png)
 
 To capture errors, query speed, and other events relevant to the real usage of your product, you need a way to know when those events happen in your code. This could be an error boundary, web vital report, or a server profiler. Many frameworks, like React and [Next.js](/tutorials/nextjs-monitoring), have functions for these built-in, others you must build them yourself. Once set up, when an event happens, capture it with one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/post-only-endpoints).
 
@@ -85,11 +85,11 @@ Once you’ve begun to capture data, you can start to analyze it. This helps you
 - Rageclicks broken down by page.
 - User path to errors.
 
-![Dashboard](../images/blog/real-user-monitoring/dashboard.png)
+![Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/dashboard.png)
 
 For each of these insights, you can use session replays to dive deeper into exactly what is happening in the related sessions. Click the visualization to get a list of users and their replays. In those replays, you can see where events like errors or queries happen, console logs, and performance details for that specific session. 
 
-![Dive](../images/blog/real-user-monitoring/dive.mp4)
+![Dive](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/dive.mp4)
 
 Enabling session replay also captures performance metrics which you can aggregate and analyze using [SQL insights](/docs/product-analytics/sql) and the `raw_session_replay_events` table.
 
@@ -107,7 +107,7 @@ Real user monitoring can also integrate with your business processes because a h
 
 At PostHog, we do this with a [broken link checker](/tutorials/broken-link-checker), which sends us a notification in Slack when someone navigates to a page that doesn’t exist and gets a 404. This helps us fix these links and provide a better user experience.
 
-![404s](../images/blog/real-user-monitoring/404.png)
+![404s](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/404.png)
 
 ## Further reading
 

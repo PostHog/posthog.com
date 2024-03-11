@@ -1,5 +1,5 @@
 ---
-date: 2023-11-01
+date: 2023-11-01T00:00:00.000Z
 title: How we designed our company for speed
 author:
   - james-hawkins
@@ -71,7 +71,7 @@ The above requires a lot of context setting from the company. To that end, we're
 
 To do this, we have a clear, simple [mission and strategy](/handbook/why-does-posthog-exist). We communicate this repeatedly through our handbook, during everyone's onboarding, repeatedly in our all hands and when we plan each quarter of work.
 
-![company strat](../images/hubs/how-we-designed-our-company-for-speed/posthog-strat.png)
+![company strat](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-strat.png)
 
 Our mission and strategy have both been refined as the company has made progress – they have felt more meaningful as a result as we've gotten further along. We've gradually gone from something hypothetical to these things feeling like an obvious label for what we do.
 
@@ -101,7 +101,7 @@ It's simple, but if you have lots of spending and focus outside of engineering, 
 
 At the time of writing, [we are 37 people](/team), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
 
-![company composition](../images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
+![company composition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
 
 We don't do outbound sales, our [marketing team](/teams/marketing) is very small, we only have one product manager, and our [exec team](/teams/exec) is only 3 people. These things are all by design. 
 

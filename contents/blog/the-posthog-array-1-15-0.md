@@ -1,5 +1,5 @@
 ---
-date: 2020-10-15
+date: 2020-10-15T00:00:00.000Z
 title: Array 1.15.0
 rootPage: /blog
 sidebar: Blog
@@ -28,7 +28,7 @@ So let's get into it: what does super scalable mean and what else did we do sinc
 
 ### [ClickHouse 👆🏠](https://github.com/PostHog/posthog/pulls?page=1&q=is%3Apr+clickhouse+is%3Aclosed)
 
-![ClickHouse Screenshot](../images/blog/array/clickhouse.png)
+![ClickHouse Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/clickhouse.png)
 <small class="centered">_A ClickHouse query completing in a fifth of a second (Click image to expand)_</small>
 
 
@@ -46,7 +46,7 @@ If you're interested in using PostHog with ClickHouse, send us an email at [cont
 
 ### [Command Palette](https://github.com/PostHog/posthog/pull/1819)
 
-![Command Palette Screenshot](../images/blog/array/command-palette.png)
+![Command Palette Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/command-palette.png)
 
 <br />
 
@@ -63,7 +63,7 @@ Stay tuned for more exciting features that were built during the hackathon.
 
 ### [Backend Feature Flags](https://github.com/PostHog/posthog-python/pull/9)
 
-![Backend Feature Flags Code](../images/blog/array/backend-flags.png)
+![Backend Feature Flags Code](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/backend-flags.png)
 
 
 Based on community feedback, we made it easier for feature flags to be integrated with your backend, in addition to our frontend JavaScript implementation.
@@ -74,7 +74,7 @@ We have ourselves been using feature flags with the Python Library to slowly rol
 
 ### [Weekly Report Email](https://github.com/PostHog/posthog/pull/1700)
 
-![Weekly Email Screenshot](../images/blog/array/weekly-email.png)
+![Weekly Email Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/weekly-email.png)
 
 To help users keep up with their key metrics in a simple way, we have introduced a weekly email that gives you an overview of your active and churned users over the previous week.
 
@@ -84,7 +84,7 @@ Have you gotten your weekly report yet?
 
 ### [We're Taking Part in Hacktoberfest 2020](/blog/hacktoberfest-2020)
 
-![Hacktoberfest Banner](../images/blog/hacktoberfest/hacktoberfest.png)
+![Hacktoberfest Banner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hacktoberfest/hacktoberfest.png)
 
 We're happy to announce that PostHog has joined [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/).
 

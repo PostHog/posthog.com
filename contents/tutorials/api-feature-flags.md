@@ -1,10 +1,12 @@
 ---
 title: How to evaluate and update feature flags with the PostHog API
-date: 2023-02-13
-author: ["ian-vanagas"]
+date: 2023-02-13T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 Like [capturing events](/tutorials/api-capture-events), feature flags get a special POST-only public endpoint in the PostHog API, `/decide/`.  There are also endpoints to get data from, update this data, and more. This tutorial shows you how to use these endpoints to evaluate your feature flags (both boolean and multivariate), get data about them, update them, and finally, shows how you can combine these requests together.
@@ -346,7 +348,7 @@ def filterUserFromFlag():
 
 Once done, run this request and check the feature flag in your PostHog instance to see it changed.
 
-![Updated feature flag](../images/tutorials/api-feature-flags/update.png)
+![Updated feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-feature-flags/update.png)
 
 Once confirmed, you're done. Congratulations, you’ve built a solid grasp of using the PostHog API to evaluate and update feature flags! You can use this skill to customize your implementation to your needs.
 

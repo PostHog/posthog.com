@@ -1,6 +1,6 @@
 ---
 title: How to filter and breakdown arrays with HogQL
-date: 2023-10-05
+date: 2023-10-05T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -46,7 +46,7 @@ arrayJoin(
 
 > Adding `?? '[]'`  is a "nullish coalescing operator" that provides a default value to your properties. In this case, it provides an empty array if `properties.$active_feature_flags` is null or undefined.
 
-![Breakdown HogQL](../images/tutorials/array-filter-breakdown/breakdown.png)
+![Breakdown HogQL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/array-filter-breakdown/breakdown.png)
 
 More useful array breakdowns include:
 
@@ -73,7 +73,7 @@ notEmpty(
 )
 ```
 
-![Filter HogQL](../images/tutorials/array-filter-breakdown/filter.png)
+![Filter HogQL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/array-filter-breakdown/filter.png)
 
 If you want to filter arrays for specific values you can use `has`, `hasAll`, and `hasAny`:
 

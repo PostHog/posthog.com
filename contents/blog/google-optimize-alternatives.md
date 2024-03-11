@@ -1,5 +1,5 @@
 ---
-date: 2023-01-23
+date: 2023-01-23T00:00:00.000Z
 title: The best Google Optimize alternatives for apps and websites
 rootPage: /blog
 sidebar: Blog
@@ -28,7 +28,7 @@ If this sounds like bad news to you, consider one of following six Google Optimi
 
 ## 1. PostHog
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/posthog.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/posthog.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** <span className="text-green text-lg">✔</span>
@@ -56,7 +56,7 @@ PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 mill
 
 ## 2. Unbounce
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/unbounce.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/unbounce.png)
 
 - **Free tier:** <span className="text-red text-lg">✖</span>
 - **Transparent pricing:** <span className="text-green text-lg">✔</span>
@@ -81,7 +81,7 @@ Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 
 
 ## 3. GrowthBook
 
-![google optimize alternatives](../images/blog/open-source-testing-tools/growthbook.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** <span className="text-green text-lg">✔</span>
@@ -104,7 +104,7 @@ GrowthBook offers unlimited traffic (subject to a fair use policy), feature flag
 
 ## 4. Instapage
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/instapage.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/instapage.png)
 
 - **Free tier:** <span className="text-red text-lg">✖</span>
 - **Transparent pricing:** Partial
@@ -125,7 +125,7 @@ Instapage's self-serve plan costs $299 per month ($199 if billed annually) and i
 
 ## 5. VWO Testing
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/vwo-testing.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/vwo-testing.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** <span className="text-red text-lg">✖</span>
@@ -146,7 +146,7 @@ Outside of its new Starter plan, VWO is largely a 'price on application' product
 
 ## 6. LaunchDarkly
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/launch-darkly-experiment.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/launch-darkly-experiment.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** Partial

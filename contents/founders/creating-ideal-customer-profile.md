@@ -1,5 +1,5 @@
 ---
-date: 2022-11-14
+date: 2022-11-14T00:00:00.000Z
 title: How we found our Ideal Customer Profile
 author:
   - james-hawkins
@@ -19,7 +19,7 @@ crosspost:
 
 You can see it in our revenue growth:
 
-![A graph showing revenue growth which increased way faster after we created an ideal customer profile](../images/revenue-growth.jpg)
+![A graph showing revenue growth which increased way faster after we created an ideal customer profile](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/revenue-growth.jpg)
 
 I _wish_ we had run this exercise sooner.
 

@@ -1,11 +1,14 @@
 ---
 title: How to add popups to your React app with feature flags
-date: 2023-03-20
-author: ["ian-vanagas"]
+date: 2023-03-20T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: https://www.youtube-nocookie.com/embed/E9QA0xPDpUk
-tags: ['feature flags', 'experimentation']
+featuredVideo: 'https://www.youtube-nocookie.com/embed/E9QA0xPDpUk'
+tags:
+  - feature flags
+  - experimentation
 ---
 
 Popups are a way to highlight features in your app. This tutorial shows how to add them to a React app and control them using [React feature flags](/tutorials/react-feature-flags) and JSON payloads. Feature flag payloads are an ideal tool for this because they enable you to send arbitrary data that controls the popup location and content without needing to redeploy. 
@@ -27,7 +30,7 @@ npm start
 
 We now have a running React app where we can add popups and prompts.
 
-![React app](../images/tutorials/react-popups/app.png)
+![React app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-popups/app.png)
 
 ## Installing PostHog
 
@@ -65,7 +68,7 @@ root.render(
 
 After restarting and opening your app, you should see events captured in your PostHog instance.
 
-![Events](../images/tutorials/react-popups/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-popups/events.png)
 
 ## Adding the code for the popup
 
@@ -124,7 +127,7 @@ The next step is to create a feature flag with a payload to control the content.
 
 Save the flag, head back to your app, and you should see a popup in the bottom right corner.
 
-![Popup](../images/tutorials/react-popups/popup.png)
+![Popup](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-popups/popup.png)
 
 ## Relatively positioning your popup
 
@@ -146,7 +149,7 @@ To set this up, change the location to `relative-bottom` and add a `locationCSSS
 
 This sets the popup to the relative right of the element you selected. 
 
-![Relative popup](../images/tutorials/react-popups/relative.png)
+![Relative popup](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-popups/relative.png)
 
 You can then use this to set up product tours across multiple pages and features in your app. Just create a flag for each page and feature you want to show off, and set the `primaryButtonURL` to the next page on the tour. Using the CSS selector also enables you to only show the popup on specific pages which include that specific element.
 

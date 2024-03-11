@@ -1,5 +1,5 @@
 ---
-date: 2023-08-25
+date: 2023-08-25T00:00:00.000Z
 title: The 9 best GA4 alternatives for apps and websites
 rootPage: /blog
 sidebar: Blog
@@ -57,7 +57,7 @@ The following GA4 alternatives all solve one or more of these issues. Some provi
 
 ### PostHog
 
-![posthog](../images/screenshots/hogflix-dashboard.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 - **Best for:** Mobile and web apps
 - **Tracking method:** Event-based
@@ -154,7 +154,7 @@ Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an 
 
 ### Matomo
 
-![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
+![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 - **Best for:** Content, marketing and e-commerce websites
 - **Tracking method:** Session-based
@@ -242,7 +242,7 @@ It also shares some weaknesses inherent in Universal Analytics. While Matomo has
 
 ### Kissmetrics
 
-![kissmetrics](../images/blog/ga4-alternatives/kissmetrics.png)
+![kissmetrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/kissmetrics.png)
 
 - **Best for:** Marketing and e-commerce websites
 - **Tracking method:** Event-based
@@ -335,7 +335,7 @@ One of its key features is the Populations report, which groups users into key c
 
 ### TelemetryDeck
 
-![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
+![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/telemetrydeck.png)
 
 - **Best for:** Mobile apps
 - **Tracking method:** Event-based
@@ -423,7 +423,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
 
 ### Plausible
 
-![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
+![Plausible Analytics - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
 - **Best for:** Content and marketing websites
 - **Tracking method:** Session-based
@@ -513,7 +513,7 @@ But, if you just want basic website analytics, it gets the job done, and won't a
 
 ### Vercel Web Analytics
 
-![vercel analytics](../images/blog/ga4-alternatives/vercel.png)
+![vercel analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/vercel.png)
 
 - **Best for:** Content and marketing websites
 - **Tracking method:** Event-based
@@ -603,7 +603,7 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
 
 ### Piwik PRO
 
-![piwik pro](../images/blog/ga4-alternatives/piwik-pro.png)
+![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/piwik-pro.png)
 
 - **Best for:** Content, marketing and e-commerce websites
 - **Tracking method:** Session-based
@@ -691,7 +691,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 ### Fathom
 
-![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
+![Fathom - GDPR compliant analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gdpr-compliant-analytics/fathom.png)
 
 - **Best for:** Content and marketing websites
 - **Tracking method:** Session-based
@@ -777,7 +777,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 ### Counter
 
-![counter](../images/blog/ga4-alternatives/counter.png)
+![counter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/counter.png)
 
 - **Best for:** Content and personal websites
 - **Tracking method:** Session-based

@@ -1,5 +1,5 @@
 ---
-date: 2023-01-12
+date: 2023-01-12T00:00:00.000Z
 title: 'HogMail #19: Which meetings should you kill?'
 rootPage: /blog
 sidebar: Blog
@@ -53,7 +53,7 @@ We often get asked how to achieve the fabled product-market fit (PMF), mainly be
 
 >"At any given moment in time, even if you have PMF, you still need to be working towards a future state where the market has evolved, and your product has kept up."
 
-![product market fit](../images/blog/product-market-flex.jpeg)
+![product market fit](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-market-flex.jpeg)
  
 The author goes on to argue teams can flex two dimensions to achieve PMF: (i) reduce the effort by the user to get value (product); and (ii) increase user literacy (go-to-market).
 

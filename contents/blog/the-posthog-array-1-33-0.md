@@ -1,5 +1,5 @@
 ---
-date: 2022-02-28
+date: 2022-02-28T00:00:00.000Z
 title: Array 1.33.0
 rootPage: /blog
 sidebar: Blog
@@ -57,7 +57,7 @@ We've redesigned dashboards to make them more useful than ever. Changes include 
 
 We've also added a new Insight Details feature that can give you a handy summary of the query. Now all the information you need to understand a dashboard is right there in front of you!
 
-![Screenshot: Dashboard redesign](../images/docs/user-guides/funnels/geoip-docs-image.png)
+![Screenshot: Dashboard redesign](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/geoip-docs-image.png)
 
 <br />
 

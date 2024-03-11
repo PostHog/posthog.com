@@ -1,5 +1,5 @@
 ---
-date: 2023-05-09
+date: 2023-05-09T00:00:00.000Z
 title: 'In-depth: The AARRR pirate funnel explained'
 author:
   - andy-vandervell
@@ -36,7 +36,7 @@ In this guide, you'll learn:
 
 ## How does the AARRR funnel work?
 
-![AARRR pirate funnel](../images/blog/aarrr-pirate-funnel/aarrr-graphic.png)
+![AARRR pirate funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/aarrr-graphic.png)
 
 The five pirate metrics are:
 
@@ -52,7 +52,7 @@ McClure visualized the AARRR funnel in a table like the one below, though you co
 
 This version is what the funnel might look like for our product, PostHog, an [all-in-one analytics platform](https://posthog.com/) comprising product analytics, session replay, feature flags, and A/B testing.
 
-![aarrr funnel breakdown](../images/blog/aarrr-pirate-funnel/arrrr-funnel-table.png)
+![aarrr funnel breakdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/arrrr-funnel-table.png)
 
 Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively.
 
@@ -180,7 +180,7 @@ At PostHog, we're [organized into small teams](/handbook/company/small-teams).
 
 Here's how our earlier breakdown might look like if we assigned different PostHog teams to each user status:
 
-![aarrr funnel team](../images/blog/aarrr-pirate-funnel/aarrr-funnel-team.png)
+![aarrr funnel team](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/aarrr-funnel-team.png)
 
 As you can see, there is trickle down to all levels of the funnel, and we could go further. Activation is influenced by whether people coming into the funnel match our Ideal Customer Profile (ICP), so marketing also influences it even if they don't own activation directly. 
 

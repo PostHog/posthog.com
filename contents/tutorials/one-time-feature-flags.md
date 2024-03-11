@@ -1,10 +1,12 @@
 ---
 title: How to set up one-time feature flags
-date: 2023-05-12
-author: ["ian-vanagas"]
+date: 2023-05-12T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 Sometimes you want to show users a component or some content only once. You can use a field in their user model or store it locally, but this gets messy fast. It also might prevent you from changing it remotely. A better way to do this is a feature flag that changes once a user completes what you want.
@@ -91,7 +93,7 @@ app.get('/', (req, res) => {
 
 After making a request again to this route, we get a `first request` event in our PostHog instance. 
 
-![Events](../images/tutorials/one-time-feature-flags/event.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/one-time-feature-flags/event.png)
 
 We haven’t set up a way to check if users made their first request. With only this, we treat every request like it’s the first. We can set up a feature flag to change this.
 
@@ -99,7 +101,7 @@ We haven’t set up a way to check if users made their first request. With only 
 
 To create our feature flag, go to the feature flags tab in PostHog, create a new one, set the key as `completed-first-request`, then set the release conditions to 100% of users where `first_request_complete` equals `true`, and click save.
 
-![Conditions](../images/tutorials/one-time-feature-flags/condition.png)
+![Conditions](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/one-time-feature-flags/condition.png)
 
 Go back to your `server.js` file and implement the flag. Check the `completed-first-request` flag with `client.isFeatureEnabled()`:
 

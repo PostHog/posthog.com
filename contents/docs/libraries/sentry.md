@@ -36,9 +36,9 @@ Sentry.init({
 
 In PostHog, you'll now have `$exception` events, which have a "Sentry URL" link to take you to the exception:
 
-![Sentry exception event in PostHog](../../images/sentry_posthog_exception.png)
+![Sentry exception event in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sentry_posthog_exception.png)
 
 From Sentry you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.
 
-![PostHog user profile URL in Sentry](../../images/sentry_exception.png)
+![PostHog user profile URL in Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sentry_exception.png)
 

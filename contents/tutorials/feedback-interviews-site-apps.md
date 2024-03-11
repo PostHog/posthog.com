@@ -1,11 +1,13 @@
 ---
 title: Get feedback and book user interviews with surveys
-date: 2023-07-11
-author: ["ian-vanagas"]
+date: 2023-07-11T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
 featuredTutorial: true
-tags: ["surveys"]
+tags:
+  - surveys
 ---
 
 Getting feedback is critical to building a successful product. Metrics and analytics are key pieces of feedback, but at an early stage, written feedback and interviews are even better. To maximize the amount of feedback you get, you need processes, but these are often time-consuming.
@@ -30,17 +32,17 @@ To add surveys, you need either [the snippet or the JavaScript library](/docs/in
 
 Next, go to the [settings page](https://us.posthog.com/settings/project-surveys) and enable survey popups if you haven't already.
 
-![Enable surveys](../images/tutorials/feedback-interviews-site-apps/enable.png)https://studio.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA/editing
+![Enable surveys](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/feedback-interviews-site-apps/enable.png)https://studio.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA/editing
 
 ## Creating your first feedback survey
 
 Once you’ve set up your app to use surveys, you can create your first one to gather feedback. To do this, go to the [surveys tab](https://app.posthog.com/surveys) in your PostHog instance and click "New survey." Choose the [open feedback template](/templates/in-app-feedback-survey). In this example, we ask for feedback on an upload feature, so our question reflects this. We also want to target the `/upload` URL so we include that under "Targeting."
 
-![Creating the feedback survey](../images/tutorials/feedback-interviews-site-apps/feedback.mp4)
+![Creating the feedback survey](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/feedback-interviews-site-apps/feedback.mp4)
 
 Feel free to add a description or change any of the style options and press "Save as draft" once ready. On the overview page, you can click "Launch" because we already did all the setup. Once launched, you see the prompt in your app and results are captured into PostHog for you to see.
 
-![Feedback in app](../images/tutorials/feedback-interviews-site-apps/feedback-app.png)
+![Feedback in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/feedback-interviews-site-apps/feedback-app.png)
 
 ## Using surveys to book user interviews
 
@@ -50,11 +52,11 @@ To control who sees the prompt, we can use a feature flag. To create one, go to 
 
 Next, go to the [surveys tab](https://app.posthog.com/surveys) and click "New survey." Use the user interview template. Add your booking link to the first question, and then under "Targeting," link your `user-interview` feature flag. Altogether, this might look like this:
 
-![Interview survey](../images/tutorials/feedback-interviews-site-apps/interview.mp4)
+![Interview survey](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/feedback-interviews-site-apps/interview.mp4)
 
 Once you customize it to your liking, click "Save as draft" and then "Launch" to show it to all the users in the flag rollout.
 
-![Interview survey in app](../images/tutorials/feedback-interviews-site-apps/interview-app.png)
+![Interview survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/feedback-interviews-site-apps/interview-app.png)
 
 ## Further reading
 

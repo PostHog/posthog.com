@@ -1,11 +1,17 @@
 ---
-title: Calculating average session duration, time on site, and other session-based metrics
+title: >-
+  Calculating average session duration, time on site, and other session-based
+  metrics
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2022-09-26
-featuredVideo: https://www.youtube-nocookie.com/embed/CVu6ObmOR8Q
-tags: ['trends', 'sessions', 'product analytics']
+author:
+  - ian-vanagas
+date: 2022-09-26T00:00:00.000Z
+featuredVideo: 'https://www.youtube-nocookie.com/embed/CVu6ObmOR8Q'
+tags:
+  - trends
+  - sessions
+  - product analytics
 ---
 
 Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is tracking metrics like time on site, average session duration, and pages per session. 
@@ -25,11 +31,11 @@ To follow this tutorial along, you need to have:
 
 To start calculating time-based insights you first must go to insights and create a new insight. Once in, choose pageview as your event, and aggregate the sum of session duration.
 
-![Session duration sum](../images/tutorials/session-metrics/session-duration-sum.png)
+![Session duration sum](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-metrics/session-duration-sum.png)
 
 Once you modify the graph to your liking, by choosing a date range and setting the Y-axis unit to `Duration (s)`, you have a nice graph of the sum of time on site over time.
 
-![Session duration sum graph](../images/tutorials/session-metrics/session-duration-sum-graph.png)
+![Session duration sum graph](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-metrics/session-duration-sum-graph.png)
 
 This might be useful for getting a rough idea of the usage of our whole product over time but becomes more useful as you break it down. You can do this by filtering the data. For example, you can filter for sessions by section of your product or site such as pricing or signup.
 
@@ -41,7 +47,7 @@ Now that you visualized time on site, we can visualize session-based metrics bas
 
 We’ll start with the average session duration. It can be calculated by again choosing pageview, but now aggregating by average session duration. Ensuring Y-axis is set to `Duration (s)` creates a graph of average session duration. 
 
-![Average session duration](../images/tutorials/session-metrics/average-session-duration.png)
+![Average session duration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-metrics/average-session-duration.png)
 
 In many ways, average session duration is more useful than the sum or total time spent on site. A large number of sessions can increase total time on site, which is driven by brand, marketing, and distribution. Average session duration is more driven by the quality and content of the pages and application, which engineers and product managers have more control over. 
 
@@ -53,7 +59,7 @@ Another useful average to visualize is the average number of pages per session. 
 
 > **Tip:** Be sure to set the Y-axis unit in your chart back to `None`.
 
-![Pages per session](../images/tutorials/session-metrics/pages-per-session.png)
+![Pages per session](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-metrics/pages-per-session.png)
 
 Again, you can filter these series to better identify the types of users you want, or to provide details on sections and funnels on our site. Clicking on the charts will provide a list of the users included in that data. If there is a [session recording](/manual/recordings) available for that user session, there will be a link for you to go directly watch it.
 

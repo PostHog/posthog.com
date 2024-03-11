@@ -1,5 +1,5 @@
 ---
-date: 2023-03-30
+date: 2023-03-30T00:00:00.000Z
 title: The conformist startup rule you can ignore
 author:
   - andy-vandervell
@@ -49,7 +49,7 @@ My first instinct was Stripe. It’s big, has loads of products. It must fit.
 
 But, when you dig down, it’s not even close:
 
-![compound startups](../images/blog/compound-startups.png)
+![compound startups](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/compound-startups.png)
 
 Yes, it has lots of products and most revolve around payment data in some way, but integration isn’t the product. It’s more like a hydra – Adobe for payments, if you will. Hubspot, however, totally does. 
 

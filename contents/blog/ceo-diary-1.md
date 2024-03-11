@@ -1,5 +1,5 @@
 ---
-date: 2021-08-25
+date: 2021-08-25T00:00:00.000Z
 title: Winning from the back - late mover advantage
 rootPage: /blog
 sidebar: Blog
@@ -19,7 +19,7 @@ _We are open source_ is [literally our top value](../handbook/company/values)...
 
 Product analytics is a busy space. It reminds me of the _front_ entrance to Liverpool Street station in London:
 
-![Liverpool Street Front Entrance - lots of people](../images/blog/CEO-diary-1/liverpool-st-station.jpg)
+![Liverpool Street Front Entrance - lots of people](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/CEO-diary-1/liverpool-st-station.jpg)
 
 PostHog Fact: Tim (my co-founder) incorrectly believes this is the side entrance - it's one of our greatest disagreements.
 
@@ -43,7 +43,7 @@ A winning strategy for us involves:
 
 PostHog started off as an open source project. We started getting emails like this one, which is from a 30k employee corporate that you'll have heard of:
 
-![An email from a potential customer saying they have extreme interest](../images/blog/CEO-diary-1/extreme-interest.jpg)
+![An email from a potential customer saying they have extreme interest](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/CEO-diary-1/extreme-interest.jpg)
 
 Weirdly enough, at the time, we felt we provided a _worse_ experience to paying customers like this than to free users.
 
@@ -63,7 +63,7 @@ They appeared to be from a wide range of industries, so we thought about the _Ne
 
 This is what we're seeing:
 
-![Customer problems they have in common](../images/blog/CEO-diary-1/customer-dna.jpg)
+![Customer problems they have in common](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/CEO-diary-1/customer-dna.jpg)
 
 ## What's next
 

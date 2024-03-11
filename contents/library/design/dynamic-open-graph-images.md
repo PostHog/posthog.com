@@ -1,5 +1,5 @@
 ---
-date: 2022-03-03
+date: 2022-03-03T00:00:00.000Z
 title: Using Gatsby and Puppeteer to create dynamic Open Graph images
 rootPage: /blog
 sidebar: Blog
@@ -29,14 +29,14 @@ But most sites (including ours, up until recently) just opt to display a logo an
 
 This is what ours used to look like. There’s a lot of untapped potential here.
 
-![Our previous site-wide Open Graph image](../images/blog/open-graph-images/og-0.png)
+![Our previous site-wide Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-0.png)
 <figcaption class="text-center text-primary text-opacity-70 font-semibold !text-sm -mt-4 mb-4 hover:text-primary dark:text-white dark:hover:text-white">Our previous site-wide Open Graph image</figcaption>
 
 ### After
 
 We decided to make better use of the space that Open Graph provides by creating custom layouts and images for most individual pages of our website. Some dynamically generated every time we update [posthog.com](http://posthog.com) (like [this Docs article](/docs)).
 
-![Dynamically-generated Open Graph image with live data from our website](../images/blog/open-graph-images/og-12.png)
+![Dynamically-generated Open Graph image with live data from our website](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-12.png)
 <figcaption class="text-center text-primary text-opacity-70 font-semibold !text-sm -mt-4 mb-4 hover:text-primary dark:text-white dark:hover:text-white">Dynamically-generated Open Graph image with live data from our website</figcaption>
 
 This project is now generating hundreds of Open Graph image previews daily and appearing in Twitter and LinkedIn timelines, and in Slack channels everywhere.
@@ -55,29 +55,29 @@ It’s a great way for websites to make links more visually enticing and website
 
 **Stripe** uses a gradient background that is synonymous with anyone who’s ever seen Stripe’s website (it’s on brand).
 
-![Stripe's Open Graph image](../images/blog/open-graph-images/og-2.png)
+![Stripe's Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-2.png)
 
 **Squarespace** uses the space to feature some lifestyle imagery, and an example of the product they offer.
 
-![Squarespace's Open Graph image](../images/blog/open-graph-images/og-3.png)
+![Squarespace's Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-3.png)
 
 **Webflow** displays some cool interface elements and product examples within their image.
 
-![Webflow's Open Graph image](../images/blog/open-graph-images/og-4.png)
+![Webflow's Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-4.png)
 
 There are also a lot of major brands who have seemingly put zero effort into link previews.
 
 **Apple**
 
-![Apple's Open Graph image](../images/blog/open-graph-images/og-5.png)
+![Apple's Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-5.png)
 
 **Shopify**
 
-![Shopify's Open Graph Image](../images/blog/open-graph-images/og-6.png)
+![Shopify's Open Graph Image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-6.png)
 
 **Microsoft**
 
-![Microsoft's Open Graph Image](../images/blog/open-graph-images/og-7.png)
+![Microsoft's Open Graph Image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-7.png)
 
 There’s a lot of missed opportunity - our customers are essentially giving us free ad space in front of their friends, followers, and colleagues. Whatever their connections see here needs to encourage them to want to see more.
 
@@ -88,7 +88,7 @@ We frequently post content [on our blog](/blog), and we frequently create custom
 
 Last year [for a product update](/blog/the-posthog-array-1-26-0), we used artwork manually created in Figma that contained a summary of what was in the update. This was our first step in starting to think of better ways to use this space.
 
-![The first unique Open Graph image we used for a product update](../images/blog/open-graph-images/array-custom-art.png)
+![The first unique Open Graph image we used for a product update](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/array-custom-art.png)
 <figcaption class="text-center text-primary text-opacity-70 font-semibold !text-sm -mt-4 mb-4 hover:text-primary dark:text-white dark:hover:text-white">The first unique Open Graph image we used for a product update</figcaption>
 
 ### Just days before, GitHub made Open Graph images 10x better!
@@ -99,7 +99,7 @@ Now when sharing links to repositories or pull requests, you can see more contex
 
 **For example, here’s what sharing a link to [a pull request](https://github.com/PostHog/posthog/pull/8142) looks like.**
 
-![GitHub's new Open Graph image example](../images/blog/open-graph-images/og-8.png)
+![GitHub's new Open Graph image example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-8.png)
 
 Aside from being more visually interesting than a static image, it also serves to prepare the reader on what they’re about to click. Even this brief context is valuable - and definitely more valuable than a single static site-wide image.
 
@@ -107,7 +107,7 @@ I should point out that GitHub also allows repos to upload a custom Open Graph i
 
 This served as inspiration for PostHog: *How could we take this concept but 10x what GitHub did?*
 
-![Our GitHub repo's Open Graph image](../images/blog/open-graph-images/og-9.png)
+![Our GitHub repo's Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-9.png)
 <figcaption class="text-center text-primary text-opacity-70 font-semibold !text-sm -mt-4 mb-4 hover:text-primary dark:text-white dark:hover:text-white">Finally, an Open Graph image (for our GitHub repo) that was really designed to be looked at.</figcaption>
 
 ## Making Open Graph images 100x better
@@ -152,11 +152,11 @@ We posed some questions about what would make these Open Graph images useful:
 
 Here’s what you’ll see when sharing [posthog.com/product/session-recording](/product/session-recording):
 
-![PostHog's Session Recording Open Graph image](../images/blog/open-graph-images/og-10.png)
+![PostHog's Session Recording Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-10.png)
 
 We also build custom artwork for pages we know are likely to be shared, like for an event we’ll be hosting soon.
 
-![Personalized Open Graph image for an event](../images/blog/open-graph-images/og-11.png)
+![Personalized Open Graph image for an event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-11.png)
 
 ## **Dynamic Open Graph images**
 
@@ -170,13 +170,13 @@ Similar to GitHub’s approach, we automatically generate some Open Graph images
 
 We shared a single static image across all Docs articles
 
-![Open Graph image](../images/blog/open-graph-images/og-0.png)
+![Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-0.png)
 
 **After**
 
 Now we show a preview from the article, along with some relevant information about it that you might like to know.
 
-![Open Graph image](../images/blog/open-graph-images/og-12.png)
+![Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-12.png)
 
 This gives us the chance to draw a user into the content on the page before they decide to click. Our bet was this could increase clickthroughs by reducing the uncertainty about what was on the other side of the link.
 
@@ -200,19 +200,19 @@ There are a considerations for our blog posts:
 - Some posts have multiple authors, so that needs to be factored in.
 - In some cases, post images have text [inside the image](https://posthog.com/blog/yc-top-companies) that would be obscured with auto-generated Open Graph images. We have a parameter in our blog post’s front matter to skip this image generation.
 
-![Blog Open Graph image](../images/blog/open-graph-images/og-13.png)
+![Blog Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-13.png)
 
 **Customer stories**
 
 Since each customer story involves two logos, we placed them at the top along with a heart in between.
 
-![Example of Open Graph image in a customer story](../images/blog/open-graph-images/og-14.png)
+![Example of Open Graph image in a customer story](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-14.png)
 
 **Careers**
 
 Especially useful for the PostHog team when posting roles on LinkedIn, this image is always up to date with the latest roles we’re hiring.
 
-![Careers Open Graph image](../images/blog/open-graph-images/og-1.png)
+![Careers Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-1.png)
 
 ## How it works
 
@@ -286,11 +286,11 @@ We still consider this a v1 approach, as there are plenty of edge cases to work 
 
 In a future update, we plan to [make our Tutorials Open Graph images transparent](https://github.com/PostHog/posthog.com/issues/2720) so they naturally work in both light and dark modes.
 
-![Opaque tutorial Open Graph images](../images/blog/open-graph-images/opaque-tutorials.png)
+![Opaque tutorial Open Graph images](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/opaque-tutorials.png)
 
 We've also designed (and plan to implement) dynamic images for personalized landing pages (to be shared with prospective customers) so PostHog feels a little more personalized when our link is shared around a company’s Slack.
 
-![Next Steps Open Graph image](../images/blog/open-graph-images/og-15.png)
+![Next Steps Open Graph image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/images/blog/open-graph-images/og-15.png)
 
 But this first step is light years more interesting to look at than a simple PostHog logo on a white background. (If you see opportunity for improvement, we invite you to submit a pull request [on our website’s repo](http://github.com/posthog/posthog.com)!)
 

@@ -1,5 +1,5 @@
 ---
-date: 2020-07-29
+date: 2020-07-29T00:00:00.000Z
 title: Array 1.12.0
 rootPage: /blog
 sidebar: Blog
@@ -24,7 +24,7 @@ Please also update your `posthog-js` version to at least `1.3.5` if you have it 
 
 ### Shared Dashboards
 
-![](../images/shared-dashboard.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/shared-dashboard.png)
 
 Dashboard on a TV in your office? Want to have a public stats page? Share a dashboard with someone who doesn't have a PostHog account? You can now publicly share a dashboard. Just click "Share Dashboard" and enable sharing. You'll get a link that's publicly accessible.
 
@@ -32,13 +32,13 @@ Changed your mind? You can always disable sharing.
 
 ### Aggregate Functions
 
-![](../images/aggregate.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/aggregate.png)
 
 Want to know the average revenue per user? Want to know the lowest browser version anyone is using? You can now do Sum, Max, Min and Avg calculations on any event property and graph them in trends!
 
 ### Global Annotations
 
-![](../images/annotations.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/annotations.png)
 
 Digging through git commits to find out what changed to make the graphs go hay-wire? No more! You can now annotate when something happened (a big release, a bugfix or a launch) and make it super easy for your team-mates to figure out what's going on. Now global.
 
@@ -46,13 +46,13 @@ As part of this, you can now also manage, add and delete annotations from a cent
 
 ### Funnel Step Time 
 
-![](../images/funnel-step-time.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/funnel-step-time.png)
 
 You can now see how long it takes users on average to get through steps in a funnel.
 
 ### Regex Filtering
 
-![](../images/regex.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/regex.png)
 
 Regex master? Put those skills to use on any property with regex filtering
 

@@ -1,5 +1,5 @@
 ---
-date: 2020-04-08
+date: 2020-04-08T00:00:00.000Z
 title: Array 1.0.11
 rootPage: /blog
 sidebar: Blog
@@ -26,7 +26,7 @@ Updates and performance improvements this week have focused on making PostHog ea
 
 ### [Filter by events](https://github.com/PostHog/posthog/pull/442)
 
-![filter by events](../images/04/events-in-trends.gif)
+![filter by events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/events-in-trends.gif)
 
 This is perhaps the most exciting change to PostHog in this release, we have explained the important reason for creating a distinction between [Actions and Events](/blog/the-posthog-array-1-0-8).
 
@@ -36,8 +36,8 @@ Within Trends users can now filter by events and/or actions, multiplying the dat
 
 ### [Password Changes](https://github.com/PostHog/posthog/pull/468)
 
-![password change start](../images/04/Posthog-3.png)
-![password change end](../images/04/Posthog-2.png)
+![password change start](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/Posthog-3.png)
+![password change end](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/Posthog-2.png)
 
 Since we launched this has been one of our longstanding issues ([22 February](https://github.com/PostHog/posthog/issues/167) to be exact) – we had neither the capability to change an existing password or reset if we had forgotten.
 
@@ -45,13 +45,13 @@ These small changes make this possible and should stop people getting stuck for 
 
 ### [GitHub / GitLab Social Authorization](https://github.com/PostHog/posthog/pull/416)
 
-![GitHub or GitLab social authorization](../images/04/Posthog-1.png)
+![GitHub or GitLab social authorization](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/Posthog-1.png)
 
 Coupled with the above you can now authenticate your login through GitHub or GitLab making it even easier to login.
 
 ### [Logout Button](https://github.com/PostHog/posthog/pull/469)
 
-![GitHub or GitLab social authorization](../images/04/logoutbuton.gif)
+![GitHub or GitLab social authorization](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/logoutbuton.gif)
 
 Aaron was so used to typing /logout he did not realize how frustrating not having a logout button can be.
 
@@ -59,7 +59,7 @@ It had been pointed out several times that having a username in the top right co
 
 ### [Explaining Stickiness](https://github.com/PostHog/posthog/pull/438)
 
-![stickiness explanation](../images/04/Posthog-4.png)
+![stickiness explanation](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/Posthog-4.png)
 
 We released Stickiness with [#1.0.9](/blog/the-posthog-array-1-0-9), whilst it is explained in our docs and youtube channel it is important to make sure people can understand the Trend Graphs whilst they are in front of them.
 
@@ -77,7 +77,7 @@ So there will be a couple of things to watch out for this week as a result of th
 
 You will also see the below message – as with next week’s release you will need a background worker to get PostHog working properly.
 
-![workers added to PostHog message](../images/04/Posthog-5.png)
+![workers added to PostHog message](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/04/Posthog-5.png)
 
 ###[ Precalculate Events that match Actions](https://github.com/PostHog/posthog/pull/420)
 

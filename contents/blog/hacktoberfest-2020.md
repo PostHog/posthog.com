@@ -1,5 +1,5 @@
 ---
-date: 2020-10-01
+date: 2020-10-01T00:00:00.000Z
 title: PostHog Joins Hacktoberfest 2020
 rootPage: /blog
 sidebar: Blog
@@ -23,7 +23,7 @@ As a company that's extensively dedicated to the open source ecosystem as a whol
 
 As a result, we have now [tagged some good first issues](https://github.com/PostHog/posthog/labels/Hacktoberfest) on our [main repo](https://github.com/PostHog/posthog/) with the <code class="hacktoberfest">Hacktoberfest</code> tag, as these should be suitable issues for first-time contributors. We have also made an effort to document those issues better, so that their scope is clearly defined. 
 
-![Hacktoberfest Banner](../images/blog/hacktoberfest/tagged-issues.png)
+![Hacktoberfest Banner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hacktoberfest/tagged-issues.png)
 
 From the perspective of the Hacktoberfest rules, you are able to contribute to any issue, be it tagged or not. We welcome all contributions and would be happy to help you with your pull request. We nevertheless recommend you try to find an issue tagged with <code class="hacktoberfest">Hacktoberfest</code> or <code class="good-first-issue">good first issue</code> if this is your first time contributing to PostHog. 
 

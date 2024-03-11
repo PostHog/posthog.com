@@ -1,6 +1,6 @@
 ---
 title: 'The most popular PostHog alternatives, compared'
-date: 2023-06-23
+date: 2023-06-23T00:00:00.000Z
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -27,7 +27,7 @@ This guide is an overview of some popular alternatives to PostHog, how they comp
 
 ## Amplitude
 
-![amplitude vs posthog](../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg)
+![amplitude vs posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg)
 
 - **Founded:** 2012
 - **Similar to:** Mixpanel, Heap
@@ -161,7 +161,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 ## Mixpanel
 
-![mixpanel posthog](../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg)
+![mixpanel posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg)
 
 - **Founded:** 2009
 - **Similar to:** Amplitude, Heap
@@ -301,7 +301,7 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 
 ## FullStory
 
-![fullstory posthog](../images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg)
+![fullstory posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg)
 
 - **Founded:** 2014
 - **Similar to:** LogRocket, Hotjar
@@ -433,7 +433,7 @@ While users like FullStory's session replay features, some find it falls short f
 
 ## Heap
 
-![heap posthog](../images/blog/posthog-vs-heap/posthog-vs-heap.jpeg)
+![heap posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-heap/posthog-vs-heap.jpeg)
 
 - **Founded:** 2013
 - **Similar to:** Mixpanel, Amplitude
@@ -567,7 +567,7 @@ Some users also complain about performance:
 
 ## LogRocket
 
-![logrocket posthog](../images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg)
+![logrocket posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg)
 
 - **Founded:** 2016
 - **Similar to:** FullStory

@@ -1,10 +1,12 @@
 ---
 title: How to set up React feature flags
-date: 2023-09-14
-author: ["ian-vanagas"]
+date: 2023-09-14T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 [Feature flags](/docs/feature-flags) help you release features and conditional show content in your React apps. This tutorial shows you how to create a basic React app, add PostHog, create a feature flag, and then implement the flag to control content in your app.
@@ -37,7 +39,7 @@ export default App;
 
 Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:3000/) to see our new homepage.
 
-![App homepage](../images/tutorials/react-feature-flags/app.png)
+![App homepage](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-feature-flags/app.png)
 
 ## Adding PostHog
 
@@ -73,13 +75,13 @@ root.render(
 
 Once done, go back to your app running locally, refresh, and you should see an event autocaptured into your PostHog instance.
 
-![Event in PostHog](../images/tutorials/react-feature-flags/event.png)
+![Event in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-feature-flags/event.png)
 
 ## Creating a feature flag
 
 With PostHog set up, your React app is ready for feature flags. To create one, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Enter a flag key (like `cool-react-homepage`), set the release condition to roll out to 100% of users, and press "Save."
 
-![Creating a flag in PostHog](../images/tutorials/react-feature-flags/flag.png)
+![Creating a flag in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-feature-flags/flag.png)
 
 You can customize your conditions with percentage and person or group properties to fit your needs.
 
@@ -112,7 +114,7 @@ export default App;
 
 With the flag enabled, our app now shows "Welcome to my cool new React app."
 
-![New app after adding the flag](../images/tutorials/react-feature-flags/new-app.png)
+![New app after adding the flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-feature-flags/new-app.png)
 
 > **Want to remove the flicker while loading?** Read our tutorial on [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react).
 

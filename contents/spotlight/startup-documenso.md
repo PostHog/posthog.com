@@ -1,6 +1,6 @@
 ---
 title: 'How Documenso got 4,000 stars and grew an active GitHub community'
-date: 2023-10-11
+date: 2023-10-11T00:00:00.000Z
 author:
   - joe-martin
 showTitle: true
@@ -21,7 +21,7 @@ Documenso, the open-source alternative to Docusign, launched in November 2022 bu
 
 Over the past year Documenso has put a lot of effort into growing its presence on GitHub, and learned several lessons about what does (and doesn’t) work...
 
-![Documenso GitHub Stars](../images/blog/documenso-stars.png)
+![Documenso GitHub Stars](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/documenso-stars.png)
 <Caption>Documenso has adopted various tactics to create a vibrant GitHub following</Caption>
 
 ### 1. Start small, stay transparent
@@ -60,7 +60,7 @@ Inspired by these surges, Documenso now announces similar milestones whenever it
 
 > **Putting it into practice:** Documenso encourages contributions with a bounty program that posts new issues into their Discord community. Swag is a powerful tool for incentivizing users too! 
 
-![Documenso store](../images/blog/documenso_store.png)
+![Documenso store](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/documenso_store.png)
 <Caption>Documenso uses merch as an incentive for encouraging contributors</Caption>
 
 ### 4. Create incentives

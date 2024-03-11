@@ -1,6 +1,6 @@
 ---
 title: 'Feature flags vs configuration: Which should you choose?'
-date: 2023-06-30
+date: 2023-06-30T00:00:00.000Z
 author:
   - ian-vanagas
 featuredImage: >-
@@ -22,7 +22,7 @@ A configuration, or config, is a key that returns a specific value when called w
 
 An example of a configuration is a secret key for an external service like Stripe or AWS set in an environment variable. It is set in a `.env` file or by using the `export` keyword in bash and accessed with a module like `dotenv` or `os`.
 
-![env file](../images/blog/feature-flags-vs-configuration/env.png)
+![env file](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/feature-flags-vs-configuration/env.png)
 
 At a technical level, configurations are often set at compile or load time and don’t change. This means the app needs to be re-complied or restarted to make a change to the configuration. Because of this, developers expect they won’t change often; for example, they aren’t used to provide multiple different values during the same session.
 
@@ -56,7 +56,7 @@ Feature flags are almost always remotely configurable, and because they use an e
 
 An example use case of a feature flag is rolling a new feature into beta. A conditional statement wraps the beta feature to check the value of the flag. The feature flag service evaluates if the user is part of the beta, and either grants or denies the user access.
 
-![Feature flag video](../images/blog/feature-flags-vs-configuration/feature-flag.mp4)
+![Feature flag video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/feature-flags-vs-configuration/feature-flag.mp4)
 
 As showcased by this use case, feature flags are often meant to be temporary. Once you test and fully release a feature, you can remove the flag from the code. The failure to remove it can create technical debt.
 

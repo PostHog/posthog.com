@@ -1,11 +1,16 @@
 ---
 title: How to analyze autocapture events with HogQL
-date: 2023-06-07
-author: ["ian-vanagas"]
+date: 2023-06-07T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['hogql', 'trends', 'product analytics']
---- 
+tags:
+  - hogql
+  - trends
+  - product analytics
+---
+ 
 
 [Autocapture](/docs/data/autocapture) is a powerful way to capture usage data without having to implement any tracking yourself. [HogQL](/docs/product-analytics/hogql) unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use HogQL to analyze autocapture events.
 
@@ -15,7 +20,7 @@ Every autocapture event contains data on the "location" of that event in your co
 
 We can access the element chain by using the autocapture series, then using `elements_chain`  in our [HogQL expression](/docs/hogql/expressions).
 
-![Element chain](../images/tutorials/hogql-autocapture/element-chain.mp4)
+![Element chain](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-autocapture/element-chain.mp4)
 
 In its default form, this data isn’t super useful. When we begin to use HogQL’s functions, it becomes incredibly powerful.
 
@@ -23,7 +28,7 @@ In its default form, this data isn’t super useful. When we begin to use HogQL�
 
 We can use HogQL to turn the element chain into an array with `splitByChar()`. From this array, we can get the element at any index. To get the element at the first index, use the expression `arrayElement(splitByChar('.', elements_chain), 1)`.
 
-![Broken down elements](../images/tutorials/hogql-autocapture/elements.png)
+![Broken down elements](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-autocapture/elements.png)
 
 We can also get the full component, where getting the first or last index might be helpful:
 
@@ -71,7 +76,7 @@ match(
 
 We can then compare these two in our visualization.
 
-![Compare](../images/tutorials/hogql-autocapture/compare.png)
+![Compare](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-autocapture/compare.png)
 
 ## Filter for specific attributes
 

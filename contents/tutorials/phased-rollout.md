@@ -1,6 +1,6 @@
 ---
 title: How to do a phased rollout
-date: 2023-10-06
+date: 2023-10-06T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -33,7 +33,7 @@ In PostHog, go to the [feature flag tab](https://app.posthog.com/feature_flags) 
 - Set the release condition to the first phase of the rollout. This could be a percentage, group, or property.
 - Once done, click "Save."
 
-![Phased rollout flag](../images/tutorials/phased-rollout/flag.png)
+![Phased rollout flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/phased-rollout/flag.png)
 
 > **Using experiments:** If you want to track the impact your rollout has on key metrics, you can create an experiment for it. After doing this, you can edit the underlying feature flag to match your first phase like you do in a [holdout test](/tutorials/holdout-testing).
 
@@ -75,7 +75,7 @@ A good way to organize rollout phases when using feature flags is cohorts. These
 
 To create a cohort, go to the [cohorts tab](https://app.posthog.com/cohorts) and click "New Cohort." Set up the properties you want the cohorts to have as well as the details on the cohort. Again, it is useful to add details on the group and dates.
 
-![Phased rollout cohort](../images/tutorials/phased-rollout/cohort.png)
+![Phased rollout cohort](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/phased-rollout/cohort.png)
 
 Once created, repeat for the rest of your phases. You can then use the cohorts as the release conditions in feature flags and swap them out as the phased rollout progresses.
 

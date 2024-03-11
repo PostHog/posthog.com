@@ -1,11 +1,14 @@
 ---
 title: Building a Vue cookie consent banner
-date: 2023-01-20
-author: ["ian-vanagas"]
+date: 2023-01-20T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: https://www.youtube-nocookie.com/embed/uxkaYnX78_o
-tags: ['configuration', 'product os']
+featuredVideo: 'https://www.youtube-nocookie.com/embed/uxkaYnX78_o'
+tags:
+  - configuration
+  - product os
 ---
 
 With internet privacy regulations, like GDPR, coming into effect, managing cookies is becoming increasingly important. Cookies are pieces of information apps set in users’ browsers to help them store information and identity. It’s possible to use [PostHog without cookies](/tutorials/cookieless-tracking), but it’s simpler to use them.
@@ -80,7 +83,7 @@ app.mount('#app')
 
 Once you run `npm run serve` again and head into the cookies for your site, you should see a PostHog cookie added.
 
-![Cookie](../images/tutorials/vue-cookie-banner/cookie.png)
+![Cookie](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-cookie-banner/cookie.png)
 
 Our app did this without the consent of the user, and now, it’s time to build the cookie consent banner to fix this.
 
@@ -130,7 +133,7 @@ Back in `App.vue`, import the `CookieBanner` component and add below the default
 // App.vue
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/tutorials/assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <CookieBanner />
   </div>
@@ -154,7 +157,7 @@ export default {
 
 That gives us a basic cookie consent banner in our Vue app. It’s not the prettiest, but you can modify it to fit your site.
 
-![Banner](../images/tutorials/vue-cookie-banner/cookie-banner.png)
+![Banner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-cookie-banner/cookie-banner.png)
 
 The problem is that it doesn’t function at the moment. We must add the logic to opt users in or out of cookies. Luckily, PostHog makes this easy.
 
@@ -196,7 +199,7 @@ export default {
 
 When you reload your page and click decline, your PostHog cookie disappears and an `opt_in_out` key is added to local storage. If you click accept, the value in local storage is `1`, and the cookie stays.
 
-![Local storage](../images/tutorials/vue-cookie-banner/local.png)
+![Local storage](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-cookie-banner/local.png)
 
 This is the functionality we want, but the banner stays no matter if the user clicked an option (and that’s annoying). We can add some more logic, again using PostHog, to hide the banner if the user choose an option.
 
@@ -208,7 +211,7 @@ First, we want to hide the banner on page load if the user opted in or out. To d
 // App.vue
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/tutorials/assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <CookieBanner v-if="showBanner"/>
   </div>
@@ -277,7 +280,7 @@ In App.vue, we can handle the `hideBanner` message and set `showBanner` to `fals
 // App.vue
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/tutorials/assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <CookieBanner 
       v-if="showBanner"

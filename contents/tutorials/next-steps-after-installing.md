@@ -2,9 +2,13 @@
 title: What to do after installing PostHog in 5 steps
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2022-11-15
-tags: ["configuration", "experimentation", 'product os']
+author:
+  - ian-vanagas
+date: 2022-11-15T00:00:00.000Z
+tags:
+  - configuration
+  - experimentation
+  - product os
 ---
 
 You created a PostHog account and installed it on your site, but what’s next? This tutorial goes over what to do after signing up and installing PostHog (we are assuming you’ve done both).
@@ -97,7 +101,7 @@ To figure out which events you should capture, think about which areas have the 
 
 Once you've started capturing events, you can create actions (a combination of one or more events) to better represent user behavior. Actions are created in the “Data Management” section of the sidebar or interactively using the toolbar (click “Launch Toolbar” on the sidebar).
 
-![Action](../images/tutorials/next-steps-after-installing/action.png)
+![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/action.png)
 
 Be sure to add properties to your events to better capture variables such as the value, type, or version. For example, you might want to know which version of the product someone is using or if they are a customer or not. Properties can help you here, and you can set them for users as well. 
 
@@ -120,7 +124,7 @@ Some recommendations include:
 
 > Want to create dashboards quickly? PostHog offers several templates to cover common areas of interest, such as website traffic. To use a template, select an option from the "Template" dropdown when creating a new dashboard.
 
-![Dashboard](../images/tutorials/next-steps-after-installing/dashboard.png)
+![Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/dashboard.png)
 
 Creating a dashboard will give you an understanding of the different types of insights you can create, from trends to retention. It will also help you refine the events you capture to better match what you want in your dashboard.
 
@@ -130,13 +134,13 @@ Now that you’ve set up PostHog with data and dashboards, your teammates can be
 
 To invite your teammates, go to your instance homepage, click the "Invite" button, and add their email. This will add them to your organization with access to all your projects.
 
-![Invite](../images/tutorials/next-steps-after-installing/invite.png)
+![Invite](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/invite.png)
 
 To make sure they don’t mess up all your hard work, you can change their access levels in your organization settings. Setting them to “Member” will prevent them from deleting or changing the settings in your project or instances. You can also set up projects you don’t want others to access as private in the project settings. 
 
 When working with others, you likely will want to [filter out](/tutorials/filter-internal-users) events they trigger when doing analysis. To set this up, go to ”Project Settings”, scroll down to “filter out internal and test users”  and add filters such as host does not include local development addresses and email does not include your company’s domain.
 
-![Filter](../images/tutorials/next-steps-after-installing/filter.png)
+![Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/filter.png)
 
 ## 4. Create subscriptions to important events, actions, and dashboards
 
@@ -144,13 +148,13 @@ Once everyone’s onboard with PostHog, you'll want to keep data and insights to
 
 If there are key events or actions you want to track, such as a potential customer visiting your pricing page, you can have it trigger a webhook. This requires setting up the webhook in the service of your choice (like [Slack](/docs/integrate/webhooks/slack), [Teams](/docs/integrate/webhooks/microsoft-teams), [Zapier](/tutorials/how-to-connect-posthog-and-notion-with-zapier), or [Discord](/docs/integrate/webhooks/discord)). You can then add the webhook to your PostHog instance in “Project Settings” under “webhook integration.” Finally, go to data management, create or select an action, then enable “post to webhook when this action is triggered.”
 
-![Webhook](../images/tutorials/next-steps-after-installing/hook.png)
+![Webhook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/hook.png)
 
 You can also subscribe to dashboards in Slack or via email. Just go to your dashboard, click the three dots to the left of share, click “subscribe,” and “new subscription.” If you want to send dashboards to Slack, you’ll need to configure our [Slack integration](/docs/libraries/slack). If you want dashboards by email, just fill in the details like the name, email, and recurrence, then click “create subscription.” 
 
 Finally, if you want your data backed up or sent to an external service such as [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), or [Snowflake](/apps/snowflake-export), you can use one of our many [“data-out” apps](/apps). Just go to “browse apps,” search for the one you want, configure it, and start sending the data to the other places you want it.
 
-![Data-out apps](../images/tutorials/next-steps-after-installing/apps.png)
+![Data-out apps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/apps.png)
 
 ## 5. Experiment to improve your product
 
@@ -158,7 +162,7 @@ Once you have some data, and you’ve had a chance to gain some insights from it
 
 Experiments in PostHog help you test if changes improve your product in the ways you care about. They provide structure for your tests by requiring variants, participants (like [new users](/tutorials/new-user-experiments)), and goals.
 
-![Experiments](../images/tutorials/next-steps-after-installing/experiment.png)
+![Experiments](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/experiment.png)
 
 Once created, PostHog creates feature flags for each variant (or you can run [experiments without them](/docs/experiments/running-experiments-without-feature-flags)). Once implemented and launched, PostHog will continuously analyze related event data to tell you if the changes are making a difference. At the end of the test, PostHog helps you decide if the experiment was successful and you can use feature flags to it roll out.
 

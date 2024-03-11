@@ -1,5 +1,5 @@
 ---
-date: 2022-02-18
+date: 2022-02-18T00:00:00.000Z
 title: I used to think you don't need product people. I was wrong.
 author:
   - james-hawkins
@@ -37,7 +37,7 @@ These were all traps I wanted to avoid for PostHog and lead me to favor hiring m
 
 ## It starts with expectation setting
 
-![product management meme](../images/blog/product-people-blog/product-management-meme.png)
+![product management meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-people-blog/product-management-meme.png)
 
 Alas.
 

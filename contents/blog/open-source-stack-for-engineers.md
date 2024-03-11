@@ -1,5 +1,5 @@
 ---
-date: 2022-10-19
+date: 2022-10-19T00:00:00.000Z
 title: Building an open source data stack
 rootPage: /blog
 sidebar: Blog
@@ -26,7 +26,7 @@ Of course, PostHog isn’t the only [open-source analytics platform](/blog/best-
 
 ## PostHog
 
-![PostHog - best open source analytics for engineers](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+![PostHog - best open source analytics for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 - **Useful for:** Product analytics, session recording, feature flags<br/>
 - **Alternative to:** [Amplitude](/blog/best-amplitude-alternatives), [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), [Matomo](/blog/posthog-vs-matomo)<br/>
@@ -49,7 +49,7 @@ Unlike proprietary platforms such as Amplitude however, PostHog offers far more 
 
 ## Metabase
 
-![Metabase - open source data visualization for engineers](../images/blog/open-source-engineers/metabase-open-source.png)
+![Metabase - open source data visualization for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-engineers/metabase-open-source.png)
 
 - **Useful for:** Data visualization, business intelligence<br/>
 - **Alternative to:** Looker, Tableau, PowerBI<br/>
@@ -67,7 +67,7 @@ What makes Metabase so essential is that, like PostHog, you can accomplish a hug
 
 ## RudderStack
 
-![Rudderstack - open source data pipeline for engineers](../images/blog/open-source-engineers/rudderstack-open-source.png)
+![Rudderstack - open source data pipeline for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-engineers/rudderstack-open-source.png)
 
 - **Useful for:** CDP, Data pipeline<br/>
 - **Alternative to:** Segment, Tealium <br/>
@@ -87,7 +87,7 @@ RudderStack is perfect for teams which are concerned with regulatory compliance,
 
 ## NocoDB
 
-![NocoDB - open source database collaboration for engineers](../images/blog/open-source-engineers/nocodb-open-source.png)
+![NocoDB - open source database collaboration for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-engineers/nocodb-open-source.png)
 
 - **Useful for:** Database collaboration<br/>
 - **Alternative to:** Airtable, Postgres <br/>
@@ -106,7 +106,7 @@ If you are comfortable with code however, NocoDB has a few advanced features up 
 
 ## n8n
 
-![n8n - open source automation for engineers](../images/blog/open-source-engineers/n8n-open-source.png)
+![n8n - open source automation for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-engineers/n8n-open-source.png)
 
 - **Useful for:** Workflow automation, connecting services<br/>
 - **Alternative to:** Zapier, node-red <br/>
@@ -127,7 +127,7 @@ As with most open-source solutions, n8n can be self-hosted if you need to keep s
 
 ## Netdata
 
-![Netdata - open source monitoring service for engineers](../images/blog/open-source-engineers/netdata-open-source.png)
+![Netdata - open source monitoring service for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-engineers/netdata-open-source.png)
 
 - **Useful for:** System monitoring <br/>
 - **Alternative to:** Datadog, Newrelic <br/>
@@ -145,7 +145,7 @@ Going beyond this, Netdata also offers more advanced anomaly detection issues fo
 
 ## ClickHouse
 
-![ClickHouse - open source database for engineers](../images/blog/open-source-engineers/clickhouse-open-source.png)
+![ClickHouse - open source database for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-engineers/clickhouse-open-source.png)
 
 - **Useful for:** Database management, powering PostHog<br/>
 - **Alternative to:** Redshift, Bigquery, Snowflake<br/>

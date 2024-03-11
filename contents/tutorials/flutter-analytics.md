@@ -215,7 +215,7 @@ dependencies:
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the flutter app](../images/tutorials/flutter-analytics/basic-app.png)
+![Basic setup of the flutter app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/basic-app.png)
 
 ## 2. Add PostHog to your app
 

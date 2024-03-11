@@ -52,7 +52,7 @@ Adding session replay increased the scope, but just three days later Mintlify ha
 
 “We were able to ship this so fast because we had some secret weapons up our sleeve,” says Han. “First was PostHog, which could handle all the data for us and meant there was nothing further to build or configure. Second, was a tool called [Tremor](https://www.tremor.so/), which let us just pipe data in and generate some visuals.”
 
-![Mintlify Analytics Powered By PostHog](../images/customers/mintlify/mintlify-analytics.png)
+![Mintlify Analytics Powered By PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/mintlify/mintlify-analytics.png)
 <Caption>Mintlify's team built user-facing analytics in just three days, using PostHog and Tremor</Caption>
 
 Best of all, because all data is already tracked in Mintlify’s own PostHog instance, there’s no need for setting up additional projects or reports — all user-facing data is simply segmented and pulled out of Mintlify’s existing instance. 

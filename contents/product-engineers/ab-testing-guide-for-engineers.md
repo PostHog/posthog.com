@@ -1,5 +1,5 @@
 ---
-date: 2023-07-13
+date: 2023-07-13T00:00:00.000Z
 title: A software engineer's guide to A/B testing
 author:
   - lior-neu-ner
@@ -40,7 +40,7 @@ With your goal in mind and your code changes ready, you **randomly** split your 
 
 You then run your A/B test to gather data (usually over a few days or weeks) and compare the differences in the goal metric between the different groups.
 
-![How A/B testing works](../images/blog/ab-testing-guide-for-engineers/ab-test-illustration.jpg)
+![How A/B testing works](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-guide-for-engineers/ab-test-illustration.jpg)
 
 There are a few different types of A/B test, such as [multivariate](/product-engineers/what-is-multivariate-testing-examples) (where you're testing more than one variation) and multi-page "funnel" tests (where you're testing different user paths), but this guide is focused traditional A/B tests. 
 

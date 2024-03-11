@@ -1,6 +1,6 @@
 ---
 title: How to do redirect testing
-date: 2023-11-01
+date: 2023-11-01T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -122,13 +122,13 @@ Now run `npm run dev`. Go to each of our pages to see that they work: `http://lo
 
 Click the button on each page to capture a custom event in PostHog.
 
-![Events](../images/tutorials/redirect-testing/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/redirect-testing/events.png)
 
 ## Creating our A/B test
 
 Our A/B test will compare these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (what we call A/B tests in PostHog) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
 
-![A/B test set up](../images/tutorials/redirect-testing/test.png)
+![A/B test set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/redirect-testing/test.png)
 
 Because we are working locally, you can launch the experiment immediately.
 

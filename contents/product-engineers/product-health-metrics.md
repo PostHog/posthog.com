@@ -1,6 +1,6 @@
 ---
 title: The most useful product health metrics
-date: 2023-12-06
+date: 2023-12-06T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -42,7 +42,7 @@ Product health metrics largely fit into three categories:
 
 A healthy product grows consistently. What "consistent" means depends on the industry. For example, a consumer app expects more users to signup than a complicated B2B SaaS platform. What’s true for both is they want the growth to continue. Like a body, if new cells stop being created, that has consequences for your health.
 
-![New user growth](../images/blog/product-health-metrics/growth.png)
+![New user growth](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-health-metrics/growth.png)
 
 If growth is slowing, your product, positioning, or strategy might need to change. It is a sign:
 
@@ -56,7 +56,7 @@ If growth is slowing, your product, positioning, or strategy might need to chang
 
 For products relying on recurring usage (and revenue), churn is the most important health metric. This is because it is one of the key drivers of revenue and growth (along with new user growth).
 
-![Churn rate](../images/blog/product-health-metrics/churn.png)
+![Churn rate](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-health-metrics/churn.png)
 
 Some products have a naturally high churn, so having a high churn rate isn’t always a bad sign. A dramatic increase in churn is a bad sign, though. It means something has changed significantly with your product and should be investigated.
 
@@ -64,7 +64,7 @@ Some products have a naturally high churn, so having a high churn rate isn’t a
 
 [Net promoter score](/product-engineers/nps-vs-csat-vs-ces) (NPS) is a measure of how likely users are to recommend your product to others. It is a way to discover which users are happy with your product and which are at risk of churning.
 
-![NPS survey](../images/blog/product-health-metrics/nps.png)
+![NPS survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-health-metrics/nps.png)
 
 NPS is a good health metric because it helps you understand user satisfaction over the long term. By repeatedly running an [NPS survey](/templates/nps-survey), you can see how product changes impact the user experience. Ideally, you want to improve your NPS score over time and take dramatic action if it drops.
 
@@ -80,7 +80,7 @@ Consistent growth in active users means:
 
 Doing a ratio of these values such as [DAU/MAU](/tutorials/dau-mau-ratio) can be useful. This helps you understand how frequently people are engaging with the product and the "intensity" of this usage. You can use PostHog’s formula mode to calculate this. 
 
-![DAU/MAU ratio](../images/blog/product-health-metrics/daumau.png)
+![DAU/MAU ratio](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-health-metrics/daumau.png)
 
 ### Feature usage (engagement)
 
@@ -88,7 +88,7 @@ Having users is great, but you want them to actually use your product. Measuring
 
 This tracks the usage of parts of your product, such as creating, analyzing, or sharing content. A way to do this is with the [lifecycle insight](/docs/product-analytics/lifecycle). It enables you to see new, returning, and resurrected usage of the feature as well as how many users have gone dormant.
 
-![Lifecycle](../images/blog/product-health-metrics/lifecycle.png)
+![Lifecycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-health-metrics/lifecycle.png)
 
 Feature usage helps you understand the health of individual parts of your product. Like the body, if you heal the "sick" parts, the whole is healthier. Feature usage improves prioritization by aligning development time with usage.
 
@@ -100,13 +100,13 @@ For products reliant on power users, the extremes of session duration can reveal
 
 For utilities, seeing the average session duration _go down_ can be a good sign. This is because your product is becoming more efficient at doing what users want it to do. Time is money, so saving it for users makes your product more valuable.
 
-![Session duration](../images/blog/product-health-metrics/duration.png)
+![Session duration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-health-metrics/duration.png)
 
 ### Customer satisfaction score (engagement)
 
 [Customer satisfaction score](/product-engineers/nps-vs-csat-vs-ces) (CSAT) is a measure of how satisfied users are with your product. It helps you discover how well your product is meeting user needs and expectations.
 
-![CSAT survey](../images/blog/product-health-metrics/csat.png)
+![CSAT survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-health-metrics/csat.png)
 
 CSAT is a direct and short-term health metric. It gives insight into the satisfaction of a user at a specific point in time. This means it is often used after specific interactions like onboarding, beta testing, and app updates. Running a [CSAT survey](/templates/csat-survey) repeatedly after these helps you monitor their health in a way normal usage wouldn't capture.
 

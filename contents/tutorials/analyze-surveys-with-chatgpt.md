@@ -1,6 +1,6 @@
 ---
 title: How to analyze surveys with ChatGPT
-date: 2023-11-08
+date: 2023-11-08T00:00:00.000Z
 author:
   - lior-neu-ner
 showTitle: true
@@ -46,7 +46,7 @@ We'll import sample survey answers into our script from a CSV file called `answe
 
 > 💡 **PostHog Tip:** If you're using [PostHog surveys](/surveys), you can export your answers by navigating to your survey, clicking "Export", and then "Copy CSV to clipboard".
 >
-> ![Export PostHog survey results to a CSV](../images/tutorials/analyze-surveys-with-chatgpt/export-posthog-csv.mp4)
+> ![Export PostHog survey results to a CSV](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/analyze-surveys-with-chatgpt/export-posthog-csv.mp4)
 
 Add the CSV file to your project folder. Then, install [`csv-parser`](https://github.com/mafintosh/csv-parser) – a handy library for parsing CSVs.
 
@@ -276,7 +276,7 @@ For example, you can create a [pivot table](https://support.microsoft.com/en-gb/
 
 You should now see a sorted list of the most common themes in your survey answers.
 
-![How to create a pivot table to analyze survey results](../images/tutorials/analyze-surveys-with-chatgpt/create-pivot-table.mp4)
+![How to create a pivot table to analyze survey results](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/analyze-surveys-with-chatgpt/create-pivot-table.mp4)
 
 ## Reducing duplicate themes
 

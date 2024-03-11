@@ -2,9 +2,14 @@
 title: How to identify and analyze power users
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2022-10-31
-tags: ['trends', 'cohorts', 'session replay', 'product analytics']
+author:
+  - ian-vanagas
+date: 2022-10-31T00:00:00.000Z
+tags:
+  - trends
+  - cohorts
+  - session replay
+  - product analytics
 ---
 
 Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.
@@ -46,7 +51,7 @@ Both represent power user behavior. When combined with the key events or actions
 
 In Hedgebox, our imanginary Dropbox clone, we’ll use `uploaded_file` as the power user event we care about. We can then either select “completed an event multiple times” or “completed an event regularly.” Because we care about the high volume of usage, and `uploaded_file` isn’t an advanced feature, we’ll choose “completed an event multiple times.” We’ll then set our usage amounts and regularity (which we can tweak later). Once done, it should look something like this:
 
-![Power user cohort](../images/tutorials/power-users/cohort.png)
+![Power user cohort](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/power-users/cohort.png)
 
 Make sure to add the title (that is searchable) and description, then select a type (static vs dynamic). You likely want to make this cohort dynamic to ensure it updates with users matching the criteria now. Finally, we’ll click save to use this power user cohort in analysis.
 
@@ -54,15 +59,15 @@ Make sure to add the title (that is searchable) and description, then select a t
 
 Once we’ve saved a cohort, we immediately get a list of users who fit our power user criteria. We can start by using this list to check for session replays. To do so, go to recordings, filter by persons and cohorts, then search for your power user cohort. From there you can filter further by events, date, or duration. Analyzing these recordings gives you insights into how power users use your product, and enables you to build a better one for them.
 
-![Session recordings](../images/tutorials/power-users/recordings.png)
+![Session recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/power-users/recordings.png)
 
 You can also use your cohort as a base in trends to do all sorts of analysis. In each of the visualizations (except lifecycle), we can use power users as a filter group. Once the power user filter group is set, we can analyze trends in usage, conversion funnels, retention graphs, user paths, and more.
 
-![Filter group](../images/tutorials/power-users/filter-group.png)
+![Filter group](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/power-users/filter-group.png)
 
 You can also use the power user cohort to compare them against average users. Compare the properties and activity of power users to average users to understand how they differ. For example, back in our Dropbox clone, we can compare the average file size for power users versus average users, and we might discover average users upload larger files than power users do.
 
-![Power users vs average](../images/tutorials/power-users/average-comparison.png)
+![Power users vs average](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/power-users/average-comparison.png)
 
 With all that, you’ve set up a power user cohort and begun to do analysis. From here, you can tweak the cohort to better fit your definition and tailor your analysis to your product. You can begin to ask questions about your data to help build a better product for your power users.
 

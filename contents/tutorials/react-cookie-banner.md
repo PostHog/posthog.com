@@ -2,11 +2,14 @@
 title: Building a tracking cookies consent banner in React
 sidebar: Docs
 showTitle: true
-featuredVideo: https://www.youtube-nocookie.com/embed/KRW5jxZ4H-I
+featuredVideo: 'https://www.youtube-nocookie.com/embed/KRW5jxZ4H-I'
 featuredTutorial: false
-date: 2022-10-03
-author: ['ian-vanagas']
-tags: ['configuration', 'product os']
+date: 2022-10-03T00:00:00.000Z
+author:
+  - ian-vanagas
+tags:
+  - configuration
+  - product os
 ---
 
 - **Level:** Medium 🦔🦔
@@ -34,7 +37,7 @@ npm start
 
 Running these commands gives us a working React app.
 
-![React app](../images/tutorials/react-cookie-banner/react-app.png)
+![React app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-cookie-banner/react-app.png)
 
 ## Step 2: Setting up PostHog
 
@@ -68,11 +71,11 @@ root.render(
 
 Once done, we can visit our site running locally, and we’ll start to see events in our PostHog instance. For now, the captured events are only the [autocaptured](/docs/data/autocapture) ones. You can use the `posthog-js` library to capture many more as well as more information. Check out our [event tracking guide](/tutorials/event-tracking-guide) to learn more.
 
-![Live events](../images/tutorials/react-cookie-banner/live-events.png)
+![Live events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-cookie-banner/live-events.png)
 
 When we head back to our local site, right-click, choose inspect, go to the Application tab, and check cookies, you’ll see we’ve created a tracking cookie with details about PostHog and the user. 
 
-![App cookie](../images/tutorials/react-cookie-banner/app-cookie.png)
+![App cookie](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-cookie-banner/app-cookie.png)
 
 ## Step 3: Building the banner component
 
@@ -141,7 +144,7 @@ export default App;
 
 When we head back to the local site, we’ll see our cookie banner at the bottom of the site. We’ll not be winning any design awards with this one, but it does work. 
 
-![Tutorial banner](../images/tutorials/react-cookie-banner/final-banner.png)
+![Tutorial banner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-cookie-banner/final-banner.png)
 
 > 💯: For bonus points, you can click each of the buttons and go view the associated events in your PostHog instance.
 
@@ -186,7 +189,7 @@ export default CookieBanner;
 
 Now, when we head back to our site, we can click accept or decline. By inspecting and clicking the Application tab again, we can see our decision stored in local storage. If declined, we’ll also see our tracking cookie was deleted.
 
-![App local storage](../images/tutorials/react-cookie-banner/app-local.png)
+![App local storage](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-cookie-banner/app-local.png)
 
 ## Step 5: Making the banner conditional
 

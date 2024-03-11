@@ -1,6 +1,6 @@
 ---
 title: How to safely test in production (and why you should)
-date: 2023-12-07
+date: 2023-12-07T00:00:00.000Z
 author:
   - ian-vanagas
 featuredImage: >-
@@ -27,7 +27,7 @@ Testing in production *successfully* is a multi-step process, and this post goes
 
 Testing in production checks that new code works with real infrastructure and data, rather than local machines or staging servers and synthetic data.
 
-![Testing in production meme](../images/blog/testing-in-production/meme.jpg)
+![Testing in production meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/testing-in-production/meme.jpg)
 
 Testing in production brings to light problems with code not surfaced by local testing. This enables you to discover issues and "fail small" before problems impact the user experience or become outages.
 
@@ -67,7 +67,7 @@ At PostHog, we test in production. We have three main reasons for doing this:
 
 Ultimately, we want the code we write and the features we build to work in reality. We try to make the development environment as close to production as possible, but it can never be a complete match and there is diminishing returns to trying.
 
-![Theory vs reality](../images/blog/testing-in-production/theory.png)
+![Theory vs reality](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/testing-in-production/theory.png)
 
 Some checks aren’t even possible outside of production. For example, we handle massive amounts of data and use big machines to process and query it. Replicating this locally is expensive and unsustainable.
 

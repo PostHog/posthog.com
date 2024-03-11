@@ -1,5 +1,5 @@
 ---
-date: 2022-08-05
+date: 2022-08-05T00:00:00.000Z
 title: Speeding up PostHog builds with Depot
 rootPage: /blog
 sidebar: Blog
@@ -92,11 +92,11 @@ The `depot/build-push-action` action handles exchanging the temporary token prov
 
 Before switching to Depot, builds using `docker build` took over [16 minutes to complete](https://github.com/PostHog/posthog/runs/7139660078?check_suite_focus=true):
 
-![GitHub Actions Docker Build](../images/blog/speeding-up-posthog-builds-with-depot/posthog-docker-build.png)
+![GitHub Actions Docker Build](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/speeding-up-posthog-builds-with-depot/posthog-docker-build.png)
 
 After switching to `depot build`, those same builds took only [three minutes on average](https://github.com/PostHog/posthog/runs/7545904011?check_suite_focus=true):
 
-![GitHub Actions Depot Build](../images/blog/speeding-up-posthog-builds-with-depot/posthog-depot-build.png)
+![GitHub Actions Depot Build](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/speeding-up-posthog-builds-with-depot/posthog-depot-build.png)
 
 A 5x speed up with very little change to the existing workflow, just one line if we don't include the OIDC improvement.
 

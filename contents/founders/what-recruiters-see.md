@@ -1,5 +1,5 @@
 ---
-date: 2024-01-26
+date: 2024-01-26T00:00:00.000Z
 title: What startup recruiters actually see when you apply for a job
 author:
   - charles-cook
@@ -41,7 +41,7 @@ Let’s get into it.
 
 If you're applying for a job at a startup, chances are they are using an applicant tracking system (ATS) like Ashby, Greenhouse, Lever, or Workable. We use Ashby, but the process a recruiter follows generally doesn't vary massively between these systems. This is what a typical application looks like:
 
-![Ashby screenshot](../images/ashby-screenshot.png)
+![Ashby screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/ashby-screenshot.png)
 
 You'll see that the UI is designed to maximize the speed with which a recruiter can process applications. It is not designed to make you look good. Most applicants do not think about information density, so you end up with a weird combo of really padded CVs with lots of white space, and cover letter that either a) don't exist, or b) are longer than this article.
 

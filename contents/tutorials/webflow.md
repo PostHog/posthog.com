@@ -2,10 +2,14 @@
 title: How to set up Webflow analytics and session recordings
 sidebar: Docs
 showTitle: true
-author: ["ian-vanagas"]
-date: 2023-01-12
-featuredVideo: https://www.youtube-nocookie.com/embed/2dNSr93N5Ns
-tags: ["configuration", 'product analytics', 'session replay']
+author:
+  - ian-vanagas
+date: 2023-01-12T00:00:00.000Z
+featuredVideo: 'https://www.youtube-nocookie.com/embed/2dNSr93N5Ns'
+tags:
+  - configuration
+  - product analytics
+  - session replay
 ---
 
 Webflow is one of the most popular no-code site builders. It makes building high-quality marketing sites, blogs, landing pages, and ecommerce stores a breeze. 
@@ -20,7 +24,7 @@ First, you need a Webflow site to add PostHog to. Sign up at [webflow.com](https
 
 You should get a `.webflow.io` URL we can test with. Once you published your site, go to the top right menu and open the Project Settings page.
 
-![Webflow publishing](../images/tutorials/webflow/webflow.gif)
+![Webflow publishing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow/webflow.gif)
 
 ## Adding PostHog to your Webflow site
 
@@ -35,11 +39,11 @@ In PostHog, get the JavaScript snippet from the Getting Started page or in your 
 
 Copy the snippet and go back to Webflow. In the Webflow “Project Settings” page, go to the “Custom Code” tab. If you haven’t already, add a site plan to enable custom code. Once active, just paste the PostHog snippet in and save the changes.
 
-![PostHog snippet](../images/tutorials/webflow/posthog-webflow.gif)
+![PostHog snippet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow/posthog-webflow.gif)
 
 Once you’ve done that, publish the site again, go to the published site, refresh, and click around (to capture some events). After a minute, events appear in PostHog. 
 
-![PostHog events](../images/tutorials/webflow/events.png)
+![PostHog events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow/events.png)
 
 From here, you can analyze data from your Webflow site with our suite of product analytics tools like trends, funnels, and recordings. It also enables you to combine [your website data](/blog/track-your-website-with-posthog) with your product data leading to better insights about the full journey.
 

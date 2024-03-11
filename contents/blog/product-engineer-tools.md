@@ -1,5 +1,5 @@
 ---
-date: 2022-12-23
+date: 2022-12-23T00:00:00.000Z
 title: The essential tools used by product engineers
 rootPage: /blog
 sidebar: Blog
@@ -24,7 +24,7 @@ Product engineers focus on users, which means you **must** talk to them. The too
 
 Tools like Zoom, Google Meet, and Slack (especially shared channels) are obvious starting points, but consider [Superhuman](https://superhuman.com/) for streamlining email, and tools like [Cron](https://cron.com/), Calendly, and [SavvyCal](https://savvycal.com/) for improving your calendar workflow. Automation tools like [customer.io](https://customer.io/), aha.io, [n8n.io](https://n8n.io/), and Zapier are also useful.
 
-![User interview](../images/blog/product-engineer-tools/user-interview.jpeg)
+![User interview](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/user-interview.jpeg)
 <Caption>We use a combination of Zapier, customer.io, Calendy, feature flags, and our <a href="https://github.com/PostHog/user-interview-app">interview app</a> to automate scheduling user interviews.</Caption>
 
 We recommend avoiding survey tools, though. While general user information is valuable to product and marketing teams, product engineers need direct feedback on what you are building.
@@ -37,7 +37,7 @@ For example, you set an OKR to increase feature usage by paid users. To measure 
 
 [PostHog](/product#top-features) has a suite of product analytics tools built for this. Product engineers (like [Y Combinator’s](/customers/ycombinator)) use PostHog to capture, organize, analyze, and visualize product usage data. PostHog also has session recordings for going into the details of an individual’s experience with the product.
 
-![Session recordings](../images/blog/product-engineer-tools/session-recordings.png)
+![Session recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/session-recordings.png)
 <Caption>PostHog's <a href="/product/session-recording">session recordings</a> visualize what users are actually doing in your product</Caption>
 
 On top of PostHog, customer data platform or ETL tools like [Segment](/docs/libraries/segment), [Hightouch](/blog/hightouch-posthog-reverse-etl-integration), [Airbyte](/docs/apps/airbyte-export), Integrate.io, and Fivetran are useful for moving and combining data between sources and storage locations. This enables you to have the data you need for analysis, where you need it.
@@ -48,7 +48,7 @@ Insights from users and data help product engineers develop high-impact ideas to
 
 An example specifically built for product engineers is [Linear](https://linear.app/). Linear is a task management app focused on helping teams build great products. It does this by having engineer-focused design and functionality, while still being a product tool. In practice, this means being keyboard first, streamlined for technical use cases, engineering-focused automations and integrations, and quick loading speeds.
 
-![Linear](../images/blog/product-engineer-tools/linear.png)
+![Linear](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/linear.png)
 <Caption>The benefits of Linear built specifically for product engineers.</Caption>
 
 Like the “talking to users” tools, many of these tools won’t shock you. Other note-taking and task management tools product engineers rely on include GitHub, Google Docs, Trello, Notion, Asana, and Coda. Use what you're comfortable with, but we recommend trying Linear if you haven't already.
@@ -61,7 +61,7 @@ Tools used for this include GitHub, GitLab, CircleCI, Jenkins, Docker, [Depot](h
 
 Because product engineers ship fast, you also must make sure you aren’t breaking things. You likely don’t have the time or resources for a dedicated QA team so you rely heavily on automated testing in its place. Implementing test frameworks like [Jest](https://jestjs.io/), [Cypress](https://www.cypress.io/), and [Playwright](https://playwright.dev/) are all critical for product engineers to continue moving fast without ruining the existing user experience.
 
-![Tests](../images/blog/product-engineer-tools/actions.png)
+![Tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/actions.png)
 <Caption>We use GitHub Actions to run our Cypress, Jest, Django, and Storybook tests to ship fast while maintaining quality.</Caption>
 
 Even with all this preventative work, breaking changes can still happen. Feature flags help prevent this. Luckily, if you’re using PostHog for analytics, you can also use it for [feature flags](/product/feature-flags) to help roll out and roll back changes quickly.
@@ -74,7 +74,7 @@ Many infrastructure-as-a-service companies exist, including the big ones like Go
 
 A trend popular among product engineers is bringing the code framework and infrastructure closer together, optimizing both for each other. The best example of this is [Vercel](https://vercel.com/), which also develops the [Next.js](https://nextjs.org/) framework popular with product engineers. Vercel helps deploy highly performant frontend code fast and is tightly integrated with Next.js to maximize benefits from the framework's design.
 
-![Vercel and Next.js](../images/blog/product-engineer-tools/vercel.png)
+![Vercel and Next.js](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/vercel.png)
 <Caption>The benefits of integrating infrastructure and code from Vercel and Next.js.</Caption>
 
 Other examples of these code and infrastructure combos include [Supabase](https://supabase.com/), [PlanetScale](https://planetscale.com/), and [Hasura](/customers/hasura). They abstract away infrastructure work while providing speed and tailored offerings. Software engineers and large teams might find their limited customization and options constraining, but product engineers love them.
@@ -88,7 +88,7 @@ Good tools for this include:
 - [Sentry](https://sentry.io/welcome/) and [LogRocket](https://logrocket.com/) to monitor errors. 
 - [Incident.io](http://Incident.io) and [PagerDuty](https://www.pagerduty.com/) to help teams respond to incidents when they happen.
 
-![Sentry](../images/blog/product-engineer-tools/sentry.png)
+![Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/sentry.png)
 <Caption>Sentry provides multiple tools (including stack traces) for monitoring errors and problems in your code.</Caption>
 
 Product engineers are reliant on these because you are responsible for the products you ship. You can't pawn maintenance off on other team members. Making sure you keep track of performance and deal with issues effectively is vital. It also ensures you remain focused on shipping high-quality code the first time.

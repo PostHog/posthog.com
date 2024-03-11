@@ -1,5 +1,5 @@
 ---
-date: 2021-12-01
+date: 2021-12-01T00:00:00.000Z
 title: Don’t bother securing your trademarks in the beginning
 author:
   - charles-cook
@@ -23,7 +23,7 @@ Those first crucial months present bigger problems to worry about - like finding
 A word mark is basically just the name of the brand (as written in a specific font, if applicable). In our case, it's the word 'PostHog.' A logo mark is typically pictorial - in our case, the hedgehog logo either alone or combined with a stylized word. The word mark is the most versatile, so that should be your first trademark priority.
 
 <div class="text-center my-8">
-<img src="/brand/posthog-logo.svg" class="w-full" />
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/founders/brand/posthog-logo.svg" class="w-full" />
 </div>
 
 When you decide to register your trademark, you don't need to spend a fortune doing it. With a tactical combination of using the right type of lawyer and doing it yourself, you should be able to get trademarks filed in the US, UK, EU and China for ~$3,000 _in total_.

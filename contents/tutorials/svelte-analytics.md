@@ -1,10 +1,15 @@
 ---
-title: How to set up Svelte analytics, feature flags, and more
-date: 2023-04-11
-author: ["ian-vanagas"]
+title: 'How to set up Svelte analytics, feature flags, and more'
+date: 2023-04-11T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["configuration", "feature flags", "persons", "events"]
+tags:
+  - configuration
+  - feature flags
+  - persons
+  - events
 ---
 
 Svelte is a popular frontend JavaScript framework, similar to [Next.js](/tutorials/nextjs-analytics) and [Vue](/tutorials/posthog-for-vuejs). Svelte shifts much of the work for processing the app from the browser, to a compile step when you build your app.
@@ -31,7 +36,7 @@ npm run dev
 
 This runs a basic Svelte app that we can start to turn into our blog. 
 
-![App](../images/tutorials/svelte-analytics/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/app.png)
 
 ## Adding the blog functionality
 
@@ -122,7 +127,7 @@ Finally, back in the `+page.svelte` in our base `routes` folder, we add a link t
 
 Our blog now has everything it needs.
 
-![Blog](../images/tutorials/svelte-analytics/app.gif)
+![Blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/app.gif)
 
 ## Setting up user authentication
 
@@ -226,7 +231,7 @@ export const load = async () => {
 
 After restarting your app and going back to your site, you should start to see events autocaptured into your PostHog instance as well as sessions recorded if you turned them on.
 
-![Autocaptured events](../images/tutorials/svelte-analytics/events.png)
+![Autocaptured events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/events.png)
 
 ## Capturing pageviews and pageleaves
 
@@ -274,7 +279,7 @@ export const load = async () => {
 
 Once you save and relaunch, you get pageviews and pageleaves for all the navigation between pages in your app.
 
-![Pageviews](../images/tutorials/svelte-analytics/pageviews.png)
+![Pageviews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/pageviews.png)
 
 ## Identifying users
 
@@ -311,7 +316,7 @@ You might notice even though you are logged in, your events are still captured f
 
 Now, when we sign in again, we are identified with the email we use with GitHub. 
 
-![Identify](../images/tutorials/svelte-analytics/identify.png)
+![Identify](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/identify.png)
 
 > **Note:** You can also call `posthog.identify()` in `+layout.svelte`, but not `+layout.js`. This is because `+layout.js` is run on the server, and `posthog.identify()` needs access to information from the client.
 
@@ -349,7 +354,7 @@ The last feature of PostHog to set up is feature flags. Feature flags enable you
 
 To set this up, create the feature flag. In PostHog, go to the feature flags tab, click "New feature flag," add a key (like `main-cta`), roll out to 100% of users, and click save. 
 
-![Feature flag](../images/tutorials/svelte-analytics/flag.png)
+![Feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/flag.png)
 
 Next, in the `src/routes/blog/[slug]` folder, go to the `+page.svelte` file. Add the `posthog.onFeatureFlags()` function to check the `main-cta` flag once they load. The `posthog.isFeatureEnabled()` controls a variable to display a call-to-action link below our post.
 
@@ -374,7 +379,7 @@ Next, in the `src/routes/blog/[slug]` folder, go to the `+page.svelte` file. Add
 
 Once saved, back on your site, the CTA added to your blog post. 
 
-![Call to action](../images/tutorials/svelte-analytics/cta.png)
+![Call to action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/cta.png)
 
 You can test it works by going back to PostHog, disabling your flag, and seeing the call to action disappear.
 

@@ -2,9 +2,12 @@
 title: How to build your own app in PostHog
 sidebar: Docs
 showTitle: true
-author: ['joe-martin']
-date: 2022-10-04
-tags: ["apps", 'product os']
+author:
+  - joe-martin
+date: 2022-10-04T00:00:00.000Z
+tags:
+  - apps
+  - product os
 ---
 
 **Estimated reading time:** 10 minutes ☕☕☕
@@ -21,7 +24,7 @@ To follow along with this tutorial, you’ll need...
 - Some knowledge of Javascript or Typescript
 
 ## Introducing PostHog’s app source editor
-![Launching the source editor](../images/tutorials/source-editor/app-editor-name-it.png)
+![Launching the source editor](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/source-editor/app-editor-name-it.png)
 
 PostHog’s source editor is a built-in tool for writing your own apps directly into PostHog. Apps which you create using the source editor are not publicly available — they exist only for your instance and cannot be seen by other organizations. You can submit your apps for others to use (and we strongly encourage it!), but more on that later. 
 
@@ -29,12 +32,12 @@ To access the source editor, log in to your self-hosted PostHog instance and sel
 
 > **Note:** You'll only be able to upload and test your own apps on a self-hosted PostHog instance. If you want to build an app and have a PostHog Cloud instance, click '[_Build your own_](/docs/apps/build)' in the description on the Apps page. You can still publish and use apps with a cloud instance, but apps need to be reviewed by us first before publishing. Read more about the [review process here](/docs/apps/build/tutorial#submitting-your-app).
 
-![Launching the source editor](../images/tutorials/source-editor/app-editor-source-launch.png)
+![Launching the source editor](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/source-editor/app-editor-source-launch.png)
 
 Once you’ve named the app, it will be created in your available apps and automatically enabled — don’t worry, it can’t do anything yet. You can change that by selecting ‘_Edit source_’. 
 
 ## Using the app source editor
-![Using the source editor](../images/tutorials/source-editor/test-app-code-view.png)
+![Using the source editor](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/source-editor/test-app-code-view.png)
 
 By default, new apps contain example code to help you get started. You can overwrite this with your own code, but before you do here’s a quick introduction to [how apps work](/docs/apps/).
 
@@ -121,11 +124,11 @@ Testing your new app on your self-hosted PostHog instance is as simple as hittin
 
 To get detailed information on how your app is working, it’s useful to look at the logs in the Javascript console — you can access this for each app individually by pressing the logs button in the app UI. You can see it highlighted in the image below. 
 
-![App logs posthog](../images/tutorials/source-editor/app-logs-highlighted.png)
+![App logs posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/source-editor/app-logs-highlighted.png)
 
 If you aren’t seeing the expected result it may be because you need to edit the order in which apps are run. This is because apps on PostHog run in a specific order, with the output of one going into the next — forming [an app chain](/docs/apps/build#example-of-an-app-chain). 
 
-![Reordering app chains](../images/tutorials/source-editor/app-order.png)
+![Reordering app chains](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/source-editor/app-order.png)
 
 App chains can be used for specific purposes, such as [filtering unwanted information from an event before it is stored](/tutorials/property-filter), and by default any new apps created with the source editor are added to the _end_ of a chain. If you need to reorder your app chain to get the desired result then simply select ‘_Edit order_’ from the ‘_Installed_’ apps tab and drag enabled apps into the order you need and hit ‘_Save_’.
 

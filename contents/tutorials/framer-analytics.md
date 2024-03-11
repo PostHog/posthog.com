@@ -1,10 +1,14 @@
 ---
-title: How to set up Framer analytics, session replay, and more
-date: 2023-08-18
-author: ["ian-vanagas"]
+title: 'How to set up Framer analytics, session replay, and more'
+date: 2023-08-18T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['session replay', 'product analytics', 'feature flags']
+tags:
+  - session replay
+  - product analytics
+  - feature flags
 ---
 
 [Framer](https://www.framer.com/) is a popular no-code site builder that makes it easy to design a high-quality site. 
@@ -28,11 +32,11 @@ With the JavaScript snippet copied, go to your Framer project and click the gear
 
 Once on a paid plan, go to the "General" tab in site settings and scroll down to the "Custom Code" section. Under "End of `<head>` tag", paste your PostHog JavaScript snippet here. Make sure to press "Save" next to the "Custom Code" heading. 
 
-![Script](../images/tutorials/framer-analytics/script.mp4)
+![Script](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/framer-analytics/script.mp4)
 
 Once you publish and go to your site, PostHog begins automatically capturing events like pageviews, button clicks, and form inputs on your site.
 
-![Autocapture](../images/tutorials/framer-analytics/autocapture.png)
+![Autocapture](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-analytics/autocapture.png)
 
 ### Enabling session replays
 
@@ -60,11 +64,11 @@ export default function CaptureButton() {
 
 After pasting this in, press cmd/ctrl + S to save the component, and go back to the home page by clicking "Home" above the code. Once on the home page, drag and drop the `CaptureButton` component from the sidebar into your page and publish again to update your site with your new button.
 
-![Framer button video](../images/tutorials/framer-analytics/framer-button.mp4)
+![Framer button video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/framer-analytics/framer-button.mp4)
 
 Once updated, you can head to your site and click the button to see events captured in PostHog and person properties set on the user.
 
-![Custom event and person properties](../images/tutorials/framer-analytics/person.png)
+![Custom event and person properties](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-analytics/person.png)
 
 ## Customizing components with feature flags
 
@@ -104,7 +108,7 @@ export default function CaptureButton() {
 
 When we save this and publish the site again, the button is still there. When we go back to PostHog and disable the `framer-example` flag, the button disappears.
 
-![Feature flag video](../images/tutorials/framer-analytics/flag.mp4)
+![Feature flag video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/framer-analytics/flag.mp4)
 
 ## Further reading
 

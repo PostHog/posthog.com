@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Angular analytics, feature flags, and more'
-date: 2023-10-17
+date: 2023-10-17T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -87,7 +87,7 @@ Remove the placeholder code from `app.component.html`, leaving us with only the 
 
 Now, we can run `ng serve` in our terminal and go to [`http://localhost:4200/`](http://localhost:4200/) to see our basic app.
 
-![In-app video](../images/tutorials/angular-analytics/app.mp4)
+![In-app video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/angular-analytics/app.mp4)
 
 ## Installing PostHog
 
@@ -118,7 +118,7 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 
 Once set up, go back to your app, refresh, and PostHog begins autocapturing events. This includes button clicks, pageviews, pageleaves, and more. It also starts [recording sessions](/docs/session-replay) if you enable those in [your project settings](https://app.posthog.com/project/settings).
 
-![Events](../images/tutorials/angular-analytics/event.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-analytics/event.png)
 
 
 ## Capturing pageviews
@@ -202,7 +202,7 @@ PostHog enables you to use feature flags to control the release of features and 
 
 To start, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Name your key (like `test-flag`) and set the release conditions to 100% of users. Fill in any other details as you like, and then press "Save."
 
-![Feature flag](../images/tutorials/angular-analytics/flag.png)
+![Feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-analytics/flag.png)
 
 To implement the flag in our app, we must make the following changes the `home.component.ts` file:
 
@@ -258,7 +258,7 @@ Lastly, update `home.component.html` to use the `buttonText` state variable.
 
 Now when you go to your app, a PostHog feature flag controls the button text.
 
-![Button controlled by flag](../images/tutorials/angular-analytics/button.png)
+![Button controlled by flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-analytics/button.png)
 
 > **Note:** If you want to remove the "flickering" of the button value on the first load, you can [bootstrap the flag values](/tutorials/bootstrap-feature-flags-react).
 

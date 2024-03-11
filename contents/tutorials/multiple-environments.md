@@ -1,11 +1,16 @@
 ---
-title: How to setup PostHog for multiple environments (development, staging, production)
+title: >-
+  How to setup PostHog for multiple environments (development, staging,
+  production)
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
-date: 2023-01-13
+author:
+  - ian-vanagas
+date: 2023-01-13T00:00:00.000Z
 featuredTutorial: false
-tags: ["configuration", 'product os']
+tags:
+  - configuration
+  - product os
 ---
 
 Many software development teams use multiple environments to split up their code, such as development, staging, and production. This ensures changes in development don’t affect production, helps teams test before release, and increases the quality of code that reaches end users.
@@ -18,7 +23,7 @@ The best practice for using PostHog across multiple environments is to use multi
 
 Creating a new project in PostHog is simple. In your instance, click your project name and then the “New project” button. Be sure to name your project to make it clear it is not production, like “development” or “staging.”
 
-![Projects](../images/tutorials/multiple-environments/project.png)
+![Projects](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/multiple-environments/project.png)
 
 This takes you through the project setup flow again and gives you a new project API key. You can keep your old key for production, and add the new one in the relevant environment. You'll likely need environment variables for this (like a `.env` file) if you haven't set those up. Initializing PostHog with a different key in each environment connects them to a different project.
 
@@ -157,7 +162,7 @@ PostHog provides a toggle to filter internal users (as defined by you) from your
 
 As an example, here’s what our internal filters look like at PostHog:
 
-![Filter](../images/tutorials/multiple-environments/filter.png)
+![Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/multiple-environments/filter.png)
 
 You can automatically enable filtering in all new insights with the toggle at the bottom, or enable it manually on each insight.
 

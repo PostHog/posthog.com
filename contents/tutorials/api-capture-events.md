@@ -1,10 +1,15 @@
 ---
 title: Using the PostHog API to capture events
-date: 2023-02-09
-author: ["ian-vanagas"]
+date: 2023-02-09T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['events', 'persons', 'product analytics', 'product os']
+tags:
+  - events
+  - persons
+  - product analytics
+  - product os
 ---
 
 PostHog provides [libraries](/docs/integrate?tab=sdks) that make it easy to capture events in popular languages. These libraries are basically wrappers around the API. They handle and automate common tasks like capturing pageviews.
@@ -57,7 +62,7 @@ print(response.json())
 
 Once you’ve done that, you should see the event in your PostHog instance.
 
-![Events](../images/tutorials/api-capture-events/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-capture-events/events.png)
 
 ### Adding properties and batching
 

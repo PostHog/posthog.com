@@ -2,10 +2,15 @@
 title: Tracking pageviews in single page apps (SPA)
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas', 'yakko-majuri']
-date: 2022-10-17
-featuredVideo: https://www.youtube-nocookie.com/embed/I_WJc8T5lL8
-tags: ['configuration', 'events', 'product analytics']
+author:
+  - ian-vanagas
+  - yakko-majuri
+date: 2022-10-17T00:00:00.000Z
+featuredVideo: 'https://www.youtube-nocookie.com/embed/I_WJc8T5lL8'
+tags:
+  - configuration
+  - events
+  - product analytics
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕
@@ -138,7 +143,7 @@ root.render(
 
 Once we’ve initialized PostHog, autocaptured events should start flowing into our instance. We’ll also see that we have some `pageview` events, but clicking our nav links doesn’t trigger `pageview` events.
 
-![Missing pageviews](../images/tutorials/spa/no-tracking.png)
+![Missing pageviews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/spa/no-tracking.png)
 
 Because this is a single page app, navigation does not trigger new `pageview` events. You see we clicked the button to go to the Benefits and About pages, but didn’t get `pageview` events for either of them. We will have to set up custom events to trigger them. In the next step, we’ll go over some ways to do this. 
 
@@ -191,7 +196,7 @@ export default App;
 
 Now when we move between pages, we’ll trigger pageviews on each.
 
-![Triggering pageviews](../images/tutorials/spa/tracking.png)
+![Triggering pageviews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/spa/tracking.png)
 
 > **Note:** other frameworks or languages have ways to “listen” for the changes in the router that we use to trigger a pageview event. For example, in Vue, you can set up a `watcher` and in Svelte, you can use the `navigating` store.
 > 

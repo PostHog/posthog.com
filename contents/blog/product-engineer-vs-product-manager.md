@@ -1,6 +1,6 @@
 ---
 title: 'Product engineer vs product manager: What''s the difference?'
-date: 2023-01-24
+date: 2023-01-24T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -57,7 +57,7 @@ Both roles are responsible for their product after launch. This means listening 
 
 Searches for product engineers have grown 80% in the last 12 month, so what does this mean for product managers?
 
-![product-engineer-trends](../images/blog/product-engineer-trend.png)
+![product-engineer-trends](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-trend.png)
 
 Product engineers are taking on many of the responsibilities product managers once had, especially at early-stage companies. By making product decisions and shipping code, product engineers can better help companies find product-market fit. This often requires rapid experimentation rather than research and planning.
 

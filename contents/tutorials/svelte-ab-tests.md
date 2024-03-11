@@ -49,7 +49,7 @@ Next, replace the code in `src/routes/+page.svelte` with a simple heading and bu
 
 Run `npm run dev` and navigate to http://localhost:5173 to see your app in action.
 
-![Basic Svelte app](../images/tutorials/svelte-ab-tests/basic-app.png)
+![Basic Svelte app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 

@@ -1,5 +1,5 @@
 ---
-date: 2023-03-20
+date: 2023-03-20T00:00:00.000Z
 title: 'In-depth: ClickHouse vs Elasticsearch'
 rootPage: /blog
 sidebar: Blog
@@ -20,11 +20,11 @@ Elasticsearch and ClickHouse are both open-source frameworks with advantages ove
 
 Elasticsearch, as the name implies, was designed to power better search. It can efficiently return search results, such as grocery items on a grocer’s website, accounting for things such as spelling mistakes. It's the bedrock product for Elastic, which sells Elastic Cloud – a managed solution that bundles Elasticsearch with other data products. 
 
-![Elasticsearch Development.png](../images/blog/clickhouse-vs-elastic/elasticsearch-development.png)
+![Elasticsearch Development.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/elasticsearch-development.png)
 
 ClickHouse, meanwhile, excels at aggregating data for uses like business analytics or financial statistics. While the database, ClickHouse, remains open source, it is managed by the for-profit ClickHouse Inc. ClickHouse Inc.’s main offering is ClickHouse Cloud, a managed service similar to Elastic Cloud, just for deploying ClickHouse instead. However, ClickHouse also merges notable contributions by Altinity, a separate company that sells Altinity.Cloud, a managed service for deploying ClickHouse in Kubernetes. 
 
-![ClickHouse Development.png](../images/blog/clickhouse-vs-elastic/clickhouse-development.png)
+![ClickHouse Development.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/clickhouse-development.png)
 
 Elasticsearch and ClickHouse are interesting to compare because of their vastly different architecture, optimized for each of their respective goals. Comparing them is a good meditation on how physical and virtual layouts can improve efficiency toward a specific efficiency goal. 
 
@@ -99,14 +99,14 @@ The three major core components of Elasticsearch’s infrastructure are **indice
 
 3. A **shard**, meanwhile, is the intersection of a specific *node* and a specific **index**. A **shard** is also a single instance of Apache Lucene. It is a collection of documents, such as two hundred user profiles of a total set of forty thousand. 
 
-![Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates. ](../images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
+![Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates. ](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
 <Caption>Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates.</Caption>
 
 #### Inverted index
 
 In each shard (or Apache Lucene instance) is an inverted index. An inverted index is like a glossary – it stores a map of string components (such as words, numbers, or prefixes) for all the documents they are located in. 
 
-![Inverted indexes dramatically improve search time.](../images/blog/clickhouse-vs-elastic/inverted-index.png)
+![Inverted indexes dramatically improve search time.](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/inverted-index.png)
 <Caption>Inverted indexes dramatically improve search time.</Caption>
 
 Inverted indexes dramatically speed up most queries. If a user queries for all the `Reviews` that use the word “outstanding”, Elasticsearch can return that collection extraordinarily fast because each shard in the `Reviews` index leverages an inverted index to find relevant `Reviews`, and Elasticsearch bundles `Reviews` into a single collection for the end user. 
@@ -133,7 +133,7 @@ Elasticsearch nodes and shards aren’t just used to distribute data, but also r
 
 Elasticsearch has two types of shards – **primary shards** and **replica shards**. Replica shards are an **exact** copy of a primary shard should a primary shard become unavailable. A primary shard and a respective replica shard reference the same set of data. Therefore, they should never be located on the same node. 
 
-![Elasticsearch can replicate data at scale without having to replicate the entire database.](../images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
+![Elasticsearch can replicate data at scale without having to replicate the entire database.](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
 <Caption>Elasticsearch can replicate data at scale without having to replicate the entire database.</Caption>
 
 Replica shards help database operations in two distinct ways: 
@@ -156,7 +156,7 @@ There are three major components that enable ClickHouse to return aggregations, 
 
 ClickHouse’s columnar layout – which flips rows and columns in storage relative to a MySQL database – makes aggregations efficient. 
 
-![ClickHouse’s biggest magic trick really comes down to swapping rows and columns ](../images/blog/clickhouse-vs-elastic/row-vs-column-database.png)
+![ClickHouse’s biggest magic trick really comes down to swapping rows and columns ](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/row-vs-column-database.png)
 <Caption>ClickHouse’s biggest magic trick really comes down to swapping rows and columns</Caption> 
 
 When databases physically access data, they scan data row-by-row. By extension, if an analyst is trying to calculate the average value of bank account balances in a PostgreSQL database, they would need to access **every** bank account row. Alone, that would probably blow out memory. But in ClickHouse, the same analyst would only need to access **one** (physical) row of data – the bank balance one – and collapse it into an average. 
@@ -167,7 +167,7 @@ Again, this is a **physical** row of data. As far as ClickHouse’s interface go
 
 ClickHouse’s second superpower is **dynamic** materialized views. 
 
-![Visualizing Materialized Views.png](../images/blog/clickhouse-vs-elastic/visualizing-materialized-views.png)
+![Visualizing Materialized Views.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/visualizing-materialized-views.png)
 
 Materialized views are not a new concept – in MySQL or PostgreSQL, a materialized view is a new table that can be queried from, rendered by a SQL query accessing other tables. However, once new data is added to the core tables, that materialized view goes out-of-date. Because creating materialized views is often expensive in traditional databases given their non-columnar layout, refreshing materialized views can only happen occasionally. 
 
@@ -209,7 +209,7 @@ Elasticsearch, meanwhile, can accomplish similar performance over certain querie
 
 While both Elasticsearch and ClickHouse are fundamentally backend products, we can compare their respective GUI products – Kibana for Elasticsearch and ClickHouse Cloud for ClickHouse. ClickHouse Cloud is a *much* younger product; Kibana, conversely, has been around for nearly a decade and has an extensive UI.
 
-![Comparinson.png](../images/blog/clickhouse-vs-elastic/comparison.png)
+![Comparinson.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/comparison.png)
 
 In a nutshell, comparing the analytics efficiency of ClickHouse and Elasticsearch has the same sort-of, not-really awkwardness of other comparisons – they both excel in their respective categories using radically different methods to cater to a different type of need. However, Elastic’s Kibana product is more mature than ClickHouse Cloud’s competitive offering. 
 

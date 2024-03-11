@@ -133,7 +133,7 @@ createApp(App).use(router).mount('#app')
 
 The basic setup is now complete. Run `npm run serve` to see your app.
 
-![Basic Vue app](../images/tutorials/vue-analytics/basic-app.png)
+![Basic Vue app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-analytics/basic-app.png)
 
 ## Adding PostHog
 

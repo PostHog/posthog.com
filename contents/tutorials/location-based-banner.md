@@ -1,10 +1,12 @@
 ---
 title: How to set up a location-based site banner
-date: 2023-06-15
-author: ["ian-vanagas"]
+date: 2023-06-15T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 Many sites want to set up banners to display information for different users, such as regional announcements or country-based alerts. Doing this with [feature flags](/docs/feature-flags) is simple and this tutorial shows you how to set it up for a Next.js app (but it can be done with any framework).
@@ -66,7 +68,7 @@ export default function RootLayout({ children }) {
 
 Finally, we can run the app with `npm run dev`. When we go to the page running locally, we see events captured into our PostHog instance.
 
-![Events](../images/tutorials/location-based-banner/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/location-based-banner/events.png)
 
 ## Set up the banner feature flag
 
@@ -74,7 +76,7 @@ First, make sure that the [GeoIP app](https://app.posthog.com/project/apps?name=
 
 Once you have confirmed that, we can create our feature flag controlling the site banner. Go to [feature flags](https://app.posthog.com/feature_flags), click "Create new flag," and name the key as "site-banner." For release conditions, match users where the continent code equals NA (or whichever geography you want), roll out to 100% of users, and press save.
 
-![Creating flag video](../images/tutorials/location-based-banner/create-flag.mp4)
+![Creating flag video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/location-based-banner/create-flag.mp4)
 
 ### Adding a flag payload
 
@@ -146,7 +148,7 @@ export default function RootLayout({ children }) {
 
 When we go to our locally running site now, we should see our new banner at the top of our page.
 
-![Banner](../images/tutorials/location-based-banner/banner.png)
+![Banner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/location-based-banner/banner.png)
 
 ### Handling the flag payload
 

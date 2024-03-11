@@ -3,27 +3,26 @@ title: Single sign-on authentication
 sidebar: Docs
 showTitle: true
 availability:
-    free: partial
-    selfServe: partial
-    enterprise: full
-
-    features:
-        jitUserProvisioning: true
-        ssoEnforcement:
-            free: false
-            selfServe: false
-            enterprise: true
-        github: true
-        gitlab: true
-        google:
-            openSource: false
-            free: true
-            selfServe: true
-            enterprise: true
-        saml:
-            free: false
-            selfServe: false
-            enterprise: true
+  free: partial
+  selfServe: partial
+  enterprise: full
+  features:
+    jitUserProvisioning: true
+    ssoEnforcement:
+      free: false
+      selfServe: false
+      enterprise: true
+    github: true
+    gitlab: true
+    google:
+      openSource: false
+      free: true
+      selfServe: true
+      enterprise: true
+    saml:
+      free: false
+      selfServe: false
+      enterprise: true
 ---
 
 SSO makes logging in easier for users to log and compliance easier for administrators.
@@ -227,7 +226,7 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
     - **SAML ACS URL**: The endpoint to which the SAML requests are posted. It's usually called SAML endpoint or IdP sign-on URL.
     - **SAML X.509 certificate**: The public certificate used to validate SAML assertions from your IdP. It must be in X509 (almost all providers will provide it in this format). If your provider gives you the certificate as a file (usually `.pem`), just open it with a text editor to get the contents. When setting this certificate be sure to **keep any spaces and new lines** (don't format it). The first and last line of the certificate (e.g. `-----BEGIN CERTIFICATE-----`) are optional.
 
-    ![Screenshot: SAML configuration](../../images/features/sso/saml-configuration.png)
+    ![Screenshot: SAML configuration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/sso/saml-configuration.png)
 
 4. Once you've configured all the settings above, you can now log out and attempt logging in using SAML (you just need to enter your email address).
 

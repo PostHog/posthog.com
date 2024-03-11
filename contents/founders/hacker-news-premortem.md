@@ -1,5 +1,5 @@
 ---
-date: 2022-06-30
+date: 2022-06-30T00:00:00.000Z
 title: The magic of a Hacker News Pre-Mortem
 author:
   - james-hawkins
@@ -62,7 +62,7 @@ One of the things we've learned about working with developers is that a lot of t
 
 Make sure someone else is using your product in production before you launch it. You'll get no end of edge cases. Or even "majority cases" cases like the first ever user of PostHog:
 
-![user gets stuck because they cannot log into PostHog](../images/02/Screenshot-2020-02-25-at-21.52.15.png)
+![user gets stuck because they cannot log into PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/Screenshot-2020-02-25-at-21.52.15.png)
 
 Hey, at least they liked the website.
 

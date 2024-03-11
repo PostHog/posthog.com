@@ -1,5 +1,5 @@
 ---
-date: 2023-02-22
+date: 2023-02-22T00:00:00.000Z
 title: 'HogMail #22: Why do companies over-hire?"'
 rootPage: /blog
 sidebar: Blog
@@ -47,7 +47,7 @@ Josephine Conneely [makes a strong case](https://waysofworkingcollection.substac
 
 Here's a [great read on async working](https://async.twist.com/remote-team-culture/) by Chase Warrington, Head of Remote at chat app Twist. It can be summed up by this graphic:
 
-![async](../images/blog/hogmail/Team-culture-comparison-with-Twist-colors.png)
+![async](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail/Team-culture-comparison-with-Twist-colors.png)
 
 The post includes three useful tips for fostering the social bonds in an async team:
 

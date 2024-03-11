@@ -1,8 +1,12 @@
 ---
-title: How to set up Remix analytics, feature flags, and more
-date: 2023-11-22
-author: ["ian-vanagas"]
-tags: ["configuration", "feature flags", "events"]
+title: 'How to set up Remix analytics, feature flags, and more'
+date: 2023-11-22T00:00:00.000Z
+author:
+  - ian-vanagas
+tags:
+  - configuration
+  - feature flags
+  - events
 ---
 
 Remix is a full stack web framework built on [React](/docs/libraries/react) with a specific focus on following web standards. 
@@ -139,7 +143,7 @@ npm run dev
 
  Once done, your basic Remix blog is running locally.
 
-![App](../images/tutorials/remix-analytics/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/app.png)
 
 ## Adding PostHog on the client side
 
@@ -183,7 +187,7 @@ startTransition(() => {
 
 After relaunching your app, PostHog begins autocapturing initial pageviews, clicks, [session replays](/docs/session-replay) (if [you enable them](https://app.posthog.com/settings/project#replay)), and more.
 
-![Autocapture](../images/tutorials/remix-analytics/autocapture.png)
+![Autocapture](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/autocapture.png)
 
 ## Capturing pageviews
 
@@ -217,7 +221,7 @@ export default function App() {
 
 When you relaunch your app and navigate between pages, you now capture `$pageview` events in PostHog for each.
 
-![Pageview events](../images/tutorials/remix-analytics/pageview.png)
+![Pageview events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/pageview.png)
 
 > **Why is it double capturing the pageviews?** There are two reasons this might happen. First, you need to set the `capture_pageview` [config option](/docs/libraries/js#config) in the PostHog initialization to `false` so we don’t double capture the initial pageview. Second, in strict mode, React renders twice. This triggers two pageview events, but doesn’t happen in production mode. You can also remove the `<StrictMode>` component in `app/entry.client.tsx` to stop it in development.
 
@@ -254,7 +258,7 @@ Now, every time a user clicks this button, it captures a `liked_post` event with
 
 Next, we can add a [feature flag](/docs/feature-flags) to control a new version of the like button we want to try out. First, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Name it `new-button-text`, set the rollout to 100% of users, fill out any other details, and press save.
 
-![Flag creation video](../images/tutorials/remix-analytics/button.mp4)
+![Flag creation video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/button.mp4)
 
 In the `posts.$slug.tsx` file, set up a `useState` for the button content, and a `useEffect` for flag evaluation. We conditionally render the button text based on the flag response.
 
@@ -292,7 +296,7 @@ export default function PostSlug() {
 
 Our post page now shows the updated button, which you can toggle remotely with the flag in PostHog.
 
-![Button text controlled by flag](../images/tutorials/remix-analytics/flag.png)
+![Button text controlled by flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/flag.png)
 
 ## Adding PostHog on the server side
 
@@ -383,7 +387,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
 When you refresh the page now, you see a `server_side_event_name` event captured along with the others.
 
-![Server side event](../images/tutorials/remix-analytics/server.png)
+![Server side event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/server.png)
 
 ### Combining frontend and backend distinct IDs
 

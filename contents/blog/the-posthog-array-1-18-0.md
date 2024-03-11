@@ -1,5 +1,5 @@
 ---
-date: 2020-11-30
+date: 2020-11-30T00:00:00.000Z
 title: Array 1.18.0
 rootPage: /blog
 sidebar: Blog
@@ -26,7 +26,7 @@ Finally, thank you to everyone who helped us out with feedback and contributions
 
 ### [New Event Selection Box](https://github.com/PostHog/posthog/pull/2394)
 
-![Events Box Screenshot](../images/blog/array/events-box.png)
+![Events Box Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/events-box.png)
 
 We upgraded our event selection box to include actions and events in one, as well as provide smarter recommendations of events and actions you might want to use of based frequently used in queries by you or your team.
 

@@ -1,12 +1,15 @@
 ---
-title: Testing frontend feature flags with React, Jest, and PostHog
-date: 2023-03-16
-author: ["ian-vanagas"]
+title: 'Testing frontend feature flags with React, Jest, and PostHog'
+date: 2023-03-16T00:00:00.000Z
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: https://www.youtube-nocookie.com/embed/cKaQ2mR4sSc
-tags: ["feature flags"]
---- 
+featuredVideo: 'https://www.youtube-nocookie.com/embed/cKaQ2mR4sSc'
+tags:
+  - feature flags
+---
+ 
 
 Combining both testing and feature flags can be a bit tricky. Tests generally check only one variant of the feature flag and leave other code untested. If you want to test the code behind feature flags, you must set up your tests to do so.
 
@@ -41,7 +44,7 @@ cd flag-test
 npm test
 ```
 
-![Test](../images/tutorials/test-frontend-feature-flags/test.png)
+![Test](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/test-frontend-feature-flags/test.png)
 
 ## Adding PostHog
 
@@ -125,7 +128,7 @@ export default App;
 
 When we run the app again, the main link on the page changed to "Go to PostHog."
 
-![Go to PostHog](../images/tutorials/test-frontend-feature-flags/app.png)
+![Go to PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/test-frontend-feature-flags/app.png)
 
 ## Making our tests and feature flags work together
 

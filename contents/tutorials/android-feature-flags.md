@@ -114,7 +114,7 @@ Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the Android app](../images/tutorials/android-feature-flags/basic-app.png)
+![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
