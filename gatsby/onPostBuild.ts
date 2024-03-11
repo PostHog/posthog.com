@@ -437,7 +437,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
 
     async function createOG({ html, slug }) {
         await page.setContent(html, {
-            waitUntil: ['domcontentloaded'],
+            waitUntil: ['domcontentloaded', 'networkidle0'],
         })
 
         await page.evaluateHandle('document.fonts.ready')
