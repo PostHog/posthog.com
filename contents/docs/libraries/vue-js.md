@@ -298,8 +298,15 @@ export default {
 </template>
 ```
 
-See the [JavaScript SDK docs](/docs/libraries/js) for all usable functions, such as:
-- [Capture custom event capture, identify users, and more.](/docs/libraries/js#send-custom-events-with-posthogcapture)
-- [Feature flags including variants and payloads.](/docs/libraries/js#feature-flags)
-
 You can the access the project used in this tutorial [on GitHub](https://github.com/mathexl/posthog-vue-demo).
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into Vue (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) SDK docs.
+
+Alternatively, we've also written the below tutorials to help get you started:
+
+- [How to set up analytics in Vue](/tutorials/vue-analytics)
+- [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
+- [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
+- [How to set up surveys in Vue](/tutorials/vue-surveys)
