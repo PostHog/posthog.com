@@ -337,6 +337,7 @@ module.exports = {
                     `SqueakTeamTeamImage`,
                     `MdxFrontmatterFeaturedImageChildImageSharp`,
                     `MdxFrontmatterThumbnailChildImageSharp`,
+                    `MdxFrontmatterImagesChildImageSharp`,
                 ],
             },
         },

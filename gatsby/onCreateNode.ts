@@ -55,6 +55,19 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 },
             }
         }
+        const images = node.frontmatter?.images
+        if (images?.length > 0) {
+            node.frontmatter.images = images.map((image) => {
+                return {
+                    publicURL: image,
+                    childImageSharp: {
+                        cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                        publicId: `posthog.com/contents${image.split('posthog.com/contents')[1]}`,
+                        originalFormat: image.split('.')[image.split('.').length - 1],
+                    },
+                }
+            })
+        }
 
         const slug = createFilePath({ node, getNode, basePath: `pages` })
 
