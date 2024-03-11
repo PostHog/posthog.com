@@ -1147,7 +1147,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Django',
-                            url: '/tutorials/django-analytics',
+                            url: '/docs/libraries/django',
                         },
                         {
                             name: 'Docusaurus v2',
@@ -1158,7 +1158,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Flask',
-                            url: '/tutorials/python-feature-flags',
+                            url: '/docs/libraries/flask',
                         },
                         {
                             name: 'Framer',
@@ -1174,6 +1174,10 @@ export const docsMenu = {
                         {
                             name: 'Google Tag Manager',
                             url: '/docs/libraries/google-tag-manager',
+                        },
+                        {
+                            name: 'Laravel',
+                            url: '/docs/libraries/laravel',
                         },
                         {
                             name: 'Next.js',

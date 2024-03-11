@@ -23,7 +23,7 @@ export const quickLinks = [
     },
     {
         name: 'Django',
-        to: '/tutorials/django-analytics',
+        to: '/docs/libraries/django',
     },
     {
         name: 'Docusaurus v2',
@@ -31,7 +31,7 @@ export const quickLinks = [
     },
     {
         name: 'Flask',
-        to: '/tutorials/python-feature-flags',
+        to: '/docs/libraries/flask',
     },
     {
         name: 'Framer',
@@ -44,6 +44,10 @@ export const quickLinks = [
     {
         name: 'Google Tag Manager',
         to: '/docs/libraries/google-tag-manager',
+    },
+    {
+        name: 'Laravel',
+        url: '/docs/libraries/laravel',
     },
     {
         name: 'Next.js',
