@@ -1,8 +1,10 @@
 ---
 title: How carVertical uses feature flags and analytics without autocapture
 customer: carVertical
-logo: ../images/customers/carvertical/carvertical_logo.png
-logoDark: ../images/customers/carvertical/carvertical_logo_dark.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/carvertical/carvertical_logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/carvertical/carvertical_logo_dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/carvertical/featured.jpg
 industries:
@@ -14,7 +16,7 @@ users:
 toolsUsed:
   - Feature flags
   - Product analytics
-date: 2023-12-01
+date: 2023-12-01T00:00:00.000Z
 ---
 
 [carVertical](https://www.carvertical.com/) is the world’s leading automotive data company that builds vehicle history reports from accumulated data. If you’re looking to buy a used car these reports can help you understand the specific history of a particular vehicle, as well as help you to understand more about the overall model.

@@ -338,6 +338,8 @@ module.exports = {
                     `MdxFrontmatterFeaturedImageChildImageSharp`,
                     `MdxFrontmatterThumbnailChildImageSharp`,
                     `MdxFrontmatterImagesChildImageSharp`,
+                    `MdxFrontmatterLogoChildImageSharp`,
+                    `MdxFrontmatterLogoDarkChildImageSharp`,
                 ],
             },
         },

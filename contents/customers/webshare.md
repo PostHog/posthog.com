@@ -1,8 +1,10 @@
 ---
 title: 'How Webshare replaced Mixpanel, Hotjar, and FullStory with PostHog'
 customer: Webshare
-logo: ../images/customers/webshare/webshare_logo.png
-logoDark: ../images/customers/webshare/webshare-logo-dark.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/webshare/webshare_logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/webshare/webshare-logo-dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/webshare/featured.png
 industries:
@@ -14,7 +16,7 @@ users:
 toolsUsed:
   - Experimentation
   - Product analytics
-date: 2023-10-01
+date: 2023-10-01T00:00:00.000Z
 ---
 
 [Webshare](https://www.webshare.io/homepage) is a leading proxy server provider, enabling more than 100,000 users to connect using high-speed proxies in over 50 countries. 

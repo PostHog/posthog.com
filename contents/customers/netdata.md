@@ -1,8 +1,10 @@
 ---
 title: How Netdata uses PostHog and BigQuery to build modern devtools
 customer: Netdata
-logo: ../images/customers/netdata/netdata_logo.svg
-logoDark: ../images/customers/netdata/netdata_logo_dark.svg
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/netdata/netdata_logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/netdata/netdata_logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/netdata/netdata_featured.png
 industries:
@@ -16,7 +18,7 @@ toolsUsed:
   - Autocapture
   - PostHog Cloud
   - Apps
-date: 2022-08-23
+date: 2022-08-23T00:00:00.000Z
 ---
 
 Netdata is an open source monitoring and troubleshooting platform used by engineers at many of the biggest technology companies in the world, including Microsoft, Amazon and Nvidia. In 2020, Netdata’s teams began looking for a way to track and analyze user behavior, considering many different tools in the process.  

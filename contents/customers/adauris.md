@@ -1,8 +1,10 @@
 ---
 title: 'How Adauris tracks performance, tailors activation and grew traffic by 500%'
 customer: Adauris
-logo: ../images/customers/adauris/logo.png
-logoDark: ../images/customers/adauris/logo-dark.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/adauris/logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/adauris/logo-dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/adauris/featured.png
 featuredCustomer: false
@@ -18,7 +20,7 @@ toolsUsed:
   - Session Replay
   - PostHog Cloud
   - Insights
-date: 2023-11-05
+date: 2023-11-05T00:00:00.000Z
 ---
 
 [Adauris](https://www.adauris.ai/) is an audio AI company offering end-to-end generative audio production for some of the largest digital media companies in the world, including Dezeen and The Stanford Daily. Every day, dozens of globally recognized brands use Adauris’ platform to repurpose written content and expand their distribution. 

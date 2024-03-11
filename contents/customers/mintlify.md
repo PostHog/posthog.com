@@ -1,8 +1,10 @@
 ---
 title: 'How Mintlify launched user-facing analytics, powered by PostHog'
 customer: Mintlify
-logo: ../images/customers/mintlify/logo.svg
-logoDark: ../images/customers/mintlify/logo_dark.svg
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/mintlify/logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/mintlify/logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/mintlify/featured.png
 industries:
@@ -17,7 +19,7 @@ toolsUsed:
   - Autocapture
   - PostHog Cloud
   - API
-date: 2023-04-06
+date: 2023-04-06T00:00:00.000Z
 ---
 
 Mintlify is startup powering product and technical documentation for the teams at [Y Combinator](/customers/ycombinator), Explo, MindsDB and others. It helps teams with rapidly evolving products to create rich, well structured docs which convert users and empower colleagues. 

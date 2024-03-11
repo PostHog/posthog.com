@@ -1,8 +1,10 @@
 ---
 title: How Purplewave reached a 25% response rate with PostHog surveys
 customer: Purplewave
-logo: ../images/customers/purplewave/purplewave_logo.png
-logoDark: ../images/customers/purplewave/purplewave_logo_dark.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/purplewave/purplewave_logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/purplewave/purplewave_logo_dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/purplewave/purplewave.jpg
 industries:
@@ -11,7 +13,7 @@ users:
   - Product
 toolsUsed:
   - Surveys
-date: 2023-09-15
+date: 2023-09-15T00:00:00.000Z
 ---
 
 [Purple Wave](https://www.purplewave.com/) is the world’s leading two-way marketplace for heavy duty equipment, such as construction and agriculture fleets. The team of 220+ people maintains a platform trusted by millions of annual visitors, with more than 150 fleet-scale auctions each year. 

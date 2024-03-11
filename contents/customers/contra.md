@@ -1,8 +1,10 @@
 ---
 title: How Contra used session replays to increase registrations by 30%
 customer: Contra
-logo: ../images/customers/contra/contra_logo.svg
-logoDark: ../images/customers/contra/contra_logo_dark.svg
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/contra/contra_logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/contra/contra_logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/contra/contra_featured.png
 industries:
@@ -14,7 +16,7 @@ toolsUsed:
   - Feature flags
   - Session replays
   - Product analytics
-date: 2023-03-06
+date: 2023-03-06T00:00:00.000Z
 ---
 
 Contra is a freelance marketplace for independent creatives and engineers. It empowers its community to find work that fits the way they want to live. Since 2022 [Contra](http://www.contra.com), has used PostHog Cloud to power many of its engineering and product decisions, though previously the stack was a lot more complex.

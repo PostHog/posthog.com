@@ -55,6 +55,28 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 },
             }
         }
+        const logo = node.frontmatter?.logo
+        if (logo && logo.includes('res.cloudinary.com')) {
+            node.frontmatter.logo = {
+                publicURL: logo,
+                childImageSharp: {
+                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                    publicId: `posthog.com/contents${logo.split('posthog.com/contents')[1]}`,
+                    originalFormat: logo.split('.')[logo.split('.').length - 1],
+                },
+            }
+        }
+        const logoDark = node.frontmatter?.logoDark
+        if (logoDark && logoDark.includes('res.cloudinary.com')) {
+            node.frontmatter.logoDark = {
+                publicURL: logoDark,
+                childImageSharp: {
+                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                    publicId: `posthog.com/contents${logoDark.split('posthog.com/contents')[1]}`,
+                    originalFormat: logoDark.split('.')[logoDark.split('.').length - 1],
+                },
+            }
+        }
         const images = node.frontmatter?.images
         if (images?.length > 0) {
             node.frontmatter.images = images.map((image) => {

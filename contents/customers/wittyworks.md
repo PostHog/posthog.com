@@ -1,8 +1,10 @@
 ---
 title: How Witty Works created open-source plugins with the PostHog community
 customer: Witty Works
-logo: ../images/customers/wittyworks/logo.svg
-logoDark: ../images/customers/wittyworks/logo_dark.svg
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/wittyworks/logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/wittyworks/logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/wittyworks/featured.png
 industries:
@@ -14,7 +16,7 @@ users:
 toolsUsed:
   - Dashboards
   - Apps
-date: 2022-03-15
+date: 2022-03-15T00:00:00.000Z
 ---
 
 [Witty Works](https://www.witty.works/) is the creator of Witty, an AI-based assistant which guides users to become better, more inclusive writers. Since launching in 2018 it has been adopted by organizations such as Microsoft and Deloitte to help discourage unconscious bias in written communications. 

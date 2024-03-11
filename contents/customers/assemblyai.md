@@ -1,8 +1,10 @@
 ---
 title: Why AssemblyAI switched from Mixpanel to PostHog
 customer: AssemblyAI
-logo: ../images/customers/assemblyai/logo.svg
-logoDark: ../images/customers/assemblyai/logo_dark.svg
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/assemblyai/logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/assemblyai/logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/assemblyai/featured.png
 industries:
@@ -15,7 +17,7 @@ toolsUsed:
   - Experimentation
   - Cloud-hosted
   - Insights
-date: 2022-03-23
+date: 2022-03-23T00:00:00.000Z
 ---
 
 [AssemblyAI](https://www.assemblyai.com/?utm_source=posthog&utm_campaign=case_study) is an API platform which provides powerful AI models to transcribe and understand speech. As a young company in the cutting-edge field of AI modeling, AssemblyAI requires teams to wear many hats and move fast, making immediate access to reliable data for decision-making a must.

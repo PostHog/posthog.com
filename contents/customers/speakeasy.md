@@ -1,8 +1,10 @@
 ---
 title: How Speakeasy manages features and developer relations using PostHog
 customer: Speakeasy
-logo: ../images/customers/speakeasy/speakeasy-logo.png
-logoDark: ../images/customers/speakeasy/speakeasy-logo-dark.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/speakeasy/speakeasy-logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/speakeasy/speakeasy-logo-dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/speakeasy/speakeasy-featured.png
 industries:
@@ -16,7 +18,7 @@ toolsUsed:
   - Feature flags
   - Product analytics
   - Templates
-date: 2023-08-31
+date: 2023-08-31T00:00:00.000Z
 ---
 ​
 A team of veteran API engineers founded Speakeasy with a mission to make every API easy to create and consume. Dozens of teams, including Writer, Airbyte and Codat, now trust [Speakeasy](https://speakeasyapi.dev/) to provide the tools that give their APIs a great developer experience: idiomatic SDKs in 8+ languages, Terraform providers and world-class reference docs.

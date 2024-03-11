@@ -1,8 +1,10 @@
 ---
 title: How Groove uses A/B testing and surveys to test new pricing models
 customer: Groove
-logo: ../images/customers/groove/logo.png
-logoDark: ../images/customers/groove/logo-dark.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/groove/logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/groove/logo-dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/groove/featured.png
 industries:
@@ -15,7 +17,7 @@ toolsUsed:
   - Experimentation
   - Product analytics
   - Surveys
-date: 2023-09-15
+date: 2023-09-15T00:00:00.000Z
 ---
 
 Founded in 2011 by serial founder Alex Turnbull, [Groove](https://www.groovehq.com/) is a simple yet powerful helpdesk and ticketing platform, and a leading alternative to [Zendesk](/tutorials/zendesk-session-replays) for price-conscious teams. It's a crowded market, which makes building quickly on an effective, scalable data stack more vital than ever.

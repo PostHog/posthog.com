@@ -1,8 +1,10 @@
 ---
 title: How OpenSauced is moving to product-market fit with PostHog for Startups
 customer: OpenSauced
-logo: ../images/customers/opensauced/logo.svg
-logoDark: ../images/customers/opensauced/logo_dark.svg
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/featured.png
 featuredCustomer: false
@@ -21,7 +23,7 @@ toolsUsed:
   - Cohorts
   - PostHog Cloud
   - Insights
-date: 2023-09-03
+date: 2023-09-03T00:00:00.000Z
 ---
 
 When Brian Douglas left his role as GitHub’s Director of Developer Advocacy in 2022, he knew he wanted to build a platform that would help engineers find and track their open source contributions. He called it [OpenSauced.pizza](https://opensauced.pizza/) and he’d been working on the idea for years in his spare time. 
