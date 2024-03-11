@@ -15,6 +15,64 @@ require('dotenv').config({
 
 // exports.onPreBuild = async () => {}
 
+exports.onPreInit = async function (_, options) {
+    const { strapiURL, strapiKey } = options
+    if (!strapiURL || !strapiKey) return
+    const createStrapiPageNodes = async (limit = 100, page = 1) => {
+        const strapiPages = await fetch(
+            `${strapiURL}/api/markdowns?pagination[pageSize]=${limit}&pagination[page]=${page}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${strapiKey}`,
+                },
+            }
+        ).then((res) => res.json())
+        const { data, meta } = strapiPages
+        if (data) {
+            data.forEach(({ id, attributes }) => {
+                files[attributes.path] = { contributors: attributes.contributors, lastUpdated: attributes.lastUpdated }
+            })
+        }
+        if (meta?.pagination?.pageCount > page) {
+            return await createStrapiPageNodes(limit, page + 1)
+        }
+    }
+
+    await createStrapiPageNodes()
+}
+
+const cloudinaryCache = {}
+
+export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
+    console.log('Fetching cloudinary data')
+
+    const fetchCloudinaryImages = async (nextCursor = null) => {
+        const { resources, next_cursor } = await fetch(
+            `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${
+                process.env.GATSBY_CLOUDINARY_CLOUD_NAME
+            }/resources/image?prefix=posthog.com&type=upload&max_results=500${
+                nextCursor ? `&next_cursor=${nextCursor}` : ``
+            }`
+        ).then((res) => res.json())
+        resources.forEach((resource) => {
+            cloudinaryCache[resource.public_id] = resource
+        })
+
+        if (next_cursor) {
+            await fetchCloudinaryImages(next_cursor)
+        }
+    }
+
+    if (
+        !process.env.CLOUDINARY_API_KEY ||
+        !process.env.CLOUDINARY_API_SECRET ||
+        !process.env.GATSBY_CLOUDINARY_CLOUD_NAME
+    )
+        return
+
+    await fetchCloudinaryImages()
+}
+
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     node,
     getNode,
@@ -35,68 +93,92 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             return
         const featuredImage = node.frontmatter?.featuredImage
         if (featuredImage && featuredImage.includes('res.cloudinary.com')) {
+            const publicId = `posthog.com/contents${featuredImage.split('posthog.com/contents')[1]}`
+            const cloudinaryData = cloudinaryCache[publicId]
             node.frontmatter.featuredImage = {
                 publicURL: featuredImage,
                 childImageSharp: {
                     cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId: `posthog.com/contents${featuredImage.split('posthog.com/contents')[1]}`,
-                    originalFormat: featuredImage.split('.')[featuredImage.split('.').length - 1],
+                    publicId,
+                    originalFormat: cloudinaryData?.format,
+                    originalWidth: cloudinaryData?.width,
+                    originalHeight: cloudinaryData?.height,
                 },
             }
         }
         const thumbnail = node.frontmatter?.thumbnail
         if (thumbnail && thumbnail.includes('res.cloudinary.com')) {
+            const publicId = `posthog.com/contents${thumbnail.split('posthog.com/contents')[1]}`
+            const cloudinaryData = cloudinaryCache[publicId]
             node.frontmatter.thumbnail = {
                 publicURL: thumbnail,
                 childImageSharp: {
                     cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId: `posthog.com/contents${thumbnail.split('posthog.com/contents')[1]}`,
-                    originalFormat: thumbnail.split('.')[thumbnail.split('.').length - 1],
+                    publicId,
+                    originalFormat: cloudinaryData?.format,
+                    originalWidth: cloudinaryData?.width,
+                    originalHeight: cloudinaryData?.height,
                 },
             }
         }
         const logo = node.frontmatter?.logo
         if (logo && logo.includes('res.cloudinary.com')) {
+            const publicId = `posthog.com/contents${logo.split('posthog.com/contents')[1]}`
+            const cloudinaryData = cloudinaryCache[publicId]
             node.frontmatter.logo = {
                 publicURL: logo,
                 childImageSharp: {
                     cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId: `posthog.com/contents${logo.split('posthog.com/contents')[1]}`,
-                    originalFormat: logo.split('.')[logo.split('.').length - 1],
+                    publicId,
+                    originalFormat: cloudinaryData?.format,
+                    originalWidth: cloudinaryData?.width,
+                    originalHeight: cloudinaryData?.height,
                 },
             }
         }
         const logoDark = node.frontmatter?.logoDark
         if (logoDark && logoDark.includes('res.cloudinary.com')) {
+            const publicId = `posthog.com/contents${logoDark.split('posthog.com/contents')[1]}`
+            const cloudinaryData = cloudinaryCache[publicId]
             node.frontmatter.logoDark = {
                 publicURL: logoDark,
                 childImageSharp: {
                     cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId: `posthog.com/contents${logoDark.split('posthog.com/contents')[1]}`,
-                    originalFormat: logoDark.split('.')[logoDark.split('.').length - 1],
+                    publicId,
+                    originalFormat: cloudinaryData?.format,
+                    originalWidth: cloudinaryData?.width,
+                    originalHeight: cloudinaryData?.height,
                 },
             }
         }
         const icon = node.frontmatter?.icon
         if (icon && icon.includes('res.cloudinary.com')) {
+            const publicId = `posthog.com/contents${icon.split('posthog.com/contents')[1]}`
+            const cloudinaryData = cloudinaryCache[publicId]
             node.frontmatter.icon = {
                 publicURL: icon,
                 childImageSharp: {
                     cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId: `posthog.com/contents${icon.split('posthog.com/contents')[1]}`,
-                    originalFormat: icon.split('.')[icon.split('.').length - 1],
+                    publicId,
+                    originalFormat: cloudinaryData?.format,
+                    originalWidth: cloudinaryData?.width,
+                    originalHeight: cloudinaryData?.height,
                 },
             }
         }
         const images = node.frontmatter?.images
         if (images?.length > 0) {
             node.frontmatter.images = images.map((image) => {
+                const publicId = `posthog.com/contents${image.split('posthog.com/contents')[1]}`
+                const cloudinaryData = cloudinaryCache[publicId]
                 return {
                     publicURL: image,
                     childImageSharp: {
                         cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                        publicId: `posthog.com/contents${image.split('posthog.com/contents')[1]}`,
-                        originalFormat: image.split('.')[image.split('.').length - 1],
+                        publicId,
+                        originalFormat: cloudinaryData?.format,
+                        originalWidth: cloudinaryData?.width,
+                        originalHeight: cloudinaryData?.height,
                     },
                 }
             })
