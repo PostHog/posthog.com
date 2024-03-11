@@ -283,7 +283,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         }
                         featuredImage {
                             childImageSharp {
-                                gatsbyImageData(width: 650, height: 350, quality: 100)
+                                gatsbyImageData(width: 650, height: 350)
                             }
                         }
                         authorData {
