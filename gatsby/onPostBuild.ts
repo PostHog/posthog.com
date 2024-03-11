@@ -234,6 +234,8 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
+    if (process.env.VERCEL_GIT_COMMIT_REF !== 'master') return
+
     const { data } = await graphql(`
         query {
             allRoadmap(filter: { complete: { ne: false } }) {
