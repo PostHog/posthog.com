@@ -94,7 +94,6 @@
         "github-slugger": "^1.4.0",
         "glob": "^10.3.10",
         "gravatar": "^1.8.2",
-        "gray-matter": "^4.0.3",
         "instantsearch.js": "^4.49.1",
         "is-plain-object": "^5.0.0",
         "jsdom": "^20.0.0",
