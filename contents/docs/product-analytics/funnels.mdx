@@ -3,47 +3,46 @@ title: Funnels
 sidebar: Docs
 showTitle: true
 related:
-    - ../../tutorials/guide-to-funnels.md
-    - ../../tutorials/nextjs-supabase-signup-funnel.mdx
+  - ../../tutorials/guide-to-funnels.md
+  - ../../tutorials/nextjs-supabase-signup-funnel.mdx
 availability:
-    free: partial
-    selfServe: full
-    enterprise: full
-
-    features:
-        correlation:
-            free: false
-            selfServe: true
-            enterprise: true
+  free: partial
+  selfServe: full
+  enterprise: full
+  features:
+    correlation:
+      free: false
+      selfServe: true
+      enterprise: true
 ---
-import newFunnelLight from '../../images/docs/user-guides/funnels/new-funnel-light-mode.mp4'
-import newFunnelDark from '../../images/docs/user-guides/funnels/new-funnel-dark-mode.mp4'
-import funnelStepsLight from '../../images/docs/user-guides/funnels/funnel-steps-light-mode.png'
-import funnelStepsDark from '../../images/docs/user-guides/funnels/funnel-steps-dark-mode.png'
-import globalFiltersLight from '../../images/docs/user-guides/funnels/global-filters-light-mode.png'
-import globalFiltersDark from '../../images/docs/user-guides/funnels/global-filters-dark-mode.png'
-import setFunnelTimeRangeLight from '../../images/docs/user-guides/funnels/set-funnel-time-range-light-mode.png'
-import setFunnelTimeRangeDark from '../../images/docs/user-guides/funnels/set-funnel-time-range-dark-mode.png'
-import saveAFunnelLight from '../../images/docs/user-guides/funnels/save-a-funnel-light-mode.mp4'
-import saveAFunnelDark from '../../images/docs/user-guides/funnels/save-a-funnel-dark-mode.mp4'
-import personsModalLight from '../../images/docs/user-guides/funnels/persons-modal-light-mode.png'
-import personsModalDark from '../../images/docs/user-guides/funnels/persons-modal-dark-mode.png'
-import identifyingLight from '../../images/docs/user-guides/funnels/identifying-drop-offs-light-mode.png'
-import identifyingDark from '../../images/docs/user-guides/funnels/identifying-drop-offs-dark-mode.png'
-import switchToRelativeLight from '../../images/docs/user-guides/funnels/switch-to-relative-drop-off-light-mode.png'
-import switchToRelativeDark from '../../images/docs/user-guides/funnels/switch-to-relative-drop-off-dark-mode.png'
-import averageTimeToConvertLight from '../../images/docs/user-guides/funnels/average-time-to-convert-light-mode.png'
-import averageTimeToConvertDark from '../../images/docs/user-guides/funnels/average-time-to-convert-dark-mode.png'
-import distributionHistogramLight from '../../images/docs/user-guides/funnels/distribution-histogram-time-to-convert-light-mode.png'
-import distributionHistogramDark from '../../images/docs/user-guides/funnels/distribution-histogram-time-to-convert-dark-mode.png'
-import granularConversionLight from '../../images/docs/user-guides/funnels/granular-conversion-time-distribution-light-mode.png'
-import granularConversionDark from '../../images/docs/user-guides/funnels/granular-conversion-time-distribution-dark-mode.png'
-import breakdownByOSLight from '../../images/docs/user-guides/funnels/breakdown-by-operating-system-light-mode.png'
-import breakdownByOSDark from '../../images/docs/user-guides/funnels/breakdown-by-operating-system-dark-mode.png'
-import funnelStepBreakdownLight from '../../images/docs/user-guides/funnels/funnel-steps-breakdown-light-mode.png'
-import funnelStepBreakdownDark from '../../images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png'
-import converstionOverTimeLight from '../../images/docs/user-guides/funnels/conversion-over-time-using-trends-light-mode.png'
-import converstionOverTimeDark from '../../images/docs/user-guides/funnels/conversion-over-time-using-trends-dark-mode.png'
+export const newFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/new-funnel-light-mode.mp4"
+export const newFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/new-funnel-dark-mode.mp4"
+export const funnelStepsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-light-mode.png"
+export const funnelStepsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-dark-mode.png"
+export const globalFiltersLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/global-filters-light-mode.png"
+export const globalFiltersDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/global-filters-dark-mode.png"
+export const setFunnelTimeRangeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/set-funnel-time-range-light-mode.png"
+export const setFunnelTimeRangeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/set-funnel-time-range-dark-mode.png"
+export const saveAFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/save-a-funnel-light-mode.mp4"
+export const saveAFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/save-a-funnel-dark-mode.mp4"
+export const personsModalLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/persons-modal-light-mode.png"
+export const personsModalDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/persons-modal-dark-mode.png"
+export const identifyingLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/identifying-drop-offs-light-mode.png"
+export const identifyingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/identifying-drop-offs-dark-mode.png"
+export const switchToRelativeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/switch-to-relative-drop-off-light-mode.png"
+export const switchToRelativeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/switch-to-relative-drop-off-dark-mode.png"
+export const averageTimeToConvertLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/average-time-to-convert-light-mode.png"
+export const averageTimeToConvertDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/average-time-to-convert-dark-mode.png"
+export const distributionHistogramLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/distribution-histogram-time-to-convert-light-mode.png"
+export const distributionHistogramDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/distribution-histogram-time-to-convert-dark-mode.png"
+export const granularConversionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/granular-conversion-time-distribution-light-mode.png"
+export const granularConversionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/granular-conversion-time-distribution-dark-mode.png"
+export const breakdownByOSLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/breakdown-by-operating-system-light-mode.png"
+export const breakdownByOSDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/breakdown-by-operating-system-dark-mode.png"
+export const funnelStepBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-light-mode.png"
+export const funnelStepBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png"
+export const converstionOverTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-light-mode.png"
+export const converstionOverTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-dark-mode.png"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=573"

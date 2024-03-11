@@ -1,19 +1,21 @@
 ---
 title: How to set up surveys in Nuxt
-date: 2024-01-18
-author: ["lior-neu-ner"]
+date: 2024-01-18T00:00:00.000Z
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['surveys']
+tags:
+  - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/nuxt-surveys/events-light.png'
-import EventsDark from '../images/tutorials/nuxt-surveys/events-dark.png'
-import ImgSurveyResultsLight from '../images/tutorials/nuxt-surveys/survey-results-light.png'
-import ImgSurveyResultsDark from '../images/tutorials/nuxt-surveys/survey-results-dark.png'
-import ImgSurveyTemplatesLight from '../images/tutorials/nuxt-surveys/survey-templates-light.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/nuxt-surveys/survey-templates-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/events-dark.png"
+export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/survey-results-light.png"
+export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/survey-results-dark.png"
+export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/survey-templates-light.png"
+export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/survey-templates-dark.png"
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Nuxt.js app.
 

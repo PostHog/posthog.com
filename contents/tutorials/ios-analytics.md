@@ -1,17 +1,19 @@
 ---
-title: "How to set up analytics in iOS"
-date: 2024-02-27
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+title: How to set up analytics in iOS
+date: 2024-02-27T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/ios-analytics/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/ios-analytics/events-dark.png'
-import IdentifyLight from '../images/tutorials/ios-analytics/identify-light.png'
-import IdentifyDark from '../images/tutorials/ios-analytics/identify-dark.png'
-import InsightLight from '../images/tutorials/ios-analytics/create-insights-light.png'
-import InsightsDark from '../images/tutorials/ios-analytics/create-insights-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-analytics/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-analytics/events-dark.png"
+export const IdentifyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-analytics/identify-light.png"
+export const IdentifyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-analytics/identify-dark.png"
+export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-analytics/create-insights-light.png"
+export const InsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-analytics/create-insights-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your iOS app. To show you how to set up analytics, in this tutorial we create a basic iOS app, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 

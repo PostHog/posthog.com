@@ -1,17 +1,19 @@
 ---
 title: How to set up A/B tests in Go
-date: 2024-02-06
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+date: 2024-02-06T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/go-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/go-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/go-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/go-ab-tests/experiment-setup-dark.png'
-import ResultsLight from '../images/tutorials/go-ab-tests/results-light.png'
-import ResultsDark from '../images/tutorials/go-ab-tests/results-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-ab-tests/experiment-setup-dark.png"
+export const ResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-ab-tests/results-light.png"
+export const ResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-ab-tests/results-dark.png"
 
 A/B tests help you improve your Go app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Go app, add PostHog, create an A/B test, and implement the code for it.
 

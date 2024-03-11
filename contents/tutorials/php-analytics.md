@@ -1,15 +1,17 @@
 ---
 title: How to set up analytics in PHP
-date: 2024-02-21
-author: ["lior-neu-ner"]
-tags: ['product analytics']
+date: 2024-02-21T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/php-analytics/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/php-analytics/events-dark.png'
-import InsightLight from '../images/tutorials/php-analytics/insight-light.png'
-import InsightDark from '../images/tutorials/php-analytics/insight-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/php-analytics/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/php-analytics/events-dark.png"
+export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/php-analytics/insight-light.png"
+export const InsightDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/php-analytics/insight-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your PHP app. To show you how to set up analytics, in this tutorial we create a basic PHP app, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 

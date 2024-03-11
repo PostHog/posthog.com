@@ -1,15 +1,19 @@
 ---
-title: How to set up Bubble analytics, session replays, and more
-date: 2024-01-10
-author: ["lior-neu-ner"]
+title: 'How to set up Bubble analytics, session replays, and more'
+date: 2024-01-10T00:00:00.000Z
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['session replay', 'feature flags', 'product analytics']
+tags:
+  - session replay
+  - feature flags
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import ImgAutocaptureLight from '../images/tutorials/bubble-analytics/autocapture-light.png'
-import ImgAutocaptureDark from '../images/tutorials/bubble-analytics/autocapture-dark.png'
+export const ImgAutocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-light.png"
+export const ImgAutocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-dark.png"
 
 [Bubble](https://bubble.io/) is a popular no-code site builder that makes it easy to design a high-quality websites and apps. Combined with tools like [analytics](/product-analytics), [session replays](/session-replay), and [feature flags](/feature-flags), you can build the best site possible.
 

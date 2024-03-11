@@ -1,17 +1,19 @@
 ---
 title: How to set up feature flags in Laravel
-date: 2024-02-15
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+date: 2024-02-15T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/laravel-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/laravel-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/laravel-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/laravel-feature-flags/create-flag-dark.png'
-import FlagCaptureLight from '../images/tutorials/laravel-feature-flags/flag-capture-light.png'
-import FlagCaptureDark from '../images/tutorials/laravel-feature-flags/flag-capture-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-feature-flags/create-flag-dark.png"
+export const FlagCaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-feature-flags/flag-capture-light.png"
+export const FlagCaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-feature-flags/flag-capture-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in Laravel using PostHog. 
 

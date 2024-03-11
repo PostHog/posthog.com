@@ -1,15 +1,17 @@
 ---
-title: "How to set up feature flags in Flutter"
-date: 2024-03-05
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+title: How to set up feature flags in Flutter
+date: 2024-03-05T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/flutter-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/flutter-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/flutter-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/flutter-feature-flags/create-flag-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them into your Flutter app using PostHog. 
 

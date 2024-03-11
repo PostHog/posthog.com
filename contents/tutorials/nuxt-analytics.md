@@ -1,13 +1,15 @@
 ---
 title: How to set up analytics in Nuxt
-date: 2024-01-19
-author: ["lior-neu-ner"]
-tags: ['product analytics']
+date: 2024-01-19T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/nuxt-surveys/events-light.png'
-import EventsDark from '../images/tutorials/nuxt-surveys/events-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/events-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Nuxt.js app. To show you how to set up analytics, in this tutorial we create a basic Nuxt app, add PostHog on both the client and server, and use it to capture pageviews and custom events.
 

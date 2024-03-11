@@ -1,17 +1,19 @@
 ---
 title: How to set up A/B tests in Node.js (Express)
-date: 2024-02-02
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+date: 2024-02-02T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/node-express-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/node-express-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/node-express-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/node-express-ab-tests/experiment-setup-dark.png'
-import ResultsLight from '../images/tutorials/node-express-ab-tests/results-light.png'
-import ResultsDark from '../images/tutorials/node-express-ab-tests/results-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-ab-tests/experiment-setup-dark.png"
+export const ResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-ab-tests/results-light.png"
+export const ResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-ab-tests/results-dark.png"
 
 A/B tests help you improve your Node app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Node app with [Express](https://expressjs.com/), add PostHog, create an A/B test, and implement the code for it.
 

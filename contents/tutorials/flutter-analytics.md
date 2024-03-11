@@ -1,17 +1,19 @@
 ---
-title: "How to set up analytics in Flutter"
-date: 2024-03-06
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+title: How to set up analytics in Flutter
+date: 2024-03-06T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/flutter-analytics/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/flutter-analytics/events-dark.png'
-import IdentifyLight from '../images/tutorials/flutter-analytics/identify-light.png'
-import IdentifyDark from '../images/tutorials/flutter-analytics/identify-dark.png'
-import InsightLight from '../images/tutorials/flutter-analytics/create-insights-light.png'
-import InsightsDark from '../images/tutorials/flutter-analytics/create-insights-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/events-dark.png"
+export const IdentifyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/identify-light.png"
+export const IdentifyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/identify-dark.png"
+export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/create-insights-light.png"
+export const InsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/create-insights-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Flutter app. To show you how to set up analytics, in this tutorial we create a basic Flutter app, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 

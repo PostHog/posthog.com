@@ -1,17 +1,19 @@
 ---
-title: "How to run A/B tests in Bubble"
-date: 2024-01-11
-author: ["lior-neu-ner"]
+title: How to run A/B tests in Bubble
+date: 2024-01-11T00:00:00.000Z
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['experimentation']
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/bubble-ab-tests/events-in-posthog-light.png'
-import EventsInPostHogDark from '../images/tutorials/bubble-ab-tests/events-in-posthog-dark.png'
-import TestSetupLight from '../images/tutorials/bubble-ab-tests/test-setup-light.png'
-import TestSetupDark from '../images/tutorials/bubble-ab-tests/test-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/events-in-posthog-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/events-in-posthog-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/test-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/test-setup-dark.png"
 
 [Bubble](https://bubble.io/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change actually improves your conversion rate. This is where [A/B testing](/ab-testing) is helpful. It enables you to test and compare the results of your changes.
 

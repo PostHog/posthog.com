@@ -1,15 +1,17 @@
 ---
-title: "How to set up feature flags in iOS"
-date: 2024-02-20
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+title: How to set up feature flags in iOS
+date: 2024-02-20T00:00:00.000Z
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/ios-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/ios-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/ios-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/ios-feature-flags/create-flag-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in iOS using PostHog. 
 
