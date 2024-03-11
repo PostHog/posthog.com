@@ -2,11 +2,11 @@
 title: How OpenSauced is moving to product-market fit with PostHog for Startups
 customer: OpenSauced
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/logo.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/opensauced/logo.svg
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/logo_dark.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/opensauced/logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/opensauced/featured.png
 featuredCustomer: false
 industries:
   - 'SaaS, Devtool'

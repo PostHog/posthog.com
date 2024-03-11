@@ -4,7 +4,7 @@ title: What we've learned about product-market fit
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/feature-images/loop.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/loop.png
 featuredImageType: full
 tags:
   - Founders

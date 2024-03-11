@@ -3,7 +3,7 @@ title: URL query parameter converter
 github: 'https://github.com/PostHog/integrations-repository/pull/31'
 installUrl: 'https://app.posthog.com/project/apps?name=url-query-parameter-converter'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/url-query.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/url-query.png
 tags:
   - url-query
 ---

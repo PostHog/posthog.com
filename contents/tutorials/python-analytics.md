@@ -8,10 +8,10 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-analytics/events-light.png"
-export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-analytics/events-dark.png"
-export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-analytics/insight-light.png"
-export const InsightDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-analytics/insight-dark.png"
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/python-analytics/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/python-analytics/events-dark.png"
+export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/python-analytics/insight-light.png"
+export const InsightDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/python-analytics/insight-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Python app. To show you how to set up analytics, in this tutorial we create a basic Python app with [Flask](https://flask.palletsprojects.com/), add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 

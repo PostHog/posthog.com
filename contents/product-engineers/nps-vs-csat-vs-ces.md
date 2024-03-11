@@ -4,7 +4,7 @@ title: 'NPS vs CSAT vs CES: Which is best for SaaS?'
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 tags:
   - Product analytics

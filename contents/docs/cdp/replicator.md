@@ -2,7 +2,7 @@
 title: Event Replicator
 github: 'https://github.com/posthog/posthog-plugin-replicator'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/replicator.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/replicator.png
 tags:
   - replicator
 ---

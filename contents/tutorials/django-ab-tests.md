@@ -8,12 +8,12 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-ab-tests/events-light.png"
-export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-ab-tests/events-dark.png"
-export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-ab-tests/experiment-setup-light.png"
-export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-ab-tests/experiment-setup-dark.png"
-export const ResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-ab-tests/results-light.png"
-export const ResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-ab-tests/results-dark.png"
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/experiment-setup-dark.png"
+export const ResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/results-light.png"
+export const ResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/results-dark.png"
 
 A/B tests help you improve your Django app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Django app, add PostHog, create an A/B test, and implement the code for it.
 

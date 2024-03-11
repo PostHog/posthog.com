@@ -8,10 +8,10 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-ab-tests/events-light.png"
-export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-ab-tests/events-dark.png"
-export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-ab-tests/experiment-setup-light.png"
-export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-ab-tests/experiment-setup-dark.png"
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/experiment-setup-dark.png"
 
 A/B tests help you make your Svelte app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic SvelteKit app, add PostHog, create an A/B test, and implement the code for it.
 

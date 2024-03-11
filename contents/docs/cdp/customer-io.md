@@ -3,7 +3,7 @@ title: Customer.io
 github: 'https://github.com/PostHog/customerio-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Customer'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/customerio-connector.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/customerio-connector.png
 tags:
   - customer.io-connector
 ---

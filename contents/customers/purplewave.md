@@ -2,11 +2,11 @@
 title: How Purplewave reached a 25% response rate with PostHog surveys
 customer: Purplewave
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/purplewave/purplewave_logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/purplewave/purplewave_logo.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/purplewave/purplewave_logo_dark.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/purplewave/purplewave_logo_dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/purplewave/purplewave.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/purplewave/purplewave.jpg
 industries:
   - ECommerce
 users:

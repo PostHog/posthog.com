@@ -4,7 +4,7 @@ date: 2023-08-23
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-blog-image.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 tags:
   - Surveys

@@ -2,7 +2,7 @@
 title: Google Cloud Storage
 github: 'https://github.com/PostHog/posthog-gcs-plugin'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/gcs-export.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/gcs-export.png
 tags:
   - gcs-export
 ---

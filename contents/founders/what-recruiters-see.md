@@ -4,7 +4,7 @@ title: What startup recruiters actually see when you apply for a job
 author:
   - charles-cook
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/transparency.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 tags:
   - Culture

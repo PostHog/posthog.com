@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - michael-matloka
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/simpler-self-deployments.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/simpler-self-deployments.png
 featuredImageType: full
 category: Engineering
 tags:

@@ -4,7 +4,7 @@ date: 2024-01-10
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/how-we-decide.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/how-we-decide.png
 featuredImageType: full
 tags:
   - Product engineers

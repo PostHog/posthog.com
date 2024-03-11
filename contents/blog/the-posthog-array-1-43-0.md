@@ -11,7 +11,7 @@ tags:
   - Release notes
 featuredVideo: 'https://www.youtube-nocookie.com/embed/TCyCryTiTbQ'
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-array-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
 ---
 

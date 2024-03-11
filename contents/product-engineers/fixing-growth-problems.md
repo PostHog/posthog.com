@@ -4,7 +4,7 @@ date: 2023-10-17
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/athlete-hog.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/athlete-hog.jpeg
 featuredImageType: full
 tags:
   - Product engineers

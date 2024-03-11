@@ -3,7 +3,7 @@ title: Salesforce
 github: 'https://github.com/PostHog/salesforce-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Salesforce'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/salesforce.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/salesforce.svg
 tags:
   - salesforce
 ---

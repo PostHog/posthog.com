@@ -2,11 +2,11 @@
 title: How Witty Works created open-source plugins with the PostHog community
 customer: Witty Works
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/wittyworks/logo.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/wittyworks/logo.svg
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/wittyworks/logo_dark.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/wittyworks/logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/wittyworks/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/wittyworks/featured.png
 industries:
   - SaaS
   - Browser extension

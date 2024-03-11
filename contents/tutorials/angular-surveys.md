@@ -6,18 +6,18 @@ author:
 showTitle: true
 sidebar: Docs
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
 tags:
   - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-surveys/events-light.png"
-export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-surveys/events-dark.png"
-export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-surveys/survey-results-light.png"
-export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-surveys/survey-results-dark.png"
-export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-surveys/survey-templates-light.png"
-export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-surveys/survey-templates-dark.png"
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/events-dark.png"
+export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-results-light.png"
+export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-results-dark.png"
+export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-templates-light.png"
+export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-templates-dark.png"
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Angular.js app.
 

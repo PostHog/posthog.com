@@ -4,7 +4,7 @@ title: 'Startups, stop treating engineers like a different species'
 author:
   - charles-cook
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-engineering-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
   - Founders

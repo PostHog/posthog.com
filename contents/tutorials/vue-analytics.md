@@ -8,8 +8,8 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-surveys/events-light.png"
-export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-surveys/events-dark.png"
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-surveys/events-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Vue.js app. To show you how to set up analytics, in this tutorial we create a basic Vue app, add PostHog, and use it to capture pageviews and custom events.
 

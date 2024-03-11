@@ -3,7 +3,7 @@ title: Intercom
 github: 'https://github.com/posthog/posthog-intercom-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Intercom'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/intercom.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/intercom.png
 tags:
   - intercom
 ---

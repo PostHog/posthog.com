@@ -2,11 +2,11 @@
 title: How Contra used session replays to increase registrations by 30%
 customer: Contra
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/contra/contra_logo.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/contra/contra_logo.svg
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/contra/contra_logo_dark.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/contra/contra_logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/contra/contra_featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/contra/contra_featured.png
 industries:
   - Saas
 users:

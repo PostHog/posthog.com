@@ -4,7 +4,7 @@ title: Finding your North Star metric and why it matters
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/give-back-friday.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/give-back-friday.png
 featuredImageType: full
 tags:
   - Founders

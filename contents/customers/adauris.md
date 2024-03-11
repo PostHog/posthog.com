@@ -2,11 +2,11 @@
 title: 'How Adauris tracks performance, tailors activation and grew traffic by 500%'
 customer: Adauris
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/adauris/logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/adauris/logo-dark.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/adauris/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/featured.png
 featuredCustomer: false
 industries:
   - 'SaaS, Publishing'

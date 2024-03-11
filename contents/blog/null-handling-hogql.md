@@ -8,7 +8,7 @@ rootpage: /blog
 sidebar: Blog
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/orange-blog-image.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/orange-blog-image.jpg
 featuredImageType: full
 category: Engineering
 ---

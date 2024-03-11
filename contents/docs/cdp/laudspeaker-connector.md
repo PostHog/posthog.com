@@ -3,7 +3,7 @@ title: Laudspeaker
 github: 'https://github.com/PostHog/posthog-laudspeaker-app'
 installUrl: 'https://app.posthog.com/project/apps?name=Laudspeaker'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/laudspeaker-connector.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/laudspeaker-connector.png
 tags:
   - laudspeaker-connector
 ---

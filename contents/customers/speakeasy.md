@@ -2,11 +2,11 @@
 title: How Speakeasy manages features and developer relations using PostHog
 customer: Speakeasy
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/speakeasy/speakeasy-logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/speakeasy/speakeasy-logo.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/speakeasy/speakeasy-logo-dark.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/speakeasy/speakeasy-logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/speakeasy/speakeasy-featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/speakeasy/speakeasy-featured.png
 industries:
   - Devtool
 users:

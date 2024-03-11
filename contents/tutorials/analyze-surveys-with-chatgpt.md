@@ -6,7 +6,7 @@ author:
 showTitle: true
 sidebar: Docs
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/banners/tutorial-14.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-14.png
 tags:
   - surveys
 ---

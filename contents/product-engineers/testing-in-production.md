@@ -4,7 +4,7 @@ date: 2023-12-07
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 tags:
   - Product engineers

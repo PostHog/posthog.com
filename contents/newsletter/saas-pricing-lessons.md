@@ -4,7 +4,7 @@ title: 10 things we've learned about pricing for SaaS startups
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/equity.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/equity.png
 featuredImageType: full
 tags:
   - Founders

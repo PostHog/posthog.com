@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - mo-shehu
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/customer-support-at-posthog/customer-support-at-posthog.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/customer-support-at-posthog/customer-support-at-posthog.jpg
 category: Inside PostHog
 tags:
   - Open source

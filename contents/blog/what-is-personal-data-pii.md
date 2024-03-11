@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-analytics-gdpr.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/google-analytics-gdpr.png
 featuredImageType: full
 author:
   - andy-vandervell

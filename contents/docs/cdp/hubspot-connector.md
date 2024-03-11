@@ -3,7 +3,7 @@ title: Hubspot
 github: 'https://github.com/PostHog/hubspot-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Hubspot'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/hubspot.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/hubspot.svg
 tags:
   - hubspot
 ---

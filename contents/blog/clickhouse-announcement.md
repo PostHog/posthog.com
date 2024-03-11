@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - mo-shehu
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-announcement.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/clickhouse-announcement.png
 featuredImageType: full
 category: PostHog news
 tags:

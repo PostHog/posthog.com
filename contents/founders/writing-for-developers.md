@@ -4,7 +4,7 @@ title: Writing for developers
 author:
   - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/writing-for-developers/writing-for-developers.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/writing-for-developers/writing-for-developers.png
 featuredImageType: full
 tags:
   - Marketing

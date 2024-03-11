@@ -2,11 +2,11 @@
 title: How carVertical uses feature flags and analytics without autocapture
 customer: carVertical
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/carvertical/carvertical_logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/carvertical/carvertical_logo.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/carvertical/carvertical_logo_dark.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/carvertical/carvertical_logo_dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/carvertical/featured.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/carvertical/featured.jpg
 industries:
   - Recruitment
 users:

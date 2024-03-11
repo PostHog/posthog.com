@@ -3,7 +3,7 @@ title: Route censor
 github: 'https://github.com/PostHog/posthog-route-censor-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=route-censor'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/censor-app
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/censor-app
   - route-censor
 ---
 

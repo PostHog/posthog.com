@@ -2,7 +2,7 @@
 title: Avo
 github: 'https://github.com/PostHog/posthog-avo-plugin'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/avo-logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/avo-logo.png
 tags:
   - avo
 ---

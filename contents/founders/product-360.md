@@ -4,7 +4,7 @@ title: I used to think you don't need product people. I was wrong.
 author:
   - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-people.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-people.png
 featuredImageType: full
 tags:
   - Founders

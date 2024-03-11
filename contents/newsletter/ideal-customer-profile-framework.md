@@ -4,7 +4,7 @@ date: 2024-01-25
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/icp/icp-feat.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/icp/icp-feat.png
 featuredImageType: full
 tags:
   - Product

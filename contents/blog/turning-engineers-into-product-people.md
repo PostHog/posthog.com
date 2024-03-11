@@ -2,7 +2,7 @@
 date: 2021-05-28
 title: How to turn your engineers into product people
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/turning-engineers-into-product-people/turning-engineers-into-product-people.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/turning-engineers-into-product-people/turning-engineers-into-product-people.png
 featuredImageType: full
 rootPage: /blog
 sidebar: Blog

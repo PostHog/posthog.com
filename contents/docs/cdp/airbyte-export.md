@@ -2,7 +2,7 @@
 title: Airbyte
 installUrl: 'https://docs.airbyte.com/integrations/sources/posthog/'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/airbyte.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/airbyte.png
 tags:
   - airbyte
 ---

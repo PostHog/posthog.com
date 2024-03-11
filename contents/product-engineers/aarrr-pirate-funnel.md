@@ -4,7 +4,7 @@ title: 'In-depth: The AARRR pirate funnel explained'
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
 featuredImageType: full
 tags:
   - Product analytics

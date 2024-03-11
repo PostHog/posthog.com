@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/data-management-feature/posthog-data-management.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/data-management-feature/posthog-data-management.png
 featuredImageType: full
 author:
   - simon-fisher

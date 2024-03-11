@@ -4,7 +4,7 @@ title: 8 annoying A/B testing mistakes every engineer should know
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/experiment-hog.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
   - Product engineers

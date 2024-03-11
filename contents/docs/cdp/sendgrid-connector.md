@@ -3,7 +3,7 @@ title: Sendgrid
 github: 'https://github.com/PostHog/sendgrid-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Sendgrid'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/sendgrid-connector.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/sendgrid-connector.png
 tags:
   - sendgrid-connector
 ---

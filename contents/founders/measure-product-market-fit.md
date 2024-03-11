@@ -4,7 +4,7 @@ title: 'In-depth: How to measure product-market fit'
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/pmf-guide.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/how-to-measure-product-market-fit/pmf-guide.png
 featuredImageType: full
 tags:
   - Founders

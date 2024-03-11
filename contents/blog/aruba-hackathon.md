@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/beach-hog.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/aruba/beach-hog.jpg
 featuredImageType: full
 category: Inside PostHog
 tags:

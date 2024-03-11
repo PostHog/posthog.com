@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - hanna-crombie
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/lw-queries.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/lw-queries.png
 featuredImageType: full
 category: Product growth
 tags:

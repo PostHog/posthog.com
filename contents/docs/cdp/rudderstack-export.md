@@ -3,7 +3,7 @@ title: RudderStack (Export)
 github: 'https://github.com/rudderlabs/rudderstack-posthog-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=RudderStack'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/rudderstack-export.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/rudderstack-export.png
 tags:
   - rudderstack
 ---

@@ -4,7 +4,7 @@ date: 2023-05-10
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/green-blog-image.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 category: Inside PostHog
 tags:

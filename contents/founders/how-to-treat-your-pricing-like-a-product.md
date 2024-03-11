@@ -4,7 +4,7 @@ title: How (and why) we treat pricing like a product
 author:
   - raquel-m-smith
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/happy-hog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
 tags:
   - Founders

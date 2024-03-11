@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
 tags:

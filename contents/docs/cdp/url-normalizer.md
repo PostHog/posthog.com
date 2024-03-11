@@ -3,7 +3,7 @@ title: URL Normalizer
 github: 'https://github.com/PostHog/posthog-url-normalizer-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=URL%20Normalizer'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/url_normalizer.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/url_normalizer.png
 tags:
   - url-normalizer
 ---

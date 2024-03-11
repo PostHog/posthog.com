@@ -2,7 +2,7 @@
 title: Google Pub/Sub
 github: 'https://github.com/vendasta/pubsub-plugin'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/pub-sub-export.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/pub-sub-export.png
 tags:
   - pub-sub
 ---

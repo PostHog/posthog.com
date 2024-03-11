@@ -4,7 +4,7 @@ title: What we learned about hiring from our first five employees
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/first-five.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
 tags:
   - Founders

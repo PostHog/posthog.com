@@ -12,8 +12,8 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const ImgAutocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-light.png"
-export const ImgAutocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-dark.png"
+export const ImgAutocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-light.png"
+export const ImgAutocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-dark.png"
 
 [Bubble](https://bubble.io/) is a popular no-code site builder that makes it easy to design a high-quality websites and apps. Combined with tools like [analytics](/product-analytics), [session replays](/session-replay), and [feature flags](/feature-flags), you can build the best site possible.
 

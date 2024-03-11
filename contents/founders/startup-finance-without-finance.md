@@ -4,7 +4,7 @@ title: How to run finance at your startup without hiring a finance person
 author:
   - charles-cook
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/equity.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/equity.png
 featuredImageType: full
 tags:
   - Founders

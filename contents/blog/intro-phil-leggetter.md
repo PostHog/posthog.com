@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - mo-shehu
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/intro-phil.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/intro-phil.png
 featuredImageType: full
 category: Inside PostHog
 ---

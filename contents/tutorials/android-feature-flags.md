@@ -8,10 +8,10 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-feature-flags/events-light.png"
-export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-feature-flags/events-dark.png"
-export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-feature-flags/create-flag-light.png"
-export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-feature-flags/create-flag-dark.png"
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in Android using PostHog. 
 

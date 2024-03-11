@@ -3,7 +3,7 @@ title: Variance
 github: 'https://github.com/PostHog/posthog-variance-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Variance'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/variance.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/variance.png
 tags:
   - variance-connector
 ---

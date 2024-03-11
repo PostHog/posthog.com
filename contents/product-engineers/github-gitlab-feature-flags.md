@@ -4,7 +4,7 @@ date: 2023-08-22
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gitlab-github-flags.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/gitlab-github-flags.jpeg
 featuredImageType: full
 tags:
   - Feature flags

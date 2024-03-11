@@ -4,7 +4,7 @@ title: PostHog's recommended reading for startup teams
 author:
   - joe-martin
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/super-hog-pink.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
   - Founders

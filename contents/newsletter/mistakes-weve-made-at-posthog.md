@@ -4,7 +4,7 @@ title: 6 mistakes we've made at PostHog (and what we learned)
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/newsletter-hog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/newsletter-hog.png
 featuredImageType: full
 tags:
   - Being a founder

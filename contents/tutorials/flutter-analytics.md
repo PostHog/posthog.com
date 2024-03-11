@@ -8,12 +8,12 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/events-light.png"
-export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/events-dark.png"
-export const IdentifyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/identify-light.png"
-export const IdentifyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/identify-dark.png"
-export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/create-insights-light.png"
-export const InsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-analytics/create-insights-dark.png"
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-analytics/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-analytics/events-dark.png"
+export const IdentifyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-analytics/identify-light.png"
+export const IdentifyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-analytics/identify-dark.png"
+export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-analytics/create-insights-light.png"
+export const InsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-analytics/create-insights-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Flutter app. To show you how to set up analytics, in this tutorial we create a basic Flutter app, add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 

@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - joe-martin
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-array-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
 category: Using PostHog
 tags:

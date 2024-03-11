@@ -4,7 +4,7 @@ title: Why we raised a $15m Series B ahead of schedule
 author:
   - joe-martin
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/series-b/series-b-baby.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/series-b/series-b-baby.png
 rootPage: /blog
 sidebar: Blog
 showTitle: true

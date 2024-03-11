@@ -4,7 +4,7 @@ layout: app
 github: 'https://github.com/PostHog/posthog-patterns-app'
 installUrl: 'https://app.posthog.com/project/apps?name=Patterns'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/patterns-logo.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/patterns-logo.svg
 tags:
   - patterns
 ---

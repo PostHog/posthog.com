@@ -3,7 +3,7 @@ title: Pineapple Mode
 github: 'https://github.com/PostHog/pineapple-mode-app'
 installUrl: 'https://app.posthog.com/project/apps?name=pineapple-mode'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/apps/thumbnails/pineapple-mode.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/apps/thumbnails/pineapple-mode.png
 tags:
   - pineapple-mode
 ---

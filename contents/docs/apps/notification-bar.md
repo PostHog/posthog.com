@@ -3,7 +3,7 @@ title: Notification Bar
 github: 'https://github.com/PostHog/notification-bar-app'
 installUrl: 'https://app.posthog.com/project/apps?name=Notification-bar'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/apps/thumbnails/notification-bar.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/apps/thumbnails/notification-bar.png
 topics:
   - notification-bar
 ---

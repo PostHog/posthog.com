@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - joe-martin
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/blog-generic-4.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/blog-generic-4.png
 featuredImageType: full
 category: Product growth
 tags:

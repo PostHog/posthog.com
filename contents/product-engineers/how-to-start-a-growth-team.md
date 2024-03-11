@@ -4,7 +4,7 @@ title: How to start a growth team (as an engineer)
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/athlete-hog.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/athlete-hog.jpeg
 featuredImageType: full
 tags:
   - Product metrics

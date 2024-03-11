@@ -2,11 +2,11 @@
 title: How 4DayWeek increased conversion by 4% with one A/B experiment
 customer: 4DayWeek
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/4dayweek/4dayweek-logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/4dayweek/4dayweek-logo-dark.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/4dayweek/4dayweek_featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek_featured.png
 industries:
   - Recruitment
 users:

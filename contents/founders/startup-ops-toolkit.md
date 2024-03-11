@@ -4,7 +4,7 @@ title: The ops toolkit for early-stage startups (2024 edition)
 author:
   - charles-cook
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-release-notes-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 tags:
   - Founders

@@ -4,7 +4,7 @@ title: Pragmatic startup lessons from Elon Musk
 author:
   - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon.jpg
 featuredImageType: full
 tags:
   - Being a founder

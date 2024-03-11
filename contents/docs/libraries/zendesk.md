@@ -3,7 +3,7 @@ title: Zendesk
 github: 'https://github.com/PostHog/posthog-zendesk-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=posthog-zendesk-plugin'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/zendesk.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/zendesk.svg
 tags:
   - zendesk-connector
 ---

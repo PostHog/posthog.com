@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - tim-glaser
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/k8s-sunset/posthog-bye-kubernetes.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/k8s-sunset/posthog-bye-kubernetes.png
 featuredImageType: full
 category: PostHog news
 tags:

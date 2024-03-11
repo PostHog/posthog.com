@@ -3,7 +3,7 @@ title: Event Sequence Timer
 github: 'https://github.com/PostHog/event-sequence-timer-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Event%20Sequence%20Timer%20Plugin'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/event-sequence-timer-plugin.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/event-sequence-timer-plugin.png
 tags:
   - event-timer
 ---

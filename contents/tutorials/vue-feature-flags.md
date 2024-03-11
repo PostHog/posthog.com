@@ -10,10 +10,10 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/events-light.png"
-export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/events-dark.png"
-export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/create-flag-light.png"
-export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/create-flag-dark.png"
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you release features and conditionally show content. This tutorial shows you how integrate them in your Vue.js app using PostHog. 
 

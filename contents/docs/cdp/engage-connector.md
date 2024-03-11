@@ -3,7 +3,7 @@ title: Engage
 github: 'https://github.com/PostHog/posthog-engage-so-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Engage'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/engage_logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/engage_logo.png
 tags:
   - engage
 ---

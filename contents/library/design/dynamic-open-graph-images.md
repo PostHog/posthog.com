@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - cory-watilo
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/library/design/https:/res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/actual-post-open-graph-image.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/library/design/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/actual-post-open-graph-image.png
 featuredImageType: full
 excerpt: >-
   The image preview you see when sharing a link is a great opportunity to get

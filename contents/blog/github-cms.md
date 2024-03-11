@@ -8,7 +8,7 @@ rootpage: /blog
 sidebar: Blog
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-blog-image.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 featuredVideo: 'https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y'
 category: Inside PostHog

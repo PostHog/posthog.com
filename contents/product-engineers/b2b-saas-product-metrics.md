@@ -2,7 +2,7 @@
 date: 2022-10-26
 title: The most useful B2B SaaS product metrics
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
 featuredImageType: full
 author:
   - andy-vandervell

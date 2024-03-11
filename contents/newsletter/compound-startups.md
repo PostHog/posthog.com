@@ -4,7 +4,7 @@ title: The conformist startup rule you can ignore
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/feature-images/working-out.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/working-out.png
 featuredImageType: full
 tags:
   - Founders

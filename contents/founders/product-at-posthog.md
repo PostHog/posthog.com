@@ -4,7 +4,7 @@ title: What's the true role of a product team at an engineering-led organization
 author:
   - paolodamico
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-at-posthog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-at-posthog.png
 featuredImageType: full
 tags:
   - Founders

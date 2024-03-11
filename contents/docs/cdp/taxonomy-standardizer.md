@@ -3,7 +3,7 @@ title: Taxonomy Standardizer
 installUrl: 'https://app.posthog.com/project/apps?name=Taxonomy+Plugin'
 github: 'https://github.com/PostHog/taxonomy-plugin'
 thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/taxonomy-standardizer.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/taxonomy-standardizer.png
 tags:
   - taxonomy-standardizer
 ---

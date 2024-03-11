@@ -4,7 +4,7 @@ title: Burning money on paid ads for a dev tool – what we've learned
 author:
   - charles-cook
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/transparency.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 tags:
   - Founders

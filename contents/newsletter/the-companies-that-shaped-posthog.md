@@ -4,7 +4,7 @@ date: 2023-12-20
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/big-buidler.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/the-companies-that-shaped-posthog/big-buidler.png
 featuredImageType: full
 tags:
   - Product engineers

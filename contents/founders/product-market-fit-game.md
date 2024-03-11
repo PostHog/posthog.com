@@ -4,7 +4,7 @@ title: The Product-Market Fit Game
 author:
   - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-guide.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/pmf-game-guide/pmf-guide.png
 featuredImageType: full
 tags:
   - Founders

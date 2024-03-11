@@ -4,7 +4,7 @@ date: 2023-06-13
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/happy-hog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
 tags:
   - Product engineers
