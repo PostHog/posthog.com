@@ -340,6 +340,7 @@ module.exports = {
                     `MdxFrontmatterImagesChildImageSharp`,
                     `MdxFrontmatterLogoChildImageSharp`,
                     `MdxFrontmatterLogoDarkChildImageSharp`,
+                    `MdxFrontmatterIconChildImageSharp`,
                 ],
             },
         },

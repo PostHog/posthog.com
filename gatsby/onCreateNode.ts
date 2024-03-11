@@ -77,6 +77,17 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 },
             }
         }
+        const icon = node.frontmatter?.icon
+        if (icon && icon.includes('res.cloudinary.com')) {
+            node.frontmatter.icon = {
+                publicURL: icon,
+                childImageSharp: {
+                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                    publicId: `posthog.com/contents${icon.split('posthog.com/contents')[1]}`,
+                    originalFormat: icon.split('.')[icon.split('.').length - 1],
+                },
+            }
+        }
         const images = node.frontmatter?.images
         if (images?.length > 0) {
             node.frontmatter.images = images.map((image) => {

@@ -1,6 +1,7 @@
 ---
 title: Sentry
-icon: ../../images/docs/integrate/frameworks/sentry.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/sentry.svg
 ---
 
 ## Why does this exist?

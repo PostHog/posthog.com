@@ -1,6 +1,7 @@
 ---
 title: WordPress
-icon: ../../images/docs/integrate/frameworks/wordpress.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/wordpress.svg
 ---
 
 Getting analytics about your [WordPress](https://www.wordpress.org/) site is simple with PostHog. Get data about traffic, usage, and user behavior with our free, open-source analytics platform. Once you have that data, you can discover insights and build dashboards with our suite of analytics tools.

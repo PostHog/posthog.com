@@ -1,6 +1,7 @@
 ---
 title: Shopify
-icon: ../../images/docs/integrate/frameworks/shopify.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/shopify.svg
 ---
 
 Tracking how users interact with your [Shopify](https://www.shopify.com/) store can help you improve the user experience and increase conversion rates.

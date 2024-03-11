@@ -3,15 +3,16 @@ title: Node.js
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-js-lite/tree/master/posthog-node
-icon: ../../../images/docs/integrate/nodejs.svg
+github: 'https://github.com/PostHog/posthog-js-lite/tree/master/posthog-node'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: false
-    sessionRecording: false
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.

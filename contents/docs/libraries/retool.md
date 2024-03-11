@@ -1,6 +1,7 @@
 ---
 title: Retool
-icon: ../../images/docs/integrate/frameworks/retool.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/retool.svg
 ---
 
 ## Objective
