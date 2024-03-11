@@ -10,7 +10,7 @@ for (const file of files) {
     const split = fm.content.split('\n')
     let edited = false
     split.forEach((str, index) => {
-        if (str.trim().startsWith('import') && str.includes(' from ')) {
+        if (str.trim().startsWith('import ') && str.includes(' from ')) {
             const importStr = str.split(' from ')[1].trim().replaceAll("'", '').replaceAll('"', '')
             const importVar = str.split(' ')[1].replace('{', '').replace('}', '')
             if (importStr.startsWith('.') || importStr.startsWith('/')) {

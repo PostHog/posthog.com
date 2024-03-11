@@ -76,16 +76,11 @@ module.exports = {
                     node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
-                    `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
                         resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
                     },
-                    {
-                        resolve: require.resolve('./plugins/gatsby-remark-video'),
-                    },
                 ],
-                plugins: [`gatsby-remark-static-images`],
             },
         },
         `gatsby-transformer-json`,
