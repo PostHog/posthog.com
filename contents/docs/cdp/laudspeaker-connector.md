@@ -1,10 +1,11 @@
 ---
 title: Laudspeaker
-github: https://github.com/PostHog/posthog-laudspeaker-app
-installUrl: https://app.posthog.com/project/apps?name=Laudspeaker
-thumbnail: ../../cdp/thumbnails/laudspeaker-connector.png
+github: 'https://github.com/PostHog/posthog-laudspeaker-app'
+installUrl: 'https://app.posthog.com/project/apps?name=Laudspeaker'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/laudspeaker-connector.png
 tags:
-    - laudspeaker-connector
+  - laudspeaker-connector
 ---
 
 Send event data from PostHog to Laudspeaker, so it can be used to trigger immediate or time-delayed customer communications across multiple channels, including Slack and email. 

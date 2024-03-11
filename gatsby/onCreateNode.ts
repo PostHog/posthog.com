@@ -44,6 +44,17 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 },
             }
         }
+        const thumbnail = node.frontmatter?.thumbnail
+        if (thumbnail && thumbnail.includes('res.cloudinary.com')) {
+            node.frontmatter.thumbnail = {
+                publicURL: thumbnail,
+                childImageSharp: {
+                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                    publicId: `posthog.com/contents${thumbnail.split('posthog.com/contents')[1]}`,
+                    originalFormat: thumbnail.split('.')[thumbnail.split('.').length - 1],
+                },
+            }
+        }
 
         const slug = createFilePath({ node, getNode, basePath: `pages` })
 

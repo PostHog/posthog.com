@@ -1,10 +1,11 @@
 ---
 title: Intercom
-github: https://github.com/posthog/posthog-intercom-plugin
-installUrl: https://app.posthog.com/project/apps?name=Intercom
-thumbnail: ../../cdp/thumbnails/intercom.png
+github: 'https://github.com/posthog/posthog-intercom-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Intercom'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/intercom.png
 tags:
-    - intercom
+  - intercom
 ---
 
 Send event data from PostHog to Intercom whenever an event matches a user who has been identified by their email address.

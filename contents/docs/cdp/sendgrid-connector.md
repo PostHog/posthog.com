@@ -1,10 +1,11 @@
 ---
 title: Sendgrid
-github: https://github.com/PostHog/sendgrid-plugin
-installUrl: https://app.posthog.com/project/apps?name=Sendgrid
-thumbnail: ../../cdp/thumbnails/sendgrid-connector.png
+github: 'https://github.com/PostHog/sendgrid-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Sendgrid'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/sendgrid-connector.png
 tags:
-    - sendgrid-connector
+  - sendgrid-connector
 ---
 
 Send event and emails data from PostHog into Sendgrid whenever a user is identified in PostHog.

@@ -1,10 +1,11 @@
 ---
 title: URL Normalizer
-github: https://github.com/PostHog/posthog-url-normalizer-plugin
-installUrl: https://app.posthog.com/project/apps?name=URL%20Normalizer
-thumbnail: ../../cdp/thumbnails/url_normalizer.png
+github: 'https://github.com/PostHog/posthog-url-normalizer-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=URL%20Normalizer'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/url_normalizer.png
 tags:
-    - url-normalizer
+  - url-normalizer
 ---
 
 This app normalizes the format of URLs so you can more easily compare them in insights.

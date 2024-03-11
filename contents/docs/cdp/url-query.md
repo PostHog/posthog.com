@@ -1,10 +1,11 @@
 ---
 title: URL query parameter converter
-github: https://github.com/PostHog/integrations-repository/pull/31
-installUrl: https://app.posthog.com/project/apps?name=url-query-parameter-converter
-thumbnail: ../../cdp/thumbnails/url-query.png
+github: 'https://github.com/PostHog/integrations-repository/pull/31'
+installUrl: 'https://app.posthog.com/project/apps?name=url-query-parameter-converter'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/url-query.png
 tags:
-    - url-query
+  - url-query
 ---
 
 This app automatically converts URL query parameters for specific terms into event properties in PostHog, enabling you to analyse them like any other data point. This can be useful for seeing how your product or content converts based on search terms. 

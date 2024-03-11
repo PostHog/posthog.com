@@ -1,10 +1,11 @@
 ---
 title: Hubspot
-github: https://github.com/PostHog/hubspot-plugin
-installUrl: https://app.posthog.com/project/apps?name=Hubspot
-thumbnail: ../../cdp/thumbnails/hubspot.svg
+github: 'https://github.com/PostHog/hubspot-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Hubspot'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/hubspot.svg
 tags:
-    - hubspot
+  - hubspot
 ---
 
 Send data from PostHog to Hubspot whenever an `$identify` event occurs. That is, whenever PostHog successfully identifies a user. This is useful for syncing customer information between both PostHog and Hubspot.

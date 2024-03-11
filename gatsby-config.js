@@ -336,6 +336,7 @@ module.exports = {
                     `SqueakRoadmapMedia`,
                     `SqueakTeamTeamImage`,
                     `MdxFrontmatterFeaturedImageChildImageSharp`,
+                    `MdxFrontmatterThumbnailChildImageSharp`,
                 ],
             },
         },

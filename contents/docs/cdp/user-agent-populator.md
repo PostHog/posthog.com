@@ -1,10 +1,11 @@
 ---
 title: User Agent Populator
-github: https://github.com/weyert/useragentplugin
-installUrl: https://app.posthog.com/project/apps?name=User%20Agent%20Populator
-thumbnail: ../../cdp/thumbnails/user-agent-enhancer.png
+github: 'https://github.com/weyert/useragentplugin'
+installUrl: 'https://app.posthog.com/project/apps?name=User%20Agent%20Populator'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/user-agent-enhancer.png
 tags:
-    - user-agent
+  - user-agent
 ---
 
 This app enhances incoming events by including browser & OS details from the `$useragent` property.

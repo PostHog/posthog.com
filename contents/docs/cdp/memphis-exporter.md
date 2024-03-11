@@ -1,9 +1,10 @@
 ---
 title: Memphis
-github: https://github.com/PostHog/posthog-memphisdev-app
-thumbnail: ../../cdp/thumbnails/memphis_logo.jpg
+github: 'https://github.com/PostHog/posthog-memphisdev-app'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/memphis_logo.jpg
 tags:
-    - memphis
+  - memphis
 ---
 
 > This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!

@@ -1,10 +1,11 @@
 ---
 title: Event Sequence Timer
-github: https://github.com/PostHog/event-sequence-timer-plugin
-installUrl: https://app.posthog.com/project/apps?name=Event%20Sequence%20Timer%20Plugin
-thumbnail: ../../cdp/thumbnails/event-sequence-timer-plugin.png
+github: 'https://github.com/PostHog/event-sequence-timer-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Event%20Sequence%20Timer%20Plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/event-sequence-timer-plugin.png
 tags:
-    - event-timer
+  - event-timer
 ---
 
 > 🚧 **Note:** We are currently in the process of reworking our app server and have therefore **disabled new installs of the event sequence timer.** You can still analyze the timing of event sequences using [HogQL](/docs/hogql).

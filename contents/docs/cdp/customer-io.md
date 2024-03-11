@@ -1,10 +1,11 @@
 ---
 title: Customer.io
-github: https://github.com/PostHog/customerio-plugin
-installUrl: https://app.posthog.com/project/apps?name=Customer
-thumbnail: ../../cdp/thumbnails/customerio-connector.png
+github: 'https://github.com/PostHog/customerio-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Customer'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/customerio-connector.png
 tags:
-    - customer.io-connector
+  - customer.io-connector
 ---
 
 Send event data from PostHog into Customer.io. User emails will also be sent if available and customers will be created in Customer.io.

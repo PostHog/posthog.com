@@ -1,10 +1,11 @@
 ---
 title: Schema Enforcer
-github: https://github.com/PostHog/schema-enforcer-plugin
-installUrl: https://app.posthog.com/project/apps?name=Schema%20Enforcer
-thumbnail: ../../cdp/thumbnails/schema-enforcer.png
+github: 'https://github.com/PostHog/schema-enforcer-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Schema%20Enforcer'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/schema-enforcer.png
 tags:
-    - schema-enforcer
+  - schema-enforcer
 ---
 
 The app enables you to enforce a schema on events in PostHog as they are ingested. It does this by preventing ingestion if the event:

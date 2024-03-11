@@ -1,10 +1,11 @@
 ---
 title: Timestamp Parser
-github: https://github.com/PostHog/timestamp-parser-plugin
-installUrl: https://app.posthog.com/project/apps?name=Timestamp%20Parser
-thumbnail: ../../cdp/thumbnails/timestamp-parser.png
+github: 'https://github.com/PostHog/timestamp-parser-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Timestamp%20Parser'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/timestamp-parser.png
 tags:
-    - timestamp-parser
+  - timestamp-parser
 ---
 
 This app parses the timestamp of each event that comes in to PostHog and adds the following time-based properties:

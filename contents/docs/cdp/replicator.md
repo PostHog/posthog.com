@@ -1,9 +1,10 @@
 ---
 title: Event Replicator
-github: https://github.com/posthog/posthog-plugin-replicator
-thumbnail: ../../cdp/thumbnails/replicator.png
+github: 'https://github.com/posthog/posthog-plugin-replicator'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/replicator.png
 tags:
-    - replicator
+  - replicator
 ---
 
 The Replicator app copies events from one PostHog instance to another, at the moment they are ingested. No changes are made to the events by this app if it runs in isolation.

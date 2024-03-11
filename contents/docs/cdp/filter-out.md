@@ -1,10 +1,11 @@
 ---
 title: Filter Out
-github: https://github.com/PostHog/posthog-filter-out-plugin
-installUrl: https://app.posthog.com/project/apps?name=Filter%Out%20Plugin
-thumbnail: ../../cdp/thumbnails/filter-out.png
+github: 'https://github.com/PostHog/posthog-filter-out-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Filter%Out%20Plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/filter-out.png
 tags:
-    - filter-out
+  - filter-out
 ---
 
 This app enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 

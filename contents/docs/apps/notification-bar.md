@@ -1,10 +1,11 @@
 ---
 title: Notification Bar
-github: https://github.com/PostHog/notification-bar-app
-installUrl: https://app.posthog.com/project/apps?name=Notification-bar
-thumbnail: ../../apps/thumbnails/notification-bar.png
+github: 'https://github.com/PostHog/notification-bar-app'
+installUrl: 'https://app.posthog.com/project/apps?name=Notification-bar'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/apps/thumbnails/notification-bar.png
 topics:
-    - notification-bar
+  - notification-bar
 ---
 
 The Notification Bar app is a site app which enables you to display a customised banner on your site to notify users about events such as product releases, sales, and events. 

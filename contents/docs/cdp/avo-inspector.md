@@ -1,9 +1,10 @@
 ---
 title: Avo
-github: https://github.com/PostHog/posthog-avo-plugin
-thumbnail: ../../cdp/thumbnails/avo-logo.png
+github: 'https://github.com/PostHog/posthog-avo-plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/cdp/thumbnails/avo-logo.png
 tags:
-    - avo
+  - avo
 ---
 
 [Avo](https://www.avo.app/) is a data governance platform which helps teams plan, implement and verify analytics at any scale. The Avo Inspector sends event schema - but not events themselves - to Avo. This enables you to, for example, avoid losing data or events due to naming issues in your analytics. 
