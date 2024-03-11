@@ -18,6 +18,10 @@ export const quickLinks = [
         url: '/docs/libraries/astro',
     },
     {
+        name: 'Bubble',
+        url: '/docs/libraries/bubble',
+    },
+    {
         name: 'Django',
         to: '/tutorials/django-analytics',
     },

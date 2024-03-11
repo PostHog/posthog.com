@@ -1142,6 +1142,10 @@ export const docsMenu = {
                             url: '/docs/libraries/astro',
                         },
                         {
+                            name: 'Bubble',
+                            url: '/docs/libraries/bubble',
+                        },
+                        {
                             name: 'Django',
                             url: '/tutorials/django-analytics',
                         },

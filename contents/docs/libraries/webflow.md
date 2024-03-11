@@ -22,7 +22,7 @@ With the snippet copied, go to your Webflow site settings by clicking on the men
 
 Go to the "Custom code" tab in site settings. In the "Head code" section, paste your PostHog snippet and press "Save". Then, publish your site.
 
-![How to add PostHog to Webflow](../images/tutorials/webflow-surveys/add-posthog-to-webflow.mp4)
+![How to add PostHog to Webflow](./images/add-posthog-to-webflow.mp4)
 
 ## Next steps
 

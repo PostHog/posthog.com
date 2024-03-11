@@ -116,6 +116,7 @@ const query = graphql`
                         in: [
                             "/docs/libraries/angular"
                             "/docs/libraries/astro"
+                            "/docs/libraries/bubble"
                             "/docs/libraries/docusaurus"
                             "/docs/libraries/framer"
                             "/docs/libraries/gatsby"
