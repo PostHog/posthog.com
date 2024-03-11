@@ -277,7 +277,7 @@ For example, in the image below we set our insight to show number of unique user
 
 <ProductScreenshot
   imageLight={InsightLight} 
-  imageDark={InsightDark} 
+  imageDark={InsightsDark} 
   alt="Insight created in PostHog" 
   classes="rounded"
 />

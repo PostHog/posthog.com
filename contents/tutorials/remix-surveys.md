@@ -91,8 +91,8 @@ startTransition(() => {
 Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight={EventsInPostHogLight} 
-  imageDark={EventsInPostHogDark} 
+  imageLight={EventsLight} 
+  imageDark={EventsDark} 
   alt="Events captured in PostHog" 
   classes="rounded"
 />
