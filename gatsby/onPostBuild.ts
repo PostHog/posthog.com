@@ -314,7 +314,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                             name
                             role
                             image {
-                                publicURL
+                                absolutePath
                             }
                         }
                     }
