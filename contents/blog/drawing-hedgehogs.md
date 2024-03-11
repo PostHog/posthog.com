@@ -1,5 +1,5 @@
 ---
-date: 2021-10-07T00:00:00.000Z
+date: 2021-10-07
 title: How we designed the PostHog mascot
 rootPage: /blog
 sidebar: Blog

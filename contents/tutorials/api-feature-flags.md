@@ -1,6 +1,6 @@
 ---
 title: How to evaluate and update feature flags with the PostHog API
-date: 2023-02-13T00:00:00.000Z
+date: 2023-02-13
 author:
   - ian-vanagas
 showTitle: true

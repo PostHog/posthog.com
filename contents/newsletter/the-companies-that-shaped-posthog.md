@@ -1,6 +1,6 @@
 ---
 title: The companies that shaped PostHog
-date: 2023-12-20T00:00:00.000Z
+date: 2023-12-20
 author:
   - ian-vanagas
 featuredImage: >-

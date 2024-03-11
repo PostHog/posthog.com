@@ -1,5 +1,5 @@
 ---
-date: 2023-07-13T00:00:00.000Z
+date: 2023-07-13
 title: A software engineer's guide to A/B testing
 author:
   - lior-neu-ner

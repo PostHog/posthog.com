@@ -1,6 +1,6 @@
 ---
 title: How to calculate time on page
-date: 2023-08-01T00:00:00.000Z
+date: 2023-08-01
 author:
   - ian-vanagas
 showTitle: true

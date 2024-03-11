@@ -1,6 +1,6 @@
 ---
 title: How to uncover your users' real problems
-date: 2023-09-27T00:00:00.000Z
+date: 2023-09-27
 author:
   - ian-vanagas
 featuredImage: >-

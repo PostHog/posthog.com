@@ -23,7 +23,7 @@ toolsUsed:
   - Cohorts
   - PostHog Cloud
   - Insights
-date: 2023-09-03T00:00:00.000Z
+date: 2023-09-03
 ---
 
 When Brian Douglas left his role as GitHub’s Director of Developer Advocacy in 2022, he knew he wanted to build a platform that would help engineers find and track their open source contributions. He called it [OpenSauced.pizza](https://opensauced.pizza/) and he’d been working on the idea for years in his spare time. 

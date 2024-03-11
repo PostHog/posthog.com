@@ -1,5 +1,5 @@
 ---
-date: 2022-06-30T00:00:00.000Z
+date: 2022-06-30
 title: The magic of a Hacker News Pre-Mortem
 author:
   - james-hawkins

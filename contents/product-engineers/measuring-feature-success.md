@@ -1,6 +1,6 @@
 ---
 title: How we build features users love (really fast)
-date: 2023-05-10T00:00:00.000Z
+date: 2023-05-10
 author:
   - ian-vanagas
 featuredImage: >-

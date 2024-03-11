@@ -16,7 +16,7 @@ toolsUsed:
   - Experimentation
   - Plugins
   - Apps
-date: 2022-03-07T00:00:00.000Z
+date: 2022-03-07
 ---
 
 Since launching in 2008, [Vendasta](https://www.vendasta.com/) has become the world’s leading end-to-end platform for channel partners selling digital solutions to small- and medium-sized businesses. Its 600+ staff now support more than 60,000 channel partners, who use the software to sell to over 5.5 million businesses, franchises, and brands globally.

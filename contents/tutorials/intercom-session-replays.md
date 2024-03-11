@@ -1,6 +1,6 @@
 ---
 title: How to add session replays to Intercom
-date: 2024-02-13T00:00:00.000Z
+date: 2024-02-13
 author:
   - ian-vanagas
 tags:

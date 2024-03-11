@@ -1,6 +1,6 @@
 ---
 title: How to use Next.js middleware to bootstrap feature flags
-date: 2023-07-04T00:00:00.000Z
+date: 2023-07-04
 author:
   - ian-vanagas
 showTitle: true

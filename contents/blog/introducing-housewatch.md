@@ -1,5 +1,5 @@
 ---
-date: 2023-06-12T00:00:00.000Z
+date: 2023-06-12
 title: 'Introducing HouseWatch: An open-source toolkit for ClickHouse'
 rootPage: /blog
 sidebar: Blog

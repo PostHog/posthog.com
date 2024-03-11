@@ -1,5 +1,5 @@
 ---
-date: 2022-11-21T00:00:00.000Z
+date: 2022-11-21
 title: How PostHog built an app server (from MVP to billions of events)
 rootPage: /blog
 sidebar: Blog

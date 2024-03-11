@@ -1,6 +1,6 @@
 ---
 title: 'How to set up customer-facing analytics with PostHog, Next.js, and Tremor'
-date: 2023-04-04T00:00:00.000Z
+date: 2023-04-04
 author:
   - ian-vanagas
 showTitle: true

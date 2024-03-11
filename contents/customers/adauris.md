@@ -20,7 +20,7 @@ toolsUsed:
   - Session Replay
   - PostHog Cloud
   - Insights
-date: 2023-11-05T00:00:00.000Z
+date: 2023-11-05
 ---
 
 [Adauris](https://www.adauris.ai/) is an audio AI company offering end-to-end generative audio production for some of the largest digital media companies in the world, including Dezeen and The Stanford Daily. Every day, dozens of globally recognized brands use Adauris’ platform to repurpose written content and expand their distribution. 

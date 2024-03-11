@@ -1,6 +1,6 @@
 ---
 title: How to safely test in production (and why you should)
-date: 2023-12-07T00:00:00.000Z
+date: 2023-12-07
 author:
   - ian-vanagas
 featuredImage: >-

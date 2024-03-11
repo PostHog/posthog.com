@@ -1,6 +1,6 @@
 ---
 title: How to show a survey after a delay
-date: 2023-11-08T00:00:00.000Z
+date: 2023-11-08
 author:
   - ian-vanagas
 showTitle: true

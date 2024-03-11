@@ -1,5 +1,5 @@
 ---
-date: 2022-09-26T00:00:00.000Z
+date: 2022-09-26
 title: 'Array 1.40.0: Interface improvements and more!'
 rootPage: /blog
 sidebar: Blog

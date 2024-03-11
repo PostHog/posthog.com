@@ -1,6 +1,6 @@
 ---
 title: How to set up feature flags in iOS
-date: 2024-02-20T00:00:00.000Z
+date: 2024-02-20
 author:
   - lior-neu-ner
 tags:

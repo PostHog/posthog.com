@@ -1,6 +1,6 @@
 ---
 title: How to create a broken link (404) checker
-date: 2023-06-01T00:00:00.000Z
+date: 2023-06-01
 author:
   - ian-vanagas
 showTitle: true

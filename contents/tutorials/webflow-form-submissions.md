@@ -1,6 +1,6 @@
 ---
 title: How to capture Webflow form submissions
-date: 2023-06-22T00:00:00.000Z
+date: 2023-06-22
 author:
   - ian-vanagas
 showTitle: true

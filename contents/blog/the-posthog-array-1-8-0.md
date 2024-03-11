@@ -1,5 +1,5 @@
 ---
-date: 2020-06-03T00:00:00.000Z
+date: 2020-06-03
 title: Array 1.8.0
 rootPage: /blog
 sidebar: Blog

@@ -7,7 +7,7 @@ author:
 tags:
   - apps
   - cdp
-date: 2022-07-01T00:00:00.000Z
+date: 2022-07-01
 ---
 
 _Estimated reading time: 6 minutes_ ☕☕

@@ -1,5 +1,5 @@
 ---
-date: 2023-06-08T00:00:00.000Z
+date: 2023-06-08
 title: What we've learned about product-market fit
 author:
   - andy-vandervell

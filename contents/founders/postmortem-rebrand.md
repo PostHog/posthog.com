@@ -1,5 +1,5 @@
 ---
-date: 2021-09-28T00:00:00.000Z
+date: 2021-09-28
 title: How we rebranded PostHog in four weeks - a postmortem
 author:
   - cory-watilo

@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Angular analytics, feature flags, and more'
-date: 2023-10-17T00:00:00.000Z
+date: 2023-10-17
 author:
   - ian-vanagas
 showTitle: true

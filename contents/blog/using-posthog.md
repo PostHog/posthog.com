@@ -1,5 +1,5 @@
 ---
-date: 2022-07-20T00:00:00.000Z
+date: 2022-07-20
 title: 22 ways PostHog makes it easier to build great products
 rootPage: /blog
 sidebar: Blog

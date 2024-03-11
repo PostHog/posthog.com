@@ -1,6 +1,6 @@
 ---
 title: How to calculate DAU/MAU ratio
-date: 2023-05-29T00:00:00.000Z
+date: 2023-05-29
 author:
   - ian-vanagas
 showTitle: true

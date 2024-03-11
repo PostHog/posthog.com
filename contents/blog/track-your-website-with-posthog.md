@@ -1,5 +1,5 @@
 ---
-date: 2022-10-10T00:00:00.000Z
+date: 2022-10-10
 title: How (and why) to track your website with PostHog
 rootPage: /blog
 sidebar: Blog

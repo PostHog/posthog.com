@@ -1,6 +1,6 @@
 ---
 title: How to track new and returning users in PostHog
-date: 2023-04-26T00:00:00.000Z
+date: 2023-04-26
 author:
   - ian-vanagas
 showTitle: true

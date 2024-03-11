@@ -1,5 +1,5 @@
 ---
-date: 2022-10-06T00:00:00.000Z
+date: 2022-10-06
 title: All the cool things we built at our Rome hackathon
 rootPage: /blog
 sidebar: Blog

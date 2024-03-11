@@ -1,5 +1,5 @@
 ---
-date: 2023-09-07T00:00:00.000Z
+date: 2023-09-07
 title: Everything we've learned about hiring for startups (so far)
 author:
   - andy-vandervell

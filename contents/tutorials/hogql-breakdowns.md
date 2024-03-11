@@ -1,6 +1,6 @@
 ---
 title: Using HogQL for advanced breakdowns
-date: 2023-05-16T00:00:00.000Z
+date: 2023-05-16
 author:
   - ian-vanagas
 showTitle: true

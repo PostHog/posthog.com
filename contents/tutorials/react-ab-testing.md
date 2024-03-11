@@ -1,6 +1,6 @@
 ---
 title: How to set up React A/B testing
-date: 2023-09-18T00:00:00.000Z
+date: 2023-09-18
 author:
   - ian-vanagas
 showTitle: true

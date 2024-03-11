@@ -1,6 +1,6 @@
 ---
 title: Using the PostHog API to capture events
-date: 2023-02-09T00:00:00.000Z
+date: 2023-02-09
 author:
   - ian-vanagas
 showTitle: true

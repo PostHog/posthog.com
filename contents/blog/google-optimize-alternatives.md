@@ -1,5 +1,5 @@
 ---
-date: 2023-01-23T00:00:00.000Z
+date: 2023-01-23
 title: The best Google Optimize alternatives for apps and websites
 rootPage: /blog
 sidebar: Blog

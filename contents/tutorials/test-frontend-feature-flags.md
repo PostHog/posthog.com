@@ -1,6 +1,6 @@
 ---
 title: 'Testing frontend feature flags with React, Jest, and PostHog'
-date: 2023-03-16T00:00:00.000Z
+date: 2023-03-16
 author:
   - ian-vanagas
 showTitle: true

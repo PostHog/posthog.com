@@ -1,5 +1,5 @@
 ---
-date: 2023-03-06T00:00:00.000Z
+date: 2023-03-06
 title: 10x engineers talk to users
 author:
   - luke-harries

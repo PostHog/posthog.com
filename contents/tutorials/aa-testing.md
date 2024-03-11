@@ -1,6 +1,6 @@
 ---
 title: How to do A/A testing
-date: 2023-07-07T00:00:00.000Z
+date: 2023-07-07
 author:
   - ian-vanagas
 showTitle: true

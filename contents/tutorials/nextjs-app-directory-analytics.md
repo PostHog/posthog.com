@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Next.js app router analytics, feature flags, and more'
-date: 2023-04-05T00:00:00.000Z
+date: 2023-04-05
 author:
   - ian-vanagas
 showTitle: true

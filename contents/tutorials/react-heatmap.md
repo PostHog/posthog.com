@@ -1,6 +1,6 @@
 ---
 title: How to set up a React app heatmap with PostHog
-date: 2023-03-07T00:00:00.000Z
+date: 2023-03-07
 author:
   - ian-vanagas
 showTitle: true

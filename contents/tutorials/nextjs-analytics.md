@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Next.js analytics, feature flags, and more'
-date: 2023-02-20T00:00:00.000Z
+date: 2023-02-20
 author:
   - ian-vanagas
 showTitle: true

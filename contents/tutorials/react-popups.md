@@ -1,6 +1,6 @@
 ---
 title: How to add popups to your React app with feature flags
-date: 2023-03-20T00:00:00.000Z
+date: 2023-03-20
 author:
   - ian-vanagas
 showTitle: true

@@ -1,5 +1,5 @@
 ---
-date: 2021-12-16T00:00:00.000Z
+date: 2021-12-16
 title: Group Analytics is now available in PostHog
 rootPage: /blog
 sidebar: Blog

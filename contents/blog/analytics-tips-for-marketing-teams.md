@@ -1,5 +1,5 @@
 ---
-date: 2022-10-10T00:00:00.000Z
+date: 2022-10-10
 title: 5 analytics ideas for marketing teams using PostHog
 rootPage: /blog
 sidebar: Blog

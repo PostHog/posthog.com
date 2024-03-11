@@ -1,5 +1,5 @@
 ---
-date: 2023-04-28T00:00:00.000Z
+date: 2023-04-28
 title: When and how to run group-targeted A/B tests
 author:
   - lior-neu-ner

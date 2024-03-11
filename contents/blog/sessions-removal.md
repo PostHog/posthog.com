@@ -1,5 +1,5 @@
 ---
-date: 2021-10-11T00:00:00.000Z
+date: 2021-10-11
 title: Why we're removing the sessions page
 rootPage: /blog
 sidebar: Blog

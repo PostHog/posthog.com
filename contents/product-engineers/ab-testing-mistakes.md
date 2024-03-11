@@ -1,5 +1,5 @@
 ---
-date: 2023-05-02T00:00:00.000Z
+date: 2023-05-02
 title: 8 annoying A/B testing mistakes every engineer should know
 author:
   - lior-neu-ner

@@ -1,6 +1,6 @@
 ---
 title: Get feedback and book user interviews with surveys
-date: 2023-07-11T00:00:00.000Z
+date: 2023-07-11
 author:
   - ian-vanagas
 showTitle: true

@@ -1,5 +1,5 @@
 ---
-date: 2023-05-17T00:00:00.000Z
+date: 2023-05-17
 title: 'VC is a tool, not a religion'
 author:
   - james-hawkins

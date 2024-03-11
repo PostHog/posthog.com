@@ -1,6 +1,6 @@
 ---
 title: Why you should decouple deployment from release (and how)
-date: 2023-09-18T00:00:00.000Z
+date: 2023-09-18
 author:
   - ian-vanagas
 featuredImage: >-

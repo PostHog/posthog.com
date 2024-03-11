@@ -1,5 +1,5 @@
 ---
-date: 2022-08-16T00:00:00.000Z
+date: 2022-08-16
 title: What we learned about hiring from our first five employees
 author:
   - andy-vandervell

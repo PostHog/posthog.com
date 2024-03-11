@@ -1,5 +1,5 @@
 ---
-date: 2022-11-14T00:00:00.000Z
+date: 2022-11-14
 title: How we found our Ideal Customer Profile
 author:
   - james-hawkins

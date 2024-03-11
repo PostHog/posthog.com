@@ -1,5 +1,5 @@
 ---
-date: 2022-03-21T00:00:00.000Z
+date: 2022-03-21
 title: Introducing Data Management for PostHog
 rootPage: /blog
 sidebar: Blog

@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in React Native (Expo)
-date: 2024-03-01T00:00:00.000Z
+date: 2024-03-01
 author:
   - lior-neu-ner
 tags:

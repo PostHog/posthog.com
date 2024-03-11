@@ -1,5 +1,5 @@
 ---
-date: 2020-08-18T00:00:00.000Z
+date: 2020-08-18
 title: Why you may not need a sales team
 author:
   - james-hawkins

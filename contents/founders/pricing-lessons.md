@@ -1,5 +1,5 @@
 ---
-date: 2022-03-17T00:00:00.000Z
+date: 2022-03-17
 title: Counterintuitive lessons about our pricing
 author:
   - james-hawkins

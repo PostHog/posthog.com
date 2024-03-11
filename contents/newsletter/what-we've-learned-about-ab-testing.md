@@ -1,5 +1,5 @@
 ---
-date: 2023-08-24T00:00:00.000Z
+date: 2023-08-24
 title: 10 things we've learned about A/B testing for startups
 author:
   - ian-vanagas

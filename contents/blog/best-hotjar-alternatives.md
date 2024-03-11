@@ -1,6 +1,6 @@
 ---
 title: 'The best Hotjar alternatives & competitors, compared'
-date: 2024-03-04T00:00:00.000Z
+date: 2024-03-04
 author:
   - andy-vandervell
 rootpage: /blog

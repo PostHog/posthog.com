@@ -1,6 +1,6 @@
 ---
 title: How to set up one-time feature flags
-date: 2023-05-12T00:00:00.000Z
+date: 2023-05-12
 author:
   - ian-vanagas
 showTitle: true

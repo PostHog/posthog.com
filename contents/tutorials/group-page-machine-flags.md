@@ -1,6 +1,6 @@
 ---
 title: 'Targeting feature flags on groups, pages, machines, and more'
-date: 2023-08-14T00:00:00.000Z
+date: 2023-08-14
 author:
   - ian-vanagas
 showTitle: true

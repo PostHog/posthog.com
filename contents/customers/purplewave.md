@@ -13,7 +13,7 @@ users:
   - Product
 toolsUsed:
   - Surveys
-date: 2023-09-15T00:00:00.000Z
+date: 2023-09-15
 ---
 
 [Purple Wave](https://www.purplewave.com/) is the world’s leading two-way marketplace for heavy duty equipment, such as construction and agriculture fleets. The team of 220+ people maintains a platform trusted by millions of annual visitors, with more than 150 fleet-scale auctions each year. 

@@ -1,5 +1,5 @@
 ---
-date: 2023-09-08T00:00:00.000Z
+date: 2023-09-08
 title: How we made feature flags faster and more reliable
 rootPage: /blog
 sidebar: Blog

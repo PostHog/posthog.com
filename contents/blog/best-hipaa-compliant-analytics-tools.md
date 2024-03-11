@@ -1,5 +1,5 @@
 ---
-date: 2024-03-04T00:00:00.000Z
+date: 2024-03-04
 title: The 7 best HIPAA-compliant analytics tools
 rootPage: /blog
 sidebar: Blog

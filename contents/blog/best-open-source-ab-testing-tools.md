@@ -1,5 +1,5 @@
 ---
-date: 2023-03-16T00:00:00.000Z
+date: 2023-03-16
 title: The 6 best free and open-source A/B testing tools
 rootPage: /blog
 sidebar: Blog

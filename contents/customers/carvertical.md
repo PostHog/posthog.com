@@ -16,7 +16,7 @@ users:
 toolsUsed:
   - Feature flags
   - Product analytics
-date: 2023-12-01T00:00:00.000Z
+date: 2023-12-01
 ---
 
 [carVertical](https://www.carvertical.com/) is the world’s leading automotive data company that builds vehicle history reports from accumulated data. If you’re looking to buy a used car these reports can help you understand the specific history of a particular vehicle, as well as help you to understand more about the overall model.

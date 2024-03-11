@@ -17,7 +17,7 @@ toolsUsed:
   - Experimentation
   - Cloud-hosted
   - Insights
-date: 2022-03-23T00:00:00.000Z
+date: 2022-03-23
 ---
 
 [AssemblyAI](https://www.assemblyai.com/?utm_source=posthog&utm_campaign=case_study) is an API platform which provides powerful AI models to transcribe and understand speech. As a young company in the cutting-edge field of AI modeling, AssemblyAI requires teams to wear many hats and move fast, making immediate access to reliable data for decision-making a must.

@@ -1,5 +1,5 @@
 ---
-date: 2023-01-11T00:00:00.000Z
+date: 2023-01-11
 title: 'CEO diary: The things I learned in 2022'
 rootPage: /blog
 sidebar: Blog

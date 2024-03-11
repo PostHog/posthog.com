@@ -1,5 +1,5 @@
 ---
-date: 2021-11-16T00:00:00.000Z
+date: 2021-11-16
 title: The state of plugins on PostHog
 rootPage: /blog
 sidebar: Blog

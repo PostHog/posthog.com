@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Vue
-date: 2023-12-11T00:00:00.000Z
+date: 2023-12-11
 author:
   - lior-neu-ner
 tags:

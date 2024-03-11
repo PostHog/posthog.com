@@ -1,5 +1,5 @@
 ---
-date: 2023-06-29T00:00:00.000Z
+date: 2023-06-29
 title: 6 mistakes we've made at PostHog (and what we learned)
 author:
   - andy-vandervell

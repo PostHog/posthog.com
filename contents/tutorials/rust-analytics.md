@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in Rust
-date: 2024-02-27T00:00:00.000Z
+date: 2024-02-27
 author:
   - lior-neu-ner
 tags:

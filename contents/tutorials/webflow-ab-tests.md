@@ -1,6 +1,6 @@
 ---
 title: How to run A/B tests in Webflow
-date: 2023-01-26T00:00:00.000Z
+date: 2023-01-26
 author:
   - ian-vanagas
 showTitle: true

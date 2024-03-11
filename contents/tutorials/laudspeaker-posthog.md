@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author:
   - laudspeaker
-date: 2023-01-26T00:00:00.000Z
+date: 2023-01-26
 tags:
   - apps
   - site-apps

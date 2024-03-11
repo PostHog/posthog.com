@@ -1,5 +1,5 @@
 ---
-date: 2023-02-13T00:00:00.000Z
+date: 2023-02-13
 title: 'HogMail #21: Avoiding the "Product Death Cycle"'
 rootPage: /blog
 sidebar: Blog

@@ -1,6 +1,6 @@
 ---
 title: Defining our ICP is the most important thing we ever did
-date: 2024-01-25T00:00:00.000Z
+date: 2024-01-25
 author:
   - andy-vandervell
 featuredImage: >-

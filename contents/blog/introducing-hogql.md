@@ -1,5 +1,5 @@
 ---
-date: 2023-06-08T00:00:00.000Z
+date: 2023-06-08
 title: 'Introducing HogQL: Direct SQL access for PostHog'
 rootPage: /blog
 sidebar: Blog

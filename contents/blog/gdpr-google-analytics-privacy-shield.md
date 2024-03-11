@@ -1,5 +1,5 @@
 ---
-date: 2022-01-25T00:00:00.000Z
+date: 2022-01-25
 title: A new 'Privacy Shield' won't solve big tech's GDPR problem
 rootPage: /blog
 sidebar: Blog

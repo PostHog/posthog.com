@@ -19,7 +19,7 @@ toolsUsed:
   - Autocapture
   - PostHog Cloud
   - API
-date: 2023-04-06T00:00:00.000Z
+date: 2023-04-06
 ---
 
 Mintlify is startup powering product and technical documentation for the teams at [Y Combinator](/customers/ycombinator), Explo, MindsDB and others. It helps teams with rapidly evolving products to create rich, well structured docs which convert users and empower colleagues. 

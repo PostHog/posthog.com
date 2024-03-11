@@ -1,6 +1,6 @@
 ---
 title: How to set up feature flags in Go
-date: 2023-09-27T00:00:00.000Z
+date: 2023-09-27
 author:
   - ian-vanagas
 showTitle: true

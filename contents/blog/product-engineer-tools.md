@@ -1,5 +1,5 @@
 ---
-date: 2022-12-23T00:00:00.000Z
+date: 2022-12-23
 title: The essential tools used by product engineers
 rootPage: /blog
 sidebar: Blog

@@ -1,6 +1,6 @@
 ---
 title: How to run A/B tests in Bubble
-date: 2024-01-11T00:00:00.000Z
+date: 2024-01-11
 author:
   - lior-neu-ner
 showTitle: true

@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Astro analytics, feature flags, and more'
-date: 2023-11-28T00:00:00.000Z
+date: 2023-11-28
 author:
   - ian-vanagas
 tags:

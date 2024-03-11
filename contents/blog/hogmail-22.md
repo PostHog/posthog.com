@@ -1,5 +1,5 @@
 ---
-date: 2023-02-22T00:00:00.000Z
+date: 2023-02-22
 title: 'HogMail #22: Why do companies over-hire?"'
 rootPage: /blog
 sidebar: Blog

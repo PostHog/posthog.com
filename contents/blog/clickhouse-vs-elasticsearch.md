@@ -1,5 +1,5 @@
 ---
-date: 2023-03-20T00:00:00.000Z
+date: 2023-03-20
 title: 'In-depth: ClickHouse vs Elasticsearch'
 rootPage: /blog
 sidebar: Blog

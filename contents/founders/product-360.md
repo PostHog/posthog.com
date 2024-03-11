@@ -1,5 +1,5 @@
 ---
-date: 2022-02-18T00:00:00.000Z
+date: 2022-02-18
 title: I used to think you don't need product people. I was wrong.
 author:
   - james-hawkins

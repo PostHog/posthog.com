@@ -1,5 +1,5 @@
 ---
-date: 2023-03-16T00:00:00.000Z
+date: 2023-03-16
 title: Open source (and self-hosted) alternatives to Hotjar & FullStory
 rootPage: /blog
 sidebar: Blog

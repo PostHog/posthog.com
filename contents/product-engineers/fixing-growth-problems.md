@@ -1,6 +1,6 @@
 ---
 title: The most common growth team failure modes (and how to fix them)
-date: 2023-10-17T00:00:00.000Z
+date: 2023-10-17
 author:
   - lior-neu-ner
 featuredImage: >-

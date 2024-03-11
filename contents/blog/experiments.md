@@ -1,5 +1,5 @@
 ---
-date: 2022-03-23T00:00:00.000Z
+date: 2022-03-23
 title: What launching Experimentation taught us about running effective A/B tests
 rootPage: /blog
 sidebar: Blog

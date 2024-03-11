@@ -1,5 +1,5 @@
 ---
-date: 2023-04-27T00:00:00.000Z
+date: 2023-04-27
 title: 10 things we've learned about pricing for SaaS startups
 author:
   - andy-vandervell

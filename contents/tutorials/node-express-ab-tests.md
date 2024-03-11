@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Node.js (Express)
-date: 2024-02-02T00:00:00.000Z
+date: 2024-02-02
 author:
   - lior-neu-ner
 tags:

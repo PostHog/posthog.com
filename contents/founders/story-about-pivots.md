@@ -1,5 +1,5 @@
 ---
-date: 2021-01-21T00:00:00.000Z
+date: 2021-01-21
 title: A story about pivots
 author:
   - james-hawkins

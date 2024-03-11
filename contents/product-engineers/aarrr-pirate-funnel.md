@@ -1,5 +1,5 @@
 ---
-date: 2023-05-09T00:00:00.000Z
+date: 2023-05-09
 title: 'In-depth: The AARRR pirate funnel explained'
 author:
   - andy-vandervell

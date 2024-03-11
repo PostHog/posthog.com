@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Flutter
-date: 2024-03-05T00:00:00.000Z
+date: 2024-03-05
 author:
   - lior-neu-ner
 tags:

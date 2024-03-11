@@ -1,6 +1,6 @@
 ---
 title: How to do redirect testing
-date: 2023-11-01T00:00:00.000Z
+date: 2023-11-01
 author:
   - ian-vanagas
 showTitle: true

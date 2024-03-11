@@ -1,6 +1,6 @@
 ---
 title: How YC's biggest startups run A/B tests (with examples)
-date: 2023-07-28T00:00:00.000Z
+date: 2023-07-28
 author:
   - ian-vanagas
 featuredImage: >-

@@ -17,7 +17,7 @@ toolsUsed:
   - Data warehouse
   - Cloud-hosted
   - Feature flags
-date: 2021-12-01T00:00:00.000Z
+date: 2021-12-01
 ---
 
 [Phantom](https://phantom.app/) is a crypto wallet which makes it easy to store, send, receive, stake and swap Solana through a friendly Chrome extension. Since launching in 2021 Phantom has used PostHog as part of its long-term vision for leveraging data within the product. 

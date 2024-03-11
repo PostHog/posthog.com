@@ -1,5 +1,5 @@
 ---
-date: 2021-08-25T00:00:00.000Z
+date: 2021-08-25
 title: Winning from the back - late mover advantage
 rootPage: /blog
 sidebar: Blog

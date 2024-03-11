@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in React
-date: 2024-01-31T00:00:00.000Z
+date: 2024-01-31
 author:
   - lior-neu-ner
 tags:

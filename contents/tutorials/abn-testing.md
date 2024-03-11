@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B/n testing
-date: 2023-08-21T00:00:00.000Z
+date: 2023-08-21
 author:
   - ian-vanagas
 showTitle: true

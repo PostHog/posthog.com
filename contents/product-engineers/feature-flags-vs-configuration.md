@@ -1,6 +1,6 @@
 ---
 title: 'Feature flags vs configuration: Which should you choose?'
-date: 2023-06-30T00:00:00.000Z
+date: 2023-06-30
 author:
   - ian-vanagas
 featuredImage: >-

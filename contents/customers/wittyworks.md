@@ -16,7 +16,7 @@ users:
 toolsUsed:
   - Dashboards
   - Apps
-date: 2022-03-15T00:00:00.000Z
+date: 2022-03-15
 ---
 
 [Witty Works](https://www.witty.works/) is the creator of Witty, an AI-based assistant which guides users to become better, more inclusive writers. Since launching in 2018 it has been adopted by organizations such as Microsoft and Deloitte to help discourage unconscious bias in written communications. 

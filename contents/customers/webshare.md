@@ -16,7 +16,7 @@ users:
 toolsUsed:
   - Experimentation
   - Product analytics
-date: 2023-10-01T00:00:00.000Z
+date: 2023-10-01
 ---
 
 [Webshare](https://www.webshare.io/homepage) is a leading proxy server provider, enabling more than 100,000 users to connect using high-speed proxies in over 50 countries. 

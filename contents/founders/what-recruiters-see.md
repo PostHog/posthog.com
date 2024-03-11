@@ -1,5 +1,5 @@
 ---
-date: 2024-01-26T00:00:00.000Z
+date: 2024-01-26
 title: What startup recruiters actually see when you apply for a job
 author:
   - charles-cook

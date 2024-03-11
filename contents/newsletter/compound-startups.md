@@ -1,5 +1,5 @@
 ---
-date: 2023-03-30T00:00:00.000Z
+date: 2023-03-30
 title: The conformist startup rule you can ignore
 author:
   - andy-vandervell

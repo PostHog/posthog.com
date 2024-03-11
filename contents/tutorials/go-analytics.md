@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in Go
-date: 2024-02-21T00:00:00.000Z
+date: 2024-02-21
 author:
   - lior-neu-ner
 tags:

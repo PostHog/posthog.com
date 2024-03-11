@@ -18,7 +18,7 @@ toolsUsed:
   - Feature flags
   - Product analytics
   - Templates
-date: 2023-08-31T00:00:00.000Z
+date: 2023-08-31
 ---
 ​
 A team of veteran API engineers founded Speakeasy with a mission to make every API easy to create and consume. Dozens of teams, including Writer, Airbyte and Codat, now trust [Speakeasy](https://speakeasyapi.dev/) to provide the tools that give their APIs a great developer experience: idiomatic SDKs in 8+ languages, Terraform providers and world-class reference docs.

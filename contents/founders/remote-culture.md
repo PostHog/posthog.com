@@ -1,5 +1,5 @@
 ---
-date: 2020-09-01T00:00:00.000Z
+date: 2020-09-01
 title: Building an all-remote company from scratch
 rootPage: /blog
 sidebar: Blog

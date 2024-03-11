@@ -1,6 +1,6 @@
 ---
 title: How to set up Next.js A/B tests
-date: 2024-02-16T00:00:00.000Z
+date: 2024-02-16
 author:
   - ian-vanagas
 tags:

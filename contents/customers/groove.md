@@ -17,7 +17,7 @@ toolsUsed:
   - Experimentation
   - Product analytics
   - Surveys
-date: 2023-09-15T00:00:00.000Z
+date: 2023-09-15
 ---
 
 Founded in 2011 by serial founder Alex Turnbull, [Groove](https://www.groovehq.com/) is a simple yet powerful helpdesk and ticketing platform, and a leading alternative to [Zendesk](/tutorials/zendesk-session-replays) for price-conscious teams. It's a crowded market, which makes building quickly on an effective, scalable data stack more vital than ever.

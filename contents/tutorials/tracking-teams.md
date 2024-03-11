@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author:
   - yakko-majuri
-date: 2021-04-08T00:00:00.000Z
+date: 2021-04-08
 tags:
   - configuration
   - product analytics

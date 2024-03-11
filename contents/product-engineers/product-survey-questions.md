@@ -1,6 +1,6 @@
 ---
 title: How to write great product survey questions (with examples)
-date: 2023-08-23T00:00:00.000Z
+date: 2023-08-23
 author:
   - ian-vanagas
 featuredImage: >-

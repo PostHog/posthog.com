@@ -1,6 +1,6 @@
 ---
 title: How to set up a public beta program using early access management
-date: 2023-07-28T00:00:00.000Z
+date: 2023-07-28
 author:
   - ian-vanagas
 showTitle: true

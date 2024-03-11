@@ -1,6 +1,6 @@
 ---
 title: What is a growth engineer? (And why they're awesome)
-date: 2023-04-26T00:00:00.000Z
+date: 2023-04-26
 author:
   - ian-vanagas
 showTitle: true

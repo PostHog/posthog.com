@@ -1,6 +1,6 @@
 ---
 title: How to analyze autocapture events with HogQL
-date: 2023-06-07T00:00:00.000Z
+date: 2023-06-07
 author:
   - ian-vanagas
 showTitle: true

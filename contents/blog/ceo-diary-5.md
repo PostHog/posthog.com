@@ -1,5 +1,5 @@
 ---
-date: 2022-01-09T00:00:00.000Z
+date: 2022-01-09
 title: Things I learned last year
 rootPage: /blog
 sidebar: Blog

@@ -8,7 +8,7 @@ author:
 tags:
   - session replay
 featuredVideo: 'https://www.youtube-nocookie.com/embed/3BS5h2gkz90'
-date: 2022-11-03T00:00:00.000Z
+date: 2022-11-03
 ---
 
 Funnels may tell you _where_ users are experiencing friction within your product, but only session replays can show you _why_.

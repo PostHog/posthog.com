@@ -1,6 +1,6 @@
 ---
 title: How to set up Python feature flags in Flask
-date: 2023-09-05T00:00:00.000Z
+date: 2023-09-05
 author:
   - ian-vanagas
 showTitle: true

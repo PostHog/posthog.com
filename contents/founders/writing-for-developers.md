@@ -1,5 +1,5 @@
 ---
-date: 2021-05-20T00:00:00.000Z
+date: 2021-05-20
 title: Writing for developers
 author:
   - james-hawkins

@@ -1,6 +1,6 @@
 ---
 title: How to set up feature flags in Nuxt
-date: 2024-01-23T00:00:00.000Z
+date: 2024-01-23
 author:
   - lior-neu-ner
 showTitle: true

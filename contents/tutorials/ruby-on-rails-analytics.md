@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Ruby on Rails analytics, feature flags and more'
-date: 2023-02-02T00:00:00.000Z
+date: 2023-02-02
 author:
   - ian-vanagas
 showTitle: true

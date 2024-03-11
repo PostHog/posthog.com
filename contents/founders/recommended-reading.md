@@ -1,5 +1,5 @@
 ---
-date: 2023-08-22T00:00:00.000Z
+date: 2023-08-22
 title: PostHog's recommended reading for startup teams
 author:
   - joe-martin

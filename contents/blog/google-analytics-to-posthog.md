@@ -1,6 +1,6 @@
 ---
 title: An intro to PostHog for Google Analytics users
-date: 2023-07-04T00:00:00.000Z
+date: 2023-07-04
 author:
   - ian-vanagas
   - andy-vandervell

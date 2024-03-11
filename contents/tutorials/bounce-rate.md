@@ -1,6 +1,6 @@
 ---
 title: How to calculate bounce rate
-date: 2023-06-27T00:00:00.000Z
+date: 2023-06-27
 author:
   - ian-vanagas
 showTitle: true

@@ -1,5 +1,5 @@
 ---
-date: 2022-06-01T00:00:00.000Z
+date: 2022-06-01
 title: Why we ditched ‘talk to sales’ for transparent pricing
 rootPage: /blog
 sidebar: Blog

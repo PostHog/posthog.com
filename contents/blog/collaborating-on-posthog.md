@@ -1,5 +1,5 @@
 ---
-date: 2022-03-24T00:00:00.000Z
+date: 2022-03-24
 title: Introducing Collaboration for PostHog
 rootPage: /blog
 sidebar: Blog

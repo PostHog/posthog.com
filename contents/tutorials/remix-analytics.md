@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Remix analytics, feature flags, and more'
-date: 2023-11-22T00:00:00.000Z
+date: 2023-11-22
 author:
   - ian-vanagas
 tags:

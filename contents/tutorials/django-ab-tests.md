@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Django
-date: 2024-02-09T00:00:00.000Z
+date: 2024-02-09
 author:
   - lior-neu-ner
 tags:

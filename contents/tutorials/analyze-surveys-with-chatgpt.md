@@ -1,6 +1,6 @@
 ---
 title: How to analyze surveys with ChatGPT
-date: 2023-11-08T00:00:00.000Z
+date: 2023-11-08
 author:
   - lior-neu-ner
 showTitle: true

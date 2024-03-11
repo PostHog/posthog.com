@@ -1,5 +1,5 @@
 ---
-date: 2023-03-08T00:00:00.000Z
+date: 2023-03-08
 title: How to turn user interviews into actionable snapshots
 author:
   - annika-schmid

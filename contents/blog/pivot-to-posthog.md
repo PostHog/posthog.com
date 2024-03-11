@@ -1,5 +1,5 @@
 ---
-date: 2020-02-25T00:00:00.000Z
+date: 2020-02-25
 title: Pivot to PostHog
 rootPage: /blog
 sidebar: Blog

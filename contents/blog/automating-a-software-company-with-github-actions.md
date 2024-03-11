@@ -1,5 +1,5 @@
 ---
-date: 2022-07-05T00:00:00.000Z
+date: 2022-07-05
 title: Automating a software company with GitHub Actions
 rootPage: /blog
 sidebar: Blog

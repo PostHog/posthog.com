@@ -1,6 +1,6 @@
 ---
 title: An intro to PostHog for Google Optimize users
-date: 2023-10-20T00:00:00.000Z
+date: 2023-10-20
 author:
   - ian-vanagas
 showTitle: true

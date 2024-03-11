@@ -1,5 +1,5 @@
 ---
-date: 2024-02-13T00:00:00.000Z
+date: 2024-02-13
 title: 'Product engineer vs software engineer: How are they different?'
 author:
   - ian-vanagas

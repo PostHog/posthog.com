@@ -1,5 +1,5 @@
 ---
-date: 2023-12-18T00:00:00.000Z
+date: 2023-12-18
 title: How successful startups use growth loops (with examples)
 author:
   - ian-vanagas

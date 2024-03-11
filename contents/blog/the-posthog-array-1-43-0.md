@@ -1,5 +1,5 @@
 ---
-date: 2023-01-16T00:00:00.000Z
+date: 2023-01-16
 title: 'Array 1.43.0: Massive performance improvements!'
 rootPage: /blog
 sidebar: Blog

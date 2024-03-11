@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Bubble analytics, session replays, and more'
-date: 2024-01-10T00:00:00.000Z
+date: 2024-01-10
 author:
   - lior-neu-ner
 showTitle: true

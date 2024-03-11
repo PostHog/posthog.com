@@ -1,5 +1,5 @@
 ---
-date: 2022-10-19T00:00:00.000Z
+date: 2022-10-19
 title: Building an open source data stack
 rootPage: /blog
 sidebar: Blog

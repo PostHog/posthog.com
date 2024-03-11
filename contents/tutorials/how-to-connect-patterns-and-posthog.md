@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author:
   - patterns
-date: 2022-09-13T00:00:00.000Z
+date: 2022-09-13
 tags:
   - apps
   - cdp

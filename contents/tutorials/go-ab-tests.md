@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Go
-date: 2024-02-06T00:00:00.000Z
+date: 2024-02-06
 author:
   - lior-neu-ner
 tags:

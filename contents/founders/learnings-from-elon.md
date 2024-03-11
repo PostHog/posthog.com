@@ -1,5 +1,5 @@
 ---
-date: 2024-03-05T00:00:00.000Z
+date: 2024-03-05
 title: Pragmatic startup lessons from Elon Musk
 author:
   - james-hawkins

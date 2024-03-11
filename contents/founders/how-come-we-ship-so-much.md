@@ -1,5 +1,5 @@
 ---
-date: 2023-11-01T00:00:00.000Z
+date: 2023-11-01
 title: How we designed our company for speed
 author:
   - james-hawkins

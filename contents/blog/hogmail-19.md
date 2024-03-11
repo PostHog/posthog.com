@@ -1,5 +1,5 @@
 ---
-date: 2023-01-12T00:00:00.000Z
+date: 2023-01-12
 title: 'HogMail #19: Which meetings should you kill?'
 rootPage: /blog
 sidebar: Blog

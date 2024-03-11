@@ -1,5 +1,5 @@
 ---
-date: 2019-09-01T00:00:00.000Z
+date: 2019-09-01
 title: The time before YC
 rootPage: /blog
 sidebar: Blog

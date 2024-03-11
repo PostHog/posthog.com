@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author:
   - ian-vanagas
-date: 2023-01-05T00:00:00.000Z
+date: 2023-01-05
 featuredTutorial: false
 featuredVideo: 'https://www.youtube-nocookie.com/embed/aYRzmDP-Mwc'
 tags:

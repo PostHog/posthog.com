@@ -1,6 +1,6 @@
 ---
 title: How to set up Python A/B testing
-date: 2023-09-12T00:00:00.000Z
+date: 2023-09-12
 author:
   - ian-vanagas
 showTitle: true

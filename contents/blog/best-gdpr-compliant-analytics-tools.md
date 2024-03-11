@@ -1,5 +1,5 @@
 ---
-date: 2023-08-29T00:00:00.000Z
+date: 2023-08-29
 title: The 9 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog

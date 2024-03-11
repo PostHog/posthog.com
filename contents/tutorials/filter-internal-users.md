@@ -10,7 +10,7 @@ tags:
   - filters
   - settings
   - product os
-date: 2022-02-14T00:00:00.000Z
+date: 2022-02-14
 ---
 
 _Estimated reading time: 4 minutes_ ☕

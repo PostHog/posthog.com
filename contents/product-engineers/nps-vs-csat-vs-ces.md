@@ -1,5 +1,5 @@
 ---
-date: 2023-11-29T00:00:00.000Z
+date: 2023-11-29
 title: 'NPS vs CSAT vs CES: Which is best for SaaS?'
 author:
   - lior-neu-ner

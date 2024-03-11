@@ -1,6 +1,6 @@
 ---
 title: Building a Next.js cookie consent banner
-date: 2024-01-05T00:00:00.000Z
+date: 2024-01-05
 author:
   - ian-vanagas
 showTitle: true

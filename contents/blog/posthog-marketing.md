@@ -1,5 +1,5 @@
 ---
-date: 2022-09-28T00:00:00.000Z
+date: 2022-09-28
 title: How (and why) our marketing team uses PostHog
 rootPage: /blog
 sidebar: Blog

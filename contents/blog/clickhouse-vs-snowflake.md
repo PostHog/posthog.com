@@ -1,5 +1,5 @@
 ---
-date: 2023-02-15T00:00:00.000Z
+date: 2023-02-15
 title: 'In-depth: ClickHouse vs Snowflake'
 rootPage: /blog
 sidebar: Blog

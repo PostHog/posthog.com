@@ -1,6 +1,6 @@
 ---
 title: 'Guardrail metrics for A/B tests, explained'
-date: 2023-10-16T00:00:00.000Z
+date: 2023-10-16
 author:
   - ian-vanagas
 featuredImage: >-

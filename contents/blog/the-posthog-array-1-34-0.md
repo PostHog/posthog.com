@@ -1,5 +1,5 @@
 ---
-date: 2022-03-30T00:00:00.000Z
+date: 2022-03-30
 title: Array 1.34.0
 rootPage: /blog
 sidebar: Blog

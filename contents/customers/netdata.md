@@ -18,7 +18,7 @@ toolsUsed:
   - Autocapture
   - PostHog Cloud
   - Apps
-date: 2022-08-23T00:00:00.000Z
+date: 2022-08-23
 ---
 
 Netdata is an open source monitoring and troubleshooting platform used by engineers at many of the biggest technology companies in the world, including Microsoft, Amazon and Nvidia. In 2020, Netdata’s teams began looking for a way to track and analyze user behavior, considering many different tools in the process.  

@@ -1,6 +1,6 @@
 ---
 title: How to set up surveys in Angular
-date: 2024-01-24T00:00:00.000Z
+date: 2024-01-24
 author:
   - lior-neu-ner
 showTitle: true

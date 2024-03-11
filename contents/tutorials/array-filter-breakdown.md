@@ -1,6 +1,6 @@
 ---
 title: How to filter and breakdown arrays with HogQL
-date: 2023-10-05T00:00:00.000Z
+date: 2023-10-05
 author:
   - ian-vanagas
 showTitle: true

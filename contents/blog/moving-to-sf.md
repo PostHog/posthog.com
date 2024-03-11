@@ -1,5 +1,5 @@
 ---
-date: 2020-02-24T00:00:00.000Z
+date: 2020-02-24
 title: Moving to San Francisco
 rootPage: /blog
 sidebar: Blog

@@ -1,5 +1,5 @@
 ---
-date: 2021-12-01T00:00:00.000Z
+date: 2021-12-01
 title: Don’t bother securing your trademarks in the beginning
 rootPage: /blog
 sidebar: Blog

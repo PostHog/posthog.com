@@ -1,6 +1,6 @@
 ---
 title: How to set up surveys in Svelte
-date: 2024-01-25T00:00:00.000Z
+date: 2024-01-25
 author:
   - lior-neu-ner
 showTitle: true

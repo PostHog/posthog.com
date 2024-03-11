@@ -9,7 +9,7 @@ tags:
   - configuration
   - data management
   - product os
-date: 2022-07-01T00:00:00.000Z
+date: 2022-07-01
 ---
 
 _Estimated reading time: 2 minutes_ ☕

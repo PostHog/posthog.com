@@ -1,6 +1,6 @@
 ---
 title: How we do trunk-based development (and why you should too)
-date: 2024-02-05T00:00:00.000Z
+date: 2024-02-05
 author:
   - ian-vanagas
 rootpage: /blog

@@ -1,6 +1,6 @@
 ---
 title: How to set up feature flags in Android
-date: 2024-02-19T00:00:00.000Z
+date: 2024-02-19
 author:
   - lior-neu-ner
 tags:

@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author:
   - lior-neu-ner
-date: 2023-04-13T00:00:00.000Z
+date: 2023-04-13
 featuredTutorial: true
 tags:
   - session replay

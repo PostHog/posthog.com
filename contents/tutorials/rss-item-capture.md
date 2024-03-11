@@ -1,6 +1,6 @@
 ---
 title: 'How to capture new RSS items in PostHog (releases, blogs, status)'
-date: 2023-08-30T00:00:00.000Z
+date: 2023-08-30
 author:
   - ian-vanagas
 showTitle: true

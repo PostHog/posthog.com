@@ -5,7 +5,7 @@ showTitle: true
 author:
   - ian-vanagas
   - yakko-majuri
-date: 2022-10-17T00:00:00.000Z
+date: 2022-10-17
 featuredVideo: 'https://www.youtube-nocookie.com/embed/I_WJc8T5lL8'
 tags:
   - configuration

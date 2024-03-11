@@ -1,6 +1,6 @@
 ---
 title: How to create surveys in Framer
-date: 2023-11-29T00:00:00.000Z
+date: 2023-11-29
 author:
   - lior-neu-ner
 showTitle: true

@@ -16,7 +16,7 @@ toolsUsed:
   - Feature flags
   - Session replays
   - Product analytics
-date: 2023-03-06T00:00:00.000Z
+date: 2023-03-06
 ---
 
 Contra is a freelance marketplace for independent creatives and engineers. It empowers its community to find work that fits the way they want to live. Since 2022 [Contra](http://www.contra.com), has used PostHog Cloud to power many of its engineering and product decisions, though previously the stack was a lot more complex.

@@ -1,6 +1,6 @@
 ---
 title: The power of HogQL’s sum() aggregation
-date: 2023-06-06T00:00:00.000Z
+date: 2023-06-06
 author:
   - ian-vanagas
 showTitle: true

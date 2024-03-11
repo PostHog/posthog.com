@@ -1,6 +1,6 @@
 ---
 title: How to use the PostHog API to get insights and persons
-date: 2023-02-01T00:00:00.000Z
+date: 2023-02-01
 author:
   - ian-vanagas
 showTitle: true

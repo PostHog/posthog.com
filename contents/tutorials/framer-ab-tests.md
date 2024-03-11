@@ -1,6 +1,6 @@
 ---
 title: How to run A/B tests in Framer
-date: 2023-11-15T00:00:00.000Z
+date: 2023-11-15
 author:
   - lior-neu-ner
 showTitle: true

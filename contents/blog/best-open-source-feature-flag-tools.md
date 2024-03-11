@@ -1,5 +1,5 @@
 ---
-date: 2023-12-11T00:00:00.000Z
+date: 2023-12-11
 title: The 8 best free and open-source feature flag services
 rootPage: /blog
 sidebar: Blog

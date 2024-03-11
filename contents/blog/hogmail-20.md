@@ -1,5 +1,5 @@
 ---
-date: 2023-01-27T00:00:00.000Z
+date: 2023-01-27
 title: 'HogMail #20: Why do startups fail?'
 rootPage: /blog
 sidebar: Blog

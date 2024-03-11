@@ -1,6 +1,6 @@
 ---
 title: Why we use GitHub as our CMS
-date: 2023-03-23T00:00:00.000Z
+date: 2023-03-23
 author:
   - ian-vanagas
 showTitle: true

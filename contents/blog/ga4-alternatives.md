@@ -1,5 +1,5 @@
 ---
-date: 2023-08-25T00:00:00.000Z
+date: 2023-08-25
 title: The 9 best GA4 alternatives for apps and websites
 rootPage: /blog
 sidebar: Blog

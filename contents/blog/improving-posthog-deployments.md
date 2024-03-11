@@ -1,5 +1,5 @@
 ---
-date: 2022-03-22T00:00:00.000Z
+date: 2022-03-22
 title: How we’re making PostHog deployments easier
 rootPage: /blog
 sidebar: Blog

@@ -1,5 +1,5 @@
 ---
-date: 2022-08-05T00:00:00.000Z
+date: 2022-08-05
 title: Speeding up PostHog builds with Depot
 rootPage: /blog
 sidebar: Blog

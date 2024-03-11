@@ -1,6 +1,6 @@
 ---
 title: How to track high-volume APIs
-date: 2023-05-09T00:00:00.000Z
+date: 2023-05-09
 author:
   - ian-vanagas
 showTitle: true

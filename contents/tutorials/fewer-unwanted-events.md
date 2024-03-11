@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author:
   - ian-vanagas
-date: 2022-10-20T00:00:00.000Z
+date: 2022-10-20
 tags:
   - events
   - apps

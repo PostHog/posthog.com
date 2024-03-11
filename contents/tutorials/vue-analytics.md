@@ -1,6 +1,6 @@
 ---
 title: How to set up analytics in Vue
-date: 2024-01-18T00:00:00.000Z
+date: 2024-01-18
 author:
   - lior-neu-ner
 tags:

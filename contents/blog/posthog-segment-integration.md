@@ -1,5 +1,5 @@
 ---
-date: 2020-07-22T00:00:00.000Z
+date: 2020-07-22
 title: PostHog is now available on Segment!
 rootPage: /blog
 sidebar: Blog

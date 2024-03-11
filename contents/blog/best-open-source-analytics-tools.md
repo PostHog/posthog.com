@@ -1,5 +1,5 @@
 ---
-date: 2023-11-22T00:00:00.000Z
+date: 2023-11-22
 title: The 12 best open source analytics tools you can self-host
 rootPage: /blog
 sidebar: Blog

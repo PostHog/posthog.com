@@ -1,6 +1,6 @@
 ---
 title: 'How to do time-based breakdowns (hour, minute, real time)'
-date: 2023-07-27T00:00:00.000Z
+date: 2023-07-27
 author:
   - ian-vanagas
 showTitle: true

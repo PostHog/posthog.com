@@ -1,5 +1,5 @@
 ---
-date: 2022-11-30T00:00:00.000Z
+date: 2022-11-30
 title: 'Array 1.42.0: Get beta features via our roadmap!'
 rootPage: /blog
 sidebar: Blog

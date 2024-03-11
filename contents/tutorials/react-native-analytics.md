@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author:
   - ian-vanagas
-date: 2023-01-12T00:00:00.000Z
+date: 2023-01-12
 featuredTutorial: false
 tags:
   - configuration

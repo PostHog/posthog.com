@@ -11,7 +11,7 @@ tags:
   - correlation analysis
   - paths
   - product analytics
-date: 2022-04-20T00:00:00.000Z
+date: 2022-04-20
 ---
 
 - **Level:** Intermediate 🦔🦔

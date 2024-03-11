@@ -1,5 +1,5 @@
 ---
-date: 2022-05-09T00:00:00.000Z
+date: 2022-05-09
 title: >-
   Using Google Analytics was deemed 'illegal' in some EU countries. We built a
   microsite in 48 hours to capitalize on the news.

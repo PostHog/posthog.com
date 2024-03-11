@@ -1,6 +1,6 @@
 ---
 title: How to create a great user persona (with examples)
-date: 2023-11-08T00:00:00.000Z
+date: 2023-11-08
 author:
   - lior-neu-ner
 featuredImage: >-

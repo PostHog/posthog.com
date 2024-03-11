@@ -1,6 +1,6 @@
 ---
 title: How to set up surveys in Astro
-date: 2024-01-30T00:00:00.000Z
+date: 2024-01-30
 author:
   - lior-neu-ner
 showTitle: true

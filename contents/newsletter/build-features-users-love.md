@@ -1,6 +1,6 @@
 ---
 title: How Spotify (and PostHog) build successful features
-date: 2023-05-17T00:00:00.000Z
+date: 2023-05-17
 author:
   - ian-vanagas
 featuredImage: >-

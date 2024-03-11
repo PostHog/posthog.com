@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Framer analytics, session replay, and more'
-date: 2023-08-18T00:00:00.000Z
+date: 2023-08-18
 author:
   - ian-vanagas
 showTitle: true

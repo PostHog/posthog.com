@@ -1,6 +1,6 @@
 ---
 title: How to track scroll depth
-date: 2023-04-13T00:00:00.000Z
+date: 2023-04-13
 author:
   - ian-vanagas
 showTitle: true

@@ -1,6 +1,6 @@
 ---
 title: What is real user monitoring (and how to set it up)
-date: 2023-06-13T00:00:00.000Z
+date: 2023-06-13
 author:
   - ian-vanagas
 featuredImage: >-

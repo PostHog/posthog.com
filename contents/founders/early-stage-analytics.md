@@ -1,6 +1,6 @@
 ---
 title: The 80/20 of early-stage startup analytics
-date: 2023-02-09T00:00:00.000Z
+date: 2023-02-09
 author:
   - ian-vanagas
 featuredImage: >-

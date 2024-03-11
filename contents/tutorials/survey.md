@@ -1,6 +1,6 @@
 ---
 title: How to create custom surveys
-date: 2023-07-25T00:00:00.000Z
+date: 2023-07-25
 author:
   - ian-vanagas
 showTitle: true

@@ -1,6 +1,6 @@
 ---
 title: Why and how we moved exports to Temporal
-date: 2023-09-26T00:00:00.000Z
+date: 2023-09-26
 author:
   - tomas-farias
   - ian-vanagas

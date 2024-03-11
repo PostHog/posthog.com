@@ -1,6 +1,6 @@
 ---
 title: How to do a phased rollout
-date: 2023-10-06T00:00:00.000Z
+date: 2023-10-06
 author:
   - ian-vanagas
 showTitle: true

@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Laravel
-date: 2024-02-07T00:00:00.000Z
+date: 2024-02-07
 author:
   - lior-neu-ner
 tags:
