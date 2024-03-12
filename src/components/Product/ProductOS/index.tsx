@@ -460,6 +460,28 @@ export const ProductOS = () => {
                     <CTA />
                 </section>
             </div>
+            <section className="my-24 px-5">
+                <div className="max-w-screen-lg mx-auto font-bold">
+                    <blockquote className="text-2xl text-primary dark:text-primary-dark m-0 quote md:text-[32px] md:leading-tight">
+                        <span className="leading-tight">
+                            "<span className="text-red">So glad we picked Posthog</span>. Hard to quantify just how much
+                            time we've saved by reducing complexity of our data pipeline and using a single tool as a
+                            source of truth for almost every customer related data question”
+                        </span>
+                        <footer className="flex items-center space-x-8 mt-9">
+                            <span className="flex flex-col">
+                                <cite className="not-italic text-lg md:text-xl">Gajus Kuizinas, CTO at Contra</cite>
+                                <cite className="not-italic font-medium text-lg opacity-50 md:text-lg">
+                                    <a href="https://twitter.com/kuizinas/status/1767237394003308779?s=46">
+                                        (Yes, he actually tweeted this)
+                                    </a>
+                                    <span className="inline-block"></span>
+                                </cite>
+                            </span>
+                        </footer>
+                    </blockquote>
+                </div>
+            </section>
         </>
     )
 }
