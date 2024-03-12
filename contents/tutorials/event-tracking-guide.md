@@ -63,7 +63,7 @@ posthog.project_api_key = '<ph_project_api_key>'
 posthog.personal_api_key = '<ph_personal_api_key>'
 
 # You can remove this line if you're using app.posthog.com
-posthog.host = '<ph_instance_address>'
+posthog.host = '<ph_client_api_host>'
 ```
 
 Third, once the library is installed and configured, events can be captured by calling library methods with user details, event types, and properties. Each of our libraries contains the relevant structure for connecting the arguments to these categories. For example, in Python a capture method call might look like this:

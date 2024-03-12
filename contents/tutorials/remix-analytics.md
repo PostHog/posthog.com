@@ -163,7 +163,7 @@ import posthog from "posthog-js";
 function PosthogInit() {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_instance_address>',
+      api_host: '<ph_client_api_host>',
     });
   }, []);
 
@@ -313,7 +313,7 @@ let posthogClient = null;
 export default function PostHogClient() {
   if (!posthogClient) {
     posthogClient = new PostHog('<ph_project_api_key>', {
-      host: '<ph_instance_address>',
+      host: '<ph_client_api_host>',
     });
   }
   return posthogClient;

@@ -19,7 +19,7 @@ The project API key is a write-only key, which works perfectly for the POST-only
 
 ## Basic event capture request
 
-To capture events, all we need is a project API key, the data we want to send, and a way to send a request. To capture a new event, you need to send a `POST` request to [`<ph_instance_address>/capture/`](<ph_instance_address>/capture/)  (or the `/capture` endpoint for your instance) with the project API key, event name, and distinct ID.
+To capture events, all we need is a project API key, the data we want to send, and a way to send a request. To capture a new event, you need to send a `POST` request to [`<ph_client_api_host>/capture/`](<ph_client_api_host>/capture/)  (or the `/capture` endpoint for your instance) with the project API key, event name, and distinct ID.
 
 <MultiLanguage>
 
@@ -29,7 +29,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "event": "request",
     "distinct_id": "ian@posthog.com"
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ```python
@@ -46,7 +46,7 @@ body = {
     }
 }
 
-url = "<ph_instance_address>/capture/"
+url = "<ph_client_api_host>/capture/"
 
 response = requests.post(url, headers=headers, json=body)
 
@@ -75,7 +75,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "timestamp": "2022-09-21 09:03:11.913767",
     "distinct_id": "ian@posthog.com",
     "event": "big_request"
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
     
 ```python
@@ -95,7 +95,7 @@ body = {
     }
 }
 
-url = "<ph_instance_address>/capture/"
+url = "<ph_client_api_host>/capture/"
 
 response = requests.post(url, headers=headers, json=body)
 
@@ -127,12 +127,12 @@ curl -v -L --header "Content-Type: application/json" -d '{
             }
         }
     ]
-}' <ph_instance_address>/batch/
+}' <ph_client_api_host>/batch/
 ```
 
 ```python
 import requests
-url = "<ph_instance_address>/batch/"
+url = "<ph_client_api_host>/batch/"
 
 headers = {
     "Content-Type": "application/json",
@@ -182,11 +182,11 @@ curl -v -L --header "Content-Type: application/json" -d '{
 			"is_cool": true
 		},
     "event": "$identify"
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
 ```python
 import requests
-url = '<ph_instance_address>/capture/'
+url = '<ph_client_api_host>/capture/'
 
 headers = {
     "Content-Type": "application/json",
@@ -223,12 +223,12 @@ curl -v -L --header "Content-Type: application/json" -d '{
         "alias": "ian2@posthog.com"
     },
     "event": "$create_alias"
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ```python
 import requests
-url = '<ph_instance_address>/capture/'
+url = '<ph_client_api_host>/capture/'
 
 headers = {
     "Content-Type": "application/json",

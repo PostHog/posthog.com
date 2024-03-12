@@ -206,7 +206,7 @@ export default function App() {
       <PostHogProvider 
         apiKey="<ph_project_api_key>"
         options={{
-          host: "<ph_instance_address>",
+          host: "<ph_client_api_host>",
         }}
       >
         <Stack.Navigator initialRouteName="Home">

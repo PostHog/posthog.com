@@ -11,7 +11,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     },
     "person_properties": {"<personProp1>": "<personVal1>"},
     "group_properties": {"group_type": {"property_name":"property_value"}} # 
-}' https://app.posthog.com/decide?v=3 # or https://eu.posthog.com/decide?v=3
+}' https://us.posthog.com/decide?v=3 # or https://eu.posthog.com/decide?v=3
 ```
 
 import OverrideGeoIPPropertiesIntro from './override-geoip-properties-intro.mdx'
@@ -32,7 +32,7 @@ curl -v -L \
     },
     "person_properties": {"<personProp1>": "<personVal1>"}, # Optional. Include any properties used to calculate the value of the feature flag.
     "group_properties": {"group type": {"<groupProp1>":"<groupVal1>"}} # Optional. Include any properties used to calculate the value of the feature flag.
-}' https://app.posthog.com/decide?v=3 # or https://eu.posthog.com/decide?v=3
+}' https://us.posthog.com/decide?v=3 # or https://eu.posthog.com/decide?v=3
 ```
 
 The list of properties that this overrides:

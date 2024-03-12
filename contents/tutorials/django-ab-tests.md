@@ -74,7 +74,7 @@ from django.http import HttpResponse
 from posthog import Posthog
 
 def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
+    posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
 
     # rest of your code
 ```
@@ -86,7 +86,7 @@ from django.http import HttpResponse
 from posthog import Posthog
 
 def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
+    posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
     distinct_id = 'placeholder-user-id' 
 
     paragraphText = 'Placeholder text'
@@ -145,7 +145,7 @@ from django.http import HttpResponse
 from posthog import Posthog
 
 def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
+    posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
     distinct_id = 'placeholder-user-id' 
     enabled_variant = posthog.get_feature_flag('my-cool-experiment', distinct_id)
     

@@ -39,7 +39,7 @@ Add your environment variables to your `.env.local` file and to your hosting pro
 
 ```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
 These values need to start with `NEXT_PUBLIC_` to be accessible on the client-side.

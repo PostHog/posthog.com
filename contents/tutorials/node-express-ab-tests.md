@@ -76,7 +76,7 @@ const port = 3000;
 const { PostHog } = require('posthog-node');
 
 const posthogClient = new PostHog('<ph_project_api_key>', {
-  host: '<ph_instance_address>',
+  host: '<ph_client_api_host>',
 });
 
 // rest of your code

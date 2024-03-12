@@ -15,7 +15,7 @@ We can capture events from these feeds by polling them, checking for new entries
 
 After signing up for [Val Town](https://www.val.town/), you can go to your workspace and start creating JavaScript functions. We start by writing a function to capture an event using the [PostHog API](/docs/api).
 
-Since we will use this function to capture events from multiple feeds, we make it reusable. We write it as a function that takes an object ccontaining a `key`, `event`, `properties`, and `distinct_id`. It uses these to create the body of the request and then send a fetch request to `https://app.posthog.com/capture/` (or `https://eu.posthog.com/capture/`). Altogether, this looks like this:
+Since we will use this function to capture events from multiple feeds, we make it reusable. We write it as a function that takes an object ccontaining a `key`, `event`, `properties`, and `distinct_id`. It uses these to create the body of the request and then send a fetch request to `https://us.i.posthog.com/capture/` (or `https://eu.i.posthog.com/capture/`). Altogether, this looks like this:
 
 <iframe src="https://www.val.town/embed/ianvph.postHogAPICapture" height="630" frameBorder="0" allowFullScreen></iframe>
 

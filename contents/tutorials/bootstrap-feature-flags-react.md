@@ -42,7 +42,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>', 
   { 
-    api_host: '<ph_instance_address>', 
+    api_host: '<ph_client_api_host>', 
   }
 );
 
@@ -64,7 +64,7 @@ In the feature flag tab, create a new flag, set a key (I chose `test-flag`), set
 posthog.init(
   '<ph_project_api_key>', 
   { 
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     loaded(ph) {
       console.log(ph.isFeatureEnabled('test-flag'))
     }
@@ -194,7 +194,7 @@ const { PostHog } = require('posthog-node')
 const client = new PostHog(
     '<ph_project_api_key>',
     { 
-      host: '<ph_instance_address>',
+      host: '<ph_client_api_host>',
       personalApiKey: '<ph_personal_api_key>'
     }
 )
@@ -290,7 +290,7 @@ const distinctId = window.__PH_DISTINCT_ID__;
 posthog.init(
   '<ph_project_api_key>', 
   { 
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
       distinctID: distinctId,
       featureFlags: flagData,

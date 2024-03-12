@@ -81,14 +81,14 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
       }
     );
   },
 };
 ```
 
-Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
+Replace `<ph_project_api_key>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 

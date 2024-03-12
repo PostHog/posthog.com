@@ -40,7 +40,7 @@ By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in 
 const client = new PostHog(
     '<ph_project_api_key>',
     { 
-        host: '<ph_instance_address>',
+        host: '<ph_client_api_host>',
         personalApiKey: 'your personal API key from step 1',
         featureFlagsPollingInterval: 30000 // Optional. Measured in milliseconds. Defaults to 30000 (30 seconds)
     }
@@ -50,7 +50,7 @@ const client = new PostHog(
 ```ruby
 posthog = PostHog::Client.new({
   api_key: "<ph_project_api_key>",
-  host: "<ph_instance_address>",
+  host: "<ph_client_api_host>",
   personal_api_key: 'your personal API key from step 1',
   feature_flags_polling_interval: 30 # Optional. Measured in seconds. Defaults to 30.
 })
@@ -68,7 +68,7 @@ func main() {
 	client, _ := posthog.NewWithConfig(
 		os.Getenv("POSTHOG_API_KEY"),
 		posthog.Config{
-			Endpoint:       "<ph_instance_address>",
+			Endpoint:       "<ph_client_api_host>",
 			PersonalApiKey: "your personal API key", // Required for feature flags
             DefaultFeatureFlagsPollingInterval: 300 // Optional. Measured in seconds. Defaults to 300 (5 minutes).
 		},
@@ -80,7 +80,7 @@ func main() {
 
 ```php
 PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_instance_address>',
+  array('host' => '<ph_client_api_host>',
         'personal_api_key' => 'your personal API key from step 1'),
         'poll_interval' => 30 # Optional. Measured in seconds. Defaults to 30.
 );
@@ -90,7 +90,7 @@ PostHog::init("<ph_project_api_key>",
 from posthog import Posthog
 
 posthog = Posthog('<ph_project_api_key>', 
-    host='<ph_instance_address>',
+    host='<ph_client_api_host>',
     poll_interval=30 # Optional. Measured in seconds. Defaults to 30.
 )
 ```

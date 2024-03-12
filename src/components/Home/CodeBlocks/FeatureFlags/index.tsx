@@ -58,8 +58,8 @@ function Bootstrapping() {
                 redirecting to another page based on feature flag or showing variants instantly.
             </p>
             <CodeBlock
-                code={`posthog.init('<YourPostHogKey>', {
-  api_host: 'https://app.posthog.com',
+                code={`posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
   bootstrap: {
     distinctID: 'your-anonymous-id',
     featureFlags: {

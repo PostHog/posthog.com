@@ -16,7 +16,7 @@ As console logs can contain sensitive information, we do not capture these logs 
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     enable_recording_console_log: true, // TIP: This is only needed if you aren't configuring session replay using the project settings toggle.
     // ... other options
 })

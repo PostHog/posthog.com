@@ -10,7 +10,7 @@ In your app, import the `posthog` library and set your project API key and host 
 from posthog import Posthog
 
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
 ```
 
 > **Note:** As a rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable is best.

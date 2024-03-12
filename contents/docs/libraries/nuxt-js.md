@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_instance_address>'
+      posthogHost: '<ph_client_api_host>'
     }
   }
 })
@@ -98,7 +98,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_instance_address>'
+      posthogHost: '<ph_client_api_host>'
     }
   }
 })
@@ -172,7 +172,7 @@ import Vue from 'vue'
 export default function({ app: { router } }, inject) {
   // Init PostHog
   posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     capture_pageview: false,
     loaded: () => posthog.identify('unique_id') // If you can already identify your user
   })
