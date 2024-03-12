@@ -126,17 +126,17 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </div>
             )}
             {product.imageProducts?.length > 0 && (
-                <div>
-                    <h3 className="text-lg mb-0">Complete the look</h3>
-                    <p className="mt-0">These products made a special appearance in the photos above.</p>
+                <div className="border-t border-light dark:border-dark pt-4 mt-4">
+                    <h3 className="text-lg mb-0">See something else you liked?</h3>
+                    <p className="mt-0 opacity-75">You may have spotted these other fine PostHog products in the photos above.</p>
                     <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-2">
                         {product.imageProducts?.map((product) => {
                             const { handle, featuredImage } = product
                             return (
                                 <li key={handle}>
-                                    <button onClick={() => updateURL(product)}>
+                                    <a href={`?product=${handle}`}>
                                         <GatsbyImage alt={handle} image={getImage(featuredImage?.localFile)} />
-                                    </button>
+                                    </a>
                                 </li>
                             )
                         })}
