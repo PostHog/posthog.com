@@ -11,7 +11,15 @@ import RoadmapSelect from 'components/RoadmapSelect'
 import qs from 'qs'
 import TeamSelect from 'components/TeamSelect'
 
-export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; onSubmit?: () => void }) {
+export default function TeamUpdate({
+    teamName,
+    onSubmit,
+    roadmapID,
+}: {
+    teamName?: string
+    onSubmit?: () => void
+    roadmapID?: number
+}) {
     const [team, setTeam] = useState<any>(null)
     const { getJwt, user } = useUser()
     const [updateCount, setUpdateCount] = useState(0)
@@ -20,8 +28,8 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
         initialValues: {
             body: '',
             thingOfTheWeek: false,
-            roadmap: false,
-            roadmapID: null,
+            roadmap: !!roadmapID,
+            roadmapID,
             images: [],
             impersonate: false,
         },
@@ -149,19 +157,23 @@ export default function TeamUpdate({ teamName, onSubmit }: { teamName?: string; 
                                 label="Post as team lead"
                             />
                         </div>
-                        <Toggle
-                            checked={values.roadmap}
-                            onChange={(checked) => setFieldValue('roadmap', checked)}
-                            label="This is connected to a roadmap item"
-                        />
-                        {values.roadmap && (
-                            <div className="border border-border dark:border-dark rounded-md mt-4">
-                                <RoadmapSelect
-                                    teamID={team.id}
-                                    onChange={(value) => setFieldValue('roadmapID', value)}
-                                    value={values.roadmapID}
+                        {!roadmapID && (
+                            <>
+                                <Toggle
+                                    checked={values.roadmap}
+                                    onChange={(checked) => setFieldValue('roadmap', checked)}
+                                    label="This is connected to a roadmap item"
                                 />
-                            </div>
+                                {values.roadmap && (
+                                    <div className="border border-border dark:border-dark rounded-md mt-4">
+                                        <RoadmapSelect
+                                            teamID={team.id}
+                                            onChange={(value) => setFieldValue('roadmapID', value)}
+                                            value={values.roadmapID}
+                                        />
+                                    </div>
+                                )}
+                            </>
                         )}
                     </>
                 )}
