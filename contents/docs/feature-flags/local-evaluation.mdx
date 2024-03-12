@@ -80,10 +80,11 @@ func main() {
 
 ```php
 PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_instance_address>',
-        'personal_api_key' => 'your personal API key from step 1'),
-        'poll_interval' => 30 # Optional. Measured in seconds. Defaults to 30.
+  array('host' => '<ph_instance_address>'),
+  null, // or custom http client
+ 'YOUR PERSONAL API KEY from step 1'
 );
+// NOTE: PHP currently doesn't support a poller, so you'll need to reload flags as and when needed, or re-initialise the posthog client
 ```
 
 ```python
