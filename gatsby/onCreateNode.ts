@@ -44,6 +44,14 @@ exports.onPreInit = async function (_, options) {
 const cloudinaryCache = {}
 
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
+    if (
+        !process.env.CLOUDINARY_API_KEY ||
+        !process.env.CLOUDINARY_API_SECRET ||
+        !process.env.GATSBY_CLOUDINARY_CLOUD_NAME
+    ) {
+        console.warn('Cloudinary credentials not found')
+        return
+    }
     console.log('Fetching cloudinary data')
 
     const fetchCloudinaryImages = async (nextCursor = null) => {
@@ -53,7 +61,9 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
             }/resources/image?prefix=posthog.com&type=upload&max_results=500${
                 nextCursor ? `&next_cursor=${nextCursor}` : ``
             }`
-        ).then((res) => res.json())
+        )
+            .then((res) => res.json())
+            .catch((e) => console.error(e))
         resources.forEach((resource) => {
             cloudinaryCache[resource.public_id] = resource
         })
@@ -62,13 +72,6 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
             await fetchCloudinaryImages(next_cursor)
         }
     }
-
-    if (
-        !process.env.CLOUDINARY_API_KEY ||
-        !process.env.CLOUDINARY_API_SECRET ||
-        !process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-    )
-        return
 
     await fetchCloudinaryImages()
 }
@@ -91,86 +94,38 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             parent?.internal.type === 'PostHogIssue'
         )
             return
-        const featuredImage = node.frontmatter?.featuredImage
-        if (featuredImage && featuredImage.includes('res.cloudinary.com')) {
-            const publicId = `posthog.com/contents${featuredImage.split('posthog.com/contents')[1]}`
-            const cloudinaryData = cloudinaryCache[publicId]
-            node.frontmatter.featuredImage = {
-                publicURL: featuredImage,
-                childImageSharp: {
-                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId,
-                    originalFormat: cloudinaryData?.format,
-                    originalWidth: cloudinaryData?.width,
-                    originalHeight: cloudinaryData?.height,
-                },
+
+        const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
+        imageFields.forEach((field) => {
+            if (node.frontmatter?.[field] && node.frontmatter?.[field].includes('res.cloudinary.com')) {
+                const publicId = `posthog.com/contents${
+                    node.frontmatter?.[field].split('posthog.com/contents')[1].split('.')[0]
+                }`
+                const cloudinaryData = cloudinaryCache[publicId]
+                if (!cloudinaryData) {
+                    console.warn(`Cloudinary data not found for ${publicId}`)
+                }
+                node.frontmatter[field] = {
+                    publicURL: node.frontmatter?.[field],
+                    childImageSharp: {
+                        cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                        publicId,
+                        originalFormat: cloudinaryData?.format,
+                        originalWidth: cloudinaryData?.width,
+                        originalHeight: cloudinaryData?.height,
+                    },
+                }
             }
-        }
-        const thumbnail = node.frontmatter?.thumbnail
-        if (thumbnail && thumbnail.includes('res.cloudinary.com')) {
-            const publicId = `posthog.com/contents${thumbnail.split('posthog.com/contents')[1]}`
-            const cloudinaryData = cloudinaryCache[publicId]
-            node.frontmatter.thumbnail = {
-                publicURL: thumbnail,
-                childImageSharp: {
-                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId,
-                    originalFormat: cloudinaryData?.format,
-                    originalWidth: cloudinaryData?.width,
-                    originalHeight: cloudinaryData?.height,
-                },
-            }
-        }
-        const logo = node.frontmatter?.logo
-        if (logo && logo.includes('res.cloudinary.com')) {
-            const publicId = `posthog.com/contents${logo.split('posthog.com/contents')[1]}`
-            const cloudinaryData = cloudinaryCache[publicId]
-            node.frontmatter.logo = {
-                publicURL: logo,
-                childImageSharp: {
-                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId,
-                    originalFormat: cloudinaryData?.format,
-                    originalWidth: cloudinaryData?.width,
-                    originalHeight: cloudinaryData?.height,
-                },
-            }
-        }
-        const logoDark = node.frontmatter?.logoDark
-        if (logoDark && logoDark.includes('res.cloudinary.com')) {
-            const publicId = `posthog.com/contents${logoDark.split('posthog.com/contents')[1]}`
-            const cloudinaryData = cloudinaryCache[publicId]
-            node.frontmatter.logoDark = {
-                publicURL: logoDark,
-                childImageSharp: {
-                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId,
-                    originalFormat: cloudinaryData?.format,
-                    originalWidth: cloudinaryData?.width,
-                    originalHeight: cloudinaryData?.height,
-                },
-            }
-        }
-        const icon = node.frontmatter?.icon
-        if (icon && icon.includes('res.cloudinary.com')) {
-            const publicId = `posthog.com/contents${icon.split('posthog.com/contents')[1]}`
-            const cloudinaryData = cloudinaryCache[publicId]
-            node.frontmatter.icon = {
-                publicURL: icon,
-                childImageSharp: {
-                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId,
-                    originalFormat: cloudinaryData?.format,
-                    originalWidth: cloudinaryData?.width,
-                    originalHeight: cloudinaryData?.height,
-                },
-            }
-        }
+        })
+
         const images = node.frontmatter?.images
         if (images?.length > 0) {
             node.frontmatter.images = images.map((image) => {
-                const publicId = `posthog.com/contents${image.split('posthog.com/contents')[1]}`
+                const publicId = `posthog.com/contents${image.split('posthog.com/contents')[1].split('.')[0]}`
                 const cloudinaryData = cloudinaryCache[publicId]
+                if (!cloudinaryData) {
+                    console.warn(`Cloudinary data not found for ${publicId}`)
+                }
                 return {
                     publicURL: image,
                     childImageSharp: {
