@@ -170,7 +170,7 @@ title: The state of plugins on PostHog
 rootPage: /blog
 author: ["yakko-majuri"]
 featuredVideo: https://www.youtube-nocookie.com/embed/TCyCryTiTbQ
-featuredImage: ../images/blog/running-content.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/running-content.png
 featuredImageType: full
 category: Guides
 tags: ["Using PostHog", "Privacy"]
@@ -186,7 +186,7 @@ seo: {
 - `rootPage`: necessary for listing all blog posts on /blog. should always be set to `/blog`
 - `author`: the author(s) of the post. correlates to your handle located in /src/data/authors.json
 - `featuredVideo`: the iframe src of the video that appears at the top of the post. replaces the featured image on post pages.
-- `featuredImage`: the URL of the image that appears at the top of the post and on the blog listing page
+- `featuredImage`: the Cloudinary URL of the image that appears at the top of the post and on the blog listing page
 - `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
 - `category`: the broader category the post belongs to. one of the following:
   - <CategoryData />
@@ -216,7 +216,7 @@ tags: ['filters', 'settings']
 - `author`: the author(s) of the tutorial. Ccrrelates to your handle located in /src/data/authors.json
 - `featuredTutorial`: determines if tutorial should be featured on the homepage
 - `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
-- `featuredImage`: the URL of the image that appears at the top of the tutorial and on the tutorial listing page
+- `featuredImage`: the Cloudinary URL of the image that appears at the top of the tutorial and on the tutorial listing page
 - `tags`: the tag(s) the tutorial belongs to. an array containing any number of the following:
   - <TutorialTags />
 - `seo`: object containing SEO metadata:
@@ -273,8 +273,8 @@ Markdown files located in `/contents/customers`
 ---
 title: How Hasura improved conversion rates by 10-20% with PostHog
 customer: Hasura
-logo: ../images/customers/hasura/logo.svg
-featuredImage: ../images/customers/hasura/featured.jpg
+logo: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/hasura/logo.svg
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/hasura/featured.jpg
 industries:
     - Developer tool
 users:
@@ -292,7 +292,7 @@ toolsUsed:
 - `title`: the title of the case study
 - `customer`: the name of the customer
 - `logo`: the customer logo
-- `featuredImage`: the image that appears in the card on the customers listing page
+- `featuredImage`: the Cloudinary URL of the image that appears in the card on the customers listing page
 - `industries`: a list of industries that apply to the company
 - `users`: a list of user types that use the company's product
 - `toolsUsed`: a list of highlighted PostHog tools used by the company
@@ -326,29 +326,15 @@ You can often refer to the source of existing pages for more examples, but if in
 
 #### Images/GIFs
 
-For our Markdown, we use [gatsby-remark-copy-linked-files](https://www.gatsbyjs.org/packages/gatsby-remark-copy-linked-files/).
+If you need to upload images, you can upload them to Cloudinary
 
-This copies local files linked to/from Markdown files to the root directory.
-
-If you need to upload images, you can place them in `contents/images/`. We recommend creating or using existing subfolders to keep images organized.
-
-To include an image in a markdown file, you can use nice local references, like so:
+To include an image in a markdown file, you can use Cloudinary URLs, like so:
 
 ```markdown
 ![Twin Peaks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/handbook/engineering/images/02/IMG_4294-scaled.jpg)
 ```
 
 In this case, `Twin Peaks` is the alt-text applied to the image.
-
-Note that it may be necessary to change the folder depending on your file structure. For example, if you needed to go up two directories, this *could* be:
-
-```markdown
-![Twin Peaks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/IMG_4294-scaled.jpg)
-```
-
-Notice the extra ```../```.
-
-For most images, this plugin will automatically generate a range of sizes to optimize for the device and they'll even have a blurry low filesize loading image created to hold the place. Pretty cool.
 
 #### Links to/from the navigation
 
