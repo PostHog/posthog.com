@@ -20,6 +20,7 @@ import {
     TEN_MILLION,
     HUNDRED_MILLION,
     BILLION,
+    TWO_FIFTY_MILLION,
 } from '../../pricingLogic'
 import { button } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
@@ -129,9 +130,9 @@ export const PricingCalculator = () => {
                                 ) : (
                                     <LogSlider
                                         stepsInRange={100}
-                                        marks={[MILLION, TEN_MILLION, HUNDRED_MILLION, BILLION]}
+                                        marks={[MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS]}
                                         min={MILLION}
-                                        max={BILLION}
+                                        max={MAX_PRODUCT_ANALYTICS}
                                         onChange={(value) => setProductAnalyticsSliderValue(value, sliderCurve)}
                                         value={productAnalyticsSliderValue}
                                     />
