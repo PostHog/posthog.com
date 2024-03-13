@@ -8,6 +8,20 @@ availability:
     enterprise: full
 
 ---
+import sentAMessageLight from '../../images/docs/product-analytics/sent-a-message-lifecycle-light-mode.png'
+import sentAMessageDark from '../../images/docs/product-analytics/sent-a-message-lifecycle-dark-mode.png'
+import lifecycleFiltersLight from '../../images/docs/product-analytics/lifecycle-filters-light-mode.png'
+import lifecycleFiltersDark from '../../images/docs/product-analytics/lifecycle-filters-dark-mode.png'
+import timeControlLight from '../../images/docs/product-analytics/time-control-light-mode.png'
+import timeControlDark from '../../images/docs/product-analytics/time-control-dark-mode.png'
+import chartLight from '../../images/docs/product-analytics/lifecycle-chart-light-mode.png'
+import chartDark from '../../images/docs/product-analytics/lifecycle-chart-dark-mode.png'
+import showValuesLight from '../../images/docs/product-analytics/show-values-light-mode.png'
+import showValuesDark from '../../images/docs/product-analytics/show-values-dark-mode.png'
+import detailLight from '../../images/docs/product-analytics/detail-light-mode.png'
+import detailDark from '../../images/docs/product-analytics/detail-dark-mode.png'
+import viewSessionLight from '../../images/docs/product-analytics/view-session-reply-light-mode.png'
+import viewSessionDark from '../../images/docs/product-analytics/view-session-reply-dark-mode.png'
 
 The lifecycle insight is designed to enable you to understand how your active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.
 
@@ -28,19 +42,51 @@ Lifecycle breaks down whether a user has been active in your selected time inter
 To start with, you'll need to select an event that best describes activity for your product, this might be something as simple as logging into your app or loading the page. For example: in a messaging product, you might consider someone active if they've sent a message within the interval.
 
 You can see here that I have selected the Message Sent event to define my user activity metric:
-![image](https://user-images.githubusercontent.com/85295485/139204932-dfd438d7-cb86-407c-8a0e-efb6a906f3d3.png)
+
+<ProductScreenshot
+    imageLight = {sentAMessageLight} 
+    imageDark = {sentAMessageDark}
+    classes="rounded"
+    alt="Set up a new lifecycle analysis with custom event 'Sent a message'"
+/>
 
 As with other tools in PostHog, you can add filters if you wish to focus on a subset of these events.
 
-![image](https://user-images.githubusercontent.com/85295485/139205269-21790a9d-6f4c-471a-ae0a-76b2b6557646.png)
+<ProductScreenshot
+    imageLight = {lifecycleFiltersLight} 
+    imageDark = {lifecycleFiltersDark}
+    classes="rounded"
+    alt="Add filters for lifecycle analysis"
+/>
 
-Next set the time interval that aligns with the natural frequency of your product, here were' looking at "Daily" active since we expect people to be sending messages every day, but depending on how people use your product, you might want to change the interval to "Week" or "Month". You can also set how far back you would like to consider this data over.
+Next set the time interval that aligns with the natural frequency of your product by updating the "grouped by" setting. Here were' looking at "Weekly" active as in this hypothetical scenario, we expect people to be sending messages every week, but depending on how people use your product, you might want to change the group by setting to by "Hour", "Day" or "Month". You can also set how far back you would like to consider this data over.
+
+<ProductScreenshot
+    imageLight = {timeControlLight} 
+    imageDark = {timeControlDark}
+    classes="rounded"
+    alt="Set time interval"
+/>
 
 ### Interpreting your lifecycle
 
 Our lifecycle chart for "Message sent" looks like this:
 
-![image](https://user-images.githubusercontent.com/85295485/139205374-d891ef11-2ed2-4e92-abcb-80726795d881.png)
+<ProductScreenshot
+    imageLight = {chartLight} 
+    imageDark = {chartDark}
+    classes="rounded"
+    alt="Lifecycle chart"
+/>
+
+You can also click on the Option button and select "Show values on series" to dispaly values on the chart for More details: 
+
+<ProductScreenshot
+    imageLight = {showValuesLight} 
+    imageDark = {showValuesDark}
+    classes="rounded"
+    alt="Lifecycle chart with values on the chart"
+/>
 
 Everything above the zero line on the horizontal access represents a user who was active in the interval:
 
@@ -68,10 +114,21 @@ With the information from this graph in mind, you may want to dig deeper to unde
 -   Is our product getting better or worse over time? Are users being retained better and experiencing value over longer-term periods?
 -   Where is the loss of users coming from? Are users being lost from recent time periods or is it users who signed up / started using the feature a long time ago?
 
-![image](https://user-images.githubusercontent.com/85295485/139206407-40bfa178-76d8-47a5-8482-fbf0f682c1d6.png)
+<ProductScreenshot
+    imageLight = {detailLight} 
+    imageDark = {detailDark}
+    classes="rounded"
+    alt="Lifecycle chart pop-up"
+/>
 
 You can then click through to look at these individual users behavior in the events or recordings tools
 
-![image](https://user-images.githubusercontent.com/85295485/139206528-bbdce478-97d9-48ad-888d-3220b50e2b42.png)
+
+<ProductScreenshot
+    imageLight = {viewSessionLight} 
+    imageDark = {viewSessionDark}
+    classes="rounded"
+    alt="View session recordings"
+/>
 
 Or create a cohort for further analysis in the trends tool.

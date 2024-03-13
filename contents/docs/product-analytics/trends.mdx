@@ -6,6 +6,53 @@ availability:
     enterprise: full
 ---
 
+import newInsightsLight from '../../images/docs/user-guides/trends/new-insight-light-mode.png'
+import newInsightsDark from '../../images/docs/user-guides/trends/new-insight-dark-mode.png'
+import selectEventLight from '../../images/docs/user-guides/trends/select-event-light-mode.png'
+import selectEventDark from '../../images/docs/user-guides/trends/select-event-dark-mode.png'
+import basicFilterLight from '../../images/docs/user-guides/trends/basic-filter-light-mode.png'
+import basicFilterDark from '../../images/docs/user-guides/trends/basic-filter-dark-mode.png'
+import longerDateLight from '../../images/docs/user-guides/trends/longer-date-range-light-mode.png'
+import longerDateDark from '../../images/docs/user-guides/trends/longer-date-range-dark-mode.png'
+import inlineFilterLight from '../../images/docs/user-guides/trends/inline-filter-light-mode.png'
+import inlineFilterDark from '../../images/docs/user-guides/trends/longer-date-range-dark-mode.png'
+import filterGroupsLight from '../../images/docs/user-guides/trends/filter-groups-light-mode.png'
+import filterGroupsDark from '../../images/docs/user-guides/trends/filter-groups-dark-mode.png'
+import internalLight from '../../images/docs/user-guides/trends/internal-and-test-users-light-mode.png'
+import internalDark from '../../images/docs/user-guides/trends/internal-and-test-users-dark-mode.png'
+import breakdownLight from '../../images/docs/user-guides/trends/breakdown-by-light-mode.png'
+import breakdownDark from '../../images/docs/user-guides/trends/breakdown-by-dark-mode.png'
+import breakdownGraphLight from '../../images/docs/user-guides/trends/breakdown-graph-light-mode.png'
+import breakdownGraphDark from '../../images/docs/user-guides/trends/breakdown-graph-dark-mode.png'
+import breakdownBarsLight from '../../images/docs/user-guides/trends/breakdown-bars-light-mode.png'
+import breakdownBarsDark from '../../images/docs/user-guides/trends/breakdown-bars-dark-mode.png'
+import breakdownIntoBinsLight from '../../images/docs/user-guides/trends/breakdown-into-bins-light-mode.png'
+import breakdownIntoBinsDark from '../../images/docs/user-guides/trends/breakdown-into-bins-dark-mode.png'
+import personsLight from '../../images/docs/user-guides/trends/persons-light-mode.png'
+import personsDark from '../../images/docs/user-guides/trends/persons-dark-mode.png'
+import multipleSeriesLight from '../../images/docs/user-guides/trends/multiple-series-light-mode.png'
+import multipleSeriesDark from '../../images/docs/user-guides/trends/multiple-series-dark-mode.png'
+import displayOptionsLight from '../../images/docs/user-guides/trends/display-options-light-mode.png'
+import displayOptionsDark from '../../images/docs/user-guides/trends/display-options-dark-mode.png'
+import linerLight from '../../images/docs/user-guides/trends/linear-light-mode.png'
+import linerDark from '../../images/docs/user-guides/trends/linear-dark-mode.png'
+import cumulativeLight from '../../images/docs/user-guides/trends/cumulative-light-mode.png'
+import cumulativeDark from '../../images/docs/user-guides/trends/cumulative-dark-mode.png'
+import timeBarchartLight from '../../images/docs/user-guides/trends/time-bar-chart-light-mode.png'
+import timeBarchartDark from '../../images/docs/user-guides/trends/time-bar-chart-dark-mode.png'
+import valueLight from '../../images/docs/user-guides/trends/value-light-mode.png'
+import valueDark from '../../images/docs/user-guides/trends/value-dark-mode.png'
+import tableLight from '../../images/docs/user-guides/trends/table-light-mode.png'
+import tableDark from '../../images/docs/user-guides/trends/table-dark-mode.png'
+import pieLight from '../../images/docs/user-guides/trends/pie-light-mode.png'
+import pieDark from '../../images/docs/user-guides/trends/pie-dark-mode.png'
+import worldMapLight from '../../images/docs/user-guides/trends/world-map-light-mode.png'
+import worldMapDark from '../../images/docs/user-guides/trends/world-map-dark-mode.png'
+import formulaLight from '../../images/docs/user-guides/trends/formula-light-mode.png'
+import formulaDark from '../../images/docs/user-guides/trends/formula-dark-mode.png'
+import insightsSourceLight from '../../images/docs/user-guides/trends/insights-source-light-mode.png'
+import insightsSourceDark from '../../images/docs/user-guides/trends/insights-source-dark-mode.png'
+
 export const FilterIcon = () => <svg class="inline-block w-5 h-5 text-gray" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"><path d="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z" fill="currentColor"></path></svg>
 
 export const CopyIcon = () => <svg class="inline-block w-5 h-5 text-gray" fill="none" width="1em" height="1em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m15.4545 3h-9.81814c-.9 0-1.63636.73636-1.63636 1.63636v11.45454h1.63636v-11.45454h9.81814zm2.4546 3.27273h-9.00001c-.9 0-1.63636.73636-1.63636 1.63636v11.45451c0 .9.73636 1.6364 1.63636 1.6364h9.00001c.9 0 1.6364-.7364 1.6364-1.6364v-11.45451c0-.9-.7364-1.63636-1.6364-1.63636zm0 13.09087h-9.00001v-11.45451h9.00001z" fill="currentColor"></path></svg>
@@ -38,13 +85,23 @@ Using the side menu, navigate to the [Product Analytics](https://us.posthog.com/
 
 You should now see a screen that looks like this
 
-![new insight](../../images/docs/user-guides/trends/new-insight.png)
+<ProductScreenshot
+    imageLight = {newInsightsLight} 
+    imageDark = {newInsightsDark}
+    classes="rounded"
+    alt="New insight"
+/>
 
 #### Adding events
 
 Now that you've created a Trends insight, the next thing is select the events you would like to see. Click the dropdown to the right of the <div class="inline-flex items-center justify-center rounded-full border-2 font-semibold" style="width: 20px; height: 20px; border-color: rgb(29, 74, 255); color: rgb(29, 74, 255); background-color: rgba(29, 74, 255, 0.15);">A</div> icon.
 
-![selecting our event](../../images/docs/user-guides/trends/select-event.png)
+<ProductScreenshot
+    imageLight = {selectEventLight} 
+    imageDark = {selectEventDark}
+    classes="rounded"
+    alt="Selecting our event"
+/>
 
 This dropdown allows you to search through all your [events](/docs/user-guides/events) and [actions](/docs/user-guides/actions) and pick which one you would like to plot data from.
 
@@ -60,7 +117,12 @@ To add a filter to an event series, click on the <FilterIcon /> icon next to the
 
 This will bring up a dropdown where you can search through all event properties and choose the one you would like to filter based on. For this example, we'll choose the 'Device Type' event so that we can plot data only for Desktop users.
 
-![a filter that only shows events from desktop users](../../images/docs/user-guides/trends/basic-filter.png)
+<ProductScreenshot
+    imageLight = {basicFilterLight} 
+    imageDark = {basicFilterDark}
+    classes="rounded"
+    alt="A filter that only shows events from desktop users"
+/>
 
 Read more about filters in the [filtering events](#filtering-events) section.
 
@@ -73,6 +135,13 @@ This can be done using the [display options at the top of the chart](#changing-t
 > **Note: ** Setting a very large time scale may severely impact your query performance as the number of events can increase dramatically
 
 ![showing a chart over a longer date range (90 days)](../../images/docs/user-guides/trends/longer-date-range.png)
+
+<ProductScreenshot
+    imageLight = {longerDateLight} 
+    imageDark = {longerDateDark}
+    classes="rounded"
+    alt="Showing a chart over a longer date range (90 days)"
+/>
 
 > ** Note: ** You may see a portion of the chart plotted as a dotted line, which simply means that data for that period is still being collected
 
@@ -135,7 +204,12 @@ Within trends there are two different ways of filtering down events:
 
 #### Inline filters
 
-![example inline filter](../../images/docs/user-guides/trends/inline-filter.png)
+<ProductScreenshot
+    imageLight = {inlineFilterLight} 
+    imageDark = {inlineFilterDark}
+    classes="rounded"
+    alt="Example inline filter"
+/>
 
 These filters apply to a specific series within a graph, and different series can have different inline filters.
 
@@ -148,7 +222,12 @@ Filter groups allow you to apply filters to **all series** within an insight. Th
 -   `AND` - Events have to match _every_ filter within the group
 -   `OR` - Events only have to match _a single_ filter within the group
 
-![example global filter](../../images/docs/user-guides/trends/filter-groups.png)
+<ProductScreenshot
+    imageLight = {filterGroupsLight} 
+    imageDark = {filterGroupsDark}
+    classes="rounded"
+    alt="Example global filter"
+/>
 
 One thing to note about global filters: since they apply to all events within an insight, and these events may not share all their properties, global filters allow you to use any property that has been seen in _at least one_ of your events.
 If you happen to create a filter that references a property that not all events have, events that do not contain this property will automatically fail the check and will be excluded by the filter.
@@ -158,7 +237,12 @@ If you happen to create a filter that references a property that not all events 
 The final option for filtering down events is using the option to filter out 'internal and test users'.
 This option is useful for excluding events sent from local builds of your product, or by members of your team that you don't want to include in your analysis.
 
-![filtering internal and test users turned on](../../images/docs/user-guides/trends/internal-and-test-users.png)
+<ProductScreenshot
+    imageLight = {internalLight} 
+    imageDark = {internalDark}
+    classes="rounded"
+    alt="Filtering internal and test users turned on"
+/>
 
 If you want to customize the filters that are used, you can click on the settings icon.
 
@@ -167,11 +251,21 @@ If you want to customize the filters that are used, you can click on the setting
 Breakdowns offer a way for you to split up your trends graph by the values of a certain property. This is a very powerful tool when analyzing a trend and trying to determine the cause of a change in one of your metrics.
 Once you've selected a property to break down on, you should see your graph split into multiple lines, each one corresponding to a distinct value of that property.
 
-![breaking down an insight by browser](../../images/docs/user-guides/trends/breakdown.png)
+<ProductScreenshot
+    imageLight = {internalLight} 
+    imageDark = {internalDark}
+    classes="rounded"
+    alt="Breaking down an insight by browser"
+/>
 
 For readability, PostHog will only load the first 25 values of a breakdown when you first load an insight. You can manually load more values by clicking the 'Load more breakdown values' button.
 
-![graph of an insight broken down by a property](../../images/docs/user-guides/trends/breakdown-graph.png)
+<ProductScreenshot
+    imageLight = {breakdownGraphLight} 
+    imageDark = {breakdownGraphDark}
+    classes="rounded"
+    alt="Graph of an insight broken down by a property"
+/>
 
 > **Note: ** Currently, you're only able to breakdown an insight by a single property, but we're actively working on the ability to breakdown based on more than one property
 
@@ -179,14 +273,24 @@ For readability, PostHog will only load the first 25 values of a breakdown when 
 
 If you're more interested in the total count of an event over a given time period, you can switch to either the [Value bar chart](#value-bar-chart) or [Table](#table) view to see the total number of events for each breakdown value.
 
-![sample breakdown bar chart](../../images/docs/user-guides/trends/breakdown-bars.png)
+<ProductScreenshot
+    imageLight = {breakdownBarsLight} 
+    imageDark = {breakdownBarsDark}
+    classes="rounded"
+    alt="Sample breakdown bar chart"
+/>
 
 #### Breaking down numerical values into bins
 
 When breaking down based on a string value, your graph will be split up with separate series for _every distinct value_ of that property. This works well for text values, however when trying to analyze numeric or time properties,
 this is often far too granular. As a solution, when breaking down a numeric property, you can select a number of 'Bins' to combine ranges of values into.
 
-![breaking down into 10 bins](../../images/docs/user-guides/trends/breakdown-into-bins.png)
+<ProductScreenshot
+    imageLight = {breakdownIntoBinsLight} 
+    imageDark = {breakdownIntoBinsDark}
+    classes="rounded"
+    alt="Breaking down into 10 bins"
+/>
 
 PostHog will then break up your events into the specified number of bins based on the distinct values of the property.
 For example, if your property can take the values `20, 21, 22, ..., 40` and you split it up into `10` bins, it will break your events up into ranges of `20 - 22`, `22 - 24`, etc.
@@ -198,7 +302,12 @@ For example, if your property can take the values `20, 21, 22, ..., 40` and you 
 When viewing a trend, oftentimes you're interested in drilling down further into users who performed an event on a specific week or day.
 With trends, this is as easy as clicking on a data point in a plot, which will open up a menu where you can view all the people who performed that event during the time period.
 
-![all persons who performed an event](../../images/docs/user-guides/trends/persons.png)
+<ProductScreenshot
+    imageLight = {personsLight} 
+    imageDark = {personsDark}
+    classes="rounded"
+    alt="All persons who performed an event"
+/>
 
 From this menu, you can easily select a user or expand an event to see the properties that were sent, as well as using the 'Watch Recording' button to jump straight to the [recording](/docs/user-guides/recordings) for that user's session.
 
@@ -246,7 +355,12 @@ Property aggregation is an incredibly powerful part of trends insights which all
 
 Trends support adding multiple series onto the same insight, each tracking a separate event. This is useful when comparing the usages of different events across the same time period.
 
-![a sample with 3 graph series](../../images/docs/user-guides/trends/multiple-series.png)
+<ProductScreenshot
+    imageLight = {personsLight} 
+    imageDark = {personsDark}
+    classes="rounded"
+    alt="A sample with 3 graph series"
+/>
 
 To add a second series to a trend you can click the 'Add graph series' button, and then select the event you would like to plot from the dropdown.
 Another option is clicking the <CopyIcon /> icon, which will duplicate that series along with its inline filters. This is helpful when you want to compare the same event with slightly different filters.
@@ -255,7 +369,12 @@ Another option is clicking the <CopyIcon /> icon, which will duplicate that seri
 
 Within a trends graph, there are a number of different options to tweak exactly how your data appears visually.
 
-![display options](../../images/docs/user-guides/trends/display-options.png)
+<ProductScreenshot
+    imageLight = {displayOptionsLight} 
+    imageDark = {displayOptionsDark}
+    classes="rounded"
+    alt="Display options"
+/>
 
 #### Changing the date range
 
@@ -281,25 +400,45 @@ Trends offer a diverse number of chart types to change how your data is displaye
 
 ##### Linear
 
-![linear plot](../../images/docs/user-guides/trends/linear.png)
+<ProductScreenshot
+    imageLight = {linerLight} 
+    imageDark = {linerDark}
+    classes="rounded"
+    alt="Linear plot"
+/>
 
 The **Linear** plot is the most basic type of trend plot and is a simple line-chart with time on the X-axis, and each data point corresponding to the grouping value you've chosen.
 
 ##### Cumulative
 
-![cumulative plot](../../images/docs/user-guides/trends/cumulative.png)
+<ProductScreenshot
+    imageLight = {cumulativeLight} 
+    imageDark = {cumulativeDark}
+    classes="rounded"
+    alt="Cumulative plot"
+/>
 
 The **Cumulative** plot displays a running tally of each series over the given interval.
 
 ##### Time (Bar Chart)
 
-![time bar chart](../../images/docs/user-guides/trends/time-bar-chart.png)
+<ProductScreenshot
+    imageLight = {timeBarchartLight} 
+    imageDark = {timeBarchartDark}
+    classes="rounded"
+    alt="Time bar chart"
+/>
 
 The **Time** bar chart displays the value of a series over time. This plot shows the exact same information as the [linear chart](#linear), but in a slightly different visual manner.
 
 ##### Value (Bar Chart)
 
-![value bar chart](../../images/docs/user-guides/trends/value.png)
+<ProductScreenshot
+    imageLight = {valueLight} 
+    imageDark = {valueDark}
+    classes="rounded"
+    alt="Value bar chart"
+/>
 
 The **Value** bar chart displays the total value of a series over the _entire date range_. This means that this type of plot has no option for grouping, as it doesn't display data over time.
 
@@ -307,19 +446,34 @@ The **Value** bar chart displays the total value of a series over the _entire da
 
 ##### Table
 
-![table chart](../../images/docs/user-guides/trends/table.png)
+<ProductScreenshot
+    imageLight = {tableLight} 
+    imageDark = {tableDark}
+    classes="rounded"
+    alt="Table chart"
+/>
 
 The **Table** chart displays the raw numerical values of a series over the _entire date range_. This plot shows the exact same information as the [value bar chart](#value-bar-chart), just in a different visual manner.
 
 ##### Pie
 
-![pie chart](../../images/docs/user-guides/trends/pie.png)
+<ProductScreenshot
+    imageLight = {pieLight} 
+    imageDark = {pieDark}
+    classes="rounded"
+    alt="Pie chart"
+/>
 
 The **Pie** chart displays the relative distribution of the values of different series or breakdowns over the _entire date range_.
 
 ##### World Map
 
-![world map chart](../../images/docs/user-guides/trends/world-map.png)
+<ProductScreenshot
+    imageLight = {worldMapLight} 
+    imageDark = {worldMapDark}
+    classes="rounded"
+    alt="World map chart"
+/>
 
 The **World Map** chart displays values in an interactive map of the world, broken down by country code. This display option can't be selected if you're already breaking down by a property other than Country Code.
 
@@ -327,7 +481,12 @@ The **World Map** chart displays values in an interactive map of the world, brok
 
 One of the most powerful tools when creating a new trend is using custom formulas. Formulas are custom mathematical expressions that you can use to compare and combine the value of multiple series.
 
-![formula map chart](../../images/docs/user-guides/trends/formula.png)
+<ProductScreenshot
+    imageLight = {formulaLight} 
+    imageDark = {formulaDark}
+    classes="rounded"
+    alt="Formula map chart"
+/>
 
 To add a formula, open the 'Advanced Options' dropdown and click the 'Add formula' button. Then within the input box, type out the expression you would like to evaluate.
 
@@ -341,6 +500,11 @@ For example, if you have two series A and B, then the formula A / B will plot th
 
 Insight filters follow a declarative format that you can view and edit. Open the insight editor by clicking on the `{}` icon next to the save insight button and you will see the source for the current insight configuration. Using this editor you can copy-and-paste complete or partial insights and understand what is going on under the hood. We admit this is a bit of a power user feature, but if you're so inclined you might even find it easier to edit insights this way.
 
-![view insight configuration source](../../images/docs/user-guides/trends/insights-source.png)
+<ProductScreenshot
+    imageLight = {insightsSourceLight} 
+    imageDark = {insightsSourceDark}
+    classes="rounded"
+    alt="View insight configuration source"
+/>
 
 Want more? Check our [full list of PostHog tutorials](/tutorials).

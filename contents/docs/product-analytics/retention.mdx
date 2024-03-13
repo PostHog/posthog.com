@@ -7,8 +7,10 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import retentionTableLight from '../../images/docs/product-analytics/retention-table-light-mode.png'
+import retentionTableDark from '../../images/docs/product-analytics/retention-table-dark-mode.png'
 
-<iframe
+<iframe 
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=658"
     className="rounded shadow-xl"
 />
@@ -43,14 +45,19 @@ The remaining columns are the ones displaying retention. Day 0 is the day repres
 
 It's easiest to explain retention using the following visual example:
 
-![Retention table](../../images/retention-table.png)
+<ProductScreenshot
+    imageLight = {retentionTableLight} 
+    imageDark = {retentionTableDark}
+    classes="rounded"
+    alt= "Retention table"
+/>
 
--   Looking at the row for "Sun. 12 July", 3 users visited the website on that day (Day 0).
--   Then, the next day (Day 1), 33% of those users visited **again**. In other words, one of the distinct users who visited the website on the 12th also visited on the 13th. One of those users also visited once more on Day 5 (i.e. 5 days after the 12th -> 17th).
+-   Looking at the row for "Feb 5", 15 users visited the website on that day (Day 0).
+-   Then, two days later (Day 2), 33% of those users visited **again**. In other words, five of the distinct users who visited the website on the 5th also visited on the 7th. Six of those distinct 15 users also visited again on Day 5 (i.e. 5 days after the 5th -> 10th).
 -   Retention tracks distinct users and is a great way to see how well they are being retained. Do they come back often? Or do they just visit once? (More on this in the next section).
 -   Finally, note that the retention table is filled from the bottom up, in a queue-like manner. That means cohorts are added and removed on a First In First Out basis. They are added at the bottom of the table daily, and the first row (oldest) is removed from the top.
 
-> Users are distinct on each cohort, but not _across_ cohorts. A user from the 12th who came back on the 15th will be represented in both rows.
+> Users are distinct on each cohort, but not _across_ cohorts. A user from the 4th who came back on the 11th will be represented in both rows.
 
 ## Retention types
 

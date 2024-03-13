@@ -9,6 +9,11 @@ showTitle: true
 
 import UserPropertiesHowToSet from "../getting-started/\_snippets/user-properties-how-to-set.mdx"
 import UserPropertiesSetVsSetOnce from "../getting-started/\_snippets/user-properties-set-vs-set-once.mdx"
+import viewUserPropertiesLight from '../../images/docs/data/user-properties/view-user-properties-light-mode.mp4'
+import viewUserPropertiesDark from '../../images/docs/data/user-properties/view-user-properties-dark-mode.mp4'
+import changeDisplayNameLight from '../../images/docs/data/user-properties/change-display-name-light-mode.png'
+import changeDisplayNameDark from '../../images/docs/data/user-properties/change-display-name-dark-mode.png'
+
 
 User properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
 
@@ -103,13 +108,23 @@ To view properties for a particular user, go to [Persons & Groups](https://app.p
 
 On a user's property list, you can add properties to them by clicking the "New property" button, then adding a key, type, and value. You can also delete a custom property for a user by clicking the red garbage bin icon on the right side of property listing.
 
-![How to view user properties](../../images/docs/data/user-properties/view-user-properties.mp4)
+<ProductVideo
+    videoLight = {viewUserPropertiesLight} 
+    videoDark = {viewUserPropertiesDark}
+    classes="rounded"
+    alt="How to view user properties"
+/>
 
 ## Person display name
 
 The person display name is the name that is shown in the PostHog UI. The person properties that are used as the display name can be configured in [Project Settings](https://app.posthog.com/project/settings).
 
-![Where to change the display name in project settings](../../images/docs/data/user-properties/change-display-name.png)
+<ProductScreenshot
+    imageLight = {changeDisplayNameLight} 
+    imageDark = {changeDisplayNameDark}
+    classes="rounded"
+    alt="Where to change the display name in project settings"
+/>
 
 ## Default user properties
 
