@@ -11,6 +11,7 @@ const query = (params: any, offset: number) => {
             teams: {
                 populate: ['leadProfiles'],
             },
+            likes: true,
         },
         sort: 'updatedAt:desc',
         pagination: {
@@ -19,7 +20,6 @@ const query = (params: any, offset: number) => {
         },
         ...params,
     }
-    console.log(query)
     return qs.stringify(query, {
         encodeValuesOnly: true,
     })

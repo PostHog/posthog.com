@@ -165,8 +165,8 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
   <key>com.posthog.posthog.POSTHOG_HOST</key>
   <string><ph_instance_address></string>  <!--  https://app.posthog.com or https://eu.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
-  <key>com.posthog.posthog.DEBUG</key>
   <true/>
+  <key>com.posthog.posthog.DEBUG</key>
   <true/>
 </dict>
 </plist>
@@ -340,5 +340,5 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 ## Further reading
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
+- [How to set up analytics in Flutter](/tutorials/flutter-analytics)
 - [How to set up feature flags in Flutter](/tutorials/flutter-feature-flags)

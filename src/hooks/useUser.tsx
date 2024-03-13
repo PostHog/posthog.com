@@ -39,6 +39,8 @@ type UserContextValue = {
     }) => Promise<User | null | { error: string }>
     isSubscribed: (contentType: 'topic' | 'question', id: number | string) => Promise<boolean>
     setSubscription: (contentType: 'topic' | 'question', id: number | string, subscribe: boolean) => Promise<void>
+    likePost: (id: number, unlike?: boolean, slug?: string) => Promise<void>
+    likeRoadmap: (id: number, unlike?: boolean, title?: string) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -57,6 +59,8 @@ export const UserContext = createContext<UserContextValue>({
     signUp: async () => null,
     isSubscribed: async () => false,
     setSubscription: async () => undefined,
+    likePost: async () => undefined,
+    likeRoadmap: async () => undefined,
 })
 
 type UserProviderProps = {
@@ -442,6 +446,41 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         await fetchUser()
     }
 
+    const likeRoadmap = async (id: number, unlike = false, title = '') => {
+        const profileID = user?.profile?.id
+        if (!profileID || !id) return
+        const body = {
+            data: {
+                roadmapLikes: unlike
+                    ? { disconnect: [id] }
+                    : {
+                          connect: [id],
+                      },
+            },
+        }
+        const likeRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!likeRes.ok) {
+            throw new Error(`Failed to like roadmap`)
+        }
+
+        posthog?.capture(unlike ? 'roadmap downvote' : 'roadmap upvote', {
+            post: {
+                id,
+                title,
+            },
+        })
+
+        await fetchUser()
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -459,6 +498,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         isSubscribed,
         setSubscription,
         likePost,
+        likeRoadmap,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

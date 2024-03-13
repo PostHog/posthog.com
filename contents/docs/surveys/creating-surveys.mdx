@@ -8,6 +8,10 @@ availability:
     enterprise: full
 ---
 
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import newSurveyLight from '../../images/docs/surveys/new-survey-light-mode.png'
+import newSurveyDark from '../../images/docs/surveys/new-survey-dark-mode.png'
+
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
     className="rounded shadow-xl"
@@ -17,7 +21,12 @@ To create a new survey, go to the [surveys tab](https://us.posthog.com/surveys) 
 
 This presents you with a collection of survey templates or you can click "Create blank survey" to create your own. After choosing one, you are brought to a form where you can complete the details of your new survey:
 
-![Create a survey](../../images/docs/surveys/new-survey.png)
+<ProductScreenshot
+    imageLight={newSurveyLight} 
+    imageDark={newSurveyDark}
+    alt="Create a survey" 
+    classes="rounded"
+/>
 
 Here's a breakdown of each field in the form:
 
