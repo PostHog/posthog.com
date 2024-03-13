@@ -33,8 +33,10 @@ export default function TeamUpdates() {
             <section className="max-w-[700px] mx-auto px-5 mt-8">
                 <div className="relative pb-6 mb-6 border-b border-border dark:border-dark flex justify-between items-end">
                     <div>
-                        <h1 className="font-bold text-5xl my-0">Work in progress</h1>
-                        <p className="my-0 font-semibold opacity-70 mt-2">Here's what we're building right now</p>
+                        <h1 className="font-bold text-3xl sm:text-5xl my-0">Work in progress</h1>
+                        <p className="my-0 font-semibold opacity-70 mt-1 sm:mt-2">
+                            Here's what we're building right now
+                        </p>
                     </div>
                 </div>
                 <div className="pb-12">

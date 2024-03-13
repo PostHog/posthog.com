@@ -140,12 +140,14 @@ export default function Roadmap() {
     return (
         <Layout>
             <SEO title="PostHog Roadmap" />
-            <section className="max-w-4xl mx-auto py-12">
-                <h1 className="m-0 mb-1">Roadmap</h1>
-                <p>
-                    Here's what we're thinking about building next. Vote for your favorites, or request a new feature on
-                    GitHub.
-                </p>
+            <section className="max-w-[700px] mx-auto px-5 mt-8 mb-12">
+                <div className="relative pb-6 mb-6 border-b border-border dark:border-dark">
+                    <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
+                    <p className="my-0 font-semibold opacity-70 mt-1 sm:mt-2">
+                        Here's what we're thinking about building next. Vote for your favorites, or request a new
+                        feature on GitHub.
+                    </p>
+                </div>
                 {isLoading ? (
                     <Skeleton />
                 ) : (
