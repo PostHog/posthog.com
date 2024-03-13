@@ -9,6 +9,8 @@ tags:
 
 Send event data from PostHog into Customer.io. User emails will also be sent if available and customers will be created in Customer.io.
 
+> Note: We currently have an [open issue](https://github.com/PostHog/customerio-plugin/issues/26) with our customer.io plugin which is impacting some functionality. 
+
 ## Requirements
 
 This requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
