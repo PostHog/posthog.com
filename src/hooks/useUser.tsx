@@ -40,7 +40,17 @@ type UserContextValue = {
     isSubscribed: (contentType: 'topic' | 'question', id: number | string) => Promise<boolean>
     setSubscription: (contentType: 'topic' | 'question', id: number | string, subscribe: boolean) => Promise<void>
     likePost: (id: number, unlike?: boolean, slug?: string) => Promise<void>
-    likeRoadmap: (id: number, unlike?: boolean, title?: string) => Promise<void>
+    likeRoadmap: ({
+        id,
+        unlike,
+        title,
+        user,
+    }: {
+        id: number
+        unlike?: boolean
+        title?: string
+        user?: User
+    }) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -446,8 +456,18 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         await fetchUser()
     }
 
-    const likeRoadmap = async (id: number, unlike = false, title = '') => {
-        const profileID = user?.profile?.id
+    const likeRoadmap = async ({
+        id,
+        unlike = false,
+        title = '',
+        ...other
+    }: {
+        id: number
+        unlike?: boolean
+        title?: string
+        user?: User
+    }) => {
+        const profileID = (other?.user || user)?.profile?.id
         if (!profileID || !id) return
         const body = {
             data: {
