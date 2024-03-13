@@ -10,9 +10,10 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
+import groupBy from 'lodash.groupby'
 
 const Feature = ({ id, title, teams, description, likeCount, onLike }) => {
-    const { user, likeRoadmap, getJwt, fetchUser } = useUser()
+    const { user, likeRoadmap } = useUser()
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const teamName = teams?.data?.[0]?.attributes?.name
@@ -98,7 +99,49 @@ const Feature = ({ id, title, teams, description, likeCount, onLike }) => {
         </>
     )
 }
+
+const Sort = ({ setSortBy, sortBy, className = '' }) => {
+    return (
+        <div className={`space-x-2 items-center ${className}`}>
+            <p className="m-0 font-bold opacity-70 leading-none">Sort by</p>
+            <div className="flex items-center">
+                <SortButton
+                    className="rounded-tl-md rounded-bl-md"
+                    active={sortBy === 'votes'}
+                    onClick={() => setSortBy('votes')}
+                >
+                    Votes
+                </SortButton>
+                <SortButton className="border-x-0" active={sortBy === 'team'} onClick={() => setSortBy('team')}>
+                    Team
+                </SortButton>
+                <SortButton
+                    className="rounded-tr-md rounded-br-md"
+                    active={sortBy === 'new'}
+                    onClick={() => setSortBy('new')}
+                >
+                    New
+                </SortButton>
+            </div>
+        </div>
+    )
+}
+
+const SortButton = ({ active, onClick, children, className = '' }) => {
+    return (
+        <button
+            onClick={onClick}
+            className={`px-4 py-1 border text-sm border-border dark:border-dark ${
+                active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+            } ${className}`}
+        >
+            {children}
+        </button>
+    )
+}
+
 export default function Roadmap() {
+    const [sortBy, setSortBy] = useState('votes')
     const { staticRoadmaps } = useStaticQuery(graphql`
         {
             staticRoadmaps: allSqueakRoadmap {
@@ -136,31 +179,78 @@ export default function Roadmap() {
             staticRoadmaps.nodes.find((node) => node.squeakId === id)?.githubPages?.[0]?.reactions?.total_count || 0
         return { id, attributes: { ...attributes, likeCount: likeCount + staticLikeCount } }
     })
+    const roadmapsGroupedByTeam = groupBy(
+        roadmaps,
+        (roadmap) => roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'
+    )
 
     return (
         <Layout>
             <SEO title="PostHog Roadmap" />
             <section className="max-w-[700px] mx-auto px-5 mt-8 mb-12">
-                <div className="relative pb-6 mb-6 border-b border-border dark:border-dark">
-                    <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
-                    <p className="my-0 font-semibold opacity-70 mt-1 sm:mt-2">
+                <div className="relative ">
+                    <div className="flex justify-between items-center">
+                        <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
+                        <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
+                    </div>
+                    <p className="my-0 font-semibold opacity-70 mt-2">
                         Here's what we're thinking about building next. Vote for your favorites, or request a new
                         feature on GitHub.
                     </p>
+                    <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
                 </div>
                 {isLoading ? (
                     <Skeleton />
                 ) : (
-                    <ul className="m-0 p-0 list-none mt-8 space-y-8">
-                        {[...roadmaps]
-                            .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
-                            .map((roadmap) => {
-                                return (
-                                    <li key={roadmap.id}>
-                                        <Feature id={roadmap.id} {...roadmap.attributes} onLike={mutate} />
-                                    </li>
-                                )
-                            })}
+                    <ul className="m-0 p-0 list-none mt-6 space-y-8">
+                        {sortBy === 'votes' || sortBy === 'new' ? (
+                            [...roadmaps]
+                                .sort((a, b) => {
+                                    return sortBy === 'votes'
+                                        ? b.attributes.likeCount - a.attributes.likeCount
+                                        : b.attributes.createdAt - a.attributes.createdAt
+                                })
+                                .map((roadmap) => {
+                                    return (
+                                        <li
+                                            className="first:pt-8 first:border-t border-border dark:border-dark"
+                                            key={roadmap.id}
+                                        >
+                                            <Feature id={roadmap.id} {...roadmap.attributes} onLike={mutate} />
+                                        </li>
+                                    )
+                                })
+                        ) : (
+                            <ul className="m-0 p-0 list-none mt-6 space-y-10">
+                                {Object.keys(roadmapsGroupedByTeam)
+                                    .sort()
+                                    .map((team) => {
+                                        const roadmaps = roadmapsGroupedByTeam[team]
+                                        return (
+                                            <li className="relative" key={team}>
+                                                <h4 className="m-0 mb-6 pr-2 inline-flex items-center bg-tan after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
+                                                    {team} Team
+                                                </h4>
+                                                <ul className="m-0 p-0 list-none space-y-8">
+                                                    {[...roadmaps]
+                                                        .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
+                                                        .map((roadmap) => {
+                                                            return (
+                                                                <li key={roadmap.id}>
+                                                                    <Feature
+                                                                        id={roadmap.id}
+                                                                        {...roadmap.attributes}
+                                                                        onLike={mutate}
+                                                                    />
+                                                                </li>
+                                                            )
+                                                        })}
+                                                </ul>
+                                            </li>
+                                        )
+                                    })}
+                            </ul>
+                        )}
                     </ul>
                 )}
             </section>
