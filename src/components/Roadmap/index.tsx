@@ -13,6 +13,7 @@ import { Authentication } from 'components/Squeak'
 import groupBy from 'lodash.groupby'
 import UpdateWrapper from './UpdateWrapper'
 import RoadmapForm from 'components/RoadmapForm'
+import Link from 'components/Link'
 
 const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
     const { user, likeRoadmap } = useUser()
@@ -205,9 +206,15 @@ export default function Roadmap() {
                         <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
                         <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
                     </div>
-                    <p className="my-0 font-semibold opacity-70 mt-2">
-                        Here's what we're thinking about building next. Vote for your favorites, or request a new
-                        feature on GitHub.
+                    <p className="my-0 font-semibold mt-2">
+                        <span className="opacity-70">
+                            Here's what we're thinking about building next. Vote for your favorites, or request a new
+                            feature{' '}
+                        </span>
+                        <Link externalNoIcon to="https://github.com/PostHog/posthog">
+                            on GitHub
+                        </Link>
+                        <span className="opacity-70">.</span>
                     </p>
                     <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
                 </div>
