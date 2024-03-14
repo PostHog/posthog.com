@@ -19,6 +19,8 @@ import { Video } from 'cloudinary-react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import RoadmapForm from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
+import Tooltip from 'components/Tooltip'
+import { IconShieldLock } from '@posthog/icons'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -141,9 +143,28 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
             title="Changelog"
             tableOfContents={tableOfContents}
         >
-            <section className="mb-4 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
+            <section className="mb-4 flex justify-between md:items-center md:flex-row flex-col md:space-y-0 space-y-4">
                 <div>
-                    <h1 className="m-0 text-3xl">Changelog</h1>
+                    <div className="flex gap-4 items-center">
+                        <div>
+                            <h1 className="m-0 text-3xl">Changelog</h1>
+                        </div>
+                        <div>
+                            {isModerator && (
+                                <>
+                                    {!adding && (
+                                        <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                            <Tooltip content="Only moderators can see this" placement="top">
+                                                <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                            </Tooltip>
+                                            Add entry
+                                        </CallToAction>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    </div>
+
                     <p className="m-0 mt-2">
                         <em>"All the updates that are fit to print"</em>
                     </p>
@@ -173,6 +194,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                     })}
                 </div>
             </section>
+
             {isModerator && (
                 <>
                     {newRoadmapID && (
@@ -183,12 +205,11 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                             <RoadmapForm status="complete" onSubmit={(roadmap) => setNewRoadmapID(roadmap.id)} />
                         </div>
                     ) : (
-                        <CallToAction onClick={() => setAdding(true)} size="sm" type="primary" className="mb-6">
-                            New change
-                        </CallToAction>
+                        ''
                     )}
                 </>
             )}
+
             <section className="grid article-content">
                 {Object.keys(changesByMonth).map((month, index) => {
                     const nodes = changesByMonth[month]
