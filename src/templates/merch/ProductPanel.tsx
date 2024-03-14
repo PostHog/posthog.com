@@ -11,16 +11,18 @@ import { useProduct } from './hooks'
 import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 type ProductPanelProps = {
     className?: string
     product: ShopifyProduct
     setIsCart: React.Dispatch<React.SetStateAction<boolean>>
     onClick: () => void
+    updateURL: (product: ShopifyProduct) => void
 }
 
 export function ProductPanel(props: ProductPanelProps): React.ReactElement {
-    const { className, product, setIsCart } = props
+    const { className, product, setIsCart, updateURL } = props
 
     const [isAdding, setIsAdding] = useState<boolean>(false)
     const [quantity, setQuantity] = useState<number>(1)
@@ -121,6 +123,24 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 <div className="border-t border-light dark:border-dark pt-4">
                     <h3 className="text-lg mb-0">Description</h3>
                     <p className="text-[15px]">{product.description}</p>
+                </div>
+            )}
+            {product.imageProducts?.length > 0 && (
+                <div className="border-t border-light dark:border-dark pt-4 mt-4">
+                    <h3 className="text-lg mb-0">See something else you liked?</h3>
+                    <p className="mt-0 opacity-75">You may have spotted these other fine PostHog products in the photos above.</p>
+                    <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-2">
+                        {product.imageProducts?.map((product) => {
+                            const { handle, featuredImage } = product
+                            return (
+                                <li key={handle}>
+                                    <a href={`?product=${handle}`}>
+                                        <GatsbyImage alt={handle} image={getImage(featuredImage?.localFile)} />
+                                    </a>
+                                </li>
+                            )
+                        })}
+                    </ul>
                 </div>
             )}
         </div>

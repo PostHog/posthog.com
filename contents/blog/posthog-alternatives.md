@@ -127,7 +127,7 @@ Amplitude is most known as a product analytics platform, though it also offers s
 
 2. **Marketing use cases:** Amplitude offers more useful features for marketing teams, such as predictive forecasting, and multi-touch attribution. PostHog is primarily designed for technical users, and product teams.
 
-3. **Free tier:** PostHog offers a generous 1 million events and 15k session recordings for free. Amplitude's free plan is limited to 100k monthly tracks users, and doesn't include important features, such as cohorts or data tables.
+3. **Free tier:** PostHog offers a generous 1 million events and 5k session recordings for free. Amplitude's free plan is limited to 100k monthly tracks users, and doesn't include important features, such as cohorts or data tables.
 
 ### What people like about Amplitude
 
@@ -397,7 +397,7 @@ FullStory is primarily a session replay tool, though it also includes some produ
 
 ### Key differences
 
-1. **Value and transparency:** FullStory offers no free plan and is notoriously pricey. PostHog offers a generous free plan (1 million events and 15k recordings per month), and all pricing is transparent. 
+1. **Value and transparency:** FullStory offers no free plan and is notoriously pricey. PostHog offers a generous free plan (1 million events and 5k recordings per month), and all pricing is transparent. 
 
 2. **Heat maps and scroll maps:** PostHog supports click maps via the [PostHog Toolbar](/docs/toolbar), but FullStory goes further to offer cursor heatmaps and scroll tracking, making it more useful for UX researchers.
 
@@ -533,7 +533,7 @@ Heap is very similar to Amplitude and Mixpanel, though it added session replay f
 
 2. **Marketing uses cases:** Both tools are useful for marketing teams, but Heap goes further by supporting multi-touch attribution for marketing campaigns.
 
-3. **Free tier:** Heap's free tier is limited to just 10,000 monthly sessions, and doesn't include session replay. All PostHog users get 1 million events and 15k recordings for free, every month.
+3. **Free tier:** Heap's free tier is limited to just 10,000 monthly sessions, and doesn't include session replay. All PostHog users get 1 million events and 5k recordings for free, every month.
 
 **Read more:** [In-depth PostHog vs Heap comparison](/blog/posthog-vs-heap) 
 
@@ -667,7 +667,7 @@ LogRocket is similar to FullStory in many respects, but with a greater focus on 
 
 2. **Heat maps and scroll maps:** PostHog supports click maps, but LogRocket offers more in-depth heat maps and scroll depth visualizations, which are ideal for UX research and click-through optimization.
 
-3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 15k session recordings for free every month, and all the core features.
+3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 5k session recordings for free every month, and all the core features.
 
 ### What people like about LogRocket
 

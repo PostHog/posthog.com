@@ -35,7 +35,7 @@ You can also use subqueries, joins, table expressions, arrays, lambdas, and a wh
 
 See our [HogQL documentation](/docs/product-analytics/hogql) for a full [list of supported ClickHouse SQL functions](/docs/product-analytics/hogql#supported-clickhouse-functions).
 
-> **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-top) – all users get 1 million events and 15k recordings free every month, **no card required.**
+> **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-top) – all users get 1 million events and 5k recordings free every month, **no card required.**
 
 ## What can you do with HogQL?
 
@@ -132,6 +132,6 @@ We're still actively developing all these ideas, as well as the implementation o
 
 Got an opinion on what we should do next? Share it via the [feedback modal in PostHog](https://app.posthog.com/home#supportModal=feedback%3A), or let us know [on Twitter](https://twitter.com/posthog).
 
-> **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-bottom) – all users get 1 million events and 15k recordings free every month, **no card required.**
+> **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-bottom) – all users get 1 million events and 5k recordings free every month, **no card required.**
 
 [^1]: 68.5% of 🇺🇸 residents think 🍍 belongs on 🍕. People in 🇪🇸 are the greatest 🍍 deniers at 10%. One person in Aruba 🇦🇼 voted, but we're pretty sure that was one of us during our [2023 all-company offsite](/blog/aruba-hackathon). We built some cool hackathon projects there, like our [dashboard template library](/templates), and an open-source tool for [monitoring and managing ClickHouse clusters](https://github.com/PostHog/HouseWatch). You could say it was openly... sourcey. "_Hello, HR? Are bad puns a firing offense?_"

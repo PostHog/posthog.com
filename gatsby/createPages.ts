@@ -366,6 +366,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                 }
                             }
                         }
+						imageProducts {
+							handle
+							featuredImage {
+								localFile {
+									childImageSharp {
+									gatsbyImageData
+									}
+								}
+							}
+						}
                         metafields {
                             value
                             key

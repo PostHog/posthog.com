@@ -116,6 +116,36 @@ PostHog::groupIdentify(array(
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
+## Config options
+
+When calling `PostHog::init`, there are various configuration options you can set apart from the host. Pass them into your client initialisation like so:
+
+```php
+PostHog::init(
+    'PROJECT_API_KEY',
+    array(
+        'host' => 'https://app.posthog.com', 
+        'debug' => true,
+        'ssl' => false,
+        // all options go here
+    ),
+);
+```
+
+All possible options below:
+
+| Attribute                 | Description   |
+| ------------------------- | ------------- |
+| `host`<br/><br/>**Type:** String<br/>**Default:** `app.posthog.com` | URL of your PostHog instance. |
+| `ssl`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Whether to use SSL for API requests or not |
+| `timeout`<br/><br/>**Type:** Integer<br/>**Default:** `10000` | Request timeout in milliseconds |
+| `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000` | Request timeout for feature flags in milliseconds |
+| `maximum_backoff_duration`<br/><br/>**Type:** Integer<br/>**Default:** `10000` | Request retry backoff. Retries will stop after this duration is hit |
+| `consumer`<br/><br/>**Type:** String<br/>**Default:** `lib_curl` | One of `socket`, `file`, `lib_curl`, and `fork_curl`. Determines what transport option to use for analytics capture. [More details here](https://github.com/PostHog/posthog-php/blob/master/lib/Consumer/File.php) |
+| `debug`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Output debug logs or not |
+
+
+
 ## Thank you
 
 This library is largely based on the `analytics-php` package.
