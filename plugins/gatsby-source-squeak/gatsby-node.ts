@@ -451,6 +451,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             number: String
             closed_at: String
             reactions: GithubReactions
+            total_count: Int
         }
 
         type GithubReactions {
