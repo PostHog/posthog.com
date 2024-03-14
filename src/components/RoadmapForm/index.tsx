@@ -207,7 +207,7 @@ export default function RoadmapForm({
     })
 
     return (
-        <form onSubmit={handleSubmit} className="m-0">
+        <form onSubmit={handleSubmit} className="mt-2 mb-6 border-b border-light dark:border-dark pb-8">
             <div className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark overflow-hidden">
                 {status === 'complete' && (
                     <div className="border-b border-border dark:border-dark">
