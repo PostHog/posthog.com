@@ -3,7 +3,7 @@ import Markdown from 'markdown-to-jsx'
 import { User, useUser } from 'hooks/useUser'
 import { CallToAction } from 'components/CallToAction'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { IconThumbsUp, IconUndo } from '@posthog/icons'
+import { IconShieldLock, IconThumbsUp, IconThumbsUpFilled, IconUndo } from '@posthog/icons'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import SideModal from 'components/Modal/SideModal'
@@ -18,6 +18,7 @@ import Slider from 'components/Slider'
 import CommunityLayout from 'components/Community/Layout'
 import { companyMenu } from '../../navs'
 import Fuse from 'fuse.js'
+import Tooltip from 'components/Tooltip'
 
 interface IGitHubPage {
     title: string
@@ -98,7 +99,11 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                             <br />
                             <span className="text-sm">vote{likeCount !== 1 && 's'}</span>
                         </p>
-                        {liked && <IconThumbsUp className="text-red w-5 h-5 absolute -top-2 -right-2" />}
+                        {liked && (
+                            <div className="absolute -top-2 -left-2.5 rotate-6 bg-green p-1 rounded-full">
+                                <IconThumbsUpFilled className="text-white w-4 h-4" />
+                            </div>
+                        )}
                     </div>
                     <div>
                         <h3 className="text-lg m-0 leading-tight">{title}</h3>
@@ -112,7 +117,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                                 {teamName} Team
                             </Link>
                         )}
-                        <div className="mt-2">
+                        <div className="mt-1">
                             <Markdown>{description}</Markdown>
                         </div>
                         <div className="mt-2">
@@ -152,21 +157,25 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
 
 const Sort = ({ sortBy, className = '' }) => {
     return (
-        <div className={`space-x-2 items-center ${className}`}>
-            <p className="m-0 font-bold opacity-70 leading-none">Sort by</p>
+        <div className={`md:space-x-2 items-center mb-4 sm:mb-0 ${className}`}>
+            <p className="sr-only">Sort by</p>
             <div className="flex items-center">
                 <SortButton
-                    className="rounded-tl-md rounded-bl-md"
+                    className="rounded-tl-md rounded-bl-md opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75"
                     active={sortBy === 'popular'}
                     onClick={() => navigate(`?sort=popular`)}
                 >
                     Popular
                 </SortButton>
-                <SortButton className="border-x-0" active={sortBy === 'team'} onClick={() => navigate(`?sort=team`)}>
+                <SortButton
+                    className="border-x-0 opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75"
+                    active={sortBy === 'team'}
+                    onClick={() => navigate(`?sort=team`)}
+                >
                     Team
                 </SortButton>
                 <SortButton
-                    className="rounded-tr-md rounded-br-md"
+                    className="rounded-tr-md rounded-br-md opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75"
                     active={sortBy === 'latest'}
                     onClick={() => navigate(`?sort=latest`)}
                 >
@@ -275,7 +284,7 @@ export default function Roadmap() {
                         <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
                         <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
                     </div>
-                    <p className="my-0 font-semibold mt-2">
+                    <p className="my-0 font-semibold mt-2 mb-4">
                         <span className="opacity-70">
                             Here's what we're thinking about building next. Vote for your favorites, or request a new
                             feature{' '}
@@ -299,24 +308,29 @@ export default function Roadmap() {
                             />
                         ) : (
                             <CallToAction onClick={() => setAdding(true)} size="sm" type="primary">
+                                <Tooltip content="Only moderators can see this" placement="top">
+                                    <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                </Tooltip>
                                 New feature request
                             </CallToAction>
                         ))}
                 </div>
                 <input
                     onChange={(e) => setRoadmapSearch(e.target.value)}
-                    placeholder="Type to search..."
+                    placeholder="Search this page..."
                     className="w-full p-2 rounded-md border border-border dark:border-dark text-black"
                 />
                 {sortBy === 'team' && teams.length > 0 && (
-                    <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-2 mt-4">
+                    <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-1.5 mt-4">
                         {['All teams', ...teams].map((team) => {
                             return (
                                 <button
                                     key={team}
                                     onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
-                                    className={`px-4 py-1 text-sm border border-border dark:border-dark rounded-md ${
-                                        selectedTeam === team ? 'bg-accent dark:bg-accent-dark' : ''
+                                    className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
+                                        selectedTeam === team
+                                            ? 'bg-accent dark:bg-accent-dark font-bold'
+                                            : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent/75'
                                     }`}
                                 >
                                     {team}
@@ -328,7 +342,7 @@ export default function Roadmap() {
                 {isLoading ? (
                     <Skeleton />
                 ) : (
-                    <ul className="m-0 p-0 list-none mt-6 space-y-8">
+                    <ul className="m-0 p-0 list-none mt-10 space-y-10">
                         {sortBy === 'popular' || sortBy === 'latest' ? (
                             [...roadmaps]
                                 .sort((a, b) => {
@@ -338,10 +352,7 @@ export default function Roadmap() {
                                 })
                                 .map((roadmap) => {
                                     return (
-                                        <li
-                                            className="first:pt-8 first:border-t border-border dark:border-dark"
-                                            key={roadmap.id}
-                                        >
+                                        <li className="" key={roadmap.id}>
                                             <Feature
                                                 id={roadmap.id}
                                                 {...roadmap.attributes}
@@ -383,6 +394,27 @@ export default function Roadmap() {
                                     })}
                             </ul>
                         )}
+
+                        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark px-8 py-8 rounded-md">
+                            <h3 className="m-0 mb-2 text-lg">Request another feature</h3>
+                            <p className="mb-3">
+                                We add features to our roadmap based on customer feedback shared{' '}
+                                <Link to="https://github.com/posthog/posthog/issues" external>
+                                    in our GitHub repo
+                                </Link>
+                                . We'd love to have you share your best ideas there!
+                            </p>
+                            <p className="mb-0">
+                                <CallToAction
+                                    size="sm"
+                                    type="secondary"
+                                    to="https://github.com/posthog/posthog/issues"
+                                    externalNoIcon
+                                >
+                                    Request a feature
+                                </CallToAction>
+                            </p>
+                        </div>
                     </ul>
                 )}
             </section>
