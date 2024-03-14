@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 export default function TeamSelect({ value, onChange }) {
     const [teams, setTeams] = useState([])
     useEffect(() => {
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams`)
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?populate=*`)
             .then((res) => res.json())
             .then(({ data }) => {
                 setTeams(data)
@@ -13,9 +13,9 @@ export default function TeamSelect({ value, onChange }) {
 
     return (
         <Select
-            value={value}
+            value={value && (teams.includes(value) ? value : teams.find((team) => team.id === value.id))}
             onChange={onChange}
-            options={teams.map(({ id, attributes }) => ({ label: attributes.name, value: id }))}
+            options={teams.map((team) => ({ label: team.attributes.name, value: team }))}
             placeholder="Team"
         />
     )

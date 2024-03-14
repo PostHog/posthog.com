@@ -31,12 +31,16 @@ export default function UpdateWrapper({
     status,
     formClassName = '',
     editButtonClassName = '',
+    onSubmit,
+    showSuccessMessage = false,
 }: {
     id: number
     children: JSX.Element
     status: Status
     formClassName?: string
     editButtonClassName?: string
+    onSubmit?: (roadmap: any) => void
+    showSuccessMessage?: boolean
 }) {
     const { user } = useUser()
     const [editing, setEditing] = useState(false)
@@ -54,7 +58,7 @@ export default function UpdateWrapper({
                     body: description,
                     images: [],
                     topic: topic?.data || undefined,
-                    team: teams?.data?.[0]?.id || undefined,
+                    team: teams?.data?.[0] || undefined,
                     featuredImage: image?.data ? { file: null, objectURL: image.data.attributes.url } : undefined,
                     betaAvailable,
                     milestone,
@@ -76,16 +80,19 @@ export default function UpdateWrapper({
                 initialValues={initialValues}
                 buttonText="Update"
                 id={id}
-                onSubmit={() => {
+                onSubmit={(roadmap) => {
                     fetchRoadmapItem()
                     setSuccess(true)
                     setEditing(false)
+                    onSubmit?.(roadmap)
                 }}
             />
         </div>
     ) : (
         <>
-            {success && <RoadmapSuccess description="Roadmap will update on next build" id={id} />}
+            {showSuccessMessage && success && (
+                <RoadmapSuccess description="Roadmap will update on next build" id={id} />
+            )}
             <div className="relative">
                 {initialValues && (
                     <button className={`font-bold text-red ${editButtonClassName}`} onClick={() => setEditing(true)}>

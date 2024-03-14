@@ -1,18 +1,24 @@
-import Layout from 'components/Layout'
-import React, { useEffect, useState } from 'react'
-import Link from 'components/Link'
-import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
-import { UnderConsideration } from './UnderConsideration'
-import { InProgress } from './InProgress'
-import { StaticImage } from 'gatsby-plugin-image'
-import { useRoadmap } from 'hooks/useRoadmap'
-import { useNav } from 'components/Community/useNav'
+import React, { useEffect, useMemo, useState } from 'react'
+import Markdown from 'markdown-to-jsx'
+import { User, useUser } from 'hooks/useUser'
 import { CallToAction } from 'components/CallToAction'
-import RoadmapForm, { Status } from 'components/RoadmapForm'
-import { useUser } from 'hooks/useUser'
-import UpdateWrapper, { RoadmapSuccess } from './UpdateWrapper'
+import { useRoadmaps } from 'hooks/useRoadmaps'
+import { IconShieldLock, IconThumbsUp, IconThumbsUpFilled, IconUndo } from '@posthog/icons'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { Skeleton } from 'components/Questions/QuestionsTable'
+import SideModal from 'components/Modal/SideModal'
+import { Authentication } from 'components/Squeak'
+import groupBy from 'lodash.groupby'
+import UpdateWrapper from './UpdateWrapper'
+import RoadmapForm from 'components/RoadmapForm'
+import Link from 'components/Link'
+import slugify from 'slugify'
 import { useLocation } from '@reach/router'
+import Slider from 'components/Slider'
+import CommunityLayout from 'components/Community/Layout'
+import { companyMenu } from '../../navs'
+import Fuse from 'fuse.js'
+import Tooltip from 'components/Tooltip'
 
 interface IGitHubPage {
     title: string
@@ -24,14 +30,9 @@ interface IGitHubPage {
         heart: number
         eyes: number
         plus1: number
+        total_count: number
     }
 }
-
-interface ITeam {
-    name: string
-    roadmaps: IRoadmap[]
-}
-
 export interface IRoadmap {
     squeakId: number
     title: string
@@ -46,256 +47,376 @@ export interface IRoadmap {
     githubPages: IGitHubPage[]
 }
 
-/*const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
-    const { title, githubPages } = props
-    const url = githubPages?.length > 0 && githubPages[0]?.html_url
+const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
+    const { user, likeRoadmap } = useUser()
+    const [authModalOpen, setAuthModalOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const teamName = teams?.data?.[0]?.attributes?.name
+    const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
 
-    return (
-        <li className="text-base font-semibold">
-            {url ? (
-                <Link
-                    to={url}
-                    className="flex px-4 py-2 bg-white rounded-sm relative active:top-[0.5px] active:scale-[.99] shadow-xl"
-                >
-                    {title}
-                </Link>
-            ) : (
-                <span className="flex bg-white px-4 py-2 rounded-sm shadow-xl relative">{title}</span>
-            )}
-        </li>
-    )
-}*/
+    useEffect(() => {
+        setLoading(false)
+    }, [liked])
 
-const AddRoadmapItem = ({ status }: { status: 'in-progress' | 'complete' | 'under-consideration' }) => {
-    const [adding, setAdding] = useState(false)
-    const [roadmapID, setRoadmapID] = useState(null)
+    const like = async (user?: User) => {
+        setLoading(true)
+        await likeRoadmap({ id, title, user, unlike: liked })
+        onLike?.()
+    }
 
-    return (
-        <div className="pt-4 !mt-4 border-t border-border dark:border-dark pb-4">
-            {roadmapID && <RoadmapSuccess id={roadmapID} />}
-            {adding ? (
-                <RoadmapForm
-                    status={status}
-                    onSubmit={(roadmap) => {
-                        setAdding(false)
-                        setRoadmapID(roadmap.id)
-                    }}
-                />
-            ) : (
-                <CallToAction
-                    width="full"
-                    onClick={() => {
-                        setAdding(true)
-                        setRoadmapID(null)
-                    }}
-                >
-                    Add
-                </CallToAction>
-            )}
-        </div>
-    )
-}
+    const onAuth = (user: User) => {
+        like(user)
+        setAuthModalOpen(false)
+    }
 
-export const Section = ({
-    title,
-    description,
-    children,
-    className,
-}: {
-    title: React.ReactNode
-    description?: React.ReactNode
-    children: React.ReactNode
-    className?: string
-}) => {
-    return (
-        <div className={`xl:px-7 2xl:px-8 px-5 py-8 ${className ?? ''}`}>
-            <h3 className="text-xl m-0">{title}</h3>
-            {description && <p className="text-[15px] m-0 text-black/60 dark:text-white/60 mb-4">{description}</p>}
-            {children}
-        </div>
-    )
-}
-
-export const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
         <>
-            {team !== 'undefined' && <h4 className="text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
-            <li className="m-0 mb-3">{children}</li>
+            <SideModal title={title} open={authModalOpen} setOpen={setAuthModalOpen}>
+                <h4 className="mb-4">Sign into PostHog.com</h4>
+                <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                    <p className="text-sm mb-2">
+                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                    </p>
+
+                    <p className="text-sm mb-0">
+                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                        account.
+                    </p>
+                </div>
+
+                <Authentication initialView="sign-in" onAuth={onAuth} showBanner={false} showProfile={false} />
+            </SideModal>
+            <UpdateWrapper
+                id={id}
+                status="under-consideration"
+                editButtonClassName="absolute bottom-0 right-0"
+                onSubmit={() => onUpdate()}
+            >
+                <div className="flex space-x-4">
+                    <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent dark:bg-accent-dark flex-shrink-0 relative">
+                        <p className="m-0 leading-none">
+                            <strong className="text-lg leading-none">{likeCount}</strong>
+                            <br />
+                            <span className="text-sm">vote{likeCount !== 1 && 's'}</span>
+                        </p>
+                        {liked && (
+                            <div className="absolute -top-2 -left-2.5 rotate-6 bg-green p-1 rounded-full">
+                                <IconThumbsUpFilled className="text-white w-4 h-4" />
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        <h3 className="text-lg m-0 leading-tight">{title}</h3>
+                        {teamName && (
+                            <Link
+                                to={`/teams/${slugify(teamName.toLowerCase().replace('ops', ''), {
+                                    remove: /and/,
+                                })}`}
+                                className="text-sm opacity-70 text-inherit hover:opacity-100 hover:text-red dark:hover:text-yellow mt-0.5"
+                            >
+                                {teamName} Team
+                            </Link>
+                        )}
+                        <div className="mt-1">
+                            <Markdown>{description}</Markdown>
+                        </div>
+                        <div className="mt-2">
+                            <CallToAction
+                                disabled={loading}
+                                onClick={() => {
+                                    if (user) {
+                                        like()
+                                    } else {
+                                        setAuthModalOpen(true)
+                                    }
+                                }}
+                                size="sm"
+                                type={liked ? 'outline' : 'primary'}
+                            >
+                                <span className="flex items-center space-x-1">
+                                    {liked ? (
+                                        <>
+                                            <IconUndo className="w-4 h-4" />
+                                            <span>Unvote</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <IconThumbsUp className="w-4 h-4" />
+                                            <span>Vote</span>
+                                        </>
+                                    )}
+                                </span>
+                            </CallToAction>
+                        </div>
+                    </div>
+                </div>
+            </UpdateWrapper>
         </>
     )
 }
 
-export const CardContainer = ({ children }: { children: React.ReactNode }) => {
-    return <ul className="list-none m-0 p-0 flex flex-col gap-4 ">{children}</ul>
+const Sort = ({ sortBy, className = '' }) => {
+    return (
+        <div className={`md:space-x-2 items-center mb-4 sm:mb-0 ${className}`}>
+            <p className="sr-only">Sort by</p>
+            <div className="flex items-center">
+                <SortButton
+                    className="rounded-tl-md rounded-bl-md"
+                    active={sortBy === 'popular'}
+                    onClick={() => navigate(`?sort=popular`)}
+                >
+                    Popular
+                </SortButton>
+                <SortButton className="border-x-0" active={sortBy === 'team'} onClick={() => navigate(`?sort=team`)}>
+                    Team
+                </SortButton>
+                <SortButton
+                    className="rounded-tr-md rounded-br-md"
+                    active={sortBy === 'latest'}
+                    onClick={() => navigate(`?sort=latest`)}
+                >
+                    Latest
+                </SortButton>
+            </div>
+        </div>
+    )
+}
+
+const SortButton = ({ active, onClick, children, className = '' }) => {
+    return (
+        <button
+            onClick={onClick}
+            className={`px-4 py-1 border text-sm border-border dark:border-dark opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75 ${
+                active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+            } ${className}`}
+        >
+            {children}
+        </button>
+    )
 }
 
 export default function Roadmap() {
     const { search } = useLocation()
-    const nav = useNav()
-    const teams = useRoadmap()
     const { user } = useUser()
-    const underConsideration: ITeam[] = teams
-        .map((team) => {
-            return {
-                ...team,
-                roadmaps: team.roadmaps.filter(
-                    (roadmap) =>
-                        !roadmap.dateCompleted &&
-                        !roadmap.projectedCompletion &&
-                        roadmap.githubPages &&
-                        roadmap.githubPages.length > 0
-                ),
+    const [sortBy, setSortBy] = useState('popular')
+    const [adding, setAdding] = useState(false)
+    const [selectedTeam, setSelectedTeam] = useState('All teams')
+    const [roadmapSearch, setRoadmapSearch] = useState('')
+    const { staticRoadmaps } = useStaticQuery(graphql`
+        {
+            staticRoadmaps: allSqueakRoadmap {
+                nodes {
+                    githubPages {
+                        reactions {
+                            total_count
+                        }
+                    }
+                    squeakId
+                }
             }
-        })
-        .filter((team) => team.roadmaps.length > 0)
+        }
+    `)
 
-    const inProgress: ITeam[] = teams
-        .map((team) => {
-            return {
-                ...team,
-                roadmaps: team.roadmaps.filter((roadmap) => !roadmap.complete && roadmap.projectedCompletion),
-            }
-        })
-        .filter((team) => team.roadmaps.length > 0)
+    const {
+        roadmaps: initialRoadmaps,
+        mutate,
+        isLoading,
+    } = useRoadmaps({
+        params: {
+            filters: {
+                dateCompleted: {
+                    $null: true,
+                },
+                projectedCompletion: {
+                    $null: true,
+                },
+            },
+        },
+    })
 
-    const params = new URLSearchParams(search)
-    const roadmapID = params.get('id')
+    const fuse = useMemo(
+        () => new Fuse(initialRoadmaps, { keys: ['attributes.title', 'attributes.description'], includeMatches: true }),
+        [initialRoadmaps]
+    )
+    const filteredRoadmaps = useMemo(() => {
+        const results = fuse.search(roadmapSearch).map(({ item }) => item)
+        return results.length > 0 ? results : null
+    }, [fuse, roadmapSearch])
+
+    useEffect(() => {
+        const params = new URLSearchParams(search)
+        const sort = params.get('sort')
+        const team = params.get('team')
+        if (sort) {
+            setSortBy(sort)
+        }
+        if (team) {
+            setSelectedTeam(team)
+        }
+    }, [search])
+
+    const roadmaps = (filteredRoadmaps || initialRoadmaps).map(({ id, attributes }) => {
+        const likeCount = attributes?.likes?.data?.length || 0
+        const staticLikeCount =
+            staticRoadmaps.nodes.find((node) => node.squeakId === id)?.githubPages?.[0]?.reactions?.total_count || 0
+        return { id, attributes: { ...attributes, likeCount: likeCount + staticLikeCount } }
+    })
+    const roadmapsGroupedByTeam = groupBy(
+        roadmaps,
+        (roadmap) => `${roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'} Team`
+    )
+    const teams = Object.keys(roadmapsGroupedByTeam).sort()
+    const isModerator = user?.role?.type === 'moderator'
 
     return (
-        <Layout>
-            <SEO title="PostHog Roadmap" />
-            <div className="">
-                <PostLayout
-                    article={false}
-                    title={'Roadmap'}
-                    hideSurvey
-                    menu={nav}
-                    darkMode={false}
-                    contentContainerClassName="lg:-mb-12 -mb-8"
-                    fullWidthContent
-                >
-                    <div className="relative">
-                        <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
-                        <figure className="sm:-mt-12 xl:-mt-24 mb-0">
-                            <StaticImage
-                                className="w-full"
-                                imgClassName="w-full aspect-auto"
-                                placeholder="blurred"
-                                alt={`Look at those views!'`}
-                                src="./images/hike-hog.png"
-                            />
-                        </figure>
+        <CommunityLayout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'roadmap')}
+            title="Roadmap"
+        >
+            <section>
+                <div className="relative">
+                    <div className="flex justify-between items-center">
+                        <div className="flex gap-4 items-center">
+                            <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
+                            {isModerator && !adding && (
+                                <div className="relative top-1">
+                                    <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                        <Tooltip content="Only moderators can see this" placement="top">
+                                            <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                        </Tooltip>
+                                        Add a feature
+                                    </CallToAction>
+                                </div>
+                            )}
+                        </div>
+                        <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
                     </div>
-                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-light dark:divide-dark pb-8">
-                        <Section
-                            title="Under consideration"
-                            description="The top features we might build next. Your feedback is requested."
-                        >
-                            <CardContainer>
-                                {underConsideration.sort().map((team) => {
-                                    return (
-                                        <Card key={team.name} team={team.name}>
-                                            <CardContainer>
-                                                {team.roadmaps.map((node) => {
-                                                    return (
-                                                        <UpdateWrapper
-                                                            key={node.title}
-                                                            id={node.squeakId}
-                                                            status="under-consideration"
-                                                            formClassName="mb-4"
-                                                            editButtonClassName="absolute bottom-4 right-4 z-10"
-                                                        >
-                                                            <UnderConsideration {...node} />
-                                                        </UpdateWrapper>
-                                                    )
-                                                })}
-                                            </CardContainer>
-                                        </Card>
-                                    )
-                                })}
-                                {user?.role?.type === 'moderator' && <AddRoadmapItem status="under-consideration" />}
-                            </CardContainer>
-                        </Section>
+                    <p className="my-0 font-semibold mt-2 mb-4">
+                        <span className="opacity-70">
+                            Here's what we're thinking about building next. Vote for your favorites, or request a new
+                            feature{' '}
+                        </span>
+                        <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
+                            on GitHub
+                        </Link>
+                        <span className="opacity-70">.</span>
+                    </p>
+                    <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
 
-                        <Section
-                            title="In progress"
-                            description={
-                                <>
-                                    Here’s what we're building <strong>right now</strong>. (We choose milestones using
-                                    community feedback.)
-                                </>
-                            }
-                        >
-                            <CardContainer>
-                                {inProgress
-                                    .sort((a, b) =>
-                                        a.roadmaps.some((goal) => goal.betaAvailable)
-                                            ? -1
-                                            : b.roadmaps.some((goal) => goal.betaAvailable)
-                                            ? 1
-                                            : 0
+                    {isModerator && adding && (
+                        <RoadmapForm
+                            status="under-consideration"
+                            onSubmit={() => {
+                                mutate()
+                                setAdding(false)
+                            }}
+                        />
+                    )}
+                </div>
+                <input
+                    onChange={(e) => setRoadmapSearch(e.target.value)}
+                    placeholder="Search this page..."
+                    className="w-full p-2 rounded-md border border-border dark:border-dark text-black"
+                />
+                {sortBy === 'team' && teams.length > 0 && (
+                    <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-1.5 mt-4">
+                        {['All teams', ...teams].map((team) => {
+                            return (
+                                <button
+                                    key={team}
+                                    onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
+                                    className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
+                                        selectedTeam === team
+                                            ? 'bg-accent dark:bg-accent-dark font-bold'
+                                            : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent/75'
+                                    }`}
+                                >
+                                    {team}
+                                </button>
+                            )
+                        })}
+                    </Slider>
+                )}
+                {isLoading ? (
+                    <Skeleton />
+                ) : (
+                    <ul className="m-0 p-0 list-none mt-10 space-y-10">
+                        {sortBy === 'popular' || sortBy === 'latest' ? (
+                            [...roadmaps]
+                                .sort((a, b) => {
+                                    return sortBy === 'popular'
+                                        ? b.attributes.likeCount - a.attributes.likeCount
+                                        : b.attributes.createdAt - a.attributes.createdAt
+                                })
+                                .map((roadmap) => {
+                                    return (
+                                        <li className="" key={roadmap.id}>
+                                            <Feature
+                                                id={roadmap.id}
+                                                {...roadmap.attributes}
+                                                onLike={mutate}
+                                                onUpdate={mutate}
+                                            />
+                                        </li>
                                     )
+                                })
+                        ) : (
+                            <ul className="m-0 p-0 list-none mt-6 space-y-10">
+                                {teams
+                                    .filter((team) => selectedTeam === 'All teams' || team === selectedTeam)
                                     .map((team) => {
+                                        const roadmaps = roadmapsGroupedByTeam[team]
                                         return (
-                                            <Card key={team.name} team={team.name}>
-                                                <CardContainer>
-                                                    {team.roadmaps.map((node) => {
-                                                        return (
-                                                            <UpdateWrapper
-                                                                key={node.title}
-                                                                id={node.squeakId}
-                                                                status="in-progress"
-                                                                formClassName="mb-4"
-                                                                editButtonClassName="absolute bottom-4 right-4 z-10"
-                                                            >
-                                                                <InProgress
-                                                                    stacked
-                                                                    {...node}
-                                                                    modalOpen={roadmapID == node.squeakId}
-                                                                />
-                                                            </UpdateWrapper>
-                                                        )
-                                                    })}
-                                                </CardContainer>
-                                            </Card>
+                                            <li className="relative" key={team}>
+                                                <h4 className="m-0 mb-6 pr-2 inline-flex items-center bg-light dark:bg-dark after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
+                                                    {team}
+                                                </h4>
+                                                <ul className="m-0 p-0 list-none space-y-8">
+                                                    {[...roadmaps]
+                                                        .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
+                                                        .map((roadmap) => {
+                                                            return (
+                                                                <li key={roadmap.id}>
+                                                                    <Feature
+                                                                        id={roadmap.id}
+                                                                        {...roadmap.attributes}
+                                                                        onLike={mutate}
+                                                                        onUpdate={mutate}
+                                                                    />
+                                                                </li>
+                                                            )
+                                                        })}
+                                                </ul>
+                                            </li>
                                         )
                                     })}
-                                {user?.role?.type === 'moderator' && <AddRoadmapItem status="in-progress" />}
-                            </CardContainer>
-                        </Section>
+                            </ul>
+                        )}
 
-                        <Section
-                            title="Recently shipped"
-                            // description="Here's what was included in our last array."
-                            className=""
-                        >
-                            <p className="p-4  rounded-sm text-[15px]">
-                                Check out <Link to="/changelog">our changelog</Link> on our blog to see what we've
-                                shipped recently.
+                        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark px-8 py-8 rounded-md">
+                            <h3 className="m-0 mb-2 text-lg">Request another feature</h3>
+                            <p className="mb-3">
+                                We add features to our roadmap based on customer feedback shared{' '}
+                                <Link to="https://github.com/posthog/posthog/issues" external>
+                                    in our GitHub repo
+                                </Link>
+                                . We'd love to have you share your best ideas there!
                             </p>
-                            {user?.role?.type === 'moderator' && <AddRoadmapItem status="complete" />}
-                            {/*
-                            hidden until we have more historical content loaded
-                            <CardContainer>
-                            {Object.keys(complete)
-                                .sort()
-                                .map((key) => {
-                                    return (
-                                        <Card key={key} team={key}>
-                                            <CardContainer>
-                                                {complete[key]?.map((node: IRoadmap) => {
-                                                    return <Complete key={node.title} {...node} />
-                                                })}
-                                            </CardContainer>
-                                        </Card>
-                                    )
-                                })}
-                            </CardContainer>
-                        */}
-                        </Section>
-                    </div>
-                </PostLayout>
-            </div>
-        </Layout>
+                            <p className="mb-0">
+                                <CallToAction
+                                    size="sm"
+                                    type="secondary"
+                                    to="https://github.com/posthog/posthog/issues"
+                                    externalNoIcon
+                                >
+                                    Request a feature
+                                </CallToAction>
+                            </p>
+                        </div>
+                    </ul>
+                )}
+            </section>
+        </CommunityLayout>
     )
 }
