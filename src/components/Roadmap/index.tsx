@@ -161,21 +161,17 @@ const Sort = ({ sortBy, className = '' }) => {
             <p className="sr-only">Sort by</p>
             <div className="flex items-center">
                 <SortButton
-                    className="rounded-tl-md rounded-bl-md opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75"
+                    className="rounded-tl-md rounded-bl-md"
                     active={sortBy === 'popular'}
                     onClick={() => navigate(`?sort=popular`)}
                 >
                     Popular
                 </SortButton>
-                <SortButton
-                    className="border-x-0 opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75"
-                    active={sortBy === 'team'}
-                    onClick={() => navigate(`?sort=team`)}
-                >
+                <SortButton className="border-x-0" active={sortBy === 'team'} onClick={() => navigate(`?sort=team`)}>
                     Team
                 </SortButton>
                 <SortButton
-                    className="rounded-tr-md rounded-br-md opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75"
+                    className="rounded-tr-md rounded-br-md"
                     active={sortBy === 'latest'}
                     onClick={() => navigate(`?sort=latest`)}
                 >
@@ -190,7 +186,7 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-4 py-1 border text-sm border-border dark:border-dark ${
+            className={`px-4 py-1 border text-sm border-border dark:border-dark opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75 ${
                 active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
             } ${className}`}
         >
@@ -283,19 +279,16 @@ export default function Roadmap() {
                     <div className="flex justify-between items-center">
                         <div className="flex gap-4 items-center">
                             <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
-                            {isModerator &&
-                                (adding ? (
-                                    ''
-                                ) : (
-                                    <div className="relative top-1">
-                                        <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                            <Tooltip content="Only moderators can see this" placement="top">
-                                                <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                            </Tooltip>
-                                            Add a feature
-                                        </CallToAction>
-                                    </div>
-                                ))}
+                            {isModerator && !adding && (
+                                <div className="relative top-1">
+                                    <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                        <Tooltip content="Only moderators can see this" placement="top">
+                                            <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                        </Tooltip>
+                                        Add a feature
+                                    </CallToAction>
+                                </div>
+                            )}
                         </div>
                         <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
                     </div>
@@ -304,25 +297,22 @@ export default function Roadmap() {
                             Here's what we're thinking about building next. Vote for your favorites, or request a new
                             feature{' '}
                         </span>
-                        <Link externalNoIcon to="https://github.com/PostHog/posthog">
+                        <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
                             on GitHub
                         </Link>
                         <span className="opacity-70">.</span>
                     </p>
                     <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
 
-                    {isModerator &&
-                        (adding ? (
-                            <RoadmapForm
-                                status="under-consideration"
-                                onSubmit={() => {
-                                    mutate()
-                                    setAdding(false)
-                                }}
-                            />
-                        ) : (
-                            ''
-                        ))}
+                    {isModerator && adding && (
+                        <RoadmapForm
+                            status="under-consideration"
+                            onSubmit={() => {
+                                mutate()
+                                setAdding(false)
+                            }}
+                        />
+                    )}
                 </div>
                 <input
                     onChange={(e) => setRoadmapSearch(e.target.value)}

@@ -51,37 +51,31 @@ export default function TeamUpdates() {
                 <div className="relative mb-6">
                     <div className="flex gap-4 items-center">
                         <h1 className="font-bold text-3xl sm:text-5xl my-0">Work in progress</h1>
-                        {isModerator &&
-                            (adding ? (
-                                ''
-                            ) : (
-                                <div className="relative top-1">
-                                    <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                        <Tooltip content="Only moderators can see this" placement="top">
-                                            <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                        </Tooltip>
-                                        New item
-                                    </CallToAction>
-                                </div>
-                            ))}
+                        {isModerator && !adding && (
+                            <div className="relative top-1">
+                                <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                    <Tooltip content="Only moderators can see this" placement="top">
+                                        <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                    </Tooltip>
+                                    New item
+                                </CallToAction>
+                            </div>
+                        )}
                     </div>
                     <p className="my-0 font-semibold opacity-70 mt-1 sm:mt-2">Here's what we're building right now</p>
                 </div>
 
-                {isModerator &&
-                    (adding ? (
-                        <div className="mt-2 mb-8">
-                            <RoadmapForm
-                                status="in-progress"
-                                onSubmit={() => {
-                                    mutate()
-                                    setAdding(false)
-                                }}
-                            />
-                        </div>
-                    ) : (
-                        ''
-                    ))}
+                {isModerator && adding && (
+                    <div className="mt-2 mb-8">
+                        <RoadmapForm
+                            status="in-progress"
+                            onSubmit={() => {
+                                mutate()
+                                setAdding(false)
+                            }}
+                        />
+                    </div>
+                )}
 
                 <div className="pb-12">
                     {isLoading ? (

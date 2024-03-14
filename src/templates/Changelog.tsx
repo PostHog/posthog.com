@@ -150,17 +150,13 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                             <h1 className="m-0 text-3xl">Changelog</h1>
                         </div>
                         <div>
-                            {isModerator && (
-                                <>
-                                    {!adding && (
-                                        <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                            <Tooltip content="Only moderators can see this" placement="top">
-                                                <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                            </Tooltip>
-                                            Add entry
-                                        </CallToAction>
-                                    )}
-                                </>
+                            {isModerator && !adding && (
+                                <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                    <Tooltip content="Only moderators can see this" placement="top">
+                                        <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                    </Tooltip>
+                                    Add entry
+                                </CallToAction>
                             )}
                         </div>
                     </div>
@@ -200,12 +196,10 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                     {newRoadmapID && (
                         <RoadmapSuccess id={newRoadmapID} description="Changelog will update on next build" />
                     )}
-                    {adding ? (
+                    {adding && (
                         <div className="mb-6 border-border dark:border-dark">
                             <RoadmapForm status="complete" onSubmit={(roadmap) => setNewRoadmapID(roadmap.id)} />
                         </div>
-                    ) : (
-                        ''
                     )}
                 </>
             )}
