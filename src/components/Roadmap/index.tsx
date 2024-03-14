@@ -17,6 +17,8 @@ import Link from 'components/Link'
 import slugify from 'slugify'
 import { useLocation } from '@reach/router'
 import Slider from 'components/Slider'
+import CommunityLayout from 'components/Community/Layout'
+import { companyMenu } from '../../navs'
 
 const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
     const { user, likeRoadmap } = useUser()
@@ -226,9 +228,12 @@ export default function Roadmap() {
     const isModerator = user?.role?.type === 'moderator'
 
     return (
-        <Layout>
-            <SEO title="PostHog Roadmap" />
-            <section className="max-w-[700px] mx-auto px-5 mt-8 mb-12">
+        <CommunityLayout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'roadmap')}
+            title="Roadmap"
+        >
+            <section>
                 <div className="relative">
                     <div className="flex justify-between items-center">
                         <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
@@ -340,6 +345,6 @@ export default function Roadmap() {
                     </ul>
                 )}
             </section>
-        </Layout>
+        </CommunityLayout>
     )
 }

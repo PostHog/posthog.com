@@ -856,7 +856,7 @@ export const companyMenu = {
         },
         {
             name: 'WIP',
-            icon: 'IconSpinner',
+            icon: 'IconHourglass',
             color: 'seagreen',
             url: '/wip',
         },

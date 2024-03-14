@@ -1,6 +1,4 @@
-import Layout from 'components/Layout'
 import React, { useState } from 'react'
-import SEO from 'components/seo'
 import { companyMenu } from '../navs'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import { useRoadmaps } from 'hooks/useRoadmaps'
@@ -10,6 +8,7 @@ import RoadmapForm from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
+import CommunityLayout from 'components/Community/Layout'
 
 export default function TeamUpdates() {
     const { user } = useUser()
@@ -41,9 +40,12 @@ export default function TeamUpdates() {
     const isModerator = user?.role?.type === 'moderator'
 
     return (
-        <Layout parent={companyMenu}>
-            <SEO title="WIP - PostHog" />
-            <section className="max-w-[700px] mx-auto px-5 mt-8">
+        <CommunityLayout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'wip')}
+            title="WIP"
+        >
+            <section>
                 <div className="relative mb-6">
                     <h1 className="font-bold text-3xl sm:text-5xl my-0">Work in progress</h1>
                     <p className="my-0 font-semibold opacity-70 mt-1 sm:mt-2">Here's what we're building right now</p>
@@ -102,6 +104,6 @@ export default function TeamUpdates() {
                     )}
                 </div>
             </section>
-        </Layout>
+        </CommunityLayout>
     )
 }
