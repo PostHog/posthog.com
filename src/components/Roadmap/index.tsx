@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { SEO } from 'components/seo'
 import Markdown from 'markdown-to-jsx'
 import { User, useUser } from 'hooks/useUser'
@@ -19,6 +19,7 @@ import { useLocation } from '@reach/router'
 import Slider from 'components/Slider'
 import CommunityLayout from 'components/Community/Layout'
 import { companyMenu } from '../../navs'
+import Fuse from 'fuse.js'
 
 const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
     const { user, likeRoadmap } = useUser()
@@ -170,6 +171,7 @@ export default function Roadmap() {
     const [sortBy, setSortBy] = useState('popular')
     const [adding, setAdding] = useState(false)
     const [selectedTeam, setSelectedTeam] = useState('All teams')
+    const [roadmapSearch, setRoadmapSearch] = useState('')
     const { staticRoadmaps } = useStaticQuery(graphql`
         {
             staticRoadmaps: allSqueakRoadmap {
@@ -202,6 +204,15 @@ export default function Roadmap() {
         },
     })
 
+    const fuse = useMemo(
+        () => new Fuse(initialRoadmaps, { keys: ['attributes.title', 'attributes.description'], includeMatches: true }),
+        [initialRoadmaps]
+    )
+    const filteredRoadmaps = useMemo(() => {
+        const results = fuse.search(roadmapSearch).map(({ item }) => item)
+        return results.length > 0 ? results : null
+    }, [fuse, roadmapSearch])
+
     useEffect(() => {
         const params = new URLSearchParams(search)
         const sort = params.get('sort')
@@ -214,7 +225,7 @@ export default function Roadmap() {
         }
     }, [search])
 
-    const roadmaps = initialRoadmaps.map(({ id, attributes }) => {
+    const roadmaps = (filteredRoadmaps || initialRoadmaps).map(({ id, attributes }) => {
         const likeCount = attributes?.likes?.data?.length || 0
         const staticLikeCount =
             staticRoadmaps.nodes.find((node) => node.squeakId === id)?.githubPages?.[0]?.reactions?.total_count || 0
@@ -267,6 +278,11 @@ export default function Roadmap() {
                             </CallToAction>
                         ))}
                 </div>
+                <input
+                    onChange={(e) => setRoadmapSearch(e.target.value)}
+                    placeholder="Type to search..."
+                    className="w-full p-2 rounded-md border border-border dark:border-dark"
+                />
                 {sortBy === 'team' && teams.length > 0 && (
                     <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-2 mt-4">
                         {['All teams', ...teams].map((team) => {
