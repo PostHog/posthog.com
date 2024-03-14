@@ -9,6 +9,7 @@ import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
 import RoadmapForm from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
 import { CallToAction } from 'components/CallToAction'
+import groupBy from 'lodash.groupby'
 
 export default function TeamUpdates() {
     const { user } = useUser()
@@ -32,13 +33,18 @@ export default function TeamUpdates() {
         },
     })
 
+    const roadmapsGroupedByTeam = groupBy(
+        roadmaps,
+        (roadmap) => `${roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'} Team`
+    )
+    const teams = Object.keys(roadmapsGroupedByTeam).sort()
     const isModerator = user?.role?.type === 'moderator'
 
     return (
         <Layout parent={companyMenu}>
             <SEO title="WIP - PostHog" />
             <section className="max-w-[700px] mx-auto px-5 mt-8">
-                <div className="relative pb-6 mb-6 border-b border-border dark:border-dark">
+                <div className="relative mb-6">
                     <h1 className="font-bold text-3xl sm:text-5xl my-0">Work in progress</h1>
                     <p className="my-0 font-semibold opacity-70 mt-1 sm:mt-2">Here's what we're building right now</p>
                     {isModerator &&
@@ -63,20 +69,32 @@ export default function TeamUpdates() {
                     {isLoading ? (
                         <Skeleton />
                     ) : (
-                        <ul className="list-none m-0 p-0 pb-4 grid gap-y-4">
-                            {roadmaps.map((roadmap) => {
-                                const { id, attributes } = roadmap
+                        <ul className="list-none m-0 p-0 pb-4 grid gap-y-8">
+                            {teams.map((team) => {
+                                const roadmaps = roadmapsGroupedByTeam[team]
                                 return (
-                                    <li key={id}>
-                                        <UpdateWrapper
-                                            key={id}
-                                            id={id}
-                                            status="in-progress"
-                                            formClassName="mb-4"
-                                            editButtonClassName={'absolute top-4 right-4 z-10'}
-                                        >
-                                            <InProgress {...attributes} squeakId={id} />
-                                        </UpdateWrapper>
+                                    <li className="relative" key={team}>
+                                        <h4 className="m-0 mb-6 pr-2 inline-flex items-center bg-light dark:bg-dark after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
+                                            {team}
+                                        </h4>
+                                        <ul className="m-0 p-0 list-none space-y-6">
+                                            {roadmaps.map((roadmap) => {
+                                                const { id, attributes } = roadmap
+                                                return (
+                                                    <li key={id}>
+                                                        <UpdateWrapper
+                                                            key={id}
+                                                            id={id}
+                                                            status="in-progress"
+                                                            formClassName="mb-4"
+                                                            editButtonClassName={'absolute top-4 right-4 z-10'}
+                                                        >
+                                                            <InProgress {...attributes} squeakId={id} />
+                                                        </UpdateWrapper>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
                                     </li>
                                 )
                             })}
