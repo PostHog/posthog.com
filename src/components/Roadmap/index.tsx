@@ -287,7 +287,7 @@ export default function Roadmap() {
                     </p>
                     <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
                 </div>
-                <div className="mt-4">
+                <div className="my-4">
                     {isModerator &&
                         (adding ? (
                             <RoadmapForm
