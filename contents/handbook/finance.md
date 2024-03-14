@@ -5,15 +5,15 @@ showTitle: true
 ---
 ## Stay calm and default alive
 
-We don't optimize for short run revenue growth, but we do make sure we have enough money to never feel dependent on future fundraising.
+We don't optimize for short-run revenue growth, but we do make sure we have enough money to never feel dependent on future fundraising.
 
-If we average 5% MoM growth, we are default alive (i.e. we'll become profitable before we run out of capital). If we average 7.5% we'll hit $100M by the end of 2026.
+If we average 5% MoM growth, we are default alive (i.e. we'll become profitable before we run out of capital). If we average 7.5% we'll hit $100m by the end of 2026.
 
-Maintaining a strong financial position helps us optimize for long term revenue growth. For example, we've [removed products and revenue](/blog/sunsetting-helm-support-posthog) for long-term gains.
+Maintaining a strong financial position helps us optimize for long-term revenue growth. For example, we've [removed products and revenue](/blog/sunsetting-helm-support-posthog) for long-term gains.
 
 ## Fundraising principles
 
-Rule #1: Never have to fundraise... and fundraise if all the following are true:
+Rule #1: Never have to fundraise - and only fundraise if all the following are true:
 
 * It will speed us up.
 * We can use the money effectively.
@@ -29,4 +29,4 @@ The advantage of our approach is that it's more efficient – $1 spent on produc
 
 The disadvantage is that scaling an engineering team is, in our opinion, harder than scaling a sales team. Since engineers' work very heavily overlaps, there is more complexity to getting this right. We may not be able to grow beyond a certain rate, no matter how much we spend. 
 
-The final disadvantage is that it's harder to predict how fast we'll grow (compared to a company that grows by hiring salespeople with targets), so it takes more thought and often requires more faith!
+The final disadvantage is that it's harder to predict how fast we'll grow compared to a company that grows by hiring salespeople with targets, so it takes more thought and often requires more faith!
