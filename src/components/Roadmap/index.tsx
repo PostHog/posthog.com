@@ -1,6 +1,4 @@
-import Layout from 'components/Layout'
 import React, { useEffect, useMemo, useState } from 'react'
-import { SEO } from 'components/seo'
 import Markdown from 'markdown-to-jsx'
 import { User, useUser } from 'hooks/useUser'
 import { CallToAction } from 'components/CallToAction'
@@ -20,6 +18,33 @@ import Slider from 'components/Slider'
 import CommunityLayout from 'components/Community/Layout'
 import { companyMenu } from '../../navs'
 import Fuse from 'fuse.js'
+
+interface IGitHubPage {
+    title: string
+    html_url: string
+    number: string
+    closed_at: string
+    reactions: {
+        hooray: number
+        heart: number
+        eyes: number
+        plus1: number
+        total_count: number
+    }
+}
+export interface IRoadmap {
+    squeakId: number
+    title: string
+    description: string
+    betaAvailable: boolean
+    complete: boolean
+    dateCompleted: string
+    image?: {
+        url: string
+    }
+    projectedCompletion: string
+    githubPages: IGitHubPage[]
+}
 
 const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
     const { user, likeRoadmap } = useUser()
