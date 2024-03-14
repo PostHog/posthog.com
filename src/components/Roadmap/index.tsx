@@ -306,7 +306,7 @@ export default function Roadmap() {
                 <input
                     onChange={(e) => setRoadmapSearch(e.target.value)}
                     placeholder="Type to search..."
-                    className="w-full p-2 rounded-md border border-border dark:border-dark"
+                    className="w-full p-2 rounded-md border border-border dark:border-dark text-black"
                 />
                 {sortBy === 'team' && teams.length > 0 && (
                     <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-2 mt-4">
@@ -316,7 +316,7 @@ export default function Roadmap() {
                                     key={team}
                                     onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
                                     className={`px-4 py-1 text-sm border border-border dark:border-dark rounded-md ${
-                                        selectedTeam === team ? 'bg-accent' : ''
+                                        selectedTeam === team ? 'bg-accent dark:bg-accent-dark' : ''
                                     }`}
                                 >
                                     {team}
