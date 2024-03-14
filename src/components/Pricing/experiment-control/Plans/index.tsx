@@ -43,7 +43,7 @@ const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
     )
 }
 
-const Title = ({ title, className = '' }: { title: string; className?: string }) => {
+const Title = ({ title, className = '' }: { title: string | Element; className?: string }) => {
     return <h5 className={`m-0 text-[15px] opacity-70 font-medium ${className}`}>{title}</h5>
 }
 
@@ -109,8 +109,8 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                         title={
                             plans[0].free_allocation === up_to ? (
                                 'Free'
-                            ) : enterprise_flag_enabled && index === tiers.length - 1 ? (
-                                <s>
+                            ) : type === 'product_analytics' && !up_to ? (
+                                <>
                                     $
                                     {parseFloat(unit_amount_usd).toFixed(
                                         Math.max(
@@ -118,8 +118,9 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                                                 (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
                                             )
                                         )
-                                    )}
-                                </s>
+                                    )}{' '}
+                                    - <Link to="/contact-sales">Contact us</Link> for custom pricing
+                                </>
                             ) : (
                                 `$${parseFloat(unit_amount_usd).toFixed(
                                     Math.max(
