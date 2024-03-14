@@ -85,7 +85,7 @@ export const useProducts = () => {
             icon: <IconRewindPlay className="w-5 h-6 text-yellow" />,
             name: 'Session replay',
             slug: 'session-replay',
-            freeLimit: '15,000',
+            freeLimit: '5,000',
             denomination: 'recording',
             price: '0.0050',
             calcVolume: <>{sessionRecordingEventNumber.toLocaleString()}</>,
