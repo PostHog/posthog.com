@@ -11,8 +11,10 @@ import { Skeleton } from 'components/Questions/QuestionsTable'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import groupBy from 'lodash.groupby'
+import UpdateWrapper from './UpdateWrapper'
+import RoadmapForm from 'components/RoadmapForm'
 
-const Feature = ({ id, title, teams, description, likeCount, onLike }) => {
+const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
     const { user, likeRoadmap } = useUser()
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -51,51 +53,58 @@ const Feature = ({ id, title, teams, description, likeCount, onLike }) => {
 
                 <Authentication initialView="sign-in" onAuth={onAuth} showBanner={false} showProfile={false} />
             </SideModal>
-            <div className="flex space-x-4">
-                <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent flex-shrink-0 relative">
-                    <p className="m-0 leading-tight">
-                        <strong>{likeCount}</strong>
-                        <br />
-                        vote{likeCount !== 1 && 's'}
-                    </p>
-                    {liked && <IconThumbsUp className="text-red w-5 h-5 absolute -top-2 -right-2" />}
-                </div>
-                <div>
-                    <h3 className="text-lg m-0 leading-tight">{title}</h3>
-                    {teamName && <p className="m-0 text-sm opacity-70 mt-0.5">{teamName} Team</p>}
-                    <div className="mt-2">
-                        <Markdown>{description}</Markdown>
+            <UpdateWrapper
+                id={id}
+                status="under-consideration"
+                editButtonClassName="absolute bottom-0 right-0"
+                onSubmit={() => onUpdate()}
+            >
+                <div className="flex space-x-4">
+                    <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent flex-shrink-0 relative">
+                        <p className="m-0 leading-tight">
+                            <strong>{likeCount}</strong>
+                            <br />
+                            vote{likeCount !== 1 && 's'}
+                        </p>
+                        {liked && <IconThumbsUp className="text-red w-5 h-5 absolute -top-2 -right-2" />}
                     </div>
-                    <div className="mt-2">
-                        <CallToAction
-                            disabled={loading}
-                            onClick={() => {
-                                if (user) {
-                                    like()
-                                } else {
-                                    setAuthModalOpen(true)
-                                }
-                            }}
-                            size="sm"
-                            type={liked ? 'outline' : 'primary'}
-                        >
-                            <span className="flex items-center space-x-1">
-                                {liked ? (
-                                    <>
-                                        <IconUndo className="w-4 h-4" />
-                                        <span>Unvote</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <IconThumbsUp className="w-4 h-4" />
-                                        <span>Vote</span>
-                                    </>
-                                )}
-                            </span>
-                        </CallToAction>
+                    <div>
+                        <h3 className="text-lg m-0 leading-tight">{title}</h3>
+                        {teamName && <p className="m-0 text-sm opacity-70 mt-0.5">{teamName} Team</p>}
+                        <div className="mt-2">
+                            <Markdown>{description}</Markdown>
+                        </div>
+                        <div className="mt-2">
+                            <CallToAction
+                                disabled={loading}
+                                onClick={() => {
+                                    if (user) {
+                                        like()
+                                    } else {
+                                        setAuthModalOpen(true)
+                                    }
+                                }}
+                                size="sm"
+                                type={liked ? 'outline' : 'primary'}
+                            >
+                                <span className="flex items-center space-x-1">
+                                    {liked ? (
+                                        <>
+                                            <IconUndo className="w-4 h-4" />
+                                            <span>Unvote</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <IconThumbsUp className="w-4 h-4" />
+                                            <span>Vote</span>
+                                        </>
+                                    )}
+                                </span>
+                            </CallToAction>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </UpdateWrapper>
         </>
     )
 }
@@ -141,7 +150,9 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
 }
 
 export default function Roadmap() {
+    const { user } = useUser()
     const [sortBy, setSortBy] = useState('votes')
+    const [adding, setAdding] = useState(false)
     const { staticRoadmaps } = useStaticQuery(graphql`
         {
             staticRoadmaps: allSqueakRoadmap {
@@ -183,6 +194,7 @@ export default function Roadmap() {
         roadmaps,
         (roadmap) => roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'
     )
+    const isModerator = user?.role?.type === 'moderator'
 
     return (
         <Layout>
@@ -199,6 +211,22 @@ export default function Roadmap() {
                     </p>
                     <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
                 </div>
+                {isModerator &&
+                    (adding ? (
+                        <div className="mt-4">
+                            <RoadmapForm
+                                status="under-consideration"
+                                onSubmit={() => {
+                                    mutate()
+                                    setAdding(false)
+                                }}
+                            />
+                        </div>
+                    ) : (
+                        <CallToAction onClick={() => setAdding(true)} size="sm" type="primary" className="mt-4">
+                            New feature request
+                        </CallToAction>
+                    ))}
                 {isLoading ? (
                     <Skeleton />
                 ) : (
@@ -216,7 +244,12 @@ export default function Roadmap() {
                                             className="first:pt-8 first:border-t border-border dark:border-dark"
                                             key={roadmap.id}
                                         >
-                                            <Feature id={roadmap.id} {...roadmap.attributes} onLike={mutate} />
+                                            <Feature
+                                                id={roadmap.id}
+                                                {...roadmap.attributes}
+                                                onLike={mutate}
+                                                onUpdate={mutate}
+                                            />
                                         </li>
                                     )
                                 })
@@ -241,6 +274,7 @@ export default function Roadmap() {
                                                                         id={roadmap.id}
                                                                         {...roadmap.attributes}
                                                                         onLike={mutate}
+                                                                        onUpdate={mutate}
                                                                     />
                                                                 </li>
                                                             )

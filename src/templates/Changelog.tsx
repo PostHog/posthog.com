@@ -14,9 +14,11 @@ import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
-import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
+import UpdateWrapper, { RoadmapSuccess } from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import RoadmapForm from 'components/RoadmapForm'
+import { useUser } from 'hooks/useUser'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -94,8 +96,11 @@ export const Change = ({ title, teamName, media, description, cta }) => {
 }
 
 export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
+    const { user } = useUser()
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
+    const [newRoadmapID, setNewRoadmapID] = useState()
+    const [adding, setAdding] = useState(false)
 
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
@@ -127,10 +132,12 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
         return { url: month, value: month, depth: 0 }
     })
 
+    const isModerator = user?.role?.type === 'moderator'
+
     return (
         <CommunityLayout
             parent={companyMenu}
-            activeInternalMenu={companyMenu.children[2]}
+            activeInternalMenu={companyMenu.children.find((child) => child.name.toLowerCase() === 'changelog')}
             title="Changelog"
             tableOfContents={tableOfContents}
         >
@@ -166,6 +173,22 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                     })}
                 </div>
             </section>
+            {isModerator && (
+                <>
+                    {newRoadmapID && (
+                        <RoadmapSuccess id={newRoadmapID} description="Changelog will update on next build" />
+                    )}
+                    {adding ? (
+                        <div className="mb-6 border-border dark:border-dark">
+                            <RoadmapForm status="complete" onSubmit={(roadmap) => setNewRoadmapID(roadmap.id)} />
+                        </div>
+                    ) : (
+                        <CallToAction onClick={() => setAdding(true)} size="sm" type="primary" className="mb-6">
+                            New change
+                        </CallToAction>
+                    )}
+                </>
+            )}
             <section className="grid article-content">
                 {Object.keys(changesByMonth).map((month, index) => {
                     const nodes = changesByMonth[month]
@@ -202,6 +225,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                 formClassName="mt-8"
                                                 editButtonClassName="absolute bottom-0 right-0"
                                                 id={strapiID}
+                                                showSuccessMessage
                                             >
                                                 <Change
                                                     cta={cta}
