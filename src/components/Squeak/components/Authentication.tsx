@@ -18,7 +18,7 @@ type AuthenticationProps = {
     showBanner?: boolean
     showProfile?: boolean
     handleMessageSubmit?: (values: any, user: User | null) => void
-    onAuth?: () => void
+    onAuth?: (user: User) => void
 }
 
 export const Authentication = ({
@@ -123,7 +123,7 @@ export const Authentication = ({
                                                     setParentView?.(null)
                                                 }
 
-                                                onAuth?.()
+                                                onAuth?.(user)
                                             }}
                                         />
                                     ),
@@ -138,7 +138,7 @@ export const Authentication = ({
                                                     setParentView?.(null)
                                                 }
 
-                                                onAuth?.()
+                                                onAuth?.(user)
                                             }}
                                         />
                                     ),

@@ -7,32 +7,34 @@ import Toggle from 'components/Toggle'
 import { useFormik } from 'formik'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
-import qs from 'qs'
 import RoadmapSelect from 'components/RoadmapSelect'
+import qs from 'qs'
+import TeamSelect from 'components/TeamSelect'
 
-type Update = {
-    thingOfTheWeek: boolean
-    roadmap: boolean
-    roadmapID: number | null
-    question: number
-    team: number
-}
-
-export default function TeamUpdate({ teamName }: { teamName: string }) {
-    const [teamID, setTeamID] = useState<number | null>(null)
-    const [updates, setUpdates] = useState<Update[]>([])
+export default function TeamUpdate({
+    teamName,
+    onSubmit,
+    roadmapID,
+}: {
+    teamName?: string
+    onSubmit?: () => void
+    roadmapID?: number
+}) {
+    const [team, setTeam] = useState<any>(null)
     const { getJwt, user } = useUser()
+    const [updateCount, setUpdateCount] = useState(0)
     const { handleSubmit, values, setFieldValue, initialValues, submitForm, isSubmitting, resetForm } = useFormik({
         validateOnMount: false,
         initialValues: {
             body: '',
             thingOfTheWeek: false,
-            roadmap: false,
-            roadmapID: null,
+            roadmap: !!roadmapID,
+            roadmapID,
             images: [],
+            impersonate: false,
         },
-        onSubmit: async ({ body, thingOfTheWeek, roadmap, roadmapID, images }) => {
-            if (!teamID) return
+        onSubmit: async ({ body, thingOfTheWeek, roadmap, roadmapID, images, impersonate }) => {
+            if (!team) return
             try {
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
@@ -50,7 +52,7 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                         data: {
                             thingOfTheWeek,
                             team: {
-                                connect: [teamID],
+                                connect: [team.id],
                             },
                             ...(roadmap && roadmapID
                                 ? {
@@ -64,9 +66,7 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                 }).then((res) => res.json())
 
                 const transformedValues = await transformValues({ body, images: images ?? [] }, profileID, jwt)
-                const {
-                    data: { id: questionID },
-                } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -81,21 +81,26 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                             update: {
                                 connect: [updateID],
                             },
+                            ...(impersonate
+                                ? {
+                                      profile: team.attributes.leadProfiles.data[0].id,
+                                  }
+                                : null),
                         },
                     }),
                 }).then((res) => res.json())
-
-                setUpdates([{ thingOfTheWeek, question: questionID, team: teamID, roadmap, roadmapID }, ...updates])
                 resetForm()
+                setUpdateCount(updateCount + 1)
+                onSubmit?.()
             } catch (err) {
                 console.error(err)
             }
         },
     })
 
-    const fetchUpdates = async () => {
+    const fetchTeam = async () => {
         const {
-            data: [{ id: teamID }],
+            data: [team],
         } = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${qs.stringify(
                 {
@@ -108,104 +113,76 @@ export default function TeamUpdate({ teamName }: { teamName: string }) {
                 { encodeValuesOnly: true }
             )}`
         ).then((res) => res.json())
-        setTeamID(teamID)
-        const { data } = await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates?${qs.stringify(
-                {
-                    populate: ['question.id', 'roadmap.id', 'team.id'],
-                    sort: ['createdAt:desc'],
-                    filters: {
-                        team: {
-                            id: {
-                                $eq: teamID,
-                            },
-                        },
-                    },
-                },
-                { encodeValuesOnly: true }
-            )}`
-        ).then((res) => res.json())
-
-        const updates = data?.map(({ attributes: { thingOfTheWeek, roadmap, question, team } }) => {
-            return {
-                thingOfTheWeek,
-                roadmap: roadmap?.data?.id,
-                question: question?.data.id,
-                team: team?.data?.id,
-            }
-        })
-        setUpdates(updates ?? [])
+        setTeam(team)
     }
 
     useEffect(() => {
-        fetchUpdates()
-    }, [])
+        if (teamName) {
+            fetchTeam()
+        }
+    })
 
-    return (
-        <div>
-            {user?.role?.type === 'moderator' && user?.profile?.teams?.some(({ id }) => id === teamID) && (
-                <form onSubmit={handleSubmit} className="m-0 mb-8 pb-8 border-b border-border dark:border-dark">
-                    <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
-                    <div className="ml-[50px]">
-                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
-                            <div className="leading-[0]">
-                                <RichText
-                                    key={updates.length}
-                                    onSubmit={submitForm}
-                                    autoFocus
-                                    setFieldValue={setFieldValue}
-                                    initialValue={initialValues?.body}
-                                    values={values}
-                                />
-                            </div>
+    return user?.role?.type === 'moderator' ? (
+        <form onSubmit={handleSubmit} className="m-0">
+            <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
+            <div className="ml-[50px]">
+                <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
+                    {!teamName && (
+                        <div className="border-b border-border dark:border-dark">
+                            <TeamSelect value={team} onChange={(team) => setTeam(team)} />
                         </div>
-                        <Toggle
-                            checked={values.thingOfTheWeek}
-                            onChange={(checked) => setFieldValue('thingOfTheWeek', checked)}
-                            label="Thing of the week"
+                    )}
+                    <div className="leading-[0]">
+                        <RichText
+                            key={updateCount}
+                            onSubmit={submitForm}
+                            autoFocus
+                            setFieldValue={setFieldValue}
+                            initialValue={initialValues?.body}
+                            values={values}
                         />
-                        <div className="mt-4 mb-6">
-                            <Toggle
-                                checked={values.roadmap}
-                                onChange={(checked) => setFieldValue('roadmap', checked)}
-                                label="This is connected to a roadmap item"
-                            />
-                            {values.roadmap && teamID && (
-                                <div className="border border-border dark:border-dark rounded-md mt-4">
-                                    <RoadmapSelect
-                                        onChange={(value) => setFieldValue('roadmapID', value)}
-                                        value={values.roadmapID}
-                                    />
-                                </div>
-                            )}
-                        </div>
                     </div>
-                    <span className="ml-[50px]">
-                        <Button
-                            loading={isSubmitting}
-                            disabled={isSubmitting}
-                            type="submit"
-                            className="w-[calc(100%_-_50px)]"
-                        >
-                            Post update
-                        </Button>
-                    </span>
-                </form>
-            )}
-            {updates?.length > 0 && (
-                <div className="mb-8 pb-2 border-b border-border dark:border-dark">
-                    <h3>Team updates</h3>
-                    <ul className="m-0 p-0 list-none mb-6">
-                        {updates.map(({ question }) => {
-                            return (
-                                <li key={question} className="py-4 first:pt-0">
-                                    <Question showActions={false} buttonText="Reply" id={question} />
-                                </li>
-                            )
-                        })}
-                    </ul>
                 </div>
-            )}
-        </div>
-    )
+                <Toggle
+                    checked={values.thingOfTheWeek}
+                    onChange={(checked) => setFieldValue('thingOfTheWeek', checked)}
+                    label="Thing of the week"
+                />
+                {team && (
+                    <>
+                        <div className="my-4">
+                            <Toggle
+                                checked={values.impersonate}
+                                onChange={(checked) => setFieldValue('impersonate', checked)}
+                                label="Post as team lead"
+                            />
+                        </div>
+                        {!roadmapID && (
+                            <>
+                                <Toggle
+                                    checked={values.roadmap}
+                                    onChange={(checked) => setFieldValue('roadmap', checked)}
+                                    label="This is connected to a roadmap item"
+                                />
+                                {values.roadmap && (
+                                    <div className="border border-border dark:border-dark rounded-md mt-4">
+                                        <RoadmapSelect
+                                            teamID={team.id}
+                                            onChange={(value) => setFieldValue('roadmapID', value)}
+                                            value={values.roadmapID}
+                                        />
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </>
+                )}
+            </div>
+            <span className="ml-[50px] mt-6 inline-block">
+                <Button loading={isSubmitting} disabled={isSubmitting} type="submit" className="w-[calc(100%_-_50px)]">
+                    Post update
+                </Button>
+            </span>
+        </form>
+    ) : null
 }

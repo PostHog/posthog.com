@@ -14,9 +14,13 @@ import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
-import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
+import UpdateWrapper, { RoadmapSuccess } from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import RoadmapForm from 'components/RoadmapForm'
+import { useUser } from 'hooks/useUser'
+import Tooltip from 'components/Tooltip'
+import { IconShieldLock } from '@posthog/icons'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -94,8 +98,11 @@ export const Change = ({ title, teamName, media, description, cta }) => {
 }
 
 export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
+    const { user } = useUser()
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
+    const [newRoadmapID, setNewRoadmapID] = useState()
+    const [adding, setAdding] = useState(false)
 
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
@@ -127,16 +134,33 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
         return { url: month, value: month, depth: 0 }
     })
 
+    const isModerator = user?.role?.type === 'moderator'
+
     return (
         <CommunityLayout
             parent={companyMenu}
-            activeInternalMenu={companyMenu.children[2]}
+            activeInternalMenu={companyMenu.children.find((child) => child.name.toLowerCase() === 'changelog')}
             title="Changelog"
             tableOfContents={tableOfContents}
         >
-            <section className="mb-4 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
+            <section className="mb-4 flex justify-between md:items-center md:flex-row flex-col md:space-y-0 space-y-4">
                 <div>
-                    <h1 className="m-0 text-3xl">Changelog</h1>
+                    <div className="flex gap-4 items-center">
+                        <div>
+                            <h1 className="m-0 text-3xl">Changelog</h1>
+                        </div>
+                        <div>
+                            {isModerator && !adding && (
+                                <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                    <Tooltip content="Only moderators can see this" placement="top">
+                                        <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                    </Tooltip>
+                                    Add entry
+                                </CallToAction>
+                            )}
+                        </div>
+                    </div>
+
                     <p className="m-0 mt-2">
                         <em>"All the updates that are fit to print"</em>
                     </p>
@@ -166,6 +190,20 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                     })}
                 </div>
             </section>
+
+            {isModerator && (
+                <>
+                    {newRoadmapID && (
+                        <RoadmapSuccess id={newRoadmapID} description="Changelog will update on next build" />
+                    )}
+                    {adding && (
+                        <div className="mb-6 border-border dark:border-dark">
+                            <RoadmapForm status="complete" onSubmit={(roadmap) => setNewRoadmapID(roadmap.id)} />
+                        </div>
+                    )}
+                </>
+            )}
+
             <section className="grid article-content">
                 {Object.keys(changesByMonth).map((month, index) => {
                     const nodes = changesByMonth[month]
@@ -202,6 +240,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                 formClassName="mt-8"
                                                 editButtonClassName="absolute bottom-0 right-0"
                                                 id={strapiID}
+                                                showSuccessMessage
                                             >
                                                 <Change
                                                     cta={cta}
