@@ -8,20 +8,24 @@ hideAnchor: false
 
 ## Logo
 
-If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.
+If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss. 
+
+(Images shown below have transparent backgrounds but appear here with a solid background color.)
 
 <OverflowXSection>
 
 | Preview | Name          | Vector | PNG                   | PNG w/ padding*                      |
 |---------|---------------|--------|-----------------------|--------------------------------|
-| <img src="/brand/posthog-logo@2x.png" width="157" />     | Standard logo | <a href="/brand/posthog-logo.svg" download>SVG</a> | <a href="/brand/posthog-logo.png" download>PNG</a> \| <a href="/brand/posthog-logo@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-padded@2x.png" download>PNG @2x</a> |
-| ![](/brand/posthog-logo-black.svg)  | Dark logo | <a href="/brand/posthog-logo-black.svg" download>SVG</a> | <a href="/brand/posthog-logo-black.png" download>PNG</a> \| <a href="/brand/posthog-logo-black@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-black-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-black-padded@2x.png" download>PNG @2x</a> |
-| ![](/brand/posthog-logo-white.svg)  | Light logo    | <a href="/brand/posthog-logo-white.svg" download>SVG</a> | <a href="/brand/posthog-logo-white.png" download>PNG</a> \| <a href="/brand/posthog-logo-white@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-white-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-white-padded@2x.png" download>PNG @2x</a> |
-| ![](/brand/posthog-logomark.svg)    | Logomark      | <a href="/brand/posthog-logomark.svg" download>SVG</a> | <a href="/brand/posthog-logomark.png" download>PNG</a> \| <a href="/brand/posthog-logomark@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logomark-padded.png" download>PNG</a> \| <a href="/brand/posthog-logomark-padded@2x.png" download>PNG @2x</a> |
+| <div style="background:#EEEFE9;padding:5px 5px 0;margin-left:-5px;"><img src="/brand/posthog-logo@2x.png" width="157" /></div>     | Standard logo | <a href="/brand/posthog-logo.svg" download>SVG</a> | <a href="/brand/posthog-logo.png" download>PNG</a> \| <a href="/brand/posthog-logo@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-padded@2x.png" download>PNG @2x</a> |
+| <div style="background:#EEEFE9;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-black.svg)</div>  | Dark logo | <a href="/brand/posthog-logo-black.svg" download>SVG</a> | <a href="/brand/posthog-logo-black.png" download>PNG</a> \| <a href="/brand/posthog-logo-black@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-black-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-black-padded@2x.png" download>PNG @2x</a> |
+| <div style="background:#111;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-white.svg)</div>  | Light logo    | <a href="/brand/posthog-logo-white.svg" download>SVG</a> | <a href="/brand/posthog-logo-white.png" download>PNG</a> \| <a href="/brand/posthog-logo-white@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-white-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-white-padded@2x.png" download>PNG @2x</a> |
+| <div style="background:#EEEFE9;display:inline-block;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logomark.svg)</div>    | Logomark      | <a href="/brand/posthog-logomark.svg" download>SVG</a> | <a href="/brand/posthog-logomark.png" download>PNG</a> \| <a href="/brand/posthog-logomark@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logomark-padded.png" download>PNG</a> \| <a href="/brand/posthog-logomark-padded@2x.png" download>PNG @2x</a> |
 
 </OverflowXSection>
 
 *PNGs with padding are useful when uploading the logo to a third-party service where there is limited control over padding/margin around the logo.
+
+When using the logo on a dark background, use the white-only version of the logo. _Never_ modify the colors in the logomark (like changing the hedgehog's eye color to white when using on a dark background).
 
 The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display). When using the logo in third party services that support uploading multiple versions (standard and hi-dpi), please be sure to include the @2x logo as it will appear crisper on newer devices, tablets and high resolution mobile devices.
 
