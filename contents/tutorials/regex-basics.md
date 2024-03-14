@@ -24,7 +24,7 @@ Other important symbols to know:
 - `+` checks the preceding item matches 1 or more times. `*` matches zero or more times. `.*` would match everything minus newlines.
 - `\w`, `\d`, `\s` represent a word, digit, and whitespace. Capitalize them to represent NOT a word, digit, or whitespace.
 
-There are many more symbols representing many more use cases, they include special characters, escaped characters, logic, lookahead, and more. You can play around and learn more regex on a site like [RegExr](https://regexr.com/) or [Regex101](https://regex101.com/). 
+There are many more symbols representing many more use cases, they include special characters, escaped characters, logic, lookahead, and more. You can play around and learn more regex on a site like [RegExr](https://regexr.com/), [Regex101](https://regex101.com/) or [Cyrilex](https://extendsclass.com/regex-tester.html). 
 
 ## Using regex in PostHog
 
