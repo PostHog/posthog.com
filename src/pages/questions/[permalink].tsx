@@ -39,6 +39,8 @@ export default function QuestionPage(props: QuestionPageProps) {
 
     const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
     const nav = useTopicsNav()
+    const backTo = props?.location?.state?.previous
+
     return (
         <Layout
             parent={communityMenu}
@@ -58,11 +60,13 @@ export default function QuestionPage(props: QuestionPageProps) {
                 <section className="pb-12">
                     <div className="mb-4">
                         <Link
-                            to="/questions"
+                            to={backTo?.url || '/questions'}
                             className="inline-flex space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                         >
                             <RightArrow className="-scale-x-100 w-6" />
-                            <span className="text-primary dark:text-primary-dark text-[15px]">Back to questions</span>
+                            <span className="text-primary dark:text-primary-dark text-[15px]">
+                                Back to {backTo?.title || 'questions'}
+                            </span>
                         </Link>
                     </div>
 
