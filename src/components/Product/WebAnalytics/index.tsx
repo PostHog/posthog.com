@@ -330,9 +330,9 @@ export const ProductWebAnalytics = () => {
     return (
         <>
             <SEO
-                title="Session Replay - PostHog"
-                description="Session Replay helps you diagnose issues and understand user behavior in your product or website."
-                image={`/images/og/session-replay.jpg`}
+                title="Web analytics - PostHog"
+                description="It's like Google Analytics 3, but it still exists..."
+                image={`/images/og/web-analytics.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
