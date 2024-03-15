@@ -86,3 +86,16 @@ is_my_flag_enabled = posthog.is_feature_enabled(
 import RubyOverrideServerProperties from './override-server-properties/ruby.mdx'
 
 <RubyOverrideServerProperties />
+
+### Feature flag timeouts
+
+You can use the `feature_flag_request_timeout_seconds` parameter on initialisation to set a configurable flag request timeout. This is useful so your requests don't block when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+
+```ruby
+posthog = PostHog::Client.new({
+   api_key: "", # You can find this key on the /setup page in PostHog
+   personal_api_key: "", # Required for local feature flag evaluation
+   feature_flags_polling_interval: 10, # How often to poll for feature flags
+   feature_flag_request_timeout_seconds: 5 # Timeout for `/decide` feature flag requests
+})
+```
