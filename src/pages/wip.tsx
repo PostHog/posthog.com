@@ -97,9 +97,10 @@ export default function TeamUpdates() {
                                                         <UpdateWrapper
                                                             key={id}
                                                             id={id}
+                                                            roundButton={true}
                                                             status="in-progress"
                                                             formClassName="mb-4"
-                                                            editButtonClassName={'absolute top-4 right-4 z-10'}
+                                                            editButtonClassName={'absolute -top-4 -right-4 z-10'}
                                                         >
                                                             <InProgress {...attributes} squeakId={id} />
                                                         </UpdateWrapper>

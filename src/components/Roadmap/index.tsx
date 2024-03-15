@@ -89,7 +89,8 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
             <UpdateWrapper
                 id={id}
                 status="under-consideration"
-                editButtonClassName="absolute bottom-0 right-0"
+                editButtonClassName="absolute top-0 right-0"
+                roundButton={false}
                 onSubmit={() => onUpdate()}
             >
                 <div className="flex space-x-4">
