@@ -147,7 +147,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                 <div>
                     <div className="flex gap-4 items-center">
                         <div>
-                            <h1 className="m-0 text-3xl">Changelog</h1>
+                            <h1 className="m-0 text-3xl sm:text-4xl">Changelog</h1>
                         </div>
                         <div>
                             {isModerator && !adding && (

@@ -279,7 +279,7 @@ export default function Roadmap() {
                 <div className="relative">
                     <div className="flex justify-between items-center">
                         <div className="flex gap-4 items-center">
-                            <h1 className="font-bold text-3xl sm:text-5xl my-0">Roadmap</h1>
+                            <h1 className="font-bold text-3xl sm:text-4xl my-0">Roadmap</h1>
                             {isModerator && !adding && (
                                 <div className="relative top-1">
                                     <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
