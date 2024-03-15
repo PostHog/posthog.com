@@ -52,7 +52,7 @@ This will then send this as a property on all future events, including autocaptu
 > **Note:** Make sure to call `posthog.unregister('email')` whenever a user logs out to clear this property
 
 Currently, [Super Properties](/docs/integrate/client/js#super-properties) are only available in the `posthog-js` library or when using the PostHog snippet.
-If you are using a different SDK, you'll need to manually the `email` property for every event that you want to send to Intercom.
+If you are using a different SDK, you'll need to manually add the `email` property for every event that you want to send to Intercom.
 
 ## FAQ
 
