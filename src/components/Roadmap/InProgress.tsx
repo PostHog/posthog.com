@@ -9,7 +9,7 @@ import { useToast } from '../../hooks/toast'
 import useSWR from 'swr'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import { IconInfo, IconX } from '@posthog/icons'
+import { IconInfo, IconBell, IconUndo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import SideModal from 'components/Modal/SideModal'
 import TeamUpdate from 'components/TeamUpdate'
@@ -427,44 +427,7 @@ export function InProgress(
                 </div>
 
                 <div className="px-4">
-                    <div className="flex flex-col md:flex-row justify-between md:items-center my-4">
-                        <h6 className="m-0">Project updates</h6>
-
-                        <button
-                            disabled={loading}
-                            onClick={() => (subscribed ? unsubscribe() : subscribe())}
-                            className="text-sm font-semibold flex gap-2 items-center"
-                            data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
-                        >
-                            <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
-                                {loading ? (
-                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
-                                ) : subscribed ? (
-                                    <Check className="w-[14px] h-[14px]" />
-                                ) : (
-                                    <Plus className="w-[14px] h-[14px]" />
-                                )}
-                            </span>
-                            <span>
-                                {subscribed
-                                    ? 'Unsubscribe'
-                                    : betaAvailable
-                                    ? 'Get early access'
-                                    : 'Get updates about this project'}
-                                {!subscribed && !betaAvailable && (
-                                    <Tooltip
-                                        content="Get email notifications when the team shares updates about this project, releases a beta, or
-                                            ships this feature."
-                                        contentContainerClassName="max-w-xs"
-                                    >
-                                        <div className="inline-block relative">
-                                            <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
-                                        </div>
-                                    </Tooltip>
-                                )}
-                            </span>
-                        </button>
-                    </div>
+                    <h6 className="my-4">Project updates</h6>
 
                     {updates?.length > 0 ? (
                         <ul className="list-none m-0 p-0 mb-6">
@@ -492,14 +455,50 @@ export function InProgress(
                             No updates yet. Engineers are currently hard at work, so check back soon!
                         </p>
                     )}
-                    {isModerator &&
-                        (addingUpdate ? (
-                            <TeamUpdate roadmapID={squeakId} onSubmit={fetchUpdates} />
-                        ) : (
+
+                    <div className="flex gap-2">
+                        <CallToAction
+                            size="md"
+                            disabled={loading}
+                            onClick={() => (subscribed ? unsubscribe() : subscribe())}
+                            className="text-sm font-semibold flex gap-2 items-center [&_>span]:flex [&_>span]:items-center [&_>span]:gap-2"
+                            data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
+                            type={subscribe ? 'secondary' : 'primary'}
+                        >
+                            {loading ? (
+                                <Spinner className="w-[14px] h-[14px] !text-blue" />
+                            ) : subscribed ? (
+                                <IconUndo className="w-5 h-5 inline-block" />
+                            ) : (
+                                <>{betaAvailable ? '' : <IconBell className="w-5 h-5 inline-block" />}</>
+                            )}
+                            <span>
+                                {subscribed
+                                    ? 'Unsubscribe'
+                                    : betaAvailable
+                                    ? 'Request early access'
+                                    : 'Get updates about this project'}
+                                {!subscribed && !betaAvailable && (
+                                    <Tooltip
+                                        content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                            ships this feature."
+                                        contentContainerClassName="max-w-xs"
+                                    >
+                                        <div className="inline-block relative">
+                                            <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                        </div>
+                                    </Tooltip>
+                                )}
+                            </span>
+                        </CallToAction>
+
+                        {isModerator && !addingUpdate && (
                             <CallToAction size="md" onClick={() => setAddingUpdate(true)}>
                                 Add an update
                             </CallToAction>
-                        ))}
+                        )}
+                    </div>
+                    {isModerator && addingUpdate && <TeamUpdate roadmapID={squeakId} onSubmit={fetchUpdates} />}
                 </div>
             </li>
         </>
