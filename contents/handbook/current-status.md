@@ -84,7 +84,7 @@ We’ve got multiple products that are early:
 
 We have a bunch of awesome products generating revenue. Since last quarter:
 
-- Feature flags and experiments has got product market fit
+- Feature flags and experiments has got product-market fit
 - We've got a warehouse with early meaningful usage
 - We figured out notebooks vs PostHog 3000 and have shipped a new UX for everyone
 - Web analytics has been shipped and is getting plenty of usage
@@ -100,6 +100,6 @@ This is a quarter of caring about the craft of your product:
 - Talking to users and incorporating their feedback
 - Nailing support for your product - fixing things
 
-Products are not limited to people working on the app - it includes what customer success, marketing, and ops are working on. Everything can be considered a product.
+Products are not limited to people working on the app – it includes what customer success, marketing, and ops are working on. Everything can be considered a product.
 
 Each team should be aiming to feel proud of what they've built by the end of the quarter.

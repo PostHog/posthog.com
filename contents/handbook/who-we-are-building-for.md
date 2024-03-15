@@ -19,7 +19,7 @@ Why? We believe that the best tech companies are increasingly engineering-led. B
 |  | High-growth startup |
 | --- | --- |
 | **Description** | Startups that have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. |
-| **Criteria** | - 15-500 employees<br />- $100k+/month in revenue _or_ very large number of consumer users<br />- Raised from leading investors<br />- Not yet completed an IPO |
+| **Criteria** | - 15-500 employees<br />- $100k+/month in revenue _or_ very large number of consumer users<br />- Raised from leading investors<br />- Not yet IPO'ed |
 | **Why they matter?** | - Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
 | **Job role** | We build for the power users of the **the product team**<br /><br />**Primary focus**<br />- [Product engineers](https://posthog.com/blog/what-is-a-product-engineer)<br/>- Technical founders <br />- Highly technical product managers <br /><br />**Should be usable by**:<br />- Designers<br />- Less technical product managers<br />- Marketers<br />|
 | **Examples** | PostHog anytime from their Series B to IPO, Linear, Ramp, Vercel, Retool |

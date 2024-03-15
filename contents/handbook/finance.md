@@ -13,7 +13,7 @@ Maintaining a strong financial position helps us optimize for long-term revenue 
 
 ## Fundraising principles
 
-Rule #1: Never have to fundraise - and only fundraise if all the following are true:
+Rule #1: Never have to fundraise – and only fundraise if all the following are true:
 
 * It will speed us up.
 * We can use the money effectively.

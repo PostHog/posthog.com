@@ -26,7 +26,7 @@ Finally, we hire people we think will flourish in an autonomous environment. We 
 
 One of the things we've learned is the very strongest engineers are usually those who want autonomy the most, and so freedom is a great way to attract and retain world-class talent. Now that we're lucky enough to have people like this already here, people see PostHog as a destination company, accelerating further our access to some of the best people in the world at what they do.
 
-## A high percentage of our emoloyees are engineers
+## A high percentage of our employees are engineers
 
 If we want to ship a lot, we need to figure out how we can have most of capital go into engineering.
 

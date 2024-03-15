@@ -8,13 +8,13 @@ We make money from those that have it and like our products. We don't make money
 
 ## How we do sales is based on the best experience for our Ideal Customer Profile
 
-I cannot think of any harder group than developers to convince via a cold call or email to buy software. We should focus all our energy on inbound - that's why we don't do outbound sales.
+I cannot think of any harder group than developers to convince via a cold call or email to buy software. We should focus all our energy on inbound – that's why we don't do outbound sales.
 
 All the other rules here are based on what we felt would be the best experience for an engineering customer, whilst allowing us to grow revenue in the long run.
 
 ## Don't let pricing get in the way
 
-Before a user has decided to buy the product, we should let them try it for free. Not only does this mean they can immediately self-serve without having to get budget internally, it also reduces the need for a large sales team to convince them otherwise. When someone is looking for a solution, they are ready to install it - but only if we can get out of the way commercially.
+Before a user has decided to buy the product, we should let them try it for free. Not only does this mean they can immediately self-serve without having to get budget internally, it also reduces the need for a large sales team to convince them otherwise. When someone is looking for a solution, they are ready to install it – but only if we can get out of the way commercially.
 
 Once a user likes the product, we don't want to create a big decision around continuing to expand their usage with us. (For example, if we suddenly charged a large recurring price per month.) Instead, we charge a tiny fraction of a cent for each extra event they send.
 

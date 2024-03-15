@@ -19,7 +19,7 @@ We're excited by:
 
 We're *not* excited by:
 
-* Selling the company for $1 billion - we think we can build a much bigger company by staying independent
+* Selling the company for $1 billion – we think we can build a much bigger company by staying independent
 
 ## $100M by 2026
 
