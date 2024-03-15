@@ -123,7 +123,7 @@ export default function TeamUpdate({
     })
 
     return user?.role?.type === 'moderator' ? (
-        <form onSubmit={handleSubmit} className="m-0">
+        <form onSubmit={handleSubmit} className="m-0 mt-4">
             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
             <div className="ml-[50px]">
                 <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
