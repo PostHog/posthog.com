@@ -57,7 +57,7 @@ Since Q3 is about to finish, we've started planning for Q4.
 
 Currently, we are often mentioned as an alternative to product analytics tools.
 
-We have the capabilities now, but we are winning the internet when we get more of this for our _other_ products. (We don’t have to win everything, but we need to get into the comparison each time). This is _starting_ to happen, but to Win the Internet, we need to see this happening daily.
+We have the capabilities now, but we are winning the internet when we get more of this for our _other_ products. (We don’t have to win everything, but we need to get into the comparison each time.) This is _starting_ to happen, but to Win the Internet, we need to see this happening daily.
 
 We’ve got multiple products that are early:
 
