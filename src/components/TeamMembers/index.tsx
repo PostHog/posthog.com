@@ -55,9 +55,9 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
         query === ''
             ? moderators
             : moderators.filter((mod) => {
-                const name = [mod?.profile?.firstName, mod?.profile?.lastName].filter(Boolean).join(' ')
-                return name?.toLowerCase().includes(query.toLowerCase())
-            })
+                  const name = [mod?.profile?.firstName, mod?.profile?.lastName].filter(Boolean).join(' ')
+                  return name?.toLowerCase().includes(query.toLowerCase())
+              })
 
     return (
         <div className="relative w-full mt-4">
@@ -81,8 +81,9 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
                             <Combobox.Option key={mod.id} value={mod} className="!m-0">
                                 {({ active }) => (
                                     <div
-                                        className={`bg-accent dark:bg-accent-dark p-3 py-2 text-base flex space-x-3 items-center cursor-pointer border-border dark:border-dark ${active ? 'bg-border dark:bg-border-dark' : ''
-                                            }`}
+                                        className={`bg-accent dark:bg-accent-dark p-3 py-2 text-base flex space-x-3 items-center cursor-pointer border-border dark:border-dark ${
+                                            active ? 'bg-border dark:bg-border-dark' : ''
+                                        }`}
                                     >
                                         <img
                                             className="rounded-full w-[32px] h-[32px] bg-border dark:bg-border-dark border border-border dark:border-dark"
@@ -112,7 +113,9 @@ export const AddTeamMember = ({ handleChange }) => {
             }}
         />
     ) : (
-        <CallToAction onClick={() => setShowMods(true)} type="secondary" size="sm" className="mt-4">Add team member</CallToAction>
+        <CallToAction onClick={() => setShowMods(true)} type="secondary" size="sm" className="mt-4">
+            Add team member
+        </CallToAction>
     )
 }
 

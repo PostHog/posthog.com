@@ -71,6 +71,7 @@ func main() {
 			Endpoint:       "<ph_instance_address>",
 			PersonalApiKey: "your personal API key", // Required for feature flags
             DefaultFeatureFlagsPollingInterval: 300 // Optional. Measured in seconds. Defaults to 300 (5 minutes).
+            // NextFeatureFlagsPollingTick: func() time.Duration {} // Optional. Use this to sync polling intervals between instances. For an example see: https://github.com/PostHog/posthog-go/pull/36#issuecomment-1991734125
 		},
 	)
 	defer client.Close()
@@ -80,10 +81,11 @@ func main() {
 
 ```php
 PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_instance_address>',
-        'personal_api_key' => 'your personal API key from step 1'),
-        'poll_interval' => 30 # Optional. Measured in seconds. Defaults to 30.
+  array('host' => '<ph_instance_address>'),
+  null, // or custom http client
+ 'YOUR PERSONAL API KEY from step 1'
 );
+// NOTE: PHP currently doesn't support a poller, so you'll need to reload flags as and when needed, or re-initialize the posthog client
 ```
 
 ```python

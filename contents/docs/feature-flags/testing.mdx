@@ -3,6 +3,9 @@ title: Testing your feature flag
 sidebar: Docs
 showTitle: true
 ---
+import {ProductVideo} from 'components/ProductVideo'
+import OverrideFeatureFlagLight from '../../images/features/feature-flags/override-feature-flag-light-mode.mp4'
+import OverrideFeatureFlagDark from '../../images/features/feature-flags/override-feature-flag-dark-mode.mp4'
 
 Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 3 ways you can do this:
 
@@ -22,7 +25,12 @@ To do this:
 4. If it is a multivariant flag, set the optional override to the variant you want to assign these users to.
 5. Click "Save".
 
-![How to test your feature flag](../../images/features/feature-flags/override-feature-flag.mp4)
+<ProductVideo
+    videoLight = {OverrideFeatureFlagLight}
+    videoDark = {OverrideFeatureFlagDark}
+    alt = "How to test your feature flag"
+    classes = "rounded"
+/>
 
 ## Method 2: Use `posthog.featureFlags.override()`
 

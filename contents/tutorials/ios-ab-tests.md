@@ -3,6 +3,7 @@ title: "How to run A/B tests in iOS"
 date: 2023-11-16
 author: ["lior-neu-ner"]
 tags: ['experimentation']
+featuredVideo: https://www.youtube-nocookie.com/embed/BtHeP8lORJY
 ---
 
 [A/B tests](/ab-testing) help you make your iOS app better by comparing the impact of changes on key metrics. 
