@@ -19,6 +19,9 @@ images:
     - './images/better_capital_logo.jpg'
     - './images/boldstart_square.png'
     - './images/oliver-kicks.png'
+    - './images/startup-partner.png'
+    - './images/startup-presenter.png'
+
 ---
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
@@ -55,26 +58,31 @@ import refer from './images/startup-refer.png'
     <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Here's what you get when you join</h3>
         <p class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Teams must be less than 2 years old and have less than $5m in funding to qualify</p>
     <div class="flex justify-center">
-      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative text-center sm:text-left">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-5 justify-evenly relative text-center sm:text-left">
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[8])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">$50,000 in credit</h5>
-          <p class="m-0 text-[15px]">That's equivalent to 30m events, 4bn API calls or 50k session replays! Credit lasts a whole year.</p>
-        </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[7])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Startup spotlights</h5>
-          <p class="m-0 text-[15px]">Each month we pick a startup to spotlight, featuring the lucky team on our site and socials.</p>
+          <p class="m-0 text-[15px]">That's a lot of events, replays, API calls, and survey responses. It lasts a year!</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[6])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Free founder merch</h5>
-          <p class="m-0 text-[15px]">You can never have too many laptop stickers or custom backpacks, right? Also, an origami hedgehog!</p>
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Founder merch</h5>
+          <p class="m-0 text-[15px]">You can never have too many laptop stickers, hats, or free t-shirts, right? Right.</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[9])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 195 }} />
+          <GatsbyImage image={getImage(props?.images[15])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Partner benefits</h5>
+          <p class="m-0 text-[15px]">We're part of Digital Ocean's Hatch program. You'll get $25,000 of infra credit.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[16])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Startup spotlights</h5>
+          <p class="m-0 text-[15px]">Each month we feature a team in our startup newsletter. It could be you!</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[9])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Referral perks</h5>
-          <p class="m-0 text-[15px]">Refer your accelerator to double your credits, or split an extra $10,000 when you refer a friend.</p>
+          <p class="m-0 text-[15px]">Refer your accelerator to 2x your credits, or split $10k when you refer a friend.</p>
         </li>
       </ul>
     </div>
@@ -253,8 +261,8 @@ import refer from './images/startup-refer.png'
 </details>
 
 <details>
-<summary>How come you don't offer credits for AWS, Segment etc. like Mixpanel does?</summary>
-<p>Because all of those are available if you just go to the company <a href="https://startupcredits.io/">directly</a> anyway. We've focused this program on benefits which are only available from PostHog, and are not merely curated from other freely available sources. </p>
+<summary>How do I get the DigitalOcean infrastructure credit?</summary>
+<p>To claim your infra credit, simply sign up to the DigitalOcean Hatch program and cite PostHog as your Hatch partner. We'll send you a reminder and further instructions by email when you're accepted into PostHog for Startups.</p>
 </details>
 </div>
 </section>
