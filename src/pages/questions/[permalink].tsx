@@ -38,10 +38,12 @@ export default function QuestionPage(props: QuestionPageProps) {
     }
 
     const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
-    const escalated = question?.attributes.escalated
     const nav = useTopicsNav()
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
+        <Layout
+            parent={communityMenu}
+            activeInternalMenu={communityMenu.children.find(({ name }) => name.toLowerCase() === 'questions')}
+        >
             <SEO
                 title={isLoading ? 'Community question - PostHog' : `${question?.attributes?.subject} - PostHog`}
                 noindex={question?.attributes.archived}
