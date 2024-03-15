@@ -12,7 +12,7 @@ export default function TeamRoadmap({ team }: { team?: string }) {
     const futureRoadmaps = roadmaps.filter((r) => r.projectedCompletion && !r.complete)
 
     return futureRoadmaps.length <= 0 ? (
-        <p className="!m-0 py-4 px-6  dark:border-gray-accent-dark rounded-md">
+        <p className="!m-0 py-4 px-6  bg-accent dark:bg-accent-dark rounded-md">
             Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!
         </p>
     ) : (

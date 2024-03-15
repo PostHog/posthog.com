@@ -3,9 +3,10 @@ import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconPieChart,
-    IconBolt,
-    IconPlaylist,
-    IconPhone,
+    IconTarget,
+    IconMouseScrollDown,
+    IconArrowUpLeftDiagonal,
+    IconClock,
     IconDownload,
     IconPassword,
     IconGraph,
@@ -91,22 +92,22 @@ const subfeatures = [
     {
         title: 'UTM tracking',
         description: 'See which campaigns perform best',
-        icon: <IconBolt />,
+        icon: <IconTarget />,
     },
     {
         title: 'Scroll tracking',
         description: 'Discover how much users actually read',
-        icon: <IconPlaylist />,
+        icon: <IconMouseScrollDown />,
     },
     {
         title: 'Bounce tracking',
         description: 'Find out when users immediately get out of dodge',
-        icon: <IconPhone />,
+        icon: <IconArrowUpLeftDiagonal />,
     },
     {
         title: 'Duration tracking',
         description: 'Monitor how long users are hanging around',
-        icon: <IconPhone />,
+        icon: <IconClock />,
     },
 ]
 
@@ -290,7 +291,7 @@ const PairsWithArray = [
         icon: <IconFlask />,
         product: 'Surveys',
         description:
-            'Get _even more context_ by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
+            'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
         url: '/surveys',
     },
 ]
@@ -339,7 +340,7 @@ export const ProductWebAnalytics = () => {
                     icon={<IconPieChart />}
                     product={product.capitalized}
                     title="Monitor your website traffic"
-                    description="Finally the Google Analytics replacement – done the PostHog way"
+                    description="Web analytics for people who really liked GA3..."
                 />
 
                 <div className="text-center -mb-24">
@@ -379,7 +380,7 @@ export const ProductWebAnalytics = () => {
                 */}
             </div>
 
-            <SmoothScroll exclude={['Meet the team']} />
+            <SmoothScroll exclude={['Pricing', 'Installation', 'Meet the team']} />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
@@ -405,6 +406,7 @@ export const ProductWebAnalytics = () => {
                     </Marquee>
                 </section>
             </div>
+            {/*
             <section
                 id="pricing"
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
@@ -435,8 +437,9 @@ export const ProductWebAnalytics = () => {
                     </div>
                 </div>
             </section>
+            */}
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto mt-12`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -456,7 +459,9 @@ export const ProductWebAnalytics = () => {
                                 }
                             >
                                 <ul>
-                                    <li>You _only_ need web analytics, nothing else</li>
+                                    <li>
+                                        You <em>only</em> need web analytics, nothing else
+                                    </li>
                                     <li>You don’t need any integrations other than with Google</li>
                                     <li>You need to migrate data from GA4</li>
                                     <li>You actually really like GA4 😱</li>
@@ -510,6 +515,8 @@ export const ProductWebAnalytics = () => {
                     </ul>
                 </section>
 
+                {/*
+
                 <section id="installation" className="mb-20 px-5 md:px-0">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
                     <p className="mt-0 opacity-50 text-center mb-12">
@@ -518,6 +525,8 @@ export const ProductWebAnalytics = () => {
 
                     <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...SessionReplay]} />
                 </section>
+
+                */}
 
                 <section id="docs" className="mb-20 px-5 md:px-0">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
