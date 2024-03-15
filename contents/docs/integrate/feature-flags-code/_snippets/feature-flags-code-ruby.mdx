@@ -94,8 +94,6 @@ You can use the `feature_flag_request_timeout_seconds` parameter on initialisati
 ```ruby
 posthog = PostHog::Client.new({
    api_key: "", # You can find this key on the /setup page in PostHog
-   personal_api_key: "", # Required for local feature flag evaluation
-   feature_flags_polling_interval: 10, # How often to poll for feature flags
    feature_flag_request_timeout_seconds: 5 # Timeout for `/decide` feature flag requests
 })
 ```
