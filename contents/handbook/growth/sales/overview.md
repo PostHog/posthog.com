@@ -1,5 +1,5 @@
 ---
-title: Customer success overview
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---
