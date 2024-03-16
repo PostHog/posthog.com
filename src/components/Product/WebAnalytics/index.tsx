@@ -412,11 +412,23 @@ export const ProductWebAnalytics = () => {
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-20 pb-10`}
             >
                 <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
-                <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 text-center mt-1">
-                    <p className="m-0 p-0">
-                        Web analytics is currently billed with <Link to="/product-analytics">product analytics</Link>.
-                        Reduced pricing is coming soon.
+                <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
+                    <p className="mb-1">
+                        <strong>While in beta...</strong>
                     </p>
+                    <p className="mb-2">
+                        Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
+                    </p>
+                    <ul className="mb-2">
+                        <li>
+                            <strong>First 1 million events every month:</strong> Free (get access to both products)
+                        </li>
+                        <li>
+                            <strong>After 1 million events/mo:</strong> Usage is billed through product analytics. Get
+                            access to web analytics at no additional cost.
+                        </li>
+                    </ul>
+                    <p className="mb-0">Cheaper, dedicated pricing for web analytics is coming soon.</p>
                 </div>
 
                 {/*}
