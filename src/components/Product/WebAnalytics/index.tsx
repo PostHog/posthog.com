@@ -338,6 +338,7 @@ export const ProductWebAnalytics = () => {
                 <Hero
                     color="[#36C46F]"
                     icon={<IconPieChart />}
+                    beta={true}
                     product={product.capitalized}
                     title="Monitor your website traffic"
                     description="Web analytics for people who really liked GA3..."
