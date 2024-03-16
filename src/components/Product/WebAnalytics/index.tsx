@@ -381,7 +381,7 @@ export const ProductWebAnalytics = () => {
                 */}
             </div>
 
-            <SmoothScroll exclude={['Pricing', 'Installation', 'Meet the team']} />
+            <SmoothScroll exclude={['Installation', 'Meet the team']} />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
@@ -407,11 +407,19 @@ export const ProductWebAnalytics = () => {
                     </Marquee>
                 </section>
             </div>
-            {/*
             <section
                 id="pricing"
-                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-20 pb-10`}
             >
+                <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
+                <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 text-center mt-1">
+                    <p className="m-0 p-0">
+                        Web analytics is currently billed with <Link to="/product-analytics">product analytics</Link>.
+                        Reduced pricing is coming soon.
+                    </p>
+                </div>
+
+                {/*}
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -437,8 +445,8 @@ export const ProductWebAnalytics = () => {
                         })}
                     </div>
                 </div>
+                */}
             </section>
-            */}
 
             <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto mt-12 `}>
                 <div id="posthog-vs">
