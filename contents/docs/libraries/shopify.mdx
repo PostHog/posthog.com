@@ -6,7 +6,6 @@ icon: ../../images/docs/integrate/frameworks/shopify.svg
 import eventLight from '../../images/tutorials/shopify/event-light.png';
 import eventDark from '../../images/tutorials/shopify/event-dark.png';
 
-Tracking your [Shopify](https://www.shopify.com/) store with PostHog can help you improve the user experience and increase conversion rates.
 
 ## Setting up a custom web pixel
 
@@ -20,7 +19,7 @@ Next, add code that contains:
 
 3. The rest of your PostHog capture logic. 
 
-For example, we use a custom pixel in [our merch store](https://merch.posthog.com/) to identify customers and capture a `merch store order submitted` event with details like `userID`, `order_number`, `product_id`, `price`, and more.
+As an example, here is the code for subscribing to a `checkout_completed` event. Every time a user checks out, we capture an event. We also call [`posthog.identify()`](/docs/product-analytics/identify) so that we can track the user across different sessions:
 
 ```js
 analytics.subscribe("checkout_completed", (event) => {
@@ -55,7 +54,7 @@ analytics.subscribe("checkout_completed", (event) => {
 });
 ```
 
-With this, every time a Shopify `checkout_completed` event fires (when a user completes a purchase), PostHog captures the event.
+In the above code, we capture the event with details like `userID`, `order_number`, `product_id`, `price`, and more. This is then viewable in PostHog:
 
 <ProductScreenshot 
   imageLight={eventLight} 
@@ -81,15 +80,15 @@ To have unrestricted access to the features of PostHog in your Shopify store, yo
 
 1. Click the green save button on the top right and you're good to go - PostHog should now capturing events on your Shopify store!
 
-> To confirm PostHog is configured correctly, visit your store and then check if the events from your session appear in PostHog. This may take a few minutes.
+> To confirm PostHog is configured correctly, visit your store and then check if the events from your session appear in the [PostHog activity tab](https://us.posthog.com/events). This may take a few minutes.
 
 ### Advanced tracking
+
+> This section requires some knowledge of HTML and Shopify's [Liquid templating engine](https://shopify.dev/docs/api/liquid).
 
 It can be useful to track additional events on your Shopify store, such as when a user adds an item to their cart or completes a purchase.
 
 Although [autocapture](/docs/product-analytics/autocapture) does capture these events, you may need to add additional metadata. This information can be used in further analysis in aggregate or when understanding behavior of an individual user.
-
-> The following requires some knowledge of HTML and Shopify's [Liquid templating engine](https://shopify.dev/docs/api/liquid).
 
 #### Add data attributes to buttons
 
