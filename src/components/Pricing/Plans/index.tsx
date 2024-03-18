@@ -124,16 +124,16 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                                     <Tooltip
                                         content={() => (
                                             <div>
+                                                Custom pricing available for large volumes.
                                                 <Link to="/contact-sales">
                                                     <Label
-                                                        className="!p-0 !text-sm !font-bold"
-                                                        text=" Custom pricing available for large volumes."
+                                                        className="!m-0 !p-0 !text-sm !font-bold"
+                                                        text="Get in touch"
                                                         style="orangeNoBg"
                                                     />
                                                 </Link>
                                             </div>
                                         )}
-                                        placement="right"
                                         contentContainerClassName="max-w-xs"
                                     >
                                         <div>
