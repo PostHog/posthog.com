@@ -12,19 +12,23 @@ const linklist: IProps[] = [
         url: '/products/product-analytics',
         items: [
             {
-                title: 'Product Analytics',
+                title: 'Product analytics',
                 url: '/product-analytics',
             },
             {
-                title: 'Session Replay',
+                title: 'Web analytics',
+                url: '/web-analytics',
+            },
+            {
+                title: 'Session replay',
                 url: '/session-replay',
             },
             {
-                title: 'Feature Flags',
+                title: 'Feature flags',
                 url: '/feature-flags',
             },
             {
-                title: 'A/B Testing',
+                title: 'A/B testing',
                 url: '/ab-testing',
             },
             {
@@ -100,19 +104,19 @@ const linklist: IProps[] = [
         url: '/docs',
         items: [
             {
-                title: 'Product Analytics',
+                title: 'Product analytics',
                 url: '/docs/product-analytics/',
             },
             {
-                title: 'Session Recording',
+                title: 'Session recording',
                 url: '/docs/session-replay',
             },
             {
-                title: 'Feature Flags',
+                title: 'Feature flags',
                 url: '/docs/feature-flags',
             },
             {
-                title: 'A/B Testing',
+                title: 'A/B testing',
                 url: '/docs/experiments',
             },
             {
@@ -124,7 +128,7 @@ const linklist: IProps[] = [
                 url: '/docs/cdp',
             },
             {
-                title: 'Data Warehouse',
+                title: 'Data warehouse',
                 url: '/docs/data-warehouse',
             },
             {
