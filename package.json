@@ -14,7 +14,7 @@
     "private": true,
     "scripts": {
         "build": "gatsby build",
-        "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8002",
+        "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
         "serve": "gatsby serve",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "clean": "gatsby clean",
