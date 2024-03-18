@@ -58,8 +58,6 @@ const MyComponent = () => {
 // posthog.ts
 import PostHog from 'posthog-react-native'
 
-export let posthog: PostHog | undefined = undefined
-
 export const posthog = new PostHog('<ph_project_api_key>', {
   // usually 'https://app.posthog.com' or 'https://eu.posthog.com'  
   host: '<ph_instance_address>' // TIP: host is optional if you use https://app.posthog.com

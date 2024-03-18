@@ -364,7 +364,7 @@ export async function getServerSideProps(ctx) {
 }
 ```
 
-> **Note**: Make sure to _always_ call `client.shutdown()` after sending events from the server-side.
+> **Note**: Make sure to _always_ call `await client.shutdown()` after sending events from the server-side.
 > PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 ### App router

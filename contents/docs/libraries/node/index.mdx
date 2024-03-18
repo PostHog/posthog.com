@@ -186,8 +186,6 @@ You should call `shutdown` on your program's exit to exit cleanly:
 
 ```node
 // Stop pending pollers and flush any remaining events
-client.shutdown()
-// or
 await client.shutdown()
 ```
 
