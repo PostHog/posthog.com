@@ -38,7 +38,7 @@ export default function Link({
     href,
     glossary,
     ...other
-}: Props) {
+}: Props): JSX.Element {
     const { compact } = useLayoutData()
     const posthog = usePostHog()
     const url = to || href
