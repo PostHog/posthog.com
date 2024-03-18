@@ -227,16 +227,16 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
-        name: 'Customer success',
+        name: 'Sales & CS',
         url: '',
         children: [
             {
-                name: 'Customer support',
-                url: '/handbook/growth/customer-support',
+                name: 'Overview',
+                url: '/handbook/growth/sales/overview',
             },
             {
-                name: 'Sales overview',
-                url: '/handbook/growth/sales/overview',
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
             },
             {
                 name: 'Sales operations',
@@ -247,7 +247,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'New customer onboarding',
+                        name: 'Customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
                     },
                     {
@@ -275,7 +275,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
                     {
-                        name: 'Historical import',
+                        name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
                 ],
