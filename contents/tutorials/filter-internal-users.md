@@ -17,25 +17,25 @@ Filtering out these sorts of users can be especially important for large organiz
 
 To make it easier to get accurate insights, PostHog includes tools to filter internal users out — and here’s how to use them. 
 
-## Step 1: Navigate to Project Settings
+## Step 1: Navigate to project settings
+
+PostHog identifies internal users on a project-by-project basis, so head to [your project setting](https://us.posthog.com/settings/project#internal-user-filtering) to get started. If your PostHog instance spans multiple projects then you must repeat this tutorial for each project. 
 
 ![Filter Internal Users Step 1](../images/tutorials/internal-users/step1.png)
-
-PostHog identifies internal users on a project-by-project basis, so head to Project Setting in the navigation to get started. If your PostHog instance spans multiple projects then you will have to repeat this tutorial for each project. 
 
 Any internal users you identify for a project will apply for _all_ users on that project. 
 
 ## Step 2: Add an internal user filter
 
-![Filter Internal Users Step 2](../images/tutorials/internal-users/step2.png)
-
-In Project Settings, scroll down to the ‘_Filter out internal and test users_’ section and click ‘_+ Add filter_’ to begin. 
+In project settings, scroll down to the ‘_Filter out internal and test users_’ section and click ‘_+ Add filter_’ to begin. 
 
 Adding a filter here works exactly the same as it does when you add a filter to any other insight, with a list of available events, properties and cohorts to choose from as a base for your filter. You can add several filters at once, to create an inclusive list of ways to identify groups of internal users or beta testers. 
 
 One of the easiest filters to create is to filter out internal users identified by their email address. We do this at PostHog, using the following filter to create insights based only on users who do not have a PostHog email address:
 
 > email ∌ (doesn’t contain) @posthog.com
+
+![Filter Internal Users Step 2](../images/tutorials/internal-users/step2.png)
 
 The filters you apply are added as extra filters when the toggle is switched on. So, if you apply a Cohort filter, it means toggling filtering on will match only this specific cohort.
 

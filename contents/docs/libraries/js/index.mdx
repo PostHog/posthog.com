@@ -404,9 +404,10 @@ posthog.capture("survey dismissed", {
 // 3. When a user has responded to a survey
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
-    $survey_response: survey_response // required. `survey_response` must be a text or number value (depending on your question type).
-    // For multiple choice select surveys, `survey_response` must be in an array of values with the selected choices.
-    // e.g., $survey_response: ["response_1", 8, "response_2"]
+    $survey_response: survey_response // required. `survey_response` must be a text value.
+    // Convert numbers to text e.g. 8 should be converted "8".
+    // For multiple choice select surveys, `survey_response` must be an array of values with the selected choices.
+    // e.g., $survey_response: ["response_1", "response_2"]
 })
 ```
 
@@ -450,7 +451,7 @@ In order for PostHog to work optimally, we require storing a small amount of inf
 -   Any super properties you have defined.
 -   Some PostHog configuration options (e.g. whether session recording is enabled)
 
-By default we store all this information in a `cookie`, which means that PostHog will still be able to identify your users even across subdomains. By default, this cookie is set to expire after `365` days.
+By default we store all this information in a `cookie`, which means that PostHog will still be able to identify your users even across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
 
 If you would like to change how PostHog stores this information, you can do so with the `persistence` parameter.
 
@@ -505,7 +506,7 @@ Some of the most relevant options are:
 | `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                         | Prevent PostHog autocapture from capturing any attributes from your elements.                                                  |
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
 | `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
-| `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                       | A list of properties that should never be sent with `capture` calls.                                                           |
+| `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                        | A list of properties that should never be sent with `capture` calls.                                                           |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                             | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
@@ -519,6 +520,7 @@ In this section we describe some additional details on advanced configuration av
 | `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.     |
 | `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will keep `/decide` running, but without any feature flag requests     |
 | `advanced_disable_feature_flags_on_first_load`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Stops from firing feature flag requests on first page load. Only requests feature flags when user identity or properties are updated, or you manually request for flags to be loaded.  |
+| `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000` | Sets timeout for fetching feature flags  |
 | `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`          | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
 | `custom_campaign_params` <br/><br/>**Type:** Array<br/>**Default:** `[]`      | List of query params to be automatically captured (see [UTM Segmentation](/docs/data/utm-segmentation) ) |
 

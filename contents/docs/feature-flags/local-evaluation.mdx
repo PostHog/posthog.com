@@ -71,6 +71,7 @@ func main() {
 			Endpoint:       "<ph_instance_address>",
 			PersonalApiKey: "your personal API key", // Required for feature flags
             DefaultFeatureFlagsPollingInterval: 300 // Optional. Measured in seconds. Defaults to 300 (5 minutes).
+            // NextFeatureFlagsPollingTick: func() time.Duration {} // Optional. Use this to sync polling intervals between instances. For an example see: https://github.com/PostHog/posthog-go/pull/36#issuecomment-1991734125
 		},
 	)
 	defer client.Close()
@@ -80,10 +81,11 @@ func main() {
 
 ```php
 PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_instance_address>',
-        'personal_api_key' => 'your personal API key from step 1'),
-        'poll_interval' => 30 # Optional. Measured in seconds. Defaults to 30.
+  array('host' => '<ph_instance_address>'),
+  null, // or custom http client
+ 'YOUR PERSONAL API KEY from step 1'
 );
+// NOTE: PHP currently doesn't support a poller, so you'll need to reload flags as and when needed, or re-initialize the posthog client
 ```
 
 ```python
@@ -247,16 +249,26 @@ client.ReloadFeatureFlags()
 
 </MultiLanguage>
 
-## Restriction on local evaluation and cohorts
+## Restriction on local evaluation
+
+### General restrictions
+
+Local evaluation is not possible for flags that:
+
+1. Have experience continuity enabled, which is set when you check ['persist flag across authentication steps'](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps) on your feature flag.
+2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
+3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
+
+### Dynamic cohort restrictions
 
 > **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](https://posthog.com/docs/libraries/python) SDK.
 
-To enable local evaluation of feature flags that depend on [cohorts](/docs/data/cohorts), we translate the cohort definition into person properties.
+To enable local evaluation of feature flags that depend on [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts), we translate the cohort definition into person properties.
 
 However, there are a few constraints, and cohorts cannot be evaluated locally if:
 
 1. There is a variant override on the condition with the cohort.
-2. They have non-person properties
+2. They have non-person properties.
 3. There's more than one cohort in the feature flag definition.
 4. The cohort in the feature flag is in the same group as another condition.
 5. The cohort has nested AND-OR filters. Only simple cohorts that have a top level OR group, and inner level ANDs will be evaluated locally.

@@ -50,6 +50,10 @@ export const quickLinks = [
         to: '/docs/libraries/nuxt-js',
     },
     {
+        name: 'n8n',
+        to: '/docs/libraries/n8n',
+    },
+    {
         name: 'Remix',
         to: '/tutorials/remix-analytics',
     },
@@ -92,6 +96,10 @@ export const quickLinks = [
     {
         name: 'WordPress',
         to: '/docs/libraries/wordpress',
+    },
+    {
+        name: 'Zendesk',
+        to: '/docs/libraries/zendesk',
     },
 ]
 

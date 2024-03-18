@@ -137,7 +137,7 @@ Charles, James and Tim at this time are the only people able to sign legal paper
 Now it's time to dive into some of the more practical stuff - these are the most important pages:
 
 1. [Communication](/handbook/company/communication) - we have a distinctive style. If PostHog is your first all-remote company, this page is especially helpful.
-2. [Team structure](/handbook/small-teams/team-structure) - we are structured in Small Teams. These pages will help you get the lay of the land, and who does what. 
+2. [Team structure](/handbook/team-structure) - we are structured in Small Teams. These pages will help you get the lay of the land, and who does what. 
 3. [Management](/handbook/company/management) - we have a relatively unusual approach to management, and it is possible that you will not be familiar with our approach. 
 
 ### Working in GitHub

@@ -4,35 +4,40 @@ title: Replay data retention
 
 Depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
 
+> **Note:** Any individual recording you want to preserve can be downloaded by clicking "Export to file" in the more options menu in the bottom right of a recording. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
+
 ## PostHog Cloud
 
 Recordings are automatically deleted after **1 month** (**3 months** for paid customers). 
-The deletion is not immediate meaning that recordings may still appear for a short time in the UI after the retention period expires or when manually deleted via the UI. 
+
+The deletion is not immediate. Recordings may still appear for a short time after the retention period expires or when manually deleted via the UI.
+
+### One year retention
+
+Some recordings are stored for 1 year:
+
+* pinned to a playlist
+* shared publicly
+* added to a notebook
+
+### Exporting your recordings
 
 
-### Preserving recordings
+## Self-hosted installations
 
-Pinned or Shared recordings are kept for as long as they are actively in use. Alternatively, any individual recording that you would like to preserve for longer can be done by downloading them locally. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
+The original version of session replay stored recordings in ClickHouse. At a higher scale, this was impractical and expensive. To make PostHog cheaper and easier to run and maintain, we have deprecated storing recordings in ClickHouse. We now only support blob storage backed recordings. In PostHog Cloud, we use AWS S3 as a blob store. Self-hosted versions include [MINIO](https://min.io/) to enable you to use whichever blob storage you prefer.
 
+### I want to keep using ClickHouse for recording storage...
 
-## Self-hosted 
+The [final PostHog release to officially support ClickHouse stored recordings](https://hub.docker.com/layers/posthog/posthog/9c68581779c78489cfe737cfa965b73f7fc5503c/images/sha256-4dec586a83328f4123039bab924289f9bd52bd46f56bf14e9ae91fcd6d05ed5d?context=explore) can be pinned using the `deploy-hobby` script. All subsequent releases only support blob storage-backed recordings.
 
-In order to make PostHog cheaper and easier to run and maintain we are deprecating storing recordings in ClickHouse. 
-
-### Pinning a non-deprecated version
-
-The [final PostHog release to officially support ClickHouse stored recordings](https://hub.docker.com/layers/posthog/posthog/9c68581779c78489cfe737cfa965b73f7fc5503c/images/sha256-4dec586a83328f4123039bab924289f9bd52bd46f56bf14e9ae91fcd6d05ed5d?context=explore) can be pinned using the `deploy-hobby` script. All subsequent releases only support blob storage backed recordings.
-
-Or edit your docker compose file to replace `image: posthog/posthog:$POSTHOG_APP_TAG` with `image: posthog/posthog:9c68581779c78489cfe737cfa965b73f7fc5503c`
+You can also edit your docker-compose file to replace `image: posthog/posthog:$POSTHOG_APP_TAG` with `image: posthog/posthog:9c68581779c78489cfe737cfa965b73f7fc5503c`.
 
 ### Managing storage
 
-Self-hosted installations, pinned to earlier versions, 
-are able to control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
+Self-hosted installations pinned to earlier versions can control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
 
-Please note, 
-for versions of PostHog that rely on Clickhouse storage, 
-you need to manage the available capacity. 
+Please note that you need to manage the available capacity for versions of PostHog that rely on Clickhouse storage. 
 Ensure you increase volume capacity before changing the `RECORDINGS_TTL_WEEKS` value (even if you're decreasing the value). 
 ClickHouse requires abundant free disk space to manage the `session_recording_events` table.
 

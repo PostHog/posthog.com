@@ -189,7 +189,7 @@ const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: B
     )
 }
 
-export const CTA = () => {
+export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): JSX.Element => {
     const posthog = usePostHog()
     return (
         <TrackedCTA
@@ -197,7 +197,7 @@ export const CTA = () => {
                 name: `clicked Get started - free`,
                 type: 'cloud',
             }}
-            type="primary"
+            type={type}
             size="md"
             className="shadow-md !w-auto"
             to={`https://${
@@ -210,7 +210,7 @@ export const CTA = () => {
 }
 
 const allProductsData = graphql`
-    query GetAllProductData {
+    query {
         allProductData {
             nodes {
                 products {
@@ -271,6 +271,8 @@ const allProductsData = graphql`
                         name
                         plan_key
                         product_key
+                        contact_support
+                        unit_amount_usd
                         tiers {
                             current_amount_usd
                             current_usage
@@ -317,7 +319,7 @@ export default function Plans({
                                     {plans.map(({ free_allocation, plan_key }) => {
                                         return (
                                             <Heading
-                                                title={free_allocation ? 'Free' : 'Unlimited'}
+                                                title={free_allocation ? 'Free' : 'All other plans'}
                                                 subtitle={
                                                     free_allocation
                                                         ? 'No credit card required'

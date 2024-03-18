@@ -30,8 +30,8 @@ Let us know [on this GitHub issue](https://github.com/PostHog/posthog/issues/127
 ```
 
 4. Once done, click “Create new template.” Test that it works in the team project.
-5. Create a dashboard image in Figma in the “Hoglitos” file. Make the size of image small (like 396x208). Export and add to `posthog.com/static/template_art/`.
-6. Copy the same hedgehog as a small square image with a transparent background. Export and add to `posthog.com/contents/templates/thumbnails/`.
+5. Create a dashboard image in Figma in the “[Hoglitos](https://www.figma.com/file/HwUmk7WqccLkGgNNGAs4zN/Art-board?type=design&node-id=15-11&mode=design)” file. Make the size of image small (like 396x208). Export and add to [`posthog.com/static/template_art/`](https://github.com/PostHog/posthog.com/tree/master/static/template_art).
+6. For the website, copy the same hedgehog as a small square image with a transparent background. Export and add to `posthog.com/contents/templates/thumbnails/`.
 7. While you are in Figma, create a 1920x1080 preview image with a couple of the insights. Export and add to `posthog.com/contents/templates/thumbnails/featured`.
 8. In that same `posthog.com/contents/templates` folder, create a new folder for your template, copy an index.mdx file from one of the other folders, and modify for your new template.
 9. Open a pull request.

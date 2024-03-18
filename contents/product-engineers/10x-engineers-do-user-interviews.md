@@ -88,7 +88,7 @@ User interviews are powerful but slow. You can quickly narrow down the most impo
 
 After the initial discussion, get your user on Slack for B2B or iMessage for B2C – or whatever messaging tool works best for them. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
 
-Here's an example from Li on our [Feature Success Team](/handbook/small-teams/feature-success) seeking feedback on our feature flag permissioning. She received a response 3 minutes (!!) later.
+Here's an example from Li on our [Feature Success Team](/teams/feature-success) seeking feedback on our feature flag permissioning. She received a response 3 minutes (!!) later.
 
 ![Slack feedback on feature flags](../images/blog/10x-engineers-do-user-interviews/feature-flags-feedback.png)
 

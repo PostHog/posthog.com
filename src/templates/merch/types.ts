@@ -76,6 +76,7 @@ export type ShopifyProduct = {
     title: string
     totalInventory: number
     variants: ShopifyProductVariant[]
+    imageProducts: ShopifyProduct[]
 }
 
 export type ShopifyProductVariant = {

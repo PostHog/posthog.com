@@ -166,7 +166,7 @@ h4 {
 
     p,
     li {
-        @apply text-base leading-7;
+        @apply text-base leading-6;
 
         li {
             @apply text-base;
@@ -358,6 +358,9 @@ h4 {
 
 /* applies to question and reply content */
 .question-content {
+    a {
+        @apply text-red dark:text-yellow;
+    }
     h3 {
         @apply text-xl;
 
@@ -393,6 +396,15 @@ h4 {
     container-type: inline-size;
 }
 
+.team-page-content {
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-[17px];
+    }
+}
+
 /* scope to left nav */
 .z-20 {
     /* make active nav item full strength */
@@ -418,6 +430,24 @@ h4 {
     }
     .placement-left:before {
         clip-path: polygon(100% 100%, 100% 0, 0 0);
+    }
+}
+
+/* pricing page: unique slider bar colors */
+
+.rc-slider-handle,
+.rc-slider-track {
+    .product-product-analytics & {
+        @apply !bg-blue;
+    }
+    .product-session-replay & {
+        @apply !bg-yellow;
+    }
+    .product-feature-flags & {
+        @apply !bg-green;
+    }
+    .product-surveys & {
+        @apply !bg-red;
     }
 }
 
@@ -609,7 +639,7 @@ ul {
 }
 
 .rc-slider.slider .rc-slider-track {
-    @apply bg-black;
+    @apply bg-black/60 dark:bg-white/50;
 }
 
 .rc-slider.slider .rc-slider-handle {
@@ -622,6 +652,14 @@ ul {
 
 .rc-slider.slider .rc-slider-tooltip {
     display: none;
+}
+
+.rc-slider.slider .rc-slider-mark-text {
+    @apply text-primary/60 dark:text-primary-dark/60;
+
+    &.rc-slider-mark-text-active {
+        @apply text-primary/75 dark:text-primary-dark/75 font-bold;
+    }
 }
 
 /* Slider base styles */
@@ -1346,7 +1384,7 @@ li.squeak-left-border {
     }
 
     p {
-        @apply m-0 mb-2 text-[15px];
+        @apply m-0 mb-4 text-[15px];
     }
 
     ol,

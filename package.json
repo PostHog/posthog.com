@@ -34,7 +34,7 @@
         "@heroicons/react": "^1.0.6",
         "@hubspot/api-client": "^7.1.2",
         "@popperjs/core": "^2.11.2",
-        "@posthog/icons": "0.4.16",
+        "@posthog/icons": "0.6.7",
         "@slack/bolt": "^3.8.1",
         "@supabase/supabase-js": "^1.29.4",
         "@tailwindcss/container-queries": "^0.1.1",
@@ -217,7 +217,7 @@
         "storybook-addon-gatsby": "0.0.2",
         "storybook-dark-mode": "^1.0.8",
         "style-loader": "^3.3.0",
-        "tailwindcss": "^3.3.5",
+        "tailwindcss": "3.4.1",
         "webpack": "5"
     },
     "husky": {

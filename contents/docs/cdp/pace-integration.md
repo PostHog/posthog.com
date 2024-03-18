@@ -21,25 +21,25 @@ You'll also need access to the relevant Pace account.
 
 ### Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
-2. Search for 'Pace' and select the app, press Install.
-3. Enable the app enter your Pace API key to authenticate with Pace.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+2. Search for 'Pace' and select the destination, press Install.
+3. Enable the destination enter your Pace API key to authenticate with Pace.
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this destination available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/pace-posthog-integration) is available on GitHub.
+PostHog is open-source and so are all destinations on the platform. The [source code](https://github.com/PostHog/pace-posthog-integration) is available on GitHub.
 
-### Who created this app?
+### Who created this destination?
 
-This app was created by [Saimon Alam](https://github.com/SaimonAlam15) at [Pace](https://www.paceapp.com/). 
+This destination was created by [Saimon Alam](https://github.com/SaimonAlam15) at [Pace](https://www.paceapp.com/). 
 
-### Who maintains this app?
+### Who maintains this destination?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this destination?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

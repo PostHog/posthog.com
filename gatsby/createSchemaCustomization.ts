@@ -3,6 +3,9 @@ import { GatsbyNode } from 'gatsby'
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const { createTypes } = actions
     createTypes(`
+	type ShopifyProduct implements Node {
+		imageProducts: [ShopifyProduct]
+	}
     type Mdx implements Node {
       frontmatter: Frontmatter
       avatar: File @link(from: "avatar___NODE")
@@ -217,6 +220,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type Roadmap implements Node {
       year: Int
     }
+    type ProductDataProductsPlans {
+      contact_support: Boolean
+      unit_amount_usd: Float
+    }
   `)
     createTypes([
         schema.buildObjectType({
@@ -278,6 +285,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               maxVariantPrice: ShopifyMoneyV2!
               minVariantPrice: ShopifyMoneyV2!
             }
+            type ShopifyFeaturedImage {
+              localFile: File
+            }
             type ShopifyProduct implements Node {
               description: String!
               featuredMedia: ShopifyMedia
@@ -293,6 +303,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               options: [ShopifyProductOption!]!
               tags: [String!]!
               totalInventory: Int!
+              featuredImage: ShopifyFeaturedImage
             }
           `
         )

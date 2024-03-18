@@ -140,8 +140,7 @@ import com.posthog.android.PostHogAndroidConfig
 class MyFeatureFlagsApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
-        // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-        private const val POSTHOG_HOST = "<ph_instance_address>"
+        private const val POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
     }
 
     override fun onCreate() {
@@ -157,7 +156,7 @@ class MyFeatureFlagsApplication : Application() {
 
 To get your PostHog API key and host, [sign up to PostHog](https://us.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://us.posthog.com/settings/project).
 
-We now need to register our custom application class. Go to `app/manifests/AndroidManifest.xml` and add `android:name=".MyFeatureFlagsApplication"` within the `<application` tag:
+We now need to register our custom application class. Go to `app/manifests/AndroidManifest.xml` and add `android:name=".MyFeatureFlagsApplication"` within the `<application>` tag:
 
 ```XML file=app/manifests/AndroidManifest.xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -233,4 +232,4 @@ That's it! When you restart your app and click the button, you should see the gr
 
 - [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
-- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
+- [How to set up analytics in Android](/tutorials/android-analytics)

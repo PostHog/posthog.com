@@ -171,9 +171,18 @@ export const Sidebar = () => {
 export const PostsContext = createContext({})
 
 const menusByRoot = {
-    tutorials: { parent: communityMenu, activeInternalMenu: communityMenu.children[2] },
-    blog: { parent: companyMenu, activeInternalMenu: companyMenu.children[5] },
-    newsletter: { parent: communityMenu, activeInternalMenu: communityMenu.children[4] },
+    tutorials: {
+        parent: communityMenu,
+        activeInternalMenu: communityMenu.children.find(({ name }) => name.toLowerCase() === 'guides'),
+    },
+    blog: {
+        parent: companyMenu,
+        activeInternalMenu: companyMenu.children.find(({ name }) => name.toLowerCase() === 'blog'),
+    },
+    newsletter: {
+        parent: communityMenu,
+        activeInternalMenu: communityMenu.children.find(({ name }) => name.toLowerCase() === 'newsletter'),
+    },
 }
 
 const Router = ({ children, prev }: { children: React.ReactNode; prev: string | null }) => {

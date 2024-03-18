@@ -8,49 +8,109 @@ availability:
     enterprise: full
 ---
 
-HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. HogQL is effectively a wrapper around [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference), with a few tweaks, such as simplified event and person property access.
+import ExpressionLight from '../../images/features/hogql/expression-light.png'
+import ExpressionDark from '../../images/features/hogql/expression-dark.png'
+import SQLLight from '../../images/features/hogql/sql-light.png'
+import SQLDark from '../../images/features/hogql/sql-dark.png'
+import WarehouseLight from '../../images/features/hogql/warehouse-light.png'
+import WarehouseDark from '../../images/features/hogql/warehouse-dark.png'
 
-**Is HogQL _real_ SQL?** Yes, it's a translation layer over ClickHouse SQL. You can use most ClickHouse features in HogQL, including JOINs and subqueries. To learn more about ClickHouse, and how it differs from traditional SQL databases, read [PostHog's ClickHouse Manual](https://posthog.com/handbook/engineering/clickhouse).
+HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. It is effectively a wrapper around [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference), with tweaks such as simplified event and person property access, null handling, and visualization integrations.
 
 > HogQL is currently in **public beta**. This means it's not yet a perfect experience, and the language itself may still change. Follow along with the development [here](https://github.com/PostHog/meta/issues/81).
 
 ## HogQL expressions
 
-[HogQL expressions](/docs/hogql/expressions) enable you to directly access, filter, and breakdown your data using SQL. They can be used wherever event filters can including dashboards, trends, funnels, and the activity tab.
+[HogQL expressions](/docs/hogql/expressions) enable you to use database identifiers and functions to directly access, [aggregate](/docs/hogql/aggregations), filter, transform, and breakdown your data.
 
-To use them, select the "HogQL" tab when filtering or breaking down and add your expression.
+They can be used by selecting the "HogQL" tab or "HogQL expression" option in filters, breakdowns, dashboards, trends, funnels (aggregating by), user paths (event types), the activity tab (columns), and more.
 
-![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
+For example, to group pageviews into "desktop" or "mobile," you can breakdown with the expression `multiIf(properties.$os == 'Android', 'mobile', properties.$os == 'iOS', 'mobile', 'desktop')`
+
+<ProductScreenshot
+  imageLight={ExpressionLight}
+  imageDark={ExpressionDark}
+  alt="HogQL expression example"
+/>
 
 ## SQL insights
 
-[SQL insights](/docs/product-analytics/sql) enable you to create and edit insights using full SQL queries instead of the UI. Clicking the `{}` button in the top right corner of an insight shows you the SQL schema used to generate the insight which you can edit.
+[SQL insights](/docs/product-analytics/sql) enable you to directly query your data with SQL commands like `SELECT`, `FROM`, `JOIN`, `WHERE`, `GROUP BY` along with many of [ClickHouse SQL's function](/docs/hogql/clickhouse-functions). This enables more complex and customizable queries and results than other insights.
 
-![HogQL SQL insight](../../images/features/hogql/insights-sql.png)
+For example, to get a count of the most popular first pageview `current_url` values, we can use an SQL query like this:
 
-## Activity
+```sql
+SELECT 
+    properties.$current_url AS current_url,
+    count() AS url_count
+FROM events
+WHERE event = '$pageview'
+    AND (distinct_id, timestamp) IN (
+        SELECT distinct_id, min(timestamp)
+        FROM events
+        WHERE event = '$pageview'
+        GROUP BY distinct_id
+    )
+GROUP BY current_url
+ORDER BY url_count DESC
+```
 
-The [activity](https://app.posthog.com/events) tab replaces the "Live Events" tab in PostHog. It provides more functionality including date filtering, event counts, HogQL queries, [aggregations](#supported-aggregations) and column configuration.
+<ProductScreenshot
+  imageLight={SQLLight}
+  imageDark={SQLDark}
+  alt="HogQL SQL insight"
+/>
 
-![Event Explorer](../../images/features/hogql/event-explorer.png)
+You can use SQL insights within [notebooks](/docs/notebooks) and with external sources using the [data warehouse](/docs/data-warehouse).
 
-## Database
+## Query API
 
-To display all the tables you can query, check out the new "[Database](https://app.posthog.com/data-management/database)" tab under "Data Management".
-
-![Database](../../images/features/hogql/database.png)
-
-We're working hard on making all these public. Follow along in the [relevant Github issue](https://github.com/PostHog/meta/issues/81), or [send us a support ticket](https://app.posthog.com/home#supportModal) if you want to get access.
-
-## API access 
-
-> **Will there be API pricing?** The HogQL API is free to use while it's in the public beta, and we work out the details. After we launch for real, we plan to charge a competitive rate for heavy usage. Stay tuned.
-
-To access HogQL via the [PostHog API](/docs/api), make a POST request to `/api/projects/:project_id/query` with the following JSON payload:
+To query events using HogQL via the [PostHog API](/docs/api/query), get [your project ID](https://us.posthog.com/settings/project-details#variables), a [personal API key](https://us.posthog.com/settings/user-api-keys) with the project query read permission and make a POST request to `/api/projects/:project_id/query` endpoint with the following JSON payload:
 
 ```json
-{"query": {"kind": "HogQLQuery", "query": "select * from events limit 100"}}
+{"query": {"kind": "HogQLQuery", "query": "select * from events"}}
 ```
+
+For example, to get a count of the most common `event` values, you can make a request like this (change `app.posthog.com` to `eu.posthog.com` if you're on EU cloud):
+
+<MultiLanguage>
+
+```bash
+curl -X POST "https://app.posthog.com/api/projects/:project_id/query" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <personal_api_key>" \
+     -d '{
+            "query": {
+              "kind": "HogQLQuery", 
+              "query": "SELECT event, COUNT() FROM events GROUP BY event ORDER BY COUNT() DESC"
+            }
+         }'
+```
+
+```python
+import requests
+
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer <personal_api_key>"
+}
+
+data = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": "SELECT event, COUNT() FROM events GROUP BY event ORDER BY COUNT() DESC"
+    }
+}
+
+response = requests.post(
+    'https://app.posthog.com/api/projects/:project_id/query', 
+    headers=headers, 
+    json=data
+)
+
+print(response.json())
+```
+</MultiLanguage>
 
 The response is in the format:
 
@@ -73,9 +133,16 @@ export interface HogQLQueryResponse {
 
 While in the public beta, the response format may still change. 
 
-## Further reading
+> **Will there be API pricing?** The HogQL API is free to use while it's in the public beta and we work out the details. After we launch for real, we plan to charge a competitive rate for heavy usage. Stay tuned.
 
-- [Guide to using HogQL](/docs/hogql/guide)
-- [Supported ClickHouse functions](/docs/hogql/clickhouse-functions)
-- [Supported aggregations](/docs/hogql/aggregations)
-- [Tutorials](/docs/hogql/tutorials)
+## Data warehouse
+
+To get a list of all the sources you can query with HogQL, enable the [data warehouse beta](https://us.posthog.com/#panel=feature-previews) and check out the ["Data warehouse" tab](https://us.posthog.com/data-warehouse). You can click on every table listed to see the data included and query them.
+
+<DataWarehouseScreenshot
+  imageLight={WarehouseLight}
+  imageDark={WarehouseDark}
+  alt="Data warehouse example"
+/>
+
+The data warehouse also enables you to add external sources, like Stripe and Hubspot, and query them alongside your PostHog data.
