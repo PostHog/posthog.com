@@ -19,6 +19,7 @@ import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
 import OnePlatform from './OnePlatform'
 import NoHatingAllowed from './NoHatingAllowed'
+import BillboardTruck from './BillboardTruck'
 
 const Home = () => {
     usePostHog()
@@ -38,6 +39,7 @@ const Home = () => {
                 <CodeBlocks />
                 <OnePlatform />
                 <NoHatingAllowed />
+                <BillboardTruck /> {/* leftHandDrive={true} */}
                 <ApiExamples />
                 <HogQL />
                 <Community />
