@@ -2,14 +2,16 @@ import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconMessage,
+    IconPieChart,
+    IconTarget,
+    IconMouseScrollDown,
+    IconArrowUpLeftDiagonal,
     IconClock,
+    IconDownload,
+    IconPassword,
     IconGraph,
     IconFlask,
     IconToggle,
-    IconPieChart,
-    IconNotification,
-    IconRewindPlay,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -17,10 +19,12 @@ import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
+import { Marquee } from 'components/Products/Marquee'
 import { graphql, useStaticQuery } from 'gatsby'
+import ContentViewer from 'components/ContentViewer'
+import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'
 import TeamRoadmap from 'components/TeamRoadmap'
-import { Marquee } from 'components/Products/Marquee'
 import RecentChange from '../RecentChange'
 import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
@@ -34,98 +38,118 @@ import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
+import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 
 const product = {
-    slug: 'surveys',
-    lowercase: 'surveys',
-    capitalized: 'Surveys',
-    freeTier: '250 survey responses',
+    slug: 'web-analytics',
+    lowercase: 'web analytics',
+    capitalized: 'Web analytics',
+    freeTier: '5,000 recordings',
 }
 
-const team = 'Feature Success'
-const teamSlug = '/teams/feature-success'
+const team = 'Web Analytics'
+const teamSlug = '/teams/web-analytics'
 
 const featuresPerRow = 3
 const features = [
     {
-        title: 'Question types',
-        description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
-        image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
+        title: 'Top paths',
+        description: 'See the most visited pages on your site',
+        image: <StaticImage src="../../../../static/images/products/web-analytics/top-paths.jpg" width={420} />,
+        border: true,
     },
     {
-        title: 'Templates',
-        description: 'Choose from the library or start from scratch',
-        image: <StaticImage src="./images/templates.png" width={428} placeholder="none" />,
-        background: true,
-        fade: true,
+        title: 'Top referrers',
+        description: 'Discover where traffic is coming from',
+        image: <StaticImage src="../../../../static/images/products/web-analytics/top-referrers.jpg" width={420} />,
+        border: true,
     },
     {
-        title: 'Targeting',
-        description: 'Target by URL, user property, or feature flag when used with Feature Flags',
-        image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
+        title: 'Device types',
+        description: 'Break down traffic by device',
+        image: <StaticImage src="../../../../static/images/products/web-analytics/device-types.jpg" width={420} />,
+        border: true,
     },
     {
-        title: 'Multi-step surveys',
-        description: 'Up to 10 questions',
-        image: <StaticImage src="./images/steps.png" width={428} placeholder="none" />,
+        title: 'World map',
+        description: 'Visualize users across planet earth',
+        image: <StaticImage src="../../../../static/images/products/web-analytics/world-map.jpg" width={420} />,
+        border: true,
     },
     {
-        title: 'Link somewhere',
-        description: 'Send users to a webpage or invite them to book a meeting with a calendar invite',
-        image: <StaticImage src="./images/link-scheduler.png" width={428} placeholder="none" />,
-    },
-    {
-        title: 'No-code? Yes. API? Yes.',
-        description:
-            "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/api/surveys'>Surveys API</a>.",
-        image: <StaticImage src="./images/api.png" width={428} placeholder="none" />,
-        fade: true,
+        title: 'Retention cohorts',
+        description: 'Analyze retention by week',
+        image: <StaticImage src="../../../../static/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
+        border: true,
     },
 ]
 
-const subfeaturesItemCount = 3
+const subfeaturesItemCount = 4
 const subfeatures = [
     {
-        title: 'Aggregated results',
-        description: 'See feedback summarized and broken down per response',
-        icon: <IconPieChart />,
+        title: 'UTM tracking',
+        description: 'See which campaigns perform best',
+        icon: <IconTarget />,
     },
     {
-        title: 'Slack notifications',
-        description: 'Send realtime survey responses to a Slack channel',
-        icon: <IconNotification />,
+        title: 'Scroll tracking',
+        description: 'Discover how much users actually read',
+        icon: <IconMouseScrollDown />,
     },
     {
-        title: 'Customizable wait periods',
-        description: 'Set a delay before a survey opens',
+        title: 'Bounce tracking',
+        description: 'Find out when users immediately get out of dodge',
+        icon: <IconArrowUpLeftDiagonal />,
+    },
+    {
+        title: 'Duration tracking',
+        description: 'Monitor how long users are hanging around',
         icon: <IconClock />,
     },
 ]
 
 const questions = [
     {
-        question: 'Would you like to book a user interview?',
-        url: '/tutorials/feedback-interviews-site-apps',
+        question: 'How many visitors have I had this week?',
     },
     {
-        question: 'Would you like to be interviewed by our product team?',
+        question: "What's my average bounce rate?",
     },
     {
-        question: 'How would you feel if you could no longer use this product?',
+        question: 'Where in the world are my visitors coming from?',
     },
     {
-        question: "How satisfied are you with the support you've received?",
+        question: 'Are my users mostly on mobile, tablet, or desktop?',
+    },
+    {
+        question: "What's my most popular blog post from the last month?",
+    },
+    {
+        question: 'What other websites are sending me the most traffic?',
+    },
+    {
+        question: 'How many visitors are coming back to my site regularly?',
     },
 ]
 
 const faqs = [
     {
-        question: 'How long do you retain survey data?',
+        question: 'How do I know what my recording volume is?',
         children:
-            'Data is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
+            "The easiest way is to sign up for the Free plan - no credit card required. You'll get an accurate volume projection after just a few days.",
+    },
+    {
+        question: 'Do I pay anything for stored recordings?',
+        children:
+            'No, you only pay the fee per captured recording in a given month. There are no additional costs or fees.',
+    },
+    {
+        question: 'How long do you retain session recordings?',
+        children:
+            'Recordings are kept on Clickhouse-based installations for 1 month. For paid customers on PostHog Cloud, recordings are kept for 3 months.',
     },
     {
         question: 'Is there a free trial on paid plans?',
@@ -148,149 +172,101 @@ const faqs = [
     },
 ]
 
-const comparisonColumnCount = 5
+const comparisonColumnCount = 4
 const comparison = [
     {
-        feature: 'Customizable pop-ups',
+        feature: 'Pre-configured dashboards',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Live previews',
+        feature: 'Visitor and view tracking',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Multi-step surveys',
+        feature: 'Session and duration tracking',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'API access',
+        feature: 'Bounce rate tracking',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Single choice questions',
+        feature: 'Breakdown by GeoIP',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Multiple choice questions',
+        feature: 'Breakdown by device and browser',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Open text questions',
+        feature: 'Real-time reporting',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Numerical rating questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Emoji rating questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Third-party link support',
-        companies: {
-            Pendo: true,
-            Hotjar: false,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by property',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by URL',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by feature flag',
-        companies: {
-            Pendo: false,
-            Hotjar: false,
-            Sprig: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Survey scheduling',
-        companies: {
-            Pendo: true,
-            Hotjar: false,
-            Sprig: false,
+            Matomo: true,
+            GA4: true,
             PostHog: false,
         },
     },
     {
-        feature: 'Export responses',
+        feature: 'Open source',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            Matomo: true,
+            GA4: false,
             PostHog: true,
         },
     },
     {
-        feature: 'Slack integration',
+        feature: '1st party cookies',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            Matomo: true,
+            GA4: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'No-cookie option',
+        companies: {
+            Matomo: true,
+            GA4: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'HIPAA compliance',
+        companies: {
+            Matomo: true,
+            GA4: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'GDPR compliance',
+        companies: {
+            Matomo: true,
+            GA4: false,
             PostHog: true,
         },
     },
@@ -301,26 +277,27 @@ const PairsWithArray = [
     {
         icon: <IconGraph />,
         product: 'Product analytics',
-        description: 'Use insights to breakdown average scores, analyze results over time, or find trends.',
+        description: 'Need to go deeper than a dashboard? Building your own insights and HogQL queries from scratch!',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
-        product: 'Feature flags',
-        description: 'Connect a survey to a feature flag to gather feedback on your latest ideas and tests.',
-        url: '/feature-flags',
+        product: 'Session replays',
+        description:
+            "Get more context by watching what users actually do on your site. It's not creepy if you have permission.",
+        url: '/session-replays',
     },
     {
-        icon: <IconRewindPlay />,
-        product: 'Session replay',
+        icon: <IconFlask />,
+        product: 'Surveys',
         description:
-            "Watch recordings of users completing a survey to understand full context about a user's behavior.",
-        url: '/session-replay',
+            'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
+        url: '/surveys',
     },
 ]
 
-export const ProductSurveys = () => {
-    const { purplewave } = useStaticQuery(graphql`
+export const ProductWebAnalytics = () => {
+    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -335,7 +312,16 @@ export const ProductSurveys = () => {
             }
         }
         {
-            purplewave: mdx(slug: { eq: "customers/purplewave" }) {
+            contra: mdx(slug: { eq: "customers/contra" }) {
+                ...ProductCustomerFragment
+            }
+            hasura: mdx(slug: { eq: "customers/hasura" }) {
+                ...ProductCustomerFragment
+            }
+            netdata: mdx(slug: { eq: "customers/netdata" }) {
+                ...ProductCustomerFragment
+            }
+            pry: mdx(slug: { eq: "customers/pry" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -344,39 +330,58 @@ export const ProductSurveys = () => {
     return (
         <>
             <SEO
-                title="Surveys - PostHog"
-                description="Ask anything with no-code surveys – or use the API for complete control."
-                image={`/images/og/surveys.jpg`}
+                title="Web analytics - PostHog"
+                description="It's like Google Analytics 3, but it still exists..."
+                image={`/images/og/web-analytics.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
-                    color="salmon"
-                    icon={<IconMessage />}
+                    color="[#36C46F]"
+                    icon={<IconPieChart />}
+                    beta={true}
                     product={product.capitalized}
-                    title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
-                    description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
+                    title="Monitor your website traffic"
+                    description="Web analytics for people who really liked GA3..."
                 />
 
-                <div className="text-center">
+                <div className="text-center -mb-24">
                     <StaticImage
-                        src="../../../images/products/screenshot-surveys.png"
-                        alt="Screenshot of survey results in PostHog"
-                        className="w-full max-w-[1360px]"
+                        src="../../../../static/images/products/web-analytics/screenshot-web-analytics.png"
+                        alt="Screenshot of web analytics in PostHog"
+                        className="w-full max-w-[1440px]"
                         placeholder="none"
                     />
                 </div>
-                <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-1 gap-4 mb-10 md:mb-20">
+
+                {/*
+                <section id="customers" className="-mt-56 pt-36">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="reached a 25% response rate with surveys"
-                            quote="I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform."
-                            customer={purplewave}
+                            outcome="improved conversion rates by 10-20%"
+                            quote="We wouldn't have noticed that needed fixing without PostHog's session replays."
+                            customer={hasura}
+                        />
+                        <CustomerCard
+                            outcome="increased registrations by 30%"
+                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
+                            customer={contra}
+                        />
+                        <CustomerCard
+                            outcome="reduced back-and-forth in community support"
+                            quote="Session replay is... an essential tool for Netdata."
+                            customer={netdata}
+                        />
+                        <CustomerCard
+                            outcome="improved registrations by 20-30%"
+                            quote="Even Pry's support team... uses replays to understand how bugs occurred."
+                            customer={pry}
                         />
                     </ul>
                 </section>
+                */}
             </div>
 
-            <SmoothScroll exclude={['Installation']} />
+            <SmoothScroll exclude={['Installation', 'Meet the team']} />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
@@ -395,7 +400,7 @@ export const ProductSurveys = () => {
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
-                    <Marquee product={product.capitalized} shortFade={true}>
+                    <Marquee product={product.capitalized}>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />
                         })}
@@ -404,8 +409,29 @@ export const ProductSurveys = () => {
             </div>
             <section
                 id="pricing"
-                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-20 pb-10`}
             >
+                <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
+                <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
+                    <p className="mb-1">
+                        <strong>While in beta...</strong>
+                    </p>
+                    <p className="mb-2">
+                        Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
+                    </p>
+                    <ul className="mb-2">
+                        <li>
+                            <strong>First 1 million events every month:</strong> Free (get access to both products)
+                        </li>
+                        <li>
+                            <strong>After 1 million events/mo:</strong> Usage is billed through product analytics. Get
+                            access to web analytics at no additional cost.
+                        </li>
+                    </ul>
+                    <p className="mb-0">Cheaper, dedicated pricing for web analytics is coming soon.</p>
+                </div>
+
+                {/*}
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -416,15 +442,14 @@ export const ProductSurveys = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/surveys-hog.png" alt="" />
+                        <StaticImage placeholder="none" quality={100} src="../hogs/session-replay-hog.png" alt="" />
                     </div>
                 </div>
 
                 <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
                     <div className="flex-grow overflow-auto px-5 md:px-0">
-                        <Plans showHeaders={false} showCTA={false} groupsToShow={['surveys']} />
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
                     </div>
-
                     <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
                         {faqs.map((faq, index) => {
@@ -432,9 +457,10 @@ export const ProductSurveys = () => {
                         })}
                     </div>
                 </div>
+                */}
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto mt-12 `}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -448,32 +474,26 @@ export const ProductSurveys = () => {
                                 title="Reasons a competitor might be better for you (for now...)"
                                 image={
                                     <StaticImage
-                                        src="../../../images/products/competitors-surveys.png"
-                                        className="max-w-[159px]"
-                                        placeholder="none"
+                                        src="../../../images/products/competitors-sr.png"
+                                        className="max-w-[167px]"
                                     />
                                 }
                             >
                                 <ul>
                                     <li>
-                                        Forms
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                PostHog offers multi-step surveys, but they won't be full-page forms
-                                                such as Typeform or Google Forms
-                                            </li>
-                                        </ul>
+                                        You <em>only</em> need web analytics, nothing else
                                     </li>
-                                    <li>AI-powered analysis or recommendations based on results</li>
-                                    <li>Limited formatting options</li>
+                                    <li>You don’t need any integrations other than with Google</li>
+                                    <li>You need to migrate data from GA4</li>
+                                    <li>You actually really like GA4 😱</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>No-code surveys with customizable colors and removable branding</li>
-                                    <li>Automatic NPS score calculations</li>
-                                    <li>Robust targeting &amp; integration with feature flags</li>
-                                    <li>Tight integration with analytics, experiments, and session replay</li>
+                                    <li>You want to do more than just web analytics</li>
+                                    <li>You don't want to spend weeks setting up dashboards</li>
+                                    <li>You need to comply with HIPAA</li>
+                                    <li>It's not GA4</li>
                                 </ul>
                             </VsPostHog>
                         </div>
@@ -494,47 +514,52 @@ export const ProductSurveys = () => {
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to run a fake door test"
-                            description='A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building.'
-                            url="/tutorials/fake-door-test"
+                            title="How to create a broken link (404) checker"
+                            description="This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist."
+                            url="/tutorials/broken-link-checker"
                         />
                         <TutorialCard
-                            title="Get feedback and book user interviews with surveys"
-                            description="PostHog's surveys help automate the process of getting feedback and booking interviews. In this tutorial, we show how to set up surveys to do both."
-                            url="/tutorials/feedback-interviews-site-apps"
+                            title="How to use PostHog without cookie banners"
+                            description="Normally, PostHog collects information about your users and stores it in a cookie in the users’ browser. This tutorial explains how to use page memory instead."
+                            url="/tutorials/cookieless-tracking"
                         />
                         <TutorialCard
-                            title="How to measure your NPS score in PostHog"
-                            description="Asking NPS asking users how likely they are to recommend your product or service, so you can gauge product-market fit."
-                            url="/tutorials/nps-survey"
+                            title="An introduction to identifying users"
+                            description="Many of the most valuable insights require an accurate understanding of the user using your product. This tutorial goes over the different ways to identify users and recommendations on how to do it better."
+                            url="/tutorials/identifying-users-guide"
                         />
                         <TutorialCard
-                            title="How to create custom surveys"
-                            description="Use the API to create a completely custom experience."
-                            url="/tutorials/survey"
+                            title="A non-technical guide to PostHog data"
+                            description="You don’t need to be an engineer, but knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user."
+                            url="/tutorials/non-technical-guide-to-data"
                         />
                     </ul>
                 </section>
 
                 {/*
-        <section id="installation" className="mb-20 px-5 md:px-0">
-          <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
-          <p className="mt-0 opacity-50 text-center mb-12">
-            Here are some ways you can fine tune how you implement {product.lowercase}.
-          </p>
 
-          <ContentViewer sticky={false} scrollToTop={false} content={[...SessionReplay]} />
-        </section>
-        */}
+                <section id="installation" className="mb-20 px-5 md:px-0">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
+                    <p className="mt-0 opacity-50 text-center mb-12">
+                        Here are some ways you can fine tune how you implement {product.lowercase}.
+                    </p>
+
+                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...SessionReplay]} />
+                </section>
+
+                */}
 
                 <section id="docs" className="mb-20 px-5 md:px-0">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'surveys').children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics').children}
+                    />
                 </section>
 
+                {/*
                 <section id="team" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
@@ -544,6 +569,7 @@ export const ProductSurveys = () => {
                     </p>
                     <TeamMembers teamName={team} />
                 </section>
+                */}
 
                 <section id="roadmap" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
@@ -573,7 +599,7 @@ export const ProductSurveys = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={64} />
+                    <Questions topicIds={[65]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>
@@ -591,4 +617,4 @@ export const ProductSurveys = () => {
     )
 }
 
-export default ProductSurveys
+export default ProductWebAnalytics
