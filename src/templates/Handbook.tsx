@@ -10,7 +10,7 @@ import PostLayout from 'components/PostLayout'
 import Contributors from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { SEO } from 'components/seo'
-import Team from 'components/Team'
+import Team from 'components/People'
 import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
@@ -188,7 +188,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 }
 
 export default function Handbook({
-    data: { post, nextPost, glossary, mission, objectives },
+    data: { post, nextPost, glossary },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
@@ -246,8 +246,6 @@ export default function Handbook({
         a: A,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
-        Mission: (_props) => (mission?.body ? MDX({ body: mission.body }) : null),
-        Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -297,7 +295,7 @@ export default function Handbook({
                             <div className="flex items-center mt-0 flex-wrap justify-between">
                                 <div className="flex flex-col-reverse md:flex-row md:items-center space-x-2 mb-1 w-full">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
-                                    {showTitle && (
+                                    {showTitle !== false && (
                                         <div className="flex-1">
                                             <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{title}</h1>
                                             {description && (
@@ -361,7 +359,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!, $mission: String, $objectives: String) {
+    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {
@@ -382,12 +380,6 @@ export const query = graphql`
             fields {
                 slug
             }
-        }
-        mission: mdx(fields: { slug: { eq: $mission } }) {
-            body
-        }
-        objectives: mdx(fields: { slug: { eq: $objectives } }) {
-            body
         }
         post: mdx(id: { eq: $id }) {
             id

@@ -62,7 +62,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
         teamLength &&
         teamLength > 0 &&
         Math.round((teamMembers.filter(({ pineappleOnPizza }: any) => pineappleOnPizza).length / teamLength) * 100)
-    const teamURL = `/handbook/small-teams/${slugify(team, { lower: true })}`
+    const teamURL = `/teams/${slugify(team, { lower: true })}`
     return (
         <div id="roadmap">
             <SectionWrapper>

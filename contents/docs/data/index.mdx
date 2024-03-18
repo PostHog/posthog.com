@@ -7,12 +7,23 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import dataManagementLight from '../../images/features/data-management/data-management-light-mode.png'
+import dataManagementDark from '../../images/features/data-management/data-management-dark-mode.png'
+import definitionCardLight from '../../images/features/data-management/definition-card-edit-light-mode.png'
+import definitionCardDark from '../../images/features/data-management/definition-card-edit-dark-mode.png'
+import warningsLight from '../../images/features/data-management/warnings-light-mode.png'
+import warningsDark from '../../images/features/data-management/warnings-dark-mode.png'
 
-You can manage all your PostHog data on the [Data](https://us.posthog.com/data-management/events) and [People](https://us.posthog.com/persons) pages.
+You can manage all your PostHog data in the [data management](https://us.posthog.com/data-management/events) and [people](https://us.posthog.com/persons) tabs.
 
-![Data management events](../../images/features/data-management/events.png)
+<ProductScreenshot
+    imageLight = {dataManagementLight} 
+    imageDark = {dataManagementDark}
+    alt="Data management events" 
+    classes="rounded"
+/>
 
-## Events
+## Data management
 
 The [Events tab](https://app.posthog.com/data-management/events) contains a list of all the events captured into your PostHog instance. They are sortable by name, last seen, and type (custom vs default).
 
@@ -32,7 +43,12 @@ Clicking the edit button enables you to edit the description along with the even
 
 This is useful for keeping track of what data is up-to-date and relevant.
 
-![Definition card edit](../../images/features/data-management/definition-card-edit.png)
+<ProductScreenshot
+    imageLight = {definitionCardLight} 
+    imageDark = {definitionCardDark}
+    alt="Definition card edit" 
+    classes="rounded"
+/>
 
 ## Actions
 
@@ -60,7 +76,12 @@ Sometimes PostHog runs into problems during ingestion due to incorrect or subopt
 
 If this happens, we do our best to still ingest the event and we log an ingestion warning. 
 
-![Ingestion warnings](../../images/features/data-management/warnings.png)
+<ProductScreenshot
+    imageLight = {warningsLight} 
+    imageDark = {warningsDark}
+    alt="Ingestion warnings" 
+    classes="rounded"
+/>
 
 See [ingestion warnings docs](/docs/data/ingestion-warnings) for a complete list.
 

@@ -148,7 +148,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
 
-```xml ios/Runner/Info.plist
+```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -168,7 +168,7 @@ For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting
 
 Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
 
-```yaml ios/Podfile
+```yaml file=ios/Podfile
 platform :ios, '13.0'
 
 # rest of your config
@@ -281,4 +281,4 @@ That's it! When you restart your app and click the button, you should see the gr
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [How to run A/B tests in Flutter](/tutorials/flutter-ab-tests)
-- [How to run A/B tests in Android](/tutorials/android-ab-tests)
+- [How to set up analytics in Flutter](/tutorials/flutter-analytics)

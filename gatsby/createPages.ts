@@ -373,6 +373,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                 }
                             }
                         }
+						imageProducts {
+							handle
+							featuredImage {
+								localFile {
+									childImageSharp {
+									gatsbyImageData
+									}
+								}
+							}
+						}
                         metafields {
                             value
                             key
@@ -667,18 +677,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    const createTeamContext = (node) => ({
-        mission: `${node.fields?.slug || node.url}/mission`,
-        objectives: `${node.fields?.slug || node.url}/objectives`,
-    })
-
-    createPosts(
-        result.data.handbook.nodes,
-        'handbook',
-        HandbookTemplate,
-        { name: 'Handbook', url: '/handbook' },
-        createTeamContext
-    )
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
@@ -900,8 +899,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id,
                     slug,
-                    objectives: `/handbook/small-teams/${slugify(teams[0], { lower: true })}/objectives`,
-                    mission: `/handbook/small-teams/${slugify(teams[0], { lower: true })}/mission`,
+                    objectives: `/teams/${slugify(teams[0], { lower: true })}/objectives`,
+                    mission: `/teams/${slugify(teams[0], { lower: true })}/mission`,
                     gitHubIssues,
                     teams,
                 },

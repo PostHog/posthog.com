@@ -21,6 +21,15 @@ availability:
             selfServe: true
             enterprise: true
 ---
+
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import cohortsPageLight from '../../images/features/cohorts/cohorts-page-light-mode.png'
+import cohortsPageDark from '../../images/features/cohorts/cohorts-page-dark-mode.png'
+
+import {ProductVideo} from 'components/ProductVideo'
+import createCohortLight from '../../images/features/cohorts/create-cohort-from-trend-light-mode.mp4'
+import createCohortDark from '../../images/features/cohorts/create-cohort-from-trend-dark-mode.mp4'
+
 ## What are cohorts?
 
 <iframe
@@ -82,15 +91,25 @@ You can create cohorts using data from insights such as trends, [funnels](/docs/
 
 The video below shows how to create a new cohort from a trend, although you can similarly create a cohort from a funnel, user path, or any other insight.
 
-![How to create a cohort from a trend](../../images/features/cohorts/create-cohort-from-trend.mp4)
+<ProductVideo
+    videoLight={createCohortLight} 
+    videoDark={createCohortDark}
+    alt="How to create a cohort from a trend" 
+    classes="rounded"
+/>
 
 ### Method 2: Create a new cohort from the cohorts page
 
-1. Navigate to the [Persons](https://us.posthog.com/persons) page within the sidebar, then click on the [Cohorts tab](https://us.posthog.com/cohorts).
+1. Navigate to the [People](https://us.posthog.com/persons) page within the sidebar, then click on the [Cohorts tab](https://us.posthog.com/cohorts).
 
 2. Click '+ New Cohort' on the top right.
 
-![left hand navigation for cohorts](../../images/features/cohorts/cohorts-page.png)
+<ProductScreenshot
+    imageLight={cohortsPageLight} 
+    imageDark={cohortsPageDark}
+    alt="left hand navigation for cohorts" 
+    classes="rounded"
+/>
 
 ## Static and dynamic cohorts
 

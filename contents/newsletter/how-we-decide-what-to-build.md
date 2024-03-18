@@ -100,7 +100,7 @@ Testing is part of the decision-making process. Building MVPs of features and pr
 
 2. How much effort will building it take?
 
-All of PostHog’s products (beyond product analytics) were initially built in 1 to 3 person teams at our hackathons. Our newest products like [web analytics](/handbook/small-teams/web-analytics) and the [data warehouse](/handbook/small-teams/data-warehouse) are being built by single-person teams.
+All of PostHog’s products (beyond product analytics) were initially built in 1 to 3 person teams at our hackathons. Our newest products like [web analytics](/teams/web-analytics) and the [data warehouse](/teams/data-warehouse) are being built by single-person teams.
 
 This enables us to get stronger validation on demand before investing further. Companies like [Apple](https://review.firstround.com/six-steps-to-superior-product-prototyping-lessons-from-an-apple-and-oculus-engineer) and [Spotify](https://blog.crisp.se/wp-content/uploads/2013/01/HowSpotifyBuildsProducts.pdf) also rely on this prototyping-heavy style.
 
@@ -119,7 +119,7 @@ Another way we test with minimal effort is by building on what we’ve already d
 
 3. Also around this time, Marius shipped [site apps](https://github.com/PostHog/posthog/issues/9479). This enabled MVPs of feedback, user interview, and NPS survey apps, which got solid usage internally and some usage externally.
 
-4. At our [Aruba offsite](/blog/aruba-hackathon), the [Feature Success team](/handbook/small-teams/feature-success) was doing roadmap planning. They decided they had good ways to measure success quantitatively, but not qualitatively. To ensure PostHog “provides every tool needed for evaluating success” (a core strategy point), it made sense to build surveys out further.
+4. At our [Aruba offsite](/blog/aruba-hackathon), the [Feature Success team](/teams/feature-success) was doing roadmap planning. They decided they had good ways to measure success quantitatively, but not qualitatively. To ensure PostHog “provides every tool needed for evaluating success” (a core strategy point), it made sense to build surveys out further.
 
 5. [Li](/community/profiles/129) took ownership of surveys and built on top of site apps (initially), feature flags, and product analytics. Throughout the process, she got feedback (sometimes using surveys, very meta), and shipped towards launch.
 

@@ -10,13 +10,13 @@ So, what's it like working at PostHog?
 
 ## All remote
 
-Our [team](/handbook/company/team) is 100% remote, and distributed across over 10 countries.
+Our [team](/people) is 100% remote, and distributed across over 10 countries.
 
 As well as the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space) or to cover the costs of coffees for those who prefer not to work at home.
 
 All remote has a bunch of advantages:
 
-* We can hire [amazing people](/handbook/company/team) from a global talent pool.
+* We can hire [amazing people](/people) from a global talent pool.
 * Being remote encourages a deeper level of personal thought and writing things down.
 * It allows for uninterrupted work.
 * It makes results clearer, which helps us hold people to account for outcomes rather than hours spent in the office.
@@ -71,7 +71,7 @@ We're big believers in the importance of the [maker's schedule](http://www.paulg
 
 One of the benefits of hiring high-performing, self-sufficient, empowered team members is that we don't need to put in place some of the typical corporate structures and processes that can slow teams down. 
 
-We have optimised for this by introducing [Small Teams](/handbook/small-teams/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
+We have optimised for this by introducing [Small Teams](/handbook/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
 
 Right now, our [management approach](/handbook/company/management) is super simple - James H, Tim and the team leaders are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 

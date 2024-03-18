@@ -7,6 +7,12 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import {ProductVideo} from 'components/ProductVideo'
+import surveyInsightsLight from '../../images/docs/surveys/survey-insights-light-mode.mp4'
+import surveyInsightsDark from '../../images/docs/surveys/survey-insights-dark-mode.mp4'
+import surveyResultsLight from '../../images/docs/surveys/survey-results-sample-light-mode.png'
+import surveyResultsDark from '../../images/docs/surveys/survey-results-sample-dark-mode.png'
 
 Survey results can be viewed in two places:
 
@@ -23,7 +29,12 @@ You can view your results by selecting your survey from the [surveys tab](https:
 
 Depending your [question type](/docs/surveys/creating-surveys#question-type), you may also see charts with your responses.
 
-![Sample survey results](../../images/docs/surveys/survey-results-sample.png)
+<ProductScreenshot
+    imageLight={surveyResultsLight} 
+    imageDark={surveyResultsDark}
+    alt="Sample survey results" 
+    classes="rounded"
+/>
 
 ## 2. Creating your own insights
 
@@ -39,5 +50,9 @@ When creating an insight, select any of these events. To see data for a specific
 
 Depending on your [question type](/docs/surveys/creating-surveys#question-type), you may also find it helpful to breakdown results by `Survey Response` (e.g., for number rating or choice selection).
 
-![How to create insights from surveys](../../images/docs/surveys/survey-insights.mp4)
-
+<ProductVideo
+    videoLight={surveyInsightsLight} 
+    videoDark={surveyInsightsDark}
+    alt="How to create insights from surveys" 
+    classes="rounded"
+/>

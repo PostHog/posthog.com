@@ -81,7 +81,7 @@ Verified events will be prioritized in filters and other selection components to
 
 We highly recommend using tags to organize events coming in from different parts of your product. At PostHog for example, we use tags called `session-recordings`, `funnels`, and `feature-flags` to keep track of insights and dashboards related to those features. 
 
-Tags can also be useful for organizing PostHog for internal use. We create tags for each of our internal [small teams](/handbook/small-teams/team-structure/why-small-teams) to signal which dashboards are interesting to our respective teams.
+Tags can also be useful for organizing PostHog for internal use. We create tags for each of our internal [small teams](/handbook/team-structure/why-small-teams) to signal which dashboards are interesting to our respective teams.
 
 ## What's next for Data Management?
 

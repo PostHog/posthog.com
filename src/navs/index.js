@@ -224,19 +224,19 @@ export const handbookSidebar = [
     },
     {
         name: 'Team structure',
-        url: '/handbook/small-teams/team-structure',
+        url: '/handbook/team-structure',
     },
     {
-        name: 'Customer success',
+        name: 'Sales & CS',
         url: '',
         children: [
             {
-                name: 'Customer support',
-                url: '/handbook/growth/customer-support',
+                name: 'Overview',
+                url: '/handbook/growth/sales/overview',
             },
             {
-                name: 'Sales overview',
-                url: '/handbook/growth/sales/overview',
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
             },
             {
                 name: 'Sales operations',
@@ -247,7 +247,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'New customer onboarding',
+                        name: 'Customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
                     },
                     {
@@ -275,7 +275,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
                     {
-                        name: 'Historical import',
+                        name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
                 ],
@@ -855,12 +855,18 @@ export const companyMenu = {
             url: '/roadmap',
         },
         {
+            name: 'WIP',
+            icon: 'IconHourglass',
+            color: 'seagreen',
+            url: '/wip',
+        },
+        {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
             url: '/changelog/2024',
         },
-        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/team' },
+        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/people' },
         {
             name: 'Teams',
             icon: 'IconPeople',
@@ -876,58 +882,58 @@ export const companyMenu = {
                 },
                 {
                     name: 'Data Warehouse',
-                    url: '/handbook/small-teams/data-warehouse',
+                    url: '/teams/data-warehouse',
                 },
                 {
                     name: 'Feature Success',
-                    url: '/handbook/small-teams/feature-success',
+                    url: '/teams/feature-success',
                 },
                 {
                     name: 'Infrastructure',
-                    url: '/handbook/small-teams/infrastructure',
+                    url: '/teams/infrastructure',
                 },
                 {
                     name: 'Replay',
-                    url: '/handbook/small-teams/replay',
+                    url: '/teams/replay',
                 },
                 {
                     name: 'Pipeline',
-                    url: '/handbook/small-teams/pipeline',
+                    url: '/teams/pipeline',
                 },
                 {
                     name: 'Product Analytics',
-                    url: '/handbook/small-teams/product-analytics',
+                    url: '/teams/product-analytics',
                 },
                 {
                     name: 'Web Analytics',
-                    url: '/handbook/small-teams/web-analytics',
+                    url: '/teams/web-analytics',
                 },
                 {
                     name: 'Not engineering',
                 },
                 {
                     name: 'Customer Success',
-                    url: '/handbook/small-teams/customer-success',
+                    url: '/teams/customer-success',
                 },
                 {
                     name: 'Exec',
-                    url: '/handbook/small-teams/exec',
+                    url: '/teams/exec',
                 },
                 {
                     name: 'Growth',
-                    url: '/handbook/small-teams/growth',
+                    url: '/teams/growth',
                 },
                 {
                     name: 'Marketing',
-                    url: '/handbook/small-teams/marketing',
+                    url: '/teams/marketing',
                 },
                 {
                     name: 'People & Ops',
-                    url: '/handbook/small-teams/people',
+                    url: '/teams/people',
                 },
                 {
                     name: 'Website & Docs',
-                    url: '/handbook/small-teams/website-docs',
+                    url: '/teams/website-docs',
                 },
             ],
         },
@@ -1247,6 +1253,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy',
                             children: [
                                 {
+                                    name: 'AWS CloudFront',
+                                    url: '/docs/advanced/proxy/cloudfront',
+                                },
+                                {
                                     name: 'Caddy',
                                     url: '/docs/advanced/proxy/caddy',
                                 },
@@ -1255,26 +1265,30 @@ export const docsMenu = {
                                     url: '/docs/advanced/proxy/cloudflare',
                                 },
                                 {
-                                    name: 'AWS CloudFront',
-                                    url: '/docs/advanced/proxy/cloudfront',
+                                    name: 'Netlify',
+                                    url: '/docs/advanced/proxy/netlify',
                                 },
                                 {
                                     name: 'Next.js',
                                     url: '/docs/advanced/proxy/nextjs',
                                 },
                                 {
-                                    name: 'Netlify',
-                                    url: '/docs/advanced/proxy/netlify',
-                                },
-                                {
-                                    name: 'Vercel',
-                                    url: '/docs/advanced/proxy/vercel',
+                                    name: 'Next.js Middleware',
+                                    url: '/docs/advanced/proxy/nextjs-middleware',
                                 },
                                 {
                                     name: 'Nuxt',
                                     url: '/docs/advanced/proxy/nuxt',
                                 },
+                                {
+                                    name: 'Vercel',
+                                    url: '/docs/advanced/proxy/vercel',
+                                },
                             ],
+                        },
+                        {
+                            name: 'Using Content Security Policies',
+                            url: '/docs/advanced/content-security-policy',
                         },
                         {
                             name: 'Browser extensions',
@@ -2574,6 +2588,12 @@ const menu = [
                 icon: 'IconGraph',
                 color: 'blue',
                 url: '/product-analytics',
+            },
+            {
+                name: 'Web analytics',
+                icon: 'IconPieChart',
+                color: '[#36C46F]',
+                url: '/web-analytics',
             },
             {
                 name: 'Session replay',

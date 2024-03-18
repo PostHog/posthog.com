@@ -19,7 +19,7 @@ Marketing is the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. 
  
 - Proactively reporting and amplifying company and product news, rather than [artificially creating news](https://en.wikipedia.org/wiki/Tomorrow_Never_Dies) or buzz by telling people what to build.
 
-The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/handbook/small-teams/marketing).
+The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/teams/marketing).
 
 ## Marketing & content vision 
 
@@ -131,7 +131,7 @@ Sometimes we summarise our findings into internal reports to help us stay inform
 
 ## Who the marketing team are
 
-The Marketing Small Team page is maintained [here](/handbook/small-teams/marketing). By 2026, we still want to be a very small but highly effective and responsive team (15-20 people), rather than a very large marketing team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
+The Marketing Small Team page is maintained [here](/teams/marketing). By 2026, we still want to be a very small but highly effective and responsive team (15-20 people), rather than a very large marketing team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
 
 - Strong opinions 
 - People who like to choose their own objectives 
