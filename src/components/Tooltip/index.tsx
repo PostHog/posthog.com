@@ -21,7 +21,7 @@ export default function Tooltip({
     placement?: Placement
     title?: string
     contentContainerClassName?: string
-}) {
+}): JSX.Element {
     const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
