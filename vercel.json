@@ -1212,7 +1212,7 @@
         { "source": "/handbook/small-teams/pipeline", "destination": "/teams/pipeline" },
         { "source": "/handbook/small-teams/web-analytics", "destination": "/teams/web-analytics" },
         { "source": "/handbook/small-teams/people-ops", "destination": "/teams/people" },
-        { "source": "/self-host", "destination": "/docs/self-host" }
+        { "source": "/self-host", "destination": "/docs/self-host" },
         { "source": "/handbook/company/values", "destination": "/handbook/values"},
     ]
 }
