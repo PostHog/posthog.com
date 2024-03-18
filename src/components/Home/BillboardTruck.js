@@ -1,9 +1,6 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import { Quote } from 'components/Pricing/Quote'
 import { section } from './classes'
-import { Check3, YC } from 'components/Icons'
-import { CallToAction } from 'components/CallToAction'
 
 export const Contra = ({ active }) => {
     return (
