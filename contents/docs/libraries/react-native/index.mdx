@@ -105,12 +105,10 @@ Setting this to `1` will send events immediately and will use more battery. This
 You can also configure the flush interval. By default we flush all events after `30` seconds,
 no matter how many events have gathered.
 
-You can also manually flush the queue, like so:
+You can also manually flush the queue. If a flush is already in progress it returns a promise for the existing flush.
 
 ```javascript
-posthog.flush()
-// or using async/await
-await posthog.flushAsync()
+await posthog.flush()
 ```
 
 ## Reset
