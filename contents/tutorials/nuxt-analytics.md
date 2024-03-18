@@ -238,7 +238,7 @@ export default defineEventHandler(async (event) => {
 });
 ```
 
-> **Note**: Make sure to _always_ call `posthog.shutdown()` after capturing events from the server-side.
+> **Note**: Make sure to _always_ call `await posthog.shutdown()` after capturing events from the server-side.
 > PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 If you run your app again, you should begin to see `in_the_middleware` events in PostHog.
