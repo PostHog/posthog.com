@@ -18,10 +18,10 @@ To create a breakdown using [HogQL](/docs/product-analytics/hogql), create an in
 
 ## Multiple properties
 
-HogQL can access multiple properties at once for use in your breakdowns. For example, breakdown by the combination of browser and operating system, you can use the following expression:
+HogQL can access multiple properties at once for use in your breakdowns. For example, to break down by the combination of browser and operating system, you can use the following expression:
 
 ```
-concat(properties.$browser, ' ', properties.$os)
+concat(properties.$browser, ' - ', properties.$os)
 ```
 
 <ProductScreenshot
