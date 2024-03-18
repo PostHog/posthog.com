@@ -286,7 +286,9 @@ export const Question = (props: QuestionProps) => {
                                     </button>
                                 </>
                             )}
-                            {!archived && <SubscribeButton contentType="question" id={questionData?.id} />}
+                            {!archived && (
+                                <SubscribeButton contentType="question" id={questionData?.id} show={showActions} />
+                            )}
                         </div>
                     </div>
 
