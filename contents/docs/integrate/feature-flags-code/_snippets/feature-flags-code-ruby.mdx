@@ -87,13 +87,13 @@ import RubyOverrideServerProperties from './override-server-properties/ruby.mdx'
 
 <RubyOverrideServerProperties />
 
-### Feature flag timeouts
+### Request timeout
 
-You can use the `feature_flag_request_timeout_seconds` parameter on initialisation to set a configurable flag request timeout. This is useful so your requests don't block when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+You can configure the `feature_flag_request_timeout_seconds` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
 
 ```ruby
 posthog = PostHog::Client.new({
-   api_key: "", # You can find this key on the /setup page in PostHog
-   feature_flag_request_timeout_seconds: 5 # Timeout for `/decide` feature flag requests
+   # rest of your configuration...
+   feature_flag_request_timeout_seconds: 3 # Time in seconds. Default is 3.
 })
 ```
