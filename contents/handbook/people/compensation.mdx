@@ -54,6 +54,8 @@ Most of our location factors are based on GitLab's location factors, and are bas
 
 In order to simplify location factors, we have added a floor at 0.6 globally, and 0.65 specifically for the US. This means nobody will have a location factor lower than 0.6. We are aware that this might lead to comparatively low number for certain areas in comparison to others, but this approach allows us to move fast now and adjust the location data later on, if needed. 
 
+The location factor takes your local exchange rate into account. Unless there is a very good reason not to, you will be paid in your local currency. 
+
 ### Executive compensation
 
 For hiring into executive roles, we use a separate database of compensation benchmarks rather than this calculator. The terms of access to this (paid) database means that we're not able to share it publicly.
@@ -61,12 +63,6 @@ For hiring into executive roles, we use a separate database of compensation benc
 The benchmark data is all we use for executives. As a rule, executives are paid above average but not top of market.
 
 The reason for less sophistication here is that we have very few executives, and only one for each role by definition. It's irrational to create a system so that, within a given benchmark, people are paid equally when there is just one person to consider!
-
-## Exchange rate
-
-Unless there is a very good reason, you'll be paid in your local currency. This means that you know exactly how much you'll get every month. The [rates](https://github.com/PostHog/posthog.com/blob/master/src/components/CompensationCalculator/compensation_data/currency.ts) are from [OpenRates](https://openrates.io/) and were taken on *1st January 2022*. If your local currency is not listed, we will set the rate as effective from the date we extended your offer.
-
-We will review changes to these rates in the first review cycle after the 1st of January. If the exchange rates have moved, we'll move the location factors up and down (including possibly the floor) to compensate. That way your pay won't fluctuate up or down and you can feel confident in your pay.
 
 ## Pay reviews
 
