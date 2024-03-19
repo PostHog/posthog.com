@@ -8,6 +8,7 @@ tags:
   - AB testing
 crosspost:
   - Product engineers
+  - Blog
 ---
 
 Every A/B test has four components:

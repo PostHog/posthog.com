@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Ops & finance
+crosspost:
+  - Blog  
 ---
 _**Disclaimer:** This is intended as a short, tactical guide to getting your trademarks sorted out for the first time, on a minimal budget. This is *not* legal advice and we are not lawyers - this is just what has worked for us._
 

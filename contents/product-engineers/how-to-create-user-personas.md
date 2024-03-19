@@ -9,13 +9,15 @@ tags:
   - User research
   - Product engineers
   - Product
+crosspost:
+  - Blog  
 ---
 
 ## What is a user persona? 
 
 User personas are a generalized way of understanding and talking about the people using your product. This enables you to empathize with them and focus on their needs while you're building for them.
 
-Users personas are not the same as buyer personas or ideal customer profiles (ICPs), who may not actually use your product. 
+Users personas are not the same as buyer personas or [ideal customer profiles](/newsletter/ideal-customer-profile-framework) (ICPs), who may not actually use your product. 
 
 Here's a quick comparison:
 
@@ -151,7 +153,7 @@ Your user persona is the voice of your user. It should guide your product develo
 
 Incorporate them into team meetings and encourage your team to always ask, "How will this benefit our key user personas?". By doing so, you build a culture of empathy for your users, ensuring that you make the best products for them.
 
-For instance, at PostHog our product teams use our personas to create their team mission, values, and quarterly goals. Since our company handbook is public, you can view precisely how by visiting each team's page – e.g., our [Feature Success](/handbook/small-teams/feature-success#personas) and [Web Analytics](/handbook/small-teams/web-analytics#who-are-we-building-for) teams.
+For instance, at PostHog our product teams use our personas to create their team mission, values, and quarterly goals. Since our company handbook is public, you can view precisely how by visiting each team's page – e.g., our [Feature Success](/teams/feature-success#personas) and [Web Analytics](/teams/web-analytics#who-are-we-building-for) teams.
 
 ## Frequently asked questions
 

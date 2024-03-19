@@ -105,7 +105,7 @@ Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog
 
 ## Contributions from the community
 
-Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack).
+Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our community page](/posts).
 
 We would also specifically like to thank PostHog team members [@hazzadous](https://github.com/hazzadous), [@guidoiaquinti](https://github.com/guidoiaquinti) and [@liyiy](https://github.com/liyiy) for their efforts on this particularly stubborn release.
 

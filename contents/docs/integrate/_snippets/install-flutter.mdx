@@ -2,72 +2,110 @@ PostHog is available for install via [Pub](https://pub.dev/packages/posthog_flut
 
 ### Configuration
 
-Set your PostHog API key and change the automatic event tracking (only for Android and iOS) on if you wish the library to take care of it for you.
+Set your PostHog API key and change the automatic event tracking on if you wish the library to take care of it for you.
 
 Remember that the application lifecycle events won't have any special context set for you by the time it is initialized. If you are using a self-hosted instance of PostHog you will need to have the public hostname or IP for your instance as well.
 
-#### Android
+To start, add `posthog_flutter` to your `pubspec.yaml`:
 
-```xml file=AndroidManifest.xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.posthog.posthog_flutter_example">
+```yaml file=pubspec.yaml
+# rest of your code
+
+dependencies:
+  flutter:
+    sdk: flutter
+  posthog_flutter: ^4.0.1
+
+# rest of your code
+```
+
+Then complete the set up for each platform:
+
+#### Android setup
+
+For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
+
+```xml file=android/app/src/main/AndroidManifest.xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
     <application>
-        <activity>
-            [...]
-        </activity>
+        <!-- ... other configuration ... -->
         <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_api_key>" />
-        <!-- usually 'https://app.posthog.com' or 'https://eu.posthog.com' -->
-        <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_instance_address>" />
-        <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="false" />
-        <meta-data android:name="com.posthog.posthog.DEBUG" android:value="false" />
+        <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_instance_address>" />  <!-- usually 'https://app.posthog.com' or 'https://eu.posthog.com' -->
+        <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
+        <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
     </application>
 </manifest>
 ```
 
-#### iOS
+You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
 
-```xml file=Info.plist
+```gradle_kotlin file=android/app/build.gradle
+// rest of your config
+
+    defaultConfig {
+      minSdkVersion 21
+      // rest of your config
+    }
+
+// rest of your config
+```
+
+#### iOS setup
+
+For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
+
+```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	[...]
-	<key>com.posthog.posthog.API_KEY</key>
-	<string><ph_project_api_key></string>
-	<key>com.posthog.posthog.POSTHOG_HOST</key>
-	<!-- usually 'https://app.posthog.com' or 'https://eu.posthog.com' -->
-	<string><ph_instance_address></string>
-	<key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
-	<false/>
-	[...]
+<!-- rest of your configuration -->
+  <key>com.posthog.posthog.API_KEY</key>
+  <string><ph_project_api_key></string>
+  <key>com.posthog.posthog.POSTHOG_HOST</key>
+  <string><ph_instance_address></string>
+  <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
+  <true/>
+  <key>com.posthog.posthog.DEBUG</key>
+  <true/>
 </dict>
 </plist>
 ```
 
-#### Web
+Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
 
-```html
+```yaml file=ios/Podfile
+platform :ios, '13.0'
+
+# rest of your config
+```
+
+#### Web setup
+
+For Web, add your `Web snippet` (which you can find in [your project settings](https://us.posthog.com/settings/project#snippet)) in the `<header>` of your `web/index.html` file:
+
+```html file=web/index.html
 <!DOCTYPE html>
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>example</title>
+  <!-- ... other head elements ... -->
+
+  <script async>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init(
+      '<ph_project_api_key>',
+      {
+        api_host:'<ph_instance_address>', // 'https://app.posthog.com' or 'https://eu.posthog.com'
+      }
+    )
+  </script>
 </head>
 
-<body>
-  <script>
-    !function () {
-      var analytics = window.analytics = window.analytics || []; if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("PostHog snippet included twice."); else {
-        analytics.invoked = !0; analytics.methods = ["captureSubmit", "captureClick", "captureLink", "captureForm", "pageview", "identify", "reset", "group", "capture", "ready", "alias", "debug", "page", "once", "off", "on"]; analytics.factory = function (t) { return function () { var e = Array.prototype.slice.call(arguments); e.unshift(t); analytics.push(e); return analytics } }; for (var t = 0; t < analytics.methods.length; t++) { var e = analytics.methods[t]; analytics[e] = analytics.factory(e) } analytics.load = function (t, e) { var n = document.createElement("script"); n.type = "text/javascript"; n.async = !0; n.src = "https://cdn.posthog.com/analytics.js/v1/" + t + "/analytics.min.js"; var a = document.getElementsByTagName("script")[0]; a.parentNode.insertBefore(n, a); analytics._loadOptions = e }; analytics.SNIPPET_VERSION = "4.1.0";
-        analytics.load("YOUR_API_KEY_GOES_HERE");
-        analytics.page();
-      }
-    }();
-  </script>
-  <script src="main.dart.js" type="application/javascript"></script>
-</body>
+<!-- other elements -->
 
 </html>
+
 ```
 
 For more information please check: https://posthog.com/docs/libraries/js

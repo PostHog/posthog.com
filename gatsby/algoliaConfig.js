@@ -63,7 +63,7 @@ module.exports = {
             retrievePages('docs', '/^docs/'),
             retrievePages('handbook', '/^handbook/'),
             retrievePages('tutorial', '/^tutorials/'),
-            retrievePages('blog', '/^blog/'),
+            retrievePages('blog', '/^blog|^spotlight/'),
             retrievePages('customers', '/^customers/'),
             retrievePages('apps', '/^apps/'),
             retrievePages('cdp', '/^cdp/'),
@@ -108,9 +108,11 @@ module.exports = {
                                 nodes {
                                   id
                                   title: subject
-                                  replies {
+                                  body
+                                  resolvedBy {
                                     body
                                   }
+                                  resolved
                                   permalink
                                   internal {
                                     contentDigest
@@ -120,13 +122,14 @@ module.exports = {
                             }
                         `,
                 transformer: ({ data }) => {
-                    return data.questions.nodes.map(({ replies, permalink, ...question }) => {
+                    return data.questions.nodes.map(({ body, permalink, resolvedBy, ...question }) => {
                         return {
                             ...question,
-                            excerpt: replies?.[0]?.body,
+                            excerpt: body,
                             slug: `questions/${permalink || ''}`,
                             type: 'question',
                             path_ranking: 5,
+                            resolutionBody: resolvedBy?.body,
                         }
                     })
                 },

@@ -2,6 +2,12 @@
 title: Early access feature management
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import CreateNewFeatureFlagLight from '../../images/features/feature-flags/create-new-feature-flag-light-mode.png'
+import CreateNewFeatureFlagDark from '../../images/features/feature-flags/create-new-feature-flag-dark-mode.png'
+import SiteAppDark from '../../images/features/feature-flags/site-app-light-mode.png'
+import SiteAppLight from '../../images/features/feature-flags/site-app-dark-mode.png'
+
 > **Note:** Early access management is only available in the [JavaScript web SDK](/docs/libraries/js).
 
 Early access feature management enables your users to opt in (and out) of betas and other in-progress features. 
@@ -17,7 +23,12 @@ Early access features can be created and edited from the [Early Access Managemen
 
 Features are powered by feature flags. Flags are automatically created when a feature is created (based on the name of the feature), or you can link an existing feature flag to a feature. Each feature can also contain a description and documentation link to help users understand what the feature is for.
 
-![Create feature flags](../../images/features/feature-flags/create-feature-release.png)
+<ProductScreenshot
+    imageLight={CreateNewFeatureFlagLight} 
+    imageDark={CreateNewFeatureFlagDark}
+    alt="Create a feature flag" 
+    classes="rounded"
+/>
 
 Once created, you can opt users in or out manually on the feature detail screen by searching for them in PostHog. You can also implement a public opt-in flow which we detail below.
 
@@ -41,7 +52,12 @@ To use it:
 
 3. Enable it by clicking the blue gear, setting an HTML attribute selector like `data-attr`, `#id`, or `.class` (or enabling "Show features button on the page"), enabling the toggle and pressing save.
 
-![Setting up site app](../../images/features/feature-flags/site-app.png)
+<ProductScreenshot
+    imageLight={SiteAppLight} 
+    imageDark={SiteAppDark}
+    alt="Setting up site app" 
+    classes="rounded"
+/>
 
 4. If you did set an HTML attribute selector, add a component with that selector into your app. For example, if you set your selector to `#beta-button`, you need to add an element like `<button id="beta-button">Public Betas</button>`.
 
@@ -52,6 +68,10 @@ Once set up, early access features appear on this panel for users to opt in or o
 You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js#early-access-feature-management).
 
 - `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, and documentation link. You can use this to build a UI for users to opt in or out of features.
+
+> *Note:* Available early access features are cached per browser load. This means if you have a browser open and create a new early access feature, you wouldn't see it until you refresh. 
+> If you want the latest values always available, include the `force_reload` parameter in your `getEarlyAccessFeatures` call. This makes a network request to get the updated list instead of using the cache. The downside is that this can delay when early access features are available on load.
+
 
 ```react
 const posthog = usePostHog()

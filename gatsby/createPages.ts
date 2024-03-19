@@ -23,6 +23,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
+    const TeamTemplate = path.resolve(`src/templates/Team.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -42,7 +43,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
                     frontmatter: { title: { ne: "" } }
                 }
-                limit: 1000
             ) {
                 nodes {
                     id
@@ -325,6 +325,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fieldValue
                 }
             }
+            teams:  allMdx(filter: {frontmatter: {template: {eq: "team"}}}) {
+                nodes {
+                  id
+                  fields {
+                    slug
+                  }
+                  frontmatter {
+                    title
+                  }
+                }
+              }
             ${
                 merchStore
                     ? `allShopifyProduct(limit: 1000) {
@@ -362,6 +373,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                 }
                             }
                         }
+						imageProducts {
+							handle
+							featuredImage {
+								localFile {
+									childImageSharp {
+									gatsbyImageData
+									}
+								}
+							}
+						}
                         metafields {
                             value
                             key
@@ -656,18 +677,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    const createTeamContext = (node) => ({
-        mission: `${node.fields?.slug || node.url}/mission`,
-        objectives: `${node.fields?.slug || node.url}/objectives`,
-    })
-
-    createPosts(
-        result.data.handbook.nodes,
-        'handbook',
-        HandbookTemplate,
-        { name: 'Handbook', url: '/handbook' },
-        createTeamContext
-    )
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
@@ -860,9 +870,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         for (node of result.data.jobs.nodes) {
             const { id, parent } = node
             const slug = node.fields.slug
-            const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
-            const issues = parent?.customFields?.find(({ title, value }) => title === 'Issues')?.value?.split(',')
-            const repo = parent?.customFields?.find(({ title, value }) => title === 'Repo')?.value
+            const issues = parent?.customFields?.find(({ title }) => title === 'Issues')?.value?.split(',')
+            const repo = parent?.customFields?.find(({ title }) => title === 'Repo')?.value
+            const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
             let gitHubIssues = []
             if (issues) {
                 for (const issue of issues) {
@@ -889,11 +899,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id,
                     slug,
-                    teamName: team,
-                    teamNameInfo: `${team} Team`,
-                    objectives: `/handbook/small-teams/${slugify(team, { lower: true })}/objectives`,
-                    mission: `/handbook/small-teams/${slugify(team, { lower: true })}/mission`,
+                    objectives: `/teams/${slugify(teams[0], { lower: true })}/objectives`,
+                    mission: `/teams/${slugify(teams[0], { lower: true })}/mission`,
                     gitHubIssues,
+                    teams,
                 },
             })
         }
@@ -905,6 +914,20 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: ChangelogTemplate,
             context: {
                 year: Number(year),
+            },
+        })
+    })
+
+    result.data.teams.nodes.forEach(({ id, frontmatter: { title }, fields: { slug } }) => {
+        createPage({
+            path: slug,
+            component: TeamTemplate,
+            context: {
+                id,
+                slug,
+                teamName: title,
+                ignoreWrapper: true,
+                objectives: `${slug}/objectives`,
             },
         })
     })

@@ -7,6 +7,8 @@ featuredImageType: full
 tags: 
   - Product engineers
   - AB testing
+crosspost:
+  - Blog  
 ---
 
 
@@ -115,7 +117,7 @@ Counter metrics measure unintended negative side-effects in your experiments. If
 
 For example, say you're testing a change to your sign-up page. While the number of sign-ups may increase, you notice that time spent in your app decreases. In this case, it may indicate that your new sign-up page is misleading users about what your app does, resulting in more sign-ups but also more churn.
 
-Another option here is to [run a holdout test](tutorials/holdout-testing), where a small group of users is not shown your changes for a long period of time – e.g. weeks or months after your experiment ends. This helps you to verify that the experiment doesn’t have negative long term effects.
+Another option here is to [run a holdout test](/tutorials/holdout-testing), where a small group of users is not shown your changes for a long period of time – e.g. weeks or months after your experiment ends. This helps you to verify that the experiment doesn’t have negative long term effects.
 
 ## 6. Not accounting for seasonality
 
@@ -151,7 +153,7 @@ This also makes it easier to investigate the experiment results, especially when
 
 Not everything that can be measured matters. Not everything that matters can be measured. It's important to remember that there can be other reasons for shipping things besides for metric changes, such as solving user pain points, or creating enjoyable user experiences.
 
-[Raquel](/handbook/company/team), one of our growth engineers here at PostHog, shares an example:
+[Raquel](/people), one of our growth engineers here at PostHog, shares an example:
 
 > "We ran an experiment on our sign-up page to make our social login buttons more prominent (e.g., "Sign up with Google" and "Sign up with GitHub") instead of signing up with email and password. While more people signed up using Google and Github, overall sign-ups didn't increase, and nor did activation. Ultimately, we decided to ship the change since we felt that social login lowers friction, and provides a better user experience."
 

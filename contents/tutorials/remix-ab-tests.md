@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Remix
-date: 2023-02-01
+date: 2024-02-01
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---
@@ -54,27 +54,30 @@ To start, install the [JavaScript web SDK](/docs/libraries/js):
 npm i posthog-js
 ```
 
-Then, go to `app/entry.client.tsx` and initialize PostHog. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).  
-
+Then, go to `app/entry.client.tsx` and initialize PostHog as a component. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
 
 ```ts file=entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
-import { startTransition, StrictMode } from "react";
+import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
 import posthog from "posthog-js";
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_instance_address>',
-  }
-)
+function PosthogInit() {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_instance_address>',
+    });
+  }, []);
+
+  return null;
+}
 
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
         <RemixBrowser />
+        <PosthogInit/>
     </StrictMode>
   );
 });
@@ -294,7 +297,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 ```
 
 In the scenario where your PostHog cookie is not available on the server side, you can fall back to the client side rendering approach of feature flags
+
 ## Further reading
 
 - [How to set up Remix analytics, feature flags, and more](/tutorials/remix-analytics)
+- [How to set up surveys in Remix](/tutorials/remix-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)

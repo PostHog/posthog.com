@@ -1,96 +1,126 @@
 ---
-date: 2024-01-20
-title: Learnings from Elon
+date: 2024-03-05
+title: Pragmatic startup lessons from Elon Musk
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: ../images/newsletter/beyond-10x-engineer/elon.jpg
 featuredImageType: full
 tags: 
  - Being a founder
+crosspost:
+  - Blog
+  - Newsletter 
 ---
 
-Love or loathe him, Elon is one of most opinionated business leaders out there. That makes him worth studying as a founder, no matter what politics he gets into. I read Walter Isaacson's biography of him over Christmas. These are some lessons that we can take from his work.
+Elon Musk is many things. Erratic. Uncompromising. A prolific shitposter.
 
-## The power (or not) of artificial deadlines and urgency
+But, when I read Walter Isaacson’s biography of him over Christmas, one thing struck me above all: how practical his underlying businesses are.
 
-There are many examples of Elon setting a ridiculous seeming artificial deadline to create urgency. In 2016 with the Tesla Model 3, for example, Elon announced he was advancing Tesla's 500,000 unit plan to 2018, two years earlier than previously planned.
+Despite his wild ambitions to colonize Mars and revolutionize the automotive industry, there’s a strand of pragmatic business philosophy that any founder can learn from.
 
-This clearly works for him – look at all the progress he has made. Getting to space, totally disrupting the automative industry worldwide, and so on!
+**This week’s theme is:** Learning from Elon
 
-There are other companies in our space doing the same. Supabase, for example, is known for its [launch weeks](https://supabase.com/blog/supabase-how-we-launch).
+> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
-At PostHog, artificial deadlines have not worked. We even tried doing a launch week once. We’ve considered why this is the case quite carefully. We think it comes down to a particularly intrinsically motivated team. Let me explain.
+## 1. Be in the details, not the day-to-day
+Elon attends very detailed design review sessions for the major projects he cares about – e.g. sessions to design a robot’s hands. But he also has 30+ direct reports, way too many to be across the day-to-day of everything.
 
-Part of our strategy is to ship all the tools developers need. This means we’ve a lot of surface area - too much for one person or team to hold it all in their heads. We need to decentralize control of our products to our small teams. This means each team decide what to build proactively. So we hire proactive, intrinsically motivated people.
+As CTO and CEO, Tim and I are trying to work like this more and more. We aim to go deep on the projects we can help out on, and “build the org” to cover the daily execution of things like ops, marketing and customer success.
 
-Second, we think more experienced people are usually better at working proactively, since they get stuck less often and need less help. These people generally do not want to work until midnight on a weekend as they usually, but not always, have families. We’ve gone so far as to have an all remote environment, which is particularly well suited to people like this (amongst many other benefits, such as long, uninterrupted blocks of time to just build cool stuff).
+> **Takeaway:** Giving away some responsibility means you can add more value to the things you’re uniquely good at, stay motivated, and avoid micromanaging. [Making your first ops hire](/founders/first-ops-hire) is a key part of this journey.
 
-Third, we grow by shipping, not by hiring salespeople. This means we need to optimize for long term shipping speed. If we set artificial feature-focused deadlines, we’ll speed up in the short run, but will incur technical debt and hurt our long term growth.
+## 2. Take fun seriously
 
-To broaden this lesson, to find startup success, I think you need to either be all in on working 28 hours a day, 9 days a week with a bunch of 20-year-olds, or you should focus on a smaller, more experienced team. The former suits artificial deadlines, the latter sees them as a bad thing.
+Fun is undervalued in startup lore and Elon [clearly gets a kick out](https://www.youtube.com/watch?v=rWdavYiwh0I) of what he does, even if some of his weirder projects don’t work out!
 
-## Product drives marketing and sales
+![elon-tweet](../images/newsletter/beyond-10x-engineer/elon-tweet.png)
 
-Elon has a very product-first approach – many of his companies put something so cool on the internet that it generates an extreme amount of word of mouth growth. Just [look at the robot doing the laundry](https://twitter.com/elonmusk/status/1746964887949934958)!
+Making decisions based on what we find fun and interesting has lead to remarkable things happening with our website, marketing, customer success, and product.
 
-We grow primarily through word of mouth. Long term, we think this is a winning strategy as it’s more efficient than a sales led model – you can reinvest everything back into the product, to build a bigger and bigger long term advantage.
+It’s also directly influenced one of our most important decisions: ceasing to monetize our self-hosted product.
 
-You can see this from the mind-blowing specification of Teslas – they are incredibly powerful, superb value and very cool. There’s really no major compromise. Hence they rocketed in popularity.
+We invested a great deal in making it work, but we eventually realized:
 
-## At scale, be in the details but not the day to day running
+It was a worse business model.
 
-Elon attends very detailed design review sessions for many of the major projects he cares about. The book explains how he is regularly attending sessions to design a robot’s hands, for example. However, it goes on to describe him having 30+ direct reports. That is simply too many to be meaningful for daily progress.
+We didn’t enjoy it.
 
-Tim and I are trying to work like this more and more – we aim to go deep on the projects we can help out, and “build the org” to cover the daily execution. Charles, in our exec team, makes sure our ops, marketing and customer success teams all function smoothly (each has a leader that reports to him), and we’re starting to do the same in engineering. Giving away some responsibility means you can add more value to the specific things you are uniquely good at, or which you love.
+We didn’t enjoy the sales process, and we didn’t enjoy debugging other people's infrastructure. Lifting those burdens instantly made PostHog more fun and forward-looking.
 
-## Being erratic is good or bad
+> **Takeaway:** The easiest way to fail is to simply lose interest. When we made that decision, we optimized for what would keep us and our team motivated in the long term. We optimized for (meaningful) fun.
 
-Elon has had a string of weird stuff on social media. Whilst this probably brings more awareness and a strange kind of marketing benefit, we think it’s a symptom of a very top down culture where things change based on the leader’s mood.
+## 3. When artificial deadlines do (and don’t) work
 
-We do not think this is a strength - perhaps it works in his companies because it creates a fear element, and more urgency as a result. 
+Elon is famous for creating urgency by setting unrealistic artificial deadlines – e.g. moving the 500k unit target for the Model 3 forward by two years.
 
-At PostHog, as mentioned, we’re more intrinsically motivated so ruling by fear would be harmful to performance.
+This clearly works for him – see Tesla and SpaceX as evidence. In the software space, Supabase does something similar with its [launch weeks](https://supabase.com/blog/supabase-how-we-launch).
 
-Whilst Tim and I technically are the CTO and CEO respectively, we more or less share the CEO role. We’ve been very effective like this. I think it’s because we’re a product-led company, so what we ship has a very strong impact on marketing and sales (see “Product drives marketing and sales” above), so keeping a tight connection between these varied teams really matters.
+We tried this approach, but it didn’t work. We think it’s because:
 
-The key to making a split like this work is happily spending a lot of time together. This (and being ok sometimes missing out on decisions) is the only way to be decisive when two of you are paired like this. We talk a lot, several hours a week, minimum. This can feel inefficient, but the reality is we need to optimize for organizational effectiveness, not our own schedules.
+1. **We hire intrinsically motivated people** because our goals and culture don’t work without them. The kind of people who [truly love building](https://newsletter.posthog.com/i/141291244/a-genuine-love-for-building) don’t need an artificial deadline to motivate them.
 
-## Learn to enjoy the taste of your own blood
+2. **We (mostly) bias to experience** because we give people autonomy, but they’re more likely to have families and not want to work until midnight on weekends.
 
-Clickbait subtitle. You got me. Elon gives very direct feedback and makes painful decisions rapidly and doesn’t dwell on any of this stuff. For example, he went through a [very public process to buy Twitter](https://www.nbcnews.com/business/business-news/twitter-elon-musk-timeline-what-happened-so-far-rcna57532), then [laid off 80% of the workforce](https://www.cnn.com/2023/04/12/tech/elon-musk-bbc-interview-twitter-intl-hnk/index.html). 
+3. **Artificial deadlines generate more technical debt**, which slows us down in the long term. We grow by shipping, not by hiring salespeople, so optimizing for long-term speed is better for us.
 
-We describe PostHog as a team for this reason. We have performance managed – letting people go decisively – throughout our time, and it has been one of the most important things we’ve ever done.
+> **Takeaway:** Artificial deadlines are great for focusing large organizations. In startups, I think you need to either be all in on working 28 hours a day, 9 days a week with mostly younger team, or build a smaller, more experienced team. Artificial deadlines work for the former, not the latter.
 
-We do this because we’re optimizing for our strongest performers, who want to work in an environment where everyone is shipping their best work. As soon as we make it ok not to push hard, everyone will feel it and eventually quit or reduce their own input.
+**Further reading:** [How we decide what to build](https://newsletter.posthog.com/p/how-we-decide-what-to-build)
 
-We try to balance this by being as kind as possible for people who depart under these circumstances - we pay four months’ severance once someone has been here more than a couple of months. Beyond pay, we talk directly and honesty to people - we avoid doing PIP (Performance Improvement Program) type processes as we think they are dehumanizing on both sides and cause more legal cases than they solve.
+## 4. Product drives sales and marketing
 
-## Take fun seriously
+Elon has a very product-first approach – many of his companies build things so cool they generate an extreme word of mouth growth. Case in point, Tesla’s [laundry robot](https://twitter.com/elonmusk/status/1746964887949934958)!
 
-There’s very little written in startup lore about the importance of having fun. Elon seems to [get a clear kick](https://www.youtube.com/watch?v=rWdavYiwh0I) of out what he does.
+PostHog isn’t as cool as a laundry robot, but we also grow primarily through word of mouth. Elon’s shown this is a winning strategy at scale because:
 
-We often make decisions at PostHog based on what will be the most entertaining. This can lead to remarkable things happening with our website, marketing, customer success and product. The reason we do this is that we have a lot of products to build which will take a long time. We need to consider PostHog a marathon, and fun keeps people’s spirits up. 
+1. It’s more efficient than a sales/marketing-led model.
+2. You can reinvest everything back into the product, cementing your advantage.
 
-For example, we [stopped focusing on making money with our self-hosted product](https://posthog.com/blog/sunsetting-helm-support-posthog) - it was a worse business model, but (frankly) debugging other people's infrastructure via Slack wasn't much fun.
+> **Takeaway:** Product-led doesn’t work for all startups, but the benefits are incredibly powerful. Tesla is a famously efficient business as a result. Its cars are class-leading, superb value, and very cool.
 
-## Harder missions are easier to achieve
+**Further reading:** [Startup marketing for noobs](https://newsletter.posthog.com/p/startup-marketing-for-noobs-by-noobs)
 
-Elon’s companies are wildly ambitious. To make humans a multi-planetary species, for example.
+## 5. Enjoy the taste of your own blood
 
-In the early days of PostHog, we were a self-hostable version of product analytics. That was very pragmatic - it filled a clear market need, but it wasn’t world changing.
+Clickbait subtitle. You got me.
 
-As we got bigger, we created a more inspiring mission, alongside a slightly outrageous strategy.
+Elon gives very direct feedback and makes painful decisions quickly. He doesn’t dwell on any of this stuff. He went through a [very public process to buy Twitter](https://www.nbcnews.com/business/business-news/twitter-elon-musk-timeline-what-happened-so-far-rcna57532), then [laid off 80% of the workforce](https://www.cnn.com/2023/04/12/tech/elon-musk-bbc-interview-twitter-intl-hnk/index.html), for example.
 
-We help engineers build better products, and the first way we do this is by giving them all the products they need to do this.
+We describe PostHog as a team, rather than a family, for this reason. This means we let go of people we like for performance and culture fit reasons, and do so decisively.
 
-Yes, our strategy is to build a ton of potential products. We've built 8 already, and have a list of 30 more. It may end up being hundreds. 
+It can feel brutal, but we try and balance this by:
 
-As we got more direct with this strategy - putting it everywhere on the website, in our job ads, and in our all hands, it became self-fulfilling. Engineers spotted how challenging it looks to do this, and this draws the very best people in. We now get hundreds or even thousands of applicants for every job role, and the product itself is so impressive that our main way of growing is word of mouth. 
+1. Talking directly and honestly with people.
+2. Avoiding dehumanizing performance improvement programs.
+3. Paying generous severance (four months) to people we let go.
 
-## No matter how wild the mission, you need a real business to get there
+> **Takeaway:** Optimize for your strongest performers. If make it OK not to push hard, everyone will feel it and eventually leave or “quiet quit”.
 
-Take the example of SpaceX. It has a very futuristic vision, one Elon may not live to really see it, but their heads are firmly out of the clouds. SpaceX created a mission and then figured out a business model – shipping things into space for money – that could fuel the mission.
+## 6. Harder missions attract more talent
+Elon’s companies are wildly ambitious. They attract some of the smartest people in their industries. Literal rocket scientists.
 
-At PostHog, we're disciplined with each product we ship - we care about performance, margins, and revenue for each one. 
+We’ve seen this, too. Early on, we were very fortunate to find really great people, but we were choosing from the very small pool. As our ambition has grown, so has the pool of talent we can hire from.
 
-Many venture capitalists will tell you to hire like crazy when you have [product-market fit](/founders/product-market-fit-game). We have product-market fit, but we don’t do this at all. We take pride in our individual products being real businesses - potentially profitable, with revenue and with sane margins.
+We now get hundreds, sometimes thousands, of applicants for every role. Engineers have noticed how challenging it looks to build a huge suite of products – we've [built eight already](https://posthog.com/) and have a [list of 30 more](https://newsletter.posthog.com/i/140404838/map-everything-your-users-want).
+
+> **Takeaway:** Your ambition – and how you communicate it – can make all the difference. And, as we constantly remind people, [talent compounds](/handbook/values#6-talent-compounds).
+
+**Further reading:** [What we’ve learned about hiring](https://newsletter.posthog.com/p/everything-weve-learned-about-hiring)
+
+## 7. You still need a real business to get there
+
+Wild ambitions aren’t invulnerable. They need to survive contact with the real world. SpaceX has a very futuristic vision, one Elon may not live to see, but their heads are firmly out of the clouds. SpaceX created a mission and then figured out a business model – shipping things into space for money – that could fuel the mission.
+
+Many VCs will tell you to hire like crazy when you have [product-market fit](/founders/product-market-fit-game). We have product-market fit, but we don’t do this at all. We take pride in our individual products being real businesses – potentially profitable, with revenue, and sane margins.
+
+> **Takeaway:** Your first job as a founder is to survive. Yes, that means raising money from VCs, if you need to, but never take your eye off the fundamentals. The era of cheap money is over, after all.
+
+## Good reads for product engineers 📖
+
+- **[The state of SaaS pricing](https://www.growthunhinged.com/p/the-state-of-usage-based-pricing) – Kyle Poyar:** A comprehensive look at the current state of pricing for SaaS products, trends around usage-based pricing, and a potential new model for SaaS pricing.
+
+- **[How we built our onboarding email flow (with actual performance data)](/blog/how-we-built-email-onboarding) – Joe Martin**: ”Marketers believe onboarding emails are a powerful. Everyone else thinks they're annoying and ineffective. The truth, as always, is a little more complicated.”
+
+- **[My Sixth Year as a Bootstrapped Founder](https://mtlynch.io/solo-developer-year-6/) – Michael Lynch:** Lessons from Lynch in his sixth year bootstrapping, where he finally reached $1 million in revenue.
+
+- **[How to fix broken teams](https://blog.staysaasy.com/p/how-to-fix-broken-teams) – Stay SaaSy:** StaySaaSy shares some actionable tips on how to fix to failing teams.

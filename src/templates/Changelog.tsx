@@ -14,6 +14,13 @@ import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
+import UpdateWrapper, { RoadmapSuccess } from 'components/Roadmap/UpdateWrapper'
+import { Video } from 'cloudinary-react'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import RoadmapForm from 'components/RoadmapForm'
+import { useUser } from 'hooks/useUser'
+import Tooltip from 'components/Tooltip'
+import { IconShieldLock } from '@posthog/icons'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -32,7 +39,6 @@ const Select = ({ onChange, values, ...other }) => {
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                             {({ selected }) => {
-                                console.log(other.value, value.label)
                                 return (
                                     <li
                                         className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
@@ -51,18 +57,52 @@ const Select = ({ onChange, values, ...other }) => {
     )
 }
 
+export const Change = ({ title, teamName, media, description, cta }) => {
+    return (
+        <>
+            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
+                {title}
+            </Heading>
+            {teamName && <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>}
+            {media?.data?.attributes?.mime && (
+                <div className="my-4">
+                    {media?.data?.attributes?.mime === 'video/mp4' ? (
+                        <ZoomImage>
+                            <Video
+                                publicId={media.publicId}
+                                cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                                className="max-w-2xl w-full"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                            />
+                        </ZoomImage>
+                    ) : (
+                        <ZoomImage>
+                            <GatsbyImage image={getImage(media)} />
+                        </ZoomImage>
+                    )}
+                </div>
+            )}
+            <div className="mt-2">
+                <Markdown>{description}</Markdown>
+            </div>
+            {cta && (
+                <CallToAction type="secondary" size="md" to={cta.url}>
+                    {cta.label}
+                </CallToAction>
+            )}
+        </>
+    )
+}
+
 export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
+    const { user } = useUser()
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
-
-    const changesByDate = groupBy(changes, (node) => {
-        const date = new Date(node.date)
-        return dayjs().month(date.getMonth()).year(date.getFullYear())
-    })
-    const tableOfContents = Object.keys(changesByDate).map((date) => {
-        const month = dayjs(date).format('MMMM')
-        return { url: month, value: month, depth: 0 }
-    })
+    const [newRoadmapID, setNewRoadmapID] = useState()
+    const [adding, setAdding] = useState(false)
 
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
@@ -85,19 +125,42 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                           return get(change, field) === value
                       })
                   )
-        setChanges(newChanges)
+        setChanges([...newChanges])
     }, [filters])
+
+    const changesByMonth = groupBy(changes, (node) => node.monthShort)
+
+    const tableOfContents = Object.keys(groupBy(changes, (node) => node.monthLong)).map((month) => {
+        return { url: month, value: month, depth: 0 }
+    })
+
+    const isModerator = user?.role?.type === 'moderator'
 
     return (
         <CommunityLayout
             parent={companyMenu}
-            activeInternalMenu={companyMenu.children[2]}
+            activeInternalMenu={companyMenu.children.find((child) => child.name.toLowerCase() === 'changelog')}
             title="Changelog"
             tableOfContents={tableOfContents}
         >
-            <section className="mb-4 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
+            <section className="mb-4 flex justify-between md:items-center md:flex-row flex-col md:space-y-0 space-y-4">
                 <div>
-                    <h1 className="m-0 text-3xl">Changelog</h1>
+                    <div className="flex gap-4 items-center">
+                        <div>
+                            <h1 className="m-0 text-3xl sm:text-4xl">Changelog</h1>
+                        </div>
+                        <div>
+                            {isModerator && !adding && (
+                                <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                    <Tooltip content="Only moderators can see this" placement="top">
+                                        <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                    </Tooltip>
+                                    Add entry
+                                </CallToAction>
+                            )}
+                        </div>
+                    </div>
+
                     <p className="m-0 mt-2">
                         <em>"All the updates that are fit to print"</em>
                     </p>
@@ -127,68 +190,67 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                     })}
                 </div>
             </section>
+
+            {isModerator && (
+                <>
+                    {newRoadmapID && (
+                        <RoadmapSuccess id={newRoadmapID} description="Changelog will update on next build" />
+                    )}
+                    {adding && (
+                        <div className="mb-6 border-border dark:border-dark">
+                            <RoadmapForm status="complete" onSubmit={(roadmap) => setNewRoadmapID(roadmap.id)} />
+                        </div>
+                    )}
+                </>
+            )}
+
             <section className="grid article-content">
-                {Object.keys(changesByDate).map((date) => {
-                    const nodes = changesByDate[date]
+                {Object.keys(changesByMonth).map((month, index) => {
+                    const nodes = changesByMonth[month]
                     return (
-                        <div key={date} id={slugify(dayjs(date).format('MMMM'))} className="flex gap-4">
+                        <div key={`${month}-${index}`} id={tableOfContents[index].url} className="flex gap-4">
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
                                 <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
-                                    <h2 className="!text-sm font-bold uppercase !m-0">{dayjs(date).format('MMM')}</h2>
-                                    <div className="text-xs font-semibold">{dayjs(date).format('YYYY')}</div>
+                                    <h2 className="!text-sm font-bold uppercase !m-0">{month}</h2>
+                                    <div className="text-xs font-semibold">{pageContext.year}</div>
                                 </div>
                             </div>
                             <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
-                                {nodes.map(({ description, media, topic, teams, title, cta }) => {
+                                {nodes.map(({ description, media, topic, teams, title, cta, strapiID }) => {
                                     const team = teams?.data[0]
                                     const topicName = topic?.data?.attributes.label
                                     const teamName = team?.attributes?.name
-                                    const mediaURL = media?.data?.attributes?.url
                                     const Icon = topicIcons[topicName?.toLowerCase()]
                                     return (
-                                        <li key={title}>
+                                        <li
+                                            id={slugify(title, { lower: true })}
+                                            className="scroll-mt-[108px]"
+                                            key={strapiID}
+                                        >
                                             {topicName && (
-                                                <p className="font-bold flex mt-3 !-mb-4 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
+                                                <p className="font-bold flex mt-3 !-mb-2 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
                                                     <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
                                                         {Icon && <Icon className="w-5" />}
                                                         <span>{topicName}</span>
                                                     </span>
                                                 </p>
                                             )}
-                                            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
-                                                {title}
-                                            </Heading>
-                                            {teamName && (
-                                                <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>
-                                            )}
-                                            {mediaURL && (
-                                                <div className="my-4">
-                                                    {media?.data?.attributes?.mime === 'video/mp4' ? (
-                                                        <ZoomImage>
-                                                            <video
-                                                                className="max-w-2xl w-full"
-                                                                src={mediaURL}
-                                                                autoPlay
-                                                                loop
-                                                                muted
-                                                                playsInline
-                                                            />
-                                                        </ZoomImage>
-                                                    ) : (
-                                                        <ZoomImage>
-                                                            <img src={mediaURL} className="max-w-2xl w-full" />
-                                                        </ZoomImage>
-                                                    )}
-                                                </div>
-                                            )}
-                                            <div className="mt-2">
-                                                <Markdown>{description}</Markdown>
-                                            </div>
-                                            {cta && (
-                                                <CallToAction type="secondary" size="md" to={cta.url}>
-                                                    {cta.label}
-                                                </CallToAction>
-                                            )}
+                                            <UpdateWrapper
+                                                status="complete"
+                                                formClassName="mt-8"
+                                                editButtonClassName="absolute top-0 right-0"
+                                                roundButton={false}
+                                                id={strapiID}
+                                                showSuccessMessage
+                                            >
+                                                <Change
+                                                    cta={cta}
+                                                    description={description}
+                                                    media={media}
+                                                    teamName={teamName}
+                                                    title={title}
+                                                />
+                                            </UpdateWrapper>
                                         </li>
                                     )
                                 })}
@@ -205,12 +267,15 @@ export const query = graphql`
     query ChangelogQuery($year: Int!) {
         allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year }, complete: { eq: true } }) {
             nodes {
-                date
+                strapiID
+                monthShort: date(formatString: "MMM")
+                monthLong: date(formatString: "MMMM")
                 description
                 media {
+                    gatsbyImageData
+                    publicId
                     data {
                         attributes {
-                            url
                             mime
                         }
                     }

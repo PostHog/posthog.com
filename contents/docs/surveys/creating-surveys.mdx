@@ -8,11 +8,25 @@ availability:
     enterprise: full
 ---
 
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import newSurveyLight from '../../images/docs/surveys/new-survey-light-mode.png'
+import newSurveyDark from '../../images/docs/surveys/new-survey-dark-mode.png'
+
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
+    className="rounded shadow-xl"
+/>
+
 To create a new survey, go to the [surveys tab](https://us.posthog.com/surveys) in the PostHog app, and click on the "New survey" button in the top right.
 
 This presents you with a collection of survey templates or you can click "Create blank survey" to create your own. After choosing one, you are brought to a form where you can complete the details of your new survey:
 
-![Create a survey](../../images/docs/surveys/new-survey.png)
+<ProductScreenshot
+    imageLight={newSurveyLight} 
+    imageDark={newSurveyDark}
+    alt="Create a survey" 
+    classes="rounded"
+/>
 
 Here's a breakdown of each field in the form:
 
@@ -35,12 +49,14 @@ PostHog supports multiple questions types. All survey types are available for bo
 
 | Type                      | Preview                                                                                               |
 |------------------------|-------------------------------------------------------------------------------------------------------|
-| **Open text**              | ![Open text survey](../../images/docs/surveys/freetext-survey.png)                                     |
+| **Freeform text**              | ![Open text survey](../../images/docs/surveys/freetext-survey.png)                                     |
 | **Link/Notification**                   | ![Link survey](../../images/docs/surveys/link-survey.png)                                              |
-| **Rating - emoji**         | ![Emoji rating survey](../../images/docs/surveys/rating-emoji-survey.png)                              |
+| **Rating emoji**         | ![Emoji rating survey](../../images/docs/surveys/rating-emoji-survey.png)                              |
 | **Rating - number**        | ![Number rating survey](../../images/docs/surveys/rating-number-survey.png)                            |
 | **Single choice select**   | ![Single choice select survey](../../images/docs/surveys/single-select-survey.png)                      |
 | **Multiple choice select** | ![Multiple choice survey](../../images/docs/surveys/multiple-choice-survey.png)                         |
+
+You can also select from [a variety of pre-built templates](/templates?filter=type&value=survey). 
 
 ### Customization
 

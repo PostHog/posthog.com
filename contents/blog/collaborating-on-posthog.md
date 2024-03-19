@@ -83,7 +83,7 @@ A very user-friendly way of keeping users updated on these metrics is by integra
 
 You've seen the typical Medium post with a graph, well we have too and we hate they're not PostHog graphs. But aside from that superficial argument, teams have different workflows and tools where product context is shared (e.g. an intranet, Notion, Google Docs, code repositories, blog posts). Usually product decisions are at least data-informed (and we do hope this will help drive this behavior further), so we want to make sure that the context from product data is properly shared, accessible and preserved. In particular, we also want to make sure these context remains up-to-date.
 
-As always, we welcome and highly encourage you to share any feedback you may have about this or any other feature. Give us a shout in our [community Slack](/slack) or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product or Engineering team.
+As always, we welcome and highly encourage you to share any feedback you may have about this or any other feature. Give us a shout in [our community page](/posts) or join us directly for a [call](https://calendly.com/posthog-feedback) with our Product or Engineering team.
 
 <div style="border: 1px solid #D9D9D9; margin-bottom: 16px; margin-top: 16px;"></div>
 

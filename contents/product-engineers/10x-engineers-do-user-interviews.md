@@ -11,7 +11,8 @@ tags:
   - Culture
   - People
 crosspost:
-  - Founders  
+  - Founders
+  - Blog  
 ---
 
 I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand and care about their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems.
@@ -40,7 +41,7 @@ Companies still need product managers, but it's easier to ship faster and better
 
 Automation is crucial here. Too much friction and you’ll ride an initial burst of motivation followed by regression to the old way of heads-down coding.
 
-Step one is to find users to talk to. You can define your segment using company traits, user traits, and behavioral information. A data warehouse or analytics platform like PostHog can be helpful here.
+Step one is to find users to talk to. You can define your segment using company traits, user traits, and [behavioral information](/product-engineers/behavioral-analytics). A data warehouse or analytics platform like PostHog can be helpful here.
 
 Next, it's time to bulk email your segment. The simplest way is to email out a Calendly link in batches via bcc’ed using a message like this:
 
@@ -87,7 +88,7 @@ User interviews are powerful but slow. You can quickly narrow down the most impo
 
 After the initial discussion, get your user on Slack for B2B or iMessage for B2C – or whatever messaging tool works best for them. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
 
-Here's an example from Li on our [Feature Success Team](/handbook/small-teams/feature-success) seeking feedback on our feature flag permissioning. She received a response 3 minutes (!!) later.
+Here's an example from Li on our [Feature Success Team](/teams/feature-success) seeking feedback on our feature flag permissioning. She received a response 3 minutes (!!) later.
 
 ![Slack feedback on feature flags](../images/blog/10x-engineers-do-user-interviews/feature-flags-feedback.png)
 

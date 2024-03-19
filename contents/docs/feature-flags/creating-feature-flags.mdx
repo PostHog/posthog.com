@@ -7,12 +7,27 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import CreateNewFeatureFlagLight from '../../images/features/feature-flags/create-new-feature-flag-light-mode.png'
+import CreateNewFeatureFlagDark from '../../images/features/feature-flags/create-new-feature-flag-dark-mode.png'
+import ReleaseConditionLight from '../../images/features/feature-flags/release-conditions-light-mode.png'
+import ReleaseConditionDark from '../../images/features/feature-flags/release-conditions-dark-mode.png'
 
-To create a new feature flag, go to the [feature flags tab](https://app.posthog.com/feature_flags) in the PostHog app, and click on the "New feature flag" button in the top right.
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=774"
+    className="rounded shadow-xl"
+/>
+
+To create a new feature flag, navigate to the [feature flags tab](https://app.posthog.com/feature_flags) in your PostHog app, where you should see a 'Create feature flag' button that we'll click.
 
 This presents you with a form where you can complete the details of your new flag:
 
-![How to create a feature flag in PostHog](../../images/features/feature-flags/create-new-feature-flag.png)
+<ProductScreenshot
+    imageLight={CreateNewFeatureFlagLight} 
+    imageDark={CreateNewFeatureFlagDark}
+    alt="How to create a feature flag in PostHog" 
+    classes="rounded"
+/>
 
 Here's a breakdown of each field in the form:
 
@@ -70,4 +85,9 @@ This specifies the conditions a user must meet to access the feature flag and re
 
 You can create conditions based on [user properties](/docs/product-analytics/user-properties), [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties), or [cohorts](/docs/data/cohorts).
 
-![Feature flags release conditions](../../images/features/feature-flags/release-conditions.png)
+<ProductScreenshot
+    imageLight={ReleaseConditionLight} 
+    imageDark={ReleaseConditionDark}
+    alt="Feature flags release conditions" 
+    classes="rounded"
+/>

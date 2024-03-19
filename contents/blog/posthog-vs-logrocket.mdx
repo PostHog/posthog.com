@@ -40,15 +40,15 @@ We ship weirdly fast. We update [our changelog](/changlog) every week and often 
 
 ## Comparing PostHog and LogRocket
 
-<ComparisonTable column1="LogRocket" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="LogRocket">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={false} column2={true} feature="Experiments" description="Test changes and analyze impact" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Test changes and analyze impact" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Track where users click" />
   <ComparisonRow column1={true} column2={true} feature="Event pipelines" description="Push and pull data to enrich customer profiles" />
-  <ComparisonRow column1={false} column2={true} feature="Open source" description="Build your own apps and contribute code" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
 
 -   **Feature flags:** PostHog offers robust, multivariate feature flags which support JSON payloads. This enables you to push real-time changes to your product without needing to redeploy. Visit [our feature flag page](/feature-flags) for more information. LogRocket doesn’t have any in-built feature flag functions.
@@ -59,7 +59,7 @@ We ship weirdly fast. We update [our changelog](/changlog) every week and often 
 
 While LogRocket offers some product analytics features, it isn’t primarily intended as an analytics platform and lacks many things product managers and engineers require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis, custom formulas, and a flexible SQL query editor.
 
-<ComparisonTable column1="LogRocket" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="LogRocket">
   <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
   <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
   <ComparisonRow column1={true} column2={true} feature="Funnels" description="Understand conversion between events, pages" />
@@ -67,10 +67,10 @@ While LogRocket offers some product analytics features, it isn’t primarily int
   <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
   <ComparisonRow column1={true} column2={true} feature="Retention" description="Analyze user and revenue retention" />
   <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
-  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
-  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Understand how organizations use your product" />
-  <ComparisonRow column1={false} column2={true} feature="Formulas" description="Use custom formulas to calculate unique insights" />
-  <ComparisonRow column1={false} column2={true} feature="SQL query editor" description="Write your own queries in SQL" />
+  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Understand how organizations use your product" />
+  <ComparisonRow column1={true} column2={false} feature="Formulas" description="Use custom formulas to calculate unique insights" />
+  <ComparisonRow column1={true} column2={false} feature="SQL query editor" description="Write your own queries in SQL" />
 </ComparisonTable>
 
 -   **Correlation analysis:** This feature enables you to [automatically find correlated events or properties](/manual/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn’t offer any such automated correlation discovery, meaning users must search for correlating factors manually and without assistance.
@@ -81,9 +81,9 @@ While LogRocket offers some product analytics features, it isn’t primarily int
 
 LogRocket and PostHog both offer robust, full-featured [session replay tools](/blog/best-open-source-session-replay-tools) that outperform even dedicated tools, such as Hotjar.
 
-<ComparisonTable column1="LogRocket" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="LogRocket">
   <ComparisonRow column1={true} column2={true} feature="Web app recordings" description="Capture recordings from single-page apps" />
-  <ComparisonRow column1={true} column2="Beta" feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
+  <ComparisonRow column1="Beta" column2={true} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
   <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
   <ComparisonRow column1={true} column2={true} feature="Console logs" description="Capture extra content from a users’ browser environment" />
   <ComparisonRow column1={true} column2={true} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
@@ -110,7 +110,7 @@ LogRocket’s heatmap and click tracking functionality exceeds PostHog’s and e
 
 **Tl;dr:** Both support a broad range of tracking options and libraries, and manual event instrumentation, as well as autocapture.
 
-<ComparisonTable column1="LogRocket" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="LogRocket">
   <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Track manually instrumented events" />
   <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Automatically track events without instrumentation" />
   <ComparisonRow column1={true} column2={true} feature="Combined events" description="Track related events as a single trackable action or behavior" />
@@ -124,31 +124,31 @@ LogRocket’s heatmap and click tracking functionality exceeds PostHog’s and e
 
 PostHog supports a wide range of client and server libraries, but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all our features. See [our client library documentation](/docs/getting-started/install?tab=snippet) for more information.
 
-<ComparisonTable column1="LogRocket" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="LogRocket">
   <ComparisonRow column1={true} column2={true} feature="JavaScript" />
   <ComparisonRow column1={true} column2={true} feature="React Native" />
   <ComparisonRow column1={true} column2={true} feature="React" />
-  <ComparisonRow column1={false} column2={true} feature="Flutter" />
+  <ComparisonRow column1={true} column2={false} feature="Flutter" />
   <ComparisonRow column1={true} column2={true} feature="iOS" />
   <ComparisonRow column1={true} column2={true} feature="Android" />
-  <ComparisonRow column1={false} column2={true} feature="Ruby" />
+  <ComparisonRow column1={true} column2={false} feature="Ruby" />
 </ComparisonTable>
 
 ### Data pipelines
 
 [PostHog offers more than 50 integrations and apps](/cdp), while [LogRocket offers slightly fewer](https://logrocket.com/features/integrations). As an open-source application, PostHog welcomes contributions from the community. If an integration you need isn’t available, [it’s possible to create it](/docs/apps/build)!
 
-<ComparisonTable column1="LogRocket" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="LogRocket">
   <ComparisonRow column1={true} column2={true} feature="Export API" description="Export data via API" />
   <ComparisonRow column1={true} column2={true} feature="Import API" description="Import data via API" />
-  <ComparisonRow column1={false} column2={true} feature="Amazon Redshift" description="Export data to Redshift" />
-  <ComparisonRow column1={false} column2={true} feature="Amazon S3" description="Export data to S3 bucket" />
-  <ComparisonRow column1={false} column2={true} feature="Azure Blob Storage" description="Export data to Microsoft Azure" />
-  <ComparisonRow column1={false} column2={true} feature="Google Cloud Storage" description="Export data to GCS" />
-  <ComparisonRow column1={false} column2={true} feature="Snowflake" description="Export data to Snowflake database" />
-  <ComparisonRow column1={false} column2={true} feature="BigQuery" description="Export data to Google BigQuery for analysis" />
-  <ComparisonRow column1={false} column2={true} feature="RudderStack" description="Sync event and person data" />
-  <ComparisonRow column1={false} column2={true} feature="Airbyte" description="Extract and load data to external platforms" />
+  <ComparisonRow column1={true} column2={false} feature="Amazon Redshift" description="Export data to Redshift" />
+  <ComparisonRow column1={true} column2={false} feature="Amazon S3" description="Export data to S3 bucket" />
+  <ComparisonRow column1={true} column2={false} feature="Azure Blob Storage" description="Export data to Microsoft Azure" />
+  <ComparisonRow column1={true} column2={false} feature="Google Cloud Storage" description="Export data to GCS" />
+  <ComparisonRow column1={true} column2={false} feature="Snowflake" description="Export data to Snowflake database" />
+  <ComparisonRow column1={true} column2={false} feature="BigQuery" description="Export data to Google BigQuery for analysis" />
+  <ComparisonRow column1={true} column2={false} feature="RudderStack" description="Sync event and person data" />
+  <ComparisonRow column1={true} column2={false} feature="Airbyte" description="Extract and load data to external platforms" />
 </ComparisonTable>
 
 ### Popular integrations 
@@ -158,23 +158,20 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 <ComparisonTable column1="LogRocket" column2="PostHog">
   <ComparisonRow column1={false} column2={true} feature="Hubspot" description="Sync event and person data" />
   <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync event and person data" />
-  <ComparisonRow column1={false} column2={true} feature="Zapier" description="Export events for use in Zaps" />
-  <ComparisonRow column1={false} column2={true} feature="Stripe" description="Sync customer and invoice data" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" description="Export events for use in Zaps" />
+  <ComparisonRow column1={true} column2={false} feature="Stripe" description="Sync customer and invoice data" />
   <ComparisonRow column1={true} column2={true} feature="Intercom" description="Extract and load data to external platforms" />
-  <ComparisonRow column1={false} column2={true} feature="Customer.io" description="Sync data between platforms" />
+  <ComparisonRow column1={true} column2={false} feature="Customer.io" description="Sync data between platforms" />
   <ComparisonRow column1={true} column2={true} feature="Sentry" description="Ingest Sentry errors for analysis" />
   <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events from Segment" />
 </ComparisonTable>
 
 ### Compliance
-
-Regulatory compliance can be make-or-break for many teams, especially those operating in fields such as healthcare or the financial sector. Luckily, LogRocket and PostHog both offer a variety of ways to comply with such regulations.
-
-<ComparisonTable column1="LogRocket" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="LogRocket">
   <ComparisonRow column1={true} column2={true} feature="GDPR ready" />
-  <ComparisonRow column1="Self-host only" column2={false} feature="HIPAA ready" />
+  <ComparisonRow column1={true} column2="Self-host only" feature="HIPAA ready" />
   <ComparisonRow column1={true} column2={true} feature="Data anonymization" />
-  <ComparisonRow column1={false} column2={true} feature="Cookie-less tracking option" />
+  <ComparisonRow column1={true} column2={false} feature="Cookie-less tracking option" />
   <ComparisonRow column1={true} column2={true} feature="SOC 2 certified" />
   <ComparisonRow column1={true} column2={true} feature="SAML/SSO available" />
   <ComparisonRow column1={true} column2={true} feature="2FA available" />
@@ -204,7 +201,7 @@ The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integ
 
 ### Does PostHog block bots by default?
 
-Yes. See the [full blocklist in our docs](/troubleshooting#does-posthog-block-bots-by-default).
+Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
 
 ### What about ad blockers?
 

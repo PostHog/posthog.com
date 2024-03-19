@@ -10,6 +10,8 @@ tags:
   - Culture
   - Being a founder
   - Ops & finance
+crosspost:
+  - Blog  
 ---
 
 There really hasn't been a single situation where transparency hasn't been to our company's advantage.

@@ -26,7 +26,7 @@ Replays (aka session recordings) are a great way to understand:
 - Hesitation at different stages of your funnel.
 - How your users are interacting with individual elements of your product.
 
-Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
+Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at [Hotjar alternatives](/blog/best-hotjar-alternatives) that are either free or open source, particularly session replay tools. 
 
 > **Changelog:**
 >
@@ -65,7 +65,7 @@ You can also self-host PostHog Open Source (available under an MIT license) usin
 ## 2. OpenReplay
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
-[OpenReplay](https://openreplay.com/) is an open-source session replay stack that provides insights into user actions inside web apps. Its tooling is particularly effective for application state and customer support. It has some basic analytics features, such as funnel analysis, though it falls some way short of feature-complete product analytics tools.
+[OpenReplay](https://openreplay.com/) is an open-source [alternative to Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) that offers more advanced, technical features for engineers on top of basic session replay. Its tooling is particularly effective for application state and customer support. It has some basic analytics features, such as funnel analysis, though it falls some way short of feature-complete product analytics tools.
 
 ### Who is OpenReplay for?
 

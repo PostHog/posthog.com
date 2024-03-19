@@ -8,6 +8,7 @@ tags:
   - Being a founder
 crosspost:
   - Founders
+  - Blog
 ---
 
 We’ve made mistakes at PostHog. We’re still making them, probably. In this issue, we’re sharing some important ones we’ve made, and what we learned from them.

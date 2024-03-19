@@ -7,22 +7,22 @@ tags:
     - salesforce
 ---
 
-This app connects to your Salesforce instance, sending events from PostHog to Salesforce as they are ingested.
+This destination connects to your Salesforce instance, sending events from PostHog to Salesforce as they are ingested.
 
 ## Requirements
 
-This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-You'll also need a Salesforce account to connect to, as well as the relevant levels of access to install and configure this app.
+You'll also need a Salesforce account to connect to, as well as the relevant levels of access to install and configure this destination.
 
 ## Installation
 
 1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
+2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Salesforce'
-4. Select the app, press 'Install' and follow the on-screen instructions
+4. Select the destination, press 'Install' and follow the on-screen instructions
 
 ## Configuration
 
@@ -30,19 +30,19 @@ You'll also need a Salesforce account to connect to, as well as the relevant lev
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this destination available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/salesforce-plugin) is available on GitHub.
+PostHog is open-source and so are all destinations on the platform. The [source code](https://github.com/PostHog/salesforce-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this destination?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community members [Angela Purcell](https://github.com/purcell3a) and [Conrad Kurth](https://github.com/ConradKurth) for creating this. Thank you, all!
 
-### Who maintains this app?
+### Who maintains this destination?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this destination?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

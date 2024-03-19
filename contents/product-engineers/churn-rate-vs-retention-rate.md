@@ -12,6 +12,7 @@ tags:
   - Growth
 crosspost:
   - Founders
+  - Blog
 ---
 
 Here's what you need to know about churn rate and retention rate:
@@ -69,7 +70,7 @@ I've collated the better sources [in the appendix](#more-on-churn-rate-benchmark
 
 - **Enterprise B2B SaaS:** Products selling to large enterprises (think more than 1,000 employees) have lower churn, mainly because large companies change slowly and are billed annually. A monthly churn rate up to 2% is good. Anything less than 1% is excellent. A monthly churn rate of 1% is equivalent to 11.3% annually – i.e. a company with 1,000 customers will lose 114 over 12 months.
 
-Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
+Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
 
 ## Retention rate formula explained 📈
 
@@ -159,7 +160,7 @@ Involuntary churn typically means billing problems – e.g. expired cards, out-o
 
 ### 2. Target different users
 
-Sometimes poor retention comes from acquiring the wrong users. This could be a marketing problem, or you might have the wrong [ideal customer profile](/blog/creating-ideal-customer-profile) for your product.
+Sometimes poor retention comes from acquiring the wrong users. This could be a marketing problem, or you might have the wrong [ideal customer profile](/newsletter/ideal-customer-profile-framework) for your product.
 
 ### 3. Learn about your power users
 
@@ -183,7 +184,7 @@ Users who don't get full value out of your product are more likely the churn, an
 
 ### 8. Focus on customer success
 
-Customer success > outbound sales a lot of the time. [Our customer success team](/handbook/small-teams/customer-success) owns all inbound contact requests, assisting new users and introducing them to the right PostHog people at the right time. If you can't afford a dedicated team, give the job to someone until you do. PostHog CEO, James Hawkins, owned this area in our early days.
+Customer success > outbound sales a lot of the time. [Our customer success team](/teams/customer-success) owns all inbound contact requests, assisting new users and introducing them to the right PostHog people at the right time. If you can't afford a dedicated team, give the job to someone until you do. PostHog CEO, James Hawkins, owned this area in our early days.
 
 ### 9. Re-engage your users
 
@@ -233,7 +234,7 @@ To conclude, here are five takeaways:
 
 If you're interested in early-stage startups and product-led growth, you may find these articles useful: 
 
-- PostHog CEO, James Hawkins, on [how we found our Ideal Customer Profile](/blog/creating-ideal-customer-profile)
+- PostHog CEO, James Hawkins, on [how we found our Ideal Customer Profile](/newsletter/ideal-customer-profile-framework)
 
 - My guide to [building an AARRR pirate funnel](/blog/aarrr-pirate-funnel) for tracking your most important metrics
 

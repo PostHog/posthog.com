@@ -314,7 +314,7 @@ noindex: true
 ```
 
 - `title`: the title that appears at the top of the page
-- `showTitle`: `true` | `false` - determines whether to show / hide the title at the top of the page
+- `showTitle`: `false` - if omitted, the title will appear at the top of the page
 - `width`: `sm` | `md` | `lg` | `full` - determines the width of the page
 - `noindex`: `true` | `false` - determines whether to index the page or not
 - `seo`: object containing SEO metadata:

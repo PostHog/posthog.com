@@ -11,10 +11,10 @@ In this tutorial, we show you how to add PostHog to your Remix app (on both the 
 
 ## Creating a Remix app
 
-First, make sure to [install a Node version](https://nodejs.org/en/download) greater than 18. After confirming, run the following command to create a basic app. Name it what you like (we chose `remix-tutorial`) and choose the default options.
+First, make sure to [install a Node version](https://nodejs.org/en/download) greater than 18. After confirming, run the following command to create a basic app and choose the default options.
 
 ```bash
-npx create-remix@latest
+npx create-remix@latest remix-tutorial
 ```
 
 Our app is going to be a basic blog with a few pages we can move between. 
@@ -151,31 +151,34 @@ npm i posthog-js
 
 Once done, you need your project API key and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
 
-With these, go to `entry.client.tsx` and initialize PostHog. 
+With these, go to `entry.client.tsx` and initialize PostHog using a component. This ensures the initialization doesn't break hydration.
 
-```ts
+```tsx
 // app/entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
-import { startTransition, StrictMode } from "react";
+import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
 import posthog from "posthog-js";
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_instance_address>',
-  }
-)
+function PosthogInit() {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_instance_address>',
+    });
+  }, []);
+
+  return null;
+}
 
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
         <RemixBrowser />
+        <PosthogInit/>
     </StrictMode>
   );
 });
-
 ```
 
 After relaunching your app, PostHog begins autocapturing initial pageviews, clicks, [session replays](/docs/session-replay) (if [you enable them](https://app.posthog.com/settings/project#replay)), and more.
@@ -482,4 +485,4 @@ Now, when you reload your page, the button doesn’t flicker. This is especially
 
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to set up A/B tests in Remix](/tutorials/remix-ab-tests)
-- [How to set up surveys in React](/tutorials/react-surveys)
+- [How to set up surveys in Remix](/tutorials/remix-surveys)
