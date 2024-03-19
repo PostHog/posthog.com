@@ -279,8 +279,9 @@ export default function Apply({ id, info }) {
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}
-                                    className={`${copied ? '' : 'active:top-[0.5px] active:scale-[.90]'
-                                        } relative outline-none`}
+                                    className={`${
+                                        copied ? '' : 'active:top-[0.5px] active:scale-[.90]'
+                                    } relative outline-none`}
                                     onClick={handleCopy}
                                 >
                                     <AnimatePresence>
@@ -366,11 +367,11 @@ export default function Apply({ id, info }) {
                                 render={() => (
                                     <TrackedCTA
                                         className="mt-auto"
-                                        to={`https://${posthog?.isFeatureEnabled &&
-                                            posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                            ? 'eu'
-                                            : 'app'
-                                            }.posthog.com/signup`}
+                                        to={`https://${
+                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                ? 'eu'
+                                                : 'app'
+                                        }.posthog.com/signup`}
                                         event={{ name: `clicked Continue`, type: 'cloud' }}
                                     >
                                         Get started - free
