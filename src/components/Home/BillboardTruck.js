@@ -21,7 +21,11 @@ export const Contra = () => {
 export default function BillboardTruck({ leftHandDrive }) {
     return (
         <section className="text-center pb-12 max-w-screen overflow-x-hidden">
-            <div className="relative -ml-20 xs:-ml-28 sm:mx-auto inline-block [zoom:.6] xs:[zoom:.75] md:[zoom:.75] mdlg:[zoom:.9] lg:[zoom:1]">
+            <div
+                className={`relative inline-block [zoom:.6] xs:[zoom:.75] md:[zoom:.75] mdlg:[zoom:.9] lg:[zoom:1] ${
+                    leftHandDrive ? '-ml-8 xs:mr-0 sm:mx-auto' : '-ml-12 xs:ml-0 sm:mx-auto'
+                }`}
+            >
                 <StaticImage
                     src="./images/billboard-truck-short.png"
                     alt=""
