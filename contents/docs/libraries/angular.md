@@ -1,6 +1,7 @@
 ---
 title: Angular
-icon: ../../images/docs/integrate/frameworks/angular.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/angular.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Angular.js](https://angularjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.

@@ -1,6 +1,7 @@
 ---
 title: Remix
-icon: ../../images/docs/integrate/frameworks/remix.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/remix.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Remix](https://remix.run/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.

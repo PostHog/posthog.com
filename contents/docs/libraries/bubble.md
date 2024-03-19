@@ -1,6 +1,7 @@
 ---
 title: Bubble
-icon: ../../images/docs/integrate/frameworks/bubble.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/bubble.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Bubble](https://bubble.io/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.

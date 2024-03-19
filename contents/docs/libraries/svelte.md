@@ -1,6 +1,7 @@
 ---
 title: Svelte
-icon: ../../images/docs/integrate/frameworks/svelte.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/svelte.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Svelte](https://svelte.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.

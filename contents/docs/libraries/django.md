@@ -1,6 +1,7 @@
 ---
 title: Django
-icon: ../../images/docs/integrate/frameworks/django.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/django.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your Django app. Integrating PostHog enables analytics, custom events capture, feature flags, and more.

@@ -1,6 +1,7 @@
 ---
 title: Laravel
-icon: ../../images/docs/integrate/frameworks/laravel.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/laravel.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your Laravel app. Integrating PostHog enables analytics, custom events capture, feature flags, and more.
