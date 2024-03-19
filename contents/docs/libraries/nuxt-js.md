@@ -129,7 +129,7 @@ const { data: someData, error } = await useAsyncData('ctaText', async () => {
         distinctId: distinctId,
         event: 'user_did_something"',
       })
-      await posthog.shutdownAsync()
+      await posthog.shutdown()
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +140,7 @@ const { data: someData, error } = await useAsyncData('ctaText', async () => {
 </script>
 ```
 
-> **Note**: Make sure to _always_ call `posthog.shutdownAsync()` after capturing events from the server-side.
+> **Note**: Make sure to _always_ call `posthog.shutdown()` after capturing events from the server-side.
 > PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 See the [Node SDK docs](/docs/libraries/node) for all usable functions, such as:

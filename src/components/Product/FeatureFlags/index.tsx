@@ -482,7 +482,7 @@ export const ProductFeatureFlags = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>

@@ -36,7 +36,7 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                         | `true`                    |
 
-> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdownAsync()` at the end to flush and send all pending events.
+> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 
 
 ## Capturing events
@@ -187,9 +187,7 @@ You should call `shutdown` on your program's exit to exit cleanly:
 
 ```node
 // Stop pending pollers and flush any remaining events
-client.shutdown()
-// or
-await client.shutdownAsync()
+await client.shutdown()
 ```
 
 ## Debugging and exceptions
@@ -213,7 +211,7 @@ client.debug()
 
 ## Using in a short-lived process like AWS Lambda
 
-PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method `shutdownAsync()` which can be awaited and ensures the queued events are all flushed to the API.
+PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method `shutdown()` which can be awaited and ensures the queued events are all flushed to the API.
 
 For example:
 
@@ -232,7 +230,7 @@ export const handler() {
   // So far 2 events are queued but not sent
 
   // Calling shutdown, flushed the queue but batched into 1 API call for maximum efficiency
-  await client.shutdownAsync()
+  await client.shutdown()
 }
 ```
 

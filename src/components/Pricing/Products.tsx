@@ -73,9 +73,9 @@ export const useProducts = () => {
             slider: (
                 <LogSlider
                     stepsInRange={100}
-                    marks={[MILLION, TEN_MILLION, HUNDRED_MILLION, BILLION]}
+                    marks={[MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS]}
                     min={MILLION}
-                    max={BILLION}
+                    max={MAX_PRODUCT_ANALYTICS}
                     onChange={(value) => setProductAnalyticsSliderValue(value, sliderCurve)}
                     value={productAnalyticsSliderValue}
                 />

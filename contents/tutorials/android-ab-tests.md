@@ -118,7 +118,7 @@ Our basic set up is now complete. Build and run your app to test that it's worki
 First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `Gradle Scripts/build.gradle.kts (Module: app)` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). For this tutorial, we use version `3.1.7`.
 
 
-```gradle_kotlin
+```gradle_kotlin file=app/build.gradle
 dependencies {
     implementation("com.posthog:posthog-android:3.+")
     //... other dependencies

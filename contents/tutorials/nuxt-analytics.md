@@ -236,11 +236,11 @@ export default defineEventHandler(async (event) => {
     distinctId: 'placeholder_distinct_id_of_the_user', 
     event: 'in_the_middleware',
   });
-  await posthog.shutdownAsync()  
+  await posthog.shutdown()  
 });
 ```
 
-> **Note**: Make sure to _always_ call `posthog.shutdownAsync()` after capturing events from the server-side.
+> **Note**: Make sure to _always_ call `await posthog.shutdown()` after capturing events from the server-side.
 > PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 If you run your app again, you should begin to see `in_the_middleware` events in PostHog.
@@ -271,7 +271,7 @@ export default defineEventHandler(async (event) => {
         distinctId: distinctId, 
         event: 'in_the_middleware',
       });
-      await posthog.shutdownAsync()
+      await posthog.shutdown()
     } 
   }
 });

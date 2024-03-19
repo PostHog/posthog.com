@@ -34,6 +34,8 @@ If you're [identifying](/docs/product-analytics/identify) users, they may see a 
 
 To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
 
+> *Note*: This does not apply to server-side SDKs, because you're explicitly telling us which distinct ID to use to evaluate flags, rather than depending on the identify() event to tell us which distinct ID to use.
+
 ### 3. An ad-blocker may be blocking calls
 
 Check if an ad-blocker is interfering with PostHog calls. If this is the case, you can fix this by [deploying a reverse proxy](/docs/advanced/proxy).

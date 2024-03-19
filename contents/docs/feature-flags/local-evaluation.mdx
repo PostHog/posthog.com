@@ -71,6 +71,7 @@ func main() {
 			Endpoint:       "<ph_instance_address>",
 			PersonalApiKey: "your personal API key", // Required for feature flags
             DefaultFeatureFlagsPollingInterval: 300 // Optional. Measured in seconds. Defaults to 300 (5 minutes).
+            // NextFeatureFlagsPollingTick: func() time.Duration {} // Optional. Use this to sync polling intervals between instances. For an example see: https://github.com/PostHog/posthog-go/pull/36#issuecomment-1991734125
 		},
 	)
 	defer client.Close()

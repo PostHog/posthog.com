@@ -424,7 +424,7 @@ export default function Home({ posts }) {
 
   const router = useRouter()
   const newLoginState = router.query.loginState
-  if (newloginState == 'signedIn' && session) {
+  if (newLoginState == 'signedIn' && session) {
     posthog.identify(session.user.email);
     router.replace('/', undefined, { shallow: true });
   }

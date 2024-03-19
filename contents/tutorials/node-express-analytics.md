@@ -262,7 +262,7 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
-client.shutdown() // new
+await client.shutdown() // new
 ```
 
 You can install the Node library alongside the snippet to capture the most amount of data and get access to all the tools. Once done, we can start to set up more of PostHog’s features.
