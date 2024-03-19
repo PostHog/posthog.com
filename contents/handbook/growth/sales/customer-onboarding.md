@@ -118,20 +118,29 @@ Every trial should have an end date by which time we expect the customer to make
 
 If they do become a customer (yay!) then we should agree a regular check in call cadence with them from the start (it's much harder to do after they are in the steady state).
 
+# Customer Success-led
 
 ## 1-hr onboarding call
 
 Customers on the Teams plan (and up) are entitled to a one hour kickoff/implementation call. This could include a high-level discussion of how PostHog fits into their stack, troubleshooting issues they've hit so far, or walking them through as they code it up, for simple setups. In practice we only need to worry about this for product-led / customers who haven't talked to sales before. [TO DO] Include a team calendly link in the welcome emails for Teams purchases or set up a separate campaign to email from a CSM. 
 
+## Ongoing Training
+
+Enterprise customers will also receive 1-2 hours of bespoke training per quarter according to their needs.  This can be delivered in a few formats depending on where the customer is in their PostHog journey:
+
+1. A deep-dive on a specific topic of their choosing.
+2. Question and Answer session with their CSM.
+3. An intro/set-up session for a PostHog product they've not used yet.
+
 ## Sales to CSM "handoff"
 
 Current thinking around this is based on customer spend. 
 
-- < $20K AR: Sales process is self-serve, with some added assistance for Teams plan purchase (eg onboarding call)
+- < $20K ARR: Sales process is self-serve, with some added assistance for Teams plan purchase (eg onboarding call).
 - $20K - $100K ARR:
-   - Cameron is primary for sales + onboarding to get them to 2 bills paid (or annual contract)
-   - Mine is CSM and handles renewal/cross-sell
-- $100K+ ARR: Simon handles the whole customer lifecycle (sales, onbaording, CSM-ing, and renewals).
+   - Cameron is primary for sales + onboarding to get them to 2 bills paid (or annual contract).
+   - Mine is CSM and handles renewal/cross-sell.
+- $100K+ ARR: Simon handles the whole customer lifecycle (sales, onboarding, CSM-ing, and renewals).
 
 
 
