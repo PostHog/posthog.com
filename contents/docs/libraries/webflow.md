@@ -28,7 +28,7 @@ Go to the "Custom code" tab in site settings. In the "Head code" section, paste 
 
 For any technical questions for how to integrate specific PostHog features into Webflow (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up Webflow analytics and session recordings](/tutorials/webflow)
 - [How to run A/B tests in Webflow](/tutorials/webflow-ab-tests)

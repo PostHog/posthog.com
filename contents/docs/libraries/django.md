@@ -37,7 +37,7 @@ You can find your project API key and instance address in [your project settings
 
 For any technical questions for how to integrate specific PostHog features into Django (such as analytics, feature flags, A/B testing, etc.), have a look at our [Python SDK docs](/docs/libraries/python).
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)
 - [How to set up A/B tests in Django](/tutorials/django-ab-tests)

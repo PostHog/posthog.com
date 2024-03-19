@@ -39,7 +39,7 @@ You can find your project API key and instance address in [your project settings
 
 For any technical questions for how to integrate specific PostHog features into Flask (such as analytics, feature flags, A/B testing, etc.), have a look at our [Python SDK docs](/docs/libraries/python).
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up analytics in Python and Flask](/tutorials/python-analytics)
 - [How to set up feature flags in Python and Flask](/tutorials/python-feature-flags)

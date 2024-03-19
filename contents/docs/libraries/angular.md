@@ -17,7 +17,7 @@ yarn add posthog-js
 npm install --save posthog-js
 ```
 
-In your `src/main.ts`, initialize PostHog using your project API key and instance address (You can find both in your [project settings](https://us.posthog.com/project/settings)).  
+In your `src/main.ts`, initialize PostHog using your project API key and instance address. You can find both in your [project settings](https://us.posthog.com/project/settings).  
 
 ```ts file=main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -89,7 +89,7 @@ Now, every time a user moves between pages, PostHog captures a `$pageview` event
 
 For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up Angular analytics, feature flags, and more](/tutorials/angular-analytics)
 - [How to set up A/B tests in Angular](/tutorials/angular-ab-tests)

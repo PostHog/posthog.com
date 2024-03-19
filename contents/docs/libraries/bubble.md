@@ -5,7 +5,7 @@ icon: ../../images/docs/integrate/frameworks/bubble.svg
 
 PostHog makes it easy to get data about traffic and usage of your [Bubble](https://bubble.io/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-This guide walks you through integrating PostHog into your Framer app using the [JavaScript Web SDK](/docs/libraries/js).
+This guide walks you through integrating PostHog into your Bubble app using the [JavaScript Web SDK](/docs/libraries/js).
 
 ## Installation
 
@@ -46,7 +46,7 @@ window.posthog.capture("button_clicked")
 
 For any technical questions for how to integrate specific PostHog features into Bubble (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up Bubble analytics, session replays, and more](/tutorials/bubble-analytics)
 - [How to create surveys in Bubble](/tutorials/bubble-surveys)

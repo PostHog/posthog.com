@@ -61,7 +61,7 @@ Route::get('/', function () {
 
 For any technical questions for how to integrate specific PostHog features into Laravel (such as analytics, feature flags, A/B testing, etc.), have a look at our [PHP SDK docs](/docs/libraries/php).
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up analytics in Laravel](/tutorials/laravel-analytics)
 - [How to set up feature flags in Laravel](/tutorials/laravel-feature-flags)

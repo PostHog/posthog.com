@@ -229,9 +229,9 @@ Let's say for example the user makes a purchase you could track an event like th
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Framer (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node) SDK docs.
+For any technical questions for how to integrate specific PostHog features into Nuxt (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node) SDK docs.
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)
 - [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)

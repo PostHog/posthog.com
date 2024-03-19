@@ -50,7 +50,7 @@ startTransition(() => {
 
 For any technical questions for how to integrate specific PostHog features into Astro (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up Remix analytics, feature flags, and more](/tutorials/remix-analytics)
 - [How to set up A/B tests in Remix](/tutorials/remix-ab-tests)

@@ -3,7 +3,7 @@ title: Svelte
 icon: ../../images/docs/integrate/frameworks/svelte.svg
 ---
 
-PostHog makes it easy to get data about traffic and usage of your [Svelte](https://astro.build/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+PostHog makes it easy to get data about traffic and usage of your [Svelte](https://svelte.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your SvelteKit app using the [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs.
 
@@ -112,7 +112,7 @@ export async function load() {
 
 For any technical questions for how to integrate specific PostHog features into Svelte (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node]((/docs/libraries/node)) SDK docs.
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up Svelte analytics, feature flags, and more](/tutorials/svelte-analytics)
 - [How to set up A/B tests in Svelte](/tutorials/svelte-ab-tests)

@@ -9,7 +9,7 @@ This guide walks you through integrating PostHog into your Framer app using the 
 
 ## Installation
 
-Go to your [project settings](https://app.posthog.com/settings/project) and copy your web snippet.  It looks like this:
+Go to your [project settings](https://us.posthog.com/settings/project#snippet) and copy your web snippet. It looks like this:
 
 ```js
 <script>
@@ -28,7 +28,7 @@ Finally, **publish** your site.
 
 ## Capture custom events
 
-To [capture custom events](/docs/product-analytics/capture-events), you call `posthog.capture()` using [custom code components in Framer](https://www.framer.com/developers/#code-components). Below is an in-depth example on how to do this:
+To [capture custom events](/docs/product-analytics/capture-events), you call `posthog.capture()` using [custom code components in Framer](https://www.framer.com/developers/#code-components).
 
 Go to the **Assets** tab in the top left of your Framer project, and click the **plus icon** next to the Code tab. This will show a pop up to create a new code file. Name the file `CaptureButton`, set it as a "New component" and press "Create."
 
@@ -60,7 +60,7 @@ Publish your site and then click your new button to [see the event in PostHog](h
 
 For any technical questions for how to integrate specific PostHog features into Framer (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
 
-Alternatively, we've also written the below tutorials to help get you started:
+Alternatively, the following tutorials can help you get started:
 
 - [How to set up Framer analytics and session recordings](/tutorials/framer-analytics)
 - [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
