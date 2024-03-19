@@ -26,25 +26,24 @@ export default function BillboardTruck({ leftHandDrive }) {
                     leftHandDrive ? '-ml-8 xs:mr-0 sm:mx-auto' : '-ml-12 xs:ml-0 sm:mx-auto'
                 }`}
             >
-                <StaticImage
-                    src="./images/billboard-truck-short.png"
-                    alt=""
-                    className={`md:hidden w-[809px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}
-                    quality={100}
-                    placeholder="tracedSVG"
-                />
-                <StaticImage
-                    src="./images/billboard-truck.png"
-                    alt=""
+                <div className={`md:hidden w-[809px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}>
+                    <StaticImage
+                        src="./images/billboard-truck-short.png"
+                        alt=""
+                        quality={100}
+                        placeholder="tracedSVG"
+                    />
+                </div>
+                <div
                     className={`hidden md:block w-[966px] max-w-screen ${
                         leftHandDrive ? 'transform -scale-x-100' : ''
                     }`}
-                    quality={100}
-                    placeholder="tracedSVG"
-                />
+                >
+                    <StaticImage src="./images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
+                </div>
                 <div
                     className={`absolute top-[16.25%] w-[341px] md:w-[495px] h-[239px] ${
-                        leftHandDrive ? 'left-[7.5%] md:left-[6.25%]' : 'right-[6.5%] md:right-[5.25%]'
+                        leftHandDrive ? 'left-[7.5%] md:left-[6.25%]' : 'right-[5.75%] md:right-[5.25%]'
                     }`}
                 >
                     <div className="relative h-full text-left">
