@@ -134,13 +134,7 @@ Enterprise customers will also receive 1-2 hours of bespoke training per quarter
 
 ## Sales to CSM "handoff"
 
-Current thinking around this is based on customer spend. 
-
-- < $20K ARR: Sales process is self-serve, with some added assistance for Teams plan purchase (eg onboarding call).
-- $20K - $100K ARR:
-   - Cameron is primary for sales + onboarding to get them to 2 bills paid (or annual contract).
-   - Mine is CSM and handles renewal/cross-sell.
-- $100K+ ARR: Simon handles the whole customer lifecycle (sales, onboarding, CSM-ing, and renewals).
+Customer lifecycle handoff/ownership is described [here](/handbook/growth/sales/overview#who-the-sales--cs-team-are).
 
 
 
