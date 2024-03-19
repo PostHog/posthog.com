@@ -23,7 +23,7 @@ export default function BillboardTruck({ leftHandDrive }) {
         <section className="text-center pb-12 max-w-screen overflow-x-hidden">
             <div
                 className={`relative inline-block [zoom:.6] xs:[zoom:.75] md:[zoom:.75] mdlg:[zoom:.9] lg:[zoom:1] ${
-                    leftHandDrive ? '-ml-8 xs:mr-0 sm:mx-auto' : '-ml-12 xs:ml-0 sm:mx-auto'
+                    leftHandDrive ? '-mr-24 xs:-mr-28 sm:mx-auto' : '-ml-24 xs:-ml-28 sm:mx-auto'
                 }`}
             >
                 <div className={`md:hidden w-[809px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}>
