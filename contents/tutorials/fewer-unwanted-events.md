@@ -45,8 +45,10 @@ posthog.init(
   { 
     api_host: '<ph_instance_address>',
     loaded: function (posthog) {
-      if (posthog.isFeatureEnabled('disable-autocapture')) {
-        posthog.config.autocapture = false;
+      posthog.onFeatureFlags((_flags) => {
+        if (posthog.isFeatureEnabled('disable-autocapture')) {
+          posthog.config.autocapture = false;
+        }
       }
     }
   }
@@ -57,7 +59,7 @@ Second, you can put events in key areas behind feature flags and turn them off i
 
 ```js
 if (!posthog.isFeatureEnabled('disable-event-capture')) {
-	posthog.capture('event');
+  posthog.capture('event');
 }
 ```
 
