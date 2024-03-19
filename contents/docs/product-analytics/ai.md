@@ -18,7 +18,7 @@ We've teamed up with [Langfuse](https://langfuse.com/) to track metrics for prod
 
 Here's an [example dashboard](https://eu.posthog.com/shared/HPOaK5zNVkP062nQJQJoooXe61l15w).
 
-## Supported Application Types
+## Supported application types
 
 Langfuse is open, supports any LLM for usage and cost tracking, has asynchronous production-grade JS and Python SDKs, and is integrated with popular application frameworks.
 
