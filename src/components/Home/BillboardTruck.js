@@ -20,59 +20,63 @@ export const Contra = () => {
 
 export default function BillboardTruck({ leftHandDrive }) {
     return (
-        <section className="text-center pb-12 max-w-screen overflow-x-hidden">
-            <div
-                className={`relative inline-block [zoom:.6] xs:[zoom:.75] md:[zoom:.75] mdlg:[zoom:.9] lg:[zoom:1] ${
-                    leftHandDrive ? '-mr-24 xs:-mr-28 sm:mx-auto' : '-ml-24 xs:-ml-28 sm:mx-auto'
-                }`}
-            >
-                <div className={`md:hidden w-[809px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}>
-                    <StaticImage
-                        src="./images/billboard-truck-short.png"
-                        alt=""
-                        quality={100}
-                        placeholder="tracedSVG"
-                    />
-                </div>
+        <section className="overflow-hidden">
+            <div className="text-center pb-12 scale-[.6] xs:scale-[.75] md:scale-[.75] mdlg:scale-[.9] lg:scale-100 origin-left">
                 <div
-                    className={`hidden md:block w-[966px] max-w-screen ${
-                        leftHandDrive ? 'transform -scale-x-100' : ''
+                    className={`relative inline-block ${
+                        leftHandDrive ? '-mr-24 xs:-mr-28 sm:mx-auto' : '-ml-24 xs:-ml-28 sm:mx-auto'
                     }`}
                 >
-                    <StaticImage src="./images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
-                </div>
-                <div
-                    className={`absolute top-[16.25%] w-[341px] md:w-[495px] h-[239px] ${
-                        leftHandDrive ? 'left-[7.5%] md:left-[6.25%]' : 'right-[5.75%] md:right-[5.25%]'
-                    }`}
-                >
-                    <div className="relative h-full text-left">
-                        <div className={`text-white pt-[1.25rem] pr-4 md:pr-5 pl-4 md:pl-[10.5rem]`}>
-                            <p className="text-[1.4rem] font-bold mb-1 md:mb-2">So glad we picked @posthog</p>
-                            <p className="font-semibold md:font-bold mb-5 md:mb-3 text-[16px] md:text-base leading-[1.2rem] md:leading-[1.3rem]">
-                                <span className="text-yellow">Hard to quantify just how much time we've saved</span> by
-                                reducing complexity of our data pipeline and{' '}
-                                <span className="text-yellow">using a single tool as a source of truth</span> for almost
-                                every customer related data question
-                            </p>
-                            <div className="flex items-center gap-4 md:gap-7 pl-12 md:pl-0">
-                                <div className="flex flex-col">
-                                    <strong>Gajus Kuizinas</strong>
-                                    <span className="opacity-50 text-sm">Co-founder, CTO</span>
-                                </div>
-                                <div className="border-l border-dark pl-3 md:pl-6 py-2">
-                                    <Contra />
+                    <div
+                        className={`md:hidden w-[809px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}
+                    >
+                        <StaticImage
+                            src="./images/billboard-truck-short.png"
+                            alt=""
+                            quality={100}
+                            placeholder="tracedSVG"
+                        />
+                    </div>
+                    <div
+                        className={`hidden md:block w-[966px] max-w-screen ${
+                            leftHandDrive ? 'transform -scale-x-100' : ''
+                        }`}
+                    >
+                        <StaticImage src="./images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
+                    </div>
+                    <div
+                        className={`absolute top-[16.25%] w-[341px] md:w-[495px] h-[239px] ${
+                            leftHandDrive ? 'left-[7.5%] md:left-[6.25%]' : 'right-[5.75%] md:right-[5.25%]'
+                        }`}
+                    >
+                        <div className="relative h-full text-left">
+                            <div className={`text-white pt-[1.25rem] pr-4 md:pr-5 pl-4 md:pl-[10.5rem]`}>
+                                <p className="text-[1.4rem] font-bold mb-1 md:mb-2">So glad we picked @posthog</p>
+                                <p className="font-semibold md:font-bold mb-5 md:mb-3 text-[16px] md:text-base leading-[1.2rem] md:leading-[1.3rem]">
+                                    <span className="text-yellow">Hard to quantify just how much time we've saved</span>{' '}
+                                    by reducing complexity of our data pipeline and{' '}
+                                    <span className="text-yellow">using a single tool as a source of truth</span> for
+                                    almost every customer related data question
+                                </p>
+                                <div className="flex items-center gap-4 md:gap-7 pl-12 md:pl-0">
+                                    <div className="flex flex-col">
+                                        <strong>Gajus Kuizinas</strong>
+                                        <span className="opacity-50 text-sm">Co-founder, CTO</span>
+                                    </div>
+                                    <div className="border-l border-dark pl-3 md:pl-6 py-2">
+                                        <Contra />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="absolute left-0 bottom-0">
-                            <StaticImage
-                                src="./images/gajus.png"
-                                alt=""
-                                className="w-[62px] h-[72px] md:w-[164px] md:h-[190px]"
-                                quality={100}
-                                placeholder="none"
-                            />
+                            <div className="absolute left-0 bottom-0">
+                                <StaticImage
+                                    src="./images/gajus.png"
+                                    alt=""
+                                    className="w-[62px] h-[72px] md:w-[164px] md:h-[190px]"
+                                    quality={100}
+                                    placeholder="none"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
