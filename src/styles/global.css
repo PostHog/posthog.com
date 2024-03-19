@@ -166,7 +166,7 @@ h4 {
 
     p,
     li {
-        @apply text-base leading-6;
+        @apply text-base leading-7;
 
         li {
             @apply text-base;
@@ -1388,7 +1388,7 @@ li.squeak-left-border {
     }
 
     p {
-        @apply m-0 mb-4 text-[15px];
+        @apply m-0 mb-2 text-[15px];
     }
 
     ol,
