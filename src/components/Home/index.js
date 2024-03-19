@@ -19,10 +19,11 @@ import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
 import OnePlatform from './OnePlatform'
 import NoHatingAllowed from './NoHatingAllowed'
+import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 
 const Home = () => {
-    usePostHog()
+    const posthog = usePostHog()
 
     return (
         <>
@@ -39,7 +40,18 @@ const Home = () => {
                 <CodeBlocks />
                 <OnePlatform />
                 <NoHatingAllowed />
-                <BillboardTruck /> {/* leftHandDrive={true} */}
+
+                <RenderInClient
+                    render={() => {
+                        return posthog?.getFeatureFlag('homepage-billboard-truck') === true ? (
+                            <BillboardTruck leftHandDrive={true} />
+                        ) : (
+                            <BillboardTruck />
+                        )
+                    }}
+                    placeholder={<>Loading...</>}
+                />
+
                 <ApiExamples />
                 <HogQL />
                 <Community />

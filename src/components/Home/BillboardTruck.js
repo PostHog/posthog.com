@@ -32,7 +32,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                 />
                 <div
                     className={`absolute top-[16.25%] w-[495px] h-[239px] ${
-                        leftHandDrive ? 'left-[5.25%]' : 'right-[5.25%]'
+                        leftHandDrive ? 'left-[6.25%]' : 'right-[5.25%]'
                     }`}
                 >
                     <div className="relative h-full text-left">
