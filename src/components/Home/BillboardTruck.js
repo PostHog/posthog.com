@@ -1,8 +1,7 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import { section } from './classes'
 
-export const Contra = ({ active }) => {
+export const Contra = () => {
     return (
         <svg fill="none" className="h-6" viewBox="0 0 128 24">
             <g fill="#fff" clipPath="url(#a)">
@@ -28,7 +27,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                     alt=""
                     className={`w-[966px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}
                     quality={100}
-                    formats={['png']}
+                    placeholder="tracedSVG"
                 />
                 <div
                     className={`absolute top-[16.25%] w-[495px] h-[239px] ${
@@ -60,7 +59,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                                 alt=""
                                 className="w-[164px] h-[190px]"
                                 quality={100}
-                                formats={['png']}
+                                placeholder="none"
                             />
                         </div>
                     </div>

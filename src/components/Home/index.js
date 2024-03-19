@@ -21,6 +21,7 @@ import OnePlatform from './OnePlatform'
 import NoHatingAllowed from './NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
+import Spinner from 'components/Spinner'
 
 const Home = () => {
     const posthog = usePostHog()
@@ -43,13 +44,17 @@ const Home = () => {
 
                 <RenderInClient
                     render={() => {
-                        return posthog?.getFeatureFlag('homepage-billboard-truck') === true ? (
-                            <BillboardTruck leftHandDrive={true} />
+                        return posthog?.getFeatureFlag?.('homepage-billboard-truck') === true ? (
+                            <BillboardTruck leftHandDrive />
                         ) : (
                             <BillboardTruck />
                         )
                     }}
-                    placeholder={<>Loading...</>}
+                    placeholder={
+                        <div>
+                            <Spinner className="w-7 h-7 mx-auto my-12" />
+                        </div>
+                    }
                 />
 
                 <ApiExamples />
