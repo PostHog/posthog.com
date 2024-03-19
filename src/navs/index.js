@@ -912,8 +912,8 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Customer Success',
-                    url: '/teams/customer-success',
+                    name: 'Sales & CS',
+                    url: '/teams/sales-cs',
                 },
                 {
                     name: 'Exec',
