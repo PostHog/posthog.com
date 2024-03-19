@@ -82,3 +82,14 @@ is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_us
 import PythonOverrideServerProperties from './override-server-properties/python.mdx'
 
 <PythonOverrideServerProperties />
+
+### Request timeout
+
+You can configure the `feature_flags_request_timeout_seconds` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+
+```python
+posthog = Posthog('<ph_project_api_key>', 
+    host='<ph_instance_address>'
+    feature_flags_request_timeout_seconds=3 // Time in second. Default is 3
+)
+```

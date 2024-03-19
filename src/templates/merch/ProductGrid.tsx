@@ -93,7 +93,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
                     setSidePanels((prev) => ({ ...prev, isOpen: false, animateOpen: true }))
                 }}
             >
-                <ProductPanels className="" product={sidePanels.product} />
+                <ProductPanels className="" product={sidePanels.product} updateURL={updateURL} />
             </Drawer>
         </>
     )

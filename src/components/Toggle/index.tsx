@@ -43,7 +43,7 @@ export default function Toggle({
                 </Switch>
                 {label && (
                     <Switch.Label>
-                        <span className="ml-1 font-semibold">{label}</span>
+                        <span className="ml-1 font-semibold text-sm">{label}</span>
                     </Switch.Label>
                 )}
             </Switch.Group>
