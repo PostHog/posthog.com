@@ -118,15 +118,15 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
 
 type AppParametersProps = {
     config:
-    | {
-        key: string
-        name: string | null
-        required: boolean | null
-        type: string | null
-        hint: string | null
-        description: string | null
-    }[]
-    | null
+        | {
+              key: string
+              name: string | null
+              required: boolean | null
+              type: string | null
+              hint: string | null
+              description: string | null
+          }[]
+        | null
 }
 
 export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {

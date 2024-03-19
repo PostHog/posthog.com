@@ -89,3 +89,15 @@ const isFeatureFlagEnabled = await client.isFeatureEnabled(
 import NodeOverrideServerProperties from './override-server-properties/node.mdx'
 
 <NodeOverrideServerProperties />
+
+### Request timeout
+
+You can configure the `feature_flag_request_timeout_ms` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+
+```js
+const client = new PostHog('<ph_project_api_key>', { 
+        api_host: '<ph_instance_address>',
+        feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).
+    }
+)
+```
