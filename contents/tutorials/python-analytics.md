@@ -146,7 +146,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 Run `pip3 install posthog` to install [PostHog's Python SDK](/docs/libraries/python). Then, initialize PostHog in `app.py` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 
-```py file=apo.py
+```py file=app.py
 package main
 from flask import Flask, render_template, request, redirect, session, url_for
 from posthog import Posthog
