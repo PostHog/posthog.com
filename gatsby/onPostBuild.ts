@@ -234,6 +234,8 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
+    if (process.env.VERCEL_GIT_COMMIT_REF !== 'master') return
+
     const { data } = await graphql(`
         query {
             allRoadmap(filter: { complete: { ne: false } }) {
@@ -283,7 +285,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         }
                         featuredImage {
                             childImageSharp {
-                                gatsbyImageData(width: 650, height: 350, quality: 100)
+                                gatsbyImageData(width: 650, height: 350)
                             }
                         }
                         authorData {
@@ -308,7 +310,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     frontmatter {
                         title
                         featuredImage {
-                            absolutePath
+                            publicURL
                         }
                         authorData {
                             name
@@ -352,7 +354,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                     frontmatter {
                         featuredImage {
-                            absolutePath
+                            publicURL
                         }
                     }
                 }
@@ -364,10 +366,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                     frontmatter {
                         featuredImage {
-                            absolutePath
+                            publicURL
                         }
                         logo {
-                            absolutePath
+                            publicURL
                         }
                         title
                     }
@@ -437,7 +439,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
 
     async function createOG({ html, slug }) {
         await page.setContent(html, {
-            waitUntil: ['domcontentloaded'],
+            waitUntil: ['domcontentloaded', 'networkidle0'],
         })
 
         await page.evaluateHandle('document.fonts.ready')
@@ -452,9 +454,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     // Blog post OG
     for (const post of data.blog.nodes) {
         const { title, authorData, featuredImage } = post.frontmatter
-        const image = fs.readFileSync(featuredImage.absolutePath, {
-            encoding: 'base64',
-        })
+        const image = featuredImage?.publicURL
         const author =
             authorData &&
             authorData.map((author) => {
@@ -524,21 +524,13 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     // Customers OG
     for (const post of data.customers.nodes) {
         const { frontmatter } = post
-        const logoType = frontmatter.logo.absolutePath.includes('.svg') ? 'svg+xml' : 'image/jpeg'
-        const featuredImageType = frontmatter.featuredImage.absolutePath.includes('.svg') ? 'svg+xml' : 'image/jpeg'
-        const featuredImage = fs.readFileSync(frontmatter.featuredImage.absolutePath, {
-            encoding: 'base64',
-        })
-        const logo = fs.readFileSync(frontmatter.logo.absolutePath, {
-            encoding: 'base64',
-        })
+        const featuredImage = frontmatter.featuredImage?.publicURL
+        const logo = frontmatter.logo?.publicURL
         await createOG({
             html: customerTemplate({
                 title: frontmatter.title,
                 featuredImage,
-                featuredImageType,
                 logo,
-                logoType,
                 font,
             }),
             slug: post.fields.slug,

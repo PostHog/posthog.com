@@ -1,10 +1,16 @@
 ---
-title: How to build, analyze and optimize conversion funnels in PostHog
+title: 'How to build, analyze and optimize conversion funnels in PostHog'
 sidebar: Docs
 showTitle: true
-featuredVideo: https://www.youtube-nocookie.com/embed/cMFz_xFlHaE
-author: ["yakko-majuri", "andy-vandervell"]
-tags: ["funnels", "correlation analysis", "paths", 'product analytics']
+featuredVideo: 'https://www.youtube-nocookie.com/embed/cMFz_xFlHaE'
+author:
+  - yakko-majuri
+  - andy-vandervell
+tags:
+  - funnels
+  - correlation analysis
+  - paths
+  - product analytics
 date: 2022-04-20
 ---
 
@@ -30,11 +36,11 @@ To follow this tutorial you need to:
 
 Funnels are great for when your users should perform actions in succession - i.e. if you need your user to do something _and then_ do something else.
 
-![PostHog Funnel Example](../images/tutorials/funnels/top-to-bottom-funnel.png)
+![PostHog Funnel Example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/funnels/top-to-bottom-funnel.png)
 
 Above is a very simple example of a funnel in PostHog, measuring how often people visit our docs after arriving on the homepage. We have two funnel views: top-to-bottom (above) and left-to-right (below).
 
-![PostHog Funnel Example](../images/tutorials/funnels/simple-left-right.png)
+![PostHog Funnel Example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/funnels/simple-left-right.png)
 
 Funnels can have as many steps as you like, and reveal both what percentage of **unique users** are converting from one step to another, and which users do or don't convert.
 
@@ -57,7 +63,7 @@ Click on the '+' icon next to 'Insights' in the sidebar to start creating a new 
 
 Then, in the insight builder, click on 'Funnels' to start creating your funnel.
 
-![Funnels insight](../images/tutorials/funnels/funnel-preview.png)
+![Funnels insight](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/funnels/funnel-preview.png)
 
 The Funnels builder is split into two panes: 'Query Steps' on the left for defining your funnel, and a preview pane on the right. Changes are calculated on-the-fly, so you can see if your funnel is set up correctly as you go.
 
@@ -96,7 +102,7 @@ You also have the option to breakdown your funnel in all the same ways you can f
 
 Here's of our example funnel broken down by continent:
 
-![Three step funnel](../images/tutorials/funnels/continent-breakdown.png)
+![Three step funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/funnels/continent-breakdown.png)
 
 Mousing over each breakdown will show the conversion rate for that specific result. You can also add or remove properties from the breakdown.
 
@@ -126,7 +132,7 @@ It's a powerful way to discover eye-opening insights into what your users are ac
 
 Let's take a look at the Correlated Events for our example.
 
-![Correlated Events](../images/tutorials/funnels/correlated-events.png)
+![Correlated Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/funnels/correlated-events.png)
 
 The top result immediately stands out as significant. "Persons who converted were 27x more likely" to perform the "deploy option clicked" event.
 
@@ -176,7 +182,7 @@ All you need to do is choose a target metric, choose specific people to run this
 
 Here's an example of the output of an experiment we ran in PostHog:
 
-![Experiment result](../images/tutorials/funnels/experiment-result.png)
+![Experiment result](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/funnels/experiment-result.png)
 
 In this example, we were testing a two possible changes to our User Paths insight feature against a control to see which, if any, improved the number of Discoveries (our [primary product metric](/handbook/product/metrics)) of PostHog users.
 

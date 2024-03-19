@@ -1,15 +1,17 @@
 ---
-title: "How to set up A/B tests in Flutter"
+title: How to set up A/B tests in Flutter
 date: 2024-03-05
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/flutter-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/flutter-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/flutter-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/flutter-ab-tests/experiment-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/experiment-setup-dark.png"
 
 [A/B tests](/ab-testing) help you improve your Flutter app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Flutter app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -100,7 +102,7 @@ class FeatureScreenView extends StatelessWidget {
 
 Press **F5** and run the app in any emulator (we chose Android) to see your app in action.
 
-![Basic setup of the Flutter app](../images/tutorials/flutter-ab-tests/basic-app.mp4)
+![Basic setup of the Flutter app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-ab-tests/basic-app.mp4)
 
 ## 2. Add PostHog to your app
 

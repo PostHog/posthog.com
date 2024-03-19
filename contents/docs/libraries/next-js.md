@@ -1,6 +1,7 @@
 ---
 title: Next.js
-icon: ../../images/docs/integrate/frameworks/nextjs.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg
 features:
   eventCapture: true
   userIdentification: true

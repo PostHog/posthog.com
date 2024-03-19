@@ -1,10 +1,11 @@
 ---
 title: RudderStack (Export)
-github: https://github.com/rudderlabs/rudderstack-posthog-plugin
-installUrl: https://app.posthog.com/project/apps?name=RudderStack
-thumbnail: ../../cdp/thumbnails/rudderstack-export.png
+github: 'https://github.com/rudderlabs/rudderstack-posthog-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=RudderStack'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/rudderstack-export.png
 tags:
-    - rudderstack
+  - rudderstack
 ---
 
 Send events from PostHog to RudderStack. RudderStack will recognize PostHog as a data source, so you can use RudderStack's data pipeline features to send PostHog event data to other platforms.

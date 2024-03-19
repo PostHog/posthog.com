@@ -1,19 +1,22 @@
 ---
 title: Why AssemblyAI switched from Mixpanel to PostHog
 customer: AssemblyAI
-logo: ../images/customers/assemblyai/logo.svg
-logoDark: ../images/customers/assemblyai/logo_dark.svg
-featuredImage: ../images/customers/assemblyai/featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/assemblyai/logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/assemblyai/logo_dark.svg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/assemblyai/featured.png
 industries:
-    - API Platform
+  - API Platform
 users:
-    - Leadership
-    - Marketing
-    - Engineering
+  - Leadership
+  - Marketing
+  - Engineering
 toolsUsed:
-    - Experimentation
-    - Cloud-hosted
-    - Insights
+  - Experimentation
+  - Cloud-hosted
+  - Insights
 date: 2022-03-23
 ---
 

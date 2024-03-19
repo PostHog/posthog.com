@@ -1,26 +1,25 @@
 ---
 title: Path analysis
 related:
-    - ../../tutorials/guide-to-funnels.md
-    - ../../tutorials/nextjs-supabase-signup-funnel.mdx
+  - ../../tutorials/guide-to-funnels.md
+  - ../../tutorials/nextjs-supabase-signup-funnel.mdx
 availability:
-    free: partial
-    selfServe: full
-    enterprise: full
-
-    features:
-        cohorts:
-            free: false
-            selfServe: true
-            enterprise: true
-        wildcardGroups:
-            free: false
-            selfServe: true
-            enterprise: true
-        advancedOptions:
-            free: false
-            selfServe: true
-            enterprise: true
+  free: partial
+  selfServe: full
+  enterprise: full
+  features:
+    cohorts:
+      free: false
+      selfServe: true
+      enterprise: true
+    wildcardGroups:
+      free: false
+      selfServe: true
+      enterprise: true
+    advancedOptions:
+      free: false
+      selfServe: true
+      enterprise: true
 ---
 
 ## Overview
@@ -50,11 +49,11 @@ Generally, paths are a tool that's used for exploration, and aren't as much focu
 1. Click the **+ New Insights** tab
 1. Select the ** User Paths** tab
 
-![switching the event type](../../images/docs/user-guides/paths/switching-type.png)
+![switching the event type](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/switching-type.png)
 
 You've now created your first paths insight!
 
-![example paths](../../images/docs/user-guides/paths/example.png)
+![example paths](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example.png)
 
 Depending on the amount of data you've ingesting into PostHog, the graph you see may be quite complex, so we'd highly recommend continuing to the next section to get a better idea of how to understand and customize your paths visualization.
 
@@ -77,7 +76,7 @@ Now that we know the basic concepts in a path, let's take a look at some simple 
 The basic concept of a path is most easily seen by setting the number of steps above the visualization to only 2.
 For simplicity, we'll also only be thinking about paths of Page views, but the thought process for custom events is exactly the same.
 
-![path visualization with only 2 steps](../../images/docs/user-guides/paths/2-step.png)
+![path visualization with only 2 steps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/2-step.png)
 
 Here, I've set the [start point](#changing-the-start-and-end-point) to be the Docs homepage for PostHog, and I've [limited the number of paths](#maximum-number-of-paths) to only 5.
 With this visualization, you can see that the core idea of paths is very simple: Each step along the path is a page that the user viewed, and the horizontal bars correspond to a user navigating from one page to another.
@@ -87,7 +86,7 @@ The numbers next to the paths correspond to how many distinct users passed throu
 
 Now that we have an idea of how the 2-step path works, let's add a 3rd step so we can learn about drop off. As a disclaimer, I've filtered out a bunch of other user paths here to make things easier to understand.
 
-![path visualization with only 3 steps](../../images/docs/user-guides/paths/3-step.png)
+![path visualization with only 3 steps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/3-step.png)
 
 As you can see, we now have 3 steps in our journey, starting with a user viewing the `/docs/` page, and then continuing on to whatever page that user viewed next, with the 3rd step being wherever the user ended up.
 In this case, some users navigated directly to the `/docs/integrate` page, and as a result there is no intermediate step displayed.
@@ -102,7 +101,7 @@ We can also now see a red portion of our flow, which corresponds to the number o
 
 Now that we've identified where users are dropping off, let's dig in deeper on this specific step. First, we'll hover over the name of the step to some more metrics.
 
-![path visualization with only 3 steps](../../images/docs/user-guides/paths/dropoff.png)
+![path visualization with only 3 steps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/dropoff.png)
 
 This will give us the exact conversion rate of this step, as well as the average time it took users to get here from the previous step. In addition to this information, we can also click on the ••• icon to bring up a menu with a number of useful actions for this step.
 
@@ -119,7 +118,7 @@ This will give us the exact conversion rate of this step, as well as the average
 One of the most powerful features of the Paths insight is the ability to see all the users who passed through a specific step.
 To do this, we simply click on the blue number next to the name of step which shows how many users arrived at this point, which will bring up a list of all of these users.
 
-![list of users who reached a step](../../images/docs/user-guides/paths/users.png)
+![list of users who reached a step](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/users.png)
 
 Next to each user, you can click on the Watch recording button to see a recording of the session where they passed through this step.
 In addition to this, if you hover over the name of a step to bring up the menu we saw in the last section, you'll see you can also click on the numbers showing how many users continued and how many users dropped off to see recordings from each outcome.
@@ -201,7 +200,7 @@ Start and end points can be set to a number of different options:
 
 Exclusions allow you to remove events entirely from being displayed in a path, and can be added for Pageview URLs, Screens, Custom events, and Wildcards.
 
-![excluding two events](../../images/docs/user-guides/paths/exclusions.png)
+![excluding two events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/exclusions.png)
 
 ### Advanced options
 
@@ -233,7 +232,7 @@ In this sense, these path cleaning rules are an advanced version of [Wildcard gr
 
 Path cleaning rules can either be added directly to an insight, or you can configure global path cleaning rules by clicking the 'Configure Project Rules' button.
 
-![create path cleaning dialogue](../../images/docs/user-guides/paths/path-cleaning.png)
+![create path cleaning dialogue](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/path-cleaning.png)
 
 To give a better idea of how path cleaning rules work, let's take the example from the image above.
 

@@ -1,12 +1,14 @@
 ---
 date: 2023-01-13
-title: "In-depth: ClickHouse vs Druid"
+title: 'In-depth: ClickHouse vs Druid'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mathew-pregasen"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+author:
+  - mathew-pregasen
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -18,7 +20,7 @@ Contrary to what the names might suggest, ClickHouse isn’t an TikTok influence
 
 OLAP databases store data in a columnar format that is primed for aggregations, unlike online _transaction_ processing (OLTP) ones like mySQL (see below). But, while ClickHouse and Druid solve a fundamentally similar problem, they do so via dramatically different approaches. 
 
-![OLAP vs OLTP](../images/blog/clickhouse-vs-postgres/rows-vs-columns.png)  
+![OLAP vs OLTP](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/rows-vs-columns.png)  
 
 Products with massive volumes of data, like business intelligence tools, stock market trading books, and apps with lots of charts and graphs, can benefit from using  OLAP databases. 
 
@@ -48,7 +50,7 @@ ClickHouse's cornerstone principle is that ClickHouse should do the work for you
 
 Here's what that looks like in practice:
 
-![ClickHouse architecture diagram](../images/blog/clickhouse-vs-druid/clickhouse-architecture.png)  
+![ClickHouse architecture diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-druid/clickhouse-architecture.png)  
 
 What is a materialized view? A materialized view, unlike a normal view, is a separate table of data generated at a specific time from the base tables. This makes running queries on data in materialized views more efficient (if set up correctly). Materialized views don't need to be re-queried before being queried from, unlike normal views.
 
@@ -69,7 +71,7 @@ Druid is all about modularity. Druid separates the query, data, and storage node
 
 Let’s take a look at a Druid setup: 
 
-![Druid architecture diagram](../images/blog/clickhouse-vs-druid/druid-architecture.png)  
+![Druid architecture diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-druid/druid-architecture.png)  
 
 Druid is built for massive applications with unique data streaming needs. For instance, imagine an application that needs to take the last stock trade into account before returning a value. 
 

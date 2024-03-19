@@ -96,7 +96,7 @@ export const DocsIndex = () => {
                         <figure className="m-0">
                             <StaticImage
                                 objectFit="contain"
-                                src="../../../contents/images/adventure-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
                                 alt="This hog knows where he's headed"
                                 width={342}
                                 placeholder="blurred"

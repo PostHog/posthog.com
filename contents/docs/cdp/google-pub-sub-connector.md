@@ -1,9 +1,10 @@
 ---
 title: Google Pub/Sub
-github: https://github.com/vendasta/pubsub-plugin
-thumbnail: ../../cdp/thumbnails/pub-sub-export.png
+github: 'https://github.com/vendasta/pubsub-plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/pub-sub-export.png
 tags:
-    - pub-sub
+  - pub-sub
 ---
 
 > This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!

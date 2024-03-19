@@ -2,9 +2,13 @@
 title: Creating actions using CSS selectors
 sidebar: Docs
 showTitle: true
-author: ['igor-kotua']
+author:
+  - igor-kotua
 date: 2022-07-06
-tags: ["actions", "toolbar", 'product analytics']
+tags:
+  - actions
+  - toolbar
+  - product analytics
 ---
 
 _Estimated reading time: 7 minutes_ ☕
@@ -129,19 +133,19 @@ There are two ways to do it - through the Toolbar and Data Management section.
 ### The toolbar
 Go to your PostHog instance and select `Launch toolbar` in the bottom of the sidebar.
 
-![Toolbar Location](../images/tutorials/css-selectors-for-actions/toolbar-location.mp4)
+![Toolbar Location](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/toolbar-location.mp4)
 
 Then, press the `Open with Toolbar` button, which will take you to your website. You can read more about working with the toolbar [here](/manual/toolbar).
 
 After your website is open, you should see a PostHog toolbar:
 
-![Toolbar In Action](../images/tutorials/css-selectors-for-actions/toolbar_in_action.png)
+![Toolbar In Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/toolbar_in_action.png)
 
 The best option to start creating actions with CSS selectors is to use the `Inspect` option in the toolbar and then click on some element on the page. You should see the menu with a `Create a new action` button in the bottom. Press it and you will see the `Actions` menu with automatically generated CSS selector in the `Selector` section. Feel free to start from there and change it!
 
 Alternatively, you can go to the `Actions` option in the toolbar, select `New action` and then press `Select Element`. You should get the `Actions` menu:
 
-![Action Menu](../images/tutorials/css-selectors-for-actions/create_action.png).
+![Action Menu](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/create_action.png).
 
 Tick the `Selector` checkbox and you are ready to create CSS selectors!
 
@@ -149,17 +153,17 @@ Tick the `Selector` checkbox and you are ready to create CSS selectors!
 
 Another way to create CSS selectors is to go to the [Data Management](https://us.posthog.com/data-management/events) tab, which is located in the sidebar of your PostHog instance.
 
-![Data Management Location](../images/tutorials/css-selectors-for-actions/data_management_location.png).
+![Data Management Location](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/data_management_location.png).
 
 On the `Data Management` page, select the `Actions` tab. Then press the `New Action` button. You should see the menu like this:
 
-![Create New Action Data Management](../images/tutorials/css-selectors-for-actions/create_new_action_data_management.png).
+![Create New Action Data Management](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/create_new_action_data_management.png).
 
 Now you can select the `Inspect element` option, but it will eventually bring you back to the `Toolbar` which we covered earlier. So, instead we will select `From event or pageview` option.
 
 Finaly you should see a new page with a `Match Group` menu open. Choose the `Autocapture` option.
 
-![Create New Action Data Management](../images/tutorials/css-selectors-for-actions/match_groups.png).
+![Create New Action Data Management](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/match_groups.png).
 
 Scroll down a bit and you will find the `HTML selector matches` section. Here you can define your CSS selectors.
 

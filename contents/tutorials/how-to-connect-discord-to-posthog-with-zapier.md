@@ -4,8 +4,14 @@ sidebar: Docs
 showTitle: true
 featuredTutorial: false
 date: 2022-05-04
-author: ['joe-martin']
-tags: ['apps', 'zapier', 'toolbar', 'subscriptions', 'cdp']
+author:
+  - joe-martin
+tags:
+  - apps
+  - zapier
+  - toolbar
+  - subscriptions
+  - cdp
 ---
 
 - *Level:* Easy 🦔
@@ -21,7 +27,7 @@ First, we need to create the action which we want to use as a trigger in PostHog
 
 In this example we’ll use the [toolbar](/docs/user-guides/toolbar) to create a simple action based on a form submission on [PostHog’s Contact Sales form](https://posthog.com/contact-sales), but you can also check [the Actions docs](/docs/user-guides/actions) for information about creating custom actions, or understanding how actions differ from events.
 
-![Create action](../images/tutorials/discord/discord-create-action.png)
+![Create action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/discord/discord-create-action.png)
 
 Start by opening the toolbar by clicking the floating PostHog logo, then select ‘Inspect’ to view all actionable elements on the current page via a blue overlay. Find the item you want to use as a trigger for your Slack notification — in this case the ‘Submit Form’ button at the bottom of the page. 
 
@@ -29,7 +35,7 @@ The Inspect view will give you some information about the selected element, incl
 
 If an action doesn’t exist, you can create one by simply selecting ‘Create a new action’, which opens a form where you can provide additional information. In this example, all we need to do is give the action a descriptive name — ‘_Submitted Contact Sales Form_’.
 
-![Name action](../images/tutorials/discord/discord-name-action.png)
+![Name action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/discord/discord-name-action.png)
 
 ## Step 2: Connect Zapier to Discord and PostHog
 

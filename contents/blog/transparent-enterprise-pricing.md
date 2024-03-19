@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/hog-in-a-room-generic.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog-in-a-room-generic.jpg
 featuredImageType: full
 author:
   - simon-fisher
@@ -54,13 +55,13 @@ Self-service, meanwhile, makes it easy for customers to get up and running as qu
 
 That's why we made our core paid plans totally self-serve and free up to 1 million events per month, with the "per event" price decreasing as usage increases, as you can see below.
 
-![PostHog pricing calc](../images/blog/enterprise-pricing-blog/pricing-calc.png)
+![PostHog pricing calc](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/enterprise-pricing-blog/pricing-calc.png)
 
 This model has worked incredibly well for us. 
 
 In the last six months, we've seen 20% month over month growth on our paid plans – an 8.9x increase per year. 
 
-![PostHog's revenue going sharply up and to the right](../images/blog/pricing-lesson/revenue-pricing.png)
+![PostHog's revenue going sharply up and to the right](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pricing-lesson/revenue-pricing.png)
 
 We achieved this without cold emailing companies, or chasing specific customers. We just make it super easy for companies to try us and pay us, and proactively help new and potential customers get what they need from PostHog.
 

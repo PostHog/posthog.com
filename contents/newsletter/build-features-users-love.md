@@ -1,15 +1,17 @@
 ---
-title: "How Spotify (and PostHog) build successful features"
+title: How Spotify (and PostHog) build successful features
 date: 2023-05-17
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/prodhog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/prodhog.png
 featuredImageType: full
 tags:
   - Product engineers
   - Engineering
 crosspost:
   - Product engineers
-  - Blog  
+  - Blog
 ---
 
 What is the meaning of life?
@@ -33,7 +35,7 @@ At PostHog, a new feature is successful if it:
 
 These are simple principles. The real secret lies in the process, which we can divide into five steps: Decide, Build, Test, Launch, Repeat.
 
-![New feature process](../images/blog/build-features-users-love/new-features.jpeg)
+![New feature process](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/build-features-users-love/new-features.jpeg)
 
 Here’s that process in more detail:
 
@@ -80,7 +82,7 @@ They iterated several versions internally, using their own experience to guide t
 ### 3. Testing internally
 After a few weeks of iteration, it was rolled out to employees, who loved it. The reach, depth, and retention metrics showed this, as did the qualitative feedback.
 
-![Spotify metrics](../images/blog/build-features-users-love/spotify.jpeg)
+![Spotify metrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/build-features-users-love/spotify.jpeg)
 
 Not all companies can generate as much usable internal test data, but Spotify has the scale to generate lots of reliable usage insights before showing new features to customers.
 

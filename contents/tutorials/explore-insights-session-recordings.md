@@ -2,10 +2,14 @@
 title: How to use session replays to get a deeper understanding of user behavior
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2022-12-23
-tags: ['insights', 'session replay']
---- 
+tags:
+  - insights
+  - session replay
+---
+ 
 
 One of the biggest benefits of PostHog is the connections from all your product data and tools being in one place. You don’t need to link together multiple products, find ways to connect the right data, and hop between them to create insights. PostHog builds in these links. For example, going from product data to visualizations to session replays is literally three clicks.
 
@@ -19,11 +23,11 @@ When viewing a funnel, it is easy to lose a sense of what is happening in realit
 
 Once you’ve created a funnel insight, click any of the “persons” numbers in the visualization. These are either beside “completed step” or “dropped off.” Clicking them gives you a list of users and their related sessions to dive into the details.
 
-![Watching funnels](../images/tutorials/explore-insights-session-recordings/funnel.png)
+![Watching funnels](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/explore-insights-session-recordings/funnel.png)
 
 When viewing a session, you can click the “Only show matching events” toggle to filter the session’s events by the ones connected to your funnel’s events. This makes it quick to view the relevant funnel events.
 
-![Only matching](../images/tutorials/explore-insights-session-recordings/only-matching.png)
+![Only matching](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/explore-insights-session-recordings/only-matching.png)
 
 For example, you can use a signup funnel insight to both analyze the ongoing conversion from pageview to signup, as well as the details of where users get stuck via recordings. This should enable you to get an idea of the problem areas in the funnel, as well as specific ways to improve it.
 
@@ -35,7 +39,7 @@ Below your created funnel, you get a set of correlated events and another for pr
 
 > **Tip:** To only see success or drop off correlated events or properties, click the selectors in the top right of the component.
 
-![Correlated events](../images/tutorials/explore-insights-session-recordings/correlated.png)
+![Correlated events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/explore-insights-session-recordings/correlated.png)
 
 Viewing a session replay for a correlated event or property gives a fuller picture of the importance of that correlation. It isn’t just an event or property, but an overall behavior leading to different results.
 
@@ -47,7 +51,7 @@ At every step of the path, you can click the number next to the step, “continu
 
 In a recording, you can see the specifics of their journey, including the parts relevant to the path. Use the “Only show matching events” toggle to filter for events related to the stage of the path you clicked.
 
-![Path](../images/tutorials/explore-insights-session-recordings/path.png)
+![Path](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/explore-insights-session-recordings/path.png)
 
 ## Find and analyze outliers in trend graphs
 
@@ -61,11 +65,11 @@ After creating one of these in insights, you can click the graph to view a list 
 
 For example, you can create a trend for 95th percentile session duration by creating a series with pageview events, and property value (95th percentile), then make sure to choose “Session duration” under “Sessions” as your property.
 
-![95th percentile session duration setup](../images/tutorials/explore-insights-session-recordings/extreme.png)
+![95th percentile session duration setup](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/explore-insights-session-recordings/extreme.png)
 
 Once created, click any of the days in the graph, and you get a list of people with a 95th percentile session duration that day. For any of them, click the recording to see what they were doing that whole time.
 
-![Extreme sessions](../images/tutorials/explore-insights-session-recordings/extreme-sessions.png)
+![Extreme sessions](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/explore-insights-session-recordings/extreme-sessions.png)
 
 > **Tip:** If you are watching long session replays, make sure to enable “Skip inactivity” (the mouse icon on the bottom right of the player). You can also increase the speed of playback using the “1x” button.
 
