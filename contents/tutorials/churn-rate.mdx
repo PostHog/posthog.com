@@ -37,7 +37,7 @@ Better yet, we can visualize and refine this calculation. PostHog has tools, lik
 
 ## Step 2: Visualizing churn rate
 
-To start visualizing churn rate, you can set up a retention funnel for users completing an action or event, then see how many continue their usage. The action or event you choose could be something like an autocapture of a pageview, an event capture you’ve written into your code or a combination of events (an action) that define feature usage. For us, we’ll set up a retention chart for unique users who completed the event `downloaded_file` over the last 8 weeks. 
+To start visualizing churn rate, you can set up a retention funnel for users completing an action or event, then see how many continue their usage. The action or event you choose could be something like an autocapture of a pageview, an event capture you’ve written into your code or a combination of events (an action) that define feature usage. For us, we’ll set up a retention chart for unique users who completed the event `downloaded_file` over the last 14 days. 
 
 <ProductScreenshot
     imageLight = {retentionChartLight} 
@@ -45,7 +45,6 @@ To start visualizing churn rate, you can set up a retention funnel for users com
     classes="rounded"
     alt="Retention chart"
 />
-
 
 We can calculate our weekly churn and total churn by comparing our initial cohort size with the percentage of users remaining. For example, if we care about weekly churn, we can compare Week 0 and Week 1. If we care about churn across the entire period, we can compare Week 0 and Week 8. To learn more about retention charts, check out our [product manual](/manual/retention).
 

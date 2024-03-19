@@ -17,6 +17,8 @@ import dataManagementLight from '../images/features/data-management/data-managem
 import dataManagementDark from '../images/features/data-management/data-management-dark-mode.png'
 import matchGroupsLight from '../images/tutorials/css-selectors-for-actions/match-groups-light-mode.png'
 import matchGroupsDark from '../images/tutorials/css-selectors-for-actions/match-groups-dark-mode.png'
+import toolbarLight from '../images/tutorials/css-selectors-for-actions/toolbar-light-mode.png'
+import toolbarDark from '../images/tutorials/css-selectors-for-actions/toolbar-dark-mode.png'
 
 
 _Estimated reading time: 7 minutes_ ☕
@@ -153,7 +155,12 @@ Then, press the `Open with Toolbar` button, which will take you to your website.
 
 After your website is open, you should see a PostHog toolbar:
 
-![Toolbar In Action](../docs/toolbar/toolbar.png)
+<ProductScreenshot
+    imageLight = {toolbarLight}
+    imageDark = {toolbarDark}
+    alt="Toolbar in action" 
+    classes = {"rounded"}
+/>
 
 The best option to start creating actions with CSS selectors is to use the `Inspect` option in the toolbar and then click on some element on the page. You should see the menu with a `Create a new action` button in the bottom. Press it and you will see the `Actions` menu with automatically generated CSS selector in the `Selector` section. Feel free to start from there and change it!
 
