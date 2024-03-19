@@ -7,10 +7,11 @@ import { ShopifyProduct } from './types'
 type ProductPanelsProps = {
     className?: string
     product: ShopifyProduct | null
+    updateURL: (product: ShopifyProduct) => void
 }
 
 export function ProductPanels(props: ProductPanelsProps): React.ReactElement | null {
-    const { className, product } = props
+    const { className, product, updateURL } = props
     const [isCart, setIsCart] = useState<boolean>(false)
 
     function handle() {
@@ -33,7 +34,7 @@ export function ProductPanels(props: ProductPanelsProps): React.ReactElement | n
                     className
                 )}
             >
-                <ProductPanel product={product} onClick={handle} setIsCart={setIsCart} />
+                <ProductPanel product={product} onClick={handle} setIsCart={setIsCart} updateURL={updateURL} />
                 <Cart className="h-full overflow-y-scroll" />
             </div>
         </div>

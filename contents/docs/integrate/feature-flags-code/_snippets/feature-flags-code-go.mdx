@@ -49,19 +49,11 @@ client.Enqueue(posthog.Capture{
 })
 ```
 
-### Method 2: Set `SendFeatureFlags` to `true`
+#### Method 2: Set `SendFeatureFlags` to `true`
 
-The `capture()` method has an optional argument `SendFeatureFlags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
+import GoSetSendFeatureFlagsTrue from "./feature-flags-code-go-set-send-feature-flags-to-true.mdx" 
 
-Note that by doing this, PostHog will make an additional request to fetch feature flag information before capturing the event. So this method is only recommended if you don't mind the extra API call and delay.
-
-```go
-client.Enqueue(posthog.Capture{
-  DistinctId: "distinct_id_of_your_user",
-  Event:      "event_name",
-  SendFeatureFlags: true,
-})
-```
+<GoSetSendFeatureFlagsTrue />
 
 ### Fetching all flags for a user
 
@@ -100,3 +92,18 @@ isMyFlagEnabled, err := client.IsFeatureEnabled(
 import GoOverrideServerProperties from './override-server-properties/go.mdx'
 
 <GoOverrideServerProperties />
+
+### Request timeout
+
+You can configure the `FeatureFlagRequestTimeout` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+
+```go
+ client, _ := posthog.NewWithConfig(
+   os.Getenv("<ph_project_api_key>"),
+   posthog.Config{
+      PersonalApiKey:            "your personal API key", // Required for feature flags
+      Endpoint:                  "<ph_instance_address>",
+      FeatureFlagRequestTimeout: 3 // Time in seconds. Default is 3.
+   },
+)
+```

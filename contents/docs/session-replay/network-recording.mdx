@@ -35,6 +35,8 @@ When request capture is enabled you can also enabled payload and body capture, t
 
 ## Sensitive information
 
+We automatically scrub some sensitive information from network headers, but your request or response payloads could contain sensitive data, you should provide a function to mask the captured data when you initialize PostHog.
+
 We have a deny-list of headers that we will never capture.
 
 * authorization
@@ -51,7 +53,23 @@ We have a deny-list of headers that we will never capture.
 * x-csrftoken
 * x-xsrf-token
 
-But you can also register a callback to inspect and redact each network request, like so:
+And we redact bodies if we believe they might contain
+
+* credit card numbers
+* social security numbers
+* password
+* secret
+* passwd
+* api_key
+* apikey
+* auth
+* credentials
+* mysql_pwd
+* privatekey
+* private_key
+* token
+
+To register a callback to inspect and redact each network request:
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
@@ -90,6 +108,10 @@ PostHog has to wrap `fetch` and `xhr` in order to capture network requests. If y
 ## PostHog truncated the request or response body
 
 In order to maintain service levels we truncate all request and response bodies at 1MB
+
+## A network request says it was redacted
+
+We are cautious in what we capture. If you think we're being too cautious let us know!
 
 ## I want to query the network performance data I capture
 

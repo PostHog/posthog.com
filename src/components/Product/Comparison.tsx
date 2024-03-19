@@ -19,6 +19,9 @@ const companies = {
     FullStory: {
         comparisonURL: '/blog/posthog-vs-fullstory',
     },
+    GA4: {
+        comparisonURL: '/blog/posthog-vs-ga4',
+    },
     Hotjar: {
         comparisonURL: '/blog/posthog-vs-hotjar',
     },
