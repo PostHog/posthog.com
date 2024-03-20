@@ -1,10 +1,12 @@
 ---
 title: How to set up a public beta program using early access management
 date: 2023-07-28
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 Public betas are a way to get new features into the hands of users and get valuable feedback and analytics. In this tutorial, we show you how to add a basic public beta program to your app with PostHog’s [early access management feature](/docs/feature-flags/early-access-feature-management).
@@ -99,7 +101,7 @@ export default function Home() {
 
 When we run `npm run dev` again and go to our localhost, we see the old documentation because we haven’t joined the beta yet.
 
-![App without beta](../images/tutorials/public-beta-program/app.png)
+![App without beta](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/public-beta-program/app.png)
 
 ## Adding our public beta opt-in to our app
 
@@ -133,7 +135,7 @@ export default function Home() {
 
 When you head back to your browser and click the "Public Betas" button, a modal pops up allowing users to opt into the "New docs" beta. Once they do this, they see the new text we added behind the flag earlier.
 
-![Beta modal open](../images/tutorials/public-beta-program/site-app.png)
+![Beta modal open](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/public-beta-program/site-app.png)
 
 This is a simple example of a public beta you can set up. At PostHog, we’ve used early access management to run public betas for full features like surveys, notebooks, and our data warehouse. 
 
@@ -229,7 +231,7 @@ return (
 
 This displays the active and inactive betas (you can create and launch another inactive beta feature to show that it works if you want).
 
-![Betas page](../images/tutorials/public-beta-program/betas.png)
+![Betas page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/public-beta-program/betas.png)
 
 The last piece is adding buttons to let users opt-in and out. To do this, we create a function that checks if the related flag key is in the `activeBetas` state. 
 

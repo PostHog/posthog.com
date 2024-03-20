@@ -1,5 +1,5 @@
 ---
-title: "How to run A/B tests in iOS"
+title: How to run A/B tests in iOS
 date: 2023-11-16
 author: ["lior-neu-ner"]
 tags: ['experimentation']
@@ -77,7 +77,7 @@ struct FeatureScreenView: View {
 
 Our basic set up is now complete. Build and run your app to test that it's working.
 
-![Basic setup of the iOS app](../images/tutorials/ios-ab-tests/app-setup.mp4)
+![Basic setup of the iOS app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/app-setup.mp4)
 
 ## Adding PostHog to your iOS app
 
@@ -85,7 +85,7 @@ First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency
 
 Note that for this tutorial we use version `3.1.0` of the SDK.
 
-![Add PostHog from Swift Package Manager](../images/tutorials/ios-ab-tests/swift-npm.png)
+![Add PostHog from Swift Package Manager](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/swift-npm.png)
 
 Next, configure your PostHog instance in your `App.swift` struct initializer:
 
@@ -130,7 +130,7 @@ Button("Click Me!") {
 
 To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [activity tab](https://app.posthog.com/events).
 
-![iOS events captured](../images/tutorials/ios-ab-tests/event-captured.png)
+![iOS events captured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/event-captured.png)
 
 ## Create an A/B test in PostHog
 
@@ -145,7 +145,7 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![Experiment setup in PostHog](../images/tutorials/ios-ab-tests/experiment-setup.png)
+![Experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/experiment-setup.png)
 
 ## Implement the A/B test in Xcode
 

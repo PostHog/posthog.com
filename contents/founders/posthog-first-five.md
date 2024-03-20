@@ -3,21 +3,22 @@ date: 2022-08-16
 title: What we learned about hiring from our first five employees
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-first-five/first-five.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
 tags:
   - Founders
   - People
   - Culture
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Our CEO and co-founder, James Hawkins, [recently joined Y Combinator](https://www.youtube.com/watch?v=gF1NGUsjxLU) to talk about the first five hires PostHog ever made, how we made them, and why. This is the story behind each hire, and the lessons we learned along the way.
 
 ## 1. Marius Andra
 
-![Marius](../images/blog/posthog-first-five/marius.png)
+![Marius](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/marius.png)
 
 James and co-founder Tim (CTO) were frantically trying to hit their launch deadline, but there was a problem. They wanted libraries for mobile, desktop, and other programming languages, but they didn't have capacity to complete the work themselves.
 
@@ -31,7 +32,7 @@ And that's how Marius become employee no.1 at PostHog.
 
 ## 2. Eric Duong
 
-![Eric](../images/blog/posthog-first-five/eric.png)
+![Eric](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/eric.png)
 
 After PostHog's seed round, James and Tim decided PostHog would be a remote company. They then began outlining our now famous [public company handbook](/handbook/).
 
@@ -53,7 +54,7 @@ James: "He was supposed to start on a Monday, but over the weekend he'd already 
 
 ## 3. James Greenhill
 
-![James](../images/blog/posthog-first-five/james.png)
+![James](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/james.png)
 
 In the early days, CEO James would check out people who starred the repo and sometimes get in touch to gather feedback. He saw James G was a data engineer at Uber and this piqued his interest.
 
@@ -65,15 +66,15 @@ James: "It was obvious, we were learning tons from him around how to make the pl
 
 ## 4. Lottie Coxon
 
-![Lottie](../images/blog/posthog-first-five/lottie.png)
+![Lottie](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/lottie.png)
 
 Lottie is a graphic designer, and PostHog's first non-engineering hire. Why did we hire Lottie? Well, there's a short version and a long version. Here's the short version...
 
-![original posthog logo](../images/blog/posthog-first-five/old-logo.png)
+![original posthog logo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/old-logo.png)
 
 Believe it or not, this is PostHog's original logo/mascot – lovingly dubbed "hairy thumb". Do you really need the long version? Here it is, anyway.
 
-![logo meme](../images/blog/posthog-first-five/logo-meme.png)
+![logo meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/logo-meme.png)
 
 It all started with that damned smile... or when James and Tim considered what would make a developer want to try PostHog, or put them off. Good documentation, and evidence of people using it were important, but they decided good design and a unique brand would be important too.
 
@@ -87,7 +88,7 @@ Like previous hires, Lottie did some paid contract work first and immediately im
 
 ## 5. Michael Matloka
 
-![Michael](../images/blog/posthog-first-five/michael.png)
+![Michael](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/michael.png)
 
 Michael found PostHog via a "Who's hiring?" thread on Hacker News when he was an 18-year-old still at school. Because our product is built for developers, it's a great place for us to hire. Our open source approach, and transparent processes, help us stand out.
 

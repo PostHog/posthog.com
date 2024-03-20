@@ -1,15 +1,17 @@
 ---
-title: Guardrail metrics for A/B tests, explained
+title: 'Guardrail metrics for A/B tests, explained'
 date: 2023-10-16
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/green-blog-image.jpg
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 tags:
- - Product engineers
- - AB testing
- - Growth engineering
+  - Product engineers
+  - AB testing
+  - Growth engineering
 crosspost:
-  - Blog 
+  - Blog
 ---
 
 ## What are guardrail metrics?
@@ -44,7 +46,7 @@ A team responsible for increasing bookings ran a test where the house rules were
 
 When an A/B test triggers a guardrail metric at Airbnb, it's immediately escalated to a group of stakeholders who decide whether to continue the test or not.
 
-![Airbnb guardrail process](../images/blog/guardrail-metrics/trigger.png)
+![Airbnb guardrail process](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/guardrail-metrics/trigger.png)
 
 Out of the thousands of experiments that run at Airbnb each month, guardrails trigger ~25 for review. 80% of these rollout after stakeholder discussion. They decide to pause ~5 experiments per month, which prevents 5 potentially major impacts to critical metrics and product areas.
 
@@ -92,7 +94,7 @@ Now that you know all about guardrail metrics, it’s time to implement them in 
 
 5. Guardrail metrics display alongside your goal metrics on the experiment detail screen.
 
-![Guardrail metrics in PostHog](../images/blog/guardrail-metrics/guardrail.png)
+![Guardrail metrics in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/guardrail-metrics/guardrail.png)
 
 Another way to track guardrail metrics is by creating them as an insight or dashboard. This enables you to completely customize your guardrail metrics as well as reuse them across experiments. You can then send them to your email or Slack with a [subscription](/docs/product-analytics/subscriptions).
 

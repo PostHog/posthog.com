@@ -1,15 +1,19 @@
 ---
-title: How to set up Bubble analytics, session replays, and more
+title: 'How to set up Bubble analytics, session replays, and more'
 date: 2024-01-10
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['session replay', 'feature flags', 'product analytics']
+tags:
+  - session replay
+  - feature flags
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import ImgAutocaptureLight from '../images/tutorials/bubble-analytics/autocapture-light.png'
-import ImgAutocaptureDark from '../images/tutorials/bubble-analytics/autocapture-dark.png'
+export const ImgAutocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-light.png"
+export const ImgAutocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-dark.png"
 
 [Bubble](https://bubble.io/) is a popular no-code site builder that makes it easy to design a high-quality websites and apps. Combined with tools like [analytics](/product-analytics), [session replays](/session-replay), and [feature flags](/feature-flags), you can build the best site possible.
 
@@ -30,7 +34,7 @@ With the snippet copied, go to your Bubble site settings by clicking on the icon
 
 Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in the **Script/meta tags in header** section. Then, deploy your site to live.
 
-![How to add PostHog to Bubble](../images/tutorials/bubble-ab-tests/adding-posthog.mp4)
+![How to add PostHog to Bubble](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/adding-posthog.mp4)
 
 PostHog will now begin [automatically capturing](/docs/product-analytics/autocapture) events like pageviews, button clicks, and form inputs on your site.
 
@@ -49,7 +53,7 @@ To do so, you first need to install the [Toolbox plugin](https://bubble.io/plugi
 
 In the menu that appears, click on **Plugins** and then **Run javascript**. This will open a new menu where you can add custom JavaScript code.
 
-![How to add custom javascript in Bubble](../images/tutorials/bubble-analytics/bubble-custom-code.mp4)
+![How to add custom javascript in Bubble](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/bubble-custom-code.mp4)
 
 To capture PostHog events, add the following code under the **Script** heading:
 
@@ -67,7 +71,7 @@ posthog.capture('your_event_name', {
 
 where `param1` is set in the "Run javascript" menu:
 
-![Set parameters in Bubble's Run Javascript menu](../images/tutorials/bubble-analytics/bubble-toolbox-params.png)
+![Set parameters in Bubble's Run Javascript menu](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/bubble-toolbox-params.png)
 
 Finally, deploy your changes to live to begin capturing your custom event.
 
@@ -79,7 +83,7 @@ To enable it, go the [Session replay tab](https://us.posthog.com/replay) in Post
 
 Once enabled, user sessions will begin to appear in the [Recent recordings tab](https://us.posthog.com/replay/recent).
 
-![How to enable session replays in PostHog](../images/tutorials/bubble-analytics/bubble-record-sessions.mp4)
+![How to enable session replays in PostHog](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/bubble-record-sessions.mp4)
 
 ## Customizing components with feature flags
 
@@ -105,7 +109,7 @@ if (signUpButton) {
 
 When we save this and publish the site again, the button is still there. When we go back to PostHog and disable the `show-signup-button` flag, the button disappears.
 
-![Feature flags in bubble](../images/tutorials/bubble-analytics/bubble-feature-flags.png)
+![Feature flags in bubble](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/bubble-feature-flags.png)
 
 ## Further reading
 

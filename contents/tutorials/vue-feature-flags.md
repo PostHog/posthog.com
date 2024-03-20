@@ -1,17 +1,19 @@
 ---
 title: How to set up feature flags in Vue
 date: 2024-01-19
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/vue-feature-flags/events-light.png'
-import EventsDark from '../images/tutorials/vue-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/vue-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/vue-feature-flags/create-flag-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you release features and conditionally show content. This tutorial shows you how integrate them in your Vue.js app using PostHog. 
 
@@ -46,7 +48,7 @@ export default {
 
 Run `npm run serve` to start your app.
 
-![Basic Vue app](../images/tutorials/vue-feature-flags/basic-app.png)
+![Basic Vue app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/basic-app.png)
 
 ## Adding PostHog
 
@@ -158,7 +160,7 @@ export default {
 
 When you run your app now, you should see the updated text.
 
-![New app after adding the flag](../images/tutorials/vue-feature-flags/flag-enabled-in-app.png)
+![New app after adding the flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/flag-enabled-in-app.png)
 
 ### Bootstrapping feature flags
 

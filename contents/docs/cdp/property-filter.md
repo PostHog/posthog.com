@@ -1,10 +1,11 @@
 ---
 title: Property Filter
-github: https://github.com/witty-works/posthog-property-filter-plugin
-installUrl: https://app.posthog.com/project/apps?name=Property%20Filter
-thumbnail: ../../cdp/thumbnails/property-filter.png
+github: 'https://github.com/witty-works/posthog-property-filter-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Property%20Filter'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/property-filter.png
 tags:
-    - property-filter
+  - property-filter
 ---
 
 This app sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use.

@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 category: General
 tags:
@@ -39,7 +40,7 @@ These are the broad principles, but **please consult an expert** before making a
 
 ### 1. PostHog
 
-![PostHog](../images/screenshots/ab-testing.png)
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
 
 #### Features
 
@@ -60,7 +61,7 @@ PostHog offers a BAA on its Teams plan, which starts at $450 and includes [gener
 
 ### 2. Kameleoon
 
-![kameleoon](../images/blog/hipaa-compliant-ab-testing/kameleoon.png)
+![kameleoon](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/kameleoon.png)
 
 #### Features
 
@@ -81,7 +82,7 @@ Kameleoon doesn't publish pricing publicly, but conversion optimization consulta
 
 ### 3. VWO
 
-![vwo testing](../images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
+![vwo testing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
 
 #### Features
 
@@ -102,7 +103,7 @@ Unlike most tools in this list, VWO charges separately for website and mobile ap
 
 ### 4. LaunchDarkly
 
-![LaunchDarkly mobile app A/B tests](../images/blog/best-mobile-app-ab-testing-tools/launch-darkly.png)
+![LaunchDarkly mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/launch-darkly.png)
 
 #### Features
 

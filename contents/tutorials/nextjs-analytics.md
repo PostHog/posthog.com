@@ -1,12 +1,17 @@
 ---
-title: How to set up Next.js analytics, feature flags, and more
+title: 'How to set up Next.js analytics, feature flags, and more'
 date: 2023-02-20
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
 featuredTutorial: true
-featuredVideo: https://www.youtube-nocookie.com/embed/nSBjr1Sz18o
-tags: ["configuration", "feature flags", "persons", "events"]
+featuredVideo: 'https://www.youtube-nocookie.com/embed/nSBjr1Sz18o'
+tags:
+  - configuration
+  - feature flags
+  - persons
+  - events
 ---
 
 Next.js is a popular web framework built on React. It provides optimizations and abstractions to help developers build fast and performant apps and sites.
@@ -40,7 +45,7 @@ npm run dev
 
 At your [localhost](http://localhost:3000/), you should see a basic webpage like this:
 
-![Next](../images/tutorials/nextjs-analytics/next.png)
+![Next](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/next.png)
 
 ## Adding blog functionality to our Next.js app
 
@@ -115,7 +120,7 @@ export async function getStaticProps() {
 
 This gives us a basic page that looks like this:
 
-![Index](../images/tutorials/nextjs-analytics/index.png)
+![Index](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/index.png)
 
 We also need the pages for the posts. In the `pages` folder, create another folder named `posts` and create a file named `[id].js`. Next.js automatically uses this to create routes to our posts.
 
@@ -164,7 +169,7 @@ export async function getStaticProps({ params }) {
 
 Going back to our app, clicking on the links now brings us to a page that looks like this:
 
-![Post](../images/tutorials/nextjs-analytics/post.png)
+![Post](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/post.png)
 
 ## Adding authentication
 
@@ -196,7 +201,7 @@ export default NextAuth({
 
 Next, get these details from GitHub by going to [developer settings](https://github.com/settings/developers). Create a new OAuth app and get the client ID and client secret. Set the homepage URL to `http://localhost:3000` and the authorization callback URL to `http://localhost:3000/api/auth/callback/github`.
 
-![GitHub](../images/tutorials/nextjs-analytics/github.png)
+![GitHub](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/github.png)
 
 With these, create a `.env.local` file in the main app (`tutorial`) folder and include the `NEXTAUTH_URL` ([`http://localhost:3000/`](http://localhost:3000/) for now) and a `NEXTAUTH_SECRET` (which you can generate on [this site](https://generate-secret.vercel.app/32) or by creating a random 32-character string).
 
@@ -261,7 +266,7 @@ export default function Home({ posts }) {
 
 When you click sign in, you go through the sign in flow with GitHub, and get redirected back to the app with an active session.
 
-![Signed in](../images/tutorials/nextjs-analytics/signin.png)
+![Signed in](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/signin.png)
 
 Once this is working, we have all the functionality we want in our Next.js app and it’s time to add PostHog.
 
@@ -316,7 +321,7 @@ export default function App(
 
 Once saved, go back to your app and click around, you should see events start to populate in your PostHog instance.
 
-![Events](../images/tutorials/nextjs-analytics/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/events.png)
 
 The library autocaptures clicks, inputs, session recordings (if enabled), pageviews (for single pages, we'll fix this next) and more. It also provides access to the all the features of [`posthog-js`](/docs/integrate/client/js) which we will set up during the rest of this tutorial.
 
@@ -390,7 +395,7 @@ export default function Post({ post }) {
 
 Go to a post, click "like," then check your PostHog instance to see the custom event show up.
 
-![Post liked event](../images/tutorials/nextjs-analytics/post-liked.png)
+![Post liked event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/post-liked.png)
 
 ## Identifying users
 
@@ -451,7 +456,7 @@ export default function Home({ posts }) {
 
 Now, when you sign in, this triggers an `identify` event in PostHog and events from the anonymous user connect with the identified person.
 
-![Identify](../images/tutorials/nextjs-analytics/identify.png)
+![Identify](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/identify.png)
 
 ### Resetting identification
 
@@ -507,7 +512,7 @@ return (
 
 When you log out now, PostHog creates and connects events to a new anonymous person when you next load the page. This person is disconnected from your old anonymous and identified person.
 
-![Pageview](../images/tutorials/nextjs-analytics/pageview.png)
+![Pageview](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/pageview.png)
 
 > **Note:** Be careful to only reset when a user logs out, **not** on every request. If you reset on every request, you create an excess of new anonymous users and new session recordings.
 
@@ -519,7 +524,7 @@ For both, use them to show a call to action on our blog pages.
 
 To start, create a feature flag in your PostHog instance. Go to the "Feature Flags" tab, click the "New feature flag" button, enter `blog-cta` as the key, set "Release conditions" to 100% of users, and press save.
 
-![Feature flag](../images/tutorials/nextjs-analytics/flag.png)
+![Feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/flag.png)
 
 This gives us a basic flag to add to our app.
 
@@ -554,7 +559,7 @@ Then create a feature flag called `blog-cta` and set it to 100% of users.
 
 You should see a call to action on your blog page.
 
-![CTA](../images/tutorials/nextjs-analytics/cta.png)
+![CTA](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/cta.png)
 
 ### Server-side rendering feature flags
 

@@ -5,8 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/hogmail.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hogmail.png
 featuredImageType: full
 category: General
 ---
@@ -31,7 +33,7 @@ Words by Andy Vandervell, who just trains AIs to write now.
 
 In November, Adam Smith, the founder of AI-assisted programming startup Kite, [announced they were closing](https://www.kite.com/blog/product/kite-is-saying-farewell/) despite having reached [product-market fit](/blog/product-market-fit-game) and 500k monthly-active developers.
 
-![kite](../images/blog/hogmail/kit-farewell.png)
+![kite](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail/kit-farewell.png)
 
 How does a product with **500k active users** fail? In Adam's opinion:
 
@@ -43,7 +45,7 @@ How does a product with **500k active users** fail? In Adam's opinion:
 
 But, here's the kicker, he also says:
 
-![kite blog](../images/blog/hogmail/kite-blog-excerpt.png)
+![kite blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail/kite-blog-excerpt.png)
 
 Adam goes onto explain how it took five years to reach product-market fit and, having done so, they focused on growing users rather than working out monetization simultaneously.
 

@@ -2,12 +2,16 @@
 title: How to use PostHog without cookie banners
 sidebar: Docs
 showTitle: true
-featuredImage: ../images//cookieless-tracking.png
-featuredVideo: https://www.youtube-nocookie.com/embed/3V3fbz6sgPk
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/cookieless-tracking.png
+featuredVideo: 'https://www.youtube-nocookie.com/embed/3V3fbz6sgPk'
 featuredTutorial: false
 date: 2022-08-03
-author: ['joe-martin']
-tags: ['configuration', 'product os']
+author:
+  - joe-martin
+tags:
+  - configuration
+  - product os
 ---
 
 - **Level:** Medium 🦔🦔
