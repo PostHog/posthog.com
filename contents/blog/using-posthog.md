@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/using-posthog/posthog-features.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/using-posthog/posthog-features.jpg
 featuredImageType: full
 author:
   - andy-vandervell
@@ -38,7 +39,7 @@ And if you [self-host PostHog](/docs/self-host), you get a built-in data warehou
 
 ## 2. Build an AARRR pirate metrics dashboard
 
-![AARRR pirate metrics](../images/blog/using-posthog/aarrr.png)
+![AARRR pirate metrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/aarrr.png)
 
 AARRR (Acquisition, Activation, Retention, Revenue, Referral) is a classic framework for driving product-led growth, and it's a great place to start when building your first dashboard in PostHog.
 
@@ -48,7 +49,7 @@ Read our complete guide to [building a pirate metrics funnel](/blog/aarrr-pirate
 
 ## 3. Discover who your power users are
 
-![discovering power users](../images/blog/using-posthog/cohorts.png)
+![discovering power users](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/cohorts.png)
 
 You can learn a huge amount by discovering who your most active users are, and what they're doing.
 
@@ -62,7 +63,7 @@ An e-commerce platform might ask for "users who bought an item in 5 out of the l
 
 ## 4. Gather user feedback
 
-![pineapple on pizza](../images/blog/using-posthog/pinepapple.png)
+![pineapple on pizza](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/pinepapple.png)
 
 Because PostHog is all about tracking events, it's easy to create your own simple feedback interfaces and analyse the results in PostHog.
 
@@ -110,13 +111,13 @@ Try experimenting with any of the above, while also using AND/OR operators, to c
 
 ## 7. Validate a product change using experiments
 
-![PostHog experiments](../images/blog/using-posthog/experiments-1.png)
+![PostHog experiments](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/experiments-1.png)
 
 Experimentation is a fundamental tool every engineer and product manager needs. While you can roll out changes and observe their impact after the fact, it's impossible to verify whether small shifts in your metrics are down to your changes or some other unknown variable.
 
 PostHog's Experimentation suite is built atop our Feature Flag functionality, so you can run A/B tests and multivariate tests with ease. You set a minimum acceptable improvement for the test, and PostHog will recommend a sample size and test duration based on your parameters.
 
-![PostHog experiments](../images/blog/using-posthog/experiments-2.png)
+![PostHog experiments](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/experiments-2.png)
 
 We then run a Bayesian analysis on the data to give a probability for each variant being the best, a graph of how things are looking for each variant, and whether the results are statistically significant or not.
 
@@ -138,7 +139,7 @@ Quoting [Pry CEO and co-founder Andy Su](https://posthog.com/customers/pry):
 
 ## 10. Use Correlation Analysis to discover commonalities
 
-![correlation analysis posthog](../images/blog/using-posthog/correlation-analysis.png)
+![correlation analysis posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/correlation-analysis.png)
 
 Accessible via Funnel insights, [Correlation Analysis](https://posthog.com/docs/user-guides/correlation) shows you the events and person properties that your converting users have in common. Is there an industry that really loves your product that you don't event know about? Correlation Analysis helps surface insights like these, which can change your product strategy completely.
 
@@ -152,7 +153,7 @@ Tracking errors can be enormously useful for deciding where to invest engineerin
 
 ## 12. Watch users interact with your acquisition funnel
 
-![funnel users](../images/blog/using-posthog/converted-users.png)
+![funnel users](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/converted-users.png)
 
 Having session recording and product analytics in one tool means you can go from reviewing a funnel insight to watching exactly what those same users are doing, seamlessly. 
 
@@ -174,7 +175,7 @@ In the Recordings page in PostHog, you can filter all recordings based on cohort
 
 Once setup, you're ready to dive in and discover all the odd things users do that you never anticipated, the problems they encounter, and the workarounds they employ.
 
-![twitter quote](../images/blog/using-posthog/twitter-quote.png)
+![twitter quote](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/twitter-quote.png)
 
 This guy gets it.
 
@@ -190,7 +191,7 @@ Don't fancy building your own? Don't hesitate to suggest one on the [PostHog rep
 
 ## 16. Subscribe to an insight or dashboard
 
-![posthog insight subscriptions](../images/blog/using-posthog/subscriptions.png)
+![posthog insight subscriptions](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/subscriptions.png)
 
 You don't need to login to PostHog everyday to get insights. Instead, setup your most valuable insights and dashboards, and then get them sent to your inbox on any schedule and time to suit you. You can also send updates to multiple addresses, which is ideal for keeping stakeholders up-to-date.
 
@@ -228,7 +229,7 @@ Enter the [Property Filter](/apps/property-filter) app, which was built by PostH
 
 Want to see where people are clicking on any page on your website or web app, just like this?
 
-![heatmap](../images/blog/using-posthog/docs-heatmap.png)
+![heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/docs-heatmap.png)
 
 Try the [PostHog Toolbar](/tutorials/toolbar).
 

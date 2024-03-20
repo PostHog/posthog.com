@@ -1,15 +1,17 @@
 ---
-title: "How to set up feature flags in iOS"
+title: How to set up feature flags in iOS
 date: 2024-02-20
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/ios-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/ios-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/ios-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/ios-feature-flags/create-flag-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ios-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ios-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ios-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ios-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in iOS using PostHog. 
 
@@ -75,7 +77,7 @@ struct FeatureScreenView: View {
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the iOS app](../images/tutorials/ios-feature-flags/basic-app.png)
+![Basic setup of the iOS app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -87,7 +89,7 @@ To add the package dependency to your Xcode project, select `File > Add Package 
 
 Note that for this tutorial we use version `3.1.3` of the SDK.
 
-![Add PostHog from Swift Package Manager](../images/tutorials/ios-feature-flags/swift-npm.png)
+![Add PostHog from Swift Package Manager](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-feature-flags/swift-npm.png)
 
 Next, configure your PostHog instance in `App.swift` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 

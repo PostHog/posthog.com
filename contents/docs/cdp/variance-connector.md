@@ -1,10 +1,11 @@
 ---
 title: Variance
-github: https://github.com/PostHog/posthog-variance-plugin
-installUrl: https://app.posthog.com/project/apps?name=Variance
-thumbnail: ../../cdp/thumbnails/variance.png
+github: 'https://github.com/PostHog/posthog-variance-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Variance'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/variance.png
 tags:
-    - variance-connector
+  - variance-connector
 ---
 
 This destination exports PostHog data to Variance in real-time and formats it for use by revenue teams. This includes extracting accounts and contacts, making it easy to see customers by sales stage, and more.

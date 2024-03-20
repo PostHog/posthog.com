@@ -3,7 +3,8 @@ date: 2023-12-18
 title: How successful startups use growth loops (with examples)
 author:
   - ian-vanagas
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 tags:
   - Product analytics
@@ -36,7 +37,7 @@ Nearly every successful company utilizes growth loops, consciously or not.
 
 The newsletter platform Substack enables writers to easily share and monetize their work. As they do, it gets the attention of other writers, who discover Substack, join, and continue the loop. It's a virtuous circle where everyone involved benefits.
 
-![Substack growth loop](../images/blog/growth-loops/substack.png)
+![Substack growth loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/growth-loops/substack.png)
 
 For this loop to work, the marketing and business development teams must attract popular writers (who often require upfront payments) while the product and engineering teams must deliver a great writing and subscription experience. When this happens, it provides compounding benefits for Substack like bigger writers, better experiences, more readers, and ultimately, more revenue. 
 
@@ -44,7 +45,7 @@ For this loop to work, the marketing and business development teams must attract
 
 Twitch is a streaming platform for gaming. Similar to Substack and writers, streamers drive growth by attracting viewers. Those viewers join the platform, generate revenue, and watch other streams. Streamers, new and old, do more to capture that revenue and viewership, and the loop repeats.
 
-![Twitch growth loop](../images/blog/growth-loops/twitch.png)
+![Twitch growth loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/growth-loops/twitch.png)
 
 Twitch's ties its success to its ability to do this better than its competitors. Other streaming platforms like YouTube and Kick compete with them for streamers, often with large exclusive contracts, hurting the core of Twitch's growth loop.
 
@@ -52,7 +53,7 @@ Twitch's ties its success to its ability to do this better than its competitors.
 
 Tripadvisor uses its data on hotels and restaurants to create content that ranks well on search engines. This content attracts users, who review hotels and restaurants, which improves and expands that content.
 
-![Tripadvisor growth loop](../images/blog/growth-loops/tripadvisor.png)
+![Tripadvisor growth loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/growth-loops/tripadvisor.png)
 
 This data was once hidden in travel agents and local knowledge. By making it public and accessible, Tripadvisor unlocked massive growth.
 
@@ -60,7 +61,7 @@ This data was once hidden in travel agents and local knowledge. By making it pub
 
 YC invests in startups. Their advice and network help startups grow and succeed. The prestige this creates attracts investment into YC startups, improves their network, and encourages more startups to apply. As long as their advice and network continue to be valuable, this loop continues.
 
-![YC growth loop](../images/blog/growth-loops/yc.png)
+![YC growth loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/growth-loops/yc.png)
 
 YC differentiates itself from other accelerators by being extremely startup-friendly, focused on San Francisco, and having a strong founder network. Each of these is core to the success of their growth loop.
 
@@ -86,7 +87,7 @@ The performance marketing growth loop is using [paid marketing](/founders/dev-ma
 
 For example, with Google Ad Words, companies pay per click on specific keywords related to potential customers’ searches. With the correct math figured out (cost of acquisition), this can lead to a growth loop of increasing ad spend and revenue growth.
 
-![Performance marketing with Google growth loop](../images/blog/growth-loops/google.png)
+![Performance marketing with Google growth loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/growth-loops/google.png)
 
 Products that use performance marketing growth loops generally have high margins (more money for ads), but low organic demand. Good examples include ecommerce and direct-to-consumer goods (e.g. Casper, Warby Parker, Dollar Shave Club) and SaaS software targeting small-medium businesses (e.g. Shopify, Hubspot, Slack).
 
@@ -137,7 +138,7 @@ Understanding your ideal user helps you decide where to put your effort. If your
 
 Let's imagine, for example, you work at LinkedIn. Your ideal user is a newly graduated business professional. They have less income, so they are less likely to pay for a subscription. Sales and performance marketing are less likely to work.
 
-![LinkedIn growth loop](../images/blog/growth-loops/linkedin.png)
+![LinkedIn growth loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/growth-loops/linkedin.png)
 
 What you can do is create a connection between their network and content creation. They value their network a lot, and creating content is free. When a user creates and shares content, their network pays attention. With this attention, the user engages with their network, and LinkedIn sells ads. When other users see the benefits of this, they share content, and this cycle repeats.
 
@@ -149,7 +150,7 @@ Hubspot, for example, builds free tools small businesses benefit from, like "Web
 
 These freebies get a lot of attention which drives signups, and some turn into customers. They invest more in their overall product (including their free tools) and create a B2B viral growth loop.
 
-![Hubspot growth loop](../images/blog/growth-loops/hubspot.png)
+![Hubspot growth loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/growth-loops/hubspot.png)
 
 There are many creative ways to incentivize users to join your growth loop. Optimizing existing win-wins with users, as well as finding new ones, fuels the growth loops that help products succeed.
 

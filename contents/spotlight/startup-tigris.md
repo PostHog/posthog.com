@@ -1,12 +1,14 @@
 ---
-title: "Startup Spotlight: Tigris Data"
+title: 'Startup Spotlight: Tigris Data'
 date: 2023-04-20
-author: ["charles-cook"]
+author:
+  - charles-cook
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/spotlight_tigris.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/spotlight_tigris.png
 featuredImageType: full
 category: Startups
 ---

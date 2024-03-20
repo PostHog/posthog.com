@@ -404,7 +404,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                     quality={100}
                                     objectFit="contain"
                                     alt=""
-                                    src="../../../contents/images/media/social-media-headers/hogs/detective_hog.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/media/social-media-headers/hogs/detective_hog.png"
                                     className="max-w-[150px]"
                                 />
                             </div>

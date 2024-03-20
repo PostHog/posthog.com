@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - joe-martin
-featuredImage: ../images/blog/hosthog-banner.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hosthog-banner.png
 featuredImageType: standard
 category: PostHog news
 ---

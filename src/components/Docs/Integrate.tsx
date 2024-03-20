@@ -114,24 +114,34 @@ const query = graphql`
                 fields: {
                     slug: {
                         in: [
+                            "/docs/libraries/angular"
+                            "/docs/libraries/astro"
+                            "/docs/libraries/bubble"
+                            "/docs/libraries/django"
                             "/docs/libraries/docusaurus"
+                            "/docs/libraries/flask"
+                            "/docs/libraries/framer"
                             "/docs/libraries/gatsby"
                             "/docs/libraries/google-tag-manager"
+                            "/docs/libraries/laravel"
                             "/docs/libraries/next-js"
                             "/docs/libraries/nuxt-js"
+                            "/docs/libraries/remix"
                             "/docs/libraries/retool"
                             "/docs/libraries/rudderstack"
                             "/docs/libraries/segment"
                             "/docs/libraries/sentry"
                             "/docs/libraries/slack"
                             "/docs/libraries/shopify"
+                            "/docs/libraries/svelte"
                             "/docs/libraries/vue-js"
+                            "/docs/libraries/webflow"
                             "/docs/libraries/wordpress"
                         ]
                     }
                 }
             }
-            sort: { fields: fields___pageViews, order: DESC }
+            sort: { fields: slug, order: ASC }
         ) {
             nodes {
                 ...framework

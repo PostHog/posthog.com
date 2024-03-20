@@ -1,5 +1,5 @@
 ---
-title: Logos, brand, hedgehogs
+title: 'Logos, brand, hedgehogs'
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
@@ -14,10 +14,10 @@ If you're looking for the PostHog logo, you came to the right place. Please keep
 
 | Preview | Name          | Vector | PNG                   | PNG w/ padding*                      |
 |---------|---------------|--------|-----------------------|--------------------------------|
-| <img src="/brand/posthog-logo@2x.png" width="157" />     | Standard logo | <a href="/brand/posthog-logo.svg" download>SVG</a> | <a href="/brand/posthog-logo.png" download>PNG</a> \| <a href="/brand/posthog-logo@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-padded@2x.png" download>PNG @2x</a> |
-| ![](/brand/posthog-logo-black.svg)  | Dark logo | <a href="/brand/posthog-logo-black.svg" download>SVG</a> | <a href="/brand/posthog-logo-black.png" download>PNG</a> \| <a href="/brand/posthog-logo-black@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-black-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-black-padded@2x.png" download>PNG @2x</a> |
-| ![](/brand/posthog-logo-white.svg)  | Light logo    | <a href="/brand/posthog-logo-white.svg" download>SVG</a> | <a href="/brand/posthog-logo-white.png" download>PNG</a> \| <a href="/brand/posthog-logo-white@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-white-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-white-padded@2x.png" download>PNG @2x</a> |
-| ![](/brand/posthog-logomark.svg)    | Logomark      | <a href="/brand/posthog-logomark.svg" download>SVG</a> | <a href="/brand/posthog-logomark.png" download>PNG</a> \| <a href="/brand/posthog-logomark@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logomark-padded.png" download>PNG</a> \| <a href="/brand/posthog-logomark-padded@2x.png" download>PNG @2x</a> |
+| <img src="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/handbook/company/brand/posthog-logo@2x.png" width="157" />     | Standard logo | <a href="/brand/posthog-logo.svg" download>SVG</a> | <a href="/brand/posthog-logo.png" download>PNG</a> \| <a href="/brand/posthog-logo@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-padded@2x.png" download>PNG @2x</a> |
+| ![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/handbook/company/brand/posthog-logo-black.svg)  | Dark logo | <a href="/brand/posthog-logo-black.svg" download>SVG</a> | <a href="/brand/posthog-logo-black.png" download>PNG</a> \| <a href="/brand/posthog-logo-black@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-black-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-black-padded@2x.png" download>PNG @2x</a> |
+| ![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/handbook/company/brand/posthog-logo-white.svg)  | Light logo    | <a href="/brand/posthog-logo-white.svg" download>SVG</a> | <a href="/brand/posthog-logo-white.png" download>PNG</a> \| <a href="/brand/posthog-logo-white@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-white-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-white-padded@2x.png" download>PNG @2x</a> |
+| ![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/handbook/company/brand/posthog-logomark.svg)    | Logomark      | <a href="/brand/posthog-logomark.svg" download>SVG</a> | <a href="/brand/posthog-logomark.png" download>PNG</a> \| <a href="/brand/posthog-logomark@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logomark-padded.png" download>PNG</a> \| <a href="/brand/posthog-logomark-padded@2x.png" download>PNG @2x</a> |
 
 </OverflowXSection>
 
@@ -27,7 +27,7 @@ The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://
 
 > **Important:** We updated our logo in 2021. Please be sure to use the _correct_ version. 👇🏼
 
-![Logo usage examples](/brand/logo-usage.png)
+![Logo usage examples](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/handbook/company/brand/logo-usage.png)
 
 If you have any questions or need clarification about which version to use, ask Cory, or reach out in [our community page](/posts) and we'll be happy to help.
 

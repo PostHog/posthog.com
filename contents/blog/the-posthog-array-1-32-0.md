@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
 excerpt: >-
   PostHog 1.32.0 makes it easier to find what you want in the Persons & Groups

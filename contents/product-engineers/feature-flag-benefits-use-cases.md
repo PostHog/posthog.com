@@ -1,15 +1,17 @@
 ---
 date: 2023-01-18
-title: Why use feature flags? Benefits, types and use cases, explained
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/experiment-hog.jpg
+title: 'Why use feature flags? Benefits, types and use cases, explained'
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
   - Feature management
   - Feature flags
   - Product engineers
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 ## What is a feature flag?
