@@ -34,7 +34,7 @@ If you're [identifying](/docs/product-analytics/identify) users, they may see a 
 
 To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
 
-> *Note*: This does not apply to server-side SDKs, because you're explicitly telling us which distinct ID to use to evaluate flags, rather than depending on the identify() event to tell us which distinct ID to use.
+> *Note*: This only applies to frontend SDKs. Server-side SDKs do not need to call `identify()`.
 
 ### 3. An ad-blocker may be blocking calls
 
