@@ -16,7 +16,7 @@ toolsUsed:
 date: 2024-03-19
 ---
 
-[Creatify](https://creatify.ai/) is an AI-powered video creation platform that makes it easy for businesses such as Done, Poshmark and Storyblocks to quickly create ads for use across any platform. The ability to rapidly create video content enables users to test strategies and adopt the sort of data-driven approach which Creatify itself champions. 
+[Creatify](https://creatify.ai/) is a powerful AI video editor that simplifies the process of quickly creating short video ads for use across any platform. Its capability to rapidly generate marketing video content allows users to test strategies and adopt the data-driven approach that Creatify champions.
 
 “We officially launched Creatify in early 2024 but we’d been in development mode for a while before that,” said founding CTO Xin Zhou, who met his Creatify co-founders while working at Meta. “We used that time to build the product and test ideas. PostHog was key to that — we’d been using it for about six months before we even launched.”
 
