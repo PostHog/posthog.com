@@ -11,15 +11,19 @@ import List from 'components/List'
 export const quickLinks = [
     {
         name: 'Angular',
-        to: '/tutorials/angular-analytics',
+        to: '/docs/libraries/angular',
     },
     {
         name: 'Astro',
-        to: '/tutorials/astro-analytics',
+        url: '/docs/libraries/astro',
+    },
+    {
+        name: 'Bubble',
+        url: '/docs/libraries/bubble',
     },
     {
         name: 'Django',
-        to: '/tutorials/django-analytics',
+        to: '/docs/libraries/django',
     },
     {
         name: 'Docusaurus v2',
@@ -27,11 +31,11 @@ export const quickLinks = [
     },
     {
         name: 'Flask',
-        to: '/tutorials/python-feature-flags',
+        to: '/docs/libraries/flask',
     },
     {
         name: 'Framer',
-        to: '/tutorials/framer-analytics',
+        url: '/docs/libraries/framer',
     },
     {
         name: 'Gatsby',
@@ -40,6 +44,10 @@ export const quickLinks = [
     {
         name: 'Google Tag Manager',
         to: '/docs/libraries/google-tag-manager',
+    },
+    {
+        name: 'Laravel',
+        url: '/docs/libraries/laravel',
     },
     {
         name: 'Next.js',
@@ -55,7 +63,7 @@ export const quickLinks = [
     },
     {
         name: 'Remix',
-        to: '/tutorials/remix-analytics',
+        to: '/docs/libraries/remix',
     },
     {
         name: 'Retool',
@@ -83,7 +91,7 @@ export const quickLinks = [
     },
     {
         name: 'Svelte',
-        to: '/tutorials/svelte-analytics',
+        to: '/docs/libraries/svelte',
     },
     {
         name: 'Vue.js',
@@ -91,7 +99,7 @@ export const quickLinks = [
     },
     {
         name: 'Webflow',
-        to: '/tutorials/webflow',
+        to: '/docs/libraries/webflow',
     },
     {
         name: 'WordPress',

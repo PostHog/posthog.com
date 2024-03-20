@@ -1,16 +1,17 @@
 ---
 date: 2023-12-19
-title: "Introducing Notebooks for PostHog"
+title: Introducing Notebooks for PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/announcing-notebooks/notebooks.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/announcing-notebooks/notebooks.jpg
 featuredImageType: full
 author:
   - joe-martin
 category: PostHog news
-tags: 
+tags:
   - Product updates
 ---
 
@@ -30,7 +31,7 @@ Researching a new idea? Collect insights and add them to your proposal seamlessl
 
 Planning a launch? Embed the feature flags, events, persons, or cohorts you’ll need to deploy changes and track success. 
 
-![Using PostHog notebooks](../images/blog/announcing-notebooks/pizza_survey.mp4)
+![Using PostHog notebooks](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/announcing-notebooks/pizza_survey.mp4)
 
 Or, obviously, you can use a notebook as just a daily scratchpad. This is actually the default behavior, whereby a freshly opened notebook will persist only in the browser until you save it.
 

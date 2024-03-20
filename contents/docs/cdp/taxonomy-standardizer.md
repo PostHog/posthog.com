@@ -1,10 +1,11 @@
 ---
 title: Taxonomy Standardizer
-installUrl: https://app.posthog.com/project/apps?name=Taxonomy+Plugin
-github: https://github.com/PostHog/taxonomy-plugin
-thumbnail: ../../cdp/thumbnails/taxonomy-standardizer.png
+installUrl: 'https://app.posthog.com/project/apps?name=Taxonomy+Plugin'
+github: 'https://github.com/PostHog/taxonomy-plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/taxonomy-standardizer.png
 tags:
-    - taxonomy-standardizer
+  - taxonomy-standardizer
 ---
 
 This app standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.

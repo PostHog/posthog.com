@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - joe-martin
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 category: Using PostHog
 tags:
@@ -19,7 +20,7 @@ One of the great things about PostHog is that it democratizes your product strat
 Internally, [our marketing team](/handbook/people/team-structure/marketing) uses PostHog for [all their reporting](/blog/posthog-marketing), as well as for running ad-hoc analysis and testing new ideas. Here are some of the tips and tricks we recommend based on their experience...
 
 ## 1. Set up an AARRR pirate funnel
-![AARRR pirate metrics](../images/blog/using-posthog/aarrr.png)
+![AARRR pirate metrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/aarrr.png)
 
 AARRR funnels are a framework for understanding how users engage with your product at different stages of their journey — Acquisition, Activation, Retention, Revenue, and Referral. It’s especially useful for marketers, growth teams and product marketers because it enables you to see where your biggest drop-offs are at a glance. 
 
@@ -28,7 +29,7 @@ The AARRR framework needs to be adapted slightly for each product — acquisitio
 > 💡**PostHog Tip:** Want to know more? Check our [complete guide to AARRR pirate funnels](/blog/aarrr-pirate-funnel)!
 
 ## 2. Track campaigns with trend insights
-![how to track utms in posthog](../images/blog/activation-checklist-images/utm-tracking-in-posthog.png)
+![how to track utms in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/utm-tracking-in-posthog.png)
 
 UTMs are an indispensable tool in the modern marketing arsenal, enabling you to track clicks by adding a customizable parameter after a URL. The URL `posthog.com/?utm_campaign=opensource` could be used in social media posts to track visits to the PostHog website via an open source campaign, for example. But how do you track these campaigns in PostHog?
 
@@ -37,7 +38,7 @@ The simplest way is to use a [trends insight](/manual/trends) in PostHog that fi
 > 💡**PostHog Tip:** Trends aren’t the only way to visualize UTM performance. You can also use [the funnels insight](/manual/funnels) to explore how users move between two events - such as viewing a landing page, and signing up. 
 
 ## 3. Watch how users sign-up with session recordings
-![session recordings in posthog](../images/blog/activation-checklist-images/session-recording-posthog.png)
+![session recordings in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/session-recording-posthog.png)
 
 You may think your sign-up flow is easy to navigate, but what really matters is what your users think. If only there was some way to watch how they use your site, so you can identify where they’re experiencing friction? Enter: [session recordings](/manual/recordings).
 
@@ -46,7 +47,7 @@ Session recordings are like a DVR of people using your product and enable you to
 > 💡**PostHog Tip:** Watching lots of recordings can be time consuming. We recommend filtering recordings to focus on key events, such as new sign-ups, to make it easier to find valuable insights. 
 
 ## 4. Understand how users explore your site with paths
-![session recordings in posthog](../images/blog/activation-checklist-images/paths-in-posthog.png)
+![session recordings in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/paths-in-posthog.png)
 
 So, you know how to track performance of marketing campaigns and how to see how individual users engage with your content, but how can you get a view of the entire user journey? That’s where [path analysis](/manual/paths) comes in. 
 
@@ -55,7 +56,7 @@ Paths enable you to see the route every user takes between two points, as well a
 > 💡**PostHog Tip:** Path insights in PostHog don’t have to specify both the start and endpoint. If you’re curious how users get to a specific page, for example, you can just set an endpoint to see every path users took to reach that page. 
 
 ## 5. Use dashboards subscriptions to keep up to date
-![dashboard subscriptions in posthog](../images/blog/activation-checklist-images/subscribe-in-posthog.png)
+![dashboard subscriptions in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/subscribe-in-posthog.png)
 
 Maybe you want to share PostHog reports with the whole company, or maybe you’re just trying to cut down on time spent looking for credentials in 1Password. Either way, subscriptions are the solution. 
 

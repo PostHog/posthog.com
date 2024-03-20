@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -23,19 +24,19 @@ We’ve made a lot of exciting new features this week (to update, please see htt
 
 ### Filtering action trends graphs
 
-![](../images/03/Action-trend-filter-gif.gif)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/Action-trend-filter-gif.gif)
 
 This is a more intuitive way of filtering action trends. You can also look at both the total and DAUs with this update.
 
 ### Exact/contains matching for URLs in actions
 
-![](../images/03/image-2.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/image-2.png)
 
 This does exactly what it says on the tin, it will allow you to be able to specify specific pages to track in your app/website.
 
 ### Filtering paths by date
 
-![](../images/03/Path-by-date-gif.gif)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/Path-by-date-gif.gif)
 
 We got a lot of requests for this update – paths are super interesting but if you’re making changes to your website based on your findings you should be able to then refine your paths by date.
 
@@ -43,7 +44,7 @@ and lastly…
 
 ### Graphs show numbers
 
-![](../images/03/image-1.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/image-1.png)
 
 We took way too long to realize this was much simpler than guessing the number on the Y axis.
 

@@ -1,15 +1,17 @@
 ---
-title: "How to set up A/B tests in Flutter"
+title: How to set up A/B tests in Flutter
 date: 2024-03-05
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/flutter-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/flutter-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/flutter-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/flutter-ab-tests/experiment-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/experiment-setup-dark.png"
 
 [A/B tests](/ab-testing) help you improve your Flutter app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Flutter app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -100,7 +102,7 @@ class FeatureScreenView extends StatelessWidget {
 
 Press **F5** and run the app in any emulator (we chose Android) to see your app in action.
 
-![Basic setup of the Flutter app](../images/tutorials/flutter-ab-tests/basic-app.mp4)
+![Basic setup of the Flutter app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-ab-tests/basic-app.mp4)
 
 ## 2. Add PostHog to your app
 
@@ -154,7 +156,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration with your project API key and instance address to the `Info.plist` file located in the `ios/Runner` directory:
 
-```xml ios/Runner/Info.plist
+```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -174,7 +176,7 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
 
 Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
 
-```yaml ios/Podfile
+```yaml file=ios/Podfile
 platform :ios, '13.0'
 
 # rest of your config

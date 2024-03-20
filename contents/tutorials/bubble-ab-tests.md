@@ -1,17 +1,19 @@
 ---
-title: "How to run A/B tests in Bubble"
+title: How to run A/B tests in Bubble
 date: 2024-01-11
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['experimentation']
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/bubble-ab-tests/events-in-posthog-light.png'
-import EventsInPostHogDark from '../images/tutorials/bubble-ab-tests/events-in-posthog-dark.png'
-import TestSetupLight from '../images/tutorials/bubble-ab-tests/test-setup-light.png'
-import TestSetupDark from '../images/tutorials/bubble-ab-tests/test-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/events-in-posthog-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/events-in-posthog-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/test-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/test-setup-dark.png"
 
 [Bubble](https://bubble.io/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change actually improves your conversion rate. This is where [A/B testing](/ab-testing) is helpful. It enables you to test and compare the results of your changes.
 
@@ -32,7 +34,7 @@ With the snippet copied, go to your Bubble site settings by clicking on the icon
 
 Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in the **Script/meta tags in header** section. Then, deploy your site to live.
 
-![How to add PostHog to Bubble](../images/tutorials/bubble-ab-tests/adding-posthog.mp4)
+![How to add PostHog to Bubble](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/adding-posthog.mp4)
 
 ## 2. Capture a custom event
 
@@ -52,7 +54,7 @@ To capture this event:
 window.posthog.capture("ab_test_button_clicked")
 ```
 
-![Capture custom event in Bubble](../images/tutorials/bubble-ab-tests/capture-custom-event.mp4)
+![Capture custom event in Bubble](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/capture-custom-event.mp4)
 
 Finally, deploy your changes to live and then click your new button to [see the event in PostHog](https://us.posthog.com/events).
 
@@ -112,7 +114,7 @@ posthog.onFeatureFlags(() => {
 
 Finally, deploy your changes to live.
 
-![Add script in Framer](../images/tutorials/bubble-ab-tests/add-flag-code.mp4)
+![Add script in Framer](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-ab-tests/add-flag-code.mp4)
 
 That's it! Your A/B test is now live. PostHog will split your users so half see the updated button text and tracks whether it has an impact on your click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
 

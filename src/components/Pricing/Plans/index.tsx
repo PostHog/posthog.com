@@ -10,6 +10,7 @@ import { BillingProductV2Type, BillingV2FeatureType } from 'types'
 import { product_type_to_max_events } from '../pricingLogic'
 import { Discount } from 'components/NotProductIcons'
 import Link from 'components/Link'
+import { IconInfo } from '@posthog/icons'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -110,8 +111,8 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                         title={
                             plans[0].free_allocation === up_to ? (
                                 'Free'
-                            ) : enterprise_flag_enabled && index === tiers.length - 1 ? (
-                                <s>
+                            ) : type === 'product_analytics' && index === tiers.length - 1 ? (
+                                <div className="flex items-center">
                                     $
                                     {parseFloat(unit_amount_usd).toFixed(
                                         Math.max(
@@ -120,7 +121,26 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                                             )
                                         )
                                     )}
-                                </s>
+                                    <Tooltip
+                                        content={() => (
+                                            <div>
+                                                Custom pricing available for large volumes.
+                                                <Link to="/contact-sales">
+                                                    <Label
+                                                        className="!m-0 !p-0 !text-sm !font-bold"
+                                                        text="Get in touch"
+                                                        style="orangeNoBg"
+                                                    />
+                                                </Link>
+                                            </div>
+                                        )}
+                                        contentContainerClassName="max-w-xs"
+                                    >
+                                        <div>
+                                            <IconInfo className="w-4 h-4 ml-1 opacity-50" />
+                                        </div>
+                                    </Tooltip>
+                                </div>
                             ) : (
                                 `$${parseFloat(unit_amount_usd).toFixed(
                                     Math.max(

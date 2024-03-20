@@ -256,14 +256,14 @@ export const ProductAnalytics = () => {
                         <div className="block dark:hidden">
                             <StaticImage
                                 {...imageProps}
-                                src="../../../../contents/images/products/product-analytics/product-analytics-light.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-light.png"
                                 alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
                             />
                         </div>
                         <div className="hidden dark:block">
                             <StaticImage
                                 {...imageProps}
-                                src="../../../../contents/images/products/product-analytics/product-analytics-dark.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-dark.png"
                                 alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
                             />
                         </div>
@@ -334,14 +334,14 @@ export const WebAnalytics = () => {
                         <div className="block dark:hidden">
                             <StaticImage
                                 {...imageProps}
-                                src="../../../../contents/images/products/web-analytics/web-analytics-light.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-light.png"
                                 alt="A screenshot of web analytics"
                             />
                         </div>
                         <div className="hidden dark:block">
                             <StaticImage
                                 {...imageProps}
-                                src="../../../../contents/images/products/web-analytics/web-analytics-dark.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-dark.png"
                                 alt="A screenshot of web analytics"
                             />
                         </div>
@@ -369,8 +369,8 @@ export const WebAnalytics = () => {
                 />
             )}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
-            buttonLabel="Read the docs"
-            buttonUrl="/docs/web-analytics"
+            buttonLabel="Explore"
+            buttonUrl="/web-analytics"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
             buttonChildClasses="!bg-lime-green border-primary !text-primary group-hover:text-black"
         />
@@ -411,14 +411,14 @@ export const SessionReplay = () => {
                         <div className="block dark:hidden">
                             <StaticImage
                                 {...imageProps}
-                                src="../../../../contents/images/products/session-replay/session-replay-light.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-light.png"
                                 alt="A screenshot of a session recording"
                             />
                         </div>
                         <div className="hidden dark:block">
                             <StaticImage
                                 {...imageProps}
-                                src="../../../../contents/images/products/session-replay/session-replay-dark.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-dark.png"
                                 alt="A screenshot of a session recording"
                             />
                         </div>
@@ -494,7 +494,7 @@ export const FeatureFlags = () => {
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...image1Props}
-                                    src="../../../../contents/images/products/feature-flags/feature-flags-1-light.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-light.png"
                                     className={`${image1Props.className}`}
                                 />
                             </div>
@@ -502,7 +502,7 @@ export const FeatureFlags = () => {
                                 <StaticImage
                                     {...image1Props}
                                     className={`${image1Props.className}`}
-                                    src="../../../../contents/images/products/feature-flags/feature-flags-1-dark.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-dark.png"
                                 />
                             </div>
                         </div>
@@ -510,7 +510,7 @@ export const FeatureFlags = () => {
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...image2Props}
-                                    src="../../../../contents/images/products/feature-flags/feature-flags-2-light.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-light.png"
                                     className={`${image2Props.className}`}
                                 />
                             </div>
@@ -518,7 +518,7 @@ export const FeatureFlags = () => {
                                 <StaticImage
                                     {...image2Props}
                                     className={`${image2Props.className} `}
-                                    src="../../../../contents/images/products/feature-flags/feature-flags-2-dark.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-dark.png"
                                 />
                             </div>
                         </div>
@@ -595,7 +595,7 @@ export const ABTesting = () => {
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...image1Props}
-                                    src="../../../../contents/images/products/ab-testing/ab-testing-1-light.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-light.png"
                                     className={`${image1Props.className} block dark:hidden`}
                                 />
                             </div>
@@ -603,7 +603,7 @@ export const ABTesting = () => {
                                 <StaticImage
                                     {...image1Props}
                                     className={`${image1Props.className}`}
-                                    src="../../../../contents/images/products/ab-testing/ab-testing-1-dark.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-dark.png"
                                 />
                             </div>
                         </div>
@@ -611,7 +611,7 @@ export const ABTesting = () => {
                             <div className="block dark:hidden">
                                 <StaticImage
                                     {...image2Props}
-                                    src="../../../../contents/images/products/ab-testing/ab-testing-2-light.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-light.png"
                                     className={`${image2Props.className} `}
                                 />
                             </div>
@@ -619,7 +619,7 @@ export const ABTesting = () => {
                                 <StaticImage
                                     {...image2Props}
                                     className={`${image2Props.className} `}
-                                    src="../../../../contents/images/products/ab-testing/ab-testing-2-dark.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-dark.png"
                                 />
                             </div>
                         </div>
@@ -684,7 +684,7 @@ export const Surveys = () => {
                             quality={100}
                             objectFit="contain"
                             className="w-full h-full pb-8 mdlg:py-4 max-w-[337px] md:max-w-[287px] mdlg:max-w-[337px] rotate-1"
-                            src="../../../../contents/images/products/surveys/survey.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/surveys/survey.png"
                         />
                     </>
                 )
@@ -746,7 +746,7 @@ export const DataPipeline = () => {
                             quality={100}
                             objectFit="contain"
                             className="w-full h-full max-w-[571px]"
-                            src="../../../../contents/images/products/cdp/pipeline-scene.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/cdp/pipeline-scene.png"
                         />
                     </>
                 )
@@ -789,7 +789,7 @@ export const DataWarehouse = () => {
                             quality={100}
                             objectFit="contain"
                             className="w-full h-full max-h-96 max-w-[826px]"
-                            src="../../../../contents/images/products/data-warehouse/warehouse-scene.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-scene.png"
                         />
                     </>
                 )
@@ -800,7 +800,7 @@ export const DataWarehouse = () => {
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                    src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                 />
             )}
             HogDesktop={() => (
@@ -809,7 +809,7 @@ export const DataWarehouse = () => {
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                    src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                 />
             )}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
@@ -839,7 +839,7 @@ export const Sql = () => {
                             quality={100}
                             objectFit="contain"
                             className="w-full h-full py-10 max-h-96"
-                            src="../../../../contents/images/products/sql/sql-hog.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/sql/sql-hog.png"
                         />
                     </div>
                 </ImageContainer>

@@ -3,14 +3,15 @@ date: 2022-07-20
 title: Remote companies can be too asynchronous
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Culture
   - Founders
   - People
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Even when Tim (my cofounder) and I were doing a [Y Combinator](https://ycombinator.com) (YC) batch in 2020, we realized we got more work done when we worked asynchronously. 

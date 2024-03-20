@@ -1,17 +1,19 @@
 ---
 title: How to set up A/B tests in Ruby on Rails
 date: 2024-02-14
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/ruby-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/ruby-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/ruby-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/ruby-ab-tests/experiment-setup-dark.png'
-import IdentifyLight from '../images/tutorials/ruby-ab-tests/identify-light.png'
-import IdentifyDark from '../images/tutorials/ruby-ab-tests/identify-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/experiment-setup-dark.png"
+export const IdentifyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/identify-light.png"
+export const IdentifyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/identify-dark.png"
 
 A/B tests help you improve your Ruby on Rails app by enabling you to compare the impact of changes on key metrics. 
 
@@ -51,7 +53,7 @@ end
 
 Run `rails server` and navigate to `http://localhost:3000` to see our app in action.
 
-![Basic Ruby app](../images/tutorials/ruby-ab-tests/basic-app.png)
+![Basic Ruby app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ruby-ab-tests/basic-app.png)
 
 ## 2. Add PostHog on the client side
 

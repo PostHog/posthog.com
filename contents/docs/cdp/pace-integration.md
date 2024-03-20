@@ -1,10 +1,11 @@
 ---
 title: Pace
-github: https://github.com/PostHog/pace-posthog-integration
-installUrl: https://app.posthog.com/project/apps?name=Pace
-thumbnail: ../../cdp/thumbnails/pace-integration.png
+github: 'https://github.com/PostHog/pace-posthog-integration'
+installUrl: 'https://app.posthog.com/project/apps?name=Pace'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/pace-integration.png
 tags:
-    - pace-integration
+  - pace-integration
 ---
 
 [Pace](https://www.paceapp.com/) is a tool that equips sellers with relevant insights at the right time so they can spend time growing revenue. It allows them to convert, retain, and grow customers by prioritizing time and effort on the users who need it most.

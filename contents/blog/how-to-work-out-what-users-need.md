@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - marcus-hyett
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 category: Product growth
 tags:

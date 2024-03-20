@@ -1,15 +1,17 @@
 ---
 date: 2023-12-07
-title: "9 essential feature flag best practices (with code examples)"
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/green-blog-image.jpg
+title: 9 essential feature flag best practices (with code examples)
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 tags:
   - Feature management
   - Feature flags
   - Product engineers
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Feature flags, aka feature toggles, are a simple pattern with many uses. New feature to beta test? Use a feature flag. Testing variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say there are [many benefits to feature flags](/blog/feature-flag-benefits-use-cases).
@@ -170,7 +172,7 @@ Feature flags are usually checked at the person level, but there are other ways.
 
 For example, a customer complains about an issue with your product. You create a fix for them but aren’t sure it works for everyone. You can roll it out behind a feature flag and set the distribution to members of that company.
 
-![Group release](../images/blog/feature-flags-best-practices/group-release.png)
+![Group release](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/feature-flags-best-practices/group-release.png)
 
 Enabling flags for specific groups allows the experience to be consistent for those groups. Members of an organization aren’t seeing different UIs or getting different experiences. They also act as a “permission” to access those changes.
 

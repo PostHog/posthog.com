@@ -40,13 +40,13 @@ If you aren't able to make a change yourself, create an issue in GitHub. Avoid s
 
 For discussions, public repos are the best place. Then private ones, then Slack public channels, then Slack private channels or DMs. This is part of our _"We are open source"_ value, and helps with general context setting for the wider team, which means everyone can work more autonomously.
 
-There are only a few exceptions to what we can't share publicly, for example if you are discussing security concerns, specific customers (for privacy reasons), revenue or growth numbers (since these cause signalling issues with investors or competitors).
+There are only a few exceptions to what we can't share publicly, for example if you are discussing security concerns, specific customers (for privacy reasons), revenue, or growth numbers (since these cause signalling issues with investors or competitors).
 
 Internally, _everything_ can be shared apart from people issues – such as HR / personal (i.e. recruitment or health data).
 
 ### Be proactive with community questions
 
-Don't _only_ help the community when you're the person on support hero in your small team. No matter what your goals may be, if you can quickly ship fixes to real life user problems, then you are going to build goodwill, word of mouth growth, and a better product all in one swoop.
+Don't _only_ help the community when you're the person on support hero in your small team. No matter what your goals may be, if you can quickly ship fixes to real life user problems, then you are going to build goodwill, word-of-mouth growth, and a better product all in one swoop.
 
 You can find these in [posthog.com/questions](https://posthog.com/questions).
 
@@ -64,25 +64,25 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 
 * Mr Blobby. We once changed how we ingest session recording data, to use S3 blob storage. We called it Mr Blobby. [Mr Blobby](https://en.wikipedia.org/wiki/Mr_Blobby) is a creepy '90s TV character from the UK. This project was nightmarishly hard, which is why this character was fitting.
 
-* Paul will make you eat Gelato at every offsite.
+* Paul will make you eat gelato at every offsite.
 
-* Sometimes people screenshot each other's faces and zoom screens and use them as their backgrounds. Usually when an all hands is too dry.
+* Sometimes people screenshot each other's faces and Zoom screens and use them as their backgrounds. Usually when an all-hands is too dry.
 
-* Charles wore a suit to his performance review. He is the only person in history to wear a suit to anything PostHog related. Unsure if he was making a point, we later abandoned the practice of performance reviews regardless.
+* Charles wore a suit to his performance review. He is the only person in history to wear a suit to anything PostHog-related. Unsure if he was making a point, we later abandoned the practice of performance reviews regardless.
 
 * We took lots of buses at an offsite in Portugal. The roads were incredibly twisty, the driver was in a bad mood, drove too quickly, and people threw up. It was bad.
 
 * <Emoji name="sparksjoy" src="/images/emojis/sparksjoy.png" /> / <Emoji name="does_not_spark_joy" src="/images/emojis/does_not_spark_joy.png" /> A reference to <a href="https://konmari.com/marie-kondo-rules-of-tidying-sparks-joy/">Marie Kondo's book</a> on tidying your house, generally used to describe things that are particularly good or bad from a user's perspective
 
-* <Emoji name="eu-thumbsup" src="/images/emojis/eu-thumbsup.png" /> / <Emoji name="thumbs-down-eu" src="/images/emojis/thumbs-down-eu.png" /> We once made <a href="https://www.isgoogleanalyticsillegal.com">isgoogleanalyticsillegal.com</a> when there were privacy rulings about Google Analytics. We put it on HN, got the top of the front page, and it was our biggest <em>ever</em> day of signups at the time. The website was supposed to be tongue in cheek, but the internet took it seriously. The person in the emoji is Ursula von der Leyen who introduced the GDPR legislation.
+* <Emoji name="eu-thumbsup" src="/images/emojis/eu-thumbsup.png" /> / <Emoji name="thumbs-down-eu" src="/images/emojis/thumbs-down-eu.png" /> We once made <a href="https://www.isgoogleanalyticsillegal.com">isgoogleanalyticsillegal.com</a> when there were privacy rulings about Google Analytics. We put it on Hacker News, got the top of the front page, and it was our biggest <em>ever</em> day of signups at the time. The website was supposed to be tongue in cheek, but the internet took it seriously. The person in the emoji is Ursula von der Leyen, who introduced the GDPR legislation.
 
 * IPO promises. There is a list of these that is brought out at certain moments. You may see.
 
-* [Marius](/community/profiles/1) will train you on Post-it notes if you go to an offsite with him. Success of a good Post-it note posting is in the lift away from the surface – the most important thing is to peel, as opposed to pulling, the Post-it note off.
+* [Marius](/community/profiles/1) will train you on Post-it notes if you go to an offsite with him. Success of a good Post-it note posting is in the lift away from the surface – the most important thing is to peel off the Post-it note, as opposed to pulling.
 
 * Three finger rule - another Marius invention, if someone holds up three fingers while you're talking, it means you aren't being concise enough. We don't actually use this much as it's predictably awkward and distracting, so ruins any meeting it could have otherwise helped.
 
-* When we hit 10,000 GitHub stars, [Ian](../community/profiles/269) read every username on a live stream that took over 6 hours.
+* When we hit 10,000 GitHub stars, [Ian](../community/profiles/269) read every username on a live stream that took over six hours.
 
 * We like to nail things. It's not uncommon to see a GitHub issue titled "Nail [feature name]". Sometimes we'll even assign an absurd version number like "3000". (The codename for the next generation UI of the PostHog app is referred to as PostHog 3000, and other projects have also adopted this naming convention as well.)
 
