@@ -1,30 +1,32 @@
 ---
-title: "How to use filters + session replays to understand user friction" 
+title: How to use filters + session replays to understand user friction
 sidebar: Docs
 showTitle: true
 featuredTutorial: false
-author: ['joe-martin']
-tags: ['session replay']
-featuredVideo: https://www.youtube-nocookie.com/embed/3BS5h2gkz90
-date: 2022-11-03
+author:
+  - joe-martin
+tags:
+  - session replay
+featuredVideo: 'https://www.youtube-nocookie.com/embed/3BS5h2gkz90'
+date: 2022-11-03T00:00:00.000Z
 ---
 
-import filterSessionLight from '../images/tutorials/filter-session-recordings/filter-events-session-recording-light-mode.png'
-import filterSessionDark from '../images/tutorials/filter-session-recordings/filter-events-session-recording-dark-mode.png'
-import filterOffLight from '../images/tutorials/filter-session-recordings/recording-filter-off-light-mode.png'
-import filterOffDark from '../images/tutorials/filter-session-recordings/recording-filter-off-dark-mode.png'
-import filterOnLight from '../images/tutorials/filter-session-recordings/recording-filter-on-light-mode.png'
-import filterOnDark from '../images/tutorials/filter-session-recordings/recording-filter-on-dark-mode.png'
-import searchRecordingFlagLight from '../images/tutorials/filter-session-recordings/search-recording-flag-light-mode.mp4'
-import searchRecordingFlagDark from '../images/tutorials/filter-session-recordings/search-recording-flag-dark-mode.mp4'
-import filterPersonsRecordingsLight from '../images/tutorials/filter-session-recordings/filter-persons-recordings-light-mode.png'
-import filterPersonsRecordingsDark from '../images/tutorials/filter-session-recordings/filter-persons-recordings-dark-mode.png'
-import quickFilterLight from '../images/tutorials/filter-session-recordings/quick-filter-recordings-light-mode.png'
-import quickFilterDark from '../images/tutorials/filter-session-recordings/quick-filter-recordings-dark-mode.png'
-import filterRecordingsLight from '../images/tutorials/filter-session-recordings/filter-recordings-time-light-mode.png'
-import filterRecordingsDark from '../images/tutorials/filter-session-recordings/filter-recordings-time-dark-mode.png'
-import timePickerLight from '../images/tutorials/filter-session-recordings/time-picker-light-mode.mp4'
-import timePickerDark from '../images/tutorials/filter-session-recordings/time-picker-dark-mode.mp4'
+export const filterSessionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-events-session-recording-light-mode.png"
+export const filterSessionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-events-session-recording-dark-mode.png"
+export const filterOffLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/recording-filter-off-light-mode.png"
+export const filterOffDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/recording-filter-off-dark-mode.png"
+export const filterOnLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/recording-filter-on-light-mode.png"
+export const filterOnDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/recording-filter-on-dark-mode.png"
+export const searchRecordingFlagLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/search-recording-flag-light-mode.mp4"
+export const searchRecordingFlagDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/search-recording-flag-dark-mode.mp4"
+export const filterPersonsRecordingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-persons-recordings-light-mode.png"
+export const filterPersonsRecordingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-persons-recordings-dark-mode.png"
+export const quickFilterLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/quick-filter-recordings-light-mode.png"
+export const quickFilterDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/quick-filter-recordings-dark-mode.png"
+export const filterRecordingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-recordings-time-light-mode.png"
+export const filterRecordingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-recordings-time-dark-mode.png"
+export const timePickerLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/time-picker-light-mode.mp4"
+export const timePickerDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/time-picker-dark-mode.mp4"
 
 Funnels may tell you _where_ users are experiencing friction within your product, but only session replays can show you _why_.
 
