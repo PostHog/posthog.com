@@ -1,9 +1,9 @@
 ---
 title: Why Creatify switched from Google Analytics to PostHog
 customer: Creatify
-logo: ../images/customers/creatify/logo.png
-logoDark: ../images/customers/creatify/logo-dark.png
-featuredImage: ../images/customers/creatify/featured.png
+logo: https://res.cloudinary.com/dmukukwp6/image/upload/v1710956135/posthog.com/contents/images/customers/creatify/logo.png
+logoDark: https://res.cloudinary.com/dmukukwp6/image/upload/v1710956135/posthog.com/contents/images/customers/creatify/logo-dark.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/v1710956135/posthog.com/contents/images/customers/creatify/featured.png
 industries:
     - AI
 users:
