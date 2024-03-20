@@ -1,21 +1,23 @@
 As always, reliability is the #1 unwritten goal: Making sure feature flags are reliable trumps every other objective.
 
+### Objective: Make sure feature flags can handle 10x current scale
 
-### Objective: Doubling down on surveys
+Last quarter we hit some scaling limits on flags: It's now very expensive to run flags on Django and we'll hit some scaling limits at 5x our scale.
 
-Last quarter, we officially launched surveys and gathered lots of feedback! This quarter, we're building out more of the things that'll make surveys the obvious choice for customers to collect user feedback. 
+To get ahead of this problem, we'll rewrite our flags service to be more performant and reliable.
+
+### Objective: Polish new experiments UI & collect feedback
+
+Last quarter we finished a basic version of our new experiment UI. This quarter, we want to polish this up, collect feedback from users, and address any issues that come up.
+
+Broadly, we should:
+1. Make it easy for people to set up experiments and understand the results, with clear action items on when to end and what to do after ending experiments.
+2. At every stage of the experiment, tell people what to do next
+3. Have common sense boundaries, and better running time predictions
+
+### Objective: Add most requested surveys functionality
 
 We will, in order of priority build:
 
 - Event based targeting for surveys
 - Branching logic with multiple questions
-- Better result visualisation for customer experience metric surveys (NPS, CSAT, etc)
-
-### Objective: Doubling down on experiments
-
-Last quarter, we built out the core missing features for feature flags. Now to leverage these building blocks we want to focus on improving our A/B testing platform.
-
-Broadly, we will focus on two themes:
-
-1. Make it easy for people to set up experiments and understand the results, with clear action items on when to end and what to do after ending experiments.
-2. Expand what is possible to track in experiments: From statistical significance for secondary metrics, to having a linked dashboard for extra result exploration.
