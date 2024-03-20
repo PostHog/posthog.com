@@ -42,6 +42,7 @@ import useTeam from 'hooks/useTeam'
 import { IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
+import TeamUpdate from 'components/TeamUpdate'
 
 const SidebarSection = ({ title, children }) => {
     return (
@@ -462,17 +463,26 @@ export default function Team({
             </Section>
             {hasInProgress && (
                 <Section title="What we're building" id="in-progress">
-                    <div className="flex space-x-12 items-start">
-                        <ul className="list-none m-0 p-0 grid md:grid-cols-2 gap-4">
+                    <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
+                        <ul className="list-none m-0 p-0 grid lg:grid-cols-2 gap-4">
                             {inProgress.map((roadmap) => (
                                 <InProgress key={roadmap.squeakId} {...roadmap} />
                             ))}
                         </ul>
-                        {updates.length > 0 && (
-                            <div className="max-w-[340px] w-full flex-shrink-0">
-                                <SidebarSection title="Latest update">
-                                    <Question key={updates[0].question} id={updates[0].question} />
-                                </SidebarSection>
+                        {(updates.length > 0 || isModerator) && (
+                            <div className="lg:max-w-[340px] w-full flex-shrink-0">
+                                {isModerator && (
+                                    <div className="mb-8 pb-8 border-b border-border dark:border-dark">
+                                        <SidebarSection title="Post an update">
+                                            <TeamUpdate teamName={name} />
+                                        </SidebarSection>
+                                    </div>
+                                )}
+                                {updates.length > 0 && (
+                                    <SidebarSection title="Latest update">
+                                        <Question key={updates[0].question} id={updates[0].question} />
+                                    </SidebarSection>
+                                )}
                             </div>
                         )}
                     </div>

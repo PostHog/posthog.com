@@ -67,7 +67,7 @@ We use a billing config file to determine what is shown in the UI and how billin
 We use very limited metadata on some of these prices to allow the Billing Service to appropriately load and offer products to the instances:
 
 
-![Stripe products](../../../images/handbook/growth/sales/stripe-products.png)
+![Stripe products](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth/sales/stripe-products.png)
 
 
 
@@ -145,7 +145,7 @@ You can manually change the plan for a customer by updating the `plans_map` in t
 
 Stripe subscriptions can be modified relatively freely for example if moving to a custom pricing plan. 
 
-![Stripe subscription update](../../../images/handbook/growth/sales/stripe-update-subscription.png)
+![Stripe subscription update](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth/sales/stripe-update-subscription.png)
 
 1. Look up the customer on [Stripe dashboard][stripe_dashboard] using their email address or Stripe ID (this can be found in the Billing Service admin under `Customers`).
 1. Click on the customer's current subscription.

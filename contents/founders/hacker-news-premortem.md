@@ -3,14 +3,15 @@ date: 2022-06-30
 title: The magic of a Hacker News Pre-Mortem
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Marketing
   - Founders
   - Growth
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Imagine you're working on something for other developers that you really, _really_ want to be great.
@@ -61,7 +62,7 @@ One of the things we've learned about working with developers is that a lot of t
 
 Make sure someone else is using your product in production before you launch it. You'll get no end of edge cases. Or even "majority cases" cases like the first ever user of PostHog:
 
-![user gets stuck because they cannot log into PostHog](../images/02/Screenshot-2020-02-25-at-21.52.15.png)
+![user gets stuck because they cannot log into PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/Screenshot-2020-02-25-at-21.52.15.png)
 
 Hey, at least they liked the website.
 

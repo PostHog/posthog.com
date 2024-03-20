@@ -50,7 +50,7 @@ For information on what code to write and what special functions to use, check o
 
 Go to Apps -> Advanced tab -> App editor -> Start coding.
 
-![App editor location](../../../images/plugins/plugin-editor-location.png)
+![App editor location](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/plugins/plugin-editor-location.png)
 
 Then, click on "Edit Source", and you're good to go. Copy your code and config into the editor, and you're ready to [test the app.](#testing)
 
@@ -81,7 +81,7 @@ For now, the best way to test apps is to install them locally.
 - If you're writing a app in the App source editor, this is as easy as clicking "Save".
 - If you're writing a app in a GitHub repository, install it locally using the "Install Local App" option in the Advanced Tab.
 
-![Install app location](../../../images/plugins/install-plugin-location.png)
+![Install app location](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/plugins/install-plugin-location.png)
 
 This allows you to tweak your app and see that everything works fine.
 

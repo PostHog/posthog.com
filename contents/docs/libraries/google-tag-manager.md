@@ -1,6 +1,7 @@
 ---
 title: Google Tag Manager
-icon: ../../images/docs/integrate/frameworks/gtm.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/gtm.svg
 ---
 
 ## Objective
@@ -25,7 +26,7 @@ To follow this tutorial along, you should:
 2. Access your [Google Tag Manager dashboard](https://tagmanager.google.com/) and navigate to the desired account/container that is integrated with the website you want to add PostHog tracking to
 3. Click to add a new tag:
     
-    ![GTM Dashboard](../../images/tutorials/gtm/dashboard.png)
+    ![GTM Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/gtm/dashboard.png)
     
 4. On the page to configure a new tag, add your PostHog snippet as a 'Custom HTML Tag' under 'Tag Configuration'
 5. For the trigger, select the default "All Pages - Page View" trigger and then click 'Save' on the top right corner of the drawer

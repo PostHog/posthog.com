@@ -3,13 +3,14 @@ date: 2024-03-05
 title: Pragmatic startup lessons from Elon Musk
 author:
   - james-hawkins
-featuredImage: ../images/newsletter/beyond-10x-engineer/elon.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon.jpg
 featuredImageType: full
-tags: 
- - Being a founder
+tags:
+  - Being a founder
 crosspost:
   - Blog
-  - Newsletter 
+  - Newsletter
 ---
 
 Elon Musk is many things. Erratic. Uncompromising. A prolific shitposter.
@@ -33,7 +34,7 @@ As CTO and CEO, Tim and I are trying to work like this more and more. We aim to 
 
 Fun is undervalued in startup lore and Elon [clearly gets a kick out](https://www.youtube.com/watch?v=rWdavYiwh0I) of what he does, even if some of his weirder projects don’t work out!
 
-![elon-tweet](../images/newsletter/beyond-10x-engineer/elon-tweet.png)
+![elon-tweet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon-tweet.png)
 
 Making decisions based on what we find fun and interesting has lead to remarkable things happening with our website, marketing, customer success, and product.
 

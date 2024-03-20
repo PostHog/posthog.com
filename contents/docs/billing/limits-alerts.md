@@ -12,7 +12,7 @@ To set a billing limit:
 
 You’ll need to do this for each of the products. You can also remove limits by following the same process and clicking “Remove limit” instead of "Save."
 
-![two types of cohorts: static and dynamic](../../images/docs/billing/alerts.png)
+![two types of cohorts: static and dynamic](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/billing/alerts.png)
 
 ## Billing alerts
 

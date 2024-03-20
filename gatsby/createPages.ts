@@ -18,7 +18,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
-    const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
@@ -297,12 +296,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            hostHog: allMdx(filter: { fields: { slug: { regex: "/^/hosthog/" } } }) {
-                nodes {
-                    id
-                    slug
-                }
-            }
             jobs: allAshbyJobPosting {
                 nodes {
                     id
@@ -373,6 +366,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                 }
                             }
                         }
+						imageProducts {
+							handle
+							featuredImage {
+								localFile {
+									childImageSharp {
+									gatsbyImageData
+									}
+								}
+							}
+						}
                         metafields {
                             value
                             key
@@ -842,18 +845,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
             },
         })
-    })
-    result.data.hostHog.nodes.forEach((node) => {
-        const { id, slug } = node
-        if (slug) {
-            createPage({
-                path: slug,
-                component: HostHogTemplate,
-                context: {
-                    id,
-                },
-            })
-        }
     })
 
     if (process.env.ASHBY_API_KEY && process.env.GITHUB_API_KEY) {

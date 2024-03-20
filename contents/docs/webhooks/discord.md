@@ -17,7 +17,7 @@ You can send messages to Discord whenever an [action](/docs/user-guides/actions)
 
 It should look something like this. 
 
-![Discord Webhook setup](../../images/discord-webhook.png)
+![Discord Webhook setup](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/discord-webhook.png)
 
 For more information, see the [Discord webhook docs](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
 
@@ -25,7 +25,7 @@ For more information, see the [Discord webhook docs](https://support.discord.com
 
 Copy the Webhook URL from Discord, navigate to project settings in PostHog, and paste the URL into the "Webhook integration section".
 
-![Add webhook integration](../../images/docs/webhooks/webhook-integration.png)
+![Add webhook integration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/webhooks/webhook-integration.png)
 
 Click "Test & Save" and you should receive a message on Discord. 
 
@@ -33,8 +33,8 @@ Click "Test & Save" and you should receive a message on Discord.
 
 In PostHog, navigate to the [action](https://app.posthog.com/data-management/actions) that you'd like to receive webhooks for. Then select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
-![PostHog edit action](../../images/post-action-slack.png)
+![PostHog edit action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/post-action-slack.png)
 
 ## 4. Celebrate
-![](../../images/discord-message.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/discord-message.png)
 

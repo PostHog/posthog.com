@@ -26,7 +26,7 @@ The [GeoIP Enricher](/apps/geoip-enrichment) is an example of an app which adds 
 
 By running a second app after the GeoIP app, we create a chain. Here's an example of how this can look for an individual event when a second app (which simply adds ```Hello: "world"``` to the event) runs after the GeoIP Enricher. 
 
-![GeoIP Enricher Example](../../../images/plugins/geoip-plugin-example.png)
+![GeoIP Enricher Example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/plugins/geoip-plugin-example.png)
 
 App chains are important because they control what the event looks like before it is stored. If you want to remove certain properties out of an event with the [Property Filter app](/apps/property-filter), for example, it is best to have it run at the end of the app chain so that all unwanted properties can be filtered out before storage.  
 
@@ -38,7 +38,7 @@ For example, an app can send an event to AWS S3 whenever it is seen in PostHog. 
 
 Here's how this can look:
 
-![S3 Export App Example](../../../images/plugins/s3-plugin-example.png)
+![S3 Export App Example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/plugins/s3-plugin-example.png)
 
 As before, it is important to bear in mind how chains work. If you wanted the event stored on S3 to contain GeoIP information, for example, then the GeoIP Enricher must run _before_ the S3 Exporter. 
 
@@ -46,7 +46,7 @@ As before, it is important to bear in mind how chains work. If you wanted the ev
 
 Now, how do you make all of this happen? Each app has two files: `index.js` and `plugin.json`. The index file has code for the entire app, and the JSON file has configuration for user inputs. This config is what you see in PostHog:
 
-![App Configuration Example](../../../images/plugins/plugin-config.png)
+![App Configuration Example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/plugins/plugin-config.png)
 
 We have some special function names which enable you to process an event, like in the GeoIP Enricher, or to do something else entirely, like in the S3 Exporter. We expect `index.js` to export these special functions.
 

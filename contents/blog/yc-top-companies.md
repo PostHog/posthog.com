@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mo-shehu
-featuredImage: ../images/blog/yc-top-companies/yc-top-companies.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/yc-top-companies/yc-top-companies.png
 category: PostHog news
 tags:
   - Y Combinator

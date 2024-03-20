@@ -1,11 +1,14 @@
 ---
 title: How to set up surveys in Next.js
 date: 2023-10-18
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+tags:
+  - surveys
 ---
 
 [Surveys](/docs/surveys) are an excellent way to get feedback from your users. In this guide, we show you how to add a survey to your Next.js app.
@@ -45,7 +48,7 @@ export default function Home() {
 
 Finally, run `npm run dev` and go to `http://localhost:3000` to see our new homepage.
 
-![Basic Next.js app](../images/tutorials/nextjs-surveys/basic-app.png)
+![Basic Next.js app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/basic-app.png)
 
 ## Adding PostHog
 
@@ -116,17 +119,17 @@ To create a survey with a prebuilt UI, go to the [surveys tab](https://app.posth
 4. Leave the remaining optional properties blank (such as `Targeting` or `Thank you message`).
 5. Click "Save as draft" and then on the next screen click "Launch". 
 
-![Popover survey set up](../images/tutorials/nextjs-surveys/create-popover-survey.png)
+![Popover survey set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/create-popover-survey.png)
 
 That's it! Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#viewing-results).
 
-![Popover survey in app](../images/tutorials/nextjs-surveys/popover-survey-example.png)
+![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/popover-survey-example.png)
 
 ### Option 2: Implement your own survey UI
 
 First, create a Rating survey in PostHog like in option 1 above, except set the display mode to `API`.
 
-![Custom survey set up](../images/tutorials/nextjs-surveys/create-api-survey.png)
+![Custom survey set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/create-api-survey.png)
 
 Then, there are four parts to adding code for our custom survey:
 
@@ -243,7 +246,7 @@ export default function Home() {
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/nextjs-surveys/sample-survey-ui.png)
+![Custom survey UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 
@@ -500,7 +503,7 @@ After interacting with your survey, you can view results by selecting the survey
 
 You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
-![Viewing survey results](../images/tutorials/nextjs-surveys/survey-results.png)
+![Viewing survey results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/survey-results.png)
 
 ## Further reading
 

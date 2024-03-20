@@ -3,14 +3,15 @@ date: 2022-12-05
 title: Raising money is less stressful than bootstrapping
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Fundraising
   - Being a founder
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Since PostHog raised Venture Capital (VC), we've had far less stress, and far more fun.

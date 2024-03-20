@@ -1,10 +1,11 @@
 ---
 title: SemVer Flattener
-github: https://github.com/PostHog/semver-flattener-plugin
-installUrl: https://app.posthog.com/project/apps?name=SemVer
-thumbnail: ../../cdp/thumbnails/semver-flattener.png
+github: 'https://github.com/PostHog/semver-flattener-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=SemVer'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/semver-flattener.png
 tags:
-    - semver-flattener
+  - semver-flattener
 ---
 
 The SemVer Flattener splits a valid SemVer version into the following 

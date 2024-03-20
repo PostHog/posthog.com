@@ -1,9 +1,10 @@
 ---
 title: Outfunnel
-github: https://github.com/PostHog/outfunnel-export-plugin
-thumbnail: ../../cdp/thumbnails/outfunnel-logo.png
+github: 'https://github.com/PostHog/outfunnel-export-plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/outfunnel-logo.png
 tags:
-    - outfunnel
+  - outfunnel
 ---
 
 Send events from PostHog to Outfunnel as they are ingested. Outfunnel is a platform for connecting sales and marketing tools with the data you need to prioritize leads. 

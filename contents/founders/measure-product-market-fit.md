@@ -1,8 +1,10 @@
 ---
 date: 2023-08-14
-title: "In-depth: How to measure product-market fit"
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/how-to-measure-product-market-fit/pmf-guide.png
+title: 'In-depth: How to measure product-market fit'
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/how-to-measure-product-market-fit/pmf-guide.png
 featuredImageType: full
 tags:
   - Founders
@@ -12,7 +14,7 @@ tags:
   - Product engineers
 crosspost:
   - Product engineers
-  - Blog  
+  - Blog
 ---
 
 Startups can't succeed without [achieving product-market fit](/blog/product-market-fit-game) – it's one of the few things startup gurus agree on. It's often described as a feeling – a palpable excitement from users, or a sense you can't keep up with demand. You either have _it_, or you don't.
@@ -31,7 +33,7 @@ Three metrics (two leading indicators and one lagging indicator) is a good start
 
 Why three? Because of what Brian Balfour, a serial co-founder and a former VP of Growth at Hubspot, calls The Trifecta:[^1]
 
-![pmf trifecta](../images/blog/how-to-measure-product-market-fit/pmf-trifecta.png)
+![pmf trifecta](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/pmf-trifecta.png)
 
 Achieving all three is a reliable sign of product-market fit, but it rarely comes easily.
 
@@ -63,21 +65,21 @@ Tracking brand mentions is more about understanding what people are saying about
 
 **Google Trends** is a good option if you have a unique brand name. Just plug your brand into Trends to see how searches for your brand are trending over time.
 
-![google trend for posthog](../images/blog/how-to-measure-product-market-fit/posthog-trends.png)
+![google trend for posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/posthog-trends.png)
 
 It's also useful for comparing yourself to other companies, such as those you _know_ have product-market fit or competitors.
 
-![google trend comparison](../images/blog/how-to-measure-product-market-fit/posthog-with-logrocket.png)
+![google trend comparison](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/posthog-with-logrocket.png)
 
 At PostHog, we also use [Glimpse](https://meetglimpse.com/) – an extension that augments Trends by adding trend lines, forecasts, and real search volumes. 
 
-![trends with Glimpse](../images/blog/how-to-measure-product-market-fit/glimpse.png)
+![trends with Glimpse](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/glimpse.png)
 
 The above shows how PostHog showed signs of product-market fit in late 2021 / early 2022, which grew stronger from mid-2022 onwards. While exponential growth is desirable, linear growth is still a good sign.
 
 Glimpse also suggests similar companies – useful for comparing your growth with those you know have product-market fit.
 
-![related companies](../images/blog/how-to-measure-product-market-fit/related-companies.png)
+![related companies](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/related-companies.png)
 
 ### 3. Organic traffic to your homepage
 
@@ -89,7 +91,7 @@ You can verify the above using organic visitors to your website homepage as a pr
 
 This captures new users who visit our homepage by searching for us, typing in our website address, or via dark social sources like Slack and WhatsApp.
 
-![posthog proxy](../images/blog/how-to-measure-product-market-fit/word-of-mouth-proxy.png)
+![posthog proxy](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/word-of-mouth-proxy.png)
 
 Above shows our word-of-mouth trend since the beginning of 2021. It's similar to Google Trends. Again, exponential growth is a nice to have, not a must-have.
 
@@ -174,11 +176,11 @@ Are users experiencing the _real value_ of your product? Spoiler: logging in ≠
 
 You want to see user engagement growing faster than, or in line with, new users. Engagement growing faster than signups is a strong predictor of product-market fit.
 
-![good pmf](../images/blog/how-to-measure-product-market-fit/good-pmf.png)
+![good pmf](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/good-pmf.png)
 
 Growing signups with flat user engagement is flat suggests you _don't_ have product-market fit – most likely people are trying your product, but not coming back.
 
-![bad pmf](../images/blog/how-to-measure-product-market-fit/bad-pmf.png)
+![bad pmf](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/bad-pmf.png)
 
 At PostHog, we created a user engagement metric we call Discoveries. We define a discovery as:
 
@@ -219,7 +221,7 @@ Instead, create an [Ideal Customer Profile](/newsletter/ideal-customer-profile-f
 
 Here's PostHog's first ICP:
 
-![posthog icp](../images/blog/pmf-game-guide/posthog-icp.png)
+![posthog icp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/posthog-icp.png)
 
 _How much_ your ICP customers are paying is less important than _how many_ ICP customers you have, and if they're growing in number. Can you onboard 5 paying ICP customers, then 10, 20, 50, and so on?
 
@@ -250,7 +252,7 @@ It's essential for any B2B SaaS product – it doesn't matter if they're self-s
 
 Retention is _the main_ lagging indicator of product-market fit for any type of product. If your retention curve flattens _at any point_, it's a strong sign you have product-market fit.
 
-![retention curve](../images/blog/how-to-measure-product-market-fit/retention-curve.png)
+![retention curve](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-product-market-fit/retention-curve.png)
 
 You'll want to track active users over a long(ish) period of time – weeks or months, rather than days. It's best to track events or actions where a user is experiencing the _real value_ of your product. Again, logging in does not count!
 

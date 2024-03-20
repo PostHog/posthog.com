@@ -1,15 +1,17 @@
 ---
-title: "How to uncover your users' real problems"
+title: How to uncover your users' real problems
 date: 2023-09-27
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/prodhog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/prodhog.png
 featuredImageType: full
 tags:
   - Product engineers
   - Engineering
 crosspost:
-  - Product engineers 
-  - Blog 
+  - Product engineers
+  - Blog
 ---
 
 Users are like kids at Christmas. They say they really want this one thing, but that one thing won't keep them happy for long. 
@@ -46,7 +48,7 @@ The lesson here? The best time to time ask a question is when users have the con
 
 Let's apply that logic to an onboarding survey…
 
-![Onboard](../images/newsletter/how-to-uncover-your-users-real-problems/onboard.jpeg)
+![Onboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-to-uncover-your-users-real-problems/onboard.jpeg)
 
 It makes no sense to ask users about their onboarding experience after they've become a regular user. They've probably forgotten what it was like, or their opinion is based on experiences unrelated to onboarding.
 
@@ -58,7 +60,7 @@ Asking surface-level questions like “what do you think of our product?” or �
 
 Surface-level questions create the **XY problem**. Answers provide solutions (X), but those solutions don't solve the underlying issue (Y). Digging deeper into [jobs to be done](https://jtbd.info/2-what-is-jobs-to-be-done-jtbd-796b82081cca) helps prevent this.
 
-![Iceberg](../images/newsletter/how-to-uncover-your-users-real-problems/ice.jpg)
+![Iceberg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-to-uncover-your-users-real-problems/ice.jpg)
 
 To discover your user's jobs to be done and pain points, **Y Combinator** recommends asking questions like:
 
@@ -100,7 +102,7 @@ As a programmer, [Julia Evans](https://jvns.ca/blog/good-questions/) says “goo
 
 [Uber](https://uber.app.box.com/s/ilxsiqy0bkfhgum8o15n6k6bqi2rqn9c) achieves this by combining quick and easy multiple choice questions with open text follow-ups:
 
-![Uber](../images/newsletter/how-to-uncover-your-users-real-problems/uber.jpeg)
+![Uber](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-to-uncover-your-users-real-problems/uber.jpeg)
 
 **Bottom line:** “What could we improve?” is an easy question to ask, but it doesn't encourage good responses. Every ounce of effort you spend making your question east to answer will lead to a similar improvement in responses.
 
