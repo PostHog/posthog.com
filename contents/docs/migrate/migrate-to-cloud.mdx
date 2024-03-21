@@ -50,16 +50,11 @@ To migrate metadata like projects, dashboards, insights, actions, feature flags,
 
 For more information on the options see the [repo's readme](https://github.com/PostHog/posthog-migrate-meta)
 
-## Migrate your events
+## Migrate your events to Cloud
 
-> You'll only be charged for events within the current month. However, you can import historical events into PostHog at no cost.
-> Reach out to sales@posthog.com if you are planning to import more than 20M events.
+> Before you start, disable all the apps in the destination cloud project (e.g. GeoIP). Keeping these enabled may change the events you are migrating.
 
-First, disable all the apps in the destination cloud project (e.g. GeoIP). Keeping these enable may change events you are migrating.
-
-If you're migrating from our cloud instance, e.g. from US cloud to EU cloud, ask us to do the events migration for you by [raising a support ticket in the app](https://app.posthog.com/home#supportModal).
-
-### Self-hosted migration
+### From self-hosted to Cloud
 
 To migrate your events, you can read data directly from your ClickHouse cluster and ingest the data with the Python library using our [self-hosted migration tool](https://github.com/PostHog/posthog-migration-tools).
 
@@ -108,7 +103,17 @@ python3 ./migrate.py \
 > - This script adds a `$lib` property of `posthog-python`, overriding any `$lib` property already set.
 > - If the script fails for some reason, just run it again with the latest cursor. There are some transient issues that can happen that are solved by re-running the script.
 
-## Switching tracking in you product
+### Between Cloud instances (e.g. US Cloud to EU CLoud)
+
+You will need to ask us to do the events migration for you by [raising a support ticket in the app](https://app.posthog.com/home#supportModal). Please note that this option is only available to paying customers as it requires significant engineering time. 
+
+We are currently unable to support migrating between US and EU Cloud for non-paying users. 
+
+### Importing historical events
+
+You'll only be charged for events within the current month. However, you can import historical events into PostHog at no cost. Reach out to sales@posthog.com if you are planning to import more than 20M events.
+
+## Switching tracking in your product
 
 To make sure you don't miss any events, complete the two previous steps **first**, so you can switch tracking in your product without losing any events:
 

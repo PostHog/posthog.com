@@ -297,7 +297,7 @@ const PairsWithArray = [
 ]
 
 export const ProductWebAnalytics = () => {
-    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { ycombinator, significa, creatify } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -312,16 +312,13 @@ export const ProductWebAnalytics = () => {
             }
         }
         {
-            contra: mdx(slug: { eq: "customers/contra" }) {
+            ycombinator: mdx(slug: { eq: "customers/ycombinator" }) {
                 ...ProductCustomerFragment
             }
-            hasura: mdx(slug: { eq: "customers/hasura" }) {
+            significa: mdx(slug: { eq: "customers/significa" }) {
                 ...ProductCustomerFragment
             }
-            netdata: mdx(slug: { eq: "customers/netdata" }) {
-                ...ProductCustomerFragment
-            }
-            pry: mdx(slug: { eq: "customers/pry" }) {
+            creatify: mdx(slug: { eq: "customers/creatify" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -353,32 +350,25 @@ export const ProductWebAnalytics = () => {
                     />
                 </div>
 
-                {/*
                 <section id="customers" className="-mt-56 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="improved conversion rates by 10-20%"
-                            quote="We wouldn't have noticed that needed fixing without PostHog's session replays."
-                            customer={hasura}
+                            outcome="gathers 30% more data than with Google Analytics"
+                            quote="We could autocapture... events using the JS snippet and... configure custom events."
+                            customer={ycombinator}
                         />
                         <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-                            customer={contra}
+                            outcome="switched from Plausible"
+                            quote="PostHog is way more powerful and insightful than Plausible. We have more info that we used to have."
+                            customer={significa}
                         />
                         <CustomerCard
-                            outcome="reduced back-and-forth in community support"
-                            quote="Session replay is... an essential tool for Netdata."
-                            customer={netdata}
-                        />
-                        <CustomerCard
-                            outcome="improved registrations by 20-30%"
-                            quote="Even Pry's support team... uses replays to understand how bugs occurred."
-                            customer={pry}
+                            outcome="switched from Google Analytics"
+                            quote="Web analytics gives us all the metrics we really care about. It is so much better than GA4."
+                            customer={creatify}
                         />
                     </ul>
                 </section>
-                */}
             </div>
 
             <SmoothScroll exclude={['Installation', 'Meet the team']} />
