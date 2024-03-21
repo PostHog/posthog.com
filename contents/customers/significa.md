@@ -37,7 +37,7 @@ Tomás is currently focused on tracking typical user interactions and uses [funn
 
 <BorderWrapper>
 <Quote
-    imageSource="https://res.cloudinary.com/dmukukwp6/image/upload/v1711024257/posthog.com/contents/images/customers/significa/significa-tomas.jpg"
+    imageSource="/images/customers/significa-tomas.jpg"
     size="md"
     name="Tomás Gouveia"
     title="Digital Marketer at Significa"
