@@ -177,9 +177,7 @@ export default function RoadmapForm({
                                   image: uploadedFeaturedImage?.id,
                               }
                             : null),
-                        teams: {
-                            connect: [team.id],
-                        },
+                        teams: [team.id],
                         betaAvailable,
                         milestone,
                         githubUrls: githubUrls.filter((url) => !!url),
