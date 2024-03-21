@@ -1,6 +1,7 @@
 ---
 title: How to set up analytics in React
 date: 2024-01-31
+featuredVideo: https://www.youtube-nocookie.com/embed/4hl3N8h6b10
 author:
   - lior-neu-ner
 tags:
