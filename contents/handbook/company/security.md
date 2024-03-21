@@ -23,9 +23,11 @@ Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or what
 
 ## SOC 2
 
-PostHog is certified as SOC 2 Type 1 compliant, following an external audit. 
+PostHog is certified as SOC 2 Type II compliant, following an external audit. 
 
-Our latest [security report](https://drive.google.com/file/d/1hSW8roswMjVn0HReVOs1lQFo3O9ToqXh/view?usp=share_link) is publicly available (last updated April 2023). 
+Our latest [security report](https://drive.google.com/file/d/1hSW8roswMjVn0HReVOs1lQFo3O9ToqXh/view?usp=share_link) is publicly available (covering controls as of February 28th, 2023). 
+
+We are currently in the process of obtaining our Type II certification, and anticipate our report will be available in July. If a customer requires a bridge letter in the meantime, they should email privacy@posthog.com. 
 
 ### Policies
 
