@@ -1907,8 +1907,8 @@ export const docsMenu = {
                     name: 'Tools',
                 },
                 {
-                    name: 'AI and LLM insights',
-                    url: '/docs/product-analytics/ai',
+                    name: 'LLM insights',
+                    url: '/docs/product-analytics/llms',
                     icon: 'IconMagicWand',
                     color: 'yellow',
                     badge: {
