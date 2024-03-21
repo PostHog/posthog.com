@@ -1213,6 +1213,7 @@
         { "source": "/handbook/small-teams/web-analytics", "destination": "/teams/web-analytics" },
         { "source": "/handbook/small-teams/people-ops", "destination": "/teams/people" },
         { "source": "/self-host", "destination": "/docs/self-host" },
+        { "source": "/using-posthog", "destination": "/docs" },
         { "source": "/handbook/company/values", "destination": "/handbook/values" }
     ]
 }

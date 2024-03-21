@@ -116,9 +116,9 @@ export const Authentication = ({
                                         <SignIn
                                             buttonText={buttonText.login}
                                             setMessage={setMessage}
-                                            onSubmit={(user) => {
+                                            onSubmit={async (user) => {
                                                 if (formValues) {
-                                                    handleMessageSubmit?.(formValues, user)
+                                                    await handleMessageSubmit?.(formValues, user)
                                                 } else {
                                                     setParentView?.(null)
                                                 }
@@ -131,9 +131,9 @@ export const Authentication = ({
                                         <SignUp
                                             buttonText={buttonText.signUp}
                                             setMessage={setMessage}
-                                            onSubmit={(user) => {
+                                            onSubmit={async (user) => {
                                                 if (formValues) {
-                                                    handleMessageSubmit?.(formValues, user)
+                                                    await handleMessageSubmit?.(formValues, user)
                                                 } else {
                                                     setParentView?.(null)
                                                 }
