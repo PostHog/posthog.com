@@ -17,7 +17,7 @@ toolsUsed:
 date: 2024-03-20
 ---
 
-Significa is an award-winning digital-led agency based in the Portuguese city of Porto. Since 2015, Significa has worked with clients such as Dia (for which [it won a Red Dot Award](https://significa.co/projects/dia)), Zoko (for which [it won a Good Design Award](https://significa.co/projects/zoko)), and Passaporte Natura 2000 (for which [it won an iF Design award](https://significa.co/projects/passaporte-natura))
+[Significa](https://significa.co/) is an award-winning digital-led agency based in the Portuguese city of Porto. Since 2015, Significa has worked with clients such as Dia (for which [it won a Red Dot Award](https://significa.co/projects/dia)), Zoko (for which [it won a Good Design Award](https://significa.co/projects/zoko)), and Passaporte Natura 2000 (for which [it won an iF Design award](https://significa.co/projects/passaporte-natura))
 
 “We offer a range of services, but we’re design focused,” said Tomás Gouveia, Significa’s Digital Marketer. “We like to think about the product first, assemble a unique strategy, then design bespoke solutions. We don’t use templates. We always design from scratch, and the whole process is customized to the client.”
 
