@@ -1,9 +1,10 @@
 ---
 title: Route censor
-github: https://github.com/PostHog/posthog-route-censor-plugin
-installUrl: https://app.posthog.com/project/apps?name=route-censor
-thumbnail: ../../cdp/thumbnails/censor-app
-    - route-censor
+github: 'https://github.com/PostHog/posthog-route-censor-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=route-censor'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/censor-app
+  - route-censor
 ---
 
 This app enables you to censor variables from URLs that are passed to PostHog. This is useful because PostHog tracks certain URLs automatically, so if your app contains sensitive data within the URLs (such as sensitive IDs, addresses, etc.), then this offers away to censor that data before it is stored in the PostHog database. 

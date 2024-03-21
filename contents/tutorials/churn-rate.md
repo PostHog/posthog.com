@@ -2,9 +2,16 @@
 title: How to calculate and lower churn rate with PostHog
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2022-10-10
-tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions', 'product analytics']
+tags:
+  - insights
+  - trends
+  - lifecycle
+  - cohorts
+  - actions
+  - product analytics
 ---
 
 - **Level:** Easy 🦔
@@ -30,7 +37,7 @@ Better yet, we can visualize and refine this calculation. PostHog has tools, lik
 
 To start visualizing churn rate, you can set up a retention funnel for users completing an action or event, then see how many continue their usage. The action or event you choose could be something like an autocapture of a pageview, an event capture you’ve written into your code or a combination of events (an action) that define feature usage. For us, we’ll set up a retention chart for unique users who completed the event `downloaded_file` over the last 8 weeks. 
 
-![Retention chart](../images/tutorials/churn-rate/retention-chart.png)
+![Retention chart](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/churn-rate/retention-chart.png)
 
 We can calculate our weekly churn and total churn by comparing our initial cohort size with the percentage of users remaining. For example, if we care about weekly churn, we can compare Week 0 and Week 1. If we care about churn across the entire period, we can compare Week 0 and Week 8. To learn more about retention charts, check out our [product manual](/manual/retention).
 
@@ -45,7 +52,7 @@ Another way to visualize churn is through lifecycle charts. Lifecycle charts sho
 
 The dormant users are the ones who churned. Comparing them with the ones who did the event (new, returning, or resurrected) can give you the churn rate for that event or action.
 
-![Lifecycle chart](../images/tutorials/churn-rate/lifecycle-chart.png)
+![Lifecycle chart](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/churn-rate/lifecycle-chart.png)
 
 Once set up, we can click on the dormant part of the chart to get a list of dormant (churned) users. We can see their properties, save them as a cohort (which will be useful later), and watch their session recordings. This helps us gain insights to lower churn in the next section.
 
@@ -69,7 +76,7 @@ The first is creating the cohort from the list of users in our chart. As mention
 
 The second way to create a cohort is by going to the cohort page and filtering to match the high churn risk users. In our example, the filters are stopping uploading and downloading files in the last 15 days (but having done so in the last 30).
 
-![Churn risk cohort](../images/tutorials/churn-rate/churn-risk-cohort.png)
+![Churn risk cohort](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/churn-rate/churn-risk-cohort.png)
 
 Once saved, this provides us with a dynamic list of “high churn risk” users which we can monitor and use in other areas of PostHog.
 
@@ -77,7 +84,7 @@ Once saved, this provides us with a dynamic list of “high churn risk” users 
 
 One way we can use a cohort is by combining it with an event to create an action. For example, we can set up an action to trigger when a user in our high churn risk cohort visits a help page. Using [webhooks](/docs/integrate/webhooks), we can bring these actions into [Slack](/docs/integrate/webhooks/slack) or wherever our sales or customer success team spends their time to have them reach out to users when the risk action is triggered.
 
-![Churn risk action](../images/tutorials/churn-rate/churn-risk-action.png)
+![Churn risk action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/churn-rate/churn-risk-action.png)
 
 Now we’ve targeted churn on multiple fronts, both by understanding what users are doing before they churn with session recordings and by monitoring users with cohorts and actions. We’ve begun to set up the tools for lowering churn. With continued improvement and experimentation, you’ll hopefully see improvements in your churn rate and the visualizations you’ve set up.
 

@@ -8,9 +8,10 @@ hideAnchor: true
 author:
   - joe-martin
   - andy-vandervell
-featuredImage: ../images/blog/posthog-blog-at-desk.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/o_1AmP_-HPs
+featuredVideo: 'https://www.youtube-nocookie.com/embed/o_1AmP_-HPs'
 category: General
 tags:
   - Privacy
@@ -45,7 +46,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 
 ### 1. PostHog
 
-![posthog](../images/screenshots/hogflix-dashboard.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 [PostHog](https://posthog.com) is an all-in-one, [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a single platform. Think [Amplitude](/blog/best-amplitude-alternatives) + Hotjar + [LaunchDarkly](/blog/best-launchdarkly-alternatives) in one.
 
@@ -81,7 +82,7 @@ PostHog Cloud is [free to use up to 1 million events per month](/pricing) and 5,
 
 ### 2. Plausible
 
-![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
+![Plausible Analytics - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
 [Plausible](https://plausible.io/) is a lightweight alternative to tools such as Google Analytics. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform. 
 
@@ -113,7 +114,7 @@ Plausible charges by pageview with 1 million pageviews costing €69 per month �
 
 ### 3. Umami
 
-![umami analytics](../images/blog/open-source-analytics-tools/umami.png)
+![umami analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/umami.png)
 
 [Umami](https://umami.is/) is an increasingly popular open-source analytics tool designed for privacy. Like Plausible, it's easy to self-host and collects no personal information (such as IP addresses) making GDPR compliance easy. The downside, as usual with privacy-first analytics tools, is it only collects basic analytics data, so it's best used for website analytics where you're less concerned with understanding user behavior.
 
@@ -140,7 +141,7 @@ Prices start at $9 for 100k monthly events. 1 million events is $49 per month; 1
 
 ### 4. Fathom
 
-![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
+![Fathom - GDPR compliant analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gdpr-compliant-analytics/fathom.png)
 
 [Fathom](https://usefathom.com/) is a popular, privacy-friendly alternative to Google Analytics that's built with user privacy at its core. It tracks common web statistics like unique visitors, page views, time on site, bounce rate, and referral data. It also has a basic event tracking system for measuring things like downloads, mailing list signups, and purchases.
 
@@ -173,7 +174,7 @@ Like Plausible, Fathom charges by pageview, though it's a bit cheaper than Plaus
 
 ### 5. Matomo
 
-![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
+![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 [Matomo](https://matomo.org/) is one of the most popular Google Analytics alternatives because it enables teams to collect a comparable level of information, but can be deployed on-premises so that you don’t need to share information with third-parties. Like PostHog, it’s also open source. 
 
@@ -208,7 +209,7 @@ Matomo's core open source analytics is free to self-host. More advanced features
 
 ### 6. Vercel Web Analytics
 
-![vercel analytics](../images/blog/ga4-alternatives/vercel.png)
+![vercel analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/vercel.png)
 
 Vercel includes a lightweight, privacy-compliant analytics tool in all its front-end-as-a-service plans. Like most privacy-first tools, it tracks basic website metrics like pageviews, unique users, time on page, and referrers. You can also set up custom events you want to track (e.g. clicking a call to action). It records no personally identifiable information, so you can use it without cookie permission banners. It also includes a useful Speed Insights tool for keeping track of your website's Core Web Vitals.
 
@@ -238,7 +239,7 @@ Free hobby deployments are limited to just 2,500 events and 10,000 speed insight
 
 ### 7. Countly
 
-![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
+![Countly - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/countly-screenshot.png)
 
 Like PostHog, [Countly](https://count.ly/) is an extendable product analytics platform that offers self-hosted open source and enterprise editions, or cloud deployments, for organizations that want to understand product performance and user journeys in greater detail. 
 
@@ -270,7 +271,7 @@ Countly doesn't publish pricing on its website. You have to contact sales. Its o
 
 ### 8. TelemetryDeck
 
-![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
+![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/telemetrydeck.png)
 
 [TelemetryDeck](https://telemetrydeck.com/) is to app analytics what Plausible and Fathom are to website analytics – a lightweight tool that collects minimal personal information. Consequently, TelemetryDeck says developers can use it without tracking permission banners.
 
@@ -302,7 +303,7 @@ TelemetryDeck's free plan gives you up to 100,000 signals per month – signals 
 
 ### 9. GoAccess
 
-![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
+![GoAccess - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 
 [GoAccess](https://goaccess.io/) is a completely open source web log analyzer and viewer which runs in a browser-based terminal to give you an overview of the most common website metrics. This means it can act as a replacement for tools such as Google Analytics, though it falls short of a product analytics platform in capabilities. 
 

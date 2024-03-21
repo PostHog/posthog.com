@@ -1,9 +1,10 @@
 ---
 title: Airbyte
-installUrl: https://docs.airbyte.com/integrations/sources/posthog/
-thumbnail: ../../cdp/thumbnails/airbyte.png
+installUrl: 'https://docs.airbyte.com/integrations/sources/posthog/'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/airbyte.png
 tags:
-    - airbyte
+  - airbyte
 ---
 
 The Airbyte export sends data from PostHog, to Airbyte. It supports both Full Refresh and Incremental syncs. You can choose if it copies only the new or updated event data, or all rows in the tables and columns you set up for replication, every time a sync is run.

@@ -1,10 +1,11 @@
 ---
 title: Twilio
-github: https://github.com/PostHog/posthog-twilio-plugin
-installUrl: https://app.posthog.com/project/apps?name=posthog-twilio-plugin
-thumbnail: ../../cdp/thumbnails/twilio.png
+github: 'https://github.com/PostHog/posthog-twilio-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=posthog-twilio-plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/twilio.png
 tags:
-    - twilio
+  - twilio
 ---
 
 This destination triggers SMS messages in Twilio when specified events or actions are detected in PostHog.

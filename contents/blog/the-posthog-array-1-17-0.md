@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -23,7 +24,7 @@ You'll notice PostHog feels much nicer to use and that's largely in part to all 
 
 ### [Sentry Integration](https://github.com/PostHog/posthog/pull/1833)
 
-![Sentry Screenshot](../images/blog/array/sentry.png)
+![Sentry Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/sentry.png)
 
 An important part of developing a great user experience is identifying, tracking, and fixing bugs. 
 
@@ -45,7 +46,7 @@ You can read more about RudderStack on [their website](https://rudderstack.com/)
 
 ### [App Attachments and GeoIP Plugin](https://github.com/PostHog/posthog/pull/2263)
 
-![MaxMind App Page Screenshot](../images/blog/array/maxmind-plugin.png)
+![MaxMind App Page Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/maxmind-plugin.png)
 
 Over the past two weeks, our [Apps](/docs/plugins/overview) feature was extensively worked on to improve the experience of using and developing apps for PostHog. 
 
@@ -57,7 +58,7 @@ As a result of this, we built the [PostHog MaxMind App](https://github.com/PostH
 
 ### [Retentions & Paths Dashboard Panels](https://github.com/PostHog/posthog/pull/2201)
 
-![Retention Panel Screenshot](../images/blog/array/retention-panel.png)
+![Retention Panel Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/retention-panel.png)
 
 Dashboards are a key part of PostHog, so it's important to us that you can have an overview of as many as possible of your metrics in them.
 
@@ -65,7 +66,7 @@ As such, the user paths graph and the retention table can now be added as panels
 
 ### [First Time Retention](https://github.com/PostHog/posthog/pull/2325)
 
-![First Time Retention Screenshot](../images/blog/array/first-time-retention.png)
+![First Time Retention Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/first-time-retention.png)
 
 Following some feedback from our own Growth Engineer on what functionality we need for ourselves at PostHog, we have now extended the functionality of our 'Retention' view, adding first time retention and differentiating between 'Cohortizing' and 'Retaining' events.
 
@@ -73,7 +74,7 @@ In short, first time retention cohortizes users based on when they did an event 
 
 ### [New Events & Actions View](https://github.com/PostHog/posthog/pull/2319)
 
-![Manage Events View Screenshot](../images/blog/array/manage-events.png)
+![Manage Events View Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/manage-events.png)
 
 In an effort to make it easier to filter through your events in PostHog and tag events that you find useful, we have now consolidated 'Events' and 'Actions' into one single view, found on the left sidebar as 'Events & Actions'.
 

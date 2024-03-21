@@ -3,15 +3,16 @@ title: JavaScript Web
 sidebarTitle: JavaScript Web
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-js
-icon: ../../../images/docs/integrate/js.svg
+github: 'https://github.com/PostHog/posthog-js'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: true
-    sessionRecording: true
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 > **Note:** This doc refers to our [posthog-js](https://github.com/PostHog/posthog-js) library for use on the browser. For server-side JavaScript, see our [Node SDK](/docs/libraries/node).
@@ -451,7 +452,7 @@ In order for PostHog to work optimally, we require storing a small amount of inf
 -   Any super properties you have defined.
 -   Some PostHog configuration options (e.g. whether session recording is enabled)
 
-By default we store all this information in a `cookie`, which means that PostHog will still be able to identify your users even across subdomains. By default, this cookie is set to expire after `365` days.
+By default we store all this information in a `cookie`, which means that PostHog will still be able to identify your users even across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
 
 If you would like to change how PostHog stores this information, you can do so with the `persistence` parameter.
 
@@ -505,6 +506,7 @@ Some of the most relevant options are:
 | `mask_all_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                       | Prevent PostHog autocapture from capturing any text from your elements.                                                        |
 | `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                         | Prevent PostHog autocapture from capturing any attributes from your elements.                                                  |
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
+| `opt_out_persistence_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of browser data storage by this PostHog instance by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
 | `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
 | `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                        | A list of properties that should never be sent with `capture` calls.                                                           |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |

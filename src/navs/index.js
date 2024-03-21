@@ -227,16 +227,16 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
-        name: 'Customer success',
+        name: 'Sales & CS',
         url: '',
         children: [
             {
-                name: 'Customer support',
-                url: '/handbook/growth/customer-support',
+                name: 'Overview',
+                url: '/handbook/growth/sales/overview',
             },
             {
-                name: 'Sales overview',
-                url: '/handbook/growth/sales/overview',
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
             },
             {
                 name: 'Sales operations',
@@ -247,7 +247,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'New customer onboarding',
+                        name: 'Customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
                     },
                     {
@@ -275,7 +275,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
                     {
-                        name: 'Historical import',
+                        name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
                 ],
@@ -619,6 +619,10 @@ export const handbookSidebar = [
         name: 'People & Ops',
         url: '',
         children: [
+           {
+                name: 'Overview',
+                url: '/handbook/people/overview',
+            },
             {
                 name: 'Finance',
                 url: '/handbook/people/finance',
@@ -855,6 +859,12 @@ export const companyMenu = {
             url: '/roadmap',
         },
         {
+            name: 'WIP',
+            icon: 'IconHourglass',
+            color: 'seagreen',
+            url: '/wip',
+        },
+        {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
@@ -906,8 +916,8 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Customer Success',
-                    url: '/teams/customer-success',
+                    name: 'Sales & CS',
+                    url: '/teams/sales-cs',
                 },
                 {
                     name: 'Exec',
@@ -1135,15 +1145,19 @@ export const docsMenu = {
                         },
                         {
                             name: 'Angular',
-                            url: '/tutorials/angular-analytics',
+                            url: '/docs/libraries/angular',
                         },
                         {
                             name: 'Astro',
-                            url: '/tutorials/astro-analytics',
+                            url: '/docs/libraries/astro',
+                        },
+                        {
+                            name: 'Bubble',
+                            url: '/docs/libraries/bubble',
                         },
                         {
                             name: 'Django',
-                            url: '/tutorials/django-analytics',
+                            url: '/docs/libraries/django',
                         },
                         {
                             name: 'Docusaurus v2',
@@ -1154,11 +1168,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Flask',
-                            url: '/tutorials/python-feature-flags',
+                            url: '/docs/libraries/flask',
                         },
                         {
                             name: 'Framer',
-                            url: '/tutorials/framer-analytics',
+                            url: '/docs/libraries/framer',
                         },
                         {
                             name: 'Gatsby',
@@ -1170,6 +1184,10 @@ export const docsMenu = {
                         {
                             name: 'Google Tag Manager',
                             url: '/docs/libraries/google-tag-manager',
+                        },
+                        {
+                            name: 'Laravel',
+                            url: '/docs/libraries/laravel',
                         },
                         {
                             name: 'Next.js',
@@ -1185,7 +1203,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Remix',
-                            url: '/tutorials/remix-analytics',
+                            url: '/docs/libraries/remix',
                         },
                         {
                             name: 'Retool',
@@ -1213,7 +1231,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Svelte',
-                            url: '/tutorials/svelte-analytics',
+                            url: '/docs/libraries/svelte',
                         },
                         {
                             name: 'Vue.js',
@@ -1221,7 +1239,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Webflow',
-                            url: '/tutorials/webflow',
+                            url: '/docs/libraries/webflow',
                         },
                         {
                             name: 'WordPress',
@@ -2582,6 +2600,12 @@ const menu = [
                 icon: 'IconGraph',
                 color: 'blue',
                 url: '/product-analytics',
+            },
+            {
+                name: 'Web analytics',
+                icon: 'IconPieChart',
+                color: '[#36C46F]',
+                url: '/web-analytics',
             },
             {
                 name: 'Session replay',

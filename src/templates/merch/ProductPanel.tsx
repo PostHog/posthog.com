@@ -128,7 +128,9 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             {product.imageProducts?.length > 0 && (
                 <div className="border-t border-light dark:border-dark pt-4 mt-4">
                     <h3 className="text-lg mb-0">See something else you liked?</h3>
-                    <p className="mt-0 opacity-75">You may have spotted these other fine PostHog products in the photos above.</p>
+                    <p className="mt-0 opacity-75">
+                        You may have spotted these other fine PostHog products in the photos above.
+                    </p>
                     <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-2">
                         {product.imageProducts?.map((product) => {
                             const { handle, featuredImage } = product

@@ -1,20 +1,23 @@
 ---
 title: How to set up surveys in Remix
 date: 2024-02-05
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+tags:
+  - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/remix-surveys/events-light.png'
-import EventsDark from '../images/tutorials/remix-surveys/events-dark.png'
-import ImgSurveyResultsLight from '../images/tutorials/remix-surveys/survey-results-light.png'
-import ImgSurveyResultsDark from '../images/tutorials/remix-surveys/survey-results-dark.png'
-import ImgSurveyTemplatesLight from '../images/tutorials/remix-surveys/survey-templates-light.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/remix-surveys/survey-templates-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/events-dark.png"
+export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/survey-results-light.png"
+export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/survey-results-dark.png"
+export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/survey-templates-light.png"
+export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/survey-templates-dark.png"
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Remix app.
 
@@ -44,7 +47,7 @@ export default function Index() {
 
 Run `npm run dev` and navigate to `http://localhost:3000` to see your app in action.
 
-![Basic Remix app](../images/tutorials/remix-surveys/basic-app.png)
+![Basic Remix app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -88,8 +91,8 @@ startTransition(() => {
 Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight={EventsInPostHogLight} 
-  imageDark={EventsInPostHogDark} 
+  imageLight={EventsLight} 
+  imageDark={EventsDark} 
   alt="Events captured in PostHog" 
   classes="rounded"
 />
@@ -124,7 +127,7 @@ Select any template, or you can create your own by clicking "Create blank survey
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
 
-![Popover survey in app](../images/tutorials/remix-surveys/popover-survey.png)
+![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/popover-survey.png)
 
 ### Option 2: Implement your own survey UI
 
@@ -243,7 +246,7 @@ export default function Index() {
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/remix-surveys/sample-survey-ui.png)
+![Custom survey UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 

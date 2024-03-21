@@ -1,10 +1,13 @@
 ---
 title: The basics of using regex in PostHog
 date: 2023-01-18
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["insights", 'product analytics']
+tags:
+  - insights
+  - product analytics
 ---
 
 Regular expressions or regex is a way to search text for patterns. It is a structure of symbols that finds text matching what you want. In doing so, it is a powerful way to filter and validate strings of text.
@@ -36,7 +39,7 @@ You can use regex to match dates, specifically, a range of dates like a week or 
 
 If you want to create a cohort of users who signed up in September of 2022, for example, you can use `2022-09-.+`. This will match any date in September of 2022. The `.+` at the end means any number of characters after the date.
 
-![Cohort](../images/tutorials/regex-basics/cohort.png)
+![Cohort](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/regex-basics/cohort.png)
 
 This is also useful if you want a range of dates. You can use the square brackets to specify a range of dates. For example, if you wanted sign ups between April 5-9th in 2022, you can use `2022-04-0[5-9]+`. 
 
@@ -46,7 +49,7 @@ One of the most popular uses of regex in PostHog is matching URL patterns. This 
 
 For example, if you wanted to get stats from every tutorial on PostHog, use `https:\/\/posthog\.com\/tutorials\/.+`. This pattern needs a bunch of backslashes `\` to escape characters. Without this, regex would recognize the forward slashes and periods as different symbols.
 
-![URL](../images/tutorials/regex-basics/url.png)
+![URL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/regex-basics/url.png)
 
 Regex can also be used to match multiple pages with the same URL structure and a variable ID. For example, if you had a blog edit page with an ID in the middle of the string, something like `example.com/blog/{id}/edit`, then you could use the following regex pattern `example.com\/blog\/.+\/edit`. 
 
@@ -62,7 +65,7 @@ In settings and the path insight, PostHog lets you clean paths by combining mult
 
 At PostHog, we use path cleaning rules for both our person and session recording views. We use the pattern `/person/\d+` to combine person pages into `person-view`, and `.sessionRecordingId=.` to combine session recordings in `Any Session Recording Route`.
 
-![Path](../images/tutorials/regex-basics/path.png)
+![Path](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/regex-basics/path.png)
 
 ## Further reading
 

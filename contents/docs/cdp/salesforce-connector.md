@@ -1,10 +1,11 @@
 ---
 title: Salesforce
-github: https://github.com/PostHog/salesforce-plugin
-installUrl: https://app.posthog.com/project/apps?name=Salesforce
-thumbnail: ../../cdp/thumbnails/salesforce.svg
+github: 'https://github.com/PostHog/salesforce-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Salesforce'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/salesforce.svg
 tags:
-    - salesforce
+  - salesforce
 ---
 
 This destination connects to your Salesforce instance, sending events from PostHog to Salesforce as they are ingested.

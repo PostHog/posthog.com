@@ -7,10 +7,11 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-eu-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-eu-blog.png
 featuredImageType: full
 category: PostHog news
-tags: 
+tags:
   - Product updates
 ---
 

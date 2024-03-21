@@ -1,6 +1,7 @@
 ---
 title: Segment
-icon: ../../images/docs/integrate/frameworks/segment.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/segment.svg
 ---
 
 Segment is a Customer Data Platform (CDP) that allows you to easily manage data and integrations with services across your growth, product, and marketing stack. 

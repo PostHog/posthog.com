@@ -1,15 +1,17 @@
 ---
 title: How to set up A/B tests in React Native (Expo)
 date: 2024-03-01
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/react-native-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/react-native-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/react-native-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/react-native-ab-tests/experiment-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/react-native-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/react-native-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/react-native-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/react-native-ab-tests/experiment-setup-dark.png"
 
 [A/B tests](/ab-testing) helps you improve your React Native app by enabling you to compare the impact of changes on key metrics. 
 
@@ -36,7 +38,7 @@ npx expo start
 
 Open your Expo Go app on your mobile device, scan the QR code in your terminal, and it should open an app with a white screen and some text.
 
-![Basic app](../images/tutorials/react-native-analytics/basic.png)
+![Basic app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-native-analytics/basic.png)
 
 Next, we set up our app's basic functionality. To set up our stack navigator, we install `@react-navigation/native-stack` as a dependency and create a new file `AppNavigator.js` in our project directory. We also create two new files for our screens:
 
