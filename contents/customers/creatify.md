@@ -32,7 +32,7 @@ When the PostHog web analytics beta launched in November 2023, Creatify was amon
 
 <BorderWrapper>
 <Quote
-    imageSource="/images/customers/creatify_xin.jpg"
+    imageSource="/images/customers/creatify-xin.png"
     size="md"
     name="Xin Zhou"
     title="CTO at Creatify"

@@ -2,9 +2,9 @@
 title: Why Significa switched from Plausible to PostHog
 customer: Significa
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711020088/posthog.com/contents/images/customers/significa/significa-logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1711025316/posthog.com/contents/images/customers/significa/wordmark.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711020088/posthog.com/contents/images/customers/significa/significa-logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1711025316/posthog.com/contents/images/customers/significa/wordmark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1711020079/posthog.com/contents/images/customers/significa/significa-feat.jpg
 industries:
