@@ -33,7 +33,7 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 - The marketing team is responsible for all the above – mostly Andy, Ian, and Lior, but James Hawkins, Joe and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
 
-- You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter. All planned content should have an issue.
+- You can view planned content on the <PrivateLink url="https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent">Marketing project board</PrivateLink> using the "content" label filter. All planned content should have an issue.
 
 - Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y) to share ad-hoc ideas.
 

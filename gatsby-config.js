@@ -80,6 +80,9 @@ module.exports = {
                     {
                         resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
                     },
+                    {
+                        resolve: require.resolve('./plugins/gatsby-remark-video'),
+                    },
                 ],
             },
         },

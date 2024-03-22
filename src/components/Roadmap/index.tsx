@@ -19,6 +19,7 @@ import CommunityLayout from 'components/Community/Layout'
 import { companyMenu } from '../../navs'
 import Fuse from 'fuse.js'
 import Tooltip from 'components/Tooltip'
+import Spinner from 'components/Spinner'
 
 interface IGitHubPage {
     title: string
@@ -48,11 +49,14 @@ export interface IRoadmap {
 }
 
 const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
-    const { user, likeRoadmap } = useUser()
+    const { user, likeRoadmap, getJwt } = useUser()
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [publishLoading, setPublishLoading] = useState(false)
+    const [publishConfirm, setPublishConfirm] = useState(false)
     const teamName = teams?.data?.[0]?.attributes?.name
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
+    const isModerator = user?.role?.type === 'moderator'
 
     useEffect(() => {
         setLoading(false)
@@ -67,6 +71,27 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
     const onAuth = (user: User) => {
         like(user)
         setAuthModalOpen(false)
+    }
+
+    const handleUnpublish = async () => {
+        if (!publishConfirm) {
+            setPublishConfirm(true)
+            return
+        }
+        setPublishLoading(true)
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}`, {
+            body: JSON.stringify({
+                data: {
+                    publishedAt: null,
+                },
+            }),
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        }).then((res) => res.json())
+        onUpdate()
     }
 
     return (
@@ -121,7 +146,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                         <div className="mt-1 text-[15px]">
                             <Markdown>{description}</Markdown>
                         </div>
-                        <div className="mt-2">
+                        <div className="mt-2 flex space-x-2">
                             <CallToAction
                                 disabled={loading}
                                 onClick={() => {
@@ -148,6 +173,22 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                                     )}
                                 </span>
                             </CallToAction>
+                            {isModerator && (
+                                <CallToAction
+                                    onClick={handleUnpublish}
+                                    type="secondary"
+                                    size="sm"
+                                    disabled={publishLoading}
+                                >
+                                    {publishConfirm ? (
+                                        'ARE YOU ABSOLUTELY SURE'
+                                    ) : publishLoading ? (
+                                        <Spinner className="mx-auto !w-5 !h-5" />
+                                    ) : (
+                                        'Unpublish'
+                                    )}
+                                </CallToAction>
+                            )}
                         </div>
                     </div>
                 </div>
