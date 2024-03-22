@@ -31,7 +31,7 @@ On the other hand, Risotto’s founders always had a clear idea what they wanted
 
 ## 2. They had deep domain expertise
 
-Part of the reason the team had such conviction in their vision was due to the deep experience they had in the sector. Aron’s co-founder, Alex, had previously led IT engineering at both Dropbox and Gusto, while Aron had experience in machine learning from his time at Grammarly. 
+Part of the reason the team had such conviction in their vision was due to the deep experience they had in the sector. One of Aron’s co-founders, Alex, had previously led IT engineering at both Dropbox and Gusto, while Aron had experience in machine learning from his time at Grammarly. 
 
 “Alex has seen all of the potential solutions out there,” says Aron. “None of them work the way they should and often they just cause new problems. That’s how we knew what to build: Risotto is the product Alex always wanted but was never able to find.”
 
@@ -57,9 +57,9 @@ For Risotto that incumbent is ServiceNow,  a $160bn company trusted by over 7,50
 
 The final ingredient, according to Aron, was that the founding team was singularly driven to get into Y Combinator due to a deep history with the program. 
 
-“Y Combinator was always our first choice,” says Aron. “Alex and I met at HelloSign, which was also [launched out of YC in the W11 batch](https://www.ycombinator.com/blog/hellofax-yc-w11-launches-hellosign-the-easies/). It was always highest on our list because of that experience and the respect that HelloSign’s founders had for YC.” 
+“Y Combinator was always our first choice,” says Aron. “Alex, Chris, and I all met at HelloSign, which was also [launched out of YC in the W11 batch](https://www.ycombinator.com/blog/hellofax-yc-w11-launches-hellosign-the-easies/). It was always highest on our list because of that experience and the respect that HelloSign’s founders had for YC.” 
 
-The increased investments which Y Combinator now makes in each startup also helped to seal the deal, as it enabled Aron and Alex to quit their jobs and focus wholly on building Risotto. 
+The increased investments which Y Combinator now makes in each startup also helped to seal the deal, as it enabled Aron, Chris, and Alex to quit their jobs and focus wholly on building Risotto. 
 
 “I’m glad we did,” continues Aron. “It’s been a fantastic experience and has exceeded my expectations in many ways. The team, the support, the encouragement you get... it’s all just incredible. We’re so humbled and honored to have got in when we did!”
 
