@@ -18,7 +18,7 @@ date: 2024-03-19
 
 [Creatify](https://creatify.ai/) is a powerful AI video editor that simplifies the process of quickly creating short video ads for any platform. Its capability to rapidly generate marketing videos lets users test strategies and adopt the data-driven approach that Creatify champions.
 
-“We officially launched Creatify in early 2023 but we’d been in development mode for a while before that,” said founding CTO Xin Zhou, who met his Creatify co-founders while working at Meta. “We used that time to build the product and test ideas. PostHog was key to that — we’d been using it for about three months before we even launched.”
+“We officially launched Creatify in early 2024 but we’d been in development mode for a while before that,” said founding CTO Xin Zhou, who met his Creatify co-founders while working at Meta. “We used that time to build the product and test ideas. PostHog was key to that — we’d been using it for about three months before we even launched.”
 
 Before switching to PostHog, Creatify had tried using other platforms, such as Google Analytics and Amplitude. They found the tools unsuitable for their needs.
 
