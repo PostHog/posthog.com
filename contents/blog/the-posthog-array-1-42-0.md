@@ -56,7 +56,7 @@ When you find an interesting session recording, you probably want to share it wi
 
 ### New: Get beta features via our roadmap
 
-![posthog roadmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-42-0-roadmap.gif)
+![posthog roadmap](https://res.cloudinary.com/dmukukwp6/video/upload/v1711093816/posthog.com/contents/images/blog/array/1-42-0-roadmap.mp4)
 
 Even though we're open source, we know it's not always very easy to tell what we're working on or planning for the future - there are just so many repos, issues and PRs!
 
