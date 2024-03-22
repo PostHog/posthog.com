@@ -15,9 +15,9 @@ tags:
 ## tl;dr
 
 * We have cut our pricing by X for everyone using our product analytics - this is our biggest ever price decrease!
-* We are now _by far_ the cheapest product analytics tool on the internet, with by far the broadest selection of features available in our lowest pricing tier. We are 5-10x cheaper than the nearest competitor.
-* We are going to continue making price cuts, this is the start
-* We have done this by creating a new lower tier for non-identified events - you can read the docs for how to set yourself up here
+* We are now _by far_ the cheapest product analytics tool on the internet, with by far the broadest selection of features available of everyone, in our lowest pricing tier. We are 5-10x cheaper than the nearest competitor.
+* We are going to continue making price cuts, this is the start.
+* We have done this by creating a new lower tier for non-identified events - you can read the docs for how to set yourself up here.
 
 <INSERT GRAPH SHOWING PRICING COMPARISON>
 
@@ -58,3 +58,7 @@ Because of our greater efficiency, we can be better and cheaper:
 
 * Better because you can integrate all the products together in one place (we are pretty deep with shockingly few people working in each team, processing 10s of billions of events each month)
 * Cheaper because it is cheaper
+
+## The more we give away, the more we make
+
+Lower prices will drive higher retention and more sign ups. Being more generous means more people turn up and stick around. That is likely to outweigh a drop in the amount we get from each user.
