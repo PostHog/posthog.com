@@ -355,7 +355,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                                         event.preventDefault()
                                                                         setCurrentModal(manual.category)
                                                                     }}
-                                                                    className="relative mt-2 inline-block bg-black/10 rounded-sm text-xs px-2 py-1 text-black/50 dark:text-white/70 font-semibold z-50 hover:bg-red hover:text-white dark:bg-white/10 dark:hover:bg-white/30"
+                                                                    className="relative mt-2 inline-block bg-black/10 rounded-sm text-xs px-2 py-1 text-black/50 dark:text-white/70 font-semibold z-[50] hover:bg-red hover:text-white dark:bg-white/10 dark:hover:bg-white/30"
                                                                 >
                                                                     {tutorials.length}{' '}
                                                                     {tutorials.length > 1 ? 'tutorials' : 'tutorial'}

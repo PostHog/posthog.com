@@ -165,7 +165,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                         <em>"All the updates that are fit to print"</em>
                     </p>
                 </div>
-                <div className="flex space-x-2 items-center relative z-50">
+                <div className="flex space-x-2 items-center relative z-[50]">
                     <Select
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}

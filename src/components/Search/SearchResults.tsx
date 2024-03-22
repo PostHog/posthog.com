@@ -150,7 +150,7 @@ export default function SearchResults(props: SearchResultsProps) {
         <Combobox value={{} as Result} onChange={onSelect} by={compareResults}>
             {({ activeOption }) => (
                 <div
-                    className="search-results z-50 bg-white rounded overflow-hidden shadow-xl flex flex-col h-full"
+                    className="search-results z-[50] bg-white rounded overflow-hidden shadow-xl flex flex-col h-full"
                     onKeyDown={handleKeyDown}
                 >
                     <SearchBox />

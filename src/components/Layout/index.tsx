@@ -18,7 +18,7 @@ const Article = ({ children, className = '' }: { children: React.ReactNode; clas
     return (
         <div className={className}>
             {compact ? (
-                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-50 bg-light dark:bg-dark">
+                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-[50] bg-light dark:bg-dark">
                     <SearchBox className="!w-full !py-2" location="mobile-header" />
                 </div>
             ) : (

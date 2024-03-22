@@ -79,7 +79,7 @@ export const Combobox = (props: ComboboxProps) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <HeadlessCombobox.Options className="absolute top-full mt-1 w-full bg-white dark:bg-gray-accent-dark rounded p-0 z-50 text-sm max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-xl border border-black/10">
+                        <HeadlessCombobox.Options className="absolute top-full mt-1 w-full bg-white dark:bg-gray-accent-dark rounded p-0 z-[50] text-sm max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-xl border border-black/10">
                             {filteredOptions.length === 0 && query !== '' ? (
                                 <div className="px-2.5 py-1 text-sm text-gray">No results</div>
                             ) : (
