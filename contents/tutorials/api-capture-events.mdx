@@ -1,6 +1,6 @@
 ---
 title: Using the PostHog API to capture events
-date: 2023-02-09
+date: 2023-02-09T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -11,6 +11,9 @@ tags:
   - product analytics
   - product os
 ---
+export const apiEventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-capture-events/api-events-light-mode.png"
+export const apiEventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-capture-events/api-events-dark-mode.png"
+
 
 PostHog provides [libraries](/docs/integrate?tab=sdks) that make it easy to capture events in popular languages. These libraries are basically wrappers around the API. They handle and automate common tasks like capturing pageviews.
 
@@ -62,7 +65,12 @@ print(response.json())
 
 Once you’ve done that, you should see the event in your PostHog instance.
 
-![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-capture-events/events.png)
+<ProductScreenshot
+    imageLight = {apiEventsLight} 
+    imageDark = {apiEventsDark}
+    classes="rounded"
+    alt="Events"
+/>
 
 ### Adding properties and batching
 

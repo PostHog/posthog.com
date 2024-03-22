@@ -10,8 +10,15 @@ tags:
   - filters
   - settings
   - product os
-date: 2022-02-14
+date: 2022-02-14T00:00:00.000Z
 ---
+export const step1Light = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step1-light-mode.png"
+export const step1Dark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step1-dark-mode.png"
+export const step2Light = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step2-light-mode.png"
+export const step2Dark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step2-dark-mode.png"
+export const step3Light = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step3-light-mode.png"
+export const step3Dark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step3-dark-mode.png"
+
 
 _Estimated reading time: 4 minutes_ ☕
 
@@ -25,7 +32,12 @@ To make it easier to get accurate insights, PostHog includes tools to filter int
 
 PostHog identifies internal users on a project-by-project basis, so head to [your project setting](https://us.posthog.com/settings/project#internal-user-filtering) to get started. If your PostHog instance spans multiple projects then you must repeat this tutorial for each project. 
 
-![Filter Internal Users Step 1](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/internal-users/step1.png)
+<ProductScreenshot
+    imageLight = {step1Light} 
+    imageDark = {step1Dark}
+    classes="rounded"
+    alt="Filter Internal Users Step 1"
+/>
 
 Any internal users you identify for a project will apply for _all_ users on that project. 
 
@@ -39,7 +51,12 @@ One of the easiest filters to create is to filter out internal users identified 
 
 > email ∌ (doesn’t contain) @posthog.com
 
-![Filter Internal Users Step 2](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/internal-users/step2.png)
+<ProductScreenshot
+    imageLight = {step2Light} 
+    imageDark = {step2Dark}
+    classes="rounded"
+    alt="Filter Internal Users Step 2"
+/>
 
 The filters you apply are added as extra filters when the toggle is switched on. So, if you apply a Cohort filter, it means toggling filtering on will match only this specific cohort.
 
@@ -55,6 +72,11 @@ You can also create filters based on pre-prepared cohorts of users, which is esp
 
 ## Step 4: Apply the filter to an insight
 
-![Filter Internal Users Step 3](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/internal-users/step3.png)
+<ProductScreenshot
+    imageLight = {step3Light} 
+    imageDark = {step3Dark}
+    classes="rounded"
+    alt="Filter Internal Users Step 3"
+/>
 
 The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together. Simple!

@@ -4,12 +4,26 @@ sidebar: Docs
 showTitle: true
 author:
   - igor-kotua
-date: 2022-07-06
+date: 2022-07-06T00:00:00.000Z
 tags:
   - actions
   - toolbar
   - product analytics
 ---
+
+export const setupLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/setup-toolbar-light-mode.mp4"
+export const setupDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/setup-toolbar-dark-mode.mp4"
+export const createNewActionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/docs/getting-started/images/create-new-action-light-mode.png"
+export const createNewActionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/docs/getting-started/images/create-new-action-dark-mode.png"
+export const toolbarNewActionLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/products/product-analytics/toolbar-create-new-action-light-mode.mp4"
+export const toolbarNewActionDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/products/product-analytics/toolbar-create-new-action-dark-mode.mp4"
+export const dataManagementLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/data-management/data-management-light-mode.png"
+export const dataManagementDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/data-management/data-management-dark-mode.png"
+export const matchGroupsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/match-groups-light-mode.png"
+export const matchGroupsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/match-groups-dark-mode.png"
+export const toolbarLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711136223/posthog.com/contents/images/tutorials/css-selectors-for-actions/toolbar-light-mode.png"
+export const toolbarDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711136223/posthog.com/contents/images/tutorials/css-selectors-for-actions/toolbar-dark-mode.png"
+
 
 _Estimated reading time: 7 minutes_ ☕
 
@@ -98,6 +112,7 @@ Let's take a look at an example:
        Subscribe
    </button>
 ```
+
 Here we defined the data attribute `data-action` with a value `newsletter__subscribe`. As you see, we are in a full control of these attributes, meaning we can manage how narrow or wide our selectors will be. 
 
 Then in PostHog we can accurately group all events around newsletter subscription with a simple CSS selector:
@@ -133,19 +148,34 @@ There are two ways to do it - through the Toolbar and Data Management section.
 ### The toolbar
 Go to your PostHog instance and select `Launch toolbar` in the bottom of the sidebar.
 
-![Toolbar Location](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/toolbar-location.mp4)
+<ProductVideo
+    videoLight = {setupLight}
+    videoDark = {setupDark}
+    alt="How to setup the PostHog toolbar" 
+    classes = {"rounded"}
+/>
 
 Then, press the `Open with Toolbar` button, which will take you to your website. You can read more about working with the toolbar [here](/manual/toolbar).
 
 After your website is open, you should see a PostHog toolbar:
 
-![Toolbar In Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/toolbar_in_action.png)
+<ProductScreenshot
+    imageLight = {toolbarLight}
+    imageDark = {toolbarDark}
+    alt="Toolbar in action" 
+    classes = {"rounded"}
+/>
 
 The best option to start creating actions with CSS selectors is to use the `Inspect` option in the toolbar and then click on some element on the page. You should see the menu with a `Create a new action` button in the bottom. Press it and you will see the `Actions` menu with automatically generated CSS selector in the `Selector` section. Feel free to start from there and change it!
 
 Alternatively, you can go to the `Actions` option in the toolbar, select `New action` and then press `Select Element`. You should get the `Actions` menu:
 
-![Action Menu](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/create_action.png).
+<ProductVideo
+    videoLight = {toolbarNewActionLight}
+    videoDark = {toolbarNewActionDark}
+    alt="How to create a new action using the toolbar" 
+    classes = {"rounded"}
+/>
 
 Tick the `Selector` checkbox and you are ready to create CSS selectors!
 
@@ -153,18 +183,32 @@ Tick the `Selector` checkbox and you are ready to create CSS selectors!
 
 Another way to create CSS selectors is to go to the [Data Management](https://us.posthog.com/data-management/events) tab, which is located in the sidebar of your PostHog instance.
 
-![Data Management Location](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/data_management_location.png).
+<ProductScreenshot
+    imageLight = {dataManagementLight} 
+    imageDark = {dataManagementDark}
+    classes= "rounded"
+    alt= "Data management events" 
+/>
 
 On the `Data Management` page, select the `Actions` tab. Then press the `New Action` button. You should see the menu like this:
 
-![Create New Action Data Management](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/create_new_action_data_management.png).
+<ProductScreenshot
+    imageLight={createNewActionLight} 
+    imageDark={createNewActionDark} 
+    alt= "Create new action modal with two buttons: 'Inspect element on your site' and 'From event or pageview'"
+    classes="rounded"
+/>
 
 Now you can select the `Inspect element` option, but it will eventually bring you back to the `Toolbar` which we covered earlier. So, instead we will select `From event or pageview` option.
 
 Finaly you should see a new page with a `Match Group` menu open. Choose the `Autocapture` option.
 
-![Create New Action Data Management](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/css-selectors-for-actions/match_groups.png).
-
+<ProductScreenshot
+    imageLight = {matchGroupsLight} 
+    imageDark = {matchGroupsDark}
+    alt= "Data management: match groups" 
+    classes="rounded"
+/>
 Scroll down a bit and you will find the `HTML selector matches` section. Here you can define your CSS selectors.
 
 It's worth noting that using `Match groups` it is possible to use CSS selectors alongside other filters, like `Text equals` and `Link target equals`. Moreover, you can even define several `Match groups` for a one action.
