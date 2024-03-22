@@ -79,7 +79,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
             return
         }
         setPublishLoading(true)
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id ?? ''}`, {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}`, {
             body: JSON.stringify({
                 data: {
                     publishedAt: null,
