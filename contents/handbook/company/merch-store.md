@@ -33,11 +33,17 @@ We sell it through our [merch store](https://merch.posthog.com/) store on Shopif
 
 ## How do we give away merch for free?
 
-### Individuals
+### Customers
 
 Create a gift card in [Shopify admin](https://posthog.myshopify.com/admin/gift_cards). You can either copy the code, or create a 'new customer' and send them the code directly. For contributions we tend to do $50, with no expiration date.
 
 Alternatively, if you want to send them a specific product via Printfection, you can create a 'New Order' under [this campaign](https://app.printfection.com/account/campaign/manage.php?storeid=304946). 
+
+### PostHog team
+
+If you want more, <PrivateLink url="https://github.com/PostHog/runbooks/blob/main/docs/merch.md"> here's how to get it! </PrivateLink> 
+
+As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
 
 ### YC Deal
 
