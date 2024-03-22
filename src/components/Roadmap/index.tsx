@@ -53,6 +53,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [publishLoading, setPublishLoading] = useState(false)
+    const [publishConfirm, setPublishConfirm] = useState(false)
     const teamName = teams?.data?.[0]?.attributes?.name
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
     const isModerator = user?.role?.type === 'moderator'
@@ -73,6 +74,10 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
     }
 
     const handleUnpublish = async () => {
+        if (!publishConfirm) {
+            setPublishConfirm(true)
+            return
+        }
         setPublishLoading(true)
         await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id ?? ''}`, {
             body: JSON.stringify({
@@ -175,7 +180,13 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                                     size="sm"
                                     disabled={publishLoading}
                                 >
-                                    {publishLoading ? <Spinner className="mx-auto !w-5 !h-5" /> : 'Unpublish'}
+                                    {publishConfirm ? (
+                                        'ARE YOU ABSOLUTELY SURE'
+                                    ) : publishLoading ? (
+                                        <Spinner className="mx-auto !w-5 !h-5" />
+                                    ) : (
+                                        'Unpublish'
+                                    )}
                                 </CallToAction>
                             )}
                         </div>
