@@ -1,10 +1,14 @@
 ---
 title: Using HogQL for advanced time and date filters
 date: 2023-05-30
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["hogql", "insights", 'product analytics']
+tags:
+  - hogql
+  - insights
+  - product analytics
 ---
 
 Since there are infinite ways to break down time, there are infinite ways to filter based on time. HogQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
@@ -17,7 +21,7 @@ To add a HogQL filter:
 
 HogQL filters are available on every type of insight from trends to funnels to lifecycle.
 
-![hogql.mp4](../images/tutorials/hogql-date-time-filters/hogql.mp4)
+![hogql.mp4](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-date-time-filters/hogql.mp4)
 
 ## Accessing your data’s dates and times
 
@@ -108,7 +112,7 @@ dateDiff(
 
 A use case for this is creating an action for `pricing pageviews` during the last days of the trial, then posting to a [webhook](/docs/webhooks) to notify your team to reach out to the user.
 
-![Action](../images/tutorials/hogql-date-time-filters/action.png)
+![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-date-time-filters/action.png)
 
 Another similar example is using HogQL to understand usage in the first two weeks after subscribing. To do this, use `dateDiff()` again but with `'week'`, your signed up property, and `now()` like this:
 

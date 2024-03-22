@@ -18,7 +18,7 @@ type AuthenticationProps = {
     showBanner?: boolean
     showProfile?: boolean
     handleMessageSubmit?: (values: any, user: User | null) => void
-    onAuth?: () => void
+    onAuth?: (user: User) => void
 }
 
 export const Authentication = ({
@@ -116,14 +116,14 @@ export const Authentication = ({
                                         <SignIn
                                             buttonText={buttonText.login}
                                             setMessage={setMessage}
-                                            onSubmit={(user) => {
+                                            onSubmit={async (user) => {
                                                 if (formValues) {
-                                                    handleMessageSubmit?.(formValues, user)
+                                                    await handleMessageSubmit?.(formValues, user)
                                                 } else {
                                                     setParentView?.(null)
                                                 }
 
-                                                onAuth?.()
+                                                onAuth?.(user)
                                             }}
                                         />
                                     ),
@@ -131,14 +131,14 @@ export const Authentication = ({
                                         <SignUp
                                             buttonText={buttonText.signUp}
                                             setMessage={setMessage}
-                                            onSubmit={(user) => {
+                                            onSubmit={async (user) => {
                                                 if (formValues) {
-                                                    handleMessageSubmit?.(formValues, user)
+                                                    await handleMessageSubmit?.(formValues, user)
                                                 } else {
                                                     setParentView?.(null)
                                                 }
 
-                                                onAuth?.()
+                                                onAuth?.(user)
                                             }}
                                         />
                                     ),

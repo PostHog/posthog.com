@@ -1,10 +1,12 @@
 ---
 title: How to show a survey after a delay
 date: 2023-11-08
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['surveys']
+tags:
+  - surveys
 ---
 
 When asking for feedback, timing is everything. You want users to **actually use your app** before asking them about it. A survey that pops up immediately can annoy users and receive worse responses.
@@ -21,7 +23,7 @@ This means our survey **only shows when an HTML element with the class `delayed-
 
 Finally, click "Save as draft" and then "Launch." You don’t have to worry about this survey showing early because the class selector won’t match anything until we implement it.
 
-![Creating a survey video](../images/tutorials/delayed-survey/survey.mp4)
+![Creating a survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/delayed-survey/survey.mp4)
 
 ## Implement your delayed survey
 
@@ -59,7 +61,7 @@ export default function Test() {
 
 Now, when we run `npm run dev` and go to `http://localhost:3000/test`, our survey pops up after a delay instead of right away.
 
-![Delayed survey video](../images/tutorials/delayed-survey/delay.mp4)
+![Delayed survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/delayed-survey/delay.mp4)
 
 ## Further reading
 

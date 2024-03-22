@@ -2,10 +2,14 @@
 title: How to filter out internal users
 sidebar: Docs
 showTitle: true
-featuredVideo: https://www.youtube-nocookie.com/embed/2bptTniYPGc
+featuredVideo: 'https://www.youtube-nocookie.com/embed/2bptTniYPGc'
 featuredTutorial: false
-author: ["joe-martin"]
-tags: ['filters', 'settings', 'product os']
+author:
+  - joe-martin
+tags:
+  - filters
+  - settings
+  - product os
 date: 2022-02-14
 ---
 
@@ -21,7 +25,7 @@ To make it easier to get accurate insights, PostHog includes tools to filter int
 
 PostHog identifies internal users on a project-by-project basis, so head to [your project setting](https://us.posthog.com/settings/project#internal-user-filtering) to get started. If your PostHog instance spans multiple projects then you must repeat this tutorial for each project. 
 
-![Filter Internal Users Step 1](../images/tutorials/internal-users/step1.png)
+![Filter Internal Users Step 1](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/internal-users/step1.png)
 
 Any internal users you identify for a project will apply for _all_ users on that project. 
 
@@ -35,7 +39,7 @@ One of the easiest filters to create is to filter out internal users identified 
 
 > email ∌ (doesn’t contain) @posthog.com
 
-![Filter Internal Users Step 2](../images/tutorials/internal-users/step2.png)
+![Filter Internal Users Step 2](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/internal-users/step2.png)
 
 The filters you apply are added as extra filters when the toggle is switched on. So, if you apply a Cohort filter, it means toggling filtering on will match only this specific cohort.
 
@@ -51,6 +55,6 @@ You can also create filters based on pre-prepared cohorts of users, which is esp
 
 ## Step 4: Apply the filter to an insight
 
-![Filter Internal Users Step 3](../images/tutorials/internal-users/step3.png)
+![Filter Internal Users Step 3](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/internal-users/step3.png)
 
 The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together. Simple!

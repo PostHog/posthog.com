@@ -1,15 +1,18 @@
 ---
 title: How Purplewave reached a 25% response rate with PostHog surveys
 customer: Purplewave
-logo: ../images/customers/purplewave/purplewave_logo.png
-logoDark: ../images/customers/purplewave/purplewave_logo_dark.png
-featuredImage: ../images/customers/purplewave/purplewave.jpg
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/purplewave/purplewave_logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/purplewave/purplewave_logo_dark.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/purplewave/purplewave.jpg
 industries:
-    - ECommerce
+  - ECommerce
 users:
-    - Product
+  - Product
 toolsUsed:
-    - Surveys
+  - Surveys
 date: 2023-09-15
 ---
 
@@ -44,7 +47,7 @@ Conducting surveys with PostHog also enabled Purple Wave to centralize data into
 “I really hate having to switch between separate software,” says Matt. “I want it all in one platform so it’s easy to access. Ultimately everything comes back to the [data warehouse](/docs/data-warehouse). You have to have your data centralized in order to use it effectively.” 
 
 
-![PostHog surveys](../images/customers/purplewave/purplewave_survey.png)
+![PostHog surveys](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/purplewave/purplewave_survey.png)
 <Caption>Survey templates help you get started quickly, or you can build your own from scratch</Caption>
 
 

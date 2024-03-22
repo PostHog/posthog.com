@@ -1,13 +1,15 @@
 ---
 title: How we do trunk-based development (and why you should too)
 date: 2024-02-05
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 rootpage: /blog
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
- - Engineering
- - Feature management
+  - Engineering
+  - Feature management
 ---
 
 What do trees, elephants, and successful software all have in common? They rely on their trunks to help them grow big and strong. In the case of software, the trunk is the main codebase engineers make changes to and that deploys to users.
@@ -26,7 +28,7 @@ Specifically for trunk-based development, there are two types of branches:
 
 2. `feature/fix`: Relatively small and short-lived branches where work and changes happen, and then get squashed and merged into `main` regularly. 
 
-![Trunk-based development diagram](../images/blog/trunk-based-development/trunk.png)
+![Trunk-based development diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/trunk-based-development/trunk.png)
 
 This simplicity is different than other software development strategies with more branches such as:
 
@@ -36,7 +38,7 @@ This simplicity is different than other software development strategies with mor
 
 - **Forking:** Often used by open-source projects, developers have their own repository, make changes, and then maintainers review and pull changes into the main repository.
 
-![Feature branching](../images/blog/trunk-based-development/feature.png)
+![Feature branching](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/trunk-based-development/feature.png)
 
 ## What are the benefits of trunk-based development?
 
@@ -95,7 +97,7 @@ For someone coming from a different branching strategy, this philosophy may seem
 
 We expect engineers to write tests for their code as they are working on it and before they merge it. They run these locally then add them to our test suite that runs on every PR.
 
-![Checks](../images/blog/trunk-based-development/checks.png)
+![Checks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/trunk-based-development/checks.png)
 
 You can look at [a pull request on our repo](https://github.com/PostHog/posthog/pulls) to see the suite of end-to-end, frontend, linting, Storybook, code quality, visual regression, and migration tests before merging. This enables us to be confident in the code we are merging.
 

@@ -1,9 +1,10 @@
 ---
 date: 2024-02-13
-title: "Product engineer vs software engineer: How are they different?"
+title: 'Product engineer vs software engineer: How are they different?'
 author:
   - ian-vanagas
-featuredImage: ../images/blog/product-engineer.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-engineer.jpg
 featuredImageType: full
 category: Engineering
 tags:
@@ -17,7 +18,7 @@ Software companies were once dominated by two types of roles: product managers a
 
 Want proof? Look at this graph:
 
-![product-engineer-trends](../images/blog/product-engineer-trend.png)
+![product-engineer-trends](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-trend.png)
 
 Online searches for product engineers have grown by 80% since 2021 as startups like [ourselves](https://newsletter.posthog.com/p/beyond-the-10x-engineer), [incident.io](http://incident.io/), and [Ghost](https://ghost.org/), prioritize engineers who are customer obsessed, talk to them directly, and comfortable working autonomously. 
 

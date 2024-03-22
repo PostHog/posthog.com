@@ -1,10 +1,14 @@
 ---
 title: How to set up Next.js monitoring
 date: 2023-05-30
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['configuration', 'session replay', 'insights']
+tags:
+  - configuration
+  - session replay
+  - insights
 ---
 
 Monitoring a Next.js app for performance regressions, loading speed, and errors helps you be confident your app is providing the best possible experience. [Real user monitoring](/blog/real-user-monitoring) is a best practice for apps looking to optimize their user experience.
@@ -30,7 +34,7 @@ npm run dev
 
 This starts up your Next.js site, which we can now add PostHog to set up monitoring.
 
-![App](../images/tutorials/nextjs-monitoring/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/app.png)
 
 ## Set up PostHog
 
@@ -82,7 +86,7 @@ Once this is set up, go to your [project settings](https://app.posthog.com/proje
 - [Autocapture](/docs/data/autocapture) is enabled
 - Under [recordings](https://app.posthog.com/project/settings#recordings), record user sessions, capture console logs, and capture network performance are all enabled.
 
-![Settings](../images/tutorials/nextjs-monitoring/settings.png)
+![Settings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/settings.png)
 
 Enabling these provides the key monitoring tools including performance monitoring, app usage, and session replays. It also enables capturing custom events which we use for errors and more performance data next.
 
@@ -138,11 +142,11 @@ export default function About() {
 
 When you go to `http://localhost:3000/about`, you'll see the error page.
 
-![Error](../images/tutorials/nextjs-monitoring/app-error.png)
+![Error](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/app-error.png)
 
 This also captures an `exception` event in PostHog with details like the current URL, OS, browser, time, and more.
 
-![Exception](../images/tutorials/nextjs-monitoring/exception.png)
+![Exception](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/exception.png)
 
 This will capture errors thrown in your app (wherever they happen) into PostHog.
 
@@ -190,7 +194,7 @@ export default function RootLayout({ children }) {
 
 Once done, you'll start to see performance metrics in your PostHog instance.
 
-![Performance metrics](../images/tutorials/nextjs-monitoring/monitoring-metrics.png)
+![Performance metrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/monitoring-metrics.png)
 
 > **Note:** you might want to filter for specific web vital events by checking their name or sample using specific criteria as this method generates **a lot of events** for each pageview.
 
@@ -202,15 +206,15 @@ To start, go to the [dashboards tab](https://app.posthog.com/dashboard), click n
 
 We start with averages for our page load metrics. Select `LCP` as your series, then aggregate by average property value, select value as your property, enable formula mode, and divide `A` by 1000 to get seconds. Both the trend and number chart type work well for this. Once done, click "Save & add to dashboard." 
 
-![LCP insight](../images/tutorials/nextjs-monitoring//lcp-insight.mp4)
+![LCP insight](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/lcp-insight.mp4)
 
 Afterward, you can create similar insights the other performance metrics like TTFB, FCP, and CLS. Your dashboard will look like this:
 
-![Dashboard](../images/tutorials/nextjs-monitoring/dashboard.png)
+![Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/dashboard.png)
 
 Next, we can analyze our errors. We can create insights for errors broken down by current URL and message. Use the `Exception` event as the series, aggregate by total count, break down by current URL, and choose the total value bar chart. You can duplicate the insight, change the breakdown to `message`, and add both to your dashboard.
 
-![Error](../images/tutorials/nextjs-monitoring/errors.png)
+![Error](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/errors.png)
 
 This gives you a base dashboard to monitor your Next.js application. Some more insights you could add to your monitoring dashboard include:
 
@@ -221,7 +225,7 @@ This gives you a base dashboard to monitor your Next.js application. Some more i
 
 For all of these insights, you can click the visualization to list the users and sessions that make up the data. From the modal that pops up, you can go to related replays and see all the details, including the events, console, and performance.
 
-![Error replay](../images/tutorials/nextjs-monitoring/error-replay.mp4)
+![Error replay](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/error-replay.mp4)
 
 ## Further reading
 

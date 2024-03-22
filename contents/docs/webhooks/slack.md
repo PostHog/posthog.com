@@ -23,21 +23,21 @@ Go to the 'Incoming Webhooks' page for your newly-created app and toggle 'Activa
 ## 3. Connect your webhook to PostHog
 Copy the Webhook URL from Slack, navigate to [project settings](https://app.posthog.com/project/settings) in PostHog, and paste the URL into the "Webhook integration section".
 
-![Add webhook integration](../../images/docs/webhooks/webhook-integration.png)
+![Add webhook integration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/webhooks/webhook-integration.png)
 
 Click "Test & Save" and you should receive a message on Slack. 
 
 > **Note:** In your project settings, you'll also see a "Slack integration" section. You can ignore this as this is not required for setting up the Slack webhook. It's only required for setting up [Subscriptions](/docs/data/subscriptions) to receive regular reports for any insight or dashboard.
 > 
-> ![Screenshot of Slack integration](../../images/docs/webhooks/slack-integration-for-subscriptions.png) 
+> ![Screenshot of Slack integration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/webhooks/slack-integration-for-subscriptions.png) 
 
 ## 4. Post actions to the webhook
 
 In PostHog, navigate to the [action](https://app.posthog.com/data-management/actions) that you'd like to receive webhooks for. Then select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
-![PostHog Edit Action](../../images/post-action-slack.png)
+![PostHog Edit Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/post-action-slack.png)
 
 ## 5. Celebrate!
 
-![Slack Message](../../images/slack-message.png)
+![Slack Message](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/slack-message.png)
 

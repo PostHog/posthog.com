@@ -1,6 +1,6 @@
 ---
 date: 2023-06-12
-title: "Introducing HouseWatch: An open-source toolkit for ClickHouse"
+title: 'Introducing HouseWatch: An open-source toolkit for ClickHouse'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -13,7 +13,8 @@ tags:
   - Product updates
   - Release notes
   - ClickHouse
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 
@@ -46,13 +47,13 @@ To help understand the performance of all the queries on your ClickHouse cluster
 
 Each query includes metrics on average run time, calls per minute, percentage of all IOPs, total IOPs, and percentage of run time. It also includes details on the query itself and the `EXPLAIN` statement. From this, you can sort, monitor, and improve important, slow, or high-stress queries.
 
-![Slow](../images/blog/introducing-housewatch/slow.png)
+![Slow](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/introducing-housewatch/slow.png)
 
 ### Schema stats
 
 HouseWatch provides stats for all the tables for your cluster and lets you dive into the details for each of them. For each table, you can see columns, parts, compressed and uncompressed disk space sizes, disk usage, and more.
 
-![Schema](../images/blog/introducing-housewatch/table.png)
+![Schema](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/introducing-housewatch/table.png)
 
 ### Query editing and benchmarking
 
@@ -60,23 +61,23 @@ With the size of data ClickHouse stores and processes, optimizing your queries i
 
 You can run queries on your ClickHouse cluster and receive results visualized in HouseWatch. For query comparisons, you can write two queries, run them, and then get metrics on performance across the duration, read bytes, CPU usage, memory usage, and more. 
 
-![Compare](../images/blog/introducing-housewatch/compare.png)
+![Compare](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/introducing-housewatch/compare.png)
 
 We’ve also built a natural language query editor that uses GPT to create ClickHouse queries based on the table and instructions you provide.
 
-![AI](../images/blog/introducing-housewatch/ai.png)
+![AI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/introducing-housewatch/ai.png)
 
 ### Logs and errors
 
 Like any good monitoring tool, HouseWatch provides access to logs and errors from ClickHouse. For both, you can search for specific ones, as well as see the number of and most recent occurrences.
 
-![Errors](../images/blog/introducing-housewatch/errors.png)
+![Errors](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/introducing-housewatch/errors.png)
 
 ### Operations
 
 Last but not least is our operations tool. This is inspired by our [async migrations tool](/handbook/engineering/databases/async-migrations), which we've used in production for over a year. It enables you to run and monitor long-running operations like migrations or SQL commands. You can monitor their status, pause or stop them, and retry them if they fail. Failures come with automatic rollbacks as well.
 
-![Operations](../images/blog/introducing-housewatch/operations.png)
+![Operations](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/introducing-housewatch/operations.png)
 
 ## Deploying HouseWatch
 
