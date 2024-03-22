@@ -68,6 +68,12 @@ We also give all team members a [$1,500/quarter budget](/handbook/people/spendin
 
 For any work-related travel, we also use [Project Wren](https://www.wren.co/) for carbon offsetting. 
 
+### Free merch
+
+People like our merch. If you want more, <PrivateLink url="https://github.com/PostHog/runbooks/blob/main/docs/merch.md"> here's how to get it! </PrivateLink> 
+
+As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
+
 ### Support open-source projects
 
 Everyone gets a monthly [open-source sponsorship](/handbook/people/spending-money#open-source-sponsorship-for-individuals) budget to spend as they see fit to support open source projects of their choice.
