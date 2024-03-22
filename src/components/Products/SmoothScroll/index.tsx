@@ -31,7 +31,7 @@ const menuItems: MenuItem[] = [
 export const SmoothScroll = ({ exclude = [], ...other }: { menuItems: MenuItem[] }): JSX.Element => {
     const [activeTab, setActiveTab] = useState(0)
     return (
-        <div className="hidden md:block sticky top-[-1px] reasonable:top-[107px] z-50 bg-accent dark:bg-accent-dark mb-12">
+        <div className="hidden md:block sticky top-[-1px] reasonable:top-[107px] z-[50] bg-accent dark:bg-accent-dark mb-12">
             <section>
                 <Slider className="list-none flex gap-4 pt-0.5 ![justify-content:_safe_center] border-t border-border dark:border-dark">
                     {(other?.menuItems ?? menuItems)
