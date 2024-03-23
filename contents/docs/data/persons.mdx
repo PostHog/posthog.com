@@ -1,36 +1,56 @@
 ---
-title: Persons
+title: People
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
-
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
-PostHog tracks user behaviour, whether or not the user is logged in and identifiable.
+export const personProfileLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/data/people/person-profile-light-mode.png"
+export const personProfileDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/data/people/person-profile-dark-mode.png"
 
-## Viewing user list
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=295"
+    className="rounded shadow-xl"
+/>
 
-Click on 'Persons & Groups' on the left-hand navigation. This will open a list containing all users, which you can then search.
+Clicking on [People](https://us.posthog.com/persons) in the left-hand navigation opens a list containing all users, which you can then search.
 
-If you have added properties to your users (e.g. email), these will also appear here.
+All users have a alphanumeric ID. [Identified users](/docs/product-analytics/identify) have a distinct ID, normally `email`.
 
-Clicking the arrows next to the user will expand and show all of that user's properties.
+PostHog tracks user behavior, whether or not the user is logged in and identifiable.
 
-## User history
+## Person profiles
 
-Clicking on an individual person brings up their entire event history, as well as their properties.
+Clicking on a user opens their profile and shows all their properties.
 
-You can go even deeper by inspecting each event individually. Clicking on the event will bring up all the event properties.
+<ProductScreenshot
+    imageLight={personProfileLight}
+    imageDark = {personProfileDark}
+    alt="Person profile" 
+    classes="rounded"
+/>
+
+- **Events** shows all the events a user has triggered, which you can search and filter to find specific events.
+
+- **Recordings** shows all session replays a user has generated. Note this is subject to the retention policy of your plan, so users who haven't been active recently may have none.
+
+- **Cohorts** shows all the cohorts a user belongs to.
+
+- **Related groups:** shows groups (e.g. organizations, projects, and instances) a user belongs to.
+
+- **Feature flags:** shows all feature flags that are enabled for a user.
+
+- **History:** shows any manual changes that have been made to the user's profile.
 
 ## Deleting person data
 
--   Select 'Persons & Groups' from the left-hand menu
--   Search for the person via their unique ID. For example, their email
--   Click on the person's ID
--   Click 'Delete person' to remove them and all their associated data from the PostHog instance. You will be prompted to confirm this action.
+- Select 'Persons' from the left-hand menu
+- Search for the person via their unique ID. For example, their email
+- Click on the person's ID
+- Click 'Delete person' to remove them and all their associated data from the PostHog instance. You will be prompted to confirm this action.
 
 ## Deleting person data with the API
 

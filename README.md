@@ -79,13 +79,27 @@ docker run -it --rm \
 
 ### Working on `/docs/api`?
 
-1. Create a [personal API key](https://posthog.com/docs/api#how-to-obtain-a-personal-api-key) in PostHog
-1. `export POSTHOG_APP_API_KEY=key`
-1. `yarn start`
+The site will load the API schema from US Cloud by default. You can override this to use your local PostHog instance with an env var:
+
+```
+POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" yarn start
+```
+
 
 ### Want Ashby job listings or GitHub contributors to load?
 
 You’ll need to set environment variables for these. [See (private) instructions](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md) for this.
+
+### Developing the posts section
+To see your local version of the posts section, `/posts` needs to be visited directly (`http://localhost:8001/posts`)
+
+### Developing the merch store
+Additional environment variables are needed to develop the merch store:
+- `SHOPIFY_APP_PASSWORD`
+- `GATSBY_MYSHOPIFY_URL`
+- `GATSBY_SHOPIFY_STOREFRONT_TOKEN`
+
+Currently, these environment variables are excluded from Vercel preview builds to disable merch store node creation and speed up build times on non-merch related PRs.
 
 ## Contributing
 

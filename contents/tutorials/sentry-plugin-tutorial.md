@@ -4,8 +4,13 @@ sidebar: Docs
 showTitle: true
 featuredTutorial: false
 date: 2022-05-04
-author: ['joe-martin']
-tags: ['apps', 'sentry', 'product os', 'cdp']
+author:
+  - joe-martin
+tags:
+  - apps
+  - sentry
+  - product os
+  - cdp
 ---
 
 - *Level:* Easy 🦔
@@ -27,7 +32,7 @@ Once the integration is setup, Sentry will automatically start sending ```$excep
 
 Using this as a PostHog event, we can track how many errors are logged over time. The chart below, for example, shows the number of ```$exception``` errors over the last 7 days compared to the previous 7 days. 
 
-![Sentry Error Tracking in PostHog](../images/tutorials/sentry/trend-error-sentry.png)
+![Sentry Error Tracking in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/sentry/trend-error-sentry.png)
 
 However, this is only the start of what’s possible in PostHog. We can also use PostHog to correlate ```$exception``` events with other metrics and PostHog data. 
 
@@ -37,13 +42,13 @@ Each ```$exception``` event in PostHog represents an error logged by Sentry, so 
 
 A simple example to illustrate can be seen below, using the [Trends](/docs/user-guides/trends) tool to correlate ```$exception``` events with an event we’ve setup to capture rageclicks. Unsurprisingly, errors correlates closely with rageclicks, which we can take as an indicator that users are experiencing frustration with these errors. 
 
-![Rageclicks and Error Tracking in PostHog](../images/tutorials/sentry/trend-rage-error.png)
+![Rageclicks and Error Tracking in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/sentry/trend-rage-error.png)
 
 We can also use the ```$exception``` event to track user behavior in other ways, such as using the [Retention](/docs/user-guides/retention) tool to see how errors impact retention. 
 
 In this case, we can use Retention to examine ```$exception``` events against [Insight](/docs/user-guides/insights) views (which we can use as a proxy for successful product usage). We can compare this to control groups which did not experience the ```$exception``` event to understand how these errors are impacting overall retention. 
 
-![Sentry Error Tracking in PostHog](../images/tutorials/sentry/sentry_retention.png)
+![Sentry Error Tracking in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/sentry/sentry_retention.png)
 
 ## Step 4: Debug errors using Sentry and PostHog
 

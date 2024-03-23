@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -21,7 +22,7 @@ First our updates and new features.
 
 ### Users in Trend Graphs
 
-![users in trend graphs](../images/03/usersintrends.gif)
+![users in trend graphs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/usersintrends.gif)
 
 Whilst we have progressively built in Total volume of users, DAUs and Stickiness into our graphs this change lets you identify the unique users performing those actions. 
 
@@ -33,7 +34,7 @@ There were a ton of scenarios in which we wanted to see the breakdown of the use
 
 ### Adding demo data to HogFlix
 
-![adding demo data to HogFlix](../images/03/demodatahogflix.gif)
+![adding demo data to HogFlix](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/demodatahogflix.gif)
 
 We wanted to make our demo site a little more complete, if you are self hosting when you set up a fresh instance and navigate to /demo we’ll add a bunch of demo data. This can then be removed easily by going to /setup
 

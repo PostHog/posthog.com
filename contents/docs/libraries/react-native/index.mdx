@@ -3,15 +3,16 @@ title: React Native
 sidebarTitle: React Native
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-react-native
-icon: ../../../images/docs/integrate/react.svg
+github: 'https://github.com/PostHog/posthog-react-native'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: true
-    sessionRecording: false
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 Purely built for React Native, this library allows you to integrate PostHog with your React Native project. For React Native projects built with Expo, there are no mobile native dependencies outside of supported Expo packages.
@@ -105,12 +106,10 @@ Setting this to `1` will send events immediately and will use more battery. This
 You can also configure the flush interval. By default we flush all events after `30` seconds,
 no matter how many events have gathered.
 
-You can also manually flush the queue, like so:
+You can also manually flush the queue. If a flush is already in progress it returns a promise for the existing flush.
 
 ```javascript
-posthog.flush()
-// or using async/await
-await posthog.flushAsync()
+await posthog.flush()
 ```
 
 ## Reset
@@ -123,7 +122,7 @@ posthog.reset()
 
 ## Opt in/out
 
-By default, PostHog has tracking enabled unless it is forcefully disabled by default using the option `{ enable: false }`.
+By default, PostHog has tracking enabled unless it is forcefully disabled by default using the option `{ defaultOptIn: false }`.
 
 You can give your users the option to opt in or out by calling the relevant methods. Once these have been called they are persisted and will be respected until optIn/Out is called again or the `reset` function is called.
 
@@ -203,7 +202,37 @@ posthog.group('company', 'company_id_in_your_db', {
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
-## Upgrading from V1 to V2
+## Disabling for local development
+
+You may want to disable PostHog when working locally or in a test environment. You can do this by setting the `disable` option to `true` when initializing PostHog. Helpfully this allows you to continue using `usePostHog` and safely calling it without anything actually happening.
+
+```react-native
+// App.(js|ts)
+import { usePostHog, PostHogProvider } from 'posthog-react-native'
+...
+
+export function MyApp() {
+    return (
+        <PostHogProvider apiKey="<ph_project_api_key>" options={{
+            // Disable PostHog in development (or whatever other logic you choose)
+            disabled: __DEV__,
+        }}>
+            <MyComponent />
+        </PostHogProvider>
+    )
+}
+
+const MyComponent = () => {
+    const posthog = usePostHog()
+
+    useEffect(() => {
+        // Safe to call even when disabled!
+        posthog.capture("mycomponent_loaded", { foo: "bar" })
+    }, [])
+}
+```
+
+## Upgrading from V1 or V2 to V3
 
 V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
 
@@ -218,11 +247,12 @@ Events such as `Application Installed` and `Application Updated` that require pr
 
 import PostHog from 'posthog-react-native'
 
-await PostHog.setup('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
-    host: 'https://app.posthog.com',
-    captureApplicationLifecycleEvents: false, // Replaced by `PostHogProvider`
+await PostHog.setup('<ph_project_api_key>', {
+    // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+    host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+    captureApplicationLifecycleEvents: false, // Replaced by 'PostHogProvider'
     captureDeepLinks: false, // No longer supported
-    recordScreenViews: false, // Replaced by `PostHogProvider` supporting @react-navigation/native
+    recordScreenViews: false, // Replaced by 'PostHogProvider' supporting @react-navigation/native
     flushInterval: 30, // Stays the same
     flushAt: 20, // Stays the same
     android: {...}, // No longer needed
@@ -235,8 +265,21 @@ PostHog.capture("foo")
 // V2 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = await Posthog.initAsync('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
-    host: 'https://app.posthog.com',
+const posthog = await Posthog.initAsync('<ph_project_api_key>', {
+    // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+    host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+    // Add any other options here.
+})
+
+// Use created instance rather than the PostHog class
+posthog.capture("foo")
+
+// V3 Setup difference
+import PostHog from 'posthog-react-native'
+
+const posthog = new PostHog('<ph_project_api_key>', {
+    // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+    host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
     // Add any other options here.
 })
 

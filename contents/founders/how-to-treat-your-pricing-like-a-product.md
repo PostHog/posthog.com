@@ -3,7 +3,8 @@ date: 2023-04-19
 title: How (and why) we treat pricing like a product
 author:
   - raquel-m-smith
-featuredImage: ../images/blog/happy-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
 tags:
   - Founders
@@ -13,7 +14,7 @@ tags:
   - Growth Engineering
 crosspost:
   - Product engineers
-
+  - Blog
 ---
 "Pricing is important" is common knowledge – price determines profit margin, which directly or indirectly determines nearly everything else. 
 
@@ -70,7 +71,7 @@ For PostHog, our pricing product’s customers are:
 
 It’s also important to determine how each customer will "pay" for or transfer value to your product. Since people aren’t paying for pricing as a product (unless, of course, the product you sell is pricing as a product) then the value transfer is murkier. It often comes down to usage, or even revenue on the other products. Whatever it is, understand and track it so you can gauge the usefulness of your efforts.
 
-> 📖 **Further reading:** Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog, see [How we found our Ideal Customer Profile](/blog/creating-ideal-customer-profile) for more.
+> 📖 **Further reading:** Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog, see [How we found our Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) for more.
 
 ### 3. Build your tooling to satisfy the customers’ needs
 

@@ -1,9 +1,10 @@
 ---
 date: 2023-03-06
-title: "10x engineers talk to users"
+title: 10x engineers talk to users
 author:
   - luke-harries
-featuredImage: ../images/blog/super-hog-pink.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
   - User research
@@ -11,7 +12,8 @@ tags:
   - Culture
   - People
 crosspost:
-  - Founders  
+  - Founders
+  - Blog
 ---
 
 I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand and care about their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems.
@@ -22,13 +24,13 @@ The best way to do this? Speak directly to them.
 
 In traditional tech companies, information flows from the user to the product manager (PM) by an interview, and then from the PM to the engineer through a bunch of tickets:
 
-![PM to engineer](../images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
+![PM to engineer](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
 
 At each stage, important context is lost. Information flows one way, so you can’t go deeper on the important areas, and engineers lose agency in what they're building and why.
 
 Here's what it looks like when engineers talk directly to users:
 
-![Direct user-Engineer Interaction](../images/blog/10x-engineers-do-user-interviews/direct-interaction.png)
+![Direct user-Engineer Interaction](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/direct-interaction.png)
 
 Information moves quickly and in both directions, boosting the signal. By increasing the signal you can quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution – something engineers can do most effectively because they have the background on the existing architecture and components. 
 
@@ -40,7 +42,7 @@ Companies still need product managers, but it's easier to ship faster and better
 
 Automation is crucial here. Too much friction and you’ll ride an initial burst of motivation followed by regression to the old way of heads-down coding.
 
-Step one is to find users to talk to. You can define your segment using company traits, user traits, and behavioral information. A data warehouse or analytics platform like PostHog can be helpful here.
+Step one is to find users to talk to. You can define your segment using company traits, user traits, and [behavioral information](/product-engineers/behavioral-analytics). A data warehouse or analytics platform like PostHog can be helpful here.
 
 Next, it's time to bulk email your segment. The simplest way is to email out a Calendly link in batches via bcc’ed using a message like this:
 
@@ -50,7 +52,7 @@ Hi! I’m {YOUR NAME}, a software engineer at {YOUR COMPANY}. I’m currently wo
 
 This is a good start, but you should move to an in-app prompt as soon as you can to save time and increase conversion – we built PostHog's [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) (pictured below) just for this.  
 
-![User interview app](../images/blog/10x-engineers-do-user-interviews/user-interview-app.png)
+![User interview app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/user-interview-app.png)
 
 We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%) since we started using in-app prompts, a reduction in email spam, and better organization by doing so. A reward like a $30 merch voucher helps.
 
@@ -87,9 +89,9 @@ User interviews are powerful but slow. You can quickly narrow down the most impo
 
 After the initial discussion, get your user on Slack for B2B or iMessage for B2C – or whatever messaging tool works best for them. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
 
-Here's an example from Li on our [Feature Success Team](/handbook/small-teams/feature-success) seeking feedback on our feature flag permissioning. She received a response 3 minutes (!!) later.
+Here's an example from Li on our [Feature Success Team](/teams/feature-success) seeking feedback on our feature flag permissioning. She received a response 3 minutes (!!) later.
 
-![Slack feedback on feature flags](../images/blog/10x-engineers-do-user-interviews/feature-flags-feedback.png)
+![Slack feedback on feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/feature-flags-feedback.png)
 
 The more important the problem for the user, the quicker they'll respond.
 
@@ -103,7 +105,7 @@ Often the solution they propose doesn’t actually solve the problem they experi
 
 That said, be careful not to go too far the other way and generalize every problem. The art of product is using your judgment.
 
-![XKCD: The general problem](../images/blog/10x-engineers-do-user-interviews/the-general-problem.png)
+![XKCD: The general problem](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/the-general-problem.png)
 
 For example, quickly shipping small usability improvements based on feedback is a great way to delight users, generate goodwill, and encourage more relevant feedback. 
 

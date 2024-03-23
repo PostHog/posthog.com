@@ -1,5 +1,8 @@
 import { MDXProvider } from '@mdx-js/react'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductVideo } from 'components/ProductVideo'
+import { PrivateLink } from 'components/PrivateLink'
 import { Hero } from 'components/Hero'
 import { Check, Close } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
@@ -25,21 +28,15 @@ const A = (props) => <Link {...props} className="text-red hover:text-red font-se
 export default function Plain({ data }) {
     const { pageData } = data
     const { body, excerpt } = pageData
-    const {
-        title,
-        featuredImage,
-        description,
-        showTitle,
-        width = 'sm',
-        noindex,
-        images,
-        isInFrame,
-    } = pageData?.frontmatter
+    const { title, featuredImage, showTitle, width = 'sm', noindex, images, isInFrame, seo } = pageData?.frontmatter
     const components = {
         pre: MdxCodeBlock,
         Hero,
         Section,
+        ProductScreenshot,
+        ProductVideo,
         FeatureSnapshot,
+        PrivateLink,
         Check,
         Close,
         a: A,
@@ -52,8 +49,8 @@ export default function Plain({ data }) {
     return (
         <Wrapper className={isInFrame ? 'flex justify-center items-center h-screen' : undefined}>
             <SEO
-                title={title + ' - PostHog'}
-                description={description || excerpt}
+                title={seo?.metaTitle || title + ' - PostHog'}
+                description={seo?.metaDescription || excerpt}
                 article
                 image={featuredImage?.publicURL}
                 noindex={isInFrame || noindex}
@@ -79,7 +76,6 @@ export const query = graphql`
             frontmatter {
                 title
                 showTitle
-                description
                 featuredImageType
                 featuredImage {
                     publicURL
@@ -92,6 +88,9 @@ export const query = graphql`
                 width
                 noindex
                 isInFrame
+                seo {
+                    ...SEOFragment
+                }
             }
         }
     }

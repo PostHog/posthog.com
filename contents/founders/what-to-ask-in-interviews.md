@@ -3,11 +3,14 @@ date: 2022-06-22
 title: The really important job interview questions engineers should ask (but don't)
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - People
+crosspost:
+  - Blog
 ---
 
 Since we started PostHog, our team has interviewed 725 people.

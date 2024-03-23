@@ -1,9 +1,10 @@
 ---
 date: 2023-05-09
-title: "In-depth: The AARRR pirate funnel explained"
+title: 'In-depth: The AARRR pirate funnel explained'
 author:
   - andy-vandervell
-featuredImage: ../images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
 featuredImageType: full
 tags:
   - Product analytics
@@ -11,6 +12,7 @@ tags:
   - Growth
 crosspost:
   - Founders
+  - Blog
 ---
 
 > **Want to build an AARRR funnel in PostHog?** Use our [AARRR dashboard template](/templates/aarrr-dashboard) to set one up quickly and easily.
@@ -34,7 +36,7 @@ In this guide, you'll learn:
 
 ## How does the AARRR funnel work?
 
-![AARRR pirate funnel](../images/blog/aarrr-pirate-funnel/aarrr-graphic.png)
+![AARRR pirate funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/aarrr-graphic.png)
 
 The five pirate metrics are:
 
@@ -50,7 +52,7 @@ McClure visualized the AARRR funnel in a table like the one below, though you co
 
 This version is what the funnel might look like for our product, PostHog, an [all-in-one analytics platform](https://posthog.com/) comprising product analytics, session replay, feature flags, and A/B testing.
 
-![aarrr funnel breakdown](../images/blog/aarrr-pirate-funnel/arrrr-funnel-table.png)
+![aarrr funnel breakdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/arrrr-funnel-table.png)
 
 Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively.
 
@@ -92,7 +94,7 @@ Acquisition is probably the easiest metric to define, but what you track will de
 
 For an e-commerce website, overall unique users is an important metric, but user signups is better for B2B products.
 
-It may also be prudent to add a quality metric here, too. Tracking signups based on an ideal customer profile (ICP) can be important to avoid over optimizing for the wrong kind of new users.
+It may also be prudent to add a quality metric here, too. Tracking signups based on an [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) can be important to avoid over optimizing for the wrong kind of new users.
 
 > 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate what you should optimize first. Most B2B SaaS products should prioritize retention – it's a great indicator of [product-market fit](/blog/product-market-fit-game).
  
@@ -152,7 +154,7 @@ Referral metrics are especially important for products or services that have a [
 
 Referrals can also be both internal (more users from the same organization) or external.
 
-> 💡 **PostHog Tip:** At PostHog, we automatically invite active paying users to review PostHog using official the [Customer.io integration](/apps/customer-io). There are also marketing automation apps for Engage, Sendgrid, Intercom, and Zapier.
+> 💡 **PostHog Tip:** At PostHog, we automatically invite active paying users to review PostHog using official the [Customer.io integration](/apps/customer-io). There are also marketing automation apps for Engage, Sendgrid, [Intercom](/tutorials/intercom-session-replays), and Zapier.
 
 ## How to use pirate metrics in your product
 
@@ -178,7 +180,7 @@ At PostHog, we're [organized into small teams](/handbook/company/small-teams).
 
 Here's how our earlier breakdown might look like if we assigned different PostHog teams to each user status:
 
-![aarrr funnel team](../images/blog/aarrr-pirate-funnel/aarrr-funnel-team.png)
+![aarrr funnel team](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/aarrr-funnel-team.png)
 
 As you can see, there is trickle down to all levels of the funnel, and we could go further. Activation is influenced by whether people coming into the funnel match our Ideal Customer Profile (ICP), so marketing also influences it even if they don't own activation directly. 
 

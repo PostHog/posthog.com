@@ -11,7 +11,7 @@ isMyFlagEnabled, err := client.IsFeatureEnabled(
                 DistinctId: "distinct_id_of_your_user",
             })
 
-if isMyFlagEnabled {
+if isMyFlagEnabled == true {
     // Do something differently for this user
 }
 ```
@@ -49,19 +49,11 @@ client.Enqueue(posthog.Capture{
 })
 ```
 
-### Method 2: Set `SendFeatureFlags` to `true`
+#### Method 2: Set `SendFeatureFlags` to `true`
 
-The `capture()` method has an optional argument `SendFeatureFlags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
+import GoSetSendFeatureFlagsTrue from "./feature-flags-code-go-set-send-feature-flags-to-true.mdx" 
 
-Note that by doing this, PostHog will make an additional request to fetch feature flag information before capturing the event. So this method is only recommended if you don't mind the extra API call and delay.
-
-```go
-client.Enqueue(posthog.Capture{
-  DistinctId: "distinct_id_of_your_user",
-  Event:      "event_name",
-  SendFeatureFlags: true,
-})
-```
+<GoSetSendFeatureFlagsTrue />
 
 ### Fetching all flags for a user
 
@@ -75,6 +67,43 @@ featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
 })
 ```
 
+### Sending `$feature_flag_called` events
+
+Capturing `$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
+
+1. You call `GetFeatureFlag()` or `IsFeatureEnabled()`, AND 
+2. It's a new user, or the value of the flag has changed. 
+
+> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `GetFeatureFlag` or `IsFeatureEnabled`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
+
+You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
+
+To disable it, set the `SendFeatureFlagEvents` argument in your function call, like so:
+
+```go
+isMyFlagEnabled, err := client.IsFeatureEnabled(
+            FeatureFlagPayload{
+                Key:                    "flag-key",
+                DistinctId:             "distinct_id_of_your_user",
+                SendFeatureFlagEvents:  true
+            })
+```
+
 import GoOverrideServerProperties from './override-server-properties/go.mdx'
 
 <GoOverrideServerProperties />
+
+### Request timeout
+
+You can configure the `FeatureFlagRequestTimeout` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+
+```go
+ client, _ := posthog.NewWithConfig(
+   os.Getenv("<ph_project_api_key>"),
+   posthog.Config{
+      PersonalApiKey:            "your personal API key", // Required for feature flags
+      Endpoint:                  "<ph_instance_address>",
+      FeatureFlagRequestTimeout: 3 // Time in seconds. Default is 3.
+   },
+)
+```

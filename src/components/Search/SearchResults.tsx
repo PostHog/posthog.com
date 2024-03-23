@@ -11,6 +11,9 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Search } from 'components/Icons/Icons'
 import usePostHog from '../../hooks/usePostHog'
+import { IconCheckCircle } from '@posthog/icons'
+import Tooltip from 'components/Tooltip'
+import Markdown from 'components/Squeak/components/Markdown'
 
 type Result = Hit<{
     id: string
@@ -27,6 +30,8 @@ type Result = Hit<{
         fragment: string
     }[]
     excerpt: string
+    resolved: boolean
+    resolutionBody?: string
 }>
 
 type Category = typeof categories[number]
@@ -59,6 +64,10 @@ const categories = [
     {
         type: 'question',
         name: 'Questions',
+    },
+    {
+        type: 'post',
+        name: 'Posts',
     },
     {
         type: 'handbook',
@@ -141,7 +150,7 @@ export default function SearchResults(props: SearchResultsProps) {
         <Combobox value={{} as Result} onChange={onSelect} by={compareResults}>
             {({ activeOption }) => (
                 <div
-                    className="search-results z-50 bg-white rounded overflow-hidden shadow-xl flex flex-col h-full"
+                    className="search-results z-[50] bg-white rounded overflow-hidden shadow-xl flex flex-col h-full"
                     onKeyDown={handleKeyDown}
                 >
                     <SearchBox />
@@ -356,7 +365,16 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                             {hit.type}
                                         </span>
 
-                                        <span className="line-clamp-1 font-semibold">{hit.title}</span>
+                                        <span className="flex space-x-2 items-center">
+                                            <span className="line-clamp-1 font-semibold">{hit.title}</span>
+                                            {hit.resolved && (
+                                                <Tooltip content={'Resolved'}>
+                                                    <span className="relative">
+                                                        <IconCheckCircle className="text-green w-5 flex-shrink-0" />
+                                                    </span>
+                                                </Tooltip>
+                                            )}
+                                        </span>
                                         {/* <p className="text-sm font-normal m-0 text-gray line-clamp-2">{hit.excerpt}</p> */}
                                         <span className="text-[13px] font-normal">
                                             <span className="text-black dark:text-white opacity-[35%]">
@@ -386,7 +404,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                     quality={100}
                                     objectFit="contain"
                                     alt=""
-                                    src="../../../contents/images/media/social-media-headers/hogs/detective_hog.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/media/social-media-headers/hogs/detective_hog.png"
                                     className="max-w-[150px]"
                                 />
                             </div>
@@ -418,6 +436,17 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                             </span>
                             <h4 className="text-2xl mb-3 leading-[1.125]">{activeOption.title}</h4>
                             <p className="text-black/70 dark:text-white/80 text-[15px] mb-0">{activeOption.excerpt}</p>
+                            {activeOption.resolved && (
+                                <div className="mt-4 bg-accent/40 dark:bg-accent-dark/40 rounded-md p-4 border border-border dark:border-dark">
+                                    <h5 className="text-green flex space-x-1 m-0 mb-2">
+                                        <IconCheckCircle className="w-5 flex-shrink-0" />
+                                        <span>Answer</span>
+                                    </h5>
+                                    <div className="text-black/70 dark:text-white/80 text-[15px]">
+                                        <Markdown>{activeOption.resolutionBody}</Markdown>
+                                    </div>
+                                </div>
+                            )}
                             {activeOption.type !== 'question' && activeOption.type !== 'apps' ? (
                                 <span className="block text-xs text-black/60 dark:text-white/60 font-semibold mt-5 mb-3">
                                     On this page

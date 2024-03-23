@@ -2,7 +2,7 @@
     {
         "handle": "james-hawkins",
         "name": "James Hawkins",
-        "role": "Co-founder/CEO of PostHog",
+        "role": "Co-founder/CEO",
         "image": "../../static/images/authors/james-hawkins-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/james406",
@@ -24,6 +24,15 @@
         "link_type": "github",
         "link_url": "https://github.com/yakkomajuri",
         "profile_id": 56
+    },
+    {
+        "handle": "james-temperton",
+        "name": "James Temperton",
+        "role": "Content Marketer",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/jtemperton",
+        "profile_id": 2303
     },
     {
         "handle": "joe-martin",
@@ -232,7 +241,7 @@
     {
         "handle": "tim-glaser",
         "name": "Tim Glaser",
-        "role": "Co-founder/CTO of PostHog",
+        "role": "Co-founder/CTO",
         "image": "../../static/images/authors/tim-glaser.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/timgl/",
@@ -308,7 +317,7 @@
         "handle": "laudspeaker",
         "name": "Abe Basu",
         "role": "CEO of Laudspeaker",
-        "image": "../../contents/apps/thumbnails/laudspeaker-connector.png",
+        "image": "../../static/images/authors/laudspeaker-connector.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/laudspeaker"
     },
@@ -334,7 +343,7 @@
         "handle": "annika-schmid",
         "name": "Annika Schmid",
         "role": "Product Manager",
-        "image": "../../contents/images/team/annika.png",
+        "image": "../../static/images/authors/annika-schmid-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/annikaze_",
         "profile_id": 221
@@ -343,7 +352,7 @@
         "handle": "lior-neu-ner",
         "name": "Lior Neu-ner",
         "role": "Technical Content Marketer",
-        "image": "../../contents/images/team/lior.png",
+        "image": "../../static/images/authors/lior-neu-ner-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/liornn",
         "profile_id": 684
@@ -360,6 +369,6 @@
         "handle": "tomas-farias",
         "name": "Tomás Farías Santana",
         "role": "Software Engineer",
-        "image": "../../contents/images/team/tomas.png"
+        "image": "../../static/images/authors/tomas-farias-posthog.png"
     }
 ]

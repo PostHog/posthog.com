@@ -20,7 +20,58 @@ These are the ways in which customers can currently reach us:
 - **Community questions** - users can also search [previously answered questions](/questions) that have been asked anywhere on posthog.com in our Docs. This is a great way to help us improve our Docs for simpler use-case type questions, but more complex questions should be re-routed via a support ticket. 
 - **Dedicated Slack channels** - For higher-paying (or potential higher-paying) customers, we offer a dedicated channel on our main company Slack.
 
+Sometimes people reach out to us with support issues on Twitter/X. Regardless of whether someone reaches out to your personal account or to the company account the broad approach should be as follows:
+
+1. Check first if they already have a ticket in Zendesk (either in-app or via /questions). There is nothing more annoying for a user than being asked to create a support ticket if they already have. If you don't have Zendesk access, ask someone in CS. 
+2. If no tickets exist, explain that we can't provide support over social media and ask them to create a support ticket within the app - this is _much_ better than trying to solve their problem over Twitter as Zendesk pulls in a bunch of contextual information and is easier to collaborate in. Do this from the **PostHog** Twitter account - otherwise you will get personally contacted every time this user wants help. 
+3. If yes, say that we can see their ticket and reassure them that all tickets are triaged and responded to. Let CS know that you have done this. Again, use the PostHog Twitter account.
+
+Your objective should be to get the conversation into Zendesk ASAP, because it's easier to help the person there and to avoid setting a precedent that complaining visibly on social media results in an expedited response. An exception to this rule is if you are engaging with someone who has provided general feedback about PostHog - feel free to use your personal account if someone has a feature request or similar. If a user engage in a way which causes you _any_ distress, you can skip all of the above and just highlight it in Slack for CS to deal with. 
+
 > Sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them on GitHub. We don't consider GitHub to be a proper 'support' channel, but it is a useful place to gauge the popularity of feature requests or the prevalence of issues. 
+
+### Response Targets
+
+We have a high volume of tickets created, and some require more attention than others.  Here we have our targets for _initial_ response/acknowledgement to issues by Customer Priority and Issue [Severity](/docs/support-options#severity-levels), along with an indication of who is responsible for the initial response (CS = Customer Success, SH = designated Support Hero for the impacted team)
+
+<table>
+  <tr>
+    <th colspan="2"></th><th colspan="3"> Customer Priority</th>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+    <th>High</th>
+    <th>Medium</th>
+    <th>Low</th>
+  </tr>
+<tr>
+    <th rowspan="4">Issue Severity</th>
+    <th>Critical</th>
+    <td>1 hour (CS)</td>
+    <td>1 hour (CS)</td>
+    <td>1 day (CS)</td>
+  </tr>
+<tr>
+    <th>High</th>
+    <td>1 hour (CS)</td>
+    <td>1 day (SH)</td>
+    <td>1 day (SH)</td>
+  </tr>
+<tr>
+    <th>Medium</th>
+    <td>1 day (SH)</td>
+    <td>1 day (SH)</td>
+    <td>2 days (SH)</td>
+  </tr>
+<tr>
+    <th>Low</th>
+    <td>1 day (SH)</td>
+    <td>2 days (SH)</td>
+    <td>Automated Response (See below)</td>
+  </tr>
+</table>
+
+Note for Low Priority/Low Severity tickets we should auto-respond letting customers know that they can ask questions in Community Questions
 
 ### Support Engineers
 
@@ -40,7 +91,7 @@ One person on each product team takes on the **[Support Hero](/handbook/engineer
 
 ## Community
 
-Support =/= community - we consider them to be separate things. [Learn more about how we think about community.](/handbook/small-teams/website-docs/community)
+Support =/= community - we consider them to be separate things. [Learn more about how we think about community.](/teams/website-docs/community)
 
 ### Tutorials
 

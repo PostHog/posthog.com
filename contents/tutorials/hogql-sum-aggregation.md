@@ -1,10 +1,15 @@
 ---
-title: "The power of HogQL’s sum() aggregation"
+title: The power of HogQL’s sum() aggregation
 date: 2023-06-06
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['hogql', 'trends', 'insights', 'product analytics']
+tags:
+  - hogql
+  - trends
+  - insights
+  - product analytics
 ---
 
 PostHog provides multiple options for aggregating data series including total count, count per user, unique sessions, property values, and more. HogQL unlocks a new level of aggregation customization, enabling you to use [expressions](/docs/hogql/expressions) to aggregate your data however you want. To showcase this, this tutorial goes over one of the most powerful aggregations: `sum()`.
@@ -13,7 +18,7 @@ PostHog provides multiple options for aggregating data series including total co
 
 Sum is simple: it calculates the sum of the numbers it is provided. In its simplest form, we can use it to sum event properties (or nested ones). For example, to sum your revenue, chose your payment event, then sum the `amount_paid` property. The HogQL expression for this is `sum(properties.amount_paid)`
 
-![Sum](../images/tutorials/hogql-sum-aggregation/sum.png)
+![Sum](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-sum-aggregation/sum.png)
 
 > **Note:** Sum only works for numbers. You can use `toInt()` to convert any strings to numbers.
 
@@ -58,7 +63,7 @@ sumIf(
 
 When we breakdown by `person_id`, this gives us a list of users with the highest scores, and we can customize our score this as our definition of "high-potential user" changes.
 
-![Score](../images/tutorials/hogql-sum-aggregation/score.png)
+![Score](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-sum-aggregation/score.png)
 
 > **Note:** [Person properties](/docs/getting-started/user-properties) can’t be used with HogQL expression series, only event properties.
 
@@ -92,7 +97,7 @@ sumIf(
 
 Finally, chose the time series bar, and set the Y-axis to "Percent (0-1)."
 
-![Chrome vs Safari](../images/tutorials/hogql-sum-aggregation/sum.mp4)
+![Chrome vs Safari](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-sum-aggregation/sum.mp4)
 
 ## Calculating net promoter score (NPS)
 

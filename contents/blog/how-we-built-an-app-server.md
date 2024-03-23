@@ -8,7 +8,8 @@ hideAnchor: true
 author:
   - marius-andra
   - ian-vanagas
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 ---
@@ -25,7 +26,7 @@ This is the story of how [PostHog apps](/apps) went from three-day MVP into a se
 
 PostHog apps were an idea of mine (Marius). I wanted a Google Analytics-style world map view and that required location data from IP addresses. While there were many services to do this, connecting them to event data was difficult. I decided to work on solving this during our Tuscany offsite hackathon.
 
-![Map](../images/blog/how-we-built-an-app-server/map.png)
+![Map](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-we-built-an-app-server/map.png)
 
 My solution was to build an app platform and the first ever PostHog app, [GeoIP](/apps/geoip-enrichment), but the project vision immediately expanded to enable more modification of the events pipeline, such as backing up data to S3, syncing GitHub stars, or getting customer feedback.
 
@@ -192,7 +193,7 @@ As you can see by reading the above examples, the index file exports functions t
 
 When users upload apps to PostHog, we import these functions from the files and run them through [custom babel transforms](https://github.com/PostHog/posthog/tree/master/plugin-server/src/worker/vm/transforms) for extra security. From there they run as callable functions on VMs as part of our ingestion pipeline and also have access to extensions like storage, caching, and logging. Overall, it looks like this:
 
-![VM](../images/blog/how-we-built-an-app-server/vm.png)
+![VM](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-we-built-an-app-server/vm.png)
 
 Structuring apps this way provides flexibility to users while maintaining scalability and security. We continued to improve each of these aspects as apps developed:
 
@@ -250,7 +251,7 @@ We chose these because we used them elsewhere and they have a proven track recor
 
 As mentioned earlier, our plugin server expanded to encompass much more than apps. It now handles all plugins, including apps that validate, process, format, and write event data to databases. The plugin server looks like this: 
 
-![Plugin server](../images/blog/how-we-built-an-app-server/plugin-server.png)
+![Plugin server](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-we-built-an-app-server/plugin-server.png)
 
 The main thread routes incoming tasks to the right location. It receives data and starts threads to complete them. We use [Piscina](https://github.com/piscinajs/piscina) (a node.js worker pool) to create and manage the threads. Piscina abstracts away a lot of the management of threads we would need to do to scale. The main thread also handles the functionality of scheduling and job queuing. The result creates tasks and sends them to worker threads to complete.
 
@@ -258,7 +259,7 @@ The main thread routes incoming tasks to the right location. It receives data an
 
 Worker threads receive tasks from the main thread and execute them. Some of the tasks, like `processEvent` or `runEveryMinute`, use the callable functions (app code) we detailed above. Worker threads contain the VMs, as well as the ingestion logic and connections to extensions and libraries. Each worker thread can run up to 10 tasks at the same time.
 
-![Worker thread](../images/blog/how-we-built-an-app-server/worker-thread.png)
+![Worker thread](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-we-built-an-app-server/worker-thread.png)
 
 When the worker thread finishes its task, it gets another new event, process, or other scheduled task from the main thread. The main thread handles getting and rerouting events for further processing. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
 
@@ -304,7 +305,7 @@ Since launch, we've seen companies and solo devs create many useful, clever apps
 
 - "Data-out" apps for exporting PostHog data to [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), [Rudderstack](/apps/rudderstack-export) (community built), and [Intercom](/apps/intercom).
 
-- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built) and [First Time Event Tracker](/apps/first-time-event-tracker) that give users, even more, control over events and properties sent to PostHog.
+- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built) and First Time Event Tracker that give users, even more, control over events and properties sent to PostHog.
 
 Our vision for apps is to continue to enable more customizability for data flows. We want users to have access to the data they need to create better products, and apps are key to doing this. 
 

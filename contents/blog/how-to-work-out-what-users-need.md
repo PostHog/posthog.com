@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - marcus-hyett
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 category: Product growth
 tags:
@@ -54,7 +55,7 @@ Another option to a scaled survey is to hold a focus group - a cross between the
 ### How does PostHog do this?
 In addition to collecting user feedback through direct conversations, we occasionally run surveys via our Slack community to find out how we're doing. We use this primarily as a tool for collecting ideas on topics outside of our core product, such as new community or marketing iniatives. 
 
-Want to find out more about our community? You can [join the PostHog Slack group](/slack) today!
+Want to find out more about our community? You can join [our community page](/posts) today!
 
 ## Metrics
 Monitor how people are using your product,  as they may be getting stuck when trying to accomplish something. You can piece together key pieces of information from success metrics to see what differs between users who are successful and those who are not, to shed light on unmet user needs.

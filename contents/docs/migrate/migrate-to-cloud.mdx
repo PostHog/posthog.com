@@ -4,7 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-> If you're attempting this migration, feel free to ask questions and provide feedback via [raising a support ticket in the app](https://app.posthog.com/home#supportModal). 
+> Prior to beginning a historical data import please ensure you do the following:
+> 1. Create a project on our [US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) Cloud
+> 2. Sign up to a paid plan on the billing page in-app (historic imports are not billable but this will unlock the necessary features).
+> 3. Raise an in-app support request (Target Area: Data Management) detailing where you are sending events from and the total volume.
+> 4. Wait for the OK from our team before starting the migration process to ensure that it completes successfully and is not rate limited.
 
 ## Requirements
 
@@ -41,21 +45,16 @@ To migrate metadata like projects, dashboards, insights, actions, feature flags,
 2. Install the dependencies by running `yarn`
 3. Run the script
     ```bash
-    ts-node --source [posthog instance you want to migrate from] --sourcekey [personal api key for that instance] --destination [posthog instance you want to migrate to.] --destinationkey [personal api key for destination instance]
+    ts-node index.ts --source [posthog instance you want to migrate from] --sourcekey [personal api key for that instance] --destination [posthog instance you want to migrate to.] --destinationkey [personal api key for destination instance]
     ```
 
 For more information on the options see the [repo's readme](https://github.com/PostHog/posthog-migrate-meta)
 
-## Migrate your events
+## Migrate your events to Cloud
 
-> You'll only be charged for events within the current month. However, you can import historical events into PostHog at no cost.
-> Reach out to sales@posthog.com if you are planning to import more than 20M events.
+> Before you start, disable all the apps in the destination cloud project (e.g. GeoIP). Keeping these enabled may change the events you are migrating.
 
-First, disable all the apps in the destination cloud project (e.g. GeoIP). Keeping these enable may change events you are migrating.
-
-If you're migrating from our cloud instance, e.g. from US cloud to EU cloud, ask us to do the events migration for you by [raising a support ticket in the app](https://app.posthog.com/home#supportModal).
-
-### Self-hosted migration
+### From self-hosted to Cloud
 
 To migrate your events, you can read data directly from your ClickHouse cluster and ingest the data with the Python library using our [self-hosted migration tool](https://github.com/PostHog/posthog-migration-tools).
 
@@ -104,7 +103,17 @@ python3 ./migrate.py \
 > - This script adds a `$lib` property of `posthog-python`, overriding any `$lib` property already set.
 > - If the script fails for some reason, just run it again with the latest cursor. There are some transient issues that can happen that are solved by re-running the script.
 
-## Switching tracking in you product
+### Between Cloud instances (e.g. US Cloud to EU CLoud)
+
+You will need to ask us to do the events migration for you by [raising a support ticket in the app](https://app.posthog.com/home#supportModal). Please note that this option is only available to paying customers as it requires significant engineering time. 
+
+We are currently unable to support migrating between US and EU Cloud for non-paying users. 
+
+### Importing historical events
+
+You'll only be charged for events within the current month. However, you can import historical events into PostHog at no cost. Reach out to sales@posthog.com if you are planning to import more than 20M events.
+
+## Switching tracking in your product
 
 To make sure you don't miss any events, complete the two previous steps **first**, so you can switch tracking in your product without losing any events:
 
@@ -118,7 +127,7 @@ This approach also helps minimize duplicates, which are eventually deduplicated,
 
 Start by logging in to your old instance and navigating to the 'Apps' tab. Next, search for the 'Replicator' app and install it if it isn't already.
 
-![image of configuration for the replicator app](../../images/docs/migrate/configure-replicator.png)
+![image of configuration for the replicator app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/migrate/configure-replicator.png)
 
 For the configuration:
 - **Host**: either app.posthog.com for US or eu.posthog.com for EU

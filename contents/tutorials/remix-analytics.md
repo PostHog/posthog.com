@@ -1,8 +1,12 @@
 ---
-title: How to set up Remix analytics, feature flags, and more
+title: 'How to set up Remix analytics, feature flags, and more'
 date: 2023-11-22
-author: ["ian-vanagas"]
-tags: ["configuration", "feature flags", "events"]
+author:
+  - ian-vanagas
+tags:
+  - configuration
+  - feature flags
+  - events
 ---
 
 Remix is a full stack web framework built on [React](/docs/libraries/react) with a specific focus on following web standards. 
@@ -11,10 +15,10 @@ In this tutorial, we show you how to add PostHog to your Remix app (on both the 
 
 ## Creating a Remix app
 
-First, make sure to [install a Node version](https://nodejs.org/en/download) greater than 18. After confirming, run the following command to create a basic app. Name it what you like (we chose `remix-tutorial`) and choose the default options.
+First, make sure to [install a Node version](https://nodejs.org/en/download) greater than 18. After confirming, run the following command to create a basic app and choose the default options.
 
 ```bash
-npx create-remix@latest
+npx create-remix@latest remix-tutorial
 ```
 
 Our app is going to be a basic blog with a few pages we can move between. 
@@ -139,7 +143,7 @@ npm run dev
 
  Once done, your basic Remix blog is running locally.
 
-![App](../images/tutorials/remix-analytics/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/app.png)
 
 ## Adding PostHog on the client side
 
@@ -151,66 +155,45 @@ npm i posthog-js
 
 Once done, you need your project API key and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
 
-With these, go to `routes/root.tsx` and set up a `useEffect` to initialize PostHog. 
+With these, go to `entry.client.tsx` and initialize PostHog using a component. This ensures the initialization doesn't break hydration.
 
-```ts
-// routes/root.tsx
-import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration
-} from "@remix-run/react";
-import posthog from "posthog-js"; // new
-import { useEffect } from "react"; // new
+```tsx
+// app/entry.client.tsx
+import { RemixBrowser } from "@remix-run/react";
+import { startTransition, StrictMode, useEffect } from "react";
+import { hydrateRoot } from "react-dom/client";
+import posthog from "posthog-js";
 
-export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
-
-export default function App() {
+function PosthogInit() {
   useEffect(() => {
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host:'<ph_instance_address>'
-      }
-    )
-  }
-  , [])
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_instance_address>',
+    });
+  }, []);
 
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
-  );
+  return null;
 }
+
+startTransition(() => {
+  hydrateRoot(
+    document,
+    <StrictMode>
+        <RemixBrowser />
+        <PosthogInit/>
+    </StrictMode>
+  );
+});
 ```
 
 After relaunching your app, PostHog begins autocapturing initial pageviews, clicks, [session replays](/docs/session-replay) (if [you enable them](https://app.posthog.com/settings/project#replay)), and more.
 
-![Autocapture](../images/tutorials/remix-analytics/autocapture.png)
+![Autocapture](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/autocapture.png)
 
 ## Capturing pageviews
 
 You might notice we captured only one pageview even though we navigated between multiple pages. This is because Remix is a [single-page app](/tutorials/single-page-app-pageviews) and only triggers an initial page load event. PostHog uses the page load event for pageviews, so to fix this, we must implement pageview capture ourselves.
 
-Again, we do this in `routes/root.tsx`. We import and set up `useLocation`, and then trigger another `useEffect` to capture a `$pageview` event. We also set the `capture_pageview` PostHog property to `false` so we don’t double capture the initial pageview.
+We do this in `routes/root.tsx`. We import `useLocation`, `useEffect`, and `posthog`. We set up `useLocation`, and then use a `useEffect` to capture a `$pageview` event.
 
 ```ts
 // routes/root.tsx
@@ -226,17 +209,6 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
-  useEffect(() => {
-    posthog.init(
-      '<ph_project_api_key',
-      {
-        api_host:'<ph_instance_address>',
-        capture_pageview: false // new
-      }
-    )
-  }
-  , [])
-
   const location = useLocation();
   useEffect(() => {
     posthog.capture('$pageview');
@@ -249,9 +221,9 @@ export default function App() {
 
 When you relaunch your app and navigate between pages, you now capture `$pageview` events in PostHog for each.
 
-![Pageview events](../images/tutorials/remix-analytics/pageview.png)
+![Pageview events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/pageview.png)
 
-> **Why is it double capturing the initial pageview?** In strict mode, React renders twice, triggering two pageview events. This doesn’t happen in production mode. You can also remove the `<StrictMode>` component in `routes/entry.client.tsx` to stop it in development.
+> **Why is it double capturing the pageviews?** There are two reasons this might happen. First, you need to set the `capture_pageview` [config option](/docs/libraries/js#config) in the PostHog initialization to `false` so we don’t double capture the initial pageview. Second, in strict mode, React renders twice. This triggers two pageview events, but doesn’t happen in production mode. You can also remove the `<StrictMode>` component in `app/entry.client.tsx` to stop it in development.
 
 ## Capturing custom events
 
@@ -286,7 +258,7 @@ Now, every time a user clicks this button, it captures a `liked_post` event with
 
 Next, we can add a [feature flag](/docs/feature-flags) to control a new version of the like button we want to try out. First, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Name it `new-button-text`, set the rollout to 100% of users, fill out any other details, and press save.
 
-![Flag creation video](../images/tutorials/remix-analytics/button.mp4)
+![Flag creation video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/button.mp4)
 
 In the `posts.$slug.tsx` file, set up a `useState` for the button content, and a `useEffect` for flag evaluation. We conditionally render the button text based on the flag response.
 
@@ -324,11 +296,11 @@ export default function PostSlug() {
 
 Our post page now shows the updated button, which you can toggle remotely with the flag in PostHog.
 
-![Button text controlled by flag](../images/tutorials/remix-analytics/flag.png)
+![Button text controlled by flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/flag.png)
 
 ## Adding PostHog on the server side
 
-Remix is a full stack framework, parts of it run on both the client and server side. So far, we’ve only used PostHog on the client side and the JavaScript Web library we installed won’t work on the server side. Instead, we must use the `[posthog-node` SDK](/docs/libraries/node). We can start by installing it:
+Remix is a full stack framework, parts of it run on both the client and server side. So far, we’ve only used PostHog on the client side and the [JavaScript Web library](/docs/libraries/js) we installed won’t work on the server side. Instead, we must use the [`posthog-node` SDK](/docs/libraries/node). We can start by installing it:
 
 ```bash
 npm i posthog-node
@@ -372,7 +344,7 @@ type Post = {
 };
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
-	 const filePath = path.join(process.cwd(), 'json', 'data.json');
+	const filePath = path.join(process.cwd(), 'json', 'data.json');
 
   const fileContents = await fs.readFile(filePath, 'utf8');
   const posts: Post[] = JSON.parse(fileContents).posts;
@@ -384,7 +356,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   }	
 
   const cookieString = request.headers.get('Cookie') || '';  
-	const projectAPIKey = '<ph_project_api_key>';
+  const projectAPIKey = '<ph_project_api_key>';
   const cookieName = `ph_${projectAPIKey}_posthog`;
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   let distinctId;
@@ -415,7 +387,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
 When you refresh the page now, you see a `server_side_event_name` event captured along with the others.
 
-![Server side event](../images/tutorials/remix-analytics/server.png)
+![Server side event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/server.png)
 
 ### Combining frontend and backend distinct IDs
 
@@ -516,5 +488,5 @@ Now, when you reload your page, the button doesn’t flicker. This is especially
 ## Further reading
 
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [How to set up React A/B testing](/tutorials/react-ab-testing)
-- [How to set up surveys in React](/tutorials/react-surveys)
+- [How to set up A/B tests in Remix](/tutorials/remix-ab-tests)
+- [How to set up surveys in Remix](/tutorials/remix-surveys)

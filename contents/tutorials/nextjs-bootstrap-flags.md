@@ -1,10 +1,13 @@
 ---
 title: How to use Next.js middleware to bootstrap feature flags
 date: 2023-07-04
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["configuration", "feature flags"]
+tags:
+  - configuration
+  - feature flags
 ---
 
 [Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) enables you to run functions between requests and responses. We can use this to [bootstrap feature flags](/docs/feature-flags/bootstrapping-and-local-evaluation) on page load and make them available immediately without making an additional requests. This is useful for redirecting, showing components without flickering, avoiding layout changes, and more.
@@ -67,7 +70,7 @@ export default function RootLayout({ children }) {
 
 After setting up PostHog, we need a [feature flag](/docs/feature-flags). To create one, go to the [feature flag tab](https://app.posthog.com/feature_flags) in your PostHog instance, and click "New feature flag." Add a key (like `bootstrap-test`), set rollout to 100% of users, and press save.
 
-![Flag creation video](../images/tutorials/nextjs-bootstrap-flags/flag.mp4)
+![Flag creation video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-bootstrap-flags/flag.mp4)
 
 Back in your app, set up the base `page.js` file to check the flag:
 
@@ -92,7 +95,7 @@ export default function Home() {
 
 Once done, you can run the site by running the `npm run dev` command. Go to your site running on your [localhost](http://localhost) and you might see "Not yet." Refresh and, if your feature flag is set up correctly, it changes to "PostHog is awesome." This means the flag works, but the app isn’t loading the feature flag value right away. To solve this, we can bootstrap the feature flags. 
 
-![Load site with flags video](../images/tutorials/nextjs-bootstrap-flags/load.mp4)
+![Load site with flags video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-bootstrap-flags/load.mp4)
 
 ## Getting feature flags with Next.js middleware
 
@@ -281,6 +284,9 @@ export default function Home() {
 Once you restart your app to reinitialize PostHog, your flags load instantly.
 
 > **When to bootstrap vs use cookies?** You might think to use cookies directly, but they don’t update when properties change. You should use bootstrapping and the `posthog-js` library when you want flags to update over time in the user session. For example, when they do something that updates properties like opt into a beta.
+
+> **Note:** When using Next.js v12, there's a [bug in 12.3.0](https://github.com/vercel/next.js/issues/39262) that can cause session recording not to work when using this method. To fix this, use a version of Next.js v12 at least at v12.3.4.
+
 
 ## Further reading
 

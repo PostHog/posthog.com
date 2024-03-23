@@ -3,15 +3,28 @@ title: Group analytics
 sidebar: Docs
 showTitle: true
 availability:
-    free: none
-    selfServe: full
-    enterprise: full
+  free: none
+  selfServe: full
+  enterprise: full
 ---
 import JSGroupsIntro from "../\_snippets/groups-intro.mdx"
 import JSGroupsVSCohorts from "../\_snippets/groups-vs-cohorts.mdx"
 import JSCreateGroups from "../\_snippets/how-to-create-groups.mdx"
 import JSSetGroupProperties from "../\_snippets/setting-group-properties.mdx"
 import JSLinkEventsToGroups from "../\_snippets/how-to-link-events-to-groups.mdx"
+
+export const viewGroupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/view-groups-light-mode.png"
+export const viewGroupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/view-groups-dark-mode.png"
+export const relatedLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/related-people-and-groups-light-mode.png"
+export const relatedDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/related-people-and-groups-dark-mode.png"
+export const groupInsightsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/group-insights-light-mode.png"
+export const groupInsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/group-insights-dark-mode.png"
+export const funnelsGroupAggregationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/funnels-group-aggregation-light-mode.png"
+export const funnelsGroupAggregationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/funnels-group-aggregation-dark-mode.png"
+export const groupsInFeatureLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-light-mode.mp4"
+export const groupsInFeatureDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-dark-mode.mp4"
+export const groupsProjectSettingLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-project-settings-light-mode.png"
+export const groupsProjectSettingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-project-settings-dark-mode.png"
 
 <JSGroupsIntro />
 
@@ -57,7 +70,7 @@ client.Enqueue(posthog.Capture{
     DistinctId: "static_string_for_group_events",
     Event: "group_event_name",
     Groups: posthog.NewGroups().
-    Set("company", "company_id_in_your_db").
+        Set("company", "company_id_in_your_db"),
 })
 ```
 
@@ -92,11 +105,21 @@ To view groups and their properties, head to the "Persons and Groups" tab on the
 
 From here, you can select the group type you are interested in and view the groups and properties (by clicking the chevrons on the left).
 
-![View Groups](../../images/docs/user-guides/funnels/view-groups.png)
+<ProductScreenshot
+    imageLight = {viewGroupLight} 
+    imageDark = {viewGroupDark}
+    classes="rounded"
+    alt="View groups"
+/>
 
 You can also click on a specific group to see information such as all the events that have been sent by this group. From there, in the "Related people & groups" tab, you can also see all of the persons who have sent events that were associated with this group, as well as all the other groups associated with the events.
 
-![View related people and groups](../../images/docs/user-guides/funnels/related-people-and-groups.png)
+<ProductScreenshot
+    imageLight = {relatedLight} 
+    imageDark = {relatedDark}
+    classes="rounded"
+    alt="View related people and groups"
+/>
 
 ### How to view group insights
 
@@ -106,7 +129,12 @@ For example, let's say that we wanted to see a graph showing how many different 
 
 To do this, expand the menu next to the event you've chosen. This lists of all the group types available. Next, select the option for "Unique" with your group type name, such as "Unique organizations." This shows a graph with the total number of groups (organizations) that have signed up (as opposed to individual users).
 
-![Analyze group insights](../../images/docs/user-guides/funnels/group-insights.mp4)
+<ProductScreenshot
+    imageLight = {groupInsightsLight} 
+    imageDark = {groupInsightsDark}
+    classes="rounded"
+    alt="Analyze group insights"
+/>
 
 ### Using groups with funnels
 
@@ -116,7 +144,12 @@ For example, you may want to understand how organizations move from their first 
 
 This shows how many organizations have made it through, as well as the percentage of organizations that dropped off. It's also possible to see exactly which specific groups dropped off at each step.
 
-![Group funnels](../../images/docs/user-guides/funnels/funnels-group-aggregation.png)
+<ProductScreenshot
+    imageLight = {funnelsGroupAggregationLight} 
+    imageDark = {funnelsGroupAggregationDark}
+    classes="rounded"
+    alt="Group funnels"
+/>
 
 ### Using groups with feature flags
 
@@ -124,7 +157,12 @@ Groups in feature flags enable you to rollout a feature by group type (like `com
 
 To do this, create a feature flag as you normally would, and select the group type you wish to "Match by", using the drop down in the "Release conditions" section:
 
-![Groups in project settings](../../images/docs/user-guides/funnels/groups-in-feature-flags.mp4)
+<ProductVideo
+    videoLight = {groupsInFeatureLight} 
+    videoDark = {groupsInFeatureDark}
+    classes="rounded"
+    alt="Feature flags for groups"
+/>
 
 You also need to update your event tracking code for the feature flag to determine the groups of the current user.
 
@@ -163,7 +201,12 @@ if (isFlagEnabled) {
 
 You can change how group types are displayed in the insights interface and throughout PostHog by in project settings.
 
-![Groups in project settings](../../images/docs/user-guides/funnels/groups-project-settings.png)
+<ProductScreenshot
+    imageLight = {groupsProjectSettingLight} 
+    imageDark = {groupsProjectSettingDark}
+    classes="rounded"
+    alt="Groups in project settings"
+/>
 
 ## Limitations
 

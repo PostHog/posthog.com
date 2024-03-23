@@ -1,19 +1,14 @@
 import Snippet from "../snippet.mdx"
 
-> This is the simplest way to get PostHog up and running on your website, and only takes a few minutes to set-up.
+This is the simplest way to get PostHog up and running. It only takes a few minutes.
 
-#### Add to your website &amp; app
+Copy the snippet below and replace `<ph_project_api_key>` and `<ph_instance_address>` with your project's values, then add it within the `<head>` tags at the base of your product - ideally just before the closing `</head>` tag. This ensures PostHog loads on any page users visit.
 
-Paste this snippet within the `<head>` tags of your website - ideally just inside the closing `</head>` tag - on all pages that you wish to track.
+You can find the snippet pre-filled with this data in [your project settings](https://us.posthog.com/settings/project#snippet).
 
 <Snippet />
 
-Be sure to replace `<ph_project_api_key>` and `<ph_instance_address>` with your project's values. (You can find the snippet pre-filled with this data in the PostHog app under Project / Settings. _(Quick links if you use [PostHog Cloud US](https://app.posthog.com/project/settings) or [PostHog Cloud EU](https://eu.posthog.com/project/settings))_
+Once the snippet is added, PostHog automatically captures `$pageview` and [other events](/docs/data/autocapture) like button clicks. You can then enable other products, such as session replays, within [your project settings](https://us.posthog.com/settings). 
 
-#### What this code does
 
-After adding the snippet to your website, it will automatically start to:
 
--   Capture `$pageview` events when a user visits a page
--   Track when users [click on links or buttons](/docs/data/autocapture)
--   [Record videos of user sessions](/docs/user-guides/recordings) that you can play back (if you've enabled the Session recordings feature, which we highly recommend!)

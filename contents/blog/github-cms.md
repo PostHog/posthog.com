@@ -1,14 +1,16 @@
 ---
 title: Why we use GitHub as our CMS
 date: 2023-03-23
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y
+featuredVideo: 'https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y'
 category: Inside PostHog
 ---
 
@@ -55,13 +57,13 @@ The one thing it lacks is a content calendar, but it's not something we miss muc
 
 ## 3. GitHub keeps us engineering-focused
 
-At PostHog, [everybody codes](/handbook/company/values#everyone-codes), and our [ideal customers](/blog/creating-ideal-customer-profile) are developers. Using GitHub and combining content and code keeps this top of mind. GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages non-technical people to be more technical.
+At PostHog, [everybody codes](/handbook/company/values#everyone-codes), and our [ideal customers](/newsletter/ideal-customer-profile-framework) are developers. Using GitHub and combining content and code keeps this top of mind. GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages non-technical people to be more technical.
 
 Developers don’t want to spend time in a CMS. They want to use tools they already know and spend time in. Trying to get a busy developer to contribute on GitHub is easier than trying to get them to contribute in a CMS they aren’t familiar with. This means they make more changes to our site and review content more often. **~40% of [merged pull requests in the posthog.com repo](https://github.com/PostHog/posthog.com/pulls?q=is%3Aclosed) are from people outside of marketing, website, and docs.**
 
 It also encourages our marketing team to be more technical. They must understand how the code and content interact. For example, when missing metadata causes an error in the web app. The marketing team can figure out and solve this themselves, rather than asking the development team to do it.
 
-![VSCode screenshot of this blog](../images/blog/github-cms/blog.png)
+![VSCode screenshot of this blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/github-cms/blog.png)
 
 By using GitHub as a CMS, we stay engineering-focused. Everyone works like an engineer, and that enables us to understand and build a better product for them. This helps PostHog succeed in the long run. 
 

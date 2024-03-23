@@ -3,18 +3,19 @@ title: Multi-project feature flags
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const MultiProjectFeatureFlagsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/multi-project-feature-flags-light.png"
+export const MultiProjectFeatureFlagsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/multi-project-feature-flags-dark.png"
 
 Sometimes, you may want to use the same feature flag keys across different PostHog [projects](/docs/data/organizations-and-projects). For example, when you're testing a new feature in staging before releasing to production. In this case, PostHog makes it easy to copy and sync feature flags across projects.
 
 This eliminates the need for manual replication, which is error-prone.
 
 ## How to copy or update a feature flag across projects
-
-
 
 > **Note:** If you copy a flag linked to a [dynamic cohort](/docs/data/cohorts#dynamic-cohorts) and a cohort with the same name does not exist in the target project, the entire cohort will be copied over.
 >
@@ -28,4 +29,9 @@ Follow these steps to copy or update the flag in another project:
 4. Click `Copy` or `Update` - this depends on whether the flag already exists in the target project.
 5. View the table at the bottom to see the newly created or updated flag.
 
-![Multi-project feature flags](../../images/features/feature-flags/multi-project-feature-flags.png)
+<ProductScreenshot
+    imageLight={MultiProjectFeatureFlagsLight}
+    imageDark={MultiProjectFeatureFlagsDark}
+    alt="Multi-project feature flags" 
+    classes="rounded"
+/>

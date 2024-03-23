@@ -1,13 +1,15 @@
 ---
 date: 2023-01-11
-title: "CEO diary: The things I learned in 2022"
+title: 'CEO diary: The things I learned in 2022'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: CEO diaries
-author: ["james-hawkins"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+author:
+  - james-hawkins
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
@@ -17,7 +19,7 @@ It's always helpful to look back on the year just gone, and 2022 was an exceptio
 
 ### We grew very fast _and_ are much more durable
 
-![Our 2022 revenue growth over time, which increases by 6 times](../images/revenue-end-2022.jpg)
+![Our 2022 revenue growth over time, which increases by 6 times](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/revenue-end-2022.jpg)
 
 - Revenue grew nearly 6x without any outbound sales team.
 
@@ -73,7 +75,7 @@ My (then) one-year-old daughter got diagnosed with bilateral retinoblastoma (a t
 
 We made too many improvements to list on user-facing functionality, and infra / ingestion-based functionality. It feels like we can make new things appear, although Q1 will be a big test – it'll be one of our most ambitious quarters.
 
-Other teams also get their work out the door quickly, unimpeded by bureaucracy / excessive planning. We've had a ton of marketing content appearing, a smooth time with our [People and Ops team](../handbook/small-teams/people), and a [Growth Team](../handbook/small-teams/growth) that can't stop producing winning variants!
+Other teams also get their work out the door quickly, unimpeded by bureaucracy / excessive planning. We've had a ton of marketing content appearing, a smooth time with our [People and Ops team](../teams/people), and a [Growth Team](../teams/growth) that can't stop producing winning variants!
 
 ### I'm really glad we're not doing outbound / went for a growth team instead
 

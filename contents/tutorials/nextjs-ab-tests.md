@@ -1,269 +1,297 @@
 ---
 title: How to set up Next.js A/B tests
-date: 2023-03-06
-author: ["ian-vanagas"]
-showTitle: true
-sidebar: Docs
-featuredVideo: https://www.youtube-nocookie.com/embed/QfTMREUEc18
-tags: ['experimentation', 'feature flags', 'actions']
+date: 2024-02-16
+author:
+  - ian-vanagas
+tags:
+  - experimentation
+  - feature flags
+  - actions
 ---
 
-Many of the features of Next.js optimize for creating the best possible user experience. It automates and abstracts functionality like static page generation, image loading optimization, and optional server-side rendering, allowing you to focus on the content of your app.
+[A/B tests](/ab-testing) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
 
-A/B tests are a way to make sure this content performs as well as possible. A/B tests involve comparing two or more variations against a goal. The winner is the one which achieves the goal best and is then used to improve everyone's experience.
+PostHog's experimentation tool makes it easy to set up A/B tests. This tutorial shows you how to build a basic Next.js app (with the app router), add PostHog to it, bootstrap feature flag data, and set up the A/B test in the app.
 
-PostHog’s experimentation tool makes this entire process simple. This tutorial shows you how to build a basic Next.js app, add PostHog to it, and finally set up and run an A/B test experiment.
+## 1. Create a Next.js app
 
-> Already have a Next.js app? [Skip to adding PostHog and setting up the A/B test](#adding-posthog).
-
-## Creating a Next.js app
-
-We will create a basic Next.js app with a simple button to run our test on. Check out [our full Next.js tutorial](/tutorials/nextjs-analytics) if you’re looking for more details on building a multi-page app with authentication, user identification, event capture, and more.
-
-First, make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (14.6.0 or newer), then create a Next.js app:
-
-```bash
-npx create-next-app@latest
-```
-
-Name it whatever you like (we call ours `next-ab`), select `No` for TypeScript, `No` for using the app router, and the defaults for the rest of the options.
-
-Once created, go into the `next-ab` folder it creates, then go to `pages/index.js` and replace the code with just a heading and a button (which our A/B test runs on). 
+We will create a basic Next.js app with a simple button to run our test on. First, make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (18.17 or newer), then create a Next.js app:
 
 ```js
-// pages/index.js
-import Head from 'next/head'
+npx create-next-app@latest next-ab
+```
+
+Select `No` for TypeScript, `Yes` for `use app router`, and the defaults for the rest of the options. Once created, go to your `app/page.js` file and set up a basic page with a heading and a button.
+
+```js
+// app/page.js
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>Next.js A/B tests</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-        <h1>Next.js A/B tests</h1>
-        <button id="main-cta">Click me</button>
-      </main>
-    </>
-  )
+    <main>
+      <h1>Next.js A/B tests</h1>
+			<button id="main-cta">Click me</button>
+    </main>
+  );
 }
 ```
 
-After doing this, delete the default CSS in the `styles` folder and run `npm run dev` to get an extremely basic Next.js app we can run our A/B tests on. 
+Once done, run `npm run dev` and go `http://localhost:3000` to see your app.
 
-![Basic app](../images/tutorials/nextjs-ab-tests/button.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-ab-tests/app.png)
 
-## Adding PostHog
+## 2. Add PostHog
 
-Now, we can add PostHog (if you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup)). To do this, first, install `posthog-js` .
+To track our app and set up an A/B test, we install PostHog. If you don't have a PostHog instance already, you can [sign up for free](https://us.posthog.com/signup). 
+
+Start by installing the `posthog-js` SDK:
 
 ```bash
-npm install posthog-js
+npm i posthog-js
 ```
 
-In `_app.js`, we can then initialize PostHog and set up a provider that provides access to PostHog throughout our app. 
+Next, create a `providers.js` file in your `app` folder. In it, initialize PostHog with your project API key and instance address and export a provider component.
 
 ```js
-// pages/_app.js
-import { PostHogProvider } from 'posthog-js/react'
+// app/providers.js
+'use client'
 import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
 
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', 
-  { 
-    api_host: '<ph_instance_address>'
-  })
-}
+export function PHProvider({ children }) {
+	if (typeof window !== 'undefined') {
+	  posthog.init('<ph_project_api_key>', {
+	    api_host: '<ph_instance_address>'
+	  })
+	}
 
-export default function App({ Component, pageProps }) {
-  return (
-    <PostHogProvider client={posthog}>
-      <Component {...pageProps} />
-    </PostHogProvider>
-  )
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
 
-Once you’ve done this, reload your app and click the button a few times. You should see this being captured in PostHog.
-
-![Events](../images/tutorials/nextjs-ab-tests/events.png)
-
-## Creating an action for our experiment goal
-
-The first part of setting up our experiment in PostHog is setting up the goal. In this case, it is clicks of the main call to action button which has varying content.
-
-To measure this, we can set up an [action](/manual/actions) using the PostHog toolbar. To enable and launch the toolbar, go to the "Launch Toolbar" tab in PostHog, add `http://localhost:3000/` as an authorized URL, then click launch. This brings you to your app with a PostHog icon hovering on your screen.
-
-To create an action with the toolbar, click:
-
-1. the PostHog icon
-2. "Inspect" 
-3. the "Click Me" button, 
-4. "Create New Action" in the modal. 
-
-Name the action "Clicked Main CTA" and unselect the text match (because it changes), then scroll to the bottom of the modal to create an action.
-
-![Action](../images/tutorials/nextjs-ab-tests/action.gif)
-
-## Creating an experiment
-
-With our Next.js app, PostHog, and our experiment goal set up, we can go into PostHog, and create a new experiment.
-
-> Experimentation is a paid feature in PostHog, but is free to use up to 1M events and 15k session recordings per month.
-
-In your PostHog instance, go to the experiments tab, click create a new experiment, and enter a name and key. We keep the defaults for variants and not use any filters (which means 100% of users see the experiment). Use the action we created earlier as our experiment goal. 
-
-![Experiment](../images/tutorials/nextjs-ab-tests/experiment.gif)
-
-> **Note:** There must be at least one occurrence of the action for it to show as a goal, so make sure to click the button after creating the action.
-
-Once we create the experiment, we can start to implement it. Come back and launch it later.
-
-## Implementing our experiment
-
-When it comes to implementing our experiment and its associated feature flags, there are a few options we can choose:
-
-1. Bootstrap feature flags by using [`getInitialProps`](https://nextjs.org/docs/api-reference/data-fetching/get-initial-props) in `_app.js`
-2. Server-side render feature flags in `index.js` using `posthog-node`.
-3. Client-side render feature flags in `index.js`.
-
-Because `getInitialProps` disables [Automatic Static Optimization](https://nextjs.org/docs/advanced-features/automatic-static-optimization) for the entire app (one of the main benefits of Next.js), we aren’t going to bootstrap feature flags (option 1). Instead, we use a combination of server-side and client-side rendering. This ensures the flags' accuracy and speed while still leveraging the unique benefits of Next.js.
-
-### Client-side rendering feature flags
-
-To client-side render the experiment using feature flags, we can use the `PostHogProvider` we set up earlier. This ensures PostHog is loaded when we check the flags.
-
-In `index.js`, set up a state for the call to action button and a `useEffect()` to check the flag when the page loads.
-
-To check the flag, import `useFeatureFlagEnabled` from `posthog-js/react`, use it to call the flag name (`main-cta`), and change the state of the button text to "Learn more" if `true`.
-
-> **Note:** Use `posthog.featureFlags.override({'main-cta': 'test'})` to make sure it is working, but remove it when we go to release.
+Once created, you can import `PHProvider` into your `layout.js` file and wrap your app in it:
 
 ```js
-// pages/index.js
-import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import { usePostHog, useFeatureFlagEnabled } from 'posthog-js/react'
+import "./globals.css";
+import { PHProvider } from './providers'
 
-export default function Home() {
-
-  const [ ctaState, setCtaState ] = useState('Click me')
-  const posthog = usePostHog()
-  posthog.featureFlags.override({'main-cta': 'test'})
-  const ctaVariant = useFeatureFlagVariantKey('main-cta')
-
-  useEffect(() => {
-    if (ctaVariant === 'test') {
-      setCtaState('Learn more')
-    }
-  }, [ctaVariant])
-
+export default function RootLayout({ children }) {
   return (
-    <>
-      <Head>
-        <title>Next.js A/B tests</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-        <h1>Next.js A/B tests</h1>
-        <button id="main-cta">{ctaState}</button>
-      </main>
-    </>
-  )
+    <html lang="en">
+      <PHProvider>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  );
 }
 ```
 
-If you’ve set everything up correctly, this changes the call to action to "Learn more"
+When you reload your app, you should see events captured in [your activity tab](https://us.posthog.com/events) in PostHog.
 
-![Learn call to action](../images/tutorials/nextjs-ab-tests/learn.png)
+## 3. Creating an action for our experiment goal
 
-With this you’re ready to launch your experiment, but make sure to remove your override.
+To measure the impact of our change, we need a goal metric. To set this up, we can create an [action](/docs/data/actions) from the events PostHog [autocaptures](/docs/product-analytics/autocapture) using the toolbar.
 
-### Server-side rendering
+To enable and launch the toolbar, go to the "[Launch toolbar](https://us.posthog.com/toolbar)" tab, add `http://localhost:3000/` as an authorized URL, then click launch. To create an action with the toolbar, click:
 
-Notice when you refresh the call to action that it flickers between "Click me" and "Learn more." This is because it takes time for React and PostHog to load. 
+1. The target icon (inspector) in the toolbar
+2. The "Click me" button
+3. "Create new action" in the modal
 
-Server-side rendering the feature flag is a way to limit this. This gets the data about the feature flag before the client loads, so the call to action only requires React to load on the client-side.
+Name the action "Clicked Main CTA" and then click "Create action."
 
-To set this up, first, we must install and use PostHog’s Node library (because we are making server-side requests).
+![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-ab-tests/action.png)
+
+> **Note:** You can also use a custom event as a goal metric. See our [full Next.js analytics tutorial](/tutorials/nextjs-app-directory-analytics#capturing-custom-events) for how to set up custom event capture.
+
+## 4. Creating an experiment
+
+With PostHog installed and our action set up, we're ready to create our experiment. To do so, go to the [A/B testing tab](https://us.posthog.com/experiments) in PostHog, click "New experiment," and then: 
+
+1. Name your A/B test.
+2. Set your feature flag key to something like `main-cta`.
+3. Choose the "Clicked Main CTA" action as your experiment goal. You may need to refresh for it to show up.
+4. Click "Save as draft" and then "Launch."
+
+Once done, you're ready to go back to your app to start implementing it.
+
+## 5. Bootstrapping feature flags
+
+A/B testing in PostHog relies on feature flag data. To ensure that feature flag data is available as soon as possible, we make a server-side request for it and then pass it to the client-side initialization of PostHog (known as [bootstrapping](/docs/feature-flags/bootstrapping)).
+
+Set up a function in `layout.js` that:
+
+1. Checks for the user `distinct_id` in the cookies.
+2. If it doesn't exist, creates one using [`uuidv7`](https://github.com/LiosK/uuidv7).
+3. Uses the [`posthog-node`](/docs/libraries/node) library and the `distinct_id` to [`getAllFlags`](https://posthog.com/docs/libraries/node#fetching-all-flags-for-a-user).
+4. Passes the flags and `distinct_id` to the `PHProvider`.
+
+Start by installing `uuidv7` and `posthog-node`:
 
 ```bash
-npm i posthog-node
+npm i uuidv7 posthog-node
 ```
 
-In `index.js` below our `Home()` function, use the `getServerSideProps` method that Next.js automatically provides to get the data for the feature flags for the experiment. Make sure to go back into PostHog and launch your experiment if you haven’t already. In our `getServerSideProps` method, we need:
-
-- to check that cookies exist
-- the user’s distinct ID which we can get from the cookies sent in the request
-- their related feature flag data which we can get by calling the `posthog-node` `getAllFlags()`  method
+Next, create a `utils` folder and create a folder named `gen-id.js`. In this file, we use React's cache feature to generate an ID once and return the same value if we call it again.
 
 ```js
-// pages/index.js
+// app/utils/gen-id.js
+import { cache } from 'react'
+import { uuidv7 } from "uuidv7";
+ 
+export const generateId = cache(() => {
+  const id = uuidv7()
+  return id 
+})
+```
+
+After this, we are ready to set up the `getBootstrapData` function in `layout.js`:
+
+1. Import PostHog (from Node), the Next `cookies` function, and the `generateId` utility.
+2. Add the `getBootstrapData` function and logic.
+3. Call it from the `RootLayout`.
+4. Pass the data to the `PHProvider`.
+
+```js
+// app/layout.js
+import './globals.css'
+import PHProvider from "./providers";
 import { PostHog } from 'posthog-node'
+import { cookies } from 'next/headers'
+import { generateId } from './utils/gen-id'
 
-//... rest of imports and Home() function
+export default async function RootLayout({ children }) {
+  const bootstrapData = await getBootstrapData()
 
-export async function getServerSideProps(ctx) {
+  return (
+    <html lang="en">
+      <PHProvider bootstrapData={bootstrapData}>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
+}
 
-  if (Object.keys(ctx.req.cookies).length === 0) {
-    return {
-      props: {
-        flags: null
-      },
-    }
+export async function getBootstrapData() {
+  let distinct_id = ''
+  const phProjectAPIKey = '<ph_project_api_key>'
+  const phCookieName = `ph_${phProjectAPIKey}_posthog`
+  const cookieStore = cookies()
+  const phCookie = cookieStore.get(phCookieName)
+
+  if (phCookie) {
+    const phCookieParsed = JSON.parse(phCookie.value);
+    distinct_id = phCookieParsed.distinct_id;
   }
-
-  const ph_project_api_key = '<ph_project_api_key>'
-
-  const user_id = JSON.parse(ctx.req.cookies[`ph_${ph_project_api_key}_posthog`]).distinct_id
+  if (!distinct_id) {
+    distinct_id = generateId()
+  }
 
   const client = new PostHog(
-    ph_project_api_key,
-    {
-      api_host: '<ph_instance_address>',
-    }
-  )
-  const flags = await client.getAllFlags(user_id);
-
-  return {
-    props: {
-      flags
-    },
+    phProjectAPIKey,
+    { host: "<ph_instance_address>" })
+  const flags = await client.getAllFlags(distinct_id)
+  const bootstrap = {
+    distinctID: distinct_id,
+    featureFlags: flags
   }
+
+  return bootstrap
 }
 ```
 
-If the `flags` props is available and the `main-cta` flag is set to `test`, we set the `ctaState` to "Learn more." 
-
-Make sure to keep the other `useEffect()` call for client-side rendering to ensure flags are accurate and work on the first visit.
+Finally, in `providers.js`, we handle the `bootstrapData` and add it to the PostHog initialization.
 
 ```js
-// pages/index.js
-//... imports
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
 
-export default function Home({ flags }) {
+export default function PHProvider({ children, bootstrapData }) {
+  if (typeof window !== 'undefined') {
+    posthog.init("<ph_project_api_key>", {
+      api_host: "<ph_instance_address>",
+      bootstrap: bootstrapData
+    })
+  }
 
-  const [ ctaState, setCtaState ] = useState('Click me')
-  const ctaVariant = useFeatureFlagVariantKey('main-cta')
-
-  useEffect(() => {
-    if (flags && flags['main-cta'] === 'test') {
-      setCtaState('Learn more')
-    }
-  }, [])
-
-//... rest of Home() and getServerSideProps()
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
 ```
 
-Now, when you refresh the page, the call to action loads faster. 
+Now, feature flag data is available as soon as PostHog loads. Bootstrapping flags like this ensures a user's experience is consistent and you track them accurately. 
 
-> **Note:** This only works on subsequence visits to your app where the PostHog cookie is set. Using this method still requires waiting for PostHog and feature flags to load on the first visit.
+## 6. Implementing our A/B test
+
+The final part is to implement the A/B test in our component. There are two ways to do this:
+
+1. A client-side implementation where we wait for PostHog to load and use it to control display logic.
+2. A server-side implementation where we use the bootstrap data directly.
+
+### Client-side implementation
+
+To set up our A/B test in `app/page.js`:
+
+1. Change it to a client-side rendered component.
+2. Set up PostHog using the `usePostHog` hook.
+3. Use a `useEffect` to check the feature flag.
+4. Change the button text based on the flag value.
+
+```js
+// app/page.js
+'use client'
+import { usePostHog } from 'posthog-js/react'
+import { useEffect, useState } from 'react'
+
+export default function Home() {
+  const posthog = usePostHog()
+  const [text, setText] = useState('')
+
+  useEffect(() => {
+    const flag = posthog.getFeatureFlag('main-cta')
+    setText(flag === 'test' ? 'Click this button for free money' : 'Click me');
+  }, [])
+
+  return (
+    <main>
+      <h1>Next.js A/B tests</h1>
+      <button id="main-cta">{text}</button>
+    </main>
+  )
+}
+```
+
+When you reload the app, you see our app still needs to wait for PostHog to load even though we are loading flags as fast as possible with bootstrapping. This causes the "flicker," but is solvable if we server-render the component.
+
+### Server-side implementation
+
+We can use the same `getBootstrapData` function in a server-rendered page and access the data directly. Next.js [caches the response](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#caching-data), meaning it is consistent with the bootstrapped data.
+
+To set up the A/B test, we change the `app/page.js` component to be server-rendered and await the `bootstrapData` to use it to set the button text.
+
+```js
+// app/page.js
+import { getBootstrapData } from "./layout"
+
+export default async function Home() {
+  const bootstrapData = await getBootstrapData()
+  const flag = bootstrapData.featureFlags['main-cta']
+  const buttonText = flag === "test" ? "Click this button for free money" : "Click me";
+
+  return (
+    <main>
+      <h1>Next.js A/B tests</h1>
+			<button id="main-cta">{buttonText}</button>
+    </main>
+  );
+}
+```
+
+This shows your updated button text immediately on load. This method still uses the client-side for tracking, and this works because we bootstrap the distinct ID from the server-side to the client.
 
 ## Further reading
 
+- [How, when, and where to run your first A/B test](/product-engineers/how-to-do-ab-testing)
+- [10 things we've learned about A/B testing for startups](/newsletter/what-we've-learned-about-ab-testing)
 - [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
-- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
-- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)

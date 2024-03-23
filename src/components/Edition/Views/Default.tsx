@@ -116,7 +116,7 @@ export const SortDropdown = ({ sort, setSort }) => {
                         </Tooltip>
                         <IconChevronDown className="w-6" />
                     </Menu.Button>
-                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-0 left-0 translate-y-full overflow-hidden">
+                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-0 left-0 translate-y-full overflow-hidden">
                         {sortOptions.map((option, index) => {
                             return (
                                 <Menu.Item key={`${option.label}-${index}`}>
@@ -162,7 +162,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                                 <IconChevronDown className="w-6 h-6 -mb-[2px]" />
                             </div>
                         </Menu.Button>
-                        <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                        <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                             {menu.map((menu, index) => {
                                 const { name, url, icon, color } = menu
                                 const active = menu === activeMenu
@@ -197,7 +197,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                             <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
                                 <IconFilter className="w-5 h-5" />
                             </Menu.Button>
-                            <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                            <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                                 <Menu.Item>
                                     <button
                                         onClick={() => {
@@ -268,7 +268,7 @@ const Title = () => {
     const { activeMenu, tag, sort, setSort } = useContext(PostsContext)
 
     return (
-        <div className="flex justify-between items-center mb-2 pt-4">
+        <div className="hidden md:flex justify-between items-center mb-2 pt-4">
             <h2 className="m-0 text-xl space-x-2 flex-wrap md:flex hidden">
                 {activeMenu?.name === 'Founders' ? (
                     <>Founder's hub{tag ? `: ${tag}` : null}</>
@@ -322,7 +322,7 @@ function PostsListing() {
                     </>
                 )}
                 <ul
-                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden mt-4 ${
+                    className={`list-none p-0 m-0 snap-y snap-proximity overflow-x-hidden mt-4 ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
                     }`}
                 >
@@ -374,7 +374,7 @@ export default function Default({ children }) {
                     className={`${
                         articleView
                             ? 'flex-grow'
-                            : 'sticky top-[108px] h-screen basis-[20rem] flex-shrink-0 block pl-4 border-l border-light dark:border-dark'
+                            : 'sticky top-[108px] h-screen basis-[20rem] flex-shrink-0 pl-4 border-l border-light dark:border-dark md:block hidden'
                     }`}
                 >
                     {children}

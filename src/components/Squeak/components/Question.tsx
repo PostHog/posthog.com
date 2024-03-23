@@ -26,6 +26,8 @@ type QuestionProps = {
     question?: StrapiRecord<QuestionData>
     expanded?: boolean
     showSlug?: boolean
+    buttonText?: string
+    showActions?: boolean
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -191,7 +193,7 @@ const EscalateButton = ({ escalate, escalated }) => {
 }
 
 export const Question = (props: QuestionProps) => {
-    const { id, question, showSlug } = props
+    const { id, question, showSlug, buttonText, showActions = true } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const { user } = useUser()
 
@@ -247,14 +249,16 @@ export const Question = (props: QuestionProps) => {
                     </div>
                 )}
                 <div className={`flex flex-col w-full`}>
-                    <div className="flex items-center space-x-2 w-full">
+                    <div
+                        className={`flex items-center space-x-2 w-full ${!questionData.attributes.subject && '-mb-2'}`}
+                    >
                         <Profile
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
                         <Days created={questionData.attributes.createdAt} />
                         <div className="!ml-auto flex space-x-2">
-                            {user?.role?.type === 'moderator' && (
+                            {user?.role?.type === 'moderator' && showActions && (
                                 <>
                                     {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
                                     <EscalateButton escalate={escalate} escalated={escalated} />
@@ -282,20 +286,24 @@ export const Question = (props: QuestionProps) => {
                                     </button>
                                 </>
                             )}
-                            {!archived && <SubscribeButton contentType="question" id={questionData?.id} />}
+                            {!archived && (
+                                <SubscribeButton contentType="question" id={questionData?.id} show={showActions} />
+                            )}
                         </div>
                     </div>
 
                     <div className={archived ? 'opacity-50' : ''}>
                         <div className="ml-5 pl-[30px] border-l border-light dark:border-dark">
-                            <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
-                                <Link
-                                    to={`/questions/${questionData.attributes.permalink}`}
-                                    className="no-underline font-semibold text-black dark:text-white hover:text-black dark:hover:text-white"
-                                >
-                                    {questionData.attributes.subject}
-                                </Link>
-                            </h3>
+                            {questionData.attributes.subject && (
+                                <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
+                                    <Link
+                                        to={`/questions/${questionData.attributes.permalink}`}
+                                        className="no-underline font-semibold text-black dark:text-white hover:text-black dark:hover:text-white"
+                                    >
+                                        {questionData.attributes.subject}
+                                    </Link>
+                                </h3>
+                            )}
 
                             <Markdown className="question-content">{questionData.attributes.body}</Markdown>
 
@@ -319,7 +327,13 @@ export const Question = (props: QuestionProps) => {
                             archived ? 'opacity-25' : ''
                         }`}
                     >
-                        <QuestionForm archived={archived} questionId={questionData.id} formType="reply" reply={reply} />
+                        <QuestionForm
+                            archived={archived}
+                            questionId={questionData.id}
+                            buttonText={buttonText}
+                            formType="reply"
+                            reply={reply}
+                        />
                     </div>
                 </div>
             </div>

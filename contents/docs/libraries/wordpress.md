@@ -1,6 +1,7 @@
 ---
 title: WordPress
-icon: ../../images/docs/integrate/frameworks/wordpress.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/wordpress.svg
 ---
 
 Getting analytics about your [WordPress](https://www.wordpress.org/) site is simple with PostHog. Get data about traffic, usage, and user behavior with our free, open-source analytics platform. Once you have that data, you can discover insights and build dashboards with our suite of analytics tools.
@@ -38,7 +39,7 @@ The instructions below detail how to use the WordPress built-in functionality fo
 
     <br />
     
-    ![WordPress Theme Editor](../../images/tutorials/wordpress/wordpress-header-edit.png)
+    ![WordPress Theme Editor](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/wordpress/wordpress-header-edit.png)
     
     <br />
 5. You should now see the contents of the `header.php` template file in the code editing view. It is recommended that you copy all the text/code and save it somewhere as a back-up.

@@ -3,12 +3,15 @@ date: 2021-01-21
 title: A story about pivots
 author:
   - james-hawkins
-featuredImage: ../images/blog/story-about-pivots.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/story-about-pivots.png
 featuredImageType: full
 tags:
   - Founders
   - Product-market fit
-  - Product  
+  - Product
+crosspost:
+  - Blog
 ---
 
 PostHog has pivoted _a lot_.
@@ -42,7 +45,7 @@ So, what did we build?
 
 At one stage in my life, I was the VP of Sales at an enterprise software company. On paper, it looked like a glamorous job - I used to fly around the world with the sales team, and met with huge enterprise clients in fancy skyscrapers, like the [ICC in Hong Kong](https://en.wikipedia.org/wiki/International_Commerce_Centre):
 
-![International Commerce Center - a big skyscraper in Hong Kong](../images/blog/pivoting/international-commerce-centre.jpg)
+![International Commerce Center - a big skyscraper in Hong Kong](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pivoting/international-commerce-centre.jpg)
 
 Despite this, the _majority_ of your time in sales is spent getting nowhere. All those hotels, flights, calls, fastidiously wearing a suit in inappropriately warm weather - very few of those things result in anything.
 
@@ -94,7 +97,7 @@ It was the prioritization of where to focus your sales efforts. If 90% of your s
 
 Yet, many managers in practice don't prepare, at all.
 
-![A team that look a little bit like their happiness is staged](../images/blog/pivoting/amazing-team.jpg)
+![A team that look a little bit like their happiness is staged](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pivoting/amazing-team.jpg)
 
 We changed the UX completely, and made an app that looked a bit like google docs, where you and your reports could each create an agenda in advance and take notes. The twist? The product would interpret your sales pipeline and would use predictive analytics to suggest specific deals to discuss that could be worth replacing or that had changed dramatically since the previous week.
 
@@ -136,7 +139,7 @@ It turns out everyone has problems with technical debt, but solving it involves 
 
 After a meetup with our YC friends at a cool [food truck spot](http://sparksocialsf.com/), we took a long walk back to our house in [Castro](https://en.wikipedia.org/wiki/Castro_District,_San_Francisco). We were thinking about how to solve our product woes. Could it turn into a piece of roadmapping software? Would it need to integrate with the roadmap software already in use? We just didn't feel excited about building these things out.
 
-![James and Tim at a group ycombinator meetup about to walk home](../images/blog/pivoting/about-to-run-out-of-product-ideas.jpeg)
+![James and Tim at a group ycombinator meetup about to walk home](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pivoting/about-to-run-out-of-product-ideas.jpeg)
 
 A couple of days later, driving between Mountain View and San Francisco, we realized that we just weren't the right people to run this business.
 
@@ -174,7 +177,7 @@ When did we know this idea was right?
 
 When we saw real life actual people on the internet start using our thing, without us having to manually get them to do so.
 
-Even better was seeing a community starting to appear. We got [our first ever issue from someone else](https://github.com/PostHog/posthog/issues/100) on February 15th, and our first community discussion [on the 23rd](https://github.com/PostHog/posthog/issues/149). This started to spiral. We now get a stream of issues every day in our [PostHog Users Slack](/slack) or the [repo](https://github.com/posthog/posthog).
+Even better was seeing a community starting to appear. We got [our first ever issue from someone else](https://github.com/PostHog/posthog/issues/100) on February 15th, and our first community discussion [on the 23rd](https://github.com/PostHog/posthog/issues/149). This started to spiral. We now get a stream of issues every day in [our community page](/posts) or the [repo](https://github.com/posthog/posthog).
 
 Growth suddenly went from being the hardest part of what we were doing, to being quite easy - we started getting swamped with product work. The problem was keeping up rather than getting something to happen.
 

@@ -1,12 +1,14 @@
 ---
-title: "The most popular PostHog alternatives, compared"
+title: 'The most popular PostHog alternatives, compared'
 date: 2023-06-23
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/posthog-alternatives/posthog-alternatives.jpeg
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
 category: General
 tags:
@@ -25,7 +27,7 @@ This guide is an overview of some popular alternatives to PostHog, how they comp
 
 ## Amplitude
 
-![amplitude vs posthog](../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg)
+![amplitude vs posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg)
 
 - **Founded:** 2012
 - **Similar to:** Mixpanel, Heap
@@ -125,7 +127,7 @@ Amplitude is most known as a product analytics platform, though it also offers s
 
 2. **Marketing use cases:** Amplitude offers more useful features for marketing teams, such as predictive forecasting, and multi-touch attribution. PostHog is primarily designed for technical users, and product teams.
 
-3. **Free tier:** PostHog offers a generous 1 million events and 15k session recordings for free. Amplitude's free plan is limited to 100k monthly tracks users, and doesn't include important features, such as cohorts or data tables.
+3. **Free tier:** PostHog offers a generous 1 million events and 5k session recordings for free. Amplitude's free plan is limited to 100k monthly tracks users, and doesn't include important features, such as cohorts or data tables.
 
 ### What people like about Amplitude
 
@@ -159,7 +161,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 ## Mixpanel
 
-![mixpanel posthog](../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg)
+![mixpanel posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg)
 
 - **Founded:** 2009
 - **Similar to:** Amplitude, Heap
@@ -299,7 +301,7 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 
 ## FullStory
 
-![fullstory posthog](../images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg)
+![fullstory posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg)
 
 - **Founded:** 2014
 - **Similar to:** LogRocket, Hotjar
@@ -395,7 +397,7 @@ FullStory is primarily a session replay tool, though it also includes some produ
 
 ### Key differences
 
-1. **Value and transparency:** FullStory offers no free plan and is notoriously pricey. PostHog offers a generous free plan (1 million events and 15k recordings per month), and all pricing is transparent. 
+1. **Value and transparency:** FullStory offers no free plan and is notoriously pricey. PostHog offers a generous free plan (1 million events and 5k recordings per month), and all pricing is transparent. 
 
 2. **Heat maps and scroll maps:** PostHog supports click maps via the [PostHog Toolbar](/docs/toolbar), but FullStory goes further to offer cursor heatmaps and scroll tracking, making it more useful for UX researchers.
 
@@ -431,7 +433,7 @@ While users like FullStory's session replay features, some find it falls short f
 
 ## Heap
 
-![heap posthog](../images/blog/posthog-vs-heap/posthog-vs-heap.jpeg)
+![heap posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-heap/posthog-vs-heap.jpeg)
 
 - **Founded:** 2013
 - **Similar to:** Mixpanel, Amplitude
@@ -531,7 +533,7 @@ Heap is very similar to Amplitude and Mixpanel, though it added session replay f
 
 2. **Marketing uses cases:** Both tools are useful for marketing teams, but Heap goes further by supporting multi-touch attribution for marketing campaigns.
 
-3. **Free tier:** Heap's free tier is limited to just 10,000 monthly sessions, and doesn't include session replay. All PostHog users get 1 million events and 15k recordings for free, every month.
+3. **Free tier:** Heap's free tier is limited to just 10,000 monthly sessions, and doesn't include session replay. All PostHog users get 1 million events and 5k recordings for free, every month.
 
 **Read more:** [In-depth PostHog vs Heap comparison](/blog/posthog-vs-heap) 
 
@@ -565,7 +567,7 @@ Some users also complain about performance:
 
 ## LogRocket
 
-![logrocket posthog](../images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg)
+![logrocket posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg)
 
 - **Founded:** 2016
 - **Similar to:** FullStory
@@ -665,7 +667,7 @@ LogRocket is similar to FullStory in many respects, but with a greater focus on 
 
 2. **Heat maps and scroll maps:** PostHog supports click maps, but LogRocket offers more in-depth heat maps and scroll depth visualizations, which are ideal for UX research and click-through optimization.
 
-3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 15k session recordings for free every month, and all the core features.
+3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 5k session recordings for free every month, and all the core features.
 
 ### What people like about LogRocket
 

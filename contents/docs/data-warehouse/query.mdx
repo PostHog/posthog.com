@@ -1,0 +1,66 @@
+---
+title: Query your sources
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const DataWarehouseLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/dw-light.png"
+export const DataWarehouseDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/dw-dark.png"
+export const QueryLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/query-light.png"
+export const QueryDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/query-dark.png"
+
+To see all of the sources available to query, go to the [data warehouse tab](https://us.posthog.com/data-warehouse). This page shows all the external and PostHog tables you can query through [SQL insights](/docs/product-analytics/sql) along with saved views. Click on any of the tables, and then click "Query" to open an SQL insight.
+
+<ProductScreenshot
+  imageLight={DataWarehouseLight} 
+  imageDark={DataWarehouseDark} 
+  alt="Data warehouse tab in PostHog app" 
+  classes="rounded"
+/>
+
+## Querying sources
+
+To start with querying your sources:
+
+1. Choose a table and click "Query" or create a [new SQL insight](https://us.posthog.com/insights/new).
+2. If you didn't already, choose a table to query `FROM` like `stripe_charge` or `hubspot_contacts`
+3. Write your SQL query using your table like `SELECT * FROM hubspot_contacts`
+4. Click "Update and run" to see the results.
+5. Modify your query using [SQL commands](/docs/product-analytics/sql) as needed to get the data you want like `SELECT email FROM hubspot_contacts WHERE city = 'Brisbane'`.
+6. Save your query.
+
+<ProductScreenshot
+    imageLight={QueryLight} 
+    imageDark={QueryDark} 
+    alt="Querying a source in PostHog" 
+    classes="rounded"
+  />
+
+## Combining data sources
+
+Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands.
+
+For example, to get a count of events for your Hubspot contacts you can filter `events.distinct_id` by `email FROM hubspot_contacts` like this:
+
+```sql
+SELECT COUNT() AS event_count, distinct_id
+FROM events
+WHERE distinct_id IN (SELECT email FROM hubspot_contacts)
+GROUP BY distinct_id
+ORDER BY event_count DESC
+```
+
+You can also use a `JOIN` such as `INNER JOIN` or `LEFT JOIN` to combine data. For example, to get a count of events for your Stripe customers you can `INNER JOIN` on `distinct_id` and `email` like this:
+
+```SQL
+SELECT events.distinct_id, COUNT() AS event_count
+FROM events
+INNER JOIN prod_stripe_customer ON events.distinct_id = prod_stripe_customer.email
+GROUP BY events.distinct_id
+ORDER BY event_count DESC
+```

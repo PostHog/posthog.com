@@ -1,7 +1,7 @@
 import cntl from 'cntl'
 import Link from 'components/Link'
-import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
+import usePostHog from '../../hooks/usePostHog'
 
 const sizes = {
     xs: cntl`
@@ -199,6 +199,7 @@ export type CTAPropsType = {
     state?: any
     event?: any
     color?: boolean
+    disabled?: boolean
 }
 
 export interface TrackedCTAPropsType extends CTAPropsType {
@@ -228,6 +229,7 @@ export const CallToAction = ({
     size = 'lg',
     href,
     to,
+    disabled,
     onClick,
     children,
     className = '',
@@ -241,6 +243,7 @@ export const CallToAction = ({
     const url = to || href
     return (
         <Link
+            disabled={disabled}
             state={state}
             external={external}
             externalNoIcon={externalNoIcon}

@@ -1,11 +1,12 @@
 ---
-date: 2022-06-01
-title: "In-depth: PostHog vs Matomo"
+date: 2024-01-12
+title: 'In-depth: PostHog vs Matomo'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/posthog-vs-matomo/posthog-vs-matomo.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/matomo.jpeg
 featuredImageType: full
 author:
   - andy-vandervell
@@ -22,16 +23,7 @@ PostHog and Matomo are both [open-source analytics platforms](/blog/best-open-so
 
 Matomo is primarily pitched as a Google Analytics alternative for marketing analytics, and offers useful tools for migrating GA data into Matomo for a seamless transition. Its focus on session tracking makes it ideal for running analytics on large content and e-commerce websites
 
-In contrast, PostHog is a comprhensive Product OS that includes product analytics, session recording, feature flags, experimentation, and much more.
-
-**Contents:**
-
-- [How is PostHog different to Matomo?](#how-is-posthog-different-from-matomo)
-- [PostHog vs Matomo feature comparison](#feature-comparison)
-- [Integrations and data sources](#integrations-and-data-sources)
-- [Strengths of PostHog](#strengths-of-posthog)
-- [Strengths of Matomo](#strengths-of-matomo)
-- [Coming soon to PostHog](#coming-soon-to-posthog)
+In contrast, PostHog is a comprhensive Product OS that includes product analytics, session recording, feature flags, A/B testing, and much more.
 
 ## How is PostHog different from Matomo?
 
@@ -123,7 +115,7 @@ PostHog Cloud adds [experimentation](/product/experimentation-suite), [group ana
         	<td>HIPAA compliance</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
 		<tr>
         	<td>API access</td>
@@ -237,42 +229,39 @@ Matomo doesn't offer many dedicated integrations for syncing data with other pla
 
 In addition to extensive selection of dedicated integrations, PostHog [offers two APIs](/docs/api): a public API for pushing data into PostHog, and a private API for exporting data and performing various actions.
 
-<ComparisonTable column1="Matomo" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Matomo">
   <ComparisonHeader category="Export" />
   <ComparisonRow column1={true} column2={true} feature="API" />
-  <ComparisonRow column1={false} column2={true} feature="Redshift" />
-  <ComparisonRow column1={false} column2={true} feature="Google Cloud Storage" />
-  <ComparisonRow column1={false} column2={true} feature="Snowflake" />
-  <ComparisonRow column1={false} column2={true} feature="Amazon S3" />
-  <ComparisonRow column1={false} column2={true} feature="Google BigQuery" />
-  <ComparisonRow column1={false} column2={true} feature="Google Pub/Sub" />
-  <ComparisonRow column1={false} column2={true} feature="RudderStack" />
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" />
-  <ComparisonRow column1={false} column2={true} feature="Zapier" />
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" />
-  <ComparisonRow column1={false} column2={true} feature="Salesforce" />
-  </ComparisonTable>
-  
-<ComparisonTable column1="Matomo" column2="PostHog">
+  <ComparisonRow column1={true} column2={false} feature="Redshift" />
+  <ComparisonRow column1={true} column2={false} feature="Google Cloud Storage" />
+  <ComparisonRow column1={true} column2={false} feature="Snowflake" />
+  <ComparisonRow column1={true} column2={false} feature="Amazon S3" />
+  <ComparisonRow column1={true} column2={false} feature="Google BigQuery" />
+  <ComparisonRow column1={true} column2={false} feature="Google Pub/Sub" />
+  <ComparisonRow column1={true} column2={false} feature="RudderStack" />
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" />
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" />
+  <ComparisonRow column1={true} column2={false} feature="Salesforce" />
+	
   <ComparisonHeader category="Import" />
-  <ComparisonRow column1={true} column2={false} feature="Google Analytics" />
-  <ComparisonRow column1={false} column2={true} feature="API" />
-  <ComparisonRow column1={false} column2={true} feature="Redshift" />
-  <ComparisonRow column1={false} column2={true} feature="Google Cloud Storage" />
-  <ComparisonRow column1={false} column2={true} feature="Snowflake" />
-  <ComparisonRow column1={false} column2={true} feature="Amazon S3" />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" />
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" />
-  <ComparisonRow column1={false} column2={true} feature="Salesforce" />
-  <ComparisonRow column1={false} column2={true} feature="Zapier" />
-  <ComparisonRow column1={false} column2={true} feature="Zendesk" />
+  <ComparisonRow column1={false} column2={true} feature="Google Analytics" />
+  <ComparisonRow column1={true} column2={false} feature="API" />
+  <ComparisonRow column1={true} column2={false} feature="Redshift" />
+  <ComparisonRow column1={true} column2={false} feature="Google Cloud Storage" />
+  <ComparisonRow column1={true} column2={false} feature="Snowflake" />
+  <ComparisonRow column1={true} column2={false} feature="Amazon S3" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" />
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" />
+  <ComparisonRow column1={true} column2={false} feature="Salesforce" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" />
+  <ComparisonRow column1={true} column2={false} feature="Zendesk" />
 </ComparisonTable>
-
 
 ## Strengths of PostHog
 
-![PostHog screenshot](../images/screenshots/hogflix-dashboard.png)
+![PostHog screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 ### Combining feature flags and product analytics
 
@@ -288,7 +277,7 @@ PostHog and Matomo both support event tracking, but PostHog goes one step furthe
 
 ## Strengths of Matomo
 
-![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
+![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 ### E-commerce and marketing analytics
 
@@ -296,27 +285,51 @@ Matomo is especially well-suited to content and e-commerce websites. Unlike Goog
 
 ### Integration with popular content management systems
 
-Matomo is ideal for anyone who uses popular off-the-shelf content management systems or e-commerce platforms. Websites with fewer than 50,000 page views per month can safely install Matomo straight from the WordPress plugin library, and Matomo offers an official integration with WooCommerce as well. There are community integrations for numerous other platforms, including Drupal, Joomla, DatoCMS, Pimcore, and Adobe Commerce.  
+Matomo is ideal for anyone who uses popular off-the-shelf content management systems or e-commerce platforms. Websites with fewer than 50,000 page views per month can safely install Matomo straight from the WordPress plugin library, and Matomo offers an official integration with WooCommerce as well. There are community integrations for numerous other platforms, including Drupal, Joomla, DatoCMS, Pimcore, and Adobe Commerce.
 
-## Coming soon to PostHog
+## Frequently asked questions
 
-We ship weirdly fast. Here's a quick snapshot of what we're working on right now:
+### Can PostHog also replace Google Analytics?
 
-- SOC 2 compliance
-- PostHog Customer Data Platform
-- See Users & Recordings linked to feature flags ([GitHub issue](https://github.com/PostHog/posthog/issues/12360))
-- Direct access to data via SQL ([GitHub issue](https://github.com/PostHog/posthog/issues/12352))
-- Universal search for people, recordings, cohorts, events, and groups ([GitHub issue](https://github.com/PostHog/posthog/issues/7963))
-- Feature flags platform for Android, iOS and Flutter
-- Mobile session recordings
-- Interlinking recordings and analytics
+Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using Google Tag Manager. See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [An intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
 
-You can view and vote on issues on [our public roadmap](/roadmap).
+### Is PostHog easy to deploy?
 
-You can also take a look at [recent issues](https://github.com/PostHog/posthog/issues) and [pull requests](https://github.com/PostHog/posthog/pulls) on the [PostHog repo](https://github.com/PostHog/posthog) to see what we're working on.
+Yes. Just paste our JS snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
 
-At PostHog, nearly everything we do is done in the open. You can chat with our engineers directly in the [community Slack](/slack), or ask them questions on [any of our docs pages](/docs). 
+### How much does PostHog cost?
 
-You can read all about how we work in our [company handbook](/handbook).
+You **only pay for what you use** and every PostHog users gets a generous amount of free usage each month:
+
+|                       | **Free usage per month** 
+|-----------------------|--------------------------
+| **Product analytics** | 1 million events        
+| **Session replay**    | 5,000 recordings         
+| **Feature flags**     | 1 million API requests
+| **A/B testing**       | 1 million API requests  
+| **Surveys**           | 250 responses
+
+You'll never pay anything if you stay within these limits and you can set billing limits to avoid surprise bills.
+
+We charge progressively less the more you use – e.g. we charge $0.000100 per event up to 2 million events, but all events after 10 million a month only cost 
+$0.000025, 75% less per event.
+
+A full breakdown and pricing calculator is on [our pricing page](/pricing).
+
+### How can I estimate my usage?
+
+The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days. Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
+
+### Does PostHog block bots by default?
+
+Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
+
+### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
+
+Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
+
+### What about ad blockers?
+
+We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
 
 <ArrayCTA />

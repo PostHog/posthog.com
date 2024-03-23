@@ -1,10 +1,12 @@
 ---
 title: How to set up React A/B testing
 date: 2023-09-18
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['experimentation']
+tags:
+  - experimentation
 ---
 
 A/B tests help you make your React app better by comparing changes for their impact on key metrics. To show you how to set one up, we will create a basic React app, add PostHog, create an experiment, and implement it to A/B test content in our app.
@@ -38,7 +40,7 @@ export default App;
 
 Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:3000/) to see our new homepage.
 
-![React app](../images/tutorials/react-ab-testing/app.png)
+![React app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-ab-testing/app.png)
 
 ## Adding PostHog
 
@@ -99,13 +101,13 @@ export default App;
 
 Once done, go back to your app, click the button, and you should see a `button clicked` event captured into your PostHog instance.
 
-![Button clicked event](../images/tutorials/react-ab-testing/event.png)
+![Button clicked event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-ab-testing/event.png)
 
 ## Creating an experiment
 
 With PostHog set up, your React app is ready for the A/B test. To create one, go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." Add a name, feature flag key (like `home-button-test`), set your goal type to a trend of the `button clicked` event, and press "Save as draft." 
 
-![A/B test set up](../images/tutorials/react-ab-testing/ab-test.png)
+![A/B test set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-ab-testing/ab-test.png)
 
 You can customize it further with a description, secondary metrics, or more variants (for [multivariate testing](/product-engineers/what-is-multivariate-testing-examples)). 
 
@@ -161,4 +163,4 @@ After confirming it works, remove the `featureFlags.override` call, go back to y
 
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to do holdout testing](/tutorials/holdout-testing)
-- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+- [How to set up analytics in React](/tutorials/react-analytics)

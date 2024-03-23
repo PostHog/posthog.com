@@ -17,7 +17,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 ## How it works
 
-* The overall goal is for a Small Team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes
+* The overall goal for a Small Team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes
 * A Small Team should _strictly_ be between 2-6 people
 * A Small Team has a Team Lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
 * A Small Team must have a customer (internal or external)
@@ -71,9 +71,22 @@ Each project should be owned by an individual within a single small team. Howeve
 
 For these projects, we recommend the individual owning it write a "Status update" every 2 weeks on slack and add a link to this update in the "Updates on bigger projects that affect multiple teams" section of the all hands doc. These status updates might include: what's been done since the last update, any blockers, and what are the next steps.
 
+## Small Teams Intros
+
+Every small team should have an agreed charter which should include: 
+
+* Mission
+* Long term goals
+* Description of what the team does
+* Target customer
+* Who is on the team
+* Key metrics
+
+These should all be visible in the Handbook, updated when changes are made & confirmed ahead of each quarter so everyone is on the same page. 
+
 ## Small Teams list
 
-See [team structure](/handbook/small-teams/team-structure).
+See [team structure](/handbook/team-structure).
 
 ## FAQ
 

@@ -192,7 +192,7 @@ h4 {
     }
 
     code:not('.article-content-ignore') {
-        @apply font-code font-medium text-sm border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm px-1 py-0.5;
+        @apply font-code font-medium text-sm border border-light dark:border-dark bg-accent dark:bg-accent-dark  rounded-sm px-1 py-0.5;
     }
 
     blockquote {
@@ -288,6 +288,10 @@ h4 {
         padding-right: 0;
     }
 
+    th:empty {
+        display: none;
+    }
+
     hr {
         @apply border-t border-b-0 border-solid border-light dark:border-dark my-6 h-0;
     }
@@ -358,6 +362,9 @@ h4 {
 
 /* applies to question and reply content */
 .question-content {
+    a {
+        @apply text-red dark:text-yellow;
+    }
     h3 {
         @apply text-xl;
 
@@ -393,6 +400,15 @@ h4 {
     container-type: inline-size;
 }
 
+.team-page-content {
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-[17px];
+    }
+}
+
 /* scope to left nav */
 .z-20 {
     /* make active nav item full strength */
@@ -404,6 +420,39 @@ h4 {
 .share-links a {
     background: none;
     transition: none;
+}
+
+.tooltip {
+    .placement-top:before {
+        clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    }
+    .placement-right:before {
+        clip-path: polygon(100% 100%, 0 0, 0 100%);
+    }
+    .placement-bottom:before {
+        clip-path: polygon(100% 0, 0 0, 0 100%);
+    }
+    .placement-left:before {
+        clip-path: polygon(100% 100%, 100% 0, 0 0);
+    }
+}
+
+/* pricing page: unique slider bar colors */
+
+.rc-slider-handle,
+.rc-slider-track {
+    .product-product-analytics & {
+        @apply !bg-blue;
+    }
+    .product-session-replay & {
+        @apply !bg-yellow;
+    }
+    .product-feature-flags & {
+        @apply !bg-green;
+    }
+    .product-surveys & {
+        @apply !bg-red;
+    }
 }
 
 /* timeline key */
@@ -593,20 +642,28 @@ ul {
     -moz-appearance: none;
 }
 
-.rc-slider.log-slider .rc-slider-track {
-    @apply bg-black;
+.rc-slider.slider .rc-slider-track {
+    @apply bg-black/60 dark:bg-white/50;
 }
 
-.rc-slider.log-slider .rc-slider-handle {
+.rc-slider.slider .rc-slider-handle {
     @apply bg-red border-3 border-white h-[21px] w-[21px] shadow-md -mt-[7px];
 }
 
-.rc-slider.log-slider .rc-slider-handle:active {
+.rc-slider.slider .rc-slider-handle:active {
     @apply shadow-none;
 }
 
-.rc-slider.log-slider .rc-slider-tooltip {
+.rc-slider.slider .rc-slider-tooltip {
     display: none;
+}
+
+.rc-slider.slider .rc-slider-mark-text {
+    @apply text-primary/60 dark:text-primary-dark/60;
+
+    &.rc-slider-mark-text-active {
+        @apply text-primary/75 dark:text-primary-dark/75 font-bold;
+    }
 }
 
 /* Slider base styles */
@@ -886,14 +943,17 @@ ul {
 }
 
 .active-sidebar-item {
+    @apply font-bold opacity-100;
+
     &:before {
-        @apply bg-red absolute;
-        bottom: 2px;
+        @apply bg-red absolute -left-3.5 bottom-px top-px;
         border-radius: 2px;
         content: '';
-        left: 0px;
-        top: 2px;
-        width: 2px;
+        width: 3px;
+    }
+
+    &.post:before {
+        @apply -left-0;
     }
 }
 
@@ -978,9 +1038,25 @@ ul {
 }
 
 .mermaid {
+    .messageText {
+        @apply dark:!fill-white;
+    }
+    .loopText {
+        @apply dark:!fill-gray-accent-light !stroke-gray-accent-light;
+    }
+    path,
+    line {
+        @apply dark:!stroke-gray-accent;
+    }
+    tspan {
+        @apply dark:!fill-white;
+    }
+    g rect {
+        @apply dark:!fill-gray-accent-dark;
+    }
+
     line-height: 1;
 }
-
 @keyframes fade {
     0% {
         opacity: 0;
@@ -1317,11 +1393,39 @@ li.squeak-left-border {
 
     ol,
     ul {
-        @apply pb-0 mb-2 text-[15px];
+        @apply pb-0 mb-2;
+
+        li {
+            @apply text-[15px];
+        }
     }
 
     pre {
         @apply text-base my-3 overflow-scroll p-4 text-[15px];
+    }
+
+    h1 {
+        @apply text-xl;
+    }
+
+    h2 {
+        @apply text-lg;
+    }
+
+    h3 {
+        @apply text-base;
+    }
+
+    h4 {
+        @apply text-[15px];
+    }
+
+    h5 {
+        @apply text-sm;
+    }
+
+    h6 {
+        @apply text-[13px];
     }
 }
 

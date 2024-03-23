@@ -3,18 +3,20 @@ title: Identifying users
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
-
+  free: full
+  selfServe: full
+  enterprise: full
 ---
-
 import JSIdentifyIntro from "../\_snippets/identify-intro.mdx"
 import JSIdentifyHowItWorks from "../\_snippets/identify-how-it-works"
 import JSIdentifyWhenToCall from "../\_snippets/identify-when-to-call.mdx"
 import JSIdentifyUseUniqueIds from "../\_snippets/identify-use-unique-ids.mdx"
 import JSIdentifyReset from "../\_snippets/identify-reset.mdx"
 import JSIdentifySetUserProperties from "../\_snippets/identify-setting-user-properties.mdx"
+export const mergeRestrictionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/identify/merge-restrictions-tooltip-light-mode.png"
+export const mergeRestrictionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/identify/merge-restrictions-tooltip-dark-mode.png"
+export const splitUsersLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/identify/how-to-split-users-light-mode.mp4"
+export const splitUsersDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/identify/how-to-split-users-dark-mode.mp4"
 
 <JSIdentifyIntro/> 
 
@@ -177,7 +179,12 @@ posthog.alias("any_other_id", "distinct_id_one");
 
 You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/data/user-properties#how-to-view-user-properties) in the PostHog app: Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not – i.e., whether you can use their ID as an `alias_id` or not.
 
-![Merge restrictions tooltip](../../images/docs/data/identify/merge-restrictions-tooltip.png)
+<ProductScreenshot
+    imageLight = {mergeRestrictionsLight} 
+    imageDark = {mergeRestrictionsDark}
+    classes="rounded"
+    alt="Merge restrictions tooltipl"
+/>
 
 > Note that when calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they will be merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
 
@@ -240,11 +247,11 @@ PostHog.identify(distinctId = "distinct_id_two")
 // so we cannot identify them again with a different distinct ID "distinct_id_two"
 ```
 
-```ios
-posthog.identify("distinct_id_one", 
-          properties: [])
-posthog.identify("distinct_id_two", 
-          properties: [])
+```ios_swift
+PostHogSDK.shared.identify("distinct_id_one",
+                           userProperties: [:])
+PostHogSDK.shared.identify("distinct_id_two",
+                           userProperties: [:])
 // ❌ Not possible, since we already identified this user with "distinct_id_one"
 // so we cannot identify them again with a different distinct ID "distinct_id_two"
 ```
@@ -329,7 +336,12 @@ If you've accidentally linked distinct IDs together that represent different use
 
 > **Warning:** This will treat the distinct IDs as separate users for future events. However, there is no guarantee as to how past events will be treated – they may be be considered separate users, or be considered a single user for some or all events.
 
-![How to split users in PostHog](../../images/docs/data/identify/how-to-split-users.mp4)
+<ProductVideo
+    videoLight = {splitUsersLight}
+    videoDark = {splitUsersDark}
+    classes="rounded"
+    alt="How to split users in PostHog"
+/>
 
 ### How are properties managed when merging users?
 

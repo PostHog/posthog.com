@@ -3,7 +3,8 @@ date: 2022-09-14
 title: Finding your North Star metric and why it matters
 author:
   - andy-vandervell
-featuredImage: ../images/blog/give-back-friday.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/give-back-friday.png
 featuredImageType: full
 tags:
   - Founders
@@ -12,8 +13,9 @@ tags:
   - Product analytics
   - Product engineers
   - Product metrics
-crosspost: 
+crosspost:
   - Product engineers
+  - Blog
 ---
 
 Successful products need actionable metrics and for many businesses this starts with identifying what many refer to as a 'North Star' metric.

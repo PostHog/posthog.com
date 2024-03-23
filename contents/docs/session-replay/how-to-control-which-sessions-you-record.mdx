@@ -1,18 +1,30 @@
 ---
 title: How to control which sessions you record
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const ImgFeatureFlagControlLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/select-replay-control-flag-light-mode.png"
+export const ImgFeatureFlagControlDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/select-replay-control-flag-dark-mode.png"
+export const ImgSampleConfigLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/sampling-config-light-mode.png"
+export const ImgSampleConfigDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/sampling-config-dark-mode.png"
+export const ImgMinDurationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-light-mode.png"
+export const ImgMinDurationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-dark-mode.png"
+
 If you want control over which sessions to record:
+
+# Available on all plans
+
+## With your own code
 
 1. Set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config).
 
 2. Manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
 
-You can then achieve even finer control by combining the above methods with [feature flags](/docs/feature-flags). This enables you to control session recordings based on user or group properties. You can also use feature flags to capture a percentage of all sessions.
+3. **Important** make sure the your domain is added to the [Authorized Domains list](https://app.posthog.com/settings/project-replay#replay-authorized-domains) as otherwise the data will still be ignored as it is ingested by our servers.
 
 For example:
 
@@ -22,12 +34,69 @@ posthog.init('<ph_project_api_key>', {
     disable_session_recording: true,
     // ... other options
 })
-posthog.onFeatureFlags(function () {
-    if (posthog.isFeatureEnabled('your-feature-flag')) {
-        posthog.startSessionRecording()
-    }
-})
+
+// some time later based on a trigger in your system
+posthog.startSessionRecording()
 ```
 
-For more examples of controlling  which sessions you record, see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
+## Billing Limits
+
+You can set a billing limit [using these instructions](https://posthog.com/docs/billing/limits-alerts). We'll stop ingesting recordings when you reach your limit. 
+
+# Available on all plans started since Jan 2024
+
+We're currently testing these new controls and will release them more widely once those tests are complete. 
+
+## With feature flags
+
+You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
+
+1. Create a boolean flag that you can use to control whether to record sessions or not.
+2. Visit your [replay ingestion settings page](https://us.posthog.com/settings/project-replay#replay-ingestion).
+3. Select that flag in the "Enable recordings using feature flag" dropdown menu.
+
+<ProductScreenshot
+    imageLight={ImgFeatureFlagControlLight} 
+    imageDark={ImgFeatureFlagControlDark}
+    alt="Selecting a feature flag to control session recordings" 
+    classes="rounded"
+/>
+
+## Sampling
+
+You can configure sampling to limit the number of sessions you record for each user. This is useful if you want to record a percentage of sessions for all users. Sampling helps reduce the number of sessions you record, but it doesn’t let you control which sessions are included.
+
+Our recommendation is to start with capturing all sessions (e.g. 100% - the default) or a high sampling rate (e.g. 90% or 95%) and decrease it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
+
+<ProductScreenshot
+    imageLight={ImgSampleConfigLight} 
+    imageDark={ImgSampleConfigDark}
+    alt="Sampling config shown set to 100% i.e. no sampling" 
+    classes="rounded"
+/>
+
+Whenever a new session starts after you select a collection below 100%, the browser generates a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session is recorded. If it is greater than the sampling rate, the session is not recorded.
+
+## Minimum duration
+
+You can also set a minimum duration for sessions to be recorded. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
+
+<ProductScreenshot
+    imageLight={ImgMinDurationLight} 
+    imageDark={ImgMinDurationDark}
+    alt="Minimum duration config shown set to 2 seconds" 
+    classes="rounded"
+/>
+
+The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory. 
+
+### Limitations
+
+This means that if you set a high minimum duration and your user visits multiple pages each for a short time, you still record the session but miss the beginning. If the user leaves the site before the minimum duration has passed, the session is not recorded.
+
+If you find you are missing the beginning of sessions, you can reduce the minimum duration or use one of our other methods to reduce the number of sessions you record.
+
+# For more examples of controlling which sessions you record 
+
+see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
 

@@ -3,20 +3,23 @@ date: 2022-11-14
 title: How we found our Ideal Customer Profile
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Product
   - Sales & CS
   - Marketing
+crosspost:
+  - Blog
 ---
 
-Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog.
+[Creating an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) is one of the most important things we've ever done at PostHog.
 
 You can see it in our revenue growth:
 
-![A graph showing revenue growth which increased way faster after we created an ideal customer profile](../images/revenue-growth.jpg)
+![A graph showing revenue growth which increased way faster after we created an ideal customer profile](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/revenue-growth.jpg)
 
 I _wish_ we had run this exercise sooner.
 

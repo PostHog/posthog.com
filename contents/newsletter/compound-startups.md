@@ -1,8 +1,10 @@
 ---
 date: 2023-03-30
-title: "The conformist startup rule you can ignore"
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/feature-images/working-out.png
+title: The conformist startup rule you can ignore
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/working-out.png
 featuredImageType: full
 tags:
   - Founders
@@ -10,6 +12,7 @@ tags:
   - Product-market fit
 crosspost:
   - Founders
+  - Blog
 ---
 
 Focus is important, right? Building a single great product and monetizing it is the path to startup success. Everyone knows this. It _feels_ intuitively correct. 
@@ -46,7 +49,7 @@ My first instinct was Stripe. It’s big, has loads of products. It must fit.
 
 But, when you dig down, it’s not even close:
 
-![compound startups](../images/blog/compound-startups.png)
+![compound startups](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/compound-startups.png)
 
 Yes, it has lots of products and most revolve around payment data in some way, but integration isn’t the product. It’s more like a hydra – Adobe for payments, if you will. Hubspot, however, totally does. 
 

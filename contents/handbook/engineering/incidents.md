@@ -64,8 +64,7 @@ The person who raised the incident is the incident lead. It’s their responsibi
 - Make sure the right people join the call. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](https://posthog.com/handbook/engineering/feature-ownership) and Marketing if relevant. Marketing can assist on running communication if required.
 - Take notes in the incident channel. This should include time stamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status banner on app](https://app.posthog.com/feature_flags/984). There are some templates below to make this easier.
-- Update the [status page](https://status.posthog.com/) - this is best done via the incident slack channel.
-  - This will automatically update users in [#status-updates](https://posthogusers.slack.com/archives/CT7HXDEG3)
+- Update the [status page](https://status.posthog.com/) - this is best done via the incident slack channel via the incident app actions.
 
 If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 
@@ -99,9 +98,12 @@ Don't forget to disable the in-app banner too.
 
 24-48 hours after an incident, we should have a quick sync meeting with a small group of people involved in the incident, plus Tim. If you raised the incident, you can schedule this. If you don’t want to or can’t, Tim is happy to take over at this point, just let him know.
 
-Incident.io will automatically create an incident analysis doc that you can paste into a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis). It'll have a timeline of everything that happened.
+Before this meeting you should create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis). You can use Incident.io's automatic analysis as a starting point. In general it is advised to post short point in time summaries of actions taken in the incident Slack channel so that you can more easily fill this out after the fact.
+
+- If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
 During the incident analysis session, we’ll walk through the entire timeline as it happened. While doing that, we want to answer the following types of questions:
+
 - In what ways did our systems surprise us?
 - How did it make sense for someone to do what they did?
 

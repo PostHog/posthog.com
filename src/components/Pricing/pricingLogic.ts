@@ -3,6 +3,30 @@ import { BillingProductV2Type, BillingV2PlanType } from 'types'
 
 import type { pricingLogicType } from './pricingLogicType'
 
+export const TEN_THOUSAND = 10000
+export const ONE_FIFTY_THOUSAND = 150000
+export const MILLION = 1000000
+export const THREE_MILLION = 3000000
+export const FIVE_MILLION = 5000000
+export const TEN_MILLION = 10000000
+export const TWENTY_MILLION = 20000000
+export const TWENTY_FIVE_MILLION = 25000000
+export const FIFTY_MILLION = 50000000
+export const HUNDRED_MILLION = 100000000
+export const TWO_FIFTY_MILLION = 250000000
+export const BILLION = 1000000000
+export const MAX_PRODUCT_ANALYTICS = TWO_FIFTY_MILLION
+export const MAX_SESSION_REPLAY = ONE_FIFTY_THOUSAND
+export const MAX_FEATURE_FLAGS = TEN_MILLION
+export const MAX_SURVEYS = TEN_THOUSAND
+
+export const product_type_to_max_events = {
+    product_analytics: MAX_PRODUCT_ANALYTICS,
+    session_replay: MAX_SESSION_REPLAY,
+    feature_flags: MAX_FEATURE_FLAGS,
+    surveys: MAX_SURVEYS,
+}
+
 export const pricingLogic = kea<pricingLogicType>({
     actions: {
         setAvailablePlans: (plans: BillingV2PlanType[]) => ({ plans }),

@@ -1,21 +1,24 @@
 ---
 title: How to capture Webflow form submissions
 date: 2023-06-22
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["configuration", 'surveys']
+tags:
+  - configuration
+  - surveys
 ---
 
 With PostHog, you can autocapture events and record sessions on your Webflow site. With a bit more setup, you can also use it to capture form submissions. In this tutorial, we show how to do this with a basic Webflow site, PostHog, and some JavaScript.
 
-> Want a full tutorial on how to set up PostHog for Webflow? Check out "[How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)."
+> Want a full tutorial on how to set up PostHog for Webflow? Check out "[How to set up Webflow analytics and session recordings](/tutorials/webflow)."
 
 ## Initial Webflow and PostHog setup
 
 To start, you need a [Webflow](https://webflow.com/) site with a form. I used the portfolio starter, but any template works (or a site you already created). Once created, we can add the form block element and make some edits to the homepage like this:
 
-![Site](../images/tutorials/webflow-form-submissions/site.png)
+![Site](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-form-submissions/site.png)
 
 Once the basic site is set up, go to the site settings, upgrade to at least the "Basic" website plan (to unlock custom code), then go to the custom code tab. Once there, get your PostHog snippet from the getting started flow or [your project settings](https://app.posthog.com/project/settings) which looks like this:
 
@@ -34,7 +37,7 @@ To handle the submission of the form, we need to add some JavaScript to our page
 
 To start, go back to the site designer and add IDs to the text field(s) and submit button. You do this by clicking on the element, then going to the element settings (gear icon on right side panel), and adding a value to the ID field. I used `form-name`, `form-email`, and `form-submit` for the name, email, and submit button respectively.
 
-![Adding ID video](../images/tutorials/webflow-form-submissions/id.mp4)
+![Adding ID video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-form-submissions/id.mp4)
 
 Next, we’ll add our code to capture events. To add code to the page, click "Pages" on the left side panel, hover over the "Home" page, click the gear that appears, then scroll down to custom code. In "Before body tag" section, set up a click event listener for the submit input with the ID of `form-submit` that captures a PostHog `form submitted` event with the values from both the `form-name` and `form-email` as properties.
 
@@ -68,16 +71,16 @@ submitButton.addEventListener('click', function(event) {
 
 Once done, press save on the page settings and publish the site.
 
-![Adding code video](../images/tutorials/webflow-form-submissions/code.mp4)
+![Adding code video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-form-submissions/code.mp4)
 
 Now, when users submit the form, it is captured as an event in PostHog.
 
-![Event](../images/tutorials/webflow-form-submissions/event.png)
+![Event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-form-submissions/event.png)
 
 With this, you can set up alerts in Slack for email submissions with a [webhook](/docs/webhooks/slack), [identify users](/docs/data/identify) with the email they submit, and export [cohorts of users](/docs/data/cohorts) who submit emails.
 
 ## Further reading
 
-- [How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)
-- [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
+- [How to run A/B tests in Webflow](/tutorials/webflow-ab-tests)
+- [How to set up Webflow analytics and session recordings](/tutorials/webflow)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)

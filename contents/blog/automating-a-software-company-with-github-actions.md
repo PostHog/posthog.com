@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - michael-matloka
-featuredImage: ../images/blog/simpler-self-deployments.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/simpler-self-deployments.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -162,7 +163,7 @@ jobs:
 > One thing we've not covered yet is what running jobs on every PR gives us in practice.
 > It's two things:
 > 1. Such jobs become **PR checks**, and they are shown on the PR's page, along with their statuses.
->   ![Bump labels](../images/blog/github-actions/pr.png)
+>   ![Bump labels](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/github-actions/pr.png)
 > 2. Select PR checks can be made required, in which case merging is prevented until all required checks turn green.
 
 ### Keeping stale PRs in check
@@ -345,7 +346,7 @@ Something particularly tedious we eliminated is incrementing package versions. A
 
 What gives? Well, these days the only thing an engineer has to do is give their PR the right label:
 
-![Bump labels](../images/blog/github-actions/bump-labels.png)
+![Bump labels](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/github-actions/bump-labels.png)
 
 Right after that PR gets merged, the package version gets incremented in `master`:
 
@@ -416,7 +417,7 @@ jobs:
 
 Here's what this looks like in GitHub's workflow visualization feature:
 
-![Visualization 1. Autobump](../images/blog/github-actions/1-autobump.png)
+![Visualization 1. Autobump](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/github-actions/1-autobump.png)
 
 But this is just the starting point, because on every commit to `master` we check whether the version has been incremented - and if it has, all the aforementioned release tasks run automatically.
 
@@ -424,7 +425,7 @@ In fact, there are too many steps to show them all in this post – but I encour
 
 GitHub can also _visualize_ workflows – extremely boring if there's only one job, but here the graph is quite informative. Do keep in mind that this CD process is really an extension of the previous autobump workflow.
 
-![Visualization 2. Autorelease](../images/blog/github-actions/2-autorelease.png)
+![Visualization 2. Autorelease](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/github-actions/2-autorelease.png)
 
 ### Fixing typos
 

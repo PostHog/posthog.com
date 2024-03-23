@@ -37,12 +37,12 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'ab-testing',
     lowercase: 'A/B testing',
-    capitalized: 'A/B Testing',
+    capitalized: 'A/B testing',
     freeTier: '1,000,000 requests',
 }
 
 const team = 'Feature Success'
-const teamSlug = '/handbook/small-teams/feature-success'
+const teamSlug = '/teams/feature-success'
 
 const featuresPerRow = 3
 const features = [
@@ -292,7 +292,7 @@ export const ProductAbTesting = () => {
                     icon={<IconFlask />}
                     product={product.capitalized}
                     title='Test changes with <span class="text-red dark:text-yellow">statistical significance</span>'
-                    description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
+                    description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
                 />
 
                 <div className="text-center">
@@ -386,7 +386,7 @@ export const ProductAbTesting = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -505,7 +505,9 @@ export const ProductAbTesting = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[4].children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'a/b testing').children}
+                    />
                 </section>
 
                 <section id="team" className="mb-20 px-5">

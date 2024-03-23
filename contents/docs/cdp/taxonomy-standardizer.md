@@ -1,10 +1,11 @@
 ---
 title: Taxonomy Standardizer
-installUrl: https://app.posthog.com/project/apps?name=Taxonomy+Plugin
-github: https://github.com/PostHog/taxonomy-plugin
-thumbnail: ../../cdp/thumbnails/taxonomy-standardizer.png
+installUrl: 'https://app.posthog.com/project/apps?name=Taxonomy+Plugin'
+github: 'https://github.com/PostHog/taxonomy-plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/taxonomy-standardizer.png
 tags:
-    - taxonomy-standardizer
+  - taxonomy-standardizer
 ---
 
 This app standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
@@ -27,7 +28,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Taxonomy Standardizer' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

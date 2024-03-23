@@ -1,0 +1,40 @@
+---
+title: Using Netlify redirects as a reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
+Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) which we can use as a reverse proxy from an `/ingest` route. In your `netlify.toml` file, add a redirect like this:
+
+```js
+[[redirects]]
+  from = "/ingest/static/*"
+  to = "https://us-assets.i.posthog.com/static/:splat"
+  host = "us-assets.i.posthog.com"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ingest/*"
+  to = "https://us.i.posthog.com/:splat"
+  host = "us.i.posthog.com"
+  status = 200
+  force = true
+```
+
+Once done, set the `/ingest` route of your domain as the API host in your PostHog initialization like this:
+
+```js
+posthog.init('<ph_project_api_key>',
+  {
+    api_host: 'https://www.your-domain.com/ingest',
+    ui_host: 'https://app.posthog.com' // or 'https://eu.posthog.com' if your PostHog is hosted in Europe
+  }
+)
+```
+
+Once updated, deploy your changes on Netlify and check that PostHog requests are going to `https://www.your-domain.com/ingest` by checking the network tab on your domain.

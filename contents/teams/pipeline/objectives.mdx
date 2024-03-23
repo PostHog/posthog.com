@@ -1,0 +1,79 @@
+## Objectives: Q1 2024
+
+- Wrapped up Webhooks Delivery system - Brett
+- Wrapped up capture-rs posthog-js rollout - Xavier 
+- Wrapped up New Pipeline UI - Tiina
+- Wrapped up PoE (with backfills and squashes) - Ted 
+- Volume spikes on session reply do not hurt other users - Xavier
+- Person property updates don't slow down ingestion - Brett
+- Requested data deletion is complete and reliably executed going forward - Tiina
+
+## Objectives: Q4 2023
+
+- Keep the lights on
+  - Increase isolation with Redis - Xavier Vello
+  - Roll out RDKafka - Brett Hoerner
+  - All events ingested through capture-rs - Xavier Vello
+  - Make GeoIP cheaper - Ted
+  - moving event properties follow-ups, cohorts, ... outside of ingestion hot path - Ted
+- Batch exports migrations - Tomás Farías Santana
+  - Redshift and maybe replicator depending on demands
+  - Add logs/metrics/alerting
+  - Higher frequency
+- Webhooks v2 - Tiina Turban
+  - the new delivery system that can 
+  	- retries
+ 	- observability to both users and us for success rate, retry count, latency
+ 	- endpoint disabling
+ 	- multiple webhook destinations
+ 	- UI
+ 	- can be used for automation for other teams needs
+ - move webhooks, resthooks and onEvent apps to use the new system
+- PoE - Brett Hoerner
+  - KV store for person overrides
+  - Stretch: Squash person overrides 
+  - Stretch: persons without ordering constraints
+
+## Objectives: Q3 2023
+
+- Define and enforce limits on what users can send us - Owner @xaviervelo
+- Deprecate and improve apps
+  - Finish batch exports so we can deprecate export apps - Owner @tomasfarias
+  - Remove all processing apps - Owner @tiina303
+- Figure out the pipeline architecture for the next 2 years - Owner @timgl
+
+## Objectives: Q2 2023
+
+- Objective: CDP - Owner @fuziontech
+    - Key Result: Rock solid webhooks - Owner @hazzadous
+        - Edit: deprioritized as it is not a burning bridge, and instead:
+        - Improve quality of existing offering by removing questionable Apps: mark apps that store lots of data in postgres, or are generally lower quality as non-global or disable altogether.
+        - Separate export and CPD Apps within the interface to enable separating the two products. Bill these two products separately.
+        - Make batch processing exports rock solid as below.
+    - Key Result: Rock solid batch processing (exports) - Owner @tomasfarias
+- Objective: Pipeline unblocks query performance and ensures data quality - Owner @tiina303
+    - Key Result: Persons on Events write path and squash shipped with monitoring and alerting
+    - Key Result: Backfills are complete for all teams
+    - Key Result: Guaranteed deduplication of UUIDs in events table within 7 days (with docs explaining it)
+    - Key Result: Query time deduplication of events to cover until ClickHouse deduplication is complete
+- Objective: Pipeline Robustness and Reliability - Owner @xvello
+    - Key Result: Errors cause kafka lag instead of DLQ production e.g. person creation failures cause kafka lag not go to DLQ
+    - Key Result: Plugin server scales elastically and deploys do not create more than 2 minutes of lag
+
+
+## Objectives: Q1 2023
+
+- Objective: Performance
+    - Key Results: We have wrapped up the person-on-event project and have deprecated the old non-person-on-events queries
+        - Why? Performance speed up
+    - Key Results: We have reduced the cost per event for capture by an order of magnitude
+        - Why? Infra savings and improves performance
+- Objective: Reliability
+    - Key Results: We have converted all current US dashboards into IaC dashboards configured in Terraform and made all necessary migrations from StatsD to Prom to support this.
+        - Why? Gets US and EU equivalent in terms of monitoring
+    - Key Results: All of our alerts have runbooks
+        - Why? Improve incident recovery times and share knowledge with all engineers, so that most incidents can be resolved without escalating to the team
+    - Key Results: Backfills do not slow us down or take down the system. We have tests for this.
+        - Why? Improves service quality and protects against bad actors
+    - Key Results: Erroring apps fail gracefully, do not take down anything else, and we have tests to prove this. And re-enable after temporary unavailability
+        - Why? Improves service quality and tackles customer annoyance of apps turning off when there's an error

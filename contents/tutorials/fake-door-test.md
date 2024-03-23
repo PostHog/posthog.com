@@ -1,10 +1,13 @@
 ---
 title: How to run a fake door test
 date: 2023-08-17
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['surveys', 'actions']
+tags:
+  - surveys
+  - actions
 ---
 
 A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building. When users interact with it, you tell them it isn't available (yet). This enables you determine if your users would actually be interested in your new feature.
@@ -100,7 +103,7 @@ Once we capture that data in PostHog, we can set up an [action](/docs/data/actio
 4. Select "Autocapture" as our "Match Group #1," and then match the element text "Try our new feature" exactly. 
 5. Press save.
 
-![Action](../images/tutorials/fake-door-test/action.png)
+![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/fake-door-test/action.png)
 
 This tracks the number of button clicks, enabling you to track the success of your fake door test and interest in your feature.
 
@@ -140,7 +143,7 @@ Because we set `opt_in_site_apps: true` in our PostHog initialization earlier, a
 
 Once done, we can go back to our draft survey and press "Launch." Now, users who visit the `/new` page get a survey so we can get further validation on our fake door test. PostHog saves survey responses which you can use to guide your feature development.
 
-![Survey on the new page](../images/tutorials/fake-door-test/survey.png)
+![Survey on the new page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/fake-door-test/survey.png)
 
 ## Further reading
 

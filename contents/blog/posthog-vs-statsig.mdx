@@ -1,16 +1,18 @@
 ---
-title: "In-depth: PostHog vs Statsig"
+title: 'In-depth: PostHog vs Statsig'
 date: 2023-12-14
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/statsig.jpeg
 featuredImageType: full
 category: General
 tags:
-    - Comparisons
+  - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -31,9 +33,9 @@ This post compares their platforms, experimentation features, pricing, and more.
 
 PostHog brings together all the tools engineers need for testing, releasing, and measuring the success of new features. Feature flags and A/B testing are only part of a suite of tools PostHog offers.
 
-![PostHog homepage features](../images/blog/posthog-vs-statsig/all.png)
+![PostHog homepage features](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-statsig/all.png)
 
-PostHog combines usage, performance, and behavioral data with flags and experiments. Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
+PostHog combines usage, performance, and [behavioral data](/product-engineers/behavioral-analytics) with flags and experiments. Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
 
 ### 2. We're open source and transparent
 
@@ -94,7 +96,7 @@ While both offer the core features you need, Statsig's feature flags are boolean
   <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
   <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
   <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1={false} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
   <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, stage, prod" />
   <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
   <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
@@ -160,13 +162,11 @@ Below is a sample comparison of PostHog and Statsig's integrations. Be sure to c
 
 Both PostHog and LaunchDarkly enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
 
-An advantage of Statsig is that it can be made HIPAA-compliant, while PostHog cannot. This makes Statsig better suited for healthcare companies.
-
 <ComparisonTable column1="PostHog" column2="Statsig">
   <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
   <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
   <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={false} column2="Enterprise" feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+  <ComparisonRow column1={true} column2="Enterprise" feature="HIPAA-ready" description="Can be compliant with HIPAA" />
   <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
   <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
   <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />

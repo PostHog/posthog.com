@@ -22,7 +22,7 @@ We send an introductory email to all new hires to welcome them to the team and e
 
 The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we send email using Gmail Layouts. You can access Gmail Layouts with this button: 
 
-![google email layouts](../../images/handbook/layouts-button.png)
+![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layouts-button.png)
 
 If this is the first time you've used Gmail Layouts, select `Default Styling` before choosing a template. Choosing Black `#00000` as your primary colour will create simple black buttons which match the design of other emails. Please also upload a PostHog logo and enter our Twitter and LinkedIn links. You can use the following text in your email footers. 
 
@@ -33,11 +33,11 @@ PostHog's mailing address is 2261 Market Street #4008 in the city of San Francis
 
 With default styling set, you can now choose the 'Call to action' template. 
 
-![google email layouts](../../images/handbook/layout-email.png)
+![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layout-email.png)
 
 With an email template chosen, you can then enter the copy you want to send. [This doc is a suggested template](https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing) with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails. 
 
-![onboarding image](../../images/handbook/handbook-onboarding-email.jpg)
+![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
 ## Onboarding buddy
 
@@ -73,9 +73,10 @@ Based on this ongoing learning process, here are our **five rules for onboarding
       <summary>Looking for learning session ideas?</summary>
       <p>Here's a non-exhaustive list:</p>
       <ul>
-        <li>How an event gets from a client library all the way to the Live Events view</li>
+        <li>The <a href="/handbook/engineering/databases/event-ingestion">lifecycle of an event</a>, from a client library all the way to query results</li>
         <li>How we turn all our TSX and SCSS files into a fast frontend served from S3</li>
         <li>The architecture of PostHog Cloud</li>
+        <li>Trunk-based development - how we make use of feature flags</li>
         <li>Query nodes and how they're used throughout the app</li>
         <li>What the dead letter queue is for</li>
         <li>How PostHog experiment results are calculated</li>
@@ -108,7 +109,7 @@ We use a number of different tools to organise our work and communicate at PostH
 
 ### Engineering
 - AWS
-- Pagerduty
+- PagerDuty
 - Heroku
 - Grafana
 - Sentry
@@ -136,12 +137,12 @@ Charles, James and Tim at this time are the only people able to sign legal paper
 Now it's time to dive into some of the more practical stuff - these are the most important pages:
 
 1. [Communication](/handbook/company/communication) - we have a distinctive style. If PostHog is your first all-remote company, this page is especially helpful.
-2. [Team structure](/handbook/small-teams/team-structure) - we are structured in Small Teams. These pages will help you get the lay of the land, and who does what. 
+2. [Team structure](/handbook/team-structure) - we are structured in Small Teams. These pages will help you get the lay of the land, and who does what. 
 3. [Management](/handbook/company/management) - we have a relatively unusual approach to management, and it is possible that you will not be familiar with our approach. 
 
 ### Working in GitHub
 
-We use [GitHub](https://github.com/PostHog) for _everything_, including non-engineering task management. This might take some getting used to if you are non-technical. If that is the case, we have [this intro video](https://www.youtube.com/watch?v=2BB4Nkc0uVM) that will teach you the basics and [a detailed guide on how to set up a local version of Posthog.com so that you can make changes to the docs, handbook and website](/handbook/engineering/posthog-com/developing-the-website). 
+We use [GitHub](https://github.com/PostHog) for _everything_, including non-engineering task management. This might take some getting used to if you are non-technical. If that is the case, we have [a detailed guide on how to set up a local version of Posthog.com so that you can make changes to the docs, handbook and website](/handbook/engineering/posthog-com/developing-the-website) and a blog about [why we use GitHub as our CMS](/blog/github-cms) to help you out.
 
 Our most active repositories (aka 'repos') are:
 
@@ -157,3 +158,14 @@ We use GitHub Projects to track the status of Issues in an easily viewable way. 
 You can also assign an Issue to a specific person, and tag it with a relevant label - use these to help people filter more easily.
 
 Each Small Team has its own Project for tracking their Issues - [full list here](https://github.com/orgs/PostHog/projects). Most teams run two week sprints - as part of onboarding, you will be invited to the relevant planning meetings. 
+
+## 30/60/90 day check-ins
+
+As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to simply serve as a reminder that these checkpoints have arrived. There is no formal requirement for a manager to do anything different at these stages but there are a few helpful suggestions below to help the new team member's experience and to make sure everything is on track with the onboarding and the [first 3 months probationary period](https://posthog.com/handbook/people/compensation#notice-period) will be passed.
+
+- Around the 30 day mark, it's good for the manager to provide initial feedback - especially if there is constructive feedback that needs to be given to ensure the person passes probation. Separately, it's also a good time to reinforce the positive work that has been done by somebody on the right track.
+- Around the 60 day mark, if things are going well, the manager might want to give an indication of this as it can ease any fears the team member may have. A member of the Ops team will also check in with the manager to see if things are on track.
+- The 60 day mark is likely the _latest_ point a manager should be flagging any issues in performance with a new starter. If there are concerns, it's best to raise these with the Exec team as soon as possible to come up with a plan on how to move forward.
+- Feedback is a really important part of the onboarding process and as a manager it's a good idea to ensure the new team member receives feedback from their peers - either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a manager how best to approach that. As a manager you can also have blind spots on performance, so checking in with their peers can be helpful and can be done during your normal 1-1s.
+
+These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. 

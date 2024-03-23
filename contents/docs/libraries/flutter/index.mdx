@@ -3,18 +3,23 @@ title: Flutter
 sidebarTitle: Flutter
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-flutter
-icon: ../../../images/docs/integrate/flutter.svg
+github: 'https://github.com/PostHog/posthog-flutter'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: false
-    sessionRecording: false
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
 ---
 
+import FlutterIdentify from './\_snippets/identify.mdx'
+
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
+
+PostHog supports the iOS, macOS, Android and Web platforms.
 
 ## Installation
 
@@ -23,28 +28,6 @@ import FlutterInstall from '../../integrate/_snippets/install-flutter.mdx'
 <FlutterInstall />
 
 ## Usage
-
-To use this, add `posthog_flutter` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
-
-### Supported methods
-
-| Method               | Android | iOS | Web |
-| ---------------------| ------- | --- | --- |
-| `identify`           | X       | X   | X   |
-| `capture`            | X       | X   | X   |
-| `screen`             | X       | X   | X   |
-| `alias`              | X       | X   | X   |
-| `getAnonymousId`     | X       | X   | X   |
-| `reset`              | X       | X   | X   |
-| `disable`            | X       | X   |     |
-| `enable`             | X       | X   |     |
-| `debug`              | X\*     | X   | X   |
-| `setContext`         | X       | X   |     |
-| `isFeatureEnabled`   | X       | X   | X   |
-| `reloadFeatureFlags` | X       | X   | X   |
-| `groups`             | X       | X   | X   |
-
-> Debugging must be set as a configuration parameter in `AndroidManifest.xml` (see below). The Official PostHog Library does not offer the debug method for Android.
 
 ### Example
 
@@ -57,42 +40,31 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Posthog.screen(
-      screenName: 'Example Screen',
-    );
     return MaterialApp(
+      navigatorObservers: [
+        // The PosthogObserver records screen views automatically
+        PosthogObserver(),
+      ],
       home: Scaffold(
         appBar: AppBar(
           title: Text('PostHog example app'),
         ),
         body: Center(
           child: FlatButton(
-            child: Text('TRACK ACTION WITH POSTHOG'),
-            onPressed: () {
-              Posthog.capture(
-                eventName: 'button_clicked',
+            child: Text('TRACK ACTION WITH PostHog'),
+            onPressed: () async {
+              await Posthog().capture(
+                eventName: 'ButtonClicked',
                 properties: {
                   'foo': 'bar',
                   'number': 1337,
                   'clicked': true,
-                  '\$set': {
-                    'userProp': 'value1',
-                    '\$groups': {
-                      'company': 'twitter',
-                    },
-                  },
-                  '\$set_once': {
-                    'userProp': 'value2'
-                  }
                 },
               );
             },
           ),
         ),
-      ),
-      navigatorObservers: [
-        PosthogObserver(),
-      ],
+      )
     );
   }
 }
@@ -104,6 +76,37 @@ import FlutterSendEvents from '../../integrate/send-events/_snippets/send-events
 
 <FlutterSendEvents />
 
+## Identify
+
+> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+
+<FlutterIdentify />
+
+## Group analytics
+
+Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Associate the events for this session with a group
+
+```dart
+await Posthog().group(groupType: "company", groupKey: "company_id_in_your_db");
+```
+
+-   Associate the events for this session with a group AND update the properties of that group
+
+```swift
+await Posthog().group(
+  groupType: "company", 
+  groupKey: "company_id_in_your_db", 
+  groupProperties: {
+    "name": "ACME Corp"
+});
+```
+
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+
 ## Feature Flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
@@ -113,6 +116,12 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-flutter.mdx'
 
 <FlutterFeatureFlagsCode />
+
+## Session replay
+
+> **Note: ** Session replay is only supported on the [Flutter Web](https://flutter.dev/multi-platform/web) environment.
+
+To set up [session replay](/docs/session-replay) in your project, all you need to do is install the Flutter SDK and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
 
 ## Issues
 

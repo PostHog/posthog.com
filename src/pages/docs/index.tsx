@@ -15,14 +15,14 @@ const quickLinks = [
         icon: 'IconGraph',
         name: 'Product analytics',
         to: '/docs/product-analytics',
-        description: 'Better understand your users and build better products',
+        description: 'Understand your users and build better products',
         color: 'blue',
     },
     {
         icon: 'IconRewindPlay',
         name: 'Session replay',
         to: '/docs/session-replay',
-        description: 'Play back sessions to diagnose UI issues and get inspired',
+        description: 'Play back sessions to diagnose UI issues',
         color: 'yellow',
     },
     {
@@ -60,6 +60,13 @@ const quickLinks = [
         description: 'Extend PostHog by adding your own functionality',
         color: 'seagreen',
     },
+    {
+        icon: 'IconPieChart',
+        name: 'Web analytics',
+        to: '/docs/web-analytics',
+        description: 'Easily track the most common web metrics',
+        color: 'green',
+    },
 ]
 
 export const DocsIndex = () => {
@@ -89,7 +96,7 @@ export const DocsIndex = () => {
                         <figure className="m-0">
                             <StaticImage
                                 objectFit="contain"
-                                src="../../../contents/images/adventure-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
                                 alt="This hog knows where he's headed"
                                 width={342}
                                 placeholder="blurred"
@@ -119,17 +126,14 @@ export const DocsIndex = () => {
                             </CallToAction>
                         </div>
                         <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                            <h3 className="text-xl mb-2">Apps</h3>
+                            <h3 className="text-xl mb-2">Templates</h3>
                             <p className="text-[15px]">
-                                Extend functionality with third-party apps that integrate into the PostHog ecosystem.
+                                Instantly analyze data and collect feedback with dashboard and survey templates.
                             </p>
                             <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
-                                <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
-                                    Explore
+                                <CallToAction to="/templates" type="outline" size="md" className="!w-full sm:!w-auto">
+                                    Browse templates
                                 </CallToAction>
-                                <Link to="/apps" className="text-sm">
-                                    Browse apps
-                                </Link>
                             </div>
                         </div>
                         <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">

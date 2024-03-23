@@ -1,13 +1,16 @@
 ---
 date: 2023-06-29
-title: "6 mistakes we've made at PostHog (and what we learned)"
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/newsletter-hog.png
+title: 6 mistakes we've made at PostHog (and what we learned)
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/newsletter-hog.png
 featuredImageType: full
 tags:
   - Being a founder
 crosspost:
   - Founders
+  - Blog
 ---
 
 We’ve made mistakes at PostHog. We’re still making them, probably. In this issue, we’re sharing some important ones we’ve made, and what we learned from them.
@@ -54,7 +57,7 @@ In 2022, we formalized creating quarterly objectives and key results (OKRs) for 
 
 Conventional wisdom says OKRs should have an objective (what you want to achieve) and a key result (how you’ll measure success). This typically results in OKRs like this [(source)](https://www.whatmatters.com/articles/leading-indicator-product-market-fit-okrs):
 
-![okrs](../images/newsletter/mistakes/superhuman-okr.png)
+![okrs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/mistakes/superhuman-okr.png)
 
 There’s nothing inherently wrong with this approach – it’s a popular method for a reason. But our engineering teams found they agonized over finding the right metrics, and found they didn’t accurately reflect their subjective view of progress.
 
@@ -64,7 +67,7 @@ As one engineer put it:
 
 💡 **What we learned:** One size fits all rarely works, neither does following conventional wisdom because “Google does it”. Instead, we’ve given teams the freedom to set goals and how they measure them – including using precise metrics where appropriate. This has resulted in team goals like this:
 
-![okrs](../images/newsletter/mistakes/okrs.png)
+![okrs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/mistakes/okrs.png)
 
 ## 5. Taking too long to re-hire roles
 

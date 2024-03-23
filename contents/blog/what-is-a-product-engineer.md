@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - ian-vanagas
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -79,7 +80,7 @@ All of this helps them create insights that help them build better products. Pro
 
 The end goal of a product engineer is to ship a great product. Briefs, mockups, written reports, and presentations are not a great product. Prototyping, shipping, and experimenting are closer, and that is what product engineers focus on.
 
-Product engineers ideate new ways to make the product better. They then iterate on these ideas for improving the product and do it fast. This means a lot of experiments and tests. Tools like A/B tests and feature flags help with this.
+Product engineers ideate new ways to make the product better. They then iterate on these ideas for improving the product and do it fast. This means a lot of experiments and tests. Tools like [A/B tests](/product-engineers/how-to-do-ab-testing) and feature flags help with this.
 
 > **Product engineers vs growth engineers:** Product engineers experiment to improve a specific product they own. Growth engineers experiment at a higher level, focusing on increasing growth metrics like signups, subscriptions, and revenue across products. Read our [guide to growth engineers](/blog/what-is-a-growth-engineer) and why they're awesome to learn more.
 

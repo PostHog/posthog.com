@@ -1,10 +1,15 @@
 ---
-title: How to set up Ruby on Rails analytics, feature flags and more
+title: 'How to set up Ruby on Rails analytics, feature flags and more'
 date: 2023-02-02
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["configuration", "feature flags", "persons", "events"]
+tags:
+  - configuration
+  - feature flags
+  - persons
+  - events
 ---
 
 Ruby on Rails is a popular fullstack web framework used by companies like Shopify, GitHub, Twitch, and more.
@@ -31,7 +36,7 @@ bin/rails server
 
 Going to `localhost:3000` pulls up a site that looks like this:
 
-![App](../images/tutorials/ruby-on-rails-analytics/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ruby-on-rails-analytics/app.png)
 
 > A more detailed version of this Ruby app building process is in the [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html) guide.
 
@@ -170,7 +175,7 @@ Next, create a form page for article creation in `app/views/articles/new.html.er
 
 You should now have a nice Ruby on Rails app with a home page, article pages, and the ability to add new articles. Customize it further if you'd like, then when you're ready it's time to add PostHog.
 
-![Full app](../images/tutorials/ruby-on-rails-analytics/ruby.gif)
+![Full app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ruby-on-rails-analytics/ruby.gif)
 
 ## 2. Integrating the PostHog snippet and Ruby library
 
@@ -340,5 +345,5 @@ Once done, you have a basic Ruby on Rails app with many of the key features of P
 ## Further reading
 
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
+- [How to set up A/B tests in Ruby on Rails](/tutorials/ruby-ab-tests)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)

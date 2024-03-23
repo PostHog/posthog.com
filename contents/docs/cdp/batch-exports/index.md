@@ -1,11 +1,11 @@
 ---
-title: Batch exports (beta)
+title: Batch exports
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 Batch exports give you a platform to schedule data exports to supported destinations. Batch exports are built on [Temporal](https://www.temporal.io/) to enable reliable data exports, ensuring your data reaches your destination.
@@ -16,7 +16,7 @@ The key features offered by this platform are:
 
 Batch exports are designed to power any complimentary analytics use cases outside of PostHog.
 
-> Batch exports are currently in **public beta**. This means that we offer data exports to a subset of all the planned destinations, some features will be missing, and you will encounter UI elements still in development. You can follow and comment on the progress [in this GitHub issue](https://github.com/PostHog/posthog/issues/15997).
+> **Note:** Batch exports require a subscription to the data pipeline add-on which you can enable in [your billing settings](https://us.posthog.com/organization/billing).
 
 ## Destinations
 
@@ -26,6 +26,7 @@ Every batch export exports data to a destination using the configuration paramet
 * [S3](/docs/cdp/batch-exports/s3)
 * [Snowflake](/docs/cdp/batch-exports/snowflake)
 * [Postgres](/docs/cdp/batch-exports/postgres)
+* [Redshift](/docs/cdp/batch-exports/redshift)
 
 Support for new destinations will be added based on demand. You can follow development of new destinations [here](https://github.com/PostHog/posthog/issues/15997).
 
@@ -41,7 +42,7 @@ As an example, creating a batch export of events with daily frequency today will
 
 On each batch export view, you are presented with a list of the latest executed runs:
 
-![batch export runs](../../../images/docs/batch-exports/batch-exports-runs.png)
+![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/batch-exports-runs.png)
 
 Each run has:
 1. A state indicator which can be either "Starting", "Running", "Failed", or "Completed."
@@ -56,11 +57,11 @@ You can use batch exports for past data stored in PostHog, known as historical d
 
 A "Create historic export" button can be found in the UI:
 
-![batch exports ui](../../../images/docs/batch-exports/batch-exports-ui.png)
+![batch exports ui](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/batch-exports-ui.png)
 
 Which will let you input the start and end date of the historical export:
 
-![create historic export](../../../images/docs/batch-exports/create-historic-export.png)
+![create historic export](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/create-historic-export.png)
 
 Immediately afterwards, the historical export runs that fall within the bounds selected are scheduled.
 

@@ -149,15 +149,21 @@ export const CompensationCalculator = ({
                 description={descriptions['location'] && descriptions['location']}
             >
                 <div className="grid grid-cols-2 gap-x-4">
-                    <Combobox label="Country" value={country} onChange={setItem('country')} options={countries} />
+                    <Combobox
+                        label="Country"
+                        value={country}
+                        onChange={setItem('country')}
+                        options={countries.sort()}
+                    />
                     <Combobox
                         label="Region"
                         value={region}
                         onChange={setItem('region')}
                         options={locationFactor
                             .filter((location) => location.country === country)
-                            .map((location) => location.area)}
-                        display={(area) => (area ? `${area} ${findLocation(country, area)?.locationFactor}` : '')}
+                            .map((location) => location.area)
+                            .sort()}
+                        display={(area) => (area ? area : '')}
                     />
                 </div>
             </Section>
@@ -203,14 +209,15 @@ export const CompensationCalculator = ({
                     {!hideFormula && job && country && currentLocation && level && step && (
                         <ol className="ml-0 !mb-2 p-0 border-b-2 border-light dark:border-dark">
                             <Factor>
-                                <span>Benchmark (San Francisco)</span>{' '}
-                                <span>{formatCur(sfBenchmark[job], currentLocation?.currency)}</span>
-                            </Factor>
-                            <Factor>
                                 <span>
-                                    <IconMultiply className="w-6 h-6 inline-flex -ml-1" /> Location factor
+                                    Benchmark ({currentLocation.country} - {currentLocation.area})
                                 </span>{' '}
-                                <span>{currentLocation?.locationFactor}</span>
+                                <span>
+                                    {formatCur(
+                                        sfBenchmark[job] * (currentLocation.locationFactor || 1),
+                                        currentLocation?.currency
+                                    )}
+                                </span>
                             </Factor>
                             <Factor>
                                 <span>

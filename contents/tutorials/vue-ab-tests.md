@@ -1,8 +1,10 @@
 ---
 title: How to set up A/B tests in Vue
 date: 2023-12-11
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 A/B tests help you make your Vue app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, in this tutorial we create a basic Vue app, add PostHog, create an A/B test, and implement the code for it.
@@ -11,7 +13,7 @@ A/B tests help you make your Vue app better by enabling you to compare the impac
 
 For this tutorial, we create a basic `Vue 3` app with a simple button to run our test on.
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then install `@vue/cli` and create a new Vue app:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then install `@vue/cli` and create a new Vue app:
 
 ```bash
 npm install -g @vue/cli
@@ -44,7 +46,7 @@ export default {
 
 Run `npm run serve` to start your app.
 
-![Basic Vue app](../images/tutorials/vue-ab-tests/basic-app.png)
+![Basic Vue app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-ab-tests/basic-app.png)
 
 ## Adding PostHog
 
@@ -97,7 +99,7 @@ app.mount('#app')
 
 Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog events explorer](https://app.posthog.com/events).
 
-![Events](../images/tutorials/vue-ab-tests/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-ab-tests/events.png)
 
 ## Creating a custom event for our A/B test goal
 
@@ -116,6 +118,7 @@ To measure this, we [capture a custom event](/docs/product-analytics/capture-eve
 ```
 
 With this set up, refresh your app and click the button a few times to capture the event in PostHog.
+
 ## Creating an A/B test in PostHog
 
 The next step is to set up an A/B test (we call them experiments in PostHog).
@@ -129,7 +132,7 @@ Go to the [A/B testing tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![Vue.js experiment setup in PostHog](../images/tutorials/vue-ab-tests/new-experiment.png)
+![Vue.js experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-ab-tests/new-experiment.png)
 
 ## Implementing the A/B test code
 
@@ -176,6 +179,6 @@ With this, you’re ready to launch your experiment!
 
 ## Further reading
 
-- [PostHog Vue.js docs](/docs/libraries/vue-js)
-- [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+- [How to set up surveys in Vue](/tutorials/vue-surveys)
+- [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
+- [How to set up analytics in Vue](/tutorials/vue-analytics)

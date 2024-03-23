@@ -3,11 +3,14 @@ date: 2023-12-13
 title: The ops toolkit for early-stage startups (2024 edition)
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-release-notes-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Ops & finance
+crosspost:
+  - Blog
 ---
 
 Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but what are all the boring admin things that are actually going to drain 40% of your time which no one has told you about?

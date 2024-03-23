@@ -3,11 +3,14 @@ date: 2021-08-26
 title: What's the true role of a product team at an engineering-led organization?
 author:
   - paolodamico
-featuredImage: ../images/blog/product-at-posthog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-at-posthog.png
 featuredImageType: full
 tags:
   - Founders
   - Product
+crosspost:
+  - Blog
 ---
 
 We’ve talked before about [product-minded engineers](/blog/what-is-a-product-engineer) at PostHog. We don’t have PMs dictating a roadmap or solutions - it all comes from engineering. A PostHog engineer has complete autonomy to decide the 'what' (prioritization) and the 'how' (solution) of the features we build, so Product & Design play a role that’s a bit different to the typical tech startup. 

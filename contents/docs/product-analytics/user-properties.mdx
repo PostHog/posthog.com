@@ -1,7 +1,8 @@
 ---
 title: User properties
 sidebarTitle: User properties
-featuredImage: ./images/docs-properties.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/images/docs-properties.png
 nextPage: ./actions-and-insights.mdx
 sidebar: Docs
 showTitle: true
@@ -9,6 +10,11 @@ showTitle: true
 
 import UserPropertiesHowToSet from "../getting-started/\_snippets/user-properties-how-to-set.mdx"
 import UserPropertiesSetVsSetOnce from "../getting-started/\_snippets/user-properties-set-vs-set-once.mdx"
+export const viewUserPropertiesLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/user-properties/view-user-properties-light-mode.mp4"
+export const viewUserPropertiesDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/user-properties/view-user-properties-dark-mode.mp4"
+export const changeDisplayNameLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/user-properties/change-display-name-light-mode.png"
+export const changeDisplayNameDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/user-properties/change-display-name-dark-mode.png"
+
 
 User properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
 
@@ -103,13 +109,23 @@ To view properties for a particular user, go to [Persons & Groups](https://app.p
 
 On a user's property list, you can add properties to them by clicking the "New property" button, then adding a key, type, and value. You can also delete a custom property for a user by clicking the red garbage bin icon on the right side of property listing.
 
-![How to view user properties](../../images/docs/data/user-properties/view-user-properties.mp4)
+<ProductVideo
+    videoLight = {viewUserPropertiesLight} 
+    videoDark = {viewUserPropertiesDark}
+    classes="rounded"
+    alt="How to view user properties"
+/>
 
 ## Person display name
 
 The person display name is the name that is shown in the PostHog UI. The person properties that are used as the display name can be configured in [Project Settings](https://app.posthog.com/project/settings).
 
-![Where to change the display name in project settings](../../images/docs/data/user-properties/change-display-name.png)
+<ProductScreenshot
+    imageLight = {changeDisplayNameLight} 
+    imageDark = {changeDisplayNameDark}
+    classes="rounded"
+    alt="Where to change the display name in project settings"
+/>
 
 ## Default user properties
 
@@ -129,8 +145,8 @@ The following properties are automatically set for all users when using the `pos
 | `$initial_device_type` | Initial Device Type | The initial type of device that was used (first-touch). | Mobile, Tablet, Desktop |
 | `$initial_os` | Initial OS | The operating system that the user first used (first-touch). | Windows, Mac OS X |
 | `$initial_pathname` | Initial Path Name | The path of the Current URL, which means everything in the url after the domain. Data from the first time this user was seen. | /pricing, /about-us/team |
-| `$initial_referrer` | Initial Referrer URL | URL of where the user came from most recently (last-touch). Data from the first time this user was seen. | https://google.com/search?q=posthog&rlz=1C... |
-| `$initial_referring_domain` | Initial Referring Domain | Domain of where the user came from most recently (last-touch). Data from the first time this user was seen. | google.com, facebook.com |
+| `$initial_referrer` | Initial Referrer URL | URL of where the user came from most recently (first-touch). Data from the first time this user was seen. | https://google.com/search?q=posthog&rlz=1C... |
+| `$initial_referring_domain` | Initial Referring Domain | Domain of where the user came from most recently (first-touch). Data from the first time this user was seen. | google.com, facebook.com |
 | `$initial_utm_campaign` | Initial UTM Campaign | UTM campaign tag (first-touch). | feature launch, discount |
 | `$initial_utm_content` | Initial UTM Content | UTM content tag (first-touch). | bottom link, second button |
 | `$initial_utm_medium` | Initial UTM Medium | UTM medium tag (first-touch). | Social, Organic, Paid, Email |

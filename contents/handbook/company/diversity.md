@@ -44,9 +44,10 @@ We send all applicants an optional survey to complete as part of their applicati
 In addition to posting on our own website, LinkedIn, YC, and AngelList, we look for job boards that specifically target underrepresented groups. We are always testing and learning to see which are most effective. Previous places we have advertised include: 
 
 - Women Who Code
-- include.io
+- Squad Jobs
 - Black Girls in Tech
 - Tech Ladies
+- Elpha
 
 #### Attending events for underrepresented groups
 
@@ -82,7 +83,7 @@ For those candidates that might have other commitments that make a full day impr
 
 These are some of the things we've implemented so far:
 
-* [All remote](/handbook/company/team) - so we can hire people from any country in the world. We have people in ~10 countries, with no office. We also provide everyone  with $200/month to use on a [coworking space](/handbook/people/spending-money/#work-space) of their choice, and $250/month to [meet up with other team members](/handbook/people/spending-money/#meetups). 
+* [All remote](/people) - so we can hire people from any country in the world. We have people in ~10 countries, with no office. We also provide everyone  with $300/month to use on a [coworking space](/handbook/people/spending-money/#work-space) of their choice, and $500/month to [meet up with other team members](/handbook/people/spending-money/#meetups). 
 * [Asynchronous and transparent communication](/handbook/company/communication) - so people can get the context they need to work effectively across multiple time zones and on schedules that suit them.
 * [Unlimited vacation policy](/handbook/people/time-off/#permissionless-time-off) with mandatory minimum time off - so you can fit work around your life.
 * [Flexible hours](/handbook/people/time-off#flexible-working) - so you can do the daily school run, or schedule a dentist appointment. 
@@ -91,7 +92,7 @@ These are some of the things we've implemented so far:
 * Anyone can contribute to [our handbook](/handbook/) - so if we miss something, others can ask for a change in our policy! 
 * [Training budget](/handbook/people/training/#training-budget) for those in roles where we don't have lots of existing experience as a company.
 * Life story Fridays (when we have a new team member, we'll ask them if they'd like to present their life story for up to 30min on a Friday) - so you have more context on the points of views of others in the team.
-* [Sponsored visas](/handbook/people/hiring-process/#visa-sponsorship) for those who need them to continue staying in the US or UK.
+* [Sponsored visas](/handbook/people/hiring-process/#visa-sponsorship) - this is only applicable for those who are staying in the UK. 
 * [Health insurance](/handbook/people/benefits/#pension-and-401k-contributions) for those from countries that do not provide this freely.
 
 Are you a potential candidate reading this? [Let us know](mailto:careers@posthog.com) how we can do a better job!

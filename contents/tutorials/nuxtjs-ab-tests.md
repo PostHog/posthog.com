@@ -1,8 +1,11 @@
 ---
 title: How to set up A/B tests in Nuxt
 date: 2023-12-05
-author: ["lior-neu-ner"]
-tags: ['experimentation', 'feature flags']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
+  - feature flags
 ---
 A/B tests are crucial for optimizing your Nuxt.js app. PostHog's experimentation tool simplifies this process. This tutorial will show you how to set up and run an A/B test in Nuxt using PostHog.
 
@@ -14,7 +17,7 @@ We'll cover creating a basic Nuxt app, integrating PostHog, and setting up the A
 
 For this tutorial, we create a basic `Nuxt 3` app with a simple button to run our test on. 
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 14.6.0 or newer). Then create a Nuxt.js app:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0.0 or newer). Then create a Nuxt.js app:
 
 ```bash
 npx nuxi@latest init <project-name>
@@ -35,7 +38,7 @@ Replace the code in `app.vue` with a simple heading and button:
 
 Run `npm run dev` to start your app.
 
-![Basic app](../images/tutorials/nuxtjs-ab-tests/basic-setup.png)
+![Basic app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxtjs-ab-tests/basic-setup.png)
 
 ## Adding PostHog
 
@@ -90,7 +93,7 @@ export default defineNuxtPlugin(nuxtApp => {
 
 Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog events explorer](https://app.posthog.com/events).
 
-![Events](../images/tutorials/nuxtjs-ab-tests/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxtjs-ab-tests/events.png)
 
 ## Creating a custom event for our A/B test goal
 
@@ -130,7 +133,7 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![Nuxt.js experiment setup in PostHog](../images/tutorials/nuxtjs-ab-tests/experiment-setup.png)
+![Nuxt.js experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxtjs-ab-tests/experiment-setup.png)
 
 ## Implementing the A/B test code
 
@@ -259,6 +262,6 @@ Now, when you refresh the page, the button text is already set when the page loa
 
 ## Further reading
 
-- [PostHog Nuxt.js docs](/docs/libraries/nuxt-js)
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
+- [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
+- [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
+- [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)

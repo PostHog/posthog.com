@@ -1,13 +1,16 @@
 ---
 date: 2023-03-08
-title: "How to turn user interviews into actionable snapshots"
+title: How to turn user interviews into actionable snapshots
 author:
   - annika-schmid
-featuredImage: ../images/blog/posthog-blog-at-desk.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
 tags:
   - Product engineers
   - User research
+crosspost:
+  - Blog
 ---
 
 Regularly talking to users is an important habit for any product team, but it's wasted without an efficient way to share what you learn. At PostHog, we favor interview snapshots. Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), we like snapshots because:
@@ -24,7 +27,7 @@ Snapshots are an easy-to-digest summary of the insights you glean from interview
 
 Here's what a completed snapshot looks like:
 
-![interview-snapshot](../images/interview-snapshots/interview-snapshot-filled-out.jpg)
+![interview-snapshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/interview-snapshots/interview-snapshot-filled-out.jpg)
 
 While taking notes, focus on how the user is using your product, and how they feel while using it. What makes them excited? What frustrates them? Those are the insights that later go into your interview snapshot.
 
@@ -36,7 +39,7 @@ Instead, I recommend blocking 30 minutes after your interview to review your not
 
 Once you've reviewed your notes, you're ready to start filling out your snapshot. You can save and edit the snapshot below, or make a copy on [Figma](https://www.figma.com/file/iO6kIZ8kXdMudLtu7kSyc5/PostHog-Interview-Snapshot-Template?node-id=0%3A1&t=LDU8ALaROQyfh6JL-1) and [Google Sheets](https://docs.google.com/presentation/d/1JnewtJmeRHrXPloJzT5nGmXYrBUbaKnN7-k4kYjbo9M/edit?usp=sharing).
 
-![interview-snapshot](../images/interview-snapshots/interview-snapshot.jpg)
+![interview-snapshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/interview-snapshots/interview-snapshot.jpg)
 
 ### 1. Note high-level information of your user
 

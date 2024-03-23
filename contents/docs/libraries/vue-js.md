@@ -1,6 +1,7 @@
 ---
 title: Vue.js
-icon: ../../images/docs/integrate/frameworks/vue.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/vue.svg
 ---
 PostHog makes it easy to get data about usage of your [Vue.js](https://vuejs.org/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
@@ -206,21 +207,47 @@ export default {
 }
 ```
 
-## Capturing page views
+## Capturing pageviews
 
-While PostHog will automatically capture paths, you can optionally bind it to Vue’s built-in router using the `afterEach` function. Additionally, you can mount PostHog inside `nextTick` so that the capture event fires after the page is mounted. 
+You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Vue creates a single-page app, this only happens once, and the Vue router handles subsequent page changes.
+
+If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
+
+First, make sure to set `capture_pageview` in the PostHog initialization config to `false`. This turns off autocaptured pageviews and ensures you won’t double-capture pageviews on the first load.
+
+```js
+// in the file where you initialize posthog
+posthog.init(
+      "<ph_project_api_key>",
+      {
+        api_host: "<ph_instance_address>",
+        capture_pageview: false
+      }
+);
+```
 
 **Vue 3.x:** 
 
-```js
-//router.js #might be in your app.js
+In `main.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that the capture event fires only after the page is mounted.
 
-router.afterEach((to) => {
-  nextTick(() => {
-    posthog.capture("$pageview", {
-      $current_url: to.fullPath,
+```js
+// main.js
+import { createApp, nextTick } from 'vue'
+import App from './App.vue'
+import router from './router'
+import posthogPlugin from '../plugins/posthog';
+
+const app = createApp(App);
+app.use(posthogPlugin)
+.use(router)
+.mount('#app');
+
+router.afterEach((to, from, failure) => {
+  if (!failure) {
+    nextTick(() => {
+      app.config.globalProperties.$posthog.capture('$pageview', { path: to.fullPath });
     });
-  });
+  }
 });
 ```
 
@@ -272,8 +299,15 @@ export default {
 </template>
 ```
 
-See the [JavaScript SDK docs](/docs/libraries/js) for all usable functions, such as:
-- [Capture custom event capture, identify users, and more.](/docs/libraries/js#send-custom-events-with-posthogcapture)
-- [Feature flags including variants and payloads.](/docs/libraries/js#feature-flags)
-
 You can the access the project used in this tutorial [on GitHub](https://github.com/mathexl/posthog-vue-demo).
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into Vue (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) SDK docs.
+
+Alternatively, the following tutorials can help you get started:
+
+- [How to set up analytics in Vue](/tutorials/vue-analytics)
+- [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
+- [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
+- [How to set up surveys in Vue](/tutorials/vue-surveys)

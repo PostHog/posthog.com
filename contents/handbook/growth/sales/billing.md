@@ -67,7 +67,7 @@ We use a billing config file to determine what is shown in the UI and how billin
 We use very limited metadata on some of these prices to allow the Billing Service to appropriately load and offer products to the instances:
 
 
-![Stripe products](../../../images/handbook/growth/sales/stripe-products.png)
+![Stripe products](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth/sales/stripe-products.png)
 
 
 
@@ -110,21 +110,20 @@ As much as possible the existing prices should be used in combination with `Coup
 
 When calculating usage limits, discounts are taken into consideration _before_ the limit is calculated. This means that if the customer sets a billing limit of $200 and has a 20% discount, they will get charged $200 for _$250 worth of volume_. 
 
-#### Bespoke prices
- 
-In more complex cases it may be useful to create a custom pricing configuration for a product(s).
-To do this:
+#### Creating new or bespoke prices
 
 1. Go to the appropriate product in question (**do not create your own Product**)
 1. Click "Add another price"
-1. **Important**: For metered products (e.g. Product Analytics, Session Replay) select `Graduated Pricing`, `Usage is metered` and `Maximum usage during period`. This is crucial as the Billing Service will always send the maximum number of events for the billable period, respecting any billing limits set at the time.
+1. **Important**: For metered products (e.g. Product Analytics, Session Replay), set up the price as follows:
+    - Select `Recurring`, `Usage-based`, `Per tier`, and `Graduated`.
+    - ![image](https://github.com/PostHog/posthog.com/assets/18598166/40bd393e-734e-417a-bea8-bd63f9f62c7d)
+    - Under Advanced, set the "Metered usage charge method" to `Most recent usage value during period`. This is crucial as the Billing Service will send the correct number of units (events, recordings, etc) every day, so any errors that caused excess usage to be reported can self-heal with the next reporting cycle.
+    - ![image](https://github.com/PostHog/posthog.com/assets/18598166/c71917a8-7bc9-4834-83d6-d38d1de2d4e8)
 1. Expand the `additional options` and add a straightforward Price Description like `Custom - {date of creation}`
 1. Add the tiers as you see fit
      - If the custom prices are for a product and addons (eg. Product analytics and Group analytics) the tier volumes need to be exactly the same between the two products/prices. If tier 3 for Product analytics is up to 15M and tier 3 for Group analytics is for 16M, you'll get errors from the billing service).
     - If you are making a custom price for just one product (ie. someone is getting special pricing for Product Analytics but will get the normal pricing for Group Analytics), make sure the tiers match up between the main product and the addons.
 1. Add custom metadata if needed.
-
-![Stripe price example](../../../images/handbook/growth/sales/stripe-custom-price.png)
 
 ### Plans
 > ⚠️ Modifying plans should be done carefully. If you aren't sure at any point contact the #growth team to check what you are doing
@@ -146,7 +145,7 @@ You can manually change the plan for a customer by updating the `plans_map` in t
 
 Stripe subscriptions can be modified relatively freely for example if moving to a custom pricing plan. 
 
-![Stripe subscription update](../../../images/handbook/growth/sales/stripe-update-subscription.png)
+![Stripe subscription update](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth/sales/stripe-update-subscription.png)
 
 1. Look up the customer on [Stripe dashboard][stripe_dashboard] using their email address or Stripe ID (this can be found in the Billing Service admin under `Customers`).
 1. Click on the customer's current subscription.

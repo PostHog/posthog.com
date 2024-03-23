@@ -1,8 +1,10 @@
 ---
-title: "How to run A/B tests in Android with PostHog"
+title: How to run A/B tests in Android
 date: 2023-11-22
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 [A/B tests](/ab-testing) enables you to compare the impact of your changes on key metrics. 
@@ -109,16 +111,16 @@ Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")
 
 Our basic set up is now complete. Build and run your app to test that it's working.
 
-![Basic setup of the Android app](../images/tutorials/android-ab-tests/android-basic-setup.mp4)
+![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/android-ab-tests/android-basic-setup.mp4)
 
 ## Adding PostHog to your Android app
 
-First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `app/build.gradle.kts` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). For this tutorial, we use version `2.0.3`.
+First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `Gradle Scripts/build.gradle.kts (Module: app)` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). For this tutorial, we use version `3.1.7`.
 
 
-```gradle_kotlin
+```gradle_kotlin file=app/build.gradle
 dependencies {
-    implementation("com.posthog.android:posthog:2.0.3")
+    implementation("com.posthog:posthog-android:3.+")
     //... other dependencies
 }
 ```
@@ -132,45 +134,37 @@ Next, we create a Kotlin class where we can configure our PostHog instance. In t
 package com.example.my_ab_test
 
 import android.app.Application
-import com.posthog.android.PostHog
+import com.posthog.android.PostHogAndroid
+import com.posthog.android.PostHogAndroidConfig
 
 class MyABTestApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
-        private const val POSTHOG_HOST = "<ph_instance_address>"
+        private const val POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
     }
 
     override fun onCreate() {
         super.onCreate()
-
-        // Initialize PostHog
-        val posthog = PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
-            .captureApplicationLifecycleEvents()
-            .recordScreenViews()
-            .build()
-
-        // Set the initialized instance as a globally accessible instance
-        PostHog.setSingletonInstance(posthog)
+        val config = PostHogAndroidConfig(
+            apiKey = POSTHOG_API_KEY,
+            host = POSTHOG_HOST
+        )
+        PostHogAndroid.setup(this, config)
     }
 }
 ```
 
 To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project).
 
-We now need to register our custom application class. Go to `AndroidManifest.xml` and add `android:name=".MyABTestApplication"` within the `<application` tag. We also need to give our app internet permission by adding `<uses-permission android:name="android.permission.INTERNET" />`. 
-
-Together both of these changes look like this:
+We now need to register our custom application class. Go to `AndroidManifest.xml` and add `android:name=".MyABTestApplication"` within the `<application` tag:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".MyABTestApplication"
-        ...
+        <!-- rest of config -->
     </application>
 </manifest>
 ```
@@ -182,8 +176,7 @@ Update the `SecondScreen` function in `MainActivity.kt` to the following:
 ```kotlin
 // in MainActivity.kt
 
-import com.posthog.android.PostHog
-import androidx.compose.ui.platform.LocalContext
+import com.posthog.PostHog
 // ... [Rest of your imports and MainActivity code]
 
 @Composable
@@ -191,13 +184,10 @@ fun SecondScreen() {
     val isTestVariant = remember { mutableStateOf(false) } // We'll set this value later in the tutorial
     val backgroundColor = if (isTestVariant.value) Color.Green else Color.Red
 
-    val context = LocalContext.current // new
-
     Surface(modifier = Modifier.fillMaxSize(), color = backgroundColor) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
             Button(onClick = {
-                PostHog.with(context)
-                    .capture("feature_button_clicked");
+                PostHog.capture("feature_button_clicked");
             }) {
                 Text("Click Me!")
             }
@@ -206,9 +196,9 @@ fun SecondScreen() {
 }
 ```
 
-To check your setup, build and run your app. Click your button a few times and you should start seeing events in the [PostHog event explorer](https://app.posthog.com/events).
+To check your setup, build and run your app. Click your button a few times and you should start seeing events in the [activity tab](https://app.posthog.com/events).
 
-![Android events captured](../images/tutorials/android-ab-tests/android-events.png)
+![Android events captured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-ab-tests/android-events.png)
 
 ## Create an A/B test in PostHog
 
@@ -223,7 +213,7 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![Experiment setup in PostHog](../images/tutorials/android-ab-tests/experiment-setup.png)
+![Experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-ab-tests/experiment-setup.png)
 
 ## Implement the A/B test code
 
@@ -243,12 +233,10 @@ import androidx.compose.runtime.LaunchedEffect
 
 @Composable
 fun SecondScreen() {
-    val context = LocalContext.current
     val isTestVariant = remember { mutableStateOf(false) }
 
-    // LaunchedEffect to call PostHog.getFeatureFlag() once when the composable is initialized
     LaunchedEffect(key1 = Unit) {
-        isTestVariant.value = PostHog.with(context).getFeatureFlag("android-background-color-experiment") == "test"
+        isTestVariant.value = PostHog.getFeatureFlag("android-background-color-experiment") == "test"
     }
 
     val backgroundColor = if (isTestVariant.value) Color.Green else Color.Red
@@ -270,5 +258,5 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 ## Further reading
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
-- [How to run A/B tests in iOS with PostHog](/tutorials/ios-ab-tests)
+- [How to set up feature flags in Android](/tutorials/android-feature-flags)
+- [How to set up analytics in Android](/tutorials/android-analytics)

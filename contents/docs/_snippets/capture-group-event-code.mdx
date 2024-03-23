@@ -19,7 +19,7 @@ client.Enqueue(posthog.Capture{
     DistinctId: "user_distinct_id",
     Event: "user_signed_up",
     Groups: posthog.NewGroups().
-        Set("company", "company_id_in_your_db").
+        Set("company", "company_id_in_your_db"),
 })
 ```
 
@@ -39,8 +39,8 @@ PostHog::capture(array(
 ));
 ```
 
-```ios
-posthog.group( "company", groupKey: "company_id_in_your_db")
+```ios_swift
+PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
 // For this session, any event captured after calling `posthog.group` will be associated with company `company_id_on_your_db`
 ```
 

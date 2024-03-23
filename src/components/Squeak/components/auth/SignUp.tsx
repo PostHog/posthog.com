@@ -21,7 +21,7 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
         } else if ('error' in user) {
             setMessage?.(user.error)
         } else {
-            onSubmit?.(user)
+            await onSubmit?.(user)
         }
     }
 

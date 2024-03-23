@@ -1,12 +1,17 @@
 ---
-title: Setting up Django analytics, feature flags, and more with PostHog
+title: 'Setting up Django analytics, feature flags, and more'
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2022-12-15
 featuredTutorial: false
-featuredVideo: https://www.youtube-nocookie.com/embed/QB-PI_ZXkwo
-tags: ["configuration", "feature flags", "persons", "events"]
+featuredVideo: 'https://www.youtube-nocookie.com/embed/QB-PI_ZXkwo'
+tags:
+  - configuration
+  - feature flags
+  - persons
+  - events
 ---
 
 Django is a popular Python web framework. It’s used by thousands of teams and developers around the world, including PostHog, to build apps, websites, APIs, and more.
@@ -51,7 +56,7 @@ python manage.py runserver
 
 Going to your [local host](http://127.0.0.1:8000/) should bring you to a page that looks like this:
 
-![Django](../images/tutorials/django-analytics/django.png)
+![Django](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/django.png)
 
 This is a basic Django app up and running. After confirming it’s working, shut down the server, and run the default migrations.
 
@@ -131,7 +136,7 @@ python manage.py createsuperuser
 
 Once you’ve created a superuser, you can go to the [admin panel](http://127.0.0.1:8000/admin) (`/admin`), login, and create a couple of blog posts. Once created and saved, we’ll setup the view to show them.
 
-![Admin panel](../images/tutorials/django-analytics/admin.png)
+![Admin panel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/admin.png)
 
 ### View
 
@@ -202,7 +207,7 @@ urlpatterns = [
 
 Once you save all of this, reload your server, and open your [development site](http://127.0.0.1:8000/). You should see a page with a list of blog posts.
 
-![Blog](../images/tutorials/django-analytics/blog.png)
+![Blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/blog.png)
 
 ## 3. Adding PostHog
 
@@ -216,7 +221,7 @@ PostHog makes it easy to get started fast with autocapture. This captures events
 
 In a new project’s getting started flow or your project settings, copy the HTML snippet and add it into the `<head>` tag of your `base.html` page. 
 
-![Snippet](../images/tutorials/django-analytics/snippet.png)
+![Snippet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/snippet.png)
 
 ```html
 <!DOCTYPE html>
@@ -375,7 +380,7 @@ To show off feature flags, add an optional call to action at the bottom of our b
 
 Next, go to our PostHog project and create a feature flag named `blog-cta` and set it to all users for now.
 
-![Feature flag](../images/tutorials/django-analytics/feature-flag.png)
+![Feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/feature-flag.png)
 
 We can copy the Python code it gives us, add it to our `get_context_data` function in our `PostListView`, and modify it to work with our code. The code checks if the feature flag is active for that user, and if so, show the call to action.
 
@@ -402,7 +407,7 @@ class PostListView(ListView):
 
 Finally, when we go back to our site, the feature flag is active and the CTA is showing.
 
-![CTA](../images/tutorials/django-analytics/cta.png)
+![CTA](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/cta.png)
 
 > We can also get the feature flags from the cookie by checking the dictionary for `$active_feature_flags`. This means that the user wouldn’t need to login for us to show them the feature flag.
 
@@ -412,6 +417,6 @@ With autocapture, session recordings, feature flags, identification, and custom 
 
 ## Further reading
 
+- [How to set up A/B tests in Django](/tutorials/django-ab-tests)
 - [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
-- [Running experiments on new users](/tutorials/new-user-experiments)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)

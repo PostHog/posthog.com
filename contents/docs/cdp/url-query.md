@@ -1,23 +1,24 @@
 ---
 title: URL query parameter converter
-github: https://github.com/PostHog/integrations-repository/pull/31
-installUrl: https://app.posthog.com/project/apps?name=url-query-parameter-converter
-thumbnail: ../../cdp/thumbnails/url-query.png
+github: 'https://github.com/PostHog/integrations-repository/pull/31'
+installUrl: 'https://app.posthog.com/project/apps?name=url-query-parameter-converter'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/url-query.png
 tags:
-    - url-query
+  - url-query
 ---
 
 This app automatically converts URL query parameters for specific terms into event properties in PostHog, enabling you to analyse them like any other data point. This can be useful for seeing how your product or content converts based on search terms. 
 
 ## Requirements
 
-This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This app requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ## Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'URL query parameter converter' and select the app, press Install.
 3. Configure the app to whitelist the parameters you want to turn into events.
 

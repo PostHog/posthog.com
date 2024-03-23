@@ -18,7 +18,7 @@ A great way to do this is by using [Cohorts](/docs/user-guides/cohorts). If you 
 
 Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 
-![Trends A/B Testing](../images/tutorials/feature-flags/trends-ab.png)
+![Trends A/B Testing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/feature-flags/trends-ab.png)
 
 ### Gradual Rollouts
 
@@ -28,7 +28,7 @@ Whatever the case may be, feature flags let you easily roll out features in an i
 
 ### "Master Toggles"
 
-If you have to ship a big piece of functionality, chances are that you'll be doing it across multiple PRs.
+If you have to ship a big piece of functionality and follow [trunk-based development](/product-engineers/trunk-based-development), chances are that you'll be doing it across multiple PRs.
 
 As such, rather than attempt to coordinate a merge spree to ensure everything is live at once, you can create a feature flag that wraps all the new logic in all the pull requests. Then, once everything is merged and ready to go, you can simply flip the switch to release it.
 

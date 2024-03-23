@@ -1,10 +1,14 @@
 ---
 title: How to track new and returning users in PostHog
 date: 2023-04-26
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["trends", "cohorts", 'product analytics']
+tags:
+  - trends
+  - cohorts
+  - product analytics
 ---
 
 Understanding user growth is critical to building a successful product. A lack of new users or existing users churning is a bad sign. This tutorial goes over the different ways to calculate new and returning users in PostHog, as well as insights you can create using these calculations.
@@ -19,21 +23,11 @@ There are multiple ways to calculate new users in PostHog depending on your situ
 
 The first and easiest is creating a cohort where the users completed an event (such as pageviews, [identify](/docs/data/identify), or a custom event) for the first time. To set this up, go to the cohort tab, click new cohort, enter a title and description, then choose "completed an event for the first time" with your event and recency. 
 
-![New users](../images/tutorials/track-new-returning-users/new.png)
+![New users](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-new-returning-users/new.png)
 
 You can then use this cohort of new users for further analysis.
 
 > **Note:** since this is a behavioral cohort (based on events), this cohort won’t work with feature flags.
-
-### First time event tracker
-
-You can set up and use the [first time event tracker app](/docs/apps/first-time-event-tracker) to add a property to events that indicates if it was the first time it happened.
-
-To set it up, search for "First Time Event Tracker" in your PostHog instance, set the event you want to track in the configuration (like `$pageview`) and enable the app. 
-
-![First time event tracker](../images/tutorials/track-new-returning-users/first.png)
-
-You can then filter for events where `is_first_event_user` is `true` recently to get new users for analysis. This method is useful if you don't want to set up or use cohorts in your analysis. 
 
 ### Manually set user property
 
@@ -55,7 +49,7 @@ This is especially useful for projects that are on the backend, not using autoca
 
 Calculating returning users is done by identifying users who aren’t new and have completed an event recently. To create a cohort for this, you can use the new user cohort as an anti-cohort (choose "Not in cohort"), and include another criteria for completing an event recently.
 
-![Returning users](../images/tutorials/track-new-returning-users/returning.png)
+![Returning users](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-new-returning-users/returning.png)
 
 Alternatively, if you created a `created_at` user property, you can also filter for users who weren’t created recently but completed the event. 
 
@@ -65,7 +59,7 @@ If you care specifically about returning users, you can set up a retention insig
 
 For example, an 8 week pageview retention graph looks like this:
 
-![Retention](../images/tutorials/track-new-returning-users/retention.png)
+![Retention](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-new-returning-users/retention.png)
 
 You can learn more about retention in our [guide to churn analysis](/blog/customer-churn-analysis-guide).
 
@@ -73,7 +67,7 @@ You can learn more about retention in our [guide to churn analysis](/blog/custom
 
 With both new and returning users calculated, you can compare them for analysis. To do this, create an insight with two unique user trends: one filtered by the new user cohort, the other filtered by the returning user cohort. 
 
-![Versus](../images/tutorials/track-new-returning-users/versus.png)
+![Versus](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-new-returning-users/versus.png)
 
 This gives you a trend similar to Google Analytics’ new vs returning visitors graph. You can also use these cohort filters for further analysis like comparing [session duration](/tutorials/session-metrics), feature usage, or even funnel conversion.
 
@@ -83,7 +77,7 @@ The lifecycle chart doesn’t use either of the new or returning cohorts we set 
 
 Create a new insight, select the lifecycle tab, then  choose the event you want. This gives you a visualization with new, returning, resurrecting, and dormant users for that time and event which enables you to compare new vs returning users for that event easily.
 
-![Lifecycle](../images/tutorials/track-new-returning-users/lifecycle.png)
+![Lifecycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-new-returning-users/lifecycle.png)
 
 ## Further reading
 

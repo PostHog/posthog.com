@@ -47,12 +47,12 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'product-analytics',
     lowercase: 'product analytics',
-    capitalized: 'Product Analytics',
+    capitalized: 'Product analytics',
     freeTier: '1,000,000 events',
 }
 
 const team = 'Product Analytics'
-const teamSlug = '/handbook/small-teams/product-analytics'
+const teamSlug = '/teams/product-analytics'
 
 const subfeaturesItemCount = 5
 const subfeatures = [
@@ -720,20 +720,20 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconRewindPlay />,
-        product: 'Session Replay',
+        product: 'Session replay',
         description:
             'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
         url: '/session-replay',
     },
     {
         icon: <IconToggle />,
-        product: 'Feature Flags',
+        product: 'Feature flags',
         description: 'See which feature flags were enabled for a user during a session',
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
-        product: 'A/B Testing',
+        product: 'A/B testing',
         description:
             'Filter data down to users within an active experiment, whether part of a control group or a test variant',
         url: '/ab-testing',
@@ -784,7 +784,7 @@ export const ProductProductAnalytics = () => {
                     icon={<IconGraph />}
                     product={product.capitalized}
                     title="Product analytics with autocapture"
-                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>Session Replay</a>, <a href='/feature-flags'>Feature Flags</a>, <a href='/ab-testing'>A/B Testing</a>, and <a href='/surveys'>Surveys</a>."
+                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/ab-testing'>A/B testing</a>, and <a href='/surveys'>surveys</a>."
                 />
 
                 <div className="text-center">
@@ -876,7 +876,7 @@ export const ProductProductAnalytics = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -900,8 +900,7 @@ export const ProductProductAnalytics = () => {
                                         Time-based analysis for web analytics (e.g. time on page)
                                         <ul className="pl-6">
                                             <li className="text-sm">
-                                                (We're{' '}
-                                                <Link to="/handbook/small-teams/web-analytics">working on this</Link>!)
+                                                (We're <Link to="/teams/web-analytics">working on this</Link>!)
                                             </li>
                                         </ul>
                                     </li>
@@ -988,7 +987,9 @@ export const ProductProductAnalytics = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[1].children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'product analytics').children}
+                    />
                 </section>
 
                 <section id="team" className="mb-20 px-5">

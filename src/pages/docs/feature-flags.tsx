@@ -87,7 +87,11 @@ export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
         <>
-            {(quickLinks || compact) && <QuickLinks items={docsMenu.children[3].children} />}
+            {(quickLinks || compact) && (
+                <QuickLinks
+                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'feature flags')?.children}
+                />
+            )}
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
@@ -191,7 +195,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                 </ul>
                 <CallToAction
-                    to="/tutorials/categories/feature-flags"
+                    to="/docs/feature-flags/tutorials"
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"

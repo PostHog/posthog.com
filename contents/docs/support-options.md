@@ -85,9 +85,19 @@ We are very grateful to people that do this the other way around and help answer
 
 Anybody using PostHog Cloud can raise a bug, submit feedback or otherwise ask for help via the help menu in the top right hand corner of the UI. Your request will be routed to the correct team and we'll get back to you via email for further help if needed.
 
+### Severity Levels
+
+In order to prioritise our responses we ask you to indicate the impact an issue is having for you.  When creating a ticket you'll be asked to choose a severity level from one of the following:
+
+| **Level** | **Impact**                                                                                        | **Examples**                                                                                                                                         |
+|-----------|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Critical  | PostHog is completely unavailable or or other significant business impact                         | <ul> <li>PostHog Cloud UI is unavailable</li> <li>Feature Flags API not responding</li> <li>Data loss</li> <li>Security breach</li> </ul>            |
+| High      | Key features of the product are unavailable, causing major inconvenience or limited functionality | <ul><li>Dashboards not loading</li><li>Session Replays not loading</li><li>Data Ingestion is delayed</li><li>Feature Flag targeting issues</li></ul> |
+| Medium    | There are issues with the product, but the impact is limited                                      | <ul><li>Insights are slow to load</li><li>Session replays have missing information</li></ul>                                                         |
+| Low       | Requests that have minimal impact on the usability of the product                                 | <ul><li>Feature requests</li><li>Usage questions</li></ul>                                                                                           |                                                                                                                                           |                                                                        |                                                                                                 |
 ## Dedicated Slack
 
-Our preference for paid customers is to support them through a private Slack channel. This helps us all get on the same side - and it's just more fun for everyone.
+For certain paid customers we support you through a private Slack channel. This helps us all get on the same side - and it's just more fun for everyone.
 
 We will select the right team for you at PostHog. This typically includes the Customer Success and Engineering teams.
 
@@ -104,7 +114,7 @@ From your side, it's important you bring your A team. We recommend you add:
 * A stakeholder from customer success (if relevant)
 * A stakeholder from sales (if relevant)
 
-It's best not to let your group get much bigger as it can create a lot of noise. We don't support you adding several end users of PostHog to this group - you will need to triage your own issues first.
+It's best not to let your group get much bigger as it can create a lot of noise.
 
 ## Training sessions
 

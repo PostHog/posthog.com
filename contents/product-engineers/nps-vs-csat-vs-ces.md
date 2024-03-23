@@ -1,15 +1,18 @@
 ---
 date: 2023-11-29
-title: "NPS vs CSAT vs CES: Which is best for SaaS?"
+title: 'NPS vs CSAT vs CES: Which is best for SaaS?'
 author:
   - lior-neu-ner
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 tags:
   - Product analytics
   - Product engineers
   - User research
   - Growth engineering
+crosspost:
+  - Blog
 ---
 
 The two most important metrics in SaaS are growth and retention. [User surveys](/surveys) are a great way to unlock insights into how to improve them, but which survey type gives you the best insights? 
@@ -26,7 +29,7 @@ Here's the TLDR:
 
 ## What is NPS?
 
-![NPS survey](../images/blog/nps-csat-ces/nps-survey.png)
+![NPS survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/nps-csat-ces/nps-survey.png)
 
 Net Promoter Score (NPS) measures how passionate your users are about your product. You ask them how likely they are to recommend your product to a friend or coworker and they respond on a scale from 0 (not likely at all) to 10 (extremely likely).
 
@@ -42,7 +45,7 @@ NPS survey responses are grouped into three categories:
 
 - **Detractors** – people who respond with 6 or below. They may have had a bad experience and are likely to complain to others.
 
-![NPS scale](../images/blog/nps-csat-ces/nps-score.png)
+![NPS scale](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/nps-csat-ces/nps-score.png)
 
 Your NPS score is the `% of promoters - % of detractors`. The scores range between -100 (100% negative) and +100 (100% positive).
 
@@ -97,7 +100,7 @@ Then, repeat the same steps for detractors who responded with 5 or 6. You can al
 
 ## What is CSAT?
 
-![CSAT survey](../images/blog/nps-csat-ces/csat-survey.png)
+![CSAT survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/nps-csat-ces/csat-survey.png)
 
 Customer satisfaction (CSAT) score measures how satisfied your users are with a specific feature or product. Responses range from 1-5 or 1-10 on an "extremely dissatisfied – extremely satisfied" scale.
 
@@ -113,7 +116,7 @@ Responses are grouped into two categories:
 
 - **Everyone else**
 
-![CSAT scale](../images/blog/nps-csat-ces/csat-score.png)
+![CSAT scale](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/nps-csat-ces/csat-score.png)
 
 Your CSAT score is the `Total number of positive responses / Total responses = % of satisfied customers`.
 
@@ -169,7 +172,7 @@ After gathering this data, identify patterns and translate these insights into a
 
 ## What is CES?
 
-![CES survey](../images/blog/nps-csat-ces/ces-survey.png)
+![CES survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/nps-csat-ces/ces-survey.png)
 
 Customer effort score (CES) measures how easy it is to use your product or feature. Users are asked "How easy was it to use `<name of feature>`" and a response scale ranging from 1 (very difficult) to 5 (very easy).
 
@@ -179,7 +182,7 @@ CES is great for pinpointing UX problems in your app.
 
 To find your CES score, calculate the average score of all your responses. That is: `sum of all responses / number of responses = CES score`
 
-![CES score](../images/blog/nps-csat-ces/ces-score.png)
+![CES score](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/nps-csat-ces/ces-score.png)
 
 For example, let's say you survey `100` people. If the sum of all their responses is `450`, your CES score is `4.5`.
 
@@ -221,7 +224,7 @@ Good questions to dig into are:
  
 Here's what we recommend:
 
-- **Use CSAT before before product-market fit.** Your app is constantly changing at this stage as you figure out what to build, so it makes sense to focus on the short term only. CSAT surveys enable to you quickly determine if your changes are meeting expectations, so you can iterate further. Also consider [measuring product-market fit](/founders/measure-product-market-fit) using a PMF survey.
+- **Use CSAT before product-market fit.** Your app is constantly changing at this stage as you figure out what to build, so it makes sense to focus on the short term only. CSAT surveys enable to you quickly determine if your changes are meeting expectations, so you can iterate further. Also consider [measuring product-market fit](/founders/measure-product-market-fit) using a PMF survey.
 
 - **Use NPS after you've achieved product-market fit.** At this stage, you're looking to grow and maintain a loyal user base. NPS provides a clearer picture than CSAT of which of your users are likely to retain or churn.
 

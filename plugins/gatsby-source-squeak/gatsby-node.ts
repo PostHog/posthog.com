@@ -14,6 +14,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     while (true) {
         let profileQuery = qs.stringify(
             {
+                filters: {
+                    teams: {
+                        id: {
+                            $notNull: true,
+                        },
+                    },
+                },
                 pagination: {
                     page,
                     pageSize: 100,
@@ -86,13 +93,16 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 topics: {
                     fields: ['id'],
                 },
+                resolvedBy: {
+                    fields: ['id'],
+                },
             },
         })
 
         const questions = await fetch(`${apiHost}/api/questions?${questionQuery}`).then((res) => res.json())
 
         for (let question of questions.data) {
-            const { topics, replies, profile, ...rest } = question.attributes
+            const { topics, replies, profile, resolvedBy, ...rest } = question.attributes
 
             if (!profile.data?.id) {
                 console.warn(`Question ${question.id} has no profile`)
@@ -117,6 +127,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     id: createNodeId(`squeak-topic-${topic.id}`),
                 })),
                 ...rest,
+                resolvedBy: createNodeId(`squeak-reply-${resolvedBy?.data?.id}`),
             })
 
             for (let reply of filteredReplies) {
@@ -209,6 +220,18 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 roadmaps: {
                     fields: ['id'],
                 },
+                profiles: {
+                    populate: '*',
+                },
+                leadProfiles: {
+                    fields: 'id',
+                },
+                crest: true,
+                teamImage: {
+                    populate: {
+                        image: true,
+                    },
+                },
             },
         },
         {
@@ -219,20 +242,42 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
 
     for (const team of teams.data) {
-        const { roadmaps, ...rest } = team.attributes
+        const { roadmaps, crest, teamImage, ...rest } = team.attributes
 
-        createNode({
+        const cloudinaryTeamImage = {
+            ...teamImage,
+            cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+            publicId: teamImage?.image?.data?.attributes?.provider_metadata?.public_id,
+            originalHeight: teamImage?.image?.data?.attributes?.height,
+            originalWidth: teamImage?.image?.data?.attributes?.width,
+            originalFormat: (teamImage?.image?.data?.attributes?.ext || '').replace('.', ''),
+        }
+
+        const cloudinaryCrest = {
+            ...crest,
+            cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+            publicId: crest?.data?.attributes?.provider_metadata?.public_id,
+            originalHeight: crest?.data?.attributes?.height,
+            originalWidth: crest?.data?.attributes?.width,
+            originalFormat: (crest?.data?.attributes?.ext || '').replace('.', ''),
+        }
+
+        const node = {
             id: createNodeId(`squeak-team-${team.id}`),
             squeakId: team.id,
             internal: {
                 type: `SqueakTeam`,
                 contentDigest: createContentDigest(team),
             },
+            teamImage: cloudinaryTeamImage,
+            crest: cloudinaryCrest,
             ...rest,
             roadmaps: roadmaps.data.map((roadmap) => ({
                 id: createNodeId(`squeak-roadmap-${roadmap.id}`),
             })),
-        })
+        }
+
+        createNode(node)
     }
 
     // Fetch all roadmaps
@@ -247,8 +292,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     fields: ['id'],
                 },
                 image: {
-                    fields: ['id', 'url'],
+                    fields: '*',
                 },
+                cta: true,
             },
         })
 
@@ -257,14 +303,23 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         for (const roadmap of roadmaps.data) {
             const { teams, githubUrls, image, ...rest } = roadmap.attributes
 
+            const cloudinaryMedia = {
+                ...image,
+                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                publicId: image?.data?.attributes?.provider_metadata?.public_id,
+                originalHeight: image?.data?.attributes?.height,
+                originalWidth: image?.data?.attributes?.width,
+                originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
+            }
+
             const node = {
-                id: createNodeId(`squeak-roadmap-${roadmap.id}`),
                 squeakId: roadmap.id,
                 internal: {
                     type: `SqueakRoadmap`,
                     contentDigest: createContentDigest(roadmap.attributes),
                 },
                 ...rest,
+                media: cloudinaryMedia,
                 ...(image.data && {
                     id: createNodeId(`squeak-image-${image.data.id}`),
                     url: image.data.attributes.url,
@@ -272,20 +327,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 teams: roadmap.attributes.teams.data.map((team) => ({
                     id: createNodeId(`squeak-team-${team.id}`),
                 })),
+                id: createNodeId(`squeak-roadmap-${roadmap.id}`),
             }
-
-            /*if (image) {
-                const url = `https://res.cloudinary.com/${image.cloud_name}/v${image.version}/${image.publicId}.${image.format}`
-    
-                const fileNode = await createRemoteFileNode({
-                    url,
-                    parentNodeId: node.id,
-                    createNode,
-                    createNodeId,
-                    cache,
-                })
-                node.thumbnail___NODE = fileNode?.id
-            }*/
 
             if (githubUrls?.length > 0 && process.env.GITHUB_API_KEY) {
                 node.githubPages = await Promise.all(
@@ -350,6 +393,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             profile: SqueakProfile! @link(by: "id", from: "profile.id")
             replies: [SqueakReply!] @link(by: "id", from: "replies.id")
             topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
+            resolvedBy: SqueakReply @link(by: "id")
         }
 
         type SqueakReply implements Node {
@@ -380,7 +424,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             id: ID!
             squeakId: Int!
             name: String!
-            profiles: [SqueakProfile!] @link(by: "id", from: "profiles.id")
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
         }
 
@@ -416,6 +459,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             eyes: Int
             plus1: Int
             minus1: Int
+            total_count: Int
         }
 
     `)

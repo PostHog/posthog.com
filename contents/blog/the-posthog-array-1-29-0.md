@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/1-28-0.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-28-0.png
 featuredImageType: full
 excerpt: >-
   Fully revamped Paths experience enables you to better explore what actions
@@ -86,7 +87,7 @@ If you're interested in better measuring your user engagement, DAU/WAU, WAU/MAU 
 
 ### Deprecation notice
 
-1. We're deprecating the sessions page and fully removing it in PostHog 1.30.0. Read more about it, [in this blog post](/blog/sessions-removal). If you have any feedback on this change, please [reach out](/slack).
+1. We're deprecating the sessions page and fully removing it in PostHog 1.30.0. Read more about it, [in this blog post](/blog/sessions-removal). If you have any feedback on this change, please [reach out](/posts).
 
 2. In PostHog 1.30.0 we will be introducing major improvements to the experience of using PostHog with multiple projects and that requires us to rework part of the API structure. Hence, in PostHog 1.29.0 the following API paths are deprecated, with straightforward replacements:
 
@@ -114,7 +115,7 @@ Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog
 
 ## PostHog News
 
-Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/handbook/small-teams/infrastructure).
+Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/teams/infrastructure).
 
 ## Community
 ### Community MVP 🏆

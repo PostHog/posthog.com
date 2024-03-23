@@ -26,14 +26,15 @@ import PostsTable from 'components/Edition/PostsTable'
 import { SortDropdown } from 'components/Edition/Views/Default'
 import { sortOptions } from 'components/Edition/Posts'
 import { AnimatePresence, motion } from 'framer-motion'
+import Tooltip from 'components/Tooltip'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div
-            className={`overflow-hidden rounded-full p-[1px] bg-white border border-light dark:border-dark ${props.className}`}
+            className={`overflow-hidden aspect-square rounded-full bg-white border border-light dark:border-dark ${props.className}`}
         >
             {props.src ? (
-                <img className="w-full h-full rounded-full bg-white border-white border-[2px]" alt="" src={props.src} />
+                <img className="w-full object-fill" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -90,6 +91,7 @@ export default function ProfilePage({ params }: PageProps) {
             },
         },
     })
+    const isCurrentUser = user?.profile?.id === id
 
     const profileQuery = qs.stringify(
         {
@@ -97,6 +99,25 @@ export default function ProfilePage({ params }: PageProps) {
                 avatar: true,
                 role: {
                     select: ['type'],
+                },
+                achievements: {
+                    ...(!isCurrentUser
+                        ? {
+                              filters: {
+                                  hidden: {
+                                      $ne: true,
+                                  },
+                              },
+                          }
+                        : null),
+                    populate: {
+                        achievement: {
+                            populate: {
+                                image: true,
+                                icon: true,
+                            },
+                        },
+                    },
                 },
                 teams: {
                     populate: {
@@ -173,6 +194,7 @@ export default function ProfilePage({ params }: PageProps) {
                             handleEditProfile={handleEditProfile}
                             setEditModalOpen={setEditModalOpen}
                             profile={{ ...profile, id }}
+                            mutate={mutate}
                         />
                     }
                     hideSurvey
@@ -262,7 +284,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                     initial={{ opacity: 0, translateY: '100%' }}
                                                     animate={{ opacity: 1, translateY: 0 }}
                                                     exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                                                    className={`-ml-4 z-50`}
+                                                    className={`-ml-4 z-[50]`}
                                                 >
                                                     <SortDropdown sort={sort} setSort={setSort} />
                                                 </motion.div>
@@ -298,10 +320,82 @@ type ProfileSidebarProps = {
     profile: ProfileData
     setEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>
     handleEditProfile: () => void
+    mutate: () => void
 }
 
-const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile }) => {
-    const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
+const Achievement = ({ title, description, image, icon, id, mutate, profile, ...other }) => {
+    const { user, getJwt } = useUser()
+    const [hidden, setHidden] = useState(other.hidden)
+    const [opacity, setOpacity] = useState(hidden ? 0.6 : 1)
+    const isCurrentUser = user?.profile?.id === profile.id
+    const handleClick = async (hidden: boolean) => {
+        if (isCurrentUser) {
+            setHidden(hidden)
+            try {
+                const jwt = await getJwt()
+                const body = {
+                    data: {
+                        achievements: [
+                            ...profile.achievements
+                                .filter((achievement) => achievement.id !== id)
+                                .map(({ id, hidden }) => ({ id, hidden })),
+                            {
+                                id,
+                                hidden,
+                            },
+                        ],
+                    },
+                }
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user.profile.id}?populate=avatar`, {
+                    method: 'PUT',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+                await mutate()
+            } catch (err) {
+                console.error(err)
+            }
+        }
+    }
+
+    useEffect(() => {
+        setOpacity(hidden ? 0.6 : 1)
+    }, [hidden])
+
+    const ImageContainer = isCurrentUser ? 'button' : 'span'
+
+    return (
+        <Tooltip
+            contentContainerClassName="!border-none !p-0 !bg-transparent"
+            tooltipClassName="!rounded-none"
+            placement="bottom-start"
+            content={() => (
+                <div className="max-w-[250px] text-left px-2 rounded-sm overflow-hidden border border-border dark:border-dark bg-light dark:bg-dark">
+                    <div className="mb-4 -mx-4 -mt-2">
+                        <img src={image?.data?.attributes?.url} />
+                    </div>
+                    <h4 className="text-lg m-0">{title}</h4>
+                    <p className="m-0 mt-1 text-sm mb-2">{description}</p>
+                </div>
+            )}
+        >
+            <ImageContainer
+                onClick={isCurrentUser ? () => handleClick(!hidden) : undefined}
+                onMouseEnter={isCurrentUser ? () => setOpacity(0.8) : undefined}
+                onMouseOut={isCurrentUser ? () => setOpacity(hidden ? 0.6 : 1) : undefined}
+                style={{ opacity }}
+                className={`relative transition-opacity`}
+            >
+                <img className="w-full" src={icon?.data?.attributes?.url} />
+            </ImageContainer>
+        </Tooltip>
+    )
+}
+
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile, mutate }) => {
     const [editProfile, setEditProfile] = useState(false)
     const { user } = useUser()
     const breakpoints = useBreakpoint()
@@ -358,6 +452,28 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                     </ul>
                 </SidebarSection>
             ) : null}
+
+            {profile.achievements?.length > 0 && (
+                <SidebarSection title="Achievements">
+                    <ul className="list-none m-0 p-0 grid grid-cols-5 gap-2">
+                        {profile.achievements
+                            .sort((a, b) => a.id - b.id)
+                            .map(({ achievement, hidden, id }) => {
+                                return (
+                                    <li key={id}>
+                                        <Achievement
+                                            {...achievement.data.attributes}
+                                            id={id}
+                                            hidden={hidden}
+                                            profile={profile}
+                                            mutate={mutate}
+                                        />
+                                    </li>
+                                )
+                            })}
+                    </ul>
+                </SidebarSection>
+            )}
 
             {profile.teams
                 ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {

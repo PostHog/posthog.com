@@ -1,11 +1,15 @@
 ---
 title: How to track scroll depth
 date: 2023-04-13
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: https://www.youtube-nocookie.com/embed/T9MbFiDU6hY
-tags: ["configuration", "insights", 'product analytics']
+featuredVideo: 'https://www.youtube-nocookie.com/embed/T9MbFiDU6hY'
+tags:
+  - configuration
+  - insights
+  - product analytics
 ---
     
 You can waste a lot of effort on parts of pages people never see. While [session replay](/tutorials/explore-insights-session-recordings) is great for understanding individual sessions, an aggregate understanding of how much of a page is viewed is valuable too. This is where tracking scroll depth can be helpful. 
@@ -183,7 +187,7 @@ export default function App({ Component, pageProps }) {
 
 This captures details about scroll depth into PostHog.
 
-![Left page](../images/tutorials/scroll-depth/left-page.png)
+![Left page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/scroll-depth/left-page.png)
 
 ### Capturing scroll depth on pageleave
 
@@ -229,7 +233,7 @@ export default function App({ Component, pageProps }) {
 
 With this, we’ll get a custom `$pageleave` event.
 
-![Pageleave](../images/tutorials/scroll-depth/pageleave.png)
+![Pageleave](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/scroll-depth/pageleave.png)
 
 ## Creating scroll depth insights
 
@@ -237,22 +241,22 @@ Now that we are capturing scroll depth, we can use PostHog to analyze each of th
 
 First, create an insight for the average max scroll depth. To do this, create a new insight, choose the `left page` (or `Pageleave`) event, change "Total count" to "Property value (average)," then select  "last scroll percentage" as your property.
 
-![Average scroll insight](../images/tutorials/scroll-depth/average.png)
+![Average scroll insight](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/scroll-depth/average.png)
 
 Second, break this down by pages to see the average scroll depth on different pages. Alternatively, you could filter the `left page` event by the current URL to get the average last scroll percentage for a specific page.
 
-![Breakdown](../images/tutorials/scroll-depth/page-breakdown.png)
+![Breakdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/scroll-depth/page-breakdown.png)
 
 Third, create an insight to figure out what percentage of pageviews for a specific page made it to the bottom. 
 
 To do this, add a graph series for pageviews where the current URL contains the slug you want, in our case "big." Next, change the `left page` event back to "Total count" and add a filter where the max scroll percentage equals 1. You can also do this for scrolling at all (by using the `scrolled` property). Once done, use formula mode to divide the `left page` series by the `Pageview` series.
 
-![Full page](../images/tutorials/scroll-depth/full-page-percentage.png)
+![Full page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/scroll-depth/full-page-percentage.png)
 
 Once you’ve done this, you have scroll depth tracked and basic insights to analyze your pages. You can continue using the different properties we capture to figure out which pages are fully viewed, and which aren’t.
 
 ## Further reading
 
-- [How to set up a React app heatmap with PostHog](/tutorials/react-heatmap)
+- [How to set up a React app heatmap](/tutorials/react-heatmap)
 - [How to use session recordings to improve your support experience](/tutorials/session-recordings-for-support)
 - [How to use session recordings to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)

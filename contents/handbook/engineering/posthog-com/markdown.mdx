@@ -2,11 +2,66 @@
 title: Markdown
 ---
 
+There are some nifty MDX components available for use in Markdown content. Because these components are included globally, you don't need to do anything special to use them (like renaming `.md` to `.mdx` or manually importing them at the top of the file).
+
+## Product screenshots
+
+The `<ProductScreenshot>` component encapsulates an image with a border and background. It's useful since the app's background matches the website background, and without using this component, it can be hard to differentiate between the screenshot and normal page content. ([See an example](/docs/session-replay/how-to-control-which-sessions-you-record) of this component in action.)
+
+It supports dark mode screenshots (optional). Here's how to use it:
+
+1. Import the image(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
+
+  ```
+  ---
+export const  = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
+export const  = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
+  ```
+1. Use the component wherever you want the image to appear.
+
+  ```
+  <ProductScreenshot
+    imageLight={ImgSampleConfigLight} 
+    imageDark={ImgSampleConfigDark} 
+    alt="Sampling config shown set to 100% i.e. no sampling" 
+    classes="rounded"
+  />
+  ```
+
+  Optionally pass `zoom={false}` if you don't want the image to be zoomable, otherwise it will be zoomable by default.
+
+  _Note: If you don't have a dark image, just leave out the `imageDark` prop and the light screenshot will be used for both color modes._
+
+## Product videos
+
+Th `<ProductVideo />` component works the same as product screenshots (above) but supports light and dark videos.
+
+1. Import the video(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
+
+  ```
+  ---
+export const  = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel.mp4"
+export const  = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel-dark.mp4"
+
+  ```
+
+1. Use the component wherever you want the video(s) to appear.
+
+  ```
+  <ProductVideo
+    videoLight={NewFunnelLight} 
+    videoDark={NewFunnelDark} 
+    classes="rounded"
+  />
+  ```
+
+  _Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
+
 ## Codeblocks
 
 The PostHog website has a custom codeblock component that comes with a number of useful features built-in:
 
-- [Syntax highlighting](#adding-syntax-highlighting)
+- [Syntax highDarking](#adding-syntax-highlighting)
 - [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
 - [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
 
@@ -166,3 +221,15 @@ cert-manager:
     enabled: true
 ```
 
+## Private links
+
+Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL. Use the `<PrivateLink />` component for this. ([Here's an example.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
+
+```
+<PrivateLink url="https://path/to/private/link">
+  click here
+</PrivateLink>
+
+```
+
+Private links will always open in a new tab.

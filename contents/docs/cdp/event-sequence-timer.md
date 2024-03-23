@@ -1,10 +1,11 @@
 ---
 title: Event Sequence Timer
-github: https://github.com/PostHog/event-sequence-timer-plugin
-installUrl: https://app.posthog.com/project/apps?name=Event%20Sequence%20Timer%20Plugin
-thumbnail: ../../cdp/thumbnails/event-sequence-timer-plugin.png
+github: 'https://github.com/PostHog/event-sequence-timer-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Event%20Sequence%20Timer%20Plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/event-sequence-timer-plugin.png
 tags:
-    - event-timer
+  - event-timer
 ---
 
 > 🚧 **Note:** We are currently in the process of reworking our app server and have therefore **disabled new installs of the event sequence timer.** You can still analyze the timing of event sequences using [HogQL](/docs/hogql).
@@ -51,7 +52,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Event Sequence Timer' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

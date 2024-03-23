@@ -1,9 +1,10 @@
 ---
 title: Google Pub/Sub
-github: https://github.com/vendasta/pubsub-plugin
-thumbnail: ../../cdp/thumbnails/pub-sub-export.png
+github: 'https://github.com/vendasta/pubsub-plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/pub-sub-export.png
 tags:
-    - pub-sub
+  - pub-sub
 ---
 
 > This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
@@ -12,7 +13,7 @@ This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.goo
 
 ## Requirements
 
-This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -20,7 +21,7 @@ You'll also need a Google Cloud Pub/Sub account to connect to.
 
 ## Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Pub/Sub' and select the app, press Install.
 3. Upload your Google Cloud key .json file. ([How to get the file.](https://cloud.google.com/pubsub/docs/reference/libraries))
 4. Enter your Topic ID.

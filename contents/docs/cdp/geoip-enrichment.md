@@ -1,10 +1,11 @@
 ---
 title: GeoIP Enricher
-github: https://github.com/PostHog/posthog-plugin-geoip
-installUrl: https://app.posthog.com/project/apps?name=GeoIP
-thumbnail: ../../cdp/thumbnails/geoip.png
+github: 'https://github.com/PostHog/posthog-plugin-geoip'
+installUrl: 'https://app.posthog.com/project/apps?name=GeoIP'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/geoip.png
 tags:
-    - geoip
+  - geoip
 ---
 
 This app enriches PostHog events and persons with IP location data. Simply enable this app and from that point on, your new events will have GeoIP data added, allowing you to locate users and run queries based on geographic data.
@@ -24,7 +25,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 ## Installation
 
 1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
+2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'GeoIP'
 4. Select the GeoIP app, press 'Install' and follow the on-screen instructions
 

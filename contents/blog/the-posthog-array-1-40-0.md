@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
 category: PostHog news
 tags:
@@ -29,19 +30,19 @@ Want to know more about what we're up to? [Subscribe to our new newsletter](http
 
 ### New: Redesigned calendar and date components
 
-![lemon calendar](../images/blog/array/1-40-0-lemon-calendar.png)
+![lemon calendar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-40-0-lemon-calendar.png)
 
 The 1.40.0 update is all about visual polish, and we're starting with new calendar and date components. These are some of the most used modals in PostHog, so we've given careful attention to providing an improved and more unified experience.
 
 ### New: Overhauled annotations
 
-![annotation](../images/blog/array/1-40-0-annotation-modal.png)
+![annotation](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-40-0-annotation-modal.png)
 
 We've overhauled [annotations](/manual/annotations) with a new look and interface. This change resolves several layout and interaction issues that had previously been impacting annotations. We've also touched up the annotations page to highlight important information better!
 
 ### New: Revamped persons modals
 
-![person modal](../images/blog/array/1-40-0-person-modal.png)
+![person modal](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-40-0-person-modal.png)
 
 Clicking datapoints in an insight is one of our favorite ways to analyze the users behind the numbers. The new person modal now looks and feels like the rest of the app. We've made it easier for you to search and perform actions on those lists of users, too.
 
@@ -51,7 +52,7 @@ Struggling with keeping toolbar and recordings settings separate? Us too... That
 
 ### Improved: Retention insight update
 
-![retention insight](../images/blog/array/1-40-0-retention.png)
+![retention insight](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-40-0-retention.png)
 
 Once again, we've cleaned up the UI on the retention insight to keep up with all the styling updates we've had across the board. The end result is more consistent with the rest of our product, with lots of little touches which add visual flair and create an improved experience.
 
@@ -78,7 +79,7 @@ We always welcome contributions from our community and this time we want to than
 - [Thebigbignooby](https://github.com/Thebigbignooby) for correcting an error in our documentation.
 - [Klamas1](https://github.com/klamas1) for adding nodeSelector and tolerations to hooks. 
 
-Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our community page](/posts). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 
 ## Open roles at PostHog
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:

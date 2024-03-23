@@ -3,12 +3,15 @@ date: 2022-02-18
 title: I used to think you don't need product people. I was wrong.
 author:
   - james-hawkins
-featuredImage: ../images/blog/product-people.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-people.png
 featuredImageType: full
 tags:
   - Founders
   - Product
   - Being a founder
+crosspost:
+  - Blog
 ---
 
 When PostHog was fresh out of YC last year, there were two things we focused on: (i) build and (ii) talk to customers. Hiring a product person felt like it would slow us down. Engineers on our team would speak to our users (also engineers) - surely they'd know what's best to prioritize? We didn't want our engineers to be "shielded" from our customers.
@@ -34,7 +37,7 @@ These were all traps I wanted to avoid for PostHog and lead me to favor hiring m
 
 ## It starts with expectation setting
 
-![product management meme](../images/blog/product-people-blog/product-management-meme.png)
+![product management meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-people-blog/product-management-meme.png)
 
 Alas.
 
@@ -66,7 +69,7 @@ PostHog still sends financial and revenue data each time, and has modelling to c
 
 Specifically, this is the list we currently care about:
 
-* Quality sign ups (we look for signups that match our [Ideal Customer Profile](../handbook/strategy/overview#target-customers-for-2022))
+* Quality sign ups (we look for signups that match our [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework))
 * Conversion rate of high quality sign ups to paid
 * Deployment conversion rate
 * Number of discoveries inside PostHog (this is people creating a data visualization with filtering - the more users do this, the better we retain them)

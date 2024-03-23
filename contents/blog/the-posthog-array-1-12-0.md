@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -23,7 +24,7 @@ Please also update your `posthog-js` version to at least `1.3.5` if you have it 
 
 ### Shared Dashboards
 
-![](../images/shared-dashboard.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/shared-dashboard.png)
 
 Dashboard on a TV in your office? Want to have a public stats page? Share a dashboard with someone who doesn't have a PostHog account? You can now publicly share a dashboard. Just click "Share Dashboard" and enable sharing. You'll get a link that's publicly accessible.
 
@@ -31,13 +32,13 @@ Changed your mind? You can always disable sharing.
 
 ### Aggregate Functions
 
-![](../images/aggregate.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/aggregate.png)
 
 Want to know the average revenue per user? Want to know the lowest browser version anyone is using? You can now do Sum, Max, Min and Avg calculations on any event property and graph them in trends!
 
 ### Global Annotations
 
-![](../images/annotations.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/annotations.png)
 
 Digging through git commits to find out what changed to make the graphs go hay-wire? No more! You can now annotate when something happened (a big release, a bugfix or a launch) and make it super easy for your team-mates to figure out what's going on. Now global.
 
@@ -45,13 +46,13 @@ As part of this, you can now also manage, add and delete annotations from a cent
 
 ### Funnel Step Time 
 
-![](../images/funnel-step-time.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/funnel-step-time.png)
 
 You can now see how long it takes users on average to get through steps in a funnel.
 
 ### Regex Filtering
 
-![](../images/regex.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/regex.png)
 
 Regex master? Put those skills to use on any property with regex filtering
 
@@ -71,13 +72,13 @@ Clicking on any section in the retention table will tell you exactly which users
 * We've [fixed various issues with annotations](https://github.com/PostHog/posthog/pull/1291)
 * We don't refresh the Events table if you [don't select a property](https://github.com/PostHog/posthog/pull/1285)
 * "All time" date filter [works on funnels again](https://github.com/PostHog/posthog/pull/1252)
-* You can now [delete users from your team(https://github.com/PostHog/posthog/pull/1274)
+* You can now [delete users from your team](https://github.com/PostHog/posthog/pull/1274)
 * Fixed an issue where timestamps [were displayed incorrectly on sessions](https://github.com/PostHog/posthog/pull/1294)
 * Fixed a bug where selecting "last 48 hours" [wouldn't return results](https://github.com/PostHog/posthog/pull/1264)
 * Fixed issues with funnels loading [on dashboards](https://github.com/PostHog/posthog/pull/1266)
 * [UUIDs are ugly](https://github.com/PostHog/posthog/pull/1255), so we just cut them off rather than wrapping entire lines in the events table
 * [Samcaspus](https://github.com/samcaspus) contributed a little bit of magic: we now automatically adjust your date range if [you change the interval](https://github.com/PostHog/posthog/pull/1253)
-* We added a button to dashboard that allows users to [easily add a new item(https://github.com/PostHog/posthog/pull/1242)
+* We added a button to dashboard that allows users to [easily add a new item](https://github.com/PostHog/posthog/pull/1242)
 * enhanced ctrl + click new tab opening feature [](https://github.com/PostHog/posthog/pull/1248)
 * Massively speed up [loading live actions](https://github.com/PostHog/posthog/pull/1182)
 * Fix password validation and improve minimums notice (closes #1197) [](https://github.com/PostHog/posthog/pull/1204)
