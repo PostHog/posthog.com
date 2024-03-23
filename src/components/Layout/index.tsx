@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
@@ -12,9 +12,97 @@ import { IProps, LayoutProvider } from './context'
 import { Mobile as MobileNav } from 'components/MainNav'
 import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
+import { CallToAction } from 'components/CallToAction'
+import { motion } from 'framer-motion'
+import { FixedSizeList as List } from 'react-window'
+import Toggle from 'components/Toggle'
+import Logo from 'components/Logo'
+
+const fields = [
+    { type: 'text', name: 'firstName', placeholder: 'First name' },
+    { type: 'text', name: 'lastName', placeholder: 'Last name' },
+    { type: 'email', name: 'email', placeholder: 'Email' },
+    { type: 'text', name: 'companyName', placeholder: 'Company name' },
+    { type: 'number', name: 'noe', placeholder: 'Number of employees' },
+    { type: 'text', name: 'wdyhau', placeholder: 'Where did you hear about us?' },
+    { type: 'text', name: 'lopp', placeholder: 'Length of procurement process (years)' },
+    { type: 'number', name: 'cloutScore', placeholder: 'Clout score' },
+    { type: 'text', name: 'osVersion', placeholder: 'OS version' },
+]
+
+const repeatedFields = Array(100)
+    .fill(fields)
+    .flat()
+    .map((field, index) => ({
+        ...field,
+        name: `${field.name}_${index}`,
+    }))
+    .sort(() => Math.random() - 0.5)
+
+const Input = (props) => {
+    return <input {...props} className="w-full p-2 border border-border dark:border-dark rounded-md" />
+}
+
+const Row = ({ index, style }) => {
+    const field = repeatedFields[index]
+    return (
+        <div style={style}>
+            <Input {...field} />
+        </div>
+    )
+}
+
+const WhitepaperBanner = () => {
+    const [blackPaper, setBlackPaper] = useState(false)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
+    return (
+        <motion.div
+            initial={{ translateX: '100%', opacity: 0 }}
+            animate={{ translateX: '0%', opacity: 1 }}
+            className="bg-white dark:bg-dark rounded-md border border-border dark:border-dark fixed bottom-4 right-4 z-[50] flex"
+        >
+            <div
+                className={`${
+                    blackPaper ? 'bg-black dark' : 'bg-white'
+                } w-[400px] p-4 flex justify-center flex-col m-2 border border-border dark:border-dark`}
+            >
+                <Logo className="mx-auto mt-2" />
+                <div className="my-auto">
+                    <h1 className={`${blackPaper ? 'text-white' : 'text-black'} leading-snug text-5xl text-center`}>
+                        {blackPaper ? 'Blackpaper' : 'Whitepaper'}
+                    </h1>
+                </div>
+            </div>
+            <div className="w-[380px] flex flex-col items-center my-4">
+                <div className="self-start mx-[15px] mb-4">
+                    <h3 className="m-0">Get a free whitepaper</h3>
+                    <p className="opacity-70 font-semibold m-0">Just fill out the fields below</p>
+                </div>
+                <form onSubmit={handleSubmit} className="m-0">
+                    <List height={370} itemCount={repeatedFields.length} itemSize={50} width={350}>
+                        {Row}
+                    </List>
+                    <div className="my-4">
+                        <Toggle
+                            checked={blackPaper}
+                            label="Blackpaper"
+                            onChange={(checked) => setBlackPaper(checked)}
+                        />
+                        <p className="text-sm m-0">(same as white paper but black background)</p>
+                    </div>
+                    <CallToAction width="full">
+                        Get your free {blackPaper ? 'blackpaper' : 'whitepaper'} now!
+                    </CallToAction>
+                </form>
+            </div>
+        </motion.div>
+    )
+}
 
 const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    const { compact } = useLayoutData()
+    const { compact, enterpriseMode } = useLayoutData()
     return (
         <div className={className}>
             {compact ? (
@@ -32,6 +120,7 @@ const Article = ({ children, className = '' }: { children: React.ReactNode; clas
                     <MobileNav />
                 </>
             )}
+            {enterpriseMode && <WhitepaperBanner />}
         </div>
     )
 }

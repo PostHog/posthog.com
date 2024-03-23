@@ -1,14 +1,13 @@
-import React from 'react'
-import { TrackedCTA } from '../CallToAction'
+import React, { useState } from 'react'
+import { CallToAction, TrackedCTA } from '../CallToAction'
 import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
-import { SignupCTA } from 'components/SignupCTA'
 import Accordion from './Accordion'
 import './hero.scss'
 import { useLayoutData } from 'components/Layout/hooks'
-
-const heroTitle = 'How engineers build better products'
+import usePostHog from 'hooks/usePostHog'
+import { SignupCTA } from 'components/SignupCTA'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -29,6 +28,27 @@ export const FeatureStrip = ({ className = '' }) => {
     )
 }
 
+const EnterpriseSignupCTA = () => {
+    const posthog = usePostHog()
+    const [confirm, setConfirm] = useState(false)
+
+    const handleClick = () => {
+        if (!confirm) {
+            setConfirm(true)
+            return
+        }
+        window.location.href = `https://${
+            posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
+        }.posthog.com/signup`
+    }
+
+    return (
+        <CallToAction onClick={handleClick}>
+            {confirm ? `Are you sure you don’t want to book a demo?` : 'Get started - free'}
+        </CallToAction>
+    )
+}
+
 const Feature = ({ title, icon, url }) => {
     return (
         <li className="w-24">
@@ -45,6 +65,9 @@ const Feature = ({ title, icon, url }) => {
 
 export default function Hero() {
     const { enterpriseMode } = useLayoutData()
+    const heroTitle = enterpriseMode
+        ? 'The modern digital optimization platform'
+        : 'How engineers build better products'
 
     return (
         <section className="flex flex-col justify-center items-center">
@@ -63,17 +86,20 @@ export default function Hero() {
                         ))}
                     </h1>
                     <h2 className={`${heading('subtitle', 'primary', 'mt-0 mb-6')} home-hero-subtitle`}>
-                        The single platform to analyze, test, observe, and deploy new features
+                        {enterpriseMode
+                            ? 'Product solutions reimagined for the 21 century'
+                            : 'The single platform to analyze, test, observe, and deploy new features'}
                     </h2>
                     <div className="flex justify-center items-center gap-2 home-hero-cta">
-                        <SignupCTA />
+                        {enterpriseMode ? <EnterpriseSignupCTA /> : <SignupCTA />}
                         <TrackedCTA
+                            key={enterpriseMode ? 'talk-to-sales' : 'get-a-demo'}
                             event={{ name: `clicked Get a demo` }}
                             href="/book-a-demo"
                             type="secondary"
                             size="lg"
                         >
-                            Get a demo
+                            {enterpriseMode ? 'Talk to sales' : 'Get a demo'}
                         </TrackedCTA>
                     </div>
                 </div>
