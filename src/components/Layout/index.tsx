@@ -60,13 +60,13 @@ const WhitepaperBanner = () => {
     return (
         <motion.div
             initial={{ translateX: '100%', opacity: 0 }}
-            animate={{ translateX: '0%', opacity: 1 }}
+            animate={{ translateX: '0%', opacity: 1, transition: { duration: 3 } }}
             className="bg-white dark:bg-dark rounded-md border border-border dark:border-dark fixed bottom-4 right-4 z-[50] flex"
         >
             <div
                 className={`${
                     blackPaper ? 'bg-black dark' : 'bg-white'
-                } w-[400px] p-4 flex justify-center flex-col m-2 border border-border dark:border-dark`}
+                } w-[300px] p-4 flex justify-center flex-col m-2 border border-border dark:border-dark`}
             >
                 <Logo className="mx-auto mt-2" />
                 <div className="my-auto">
@@ -81,7 +81,7 @@ const WhitepaperBanner = () => {
                     <p className="opacity-70 font-semibold m-0">Just fill out the fields below</p>
                 </div>
                 <form onSubmit={handleSubmit} className="m-0">
-                    <List height={370} itemCount={repeatedFields.length} itemSize={50} width={350}>
+                    <List height={200} itemCount={repeatedFields.length} itemSize={47} width={350}>
                         {Row}
                     </List>
                     <div className="my-4">
