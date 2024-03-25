@@ -18,6 +18,7 @@ import { FixedSizeList as List } from 'react-window'
 import Toggle from 'components/Toggle'
 import Logo from 'components/Logo'
 import { IconX } from '@posthog/icons'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const fields = [
     { type: 'text', name: 'firstName', placeholder: 'First name' },
@@ -72,12 +73,7 @@ const WhitepaperBanner = ({ onClose }) => {
                     blackPaper ? 'bg-black dark' : 'bg-white'
                 } w-[300px] p-4 flex justify-center flex-col m-2 border border-border dark:border-dark`}
             >
-                <Logo className="mx-auto mt-2" />
-                <div className="my-auto">
-                    <h1 className={`${blackPaper ? 'text-white' : 'text-black'} leading-snug text-5xl text-center`}>
-                        {blackPaper ? 'Blackpaper' : 'Whitepaper'}
-                    </h1>
-                </div>
+                <StaticImage src="../../../public/images/enterprise/whitepaper-poster-light.jpg" />
             </div>
             <div className="w-[380px] flex flex-col items-center my-4">
                 <div className="self-start mx-[15px] mb-4">
