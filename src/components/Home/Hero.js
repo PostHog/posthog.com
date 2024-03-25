@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CallToAction, TrackedCTA } from '../CallToAction'
 import { heading, section } from './classes'
 import Icon from './Icon'
@@ -8,6 +8,8 @@ import './hero.scss'
 import { useLayoutData } from 'components/Layout/hooks'
 import usePostHog from 'hooks/usePostHog'
 import { SignupCTA } from 'components/SignupCTA'
+import Modal from 'components/Modal'
+import { IconX } from '@posthog/icons'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -61,59 +63,96 @@ const Feature = ({ title, icon, url }) => {
 }
 
 export default function Hero() {
+    const [selectedIndex, setSelectedIndex] = useState()
+    const [showNPS, setShowNPS] = useState(false)
     const { enterpriseMode } = useLayoutData()
     const heroTitle = enterpriseMode
         ? 'The modern digital optimization platform'
         : 'How engineers build better products'
 
+    useEffect(() => {
+        setShowNPS(enterpriseMode)
+    }, [enterpriseMode])
+
     return (
-        <section className="flex flex-col justify-center items-center">
-            <div className="relative w-full z-10">
-                <div className={section('z-10 relative md:!mb-8')}>
-                    <h1 className={`${heading()} overflow-hidden pb-1 home-hero-title`}>
-                        {heroTitle.split(' ').map((word, index) => (
-                            <span
-                                key={word}
-                                className={`${
-                                    index > 1 ? 'text-red dark:text-yellow' : ''
-                                } ml-4 first:ml-0 inline-block`}
-                            >
-                                {word}
-                            </span>
-                        ))}
-                    </h1>
-                    <h2 className={`${heading('subtitle', 'primary', 'mt-0 mb-6')} home-hero-subtitle`}>
-                        {enterpriseMode
-                            ? 'Product solutions reimagined for the 21 century'
-                            : 'The single platform to analyze, test, observe, and deploy new features'}
-                    </h2>
-                    <div className="flex justify-center items-center gap-2 home-hero-cta">
-                        {enterpriseMode ? (
-                            <CallToAction size="lg" to="/book-a-demo">
-                                Contact sales
-                            </CallToAction>
-                        ) : (
-                            <SignupCTA />
-                        )}
-                        <TrackedCTA
-                            key={enterpriseMode ? 'talk-to-sales' : 'get-a-demo'}
-                            event={{ name: `clicked Get a demo` }}
-                            href="/book-a-demo"
-                            type="secondary"
-                            size="lg"
-                        >
-                            {enterpriseMode ? 'Contact enterprise sales' : 'Get a demo'}
-                        </TrackedCTA>
-                    </div>
-                    {enterpriseMode && (
-                        <div className="flex justify-center mt-2 enterprise-mode-home-hero-cta">
-                            <EnterpriseSignupCTA />
+        <>
+            <Modal open={showNPS} setOpen={setShowNPS}>
+                <div className="absolute flex justify-center items-center w-full h-full text-center ">
+                    <div className="bg-white w-[300px] dark:bg-dark p-4 rounded-md border border-border dark:border-dark relative">
+                        <div className="text-right">
+                            <button onClick={() => setShowNPS(false)}>
+                                <IconX className="w-4 h-4" />
+                            </button>
                         </div>
-                    )}
+                        <h4>How would you rate our site?</h4>
+                        <div className="grid grid-cols-10 rounded-sm border border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
+                            {Array.from({ length: 10 }, (_, index) => (
+                                <button
+                                    onClick={() => setSelectedIndex(index)}
+                                    className={selectedIndex === index ? 'bg-black text-white' : ''}
+                                    key={index + 1}
+                                >
+                                    {index + 1}
+                                </button>
+                            ))}
+                        </div>
+                        <button
+                            onClick={() => setShowNPS(false)}
+                            className="w-full px-4 py-2 mt-4 bg-black text-white rounded-md"
+                        >
+                            Submit
+                        </button>
+                    </div>
                 </div>
-                <Slider />
-                <Accordion />
-            </div>
-        </section>
+            </Modal>
+            <section className="flex flex-col justify-center items-center">
+                <div className="relative w-full z-10">
+                    <div className={section('z-10 relative md:!mb-8')}>
+                        <h1 className={`${heading()} overflow-hidden pb-1 home-hero-title`}>
+                            {heroTitle.split(' ').map((word, index) => (
+                                <span
+                                    key={word}
+                                    className={`${
+                                        index > 1 ? 'text-red dark:text-yellow' : ''
+                                    } ml-4 first:ml-0 inline-block`}
+                                >
+                                    {word}
+                                </span>
+                            ))}
+                        </h1>
+                        <h2 className={`${heading('subtitle', 'primary', 'mt-0 mb-6')} home-hero-subtitle`}>
+                            {enterpriseMode
+                                ? 'Product solutions reimagined for the 21 century'
+                                : 'The single platform to analyze, test, observe, and deploy new features'}
+                        </h2>
+                        <div className="flex justify-center items-center gap-2 home-hero-cta">
+                            {enterpriseMode ? (
+                                <CallToAction size="lg" to="/book-a-demo">
+                                    Contact sales
+                                </CallToAction>
+                            ) : (
+                                <SignupCTA />
+                            )}
+                            <TrackedCTA
+                                key={enterpriseMode ? 'talk-to-sales' : 'get-a-demo'}
+                                event={{ name: `clicked Get a demo` }}
+                                href="/book-a-demo"
+                                type="secondary"
+                                size="lg"
+                            >
+                                {enterpriseMode ? 'Contact enterprise sales' : 'Get a demo'}
+                            </TrackedCTA>
+                        </div>
+                        {enterpriseMode && (
+                            <div className="flex justify-center mt-2 enterprise-mode-home-hero-cta">
+                                <EnterpriseSignupCTA />
+                            </div>
+                        )}
+                    </div>
+                    <Slider />
+                    <Accordion />
+                </div>
+            </section>
+        </>
     )
 }
