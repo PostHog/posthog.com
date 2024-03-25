@@ -17,6 +17,7 @@ import { motion } from 'framer-motion'
 import { FixedSizeList as List } from 'react-window'
 import Toggle from 'components/Toggle'
 import Logo from 'components/Logo'
+import { IconX } from '@posthog/icons'
 
 const fields = [
     { type: 'text', name: 'firstName', placeholder: 'First name' },
@@ -52,7 +53,7 @@ const Row = ({ index, style }) => {
     )
 }
 
-const WhitepaperBanner = () => {
+const WhitepaperBanner = ({ onClose }) => {
     const [blackPaper, setBlackPaper] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -63,6 +64,12 @@ const WhitepaperBanner = () => {
             animate={{ translateX: '0%', opacity: 1, transition: { duration: 3 } }}
             className="bg-white dark:bg-dark rounded-md border border-border dark:border-dark fixed bottom-4 right-4 z-[50] flex"
         >
+            <button
+                onClick={onClose}
+                className="w-8 h-8 bg-white rounded-full border border-border dark:border-dark flex items-center justify-center absolute -top-3 -right-3"
+            >
+                <IconX className="w-4 h-4" />
+            </button>
             <div
                 className={`${
                     blackPaper ? 'bg-black dark' : 'bg-white'
@@ -103,6 +110,14 @@ const WhitepaperBanner = () => {
 
 const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     const { compact, enterpriseMode } = useLayoutData()
+    const [whitepaperOpen, setWhitepaperOpen] = useState(false)
+
+    useEffect(() => {
+        if (enterpriseMode) {
+            setWhitepaperOpen(true)
+        }
+    }, [enterpriseMode])
+
     return (
         <div className={className}>
             {compact ? (
@@ -120,7 +135,7 @@ const Article = ({ children, className = '' }: { children: React.ReactNode; clas
                     <MobileNav />
                 </>
             )}
-            {enterpriseMode && <WhitepaperBanner />}
+            {whitepaperOpen && <WhitepaperBanner onClose={() => setWhitepaperOpen(false)} />}
         </div>
     )
 }
