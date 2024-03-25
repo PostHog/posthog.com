@@ -115,6 +115,20 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         return () => window.removeEventListener('message', onMessage)
     }, [])
 
+    useEffect(() => {
+        if (enterpriseMode) {
+            document.querySelector('body')?.setAttribute('style', 'font-family: Times New Roman !important')
+        } else {
+            document.querySelector('body')?.removeAttribute('style')
+        }
+    }, [enterpriseMode])
+
+    useEffect(() => {
+        if (pathname !== '/') {
+            setEnterpriseMode(false)
+        }
+    }, [pathname])
+
     return (
         <Context.Provider
             value={{
