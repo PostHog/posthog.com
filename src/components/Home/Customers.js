@@ -18,6 +18,7 @@ import yCombinator from './images/customers/y-combinator.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Link from 'components/Link'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const Logo = ({ src, alt, className = '' }) => (
     <img className={`icon px-4 md:px-6 lg:px-4 w-full ${className}`} src={src} alt={alt} />
@@ -51,11 +52,20 @@ const Customer = ({ image, alt, className = '', url }) => {
 }
 
 export default function Customers() {
+    const { enterpriseMode } = useLayoutData()
     return (
         <section className="md:-mt-[1px] bg-dark md:pb-0 relative after:absolute after:h-48 after:bottom-0 after:left-0 after:w-full after:bg-gradient-to-b after:from-dark after:to-[#13161B] after:content-[''] -mb-px">
             <div className="py-8 md:pt-12 xl:pt-16 px-4 relative z-20">
                 <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-primary-dark max-w-screen-2xl mx-auto">
-                    These folks <span className="text-yellow">build products users want</span> with
+                    {enterpriseMode ? (
+                        <>
+                            These customers <span className="text-yellow">increase shareholder value</span> with PostHog
+                        </>
+                    ) : (
+                        <>
+                            These folks <span className="text-yellow">build products users want</span> with
+                        </>
+                    )}
                     <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
                 </h2>
             </div>

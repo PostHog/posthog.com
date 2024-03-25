@@ -360,6 +360,14 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
 const keyboardShortcut =
     'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs'
 
+const enterpiseModeNames = {
+    Products: 'Solutions',
+    Pricing: 'Plans',
+    Docs: 'Developer resources',
+    Community: 'Press releases/Newsroom',
+    Company: 'Investor relations',
+}
+
 export const Main = () => {
     const { user } = useUser()
 
@@ -439,7 +447,9 @@ export const Main = () => {
                                         }`}
                                     >
                                         {active && <ActiveBackground />}
-                                        <span className="relative">{name}</span>
+                                        <span className="relative">
+                                            {enterpriseMode ? enterpiseModeNames[name] : name}
+                                        </span>
                                     </Link>
                                 </li>
                             )
@@ -455,6 +465,10 @@ export const Main = () => {
                                 event={'clicked Dashboard in main nav'}
                             >
                                 Dashboard
+                            </CallToAction>
+                        ) : enterpriseMode ? (
+                            <CallToAction size="sm" type="outline" className="hidden sm:flex mr-2" to="/book-a-demo">
+                                Talk to sales
                             </CallToAction>
                         ) : (
                             <SignupCTA size="sm" type="outline" className="hidden sm:flex mr-2" text="Get started" />
