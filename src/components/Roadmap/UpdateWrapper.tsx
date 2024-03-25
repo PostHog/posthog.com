@@ -1,3 +1,4 @@
+import { IconPencil } from '@posthog/icons'
 import Link from 'components/Link'
 import RoadmapForm, { Status } from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
@@ -31,12 +32,18 @@ export default function UpdateWrapper({
     status,
     formClassName = '',
     editButtonClassName = '',
+    roundButton,
+    onSubmit,
+    showSuccessMessage = false,
 }: {
     id: number
     children: JSX.Element
     status: Status
     formClassName?: string
     editButtonClassName?: string
+    roundButton?: boolean
+    onSubmit?: (roadmap: any) => void
+    showSuccessMessage?: boolean
 }) {
     const { user } = useUser()
     const [editing, setEditing] = useState(false)
@@ -54,7 +61,7 @@ export default function UpdateWrapper({
                     body: description,
                     images: [],
                     topic: topic?.data || undefined,
-                    team: teams?.data?.[0]?.id || undefined,
+                    team: teams?.data?.[0] || undefined,
                     featuredImage: image?.data ? { file: null, objectURL: image.data.attributes.url } : undefined,
                     betaAvailable,
                     milestone,
@@ -76,20 +83,34 @@ export default function UpdateWrapper({
                 initialValues={initialValues}
                 buttonText="Update"
                 id={id}
-                onSubmit={() => {
+                onSubmit={(roadmap) => {
                     fetchRoadmapItem()
                     setSuccess(true)
                     setEditing(false)
+                    onSubmit?.(roadmap)
                 }}
             />
         </div>
     ) : (
         <>
-            {success && <RoadmapSuccess description="Roadmap will update on next build" id={id} />}
+            {showSuccessMessage && success && (
+                <RoadmapSuccess description="Roadmap will update on next build" id={id} />
+            )}
             <div className="relative">
                 {initialValues && (
-                    <button className={`font-bold text-red ${editButtonClassName}`} onClick={() => setEditing(true)}>
-                        Edit
+                    <button
+                        className={`group z-10 font-bold p-2 rounded-full border ${
+                            roundButton
+                                ? ' bg-white dark:bg-dark border-light dark:border-dark'
+                                : '-mt-2 opacity-50 hover:bg-white hover:dark:bg-dark border-transparent hover:border-light hover:dark:border-dark'
+                        } leading-none hover:scale-[1.02] hover:-translate-y-px active:translate-y-px active:scale-[.98] ${editButtonClassName}`}
+                        onClick={() => setEditing(true)}
+                    >
+                        <IconPencil
+                            className={`w-5 h-5 inline-block ${
+                                roundButton ? 'opacity-50 group-hover:opacity-100' : ''
+                            }}`}
+                        />
                     </button>
                 )}
                 <span>{children}</span>

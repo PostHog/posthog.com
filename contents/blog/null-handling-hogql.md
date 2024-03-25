@@ -1,12 +1,14 @@
 ---
-title: "Adventures in null handling: Null money, null problems"
+title: 'Adventures in null handling: Null money, null problems'
 date: 2023-07-07
-author: ["marius-andra"]
+author:
+  - marius-andra
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/orange-blog-image.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/orange-blog-image.jpg
 featuredImageType: full
 category: Engineering
 ---

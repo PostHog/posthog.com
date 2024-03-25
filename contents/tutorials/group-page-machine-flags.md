@@ -1,10 +1,12 @@
 ---
-title: Targeting feature flags on groups, pages, machines, and more
+title: 'Targeting feature flags on groups, pages, machines, and more'
 date: 2023-08-14
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 To decide what value to return, PostHog’s feature flag service uses a flag key and an entity. Which entity to use it up to you, and these don't necessarily need to be _users_ – you can also target organizations, pages, machines, and more. 
@@ -15,13 +17,13 @@ This tutorial shows you how to target these non-user entities in your use of fea
 
 If you enabled [group analytics](/docs/product-analytics/group-analytics) and set up group idenitifcation, targeting by groups, teams, or organizations is easy. When creating your feature flag, change the "Match by" value under "Release conditions" your group type name, add any conditions you want, and roll out the flag.
 
-![Match by organization](../images/tutorials/group-page-machine-flags/org.png)
+![Match by organization](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/group-page-machine-flags/org.png)
 
 ### Property or cohort filter
 
 Another way to target an organization or team is to use the email or similar repeated identifier of a user. This enables you to filter for groups without using group analytics. Similarly, you can create a cohort for the organization, then use that as a condition.
 
-![Email condition](../images/tutorials/group-page-machine-flags/email.png)
+![Email condition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/group-page-machine-flags/email.png)
 
 ## Targeting pages
 
@@ -76,7 +78,7 @@ If instead, you want to target users who visited a page repeatedly, you can crea
 
 > **Why can’t I use a behavioral cohort directly?** Calculating a behavioral (based on events) cohorts is slow. Feature flags care about speed. Adding behavioral cohorts to flag evaluation would significantly slow them down. Read [a full explanation in our docs](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag).
 
-![Cohort creation video](../images/tutorials/group-page-machine-flags/cohort.mp4)
+![Cohort creation video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/group-page-machine-flags/cohort.mp4)
 
 ## Targeting services, machines, devices, applications
 

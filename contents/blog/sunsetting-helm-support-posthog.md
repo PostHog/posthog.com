@@ -1,12 +1,14 @@
 ---
 date: 2023-02-08
-title: "Sunsetting Kubernetes support for PostHog"
+title: Sunsetting Kubernetes support for PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["tim-glaser"]
-featuredImage: ../images/blog/k8s-sunset/posthog-bye-kubernetes.png
+author:
+  - tim-glaser
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/k8s-sunset/posthog-bye-kubernetes.png
 featuredImageType: full
 category: PostHog news
 tags:

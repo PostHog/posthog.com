@@ -1,10 +1,11 @@
 ---
 title: SemVer Flattener
-github: https://github.com/PostHog/semver-flattener-plugin
-installUrl: https://app.posthog.com/project/apps?name=SemVer
-thumbnail: ../../cdp/thumbnails/semver-flattener.png
+github: 'https://github.com/PostHog/semver-flattener-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=SemVer'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/semver-flattener.png
 tags:
-    - semver-flattener
+  - semver-flattener
 ---
 
 The SemVer Flattener splits a valid SemVer version into the following 
@@ -53,7 +54,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'SemVer Flattener' and select the app, press Install.
 
 That's it!

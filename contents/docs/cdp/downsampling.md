@@ -1,10 +1,11 @@
 ---
 title: Downsampler
-github: https://github.com/PostHog/downsampling-plugin
-installUrl: https://app.posthog.com/project/apps?name=Downsampling
-thumbnail: ../../cdp/thumbnails/downsampling.png
+github: 'https://github.com/PostHog/downsampling-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Downsampling'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/downsampling.png
 tags:
-    - downsampler
+  - downsampler
 ---
 
 This app enables you to reduce how many events a deployment of PostHog will ingest. This is especially useful for users who have huge volumes of data, but don't need to analyze it all and want to avoid large bills.
@@ -17,7 +18,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Downsampling' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

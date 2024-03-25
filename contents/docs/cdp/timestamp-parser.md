@@ -1,10 +1,11 @@
 ---
 title: Timestamp Parser
-github: https://github.com/PostHog/timestamp-parser-plugin
-installUrl: https://app.posthog.com/project/apps?name=Timestamp%20Parser
-thumbnail: ../../cdp/thumbnails/timestamp-parser.png
+github: 'https://github.com/PostHog/timestamp-parser-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Timestamp%20Parser'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/timestamp-parser.png
 tags:
-    - timestamp-parser
+  - timestamp-parser
 ---
 
 This app parses the timestamp of each event that comes in to PostHog and adds the following time-based properties:
@@ -22,7 +23,7 @@ This app parses the timestamp of each event that comes in to PostHog and adds th
 
 Here is an example of what these properties look like after they have been added to an event.
 
-![event with timestamp properties added](../../images/docs/apps/timestamp-parser/timestamp-properties.png)
+![event with timestamp properties added](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/timestamp-parser/timestamp-properties.png)
 
 ## Installation
 
@@ -36,7 +37,7 @@ Once the app has been enabled, it will automatically start parsing all new event
 > The Timestamp Parser requires a PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 > Not running 1.30.0? Find out [how to update](https://posthog.com/docs/runbook/upgrading-posthog).
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Timestamp Parser'.
 3. Click on the toggle to enable the app.
 
@@ -59,11 +60,11 @@ By filtering and breaking down events, we can now easily answer questions such a
 
 Here's an example of creating a filter in a [trends](/docs/user-guides/trends) insight to only show events that were send on a Saturday or Sunday.
 
-![filter for only events on Saturday or Sunday](../../images/docs/apps/timestamp-parser/weekend-filter.png)
+![filter for only events on Saturday or Sunday](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/timestamp-parser/weekend-filter.png)
 
 We can also break down an insight by `month` to get an idea of how it varies over the course of a year.
 
-![breaking down an insight by month](../../images/docs/apps/timestamp-parser/month-breakdown.png)
+![breaking down an insight by month](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/timestamp-parser/month-breakdown.png)
 
 Overall, the timestamp parser is a simple yet incredibly powerful app that these examples only scratch the surface on.
 

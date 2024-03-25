@@ -1,21 +1,24 @@
 ---
-title: How Mintlify launched user-facing analytics, powered by PostHog
+title: 'How Mintlify launched user-facing analytics, powered by PostHog'
 customer: Mintlify
-logo: ../images/customers/mintlify/logo.svg
-logoDark: ../images/customers/mintlify/logo_dark.svg
-featuredImage: ../images/customers/mintlify/featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/logo_dark.svg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/featured.png
 industries:
-    - SaaS, DevTool
+  - 'SaaS, DevTool'
 users:
-    - Leadership
-    - Engineering
-    - Product
-    - Users
+  - Leadership
+  - Engineering
+  - Product
+  - Users
 toolsUsed:
-    - Session replay
-    - Autocapture
-    - PostHog Cloud
-    - API
+  - Session replay
+  - Autocapture
+  - PostHog Cloud
+  - API
 date: 2023-04-06
 ---
 
@@ -49,7 +52,7 @@ Adding session replay increased the scope, but just three days later Mintlify ha
 
 “We were able to ship this so fast because we had some secret weapons up our sleeve,” says Han. “First was PostHog, which could handle all the data for us and meant there was nothing further to build or configure. Second, was a tool called [Tremor](https://www.tremor.so/), which let us just pipe data in and generate some visuals.”
 
-![Mintlify Analytics Powered By PostHog](../images/customers/mintlify/mintlify-analytics.png)
+![Mintlify Analytics Powered By PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/mintlify/mintlify-analytics.png)
 <Caption>Mintlify's team built user-facing analytics in just three days, using PostHog and Tremor</Caption>
 
 Best of all, because all data is already tracked in Mintlify’s own PostHog instance, there’s no need for setting up additional projects or reports — all user-facing data is simply segmented and pulled out of Mintlify’s existing instance. 

@@ -1,14 +1,16 @@
 ---
 title: Why we use GitHub as our CMS
 date: 2023-03-23
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y
+featuredVideo: 'https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y'
 category: Inside PostHog
 ---
 
@@ -61,7 +63,7 @@ Developers don’t want to spend time in a CMS. They want to use tools they alre
 
 It also encourages our marketing team to be more technical. They must understand how the code and content interact. For example, when missing metadata causes an error in the web app. The marketing team can figure out and solve this themselves, rather than asking the development team to do it.
 
-![VSCode screenshot of this blog](../images/blog/github-cms/blog.png)
+![VSCode screenshot of this blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/github-cms/blog.png)
 
 By using GitHub as a CMS, we stay engineering-focused. Everyone works like an engineer, and that enables us to understand and build a better product for them. This helps PostHog succeed in the long run. 
 

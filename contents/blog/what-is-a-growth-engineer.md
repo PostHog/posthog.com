@@ -2,29 +2,30 @@
 title: What is a growth engineer? (And why they're awesome)
 date: 2023-04-26
 author:
-    - ian-vanagas
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Startups
 tags:
- - Explainers
+  - Explainers
 ---
 
 Every startup loves to see its growth metrics – signups, subscriptions, and revenue, etc. – go up, yet most engineers work on things that don't directly impact those metrics. Growth engineers are different. They focus entirely on projects dedicated to driving as much growth as possible, no matter where they build those projects.
 
 In this post, we'll explain the benefits of growth engineers, the type of people who succeed as growth engineers, their skills, what they work on, why you should hire them, and how growth engineering works at PostHog.
 
-> **Who are we?** [PostHog](/) is an open source suite of product and data tools built to help engineers build successful products. Relevant to this post, we have a [team of growth engineers](/handbook/small-teams/growth) who work to maximize the number of people who get value out of PostHog.
+> **Who are we?** [PostHog](/) is an open source suite of product and data tools built to help engineers build successful products. Relevant to this post, we have a [team of growth engineers](/teams/growth) who work to maximize the number of people who get value out of PostHog.
 
 ## What are the characteristics of a growth engineer?
 
 To start, it is useful to understand who growth engineers are as people. When comparing them to software engineers, here are the characteristics that stand out:
 
-![Characteristics](../images/blog/what-is-a-growth-engineer/characteristics.png)
+![Characteristics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/characteristics.png)
 
 1. **Entrepreneurial**. Growth engineers, especially at PostHog, have an interest in the business as a whole as well as the hustle to find ways to improve it. They find areas they can make a large impact on the growth metrics, and develop solutions themselves to improve those metrics. Like an entrepreneur, they are independent and scrappy.
 
@@ -74,7 +75,7 @@ As [Terra](https://www.workatastartup.com/jobs/59415), a YC and Samsung-backed h
 
 If all this sounds like a unicorn, you aren’t wrong. This is again why we find former technical founders as a good fit for this role. They have the business and product knowledge to develop growth ideas and strategies, the practical technical knowledge to implement them, as well as a familiarity with the data a product produces.
 
-![Growth engineers' power](../images/blog/what-is-a-growth-engineer/thanos.png)
+![Growth engineers' power](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/thanos.png)
 
 > **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/blog/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
 
@@ -90,7 +91,7 @@ So what do growth engineers apply their skills to? We already covered that they 
 
 ## Growth engineering at PostHog
 
-At PostHog, our [growth engineers](/handbook/small-teams/growth) are key to how we onboard, deal with pricing, drive signups, and interact with customers in-app. Without them, we would leave a lot on the table. To explain how they do this, we can look at their three areas of focus over the past few months:
+At PostHog, our [growth engineers](/teams/growth) are key to how we onboard, deal with pricing, drive signups, and interact with customers in-app. Without them, we would leave a lot on the table. To explain how they do this, we can look at their three areas of focus over the past few months:
 
 ### Billing
 
@@ -102,7 +103,7 @@ It includes creating a [billing service](https://github.com/PostHog/posthog/pull
 
 Our growth team are improving the signup funnel by running A/B tests of options like [single sign on buttons](https://github.com/PostHog/posthog/pull/13234), [verifying emails](https://github.com/PostHog/posthog/pull/13632), and adding two-factor authentication.
 
-![Experiment example](../images/blog/what-is-a-growth-engineer/experiment.png)
+![Experiment example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/experiment.png)
 <Caption>An example of the pricing call to action experiment.</Caption>
 
 The results of this include:
@@ -127,7 +128,7 @@ Growth engineers likely won't help you find traction, they need products to conn
 
 From our experience, we'd recommend the technical and entreprenuerial growth engineer, this often arises in former founders. Later-stage teams often find success with larger growth teams, and more marketing-focused roles, but we haven't made it that far yet. 
 
-Still curious about our growth team? Check out [their small team page](/handbook/small-teams/growth).
+Still curious about our growth team? Check out [their small team page](/teams/growth).
 
 ## Further reading
 

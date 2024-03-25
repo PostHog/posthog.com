@@ -1,15 +1,17 @@
 ---
 date: 2023-01-18
-title: Why use feature flags? Benefits, types and use cases, explained
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/experiment-hog.jpg
+title: 'Why use feature flags? Benefits, types and use cases, explained'
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
   - Feature management
   - Feature flags
   - Product engineers
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 ## What is a feature flag?
@@ -229,7 +231,7 @@ Each has different features, here's a comparison of them:
 
 Except for PostHog, each of these tools focuses specifically on feature flags. In doing so, they miss out on the benefits of having all of your data in one place. For example, to get data on the usage of a feature flag, you would need to integrate a third-party analytics platform. 
 
-PostHog has all the tools you need to build a great product, and they are integrated together. Feature flags are connected to analytics and visualizations which are connected to session recordings. [Our starter plan](/pricing) includes unlimited events, 1M events and 15k recordings for free
+PostHog has all the tools you need to build a great product, and they are integrated together. Feature flags are connected to analytics and visualizations which are connected to session recordings. [Our starter plan](/pricing) includes unlimited events, 1M events and 5k recordings for free
 
 ## Further reading
 

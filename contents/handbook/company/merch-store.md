@@ -48,29 +48,34 @@ Follow Printfection's instructions on creating a giveaway [campaign](https://hel
 
 ## How are Prinfection and Shopify connected?
 
-We integrated the two via Zapier. Unfortunately this part is a little complex - [here are the details on exactly how the integration is set up.](https://help.printfection.com/hc/en-us/articles/218014268-Integrating-Shopify-Printfection-via-Zapier-)
+This uses a custom Shopify app [using these instructions](https://help.printfection.com/hc/en-us/articles/218014268-Integrating-Shopify-Printfection). It leverages product metafields to send product/variant info to Printfection.
 
-If you need to make any changes to how the two are connected, reference the article above and follow it _very_ carefully.
-
-In summary:
-
-1. Order is created when someone checks out on Shopify
-2. This order is picked by our PostHog Zapier account (details in 1Password)
-3. Zapier then sends this order to Printfection along with delivery details
+[Here's the Printfection collection](https://app.printfection.com/account/campaign/overview.php?storeid=301365) (login requried) linked to our Shopify store where available products can be managed.
 
 ## How do I add a new product to Shopify?
 
-If you have created a new product in Printfection, adding it to Shopify is quite straightforward but a little nuanced - and _very_ important to get right:
+If you have created a new product in Printfection, adding it to Shopify is quite straightforward but a little nuanced - and _very_ important to get right.
 
-1. Go to Shopify, click 'Products' -> 'Add Product'
-2. Add all the details about the product, including images, description, title etc.
-3. Add the IDs from Printfection (this is essential for the integration to work). To do this review the section "1. Add products and required ID fields to your store" from [this setup document](https://help.printfection.com/hc/en-us/articles/218014268-Integrating-Shopify-Printfection-via-Zapier-).
-4. Select "Track Inventory" and set it to match what is available in Printfection by adding the quantity to the Printfection location name.
-5. Set the product to 'Active'.
+### If the product has variants (like sizing, color options):
 
-If you're confused at any point, take a look at an existing product to ensure you have all the right details.
+1. On Printfection in the [Merch store collection](https://app.printfection.com/account/campaign/overview.php?storeid=301365), click _Items_ and make sure the item is added to the campaign.
+1. Once added, click to the details and copy the **Item ID**.
+1. In Shopify, add the product (Products -→ Add product) and add product details
+1. Add the **Item ID** from Printfection to the _SKU (Stock Keeping Unit)_ field in Shopify (under _Inventory_)
+1. Scroll to the bottom and look for _Product metafields_ and _Variant metafields_.
+  1. In _Product subtitle_, add a short description. This will appear on the merch store collection page with the title and price. (The full product description only appears when viewing product details.)
+  1. For _CampaignID_, enter `301365` which is the ID of the Merch store collection campaign ID in Printfection.
+1. If the item has variants (eg: multiple sizes, color options)...
+  1. Add the relevant variant (eg: Size)
+  1. In Printfection, when viewing the item details, look for _Size breakdown_ which will have a list of sizes and a _Size ID_ field for each.
+  1. In Shopify, click into a variant.
+    1. Make sure the SKU is entered same as above
+    1. Scroll to bottom and make sure the CampaignID is set to `301365`
+    1. Copy/paste the `SizeID` from Printfection for the applicable size`
+    1. Set the variant's inventory to match
+1. Make sure the product is set to Active
 
-> Warning: If you have something with different sizes, it's a little more complex, so make sure you read the documentation carefully.
+> **Note:** Because of how PostHog.com is built, product changes will only appear the next time the site is built. (Merging any PR will do this, but will take up to 45 minutes to be live.)
 
 ## Troubleshooting customer orders
 

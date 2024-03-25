@@ -3,9 +3,9 @@ title: Batch exports
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 Batch exports give you a platform to schedule data exports to supported destinations. Batch exports are built on [Temporal](https://www.temporal.io/) to enable reliable data exports, ensuring your data reaches your destination.
@@ -42,7 +42,7 @@ As an example, creating a batch export of events with daily frequency today will
 
 On each batch export view, you are presented with a list of the latest executed runs:
 
-![batch export runs](../../../images/docs/batch-exports/batch-exports-runs.png)
+![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/batch-exports-runs.png)
 
 Each run has:
 1. A state indicator which can be either "Starting", "Running", "Failed", or "Completed."
@@ -57,11 +57,11 @@ You can use batch exports for past data stored in PostHog, known as historical d
 
 A "Create historic export" button can be found in the UI:
 
-![batch exports ui](../../../images/docs/batch-exports/batch-exports-ui.png)
+![batch exports ui](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/batch-exports-ui.png)
 
 Which will let you input the start and end date of the historical export:
 
-![create historic export](../../../images/docs/batch-exports/create-historic-export.png)
+![create historic export](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/create-historic-export.png)
 
 Immediately afterwards, the historical export runs that fall within the bounds selected are scheduled.
 

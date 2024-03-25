@@ -3,10 +3,15 @@ title: Web analytics
 sidebar: Docs
 showTitle: true
 availability:
-    free: partial
-    selfServe: partial
-    enterprise: partial
+  free: partial
+  selfServe: partial
+  enterprise: partial
 ---
+
+export const webAnalyticsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/web-analytics/web-analytics-light-mode.png"
+export const webAnalyticsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/web-analytics/web-analytics-dark-mode.png"
+export const webAnalyticsVideoLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/web-analytics/web-analytics-light-mode.mp4"
+export const webAnalyticsVideoDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/web-analytics/web-analytics-dark-mode.mp4"
 
 > Web analytics is currently an [opt-in public beta](/docs/getting-started/enable-betas). This means it's not yet a perfect experience, but we'd love to know your thoughts. Please [share your feedback](http://app.posthog.com/home#supportModal) and [follow our roadmap](https://github.com/PostHog/posthog/issues/18547).
 
@@ -14,7 +19,12 @@ Web analytics enables you to easily track and monitor many of the most important
 
 Unlike product analytics, web analytics offers a more streamlined and focused experience. This is especially useful for marketers, content creators, or anyone used to tools like Google Analytics. It includes a dashboard that offers essential metrics, such as visitors, views, sessions, session duration, bounce rate, paths, referrers, and more.
 
-![Web analytics](../../images/docs/web-analytics/web-analytics.png)
+<ProductScreenshot
+    imageLight = {webAnalyticsLight} 
+    imageDark = {webAnalyticsDark}
+    alt="Web analytics" 
+    classes="rounded"
+/>
 
 ## Get started with web analytics
 
@@ -30,7 +40,12 @@ Follow the [installation instructions](/docs/product-analytics/installation) to 
 
 In PostHog, click your profile icon in the top right and then click "Feature preview." In the [feature preview modal](https://app.posthog.com/home#panel=feature-previews), enable "Web Analytics Dashboard"
 
-![Enable web Analytics video](../../images/docs/web-analytics/web-analytics.mp4)
+<ProductVideo
+    videoLight = {webAnalyticsVideoLight}
+    videoDark = {webAnalyticsVideoDark}
+    alt = "Enable web Analytics video"
+    classes = "rounded"
+/>
 
 ### 3. Go to the web analytics dashboard
 

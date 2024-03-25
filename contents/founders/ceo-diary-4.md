@@ -3,13 +3,14 @@ date: 2021-12-09
 title: '"How come your website is so nice?"'
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Marketing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 I've been asked this three times today, so I thought I'd explain it from a founder's perspective. This is what I've learned so far.

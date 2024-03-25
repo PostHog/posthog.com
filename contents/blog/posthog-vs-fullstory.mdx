@@ -1,17 +1,18 @@
 ---
 date: 2023-05-25
-title: "In-depth: PostHog vs FullStory"
+title: 'In-depth: PostHog vs FullStory'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg
 featuredImageType: full
 author:
-    - joe-martin
+  - joe-martin
 category: General
 tags:
-    - Comparisons
+  - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -48,15 +49,15 @@ As an open source company, we build in public and give you unrivalled access. Yo
 
 This comparison will compare all available features, regardless of pricing tier. Visit the [pricing section in the FAQ](#how-much-do-posthog-and-fullstory-cost) for more information on pricing.
 
-<ComparisonTable column1="FullStory" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="FullStory">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
   <ComparisonRow column1={true} column2={true} feature="Session replays" description="Watch real users use your product; debug behaviour" />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={true} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Test changes and analyze impact" />
-  <ComparisonRow column1={false} column2={true} feature="In-app prompts and messages" description="Send messages to users in your app" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze impact" />
+  <ComparisonRow column1={true} column2={false} feature="In-app prompts and messages" description="Send messages to users in your app" />
   <ComparisonRow column1={true} column2={true} feature="Apps/Integrations" description="Push and pull data to other destinations" />
-  <ComparisonRow column1={false} column2={true} feature="Open source" description="Build your own apps and contribute code" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
 
 - **Product analytics:** Both FullStory and PostHog offer product analytics, but _what_ they offer is drastically different. We explore this comparison in greater detail below. 
@@ -69,16 +70,16 @@ This comparison will compare all available features, regardless of pricing tier.
 
 FullStory is aimed at UI designers and general product managers, while PostHog is suited to product engineers, front-end developers and more technical users. As a result, PostHog offers a wider range of analytics tools, including [its own SQL dialect for detailed analysis](/docs/product-analytics/hogql).
 
-<ComparisonTable column1="FullStory" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="FullStory">
   <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Log page views, clicks and other custom events." />
   <ComparisonRow column1={true} column2={true} feature="Trends" description="Track your data over time and visualize in charts." />
   <ComparisonRow column1={true} column2={true} feature="Funnels" description="Visualize conversion rates and drop-offs." />
   <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Display a collection of insights and trends." />
-  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Automatically highlight factors affecting funnel conversion rates." />
-  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Group events by users in the same company, project, or any other attribute." />
-  <ComparisonRow column1={false} column2={true} feature="Lifecycle insights" description="Break down events from new, returning, resurrecting, and dormant users." />
+  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Automatically highlight factors affecting funnel conversion rates." />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Group events by users in the same company, project, or any other attribute." />
+  <ComparisonRow column1={true} column2={false} feature="Lifecycle insights" description="Break down events from new, returning, resurrecting, and dormant users." />
   <ComparisonRow column1={true} column2={true} feature="Retention insights" description="Understand churn with returning user actions." />
-  <ComparisonRow column1={false} column2={true} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
+  <ComparisonRow column1={true} column2={false} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
   <ComparisonRow column1={true} column2={true} feature="Path insights" description="Inspect how users journey through your product." />
 </ComparisonTable>
 
@@ -94,20 +95,20 @@ You can also do this in reverse by filtering for session replays where particula
 
 FullStory is _primarily_ a session replay tool, while PostHog is all-in-one platform. FullStory's specialism means it has some extra features compared to Posthog, though the gap isn’t as large as you may imagine... and it's closing fast.
 
-<ComparisonTable column1="FullStory" column2="PostHog">
-  <ComparisonRow column1={true} column2="In beta" feature="iOS app replays" description="Record user sessions in iOS apps." />
-  <ComparisonRow column1={true} column2="On the roadmap" feature="Android app replays" description="Record user sessions in Android apps" />
+<ComparisonTable column1="PostHog" column2="FullStory">
+  <ComparisonRow column1="In beta" column2={true} feature="iOS app replays" description="Record user sessions in iOS apps." />
+  <ComparisonRow column1="On the roadmap" column2={true} feature="Android app replays" description="Record user sessions in Android apps" />
   <ComparisonRow column1={true} column2={true} feature="Web app replays" description="Capture replays from single-page apps" />
   <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Avoid capturing user data" />
   <ComparisonRow column1={true} column2={true} feature="Conditional capturing" description="Only capture the sessions you want" />
   <ComparisonRow column1={true} column2={true} feature="Performance monitoring" description="Monitor network activity and performance." />
-  <ComparisonRow column1={false} column2={true} feature="Custom playlists" description="Create playlists of related replays" />
+  <ComparisonRow column1={true} column2={false} feature="Custom playlists" description="Create playlists of related replays" />
   <ComparisonRow column1={true} column2={true} feature="Share replays" description="Generate timestamped short links for sharing" />
-  <ComparisonRow column1={true} column2={false} feature="Add notes to replays" description="Add notes to a timebar when sharing" />
-  <ComparisonRow column1={false} column2={true} feature="DOM explorer" description="Explore an interactive snapshot of replays" />
+  <ComparisonRow column1={false} column2={true} feature="Add notes to replays" description="Add notes to a timebar when sharing" />
+  <ComparisonRow column1={true} column2={false} feature="DOM explorer" description="Explore an interactive snapshot of replays" />
   <ComparisonRow column1={true} column2={true} feature="Export replays" description="Save replay files offline for storage." />
-  <ComparisonRow column1="1 month*" column2="Up to 3 months" feature="Data retention" description="" />
-  <ComparisonRow column1="No free allowance**" column2="5,000 sessions every month" feature="Free replay allowance" />
+  <ComparisonRow column1="Up to 3 months" column2="1 month*" feature="Data retention" description="" />
+  <ComparisonRow column1="5,000 sessions every month" column2="No free allowance**" feature="Free replay allowance" />
 </ComparisonTable>
 
 <sup>*</sup> Data retention increases on more expensive plans.
@@ -118,10 +119,10 @@ Beyond this, PostHog and FullStory are roughly comparable even in spite of FullS
 ### Heatmaps, clickmaps and scrollmaps
 Different types of heatmaps enable you to see where users are focusing their attention – or even precisely where they are looking on a page. FullStory is inarguably a better heatmapping tool, but PostHog's clickmaps offer all the essential information – especially when used in conjunction with session replays and product analytics.
 
-<ComparisonTable column1="FullStory" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="FullStory">
   <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="Visualize where users click on a page" />
   <ComparisonRow column1={false} column2={false} feature="Scrollmaps" description="Check where users scroll to" />
-  <ComparisonRow column1={true} column2={false} feature="Movement maps" description="Visualize mouse movements" />
+  <ComparisonRow column1={false} column2={true} feature="Movement maps" description="Visualize mouse movements" />
   <ComparisonRow column1={false} column2={false} feature="Eye tracking" description="Support for eye-tracking tools" />
 </ComparisonTable>
 
@@ -132,18 +133,18 @@ PostHog is also open source, meaning [you can easily create your own apps](/tuto
 
 Below are some of the most popular apps and integrations for FullStory and PostHog:
 
-<ComparisonTable column1="FullStory" column2="PostHog">
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" description="Sync event and person data" />
+<ComparisonTable column1="PostHog" column2="FullStory">
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Sync event and person data" />
   <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync event and person data" />
-  <ComparisonRow column1={false} column2={true} feature="Zapier" description="Export events for use in Zaps" />
-  <ComparisonRow column1={false} column2={true} feature="Stripe" description="Sync customer and invoice data" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" description="Export events for use in Zaps" />
+  <ComparisonRow column1={true} column2={false} feature="Stripe" description="Sync customer and invoice data" />
   <ComparisonRow column1={true} column2={true} feature="Intercom" description="Extract and load data to external platforms" />
-  <ComparisonRow column1={false} column2={true} feature="Customer.io" description="Sync data between platforms" />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" description="Ingest Sentry errors for analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Customer.io" description="Sync data between platforms" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Ingest Sentry errors for analysis" />
   <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events from Segment" />
-  <ComparisonRow column1={false} column2={true} feature="Amazon Redshift" description="Export data to Redshift" />
-  <ComparisonRow column1={false} column2={true} feature="Amazon S3" description="Export data to a S3 bucket" />
-  <ComparisonRow column1={false} column2={true} feature="Azure Blob Storage" description="Export data to Microsoft Azure" />
+  <ComparisonRow column1={true} column2={false} feature="Amazon Redshift" description="Export data to Redshift" />
+  <ComparisonRow column1={true} column2={false} feature="Amazon S3" description="Export data to a S3 bucket" />
+  <ComparisonRow column1={true} column2={false} feature="Azure Blob Storage" description="Export data to Microsoft Azure" />
   <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" description="Export data to GCS" />
   <ComparisonRow column1={true} column2={true} feature="Snowflake" description="Export data to Snowflake database" />
   <ComparisonRow column1={true} column2={true} feature="BigQuery" description="Export data to Google BigQuery for analysis" />
@@ -155,7 +156,7 @@ Below are some of the most popular apps and integrations for FullStory and PostH
 
 Both PostHog and FullStory support a broad range of tracking options and libraries, and manual event instrumentation, as well as autocapture.
 
-<ComparisonTable column1="FullStory" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="FullStory">
   <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Automatically track events without instrumentation" />
   <ComparisonRow column1={true} column2={true} feature="Combined events" description="Track related events as a single trackable action or behavior" />
   <ComparisonRow column1={true} column2={true} feature="Reverse proxy available" description="Send events from your own domain to capture more data" />
@@ -170,11 +171,11 @@ Both PostHog and FullStory support a broad range of tracking options and librari
 
 ## Security and compliance
 
-<ComparisonTable column1="FullStory" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="FullStory">
   <ComparisonRow column1={true} column2={true} feature="GDPR-ready" />
   <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" />
   <ComparisonRow column1={true} column2={true} feature="Data anonymization" />
-  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" />
+  <ComparisonRow column1={true} column2={false} feature="Cookieless tracking option" />
   <ComparisonRow column1={true} column2={true} feature="SOC 2 certified" />
   <ComparisonRow column1={true} column2={true} feature="SAML/SSO available" />
   <ComparisonRow column1={true} column2={true} feature="2FA available" />

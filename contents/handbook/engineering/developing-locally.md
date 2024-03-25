@@ -349,16 +349,16 @@ You can narrow the run down to only files under matching paths:
 pnpm jest --testPathPattern=frontend/src/lib/components/IntervalFilter/intervalFilterLogic.test.ts
 ```
 
-To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:
+To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab). You may also need to install Playwright with `pnpm exec playwright install`. And then run:
 
 ```bash
-pnpm test:visual-regression
+pnpm test:visual
 ```
 
 To only update snapshots for stories under a specific path, run:
 
 ```bash
-pnpm test:visual-regression:stories frontend/src/lib/Example.stories.tsx
+pnpm test:visual:update frontend/src/lib/Example.stories.tsx
 ```
 
 ### Backend
@@ -423,4 +423,4 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 
 ## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. Learn how to do so [here](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).

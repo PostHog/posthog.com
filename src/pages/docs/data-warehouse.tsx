@@ -7,67 +7,12 @@ import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
-import Modal from 'components/Modal'
-import HubSpotForm from 'components/HubSpotForm'
-import { Close2 } from 'components/Icons'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { MenuContainer } from 'components/PostLayout/MobileNav'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 
-const AccessForm = () => {
-    return (
-        <HubSpotForm
-            buttonOptions={{ size: 'lg' }}
-            formID="58118087-6363-4889-b2ca-18e5e10cea1f"
-            customFields={{
-                maus: {
-                    type: 'radioGroup',
-                    options: [
-                        { label: 'Under 10k/mo', value: 10_000 },
-                        { label: '10k-50k/mo', value: 50_000 },
-                        { label: '50k-100k/mo', value: 100_000 },
-                        { label: '100k-500k/mo', value: 500_000 },
-                        { label: '500k-1m/mo', value: 100_000_000 },
-                        { label: 'More than 1m/mo', value: 100_000_000_000 },
-                    ],
-                },
-            }}
-        />
-    )
-}
-
 export const Intro = ({ image = true }) => {
-    const breakpoints = useBreakpoint()
-    const [modalOpen, setModalOpen] = useState(false)
     return (
         <>
-            {breakpoints.md ? (
-                modalOpen && (
-                    <MenuContainer setOpen={(open) => setModalOpen(!!open)}>
-                        <AccessForm />
-                    </MenuContainer>
-                )
-            ) : (
-                <Modal open={modalOpen} setOpen={setModalOpen}>
-                    <div onClick={() => setModalOpen(false)} className="absolute w-full h-full">
-                        <div
-                            className="max-w-2xl bg-accent dark:bg-accent-dark relative w-full p-5 pt-12 ml-auto h-full border-l border-border dark:border-dark"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <div className="absolute right-5 top-3">
-                                <button onClick={() => setModalOpen(false)}>
-                                    <Close2
-                                        className="w-6 h-6 opacity-60 hover:opacity-100 transition-opacity"
-                                        fill="currentColor"
-                                    />
-                                </button>
-                            </div>
-                            <AccessForm />
-                        </div>
-                    </div>
-                </Modal>
-            )}
             <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
                 <div className="p-4 md:p-8">
                     <h1 className="text-4xl mt-0 mb-2 flex items-center space-x-2">
@@ -76,7 +21,7 @@ export const Intro = ({ image = true }) => {
                     <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                         A single source for all your important data
                     </h3>
-                    <CallToAction onClick={() => setModalOpen(true)}>Join the waitlist</CallToAction>
+                    <CallToAction to="/docs/data-warehouse/setup">Link your first source</CallToAction>
                 </div>
 
                 {image && (
@@ -86,7 +31,7 @@ export const Intro = ({ image = true }) => {
                             placeholder="none"
                             quality={100}
                             className=""
-                            src="../../../contents/images/products/data-warehouse/data-warehouse.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/data-warehouse.png"
                         />
                     </figure>
                 )}
@@ -107,8 +52,8 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Article"
-                        title="Creating a table"
-                        description="Get started by creating your first table"
+                        title="Linking a source"
+                        description="Get started by adding your first external source to PostHog"
                         Image={
                             <StaticImage
                                 alt=""
@@ -117,15 +62,15 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
-                        url="/docs/data-warehouse/setup#creating-a-table"
+                        url="/docs/data-warehouse/setup"
                     />
                     <ResourceItem
-                        type="Guide"
-                        title="How to do time-based breakdowns"
-                        description="Break down events by time of day, hourly, and even minute-by-minute"
+                        type="Article"
+                        title="Query your source"
+                        description="Once you have a source linked, learn how to query it using HogQL"
                         Image={
                             <StaticImage
                                 alt=""
@@ -134,10 +79,10 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
-                        url="/tutorials/time-breakdowns"
+                        url="/docs/data-warehouse/query"
                     />
                     <ResourceItem
                         type="Guide"
@@ -151,7 +96,7 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
                         url="/tutorials/hogql-sum-aggregation"

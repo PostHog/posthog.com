@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -31,11 +32,11 @@ Please also update your `posthog-js` version to at least `1.2.4` if you have it 
 
 It's like inspect element, but for user data.
 
-![inspect](../images/casts/inspect.gif)
+![inspect](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/casts/inspect.gif)
 
 Easily see the ranking of which parts of the page your users are interacting with the most:
 
-![heatmap](../images/casts/heatmap.gif)
+![heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/casts/heatmap.gif)
 
 We learned a ton about our product and website within minutes of trying this out.
 
@@ -43,15 +44,15 @@ We learned a ton about our product and website within minutes of trying this out
 
 Step 1 - go to your setup page, and switch it on:
 
-![setup](../images/casts/setup.gif)
+![setup](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/casts/setup.gif)
 
 This little buddy will appear over your website, only if you are logged into PostHog (it will NOT appear for your regular visitors…):
 
-![authenticate](../images/casts/authenticate.gif)
+![authenticate](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/casts/authenticate.gif)
 
 Hover over him to get started!
 
-![toolbar dance](../images/casts/dance.gif)
+![toolbar dance](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/casts/dance.gif)
 
 #### Fair warning! (It's BETA! Really!)
 
@@ -63,7 +64,7 @@ When you're trying it out, please raise all issues that you find [here](https://
 
 ### Feature flags
 
-![feature flags](../images/feature-flags.png)
+![feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/feature-flags.png)
 
 This is the first step in the direction of becoming a product experimentation platform.
 
@@ -83,7 +84,7 @@ You asked for it and now [it's here](https://posthog.com/docs/integrate/client/f
 
 PostHog already had stickiness, but now there is a table that demonstrates perhaps more clearly how your users are coming back (or not!)
 
-![toolbar icon](../images/retention-view.png)
+![toolbar icon](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/retention-view.png)
 
 Head to the users menu in the left hand navigation to give it a whirl.
 

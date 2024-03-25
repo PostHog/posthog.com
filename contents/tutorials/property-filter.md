@@ -2,8 +2,13 @@
 title: How to protect user privacy with the Property Filter app
 sidebar: Docs
 showTitle: true
-author: ["lukas-smith"]
-tags: ["apps", "configuration", "data management", 'product os']
+author:
+  - lukas-smith
+tags:
+  - apps
+  - configuration
+  - data management
+  - product os
 date: 2022-07-01
 ---
 
@@ -22,7 +27,7 @@ For this reason Witty Works created the [Property Filter app](/apps/property-fil
 First, install the [Property Filter](/apps/property-filter) to your PostHog instance. You can find it in the Apps Library by following these steps:
 
 - Log in to your PostHog instance
-- Click 'Apps' on the left-hand tool bar
+-  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 - Search for 'Property Filter' press 'Install'
 
 It's important to note that this app effectively removes information from PostHog events by setting properties to null. Apps on PostHog run in sequence, so it usually makes sense to place this app at the end of a sequence. If you are filtering `$ip`, `event.ip` will also be set to `null`.
@@ -31,7 +36,7 @@ It's important to note that this app effectively removes information from PostHo
 
 Apps on PostHog run in a sequential chain and in order for the Property Filter to remove unwanted information, that information first has to be present. In short: Ensure that the Property Filter runs _after_ the GeoIP Enricher. 
 
-![PostHog Property Filter](../images/tutorials/property-filter/property-filter-tutorial.png)
+![PostHog Property Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/property-filter/property-filter-tutorial.png)
 
 You can reorder the app chain simply by selecting 'Edit Order' and dragging the apps to run in any order you want. Apps at the top of the list run first, while those at the bottom run last. 
 
@@ -41,7 +46,7 @@ This app sets all specified properties on ingested events to `null`, effectively
 
 To configure the app to remove selected properties, simply select the blue gear icon and enter the properties you wish to remove. 
 
-![PostHog Property Filter](../images/tutorials/property-filter/property-filter-tutorial-2.png)
+![PostHog Property Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/property-filter/property-filter-tutorial-2.png)
 
 ## The full list of GeoIP properties
 

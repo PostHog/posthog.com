@@ -3,9 +3,9 @@ title: Heatmaps
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 <iframe
@@ -19,11 +19,11 @@ Heatmaps is a feature in the toolbar that shows you how users are interacting wi
 
 To view your heatmaps, click the heatmap icon on the toolbar.
 
-![Launch toolbar heatmaps](../../images/tutorials/toolbar/toolbar-heatmap.png)
+![Launch toolbar heatmaps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/toolbar-heatmap.png)
 
 With the heatmap on, clickable elements on your website will have a red overlay with numbers on them. Here's an example of our website with the heatmap enabled:
 
-![An example from the PostHog website showing the heatmap highlighting a number of page elements. Some showing a count of clicks and one also showing a rage-click](../../images/tutorials/toolbar/posthog-heatmap-example.png)
+![An example from the PostHog website showing the heatmap highlighting a number of page elements. Some showing a count of clicks and one also showing a rage-click](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/posthog-heatmap-example.png)
 
 Each number in the top right box of each element represents the total number of clicks in the last 7 days. The number in the top left of the element is the number of rage-clicks.
 
@@ -33,13 +33,13 @@ Numbers at the bottom or top of the screen indicate that there are more elements
 
 Once you have enabled the heatmap, click on any element. You will then be able to create an [action](/docs/data/actions) from it.
 
-![How to create an action using heatmaps](../../images/products/product-analytics/heatmaps-create-action.mp4)
+![How to create an action using heatmaps](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-create-action.mp4)
 
 ## Loading more data
 
 If you have many events, you may need to load more data to see everything on the heatmap. To do this, click on the load more button in the heatmap menu.
 
-![How to load more data in the heatmap menu](../../images/products/product-analytics/heatmaps-load-more.png)
+![How to load more data in the heatmap menu](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-load-more.png)
 
 ## Matching links by their target URL
 
@@ -47,17 +47,17 @@ By default, the toolbar matches clicks using the elements on the page, and not b
 
 For example, consider the following screenshot of a list of elements for "Newly seen persons" from the PostHog app:
 
-![the list of recent insights showing several clicks](../../images/products/product-analytics/heatmaps-target-url-off.png)
+![the list of recent insights showing several clicks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-target-url-off.png)
 
 The "Newly seen persons" shows the most recent list of persons using the app and is constantly being updated as new users use the app. In the heatmap, we see 106 clicks for the **first element**. This doesn't mean that the this specific person in the list received 106 clicks, but rather that the first element in the list received 106 elements, regardless of which person was shown.
 
 If we were more interested in the number of clicks each specific person in the list received (regardless of which position they appeared in), then we can turn on "Match links by their target URL" in the heatmap menu. This matches clicks to elements based on their target URLs.
 
-![How to enable link matching in the heatmap](../../images/products/product-analytics/heatmaps-match-link.png)
+![How to enable link matching in the heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-match-link.png)
 
 For example, if we enable this for our previous example, we see much fewer clicks. This is because we are now seeing clicks on each specific user:
 
-![How to enable link matching in the heatmap](../../images/products/product-analytics/heatmaps-target-url-on.png)
+![How to enable link matching in the heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-target-url-on.png)
 
 ## Combining heatmaps from similar pages using wildcards
 
@@ -65,4 +65,4 @@ If you have similar pages that are mostly the same but have dynamic content base
 
 For example, if the product pages on an ecommerce site use a URL format of `https://yourwebsite.com/products/product-id`, you can use the wildcard URL `https://yourwebsite.com/products/*` to display a combined heatmap from all the product pages.
 
-![Toolbar heatmaps popover menu being used to add a wildcard into the URL](../../images/products/product-analytics/toolbar-heatmap-wildcard.png)
+![Toolbar heatmaps popover menu being used to add a wildcard into the URL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/toolbar-heatmap-wildcard.png)

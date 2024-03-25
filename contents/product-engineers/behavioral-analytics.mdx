@@ -1,24 +1,28 @@
 ---
-title: An engineer's guide to behaviorial analytics
+title: An engineer's guide to behavioral analytics
 date: 2024-02-15
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
- - Guides
- - Product analytics
- - Product
+  - Guides
+  - Product analytics
+  - Product
 crosspost:
   - Blog
-seo: {
-    metaTitle: "Behavioral Analytics for Engineers",
-    metaDescription: "Engineers can use behavioral analytics tools like product analytics and session replay to understand everything about their users, fix problems, and measure the true impact of their work"
-}  
+seo:
+  metaTitle: Behavioral Analytics for Engineers
+  metaDescription: >-
+    Engineers can use behavioral analytics tools like product analytics and
+    session replay to understand everything about their users, fix problems, and
+    measure the true impact of their work
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import ReplayLight from '../images/product-engineers/behavioral-analytics/replay.png'
-import ReplayDark from '../images/product-engineers/behavioral-analytics/replay-dark.png'
+export const ReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/product-engineers/behavioral-analytics/replay.png"
+export const ReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/product-engineers/behavioral-analytics/replay-dark.png"
 
 The measurement and analysis of user behavior, AKA behavioral analytics, is critical to building  successful products. This has long been a responsibility of product managers, marketers, and analysts, but that is changing. Many engineers are [taking on product responsibilities](/blog/what-is-a-product-engineer), and with that, are developing a need for behavioral analytics.
 
@@ -34,7 +38,7 @@ Why?
 
 Because striving for a "perfect" plan is just a recipe for frustration. There's so much you _can_ track and often the most the most valuable things are the least predictable. We're in the "[jump off the cliff and build an airplane on the way down](https://twitter.com/reidhoffman/status/1481071139221049345?lang=en)" camp. You'll just learn faster this way.
 
-![Real behavior](../images/product-engineers/behavioral-analytics/real_behavior.png)
+![Real behavior](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/product-engineers/behavioral-analytics/real_behavior.png)
 
 Start by tracking one specific area and expanding from there — e.g. track the usage of a specific feature. If you're using PostHog you can either:
 

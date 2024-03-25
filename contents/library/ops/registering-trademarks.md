@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/library/images/blog/posthog-blog-image.png
 featuredImageType: full
 category: Startups
 tags:

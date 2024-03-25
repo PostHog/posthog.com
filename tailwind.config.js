@@ -50,6 +50,7 @@ module.exports = {
             '-1': '-1',
             75: '.75',
             100: '1',
+            '-100': '-1',
         },
         flex: {
             1: '1',
@@ -153,6 +154,10 @@ module.exports = {
             },
             gridTemplateColumns: {
                 16: 'repeat(16, minmax(0, 1fr))',
+            },
+            gridColumn: {
+                'span-13': 'span 13 / span 13',
+                'span-16': 'span 16 / span 16',
             },
             colors: {
                 primary: '#151515',

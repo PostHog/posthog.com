@@ -1,11 +1,14 @@
 ---
-title: "How to run A/B tests in Webflow"
+title: How to run A/B tests in Webflow
 date: 2023-01-26
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: https://www.youtube-nocookie.com/embed/rwP2leifdNk
-tags: ['experimentation', 'feature flags']
+featuredVideo: 'https://www.youtube-nocookie.com/embed/rwP2leifdNk'
+tags:
+  - experimentation
+  - feature flags
 ---
 
 Optimizing your marketing site often requires testing small changes against each other, also known as A/B tests. Getting the best site possible requires tweaking, experimenting, and tracking results.
@@ -26,11 +29,11 @@ In case it wasn’t obvious, you need both a Webflow site and a PostHog instance
 
 The whole process looks like this:
 
-![Webflow setup](../images/tutorials/webflow-ab-tests/webflow.gif)
+![Webflow setup](https://res.cloudinary.com/dmukukwp6/video/upload/v1711092872/posthog.com/contents/images/tutorials/webflow-ab-tests/webflow.mp4)
 
 Make sure your Webflow site has a good place to A/B test, such as a call-to-action button. Whatever this element is, it needs an ID so we can select it later. To add this, click the element then either click the gear next to the element or the gear at the top of the side panel. Enter whatever ID you like, we choose `main-cta`.
 
-![Button ID](../images/tutorials/webflow-ab-tests/button.png)
+![Button ID](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-ab-tests/button.png)
 
 ## Create an experiment in PostHog
 
@@ -60,7 +63,7 @@ Back in the Webflow site designer, click the "Pages" tab on the left panel, hove
 
 Once you do this, go back to PostHog and click "Launch" on the experiment. When you publish the changes and reload your Webflow page, there should be a 50% chance you see the new CTA. If not, add `posthog.featureFlags.override({'cta': 'test'})` to the custom code you just added (but don’t forget to remove it). You can check the variations in incognito windows in your browser.
 
-![CTA changed](../images/tutorials/webflow-ab-tests/cta.png)
+![CTA changed](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-ab-tests/cta.png)
 
 Once you launch this experiment, PostHog automatically tracks the results and make a suggestion about which variation performs best. It uses the goals you set in the experiment to decide this. 
 

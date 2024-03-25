@@ -1,0 +1,63 @@
+## Q2 2024 Objectives
+
+- HogQL-based querying
+  - Convert the remaining legacy queries to HogQL and release to public (Thomas, Julian, Marius)
+    - Trends? Funnels? Paths?
+    - Cohorts
+  - Remove legacy querying backend (Thomas, Julian)
+    - Convert filters to query (insights, notebooks, activity log, experiments)
+    - Clean up or rewrite dashboardLogic
+  - Missing Product Analytics features (Thomas, Julian)
+    - Breakdowns (multiple) in literally everything
+    - Make a list based on GitHub issues from customer requests…
+  - Missing HogQL features (Tom, Marius)
+    - Type system, JSON
+    - Missing things when building funnels
+
+- Querying and processing performance (Thomas, Julian)
+  - Global performance overview dashboards
+    - Insights
+    - Exports
+    - Cohort recalculations
+  - Query request tracing
+    - Possibly query runner Python optimizations
+    - Exports improvements
+  - Identify top 5 query optimizations in terms of impact
+
+- Artificial Hog / Post Intelligence (Michael)
+  - Ask a question to get a magical insight (aware of your taxonomy)
+  - Figure out infra for upgrading queries and models
+  - Product-wide framework for opting into sharing with OpenAI
+
+- Activation (side quest: Michael)
+  - Michael to work with Growth to identify optimizations to getting started with Product Analytics
+
+## Q1 2024 Objectives
+
+1. HogQL & Data Exploration (Julian, Marius)
+  - Convert ALL our insights to use HogQL as their base.
+    - Most product analytics insights are built in a bespoke way using our "legacy" Python codebase. This code produces ClickHouse SQL as its output, and is hard to extend, as all queries mix both platform level concerns (e.g. how "group analytics" works) and query level concerns (most optimal query for this data structure). Adding new query types or new platform features has turned out to be a nightmater with so many loose parts to consider.
+    - We've built the HogQL platform, which takes care of implementation details (e.g. where precisely are person properties stored) and lets users focus on writing queries. We're now rewriting all our insights to output HogQL instead of ClickHouse SQL. This will make the system more reliable, fix whole classes of bugs, and allow the end user to directly modify the generated HogQL SQL for further analysis.
+    - The migrated queries are also a blocker for the removal of a lot of legacy frontend code, which is often causing bugs.
+  - Improve the type system and get rid of `assumeNotNull`.
+    - ClickHouse is notoriously cranky when it comes to `NULL`-s. Whenever it sees any unaccounted null anywhere, the entire row is discarded from analysis. We have several fields and properties, which are sometimes `NULL`, but mostly not. We have special handling for nullable fiels in the `concat` function, and in all compersions. For example `(0 != NULL)` feels like it should return `true`, but in ClickHouse it returns `NULL`. In HogQL it returns `true` due to our special handling.
+    - This special handling in HogQL makes for better predictable queries, at the cost of some performance. We can optimise this further if we know a field to definitely not be `NULL`. Unfortunately this nullability information gets lost once fields pass functions and subquery boundaries. Upgrading the type system to account for this is the goal.
+  - Write great docs for HogQL and data exploration nodes.
+    - Make sure all Data Exploration Nodes, including HogQLQuery, are documented somewhere.
+    - Can we build a live API playground?
+  - Proactively monitor query performance.
+
+2. Product Analytics frontend (Thomas, Michael)
+  - Clean things up now that we have PostHog 3000 and HogQL everywhere.
+    - Migrate Insights in the database away from "filters" onto "query"
+    - Purge legacy UI
+    - Purge legacy python insights
+  - Prioritise and work on any of the many ideas we have to make the app better:
+    - Universal Exploration view
+    - Reworked filtering experience
+    - Query builder 3000
+    - Notebook-first flow
+    - Make Product Analytics as easy as Web Analytics
+3. BI (Tom)
+  - Support non-event data sources on HogQL insights.
+  - Build the new querying experience, and/or integrate it into the "Explore" view.

@@ -1,10 +1,11 @@
 ---
 title: Filter Out
-github: https://github.com/PostHog/posthog-filter-out-plugin
-installUrl: https://app.posthog.com/project/apps?name=Filter%Out%20Plugin
-thumbnail: ../../cdp/thumbnails/filter-out.png
+github: 'https://github.com/PostHog/posthog-filter-out-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Filter%Out%20Plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/filter-out.png
 tags:
-    - filter-out
+  - filter-out
 ---
 
 This app enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
@@ -17,7 +18,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## Installation
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Filter Out' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 

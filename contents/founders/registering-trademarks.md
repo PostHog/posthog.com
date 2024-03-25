@@ -3,13 +3,14 @@ date: 2021-12-01
 title: Don’t bother securing your trademarks in the beginning
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 tags:
   - Founders
   - Ops & finance
 crosspost:
-  - Blog  
+  - Blog
 ---
 _**Disclaimer:** This is intended as a short, tactical guide to getting your trademarks sorted out for the first time, on a minimal budget. This is *not* legal advice and we are not lawyers - this is just what has worked for us._
 

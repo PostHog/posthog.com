@@ -3,10 +3,17 @@ title: Testing and launching an experiment
 sidebar: Docs
 showTitle: true
 availability:
-    free: none
-    selfServe: full
-    enterprise: full
+  free: none
+  selfServe: full
+  enterprise: full
 ---
+
+import {ProductVideo} from 'components/ProductVideo'
+import {ProductScreenshot} from 'components/ProductScreenshot'
+export const assignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4"
+export const assignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
+export const resultLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-result-light-mode.png"
+export const resultDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-result-light-mode.png"
 
 Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
 
@@ -21,7 +28,12 @@ The best way to do this is **adding an optional override** to your [release cond
 4. Set the optional override for the variant you'd like to assign these users to.
 5. Click "Save".
 
-![How to test your experiment](../../images/features/experiments/testing-your-experiment.mp4)
+<ProductVideo
+    videoLight = {assignAnOverrideLight}
+    videoDark = {assignAnOverrideDark}
+    alt = "How to assign an override to test your experiment"
+    classes = "rounded"
+/>
 
 Once you test it works, you're ready to launch your experiment.
 
@@ -33,7 +45,12 @@ Once you test it works, you're ready to launch your experiment.
 
 While the experiment is running, you can see results on the page:
 
-![Viewing experiment results](../../images/features/experiments/experiment-results.png)
+<ProductScreenshot
+    imageLight = {resultLight}
+    imageDark = {resultDark}
+    alt = "Viewing experiment results"
+    classes = "rounded"
+/>
 
 Sometimes, in the beginning of an experiment, results can be skewed to one side while enough data is being still gathered. While peeking at preliminary results is not a problem, making quick decisions based on them is [problematic](/blog/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration). We advise you to wait until your experiment has had a chance to gather enough data.
 
@@ -54,4 +71,3 @@ Want to learn more about how to run successful experiments in PostHog? Try these
 - [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) 
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
-

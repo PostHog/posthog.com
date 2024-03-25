@@ -52,7 +52,7 @@ const product = {
 }
 
 const team = 'Product Analytics'
-const teamSlug = '/handbook/small-teams/product-analytics'
+const teamSlug = '/teams/product-analytics'
 
 const subfeaturesItemCount = 5
 const subfeatures = [
@@ -876,7 +876,7 @@ export const ProductProductAnalytics = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -900,8 +900,7 @@ export const ProductProductAnalytics = () => {
                                         Time-based analysis for web analytics (e.g. time on page)
                                         <ul className="pl-6">
                                             <li className="text-sm">
-                                                (We're{' '}
-                                                <Link to="/handbook/small-teams/web-analytics">working on this</Link>!)
+                                                (We're <Link to="/teams/web-analytics">working on this</Link>!)
                                             </li>
                                         </ul>
                                     </li>
@@ -988,7 +987,9 @@ export const ProductProductAnalytics = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[1].children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'product analytics').children}
+                    />
                 </section>
 
                 <section id="team" className="mb-20 px-5">

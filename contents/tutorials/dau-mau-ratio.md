@@ -1,10 +1,14 @@
 ---
 title: How to calculate DAU/MAU ratio
 date: 2023-05-29
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["insights", "trends", 'product analytics']
+tags:
+  - insights
+  - trends
+  - product analytics
 ---
 
 The ratio of daily active users over monthly active users, or DAU/MAU ratio, is a popular engagement metric measuring stickiness. It shows what percentage of your users are active and use your product every day.
@@ -41,7 +45,7 @@ Although your DAU/MAU ratio is a great measurement of engagement and stickiness,
 
 In PostHog, [create an insight](https://app.posthog.com/insights/new) with two series, one for "all events" aggregated by "unique users" and another for "all events" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
 
-![DAU/MAU ratio](../images/tutorials/dau-mau-ratio/dau-mau.mp4)
+![DAU/MAU ratio](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/dau-mau-ratio/dau-mau.mp4)
 
 > **How we calculate unique users and monthly active users in PostHog:**
 > - **`dau` aka "unique users":** count of unique users in the interval, which defaults to daily. Despite the name, if you select the `interval` to be weekly or monthly, this will show weekly or monthly active users respectively.
@@ -53,7 +57,7 @@ There are many ways to customize your DAU/MAU ratio to fit your needs. The easie
 
 To do this in the same insight, click "+ Add filter group" then select a property like "Browser" and a value like "Chrome." Once set, this gives your DAU/MAU ratio for Chrome users.
 
-![Filter](../images/tutorials/dau-mau-ratio/filter.png)
+![Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/dau-mau-ratio/filter.png)
 
 ### Feature DAU/MAU ratio
 
@@ -61,13 +65,13 @@ Products contain many features. Some products get so large that a single DAU/MAU
 
 To better capture the details of your product, you can create per feature DAU/MAU ratio. You can do this by choosing an event or action that represents the usage of your feature as your series instead of "All events." In our case, that action is "Edited document."
 
-![Feature](../images/tutorials/dau-mau-ratio/action.png)
+![Feature](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/dau-mau-ratio/action.png)
 
 ### New user DAU/MAU ratio
 
 To understand how sticky your product is with new users, you can create a new user [cohort](/docs/data/cohorts) and filter your insights by that cohort. To do this, go to cohorts, and create a new cohort that matches persons who completed a "signed up" event or action for the first time in the last 3 months. What you choose for your event or action and time range is up to you.
 
-![New user](../images/tutorials/dau-mau-ratio/new.png)
+![New user](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/dau-mau-ratio/new.png)
 
 Once created, you can use this cohort as a filter in your DAU/MAU ratio calculation.
 
@@ -77,7 +81,7 @@ Although you can use DAU/MAU ratio as a proxy for power users, it doesn’t full
 
 To combine these two definitions, you can create a power user cohort, then use it as a filter in your DAU/MAU ratio calculation. To create this cohort, match persons who completed a key usage metric multiple times. For my example, I chose `Edited document at least 30 times in the last 30 days`.
 
-![Power user](../images/tutorials/dau-mau-ratio/power.png)
+![Power user](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/dau-mau-ratio/power.png)
 
 Once saved, you can use this power user cohort as a filter for your DAU/MAU ratio.
 

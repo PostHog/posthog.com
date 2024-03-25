@@ -30,4 +30,13 @@ posthog.identify('distinct_id', { // Replace "distinct_id" with your user's uniq
 })
 ```
 
+```flutter
+await Posthog().identify(
+  userId: 'distinct_id', // Replace "distinct_id" with your user's unique identifier
+  userProperties: {
+    email: "max@hedgehogmail.com", // optional: set additional user properties
+    name: "Max Hedgehog"
+});
+```
+
 </MultiLanguage>

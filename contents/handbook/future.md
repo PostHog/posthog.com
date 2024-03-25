@@ -12,14 +12,14 @@ What motivates us is building an epic product and company.
 
 We're excited by:
 
-* figuring out how far we can go
-* helping engineers build products - reduce the need for product and data teams
-* beating all the point solution competitors
-* having customers buy _from_ us instead of us selling _to_ them
+* Figuring out how far we can go
+* Helping engineers build products - reduce the need for product and data teams
+* Beating all the point solution competitors
+* Having customers buy _from_ us instead of us selling _to_ them
 
 We're *not* excited by:
 
-* selling the company for $1 billion - we think we can build a much bigger company by staying independent
+* Selling the company for $1 billion – we think we can build a much bigger company by staying independent
 
 ## $100M by 2026
 
@@ -33,4 +33,4 @@ Everyone at PostHog has options in the company – that means they can be a shar
 
 However, at different stages of the company's life, the value of each person's stock may be hundreds of thousands, millions, or even tens of millions of dollars. If someone doesn't have much capital but has $10 million in stock options, they'll start wanting us to sell.
 
-Therefore, we aim to let people sell some of their stock when we fundraise once their stock has very significantly increased in value, to keep everyone focused on building something bigger and longer term. This depends on what we can negotiate every time we fundraise, but it's the general philosophy we have.
+As a result, we aim to let people sell some of their stock when we fundraise and once their stock has very significantly increased in value. This helps keep everyone focused on building something bigger and longer term. What we can offer will depend on what we can negotiate every time we fundraise, but this is our general philosophy.

@@ -1,134 +1,242 @@
 ---
-date: 2022-02-16
-title: The 4 best HIPAA-compliant analytics tools
+date: 2024-03-04
+title: The 7 best HIPAA-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-  - joe-martin
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
 featuredImageType: full
 category: General
 tags:
   - Privacy
 ---
 
-Passed in 1996, HIPAA (aka Health Insurance Portability and Accountability Act) defines the legal requirements for securing and handling health information, and the severe penalties for failing to do so.
+## What is HIPAA?
 
-Data protected under HIPAA is called Protected Health Information (PHI), or ePHI if it is digitized. It includes any data which can be used to identify the past, current or future health status of an individual. This obviously includes test results and diagnoses, but it can also cover birthdays, ethnicity, gender and other information. Even your IP address can be considered ePHI under HIPAA. 
+Passed in 1996, HIPAA (Health Insurance Portability and Accountability Act) defines the legal requirements for securing and handling health information, and the severe penalties for failing to do so.
 
-One of the challenges for organizations affected by HIPAA is that it limits how data about customers can be gathered, stored and shared. 
+Data protected under HIPAA is called [Protected Health Information](/blog/what-is-personal-data-pii) (PHI), or ePHI if it is digitized. It includes any data that can be used to identify the past, current or future health status of an individual. 
 
-In this article we’ll explore the best platforms for gathering and analyzing customer information in a way which complies with HIPAA. Many platforms which rely on third-party cookies, cannot be used under HIPAA regulations without either anonymizing data or signing BAA agreements. 
+This includes test results and diagnoses, but also birthdays, ethnicity, gender and other information. Even an IP address can be considered ePHI under HIPAA.
 
-### What is a Business Associate Agreement (BAA)?
+While similar in some respects to the EU's General Data Protection Regulation (GDPR), HIPAA applies specifically to companies handling the PHI of US-based customers. Companies that also need to comply with the GDPR should see our guide to [GDPR-compliant analytics](/blog/best-gdpr-compliant-analytics-tools).
 
-Some services enable HIPAA compliance through the creation of a [Business Associate Agreement, or BAA](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html). This is essentially a contract with a service provider to ensure that they are jointly compliant and liable for services they provide. 
+There are two ways to be HIPAA-compliant while using analytics tools:
 
-It's worth noting that, because BAAs expose third-parties to increased risk and scrutiny, they are often an expensive option and/or require users to purchase a higher tier of license than they may otherwise require. Additionally, not all organizations may offer BAAs at all. 
+1. Self-host your analytics, so data remains totally within your control.
+2. Sign a Business Associate Agreement (BAA) with a third-party analytics tool. 
 
-> If your business operates inside the EU, it’s worth checking out our article about [GDPR compliant analytics](/blog/best-gdpr-compliant-analytics-tools) to ensure you comply with both sets of regulations. 
+## What is a Business Associate Agreement (BAA)?
 
-## 1 [PostHog](/product-analytics)
+Some services enable HIPAA compliance through the creation of a [Business Associate Agreement](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) (US Department of Health). This is a contract with a service provider to ensure that they are jointly compliant and liable for services they provide. 
 
-![posthog](../images/blog/hipaa-compliant-ab-testing/posthog.png)
+It's worth noting that, because BAAs expose third-parties to increased risk and scrutiny, they are often an expensive option and/or require users to purchase a higher tier of license. 
 
-PostHog is an all-in-one platform for building better products. Unlike other tools on this list, it offers a robust suite of tools, including product analytics, feature flags, A/B testing, user surveys, data pipelines, session replays, and more. 
+Some analytics tools, such as Google Analytics, don't offer BAAs and are therefore not HIPAA-compliant.
 
-We're biased, but we think it's pretty great - not least because you only need a single BAA to cover usages across all 8+ features. That means there's less risk, less overhead, and it's quicker to get setup. 
+## The best HIPAA-compliant analytics tools
 
-PostHog's product analytics suite offers a wide selection of tools, from funnel and path analysis to an SQL input for more advanced queries. Best of all, product analytics combines brilliantly with other parts of PostHog - you can, for example, jump straight from a funnel view to a list of session replays illustrating that journey. 
+### 1. PostHog
 
-### Features & benefits
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
-- All-in-one product stack with 8+ functions
-- Only one BAA needed to cover multiple products
-- Self-serve, no SQL required
-- SOC 2 certified, GDPR-ready
-- US & EU hosting available
-- Open source
+#### Overview
 
-### Is PostHog HIPAA compliant?
+- **Product analytics:** <span className="text-green text-lg">✔</span>
+- **Web analytics:** <span className="text-green text-lg">✔</span>
+- **Session replay:** <span className="text-green text-lg">✔</span>
+- **Feature flags:** <span className="text-green text-lg">✔</span>
+- **A/B testing:** <span className="text-green text-lg">✔</span>
+- **Surveys:** <span className="text-green text-lg">✔</span>
+- **Customer data platform:** <span className="text-green text-lg">✔</span>
 
-PostHog offers Business Associate Agreements (BAA) to teams which need HIPAA complaince, enabling those teams to use all of PostHog's features until a single agreement. 
+[PostHog](https://posthog.com/) is an open-source platform that combines product analytics, web analytics, session replay, feature flags, A/B testing, and user surveys into one platform. It gives you every tool you need to understand user behavior and, unlike typical analytics tools that rely on third-party integrations, all these tools work together seamlessly.
 
-## 2. [Mixpanel](https://mixpanel.com/)
+Being an all-in-one platform has two further benefits:
 
-![Mixpanel - hipaa analytics tools](../images/blog/open-source-analytics-tools/mixpanel.png)
+1. PostHog can replace multiple individual products – e.g. [Mixpanel](/blog/best-mixpanel-alternatives) for product analytics, [LaunchDarkly](/blog/best-launchdarkly-alternatives) for feature management, etc.
+2. You only need to sign one BAA to get all these tools, reducing legal complexity and risk.
 
-Mixpanel offers a suite of product analytics tools, including funnel and trend analysis. It lacks some specific features, such as Feature Flags, but offers a library of 50 plugins to extend functionality via integrations with other platforms. 
+#### PostHog and HIPAA compliance
 
-Mixpanel isn’t open source and can’t be deployed into a users’ own infrastructure. Instead, it must be deployed via the Cloud and data must be shared with Mixpanel directly, meaning [a BAA is required in order to use Mixpanel under HIPAA](https://mixpanel.com/legal/mixpanel-hipaa/). 
+- **Self-hostable:** <span className="text-green text-lg">✔</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
 
-### Features & benefits
+A BAA is available on PostHog's [Teams plan](/pricing), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
 
-- Product analytics suite
-- Group Analytics, for B2B organizations
-- Self-serve, no SQL required
-- SOC 2 certified
+### 2. Mixpanel
 
-### Is Mixpanel HIPAA compliant?
+![Mixpanel - hipaa analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/mixpanel.png)
 
-Mixpanel isn’t HIPAA compliant out-of-the-box, but offers a Business Associate Agreement so that it can be used by organizations which need to remain compliant with HIPAA regulations. 
+#### Overview
 
-## Is Google Analytics HIPAA compliant?
+- **Product analytics:** <span className="text-green text-lg">✔</span>
+- **Web analytics:** <span className="text-green text-lg">✔</span>
+- **Session replay:** <span className="text-red text-lg">✖</span>
+- **Feature flags:** <span className="text-red text-lg">✖</span>
+- **A/B testing:** <span className="text-red text-lg">✖</span>
+- **Surveys:** <span className="text-red text-lg">✖</span>
+- **Customer data platform:** <span className="text-red text-lg">✖</span>
 
-The short answer is that, no, [Google Analytics is not HIPAA compliant](/blog/is-google-analytics-hipaa-compliant). 
+[Mixpanel](https://mixpanel.com/) is a pure product analytics tool for analyzing user funnels and behavior. It doesn't offer built-in tools for things like session replay, feature management, A/B testing, or user surveys, but it does have extensive integrations with third-party tools for these. 
 
-According to [Google’s own disclaimers](https://support.google.com/analytics/answer/6366371?hl=en#hipaa&zippy=%2Cin-this-article), Google Analytics cannot be used for handling PHI or ePHI (including IP addresses) by _either_ covered entities or their third-party business associates: 
+#### Mixpanel and HIPAA compliance
 
->Unless otherwise specified in writing by Google, Google does not intend uses of Google Analytics to create obligations under the Health Insurance Portability and Accountability Act, as amended, (“HIPAA”), and makes no representations that Google Analytics satisfies HIPAA requirements. If you are (or become) a Covered Entity or Business Associate under HIPAA, you may not use Google Analytics for any purpose or in any manner involving Protected Health Information unless you have received prior written consent to such use from Google.
+- **Self-hostable:** <span className="text-red text-lg">✖</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
 
-Although [Google does offer a BAA for some services](https://support.google.com/a/answer/3407054?hl=en), such as Google Calendar and Google Keep, Google Analytics is not included on this list. In fact, [Google Analytics may even be illegal](https://isgoogleanalyticsillegal.com/) to use in some countries due to the way it collects and stores data.
+A BAA is available on Mixpanel's Growth plan, which starts at $20 per month for 10,000 events. You'll need to sign separate BAAs with any other analytics you wish to integrate with Mixpanel.
 
-## 3. [Countly](https://count.ly/)
+**See also:** [The most popular Mixpanel alternatives](/blog/best-mixpanel-alternatives)
 
-![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
+### 3. Countly
 
-Tailored to the needs of Internet Of Things (IoT) organizations, Countly’s product analytics platform offers tools such as multi-device user tracking and crash analytics. This makes it especially suited to hardware manufacturers, or teams who need to focus on debugging customer issues.
+![Countly - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/countly-screenshot.png)
 
-Countly isn’t open source - though it does offer a range of apps to increase extensibility and add features such as surveys, dashboards and funnel analysis. 
+#### Overview
 
-### Features & benefits
+- **Product analytics:** <span className="text-green text-lg">✔</span>
+- **Web analytics:** <span className="text-green text-lg">✔</span>
+- **Session replay:** <span className="text-red text-lg">✖</span>
+- **Feature flags:** <span className="text-red text-lg">✖</span>
+- **A/B testing:** <span className="text-green text-lg">✔</span>
+- **Surveys:** <span className="text-green text-lg">✔</span>
+- **Customer data platform:** <span className="text-red text-lg">✖</span>
 
-- User tracking across desktop, mobile and IOT devices
-- Library of apps to extend functionality
-- Push notifications and crash analytics
+[Countly](https://countly.com) is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to mobile app analytics.
 
-### Is Countly HIPAA compliant?
-Yes. Countly can be deployed on to your own infrastructure, so that data doesn’t have to be sent to third-party services. BAA agreements may still be needed with hosting providers, however.
+#### Countly and HIPAA compliance
 
-> Looking for HIPAA-compliant session recording tools as well? Read our guide to [best self-hosted session recording tools](/blog/best-open-source-session-replay-tools)
+- **Self-hostable:** <span className="text-green text-lg">✔</span>
+- **BAA available:** <span className="text-red text-lg">✖</span>
 
-## 4. [Plausible](https://plausible.io/)
+Countly doesn't offer a BAA for HIPAA compliance on its hosted cloud, but it does offer the option to either:
 
-![Plausible Analytics - plausible hipaa analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
+1. Self-host the product on your own.
+2. Deploy it to a private cloud managed by Countly.
 
-Another open-source analytics platform, Plausible is designed to help teams track basic website metrics such as pageviews and bounce rates. This pared-back focus means Plausible lacks the more powerful features included in PostHog, such as Feature Flags and Session Recording, but makes it suited to the needs of website managers. 
+This makes Countly a good option if you'd prefer to self-host your analytics.
 
-One benefit of Plausible’s approach is that it only requires a 1KB script in order to function and has a much smaller impact on page performance than Google Analytics. Again, because it’s open source (under an AGPL license), it can be tailored to the needs of your team and can be deployed on-premises.
+### 4. Freshpaint
 
-Plausible is a good fit for website admins and includes integrations with both Slack and Google Search Console, but it lacks the more powerful features needed by Product or Engineering teams in larger organizations.
+![freshpaint](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/freshpaint.png)
 
-### Features & benefits
+- **Product analytics:** <span className="text-red text-lg">✖</span>
+- **Web analytics:** <span className="text-red text-lg">✖</span>
+- **Session replay:** <span className="text-red text-lg">✖</span>
+- **Feature flags:** <span className="text-red text-lg">✖</span>
+- **A/B testing:** <span className="text-red text-lg">✖</span>
+- **Surveys:** <span className="text-red text-lg">✖</span>
+- **Customer data platform:** <span className="text-green text-lg">✔</span>
 
-- Lightweight script with no need for cookies
-- Minimal data collection for users
-- No tracking across sessions, devices or sites
+#### Overview
 
-### Is Plausible HIPAA compliant?
+[Freshpaint](https://www.freshpaint.io/) isn't an analytics tool per se, it's more of an analytics event tracker and customer data platform (CDP) that's specifically designed for healthcare companies. 
 
-Yes. Plausible can be hosted on your own infrastructure. It also collects minimal amounts of user data and only presents it in an anonymized, aggregated format. This is both a benefit and a drawback however, as it’s not possible to use Plausible to inspect the behavior or information of individual users. 
+Freshpaint sits between data sources (e.g data warehouses) and third-party data destinations and ensures no PHI is passed between them. This means you can continue to use non-HIPAA compliant tools, such as Google Analytics, safe in the knowledge you're not accidentally passing PHI into them.
 
-You may still need to create a BAA with your cloud hosting provider, as with any self-hosted solution.
+#### Freshpaint and HIPAA compliance
 
-## Is Google Analytics HIPAA compliant?
+- **Self-hostable:** <span className="text-red text-lg">✖</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
 
-The short answer is that, no, [Google Analytics is not HIPAA compliant](/blog/is-google-analytics-hipaa-compliant). 
+Freshpaint is a cloud-only product specifically designed for healthcare companies, so offers a BAA for HIPAA compliance.
 
-According to [Google’s own disclaimers](https://support.google.com/analytics/answer/6366371?hl=en#hipaa&zippy=%2Cin-this-article), Google Analytics cannot be used for handling PHI or ePHI (including IP addresses) by _either_ covered entities or their third-party business associates: 
+### 5. Piwik PRO
 
->Unless otherwise specified in writing by Google, Google does not intend uses of Google Analytics to create obligations under the Health Insurance Portability and Accountability Act, as amended, (“HIPAA”), and makes no representations that Google Analytics satisfies HIPAA requirements. If you are (or become) a Covered Entity or Business Associate under HIPAA, you may not use Google Analytics for any purpose or in any manner involving Protected Health Information unless you have received prior written consent to such use from Google.
+![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/piwik-pro.png)
 
-Although [Google does offer a BAA for some services](https://support.google.com/a/answer/3407054?hl=en), such as Google Calendar and Google Keep, Google Analytics is not included on this list. In fact, [Google Analytics may even be illegal](https://isgoogleanalyticsillegal.com/) to use in some countries due to the way it collects and stores data. 
+- **Product analytics:** <span className="text-red text-lg">✖</span>
+- **Web analytics:** <span className="text-green text-lg">✔</span>
+- **Session replay:** <span className="text-red text-lg">✖</span>
+- **Feature flags:** <span className="text-red text-lg">✖</span>
+- **A/B testing:** <span className="text-red text-lg">✖</span>
+- **Surveys:** <span className="text-red text-lg">✖</span>
+- **Customer data platform:** <span className="text-green text-lg">✔</span>
+
+#### Overview
+
+Piwik PRO is a commercial analytics and customer data platform spun out of the open-source analytics tool, Matomo. As such, it's more a web analytics tool than other options in this list, though you can use it on mobile and web apps. Because it's based on Europe, Piwik PRO is popular among companies also seeking GDPR compliance – it has a built-in compliance manager to assist with this, too.
+
+#### PiwikPRO and HIPAA compliance
+
+- **Self-hostable:** <span className="text-green text-lg">✔</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
+
+PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by signing a BAA or by self-hosting, giving you maximum flexibility.
+
+### 6. Amplitude
+
+![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
+
+#### Overview
+
+- **Product analytics:** <span className="text-green text-lg">✔</span>
+- **Web analytics:** <span className="text-red text-lg">✖</span>
+- **Session replay:** <span className="text-green text-lg">✔</span>
+- **Feature flags:** <span className="text-green text-lg">✔</span>
+- **A/B testing:** <span className="text-green text-lg">✔</span>
+- **Surveys:** <span className="text-red text-lg">✖</span>
+- **Customer data platform:** <span className="text-green text-lg">✔</span>
+
+[Amplitude](https://amplitude.com) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but it also offers extras such as session replay, feature flags, and A/B testing. It also offers anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days".   
+
+#### Amplitude and HIPAA compliance
+
+- **Self-hostable:** <span className="text-red text-lg">✖</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
+
+Amplitude offers a BAA, but doesn't stipulate the minimum terms for signing one on its website. You can also use its product analytics tool on top of a Snowflake data warehouse, which may be an option for HIPAA compliance if you're already storing analytics data in Snowflake.
+
+**See also:** [The most popular Amplitude alternatives](/blog/best-amplitude-alternatives)
+
+### 7. Heap
+
+![heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/heap.png)
+
+- **Product analytics:** <span className="text-green text-lg">✔</span>
+- **Web analytics:** <span className="text-red text-lg">✖</span>
+- **Session replay:** <span className="text-green text-lg">✔</span>
+- **Feature flags:** <span className="text-red text-lg">✖</span>
+- **A/B testing:** <span className="text-red text-lg">✖</span>
+- **Surveys:** <span className="text-red text-lg">✖</span>
+- **Customer data platform:** <span className="text-red text-lg">✖</span>
+
+#### Overview
+
+[Heap](https://heap.io) is a product analytics tool that, like PostHog, Mixpanel and Amplitude, helps you understand user behavior using trends and funnel analysis. It also offers a basic session replay tool. Like Amplitude, it caters more to non-technical users, such as marketing and e-commerce teams focused on optimizing conversions.
+
+#### Heap and HIPAA compliance
+
+- **Self-hostable:** <span className="text-red text-lg">✖</span>
+- **BAA available:** <span className="text-green text-lg">✔</span>
+
+Heap offers a BAA, but only on its Pro and Premier plans, not on its self-serve Growth plan. It's not available as a self-hosted product.
+
+**See also:** [The most popular Heap alternatives](/blog/best-heap-alternatives)
+
+## FAQ
+
+### Who does HIPAA apply to?
+
+HIPAA applies to "covered entities," such as healthcare providers who transmit any health information in electronic form, health plans, and healthcare clearinghouses. Mobile apps fall under HIPAA if they store protected health information (PHI), and share it with any covered entity. 
+
+HIPAA also applies to "business associates," which, according to the [US Department of Health and Human Services](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html), are "a subcontractor that creates, receives, maintains, or transmits protected health information on behalf of another business associate."
+
+Under HIPAA, the analytics tools in this guide would all be considered business associates.
+
+### What is PHI (Protected Health Information)?
+
+Protected Health Information (PHI) is any information about health status, provision of healthcare, or payment for healthcare that can be linked to an individual. 
+
+This includes medical records, laboratory results, billing information, and any other information that identifies an individual and relates to their past, present, or future physical or mental health condition, treatment, or payment for healthcare services.
+
+### Is self-hosting analytics better than signing a BAA?
+
+There's no objective correct answer here. In theory, self-hosting is preferable as it means you don't share any data with third-parties (business associates), and thus you don't need to sign a BAA.
+
+But self-hosting also presents additional risks. You're wholly liable for ensuring your analytics infrastructure is secure, which can be challenging if you don't have the internal expertise to manage this. If this is the case, it may be better to rely on a HIPAA-compliant business associate who has experience hosting analytics at scale.

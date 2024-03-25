@@ -1,11 +1,12 @@
 ---
 date: 2024-01-12
-title: "In-depth: PostHog vs Matomo"
+title: 'In-depth: PostHog vs Matomo'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/comparisons/matomo.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/matomo.jpeg
 featuredImageType: full
 author:
   - andy-vandervell
@@ -228,41 +229,39 @@ Matomo doesn't offer many dedicated integrations for syncing data with other pla
 
 In addition to extensive selection of dedicated integrations, PostHog [offers two APIs](/docs/api): a public API for pushing data into PostHog, and a private API for exporting data and performing various actions.
 
-<ComparisonTable column1="Matomo" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Matomo">
   <ComparisonHeader category="Export" />
   <ComparisonRow column1={true} column2={true} feature="API" />
-  <ComparisonRow column1={false} column2={true} feature="Redshift" />
-  <ComparisonRow column1={false} column2={true} feature="Google Cloud Storage" />
-  <ComparisonRow column1={false} column2={true} feature="Snowflake" />
-  <ComparisonRow column1={false} column2={true} feature="Amazon S3" />
-  <ComparisonRow column1={false} column2={true} feature="Google BigQuery" />
-  <ComparisonRow column1={false} column2={true} feature="Google Pub/Sub" />
-  <ComparisonRow column1={false} column2={true} feature="RudderStack" />
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" />
-  <ComparisonRow column1={false} column2={true} feature="Zapier" />
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" />
-  <ComparisonRow column1={false} column2={true} feature="Salesforce" />
-  </ComparisonTable>
-  
-<ComparisonTable column1="Matomo" column2="PostHog">
+  <ComparisonRow column1={true} column2={false} feature="Redshift" />
+  <ComparisonRow column1={true} column2={false} feature="Google Cloud Storage" />
+  <ComparisonRow column1={true} column2={false} feature="Snowflake" />
+  <ComparisonRow column1={true} column2={false} feature="Amazon S3" />
+  <ComparisonRow column1={true} column2={false} feature="Google BigQuery" />
+  <ComparisonRow column1={true} column2={false} feature="Google Pub/Sub" />
+  <ComparisonRow column1={true} column2={false} feature="RudderStack" />
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" />
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" />
+  <ComparisonRow column1={true} column2={false} feature="Salesforce" />
+	
   <ComparisonHeader category="Import" />
-  <ComparisonRow column1={true} column2={false} feature="Google Analytics" />
-  <ComparisonRow column1={false} column2={true} feature="API" />
-  <ComparisonRow column1={false} column2={true} feature="Redshift" />
-  <ComparisonRow column1={false} column2={true} feature="Google Cloud Storage" />
-  <ComparisonRow column1={false} column2={true} feature="Snowflake" />
-  <ComparisonRow column1={false} column2={true} feature="Amazon S3" />
-  <ComparisonRow column1={false} column2={true} feature="Sentry" />
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" />
-  <ComparisonRow column1={false} column2={true} feature="Salesforce" />
-  <ComparisonRow column1={false} column2={true} feature="Zapier" />
-  <ComparisonRow column1={false} column2={true} feature="Zendesk" />
+  <ComparisonRow column1={false} column2={true} feature="Google Analytics" />
+  <ComparisonRow column1={true} column2={false} feature="API" />
+  <ComparisonRow column1={true} column2={false} feature="Redshift" />
+  <ComparisonRow column1={true} column2={false} feature="Google Cloud Storage" />
+  <ComparisonRow column1={true} column2={false} feature="Snowflake" />
+  <ComparisonRow column1={true} column2={false} feature="Amazon S3" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" />
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" />
+  <ComparisonRow column1={true} column2={false} feature="Salesforce" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" />
+  <ComparisonRow column1={true} column2={false} feature="Zendesk" />
 </ComparisonTable>
 
 ## Strengths of PostHog
 
-![PostHog screenshot](../images/screenshots/hogflix-dashboard.png)
+![PostHog screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 ### Combining feature flags and product analytics
 
@@ -278,7 +277,7 @@ PostHog and Matomo both support event tracking, but PostHog goes one step furthe
 
 ## Strengths of Matomo
 
-![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
+![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 ### E-commerce and marketing analytics
 

@@ -1,10 +1,14 @@
 ---
 title: How to calculate time on page
 date: 2023-08-01
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['hogql', 'insights', 'product analytics']
+tags:
+  - hogql
+  - insights
+  - product analytics
 ---
 
 Understanding how users spend their time on your site helps you understand your site’s strengths and weaknesses. Calculating the time spent on a page is the key metric for doing this. In this tutorial, we show you how to calculate time on page and related metrics using PostHog.
@@ -48,7 +52,7 @@ FROM (
 
 After running this query, you might notice that the result is very high. Industry averages range from 40 to 80 seconds, not the 180 minutes I got from PostHog’s data. This is because it includes situations where the subsequent event is months afterward.
 
-![Average time on page](../images/tutorials/time-on-page/average.png)
+![Average time on page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/time-on-page/average.png)
 
 We can limit this by filtering out `time_on_page` values that are greater than 30 minutes. These are likely inactive and separate sessions. Both PostHog and Google Analytics count a 30 minute gap as inactivity.
 
@@ -154,7 +158,7 @@ ORDER BY avg_time_on_page DESC
 
 One last thing you might want to filter out is URLs with question marks or number signs. To do this add the statements `AND properties.$current_url NOT LIKE '%?%'` and `AND properties.$current_url NOT LIKE '%#%'` below the `properties.$current_url LIKE '%posthog.com/blog%'` filter. This cleans the URLs.
 
-![URLs](../images/tutorials/time-on-page/urls.png)
+![URLs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/time-on-page/urls.png)
 
 ### Time on page for an individual page
 

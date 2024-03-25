@@ -41,7 +41,7 @@ export const wrapPageElement = ({ element, props }) => {
     return !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
         (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
         <Posts {...props}>{element}</Posts>
-    ) : props.custom404 || !props.data ? (
+    ) : props.custom404 || !props.data || props.pageContext.ignoreWrapper ? (
         element
     ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
       ![

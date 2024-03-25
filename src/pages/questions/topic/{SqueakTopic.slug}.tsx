@@ -80,7 +80,7 @@ export default function Questions({ data, pageContext }: IProps) {
     const topicsNav = useTopicsNav()
 
     return (
-        <CommunityLayout menu={topicsNav} title={data.squeakTopic.label} contentWidth={'100%'}>
+        <CommunityLayout menu={topicsNav} title={data.squeakTopic.label}>
             <section className="max-w-screen-4xl space-y-8 pb-12 -mx-3 lg:-mx-4 xl:-mx-10">
                 <div className="w-full flex items-center mb-8">
                     <Link
@@ -103,7 +103,7 @@ export default function Questions({ data, pageContext }: IProps) {
                             id={data?.squeakTopic?.squeakId}
                         />
                     </div>
-                    <div className="ml-auto sm:mt-0 mt-4 sm:w-32 z-50 relative">
+                    <div className="ml-auto sm:mt-0 mt-4 sm:w-32 z-[50] relative">
                         <Listbox as="div" className="relative" value={sortBy} onChange={setSortBy}>
                             <Listbox.Label className="sr-only">Sort by</Listbox.Label>
                             <Listbox.Button className="relative w-full flex items-center py-2 px-3 text-left bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded cursor-pointer text-sm">
@@ -138,7 +138,7 @@ export default function Questions({ data, pageContext }: IProps) {
                         fetchMore={fetchMore}
                         sortBy={sortBy}
                         currentPage={{
-                            title: `${data?.squeakTopic?.label} questions`,
+                            title: data?.squeakTopic?.label,
                             url: `/questions/topic/${pageContext.slug}`,
                         }}
                         pinnedQuestions={pinnedQuestions}

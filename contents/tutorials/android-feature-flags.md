@@ -1,15 +1,17 @@
 ---
-title: "How to set up feature flags in Android"
+title: How to set up feature flags in Android
 date: 2024-02-19
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/android-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/android-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/android-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/android-feature-flags/create-flag-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in Android using PostHog. 
 
@@ -112,14 +114,14 @@ Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the Android app](../images/tutorials/android-feature-flags/basic-app.png)
+![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
 First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `Gradle Scripts/build.gradle.kts (Module: app)` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). For this tutorial, we use version `3.1.7`.
 
 
-```gradle_kotlin
+```gradle_kotlin file=app/build.gradle
 dependencies {
     implementation("com.posthog:posthog-android:3.+")
     //... other dependencies
@@ -140,8 +142,7 @@ import com.posthog.android.PostHogAndroidConfig
 class MyFeatureFlagsApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
-        // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-        private const val POSTHOG_HOST = "<ph_instance_address>"
+        private const val POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
     }
 
     override fun onCreate() {
@@ -157,7 +158,7 @@ class MyFeatureFlagsApplication : Application() {
 
 To get your PostHog API key and host, [sign up to PostHog](https://us.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://us.posthog.com/settings/project).
 
-We now need to register our custom application class. Go to `app/manifests/AndroidManifest.xml` and add `android:name=".MyFeatureFlagsApplication"` within the `<application` tag:
+We now need to register our custom application class. Go to `app/manifests/AndroidManifest.xml` and add `android:name=".MyFeatureFlagsApplication"` within the `<application>` tag:
 
 ```XML file=app/manifests/AndroidManifest.xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -233,4 +234,4 @@ That's it! When you restart your app and click the button, you should see the gr
 
 - [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
-- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
+- [How to set up analytics in Android](/tutorials/android-analytics)
