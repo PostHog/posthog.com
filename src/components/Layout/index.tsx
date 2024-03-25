@@ -14,45 +14,55 @@ import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
 import { CallToAction } from 'components/CallToAction'
 import { motion } from 'framer-motion'
-import { FixedSizeList as List } from 'react-window'
 import Toggle from 'components/Toggle'
-import Logo from 'components/Logo'
 import { IconX } from '@posthog/icons'
 import { StaticImage } from 'gatsby-plugin-image'
 
-const fields = [
-    { type: 'text', name: 'firstName', placeholder: 'First name' },
-    { type: 'text', name: 'lastName', placeholder: 'Last name' },
-    { type: 'email', name: 'email', placeholder: 'Email' },
-    { type: 'text', name: 'companyName', placeholder: 'Company name' },
-    { type: 'number', name: 'noe', placeholder: 'Number of employees' },
-    { type: 'text', name: 'wdyhau', placeholder: 'Where did you hear about us?' },
-    { type: 'text', name: 'lopp', placeholder: 'Length of procurement process (years)' },
-    { type: 'number', name: 'cloutScore', placeholder: 'Clout score' },
-    { type: 'text', name: 'osVersion', placeholder: 'OS version' },
+const whitepaperFields = [
+    { label: 'First name', name: 'firstName' },
+    { label: 'Middle name', name: 'middleName' },
+    { label: 'Last name', name: 'lastName' },
+    { label: 'Work email', name: 'workEmail' },
+    { label: 'Personal email', name: 'personalEmail' },
+    { label: 'Company', name: 'company' },
+    { label: "Boss' name", name: 'bossName' },
+    { label: "Boss' boss' name", name: 'bossBossName' },
+    { label: 'Gartner quadrant', name: 'gartnerQuadrant' },
+    {
+        label: 'How long of a PostHog demo are you interested in?',
+        name: 'demoLength',
+        type: 'radio',
+        options: ['90 minutes', '6 hours', '12 hours', 'Just keep it running'],
+    },
+    { label: 'Length of procurement process (years)', name: 'procurementLength', type: 'number' },
+    { label: 'Monthly expense account limit (in dollars)', name: 'expenseLimit', type: 'number' },
+    { label: 'What version of Webex are you running?', name: 'webexVersion' },
+    { label: 'Current compensation', name: 'compensation', type: 'number' },
+    { label: 'Do you moisturize?', name: 'moisturize', type: 'radio', options: ['Yes', 'No'] },
+    { label: 'Klout score', name: 'kloutScore' },
+    { label: 'Street you grew up on', name: 'street' },
+    { label: 'Is Office Space a parody or documentary?', name: 'officeSpace' },
+    { label: "Mother's maiden name", name: 'motherMaidenName' },
+    { label: 'Last bowel movement (date and size)', name: 'bowelMovement', type: 'date' },
+    { label: 'Last 4 digits of your debit card', name: 'debitCardLast4', type: 'number' },
+    { label: 'First 12 digits of your debit card', name: 'debitCardFirst12', type: 'number' },
+    { label: 'Are you a Swiftie?', name: 'swiftie', type: 'radio', options: ['Yes', 'No'] },
+    { label: 'Does pineapple belong on pizza?', name: 'pineapplePizza', type: 'radio', options: ['Yes', 'No'] },
+    { label: 'Favorite password', name: 'favoritePassword', placeholder: 'hunter2' },
+    {
+        label: 'Have you ever been convicted of murder?',
+        name: 'convictedOfMurder',
+        type: 'radio',
+        options: ['Yes', 'No', 'Not yet'],
+    },
+    {
+        label: 'I’d like to learn more about saving 15% or more on car insurance',
+        name: 'carInsurance',
+        type: 'radio',
+        options: ['Yes'],
+    },
+    { label: 'Would you like to join our next webinar?', name: 'nextWebinar', type: 'radio', options: ['Yes', 'No'] },
 ]
-
-const repeatedFields = Array(100)
-    .fill(fields)
-    .flat()
-    .map((field, index) => ({
-        ...field,
-        name: `${field.name}_${index}`,
-    }))
-    .sort(() => Math.random() - 0.5)
-
-const Input = (props) => {
-    return <input {...props} className="w-full p-2 border border-border dark:border-dark rounded-md" />
-}
-
-const Row = ({ index, style }) => {
-    const field = repeatedFields[index]
-    return (
-        <div style={style}>
-            <Input {...field} />
-        </div>
-    )
-}
 
 const WhitepaperBanner = ({ onClose }) => {
     const [blackPaper, setBlackPaper] = useState(false)
@@ -75,15 +85,37 @@ const WhitepaperBanner = ({ onClose }) => {
             >
                 <StaticImage src="../../../public/images/enterprise/whitepaper-poster-light.jpg" />
             </div>
-            <div className="w-[380px] flex flex-col items-center my-4">
-                <div className="self-start mx-[15px] mb-4">
+            <div className="w-[380px] my-4">
+                <div className="mb-4">
                     <h3 className="m-0">Get a free whitepaper</h3>
                     <p className="opacity-70 font-semibold m-0">Just fill out the fields below</p>
                 </div>
                 <form onSubmit={handleSubmit} className="m-0">
-                    <List height={200} itemCount={repeatedFields.length} itemSize={47} width={350}>
-                        {Row}
-                    </List>
+                    <div className="max-h-[200px] overflow-auto">
+                        {whitepaperFields.map(({ label, name, type = 'text', options = [], placeholder }) => {
+                            return (
+                                <div key={name} className="my-1">
+                                    <label className="m-0 mb-2 inline-block" htmlFor={name}>
+                                        {label}
+                                    </label>
+                                    {type === 'radio' ? (
+                                        <div className="grid gap-4 grid-cols-2">
+                                            {options.map((option) => (
+                                                <label key={option} className="flex items-center space-x-1">
+                                                    <input type="radio" name={name} value={option} className="mr-2" />
+                                                    {option}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    ) : type === 'date' ? (
+                                        <input type="date" className="w-full" id={name} />
+                                    ) : (
+                                        <input type={type} id={name} placeholder={placeholder} className="w-full" />
+                                    )}
+                                </div>
+                            )
+                        })}
+                    </div>
                     <div className="my-4">
                         <Toggle
                             checked={blackPaper}
