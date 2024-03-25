@@ -1,6 +1,6 @@
 ---
 title: How to use the PostHog API to get insights and persons
-date: 2023-02-01
+date: 2023-02-01T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -10,6 +10,11 @@ tags:
   - persons
   - product os
 ---
+export const profileLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-get-insights-persons/profile-light-mode.png"
+export const profileDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-get-insights-persons/profile-dark-mode.png"
+export const inspectLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-get-insights-persons/inspect-light-mode.png"
+export const inspectDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-get-insights-persons/inspect-dark-mode.png"
+
 
 An API or application programming interface is how computers talk to each other. They are powerful access points to applications, data, and processing.
 
@@ -19,9 +24,14 @@ This tutorial shows you the basics of the PostHog API. We focus on `GET` request
 
 Like most APIs, we must authenticate ourselves before we can access our data in PostHog. To do this, you need a personal API key. 
 
-To create a personal API key in PostHog, click your avatar icon in the bottom left corner of your PostHog instance, then click the gear icon to go to "My settings." 
+To create a personal API key in PostHog, click your avatar icon in the bottom left corner of your PostHog instance, then click the gear icon to go to "Account settings." 
 
-![Profile](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-get-insights-persons/profile.png)
+<ProductScreenshot
+    imageLight = {profileLight} 
+    imageDark = {profileDark}
+    classes="rounded"
+    alt="Profile"
+/>
 
 In "My settings," go to the ["Personal API Keys" tab](https://us.posthog.com/settings/user-api-keys) click "Create personal API key," add a name, and click "Create key." This creates a key and value in the table below. Make sure to save the value as it is only shown once, and you must create a new key if you lose it. The value looks like this:
 
@@ -288,7 +298,12 @@ This is just scratching the surface. API routes exist for all types of data in y
 
 One of the best ways to explore the API is to use PostHog normally, but with the browser network tab open to the `Fetch/XHR` tab. This gives you an idea of what requests PostHog is sending to generate the data you are seeing. It can be useful if you are trying to recreate a request to see how we do it in PostHog.
 
-![Inspect requests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-get-insights-persons/inspect.png)
+<ProductScreenshot
+    imageLight = {inspectLight} 
+    imageDark = {inspectDark}
+    classes="rounded"
+    alt="Inspect requests"
+/>
 
 Also, check out our [our API documentation](/docs/api) for all the information about the API and its possibilities.
 

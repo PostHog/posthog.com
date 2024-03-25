@@ -44,7 +44,7 @@ export function Nav(props: NavProps): React.ReactElement {
 
     return (
         <>
-            <div className="mb-6 px-2 sticky top-[57px] md:top-[-1px] md:reasonable:top-[107px] z-50 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
+            <div className="mb-6 px-2 sticky top-[57px] md:top-[-1px] md:reasonable:top-[107px] z-[50] bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
                 <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-3 py-1 min-h-[40px]">
                     {/**
                      * If you're on a product page

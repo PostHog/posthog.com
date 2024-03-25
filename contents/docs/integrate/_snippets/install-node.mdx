@@ -13,7 +13,7 @@ import { PostHog } from 'posthog-node'
 
 const client = new PostHog(
     '<ph_project_api_key>',
-    { host: '<ph_instance_address>' } // TIP: You can omit this line if using PostHog Cloud
+    { host: '<ph_instance_address>' }
 )
 
 await client.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events

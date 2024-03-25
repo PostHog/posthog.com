@@ -619,7 +619,7 @@ export const handbookSidebar = [
         name: 'People & Ops',
         url: '',
         children: [
-           {
+            {
                 name: 'Overview',
                 url: '/handbook/people/overview',
             },

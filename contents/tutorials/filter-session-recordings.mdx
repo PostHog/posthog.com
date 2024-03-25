@@ -8,8 +8,25 @@ author:
 tags:
   - session replay
 featuredVideo: 'https://www.youtube-nocookie.com/embed/3BS5h2gkz90'
-date: 2022-11-03
+date: 2022-11-03T00:00:00.000Z
 ---
+
+export const filterSessionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-events-session-recording-light-mode.png"
+export const filterSessionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-events-session-recording-dark-mode.png"
+export const filterOffLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/recording-filter-off-light-mode.png"
+export const filterOffDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/recording-filter-off-dark-mode.png"
+export const filterOnLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/recording-filter-on-light-mode.png"
+export const filterOnDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/recording-filter-on-dark-mode.png"
+export const searchRecordingFlagLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/search-recording-flag-light-mode.mp4"
+export const searchRecordingFlagDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/search-recording-flag-dark-mode.mp4"
+export const filterPersonsRecordingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-persons-recordings-light-mode.png"
+export const filterPersonsRecordingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-persons-recordings-dark-mode.png"
+export const quickFilterLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/quick-filter-recordings-light-mode.png"
+export const quickFilterDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/quick-filter-recordings-dark-mode.png"
+export const filterRecordingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-recordings-time-light-mode.png"
+export const filterRecordingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/filter-recordings-time-dark-mode.png"
+export const timePickerLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/time-picker-light-mode.mp4"
+export const timePickerDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/filter-session-recordings/time-picker-dark-mode.mp4"
 
 Funnels may tell you _where_ users are experiencing friction within your product, but only session replays can show you _why_.
 
@@ -23,17 +40,32 @@ You'll need an appropriate event or action set up to do this – see [our comple
 
 To start filtering, click ‘Filter.’ 
 
-![search for recording events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings/filter-events-session-recording.png)
+<ProductScreenshot
+    imageLight = {filterSessionLight} 
+    imageDark = {filterSessionDark}
+    classes="rounded"
+    alt="Search for recording events"
+/>
 
 Next, click "Show advanced filters," and then "Filter for events or actions." Here you can search for actions or events similar to how you would build an insights — use the filter builder on the left of the screen to define what sort of actions or events you’re looking for. 
 
 Once you have filtered the recordings to a smaller, more relevant list then you can search within individual recordings to find the specific moment when an event occurs. In fact, there are a few ways to find the specific event you’re looking for!
 
-![global filter off](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings/recording-filter-off.png)
+<ProductScreenshot
+    imageLight = {filterOffLight} 
+    imageDark = {filterOffDark}
+    classes="rounded"
+    alt="Global filter off"
+/>
 
 The easiest way to focus on a particular action is to use the toggle labeled ‘Only events matching filters’. This removes all events which don’t match your global filter from both the timeline and the event list, changing the view from the above, to the below. 
 
-![global filter on](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings/recording-filter-on.png)
+<ProductScreenshot
+    imageLight = {filterOnLight} 
+    imageDark = {filterOnDark}
+    classes="rounded"
+    alt="Global filter on"
+/>
 
 Alternatively, you may prefer to search for an event which _doesn’t_ match a global filter — in which case you use the search events field to find other events within the current recording. 
 
@@ -43,7 +75,12 @@ If you use feature flags in PostHog, you can also filter recordings by the flag 
 
 To filter recordings based on an event which happens within a recording where a user has viewed a particular flag. To do this, you must first create a filter based on the event you’re looking for and _then_ create a secondary filter that specifies the flag. 
 
-![feature flag recording filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings/search-recording-flag.png)
+<ProductVideo
+    videoLight = {searchRecordingFlagLight} 
+    videoDark = {searchRecordingFlagDark}
+    classes="rounded"
+    alt="Feature flag recording filter"
+/>
 
 As before, you can then search within a specific recording to find the event you’re interested in. 
 
@@ -53,7 +90,12 @@ Another use case for filtering recordings is to see how certain types of users b
 
 Filtering recordings based on person properties is similar to actions or events, except that it is done using the ‘Filter by persons or cohorts’ filter instead. 
 
-![filter persons recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings/filter-persons-recordings.png)
+<ProductScreenshot
+    imageLight = {filterPersonsRecordingsLight} 
+    imageDark = {filterPersonsRecordingsDark}
+    classes="rounded"
+    alt="Filter persons recordings"
+/>
 
 As before, you can then search within a specific recording to find the event you’re interested in. 
 
@@ -61,7 +103,12 @@ As before, you can then search within a specific recording to find the event you
 
 Often, you’ll want to combine several persons filters with events filters so that you can, for example, find users who completed a specific action on macOS, or called a particular feature flag within the UK. 
 
-![quick filters](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings/quick-filter-recordings.png)
+<ProductScreenshot
+    imageLight = {quickFilterLight} 
+    imageDark = {quickFilterDark}
+    classes="rounded"
+    alt="Quick filters"
+/>
 
 In such instances you may want to build filters based on device, OS, location or browser with a single click. That’s why we built the quick filter options which you can see on each entry in the recent recordings column — simply click a matching icon to filter for similar recordings. 
 
@@ -69,9 +116,21 @@ In such instances you may want to build filters based on device, OS, location or
 
 The final way to filter recordings is chronologically, based on the time or date that an recording was captured. This can be especially powerful for products where user behavior is influenced by the time of year, such as a B2C marketplace that runs seasonal sales.
 
-![filter recording by time](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings/filter-recordings-time.png)
+<ProductScreenshot
+    imageLight = {filterRecordingsLight} 
+    imageDark = {filterRecordingsDark}
+    classes="rounded"
+    alt="Filter recording by time"
+/>
 
 Next to the date picker, you can filter recordings based on the overall duration of a session. This is useful if you need to find recordings based where users are highly engaged and interact with your app for extended periods — or where engagements are brief, perhaps due to UX issues. 
+
+<ProductVideo
+    videoLight = {timePickerLight} 
+    videoDark = {timePickerDark}
+    classes="rounded"
+    alt="Using time picker to filter"
+/>
 
 ## Further reading
 

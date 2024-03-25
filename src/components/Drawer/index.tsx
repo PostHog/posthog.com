@@ -45,7 +45,7 @@ export const Drawer = (props: DrawerProps): React.ReactElement => {
                         >
                             <Dialog.Panel className={classes}>
                                 <div
-                                    className="group absolute top-4 right-4 bg-accent dark:bg-accent-dark rounded-full p-1 border-light dark:border-dark cursor-pointer z-50 border-transparent  hover:border-light dark:hover:border-dark "
+                                    className="group absolute top-4 right-4 bg-accent dark:bg-accent-dark rounded-full p-1 border-light dark:border-dark cursor-pointer z-[50] border-transparent  hover:border-light dark:hover:border-dark "
                                     onClick={onClose}
                                 >
                                     <IconX className="text-primary dark:text-primary-dark w-6 h-6 relative group-hover:top-[-1px] group-hover:scale-[1.05] group-active:top-[0px] group-active:scale-[.99]" />
