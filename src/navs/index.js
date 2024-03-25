@@ -1904,13 +1904,17 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Subscriptions',
-                    url: '/docs/product-analytics/subscriptions',
-                    icon: 'IconBell',
-                    color: 'red',
+                    name: 'Tools',
                 },
                 {
-                    name: 'Tools',
+                    name: 'LLM insights',
+                    url: '/docs/product-analytics/llms',
+                    icon: 'IconMagicWand',
+                    color: 'yellow',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Autocapture',
@@ -1919,16 +1923,22 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Data management',
+                    url: '/docs/data',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'Sharing & embedding',
                     url: '/docs/product-analytics/sharing',
                     icon: 'IconShare',
                     color: 'purple',
                 },
                 {
-                    name: 'Data management',
-                    url: '/docs/data',
-                    icon: 'IconDatabase',
-                    color: 'blue',
+                    name: 'Subscriptions',
+                    url: '/docs/product-analytics/subscriptions',
+                    icon: 'IconBell',
+                    color: 'red',
                 },
                 {
                     name: 'Sampling',
