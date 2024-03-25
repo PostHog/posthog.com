@@ -20,7 +20,7 @@ We deprecated the functionality of PostHog apps that enable you to capture data 
 
 There are two options for recreating this functionality:
 
-1. **Set up a cron of your own**. You can use a tool like [val.town](https://val.town/) to easily set up scheduled tasks that capture data from other tools and send it to PostHog. Our tutorials on [capturing new RSS items](/tutorials/rss-item-capture) and [events from Calendly webhooks](/tutorials/calendly-webhooks) are examples of this.
+1. **Set up a cron of your own**. You can use a tool like [val.town](https://val.town/) to easily set up scheduled tasks that capture data from other tools and send it to PostHog. Our tutorials on [capturing new RSS items](/tutorials/rss-item-capture), [events from Calendly webhooks](/tutorials/calendly-webhooks), and [GitHub stars](/tutorials/github-star-tracker) are examples of this.
 
 2. **Use our data warehouse**. PostHog's data warehouse enables you to import and use data from platforms like Stripe, Hubspot, and Postgres natively in PostHog. See our [docs](/docs/data-warehouse) for more information.
 

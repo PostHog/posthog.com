@@ -28,7 +28,7 @@ PostHog apps were an idea of mine (Marius). I wanted a Google Analytics-style wo
 
 ![Map](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-we-built-an-app-server/map.png)
 
-My solution was to build an app platform and the first ever PostHog app, [GeoIP](/apps/geoip-enrichment), but the project vision immediately expanded to enable more modification of the events pipeline, such as backing up data to S3, syncing GitHub stars, or getting customer feedback.
+My solution was to build an app platform and the first ever PostHog app, [GeoIP](/apps/geoip-enrichment), but the project vision immediately expanded to enable more modification of the events pipeline, such as backing up data to S3, [syncing GitHub stars](/tutorials/github-star-tracker), or getting customer feedback.
 
 ### Arbitrary app code in Python
 
