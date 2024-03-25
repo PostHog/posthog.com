@@ -32,6 +32,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { usePopper } from 'react-popper'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
+import { StaticImage } from 'gatsby-plugin-image'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -426,10 +427,14 @@ export const Main = () => {
                     <div className="flex-1 flex">
                         <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
                             {pathname === '/' && <ActiveBackground />}
-                            <Logo
-                                color={websiteTheme === 'dark' && 'white'}
-                                className="h-[24px] fill-current relative px-2 box-content"
-                            />
+                            {enterpriseMode ? (
+                                <StaticImage src="./posthog-tm.png" className="h-6 mx-6" />
+                            ) : (
+                                <Logo
+                                    color={websiteTheme === 'dark' && 'white'}
+                                    className="h-[24px] fill-current relative px-2 box-content"
+                                />
+                            )}
                         </Link>
                     </div>
                     <ul className="md:flex hidden list-none m-0 p-0">
