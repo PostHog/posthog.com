@@ -1,11 +1,11 @@
 ---
 title: Shopify
-icon: ../../images/docs/integrate/frameworks/shopify.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/shopify.svg
 ---
 
-import eventLight from '../../images/tutorials/shopify/event-light.png';
-import eventDark from '../../images/tutorials/shopify/event-dark.png';
-
+export const eventLight = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711383938/posthog.com/contents/images/tutorials/shopify/event-light.png'
+export const eventDark = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711383938/posthog.com/contents/images/tutorials/shopify/event-dark.png'
 
 ## Setting up a custom web pixel
 
@@ -71,12 +71,12 @@ To have unrestricted access to the features of PostHog in your Shopify store, yo
 1. Go to 'Online Store' -> 'Themes' (see image below)
 1. On your theme, click 'Actions' -> 'Edit code' (see image below)
 
-![Shopify Dashboard](../../images/tutorials/shopify/shopify-dashboard.png)
+![Shopify Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/shopify-dashboard.png)
 
 1. You should now be seeing a code editor. Click on `theme.liquid` under 'Layout' on the left sidebar (see image below)
 1. Navigate until you see the closing `</head>` tag. Paste your snippet there, before that tag, like in the image below:
 
-![Shopify Dashboard](../../images/tutorials/shopify/snippet.png)
+![Shopify Snippet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/snippet.png)
 
 1. Click the green save button on the top right and you're good to go - PostHog should now capturing events on your Shopify store!
 
@@ -103,7 +103,7 @@ To track _which_ product a user adds to their cart, we can use a `data-ph-captur
 
 Once set up, the _Add to cart_ button autocapture event in PostHog will include the properties for each of the attributes prefixed with `data-ph-capture-attribute-` and their values.
 
-![Data attributes in an autocaptured event](../../images/tutorials/shopify/autocapture-data-attributes.png)
+![Data attributes in an autocaptured event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/autocapture-data-attributes.png)
 
 #### Use custom events and properties
 
@@ -142,7 +142,7 @@ To add a custom event to your Shopify checkout page, add a script like this to y
 
 Once setup, you can see the order's total price including taxes (`value`) and the array of products that were ordered with specific info about the variants in PostHog:
 
-![Order details sent from Shopify as properties on a custom event](../../images/tutorials/shopify/shopify-order-details.png)
+![Order details sent from Shopify as properties on a custom event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/shopify-order-details.png)
 
 ## What can you do with this data?
 
