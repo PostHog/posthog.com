@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mo-shehu
-featuredImage: ../images/blog/intro-phil.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/intro-phil.png
 featuredImageType: full
 category: Inside PostHog
 ---

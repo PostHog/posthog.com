@@ -31,7 +31,7 @@ export const Intro = ({ image = true }) => {
                             placeholder="none"
                             quality={100}
                             className=""
-                            src="../../../contents/images/products/data-warehouse/data-warehouse.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/data-warehouse.png"
                         />
                     </figure>
                 )}
@@ -62,7 +62,7 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
                         url="/docs/data-warehouse/setup"
@@ -79,7 +79,7 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
                         url="/docs/data-warehouse/query"
@@ -96,7 +96,7 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
                         url="/tutorials/hogql-sum-aggregation"

@@ -150,7 +150,7 @@ export default function SearchResults(props: SearchResultsProps) {
         <Combobox value={{} as Result} onChange={onSelect} by={compareResults}>
             {({ activeOption }) => (
                 <div
-                    className="search-results z-50 bg-white rounded overflow-hidden shadow-xl flex flex-col h-full"
+                    className="search-results z-[50] bg-white rounded overflow-hidden shadow-xl flex flex-col h-full"
                     onKeyDown={handleKeyDown}
                 >
                     <SearchBox />
@@ -404,7 +404,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                     quality={100}
                                     objectFit="contain"
                                     alt=""
-                                    src="../../../contents/images/media/social-media-headers/hogs/detective_hog.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/media/social-media-headers/hogs/detective_hog.png"
                                     className="max-w-[150px]"
                                 />
                             </div>

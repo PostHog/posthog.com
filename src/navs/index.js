@@ -620,6 +620,10 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
+                name: 'Overview',
+                url: '/handbook/people/overview',
+            },
+            {
                 name: 'Finance',
                 url: '/handbook/people/finance',
             },
@@ -1141,15 +1145,19 @@ export const docsMenu = {
                         },
                         {
                             name: 'Angular',
-                            url: '/tutorials/angular-analytics',
+                            url: '/docs/libraries/angular',
                         },
                         {
                             name: 'Astro',
-                            url: '/tutorials/astro-analytics',
+                            url: '/docs/libraries/astro',
+                        },
+                        {
+                            name: 'Bubble',
+                            url: '/docs/libraries/bubble',
                         },
                         {
                             name: 'Django',
-                            url: '/tutorials/django-analytics',
+                            url: '/docs/libraries/django',
                         },
                         {
                             name: 'Docusaurus v2',
@@ -1160,11 +1168,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Flask',
-                            url: '/tutorials/python-feature-flags',
+                            url: '/docs/libraries/flask',
                         },
                         {
                             name: 'Framer',
-                            url: '/tutorials/framer-analytics',
+                            url: '/docs/libraries/framer',
                         },
                         {
                             name: 'Gatsby',
@@ -1176,6 +1184,10 @@ export const docsMenu = {
                         {
                             name: 'Google Tag Manager',
                             url: '/docs/libraries/google-tag-manager',
+                        },
+                        {
+                            name: 'Laravel',
+                            url: '/docs/libraries/laravel',
                         },
                         {
                             name: 'Next.js',
@@ -1191,7 +1203,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Remix',
-                            url: '/tutorials/remix-analytics',
+                            url: '/docs/libraries/remix',
                         },
                         {
                             name: 'Retool',
@@ -1219,7 +1231,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Svelte',
-                            url: '/tutorials/svelte-analytics',
+                            url: '/docs/libraries/svelte',
                         },
                         {
                             name: 'Vue.js',
@@ -1227,7 +1239,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Webflow',
-                            url: '/tutorials/webflow',
+                            url: '/docs/libraries/webflow',
                         },
                         {
                             name: 'WordPress',
@@ -1892,13 +1904,17 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Subscriptions',
-                    url: '/docs/product-analytics/subscriptions',
-                    icon: 'IconBell',
-                    color: 'red',
+                    name: 'Tools',
                 },
                 {
-                    name: 'Tools',
+                    name: 'LLM insights',
+                    url: '/docs/product-analytics/llms',
+                    icon: 'IconMagicWand',
+                    color: 'yellow',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Autocapture',
@@ -1907,16 +1923,22 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Data management',
+                    url: '/docs/data',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'Sharing & embedding',
                     url: '/docs/product-analytics/sharing',
                     icon: 'IconShare',
                     color: 'purple',
                 },
                 {
-                    name: 'Data management',
-                    url: '/docs/data',
-                    icon: 'IconDatabase',
-                    color: 'blue',
+                    name: 'Subscriptions',
+                    url: '/docs/product-analytics/subscriptions',
+                    icon: 'IconBell',
+                    color: 'red',
                 },
                 {
                     name: 'Sampling',

@@ -1,25 +1,28 @@
 ---
 title: How OpenSauced is moving to product-market fit with PostHog for Startups
 customer: OpenSauced
-logo: ../images/customers/opensauced/logo.svg
-logoDark: ../images/customers/opensauced/logo_dark.svg
-featuredImage: ../images/customers/opensauced/featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/opensauced/logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/opensauced/logo_dark.svg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/opensauced/featured.png
 featuredCustomer: false
 industries:
-    - SaaS, Devtool
+  - 'SaaS, Devtool'
 users:
-    - Leadership
-    - Investors
-    - Founder
-    - Leadership
-    - Marketing
-    - Design
-    - Engineering
+  - Leadership
+  - Investors
+  - Founder
+  - Leadership
+  - Marketing
+  - Design
+  - Engineering
 toolsUsed:
-    - Analytics
-    - Cohorts
-    - PostHog Cloud
-    - Insights
+  - Analytics
+  - Cohorts
+  - PostHog Cloud
+  - Insights
 date: 2023-09-03
 ---
 
@@ -31,7 +34,7 @@ While seeking funding, Brian applied to [PostHog for Startups](/startups) — a 
 
 “I spoke to Anna Debenham at [boldstart](https://boldstart.vc/) and told her: I’m an engineer, not a product manager,” says Brian. “I explained that we had all this data, but I didn’t know how to slice and dice it. She taught me how to start picking metrics and building insights so we could track things in line with our bottom-up strategy.”
 
-![OpenSauced](../images/customers/opensauced/opensauced-pizza.png)
+![OpenSauced](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/opensauced/opensauced-pizza.png)
 <Caption>OpenSauced joined PostHog for Startups and claimed $50,000 in free credits</Caption>
 
 ### PostHog for startups (and designers, and developer relations)

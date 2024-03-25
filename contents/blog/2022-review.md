@@ -1,13 +1,15 @@
 ---
 date: 2023-01-11
-title: "CEO diary: The things I learned in 2022"
+title: 'CEO diary: The things I learned in 2022'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: CEO diaries
-author: ["james-hawkins"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+author:
+  - james-hawkins
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
@@ -17,7 +19,7 @@ It's always helpful to look back on the year just gone, and 2022 was an exceptio
 
 ### We grew very fast _and_ are much more durable
 
-![Our 2022 revenue growth over time, which increases by 6 times](../images/revenue-end-2022.jpg)
+![Our 2022 revenue growth over time, which increases by 6 times](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/revenue-end-2022.jpg)
 
 - Revenue grew nearly 6x without any outbound sales team.
 

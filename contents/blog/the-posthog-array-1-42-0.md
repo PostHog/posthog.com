@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
 category: PostHog news
 tags:
@@ -33,7 +34,7 @@ If you haven't run async migrations 0005-0007 yet, or if they aren't available o
 
 ### New: Area chart visualization
 
-![area chart visualization in posthog](../images/blog/array/1-42-0-area-charts.gif)
+![area chart visualization in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-42-0-area-charts.gif)
 
 New team member Thomas Obermueller has got off to a great start by delivering the much-requested area chart visualization for PostHog insights. Now, if a normal line chart isn't  enough and a regular bar chart won't satisfy then you have an exciting third option.
 
@@ -41,7 +42,7 @@ To [quote Thomas](https://github.com/PostHog/posthog/pull/12869) himself: "_The 
 
 ### New: URL breakdown normalisations
 
-![URL breakdown normalization](../images/blog/array/1-42-0-url-breakdown.gif)
+![URL breakdown normalization](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-42-0-url-breakdown.gif)
 
 Are you frustrated when you breakdown trends and funnels by URLs and see four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`? Well, not anymore! 
 
@@ -49,13 +50,13 @@ Now, whenever we're dealing with breakdowns by "Current URL" or "Pathname", we n
 
 ### New: Share recordings easily
 
-![share recordings in posthog](../images/blog/array/1-42-0-share-recordings.gif)
+![share recordings in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-42-0-share-recordings.gif)
 
 When you find an interesting session recording, you probably want to share it with your team. So, we've improved sharing options to make it easier. You can now share specific recordings easily, and even send teammates to an exact time in any recording!
 
 ### New: Get beta features via our roadmap
 
-![posthog roadmap](../images/blog/array/1-42-0-roadmap.gif)
+![posthog roadmap](https://res.cloudinary.com/dmukukwp6/video/upload/v1711093816/posthog.com/contents/images/blog/array/1-42-0-roadmap.mp4)
 
 Even though we're open source, we know it's not always very easy to tell what we're working on or planning for the future - there are just so many repos, issues and PRs!
 

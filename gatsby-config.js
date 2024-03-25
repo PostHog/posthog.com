@@ -76,7 +76,6 @@ module.exports = {
                     node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
-                    `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
                         resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
@@ -85,7 +84,6 @@ module.exports = {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
                 ],
-                plugins: [`gatsby-remark-static-images`],
             },
         },
         `gatsby-transformer-json`,
@@ -330,7 +328,18 @@ module.exports = {
         {
             resolve: `gatsby-transformer-cloudinary`,
             options: {
-                transformTypes: [`RoadmapMedia`, `SqueakTeamCrest`, `SqueakRoadmapMedia`, `SqueakTeamTeamImage`],
+                transformTypes: [
+                    `RoadmapMedia`,
+                    `SqueakTeamCrest`,
+                    `SqueakRoadmapMedia`,
+                    `SqueakTeamTeamImage`,
+                    `MdxFrontmatterFeaturedImageChildImageSharp`,
+                    `MdxFrontmatterThumbnailChildImageSharp`,
+                    `MdxFrontmatterImagesChildImageSharp`,
+                    `MdxFrontmatterLogoChildImageSharp`,
+                    `MdxFrontmatterLogoDarkChildImageSharp`,
+                    `MdxFrontmatterIconChildImageSharp`,
+                ],
             },
         },
         ...(process.env.SHOPIFY_APP_PASSWORD &&

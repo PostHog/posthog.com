@@ -1,12 +1,14 @@
 ---
 date: 2023-06-30
-title: "In-depth: ClickHouse vs Redshift"
+title: 'In-depth: ClickHouse vs Redshift'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mathew-pregasen"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+author:
+  - mathew-pregasen
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -60,13 +62,13 @@ On paper, these are standard premises behind an OLAP database. Redshift uses a l
 
 Compute nodes, through some complexity discussed below, transact with storage that is often built on AWS S3, though support for other storage solutions, like RDS, has been added recently. 
 
-![Redshift Simplfiied.png](../images/blog/clickhouse-vs-redshift/Redshift_Simplfiied.png)
+![Redshift Simplfiied.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/Redshift_Simplfiied.png)
 
 Redshift becomes a bit more complex once we dive into its multiple layers of computation optimizations, both organizational and with bare-metal hardware. 
 
 The first is Redshift Spectrum, which refers to an army of EC2 machines that compute nodes can recruit to split a single query into parallel computations. More accurately, Redshift Spectrum is a layer between compute nodes and storage – while compute nodes divvy up queries via the leader node, Spectrum splits a single query’s computation between many machines. 
 
-![Amazon Redshift Spectrum.png](../images/blog/clickhouse-vs-redshift/Amazon_Redshift_Spectrum.png)
+![Amazon Redshift Spectrum.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/Amazon_Redshift_Spectrum.png)
 
 The easiest way to describe this setup is to walk through a single query. Imagine a business intelligence (BI) tool that wants to learn the total sum of sales across a company’s history. In order: 
 
@@ -83,7 +85,7 @@ AQUA is a hardware optimization that enables storage units to run computations w
 
 According to AWS, AQUA boosts performance by 10x on average by precomputing queries. 
 
-![AQUA.png](../images/blog/clickhouse-vs-redshift/AQUA.png)
+![AQUA.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/AQUA.png)
 
 AQUA shifts Amazon’s shared-nothing model to something similar to a shared storage model. Because AQUA precomputes data, it encourages developers to use a single Redshift managed storage layer that multiple Redshift clusters can interact with. 
 
@@ -93,11 +95,11 @@ ClickHouse’s traditional architecture differ for some managed instances, but i
 
 ClickHouse extends a shared-nothing architecture, combining CPU, storage, and memory into a single, beefy machine. But while ClickHouse’s design is fundamentally monolithic, it also supports sharding a database across multiple instances using Apache ZooKeeper. 
 
-![Shared Nothing Architecture.png](../images/blog/clickhouse-vs-redshift/Shared_Nothing_Architecture.png)
+![Shared Nothing Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/Shared_Nothing_Architecture.png)
 
 Because ClickHouse bundles everything into the same instance, it can scale that instance into three discrete dimensions – storage, memory, and compute. Although, scaling an already provisioned instance isn’t trivial; a new instance needs to be spun up and the data needs to be manually migrated. 
 
-![Clickhouse_ 3 Dimensions.png](../images/blog/clickhouse-vs-redshift/Clickhouse__3_Dimensions.png)
+![Clickhouse_ 3 Dimensions.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/Clickhouse__3_Dimensions.png)
 
 Like Redshift, ClickHouse employs techniques for pre-aggregating data to return faster queries. Redshift accomplishes this by specialized in-memory hardware that precomputes queries. ClickHouse, by contrast, uses materialized views with custom settings that dynamically and efficiently precompute data once new data is ingested. 
 
@@ -107,7 +109,7 @@ In layman's terms ClickHouse is a speedboat whereas Amazon Redshift is an aircra
 
 A common point of confusion is the distinction between ClickHouse and ClickHouse Cloud, particularly in regard to architecture. While ClickHouse is a monolithic titan, ClickHouse Cloud decouples storage and compute. It is deployed on AWS and, as of very recently, GCP. 
 
-![ClickHouse Cloud Architecture.png](../images/blog/clickhouse-vs-redshift/ClickHouse_Cloud_Architecture.png)
+![ClickHouse Cloud Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/ClickHouse_Cloud_Architecture.png)
 
 ClickHouse Cloud was modeled after Google BigQuery, offering out-of-the-box integrations with ELT providers, an interactive SQL console, automated backups, caching, and automatic replication. 
 

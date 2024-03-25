@@ -1,20 +1,23 @@
 ---
 title: How to set up surveys in Svelte
 date: 2024-01-25
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+tags:
+  - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/svelte-surveys/events-light.png'
-import EventsDark from '../images/tutorials/svelte-surveys/events-dark.png'
-import ImgSurveyResultsLight from '../images/tutorials/svelte-surveys/survey-results-light.png'
-import ImgSurveyResultsDark from '../images/tutorials/svelte-surveys/survey-results-dark.png'
-import ImgSurveyTemplatesLight from '../images/tutorials/svelte-surveys/survey-templates-light.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/svelte-surveys/survey-templates-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/events-dark.png"
+export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/survey-results-light.png"
+export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/survey-results-dark.png"
+export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/survey-templates-light.png"
+export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/survey-templates-dark.png"
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Svelte app.
 
@@ -47,7 +50,7 @@ Next, replace the code in `src/routes/+page.svelte` with a simple heading:
 
 Run `npm run dev` and navigate to http://localhost:5173 to see your app in action.
 
-![Basic Svelte app](../images/tutorials/svelte-surveys/basic-app.png)
+![Basic Svelte app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-surveys/basic-app.png)
 
 ## 2. Add PostHog
 
@@ -116,7 +119,7 @@ Select any template, or you can create your own by clicking "Create blank survey
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
 
-![Popover survey in app](../images/tutorials/svelte-surveys/popover-survey.png)
+![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-surveys/popover-survey.png)
 
 ### Option 2: Implement your own survey UI
 
@@ -233,7 +236,7 @@ Then, integrate the component into `src/routes/+page.svelte`:
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/svelte-surveys/sample-survey-ui.png)
+![Custom survey UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 

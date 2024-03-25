@@ -1,9 +1,10 @@
 ---
 title: Google Cloud Storage
-github: https://github.com/PostHog/posthog-gcs-plugin
-thumbnail: ../../cdp/thumbnails/gcs-export.png
+github: 'https://github.com/PostHog/posthog-gcs-plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/gcs-export.png
 tags:
-    - gcs-export
+  - gcs-export
 ---
 
 > This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!

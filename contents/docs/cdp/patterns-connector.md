@@ -1,11 +1,12 @@
 ---
 title: Patterns
 layout: app
-github: https://github.com/PostHog/posthog-patterns-app
-installUrl: https://app.posthog.com/project/apps?name=Patterns
-thumbnail: ../../cdp/thumbnails/patterns-logo.svg
+github: 'https://github.com/PostHog/posthog-patterns-app'
+installUrl: 'https://app.posthog.com/project/apps?name=Patterns'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/patterns-logo.svg
 tags:
-    - patterns
+  - patterns
 ---
 
 Send event data from PostHog, to Patterns. This is useful for a number of reasons, including centralizing data into a CDP, or using it to generate customer models.

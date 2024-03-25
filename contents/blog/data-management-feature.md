@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/data-management-feature/posthog-data-management.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/data-management-feature/posthog-data-management.png
 featuredImageType: full
 author:
   - alex-kim
@@ -33,7 +34,7 @@ We set out to solve these pain points and the result is the new Data Management 
 
 The Data Management page (pictured below) is the new hub for viewing, editing and managing all the data coming into your instance. 
 
-![PostHog - data management tab](../images/blog/data-management-feature/data_management_tab.png)
+![PostHog - data management tab](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/data-management-feature/data_management_tab.png)
 
 Data Management introduces more ways to organize and categorize your events. Event definitions can now be organized using tags and we've created the 'Verified' marker, which tells collaborators that an event should be favored over other similar events. 
 
@@ -41,7 +42,7 @@ Verified events are prioritized within filters and other selection components, a
 
 As part of this overhaul, we've made a few important changes to how data is organized, too. 'Event Stats' and 'Property Stats' have been renamed 'Events' and 'Event properties', and we've moved them into the Data Management tab alongside 'Actions'. The 'Events & Actions' tab has been renamed 'Activity', where you can debug incoming event data by streaming it in near real time.
 
-![PostHog - live events tab](../images/blog/data-management-feature/live_events.png)
+![PostHog - live events tab](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/data-management-feature/live_events.png)
 
 ## Making it easy to define events 'on the fly'
 
@@ -51,15 +52,15 @@ Building an insight and see an Event or Event property that could be more descri
 
 Just hover over the Event property in the dropdown...
 
-![PostHog - read definition hover card](../images/blog/data-management-feature/read_definition_card.png)
+![PostHog - read definition hover card](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/data-management-feature/read_definition_card.png)
 
 And when you click 'Edit' you can add a description, add tags or mark it as a Verified Event.
 
-![PostHog - write definition hover card](../images/blog/data-management-feature/write_definition_card.png)
+![PostHog - write definition hover card](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/data-management-feature/write_definition_card.png)
 
 Alternatively, click on 'View' in the definition hover card and you'll be redirected to the new Data Management page, where you can explore all the Events and Event properties you've created.
 
-![PostHog - view definition context](../images/blog/data-management-feature/data_management_view.gif)
+![PostHog - view definition context](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/data-management-feature/data_management_view.gif)
 
 And if you want a gold star in best practice, you can also opt to create definitions with our API. Check out our documentation on how to use the [`event_definitions`](/docs/api/event-definitions) and [`property_definitions`](/docs/api/property-definitions) API endpoints.
 

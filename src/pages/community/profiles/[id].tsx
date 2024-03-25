@@ -284,7 +284,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                     initial={{ opacity: 0, translateY: '100%' }}
                                                     animate={{ opacity: 1, translateY: 0 }}
                                                     exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                                                    className={`-ml-4 z-50`}
+                                                    className={`-ml-4 z-[50]`}
                                                 >
                                                     <SortDropdown sort={sort} setSort={setSort} />
                                                 </motion.div>

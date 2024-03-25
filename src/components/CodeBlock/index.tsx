@@ -168,7 +168,10 @@ export const CodeBlock = ({
             return code
         }
 
-        return code.replace("'<ph_project_api_key>'", projectToken).replace("'<ph_project_name>'", projectName)
+        return code
+            .replace('<ph_project_api_key>', projectToken)
+            .replace('<ph_project_name>', projectName)
+            .replace('<ph_instance_address>', projectInstance || 'https://app.posthog.com')
     }
 
     const copyToClipboard = () => {
@@ -247,7 +250,7 @@ export const CodeBlock = ({
                                         <SelectorIcon className="w-4 h-4" />
                                     </Listbox.Button>
 
-                                    <Listbox.Options className="absolute top-full right-0 m-0 p-0 mt-1 bg-black text-white list-none rounded text-xs focus:outline-none z-50 overflow-hidden border border-border dark:border-border-dark">
+                                    <Listbox.Options className="absolute top-full right-0 m-0 p-0 mt-1 bg-black text-white list-none rounded text-xs focus:outline-none z-[50] overflow-hidden border border-border dark:border-border-dark">
                                         {languages.map((option) => (
                                             <Listbox.Option
                                                 key={option.language}

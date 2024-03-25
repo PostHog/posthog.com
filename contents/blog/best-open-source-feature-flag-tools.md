@@ -5,12 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author:
   - andy-vandervell
 category: General
-tags: 
+tags:
   - Open source
 ---
 
@@ -31,7 +32,7 @@ While it's tempting to [build your own tools](/blog/feature-flags-as-a-service),
 - **GitHub stars:** 14.8k
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-![PostHog](../images/screenshots/feature-flags.png)
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/feature-flags.png)
 
 #### What is PostHog?
 
@@ -61,7 +62,7 @@ There are no limits on feature flag usage in the open-source edition, though A/B
 - **GitHub stars:** 9k
 - [Flagsmith on GitHub](https://github.com/Unleash/unleash)
 
-![unleash](../images/blog/open-source-feature-flags/unleash.png)
+![unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/unleash.png)
 
 #### What is Unleash?
 
@@ -85,7 +86,7 @@ Unleash is free for two environments when you self-host. A managed version is al
 - **GitHub stars:** 5.2k
 - [GrowthBook on GitHub](https://github.com/growthbook/growthbook/)
 
-![GrowthBook](../images/blog/open-source-feature-flags/growthbook.png)
+![GrowthBook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/growthbook.png)
 
 #### What is GrowthBook?
 
@@ -109,7 +110,7 @@ Growthbook’s open source self-hosted plan is free forever, with unlimited flag
 - **GitHub stars:** 3.4k
 - [Flagsmith on GitHub](https://github.com/Flagsmith/flagsmith)
 
-![Flagsmith](../images/blog/open-source-feature-flags/flagsmith.png)
+![Flagsmith](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/flagsmith.png)
 
 #### What is Flagsmith?
 
@@ -135,7 +136,7 @@ Flagsmith is free up to 50,000 requests per month when you choose the cloud feat
 - **GitHub stars:** 3k
 - [Flipt on GitHub](https://github.com/flipt-io/flipt)
 
-![flipt](../images/blog/open-source-feature-flags/flipt.png)
+![flipt](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/flipt.png)
 
 #### What is Flipt?
 
@@ -153,7 +154,7 @@ Nothing. There is no paid version of Flipt. It's distributed under a GPL-3.0 lic
 
 ### 6. Flipper
 
-![flipper](../images/blog/open-source-feature-flags/flipper.png)
+![flipper](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/flipper.png)
 
 - **License:** MIT
 - **GitHub stars:** 3.4k
@@ -175,7 +176,7 @@ In addition to the free open-source edition, Flipper also offers a cloud-hosted 
 - **GitHub stars:** 1.1k
 - [FeatBit on GitHub](https://github.com/featbit/featbit)
 
-![featbit](../images/blog/open-source-feature-flags/featbit.png)
+![featbit](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/featbit.png)
 
 #### What is FeatBit?
 
@@ -197,7 +198,7 @@ All features are completely free. FeatBit monetizes its platform by offering pre
 - **GitHub Stars:** 276
 - [Feature Hub on GitHub](https://github.com/featurehub-io)
 
-![featurehub](../images/blog/open-source-feature-flags/feature-hub.png)
+![featurehub](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/feature-hub.png)
 
 #### What is FeatureHub?
 

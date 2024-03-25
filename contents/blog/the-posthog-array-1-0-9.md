@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -23,7 +24,7 @@ First our updates and new features.
 
 ### Stickiness
 
-![stickiness](../images/03/stickiness-gif.gif)
+![stickiness](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/stickiness-gif.gif)
 
 Last week we made a lot of changes to actions but one important change missed the release.
 
@@ -33,7 +34,7 @@ Stickiness lets you view an action as it is repeated by unique users on a daily 
 
 ### New Funnel Builder
 
-![new funnel builder](../images/03/newfunnel.gif)
+![new funnel builder](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/newfunnel.gif)
 
 Tim spent a lot of work on funnels – we thought it was so useful in our previous product we included it in the very first PostHog release.
 
@@ -45,11 +46,11 @@ This is three small changes grouped together following on from our Actions vs Ev
 
 We are aiming to make events very intuitive so firstly we have changed the wording around event property filters and made it clear that you can use dropdowns in events
 
-![](../images/03/Posthog-5.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/Posthog-5.png)
 
 and most importantly we added 'isnot' and 'does not contain' to property filters making this much more powerful.
 
-![](../images/03/isnotdoesnotcontain.gif)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/03/isnotdoesnotcontain.gif)
 
 ## Performance updates
 

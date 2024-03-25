@@ -67,7 +67,7 @@ export const useProducts = () => {
             slug: 'product-analytics',
             freeLimit: '1,000,000',
             denomination: 'event',
-            price: '0.00031',
+            price: '0.000248',
             calcVolume: <>{eventNumber.toLocaleString()}</>,
             calcCost: <>{productAnalyticsCost.toLocaleString()}</>,
             slider: (
@@ -87,7 +87,7 @@ export const useProducts = () => {
             slug: 'session-replay',
             freeLimit: '5,000',
             denomination: 'recording',
-            price: '0.0050',
+            price: '0.04',
             calcVolume: <>{sessionRecordingEventNumber.toLocaleString()}</>,
             calcCost: <>{sessionRecordingCost.toLocaleString()}</>,
             slider: (

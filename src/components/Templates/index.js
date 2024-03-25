@@ -119,7 +119,6 @@ const query = graphql`
                 }
                 frontmatter {
                     thumbnail {
-                        id
                         publicURL
                     }
                     title

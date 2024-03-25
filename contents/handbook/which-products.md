@@ -22,7 +22,7 @@ Products we build into the platform should:
 
 [This diagram](https://miro.com/app/board/uXjVMF-MT74=/?share_link_id=847485164707) shows example products we could ship:
 
-![a diagram showing which products we could build in which order](../images/product-order.png)
+![a diagram showing which products we could build in which order](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/product-order.png)
 
 At earlier stage companies, technical founders will do _every_ role, so tools traditionally used by those further from engineering (i.e. support) are likely to get usage if built into PostHog's platform. In later stage companies, we need - for now - to remain closer to engineering tools
 
