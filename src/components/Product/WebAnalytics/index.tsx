@@ -353,13 +353,13 @@ export const ProductWebAnalytics = () => {
                 <section id="customers" className="-mt-56 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="gathers 30% more data than with Google Analytics"
+                            outcome="gathers 30% more data than with GA4"
                             quote="We could autocapture... events using the JS snippet and... configure custom events."
                             customer={ycombinator}
                         />
                         <CustomerCard
                             outcome="switched from Plausible"
-                            quote="PostHog is way more powerful and insightful than Plausible. We have more info that we used to have."
+                            quote="PostHog is way more powerful and insightful than Plausible. We have more info than we used to have."
                             customer={significa}
                         />
                         <CustomerCard
