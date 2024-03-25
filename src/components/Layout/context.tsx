@@ -117,7 +117,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
 
     useEffect(() => {
         if (enterpriseMode) {
-            document.querySelector('body')?.setAttribute('style', 'font-family: Times New Roman !important')
+            document.querySelector('body')?.setAttribute('style', 'font-family: Verdana !important')
         } else {
             document.querySelector('body')?.removeAttribute('style')
         }
