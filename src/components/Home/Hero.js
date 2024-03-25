@@ -42,8 +42,13 @@ const EnterpriseSignupCTA = () => {
     }
 
     return (
-        <CallToAction type="secondary" onClick={handleClick}>
-            Get started - free (not recommended)
+        <CallToAction
+            type="secondary"
+            onClick={handleClick}
+            className="mt-4 !border-0 bg-transparent p-0 [&_span]:font-normal [&_span]:bg-transparent [&_span]:border-0 [&_span]:p-0 [&_span]:text-primary"
+        >
+            <span className="opacity-75">or</span> <strong className="text-blue">Get started - free</strong>{' '}
+            <span className="opacity-75">(not recommended)</span>
         </CallToAction>
     )
 }
@@ -78,12 +83,16 @@ export default function Hero() {
         <>
             <Modal open={showNPS} setOpen={setShowNPS}>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[300px] dark:bg-border-dark p-4 rounded-md border border-border dark:border-dark">
-                    <div className="text-right">
+                    <div className="float-right ml-4">
                         <button onClick={() => setShowNPS(false)}>
                             <IconX className="w-4 h-4" />
                         </button>
                     </div>
-                    <h4>How would you rate our site?</h4>
+                    <h4 className="font-bold leading-tight">We're listening: Tell us about your experience</h4>
+                    <p>
+                        We're always trying to improve our web site for you. Please rate your experience before
+                        continuing.
+                    </p>
                     <div className="grid grid-cols-10 rounded-sm border bg-white text-black border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
                         {Array.from({ length: 10 }, (_, index) => (
                             <button
@@ -95,9 +104,13 @@ export default function Hero() {
                             </button>
                         ))}
                     </div>
+                    <div className="flex justify-between gap-4 text-xs mt-1 mb-3">
+                        <span>Good</span>
+                        <span>Great</span>
+                    </div>
                     <button
                         onClick={() => setShowNPS(false)}
-                        className="w-full px-4 py-2 mt-4 bg-black dark:bg-accent-dark text-white rounded-md"
+                        className="w-full appearance-none bg-initial bg-gray-accent border border-light dark:border-dark py-2"
                     >
                         Submit
                     </button>
