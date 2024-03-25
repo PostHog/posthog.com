@@ -86,9 +86,9 @@ export const load = async () => {
 Install `posthog-node` using your package manager:
 
 ```bash
-yarn add posthog-js
+yarn add posthog-node
 # or
-npm install --save posthog-js
+npm install --save posthog-node
 ```
 
 Then, initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [load function](https://kit.svelte.dev/docs/load#page-data):
