@@ -76,3 +76,12 @@ $ctaCount: 2;
         }
     }
 }
+
+.enterprise-mode-home-hero-cta {
+    opacity: 0;
+    animation: fadeIn;
+    animation-duration: 3s;
+    animation-delay: 2300ms;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}

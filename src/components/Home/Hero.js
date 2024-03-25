@@ -30,21 +30,18 @@ export const FeatureStrip = ({ className = '' }) => {
 
 const EnterpriseSignupCTA = () => {
     const posthog = usePostHog()
-    const [confirm, setConfirm] = useState(false)
 
     const handleClick = () => {
-        if (!confirm) {
-            setConfirm(true)
-            return
+        if (window.confirm('Are you sure you don’t want to book a demo?')) {
+            window.location.href = `https://${
+                posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
+            }.posthog.com/signup`
         }
-        window.location.href = `https://${
-            posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
-        }.posthog.com/signup`
     }
 
     return (
-        <CallToAction onClick={handleClick}>
-            {confirm ? `Are you sure you don’t want to book a demo?` : 'Get started - free'}
+        <CallToAction type="secondary" onClick={handleClick}>
+            Get started - free (not recommended)
         </CallToAction>
     )
 }
@@ -91,7 +88,13 @@ export default function Hero() {
                             : 'The single platform to analyze, test, observe, and deploy new features'}
                     </h2>
                     <div className="flex justify-center items-center gap-2 home-hero-cta">
-                        {enterpriseMode ? <EnterpriseSignupCTA /> : <SignupCTA />}
+                        {enterpriseMode ? (
+                            <CallToAction size="lg" to="/book-a-demo">
+                                Contact sales
+                            </CallToAction>
+                        ) : (
+                            <SignupCTA />
+                        )}
                         <TrackedCTA
                             key={enterpriseMode ? 'talk-to-sales' : 'get-a-demo'}
                             event={{ name: `clicked Get a demo` }}
@@ -99,9 +102,14 @@ export default function Hero() {
                             type="secondary"
                             size="lg"
                         >
-                            {enterpriseMode ? 'Talk to sales' : 'Get a demo'}
+                            {enterpriseMode ? 'Contact enterprise sales' : 'Get a demo'}
                         </TrackedCTA>
                     </div>
+                    {enterpriseMode && (
+                        <div className="flex justify-center mt-2 enterprise-mode-home-hero-cta">
+                            <EnterpriseSignupCTA />
+                        </div>
+                    )}
                 </div>
                 <Slider />
                 <Accordion />
