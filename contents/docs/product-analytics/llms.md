@@ -19,7 +19,7 @@ Combining your Langfuse and PostHog data makes it easy to answer questions like:
 
 Here's an [example dashboard in PostHog](https://eu.posthog.com/shared/HPOaK5zNVkP062nQJQJoooXe61l15w):
 
-![LLM analytics example dashboard](../../images/docs/product-analytics/llm-example-dash.mp4)
+![LLM analytics example dashboard](https://res.cloudinary.com/dmukukwp6/video/upload/v1711368021/posthog.com/contents/docs/llm-example-dash.mp4)
 
 ## Supported application types
 
@@ -38,7 +38,7 @@ Once you've added the integration into PostHog, you can use a dashboard template
 2. Click the **New dashboard** button in the top right.
 3. Select **LLM metrics** from the list of templates.
 
-![How to create an LLM analytics dashboard using the template](../../images/docs/product-analytics/llm-create-dash.mp4)
+![How to create an LLM analytics dashboard using the template](https://res.cloudinary.com/dmukukwp6/video/upload/v1711368118/posthog.com/contents/docs/llm-create-dash.mp4)
 
 ## Supported Langfuse events
 
