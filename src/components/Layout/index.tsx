@@ -91,7 +91,7 @@ const WhitepaperBanner = ({ onClose }) => {
                     <p className="opacity-70 font-semibold m-0">Just fill out the fields below</p>
                 </div>
                 <form onSubmit={handleSubmit} className="m-0">
-                    <div className="max-h-[200px] overflow-auto">
+                    <div className="max-h-[200px] overflow-auto text-sm">
                         {whitepaperFields.map(({ label, name, type = 'text', options = [], placeholder }) => {
                             return (
                                 <div key={name} className="my-1">
