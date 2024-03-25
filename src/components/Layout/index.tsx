@@ -61,7 +61,7 @@ const WhitepaperBanner = ({ onClose }) => {
     return (
         <motion.div
             initial={{ translateX: '100%', opacity: 0 }}
-            animate={{ translateX: '0%', opacity: 1, transition: { duration: 3 } }}
+            animate={{ translateX: '0%', opacity: 1, transition: { duration: 5 } }}
             className="bg-white dark:bg-dark rounded-md border border-border dark:border-dark fixed bottom-4 right-4 z-[50] flex"
         >
             <button
@@ -135,7 +135,7 @@ const Article = ({ children, className = '' }: { children: React.ReactNode; clas
                     <MobileNav />
                 </>
             )}
-            {whitepaperOpen && <WhitepaperBanner onClose={() => setWhitepaperOpen(false)} />}
+            {whitepaperOpen && enterpriseMode && <WhitepaperBanner onClose={() => setWhitepaperOpen(false)} />}
         </div>
     )
 }
