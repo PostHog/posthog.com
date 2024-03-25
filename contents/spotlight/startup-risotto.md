@@ -1,6 +1,6 @@
 ---
 title: How Risotto got into Y Combinator and built an AI product
-date: 2024-03-22
+date: 2024-03-25
 author:
   - joe-martin
 showTitle: true
@@ -8,7 +8,7 @@ rootpage: /blog
 sidebar: Blog
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/startup_beforesunset.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1711365816/posthog.com/contents/images/blog/risotto-startup.jpg
 featuredImageType: full
 category: Startups
 ---
