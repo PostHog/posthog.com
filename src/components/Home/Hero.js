@@ -63,7 +63,7 @@ const Feature = ({ title, icon, url }) => {
 }
 
 export default function Hero() {
-    const [selectedIndex, setSelectedIndex] = useState()
+    const [selectedIndex, setSelectedIndex] = useState(9)
     const [showNPS, setShowNPS] = useState(false)
     const { enterpriseMode } = useLayoutData()
     const heroTitle = enterpriseMode
@@ -77,32 +77,30 @@ export default function Hero() {
     return (
         <>
             <Modal open={showNPS} setOpen={setShowNPS}>
-                <div className="absolute flex justify-center items-center w-full h-full text-center ">
-                    <div className="bg-white w-[300px] dark:bg-border-dark p-4 rounded-md border border-border dark:border-dark relative">
-                        <div className="text-right">
-                            <button onClick={() => setShowNPS(false)}>
-                                <IconX className="w-4 h-4" />
-                            </button>
-                        </div>
-                        <h4>How would you rate our site?</h4>
-                        <div className="grid grid-cols-10 rounded-sm border bg-white text-black border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
-                            {Array.from({ length: 10 }, (_, index) => (
-                                <button
-                                    onClick={() => setSelectedIndex(index)}
-                                    className={selectedIndex === index ? 'bg-black dark:bg-accent-dark text-white' : ''}
-                                    key={index + 1}
-                                >
-                                    {index + 1}
-                                </button>
-                            ))}
-                        </div>
-                        <button
-                            onClick={() => setShowNPS(false)}
-                            className="w-full px-4 py-2 mt-4 bg-black dark:bg-accent-dark text-white rounded-md"
-                        >
-                            Submit
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[300px] dark:bg-border-dark p-4 rounded-md border border-border dark:border-dark">
+                    <div className="text-right">
+                        <button onClick={() => setShowNPS(false)}>
+                            <IconX className="w-4 h-4" />
                         </button>
                     </div>
+                    <h4>How would you rate our site?</h4>
+                    <div className="grid grid-cols-10 rounded-sm border bg-white text-black border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
+                        {Array.from({ length: 10 }, (_, index) => (
+                            <button
+                                onClick={() => setSelectedIndex(index)}
+                                className={selectedIndex === index ? 'bg-black dark:bg-accent-dark text-white' : ''}
+                                key={index + 1}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                    </div>
+                    <button
+                        onClick={() => setShowNPS(false)}
+                        className="w-full px-4 py-2 mt-4 bg-black dark:bg-accent-dark text-white rounded-md"
+                    >
+                        Submit
+                    </button>
                 </div>
             </Modal>
             <section className="flex flex-col justify-center items-center">
