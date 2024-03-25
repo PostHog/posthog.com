@@ -45,7 +45,7 @@ const EnterpriseSignupCTA = () => {
         <CallToAction
             type="secondary"
             onClick={handleClick}
-            className="mt-4 !border-0 bg-transparent p-0 [&_span]:font-normal [&_span]:bg-transparent [&_span]:border-0 [&_span]:p-0 [&_span]:text-primary"
+            className="mt-4 !border-0 !bg-transparent p-0 [&_span]:font-normal [&_span]:bg-transparent [&_span]:border-0 [&_span]:p-0 [&_span]:text-primary [&_span]:dark:text-primary-dark"
         >
             <span className="opacity-75">or</span> <strong className="text-blue">Get started - free</strong>{' '}
             <span className="opacity-75">(not recommended)</span>
@@ -93,11 +93,13 @@ export default function Hero() {
                         We're always trying to improve our web site for you. Please rate your experience before
                         continuing.
                     </p>
-                    <div className="grid grid-cols-10 rounded-sm border bg-white text-black border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
+                    <div className="grid grid-cols-10 rounded-sm border bg-white dark:bg-black text-black dark:text-white border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
                         {Array.from({ length: 10 }, (_, index) => (
                             <button
                                 onClick={() => setSelectedIndex(index)}
-                                className={selectedIndex === index ? 'bg-black dark:bg-accent-dark text-white' : ''}
+                                className={
+                                    selectedIndex === index ? 'bg-black dark:bg-orange text-white dark:text-black' : ''
+                                }
                                 key={index + 1}
                             >
                                 {index + 1}
@@ -110,7 +112,7 @@ export default function Hero() {
                     </div>
                     <button
                         onClick={() => setShowNPS(false)}
-                        className="w-full appearance-none bg-initial bg-gray-accent border border-light dark:border-dark py-2"
+                        className="w-full appearance-none bg-initial bg-gray-accent dark:bg-gray-accent-dark border border-light dark:border-dark py-2"
                     >
                         Submit
                     </button>
