@@ -1,19 +1,19 @@
 ---
 title: Read this before you pivot your startup
-date: 2024-03-21
+date: 2024-03-25
 author:
   - james-temperton
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1710126230/posthog.com/contents/images/blog/story-about-pivots.png
 featuredImageType: full
 tags:
-  - Startups
+  - Product-market fit
+  - Being a founder
 crosspost:
-  - Product engineers
-  - Engineers
   - Founders
   - Blog
 ---
+
 YouTube used to be a [dating website](https://www.theguardian.com/technology/2016/mar/16/youtube-past-video-dating-website). Twitter used to be a [podcasting platform](https://www.businessinsider.com/how-twitter-was-founded-2011-4). Wrigley, the chewing gum company, [originally sold soap](https://en.wikipedia.org/wiki/Wrigley_Company). Few startup founders get it right first time, and a well-timed and executed pivot is (almost) always worth it.
 
 Take Wrigley, for example. In the 1890s, when the company started [selling scouring soap](https://www.lib.uchicago.edu/collex/exhibits/sweet-home-chicago/history-chocolate-and-candy-making-chicago/wrigley-spearmen-work-and-play/), packs of chewing gum were an added extra to encourage people to order. But the gum soon proved more popular than the soap. The rest is chewy, minty history.
@@ -22,7 +22,7 @@ At PostHog, we’ve pivoted more than most. It took us six pivots ([count ‘em]
 
 **This week’s theme is: How, and when, to pivot your startup.**
 
-> This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. If you’re going to pivot, make it big
 
@@ -36,7 +36,7 @@ In both cases, Butterfield found success by making huge pivots away from his ori
 
 ![pivot quiz](https://res.cloudinary.com/dmukukwp6/image/upload/v1711038004/posthog.com/contents/images/newsletter/pivot/pivot_quiz.png)
 
-##2. Is your product the problem? Or the market?
+## 2. Is your product the problem? Or the market?
 
 Monzo founder and YC partner [Tom Blomfield has](https://twitter.com/t_blom) more than a little experience in the art of the pivot. 
 
@@ -115,16 +115,12 @@ Define that timeframe and stick to it.
 
 ## Good reads for product engineers 📖
 
-**[The Big Pivot Podcast](https://mastersofscale.com/stewart-butterfield-the-big-pivot/) – Stewart Butterfield**
-Find 37 minutes in your day to listen to Slack co-founder and CEO Stewart Butterfield in conversation with Reid Hoffman on how to navigate big pivots.
+**[The Big Pivot Podcast](https://mastersofscale.com/stewart-butterfield-the-big-pivot/) – Stewart Butterfield:** Find 37 minutes in your day to listen to Slack co-founder and CEO Stewart Butterfield in conversation with Reid Hoffman on how to navigate big pivots.
 
-**[Enterprise is Dead](https://cra.mr/enterprise-is-dead/) – David Cramer**
-Sentry’s co-founder and CEO on why “the era of servicing only the Fortune 500” has been killed by Sentry’s target market, the Fortune 500,000.
+**[Enterprise is Dead](https://cra.mr/enterprise-is-dead/) – David Cramer:** Sentry’s co-founder and CEO on why “the era of servicing only the Fortune 500” has been killed by Sentry’s target market, the Fortune 500,000.
 
-**[Why software projects fail](https://members.vadimkravcenko.com/why-software-projects-fail) – Vadim Kravchenko**
-Vadim outlines how overconfident engineers, inexperienced managers, and mismanaged stakeholders can derail promising projects.
+**[Why software projects fail](https://members.vadimkravcenko.com/why-software-projects-fail) – Vadim Kravchenko:** Vadim outlines how overconfident engineers, inexperienced managers, and mismanaged stakeholders can derail promising projects.
 
-**[How startups beat incumbents](https://longform.asmartbear.com/startup-beats-incumbent) – Jason Cohen**
-An in-depth guide from the founder of WP Engine.
+**[How startups beat incumbents](https://longform.asmartbear.com/startup-beats-incumbent) – Jason Cohen:** An in-depth guide from the founder of WP Engine.
 
 *Answers. Snowboarding: Shopify. Dating website: YouTube. Online RPG: Flickr. Cell phone towers: Soylent.*
