@@ -12,9 +12,9 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 - **Product engineers:** Software engineers who want to improve their product skills, understand users, and build successful new products. We share what we've learned and curate useful advice in the [product engineers hub](/product-engineers).
 
-- **PostHog users:** Existing PostHog users how want to develop their skills and learn how to get the most out of PostHog.
+- **PostHog users:** Existing PostHog users who want to develop their skills and learn how to get the most out of PostHog.
 
-- **B2B SaaS companies:** Our ideal customers are B2B SaaS companies who need reliable user data and simplified data stack. Most of our output is tailored toward B2B uses cases.
+- **B2B SaaS companies:** Our ideal customers are B2B SaaS companies who need reliable user data and a simplified data stack. Most of our output is tailored toward B2B use cases.
 
 ## What kind of content do we produce?
 
@@ -27,11 +27,11 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 4. **Engineering tutorials:** – Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others, like [How to show a survey after a delay](/tutorials/delayed-survey), focus on specific PostHog user pain points.
 
-5. **Newsletters:** – Our newsletter, [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy to digest, snackable format. 
+5. **Newsletters:** – Our newsletter, [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format. 
 
 ### Good to knows
 
-- The marketing team is responsible for all the above – mostly Andy, Ian, and Lior, but James Hawkins, Joe and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
+- The marketing team is responsible for all the above – mostly Andy, Ian, and Lior, but James Hawkins, Joe, and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
 
 - You can view planned content on the <PrivateLink url="https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent">Marketing project board</PrivateLink> using the "content" label filter. All planned content should have an issue.
 
