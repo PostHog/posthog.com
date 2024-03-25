@@ -62,13 +62,10 @@ const WhitepaperBanner = ({ onClose }) => {
         <motion.div
             initial={{ translateX: '100%', opacity: 0 }}
             animate={{ translateX: '0%', opacity: 1, transition: { duration: 5 } }}
-            className="bg-white dark:bg-dark rounded-md border border-border dark:border-dark fixed bottom-4 right-4 z-[50] flex"
+            className="bg-white dark:bg-border-dark rounded-md border border-border dark:border-dark fixed bottom-4 right-4 z-[50] flex"
         >
-            <button
-                onClick={onClose}
-                className="w-8 h-8 bg-white rounded-full border border-border dark:border-dark flex items-center justify-center absolute -top-3 -right-3"
-            >
-                <IconX className="w-4 h-4" />
+            <button onClick={onClose} className="flex items-center justify-center absolute top-1 right-1">
+                <IconX className="w-6 h-6" />
             </button>
             <div
                 className={`${

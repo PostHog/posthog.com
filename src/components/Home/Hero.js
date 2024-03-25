@@ -78,18 +78,18 @@ export default function Hero() {
         <>
             <Modal open={showNPS} setOpen={setShowNPS}>
                 <div className="absolute flex justify-center items-center w-full h-full text-center ">
-                    <div className="bg-white w-[300px] dark:bg-dark p-4 rounded-md border border-border dark:border-dark relative">
+                    <div className="bg-white w-[300px] dark:bg-border-dark p-4 rounded-md border border-border dark:border-dark relative">
                         <div className="text-right">
                             <button onClick={() => setShowNPS(false)}>
                                 <IconX className="w-4 h-4" />
                             </button>
                         </div>
                         <h4>How would you rate our site?</h4>
-                        <div className="grid grid-cols-10 rounded-sm border border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
+                        <div className="grid grid-cols-10 rounded-sm border bg-white text-black border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
                             {Array.from({ length: 10 }, (_, index) => (
                                 <button
                                     onClick={() => setSelectedIndex(index)}
-                                    className={selectedIndex === index ? 'bg-black text-white' : ''}
+                                    className={selectedIndex === index ? 'bg-black dark:bg-accent-dark text-white' : ''}
                                     key={index + 1}
                                 >
                                     {index + 1}
@@ -98,7 +98,7 @@ export default function Hero() {
                         </div>
                         <button
                             onClick={() => setShowNPS(false)}
-                            className="w-full px-4 py-2 mt-4 bg-black text-white rounded-md"
+                            className="w-full px-4 py-2 mt-4 bg-black dark:bg-accent-dark text-white rounded-md"
                         >
                             Submit
                         </button>
