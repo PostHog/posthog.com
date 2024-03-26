@@ -72,7 +72,7 @@ const WhitepaperBanner = ({ onClose }) => {
         <motion.div
             initial={{ translateX: '100%', opacity: 1 }}
             animate={{ translateX: '0%', opacity: 1, transition: { duration: 10 } }}
-            className="bg-white dark:bg-border-dark rounded-md border border-border dark:border-dark fixed bottom-4 right-4 z-[50] flex"
+            className="bg-white dark:bg-border-dark rounded-md border border-border dark:border-dark fixed bottom-16 md:bottom-4 right-4 z-[50] flex flex-col md:flex-row"
         >
             <button onClick={onClose} className="flex items-center justify-center absolute top-4 right-4">
                 <IconX className="w-6 h-6" />
@@ -80,12 +80,12 @@ const WhitepaperBanner = ({ onClose }) => {
             <div
                 className={`${
                     blackPaper ? 'bg-black dark' : 'bg-white'
-                } w-[340px] p-4 flex justify-center flex-col m-2 border border-light dark:border-dark`}
+                } basis-[200px] md:basis-auto text-center w-auto md:w-[340px] p-4 flex items-center flex-col m-2 border border-light dark:border-dark`}
             >
-                <div className="dark:hidden">
+                <div className="dark:hidden max-h-[300px] max-w-[200px] md:max-w-full md:max-h-auto">
                     <StaticImage src="../../../public/images/enterprise/whitepaper-poster.jpg" />
                 </div>
-                <div className="hidden dark:block">
+                <div className="hidden dark:block max-h-[300px] max-w-[200px] md:max-w-full md:max-h-auto">
                     <StaticImage src="../../../public/images/enterprise/blackpaper-poster.jpg" />
                 </div>
             </div>
