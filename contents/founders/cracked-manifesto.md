@@ -44,7 +44,7 @@ A lot of traditional management behavior doesn’t apply here, and can actively 
 
 ### 1. Be cracked yourself
 
-You need to demonstrate the behavior you want to see. Cracked people are extremely attuned to ‘do as I do’ not ‘do as I say’. This means spending a significant amount of time doing IC work. Do the stuff that arrogant senior people would find ‘boring’. Write tests. Respond to customer support queries. Go weirdly deep into some piece of analysis. Do something badly that’s not your job so you at least understand it better. 
+You need to demonstrate the behavior you want to see. Cracked people are extremely attuned to ‘do as I do’ not ‘do as I say’. This means spending a significant amount of time doing IC work. Do the stuff that arrogant senior people would find ‘boring’. Write tests. Respond to customer support queries. Go weirdly deep into some piece of analysis. Do something badly that’s not your job, so you at least understand it better. 
 
 **Spend most of your time generating enthusiasm**
 
