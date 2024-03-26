@@ -146,7 +146,7 @@ If we want to capture every route change, we must write code to capture pageview
 
 In `posthog.client.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that you capture the event after the page is mounted.
 
-```js plugins/posthog.client.js
+```js file=plugins/posthog.client.js
 import { defineNuxtPlugin } from '#app'
 import posthog from 'posthog-js'
 
@@ -254,7 +254,7 @@ import { PostHog } from 'posthog-node';
 
 export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig();
-  const cookieString = event.req.headers.cookie || '';  
+  const cookieString =  event.node.req.headers.cookie || '';  
   const cookieName =`ph_${runtimeConfig.public.posthogPublicKey}_posthog`;
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   
