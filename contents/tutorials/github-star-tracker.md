@@ -42,7 +42,18 @@ Now, go to your repo and star it. You should see an event with the relevant info
   classes="rounded"
 />
 
-You can use this information to track and visualize the popularity of your repositories. You can also combine with [the Slack webhook](/docs/webhooks/slack) to send this information to Slack every time it happens.
+## Using GitHub stars in PostHog
+
+To visualize star data in PostHog, create an insight by going to the [product analytics tab](https://us.posthog.com/insights) and clicking **New insight**. Once here, select `GitHub Star` as the event for your series and visualize using a time series line chart or total value number.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711472788/posthog.com/contents/images/tutorials/github-star-tracker/stars-insight-light.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711472789/posthog.com/contents/images/tutorials/github-star-tracker/stars-insight-dark.png" 
+  alt="GitHub Stars insight in PostHog" 
+  classes="rounded"
+/>
+
+You can also [set up an action](/docs/data/actions) and then use the [the Slack webhook](/docs/webhooks/slack) to send stars to Slack every time they happen.
 
 ## Further reading
 
