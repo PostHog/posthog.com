@@ -67,7 +67,7 @@ Here is some subjective math:
 - Doubling down on a cracked person’s performance can improve their output from 8/10 to 9/10.
 - It’s the 9/10 quality output that will delight your users, so you should focus on that, even if the absolute increase in performance is less. 
 
-**If you find yourself approving stuff for your team, fire yourself**
+### 5. If you find yourself approving stuff for your team, fire yourself
 
 Asking thoughtful questions and rigorously testing ideas is cracked. Long approval processes that exist for the sake of having someone senior sign off on something in order to kick accountability up the chain is very un-cracked. If you find yourself approving stuff for your team because of your position as their manager, remove yourself from the process. 
 
