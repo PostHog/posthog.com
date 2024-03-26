@@ -52,7 +52,7 @@ It is unbelievably easy to find reasons not to do stuff at any kind of organizat
 
 This is why you should spend more time motivating people than trying to teach them new skills or making them do training. If they are cracked and staying motivated, they will train themselves. I don’t think I’ve yet read a blog post by someone I admire and learned from that says ‘I got good because I attended blah blah special leadership course on being great.’
 
-**Get out of the way**
+### 3. Get out of the way
 
 Cracked people are deeply intrinsically motivated. This means that extrinsic motivation, while still present in some form (we’ve all got to pay bills yeah), is way less important. Help cracked engineers take ownership of their own projects by encouraging them to make the decisions about what to do next. If they ask for help - ie. they actively want you to get in the way - ask questions about what they think should happen next, rather than giving them the answers. 
 
