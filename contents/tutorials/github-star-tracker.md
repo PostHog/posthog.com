@@ -12,11 +12,11 @@ To help you make better use of stars, this tutorial shows you how capture them u
 
 ## Creating a webhook handler in Val Town
 
-Our webhook handler will simply accept a `POST` request, get the data we want from that request, and capture a PostHog event with that data. Val Town is great for doing this because we can reuse the `capturePostHogEvent` we created earlier and you can fork, modify, and run [the code I already wrote here](https://www.val.town/v/ianvph/posthogGitHubStarCapture):
+Our webhook handler will accept a `POST` request and capture a PostHog event with the data from the request. Val Town is great for doing this because you can reuse [the code I already wrote here](https://www.val.town/v/ianvph/posthogGitHubStarCapture) (just click **Fork** in the 3 dots menu beside **Save**):
 
 <iframe src="https://www.val.town/embed/ianvph/posthogGitHubStarCapture" height="630" frameBorder="0" allowFullScreen></iframe>
 
-Once done, create a `phProjectAPIKey` environment variable in [your Val Town settings](https://www.val.town/settings/environment-variables) using your PostHog project API key which you can get in [your project settings](https://us.posthog.com/settings/project#variables). Finally, click the 3 dots next to the save and preview buttons then copy the HTTP endpoint link.
+Once done, create a `phProjectAPIKey` environment variable in [your Val Town settings](https://www.val.town/settings/environment-variables). Set this value to your PostHog project API key, which you can find in [your project settings](https://us.posthog.com/settings/project#variables). Finally, click the 3 dots next to the**Save** button then copy the HTTP endpoint link.
 
 ![Val created](https://res.cloudinary.com/dmukukwp6/image/upload/v1711401477/posthog.com/contents/images/tutorials/github-star-tracker/val.png)
 
@@ -24,16 +24,16 @@ Once done, create a `phProjectAPIKey` environment variable in [your Val Town set
 
 With the HTTP endpoint link from Val Town, go the settings page of the repository you want to track. Once there: 
 
-1. Click "Webhooks" in the sidebar and then "Add webhook." 
+1. Click **Webhooks** in the sidebar and then **Add webhook**. 
 2. Paste your HTTP endpoint link into the Payload URL and choose `application/json` as the content type.
-3. Change events that trigger the webhook to selected events, then unselect "Pushes" and select "Stars."
-4. Click "Add webhook."
+3. Change events that trigger the webhook to selected events, then unselect **Pushes** and select **Stars**.
+4. Click **Add webhook**.
 
 ![Webhook](https://res.cloudinary.com/dmukukwp6/image/upload/v1711401480/posthog.com/contents/images/tutorials/github-star-tracker/webhook.png)
 
 > **Note:** You can also choose other GitHub events like deployments, forks, issues, pushes, pull requests, releases, and more.
 
-Now, you can go to your repo, star it, and you should see an event with the relevant information captured into PostHog. 
+Now, go to your repo and star it. You should see an event with the relevant information captured into PostHog. 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711401484/posthog.com/contents/images/tutorials/github-star-tracker/event-light.png" 
