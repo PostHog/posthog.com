@@ -8,15 +8,15 @@ tags:
 
 GitHub stars are a popular way to track the success of open-sourced projects. Beyond seeing how many stars a repo has, GitHub does little to help you track or analyze these stars. 
 
-To help you make better use of stars, this tutorial shows you how capture them using a combination of PostHog, GitHub webhooks, and [Val Town](https://val.town/), platform for writing, running, and scheduling JavaScript functions in your browser.
+To help you make better use of stars, this tutorial shows you how to capture them using a combination of PostHog, GitHub webhooks, and [Val Town](https://val.town/), a platform for writing, running, and scheduling JavaScript functions in your browser.
 
 ## Creating a webhook handler in Val Town
 
-Our webhook handler will accept a `POST` request and capture a PostHog event with the data from the request. Val Town is great for doing this because you can reuse [the code I already wrote here](https://www.val.town/v/ianvph/posthogGitHubStarCapture) (just click **Fork** in the 3 dots menu beside **Save**):
+Our webhook handler will accept a `POST` request and capture a PostHog event with the data from the request. Val Town is great for doing this because you can reuse [the code I already wrote here](https://www.val.town/v/ianvph/posthogGitHubStarCapture) (just click **Fork** in the three-dot menu beside **Save**):
 
 <iframe src="https://www.val.town/embed/ianvph/posthogGitHubStarCapture" height="630" frameBorder="0" allowFullScreen></iframe>
 
-Once done, create a `phProjectAPIKey` environment variable in [your Val Town settings](https://www.val.town/settings/environment-variables). Set this value to your PostHog project API key, which you can find in [your project settings](https://us.posthog.com/settings/project#variables). Finally, click the 3 dots next to the**Save** button then copy the HTTP endpoint link.
+Now create a `phProjectAPIKey` environment variable in [your Val Town settings](https://www.val.town/settings/environment-variables). Set this value to your PostHog project API key, which you can find in [your project settings](https://us.posthog.com/settings/project#variables). Finally, click the three-dot menu next to the**Save** button then copy the HTTP endpoint link.
 
 ![Val created](https://res.cloudinary.com/dmukukwp6/image/upload/v1711401477/posthog.com/contents/images/tutorials/github-star-tracker/val.png)
 
@@ -33,7 +33,7 @@ With the HTTP endpoint link from Val Town, go the settings page of the repositor
 
 > **Note:** You can also choose other GitHub events like deployments, forks, issues, pushes, pull requests, releases, and more.
 
-Now, go to your repo and star it. You should see an event with the relevant information captured into PostHog. 
+Now, go to your repo and star it. You should see an event with the relevant information captured in PostHog. 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711401484/posthog.com/contents/images/tutorials/github-star-tracker/event-light.png" 
@@ -44,7 +44,7 @@ Now, go to your repo and star it. You should see an event with the relevant info
 
 ## Using GitHub stars in PostHog
 
-To visualize star data in PostHog, create an insight by going to the [product analytics tab](https://us.posthog.com/insights) and clicking **New insight**. Once here, select `GitHub Star` as the event for your series and visualize using a time series line chart or total value number.
+To visualize star data in PostHog, create an insight by going to the [product analytics tab](https://us.posthog.com/insights) and clicking **New insight**. Now select `GitHub Star` as the event for your series and visualize it using a time series line chart or total value number.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711472788/posthog.com/contents/images/tutorials/github-star-tracker/stars-insight-light.png" 
