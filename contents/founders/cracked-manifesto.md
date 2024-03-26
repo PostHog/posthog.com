@@ -60,7 +60,7 @@ Help cracked engineers take ownership of their own projects by encouraging them 
 
 Setting deadlines, creating arbitrary reporting obligations, or saying ‘if you ship X, you will get to Y title’ are examples of trying to use extrinsic motivation that you should avoid. 
 
-**Prioritize making cracked people more cracked, not making mediocre people good**
+### 4. Prioritize making cracked people more cracked, not making mediocre people good
 
 Here is some subjective math:
 
