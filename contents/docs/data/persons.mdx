@@ -74,6 +74,8 @@ Some examples of usecases that often don't require user profiles
 - B2C apps where users don't sign up or log in
 - High volume API server events
 
+> For backward compatibility reasons, and to make sure we don't drop person information accidentally, processing events with persons is the default for configs without any option set. 
+
 ### PostHog-js
 
 You can control whether events from PostHog-js have person processing enabled with the `process_persons` config setting. There are three options:
