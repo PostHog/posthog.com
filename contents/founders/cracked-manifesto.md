@@ -14,10 +14,14 @@ crosspost:
 
 We’ve become a bit obsessed with the notion of hiring cracked people at PostHog. When we say cracked, we mean things like:
 
-- Taking extreme ownership of ideas and driving them to completion, even if others disagree with you. Some people call this founder mentality. Better yet - you bring others on the journey with you. 
-- Unwavering optimism in the face of change or new ideas. This doesn’t mean you have to agree with the change, but adopting a ‘yes and’ mentality helps new ideas get off the ground that might otherwise die in a committee somewhere. This is especially true for ideas that come from non-senior/new people. 
-- People leave a meeting or conversation with you more excited/energized than when they started. You build people and their ideas up, and are generally perceived as a very helpful person. 
-- Behaving in a completely authentic way. You don’t play politics - your work does the talking. For example, if you do marketing, talk like an actual human being. This doesn’t work in most large organizations, sadly.
+- Taking extreme ownership of ideas and driving them to completion, even if others disagree with you. Some people call this founder mentality. Better still, you bring others on the journey with you.
+ 
+- Unwavering optimism in the face of change or new ideas. This doesn’t mean you have to agree with the change, but adopting a ‘yes and’ mentality helps new ideas get off the ground that might otherwise die in a committee somewhere. This is especially true for ideas that come from non-senior/new people.
+ 
+- People leave a meeting or conversation with you more excited/energized than when they started. You build people and their ideas up, and are generally perceived as a very helpful person.
+ 
+- Behaving in a completely authentic way. You don’t play politics – your work does the talking. For example, if you do marketing, talk like an actual human being. This doesn’t work in most large organizations, sadly.
+
 - You apply yourself to the craft of your discipline with a quasi-religious fervor. The joy comes from the craft itself, not creating shareholder value.  
 
 Hm, sounds pretty ripe for a toxic monoculture of tech bros doing whatever they want while the founders arbitrarily pick new pet projects based on what they last saw DHH tweet, right?
