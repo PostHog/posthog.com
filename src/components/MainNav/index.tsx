@@ -365,7 +365,7 @@ const enterpiseModeNames = {
     Products: 'Solutions',
     Pricing: 'Plans',
     Docs: 'Developer resources',
-    Community: 'Press releases/Newsroom',
+    Community: 'Newsroom',
     Company: 'Investor relations',
 }
 
@@ -649,7 +649,14 @@ export const Main = () => {
 }
 
 export const Mobile = () => {
-    const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
+    const enterpiseModeNames = {
+        Products: 'Solutions',
+        Pricing: 'Plans',
+        Docs: 'Developer resources',
+        Community: 'Newsroom',
+        Company: 'Investor relations',
+    }
+    const { menu, parent, internalMenu, activeInternalMenu, enterpriseMode, setEnterpriseMode } = useLayoutData()
 
     return (
         <div className="fixed bottom-0 w-full md:hidden z-[9999999]">
@@ -678,7 +685,7 @@ export const Mobile = () => {
                                 <span className={`w-5 h-5 inline-block relative !m-0`}>
                                     <Icon />
                                 </span>
-                                <span className="relative">{name}</span>
+                                <span className="relative">{enterpriseMode ? enterpiseModeNames[name] : name}</span>
                             </Link>
                         </li>
                     )
