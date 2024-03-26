@@ -32,7 +32,7 @@ export interface IProps {
 }
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
-    const { pathname } = useLocation()
+    const { pathname, search } = useLocation()
     const compact = typeof window !== 'undefined' && window !== window.parent
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
@@ -126,6 +126,9 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     useEffect(() => {
         if (pathname !== '/') {
             setEnterpriseMode(false)
+        }
+        if (pathname === '/' && search.includes('enterprise-mode=true')) {
+            setEnterpriseMode(true)
         }
     }, [pathname])
 
