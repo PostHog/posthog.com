@@ -28,10 +28,13 @@ Hmm, sounds pretty ripe for a toxic monoculture of tech bros doing whatever they
 
 No! The following are definitely not prerequisites to being cracked:
 
-- Fancy companies on your resume. You don’t need to have worked at a FAANG/MAMAA/shit hot SV-based company. We welcome cracked engineers who held together failing companies - we like their paranoia. 
-- Being an asshole. People need to want to work with you - saying ‘screw you, I’m doing this anyway’ is uncracked behavior if you can’t back it up. 
+- Fancy companies on your resume. You don’t need to have worked at a FAANG/MAMAA/shit hot SV-based company. We welcome cracked engineers who held together failing companies – we like their paranoia.
+ 
+- Being an asshole. People need to want to work with you – saying ‘screw you, I’m doing this anyway’ is uncracked behavior if you can’t back it up. 
+
 - There is no number of years of experience that correlates with crackedness, in either direction. 
-- You built a side project used by 1m people. Side projects are often great signs of crackedness/ownership, but they don’t have to be commercially successful - they just have to be interesting. 
+
+- You built a side project used by 1m people. Side projects are often great signs of crackedness/ownership, but they don’t have to be commercially successful – they just have to be interesting. 
 
 What’s cool about adopting this mentality is that it has noticeably increased the diversity of people applying to work with us at PostHog, as it ignores some of the traditional markers of status when it comes to job applications.
 
