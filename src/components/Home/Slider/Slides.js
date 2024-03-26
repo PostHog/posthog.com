@@ -35,6 +35,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { feature } from 'components/Pricing/PricingTable/classes'
 import { CallToAction } from 'components/CallToAction'
+import { useLayoutData } from '../../Layout/hooks'
 
 const Slide = ({
     containerClasses,
@@ -240,6 +241,9 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: IconRetention },
         { title: 'SQL', Icon: IconHogQL },
     ]
+
+    const { enterpriseMode } = useLayoutData()
+
     return (
         <Slide
             bgColor="[#1371FF]"
@@ -253,20 +257,28 @@ export const ProductAnalytics = () => {
             Images={() => {
                 return (
                     <>
-                        <div className="block dark:hidden">
-                            <StaticImage
-                                {...imageProps}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-light.png"
-                                alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
-                            />
-                        </div>
-                        <div className="hidden dark:block">
-                            <StaticImage
-                                {...imageProps}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-dark.png"
-                                alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
-                            />
-                        </div>
+                        {enterpriseMode ? (
+                            <div className="py-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_758444896.jpg" alt="" />
+                            </div>
+                        ) : (
+                            <>
+                                <div className="block dark:hidden">
+                                    <StaticImage
+                                        {...imageProps}
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-light.png"
+                                        alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
+                                    />
+                                </div>
+                                <div className="hidden dark:block">
+                                    <StaticImage
+                                        {...imageProps}
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-dark.png"
+                                        alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
+                                    />
+                                </div>
+                            </>
+                        )}
                     </>
                 )
             }}
@@ -314,6 +326,8 @@ export const WebAnalytics = () => {
         { title: 'Device & location', Icon: IconGlobe },
         { title: 'Channels', Icon: IconMegaphone },
     ]
+    const { enterpriseMode } = useLayoutData()
+
     return (
         <Slide
             bgColor="lime-green"
@@ -331,20 +345,28 @@ export const WebAnalytics = () => {
             Images={() => {
                 return (
                     <>
-                        <div className="block dark:hidden">
-                            <StaticImage
-                                {...imageProps}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-light.png"
-                                alt="A screenshot of web analytics"
-                            />
-                        </div>
-                        <div className="hidden dark:block">
-                            <StaticImage
-                                {...imageProps}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-dark.png"
-                                alt="A screenshot of web analytics"
-                            />
-                        </div>
+                        {enterpriseMode ? (
+                            <div className="py-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_2001554009.jpg" alt="" />
+                            </div>
+                        ) : (
+                            <>
+                                <div className="block dark:hidden">
+                                    <StaticImage
+                                        {...imageProps}
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-light.png"
+                                        alt="A screenshot of web analytics"
+                                    />
+                                </div>
+                                <div className="hidden dark:block">
+                                    <StaticImage
+                                        {...imageProps}
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-dark.png"
+                                        alt="A screenshot of web analytics"
+                                    />
+                                </div>
+                            </>
+                        )}
                     </>
                 )
             }}
@@ -391,6 +413,8 @@ export const SessionReplay = () => {
         { title: 'Console logs', Icon: IconTerminal },
         { title: 'Network requests', Icon: IconPulse },
     ]
+    const { enterpriseMode } = useLayoutData()
+
     return (
         <Slide
             bgColor="[#F2AD46]"
@@ -408,20 +432,28 @@ export const SessionReplay = () => {
             Images={() => {
                 return (
                     <>
-                        <div className="block dark:hidden">
-                            <StaticImage
-                                {...imageProps}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-light.png"
-                                alt="A screenshot of a session recording"
-                            />
-                        </div>
-                        <div className="hidden dark:block">
-                            <StaticImage
-                                {...imageProps}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-dark.png"
-                                alt="A screenshot of a session recording"
-                            />
-                        </div>
+                        {enterpriseMode ? (
+                            <div className="py-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_2312841725.jpg" alt="" />
+                            </div>
+                        ) : (
+                            <>
+                                <div className="block dark:hidden">
+                                    <StaticImage
+                                        {...imageProps}
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-light.png"
+                                        alt="A screenshot of a session recording"
+                                    />
+                                </div>
+                                <div className="hidden dark:block">
+                                    <StaticImage
+                                        {...imageProps}
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-dark.png"
+                                        alt="A screenshot of a session recording"
+                                    />
+                                </div>
+                            </>
+                        )}
                     </>
                 )
             }}
@@ -476,6 +508,8 @@ export const FeatureFlags = () => {
         { title: 'JSON payloads', Icon: IconBrackets },
         { title: 'Instant rollbacks', Icon: IconRewind },
     ]
+    const { enterpriseMode } = useLayoutData()
+
     return (
         <Slide
             bgColor="[#29DBBB]"
@@ -490,38 +524,46 @@ export const FeatureFlags = () => {
             Images={() => {
                 return (
                     <>
-                        <div className="-rotate-1 -mr-6 -mt-2 mdlg:-mr-24 lg:-mr-52 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
-                            <div className="block dark:hidden">
-                                <StaticImage
-                                    {...image1Props}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-light.png"
-                                    className={`${image1Props.className}`}
-                                />
+                        {enterpriseMode ? (
+                            <div className="py-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_1974130838.jpg" alt="" />
                             </div>
-                            <div className="hidden dark:block">
-                                <StaticImage
-                                    {...image1Props}
-                                    className={`${image1Props.className}`}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-dark.png"
-                                />
-                            </div>
-                        </div>
-                        <div className="rotate-1 -ml-20 mdlg:-ml-28 lg:-ml-60 w-3/4 mdlg:w-3/4 lg:w-3/5">
-                            <div className="block dark:hidden">
-                                <StaticImage
-                                    {...image2Props}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-light.png"
-                                    className={`${image2Props.className}`}
-                                />
-                            </div>
-                            <div className="hidden dark:block">
-                                <StaticImage
-                                    {...image2Props}
-                                    className={`${image2Props.className} `}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-dark.png"
-                                />
-                            </div>
-                        </div>
+                        ) : (
+                            <>
+                                <div className="-rotate-1 -mr-6 -mt-2 mdlg:-mr-24 lg:-mr-52 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
+                                    <div className="block dark:hidden">
+                                        <StaticImage
+                                            {...image1Props}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-light.png"
+                                            className={`${image1Props.className}`}
+                                        />
+                                    </div>
+                                    <div className="hidden dark:block">
+                                        <StaticImage
+                                            {...image1Props}
+                                            className={`${image1Props.className}`}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-dark.png"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="rotate-1 -ml-20 mdlg:-ml-28 lg:-ml-60 w-3/4 mdlg:w-3/4 lg:w-3/5">
+                                    <div className="block dark:hidden">
+                                        <StaticImage
+                                            {...image2Props}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-light.png"
+                                            className={`${image2Props.className}`}
+                                        />
+                                    </div>
+                                    <div className="hidden dark:block">
+                                        <StaticImage
+                                            {...image2Props}
+                                            className={`${image2Props.className} `}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-dark.png"
+                                        />
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </>
                 )
             }}
@@ -577,6 +619,8 @@ export const ABTesting = () => {
         { title: 'Dynamic cohort support', Icon: IconPeople },
     ]
 
+    const { enterpriseMode } = useLayoutData()
+
     return (
         <Slide
             bgColor="[#9C19BD]"
@@ -591,38 +635,46 @@ export const ABTesting = () => {
             Images={() => {
                 return (
                     <>
-                        <div className="-rotate-1 mdlg:ml-4 lg:ml-8 mt-8 md:mt-0 md:mb-8 mdlg:m-0 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
-                            <div className="block dark:hidden">
-                                <StaticImage
-                                    {...image1Props}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-light.png"
-                                    className={`${image1Props.className} block dark:hidden`}
-                                />
+                        {enterpriseMode ? (
+                            <div className="py-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_639884194.jpg" alt="" />
                             </div>
-                            <div className="hidden dark:block">
-                                <StaticImage
-                                    {...image1Props}
-                                    className={`${image1Props.className}`}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-dark.png"
-                                />
-                            </div>
-                        </div>
-                        <div className="rotate-1 -mt-12 mdlg:mt-0 -ml-24 md:-ml-32 w-5/6 mdlg:w-3/4 lg:w-3/5 z-20">
-                            <div className="block dark:hidden">
-                                <StaticImage
-                                    {...image2Props}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-light.png"
-                                    className={`${image2Props.className} `}
-                                />
-                            </div>
-                            <div className="hidden dark:block">
-                                <StaticImage
-                                    {...image2Props}
-                                    className={`${image2Props.className} `}
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-dark.png"
-                                />
-                            </div>
-                        </div>
+                        ) : (
+                            <>
+                                <div className="-rotate-1 mdlg:ml-4 lg:ml-8 mt-8 md:mt-0 md:mb-8 mdlg:m-0 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
+                                    <div className="block dark:hidden">
+                                        <StaticImage
+                                            {...image1Props}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-light.png"
+                                            className={`${image1Props.className} block dark:hidden`}
+                                        />
+                                    </div>
+                                    <div className="hidden dark:block">
+                                        <StaticImage
+                                            {...image1Props}
+                                            className={`${image1Props.className}`}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-dark.png"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="rotate-1 -mt-12 mdlg:mt-0 -ml-24 md:-ml-32 w-5/6 mdlg:w-3/4 lg:w-3/5 z-20">
+                                    <div className="block dark:hidden">
+                                        <StaticImage
+                                            {...image2Props}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-light.png"
+                                            className={`${image2Props.className} `}
+                                        />
+                                    </div>
+                                    <div className="hidden dark:block">
+                                        <StaticImage
+                                            {...image2Props}
+                                            className={`${image2Props.className} `}
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-dark.png"
+                                        />
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </>
                 )
             }}
@@ -663,6 +715,8 @@ export const Surveys = () => {
         { title: 'No-code or API', Icon: IconMagicWand },
     ]
 
+    const { enterpriseMode } = useLayoutData()
+
     return (
         <Slide
             bgColor="[#D42F18]"
@@ -678,14 +732,22 @@ export const Surveys = () => {
             Images={() => {
                 return (
                     <>
-                        <StaticImage
-                            alt="Survey widget example"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full pb-8 mdlg:py-4 max-w-[337px] md:max-w-[287px] mdlg:max-w-[337px] rotate-1"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/surveys/survey.png"
-                        />
+                        {enterpriseMode ? (
+                            <div className="py-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_2090565652.jpg" alt="" />
+                            </div>
+                        ) : (
+                            <>
+                                <StaticImage
+                                    alt="Survey widget example"
+                                    placeholder="none"
+                                    quality={100}
+                                    objectFit="contain"
+                                    className="w-full h-full pb-8 mdlg:py-4 max-w-[337px] md:max-w-[287px] mdlg:max-w-[337px] rotate-1"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/surveys/survey.png"
+                                />
+                            </>
+                        )}
                     </>
                 )
             }}
@@ -724,6 +786,8 @@ export const DataPipeline = () => {
         { title: 'Destinations', Icon: IconShare },
         { title: 'Transformations', Icon: IconGear },
     ]
+    const { enterpriseMode } = useLayoutData()
+
     return (
         <Slide
             bgColor="[#43B6E7]"
@@ -740,14 +804,22 @@ export const DataPipeline = () => {
             Images={() => {
                 return (
                     <>
-                        <StaticImage
-                            alt="Some hedgehogs fixing some data pipes"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full max-w-[571px]"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/cdp/pipeline-scene.png"
-                        />
+                        {enterpriseMode ? (
+                            <div className="py-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_2278332703.jpg" alt="" />
+                            </div>
+                        ) : (
+                            <>
+                                <StaticImage
+                                    alt="Some hedgehogs fixing some data pipes"
+                                    placeholder="none"
+                                    quality={100}
+                                    objectFit="contain"
+                                    className="w-full h-full max-w-[571px]"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/cdp/pipeline-scene.png"
+                                />
+                            </>
+                        )}
                     </>
                 )
             }}
@@ -762,6 +834,7 @@ export const DataPipeline = () => {
 
 export const DataWarehouse = () => {
     const features = []
+    const { enterpriseMode } = useLayoutData()
     return (
         <Slide
             containerClasses="!pt-0"
@@ -783,14 +856,22 @@ export const DataWarehouse = () => {
             Images={() => {
                 return (
                     <>
-                        <StaticImage
-                            alt="An artist's depiction of a data warehouse"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full max-h-96 max-w-[826px]"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-scene.png"
-                        />
+                        {enterpriseMode ? (
+                            <div className="py-2 pl-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_343843886.jpg" alt="" />
+                            </div>
+                        ) : (
+                            <>
+                                <StaticImage
+                                    alt="An artist's depiction of a data warehouse"
+                                    placeholder="none"
+                                    quality={100}
+                                    objectFit="contain"
+                                    className="w-full h-full max-h-96 max-w-[826px]"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-scene.png"
+                                />
+                            </>
+                        )}
                     </>
                 )
             }}
