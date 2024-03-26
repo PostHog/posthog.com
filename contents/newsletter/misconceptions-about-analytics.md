@@ -126,16 +126,13 @@ Analytics is some of the most valuable data an organization has. If you find you
 
 ## Good reads for product engineers 📖
 
-[Product Management is broken, a change is coming](https://zaidesanton.substack.com/p/product-management-is-broken-and) – Anton Zaides
+- **[Product Management is broken, a change is coming](https://zaidesanton.substack.com/p/product-management-is-broken-and) – Anton Zaides:**
 Anton and Leo write about how the dynamics between engineers and product managers are broken and how to fix them.
 
-[A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers) – Lior Neu-ner
-Engineers have a lot of misconceptions about A/B testing, too. Lior writes about how A/B testing works, how to create a good test, and more.
+- **[A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers) – Lior Neu-ner:** Engineers have a lot of misconceptions about A/B testing, too. Lior writes about how A/B testing works, how to create a good test, and more.
 
-[Rethinking the startup MVP: Building a competitive product](https://linear.app/blog/rethinking-the-startup-mvp-building-a-competitive-product) – Tuomas Artman
-Linear’s co-founder argues “today's Minimum Viable Product (MVP) is often about building a better version of an idea, not validating a novel one.”
+- **[Rethinking the startup MVP: Building a competitive product](https://linear.app/blog/rethinking-the-startup-mvp-building-a-competitive-product) – Tuomas Artman:** Linear’s co-founder argues “today's Minimum Viable Product (MVP) is often about building a better version of an idea, not validating a novel one.”
 
-[The 14 pains of building your own billing system](https://arnon.dk/the-14-pains-of-billing/) – Arnon Shimoni
-Billing systems are surprisingly complicated, connect to many parts of the company, and are mission critical to… making money. Arnon does a deep dive of patterns and pains you need to know when building one.
+- **[The 14 pains of building your own billing system](https://arnon.dk/the-14-pains-of-billing/) – Arnon Shimoni:** Billing systems are surprisingly complicated, connect to many parts of the company, and are mission critical to… making money. Arnon does a deep dive of patterns and pains you need to know when building one.
 
 *Words by Ian Vanagas, party parrot evangelist.*
