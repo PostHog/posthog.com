@@ -38,7 +38,7 @@ No! The following are definitely not prerequisites to being cracked:
 
 Adopting this mentality has noticeably increased the diversity of people applying to work with us at PostHog, as it ignores some of the traditional markers of status when it comes to job applications.
 
-### How to manage a cracked team
+## How to manage a cracked team
 
 A lot of traditional management behavior doesn’t apply here, and can actively slow down or demotivate your team.
 
