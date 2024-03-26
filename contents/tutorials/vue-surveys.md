@@ -488,7 +488,7 @@ export default {
           this.surveyTitle = survey.questions[0].question;
           this.checkSurveyInteraction();
           if (this.showSurvey) {
-            this.$posthog.capture("survey seen", {
+            this.$posthog.capture("survey shown", {
               $survey_id: this.surveyID // required
             })
           }
@@ -564,7 +564,7 @@ export default {
           this.surveyTitle = survey.questions[0].question;
           this.checkSurveyInteraction();
           if (this.showSurvey) {
-            this.$posthog.capture("survey seen", {
+            this.$posthog.capture("survey shown", {
               $survey_id: this.surveyID // required
             })
           }

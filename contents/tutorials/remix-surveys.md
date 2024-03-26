@@ -382,7 +382,7 @@ You can capture these events using `posthog.capture()`:
 
   useEffect(() => {
     if (showSurvey && surveyID) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -436,7 +436,7 @@ export default function Index() {
 
   useEffect(() => {
     if (showSurvey && surveyID) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }

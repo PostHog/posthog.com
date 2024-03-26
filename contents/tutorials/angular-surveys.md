@@ -405,7 +405,7 @@ export class AppComponent {
     this.showSurvey = !hasInteractedWithSurvey;
     this.changeDetector.detectChanges();
     if (this.showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: this.surveyID // required
       })
     }
@@ -477,7 +477,7 @@ export class AppComponent {
     this.showSurvey = !hasInteractedWithSurvey;
     this.changeDetector.detectChanges();
     if (this.showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: this.surveyID // required
       })
     }

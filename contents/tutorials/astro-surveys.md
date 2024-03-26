@@ -479,7 +479,7 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 						surveyElement.style.display = show ? 'block' : 'none';
 
 						if (show) {
-						  window.posthog.capture("survey seen", {
+						  window.posthog.capture("survey shown", {
 						    $survey_id: surveyID // required
 						  })
 						}
@@ -553,7 +553,7 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 				    surveyElement.style.display = show ? 'block' : 'none';
 
 						if (show) {
-							window.posthog.capture("survey seen", {
+							window.posthog.capture("survey shown", {
 							  $survey_id: surveyID // required
 							})
 						}
