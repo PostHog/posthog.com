@@ -36,7 +36,7 @@ No! The following are definitely not prerequisites to being cracked:
 
 - You built a side project used by 1m people. Side projects are often great signs of crackedness/ownership, but they don’t have to be commercially successful – they just have to be interesting. 
 
-What’s cool about adopting this mentality is that it has noticeably increased the diversity of people applying to work with us at PostHog, as it ignores some of the traditional markers of status when it comes to job applications.
+Adopting this mentality has noticeably increased the diversity of people applying to work with us at PostHog, as it ignores some of the traditional markers of status when it comes to job applications.
 
 ### How to manage a cracked team
 
