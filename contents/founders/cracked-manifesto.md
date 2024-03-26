@@ -75,7 +75,7 @@ Asking thoughtful questions and rigorously testing ideas is cracked. Long approv
 
 The number one thing you can do to motivate cracked people? Find them more cracked people to work with! 
 
-And conversely, the number one thing you can do to demotivate them is to make them worked with uncracked people. (Yes there are many other very obvious ways you can demotivate like creating a shitty culture, making people burnout with unrealistic demands, pivoting aggressively every week for no reason, but I’m going to assume you at least have some semblance of managerial logic if you’ve got this far through the article). 
+Conversely, the number one thing you can do to demotivate them is to make them worked with uncracked people. (Yes there are many other very obvious ways you can demotivate, like creating a shitty culture, making people burnout with unrealistic demands, pivoting aggressively every week for no reason, but I’m going to assume you at least have some semblance of managerial logic if you’ve got this far through the article.) 
 
 A close number two is setting the right context for them to do their best work. This means making sure that your company or team's vision is super clearly articulated and understood by everyone in the first place, and then helping them pick between competing priorities when they are not sure what to do, or if the answer isn't obvious. You need to try really hard to make sure that you don't use 'setting context' as a euphemism for 'work on the stuff I care about as a manager' - they are not the same thing!
 
