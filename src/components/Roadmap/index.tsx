@@ -50,6 +50,7 @@ export interface IRoadmap {
 
 const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
     const { user, likeRoadmap, getJwt } = useUser()
+    const { search } = useLocation()
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [publishLoading, setPublishLoading] = useState(false)
@@ -93,6 +94,13 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
         }).then((res) => res.json())
         onUpdate()
     }
+
+    useEffect(() => {
+        const params = new URLSearchParams(search)
+        if (params.get('id')) {
+            navigate(`/wip${search}`)
+        }
+    }, [])
 
     return (
         <>
