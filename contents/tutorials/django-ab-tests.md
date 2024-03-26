@@ -69,26 +69,45 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 To start, run `pip install posthog` to install [PostHog’s Python SDK](/docs/libraries/python).
 
-Then, initialize PostHog in `views.py` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
+Then, set the PostHog API key and host in your `AppConfig` in `basic_app/apps.py` so that's it's available everywhere:
 
-```python file=basic_app/views.py
-from django.http import HttpResponse
-from posthog import Posthog
+```python file=basic_app/apps.py
+from django.apps import AppConfig
+import posthog
 
-def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
-
-    # rest of your code
+class BasicAppConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "basic_app"
+    def ready(self):
+        posthog.api_key = '<ph_project_api_key>'
+        posthog.host = '<ph_instance_address>'
 ```
 
-Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`:
+You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings). 
+
+Next, add your `AppConfig` to `django_ab_tests/settings.py` under `INSTALLED_APPS`:
+
+```python file=django_ab_tests/settings.py
+INSTALLED_APPS = [
+    'basic_app.apps.BasicAppConfig',  # Add your app config
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+]
+```
+
+Then, initialize PostHog in `views.py` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
+
+Lastly, we import posthog into `basic_app/views.py` and [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`:
 
 ```python file=views.py
 from django.http import HttpResponse
-from posthog import Posthog
+import posthog
 
 def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
     distinct_id = 'placeholder-user-id' 
 
     paragraphText = 'Placeholder text'
@@ -147,7 +166,6 @@ from django.http import HttpResponse
 from posthog import Posthog
 
 def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
     distinct_id = 'placeholder-user-id' 
     enabled_variant = posthog.get_feature_flag('my-cool-experiment', distinct_id)
     

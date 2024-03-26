@@ -12,27 +12,38 @@ This guide walks you through integrating PostHog into your Django app using the 
 
 To start, run `pip install posthog` to install PostHog’s Python SDK.
 
-Then, initialize PostHog where you'd like to use it. For example, here's how to capture an event in a simple view:
+Then, set the PostHog API key and host in your `AppConfig` in your `your_app/apps.py` so that's it's available everywhere:
 
-```python file=views.py
-from django.http import HttpResponse
-from posthog import Posthog
+```python file=your_app/apps.py
+from django.apps import AppConfig
+import posthog
 
-def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
-    posthog.capture('disticint_id_of_your_user', 'route_called')
-
-    return HttpResponse(f"""
-    <!DOCTYPE html>
-    <html>
-      <body>
-        <h1>Django docs</h1>
-      </body>
-    </html>
-    """)
+class YourAppConfig(AppConfig):
+    name = "your_app_name"
+    def ready(self):
+        posthog.api_key = '<ph_project_api_key>'
+        posthog.host = '<ph_instance_address>'
 ```
 
 You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings). 
+
+Next, if you haven't done so already, make sure you add your `AppConfig` to your `settings.py` under `INSTALLED_APPS`:
+
+```python file=settings.py
+INSTALLED_APPS = [
+    # other apps
+    'your_app_name.apps.MyAppConfig',  # Add your app config
+]
+```
+
+Lastly, to access PostHog in any file, simply import posthog and call the method you'd like. For example, to capture an event:
+
+```python
+import posthog
+
+def some_request(request):
+    posthog.capture('distinct_id_of_the_user', 'event_name')
+```
 
 ## Next steps
 
