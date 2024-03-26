@@ -11,9 +11,11 @@ import groupBy from 'lodash.groupby'
 import CommunityLayout from 'components/Community/Layout'
 import { IconShieldLock } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
+import { useLocation } from '@reach/router'
 
 export default function TeamUpdates() {
     const { user } = useUser()
+    const { search } = useLocation()
     const [adding, setAdding] = useState(false)
     const { roadmaps, isLoading, mutate } = useRoadmaps({
         params: {
@@ -40,6 +42,9 @@ export default function TeamUpdates() {
     )
     const teams = Object.keys(roadmapsGroupedByTeam).sort()
     const isModerator = user?.role?.type === 'moderator'
+
+    const params = new URLSearchParams(search)
+    const roadmapID = params.get('id')
 
     return (
         <CommunityLayout
@@ -102,7 +107,11 @@ export default function TeamUpdates() {
                                                             formClassName="mb-4"
                                                             editButtonClassName={'absolute -top-4 -right-4 z-10'}
                                                         >
-                                                            <InProgress {...attributes} squeakId={id} />
+                                                            <InProgress
+                                                                {...attributes}
+                                                                squeakId={id}
+                                                                modalOpen={roadmapID == id}
+                                                            />
                                                         </UpdateWrapper>
                                                     </li>
                                                 )
