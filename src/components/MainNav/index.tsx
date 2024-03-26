@@ -564,7 +564,7 @@ export const Main = () => {
                                             </button>
                                         </li>
                                         {pathname === '/' && (
-                                            <li className="px-1">
+                                            <li className="px-1 whitespace-nowrap">
                                                 <button
                                                     onClick={() => setEnterpriseMode(!enterpriseMode)}
                                                     className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
