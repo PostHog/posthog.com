@@ -54,7 +54,9 @@ This is why you should spend more time motivating people than trying to teach th
 
 ### 3. Get out of the way
 
-Cracked people are deeply intrinsically motivated. This means that extrinsic motivation, while still present in some form (we’ve all got to pay bills yeah), is way less important. Help cracked engineers take ownership of their own projects by encouraging them to make the decisions about what to do next. If they ask for help - ie. they actively want you to get in the way - ask questions about what they think should happen next, rather than giving them the answers. 
+Cracked people are deeply intrinsically motivated. This means that extrinsic motivation, while still present in some form (we’ve all got to pay bills yeah), is way less important. 
+
+Help cracked engineers take ownership of their own projects by encouraging them to make the decisions about what to do next. If they ask for help – i.e. they actively want you to get in the way – ask questions about what they think should happen next, rather than giving them the answers. 
 
 Setting deadlines, creating arbitrary reporting obligations, or saying ‘if you ship X, you will get to Y title’ are examples of trying to use extrinsic motivation that you should avoid. 
 
