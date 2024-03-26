@@ -46,7 +46,7 @@ A lot of traditional management behavior doesn’t apply here, and can actively 
 
 You need to demonstrate the behavior you want to see. Cracked people are extremely attuned to ‘do as I do’ not ‘do as I say’. This means spending a significant amount of time doing IC work. Do the stuff that arrogant senior people would find ‘boring’. Write tests. Respond to customer support queries. Go weirdly deep into some piece of analysis. Do something badly that’s not your job, so you at least understand it better. 
 
-**Spend most of your time generating enthusiasm**
+### 2. Spend most of your time generating enthusiasm
 
 It is unbelievably easy to find reasons not to do stuff at any kind of organization, including startups. Inertia is the default state of most businesses. Overcoming this inertia is mainly reliant on the enthusiasm of people to make new/cool things happen far more than their raw intelligence or competence. 
 
