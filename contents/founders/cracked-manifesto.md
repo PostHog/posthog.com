@@ -71,7 +71,7 @@ Here is some subjective math:
 
 Asking thoughtful questions and rigorously testing ideas is cracked. Long approval processes that exist for the sake of having someone senior sign off on something in order to kick accountability up the chain is very un-cracked. If you find yourself approving stuff for your team because of your position as their manager, remove yourself from the process. 
 
-**Hiring and setting context are your two most important jobs**
+### 6.Hiring and setting context are your two most important jobs
 
 The number one thing you can do to motivate cracked people? Find them more cracked people to work with! 
 
