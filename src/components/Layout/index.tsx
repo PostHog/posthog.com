@@ -41,7 +41,10 @@ const whitepaperFields = [
     { label: 'Street you grew up on', name: 'street' },
     { label: 'Is Office Space a parody or documentary?', name: 'officeSpace' },
     { label: "Mother's maiden name", name: 'motherMaidenName' },
-    { label: 'Last bowel movement (date and size)', name: 'bowelMovement', type: 'date' },
+    {
+        label: 'Last bowel movement (date and size)',
+        name: 'bowelMovement',
+    },
     { label: 'Last 4 digits of your debit card', name: 'debitCardLast4', type: 'number' },
     { label: 'First 12 digits of your debit card', name: 'debitCardFirst12', type: 'number' },
     { label: 'Are you a Swiftie?', name: 'swiftie', type: 'radio', options: ['Yes', 'No'] },
@@ -71,15 +74,20 @@ const WhitepaperBanner = ({ onClose }) => {
             animate={{ translateX: '0%', opacity: 1, transition: { duration: 10 } }}
             className="bg-white dark:bg-border-dark rounded-md border border-border dark:border-dark fixed bottom-4 right-4 z-[50] flex"
         >
-            <button onClick={onClose} className="flex items-center justify-center absolute top-1 right-1">
+            <button onClick={onClose} className="flex items-center justify-center absolute top-4 right-4">
                 <IconX className="w-6 h-6" />
             </button>
             <div
                 className={`${
                     blackPaper ? 'bg-black dark' : 'bg-white'
-                } w-[300px] p-4 flex justify-center flex-col m-2 border border-border dark:border-dark`}
+                } w-[340px] p-4 flex justify-center flex-col m-2 border border-light dark:border-dark`}
             >
-                <StaticImage src="../../../public/images/enterprise/whitepaper-poster-light.jpg" />
+                <div className="dark:hidden">
+                    <StaticImage src="../../../public/images/enterprise/whitepaper-poster.jpg" />
+                </div>
+                <div className="hidden dark:block">
+                    <StaticImage src="../../../public/images/enterprise/blackpaper-poster.jpg" />
+                </div>
             </div>
             <div className="w-[380px] my-4 px-2">
                 <div className="mb-4">
@@ -87,10 +95,10 @@ const WhitepaperBanner = ({ onClose }) => {
                     <p className="opacity-70 font-semibold m-0">Just fill out the fields below</p>
                 </div>
                 <div>
-                    <div className="max-h-[200px] overflow-auto text-sm">
+                    <div className="max-h-[250px] overflow-auto text-sm">
                         {whitepaperFields.map(({ label, name, type = 'text', options = [], placeholder }) => {
                             return (
-                                <div key={name} className="my-1">
+                                <div key={name} className="mb-4">
                                     <label className="m-0 mb-2 inline-block" htmlFor={name}>
                                         {label}
                                     </label>
@@ -120,11 +128,15 @@ const WhitepaperBanner = ({ onClose }) => {
                             onChange={() => setBlackPaper(!blackPaper)}
                             className="mr-2"
                         />
-                        <label htmlFor="blackPaperCheckbox">Blackpaper</label>
-                        <p className="text-sm m-0">(same as white paper but black background)</p>
+                        <label htmlFor="blackPaperCheckbox">Opt for blackpaper</label>
+                        <p className="text-xs m-0">(Same as white paper but with a black background)</p>
                     </div>
                     <a
-                        href="/brand/whitepaper.pdf"
+                        href={
+                            blackPaper
+                                ? '/brand/Copy of blackpaper (2) - final FINAL.pdf.pdf'
+                                : '/brand/Copy of whitepaper (2) - final FINAL.pdf.pdf'
+                        }
                         download
                         className="w-full inline-block text-center appearance-none bg-initial bg-gray-accent dark:bg-gray-accent-dark border border-light dark:border-dark py-2"
                     >
