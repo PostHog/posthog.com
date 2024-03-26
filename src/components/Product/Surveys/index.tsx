@@ -377,7 +377,7 @@ export const ProductSurveys = () => {
                         />
                         <CustomerCard
                             outcome="uses surveys to organize interviews and more"
-                            quote="We even use surveys to send a little pop-up to our users and ask them to review us on G2."
+                            quote="We even use surveys to send a little pop-up to our most active users and ask them to review us on G2."
                             customer={elevenlabs}
                         />
                     </ul>
