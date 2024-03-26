@@ -134,8 +134,8 @@ const WhitepaperBanner = ({ onClose }) => {
                     <a
                         href={
                             blackPaper
-                                ? '/brand/Copy of blackpaper (2) - final FINAL.pdf.pdf'
-                                : '/brand/Copy of whitepaper (2) - final FINAL.pdf.pdf'
+                                ? '/brand/Copy of blackpaper (2) - final FINAL.docx.pdf'
+                                : '/brand/Copy of whitepaper (2) - final FINAL.docx.pdf'
                         }
                         download
                         className="w-full inline-block text-center appearance-none bg-initial bg-gray-accent dark:bg-gray-accent-dark border border-light dark:border-dark py-2"
