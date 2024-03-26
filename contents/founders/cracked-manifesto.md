@@ -62,10 +62,10 @@ Setting deadlines, creating arbitrary reporting obligations, or saying ‘if you
 
 Here is some subjective math:
 
-- The 20% of your team who are underperforming will take up 80% of your effort 
-- You may be able to get an underperformer’s output from 4/10 to 6/10 if you work hard with them
-- Doubling down on a cracked person’s performance can improve their output from 8/10 to 9/10
-- It’s the 9/10 quality output that will delight your users, so you should focus on that, even if the absolute increase in performance is less 
+- The 20% of your team who are underperforming will take up 80% of your effort. 
+- You may be able to get an underperformer’s output from 4/10 to 6/10 if you work hard with them.
+- Doubling down on a cracked person’s performance can improve their output from 8/10 to 9/10.
+- It’s the 9/10 quality output that will delight your users, so you should focus on that, even if the absolute increase in performance is less. 
 
 **If you find yourself approving stuff for your team, fire yourself**
 
