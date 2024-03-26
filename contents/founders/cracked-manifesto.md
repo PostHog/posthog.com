@@ -50,7 +50,7 @@ You need to demonstrate the behavior you want to see. Cracked people are extreme
 
 It is unbelievably easy to find reasons not to do stuff at any kind of organization, including startups. Inertia is the default state of most businesses. Overcoming this inertia is mainly reliant on the enthusiasm of people to make new/cool things happen far more than their raw intelligence or competence. 
 
-This is why you should spend more time motivating people than trying to teach them new skills or making them do training - if they are cracked and staying motivated, they will train themselves. I don’t think I’ve yet read a blog post by someone I admire and learned from that says ‘I got good because I attended blah blah special leadership course on being great.’
+This is why you should spend more time motivating people than trying to teach them new skills or making them do training. If they are cracked and staying motivated, they will train themselves. I don’t think I’ve yet read a blog post by someone I admire and learned from that says ‘I got good because I attended blah blah special leadership course on being great.’
 
 **Get out of the way**
 
