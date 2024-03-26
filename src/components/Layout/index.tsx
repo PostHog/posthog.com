@@ -12,9 +12,7 @@ import { IProps, LayoutProvider } from './context'
 import { Mobile as MobileNav } from 'components/MainNav'
 import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
-import { CallToAction } from 'components/CallToAction'
 import { motion } from 'framer-motion'
-import Toggle from 'components/Toggle'
 import { IconX } from '@posthog/icons'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -66,9 +64,7 @@ const whitepaperFields = [
 
 const WhitepaperBanner = ({ onClose }) => {
     const [blackPaper, setBlackPaper] = useState(false)
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    }
+
     return (
         <motion.div
             initial={{ translateX: '100%', opacity: 1 }}
@@ -85,12 +81,12 @@ const WhitepaperBanner = ({ onClose }) => {
             >
                 <StaticImage src="../../../public/images/enterprise/whitepaper-poster-light.jpg" />
             </div>
-            <div className="w-[380px] my-4">
+            <div className="w-[380px] my-4 px-2">
                 <div className="mb-4">
                     <h3 className="m-0">Get a free whitepaper</h3>
                     <p className="opacity-70 font-semibold m-0">Just fill out the fields below</p>
                 </div>
-                <form onSubmit={handleSubmit} className="m-0">
+                <div>
                     <div className="max-h-[200px] overflow-auto text-sm">
                         {whitepaperFields.map(({ label, name, type = 'text', options = [], placeholder }) => {
                             return (
@@ -117,17 +113,24 @@ const WhitepaperBanner = ({ onClose }) => {
                         })}
                     </div>
                     <div className="my-4">
-                        <Toggle
+                        <input
+                            type="checkbox"
+                            id="blackPaperCheckbox"
                             checked={blackPaper}
-                            label="Blackpaper"
-                            onChange={(checked) => setBlackPaper(checked)}
+                            onChange={() => setBlackPaper(!blackPaper)}
+                            className="mr-2"
                         />
+                        <label htmlFor="blackPaperCheckbox">Blackpaper</label>
                         <p className="text-sm m-0">(same as white paper but black background)</p>
                     </div>
-                    <CallToAction width="full">
+                    <a
+                        href="/brand/whitepaper.pdf"
+                        download
+                        className="w-full inline-block text-center appearance-none bg-initial bg-gray-accent dark:bg-gray-accent-dark border border-light dark:border-dark py-2"
+                    >
                         Get your free {blackPaper ? 'blackpaper' : 'whitepaper'} now!
-                    </CallToAction>
-                </form>
+                    </a>
+                </div>
             </div>
         </motion.div>
     )
