@@ -390,7 +390,7 @@ You can capture these events using `posthog.capture()`:
 
   useEffect(() => {
     if (posthog && surveyID && showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -451,7 +451,7 @@ function App() {
 
   useEffect(() => {
     if (posthog && surveyID && showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }

@@ -412,7 +412,7 @@ const fetchActiveSurveys = () => {
       surveyTitle.value = survey.questions[0].question;
       checkSurveyInteraction();
       if (showSurvey) {
-        $posthog().capture("survey seen", {
+        $posthog().capture("survey shown", {
           $survey_id: surveyID // required
         })
       }
@@ -489,7 +489,7 @@ const fetchActiveSurveys = () => {
       surveyTitle.value = survey.questions[0].question;
       checkSurveyInteraction();
       if (showSurvey) {
-        $posthog().capture("survey seen", {
+        $posthog().capture("survey shown", {
           $survey_id: surveyID // required
         })
       }
