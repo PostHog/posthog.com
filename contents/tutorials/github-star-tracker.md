@@ -1,6 +1,6 @@
 ---
 title: How to track GitHub stars in PostHog
-date: 2024-03-25
+date: 2024-03-27
 author: ["ian-vanagas"]
 tags:
   - events
