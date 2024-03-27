@@ -1972,6 +1972,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Dashboard',
+                    url: '/docs/web-analytics/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'orange',
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
