@@ -79,7 +79,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     } catch (err) {}
     window.__setPreferredTheme = function (newTheme) {
         setTheme(newTheme)
-        document.cookie = \`theme=\${preferredTheme}; Path=/; Domain=posthog.com\`
+        document.cookie = \`theme=\${newTheme}; Path=/; Domain=posthog.com\`
     }
     setTheme(preferredTheme)
 })()
