@@ -321,7 +321,7 @@ const PairsWithArray = [
 ]
 
 export const ProductSessionReplay = () => {
-    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { elevenlabs, hasura, netdata, pry } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -336,7 +336,7 @@ export const ProductSessionReplay = () => {
             }
         }
         {
-            contra: mdx(slug: { eq: "customers/contra" }) {
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
             hasura: mdx(slug: { eq: "customers/hasura" }) {
@@ -385,18 +385,18 @@ export const ProductSessionReplay = () => {
                             customer={hasura}
                         />
                         <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-                            customer={contra}
+                            outcome="uses replays and surveys when testing ideas"
+                            quote="We watch lots of replays when testing a feature, and love how easy it is to launch surveys."
+                            customer={elevenlabs}
                         />
                         <CustomerCard
                             outcome="reduced back-and-forth in community support"
-                            quote="Session replay is... an essential tool for Netdata."
+                            quote="Session replay in PostHog is so much better than Smartlook, which we used to use."
                             customer={netdata}
                         />
                         <CustomerCard
                             outcome="improved registrations by 20-30%"
-                            quote="Even Pry's support team... uses replays to understand how bugs occurred."
+                            quote="We've improved our whole onboarding flow by about 5% too, which is great."
                             customer={pry}
                         />
                     </ul>
