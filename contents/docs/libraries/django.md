@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Lastly, to access PostHog in any file, simply import posthog and call the method you'd like. For example, to capture an event:
+Lastly, to access PostHog in any file, simply `import posthog` and call the method you'd like. For example, to capture an event:
 
 ```python
 import posthog

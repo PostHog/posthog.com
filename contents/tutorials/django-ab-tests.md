@@ -99,9 +99,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Then, initialize PostHog in `views.py` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
-
-Lastly, we import posthog into `basic_app/views.py` and [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`:
+Lastly, we import `posthog` into `basic_app/views.py` and [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`:
 
 ```python file=views.py
 from django.http import HttpResponse
