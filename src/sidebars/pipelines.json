@@ -64,14 +64,6 @@
         "url": "/product/experimentation-suite"
     },
     {
-        "name": "GitHub Releases",
-        "url": "/cdp/github-release-tracker"
-    },
-    {
-        "name": "GitHub Stars",
-        "url": "/cdp/github-star-sync"
-    },
-    {
         "name": "GitLab ",
         "url": "/cdp/gitlab-release-tracker"
     },
