@@ -27,7 +27,7 @@ When it came to web analytics, Significa used to rely on Plausible. But, as the 
 
 ## Web analytics was just the beginning
 
-Web analytics in PostHog is similar to Plausible – it’s centered around a single, clear dashboard that summarizes relevant traffic data – Significa wanted the ability to go deeper.
+Web analytics in PostHog is similar to Plausible – it’s centered around [a single, clear dashboard](/docs/web-analytics/dashboard) that summarizes relevant traffic data – Significa wanted the ability to go deeper.
 
 “We were using Plausible but it doesn’t really have any cool features to analyze data more deeply,” said Tomás. “PostHog, on the other hand, enables us to analyze our traffic in more ways and to set up funnels when we need to.”
 

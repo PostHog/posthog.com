@@ -9,15 +9,15 @@ The web analytics dashboard provides an overview of your website's traffic.
 For the selected time range, it starts with the number of visitors, views, sessions, along with trends for each, as well as average session duration and bounce rate. Each of these is compared with the previous time range, showing how much they increased or decreased.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580006/posthog.com/contents/images/docs/web-analytics/dashboard/top-light.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579997/posthog.com/contents/images/docs/web-analytics/dashboard/top-dark.png"
-    alt="Web analytics dashboard" 
-    classes="rounded"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580006/posthog.com/contents/images/docs/web-analytics/dashboard/top-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579997/posthog.com/contents/images/docs/web-analytics/dashboard/top-dark.png"
+  alt="Web analytics dashboard" 
+  classes="rounded"
 />
 
 ## Bounce rate
 
-A bounce is a session where the user only had one pageview, no autocaptures, and spent less than 30 seconds on the page. Your bounce rate is the percentage of sessions that resulted in a bounce. 
+A bounce is a session where the user only had one pageview, no autocaptures, and spent less than 30 seconds on the page. Your bounce rate is the percentage of sessions that resulted in a bounce.
 
 PostHog uses autocaptured events to calculate this. To make sure this value is accurate, make sure you enable [autocapture](/docs/product-analytics/autocapture) and are capturing both `$pageleave` and `$autocapture` events.
 
@@ -26,10 +26,10 @@ PostHog uses autocaptured events to calculate this. To make sure this value is a
 Top paths and top entry paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
-    alt="Web analytics dashboard" 
-    classes="rounded"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
+  alt="Web analytics dashboard" 
+  classes="rounded"
 />
 
 ### Scroll depth
@@ -44,10 +44,10 @@ Both average scroll and deep scroll rate are calculated using how far a user has
 To get an idea of where users are visiting your site from, you can see top referrers, channels, and UTM values.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png"
-    alt="Web analytics referrers" 
-    classes="rounded"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png"
+  alt="Web analytics referrers" 
+  classes="rounded"
 />
 
 ### Channel types
@@ -69,10 +69,10 @@ Based on UTMs, referring domains, and more, PostHog automatically classifies tra
 - Paid Other
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580001/posthog.com/contents/images/docs/web-analytics/dashboard/channels-light.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580003/posthog.com/contents/images/docs/web-analytics/dashboard/channels-dark.png"
-    alt="Web analytics channel types" 
-    classes="rounded"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580001/posthog.com/contents/images/docs/web-analytics/dashboard/channels-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580003/posthog.com/contents/images/docs/web-analytics/dashboard/channels-dark.png"
+  alt="Web analytics channel types" 
+  classes="rounded"
 />
 
 We base these [definitions on GA4](https://support.google.com/analytics/answer/9756891?hl=en) and add logic to handle edge cases they don't.
@@ -94,10 +94,10 @@ Setting UTMs correctly is crucial for accurately classifying your traffic, not o
 The world map shows where your users are located, but you can also select it to show top countries, regions (like California, England, or Ontario), or cities.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579999/posthog.com/contents/images/docs/web-analytics/dashboard/regions-light.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580000/posthog.com/contents/images/docs/web-analytics/dashboard/regions-dark.png"
-    alt="Web analytics regions" 
-    classes="rounded"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579999/posthog.com/contents/images/docs/web-analytics/dashboard/regions-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580000/posthog.com/contents/images/docs/web-analytics/dashboard/regions-dark.png"
+  alt="Web analytics regions" 
+  classes="rounded"
 />
 
 ## Retention
@@ -105,10 +105,10 @@ The world map shows where your users are located, but you can also select it to 
 Retention creates a cohort of unique users who performed any event for the first time in the last week. It then tracks the percentage of users who return to perform any event in the following weeks. 
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579998/posthog.com/contents/images/docs/web-analytics/dashboard/retention-light.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579997/posthog.com/contents/images/docs/web-analytics/dashboard/retention-dark.png"
-    alt="Web analytics retention" 
-    classes="rounded"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579998/posthog.com/contents/images/docs/web-analytics/dashboard/retention-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579997/posthog.com/contents/images/docs/web-analytics/dashboard/retention-dark.png"
+  alt="Web analytics retention" 
+  classes="rounded"
 />
 
 > **Read more:** [Creating and understanding retention](/docs/product-analytics/retention)
