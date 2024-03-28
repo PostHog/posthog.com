@@ -60,3 +60,36 @@ COMMENT = 'PostHog events table'
 Batch exports use Snowflake's [internal table stages](https://docs.snowflake.com/en/user-guide/data-load-local-file-system-create-stage#table-stages) to stage the files copied into your Snowflake tables. We recommend using separate tables to export data from PostHog to avoid conflicting with other workflows that use internal table stages.
 
 > **Note:** This differs from the old PostHog Snowflake export app which required extra configuration and used S3 or GCS as an external stage.
+
+## FAQ
+
+### Export is showing up as NULL recods in Snowflake
+
+This is most likely because the table's schema is different from what we are sending. To verify, run this command replacing the variables:
+```
+snow sql -q "SELECT GET_DDL('TABLE', '\"<database_name>\".\"<schema_name>\".\"<table_name>\"');" --password='<password>' --account='<account>' --username='<user>' --warehouse='<warehouse>' -x --database='"<database_name>"'
+```
+and check that the output matches this
+```
++------------------------------------------------------------------------------------------------------------------+
+| GET_DDL('TABLE',                                                                                                 |
+| '"DATABASE_NAME"."SCHEMA_NAME"."TABLE_NAME"')                                                                    |
+|------------------------------------------------------------------------------------------------------------------|
+| create or replace TABLE "table_name" (                                                         |
+|         "uuid" VARCHAR(16777216),                                                                                |
+|         "event" VARCHAR(16777216),                                                                               |
+|         "properties" VARIANT,                                                                                    |
+|         "elements" VARIANT,                                                                                      |
+|         "people_set" VARIANT,                                                                                    |
+|         "people_set_once" VARIANT,                                                                               |
+|         "distinct_id" VARCHAR(16777216),                                                                         |
+|         "team_id" NUMBER(38,0),                                                                                  |
+|         "ip" VARCHAR(16777216),                                                                                  |
+|         "site_url" VARCHAR(16777216),                                                                            |
+|         "timestamp" TIMESTAMP_NTZ(9)                                                                             |
+| )COMMENT='PostHog generated events table'                                                                        |
+| ;                                                                                                                |
++------------------------------------------------------------------------------------------------------------------+
+```
+
+If your table doesn't match exactly (including casing), then the recommended approach is delete the table and let PostHog create it for you (alternatively you can copy the DDL exactly).
