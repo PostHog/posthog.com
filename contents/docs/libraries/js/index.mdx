@@ -481,7 +481,7 @@ const handleCookieConsent = (consent) => {
 
 - Due to the size limitation of cookies you may run into `431 Request Header Fields Too Large` errors (e.g. if you have a lot of feature flags). In that case, use `localStorage+cookie`.
 
-- If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config. If you do this, remember to call `posthog.identify` **every time** your app loads. If you don't, every page refresh is treated as a new and different user.
+- If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config. If you do this, remember to call [`posthog.identify`](#identifying-users) **every time** your app loads. If you don't, every page refresh is treated as a new and different user.
 
 ## Config
 
