@@ -54,19 +54,27 @@ To get an idea of where users are visiting your site from, you can see top refer
 
 Based on UTMs, referring domains, and more, PostHog automatically classifies traffic into specific channel types such as:
 
-- Direct
-- Email
-- Referral
-- Organic Search
-- Paid Search
-- Organic Social
-- Paid Social
-- Organic Video
-- Paid Video
-- Organic Shopping
-- Paid Shopping
-- Other
-- Paid Other
+| Channel Type     | Description                                                                                     |
+|------------------|-------------------------------------------------------------------------------------------------|
+| Direct           | User typed in the URL directly or used a saved link.                                            |
+| Paid Search      | User clicked on an ad from a search engine, e.g. Google, Bing, or Baidu.                        |
+| Paid Social      | User clicked on an ad from a social media platform, e.g. Facebook, LinkedIn, or Twitter         |
+| Paid Video       | User clicked on an ad from a video platform, e.g. YouTube or Twitch.                            |
+| Paid Shopping    | User clicked on an ad from a shopping platform, e.g. Amazon or eBay.                            |
+| Paid Other       | User clicked on an ad from an unknown platform.                                                 |
+| Cross-Network    | User clicked on a cross-network ad                                                              |
+| Organic Search   | User clicked on a non-ad search result from a search engine, e.g. Google, Bing, or Baidu.       |
+| Organic Social   | User clicked on a non-ad link from a social media platform, e.g. Facebook, LinkedIn, or Twitter |
+| Organic Video    | User clicked on a non-ad link from a video platform, e.g. YouTube or TikTok.                    |
+| Organic Shopping | User clicked on a non-ad link from a shopping platform, e.g. Amazon or eBay.                    |
+| Affiliate        | User clicked on an affiliate link.                                                              |
+| Referral         | User clicked on a referral link.                                                                |
+| Email            | User clicked on a link from an email.                                                           |
+| Display          | User clicked on a display ad, e.g. an ad on Google Display Network.                             |
+| SMS              | User clicked on a link from an SMS.                                                             |
+| Audio            | User clicked on an audio ad, e.g. a podcast ad.                                                 |
+| Push             | User clicked on a push notification.                                                            |
+| Other            | User clicked on a link from an unknown source.                                                  |
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580001/posthog.com/contents/images/docs/web-analytics/dashboard/channels-light.png" 
@@ -75,9 +83,7 @@ Based on UTMs, referring domains, and more, PostHog automatically classifies tra
   classes="rounded"
 />
 
-We base these [definitions on GA4](https://support.google.com/analytics/answer/9756891?hl=en) and add logic to handle edge cases they don't.
-
-You can find a full list of what mediums and sources relate to which channel type in the [PostHog repo](https://github.com/PostHog/posthog/blob/master/posthog/models/channel_type/channel_definitions.json).
+> **Read more:** [How channel type is calculated](/docs/data/channel-type)
 
 ### UTMs
 
