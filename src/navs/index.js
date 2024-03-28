@@ -2300,6 +2300,15 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                 },
+                {
+                    name: 'Features',
+                },
+                {
+                    name: 'Webhook',
+                    url: '/docs/surveys/webhook',
+                    icon: 'IconLaptop',
+                    color: 'orange',
+                },
             ],
         },
         {

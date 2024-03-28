@@ -1,0 +1,38 @@
+---
+title: Survey responses webhook
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: full
+  enterprise: full
+---
+
+import {ProductVideo} from 'components/ProductVideo'
+export const surveyActionsLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1711621933/posthog.com/contents/docs/surveys-actions-light.mp4"
+export const surveyActionsDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1711621933/posthog.com/contents/docs/survey-actions-dark.mp4"
+
+It can be useful to receive notifications whenever a user responds to your survey. For example, messages containing their response can be sent to Slack, Discord, or Teams. To set this up, follow the below steps:
+
+## Step 1: Set up your PostHog Webhook
+
+First you need to set up an [webhook endpoint](/docs/webhooks) where you'll receive survey responses. You can use your own custom endpoint, or you can follow our guides for setting one up for [Slack](/docs/webhooks/slack), [Discord](/docs/webhooks/discord), and [Teams](/docs/webhooks/microsoft-teams).
+
+## Step 2: Create an action for survey responses
+
+Next we set up an [action](/docs/data/actions) which posts survey events to our webhook. To do this: 
+
+1. Navigate to the [actions tab in Data Management](https://us.posthog.com/data-management/actions) and clicking **New action** in the top right.
+2. Select **From event or pageview** when prompted.
+3. Under **Match Group #1**, click **All events** and select `survey sent` as the event name.
+4. Check the box which says `Post to webhook when this action is triggered`.
+5. In the **message format** text field, set the text to `New response for [event.properties.$survey_name] from user [person]: "[event.properties.$survey_response]"`
+
+Save your action and you will now begin receiving notifications whenever users respond to your survey.
+
+<ProductVideo
+    videoLight={surveyInsightsLight} 
+    videoDark={surveyInsightsDark}
+    alt="How to create insights from surveys" 
+    classes="rounded"
+/>
