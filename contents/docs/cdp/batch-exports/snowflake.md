@@ -67,7 +67,7 @@ Batch exports use Snowflake's [internal table stages](https://docs.snowflake.com
 
 This is most likely because the table's schema is different from what we are sending. To verify, run this command replacing the variables:
 ```
-snow sql -q "SELECT GET_DDL('TABLE', '\"database_name\".\"schema_name\".\"table_name\"');" --password='password' --account='account' --username='user' --warehouse='warehouse' -x --database='"database_name"'
+snow sql -q "SELECT GET_DDL('TABLE', '\"<database_name>\".\"<schema_name>\".\"<table_name>\"');" --password='<password>' --account='<account>' --username='<user>' --warehouse='<warehouse>' -x --database='"<database_name>"'
 ```
 and check that the output matches this
 ```
