@@ -65,7 +65,7 @@ Batch exports use Snowflake's [internal table stages](https://docs.snowflake.com
 
 ### Export is showing up as NULL recods in Snowflake
 
-This is most likely because you schema is different from what we are sending. To verif run this command 
+This is most likely because the table's schema is different from what we are sending. To verify, run this command replacing the variables:
 ```
 snow sql -q "SELECT GET_DDL('TABLE', '\"database_name\".\"schema_name\".\"table_name\"');" --password='password' --account='account' --username='user' --warehouse='warehouse' -x --database='"database_name"'
 ```
