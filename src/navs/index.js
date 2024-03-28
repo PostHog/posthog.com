@@ -1334,6 +1334,10 @@ export const docsMenu = {
                             url: '/docs/data/annotations',
                         },
                         {
+                            name: 'Channel type',
+                            url: '/docs/data/channel-type',
+                        },
+                        {
                             name: 'Cohorts',
                             url: '/docs/data/cohorts',
                         },
