@@ -1334,6 +1334,10 @@ export const docsMenu = {
                             url: '/docs/data/annotations',
                         },
                         {
+                            name: 'Channel type',
+                            url: '/docs/data/channel-type',
+                        },
+                        {
                             name: 'Cohorts',
                             url: '/docs/data/cohorts',
                         },
@@ -1970,6 +1974,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics',
                     icon: 'IconHome',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Dashboard',
+                    url: '/docs/web-analytics/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'orange',
                 },
                 {
                     name: 'FAQ',

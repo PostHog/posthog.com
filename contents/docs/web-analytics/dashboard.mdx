@@ -1,0 +1,128 @@
+---
+title: Web analytics dashboard
+sidebar: Docs
+showTitle: true
+---
+
+The web analytics dashboard provides an overview of your website's traffic. 
+
+For the selected time range, it starts with the number of visitors, views, sessions, along with trends for each, as well as average session duration and bounce rate. Each of these is compared with the previous time range, showing how much they increased or decreased.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580006/posthog.com/contents/images/docs/web-analytics/dashboard/top-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579997/posthog.com/contents/images/docs/web-analytics/dashboard/top-dark.png"
+  alt="Web analytics dashboard" 
+  classes="rounded"
+/>
+
+## Bounce rate
+
+A bounce is a session where the user only had one pageview, no autocaptures, and spent less than 30 seconds on the page. Your bounce rate is the percentage of sessions that resulted in a bounce.
+
+PostHog uses autocaptured events to calculate this. To make sure this value is accurate, make sure you enable [autocapture](/docs/product-analytics/autocapture) and are capturing both `$pageleave` and `$autocapture` events.
+
+## Paths
+
+Top paths and top entry paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
+  alt="Web analytics dashboard" 
+  classes="rounded"
+/>
+
+### Scroll depth
+
+Both average scroll and deep scroll rate are calculated using how far a user has scrolled down the page and how much content has scrolled into view.
+
+- **Average scroll depth** is the average scroll percentage across pageviews.
+- **Deep scroll rate** is the percentage of users who scroll far enough down a page to view 80% of the content.
+
+## Referrers, channels, UTMs
+
+To get an idea of where users are visiting your site from, you can see top referrers, channels, and UTM values.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png"
+  alt="Web analytics referrers" 
+  classes="rounded"
+/>
+
+### Channel types
+
+Based on UTMs, referring domains, and more, PostHog automatically classifies traffic into specific acquisition channel types such as:
+
+| Channel Type     | Description of where the user came from                                         |
+|------------------|---------------------------------------------------------------------------------|
+| Direct           | Typed in the URL directly or used a saved link.                                 |
+| Paid Search      | An ad from a search engine, e.g. Google, Bing, or Baidu.                        |
+| Paid Social      | An ad from a social media platform, e.g. Facebook, LinkedIn, or Twitter         |
+| Paid Video       | An ad from a video platform, e.g. YouTube or Twitch.                            |
+| Paid Shopping    | An ad from a shopping platform, e.g. Amazon or eBay.                            |
+| Paid Other       | An ad from an unknown platform.                                                 |
+| Cross-Network    | A cross-network ad                                                              |
+| Organic Search   | A non-ad search result from a search engine, e.g. Google, Bing, or Baidu.       |
+| Organic Social   | A non-ad link from a social media platform, e.g. Facebook, LinkedIn, or Twitter |
+| Organic Video    | A non-ad link from a video platform, e.g. YouTube or TikTok.                    |
+| Organic Shopping | A non-ad link from a shopping platform, e.g. Amazon or eBay.                    |
+| Affiliate        | An affiliate link.                                                              |
+| Referral         | A referral link.                                                                |
+| Email            | A link from an email.                                                           |
+| Display          | A display ad, e.g. an ad on Google Display Network.                             |
+| SMS              | A link from an SMS.                                                             |
+| Audio            | An audio ad, e.g. a podcast ad.                                                 |
+| Push             | A push notification.                                                            |
+| Other            | A link from an unknown source.                                                  |
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580001/posthog.com/contents/images/docs/web-analytics/dashboard/channels-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580003/posthog.com/contents/images/docs/web-analytics/dashboard/channels-dark.png"
+  alt="Web analytics channel types" 
+  classes="rounded"
+/>
+
+> **Read more:** [How channel type is calculated](/docs/data/channel-type)
+
+### UTMs
+
+UTMs include source, medium, campaign, content, and term. Each are set as URL parameters and autocaptured by PostHog. For example, the following URL has the source of `twitter`, medium of `social`, and `campaign` of `twitter-campaign`:
+
+`https://posthog.com/?utm_source=twitter&utm_medium=social&utm_campaign=twitter-campaign`
+
+Setting UTMs correctly is crucial for accurately classifying your traffic, not only for UTMs, but for channel types as well. 
+
+> **Read more:** [How to capture, customize, and filter UTM parameters](/docs/data/utm-segmentation)
+
+## World map
+
+The world map shows where your users are located, but you can also select it to show top countries, regions (like California, England, or Ontario), or cities.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579999/posthog.com/contents/images/docs/web-analytics/dashboard/regions-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580000/posthog.com/contents/images/docs/web-analytics/dashboard/regions-dark.png"
+  alt="Web analytics regions" 
+  classes="rounded"
+/>
+
+## Retention
+
+Retention creates a cohort of unique users who performed any event for the first time in the last week. It then tracks the percentage of users who return to perform any event in the following weeks. 
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579998/posthog.com/contents/images/docs/web-analytics/dashboard/retention-light.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579997/posthog.com/contents/images/docs/web-analytics/dashboard/retention-dark.png"
+  alt="Web analytics retention" 
+  classes="rounded"
+/>
+
+> **Read more:** [Creating and understanding retention](/docs/product-analytics/retention)
+
+## Filtering your dashboard
+
+Like other dashboards in PostHog, the web analytics dashboard is filterable. This means you can filter for data with certain event or person property values. Options include browser, path name, device type, country, and UTMs. Just click the "Add filter" button next to the date range at the top of the dashboard.
+
+This enables you to dive into specific stats for regions, parts of the site, and specific marketing campaigns. 
+
+For more complex queries, you can still use the product analytics tab as usual.

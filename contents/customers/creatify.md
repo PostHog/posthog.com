@@ -40,7 +40,7 @@ When the PostHog web analytics beta launched in November 2023, Creatify was amon
 />
 </BorderWrapper>
 
-The team watched with anticipation over the following months as the beta grew and new features released, often sharing feedback to ensure the dashboard included the metrics they cared about most. When this wasn’t possible they simply created their own product analytics dashboards to break down the data in new ways. 
+The team watched with anticipation over the following months as the beta grew and new features released, often sharing feedback to ensure the [dashboard](/docs/web-analytics/dashboard) included the metrics they cared about most. When this wasn’t possible they simply created their own product analytics dashboards to break down the data in new ways. 
 
 “I don’t think I could ever go back to GA4 now that we’ve adopted PostHog,” said Xin. “Web analytics gives us all the metrics we really care about, and we’ve set up dashboards for breaking down specific segments when we need to. It’s great that we have all the metrics we care about so readily available.” 
 
