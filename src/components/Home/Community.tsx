@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'components/Link'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'
@@ -8,6 +7,43 @@ import { layoutLogic } from 'logic/layoutLogic'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+
+const CommunityHogs = ({ name, className = '' }) => {
+    const [ready, setReady] = useState(false)
+    const [containerRef, inView] = useInView({ threshold: 0 })
+    const videoRef = useRef<HTMLVideoElement>(null)
+
+    useEffect(() => {
+        if (inView) {
+            videoRef?.current?.play()
+        } else {
+            videoRef?.current?.pause()
+        }
+    }, [inView, ready])
+
+    return (
+        <div className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2" ref={containerRef}>
+            <video
+                ref={videoRef}
+                onCanPlay={() => {
+                    setReady(true)
+                }}
+                loop
+                playsInline
+                muted
+                preload="none"
+                className={`w-full ${className}`}
+            >
+                <source
+                    className="hidden"
+                    src={`${process.env.GATSBY_CLOUDFRONT_URL}/${name}.webm`}
+                    type="video/webm"
+                />
+                <source className="hidden" src={`${process.env.GATSBY_CLOUDFRONT_URL}/${name}.mp4`} type="video/mp4" />
+            </video>
+        </div>
+    )
+}
 
 const CommunityStat = ({ count, label, className }) => {
     return (
@@ -53,7 +89,7 @@ export default function Community() {
         <div ref={ref} className="relative">
             {inView && (websiteTheme === 'dark' ? <Stars /> : null)}
             <div className="w-full overflow-x-hidden">
-                <div className="relative -mt-28 md:mt-0 top-28 sm:top-44 md:top-12 lg:top-12 lg:mt-12 xl:top-16 px-4 md:px-0 z-40">
+                <div className="relative -mt-12 md:mt-0 top-28 sm:top-44 md:top-12 lg:top-12 lg:mt-12 xl:top-16 px-4 md:px-0 z-40">
                     <h2 className="m-0 pb-2 px-4 text-4xl md:text-6xl text-center leading-0 md:leading-none">
                         Join our <span className="text-red dark:text-yellow">open source</span> community
                     </h2>
@@ -73,33 +109,12 @@ export default function Community() {
                         .
                     </p>
                 </div>
-                <section className="relative [zoom:1.5] left-[-20%] md:left-0 md:mt-0 md:[zoom:1]">
-                    <div className="transition-opacity opacity-100 dark:hidden dark:opacity-0">
-                        <StaticImage src="./images/community-light.png" className="w-[150%] md:w-full" />
-                    </div>
-                    <div className="transition-opacity hidden opacity-0 dark:block dark:opacity-100">
-                        <StaticImage src="./images/community-dark.png" className="w-[150%] md:w-full" />
-                    </div>
-                    <CommunityStat
-                        count="110k+"
-                        label={
-                            <>
-                                Developer <br className="xl:hidden" />
-                                community
-                            </>
-                        }
-                        className="left-[20.75vw] sm:left-[20.75vw] md:left-[21vw] mdlg:left-[20.75vw] lg:left-[21.5vw] xl:left-[20vw] 2xl:left-[19.75vw] top-[29.5vw] sm:top-[30vw] md:top-[30vw] lg:top-[30vw] xl:top-[31vw] -rotate-[4deg]"
-                    />
-                    <CommunityStat
-                        count="411"
-                        label="Contributors"
-                        className="left-[42.5vw] sm:left-[42.5vw] md:left-[42vw] lg:left-[42.75vw] xl:left-[43.5vw] 2xl:left-[43.5vw] top-[40.5vw] sm:top-[41vw] md:top-[40vw] mdlg:top-[40.5vw] lg:top-[40.5vw] xl:top-[41vw] -rotate-[1.5deg]"
-                    />
-                    <CommunityStat
-                        count="100b+"
-                        label="Events tracked"
-                        className="left-[62.75vw] sm:left-[62.75vw] md:left-[62vw] lg:left-[63vw] xl:left-[63.75vw] 2xl:left-[63.75vw] top-[51vw] sm:top-[51vw] md:top-[50.5vw] lg:top-[51vw] 2xl:top-[51vw] -rotate-1"
-                    />
+                <section className="relative">
+                    <img src="/images/campfire-light.png" alt="campfire-light" className="dark:hidden block w-full" />
+                    <img src="/images/campfire-dark.png" alt="campfire-dark" className="hidden dark:block w-full" />
+
+                    <CommunityHogs name="campfire-light" className="dark:hidden block" />
+                    <CommunityHogs name="campfire-dark" className="hidden dark:block" />
                 </section>
             </div>
         </div>
