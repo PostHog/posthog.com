@@ -78,11 +78,11 @@ Some examples of usecases that often don't require person profiles
 
 ### PostHog-js
 
-You can control whether events from PostHog-js have person processing enabled with the `process_persons` config setting. There are three options:
+You can control whether events from PostHog-js have person processing enabled with the `process_person` config setting. There are three options:
 
-- `process_persons: 'always'` _(default)_ - we will process persons data for all events
-- `process_persons: 'never'` - we won't process persons for any event. This means that anonymous users will not be merged once they sign up or login, so you lose the ability to create funnels that track users from anonyomous to identified. All events (including `$identify`) will be sent with `$process_persons: False`.
-- `process_persons: 'identified_only'` - we will only process persons when you call `posthog.identify([distinct_id])`. Anonymous users won't get person profiles.
+- `process_person: 'always'` _(default)_ - we will process persons data for all events
+- `process_person: 'never'` - we won't process persons for any event. This means that anonymous users will not be merged once they sign up or login, so you lose the ability to create funnels that track users from anonyomous to identified. All events (including `$identify`) will be sent with `$process_person: False`.
+- `process_person: 'identified_only'` - we will only process persons when you call `posthog.identify([distinct_id])`. Anonymous users won't get person profiles.
 
 An example configuration would be
 
@@ -92,7 +92,7 @@ posthog.init(
     '<ph_project_api_key>',
     {
         api_host: '<ph_instance_address>',
-        process_persons: 'identified_only'
+        process_person: 'identified_only'
     }
 )
 ```
@@ -100,10 +100,10 @@ posthog.init(
 
 ### Other SDKs
 
-When sending events from other SDKs, you can pass a `$process_persons` property. There are two options:
+When sending events from other SDKs, you can pass a `$process_person` property. There are two options:
 
-- `$process_persons: 'always'` _(default)_ - we will process persons data for this event
-- `$process_persons: 'never'` - we won't process persons data for this event
+- `$process_person: true` _(default)_ - we will process persons data for this event
+- `$process_person: false` - we won't process persons data for this event
 
 An example for our node library would be:
 
@@ -112,7 +112,7 @@ client.capture({
     distinctId: 'distinct_id_of_the_user',
     event: 'api track event',
     properties: {
-        $process_persons: 'never'
+        $process_person: false
     },
 })
 ```
