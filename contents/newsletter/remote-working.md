@@ -21,7 +21,7 @@ But the policy actually makes sense for Dell. Sort of. When you’re a decades-o
 
 > This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
-### The problem? You’ve got a two-tiered system
+## The problem? You’ve got a two-tiered system
 
 If you’re a company built around [big](https://www.cnbc.com/2023/06/08/google-to-crack-down-on-hybrid-work-asks-remote-workers-to-reconsider.html), [shiny](https://gizmodo.com/apple-remote-work-return-to-office-hybrid-work-1850256210) [offices](https://www.cnn.com/2022/06/01/tech/elon-musk-tesla-ends-work-from-home/index.html), then chances are you have a two-tiered system. Essentially, an employee’s ability to move up in such a company is closely linked to their proximity to the biggest, shiniest office. Dell’s new policy acknowledges this outright: if you’re a remote worker at Dell, there’s no career progression. The same is true at many companies that have a mix of remote, hybrid, and office workers.
 
@@ -46,14 +46,16 @@ Defaulting to written communication means, chances are, if someone has a questio
 Automattic’s Beau Lebens has written (of course) a [great guide](https://beau.blog/2020/03/remote-work-at-scale/) to the benefits of effective written communication with lots of practical tips. One key takeaway: tools are not the answer. Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only work if you do all the hard work first. And nailing how you communicate is a big part of that. Writing things down is great because:
 
 * **It’s faster. **Communicating via writing, especially with remote staff in lots of different time-zones, saves a lot of time. Scheduling is hard and meetings interrupt deep work. If something can be written down, it will both save time and improve transparency around decision-making.
+
 * **It’s always there. **If a decision is made on a call and nobody writes it down, was a decision even made? Calls can be good, but calls are also information black holes. Transparency is crucial in remote-only companies. So, when you do have a meeting about something, make sure someone, [or something](https://www.sembly.ai/), is taking notes.
+
 * **It’s clearer. **Seriously, have you ever read a transcript of you speaking? Writing things down helps with intentionality as, hopefully, it makes you think through both what you’re trying to achieve and how you want to communicate it.
 
 ### The problem: Meetings
 
 Online meetings are the scourge of remote work – and often a cause of tension between office-based and non-office based employees. Mics off when they should be on, screenshare chaos, [Jeffrey Toobin’s penis](https://www.wired.com/story/jeffrey-toobin-zoom-penis/) – they remain a technical nightmare and a productivity black hole. Many companies see them as a necessary evil – a way for colleagues, no matter where they’re based, to collaborate. This is wrong.
 
-Since the pandemic, the amount of time people have spent not just in online meetings, but in meetings in general, has soared. [Time spent in meetings](https://www.microsoft.com/en-us/worklab/work-trend-index/great-expectations-making-hybrid-work-work?ref=async.twist.com) has gone up 253%. Some Teams users [spend](https://www.microsoft.com/en-us/worklab/work-trend-index/will-ai-fix-work) close to eight hours a week, or an entire workday, in online meetings. Eight hours a week! In Teams! Madness. And if you’re a manager or executive within an organization, this is all your fault.
+Since the pandemic, the amount of time people have spent not just in online meetings, but in meetings in general, has soared. [Time spent in meetings](https://www.microsoft.com/en-us/worklab/work-trend-index/great-expectations-making-hybrid-work-work) has gone up 253%. Some Teams users [spend](https://www.microsoft.com/en-us/worklab/work-trend-index/will-ai-fix-work) close to eight hours a week, or an entire workday, in online meetings. Eight hours a week! In Teams! Madness. And if you’re a manager or executive within an organization, this is all your fault.
 
 ### The solution: Kill meetings
 
@@ -82,7 +84,9 @@ Companies that have made remote working work also have one other thing in common
 That might sound a bit effusive, but getting it right has a tangible impact. Transparency about how you run a company helps employees buy into what you’re building. Here’s why trust and transparency are key for remote work:
 
 * **Empowerment: **Hire the right people and give them the freedom to do their best work. This creates a culture of ownership which, in turn, makes people more engaged and productive.
+
 * **Openness: **Be aggressively transparent and default to communicating out in the open. This not only makes asynchronous working easier, it also helps bring remote teams closer together.
+
 * **Investment: **Trust gets you a long way, but you also have to invest to really make that trust work. Almost all successful remote companies do offsites once a year. At PostHog, we also provide all employees with a [quarterly travel budget](https://posthog.com/handbook/people/spending-money) to meet up with colleagues for work and fun.
 
 ### Good reads for making remote working really work 📖
