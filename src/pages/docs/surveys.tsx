@@ -53,7 +53,9 @@ export const Content = ({ quickLinks = false }) => {
             )}
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
-                <p className="text-[15px]">Real-world use cases to get you started</p>
+                <p className="text-[15px]">
+                    Or check the latest features in <a href="/changelog">the changelog</a>
+                </p>
 
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
