@@ -72,14 +72,14 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     })
     try {
         preferredTheme =
-            (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light')) ||
-            'light'
+            document.cookie.split('; ').find(row => row.startsWith('theme='))?.split('=')[1]
+            || localStorage.getItem('theme')
+            || darkQuery.matches ? 'dark' : 'light'
+            || 'light'
     } catch (err) {}
     window.__setPreferredTheme = function (newTheme) {
         setTheme(newTheme)
-        try {
-            localStorage.setItem('theme', newTheme)
-        } catch (err) {}
+        document.cookie = \`theme=\${preferredTheme}; Path=/; Domain=posthog.com\`
     }
     setTheme(preferredTheme)
 })()
