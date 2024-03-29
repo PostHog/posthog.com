@@ -50,3 +50,12 @@ Once you create the experiment, go to the feature flag, scroll down to "Release 
 import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx"
 
 <FAQFalseOrNoneEvents />
+
+## Why are the numbers in my A/B test lower than when I create the same insight directly?
+
+This can be a common problem when you're running an A/B test with the metric being a pageview: If this is the first pageview for a user, feature flag values might not load in time, which means that people don't yet see the experiment. We remove these people from the experiment calculation. To confirm this is the case, you can add a breakdown by the A/B test feature flag to your custom insight, and check the flag value is "None" for everyone removed from the experiment.
+
+To fix this, you need to make sure flags are immediately available on a page load. There are two options here:
+
+1. Wait for feature flags to load before showing the page (low engineering effort, but slows page down by ~200ms)
+2. Use [client side bootstrapping](/docs/feature-flags/bootstrapping) (high engineering effort, but keeps the page blazing fast)
