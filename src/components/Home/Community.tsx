@@ -88,8 +88,8 @@ export default function Community() {
     return (
         <div ref={ref} className="relative">
             {inView && (websiteTheme === 'dark' ? <Stars /> : null)}
-            <div className="w-full overflow-x-hidden">
-                <div className="relative -mt-12 md:mt-0 top-28 sm:top-44 md:top-12 lg:top-12 lg:mt-12 xl:top-16 px-4 md:px-0 z-40">
+            <div className="w-full overflow-hidden">
+                <div className="relative top-16 sm:top-12 lg:mt-12 xl:top-16 px-4 md:px-0 z-40">
                     <h2 className="m-0 pb-2 px-4 text-4xl md:text-6xl text-center leading-0 md:leading-none">
                         Join our <span className="text-red dark:text-yellow">open source</span> community
                     </h2>
@@ -109,7 +109,7 @@ export default function Community() {
                         .
                     </p>
                 </div>
-                <section className="relative">
+                <section className="relative sm:scale-100 scale-[1.2] sm:origin-center origin-bottom">
                     <img src="/images/campfire-light.png" alt="campfire-light" className="dark:hidden block w-full" />
                     <img src="/images/campfire-dark.png" alt="campfire-dark" className="hidden dark:block w-full" />
 
