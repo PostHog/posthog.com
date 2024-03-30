@@ -127,7 +127,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         if (pathname !== '/') {
             setEnterpriseMode(false)
         }
-        if (pathname === '/' && search.includes('enterprise-mode=true')) {
+        if (pathname === '/' && search.includes('nsfw=false')) {
             setEnterpriseMode(true)
         }
     }, [pathname])
