@@ -8,15 +8,14 @@ tags:
   - laudspeaker-connector
 ---
 
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+
 Send event data from PostHog to Laudspeaker, so it can be used to trigger immediate or time-delayed customer communications across multiple channels, including Slack and email. 
 
 [Laudspeaker](https://laudspeaker.com/) is an open source customer messaging service and an alternative to tools such as Braze or [Customer.io](/apps/customer-io). 
 
-## Requirements
-
-This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
@@ -25,7 +24,7 @@ It is recommended to start by importing PostHog users into Laudspeaker via the e
 After configuring PostHog within Laudspeaker, you can install the Laudspeaker Connector in PostHog by following these steps...
 
 1. Log in to your PostHog instance
-2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2. Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Laudspeaker'
 4. Select the destination, press 'Install'
 
@@ -41,14 +40,6 @@ Other fields (email, phone number, custom) are optional and can be specified if 
 
 PostHog is open-source and so are all destinations on the platform. The [source code](https://github.com/PostHog/posthog-laudspeaker-app) is available on GitHub.
 
-### Who maintains this destination?
+<CommunityMaintained />
 
-This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this destination?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

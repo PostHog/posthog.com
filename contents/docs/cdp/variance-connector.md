@@ -8,13 +8,14 @@ tags:
   - variance-connector
 ---
 
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+
 This destination exports PostHog data to Variance in real-time and formats it for use by revenue teams. This includes extracting accounts and contacts, making it easy to see customers by sales stage, and more.
 
-## Requirements
+<Requirements />
 
-This requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.31.0](https://posthog.com/blog/the-posthog-array-1-31-0) or later. The destination supports `capture`, `page`, `identify`, and `alias` calls.
-
-Not running 1.31.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+The destination supports `capture`, `page`, `identify`, and `alias` calls.
 
 ## Installation
 
@@ -38,11 +39,4 @@ This destination was created by Variance. We'd like to thank everyone at Varianc
 
 This destination is maintained by Variance. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this destination?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
-
+<FeedbackQuestions />

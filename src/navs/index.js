@@ -1245,10 +1245,6 @@ export const docsMenu = {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
                         },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/libraries/zendesk',
-                        },
                     ],
                 },
                 {

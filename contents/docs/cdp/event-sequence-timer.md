@@ -8,47 +8,47 @@ tags:
   - event-timer
 ---
 
-> 🚧 **Note:** We are currently in the process of reworking our app server and have therefore **disabled new installs of the event sequence timer.** You can still analyze the timing of event sequences using [HogQL](/docs/hogql).
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
 
-For example, to get the average time between a `$pageview` and `$pageleave` events this year, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
-
-```sql
-SELECT avg(time_between) AS avg_time_between
-FROM (
-  SELECT
-    dateDiff('minute', first_timestamp, next_timestamp) AS time_between
-  FROM (
-    SELECT 
-      distinct_id,
-      event AS first_event,
-      timestamp AS first_timestamp,
-      first_value(event) OVER w AS next_event,
-      first_value(timestamp) OVER w AS next_timestamp
-    FROM events
-    WHERE 
-      toYear(timestamp) = 2023
-      AND (event = '$pageview' OR event = '$pageleave')
-    WINDOW w AS (PARTITION BY distinct_id ORDER BY timestamp ASC ROWS BETWEEN 1 FOLLOWING AND 1 FOLLOWING)
-    ORDER BY distinct_id, timestamp
-  ) AS subquery
-  WHERE first_event = '$pageview'
-    AND next_event = '$pageleave'
-)
-```
-
-This can be customized with different events or properties. See an example use case in our “[How to calculate time on page](/tutorials/time-on-page)” tutorial.
-
-If there is functionality around event sequence timing you want but don’t see a way to do, let us know by asking a question in [our community](/questions).
+> 🚧 **Note:** We are currently in the process of reworking our app server and have  **disabled new installs of this app.** You can still analyze the timing of event sequences using [HogQL](/docs/hogql).
+>
+> For example, to get the average time between a `$pageview` and `$pageleave` events this year, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
+>
+>```sql
+>SELECT avg(time_between) AS avg_time_between
+> FROM (
+>   SELECT
+>     dateDiff('minute', first_timestamp, next_timestamp) AS time_between
+>   FROM (
+>     SELECT 
+>       distinct_id,
+>       event AS first_event,
+>       timestamp AS first_timestamp,
+>       first_value(event) OVER w AS next_event,
+>       first_value(timestamp) OVER w AS next_timestamp
+>     FROM events
+>     WHERE 
+>       toYear(timestamp) = 2023
+>       AND (event = '$pageview' OR event = '$pageleave')
+>     WINDOW w AS (PARTITION BY distinct_id ORDER BY timestamp ASC ROWS BETWEEN 1 FOLLOWING AND 1 FOLLOWING)
+>     ORDER BY distinct_id, timestamp
+>   ) AS subquery
+>   WHERE first_event = '$pageview'
+>     AND next_event = '$pageleave'
+> )
+>```
+>
+> This can be customized with different events or properties. See an example use case in our “[How to calculate time on page](/tutorials/time-on-page)” tutorial.
+>
+>If there is functionality around event sequence timing you want but don’t see a way to do, let us know by asking a question in [our community](/questions).
 
 ## What does this app do?
 
 This app measures the time it takes for a user to perform one event (`EventB`), after an earlier event (`EventA`).
 
-## Requirements
-
-The Event Sequence Timer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
@@ -90,14 +90,6 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Event Sequence Timer. Thanks Yakko!
 
-### Who maintains this app?
+<PostHogMaintained />
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />
