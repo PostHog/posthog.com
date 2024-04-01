@@ -104,8 +104,7 @@ Yes! See [migration tools repo](https://github.com/PostHog/posthog-migration-too
 
 _Can a customer transfer from Cloud to Self-hosted?_
 
-Yes! See [the Replicator app](/docs/apps/replicator) for events and the [migrate meta](https://github.com/PostHog/posthog-migrate-meta) repo for everything else.
-
+Yes! [Raise a support ticket in the app](https://app.posthog.com/home#supportModal) under Data Management.
 
 _What if the customer knows their user volumes but has no idea about number of events?_
 

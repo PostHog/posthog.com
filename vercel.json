@@ -1184,6 +1184,8 @@
         { "source": "/docs/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" },
         { "source": "/docs/cdp/redshift-export", "destination": "/docs/cdp/batch-exports/redshift" },
         { "source": "/cdp/redshift-export", "destination": "/docs/cdp/batch-exports/redshift" },
+        { "source": "/cdp/replicator", "destination": "/docs/migrate/migrate-to-cloud" },
+        { "source": "/docs/cdp/replicator", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/docs/cdp/segment", "destination": "/docs/libraries/segment" },
         { "source": "/docs/cdp/sentry-connector", "destination": "/docs/libraries/sentry" },
         { "source": "/docs/cdp/n8n", "destination": "/docs/libraries/n8n" },

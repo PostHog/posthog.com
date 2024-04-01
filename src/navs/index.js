@@ -2391,10 +2391,6 @@ export const docsMenu = {
                             name: 'Engage.so',
                         },
                         {
-                            url: '/docs/cdp/replicator',
-                            name: 'Event Replicator',
-                        },
-                        {
                             url: '/docs/cdp/google-pub-sub-connector',
                             name: 'GCP Pub/Sub',
                         },
