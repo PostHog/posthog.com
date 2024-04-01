@@ -353,8 +353,8 @@ export const ProductWebAnalytics = () => {
                 <section id="customers" className="-mt-56 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="gets 30% more data than with Google Analytics"
-                            quote="We could autocapture... events using the JS snippet and... configure custom events."
+                            outcome="gets 30% more data than with GA4"
+                            quote="Other platforms we looked at dropped data due to adblockers and third-party cookies."
                             customer={ycombinator}
                         />
                         <CustomerCard

@@ -14,6 +14,7 @@ import {
 import { useInView } from 'react-intersection-observer'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 import * as Icons from '@posthog/icons'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const Lottie = ({ lottieRef, src, onEvent, placeholderIcon }) => {
     const [ready, setReady] = useState(false)
@@ -37,9 +38,21 @@ const Lottie = ({ lottieRef, src, onEvent, placeholderIcon }) => {
     )
 }
 
+const enterpriseModeProductNames = {
+    'Product analytics': 'Analytics solutions',
+    'Web analytics': 'Visitor insights',
+    'Session replay': 'Behavioral intelligence',
+    'Feature flags': 'Risk mitigation',
+    'A/B testing': 'CX optimization',
+    Surveys: 'Qualitative feedback',
+    'Data pipeline': 'CDP/ETL',
+    'Data warehouse': 'Secure data vault',
+}
+
 const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index, placeholderIcon }) => {
     const active = activeSlide === index
     const lottieRef = useRef()
+    const { enterpriseMode } = useLayoutData()
     const [playing, setPlaying] = useState(false)
 
     const handleClick = () => {
@@ -82,7 +95,7 @@ const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index, place
                         active ? 'font-bold' : 'font-medium opacity/75'
                     }`}
                 >
-                    {title}
+                    {enterpriseMode ? enterpriseModeProductNames[title] : title}
                 </p>
                 {label && (
                     <span

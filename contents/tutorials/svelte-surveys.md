@@ -364,7 +364,7 @@ You can capture these events using `posthog.capture()`:
     const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${surveyID}`);
     showSurvey = !hasInteractedWithSurvey;
     if (showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -425,7 +425,7 @@ Altogether, your code should look like this:
     const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${surveyID}`);
     showSurvey = !hasInteractedWithSurvey;
     if (showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }

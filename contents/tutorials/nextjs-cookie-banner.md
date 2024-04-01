@@ -1,6 +1,6 @@
 ---
 title: Building a Next.js cookie consent banner
-date: 2024-01-05
+date: 2024-03-27
 author:
   - ian-vanagas
 showTitle: true
@@ -31,24 +31,14 @@ To add PostHog to our app, go into your `app` folder and create a `providers.js`
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-import { useEffect, useState } from 'react'
-
-const ph_project_api_key = '<ph_project_api_key>'
 
 export function PHProvider({ children }) {
-  const [phInstance, setPhInstance] = useState(null);
-
-  useEffect(() => {
-    const ph = posthog.init(
-      ph_project_api_key,
-      {
-        api_host: '<ph_instance_address>',
-      }
-    );
-    setPhInstance(ph || null);
-  }, []);
-
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
+  if (typeof window !== 'undefined') {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_instance_address>',
+    })
+  }
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
 
@@ -85,22 +75,28 @@ Importantly, to avoid a hydration error, we must check if the frontend has mount
 import { useEffect, useState } from "react";
 
 export function Banner() {
-  const [showBanner, setShowBanner] = useState(false);
+  const [consentGiven, setConsentGiven] = useState('');
 
   useEffect(() => {
-    setShowBanner(true);
+    // We want this to only run once the client loads
+    // or else it causes a hydration error
+    setConsentGiven('undecided');
   }, []);
 
   return (
     <div>
-      <p>
-        We use tracking cookies to understand how you use 
-        the product and help us improve it.
-        Please accept cookies to help us improve.
-      </p>
-      <button type="button">Accept cookies</button>
-      <span> </span>
-      <button type="button">Decline cookies</button>
+      {consentGiven === 'undecided' && (
+        <div>
+          <p>
+            We use tracking cookies to understand how you use 
+            the product and help us improve it.
+            Please accept cookies to help us improve.
+          </p>
+          <button type="button">Accept cookies</button>
+          <span> </span>
+          <button type="button">Decline cookies</button>
+        </div>
+      )}
     </div>
   )
 }
@@ -131,233 +127,155 @@ This creates an ugly but functional cookie banner at the bottom of our site. You
 
 ![Banner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-cookie-banner/banner.png)
 
-## Adding the consent context
+## Handling and storing user consent
 
-Next, we set up the logic to manage the consent state. To do this, we create a `consent.js` file in the `app` folder and set up a context using `createContext` and `useContext`.
+Next, we add the logic to handle and store the user's consent. We do this in `banner.js` by adding `handleAcceptCookies` and `handleDeclineCookies` functions called when a user chooses to accept or decline cookies. We save this chioce to local storage.
 
-```js
-// app/consent.js
-'use client'
-import { createContext, useContext } from 'react'
-
-const ConsentContext = createContext(undefined);
-
-export const useConsent = () => {
-  const context = useContext(ConsentContext);
-  if (context === undefined) {
-    throw new Error('useConsent must be used within a ConsentProvider');
-  }
-  return context;
-};
-```
-
-After doing this, we can set up a provider to pass this context to the rest of the app. This provider also includes a way to update the consent state, which our banner uses. Doing this requires setting up a context `useState`, a `useEffect` to set the initial state, and `localStorage` calls to get and save the state. Altogether, this looks like this:
-
-```js
-// app/consent.js
-'use client'
-import { useEffect, useState, createContext, useContext } from 'react'
-
-const ph_project_api_key = '<ph_project_api_key>'
-const consentKey = `__consent_${ph_project_api_key}`;
-
-const ConsentContext = createContext(undefined);
-
-export const useConsent = () => {
-  const context = useContext(ConsentContext);
-  if (context === undefined) {
-    throw new Error('useConsent must be used within a ConsentProvider');
-  }
-  return context;
-};
-
-export const ConsentProvider = ({ children }) => {
-  const [consent, setConsent] = useState('initiating');
-
-  useEffect(() => {
-    // Access localStorage only after the component mounts, i.e., on the client side
-    const storedConsent = localStorage.getItem(consentKey);
-    if (storedConsent) {
-      setConsent(storedConsent);
-    }
-  }, []);
-
-  const updateConsent = (newConsent) => {
-    // Only update consent if the user hasn't made a decision yet
-    if (['granted', 'denied'].includes(consent)) {
-      return;
-    }
-    setConsent(newConsent);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(consentKey, newConsent);
-    }
-  };
-
-  return (
-    <ConsentContext.Provider value={{ consent, updateConsent, setConsent }}>
-      {children}
-    </ConsentContext.Provider>
-  );
-};
-```
-
-Finally, we add the consent provider to our `layout.js` file and wrap our app in it.
-
-```js
-import './globals.css'
-import { PHProvider } from './providers'
-import { ConsentProvider } from './consent'
-import Banner from './banner'
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <ConsentProvider>
-        <PHProvider>
-          <body>
-            {children}
-            <Banner />
-          </body>
-        </PHProvider>
-      </ConsentProvider>
-    </html>
-  )
-}
-```
-
-## Setting the consent state with the cookie banner
-
-Depending on the consent state, we want to initialize PostHog either with or without cookies. We also want to use it to hide the banner when the user makes a decision.
-
-To do this:
-
-1. In `banner.js`, import the `useConsent` hook from `consent.js` and add it to the component.
-
-2. Modify the `useEffect` to update consent state to `undecided` on load and only show the banner if the user hasn't made a decision yet.
-
-3. Return `null` if the `showBanner` state is false.
-
-4. Set up click handlers for the accept and decline buttons that call the `updateConsent` function and hide the banner.
-
-Together, this looks like this:
+We also add a `cookieConsentGiven` function that returns the user's consent state from local storage, which we call on first load. If there isn't a value in local storage, we set the consent state to `undecided`.
 
 ```js
 // app/banner.js
 'use client';
 import { useEffect, useState } from "react";
-import { useConsent } from "./consent";
 
-export function Banner() {
-  const [showBanner, setShowBanner] = useState(false);
-  const { consent, updateConsent, setConsent } = useConsent();
+export function cookieConsentGiven() {
+  if (!localStorage.getItem('cookie_consent')) {
+    return 'undecided';
+  }
+  return localStorage.getItem('cookie_consent');
+}
+
+export default function Banner() {
+  const [consentGiven, setConsentGiven] = useState('');
 
   useEffect(() => {
+    // We want this to only run once the client loads
+    // or else it causes a hydration error
+    setConsentGiven(cookieConsentGiven());
+  }, []);
 
-    if (consent === 'granted' || consent === 'denied') {
-      setShowBanner(false);
-      return
-    }
-
-    if (consent === 'undecided') {
-      setShowBanner(true);
-      return
-    }
-
-    // Once loaded and consent is 'initiating', 
-    // set consent to 'undecided'
-    if (consent === 'initiating') {
-      setConsent('undecided');
-    }
-  }, [consent]);
-
-  if (!showBanner) return null;
-
-  const acceptCookies = () => { 
-    updateConsent('granted');
-    setShowBanner(false);
+  const handleAcceptCookies = () => {
+    localStorage.setItem('cookie_consent', 'yes');
+    setConsentGiven('yes');
   };
 
-  const declineCookies = () => {
-    updateConsent('denied');
-    setShowBanner(false);
+  const handleDeclineCookies = () => {
+    localStorage.setItem('cookie_consent', 'no');
+    setConsentGiven('no');
   };
 
   return (
     <div>
-      <p>
-        We use tracking cookies to understand how you use 
-        the product and help us improve it.
-        Please accept cookies to help us improve.
-      </p>
-      <button type="button" onClick={acceptCookies}>
-        Accept cookies
-      </button>
-      <span> </span>
-      <button type="button" onClick={declineCookies}>
-        Decline cookies
-      </button>
+      {consentGiven === 'undecided' && (
+        <div>
+          <p>
+            We use tracking cookies to understand how you use 
+            the product and help us improve it.
+            Please accept cookies to help us improve.
+          </p>
+          <button type="button" onClick={handleAcceptCookies}>Accept cookies</button>
+          <span> </span>
+          <button type="button" onClick={handleDeclineCookies}>Decline cookies</button>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 ```
 
-Once done, the banner hides when a user makes a decision and their consent state is saved in local storage.
+## Controlling PostHog persistence based on consent
 
-![Tracking granted](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-cookie-banner/granted.png)
+Now that we can ask for and store user consent, we can use this to control whether PostHog sets a cookie or not. There are 3 possible states:
 
-## Initializing PostHog based on consent state
+1. If the user hasn't made a consent choice, show the banner and initialize PostHog in `memory` mode.
 
-The last thing we want to do is control how we initialize PostHog based on the consent state. The two ways we want to initialize PostHog are:
+2. If the user declines consent, hide the banner and keep PostHog in `memory` mode.
 
-1. If the consent state is undecided or denied, initialize PostHog without cookies (memory).
+3. If the user accepts consent, hide the banner and switch PostHog to `localStorage+cookie` mode.
 
-2. If the consent state is granted, initialize PostHog with cookies and local storage.
+To start implementing this, we add a `useEffect` dependent on the `consentGiven` in `banner.js` to update the PostHog configuration based on the user's consent.
 
-To do this, we go back to our `providers.js` file, import `useConsent` and handle the possible states in our `useEffect` call. We also want to bootstrap the user `distinct_id` when we go from undecided to granted to ensure the same user is tracked consistently. Altogether, this looks like this:
+```js
+// app/banner.js
+'use client';
+import { useEffect, useState } from "react";
+import { usePostHog } from "posthog-js/react";
+
+export function cookieConsentGiven() {
+  if (!localStorage.getItem('cookie_consent')) {
+    return 'undecided';
+  }
+  return localStorage.getItem('cookie_consent');
+}
+
+export default function Banner() {
+  const [consentGiven, setConsentGiven] = useState('');
+  const posthog = usePostHog();
+
+  useEffect(() => {
+    // We want this to only run once the client loads
+    // or else it causes a hydration error
+    setConsentGiven(cookieConsentGiven());
+  }, []);
+
+  useEffect(() => {
+    if (consentGiven !== '') {
+      posthog.set_config({ persistence: consentGiven === 'yes' ? 'localStorage+cookie' : 'memory' });
+    }
+  }, [consentGiven]);
+
+  const handleAcceptCookies = () => {
+    localStorage.setItem('cookie_consent', 'yes');
+    setConsentGiven('yes');
+  };
+
+  const handleDeclineCookies = () => {
+    localStorage.setItem('cookie_consent', 'no');
+    setConsentGiven('no');
+  };
+
+  return (
+    <div>
+      {consentGiven === 'undecided' && (
+        <div>
+          <p>
+            We use tracking cookies to understand how you use 
+            the product and help us improve it.
+            Please accept cookies to help us improve.
+          </p>
+          <button type="button" onClick={handleAcceptCookies}>Accept cookies</button>
+          <span> </span>
+          <button type="button" onClick={handleDeclineCookies}>Decline cookies</button>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+To ensure, we initialize PostHog correctly on future loads, we also need to update `providers.js` to set the `persistence` config option based on the user's consent state. We can do this by reusing the `cookieConsentGiven` function.
 
 ```js
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-import { useEffect, useState } from 'react'
-import { useConsent } from './consent'
+import { cookieConsentGiven } from './banner'
 
 export function PHProvider({ children }) {
-  const { consent } = useConsent();
-  const [phInstance, setPhInstance] = useState(null);
-
-  useEffect(() => {
-    const initPostHog = (mode) => {
-      const ph = posthog.init(
-        '<ph_project_api_key>',
-        {
-          persistence: mode === 'memory' ? 'memory' : 'localStorage+cookie',
-          api_host: '<ph_instance_address>',
-          ...(mode !== 'memory' && { bootstrap: { distinctID: phInstance?.get_distinct_id() } }),
-        },
-        mode
-      );
-      setPhInstance(ph || null);
-    };
-
-    if (consent === 'initiating' || (phInstance && consent !== 'granted')) {
-      return;
-    }
-    if (consent === 'undecided' || consent === 'denied') {
-      initPostHog('memory');
-    } else if (consent === 'granted') {
-      initPostHog('cookie');
-    }
-  }, [consent]);
-
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
+  if (typeof window !== 'undefined') {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_instance_address>',
+      persistence: cookieConsentGiven() === 'yes' ? 'localStorage+cookie' : 'memory'
+    })
+  }
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
 
-Now, when users accept cookies, PostHog is initialized with data in cookies and local storage. When they decline, it is initialized without cookies (memory).
+When users visit your site now, PostHog is initialized either with or without cookies based on their consent choice.
 
-![Tracking granted](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-cookie-banner/localstorage.png)
+![Consented with local storage](https://res.cloudinary.com/dmukukwp6/image/upload/v1711561917/posthog.com/contents/images/tutorials/nextjs-cookie-banner/consent.png)
 
 ## Further reading
 

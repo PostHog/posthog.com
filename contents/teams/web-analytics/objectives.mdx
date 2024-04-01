@@ -1,7 +1,13 @@
-1. Finish the [beta to-do list](https://github.com/PostHog/posthog/issues/18547)
-2. Find 5 high-ICP reference customers
-
-### Non-goals
-- Until it becomes a blocker for high ICP customers, do not focus on:
-    - Pricing model
-    - Cheaper architecture
+* Make querying fast enough for large customers
+  * Sessions table - ship the sessions and switch web analytics over to using it
+  * Slow lane - ensure web analytics queries are compatible with the slow lane
+* Do personless events work where necessary (unknown amount of work)
+* Iterate on customer feedback
+  * Saved filters
+  * Live online user count
+  * Improve refresh behaviour
+  * Investigate synergies with session replay
+* Product management work
+  * Do interviews with YC companies/later stage people to get feedback
+  * Figure out the relation between product analytics and web analytics within the product
+  * Make web analytics a first class product on website/docs, change positioning where necessary

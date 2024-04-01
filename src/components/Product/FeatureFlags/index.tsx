@@ -340,7 +340,7 @@ const PairsWithArray = [
 ]
 
 export const ProductFeatureFlags = () => {
-    const { phantom, contra, speakeasy, carvertical } = useStaticQuery(graphql`
+    const { phantom, contra, elevenlabs, carvertical } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -361,7 +361,7 @@ export const ProductFeatureFlags = () => {
             contra: mdx(slug: { eq: "customers/contra" }) {
                 ...ProductCustomerFragment
             }
-            speakeasy: mdx(slug: { eq: "customers/speakeasy" }) {
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
             carvertical: mdx(slug: { eq: "customers/carvertical" }) {
@@ -399,21 +399,21 @@ export const ProductFeatureFlags = () => {
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="cut failure rates by 90%"
-                            quote="Feature flags are crucial for us. We use them as kill switches for all our features."
+                            quote="Feature flags are crucial for us. We use them as kill switches for all features and use the data to make decisions."
                             customer={phantom}
                         />
                         <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="Enables a ‘slow rollout’ strategy... while also analyzing feature adoption and performance in the same tool."
+                            outcome="increased registrations 30%"
+                            quote="Teams used to use different tools. That led to confusion because flags didn't integrate with our analytics or replays."
                             customer={contra}
                         />
                         <CustomerCard
-                            outcome="improved feature roll-out with flags"
-                            quote="The integrated insights and feature flags help us monitor how users with specific flags enabled are using features"
-                            customer={speakeasy}
+                            outcome="uses flags for feature testing"
+                            quote="We test changes as simple as changing the null state of a page through to new onboarding flows or new pricing changes."
+                            customer={elevenlabs}
                         />
                         <CustomerCard
-                            outcome="switched from an in-house tool"
+                            outcome="switched from in-house tools"
                             quote="Feature flags immediately bought a lot of value. What’s really elegant is how flags interlink with product analytics."
                             customer={carvertical}
                         />

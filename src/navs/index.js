@@ -1334,6 +1334,10 @@ export const docsMenu = {
                             url: '/docs/data/annotations',
                         },
                         {
+                            name: 'Channel type',
+                            url: '/docs/data/channel-type',
+                        },
+                        {
                             name: 'Cohorts',
                             url: '/docs/data/cohorts',
                         },
@@ -1972,6 +1976,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Dashboard',
+                    url: '/docs/web-analytics/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'orange',
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
@@ -2300,6 +2310,15 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                 },
+                {
+                    name: 'Features',
+                },
+                {
+                    name: 'Webhook',
+                    url: '/docs/surveys/webhook',
+                    icon: 'IconLaptop',
+                    color: 'orange',
+                },
             ],
         },
         {
@@ -2370,10 +2389,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/engage-connector',
                             name: 'Engage.so',
-                        },
-                        {
-                            url: '/docs/cdp/replicator',
-                            name: 'Event Replicator',
                         },
                         {
                             url: '/docs/cdp/google-pub-sub-connector',
