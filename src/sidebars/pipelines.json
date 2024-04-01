@@ -96,10 +96,6 @@
         "url": "/cdp/property-filter"
     },
     {
-        "name": "Replicator",
-        "url": "/cdp/replicator"
-    },
-    {
         "name": "RudderStack",
         "url": "/cdp/rudderstack-export"
     },
