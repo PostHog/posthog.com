@@ -209,7 +209,15 @@ const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: B
     )
 }
 
-export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): JSX.Element => {
+export const CTA = ({
+    type = 'primary',
+    ctaText,
+    ctaLink,
+}: {
+    type?: 'primary' | 'secondary'
+    ctaText?: string
+    ctaLink?: string
+}): JSX.Element => {
     const posthog = usePostHog()
     return (
         <TrackedCTA
@@ -220,11 +228,15 @@ export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): J
             type={type}
             size="md"
             className="shadow-md !w-auto"
-            to={`https://${
-                posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
-            }.posthog.com/signup`}
+            to={
+                ctaLink
+                    ? ctaLink
+                    : `https://${
+                          posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
+                      }.posthog.com/signup`
+            }
         >
-            Get started - free
+            {ctaText ? ctaText : 'Get started - free'}
         </TrackedCTA>
     )
 }

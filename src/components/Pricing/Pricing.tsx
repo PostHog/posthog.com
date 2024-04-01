@@ -24,6 +24,8 @@ interface PlanData {
     price: string
     priceSubtitle?: string | JSX.Element
     features: React.ReactNode[]
+    CTAText?: string
+    CTALink?: string
 }
 
 const planSummary: PlanData[] = [
@@ -86,6 +88,7 @@ const planSummary: PlanData[] = [
             'Priority support',
             'Pay only for what you use',
         ],
+        CTAText: 'Get started',
     },
     {
         title: 'Enterprise',
@@ -99,6 +102,8 @@ const planSummary: PlanData[] = [
             'Personalized onboarding & training',
             'Advanced permissions & audit logs',
         ],
+        CTAText: 'Get in touch',
+        CTALink: '/contact-sales',
     },
 ]
 
@@ -126,7 +131,11 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
                     ))}
                 </ul>
                 <div className="mt-auto">
-                    <PlanCTA type={planData.title === 'Ridiculously cheap' ? 'primary' : 'secondary'} />
+                    <PlanCTA
+                        type={planData.title === 'Ridiculously cheap' ? 'primary' : 'secondary'}
+                        ctaText={planData.CTAText}
+                        ctaLink={planData.CTALink}
+                    />
                 </div>
             </div>
         </div>
