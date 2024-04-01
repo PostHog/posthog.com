@@ -230,7 +230,7 @@ export default function Hero() {
             <Modal open={showNPS} setOpen={handleCloseNPS}>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[300px] dark:bg-border-dark p-4 rounded-md border border-border dark:border-dark">
                     <div className="float-right ml-4">
-                        <button onClick={() => setShowNPS(false)}>
+                        <button onClick={handleCloseNPS}>
                             <IconX className="w-4 h-4" />
                         </button>
                     </div>
