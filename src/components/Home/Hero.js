@@ -136,10 +136,16 @@ const WhitepaperBanner = ({ onClose }) => {
                 } basis-[200px] md:basis-auto text-center w-auto md:w-[340px] p-4 flex items-center flex-col m-2 border border-light dark:border-dark`}
             >
                 <div className="dark:hidden max-h-[300px] max-w-[200px] md:max-w-full md:max-h-auto">
-                    <StaticImage src="../../../public/images/enterprise/whitepaper-poster.jpg" />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/f_auto,q_auto/v1/posthog.com/contents/images/enterprise/ftbq1l9oz8t9kwiqwgww.jpg"
+                        alt="Whitepaper"
+                    />
                 </div>
                 <div className="hidden dark:block max-h-[300px] max-w-[200px] md:max-w-full md:max-h-auto">
-                    <StaticImage src="../../../public/images/enterprise/blackpaper-poster.jpg" />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/f_auto,q_auto/v1/posthog.com/contents/images/enterprise/xp093mcq8nswx29n8x3l.jpg"
+                        alt="Blackpaper"
+                    />
                 </div>
             </div>
             <div className="w-[380px] my-4 px-2">
