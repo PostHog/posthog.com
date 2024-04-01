@@ -51,11 +51,15 @@ import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-ev
 
 <FAQFalseOrNoneEvents />
 
-## Why are the numbers in my A/B test lower than when I create the same insight directly?
+## Why are my A/B test event numbers lower than when I create an insight directly?
 
-This can be a common problem when you're running an A/B test with the metric being a pageview: If this is the first pageview for a user, feature flag values might not load in time, which means that people don't yet see the experiment. We remove these people from the experiment calculation. To confirm this is the case, you can add a breakdown by the A/B test feature flag to your custom insight, and check the flag value is "None" for everyone removed from the experiment.
+Experiment results only count events that include the experiment's feature flag data. Sometimes, when you capture experiment events, the flags are not loaded yet. This means users don't see the experiment, their events won't have the flag data, and they are not included in the results calculation.
 
-To fix this, you need to make sure flags are immediately available on a page load. There are two options here:
+By default, insights count all the events, whether they include flag data or not. This is why they show a higher number. To confirm this, break down an insight by your experiment's flag and check the number of events with the value `None`.
 
-1. Wait for feature flags to load before showing the page (low engineering effort, but slows page down by ~200ms)
-2. Use [client side bootstrapping](/docs/feature-flags/bootstrapping) (high engineering effort, but keeps the page blazing fast)
+A situation where this happens is using pageviews as your goal metric. Because pageviews are captured as soon as PostHog loads, the flag data may not have loaded yet, especially for first time users where flags aren't cached. Thus, the pageview count in insights might be higher than in your experiment.
+
+To fix this, you make sure flags are immediately available on a page load. There are two options to do this:
+
+1. Wait for feature flags to load before showing the page (low engineering effort, but slows page down by ~200ms).
+2. Use [client-side bootstrapping](/docs/feature-flags/bootstrapping) (high engineering effort, but keeps the page blazing fast).
