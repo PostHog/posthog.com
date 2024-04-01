@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
@@ -15,6 +15,7 @@ import SearchBox from 'components/Search/SearchBox'
 
 const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     const { compact } = useLayoutData()
+
     return (
         <div className={className}>
             {compact ? (
