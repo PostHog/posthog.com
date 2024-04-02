@@ -17,15 +17,15 @@ Remote work sucks. If you work at Dell, that is. The company [recently announced
 
 But the policy actually makes sense for Dell. Sort of. When you’re a decades-old behemoth built around people working in offices, implementing remote work policies that actually work is hard. But it doesn't have to be. There are some key principles that any company – big or small, young or old, or Dell – can follow to realize the potential of remote working. 
 
-**This week, we explain: **how to make remote work actually work.
+**This week, we explain:** how to make remote work actually work.
 
 > This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
-## The problem? You’ve got a two-tiered system
+## Problem #1: A a two-tier system
 
 If you’re a company built around [big](https://www.cnbc.com/2023/06/08/google-to-crack-down-on-hybrid-work-asks-remote-workers-to-reconsider.html), [shiny](https://gizmodo.com/apple-remote-work-return-to-office-hybrid-work-1850256210) [offices](https://www.cnn.com/2022/06/01/tech/elon-musk-tesla-ends-work-from-home/index.html), then chances are you have a two-tiered system. Essentially, an employee’s ability to move up in such a company is closely linked to their proximity to the biggest, shiniest office. Dell’s new policy acknowledges this outright: if you’re a remote worker at Dell, there’s no career progression. The same is true at many companies that have a mix of remote, hybrid, and office workers.
 
-### The solution? Aggressive transparency
+### The solution: Aggressive transparency
 
 Rather than presentism and nepotism, career progression should be linked to a transparent framework of measurable goals. Do the work, do it well, deliver value for customers, and you’ll be rewarded. Leif Singer, a software engineer at Automattic, the company behind WordPress, has shared some great examples of [how this works in practice](https://youtu.be/aRiP72kRrnc?feature=shared). 
 
@@ -39,9 +39,13 @@ Making remote work actually work requires making big cultural and procedural cha
 
 ### The solution: Write. Everything. Down
 
-How do I [file expenses](https://posthog.com/handbook/people/spending-money)? What’s the [onboarding process for new hires](https://posthog.com/handbook/people/onboarding)? What’s the product analytics team [focused on this quarter](https://posthog.com/teams/product-analytics)? In most companies, answers to these kinds of questions are either hidden in labyrinthian collections of out-of-date Google Docs or inside someone’s brain. At well-functioning, all-remote companies, they’re written down in a handbook where anyone can access them. That handbook can be your public website, or an internal wiki. But written communication also includes Slack, GitHub, or systems like Trello or Airtable.
+How do I [file expenses](https://posthog.com/handbook/people/spending-money)? What’s the [onboarding process for new hires](https://posthog.com/handbook/people/onboarding)? What’s the product analytics team [focused on this quarter](https://posthog.com/teams/product-analytics)? 
 
-Defaulting to written communication means, chances are, if someone has a question they don’t have to wait for an answer – they can go find it themselves. And if they can’t find an answer, writing a clear, concise question in a public channel on Slack will ensure that everyone can see the answer. Being able to clearly communicate often complex ideas is a key skill for anyone working remotely, but especially engineers. Software engineer Dmitry Kudryavtsev [sums it up nicely](https://www.yieldcode.blog/post/why-engineers-should-write/): “The sooner you get better at writing, the faster you will become a better engineer.” It also created some lively discussion on [Hacker News](https://news.ycombinator.com/item?id=36659166).
+In most companies, answers to these kinds of questions are either hidden out-of-date Google Docs or inside someone’s brain. At well-functioning, all-remote companies, they’re written down in a handbook where anyone can access them. That handbook can be your public website, or an internal wiki. But written communication also includes Slack, GitHub, or systems like Trello or Airtable.
+
+Defaulting to written communication means, chances are, if someone has a question they don’t have to wait for an answer – they can go find it themselves. And if they can’t find an answer, writing a clear, concise question in a public channel on Slack will ensure that everyone can see the answer. 
+
+Being able to clearly communicate often complex ideas is a key skill for anyone working remotely, but especially engineers. Software engineer Dmitry Kudryavtsev [sums it up nicely](https://www.yieldcode.blog/post/why-engineers-should-write/): “The sooner you get better at writing, the faster you will become a better engineer.” It also created some lively discussion on [Hacker News](https://news.ycombinator.com/item?id=36659166).
 
 Automattic’s Beau Lebens has written (of course) a [great guide](https://beau.blog/2020/03/remote-work-at-scale/) to the benefits of effective written communication with lots of practical tips. One key takeaway: tools are not the answer. Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only work if you do all the hard work first. And nailing how you communicate is a big part of that. Writing things down is great because:
 
@@ -51,7 +55,7 @@ Automattic’s Beau Lebens has written (of course) a [great guide](https://beau.
 
 * **It’s clearer. **Seriously, have you ever read a transcript of you speaking? Writing things down helps with intentionality as, hopefully, it makes you think through both what you’re trying to achieve and how you want to communicate it.
 
-### The problem: Meetings
+## Problem #3: Death by Zoom
 
 Online meetings are the scourge of remote work – and often a cause of tension between office-based and non-office based employees. Mics off when they should be on, screenshare chaos, [Jeffrey Toobin’s penis](https://www.wired.com/story/jeffrey-toobin-zoom-penis/) – they remain a technical nightmare and a productivity black hole. Many companies see them as a necessary evil – a way for colleagues, no matter where they’re based, to collaborate. This is wrong.
 
@@ -65,7 +69,7 @@ At a lot of companies, this has forced way too many people onto the “manager�
 
 A lot of companies, big and small, have adopted this approach. GitLab and Automattic for starters, but also [Twist](https://async.twist.com/asynchronous-communication/), [Buffer](https://buffer.com/about), and [Zapier](https://zapier.com/jobs/culture-and-values-at-zapier) have all followed a similar blueprint to make remote work actually work for both managers and engineers.
 
-### The problem: Everyone will slack off
+### Problem #4: Lack of trust
 
 This is probably the biggest (and stupidest) argument against remote working. Statistics on this issue abound, but here are some key findings: remote work [doesn’t affect productivity, at all](https://www.bloomberg.com/news/articles/2024-01-16/remote-work-doesn-t-seem-to-affect-productivity-fed-study-finds). That’s not according to some random survey, that’s based on detailed research by the Federal Reserve Bank of San Francisco. 
 
