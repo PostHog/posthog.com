@@ -151,7 +151,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                                 {teamName} Team
                             </Link>
                         )}
-                        <div className="mt-1 text-[15px]">
+                        <div className="mt-1 text-[15px] community-post-markdown">
                             <Markdown>{description}</Markdown>
                         </div>
                         <div className="mt-2 flex space-x-2">
