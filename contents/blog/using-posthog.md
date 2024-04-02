@@ -233,10 +233,4 @@ Want to see where people are clicking on any page on your website or web app, ju
 
 Try the [PostHog Toolbar](/tutorials/toolbar).
 
-## 22. Track support tickets by connecting Zendesk
-
-The [Zendesk integration for PostHog](/apps/zendesk-connector) is a two-way connector that allows you turn Zendesk tickets into PostHog events and enrich Zendesk tickets with PostHog event data. You can also [add session replays to Zendesk tickets](/tutorials/zendesk-session-replays) to help debug and recreate issues.
-
-Importing support tickets as events allows you to understand support trends, and use Cohorts and Correlation Analysis to breakdown common traits among users who raise tickets frequently.
-
 <ArrayCTA />

@@ -8,6 +8,10 @@ tags:
   - geoip
 ---
 
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
+
 This app enriches PostHog events and persons with IP location data. Simply enable this app and from that point on, your new events will have GeoIP data added, allowing you to locate users and run queries based on geographic data.
 
 ## How it works
@@ -16,16 +20,12 @@ This app prefers to use event property `$ip` (which should be of type `string`),
 
 This way the app can, in most cases, infer the IP address without any work on your side.
 
-## Requirements
-
-The GeoIP Enricher requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
 1. Log in to your PostHog instance
-2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2. Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'GeoIP'
 4. Select the GeoIP app, press 'Install' and follow the on-screen instructions
 
@@ -69,14 +69,6 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 
 We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Tim Glaser](https://github.com/timgl), [Michael Matloka](https://github.com/Twixes) and former team member [Paolo D'Amico](https://github.com/paolodamico) for creating the GeoIP Enricher. We miss you, Paolo!
 
-### Who maintains this app?
+<PostHogMaintained />
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />
