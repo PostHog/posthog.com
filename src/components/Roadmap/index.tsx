@@ -236,8 +236,10 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-4 py-1 border text-sm border-border dark:border-dark opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75 ${
-                active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+            className={`px-4 py-1 border dark:bg-accent-dark text-sm border-border dark:border-dark opacity-75 hover:bg-accent/75 dark:hover:bg-accent-dark/75 ${
+                active
+                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark dark:text-white opacity-100 font-bold'
+                    : ''
             } ${className}`}
         >
             {children}
