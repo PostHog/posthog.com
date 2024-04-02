@@ -13,6 +13,7 @@ import {
     IconHogQL,
     IconPeople,
     IconPieChart,
+    IconPhone,
     IconPrivacy,
     IconPulse,
     IconRewindPlay,
@@ -59,6 +60,7 @@ export const topicIcons = {
     paths: PathAnalysis, // to be replaced or removed
     'people & properties': IconBrackets,
     'pricing & billing': IconReceipt,
+    'mobile libraries': IconPhone,
     monitoring: IconPulse,
     'product analytics': IconGraph,
     security: IconPrivacy,
