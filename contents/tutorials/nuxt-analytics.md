@@ -1,6 +1,7 @@
 ---
 title: How to set up analytics in Nuxt
 date: 2024-01-19
+featuredVideo: https://www.youtube-nocookie.com/embed/7-GS9srUsqs
 author:
   - lior-neu-ner
 tags:
