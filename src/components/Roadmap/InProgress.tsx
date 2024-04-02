@@ -373,9 +373,9 @@ export function InProgress(
                         <p className="m-0 !text-[15px] !leading-none opacity-80 inline">
                             {more
                                 ? description
-                                : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
+                                : description.substring(0, 300) + (description?.length > 300 ? '...' : '')}
                         </p>
-                        {!more && (description?.length > 125 || githubPages?.length > 0) && (
+                        {!more && (description?.length > 300 || githubPages?.length > 0) && (
                             <button
                                 onClick={() => setMore(true)}
                                 className="font-semibold text-red inline text-sm ml-1"
