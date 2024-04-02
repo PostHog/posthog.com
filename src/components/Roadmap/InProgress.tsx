@@ -9,7 +9,7 @@ import { useToast } from '../../hooks/toast'
 import useSWR from 'swr'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import { IconInfo, IconBell, IconUndo } from '@posthog/icons'
+import { IconInfo, IconBell, IconUndo, IconShieldLock } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import SideModal from 'components/Modal/SideModal'
 import TeamUpdate from 'components/TeamUpdate'
@@ -17,7 +17,6 @@ import { CallToAction } from 'components/CallToAction'
 import RichText from 'components/Squeak/components/RichText'
 import { useFormik } from 'formik'
 import transformValues from 'components/Squeak/util/transformValues'
-import { IconShieldLock } from '@posthog/icons'
 
 type RoadmapSubscriptions = {
     data: {
@@ -428,7 +427,7 @@ export function InProgress(
                 </div>
 
                 <div className="px-4">
-                    <h6 className="my-4">Project updates</h6>
+                    <h6 className="mt-4 mb-2">Project updates</h6>
 
                     {updates?.length > 0 ? (
                         <ul className="list-none m-0 p-0 mb-6">
@@ -452,7 +451,7 @@ export function InProgress(
                             )}
                         </ul>
                     ) : (
-                        <p className="!text-sm italic -mt-2">
+                        <p className="!text-[15px] italic -mt-2 opacity-75">
                             No updates yet. Engineers are currently hard at work, so check back soon!
                         </p>
                     )}
