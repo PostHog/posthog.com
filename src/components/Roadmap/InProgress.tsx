@@ -17,6 +17,7 @@ import { CallToAction } from 'components/CallToAction'
 import RichText from 'components/Squeak/components/RichText'
 import { useFormik } from 'formik'
 import transformValues from 'components/Squeak/util/transformValues'
+import { IconShieldLock } from '@posthog/icons'
 
 type RoadmapSubscriptions = {
     data: {
@@ -457,43 +458,48 @@ export function InProgress(
                     )}
 
                     <div className="flex gap-2">
-                        <CallToAction
-                            size="md"
-                            disabled={loading}
-                            onClick={() => (subscribed ? unsubscribe() : subscribe())}
-                            className="text-sm font-semibold flex gap-2 items-center [&_>span]:flex [&_>span]:items-center [&_>span]:gap-2"
-                            data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
-                            type={subscribe ? 'secondary' : 'primary'}
-                        >
-                            {loading ? (
-                                <Spinner className="w-[14px] h-[14px] !text-blue" />
-                            ) : subscribed ? (
-                                <IconUndo className="w-5 h-5 inline-block" />
-                            ) : (
-                                <>{betaAvailable ? '' : <IconBell className="w-5 h-5 inline-block" />}</>
-                            )}
-                            <span>
-                                {subscribed
-                                    ? 'Unsubscribe'
-                                    : betaAvailable
-                                    ? 'Request early access'
-                                    : 'Get updates about this project'}
-                                {!subscribed && !betaAvailable && (
-                                    <Tooltip
-                                        content="Get email notifications when the team shares updates about this project, releases a beta, or
-                                            ships this feature."
-                                        contentContainerClassName="max-w-xs"
-                                    >
-                                        <div className="inline-block relative">
-                                            <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
-                                        </div>
-                                    </Tooltip>
+                        {!isModerator && (
+                            <CallToAction
+                                size="md"
+                                disabled={loading}
+                                onClick={() => (subscribed ? unsubscribe() : subscribe())}
+                                className="text-sm font-semibold flex gap-2 items-center [&_>span]:flex [&_>span]:items-center [&_>span]:gap-2"
+                                data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
+                                type={subscribe ? 'secondary' : 'primary'}
+                            >
+                                {loading ? (
+                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                ) : subscribed ? (
+                                    <IconUndo className="w-5 h-5 inline-block" />
+                                ) : (
+                                    <>{betaAvailable ? '' : <IconBell className="w-5 h-5 inline-block" />}</>
                                 )}
-                            </span>
-                        </CallToAction>
+                                <span>
+                                    {subscribed
+                                        ? 'Unsubscribe'
+                                        : betaAvailable
+                                        ? 'Request early access'
+                                        : 'Get updates about this project'}
+                                    {!subscribed && !betaAvailable && (
+                                        <Tooltip
+                                            content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                            ships this feature."
+                                            contentContainerClassName="max-w-xs"
+                                        >
+                                            <div className="inline-block relative">
+                                                <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                            </div>
+                                        </Tooltip>
+                                    )}
+                                </span>
+                            </CallToAction>
+                        )}
 
                         {isModerator && !addingUpdate && (
-                            <CallToAction size="md" onClick={() => setAddingUpdate(true)}>
+                            <CallToAction size="md" type="secondary" onClick={() => setAddingUpdate(true)}>
+                                <Tooltip content="Only moderators can see this" placement="top">
+                                    <IconShieldLock className="w-6 h-6 inline-block -my-1 mr-1" />
+                                </Tooltip>
                                 Add an update
                             </CallToAction>
                         )}
