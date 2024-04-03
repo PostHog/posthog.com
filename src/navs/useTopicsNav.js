@@ -27,7 +27,7 @@ export default function useTopicsNav() {
     const nav = [
         { name: 'Topics' },
         { name: 'Latest', url: '/questions', icon: 'IconClock' },
-        isLoggedIn && { name: 'My discussions', url: '/community/dashboard', icon: 'IconNotification' },
+        ...(isLoggedIn ? [{ name: 'My discussions', url: '/community/dashboard', icon: 'IconNotification' }] : []),
     ]
     topicGroups.nodes
         .sort((a, b) => navSorted.indexOf(a.label) - navSorted.indexOf(b.label))
