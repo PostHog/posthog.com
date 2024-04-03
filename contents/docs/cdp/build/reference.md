@@ -1,8 +1,8 @@
 ---
-title: Apps developer reference
+title: Connector developer reference
 ---
 
-> **Note:** It's worth reading the [building apps overview](/docs/cdp/build) for a quick introduction to how to build your own app.
+> **Note:** It's worth reading the [building connectors overview](/docs/cdp/build) for a quick introduction to how to build your own connector.
 
 ## `plugin.json` file
 
@@ -38,7 +38,7 @@ A `plugin.json` file is structured as follows:
 }
 ```
 
-Here's an example `plugin.json` file from our ['Hello world app'](https://github.com/PostHog/helloworldplugin):
+Here's an example `plugin.json` file from our ['Hello world connector'](https://github.com/PostHog/helloworldplugin):
 
 ```json
 {
@@ -48,7 +48,7 @@ Here's an example `plugin.json` file from our ['Hello world app'](https://github
   "main": "index.js",
   "config": [
     {
-      "markdown": "This is a sample app!"
+      "markdown": "This is a sample connector!"
     },
     {
       "key": "bar",
@@ -66,7 +66,7 @@ Most options in this file are self-explanatory, but there are a few worth explor
 
 ### `main`
 
-`main` determines the entry point for your app, where your `setupPlugin` and `processEvent` functions are. More on these later.
+`main` determines the entry point for your connector, where your `setupPlugin` and `processEvent` functions are. More on these later.
 
 ### `config`
 
@@ -77,21 +77,21 @@ Each object in a config can have the following properties:
 |   Key    |                    Type                    |                                                                           Description                                                                           |
 | :------ | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   type   | `"string"` or `"attachment"` or `"choice"` | Determines the type of the field - "attachment" asks the user for an upload, and "choice" requires the config object to have a `choices` array, explained below |
-|   key    |                  `string`                  |                                     The key of the app config field, used to reference the value from inside the app                                      |
-|   name   |                  `string`                  |                                          Displayable name of the field - appears on the app setup in the PostHog UI                                          |
+|   key    |                  `string`                  |                                     The key of the connector config field, used to reference the value from inside the connector                                      |
+|   name   |                  `string`                  |                                          Displayable name of the field - appears on the connector setup in the PostHog UI                                          |
 | default  |                  `string`                  |                                                                   Default value of the field                                                                    |
 |   hint   |                  `string`                  |                                             More information about the field, displayed under the in the PostHog UI                                             |
 | markdown |                  `string`                  |                                                             Markdown to be displayed with the field                                                             |
 |  order   |                  `number`                  |                                                                           Deprecated                                                                            |
 | required |                 `boolean`                  |                                               Specifies if the user needs to provide a value for the field or not                                               |
-|  secret  |                 `boolean`                  |                     Secret values are write-only and never shown to the user again - useful for apps that ask for API Keys, for example                      |
+|  secret  |                 `boolean`                  |                     Secret values are write-only and never shown to the user again - useful for connectors that ask for API Keys, for example                      |
 | choices  |                  `string[]`                   |                           Only accepted on configs with `type` equal to `"choice"` - an array of choices (of type `string`) to be presented to the user                            |
 
-> **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your app but can be placed anywhere in the `config` array and is useful for customizing the content of your app's configuration step in the PostHog UI.
+> **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your connector but can be placed anywhere in the `config` array and is useful for customizing the content of your connector's configuration step in the PostHog UI.
 
 ## `PluginMeta`
 
-> Check out [types](#types) for a full spec of types for app authors.
+> Check out [types](#types) for a full spec of types for connector authors.
 
 **Every plugin server function** is called by the server with an object of type `PluginMeta` that can include `global`, `attachments`, and `config`, which you can use in your logic. 
 
@@ -99,7 +99,7 @@ Here's what they do:
 
 ### `config`
 
-Gives you access to the app config values as described in `plugin.json` and configured via the PostHog interface.
+Gives you access to the connector's config values as described in `plugin.json` and configured via the PostHog interface.
 
 Example:
 ```js
@@ -111,7 +111,7 @@ export function processEvent(event, { config }) {
 
 ### `global`
 
-The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `composeWebhook`, or `runEveryMinute`, since global scope does not work in the context of PostHog apps. `global` is not shared across worker threads
+The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `composeWebhook`, or `runEveryMinute`, since global scope does not work in the context of PostHog connectors. `global` is not shared across worker threads
 
 Example:
 ```js
@@ -151,7 +151,7 @@ export function setupPlugin({ attachments, global }: Meta) {
 
 ## `setupPlugin` function
 
-`setupPlugin` is a function you can use to dynamically set app configuration based on the user's inputs at the configuration step. 
+`setupPlugin` is a function you can use to dynamically set conector configuration based on the user's inputs at the configuration step. 
 
 You could, for example, check if an API Key inputted by the user is valid and throw an error if it isn't, prompting PostHog to ask for a new key.
 
@@ -169,7 +169,7 @@ On PostHog Cloud and [email-enabled](/docs/self-host/configure/email) instances 
 
 ## `processEvent` function
 
-`processEvent` is the juice of your app. 
+`processEvent` is the juice of your connector. 
 
 In essence, it takes an event as a parameter and returns an event as a result. In the process, this event can be:
 
@@ -178,7 +178,7 @@ In essence, it takes an event as a parameter and returns an event as a result. I
 
 It takes an event and an object of type `PluginMeta` as parameters and returns an event.
 
-Here's an example (from the ['Hello World App'](https://github.com/PostHog/helloworldplugin)):
+Here's an example (from the ['Hello World Connector'](https://github.com/PostHog/helloworldplugin)):
 
 ```js
 async function processEvent(event, { config}) {
@@ -192,9 +192,9 @@ async function processEvent(event, { config}) {
 }
 ```
 
-As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all apps run).
+As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all connectors run).
 
-Note that you cannot use storage nor cache nor external calls in processEvent apps in PostHog cloud. Furthermore you can only define one of non-async `processEvent` or `composeWebhook` per app.
+Note that you cannot use storage nor cache nor external calls in processEvent connectors in PostHog cloud. Furthermore you can only define one of non-async `processEvent` or `composeWebhook` per connector.
 
 ## `composeWebhook` function
 
@@ -223,15 +223,15 @@ function composeWebhook(event) {
 }
 ```
 
-Note that you cannot use storage nor cache in apps in PostHog cloud. Furthermore you can only define one of `processEvent` or `composeWebhook` per app.
+Note that you cannot use storage nor cache in connectors in PostHog cloud. Furthermore you can only define one of `processEvent` or `composeWebhook` per connector.
 
 ## Testing
 
-In order to ensure apps are stable and work as expected for all their users, we highly recommend writing tests for every app you build.
+In order to ensure connectors are stable and work as expected for all their users, we highly recommend writing tests for every connector you build.
 
-### Adding testing capabilities to your app
+### Adding testing capabilities to your connector
 
-You will need to add Jest and our app testing scaffold to your project in your `package.json` file:
+You will need to add Jest and our connector testing scaffold to your project in your `package.json` file:
 
 ```json
 "jest": {
@@ -250,25 +250,25 @@ Next, create your test files e.g. `index.test.js` or `index.test.ts` for testing
 
 ### Writing tests
 
-Write tests in Jest, you can learn more about the syntax and best practices in the [Jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your app (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
+Write tests in Jest, you can learn more about the syntax and best practices in the [Jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your connector (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
 
 ## Logs
 
-Apps can make use of the `console` for logging and debugging. `console.log`, `console.warn`, `console.error`, `console.debug`, `console.info` are all supported.
+Connector can make use of the `console` for logging and debugging. `console.log`, `console.warn`, `console.error`, `console.debug`, `console.info` are all supported.
 
-These logs can be seen on the 'Logs' page of each app, which can be accessed on the 'Apps' page of the PostHog UI.
+These logs can be seen on the 'Logs' page of each connector, which can be accessed on the 'Data Pipelines' page of the PostHog UI.
 
 Do not log a line for every event in PostHog cloud as that would create a lot of spam and waste storage.
 
 ## Types
 
-PostHog supports TypeScript apps natively, without you having to compile the TypeScript yourself (although you can also do that).
+PostHog supports TypeScript connectors natively, without you having to compile the TypeScript yourself (although you can also do that).
 
-To build a TypeScript app, you'll probably need some types, so read on.
+To build a TypeScript connector, you'll probably need some types, so read on.
 
 ### Installation
 
-To use the types in your app, you can install them as follows:
+To use the types in your connector, you can install them as follows:
 
 ```bash
 # if using yarn
@@ -278,7 +278,7 @@ yarn add --dev @posthog/plugin-scaffold
 npm install --save-dev @posthog/plugin-scaffold
 ``` 
 
-Then, in your apps, you can use them like so:
+Then, in your connectors, you can use them like so:
 
 ```typescript
 import { PluginEvent, PluginMeta } from '@posthog/plugin-scaffold'

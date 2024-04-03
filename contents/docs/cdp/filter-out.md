@@ -12,23 +12,23 @@ import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
-This app enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
+This connector enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
 
 <Requirements />
 
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Filter Out' and select the app, press Install.
-3. Follow the on-screen steps to configure the app.
+2. Search for 'Filter Out' and select the connector, press Install.
+3. Follow the on-screen steps to configure the connector.
 
-This app will only work on events ingested _after_ the app was enabled.
+This connector will only work on events ingested _after_ the connector was enabled.
 
 ## Configuration
 
-The app can be configured via a JSON file which specifies the properties you would like to filter.
+The connector can be configured via a JSON file which specifies the properties you would like to filter.
 
-In the example config below, the app will only keep events where all of the following conditions are met:
+In the example config below, the connector will only keep events where all of the following conditions are met:
 
 - Email does not contain yourcompany.com
 - Host is not localhost:8000
