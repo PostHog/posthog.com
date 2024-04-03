@@ -357,7 +357,7 @@ export default function Team({
                 ]}
             />
             <Section title="People" id="people">
-                <div className="flex space-x-12">
+                <div className="lg:flex lg:space-x-12 space-y-12 lg:space-y-0">
                     <div className="flex-1">
                         <ul className="list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                             {profiles?.data
@@ -444,7 +444,7 @@ export default function Team({
                     </div>
 
                     {profiles?.data?.length > 0 && (
-                        <div className="w-full md:max-w-sm shrink-1 basis-sm space-y-4 divide-y divide-gray-accent-light dark:divide-gray-accent-dark">
+                        <div className="w-full lg:max-w-sm shrink-1 basis-sm space-y-4 divide-y divide-gray-accent-light dark:divide-gray-accent-dark">
                             <SidebarSection title="Small team FAQ">
                                 <p className="font-bold m-0 text-sm">Q: Does pineapple belong on pizza?</p>
                                 <p className="font-bold m-0 mt-2 text-sm">A: {PineappleText(pineapplePercentage)}</p>
