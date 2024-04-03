@@ -2,7 +2,7 @@
 title: Using the PostHog API
 ---
 
-All apps have access to a global helper object `posthog`, which provides easy access to the PostHog API.
+All connectors have access to a global helper object `posthog`, which provides easy access to the PostHog API.
 
 The global `posthog` object contains the following interfaces:
 - [`capture`](#capture) - Send additional events from an app
@@ -10,9 +10,9 @@ The global `posthog` object contains the following interfaces:
 
 ## `capture`
 
-> **Warning:** Be very careful when calling `posthog.capture` from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
+> **Warning:** Be very careful when calling `posthog.capture` from `processEvent` or `onEvent`! The event captured will also be run through all the installed connectors and could potentially lead to an infinite loop of event generation.
 
-Calling `posthog.capture` allows you to capture a new event under the same project the app is running in.
+Calling `posthog.capture` allows you to capture a new event under the same project the connector is running in.
 
 ```ts
 capture(event: string, properties?: Record<string, any>) => void
@@ -20,9 +20,9 @@ capture(event: string, properties?: Record<string, any>) => void
 
 It takes 2 arguments, the first one being an event name (required), and the second one being an object with properties to set on the event (optional).
 
-Apps can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be attributed to a generic "App Server" person.
+Connectors can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be attributed to a generic "Pipeline Server" person.
 
-Apps can optionally pass a `timestamp`, which needs to be in ISO 8601 format. If not set, the timestamp will default to current time.
+Connectors can optionally pass a `timestamp`, which needs to be in ISO 8601 format. If not set, the timestamp will default to current time.
 
 ##### Example usage
 
@@ -46,13 +46,13 @@ put(path: string, options?: ApiMethodOptions): Promise<Response>
 delete(path: string, options?: ApiMethodOptions): Promise<Response>
 ```
 
-By default, all these methods will create a temporary access token that the app uses to access the API.
+By default, all these methods will create a temporary access token that the connector uses to access the API.
 
-> **Warning:** Be very careful when using `posthog.api.post` to send events from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
+> **Warning:** Be very careful when using `posthog.api.post` to send events from `processEvent` or `onEvent`! The event captured will also be run through all the installed connectors and could potentially lead to an infinite loop of event generation.
 
 #### Sending an API request
 
-It's best to look at an example to see how these methods work in practice. Here, we're looking to create a new annotation from within our app.
+It's best to look at an example to see how these methods work in practice. Here, we're looking to create a new annotation from within our connector.
 
 ```ts
 const res = await posthog.api.post(
@@ -68,9 +68,9 @@ const res = await posthog.api.post(
 )
 ```
 
-As you can see, when specifying the path of our API route, we can use the `@current` identifier in place of our project ID in order to let the API know we want to access the project the app is currently running in.
+As you can see, when specifying the path of our API route, we can use the `@current` identifier in place of our project ID in order to let the API know we want to access the project the connector is currently running in.
 
-We've also specified the host of our PostHog instance. This is only necessary when running an app on a self-hosted instance, and when using PostHog Cloud this can be omitted.
+We've also specified the host of our PostHog instance. This is only necessary when running an connector on a self-hosted instance, and when using PostHog Cloud this can be omitted.
 
 ```js
 const body = await res.json()

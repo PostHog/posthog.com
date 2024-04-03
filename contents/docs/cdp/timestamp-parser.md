@@ -8,7 +8,7 @@ tags:
   - timestamp-parser
 ---
 
-This app parses the timestamp of each event that comes in to PostHog and adds the following time-based properties:
+This connector parses the timestamp of each event that comes in to PostHog and adds the following time-based properties:
 
 | Property          | Description                                       | Example    |
 | ----------------- | ------------------------------------------------- | ---------- |
@@ -29,8 +29,8 @@ Here is an example of what these properties look like after they have been added
 
 ### PostHog Cloud
 
-PostHog Cloud users can find the app [here](https://app.posthog.com/project/apps?name=Timestamp+Parser) and click on the toggle to enable the app.
-Once the app has been enabled, it will automatically start parsing all new events which come in to PostHog.
+PostHog Cloud users can find the connector [here](https://app.posthog.com/project/apps?name=Timestamp+Parser) and click on the toggle to enable the app.
+Once the connector has been enabled, it will automatically start parsing all new events which come in to PostHog.
 
 ### PostHog Self-hosted
 
@@ -54,7 +54,7 @@ By filtering and breaking down events, we can now easily answer questions such a
 - How do users use our platform differently during the holiday season?
 - How does retention compare for users who join on a weekend versus a weekday?
 
-> **Note: ** This app only works on _new_ events sent to PostHog, and as a result you won't be able to filter events that were sent before it was enabled.
+> **Note: ** This connector only works on _new_ events sent to PostHog, and as a result you won't be able to filter events that were sent before it was enabled.
 
 ## Examples
 
@@ -66,7 +66,7 @@ We can also break down an insight by `month` to get an idea of how it varies ove
 
 ![breaking down an insight by month](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/timestamp-parser/month-breakdown.png)
 
-Overall, the timestamp parser is a simple yet incredibly powerful app that these examples only scratch the surface on.
+Overall, the timestamp parser is a simple yet incredibly powerful connector that these examples only scratch the surface on.
 
 ### Have a question?
 
@@ -74,15 +74,15 @@ We love answering questions. Ask us anything [in the company forums](/questions)
 
 ## FAQ
 
-### Who created this app?
+### Who created this connector?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community member [Victor Campuzano](https://github.com/vicampuzano) for creating the Timestamp Parser. Thank you, both!
 
-### Who maintains this app?
+### Who maintains this connector?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This connector is maintained by the community. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this connector?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

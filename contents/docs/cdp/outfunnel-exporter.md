@@ -11,7 +11,7 @@ Send events from PostHog to Outfunnel as they are ingested. Outfunnel is a platf
 
 ## Installation
 
-> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
+> This connector is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
 
 1. Log in to your PostHog instance
 2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
@@ -25,19 +25,19 @@ This requires either PostHog Cloud, or a self-hosted PostHog instance running [v
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this connector available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/outfunnel-export-pluginn) is available on GitHub.
+PostHog is open-source and so are all connectors on the platform. The [source code](https://github.com/PostHog/outfunnel-export-pluginn) is available on GitHub.
 
-### Who created this app?
+### Who created this connector?
 
 We'd like to thank Outfunnel for contributing this app.
 
-### Who maintains this app?
+### Who maintains this connector?
 
-This app is maintained by Outfunnel. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This connector is maintained by Outfunnel. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this connector?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

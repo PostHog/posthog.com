@@ -15,7 +15,7 @@ This tutorial explains the development workflow and best practices, using an exa
 
 ## The connector
 
-Every connector begins with either the PostHog app [source editor](#using-the-plugin-source-editor), or a new GitHub repository. In both cases, our connector's source code will look like this:
+Every connector begins with either the PostHog connector [source editor](#using-the-plugin-source-editor), or a new GitHub repository. In both cases, our connector's source code will look like this:
 
 ```js
 /* Runs on every event */

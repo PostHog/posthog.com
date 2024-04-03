@@ -23,7 +23,7 @@ You'll also need to have an [Avo](https://www.avo.app/) account, obviously.
 
 First, you need to set PostHog as a data source in Avo. We recommend checking Avo's [documentation for setting PostHog as a source in Avo](https://www.avo.app/docs/workspace/connect-inspector-to-posthog).
 
-Once PostHog is set as a source in Avo, simply install and enable the app in your PostHog instance by heading to the Apps section. You'll need to enter your Avo API key to complete the setup. 
+Once PostHog is set as a source in Avo, simply install and enable the connector in your PostHog instance by heading to the [Data pipelines](https://app.posthog.com/apps) section. You'll need to enter your Avo API key to complete the setup. 
 
 ## FAQ
 

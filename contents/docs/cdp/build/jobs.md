@@ -4,9 +4,9 @@ title: Jobs
 
 > **Minimum PostHog version:** 1.25.0
 
-Jobs are a way for app developers to schedule and run tasks asynchronously using a powerful scheduling API.
+Jobs are a way for connector developers to schedule and run tasks asynchronously using a powerful scheduling API.
 
-Jobs make possible use cases such as retrying failed requests, a key component of apps that export data out of PostHog.
+Jobs make possible use cases such as retrying failed requests, a key component of connectors that export data out of PostHog.
 
 ### Specifying jobs
 
@@ -20,7 +20,7 @@ export const jobs = {
 }
 ```
 
-Job functions can optionally take a payload as their first argument, which can be of any type. They can also access the `meta` object, which is appended as an argument to all app functions, meaning that it will be the second argument in the presence of a payload, and the first (and only) argument in the absence of one.
+Job functions can optionally take a payload as their first argument, which can be of any type. They can also access the `meta` object, which is appended as an argument to all connector functions, meaning that it will be the second argument in the presence of a payload, and the first (and only) argument in the absence of one.
 
 ### Triggering a job
 

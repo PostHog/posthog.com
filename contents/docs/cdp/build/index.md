@@ -4,11 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** You can create connectors for both self-hosted and PostHog Cloud, but releasing an app on PostHog Cloud requires a review process. [Read more about the review process in the tutorial](/docs/apps/build/tutorial#submitting-your-app). 
+> **Note:** You can create connectors for both self-hosted and PostHog Cloud, but releasing an connector on PostHog Cloud requires a review process. [Read more about the review process in the tutorial](/docs/apps/build/tutorial#submitting-your-app). 
 
 > We are currently **not reviewing new connectors** while we build [a new export system](https://github.com/PostHog/posthog/issues/15997). We will update these docs with more information as that work is completed. 
 
-PostHog makes it possible to build your own apps and integrate with other platforms. So, if our [connector library](/cdp) is missing something you need then you may still be able to create it yourself.
+PostHog makes it possible to build your own connectors and integrate with other platforms. So, if our [connector library](/cdp) is missing something you need then you may still be able to create it yourself.
 
 Connectors can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities. There are also some connectors that enqueue jobs to run in the future. Find out more about jobs in [our developer reference docs](/docs/apps/build/reference#jobs-1).
 

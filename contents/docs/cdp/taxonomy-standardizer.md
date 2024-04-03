@@ -8,11 +8,11 @@ tags:
   - taxonomy-standardizer
 ---
 
-This app standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
+This connector standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
 
 ## Supported taxonomies
 
-This app can convert from any of these taxonomies, to any other.
+This connector can convert from any of these taxonomies, to any other.
 
 -   Camel Case: `helloThereHedgehog`
 -   Pascal Case: `HelloThereHedgehog`
@@ -38,19 +38,19 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this connector available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub.
+PostHog is open-source and so are all connectors on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this connector?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Taxonomy Standardizer. Thank you, Yakko!
 
-### Who maintains this app?
+### Who maintains this connector?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this connector?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

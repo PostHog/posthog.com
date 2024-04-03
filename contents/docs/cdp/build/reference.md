@@ -257,7 +257,7 @@ As you can see, the function receives the event before it is ingested by PostHog
 
 > **Minimum PostHog version:** 1.25.0 
 
-`onEvent` works similarly to `processEvent`, except any returned value is ignored by the app server. In other words, `onEvent` can read an event but not modify it. 
+`onEvent` works similarly to `processEvent`, except any returned value is ignored by the connector server. In other words, `onEvent` can read an event but not modify it. 
 
 In addition, `onEvent` functions will run after all enabled connectors have run `processEvent`. This ensures you will be receiving an event following all possible modifications to it.
 
