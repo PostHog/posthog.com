@@ -29,11 +29,11 @@ If you’re a company built around [big](https://www.cnbc.com/2023/06/08/google-
 
 Rather than presentism and nepotism, career progression should be linked to a transparent framework of measurable goals. Do the work, do it well, deliver value for customers, and you’ll be rewarded. Leif Singer, a software engineer at Automattic, the company behind WordPress, has shared some great examples of [how this works in practice](https://youtu.be/aRiP72kRrnc?feature=shared). 
 
-A two-tiered system is built on the bizarre notion that presenteeism is how you get ahead. Clearly defining and then publishing your system for career progression is an important first step to making sure that everyone, regardless of location, is assessed using the same objective criteria. At PostHog, the way we approach [career progression](https://posthog.com/handbook/people/career-progression) and [feedback](https://posthog.com/handbook/people/feedback) is laid out in public for anyone to see.
+Clearly defining and then publishing your system for career progression is an important first step to making sure that everyone is assessed using the same objective criteria. At PostHog, the way we approach [career progression](https://posthog.com/handbook/people/career-progression) and [feedback](https://posthog.com/handbook/people/feedback) is laid out in public for anyone to see.
 
 But transparency doesn’t stop there. Remote work pioneer GitLab does everything out in the open and has published a [2,000-page handbook](https://handbook.gitlab.com/handbook/values/) covering, well, everything. At PostHog, [our handbook](https://posthog.com/handbook) is one of the most important documents we’ve ever written. Why? If you want to find out anything about the company, you can – from what [individual teams](https://posthog.com/teams) are working on right now, to how much we would pay to [hire a full stack engineer in Brunei](https://posthog.com/handbook/people/compensation), to how our co-founders [like](https://posthog.com/handbook/company/team/james-hawkins) to [work](https://posthog.com/handbook/company/team/tim-glaser). This transparent approach gives everyone access to the same information and allows them to focus on doing their best work, not navigating layers of corporate bureaucracy.
 
-### The problem? Communication is messy
+## Problem #2 Messy communication
 
 Making remote work actually work requires making big cultural and procedural changes. Fixing how your company communicates is one of the hardest as it requires everyone to buy in and change their behavior. That means saying goodbye to email, setting fire to Microsoft Teams, and training people to be much more effective communicators. Here’s how.
 
@@ -59,13 +59,17 @@ Automattic’s Beau Lebens has written (of course) a [great guide](https://beau.
 
 Online meetings are the scourge of remote work – and often a cause of tension between office-based and non-office based employees. Mics off when they should be on, screenshare chaos, [Jeffrey Toobin’s penis](https://www.wired.com/story/jeffrey-toobin-zoom-penis/) – they remain a technical nightmare and a productivity black hole. Many companies see them as a necessary evil – a way for colleagues, no matter where they’re based, to collaborate. This is wrong.
 
-Since the pandemic, the amount of time people have spent not just in online meetings, but in meetings in general, has soared. [Time spent in meetings](https://www.microsoft.com/en-us/worklab/work-trend-index/great-expectations-making-hybrid-work-work) has gone up 253%. Some Teams users [spend](https://www.microsoft.com/en-us/worklab/work-trend-index/will-ai-fix-work) close to eight hours a week, or an entire workday, in online meetings. Eight hours a week! In Teams! Madness. And if you’re a manager or executive within an organization, this is all your fault.
+Since the pandemic, [time spent in online meetings](https://www.microsoft.com/en-us/worklab/work-trend-index/great-expectations-making-hybrid-work-work) has gone up 253%. Some Teams users [spend](https://www.microsoft.com/en-us/worklab/work-trend-index/will-ai-fix-work) close to eight hours a week, or an entire workday, in online meetings. And if you’re a manager or executive within an organization, this is all your fault.
 
 ### The solution: Kill meetings
 
-Way back in 2009, Y Combinator co-founder Paul Graham [wrote](https://www.paulgraham.com/makersschedule.html) about the difference between the “maker’s schedule” and the “manager’s schedule.” In an office setting, these two schedules (sort of) work side by side. Managers spend their days in hour-long chunks full of meetings, check-ins, brainstorms, and walking around open-plan offices. A maker’s schedule, which is basically the schedule of an engineer, is the opposite: deep work, minimal meetings, headphones, Slack. When the pandemic forced almost every office-based company in the world to go full-time remote, these two worlds smashed together.
+Way back in 2009, Y Combinator co-founder Paul Graham [wrote](https://www.paulgraham.com/makersschedule.html) about the difference between the “maker’s schedule” and the “manager’s schedule.” In an office setting, these two schedules (sort of) work side by side. But when the pandemic forced almost every office-based company in the world to go full-time remote, things got messy.
 
-At a lot of companies, this has forced way too many people onto the “manager’s schedule.” If this is your company, burn your weekly schedule to the ground and start again. At PostHog, we’re [anti-meeting by default](https://posthog.com/blog/meetings). We have two meeting-free days a week and, when we do have meetings, they’re short and focused. This allows not just engineers, but everyone at the company, to focus on doing their best work how they see best. We communicate asynchronously via GitHub and Slack. 
+At a lot of companies, this has forced way too many people onto the “manager’s schedule.” If this is your company, burn your weekly schedule to the ground and start again. Then rebuild it and follow these remote work commandments:
+
+**Meeting-free days.** At PostHog, we’re [anti-meeting by default](https://posthog.com/blog/meetings). We have two meeting-free days a week and, when we do have meetings, they’re short and focused. 
+**Communicate asynchronously.** We communicate asynchronously via GitHub and Slack. There are lots and tools and systems for this, but the success of asynchronous communication really comes down to good, clear writing.
+**Focus on deep work.** Fewer meetings means more time for deep work. This allows not just engineers, but everyone at the company, to focus on doing their best work how they see best. 
 
 A lot of companies, big and small, have adopted this approach. GitLab and Automattic for starters, but also [Twist](https://async.twist.com/asynchronous-communication/), [Buffer](https://buffer.com/about), and [Zapier](https://zapier.com/jobs/culture-and-values-at-zapier) have all followed a similar blueprint to make remote work actually work for both managers and engineers.
 
@@ -79,7 +83,7 @@ Ultimately, companies that want to make remote working work – and create a mot
 
 ### The solution: Trust like you’ve never trusted before
 
-What does that mean in practice? First up, employers need to set clear and transparent expectations and then, within that framework, give people total freedom to get the job done. This kind of framework is great for engineers TKTK. Buffer co-founder and CEO Joel Gascoigne laid all this out [almost a decade ago](https://buffer.com/resources/why-transparency/). It’s still true today.
+What does that mean in practice? First up, employers need to set clear and transparent expectations and then, within that framework, give people total freedom to get the job done. Buffer co-founder and CEO Joel Gascoigne laid all this out [almost a decade ago](https://buffer.com/resources/why-transparency/). It’s still true today.
 
 Focus on output, not time-in-seat. As an employer, you need to be open and honest and demand the same of your employees. Building an organization around trust also means you need to hire carefully. Give the wrong people too much trust and, yes, they might abuse it. But give the right people trust and you’ll create a company that thrives on autonomy. 
 
