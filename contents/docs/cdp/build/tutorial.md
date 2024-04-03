@@ -1,10 +1,12 @@
 ---
-title: How to build PostHog apps
+title: How to build a PostHog app
 sidebar: Docs
 showTitle: true
 ---
 
-> We are currently **not reviewing new apps** while we build a [new export system](https://github.com/PostHog/posthog/issues/15997). We will update these docs with more information as that work is completed. 
+import NoNewApps from "../_snippets/no-new-apps.mdx"
+
+<NoNewApps />
 
 This tutorial explains the development workflow and best practices, using an example 'Hello World' app. We go from zero to publishing your app in the official PostHog repository.
 
@@ -44,13 +46,13 @@ And our config would look like:
 ]
 ```
 
-For information on what code to write and what special functions to use, check out [the overview](/docs/apps/build) and [the developer reference](/docs/apps/build/reference).
+For information on what code to write and what special functions to use, check out [the overview](/docs/cdp/build) and [the developer reference](/docs/cdp/build/reference).
 
 ### Using the app source editor
 
-Go to Apps -> Advanced tab -> App editor -> Start coding.
+Go to Data pipeline -> Manage apps tab -> Install app (advanced) -> Start coding.
 
-![App editor location](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/plugins/plugin-editor-location.png)
+![App editor location](https://res.cloudinary.com/dmukukwp6/image/upload/v1712101259/posthog.com/contents/images/docs/cdp/install-app.png)
 
 Then, click on "Edit Source", and you're good to go. Copy your code and config into the editor, and you're ready to [test the app.](#testing)
 
@@ -70,7 +72,7 @@ When creating your repository, follow the naming convention of `posthog-<plugin-
 
 ### Converting a source app to a GitHub repository
 
-If you wish to submit your app to the official repository, you need to convert it into a GitHub repository. The easiest way to do this is to start with [the template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) and copy your source code into `index.js` and your config into the config field of `plugin.json`. Then update `package.json` with the appropriate metadata, like name, description, and maintainer.
+If you wish to submit your app to the official repository (so it is listed on PostHog Cloud), you need to convert it into a GitHub repository. The easiest way to do this is to start with [the template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) and copy your source code into `index.js` and your config into the config field of `plugin.json`. Then update `package.json` with the appropriate metadata, like name, description, and maintainer.
 
 [See submission instructions](#submitting-your-plugin) for how to submit the app to the PostHog Repository.
 
@@ -79,9 +81,9 @@ If you wish to submit your app to the official repository, you need to convert i
 For now, the best way to test apps is to install them locally. 
 
 - If you're writing a app in the App source editor, this is as easy as clicking "Save".
-- If you're writing a app in a GitHub repository, install it locally using the "Install Local App" option in the Advanced Tab.
+- If you're writing a app in a GitHub repository, install it locally using the "Install from GitHub, GitLab or npm" option in the Advanced tab.
 
-![Install app location](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/plugins/install-plugin-location.png)
+![Install app location](https://res.cloudinary.com/dmukukwp6/image/upload/v1712101367/posthog.com/contents/images/docs/cdp/install-local.png)
 
 This allows you to tweak your app and see that everything works fine.
 
@@ -97,14 +99,14 @@ There are four ways to use apps you build:
 
 1. Publish the app to `npm` and install it with the url from `npmjs.com` 
 1. You can add it via its repository URL (e.g. GitHub/GitLab)
-1. Reference the location of the app on your local instance (e.g. /Users/yourname/path/to/app)  
-
-    This can be configured in 'Settings' -> 'Project Apps'.
+1. Reference the location of the app on your local instance (e.g. /Users/yourname/path/to/app). This can be configured in 'Settings' -> 'Project Apps'.
 1. Submit it to the official repository so that it can be installed on PostHog Cloud. [See below](#submitting-your-plugin) 
 
 ## Submitting your app
 
-If you wish to, you can contribute back to the PostHog community by submitting to the [official App Store](/apps). This means everyone else can use your app, too!
+<NoNewApps />
+
+If you wish to, you can contribute back to the PostHog community by submitting to the [official App Store](/cdp). This means everyone else can use your app, too!
 
 If you built a app inside the PostHog editor, first [convert it to a GitHub repository](#converting-a-source-plugin-to-a-github-repository)
 
