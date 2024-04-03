@@ -43,21 +43,27 @@ Making remote work actually work requires making big cultural and procedural cha
 
 ### The solution: Write. Everything. Down
 
-How do I [file expenses](https://posthog.com/handbook/people/spending-money)? What’s the [onboarding process for new hires](https://posthog.com/handbook/people/onboarding)? What’s the product analytics team [focused on this quarter](https://posthog.com/teams/product-analytics)? 
+How do I [file expenses](https://posthog.com/handbook/people/spending-money)? Who is [our ideal customer](https://posthog.com/handbook/who-we-are-building-for)? What’s the product analytics team [focused on this quarter](https://posthog.com/teams/product-analytics)?
 
-In most companies, answers to these kinds of questions are either hidden out-of-date Google Docs or inside someone’s brain. At well-functioning, all-remote companies, they’re written down in a handbook where anyone can access them. That handbook can be your public website, or an internal wiki. But written communication also includes Slack, GitHub, or systems like Trello or Airtable.
+Don't hide the answers to these questions in out-of-date Google Docs, or worse still, inside someone’s brain. Instead, write them down in a handbook where anyone can access them. Ours is public, but an internal wiki is fine too.
+
+Why? Because:
+
+1. **It’s faster.** Scheduling is hard and meetings interrupt deep work. If something can be written down, it will save time and improve transparency around decision-making. Plus, it's more efficient to have a meeting to align everyone _after_ you've all written down what you think.
+
+2. **It’s always there.** If a decision is made on a call and nobody writes it down, was a decision even made? Calls are information black holes so, when you do have a meeting about something, make sure someone, [or something](https://www.sembly.ai/), is taking notes.
+
+3. **It’s clearer.** Seriously, have you ever read a transcript of you speaking? Writing things down makes you think through both what you’re trying to achieve and how you want to communicate it, making everyone more intentional.
 
 Defaulting to written communication means, chances are, if someone has a question they don’t have to wait for an answer – they can go find it themselves. And if they can’t find an answer, writing a clear, concise question in a public channel on Slack will ensure that everyone can see the answer. 
 
-Being able to clearly communicate often complex ideas is a key skill for anyone working remotely, but especially engineers. Software engineer Dmitry Kudryavtsev [sums it up nicely](https://www.yieldcode.blog/post/why-engineers-should-write/): “The sooner you get better at writing, the faster you will become a better engineer.” It also created some lively discussion on [Hacker News](https://news.ycombinator.com/item?id=36659166).
+Automattic’s Beau Lebens has [some great tips](https://beau.blog/2020/03/remote-work-at-scale/) on putting this into practice:
 
-Automattic’s Beau Lebens has written (of course) a [great guide](https://beau.blog/2020/03/remote-work-at-scale/) to the benefits of effective written communication with lots of practical tips. One key takeaway: tools are not the answer. Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only work if you do all the hard work first. And nailing how you communicate is a big part of that. Writing things down is great because:
+- **Tools are not the answer.** Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only work if you do all the hard work first. And nailing how you communicate is a big part of that.
 
-* **It’s faster. **Communicating via writing, especially with remote staff in lots of different time-zones, saves a lot of time. Scheduling is hard and meetings interrupt deep work. If something can be written down, it will both save time and improve transparency around decision-making.
+- **Another tip / warning**
 
-* **It’s always there. **If a decision is made on a call and nobody writes it down, was a decision even made? Calls can be good, but calls are also information black holes. Transparency is crucial in remote-only companies. So, when you do have a meeting about something, make sure someone, [or something](https://www.sembly.ai/), is taking notes.
-
-* **It’s clearer. **Seriously, have you ever read a transcript of you speaking? Writing things down helps with intentionality as, hopefully, it makes you think through both what you’re trying to achieve and how you want to communicate it.
+- **Another tip / warning**
 
 ## Problem #3: Death by Zoom
 
