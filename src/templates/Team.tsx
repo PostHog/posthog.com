@@ -44,8 +44,17 @@ import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
 
+const hedgehogImageWidth = 30
+const hedgehogLengthInches = 11
+
 const Hedgehog = ({ className = '' }) => {
-    return <img className={`w-[30px] h-[30px] ${className}`} src="/images/hedgehog.svg" />
+    return (
+        <img
+            style={{ width: hedgehogImageWidth, height: hedgehogImageWidth }}
+            className={className}
+            src="/images/hedgehog.svg"
+        />
+    )
 }
 
 const SidebarSection = ({ title, children }) => {
@@ -264,9 +273,12 @@ export default function Team({
     const hasInProgress = inProgress.length > 0
     const hasBody = !['/teams/exec', '/teams/data-warehouse'].includes(pageContext.slug)
     const [activeProfile, setActiveProfile] = useState(false)
-    const heightToHedgehogs = profiles?.data?.reduce((acc, curr) => acc + (curr?.attributes?.height || 0), 0) / 11 || 0
+    const heightToHedgehogs =
+        profiles?.data?.reduce((acc, curr) => acc + (curr?.attributes?.height || 0), 0) / hedgehogLengthInches || 0
     const hedgehogPercentage =
-        (heightToHedgehogs % 1 !== 0 && Math.round(30 * (heightToHedgehogs - Math.floor(heightToHedgehogs)))) || 0
+        (heightToHedgehogs % 1 !== 0 &&
+            Math.round(hedgehogImageWidth * (heightToHedgehogs - Math.floor(heightToHedgehogs)))) ||
+        0
 
     return (
         <Layout>
