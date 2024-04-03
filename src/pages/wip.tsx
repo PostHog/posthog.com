@@ -106,6 +106,7 @@ export default function TeamUpdates() {
                                                             status="in-progress"
                                                             formClassName="mb-4"
                                                             editButtonClassName={'absolute -top-4 -right-4 z-10'}
+                                                            onSubmit={() => mutate()}
                                                         >
                                                             <InProgress
                                                                 {...attributes}
