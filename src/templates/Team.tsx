@@ -260,6 +260,7 @@ export default function Team({
     const hasInProgress = inProgress.length > 0
     const hasBody = !['/teams/exec', '/teams/data-warehouse'].includes(pageContext.slug)
     const [activeProfile, setActiveProfile] = useState(false)
+    const heightToHedgehogs = profiles?.data?.reduce((acc, curr) => acc + (curr?.attributes?.height || 0), 0) / 11 || 0
 
     return (
         <Layout>
@@ -349,14 +350,10 @@ export default function Team({
                         : []),
                 ]}
             />
-            <Section
-                title="People"
-                cta={<span className="text-sm">{PineappleText(pineapplePercentage)}</span>}
-                id="people"
-            >
+            <Section title="People" id="people">
                 <div className="flex space-x-12">
                     <div className="flex-1">
-                        <ul className="list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+                        <ul className="list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                             {profiles?.data
                                 ? [...profiles.data]
                                       .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
@@ -440,23 +437,21 @@ export default function Team({
                         {isModerator && <AddTeamMember handleChange={(user) => addTeamMember(user.profile.id)} />}
                     </div>
 
-                    <div className="hidden w-full md:max-w-sm shrink-1 basis-sm">
+                    <div className="w-full md:max-w-sm shrink-1 basis-sm space-y-4 divide-y divide-gray-accent-light dark:divide-gray-accent-dark">
                         <SidebarSection title="Small team FAQ">
-                            <p className="font-bold m-0">Q: Does pineapple belong on pizza?</p>
-                            <p className="font-bold m-0 mt-2">{PineappleText(pineapplePercentage)}</p>
+                            <p className="font-bold m-0 text-sm">Q: Does pineapple belong on pizza?</p>
+                            <p className="font-bold m-0 mt-2 text-sm">A: {PineappleText(pineapplePercentage)}</p>
                         </SidebarSection>
-
-                        <div className="flex gap-1 flex-wrap">
-                            <StickerFlagAT className="w-7 h-7" />
-                            <StickerFlagBE className="w-7 h-7" />
-                            <StickerFlagCA className="w-7 h-7" />
-                            <StickerFlagCO className="w-7 h-7" />
-                            <StickerFlagDE className="w-7 h-7" />
-                            <StickerFlagFR className="w-7 h-7" />
-                            <StickerFlagNL className="w-7 h-7" />
-                            <StickerFlagPL className="w-7 h-7" />
-                            <StickerFlagUnknown className="w-7 h-7" />
-                            <StickerFlagUS className="w-7 h-7" />
+                        <div className="pt-4">
+                            <SidebarSection title="Total team height as measured in hedgehogs">
+                                <ul className="list-none m-0 p-0 flex flex-wrap">
+                                    {new Array(Math.round(heightToHedgehogs)).fill(0).map((_, i) => (
+                                        <li className="p-1" key={i}>
+                                            <img src="/images/hedgehog.svg" />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </SidebarSection>
                         </div>
                     </div>
                 </div>
