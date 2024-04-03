@@ -151,7 +151,7 @@ export function setupPlugin({ attachments, global }: Meta) {
 
 ## `setupPlugin` function
 
-`setupPlugin` is a function you can use to dynamically set conector configuration based on the user's inputs at the configuration step. 
+`setupPlugin` is a function you can use to dynamically set connector configuration based on the user's inputs at the configuration step. 
 
 You could, for example, check if an API Key inputted by the user is valid and throw an error if it isn't, prompting PostHog to ask for a new key.
 

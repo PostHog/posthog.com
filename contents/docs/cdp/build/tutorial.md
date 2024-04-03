@@ -80,7 +80,7 @@ If you wish to submit your connector to the official repository (so it is listed
 
 For now, the best way to test connectors is to install them locally. 
 
-- If you're writing a connector in the Conector source editor, this is as easy as clicking "Save".
+- If you're writing a connector in the Connector source editor, this is as easy as clicking "Save".
 - If you're writing a connector in a GitHub repository, install it locally using the "Install from GitHub, GitLab or npm" option in the Advanced tab.
 
 ![Install connector location](https://res.cloudinary.com/dmukukwp6/image/upload/v1712101367/posthog.com/contents/images/docs/cdp/install-local.png)
