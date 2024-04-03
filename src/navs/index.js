@@ -2322,13 +2322,13 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Data pipeline',
+            name: 'Data pipelines',
             url: '/docs/cdp',
             color: '[#2EA2D3]',
             icon: 'IconDecisionTree',
             children: [
                 {
-                    name: 'Data pipeline (CDP)',
+                    name: 'Data pipelines (CDP)',
                     badge: {
                         title: 'Preview',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2369,6 +2369,9 @@ export const docsMenu = {
                             url: '/docs/cdp/batch-exports/redshift',
                         },
                     ],
+                },
+                {
+                    name: 'Connectors',
                 },
                 {
                     name: 'Destinations',
@@ -2489,12 +2492,15 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'More',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/cdp/common-questions',
                     icon: 'IconQuestion',
                 },
                 {
-                    name: 'Build an app',
+                    name: 'Build a connector',
                     url: '/docs/cdp/build',
                     icon: 'IconGraduationCap',
                     children: [
