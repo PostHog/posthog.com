@@ -28,13 +28,13 @@ Hmm, sounds pretty ripe for a toxic monoculture of tech bros doing whatever they
 
 No! The following are definitely not prerequisites to being cracked:
 
-- Fancy companies on your resume. You don’t need to have worked at a FAANG/MAMAA/shit hot SV-based company. We welcome cracked engineers who held together failing companies – we like their paranoia.
+- Fancy companies on your resume. You don’t need to have worked at a FAANG/MAMAA/shit-hot SV-based company. We welcome cracked engineers who held together failing companies – we like their paranoia.
  
 - Being an asshole. People need to want to work with you – saying ‘screw you, I’m doing this anyway’ is uncracked behavior if you can’t back it up. 
 
 - There is no number of years of experience that correlates with crackedness, in either direction. 
 
-- You built a side project used by 1m people. Side projects are often great signs of crackedness/ownership, but they don’t have to be commercially successful – they just have to be interesting. 
+- You built a side project used by one million people. Side projects are often great signs of crackedness/ownership, but they don’t have to be commercially successful – they just have to be interesting. 
 
 Adopting this mentality has noticeably increased the diversity of people applying to work with us at PostHog, as it ignores some of the traditional markers of status when it comes to job applications.
 
@@ -48,9 +48,9 @@ You need to demonstrate the behavior you want to see. Cracked people are extreme
 
 ### 2. Spend most of your time generating enthusiasm
 
-It is unbelievably easy to find reasons not to do stuff at any kind of organization, including startups. Inertia is the default state of most businesses. Overcoming this inertia is mainly reliant on the enthusiasm of people to make new/cool things happen far more than their raw intelligence or competence. 
+It is unbelievably easy to find reasons not to do stuff at any kind of organization, including startups. Inertia is the default state of most businesses. Overcoming this inertia is mainly reliant on the enthusiasm of people to make new and cool things happen, and is far more important than their raw intelligence or competence. 
 
-This is why you should spend more time motivating people than trying to teach them new skills or making them do training. If they are cracked and staying motivated, they will train themselves. I don’t think I’ve yet read a blog post by someone I admire and learned from that says ‘I got good because I attended blah blah special leadership course on being great.’
+This is why you should spend more time motivating people than trying to teach them new skills or making them do training. If they are cracked and motivated, they will train themselves. I don’t think I’ve yet read a blog post by someone I admire and learned from that says ‘I got good because I attended blah blah special leadership course on being great.’
 
 ### 3. Get out of the way
 
@@ -77,7 +77,7 @@ Asking thoughtful questions and rigorously testing ideas is cracked. Long approv
 
 The number one thing you can do to motivate cracked people? Find them more cracked people to work with! 
 
-Conversely, the number one thing you can do to demotivate them is to make them worked with uncracked people. (Yes there are many other very obvious ways you can demotivate, like creating a shitty culture, making people burnout with unrealistic demands, pivoting aggressively every week for no reason, but I’m going to assume you at least have some semblance of managerial logic if you’ve got this far through the article.) 
+Conversely, the number one thing you can do to demotivate them is to make them worked with uncracked people. (Yes there are many other very obvious ways you can demotivate, like creating a shitty culture, making people burnout with unrealistic demands, pivoting aggressively every week for no reason, but I’m going to assume you at least have some semblance of managerial logic if you’ve read this far.) 
 
 A close number two is setting the right context for them to do their best work. This means making sure that your company or team's vision is super clearly articulated and understood by everyone in the first place, and then helping them pick between competing priorities when they are not sure what to do, or if the answer isn't obvious. You need to try really hard to make sure that you don't use 'setting context' as a euphemism for 'work on the stuff I care about as a manager' – they are not the same thing!
 
