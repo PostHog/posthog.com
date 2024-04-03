@@ -1,6 +1,6 @@
 ---
 date: 2024-03-16
-title: A cracked manifesto
+title: Why you need to hire cracked engineers
 author:
   - charles-cook
 featuredImage: ../images/blog/transparency.jpeg
@@ -12,7 +12,7 @@ crosspost:
   - Blog      
 ---
 
-We’ve become a bit obsessed with the notion of hiring cracked people at PostHog. When we say cracked, we mean things like:
+We’ve become a bit obsessed with the notion of hiring cracked engineers at PostHog. When we say cracked, we mean things like:
 
 - Taking extreme ownership of ideas and driving them to completion, even if others disagree with you. Some people call this founder mentality. Better still, you bring others on the journey with you.
  
