@@ -1,6 +1,7 @@
 import { topicIcons } from 'components/Questions/TopicsTable'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
+import { useUser, User } from 'hooks/useUser'
 
 const navSorted = ['Products', 'Data', 'Product OS', 'Self-hosting', 'Other']
 
@@ -20,10 +21,13 @@ export default function useTopicsNav() {
         }
     `)
 
+    const { user, getJwt, logout } = useUser()
+    const isLoggedIn = !!user
+
     const nav = [
         { name: 'Topics' },
         { name: 'Latest', url: '/questions', icon: 'IconClock' },
-        { name: 'My discussions', url: '/community/dashboard', icon: 'IconNotification' },
+        isLoggedIn && { name: 'My discussions', url: '/community/dashboard', icon: 'IconNotification' },
     ]
     topicGroups.nodes
         .sort((a, b) => navSorted.indexOf(a.label) - navSorted.indexOf(b.label))
