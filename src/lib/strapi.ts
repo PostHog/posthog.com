@@ -73,6 +73,7 @@ export type ProfileData = {
     teams?: {
         id: number
     }[]
+    height: number | null
 }
 
 export type UserData = {
