@@ -67,7 +67,9 @@ export default function UpdateWrapper({
     const [success, setSuccess] = useState(false)
 
     const handleUnpublish = async () => {
-        const confirmed = window.confirm('Are you sure you want to unpublish this roadmap item?')
+        const confirmed = window.confirm(
+            'Unpublishing this roadmap item will remove it from the roadmap and it will need to be republished via Strapi. No data will be lost. Are you sure you want to unpublish?'
+        )
         if (confirmed) {
             await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}`, {
                 body: JSON.stringify({
