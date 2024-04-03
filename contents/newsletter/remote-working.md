@@ -27,7 +27,11 @@ If you’re a company built around [big](https://www.cnbc.com/2023/06/08/google-
 
 ### The solution: Aggressive transparency
 
-Rather than presentism and nepotism, career progression should be linked to a transparent framework of measurable goals. Do the work, do it well, deliver value for customers, and you’ll be rewarded. Leif Singer, a software engineer at Automattic, the company behind WordPress, has shared some great examples of [how this works in practice](https://youtu.be/aRiP72kRrnc?feature=shared). 
+Rather than presentism and nepotism, career progression should be linked to a transparent framework of measurable goals. Do the work, do it well, deliver value for customers, and you’ll be rewarded. Leif Singer, a software engineer at Automattic, the company behind WordPress, has shared some great examples of [how this works in practice](https://youtu.be/aRiP72kRrnc?feature=shared). Key points: 
+
+- Give employees the freedom grow in ways they find interesting. Make career paths more individual and don't force people to follow a predetermined ladder. This gives people more ownership over their work and makes them more motivated.
+- Review compensation regularly based on transparent, objective metrics. This approach helps remove bias and creates a culture where people can focus on doing their best work, not gaming an opaque system to try and get a promotion.
+- Ensure that employees both get and give regular feedback on their work and career progression. At Automattic, employees and team leads regularly request and give feedback on how things are going. Compensation is adjusted based on the impact their work had on the company.```
 
 Clearly defining and then publishing your system for career progression is an important first step to making sure that everyone is assessed using the same objective criteria. At PostHog, the way we approach [career progression](https://posthog.com/handbook/people/career-progression) and [feedback](https://posthog.com/handbook/people/feedback) is laid out in public for anyone to see.
 
