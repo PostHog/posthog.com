@@ -1,8 +1,8 @@
 ---
-title: Apps developer reference
+title: Connector developer reference
 ---
 
-> **Note:** It's worth reading the [Building apps overview](..) for a quick introduction to how to build your own app.
+> **Note:** It's worth reading the [Building connectors overview](/docs/cdp/build) for a quick introduction to how to build your own connector.
 
 ## `plugin.json` file
 
@@ -38,7 +38,7 @@ A `plugin.json` file is structured as follows:
 }
 ```
 
-Here's an example `plugin.json` file from our ['Hello world app'](https://github.com/PostHog/helloworldplugin):
+Here's an example `plugin.json` file from our ['Hello world connector'](https://github.com/PostHog/helloworldplugin):
 
 ```json
 {
@@ -48,7 +48,7 @@ Here's an example `plugin.json` file from our ['Hello world app'](https://github
   "main": "index.js",
   "config": [
     {
-      "markdown": "This is a sample app!"
+      "markdown": "This is a sample connector!"
     },
     {
       "key": "bar",
@@ -66,7 +66,7 @@ Most options in this file are self-explanatory, but there are a few worth explor
 
 ### `main`
 
-`main` determines the entry point for your app, where your `setupPlugin` and `processEvent` functions are. More on these later.
+`main` determines the entry point for your connector, where your `setupPlugin` and `processEvent` functions are. More on these later.
 
 ### `config`
 
@@ -77,21 +77,21 @@ Each object in a config can have the following properties:
 |   Key    |                    Type                    |                                                                           Description                                                                           |
 | :------ | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   type   | `"string"` or `"attachment"` or `"choice"` | Determines the type of the field - "attachment" asks the user for an upload, and "choice" requires the config object to have a `choices` array, explained below |
-|   key    |                  `string`                  |                                     The key of the app config field, used to reference the value from inside the app                                      |
-|   name   |                  `string`                  |                                          Displayable name of the field - appears on the app setup in the PostHog UI                                          |
+|   key    |                  `string`                  |                                     The key of the connector config field, used to reference the value from inside the connectors                                      |
+|   name   |                  `string`                  |                                          Displayable name of the field - appears on the connector setup in the PostHog UI                                          |
 | default  |                  `string`                  |                                                                   Default value of the field                                                                    |
 |   hint   |                  `string`                  |                                             More information about the field, displayed under the in the PostHog UI                                             |
 | markdown |                  `string`                  |                                                             Markdown to be displayed with the field                                                             |
 |  order   |                  `number`                  |                                                                           Deprecated                                                                            |
 | required |                 `boolean`                  |                                               Specifies if the user needs to provide a value for the field or not                                               |
-|  secret  |                 `boolean`                  |                     Secret values are write-only and never shown to the user again - useful for apps that ask for API Keys, for example                      |
+|  secret  |                 `boolean`                  |                     Secret values are write-only and never shown to the user again - useful for connectors that ask for API Keys, for example                      |
 | choices  |                  `string[]`                   |                           Only accepted on configs with `type` equal to `"choice"` - an array of choices (of type `string`) to be presented to the user                            |
 
-> **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your app but can be placed anywhere in the `config` array and is useful for customizing the content of your app's configuration step in the PostHog UI.
+> **Note:** You can have a config field that only contains `markdown`. This won't be used to configure your connectors but can be placed anywhere in the `config` array and is useful for customizing the content of your connector's configuration step in the PostHog UI.
 
 ## `PluginMeta`
 
-> Check out [App Types](/docs/plugins/types) for a full spec of types for app authors.
+> Check out [connector types](/docs/plugins/types) for a full spec of types for connector authors.
 
 **Every plugin server function** is called by the server with an object of type `PluginMeta` that will always contain the object `cache`, and can also include `global`, `attachments`, and `config`, which you can use in your logic. 
 
@@ -99,7 +99,7 @@ Here's what they do:
 
 ### `config`
 
-Gives you access to the app config values as described in `plugin.json` and configured via the PostHog interface.
+Gives you access to the connector config values as described in `plugin.json` and configured via the PostHog interface.
 
 Example:
 ```js
@@ -111,7 +111,7 @@ export async function processEvent(event, { config }) {
 
 ### `global`
 
-The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog apps. `global` is not shared across worker threads
+The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `onEvent`, or `runEveryMinute`, since global scope does not work in the context of PostHog connectors. `global` is not shared across worker threads
 
 Example:
 ```js
@@ -192,13 +192,13 @@ As of PostHog 1.37+, the following functions are _retriable_:
 
 ## `setupPlugin` function
 
-`setupPlugin` is a function you can use to dynamically set app configuration based on the user's inputs at the configuration step. 
+`setupPlugin` is a function you can use to dynamically set connector configuration based on the user's inputs at the configuration step. 
 
 You could, for example, check if an API Key inputted by the user is valid and throw an error if it isn't, prompting PostHog to ask for a new key.
 
 It takes only an object of type `PluginMeta` as a parameter and does not return anything.
 
-Example (from the [PostHog MaxMind app](https://github.com/PostHog/posthog-maxmind-plugin)):
+Example (from the [PostHog MaxMind connector](https://github.com/PostHog/posthog-maxmind-plugin)):
 
 ```js
 export function setupPlugin({ attachments, global }) {
@@ -214,7 +214,7 @@ On PostHog Cloud and [email-enabled](/docs/self-host/configure/email) instances 
 
 ## `teardownPlugin` function
 
-`teardownPlugin` is ran when an app VM is destroyed, because of, for example, a app server shutdown or an update to the app. It can be used to flush/complete any operations that may still be pending, like exporting events to a third-party service.
+`teardownPlugin` is ran when an connector VM is destroyed, because of, for example, a pipeline server shutdown or an update to the connector. It can be used to flush/complete any operations that may still be pending, like exporting events to a third-party service.
 
 ```js
 async function teardownPlugin({ global }) {
@@ -224,7 +224,7 @@ async function teardownPlugin({ global }) {
 
 ## `processEvent` function
 
-`processEvent` is the juice of your app. 
+`processEvent` is the juice of your connector. 
 
 In essence, it takes an event as a parameter and returns an event as a result. In the process, this event can be:
 
@@ -234,7 +234,7 @@ In essence, it takes an event as a parameter and returns an event as a result. I
 
 It takes an event and an object of type `PluginMeta` as parameters and returns an event.
 
-Here's an example (from the ['Hello World App'](https://github.com/PostHog/helloworldplugin)):
+Here's an example (from the ['Hello World Conector'](https://github.com/PostHog/helloworldplugin)):
 
 ```js
 async function processEvent(event, { config, cache }) {
@@ -251,17 +251,17 @@ async function processEvent(event, { config, cache }) {
 }
 ```
 
-As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all apps run).
+As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all connectors run).
 
 ## `onEvent` function
 
 > **Minimum PostHog version:** 1.25.0 
 
-`onEvent` works similarly to `processEvent`, except any returned value is ignored by the app server. In other words, `onEvent` can read an event but not modify it. 
+`onEvent` works similarly to `processEvent`, except any returned value is ignored by the connector server. In other words, `onEvent` can read an event but not modify it. 
 
-In addition, `onEvent` functions will run after all enabled apps have run `processEvent`. This ensures you will be receiving an event following all possible modifications to it.
+In addition, `onEvent` functions will run after all enabled connectors have run `processEvent`. This ensures you will be receiving an event following all possible modifications to it.
 
-This was originally built for and is particularly useful for export apps. These apps need to receive the "final form" of an event and send it out of PostHog, without having to modify it.
+This was originally built for and is particularly useful for export connectors. These connectors need to receive the "final form" of an event and send it out of PostHog, without having to modify it.
 
 Here's a quick example:
 
@@ -284,7 +284,7 @@ async function onEvent(event) {
 
 <blockquote class="warning-note">
 
-⚠️ Be very careful when using `fetch` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
+⚠️ Be very careful when using `fetch` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed connectors and could potentially lead to an infinite loop of event generation.
 
 </blockquote>
 
@@ -311,10 +311,10 @@ You can also use `require` for imports.
 
 ## Testing
 
-In order to ensure apps are stable and work as expected for all their users, we highly recommend writing tests for every app you build.
+In order to ensure connectors are stable and work as expected for all their users, we highly recommend writing tests for every connectors you build.
 
-### Adding testing capabilities to your app
-You will need to add jest and our app testing scaffold to your project in your `package.json` file:
+### Adding testing capabilities to your connector
+You will need to add jest and our connector testing scaffold to your project in your `package.json` file:
 ```json
 "jest": {
     "testEnvironment": "node"
@@ -332,12 +332,12 @@ Create your test files e.g. `index.test.js` or `index.test.ts` for testing your 
 
 ### Writing tests
 
-Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your app (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
+Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your connector (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
 
 For more information on how to setup testing, take a look at [this guide](/docs/apps/build/testing).
 
 ## Logs
 
-Apps can make use of the `console` for logging and debugging. `console.log`, `console.warn`, `console.error`, `console.debug`, `console.info` are all supported.
+Connectors can make use of the `console` for logging and debugging. `console.log`, `console.warn`, `console.error`, `console.debug`, `console.info` are all supported.
 
-These logs can be seen on the 'Logs' page of each app, which can be accessed on the 'Apps' page of the PostHog UI.
+These logs can be seen on the 'Logs' page of each connectors, which can be accessed on the 'Data Pipelines' page of the PostHog UI.

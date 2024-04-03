@@ -7,9 +7,9 @@ tags:
   - pub-sub
 ---
 
-> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+> This connector is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
-This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta).
+This connector sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta).
 
 ## Requirements
 
@@ -29,7 +29,7 @@ You'll also need a Google Cloud Pub/Sub account to connect to.
 
 ## Finding your Google Cloud key .json file
 
-You'll need this file to configure the Pub/Sub app for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
+You'll need this file to configure the Pub/Sub connector for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
 
 ## Configuration
 
@@ -37,19 +37,19 @@ You'll need this file to configure the Pub/Sub app for PostHog. You can find out
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this connector available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
+PostHog is open-source and so are all connectors on the platform. The [source code](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this connector?
 
 We'd like to thank PostHog community member Jesse Redl from [Vendasta](https://posthog.com/customers/vendasta) for creating this. Thanks, Jesse!
 
-### Who maintains this app?
+### Who maintains this connector?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this connector?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

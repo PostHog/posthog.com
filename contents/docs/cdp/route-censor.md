@@ -7,21 +7,21 @@ thumbnail: >-
   - route-censor
 ---
 
-This app enables you to censor variables from URLs that are passed to PostHog. This is useful because PostHog tracks certain URLs automatically, so if your app contains sensitive data within the URLs (such as sensitive IDs, addresses, etc.), then this offers away to censor that data before it is stored in the PostHog database. 
+This connector enables you to censor variables from URLs that are passed to PostHog. This is useful because PostHog tracks certain URLs automatically, so if your connector contains sensitive data within the URLs (such as sensitive IDs, addresses, etc.), then this offers away to censor that data before it is stored in the PostHog database. 
 
 ## Requirements
 
-This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ## Configuration
 
-First, install the app from the PostHog app library within your PostHog instance.
+First, install the connector from the PostHog connector library within your PostHog instance.
 
-The list of properties censored by the app can be configured directly within PostHog.
+The list of properties censored by the connector can be configured directly within PostHog.
 
-Information and examples of the properties which can be configured are found in [the app readme](https://github.com/PostHog/posthog-route-censor-plugin). 
+Information and examples of the properties which can be configured are found in [the connector readme](https://github.com/PostHog/posthog-route-censor-plugin). 
 
 To provide routes, attach a JSON file, similar to the example at `./src/assets/exampleRoutes.json`, that matches the Routes type defined in `./src/types/index.ts`.
 
@@ -37,13 +37,13 @@ The routes JSON must be updated whenever a new route is added to your app.
 
 ### Where can I find out more?
 
-More [information is available in the app repo](https://github.com/PostHog/posthog-route-censor-plugin). 
+More [information is available in the connector repo](https://github.com/PostHog/posthog-route-censor-plugin). 
 
-### Who maintains this app?
+### Who maintains this connector?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This connector is maintained by the community. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this connector?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

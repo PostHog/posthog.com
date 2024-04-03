@@ -7,7 +7,7 @@ tags:
   - gcs-export
 ---
 
-> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+> This connector is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 Send events from PostHog to a Google Cloud Storage bucket upon ingestion.
 
@@ -35,19 +35,19 @@ Before installing the Google Cloud Storage Export app, you will need your Google
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this connector available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-gcs-plugin) is available on GitHub.
+PostHog is open-source and so are all connectors on the platform. The [source code](https://github.com/PostHog/posthog-gcs-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this connector?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating this. Thanks, Yakko!
 
-### Who maintains this app?
+### Who maintains this connector?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this connector?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

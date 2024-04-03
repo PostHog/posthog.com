@@ -2,10 +2,10 @@
 title: Testing
 ---
 
-In order to ensure apps are stable and work as expected for all their users, we highly recommend writing tests for every app you build.
+In order to ensure connectors are stable and work as expected for all their users, we highly recommend writing tests for every connector you build.
 
-### Adding testing capabilities to your app
-You will need to add jest and our app testing scaffold to your project in your `package.json` file:
+### Adding testing capabilities to your connector
+You will need to add jest and our connector testing scaffold to your project in your `package.json` file:
 ```json
 "jest": {
     "testEnvironment": "node"
@@ -23,11 +23,11 @@ Create your test files e.g. `index.test.js` or `index.test.ts` for testing your 
 
 ### Writing tests
 
-Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your app (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
+Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your connector (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
 
-### Using the app scaffold
+### Using the connector scaffold
 
-Since most PostHog apps are likely to rely on PostHog specific features like "processEvent" we have a number of helper functions to mock these.
+Since most PostHog connectors are likely to rely on PostHog specific features like "processEvent" we have a number of helper functions to mock these.
 
 * **CreateEvent** - This will mock an event being created in PostHog e.g. ```createEvent({ event: "booking completed", properties: { amount: "20", currency: "USD" } })```
 * **CreateIdentify** - This will mock an identify event e.g. ```createIdentify()```

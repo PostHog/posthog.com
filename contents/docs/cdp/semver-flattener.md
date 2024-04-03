@@ -48,7 +48,7 @@ This is especially helpful for comparing versions when filtering in PostHog insi
 
 ## Requirements
 
-This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -61,19 +61,19 @@ That's it!
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this connector available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the SemVer Flattener](https://github.com/PostHog/semver-flattener-plugin) is available on GitHub.
+PostHog is open-source and so are all connectors on the platform. The [source code for the SemVer Flattener](https://github.com/PostHog/semver-flattener-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this connector?
 
 We'd like to thank PostHog team member [Paul D'Ambra](https://github.com/pauldambra) for creating this app. Cheers, Paul!
 
-### Who maintains this app?
+### Who maintains this connector?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this connector?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

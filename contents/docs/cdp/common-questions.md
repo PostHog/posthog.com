@@ -2,21 +2,21 @@
 title: Troubleshooting and FAQs
 ---
 
-## My app isn't working, what do I do?
+## My connector isn't working, what do I do?
 
-1. Checking that the app is enabled with the correct configuration options in the [data pipeline tab](https://us.posthog.com/apps). You can find the correct configuration options in the [app's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
+1. Checking that the connector is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/apps). You can find the correct configuration options in the [connector's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
 
-2. Click "Logs & metrics" and go to the `Metrics` tab to check that the app is processing events without errors.
+2. Click "Logs & metrics" and go to the `Metrics` tab to check that the connector is processing events without errors.
 
 3. Check the `Logs` tab to see if there are any errors.
 
 4. Go to the data management tab to check if there any [ingestion warnings](https://us.posthog.com/data-management/ingestion-warnings).
 
-5. If the app relates to an external service, check that the external service is working correctly. Make a request to the relevant API endpoint. You can also use a tool like [webhook.site](https://webhook.site/) to check that PostHog sends events as expected.
+5. If the connector relates to an external service, check that the external service is working correctly. Make a request to the relevant API endpoint. You can also use a tool like [webhook.site](https://webhook.site/) to check that PostHog sends events as expected.
 
 ## How do I capture data from another application?
 
-We deprecated the functionality of PostHog apps that enable you to capture data from other tools. Functionally, these apps were a cron which ran every minute (or more) and pulled data from another tool.
+We deprecated the functionality of PostHog connectors that enable you to capture data from other tools. Functionally, these connectors were a cron which ran every minute (or more) and pulled data from another tool.
 
 There are two options for recreating this functionality:
 

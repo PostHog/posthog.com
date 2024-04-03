@@ -45,7 +45,7 @@ const enterpriseModeProductNames = {
     'Feature flags': 'Risk mitigation',
     'A/B testing': 'CX optimization',
     Surveys: 'Qualitative feedback',
-    'Data pipeline': 'CDP/ETL',
+    'Data pipelines': 'CDP/ETL',
     'Data warehouse': 'Secure data vault',
 }
 

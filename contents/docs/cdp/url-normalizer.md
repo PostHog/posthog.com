@@ -8,13 +8,13 @@ tags:
   - url-normalizer
 ---
 
-This app normalizes the format of URLs so you can more easily compare them in insights.
+This connector normalizes the format of URLs so you can more easily compare them in insights.
 
 By default, the URL Normalizer converts all URLs to lowercase and strips trailing /s, overriding the old `current_url` property.
 
 ## Requirements
 
-The URL Normalizer app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+The URL Normalizer connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -31,19 +31,19 @@ If you'd like to normalize URLs into a different format, please consider contrib
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this connector available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the URL Normalizer](https://github.com/PostHog/posthog-url-normalizer-plugin) is available on GitHub.
+PostHog is open-source and so are all connectors on the platform. The [source code for the URL Normalizer](https://github.com/PostHog/posthog-url-normalizer-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this connector?
 
 We'd like to thank PostHog user and community member [Mark Bennett](https://github.com/MarkBennett) for creating this app
 
-### Who maintains this app?
+### Who maintains this connector?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This connector is maintained by the community. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this app?
+### What if I have feedback on this connector?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 

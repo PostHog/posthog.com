@@ -28,7 +28,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 After you've pressed 'Install', you need to add your Intercom API key at the configuration step, as well as add triggering events you want to send to Intercom.
 
--   **Intercom API Key (required)**: you can get this one from the [Intercom Developer Hub](https://developers.intercom.com/building-apps/), by creating a new app and receiving an API Key
+-   **Intercom API Key (required)**: you can get this one from the [Intercom Developer Hub](https://developers.intercom.com/building-apps/), by creating a new connector and receiving an API Key
 -   **Triggering events (required)**: A comma-separated list of PostHog events you want to send to Intercom (e.g.: `$identify,mycustomevent` ).
 
 ## Additional configuration
