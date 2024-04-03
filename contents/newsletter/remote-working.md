@@ -15,7 +15,9 @@ crosspost:
 
 Remote work sucks. If you work at Dell, that is. The company [recently announced](https://www.businessinsider.com/dell-remote-workers-promotion-return-office-push-flexible-work-2024-3) that remote employees would not be considered for promotions or be able to change roles. Dell’s rationale, something to do with “in-person connections” and “value differentiation,” is as tired as an entry-level Dell Inspiron trying to run _Cyberpunk 2077_.
 
-But the policy actually makes sense for Dell. Sort of. When you’re a decades-old behemoth built around people working in offices, implementing remote work policies that actually work is hard. But it doesn't have to be. There are some key principles that any company – big or small, young or old, or Dell – can follow to realize the potential of remote working. 
+The policy actually makes sense for Dell. Sort of. It's hard to implement remote work policies that actually work if your company is a decades-old behemoth built around people working in offices. But even behemoths can change. There are some key principles that any company – big or small, young or old, or Dell – can follow to realize the potential of remote working. Airbnb is a great example of this. In 2022, when many large companies were trying to lure people back into offices, Airbnb did the opposite and went fully remote. As founder and CEO Brian Chesky [wrote in a memo at the time]([url](https://news.airbnb.com/airbnbs-design-to-live-and-work-anywhere/)):
+
+"We want to hire and retain the best people in the world (like you). If we limited our talent pool to a commuting radius around our offices, we would be at a significant disadvantage. The best people live everywhere, not concentrated in one area. And by recruiting from a diverse set of communities, we will become a more diverse company."
 
 **This week, we explain:** how to make remote work actually work.
 
@@ -27,11 +29,13 @@ If you’re a company built around [big](https://www.cnbc.com/2023/06/08/google-
 
 ### The solution: Aggressive transparency
 
-Rather than presentism and nepotism, career progression should be linked to a transparent framework of measurable goals. Do the work, do it well, deliver value for customers, and you’ll be rewarded. Leif Singer, a software engineer at Automattic, the company behind WordPress, has shared some great examples of [how this works in practice](https://youtu.be/aRiP72kRrnc?feature=shared). Key points: 
+Rather than presentism and nepotism, career progression at any company, remote or not, should be linked to a transparent framework of measurable goals. Do the work, do it well, deliver value for customers, and you’ll be rewarded. Leif Singer, a software engineer at Automattic, the company behind WordPress, has shared some great examples of [how this works in practice](https://youtu.be/aRiP72kRrnc?feature=shared). Key points: 
 
 - Give employees the freedom grow in ways they find interesting. Make career paths more individual and don't force people to follow a predetermined ladder. This gives people more ownership over their work and makes them more motivated.
+
 - Review compensation regularly based on transparent, objective metrics. This approach helps remove bias and creates a culture where people can focus on doing their best work, not gaming an opaque system to try and get a promotion.
-- Ensure that employees both get and give regular feedback on their work and career progression. At Automattic, employees and team leads regularly request and give feedback on how things are going. Compensation is adjusted based on the impact their work had on the company.```
+ 
+- Ensure that employees both get and give regular feedback on their work and career progression. At Automattic, employees and team leads regularly request and give feedback on how things are going. Compensation is adjusted based on the impact their work had on the company.
 
 Clearly defining and then publishing your system for career progression is an important first step to making sure that everyone is assessed using the same objective criteria. At PostHog, the way we approach [career progression](https://posthog.com/handbook/people/career-progression) and [feedback](https://posthog.com/handbook/people/feedback) is laid out in public for anyone to see.
 
@@ -45,9 +49,9 @@ Making remote work actually work requires making big cultural and procedural cha
 
 How do I [file expenses](https://posthog.com/handbook/people/spending-money)? Who is [our ideal customer](https://posthog.com/handbook/who-we-are-building-for)? What’s the product analytics team [focused on this quarter](https://posthog.com/teams/product-analytics)?
 
-Don't hide the answers to these questions in out-of-date Google Docs, or worse still, inside someone’s brain. Instead, write them down in a handbook where anyone can access them. Ours is public, but an internal wiki is fine too.
+Don't hide the answers to these questions in out-of-date Google Docs, or worse still, inside someone’s brain. Instead, write them down in a handbook where anyone can access them. At PostHog, our handbook is public, but an internal wiki works well too.
 
-Why? Because:
+Why is good, written communication essential at remote companies?
 
 1. **It’s faster.** Scheduling is hard and meetings interrupt deep work. If something can be written down, it will save time and improve transparency around decision-making. Plus, it's more efficient to have a meeting to align everyone _after_ you've all written down what you think.
 
@@ -57,11 +61,13 @@ Why? Because:
 
 Defaulting to written communication means, chances are, if someone has a question they don’t have to wait for an answer – they can go find it themselves. And if they can’t find an answer, writing a clear, concise question in a public channel on Slack will ensure that everyone can see the answer. 
 
-Automattic’s Beau Lebens has [some great tips](https://beau.blog/2020/03/remote-work-at-scale/) on putting this into practice:
+Automattic’s Beau Lebens has [some great tips](https://beau.blog/2020/03/remote-work-at-scale/) on putting this into practice – and traps to avoid falling into:
 
 - **Tools are not the answer.** Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only work if you do all the hard work first. And nailing how you communicate is a big part of that.
 
-- **Another tip / warning**
+- **“If you can’t link to it, it doesn’t exist.”** Giving employees all the information they need to get their work done, whether their colleagues are online or not, keeps things moving. If a decision about something has been made, it needs writing down. If a process for something exists, it needs writing down.
+
+- **Reduce communication delays.** Brevity is the soul of wit. It's also the soul of good written communication. Rather than sending six different Slack messages ("hi!" (pause) "can i ask you a question?" (pause) "where can i find..." (pause), just send everything together and keep it tight. Small changes like this speed things up and can really improve the quality of written communication across an entire company.
 
 - **Another tip / warning**
 
@@ -78,7 +84,7 @@ Way back in 2009, Y Combinator co-founder Paul Graham [wrote](https://www.paulgr
 At a lot of companies, this has forced way too many people onto the “manager’s schedule.” If this is your company, burn your weekly schedule to the ground and start again. Then rebuild it and follow these remote work commandments:
 
 **Meeting-free days.** At PostHog, we’re [anti-meeting by default](https://posthog.com/blog/meetings). We have two meeting-free days a week and, when we do have meetings, they’re short and focused. 
-**Communicate asynchronously.** We communicate asynchronously via GitHub and Slack. There are lots and tools and systems for this, but the success of asynchronous communication really comes down to good, clear writing.
+**Communicate asynchronously.** We [communicate asynchronously]([url](https://posthog.com/newsletter/how-we-work-async)) via GitHub and Slack. There are lots and tools and systems for this, but the success of asynchronous communication really comes down to good, clear writing.
 **Focus on deep work.** Fewer meetings means more time for deep work. This allows not just engineers, but everyone at the company, to focus on doing their best work how they see best. 
 
 A lot of companies, big and small, have adopted this approach. GitLab and Automattic for starters, but also [Twist](https://async.twist.com/asynchronous-communication/), [Buffer](https://buffer.com/about), and [Zapier](https://zapier.com/jobs/culture-and-values-at-zapier) have all followed a similar blueprint to make remote work actually work for both managers and engineers.
