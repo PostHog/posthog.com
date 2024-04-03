@@ -48,16 +48,13 @@ export interface IRoadmap {
     githubPages: IGitHubPage[]
 }
 
-const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
-    const { user, likeRoadmap, getJwt } = useUser()
+const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
+    const { user, likeRoadmap } = useUser()
     const { search } = useLocation()
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [publishLoading, setPublishLoading] = useState(false)
-    const [publishConfirm, setPublishConfirm] = useState(false)
     const teamName = teams?.data?.[0]?.attributes?.name
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
-    const isModerator = user?.role?.type === 'moderator'
 
     useEffect(() => {
         setLoading(false)
@@ -72,27 +69,6 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
     const onAuth = (user: User) => {
         like(user)
         setAuthModalOpen(false)
-    }
-
-    const handleUnpublish = async () => {
-        if (!publishConfirm) {
-            setPublishConfirm(true)
-            return
-        }
-        setPublishLoading(true)
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}`, {
-            body: JSON.stringify({
-                data: {
-                    publishedAt: null,
-                },
-            }),
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        }).then((res) => res.json())
-        onUpdate()
     }
 
     useEffect(() => {
@@ -151,9 +127,14 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                                 {teamName} Team
                             </Link>
                         )}
-                        <div className="mt-1 text-[15px]">
+                        <div className="mt-1 text-[15px] community-post-markdown">
                             <Markdown>{description}</Markdown>
                         </div>
+                        {githubUrls?.length > 0 && (
+                            <Link to={githubUrls[0]} external className="text-sm relative -top-2 inline-block">
+                                Learn more on GitHub
+                            </Link>
+                        )}
                         <div className="mt-2 flex space-x-2">
                             <CallToAction
                                 disabled={loading}
@@ -181,22 +162,6 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                                     )}
                                 </span>
                             </CallToAction>
-                            {isModerator && (
-                                <CallToAction
-                                    onClick={handleUnpublish}
-                                    type="secondary"
-                                    size="sm"
-                                    disabled={publishLoading}
-                                >
-                                    {publishConfirm ? (
-                                        'ARE YOU ABSOLUTELY SURE'
-                                    ) : publishLoading ? (
-                                        <Spinner className="mx-auto !w-5 !h-5" />
-                                    ) : (
-                                        'Unpublish'
-                                    )}
-                                </CallToAction>
-                            )}
                         </div>
                     </div>
                 </div>
@@ -236,8 +201,10 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-4 py-1 border text-sm border-border dark:border-dark opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75 ${
-                active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+            className={`px-4 py-1 border dark:bg-accent-dark text-sm border-border dark:border-dark opacity-75 hover:bg-accent/75 dark:hover:bg-accent-dark/75 ${
+                active
+                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark dark:text-white opacity-100 font-bold'
+                    : ''
             } ${className}`}
         >
             {children}

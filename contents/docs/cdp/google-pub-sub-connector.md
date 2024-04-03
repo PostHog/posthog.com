@@ -14,7 +14,7 @@ import ExportDisabled from "./_snippets/export-disabled.mdx"
 
 <ExportDisabled />
 
-This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta).
+This connector sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta).
 
 <Requirements />
 
@@ -23,14 +23,14 @@ You'll also need a Google Cloud Pub/Sub account to connect to.
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Pub/Sub' and select the app, press Install.
+2. Search for 'Pub/Sub' and select the connector, press Install.
 3. Upload your Google Cloud key .json file. ([How to get the file.](https://cloud.google.com/pubsub/docs/reference/libraries))
 4. Enter your Topic ID.
 5. Watch events publish to Topic.
 
 ## Finding your Google Cloud key .json file
 
-You'll need this file to configure the Pub/Sub app for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
+You'll need this file to configure the Pub/Sub connector for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
 
 ## Configuration
 
@@ -38,11 +38,11 @@ You'll need this file to configure the Pub/Sub app for PostHog. You can find out
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this connector available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
+PostHog is open-source and so are all connectors on the platform. The [source code](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this connector?
 
 We'd like to thank PostHog community member Jesse Redl from [Vendasta](https://posthog.com/customers/vendasta) for creating this. Thanks, Jesse!
 

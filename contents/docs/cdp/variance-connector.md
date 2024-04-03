@@ -29,7 +29,7 @@ To install the Variance destination you'll need a Variance account. In your Vari
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-variance-plugin) is available on GitHub.
+PostHog is open-source and so are all connectors on the platform. The [source code](https://github.com/PostHog/posthog-variance-plugin) is available on GitHub.
 
 ### Who created this destination?
 
