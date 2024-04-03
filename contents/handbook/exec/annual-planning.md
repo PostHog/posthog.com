@@ -20,41 +20,61 @@ Changes to the plan can happen outside of this schedule - this is a rough guide,
 ### What each meeting does
 
 **12 month product plan**
+
 What: We update our rolling 12 month plan, which tells us [what products to build next](/handbook/which-products). This then tells us who we need to hire to support the plan. The output of this plan feeds into quarterly goal setting (below). 
+
 Who: Exec team
 
 **12 month hiring plan**	
+
 What: We update our rolling 12 month hiring plan, which tells us who we need to hire beyond the current quarter. The hiring plan lives in Pry. 
+
 Who: Exec team
 
 **Board meeting**
+
 What: Quarterly meeting to update the board on progress and talk through 1-2 strategic topics. Board packs are stored in Google Drive. 
+
 Who: Exec team, occasional guest presenter
 
 **Org tidy up**	
+
 What: Go through all the [small teams](/teams), make sure everyone is happy and in the right place, make any changes needed to support new products/general scaling. 
+
 Who: Exec team
 
 **Financial forecast**	
+
 What: Review the 3 year financial forecast, add another year. Tweak based on past performance, then check it is realistic, and keeps us [on track](/handbook/future). The forecast lives in Pry. 
+
 Who: Fraser, Exec
 
 **H2 financial reforecast**
+
 What: Midway through the year check that the 3 year forecast makes sense, tweak if necessary
+
 Who: Fraser, Charles
 
 **Monthly accounts review**	
+
 What: Review last month's management accounts against budget. November's accounts review happens in January, due to the holidays in December, as we typically get our monthly accounts around the 21st of the following month. 
+
 Who: Fraser, Charles
 
 **Pay reviews**
+
 What: We run these 3 times a year. Not in the calendar as the times shift year to year and we want flexibility as we grow. 
+
 Who: Exec
 
 **Quarterly goal setting** 
+
 What: Exec pre-meeting, then individual teams meet to run [their own processes](/handbook/company/goal-setting). 	
+
 Who: Exec, then team leads
 
 **Whole company offsite**
+
 What: Hopefully somewhere warm.
+
 Who: Everyone
