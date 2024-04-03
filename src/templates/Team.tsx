@@ -453,7 +453,7 @@ export default function Team({
                                 <SidebarSection title="Total team height as measured in hedgehogs">
                                     <ul className="list-none m-0 p-0 flex flex-wrap">
                                         {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
-                                            <li key={i}>
+                                            <li className="m-0.5" key={i}>
                                                 <Hedgehog />
                                             </li>
                                         ))}
@@ -462,7 +462,7 @@ export default function Team({
                                                 style={{
                                                     width: hedgehogPercentage,
                                                 }}
-                                                className="overflow-hidden relative"
+                                                className="overflow-hidden relative m-0.5"
                                             >
                                                 <Hedgehog className="absolute object-none object-left" />
                                             </li>
