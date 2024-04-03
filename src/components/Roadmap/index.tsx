@@ -48,7 +48,7 @@ export interface IRoadmap {
     githubPages: IGitHubPage[]
 }
 
-const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
+const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
     const { user, likeRoadmap } = useUser()
     const { search } = useLocation()
     const [authModalOpen, setAuthModalOpen] = useState(false)
@@ -130,6 +130,11 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                         <div className="mt-1 text-[15px] community-post-markdown">
                             <Markdown>{description}</Markdown>
                         </div>
+                        {githubUrls?.length > 0 && (
+                            <Link to={githubUrls[0]} external className="text-sm relative -top-2 inline-block">
+                                Learn more on GitHub
+                            </Link>
+                        )}
                         <div className="mt-2 flex space-x-2">
                             <CallToAction
                                 disabled={loading}
