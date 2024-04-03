@@ -8,11 +8,15 @@ tags:
   - taxonomy-standardizer
 ---
 
-This connector standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
+
+This app standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
 
 ## Supported taxonomies
 
-This connector can convert from any of these taxonomies, to any other.
+This app can convert from any of these taxonomies, to any other.
 
 -   Camel Case: `helloThereHedgehog`
 -   Pascal Case: `HelloThereHedgehog`
@@ -20,11 +24,7 @@ This connector can convert from any of these taxonomies, to any other.
 -   Kebab Case: `hello-there-hedgehog`
 -   Spaces: `hello there hedgehog`
 
-## Requirements
-
-The Taxonomy Standardizer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
@@ -38,23 +38,14 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this app available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this app?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Taxonomy Standardizer. Thank you, Yakko!
 
-### Who maintains this connector?
+<PostHogMaintained />
 
-This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this connector?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
-
+<FeedbackQuestions />

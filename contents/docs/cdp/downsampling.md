@@ -8,13 +8,15 @@ tags:
   - downsampler
 ---
 
-This connector enables you to reduce how many events a deployment of PostHog will ingest. This is especially useful for users who have huge volumes of data, but don't need to analyze it all and want to avoid large bills.
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
 
-### Requirements
+> **Note**: We do not recommend using the downsampler to lower the number of events ingested by PostHog. Instead, we have guide you can use to [capture fewer unwanted events](/tutorials/fewer-unwanted-events).
 
-The Downsampler connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This app enables you to reduce how many events a deployment of PostHog will ingest. This is especially useful for users who have huge volumes of data, but don't need to analyze it all and want to avoid large bills.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
@@ -22,32 +24,20 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 2. Search for 'Downsampling' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
-## Can I use the Downsampler connector to control my PostHog bill?
-
-Yes. Paid-for versions of PostHog are priced per event and the Downsampling connector enables you to reduce the number of events which your instance ingests, thereby giving you greater control over billing.
-
 ## Configuration
 
 <AppParameters />
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this app available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the Downsampler app](https://github.com/PostHog/downsampling-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code for the Downsampler app](https://github.com/PostHog/downsampling-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this app?
 
 We'd like to thank PostHog team members [Michael Matloka](https://github.com/Twixes) and [Marius Andra](https://github.com/mariusandra) and [Neil Kakkar](https://github.com/neilkakkar) for creating the Downsampler.
 
-### Who maintains this connector?
+<PostHogMaintained />
 
-This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this connector?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

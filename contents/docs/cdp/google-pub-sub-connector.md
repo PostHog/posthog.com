@@ -7,15 +7,16 @@ tags:
   - pub-sub
 ---
 
-> This connector is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
+import ExportDisabled from "./_snippets/export-disabled.mdx"
 
-This connector sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta).
+<ExportDisabled />
 
-## Requirements
+This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta).
 
-This requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 You'll also need a Google Cloud Pub/Sub account to connect to.
 
@@ -29,7 +30,7 @@ You'll also need a Google Cloud Pub/Sub account to connect to.
 
 ## Finding your Google Cloud key .json file
 
-You'll need this file to configure the Pub/Sub connector for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
+You'll need this file to configure the Pub/Sub app for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
 
 ## Configuration
 
@@ -37,22 +38,14 @@ You'll need this file to configure the Pub/Sub connector for PostHog. You can fi
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this app available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this app?
 
 We'd like to thank PostHog community member Jesse Redl from [Vendasta](https://posthog.com/customers/vendasta) for creating this. Thanks, Jesse!
 
-### Who maintains this connector?
+<PostHogMaintained />
 
-This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this connector?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

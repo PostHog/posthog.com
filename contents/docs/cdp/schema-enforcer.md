@@ -8,7 +8,11 @@ tags:
   - schema-enforcer
 ---
 
-The connector enables you to enforce a schema on events in PostHog as they are ingested. It does this by preventing ingestion if the event:
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
+
+The app enables you to enforce a schema on events in PostHog as they are ingested. It does this by preventing ingestion if the event:
 
 -   Is missing a required property
 -   Has a property with the wrong type
@@ -19,11 +23,7 @@ It also:
 -   Removes all other properties from an event except selected ones if acceptOnlySchemaProps is true
 -   Configuration is done via a JSON file uploaded as an attachment
 
-## Requirements
-
-The Schema Enforcer connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
@@ -67,11 +67,11 @@ Below is an example configuration file:
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this app available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the Schema Enforcer](https://www.npmjs.com/package/@posthog/schema-enforcer-plugin) is available on NPM.
+PostHog is open-source and so are all apps on the platform. The [source code for the Schema Enforcer](https://www.npmjs.com/package/@posthog/schema-enforcer-plugin) is available on NPM.
 
-### Who created this connector?
+### Who created this app?
 
 A lot of people worked on this app! We'd like to thank the following PostHog team members...
 
@@ -85,14 +85,6 @@ A lot of people worked on this app! We'd like to thank the following PostHog tea
 
 For creating the Schema Enforcer. Thank you, all!
 
-### Who maintains this connector?
+<PostHogMaintained />
 
-This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this connector?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

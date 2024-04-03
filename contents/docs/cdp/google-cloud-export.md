@@ -7,15 +7,16 @@ tags:
   - gcs-export
 ---
 
-> This connector is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
+import ExportDisabled from "./_snippets/export-disabled.mdx"
+
+<ExportDisabled />
 
 Send events from PostHog to a Google Cloud Storage bucket upon ingestion.
 
-## Requirements
-
-This requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 You'll also need access to the Google Cloud Storage bucket you want to export to.
 
@@ -35,22 +36,14 @@ Before installing the Google Cloud Storage Export app, you will need your Google
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this app available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code](https://github.com/PostHog/posthog-gcs-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-gcs-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this app?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating this. Thanks, Yakko!
 
-### Who maintains this connector?
+<PostHogMaintained />
 
-This connector is maintained by PostHog. If you have issues with the connector not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this connector?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

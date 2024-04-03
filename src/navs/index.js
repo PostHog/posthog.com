@@ -1245,10 +1245,6 @@ export const docsMenu = {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
                         },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/libraries/zendesk',
-                        },
                     ],
                 },
                 {
@@ -2505,24 +2501,16 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     children: [
                         {
-                            name: 'Tutorial',
-                            url: '/docs/cdp/build/tutorial',
-                        },
-                        {
-                            name: 'Troubleshooting',
-                            url: '/docs/cdp/enabling',
+                            name: 'Overview',
+                            url: '/docs/cdp/build',
                         },
                         {
                             name: 'Developer reference',
                             url: '/docs/cdp/build/reference',
                         },
                         {
-                            name: 'Testing',
-                            url: '/docs/cdp/build/testing',
-                        },
-                        {
-                            name: 'TypeScript types',
-                            url: '/docs/cdp/build/types',
+                            name: 'Tutorial',
+                            url: '/docs/cdp/build/tutorial',
                         },
                     ],
                 },
