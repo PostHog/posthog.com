@@ -44,6 +44,10 @@ import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
 
+const Hedgehog = ({ className = '' }) => {
+    return <img className={`w-[30px] h-[30px] ${className}`} src="/images/hedgehog.svg" />
+}
+
 const SidebarSection = ({ title, children }) => {
     return (
         <div>
@@ -261,6 +265,8 @@ export default function Team({
     const hasBody = !['/teams/exec', '/teams/data-warehouse'].includes(pageContext.slug)
     const [activeProfile, setActiveProfile] = useState(false)
     const heightToHedgehogs = profiles?.data?.reduce((acc, curr) => acc + (curr?.attributes?.height || 0), 0) / 11 || 0
+    const hedgehogPercentage =
+        (heightToHedgehogs % 1 !== 0 && Math.round(30 * (heightToHedgehogs - Math.floor(heightToHedgehogs)))) || 0
 
     return (
         <Layout>
@@ -437,23 +443,35 @@ export default function Team({
                         {isModerator && <AddTeamMember handleChange={(user) => addTeamMember(user.profile.id)} />}
                     </div>
 
-                    <div className="w-full md:max-w-sm shrink-1 basis-sm space-y-4 divide-y divide-gray-accent-light dark:divide-gray-accent-dark">
-                        <SidebarSection title="Small team FAQ">
-                            <p className="font-bold m-0 text-sm">Q: Does pineapple belong on pizza?</p>
-                            <p className="font-bold m-0 mt-2 text-sm">A: {PineappleText(pineapplePercentage)}</p>
-                        </SidebarSection>
-                        <div className="pt-4">
-                            <SidebarSection title="Total team height as measured in hedgehogs">
-                                <ul className="list-none m-0 p-0 flex flex-wrap">
-                                    {new Array(Math.round(heightToHedgehogs)).fill(0).map((_, i) => (
-                                        <li className="p-1" key={i}>
-                                            <img src="/images/hedgehog.svg" />
-                                        </li>
-                                    ))}
-                                </ul>
+                    {profiles?.data?.length > 0 && (
+                        <div className="w-full md:max-w-sm shrink-1 basis-sm space-y-4 divide-y divide-gray-accent-light dark:divide-gray-accent-dark">
+                            <SidebarSection title="Small team FAQ">
+                                <p className="font-bold m-0 text-sm">Q: Does pineapple belong on pizza?</p>
+                                <p className="font-bold m-0 mt-2 text-sm">A: {PineappleText(pineapplePercentage)}</p>
                             </SidebarSection>
+                            <div className="pt-4">
+                                <SidebarSection title="Total team height as measured in hedgehogs">
+                                    <ul className="list-none m-0 p-0 flex flex-wrap">
+                                        {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
+                                            <li key={i}>
+                                                <Hedgehog />
+                                            </li>
+                                        ))}
+                                        {hedgehogPercentage && (
+                                            <li
+                                                style={{
+                                                    width: hedgehogPercentage,
+                                                }}
+                                                className="overflow-hidden relative"
+                                            >
+                                                <Hedgehog className="absolute object-none object-left" />
+                                            </li>
+                                        )}
+                                    </ul>
+                                </SidebarSection>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </Section>
             {hasInProgress && (
