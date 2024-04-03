@@ -1,4 +1,4 @@
-import { IconPencil, IconX } from '@posthog/icons'
+import { IconPencil, IconHide } from '@posthog/icons'
 import Link from 'components/Link'
 import RoadmapForm, { Status } from 'components/RoadmapForm'
 import Tooltip from 'components/Tooltip'
@@ -149,7 +149,7 @@ export default function UpdateWrapper({
                         <ActionButton onClick={() => handleUnpublish()} roundButton={roundButton}>
                             <Tooltip content="Unpublish" placement="top">
                                 <span className="relative">
-                                    <IconX
+                                    <IconHide
                                         className={`w-5 h-5 inline-block ${
                                             roundButton ? 'opacity-50 group-hover:opacity-100' : ''
                                         }}`}
