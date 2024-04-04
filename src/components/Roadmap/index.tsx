@@ -98,7 +98,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, g
             <UpdateWrapper
                 id={id}
                 status="under-consideration"
-                editButtonClassName="absolute top-0 right-0"
+                editButtonClassName="absolute -top-4 md:top-0 right-0"
                 roundButton={false}
                 onSubmit={() => onUpdate()}
             >
@@ -334,7 +334,7 @@ export default function Roadmap() {
                 <input
                     onChange={(e) => setRoadmapSearch(e.target.value)}
                     placeholder="Search this page..."
-                    className="w-full p-2 rounded-md border border-border dark:border-dark text-black"
+                    className="w-full p-2 rounded-md border border-border dark:bg-accent-dark dark:border-dark text-primary dark:text-primary-dark"
                 />
                 {sortBy === 'team' && teams.length > 0 && (
                     <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-1.5 mt-4">
@@ -346,10 +346,10 @@ export default function Roadmap() {
                                     className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
                                         selectedTeam === team
                                             ? 'bg-accent dark:bg-accent-dark font-bold'
-                                            : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent/75'
+                                            : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
                                     }`}
                                 >
-                                    {team}
+                                    {team.replace(' Team', '')}
                                 </button>
                             )
                         })}
