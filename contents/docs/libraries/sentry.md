@@ -18,8 +18,10 @@ This way, debugging issues becomes a lot easier, and you can also correlate erro
 
 Make sure you're using both PostHog and Sentry as JS modules. You'll need to replace `'your organization'` and `project-id` with the organization and project-id from Sentry.
 
-- `'your organization'` will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
-- `project-id` will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
+- `'your organization'`: will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
+- `project-id`: will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
+- `prefix`: Optional: Url of a self-hosted sentry instance (default: https://sentry.io/organizations/)
+- `severityAllowList`: Optional: by default this is ['error'], you can provide more Sentry severity levels (e.g. ['error', 'info']) or '*' to capture all messages. Only availbl from posthog-js version 1.118.0 forward
 
 ```js-web
 import posthog from 'posthog-js'
@@ -29,7 +31,13 @@ posthog.init('<ph_project_api_key>')
 
 Sentry.init({
     dsn: '<your Sentry DSN>',
-    integrations: [new posthog.SentryIntegration(posthog, 'your organization', project-id)],
+    integrations: [new posthog.SentryIntegration(
+        posthog,
+        'your organization',
+        project-id,
+        undefined, // optional: but necessary if you want to set a severity allowlist
+        ['error', 'info'] // optional: will react to captureMessage (info) and captureException (error)
+    )],
 })
 ```
 
