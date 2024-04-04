@@ -174,22 +174,14 @@ const Sort = ({ sortBy, className = '' }) => {
     return (
         <div className={`md:space-x-2 items-center mb-4 sm:mb-0 ${className}`}>
             <p className="sr-only">Sort by</p>
-            <div className="flex items-center">
-                <SortButton
-                    className="rounded-tl-md rounded-bl-md"
-                    active={sortBy === 'popular'}
-                    onClick={() => navigate(`?sort=popular`)}
-                >
+            <div className="flex items-center border border-light dark:border-dark md:border-transparent dark:md:border-transparent hover:border-light dark:hover:border-dark p-0.5 rounded gap-x-[3px] transition-all ease-in-out md:delay-500 hover:delay-0 md:duration-500 w-full md:w-auto">
+                <SortButton className="" active={sortBy === 'popular'} onClick={() => navigate(`?sort=popular`)}>
                     Popular
                 </SortButton>
-                <SortButton className="border-x-0" active={sortBy === 'team'} onClick={() => navigate(`?sort=team`)}>
+                <SortButton className="" active={sortBy === 'team'} onClick={() => navigate(`?sort=team`)}>
                     Team
                 </SortButton>
-                <SortButton
-                    className="rounded-tr-md rounded-br-md"
-                    active={sortBy === 'latest'}
-                    onClick={() => navigate(`?sort=latest`)}
-                >
+                <SortButton className="" active={sortBy === 'latest'} onClick={() => navigate(`?sort=latest`)}>
                     Latest
                 </SortButton>
             </div>
@@ -201,10 +193,10 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-4 py-1 border dark:bg-accent-dark text-sm border-border dark:border-dark opacity-75 hover:bg-accent/75 dark:hover:bg-accent-dark/75 ${
+            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
                 active
-                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark dark:text-white opacity-100 font-bold'
-                    : ''
+                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
+                    : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
             } ${className}`}
         >
             {children}
