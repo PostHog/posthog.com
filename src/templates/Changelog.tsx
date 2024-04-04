@@ -30,10 +30,10 @@ const Select = ({ onChange, values, ...other }) => {
                 {({ open }) => (
                     <>
                         <Listbox.Button
-                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border border-transparent hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
                                 open
-                                    ? 'bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100 OPEN'
-                                    : 'NOT OPEN'
+                                    ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
+                                    : 'border-transparent'
                             }`}
                         >
                             {({ value }) => (
@@ -177,7 +177,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                         <em>"All the updates that are fit to print"</em>
                     </p>
                 </div>
-                <div className="flex space-x-px items-center relative z-[50]">
+                <div className="flex space-x-1 items-center relative z-[50]">
                     <Select
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}
