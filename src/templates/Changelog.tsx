@@ -27,21 +27,27 @@ const Select = ({ onChange, values, ...other }) => {
     return (
         <div className="relative">
             <Listbox onChange={onChange} defaultValue={defaultValue}>
-                <Listbox.Button className="py-2 px-4 bg-accent dark:bg-accent-dark rounded text-left border border-light dark:border-dark flex justify-between items-center font-semibold text-sm">
+                <Listbox.Button
+                    className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border border-transparent hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                        open
+                            ? 'bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100 OPEN'
+                            : 'NOT OPEN'
+                    }`}
+                >
                     {({ value }) => (
                         <>
                             <span>{other.value || value.label}</span>
-                            <Chevron className="w-2.5 ml-2 opacity-50" />
+                            <Chevron className="w-2.5 ml-2 opacity-30 group-hover:opacity-50" />
                         </>
                     )}
                 </Listbox.Button>
-                <Listbox.Options className="absolute right-0 min-w-full shadow-md bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-light dark:divide-dark">
+                <Listbox.Options className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0.5 rounded-md mt-1 z-20 grid">
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                             {({ selected }) => {
                                 return (
                                     <li
-                                        className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
+                                        className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${
                                             (other.value ? value.label === other.value : selected) ? 'font-bold' : ''
                                         }`}
                                     >
@@ -165,7 +171,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                         <em>"All the updates that are fit to print"</em>
                     </p>
                 </div>
-                <div className="flex space-x-2 items-center relative z-[50]">
+                <div className="flex space-x-px items-center relative z-[50]">
                     <Select
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}
