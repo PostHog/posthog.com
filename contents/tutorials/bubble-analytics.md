@@ -4,6 +4,7 @@ date: 2024-01-10
 author:
   - lior-neu-ner
 showTitle: true
+featuredVideo: https://www.youtube-nocookie.com/embed/bGCraI7BSqU
 sidebar: Docs
 tags:
   - session replay
