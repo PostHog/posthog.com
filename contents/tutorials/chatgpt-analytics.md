@@ -225,7 +225,7 @@ To create this insight, go the [Product analytics tab](https://us.posthog.com/in
 
 Then, change the chart type from **Line chart** to **Number** (or however else you'd like to visualize your data). Note that it may show `0` if your total cost is smaller than `0.01`.
 
-Addtionally, you can also breakdown your costs by model. To do this, click **+ Add breakdown** and select `model` from the event properties list.
+Additionally, you can also breakdown your costs by model. To do this, click **+ Add breakdown** and select `model` from the event properties list.
 
 <ProductScreenshot
   imageLight={TotalCostLight} 
