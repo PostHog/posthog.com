@@ -250,7 +250,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                             <UpdateWrapper
                                                 status="complete"
                                                 formClassName="mt-8"
-                                                editButtonClassName="absolute top-0 right-0"
+                                                editButtonClassName="absolute -top-4 md:top-0 right-0"
                                                 roundButton={false}
                                                 id={strapiID}
                                                 showSuccessMessage

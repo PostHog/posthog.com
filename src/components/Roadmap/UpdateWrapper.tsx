@@ -13,7 +13,7 @@ export const RoadmapSuccess = ({
     description?: string
 }) => {
     return (
-        <div className="p-2 my-6 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark">
+        <div className="py-3 px-4 my-6 bg-green/10 rounded-md border border-green ">
             <h4 className="!m-0">Success!</h4>
             <p className="!m-0">{description}</p>
             <Link

@@ -94,7 +94,7 @@ export default function TeamUpdates() {
                                         <h4 className="text-lg m-0 mb-6 pr-2 inline-flex items-center bg-light dark:bg-dark after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
                                             {team}
                                         </h4>
-                                        <ul className="m-0 p-0 list-none flex flex-col @3xl:grid grid-cols-2 gap-8">
+                                        <ul className="m-0 p-0 list-none flex flex-col gap-8">
                                             {roadmaps.map((roadmap) => {
                                                 const { id, attributes } = roadmap
                                                 return (
