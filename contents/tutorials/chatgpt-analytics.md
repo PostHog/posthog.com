@@ -28,13 +28,13 @@ We'll build a basic React app, implement the ChatGPT API, and capture these even
 
 ## 1. Create a React app
 
-We create a simple one-page React app with the following:
+To showcase how to track important metrics, we create a simple one-page React app with the following:
 
 - A form with textfield and button for user input.
 - A label to show ChatGPT output.
 - A dropdown to select different [ChatPT models](https://platform.openai.com/docs/models).
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then run the following script which create a new React app and installs the [OpenAI JavaScript](https://platform.openai.com/docs/libraries/typescript-javascript-library) and [PostHog Web](/docs/libraries/js) SDKs:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then run the following script to create a new React app and install both the [OpenAI JavaScript](https://platform.openai.com/docs/libraries/typescript-javascript-library) and [PostHog Web](/docs/libraries/js) SDKs:
 
 ```bash
 npx create-react-app chatgpt-analytics
@@ -213,9 +213,9 @@ Refresh your app and submit a few prompts. You should then see your events captu
 
 ## 3. Create insights
 
-Now that we're capturing events, we can create [insights](/docs/product-analytics/insights). Below are three examples of useful metrics you should investigate:
+Now that we're capturing events, we can create [insights](/docs/product-analytics/insights). Below are three examples of useful metrics you should monitor:
 
-### 1. Total cost
+### Total cost
 
 To create this insight, go the [Product analytics tab](https://us.posthog.com/insights) and click **+ New insight**. Then:
 
@@ -228,13 +228,13 @@ Then, change the chart type from **Line chart** to **Number** (or however else y
 Addtionally, you can also breakdown your costs by model. To do this, click **+ Add breakdown** and select `model` from the event properties list.
 
 <ProductScreenshot
-  imageLight={EventsLight} 
-  imageDark={EventsDark} 
+  imageLight={TotalCostLight} 
+  imageDark={TotalCostDark} 
   alt="Total ChatGPT model costs in PostHog" 
   classes="rounded"
 />
 
-### 2. Average cost per user
+### Average cost per user
 
 This metric helps give you an idea of how your costs will scale as your product grows. Creating this insight is similar to creating the one above, however we use **formula mode** to divide the total cost by the total number of users:
 
@@ -255,7 +255,7 @@ Once again, note that it may show `0` if the number is smaller than `0.01`.
   classes="rounded"
 />
 
-### 3. Average API response time
+### Average API response time
 
 ChatGPT's API response time can take long, especially for longer outputs, so it's useful to keep an eye on this. To do this, first we need to modify our event capturing to also include the response time:
 
@@ -296,13 +296,20 @@ Then, after capturing a few events, create a new insight to calculate the averag
 2. Click on **Total count** to show a dropdown. Click on **Property value (average)**.
 3. Select the `response_time_in_ms` property.
 
+<ProductScreenshot
+  imageLight={ResponseTimeLight} 
+  imageDark={ResponseTimeDark} 
+  alt="Average API response time in PostHog" 
+  classes="rounded"
+/>
+
 ## Next steps
 
 We've shown you the basics of creating insights from your product's ChatGPT usage. With this, you can uncover important data related to your app. Below is an example of product questions you may want to investigate further.
 
 - How many of my users are interacting with my LLM features?
 - Are there generation latency spikes?
-- Does interacting with LLM features correlate with other metrics (retention, usage, revenue, etc.)?
+- Does interacting with LLM features correlate with other metrics e.g. retention, usage, or revenue?
 
 ## Further reading
 
