@@ -1,11 +1,7 @@
 import React, { useState, useRef } from 'react'
 import type { User } from 'hooks/useUser'
-import ForgotPassword from './auth/ForgotPassword'
 import Avatar from './Avatar'
-import SignUp from './auth/SignUp'
-import SignIn from './auth/SignIn'
-import ResetPassword from './auth/ResetPassword'
-import Button from './Button'
+import { CallToAction } from 'components/CallToAction'
 
 export const inputClasses = `rounded-md border border-black/30 dark:border-white/30 block mb-5 py-2 px-4 w-full text-base text-black`
 export const labelClasses = `block text-base font-semibold mb-1 opacity-60`
@@ -21,23 +17,23 @@ type AuthenticationProps = {
     onAuth?: (user: User) => void
 }
 
+const regions = [
+    { domain: 'https://us.posthog.com/authorize_and_redirect/', label: 'US Cloud' },
+    { domain: 'https://eu.posthog.com/authorize_and_redirect/', label: 'EU Cloud' },
+]
+
 export const Authentication = ({
     formValues,
     setParentView,
-    initialView = 'sign-in',
-    buttonText = { login: 'Login', signUp: 'Sign up' },
     showBanner = true,
     showProfile = true,
-    handleMessageSubmit,
-    onAuth,
 }: AuthenticationProps) => {
-    const [view, setView] = useState(initialView)
     const [message, setMessage] = useState<string | null>(null)
-    const containerRef = useRef<HTMLDivElement>(null)
+    const [selectedRegion, setSelectedRegion] = useState<typeof regions[0]>(regions[0])
 
-    const handleForgotPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        setView('forgot-password')
+    const handleLogin = () => {
+        const path = `?redirect=${encodeURI(window.location.href)}&forum_login=true`
+        window.location.href = selectedRegion.domain + path
     }
 
     return (
@@ -78,28 +74,22 @@ export const Authentication = ({
                     }`}
                 >
                     <div className="border-y grid grid-cols-2 relative border-black/[.2] dark:border-white/[.2]">
-                        <button
-                            className={`${
-                                view === 'sign-in' ? 'text-red dark:text-yellow' : 'text-black/50 dark:text-white/50'
-                            } text-sm font-bold py-3 px-1`}
-                            onClick={() => setView('sign-in')}
-                        >
-                            Login
-                        </button>
-                        <button
-                            className={`${
-                                view === 'sign-up' ? 'text-red dark:text-yellow' : 'text-black/50 dark:text-white/50'
-                            } text-sm font-bold py-3 px-1`}
-                            onClick={() => setView('sign-up')}
-                        >
-                            Signup
-                        </button>
+                        {regions.map((region) => (
+                            <button
+                                key={region.domain}
+                                className={`${
+                                    selectedRegion === region
+                                        ? 'text-red dark:text-yellow'
+                                        : 'text-black/50 dark:text-white/50'
+                                } text-sm font-bold py-3 px-1`}
+                                onClick={() => setSelectedRegion(region)}
+                            >
+                                {region.label}
+                            </button>
+                        ))}
                         <div
-                            style={{
-                                opacity: view === 'forgot-password' || view === 'reset-password' ? 0 : 1,
-                            }}
                             className={`bottom-[-1px] w-1/2 left-0 bg-red dark:bg-yellow h-[2px] transition-all absolute rounded-md ${
-                                view === 'sign-up' ? 'translate-x-full' : ''
+                                selectedRegion === regions[0] ? '' : 'translate-x-full'
                             }`}
                         />
                     </div>
@@ -109,57 +99,10 @@ export const Authentication = ({
                                 {message}
                             </p>
                         )}
-                        <div className="pt-4 px-6 bg-accent dark:bg-accent-dark">
-                            {
-                                {
-                                    'sign-in': (
-                                        <SignIn
-                                            buttonText={buttonText.login}
-                                            setMessage={setMessage}
-                                            onSubmit={async (user) => {
-                                                if (formValues) {
-                                                    await handleMessageSubmit?.(formValues, user)
-                                                } else {
-                                                    setParentView?.(null)
-                                                }
-
-                                                onAuth?.(user)
-                                            }}
-                                        />
-                                    ),
-                                    'sign-up': (
-                                        <SignUp
-                                            buttonText={buttonText.signUp}
-                                            setMessage={setMessage}
-                                            onSubmit={async (user) => {
-                                                if (formValues) {
-                                                    await handleMessageSubmit?.(formValues, user)
-                                                } else {
-                                                    setParentView?.(null)
-                                                }
-
-                                                onAuth?.(user)
-                                            }}
-                                        />
-                                    ),
-                                    'forgot-password': (
-                                        <ForgotPassword setParentView={setParentView} setMessage={setMessage} />
-                                    ),
-                                    'reset-password': (
-                                        <ResetPassword setParentView={setParentView} setMessage={setMessage} />
-                                    ),
-                                }[view]
-                            }
-                            {view !== 'forgot-password' && view !== 'reset-password' && (
-                                <Button
-                                    width="full"
-                                    buttonType="outline"
-                                    className="mt-2 mb-4"
-                                    onClick={handleForgotPassword}
-                                >
-                                    Forgot password
-                                </Button>
-                            )}
+                        <div className="py-4 px-6 bg-accent dark:bg-accent-dark">
+                            <CallToAction onClick={() => handleLogin()} width="full" size="md">
+                                Login using Cloud Account
+                            </CallToAction>
                         </div>
                     </div>
                 </div>
