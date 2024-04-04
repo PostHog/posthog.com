@@ -383,13 +383,6 @@ export default function Posts({
                     <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
                         <div className="px-4">
                             <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12 border border-border dark:border-dark">
-                                <p className="m-0 text-sm font-bold dark:text-white">
-                                    Note: PostHog.com authentication is separate from your PostHog app.
-                                </p>
-                                <p className="text-sm my-2 dark:text-white">
-                                    We suggest signing up with your personal email. Soon you'll be able to link your
-                                    PostHog app account.
-                                </p>
                                 <Authentication
                                     onAuth={() => setLoginModalOpen(false)}
                                     showBanner={false}
