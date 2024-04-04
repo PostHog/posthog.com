@@ -20,7 +20,9 @@ The Sales & CS team act as genuine partners with our users. We should feel as mo
 
 - Being power users of PostHog is a must - otherwise we won't be credible. PostHog is a big and growing platform, so this is a challenge to stay on top of!
 
-- We prioritize getting people set up on multiple products as early as is feasible, as this makes PostHog far more valuable to them and increases our chances of retaining them. 
+- We prioritize getting people set up on multiple products as early as is feasible, as this makes PostHog far more valuable to them and increases our chances of retaining them.
+
+- We don't do margin negative deals in order to win - this doesn't set us up for a successful long term relationship with a paying customer if we're ultimately losing money to land them. Yes, this includes fancy companies whose logos would make us look good. 
 
 
 ## Sales & CS vision 
