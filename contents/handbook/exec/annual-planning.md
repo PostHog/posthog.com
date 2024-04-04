@@ -10,12 +10,16 @@ Besides _very_ high level financial forecasting, we don't plan out any further t
 
 Changes to the plan can happen outside of this schedule - this is a rough guide, not a strict timetable. 
 
+<OverflowXSection>
+
 |        | January                 | February                | March                   | April                   | May                     | June                    | July                    | August                  | September               | October                 | November                | December              |
 | ------ | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | --------------------- |
 | _Week 1_ | Monthly accounts review | Board meeting           |                         |                         | Board meeting           | H2 financial reforecast |                         | Board meeting           |                         |                         | Board meeting           | Financial forecast    |
 | _Week 2_ | 12 month product plan   |                         | Q2 goal setting        | 12 month product plan   | Whole company offsite   | Q3 goal setting        | 12 month product plan   |                         | Q4 goal setting        | 12 month product plan   |                         | Q1 goal setting      |
 | _Week 3_ | 12 month hiring plan    | Org tidy up             |                         | 12 month hiring plan    | Org tidy up             |                         | 12 month hiring plan    | Org tidy up             |                         | 12 month hiring plan    | Org tidy up             |                       |
 | _Week 4_ | Monthly accounts review | Monthly accounts review | Monthly accounts review | Monthly accounts review | Monthly accounts review | Monthly accounts review | Monthly accounts review | Monthly accounts review | Monthly accounts review | Monthly accounts review | Monthly accounts review | Holidays - keep empty |
+
+</OverflowXSection>
 
 ### What each meeting does
 
