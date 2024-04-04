@@ -1,11 +1,15 @@
 ---
 title: How to filter and breakdown arrays with HogQL
 date: 2023-10-05
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-17.png
-tags: ['hogql', 'insights']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-17.png
+tags:
+  - hogql
+  - insights
 ---
 
 Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. Although arrays can be a bit tricky to utilize with standard PostHog filters, [HogQL expressions](/docs/hogql/expressions) unlock the ability to make full use of them. 
@@ -42,7 +46,7 @@ arrayJoin(
 
 > Adding `?? '[]'`  is a "nullish coalescing operator" that provides a default value to your properties. In this case, it provides an empty array if `properties.$active_feature_flags` is null or undefined.
 
-![Breakdown HogQL](../images/tutorials/array-filter-breakdown/breakdown.png)
+![Breakdown HogQL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/array-filter-breakdown/breakdown.png)
 
 More useful array breakdowns include:
 
@@ -69,7 +73,7 @@ notEmpty(
 )
 ```
 
-![Filter HogQL](../images/tutorials/array-filter-breakdown/filter.png)
+![Filter HogQL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/array-filter-breakdown/filter.png)
 
 If you want to filter arrays for specific values you can use `has`, `hasAll`, and `hasAny`:
 

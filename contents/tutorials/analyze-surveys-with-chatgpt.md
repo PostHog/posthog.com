@@ -1,11 +1,14 @@
 ---
 title: How to analyze surveys with ChatGPT
 date: 2023-11-08
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-14.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-14.png
+tags:
+  - surveys
 ---
 
 Surveys are a great way of collecting feedback from your users, especially if you ask your users like "How can we improve our product?". However, they can be hard to analyze if you receive hundreds or more answers. Fortunately, [OpenAI's ChatGPT](https://openai.com/chatgpt) is great at doing this.
@@ -43,7 +46,7 @@ We'll import sample survey answers into our script from a CSV file called `answe
 
 > 💡 **PostHog Tip:** If you're using [PostHog surveys](/surveys), you can export your answers by navigating to your survey, clicking "Export", and then "Copy CSV to clipboard".
 >
-> ![Export PostHog survey results to a CSV](../images/tutorials/analyze-surveys-with-chatgpt/export-posthog-csv.mp4)
+> ![Export PostHog survey results to a CSV](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/analyze-surveys-with-chatgpt/export-posthog-csv.mp4)
 
 Add the CSV file to your project folder. Then, install [`csv-parser`](https://github.com/mafintosh/csv-parser) – a handy library for parsing CSVs.
 
@@ -273,7 +276,7 @@ For example, you can create a [pivot table](https://support.microsoft.com/en-gb/
 
 You should now see a sorted list of the most common themes in your survey answers.
 
-![How to create a pivot table to analyze survey results](../images/tutorials/analyze-surveys-with-chatgpt/create-pivot-table.mp4)
+![How to create a pivot table to analyze survey results](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/analyze-surveys-with-chatgpt/create-pivot-table.mp4)
 
 ## Reducing duplicate themes
 

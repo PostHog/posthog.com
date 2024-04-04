@@ -7,9 +7,10 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/xWyDI4R-JR4
+featuredVideo: 'https://www.youtube-nocookie.com/embed/xWyDI4R-JR4'
 category: Using PostHog
 tags:
   - Guides
@@ -45,11 +46,11 @@ Our top-level dashboard tracks our most important metrics, like 'new org signups
 
 This dashboard is setup in a grid with two insights per KPI – that's key performance indicator if you don't speak "marketing". One is the total number with 'compare to previous period' enabled; the second is the same metric as a weekly trend. This gives us an at-a-glance view of the top-level number, and context around peaks and troughs.
 
-![marketing-dashboard](../images/blog/posthog-marketing/marketing-dashboard.png)
+![marketing-dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/marketing-dashboard.png)
 
 We look at the last 90 days by default, but you can change the date range of the whole dashboard whenever you like. We add annotations to denote important events – e.g. changes to landing page designs, or a blog article going viral.
 
-![annotation](../images/blog/posthog-marketing/annotation.png)
+![annotation](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/annotation.png)
 
 (Seriously, people, **use [annotations!](https://posthog.com/manual/annotations)** It's way easier than trying to remember the date you redesigned your pricing page six months ago.)
 
@@ -59,7 +60,7 @@ We like to iterate our website quickly, which often means pushing new designs li
 
 In July, for example, we discovered a tracking bug between 'posthog.com' and 'app.posthog.com' which caused an obvious drop in conversions. Then, in August, we introduced a new pricing page experience. 
 
-![pricing trend](../images/blog/posthog-marketing/pricing-trend.png)
+![pricing trend](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/pricing-trend.png)
 
 As you can see (above), our first iteration was a pretty dramatic failure. Users visiting the pricing page and "showing intent" (we'll get into what this means later) declined from ~25% down to ~10%. It was also obvious from watching session recordings that our new pricing wizard was simply confusing people.
 
@@ -79,15 +80,15 @@ One level below we have our main website dashboard. This is less focused on conv
 
 This is all straightforward stuff, but it's still useful to us as a marketing team. Recently, for example, we identified a tutorial that was getting loads of SEO traffic but was in serious need of updating. We've built a [template for this dashboard](/templates/website-dashboard) for you to use too.
 
-![website dashboard](../images/blog/posthog-marketing/website-dashboard.png)
+![website dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/website-dashboard.png)
 
 Again, we use a lot of `# Number` views here combined with weekly breakdowns to add further context. The top two rows of the dashboard (pictured above) combine both to provide a quick overview of website traffic.
 
-![section breakdown](../images/blog/posthog-marketing/section-breakdown.png)
+![section breakdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/section-breakdown.png)
 
 Drilling further down, we breakdown the unique sessions by website section (above). Given we're a developer tool first, our Docs pages are generally the most popular. You can do this by creating a trends insight with multiple graph series where `Current URL` contains your desired URL path.
 
-![pages per session](../images/blog/posthog-marketing/pages-per-session.png)
+![pages per session](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/pages-per-session.png)
 
 We also track `sessions per user` and `pages per session` here using trends insights. We're not looking to optimize these metrics, but they can be useful for comparative purposes. Here's how to track these metrics in PostHog:
 
@@ -105,13 +106,13 @@ SEO is an important channel for us – it's a signal of word of mouth growth and
 
 As the below graphic from Google Trends shows, we've seen a consistent increase in brand searches (i.e. people searching for 'posthog') in 2022.
 
-![brand trend](../images/blog/posthog-marketing/brand-trend.png)
+![brand trend](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/brand-trend.png)
 
 (For those interested, the trend line is generated using the [Glimpse Chrome extension](https://chrome.google.com/webstore/detail/google-trends-supercharge/ocmojhiloccgbpjnkeiooioedaklapap). I highly recommend it!)
 
 We use insights to help isolate the impact of our SEO content efforts from this organic word of mouth growth. For example, the insight below shows the weekly cumulative growth of all our SEO content since the beginning of the year.
 
-![seo article trend](../images/blog/posthog-marketing/seo-article-trend.png)
+![seo article trend](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/seo-article-trend.png)
  
 You can get this view by selecting the 'Time' option in the 'Chart type' dropdown. This, combined with multiple graph series, will stack the results so you can view the cumulative trend. The 'Value' chart type does the opposite.
 
@@ -152,17 +153,17 @@ Why do we use this and not just signed up users? There are a few good reasons:
 
 The 'Showed Intent' action allows us to create funnel insights like the one below. It shows the percentage of all blog readers who 'Showed Intent'.
 
-![blog funnel](../images/blog/posthog-marketing/blog-funnel.png)
+![blog funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/blog-funnel.png)
 
 But... hold-up-a-minute, 3.5% seems like a very low number doesn't it? Fret not, this is why we also have a second insight on our dashboard showing the historical trend, see below.
 
-![historical trend](../images/blog/posthog-marketing/historical-trend.png)
+![historical trend](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/historical-trend.png)
 
 That massive dip? It's when '[The really important job interview questions engineers should ask (but don't)](/blog/what-to-ask-in-interviews)' went massively viral, generating upwards of 100k users to the blog. Few of those 100k users came to consider PostHog as a product (which is fine), but it's a good reminder of why you should always check these things.
 
 Beyond this top-level metric, the Content Marketing Effectiveness dashboard (yes, it is a long-winded name!) allows us to compare the influence of different articles and content formats. Let's look at some examples.
 
-![session funnel](../images/blog/posthog-marketing/os-session-recording.png)
+![session funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-marketing/os-session-recording.png)
 
 Above is a funnel analysis for one of our most successful blog posts, a guide to [open-source session recording tools](/blog/best-open-source-session-replay-tools). It converts to intent at nearly 23%, which is awesome.
 

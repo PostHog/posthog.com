@@ -39,6 +39,7 @@ const fields = {
         modOnly: true,
     },
     country: {
+        label: 'Country (2-char code)',
         modOnly: true,
     },
     biography: {
@@ -60,20 +61,11 @@ const fields = {
         component: ({ values, setFieldValue }) => {
             return (
                 <div className="flex space-x-2 mb-6">
-                    <label className="flex space-x-1 items-center">
-                        <Tooltip
-                            tooltipClassName="max-w-[200px]"
-                            content="Allows community members to ask you questions directly on your profile page"
-                        >
-                            <span className="relative">
-                                <IconInfo className="w-4 h-4" />
-                            </span>
-                        </Tooltip>
-                        <span>Ask me anything</span>
-                    </label>
                     <Toggle
+                        label="Ask me anything"
                         checked={values.amaEnabled}
                         onChange={() => setFieldValue('amaEnabled', !values.amaEnabled)}
+                        tooltip="Allows community members to ask you questions directly on your profile page"
                     />
                 </div>
             )

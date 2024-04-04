@@ -1,18 +1,21 @@
 ---
-title: How Webshare replaced Mixpanel, Hotjar, and FullStory with PostHog
+title: 'How Webshare replaced Mixpanel, Hotjar, and FullStory with PostHog'
 customer: Webshare
-logo: ../images/customers/webshare/webshare_logo.png
-logoDark: ../images/customers/webshare/webshare-logo-dark.png
-featuredImage: ../images/customers/webshare/featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/webshare/webshare_logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/webshare/webshare-logo-dark.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/webshare/featured.png
 industries:
-    - Devtool
+  - Devtool
 users:
-    - Marketing
-    - Leadership
-    - Customer Success
+  - Marketing
+  - Leadership
+  - Customer Success
 toolsUsed:
-    - Experimentation
-    - Product analytics
+  - Experimentation
+  - Product analytics
 date: 2023-10-01
 ---
 
@@ -22,13 +25,13 @@ Originally founded in 2018 by Utku Zihnioglu, Webshare has grown explosively. It
 
 “We have all our funnels nailed down, but we’re constantly running experiments on top of them,” says Utku, Webshare’s founder and CEO. “We’re really passionate about testing new ideas to get customers the best product we can.”
 
-In the early days, the team used a mix of tools to facilitate this customer-centric approach – Mixpanel for analytics, Hotjar for session replays, plus a handful of internal tools to fill the gaps left by these platforms. 
+In the early days, the team used a mix of tools to facilitate this customer-centric approach – [Mixpanel](/blog/best-mixpanel-alternatives) for analytics, [Hotjar](/blog/best-hotjar-alternatives) for session replays, plus a handful of internal tools to fill the gaps left by these platforms. 
 
 “We had to build our own tools for feature flags, because Mixpanel doesn’t do that,” says Utku. “We were using [FullStory](/blog/best-fullstory-alternatives) too... but we started looking for a replacement in 2021 because those tools just weren’t working for us anymore.”
 
 “That’s when we found PostHog, and realized it does everything we needed all at once, including feature flags!”
 
-![PostHog webshare pricing experiment](../images/customers/webshare/webshare-pricing.png)
+![PostHog webshare pricing experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/webshare/webshare-pricing.png)
 <Caption>Adding the 'Buy Now' call to action and adjusting the text enabled Webshare to boost conversion by 26%</Caption>
 
 ### How Webshare increased conversion rates by 26% with experiments

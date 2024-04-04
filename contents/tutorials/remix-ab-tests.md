@@ -1,15 +1,17 @@
 ---
 title: How to set up A/B tests in Remix
 date: 2024-02-01
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/remix-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/remix-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/remix-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/remix-ab-tests/experiment-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-ab-tests/experiment-setup-dark.png"
 
 A/B tests help you improve your Remix by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Remix app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -42,7 +44,7 @@ export default function Index() {
 
 Run `npm run dev` and navigate to `http://localhost:3000` to see your app in action.
 
-![Basic Remix app](../images/tutorials/remix-ab-tests/basic-app.png)
+![Basic Remix app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -54,27 +56,30 @@ To start, install the [JavaScript web SDK](/docs/libraries/js):
 npm i posthog-js
 ```
 
-Then, go to `app/entry.client.tsx` and initialize PostHog. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).  
-
+Then, go to `app/entry.client.tsx` and initialize PostHog as a component. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
 
 ```ts file=entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
-import { startTransition, StrictMode } from "react";
+import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
 import posthog from "posthog-js";
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_instance_address>',
-  }
-)
+function PosthogInit() {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_instance_address>',
+    });
+  }, []);
+
+  return null;
+}
 
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
         <RemixBrowser />
+        <PosthogInit/>
     </StrictMode>
   );
 });

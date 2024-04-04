@@ -1,19 +1,22 @@
 ---
 title: How Phantom enhanced its product and cut failure rates by 90%
 customer: Phantom
-logo: ../images/customers/phantom/phantom_logo.svg
-logoDark: ../images/customers/phantom/phantom_logo_dark.svg
-featuredImage: ../images/customers/phantom/featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/phantom/phantom_logo.svg
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/phantom/phantom_logo_dark.svg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/phantom/featured.png
 industries:
-    - Cryptocurrency & blockchain
+  - Cryptocurrency & blockchain
 users:
-    - Leadership
-    - Product
-    - Engineering
+  - Leadership
+  - Product
+  - Engineering
 toolsUsed:
-    - Data warehouse
-    - Cloud-hosted
-    - Feature flags
+  - Data warehouse
+  - Cloud-hosted
+  - Feature flags
 date: 2021-12-01
 ---
 

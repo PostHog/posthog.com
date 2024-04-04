@@ -1,15 +1,17 @@
 ---
 title: How to set up A/B tests in Svelte
 date: 2024-01-24
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/svelte-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/svelte-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/svelte-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/svelte-ab-tests/experiment-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/experiment-setup-dark.png"
 
 A/B tests help you make your Svelte app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic SvelteKit app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -47,7 +49,7 @@ Next, replace the code in `src/routes/+page.svelte` with a simple heading and bu
 
 Run `npm run dev` and navigate to http://localhost:5173 to see your app in action.
 
-![Basic Svelte app](../images/tutorials/svelte-ab-tests/basic-app.png)
+![Basic Svelte app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 

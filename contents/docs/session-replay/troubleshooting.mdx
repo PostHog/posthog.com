@@ -40,7 +40,7 @@ You can read more about [posthog-js configurations here](/docs/integrate/client/
 
 When recordings are enabled, postHog-js will fetch a `recorder.js` script from the PostHog server. (This is not included in the default posthog-js to minimize the default bundle size)
 
-Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to add `https://app.posthog.com` (or your host URL if you are self hosted) to your list.
+Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog doamins are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
 
 If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
 

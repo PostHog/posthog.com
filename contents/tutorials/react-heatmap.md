@@ -1,10 +1,14 @@
 ---
 title: How to set up a React app heatmap with PostHog
 date: 2023-03-07
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["heatmaps", "toolbar", 'product os']
+tags:
+  - heatmaps
+  - toolbar
+  - product os
 ---
 
 Understanding where users click your site or app shows you what interests them. A heatmap can visualize these clicks to make this analysis easier.
@@ -39,7 +43,7 @@ export default App;
 
 When we go into the app folder and run `npm start`, this gives us a basic React app which we can use to test PostHog’s heatmap functionality.
 
-![App](../images/tutorials/react-heatmap/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-heatmap/app.png)
 
 ## Adding PostHog
 
@@ -82,7 +86,7 @@ root.render(
 
 Once done, reload your app, click the button, enter some text into the input, and click the link. You should see events for these in your PostHog instance.
 
-![Events](../images/tutorials/react-heatmap/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-heatmap/events.png)
 
 ## Launching your toolbar to access the heatmap
 
@@ -90,11 +94,11 @@ With our React app and PostHog set up as well as some data, we can get a heatmap
 
 Click the "Launch Toolbar" tab on the left menu, then add `localhost:3000` (or whatever domain you are using) to the authorized URL, and click "Launch." This takes you to your site with the PostHog toolbar active.
 
-![Toolbar](../images/tutorials/react-heatmap/toolbar.png)
+![Toolbar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-heatmap/toolbar.png)
 
 To activate the heatmap, click the heatmap icon in the toolbar. This highlights the elements users are clicking on in your React app.
 
-![Heatmap](../images/tutorials/react-heatmap/heatmap.png)
+![Heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-heatmap/heatmap.png)
 
 ## Understanding the heatmap
 

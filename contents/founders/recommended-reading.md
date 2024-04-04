@@ -1,15 +1,16 @@
 ---
 date: 2023-08-22
-title: "PostHog's recommended reading for startup teams"
+title: PostHog's recommended reading for startup teams
 author:
   - joe-martin
-featuredImage: ../images/blog/super-hog-pink.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
   - Founders
   - Growth
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 
@@ -19,7 +20,7 @@ There are thousands of books which will tell you how to build a product and laun
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend.
 
 If you're looking for more startup advice or support, don't forget to check out [PostHog for Startups](/startups), our program for helping early-stage teams get to product market fit. Our startup program includes $50,000 in PostHog credit, exclusive events and promotional opportunities, and is available to any company less than 2 years old and with less than $5M in funding. 
-![Ask Iwata](../images/tracks/ask-iwata.jpg)
+![Ask Iwata](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/ask-iwata.jpg)
 ## [Ask Iwata: Words of Wisdom from Nintendo’s Legendary CEO by Hobonichi](https://www.goodreads.com/book/show/54736620-ask-iwata)
 **Recommended by [Joe Martin, Product Marketing](/community/profiles/59)**
 
@@ -32,7 +33,7 @@ Former games journalist Joe has repeatedly recommended this collection of essays
 > **Putting it into practice:** We encourage everyone at PostHog to [write a personal README](/team) about their style of work and how they like to collaborate and be communicated with. 
 
 
-![From Switzerland](../images/tracks/from-switzerland.jpg)
+![From Switzerland](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/from-switzerland.jpg)
 ## [From Switzerland by Counterprint](https://www.goodreads.com/book/show/60695040-from-switzerland)
 **Recommended by [Lottie Coxon, Graphic Designer](/community/profiles/227)**
 
@@ -45,7 +46,7 @@ Lottie claims she doesn’t read very much, but when pressed for recommendations
 > **Putting it into practice:** Our approach to design has evolved a lot over time, [as has our brand](/blog/postmortem-rebrand). Iteration is part of how we keep things fresh!
 
 
-![Secrets of Sand Hill Road](../images/tracks/sand-hill-road.jpg)
+![Secrets of Sand Hill Road](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/sand-hill-road.jpg)
 ## [Secrets of Sand Hill Road by Scott Kupor](https://www.goodreads.com/book/show/42348376-secrets-of-sand-hill-road)
 **Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
 
@@ -57,7 +58,7 @@ James reads a lot and could likely recommend enough books to fill an article all
 
 > **Putting it into practice:** Understanding how VCs think about startup has helped us raise funding, even when [we’ve decided to do it ahead of schedule](/blog/why-we-raised-a-15m-series-b-ahead-of-schedule)!
 
-![messy middle](../images/tracks/messy-middle.jpg)
+![messy middle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/messy-middle.jpg)
 
 ## [The Messy Middle by Scott Belsky](https://www.goodreads.com/book/show/40179007-the-messy-middle)
 **Recommended by [Charles Cook, Operations & Marketing](/community/profiles/254)**
@@ -69,7 +70,7 @@ If there’s one person whose book recommendations are really worth listening to
 > **Putting it into practice:** When it comes to ops, there’s no silver bullet. Instead, [you need a whole toolkit](/blog/startup-ops-toolkit) to help you solve messy problems!
 
 
-![high output management](../images/tracks/high-growth.jpg)
+![high output management](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/high-growth.jpg)
 ## [High Output Management by Andrew Grove](https://www.goodreads.com/book/show/324750.High_Output_Management)
 **Recommended by [Grace McKenzie, Finance & Operations Lead](/community/profiles/718)**
 
@@ -80,7 +81,7 @@ Andrew Grove was Intel’s third employee, third CEO, and the man who led the co
 > **Putting it into practice:** We’ve templated [our approach to goal-setting](/handbook/company/goal-setting) so that we can make fast decisions, and not waste time discussing formats. 
 
 
-![no rules rules](../images/tracks/no-rules-rules.jpg)
+![no rules rules](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/no-rules-rules.jpg)
 ## [No Rules Rules by Reed Hastings](https://www.goodreads.com/book/show/49099937-no-rules-rules) 
 **Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
 
@@ -91,7 +92,7 @@ When it came to envisioning the sort of culture he wanted to build at PostHog, n
 > **Putting it into practice:** We validated a lot of Netflix’s rules when [hiring our first five employees](/blog/posthog-first-five) — and we’ve rolled them into [our overall culture](/about).
 
 
-![getting real](../images/tracks/getting-real.jpg)
+![getting real](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/getting-real.jpg)
 ## [Getting Real by Basecamp](https://basecamp.com/gettingreal)
 **Recommended by [David Newell, Software Engineer](/community/profiles/860)**
 
@@ -102,7 +103,7 @@ David's review: “It very simply talks about avoiding ‘work work’. The focu
 > **Putting it into practice:** User feedback is _really_ important to us. So important that [we encourage everyone to get it!](/handbook/product/user-feedback)
 
 
-![continuous discovery habits](../images/tracks/continuous-discovery.jpg)
+![continuous discovery habits](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/continuous-discovery.jpg)
 ## [Continuous Discovery Habits by Teresa Torres](https://www.goodreads.com/book/show/58046715-continuous-discovery-habits) 
 **Recommended by [Annika Schmid, Product Manager](/community/profiles/221)**
 
@@ -113,7 +114,7 @@ In addition to the The Mom Test, Annika recommends this book for its practical a
 > **Putting it into practice:** Talking to users is great, but only if you invest the time in turning it into [actionable snapshots](/blog/interview-snapshot-guide).
 
 
-![the mom test](../images/tracks/mom-test.jpg)
+![the mom test](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/mom-test.jpg)
 ## [The Mom Test by Rob Fitzpatrick](https://www.goodreads.com/book/show/52283963-the-mom-test)
 **Recommended by [basically everyone](/team)**
 
@@ -125,7 +126,7 @@ James recommends it in his guide to [finding product-market fit](/blog/product-m
 
 > **Putting it into practice:** Getting to product-market fit is a vital step for every startup — [including us!](/blog/product-market-fit-game)
 
-![founding sales](../images/tracks/founding-sales.jpg)
+![founding sales](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/founding-sales.jpg)
 
 ## [Founding Sales: The Startup Sales Handbook by Daniel Kazanjy](https://www.goodreads.com/book/show/46019973-founding-sales---the-startup-sales-handbook)
 **Recommended by [Simon Fisher, Customer Success](/community/profiles/49)**
@@ -134,10 +135,10 @@ PostHog doesn’t have a sales team, but if we did then this book by Daniel Kaza
 
 **Simon's review:** “Founding Sales is written primarily for Founders and CEOs, and covers all of the bases when it comes to sales. I personally skipped some of the founder-centric stuff and focused on the advice for scaling Customer Success teams, which I found really useful.”
 
-> **Putting it into practice:** We don’t have a Sales team, but [our Customer Success team](/handbook/small-teams/customer-success#mission) is very successful!
+> **Putting it into practice:** We don’t have a Sales team, but [our Customer Success team](/teams/customer-success#mission) is very successful!
 
 
-![saas playbook](../images/tracks/saas-playbook.jpg)
+![saas playbook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/saas-playbook.jpg)
 ## [The SaaS Playbook by Rob Walling](https://www.goodreads.com/book/show/178816351-the-saas-playbook)
 **Recommended by [Lior Neu-ner, Technical Content Marketer](/community/profiles/684)**
 

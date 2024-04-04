@@ -3,16 +3,16 @@ title: Experiments under the hood
 ---
 
 import { FormulaScreenshot } from 'components/FormulaScreenshot'
-import LehrEquationLight from '../../images/docs/user-guides/experimentation/lehr-equation-light.png'
-import LehrEquationDark from '../../images/docs/user-guides/experimentation/lehr-equation-dark.png'
-import SampleSizeDeterminationLight from '../../images/docs/user-guides/experimentation/sample-size-determination-light.png'
-import SampleSizeDeterminationDark from '../../images/docs/user-guides/experimentation/sample-size-determination-dark.png'
-import TrendExperimentCalculationLight from '../../images/docs/user-guides/experimentation/trend-experiment-calculation-light.png'
-import TrendExperimentCalculationDark from '../../images/docs/user-guides/experimentation/trend-experiment-calculation-dark.png'
-import FunnelExperimentCalculationLight from '../../images/docs/user-guides/experimentation/funnel-experiment-calculation-light.png'
-import FunnelExperimentCalculationDark from '../../images/docs/user-guides/experimentation/funnel-experiment-calculation-dark.png'
-import FunnelSignificanceLight from '../../images/docs/user-guides/experimentation/funnel-significance-light.png'
-import FunnelSignificanceDark from '../../images/docs/user-guides/experimentation/funnel-significance-dark.png'
+export const LehrEquationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/lehr-equation-light.png"
+export const LehrEquationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/lehr-equation-dark.png"
+export const SampleSizeDeterminationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/sample-size-determination-light.png"
+export const SampleSizeDeterminationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/sample-size-determination-dark.png"
+export const TrendExperimentCalculationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/trend-experiment-calculation-light.png"
+export const TrendExperimentCalculationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/trend-experiment-calculation-dark.png"
+export const FunnelExperimentCalculationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-experiment-calculation-light.png"
+export const FunnelExperimentCalculationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-experiment-calculation-dark.png"
+export const FunnelSignificanceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-significance-light.png"
+export const FunnelSignificanceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-significance-dark.png"
 
 Below are all formulas and calculations we go through when recommending sample sizes and determining significance.
 
@@ -125,7 +125,7 @@ For your results and conclusions to be valid, any experiment must have a signifi
 
 Furthermore, even a large sample size (e.g. approx. 10,000 participants) can result in ambiguous results. If, for example, the difference in conversion rate between the variants is less than 1%, it's hard to say whether one variant is truly better than the other. To be significant, there must be enough difference between the conversion rates, given the exposure size.
 
-PostHog computes this significance for you automatically - we will let you know if your experiment has reached significant results or not. Once your experiment reaches significant results, it's safe to use those results to reach a conclusion and terminate the experiment. You can read more about how we do this in our 'Advanced' section below.
+PostHog computes this significance for you automatically - we will let you know if your experiment has reached significant results or not. Once your experiment reaches significant results, it's safe to use those results to reach a conclusion and terminate the experiment.
 
 In the early days of an experiment, data can vary wildly, and sometimes one variant can seem overwhelmingly better. In this case, our significance calculations might say that the results are significant, but this shouldn't be the case, since we need more data.
 

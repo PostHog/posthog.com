@@ -9,12 +9,12 @@ showTitle: true
 hideAnchor: true
 author:
   - marcus-hyett
-featuredImage: ../images/blog/dogfooding.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/dogfooding.png
 featuredImageType: full
 category: Product growth
 tags:
   - Guides
-  
 ---
 
 Product testing is essential, but your testing won’t always pick up the small sources of friction which build up over time and frustrate your users. This is where ‘dogfooding’ comes in - regularly using your product to get the full picture and build empathy with your users.

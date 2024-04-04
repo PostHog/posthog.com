@@ -2,9 +2,12 @@
 title: How to use session replays to improve your support experience
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2023-01-02
-tags: ['session replay', 'sentry']
+tags:
+  - session replay
+  - sentry
 ---
 
 On top of being useful for understanding user behavior, session replays help solve problems with your product. You can use them to discover issues, understand why they are happening, and work to fix them. In this way, session replays help you provide a better support experience to users.
@@ -18,7 +21,7 @@ To find recordings from a specific user that needs support, you can filter for a
 - which has the `Rageclick` event
 - from a person with my email address.
 
-![Filters](../images/tutorials/session-recordings-for-support/filter.png)
+![Filters](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings-for-support/filter.png)
 
 Once you’ve found a relevant recording, click the toggle above the events to show the ones matching your filters (in this case, `Rageclick`) to go straight to the issue. You can also search for other events within the session (such as [errors](/tutorials/sentry-plugin-tutorial)). This shows you those events in the recording, the behavior before or after, and the related person and event data.
 
@@ -31,7 +34,7 @@ Finding a session replay connected to the issue saves you time in multiple ways:
 
 Once you’ve found a session replay related to an issue, you can share a link with your teammates (including a timestamp). This helps them access the recording and details (like the person and their properties) quickly. Just click the share button at the top of the recording viewer to open this modal.
 
-![Share](../images/tutorials/session-recordings-for-support/share.png)
+![Share](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings-for-support/share.png)
 
 You can share these links on platforms you use to coordinate user support, such as Zendesk, Slack, GitHub, HubSpot, and Salesforce. This is valuable context for other people supporting that user. It is also useful for development teams who require data on the user and “steps to recreate the issue” so they can solve the issue. It is a simple, useful connection between your support tools and PostHog.
 
@@ -62,7 +65,7 @@ You could then use the `error` event to understand their frequency, details, and
 
 PostHog also includes the option to record console logs in session replays. This is useful for getting errors that log to the console. To turn this on, go to Project Settings and under recordings toggle “Capture console logs.” This adds console logs (as well as errors and warnings) to a separate tab on the recordings page.
 
-![Console](../images/tutorials/session-recordings-for-support/console.png)
+![Console](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings-for-support/console.png)
 
 Within a recording, you can search for the specific console logs you’re looking for, and see the details about them (such as strings or objects they include).
 
@@ -110,7 +113,7 @@ with configure_scope() as scope:
 
 Once set up, this creates exception events with the properties `Sentry URL` (with a link to the details in Sentry) and `Sentry tags` (with a link to the person and recording in PostHog). You can use these events to filter session replays further, combining them with the error data Sentry captures to get the full details about your issues.
 
-![Exceptions](../images/tutorials/session-recordings-for-support/exception.png)
+![Exceptions](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings-for-support/exception.png)
 
 Doing this enables you to further improve the support experience for users, especially technical ones. It speeds up the debugging and triaging process for your team, giving you data and details on what is going wrong. Ultimately, it enables the product to be continually improved and fixed faster, which leads to a higher quality overall product.
 

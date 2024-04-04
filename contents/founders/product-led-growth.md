@@ -3,7 +3,8 @@ date: 2020-08-18
 title: Why you may not need a sales team
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
@@ -11,7 +12,7 @@ tags:
   - Growth
   - Revenue
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 You will need sales, but do you need a sales team to achieve revenue?
@@ -39,7 +40,7 @@ You need customers.
 
 Traditionally, there are two ways to do this: sales and marketing. They are not mutually exclusive, but one strategy or the other generally takes the lead in generating growth.  To understand them, it's helpful to refer to a funnel:
 
-![HogFlix Example Funnel](../images/hogflix-funnel.png)
+![HogFlix Example Funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hogflix-funnel.png)
 
 ### Marketing-led Growth 📈
 The goal of marketing is to increase the number of people going through the funnel. 
@@ -138,7 +139,7 @@ Later on, however, if you did truly build something great, you may benefit from 
 
 Facebook and Slack are great examples of this. 
 
-| ![Facebook Stock Price](../images/facebook-stock.png)
+| ![Facebook Stock Price](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/facebook-stock.png)
 | :---------------------------------------------: |
 | <center> Facebook (FB) Stock Price - Source: [Yahoo Finance](https://finance.yahoo.com/chart/FB)</center>    | 
 

@@ -3,15 +3,20 @@ import React from 'react'
 import Link from 'components/Link'
 import {
     IconApps,
+    IconBox,
     IconBrackets,
     IconCursor,
     IconDashboard,
+    IconDatabase,
+    IconDecisionTree,
     IconEllipsis,
     IconFlask,
     IconGear,
     IconGraph,
     IconHogQL,
     IconPeople,
+    IconPieChart,
+    IconPhone,
     IconPrivacy,
     IconPulse,
     IconRewindPlay,
@@ -41,9 +46,10 @@ export const topicIcons = {
     cohorts: Cohorts, // to be replaced or removed
     configuration: IconGear,
     dashboards: IconDashboard,
+    'data pipelines': IconDecisionTree,
+    'data warehouse': IconDatabase,
     deployment: IconRocket,
     'events & actions': IconCursor,
-    'event pipelines': IconUser,
     'feature flags': IconToggle,
     funnels: IconFunnels,
     gcp: DataWarehouse, // to be replaced or removed
@@ -60,6 +66,7 @@ export const topicIcons = {
     'pricing & billing': IconReceipt,
     monitoring: IconPulse,
     'product analytics': IconGraph,
+    sdks: IconBox,
     security: IconPrivacy,
     'session replay': IconRewindPlay,
     'sparks joy': SparksJoy, // to be replaced or removed
@@ -70,6 +77,7 @@ export const topicIcons = {
     'community spotlight': Megaphone, // to be replaced or removed
     surveys: IconMessage,
     survey: IconMessage,
+    'web analytics': IconPieChart,
 }
 
 export const TopicsTable = ({ topics, topicGroup, className = '' }) => {

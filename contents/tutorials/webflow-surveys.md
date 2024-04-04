@@ -1,10 +1,12 @@
 ---
-title: "How to create surveys in Webflow"
+title: How to create surveys in Webflow
 date: 2023-11-29
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['surveys']
+tags:
+  - surveys
 ---
 
 Surveys are a great way to collect feedback from your users. This tutorial shows you how to create surveys for your [Webflow](https://webflow.com/) marketing site using PostHog.
@@ -24,13 +26,13 @@ With the snippet copied, go to your Webflow site settings by clicking on the men
 
 Go to the "Custom code" tab in site settings. In the "Head code" section, paste your PostHog snippet and press "Save". Then, publish your site.
 
-![How to add PostHog to Webflow](../images/tutorials/webflow-surveys/add-posthog-to-webflow.mp4)
+![How to add PostHog to Webflow](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-surveys/add-posthog-to-webflow.mp4)
 
 ## Create your survey
 
 Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." There are a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, or you can create your own by clicking "Create blank survey".
 
-![PostHog survey templates](../images/tutorials/webflow-surveys/survey-templates.png)
+![PostHog survey templates](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-surveys/survey-templates.png)
 
 Next, customize your survey as needed. You can customize the questions, branding, and targeting. See our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
 
@@ -46,7 +48,7 @@ After interacting with your survey, you can view results by selecting the survey
 
 You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
-![Survey results](../images/tutorials/webflow-surveys/survey-results.png)
+![Survey results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-surveys/survey-results.png)
 
 ## Further reading
 

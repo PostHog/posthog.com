@@ -1,15 +1,17 @@
 ---
 title: How to set up A/B tests in Angular
 date: 2024-01-23
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/angular-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/angular-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/angular-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/angular-ab-tests/experiment-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-ab-tests/experiment-setup-dark.png"
 
 A/B tests help you make your Angular app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Angular app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -53,7 +55,7 @@ export class AppComponent {
 
 Run `ng serve` and navigate to http://localhost:4200 to see your app in action.
 
-![Basic Angular app](../images/tutorials/angular-ab-tests/basic-app.png)
+![Basic Angular app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your Angular app
 

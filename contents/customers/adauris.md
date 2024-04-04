@@ -1,22 +1,25 @@
 ---
-title: How Adauris tracks performance, tailors activation and grew traffic by 500%
+title: 'How Adauris tracks performance, tailors activation and grew traffic by 500%'
 customer: Adauris
-logo: ../images/customers/adauris/logo.png
-logoDark: ../images/customers/adauris/logo-dark.png
-featuredImage: ../images/customers/adauris/featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo-dark.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/featured.png
 featuredCustomer: false
 industries:
-    - SaaS, Publishing
+  - 'SaaS, Publishing'
 users:
-    - Growth
-    - Engineering
-    - Product
-    - Marketing
+  - Growth
+  - Engineering
+  - Product
+  - Marketing
 toolsUsed:
-    - Experiments
-    - Session Replay
-    - PostHog Cloud
-    - Insights
+  - Experiments
+  - Session Replay
+  - PostHog Cloud
+  - Insights
 date: 2023-11-05
 ---
 

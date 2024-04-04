@@ -91,7 +91,7 @@ One person on each product team takes on the **[Support Hero](/handbook/engineer
 
 ## Community
 
-Support =/= community - we consider them to be separate things. [Learn more about how we think about community.](/handbook/small-teams/website-docs/community)
+Support =/= community - we consider them to be separate things. [Learn more about how we think about community.](/teams/website-docs/community)
 
 ### Tutorials
 

@@ -1,8 +1,11 @@
 ---
 title: How to set up A/B tests in Nuxt
 date: 2023-12-05
-author: ["lior-neu-ner"]
-tags: ['experimentation', 'feature flags']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
+  - feature flags
 ---
 A/B tests are crucial for optimizing your Nuxt.js app. PostHog's experimentation tool simplifies this process. This tutorial will show you how to set up and run an A/B test in Nuxt using PostHog.
 
@@ -35,7 +38,7 @@ Replace the code in `app.vue` with a simple heading and button:
 
 Run `npm run dev` to start your app.
 
-![Basic app](../images/tutorials/nuxtjs-ab-tests/basic-setup.png)
+![Basic app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxtjs-ab-tests/basic-setup.png)
 
 ## Adding PostHog
 
@@ -90,7 +93,7 @@ export default defineNuxtPlugin(nuxtApp => {
 
 Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog events explorer](https://app.posthog.com/events).
 
-![Events](../images/tutorials/nuxtjs-ab-tests/events.png)
+![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxtjs-ab-tests/events.png)
 
 ## Creating a custom event for our A/B test goal
 
@@ -130,7 +133,7 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![Nuxt.js experiment setup in PostHog](../images/tutorials/nuxtjs-ab-tests/experiment-setup.png)
+![Nuxt.js experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxtjs-ab-tests/experiment-setup.png)
 
 ## Implementing the A/B test code
 

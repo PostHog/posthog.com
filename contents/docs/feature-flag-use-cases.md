@@ -18,7 +18,7 @@ A great way to do this is by using [Cohorts](/docs/user-guides/cohorts). If you 
 
 Here's an example view of Trends in PostHog filtering pageview events that contain the term "blog" in the URL, showing a breakdown between Cohort A (Beta Feature On) and Cohort B (Beta Feature Off):
 
-![Trends A/B Testing](../images/tutorials/feature-flags/trends-ab.png)
+![Trends A/B Testing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/feature-flags/trends-ab.png)
 
 ### Gradual Rollouts
 

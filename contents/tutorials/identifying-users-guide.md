@@ -2,9 +2,13 @@
 title: An introductory guide to identifying users in PostHog
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2022-11-21
-tags: ["configuration", "persons", 'product os']
+tags:
+  - configuration
+  - persons
+  - product os
 ---
 
 To understand your product’s usage, you must know **who** did **what.** Many of the most valuable insights require an accurate understanding of the user using your product. To make sure user data and events are as accurate as possible, it is critical to identify users properly.
@@ -17,7 +21,7 @@ This tutorial goes over the different ways to identify users and recommendations
 
 If you haven’t set up any identification and are using the PostHog snippet or `posthog-js` library, events are captured with an anonymous user ID. We create the anonymous ID using the  user’s device ID, and it is automatically tied to all the events a user sends in that session (and future sessions if the cookie is set). In the “Live events” tab of PostHog, anonymous ID user events look like this:
 
-![Anonymous ID](../images/tutorials/identifying-users-guide/anon-id.png)
+![Anonymous ID](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/identifying-users-guide/anon-id.png)
 
 Anonymous IDs are a basic way to understand the user behind events. They lack preciseness because there is no way of ensuring consistency between sessions (it depends on cookies, which users often block) and lack the depth of custom user properties or groups. Explicitly identifying users using the other methods detailed below creates more accurate user data.
 

@@ -35,7 +35,7 @@ We don't limit you, and will push for much more than you may think is possible. 
 
 PostHog has a wide variety of challenges - from data, to entire new products and features, to design and UX tradeoffs. On the go-to-market side, we're wildly different - you'll learn about self serve, bottom up adoption, handling a community, and how giving things away for free leads to us making money.
 
-We have [small teams](/handbook/small-teams/team-structure) - we can move people around as we grow to provide variety and to let people switch up their focus if things get stale.
+We have [small teams](/handbook/team-structure) - we can move people around as we grow to provide variety and to let people switch up their focus if things get stale.
 
 **Lightweight management**
 

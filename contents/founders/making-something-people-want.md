@@ -3,14 +3,15 @@ date: 2022-10-20
 title: How we made something people want
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Product
   - Product-market fit
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 It's one thing to build _something_, it's another to build something that _people want_.

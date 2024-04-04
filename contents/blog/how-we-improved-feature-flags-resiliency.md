@@ -1,13 +1,14 @@
 ---
 date: 2023-09-08
-title: "How we made feature flags faster and more reliable"
+title: How we made feature flags faster and more reliable
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
   - neil-kakkar
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 hideLastUpdated: false
@@ -19,7 +20,7 @@ Contrast it with the PostHog interface not loading, where the problem is constra
 
 Further, flags are very sensitive to latency. If it takes 5 seconds for your flags to evaluate, that holds up your customer's application for 5 seconds. You can't wait to load them asynchronously, either, as you need this result to determine what to show. Your business logic depends on the flag.
 
-This is why the [Feature Success team](/handbook/small-teams/feature-success) has spent the last few months making PostHog's feature flags fast and resilient. Our goal was to ensure that:
+This is why the [Feature Success team](/teams/feature-success) has spent the last few months making PostHog's feature flags fast and resilient. Our goal was to ensure that:
 
 1. Neither the SDKs that query flags, nor the API interface, should go down if the PostHog interface does
 2. Latency-sensitive flags resolve in 50ms or less. 
@@ -73,7 +74,7 @@ Since flags are evaluated multiple times in a session, sending a partial respons
 
 So, we enable partial updates on our client side SDKs. Whenever there's an error computing all flags, we do a partial update: keep the old values for flags we failed to compute, and use the new value for flags we didn't fail to compute.
 
-![partial flag eval](../images/blog/flag-resiliency/partial-eval.png)
+![partial flag eval](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/flag-resiliency/partial-eval.png)
 
 As we've noted before, the only flags that can fail evaluation are ones that depend on specific properties. Further, if a property change is triggering flag evaluation, the client SDK can send these new properties alongside the request, and we use these properties as overrides for flag evaluation. We automatically send these properties for all properties set via the SDK helpers.
 
@@ -91,7 +92,7 @@ Now we can dig deeper into how exactly evaluation works when the database is dow
 
 The database going down means all three functionalities go down. Without flag definitions, we can't know what flags to evaluate. Without the project auth, we don't know which project to get to.
 
-![local flag eval](../images/blog/flag-resiliency/local-eval.png)
+![local flag eval](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/flag-resiliency/local-eval.png)
 
 The solution here is caching: we cache flag definitions per project, and also the mapping from auth token to project. This means we don't rely on the database for the critical components to return a response.
 
@@ -148,7 +149,7 @@ Our p99 latency went down from about ~500ms to 300ms, while the p90 latency tank
 
 As you can imagine, the p90 is so low because these requests don't touch the database at all, everything is handled in memory. What was surprising to me was that 90% of requests fall into this category.
 
-![latency](../images/blog/flag-resiliency/latency.png)
+![latency](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/flag-resiliency/latency.png)
 
 When we are in incident mode, i.e. the app is down completely, feature flag p99 latency drops down to ~80ms as well, because we start skipping all database related flags where these properties weren't sent.
 

@@ -24,7 +24,7 @@ export default function CookieBanner() {
 
     return showBanner ? (
         <div
-            className={`fixed z-50 left-0 lg:bottom-0 ${
+            className={`fixed z-[50] left-0 lg:bottom-0 ${
                 internalMenu?.length > 0 ? 'bottom-[122px]' : 'bottom-[75px]'
             } `}
         >

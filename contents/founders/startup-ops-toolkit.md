@@ -3,7 +3,8 @@ date: 2023-12-13
 title: The ops toolkit for early-stage startups (2024 edition)
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-release-notes-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 tags:
   - Founders

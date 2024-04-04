@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -19,13 +20,13 @@ Session times are here! They're a great way to help understand how engaged users
 
 ### [Filter properties individually](https://github.com/PostHog/posthog/pull/671)
 
-![](../images/05/captured.gif)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/captured.gif)
 
 In both trends and funnels, you can now add filters for each event individually, rather than for all events.
 
 ### [Breakdown by properties in graph](https://github.com/PostHog/posthog/pull/671)
 
-![](../images/05/captured-1.gif)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/captured-1.gif)
 
 Previously the only way to see properties broken down by value was in a table. Now you can break down on any property and display it in a graph.
 
@@ -33,25 +34,25 @@ Select a property on the left hand side, like $browser, and a line will appear f
 
 ### [Session time series](https://github.com/PostHog/posthog/pull/659)
 
-![](../images/05/Screenshot-2020-05-06-at-10.59.34.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/Screenshot-2020-05-06-at-10.59.34.png)
 
 Eric has been hard at work improving the way we display session information. You can now see how the average time spent on your app changes over time.
 
 ### [Export cohorts as CSV](https://github.com/PostHog/posthog/pull/441)
 
-![](../images/05/Screenshot-2020-05-06-at-10.53.26.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/Screenshot-2020-05-06-at-10.53.26.png)
 
 This was contributed by [Anoop](https://github.com/anoopemacs), and while it admittedly took a while to get merged it’s a great addition. You can now export a full list of users from any cohort to CSV, including all distinct ids and properties.
 
 ### [Edit frontend selectors in Actions](https://github.com/PostHog/posthog/pull/670)
 
-![](../images/05/Screenshot-2020-05-06-at-10.56.03.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/Screenshot-2020-05-06-at-10.56.03.png)
 
 Previously, the only way to edit selectors for frontend elements in actions was to go to your own site and use the toolbar. Now you can do this inside PostHog itself.
 
 ### [Setup page redesign](https://github.com/PostHog/posthog/pull/701)
 
-![](../images/05/Screenshot-2020-05-06-at-11.13.06.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/Screenshot-2020-05-06-at-11.13.06.png)
 
 Thanks to Sanket for this one! The setup page now uses Antd too and it looks great.
 

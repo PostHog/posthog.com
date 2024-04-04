@@ -1,10 +1,12 @@
 ---
 date: 2024-02-19
-title: "How we built our onboarding email flow (with actual performance data)"
+title: How we built our onboarding email flow (with actual performance data)
 rootPage: /blog
 category: Inside PostHog
-author: ["joe-martin"]
-featuredImage: ../images/blog/blog_onboarding.jpg
+author:
+  - joe-martin
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/blog_onboarding.jpg
 featuredImageType: full
 ---
 
@@ -18,7 +20,7 @@ We don’t do those sort of outreach emails. This is what we do instead, and how
 
 Back in 2022, our onboarding flow was powered by Mailchimp and was _very_ simple. In fact, nobody actually knew what it looked like. So, I mapped it in [an RFC](https://github.com/PostHog/posthog.com/issues/3202).
 
-![Onboarding 1.0](../images/blog/onboarding/onboarding_1.png)
+![Onboarding 1.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_1.png)
 <Caption>The first map we did of what our email onboarding flow looked like</Caption>
 
 We didn’t do welcome emails for new users, and even our monthly changelog emails were only sent to 660 opted-in users. I decided to change this and imported 30,000+ users into that email list. 
@@ -33,7 +35,7 @@ Towards the end of 2022, we finally moved off of Mailchimp. We looked at tools s
 
 I’d observed from other companies that we needed to at least add a welcome email for new users, and I wanted to add checks after 24, 96, and 168 hours to see if users had ingested events. If yes, we’d send them some basic usage advice. If no, we’d offer them help. This was the very least I felt we could do. 
 
-![Onboarding 2.0](../images/blog/onboarding/onboarding_2.png)
+![Onboarding 2.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_2.png)
 <Caption>Onboarding 2.0 added more checks to try and validate ingestion and three simple introductory emails</Caption>
 
 This didn’t perform as well as you’d think, however, mainly because the ingestion checks were unreliable. Users kept complaining about getting the wrong emails, so we threw this all out and moved to a new plan.
@@ -44,7 +46,7 @@ This didn’t perform as well as you’d think, however, mainly because the inge
 
 By Q3 2023, we were adding more and more new products to PostHog. We wanted to feature these in our flow, but we were also worried about becoming spammy. Thankfully, now that we had Customer.io in place, we were able to judge this based on the data. 
 
-![Onboarding 3.0](../images/blog/onboarding/onboarding_3.png)
+![Onboarding 3.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_3.png)
 <Caption>New emails for 3.0 tried to emphasize what was possible with PostHog, directing users to helpful blog content</Caption>
 
 Our conversion event was a user log-in within one week of opening an email. We hadn’t yet thought of anything better. 
@@ -70,7 +72,7 @@ Data is important, but I strongly believe it doesn’t tell the whole story. You
 
 How this works is simple: when a user signs up, they can optionally tell us what their role is. If their `role_at_organization` = `engineer` we trigger an email from me telling them about [our Product for Engineers newsletter](https://newsletter.posthog.com/). 
 
-![Onboarding 3.1](../images/blog/onboarding/onboarding_31.png)
+![Onboarding 3.1](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_31.png)
 <Caption>Onboarding 3.1 was when we really started tailoring emails based on what we knew about users</Caption>
 
 This email performed very well, with a 68% open rate and a 16% CTR. Two emails into the flow and developers were already opting in to _more_ emails! 
@@ -89,7 +91,7 @@ One successful experiment we did roll out was adding more personalized emails fo
 
 [4.0](https://github.com/PostHog/meta/pull/150/) was a massive step up in complexity as a result of our growing number of features. By late 2023 the flow had 28 separate emails, of which users would get a maximum of 6 over several weeks. We still worried this would be too many, but the low (0.4%) unsubscribe rate suggested otherwise.
 
-![Onboarding 4.0](../images/blog/onboarding/onboarding_4.png)
+![Onboarding 4.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_4.png)
 <Caption>Onboarding 4.0 split high-ICP users out into their own email flow because our CS team would reach out directly</Caption>
 
 By this point we’d also changed our conversion event to mean a user enabling billing for a product within one week of opening an email - a far better indicator of if the emails are delivering value than simply measuring logins. 
@@ -99,7 +101,7 @@ By this point we’d also changed our conversion event to mean a user enabling b
 - **Unsubscribe rate:** 0.4%
 - **Conversion rate:** 6%
 
-Around this point we also started filtering out teams in our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) using a scoring system implemented in Hubspot. If a user scored over a certain threshold they’d be moved out of the usual flow so [our customer success team](/handbook/small-teams/customer-success) could reach out directly. We’ve since removed this check because it felt too salesy and didn’t perform well, however. 
+Around this point we also started filtering out teams in our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) using a scoring system implemented in Hubspot. If a user scored over a certain threshold they’d be moved out of the usual flow so [our customer success team](/teams/customer-success) could reach out directly. We’ve since removed this check because it felt too salesy and didn’t perform well, however. 
 
 ## Onboarding 5.0: The current one
 
@@ -107,7 +109,7 @@ At the time of writing this is the current onboarding flow. It contains over 53 
 
 The goal of this flow is to focus on improving activation, and build on some parallel improvements to our in-app onboarding flow. Now when a user signs up to PostHog we ask them to select a product to setup first: analytics, replays, flags, or surveys. [Onboarding 5.0](https://github.com/PostHog/meta/issues/172) builds off that selection by encouraging users to use that product, and then showing how other features can combine with it.
 
-![Onboarding 5.0](../images/blog/onboarding/onboarding_5.png)
+![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_5.png)
 <Caption>Onboarding 5.0: Messy, complex, and highly personalized to user interests</Caption>
 
 The hope was that this would improve in-app activation, which we roughly define as: 
@@ -151,7 +153,7 @@ We do this in several ways in the latest version – delaying our welcome email,
 
 At the time of writing, Onboarding 5.0 has been live just one week – it’s too early to judge any of the metrics because users will have only received the first email. The plan, however, is to keep an eye on the data (and user feedback) and find new ways to improve the flow even further. 
 
-![Onboarding 5.0](../images/blog/onboarding/onboarding_6.png)
+![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_6.png)
 <Caption>An active experiment within the current version of our email flow</Caption>
 
 One way we’re already experimenting with this is by bringing back checks to see if users are ingesting events or not. We’re testing this with the session replay product by running the flow you can see above for the first email after the welcome email. 

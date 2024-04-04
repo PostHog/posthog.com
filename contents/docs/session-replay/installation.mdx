@@ -1,10 +1,13 @@
 ---
 title: Session replay installation
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
 
 Session replay enables you to record users navigating through your website or mobile app and play back the individual sessions to watch how real users use your product.
 
@@ -28,7 +31,12 @@ import JSInstallWeb from "../integrate/\_snippets/install-web.mdx"
 
 Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
 
-![Enable session recordings in your PostHog](../../images/docs/session-replay/enable-session-replay-in-project-settings.png)
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight} 
+  imageDark={EnableSessionReplayDark} 
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
 
 Once enabled, the library will start recording sessions by default.
 

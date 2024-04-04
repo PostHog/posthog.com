@@ -2,9 +2,12 @@
 title: Adding product data in new tab with Momentum Dash
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2022-11-04
-tags: ['apps', 'product os']
+tags:
+  - apps
+  - product os
 ---
 
 Keeping product analytics top of mind keeps you focused on what matters to your product and customers. It reminds you about the state of the product, and what you need to do to improve it.
@@ -21,7 +24,7 @@ To get our PostHog data into Momentum Dash, we need to format an API request tha
 
 We recommend creating a personal API key in PostHog for the API request. To do so, click your account icon in the top right corner, and then the gear next to your account name. In “My settings,” scroll down to “Personal API Keys” and click “Create personal API key.” Name it something like “Momentum.” Once created, make sure you copy and save it because you must create a new one if you lose it.
 
-![Personal API key](../images/tutorials/product-data-in-new-tab/personal-api-key.png)
+![Personal API key](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/product-data-in-new-tab/personal-api-key.png)
 
 You can also use the project key (not recommended). You find it in “Project settings” under “Project Variables.”
 
@@ -33,7 +36,7 @@ You find your project ID by clicking “Project settings” in the sidebar, then
 
 Next, you need the data you want to show in the new tab. Browse to your insights or dashboards for a metric you want to display. When you find it, click on the insight details (the link from insights or “view” from a dashboard). Once on that screen, copy the unique value in the URL after `<ph_instance_address>/insights/`.
 
-![Insight short ID](../images/tutorials/product-data-in-new-tab/short-id.png)
+![Insight short ID](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/product-data-in-new-tab/short-id.png)
 
 ## Formatting the API request
 
@@ -55,11 +58,11 @@ Copy your formatted code and open up a new tab (assuming you have Momentum Dash 
 
 Once you’ve signed up for Momentum Dash Plus and added the extension, your new tab page should look like this:
 
-![Momentum new tab](../images/tutorials/product-data-in-new-tab/new-tab.png)
+![Momentum new tab](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/product-data-in-new-tab/new-tab.png)
 
 Hover your mouse in the top right corner, and an “add” button appears. Click it and select “Metric.” Next, choose “From a URL” and paste the API request you created in the last section into the URL field. If you formatted the API request properly, a drop-down appears that prompts you to “select an option.” 
 
-![Momentum API request](../images/tutorials/product-data-in-new-tab/momentum-api.png)
+![Momentum API request](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/product-data-in-new-tab/momentum-api.png)
 
 When you click the drop-down, you get lots of options, you have to find the one that matches your metric (number) in PostHog. For my number chart, it was `result[0].result[0].aggregated_value` but it might also be `result[0].result[0].count`, or another value. 
 
@@ -67,7 +70,7 @@ When you click the drop-down, you get lots of options, you have to find the one 
 
 Select the option with the right value from the drop-down, add a name, and then click “Add.” Once done, you have an updating metric on your new tab page.
 
-![Metric in new tab](../images/tutorials/product-data-in-new-tab/metric.png)
+![Metric in new tab](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/product-data-in-new-tab/metric.png)
 
 Now, every time you open a new tab, you see product data showing you how you are doing. This value updates every time you open a new tab. You can add more or change them following the same process. These key product metrics provide important reminders every time you open a new tab.
 

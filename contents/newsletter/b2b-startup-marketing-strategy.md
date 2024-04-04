@@ -1,18 +1,21 @@
 ---
-title: "B2B startup marketing for noobs, by noobs – our most valuable lessons"
+title: 'B2B startup marketing for noobs, by noobs – our most valuable lessons'
 date: 2024-01-04
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/startup-marketing/feature.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/startup-marketing/feature.png
 featuredImageType: full
 tags:
   - Marketing
 crosspost:
   - Founders
-  - Blog  
-seo: {
-  metaTitle: "B2B Startup Marketing for Noobs: What We've Learned in 3 Years",
-  metaDescription: "The most valuable B2B marketing strategy lessons from 3 years of growing a B2B startup from nothing to millions in revenue."
-}  
+  - Blog
+seo:
+  metaTitle: 'B2B Startup Marketing for Noobs: What We''ve Learned in 3 Years'
+  metaDescription: >-
+    The most valuable B2B marketing strategy lessons from 3 years of growing a
+    B2B startup from nothing to millions in revenue.
 ---
 
 In three years, we’ve grown PostHog from nothing in 2020 to tens of thousands of users, millions in revenue, and default alive.
@@ -79,7 +82,7 @@ This means:
 
 2. Avoiding popular design tropes among similar products – how many devtool websites have you seen that look just like Linear?
 
-![posthog website](../images/newsletter/startup-marketing/website.png)
+![posthog website](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/startup-marketing/website.png)
 
 While our marketing and website teams work closely together, the website team has the final say on what appears on posthog.com. This stops the website becoming too marketing-y and falling foul of marketing ‘best practices’ that most developers (and people in general) despise.
 
@@ -89,7 +92,7 @@ A good (and different) website is a great source of word-of-mouth.
 
 Here’s a simplified history of online marketing attribution:
 
-![ryan reynolds](../images/newsletter/startup-marketing/marketing.png)
+![ryan reynolds](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/startup-marketing/marketing.png)
 
 
 Attribution has always been hard, and it’s only getting harder because traditional methods are impeded by privacy regulations. This is a 7/10 problem. The journey from 7/10 to 10/10 will end you.
@@ -130,7 +133,7 @@ Really good search-optimized content is highly leveraged – it’s cheaper than
 
 2. **It’s pointless before PMF** because your product is changing and you’re unlikely to have the domain authority to rank against entrenched rivals.
 
-![SEO journey](../images/newsletter/startup-marketing/seo-journey.png)
+![SEO journey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/startup-marketing/seo-journey.png)
 
 That said, don’t delay once you do have product-market fit. It’ll be tempting to use AI to scale SEO quickly. This is a great strategy if you want to murder your growth every six months when Google tweaks its algorithm.
 

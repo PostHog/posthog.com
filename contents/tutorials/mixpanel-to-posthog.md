@@ -1,10 +1,14 @@
 ---
 title: How to migrate from Mixpanel to PostHog
 date: 2023-03-03
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["configuration", "events", 'product os']
+tags:
+  - configuration
+  - events
+  - product os
 ---
 
 PostHog is a great [alternative to Mixpanel](/blog/best-mixpanel-alternatives), especially if you want to replace other tools for session replay and A/B testing.
@@ -23,7 +27,7 @@ To start with, log in to Mixpanel and go to the project with the data you want t
 2. Hold on to the **username** and **secret** for now. 
 3. You also need your **Project ID** which you can get from your "Project Settings."
 
-![Mixpanel](../images/tutorials/mixpanel-to-posthog/mixpanel.png)
+![Mixpanel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/mixpanel-to-posthog/mixpanel.png)
 
 Next, get the details for PostHog. 
 
@@ -57,11 +61,11 @@ go run .
 
 This triggers some prompts about Mixpanel’s API URL, dates (to avoid rate limits and system crashes), and any data you missed. This should look like this:
 
-![Script](../images/tutorials/mixpanel-to-posthog/script.png)
+![Script](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/mixpanel-to-posthog/script.png)
 
 Once successful, you can find your new data in your PostHog instance.
 
-![PostHog](../images/tutorials/mixpanel-to-posthog/posthog.png)
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/mixpanel-to-posthog/posthog.png)
 
 ## What the tool is doing
 

@@ -2,10 +2,14 @@
 title: How to create an action using the PostHog toolbar
 sidebar: Docs
 showTitle: true
-author: ['joe-martin']
+author:
+  - joe-martin
 date: 2022-10-04
-featuredVideo: https://www.youtube-nocookie.com/embed/C_zNykBHlTI
-tags: ["actions", "toolbar", 'product os']
+featuredVideo: 'https://www.youtube-nocookie.com/embed/C_zNykBHlTI'
+tags:
+  - actions
+  - toolbar
+  - product os
 ---
 
 **Estimated reading time:** 6 minutes ☕☕
@@ -30,7 +34,7 @@ The PostHog toolbar is an overlay across your product and website, which you can
 To get started, visit the page of your website or product which features the element you want to track. If the toolbar is available already you’ll see a floating PostHog logo and can skip the next step, but if not then you’ll need to launch it. 
 
 ### Launching the toolbar
-![Launching the toolbar](../images/tutorials/custom-events-the-easy-way/how-to-create-custom-events-posthog.png)
+![Launching the toolbar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/custom-events-the-easy-way/how-to-create-custom-events-posthog.png)
 
 Before you can launch the toolbar, you need to enable it and authorize it for the URLs you want to launch it on. Luckily, you can do all this from the Toolbar page in your PostHog instance.
 
@@ -44,15 +48,15 @@ If the URL you want isn’t listed, select ‘_+ Add authorized URL_’ and ente
 
 ## Using the toolbar to create new events
 
-![Using the toolbar](../images/tutorials/custom-events-the-easy-way/toolbar.png)
+![Using the toolbar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/custom-events-the-easy-way/toolbar.png)
 
 When the toolbar is launched, you’ll see a floating PostHog logo in your browser. You can drag the logo to reveal obscured elements of the page as needed, and on click it will reveal a pop-out menu, as pictured above.
 
-![Using the toolbar overlay](../images/tutorials/custom-events-the-easy-way/toolbar-actions.png)
+![Using the toolbar overlay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/custom-events-the-easy-way/toolbar-actions.png)
 
 Click ‘_Actions_’ to start creating a new action. This will create a blue overlay that highlights selectable elements. You can select any of these elements to summon a modal which gives you more information about the element. In this modal, click ‘_+ Create a new action_’ to continue.
 
-![create actions the easy way with posthog](../images/tutorials/custom-events-the-easy-way/toolbar-create-action.png)
+![create actions the easy way with posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/custom-events-the-easy-way/toolbar-create-action.png)
 
 Most information in the next modal will be auto-populated with relevant information — that’s why we call this the easy way! However, it’s important to give your new event a descriptive name. Enter this in the ‘_What did your user do?_’ field. A good example of an event name would be '_Clicked Get Started on homepage_' or '_New user signed up_'. 
 
@@ -72,7 +76,7 @@ Sometimes, you may want to create complex events with multiple elements. PostHog
 
 To select additional elements, select `_Add Another Element +_’ from the bottom of the modal. 
 
-![create actions the easy way with posthog](../images/tutorials/custom-events-the-easy-way/multi-element-event-posthog.png)
+![create actions the easy way with posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/custom-events-the-easy-way/multi-element-event-posthog.png)
 
 Next, select ‘_Select Element_’ and click the additional element you want to include in your event — you can then customize the action just like you could with the previous element. 
 

@@ -1,10 +1,12 @@
 ---
 title: How to set up feature flags in Go
 date: 2023-09-27
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["feature flags"]
+tags:
+  - feature flags
 ---
 
 [Feature flags](/docs/feature-flags) are a critical part of delivering code safely. This tutorial shows you how to use them in Go (Golang). We'll create a basic HTTP server, add PostHog, create a feature flag, and implement it in our app to change the response content.
@@ -41,7 +43,7 @@ func main() {
 
 Once created, run `go run main.go` and go to `localhost:8080` to see the response.
 
-![Hello World!](../images/tutorials/go-feature-flags/hello.png)
+![Hello World!](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-feature-flags/hello.png)
 
 ### Setting up user IDs
 
@@ -147,13 +149,13 @@ func main() {
 
 Re-run your `go run main.go` command, go to `localhost:8080`, and an event is captured into your PostHog instance.
 
-![Event captured](../images/tutorials/go-feature-flags/event.png)
+![Event captured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-feature-flags/event.png)
 
 ## Create a feature flag in PostHog
 
 With our Go server and PostHog set up, we can create our feature flag. Go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Set a key (we chose `new-response`), set release conditions to roll out to 100% of users, and press Save.
 
-![Flag set up](../images/tutorials/go-feature-flags/flag.png)
+![Flag set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-feature-flags/flag.png)
 
 Now we can add this flag to our app.
 
@@ -195,7 +197,7 @@ http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
 Now, when we visit our app running locally, we see the flag enabled response. This means our basic Go feature flag is successfully set up.
 
-![Enabled](../images/tutorials/go-feature-flags/enabled.png)
+![Enabled](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/go-feature-flags/enabled.png)
 
 ## Further reading
 

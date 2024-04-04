@@ -1,15 +1,17 @@
 ---
 title: How to set up A/B tests in Astro
 date: 2024-01-29
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/astro-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/astro-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/astro-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/astro-ab-tests/experiment-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-ab-tests/experiment-setup-dark.png"
 
 A/B tests help you make your Astro app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Astro app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -47,7 +49,7 @@ Next, replace the code in `src/pages/index.astro` with a simple heading and butt
 
 Run `npm run dev` and navigate to http://localhost:4321 to see your app in action.
 
-![Basic Astro app](../images/tutorials/astro-ab-tests/basic-app.png)
+![Basic Astro app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -68,7 +70,7 @@ In this file, add your `Web snippet` which you can find in [your project setting
 ---
 
 ---
-<script async>
+<script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init(
     '<ph_project_api_key>',

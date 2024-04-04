@@ -1,13 +1,15 @@
 ---
 title: How to set up analytics in Vue
 date: 2024-01-18
-author: ["lior-neu-ner"]
-tags: ['product analytics']
+author:
+  - lior-neu-ner
+tags:
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/vue-surveys/events-light.png'
-import EventsDark from '../images/tutorials/vue-surveys/events-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-surveys/events-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Vue.js app. To show you how to set up analytics, in this tutorial we create a basic Vue app, add PostHog, and use it to capture pageviews and custom events.
 
@@ -131,7 +133,7 @@ createApp(App).use(router).mount('#app')
 
 The basic setup is now complete. Run `npm run serve` to see your app.
 
-![Basic Vue app](../images/tutorials/vue-analytics/basic-app.png)
+![Basic Vue app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-analytics/basic-app.png)
 
 ## Adding PostHog
 

@@ -1,14 +1,16 @@
 ---
 date: 2023-05-02
-title: "8 annoying A/B testing mistakes every engineer should know"
-author: ['lior-neu-ner']
-featuredImage: ../images/blog/experiment-hog.jpg
+title: 8 annoying A/B testing mistakes every engineer should know
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
-tags: 
+tags:
   - Product engineers
   - AB testing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 
@@ -94,7 +96,7 @@ Alternatively, if you don't have enough statistical power (i.e., not enough user
 
 The solution is to use an A/B test running time calculator to determine if you have the required statistical power to run your experiment and for how long you should run your experiment. This is built into PostHog.
 
-![Setting up a new experiment in PostHog includes a recommended running time calculator](../images/blog/ab-testing-mistakes/minimum-acceptable-improvement.png)
+![Setting up a new experiment in PostHog includes a recommended running time calculator](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ab-testing-mistakes/minimum-acceptable-improvement.png)
 <Caption>Setting up a new experiment in PostHog includes a recommended running time calculator</Caption>
 
 ## 4. Running an experiment without testing it first
@@ -153,7 +155,7 @@ This also makes it easier to investigate the experiment results, especially when
 
 Not everything that can be measured matters. Not everything that matters can be measured. It's important to remember that there can be other reasons for shipping things besides for metric changes, such as solving user pain points, or creating enjoyable user experiences.
 
-[Raquel](/handbook/company/team), one of our growth engineers here at PostHog, shares an example:
+[Raquel](/people), one of our growth engineers here at PostHog, shares an example:
 
 > "We ran an experiment on our sign-up page to make our social login buttons more prominent (e.g., "Sign up with Google" and "Sign up with GitHub") instead of signing up with email and password. While more people signed up using Google and Github, overall sign-ups didn't increase, and nor did activation. Ultimately, we decided to ship the change since we felt that social login lowers friction, and provides a better user experience."
 

@@ -3,7 +3,8 @@ date: 2022-08-31
 title: How to run a transparent startup
 author:
   - james-hawkins
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 tags:
   - Founders
@@ -11,7 +12,7 @@ tags:
   - Being a founder
   - Ops & finance
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 There really hasn't been a single situation where transparency hasn't been to our company's advantage.

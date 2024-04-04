@@ -2,9 +2,12 @@
 title: A non-technical guide to understanding data in PostHog
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2022-11-28
-tags: ["data management", 'product os']
+tags:
+  - data management
+  - product os
 ---
 
 Non-technical users have many tools in PostHog for gaining insights from their product data. You don’t need to be a software engineer, but you do need some knowledge of your data. Knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user.
@@ -19,7 +22,7 @@ In school, using someone else’s work is cheating; in real life, it's “collab
 
 The best place to do this is through the dashboards and insights other people in your organization created. To find them, click “Dashboards” on the sidebar. If you’re looking for the most important ones, they might be under “Pinned.”
 
-![Dashboards](../images/tutorials/non-technical-guide-to-data/dashboards.png)
+![Dashboards](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/non-technical-guide-to-data/dashboards.png)
 
 When you click into a dashboard, don’t only look at the visualizations, but click “show details” to show the queries and filters behind them. Even better, click on the title of the visualizations, go to the insight detail view, and click Edit (don’t worry, we won’t save the changes).
 
@@ -38,7 +41,7 @@ Once you’ve explored dashboards and understood how data is used, it is time to
 
 You can sort all of these types of data to learn how often your team is using it. For example, by sorting by “30-day volume,” you can see the number of those events your product captures each month. By sorting by “30-day query count,” you can see how often your team uses events or properties to calculate visualizations (insights) in PostHog.
 
-![Data management](../images/tutorials/non-technical-guide-to-data/data-management.png)
+![Data management](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/non-technical-guide-to-data/data-management.png)
 
 Understanding the events, actions, and properties in PostHog, and what your team is actually using, should give you some ideas of what data is available, and what is important. This is useful when you go to create insights.
 
@@ -48,7 +51,7 @@ Another way to understand the data in PostHog is to see the captured events from
 
 To do this, click the “Activity” tab, then click “Add filter.” Search “Person properties” for an identifier for your company uses like username or email. Enter your email or username and you should see all the events your product has captured from you (if identifying users is set up).
 
-![Live events](../images/tutorials/non-technical-guide-to-data/live-events.png)
+![Live events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/non-technical-guide-to-data/live-events.png)
 
 Once you’ve set these filters, go to another tab, and click around your product more. This generates new data that loads into the event list. It gives you a better idea of how usage connects to data in PostHog.
 
@@ -60,7 +63,7 @@ Watching a session recording is similar to watching live events of a specific pe
 
 Similar to watching live events to generate, you can watch session recordings you generate. To do this, go to “Recordings,” click “Add filter” under “Filter by persons and cohorts,” search for email or username (or identifier) again, then enter yours. You should get a list of session recordings to help you induce déjà vu.
 
-![Session recordings](../images/tutorials/non-technical-guide-to-data/session-recordings.png)
+![Session recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/non-technical-guide-to-data/session-recordings.png)
 
 A “real” useful case is watching session recordings of parts of the site you care about. To do this, use your knowledge of the data in PostHog to filter for events that include the areas you care about. This could be specific events like a button click or specific event properties like a `current_url`. You can then filter for events within a session recording to find the exact moments you want. 
 

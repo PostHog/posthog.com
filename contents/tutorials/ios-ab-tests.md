@@ -1,8 +1,9 @@
 ---
-title: "How to run A/B tests in iOS"
+title: How to run A/B tests in iOS
 date: 2023-11-16
 author: ["lior-neu-ner"]
 tags: ['experimentation']
+featuredVideo: https://www.youtube-nocookie.com/embed/BtHeP8lORJY
 ---
 
 [A/B tests](/ab-testing) help you make your iOS app better by comparing the impact of changes on key metrics. 
@@ -76,15 +77,15 @@ struct FeatureScreenView: View {
 
 Our basic set up is now complete. Build and run your app to test that it's working.
 
-![Basic setup of the iOS app](../images/tutorials/ios-ab-tests/app-setup.mp4)
+![Basic setup of the iOS app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/app-setup.mp4)
 
 ## Adding PostHog to your iOS app
 
 First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods) or [Carthage](/docs/libraries/ios#carthage)). To add the package dependency to your Xcode project, select File > Add Package Dependency and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
-Note that for this tutorial we use version `2.1.0` of the SDK.
+Note that for this tutorial we use version `3.1.0` of the SDK.
 
-![Add PostHog from Swift Package Manager](../images/tutorials/ios-ab-tests/swift-npm.png)
+![Add PostHog from Swift Package Manager](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/swift-npm.png)
 
 Next, configure your PostHog instance in your `App.swift` struct initializer:
 
@@ -96,10 +97,10 @@ import PostHog
 @main
 struct App: App {
     init() {
-        let configuration = PHGPostHogConfiguration(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
-        configuration.captureApplicationLifecycleEvents = true
-        configuration.recordScreenViews = true
-        PHGPostHog.setup(with: configuration)
+        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        let POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) 
+        PostHogSDK.shared.setup(configuration)
     }
     
     var body: some Scene {
@@ -121,7 +122,7 @@ import PostHog
 // ...rest of code
 
 Button("Click Me!") {
-    PHGPostHog.shared()?.capture("feature_button_clicked")
+    PostHogSDK.shared.capture("feature_button_clicked")
 }
 
 // ...rest of code
@@ -129,7 +130,7 @@ Button("Click Me!") {
 
 To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [activity tab](https://app.posthog.com/events).
 
-![iOS events captured](../images/tutorials/ios-ab-tests/event-captured.png)
+![iOS events captured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/event-captured.png)
 
 ## Create an A/B test in PostHog
 
@@ -144,7 +145,7 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![Experiment setup in PostHog](../images/tutorials/ios-ab-tests/experiment-setup.png)
+![Experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/experiment-setup.png)
 
 ## Implement the A/B test in Xcode
 
@@ -175,7 +176,7 @@ import PostHog
 
                Button("Go to Next Screen") {
                     // Fetch feature flag here
-                    let flagValue = PHGPostHog.shared()?.getFeatureFlag("ios-background-color-experiment") as? String
+                    let flagValue = PostHogSDK.shared.getFeatureFlag("ios-background-color-experiment") as? String
                     if flagValue == "test" {
                         isTestVariant = true
                     }
@@ -201,5 +202,5 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 ## Further reading
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
+- [How to set up analytics in iOS](/tutorials/ios-analytics)
 - [How to set up feature flags in iOS](/tutorials/ios-feature-flags)

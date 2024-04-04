@@ -1,17 +1,19 @@
 ---
 title: How to set up feature flags in Nuxt
 date: 2024-01-23
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/nuxt-feature-flags/events-light.png'
-import EventsDark from '../images/tutorials/nuxt-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/nuxt-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/nuxt-feature-flags/create-flag-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-feature-flags/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you release features and conditionally show content. This tutorial shows you how integrate them in your Nuxt.js app using PostHog. 
 
@@ -39,7 +41,7 @@ Replace the code in `app.vue` with a simple heading:
 
 Run `npm run dev` to start your app.
 
-![Basic app](../images/tutorials/nuxt-surveys/basic-app.png)
+![Basic app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-surveys/basic-app.png)
 
 ## Adding PostHog on the client side
 
@@ -150,7 +152,7 @@ onMounted(() => {
 
 When you run your app now, you should see the updated text.
 
-![New app after adding the flag](../images/tutorials/nuxt-feature-flags/flag-enabled-in-app.png)
+![New app after adding the flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-feature-flags/flag-enabled-in-app.png)
 
 ## Implementing flag code on the server side
 

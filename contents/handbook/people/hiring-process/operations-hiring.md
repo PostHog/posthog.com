@@ -31,7 +31,7 @@ This is our usual first round interview with a member of the People & Ops team.
 
 #### Technical Interview 
 
-The [technical interview](/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](/handbook/small-teams/people) as well as [Charles](/community/profiles/254). For this round, you can expect questions about your background, together with scenario-based questions. 
+The [technical interview](/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](/teams/people) as well as [Charles](/community/profiles/254). For this round, you can expect questions about your background, together with scenario-based questions. 
 
 #### Operations SuperDay
 

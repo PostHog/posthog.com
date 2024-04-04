@@ -46,42 +46,30 @@ const MyComponent = () => {
     const posthog = usePostHog()
 
     useEffect(() => {
-        posthog?.capture("mycomponent_loaded", { foo: "bar" })
+        posthog.capture("mycomponent_loaded", { foo: "bar" })
     }, [])
 }
 ```
 
-### Configuration
-
 #### Without the PosthogProvider
 
-Due to the async nature of React Native, PostHog needs to be initialized asynchronously for the persisted state to load properly. The `PosthogProvider` takes care of this under-the-hood but you can alternatively create the instance yourself like so:
 
 ```react-native
 // posthog.ts
 import PostHog from 'posthog-react-native'
 
-export let posthog: PostHog | undefined = undefined
-
-export const posthogAsync: Promise<PostHog> = PostHog.initAsync('<ph_project_api_key>', {
+export const posthog = new PostHog('<ph_project_api_key>', {
   // usually 'https://app.posthog.com' or 'https://eu.posthog.com'  
   host: '<ph_instance_address>' // TIP: host is optional if you use https://app.posthog.com
 })
 
-posthogAsync.then(client => {
-  posthog = client
-})
-
 
 // app.ts
-import { posthog, posthogAsync} from './posthog'
+import { posthog } from './posthog'
 
 export function MyApp1() {
     useEffect(async () => {
-        // Use posthog optionally with the possibility that it may still be loading
-        posthog?.capture('myapp1_loaded')
-        // OR use posthog via the promise
-        (await posthogAsync).capture('myapp1_loaded')
+        posthog.capture('myapp1_loaded')
     }, [])
 
     return <View>Your app code</View>
@@ -90,7 +78,7 @@ export function MyApp1() {
 
 // You can even use this instance with the PostHogProvider
 export function MyApp2() {
-  return <PostHogProvider client={posthogAsync}>{/* Your app code */}</PostHogProvider>
+  return <PostHogProvider client={posthog}>{/* Your app code */}</PostHogProvider>
 }
 ```
 
@@ -99,26 +87,37 @@ export function MyApp2() {
 You can further customize how PostHog works through its configuration on initialization.
 
 ```ts
-export const posthog = await PostHog.initAsync("<ph_project_api_key>", {
-    // PostHog API host, usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-    host?: string = "<ph_instance_address>", // TIP: host is optional if you use https://app.posthog.com
-    // The number of events to queue before sending to PostHog (flushing)
+export const posthog = new PostHog("<ph_project_api_key>", {
+    /** PostHog API host (usually 'https://app.posthog.com' by default or 'https://eu.posthog.com') */
+    host?: string, // TIP: host is optional if you use https://app.posthog.com
+    /** The number of events to queue before sending to PostHog (flushing) */
     flushAt?: number = 20,
-    // The interval in milliseconds between periodic flushes
-    flushInterval?: number = 10000
-    // If set to false, tracking will be disabled until 'optIn' is called
-    enable?: boolean = true,
-    // Whether to track that 'getFeatureFlag' was called (used by Experiments)
+    /** The interval in milliseconds between periodic flushes */
+    flushInterval?: number = 10000,
+    /** If set to true the SDK is essentially disabled (useful for local environments where you don't want to track anything) */
+    disabled?: boolean,
+    /** If set to false the SDK will not track until the `optIn` function is called. */
+    defaultOptIn?: boolean = true,
+    /** Whether to track that `getFeatureFlag` was called (used by Experiments) */
     sendFeatureFlagEvent?: boolean = true,
-    // Whether to load feature flags when initialised or not
+    /** Whether to load feature flags when initialized or not */
     preloadFeatureFlags?: boolean = true,
-    // How many times we will retry HTTP requests
+    /** Option to bootstrap the library with given distinctId and feature flags */
+    bootstrap?: {
+        distinctId?: string
+        isIdentifiedId?: boolean
+        featureFlags?: Record<string, boolean | string>
+        featureFlagPayloads?: Record<string, JsonType>
+    },
+    /** How many times we will retry HTTP requests */
     fetchRetryCount?: number = 3,
-    // The delay between HTTP request retries
+    /** The delay between HTTP request retries */
     fetchRetryDelay?: number = 3000,
-    // For Session Analysis how long before we expire a session
-    sessionExpirationTimeSeconds?: number = 1800 // 30 mins
-    // Whether to post events to PostHog in JSON or compressed format
+    /** Timeout in milliseconds for any calls. Defaults to 10 seconds. */
+    requestTimeout?: number = 10000,
+    /** For Session Analysis how long before we expire a session (defaults to 30 mins) */
+    sessionExpirationTimeSeconds?: number = 1800,
+    /** Whether to post events to PostHog in JSON or compressed format */
     captureMode?: 'json' | 'form'
 })
 ```

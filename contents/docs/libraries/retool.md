@@ -1,6 +1,7 @@
 ---
 title: Retool
-icon: ../../images/docs/integrate/frameworks/retool.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/retool.svg
 ---
 
 ## Objective
@@ -24,7 +25,7 @@ To follow this tutorial along, you should:
 
 First, create a new app from the Retool dashboard:
 
-![Retool Dashboard](../../images/tutorials/retool/dashboard.png)
+![Retool Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/retool/dashboard.png)
 
 You will then need to create a new resource i.e. set up the configuration for where you'll pull the date from. If you have not created any resources before, Retool will prompt you to create one. 
 
@@ -40,7 +41,7 @@ To see the difference in speed, check out our [demo Retool app](https://phtestin
 
 <a href="https://phtesting.retool.com/embedded/public/6f20bb59-4199-4c75-ac7d-eee38a7b6b71" target="_blank">
 
-![Retool Demo App](../../images/tutorials/retool/demo-app.png)
+![Retool Demo App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/retool/demo-app.png)
 
 </a>
 
@@ -61,7 +62,7 @@ Integrating Retool with PostgreSQL directly is rather simple.
 
     <br />
     
-    ![Retool REST](../../images/tutorials/retool/rest.png)
+    ![Retool REST](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/retool/rest.png)
     
     <br />
 
@@ -80,7 +81,7 @@ To handle pagination in Retool and show results beyond the first "page", we need
 
     <br />
     
-    ![Retool Magic](../../images/tutorials/retool/magic.png)
+    ![Retool Magic](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/retool/magic.png)
     
     <br />
 
