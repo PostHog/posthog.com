@@ -276,6 +276,8 @@ const fetchChatGPTResponse = async () => {
       const endTime = performance.now();
       const responseTime = endTime - startTime;
 
+      const inputCostInDollars = chatCompletion.usage.prompt_tokens * selectedModel.token_input_cost
+      const outputCostInDollars = chatCompletion.usage.completion_tokens * selectedModel.token_output_cost
       posthog.capture('chat_completion', {
         model: chatCompletion.model,
         prompt: userInput,
