@@ -34,28 +34,7 @@ There are a few ways to capture a user doing an event for the first time. We cov
 
 ## How do I migrate events or rows into PostHog?
 
-If you're migrating a large amount of data (20 million rows or 10k requests per minute), please contact [sales@posthog.com](mailto:sales@posthog.com) to make sure you aren't rate limited.
-
-When you do a migration, be sure to set the `historical_migration` value to `true` like this:
-
-```bash
-curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
-  "historical_migration": true,
-  "batch": [
-    {
-      "event": "batched_event_name_1",
-      "properties": {
-        "distinct_id": "user distinct id",
-      },
-      "timestamp": "[optional timestamp in ISO 8601 format]"
-    }
-    # ...
-  ]
-}' https://app.posthog.com/batch/ 
-```
-
-See [our migration docs](/docs/migrate/ingest-historic-data) for more information.
+See our [migration docs](/docs/migrate) for the full details.
 
 ## How do I do real time exports?
 
@@ -68,3 +47,23 @@ If you're not on the enterprise plan, check out our [webhook issue](https://gith
 ## Where are my missing events?
 
 See our troubleshooting guide for [events not appearing in a project](/docs/product-analytics/troubleshooting#why-are-events-not-appearing-in-my-project).
+
+## Why can't I use the UI or events API to export data?
+
+You can, but they are rate-limited. [Batch exports](/docs/cdp/batch-exports) should be your default. The table below compares the options: 
+
+Method | When? | Limitations
+--- | --- | ---
+PostHog UI - click "Export" on the events table | You need to export a small number of events | 3,500 events
+Events API | Great for one-off smaller exports | 1 day date range and 3,500 events
+Batch exports | You need to export a large number of events, can be used for continuous exports | No limits
+
+If that isn't clear enough, here's a decision tree you might find useful:
+
+```mermaid
+graph TD
+    A[Do you need to export more than 3,500 events?] --> |Yes| B[Use batch exports]
+    A --> |No| C[Do you need to run regular exports e.g. once a day or once a week?]
+    C --> |Yes| B
+    C --> |No| E[Use the PostHog UI or the Events API]
+```

@@ -4,11 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-> Prior to beginning a historical data import please ensure you do the following:
-> 1. Create a project on our [US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) Cloud
-> 2. Sign up to a paid plan on the billing page in-app (historic imports are not billable but this will unlock the necessary features).
-> 3. Raise an in-app support request (Target Area: Data Management) detailing where you are sending events from and the total volume.
-> 4. Wait for the OK from our team before starting the migration process to ensure that it completes successfully and is not rate limited.
+import MigrationWarning from "./_snippets/migration-warning.mdx"
+
+<MigrationWarning />
 
 ## Requirements
 
@@ -22,7 +20,9 @@ showTitle: true
 This migration has 3 steps:
 
 1. [Migrate your metadata](#migrate-your-metadata) (projects, dashboards, insights, actions, cohorts, feature flags, experiments, annotations).
+
 2. [Migrate your events](#migrate-your-events), this also creates the necessary person, person distinct ID, and related records.
+
 3. [Switch tracking in your product](#switching-tracking-in-you-product) to set-up replication from the old project if needed and to start sending events to the new project.
 
 ## Migrate your metadata
@@ -52,7 +52,9 @@ For more information on the options see the [repo's readme](https://github.com/P
 
 ## Migrate your events to Cloud
 
-> Before you start, disable all the apps in the destination cloud project (e.g. GeoIP). Keeping these enabled may change the events you are migrating.
+Before you start, disable all the apps in the destination cloud project (e.g. GeoIP). Keeping these enabled may change the events you are migrating.
+
+> For more details about historical migrations, see our [migration docs](/docs/migrate).
 
 ### From self-hosted to Cloud
 
@@ -103,15 +105,11 @@ python3 ./migrate.py \
 > - This script adds a `$lib` property of `posthog-python`, overriding any `$lib` property already set.
 > - If the script fails for some reason, just run it again with the latest cursor. There are some transient issues that can happen that are solved by re-running the script.
 
-### Between Cloud instances (e.g. US Cloud to EU CLoud)
+### Between Cloud instances (e.g. US -> EU Cloud)
 
-You will need to ask us to do the events migration for you by [raising a support ticket in the app](https://app.posthog.com/home#supportModal). Please note that this option is only available to paying customers as it requires significant engineering time. 
+You must raise a [support ticket in-app](https://app.posthog.com/home#supportModal) for the PostHog team to do this migration for you. This option is **only available to paying customers** as it requires significant engineering time. 
 
-We are currently unable to support migrating between US and EU Cloud for non-paying users. 
-
-### Importing historical events
-
-You'll only be charged for events within the current month. However, you can import historical events into PostHog at no cost. Reach out to sales@posthog.com if you are planning to import more than 20M events.
+We are unable to support migrating between US and EU Cloud for non-paying users at this time. 
 
 ## Switching tracking in your product
 
@@ -127,18 +125,18 @@ Now that we've migrated our events, the next step is to switch over tracking wit
 
 If the app was filtering or transforming events before ingestion:
 
-1. (fastest option) check to see if we already have an app that does what you need. You can see the list of apps [here](/docs/cdp), look for ingestion filtering and event transformation.
-2. (also fast) you could move this logic from the PostHog app into your client before you send the event. 
-3. If you can make your app generalizable enough that others can benefit then [submit your app](/docs/apps/build/tutorial#submitting-your-app) to the store.
+1. Check if we already have an app that does what you need (fastest option). You can see the list of apps [here](/docs/cdp), look for ingestion filtering and event transformation.
 
-    - To make it generalizable you'll want to convert anything specific to your configuration into a plugin.json config value
+2. Move this logic your app before you send the event (also fast).
 
-If the app was used to send events to a custom destination:
+3. If you can make your app generalizable enough that others can benefit, [submit your app](/docs/apps/build/tutorial#submitting-your-app) to the store. To do this, convert anything specific to your configuration into a `plugin.json` config value.
 
-1. (fastest option) check to see if we already have an app that does what you need. You can see the list of apps [here](/docs/cdp), look for batch exports and destinations. 
-2. (also fast) Convert your app to work as a webhook. We are soon releasing a webhook destination. You can subscribe for updates on the [roadmap](https://github.com/PostHog/posthog/issues/13989)
-3. If you can make your app generalizable enough that others can benefit then [submit your app](/docs/apps/build/tutorial#submitting-your-app) to the store.
+If the app is used to send events to a custom destination:
 
-    - To make it generalizable you'll want to convert anything specific to your configuration into a plugin.json config value
+1. Check to see if we already have an app or batch export that does what you need (fastest option). You can see the list of apps [here](/docs/cdp), look for batch exports and destinations. 
 
-If the options above don't work and you were previously paying a substantial amount self-hosting then email us at [sales@posthog.com](mailto:sales@posthog.com) with a link to the public GitHub repo and we can see if it's appropriate as a private cloud app.
+2. Convert your app to work as a webhook (also fast). We are soon releasing a webhook destination. You can subscribe for updates on the [roadmap](https://github.com/PostHog/posthog/issues/13989)
+
+3. If you can make your app generalizable enough that others can benefit then [submit your app](/docs/apps/build/tutorial#submitting-your-app) to the store. To do this, you must convert anything specific to your configuration into a `plugin.json` config value
+
+If the options above don't work and you were previously paying a substantial amount self-hosting, then email us at [sales@posthog.com](mailto:sales@posthog.com) with a link to the public GitHub repo and we can see if it's appropriate as a private cloud app.
