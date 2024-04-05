@@ -1,5 +1,5 @@
 ---
-title: How to set up analytics for ChatGPT
+title: How to set up LLM analytics for ChatGPT
 date: 2024-04-05
 author:
   - lior-neu-ner
