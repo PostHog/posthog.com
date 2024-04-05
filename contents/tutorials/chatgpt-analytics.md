@@ -18,7 +18,7 @@ export const ResponseTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upl
 export const ResponseTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712240925/posthog.com/contents/blog/response-time-dark.png"
 
 
-Tracking your ChatGPT API usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM features. In this tutorial, we show you how to monitor important metrics such as:
+Tracking your ChatGPT API usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM powered features. In this tutorial, we show you how to monitor important metrics such as:
 
 - Total cost
 - Average cost per user
@@ -32,7 +32,7 @@ To showcase how to track important metrics, we create a simple one-page React ap
 
 - A form with textfield and button for user input.
 - A label to show ChatGPT output.
-- A dropdown to select different [ChatPT models](https://platform.openai.com/docs/models).
+- A dropdown to select different [OpenAI models](https://platform.openai.com/docs/models).
 
 First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then run the following script to create a new React app and install both the [OpenAI JavaScript](https://platform.openai.com/docs/libraries/typescript-javascript-library) and [PostHog Web](/docs/libraries/js) SDKs:
 
@@ -43,14 +43,14 @@ npm install --save openai
 npm install --save posthog-js
 ```
 
-Next, we set up Posthog using our API key and host (You can find these in [your project settings](https://app.posthog.com/project/settings)). Replace the code in `src/index.js` with the following:
+Next, we set up Posthog using our API key and host (You can find these in [your project settings](https://us.posthog.com/settings/project)). Replace the code in `src/index.js` with the following:
 
 ```js file=src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { PostHogProvider} from 'posthog-js/react'
+import { PostHogProvider } from 'posthog-js/react'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -173,7 +173,6 @@ With our app set up, we can begin [capturing events](/docs/product-analytics/cap
 - `output_cost_in_dollars` i.e. `completion_tokens` * `token_input_cost`
 - `total_cost_in_dollars` i.e. `input_cost_in_dollars + output_cost_in_dollars`
 
-
 Update your `fetchChatGPTResponse()` function in `App.js` to capture this event:
 
 ```js file=App.js
@@ -188,21 +187,23 @@ const fetchChatGPTResponse = async () => {
           content: userInput }],
         model: selectedModel.name,
       });
+      const inputCostInDollars = chatCompletion.usage.prompt_tokens * selectedModel.token_input_cost
+      const outputCostInDollars = chatCompletion.usage.completion_tokens * selectedModel.token_output_cost
       posthog.capture('chat_completion', {
         model: chatCompletion.model,
         prompt: userInput,
         prompt_tokens: chatCompletion.usage.prompt_tokens,
         completion_tokens: chatCompletion.usage.completion_tokens,
         total_tokens: chatCompletion.usage.total_tokens,
-        input_cost_in_dollars: chatCompletion.usage.prompt_tokens * selectedModel.token_input_cost,
-        output_cost_in_dollars: chatCompletion.usage.prompt_tokens * selectedModel.token_output_cost,
+        input_cost_in_dollars: inputCostInDollars,
+        output_cost_in_dollars: outputCostInDollars,
         total_cost_in_dollars: inputCostInDollars + outputCostInDollars
       })
 
       // your existing code...
 ```
 
-Refresh your app and submit a few prompts. You should then see your events captured in the [PostHog Activity tab](https://us.posthog.com/events).
+Refresh your app and submit a few prompts. You should then see your events captured in the [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={EventsLight} 
@@ -241,7 +242,7 @@ This metric helps give you an idea of how your costs will scale as your product 
 1. Set the event to `chat_completion`
 2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
 3. Select the `total_cost_in_dollars` property.
-4. Click **+ Add graph series**.
+4. Click **+ Add graph series** (if your visual is set to `number`, switch it back to `trend` first).
 5. Keep the event name as `All events`, but change the value from `Total count` to `Unique users`.
 6. Click **Enable formula mode**.
 7. In the formula box, enter `A/B`.
@@ -305,7 +306,7 @@ Then, after capturing a few events, create a new insight to calculate the averag
 
 ## Next steps
 
-We've shown you the basics of creating insights from your product's ChatGPT usage. With this, you can uncover important data related to your app. Below is an example of product questions you may want to investigate further.
+We've shown you the basics of creating insights from your product's ChatGPT API usage.  Below are more examples of product questions you may want to investigate:
 
 - How many of my users are interacting with my LLM features?
 - Are there generation latency spikes?
