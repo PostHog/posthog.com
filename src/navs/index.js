@@ -227,6 +227,16 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
+        name: 'Exec',
+        url: '',
+        children: [
+            {
+                name: 'Annual planning',
+                url: '/handbook/exec/annual-planning',
+            },
+        ],
+    },
+    {
         name: 'Sales & CS',
         url: '',
         children: [
