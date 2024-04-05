@@ -30,8 +30,8 @@ export default function InsidePostHog() {
         <Layout parent={communityMenu}>
             <SEO title="Community - PostHog" />
 
-            <section className="bg-accent grid grid-cols-[200px_1fr_200px] my-4 mx-5 p-2 items-center">
-                <div className="text-sm pl-4">
+            <section className="bg-accent grid md:grid-cols-[200px_1fr_200px] my-4 mx-5 p-2 items-center">
+                <div className="hidden md:block text-sm pl-4">
                     {currentDate.toLocaleDateString('en-US', {
                         weekday: 'long',
                         year: 'numeric',
@@ -42,7 +42,7 @@ export default function InsidePostHog() {
                 <div className="text-center py-4">
                     <InsidePostHogLogo className="h-[78px] mx-auto" />
                 </div>
-                <div className="pr-4">
+                <div className="hidden md:block pr-4">
                     <div className="flex gap-1 items-center justify-end">
                         <span className="text-green text-2xl -mt-1">&bull;</span>
                         <span className="text-sm">All systems operational</span>
@@ -51,11 +51,11 @@ export default function InsidePostHog() {
             </section>
 
             <section
-                className={`grid grid-cols-[300px_1fr_300px] gap-4 mx-auto px-5 mb-12 ${
+                className={`grid md:grid-cols-[300px_1fr_300px] gap-4 mx-auto px-5 mb-12 ${
                     fullWidthContent ? 'max-w-[1400px] mx-auto' : ''
                 }`}
             >
-                <aside className="bg-accent p-4 flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+                <aside className="order-3 md:order-none bg-accent p-4 flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
                     <div>
                         <h3 className="text-base mb-1">A note from the editor</h3>
                         <p className="text-sm mb-2">
@@ -76,7 +76,7 @@ export default function InsidePostHog() {
                         </p>
                     </div>
                 </aside>
-                <div className="px-4 border-x border-light dark:border-dark">
+                <div className="order-1 md:order-none md:px-4 md:border-x border-light dark:border-dark">
                     <div
                         className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 ${
                             fullWidthContent ? 'max-w-2xl mx-auto' : ''
@@ -143,7 +143,7 @@ export default function InsidePostHog() {
                         </div>
                     </div>
                 </div>
-                <aside className="bg-accent">
+                <aside className="order-2 md:order-none bg-accent">
                     <div className="py-4">
                         <h3>Questions</h3>
                     </div>
