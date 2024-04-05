@@ -12,7 +12,7 @@ Changes to the plan can happen outside of this schedule - this is a rough guide,
 
 <OverflowXSection>
 
-|        | January                 | February                | March                   | April                   | May                     | June                    | July                    | August                  | September               | October                 | November                | December              |
+|   &nbsp;     | January                 | February                | March                   | April                   | May                     | June                    | July                    | August                  | September               | October                 | November                | December              |
 | ------ | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- | --------------------- |
 | _Week 1_ | Monthly accounts review | Board meeting           |                         |                         | Board meeting           | H2 financial reforecast |                         | Board meeting           |                         |                         | Board meeting           | Financial forecast    |
 | _Week 2_ | 12 month product plan   |                         | Q2 goal setting        | 12 month product plan   | Whole company offsite   | Q3 goal setting        | 12 month product plan   |                         | Q4 goal setting        | 12 month product plan   |                         | Q1 goal setting      |
