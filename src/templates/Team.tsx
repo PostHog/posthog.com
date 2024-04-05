@@ -218,7 +218,8 @@ const DescriptionForm = ({ onSubmit, initialValues = { description: '' } }) => {
 export default function Team({
     data: {
         mdx: { body },
-        team: { crest, name, roadmaps, teamImage },
+        allSlackEmoji: { totalCount: totalSlackEmojis },
+        team: { crest, name, roadmaps, teamImage, ...other },
         objectives,
     },
     pageContext,
@@ -279,6 +280,8 @@ export default function Team({
         (heightToHedgehogs % 1 !== 0 &&
             Math.round(hedgehogImageWidth * (heightToHedgehogs - Math.floor(heightToHedgehogs)))) ||
         0
+
+    const emojis = other?.emojis?.filter((emoji) => !!emoji?.name)
 
     return (
         <Layout>
@@ -456,7 +459,7 @@ export default function Team({
                     </div>
 
                     {profiles?.data?.length > 0 && (
-                        <div className="w-full lg:max-w-sm shrink-1 basis-sm space-y-4 divide-y divide-gray-accent-light dark:divide-gray-accent-dark">
+                        <div className="w-full lg:max-w-[420px] shrink-1 basis-sm space-y-4 divide-y divide-gray-accent-light dark:divide-gray-accent-dark">
                             <SidebarSection title="Small team FAQ">
                                 <p className="font-bold m-0 text-sm">Q: Does pineapple belong on pizza?</p>
                                 <p className="font-bold m-0 mt-2 text-sm">A: {PineappleText(pineapplePercentage)}</p>
@@ -482,6 +485,22 @@ export default function Team({
                                     </ul>
                                 </SidebarSection>
                             </div>
+                            {emojis?.length > 0 && (
+                                <div className="pt-4">
+                                    <h5 className="m-0 text-base font-normal">
+                                        This team has created <strong>{emojis?.length}</strong> of our{' '}
+                                        <strong>{totalSlackEmojis}</strong> custom Slack emojis.
+                                    </h5>
+                                    <p className="text-sm m-0">Here are a few standouts.</p>
+                                    <ul className="list-none m-0 p-0 mt-2">
+                                        {emojis?.map(({ name, url }) => (
+                                            <li key={name}>
+                                                <img className="w-[48px] h-[48px]" src={url} />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
@@ -572,6 +591,10 @@ export const query = graphql`
         team: squeakTeam(name: { eq: $teamName }) {
             name
             description
+            emojis {
+                name
+                url
+            }
             teamImage {
                 caption
                 gatsbyImageData(width: 380, placeholder: BLURRED)
@@ -616,6 +639,9 @@ export const query = graphql`
         }
         objectives: mdx(fields: { slug: { eq: $objectives } }) {
             body
+        }
+        allSlackEmoji {
+            totalCount
         }
     }
 `

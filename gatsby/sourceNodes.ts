@@ -365,4 +365,28 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
     }
+
+    const fetchSlackEmojis = async () => {
+        const slackToken = process.env.SLACK_API_KEY
+        const { emoji } = await fetch('https://slack.com/api/emoji.list', {
+            headers: {
+                Authorization: `Bearer ${slackToken}`,
+            },
+        }).then((res) => res.json())
+        Object.entries(emoji).forEach(([name, url]) => {
+            const node = {
+                id: createNodeId(`slack-emoji-${name}`),
+                internal: {
+                    type: 'SlackEmoji',
+                    contentDigest: createContentDigest(url),
+                },
+                name,
+                url,
+            }
+            createNode(node)
+        })
+    }
+    if (process.env.SLACK_API_KEY) {
+        await fetchSlackEmojis()
+    }
 }
