@@ -1,23 +1,25 @@
-### 💪 Deploy with confidence
+### 💪 Deploy with confidence (follow up from Q1)
 Our deploy speed keeps us moving fast but bigger changes would benefit from better tooling to gradually roll out, validate and roll back if necessary.
 
-- Auto rollbacks with orchestration / blocking new deploys
-- Canary deployments
-- Load testing
-- Investigate something like envoy perhaps to enable traffic shadowing + canary deploys
-- Finish helm charts work
-- Anomaly detection
+- [ ] Support new rust capture to full release using our new ingress system
+- [ ] Finalize our canary deploy process
 
-### 💰 Keep costs under control
-- Keep on top of the great work so far to keep costs under control
-- Tackle remaining clear improvements (Cloudfront costs, reserved instances etc.)
-- Kafka ops work including tiered storage
+### 🚨 Improved alerting and monitoring
 
-### 👀 Yet more Observability  
-- CI/CD times (measuring it to know where the pain points are)
-- Cost of resources per product 
-- Get tracing solution firmly into the hands and minds of teams
+We have a pretty solid alerting and monitoring solution but there is always room for improvement. There is as much here about scaling to our number of products and teams as there is technical scaling
 
-### 🎯 Security as a feature
-- Investigate pragmatic parts of SOC 2 type II we could already be moving towards
+- [ ] Improve process around planning and detecting gaps in our alerting
+- [ ] Improve capacity planning (process as well as implementation)
+- [ ] Alerting on reverse proxy solutions
+- [ ] Make the internal tooling around creating alerts to be more opinionated
+- [ ] Swap to a more scalable solution for log aggregation
 
+### 🔒 Deeper Security
+
+Security is a never ending journey. We want to do some work to get ahead of the curve and protect things 
+
+- [ ] Extend secret management tooling to more areas
+- [ ] Improved logging and auditing
+
+### 💰 Continued cost control
+- [ ] Focus on our biggest cost centers where we can make the biggest impact
