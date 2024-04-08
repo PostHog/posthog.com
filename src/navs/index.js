@@ -1658,12 +1658,12 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Migrate & export',
-                    url: '',
+                    name: 'Migrate',
+                    url: '/docs/migrate',
                     children: [
                         {
-                            name: 'Ingest historical data',
-                            url: '/docs/migrate/ingest-historic-data',
+                            name: 'Overview',
+                            url: '/docs/migrate',
                         },
                         {
                             name: 'Migrate to PostHog Cloud',
@@ -1672,10 +1672,6 @@ export const docsMenu = {
                         {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
-                        },
-                        {
-                            name: 'Export your events',
-                            url: '/docs/migrate/export-events',
                         },
                     ],
                 },
