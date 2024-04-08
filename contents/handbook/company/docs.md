@@ -15,7 +15,7 @@ showTitle: true
   - Polishing draft documentation created by product teams.
   - Identifying and improving low quality documentation.
    - Ensuring screenshots and other visual elements are up-to-date.
-  - Shipping supplementary documentation and tutorials based on user feedback, and emerging use cases.
+  - Shipping supplementary docs and tutorials based on feedback and emerging use cases.
 
 - **Website & Docs** is responsible for design, organization, and discovery. This means:
   - The design and content of index pages.
