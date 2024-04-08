@@ -7,6 +7,8 @@ import { useLayoutData } from 'components/Layout/hooks'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Link } from 'gatsby'
+import Tooltip from 'components/Tooltip'
+import { IconArrowRight, IconInfo } from '@posthog/icons'
 
 export default function InsidePostHog() {
     const quote =
@@ -15,6 +17,47 @@ export default function InsidePostHog() {
     const { fullWidthContent } = useLayoutData()
     const { user } = useUser()
     const currentDate = new Date()
+
+    const ThreadHeaderRow = ({ column1, column2 }) => {
+        return (
+            <>
+                <div className="font-bold text-sm pb-1 mb-1 text-left border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60">
+                    {column1}
+                </div>
+                <div className="font-bold text-sm pb-1 mb-1 text-right border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60 pl-2">
+                    {column2}
+                </div>
+            </>
+        )
+    }
+
+    const Thread = ({ title, status }) => {
+        return (
+            <>
+                <div>
+                    <Link to="/" className="font-bold text-sm py-1 inline-block">
+                        {title}
+                    </Link>
+                </div>
+                <div className="text-right text-sm opacity-60 mt-1 pl-2">{status}</div>
+            </>
+        )
+    }
+
+    const TabButton = ({ active, onClick, children, className = '' }) => {
+        return (
+            <button
+                onClick={onClick}
+                className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
+                    active
+                        ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
+                        : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
+                } ${className}`}
+            >
+                {children}
+            </button>
+        )
+    }
 
     const InsidePostHogLogo = ({ className }) => {
         return (
@@ -145,45 +188,67 @@ export default function InsidePostHog() {
                     </div>
                 </div>
                 <aside className="order-2 md:order-none">
-                    <div className="">
-                        <h3 className="text-lg mb-1">Questions</h3>
-                        <h4 className="text-base mb-1">My open discussions</h4>
-                        <table>
-                            <thead className="text-sm">
-                                <th className="text-left bg-accent dark:bg-accent-dark py-1 px-2 rounded-tl-sm rounded-bl-sm text-primary/60 dark:text-primary-dark/60">
-                                    Topic
-                                </th>
-                                <th className="text-right bg-accent dark:bg-accent-dark py-1 px-2 rounded-tr-sm rounded-br-sm text-primary/60 dark:text-primary-dark/60">
-                                    Last reply
-                                </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td className="">
-                                        <Link to="/" className="font-bold text-sm p-1 pl-2">
-                                            Thread name
-                                        </Link>
-                                    </td>
-                                    <td className="pr-2 text-right text-sm opacity-60">8 mins ago</td>
-                                </tr>
-                                <tr>
-                                    <td className="">
-                                        <Link to="/" className="font-bold text-sm p-1 pl-2">
-                                            Thread name
-                                        </Link>
-                                    </td>
-                                    <td className="pr-2 text-right text-sm opacity-60">8 mins ago</td>
-                                </tr>
-                                <tr>
-                                    <td className="">
-                                        <Link to="/" className="font-bold text-sm p-1 pl-2">
-                                            Thread name
-                                        </Link>
-                                    </td>
-                                    <td className="pr-2 text-right text-sm opacity-60">8 mins ago</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div className="flex flex-col gap-8">
+                        <div>
+                            <div className="flex gap-4 w-full items-baseline">
+                                <h3 className="flex-1 text-lg mb-2">
+                                    My discussions
+                                    <Tooltip content="Subscribed threads with recent activity" placement="top">
+                                        <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
+                                    </Tooltip>
+                                </h3>
+                                <div>
+                                    <Link
+                                        to="/community/dashboard"
+                                        className="text-[13px] font-bold flex items-center bg-accent dark:bg-accent-dark rounded-lg px-2 py-1"
+                                    >
+                                        View all
+                                        <IconArrowRight className="inline-block w-4 h-4 ml-1" />
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="grid items-start w-full grid-cols-[1fr_max-content]">
+                                <ThreadHeaderRow column1="Topic" column2="Last reply" />
+
+                                <Thread title="Plugin Replicator" status="8 mins ago" />
+                                <Thread
+                                    title="User Onboarding integrations but with a longer title"
+                                    status="4 hours ago"
+                                />
+                                <Thread title="User Onboarding integrations" status="1 day ago" />
+                            </div>
+                        </div>
+
+                        <div className="">
+                            <div className="flex gap-4 w-full items-baseline">
+                                <h3 className="flex-1 text-lg mb-2">
+                                    Latest questions
+                                    <Tooltip content="Subscribed threads with recent activity" placement="top">
+                                        <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
+                                    </Tooltip>
+                                </h3>
+                                <div>
+                                    <Link
+                                        to="/questions"
+                                        className="text-[13px] font-bold flex items-center bg-accent dark:bg-accent-dark rounded-lg px-2 py-1"
+                                    >
+                                        View all
+                                        <IconArrowRight className="inline-block w-4 h-4 ml-1" />
+                                    </Link>
+                                </div>
+                            </div>
+
+                            <div className="grid items-start w-full grid-cols-[1fr_max-content]">
+                                <ThreadHeaderRow column1="Topic" column2="Last reply" />
+
+                                <Thread title="Plugin Replicator" status="8 mins ago" />
+                                <Thread
+                                    title="User Onboarding integrations but with a longer title"
+                                    status="4 hours ago"
+                                />
+                                <Thread title="User Onboarding integrations" status="1 day ago" />
+                            </div>
+                        </div>
                     </div>
                 </aside>
             </section>
