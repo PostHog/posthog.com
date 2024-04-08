@@ -39,13 +39,13 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import Markdown from 'markdown-to-jsx'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconX } from '@posthog/icons'
+import { IconInfo, IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
 
 const hedgehogImageWidth = 30
-const hedgehogLengthInches = 11
+const hedgehogLengthInches = 7
 
 const Hedgehog = ({ className = '' }) => {
     return (
@@ -57,10 +57,17 @@ const Hedgehog = ({ className = '' }) => {
     )
 }
 
-const SidebarSection = ({ title, children }) => {
+const SidebarSection = ({ title, tooltip, children }) => {
     return (
         <div>
-            <h5 className="m-0 text-[15px] opacity-50 mb-2">{title}</h5>
+            <h5 className="m-0 text-[15px] opacity-75 font-normal mb-2">
+                {title}
+                {tooltip && (
+                    <Tooltip content={tooltip}>
+                        <IconInfo className="w-4 h-4 ml-0.5 relative -top-px inline-block" />
+                    </Tooltip>
+                )}
+            </h5>
             <div>{children}</div>
         </div>
     )
@@ -373,8 +380,8 @@ export default function Team({
             />
             <Section title="People" id="people">
                 <div className="lg:flex lg:space-x-12 space-y-12 lg:space-y-0">
-                    <div className="flex-1">
-                        <ul className="list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    <div className="@container flex-1">
+                        <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
                             {profiles?.data
                                 ? [...profiles.data]
                                       .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
@@ -459,48 +466,56 @@ export default function Team({
                     </div>
 
                     {profiles?.data?.length > 0 && (
-                        <div className="w-full lg:max-w-[420px] shrink-1 basis-sm space-y-4 divide-y divide-gray-accent-light dark:divide-gray-accent-dark">
+                        <div className="@container w-full lg:max-w-[420px] shrink-1 basis-sm space-y-4 divide-y divide-border dark:divide-border-dark">
                             <SidebarSection title="Small team FAQ">
-                                <p className="font-bold m-0 text-sm">Q: Does pineapple belong on pizza?</p>
-                                <p className="font-bold m-0 mt-2 text-sm">A: {PineappleText(pineapplePercentage)}</p>
+                                <p className="font-bold m-0 text-[15px]">Q: Does pineapple belong on pizza?</p>
+                                <p className="m-0 mt-2 text-sm">A: {PineappleText(pineapplePercentage)}.</p>
                             </SidebarSection>
-                            <div className="pt-4">
-                                <SidebarSection title="Total team height as measured in hedgehogs">
-                                    <ul className="list-none m-0 p-0 flex flex-wrap">
-                                        {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
-                                            <li className="m-0.5" key={i}>
-                                                <Hedgehog />
-                                            </li>
-                                        ))}
-                                        {hedgehogPercentage && (
-                                            <li
-                                                style={{
-                                                    width: hedgehogPercentage,
-                                                }}
-                                                className="overflow-hidden relative m-0.5"
-                                            >
-                                                <Hedgehog className="absolute object-none object-left" />
-                                            </li>
-                                        )}
-                                    </ul>
-                                </SidebarSection>
-                            </div>
-                            {emojis?.length > 0 && (
-                                <div className="pt-4">
-                                    <h5 className="m-0 text-base font-normal">
-                                        This team has created <strong>{emojis?.length}</strong> of our{' '}
-                                        <strong>{totalSlackEmojis}</strong> custom Slack emojis.
-                                    </h5>
-                                    <p className="text-sm m-0">Here are a few standouts.</p>
-                                    <ul className="list-none m-0 p-0 mt-2">
-                                        {emojis?.map(({ name, url }) => (
-                                            <li key={name}>
-                                                <img className="w-[48px] h-[48px]" src={url} />
-                                            </li>
-                                        ))}
-                                    </ul>
+                            <div className="grid @xl:grid-cols-2 gap-6 pt-4 divide-y @xl:divide-y-0 divide-border dark:divide-border-dark">
+                                <div>
+                                    <SidebarSection
+                                        title="Total team height as measured in hedgehogs"
+                                        tooltip="The average hedgehog is 7 inches long"
+                                    >
+                                        <ul className="list-none m-0 p-0 flex flex-wrap">
+                                            {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
+                                                <li className="m-0.5" key={i}>
+                                                    <Hedgehog />
+                                                </li>
+                                            ))}
+                                            {hedgehogPercentage && (
+                                                <li
+                                                    style={{
+                                                        width: hedgehogPercentage,
+                                                    }}
+                                                    className="overflow-hidden relative m-0.5"
+                                                >
+                                                    <Hedgehog className="absolute object-none object-left" />
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </SidebarSection>
                                 </div>
-                            )}
+                                {emojis?.length > 0 && (
+                                    <div className="pt-6 @xl:pt-0">
+                                        <h5 className="m-0 text-base font-normal">
+                                            PostHog has created <strong>{totalSlackEmojis}</strong> custom Slack emojis.
+                                        </h5>
+                                        <p className="text-[15px] mb-4">
+                                            Here's some of this small team's best contributions.
+                                        </p>
+                                        <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
+                                            {emojis?.map(({ name, url }) => (
+                                                <li key={name}>
+                                                    <Tooltip content={`:${name}:`}>
+                                                        <img className="w-8 h-8" src={url} />
+                                                    </Tooltip>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     )}
                 </div>
