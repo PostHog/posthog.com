@@ -184,7 +184,6 @@ Here's an example (from the ['Hello World Connector'](https://github.com/PostHog
 export function processEvent(event, { config }) {
     if (!event.properties) event.properties = {}
     event.properties['greeting'] = config.greeting
-    event.properties['random_number'] = await getRandomNumber()
     return event
 }
 ```
