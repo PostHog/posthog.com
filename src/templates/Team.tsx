@@ -485,7 +485,7 @@ export default function Team({
                                             posthog?.getFeatureFlag?.('are-you-in-the-us')
                                                 ? '7 inches'
                                                 : '17 centimeters'
-                                        } inches long`}
+                                        } long`}
                                     >
                                         <ul className="list-none m-0 p-0 flex flex-wrap">
                                             {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
