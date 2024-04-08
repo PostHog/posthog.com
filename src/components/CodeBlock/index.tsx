@@ -172,7 +172,7 @@ export const CodeBlock = ({
         return code
             .replace('<ph_project_api_key>', projectToken)
             .replace('<ph_project_name>', projectName)
-            .replace('<ph_instance_address>', projectInstance || 'https://app.posthog.com')
+            .replace('<ph_client_api_host>', clientApiHost || 'https://us.i.posthog.com')
     }
 
     const copyToClipboard = () => {

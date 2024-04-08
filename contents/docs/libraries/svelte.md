@@ -29,7 +29,7 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_instance_address>' }
+      { api_host: '<ph_client_api_host>' }
     )
   }
   return
@@ -71,7 +71,7 @@ export const load = async () => {
     posthog.init(
       '<ph_project_api_key>',
       {
-        api_host:'<ph_instance_address>',
+        api_host:'<ph_client_api_host>',
         capture_pageview: false,
         capture_pageleave: false
       }
@@ -98,7 +98,7 @@ import { PostHog } from 'posthog-node';
 
 export async function load() {
   const posthog = new PostHog('<ph_project_api_key>', 
-  { host: '<ph_instance_address>' });
+  { host: '<ph_client_api_host>' });
   posthog.capture({
     distinctId: 'distinct_id_of_the_user',
     event: 'event_name',

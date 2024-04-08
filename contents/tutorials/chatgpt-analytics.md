@@ -59,7 +59,7 @@ root.render(
     <PostHogProvider 
       apiKey={'<ph_project_api_key>'}
       options={{
-        api_host: '<ph_instance_address>',
+        api_host: '<ph_client_api_host>',
       }}
     >
       <App />
