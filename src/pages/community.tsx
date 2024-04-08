@@ -6,6 +6,7 @@ import { useUser } from 'hooks/useUser'
 import { useLayoutData } from 'components/Layout/hooks'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
+import { Link } from 'gatsby'
 
 export default function InsidePostHog() {
     const quote =
@@ -143,9 +144,46 @@ export default function InsidePostHog() {
                         </div>
                     </div>
                 </div>
-                <aside className="order-2 md:order-none bg-accent">
-                    <div className="py-4">
-                        <h3>Questions</h3>
+                <aside className="order-2 md:order-none">
+                    <div className="">
+                        <h3 className="text-lg mb-1">Questions</h3>
+                        <h4 className="text-base mb-1">My open discussions</h4>
+                        <table>
+                            <thead className="text-sm">
+                                <th className="text-left bg-accent dark:bg-accent-dark py-1 px-2 rounded-tl-sm rounded-bl-sm text-primary/60 dark:text-primary-dark/60">
+                                    Topic
+                                </th>
+                                <th className="text-right bg-accent dark:bg-accent-dark py-1 px-2 rounded-tr-sm rounded-br-sm text-primary/60 dark:text-primary-dark/60">
+                                    Last reply
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td className="">
+                                        <Link to="/" className="font-bold text-sm p-1 pl-2">
+                                            Thread name
+                                        </Link>
+                                    </td>
+                                    <td className="pr-2 text-right text-sm opacity-60">8 mins ago</td>
+                                </tr>
+                                <tr>
+                                    <td className="">
+                                        <Link to="/" className="font-bold text-sm p-1 pl-2">
+                                            Thread name
+                                        </Link>
+                                    </td>
+                                    <td className="pr-2 text-right text-sm opacity-60">8 mins ago</td>
+                                </tr>
+                                <tr>
+                                    <td className="">
+                                        <Link to="/" className="font-bold text-sm p-1 pl-2">
+                                            Thread name
+                                        </Link>
+                                    </td>
+                                    <td className="pr-2 text-right text-sm opacity-60">8 mins ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </aside>
             </section>
