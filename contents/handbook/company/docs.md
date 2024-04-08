@@ -14,7 +14,7 @@ showTitle: true
 - **Content marketing** is responsible for improving the docs. This means:
   - Polishing draft documentation created by product teams.
   - Identifying and improving low quality documentation.
-   - Ensuring screenshots and other visual elements are up-to-date.
+  - Ensuring screenshots and other visual elements are up-to-date.
   - Shipping supplementary docs and tutorials based on feedback and emerging use cases.
 
 - **Website & Docs** is responsible for design, organization, and discovery. This means:
