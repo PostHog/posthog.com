@@ -11,16 +11,16 @@ showTitle: true
   - Correcting mistakes reported by users.
   - Clarifying documentation based on user feedback and support tickets.
 
-- **Content marketing** is responsible for improving the quality of documentation. This means:
+- **Content marketing** is responsible for improving the overall quality of the docs. This means:
   - Polishing draft documentation created by product teams.
   - Identifying and improving low quality documentation.
+   - Ensuring screenshots and other visual elements are up-to-date.
   - Shipping supplementary documentation and tutorials based on user feedback, and emerging use cases.
-  - Updating screenshots and other elements where needed.
 
-- **Website & Docs** is responsible for the design, organization, and discovery. This means:
+- **Website & Docs** is responsible for design, organization, and discovery. This means:
   - The design and content of index pages.
   - The overall layout of docs and how they're organized.
-  - In-page elements and components – e.g. light and dark mode.
+  - In-page elements and components – e.g. light and dark mode screenshots.
   - Website search and other elements that help users find the answers they need.
 
 ## Frequently asked questions
