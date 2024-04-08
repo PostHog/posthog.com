@@ -163,7 +163,7 @@ When we book a meeting, we have the option of selecting a Google Meet or Zoom ca
 
 The People & Ops team reviews applications and resumes/portfolios carefully and leaves their feedback as a comment on the candidate's record in Ashby if relevant.
 
-If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
+If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in [our community forum](https://posthog.com/questions)?
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email. Due to the volume of applications we receive, we usually don't provide personalized feedback.
 
