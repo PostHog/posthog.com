@@ -21,8 +21,8 @@ You can set a timeout period of between 1 second and 31536000 seconds (1 calenda
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Twilio' and select the app, press 'Install'.
-3. Follow the steps below to configure the app.
+2. Search for 'Twilio' and select the connector, press 'Install'.
+3. Follow the steps below to configure the connector.
 
 ## Configuration
 

@@ -9,7 +9,7 @@ import { useToast } from '../../hooks/toast'
 import useSWR from 'swr'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import { IconInfo, IconBell, IconUndo } from '@posthog/icons'
+import { IconInfo, IconBell, IconUndo, IconShieldLock } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import SideModal from 'components/Modal/SideModal'
 import TeamUpdate from 'components/TeamUpdate'
@@ -372,9 +372,9 @@ export function InProgress(
                         <p className="m-0 !text-[15px] !leading-none opacity-80 inline">
                             {more
                                 ? description
-                                : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
+                                : description.substring(0, 300) + (description?.length > 300 ? '...' : '')}
                         </p>
-                        {!more && (description?.length > 125 || githubPages?.length > 0) && (
+                        {!more && (description?.length > 300 || githubPages?.length > 0) && (
                             <button
                                 onClick={() => setMore(true)}
                                 className="font-semibold text-red inline text-sm ml-1"
@@ -427,7 +427,7 @@ export function InProgress(
                 </div>
 
                 <div className="px-4">
-                    <h6 className="my-4">Project updates</h6>
+                    <h6 className="mt-4 mb-2">Project updates</h6>
 
                     {updates?.length > 0 ? (
                         <ul className="list-none m-0 p-0 mb-6">
@@ -451,49 +451,54 @@ export function InProgress(
                             )}
                         </ul>
                     ) : (
-                        <p className="!text-sm italic -mt-2">
+                        <p className="!text-[15px] italic -mt-2 opacity-75">
                             No updates yet. Engineers are currently hard at work, so check back soon!
                         </p>
                     )}
 
                     <div className="flex gap-2">
-                        <CallToAction
-                            size="md"
-                            disabled={loading}
-                            onClick={() => (subscribed ? unsubscribe() : subscribe())}
-                            className="text-sm font-semibold flex gap-2 items-center [&_>span]:flex [&_>span]:items-center [&_>span]:gap-2"
-                            data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
-                            type={subscribe ? 'secondary' : 'primary'}
-                        >
-                            {loading ? (
-                                <Spinner className="w-[14px] h-[14px] !text-blue" />
-                            ) : subscribed ? (
-                                <IconUndo className="w-5 h-5 inline-block" />
-                            ) : (
-                                <>{betaAvailable ? '' : <IconBell className="w-5 h-5 inline-block" />}</>
-                            )}
-                            <span>
-                                {subscribed
-                                    ? 'Unsubscribe'
-                                    : betaAvailable
-                                    ? 'Request early access'
-                                    : 'Get updates about this project'}
-                                {!subscribed && !betaAvailable && (
-                                    <Tooltip
-                                        content="Get email notifications when the team shares updates about this project, releases a beta, or
-                                            ships this feature."
-                                        contentContainerClassName="max-w-xs"
-                                    >
-                                        <div className="inline-block relative">
-                                            <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
-                                        </div>
-                                    </Tooltip>
+                        {!isModerator && (
+                            <CallToAction
+                                size="md"
+                                disabled={loading}
+                                onClick={() => (subscribed ? unsubscribe() : subscribe())}
+                                className="text-sm font-semibold flex gap-2 items-center [&_>span]:flex [&_>span]:items-center [&_>span]:gap-2"
+                                data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
+                                type={subscribe ? 'secondary' : 'primary'}
+                            >
+                                {loading ? (
+                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                ) : subscribed ? (
+                                    <IconUndo className="w-5 h-5 inline-block" />
+                                ) : (
+                                    <>{betaAvailable ? '' : <IconBell className="w-5 h-5 inline-block" />}</>
                                 )}
-                            </span>
-                        </CallToAction>
+                                <span>
+                                    {subscribed
+                                        ? 'Unsubscribe'
+                                        : betaAvailable
+                                        ? 'Request early access'
+                                        : 'Get updates about this project'}
+                                    {!subscribed && !betaAvailable && (
+                                        <Tooltip
+                                            content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                            ships this feature."
+                                            contentContainerClassName="max-w-xs"
+                                        >
+                                            <div className="inline-block relative">
+                                                <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                            </div>
+                                        </Tooltip>
+                                    )}
+                                </span>
+                            </CallToAction>
+                        )}
 
                         {isModerator && !addingUpdate && (
-                            <CallToAction size="md" onClick={() => setAddingUpdate(true)}>
+                            <CallToAction size="md" type="secondary" onClick={() => setAddingUpdate(true)}>
+                                <Tooltip content="Only moderators can see this" placement="top">
+                                    <IconShieldLock className="w-6 h-6 inline-block -my-1 mr-1" />
+                                </Tooltip>
                                 Add an update
                             </CallToAction>
                         )}

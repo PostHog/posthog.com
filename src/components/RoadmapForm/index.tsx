@@ -14,6 +14,7 @@ import { CallToAction } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
 import { IconPlus, IconX } from '@posthog/icons'
 import * as Yup from 'yup'
+import Toggle from 'components/Toggle'
 
 const GitHubURLs = ({
     urls,
@@ -279,34 +280,19 @@ export default function RoadmapForm({
                     <div className="py-2 border-t border-border dark:border-dark px-2">
                         <Slider className="space-x-1">
                             {status === 'in-progress' && (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setFieldValue('betaAvailable', !values.betaAvailable)
-                                    }}
-                                    className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
-                                        values.betaAvailable
-                                            ? 'font-bold border-black/90 dark:border-white/90'
-                                            : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
-                                    }`}
-                                >
-                                    Beta available
-                                </button>
+                                <Toggle
+                                    checked={values.betaAvailable}
+                                    onChange={(checked) => setFieldValue('betaAvailable', checked)}
+                                    label="Beta available"
+                                />
                             )}
                             {status === 'complete' && (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setFieldValue('milestone', !values.milestone)
-                                    }}
-                                    className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
-                                        values.milestone
-                                            ? 'font-bold border-black/90 dark:border-white/90'
-                                            : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
-                                    }`}
-                                >
-                                    Show on homepage
-                                </button>
+                                <Toggle
+                                    checked={values.milestone}
+                                    onChange={(checked) => setFieldValue('milestone', checked)}
+                                    label="Show on homepage"
+                                    tooltip='Adds roadmap item to "We ship weirdly fast" section on homepage'
+                                />
                             )}
                         </Slider>
                     </div>

@@ -508,7 +508,7 @@ export default function Team({
             {hasInProgress && (
                 <Section title="What we're building" id="in-progress">
                     <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
-                        <ul className="list-none m-0 p-0 grid lg:grid-cols-2 gap-4">
+                        <ul className="list-none m-0 p-0 flex flex-col gap-4">
                             {inProgress.map((roadmap) => (
                                 <InProgress key={roadmap.squeakId} {...roadmap} />
                             ))}

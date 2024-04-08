@@ -642,7 +642,7 @@ const Pricing = ({
                                     <strong>Startups</strong>
                                 </div>
                                 <p className="pl-9 text-[15px] mb-3">
-                                    If your startup has rasied less than $5 million and is less than 2 years old, you
+                                    If your startup has raised less than $5 million and is less than 2 years old, you
                                     may be interested in our startup program. <Link to="/startups">Learn more.</Link>
                                 </p>
                             </li>

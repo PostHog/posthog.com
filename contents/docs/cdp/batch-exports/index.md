@@ -109,11 +109,11 @@ sequenceDiagram
     PostHog->>User: Inform batch export status
 ```
 
-## How does this differ from the old export apps?
+## How does this differ from the old export connectors, formerly known as apps?
 
 - The data is exported on batches at a fixed frequency, like hourly or daily.
   - This allows us to optimize uploads and insertions which generally perform better with larger sizes.
   - If you need real time delivery, then you will want check out [webhooks](/docs/webhooks).
 
-- Some features of the old export apps are still being ported over.
+- Some features of the old export connectors are still being ported over.
   - This includes logs and error reporting.

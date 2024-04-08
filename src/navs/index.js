@@ -227,6 +227,16 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
+        name: 'Exec',
+        url: '',
+        children: [
+            {
+                name: 'Annual planning',
+                url: '/handbook/exec/annual-planning',
+            },
+        ],
+    },
+    {
         name: 'Sales & CS',
         url: '',
         children: [
@@ -245,6 +255,10 @@ export const handbookSidebar = [
                     {
                         name: 'Managing our CRM',
                         url: '/handbook/growth/sales/crm',
+                    },
+                    {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/sales/icp',
                     },
                     {
                         name: 'Customer onboarding',
@@ -2318,13 +2332,13 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Data pipeline',
+            name: 'Data pipelines',
             url: '/docs/cdp',
             color: '[#2EA2D3]',
             icon: 'IconDecisionTree',
             children: [
                 {
-                    name: 'Data pipeline (CDP)',
+                    name: 'Data pipelines (CDP)',
                     badge: {
                         title: 'Preview',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2365,6 +2379,9 @@ export const docsMenu = {
                             url: '/docs/cdp/batch-exports/redshift',
                         },
                     ],
+                },
+                {
+                    name: 'Connectors',
                 },
                 {
                     name: 'Destinations',
@@ -2485,34 +2502,29 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'More',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/cdp/common-questions',
                     icon: 'IconQuestion',
                 },
                 {
-                    name: 'Build an app',
+                    name: 'Build a connector',
                     url: '/docs/cdp/build',
                     icon: 'IconGraduationCap',
                     children: [
                         {
-                            name: 'Tutorial',
-                            url: '/docs/cdp/build/tutorial',
-                        },
-                        {
-                            name: 'Troubleshooting',
-                            url: '/docs/cdp/enabling',
+                            name: 'Overview',
+                            url: '/docs/cdp/build',
                         },
                         {
                             name: 'Developer reference',
                             url: '/docs/cdp/build/reference',
                         },
                         {
-                            name: 'Testing',
-                            url: '/docs/cdp/build/testing',
-                        },
-                        {
-                            name: 'TypeScript types',
-                            url: '/docs/cdp/build/types',
+                            name: 'Tutorial',
+                            url: '/docs/cdp/build/tutorial',
                         },
                     ],
                 },
