@@ -9,6 +9,7 @@ import { CallToAction } from 'components/CallToAction'
 import { Link } from 'gatsby'
 import Tooltip from 'components/Tooltip'
 import { IconArrowRight, IconInfo } from '@posthog/icons'
+import { Twitter } from 'components/Icons/Icons'
 
 export default function InsidePostHog() {
     const quote =
@@ -99,8 +100,13 @@ export default function InsidePostHog() {
                     fullWidthContent ? 'max-w-[1400px] mx-auto' : ''
                 }`}
             >
-                <aside className="order-3 md:order-none bg-accent p-4 flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+                <aside className="order-3 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
                     <div>
+                        <aside className="float-right mb-2">
+                            <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                                <StaticImage src="../../static/images/authors/andy-vandervell-posthog.png" />
+                            </div>
+                        </aside>
                         <h3 className="text-base mb-1">A note from the editor</h3>
                         <p className="text-sm mb-2">
                             Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts,
@@ -115,9 +121,13 @@ export default function InsidePostHog() {
                         <p className="mb-2">
                             <em>"{quote}"</em>
                         </p>
-                        <p className="text-sm opacity-75">
+                        <p className="text-sm opacity-75 mb-0">
                             <em>- Max, our resident hedgehog</em>
                         </p>
+                    </div>
+
+                    <div className="py-4">
+                        <h3 className="text-base">From the PostHog Slack</h3>
                     </div>
                 </aside>
                 <div className="order-1 md:order-none md:px-4 md:border-x border-light dark:border-dark">
@@ -187,7 +197,7 @@ export default function InsidePostHog() {
                         </div>
                     </div>
                 </div>
-                <aside className="order-2 md:order-none">
+                <aside className="order-2 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
                     <div className="flex flex-col gap-8">
                         <div>
                             <div className="flex gap-4 w-full items-baseline">
@@ -249,6 +259,50 @@ export default function InsidePostHog() {
                                 <Thread title="User Onboarding integrations" status="1 day ago" />
                             </div>
                         </div>
+                    </div>
+
+                    <div>
+                        <div className="bg-white p-4 border border-light dark:border-dark my-4">
+                            <h3 className="text-lg text-center italic leading-tight">
+                                "Some of the best company swag I've ever seen"
+                            </h3>
+                            {/* quote source: https://posthog.slack.com/archives/C011L071P8U/p1710758940243199 */}
+
+                            <div className="bg-accent dark:bg-accent-dark w-full aspect-square flex justify-center items-center text-xs">
+                                Product screenshot placeholder
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="py-4">
+                        <aside className="float-right mb-2">
+                            <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                                <StaticImage src="../../static/images/authors/james-hawkins-posthog.png" />
+                            </div>
+                        </aside>
+                        <h3 className="text-base mb-1">A musing from the CEO</h3>
+                        <div className="text-sm pb-1 mb-2 [&_*]:text-sm [&>*]:mb-2">
+                            <p>what motivates us:</p>
+                            <ol>
+                                <li>building an epic product and company</li>
+                                <li>figuring out how far we can go</li>
+                                <li>helping engineers build products</li>
+                                <li>beating all the point solution competitors</li>
+                                <li>having customers buy from us instead of us selling to them</li>
+                            </ol>
+                        </div>
+                        <CallToAction
+                            href="https://x.com/james406"
+                            width="[calc(100%_+_3px)]"
+                            type="secondary"
+                            size="sm"
+                            externalNoIcon
+                        >
+                            <div className="flex justify-center items-center gap-1">
+                                <span>Follow James on</span>
+                                <Twitter className="h-4 w-4 mr-1 inline-block" />
+                            </div>
+                        </CallToAction>
                     </div>
                 </aside>
             </section>
