@@ -84,6 +84,8 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
+> **IMPORTANT**: The masking of an element applies to its children meaning `:not` selectors do not work. The ability to selectively mask elements is detailed [below](#selective-privacy---only-reveal-things-that-are-marked-as-safe)
+
 You can further control the text that gets masked. For example, by only masking text that looks like an email
 
 ```ts
