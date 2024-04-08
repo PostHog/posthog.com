@@ -11,7 +11,7 @@ showTitle: true
   - Correcting mistakes reported by users.
   - Clarifying documentation based on user feedback and support tickets.
 
-- **Content marketing** is responsible for improving the overall quality of the docs. This means:
+- **Content marketing** is responsible for improving the docs. This means:
   - Polishing draft documentation created by product teams.
   - Identifying and improving low quality documentation.
    - Ensuring screenshots and other visual elements are up-to-date.
