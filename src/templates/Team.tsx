@@ -43,6 +43,8 @@ import { IconInfo, IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from '../hooks/usePostHog'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -290,6 +292,8 @@ export default function Team({
 
     const emojis = other?.emojis?.filter((emoji) => !!emoji?.name)
 
+    const posthog = usePostHog()
+
     return (
         <Layout>
             <SEO title={`${teamName} - PostHog`} />
@@ -475,6 +479,13 @@ export default function Team({
                             </SidebarSection>
                             <div className="grid @xl:grid-cols-2 gap-6 pt-4 divide-y @xl:divide-y-0 divide-border dark:divide-border-dark">
                                 <div>
+                                    <RenderInClient
+                                        render={() => {
+                                            return posthog?.getFeatureFlag?.('are-you-in-the-us') === true
+                                                ? '7 inches'
+                                                : '17 centimeters'
+                                        }}
+                                    />
                                     <SidebarSection
                                         title="Total team height as measured in hedgehogs"
                                         tooltip="The average hedgehog is 7 inches long"
