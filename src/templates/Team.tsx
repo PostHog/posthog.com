@@ -450,7 +450,9 @@ export default function Team({
                                                           onClick={() => removeTeamMember(id)}
                                                           className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
                                                       >
-                                                          <IconX className="w-4 h-4" />
+                                                          <Tooltip content="Remove team member" placement="top">
+                                                              <IconX className="w-4 h-4" />
+                                                          </Tooltip>
                                                       </button>
                                                   )}
                                               </li>
