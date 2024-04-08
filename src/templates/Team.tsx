@@ -479,16 +479,13 @@ export default function Team({
                             </SidebarSection>
                             <div className="grid @xl:grid-cols-2 gap-6 pt-4 divide-y @xl:divide-y-0 divide-border dark:divide-border-dark">
                                 <div>
-                                    <RenderInClient
-                                        render={() => {
-                                            return posthog?.getFeatureFlag?.('are-you-in-the-us') === true
-                                                ? '7 inches'
-                                                : '17 centimeters'
-                                        }}
-                                    />
                                     <SidebarSection
                                         title="Total team height as measured in hedgehogs"
-                                        tooltip="The average hedgehog is 7 inches long"
+                                        tooltip={`The average hedgehog is ${
+                                            posthog?.getFeatureFlag?.('are-you-in-the-us')
+                                                ? '7 inches'
+                                                : '17 centimeters'
+                                        } inches long`}
                                     >
                                         <ul className="list-none m-0 p-0 flex flex-wrap">
                                             {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
