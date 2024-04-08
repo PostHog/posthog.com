@@ -111,7 +111,7 @@ export function processEvent(event, { config }) {
 
 ### `global`
 
-The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`, `composeWebhook`, or `runEveryMinute`, since global scope does not work in the context of PostHog connectors. `global` is not shared across worker threads
+The `global` object is used for sharing functionality between `setupPlugin` and the rest of the special functions, like `processEvent`or `composeWebhook`, since global scope does not work in the context of PostHog connectors. `global` is not shared across worker threads
 
 Example:
 ```js
@@ -181,27 +181,26 @@ It takes an event and an object of type `PluginMeta` as parameters and returns a
 Here's an example (from the ['Hello World Connector'](https://github.com/PostHog/helloworldplugin)):
 
 ```js
-async function processEvent(event, { config}) {
-
-    if (event.properties) {
-        event.properties['hello'] = 'world'
-        event.properties['bar'] = config.bar
-    }
-
+export function processEvent(event, { config }) {
+    if (!event.properties) event.properties = {}
+    event.properties['greeting'] = config.greeting
+    event.properties['random_number'] = await getRandomNumber()
     return event
 }
 ```
 
 As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all connectors run).
 
-Note that you cannot use storage nor cache nor external calls in processEvent connectors in PostHog cloud. Furthermore you can only define one of non-async `processEvent` or `composeWebhook` per connector.
+> **Note:** You cannot use storage nor cache nor external calls in `processEvent` connectors in PostHog Cloud. Furthermore you can only define one of non-async `processEvent` or `composeWebhook` per connector.
 
 ## `composeWebhook` function
 
 > **Minimum PostHog hash:** https://github.com/PostHog/posthog/commit/0137b9d40d8c0b4a7183fd6bb3c718a35d116b95
 
 `composeWebhook` is a non-async function that is executed at the end of the pipeline. It allows users to submit data to their own HTTP endpoint when an event happens. The function can return 
+
 - null if for a specific event we don't want to trigger an HTTP request. 
+
 - `Webhook` object, for which we'll trigger an HTTP request to the url with the payload, method and headers returned.
 If you are interested in exporting large amounts of event data from PostHog, look into [batch exports](/docs/cdp/batch-exports).
 
@@ -223,7 +222,7 @@ function composeWebhook(event) {
 }
 ```
 
-Note that you cannot use storage nor cache in connectors in PostHog cloud. Furthermore you can only define one of `processEvent` or `composeWebhook` per connector.
+> **Note:** You cannot use storage nor cache in connectors in PostHog Cloud. Furthermore you can only define one of `processEvent` or `composeWebhook` per connector.
 
 ## Testing
 
@@ -258,7 +257,7 @@ Connector can make use of the `console` for logging and debugging. `console.log`
 
 These logs can be seen on the 'Logs' page of each connector, which can be accessed on the 'Data Pipelines' page of the PostHog UI.
 
-Do not log a line for every event in PostHog cloud as that would create a lot of spam and waste storage.
+Do not log a line for every event in PostHog Cloud as that would create a lot of spam and waste storage.
 
 ## Types
 
@@ -268,7 +267,7 @@ To build a TypeScript connector, you'll probably need some types, so read on.
 
 ### Installation
 
-To use the types in your connector, you can install them as follows:
+To use the types in your connector, you can [install them](https://github.com/PostHog/plugin-scaffold) as follows:
 
 ```bash
 # if using yarn

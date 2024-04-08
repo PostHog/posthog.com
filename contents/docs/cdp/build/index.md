@@ -4,10 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import NoNewApps from "../_snippets/no-new-apps.mdx"
-
-<NoNewApps />
-
 Connectors can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities.
 
 Before building your first connector it's important to understand how data flows through connectors in the first place. There are two critical concepts to remember:
@@ -83,6 +79,6 @@ That's all for the crash course. There's a lot you can do with connectors such a
 
 1. For in-depth information on all the special functions, check out [the developer reference docs](/docs/cdp/build/reference).
 
-2. For building your own connector from start to finish, check out [our tutorial](/docs/cdp/build/tutorial).
+2. For building your own connector from start to finish (including publishing to PostHog Cloud), check out [our tutorial](/docs/cdp/build/tutorial).
 
 3. To ask questions or collaborate with others in the community, join [our community page](/questions).
