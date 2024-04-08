@@ -290,7 +290,7 @@ export default function Team({
             Math.round(hedgehogImageWidth * (heightToHedgehogs - Math.floor(heightToHedgehogs)))) ||
         0
 
-    const emojis = other?.emojis?.filter((emoji) => !!emoji?.name)
+    const emojis = other?.emojis?.filter((emoji) => !!emoji?.name && !!emoji?.localFile?.publicURL)
 
     const posthog = usePostHog()
 
@@ -515,10 +515,10 @@ export default function Team({
                                             Here's some of this small team's best contributions.
                                         </p>
                                         <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
-                                            {emojis?.map(({ name, url }) => (
+                                            {emojis?.map(({ name, localFile }) => (
                                                 <li key={name}>
                                                     <Tooltip content={`:${name}:`}>
-                                                        <img className="w-8 h-8" src={url} />
+                                                        <img className="w-8 h-8" src={localFile?.publicURL} />
                                                     </Tooltip>
                                                 </li>
                                             ))}
@@ -618,7 +618,9 @@ export const query = graphql`
             description
             emojis {
                 name
-                url
+                localFile {
+                    publicURL
+                }
             }
             teamImage {
                 caption

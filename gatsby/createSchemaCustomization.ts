@@ -227,6 +227,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type SlackEmoji implements Node {
       name: String
       url: String
+      localFile: File @link(from: "fields.localFile")
     }
   `)
     createTypes([
