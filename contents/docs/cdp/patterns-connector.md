@@ -1,12 +1,17 @@
 ---
 title: Patterns
 layout: app
-github: https://github.com/PostHog/posthog-patterns-app
-installUrl: https://app.posthog.com/project/apps?name=Patterns
-thumbnail: ../../cdp/thumbnails/patterns-logo.svg
+github: 'https://github.com/PostHog/posthog-patterns-app'
+installUrl: 'https://app.posthog.com/project/apps?name=Patterns'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/patterns-logo.svg
 tags:
-    - patterns
+  - patterns
 ---
+
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
 Send event data from PostHog, to Patterns. This is useful for a number of reasons, including centralizing data into a CDP, or using it to generate customer models.
 
@@ -14,11 +19,7 @@ Patterns is a data science platform for building and deploying data pipelines, m
 
 Use Patterns with PostHog to calculate metrics such as cohort churn, retention and customer LTV. Or, integrate your PostHog data with other sources such as your marketing data, email marketing tools, payment and billing systems.
 
-## Requirements
-
-This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+<Requirements />
 
 You'll also need an account with [Patterns](https://www.patterns.app/).
 
@@ -53,14 +54,6 @@ PostHog is open-source and so are all destinations on the platform. The [source 
 
 We'd like to thank the team at Patterns for creating this destination. Thank you!
 
-### Who maintains this destination?
+<CommunityMaintained />
 
-This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this destination?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

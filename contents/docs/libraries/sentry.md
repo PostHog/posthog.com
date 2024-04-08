@@ -1,6 +1,7 @@
 ---
 title: Sentry
-icon: ../../images/docs/integrate/frameworks/sentry.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/sentry.svg
 ---
 
 ## Why does this exist?
@@ -17,8 +18,10 @@ This way, debugging issues becomes a lot easier, and you can also correlate erro
 
 Make sure you're using both PostHog and Sentry as JS modules. You'll need to replace `'your organization'` and `project-id` with the organization and project-id from Sentry.
 
-- `'your organization'` will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
-- `project-id` will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
+- `'your organization'`: will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
+- `project-id`: will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
+- `prefix`: Optional: Url of a self-hosted sentry instance (default: https://sentry.io/organizations/)
+- `severityAllowList`: Optional: by default this is `['error']`, you can provide more Sentry severity levels (e.g. `['error', 'info']`) or '*' to capture any severity. Only available from posthog-js version 1.118.0 forward
 
 ```js-web
 import posthog from 'posthog-js'
@@ -28,7 +31,13 @@ posthog.init('<ph_project_api_key>')
 
 Sentry.init({
     dsn: '<your Sentry DSN>',
-    integrations: [new posthog.SentryIntegration(posthog, 'your organization', project-id)],
+    integrations: [new posthog.SentryIntegration(
+        posthog,
+        'your organization',
+        project-id,
+        undefined, // optional: but necessary if you want to set a severity allowlist
+        ['error', 'info'] // optional: here is set to handle captureMessage (info) and captureException (error)
+    )],
 })
 ```
 
@@ -36,9 +45,9 @@ Sentry.init({
 
 In PostHog, you'll now have `$exception` events, which have a "Sentry URL" link to take you to the exception:
 
-![Sentry exception event in PostHog](../../images/sentry_posthog_exception.png)
+![Sentry exception event in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sentry_posthog_exception.png)
 
 From Sentry you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.
 
-![PostHog user profile URL in Sentry](../../images/sentry_exception.png)
+![PostHog user profile URL in Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sentry_exception.png)
 

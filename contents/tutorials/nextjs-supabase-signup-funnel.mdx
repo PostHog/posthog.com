@@ -1,13 +1,14 @@
 ---
-title: Building and measuring a sign up funnel with Next.js, Supabase, and PostHog
+title: 'Building and measuring a sign up funnel with Next.js, Supabase, and PostHog'
 sidebar: Docs
 showTitle: true
-author: ['leggetter']
+author:
+  - leggetter
 tags:
-    - funnels
-    - user paths
-    - session replay
-    - events
+  - funnels
+  - user paths
+  - session replay
+  - events
 date: 2021-10-21
 ---
 
@@ -102,13 +103,13 @@ cp .env.local.example .env.local
 
 Now, head to the [Supabase dashboard](https://app.supabase.io/) to create a project. Click the **New project** button and you'll be presented with a "Create new project" dialog.
 
-![Supabase Create new project dialog](../images/tutorials/supabase-nextjs-signup-funnel/supabase-create-new-project-dialog.png)
+![Supabase Create new project dialog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/supabase-create-new-project-dialog.png)
 
 You may need to select an Organization. You will need to enter details for a project name, database password, and choose a deployment region. Once done, click the **Create new project** button.
 
 You'll then be presented with a page showing **Project API keys** and **Project Configuration**.
 
-![Supabase Project API keys and Project Configuration](../images/tutorials/supabase-nextjs-signup-funnel/supabase-api-keys-configuration.png)
+![Supabase Project API keys and Project Configuration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/supabase-api-keys-configuration.png)
 
 Update the contents of `.env.local` as follows:
 
@@ -117,7 +118,7 @@ Update the contents of `.env.local` as follows:
 
 Next, within the Supabase dashboard project settings select **Auth settings** and add `http://localhost:3000/auth` to the **Additional Redirect URLs** field.
 
-![Supabase Auth settings](../images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-redirect-settings.png)
+![Supabase Auth settings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-redirect-settings.png)
 
 With the Supabase configuration in place, we can run the app with:
 
@@ -127,11 +128,11 @@ npm run dev
 
 You can then navigate to `http://localhost:3000/auth` to try out the Supabase authentication functionality including sign up, login, login/sign up with magic link (email), and forgot password.
 
-![Supabase basic authentication app UI](../images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-app.png)
+![Supabase basic authentication app UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/supabase-auth-app.png)
 
 When you're signed up and logged in the UI will look like this:
 
-![Supabase Auth signed in example](../images/tutorials/supabase-nextjs-signup-funnel/supabase-signed-in.png)
+![Supabase Auth signed in example](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/supabase-signed-in.png)
 
 We'll focus on sign up for our application, so try out the sign up with email and password functionality as well as the magic link sign up (note magic link emails for a single email address can be sent once per 60 seconds).
 
@@ -222,13 +223,13 @@ As planned, the page has two CTA `<button>` elements that send the user to the `
 
 This will result in an "Awesome API" landing page that looks as follows:
 
-![Awesome API example app landing page](../images/tutorials/supabase-nextjs-signup-funnel/awesome-api-landing-page.png)
+![Awesome API example app landing page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/awesome-api-landing-page.png)
 
 Feel free to rebrand!
 
 Now that a landing page is in place we have all the assets required for a basic sign up flow that we want the user to successfully navigate through.
 
-import signUpFlowAnimation from '../images/tutorials/supabase-nextjs-signup-funnel/supabase-signup-flow.gif'
+export const signUpFlowAnimation = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/supabase-signup-flow.gif"
 
 <center>
     <img
@@ -310,7 +311,7 @@ Here, we import the [React `useEffect`](https://reactjs.org/docs/hooks-effect.ht
 
 Now, restart your application so it picks up the new config in `.env.local` and head over to the **Events** section within your PostHog instance and you'll see new events appear as you test out the sign up flow.
 
-![Signup funnel events in PostHog UI](../images/tutorials/supabase-nextjs-signup-funnel/posthog-signup-funnel-events.png)
+![Signup funnel events in PostHog UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/posthog-signup-funnel-events.png)
 
 Here's how some of the events can tie in to the flow we're trying to build:
 
@@ -353,7 +354,7 @@ In the above code we utilize the `usePostHog` function again to reference an ini
 
 If you now go through the login flow, you can map all the required events in PostHog to the sign up funnel that we're building.
 
-![Mapping events in PostHog to the sign up funnel](../images/tutorials/supabase-nextjs-signup-funnel/signup-flow-posthog-events.png)
+![Mapping events in PostHog to the sign up funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/signup-flow-posthog-events.png)
 
 You'll also see the point at which `posthog.identify` is called since the **Person** associated with the event is now listed with each event entry.
 
@@ -375,7 +376,7 @@ First, let's recap the events in the funnel and include the new `loggedIn` event
 
 To begin defining a funnel click on the **New Insight** left-hand menu item within PostHog and select the **Funnels** tab.
 
-![New Funnels Insight view](../images/tutorials/supabase-nextjs-signup-funnel/new-funnel-insight.png)
+![New Funnels Insight view](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/new-funnel-insight.png)
 
 On the left-hand side of the view there is a panel with **Graph Type** and **Steps** headings. The **Graph Type** value is set to **Conversion steps**, which is what we want. The first of the **Steps** is set to **Pageview**. As we flesh out the steps, the funnel visualization will appear on the right.
 
@@ -383,7 +384,7 @@ On the left-hand side of the view there is a panel with **Graph Type** and **Ste
 
 The first step within the funnel is the user landing on the main website landing page with a path of `/`. So, the event is correctly set to **Pageview** but we need to filter the event by path. To do this, click the filter icon next to the step and filter on **Path Name** where the path value is `/`.
 
-![Step 1 - filter on landing page based on path name](../images/tutorials/supabase-nextjs-signup-funnel/step-1-funnel-landing-page.png)
+![Step 1 - filter on landing page based on path name](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/step-1-funnel-landing-page.png)
 
 A funnel visualization won't appear at this point because a funnel must have more than one step.
 
@@ -391,11 +392,11 @@ A funnel visualization won't appear at this point because a funnel must have mor
 
 To add the second step, click either of the **Add funnel step** buttons. Change the event to **Autocapture** since the event we're looking to make use of was one [autocaptured](/docs/data/autocapture) by the PostHog JS SDK. Then, set a filter. When you click the filter icon this time, select the **Elements** tab and select the **Text** property.
 
-![Step 2 - user clicks sign up button filter on element text](../images/tutorials/supabase-nextjs-signup-funnel/step-2-signup-button-clicked.png)
+![Step 2 - user clicks sign up button filter on element text](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/step-2-signup-button-clicked.png)
 
 For the filter value choose `SignUp`, which should be pre-populated based on the values that PostHog has already ingested from our testing.
 
-![Step 2 - user clicks sign up button filter on element text value](../images/tutorials/supabase-nextjs-signup-funnel/step-2-signup-button-clicked-text-value.png)
+![Step 2 - user clicks sign up button filter on element text value](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/step-2-signup-button-clicked-text-value.png)
 
 As you populate this step, you'll see the funnel visualization appear.
 
@@ -405,17 +406,17 @@ _Note: you could also have done a **Pageview** again here, filtered by a **Path 
 
 For this step we want to track the sign up form submission. So, create a new step with an event of **Autocapture** and a first filter on the **Event Type** property (not be confused with the top-level event) with a value of "submit" for the form submission.
 
-![Step 3 - filter on Event Type of submit](../images/tutorials/supabase-nextjs-signup-funnel/step-3-event-type-submit.png)
+![Step 3 - filter on Event Type of submit](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/step-3-event-type-submit.png)
 
 However, the above filter will track all form submissions. This may include forms other than the sign up form. So, add a second filter specifically identifying the sign up form based. To do this, select the **Elements** tab, choose **CSS Selector**, and set the selector value as `[id="sign_up_form"]` to identify the `id` attribute as having a value of `sign_up_form`.
 
-![Step 3 - CSS Selector filter](../images/tutorials/supabase-nextjs-signup-funnel/step-3-css-selector-id-signup-form.png)
+![Step 3 - CSS Selector filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/step-3-css-selector-id-signup-form.png)
 
 ### Step 4 - User receives registration email
 
 As noted in the table above, we don't presently have a way of tracking this because it happens on systems outside of our control. Remember, though, it may be that an email provider could integrate with PostHog to also track email events.
 
-![Step 4 - Supabase sig nup verification email](../images/tutorials/supabase-nextjs-signup-funnel/signup-email.png)
+![Step 4 - Supabase sig nup verification email](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/signup-email.png)
 
 ### Step 5 - User clicks on link in email and logs into app
 
@@ -423,17 +424,17 @@ This represents successful completion of our sign up funnel. We added some custo
 
 So, add a new step to the funnel and select the `loggedIn`.
 
-![Step 5 - user signed up and logged in](../images/tutorials/supabase-nextjs-signup-funnel/step-5-user-signed-up-logged-in.png)
+![Step 5 - user signed up and logged in](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/step-5-user-signed-up-logged-in.png)
 
 The funnel is now complete and we can see the journey of users through the sign up funnel, users that have dropped off, and users that have completed sign up.
 
 You can adjust the options in the right-hand panel, if required. For example, you can change the orientation of the funnel visualization from left-to-right to top-to-bottom, the computation in the steps from **Overall conversion** to **Relative to previous step**, and the period of time the Funnel is calculated over.
 
-![Funnel visualization options](../images/tutorials/supabase-nextjs-signup-funnel/funnel-visualization-options.png)
+![Funnel visualization options](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/funnel-visualization-options.png)
 
 Finally, you can save the Funnel, giving it a name of **Signup Funnel**, and add it to a Dashboard by clicking **Save & add to dashboard**.
 
-![Save and name sign up funnel](../images/tutorials/supabase-nextjs-signup-funnel/save-and-name-signup-funnel.png)
+![Save and name sign up funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/supabase-nextjs-signup-funnel/save-and-name-signup-funnel.png)
 
 ## Conclusion
 

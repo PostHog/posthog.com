@@ -14,40 +14,56 @@ import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
-import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
+import UpdateWrapper, { RoadmapSuccess } from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import RoadmapForm from 'components/RoadmapForm'
+import { useUser } from 'hooks/useUser'
+import Tooltip from 'components/Tooltip'
+import { IconShieldLock } from '@posthog/icons'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
     return (
         <div className="relative">
             <Listbox onChange={onChange} defaultValue={defaultValue}>
-                <Listbox.Button className="py-2 px-4 bg-accent dark:bg-accent-dark rounded text-left border border-light dark:border-dark flex justify-between items-center font-semibold text-sm">
-                    {({ value }) => (
-                        <>
-                            <span>{other.value || value.label}</span>
-                            <Chevron className="w-2.5 ml-2 opacity-50" />
-                        </>
-                    )}
-                </Listbox.Button>
-                <Listbox.Options className="absolute right-0 min-w-full shadow-md bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-light dark:divide-dark">
-                    {values.map((value) => (
-                        <Listbox.Option key={value.label} value={value} as={React.Fragment}>
-                            {({ selected }) => {
-                                return (
-                                    <li
-                                        className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
-                                            (other.value ? value.label === other.value : selected) ? 'font-bold' : ''
-                                        }`}
-                                    >
-                                        {value.label}
-                                    </li>
-                                )
-                            }}
-                        </Listbox.Option>
-                    ))}
-                </Listbox.Options>
+                {({ open }) => (
+                    <>
+                        <Listbox.Button
+                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                                open
+                                    ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
+                                    : 'border-transparent'
+                            }`}
+                        >
+                            {({ value }) => (
+                                <>
+                                    <span>{other.value || value.label}</span>
+                                    <Chevron className="w-2.5 ml-2 opacity-30 group-hover:opacity-50" />
+                                </>
+                            )}
+                        </Listbox.Button>
+                        <Listbox.Options className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0.5 rounded-md mt-1 z-20 grid">
+                            {values.map((value) => (
+                                <Listbox.Option key={value.label} value={value} as={React.Fragment}>
+                                    {({ selected }) => {
+                                        return (
+                                            <li
+                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${
+                                                    (other.value ? value.label === other.value : selected)
+                                                        ? 'font-bold'
+                                                        : ''
+                                                }`}
+                                            >
+                                                {value.label}
+                                            </li>
+                                        )
+                                    }}
+                                </Listbox.Option>
+                            ))}
+                        </Listbox.Options>
+                    </>
+                )}
             </Listbox>
         </div>
     )
@@ -94,8 +110,11 @@ export const Change = ({ title, teamName, media, description, cta }) => {
 }
 
 export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
+    const { user } = useUser()
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
+    const [newRoadmapID, setNewRoadmapID] = useState()
+    const [adding, setAdding] = useState(false)
 
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
@@ -127,21 +146,38 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
         return { url: month, value: month, depth: 0 }
     })
 
+    const isModerator = user?.role?.type === 'moderator'
+
     return (
         <CommunityLayout
             parent={companyMenu}
-            activeInternalMenu={companyMenu.children[2]}
+            activeInternalMenu={companyMenu.children.find((child) => child.name.toLowerCase() === 'changelog')}
             title="Changelog"
             tableOfContents={tableOfContents}
         >
-            <section className="mb-4 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
+            <section className="mb-4 flex justify-between md:items-center md:flex-row flex-col md:space-y-0 space-y-4">
                 <div>
-                    <h1 className="m-0 text-3xl">Changelog</h1>
+                    <div className="flex gap-4 items-center">
+                        <div>
+                            <h1 className="m-0 text-3xl sm:text-4xl">Changelog</h1>
+                        </div>
+                        <div>
+                            {isModerator && !adding && (
+                                <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                    <Tooltip content="Only moderators can see this" placement="top">
+                                        <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                    </Tooltip>
+                                    Add entry
+                                </CallToAction>
+                            )}
+                        </div>
+                    </div>
+
                     <p className="m-0 mt-2">
                         <em>"All the updates that are fit to print"</em>
                     </p>
                 </div>
-                <div className="flex space-x-2 items-center relative z-50">
+                <div className="flex space-x-1 items-center relative z-[50]">
                     <Select
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}
@@ -166,6 +202,20 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                     })}
                 </div>
             </section>
+
+            {isModerator && (
+                <>
+                    {newRoadmapID && (
+                        <RoadmapSuccess id={newRoadmapID} description="Changelog will update on next build" />
+                    )}
+                    {adding && (
+                        <div className="mb-6 border-border dark:border-dark">
+                            <RoadmapForm status="complete" onSubmit={(roadmap) => setNewRoadmapID(roadmap.id)} />
+                        </div>
+                    )}
+                </>
+            )}
+
             <section className="grid article-content">
                 {Object.keys(changesByMonth).map((month, index) => {
                     const nodes = changesByMonth[month]
@@ -200,8 +250,10 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                             <UpdateWrapper
                                                 status="complete"
                                                 formClassName="mt-8"
-                                                editButtonClassName="absolute bottom-0 right-0"
+                                                editButtonClassName="absolute -top-4 md:top-0 right-0"
+                                                roundButton={false}
                                                 id={strapiID}
+                                                showSuccessMessage
                                             >
                                                 <Change
                                                     cta={cta}

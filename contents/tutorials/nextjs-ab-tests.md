@@ -1,8 +1,12 @@
 ---
 title: How to set up Next.js A/B tests
 date: 2024-02-16
-author: ["ian-vanagas"]
-tags: ['experimentation', 'feature flags', 'actions']
+author:
+  - ian-vanagas
+tags:
+  - experimentation
+  - feature flags
+  - actions
 ---
 
 [A/B tests](/ab-testing) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
@@ -34,7 +38,7 @@ export default function Home() {
 
 Once done, run `npm run dev` and go `http://localhost:3000` to see your app.
 
-![App](../images/tutorials/nextjs-ab-tests/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-ab-tests/app.png)
 
 ## 2. Add PostHog
 
@@ -96,7 +100,7 @@ To enable and launch the toolbar, go to the "[Launch toolbar](https://us.posthog
 
 Name the action "Clicked Main CTA" and then click "Create action."
 
-![Action](../images/tutorials/nextjs-ab-tests/action.png)
+![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-ab-tests/action.png)
 
 > **Note:** You can also use a custom event as a goal metric. See our [full Next.js analytics tutorial](/tutorials/nextjs-app-directory-analytics#capturing-custom-events) for how to set up custom event capture.
 

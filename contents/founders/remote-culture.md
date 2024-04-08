@@ -10,7 +10,7 @@ tags:
   - Culture
   - People
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Many companies are currently having to adjust to remote work, but what about the ones that started this way from scratch?
@@ -21,7 +21,7 @@ So, what's it like building an all-remote company from the very first day?
 
 ## Communication 
 
-![GitHub Chat](../images/blog/remote-culture/github-chat.png) 
+![GitHub Chat](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/remote-culture/github-chat.png) 
 
 Communication is perhaps the single most important value for us at PostHog. In our view, getting this right is essential to running an all-remote company successfully. As such, we highly value the following concepts:
 
@@ -61,7 +61,7 @@ At PostHog, a large part of our async and transparent culture is underpinned by 
 
 ## Socializing
 
-![Virtual Coffee Bot](../images/blog/remote-culture/virtual-coffee.png) 
+![Virtual Coffee Bot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/remote-culture/virtual-coffee.png) 
 
 Being all-remote, our team is unable to grab a beer together after a week of hard work. 
 
@@ -83,7 +83,7 @@ We're big fans of our Friday event, and it's brought us closer as a result.
 
 ## Flexibility
 
-![Slack do not disturb](../images/blog/remote-culture/do-not-disturb.png) 
+![Slack do not disturb](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/remote-culture/do-not-disturb.png) 
 
 At PostHog we simply don't track hours at all. All we care about is output.
 
@@ -103,7 +103,7 @@ It all comes down to trust. We hire people we believe in and give them autonomy 
 
 ## Ship, iterate, ship
 
-![Remote work banner](../images/blog/remote-culture/ship.jpg) 
+![Remote work banner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/remote-culture/ship.jpg) 
 
 <small class="centered">Photo by Shaah Shahidh
 </small>
@@ -124,7 +124,7 @@ The key to this is a culture of iteration, as well as giving the team a sense of
 
 ## Pull requests > Issues
 
-![GitHub PR](../images/blog/remote-culture/github-pr.png) 
+![GitHub PR](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/remote-culture/github-pr.png) 
 
 At PostHog, we try our best to create a culture of submitting pull requests over opening issues. 
 
@@ -137,7 +137,7 @@ However, with such a culture in place, you build a team of doers who are consist
 
 ## Diversity
 
-![Dakar Couchsurf](../images/blog/remote-culture/dakar-couchsurf.png) 
+![Dakar Couchsurf](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/remote-culture/dakar-couchsurf.png) 
 
 In addition to having access to a much broader talent pool, building an all-remote team across various countries gives you the unique chance to get people on board who have distinct backgrounds, speak different languages, and most importantly: think differently.
 

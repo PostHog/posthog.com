@@ -1,15 +1,17 @@
 ---
 title: How to set up Python analytics in Flask
 date: 2024-02-22
-author: ["lior-neu-ner"]
-tags: ['product analytics']
+author:
+  - lior-neu-ner
+tags:
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/python-analytics/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/python-analytics/events-dark.png'
-import InsightLight from '../images/tutorials/python-analytics/insight-light.png'
-import InsightDark from '../images/tutorials/python-analytics/insight-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/python-analytics/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/python-analytics/events-dark.png"
+export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/python-analytics/insight-light.png"
+export const InsightDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/python-analytics/insight-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Python app. To show you how to set up analytics, in this tutorial we create a basic Python app with [Flask](https://flask.palletsprojects.com/), add PostHog, and use it to [capture events](/docs/product-analytics/capture-events) and [create insights](/docs/product-analytics/insights).
 
@@ -138,7 +140,7 @@ Lastly, we set up the basic layout for our HTML pages:
 
 Run `python3 app.py` and navigate to `http://localhost:8000` to see our app in action. Enter anything on the login page to save some session details.
 
-![Basic Python app](../images/tutorials/python-analytics/basic-python-app.mp4)
+![Basic Python app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/python-analytics/basic-python-app.mp4)
 
 ## 2. Add PostHog to your app
 
@@ -146,7 +148,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 Run `pip3 install posthog` to install [PostHog's Python SDK](/docs/libraries/python). Then, initialize PostHog in `app.py` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 
-```py file=apo.py
+```py file=app.py
 package main
 from flask import Flask, render_template, request, redirect, session, url_for
 from posthog import Posthog

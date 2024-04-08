@@ -1,10 +1,12 @@
 ---
 title: How to create custom surveys
 date: 2023-07-25
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['surveys']
+tags:
+  - surveys
 ---
 
 [Surveys](/docs/surveys/manual) make it easy to collect qualitative feedback fast. PostHog provides everything you need to do this, but you can also customize the implementation of the survey in your app. In this tutorial, we show you how to do this by creating a Next.js app, adding PostHog, setting up a basic survey, and then creating a completely custom survey.
@@ -68,21 +70,21 @@ After setting this up and running `npm run dev`, your app is ready for surveys.
 
 With our app and PostHog set up, we can go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and enable the surveys popup if it isn’t already.
 
-![Enable surveys](../images/tutorials/survey/enable.mp4)
+![Enable surveys](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/survey/enable.mp4)
 
 Aftwards click "Create survey." Enter a name, question, and any of the other details you want (like targeting). Once done, click "Save as draft," make sure everything looks good, then click "Launch."
 
-![Feedback survey video](../images/tutorials/survey/create-survey.mp4)
+![Feedback survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/survey/create-survey.mp4)
 
 In your app, you will now see your survey in the bottom right of the page. PostHog automatically tracks surveys shown, dismissed, and submitted along with the responses and user details for each.
 
-![Survey in-app](../images/tutorials/survey/in-app.png)
+![Survey in-app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/survey/in-app.png)
 
 ## Creating a custom survey
 
 You can customize how and when you show your survey. To start, create another survey, but this time set the "Display mode" as `API` instead of `popover`. Customize the details as much as you want, save it as a draft, then launch. It won’t show in your app until we write some code to implement it.
 
-![API display mode](../images/tutorials/survey/api.png)
+![API display mode](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/survey/api.png)
 
 Once done, head back to the app and remove the boilerplate from `page.js` . We’ll make this the page with our survey. To start, this requires the `use client` directive, `usePostHog` context, and a `useState` hook for the survey data.
 
@@ -220,7 +222,7 @@ Finally, set up a `survey sent` event capture when the user clicks the submit bu
 
 When you submit the survey with a response, it shows up in your results in PostHog.
 
-![Results](../images/tutorials/survey/results.png)
+![Results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/survey/results.png)
 
 ### Dismiss and hide survey
 
@@ -294,7 +296,7 @@ useEffect(() => {
 
 This completes an introduction to our custom survey functionality, which you can customize further to your needs.
 
-![Submit survey video](../images/tutorials/survey/submit.mp4)
+![Submit survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/survey/submit.mp4)
 
 ## Further reading
 

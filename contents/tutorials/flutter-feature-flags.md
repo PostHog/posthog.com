@@ -1,15 +1,17 @@
 ---
-title: "How to set up feature flags in Flutter"
+title: How to set up feature flags in Flutter
 date: 2024-03-05
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/flutter-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/flutter-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/flutter-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/flutter-feature-flags/create-flag-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them into your Flutter app using PostHog. 
 
@@ -94,7 +96,7 @@ class FeatureScreenView extends StatelessWidget {
 
 Press **F5** and run the app in any emulator (we chose Android) to see your app in action.
 
-![Basic setup of the Flutter app](../images/tutorials/flutter-feature-flags/basic-app.png)
+![Basic setup of the Flutter app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -148,7 +150,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
 
-```xml ios/Runner/Info.plist
+```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -168,7 +170,7 @@ For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting
 
 Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
 
-```yaml ios/Podfile
+```yaml file=ios/Podfile
 platform :ios, '13.0'
 
 # rest of your config

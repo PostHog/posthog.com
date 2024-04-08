@@ -2,7 +2,7 @@ import path from 'path'
 import { GatsbyNode } from 'gatsby'
 
 export { createPages } from './gatsby/createPages'
-export { onCreateNode } from './gatsby/onCreateNode'
+export { onCreateNode, onPreInit } from './gatsby/onCreateNode'
 export { createSchemaCustomization } from './gatsby/createSchemaCustomization'
 export { sourceNodes } from './gatsby/sourceNodes'
 export { onPostBuild } from './gatsby/onPostBuild'

@@ -1,13 +1,15 @@
 ---
-title: The best Hotjar alternatives & competitors, compared
+title: 'The best Hotjar alternatives & competitors, compared'
 date: 2024-03-04
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 rootpage: /blog
-featuredImage: ../images/blog/hotjar-alternatives/hotjar-alternatives.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hotjar-alternatives/hotjar-alternatives.png
 featuredImageType: full
 category: General
 tags:
- - Comparisons
+  - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -20,7 +22,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 - **Typical users:** Engineers and product teams
 - **Typical customers:** Mid-size B2B/B2C companies and startups
 
-![posthog](../images/screenshots/session-replay.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
 
 ### What is PostHog?
 
@@ -82,7 +84,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 - **Typical users:** Marketing and UX teams
 - **Typical customers:** SMB and enterprises in retail
 
-![mouseflow](../images/blog/clarity-alternatives/mouseflow.png)
+![mouseflow](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/mouseflow.png)
 
 ### What is Mouseflow?
 
@@ -140,7 +142,7 @@ Based on reviews from G2.com, customers use Mouseflow because:
 - **Typical users:** Product teams and UX researchers
 - **Typical customers:** Medium and large B2C and B2B products
 
-![sprig](../images/blog/hotjar-alternatives/sprig.png)
+![sprig](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/sprig.png)
 
 ### What is Sprig?
 
@@ -196,7 +198,7 @@ According to [reviews on G2](https://www.g2.com/products/sprig/reviews), custome
 - **Typical users:** Marketers and consultants
 - **Typical customers:** Small e-commerce businesses and agencies
 
-![luckyorange](../images/blog/clarity-alternatives/luckyorange.png)
+![luckyorange](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/luckyorange.png)
 
 ### What is Lucky Orange?
 
@@ -254,7 +256,7 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 - **Typical users:** Marketers and UX designers
 - **Typical customers:** Small and medium size businesses and agencies
 
-![crazy egg](../images/blog/hotjar-alternatives/crazy-egg.png)
+![crazy egg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/crazy-egg.png)
 
 ### What is Crazy Egg?
 
@@ -309,7 +311,7 @@ According to reviews on G2, people use Crazy Egg because:
 - **Typical users:** Product managers and customer success teams
 - **Typical customers:** Small and mid-market B2C apps
 
-![Pendo](../images/blog/best-fullstory-alternatives/pendo.png)
+![Pendo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/pendo.png)
 
 ### What is Pendo?
 
@@ -366,7 +368,7 @@ According to G2 reviews, customers use Pendo for:
 - **Typical users:** Marketing and content teams
 - **Typical customers:** Small businesses
 
-![clarity](../images/blog/hotjar-alternatives/microsoft-clarity.png)
+![clarity](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/microsoft-clarity.png)
 
 ### What is Microsoft Clarity?
 

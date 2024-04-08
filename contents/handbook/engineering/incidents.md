@@ -51,7 +51,7 @@ Examples
 - Significantly elevated error rate
 
 #### Critical
-An incident with very high impact on customers, and with the potential to existentially effect the company or reduce revenue.
+An incident with very high impact on customers, and with the potential to existentially affect the company or reduce revenue.
 
 Examples
 - Posthog Cloud is completely down

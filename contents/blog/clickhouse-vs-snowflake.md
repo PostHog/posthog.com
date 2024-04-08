@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mathew-pregasen
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -19,7 +20,7 @@ Two years ago, Snowflake versus ClickHouse was a straightforward comparison. Bac
 
 If I was to compare the databases to boats, ClickHouse is a jet ski – ultra-fast, but limited. Snowflake, meanwhile, is a shipyard – a slew of (expensive) tools spanning various functions.
 
-![Clickhouse vs Snowflake.png](../images/blog/clickhouse-vs-snowflake/clickhouse-vs-snowflake.png)
+![Clickhouse vs Snowflake.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-snowflake/clickhouse-vs-snowflake.png)
 
 But, as I said, that was *two years ago*. Today, Clickhouse has broken ground on features that compete with Snowflake’s managed solution. Likewise, Snowflake released features that are beginning to tackle ClickHouse’s speed. However, the overlap between ClickHouse and Snowflake remains nascent. Today, they are both still  *pretty* different, though the gaps are closing.
 
@@ -77,17 +78,17 @@ Overall, ClickHouse Cloud or Altinity Cloud are excellent options for companies 
 
 When Snowflake was released in 2012, there were two major paradigms – **Shared-Disk Architecture** and **Shared-Nothing Architecture**.
 
-![Shared Disk Architecture.png](../images/blog/clickhouse-vs-snowflake/shared-disk-architecture.png)
+![Shared Disk Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-snowflake/shared-disk-architecture.png)
 
 Under Shared-Disk Architecture, CPU and memory were split into nodes, but each connected to a single storage unit – usually a blob store like S3 or GCS these days. The benefit of Shared-Disk Architecture is that you can scale Disk and Compute separately. This is huge when you are thinking about a data warehouse, where your workloads may be very spiky and periodic but your data has to be stored all the time. The cost here is that typically reading from disk is a bit slower, at least in terms of latency, when compared to reading from local storage.
 
-![Shared Nothing Architecture.png](../images/blog/clickhouse-vs-snowflake/shared-nothing-architecture.png)
+![Shared Nothing Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-snowflake/shared-nothing-architecture.png)
 
 Meanwhile, CPU, memory, and storage are encapsulated under Shared-Nothing Architecture in separate, parallel instances, only syncing via background jobs. The benefit of Shared-Nothing Architecture is speed. There is a risk that storage could go out of sync since usually replication here is eventually consistent, but that was the case with blob stores up until recently too. The easiest way to think about this is consider Postgres. When you install Postgres everything is boxed up nice and neat on a single instance. At smaller scale this is a much simpler setup and enables you to run the architecture pretty much anywhere.
 
 Part of Snowflake’s initial appeal is its hybrid solution that combines the advantages of Shared-Disk Architecture and Shared-Nothing Architecture. Snowflake achieved this by adding another layer of storage to each node that stored partial data, similar to the cache but more complete.
 
-![Snowflake Architecture.png](../images/blog/clickhouse-vs-snowflake/snowflake-architecture.png)
+![Snowflake Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-snowflake/snowflake-architecture.png)
 
 More importantly, Snowflake’s middle layer – virtual warehouses – can be scaled easily, coming in T-shirt sizes (S/M/L/XL). Snowflake makes it easy to add parallel nodes or re-size existing nodes, made possible by Snowflake's virtualized architecture.
 

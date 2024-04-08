@@ -3,14 +3,15 @@ date: 2023-04-17
 title: What we've learned about multi-product pricing (so far)
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Revenue
   - Product
   - Founders
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 PostHog started as a single product company. We just sold product analytics with a bunch of large extra features thrown in – session replay, feature flagging, experimentation, and even a Customer Data Platform.

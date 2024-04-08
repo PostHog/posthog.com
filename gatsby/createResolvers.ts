@@ -33,6 +33,39 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers
                 },
             },
         },
+        ShopifyProduct: {
+            imageProducts: {
+                type: ['ShopifyProduct'],
+                resolve(source, args, context, info) {
+                    const metafieldNodesIds = source.metafields___NODE
+                    let productIds = []
+
+                    for (const metafieldNodeId of metafieldNodesIds) {
+                        const metafieldNode = context.nodeModel.getNodeById({
+                            id: metafieldNodeId,
+                        })
+
+                        if (metafieldNode.key === 'image_products') {
+                            productIds = productIds.concat(JSON.parse(metafieldNode.value))
+                        }
+                    }
+
+                    return productIds.map((shopifyId) => {
+                        return context.nodeModel.runQuery({
+                            query: {
+                                filter: {
+                                    shopifyId: {
+                                        eq: shopifyId,
+                                    },
+                                },
+                            },
+                            type: 'ShopifyProduct',
+                            firstOnly: true,
+                        })
+                    })
+                },
+            },
+        },
     }
     createResolvers(resolvers)
 }

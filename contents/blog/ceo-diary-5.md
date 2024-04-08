@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
 ---
@@ -45,7 +46,7 @@ We did this:
   * Reference = paying list price, genuinely delighted, using the product a lot
 * Wrote out what they had in common along the way. We created a spreadsheet that looked a little like this:
 
-![A spreadsheet showing company names listed alongside what they need and what they have](../images/5-reference-customers.png)
+![A spreadsheet showing company names listed alongside what they need and what they have](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/5-reference-customers.png)
 
 Note - we had to sell more than 5 deals, to get 5 reference customers. We also looked for antipatterns - when a customer wasn't having a great experience, what did they look like.
 

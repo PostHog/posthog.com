@@ -227,16 +227,26 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
-        name: 'Customer success',
+        name: 'Exec',
         url: '',
         children: [
             {
-                name: 'Customer support',
-                url: '/handbook/growth/customer-support',
+                name: 'Annual planning',
+                url: '/handbook/exec/annual-planning',
+            },
+        ],
+    },
+    {
+        name: 'Sales & CS',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/overview',
             },
             {
-                name: 'Sales overview',
-                url: '/handbook/growth/sales/overview',
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
             },
             {
                 name: 'Sales operations',
@@ -247,7 +257,11 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'New customer onboarding',
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/sales/icp',
+                    },
+                    {
+                        name: 'Customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
                     },
                     {
@@ -275,7 +289,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
                     {
-                        name: 'Historical import',
+                        name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
                 ],
@@ -620,6 +634,10 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
+                name: 'Overview',
+                url: '/handbook/people/overview',
+            },
+            {
                 name: 'Finance',
                 url: '/handbook/people/finance',
             },
@@ -855,6 +873,12 @@ export const companyMenu = {
             url: '/roadmap',
         },
         {
+            name: 'WIP',
+            icon: 'IconHourglass',
+            color: 'seagreen',
+            url: '/wip',
+        },
+        {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
@@ -906,8 +930,8 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Customer Success',
-                    url: '/teams/customer-success',
+                    name: 'Sales & CS',
+                    url: '/teams/sales-cs',
                 },
                 {
                     name: 'Exec',
@@ -1135,15 +1159,19 @@ export const docsMenu = {
                         },
                         {
                             name: 'Angular',
-                            url: '/tutorials/angular-analytics',
+                            url: '/docs/libraries/angular',
                         },
                         {
                             name: 'Astro',
-                            url: '/tutorials/astro-analytics',
+                            url: '/docs/libraries/astro',
+                        },
+                        {
+                            name: 'Bubble',
+                            url: '/docs/libraries/bubble',
                         },
                         {
                             name: 'Django',
-                            url: '/tutorials/django-analytics',
+                            url: '/docs/libraries/django',
                         },
                         {
                             name: 'Docusaurus v2',
@@ -1154,11 +1182,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Flask',
-                            url: '/tutorials/python-feature-flags',
+                            url: '/docs/libraries/flask',
                         },
                         {
                             name: 'Framer',
-                            url: '/tutorials/framer-analytics',
+                            url: '/docs/libraries/framer',
                         },
                         {
                             name: 'Gatsby',
@@ -1170,6 +1198,10 @@ export const docsMenu = {
                         {
                             name: 'Google Tag Manager',
                             url: '/docs/libraries/google-tag-manager',
+                        },
+                        {
+                            name: 'Laravel',
+                            url: '/docs/libraries/laravel',
                         },
                         {
                             name: 'Next.js',
@@ -1185,7 +1217,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Remix',
-                            url: '/tutorials/remix-analytics',
+                            url: '/docs/libraries/remix',
                         },
                         {
                             name: 'Retool',
@@ -1213,7 +1245,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Svelte',
-                            url: '/tutorials/svelte-analytics',
+                            url: '/docs/libraries/svelte',
                         },
                         {
                             name: 'Vue.js',
@@ -1221,15 +1253,11 @@ export const docsMenu = {
                         },
                         {
                             name: 'Webflow',
-                            url: '/tutorials/webflow',
+                            url: '/docs/libraries/webflow',
                         },
                         {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
-                        },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/libraries/zendesk',
                         },
                     ],
                 },
@@ -1314,6 +1342,10 @@ export const docsMenu = {
                         {
                             name: 'Annotations',
                             url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Channel type',
+                            url: '/docs/data/channel-type',
                         },
                         {
                             name: 'Cohorts',
@@ -1886,13 +1918,17 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Subscriptions',
-                    url: '/docs/product-analytics/subscriptions',
-                    icon: 'IconBell',
-                    color: 'red',
+                    name: 'Tools',
                 },
                 {
-                    name: 'Tools',
+                    name: 'LLM insights',
+                    url: '/docs/product-analytics/llms',
+                    icon: 'IconMagicWand',
+                    color: 'yellow',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Autocapture',
@@ -1901,16 +1937,22 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Data management',
+                    url: '/docs/data',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'Sharing & embedding',
                     url: '/docs/product-analytics/sharing',
                     icon: 'IconShare',
                     color: 'purple',
                 },
                 {
-                    name: 'Data management',
-                    url: '/docs/data',
-                    icon: 'IconDatabase',
-                    color: 'blue',
+                    name: 'Subscriptions',
+                    url: '/docs/product-analytics/subscriptions',
+                    icon: 'IconBell',
+                    color: 'red',
                 },
                 {
                     name: 'Sampling',
@@ -1942,6 +1984,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics',
                     icon: 'IconHome',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Dashboard',
+                    url: '/docs/web-analytics/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'orange',
                 },
                 {
                     name: 'FAQ',
@@ -2272,16 +2320,25 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                 },
+                {
+                    name: 'Features',
+                },
+                {
+                    name: 'Webhook',
+                    url: '/docs/surveys/webhook',
+                    icon: 'IconLaptop',
+                    color: 'orange',
+                },
             ],
         },
         {
-            name: 'Data pipeline',
+            name: 'Data pipelines',
             url: '/docs/cdp',
             color: '[#2EA2D3]',
             icon: 'IconDecisionTree',
             children: [
                 {
-                    name: 'Data pipeline (CDP)',
+                    name: 'Data pipelines (CDP)',
                     badge: {
                         title: 'Preview',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2324,6 +2381,9 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Connectors',
+                },
+                {
                     name: 'Destinations',
                     url: '',
                     children: [
@@ -2342,10 +2402,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/engage-connector',
                             name: 'Engage.so',
-                        },
-                        {
-                            url: '/docs/cdp/replicator',
-                            name: 'Event Replicator',
                         },
                         {
                             url: '/docs/cdp/google-pub-sub-connector',
@@ -2446,34 +2502,29 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'More',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/cdp/common-questions',
                     icon: 'IconQuestion',
                 },
                 {
-                    name: 'Build an app',
+                    name: 'Build a connector',
                     url: '/docs/cdp/build',
                     icon: 'IconGraduationCap',
                     children: [
                         {
-                            name: 'Tutorial',
-                            url: '/docs/cdp/build/tutorial',
-                        },
-                        {
-                            name: 'Troubleshooting',
-                            url: '/docs/cdp/enabling',
+                            name: 'Overview',
+                            url: '/docs/cdp/build',
                         },
                         {
                             name: 'Developer reference',
                             url: '/docs/cdp/build/reference',
                         },
                         {
-                            name: 'Testing',
-                            url: '/docs/cdp/build/testing',
-                        },
-                        {
-                            name: 'TypeScript types',
-                            url: '/docs/cdp/build/types',
+                            name: 'Tutorial',
+                            url: '/docs/cdp/build/tutorial',
                         },
                     ],
                 },
@@ -2582,6 +2633,12 @@ const menu = [
                 icon: 'IconGraph',
                 color: 'blue',
                 url: '/product-analytics',
+            },
+            {
+                name: 'Web analytics',
+                icon: 'IconPieChart',
+                color: '[#36C46F]',
+                url: '/web-analytics',
             },
             {
                 name: 'Session replay',

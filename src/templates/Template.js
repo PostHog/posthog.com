@@ -10,8 +10,6 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
-import CreateDashboardImage from '../../contents/images/templates/create-dashboard.png'
-import CreateSurveyImage from '../../contents/images/templates/create-survey.png'
 import { communityMenu } from '../navs'
 
 export default function Template({ data }) {

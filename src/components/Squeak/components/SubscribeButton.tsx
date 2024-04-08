@@ -32,10 +32,12 @@ export default function SubscribeButton({
     contentType,
     id,
     className = '',
+    show = true,
 }: {
     contentType: 'topic' | 'question'
     id: number | string
     className?: string
+    show?: boolean
 }) {
     if (!id || !contentType) return null
     const [subscribed, setSubscribed] = useState<boolean | null>(null)
@@ -52,7 +54,7 @@ export default function SubscribeButton({
         await setSubscription(contentType, id, !subscribed)
     }
 
-    return (
+    return show || subscribed ? (
         <Tooltip
             content={() => (
                 <div style={{ maxWidth: 320 }}>
@@ -81,5 +83,5 @@ export default function SubscribeButton({
                 )}
             </span>
         </Tooltip>
-    )
+    ) : null
 }

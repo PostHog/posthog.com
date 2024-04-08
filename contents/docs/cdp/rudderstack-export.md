@@ -1,19 +1,19 @@
 ---
 title: RudderStack (Export)
-github: https://github.com/rudderlabs/rudderstack-posthog-plugin
-installUrl: https://app.posthog.com/project/apps?name=RudderStack
-thumbnail: ../../cdp/thumbnails/rudderstack-export.png
+github: 'https://github.com/rudderlabs/rudderstack-posthog-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=RudderStack'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/rudderstack-export.png
 tags:
-    - rudderstack
+  - rudderstack
 ---
+
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 
 Send events from PostHog to RudderStack. RudderStack will recognize PostHog as a data source, so you can use RudderStack's data pipeline features to send PostHog event data to other platforms.
 
-## Requirements
-
-This requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 You'll also need access to the Rudderstack instance you want to export to.
 
@@ -45,10 +45,4 @@ This was created by community members and the team at RudderStack. We'd like to 
 
 This destination is maintained by Rudderstack. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-### What if I have feedback on this destination?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

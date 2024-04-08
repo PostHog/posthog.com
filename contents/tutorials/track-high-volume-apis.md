@@ -1,10 +1,13 @@
 ---
 title: How to track high-volume APIs
 date: 2023-05-09
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['feature flags', 'configuration']
+tags:
+  - feature flags
+  - configuration
 ---
 
 Tracking high-volume APIs is a balancing act. You want to keep them as efficient as possible, while still capturing data to improve them. This tutorial aims to help you find this balance. 
@@ -106,7 +109,7 @@ app.get('/big/:id', (req, res) => {
 
 When we go to our route again, we capture an event that we can see in our PostHog instance.
 
-![Event](../images/tutorials/track-high-volume-apis/event.png)
+![Event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-high-volume-apis/event.png)
 
 In this scenario, capturing every single request to this route creates many capture requests. It hurts the performance of our API to make a request every time. Instead, we can use two different strategies for capturing them: sampling and batching.
 
@@ -248,7 +251,7 @@ cron.schedule('*/10 * * * * *', () => {
 
 Once you restart the server to implement the changes and send multiple events to an ID, you will see the event batches in your PostHog instance. Each batch event has the amount of API calls as a property which we can use for our analysis. Try sending groups of events to multiple different IDs for comparison later.
 
-![Batch](../images/tutorials/track-high-volume-apis/batch.png)
+![Batch](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-high-volume-apis/batch.png)
 
 ## Insights with batched events
 
@@ -258,7 +261,7 @@ Creating insights for batched or sampled events requires a little more planning 
 
 If we want sampled events to represent actual usage, we can multiply the rollout percentage to extrapolate a total count. For example, if we rolled out a flag to capture 10% of events, we can create an insight that takes the total count of events and multiplies it by 10.
 
-![Extrapolated](../images/tutorials/track-high-volume-apis/extrapolated.png)
+![Extrapolated](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-high-volume-apis/extrapolated.png)
 
 If you are doing this, it is important to make sure your rollout percentage matches your formula multiple to avoid large inaccuracies.
 
@@ -266,11 +269,11 @@ If you are doing this, it is important to make sure your rollout percentage matc
 
 For our batched events, we can create an insight that uses the big route batch event, and then sums the property value of calls to give us our total number of calls.
 
-![Sum](../images/tutorials/track-high-volume-apis/sum.png)
+![Sum](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-high-volume-apis/sum.png)
 
 Since we included an ID in the event property, we can use it to break down the sum for each of those IDs and use the total value bar chart type. This gives us a better understanding of individual ID usage of the API.
 
-![Breakdown](../images/tutorials/track-high-volume-apis/breakdown.png)
+![Breakdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-high-volume-apis/breakdown.png)
 
 ## Further reading
 

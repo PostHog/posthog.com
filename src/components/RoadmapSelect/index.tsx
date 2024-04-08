@@ -49,7 +49,7 @@ export default function RoadmapSelect({ teamID, onChange, value }: RoadmapOption
                     }))
                 )
             })
-    }, [])
+    }, [teamID])
 
     return <Select value={value} placeholder="Select a roadmap item" onChange={onChange} options={roadmaps} />
 }

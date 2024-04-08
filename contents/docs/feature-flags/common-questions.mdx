@@ -3,12 +3,12 @@ title: Troubleshooting and FAQs
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import PersonsFeatureFlagLight from '../../images/docs/feature-flags/persons-feature-flag-tab-light-mode.png'
-import PersonsFeatureFlagDark from '../../images/docs/feature-flags/persons-feature-flag-tab-dark-mode.png'
-import BehavioralCohortsLight from '../../images/docs/feature-flags/behavioral-cohorts-light-mode.png'
-import BehavioralCohortsDark from '../../images/docs/feature-flags/behavioral-cohorts-dark-mode.png'
-import DeuplicateAsStaticCohortLight from '../../images/docs/feature-flags/duplicate-as-static-cohort-light-mode.png'
-import DeuplicateAsStaticCohortDark from '../../images/docs/feature-flags/duplicate-as-static-cohort-dark-mode.png'
+export const PersonsFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/persons-feature-flag-tab-light-mode.png"
+export const PersonsFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/persons-feature-flag-tab-dark-mode.png"
+export const BehavioralCohortsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/behavioral-cohorts-light-mode.png"
+export const BehavioralCohortsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/behavioral-cohorts-dark-mode.png"
+export const DeuplicateAsStaticCohortLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/duplicate-as-static-cohort-light-mode.png"
+export const DeuplicateAsStaticCohortDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/duplicate-as-static-cohort-dark-mode.png"
 
 ## Why is my feature flag not working as expected?
 
@@ -33,6 +33,8 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
 If you're [identifying](/docs/product-analytics/identify) users, they may see a different value for a feature flag before and after you call `identify()`. 
 
 To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
+
+> *Note*: This only applies to frontend SDKs. Server-side SDKs do not need to call `identify()`.
 
 ### 3. An ad-blocker may be blocking calls
 

@@ -2,12 +2,12 @@
 title: Troubleshooting and FAQs
 ---
 import {ProductVideo} from 'components/ProductVideo'
-import AssignAnOverrideLight from '../../images/features/experiments/assigning-an-override-light-mode.mp4'
-import AssignAnOverrideDark from '../../images/features/experiments/assigning-an-override-dark-mode.mp4'
+export const AssignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4"
+export const AssignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import ReuseFeatureFlagLight from '../../images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png'
-import ReuseFeatureFlagDark from '../../images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png'
+export const ReuseFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png"
+export const ReuseFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png"
 
 ## How do I use an existing feature flag in an experiment?
 
@@ -50,3 +50,16 @@ Once you create the experiment, go to the feature flag, scroll down to "Release 
 import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx"
 
 <FAQFalseOrNoneEvents />
+
+## Why are my A/B test event numbers lower than when I create an insight directly?
+
+Experiment results only count events that include the experiment's feature flag data. Sometimes, when you capture experiment events, the flags are not loaded yet. This means users don't see the experiment, their events won't have the flag data, and they are not included in the results calculation.
+
+By default, insights count all the events, whether they include flag data or not. This is why they show a higher number. To confirm this, break down an insight by your experiment's flag and check the number of events with the value `None`.
+
+A situation where this happens is using pageviews as your goal metric. Because pageviews are captured as soon as PostHog loads, the flag data may not have loaded yet, especially for first time users where flags aren't cached. Thus, the pageview count in insights might be higher than in your experiment.
+
+To fix this, you make sure flags are immediately available on a page load. There are two options to do this:
+
+1. Wait for feature flags to load before showing the page (low engineering effort, but slows page down by ~200ms).
+2. Use [client-side bootstrapping](/docs/feature-flags/bootstrapping) (high engineering effort, but keeps the page blazing fast).

@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - joe-martin
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: Product growth
 tags:
@@ -21,7 +22,7 @@ Where it gets more complicated is in the particular situations and decisions tha
 
 A good example of product analytics in action is collecting information about how many users reach each stage of an onboarding funnel, then using that information to improve or optimize a funnel. This is exactly [what companies such as Hasura use tools like PostHog for](/customers/hasura)!
 
-![Product analytics funnel](../images/tutorials/pirate-funnel/slide-funnels.png)
+![Product analytics funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/pirate-funnel/slide-funnels.png)
 
 <p align = "center"><figcaption>Above: An example of a simple product analytics funnel</figcaption>
 </p>

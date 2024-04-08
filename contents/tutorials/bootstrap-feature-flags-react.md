@@ -1,11 +1,13 @@
 ---
 title: How to bootstrap feature flags in React and Express
 date: 2023-05-02
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: https://www.youtube-nocookie.com/embed/9z1axmXdqV8
-tags: ['feature flags']
+featuredVideo: 'https://www.youtube-nocookie.com/embed/9z1axmXdqV8'
+tags:
+  - feature flags
 ---
 
 Bootstrapping feature flags make them available as soon as React and PostHog load on the client side. This enables use cases like routing to different pages on load, all feature flagged content being available on first load, and visual consistency. 
@@ -74,7 +76,7 @@ posthog.init(
 
 This also gives us a chance to show why bootstrapping is valuable. On the first load of the site (before the flag is set in cookies), you see `false` in the console even though the flag should return `true`. This is because the flag isn’t loaded yet when you check it. This means the flag might not show the right code on the initial load for that user. Bootstrapping flags solves this.
 
-![False](../images/tutorials/bootstrap-feature-flags-react/false.png)
+![False](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bootstrap-feature-flags-react/false.png)
 
 ## Set up the React app for server-side rendering
 
@@ -310,7 +312,7 @@ root.render(
 
 Once we’ve done this, rebuild your site again with `npm run build` and run `nodemon server`. Open up the site on an incognito or guest window, and we see that the flag returns `true` on the first load. 
 
-![True](../images/tutorials/bootstrap-feature-flags-react/true.png)
+![True](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bootstrap-feature-flags-react/true.png)
 
 This is feature flag bootstrapping working successfully. From here, you can make the flag redirect to specific pages, [control session recordings](/tutorials/limit-session-recordings), or run an A/B test on your home page call to action.
 

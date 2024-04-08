@@ -1,33 +1,34 @@
 ---
 title: Filter Out
-github: https://github.com/PostHog/posthog-filter-out-plugin
-installUrl: https://app.posthog.com/project/apps?name=Filter%Out%20Plugin
-thumbnail: ../../cdp/thumbnails/filter-out.png
+github: 'https://github.com/PostHog/posthog-filter-out-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Filter%Out%20Plugin'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/filter-out.png
 tags:
-    - filter-out
+  - filter-out
 ---
 
-This app enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
-## Requirements
+This connector enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
 
-Using the Filter Out app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Filter Out' and select the app, press Install.
-3. Follow the on-screen steps to configure the app.
+2. Search for 'Filter Out' and select the connector, press Install.
+3. Follow the on-screen steps to configure the connector.
 
-This app will only work on events ingested _after_ the app was enabled.
+This connector will only work on events ingested _after_ the connector was enabled.
 
 ## Configuration
 
-The app can be configured via a JSON file which specifies the properties you would like to filter.
+The connector can be configured via a JSON file which specifies the properties you would like to filter.
 
-In the example config below, the app will only keep events where all of the following conditions are met:
+In the example config below, the connector will only keep events where all of the following conditions are met:
 
 - Email does not contain yourcompany.com
 - Host is not localhost:8000
@@ -66,14 +67,6 @@ The followed types and operators are allowed:
 
 ## FAQ
 
-### Who maintains this app?
+<CommunityMaintained />
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

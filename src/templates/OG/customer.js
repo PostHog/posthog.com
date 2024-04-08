@@ -1,4 +1,4 @@
-module.exports = customer = ({ logo, featuredImage, featuredImageType, title, logoType, font }) => `
+module.exports = customer = ({ logo, featuredImage, title, font }) => `
 <html>
   <head>
     <meta charset="utf-8" />
@@ -120,7 +120,7 @@ module.exports = customer = ({ logo, featuredImage, featuredImageType, title, lo
         <div>
           <img
             style="max-width: 300px;"
-            src="data:image/${logoType};charset=utf-8;base64,${logo}"
+            src="${logo}"
           />
         </div>
       </div>
@@ -145,7 +145,7 @@ module.exports = customer = ({ logo, featuredImage, featuredImageType, title, lo
             bottom: 0;
             width: 100%;
           "
-          src="data:image/${featuredImageType};charset=utf-8;base64,${featuredImage}"
+          src="${featuredImage}"
         />
       </div>
     </section>

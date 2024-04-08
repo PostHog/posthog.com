@@ -1,8 +1,10 @@
 ---
 date: 2023-11-16
-title: "How we work asynchronously"
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/feature-images/teacher.png
+title: How we work asynchronously
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/teacher.png
 featuredImageType: full
 tags:
   - Culture
@@ -27,7 +29,7 @@ Transparency is critical successful async work.
 
 This means, wherever possible, our [handbook](/handbook), [strategy](/handbook/why-does-posthog-exist#our-strategy), [roadmap](/roadmap), and [work discussions](https://github.com/PostHog/posthog/issues) are all open for anyone to see. It also means, internally, the executive team shares financials, updates on fundraising, board slides, and people decisions.
 
-![transp](../images/newsletter/async-work/transparency.png)
+![transp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/async-work/transparency.png)
 
 Each of these is often private and/or synchronous in other companies. Of course, some of our information or discussions are confidential, but as much as possible is shared as publicly as possible.
 
@@ -93,7 +95,7 @@ Instead of a “stakeholder meeting,” we use a [request for comments, AKA RFC]
 
 It includes all the context others need to ask questions and give feedback. Once done, the designated person makes (and owns) the decision. You can see examples of them on [GitHub](https://github.com/PostHog/meta/tree/main/requests-for-comments).
 
-![RFC](../images/newsletter/async-work/RFC.png)
+![RFC](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/async-work/RFC.png)
 
 An RFC eliminates organizing a meeting with the “relevant stakeholders,” preparing and distributing background materials, doing presentations, and having live Q&A. All of this takes unnecessary time for everyone involved and is not async-friendly.
 
@@ -125,7 +127,7 @@ We still do syncs, just less often than most companies. They include:
 - Co-working and meeting up budgets.
 - [One small team](/blog/rome-hackathon) and one [whole company offsite](/blog/aruba-hackathon) every year.
 
-![posthog aruba](../images/blog/aruba/aruba-hackathon-photos.jpeg)
+![posthog aruba](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/aruba-hackathon-photos.jpeg)
 <Caption>Our most recent company offsite in Aruba</Caption>
 
 This helps build connections, energize, and align the team for our async to work the rest of the time.

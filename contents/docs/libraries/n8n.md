@@ -1,6 +1,7 @@
 ---
 title: n8n
-icon: ../../cdp/thumbnails/n8n.png
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/n8n.png
 ---
 
 This n8n app enables you to automate PostHog workflows and create workflows using other services, using n8n.

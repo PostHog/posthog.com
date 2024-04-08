@@ -1,13 +1,15 @@
 ---
-title: "How we decide what to build"
+title: How we decide what to build
 date: 2024-01-10
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/how-we-decide-what-to-build/how-we-decide.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/how-we-decide.png
 featuredImageType: full
 tags:
   - Product engineers
   - Engineering
-  - Product  
+  - Product
 crosspost:
   - Product engineers
   - Founders
@@ -50,7 +52,7 @@ You need a map to go exploring. Mapping everything your users want, or could wan
 
 By talking directly to users and making it easy to share ad hoc feedback, we’ve built a good idea of [all the products our users want](/handbook/which-products), ranging from product analytics to error handling, revenue tracking, and data governance.
 
-![Map](../images/newsletter/how-we-decide-what-to-build/map.jpeg)
+![Map](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/map.jpeg)
 
 The axes for this graph relate to our [ICP](/handbook/who-we-are-building-for): **product engineers** at **high-growth startups**. Everything we’ve built already is in green, while things we’re building at the moment are in blue.
 
@@ -64,7 +66,7 @@ At a lower level, individual teams also have an idea of what all the potential f
 
 Our small teams use their offsites to map these options. Below is an example of a [Team Replay](/small-teams/replay) 2x2 grid from a recent offsite (notes in the top right are high effort and high impact):
 
-![2x2](../images/newsletter/how-we-decide-what-to-build/2x2.jpeg)
+![2x2](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/2x2.jpeg)
 
 After mapping out their ideas, the team voted on the 1-3 features they wanted to work on, “X” at the bottom. Depending on the size of the team, once a feature gets 2-3 Xs, it’s chosen and implementation begins.
 
@@ -104,7 +106,7 @@ All of PostHog’s products (beyond product analytics) were initially built in 1
 
 This enables us to get stronger validation on demand before investing further. Companies like [Apple](https://review.firstround.com/six-steps-to-superior-product-prototyping-lessons-from-an-apple-and-oculus-engineer) and [Spotify](https://blog.crisp.se/wp-content/uploads/2013/01/HowSpotifyBuildsProducts.pdf) also rely on this prototyping-heavy style.
 
-![Spotify](../images/newsletter/how-we-decide-what-to-build/spotify.png)
+![Spotify](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/spotify.png)
 <Caption>Early Spotify’s product development process</Caption>
 
 Another way we test with minimal effort is by building on what we’ve already done. For example, surveys use the JavaScript library to display forms, event capture for responses, and feature flags for targeting. Having all these things built first made surveys easier to implement, a perfect example of a high impact, low effort opportunity.
@@ -123,7 +125,7 @@ Another way we test with minimal effort is by building on what we’ve already d
 
 5. [Li](/community/profiles/129) took ownership of surveys and built on top of site apps (initially), feature flags, and product analytics. Throughout the process, she got feedback (sometimes using surveys, very meta), and shipped towards launch.
 
-![Survey](../images/newsletter/how-we-decide-what-to-build/survey.png)
+![Survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/survey.png)
 
 ## Good reads for product engineers 📖
 

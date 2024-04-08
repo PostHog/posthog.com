@@ -111,10 +111,6 @@ export default function Pipeline({ data, pageContext: { next, previous } }) {
                         url: '/cdp?filter=type&value=ingestion-filtering',
                     },
                     {
-                        name: 'Other',
-                        url: '/cdp?filter=type&value=other',
-                    },
-                    {
                         name: 'Official',
                         url: '/cdp?filter=maintainer&value=official',
                     },

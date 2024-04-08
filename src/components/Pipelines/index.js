@@ -21,10 +21,6 @@ const filters = [
         name: 'Ingestion-filtering',
     },
     {
-        type: 'type',
-        name: 'Other',
-    },
-    {
         type: 'maintainer',
         name: 'Official',
     },
@@ -131,7 +127,6 @@ const query = graphql`
                 }
                 frontmatter {
                     thumbnail {
-                        id
                         publicURL
                     }
                     title

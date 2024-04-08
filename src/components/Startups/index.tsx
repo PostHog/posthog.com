@@ -9,11 +9,12 @@ import SEO from 'components/seo'
 import HubSpotForm from 'components/HubSpotForm'
 
 const benefits = [
-    'A year of PostHog',
+    '$50k in PostHog credit',
+    '$25k in DigitalOcean credit',
+    'A whole year of PostHog',
     'Free PostHog merch',
-    '$50,000 in PostHog credit',
-    'Startup spotlight',
-    'Opportunities for extra credits',
+    'Exclusive newsletters',
+    'Referral bonuses',
 ]
 
 const validationSchema = Yup.object().shape({
@@ -116,7 +117,7 @@ export default function Startups() {
 
             <section className="grid md:grid-cols-2 gap-y-8 md:gap-y-0 md:gap-x-12 max-w-[1100px] mx-auto px-5 my-24">
                 <div>
-                    <h4>Benefits of joining</h4>
+                    <h4>Here's what you'll get...</h4>
                     <ul className="list-none p-0 m-0 grid grid-flow-row md:grid-cols-2 gap-y-4">
                         {benefits.map((benefit) => {
                             return (

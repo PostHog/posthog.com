@@ -3,13 +3,14 @@ date: 2021-03-09
 title: How we justified quitting our jobs and financing PostHog early on
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Being a founder
   - Founders
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Let me tell you a story of the financial pressures that face new founders and how that pressure motivated Tim and me to make an epic ~~pivot~~ [leap](https://posthog.com/blog/story-about-pivots), from bootstrapping to a VC-backed startup.

@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - yakko-majuri
-featuredImage: ../images/blog/running-content.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/running-content.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -31,7 +32,7 @@ I used a combination of PostHog, Metabase, Python scripts, and Google Sheets to 
 
 ## Why we like plugins
 
-![](../images/blog/state-of-plugins/plugin-views.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/state-of-plugins/plugin-views.png)
 
 Above: Pageviews for the Plugin Library (weekly).
 
@@ -49,7 +50,7 @@ As a result, it has been removed from all the graphs and tables you’ll be seei
 
 ## Plugins on PostHog Cloud
 
-![](../images/blog/state-of-plugins/cloud-usage.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/state-of-plugins/cloud-usage.png)
 
 Above: Plugin usage on PostHog Cloud.
 
@@ -63,7 +64,7 @@ The most popular plugin on Cloud (excluding GeoIP) is the Timestamp Parser, whic
 
 ## Plugins on self-hosted PostHog deployments
 
-![](../images/blog/state-of-plugins/self-usage.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/state-of-plugins/self-usage.png)
 
 Above: Plugin usage on self-hosted deployments.
 
@@ -87,7 +88,7 @@ BigQuery is by far the most popular export destination, across both self-hosted 
 
 ## The future of plugins
 
-![](../images/blog/state-of-plugins/plugin-time.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/state-of-plugins/plugin-time.png)
 
 Above: Time spent running plugins on PostHog Cloud (weekly).
 

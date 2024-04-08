@@ -69,7 +69,7 @@ How did they solve the impressive sounding technical problem? Why did they solve
 
 In one interview, assessing organization skill, I've even found out how a candidate used to organize her fridge. "What's something you've done that is so organized, that it was weird".
 
-## Keep it on track
+## Keep it on track
 
 Some candidates, due to nerves, will go down rabbit holes. The ability to sum up information concisely, under pressure, usually isn't something that appears in our job descriptions.
 

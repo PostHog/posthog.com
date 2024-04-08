@@ -1,17 +1,19 @@
 ---
-title: "How to create surveys in Bubble"
+title: How to create surveys in Bubble
 date: 2024-01-09
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['surveys']
+tags:
+  - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import ImgSurveyTemplatesLight from '../images/tutorials/bubble-surveys/survey-templates.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/bubble-surveys/survey-templates-dark.png'
-import ImgSurveyResultsLight from '../images/tutorials/bubble-surveys/survey-results.png'
-import ImgSurveyResultsDark from '../images/tutorials/bubble-surveys/survey-results-dark.png'
+export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-surveys/survey-templates.png"
+export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-surveys/survey-templates-dark.png"
+export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-surveys/survey-results.png"
+export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-surveys/survey-results-dark.png"
 
 Surveys are a great way to collect feedback from your users. This tutorial shows you how to create surveys for your [Bubble](https://bubble.io/) app or marketing site using PostHog.
 
@@ -30,7 +32,7 @@ With the snippet copied, go to your Bubble site settings by clicking on the icon
 
 Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in the **Script/meta tags in header** section. Then, deploy your site to live.
 
-![How to add PostHog to Bubble](../images/tutorials/bubble-surveys/adding-posthog.mp4)
+![How to add PostHog to Bubble](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-surveys/adding-posthog.mp4)
 
 ## 2. Create and launch your survey
 

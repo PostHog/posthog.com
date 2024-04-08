@@ -32,11 +32,12 @@ export interface IProps {
 }
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
-    const { pathname } = useLocation()
+    const { pathname, search } = useLocation()
     const compact = typeof window !== 'undefined' && window !== window.parent
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
+    const [enterpriseMode, setEnterpriseMode] = useState(false)
     const parent =
         other.parent ??
         menu.find(({ children, url }) => {
@@ -114,6 +115,23 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         return () => window.removeEventListener('message', onMessage)
     }, [])
 
+    useEffect(() => {
+        if (enterpriseMode) {
+            document.querySelector('body')?.setAttribute('style', 'font-family: Verdana !important')
+        } else {
+            document.querySelector('body')?.removeAttribute('style')
+        }
+    }, [enterpriseMode])
+
+    useEffect(() => {
+        if (pathname !== '/') {
+            setEnterpriseMode(false)
+        }
+        if (pathname === '/' && search.includes('synergy=true')) {
+            setEnterpriseMode(true)
+        }
+    }, [pathname])
+
     return (
         <Context.Provider
             value={{
@@ -124,6 +142,8 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
                 fullWidthContent,
                 setFullWidthContent,
                 compact,
+                enterpriseMode,
+                setEnterpriseMode,
             }}
         >
             {children}

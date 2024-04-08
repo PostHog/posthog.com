@@ -459,6 +459,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             eyes: Int
             plus1: Int
             minus1: Int
+            total_count: Int
         }
 
     `)

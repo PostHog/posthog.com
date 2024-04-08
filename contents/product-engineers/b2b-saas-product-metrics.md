@@ -1,7 +1,8 @@
 ---
 date: 2022-10-26
 title: The most useful B2B SaaS product metrics
-featuredImage: ../images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
 featuredImageType: full
 author:
   - andy-vandervell
@@ -13,7 +14,7 @@ tags:
   - Growth
 crosspost:
   - Founders
-  - Blog  
+  - Blog
 ---
 
 So, you're building a B2B SaaS product.

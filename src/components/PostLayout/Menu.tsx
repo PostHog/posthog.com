@@ -33,11 +33,8 @@ const Chevron = ({ open, className = '' }: { open: boolean; className?: string }
 }
 
 const getIcon = (name: string) => {
-    return NewIcons[name]
-        ? NewIcons[name]({ className: 'w-5' })
-        : NotProductIcons[name]
-        ? NotProductIcons[name]({ className: 'w-5' })
-        : null
+    const Icon = NewIcons[name] || NotProductIcons[name]
+    return Icon && <Icon className="w-5" />
 }
 
 export const Icon = ({ color, icon }: { color?: string; icon: string | React.ReactNode }) => {

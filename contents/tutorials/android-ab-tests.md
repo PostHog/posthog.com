@@ -1,8 +1,10 @@
 ---
-title: "How to run A/B tests in Android"
+title: How to run A/B tests in Android
 date: 2023-11-22
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 [A/B tests](/ab-testing) enables you to compare the impact of your changes on key metrics. 
@@ -109,14 +111,14 @@ Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")
 
 Our basic set up is now complete. Build and run your app to test that it's working.
 
-![Basic setup of the Android app](../images/tutorials/android-ab-tests/android-basic-setup.mp4)
+![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/android-ab-tests/android-basic-setup.mp4)
 
 ## Adding PostHog to your Android app
 
 First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `Gradle Scripts/build.gradle.kts (Module: app)` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). For this tutorial, we use version `3.1.7`.
 
 
-```gradle_kotlin
+```gradle_kotlin file=app/build.gradle
 dependencies {
     implementation("com.posthog:posthog-android:3.+")
     //... other dependencies
@@ -196,7 +198,7 @@ fun SecondScreen() {
 
 To check your setup, build and run your app. Click your button a few times and you should start seeing events in the [activity tab](https://app.posthog.com/events).
 
-![Android events captured](../images/tutorials/android-ab-tests/android-events.png)
+![Android events captured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-ab-tests/android-events.png)
 
 ## Create an A/B test in PostHog
 
@@ -211,7 +213,7 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![Experiment setup in PostHog](../images/tutorials/android-ab-tests/experiment-setup.png)
+![Experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-ab-tests/experiment-setup.png)
 
 ## Implement the A/B test code
 

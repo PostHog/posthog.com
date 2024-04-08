@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -27,11 +28,11 @@ If you're self hosting and desire these features - [update your PostHog](/docs/r
 
 We kept getting requests to group events by user session, so we listened! We're proud to announce this is now merged:
 
-![sessions overview](../images/sessions-overview.png)
+![sessions overview](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sessions-overview.png)
 
 You can then see exactly how a user interacted with your app:
 
-![sessions more detail](../images/session-broken-out.png)
+![sessions more detail](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/session-broken-out.png)
 
 This should really help with debugging, or just trying to get a detailed view of what users are up to.
 
@@ -55,7 +56,7 @@ If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus 
 
 ### [AWS marketplace - 1-click install](https://aws.amazon.com/marketplace/pp/B089QN5DZM)
 
-![PostHog on AWS Marketplace](../images/aws-posthog-marketplace.jpg)
+![PostHog on AWS Marketplace](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/aws-posthog-marketplace.jpg)
 
 You can now install PostHog in just a click or two via AWS' marketplace.
 

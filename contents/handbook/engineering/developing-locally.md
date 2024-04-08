@@ -349,16 +349,16 @@ You can narrow the run down to only files under matching paths:
 pnpm jest --testPathPattern=frontend/src/lib/components/IntervalFilter/intervalFilterLogic.test.ts
 ```
 
-To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:
+To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab). You may also need to install Playwright with `pnpm exec playwright install`. And then run:
 
 ```bash
-pnpm test:visual-regression
+pnpm test:visual
 ```
 
 To only update snapshots for stories under a specific path, run:
 
 ```bash
-pnpm test:visual-regression:stories frontend/src/lib/Example.stories.tsx
+pnpm test:visual:update frontend/src/lib/Example.stories.tsx
 ```
 
 ### Backend
@@ -399,6 +399,8 @@ So, when working with a feature based on feature flag `foo-bar`, [add a feature 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `DEBUG=1 python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
 
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
+
+Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
 
 ## Extra: Debugging the backend in PyCharm
 

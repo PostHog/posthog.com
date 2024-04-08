@@ -5,9 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/open-source-hotjar-alternatives/replayhog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-hotjar-alternatives/replayhog.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/mWW3lJw81LE
+featuredVideo: 'https://www.youtube-nocookie.com/embed/mWW3lJw81LE'
 author:
   - hanna-crombie
   - andy-vandervell
@@ -33,7 +34,7 @@ Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session re
 > - **Mar 16, 2023:** Removed SessionStack, added Highlight.io. Updated copy and screenshots.
 
 ## 1. PostHog
-![PostHog](../images/screenshots/session-replay.png)
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
 
 [PostHog](https://posthog.com/) is an all-in-one, Product OS that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
 
@@ -63,7 +64,7 @@ PostHog Cloud is free up to 1 million captured events and 5,000 recordings per m
 You can also self-host PostHog Open Source (available under an MIT license) using Docker Compose, though PostHog Cloud is recommended for event volumes exceeding 100k per month.
 
 ## 2. OpenReplay
-![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
+![OpenReplay - open source session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
 [OpenReplay](https://openreplay.com/) is an open-source [alternative to Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) that offers more advanced, technical features for engineers on top of basic session replay. Its tooling is particularly effective for application state and customer support. It has some basic analytics features, such as funnel analysis, though it falls some way short of feature-complete product analytics tools.
 
@@ -85,7 +86,7 @@ OpenReplay’s self-hosted plan is available for free. It also offers a cloud op
 
 ## 3. Highlight.io
 
-![higlightio](../images/blog/open-source-hotjar-alternatives/highlightio.png)
+![higlightio](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/highlightio.png)
 
 [Highlight.io](https://www.highlight.io/) is a popular open-source monitoring platform that's similar, in some ways, to OpenReplay. Core features include session replay with console logs and network monitoring, error monitoring, and customizable log alerts. It lacks some of OpenReplay's additional features, such as click maps and customer support features.
 
@@ -105,7 +106,7 @@ Highlight.io is a developer focused tool with a particular focus on debugging us
 You can self-host for free – Highlight.io recommends an upper limit of 10k sessions and 50k errors per month for hobby deployments. The managed cloud service is free up to 500 monthly sessions and 1,000 errors. Costs thereafter vary depending on usage and retention requirements.
 
 ## 4. UXWizz
-![UXWizz - self hosted session replay](../images/blog/open-source-hotjar-alternatives/img3_UXWizz.png)
+![UXWizz - self hosted session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img3_UXWizz.png)
 
 [UXWizz](https://www.uxwizz.com/) is a simplified, self-hosted product analytics tool offering features like visitor insights, session recording, segments and A/B testing. 
 
@@ -128,7 +129,7 @@ UXWizz is a good choice for individuals and small businesses who want quick, qua
 UXWizz is available as a self-hosted solution only and with prices starting at £129 for a lifetime license, including 1-year support. Additional updates and support are priced as add-on subscriptions.
 
 ## 5. UXlens
-![UXlens - self hosted session replay](../images/blog/open-source-hotjar-alternatives/img4_UXlens.png)
+![UXlens - self hosted session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img4_UXlens.png)
 
 [UXlens](https://uxlens.com/) is a developer-first session recording tool that provides insight into user interface and conversion issues. It does not include any additional analytics tools, but does have useful segment filtering features that help businesses locate blocks in their funnel.
 
@@ -147,7 +148,7 @@ UXlens is a good choice for UX designers and product teams who want to study the
 The cloud version starts at just $6 per month for 6,000 recordings. Lifetime self-host licenses start at $200.
 
 ## 6. [Matomo](https://matomo.org/)
-![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
+![Matomo - open source GA alternative](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
 
 Matomo is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
 

@@ -4,8 +4,14 @@ sidebar: Docs
 showTitle: true
 featuredTutorial: false
 date: 2022-05-04
-author: ['joe-martin']
-tags: ['apps', 'zapier', 'subscriptions', 'cdp', 'product os']
+author:
+  - joe-martin
+tags:
+  - apps
+  - zapier
+  - subscriptions
+  - cdp
+  - product os
 ---
 - *Level:* Easy 🦔
 - *Estimated reading time:* 5 minutes ☕️
@@ -28,7 +34,7 @@ Next, we need to create a Zapier bot in Notion, which will perform the action of
 
 Start by heading to Notion’s Settings page, then click the Integrations tab and select ‘Develop your own integrations’ to start creating your bot. Here you can follow the instructions to give your bot a name, as well as customize it in other ways. You can even grab the PostHog logo from [our brand assets](/handbook/company/brand-assets) and use it as the icon for your bot!
 
-![Notion Integrations Page](../images/tutorials/notion/create-integration.png)
+![Notion Integrations Page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/notion/create-integration.png)
 
 Once you’ve named and created your bot, you’ll need its secret to connect it to Zapier. Find this under the Secrets tab and copy it to a safe place temporarily.
 
@@ -42,7 +48,7 @@ Finally, you’ll need to create a database in Notion and invite your previously
 
 PostHog’s integration with Zapier enables you to create workflows, or Zaps, from a variety of triggers. We want to maintain a list of actions, so in this tutorial we’ll use ‘Action Defined’ as a trigger. This means that the workflow will be completed whenever a new action is created in PostHog.
 
-![PostHog JSON Payload for Zapier](../images/tutorials/notion/notion-test-trigger.png)
+![PostHog JSON Payload for Zapier](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/notion/notion-test-trigger.png)
 
 The Zapier editor will guide you through the process of creating the workflow, including running a test to ensure it is connected to the correct account. Doing so, you’ll be able to see what information can be written to a Notion database. This includes: 
 

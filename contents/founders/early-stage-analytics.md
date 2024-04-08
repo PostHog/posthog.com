@@ -1,22 +1,24 @@
 ---
-title: "The 80/20 of early-stage startup analytics"
+title: The 80/20 of early-stage startup analytics
 date: 2023-02-09
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/posthog-blog-image.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 tags:
- - Founders
- - Growth
- - Product
- - Product analytics
+  - Founders
+  - Growth
+  - Product
+  - Product analytics
 crosspost:
- - Product engineers
- - Blog
+  - Product engineers
+  - Blog
 ---
 
 Building a startup is like trying to find the exit of a dark cave. Sometimes you hear sounds leading you somewhere, but it's mostly dark and hard to understand. In this cave, analytics is like a flashlight. It doesn’t automatically point you to the exit, but it shows you where you're going. You stumble less and spend less time moving in the wrong direction.
 
-![Flashlight](../images/blog/early-stage-analytics/light.png)
+![Flashlight](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/early-stage-analytics/light.png)
 
 Our team works with a lot of high-growth startups (they are [our ideal customers](/handbook/strategy/ideal-customer-persona)). We succeed when they succeed. We know from experience that understanding your users is a vital part of finding early success, and you can't do that without analytics. Here we explain how to use analytics effectively at an early stage.
 
@@ -54,7 +56,7 @@ Session recordings replace number-crunching, database querying, and user testing
 
 A key metrics dashboard is useful for validating that users are actually using the product. This keeps metrics like signups, pageviews, and key feature usage all in one place for the team. Using one of our [pre-built templates](/templates) helps you set this up fast.
 
-![Dashboard](../images/blog/early-stage-analytics/dashboard.png)
+![Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/early-stage-analytics/dashboard.png)
 
 It's probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel), though. It encourages premature optimization, or worse, hides bigger problems (like no one wanting your product). A key metrics dashboard strikes the balance between being useful and overanalyzing. 
 
@@ -64,7 +66,7 @@ PostHog's snippet or library [autocaptures](/docs/data/autocapture) the metrics 
 
 Metrics give an overview of the usage of your product, but nothing beats [talking to users](/blog/making-something-people-want). Session recordings and metrics dashboards show you what users are doing, but they can’t tell you how they are feeling or what they are thinking. You must actively ask users for this information, and setting up mechanisms to do this helps it happen more.
 
-![User interview](../images/blog/early-stage-analytics/interview.png)
+![User interview](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/early-stage-analytics/interview.png)
 
 This means both asking for written quantitative feedback and booking user interviews. Organizing both take can take up lots of time. Luckily, PostHog has surveys for both ([user interview](/templates/user-interview), [feedback](/templates/in-app-feedback-survey). These surveys connect to your product and can display for a selection of users or at a customizable time.
 

@@ -1,8 +1,10 @@
 ---
 title: How to create a great user persona (with examples)
 date: 2023-11-08
-author: ["lior-neu-ner"]
-featuredImage: ../images/blog/experiment-hog.jpg
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
   - Surveys
@@ -10,7 +12,7 @@ tags:
   - Product engineers
   - Product
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 ## What is a user persona? 
@@ -27,7 +29,7 @@ Here's a quick comparison:
 
 As an example, here's how these different personas look like for PostHog (that's us!). We're an all-in-one platform created to help engineers to build better products:
 
-![ICP vs buyer persona vs user persona](../images/blog/how-to-create-personas/posthog-personas-compared.png)
+![ICP vs buyer persona vs user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/posthog-personas-compared.png)
 
 ## What makes a good user persona?
 
@@ -43,15 +45,15 @@ Here are three, real-world user persona examples from well-known companies:
 
 1. **Vercel's** primary user persona is a front-end developer who wants simple solutions to deploying and hosting apps.
 
-![Vercel user persona](../images/blog/how-to-create-personas/vercel-persona.png)
+![Vercel user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/vercel-persona.png)
 
 2. **Github's** primary user persona is a software engineer who wants an easy way to maintain and collaborate on code.
 
-![Github user persona](../images/blog/how-to-create-personas/github-persona.png)
+![Github user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/github-persona.png)
 
 3. **Asana's** primary user persona is a project manager who wants to track tasks and deliver successful projects.
 
-![Asana user persona](../images/blog/how-to-create-personas/asana-persona.png)
+![Asana user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/asana-persona.png)
 
 If you're looking for more examples, GitLab has published the [16 different user personas they use](https://about.gitlab.com/handbook/product/personas/).
 
@@ -69,7 +71,7 @@ This will tell you you who your users are, what motivates them, and what their p
 
 The quickest and easiest way to ask these questions is with an [in-product survey](/surveys):
 
-![Example of in-product survey to create a user persona](../images/blog/how-to-create-personas/survey-personas.png)
+![Example of in-product survey to create a user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/survey-personas.png)
 
 If you need to go more in-depth, you can also interview your users. Good questions to dig into in these interviews are:
 
@@ -145,7 +147,7 @@ To illustrate this with an example, below is the completed user persona for our 
 - Prioritization is important to them.
 - People who complained about email overload were receiving 100 emails a day.
 
-![The user persona for our example email app](../images/blog/how-to-create-personas/email-app-example-persona.png)
+![The user persona for our example email app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/email-app-example-persona.png)
 
 ## Next steps
 

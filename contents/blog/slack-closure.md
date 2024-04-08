@@ -1,10 +1,12 @@
 ---
 date: 2024-01-13
-title: "We're building a better PostHog community by closing our public Slack"
+title: We're building a better PostHog community by closing our public Slack
 rootPage: /blog
 category: PostHog news
-author: ["joe-martin"]
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+author:
+  - joe-martin
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 ---
 

@@ -1,12 +1,14 @@
 ---
-title: "Startup Spotlight: Unified.to"
+title: 'Startup Spotlight: Unified.to'
 date: 2023-06-21
-author: ["joe-martin"]
+author:
+  - joe-martin
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/spotlight_unified.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/spotlight_unified.png
 featuredImageType: full
 category: Startups
 ---

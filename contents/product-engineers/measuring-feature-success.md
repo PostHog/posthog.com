@@ -1,15 +1,17 @@
 ---
 title: How we build features users love (really fast)
 date: 2023-05-10
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/green-blog-image.jpg
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 category: Inside PostHog
 tags:
- - Feature flags
- - Feature management
- - Product engineers
- - Product
+  - Feature flags
+  - Feature management
+  - Product engineers
+  - Product
 crosspost:
   - Founders
   - Blog
@@ -28,7 +30,7 @@ In this post, I'll share how we measure feature success at PostHog to build feat
 
 > **What is sampling?** The sampling feature speeds up queries by analyzing a portion of the data and extrapolating the results.
 >
-> ![Sampling in action](../images/blog/measuring-feature-success/sampling.mp4)
+> ![Sampling in action](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/measuring-feature-success/sampling.mp4)
  
 ## Step 1: Deciding to build a feature
  
@@ -53,7 +55,7 @@ Once we decide to build a feature, the success evaluation can begin. We move fas
 
 This is exactly what Yakko did with sampling. He picked one insight (lifecycle was easiest), updated the API, built a quick UI, and [shipped it](https://github.com/PostHog/posthog/pull/14283) behind a feature flag. Within hours, the feature was working in production with production data. 
 
-![Lifecycle](../images/blog/measuring-feature-success/lifecycle.png)
+![Lifecycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/measuring-feature-success/lifecycle.png)
 
 A feature is successful at this stage if it solves the issue, isn’t broken, and can scale to millions of events and users. Since we use PostHog at PostHog, this often means using it ourselves (aka dogfooding). Feature flags let us roll out or roll back quickly if needed.
 
@@ -67,7 +69,7 @@ If a specific user requested the feature or has a problem potentially solved by 
 
 Sampling got its first real users through the support hero tagging Yakko in places they felt sampling might help out. This helped improve the experience for customers without completing the feature. When these users were positive about their experience, he knew the feature was successful so far and continued the rollout. 
 
-![Message](../images/blog/measuring-feature-success/message.png)
+![Message](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/measuring-feature-success/message.png)
 
 A feature is successful at this stage if users use it and the qualitative feedback we receive from them is positive. A common goal at this stage is "5 happy teams using it."
 
@@ -77,7 +79,7 @@ Once we have positive feedback and usage in beta, and the feature reaches the po
 
 Yakko continued to update the simple UI for sampling (it changed four times) to ultimately land on something he was happy with. He instrumented tracking for the feature’s usage, and rolled it out to 25% of all organizations in PostHog.
 
-![Sampling UI](../images/blog/measuring-feature-success/sampling.png)
+![Sampling UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/measuring-feature-success/sampling.png)
 
 At this stage, success is significant usage by the target user. What this portion is depends on the usage of similar features. At PostHog, this looks like:
 
@@ -95,7 +97,7 @@ In Yakko’s case, he:
 - watched [session replays](/tutorials/explore-insights-session-recordings) of the feature to see if it was having the intended impact or causing any confusion (he fixed a few visual regressions as a result of this).
 - used the [user interview app](/docs/apps/user-interview) to prompt users who tried sampling for a user interview.
 
-![Dashboard](../images/blog/measuring-feature-success/dashboard.png)
+![Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/measuring-feature-success/dashboard.png)
 
 After doing all these, he was confident the feature was trending towards success, and continued the rolling out until he hit 100% of users.
 

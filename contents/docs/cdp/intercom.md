@@ -1,19 +1,20 @@
 ---
 title: Intercom
-github: https://github.com/posthog/posthog-intercom-plugin
-installUrl: https://app.posthog.com/project/apps?name=Intercom
-thumbnail: ../../cdp/thumbnails/intercom.png
+github: 'https://github.com/posthog/posthog-intercom-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Intercom'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/intercom.png
 tags:
-    - intercom
+  - intercom
 ---
+
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
 Send event data from PostHog to Intercom whenever an event matches a user who has been identified by their email address.
 
-## Requirements
-
-Using this requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
@@ -27,7 +28,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 After you've pressed 'Install', you need to add your Intercom API key at the configuration step, as well as add triggering events you want to send to Intercom.
 
--   **Intercom API Key (required)**: you can get this one from the [Intercom Developer Hub](https://developers.intercom.com/building-apps/), by creating a new app and receiving an API Key
+-   **Intercom API Key (required)**: you can get this one from the [Intercom Developer Hub](https://developers.intercom.com/building-apps/), by creating a new connector and receiving an API Key
 -   **Triggering events (required)**: A comma-separated list of PostHog events you want to send to Intercom (e.g.: `$identify,mycustomevent` ).
 
 ## Additional configuration
@@ -60,14 +61,6 @@ If you are using a different SDK, you'll need to manually the `email` property f
 
 We'd like to thank PostHog team member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this destination. Thank you, Emanuele!
 
-### Who maintains this destination?
+<CommunityMaintained />
 
-This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this destination?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

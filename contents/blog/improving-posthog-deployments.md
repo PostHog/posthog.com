@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/simpler-self-deployments.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/simpler-self-deployments.png
 featuredImageType: full
 author:
   - harry-waye
@@ -110,9 +111,9 @@ To simplify this task for our self-hosting users, we’ve improved the built-in 
 
 We create new templated dashboards when we identify better metrics to monitor, and techniques to debug an installation, and make them available to everyone in the next release.
 
-![PostHog - built-in PostgreSQL dashboard](../images/blog/improving-posthog-deployments/postgresql.png)
+![PostHog - built-in PostgreSQL dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/improving-posthog-deployments/postgresql.png)
 
-![PostHog - built-in Redis dashboard](../images/blog/improving-posthog-deployments/redis.png)
+![PostHog - built-in Redis dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/improving-posthog-deployments/redis.png)
 
 Thanks to this work, you can now get critical insights about the majority of PostHog services by simply enabling the monitoring features in the Helm chart. You can read more about these in our [chart configuration docs](https://posthog.com/docs/self-host/deploy/configuration).
 

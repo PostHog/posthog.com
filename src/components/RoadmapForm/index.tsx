@@ -14,6 +14,7 @@ import { CallToAction } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
 import { IconPlus, IconX } from '@posthog/icons'
 import * as Yup from 'yup'
+import Toggle from 'components/Toggle'
 
 const GitHubURLs = ({
     urls,
@@ -80,7 +81,7 @@ const ValidationSchema = (status?: Status) =>
             then: Yup.object().required('Please select a topic'),
             otherwise: Yup.object().notRequired(),
         }),
-        team: Yup.number().required('Please select a team'),
+        team: Yup.object().required('Please select a team'),
         category: Yup.string().when([], {
             is: () => status === 'complete',
             then: Yup.string().required('Please select a type'),
@@ -177,9 +178,7 @@ export default function RoadmapForm({
                                   image: uploadedFeaturedImage?.id,
                               }
                             : null),
-                        teams: {
-                            connect: [team],
-                        },
+                        teams: [team.id],
                         betaAvailable,
                         milestone,
                         githubUrls: githubUrls.filter((url) => !!url),
@@ -207,7 +206,7 @@ export default function RoadmapForm({
     })
 
     return (
-        <form onSubmit={handleSubmit} className="m-0">
+        <form onSubmit={handleSubmit} className="mt-2 mb-6 border-b border-light dark:border-dark pb-8">
             <div className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark overflow-hidden">
                 {status === 'complete' && (
                     <div className="border-b border-border dark:border-dark">
@@ -232,7 +231,7 @@ export default function RoadmapForm({
                     </div>
                 )}
                 <div className="border-b border-border dark:border-dark">
-                    <TeamSelect value={values.team} onChange={(teamID) => setFieldValue('team', teamID)} />
+                    <TeamSelect value={values.team} onChange={(team) => setFieldValue('team', team)} />
                 </div>
                 {status === 'complete' && (
                     <TopicSelect label="Topic" value={values.topic} setFieldValue={setFieldValue} />
@@ -281,34 +280,19 @@ export default function RoadmapForm({
                     <div className="py-2 border-t border-border dark:border-dark px-2">
                         <Slider className="space-x-1">
                             {status === 'in-progress' && (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setFieldValue('betaAvailable', !values.betaAvailable)
-                                    }}
-                                    className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
-                                        values.betaAvailable
-                                            ? 'font-bold border-black/90 dark:border-white/90'
-                                            : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
-                                    }`}
-                                >
-                                    Beta available
-                                </button>
+                                <Toggle
+                                    checked={values.betaAvailable}
+                                    onChange={(checked) => setFieldValue('betaAvailable', checked)}
+                                    label="Beta available"
+                                />
                             )}
                             {status === 'complete' && (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setFieldValue('milestone', !values.milestone)
-                                    }}
-                                    className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
-                                        values.milestone
-                                            ? 'font-bold border-black/90 dark:border-white/90'
-                                            : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
-                                    }`}
-                                >
-                                    Show on homepage
-                                </button>
+                                <Toggle
+                                    checked={values.milestone}
+                                    onChange={(checked) => setFieldValue('milestone', checked)}
+                                    label="Show on homepage"
+                                    tooltip='Adds roadmap item to "We ship weirdly fast" section on homepage'
+                                />
                             )}
                         </Slider>
                     </div>

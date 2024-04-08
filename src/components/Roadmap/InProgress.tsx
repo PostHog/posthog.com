@@ -9,10 +9,14 @@ import { useToast } from '../../hooks/toast'
 import useSWR from 'swr'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import Modal from 'components/Modal'
-import { IconInfo, IconX } from '@posthog/icons'
+import { IconInfo, IconBell, IconUndo, IconShieldLock } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import SideModal from 'components/Modal/SideModal'
+import TeamUpdate from 'components/TeamUpdate'
+import { CallToAction } from 'components/CallToAction'
+import RichText from 'components/Squeak/components/RichText'
+import { useFormik } from 'formik'
+import transformValues from 'components/Squeak/util/transformValues'
 
 type RoadmapSubscriptions = {
     data: {
@@ -27,6 +31,68 @@ type RoadmapSubscriptions = {
     }
 }
 
+const Update = ({ body, questionID, fetchUpdates }) => {
+    const { getJwt, user } = useUser()
+    const [editing, setEditing] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const { setFieldValue, values, handleSubmit, submitForm } = useFormik({
+        initialValues: { body: '', images: [] },
+        onSubmit: async ({ body, images }) => {
+            const profileID = user?.profile.id
+            const jwt = await getJwt()
+            if (!profileID || !jwt) return
+            setLoading(true)
+            const transformedValues = await transformValues({ body, images: images ?? [] }, profileID, jwt)
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
+                body: JSON.stringify({
+                    data: {
+                        body: transformedValues.body,
+                    },
+                }),
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+            await fetchUpdates()
+            setLoading(false)
+            setEditing(false)
+        },
+    })
+    return (
+        <li>
+            {editing ? (
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
+                            <RichText
+                                onSubmit={submitForm}
+                                autoFocus
+                                setFieldValue={setFieldValue}
+                                initialValue={body}
+                                values={values}
+                            />
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <CallToAction disabled={loading} onClick={submitForm} size="md">
+                                Update
+                            </CallToAction>
+                            <button onClick={() => setEditing(false)} className="text-red font-bold text-sm">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            ) : (
+                <>
+                    <Question id={questionID} showActions={false} />
+                </>
+            )}
+        </li>
+    )
+}
+
 export function InProgress(
     props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean; modalOpen?: boolean }
 ) {
@@ -36,6 +102,8 @@ export function InProgress(
     const [updates, setUpdates] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
     const [authModalOpen, setAuthModalOpen] = useState(false)
+    const [addingUpdate, setAddingUpdate] = useState(false)
+    const isModerator = user?.role?.type === 'moderator'
 
     const [more, setMore] = useState(props.more ?? false)
     const [loading, setLoading] = useState(false)
@@ -212,7 +280,7 @@ export function InProgress(
         }
     }
 
-    useEffect(() => {
+    const fetchUpdates = async () => {
         const query = qs.stringify(
             {
                 sort: ['createdAt:desc'],
@@ -246,6 +314,10 @@ export function InProgress(
             .then(({ data: updates }) => {
                 setUpdates(updates)
             })
+    }
+
+    useEffect(() => {
+        fetchUpdates()
     }, [])
 
     useEffect(() => {
@@ -300,9 +372,9 @@ export function InProgress(
                         <p className="m-0 !text-[15px] !leading-none opacity-80 inline">
                             {more
                                 ? description
-                                : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
+                                : description.substring(0, 300) + (description?.length > 300 ? '...' : '')}
                         </p>
-                        {!more && (description?.length > 125 || githubPages?.length > 0) && (
+                        {!more && (description?.length > 300 || githubPages?.length > 0) && (
                             <button
                                 onClick={() => setMore(true)}
                                 className="font-semibold text-red inline text-sm ml-1"
@@ -355,44 +427,7 @@ export function InProgress(
                 </div>
 
                 <div className="px-4">
-                    <div className="flex flex-col md:flex-row justify-between md:items-center my-4">
-                        <h6 className="m-0">Project updates</h6>
-
-                        <button
-                            disabled={loading}
-                            onClick={() => (subscribed ? unsubscribe() : subscribe())}
-                            className="text-sm font-semibold flex gap-2 items-center"
-                            data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
-                        >
-                            <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
-                                {loading ? (
-                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
-                                ) : subscribed ? (
-                                    <Check className="w-[14px] h-[14px]" />
-                                ) : (
-                                    <Plus className="w-[14px] h-[14px]" />
-                                )}
-                            </span>
-                            <span>
-                                {subscribed
-                                    ? 'Unsubscribe'
-                                    : betaAvailable
-                                    ? 'Get early access'
-                                    : 'Get updates about this project'}
-                                {!subscribed && !betaAvailable && (
-                                    <Tooltip
-                                        content="Get email notifications when the team shares updates about this project, releases a beta, or
-                                            ships this feature."
-                                        contentContainerClassName="max-w-xs"
-                                    >
-                                        <div className="inline-block relative">
-                                            <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
-                                        </div>
-                                    </Tooltip>
-                                )}
-                            </span>
-                        </button>
-                    </div>
+                    <h6 className="mt-4 mb-2">Project updates</h6>
 
                     {updates?.length > 0 ? (
                         <ul className="list-none m-0 p-0 mb-6">
@@ -400,23 +435,75 @@ export function InProgress(
                                 ({
                                     attributes: {
                                         question: {
-                                            data: { id },
+                                            data: {
+                                                id,
+                                                attributes: { body },
+                                            },
                                         },
                                     },
                                 }) => {
                                     return (
                                         <li className="mb-4 last:mb-0" key={id}>
-                                            <Question showActions={false} id={id} />
+                                            <Update questionID={id} body={body} fetchUpdates={fetchUpdates} />
                                         </li>
                                     )
                                 }
                             )}
                         </ul>
                     ) : (
-                        <p className="!text-sm italic -mt-2">
+                        <p className="!text-[15px] italic -mt-2 opacity-75">
                             No updates yet. Engineers are currently hard at work, so check back soon!
                         </p>
                     )}
+
+                    <div className="flex gap-2">
+                        {!isModerator && (
+                            <CallToAction
+                                size="md"
+                                disabled={loading}
+                                onClick={() => (subscribed ? unsubscribe() : subscribe())}
+                                className="text-sm font-semibold flex gap-2 items-center [&_>span]:flex [&_>span]:items-center [&_>span]:gap-2"
+                                data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
+                                type={subscribe ? 'secondary' : 'primary'}
+                            >
+                                {loading ? (
+                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                ) : subscribed ? (
+                                    <IconUndo className="w-5 h-5 inline-block" />
+                                ) : (
+                                    <>{betaAvailable ? '' : <IconBell className="w-5 h-5 inline-block" />}</>
+                                )}
+                                <span>
+                                    {subscribed
+                                        ? 'Unsubscribe'
+                                        : betaAvailable
+                                        ? 'Request early access'
+                                        : 'Get updates about this project'}
+                                    {!subscribed && !betaAvailable && (
+                                        <Tooltip
+                                            content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                            ships this feature."
+                                            contentContainerClassName="max-w-xs"
+                                        >
+                                            <div className="inline-block relative">
+                                                <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                            </div>
+                                        </Tooltip>
+                                    )}
+                                </span>
+                            </CallToAction>
+                        )}
+
+                        {isModerator && !addingUpdate && (
+                            <CallToAction size="md" type="secondary" onClick={() => setAddingUpdate(true)}>
+                                <Tooltip content="Only moderators can see this" placement="top">
+                                    <IconShieldLock className="w-6 h-6 inline-block -my-1 mr-1" />
+                                </Tooltip>
+                                Add an update
+                            </CallToAction>
+                        )}
+                    </div>
+                    {isModerator && addingUpdate && <TeamUpdate roadmapID={squeakId} onSubmit={fetchUpdates} />}
                 </div>
             </li>
         </>

@@ -3,15 +3,16 @@ title: Python
 sidebarTitle: Python
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-python
-icon: ../../../images/docs/integrate/python.svg
+github: 'https://github.com/PostHog/posthog-python'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: false
-    sessionRecording: false
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -144,30 +145,7 @@ is fully flushed. To avoid this, you can either:
 
 ## Django
 
-For Django, you can do the initialisation of the key in the AppConfig, so that it's available everywhere.
-
-in `yourapp/apps.py`
-
-```python
-from django.apps import AppConfig
-import posthog
-
-class YourAppConfig(AppConfig):
-    def ready(self):
-        posthog.api_key = '<ph_project_api_key>'
-        posthog.host = '<ph_client_api_host>' # You can remove this line if you're using app.posthog.com
-
-```
-
-Then, anywhere else in your app you can do:
-
-```python
-import posthog
-
-def purchase(request):
-    # example capture
-    posthog.capture(request.user.pk, 'purchase', ...)
-```
+See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django.
 
 # Integrations
 

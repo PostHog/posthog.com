@@ -1,3 +1,39 @@
+## Q2 2024 Objectives
+
+- HogQL-based querying
+  - Convert the remaining legacy queries to HogQL and release to public (Thomas, Julian, Marius)
+    - Trends? Funnels? Paths?
+    - Cohorts
+  - Remove legacy querying backend (Thomas, Julian)
+    - Convert filters to query (insights, notebooks, activity log, experiments)
+    - Clean up or rewrite dashboardLogic
+  - Missing Product Analytics features (Thomas, Julian)
+    - Breakdowns (multiple) in literally everything
+    - Make a list based on GitHub issues from customer requests…
+  - Missing HogQL features (Tom, Marius)
+    - Type system, JSON
+    - Missing things when building funnels
+
+- Querying and processing performance (Thomas, Julian)
+  - Global performance overview dashboards
+    - Insights
+    - Exports
+    - Cohort recalculations
+  - Query request tracing
+    - Possibly query runner Python optimizations
+    - Exports improvements
+  - Identify top 5 query optimizations in terms of impact
+
+- Artificial Hog / Post Intelligence (Michael)
+  - Ask a question to get a magical insight (aware of your taxonomy)
+  - Figure out infra for upgrading queries and models
+  - Product-wide framework for opting into sharing with OpenAI
+
+- Activation (side quest: Michael)
+  - Michael to work with Growth to identify optimizations to getting started with Product Analytics
+
+## Q1 2024 Objectives
+
 1. HogQL & Data Exploration (Julian, Marius)
   - Convert ALL our insights to use HogQL as their base.
     - Most product analytics insights are built in a bespoke way using our "legacy" Python codebase. This code produces ClickHouse SQL as its output, and is hard to extend, as all queries mix both platform level concerns (e.g. how "group analytics" works) and query level concerns (most optimal query for this data structure). Adding new query types or new platform features has turned out to be a nightmater with so many loose parts to consider.
@@ -25,10 +61,3 @@
 3. BI (Tom)
   - Support non-event data sources on HogQL insights.
   - Build the new querying experience, and/or integrate it into the "Explore" view.
-  
-
-### Action plan: 
-
-- Come January, we'll take [this list](https://github.com/PostHog/meta/issues/130), split the checkboxes between the team, and keep going till it's done. ETA: end of January.
-- In February (leap year 🎉), we'll make Product Analytics ~great~ spark joy again: insights UI cleanup, unified data exploration experience, adding missing analysis features (lifecycle breakdowns, etc), and in parallel work on the BI and the HogQL editing experience. What _exactly_ we'll do and in what order is still TBD.
-- In March we'll keep going. The goal is to have an amazing BI / Product Analytics / Insights / Explore / HogQL experience by the end of it.

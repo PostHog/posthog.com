@@ -3,14 +3,15 @@ date: 2022-11-18
 title: How to run finance at your startup without hiring a finance person
 author:
   - charles-cook
-featuredImage: ../images/blog/equity.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/equity.png
 featuredImageType: full
 tags:
   - Founders
   - Finance & ops
   - Being a founder
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 We run finance at PostHog without a dedicated finance person. This is a comprehensive, step-by-step guide to do just that. If you implement _everything_ below, it should take one person a week to complete. 

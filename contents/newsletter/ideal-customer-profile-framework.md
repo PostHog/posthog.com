@@ -1,22 +1,26 @@
 ---
-title: "Defining our ICP is the most important thing we ever did"
+title: Defining our ICP is the most important thing we ever did
 date: 2024-01-25
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/icp/icp-feat.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/icp/icp-feat.png
 featuredImageType: full
 tags:
   - Product
   - Marketing
   - Product-market fit
   - Sales & CS
-  - Growth  
+  - Growth
 crosspost:
   - Founders
   - Blog
-seo: {
-  metaTitle: "Creating an Ideal Customer Profile transformed our company",
-  metaDescription: "Learning how to create an ideal customer profile will transform every part of your business for the better. This is everything you need to know about the ICP framework."
-}    
+seo:
+  metaTitle: Creating an Ideal Customer Profile transformed our company
+  metaDescription: >-
+    Learning how to create an ideal customer profile will transform every part
+    of your business for the better. This is everything you need to know about
+    the ICP framework.
 ---
 
 Defining our ideal customer profile (ICP) is one of the most important things we’ve ever done. We wish we’d done it sooner. Most startup founders say the same.
@@ -43,7 +47,7 @@ An ICP defines your customers – i.e. companies or teams that need your product
 
 Personas, on the other hand, describe the motivations and frustrations of specific users. Here’s an example from Vercel:
 
-![Vercel user persona](../images/blog/how-to-create-personas/vercel-persona.png)
+![Vercel user persona](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-create-personas/vercel-persona.png)
 
 **Why is this important?** A user persona isn’t specific enough. It won’t help you figure out your go-to-market strategy, or how you should price your product. Building your business around a user persona is a great way to build a product people love, but won’t pay for.
 
@@ -81,7 +85,7 @@ Back when PostHog was just a self-hosted product analytics tool, our first ICP w
 2. Things our customers have
 3. Things our customers don’t need
 
-![initial icp](../images/newsletter/icp/icp.png)
+![initial icp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/icp/icp.png)
 
 This lacks a few important details you need for a complete ICP, such as company size and revenue, but it was specific enough for us to test and refine later.
 
@@ -135,7 +139,7 @@ As you talk to more users and gather more intel, you should add more detail unti
 
 Eventually your ICP should look something like this, our current ICP:
 
-![posthog icp](../images/newsletter/icp/posthog-icp.png)
+![posthog icp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/icp/posthog-icp.png)
 
 This ICP works for us because they:
 
@@ -156,7 +160,7 @@ It’ll be impossible to test and give you a false security. An industry is not 
 ### Leaving it too late will cost you time 🕣
 You should start trying to define your ICP once you have a working product and some traction. Leaving it too late will waste a lot time, as we found out:
 
-![james tweet](../images/newsletter/icp/james-quote.png)
+![james tweet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/icp/james-quote.png)
 
 ### It will take you months to perfect your ICP 📆
 Startups we’ve spoken to (and our own experience) suggests anywhere between 3 months to a year is normal. It will also evolve over time. Don’t let it go stale.

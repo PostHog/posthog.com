@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
@@ -15,10 +15,11 @@ import SearchBox from 'components/Search/SearchBox'
 
 const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     const { compact } = useLayoutData()
+
     return (
         <div className={className}>
             {compact ? (
-                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-50 bg-light dark:bg-dark">
+                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-[50] bg-light dark:bg-dark">
                     <SearchBox className="!w-full !py-2" location="mobile-header" />
                 </div>
             ) : (

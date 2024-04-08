@@ -1,10 +1,13 @@
 ---
-title: How to capture new RSS items in PostHog (releases, blogs, status)
+title: 'How to capture new RSS items in PostHog (releases, blogs, status)'
 date: 2023-08-30
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['events', 'product analytics']
+tags:
+  - events
+  - product analytics
 ---
 
 RSS is a popular format for providing feeds of content. For example, GitHub uses it to provide feeds of releases, blogs provide feeds of new posts, and status pages provide feeds of incidents
@@ -97,7 +100,7 @@ Once we make all of these changes, we have a function that looks like this:
 
 When we set it up and schedule it to run every day, it captures new blogs published in PostHog.
 
-![Event captured](../images/tutorials/rss-item-capture/event.png)
+![Event captured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/rss-item-capture/event.png)
 
 ## Capturing app status changes
 

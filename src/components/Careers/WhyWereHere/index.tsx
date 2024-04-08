@@ -24,13 +24,13 @@ export const WhyWereHere = () => {
                                     </div>
                                     <figure className="mb-0">
                                         <StaticImage
-                                            src="../../../../contents/images/team/james.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/team/james.png"
                                             alt="James Hawkins"
                                             className="w-14 h-14 rounded-full bg-yellow border-2 border-solid border-white"
                                             placeholder="blurred"
                                         />
                                         <StaticImage
-                                            src="../../../../contents/images/team/tim.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/team/tim.png"
                                             alt="Tim Glaser"
                                             className="w-14 h-14 rounded-full bg-red border-2 border-solid border-white -ml-4"
                                             placeholder="blurred"

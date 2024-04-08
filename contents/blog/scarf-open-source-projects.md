@@ -6,7 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 keywords: null
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 author:
   - avi-press

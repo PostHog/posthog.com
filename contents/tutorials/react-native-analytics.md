@@ -1,11 +1,16 @@
 ---
-title: How to set up React Native (Expo) analytics, feature flags, and more
+title: 'How to set up React Native (Expo) analytics, feature flags, and more'
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2023-01-12
 featuredTutorial: false
-tags: ["configuration", "feature flags", "persons", "events"]
+tags:
+  - configuration
+  - feature flags
+  - persons
+  - events
 ---
 
 React Native is a popular mobile app framework for writing native mobile apps using React.
@@ -28,7 +33,7 @@ npx expo start
 
 Open your Expo Go app, scan the QR code in your terminal, and you should open an app with a white screen and some text.
 
-![Basic app](../images/tutorials/react-native-analytics/basic.png)
+![Basic app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-native-analytics/basic.png)
 
 Now that we are up and running, we can add some functionality to help us showcase the features of PostHog.
 
@@ -81,7 +86,7 @@ const styles = StyleSheet.create({
 
 A navigation bar was added to the top of the app and our home page changed:
 
-![](../images/tutorials/react-native-analytics/home.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-native-analytics/home.png)
 
 We still need a second function for the `About()` page, and a button that uses a `navigation` prop to navigate between the two. Also, set the `initialRouteName` in the `Stack.Navigator` to “Home.”
 
@@ -177,7 +182,7 @@ function Home({ navigation }) {
 
 This gives us an ugly, but functional app:
 
-![A functional, ugly app](../images/tutorials/react-native-analytics/buttons.png)
+![A functional, ugly app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-native-analytics/buttons.png)
 
 Feel free to add features and make it look better, but for the sake of our tutorial, this app is ready to integrate with PostHog.
 
@@ -223,7 +228,7 @@ export default function App() {
 
 Once you save this, reload the app, and click around, you should see autocaptured events in your PostHog instance from the `react-native` library.
 
-![Auto capture](../images/tutorials/react-native-analytics/autocapture.png)
+![Auto capture](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-native-analytics/autocapture.png)
 
 ## 4. Setting up user identification, event capture, and feature flags
 
@@ -288,7 +293,7 @@ Last, but not least, is feature flags. Feature flags are a powerful way to relea
 
 We use a feature flag to add a call-to-action button on our About page. To do this, first, create the feature flag in PostHog. You can do this by going to “Feature Flags” in the sidebar, clicking “Create new feature flag,” entering a key value (I chose `about-cta`), then pressing save.
 
-![Feature flags](../images/tutorials/react-native-analytics/feature-flag.gif)
+![Feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-native-analytics/feature-flag.gif)
 
 Copy the key value, and head back to your code. To use feature flags in your app, import `useFeatureFlag` and then call it with the flag key where you want the decision made. Add it to our `About()` function like this:
 
@@ -314,7 +319,7 @@ function About() {
 
 Once you saved this and reloaded the app, when you go to the About page, you should see a button to click.
 
-![CTA](../images/tutorials/react-native-analytics/cta.png)
+![CTA](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-native-analytics/cta.png)
 
 To confirm the feature flag is working, you can go back to PostHog and set the release condition to 0%. When you reload the app, the CTA should disappear.
 

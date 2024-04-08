@@ -144,9 +144,9 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 questionId: question?.id,
             })
 
-            fetchUser()
+            await fetchUser()
 
-            mutate()
+            await mutate()
         } catch (error) {
             posthog?.capture('squeak error', {
                 source: 'useQuestion.reply',
