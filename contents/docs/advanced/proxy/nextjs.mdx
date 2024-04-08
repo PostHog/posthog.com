@@ -38,7 +38,7 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
 })
 ```
 
-> Note: Next.js proxies are limited to requests from the Next.js application itself. This solution won't work if you are making requests from another application or website due to CORS errors. [We have an open issue with Next.js](https://github.com/vercel/next.js/issues/63948) to try and resolve this problem. For now, we recommend only making requests from your Next.js application to a Next.js proxy.
+> **Note:** Next.js proxies are limited to requests from the Next.js application itself. This solution won't work if you are making requests from another application or website due to CORS errors. [We have an open issue with Next.js](https://github.com/vercel/next.js/issues/63948) to try and resolve this problem. For now, we recommend only making requests from your Next.js application to a Next.js proxy.
 
 > If this isn't working for you (returning `503` errors), it may be an issue with how your hosting service (such as Heroku) handles rewrites. You can write [Next.js middleware to proxy requests](/docs/advanced/proxy/nextjs-middleware) instead.
 
