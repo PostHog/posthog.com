@@ -77,6 +77,10 @@ Our recommendation is to start with capturing all sessions (e.g. 100% - the defa
 
 Whenever a new session starts after you select a collection below 100%, the browser generates a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session is recorded. If it is greater than the sampling rate, the session is not recorded.
 
+### Overriding sampling
+
+Since posthog-js version 1.119.0 the SDK allows passing an override config when calling `startSessionRecording`. So, you can set a sample rate but can also manually call `posthog.startSessionRecording({sampling: true})` in your code which ensures a recording starts no matter what sample rate you have set. 
+
 ## Minimum duration
 
 You can also set a minimum duration for sessions to be recorded. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
