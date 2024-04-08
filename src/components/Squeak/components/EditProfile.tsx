@@ -12,6 +12,53 @@ import Toggle from 'components/Toggle'
 import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 
+function convertCentimetersToInches(centimeters: number): number {
+    return centimeters / 2.54
+}
+
+const UnitButton = ({ unit, onClick, active, className = '' }) => {
+    return (
+        <button
+            type="button"
+            className={`w-12 text-sm ${active ? 'bg-gray-accent-light/50' : ''} ${className}`}
+            onClick={onClick}
+        >
+            {unit}
+        </button>
+    )
+}
+
+const HeightField = ({ values, setFieldValue }) => {
+    const [unit, setUnit] = useState('in')
+    const [height, setHeight] = useState(values.height)
+
+    return (
+        <div className="flex border-gray-accent-light border rounded-md overflow-hidden">
+            <input
+                onChange={(e) => {
+                    const value = Number(e.target.value)
+                    setHeight(value)
+                    setFieldValue('height', unit === 'cm' ? convertCentimetersToInches(value) : value)
+                }}
+                value={height}
+                className="py-2 px-4 text-lg w-full dark:text-primary  m-0 flex-grow border-none"
+                type="number"
+                name="height"
+                placeholder="Height"
+            />
+            <div className="flex-shrink-0 flex">
+                <UnitButton
+                    active={unit === 'in'}
+                    unit="in"
+                    onClick={() => setUnit('in')}
+                    className="border-x border-gray-accent-light"
+                />
+                <UnitButton active={unit === 'cm'} unit="cm" onClick={() => setUnit('cm')} />
+            </div>
+        </div>
+    )
+}
+
 const fields = {
     avatar: {
         label: 'Avatar',
@@ -41,6 +88,10 @@ const fields = {
     country: {
         label: 'Country (2-char code)',
         modOnly: true,
+    },
+    height: {
+        modOnly: true,
+        component: HeightField,
     },
     biography: {
         component: () => (
@@ -175,6 +226,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
         country,
         pronouns,
         amaEnabled,
+        height,
     } = user?.profile || {}
 
     const avatar = getAvatarURL(user?.profile)
@@ -261,6 +313,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 location,
                 country,
                 pronouns,
+                height,
                 biography,
                 amaEnabled,
             }}
