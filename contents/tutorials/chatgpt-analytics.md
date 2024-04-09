@@ -317,5 +317,5 @@ We've shown you the basics of creating insights from your product's ChatGPT API 
 ## Further reading
 
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
-- [How to track new and returning users in PostHog](/tutorials/track-new-returning-users)
+- [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 
 - [How to use session replays to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
