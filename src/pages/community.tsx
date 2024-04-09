@@ -12,6 +12,9 @@ import { IconArrowRight, IconInfo } from '@posthog/icons'
 import { Twitter } from 'components/Icons/Icons'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 
+const quote =
+    "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
+
 const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
     return (
         <Link className="text-inherit hover:text-inherit font-normal" to={slug}>
@@ -93,13 +96,41 @@ const InsidePostHogLogo = ({ className }) => {
     )
 }
 
-export default function InsidePostHog() {
-    const quote =
-        "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
+const getStatusColor = (status?: string) => {
+    switch (status?.toLowerCase()) {
+        case 'none':
+            return 'text-green'
+        case 'minor':
+            return 'text-yellow'
+        case 'major':
+            return 'text-red'
+        case 'critical':
+            return 'text-red'
+        default:
+            return 'text-gray'
+    }
+}
 
+const getStatusDescription = (status?: string) => {
+    switch (status?.toLowerCase()) {
+        case 'none':
+            return 'All systems operational'
+        case 'minor':
+            return 'Minor issues'
+        case 'major':
+            return 'Major issues'
+        case 'critical':
+            return 'Critical issues'
+        default:
+            return 'No status available'
+    }
+}
+
+export default function InsidePostHog() {
     const { fullWidthContent } = useLayoutData()
     const { user } = useUser()
     const currentDate = new Date()
+    const [appStatus, setAppStatus] = useState()
 
     const { posts, isLoading } = usePosts({
         params: {
@@ -133,6 +164,14 @@ export default function InsidePostHog() {
         },
     })
 
+    useEffect(() => {
+        fetch('https://status.posthog.com/api/v2/status.json')
+            .then((res) => res.json())
+            .then((data) => {
+                setAppStatus(data?.status?.indicator)
+            })
+    }, [])
+
     return (
         <Layout parent={communityMenu}>
             <SEO title="Community - PostHog" />
@@ -151,8 +190,8 @@ export default function InsidePostHog() {
                 </div>
                 <div className="hidden md:block pr-4">
                     <div className="flex gap-1 items-center justify-end">
-                        <span className="text-green text-2xl -mt-1">&bull;</span>
-                        <span className="text-sm">All systems operational</span>
+                        <span className={`text-2xl -mt-1 ${getStatusColor(appStatus)}`}>&bull;</span>
+                        <span className="text-sm">{getStatusDescription(appStatus)}</span>
                     </div>
                 </div>
             </section>
