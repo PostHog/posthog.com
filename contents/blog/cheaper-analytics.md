@@ -22,7 +22,18 @@ tags:
 
 ## Pricing before and after
 
-<INSERT TABLE WITH PRICING NUMBERS BEFORE AND AFTER>
+| Tier (up to) | Personless Price (per event) | Previous pricing / our new pricing for events with person propertie |
+| ---- | ----- | ----- | ----- |
+| 1M | $0 | $0 | $0 |
+| 2M | $0.00002 |  $0.000248 |
+| 15M | $0.00002 |  $0.000104 |
+| 50M | $0.00002 |  $0.0000655 |
+| 100M | $0.00002 |  $0.0000364 |
+| 250M | $0.000009 *price changes here | $0.0000187 |
+| ∞ | $0.000009 | $0.00001 |
+
+(we can offer further discounts if you are beyond 250M events/month regardless - at that scale, we suggest you talk to us)
+
 
 <INSERT GRAPH SHOWING OUR PRICING CURVE BEFORE AND AFTER>
 
@@ -38,11 +49,14 @@ tags:
 
 ## What's the downside of sending this type of event?
 
-This change is designed for price-sensitive teams that are looking to reduce their spending on analytics (often but not always hobbyists or indie developers without funding and a large number of low value users, such as someone bootstrapping a b2c product, or alternatively an extremely high volume business trying to optimize a very high spend more carefully). If you send persons without properties, there are some downsides of this tradeoff:
+If you are a price sensitive customer, we'd recommend you make this change for anonymous traffic.
+
+The reason we don't recommend this for _all_ anonymous traffic if you are less price sensitive is that if you send persons without properties, there are some downsides of this tradeoff:
 
 * users' profiles won't have any properties set (such as email addresses), so you won't be able to identify specific users
 * you can't filter your visualizations based on user properties, or adjust targeting of cohorts based on them
-* you won't be able to track users across multiple visits or across different devices - they will show up as separate users
+* you won't be able to track users across multiple visits, multiple sites or across different devices - they will show up as separate users
+* you won't be able to use our "transformer" plugins - such as geoip
 
 All of our functionality, with the above limitations, will still work even at this dramatically lower price.
 
@@ -53,4 +67,6 @@ All of our functionality, with the above limitations, will still work even at th
     * out of all the major competitors we have, we believe we are by far the most efficient - we are 100% inbound and grow through word of mouth
     * this pricing still reflects us making a positive margin on every event sold
     * we suspect this will increase our word of mouth growth and increase our retention, so we are likely to make more revenue with this change, but at a lower margin
-    * the majority of our customers use multiple products that we offer, so we wind up making a little money off a lot of products - our competitors are not as wide, so we believe long term we can undercut
+    * the majority of our customers use multiple products that we offer, so we wind up making a little money off a lot of products - our competitors are not as wide, so we believe long term we can undercut.
+* Why aren't you making the events with person properties cheaper too?
+  * Events with person properties cost a lot more for us to ingest and query. Allowing customers to choose to not send person properties for certain event types means we can cut our own costs of providing our product to our customers. This aligns our interests with our customers, and means we can make a positive margin on all events ingested (beyond our free tier) so it is sustainable but not greedy!
