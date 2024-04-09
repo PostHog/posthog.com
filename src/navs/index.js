@@ -1688,6 +1688,10 @@ export const docsMenu = {
                             url: '/docs/billing/estimating-usage-costs',
                         },
                         {
+                            name: 'Annual plans',
+                            url: '/docs/billing/annual-plans',
+                        },
+                        {
                             name: 'Common questions about billing',
                             url: '/docs/billing/common-questions',
                         },
