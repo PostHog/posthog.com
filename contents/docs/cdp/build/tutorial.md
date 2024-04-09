@@ -4,10 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import NoNewApps from "../_snippets/no-new-apps.mdx"
-
-<NoNewApps />
-
 This tutorial explains the development workflow and best practices, using an example 'Hello World' connector. We go from zero to publishing your connector in the official PostHog repository.
 
 ## Prerequisites
@@ -95,21 +91,21 @@ These logs can be seen on the 'Logs' page of each connector, which can be access
 
 ## Publishing your connector
 
-There are four ways to use connectors you build:
+There are four ways to publish connectors you build:
 
 1. Publish the connector to `npm` and install it with the url from `npmjs.com` 
 1. You can add it via its repository URL (e.g. GitHub/GitLab)
-1. Reference the location of the connector on your local instance (e.g. /Users/yourname/path/to/connector). This can be configured in 'Settings' -> 'Project Apps'.
+1. Reference the location of the connector on your local instance (e.g. `/Users/yourname/path/to/connector`). This can be configured in 'Settings' -> 'Project Apps'.
 1. Submit it to the official repository so that it can be installed on PostHog Cloud. [See below](#submitting-your-plugin) 
 
 ## Submitting your connector
 
-<NoNewApps />
+You can submit your connector to the [official connector library](/cdp). If accepted, it becomes available to all PostHog Cloud users. 
 
-If you wish to, you can contribute back to the PostHog community by submitting to the [official CDP library](/cdp). This means everyone else can use your connector, too!
+> **Note:** We are only reviewing new apps relying on stateless `processEvent` (no cache or external calls) or `composeWebhook` functions.
 
-If you built a connector inside the PostHog editor, first [convert it to a GitHub repository](#converting-a-source-plugin-to-a-github-repository)
+If you built a connector inside the PostHog editor, convert it to a GitHub repository
 
-To submit, [email your GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A)
+To submit, send your GitHub repository URL in [an in-app support ticket](https://us.posthog.com/#panel=support%3Asupport%3Aapps%3Alow) (topic: Data pipelines) or [email your GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A)
 
 Once we get your email, we review the connector to ensure it's secure, performant, and adheres to best practices. Then, we add it to our official repository and make it available for everyone to use.
