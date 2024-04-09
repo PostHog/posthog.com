@@ -49,7 +49,7 @@ All of our functionality, with the above limitations, will still work even at th
 ## FAQs
 
 * Is this change sustainable?
-  * yes!
+  * Yes!
     * out of all the major competitors we have, we believe we are by far the most efficient - we are 100% inbound and grow through word of mouth
     * this pricing still reflects us making a positive margin on every event sold
     * we suspect this will increase our word of mouth growth and increase our retention, so we are likely to make more revenue with this change, but at a lower margin
