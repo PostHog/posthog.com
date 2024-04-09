@@ -13,7 +13,16 @@ import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconChevronDown, IconInfo, IconShield, IconArrowRightDown } from '@posthog/icons'
+import {
+    IconCalendar,
+    IconCheck,
+    IconChevronDown,
+    IconHandMoney,
+    IconInfo,
+    IconRocket,
+    IconShield,
+    IconArrowRightDown,
+} from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -625,10 +634,10 @@ const Pricing = ({
                         <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
                             <span>Available discounts</span>
                         </h2>
-                        <ul className="list-none p-0 grid md:grid-cols-3 gap-6 md:gap-12">
+                        <ul className="list-none p-0 grid md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-12 xl:gap-6">
                             <li>
                                 <div className="flex items-center gap-2">
-                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <IconCalendar className="w-7 h-7 opacity-75" />
                                     <strong>Annual payment</strong>
                                 </div>
                                 <p className="pl-9 text-[15px]">
@@ -638,7 +647,7 @@ const Pricing = ({
                             </li>
                             <li>
                                 <div className="flex items-center gap-2">
-                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <IconRocket className="w-7 h-7 opacity-75" />
                                     <strong>Startups</strong>
                                 </div>
                                 <p className="pl-9 text-[15px] mb-3">
@@ -648,11 +657,21 @@ const Pricing = ({
                             </li>
                             <li>
                                 <div className="flex items-center gap-2">
-                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <IconHandMoney className="w-7 h-7 opacity-75" />
                                     <strong>Non-profits</strong>
                                 </div>
                                 <p className="pl-9 text-[15px]">
                                     50% off in most cases. Get in touch through the app after signing up.
+                                </p>
+                            </li>
+                            <li>
+                                <div className="flex items-center gap-2">
+                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <strong>Side project insurance</strong>
+                                </div>
+                                <p className="pl-9 text-[15px]">
+                                    Unexpectedly go viral with your side project and get sticker shock? Get in touch and
+                                    we'll help cover your first bill.
                                 </p>
                             </li>
                         </ul>
