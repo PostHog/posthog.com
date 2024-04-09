@@ -359,7 +359,7 @@ export const ProductWebAnalytics = () => {
                         />
                         <CustomerCard
                             outcome="switched from Plausible"
-                            quote="PostHog is way more powerful and insightful than Plausible. We have more info that we used to have."
+                            quote="PostHog is way more powerful and insightful than Plausible. We have more info than we used to have."
                             customer={significa}
                         />
                         <CustomerCard
