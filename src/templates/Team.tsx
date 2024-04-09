@@ -296,7 +296,11 @@ export default function Team({
 
     return (
         <Layout>
-            <SEO title={`${teamName} - PostHog`} />
+            <SEO
+                title={`${teamName} - PostHog`}
+                description="We're organized into multi-disciplinary small teams."
+                image={`/images/small-teams.png`}
+            />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 <Profile {...activeProfile} />
             </SideModal>
