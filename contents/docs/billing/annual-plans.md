@@ -19,6 +19,7 @@ With an annual plan you'll:
 * We'll ask you to sign an order form which captures the credit amount, term, discount percentage and payment terms (Net 30 by default).  We use PandaDoc for e-signatures here.
 * The order form will also specify that you can buy additional credit at the same discount level in the first 6 months, meaning that you aren't penalised for underestimating your usage across the term.
 * You can then subscribe to any of our [monthly plans](/pricing) and track your credit usage on the [billing page](https://app.posthog.com/organization/billing)
+* We'll also monitor your usage in the first few months and proactively reach out so that you can take advantage of the pre-agreed discount if it looks like you might go over your credit allocation by the end of the contract term.
 
 ## Getting started
 
