@@ -8,7 +8,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Link } from 'gatsby'
 import Tooltip from 'components/Tooltip'
-import { IconArrowRight, IconInfo } from '@posthog/icons'
+import { IconArrowRight, IconCake, IconConfetti, IconInfo } from '@posthog/icons'
 import { Twitter } from 'components/Icons/Icons'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 
@@ -30,15 +30,15 @@ const PostPreview = ({ attributes: { featuredImage, title, excerpt, post_categor
     return (
         <Link
             to={slug}
-            className="text-inherit hover:text-inherit font-normal grid grid-cols-2 xl:grid-cols-[1fr_35%] 2xl:grid-cols-[1fr_40%] gap-4 items-center transition-all"
+            className="text-inherit hover:text-inherit font-normal grid @xl:grid-cols-2 xl:grid-cols-[1fr_35%] 2xl:grid-cols-[1fr_40%] gap-4 items-center transition-all"
         >
-            <div>
+            <div className="@xl:order-2">
+                <img className="w-full" src={featuredImage?.url} />
+            </div>
+            <div className="@xl:order-1">
                 <p className="text-sm opacity-75 m-0">{post_category?.data?.attributes?.label}</p>
                 <h3 className="text-[17px] xl:text-xl 2xl:text-2xl mb-2">{title}</h3>
                 <p>{excerpt}</p>
-            </div>
-            <div>
-                <img className="w-full" src={featuredImage?.url} />
             </div>
         </Link>
     )
@@ -100,6 +100,20 @@ const PersonSpotlight = ({ title, content, byline, image, cta }) => {
 
             {cta ? cta : null}
         </div>
+    )
+}
+
+const PersonCard = ({ image, name, stat }) => {
+    return (
+        <li className="flex items-center gap-1">
+            {image}
+            <div>
+                <p className="m-0 leading-tight">
+                    <Link to="#">{name}</Link>
+                </p>
+                <p className="text-[13px] leading-tight opacity-75 m-0">{stat}</p>
+            </div>
+        </li>
     )
 }
 
@@ -256,8 +270,81 @@ export default function InsidePostHog() {
                             cta={<Link to="/community/profiles/90">Learn more about James G.</Link>}
                         />
                     </div>
+
+                    <div className="py-4 grid gap-5">
+                        <div>
+                            <h3 className="text-base">People news</h3>
+
+                            <div className="flex gap-1 items-center">
+                                <div>
+                                    <IconConfetti className="w-8 h-8 text-primary/50 dark:text-accent-dark/50" />
+                                </div>
+                                <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
+                            </div>
+
+                            <ul className="list-none grid gap-3 mt-2">
+                                <PersonCard
+                                    name="Zack Waterfield"
+                                    stat="Growth Engineer"
+                                    image={
+                                        <div className="w-9 rounded-full overflow-hidden bg-salmon">
+                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                                        </div>
+                                    }
+                                />
+                                <PersonCard
+                                    name="Steven Shultz"
+                                    stat="Support Engineer"
+                                    image={
+                                        <div className="w-9 rounded-full overflow-hidden bg-blue">
+                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                                        </div>
+                                    }
+                                />
+                            </ul>
+                        </div>
+
+                        <div>
+                            <div className="flex gap-1 items-center">
+                                <div>
+                                    <IconCake className="w-8 h-8 text-primary/50 dark:text-primary-dark/50" />
+                                </div>
+                                <h4 className="font-semibold opacity-75 text-[15px] mb-0">Thanks for being here!</h4>
+                            </div>
+
+                            <ul className="list-none grid gap-3 mt-2">
+                                <PersonCard
+                                    name="Marius Andra"
+                                    stat="4 year anniversary"
+                                    image={
+                                        <div className="w-9 rounded-full overflow-hidden bg-yellow">
+                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                                        </div>
+                                    }
+                                />
+                                <PersonCard
+                                    name="Eric Duong"
+                                    stat="4 year anniversary"
+                                    image={
+                                        <div className="w-9 rounded-full overflow-hidden bg-teal">
+                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                                        </div>
+                                    }
+                                />
+                                <PersonCard
+                                    name="James Greenhill"
+                                    stat="4 year anniversary"
+                                    image={
+                                        <div className="w-9 rounded-full overflow-hidden bg-salmon">
+                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                                        </div>
+                                    }
+                                />
+                            </ul>
+                        </div>
+                    </div>
                 </aside>
-                <section className="order-1 md:order-none md:px-4 md:border-x border-light dark:border-dark">
+                <section className="@container order-1 md:order-none md:px-4 md:border-x border-light dark:border-dark">
                     <div
                         className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 ${
                             fullWidthContent ? 'max-w-2xl mx-auto' : ''
