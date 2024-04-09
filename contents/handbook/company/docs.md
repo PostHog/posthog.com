@@ -32,9 +32,9 @@ No. The content team isn't big enough to own all documentation. It also lacks th
 If you need help updating documentation:
 
 - Write a draft that covers the basics, which the content team can then help review and polish.
-- In the event multiple pages needed updating, create an example of changes needed and then request help to complete the rest.
+- In the event multiple docs pages need updating, create an example of changes needed and then request help to complete the rest.
 
-**Bottom line:** It's much easier for the content team to improve a draft than write completely new documentation, especially when documenting new features. PR > Issues.
+**Bottom line:** It's much easier for the content team to improve a draft than write completely new documentation, especially when documenting new features. Pull requests > Issues.
 
 ### Who should review docs updates?
 
