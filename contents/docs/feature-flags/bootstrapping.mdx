@@ -74,6 +74,8 @@ The `bootstrap` object has two optional arguments: `distinctID` and `isIdentifie
 
 - `distinctID` enables you to set distinct ID of the user during PostHog's initialization. This is useful when you want to ensure the distinct ID on your frontend is the same as the distinct ID that you called `getAllFlags()` with on your server. It is **strongly recommended** to include it.
 
+> **Note:** The only case where it doesn't make sense to include the distinctID is when you're bootstrapping identified users only, and you call identify for these users right on load. Here, if you pass in the distinctID to bootstrap, identify will not connect your existing anonymous ID, since its replaced by the bootstrapped ID.
+
 - `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again.
 
 <MultiLanguage>
