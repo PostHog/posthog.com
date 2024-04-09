@@ -105,34 +105,7 @@ export default function ContactSales({ location }) {
                             <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
                             form at a breakneck pace!
                         </p>
-                        <HubSpotForm
-                            autoValidate
-                            formID="21de475a-af2c-47c2-ae02-414aefdfdeb4"
-                            customFields={{
-                                maus: {
-                                    type: 'radioGroup',
-                                    options: [
-                                        { label: 'Under 10k/mo', value: 10_000 },
-                                        { label: '10k-50k/mo', value: 50_000 },
-                                        { label: '50k-100k/mo', value: 100_000 },
-                                        { label: '100k-500k/mo', value: 500_000 },
-                                        { label: '500k-1m/mo', value: 100_000_000 },
-                                        { label: 'More than 1m/mo', value: 100_000_000_000 },
-                                    ],
-                                },
-                                monthly_events: {
-                                    type: 'radioGroup',
-                                    options: [
-                                        { label: 'Under 1m/mo', value: 1_000_000 },
-                                        { label: '1m-2m/mo', value: 2_000_000 },
-                                        { label: '2m-10m/mo', value: 10_000_000 },
-                                        { label: '10m-100m/mo', value: 100_000_000 },
-                                        { label: 'More than 100m/mo', value: 100_000_000_000 },
-                                        { label: "I'm not sure!", value: 0 },
-                                    ],
-                                },
-                            }}
-                        />
+                        <HubSpotForm autoValidate formID="32d0b55f-9de6-4c40-a6ec-ddfd2c39578b" />
                     </div>
                 </section>
             </div>
