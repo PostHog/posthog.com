@@ -98,7 +98,7 @@ const PersonSpotlight = ({ title, content, byline, image, cta }) => {
                 </p>
             )}
 
-            {cta && <div dangerouslySetInnerHTML={{ __html: cta }} />}
+            {cta ? cta : null}
         </div>
     )
 }
