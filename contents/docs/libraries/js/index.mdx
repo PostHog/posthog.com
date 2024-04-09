@@ -347,6 +347,8 @@ To check flag status for a different group, first switch the active group by cal
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [targeting](/docs/surveys/creating-surveys#targeting) you set up.
 
+To disable loading surveys in a specific client, you can set the `disable_surveys` [config option](#config).
+
 Surveys using the **API** presentation enable you to implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
 
 To implement **API** surveys, start by fetching active surveys for a user using either of the methods below:
@@ -514,6 +516,7 @@ Some of the most relevant options are:
 | `capture_pageleave`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if PostHog should automatically capture pageleave events.                                                            |
 | `cross_subdomain_cookie`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if cookie should be set on the top level domain (example.com). If PostHog-js is loaded on a subdomain (test.example.com), _and_ `cross_subdomain_cookie` is set to false, it'll set the cookie on the subdomain only (test.example.com).                                                           |
 | `disable_persistence`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                 | Disable persisting user data across pages. This will disable cookies, session storage and local storage.                       |
+| `disable_surveys`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                           | Determines if surveys script should load, and whether surveys should show up for users               |
 | `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                           | Determines if users should be opted out of session recording.                                                                  |
 | `enable_recording_console_log`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if console logs should be recorded as part of the session recording. [More information](/docs/session-replay/manual#console-logs-recording).                                               |
 | `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`                                                                                                                    | A function to be called once the PostHog scripts have loaded successfully.                                                     |
