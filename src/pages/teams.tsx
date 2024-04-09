@@ -45,7 +45,11 @@ const Teams: React.FC = () => {
     `)
     return (
         <Layout>
-            <SEO title="Teams - PostHog" />
+            <SEO
+                title="Teams - PostHog"
+                description="We're organized into multi-disciplinary small teams."
+                image={`/images/small-teams.png`}
+            />
 
             <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
                 <section className="mx-auto">
