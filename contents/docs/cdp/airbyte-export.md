@@ -41,7 +41,7 @@ For more info, please check [Airbyte's integration documentation](https://docs.a
 
 ### Where can I find out more?
 
-Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about Airbyte's connector is available in [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
+Check [PostHog's API documentation](https://posthog.com/docs/api) for more information on pulling and pushing data from/to our API. Further information about Airbyte's destination is available in [Airbyte's integration documentation](https://docs.airbyte.com/integrations/sources/posthog/).
 
 ### Who maintains this destination?
 

@@ -12,7 +12,7 @@ import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
 
-> 🚧 **Note:** We are currently in the process of reworking our connector server and have  **disabled new installs of this connector.** You can still analyze the timing of event sequences using [HogQL](/docs/hogql).
+> 🚧 **Note:** We are currently in the process of reworking our transformation server and have  **disabled new installs of this transformation.** You can still analyze the timing of event sequences using [HogQL](/docs/hogql).
 >
 > For example, to get the average time between a `$pageview` and `$pageleave` events this year, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
 >
@@ -44,17 +44,17 @@ import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
 >
 >If there is functionality around event sequence timing you want but don’t see a way to do, let us know by asking a question in [our community](/questions).
 
-## What does this connector do?
+## What does this transformation do?
 
-This connector measures the time it takes for a user to perform one event (`EventB`), after an earlier event (`EventA`).
+This transformation measures the time it takes for a user to perform one event (`EventB`), after an earlier event (`EventA`).
 
 <Requirements />
 
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Event Sequence Timer' and select the connector, press Install.
-3. Follow the on-screen steps to configure the connector.
+2. Search for 'Event Sequence Timer' and select the transformation, press Install.
+3. Follow the on-screen steps to configure the transformation.
 
 ## Configuration
 
@@ -64,7 +64,7 @@ First, you must configure the list of events to track time differences on. This 
 
 Where the first event in a tuple is the event that "starts the timer" and the second event being the one that "finishes it". In other words, the first event happens before the second.
 
-You can further configure the connector using the 'Update timestamp on every new first event?' setting. The default behaviour is 'Yes'.
+You can further configure the transformation using the 'Update timestamp on every new first event?' setting. The default behaviour is 'Yes'.
 
 If you select 'Yes', the stored timestamp for the first event will always be updated when a new event with the same name comes in (for the same user). This means your second event will always contain the difference between its time and the last time the user triggered the first event.
 
@@ -72,9 +72,9 @@ If you select No, the stored timestamp will only be set once and never updated. 
 
 ## How does the Event Sequence Timer show elapsed time?
 
-The Event Sequence Timer connector measures time between two events (`EventA` and `EventB`) in milliseconds.
+The Event Sequence Timer transformation measures time between two events (`EventA` and `EventB`) in milliseconds.
 
-When a sequence is completed, the Event Sequence Timer adds a new property called `time_since_eventA` to `EventB`. You can then use this property in analysis with other PostHog connectors.
+When a sequence is completed, the Event Sequence Timer adds a new property called `time_since_eventA` to `EventB`. You can then use this property in analysis with other PostHog transformations.
 
 ## Parameters
 
@@ -82,11 +82,11 @@ When a sequence is completed, the Event Sequence Timer adds a new property calle
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the Event Sequence Timer](https://github.com/PostHog/event-sequence-timer-plugin) is available on GitHub.
+PostHog is open-source and so are all transformations on the platform. The [source code for the Event Sequence Timer](https://github.com/PostHog/event-sequence-timer-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this transformation?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Event Sequence Timer. Thanks Yakko!
 

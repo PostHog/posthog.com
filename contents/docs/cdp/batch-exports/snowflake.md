@@ -59,7 +59,7 @@ COMMENT = 'PostHog events table'
 
 Batch exports use Snowflake's [internal table stages](https://docs.snowflake.com/en/user-guide/data-load-local-file-system-create-stage#table-stages) to stage the files copied into your Snowflake tables. We recommend using separate tables to export data from PostHog to avoid conflicting with other workflows that use internal table stages.
 
-> **Note:** This differs from the old PostHog Snowflake export connector which required extra configuration and used S3 or GCS as an external stage.
+> **Note:** This differs from the old PostHog Snowflake export destination which required extra configuration and used S3 or GCS as an external stage.
 
 ## FAQ
 
