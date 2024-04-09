@@ -26,25 +26,27 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an open-source platform combining A/B testing, feature flags, product analytics, session replay, and user surveys into one product. This means it's not only an alternative to [Optimizely](/blog/posthog-vs-optimizely) but also tools like [Mixpanel](/blog/posthog-vs-mixpanel) and [Hotjar](/blog/posthog-vs-hotjar).
+[PostHog](/) (that's us 👋) is an open-source platform that includes A/B testing, feature flags, product analytics, session replay, and user surveys. This means it's also an alternative to tools like [Mixpanel](/blog/posthog-vs-mixpanel) (product analytics) and [Hotjar](/blog/posthog-vs-hotjar) (session replay and surveys).
 
-Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [ElevenLabs](/customers/elevenlabs), [Hasura](/customers/hasura), and Airbus.
+Typical PostHog users are engineers and product managers at startups and mid-size companies. Customers include [AssemblyAI](/customers/assemblyai), [ElevenLabs](/customers/elevenlabs), [Hasura](/customers/hasura), and Airbus.
 
-### Key features
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of April 2024, 5,610 (0.5%) of the top 1 million websites use PostHog. This is slightly more than Optimizely's 5,353.
 
-- 🚩 **Feature flags:** Safely rollout features with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+#### Key features
 
-- 🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+- **Feature flags:** Safely rollout features with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
-- 📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports [SQL insights](/docs/product-analytics/sql) for power users.
+- **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
-- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports [SQL insights](/docs/product-analytics/sql) for power users.
 
-- 📺 **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
+- **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+
+- **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
 
 ### How does PostHog compare to Optimizely?
 
-The core of feature flags and experimentation are similar between the two. The big difference is that PostHog is free, open-source, and has analytics built in while Optimizely has a range of enterprise content, commerce, and collaboration tools.
+The core of feature flags and experimentation are similar between the two. The big difference is that PostHog is free, open-source, and has analytics built in, while Optimizely has a range of enterprise content, commerce, and collaboration tools.
 
 <ComparisonTable column1="PostHog" column2="Optimizely">
   <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
@@ -61,10 +63,6 @@ The core of feature flags and experimentation are similar between the two. The b
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
 </ComparisonTable>
 
-### How popular is PostHog?
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of April 2024, 5,610 (0.5%) of the top 1 million websites use PostHog. This is slightly more than Optimizely's 5,353.
-
 ### Why do companies use PostHog?
 
 According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
@@ -75,8 +73,8 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
 
-> **Bottom line**
-> Being free, self-serve, and sharing many of the same features, PostHog is a great alternative to Optimizely. This is especially true for startups and scale-ups looking for product and data tools rather than enterprise project management ones.
+> ### Bottom line
+> Being free, self-serve, and sharing many of the same features, PostHog is a great alternative to Optimizely. This is especially true for startups and scale-ups looking for product and data tools, though marketing teams may prefer Optimizely for experiments due to its visual editor.
 
 ## 2. VWO
 
