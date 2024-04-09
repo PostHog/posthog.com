@@ -154,6 +154,7 @@ Slack is used differently in different organizations. Here are some guidelines f
 1. `@channel` or `@here` mentions should be reserved for urgent or time-sensitive posts that require immediate attention by everyone in the channel. (Examples: changing a meeting invite URL just before a meeting, or soliciting urgent help for a service disruption, where you're not sure who is immediately available)
 1. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
 1. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
+1. You don't need to tell people if you're away from your computer, especially on a no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
 
 ### Google Docs and Slides
 
