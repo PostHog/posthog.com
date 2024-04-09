@@ -8,21 +8,21 @@ tags:
   - twilio
 ---
 
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import CommunityMaintained from "./_snippets/community-maintained.mdx"
+
 This destination triggers SMS messages in Twilio when specified events or actions are detected in PostHog.
 
 You can set a timeout period of between 1 second and 31536000 seconds (1 calendar year) to avoid accidentally spamming users with too many messages.
 
-## Requirements
-
-This destination requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Twilio' and select the app, press 'Install'.
-3. Follow the steps below to configure the app.
+2. Search for 'Twilio' and select the connector, press 'Install'.
+3. Follow the steps below to configure the connector.
 
 ## Configuration
 
@@ -48,14 +48,6 @@ We'd like to thank community members [Sandeep Guptan](https://github.com/samcasp
 
 Check [Twilio's documentation](https://www.twilio.com/docs/) for more information on connecting Twilio with other services.
 
-### Who maintains this destination?
+<CommunityMaintained />
 
-This destination is maintained by the community. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this destination?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

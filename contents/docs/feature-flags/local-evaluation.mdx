@@ -93,7 +93,8 @@ from posthog import Posthog
 
 posthog = Posthog('<ph_project_api_key>', 
     host='<ph_instance_address>',
-    poll_interval=30 # Optional. Measured in seconds. Defaults to 30.
+    poll_interval=30, # Optional. Measured in seconds. Defaults to 30.
+    personal_api_key='your personal API key from step 1'
 )
 ```
 

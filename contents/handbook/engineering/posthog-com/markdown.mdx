@@ -2,6 +2,8 @@
 title: Markdown
 ---
 
+There are some nifty MDX components available for use in Markdown content. Because these components are included globally, you don't need to do anything special to use them (like renaming `.md` to `.mdx` or manually importing them at the top of the file).
+
 ## Product screenshots
 
 The `<ProductScreenshot>` component encapsulates an image with a border and background. It's useful since the app's background matches the website background, and without using this component, it can be hard to differentiate between the screenshot and normal page content. ([See an example](/docs/session-replay/how-to-control-which-sessions-you-record) of this component in action.)
@@ -231,5 +233,3 @@ Sometimes we link to confidential information in our handbook. Since the handboo
 ```
 
 Private links will always open in a new tab.
-
-_Note: When used within a paragraph, you'll need to convert the paragraph into HTML first (wrap with `<p></p>`) for the component to be recognized by MDX._

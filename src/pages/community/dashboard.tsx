@@ -5,6 +5,7 @@ import CommunityLayout, { SectionTitle } from 'components/Community/Layout'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
 import Link from 'components/Link'
+import useTopicsNav from '../../navs/useTopicsNav'
 
 export default function CommunityPage() {
     const { user, fetchUser } = useUser()
@@ -45,9 +46,10 @@ export default function CommunityPage() {
     }, [user])
 
     const recentPermalink = recentQuestions?.data[0]?.attributes?.permalink
+    const topicsNav = useTopicsNav()
 
     return (
-        <CommunityLayout title="Inbox">
+        <CommunityLayout menu={topicsNav} title="Inbox">
             <SectionTitle>My discussions</SectionTitle>
 
             {topicSubscriptions && topicSubscriptions?.length > 0 && (

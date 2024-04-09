@@ -116,7 +116,7 @@ export const SortDropdown = ({ sort, setSort }) => {
                         </Tooltip>
                         <IconChevronDown className="w-6" />
                     </Menu.Button>
-                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-0 left-0 translate-y-full overflow-hidden">
+                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-0 left-0 translate-y-full overflow-hidden">
                         {sortOptions.map((option, index) => {
                             return (
                                 <Menu.Item key={`${option.label}-${index}`}>
@@ -162,7 +162,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                                 <IconChevronDown className="w-6 h-6 -mb-[2px]" />
                             </div>
                         </Menu.Button>
-                        <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                        <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                             {menu.map((menu, index) => {
                                 const { name, url, icon, color } = menu
                                 const active = menu === activeMenu
@@ -197,7 +197,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                             <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
                                 <IconFilter className="w-5 h-5" />
                             </Menu.Button>
-                            <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                            <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                                 <Menu.Item>
                                     <button
                                         onClick={() => {

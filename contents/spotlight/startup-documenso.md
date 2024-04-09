@@ -15,9 +15,9 @@ category: Startups
 
 > Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work. This time, we spoke to Documenso about how they’ve grown their GitHub community. 
 
-Documenso, the open-source alternative to Docusign, launched in November 2022 but has grown rapidly. The project already has over 4,000 GitHub stars at the time of writing and the team track their Star progress closely, viewing it as a vital community metric.
+Documenso, the open-source alternative to Docusign, launched in November 2022 and has grown rapidly. The project has over 4,000 [GitHub stars](/tutorials/github-star-tracker) at the time of writing and the team track their Star progress closely, viewing it as a vital community metric.
 
-“We track Star, Forks and Contributors on a weekly basis,” says Florent Merian from Documenso. “Stars are mainly useful to us as a social proof. They show that users trust us, and encourage others to do the same — but they also inspire us in the work we do!”
+“We track Star, Forks and Contributors on a weekly basis,” says Florent Merian from Documenso. “Stars are mainly useful to us as a social proof. They show that users trust us, and encourage others to do the same — but they also inspire us in the work we do.”
 
 Over the past year Documenso has put a lot of effort into growing its presence on GitHub, and learned several lessons about what does (and doesn’t) work...
 

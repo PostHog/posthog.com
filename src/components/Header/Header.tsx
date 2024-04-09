@@ -11,7 +11,7 @@ export const Header = (): JSX.Element => {
                 <Main />
             </header>
             {/* viewport debugging
-            <div className="bg-light dark:bg-dark border-t border-l rounded-tl border-light dark:border-dark px-3 py-1 fixed bottom-0 right-0 z-50">
+            <div className="bg-light dark:bg-dark border-t border-l rounded-tl border-light dark:border-dark px-3 py-1 fixed bottom-0 right-0 z-[50]">
                 <strong className="sm:hidden">xs?</strong>
                 <strong className="hidden sm:inline md:hidden">sm</strong>
                 <strong className="hidden md:inline mdlg:hidden">md</strong>

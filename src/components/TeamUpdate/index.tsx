@@ -147,6 +147,7 @@ export default function TeamUpdate({
                     checked={values.thingOfTheWeek}
                     onChange={(checked) => setFieldValue('thingOfTheWeek', checked)}
                     label="Thing of the week"
+                    tooltip="Toggle this ON if you want this update to appear in the TOTW (Thing of the Week) page at /team-updates"
                 />
                 {team && (
                     <>
@@ -155,6 +156,7 @@ export default function TeamUpdate({
                                 checked={values.impersonate}
                                 onChange={(checked) => setFieldValue('impersonate', checked)}
                                 label="Post as team lead"
+                                tooltip="Attribute this update to the team lead"
                             />
                         </div>
                         {!roadmapID && (

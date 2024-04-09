@@ -27,7 +27,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | BI | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Billing | [Team Growth][Team Growth]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
-| Cohorts | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
+| Cohorts | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Correlation Analysis | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |

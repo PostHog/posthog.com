@@ -29,7 +29,7 @@ In case it wasn’t obvious, you need both a Webflow site and a PostHog instance
 
 The whole process looks like this:
 
-![Webflow setup](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-ab-tests/webflow.gif)
+![Webflow setup](https://res.cloudinary.com/dmukukwp6/video/upload/v1711092872/posthog.com/contents/images/tutorials/webflow-ab-tests/webflow.mp4)
 
 Make sure your Webflow site has a good place to A/B test, such as a call-to-action button. Whatever this element is, it needs an ID so we can select it later. To add this, click the element then either click the gear next to the element or the gear at the top of the side panel. Enter whatever ID you like, we choose `main-cta`.
 

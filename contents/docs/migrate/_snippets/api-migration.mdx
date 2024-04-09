@@ -1,0 +1,22 @@
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "historical_migration": true,
+  "batch": [
+    {
+      "event": "batched_event_name",
+      "properties": {
+        "distinct_id": "user_id"
+      },
+      "timestamp": "2024-04-03T12:00:00Z"
+    },
+    {
+      "event": "batched_event_name",
+      "properties": {
+        "distinct_id": "user_id"
+      },
+      "timestamp": "2024-04-03T12:00:00Z"
+    }
+  ]
+}' https://app.posthog.com/batch/
+```

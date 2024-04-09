@@ -18,7 +18,7 @@ date: 2024-03-19
 
 [Creatify](https://creatify.ai/) is a powerful AI video editor that simplifies the process of quickly creating short video ads for any platform. Its capability to rapidly generate marketing videos lets users test strategies and adopt the data-driven approach that Creatify champions.
 
-“We officially launched Creatify in early 2023 but we’d been in development mode for a while before that,” said founding CTO Xin Zhou, who met his Creatify co-founders while working at Meta. “We used that time to build the product and test ideas. PostHog was key to that — we’d been using it for about three months before we even launched.”
+“We officially launched Creatify in early 2024 but we’d been in development mode for a while before that,” said founding CTO Xin Zhou, who met his Creatify co-founders while working at Meta. “We used that time to build the product and test ideas. PostHog was key to that — we’d been using it for about three months before we even launched.”
 
 Before switching to PostHog, Creatify had tried using other platforms, such as Google Analytics and Amplitude. They found the tools unsuitable for their needs.
 
@@ -40,7 +40,7 @@ When the PostHog web analytics beta launched in November 2023, Creatify was amon
 />
 </BorderWrapper>
 
-The team watched with anticipation over the following months as the beta grew and new features released, often sharing feedback to ensure the dashboard included the metrics they cared about most. When this wasn’t possible they simply created their own product analytics dashboards to break down the data in new ways. 
+The team watched with anticipation over the following months as the beta grew and new features released, often sharing feedback to ensure the [dashboard](/docs/web-analytics/dashboard) included the metrics they cared about most. When this wasn’t possible they simply created their own product analytics dashboards to break down the data in new ways. 
 
 “I don’t think I could ever go back to GA4 now that we’ve adopted PostHog,” said Xin. “Web analytics gives us all the metrics we really care about, and we’ve set up dashboards for breaking down specific segments when we need to. It’s great that we have all the metrics we care about so readily available.” 
 

@@ -105,10 +105,6 @@ export const quickLinks = [
         name: 'WordPress',
         to: '/docs/libraries/wordpress',
     },
-    {
-        name: 'Zendesk',
-        to: '/docs/libraries/zendesk',
-    },
 ]
 
 type IntegrationsProps = {
