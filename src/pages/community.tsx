@@ -85,6 +85,24 @@ const TabButton = ({ active, onClick, children, className = '' }) => {
     )
 }
 
+const PersonSpotlight = ({ title, content, byline, image, cta }) => {
+    return (
+        <div>
+            {image && <aside className="float-right ml-1 mb-1">{image}</aside>}
+            <h3 className="text-base mb-1">{title}</h3>
+            <div className="text-sm [&_*]:text-sm [&>*]:mb-2" dangerouslySetInnerHTML={{ __html: content }} />
+
+            {byline && (
+                <p className="text-[13px] opacity-75">
+                    <em>{byline}</em>
+                </p>
+            )}
+
+            {cta && <div dangerouslySetInnerHTML={{ __html: cta }} />}
+        </div>
+    )
+}
+
 const InsidePostHogLogo = ({ className }) => {
     return (
         <svg className={className} fill="none" viewBox="0 0 195 78">
@@ -202,21 +220,16 @@ export default function InsidePostHog() {
                 }`}
             >
                 <aside className="order-3 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
-                    <div>
-                        <aside className="float-right mb-2">
+                    <PersonSpotlight
+                        title="A note from the editor"
+                        content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
+                        byline="- Andy, Editor-in-Chief"
+                        image={
                             <div className="w-24 rounded-full overflow-hidden bg-yellow">
                                 <StaticImage src="../../static/images/authors/andy-vandervell-posthog.png" />
                             </div>
-                        </aside>
-                        <h3 className="text-base mb-1">A note from the editor</h3>
-                        <p className="text-sm mb-2">
-                            Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts,
-                            community questions, and everything else that's happening in the world of PostHog.
-                        </p>
-                        <p className="text-[13px] opacity-75">
-                            <em>- Andy, Editor-in-Chief</em>
-                        </p>
-                    </div>
+                        }
+                    />
 
                     <div className="text-center py-4 px-2">
                         <p className="mb-2">
@@ -229,6 +242,19 @@ export default function InsidePostHog() {
 
                     <div className="py-4">
                         <h3 className="text-base">From the PostHog Slack</h3>
+                    </div>
+
+                    <div className="py-4">
+                        <PersonSpotlight
+                            title="Meet a team member"
+                            content="<p>James G is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
+                            image={
+                                <div className="w-24 rounded-full overflow-hidden bg-salmon">
+                                    <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                                </div>
+                            }
+                            cta={<Link to="/community/profiles/90">Learn more about James G.</Link>}
+                        />
                     </div>
                 </aside>
                 <section className="order-1 md:order-none md:px-4 md:border-x border-light dark:border-dark">
@@ -340,34 +366,38 @@ export default function InsidePostHog() {
                     </div>
 
                     <div className="py-4">
-                        <aside className="float-right mb-2">
-                            <div className="w-24 rounded-full overflow-hidden bg-yellow">
-                                <StaticImage src="../../static/images/authors/james-hawkins-posthog.png" />
-                            </div>
-                        </aside>
-                        <h3 className="text-base mb-1">A musing from the CEO</h3>
-                        <div className="text-sm pb-1 mb-2 [&_*]:text-sm [&>*]:mb-2">
-                            <p>what motivates us:</p>
-                            <ol>
-                                <li>building an epic product and company</li>
-                                <li>figuring out how far we can go</li>
-                                <li>helping engineers build products</li>
-                                <li>beating all the point solution competitors</li>
-                                <li>having customers buy from us instead of us selling to them</li>
-                            </ol>
-                        </div>
-                        <CallToAction
-                            href="https://x.com/james406"
-                            width="[calc(100%_+_3px)]"
-                            type="secondary"
-                            size="sm"
-                            externalNoIcon
-                        >
-                            <div className="flex justify-center items-center gap-1">
-                                <span>Follow James on</span>
-                                <Twitter className="h-4 w-4 mr-1 inline-block" />
-                            </div>
-                        </CallToAction>
+                        <PersonSpotlight
+                            title="A musing from the CEO"
+                            content="<p>what motivates us:</p>
+                        <ol>
+                            <li>building an epic product and company</li>
+                            <li>figuring out how far we can go</li>
+                            <li>helping engineers build products</li>
+                            <li>beating all the point solution competitors</li>
+                            <li>having customers buy from us instead of us selling to them</li>
+                        </ol>"
+                            image={
+                                <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                                    <StaticImage src="../../static/images/authors/james-hawkins-posthog.png" />
+                                </div>
+                            }
+                            cta={
+                                <div className="mt-4">
+                                    <CallToAction
+                                        href="https://x.com/james406"
+                                        width="[calc(100%_+_3px)]"
+                                        type="secondary"
+                                        size="sm"
+                                        externalNoIcon
+                                    >
+                                        <div className="flex justify-center items-center gap-1">
+                                            <span>Follow James on</span>
+                                            <Twitter className="h-4 w-4 mr-1 inline-block" />
+                                        </div>
+                                    </CallToAction>
+                                </div>
+                            }
+                        />
                     </div>
                 </aside>
             </section>
