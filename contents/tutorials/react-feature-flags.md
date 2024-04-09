@@ -1,6 +1,7 @@
 ---
 title: How to set up React feature flags
 date: 2023-09-14
+featuredVideo: https://www.youtube-nocookie.com/embed/OgwnhinI9xI
 author:
   - ian-vanagas
 showTitle: true
