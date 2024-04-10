@@ -190,7 +190,7 @@ export function processEvent(event, { config }) {
 
 As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all transformations and destinations run).
 
-> **Note:** You cannot use storage nor cache nor external calls in `processEvent` transformations or destinations in PostHog Cloud. Furthermore you can only define one of non-async `processEvent` or `composeWebhook` per transformation or destination.
+> **Note:** You cannot use storage nor cache nor external calls in transformations or destinations in PostHog Cloud. Furthermore you can only define one of non-async `processEvent` or `composeWebhook` per transformation or destination.
 
 ## `composeWebhook` function
 
