@@ -4,15 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-Transformation and destination can add more information to an event, modify existing properties, import or export data, or trigger a range of other activities.
+Transformation and destination enable you to define custom pipeline behaviors in PostHog.
 
-Before building your first one it's important to understand how data flows through them in the first place. There are two critical concepts to remember:
+**Transformations** enable you to add more information to an event or modify existing properties. They act on _single events_ coming into PostHog. The output of one goes into the next, creating a chain.
 
-1. Transformation and destination usually act on _single events_ coming in to PostHog.
-
-2. The output of one goes into the next, creating a chain.
-
-Before we get started, lets look at an examples of these principles in action. 
+**Destinations** enable you to export data to other services. They operate at the _end of the pipeline_ in parallel with each other at the same time data is being written to ClickHouse.
 
 ## Example of an transformation chain
 
@@ -32,7 +28,7 @@ Now, how do you make all of this happen? Each transformation or destination has 
 
 We have some special function names which enable you to process an event, like in the GeoIP Enricher. We expect `index.js` to export these special functions.
 
-Two notable functions to be aware of are `processEvent` and `composeWebhook`. Both of these take in a single event and the meta object. You can find out more about meta objects [in our developer reference docs](/docs/cdp/build/reference#pluginmeta), but one key property is `meta.config`. This property enables your code to read the configuration values set by users via `plugin.json`.
+Two notable functions to be aware of are `processEvent` (transformation) and `composeWebhook` (destination). Both take in a single event and the meta object. You can find out more about meta objects [in our developer reference docs](/docs/cdp/build/reference#pluginmeta), but one key property is `meta.config`. This property enables your code to read the configuration values set by users via `plugin.json`.
 
 If you want to add new properties to your event, like the GeoIP Enricher does, use the `processEvent` function. Here's an example transformation that adds the `hello` property to events.
 
@@ -50,7 +46,7 @@ export function processEvent(event, meta) {
 
 > **Note:** If you return `null` or `undefined`, you're telling PostHog to discard this event. For example, the [schema enforcer transformation](https://github.com/PostHog/posthog-schema-enforcer-plugin) does precisely this for events that don't adhere to a schema.
 
-To submit data to your own HTTP endpoint, use the `composeWebhook` function:
+To submit data to your own HTTP endpoint as a destination, use the `composeWebhook` function:
 
 ```js
 /* Runs on every event */
@@ -75,7 +71,7 @@ function composeWebhook(event) {
 
 ## Next steps
 
-That's all for the crash course. There's a lot you can do with transformation and destination such as sending events elsewhere via webhooks or modifying events before they're stored. Here are some additional resources to help you get started in building your own for PostHog:
+That's all for the crash course. There's a lot you can do with transformation, such as modifying events before they're stored, and destinations such as sending events elsewhere via webhooks. Here are some additional resources to help you get started in building your own for PostHog:
 
 1. For in-depth information on all the special functions, check out [the developer reference docs](/docs/cdp/build/reference).
 
