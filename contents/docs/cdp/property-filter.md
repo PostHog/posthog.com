@@ -1,6 +1,6 @@
 ---
 title: Property Filter
-github: 'https://github.com/witty-works/posthog-property-filter-plugin'
+github: 'https://github.com/PostHog/property-filter-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Property%20Filter'
 thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/property-filter.png
@@ -41,7 +41,7 @@ No. The Property Filter transformation will only work on events ingested _after_
 
 ### Is the source code for this transformation available?
 
-PostHog is open-source and so are all transformations on the platform. The [source code for the Property Filter transformation](https://github.com/witty-works/posthog-property-filter-plugin) is available on GitHub.
+PostHog is open-source and so are all transformations on the platform. The [source code for the Property Filter transformation](https://github.com/PostHog/property-filter-plugin) is available on GitHub.
 
 ### Who created this transformation?
 

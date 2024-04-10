@@ -1,6 +1,6 @@
 ---
 title: URL query parameter converter
-github: 'https://github.com/PostHog/integrations-repository/pull/31'
+github: 'https://github.com/PostHog/posthog-app-url-parameters-to-event-properties'
 installUrl: 'https://app.posthog.com/project/apps?name=url-query-parameter-converter'
 thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/url-query.png

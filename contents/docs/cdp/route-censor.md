@@ -10,6 +10,9 @@ thumbnail: >-
 import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import CommunityMaintained from "./_snippets/community-maintained.mdx"
+import TransformationDisabled from "./_snippets/transformation-disabled.mdx"
+
+<TransformationDisabled />
 
 This transformation enables you to censor variables from URLs that are passed to PostHog. This is useful because PostHog tracks certain URLs automatically, so if your transformation contains sensitive data within the URLs (such as sensitive IDs, addresses, etc.), then this offers away to censor that data before it is stored in the PostHog database. 
 
