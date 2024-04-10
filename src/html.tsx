@@ -49,6 +49,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                     }
                                 },
                                 __preview_process_person: 'identified_only',
+                                process_person: 'identified_only',
                             })
                             `,
                         }}
