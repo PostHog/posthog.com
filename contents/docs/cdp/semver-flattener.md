@@ -55,19 +55,19 @@ This is especially helpful for comparing versions when filtering in PostHog insi
 ### Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'SemVer Flattener' and select the connector, press Install.
+2. Search for 'SemVer Flattener' and select the transformation, press Install.
 
 That's it!
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the SemVer Flattener](https://github.com/PostHog/semver-flattener-plugin) is available on GitHub.
+PostHog is open-source and so are all transformations on the platform. The [source code for the SemVer Flattener](https://github.com/PostHog/semver-flattener-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this transformation?
 
-We'd like to thank PostHog team member [Paul D'Ambra](https://github.com/pauldambra) for creating this connector. Cheers, Paul!
+We'd like to thank PostHog team member [Paul D'Ambra](https://github.com/pauldambra) for creating this transformation. Cheers, Paul!
 
 <PostHogMaintained />
 

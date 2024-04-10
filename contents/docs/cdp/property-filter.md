@@ -12,7 +12,7 @@ import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
-This connector sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use.
+This transformation sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use.
 
 It is [used by teams such as WittyWorks to protect user privacy](https://posthog.com/customers/wittyworks) by removing unneeded geographic data.
 
@@ -21,17 +21,17 @@ It is [used by teams such as WittyWorks to protect user privacy](https://posthog
 ## Installation
 
 1. Log in to your PostHog instance
-2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2. Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Property Filter' press 'Install'
-4. Configure the by connector by following the onscreen instructions.
+4. Configure the by transformation by following the onscreen instructions.
 
-It's important to note that this connector effectively removes information from PostHog events by setting properties to `null`. Apps on PostHog run in sequence, so it usually makes sense to place this connector at the _end_ of a sequence.
+> **Note:** This transformation effectively removes information from PostHog events by setting properties to `null`. Apps on PostHog run in sequence, so it usually makes sense to place this transformation at the _end_ of a sequence.
 
 Note: If you are filtering `$ip`, `event.ip` will also be set to null.
 
 ## Does this filter properties for retrospective events?
 
-No. The Property Filter connector will only work on events ingested _after_ it was enabled.
+No. The Property Filter transformation will only work on events ingested _after_ it was enabled.
 
 ## Configuration
 
@@ -39,13 +39,13 @@ No. The Property Filter connector will only work on events ingested _after_ it w
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the Property Filter connector](https://github.com/witty-works/posthog-property-filter-plugin) is available on GitHub.
+PostHog is open-source and so are all transformations on the platform. The [source code for the Property Filter transformation](https://github.com/witty-works/posthog-property-filter-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this transformation?
 
-This connector was created by [community members at WittyWorks](/customers/wittyworks) to protect the privacy of their users. We'd like to thank [Christian](https://github.com/Christian-aman-insurely) and [Lukas Kahwe Smnith](https://github.com/lsmith77) for creating the Property Filter.
+This transformation was created by [community members at WittyWorks](/customers/wittyworks) to protect the privacy of their users. We'd like to thank [Christian](https://github.com/Christian-aman-insurely) and [Lukas Kahwe Smnith](https://github.com/lsmith77) for creating the Property Filter.
 
 <CommunityMaintained />
 
