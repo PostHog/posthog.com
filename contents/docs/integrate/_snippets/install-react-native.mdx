@@ -96,9 +96,9 @@ export const posthog = new PostHog("<ph_project_api_key>", {
     flushInterval?: number = 10000,
     /** If set to true the SDK is essentially disabled (useful for local environments where you don't want to track anything) */
     disabled?: boolean,
-    /** If set to false the SDK will not track until the `optIn` function is called. */
+    /** If set to false the SDK will not track until the 'optIn' function is called. */
     defaultOptIn?: boolean = true,
-    /** Whether to track that `getFeatureFlag` was called (used by Experiments) */
+    /** Whether to track that 'getFeatureFlag' was called (used by Experiments) */
     sendFeatureFlagEvent?: boolean = true,
     /** Whether to load feature flags when initialized or not */
     preloadFeatureFlags?: boolean = true,
@@ -118,6 +118,24 @@ export const posthog = new PostHog("<ph_project_api_key>", {
     /** For Session Analysis how long before we expire a session (defaults to 30 mins) */
     sessionExpirationTimeSeconds?: number = 1800,
     /** Whether to post events to PostHog in JSON or compressed format */
-    captureMode?: 'json' | 'form'
+    captureMode?: 'json' | 'form',
+    /** Allows you to provide the storage type. By default 'file'.
+     * 'file' will try to load the best available storage, the provided 'customStorage', 'customAsyncStorage' or in-memory storage.
+     */
+    persistence?: 'memory' | 'file',
+    /** Allows you to provide your own implementation of the common information about your App or a function to modify the default App properties generated */
+    customAppProperties?:
+      | PostHogCustomAppProperties
+      | ((properties: PostHogCustomAppProperties) => PostHogCustomAppProperties),
+    /** Allows you to provide a custom asynchronous storage such as async-storage, expo-file-system or a synchronous storage such as mmkv.
+     * If not provided, PostHog will attempt to use the best available storage via optional peer dependencies (async-storage, expo-file-system).
+     * If 'persistence' is set to 'memory', this option will be ignored.
+     */
+    customStorage?: PostHogCustomStorage,
+    /** Captures native app lifecycle events such as Application Installed, Application Updated, Application Opened, Application Became Active and Application Backgrounded.
+     * By default is false.
+     * If you're already using the 'captureLifecycleEvents' options with 'withReactNativeNavigation' or 'PostHogProvider, you should not set this to true, otherwise you may see duplicated events.
+     */
+    captureNativeAppLifecycleEvents?: boolean = false
 })
 ```
