@@ -16,6 +16,8 @@ images:
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/mentat_analytics_logo.jpg
   - >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/marketing_engineers_logo.jpg
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/wintactix_logo.png
 ---
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
@@ -50,7 +52,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 </section>
 
 <Section title="Our partners" className="@container">
-                    <div className="flex flex-col @3xl:grid md:grid-cols-3 gap-4 mb-8">
+                    <div className="flex flex-col @3xl:grid md:grid-cols-4 gap-4 mb-8">
                         <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
                          <GatsbyImage image={getImage(props?.images[3])} alt="Taleno Digital" objectFit="contain" style={{ maxHeight: 100 }} />
                             <h3 className="text-xl mb-2">Taleno Digital</h3>
@@ -80,6 +82,16 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
                                 An international team of engineers that can help you with deployment and configuring PostHog for marketing purpose. 
                             </p>
                             <CallToAction to="https://marketingengineers.nl/" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Contact
+                            </CallToAction>
+                        </div>
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                            <GatsbyImage image={getImage(props?.images[6])} alt="WintactiX" objectFit="contain" style={{ maxHeight: 100 }} />
+                            <h3 className="text-xl mb-2">WintactiX</h3>
+                            <p className="text-[15px]">
+                                WintactiX specializes in Rev Ops and software implementation. Available to consult on best practices and to integrate Posthog with your other sales and marketing SaaS without draining your in-house development resources.
+                            </p>
+                            <CallToAction to="https://www.wintactix.com//" type="outline" size="md" className="!w-full sm:!w-auto">
                                 Contact
                             </CallToAction>
                         </div>
