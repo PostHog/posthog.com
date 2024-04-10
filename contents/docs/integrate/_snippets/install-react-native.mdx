@@ -117,7 +117,7 @@ export const posthog = new PostHog("<ph_project_api_key>", {
     requestTimeout?: number = 10000,
     /** For Session Analysis how long before we expire a session (defaults to 30 mins) */
     sessionExpirationTimeSeconds?: number = 1800,
-    /** Whether to post events to PostHog in JSON or compressed format */
+    /** Whether to post events to PostHog in JSON or compressed format. Defaults to 'form' */
     captureMode?: 'json' | 'form',
     /** Allows you to provide the storage type. By default 'file'.
      * 'file' will try to load the best available storage, the provided 'customStorage', 'customAsyncStorage' or in-memory storage.
