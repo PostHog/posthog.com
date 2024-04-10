@@ -1,6 +1,6 @@
 ---
 date: 2024-03-21
-title: 'PostHog is now up to X cheaper'
+title: 'PostHog is now up to 12x cheaper'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -14,10 +14,9 @@ tags:
 
 ## tl;dr
 
-* It is now possible to use PostHog for X less
-* This change applies to all existing and new customers
+* It is now possible to use PostHog's product and web analytics for up to ~12x less, depending on your volumes
+* This change applies to all existing and new customers for any events that have no person properties set
 * The average customer can save X%
-* This cuts pricing for product analytics and web analytics
 * We are intending on more price cuts, this is the start!
 
 ## Pricing before and after
@@ -34,16 +33,11 @@ tags:
 
 (we can offer further discounts if you are beyond 250M events/month regardless - at that scale, we suggest you talk to us)
 
-
-<INSERT GRAPH SHOWING OUR PRICING CURVE BEFORE AND AFTER>
-
 ## Why we're excited to be the cheapest
 
-* we think this makes us the best value product by a long way
-* everyone else severely limits features available in their free or lower priced tiers - we don't
-* we have resisted this temptation and think by changing slightly the data we capture, we can pass these savings a
-* the markets we're in are commoditized - everyone's products are pretty similar
-* we thinking prov
+* We think this makes us the best value product analytics software by a long way
+* Everyone else has far fewer features available in their free or lower priced tiers - we only limit team-oriented features (like advanced permissioning). Instead of this, by changing slightly the data we capture, we can pass these savings along to customers directly.
+* We have lots of other products, we think we're better off long term making a little money from a lot of products.
 
 <INSERT GRAPH COMPARING US TO COMPETITORS>
 
