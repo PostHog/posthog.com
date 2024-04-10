@@ -7,10 +7,10 @@ import { useLayoutData } from 'components/Layout/hooks'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Link } from 'gatsby'
-import Tooltip from 'components/Tooltip'
-import { IconArrowRight, IconCake, IconConfetti, IconInfo } from '@posthog/icons'
+import { IconCake, IconConfetti } from '@posthog/icons'
 import { Twitter } from 'components/Icons/Icons'
 import { usePosts } from 'components/Edition/hooks/usePosts'
+import Questions from 'components/InsidePostHog/Questions'
 
 const quote =
     "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -41,32 +41,6 @@ const PostPreview = ({ attributes: { featuredImage, title, excerpt, post_categor
                 <p>{excerpt}</p>
             </div>
         </Link>
-    )
-}
-
-const ThreadHeaderRow = ({ column1, column2 }) => {
-    return (
-        <>
-            <div className="font-bold text-sm pb-1 mb-1 text-left border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60">
-                {column1}
-            </div>
-            <div className="font-bold text-sm pb-1 mb-1 text-right border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60 pl-2">
-                {column2}
-            </div>
-        </>
-    )
-}
-
-const Thread = ({ title, status }) => {
-    return (
-        <>
-            <div>
-                <Link to="/" className="font-bold text-sm py-1 inline-block">
-                    {title}
-                </Link>
-            </div>
-            <div className="text-right text-sm opacity-60 mt-1 pl-2">{status}</div>
-        </>
     )
 }
 
@@ -160,7 +134,6 @@ const getStatusDescription = (status?: string) => {
 
 export default function InsidePostHog() {
     const { fullWidthContent } = useLayoutData()
-    const { user } = useUser()
     const currentDate = new Date()
     const [appStatus, setAppStatus] = useState()
 
@@ -376,68 +349,7 @@ export default function InsidePostHog() {
                     </div>
                 </section>
                 <aside className="order-2 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
-                    <div className="flex flex-col gap-8">
-                        <div>
-                            <div className="flex gap-4 w-full items-baseline">
-                                <h3 className="flex-1 text-lg mb-2">
-                                    My discussions
-                                    <Tooltip content="Subscribed threads with recent activity" placement="top">
-                                        <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
-                                    </Tooltip>
-                                </h3>
-                                <div>
-                                    <Link
-                                        to="/community/dashboard"
-                                        className="text-[13px] font-bold flex items-center bg-accent dark:bg-accent-dark rounded-lg px-2 py-1"
-                                    >
-                                        View all
-                                        <IconArrowRight className="inline-block w-4 h-4 ml-1" />
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="grid items-start w-full grid-cols-[1fr_max-content]">
-                                <ThreadHeaderRow column1="Topic" column2="Last reply" />
-
-                                <Thread title="Plugin Replicator" status="8 mins ago" />
-                                <Thread
-                                    title="User Onboarding integrations but with a longer title"
-                                    status="4 hours ago"
-                                />
-                                <Thread title="User Onboarding integrations" status="1 day ago" />
-                            </div>
-                        </div>
-
-                        <div className="">
-                            <div className="flex gap-4 w-full items-baseline">
-                                <h3 className="flex-1 text-lg mb-2">
-                                    Latest questions
-                                    <Tooltip content="Subscribed threads with recent activity" placement="top">
-                                        <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
-                                    </Tooltip>
-                                </h3>
-                                <div>
-                                    <Link
-                                        to="/questions"
-                                        className="text-[13px] font-bold flex items-center bg-accent dark:bg-accent-dark rounded-lg px-2 py-1"
-                                    >
-                                        View all
-                                        <IconArrowRight className="inline-block w-4 h-4 ml-1" />
-                                    </Link>
-                                </div>
-                            </div>
-
-                            <div className="grid items-start w-full grid-cols-[1fr_max-content]">
-                                <ThreadHeaderRow column1="Topic" column2="Last reply" />
-
-                                <Thread title="Plugin Replicator" status="8 mins ago" />
-                                <Thread
-                                    title="User Onboarding integrations but with a longer title"
-                                    status="4 hours ago"
-                                />
-                                <Thread title="User Onboarding integrations" status="1 day ago" />
-                            </div>
-                        </div>
-                    </div>
+                    <Questions />
 
                     <div>
                         <div className="bg-white p-4 border border-light dark:border-dark my-4">
