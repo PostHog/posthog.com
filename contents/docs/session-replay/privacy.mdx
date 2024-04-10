@@ -174,7 +174,7 @@ This assumes you are adding a data attribute to every "safe" element like `<p da
 {
     maskAllInputs: true,
     maskTextSelector: "*",
-    maskInputFn: (text, element) => {
+    maskTextFn: (text, element) => {
         if (element?.dataset['record'] === 'true') {
             return text
         }
