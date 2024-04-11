@@ -379,6 +379,7 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
                     error ? 'bottom-6 placeholder-shown:bottom-8' : 'bottom-2 placeholder-shown:bottom-4'
                 } peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0`}
                 {...props}
+                {...(props.type === 'number' ? { min: 0 } : {})}
                 onFocus={() => setType(props.type ?? 'text')}
                 type={props.type === 'date' ? 'date' : type}
             />
