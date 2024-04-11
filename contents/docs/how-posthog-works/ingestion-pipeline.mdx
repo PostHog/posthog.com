@@ -2,7 +2,7 @@
 title: Ingestion pipeline
 ---
 
-In its simplest form, the ingestion pipeline is a collection of services which listen for events as they are sent in, process them, and then store them for later analysis.
+In simple terms, the ingestion pipeline is a collection of services which listen for events as they are sent in, processed, and stored for later analysis.
 
 ```mermaid
 graph TD
@@ -136,7 +136,7 @@ To determine what to do at this stage, we need to make a call to PostgreSQL to d
 >
 > In the case of an `$identify` call, we merge the person tied to `$anon_distinct_id` (`person_2`) into the person identified by `distinct_id` (`person_1`). This means that we associate `$anon_distinct_id` with `person_1`, delete `person_2` and all future events for `$anon_distinct_id` are associated with `person_1`.
 >
->If there are any conflicts when merging person properties for these two persons, the values from the non-anonymous person (`person_1`) take precedence. We do this, as it is far more likely that this person has a history of associated events we want to preserve.
+>If there are any conflicts when merging person properties for these two persons, the values from the non-anonymous person (`person_1`) take precedence. We do this as it is far more likely that this person has a history of associated events we want to preserve.
 >
 > For more information on exactly how the merging of properties is done, check out our [overview of person properties](/docs/integrate/user-properties).
 

@@ -49,8 +49,8 @@ Each person contains the following base fields within PostgreSQL:
 
 Persons are stored in PostgreSQL but are additionally replicated into ClickHouse for certain queries. For example, when viewing the global list of persons from the dashboard, this information is retrieved from ClickHouse.
 
-Additionally, person properties are also stored directly on each event. Their value is determined during ingestion by looking up the person who sent the event in PostgreSQL and combining these values with any updates from the event itself.
+Person properties are also stored directly on each event. Their value is determined during ingestion by looking up the person who sent the event in PostgreSQL and combining these values with any updates from the event itself.
 
-The `properties` field on each person object can be updated at any time, and as a result, the PostgreSQL table represents the one source of truth for the most up-to-date values for the properties of a person.
+The `properties` field on each person object can be updated at any time. As a result, the PostgreSQL table represents the one source of truth for the most up-to-date values for the properties of a person.
 
 > **Further reading:** [How person properties are added to events](/docs/how-posthog-works/ingestion-pipeline#2-person-processing)

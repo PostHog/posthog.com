@@ -69,4 +69,4 @@ PostHog discards events exceeding 1 megabyte in size after processing. The two c
 
 ## Event ingestion has overflowed capacity
 
-This warning indicates PostHog is receiving more events for a single `distinct_id` than it can process in the main [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline). These events are still safe and ingested but through a slower overflow pipeline that is slower. This is often a sign of an instrumentation bug such as a loop sending the same event.
+This warning indicates PostHog is receiving more events for a single `distinct_id` than it can process in the main [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline). These events are still safe and ingested but through a slower overflow pipeline. This is often a sign of an instrumentation bug such as a loop sending the same event.
