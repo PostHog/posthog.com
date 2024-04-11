@@ -103,30 +103,33 @@ Our small team page is maintained [here](/teams/customer-success). By 2026, we s
 - Hands-on people not motivated by managing a team
 - For anyone sales-focused, we would want to buy PostHog from them - this is more important than cool logos
 
+### How we define roles
+
+- Account executive (AE): responsible for selling to qualified leads, getting them properly using the product (ideally annual contract) and being the main point of contact for retaining/upselling to existing customers assigned to them. This is a hybrid role - we don't sell and then throw over the wall to an accounts team to manage.
+- RevOps manager: responsible for ensuring all our sales & CS systems are all functioning as they should to support us as we scale to $50m+ ARR and thousands of paying customers. This covers both the tools themselves, and how we read and act on product usage signals. 
+- Customer success manager (CSM): responsible for the ongoing relationship with customers who are more in a steady state of usage where an ongoing AE relationship doesn't make sense, or where they have more complex ongoing project management-style needs.
+- Inbound sales development rep (SDR): responsible for generating and qualifying leads. At PostHog, this would specifically mean looking at high quality leads from new signups. We don’t do outbound.
+
+### Team roles
+
 This is how current roles are split - including spaces for the next few hires we want to make!
 
-**Sales led** - people who book a demo
+**Sales**
 - Simon
-  - Sales to Extra Large customers
-  - CSM to Extra Large customers (because expansion is particularly important here)
-  - Routes all inbound demos to appropriate person
+  - AE for Extra Large customers
 - Cameron
-  - Sales to Large and Medium customers
-  - Routes smaller customer to self-serve
-- Charles
-  - Inbound SDR for Large and Extra Large customers (ie. sign ups from big company poking around)
-  - We will hire here, as he will do this badly
-
-**Sales assist** - people who self serve but need a bit of help
-- Future hire 
-  - Helps Medium and Large customers get things like proper spend controls set up if they need it
-  - We're mostly automating this right now
+  - AE for Medium & Large customers
+  - Routes inbound demos to appropriate person
+  - If he does a demo and someone is actually smaller than Medium, route to self serve
+- Actively hiring - 2x AE
+  - Medium & Large customers (1x SF-based)
+- Future hire - Inbound SDR
  
-**Retention & Expansion** - ongoing support and growth of paying customers
+**RevOps & Customer Success**
 - Mine
-  - CSM for all Medium and Large customers post 2 paid invoices
-- Future hire
-  - Another CSM doing the above - we would probably split up Medium and Large customers
+  - Building and leading RevOps
+- Future hire - CSM
+  - Manage steady state/single product customers
  
 **Support**
 - Marcus	
@@ -135,9 +138,3 @@ This is how current roles are split - including spaces for the next few hires we
   - Support engineer (US time zones)
 
 Longer term, expansion/renewals is often a separate team, but we don't need to do this now. 
-
-## How we work
-
-We also have detailed guidance in the sidebar for things like how to manage sales day-to-day under [Sales Operations](/handbook/growth/sales/sales-operations) and [CRM](/handbook/growth/sales/crm). 
-
-We are also responsible for [customer support](/handbook/growth/customer-support) at PostHog. 
