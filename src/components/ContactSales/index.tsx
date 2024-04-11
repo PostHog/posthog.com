@@ -105,7 +105,11 @@ export default function ContactSales({ location }) {
                             <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
                             form at a breakneck pace!
                         </p>
-                        <HubSpotForm autoValidate formID="32d0b55f-9de6-4c40-a6ec-ddfd2c39578b" />
+                        <HubSpotForm
+                            autoValidate
+                            formID="32d0b55f-9de6-4c40-a6ec-ddfd2c39578b"
+                            formOptions={{ cols: 1 }}
+                        />
                     </div>
                 </section>
             </div>
