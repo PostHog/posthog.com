@@ -130,7 +130,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 
     await getAllStrapiPosts()
     await getAllStrapiPostCategories()
-    const postPromises: any = []
+    const postsToCreateOrUpdate: any = []
     for (const {
         frontmatter: { title, date, featuredImage, authorData, category: postTag, tags: postTags, crosspost },
         fields: { slug },
@@ -192,10 +192,10 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                   }
                 : null),
         }
-        postPromises.push({ data, existingPostId: existingPost?.id })
+        postsToCreateOrUpdate.push({ data, existingPostId: existingPost?.id })
     }
 
-    for (const { data, existingPostId } of postPromises) {
+    for (const { data, existingPostId } of postsToCreateOrUpdate) {
         await createOrUpdateStrapiPost(data, existingPostId)
     }
 
