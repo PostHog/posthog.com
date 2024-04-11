@@ -16,7 +16,7 @@ title: Troubleshooting and FAQs
 
 ## How do I capture data from another application?
 
-We deprecated the functionality of PostHog transformation or destination that enable you to capture data from other tools. Functionally, these transformation or destination were a cron which ran every minute (or more) and pulled data from another tool.
+We deprecated the functionality of data pipelines that enable you to capture data from other tools on a schedule. Functionally, these were a cron which ran every minute (or more) and pulled data from another tool.
 
 There are two options for recreating this functionality:
 
