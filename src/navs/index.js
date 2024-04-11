@@ -1399,7 +1399,7 @@ export const docsMenu = {
                             url: '/docs/hogql/expressions',
                         },
                         {
-                            name: 'Supported ClickHouse functions',
+                            name: 'Supported functions',
                             url: '/docs/hogql/clickhouse-functions',
                         },
                         {
