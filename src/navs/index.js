@@ -253,6 +253,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
             {
+                name: 'How we work',
+                url: '/handbook/growth/sales/how-we-work',
+            },
+            {
                 name: 'Customer support',
                 url: '/handbook/growth/customer-support',
             },
