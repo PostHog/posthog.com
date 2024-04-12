@@ -44,7 +44,7 @@ At **PostHog**, we’re [anti-meeting by default](https://posthog.com/blog/meeti
 
 At **Doist**, four days of each week are [dedicated to deep work](https://async.twist.com/heroes-housekeeping-days/), with Fridays reserved for housekeeping – bug fixes, battling technical debt, reading, research, and other smaller tasks. It’s an extreme version of time blocking – essentially blocking out four days a week for shipping, with one day reserved for everything else.
 
-When you absolutely have to have meetings, make the most of them. **GitLab **has a set of principles for how notes should be taken in [just about any meeting](https://handbook.gitlab.com/handbook/communication/#smart-note-taking-in-meetings). This starts with the agenda, which is shared in advance. During meetings, everyone is encouraged to help out with note-taking with a focus on capturing key points rather than every single word that’s said. 
+When you absolutely have to have meetings, make the most of them. **GitLab** has a set of principles for how notes should be taken in [just about any meeting](https://handbook.gitlab.com/handbook/communication/#smart-note-taking-in-meetings). This starts with the agenda, which is shared in advance. During meetings, everyone is encouraged to help out with note-taking with a focus on capturing key points rather than every single word that’s said. 
 
 ### 3. They value transparency and trust over process
 
@@ -56,9 +56,9 @@ Ultimately, teams and companies that really make remote working work have to go 
 
 - Give people autonomy. At **PostHog**, we hire people who work well with high level direction and who are comfortable stepping on toes to get things done. We trust people to do their best work and, in return, they deliver.
 
-- Feedback. **GitLab **has a [policy](https://handbook.gitlab.com/handbook/values/) of “blameless problem solving.” Simply put, when something goes wrong, the investigation of the root cause is, as the company puts it, blameless. This encourages everyone to speak up without fear of punishment. People are trusted to make mistakes and, as a result, problems that do arise are easier to solve.
+- Feedback. **GitLab** has a [policy](https://handbook.gitlab.com/handbook/values/) of “blameless problem solving.” Simply put, when something goes wrong, the investigation of the root cause is, as the company puts it, blameless. This encourages everyone to speak up without fear of punishment. People are trusted to make mistakes and, as a result, problems that do arise are easier to solve.
 
-- Work in public. At **Zapier, **trust and transparency are a big part of the [company’s values](https://zapier.com/jobs/culture-and-values-at-zapier). As co-founder and CEO Wade Foster explains: “Transparency promotes equity and inclusion within our team and customer base. So work in public. Have discussions in the open and document your work.” The most successful remote companies build everything out in the open. This gives everyone the context they need to do their very best work across multiple time zones.
+- Work in public. At **Zapier**, trust and transparency are a big part of the [company’s values](https://zapier.com/jobs/culture-and-values-at-zapier). As co-founder and CEO Wade Foster explains: “Transparency promotes equity and inclusion within our team and customer base. So work in public. Have discussions in the open and document your work.” The most successful remote companies build everything out in the open. This gives everyone the context they need to do their very best work across multiple time zones.
 
 - Shared values. The most successful remote teams have a shared set of values and behaviors – and these are often clearly defined in a public handbook. These values and behaviors are more important than dictatorial processes. As **Buffer** co-founder and CEO Joel Gascoigne wrote [almost a decade ago](https://buffer.com/resources/why-transparency/), “transparency breeds trust, and trust is is the foundation of great teamwork.” It’s still true today.
 
@@ -66,9 +66,9 @@ Ultimately, teams and companies that really make remote working work have to go 
 
 Pretty much all successful remote teams have one thing in common: they’re not remote all the time. No, that doesn’t mean hybrid working, it means offsites. Great offsites are a lot of fun but also highly intentional and help remote teams come together to work on big, specific problems. They also help build bonds that make asynchronous work more creative and collaborative for the rest of the year.
 
-At** PostHog**, we organize an annual offsite. We’re far from alone, but we think we’re pretty good at them. The typical agenda includes a couple of big social events, team dinners, a day-long hackathon, all-hands strategy sessions and workshops, company culture exercises, and time for people to get some downtime and explore. 
+At **PostHog**, we organize an annual offsite. We’re far from alone, but we think we’re pretty good at them. The typical agenda includes a couple of big social events, team dinners, a day-long hackathon, all-hands strategy sessions and workshops, company culture exercises, and time for people to get some downtime and explore. 
 
-Want to know how we plan great offsites? Look no further than [our handbook](https://posthog.com/handbook/company/offsites) – it even has a comprehensive checklist and some templates you can use to get started.** **But, for successful remote teams, meeting up goes beyond annual offsites. We also encourage individual teams to get together once a year to dig into specific projects and do in-person onboarding for all our new hires. Everyone at the company also has a quarterly travel budget so they can meet up with colleagues all over the world and solve some of the company’s biggest challenges.
+Want to know how we plan great offsites? Look no further than [our handbook](https://posthog.com/handbook/company/offsites) – it even has a comprehensive checklist and some templates you can use to get started. But, for successful remote teams, meeting up goes beyond annual offsites. We also encourage individual teams to get together once a year to dig into specific projects and do in-person onboarding for all our new hires. Everyone at the company also has a quarterly travel budget so they can meet up with colleagues all over the world and solve some of the company’s biggest challenges.
 
 ### Good reads for making remote working really work 📖
 
