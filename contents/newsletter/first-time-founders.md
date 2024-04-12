@@ -117,9 +117,7 @@ Per Borgen and his co-founder spent three years trying to make their first start
 In his mind, they made two critical errors:
 
 1. The market was too small
-2. They lacked founder-market fit
-
-"None of us had a strong passion for children's books, so we didn't have the stamina to continue pushing through difficult times."
+2. They didn't have a "strong passion" for the problem they were trying to solve.
 
 They rectified both with Scrimba, an online coding school that's profitable with a team of 15, and has over 10k customers. 
 
@@ -129,6 +127,7 @@ He has one final piece of advice for first-time founders:
 
 > "The worst period is before you pull the plug, not after. I felt much better after I stopped trying to save the startup, and started doing something else. The lump in my stomach completely went away."
 
-## Good reads for product engineers
+All these founders failed on their first attempts. Odds are you will, too.
 
+## Good reads
 WORDS WORDS WORDS
