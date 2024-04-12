@@ -249,6 +249,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/new-sales',
             },
             {
+                name: 'Expansion & Retention',
+                url: '/handbook/growth/sales/expansion-and-retention',
+            },
+            {
                 name: 'Customer support',
                 url: '/handbook/growth/customer-support',
             },
