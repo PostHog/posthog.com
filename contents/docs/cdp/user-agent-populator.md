@@ -1,6 +1,6 @@
 ---
 title: User Agent Populator
-github: 'https://github.com/weyert/useragentplugin'
+github: 'https://github.com/PostHog/user-agent-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=User%20Agent%20Populator'
 thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/user-agent-enhancer.png
