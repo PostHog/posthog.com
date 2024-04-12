@@ -98,7 +98,7 @@ They got together and "pivoted weekly for ~2 months" before landing on Pylon, a 
 
 ### Not using analytics
 
-YC's Michael Seibel says "we this time and time again." See also: [What engineers get wrong about analytics](https://newsletter.posthog.com/p/what-engineers-get-wrong-about-analytics).
+YC's Michael Seibel says that, even now, "we see this time and time again." See also: [What engineers get wrong about analytics](https://newsletter.posthog.com/p/what-engineers-get-wrong-about-analytics).
 
 ### Just shipping what users say they want
 
