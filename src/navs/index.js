@@ -245,11 +245,15 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/overview',
             },
             {
+                name: 'New sales',
+                url: '/handbook/growth/sales/new-sales',
+            },
+            {
                 name: 'Customer support',
                 url: '/handbook/growth/customer-support',
             },
             {
-                name: 'Sales operations',
+                name: 'RevOps',
                 url: '/handbook/growth/sales/sales-operations',
                 children: [
                     {
@@ -267,10 +271,6 @@ export const handbookSidebar = [
                     {
                         name: 'YC onboarding',
                         url: '/handbook/growth/sales/yc-onboarding',
-                    },
-                    {
-                        name: 'Demos',
-                        url: '/handbook/growth/sales/demos',
                     },
                     {
                         name: 'Contracts',
