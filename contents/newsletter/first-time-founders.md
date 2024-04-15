@@ -56,7 +56,7 @@ Paul and his co-founder thought they were following a well-established playbook,
 
 THIS WILL BE A GRAPHIC
 
-Before Taylor found success with Mailgun and Teleport, he co-founded Profista, a web app and consulting company that helped business leaders rack financial results and "operational drivers." 
+Before [Taylor Wakefield](https://www.linkedin.com/in/taylorwakefield/ found success with Mailgun and Teleport, he co-founded Profista, a web app and consulting company that helped business leaders rack financial results and "operational drivers." 
 
 > "We essentially sold BI vaporware to large companies like EMC and Cisco to help manage their business. We would use Tableau graphs embedded in wireframes to demonstrate the idea to them."
 
