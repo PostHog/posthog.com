@@ -18,6 +18,7 @@ export const breakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/
 UTM parameters are a set 5 five parameters that allow you to track the effectiveness of marketing
 campaigns across traffic sources. These parameters were first introduced by Google Analytics, but are
 now a common way to identify where traffic to your website is coming from.
+
 They are especially useful when running ad campaigns, as nearly every platform will set them when sending traffic to your website.
 
 The parameters are attached to a link using query parameters, for example:
@@ -27,6 +28,7 @@ The parameters are attached to a link using query parameters, for example:
 ### Capturing UTM parameters
 
 PostHog is set up to automatically capture any UTM parameters that are present when a user visits your website.
+
 These parameters will then be set as properties on any event that you send to PostHog.
 
 PostHog supports all 5 parameters:
@@ -48,7 +50,7 @@ Here's an example of what an event looks like when all 5 UTM parameters are set.
     classes="rounded"
 />
 
-> **Note: ** Along with being set on events, these UTM properties will also be added to the profile of the user who sent the event.
+> **Note: ** Along with being set on events, UTM properties are also added to the person profile of the user who sent the event if events are captured with [person profiles](/docs/data/persons).
 
 ### Custom UTM parameters
 

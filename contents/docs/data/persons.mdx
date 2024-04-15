@@ -16,13 +16,57 @@ export const personProfileDark = "https://res.cloudinary.com/dmukukwp6/image/upl
     className="rounded shadow-xl"
 />
 
-Clicking on [People](https://us.posthog.com/persons) in the left-hand navigation opens a list containing all users, which you can then search.
+People in PostHog represent users who do events. Every event has a `distinct_id` representing a person attached to it. Depending on your person profile processing configuration, these persons may also have profiles in PostHog you can view by clicking on the [People tab](https://us.posthog.com/persons). 
 
-All users have a alphanumeric ID. [Identified users](/docs/product-analytics/identify) have a distinct ID, normally `email`.
+Person profiles and user properties enable:
 
-PostHog tracks user behavior, whether or not the user is logged in and identifiable.
+- Filtering on user properties
+- Merging identities across `distinct_id` values (i.e. merging an anonymous user with a logged in user)
+- Cohort creation
+- Feature flag targeting on user properties
+- Tracking initial UTM values and referrers across anonymous and identified users
 
-## Person profiles
+Beyond this, there are many use cases that don't require person profiles. Because events that don't process person profiles are cheaper for us to ingest, the pricing for these events is lower. Some examples:
+
+- Tracking a marketing website
+- B2C apps where users don't sign up or log in
+- High volume API server events
+
+For backward compatibility and to make sure we don't drop person information accidentally, processing events with persons is the default for configs without any option set. 
+
+## Capturing person profiles
+
+By default, PostHog captures events with person profiles. To change this in the JavaScript Web configuration, change the `process_person` config option with one of the three options:
+
+1. `process_person: 'always'` _(default)_ - We include person profiles for all events
+2. `process_person: 'never'` - We don't include person profiles on any event.
+3. `process_person: 'identified_only'` - We only include person profiles when you call `posthog.identify()`. Anonymous users won't get person profiles.
+
+An example of an updated configuration looks like this:
+
+```js-web
+posthog.init(
+    '<ph_project_api_key>',
+    {
+        api_host: '<ph_instance_address>',
+        process_person: 'identified_only'
+    }
+)
+```
+
+Other SDKs and the API can pass the `$process_person` property on events.
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'movie_played',
+    properties: {
+        $process_person: 'never',
+    },
+})
+```
+
+## Viewing person profiles
 
 Clicking on a user opens their profile and shows all their properties.
 
