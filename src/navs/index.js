@@ -724,6 +724,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/markdown',
                     },
                     {
+                        name: 'Uploading assets',
+                        url: '/handbook/engineering/posthog-com/assets',
+                    },
+                    {
                         name: 'Posting a new job',
                         url: '/handbook/engineering/posthog-com/jobs',
                     },
