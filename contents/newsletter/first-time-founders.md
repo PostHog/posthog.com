@@ -14,13 +14,11 @@ crosspost:
   - Blog
 ---
 
-Read the footnote if "trust me bro" isn't enough for you, but statistically:
-
 1. First-time founders fail more often than everyone else.
 2. Founders who previously failed are only _marginally_ more successful – like a percentage point or two.
 3. Previously successful founders are _way_ more likely to succeed than either of the above.
 
-Therefore, if you want to learn how first-time founders fail and avoid their mistakes, it's best to ask the ones who found success after their first startup(s) failed. 
+Statistically, all three of these are true. Therefore, if you want to learn how first-time founders fail and avoid their mistakes, it's best to ask the ones who found success after their first startup(s) failed. 
 
 So, I did. Here's what they said.
 
