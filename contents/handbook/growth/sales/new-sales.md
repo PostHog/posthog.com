@@ -76,7 +76,7 @@ If you need help with anything data privacy or [MSA-related](/handbook/growth/sa
 
 **6. Commercial evaluation**
 
-The [Contracts](/handbook/growth/sales/contracts) page has full guidance on the nuts and bolts of how to put together a commercial proposal. 
+The [Contracts](/handbook/growth/sales/contracts) page has full guidance on the nuts and bolts of how to put together a commercial proposal - we use PandaDoc. 
 
 By this point, you may have started running into some objections. These are the most common, and how to handle:
 
@@ -89,7 +89,7 @@ By this point, you may have started running into some objections. These are the 
 
 Hooray! This is defined as when the contract is signed by _everyone_. 'They're about to sign' - NOT CLOSED. 'I've sent a DocuSign' - NOT CLOSED EITHER.  
 
-Once the contract is signed, add it to the [signed contracts folder](https://drive.google.com/drive/folders/1ccWPIrY9dXwrzJwppFI2pm3kFIcOb8j8) and get them set up with [billing](/handbook/growth/sales/billing). 
+Once the contract is signed, it lives in PandaDoc. Next step - get them set up with [billing](/handbook/growth/sales/billing). 
 
 Now it's time to set up an onboarding plan. We will templatize this, but for now you should send them something in the first week that includes:
 
