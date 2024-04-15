@@ -30,7 +30,7 @@ So, I did. Here's what they said.
 
 THIS WILL BE A GRAPHIC
 
-Supabase is lean, product-led, and grows by word-of-mouth. It's the polar opposite of ServisHero, Paul's first startup, a TaskRabbit-style marketplace for local services in South East Asia.
+[Supabase](https://supabase.com/) is lean, product-led, and grows by word-of-mouth. It's the polar opposite of ServisHero, [Paul Copplestone's](https://twitter.com/kiwicopple) first startup, a TaskRabbit-style marketplace for local services in South East Asia.
 
 ServisHero [raised millions](https://techcrunch.com/2016/03/20/servishero-a-mobile-app-for-finding-local-services-in-southeast-asia-lands-2-7m/), generated early buzz, and blitzscaled their way to double-digit growth by expanding into new countries.
 
@@ -88,19 +88,16 @@ Exhibit A: [Humane AI Pin](https://www.theverge.com/24126502/humane-ai-pin-revie
 
 ### The wrong co-founder(s)
 
-"[Companies are mostly about people](https://newsletter.posthog.com/p/what-we-learned-about-hiring-from)" and that starts with your co-founders. Marty Kausus, co-founder and CEO at [Pylon](https://usepylon.com), quit his second startup the moment he found "the right co-founders" to start a more successful venture.
+"[Companies are mostly about people](https://newsletter.posthog.com/p/what-we-learned-about-hiring-from)" and that starts with your co-founders. [Marty Kausus](https://www.linkedin.com/in/martykausas/), co-founder and CEO at [Pylon](https://usepylon.com), quit his second startup the moment he found "the right co-founders" to start a more successful venture.
 
 Marty and his co-founders got together and "pivoted weekly" for around two months before landing on Pylon, a Zendesk and Intercom alternative for managing customer operations via Slack. A year and a half later, they already have strong product-market fit.
 
 > "My biggest takeaway on co-founders is to make sure they have similar hustle, spirit, and desired lifestyle. For Pylon, we wanted to live together and live and breathe the company. We joke that we don't have "work-life balance", we have "work-life integration" and that's ideal for us, while most people would find that miserable."
 
-### Not using analytics
-
-YC's Michael Seibel says that, even now, "we see this time and time again." See also: [What engineers get wrong about analytics](https://newsletter.posthog.com/p/what-engineers-get-wrong-about-analytics).
 
 ### Just shipping what users say they want
 
-Talking to customers is important, but it can go too far. This was a lesson James Evans, now co-founder at CEO at [CommandBar](https://www.commandbar.com), learned in his first startup:
+Talking to customers is important, but it can go too far. This was a lesson [James Evans](https://www.linkedin.com/in/james-evans-7086b3126/), now co-founder at CEO at [CommandBar](https://www.commandbar.com), learned in his first startup:
 
 > "Our only real advantage relative to competitors was speed and eagerness, so we shipped a ton of features. Users would ask for something on Intercom in the morning and receive it that evening. Just crazy customer service."
 
@@ -110,22 +107,20 @@ With CommandBar, James was determined to build a more opinionated product. They 
 
 ### Poor founder-market fit
 
-Per Borgen and his co-founder spent three years trying to make their first startup work. Despite reaching over a million downloads for their children's books for iPad idea, the venture almost broke his spirit: "I was convinced I'd never have the energy to do a startup again."
+[Per Borgen](https://www.linkedin.com/in/per-harald-borgen/) and his co-founder spent three years trying to make their first startup, Propell (2012 to 2015), work. Despite reaching over a million downloads for their children's books for iPad idea, the venture almost broke his spirit: "I was convinced I'd never have the energy to do a startup again."
 
 In his mind, they made two critical errors:
 
 1. The market was too small.
 2. They didn't have a "strong passion" for the problem they were trying to solve.
 
-They rectified both with Scrimba, an online coding school that's profitable with a team of 15, and has over 10k customers. 
+They rectified both with [Scrimba](https://scrimba.com/), an online coding school they founded in 2016. It's profitable with a team of 15 and has over 10,000 customers. 
 
-They have a large target market who are willing to pay and Per, having learned to code via an online bootcamps, has strong opinions how to do it well.
+Scrimba has a large target market who are willing to pay and Per, having learned to code via online bootcamps, has strong opinions on how to do it well.
 
-He has one final piece of advice for first-time founders:
+He's got one final piece of advice for first-time founders:
 
 > "The worst period is before you pull the plug, not after. I felt much better after I stopped trying to save the startup, and started doing something else. The lump in my stomach completely went away."
-
-All these founders failed on their first attempts. Odds are you will, too.
 
 ## Good reads
 WORDS WORDS WORDS
