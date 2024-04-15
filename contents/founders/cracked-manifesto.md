@@ -3,7 +3,7 @@ date: 2024-03-16
 title: Why you need to hire cracked engineers
 author:
   - charles-cook
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/v1713170014/posthog.com/contents/blog/cracked_engineer.jpg
 featuredImageType: full
 tags:
   - Culture
