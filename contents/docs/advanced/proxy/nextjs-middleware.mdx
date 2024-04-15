@@ -37,6 +37,17 @@ export const config = {
 }
 ```
 
+Add the `skipTrailingSlashRedirect` option to your `next.config.js` file:
+
+```js
+// next.config.js
+const nextConfig = {
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true, 
+}
+module.exports = nextConfig
+```
+
 Once done, configure the PostHog client to send requests via your rewrite.
 
 ```js
@@ -45,5 +56,3 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   ui_host: "https://app.posthog.com" // or "https://eu.posthog.com" if your PostHog is hosted in Europe
 })
 ```
-
-> **Note:** Next.js proxies are limited to requests from the Next.js application itself. This solution won't work if you are making requests from another application or website due to CORS errors. [We have an open issue with Next.js](https://github.com/vercel/next.js/issues/63948) to try and resolve this problem. For now, we recommend only making requests from your Next.js application to a Next.js proxy.
