@@ -50,7 +50,7 @@ You should then follow up with a standard email/Slack message that:
 - Summarizes what they’re after and how Posthog is a great/bad fit
 - Lays out next steps on both sides
 - Shares a proposed timetable for the evaluation and onboarding process
-- Includes any useful lin=ks (e.g. Docs page, competitor comparisons, relevant case studies)
+- Includes any useful links (e.g. Docs page, competitor comparisons, relevant case studies)
 
 The AE acts as the support person during this period, usually answering questions in Slack. 
 
