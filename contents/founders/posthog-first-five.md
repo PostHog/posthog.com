@@ -12,6 +12,7 @@ tags:
   - Culture
 crosspost:
   - Blog
+  - Newsletter
 ---
 
 Companies are mostly about people.
