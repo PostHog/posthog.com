@@ -97,7 +97,7 @@ Kameleoon doesn't publish pricing publicly, but conversion optimization consulta
 
 #### Summary
 
-[VWO](/blog/best-vwo-alternatives) is best known as an A/B testing platform for e-commerce websites and mobile apps, though it also offers basic session replay and analytics tools as part of its myriad pricing tiers. A/B testing features includes support for multi-armed bandit, a visual editor, and advanced targeting options, such as targeting based on screen resolution.
+[VWO](/blog/best-vwo-alternatives) is best known as an A/B testing platform for e-commerce websites and mobile apps, though it also offers basic session replay and analytics tools as part of its myriad pricing tiers. A/B testing features include support for multi-armed bandit, a visual editor, and advanced targeting options, such as targeting based on screen resolution.
 
 Unlike most tools in this list, VWO charges separately for website and mobile apps based on monthly tracked users (MTUs) for both, so it can get expensive quickly if you need both. VWO offers a BAA when you pay for the Security Plus Add-on ($529 per month).
 
