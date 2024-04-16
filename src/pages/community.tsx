@@ -169,72 +169,74 @@ const Main = () => {
 
     return (
         <section
-            className={`grid sm:flex sm:flex-wrap lg:grid lg:grid-cols-[220px_1fr_260px] xl:grid-cols-[300px_1fr_300px] gap-4 sm:gap-8 mx-auto px-5 mb-12 transition-all ${
+            className={`@container grid sm:flex sm:flex-wrap lg:grid lg:grid-cols-[220px_1fr_260px] xl:grid-cols-[300px_1fr_300px] gap-4 sm:gap-8 mx-auto px-5 mb-12 transition-all ${
                 fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
-            <aside className="order-3 sm:flex-[0_0_100%] sm:border-t border-light dark:border-dark lg:border-t-0 sm:pt-8 lg:pt-0 lg:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
-                <PersonSpotlight
-                    title="A note from the editor"
-                    content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
-                    byline="- Andy, Editor-in-Chief"
-                    image={
-                        <div className="w-24 rounded-full overflow-hidden bg-yellow">
-                            <StaticImage src="../../static/images/authors/andy-vandervell-posthog.png" />
-                        </div>
-                    }
-                />
-
-                <div className="text-center py-4 px-2">
-                    <p className="mb-2">
-                        <em>"{quote}"</em>
-                    </p>
-                    <p className="text-sm opacity-75 mb-0">
-                        <em>- Max, our resident hedgehog</em>
-                    </p>
-                </div>
-
-                <SlackPosts />
-
-                <div className="py-4">
+            <aside className="order-3 @sm:flex-[0_0_100%] sm:border-t border-light dark:border-dark lg:border-t-0 sm:pt-8 lg:pt-0 lg:order-none flex flex-col ">
+                <div className="grid @sm:grid-cols-2 gap-4 @sm:gap-8 divide-y divide-border dark:divide-border-dark">
                     <PersonSpotlight
-                        title="Meet a team member"
-                        content="<p>James G is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
+                        title="A note from the editor"
+                        content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
+                        byline="- Andy, Editor-in-Chief"
                         image={
-                            <div className="w-24 rounded-full overflow-hidden bg-salmon">
-                                <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                            <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                                <StaticImage src="../../static/images/authors/andy-vandervell-posthog.png" />
                             </div>
                         }
-                        cta={<Link to="/community/profiles/90">Learn more about James G.</Link>}
                     />
-                </div>
 
-                <div className="py-4 grid gap-5">
-                    <div>
-                        <h3 className="text-base">People news</h3>
-
-                        <div className="flex gap-1 items-center">
-                            <div>
-                                <IconConfetti className="w-8 h-8 text-primary/50 dark:text-accent-dark/50" />
-                            </div>
-                            <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
-                        </div>
-                        <Newbies />
+                    <div className="text-center py-4 px-2">
+                        <p className="mb-2">
+                            <em>"{quote}"</em>
+                        </p>
+                        <p className="text-sm opacity-75 mb-0">
+                            <em>- Max, our resident hedgehog</em>
+                        </p>
                     </div>
 
-                    <div>
-                        <div className="flex gap-1 items-center">
-                            <div>
-                                <IconCake className="w-8 h-8 text-primary/50 dark:text-primary-dark/50" />
+                    <SlackPosts />
+
+                    <div className="py-4">
+                        <PersonSpotlight
+                            title="Meet a team member"
+                            content="<p>James G is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
+                            image={
+                                <div className="w-24 rounded-full overflow-hidden bg-salmon">
+                                    <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                                </div>
+                            }
+                            cta={<Link to="/community/profiles/90">Learn more about James G.</Link>}
+                        />
+                    </div>
+
+                    <div className="py-4 grid gap-5">
+                        <div>
+                            <h3 className="text-base">People news</h3>
+
+                            <div className="flex gap-1 items-center">
+                                <div>
+                                    <IconConfetti className="w-8 h-8 text-primary/50 dark:text-accent-dark/50" />
+                                </div>
+                                <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
                             </div>
-                            <h4 className="font-semibold opacity-75 text-[15px] mb-0">Thanks for being here!</h4>
+                            <Newbies />
                         </div>
 
-                        <Anniversaries />
+                        <div>
+                            <div className="flex gap-1 items-center">
+                                <div>
+                                    <IconCake className="w-8 h-8 text-primary/50 dark:text-primary-dark/50" />
+                                </div>
+                                <h4 className="font-semibold opacity-75 text-[15px] mb-0">Thanks for being here!</h4>
+                            </div>
+
+                            <Anniversaries />
+                        </div>
                     </div>
                 </div>
             </aside>
-            <section className="@container order-1 sm:flex-1 lg:order-none sm:border-r sm:pr-8 lg:px-8 lg:border-x border-light dark:border-dark">
+            <section className="order-1 sm:flex-1 lg:order-none sm:border-r sm:pr-8 lg:px-8 lg:border-x border-light dark:border-dark">
                 <div
                     className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
                         fullWidthContent ? '' : 'max-w-2xl mx-auto'
@@ -252,7 +254,7 @@ const Main = () => {
                     </div>
                 </div>
             </section>
-            <aside className="@container order-2 sm:flex-[0_0_260px] md:flex-[0_0_300px] lg:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+            <aside className="order-2 sm:flex-[0_0_260px] md:flex-[0_0_300px] lg:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
                 <Questions />
 
                 <Merch />
