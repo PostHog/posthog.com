@@ -10,70 +10,85 @@ featuredImageType: full
 
 *This is oriented towards people doing product led growth / self serve heavy businesses, but hopefully is interesting for all*
 
-One of my greatest weeks at PostHog was an offsite in [Aruba](/blog/aruba-hackathon). As much as I love a Caribbean paradise, it wasn't for the reason you expect.
+One of my favorite weeks at PostHog was an offsite in [Aruba](/blog/aruba-hackathon). But, as much as I love a Caribbean paradise, it wasn't for the reason you expect.
 
-In 2023, we were having a great year in the face of most of [tech struggling](https://www.theatlantic.com/ideas/archive/2023/01/tech-recession-layoffs-google-facebook-microsoft/672798/), and we wanted something to celebrate. We knew there wouldn't be any big external milestones - like a fundraise for example - to break up the year, and we had a _ton_ of stuff we expected our team to build. We therefore wanted to have a celebration of how things were going. So we increased the offsite budget, opting for a fairly fancy hotel in the Caribbean.
+We'd chosen Aruba because the team deserved to celebrate a little. We'd had a great year despite most of [tech struggling](https://www.theatlantic.com/ideas/archive/2023/01/tech-recession-layoffs-google-facebook-microsoft/672798/) and everyone had pushed hard to get there. In the absence of any big external milestones, such as a fundraise, we decided to increase the offsite budget, opting for a fairly fancy hotel in the Caribbean.
 
-As fun as that sounds - a core part of my job is making sure we don't run out of money. Alas.
+As fun as that sounds, I felt a little guilty when we arrived. The lobby had a _boat_ in it. There was a _private beach_. You could drink _infinite piña coladas_. I knew we were spending $100K more than we _needed_ to and, as a founder, a core part of my job is making sure we don't run out of money!
 
-We turned up and I felt a little *guilty*. The lobby had a _boat_ in it, there was a _private beach_, you could drink _infinite piña coladas_. Add those up, and I knew we were spending $100K more than we _needed_ to.
+But, as any right-minded founder would, I:
 
-As any right-minded founder would:
+1. Compartmentalized my feelings (they don't add to shareholder value)
+2. Kept refreshing our revenue dashboard (TikTok told me manifesting is real)
 
-1. I compartmentalized my feelings (they don't add to shareholder value)
-2. I kept refreshing our revenue dashboard (TikTok told me manifesting is real)
+Our growth had been consistently increasing each month and the month of our offsite was no exception. It turned out that within ~2 days, we'd increased our annual recurring revenue enough to pay for the _entire_ trip. Suddenly, I didn't feel guilty at all. 
 
-Our growth had been consistently increasing each month, and it turned out that the month of our offsite was no exception. It turned out that within ~2 days we'd increased our annual recurring revenue enough to pay for the _entire_ trip. I didn't feel guilty at all. 
+This so clearly demonstrated to me the efficiency of our business model. The entire team can be relaxing on a beach, doing a hackathon, talking abut our values _and_ making money whilst not working on anything day-to-day. If we just chilled on the beach, we'd have achieved passive income baby! 
 
-This so clearly demonstrated to me the efficiency of our business model - the entire team can be relaxing on a beach, doing a hackathon, talking abut our values and making money whilst not working on anything day-to-day. If we just chilled on the beach, we'd have achieved passive income baby! The reason this happens is that PostHog is a 100% inbound company - we've consistently put useful and cool stuff online (like our products or our content), and because we've done a remarkable-enough job of those things, we now just need to keep building on these to grow through word of mouth. It means we don't need people constantly cold emailing or calling to find more business.
+This happens because PostHog is a 100% inbound company – we've consistently put useful and cool stuff online (like our products or our content), and because we've done a remarkable-enough job of those things, we now just need to keep building on these to grow through word of mouth. It means we don't need people constantly cold emailing or calling to find more business.
 
-If you fast forward today, >900 companies a week now sign up to PostHog, from hobbyists to Fortune 500s.
+Today, approximately 1,200 companies a week sign up to PostHog, ranging from hobbyists to Fortune 500s, . This post is about how _we_ got from our first 10 users to here.
 
 <PUT IN GRAPH OF WEEKLY COMPREHENSIVE ORG SIGNUPS>
 
 ## Prerequisites
 
-* If you want to go fast, go alone. If you want to go far, go together. You are going to have to handle a literally-endless series of problems. Find a friend! 
-* The ability to ship and get users for new products very fast, from scratch. If you're doing software, you must be very, very good at shipping and marketing software quickly. Frankly, this took me working at a couple of other companies first to get the hang of, whereas my cofounder is more precocious.
+* If you want to go fast, go alone. If you want to go far, go together. You are going to have to handle a literally-endless series of problems. Find a friend!
+ 
+* The ability to ship and get users for new products very fast, from scratch. If you're doing software, you must be very, very good at shipping and marketing software quickly. Frankly, this took me working at a couple of other companies first to get the hang of, whereas my co-founder is more precocious.
+
 * An [idea](https://www.ycombinator.com/library/8g-how-to-get-startup-ideas) of what to work on. Hopefully a good one.
 
-A note on terminology - I've used the word "users", but for B2B software, I'd treat this as "organizations". The numbers are a little approximate, but what matters is each stage and the sequence of goals that you must achieve, in the given order.
+A note on terminology: I've used the word "users", but for B2B software, I'd treat this as "organizations". The numbers are a little approximate, but what matters is each stage and the sequence of goals that you must achieve, in the given order.
 
 ## How we got to 10 users / checked that the product actually functioned
 
-This was the hardest part even though it looks like the least significant.
+This was the hardest part.
 
-For every stage of a startup, the earlier you are, the higher the chance of failure. With this in mind, you must be totally geared around failing fast. Hence the prerequisites above.
+The earlier you are, the higher the chance of failure. With this in mind, you must be totally geared around failing fast. Hence the prerequisites above.
 
-So, we set off doing this... We wound up [pivoting (ie failing) five times](pivot-to-posthog) before we landed on PostHog, most frequently failing at this stage - finding it very hard to get 10 companies to use it. We met the prerequisites!
+So, we set off doing this... We wound up [pivoting (i.e. failing) five times](pivot-to-posthog) before we landed on PostHog, most frequently failing at this stage – we found it very hard to get 10 companies use our products, even though we thought we met the prerequisites!
 
 For PostHog specifically, we wanted to quickly figure out if anyone cared.
 
-To test this, we had a plan, that was designed to take one month (so we wouldn't waste longer):
-1. we got friends up and running first
-1. we checked people can get up and running by themselves and if other people would use it
-1. then do a bigger launch - [HackerNews](https://news.ycombinator.com), to see if our target audience really cared
+To test this, we had a plan that was designed to take one month:
+1. Get friends up and running first.
+1. Check people can get up and running by themselves and if other people would use it.
+1. Do a bigger launch ([HackerNews](https://news.ycombinator.com) to see if our target audience really cared.
 
-We designed how we worked and the company (products, marketing, pricing, support, how my cofounder and I worked together - everything) to get through the above successfully. It was a crazy time - we were working flat out.
+We aimed for a month because spending longer would increase the downside of being wrong again, which we had repeatedly been so far.
 
-On the product side, we decided to focus on open source adoption and not revenue. I researched multi billion dollar open source companies and couldn't find a single example where they monetized in the first five years. I did this by cold messaging founders asking for advice and from what I could gather online. This meant we didn't have to worry about building a payment flow, we'd have slightly lower user expectations, and we wouldn't need to figure out how to convert people to paying us from an open source product. However, this wouldn't be good advice universally. We were going to compete in a very crowded market of tools - with multiple competitors doing around $100M in revenue. That meant we could be confident we'd find a way to monetize. We also were happy with a VC model, and weren't bootsrapping - so we could afford to do this. Had we been building into a new market, with less validation from competitors, or bootstrapping, then charging money sooner would have been important. Our challenge was _standing out_, and being developer focused / open source we thought (correctly, thankfully) would achieve this. And it was fun.
+We designed how we worked together, our products, marketing, pricing, support... everything) to get through the above successfully. It was a crazy time – we were working flat out.
 
-We set the product up to be quick to deploy - we created a [Heroku](https://heroku.com) one click deployment. Later on, we realized this was a mistake - we wound up eventually focusing on cloud adoption for most users. If I started again, I'd have a cloud product too even if it took a week or two longer. Finally, we picked a permissive license (MIT) because we wanted to see if enterprises would use it, and we felt they'd have rules around using non-permissive open source licenses, so we wanted to get rid of any risk they wouldn't use it.
+On the product side, we decided to focus on open-source adoption and not revenue. I researched multi-billion dollar open-source companies and couldn't find a single example where they monetized in the first five years. I did this by cold messaging founders asking for advice and from what I could gather online. 
 
-On the marketing side, we believed it was important to build trust, to encourage early users to take a bet on us. The foundation of trust is transparency, so we built a public handbook (and it has been a joy to maintain and expand as we've gotten a lot bigger). We ran a [Hacker News premortem](/founders/hacker-news-premortem) too.
+This meant we didn't have to worry about building a payment flow, we'd have slightly lower user expectations, and we wouldn't need to figure out how to convert people to paying us from an open source product. This worked for _us_, but isn't universally good advice!
 
-Marketing didn't need to be scalable to get the first 10 users. I asked my friends, only with the goal of building it _for_ someone with a real product (as we felt this would surface lots of edge cases etc, instead of us building it all locally at first).
+We were going to compete in a very crowded market of tools with multiple competitors doing around $100M in revenue. That meant we could be confident we'd find a way to monetize. We were also happy with a VC model, so we could afford to do this. Had we been building into a new market, with less validation from competitors, or bootstrapping, then charging money sooner would have been important. 
 
-And, hey, this wouldn't be PostHog unless I got real specific - so I'm going to tell you how I _actually_ did this. Just start at the top and work you way down until you get 10 people to use your product:
+Our challenge was _standing out_, and being developer-focused / open source we thought (correctly, thankfully) would achieve this. And it was fun.
 
-* whoever springs to mind first, as you likely know them the best
-* go through your whatsapp / texts
-* go through your linkedin, searching for people who are your first degree connections
-* go through your linkedin, looking for people who've ever worked at the same places you've worked
+We set the product up to be quick to deploy – we created a [Heroku](https://heroku.com) one click deployment. We later realized this was a mistake – we wound up eventually focusing on cloud adoption for most users. If I started again, I'd have a cloud product too even if it took a week or two longer. I would still have an open source product, but I wouldn't aim to sell a self hosted paid product.
 
-You are unlikely to be self serve at this stage - if you are being very fast, you probably don't have the ability to create a new user without manually editing the database, so we would set people up over Slack / Whatsapp or physically with them. We did as much in person as we could.
+Finally, we picked a permissive license (MIT) because we wanted to see if enterprises would use it, and we felt they'd have rules around using non-permissive open source licenses, so we wanted to get rid of any risk they wouldn't use it.
 
-To learn from users at this stage - talk to them, watch them use the product if they're friendly enough, use session replay and error tracking tools.
+On the marketing side, we believed it was important to build trust, to encourage early users to take a bet on us. The foundation of trust is transparency, so we built a public handbook – it has been a joy to maintain and expand as we've grown. We ran a [Hacker News premortem](/founders/hacker-news-premortem), too.
+
+Marketing didn't need to be scalable to get the first 10 users. I asked my friends, only with the goal of building it _for_ someone with a real product. We felt this would surface lots of edge cases etc, instead of us building it all locally at first.
+
+And, hey, this wouldn't be PostHog unless I got real specific, so I'm going to tell you how I _actually_ did this. Just start at the top and work you way down until you get 10 people to use your product:
+
+1. Whoever springs to mind first, as you likely know them the best.
+2. Go through your WhatsApp / texts 
+3. Go through your LinkedIn, searching for people who are your first degree connections.
+4. Go through your LinkedIn, looking for people who've ever worked at the same places you've worked.
+
+We weren't self-serve at this stage. In fact, we didn't even have the ability to create a new user without manually editing the database, so we would set people up over Slack / WhatsApp or physically with them. We did as much in person as we could.
+
+To learn from users at this stage:
+1. Talk to them as much as possible
+2. Watch them use the product if they're friendly enough, or... 
+3. Use session replay and error tracking tools to figure out where they get stuck
 
 ## How we got to 50 users / made sure people could self serve and figured out if anyone cared
 
