@@ -62,14 +62,14 @@ client.capture({
 
 For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture events without person profiles, set the event's `$process_person_profile` property to `never`:
+To capture events without person profiles, set the event's `$process_person_profile` property to `false`:
 
 ```node
 client.capture({
     distinctId: 'distinct_id_of_the_user',
     event: 'movie_played',
     properties: {
-        $process_person_profile: 'never',
+        $process_person_profile: false,
     },
 })
 ```

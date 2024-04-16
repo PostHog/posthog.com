@@ -15,7 +15,7 @@ Person profiles are a collection of properties about the users behind the events
 
 For example, you can create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts) based on user properties, which can then be used to [create insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
 
-By default, PostHog captures events with person profiles. You can change this to either `never` or `identified_only` in your JavaScript initialization's `person_profiles` option or in an event's `$process_person_profile` property.
+By default, PostHog captures events with person profiles. You can change this by setting your JavaScript initialization's `person_profiles` option to `never` or `identified_only` or an event's `$process_person_profile` property to `false`.
 
 ## How to set user properties
 

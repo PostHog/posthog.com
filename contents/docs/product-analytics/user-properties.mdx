@@ -30,7 +30,7 @@ Using user properties requires capturing [person profiles](/docs/data/persons).
 
 ### How to remove user properties
 
-Similarly to how you set properties, you can use `$unset` to remove properties with any event and including an array of properties keys:
+Similarly to how you set properties, you can use `$unset` to remove properties from person profiles with any event and including an array of properties keys:
 
 <MultiLanguage selector="tabs">
 
@@ -105,9 +105,9 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 </MultiLanguage>
 
-## How to view user properties
+## How to view the person profile and user properties
 
-To view properties for a particular user, go to [Persons & Groups](https://app.posthog.com/persons) in the PostHog app. Then, click on any person in the list to view their properties. 
+To view the person profile and user properties for a particular user, go to [Persons & Groups](https://app.posthog.com/persons) in the PostHog app. Then, click on any person in the list to view their properties. 
 
 On a user's property list, you can add properties to them by clicking the "New property" button, then adding a key, type, and value. You can also delete a custom property for a user by clicking the red garbage bin icon on the right side of property listing.
 
