@@ -117,7 +117,7 @@ import PostHog from '../components/posthog.astro'
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
-    <PostHog />
+		<PostHog />
 	</head>
 	<body>
 		<a href="/">Home</a>
