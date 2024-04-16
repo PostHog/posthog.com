@@ -11,7 +11,7 @@ import slugify from 'slugify'
 const Teams: React.FC = () => {
     const { allTeams } = useStaticQuery(graphql`
         {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
                 nodes {
                     id
                     name
