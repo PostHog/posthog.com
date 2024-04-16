@@ -127,6 +127,7 @@ const SlackPosts = () => {
 const Header = () => {
     const currentDate = new Date()
     const [appStatus, setAppStatus] = useState()
+    const { fullWidthContent } = useLayoutData()
 
     useEffect(() => {
         fetch('https://status.posthog.com/api/v2/status.json')
@@ -137,7 +138,11 @@ const Header = () => {
     }, [])
 
     return (
-        <section className="bg-accent grid md:grid-cols-[200px_1fr_200px] my-4 mx-5 p-2 items-center">
+        <section
+            className={`bg-accent grid md:grid-cols-[200px_1fr_200px] my-4 md:mb-8 mx-5 p-2 items-center transition-all ${
+                fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
+            }`}
+        >
             <div className="hidden md:block text-sm pl-4">
                 {currentDate.toLocaleDateString('en-US', {
                     weekday: 'long',
@@ -164,8 +169,8 @@ const Main = () => {
 
     return (
         <section
-            className={`grid md:grid-cols-[300px_1fr_300px] gap-4 mx-auto px-5 mb-12 ${
-                fullWidthContent ? 'max-w-[1400px] mx-auto' : ''
+            className={`grid md:grid-cols-[300px_1fr_300px] gap-4 md:gap-8 mx-auto px-5 mb-12 transition-all ${
+                fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
             <aside className="order-3 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
@@ -229,10 +234,10 @@ const Main = () => {
                     </div>
                 </div>
             </aside>
-            <section className="@container order-1 md:order-none md:px-4 md:border-x border-light dark:border-dark">
+            <section className="@container order-1 md:order-none md:px-8 md:border-x border-light dark:border-dark">
                 <div
-                    className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 ${
-                        fullWidthContent ? 'max-w-2xl mx-auto' : ''
+                    className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
+                        fullWidthContent ? '' : 'max-w-2xl mx-auto'
                     }`}
                 >
                     <Posts />
