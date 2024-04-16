@@ -275,7 +275,7 @@ We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all US
 
 ## Location - April 2024 update
 
-For some teams, it's important to have a wide range of timezones covered by the small team - this allows us to have closer to 24 hour coverage in case of incidents, and is particular relevant ie for infrastructure or pipeline teams.
+For some teams, it's important to have a wide range of timezones covered by the small team - this allows us to have closer to 24 hour coverage in case of incidents, and is particularly relevant for infrastructure or pipeline teams.
 
 For teams working on a pre-product market fit product with no users, it is preferable to hire people within a few timezones of each other so it's easier to get together in person and to do synchronous meetings if people wish to work that way.
 
