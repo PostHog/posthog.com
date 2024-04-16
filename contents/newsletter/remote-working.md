@@ -1,4 +1,4 @@
-title: The best habits of the best remote teams
+title: The habits of effective remote teams
 date: 2024-05-09
 author:
   - james-temperton
@@ -18,27 +18,28 @@ It doesn’t have to be this way. The best remote teams are brimming with energy
 
 ### 1. They write everything down
 
-Written communication is essential for successful remote teams. Documenting by default – be it information on how to [file expenses](https://posthog.com/handbook/people/spending-money), your [ICP](https://posthog.com/handbook/who-we-are-building-for), or what a specific team is [working on this quarter](https://posthog.com/teams/product-analytics) – gives everyone access to the same information, regardless of seniority or location.
+Remote work doesn't work without a strong writing culture. Documenting by default – be it information on how to [file expenses](https://posthog.com/handbook/people/spending-money), your [ICP](https://posthog.com/handbook/who-we-are-building-for), or what a specific team is [working on this quarter](https://posthog.com/teams/product-analytics) – gives everyone access to the same information, regardless of seniority or location.
 
-Why is good, written communication essential at remote companies?
+Why does this work? Because:
 
 1. **It’s faster.** Scheduling is hard and meetings interrupt deep work. If something can be written down, it will save time and improve transparency around decision-making. Plus, it's more efficient to have a meeting to align everyone after you've all written down what you think.
 
-2. **It’s always there.** If a decision is made on a call and nobody writes it down, was a decision even made? Calls are information black holes so, when you do have a meeting about something, make sure someone, [or something](https://www.sembly.ai), is taking notes.
+2. **It’s always there.** If a decision is made on a call and nobody writes it down, was a decision even made? Calls are information black holes so, when you do have a meeting about something, make sure someone, or something, is taking notes. Better yet, don't have a meeting.
 
-3. **It’s clearer.** Seriously, have you ever read a transcript of you speaking? Writing things down makes you think through both what you’re trying to achieve and how you want to communicate it, making everyone more intentional.
+3. **It’s clearer.** Seriously, have you ever read a transcript of you speaking? Writing is thinking, so it helps you think through both what you’re trying to achieve and how you want to communicate it, making everyone more intentional.
 
 How does this work in practice?
 
-The foundation of a ‘document by default’ culture is the company handbook, which helps anyone, internally or externally, understand what a company is trying to build and why. At **PostHog**, it’s one of the [most important things](https://posthog.com/handbook) we’ve ever made. Remote work pioneer **GitLab** does everything out in the open and maintains a [2,000-page handbook](https://handbook.gitlab.com/handbook/values/) covering, well, everything.
 
-At **Automattic**, Beau Lebens has [shared some great tips](https://beau.blog/2020/03/remote-work-at-scale/ on putting this into practice –) on how to communicate effectively as a remote team and explains traps to avoid. One key takeaway: tools are not the answer. Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only help if you do all the hard work first.
+At **PostHog**, it started with [our company handbook](https://posthog.com/handbook) – it’s one of the most important things we’ve ever made. It helps everyone understand what we're trying to build and why. Handbooks don't have to be public, but we were inspired by GitLab's [2,000-page handbook](https://handbook.gitlab.com/handbook/values/), which covers every aspect of how its 2,000+ team members work across 65+ countries.
+
+At **Automattic**, Beau Lebens has [shared some great tips](https://beau.blog/2020/03/remote-work-at-scale/) on how to communicate effectively as a remote team and explains traps to avoid. One key takeaway: tools are not the answer. Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only help if you do all the hard work first.
 
 At **Doist**, and just about any successful remote company, internal email is pretty much banned. As Doist founder and CEO Amir Salihefendic [explains](https://async.twist.com/asynchronous-communication/), email locks information away. This makes referring back to decisions or conversations either confusing or impossible. Default to communicating out in the open – GitHub, Slack, an internal wiki – so anyone can refer back to conversations and decisions at a later date.
 
 ### 2. They treasure deep work
 
-In an office setting, the [maker’s schedule](https://www.paulgraham.com/makersschedule.html) and the manager’s schedule (sort of) work side by side. But way too many teams switching to remote work have inadvertently defaulted to the manager’s schedule. On successful remote teams the manager’s schedule basically doesn’t exist, which makes them incredibly good at getting shit done.
+In an office setting, the [maker’s schedule](https://www.paulgraham.com/makersschedule.html) and the manager’s schedule (sort of) work side by side. But the manager's schedule is the enemy of remote work. Successful remote teams avoid it entirely, which makes them incredibly good at getting shit done.
 
 At **PostHog**, we’re [anti-meeting by default](https://posthog.com/blog/meetings). We have two meeting-free days a week and, when we do have meetings, they’re short, focused, and we take and share written notes where possible. We also only invite people who absolutely need to be there. We optimize for productivity, not presence.
 
@@ -52,7 +53,7 @@ The biggest (and stupidest) argument against remote work? It makes people less p
 
 Study after study has also shown that remote workers are happier, more diverse, and that they stay at companies for longer and, as a result, do better work. That’s especially true for [engineers and developers](https://www.shakebugs.com/blog/why-let-developers-work-remotely/). Stackoverflow has a great guide that navigates the [confusing mess of statistics](https://stackoverflow.blog/2023/11/27/are-remote-workers-more-productive-that-s-the-wrong-question/) around productivity and remote work.
 
-Ultimately, teams and companies that really make remote working work have to go big on transparency and trust. The best asynchronous working environments are transparent by design, but how do you build trust? Here’s a checklist.
+Ultimately, teams and companies that really make remote working work have to go big on transparency and trust. The best remote companies are transparent by design, but how do you build trust? Here’s a checklist.
 
 - Give people autonomy. At **PostHog**, we hire people who work well with high level direction and who are comfortable stepping on toes to get things done. We trust people to do their best work and, in return, they deliver.
 
