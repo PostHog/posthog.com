@@ -16,6 +16,7 @@ import Newbies from 'components/InsidePostHog/Newbies'
 import PersonCard from 'components/InsidePostHog/PersonCard'
 import WIP from 'components/InsidePostHog/WIP'
 import Anniversaries from 'components/InsidePostHog/Anniversaries'
+import Merch from 'components/InsidePostHog/Merch'
 
 const quote =
     "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -330,18 +331,7 @@ export default function InsidePostHog() {
                 <aside className="order-2 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
                     <Questions />
 
-                    <div>
-                        <div className="bg-white p-4 border border-light dark:border-dark my-4">
-                            <h3 className="text-lg text-center italic leading-tight">
-                                "Some of the best company swag I've ever seen"
-                            </h3>
-                            {/* quote source: https://posthog.slack.com/archives/C011L071P8U/p1710758940243199 */}
-
-                            <div className="bg-accent dark:bg-accent-dark w-full aspect-square flex justify-center items-center text-xs">
-                                Product screenshot placeholder
-                            </div>
-                        </div>
-                    </div>
+                    <Merch />
 
                     <div className="py-4">
                         <PersonSpotlight

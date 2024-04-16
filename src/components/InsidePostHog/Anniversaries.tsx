@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import PersonCard from './PersonCard'
 import qs from 'qs'
 import dayjs from 'dayjs'
-import { start } from '@popperjs/core'
+
+const Skeleton = () => (
+    <div className="skeleton w-full h-32 animate-pulse bg-accent dark:bg-accent-dark rounded-md mt-2" />
+)
 
 export default function Anniversaries() {
+    const [loading, setLoading] = useState(true)
     const [teamMembers, setTeamMembers] = useState([])
 
     useEffect(() => {
@@ -38,10 +42,13 @@ export default function Anniversaries() {
                     return date.isBefore(dayjs().subtract(364, 'days')) && startMonth === currentMonth
                 })
                 setTeamMembers(teamMembers)
+                setLoading(false)
             })
     }, [])
 
-    return (
+    return loading ? (
+        <Skeleton />
+    ) : (
         <ul className="list-none grid gap-3 mt-2">
             {teamMembers.map(({ id, years, attributes: { firstName, lastName, companyRole, avatar } }) => {
                 const image = avatar?.data?.attributes?.formats?.thumbnail?.url
