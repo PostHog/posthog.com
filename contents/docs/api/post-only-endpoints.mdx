@@ -135,6 +135,22 @@ curl -v -L --header "Content-Type: application/json" -d '{
 }' https://app.posthog.com/capture/
 ```
 
+### Events without person profiles
+
+By default, PostHog captures events with [person profiles](/docs/data/persons). To remove them, add the `$process_person_profile` property to the event and set it to `false`.
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "timestamp": "2020-08-16T09:03:11.913767",
+  "properties": {
+    "$process_person_profile": false
+  },
+  "distinct_id": "1234",
+  "event": "event name"
+}' https://app.posthog.com/capture/
+```
+
 ### Pageview
 
 ```bash
