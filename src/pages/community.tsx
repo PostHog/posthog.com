@@ -242,8 +242,8 @@ const Main = () => {
                 >
                     <Posts />
 
-                    <div className="py-4">
-                        <h3>Subscribe to our newsletter</h3>
+                    <div className="pt-4 pb-0 @md:pt-8 @md:pb-4">
+                        <h3 className="hidden @md:block">Subscribe to our newsletter</h3>
                         <Newsletter />
                     </div>
 
