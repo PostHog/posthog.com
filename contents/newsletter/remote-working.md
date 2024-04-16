@@ -48,7 +48,7 @@ When you absolutely have to have meetings, make the most of them. **GitLab** has
 
 ### 3. They value transparency and trust over process
 
-![The Remote Work Hype Cycle.]([https://myoctocat.com/assets/images/base-octocat.svg](https://res.cloudinary.com/dmukukwp6/image/upload/v1713294203/posthog.com/contents/images/newsletter/remote-work/hype_cycle.png))
+![The Remote Work Hype Cycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1713294203/posthog.com/contents/images/newsletter/remote-work/hype_cycle.png)
 
 The biggest (and stupidest) argument against remote work? It makes people less productive. But remote work [doesn’t affect productivity, at all](https://www.bloomberg.com/news/articles/2024-01-16/remote-work-doesn-t-seem-to-affect-productivity-fed-study-finds). That’s not according to some random survey, that’s based on detailed research by the Federal Reserve Bank of San Francisco. 
 
