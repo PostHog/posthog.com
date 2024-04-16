@@ -21,7 +21,7 @@ const ThreadHeaderRow = ({ columns }: { columns: string[] }) => {
                 return (
                     <div
                         key={index}
-                        className="font-bold text-sm pb-1 mb-1 text-left border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60 even:pl-2"
+                        className="font-bold text-sm pb-1 mb-1 text-left border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60 even:pl-2 even:hidden even:text-right @2xs:even:block"
                     >
                         {column}
                     </div>
@@ -35,11 +35,11 @@ const Thread = ({ title, status, url }: { title: string; status: string; url: st
     return (
         <>
             <div>
-                <Link to={url} className="font-bold text-sm py-1 inline-block">
+                <Link to={url} className="font-bold text-sm @2xs:py-1 inline-block">
                     {title}
                 </Link>
             </div>
-            <div className="text-right text-sm opacity-60 mt-1 pl-2">{status}</div>
+            <div className="@2xs:text-right text-sm opacity-60 mb-2 @2xs:mb-0 @2xs:mt-1 @2xs:pl-2">{status}</div>
         </>
     )
 }
@@ -103,7 +103,7 @@ export default function Questions(): JSX.Element {
                                 </Link>
                             </div>
                         </div>
-                        <div className="grid items-start w-full grid-cols-[1fr_max-content]">
+                        <div className="grid items-start w-full @2xs:grid-cols-[1fr_max-content]">
                             <ThreadHeaderRow columns={['Topic', 'Last reply']} />
                             {subscribedQuestions?.data?.map(({ attributes: { subject, activeAt, permalink }, id }) => {
                                 const status = dayjs(activeAt).fromNow()
@@ -135,7 +135,7 @@ export default function Questions(): JSX.Element {
                         </div>
                     </div>
 
-                    <div className="grid items-start w-full grid-cols-[1fr_max-content]">
+                    <div className="grid items-start w-full @2xs:grid-cols-[1fr_max-content]">
                         <ThreadHeaderRow columns={['Topic', 'Last reply']} />
                         {newestQuestions?.data?.map(({ attributes: { subject, activeAt, permalink }, id }) => {
                             const status = dayjs(activeAt).fromNow()

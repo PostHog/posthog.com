@@ -169,7 +169,7 @@ const Main = () => {
 
     return (
         <section
-            className={`grid sm:flex sm:flex-wrap lg:grid lg:grid-cols-[220px_1fr_220px] xl:grid-cols-[300px_1fr_300px] gap-4 sm:gap-8 mx-auto px-5 mb-12 transition-all ${
+            className={`grid sm:flex sm:flex-wrap lg:grid lg:grid-cols-[220px_1fr_260px] xl:grid-cols-[300px_1fr_300px] gap-4 sm:gap-8 mx-auto px-5 mb-12 transition-all ${
                 fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
@@ -252,7 +252,7 @@ const Main = () => {
                     </div>
                 </div>
             </section>
-            <aside className="order-2 sm:flex-[0_0_250px] md:flex-[0_0_300px] lg:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+            <aside className="@container order-2 sm:flex-[0_0_260px] md:flex-[0_0_300px] lg:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
                 <Questions />
 
                 <Merch />

@@ -235,6 +235,9 @@ module.exports = {
                 'grow-sm': 'grow-sm 3s linear infinite',
             },
         },
+        containers: {
+            '2xs': '16rem',
+        },
     },
     plugins: [
         require('@tailwindcss/forms'),
