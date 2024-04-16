@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import slugify from 'slugify'
 import { InProgress } from 'components/Roadmap/InProgress'
 
-const Skeleton = () => <div className="skeleton w-full h-96 animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+const Skeleton = () => <div className="w-full h-96 animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
 
 const getRecentUpdate = async () => {
     const { data } = await fetch(

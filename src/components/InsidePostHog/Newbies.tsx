@@ -3,9 +3,7 @@ import PersonCard from './PersonCard'
 import qs from 'qs'
 import dayjs from 'dayjs'
 
-const Skeleton = () => (
-    <div className="skeleton w-full h-32 animate-pulse bg-accent dark:bg-accent-dark rounded-md mt-2" />
-)
+const Skeleton = () => <div className="w-full h-32 animate-pulse bg-accent dark:bg-accent-dark rounded-md mt-2" />
 
 export default function Newbies() {
     const [loading, setLoading] = useState(true)
