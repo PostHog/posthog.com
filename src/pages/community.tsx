@@ -18,6 +18,7 @@ import WIP from 'components/InsidePostHog/WIP'
 import Anniversaries from 'components/InsidePostHog/Anniversaries'
 import Merch from 'components/InsidePostHog/Merch'
 import Posts from 'components/InsidePostHog/Posts'
+import Newsletter from 'components/InsidePostHog/Newsletter'
 
 const quote =
     "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -247,6 +248,7 @@ export default function InsidePostHog() {
 
                         <div className="py-4">
                             <h3>Subscribe to our newsletter</h3>
+                            <Newsletter />
                         </div>
 
                         <div className="py-4">
