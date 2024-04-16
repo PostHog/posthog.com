@@ -13,6 +13,8 @@ import { usePosts } from 'components/Edition/hooks/usePosts'
 import Questions from 'components/InsidePostHog/Questions'
 import { useQuestions } from 'hooks/useQuestions'
 import Markdown from 'components/Squeak/components/Markdown'
+import Newbies from 'components/InsidePostHog/Newbies'
+import PersonCard from 'components/InsidePostHog/PersonCard'
 
 const quote =
     "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -76,20 +78,6 @@ const PersonSpotlight = ({ title, content, byline, image, cta }) => {
 
             {cta ? cta : null}
         </div>
-    )
-}
-
-const PersonCard = ({ image, name, stat }) => {
-    return (
-        <li className="flex items-center gap-1">
-            {image}
-            <div>
-                <p className="m-0 leading-tight">
-                    <Link to="#">{name}</Link>
-                </p>
-                <p className="text-[13px] leading-tight opacity-75 m-0">{stat}</p>
-            </div>
-        </li>
     )
 }
 
@@ -292,27 +280,7 @@ export default function InsidePostHog() {
                                 </div>
                                 <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
                             </div>
-
-                            <ul className="list-none grid gap-3 mt-2">
-                                <PersonCard
-                                    name="Zack Waterfield"
-                                    stat="Growth Engineer"
-                                    image={
-                                        <div className="w-9 rounded-full overflow-hidden bg-salmon">
-                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
-                                        </div>
-                                    }
-                                />
-                                <PersonCard
-                                    name="Steven Shultz"
-                                    stat="Support Engineer"
-                                    image={
-                                        <div className="w-9 rounded-full overflow-hidden bg-blue">
-                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
-                                        </div>
-                                    }
-                                />
-                            </ul>
+                            <Newbies />
                         </div>
 
                         <div>
