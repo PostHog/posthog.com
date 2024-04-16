@@ -188,6 +188,19 @@ You can view whether a user can be merged into another user using `alias` when [
 
 > Note that when calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they will be merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
 
+## Processing person profiles
+
+For user identification to work, you must be processing person profiles. This means your JavaScript Web `person_profiles` config option must be set to `always` or `identified_only`. 
+
+If set to `identified_only`, PostHog only captures person profiles once you can one of the following functions or methods:
+
+- `identify`
+- `alias`
+- `setPersonProperties`
+- `setPersonPropertiesForFlags`
+- `group`
+- `setGroupPropertiesForFlags`
+
 ## Troubleshooting and FAQs
 
 ### What happens if you call `identify` or `alias` with invalid inputs?
