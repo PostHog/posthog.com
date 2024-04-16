@@ -272,3 +272,11 @@ If a candidate needs visa sponsorship, please keep in mind that the process is l
 ## E-Verify
 
 We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all US new hires which allows us to verify employment eligibility remotely and continue hiring in multiple states. E-Verify is not used as a tool to pre-screen candidates.
+
+## Location - April 2024 update
+
+For some teams, it's important to have a wide range of timezones covered by the small team - this allows us to have closer to 24 hour coverage in case of incidents, and is particular relevant ie for infrastructure or pipeline teams.
+
+For teams working on a pre-product market fit product with no users, it is preferable to hire people within a few timezones of each other so it's easier to get together in person and to do synchronous meetings if people wish to work that way.
+
+Currently, we are hiring a lot - aiming to go from ~45 people to ~80 by the end of 2024. Our pace of hiring is the biggest blocker to shipping all the tools in one and driving our growth, so we need to go fast while keeping the bar high. Therefore we should _not_ restrict hires to certain timezones, even if in the short run a small team would prefer to have everyone closer together. This is because over the next six months, we'll have enough new people, that we can later re-org our teams to group people back together by timezone if needed as we have higher density of talent everywhere in the timezones we cover. 
