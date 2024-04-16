@@ -254,7 +254,7 @@ const Main = () => {
                     </div>
                 </div>
             </section>
-            <aside className="order-2 sm:flex-[0_0_260px] md:flex-[0_0_300px] lg:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+            <aside className="order-2 sm:flex-[0_0_260px] md:flex-[0_0_300px] lg:order-none flex flex-col gap-4">
                 <Questions />
 
                 <Merch />
