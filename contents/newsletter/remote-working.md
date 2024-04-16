@@ -30,7 +30,6 @@ Why does this work? Because:
 
 How does this work in practice?
 
-
 At **PostHog**, it started with [our company handbook](https://posthog.com/handbook) – it’s one of the most important things we’ve ever made. It helps everyone understand what we're trying to build and why. Handbooks don't have to be public, but we were inspired by GitLab's [2,000-page handbook](https://handbook.gitlab.com/handbook/values/), which covers every aspect of how its 2,000+ team members work across 65+ countries.
 
 At **Automattic**, Beau Lebens has [shared some great tips](https://beau.blog/2020/03/remote-work-at-scale/) on how to communicate effectively as a remote team and explains traps to avoid. One key takeaway: tools are not the answer. Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only help if you do all the hard work first.
@@ -48,6 +47,8 @@ At **Doist**, four days of each week are [dedicated to deep work](https://async.
 When you absolutely have to have meetings, make the most of them. **GitLab** has a set of principles for how notes should be taken in [just about any meeting](https://handbook.gitlab.com/handbook/communication/#smart-note-taking-in-meetings). This starts with the agenda, which is shared in advance. During meetings, everyone is encouraged to help out with note-taking with a focus on capturing key points rather than every single word that’s said. 
 
 ### 3. They value transparency and trust over process
+
+![The Remote Work Hype Cycle.]([https://myoctocat.com/assets/images/base-octocat.svg](https://res.cloudinary.com/dmukukwp6/image/upload/v1713294203/posthog.com/contents/images/newsletter/remote-work/hype_cycle.png))
 
 The biggest (and stupidest) argument against remote work? It makes people less productive. But remote work [doesn’t affect productivity, at all](https://www.bloomberg.com/news/articles/2024-01-16/remote-work-doesn-t-seem-to-affect-productivity-fed-study-finds). That’s not according to some random survey, that’s based on detailed research by the Federal Reserve Bank of San Francisco. 
 
@@ -69,7 +70,9 @@ Pretty much all successful remote teams have one thing in common: they’re not 
 
 At **PostHog**, we organize an annual offsite. We’re far from alone, but we think we’re pretty good at them. The typical agenda includes a couple of big social events, team dinners, a day-long hackathon, all-hands strategy sessions and workshops, company culture exercises, and time for people to get some downtime and explore. 
 
-Want to know how we plan great offsites? Look no further than [our handbook](https://posthog.com/handbook/company/offsites) – it even has a comprehensive checklist and some templates you can use to get started. But, for successful remote teams, meeting up goes beyond annual offsites. We also encourage individual teams to get together once a year to dig into specific projects and do in-person onboarding for all our new hires. Everyone at the company also has a quarterly travel budget so they can meet up with colleagues all over the world and solve some of the company’s biggest challenges.
+Want to know how we plan great offsites? Look no further than [our handbook](https://posthog.com/handbook/company/offsites) – it even has a comprehensive checklist and some templates you can use to get started. **GitLab** also has some [useful tips]([url](https://handbook.gitlab.com/handbook/leadership/in-person/)) on how to get the most out of offsites. 
+
+The best-functioning remote teams also have budgets for booking co-working spaces – it's a great way of encouraging people to go out and find [their third place]([url](https://www.theatlantic.com/family/archive/2022/04/third-places-meet-new-people-pandemic/629468/)). At PostHog, we also encourage individual teams to get together once a year to dig into specific projects and do in-person onboarding for all our new hires. Everyone at the company also has a quarterly travel budget so they can meet up with colleagues all over the world and solve some of the company’s biggest challenges.
 
 ### Good reads for making remote working really work 📖
 
