@@ -135,8 +135,7 @@ const SlackPosts = () => {
     ) : null
 }
 
-export default function InsidePostHog() {
-    const { fullWidthContent } = useLayoutData()
+const Header = () => {
     const currentDate = new Date()
     const [appStatus, setAppStatus] = useState()
 
@@ -149,154 +148,167 @@ export default function InsidePostHog() {
     }, [])
 
     return (
-        <Layout parent={communityMenu}>
-            <SEO title="Community - PostHog" />
+        <section className="bg-accent grid md:grid-cols-[200px_1fr_200px] my-4 mx-5 p-2 items-center">
+            <div className="hidden md:block text-sm pl-4">
+                {currentDate.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                })}
+            </div>
+            <div className="text-center py-4">
+                <InsidePostHogLogo className="h-[78px] mx-auto" />
+            </div>
+            <div className="hidden md:block pr-4">
+                <div className="flex gap-1 items-center justify-end">
+                    <span className={`text-2xl -mt-1 ${getStatusColor(appStatus)}`}>&bull;</span>
+                    <span className="text-sm">{getStatusDescription(appStatus)}</span>
+                </div>
+            </div>
+        </section>
+    )
+}
 
-            <section className="bg-accent grid md:grid-cols-[200px_1fr_200px] my-4 mx-5 p-2 items-center">
-                <div className="hidden md:block text-sm pl-4">
-                    {currentDate.toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                    })}
+const Main = () => {
+    const { fullWidthContent } = useLayoutData()
+
+    return (
+        <section
+            className={`grid md:grid-cols-[300px_1fr_300px] gap-4 mx-auto px-5 mb-12 ${
+                fullWidthContent ? 'max-w-[1400px] mx-auto' : ''
+            }`}
+        >
+            <aside className="order-3 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+                <PersonSpotlight
+                    title="A note from the editor"
+                    content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
+                    byline="- Andy, Editor-in-Chief"
+                    image={
+                        <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                            <StaticImage src="../../static/images/authors/andy-vandervell-posthog.png" />
+                        </div>
+                    }
+                />
+
+                <div className="text-center py-4 px-2">
+                    <p className="mb-2">
+                        <em>"{quote}"</em>
+                    </p>
+                    <p className="text-sm opacity-75 mb-0">
+                        <em>- Max, our resident hedgehog</em>
+                    </p>
                 </div>
-                <div className="text-center py-4">
-                    <InsidePostHogLogo className="h-[78px] mx-auto" />
+
+                <SlackPosts />
+
+                <div className="py-4">
+                    <PersonSpotlight
+                        title="Meet a team member"
+                        content="<p>James G is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
+                        image={
+                            <div className="w-24 rounded-full overflow-hidden bg-salmon">
+                                <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                            </div>
+                        }
+                        cta={<Link to="/community/profiles/90">Learn more about James G.</Link>}
+                    />
                 </div>
-                <div className="hidden md:block pr-4">
-                    <div className="flex gap-1 items-center justify-end">
-                        <span className={`text-2xl -mt-1 ${getStatusColor(appStatus)}`}>&bull;</span>
-                        <span className="text-sm">{getStatusDescription(appStatus)}</span>
+
+                <div className="py-4 grid gap-5">
+                    <div>
+                        <h3 className="text-base">People news</h3>
+
+                        <div className="flex gap-1 items-center">
+                            <div>
+                                <IconConfetti className="w-8 h-8 text-primary/50 dark:text-accent-dark/50" />
+                            </div>
+                            <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
+                        </div>
+                        <Newbies />
+                    </div>
+
+                    <div>
+                        <div className="flex gap-1 items-center">
+                            <div>
+                                <IconCake className="w-8 h-8 text-primary/50 dark:text-primary-dark/50" />
+                            </div>
+                            <h4 className="font-semibold opacity-75 text-[15px] mb-0">Thanks for being here!</h4>
+                        </div>
+
+                        <Anniversaries />
+                    </div>
+                </div>
+            </aside>
+            <section className="@container order-1 md:order-none md:px-4 md:border-x border-light dark:border-dark">
+                <div
+                    className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 ${
+                        fullWidthContent ? 'max-w-2xl mx-auto' : ''
+                    }`}
+                >
+                    <Posts />
+
+                    <div className="py-4">
+                        <h3>Subscribe to our newsletter</h3>
+                        <Newsletter />
+                    </div>
+
+                    <div className="py-4">
+                        <WIP />
                     </div>
                 </div>
             </section>
+            <aside className="order-2 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+                <Questions />
 
-            <section
-                className={`grid md:grid-cols-[300px_1fr_300px] gap-4 mx-auto px-5 mb-12 ${
-                    fullWidthContent ? 'max-w-[1400px] mx-auto' : ''
-                }`}
-            >
-                <aside className="order-3 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+                <Merch />
+
+                <div className="py-4">
                     <PersonSpotlight
-                        title="A note from the editor"
-                        content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
-                        byline="- Andy, Editor-in-Chief"
+                        title="A musing from the CEO"
+                        content="<p>what motivates us:</p>
+            <ol>
+                <li>building an epic product and company</li>
+                <li>figuring out how far we can go</li>
+                <li>helping engineers build products</li>
+                <li>beating all the point solution competitors</li>
+                <li>having customers buy from us instead of us selling to them</li>
+            </ol>"
                         image={
                             <div className="w-24 rounded-full overflow-hidden bg-yellow">
-                                <StaticImage src="../../static/images/authors/andy-vandervell-posthog.png" />
+                                <StaticImage src="../../static/images/authors/james-hawkins-posthog.png" />
+                            </div>
+                        }
+                        cta={
+                            <div className="mt-4">
+                                <CallToAction
+                                    href="https://x.com/james406"
+                                    width="[calc(100%_+_3px)]"
+                                    type="secondary"
+                                    size="sm"
+                                    externalNoIcon
+                                >
+                                    <div className="flex justify-center items-center gap-1">
+                                        <span>Follow James on</span>
+                                        <Twitter className="h-4 w-4 mr-1 inline-block" />
+                                    </div>
+                                </CallToAction>
                             </div>
                         }
                     />
+                </div>
+            </aside>
+        </section>
+    )
+}
 
-                    <div className="text-center py-4 px-2">
-                        <p className="mb-2">
-                            <em>"{quote}"</em>
-                        </p>
-                        <p className="text-sm opacity-75 mb-0">
-                            <em>- Max, our resident hedgehog</em>
-                        </p>
-                    </div>
+export default function InsidePostHog() {
+    return (
+        <Layout parent={communityMenu}>
+            <SEO title="Community - PostHog" />
 
-                    <SlackPosts />
-
-                    <div className="py-4">
-                        <PersonSpotlight
-                            title="Meet a team member"
-                            content="<p>James G is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
-                            image={
-                                <div className="w-24 rounded-full overflow-hidden bg-salmon">
-                                    <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
-                                </div>
-                            }
-                            cta={<Link to="/community/profiles/90">Learn more about James G.</Link>}
-                        />
-                    </div>
-
-                    <div className="py-4 grid gap-5">
-                        <div>
-                            <h3 className="text-base">People news</h3>
-
-                            <div className="flex gap-1 items-center">
-                                <div>
-                                    <IconConfetti className="w-8 h-8 text-primary/50 dark:text-accent-dark/50" />
-                                </div>
-                                <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
-                            </div>
-                            <Newbies />
-                        </div>
-
-                        <div>
-                            <div className="flex gap-1 items-center">
-                                <div>
-                                    <IconCake className="w-8 h-8 text-primary/50 dark:text-primary-dark/50" />
-                                </div>
-                                <h4 className="font-semibold opacity-75 text-[15px] mb-0">Thanks for being here!</h4>
-                            </div>
-
-                            <Anniversaries />
-                        </div>
-                    </div>
-                </aside>
-                <section className="@container order-1 md:order-none md:px-4 md:border-x border-light dark:border-dark">
-                    <div
-                        className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 ${
-                            fullWidthContent ? 'max-w-2xl mx-auto' : ''
-                        }`}
-                    >
-                        <Posts />
-
-                        <div className="py-4">
-                            <h3>Subscribe to our newsletter</h3>
-                            <Newsletter />
-                        </div>
-
-                        <div className="py-4">
-                            <WIP />
-                        </div>
-                    </div>
-                </section>
-                <aside className="order-2 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
-                    <Questions />
-
-                    <Merch />
-
-                    <div className="py-4">
-                        <PersonSpotlight
-                            title="A musing from the CEO"
-                            content="<p>what motivates us:</p>
-                        <ol>
-                            <li>building an epic product and company</li>
-                            <li>figuring out how far we can go</li>
-                            <li>helping engineers build products</li>
-                            <li>beating all the point solution competitors</li>
-                            <li>having customers buy from us instead of us selling to them</li>
-                        </ol>"
-                            image={
-                                <div className="w-24 rounded-full overflow-hidden bg-yellow">
-                                    <StaticImage src="../../static/images/authors/james-hawkins-posthog.png" />
-                                </div>
-                            }
-                            cta={
-                                <div className="mt-4">
-                                    <CallToAction
-                                        href="https://x.com/james406"
-                                        width="[calc(100%_+_3px)]"
-                                        type="secondary"
-                                        size="sm"
-                                        externalNoIcon
-                                    >
-                                        <div className="flex justify-center items-center gap-1">
-                                            <span>Follow James on</span>
-                                            <Twitter className="h-4 w-4 mr-1 inline-block" />
-                                        </div>
-                                    </CallToAction>
-                                </div>
-                            }
-                        />
-                    </div>
-                </aside>
-            </section>
+            <Header />
+            <Main />
         </Layout>
     )
 }
