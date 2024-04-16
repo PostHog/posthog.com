@@ -1,7 +1,7 @@
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { useUser } from '../../hooks/useUser'
-import { CallToAction } from 'components/CallToAction'
+import { child, container } from 'components/CallToAction'
 import Tooltip from 'components/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
@@ -45,15 +45,16 @@ export default function Newsletter() {
                                 className="flex flex-col @md:flex-row items-start gap-2 my-4 @md:my-2"
                             >
                                 <input
+                                    required
                                     onChange={(e) => setEmail(e.target.value)}
-                                    type="text"
+                                    type="email"
                                     placeholder="Email address"
                                     className="border border-light dark:border-dark rounded text-[15px] w-full flex-1"
-                                    value={email || ''}
+                                    value={email}
                                 />
-                                <CallToAction onClick={handleSubmit} size="md" className="-mt-px w-full @md:w-auto">
-                                    Subscribe
-                                </CallToAction>
+                                <button className={`${container(undefined, 'md')} -mt-px w-full @md:w-auto`}>
+                                    <span className={child(undefined, undefined, undefined, 'md')}>Subscribe</span>
+                                </button>
                             </form>
                             <p className="text-sm opacity-50 text-center @md:text-left">
                                 We'll share your email with Substack
