@@ -25,7 +25,7 @@ export default function Newsletter() {
     }, [user])
 
     return (
-        <div className="flex flex-col @md:flex-row items-center gap-4 @md:gap-8">
+        <div className="@container flex flex-col @md:flex-row @md:justify-center items-center gap-4 @md:gap-8">
             <div className="text-center @md:text-right">
                 <StaticImage
                     src="../../images/newsletter-signup.png"
@@ -33,7 +33,7 @@ export default function Newsletter() {
                     className="w-full h-full max-w-[200px] mx-auto flex-shrink-0"
                 />
             </div>
-            <div className="@md:pt-6 w-full">
+            <div className="@md:pt-6 w-full max-w-md">
                 {!submitted ? (
                     <>
                         <p className="text-sm opacity-50 m-0">Subscribe to our Substack newsletter</p>
@@ -42,7 +42,7 @@ export default function Newsletter() {
                         <div className="">
                             <form
                                 onSubmit={handleSubmit}
-                                className="flex flex-col @md:flex-row items-start gap-2 my-4 @md:my-2"
+                                className="flex flex-col @lg:flex-row items-start gap-2 my-4 @lg:my-2"
                             >
                                 <input
                                     required
@@ -52,7 +52,7 @@ export default function Newsletter() {
                                     className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1"
                                     value={email}
                                 />
-                                <button className={`${container(undefined, 'md')} -mt-px w-full @md:w-auto`}>
+                                <button className={`${container(undefined, 'md')} -mt-px w-full @lg:w-auto`}>
                                     <span className={child(undefined, undefined, undefined, 'md')}>Subscribe</span>
                                 </button>
                             </form>

@@ -236,7 +236,7 @@ const Main = () => {
                     </div>
                 </div>
             </aside>
-            <section className="order-1 sm:flex-1 lg:order-none sm:border-r sm:pr-8 lg:px-8 lg:border-x border-light dark:border-dark">
+            <section className="@container order-1 sm:flex-1 lg:order-none sm:border-r sm:pr-8 lg:px-8 lg:border-x border-light dark:border-dark">
                 <div
                     className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
                         fullWidthContent ? '' : 'max-w-2xl mx-auto'
@@ -245,7 +245,6 @@ const Main = () => {
                     <Posts />
 
                     <div className="pt-4 pb-0 @md:pt-8 @md:pb-4">
-                        <h3 className="hidden @md:block">Subscribe to our newsletter</h3>
                         <Newsletter />
                     </div>
 

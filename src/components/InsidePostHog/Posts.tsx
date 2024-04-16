@@ -13,7 +13,7 @@ const FeaturedPostSkeleton = () => {
 
 const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
     return (
-        <Link className="text-primary dark:text-yellow hover:text-primary hover:dark:text-yellow font-normal" to={slug}>
+        <Link className="text-red dark:text-yellow hover:text-red hover:dark:text-yellow font-normal" to={slug}>
             <img className="w-full" src={featuredImage?.url} />
             <p className="text-primary dark:text-primary-dark text-sm opacity-60 dark:opacity-50 mt-3 mb-1">
                 {post_category?.data?.attributes?.label}
@@ -28,7 +28,7 @@ const PostPreview = ({ attributes: { featuredImage, title, excerpt, post_categor
     return (
         <Link
             to={slug}
-            className="@container font-normal grid @lg:grid-cols-[1fr_35%] @xl:grid-cols-[1fr_40%] gap-2 @lg:gap-4 items-center transition-all text-primary dark:text-yellow hover:text-primary hover:dark:text-yellow"
+            className="@container font-normal grid @lg:grid-cols-[1fr_35%] @xl:grid-cols-[1fr_40%] gap-2 @lg:gap-4 items-center transition-all textred dark:text-yellow hover:text-red hover:dark:text-yellow"
         >
             <div className="@lg:order-2">
                 <img className="w-full" src={featuredImage?.url} />
