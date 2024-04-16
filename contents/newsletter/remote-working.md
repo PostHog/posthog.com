@@ -37,7 +37,7 @@ At **Automattic**, Beau Lebens has [shared some great tips](https://beau.blog/20
 
 At **Doist**, and just about any successful remote company, internal email is pretty much banned. As Doist founder and CEO Amir Salihefendic [explains](https://async.twist.com/asynchronous-communication/), email locks information away. This makes referring back to decisions or conversations either confusing or impossible. Default to communicating out in the open – GitHub, Slack, an internal wiki – so anyone can refer back to conversations and decisions at a later date.
 
-### 2. They treasure deep work
+### 2. They prioritize deep work
 
 In an office setting, the [maker’s schedule](https://www.paulgraham.com/makersschedule.html) and the manager’s schedule (sort of) work side by side. But the manager's schedule is the enemy of remote work. Successful remote teams avoid it entirely, which makes them incredibly good at getting shit done.
 
@@ -49,9 +49,9 @@ When you absolutely have to have meetings, make the most of them. **GitLab** has
 
 ### 3. They value transparency and trust over process
 
-The biggest (and stupidest) argument against remote work? It makes people less productive. Statistics on this issue abound, but here are some key findings: remote work [doesn’t affect productivity, at all](https://www.bloomberg.com/news/articles/2024-01-16/remote-work-doesn-t-seem-to-affect-productivity-fed-study-finds). That’s not according to some random survey, that’s based on detailed research by the Federal Reserve Bank of San Francisco. 
+The biggest (and stupidest) argument against remote work? It makes people less productive. But remote work [doesn’t affect productivity, at all](https://www.bloomberg.com/news/articles/2024-01-16/remote-work-doesn-t-seem-to-affect-productivity-fed-study-finds). That’s not according to some random survey, that’s based on detailed research by the Federal Reserve Bank of San Francisco. 
 
-Study after study has also shown that remote workers are happier, more diverse, and that they stay at companies for longer and, as a result, do better work. That’s especially true for [engineers and developers](https://www.shakebugs.com/blog/why-let-developers-work-remotely/). Stackoverflow has a great guide that navigates the [confusing mess of statistics](https://stackoverflow.blog/2023/11/27/are-remote-workers-more-productive-that-s-the-wrong-question/) around productivity and remote work.
+But productivity, or lack thereof, isn't the problem. The problem is trust. Trust people to do their very best work on their terms and, with the right culture, they'll deliver and then some. Study after study has shown that remote workers are happier, more diverse, and that they stay at companies for longer and, as a result, do better work. That’s especially true for [engineers and developers](https://www.shakebugs.com/blog/why-let-developers-work-remotely/). Stackoverflow has a great guide that navigates the [confusing mess of statistics](https://stackoverflow.blog/2023/11/27/are-remote-workers-more-productive-that-s-the-wrong-question/) around productivity and remote work.
 
 Ultimately, teams and companies that really make remote working work have to go big on transparency and trust. The best remote companies are transparent by design, but how do you build trust? Here’s a checklist.
 
