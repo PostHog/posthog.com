@@ -1,6 +1,6 @@
 ---
 date: 2024-01-30
-title: "How to get your first 10, 50, 100, 1000 and 100,000 users"
+title: "Each step we took to get from 0 to 100,000 users"
 rootPage: /blog
 category: PostHog news
 author: ["james-hawkins"]
@@ -41,7 +41,7 @@ Today, approximately 1,200 companies a week sign up to PostHog, ranging from hob
 
 A note on terminology: I've used the word "users", but for B2B software, I'd treat this as "organizations". The numbers are a little approximate, but what matters is each stage and the sequence of goals that you must achieve, in the given order.
 
-## How we got to 10 users / checked that the product actually functioned
+## How we got to 10 then 50 users / checked that the product actually functioned then made sure people could self serve
 
 This was the hardest part.
 
@@ -90,15 +90,9 @@ To learn from users at this stage:
 2. Watch them use the product if they're friendly enough, or... 
 3. Use session replay and error tracking tools to figure out where they get stuck
 
-## How we got to 50 users / made sure people could self serve and figured out if anyone cared
+We believed, due to the nature of our target users and our market, that self serve would be a critical part of the company winning, hence prioritizing this early. Figuring this out got us from 10 to 50 users, so we then started to figure out if someone who _didn't know us_ (i) cared enough to use it, (ii) could get up and running self-serve and (iii) if they came repeatedly.
 
-Disclaimer: we believed, due to the nature of our target users and our market, that self serve would be a critical part of the company winning, hence prioritizing this early. This applies to companies doing Product Led Growth but is probably way less important if you think you'll grow by hiring a sales team in future.
-
-Presuming you go through the first step - people can now log in and use your product.
-
-Now you need to figure out if someone who _doesn't know you_ (i) cares enough to use it, (ii) can get up and running self-serve and (iii) if they will come back repeatedly.
-
-This is also an area that we failed with on several previous ideas. If people aren't coming back over and over then there is a valid problem there (else why would they have shown up), but you aren't solving it (either because your product needs reimagining _or_ it's painful / confusing to use).
+This part is where we failed on several previous ideas. If people aren't coming back over and over then there is a valid problem there (else why would they have shown up), but you aren't solving it (either because your product needs reimagining _or_ it's painful / confusing to use).
 
 Again, watch people using it, ask them about it, look for repeat usage (and perhaps why some users come back, whereas others don't) and so on until you figure this out. If you can't, then start over with a new idea. And don't become a [solution looking for a problem](https://en.wikipedia.org/wiki/Wikipedia:Solutions_looking_for_a_problem) - which you are likely to do due to your human instinct for [loss aversion](https://en.wikipedia.org/wiki/Loss_aversion) (unless you're ChatGPT reading this).
 
@@ -110,58 +104,67 @@ After the massive bump on launch day, however, our growth settled to a level tha
 
 <Put in some kind of graph to show this>
 
-This phase is about figuring out what's working, and if you have a useful product you'll start to see a slow trickle of people recommending your tool so you'll likely just get some growth without doing much marketing. We use [syften](https://syften.com/) to track online mentions as a form of feedback.
+This phase is about figuring out what's working, and if you have a useful product you'll start to see a slow trickle of people recommending your tool so you'll likely just get some growth without doing much marketing. We use [syften](https://syften.com/) to keep an eye on this - it let's you spot people talking about your product online.
 
-Haphazardly, we did experiment with one marketing channel (largely because I'm not good at coding so figured I could help out this way...). To do this, I first considered our users - engineers. I guessed they wouldn't appreciate being sold to but that they would find following our journey interesting _and_ this was one topic I really could write about. So I wrote about what my cofounder and I were up to - how we pivoted lots of times, or [what it was like going to San Francisco for YC](https://posthog.com/blog/moving-to-sf). This got us a couple more hits on the front page of Hacker News and thus we still do that to this day. So much so that to this day, now with over 50,000 companies using us, and I'm writing this blog post - as the CEO, at half midnight.
-
-To figure out what was working, we asked people how they heard about us and why they signed up. More specific still, we'd ask and track this question on every call we did, but we also ask people when they sign up via a text area (do *not* make this a selection, you want to see what people write unprompted). It's all too easy to assume Google is driving your traffic when people are searching for you because they heard about you elsewhere. It turned out that word of mouth growth was the majority. We started asking people _why_ they had been recommended our product. That turned out to be more helpful - _today_ that list looks like this:
+To figure out what was working, we asked people how they heard about us and why they signed up. More specific still, we'd ask and track this question on every call we did, but we also ask people when they sign up via a text area (do *not* make this a selection, you want to see what people write unprompted). It's all too easy to assume Google is driving your traffic when people are searching for you because they heard about you elsewhere. It turned out that word of mouth growth was the majority. Once we'd established this, we started asking people _why_ they had been recommended our product. That turned out to be more helpful - _today_ that list looks like this:
 
 * All the tools in one
+  * to scale it - let's build more tools
+  * anti goal - spend all our money on sales and marketing so we can't have lots of developers
 * Pricing
+  * to scale it - let's cut pricing
+  * anti goal - don't ramp up prices just because people are happily paying already
 * Developer focus / brand
-* Support
+  * to scale it - this is a longer piece to write!
+  * anti goal - don't stop taking risks with being outspoken online, for example
+* Support from technical people
+  * to scale it - add more technical people, improve tools and so on - again, we could write a lot about this
+  * anti goal - don't hire non technical people to scale support more cheaply
 
-With a list like this, you can do _more of these things_. For example, we're now working to make PostHog cheaper (whereas most companies try to increase prices over time, we're adding more products, we're writing way more content and doing brand better, and we're investing more in support). We are not doing things outside this list - like focusing new features on enterprise adoption at the expense of everyone else, adding a big outbound sales team and going upmarket to charge more, playing it safer with memes, or providing cheaper support from people that aren't technical... in fact the fairly standard things most companies do before they become crappy (even if successful).
+Notice that the anti goals are all standard things that most companies follow, which is _exactly_ why bigger companies often become unpopular at scale.
+
+Haphazardly, we did experiment with one marketing channel (largely because I'm not good at coding so figured I could help out this way...). To do this, I first considered our users - engineers. I guessed they wouldn't appreciate being sold to but that they would find following our journey interesting _and_ this was one topic I really could write about. So I wrote about what my cofounder and I were up to - how we pivoted lots of times, or [what it was like going to San Francisco for YC](https://posthog.com/blog/moving-to-sf). This got us a couple more hits on the front page of Hacker News and thus we still do that to this day. So much so that to this day, now with over 60,000 companies using us, and I'm writing this blog post - as the CEO, at half midnight.
+
 
 ## Getting to 1,000 users - do more of what is working, and clarify your ICP
 
-Some users now probably adore your product, others may be indifferent. The key is to figure what is different between the two types. This is [how to find your Ideal Customer Profile](creating-ideal-customer-profile), and [why your Ideal Customer Profile matters](https://newsletter.posthog.com/p/defining-our-icp-is-the-most-important) so much.
+Some users now probably adore your product, others may be indifferent. The key is to figure what is different between the two types. It's [really important](https://newsletter.posthog.com/p/defining-our-icp-is-the-most-important) to [to find your Ideal Customer Profile](creating-ideal-customer-profile).
 
-In practise, we were at a larger user number before we focused on revenue _but_ if I were to repeat this process I'd have done so sooner as we've changed [how we finance the business](https://posthog.com/handbook/people/finance), so we'd have always had better control of the business.
-
-We did this later than 1,000 users, but I'd advocate for doing it here - it's probably time to figure out your business model properly (you should do this _way_ earlier if you aren't totally certain you'll be able to make money with your idea).
+In practice, we were at a larger user number before we focused on revenue _but_ if I were to repeat this process I'd have done so sooner as we've changed [how we finance the business](https://posthog.com/handbook/people/finance), so we'd have always had better control of the business. You should do this _way_ earlier if you aren't totally certain you'll be able to make money with your idea.
 
 We started off thinking it'd look like this:
 
-* open source to give away value to the masses
+* open source to give away value to the masses, which would generate lots of fans in companies big and small 
 * paid self hosted version for big companies that didn't want to send data to a 3rd party
 
-This worked fairly well, we started growing quickly. However, at greater scale, we got stuck in k8s and infrastructure hell with high volume customers. Having tried hard to make it work, it became obvious that we should focus on cloud.
+This worked fairly well, we started growing quickly. However, at greater we should host it for people in cloud to make money (with a big free tier since cloud is a better experience for the majority of users, and good experience leads to more word of mouth growth).
 
-However, the cloud would have been very competitive for us. To stand out, however, we realized we could focus on building all the products in one (we started as product analytics, but we now have also got session replay, a/b testing, feature flags, a basic warehouse, a basic customer data platform and user surveys). The key was to not try to also go upmarket so people would have simpler needs. We would struggle to replace Snowflake in a Fortune 500, but we could provide a warehouse for a 30 person startup, with simpler needs - for example.
+However, the cloud would have been very competitive for us. We didn't pick it in the first place as we had a lot of unicorn competitors.
 
-To do these early sales, I tried the following:
+To stand out, however, we realized we could focus on building all the products in one (we started as product analytics, but we now have also got session replay, a/b testing, feature flags, web analytics, a data warehouse, a basic customer data platform and user surveys). The key was to not try to also go upmarket so people would have simpler needs. We could not replace Snowflake in a Fortune 500, but we could provide a warehouse for a 30 person startup, with simpler needs - for example.
 
-* talked to users that were already in the product about our paid offering and gauging interest
-* created a pricing page on our website, listing out our paid extra features and embedding my calendar into it (then gradually making this self serve over time)
+I did two things to get our very first sales:
 
-When someone booked a call, I'd see which extra features they really cared about, and if they wanted to buy.
+1. I talked to users that were already using our product and in our slack community (we've since moved away from Slack to a [custom built forum](https://posthog.com/questions)) about our paid offering and gauging interest
+2. I created a pricing page on our website, listing out our paid extra features and embedding my calendar into it (then gradually making this self serve over time). When someone booked a call, I'd see which extra features they really cared about, and if they wanted to buy.
 
-When we realized that we were focusing 100% on engineers, we designed our pricing model for them. We wanted to make it self serve and transparent. In early pricing discussions, I negotiated ad-hoc with customers, going from "will anyone pay anything" to a consistently used internal doc, which I iterated until it felt consistently right, to a public pricing table, and finally letting people put their cards in directly to self serve. Every time we made it easier to self serve, we got a higher conversion rate. Engineers really don't want to waste time on calls or negotiating with vendors.
+Unexpectedly, it turned out to be easier to get sales from people that came freshly through our website and pricing page, than it was to generate demand from the existing community. Both approaches, however, worked. I suspect adverse-selection is at play - if people see a free product, they may be using it _because_ it is free, so you'll find this is the wrong group to try to make money from even with a ton of great extra features.
+
+When we realized that we were focusing 100% on engineers, we designed our pricing model for them. We wanted to make it something we'd appreciate (as technical people ourselves) - that meant it'd be self serve and transparent. In early pricing discussions, I negotiated ad-hoc with customers, going from "will anyone pay anything" to a consistently used internal doc, which I iterated until it felt consistently right, to a public pricing table, and finally letting people put their cards in directly to self serve. Every time we made it closer to self serve, we got a higher conversion rate. Engineers really don't want to waste time on calls or negotiating with vendors.
 
 We started hitting app performance issues pretty rapidly, so we had to refactor the entire product from a simple Postgres backend to ClickHouse. That was painful but we had no choice.
 
 ## Bonus: How we got to 100,000 users - scale the business to match your demand
 
-... and we kept going. The principles of how we grow are the same - word of mouth and content marketing, but the business has scaled up a little.
+... and we kept going. The principles of how we grow are the same - word of mouth and content marketing, but the business has scaled up.
 
 We added more engineers. We wanted to build more and more products, and we wanted to stay on top of refactoring, bugs and performance. It's around 70% of our team. We think it's important we keep this percentage very high so we never stop adding more products in.
 
 We sprinkled some excellent people (often engineers) into marketing. We wanted to keep on top of the changelog, to create lots of tutorials and better documentation, to be easier to find for people searching for us online, and to write about what we were learning as a business so other engineers could learn more about everything outside of engineering (getting users, early sales, finance, raising money, customer support, marketing, design and so on).
 
-We worked really hard on our website too. We built something world class and we're now known for this. It's a core part of our brand. We just do most pages better than the vast, vast majority of people on the internet by being totally transparent. Design here has an _increasing_ return on investment once you're above average. This is becoming the home for our community of product engineers - something we believe will one day be much larger than our in app users.
+We worked really hard on our website too. We built something world class and we're now known for this. It's a core part of our brand. We just do most pages better than the vast majority of people on the internet by being totally transparent. Design here has an _increasing_ return on investment once you're above average. This is becoming the home for our community of product engineers - something we believe will one day be much larger than our in app users.
 
-I fundraised so we could afford all of the above, but eventually we flipped to running near profitably and hiring more organically when we saw our revenue growing. This means we're never subject to the incentives of an external investor - so we can always ensure we ship more products. I think we could have entirely skipped fundraising or could have only done a seed round - I'd play this differently in future, but that's easy to say with hindsight.
+I fundraised so we could afford all of the above, but eventually we flipped to running near profitably and hiring more organically when we saw our revenue growing. This means we're not subject to the incentives of an external investor - so we can always ensure we ship more products. I think we could have entirely skipped fundraising or could have only done a seed round - I'd play this differently in future, but that's easy to say with hindsight.
 
 We hired a couple of folk into ops - a recruiter, an ops lead, an exec assistant and a VP Ops (who also leads sales and marketing, that's a topic for another day). We wanted to make sure we could hire and retain excellent people. Kendal, PostHog's exec assistant, helps me focus my time on what would help the business the most as I get pulled around quite a bit.
 
@@ -172,9 +175,12 @@ We scaled support, but not really by hiring. In fact, we got to 100,000 sign ups
 * Our engineers would rotate who did support
 * Our engineers would rotate who did support on their products
 * We hired a support engineer to answer and triage tickets for our mature products
+* Recently we've started having a paid support product for faster response times, that is selling a lot - we think we can use the revenue from this to pay for more support engineers to service our free users better too
 
-It started feeling obvious we should have a small growth engineering team too. We had to build a billing system that could cope with a different pricing scheme for every product, credits and much more - my cofounder, as CTO, wound up picking up all these tasks (ie what no one else really owned) until it became too much. Plus we wanted to iterate our pricing over time, own and run experiments around our activation, and quite a bit more - not having a b. 
+It started feeling obvious we should have a small growth engineering team too. We had to build a billing system that could cope with a different pricing scheme for every product, credits and much more - my cofounder, as CTO, wound up picking up all these tasks (ie what no one else really owned) until it became too much. Plus we wanted to iterate our pricing over time, own and run experiments around our activation, and quite a bit more .
 
 ## and there were are
 
-There's a reason each step gets easier and easier - if you build something people want, the rest is (relatively) kind of obvious. The problems get far more constrained. No more existential crises!
+There's a reason each step gets easier and easier - if you build something people want, the rest is _relatively_ obvious. The problems get far more constrained. No more existential crises!
+
+If you take one thing from reading this - for PostHog there was no growth hacking magic _other_ than building a good product, and tailoring the _entire_ experience of the company (not just your software) towards our end users. If you do those things well, anything else is much more likely to work anyway.
