@@ -15,6 +15,7 @@ import Markdown from 'components/Squeak/components/Markdown'
 import Newbies from 'components/InsidePostHog/Newbies'
 import PersonCard from 'components/InsidePostHog/PersonCard'
 import WIP from 'components/InsidePostHog/WIP'
+import Anniversaries from 'components/InsidePostHog/Anniversaries'
 
 const quote =
     "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -291,35 +292,7 @@ export default function InsidePostHog() {
                                 <h4 className="font-semibold opacity-75 text-[15px] mb-0">Thanks for being here!</h4>
                             </div>
 
-                            <ul className="list-none grid gap-3 mt-2">
-                                <PersonCard
-                                    name="Marius Andra"
-                                    stat="4 year anniversary"
-                                    image={
-                                        <div className="w-9 rounded-full overflow-hidden bg-yellow">
-                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
-                                        </div>
-                                    }
-                                />
-                                <PersonCard
-                                    name="Eric Duong"
-                                    stat="4 year anniversary"
-                                    image={
-                                        <div className="w-9 rounded-full overflow-hidden bg-teal">
-                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
-                                        </div>
-                                    }
-                                />
-                                <PersonCard
-                                    name="James Greenhill"
-                                    stat="4 year anniversary"
-                                    image={
-                                        <div className="w-9 rounded-full overflow-hidden bg-salmon">
-                                            <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
-                                        </div>
-                                    }
-                                />
-                            </ul>
+                            <Anniversaries />
                         </div>
                     </div>
                 </aside>
