@@ -2,7 +2,6 @@ import Layout from 'components/Layout'
 import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import { communityMenu } from '../navs'
-import { useUser } from 'hooks/useUser'
 import { useLayoutData } from 'components/Layout/hooks'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
@@ -15,6 +14,7 @@ import { useQuestions } from 'hooks/useQuestions'
 import Markdown from 'components/Squeak/components/Markdown'
 import Newbies from 'components/InsidePostHog/Newbies'
 import PersonCard from 'components/InsidePostHog/PersonCard'
+import WIP from 'components/InsidePostHog/WIP'
 
 const quote =
     "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -350,7 +350,7 @@ export default function InsidePostHog() {
                         </div>
 
                         <div className="py-4">
-                            <h3>WIP</h3>
+                            <WIP />
                         </div>
                     </div>
                 </section>
