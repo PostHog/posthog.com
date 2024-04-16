@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function PersonCard({ name, stat, image, url }) {
     return (
-        <li className="flex items-center gap-1">
+        <li className="flex items-center gap-2">
             {image}
             <div>
                 <p className="m-0 leading-tight">

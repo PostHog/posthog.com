@@ -49,7 +49,7 @@ export default function Newsletter() {
                                     onChange={(e) => setEmail(e.target.value)}
                                     type="email"
                                     placeholder="Email address"
-                                    className="border border-light dark:border-dark rounded text-[15px] w-full flex-1"
+                                    className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1"
                                     value={email}
                                 />
                                 <button className={`${container(undefined, 'md')} -mt-px w-full @md:w-auto`}>

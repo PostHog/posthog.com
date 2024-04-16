@@ -13,11 +13,13 @@ const FeaturedPostSkeleton = () => {
 
 const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
     return (
-        <Link className="text-inherit hover:text-inherit font-normal" to={slug}>
+        <Link className="text-primary dark:text-yellow hover:text-primary hover:dark:text-yellow font-normal" to={slug}>
             <img className="w-full" src={featuredImage?.url} />
-            <p className="text-sm opacity-60 mt-3 mb-1">{post_category?.data?.attributes?.label}</p>
+            <p className="text-primary dark:text-primary-dark text-sm opacity-60 dark:opacity-50 mt-3 mb-1">
+                {post_category?.data?.attributes?.label}
+            </p>
             <h2 className="mb-2">{title}</h2>
-            <p>{excerpt}</p>
+            <p className="text-primary dark:text-primary-dark">{excerpt}</p>
         </Link>
     )
 }
@@ -26,15 +28,17 @@ const PostPreview = ({ attributes: { featuredImage, title, excerpt, post_categor
     return (
         <Link
             to={slug}
-            className="text-inherit hover:text-inherit font-normal grid @xl:grid-cols-2 xl:grid-cols-[1fr_35%] 2xl:grid-cols-[1fr_40%] gap-4 items-center transition-all"
+            className="@container font-normal grid @lg:grid-cols-[1fr_35%] @xl:grid-cols-[1fr_40%] gap-2 @lg:gap-4 items-center transition-all text-primary dark:text-yellow hover:text-primary hover:dark:text-yellow"
         >
-            <div className="@xl:order-2">
+            <div className="@lg:order-2">
                 <img className="w-full" src={featuredImage?.url} />
             </div>
-            <div className="@xl:order-1">
-                <p className="text-sm opacity-75 m-0">{post_category?.data?.attributes?.label}</p>
-                <h3 className="text-[17px] xl:text-xl 2xl:text-2xl mb-2">{title}</h3>
-                <p>{excerpt}</p>
+            <div className="@lg:order-1">
+                <p className="text-primary dark:text-primary-dark text-sm opacity-75 dark:opacity-60 m-0">
+                    {post_category?.data?.attributes?.label}
+                </p>
+                <h3 className="text-lg @lg:text-xl @xl:text-xl mb-2 leading-tight">{title}</h3>
+                <p className="hidden @2xl:block text-primary dark:text-primary-dark text-sm">{excerpt}</p>
             </div>
         </Link>
     )
@@ -74,7 +78,7 @@ export default function Posts() {
     })
 
     return (
-        <div className="space-y-4">
+        <div className="@container space-y-8 @lg:space-y-4">
             {isLoading ? <FeaturedPostSkeleton /> : <FeaturedPost {...posts?.[0]} />}
 
             {isLoading ? (

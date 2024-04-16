@@ -42,7 +42,7 @@ const PersonSpotlight = ({ title, content, byline, image, cta }) => {
     return (
         <div>
             {image && <aside className="float-right ml-1 mb-1">{image}</aside>}
-            <h3 className="text-base mb-1">{title}</h3>
+            <h3 className="text-base mb-1 leading-tight">{title}</h3>
             <div className="text-sm [&_*]:text-sm [&>*]:mb-2" dangerouslySetInnerHTML={{ __html: content }} />
 
             {byline && (
@@ -139,7 +139,7 @@ const Header = () => {
 
     return (
         <section
-            className={`bg-accent grid md:grid-cols-[200px_1fr_200px] my-4 md:mb-8 mx-5 p-2 items-center transition-all ${
+            className={`bg-accent dark:bg-border-dark/50 grid md:grid-cols-[200px_1fr_200px] my-4 md:mb-8 mx-5 p-2 items-center transition-all ${
                 fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
@@ -173,8 +173,8 @@ const Main = () => {
                 fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
-            <aside className="order-3 @sm:flex-[0_0_100%] sm:border-t border-light dark:border-dark lg:border-t-0 sm:pt-8 lg:pt-0 lg:order-none flex flex-col ">
-                <div className="grid @sm:grid-cols-2 gap-4 @sm:gap-8 divide-y divide-border dark:divide-border-dark">
+            <aside className="@container order-3 @sm:flex-[0_0_100%] sm:border-t border-light dark:border-dark lg:border-t-0 sm:pt-8 lg:pt-0 lg:order-none flex flex-col ">
+                <div className="grid @xl:grid-cols-2 gap-4 @xl:gap-x-12 @xl:gap-y-4 divide-y @lg:divide-y-0 divide-border dark:divide-border-dark">
                     <PersonSpotlight
                         title="A note from the editor"
                         content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
@@ -216,7 +216,7 @@ const Main = () => {
 
                             <div className="flex gap-1 items-center">
                                 <div>
-                                    <IconConfetti className="w-8 h-8 text-primary/50 dark:text-accent-dark/50" />
+                                    <IconConfetti className="w-8 h-8 text-primary/50 dark:text-primary-dark/50" />
                                 </div>
                                 <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
                             </div>

@@ -234,9 +234,9 @@ module.exports = {
                 grow: 'grow 2s linear infinite',
                 'grow-sm': 'grow-sm 3s linear infinite',
             },
-        },
-        containers: {
-            '2xs': '16rem',
+            containers: {
+                '2xs': '16rem',
+            },
         },
     },
     plugins: [

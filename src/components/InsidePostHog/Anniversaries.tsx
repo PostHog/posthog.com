@@ -58,8 +58,8 @@ export default function Anniversaries() {
                         name={name}
                         stat={companyRole}
                         image={
-                            <div className="w-9 rounded-full overflow-hidden bg-salmon">
-                                <img src={image} alt={name} className="w-full h-full" />
+                            <div className="w-9 rounded-full aspect-square overflow-hidden bg-salmon">
+                                <img src={image} alt={name} className="w-full h-full object-fill" />
                             </div>
                         }
                     />
