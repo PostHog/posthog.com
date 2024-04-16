@@ -103,7 +103,7 @@ With our app set up, the next step is to add PostHog to it. To start, create a n
 </script>
 ```
 
-After doing this, go back to your `Layout.astro` file, import PostHog, and then add it to the header section.
+After doing this, go back to your `Layout.astro` file, import PostHog, and then add it to the head section.
 
 ```js
 ---
