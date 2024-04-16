@@ -63,8 +63,8 @@ export default function Posts() {
                     },
                     {
                         post_category: {
-                            id: {
-                                $notNull: true,
+                            label: {
+                                $in: ['Founders', 'Product engineers', 'Spotlight'],
                             },
                         },
                     },
