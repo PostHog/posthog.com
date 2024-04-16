@@ -227,15 +227,6 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
-        name: 'Exec',
-        url: '',
-        children: [
-            {
-                name: 'Annual planning',
-                url: '/handbook/exec/annual-planning',
-            },
-        ],
-    },
     {
         name: 'Sales & CS',
         url: '',
@@ -530,6 +521,20 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Exec',
+        url: '',
+        children: [
+            {
+                name: 'Annual planning',
+                url: '/handbook/exec/annual-planning',
+            },
+            {
+                name: 'All hands topics',
+                url: '/handbook/exec/all-hands-topics',
+            },
+        ],
+    },
+    {
         name: 'Growth',
         url: '',
         children: [
@@ -682,6 +687,66 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Sales & CS',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/overview',
+            },
+            {
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
+            },
+            {
+                name: 'Sales operations',
+                url: '/handbook/growth/sales/sales-operations',
+                children: [
+                    {
+                        name: 'Managing our CRM',
+                        url: '/handbook/growth/sales/crm',
+                    },
+                    {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/sales/icp',
+                    },
+                    {
+                        name: 'Customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding',
+                    },
+                    {
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
+                    },
+                    {
+                        name: 'Demos',
+                        url: '/handbook/growth/sales/demos',
+                    },
+                    {
+                        name: 'Contracts',
+                        url: '/handbook/growth/sales/contracts',
+                    },
+                    {
+                        name: 'Billing',
+                        url: '/handbook/growth/sales/billing',
+                    },
+                    {
+                        name: 'Automations',
+                        url: '/handbook/growth/sales/automations',
+                    },
+                    {
+                        name: 'Who we do business with',
+                        url: '/handbook/growth/sales/who-we-do-business-with',
+                    },
+                    {
+                        name: 'Historical imports',
+                        url: '/handbook/growth/sales/historical-import',
+                    },
+                ],
+            },
+        ],
+    },
+    {
         name: 'Website & Docs',
         url: '',
         children: [
@@ -726,6 +791,10 @@ export const handbookSidebar = [
                     {
                         name: 'Markdown',
                         url: '/handbook/engineering/posthog-com/markdown',
+                    },
+                    {
+                        name: 'Uploading assets',
+                        url: '/handbook/engineering/posthog-com/assets',
                     },
                     {
                         name: 'Posting a new job',
@@ -1407,7 +1476,7 @@ export const docsMenu = {
                             url: '/docs/hogql/expressions',
                         },
                         {
-                            name: 'Supported ClickHouse functions',
+                            name: 'Supported functions',
                             url: '/docs/hogql/clickhouse-functions',
                         },
                         {

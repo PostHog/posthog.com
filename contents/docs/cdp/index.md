@@ -14,3 +14,5 @@ Pipelines can be used for a wide variety of use cases, such as:
 - **Enforce event schemas.** By default, PostHog does not enforce schemas on events it receives. However, a transformation could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.
 
 - **Label events.** To facilitate sorting through your events, you can use transformations to determine arbitrary logic to label an event (e.g. by setting a `label` property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data elsewhere.
+
+For a full list of transformations and destinations currently available , see the [PostHog codebase](https://github.com/PostHog/posthog/blob/6762a4869c0c0ad50263ba09d493da4716603ab1/frontend/src/scenes/pipeline/utils.tsx#L40).
