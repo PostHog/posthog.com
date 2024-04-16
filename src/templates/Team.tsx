@@ -45,6 +45,7 @@ import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
 import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../hooks/usePostHog'
+import { companyMenu } from '../navs'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -295,7 +296,10 @@ export default function Team({
     const posthog = usePostHog()
 
     return (
-        <Layout>
+        <Layout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children.find((menu) => menu.name.toLowerCase() === 'teams')}
+        >
             <SEO
                 title={`${teamName} - PostHog`}
                 description="We're organized into multi-disciplinary small teams."
