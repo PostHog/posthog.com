@@ -82,7 +82,7 @@ const getStatusDescription = (status?: string) => {
         case 'critical':
             return 'Critical issues'
         default:
-            return 'No status available'
+            return ''
     }
 }
 
@@ -169,11 +169,11 @@ const Main = () => {
 
     return (
         <section
-            className={`grid md:grid-cols-[300px_1fr_300px] gap-4 md:gap-8 mx-auto px-5 mb-12 transition-all ${
+            className={`grid sm:flex sm:flex-wrap lg:grid lg:grid-cols-[220px_1fr_220px] xl:grid-cols-[300px_1fr_300px] gap-4 sm:gap-8 mx-auto px-5 mb-12 transition-all ${
                 fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
-            <aside className="order-3 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+            <aside className="order-3 sm:flex-[0_0_100%] sm:border-t border-light dark:border-dark lg:border-t-0 sm:pt-8 lg:pt-0 lg:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
                 <PersonSpotlight
                     title="A note from the editor"
                     content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
@@ -234,7 +234,7 @@ const Main = () => {
                     </div>
                 </div>
             </aside>
-            <section className="@container order-1 md:order-none md:px-8 md:border-x border-light dark:border-dark">
+            <section className="@container order-1 sm:flex-1 lg:order-none sm:border-r sm:pr-8 lg:px-8 lg:border-x border-light dark:border-dark">
                 <div
                     className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
                         fullWidthContent ? '' : 'max-w-2xl mx-auto'
@@ -252,7 +252,7 @@ const Main = () => {
                     </div>
                 </div>
             </section>
-            <aside className="order-2 md:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
+            <aside className="order-2 sm:flex-[0_0_250px] md:flex-[0_0_300px] lg:order-none flex flex-col gap-4 divide-y divide-border dark:divide-border-dark">
                 <Questions />
 
                 <Merch />
