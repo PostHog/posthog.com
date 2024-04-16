@@ -59,7 +59,7 @@ Experimentation is free-to-use on PostHog's Scale plan, which is also [free up t
 
 ![GrowthBook - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
 
-[GrowthBook](https://www.growthbook.io/) is an [open-source platform for feature flags](/blog/best-open-source-feature-flag-tools) and A/B tests that helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool, or an analysis engine.
+[GrowthBook](/blog/posthog-vs-growthbook) is an [open-source platform for feature flags](/blog/best-open-source-feature-flag-tools) and A/B tests that helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process. This means it can be used as a full-stack platform, a plugin feature flagging tool, or an analysis engine.
 
 ### Who is GrowthBook for?
 
@@ -145,7 +145,7 @@ Flagsmith is open source and available on a BSD 3-clause license. For teams look
 
 ![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/vwo-testing.png)
 
-[VWO](https://vwo.com/)'s testing platform caters mainly to large enterprises, but it recently introduced a free tier to entice companies leaving the [soon-to-be-closed Google Optimize](/blog/google-optimize-alternatives). Its experimentation platform offers A/B and multivariate tests, as well as a visual editor. However, many useful features are only available in its paid tiers – the free tier only supports A/B tests using split URLs and doesn't support multiple variations or geo-targeting.
+[VWO](/blog/best-vwo-alternatives)'s testing platform caters mainly to large enterprises, but it recently introduced a free tier to entice companies leaving the [soon-to-be-closed Google Optimize](/blog/google-optimize-alternatives). Its experimentation platform has A/B and multivariate tests, as well as a visual editor. However, many useful features are only available in its paid tiers – the free tier only supports A/B tests using split URLs and doesn't support multiple variations or geo-targeting.
 
 ### Who is VWO for?
 
