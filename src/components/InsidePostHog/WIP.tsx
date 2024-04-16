@@ -3,6 +3,7 @@ import qs from 'qs'
 import Link from 'components/Link'
 import slugify from 'slugify'
 import { InProgress } from 'components/Roadmap/InProgress'
+import { CallToAction } from 'components/CallToAction'
 
 const Skeleton = () => <div className="w-full h-96 animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
 
@@ -81,6 +82,9 @@ export default function WIP() {
                     </div>
                 </div>
             </div>
+            <CallToAction to="/wip" type="secondary" size="sm" width="[calc(100%_+_3px)]" className="mt-4">
+                More WIP
+            </CallToAction>
         </div>
     )
 }
