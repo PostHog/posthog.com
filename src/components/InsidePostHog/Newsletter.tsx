@@ -67,7 +67,7 @@ export default function Newsletter() {
                         </div>
                     </>
                 ) : (
-                    <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-4 rounded-md mt-4">
+                    <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-4 rounded-md">
                         <h3 className="text-lg font-bold m-0">Thanks for subscribing!</h3>
                         <p className="m-0 opacity-60">
                             Substack's embed form isn't very pretty, so we made our own. But we need to let you know
