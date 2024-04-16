@@ -34,7 +34,7 @@ export default function Merch() {
     `)
 
     return (
-        <div className="bg-white p-4 border border-light dark:border-dark my-4">
+        <div className="bg-white dark:bg-accent-dark p-4 border border-light dark:border-dark my-4">
             <h3 className="text-lg text-center italic leading-tight">"Some of the best company swag I've ever seen"</h3>
             {/* quote source: https://posthog.slack.com/archives/C011L071P8U/p1710758940243199 */}
 
