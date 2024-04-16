@@ -107,7 +107,7 @@ Here is minimum checklist of things that we find customers should know how to do
 - Activity log
 - Internal and test user filtering
 
-Post-onboarding, you'll want to move the customer into our Expansion or Retention flow - this may take you a few months to determine:
+Post-onboarding, you'll want to move the customer into our Expansion or Retention flow - this may take you a few months to determine, so by default everyone should go into Expansion unless you have obvious reasons not to:
 - Expansion: multi-product potential, multi-team potential, _or_ same team and product but massively ramping usage next year
 - Retention: everyone else, steady state only
 
