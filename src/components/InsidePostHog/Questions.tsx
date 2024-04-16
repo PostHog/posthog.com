@@ -46,25 +46,23 @@ const Thread = ({ title, status, url }: { title: string; status: string; url: st
 
 export default function Questions(): JSX.Element {
     const { user } = useUser()
-    const { questions: subscribedQuestions, isLoading: subscribedQuestionsLoading } = user
-        ? useQuestions({
-              limit: 3,
-              sortBy: 'activity',
-              filters: {
-                  subject: {
-                      $ne: '',
-                  },
-                  resolved: {
-                      $ne: true,
-                  },
-                  profileSubscribers: {
-                      id: {
-                          $eq: user?.profile?.id,
-                      },
-                  },
-              },
-          })
-        : { questions: null, isLoading: false }
+    const { questions: subscribedQuestions, isLoading: subscribedQuestionsLoading } = useQuestions({
+        limit: 3,
+        sortBy: 'activity',
+        filters: {
+            subject: {
+                $ne: '',
+            },
+            resolved: {
+                $ne: true,
+            },
+            profileSubscribers: {
+                id: {
+                    $eq: user?.profile?.id,
+                },
+            },
+        },
+    })
 
     const { questions: newestQuestions, isLoading: newestQuestionsLoading } = useQuestions({
         limit: 3,
