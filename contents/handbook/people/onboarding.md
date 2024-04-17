@@ -168,12 +168,13 @@ All new hires should schedule a 30 minute session with the [support engineer clo
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 
 - [ ] What the role of a support hero is and how they can expect to receive tickets/escalations
+- [ ] An overview of where tickets come from and how to differentiate between paying/free users
+- [ ] How to create tickets from Slack threads and reassign tickets to other teams
+- [ ] Advice on how to communicate with customers and prioritize tickets
+- [ ] How and when to mark tickets as 'On Hold' or 'Pending'
+- [ ] What our SLAs are and what ticket severity indicates
 - [ ] How to deal with bug reports and feature requests
 - [ ] How to use macros to answer questions quickly
-- [ ] What our SLAs are and what ticket severity indicates
-- [ ] How and when to mark tickets as 'On Hold' or 'Pending'
-- [ ] Advice on how to communicate with customers and prioritize tickets
-- [ ] How to create tickets from Slack threads and reassign tickets to other teams
 
 It can be especially helpful for new hires if support engineers demonstrate how to solve a simple ticket from start to finish. 
 
