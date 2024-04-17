@@ -56,7 +56,7 @@ const planSummary: PlanData[] = [
         features: [
             'Generous free tier on all products',
             'Advanced product features',
-            '2 projects',
+            '10 projects',
             '7 year data retention',
             'Email support',
             'Pay only for what you use',
