@@ -38,10 +38,10 @@ export default function Changelog() {
                     return (
                         <li key={squeakId}>
                             <Link
-                                className="grid grid-cols-8 items-center text-inherit hover:text-inherit"
+                                className="grid md:grid-cols-8 gap-x-4 items-center text-inherit hover:text-inherit"
                                 to={`/changelog/${dayjs(dateCompleted).year()}#${slugify(title, { lower: true })}`}
                             >
-                                <div className="col-span-5 py-8">
+                                <div className="md:col-span-5 py-8">
                                     <p className="m-0 font-bold opacity-50 flex space-x-1 items-center">
                                         {Icon && (
                                             <span>
@@ -56,8 +56,8 @@ export default function Changelog() {
                                     </p>
                                 </div>
                                 {imageURL && (
-                                    <div className="relative h-full col-span-3 overflow-hidden flex items-center">
-                                        <img className="object-contain absolute" src={imageURL} alt={title} />
+                                    <div className="relative md:h-full md:col-span-3 overflow-hidden flex items-center">
+                                        <img className="object-contain md:absolute" src={imageURL} alt={title} />
                                     </div>
                                 )}
                             </Link>
