@@ -21,7 +21,7 @@ const ThreadHeaderRow = ({ columns }: { columns: string[] }) => {
                 return (
                     <div
                         key={index}
-                        className="font-bold text-sm pb-1 mb-1 text-left border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60 even:pl-2 even:hidden even:text-right @2xs:even:block"
+                        className="font-medium text-[13px] pb-1 mb-1 text-left border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60 even:pl-2 even:hidden even:text-right @2xs:even:block"
                     >
                         {column}
                     </div>
@@ -39,7 +39,7 @@ const Thread = ({ title, status, url }: { title: string; status: string; url: st
                     {title}
                 </Link>
             </div>
-            <div className="@2xs:text-right text-sm opacity-60 mb-2 @2xs:mb-0 @2xs:mt-1 @2xs:pl-2">{status}</div>
+            <div className="@2xs:text-right text-[13px] opacity-60 mb-2 @2xs:mb-0 @2xs:mt-1 @2xs:pl-2">{status}</div>
         </>
     )
 }
@@ -120,7 +120,7 @@ export default function Questions(): JSX.Element {
                     <div className="flex gap-4 w-full items-baseline">
                         <h3 className="flex-1 text-lg mb-2">
                             Latest questions
-                            <Tooltip content="Subscribed threads with recent activity" placement="top">
+                            <Tooltip content="Questions posted to the community forums" placement="top">
                                 <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
                             </Tooltip>
                         </h3>
