@@ -8,6 +8,7 @@ import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { PricingCalculator } from './PricingCalculator'
+import { Addons } from './Addons'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA } from './Plans'
@@ -629,6 +630,8 @@ const Pricing = ({
             {!currentProduct && (
                 <>
                     <PricingCalculator />
+
+                    <Addons />
 
                     <section className={`${section} my-12 md:my-24 md:px-4`}>
                         <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
