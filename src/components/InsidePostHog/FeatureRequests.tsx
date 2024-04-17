@@ -39,7 +39,7 @@ export default function FeatureRequests() {
         },
     })
     return (
-        <div>
+        <div className="border-y border-light dark:border-dark py-8 @lg:border-b-0">
             <h3 className="text-lg">Latest feature requests</h3>
             {isLoading ? (
                 <Skeleton />
@@ -57,7 +57,7 @@ export default function FeatureRequests() {
                             return (
                                 <li key={roadmap.squeakId} className="flex items-center space-x-2">
                                     <VoteBox likeCount={totalLikes} />
-                                    <h4 className="text-base m-0">{roadmap?.attributes?.title}</h4>
+                                    <h4 className="text-base m-0 leading-tight">{roadmap?.attributes?.title}</h4>
                                 </li>
                             )
                         })}

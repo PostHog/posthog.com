@@ -21,6 +21,9 @@ import Posts from 'components/InsidePostHog/Posts'
 import Newsletter from 'components/InsidePostHog/Newsletter'
 import Changelog from 'components/InsidePostHog/Changelog'
 import FeatureRequests from 'components/InsidePostHog/FeatureRequests'
+import Logo from 'components/Logo'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 const quote =
     "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -130,6 +133,8 @@ const Header = () => {
     const currentDate = new Date()
     const [appStatus, setAppStatus] = useState()
     const { fullWidthContent } = useLayoutData()
+    const { websiteTheme } = useValues(layoutLogic)
+    const darkMode = websiteTheme === 'dark'
 
     useEffect(() => {
         fetch('https://status.posthog.com/api/v2/status.json')
@@ -141,8 +146,8 @@ const Header = () => {
 
     return (
         <section
-            className={`bg-accent dark:bg-border-dark/50 grid md:grid-cols-[200px_1fr_200px] my-4 md:mb-8 mx-5 p-2 items-center transition-all ${
-                fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
+            className={`bg-accent dark:bg-border-dark/50 grid md:grid-cols-[200px_1fr_200px] my-4 md:mb-8 mx-5 @lg:mx-auto p-2 items-center transition-all ${
+                fullWidthContent ? '' : 'max-w-[1400px]'
             }`}
         >
             <div className="hidden md:block text-sm pl-4">
@@ -154,7 +159,14 @@ const Header = () => {
                 })}
             </div>
             <div className="text-center py-2">
-                <h1 className="mb-0 tracking-tight uppercase font-bold text-2xl">Community news</h1>
+                <h1 className="mb-0 tracking-tight uppercase font-bold text-xl sm:text-2xl">
+                    <Logo
+                        noText
+                        color={darkMode ? '#EEEFE9' : '#151515'}
+                        className="inline-block w-7 sm:w-9 mr-1 -mt-1"
+                    />
+                    Community news
+                </h1>
             </div>
             <div className="hidden md:block pr-4">
                 <div className="flex gap-1 items-center justify-end">
@@ -252,7 +264,7 @@ const Main = () => {
                     <div className="py-4">
                         <Changelog />
                     </div>
-                    <div className="py-4">
+                    <div className="py-4 hidden">
                         <WIP />
                     </div>
                 </div>

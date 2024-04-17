@@ -743,7 +743,7 @@ export const communityMenu = {
     icon: 'IconChat',
     children: [
         {
-            name: 'Inside PostHog',
+            name: 'News',
             icon: 'IconNewspaper',
             color: 'blue',
             url: '/community',

@@ -82,7 +82,7 @@ export default function WIP() {
                     </div>
                 </div>
             </div>
-            <CallToAction to="/wip" type="secondary" size="sm" width="[calc(100%_+_3px)]" className="mt-4">
+            <CallToAction to="/wip" type="secondary" size="md" width="[calc(100%_+_3px)]" className="mt-4">
                 More WIP
             </CallToAction>
         </div>

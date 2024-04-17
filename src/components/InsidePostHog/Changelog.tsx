@@ -25,10 +25,10 @@ export default function Changelog() {
     })
 
     return (
-        <div>
+        <div className="pt-4">
             <h3 className="m-0">Changelog</h3>
             <p className="m-0 opacity-70 mb-4">Here's what we've shipped in the last two weeks.</p>
-            <ul className="list-none p-0 m-0 space-y-2">
+            <ul className="list-none p-0 m-0 space-y-8 @lg:space-y-6 mb-4">
                 {roadmaps.map((roadmap) => {
                     const { title, squeakId, dateCompleted, image, topic, teams } = roadmap?.attributes
                     const topicName = topic?.data?.attributes?.label
@@ -38,11 +38,11 @@ export default function Changelog() {
                     return (
                         <li key={squeakId}>
                             <Link
-                                className="grid md:grid-cols-8 gap-x-4 items-center text-inherit hover:text-inherit"
+                                className="grid md:grid-cols-8 gap-x-4 items-center text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
                                 to={`/changelog/${dayjs(dateCompleted).year()}#${slugify(title, { lower: true })}`}
                             >
-                                <div className="md:col-span-5 py-8">
-                                    <p className="m-0 font-bold opacity-50 flex space-x-1 items-center">
+                                <div className="md:col-span-5">
+                                    <p className="m-0 opacity-50 flex space-x-1 items-center text-[15px]">
                                         {Icon && (
                                             <span>
                                                 <Icon className="w-4" />
@@ -50,8 +50,10 @@ export default function Changelog() {
                                         )}
                                         <span>{topicName}</span>
                                     </p>
-                                    <h4 className="m-0">{title}</h4>
-                                    <p className="m-0 font-bold opacity-50">
+                                    <h4 className="my-1 @lg:m-0 text-lg leading-tight text-red hover:text-red dark:text-yellow dark:hover:text-yellow">
+                                        {title}
+                                    </h4>
+                                    <p className="m-0 opacity-50 text-[15px]">
                                         {teams?.data?.[0]?.attributes?.name} Team
                                     </p>
                                 </div>
@@ -65,7 +67,7 @@ export default function Changelog() {
                     )
                 })}
             </ul>
-            <CallToAction to={`/changelog/${dayjs().year()}`} type="secondary" size="sm" width="[calc(100%_+_3px)]">
+            <CallToAction to={`/changelog/${dayjs().year()}`} type="secondary" size="md" width="[calc(100%_+_3px)]">
                 Visit changelog
             </CallToAction>
         </div>

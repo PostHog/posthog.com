@@ -90,7 +90,7 @@ export default function Posts() {
             )}
 
             <div>
-                <CallToAction href="/posts" type="secondary" size="sm" width="[calc(100%_+_3px)]">
+                <CallToAction href="/posts" type="secondary" size="md" width="[calc(100%_+_3px)]">
                     More posts
                 </CallToAction>
             </div>

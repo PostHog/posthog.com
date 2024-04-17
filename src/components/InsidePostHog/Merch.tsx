@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
+import Link from 'components/Link'
 
 export default function Merch() {
     const data = useStaticQuery(graphql`
@@ -32,7 +33,9 @@ export default function Merch() {
                 </h3>
                 {/* quote source: https://posthog.slack.com/archives/C011L071P8U/p1710758940243199 */}
 
-                <GatsbyImage image={getImage(gatsbyImageData)} />
+                <Link to="/merch">
+                    <GatsbyImage image={getImage(gatsbyImageData)} />
+                </Link>
             </div>
         </div>
     )
