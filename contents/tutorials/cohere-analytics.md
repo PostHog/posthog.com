@@ -1,5 +1,5 @@
 ---
-title: How to set up LLM analytics for Anthropic's Claude
+title: How to set up LLM analytics for Cohere
 date: 2024-04-09
 author:
   - lior-neu-ner
@@ -8,37 +8,37 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712670565/posthog.com/contents/blog/anthropic-events-light.png"
-export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712670566/posthog.com/contents/blog/anthropic-events-dark.png"
-export const TotalCostLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712670918/posthog.com/contents/blog/cost-per-model-light.png"
-export const TotalCostDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712670919/posthog.com/contents/blog/cost-per-model-dark.png"
-export const CostPerUserLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712671305/posthog.com/contents/blog/anthropic-cost-per-user-light.png"
-export const CostPerUserDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712671306/posthog.com/contents/blog/anthropic-cost-per-user-dark.png"
-export const ResponseTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712672102/posthog.com/contents/blog/anthropic-latency-light.png"
-export const ResponseTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712672103/posthog.com/contents/blog/anthropic-latency-dark.png"
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1713346298/posthog.com/contents/blog/events-light-cohere.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1713346298/posthog.com/contents/blog/events-dark-cohere.png"
+export const TotalCostLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1713346479/posthog.com/contents/blog/costs-per-model-light.png"
+export const TotalCostDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1713346480/posthog.com/contents/blog/costs-per-model-dark.png"
+export const CostPerUserLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1713346582/posthog.com/contents/blog/cohere-formula-light.png"
+export const CostPerUserDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1713346583/posthog.com/contents/blog/cohere-formula-dark.png"
+export const ResponseTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1713346723/posthog.com/contents/blog/repsonse-time-cohere-light.png"
+export const ResponseTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1713346724/posthog.com/contents/blog/repsonse-time-cohere-dark.png"
 
-Tracking your Claude usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM powered features. In this tutorial, we show you how to monitor important metrics such as:
+Tracking your Cohere usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM powered features. In this tutorial, we show you how to monitor important metrics such as:
 
 - Total cost per model
 - Average cost per user
 - Average API response time
 
-We'll build a basic Next.js app, implement the Claude API, and capture these events using PostHog. 
+We'll build a basic Next.js app, implement the Cohere API, and capture these events using PostHog. 
 
 ## 1. Create the demo app
 
 To showcase how to track important metrics, we create a simple one-page Next.js app with the following:
 
 - A form with textfield and button for user input.
-- A label to show Claude's output.
-- A dropdown to select different [Anthropic models](https://docs.anthropic.com/claude/docs/models-overview).
+- A label to show Cohere's output.
+- A dropdown to select different [Cohere models](https://docs.cohere.com/docs/command-r).
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then run the following script to create a new Next.js app and install both the [Anthropic JavaScript](https://docs.anthropic.com/claude/reference/client-sdks) and [PostHog Web](/docs/libraries/js) SDKs:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then run the following script to create a new Next.js app and install both the [Cohere JavaScript](https://github.com/cohere-ai/cohere-typescript?tab=readme-ov-file) and [PostHog Web](/docs/libraries/js) SDKs:
 
 ```bash
-npx create-next-app@latest anthropic-analytics
-cd anthropic-analytics
-npm install --save @anthropic-ai/sdk
+npx create-next-app@latest cohere-analytics
+cd cohere-analytics
+npm install --save cohere-ai
 npm install --save posthog-js
 cd ./src/app
 touch providers.js # we set up PostHog in this file below
@@ -70,8 +70,6 @@ Then we import the `PHProvider` component into `app/layout.js` and wrap our app 
 import "./globals.css";
 import { PHProvider } from './providers'
 
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -83,30 +81,25 @@ export default function RootLayout({ children }) {
 }
 ```
 
-Then replace the code in `page.js` with our basic layout and functionality. You can find your Anthropic API key [here](https://console.anthropic.com/settings/keys).
+Then replace the code in `page.js` with our basic layout and functionality. You can find your Cohere API key [here](https://dashboard.cohere.com/api-keys).
 
 ```js file=app/page.js
 'use client'
 
 import { useState } from 'react';
 import { usePostHog } from 'posthog-js/react'
-import Anthropic from '@anthropic-ai/sdk';
+import { CohereClient } from "cohere-ai";
 
 const models = [
   {
-    name: 'claude-3-opus-20240229',
-    token_input_cost: 0.00001500,
-    token_output_cost: 0.00007500
+    name: 'command-r-plus',
+    token_input_cost: 0.000003,
+    token_output_cost: 0.000015
   },
   {
-    name: 'claude-3-sonnet-20240229',
-    token_input_cost: 0.00000300,
-    token_output_cost:  0.00001500
-  },
-    {
-    name: 'claude-3-haiku-20240307',
-    token_input_cost: 0.00000025,
-    token_output_cost: 0.00000125
+    name: 'command-r',
+    token_input_cost: 0.0000005,
+    token_output_cost:  0.0000015
   },
 ]
 
@@ -118,19 +111,17 @@ export default function Home() {
 
   const fetchResponse = async () => {
     try {
-      const anthropic = new Anthropic({
-        apiKey: '<your_anthropic_api_key>', 
-        baseURL: window.location.origin + '/anthropic/',
-      });  
+      const cohere = new CohereClient({
+        token: '<your_cohere_api_key>',
+      });
       
       setResponse('Generating...');
-      const msg = await anthropic.messages.create({
+      const chat = await cohere.chat({
         model: selectedModel.name,
-        max_tokens: 4096,
-        messages: [{ role: "user", content: userInput }],
+        message: userInput,
       });
 
-      const response = msg.content[0].text
+      const response = chat.text
       setResponse(response);
     } catch (error) {
       setResponse(error.message);
@@ -175,35 +166,20 @@ export default function Home() {
 };
 ```
 
-Lastly, replace the code in `next.config.mjs` with the following:
-
-```js file=next.config.mjs
-const nextConfig = {
-  rewrites: async () => [
-      {
-        source: "/anthropic/:path*",
-        destination: "https://api.anthropic.com/:path*"
-      },
-    ],
-  
-};
-export default nextConfig;
-```
-
 Our basic app is now set up. Run `npm run dev` to see it in app action.
 
-![Basic Next.js app with Anthropic Claude](https://res.cloudinary.com/dmukukwp6/video/upload/v1712669231/posthog.com/contents/blog/anthropic-analytocs-demo-app.mp4)
+![Basic Next.js app with Cohere](https://res.cloudinary.com/dmukukwp6/video/upload/v1713343598/posthog.com/contents/blog/cohere-app.mp4)
 
 ## 2. Capture chat completion events
 
-With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog. To start, we capture a `claude_message_completion` event with properties related to the API request. We find the following properties most useful to capture:
+With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog. To start, we capture a `cohere_chat_completion` event with properties related to the API request. We find the following properties most useful to capture:
 
-- `prompt`
+- `message`
 - `model`
-- `input_tokens`
-- `output_tokens`
-- `input_cost_in_dollars` i.e. `input_tokens` * `token_input_cost`
-- `output_cost_in_dollars` i.e. `output_tokens` * `token_output_cost`
+- `billed_input_tokens`
+- `billed_output_tokens`
+- `input_cost_in_dollars` i.e. `billed_input_tokens` * `token_input_cost`
+- `output_cost_in_dollars` i.e. `billed_output_tokens` * `token_output_cost`
 - `total_cost_in_dollars` i.e. `input_cost_in_dollars + output_cost_in_dollars`
 
 Update your `fetchResponse()` function in `page.js` to capture this event:
@@ -215,19 +191,18 @@ const fetchResponse = async () => {
       // your existing code...
 
       setResponse('Generating...');
-      const msg = await anthropic.messages.create({
+      const chat = await cohere.chat({
         model: selectedModel.name,
-        max_tokens: 4096,
-        messages: [{ role: "user", content: userInput }],
+        message: userInput,
       });
 
-      const inputCostInDollars = msg.usage.input_tokens * selectedModel.token_input_cost
-      const outputCostInDollars = msg.usage.output_tokens * selectedModel.token_output_cost
-      posthog.capture('claude_message_completion', {
+      const inputCostInDollars = chat.meta.billedUnits.inputTokens * selectedModel.token_input_cost
+      const outputCostInDollars = chat.meta.billedUnits.outputTokens * selectedModel.token_output_cost
+      posthog.capture('cohere_chat_completion', {
         model: selectedModel.name,
         prompt: userInput,
-        input_tokens: msg.usage.input_tokens,
-        output_tokens: msg.usage.output_tokens,
+        input_tokens: chat.meta.billedUnits.inputTokens,
+        output_tokens: chat.meta.billedUnits.outputTokens,
         input_cost_in_dollars: inputCostInDollars,
         output_cost_in_dollars: outputCostInDollars,
         total_cost_in_dollars: inputCostInDollars + outputCostInDollars
@@ -241,7 +216,7 @@ Refresh your app and submit a few prompts. You should then see your events captu
 <ProductScreenshot
   imageLight={EventsLight} 
   imageDark={EventsDark} 
-  alt="Anthropic events in PostHog" 
+  alt="Cohere events in PostHog" 
   classes="rounded"
 />
 
@@ -253,7 +228,7 @@ Now that we're capturing events, we can create [insights](/docs/product-analytic
 
 To create this insight, go the [Product analytics tab](https://us.posthog.com/insights) and click **+ New insight**. Then:
 
-1. Set the event to `claude_message_completion`
+1. Set the event to `cohere_chat_completion`
 2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
 3. Select the `total_cost_in_dollars` property.
 4. Cclick **+ Add breakdown** and select `model` from the event properties list.
@@ -263,7 +238,7 @@ To create this insight, go the [Product analytics tab](https://us.posthog.com/in
 <ProductScreenshot
   imageLight={TotalCostLight} 
   imageDark={TotalCostDark} 
-  alt="Total Claude costs per model in PostHog" 
+  alt="Total Cohere costs per model in PostHog" 
   classes="rounded"
 />
 
@@ -271,11 +246,11 @@ To create this insight, go the [Product analytics tab](https://us.posthog.com/in
 
 This metric helps give you an idea of how your costs will scale as your product grows. Creating this insight is similar to creating the one above, however we use **formula mode** to divide the total cost by the total number of users:
 
-1. Set the event to `claude_message_completion`
+1. Set the event to `cohere_chat_completion`
 2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
 3. Select the `total_cost_in_dollars` property.
 4. Click **+ Add graph series** (if your visual is set to `number`, switch it back to `trend` first).
-5. Change the event name to `claude_message_completion`. Then change the value from **Total count** to **Unique users**.
+5. Change the event name to `cohere_chat_completion`. Then change the value from **Total count** to **Unique users**.
 6. Click **Enable formula mode**.
 7. In the formula box, enter `A/B`.
 
@@ -283,13 +258,13 @@ This metric helps give you an idea of how your costs will scale as your product 
 <ProductScreenshot
   imageLight={CostPerUserLight} 
   imageDark={CostPerUserDark} 
-  alt="Total Anthropic costs per user in PostHog" 
+  alt="Total Cohere costs per user in PostHog" 
   classes="rounded"
 />
 
 ### Average API response time
 
-Anthropics's API response time can take long, especially for longer outputs, so it's useful to keep an eye on this. To do this, first we need to modify our event capturing to also include the response time:
+Cohere's API response time can take long, especially for longer outputs, so it's useful to keep an eye on this. To do this, first we need to modify our event capturing to also include the response time:
 
 ```js file=page.js
 const fetchResponse = async () => {
@@ -298,33 +273,32 @@ const fetchResponse = async () => {
       // your existing code...
 
       const startTime = performance.now(); 
-      const msg = await anthropic.messages.create({
+      const chat = await cohere.chat({
         model: selectedModel.name,
-        max_tokens: 4096,
-        messages: [{ role: "user", content: userInput }],
+        message: userInput,
       });
       const endTime = performance.now();
       const responseTime = endTime - startTime;
 
-      const inputCostInDollars = msg.usage.input_tokens * selectedModel.token_input_cost
-      const outputCostInDollars = msg.usage.output_tokens * selectedModel.token_output_cost
-      posthog.capture('claude_message_completion', {
+      const inputCostInDollars = chat.meta.billedUnits.inputTokens * selectedModel.token_input_cost
+      const outputCostInDollars = chat.meta.billedUnits.outputTokens * selectedModel.token_output_cost
+      posthog.capture('cohere_chat_completion', {
         model: selectedModel.name,
         prompt: userInput,
-        input_tokens: msg.usage.input_tokens,
-        output_tokens: msg.usage.output_tokens,
+        input_tokens: chat.meta.billedUnits.inputTokens,
+        output_tokens: chat.meta.billedUnits.outputTokens,
         input_cost_in_dollars: inputCostInDollars,
         output_cost_in_dollars: outputCostInDollars,
         total_cost_in_dollars: inputCostInDollars + outputCostInDollars,
         response_time_in_ms: responseTime
-      });
+      })
 
       // your existing code...
 ```
 
 Then, after capturing a few events, create a new insight to calculate the average response time:
 
-1. Set the event to `claude_message_completion`
+1. Set the event to `cohere_chat_completion`
 2. Click on **Total count** to show a dropdown. Click on **Property value (average)**.
 3. Select the `response_time_in_ms` property.
 
@@ -337,7 +311,7 @@ Then, after capturing a few events, create a new insight to calculate the averag
 
 ## Next steps
 
-We've shown you the basics of creating insights from your product's Claude usage.  Below are more examples of product questions you may want to investigate:
+We've shown you the basics of creating insights from your product's Cohere usage.  Below are more examples of product questions you may want to investigate:
 
 - How many of my users are interacting with my LLM features?
 - Are there generation latency spikes?
@@ -345,6 +319,6 @@ We've shown you the basics of creating insights from your product's Claude usage
 
 ## Further reading
 
-- [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
+- [How to set up LLM analytics for Anthropic](/tutorials/anthropic-analytics) 
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
