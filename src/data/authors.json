@@ -11,7 +11,7 @@
     {
         "handle": "mo-shehu",
         "name": "Mo Shehu",
-        "role": "Content Lead",
+        "role": "Content Marketer",
         "image": "../../static/images/authors/mo-shehu-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://linkedin.com/in/shehuphd"
@@ -134,7 +134,7 @@
     {
         "handle": "andy-vandervell",
         "name": "Andy Vandervell",
-        "role": "Content Marketer",
+        "role": "Marketing Lead",
         "image": "../../static/images/authors/andy-vandervell-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/andyvandervell/",
@@ -143,7 +143,7 @@
     {
         "handle": "charles-cook",
         "name": "Charles Cook",
-        "role": "VP of Operations",
+        "role": "Generic Exec Person",
         "image": "../../static/images/authors/charles-cook-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/charlescook1/",
@@ -215,7 +215,7 @@
     {
         "handle": "simon-fisher",
         "name": "Simon Fisher",
-        "role": "Customer Success Lead",
+        "role": "Sales & CS Lead",
         "image": "../../static/images/authors/simon-fisher.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/simfish85/",
@@ -333,7 +333,7 @@
     {
         "handle": "raquel-m-smith",
         "name": "Raquel M Smith",
-        "role": "Product Engineer - Growth",
+        "role": "Growth Lead",
         "image": "../../static/images/authors/raquel-m-smith-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/raquel_m_smith",
