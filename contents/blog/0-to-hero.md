@@ -54,21 +54,21 @@ For PostHog specifically, we wanted to quickly figure out if anyone cared.
 To test this, we had a plan that was designed to take one month:
 1. Get friends up and running first.
 1. Check people can get up and running by themselves and if other people would use it.
-1. Do a bigger launch ([HackerNews](https://news.ycombinator.com) to see if our target audience really cared.
+1. Do a bigger launch ([HackerNews](https://news.ycombinator.com) to see if our target audience really cared.)
 
 We aimed for a month because spending longer would increase the downside of being wrong again, which we had repeatedly been so far.
 
-We designed how we worked together, our products, marketing, pricing, support... everything) to get through the above successfully. It was a crazy time – we were working flat out.
+We designed how we worked together, our products, marketing, pricing, support... (everything) to get through the above successfully. It was a crazy time – we were working flat out.
 
 On the product side, we decided to focus on open-source adoption and not revenue. I researched multi-billion dollar open-source companies and couldn't find a single example where they monetized in the first five years. I did this by cold messaging founders asking for advice and from what I could gather online. 
 
-This meant we didn't have to worry about building a payment flow, we'd have slightly lower user expectations, and we wouldn't need to figure out how to convert people to paying us from an open source product. This worked for _us_, but isn't universally good advice!
+This meant we didn't have to worry about building a payment flow, we'd have slightly lower user expectations, and we wouldn't need to figure out how to convert people to paying us from an open-source product. This worked for _us_, but isn't universally good advice!
 
 We were going to compete in a very crowded market of tools with multiple competitors doing around $100M in revenue. That meant we could be confident we'd find a way to monetize. We were also happy with a VC model, so we could afford to do this. Had we been building into a new market, with less validation from competitors, or bootstrapping, then charging money sooner would have been important. 
 
 Our challenge was _standing out_, and being developer-focused / open source we thought (correctly, thankfully) would achieve this. And it was fun.
 
-We set the product up to be quick to deploy – we created a [Heroku](https://heroku.com) one click deployment. We later realized this was a mistake – we wound up eventually focusing on cloud adoption for most users. If I started again, I'd have a cloud product too even if it took a week or two longer. I would still have an open source product, but I wouldn't aim to sell a self hosted paid product.
+We set the product up to be quick to deploy – we created a [Heroku](https://heroku.com) one click deployment. We later realized this was a mistake – we wound up eventually focusing on cloud adoption for most users. If I started again, I'd have a cloud product too even if it took a week or two longer. I would still have an open-source product, but I wouldn't aim to sell a self-hosted paid product.
 
 Finally, we picked a permissive license (MIT) because we wanted to see if enterprises would use it, and we felt they'd have rules around using non-permissive open source licenses, so we wanted to get rid of any risk they wouldn't use it.
 
@@ -94,19 +94,19 @@ We believed, due to the nature of our target users and our market, that self ser
 
 This part is where we failed on several previous ideas. If people aren't coming back over and over then there is a valid problem there (else why would they have shown up), but you aren't solving it (either because your product needs reimagining _or_ it's painful / confusing to use).
 
-Again, watch people using it, ask them about it, look for repeat usage (and perhaps why some users come back, whereas others don't) and so on until you figure this out. If you can't, then start over with a new idea. And don't become a [solution looking for a problem](https://en.wikipedia.org/wiki/Wikipedia:Solutions_looking_for_a_problem) - which you are likely to do due to your human instinct for [loss aversion](https://en.wikipedia.org/wiki/Loss_aversion) (unless you're ChatGPT reading this).
+Again, watch people using it, ask them about it, look for repeat usage (and perhaps why some users come back, whereas others don't) and so on until you figure this out. If you can't, then start over with a new idea. And don't become a [solution looking for a problem](https://en.wikipedia.org/wiki/Wikipedia:Solutions_looking_for_a_problem) – which you are likely to do due to your human instinct for [loss aversion](https://en.wikipedia.org/wiki/Loss_aversion) (unless you're ChatGPT reading this).
 
-## How we got to 100 users - made some noise online about the product and figured out what is causing the existing growth
+## How we got to 100 users / made some noise online about the product and figured out what is causing the existing growth
 
-It was time for our bigger launch - [we posted on Hacker News](https://news.ycombinator.com/item?id=22376732), it went well (because we'd achieved the other steps first), and this got us well past this number.
+It was time for our bigger launch – [we posted on Hacker News](https://news.ycombinator.com/item?id=22376732), it went well (because we'd achieved the other steps first), and this got us well past this number.
 
 After the massive bump on launch day, however, our growth settled to a level that was noticeably higher than before.
 
 <Put in some kind of graph to show this>
 
-This phase is about figuring out what's working, and if you have a useful product you'll start to see a slow trickle of people recommending your tool so you'll likely just get some growth without doing much marketing. We use [syften](https://syften.com/) to keep an eye on this - it let's you spot people talking about your product online.
+This phase is about figuring out what's working, and if you have a useful product you'll start to see a slow trickle of people recommending your tool, so you'll likely just get some growth without doing much marketing. We use [Syften](https://syften.com/) to keep an eye on this – it let's you spot people talking about your product online.
 
-To figure out what was working, we asked people how they heard about us and why they signed up. More specific still, we'd ask and track this question on every call we did, but we also ask people when they sign up via a text area (do *not* make this a selection, you want to see what people write unprompted). It's all too easy to assume Google is driving your traffic when people are searching for you because they heard about you elsewhere. It turned out that word of mouth growth was the majority. Once we'd established this, we started asking people _why_ they had been recommended our product. That turned out to be more helpful - _today_ that list looks like this:
+To figure out what was working, we asked people how they heard about us and why they signed up. More specific still, we'd ask and track this question on every call we did, but we also asked people when they sign up via a text area – do *not* make this a selection, you want to see what people write unprompted. It's all too easy to assume Google is driving your traffic when people are searching for you because they heard about you elsewhere. It turned out that word of mouth growth was the majority. Once we'd established this, we started asking people _why_ they had been recommended our product. That turned out to be more helpful – _today_ that list looks like this:
 
 * All the tools in one
   * to scale it - let's build more tools
@@ -123,19 +123,19 @@ To figure out what was working, we asked people how they heard about us and why 
 
 Notice that the anti goals are all standard things that most companies follow, which is _exactly_ why bigger companies often become unpopular at scale.
 
-Haphazardly, we did experiment with one marketing channel (largely because I'm not good at coding so figured I could help out this way...). To do this, I first considered our users - engineers. I guessed they wouldn't appreciate being sold to but that they would find following our journey interesting _and_ this was one topic I really could write about. So I wrote about what my cofounder and I were up to - how we pivoted lots of times, or [what it was like going to San Francisco for YC](https://posthog.com/blog/moving-to-sf). This got us a couple more hits on the front page of Hacker News and thus we still do that to this day. So much so that to this day, now with over 60,000 companies using us, and I'm writing this blog post - as the CEO, at half midnight.
+Haphazardly, we did experiment with one marketing channel – largely because I'm not good at coding, so figured I could help out this way. To do this, I first considered our users: engineers. I guessed they wouldn't appreciate being sold to, but that they would find following our journey interesting _and_ this was one topic I really could write about. So, I wrote about what my cofounder and I were up to – how we pivoted lots of times, or [what it was like going to San Francisco for YC](https://posthog.com/blog/moving-to-sf). This got us a couple more hits on the front page of Hacker News and thus we still do that to this day. So much so that to this day, now with over 60,000 companies using us, and I'm writing this blog post – as the CEO, at half midnight.
 
 
 ## Getting to 1,000 users - do more of what is working, and clarify your ICP
 
 Some users now probably adore your product, others may be indifferent. The key is to figure what is different between the two types. It's [really important](https://newsletter.posthog.com/p/defining-our-icp-is-the-most-important) to [to find your Ideal Customer Profile](creating-ideal-customer-profile).
 
-In practice, we were at a larger user number before we focused on revenue _but_ if I were to repeat this process I'd have done so sooner as we've changed [how we finance the business](https://posthog.com/handbook/people/finance), so we'd have always had better control of the business. You should do this _way_ earlier if you aren't totally certain you'll be able to make money with your idea.
+In practice, we were at a larger user number before we focused on revenue _but_, if I were to repeat this process, I'd have done so sooner as we've changed [how we finance the business](https://posthog.com/handbook/people/finance), so we'd have always had better control of the business. You should do this _way_ earlier if you aren't totally certain you'll be able to make money with your idea.
 
 We started off thinking it'd look like this:
 
 * open source to give away value to the masses, which would generate lots of fans in companies big and small 
-* paid self hosted version for big companies that didn't want to send data to a 3rd party
+* paid self-hosted version for big companies that didn't want to send data to a 3rd party
 
 This worked fairly well, we started growing quickly. However, at greater we should host it for people in cloud to make money (with a big free tier since cloud is a better experience for the majority of users, and good experience leads to more word of mouth growth).
 
