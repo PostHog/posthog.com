@@ -150,7 +150,7 @@ Each type has unique functionality such as direct SQL aggregations in trends, at
 
 ## Working with persons, groups, and cohorts
 
-Although PostHog is event-based, it still gathers details about users. To do an analysis similar to Google Analytics’ audiences or segments, we rely on [person](/docs/data/persons) and [group](/docs/product-analytics/group-analytics) data. 
+Although [PostHog is event-based](/docs/how-posthog-works/data-model), it still gathers details about users. To do an analysis similar to Google Analytics’ audiences or segments, we rely on [person](/docs/data/persons) and [group](/docs/product-analytics/group-analytics) data. 
 
 - Every event contains a distinct ID for a person.
 - With the snippet, every person gets an anonymous distinct ID. This gets stored in a cookie and automatically added to the events they trigger.

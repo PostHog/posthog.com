@@ -330,10 +330,6 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Event ingestion explained',
-                        url: '/handbook/engineering/databases/event-ingestion',
-                    },
-                    {
                         name: 'Making schema changes safely',
                         url: '/handbook/engineering/databases/schema-changes',
                     },
@@ -1728,6 +1724,10 @@ export const docsMenu = {
                         {
                             name: 'Querying data',
                             url: '/docs/how-posthog-works/queries',
+                        },
+                        {
+                            name: 'Session replay',
+                            url: '/docs/how-posthog-works/recordings-ingestion',
                         },
                     ],
                 },
