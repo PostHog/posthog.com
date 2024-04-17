@@ -36,7 +36,7 @@ This destination requires PostHog 1.30.0 or above, or PostHog Cloud. You also ne
 7. Select the destination, press 'Install', then select the blue gear icon to begin configuration
 8. Paste the URL in "Patterns Webhook URL" during destination configuration.
 
-You can install the connector via [the GitHub repo](https://github.com/PostHog/posthog-patterns-app). 
+You can install the destination via [the GitHub repo](https://github.com/PostHog/posthog-patterns-app). 
 
 Once you’ve installed the destination and configured the webhook, data will begin streaming into Patterns in real-time. Here is [an example app](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/nffx8k2ox23r0h5i6f6o/3evx4hiottnqeb0229ig?view=graph) you can clone that can be used to enrich, score, and prioritize new leads to your website —- this is common for optimizing a customer conversion funnel.
 

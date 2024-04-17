@@ -208,6 +208,10 @@
             "destination": "/handbook/product/enterprise-features-prioritization"
         },
         { "source": "/handbook/engineering/debugging", "destination": "/handbook/engineering/production-access" },
+        {
+            "source": "/handbook/engineering/databases/event-ingestion",
+            "destination": "/docs/how-posthog-works/ingestion-pipeline"
+        },
         { "source": "/docs/user-guides/session-recording", "destination": "/docs/user-guides/recordings" },
         { "source": "/blog/sessions-deprecation", "destination": "/blog/sessions-removal" },
         { "source": "/docs/self-host/runbook/overview", "destination": "/docs/self-host/runbook" },
@@ -662,6 +666,7 @@
         { "source": "/docs/feature-flags/payloads", "destination": "/docs/feature-flags/creating-feature-flags" },
         { "source": "/docs/integrate", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-historic-data", "destination": "/docs/migrate/ingest-historic-data" },
+        { "source": "/docs/migrate/ingest-historic-data", "destination": "/docs/migrate" },
         { "source": "/blog/categories/hogmail", "destination": "/blog/categories/newsletter" },
         { "source": "/docs/integrate/third-party/docusaurus", "destination": "/docs/libraries/docusaurus" },
         { "source": "/docs/integrate/third-party/gatsby", "destination": "/docs/libraries/gatsby" },
@@ -1087,6 +1092,10 @@
         { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" },
         { "source": "/tutorials/migrate-eu-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" },
+        {
+            "source": "/docs/migrate/export-events",
+            "destination": "/docs/cdp/common-questions#why-cant-i-use-the-ui-or-events-api-to-export-data"
+        },
         { "source": "/blog/categories/ceo-diaries", "destination": "/blog/ceo-diaries" },
         { "source": "/blog/categories/engineering", "destination": "/blog/engineering" },
         { "source": "/blog/categories/inside-posthog", "destination": "/blog/inside-posthog" },

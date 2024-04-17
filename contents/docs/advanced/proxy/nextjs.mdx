@@ -8,7 +8,7 @@ import RegionWarning from "../_snippets/region-warning.mdx"
 
 <RegionWarning />
 
-If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy. To do so, add a `rewrites()` function to your `next.config.js` file: 
+If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy. To do so, add a `rewrites()` function and the `skipTrailingSlashRedirect` option to your `next.config.js` file: 
 
 ```js
 // next.config.js
@@ -25,6 +25,8 @@ const nextConfig = {
       },
     ];
   },
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true, 
 }
 module.exports = nextConfig
 ```

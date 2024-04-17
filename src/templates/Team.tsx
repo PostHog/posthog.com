@@ -39,15 +39,38 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import Markdown from 'markdown-to-jsx'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconX } from '@posthog/icons'
+import { IconInfo, IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from '../hooks/usePostHog'
+import { companyMenu } from '../navs'
 
-const SidebarSection = ({ title, children }) => {
+const hedgehogImageWidth = 30
+const hedgehogLengthInches = 7
+
+const Hedgehog = ({ className = '' }) => {
+    return (
+        <img
+            style={{ width: hedgehogImageWidth, height: hedgehogImageWidth }}
+            className={className}
+            src="/images/hedgehog.svg"
+        />
+    )
+}
+
+const SidebarSection = ({ title, tooltip, children }) => {
     return (
         <div>
-            <h5 className="m-0 text-[15px] opacity-50 mb-2">{title}</h5>
+            <h5 className="m-0 text-[15px] opacity-75 font-normal mb-2">
+                {title}
+                {tooltip && (
+                    <Tooltip content={tooltip}>
+                        <IconInfo className="w-4 h-4 ml-0.5 relative -top-px inline-block" />
+                    </Tooltip>
+                )}
+            </h5>
             <div>{children}</div>
         </div>
     )
@@ -205,7 +228,8 @@ const DescriptionForm = ({ onSubmit, initialValues = { description: '' } }) => {
 export default function Team({
     data: {
         mdx: { body },
-        team: { crest, name, roadmaps, teamImage },
+        allSlackEmoji: { totalCount: totalSlackEmojis },
+        team: { crest, name, roadmaps, teamImage, ...other },
         objectives,
     },
     pageContext,
@@ -260,10 +284,27 @@ export default function Team({
     const hasInProgress = inProgress.length > 0
     const hasBody = !['/teams/exec', '/teams/data-warehouse'].includes(pageContext.slug)
     const [activeProfile, setActiveProfile] = useState(false)
+    const heightToHedgehogs =
+        profiles?.data?.reduce((acc, curr) => acc + (curr?.attributes?.height || 0), 0) / hedgehogLengthInches || 0
+    const hedgehogPercentage =
+        (heightToHedgehogs % 1 !== 0 &&
+            Math.round(hedgehogImageWidth * (heightToHedgehogs - Math.floor(heightToHedgehogs)))) ||
+        0
+
+    const emojis = other?.emojis?.filter((emoji) => !!emoji?.name && !!emoji?.localFile?.publicURL)
+
+    const posthog = usePostHog()
 
     return (
-        <Layout>
-            <SEO title={`${teamName} - PostHog`} />
+        <Layout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children.find((menu) => menu.name.toLowerCase() === 'teams')}
+        >
+            <SEO
+                title={`${teamName} - PostHog`}
+                description="We're organized into multi-disciplinary small teams."
+                image={`/images/small-teams.png`}
+            />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 <Profile {...activeProfile} />
             </SideModal>
@@ -349,14 +390,10 @@ export default function Team({
                         : []),
                 ]}
             />
-            <Section
-                title="People"
-                cta={<span className="text-sm">{PineappleText(pineapplePercentage)}</span>}
-                id="people"
-            >
-                <div className="flex space-x-12">
-                    <div className="flex-1">
-                        <ul className="list-none p-0 m-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+            <Section title="People" id="people">
+                <div className="lg:flex lg:space-x-12 space-y-12 lg:space-y-0">
+                    <div className="@container flex-1">
+                        <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
                             {profiles?.data
                                 ? [...profiles.data]
                                       .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
@@ -425,7 +462,9 @@ export default function Team({
                                                           onClick={() => removeTeamMember(id)}
                                                           className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
                                                       >
-                                                          <IconX className="w-4 h-4" />
+                                                          <Tooltip content="Remove team member" placement="top">
+                                                              <IconX className="w-4 h-4" />
+                                                          </Tooltip>
                                                       </button>
                                                   )}
                                               </li>
@@ -440,25 +479,63 @@ export default function Team({
                         {isModerator && <AddTeamMember handleChange={(user) => addTeamMember(user.profile.id)} />}
                     </div>
 
-                    <div className="hidden w-full md:max-w-sm shrink-1 basis-sm">
-                        <SidebarSection title="Small team FAQ">
-                            <p className="font-bold m-0">Q: Does pineapple belong on pizza?</p>
-                            <p className="font-bold m-0 mt-2">{PineappleText(pineapplePercentage)}</p>
-                        </SidebarSection>
-
-                        <div className="flex gap-1 flex-wrap">
-                            <StickerFlagAT className="w-7 h-7" />
-                            <StickerFlagBE className="w-7 h-7" />
-                            <StickerFlagCA className="w-7 h-7" />
-                            <StickerFlagCO className="w-7 h-7" />
-                            <StickerFlagDE className="w-7 h-7" />
-                            <StickerFlagFR className="w-7 h-7" />
-                            <StickerFlagNL className="w-7 h-7" />
-                            <StickerFlagPL className="w-7 h-7" />
-                            <StickerFlagUnknown className="w-7 h-7" />
-                            <StickerFlagUS className="w-7 h-7" />
+                    {profiles?.data?.length > 0 && (
+                        <div className="@container w-full lg:max-w-[420px] shrink-1 basis-sm space-y-4 divide-y divide-border dark:divide-border-dark">
+                            <SidebarSection title="Small team FAQ">
+                                <p className="font-bold m-0 text-[15px]">Q: Does pineapple belong on pizza?</p>
+                                <p className="m-0 mt-2 text-sm">A: {PineappleText(pineapplePercentage)}.</p>
+                            </SidebarSection>
+                            <div className="grid @xl:grid-cols-2 gap-6 pt-4 divide-y @xl:divide-y-0 divide-border dark:divide-border-dark">
+                                <div>
+                                    <SidebarSection
+                                        title="Total team height as measured in hedgehogs"
+                                        tooltip={`The average hedgehog is ${
+                                            posthog?.getFeatureFlag?.('are-you-in-the-us')
+                                                ? '7 inches'
+                                                : '17 centimeters'
+                                        } long`}
+                                    >
+                                        <ul className="list-none m-0 p-0 flex flex-wrap">
+                                            {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
+                                                <li className="m-0.5" key={i}>
+                                                    <Hedgehog />
+                                                </li>
+                                            ))}
+                                            {hedgehogPercentage && (
+                                                <li
+                                                    style={{
+                                                        width: hedgehogPercentage,
+                                                    }}
+                                                    className="overflow-hidden relative m-0.5"
+                                                >
+                                                    <Hedgehog className="absolute object-none object-left" />
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </SidebarSection>
+                                </div>
+                                {emojis?.length > 0 && (
+                                    <div className="pt-6 @xl:pt-0">
+                                        <h5 className="m-0 text-base font-normal">
+                                            PostHog has created <strong>{totalSlackEmojis}</strong> custom Slack emojis.
+                                        </h5>
+                                        <p className="text-[15px] mb-4">
+                                            Here's some of this small team's best contributions.
+                                        </p>
+                                        <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
+                                            {emojis?.map(({ name, localFile }) => (
+                                                <li key={name}>
+                                                    <Tooltip content={`:${name}:`}>
+                                                        <img className="w-8 h-8" src={localFile?.publicURL} />
+                                                    </Tooltip>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </Section>
             {hasInProgress && (
@@ -547,6 +624,12 @@ export const query = graphql`
         team: squeakTeam(name: { eq: $teamName }) {
             name
             description
+            emojis {
+                name
+                localFile {
+                    publicURL
+                }
+            }
             teamImage {
                 caption
                 gatsbyImageData(width: 380, placeholder: BLURRED)
@@ -591,6 +674,9 @@ export const query = graphql`
         }
         objectives: mdx(fields: { slug: { eq: $objectives } }) {
             body
+        }
+        allSlackEmoji {
+            totalCount
         }
     }
 `

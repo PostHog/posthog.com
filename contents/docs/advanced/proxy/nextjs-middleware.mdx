@@ -16,11 +16,12 @@ To do this using the [app router](/tutorials/nextjs-app-directory-analytics), cr
 import { NextResponse } from 'next/server'
  
 export function middleware(request) {
+  let url = request.nextUrl.clone()
   const hostname = url.pathname.startsWith("/ingest/static/") ? 'us-assets.i.posthog.com' : 'us.i.posthog.com'
   const requestHeaders = new Headers(request.headers)
+  
   requestHeaders.set('host', hostname)
 
-  let url = request.nextUrl.clone()
   url.protocol = 'https'
   url.hostname = hostname
   url.port = 443
@@ -34,6 +35,17 @@ export function middleware(request) {
 export const config = {
   matcher: '/ingest/:path*',
 }
+```
+
+Add the `skipTrailingSlashRedirect` option to your `next.config.js` file:
+
+```js
+// next.config.js
+const nextConfig = {
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true, 
+}
+module.exports = nextConfig
 ```
 
 Once done, configure the PostHog client to send requests via your rewrite.

@@ -15,7 +15,7 @@ Site apps make it quick and easy to add features such as forms and banners to yo
 
 In this tutorial, we’ll teach you how to build a site app. If you're looking for a broader overview of apps, you can find it [in our docs](/docs/apps). Our app will show up on our product site as button users can click to send us a customizable message captured as a PostHog event. To complete this tutorial, you only need [Node installed](https://nodejs.org/en/download/) to build and run the app.
 
-> PostHog Cloud users cannot currently add custom or third-party apps for security reasons. Have an app you want to add to PostHog? [Let us know](/posts)!
+> PostHog Cloud users cannot currently add custom or third-party apps for security reasons. Have an app you want to add to PostHog? [Submit it for review](/tutorials/build-your-own-posthog-app#submitting-new-apps-to-posthog)!
 
 ## Basic setup
 
@@ -180,7 +180,7 @@ Once you’ve created an app, the final step is deploying it to your site. The f
 
 If you have a self-hosted instance, you can add your app by pasting its GitHub, GitLab, or npm URL in the advanced tab in “Browse Apps.” If it is private, make sure to include `?private_token=TOKEN` at the end of the URL. 
 
-> **Note:** Adding custom or third-party apps isn’t available for Cloud instances.
+> **Note:** Adding custom or third-party apps yourself isn’t available for Cloud instances. Have an app you want to add to PostHog Cloud? [Submit it for review](/tutorials/build-your-own-posthog-app#submitting-new-apps-to-posthog)!
 
 If you have a cloud instance, you can search for available apps in “Browse Apps” (feedback, notification bar, and pineapple mode are all available). You can also submit your app by [emailing your GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A). Once you’ve done that, we’ll review and potentially add your site app to the app store for everyone to use.
 

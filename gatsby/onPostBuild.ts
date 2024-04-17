@@ -48,7 +48,6 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                 page,
                 pageSize: 100,
             },
-            fields: ['id', 'folder', 'label', 'post_tags'],
             populate: ['post_tags'],
         })
 
@@ -131,12 +130,11 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 
     await getAllStrapiPosts()
     await getAllStrapiPostCategories()
-    const postPromises: Promise<any>[] = []
+    const postsToCreateOrUpdate: any = []
     for (const {
         frontmatter: { title, date, featuredImage, authorData, category: postTag, tags: postTags, crosspost },
         fields: { slug },
         parent: { relativePath: path },
-        rawBody,
         excerpt,
     } of posts) {
         const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
@@ -163,7 +161,6 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
             featuredImage: {
                 url: featuredImage?.publicURL,
             },
-            body: rawBody,
             excerpt,
             authors: {
                 connect: authorIDs,
@@ -195,9 +192,13 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                   }
                 : null),
         }
-        postPromises.push(limit(() => createOrUpdateStrapiPost(data, existingPost?.id)))
+        postsToCreateOrUpdate.push({ data, existingPostId: existingPost?.id })
     }
-    await Promise.all(postPromises)
+
+    for (const { data, existingPostId } of postsToCreateOrUpdate) {
+        await createOrUpdateStrapiPost(data, existingPostId)
+    }
+
     await Promise.all(
         roadmaps.map(({ title, date: roadmapDate, media, description, cta }) => {
             const slug = slugify(title, { lower: true })
@@ -294,7 +295,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         }
                         crosspost
                     }
-                    rawBody
                     excerpt(pruneLength: 250)
                 }
             }

@@ -12,7 +12,7 @@ import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
-This connector parses the timestamp of each event that comes in to PostHog and adds the following time-based properties:
+This transformation parses the timestamp of each event that comes in to PostHog and adds the following time-based properties:
 
 | Property          | Description                                       | Example    |
 | ----------------- | ------------------------------------------------- | ---------- |
@@ -29,7 +29,7 @@ This connector parses the timestamp of each event that comes in to PostHog and a
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'Timestamp Parser'.
-3. Click on the toggle to enable the connector.
+3. Click on the toggle to enable the transformation.
 
 Any new events that come in to PostHog will now be automatically parsed!
 
@@ -44,7 +44,7 @@ By filtering and breaking down events, we can now easily answer questions such a
 - How do users use our platform differently during the holiday season?
 - How does retention compare for users who join on a weekend versus a weekday?
 
-> **Note: ** This connector only works on _new_ events sent to PostHog, and as a result you won't be able to filter events that were sent before it was enabled.
+> **Note: ** This transformation only works on _new_ events sent to PostHog, and as a result you won't be able to filter events that were sent before it was enabled.
 
 ## Examples
 
@@ -60,11 +60,11 @@ We can also break down an insight by `month` to get an idea of how it varies ove
 
 ![breaking down an insight by month](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/timestamp-parser/month-breakdown.png)
 
-Overall, the timestamp parser is a simple yet incredibly powerful connector that these examples only scratch the surface on.
+Overall, the timestamp parser is a simple yet incredibly powerful transformation that these examples only scratch the surface on.
 
 ## FAQ
 
-### Who created this connector?
+### Who created this transformation?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community member [Victor Campuzano](https://github.com/vicampuzano) for creating the Timestamp Parser. Thank you, both!
 

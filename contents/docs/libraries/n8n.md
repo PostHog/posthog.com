@@ -22,7 +22,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### Where can I find out more?
 
-Check [PostHog's API documentation](/docs/api) for more information on pulling and pushing data from/to our API. Further information about n8n's connector is available in [n8n's connector documentation](https://docs.n8n.io/nodes/n8n-nodes-base.posthog/#basic-operations).
+Check [PostHog's API documentation](/docs/api) for more information on pulling and pushing data from/to our API. Further information about n8n's destination is available in [n8n's documentation](https://docs.n8n.io/nodes/n8n-nodes-base.posthog/#basic-operations).
 
 ### Who maintains this app?
 
