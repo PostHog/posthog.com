@@ -32,10 +32,8 @@ The Capture API represents the user-facing side of the ingestion pipeline and is
 
 Before an event reaches the ingestion pipeline, there are a couple of preliminary checks and actions that we perform so that we can return a response immediately to the client:
 
-- Validating API keys
-- Anonymizing IPs according to project settings
 - Decompressing and normalizing the shape of event data for the rest of the system
-- Sending processed data to `events_plugin_ingestion` or `events_plugin_ingestion_overflow` Kafka topic
+- Sending raw data to `events_plugin_ingestion`, `events_plugin_ingestion_overflow`, or `events_plugin_ingestion_historical` Kafka topic for further processing
 
 The goal of this step is to be as simple as possible so that we can reliably get events into the ingestion pipeline, where Kafka can persist them until they can be processed.
 
@@ -54,6 +52,8 @@ flowchart TD
     STEP6["Apps - onEvent"]
     APPS1[/"GeoIP"/]
     APPS3[/"Property flattener"/]
+    APPS2[/"Customer.io destination"/]
+    APPS4[/"Hubspot destination"/]
     PERSONS[("PostgreSQL")]
     KafkaIn{{"Kafka - events_plugin_ingestion"}}
     KafkaOut{{"Kafka - clickhouse_events_json"}}
@@ -67,6 +67,8 @@ flowchart TD
 
     STEP2 <--> APPS1
     STEP2 <--> APPS3
+    STEP6 --> APPS2
+    STEP6 --> APPS4
 
     STEP5 --> KafkaOut
 
@@ -86,11 +88,9 @@ If you would like to dive even deeper the related source code can be found [here
 
 ### 1. Apps - `processEvent`
 
-After the event buffer, we start the first of a few steps that augment or transform our raw event before it gets written into ClickHouse.
+Once data reaches the plugin server, we start the first of steps that augment or transform our raw event data before it gets written into ClickHouse.
 
-This first step runs any workloads that come from [destinations and transformations](/docs/cdp) you installed and which export a `processEvent` function. This is the only chance for apps to transform or exclude an event before it is written into ClickHouse.
-
-An example of an app that uses the `processEvent` hook is the [GeoIP Enricher](https://github.com/PostHog/posthog-plugin-geoip). This app uses the `$ip` property to retrieve and add geographic information to each event as they are ingested.
+This first step runs any workloads that come from [transformations](/docs/cdp) you installed and which export a `processEvent` function. This is the only chance for apps to transform or exclude an event before it is written into ClickHouse.
 
 ### 2. Person processing
 
@@ -164,8 +164,9 @@ With our event and person ready, we perform a few last processing steps before w
 
 This is our last chance to change anything about the event, which can include:
 
+- Validating API keys
 - Adding [group properties](/manual/group-analytics) if the event has been assigned to a Group
-- Anonymizing IPs, if needed
+- Anonymizing IPs according to project settings
 
 ### 4. Writing to ClickHouse
 
@@ -175,8 +176,8 @@ We combine the fully-processed event and the person, send it to a separate Kafka
 > - [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
 > - [How ClickHouse ingestion works](/handbook/engineering/clickhouse/data-ingestion)
 
-### 5. Apps - `onEvent`
+### 5. Apps - `composeWebhook`
 
-The final step in the ingestion pipeline is calling the `onEvent` handler from any destinations that we have enabled.
+The final step in the ingestion pipeline is calling the `composeWebhook` handler from any destinations that we have enabled.
 
 Since this event has already been written to ClickHouse, it is effectively immutable as we do not allow apps to directly update events. Any apps that need to transform events should use the `processEvent` handler.
