@@ -146,7 +146,7 @@ const Header = () => {
 
     return (
         <section
-            className={`bg-accent dark:bg-border-dark/50 grid md:grid-cols-[200px_1fr_200px] my-4 md:mb-8 mx-5 @lg:mx-auto p-2 items-center transition-all ${
+            className={`bg-accent dark:bg-border-dark/50 grid md:grid-cols-[200px_1fr_200px] my-4 md:mb-8 mx-5 sm:mx-auto p-2 items-center transition-all ${
                 fullWidthContent ? '' : 'max-w-[1400px]'
             }`}
         >
