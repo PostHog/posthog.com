@@ -159,6 +159,24 @@ You can also assign an Issue to a specific person, and tag it with a relevant la
 
 Each Small Team has its own Project for tracking their Issues - [full list here](https://github.com/orgs/PostHog/projects). Most teams run two week sprints - as part of onboarding, you will be invited to the relevant planning meetings. 
 
+### Support hero training
+
+Employees are occasionally called upon to act as [support heroes](/handbook/engineering/support-hero), or need to deal with support tickets that are escalated to them. This most often applies to engineers, but can include any employee regardless of their team. For this reason, we need everyone to have a broad idea of our support processes and know how we deal with customers.
+
+All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/sales-cs) within their first three weeks at PostHog. 
+
+In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
+
+- [ ] What the role of a support hero is and how they can expect to receive tickets/escalations
+- [ ] How to deal with bug reports and feature requests
+- [ ] How to use macros to answer questions quickly
+- [ ] What our SLAs are and what ticket severity indicates
+- [ ] How and when to mark tickets as 'On Hold' or 'Pending'
+- [ ] Advice on how to communicate with customers and prioritize tickets
+- [ ] How to create tickets from Slack threads and reassign tickets to other teams
+
+It can be especially helpful for new hires if support engineers demonstrate how to solve a simple ticket from start to finish. 
+
 ## 30/60/90 day check-ins
 
 As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to simply serve as a reminder that these checkpoints have arrived. There is no formal requirement for a manager to do anything different at these stages but there are a few helpful suggestions below to help the new team member's experience and to make sure everything is on track with the onboarding and the [first 3 months probationary period](https://posthog.com/handbook/people/compensation#notice-period) will be passed.
