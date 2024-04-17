@@ -3,19 +3,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 export default function Merch() {
-    const {
-        shopifyProduct: {
-            featuredMedia: {
-                preview: {
-                    image: {
-                        localFile: {
-                            childImageSharp: { gatsbyImageData },
-                        },
-                    },
-                },
-            },
-        },
-    } = useStaticQuery(graphql`
+    const data = useStaticQuery(graphql`
         {
             shopifyProduct {
                 featuredMedia {
@@ -32,6 +20,9 @@ export default function Merch() {
             }
         }
     `)
+
+    const gatsbyImageData =
+        data?.shopifyProduct?.featuredMedia?.preview?.image?.localFile?.childImageSharp?.gatsbyImageData
 
     return (
         <div>

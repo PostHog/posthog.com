@@ -19,6 +19,8 @@ import Anniversaries from 'components/InsidePostHog/Anniversaries'
 import Merch from 'components/InsidePostHog/Merch'
 import Posts from 'components/InsidePostHog/Posts'
 import Newsletter from 'components/InsidePostHog/Newsletter'
+import Changelog from 'components/InsidePostHog/Changelog'
+import FeatureRequests from 'components/InsidePostHog/FeatureRequests'
 
 const quote =
     "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -247,7 +249,9 @@ const Main = () => {
                     <div className="pt-4 pb-0 @md:pt-8 @md:pb-4">
                         <Newsletter />
                     </div>
-
+                    <div className="py-4">
+                        <Changelog />
+                    </div>
                     <div className="py-4">
                         <WIP />
                     </div>
@@ -291,6 +295,10 @@ const Main = () => {
                             </div>
                         }
                     />
+                </div>
+
+                <div className="py-4">
+                    <FeatureRequests />
                 </div>
             </aside>
         </section>

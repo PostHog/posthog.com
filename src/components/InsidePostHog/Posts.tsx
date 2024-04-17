@@ -68,7 +68,7 @@ export default function Posts() {
                     {
                         post_category: {
                             label: {
-                                $in: ['Founders', 'Product engineers', 'Spotlight'],
+                                $notIn: ['Changelog', 'Customers', 'Tutorials'],
                             },
                         },
                     },

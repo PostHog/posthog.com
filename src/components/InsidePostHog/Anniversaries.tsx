@@ -35,8 +35,8 @@ export default function Anniversaries() {
                     const date = dayjs(startDate)
                     const startMonth = date.month()
                     const currentMonth = dayjs().month()
-                    const years = dayjs().diff(startDate, 'year')
-                    teamMember.years = years
+                    const days = dayjs().diff(startDate, 'days')
+                    teamMember.years = Math.ceil(days / 365)
                     return date.isBefore(dayjs().subtract(364, 'days')) && startMonth === currentMonth
                 })
                 setTeamMembers(teamMembers)
@@ -56,7 +56,7 @@ export default function Anniversaries() {
                         key={id}
                         url={`/community/profiles/${id}`}
                         name={name}
-                        stat={companyRole}
+                        stat={`Congrats on ${years} year${years > 1 ? 's' : ''}!`}
                         image={
                             <div className="w-9 rounded-full aspect-square overflow-hidden bg-salmon">
                                 <img src={image} alt={name} className="w-full h-full object-fill" />

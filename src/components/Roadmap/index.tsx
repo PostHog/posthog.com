@@ -48,6 +48,23 @@ export interface IRoadmap {
     githubPages: IGitHubPage[]
 }
 
+export const VoteBox = ({ likeCount, liked }) => {
+    return (
+        <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent dark:bg-accent-dark flex-shrink-0 relative">
+            <p className="m-0 leading-none">
+                <strong className="text-lg leading-none">{likeCount}</strong>
+                <br />
+                <span className="text-sm">vote{likeCount !== 1 && 's'}</span>
+            </p>
+            {liked && (
+                <div className="absolute -top-2 -left-2.5 rotate-6 bg-green p-1 rounded-full">
+                    <IconThumbsUpFilled className="text-white w-4 h-4" />
+                </div>
+            )}
+        </div>
+    )
+}
+
 const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
     const { user, likeRoadmap } = useUser()
     const { search } = useLocation()
@@ -103,18 +120,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, g
                 onSubmit={() => onUpdate()}
             >
                 <div className="flex space-x-4">
-                    <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent dark:bg-accent-dark flex-shrink-0 relative">
-                        <p className="m-0 leading-none">
-                            <strong className="text-lg leading-none">{likeCount}</strong>
-                            <br />
-                            <span className="text-sm">vote{likeCount !== 1 && 's'}</span>
-                        </p>
-                        {liked && (
-                            <div className="absolute -top-2 -left-2.5 rotate-6 bg-green p-1 rounded-full">
-                                <IconThumbsUpFilled className="text-white w-4 h-4" />
-                            </div>
-                        )}
-                    </div>
+                    <VoteBox likeCount={likeCount} liked={liked} />
                     <div>
                         <h3 className="text-lg m-0 leading-tight">{title}</h3>
                         {teamName && (
