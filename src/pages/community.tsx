@@ -233,7 +233,7 @@ const Main = () => {
                         }
                     />
 
-                    <div className="text-center py-4 px-2">
+                    <div className="text-center pt-6 pb-4 px-2">
                         <p className="mb-2">
                             <em>"{quote}"</em>
                         </p>
@@ -244,16 +244,20 @@ const Main = () => {
 
                     <SlackPosts />
 
-                    <div className="py-4">
+                    <div className="pt-4">
                         <PersonSpotlight
                             title="Meet a team member"
-                            content="<p>James G is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
+                            content="<p>James G. is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
                             image={
                                 <div className="w-24 rounded-full overflow-hidden bg-salmon">
                                     <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
                                 </div>
                             }
-                            cta={<Link to="/community/profiles/90">Learn more about James G.</Link>}
+                            cta={
+                                <Link to="/community/profiles/90" className="text-[15px]">
+                                    Learn more about James G.
+                                </Link>
+                            }
                         />
                     </div>
 
@@ -307,7 +311,7 @@ const Main = () => {
 
                 <Merch />
 
-                <div className="py-4">
+                <div className="pt-4">
                     <PersonSpotlight
                         title="A musing from the CEO"
                         content="<p>what motivates us:</p>
@@ -353,7 +357,11 @@ const Main = () => {
 export default function InsidePostHog() {
     return (
         <Layout parent={communityMenu}>
-            <SEO title="Community - PostHog" />
+            <SEO
+                title="Community News - PostHog"
+                description="What's happening at PostHog"
+                image={`/images/og/community-news.jpg`}
+            />
 
             <Header />
             <Main />
