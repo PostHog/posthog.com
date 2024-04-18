@@ -62,6 +62,7 @@ export default function Questions(): JSX.Element {
                 },
             },
         },
+        revalidateOnFocus: false,
     })
 
     const { questions: newestQuestions, isLoading: newestQuestionsLoading } = useQuestions({
@@ -77,6 +78,7 @@ export default function Questions(): JSX.Element {
                 },
             },
         },
+        revalidateOnFocus: false,
     })
 
     return (

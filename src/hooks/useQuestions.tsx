@@ -13,6 +13,7 @@ type UseQuestionsOptions = {
     limit?: number
     sortBy?: 'newest' | 'popular' | 'activity'
     filters?: any
+    revalidateOnFocus?: boolean
 }
 
 const query = (offset: number, options?: UseQuestionsOptions) => {
@@ -148,7 +149,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
             )
         },
         {
-            revalidateOnFocus: false,
+            revalidateOnFocus: options?.revalidateOnFocus ?? true,
         }
     )
 
