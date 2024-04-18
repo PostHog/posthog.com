@@ -39,7 +39,7 @@ export default function FeatureRequests() {
         },
     })
     return (
-        <div className="border-y border-light dark:border-dark py-8 @lg:border-b-0">
+        <div className="border-y border-light dark:border-dark pt-4 @lg:border-b-0">
             <h3 className="text-lg">Latest feature requests</h3>
             {isLoading ? (
                 <Skeleton />

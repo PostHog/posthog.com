@@ -35,7 +35,7 @@ const Thread = ({ title, status, url }: { title: string; status: string; url: st
     return (
         <>
             <div>
-                <Link to={url} className="font-semibold text-sm @2xs:py-1 inline-block leading-tight line-clamp-3">
+                <Link to={url} className="font-semibold text-sm @2xs:py-1 leading-tight line-clamp-3">
                     {title}
                 </Link>
             </div>
@@ -82,7 +82,7 @@ export default function Questions(): JSX.Element {
     })
 
     return (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
             {user &&
                 (subscribedQuestionsLoading ? (
                     <Skeleton />
