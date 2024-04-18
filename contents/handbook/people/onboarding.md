@@ -175,8 +175,12 @@ In this call the support engineer will be able to answer any questions, as well 
 - [ ] [What our SLAs](/handbook/growth/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
 - [ ] How to deal with bug reports and feature requests
 - [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
+- [ ] How to use macros to answer questions quickly
+- [ ] How to avoid duplication of effort in ZenDesk
+- [ ] How to create and use personal views in ZenDesk
+- [ ] Shadowing time: The support engineer works through some tickets while explaining, touching on examples of items in the list above during the process
 
-It can be especially helpful for new hires if support engineers demonstrate how to solve a simple ticket from start to finish. 
+It can be especially helpful for new hires if support engineers demonstrate how to solve a simple ticket from start to finish, through shadowing.
 
 ## 30/60/90 day check-ins
 
