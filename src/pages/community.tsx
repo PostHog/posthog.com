@@ -130,7 +130,7 @@ const Header = () => {
     const { fullWidthContent } = useLayoutData()
 
     return (
-        <section className={`px-5 transition-all mx-auto ${fullWidthContent ? '' : 'max-w-[1400px]'}`}>
+        <section className={`px-3 2xl:px-5 transition-all mx-auto ${fullWidthContent ? '' : 'max-w-[1400px]'}`}>
             <div className="bg-accent dark:bg-border-dark/50 grid grid-cols-2 md:grid-cols-[200px_1fr_200px] my-4 xl:mb-6 mx-auto px-2 py-1 md:p-2 items-center">
                 <div className="md:block text-sm md:pl-2">
                     <div className="md:hidden">
@@ -165,7 +165,7 @@ const Main = () => {
 
     return (
         <section
-            className={`@container grid sm:flex sm:flex-wrap lg:grid lg:grid-cols-[220px_1fr_260px] xl:grid-cols-[300px_1fr_300px] gap-4 sm:gap-8 mx-auto px-5 mb-12 transition-all ${
+            className={`@container grid sm:flex sm:flex-wrap lg:grid lg:grid-cols-[220px_1fr_260px] xl:grid-cols-[300px_1fr_300px] gap-6 xl:gap-8 mx-auto px-7 2xl:px-9 mb-12 transition-all ${
                 fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
@@ -236,7 +236,7 @@ const Main = () => {
                     </div>
                 </div>
             </aside>
-            <section className="@container order-1 sm:flex-1 lg:order-none sm:border-r sm:pr-8 lg:px-8 lg:border-x border-light dark:border-dark">
+            <section className="@container order-1 sm:flex-1 lg:order-none sm:border-r pr-6 lg:px-6 xl:px-8 lg:border-x border-light dark:border-dark">
                 <div
                     className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
                         fullWidthContent ? '' : 'max-w-2xl mx-auto'
