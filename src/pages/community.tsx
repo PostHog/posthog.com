@@ -203,7 +203,7 @@ const Main = () => {
                                 </div>
                             }
                             cta={
-                                <Link to="/community/profiles/90" className="text-[15px]">
+                                <Link to="/community/profiles/30174" className="text-[15px]">
                                     Learn more about James G.
                                 </Link>
                             }
