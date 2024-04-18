@@ -755,7 +755,6 @@
         { "source": "/ab-testing/features", "destination": "/ab-testing" },
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
-        { "source": "/community", "destination": "/questions", "statusCode": 302 },
         { "source": "/roadmap/changelog", "destination": "/changelog/2024" },
         { "source": "/blog/posthog-changelog", "destination": "/changelog/2024" },
         { "source": "/roadmap/changelog/2023", "destination": "/changelog/2024" },
