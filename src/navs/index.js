@@ -227,7 +227,6 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
-    {
         name: 'Sales & CS',
         url: '',
         children: [
