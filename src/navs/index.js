@@ -227,6 +227,74 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
+        name: 'Sales & CS',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/overview',
+            },
+            {
+                name: 'New sales',
+                url: '/handbook/growth/sales/new-sales',
+            },
+            {
+                name: 'Expansion & Retention',
+                url: '/handbook/growth/sales/expansion-and-retention',
+            },
+            {
+                name: 'How we work',
+                url: '/handbook/growth/sales/how-we-work',
+            },
+            {
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
+            },
+            {
+                name: 'RevOps',
+                url: '/handbook/growth/sales/sales-operations',
+                children: [
+                    {
+                        name: 'Managing our CRM',
+                        url: '/handbook/growth/sales/crm',
+                    },
+                    {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/sales/icp',
+                    },
+                    {
+                        name: 'Customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding',
+                    },
+                    {
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
+                    },
+                    {
+                        name: 'Contracts',
+                        url: '/handbook/growth/sales/contracts',
+                    },
+                    {
+                        name: 'Billing',
+                        url: '/handbook/growth/sales/billing',
+                    },
+                    {
+                        name: 'Automations',
+                        url: '/handbook/growth/sales/automations',
+                    },
+                    {
+                        name: 'Who we do business with',
+                        url: '/handbook/growth/sales/who-we-do-business-with',
+                    },
+                    {
+                        name: 'Historical imports',
+                        url: '/handbook/growth/sales/historical-import',
+                    },
+                ],
+            },
+        ],
+    },
+    {
         name: 'Design',
         url: '',
         children: [
@@ -329,10 +397,6 @@ export const handbookSidebar = [
                 name: 'Working with data',
                 url: '',
                 children: [
-                    {
-                        name: 'Event ingestion explained',
-                        url: '/handbook/engineering/databases/event-ingestion',
-                    },
                     {
                         name: 'Making schema changes safely',
                         url: '/handbook/engineering/databases/schema-changes',
@@ -747,19 +811,25 @@ export const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: 'https://posthog.com/posts',
+    url: '/community',
     icon: 'IconChat',
     children: [
         {
-            name: 'Posts',
+            name: 'News',
             icon: 'IconNewspaper',
+            color: 'blue',
+            url: '/community',
+        },
+        {
+            name: 'Posts',
+            icon: 'IconBook',
             color: 'red',
             url: 'https://posthog.com/posts',
         },
         {
             name: 'Questions',
             icon: 'IconMessage',
-            color: 'blue',
+            color: 'seagreen',
             url: '/questions',
         },
         {
@@ -1728,6 +1798,10 @@ export const docsMenu = {
                         {
                             name: 'Querying data',
                             url: '/docs/how-posthog-works/queries',
+                        },
+                        {
+                            name: 'Session replay',
+                            url: '/docs/how-posthog-works/recordings-ingestion',
                         },
                     ],
                 },

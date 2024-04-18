@@ -19,7 +19,7 @@ const query = (params: any, offset: number) => {
     )
 }
 
-export const usePosts = ({ params }: { params: any }) => {
+export const usePosts = ({ params }: { params?: any }) => {
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, offset)}`,
         (url: string) => fetch(url).then((r) => r.json())

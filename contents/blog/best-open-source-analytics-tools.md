@@ -91,7 +91,7 @@ Subscribing to PostHog Cloud removes the project limit and adds numerous paid-on
 
 #### What is Matomo?
 
-[Matomo](https://matomo.org/) is an open-source platform for website analytics. It's one of the most popular open-source [alternatives to Google Analytics 4](/blog/ga4-alternatives) for website owners and marketing teams. It even offers a data import tool for Google Analytics, so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
+[Matomo](/blog/posthog-vs-matomo) is an open-source platform for website analytics. It's one of the most popular open-source [alternatives to Google Analytics 4](/blog/ga4-alternatives) for website owners and marketing teams. It even offers a data import tool for Google Analytics, so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
 
 #### Who is Matomo for?
 Matomo is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the European Union runs a version of Matomo on all its websites.
@@ -257,7 +257,7 @@ OpenReplay is available under the ELv2 license. An Enterprise version adds addit
 
 #### What is GrowthBook?
 
-GrowthBook is an [open source A/B testing](/blog/best-open-source-ab-testing-tools) and feature flag tool for teams who want granular control over rolling out new features, and the ability to validate those changes through experiments. 
+[GrowthBook](/blog/posthog-vs-growthbook) is an [open source A/B testing](/blog/best-open-source-ab-testing-tools) and feature flag tool for teams who want granular control over rolling out new features, and the ability to validate those changes through experiments. 
 
 It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on user properties.
 

@@ -208,6 +208,10 @@
             "destination": "/handbook/product/enterprise-features-prioritization"
         },
         { "source": "/handbook/engineering/debugging", "destination": "/handbook/engineering/production-access" },
+        {
+            "source": "/handbook/engineering/databases/event-ingestion",
+            "destination": "/docs/how-posthog-works/ingestion-pipeline"
+        },
         { "source": "/docs/user-guides/session-recording", "destination": "/docs/user-guides/recordings" },
         { "source": "/blog/sessions-deprecation", "destination": "/blog/sessions-removal" },
         { "source": "/docs/self-host/runbook/overview", "destination": "/docs/self-host/runbook" },
@@ -751,7 +755,6 @@
         { "source": "/ab-testing/features", "destination": "/ab-testing" },
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
-        { "source": "/community", "destination": "/questions", "statusCode": 302 },
         { "source": "/roadmap/changelog", "destination": "/changelog/2024" },
         { "source": "/blog/posthog-changelog", "destination": "/changelog/2024" },
         { "source": "/roadmap/changelog/2023", "destination": "/changelog/2024" },
