@@ -132,7 +132,7 @@ const Header = () => {
     return (
         <section className={`px-5 transition-all mx-auto ${fullWidthContent ? '' : 'max-w-[1400px]'}`}>
             <div className="bg-accent dark:bg-border-dark/50 grid grid-cols-2 md:grid-cols-[200px_1fr_200px] my-4 xl:mb-6 mx-auto px-2 py-1 md:p-2 items-center">
-                <div className="md:block text-sm md:pl-4">
+                <div className="md:block text-sm md:pl-2">
                     <div className="md:hidden">
                         {currentDate.toLocaleDateString('en-US', {
                             year: 'numeric',
@@ -152,7 +152,7 @@ const Header = () => {
                 <div className="text-center py-2 md:py-1 order-3 md:order-none col-span-2 md:col-span-1  border-t border-light dark:border-dark md:border-t-0 mt-1 md:mt-0">
                     <CommunityNewsLogo />
                 </div>
-                <div className=" md:block md:pr-4">
+                <div className=" md:block md:pr-2">
                     <AppStatus />
                 </div>
             </div>

@@ -63,7 +63,7 @@ export default function AppStatus() {
 
     return loading ? null : (
         <Link
-            className="flex gap-1 items-center justify-end text-inherit hover:text-inherit"
+            className="flex gap-1 items-center justify-end text-inherit hover:text-red dark:hover:text-yellow"
             to="https://status.posthog.com"
             externalNoIcon
         >
