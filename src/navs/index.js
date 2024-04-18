@@ -227,6 +227,74 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
+        name: 'Sales & CS',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/overview',
+            },
+            {
+                name: 'New sales',
+                url: '/handbook/growth/sales/new-sales',
+            },
+            {
+                name: 'Expansion & Retention',
+                url: '/handbook/growth/sales/expansion-and-retention',
+            },
+            {
+                name: 'How we work',
+                url: '/handbook/growth/sales/how-we-work',
+            },
+            {
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
+            },
+            {
+                name: 'RevOps',
+                url: '/handbook/growth/sales/sales-operations',
+                children: [
+                    {
+                        name: 'Managing our CRM',
+                        url: '/handbook/growth/sales/crm',
+                    },
+                    {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/sales/icp',
+                    },
+                    {
+                        name: 'Customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding',
+                    },
+                    {
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
+                    },
+                    {
+                        name: 'Contracts',
+                        url: '/handbook/growth/sales/contracts',
+                    },
+                    {
+                        name: 'Billing',
+                        url: '/handbook/growth/sales/billing',
+                    },
+                    {
+                        name: 'Automations',
+                        url: '/handbook/growth/sales/automations',
+                    },
+                    {
+                        name: 'Who we do business with',
+                        url: '/handbook/growth/sales/who-we-do-business-with',
+                    },
+                    {
+                        name: 'Historical imports',
+                        url: '/handbook/growth/sales/historical-import',
+                    },
+                ],
+            },
+        ],
+    },
+    {
         name: 'Design',
         url: '',
         children: [
