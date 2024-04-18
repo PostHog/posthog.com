@@ -35,7 +35,7 @@ const Thread = ({ title, status, url }: { title: string; status: string; url: st
     return (
         <>
             <div>
-                <Link to={url} className="font-bold text-sm @2xs:py-1 inline-block">
+                <Link to={url} className="font-semibold text-sm @2xs:py-1 inline-block leading-tight line-clamp-3">
                     {title}
                 </Link>
             </div>
