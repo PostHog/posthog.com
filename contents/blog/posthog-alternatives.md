@@ -555,7 +555,7 @@ As autocapture, a feature it shares with PostHog:
 
 Users frequently find it unintuitive:
 
-- "Heap is not the easiest tool to use, in my opinion. I have used other data analytics platforms like Looker, Split and FullStory, and I find Heap to be very difficult to learn."
+- "Heap is not the easiest tool to use, in my opinion. I have used other data analytics platforms like Looker, [Split](/blog/best-split-alternatives) and FullStory, and I find Heap to be very difficult to learn."
 
 - "Not intuitive enough for deep analysis of funnels and journeys. It's difficult for me to understand what's happening between two points in a flow and to determine what the cause for drop-off rates may be."
 
