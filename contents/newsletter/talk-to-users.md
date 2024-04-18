@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Engineering
-  - Being a founder
+  - Product engineers
 crosspost:
   - Product engineers
   - Blog
