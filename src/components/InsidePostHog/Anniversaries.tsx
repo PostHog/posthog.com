@@ -36,7 +36,7 @@ export default function Anniversaries() {
                     const startMonth = date.month()
                     const currentMonth = dayjs().month()
                     const days = dayjs().diff(startDate, 'days')
-                    teamMember.years = Math.ceil(days / 365)
+                    teamMember.years = Math.round(days / 365)
                     return date.isBefore(dayjs().subtract(364, 'days')) && startMonth === currentMonth
                 })
                 setTeamMembers(teamMembers)
