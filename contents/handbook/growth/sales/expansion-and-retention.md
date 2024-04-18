@@ -1,5 +1,5 @@
 ---
-title: Expansion & Retention
+title: Expansion & retention
 sidebar: Handbook
 showTitle: true
 ---
