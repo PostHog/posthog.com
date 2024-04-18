@@ -26,7 +26,7 @@ export default function FeatureRequests() {
         }
     `)
 
-    const { roadmaps, isLoading } = useRoadmaps({
+    const { isLoading, ...other } = useRoadmaps({
         params: {
             filters: {
                 dateCompleted: {
@@ -38,6 +38,14 @@ export default function FeatureRequests() {
             },
         },
     })
+
+    const roadmaps = other.roadmaps.map(({ id, attributes }) => {
+        const likeCount = attributes?.likes?.data?.length || 0
+        const staticLikeCount =
+            staticRoadmaps.nodes.find((node) => node.squeakId === id)?.githubPages?.[0]?.reactions?.total_count || 0
+        return { id, attributes: { ...attributes, likeCount: likeCount + staticLikeCount } }
+    })
+
     return (
         <div className="border-y border-light dark:border-dark pt-4 @lg:border-b-0">
             <h3 className="text-lg">Latest feature requests</h3>
@@ -46,7 +54,7 @@ export default function FeatureRequests() {
             ) : (
                 <ul className="list-none m-0 p-0 space-y-2 mb-4">
                     {[...roadmaps]
-                        .sort((a, b) => b.attributes?.likes?.data?.length - a.attributes?.likes?.data?.length)
+                        .sort((a, b) => b.attributes?.likeCount - a.attributes?.likeCount)
                         .slice(0, 3)
                         .map((roadmap) => {
                             const likeCount = roadmap?.attributes?.likes?.data?.length || 0
