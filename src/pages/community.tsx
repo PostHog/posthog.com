@@ -5,7 +5,7 @@ import { communityMenu } from '../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
-import { Link } from 'gatsby'
+import Link from 'components/Link'
 import { IconCake, IconConfetti } from '@posthog/icons'
 import { Twitter } from 'components/Icons/Icons'
 import { usePosts } from 'components/Edition/hooks/usePosts'
@@ -87,7 +87,7 @@ const getStatusDescription = (status?: string) => {
         case 'critical':
             return 'Critical issues'
         default:
-            return ''
+            return 'Unknown'
     }
 }
 
@@ -151,15 +151,33 @@ const CommunityNewsLogo = () => {
 
 const Header = () => {
     const currentDate = new Date()
-    const [appStatus, setAppStatus] = useState()
+    const [appStatus, setAppStatus] = useState<string>()
     const { fullWidthContent } = useLayoutData()
 
     useEffect(() => {
-        fetch('https://status.posthog.com/api/v2/status.json')
-            .then((res) => res.json())
-            .then((data) => {
-                setAppStatus(data?.status?.indicator)
-            })
+        const appStatus = async () =>
+            fetch('https://status.posthog.com/api/v2/status.json')
+                .then((res) => res.json())
+                .then((data) => data?.status?.indicator)
+        const appIncidents = async () =>
+            fetch('https://status.posthog.com/api/v2/incidents/unresolved.json')
+                .then((res) => res.json())
+                .then((data) => data?.incidents)
+        const getAppStatus = async () => {
+            try {
+                const incidents = await appIncidents()
+                if (incidents?.length > 0) {
+                    const major = incidents.some((incident) => incident?.impact === 'major')
+                    const critical = incidents.some((incident) => incident?.impact === 'critical')
+                    return setAppStatus(critical ? 'critical' : major ? 'major' : 'minor')
+                }
+                const status = await appStatus()
+                return setAppStatus(status)
+            } catch (error) {
+                setAppStatus('unknown')
+            }
+        }
+        getAppStatus()
     }, [])
 
     return (
@@ -180,10 +198,14 @@ const Header = () => {
                 <CommunityNewsLogo />
             </div>
             <div className="hidden md:block pr-4">
-                <div className="flex gap-1 items-center justify-end">
+                <Link
+                    className="flex gap-1 items-center justify-end text-inherit hover:text-inherit"
+                    to="https://status.posthog.com"
+                    externalNoIcon
+                >
                     <span className={`text-2xl -mt-1 ${getStatusColor(appStatus)}`}>&bull;</span>
                     <span className="text-sm">{getStatusDescription(appStatus)}</span>
-                </div>
+                </Link>
             </div>
         </section>
     )
