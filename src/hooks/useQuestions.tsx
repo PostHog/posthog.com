@@ -146,6 +146,9 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
             return fetch(url, user && jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined).then((r) =>
                 r.json()
             )
+        },
+        {
+            revalidateOnFocus: false,
         }
     )
 
