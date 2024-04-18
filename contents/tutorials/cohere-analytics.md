@@ -1,6 +1,6 @@
 ---
 title: How to set up LLM analytics for Cohere
-date: 2024-04-09
+date: 2024-04-18
 author:
   - lior-neu-ner
 tags:
@@ -46,7 +46,7 @@ touch providers.js # we set up PostHog in this file below
 
 When prompted, select **No** for TypeScript, **Yes** for `use app router`, **No** for Tailwind CSS and the defaults for every other option.
 
-Next, we set up Posthog using our API key and host (You can find these in [your project settings](https://us.posthog.com/settings/project)). Add the below code to `app/providers.js`:
+Next, we set up PostHog using our API key and host (You can find these in [your project settings](https://us.posthog.com/settings/project)). Add the below code to `app/providers.js`:
 
 ```js file=app/providers.js
 'use client'
@@ -172,7 +172,7 @@ Our basic app is now set up. Run `npm run dev` to see it in app action.
 
 ## 2. Capture chat completion events
 
-With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog. To start, we capture a `cohere_chat_completion` event with properties related to the API request. We find the following properties most useful to capture:
+With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog. To start, we capture a `cohere_chat_completion` event with properties related to the API request like:
 
 - `message`
 - `model`
@@ -222,7 +222,7 @@ Refresh your app and submit a few prompts. You should then see your events captu
 
 ## 3. Create insights
 
-Now that we're capturing events, we can create [insights](/docs/product-analytics/insights). Below are three examples of useful metrics you should monitor:
+Now that we're capturing events, we can create [insights](/docs/product-analytics/insights). Below are three examples of useful metrics:
 
 ### Total cost per model
 
@@ -231,7 +231,7 @@ To create this insight, go the [Product analytics tab](https://us.posthog.com/in
 1. Set the event to `cohere_chat_completion`
 2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
 3. Select the `total_cost_in_dollars` property.
-4. Cclick **+ Add breakdown** and select `model` from the event properties list.
+4. Click **+ Add breakdown** and select `model` from the event properties list.
 
 > **Note:** Insights may show `0` if the total cost is less than `0.01`.
 
@@ -264,7 +264,7 @@ This metric helps give you an idea of how your costs will scale as your product 
 
 ### Average API response time
 
-Cohere's API response time can take long, especially for longer outputs, so it's useful to keep an eye on this. To do this, first we need to modify our event capturing to also include the response time:
+Cohere's API response time can be slow, especially for longer outputs, so it's useful to keep an eye on this. To track this, we first need to modify our event capture to also include the response time:
 
 ```js file=page.js
 const fetchResponse = async () => {
