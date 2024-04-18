@@ -743,19 +743,25 @@ export const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: 'https://posthog.com/posts',
+    url: '/community',
     icon: 'IconChat',
     children: [
         {
-            name: 'Posts',
+            name: 'News',
             icon: 'IconNewspaper',
+            color: 'blue',
+            url: '/community',
+        },
+        {
+            name: 'Posts',
+            icon: 'IconBook',
             color: 'red',
             url: 'https://posthog.com/posts',
         },
         {
             name: 'Questions',
             icon: 'IconMessage',
-            color: 'blue',
+            color: 'seagreen',
             url: '/questions',
         },
         {
