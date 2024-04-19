@@ -14,13 +14,11 @@ crosspost:
   - Blog
 ---
 
-Here are some “trust me bro” truth bombs for you:1
+Here are some “trust me bro” truth bombs for you:[^1]
 
-First-time founders are more likely to fail than those with previous experience.
-
-Founders who previously failed are only marginally more successful.
-
-Previously successful founders are way more likely to succeed than either.
+1. First-time founders are more likely to fail than those with previous experience.
+2. Founders who previously failed are only marginally more successful.
+3. Previously successful founders are way more likely to succeed than either.
 
 Therefore, if you want to learn how first-time founders fail and avoid their mistakes, it's best to ask the ones who found success after their first startup(s) failed.
 
@@ -80,7 +78,7 @@ Initial feedback and orders convinced Taylor he was onto something, but he and h
 
 ## More first-time founder mistakes
 
-1) ### The wrong co-founder(s) 🤗
+### 1) The wrong co-founder(s) 🤗
 
 "[Companies are mostly about people](https://newsletter.posthog.com/p/what-we-learned-about-hiring-from)" and that starts with your co-founders. [Marty Kausus](https://www.linkedin.com/in/martykausas/), co-founder and CEO at [Pylon](https://usepylon.com), quit his second startup the moment he found "the right co-founders" to start a more successful venture.
 
@@ -90,7 +88,7 @@ A year and a half later, Pylon already has strong product-market fit.
 
 > "My biggest takeaway on co-founders is to make sure they have similar hustle, spirit, and desired lifestyle. For Pylon, we wanted to live together and live and breathe the company. We joke that we don't have 'work-life balance,' we have 'work-life integration' and that's ideal for us, while most people would find that miserable."
 
-2) ### Just shipping what users say they want 👍
+### 2) Just shipping what users say they want 👍
 
 Talking to customers is important, but it can go too far. This was a lesson [James Evans](https://www.linkedin.com/in/james-evans-7086b3126/), now co-founder and CEO at [CommandBar](https://www.commandbar.com), learned in his first startup:
 
@@ -100,7 +98,7 @@ It felt good, but "created a ton of product debt" and led them to ship "things t
 
 With CommandBar, James was determined to build a more opinionated product. The team only build new features for customers when they can say, with confidence "this feature will help your users and not annoy them."
 
-### Poor founder-market fit
+### 3) Bad founder-market fit
 
 [Per Borgen](https://www.linkedin.com/in/per-harald-borgen/) spent three years trying to make his first startup, Propell (2012 to 2015), work. Despite reaching over a million downloads for iPad children's books idea, the venture almost broke his spirit: "I was convinced I'd never have the energy to do a startup again."
 
@@ -126,7 +124,9 @@ He's got one final piece of advice for first-time founders:
 **[How Stripe validates ideas for new products](https://fullstackresearcher.substack.com/p/how-stripe-validates-ideas-for-new) – Daniel Kyne:** Daniel shares a great summary of Stripe’s method of Customer Problem Stack Ranking (CPSR), which ranks your problem against other problems your potential customers are trying to solve.
 
 **[Positive friction](https://fullstackresearcher.substack.com/p/how-stripe-validates-ideas-for-new) – Ali Abouelatta:** Sometimes it pays to add more steps to your onboarding process, what Ali calls positive friction: “They [Rise] realized the more screens they added to the onboarding flow, the more personalized and advanced their product appeared to the end users.”
-*
+
 **[The engineer/manager pendulum](https://charity.wtf/2017/05/11/the-engineer-manager-pendulum/) – Mipsytipsy:** ”The best frontline eng managers in the world are the ones that are never more than 2-3 years removed from hands-on work, full time down in the trenches. The best individual contributors are the ones who have done time in management.”
 
 *Words by Andy Vandervell, who will accept almond croissants as payment.*
+
+[^1]: “Trust me bro” not enough for you, eh? A 2006 study by researchers from Harvard Business School and the Federal Reserve Bank of New York found first-time founders only succeed 18% of the time, compared to 20% for founders on their second, third, etc. startup. Founders who’d previously led a successful startup, however, had a much higher 30% success rate. Naturally, this study comes with some caveats. It only looked at VC-funded startups, and it’s old – it used data from between 1987 and 2006, when the startup environment was very different to now. I imagine the real success rate for first-time founders is much lower than 18%, but that’s not the point. The study argues (pretty convincingly, imo) that successful founders aren’t just lucky and more risk tolerant, they’re also more skilful. This makes intuitive sense, but now you know I actually read the source I’m quoting. You should have trusted me, bro. 
