@@ -746,6 +746,10 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
+                name: 'Updating docs',
+                url: '/handbook/company/docs',
+            },
+            {
                 name: 'Community',
                 url: '',
                 children: [
