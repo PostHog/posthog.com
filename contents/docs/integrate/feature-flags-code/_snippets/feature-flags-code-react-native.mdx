@@ -17,6 +17,8 @@ const MyComponent = () => {
         return null
     }
 
+    // Optional use the 'useFeatureFlagWithPayload' hook for fetching the feature flag payload
+
     return showFlaggedFeature ? <Text>Testing feature 😄</Text> : <Text>Not Testing feature 😢</Text>
 }
 ```
@@ -36,7 +38,7 @@ const MyComponent = () => {
       // Do something
     }
 
-    // Use the 'useFeatureFlagWithPayload' hook for fetching the feature flag payload
+    // Optional use the 'useFeatureFlagWithPayload' hook for fetching the feature flag payload
 
     return <div/>
 }
@@ -54,7 +56,7 @@ posthog.getFeatureFlag('key-for-your-boolean-flag')
 // Multivariant feature flags are returned as a string
 posthog.getFeatureFlag('key-for-your-multivariate-flag')
 
-// Fetch the payload returns 'JsonType' or undefined if not loaded yet or if there was a problem loading
+// Optional fetch the payload returns 'JsonType' or undefined if not loaded yet or if there was a problem loading
 posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')
 ```
 
@@ -68,7 +70,7 @@ If you have the need to forcefully trigger the refresh however you can use `relo
 posthog.reloadFeatureFlagsAsync().then((refreshedFlags) => console.log(refreshedFlags))
 ```
 
-Or when we want to trigger the reload but we don't care about the result
+Or when you want to trigger the reload but you don't care about the result:
 
 ```react-native
 posthog.reloadFeatureFlags()
