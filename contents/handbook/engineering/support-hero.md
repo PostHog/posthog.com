@@ -45,7 +45,7 @@ Your job is simple: resolve ticket after ticket from your team's list.
 
 There are three sources of tickets:
 
-1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support) (The `Help` tab in the righthand sidebard.) They include a bunch of useful links, e.g. to the admin panel and to the relevant session recording.
+1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support) (The `Help` tab in the righthand sidebar.) They include a bunch of useful links, e.g. to the admin panel and to the relevant session recording.
 1. Community questions asked on PostHog.com.
 1. Slack threads that have been marked with the 🎫 reaction in customer support channels.
 
