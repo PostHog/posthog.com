@@ -6,10 +6,10 @@ import { useLayoutData } from '../../Layout/hooks'
 
 const cards = [
     {
-        top: 'You enjoy "jumping on a quick call" with sales',
+        top: 'You enjoy being forced to talk to sales',
         bottom: (
             <>
-                Sorry, we don't have a sales team. But you can{' '}
+                We don't hide pricing behind a sales call. But you can{' '}
                 <Link to="/book-a-demo" className="!text-red">
                     watch a recorded demo
                 </Link>{' '}
