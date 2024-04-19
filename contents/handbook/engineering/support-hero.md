@@ -1,4 +1,4 @@
-(---
+---
 title: Support hero
 sidebar: Handbook
 showTitle: true
