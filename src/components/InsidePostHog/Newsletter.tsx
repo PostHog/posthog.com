@@ -36,8 +36,8 @@ export default function Newsletter() {
             <div className="@md:pt-6 w-full max-w-md">
                 {!submitted ? (
                     <>
-                        <p className="text-sm opacity-50 m-0">Subscribe to our Substack newsletter</p>
-                        <h4 className="relative text-2xl m-0">Product for engineers</h4>
+                        <p className="text-sm opacity-50 m-0">Subscribe to our newsletter</p>
+                        <h4 className="relative text-2xl m-0">Product for Engineers</h4>
                         <p className="m-0 text-[15px]">Helping engineers and founders flex their product muscles</p>
                         <div className="">
                             <form
@@ -73,7 +73,7 @@ export default function Newsletter() {
                         <p className="m-0 opacity-60">
                             Keep an eye out for our next edition of{' '}
                             <strong>
-                                <em>Product for engineers</em>
+                                <em>Product for Engineers</em>
                             </strong>{' '}
                             from Substack in your inbox.
                         </p>
