@@ -61,12 +61,13 @@ analytics.track('user_signed_up', {
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
-    "event": "user_signed_up",
-    "distinct_id": "user_distinct_id",
-    "properties": {
-        "$groups": {"company": "company_id_in_your_db"}
-    }
+  "api_key": "<ph_project_api_key>",
+  "event": "$groupidentify",
+  "distinct_id": "groups_setup_id",
+  "properties": {
+    "$group_type": "<company>",
+    "$group_key": "<company_id_in_your_db>",
+  }
 }' <ph_instance_address>/capture/
 ```
 
