@@ -10,6 +10,7 @@ showTitle: true
   - Documenting new features when they're launched.
   - Correcting mistakes reported by users.
   - Clarifying documentation based on user feedback and support tickets.
+  - Ensuring public betas have documentation which is linked to from feature preview menu
 
 - **Content marketing** is responsible for improving the docs. This means:
   - Reviewing draft documentation created by product teams.
