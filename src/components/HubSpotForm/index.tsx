@@ -432,7 +432,6 @@ export default function HubSpotForm({
                 }
             }),
         }
-
         const res = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/6958578/${formID}`, {
             method: 'POST',
             headers: {
@@ -502,7 +501,9 @@ export default function HubSpotForm({
                 <Formik
                     validateOnChange={false}
                     validationSchema={validationSchema}
-                    initialValues={Object.fromEntries(form.fields.map(({ name }) => [name, '']))}
+                    initialValues={Object.fromEntries(
+                        form.fields.map(({ name, fieldType }) => [name, fieldType === 'checkbox' ? [] : ''])
+                    )}
                     onSubmit={handleSubmit}
                 >
                     <Form className={formOptions?.className}>
