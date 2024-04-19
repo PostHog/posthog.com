@@ -70,12 +70,12 @@ In the UK, stock options are offered under the tax-advantaged [EMI scheme](https
 
 ## How PostHog does things differently
 
-|                           | **PostHog**                 | **Most startups**           |
-|---------------------------|-----------------------------|------------------------------|
-| **Vesting start**        | On your first day           | After a "probationary period"|
-| **Exercise window**      | 10 _years_ from grant  | 90 _days_ after departure    |
-| **Merger or acquisition** | Double-Trigger acceleration | No acceleration              |
-| **Good leavers**         | Includes performance lay-off| Doesn't include performance  |
+| &nbsp;                    | **PostHog**                  | **Most startups**             |
+|---------------------------|------------------------------|-------------------------------|
+| **Vesting start**         | On your first day            | After a "probationary period" |
+| **Exercise window**       | 10 _years_ from grant        | 90 _days_ after departure     |
+| **Merger or acquisition** | Double-Trigger acceleration  | No acceleration               |
+| **Good leavers**          | Includes performance lay-off | Doesn't include performance   |
 
 ### Vesting Start
 
