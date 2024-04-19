@@ -1,0 +1,24 @@
+---
+title: Product for Engineers workflow
+sidebar: Handbook
+showTitle: true
+---
+This is the copy editing process for all editions of the [Product for Engineers](https://newsletter.posthog.com/) newsletter and some blog posts. Use the GitHub-only process for the vast majority of docs, guides, and some blog posts. Not sure if a blog post needs to go through this process? Ask Andy or James.
+
+The process has six steps:
+
+1. **Pitch.** Write a pitch and put it in #content-ideas for review. A top line and a few bullets outlining what you want to do works great. Approved? Great! Get a deadline and get writing. This is also the point to request art if you need it. Create an issue in GitHub noting that you’re working on the draft so we can track it.
+
+2. **Write.** Write in Google Docs and don’t use markdown at this point. You should only convert to markdown once edits in the Google Doc have been wrapped up.
+
+3. **First edit.** Once you’re happy with your draft, share the Google Doc with James T who will do an initial edit and give feedback in the Google Doc using tracked changes. This should be the biggest edit the copy gets and so will likely require the most work.
+
+4. **Second edit.** Once you and James T are happy with the edits in the Google Doc, it’s time to convert it to markdown and put it into GitHub. Once that’s done, ask for high level feedback from the wider team to get different perspectives.
+
+5. **Third edit.** Once you’ve responded to all and any issues raised from the second edit, you’re ready for the third edit – which is a line edit to catch typos, fix typos, and tidy up any remaining issues. Ask James T or Andy to do this.
+
+6. **Live.** You and either James T or Andy can now work on getting the article live. If it’s a newsletter, that means copying it over to Substack – use the preview function in GitHub to get an HTML version that you can copy over. Finalize everything in Substack and on GitHub. Set the website version live as you send the newsletter version.
+
+### Simpler Workflow
+
+For a lot of content – guides, docs, some blog posts – we don’t need such an involved process. You can continue writing in markdown and requesting edits in GitHub. Oftentimes it’ll be obvious when to use this simpler workflow. If you need to check, just ask Andy or James T.
