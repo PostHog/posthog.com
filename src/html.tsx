@@ -48,8 +48,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                         password: true,
                                     }
                                 },
-                                __preview_process_person: 'identified_only',
-                                process_person: 'identified_only',
+                                person_profiles: 'identified_only',
                             })
                             `,
                         }}

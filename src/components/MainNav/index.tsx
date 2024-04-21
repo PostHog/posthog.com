@@ -393,9 +393,6 @@ export const Main = () => {
             setWebsiteTheme(window.__theme)
             window.__onThemeChange = () => {
                 setWebsiteTheme(window.__theme)
-                if (posthog) {
-                    posthog.people.set({ preferred_theme: window.__theme })
-                }
             }
             const instanceCookie = document.cookie
                 .split('; ')
