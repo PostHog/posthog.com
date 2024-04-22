@@ -17,7 +17,7 @@ Channel type is the type of acquisition channel the user came from, for example:
 | Paid Social      | An ad from a social media platform, e.g. Facebook, LinkedIn, or Twitter         |
 | Paid Video       | An ad from a video platform, e.g. YouTube or Twitch.                            |
 | Paid Shopping    | An ad from a shopping platform, e.g. Amazon or eBay.                            |
-| Paid Other       | An ad from an unknown platform.                                                 |
+| Paid Unknown     | An ad from an unknown platform.                                                 |
 | Cross-Network    | A cross-network ad                                                              |
 | Organic Search   | A non-ad search result from a search engine, e.g. Google, Bing, or Baidu.       |
 | Organic Social   | A non-ad link from a social media platform, e.g. Facebook, LinkedIn, or Twitter |
@@ -30,7 +30,7 @@ Channel type is the type of acquisition channel the user came from, for example:
 | SMS              | A link from an SMS.                                                             |
 | Audio            | An audio ad, e.g. a podcast ad.                                                 |
 | Push             | A push notification.                                                            |
-| Other            | A link from an unknown source.                                                  |
+| Unknown          | A link from an unknown source.                                                  |
 
 It is calculated using the referring domain, [UTM tags](/docs/data/utm-segmentation), and advertising IDs that are present in the URL when the user first lands on your website,.
 
@@ -57,13 +57,13 @@ These rules are applied in order, and the first one that matches is used to dete
 | Paid Social      | Traffic is paid, and `referring_domain` matches our list of social sources (e.g. `facebook.com`, `linkedin.com`, `twitter.com`)                   |
 | Paid Video       | Traffic is paid, and `referring_domain` matches our list of video sources (e.g. `youtube.com`, `twitch.tv`, `disneyplus.com`)                     |
 | Paid Shopping    | Traffic is paid, and `referring_domain` matches our list of shopping sources (e.g. `amazon.com`, `etsy.com`, `ebay.co.uk`)                        |
-| Paid Shopping    | Traffic is paid, and `utm_campaign` matches the regular expression `^(.*(([^a-df-z]|^)shop|shopping).*)$`|
+| Paid Shopping    | Traffic is paid, and `utm_campaign` matches the regular expression `^(.*(([^a-df-z]|^)shop|shopping).*)$` |
 | Paid Social      | Traffic is paid, and `utm_medium` matches our list of social mediums (e.g. `sm`, `social-media`, `social-network`)                                |
 | Paid Video       | Traffic is paid, and `utm_medium` matches our list of video mediums (e.g. `video`)                                                                |
 | Display          | Traffic is paid, and `utm_medium` matches our list of display mediums (e.g. `display`, `interstitial`, `banner`)                                  |
 | Paid Search      | Traffic is paid, and `gad_source` equals `1`                                                                                                      |
 | Paid Video       | Traffic is paid, and `utm_campaign` matches the regular expression `^(.*video.*)$`                                                                |
-| Paid Other       | Traffic is paid                                                                                                                                   |
+| Paid Unknown     | Traffic is paid                                                                                                                                   |
 | Direct           | Referring domain is the special value `$direct`, and `utm_medium` is not set, and `utm_source` is either empty or equal to `direct` or `(direct)` |
 | Organic Search   | `utm_source` matches our list of search sources (e.g. `google`, `bing`, `duckduckgo`)                                                             |
 | Organic Social   | `utm_source` matches our list of social sources (e.g. `facebook`, `linkedin`, `twitter`)                                                          |
@@ -87,7 +87,7 @@ These rules are applied in order, and the first one that matches is used to dete
 | Push             | `utm_medium` matches our list of referral mediums (e.g. `push`, `notification`, `mobile`)                                                         |
 | Organic Video    | `utm_campaign` matches the regular expression `^(.*video.*)$`                                                                                     |
 | Push             | `utm_medium` ends with `push`                                                                                                                     |
-| Other            | No previous rule matched                                                                                                                          |
+| Unknown          | No previous rule matched                                                                                                                          |
 
 If you would to be able to customise this logic, please upvote [this issue](https://github.com/PostHog/posthog/issues/21195). Our definitions were based on the [definitions that GA4 uses](https://support.google.com/analytics/answer/9756891?hl=en), but added our own logic to handle some edge cases they don't.
 
