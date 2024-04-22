@@ -27,7 +27,7 @@ Langfuse supports using any large language model and has simple integrations for
 
 To get started:
 
-1. First add Langfuse Tracing to your LLM app ([Quickstart](https://langfuse.com/docs/get-started)).
+1. First add [Langfuse Tracing](https://langfuse.com/docs/tracing) to your LLM app ([Quickstart](https://langfuse.com/docs/get-started)).
 2. In your [Langfuse dashboard](https://cloud.langfuse.com/), click on **Settings** and scroll down to the **Integrations** section to find the PostHog integration settings.
 3. Click **Configure** and paste in your PostHog host and project API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)).
 4. Click **Enabled** and then **Save**.
