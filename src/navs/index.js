@@ -639,6 +639,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'RevOps',
+                url: '',
                 children: [
                     {
                         name: 'Managing our CRM',
