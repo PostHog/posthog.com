@@ -69,13 +69,13 @@ We were going to compete in a very crowded market of tools with multiple competi
 
 Our challenge was _standing out_. Being developer-focused and open source would, we thought, achieve this. It was fun, and, thankfully, we were right.
 
-We set the product up to be quick to deploy – we created a [Heroku](https://heroku.com) one click deployment. We later realized this was a mistake – we wound up eventually focusing on cloud adoption for most users. If I started again, I'd have a cloud product too even if it took a week or two longer. I would still have an open-source product, but I wouldn't aim to sell a self-hosted paid product.
+We set the product up to be quick to deploy – we created a [Heroku](https://heroku.com) one-click deployment. We later realized this was a mistake – and eventually focussed on cloud adoption for most users. If I started again, I'd have a cloud product too, even if it took a week or two longer. I would still have an open-source product, but I wouldn't aim to sell a self-hosted paid product.
 
 Finally, we picked a permissive license (MIT) because we wanted to see if enterprises would use it, and we felt they'd have rules around using non-permissive open-source licenses.
 
 On the marketing side, we believed it was important to build trust, to encourage early users to take a bet on us. The foundation of trust is transparency, so we built a public handbook – it has been a joy to maintain and expand as we've grown. We ran a [Hacker News premortem](/founders/hacker-news-premortem), too.
 
-Marketing didn't need to be scalable to get the first 10 users. I asked my friends, only with the goal of building it _for_ someone with a real product. We felt this would surface lots of edge cases etc, instead of us building it all locally at first.
+Marketing didn't need to be scalable to get the first ten users. I asked my friends, only with the goal of building it _for_ someone with a real product. We felt this would surface lots of edge cases, instead of us building it all locally at first.
 
 And, hey, this wouldn't be PostHog unless I got real specific, so I'm going to tell you how I _actually_ did this. Just start at the top and work you way down until you get 10 people to use your product:
 
