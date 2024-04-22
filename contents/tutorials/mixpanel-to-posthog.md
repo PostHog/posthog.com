@@ -33,7 +33,7 @@ Next, get the details for PostHog.
 
 1. Get your **project API key** from the getting started flow or your project settings. 
 2. Create a **personal API key**. Go to your account settings (click the photo in the top right corner, then the gear next to your email), click the "Create personal API key" button, add a name, and press save.
-3. Finally, note your **instance address** (either `https://app.posthog.com` or `https://eu.posthog.com` or a custom domain)
+3. Finally, note your **API host** (either `https://us.i.posthog.com` or `https://eu.i.posthog.com` or a custom domain)
 
 With all this, we are ready to set up the migration tool.
 
@@ -50,7 +50,7 @@ MIXPANEL_PASSWORD=fCPFrpZYdzB9nlZ9kqabZcXuxSLKhjld
 MIXPANEL_PROJECT_ID=2880604
 POSTHOG_PROJECT_KEY=<ph_project_api_key>
 POSTHOG_API_KEY=phx_lz19ZGZWrVcwZol6qLmIvHBBHzc9lQbvN8b3U2zVufZ
-POSTHOG_ENDPOINT=<ph_instance_address>
+POSTHOG_ENDPOINT=<ph_client_api_host>
 ```
 
 Next, in the terminal, make sure you have [installed Go](https://go.dev/doc/install), then run the tool in the folder location.

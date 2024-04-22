@@ -32,8 +32,8 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
-            // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-            host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+            // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+            host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
         }}>
             <MyComponent />
         </PostHogProvider>
@@ -59,8 +59,8 @@ const MyComponent = () => {
 import PostHog from 'posthog-react-native'
 
 export const posthog = new PostHog('<ph_project_api_key>', {
-  // usually 'https://app.posthog.com' or 'https://eu.posthog.com'  
-  host: '<ph_instance_address>' // TIP: host is optional if you use https://app.posthog.com
+  // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'  
+  host: '<ph_client_api_host>' // TIP: host is optional if you use https://us.i.posthog.com
 })
 
 
@@ -88,8 +88,8 @@ You can further customize how PostHog works through its configuration on initial
 
 ```ts
 export const posthog = new PostHog("<ph_project_api_key>", {
-    /** PostHog API host (usually 'https://app.posthog.com' by default or 'https://eu.posthog.com') */
-    host?: string, // TIP: host is optional if you use https://app.posthog.com
+    /** PostHog API host (usually 'https://us.i.posthog.com' by default or 'https://eu.i.posthog.com') */
+    host?: string, // TIP: host is optional if you use https://us.i.posthog.com
     /** The number of events to queue before sending to PostHog (flushing) */
     flushAt?: number = 20,
     /** The interval in milliseconds between periodic flushes */

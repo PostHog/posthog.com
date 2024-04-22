@@ -15,7 +15,7 @@ To declare an incident, type `/incident` anywhere in Slack. This will create a n
 Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
 
 Some things that should definitely be an incident
-- `app.posthog.com` (PostHog Cloud US) or `eu.posthog.com` (PostHog Cloud EU) being completely unavailable (not just for you)
+- `us.posthog.com` (PostHog Cloud US) or `eu.posthog.com` (PostHog Cloud EU) being completely unavailable (not just for you)
 - No insights can be created
 - Feature flags are not being returned at all, or `/decide` is down
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag

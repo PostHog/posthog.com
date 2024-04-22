@@ -148,7 +148,8 @@ export const CodeBlock = ({
 
     const [projectName, setProjectName] = React.useState<string | null>(null)
     const [projectToken, setProjectToken] = React.useState<string | null>(null)
-    const [projectInstance, setProjectInstance] = React.useState<string | null>(null)
+    const [appHost, setAppHost] = React.useState<string | null>(null)
+    const clientApiHost = appHost?.replace('.posthog.com', '.i.posthog.com') ?? "https://us.i.posthog.com"
 
     const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
 
@@ -159,7 +160,7 @@ export const CodeBlock = ({
         if (document) {
             setProjectName(getCookie('ph_current_project_name'))
             setProjectToken(getCookie('ph_current_project_token'))
-            setProjectInstance(getCookie('ph_current_instance'))
+            setAppHost(getCookie('ph_current_instance'))
         }
     }, [])
 
@@ -171,7 +172,7 @@ export const CodeBlock = ({
         return code
             .replace('<ph_project_api_key>', projectToken)
             .replace('<ph_project_name>', projectName)
-            .replace('<ph_instance_address>', projectInstance || 'https://app.posthog.com')
+            .replace('<ph_client_api_host>', clientApiHost || 'https://us.i.posthog.com')
     }
 
     const copyToClipboard = () => {
@@ -378,9 +379,11 @@ export const CodeBlock = ({
                                                             >
                                                                 {children === "'<ph_project_api_key>'" && projectToken
                                                                     ? `'${projectToken}'`
-                                                                    : children === "'<ph_instance_address>'" &&
-                                                                      projectToken
-                                                                    ? projectInstance || `'https://app.posthog.com'`
+                                                                    : children === "'<ph_client_api_host>'" &&
+                                                                      clientApiHost
+                                                                    ? clientApiHost
+                                                                    : children === "'<ph_app_host>'" && appHost
+                                                                    ? appHost
                                                                     : children}
                                                             </span>
                                                         </span>

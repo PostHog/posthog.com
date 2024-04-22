@@ -35,7 +35,7 @@ import { PostHogProvider } from 'posthog-js/react'
 export function PHProvider({ children }) {
   if (typeof window !== 'undefined') {
     posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_instance_address>',
+      api_host: '<ph_client_api_host>',
     })
   }
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
@@ -265,7 +265,7 @@ import { cookieConsentGiven } from './banner'
 export function PHProvider({ children }) {
   if (typeof window !== 'undefined') {
     posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_instance_address>',
+      api_host: '<ph_client_api_host>',
       persistence: cookieConsentGiven() === 'yes' ? 'localStorage+cookie' : 'memory'
     })
   }
