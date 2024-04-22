@@ -70,7 +70,7 @@ We talk a lot about "third-party cookies". And that's how we spell them. Same fo
 
 Don't just write "You can contact us to learn more" and not link it to anything.
 
-Write "To learn more, [join our Slack community](https://posthog.com/slack)."
+Write "To learn more, [join our  community](https://posthog.com/questions)."
 
 **The backtick is your friend**
 

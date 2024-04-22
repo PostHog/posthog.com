@@ -1,9 +1,10 @@
-import { replacePath, flattenMenu } from './utils'
 import { GatsbyNode } from 'gatsby'
+import fetch from 'node-fetch'
 import path from 'path'
 import slugify from 'slugify'
-import fetch from 'node-fetch'
 import menu from '../src/navs/index'
+import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
+import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -14,15 +15,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const BlogTagTemplate = path.resolve(`src/templates/BlogTag.tsx`)
     const BlogTemplate = path.resolve(`src/templates/Blog.tsx`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
-    const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
-    const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
+    const TeamTemplate = path.resolve(`src/templates/Team.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -32,15 +32,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const merchStore =
+        process.env.SHOPIFY_APP_PASSWORD && process.env.GATSBY_MYSHOPIFY_URL && process.env.GATBSY_SHOPIFY_SALES_CHANNEL
 
-    const result = await graphql(`
+    const result = (await graphql(`
         {
             allMdx(
                 filter: {
                     fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
                     frontmatter: { title: { ne: "" } }
                 }
-                limit: 1000
             ) {
                 nodes {
                     id
@@ -295,18 +296,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
-                nodes {
-                    id
-                    slug
-                }
-            }
-            hostHog: allMdx(filter: { fields: { slug: { regex: "/^/hosthog/" } } }) {
-                nodes {
-                    id
-                    slug
-                }
-            }
             jobs: allAshbyJobPosting {
                 nodes {
                     id
@@ -329,11 +318,198 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fieldValue
                 }
             }
+            teams:  allMdx(filter: {frontmatter: {template: {eq: "team"}}}) {
+                nodes {
+                  id
+                  fields {
+                    slug
+                  }
+                  frontmatter {
+                    title
+                  }
+                }
+              }
+            ${
+                merchStore
+                    ? `allShopifyProduct(limit: 1000) {
+                nodes {
+                    handle
+                }
+            }
+            allShopifyCollection {
+                nodes {
+                    handle
+                    products {
+                        description
+                        featuredMedia {
+                            preview {
+                                image {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        handle
+                        id
+                        media {
+                            mediaContentType
+                            preview {
+                                image {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData
+                                        }
+                                    }
+                                }
+                            }
+                        }
+						imageProducts {
+							handle
+							featuredImage {
+								localFile {
+									childImageSharp {
+									gatsbyImageData
+									}
+								}
+							}
+						}
+                        metafields {
+                            value
+                            key
+                        }
+                        options {
+                            shopifyId
+                            name
+                            values
+                        }
+                        priceRangeV2 {
+                            maxVariantPrice {
+                                amount
+                            }
+                            minVariantPrice {
+                                amount
+                            }
+                        }
+                        shopifyId
+                        status
+                        title
+                        tags
+                        totalInventory
+                        variants {
+                            availableForSale
+                            media {
+                                preview {
+                                    image {
+                                        localFile {
+                                            childImageSharp {
+                                                gatsbyImageData
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            price
+                            product {
+                                title
+                                featuredMedia {
+                                    preview {
+                                        image {
+                                            localFile {
+                                                childImageSharp {
+                                                    gatsbyImageData
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            selectedOptions {
+                                name
+                                value
+                            }
+                            shopifyId
+                            sku
+                            title
+                        }
+                    }
+                }
+            }
+            allMerchNavigation {
+                nodes {
+                    title
+                    handle
+                }
+            }`
+                    : ''
+            }
         }
-    `)
+    `)) as GatsbyContentResponse
 
-    if (result.errors) {
-        return Promise.reject(result.errors)
+    if (result.error) {
+        return Promise.reject(result.error)
+    }
+
+    /**
+     * Merch
+     */
+    if (merchStore) {
+        const merchNav = result.data.allMerchNavigation.nodes?.map((item: MetaobjectsCollection) => {
+            return {
+                url: item.handle === 'all-products' ? '/merch' : `/merch/${item.handle}`,
+                handle: item.handle,
+                title: item.title,
+            }
+        })
+
+        /**
+         * Collection pages. Slightly abusing context here and sending all products
+         * per paginated collection page. Gatsby doesn't let you both filter your
+         * Graphql query at collections and then again for the products inside.
+         */
+        const productsPerPage = 50
+        result.data.allShopifyCollection.nodes.forEach((collection) => {
+            const { handle, products } = collection
+            const merchBasePath = '/merch'
+            const collectionPath = handle === 'all-products' ? '' : `/${handle}`
+            const collectionProductsCount = products.length
+            const numPages = Math.ceil(collectionProductsCount / productsPerPage)
+
+            Array.from({
+                length: numPages,
+            }).forEach((_, i) => {
+                const currentPage = i + 1
+                const startIndex = (currentPage - 1) * productsPerPage
+                const endIndex = startIndex + productsPerPage
+                const productsForCurrentPage = products.slice(startIndex, endIndex)
+
+                createPage({
+                    path: i === 0 ? `${merchBasePath}${collectionPath}` : `${merchBasePath}${collectionPath}/${i + 1}`,
+                    component: path.resolve('./src/templates/merch/Collection.tsx'),
+                    context: {
+                        merchNav,
+                        handle,
+                        limit: productsPerPage,
+                        skip: i * productsPerPage,
+                        numPages,
+                        currentPage: i + 1,
+                        productsForCurrentPage,
+                    },
+                })
+            })
+        })
+
+        result.data.allShopifyProduct.nodes.forEach((node) => {
+            createPage({
+                path: `/merch/products/${node.handle}/`,
+                component: path.resolve(`./src/templates/merch/Product.tsx`),
+                context: {
+                    handle: node.handle,
+                },
+            })
+        })
     }
 
     const menuFlattened = flattenMenu(menu)
@@ -494,18 +670,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    const createTeamContext = (node) => ({
-        mission: `${node.fields?.slug || node.url}/mission`,
-        objectives: `${node.fields?.slug || node.url}/objectives`,
-    })
-
-    createPosts(
-        result.data.handbook.nodes,
-        'handbook',
-        HandbookTemplate,
-        { name: 'Handbook', url: '/handbook' },
-        createTeamContext
-    )
+    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
@@ -681,38 +846,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             },
         })
     })
-    result.data.plugins.nodes.forEach((node) => {
-        const { id, slug } = node
-        if (slug) {
-            createPage({
-                path: slug,
-                component: PluginTemplate,
-                context: {
-                    id,
-                },
-            })
-        }
-    })
-    result.data.hostHog.nodes.forEach((node) => {
-        const { id, slug } = node
-        if (slug) {
-            createPage({
-                path: slug,
-                component: HostHogTemplate,
-                context: {
-                    id,
-                },
-            })
-        }
-    })
 
     if (process.env.ASHBY_API_KEY && process.env.GITHUB_API_KEY) {
         for (node of result.data.jobs.nodes) {
             const { id, parent } = node
             const slug = node.fields.slug
-            const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
-            const issues = parent?.customFields?.find(({ title, value }) => title === 'Issues')?.value?.split(',')
-            const repo = parent?.customFields?.find(({ title, value }) => title === 'Repo')?.value
+            const issues = parent?.customFields?.find(({ title }) => title === 'Issues')?.value?.split(',')
+            const repo = parent?.customFields?.find(({ title }) => title === 'Repo')?.value
+            const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
             let gitHubIssues = []
             if (issues) {
                 for (const issue of issues) {
@@ -739,11 +880,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id,
                     slug,
-                    teamName: team,
-                    teamNameInfo: `${team} Team`,
-                    objectives: `/handbook/small-teams/${slugify(team, { lower: true })}/objectives`,
-                    mission: `/handbook/small-teams/${slugify(team, { lower: true })}/mission`,
+                    objectives: `/teams/${slugify(teams[0], { lower: true })}/objectives`,
+                    mission: `/teams/${slugify(teams[0], { lower: true })}/mission`,
                     gitHubIssues,
+                    teams,
                 },
             })
         }
@@ -755,6 +895,20 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: ChangelogTemplate,
             context: {
                 year: Number(year),
+            },
+        })
+    })
+
+    result.data.teams.nodes.forEach(({ id, frontmatter: { title }, fields: { slug } }) => {
+        createPage({
+            path: slug,
+            component: TeamTemplate,
+            context: {
+                id,
+                slug,
+                teamName: title,
+                ignoreWrapper: true,
+                objectives: `${slug}/objectives`,
             },
         })
     })

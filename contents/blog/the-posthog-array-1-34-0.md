@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
 excerpt: >-
   PostHog 1.34.0 focuses on supporting collaboration. New features include a new
@@ -42,7 +43,7 @@ PostHog 1.34.0 focuses on supporting collaboration and helping you to find and s
 
 ### New: Project homepages
 
-![PostHog - Project Homepages](../images/blog/array/1_34_0-homepage.png)
+![PostHog - Project Homepages](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1_34_0-homepage.png)
 
 We've added default homepages for each project in PostHog, to help you explore new data and keep track on important metrics. You can pin your favorite dashboard directly to this new homepage to easily access those insights and we'll also surface popular insights for you too.
 
@@ -50,7 +51,7 @@ Best of all, if your team uses [Session Recording](/product/session-recording), 
 
 ### New: Data Management
 
-![PostHog - view definition context](../images/blog/data-management-feature/data_management_tab.png)
+![PostHog - view definition context](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/data-management-feature/data_management_tab.png)
 
 We've also added a new Data Management system! This new tool helps you organize your PostHog data in-house through event definitions, definition tagging and many more features. This is especially useful in large teams, where it can sometimes be difficult to know if your insights are using the right events.
 
@@ -60,7 +61,7 @@ Check out our [blogpost which explains more about Data Management on PostHog](/b
 
 ### Improvement: Smart insight naming
 
-![PostHog - smart insight naming](../images/blog/array/1_34_0-smart-naming.png)
+![PostHog - smart insight naming](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1_34_0-smart-naming.png)
 
 Previously, we generated random default names for insights based on animals. It was fun and ensured each insight had a unique name, but they weren't very descriptive and didn't help if you wanted to browse existing insights.
 
@@ -68,7 +69,7 @@ Now, we've added smart insight naming to automatically generate descriptive name
 
 ### New: Property group filtering
 
-![PostHog - property filters](../images/blog/array/1_34_0-property-filter.png)
+![PostHog - property filters](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1_34_0-property-filter.png)
 
 One of the most requested features for PostHog, property group filters enable you to mix and match your favourite property filters with `OR`s and `AND` conditions. This makes it much simpler to create complex filters when building insights, though this is currently only available as a global filter for insights.
 
@@ -105,7 +106,7 @@ Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog
 
 ## Contributions from the community
 
-Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack).
+Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started, or head to [our community page](/posts).
 
 We would also specifically like to thank PostHog team members [@hazzadous](https://github.com/hazzadous), [@guidoiaquinti](https://github.com/guidoiaquinti) and [@liyiy](https://github.com/liyiy) for their efforts on this particularly stubborn release.
 

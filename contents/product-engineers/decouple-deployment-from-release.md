@@ -1,13 +1,17 @@
 ---
-title: Why you should decouple deployment from release (and how) 
+title: Why you should decouple deployment from release (and how)
 date: 2023-09-18
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/green-blog-image.jpg
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 tags:
- - Product engineers
- - Engineering
- - Feature management
+  - Product engineers
+  - Engineering
+  - Feature managemen
+crosspost:
+  - Blog
 ---
 
 Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break your app, or cause other issues. Without the right processes in place, the safety of your releases is a big question mark.
@@ -24,7 +28,7 @@ A release is when the new code is made available to users. By default, as soon a
 
 This means teams often hold deployments until they are confident the code is ready to release.
 
-![Delivery process](../images/blog/decouple-deployment-from-release/delivery.png)
+![Delivery process](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/decouple-deployment-from-release/delivery.png)
 
 ## Why should you separate deployment and release?
 
@@ -38,7 +42,7 @@ Decoupling can lower the risk of issues, increase developer productivity, and im
 
 - Increase deployment frequency by removing the need to wait for a formal release. 
 
-- Developers can follow [trunk-based development](https://trunkbaseddevelopment.com/) and merge to `main` more often instead of waiting on branches. This increases shipping velocity and reduces merge conflicts.
+- Developers can follow [trunk-based development](/product-engineers/trunk-based-development) and merge to `main` more often instead of waiting on branches. This increases shipping velocity and reduces merge conflicts.
 
 - Developers can pass off releases to product managers and marketers once they deploy. They can coordinate elaborate launches and stakeholders without holding up development.
 
@@ -48,7 +52,7 @@ Decoupling can lower the risk of issues, increase developer productivity, and im
 
 We deploy many changes behind [feature flags](/feature-flags) and release them after testing them in production. At any time, there are [30+ flags](https://github.com/PostHog/posthog/blob/03eb1dcaec3cf5064a1ace4433f2f77d6676b634/frontend/src/lib/constants.tsx#L118C1-L118C1) in use in PostHog. They are created and updated daily.
 
-![PostHog's flags](../images/blog/decouple-deployment-from-release/flags.png)
+![PostHog's flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/decouple-deployment-from-release/flags.png)
 
 These flags help us dogfood features, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
 

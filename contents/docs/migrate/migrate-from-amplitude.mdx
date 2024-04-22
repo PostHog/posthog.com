@@ -1,26 +1,22 @@
 ---
-title: Migrate to PostHog from Amplitude
+title: Migrate from Amplitude to PostHog
 sidebar: Docs
 showTitle: true
 ---
 
-If you're running close to Amplitude's 10 million free events limit, migrating to PostHog could be a good idea, especially since the PostHog event schema is quite similar to Amplitude's.
+import MigrationWarning from "./_snippets/migration-warning.mdx"
 
-## Steps
+<MigrationWarning />
 
-1. Export your data from Amplitude using the [Amplitude Export API](https://developers.amplitude.com/docs/export-api)
-2. [Import data into PostHog](/docs/integrate/ingest-historic-data#importing-events) using any of PostHog's SDKs or capture API.
+Migrating from Amplitude is a two step process:
 
-## Translating the data schema
+1. Export your data from Amplitude using the [Amplitude Export API](https://www.docs.developers.amplitude.com/analytics/apis/export-api/i).
 
-Roughly, for every Amplitude event, you'll need to:
-
-- **Capture the event**: this involves calling the [Capture](/docs/api/post-only-endpoints#capture) events with the event name, timestamp, event properties, and user properties
-- **Alias the user**: if this is a logged-in user, you'll want to [Alias the device ID to the user](/docs/api/post-only-endpoints#alias)
+2. [Import data into PostHog](/docs/migrate) using PostHog's Python SDK or `batch` API with the `historical_migration` option set to `true`.
 
 ### Capture the event
 
-For reference, as of writing, Amplitude's event structure is (according to their [Export API documentation](https://developers.amplitude.com/docs/export-api):
+According to Amplitude's [Export API documentation](https://www.docs.developers.amplitude.com/analytics/apis/export-api/#response-schema), their event structure is:
 
 ```
 {
@@ -38,35 +34,33 @@ For reference, as of writing, Amplitude's event structure is (according to their
 }
 ```
 
-When capturing the event, roughly, the schema you'll want to use is:
+When capturing events into PostHog, we need to convert this schema to PostHog's:
 
-```js
-const distinctId = user_id || device_id;
-const eventMessage = {
-  properties: {
-    ...event_properties,
-    ...other_fields,
-    $set: { ...user_properties, ...group_properties },
-    $geoip_disable: true,
+```python
+distinct_id = user_id if user_id else device_id
+event_message = {
+  "properties": {
+    **event_properties,
+    **other_fields,
+    "$set": {**user_properties},
+    "$geoip_disable": True,
   },
-  event: event_type,
-  distinct_id: distinctId,
-  timestamp: event_time,
-};
+  "event": event_type,
+  "distinct_id": distinct_id,
+  "timestamp": event_time,
+}
 ```
 
 In short:
 
-- We want to track the event with the same:
-  - Event name
-  - Timestamp
-- For the distinct ID, we either want to use the User ID if present, or the Device ID (a UUID string) if not
-- We want to track both User and Group properties as [User Properties](/docs/integrate/user-properties) using `properties: {$set}`
-- We want to track Event properties using `properties`
+- We track the event with the same name and timestamp
+- For the distinct ID, we either use the User ID if present, or the Device ID (a UUID string) if not
+- We track user properties using `properties: {$set}`
+- We track event properties using `properties`
 
 ### Aliasing device IDs to user IDs
 
-In addition to tracking the events themselves, we want to tie users' events both before and after login. For Amplitude, events before and after login look a bit like this:
+In addition to tracking the events, we want to tie users' both before and after login. For Amplitude, events before and after login look a bit like this:
 
 | Event | User ID | Device ID |
 |-------|---------|-----------|
@@ -74,13 +68,17 @@ In addition to tracking the events themselves, we want to tie users' events both
 | Login | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
 | Purchase | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
 
-We'd ideally like to be able to attribute "Application installed" to the user with ID 123, so we need to also call alias with:
+We want to attribute "Application installed" to the user with ID 123, so we need to also call alias:
 
-```js
-const aliasMessage = {
-  distinct_id: user_id, // 123
-  aliasId: device_id, // 551dc114-7604-430c-a42f-cf81a3059d2b
-};
+```python
+posthog = Posthog(
+    '<ph_project_api_key>', 
+    host='<ph_client_api_host>',
+    debug=True,
+    historical_migration=True
+)
+
+posthog.alias(previous_id=device_id, distinct_id=user_id)
 ```
 
-Since you only need to do this once per event, ideally you'd store somewhere (e.g., in a SQL table outside of PostHog) a record of which aliases you'd already sent to PostHog, so that you don't end up sending the same Alias events twice.
+Since you only need to do this once per user, ideally you'd store a record (e.g. a SQL table) of which users you'd already sent to PostHog, so that you don't end up sending the same events multiple times.

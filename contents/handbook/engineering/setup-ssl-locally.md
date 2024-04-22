@@ -62,11 +62,11 @@ python manage.py runserver
 
 If you're testing the Toolbar, make sure to add the ngrok urls to the list on the 'Project Settings' page.
 
-![Permitted domains](../../images/engineering/toolbar-permitted-ngrok.png)
+![Permitted domains](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/engineering/toolbar-permitted-ngrok.png)
 
 Also, watch out, network requests can be slow through ngrok:
 
-![Network slow with ngrok](../../images/engineering/ngrok-slow.gif)
+![Network slow with ngrok](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/engineering/ngrok-slow.gif)
 
 ## Set up SSL via NGINX and a local certificate
 

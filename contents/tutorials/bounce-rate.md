@@ -1,10 +1,14 @@
 ---
-title:  How to calculate bounce rate
+title: How to calculate bounce rate
 date: 2023-06-27
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['insights', 'hogql', 'product analytics']
+tags:
+  - insights
+  - hogql
+  - product analytics
 ---
 
 Bounce rate is the percentage of users who leave your page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors.  
@@ -30,7 +34,7 @@ from raw_session_replay_events
 
 This gives us a bounce rate percentage insight we can save, update, and add to dashboards.
 
-![Bounce rate](../images/tutorials/bounce-rate/bounce-rate.mp4)
+![Bounce rate](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bounce-rate/bounce-rate.mp4)
 
 > **Why not use single page visits divided by total visits?** The `raw_session_replay_events` data does not include the frequency of events and the `events` data does not include session details, making calculating sessions with a single `$pageview` event not possible (at the moment).
 

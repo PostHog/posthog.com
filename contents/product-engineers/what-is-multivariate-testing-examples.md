@@ -1,13 +1,17 @@
 ---
-title: "Multivariate testing, explained (with examples)"
+title: 'Multivariate testing, explained (with examples)'
 date: 2023-11-16
-author: ['lior-neu-ner']
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 tags:
   - Growth engineering
   - Product engineers
   - AB testing
+crosspost:
+  - Blog
 ---
 
 ## What is multivariate testing?
@@ -16,7 +20,7 @@ Multivariate testing is when you test several different combinations of changes 
 
 It's distinct from A/B testing, where you only test two variants – a control and a single variant you want to test against it.
 
-![A/B testing vs multivariate testing](../images/blog/multivariated-testing-explained/ab-vs-mvt.png)
+![A/B testing vs multivariate testing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/multivariated-testing-explained/ab-vs-mvt.png)
 
 Here's an example:
 
@@ -67,7 +71,7 @@ If your duration is too long, but you'd still like to run a multivariate test, t
 
 > 💡 **PostHog tip:** If you're running your test with PostHog, we calculate the recommended running time for you.
 >
-> ![Recommended running time in PostHog experiment setup](../images/blog/multivariated-testing-explained/recommended-running-time.png)
+> ![Recommended running time in PostHog experiment setup](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/multivariated-testing-explained/recommended-running-time.png)
 
 ### 2. Multivariant tests require more work
 
@@ -101,7 +105,7 @@ Now that you know all about multivariate testing, here's how you implement one i
 5. Add the [experiment code](/docs/experiments/adding-experiment-code) to your app by customizing the user experience for each variant.
 6. [Launch your experiment](/docs/experiments/testing-and-launching).
 
-![Creating multivariant tests in PostHog](../images/blog/multivariated-testing-explained/multiple-variants-in-posthog.png)
+![Creating multivariant tests in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/multivariated-testing-explained/multiple-variants-in-posthog.png)
 
 ## Further reading
 

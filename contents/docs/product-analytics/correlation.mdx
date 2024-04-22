@@ -3,38 +3,33 @@ title: Correlation analysis
 sidebar: Docs
 showTitle: true
 topics:
-    - funnels
+  - funnels
 availability:
-    free: none
-    selfServe: full
-    enterprise: full
+  free: none
+  selfServe: full
+  enterprise: full
 ---
 
-Correlation analysis is a feature within [Funnels](/docs/product-analytics/funnels) that will **automatically** highlight
-significant factors that affect the conversion rate of users within the funnel.
+Correlation analysis is a feature within [funnels](/docs/product-analytics/funnels) that **automatically** highlights significant factors impacting the conversion rate of users within a funnel.
 
-The Funnels has the ability to directly compare conversion rates of users for a specific property via the breakdown feature. An example usage for the breakdown feature might be to see how the user's Operating System affects the
-conversion rate. However, this requires you to already have an initial hypothesis that Operating System may be a significant factor.
+Funnels have the ability to directly compare conversion rates of users for a specific property via the breakdown feature, but this requires you to know what property to investigate. If you're not certain, correlation analysis is helpful because it can highlight significant events or properties automatically. 
 
-If you're not sure what might be a significant event or property in determining how likely someone is to convert, you can use Correlation analysis. This report will automatically highlighting significant events or properties. Given a
-funnel, PostHog will calculate the conversion rate for different slices (either by events performed, properties they have or properties for the events they performed) and surface any relevant signals.
+Given a funnel, PostHog will calculate the conversion rate for different slices (either by events performed, properties they have or properties for the events they performed) and surface relevant signals. Below is an example of what correlation analysis might look like:
 
-Below is an example of what correlation analysis might look like:
-
-![Correlation analysis](../../images/docs/user-guides/funnels/funnel-correlation-analysis.png)
+![Correlation analysis](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/funnel-correlation-analysis.png)
 
 ## Using correlation analysis
 
 Suppose we have a funnel and we want to optimize it. The first thing we might want to do is identify if there is anything special about user that make them more or less likely to convert. With correlation analysis we can automatically identify which user properties are significant:
 
-![Person property correlations](../../images/docs/user-guides/funnels/funnel-correlation-user-properties.png)
+![Person property correlations](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/funnel-correlation-user-properties.png)
 
 Above we can see that the conversion rate of people using Android and iOS are **4.1x** and **3.1x times less likely** to convert in our example funnel. However, we also see other properties that may be of interest, for instance the "Country
 Name". This gives us some threads to pull on, perhaps we might look into internationalization, or ensure the app loads well in different regions.
 
 Equally, we can see specific events that are correlated:
 
-![Event property correlations](../../images/docs/user-guides/funnels/funnel-correlation-event-properties.png)
+![Event property correlations](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/funnel-correlation-event-properties.png)
 
 Above we see that in our example funnel, users that performed the "opted into navigation redesign" event were 3.1x times less likely to convert.
 
@@ -42,13 +37,13 @@ We can drill down further to see how this events properties are correlated as we
 
 Where we go from here requires further investigation, but the important point is that we now have strings to pull on which hopefully end up with actionable insights.
 
-## What to do with this new found knowledge?
+## What to do with this newfound knowledge?
 
 One route for further exploration might be to drill down to the people that were considered for this specific event correlation. We can do so by clicking on the "Completed" and "Dropped off" numbers within a row. In the above case, users for both "Completed" and "Dropped off" will have performed the "opted into navigation redesign". "Completed" means the users fully completed the funnel, where as "Dropped off" users will include users who entered the funnel, but failed to make it through to the end.
 
 Another option might be to take, for instance, the "Country Name" property and add this as a funnel breakdown to further explore and understand the affect it has on the funnel:
 
-![Breakdown by country](../../images/docs/user-guides/funnels/funnel-correlation-analysis-country.png)
+![Breakdown by country](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/funnels/funnel-correlation-analysis-country.png)
 
 ## Making correlations accurate
 

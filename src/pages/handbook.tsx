@@ -67,7 +67,7 @@ const otherLinks = [
             { name: 'Developing locally', to: '/handbook/engineering/developing-locally' },
             { name: 'Support hero', to: '/handbook/engineering/support-hero' },
             { name: 'Feature ownership', to: '/handbook/engineering/feature-ownership' },
-            { name: 'Releasing a new version', to: '/handbook/engineering/release-new-version' },
+            { name: 'Shipping and releasing', to: '/handbook/engineering/development-process' },
         ],
     },
     {
@@ -100,7 +100,7 @@ export const Handbook: React.FC = () => {
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="-mt-16 md:-mt-12">
                             <StaticImage
-                                src="../../contents/images/search-hog-4.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                                 alt="This hog has an answer"
                                 width={400}
                                 placeholder="blurred"

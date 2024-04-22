@@ -12,7 +12,7 @@ export default function PostsTable({ posts, isLoading, hasMore, isValidating, fe
             })}
             {isLoading && <Skeleton />}
             {hasMore && (
-                <li className="mt-4 mb-24 px-4">
+                <li className="mt-4 md:mb-24 px-4">
                     <button
                         onClick={fetchMore}
                         disabled={isLoading || isValidating}

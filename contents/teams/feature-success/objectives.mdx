@@ -1,0 +1,26 @@
+As always, reliability is the #1 unwritten goal: Making sure feature flags are reliable trumps every other objective.
+
+### Objective: Make sure feature flags can handle 10x current scale
+
+Last quarter we hit some scaling limits on flags: It's now very expensive to run flags on Django and we'll hit some scaling limits at 5x our scale.
+
+To get ahead of this problem, we'll rewrite our flags service to be more performant and reliable.
+
+### Objective: Polish new experiments UI & collect feedback
+
+Last quarter we finished a basic version of our new experiment UI. This quarter, we want to polish this up, collect feedback from users, and address any issues that come up.
+
+Broadly, we should:
+1. Make it easy for people to set up experiments and understand the results, with clear action items on when to end and what to do after ending experiments.
+2. At every stage of the experiment, tell people what to do next
+3. Have common sense boundaries, and better running time predictions, and more resilient significance calculations (flip-flopping problem)
+4. Make sure support for experiments goes down as a result of the above^
+
+
+### Objective: Add most requested surveys functionality
+
+We will, in order of priority build:
+
+- Branching logic with multiple questions
+- Ability to duplicate surveys
+- Customise how many questions show up at a time

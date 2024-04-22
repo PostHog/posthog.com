@@ -9,7 +9,7 @@ assignees: andyvan-ph
 
 ## Summary
 
-> _explain the idea in a sentence or two_
+> _Write a short paragraph on what this article is about. If applicable, what's the opinion or point we want to make in this article?_
 
 ## Where will it be published?
 
@@ -34,13 +34,15 @@ assignees: andyvan-ph
 
 ## Who is the primary audience?
 
-> _select any that apply_
+> _Select any that apply_
 
+- [ ] Founders
+- [ ] Engineers
+- [ ] Growth
+- [ ] Marketing
+- [ ] HackerNews
 - [ ] Existing PostHog users
 - [ ] Potential PostHog users
-- [ ] Engineers
-- [ ] Non-engineers
-- [ ] Other (please specify)
 
 ## What (if any) keywords are we targeting?
 

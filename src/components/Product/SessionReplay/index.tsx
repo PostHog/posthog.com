@@ -45,12 +45,12 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'session-replay',
     lowercase: 'session replay',
-    capitalized: 'Session Replay',
-    freeTier: '15,000 recordings',
+    capitalized: 'Session replay',
+    freeTier: '5,000 recordings',
 }
 
-const team = 'Monitoring'
-const teamSlug = '/handbook/small-teams/monitoring'
+const team = 'Replay'
+const teamSlug = '/teams/replay'
 
 const featuresPerRow = 3
 const features = [
@@ -88,7 +88,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Web or iOS (beta) available',
+        description: 'Web or Android (beta) available',
         icon: <IconPhone />,
     },
     {
@@ -202,7 +202,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">On the roadmap</a>',
         },
     },
     {
@@ -212,7 +212,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">On the roadmap</a>',
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
         },
     },
     {
@@ -321,7 +321,7 @@ const PairsWithArray = [
 ]
 
 export const ProductSessionReplay = () => {
-    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { elevenlabs, hasura, netdata, pry } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -336,7 +336,7 @@ export const ProductSessionReplay = () => {
             }
         }
         {
-            contra: mdx(slug: { eq: "customers/contra" }) {
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
             hasura: mdx(slug: { eq: "customers/hasura" }) {
@@ -364,7 +364,7 @@ export const ProductSessionReplay = () => {
                     icon={<IconRewindPlay />}
                     product={product.capitalized}
                     title="Watch how users <span class='text-red dark:text-yellow'>experience</span> your app"
-                    description='Session Replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
+                    description='Session replay helps <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
                     website.'
                 />
 
@@ -385,18 +385,18 @@ export const ProductSessionReplay = () => {
                             customer={hasura}
                         />
                         <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-                            customer={contra}
+                            outcome="uses replays and surveys when testing ideas"
+                            quote="We watch lots of replays when testing a feature, and love how easy it is to launch surveys."
+                            customer={elevenlabs}
                         />
                         <CustomerCard
                             outcome="reduced back-and-forth in community support"
-                            quote="Session replay is... an essential tool for Netdata."
+                            quote="Session replay in PostHog is so much better than Smartlook, which we used to use."
                             customer={netdata}
                         />
                         <CustomerCard
                             outcome="improved registrations by 20-30%"
-                            quote="Even Pry's support team... uses replays to understand how bugs occurred."
+                            quote="We've improved our whole onboarding flow by about 5% too, which is great."
                             customer={pry}
                         />
                     </ul>
@@ -459,7 +459,7 @@ export const ProductSessionReplay = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -498,8 +498,11 @@ export const ProductSessionReplay = () => {
                                                     iOS
                                                 </Link>{' '}
                                                 |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/13267" external>
-                                                    Android
+                                                <Link
+                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
+                                                    external
+                                                >
+                                                    Flutter
                                                 </Link>
                                             </li>
                                         </ul>
@@ -572,7 +575,9 @@ export const ProductSessionReplay = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[2].children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'session replay').children}
+                    />
                 </section>
 
                 <section id="team" className="mb-20 px-5">

@@ -1,14 +1,17 @@
 ---
 date: 2023-04-27
-title: "10 things we've learned about pricing for SaaS startups"
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/equity.png
+title: 10 things we've learned about pricing for SaaS startups
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/equity.png
 featuredImageType: full
 tags:
   - Founders
   - Revenue
 crosspost:
-  - Founders   
+  - Founders
+  - Blog
 ---
 
 We build PostHog for [product engineers](/blog/what-is-a-product-engineer). We define product engineers as full-stack engineers who:
@@ -72,7 +75,7 @@ Freemium models are better for bottom-up user growth; trials are better for driv
 
 Airtable ($11bn valuation) combines its freemium model with a 14-day reverse trial, where new users get time-limited access to its “most popular” paid tier, and default to the free product if they don’t convert.
 
-![airtable-pricing](../images/blog/saas-pricing-lessons/airtable-pricing-page.png)
+![airtable-pricing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/saas-pricing-lessons/airtable-pricing-page.png)
 
 Here’s Airtable’s Head of Growth, Lauren Isford, on the benefits of reverse trials:
 
@@ -105,7 +108,7 @@ A pricing change is just as good a marketing/growth opportunity as a flashy new 
 
 [Tailscale recently](https://tailscale.com/blog/pricing-v3?utm_source=posthog-newsletter&utm_medium=email) announced an improved free tier and payment plans that “should save money for essentially everyone”. Users [were delighted](https://news.ycombinator.com/item?id=35615848):
 
-![tailscale pricing](../images/blog/saas-pricing-lessons/hackernews-quote.png)
+![tailscale pricing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/saas-pricing-lessons/hackernews-quote.png)
 
 Tailscale is also a classic example of how to price for teams, not individuals.
 
@@ -126,7 +129,7 @@ Conventional pricing wisdom dictates you should pick a round number price and su
 
 As highlighted by Gergely Orosz, Substack recently ran an experiment showing a “significant decrease in the free-to-paid conversion rate” when showing $x.99 prices.
 
-![substack pricing](../images/blog/saas-pricing-lessons/substack-experiment.png)
+![substack pricing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/saas-pricing-lessons/substack-experiment.png)
 
 Don’t assume $x.99 is better for your product. Test it.
 

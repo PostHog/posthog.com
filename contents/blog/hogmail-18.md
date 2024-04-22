@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/hogmail.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hogmail.png
 featuredImageType: full
 category: General
 ---
@@ -25,7 +26,7 @@ Yes, I know those two numbers are weirdly similar. Sue me.
 
 The most popular articles this year:
 
-- [How we found our Ideal Customer Profile](/blog/creating-ideal-customer-profile) – 56 clicks
+- [How we found our Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) – 56 clicks
 - [How (and why) our marketing team uses PostHog](/blog/posthog-marketing) – 50 clicks
 - [How to run a transparent startup](/blog/how-to-run-a-transparent-company) – 48 clicks
 - [How we made something people want](/blog/making-something-people-want) – 45 clicks

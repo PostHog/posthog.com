@@ -18,12 +18,8 @@ export const useNav = () => {
             name: 'Community',
         },
         {
-            name: 'Topics',
+            name: 'Questions',
             url: '/questions',
-        },
-        {
-            name: 'Latest questions',
-            url: '/community/latest',
         },
         ...(user
             ? [
@@ -38,6 +34,10 @@ export const useNav = () => {
             url: '/roadmap',
         },
         {
+            name: 'WIP',
+            url: '/wip',
+        },
+        {
             name: 'Changelog',
             url: '',
             children: roadmapYears.group
@@ -46,10 +46,6 @@ export const useNav = () => {
                     name: year,
                     url: `/changelog/${year}`,
                 })),
-        },
-        {
-            name: 'Contributors',
-            url: '/contributors',
         },
     ]
 }

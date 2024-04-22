@@ -3,11 +3,14 @@ date: 2021-09-28
 title: How we rebranded PostHog in four weeks - a postmortem
 author:
   - cory-watilo
-featuredImage: ../images/blog/rebrand-postmortem.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/rebrand-postmortem.png
 featuredImageType: full
 tags:
   - Marketing
   - Founders
+crosspost:
+  - Blog
 ---
 We recently completed an entire rebrand of our website. From start to finish, it took less than a month. This sounds like an incredible feat of discipline - and in a way, it was. But the path to success wasn't linear; it took us more than six months to get to this point, with plenty of diversions along the way.
 
@@ -26,7 +29,7 @@ When I joined, PostHog's visual style involved pixel art that was reminiscent of
 
 This led into my first major project: redesigning our homepage. This was the natural place to start, as it was the most visited page, the best place to start updating our messaging, and a great way to set the tone for other pages of the site.
 
-![Space brand - PostHog homepage](../images/blog/brand-postmortem/space-brand-homepage.png)
+![Space brand - PostHog homepage](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/brand-postmortem/space-brand-homepage.png)
 
 We kept the 8-bit style but evolved it to incorporate the idea of PostHog as "the future of analytics" - _which naturally meant we needed rockets, planets, and a space theme!_
 
@@ -44,7 +47,7 @@ But what does this look like when it comes to design? As we were still establish
 
 Our new pricing page introduced a new, futuristic font that we implemented site-wide, as well as a more refined visual style.
 
-![Space brand - PostHog pricing page](../images/blog/brand-postmortem/space-brand-pricing.png)
+![Space brand - PostHog pricing page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/brand-postmortem/space-brand-pricing.png)
  
 But given that we always had new projects to work on, we never went back and updated the original pages. In retrospect, this was a huge failure on my part, as it led to a very inconsistent brand.
 
@@ -62,13 +65,13 @@ There were several factors that led to our rebrand. Our [Graphic Designer, Lotti
 
 This is also where refocusing on self-hosted customers came into play. In a 1:1 with James, he explained what was resonating with prospective customers. I took notes ferociously and created [a wireframe](https://balsamiq.cloud/sd0i9zq/pxvojo4/r0A75).
 
-![New brand - Original wireframe](../images/blog/brand-postmortem/new-brand-wireframe.png)
+![New brand - Original wireframe](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/brand-postmortem/new-brand-wireframe.png)
 
 At the same time, James encouraged exploring a simpler, cleaner aesthetic. As I also wasn't thrilled with the space theme as a long-term look and feel, this conversation gave me the liberty to explore entirely new ideas. 
 
 After a lot of thought (and the "space" to explore ideas), I settled on an early concept with some ideas of what the future of PostHog could look like.
 
-![New brand - Original concept](../images/blog/brand-postmortem/new-brand-concept.png)
+![New brand - Original concept](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/brand-postmortem/new-brand-concept.png)
 
 ## Finally, the rebrand
 
@@ -84,7 +87,7 @@ Our outgoing space-age theme had a dark purple background, but the new style cal
 
 ## Before/after (product page)
 
-![Before and after](../images/blog/brand-postmortem/before-after.png)
+![Before and after](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/brand-postmortem/before-after.png)
 
 Since we use [TailwindCSS](http://tailwindcss.com/) on our website, we leveraged [TailwindUI](https://tailwindui.com/) components where it made sense, so we didn't have to write a bunch of components from scratch.
 
@@ -98,7 +101,7 @@ A huge shout-out goes to Eli and Lottie for their work on what we shipped.
 
 ## The (nearly) final result
 
-![PostHog rebrand - Homepage](../images/blog/brand-postmortem/final-new-brand.png)
+![PostHog rebrand - Homepage](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/brand-postmortem/final-new-brand.png)
 
 And this is just the start! As with everything at PostHog, we still have [a huge roadmap](https://docs.google.com/document/d/16tORGZcfazvWMSONd7MrKqFjh98RJcfDdqxtZfCFrGs/edit?usp=sharing) of things we'd like to accomplish on the website and docs. This is a living, breathing website which will improve over time. If you have feedback on how we can improve the experience of our site, we'd love to hear from you. [Filing an issue](https://github.com/posthog/posthog.com/issues) in our GitHub repo is the best way for us to track feedback.
 

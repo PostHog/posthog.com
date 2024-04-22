@@ -2,9 +2,12 @@
 title: How to do a canary release with feature flags in PostHog
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2023-09-12
-tags: ["feature flags", "persons"]
+tags:
+  - feature flags
+  - persons
 ---
 
 Few things are worse than shipping a new feature, having it unexpectedly break, and then scrambling to fix it. To mitigate problems like this, teams often roll out changes to a subset of users before releasing them to everyone. This is known as a canary release or deployment.
@@ -15,7 +18,7 @@ This tutorial explains what a canary release is, and how to set one up and monit
 
 A canary release or canary deployment is the process of rolling out a new feature to a subset of users before releasing it to a larger group. Developers check the new feature is working without issues on the limited group. They watch for issues and analyze usage metrics to confirm. Once satisfied with tests and analysis, the feature rolls out to a larger group (or everyone).
 
-![Canary release](../images/tutorials/canary-release/canary.png)
+![Canary release](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/canary-release/canary.png)
 
 The name comes from the phrase “canary in a coal mine” which alludes to miners bringing a canary into mines with them. If there were toxic gases, the canary would die and stop chirping, giving an early warning to the miners to get out before they do the same. Testing on a small group of users acts as a canary for issues with the feature, preventing those issues from affecting a larger group.
 
@@ -31,7 +34,7 @@ Beyond a distinct ID, users also need properties or groups if you want to use th
 
 Once you set up PostHog and user identification, you can create the feature flags for the canary release. Go to the [feature flags tab](https://app.posthog.com/feature_flags) in your PostHog instance, add a key, a release condition (like only yourself), and any other details you want.
 
-![Feature flags](../images/tutorials/canary-release/feature-flag.png)
+![Feature flags](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/canary-release/feature-flag.mp4)
 
 Add this flag to your code around the feature you want to canary release. Test that it works for you, and that turning it off works as well. Once this goes well, you can expand the release to your users.
 
@@ -51,7 +54,7 @@ Beyond testing the flag yourself, here is a recommended step-by-step release wit
 
 At PostHog, we do all of these. Our feature flag page contains features at different stages of rollout. For example, when users have specific issues, we might canary release a fix to them before releasing it to others.
 
-![PostHog's feature flags](../images/tutorials/canary-release/posthog-flags.png)
+![PostHog's feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/canary-release/posthog-flags.png)
 
 ## Monitoring a canary release
 
@@ -63,7 +66,7 @@ On top of hearing about issues from users, you can monitor issues in PostHog. Th
 
 You can filter your insights or dashboards by a feature flag to see how the release is progressing. For example, if you are releasing a change to the signup page, it is useful to know if it improves conversion. You can set up a funnel for the conversion, then breakdown by the feature flag name.
 
-![Funnel](../images/tutorials/canary-release/funnel.png)
+![Funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/canary-release/funnel.png)
 
 You can also get session recordings related to feature flags. On the session recording list, filter for sessions including your feature flag. This enables you to get a better idea of the details of how users are interacting with your new feature.
 

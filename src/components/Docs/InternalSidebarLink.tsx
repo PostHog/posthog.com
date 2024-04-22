@@ -15,14 +15,13 @@ export default function InternalSidebarLink({ url, name, depth, onClick, classNa
         <span>
             <Link
                 offset={compact ? -70 : breakpoints.md ? -56 : -108}
-                style={style}
+                style={{ ...style, ...{ paddingLeft: `${(depth || 0) + 1}rem` } }}
                 smooth
                 duration={300}
                 to={url}
-                hashSpy
-                className={`relative block py-1 pl-[calc(1rem_+_${depth}rem)] pr-4 text-primary dark:text-primary-dark hover:bg-accent dark:hover:bg-accent-dark leading-tight font-medium hover:text-primary dark:hover:text-primary-dark cursor-pointer ${className} ${
-                    depth === 0 && 'font-semibold'
-                } ${depth === 2 && 'hidden'}`}
+                className={`relative block py-1 pr-4 text-primary dark:text-primary-dark hover:bg-accent dark:hover:bg-accent-dark leading-tight font-medium hover:text-primary dark:hover:text-primary-dark cursor-pointer ${className} ${
+                    depth === 0 ? 'font-semibold' : ''
+                }`}
                 spy
                 onClick={(e) => onClick && onClick(e)}
                 onSetActive={() => {

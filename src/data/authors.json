@@ -2,16 +2,16 @@
     {
         "handle": "james-hawkins",
         "name": "James Hawkins",
-        "role": "Co-founder/CEO of PostHog",
+        "role": "Co-founder/CEO",
         "image": "../../static/images/authors/james-hawkins-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/james406",
-        "profile_id": 71
+        "profile_id": 27732
     },
     {
         "handle": "mo-shehu",
         "name": "Mo Shehu",
-        "role": "Content Lead",
+        "role": "Content Marketer",
         "image": "../../static/images/authors/mo-shehu-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://linkedin.com/in/shehuphd"
@@ -23,7 +23,16 @@
         "image": "../../static/images/authors/yakko-majuri-posthog.png",
         "link_type": "github",
         "link_url": "https://github.com/yakkomajuri",
-        "profile_id": 56
+        "profile_id": 28694
+    },
+    {
+        "handle": "james-temperton",
+        "name": "James Temperton",
+        "role": "Content Marketer",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/jtemperton",
+        "profile_id": 29278
     },
     {
         "handle": "joe-martin",
@@ -32,7 +41,7 @@
         "image": "../../static/images/authors/joe-martin-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/joemartinwords",
-        "profile_id": 59
+        "profile_id": 29070
     },
     {
         "handle": "michael-matloka",
@@ -41,7 +50,7 @@
         "image": "../../static/images/authors/michael-matloka-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/matlokam",
-        "profile_id": 124
+        "profile_id": 28847
     },
     {
         "handle": "paolodamico",
@@ -50,7 +59,7 @@
         "image": "../../static/images/authors/paolo-damico-posthog.png",
         "link_type": "github",
         "link_url": "https://github.com/paolodamico",
-        "profile_id": 24
+        "profile_id": 27658
     },
     {
         "handle": "marcus-hyett",
@@ -59,7 +68,7 @@
         "image": "../../static/images/authors/marcus-hyett-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/marcus-hyett/",
-        "profile_id": 79
+        "profile_id": 27733
     },
     {
         "handle": "marius-andra",
@@ -68,7 +77,7 @@
         "image": "../../static/images/authors/marius-andra-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/mariusandra/",
-        "profile_id": 1
+        "profile_id": 30202
     },
     {
         "handle": "cory-watilo",
@@ -77,7 +86,7 @@
         "image": "../../static/images/authors/cory-watilo-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/corywatilo/",
-        "profile_id": 2
+        "profile_id": 21981
     },
     {
         "handle": "leggetter",
@@ -94,7 +103,7 @@
         "image": "../../static/images/authors/lottie-coxon-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/charlotte-coxon/",
-        "profile_id": 227
+        "profile_id": 27881
     },
     {
         "handle": "hanna-crombie",
@@ -111,7 +120,7 @@
         "image": "../../static/images/authors/karl-aksel-puulmann-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/karlakselpuulmann/",
-        "profile_id": 73
+        "profile_id": 27710
     },
     {
         "handle": "james-greenhill",
@@ -120,25 +129,25 @@
         "image": "../../static/images/authors/james-greenhill-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/fuziontech",
-        "profile_id": 90
+        "profile_id": 30174
     },
     {
         "handle": "andy-vandervell",
         "name": "Andy Vandervell",
-        "role": "Content Marketer",
+        "role": "Marketing Lead",
         "image": "../../static/images/authors/andy-vandervell-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/andyvandervell/",
-        "profile_id": 62
+        "profile_id": 30208
     },
     {
         "handle": "charles-cook",
         "name": "Charles Cook",
-        "role": "VP of Operations",
+        "role": "Generic Exec Person",
         "image": "../../static/images/authors/charles-cook-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/charlescook1/",
-        "profile_id": 254
+        "profile_id": 28625
     },
     {
         "handle": "eli-kinsey",
@@ -148,7 +157,7 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/eli-kinsey/",
         "slack_username": "eli",
-        "profile_id": 3
+        "profile_id": 28804
     },
     {
         "handle": "avi-press",
@@ -165,7 +174,7 @@
         "image": "../../static/images/authors/neil-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/neilkakkar",
-        "profile_id": 68
+        "profile_id": 28695
     },
     {
         "handle": "rick-marron",
@@ -174,7 +183,7 @@
         "image": "../../static/images/authors/rick-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/Rick_Marron",
-        "profile_id": 50
+        "profile_id": 27684
     },
     {
         "handle": "alex-kim",
@@ -183,7 +192,7 @@
         "image": "../../static/images/authors/alex-kim-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/alex-g-kim/",
-        "profile_id": 133
+        "profile_id": 27755
     },
     {
         "handle": "harry-waye",
@@ -192,7 +201,7 @@
         "image": "../../static/images/authors/harry-waye-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/harrywaye",
-        "profile_id": 719
+        "profile_id": 28623
     },
     {
         "handle": "guido-iaquinti",
@@ -201,16 +210,16 @@
         "image": "../../static/images/authors/guido-iaquinti-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/guidoiaquinti",
-        "profile_id": 58
+        "profile_id": 27691
     },
     {
         "handle": "simon-fisher",
         "name": "Simon Fisher",
-        "role": "Customer Success Lead",
+        "role": "Sales & CS Lead",
         "image": "../../static/images/authors/simon-fisher.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/simfish85/",
-        "profile_id": 49
+        "profile_id": 28895
     },
     {
         "handle": "colin-wren",
@@ -227,16 +236,16 @@
         "image": "../../static/images/authors/contributor-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/lsmith/",
-        "profile_id": 130
+        "profile_id": 27752
     },
     {
         "handle": "tim-glaser",
         "name": "Tim Glaser",
-        "role": "Co-founder/CTO of PostHog",
+        "role": "Co-founder/CTO",
         "image": "../../static/images/authors/tim-glaser.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/timgl/",
-        "profile_id": 108
+        "profile_id": 27730
     },
     {
         "handle": "noah-brier",
@@ -285,7 +294,7 @@
         "image": "../../static/images/authors/grace.jpg",
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/withgracetoo/",
-        "profile_id": 718
+        "profile_id": 28624
     },
     {
         "handle": "patterns",
@@ -302,13 +311,13 @@
         "image": "../../static/images/authors/ian-vanagas-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/IanVanagas",
-        "profile_id": 269
+        "profile_id": 29296
     },
     {
         "handle": "laudspeaker",
         "name": "Abe Basu",
         "role": "CEO of Laudspeaker",
-        "image": "../../contents/apps/thumbnails/laudspeaker-connector.png",
+        "image": "../../static/images/authors/laudspeaker-connector.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/laudspeaker"
     },
@@ -319,34 +328,34 @@
         "image": "../../static/images/authors/luke.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/lukeharries_",
-        "profile_id": 222
+        "profile_id": 27856
     },
     {
         "handle": "raquel-m-smith",
         "name": "Raquel M Smith",
-        "role": "Product Engineer - Growth",
+        "role": "Growth Lead",
         "image": "../../static/images/authors/raquel-m-smith-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/raquel_m_smith",
-        "profile_id": 491
+        "profile_id": 28693
     },
     {
         "handle": "annika-schmid",
         "name": "Annika Schmid",
         "role": "Product Manager",
-        "image": "../../contents/images/team/annika.png",
+        "image": "../../static/images/authors/annika-schmid-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/annikaze_",
-        "profile_id": 221
+        "profile_id": 28619
     },
     {
         "handle": "lior-neu-ner",
         "name": "Lior Neu-ner",
         "role": "Technical Content Marketer",
-        "image": "../../contents/images/team/lior.png",
+        "image": "../../static/images/authors/lior-neu-ner-posthog.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/liornn",
-        "profile_id": 684
+        "profile_id": 28754
     },
     {
         "handle": "anna-debenham",
@@ -360,6 +369,6 @@
         "handle": "tomas-farias",
         "name": "Tomás Farías Santana",
         "role": "Software Engineer",
-        "image": "../../contents/images/team/tomas.png"
+        "image": "../../static/images/authors/tomas-farias-posthog.png"
     }
 ]

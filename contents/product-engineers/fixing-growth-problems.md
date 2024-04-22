@@ -1,16 +1,19 @@
 ---
 title: The most common growth team failure modes (and how to fix them)
 date: 2023-10-17
-author: ["lior-neu-ner"]
-featuredImage: ../images/blog/athlete-hog.jpeg
+author:
+  - lior-neu-ner
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/athlete-hog.jpeg
 featuredImageType: full
-tags: 
+tags:
   - Product engineers
   - Founders
   - Growth engineering
   - Growth
 crosspost:
-  - Founders  
+  - Founders
+  - Blog
 ---
 
 Stuck metrics. Missed KPIs. Burnt out engineers. These are the telltale signs of a growth team in crisis. But how do you fix it?
@@ -53,11 +56,11 @@ Once you have shortlisted the ideas you want to work on, the next step is to **e
 
 Then, use this dollar amount together with your effort estimates to calculate a prioritization score:
 
-![How to calculate your prioritization score](../images/blog/fixing-growth-problems/how-to-calcluate-prioritization-score.png)
+![How to calculate your prioritization score](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/fixing-growth-problems/how-to-calcluate-prioritization-score.png)
 
 Because you'll have a clearer idea of what to expect from your experiments, you'll prioritize the ones more likely to win. The table below shows an example:
 
-![Example of prioritized projects table](../images/blog/fixing-growth-problems/prioritization-table.png)
+![Example of prioritized projects table](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/fixing-growth-problems/prioritization-table.png)
 
 Alexey says that **one of their biggest wins came from following this approach**:
 

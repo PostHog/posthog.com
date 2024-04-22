@@ -1,0 +1,112 @@
+---
+title: Organizations and projects
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: partial
+    enterprise: full
+
+    features:
+        multipleOrgs:
+            openSource: false
+            free: true
+            selfServe: true
+            enterprise: true
+        multipleProjects:
+            free: false
+            selfServe: true
+            enterprise: true
+        accessLevels: true
+        privateProjects:
+            free: false
+            selfServe: false
+            enterprise: true
+---
+
+> Multiple organizations and projects aren't available on open source hobby deployments.
+
+## Organizations
+
+An organization is the highest abstraction level within a PostHog instance. It's made up of projects (see more on them [below](#projects)) and members.
+
+Most commonly a PostHog organization represents a real-world company or other type of isolated grouping.
+
+To switch between organizations, to open the current organization's settings, or to create a new organization, use the account dropdown on the right of the top bar.
+
+PostHog Cloud users can create, manage, and join organizations without limits.
+
+### Notifications
+
+By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
+
+If you'd rather not get such notifications, you can disable them in the "Notification Preferences" section of organization settings.
+
+### Adding new members
+
+Any organization member can create organization invites. Such an invite is valid **for 3 days** after creation and **only for the specified email**.
+In an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud) the invite is sent automatically to the specified email. If the PostHog instance can't send emails, remember to share the invite link yourself.
+
+If there's no account associated with that email, the invited person will have to create an account. Otherwise, they'll be able to join with their existing account.
+
+Newly-joined users get the basic Member access level.
+
+## Projects
+
+A project is a silo of data within PostHog. All data belongs to a single project and all queries are project-specific.
+
+Every project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/integrate), as well as to connect to our [API](/docs/api). You can always regenerate this token, but keep in mind that the old one will be immediately revoked.
+
+Every new organization (including the one created for you on account creation) comes with a fresh project named "Default Project". You can rename or delete it as you see fit.
+
+To switch between projects, navigate to project settings, or create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
+
+### How to organize projects
+
+For most companies, we recommend creating **three projects**:
+1. Local Development - when you're running the app on your own device
+2. Staging - when you're running your app on a staging server
+3. Production - for all your production data (e.g. your live website/app)
+
+This way you can test out analytics in development and staging environments, while keeping that test data separate from production.
+
+We also **strongly recommend** keeping your apps and marketing website on the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place.
+
+It's best to use separate projects for:
+- Apps that are entirely separate products with unlinked authentication systems
+- Admin apps that aren't customer-facing products
+- Internal websites and services
+
+## Permissions
+
+By default all organization members have access to all its projects. Their permissions are then dictated by their organization-wide access level.
+
+This is best for collaboration, but see [private projects](#private-projects) if you require more granular control.
+
+### Access levels
+
+There are three access levels in PostHog: Member, Administrator, and Owner. An organization must have one and only one Owner.
+
+|                                                                                       | Member (base level) | Administrator | Owner |
+| ------------------------------------------------------------------------------------- | ------------------- | ------------- | ----- |
+| Viewing and querying project data                                                     | <span className="text-green text-lg">✔</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Inviting new members                                                                  | <span className="text-green text-lg">✔</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Billing management                                                                    | <span className="text-green text-lg">✔</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Project creation and deletion                                                         | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Project settings management (incl. [project-specific memberships](#private-projects)) | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Organization settings management (incl. memberships)                                  | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-green text-lg">✔</span>    |
+| Leaving the organization                                                              | <span className="text-green text-lg">✔</span>                  | <span className="text-green text-lg">✔</span>            | <span className="text-red text-lg">✖</span>    |
+| Transferring ownership                                                                | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
+| Organization deletion                                                                 | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
+
+Access levels can be viewed and changed in the Members section of organization settings.
+
+### Private projects
+
+<FeatureAvailability availability={_frontmatter.availability.features.privateProjects} />
+
+Private projects let you control exactly who in your organization can see it. Projects with this setting enabled become **private by default and invite-only** except for Administrators and the Owner, who get access implicitly. Private projects are invisible to anyone who doesn't have access.
+
+Any Administrator or Owner can make a project private at any time in the Access Control section of project settings.
+
+Regular organization Members can be made project Administrators, giving them elevated permissions just inside the project.

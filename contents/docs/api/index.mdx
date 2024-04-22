@@ -13,7 +13,7 @@ The API is available for all users and instances. It contains two types of endpo
 
 2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** used for creating, updating, or deleting nearly all other non-event data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with your personal API key. 
 
-> You must make API requests to the correct domain. These are `https://app.posthog.com` for US Cloud, `https://eu.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
+> You must make API requests to the correct domain. These are `https://us.posthog.com` for US Cloud, `https://eu.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
 
 ## Private endpoint authentication
 
@@ -30,6 +30,8 @@ There are separate limits for different kinds of resources.
 - For all analytics endpoints (such as calculating insights, retrieving persons, or retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
 
 - The [HogQL query](/docs/hogql#api-access) endpoint (`/api/project/:id/query`) has a rate limit of `120/hour`.
+
+- For [feature flag local evaluation](/docs/feature-flags/local-evaluation) (which is enabled in SDKs when you input a personal API key), the rate limit is `600/minute`.
 
 - For the rest of the create, read, update, and delete endpoints, the rate limits are `480/minute` and `4800/hour`.
 

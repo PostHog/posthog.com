@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog.com is built and maintained in-house by the [Website & Docs team](/handbook/small-teams/website-docs).
+PostHog.com is built and maintained in-house by the [Website & Docs team](/teams/website-docs).
 
 | Service 	| Purpose 	|
 |---	|---	|
@@ -16,7 +16,7 @@ PostHog.com is built and maintained in-house by the [Website & Docs team](/handb
 | Strapi 	| Headless CMS 	|
 | PostHog 	| Analytics, feature flags 	|
 
-![Diagram of PostHog.com](../../../images/docs/contribute/website-diagram.png)
+![Diagram of PostHog.com](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/website-diagram.png)
 
 Website content is stored in two places:
 

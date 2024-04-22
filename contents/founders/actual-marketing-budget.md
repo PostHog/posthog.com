@@ -3,18 +3,21 @@ date: 2023-11-28
 title: How we spend our marketing budget at PostHog (with actual $ figures)
 author:
   - charles-cook
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 tags:
   - Founders
   - Marketing
+crosspost:
+  - Blog
 ---
 
 It really annoys me that no one is willing to talk about how much they _actually_ spend on marketing in startup-land. 
 
 When I’m trying to figure out what a sensible amount is for PostHog to spend, all I can find are articles that talk very generally about marketing budgets in terms of things like % of revenue or general benchmarks. Which is nice, but [the ranges given are wild](https://www.datadab.com/blog/how-much-saas-companies-spend-on-marketing/) and I want _cold, hard numbers_. 
 
-How much does a typical startup [like PostHog](/about) spend on marketing? And why doesn’t anyone talk about it?
+How much does a typical startup [like PostHog](/about) spend on [B2B marketing](/newsletter/b2b-startup-marketing-strategy). And why doesn’t anyone talk about it?
 
 “But Charles, you naive idiot” asked nobody, “surely competitors will use this information against you?”
 
@@ -62,7 +65,7 @@ Our typical monthly marketing spend looks like this:
 
 - We do all of our content in-house. We have very occasionally worked with freelancers in the past, but we haven’t done this for a long time.
 
-- Technically our frontend developer is not part of the marketing team ([Website & Docs](/handbook/small-teams/website-docs) is its own team at PostHog), but I appreciate at most companies your website will be considered a marketing expense.
+- Technically our frontend developer is not part of the marketing team ([Website & Docs](/teams/website-docs) is its own team at PostHog), but I appreciate at most companies your website will be considered a marketing expense.
 
 - The 50-50 split is coincidental. 
 

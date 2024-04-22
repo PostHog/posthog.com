@@ -20,7 +20,7 @@ To bootstrap PostHog with feature flags, use the `bootstrap` key in the initiali
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
         featureFlags: {
             'flag-1': true,
@@ -38,7 +38,8 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
-            host: '<ph_instance_address>',
+            // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+            host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
             bootstrap: {
                 featureFlags: {
                     'flag-1': true,
@@ -73,13 +74,15 @@ The `bootstrap` object has two optional arguments: `distinctID` and `isIdentifie
 
 - `distinctID` enables you to set distinct ID of the user during PostHog's initialization. This is useful when you want to ensure the distinct ID on your frontend is the same as the distinct ID that you called `getAllFlags()` with on your server. It is **strongly recommended** to include it.
 
+> **Note:** The only case where it doesn't make sense to include the distinctID is when you're bootstrapping identified users only, and you call identify for these users right on load. Here, if you pass in the distinctID to bootstrap, identify will not connect your existing anonymous ID, since it's replaced by the bootstrapped ID.
+
 - `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again.
 
 <MultiLanguage>
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
         distinctID: 'distinct_id_of_your_user',
         isIdentifiedID: true,
@@ -99,7 +102,8 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
-            host: '<ph_instance_address>',
+            // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+            host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
             bootstrap: {
                 distinctID: 'distinct_id_of_your_user',
                 isIdentifiedID: true,

@@ -38,6 +38,7 @@ There is no limit on the number of events you can send in a batch, but the entir
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
+  "historical_migration": false,
   "batch": [
     {
       "event": "batched_event_name_1",
@@ -51,6 +52,16 @@ curl -v -L --header "Content-Type: application/json" -d '{
   ]
 }' https://app.posthog.com/batch/ 
 ```
+
+The `historical_migration` field is optional. For realtime events, it can be left out or set to `false`.
+
+#### Historical migrations
+
+The `historical_migration` field must be set to `true` when running [migrations](/docs/migrate). This ensures that events are processed in order without triggering our spike detection systems.
+
+import ApiMigration from "../migrate/_snippets/api-migration.mdx"
+
+<ApiMigration />
 
 ### Alias
 
@@ -115,7 +126,7 @@ Updates user information. Read more in our [identify docs](/docs/product-analyti
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
-  "timestamp": "2020-08-16 09:03:11.913767",
+  "timestamp": "2020-08-16T09:03:11.913767",
   "properties": {
     "$set": {},
   },

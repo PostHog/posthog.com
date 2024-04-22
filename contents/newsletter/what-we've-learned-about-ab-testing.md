@@ -1,13 +1,16 @@
 ---
 date: 2023-08-24
-title: "10 things we've learned about A/B testing for startups"
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/feature-images/ab-test.png
+title: 10 things we've learned about A/B testing for startups
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/ab-test.png
 featuredImageType: full
 tags:
   - AB testing
 crosspost:
   - Product engineers
+  - Blog
 ---
 
 Every A/B test has four components:
@@ -101,7 +104,7 @@ Statistical significance is generally found by calculating how difficult it woul
 
 For example, a p-value of 0.05 means that if the null hypothesis is true, there is a 5% chance of observing the data or more extreme results purely due to random chance, and you can be 95% confident in your change.
 
-![p-value](../images/newsletter/ab-testing/p-value-explained.png)
+![p-value](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/ab-testing/p-value-explained.png)
 
 Remember: lack of statistical significance does not mean your test is a failure. Other reasons for “failure” include not gathering enough data, too small (or large) a change, or aggregate results hiding significance in individual properties.
 
@@ -117,7 +120,7 @@ It’s tempting to end A/B tests when you first get results. This is the “peek
 
 But, as [Airbnb found out](/product-engineers/ab-testing-examples#4-airbnb-interleaving-dynamic-p-values), peeking too early isn’t the only way to get false positives. They found a pattern of hitting significance, and then converging back to insignificant, neutral results in their experiments.
 
-![false positives](../images/newsletter/ab-testing/test-improvement.png)
+![false positives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/ab-testing/test-improvement.png)
 
 To fix this, they calculated a dynamic p-value curve using past experiments, which started at 0 and then curved up towards 0.05 on day 30. This helped them determine whether an early result was worth investigating.
 

@@ -2,9 +2,12 @@
 title: How to connect Patterns and PostHog
 sidebar: Docs
 showTitle: true
-author: ['patterns']
+author:
+  - patterns
 date: 2022-09-13
-tags: ["apps", 'cdp']
+tags:
+  - apps
+  - cdp
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕
@@ -25,14 +28,14 @@ To install and setup the Patterns Connector, follow the steps below...
 2. Add a webhook node to your graph
 3. Copy the webhook URL from the sidebar
 4. Log in to your PostHog instance
-5. Click 'Apps' on the left-hand tool bar
+5.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 6. Search for 'Patterns'
 7. Select the app, press 'Install', then select the blue gear icon to begin configuration
 8. Paste the URL in "Patterns Webhook URL" during app configuration.
 
 Alternatively, you can install the connector via [the GitHub repo](https://github.com/PostHog/posthog-patterns-app). 
 
-![PostHog and Patterns](../images/docs/apps/patterns/lead-scoring.png)
+![PostHog and Patterns](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/patterns/lead-scoring.png)
 
 > Here is [an example Patterns app you can clone](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/nffx8k2ox23r0h5i6f6o/3evx4hiottnqeb0229ig?view=graph) that can be used to enrich, score, and prioritize new leads to your website —- this is common for optimizing a customer conversion funnel. 
 
@@ -40,7 +43,7 @@ Alternatively, you can install the connector via [the GitHub repo](https://githu
 
 The PostHog data extractor is an API integration configured in Patterns. You will need a [PostHog Personal API key](https://posthog.com/docs/api), and to have configured the Import PostHog Events component in Patterns. 
 
-![Patterns activity schema](../images/docs/apps/patterns/activity-schema.png)
+![Patterns activity schema](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/apps/patterns/activity-schema.png)
 
 Extracted data from PostHog can be used in Patterns for further analytics and in data pipelines via pre-built apps and activity schema. An activity schema is a single time series data structure, modeled as a table in your data warehouse, that describes events occurring within your business.
 

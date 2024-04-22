@@ -6,7 +6,7 @@ Look up the latest version in [com.posthog.java](https://search.maven.org/artifa
 
 All you need to do is add the `posthog` module to your `build.gradle`:
 
-```gradle_groovy
+```gradle_kotlin file=build.gradle
 dependencies {
   implementation 'com.posthog.java:posthog:1.+'
 }
@@ -35,7 +35,7 @@ import com.posthog.java.PostHog;
 
 class Sample {
   private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
-  private static final String POSTHOG_HOST = "<ph_instance_address>";
+  private static final String POSTHOG_HOST = "<ph_client_api_host>";
 
   public static void main(String args[]) {
     PostHog posthog = new PostHog.Builder(POSTHOG_API_KEY).host(POSTHOG_HOST).build();

@@ -3,15 +3,16 @@ title: JavaScript Web
 sidebarTitle: JavaScript Web
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-js
-icon: ../../../images/docs/integrate/js.svg
+github: 'https://github.com/PostHog/posthog-js'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: true
-    sessionRecording: true
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 > **Note:** This doc refers to our [posthog-js](https://github.com/PostHog/posthog-js) library for use on the browser. For server-side JavaScript, see our [Node SDK](/docs/libraries/node).
@@ -342,9 +343,110 @@ if (posthog.isFeatureEnabled('new-groups-feature')) {
 
 To check flag status for a different group, first switch the active group by calling `posthog.group()`.
 
+## Surveys
+
+[Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [targeting](/docs/surveys/creating-surveys#targeting) you set up.
+
+To disable loading surveys in a specific client, you can set the `disable_surveys` [config option](#config).
+
+Surveys using the **API** presentation enable you to implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
+
+To implement **API** surveys, start by fetching active surveys for a user using either of the methods below:
+
+```js-web
+// Fetch enabled surveys for the current user
+posthog.getActiveMatchingSurveys(callback, forceReload) 
+
+// Fetch all surveys
+posthog.getSurveys(callback, forceReload)
+```
+
+The response returns an array of survey objects and is cached by default. To force a reload, pass `true` as the `forceReload` argument.
+
+The survey objects look like this:
+
+```json
+[{
+  "id": "your_survey_id",
+  "name": "Your survey name",
+  "description": "Metadata describing your survey",
+  "type": "api", // either "api", "popover", or "widget"
+  "linked_flag_key": null, // linked feature flag key, if any.
+  "targeting_flag_key": "your_survey_targeting_flag_key",
+  "questions": [
+    {
+      "type": "single_choice",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "question": "Are you enjoying PostHog?"
+    }
+  ],
+  "conditions": null,
+  "start_date": "2023-09-19T13:10:49.505000Z",
+  "end_date": null
+}]
+```
+
+### Capturing survey events
+
+To display survey results in PostHog, you need to capture 3 types of events:
+
+```js-web
+// 1. When a user is shown a survey
+posthog.capture("survey shown", {
+    $survey_id: survey.id // required
+})
+
+// 2. When a user has dismissed a survey
+posthog.capture("survey dismissed", {
+    $survey_id: survey.id // required
+})
+
+// 3. When a user has responded to a survey
+posthog.capture("survey sent", {
+    $survey_id: survey.id, // required
+    $survey_response: survey_response // required. `survey_response` must be a text value.
+    // Convert numbers to text e.g. 8 should be converted "8".
+    // For multiple choice select surveys, `survey_response` must be an array of values with the selected choices.
+    // e.g., $survey_response: ["response_1", "response_2"]
+})
+```
+
+## Session replay
+
+To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
+
+For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can set the `disable_session_recording` [config option](#config) and use the following methods:
+
+```js-web
+// Turns session recording on
+posthog.startSessionRecording()
+
+// Turns session recording off
+posthog.stopSessionRecording()
+
+// Check if session recording is currently running
+posthog.sessionRecordingStarted()
+```
+
+To get the playback URL of the current session replay, you can use the following method:
+
+```js-web
+posthog.get_session_replay_url(
+    { withTimestamp: true, timestampLookBack: 30 }
+)
+```
+
+It has two optional parameters:
+
+-  `withTimestamp` (default: `false`): When set to `true`, the URL includes a timestamp that takes you to the session at the time of the event.
+-  `timestampLookBack` (default: `10`): The number of seconds back the timestamp links to.
+
 ## Persistence
 
-In order for PostHog to work optimally, we require storing a small amount of information about the user on the user's browser. This ensures that if the user navigates away, and comes back to your site at a later time, we will still identify them properly. We store the following information in the user's browser:
+For PostHog to work optimally, we store small amount of information about the user on the user's browser. This ensures we identify users properly if they navigates away from your site and come back later. We store the following information in the user's browser:
 
 -   User's ID
 -   Session ID & Device ID
@@ -352,22 +454,36 @@ In order for PostHog to work optimally, we require storing a small amount of inf
 -   Any super properties you have defined.
 -   Some PostHog configuration options (e.g. whether session recording is enabled)
 
-By default we store all this information in a `cookie`, which means that PostHog will still be able to identify your users even across subdomains. By default, this cookie is set to expire after `365` days.
+By default, we store all this information in a `cookie`, which means PostHog can identify your users across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
 
-If you would like to change how PostHog stores this information, you can do so with the `persistence` parameter.
+If you want to change how PostHog stores this information, you can do so with the `persistence` configuration option:
 
--   `persistence: "cookie"` (default). Everything is stored in a cookie.
--   `persistence: "localStorage+cookie"`. User's distinct ID is stored in a cookie and everything else is stored in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">localStorage</a>.
--   `persistence: "localStorage"`. Everything is stored in localStorage.
--   `persistence: "sessionStorage"`. Everything is stored in sessionStorage.
--   `persistence: "memory"`. Stores in page memory, which means data is only persisted for the duration of the page view.
+- `persistence: "localStorage+cookie"` (default): Limited things are stored in the cookie such as the distinctID and the sessionID, and everything else in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a>.
 
-As a note, due to the size limitation of cookies you may run into `431 Request Header Fields Too Large` errors (e.g. if you have a lot of feature flags). In that case, use `localStorage+cookie`.
+- `persistence: "cookie"` : Stores all data in a cookie.
 
-> **Note: ** Please be aware that localStorage and sessionStorage can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider the <code>cookie</code> option or make sure to set all super properties across each subdomain.
+- `persistence: "localStorage"`: Stores everything in `localStorage`.
 
-If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only, or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config.
-**Warning:** Remember to call `posthog.identify` every time your app loads or every page refresh will be treated as a different user.
+- `persistence: "sessionStorage"`: Stores everything in `sessionStorage`.
+
+- `persistence: "memory"`: Stores everything in page memory, which means data is only persisted for the duration of the page view.
+
+To change `persistence` values without reinitializing PostHog, you can use the `posthog.set_config()` method. This enables you to switch from memory to cookies to better comply with privacy regulations.
+
+```js-web
+const handleCookieConsent = (consent) => {
+    posthog.set_config({ persistence: consent === 'yes' ? 'localStorage+cookie' : 'memory' });
+    localStorage.setItem('cookie_consent', consent);
+};
+```
+
+### Persistence caveats
+
+- Be aware that `localStorage` and `sessionStorage` can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider a `cookie` option or make sure to set all super properties across each subdomain.
+
+- Due to the size limitation of cookies you may run into `431 Request Header Fields Too Large` errors (e.g. if you have a lot of feature flags). In that case, use `localStorage+cookie`.
+
+- If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config. If you do this, remember to call [`posthog.identify`](#identifying-users) **every time** your app loads. If you don't, every page refresh is treated as a new and different user.
 
 ## Config
 
@@ -377,7 +493,7 @@ To configure these options, pass them as an object to the `posthog.init` call, l
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     loaded: function (posthog) {
         posthog.identify('[user unique id]')
     },
@@ -400,14 +516,16 @@ Some of the most relevant options are:
 | `capture_pageleave`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if PostHog should automatically capture pageleave events.                                                            |
 | `cross_subdomain_cookie`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if cookie should be set on the top level domain (example.com). If PostHog-js is loaded on a subdomain (test.example.com), _and_ `cross_subdomain_cookie` is set to false, it'll set the cookie on the subdomain only (test.example.com).                                                           |
 | `disable_persistence`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                 | Disable persisting user data across pages. This will disable cookies, session storage and local storage.                       |
+| `disable_surveys`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                           | Determines if surveys script should load which controls whether they show up for users, and whether requests for API surveys return valid data  |
 | `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                           | Determines if users should be opted out of session recording.                                                                  |
 | `enable_recording_console_log`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if console logs should be recorded as part of the session recording. [More information](/docs/session-replay/manual#console-logs-recording).                                               |
 | `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`                                                                                                                    | A function to be called once the PostHog scripts have loaded successfully.                                                     |
 | `mask_all_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                       | Prevent PostHog autocapture from capturing any text from your elements.                                                        |
 | `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                         | Prevent PostHog autocapture from capturing any attributes from your elements.                                                  |
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
+| `opt_out_persistence_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of browser data storage by this PostHog instance by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
 | `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
-| `property_blacklist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                       | A list of properties that should never be sent with `capture` calls.                                                           |
+| `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                        | A list of properties that should never be sent with `capture` calls.                                                           |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                             | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
@@ -421,6 +539,7 @@ In this section we describe some additional details on advanced configuration av
 | `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.     |
 | `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will keep `/decide` running, but without any feature flag requests     |
 | `advanced_disable_feature_flags_on_first_load`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Stops from firing feature flag requests on first page load. Only requests feature flags when user identity or properties are updated, or you manually request for flags to be loaded.  |
+| `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000` | Sets timeout for fetching feature flags  |
 | `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`          | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
 | `custom_campaign_params` <br/><br/>**Type:** Array<br/>**Default:** `[]`      | List of query params to be automatically captured (see [UTM Segmentation](/docs/data/utm-segmentation) ) |
 

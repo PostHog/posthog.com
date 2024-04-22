@@ -194,7 +194,7 @@ export default function NewPost({ id, onSubmit, ...other }: { id?: number; onSub
                     {id ? 'Update' : 'Post'}
                 </CallToAction>
             </form>
-            <div className="pl-8 ml-8 border-l border-border dark:border-dark border-dashed py-12 h-full">
+            <div className="pl-8 ml-8 border-l border-border dark:border-dark py-12 h-full">
                 <Post
                     transformImageUri={(fakeImagePath) => {
                         const objectURL = values.images.find(

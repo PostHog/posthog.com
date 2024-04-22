@@ -211,7 +211,7 @@ export default function RichText({
                         onPaste={handlePaste}
                         disabled={imageLoading}
                         autoFocus={autoFocus}
-                        className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
+                        className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 pb-8 resize-none w-full text-black outline-none focus:ring-0"
                         onBlur={(e) => e.preventDefault()}
                         name="body"
                         value={value}
@@ -228,10 +228,15 @@ export default function RichText({
                             <p className="m-0 font-semibold">Drop image here</p>
                         </div>
                     )}
+                    <span className="bg-white dark:bg-accent-dark absolute right-4 bottom-2 px-1 rounded-sm">
+                        <span className="text-xs opacity-70">
+                            {values.body.length} / {maxLength}
+                        </span>
+                    </span>
                 </div>
             )}
             <div className="flex items-center justify-between py-1">
-                <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full">
+                <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full !mb-0">
                     {buttons.map((button, index) => {
                         return (
                             <li key={index}>
@@ -330,7 +335,7 @@ export default function RichText({
             {!value && (
                 <div className="absolute top-4 right-4">
                     <a
-                        className="text-primary/30 hover:text-primary/50 dark:text-primary-dark/30 dark:hover:text-primary-dark/50"
+                        className="!text-primary/30 hover:!text-primary/50 dark:!text-primary-dark/30 dark:hover:!text-primary-dark/50"
                         href="https://www.markdownguide.org/cheat-sheet/"
                         target="_blank"
                         rel="noreferrer"

@@ -4,7 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy. To do so, add a `rewrites()` function to your `next.config.js` file: 
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
+If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy. To do so, add a `rewrites()` function and the `skipTrailingSlashRedirect` option to your `next.config.js` file: 
 
 ```js
 // next.config.js
@@ -12,11 +16,17 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/ingest/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      {
         source: "/ingest/:path*",
-        destination: "https://app.posthog.com/:path*",
+        destination: "https://us.i.posthog.com/:path*",
       },
     ];
   },
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true, 
 }
 module.exports = nextConfig
 ```
@@ -26,7 +36,7 @@ Then configure the PostHog client to send requests via your rewrite.
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   api_host: "https://your-host.com/ingest"
-  ui_host: 'https://app.posthog.com' // or 'https://eu.posthog.com' if your PostHog is hosted in Europe
+  ui_host: 'https://us.i.posthog.com' // or 'https://eu.i.posthog.com' if your PostHog is hosted in Europe
 })
 ```
 

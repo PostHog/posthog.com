@@ -3,15 +3,16 @@ title: Node.js
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-js-lite/tree/master/posthog-node
-icon: ../../../images/docs/integrate/nodejs.svg
+github: 'https://github.com/PostHog/posthog-js-lite/tree/master/posthog-node'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: false
-    sessionRecording: false
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
@@ -35,7 +36,7 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                         | `true`                    |
 
-> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdownAsync()` at the end to flush and send all pending events.
+> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 
 
 ## Capturing events
@@ -186,9 +187,7 @@ You should call `shutdown` on your program's exit to exit cleanly:
 
 ```node
 // Stop pending pollers and flush any remaining events
-client.shutdown()
-// or
-await client.shutdownAsync()
+await client.shutdown()
 ```
 
 ## Debugging and exceptions
@@ -212,7 +211,7 @@ client.debug()
 
 ## Using in a short-lived process like AWS Lambda
 
-PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method .shutdownAsync which can be awaited and ensures the queued events are all flushed to the API.
+PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method `shutdown()` which can be awaited and ensures the queued events are all flushed to the API.
 
 For example:
 
@@ -231,7 +230,41 @@ export const handler() {
   // So far 2 events are queued but not sent
 
   // Calling shutdown, flushed the queue but batched into 1 API call for maximum efficiency
-  await posthog.shutdownAsync()
+  await client.shutdown()
+}
+```
+
+## Sentry integration
+
+When using [Sentry in Node.js](https://docs.sentry.io/platforms/node/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
+
+### Example implementation
+
+See the [`posthog-node`](https://github.com/PostHog/posthog-js-lite/blob/main/examples/example-node/server.ts) project for a complete example.
+
+```node
+import { PostHog, PostHogSentryIntegration } from 'posthog-node'
+import * as Sentry from '@sentry/node'
+
+const posthog = new PostHog(PH_API_KEY, { host: PH_HOST })
+
+Sentry.init({
+  dsn: 'https://examplePublicKey@o0.ingest.sentry.io/0',
+  integrations: [new PostHogSentryIntegration(posthog)],
+})
+
+// Set the PostHog distinctId for the relevant session either globally for all events
+Sentry.setTag(PostHogSentryIntegration.POSTHOG_ID_TAG, 'my-nodejs-service');
+
+// or contextually for example within an api request
+try {
+    myFunction()
+} catch(err) {
+  Sentry.captureException(err, {
+    tags: {
+      [PostHogSentryIntegration.POSTHOG_ID_TAG]: request.user.id,
+    },
+  })
 }
 ```
 

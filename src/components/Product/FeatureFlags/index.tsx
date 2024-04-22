@@ -48,12 +48,12 @@ import Plans from 'components/Pricing/Plans'
 const product = {
     slug: 'feature-flags',
     lowercase: 'feature flags',
-    capitalized: 'Feature Flags',
+    capitalized: 'Feature flags',
     freeTier: '1,000,000 requests',
 }
 
 const team = 'Feature Success'
-const teamSlug = '/handbook/small-teams/feature-success'
+const teamSlug = '/teams/feature-success'
 
 const featuresPerRow = 3
 const features = [
@@ -167,6 +167,11 @@ const faqs = [
             "The easiest way is to sign up for the Free plan - no credit card required. You'll get an accurate volume projection after just a few days.",
     },
     {
+        question: 'How can I manage cost at high volume?',
+        children:
+            "You can reduce the number of requests to PostHog with <a href='https://posthog.com/docs/feature-flags/local-evaluation'>local evaluation</a>, which stores flag definitions on your server and only polls PostHog periodically.",
+    },
+    {
         question: 'How long do you retain event data?',
         children:
             'Data is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
@@ -221,7 +226,7 @@ const comparison = [
             Optimizely: false,
             Flagsmith: false,
             GrowthBook: false,
-            PostHog: false,
+            PostHog: true,
         },
     },
     {
@@ -320,7 +325,7 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
-        product: 'Product Analytics',
+        product: 'Product analytics',
         description:
             "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
         url: '/product-analytics',
@@ -333,14 +338,14 @@ const PairsWithArray = [
     },
     {
         icon: <IconRewindPlay />,
-        product: 'Session Replay',
+        product: 'Session replay',
         description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         url: '/session-replay',
     },
 ]
 
 export const ProductFeatureFlags = () => {
-    const { phantom, contra, speakeasy, carvertical } = useStaticQuery(graphql`
+    const { phantom, contra, elevenlabs, carvertical } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -361,7 +366,7 @@ export const ProductFeatureFlags = () => {
             contra: mdx(slug: { eq: "customers/contra" }) {
                 ...ProductCustomerFragment
             }
-            speakeasy: mdx(slug: { eq: "customers/speakeasy" }) {
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
             carvertical: mdx(slug: { eq: "customers/carvertical" }) {
@@ -373,7 +378,7 @@ export const ProductFeatureFlags = () => {
     return (
         <>
             <SEO
-                title="Feature Flags - PostHog"
+                title="Feature flags - PostHog"
                 description="Safely roll out features to specific users or groups."
                 image={`/images/og/feature-flags.jpg`}
             />
@@ -383,7 +388,7 @@ export const ProductFeatureFlags = () => {
                     icon={<IconToggle />}
                     product={product.capitalized}
                     title='<span class="text-red dark:text-yellow">Safely roll out features</span> to specific users or groups'
-                    description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
+                    description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
                 />
 
                 <div className="text-center">
@@ -399,21 +404,21 @@ export const ProductFeatureFlags = () => {
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="cut failure rates by 90%"
-                            quote="Feature flags are crucial for us. We use them as kill switches for all our features."
+                            quote="Feature flags are crucial for us. We use them as kill switches for all features and use the data to make decisions."
                             customer={phantom}
                         />
                         <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="Enables a ‘slow rollout’ strategy... while also analyzing feature adoption and performance in the same tool."
+                            outcome="increased registrations 30%"
+                            quote="Teams used to use different tools. That led to confusion because flags didn't integrate with our analytics or replays."
                             customer={contra}
                         />
                         <CustomerCard
-                            outcome="improved feature roll-out with flags"
-                            quote="The integrated insights and feature flags help us monitor how users with specific flags enabled are using features"
-                            customer={speakeasy}
+                            outcome="uses flags for feature testing"
+                            quote="We test changes as simple as changing the null state of a page through to new onboarding flows or new pricing changes."
+                            customer={elevenlabs}
                         />
                         <CustomerCard
-                            outcome="switched from an in-house tool"
+                            outcome="switched from in-house tools"
                             quote="Feature flags immediately bought a lot of value. What’s really elegant is how flags interlink with product analytics."
                             customer={carvertical}
                         />
@@ -459,7 +464,7 @@ export const ProductFeatureFlags = () => {
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> Feature Flags and A/B Testing are currently packaged together and
+                            <strong>Note:</strong> Feature flags and A/B testing are currently packaged together and
                             share volume limits.
                         </div>
                     </div>
@@ -482,7 +487,7 @@ export const ProductFeatureFlags = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -502,9 +507,8 @@ export const ProductFeatureFlags = () => {
                                 }
                             >
                                 <ul>
-                                    <li>Flag scheduling</li>
                                     <li>Triggers and workflows to enable/disable flags on other events</li>
-                                    <li>Enterprise-level support</li>
+                                    <li>Data exports</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
@@ -584,7 +588,9 @@ export const ProductFeatureFlags = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[3].children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'feature flags').children}
+                    />
                 </section>
 
                 <section id="team" className="mb-20 px-5">

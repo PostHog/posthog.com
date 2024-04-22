@@ -3,15 +3,16 @@ title: Python
 sidebarTitle: Python
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-python
-icon: ../../../images/docs/integrate/python.svg
+github: 'https://github.com/PostHog/posthog-python'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: false
-    sessionRecording: false
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -133,6 +134,14 @@ You can also explicitly chose to enable or disable GeoIP for a single capture re
 posthog.capture('test_id', 'test_event', disable_geoip=True|False)
 ```
 
+## Historical migrations
+
+You can use the Python SDK to run [historical migrations](/docs/migrate) of data into PostHog. To do so, set the `historical_migration` option to `true` when initializing the client.
+
+import PythonMigration from "../../migrate/_snippets/python-migration.mdx"
+
+<PythonMigration />
+
 ## Serverless environments (Render/Lambda/...)
 
 By default, the library buffers events before sending them to the capture endpoint, for better performance. This can
@@ -144,34 +153,9 @@ is fully flushed. To avoid this, you can either:
 
 ## Django
 
-For Django, you can do the initialisation of the key in the AppConfig, so that it's available everywhere.
+See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django.
 
-in `yourapp/apps.py`
-
-```python
-from django.apps import AppConfig
-import posthog
-
-class YourAppConfig(AppConfig):
-    def ready(self):
-        posthog.api_key = '<ph_project_api_key>'
-        posthog.host = '<ph_instance_address>' # You can remove this line if you're using app.posthog.com
-
-```
-
-Then, anywhere else in your app you can do:
-
-```python
-import posthog
-
-def purchase(request):
-    # example capture
-    posthog.capture(request.user.pk, 'purchase', ...)
-```
-
-# Integrations
-
-## Sentry
+## Sentry integration
 
 When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
 
@@ -198,7 +182,7 @@ with configure_scope() as scope:
     scope.set_tag('posthog_distinct_id', 'some distinct id')
 ```
 
-### Example implementation with Django
+#### Example implementation with Django
 
 This can be made automatic in Django, by adding the following middleware and settings to `settings.py`:
 

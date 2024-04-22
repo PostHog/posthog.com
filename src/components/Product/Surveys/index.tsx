@@ -46,7 +46,7 @@ const product = {
 }
 
 const team = 'Feature Success'
-const teamSlug = '/handbook/small-teams/feature-success'
+const teamSlug = '/teams/feature-success'
 
 const featuresPerRow = 3
 const features = [
@@ -320,7 +320,7 @@ const PairsWithArray = [
 ]
 
 export const ProductSurveys = () => {
-    const { purplewave } = useStaticQuery(graphql`
+    const { purplewave, elevenlabs } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -336,6 +336,9 @@ export const ProductSurveys = () => {
         }
         {
             purplewave: mdx(slug: { eq: "customers/purplewave" }) {
+                ...ProductCustomerFragment
+            }
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -366,11 +369,16 @@ export const ProductSurveys = () => {
                     />
                 </div>
                 <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-1 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="reached a 25% response rate with surveys"
                             quote="I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform."
                             customer={purplewave}
+                        />
+                        <CustomerCard
+                            outcome="uses surveys to organize interviews and more"
+                            quote="We even use surveys to send a little pop-up to our most active users and ask them to review us on G2."
+                            customer={elevenlabs}
                         />
                     </ul>
                 </section>
@@ -434,7 +442,7 @@ export const ProductSurveys = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -532,7 +540,7 @@ export const ProductSurveys = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[5].children} />
+                    <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'surveys').children} />
                 </section>
 
                 <section id="team" className="mb-20 px-5">

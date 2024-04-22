@@ -26,6 +26,8 @@ PostHog autocapture automatically tracks the following events for you:
 -   **Application Opened** - when the app is opened from a closed state
 -   **Application Became Active** - when the app comes to the foreground (e.g. from the app switcher)
 -   **Application Backgrounded** - when the app is sent to the background by the user
+-   **Application Installed** - when the app is installed.
+-   **Application Updated** - when the app is updated.
 -   **$screen** - when the user navigates (if using `@react-navigation/native` or `react-native-navigation`)
 -   **$autocapture** - touch events when the user interacts with the screen
 
@@ -68,12 +70,12 @@ export function App() {
 import PostHog, { PostHogProvider } from 'posthog-react-native'
 import { Navigation } from 'react-native-navigation';
 
-export const posthogAsync = PostHog.initAsync('<ph_project_api_key>');
+export const posthog = new PostHog('<ph_project_api_key>');
 
 // Simplify the wrapping of your Screens with a shared PostHogProvider
 export const SharedPostHogProvider = (props: any) => {
   return (
-    <PostHogProvider client={posthogAsync} autocapture={{
+    <PostHogProvider client={posthog} autocapture={{
       captureLifecycleEvents: false,  // Lifecycle events are handled differently for react-native-navigation
       captureTouches: true,
     }}>
@@ -96,7 +98,7 @@ export const MyScreen = () => {
 Navigation.registerComponent('Screen', () => MyScreen);
 
 Navigation.events().registerAppLaunchedListener(async () => {
-  (await posthogAsync).initReactNativeNavigation({
+  posthog.initReactNativeNavigation({
     navigation: {
       // (Optional) Set the name based on the route. Defaults to the route name.
       routeToName: (name, properties) => name,

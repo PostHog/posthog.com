@@ -1,36 +1,60 @@
 ---
 title: Subscriptions
 availability:
-    free: none
-    selfServe: full
-    enterprise: full
+  free: none
+  selfServe: full
+  enterprise: full
 ---
+export const newSubscriptionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/new-subscription-button-light-mode.png"
+export const newSubscriptionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/new-subscription-button-dark-mode.png"
+export const slackSubsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-choose-light-mode.png"
+export const slackSubsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-choose-dark-mode.png"
+export const slackAddLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-light-mode.png"
+export const slackAddDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-dark-mode.png"
 
 Subscriptions enable you to receive regular reports for any Insight or Dashboard in PostHog.
 
 ## Subscriptions Overview
 
-From any **Insight** or **Dashboard**, you can create and manage subscriptions via the dropdown menu at the top right.
+From any insight or dashboard, you can create and manage subscriptions via the dropdown menu at the top right.
 
-![New Subscription Button](../../images/features/subscriptions/new-subscription-button.png)
+<ProductScreenshot
+    imageLight = {newSubscriptionLight} 
+    imageDark = {newSubscriptionDark}
+    classes="rounded"
+    alt="New Subscription Button"
+/>
 
 ## Email Subscriptions
 
-> 🚧 For Self-hosted plans, you need to have configured the SMTP Email settings in [instance settings](/docs/self-host/configure/email).
+> 🚧 For self-hosted instances, you need to have configured the SMTP Email settings in [instance settings](/docs/self-host/configure/email).
 
-When configuring an Email Subscription you can subscribe multiple emails at once, whether they are a member of your PostHog team or not. Once saved, any email addresses not already subscribed will receive a notification email informing them what you have subscribed them to. You can optionally include a small personalised message that will be sent along to them.
+When configuring an email subscription you can subscribe multiple emails at once, whether they are a member of your PostHog team or not. Once saved, any email addresses not already subscribed will receive a notification email informing them what you have subscribed them to. You can optionally include a small personalised message that will be sent along to them.
 
 ## Slack Subscriptions
 
-> 🚧 For Self-hosted plans, you need to have configured the Slack App in [instance settings](/docs/self-host/configure/slack).
+> 🚧 For self-hosted instances, you need to have configured the Slack App in [instance settings](/docs/self-host/configure/slack).
 
 You can configure a subscription to be sent to any Slack channel in your workspace that the PostHog Slack App has access to.
-With the PostHog Slack App installed you can then select from any channel that the PostHog App is added to. **Private channels** will only be listed if you have already added PostHog to the relevant channel.
+
+With the PostHog Slack App installed you can then select from any channel that the PostHog App is added to. 
+
+**Private channels** will only be listed if you have already added PostHog to the relevant channel.
 
 > ✅ **Important!** You must remember to invite the PostHog app to the relevant Slack channel so that it is able to send messages
 
-![Slack channel selection](../../images/features/subscriptions/slack-subscription-choose.png)
+<ProductScreenshot
+    imageLight = {slackSubsLight} 
+    imageDark = {slackSubsDark}
+    classes="rounded"
+    alt="Slack channel selection"
+/>
 
 If you have not already configured the PostHog Slack App you will be prompted to do so.
 
-![Add to Slack button](../../images/features/subscriptions/slack-subscription-add.png)
+<ProductScreenshot
+    imageLight = {slackAddLight} 
+    imageDark = {slackAddDark}
+    classes="rounded"
+    alt="Add to Slack button"
+/>

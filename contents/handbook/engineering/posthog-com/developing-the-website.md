@@ -48,27 +48,27 @@ To work on it locally, first you need to clone it to your disk:
 
     You can also clone the repository with [GitHub Desktop](https://desktop.github.com/) installed, from the [posthog.com repository page](https://github.com/PostHog/posthog.com), click the **Code** button and select **Open with GitHub Desktop** from the dropdown that appears.
 
-    ![Open in GitHub Desktop](../../../images/docs/contribute/open-in-github-desktop.png)
+    ![Open in GitHub Desktop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/open-in-github-desktop.png)
 
     You will then be prompted by the browser to confirm if you want to open the GitHub Desktop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
 
     Once GitHub Desktop has opened you will be prompted to confirm the repository that is being cloned and the location on disk where you wish the code to be stored.
 
-    ![GitHub Desktop clone to dialog](../../../images/docs/contribute/github-desktop-clone-repo.png)
+    ![GitHub Desktop clone to dialog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/github-desktop-clone-repo.png)
 
     Click **Clone** to clone the posthog.com repository to your local disk.
 
-    ![GitHub Desktop cloning to disk](../../../images/docs/contribute/github-desktop-cloning-to-disk.png)
+    ![GitHub Desktop cloning to disk](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/github-desktop-cloning-to-disk.png)
 
     Once the clone has completed the GitHub Desktop interface will change to the following:
 
-    ![GitHub Desktop cloned successfully](../../../images/docs/contribute/github-desktop-cloned.png)
+    ![GitHub Desktop cloned successfully](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/github-desktop-cloned.png)
 
     To view the code for the website click **Open in Visual Studio Code**. Dialogs may appear around permissions and trust as you open Visual Studio Code.
 
     Once you have Visual Studio Code open, select the **Terminal** menu option. Within the dropdown select **New Terminal**. This will open a new terminal window within Visual Studio Code:
 
-    ![Visual Studio Code terminal](../../../images/docs/contribute/visual-studio-code-terminal.png)
+    ![Visual Studio Code terminal](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/visual-studio-code-terminal.png)
 
     Don't worry! We only need to run a few commands in the command line.
 
@@ -105,7 +105,7 @@ Our website uses various APIs to pull in data from sites like GitHub (for contri
 
 If you're a core team member and need this data locally, you can:
 
-1. Ask the [Website & Docs team](https://posthog.slack.com/archives/C01V9AT7DK4) for access to our Vercel account
+1. Ask the [Website & Docs team](https://app.slack.com/client/TSS5W8YQZ/C01V9AT7DK4) files located for access to our Vercel account
 1. Install the Vercel CLI
 1. Run `vercel pull`
 1. Open `.vercel/.env.development.local`
@@ -145,11 +145,11 @@ When editing locally, changes should be made on a new Git branch. Branches shoul
 
     You can also create a new branch in GitHub Desktop by selecting the dropdown next to the **Current Branch** name and clicking **New Branch**.
 
-    ![GitHub Desktop - new branch dropdown](../../../images/docs/contribute/github-desktop-new-branch-dropdown.png)
+    ![GitHub Desktop - new branch dropdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/github-desktop-new-branch-dropdown.png)
 
     Then, in the dialog that follows, entering the new branch name.
 
-    ![GitHub Desktop - new branch dialog](../../../images/docs/contribute/visual-studio-code-new-branch-dialog.png)
+    ![GitHub Desktop - new branch dialog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/visual-studio-code-new-branch-dialog.png)
 
     Once you have a new branch, you can make changes.
 
@@ -170,10 +170,14 @@ title: The state of plugins on PostHog
 rootPage: /blog
 author: ["yakko-majuri"]
 featuredVideo: https://www.youtube-nocookie.com/embed/TCyCryTiTbQ
-featuredImage: ../images/blog/running-content.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/running-content.png
 featuredImageType: full
 category: Guides
 tags: ["Using PostHog", "Privacy"]
+seo: {
+    metaTitle: Overview of PostHog Plugins
+    metaDescription: Learn about the current state of plugins on PostHog and get valuable insights into their functionality and performance.
+}
 ---
 ```
 
@@ -182,12 +186,15 @@ tags: ["Using PostHog", "Privacy"]
 - `rootPage`: necessary for listing all blog posts on /blog. should always be set to `/blog`
 - `author`: the author(s) of the post. correlates to your handle located in /src/data/authors.json
 - `featuredVideo`: the iframe src of the video that appears at the top of the post. replaces the featured image on post pages.
-- `featuredImage`: the URL of the image that appears at the top of the post and on the blog listing page
+- `featuredImage`: the Cloudinary URL of the image that appears at the top of the post and on the blog listing page
 - `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
 - `category`: the broader category the post belongs to. one of the following:
   - <CategoryData />
 - `tags`: the more specific tag(s) the post belongs to. an array containing any number of the following:
   - <CategoryData type="tags" />
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 ##### Tutorials
 
@@ -209,9 +216,12 @@ tags: ['filters', 'settings']
 - `author`: the author(s) of the tutorial. Ccrrelates to your handle located in /src/data/authors.json
 - `featuredTutorial`: determines if tutorial should be featured on the homepage
 - `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
-- `featuredImage`: the URL of the image that appears at the top of the tutorial and on the tutorial listing page
+- `featuredImage`: the Cloudinary URL of the image that appears at the top of the tutorial and on the tutorial listing page
 - `tags`: the tag(s) the tutorial belongs to. an array containing any number of the following:
   - <TutorialTags />
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 
 
@@ -226,6 +236,9 @@ title: Contribute to the website: documentation, handbook, and blog
 ```
 
 - `title`: the title that appears at the top of the handbook / doc page
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 ##### Comparison pages
 
@@ -260,8 +273,8 @@ Markdown files located in `/contents/customers`
 ---
 title: How Hasura improved conversion rates by 10-20% with PostHog
 customer: Hasura
-logo: ../images/customers/hasura/logo.svg
-featuredImage: ../images/customers/hasura/featured.jpg
+logo: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/hasura/logo.svg
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/hasura/featured.jpg
 industries:
     - Developer tool
 users:
@@ -279,10 +292,13 @@ toolsUsed:
 - `title`: the title of the case study
 - `customer`: the name of the customer
 - `logo`: the customer logo
-- `featuredImage`: the image that appears in the card on the customers listing page
+- `featuredImage`: the Cloudinary URL of the image that appears in the card on the customers listing page
 - `industries`: a list of industries that apply to the company
 - `users`: a list of user types that use the company's product
 - `toolsUsed`: a list of highlighted PostHog tools used by the company
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 ##### Plain
 
@@ -298,38 +314,27 @@ noindex: true
 ```
 
 - `title`: the title that appears at the top of the page
-- `showTitle`: `true` | `false` - determines whether to show / hide the title at the top of the page
+- `showTitle`: `false` - if omitted, the title will appear at the top of the page
 - `width`: `sm` | `md` | `lg` | `full` - determines the width of the page
 - `noindex`: `true` | `false` - determines whether to index the page or not
+- `seo`: object containing SEO metadata:
+  - `metaTitle`: String
+  - `metaDescription`: String
 
 
 You can often refer to the source of existing pages for more examples, but if in doubt, you can always [ask for help](https://app.posthog.com/home#supportModal).
 
 #### Images/GIFs
 
-For our Markdown, we use [gatsby-remark-copy-linked-files](https://www.gatsbyjs.org/packages/gatsby-remark-copy-linked-files/).
+If you need to upload images, you can upload them to Cloudinary
 
-This copies local files linked to/from Markdown files to the root directory.
-
-If you need to upload images, you can place them in `contents/images/`. We recommend creating or using existing subfolders to keep images organized.
-
-To include an image in a markdown file, you can use nice local references, like so:
+To include an image in a markdown file, you can use Cloudinary URLs, like so:
 
 ```markdown
-![Twin Peaks](../images/02/IMG_4294-scaled.jpg)
+![Twin Peaks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/handbook/engineering/images/02/IMG_4294-scaled.jpg)
 ```
 
 In this case, `Twin Peaks` is the alt-text applied to the image.
-
-Note that it may be necessary to change the folder depending on your file structure. For example, if you needed to go up two directories, this *could* be:
-
-```markdown
-![Twin Peaks](../../../images/02/IMG_4294-scaled.jpg)
-```
-
-Notice the extra ```../```.
-
-For most images, this plugin will automatically generate a range of sizes to optimize for the device and they'll even have a blurry low filesize loading image created to hold the place. Pretty cool.
 
 #### Links to/from the navigation
 
@@ -387,11 +392,11 @@ It's best to create commits that are focused on one specific area. For example, 
 
     Files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
 
-    ![Viewing changes in GitHub Desktop](../../../images/docs/contribute/viewing-changes-in-github-desktop.png)
+    ![Viewing changes in GitHub Desktop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/viewing-changes-in-github-desktop.png)
 
     Select the files that you want to be part of the commit by ensuring the checkbox to the left of the file is checked within GitHub Desktop. Then, write a short descriptive commit message and click the **Commit to...** button.
 
-    ![Making a commit in GitHub Desktop](../../../images/docs/contribute/commit-in-github-desktop.gif)
+    ![Making a commit in GitHub Desktop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/commit-in-github-desktop.gif)
 
 ## Push changes to GitHub
 
@@ -428,7 +433,7 @@ In order to request that the changes you have made are merged into the main webs
 
     Once you have committed the changes you want to push to GitHub, click the **Push origin** button.
 
-    ![Push to origin from GitHub Desktop](../../../images/docs/contribute/push-to-origin-github-desktop.gif)
+    ![Push to origin from GitHub Desktop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/push-to-origin-github-desktop.gif)
 
 ## Create a pull request
 
@@ -453,13 +458,13 @@ Create a pull request to request that your changes be merged into the main branc
 
     With the branch published, click the **Create pull request** button.
 
-    ![pull request from GitHub Desktop](../../../images/docs/contribute/github-desktop-pull-request.png)
+    ![pull request from GitHub Desktop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/github-desktop-pull-request.png)
 
     This will open up a page on github.com in your default web browser.
 
 If you are pushing to an existing branch, navigate to the [posthog.com repo](https://github.com/posthog/posthog.com) and switch to the new branch using the dropdown:
 
-![GitHub branch switcher](../../../images/docs/contribute/github-branch-switcher.png)
+![GitHub branch switcher](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/github-branch-switcher.png)
 
 Then, open the **Contribute** dropdown and click the **Open pull request** button.
 
@@ -471,7 +476,7 @@ If you know who you would like to review the pull request, select them in the **
 
 After a series of checks are run (to ensure nothing in your pull request breaks the website), Vercel will generate a preview link available in the Vercel bot comment. This includes all of your changes, so you can preview before your pull request is merged.
 
-![Preview branch](../../../images/docs/contribute/preview-branch.png)
+![Preview branch](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/preview-branch.png)
 
 > **Note:** Checks are run automatically for PostHog org members and previous contributors. First time contributors will require authorization for checks to be run by a PostHog org member.
 

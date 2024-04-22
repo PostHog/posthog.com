@@ -228,6 +228,8 @@ pnpm i --dir plugin-server
         ```bash
         brew install libxml2 libxmlsec1 pkg-config
         ```
+        > If installing `xmlsec` doesn't work, try updating macOS to the latest version (Sonoma). 
+   
     - On Debian-based Linux:
         ```bash
         sudo apt install -y libxml2 libxmlsec1-dev pkg-config
@@ -347,16 +349,16 @@ You can narrow the run down to only files under matching paths:
 pnpm jest --testPathPattern=frontend/src/lib/components/IntervalFilter/intervalFilterLogic.test.ts
 ```
 
-To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:
+To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab). You may also need to install Playwright with `pnpm exec playwright install`. And then run:
 
 ```bash
-pnpm test:visual-regression
+pnpm test:visual
 ```
 
 To only update snapshots for stories under a specific path, run:
 
 ```bash
-pnpm test:visual-regression:stories frontend/src/lib/Example.stories.tsx
+pnpm test:visual:update frontend/src/lib/Example.stories.tsx
 ```
 
 ### Backend
@@ -398,6 +400,8 @@ If you'd like to have ALL feature flags that exist in PostHog at your disposal r
 
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
+Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
+
 ## Extra: Debugging the backend in PyCharm
 
 With PyCharm's built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
@@ -419,6 +423,6 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
    - "Frontend" and click on run
    - "Plugin server" and click on run
 
-## Extra: Adding an enterprise license (PostHog employees only)
+## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can add an enterprise license to your local instance by following this [internal guide](https://github.com/PostHog/billing/blob/main/docs/running-posthog-with-billing.md). This is particularly useful if developing enterprise features or testing billing-related functionality.
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).

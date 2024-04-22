@@ -1,13 +1,15 @@
 ---
-date: 2023-03-10
-title: "In-depth: PostHog vs Heap"
+date: 2024-01-10
+title: 'In-depth: PostHog vs Heap'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-heap/posthog-vs-heap.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-heap/posthog-vs-heap.jpeg
 featuredImageType: full
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 category: General
 tags:
   - Comparisons
@@ -16,264 +18,187 @@ tags:
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-Want to know how PostHog and Heap are different? If you remember nothing else, remember these two points:
+Want to know how PostHog and Heap compare? If you remember nothing else, remember these two points:
 
-1. Heap is a product analytics tool designed for non-technical users.
+1. **Heap** is a product analytics tool designed for non-technical users.
 
-2. PostHog is an all-in-one platform for product analytics, session recording, feature management, and more, built for engineers and product teams.
-
-In this guide, we'll cover:
-
-- Heap and PostHog's [core features](#core-features)
-- [Product analytics](#product-analytics) features and insight types
-- [Session recording](#session-recording) capability 
-- [Third-party integrations](#integrations), including data export and data import options
-- [Privacy](#privacy-compliance) and [security](#admin--security)
-- [Frequently asked questions](#frequently-asked-questions)
+2. **PostHog** is an all-in-one platform built for engineers that replaces Heap _and_ numerous other tools.
 
 ## How is PostHog different to Heap?
 
 ### 1. PostHog is an all-in-one platform
 
-Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt additional tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform. PostHog is like mission control for your product.
+Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt additional tools for things like feature management, A/B testing, and surveys. PostHog combines all these features into one platform, so you can spend less time integrating different tools and more time 
 
 ### 2. PostHog's built for engineers
 
-Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing) – but our goal is to [help engineers be better at product](/blog/helping-engineers-to-product) by giving them the insights and tools they need to ship impactful features at pace. 
+We support all popular (and some unpopular) [SDKs](/docs/libraries), have [extensively documented APIs](/docs/api), and a [powerful SQL query builder](/docs/hogql), so you can analyze data how you want. We make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
 
 ### 3. Self-serve vs talk to sales
 
-Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate) to your site or app. That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No sales calls. No paid add-ons. No confusing product tiers. Just sign up and start building.
+Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate) to your site or app. That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No mandatory sales calls. No boring white papers in exchange for your email.
 
-## Feature comparison
+## Comparing PostHog and Heap
 
-PostHog has three plans (Free, Scale and Enterprise) to Heap's four (Free, Growth, Pro and Premier). In this guide, we'll compare PostHog's Scale plan to Heap Pro as they're the most comparable plans for a typical, mid-market business.
+### Platform
 
-### Core features
+PostHog includes everything you need to rollout, analyze, test, and observe new features – and gather feedback from your users.
 
-PostHog integrates several normally separate tools, such as product analytics, session recording, and feature flags, into one platform. While it recently added a basic session recording feature, Heap is best known as a pure product analytics tool like Mixpanel or Amplitude.
-
-<ComparisonTable column1="Heap" column2="PostHog">
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
-  <ComparisonRow column1="Paid add-on" column2={true} feature="Session recording" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={false} column2={true} feature="Experiments" description="Run A/B/n tests on new features; optimize conversion funnels" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website" />
-  <ComparisonRow column1={false} column2={true} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Automatically track events without instrumentation" />
-  <ComparisonRow column1="Paid add-on" column2={true} feature="Sync with data warehouse" description="Sync data to and from your data warehouse" />
+<ComparisonTable column1="PostHog" column2="Heap">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion, analyze user behavior" />
+  <ComparisonRow column1="Beta" column2={false} feature="Web analytics" description="Easy to use analytics for marketing websites" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={true} feature="Experiments" description="Run tests on new features, optimize conversion funnels" />
+  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF surveys " />
+  <ComparisonRow column1="Beta" column2={false} feature="Customer data platform" description="Sync data with third-party tools" />
+  <ComparisonRow column1="Beta" column2={false} feature="Data warehouse" description="A single source for all your important data" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website" />
+  <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Ad-hoc analysis and collaboration" />
+  <ComparisonRow column1={true} column2={false} feature="Dark mode" description="Choose between light and dark UI" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
-
-- **Session replays:** Heap offers basic session replays in addition to its core product analytics product, but it's a bolt-on option on all plans. Session replays are built-in to PostHog and you get 15,000 free recordings every month. **Jump to:** [Session recording comparison](#session-recording)
-
-- **Sync to data warehouse:** The ability to sync with your data warehouse is part of Heap Connect, a paid add-on on to Heap's Pro plan – it's included on Heap's Premier plan. Data warehouse sync is available in PostHog at no additional cost because we believe companies should own their data.
-
-- **Experiments:** Heap doesn't have a built-in testing feature, though it does integrate with a number of popular A/B testing tools, such as AB Tasty and [Optimizely](/blog/posthog-vs-optimizely). PostHog has a [built-in experimentation suite](/product/experimentation-suite) for running A/B and multivariate experiments.
-
-- **Feature flagging:** The [benefits of feature flags](/blog/feature-flag-benefits-use-cases) include the ability to stagger new feature releases, ship to test groups or specific cohorts, manage feature access, and more. PostHog's feature flag product is built-in and tightly integrated with all other products.
-
-- **Open source:** PostHog is open source and self-hostable via Docker Compose for small event volumes of ~100k events per month. See our [open source deployment docs](/docs/self-host/open-source/deployment) for more.
-
-**Related:** Our in-depth [guide to the best Heap alternatives](/blog/best-heap-alternatives)
 
 ### Product analytics
 
-Heap and PostHog offer similar product analytics features with a slight difference in emphasis – Heap has more insight options for marketing teams, while PostHog has more for product teams.
+Heap and PostHog offer similar product analytics features, but PostHog's SQL query editor makes it a more useful tool for power users. PostHog also has a more [generous free tier](/pricing).
 
-<ComparisonTable column1="Heap" column2="PostHog">
+<ComparisonTable column1="PostHog" column2="Heap">
+  <ComparisonRow column1="1 million events" column2="10k monthly tracked users" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual logging" />
+  <ComparisonRow column1={true} column2={false} feature="Query editor" description="Write your own queries in SQL" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at a company and account level" />
   <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
-  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Understand conversion between events, pages" />
-  <ComparisonRow column1={true} column2={true} feature="Retention" description="Analyze user and revenue retention" />
+  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={true} feature="Retention" description="Visualize which users stay, for how long" />
   <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
-  <ComparisonRow column1={false} column2={true} feature="Stickiness" description="Understand your most engaging features" />
-  <ComparisonRow column1={false} column2={true} feature="Lifecycle" description="Break users down by new, resurrecting, returning, and dormant" />
-  <ComparisonRow column1={true} column2={false} feature="Influence analysis" description="Multi-touch analysis of marketing channels" />
   <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Understand how organizations of multiple users use your product" />
-  <ComparisonRow column1={true} column2={true} feature="Formulas" description="Use custom formulas to calculate unique insights" />
-  <ComparisonRow column1={false} column2={true} feature="Query editor" description="Write your own queries in SQL" />
-  <ComparisonRow column1="1 year (pay for more)" column2="7 years" feature="Data retention" description="How long historical data is retained" />
+  <ComparisonRow column1={true} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
+  <ComparisonRow column1={true} column2={false} feature="Stickiness" description="Find out what events keep users coming back." />
+  <ComparisonRow column1={true} column2={false} feature="Custom formulas" description="Use formulas to calculate unique insights" />
+  <ComparisonRow column1="7 years" column2="1 year (pay for more)" feature="Data retention" description="Use formulas to calculate unique insights" />
 </ComparisonTable>
 
 ### Session replays
 
-Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
+Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session replay, though Heap lacks many developer-facing features like a DOM explorer and network events.
 
-<ComparisonTable column1="Heap" column2="PostHog">
-  <ComparisonRow column1="None (free trial)" column2="15,000/mo" feature="Free recording allowance" description="Free recordings before being charged" />
-  <ComparisonRow column1={true} column2={true} feature="Browser app recording" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2="In beta" feature="iOS app recording" description="Record user sessions in iOS apps" />
-  <ComparisonRow column1={true} column2="Planned 2023" feature="Android app recording" description="Record user sessions in Android apps" />
-  <ComparisonRow column1={false} column2={true} feature="Playlists" description="Create playlists of related recordings" />
-  <ComparisonRow column1={false} column2={true} feature="Download recordings" description="Save recording files offline for storage" />
-  <ComparisonRow column1={false} column2={true} feature="Play from file" description="Replay recording from saved file" />
-  <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug user problems and app errors" />
-  <ComparisonRow column1={false} column2={true} feature="Network activity" description="Monitor network activity and performance" />
+<ComparisonTable column1="PostHog" column2="Heap">
+  <ComparisonRow column1="5,000 recordings" column2="None" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={false} feature="Web app recordings" description="Capture recordings from single-page apps" />
+  <ComparisonRow column1="Beta" column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
+  <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
+  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a users' browser environment" />
+  <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
+  <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
+  <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />
+  <ComparisonRow column1={true} column2={true} feature="Conditional capture" description="Only capture the sessions you want" />
+  <ComparisonRow column1={true} column2={false} feature="DOM explorer" description="Explore an interactive snapshot of replays" />
+  <ComparisonRow column1={true} column2={false} feature="Export recordings" description="Save important recordings offline" />
+  <ComparisonRow column1={true} column2={false} feature="Minimum duration" description="Only record sessions longer than the minimum duration" />
+  <ComparisonRow column1={true} column2={true} feature="Sample recorded sessions" description="Restrict the percentage of sessions that will be recorded" />
+  <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
 </ComparisonTable>
 
-- **Recording retention:** Heap keeps all recordings for 90 days, but retains any **viewed recordings** for 10 years. PostHog retains all recordings for three weeks, but retains recordings saved to a playlist forever. PostHog also allows you to download recordings as a `.json` file for safe keeping.
+### Feature flags
 
-<ArrayCTA />
+Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
-## Integrations
-
-This section includes a curated summary of the most popular integrations in PostHog and Heap, organized by category.
-
-See the [PostHog Apps](/apps) and [Heap integrations](https://help.heap.io/category/integrations/) pages for complete lists of available integrations.
-
-**Categories:**
-
-- [Data out](#data-out) 
-- [Data in](#data-in)
-- [Dev tools & support](#dev-tools--support) 
-- [Marketing & sales](#marketing--sales)
-
-### Data out
-
-At PostHog, we believe in your right to own your data, which means enabling you to export raw events whenever you want at no additional cost.
-
-In Heap, data warehouse integrations are only available on Heap Premier, or as a paid add-on to Heap Pro, and there is no open export API.
-
-<ComparisonTable column1="Heap" column2="PostHog">
-    <ComparisonRow column1={false} column2={true} feature="Export API" description="Export data via API" />
-    <ComparisonRow column1="Paid add-on" column2={true} feature="Amazon Redshift" description="Export data to Redshift" />
-    <ComparisonRow column1="Paid add-on" column2={true} feature="Amazon S3" description="Export data to S3 bucket" />
-    <ComparisonRow column1={false} column2={true} feature="Google Cloud Storage" description="Export data to GCS" />
-    <ComparisonRow column1="Paid add-on" column2={true} feature="Snowflake" description="Export data to Snowflake database" />
-    <ComparisonRow column1="Paid add-on" column2={true} feature="Google BigQuery" description="Export data to BigQuery for analysis" />
-    <ComparisonRow column1={false} column2={true} feature="PostgreSQL" description="Export data to a PostgreSQL instance" />
-    <ComparisonRow column1={false} column2={true} feature="RudderStack" description="Sync event and person data" />
-    <ComparisonRow column1={true} column2={true} feature="Hightouch" description="Reverse ETL data to multiple platforms" />
-    <ComparisonRow column1={true} column2={true} feature="Census" description="Reverse ETL data to multiple platforms" />
-    <ComparisonRow column1={true} column2={true} feature="Zapier" description="Connect to services using Zapier" />
-    <ComparisonRow column1={false} column2={true} feature="n8n" description="Open source Zapier alternaitve" />
+<ComparisonTable column1="PostHog" column2="Heap">
+  <ComparisonRow column1="1 million API requests" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={false} feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
+  <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Store flag definitions locally" />
+  <ComparisonRow column1={true} column2={false} feature="Percentage rollouts" description="Target percentages of a group" />
+  <ComparisonRow column1={true} column2={false} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
+  <ComparisonRow column1="Beta" column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
+  <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
-- **Exporting events in PostHog:** PostHog provides numerous methods for exporting event data, including via the PostHog UI (for small volumes), the Events API (with rate limits), or via dedicated export apps (no limits). See our [data export documentation](/docs/migrate/export-events) for more information.
+### Experimentation
 
-### Data in
+PostHog's offers a generous free 1 million A/B testing events. Heap doesn't support A/B testing, instead opting to integrate with several third-party tools.
 
-<ComparisonTable column1="Heap" column2="PostHog">
-    <ComparisonRow column1={true} column2={true} feature="Import API" description="API for importing and enriching data" />
-    <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events and user properties tracked in Segment" />
-    <ComparisonRow column1={true} column2={true} feature="RudderStack" description="Ingest events and user properties tracked in RudderStack" />
-    <ComparisonRow column1={true} column2={false} feature="Tealium" description="Ingest events and user properties tracked in Tealium" />
-    <ComparisonRow column1={false} column2={true} feature="Airbyte" description="ETL data pipelines" />
-    <ComparisonRow column1={true} column2={true} feature="Fivetran" description="ETL data pipelines" />
-    <ComparisonRow column1={true} column2={true} feature="Stripe" description="Sync customer and invoice data" />
-    <ComparisonRow column1={true} column2={true} feature="Zapier" description="Connect to services using Zapier" />
-    <ComparisonRow column1={false} column2={true} feature="n8n" description="Open source Zapier alternaitve" />
+<ComparisonTable column1="PostHog" column2="Heap">
+  <ComparisonRow column1="1 million API requests" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={false} feature="Custom goals" description="Customize metrics that a test tracks" />
+  <ComparisonRow column1={true} column2={false} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
+  <ComparisonRow column1={true} column2={false} feature="Split testing" description="Split participants into groups" />
+  <ComparisonRow column1={true} column2={false} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={true} column2={false} feature="Statistical significance" description="Automatically checks for statistical significance" />
+  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculates the recommended run time and sample size" />
+  <ComparisonRow column1="Partial" column2="n/a" feature="Holdout testing" description="Withhold multiple features to measure cumulative impact" />
+  <ComparisonRow column1="Bayesian" column2="n/a" feature="Statistics engine" description="How the results of an experiment are calculated" />
 </ComparisonTable>
 
-- **PostHog as a Customer Data Platform:** PostHog integrates with numerous popular customer data platforms (CDP), but some customers choose to use PostHog as their CDP. This helps reduce costs, the risk of data being dropped, and ensures total compatibility with all our features. See [Using PostHog with a CDP](/docs/integrate/cdp) for more information.
+### Integrations
 
-### Dev tools & support
+PostHog and Heap both offer a wide range if integrations, but only PostHog enables you to build you own custom integrations thanks to our open-source license. Below is snapshot of integrations, see our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
 
-As an open source platform designed for technical teams, PostHog integrates with numerous developer tools and platforms. This isn't an area of strong support for Heap.
-
-<ComparisonTable column1="Heap" column2="PostHog">
-    <ComparisonRow column1={false} column2={true} feature="BitBucket Release Tracker" description="Track impact of releases in analytics" />
-    <ComparisonRow column1={false} column2={true} feature="GitHub Release Tracker" description="Track impact of releases in analytics" />
-    <ComparisonRow column1={false} column2={true} feature="GitHub Star Sync" description="Track GitHub star growth" />
-    <ComparisonRow column1={false} column2={true} feature="GitLab Release Tracker" description="Track impact of releases in analytics" />
-    <ComparisonRow column1={false} column2={true} feature="Sentry" description="Connect errors to individual users" />
-    <ComparisonRow column1={false} column2={true} feature="Retool" description="Build internal tools using your usage data" />
-    <ComparisonRow column1={false} column2={true} feature="User Inteview Scheduler" description="Invite users for an interview based on user properties" />
-    <ComparisonRow column1={true} column2={true} feature="Zendesk" description="Track tickets as events, add context to tickets" />
-    <ComparisonRow column1="In beta" column2={true} feature="Custom webhooks" description="Create your own custom webhooks for Slack, etc." />
+<ComparisonTable column1="PostHog" column2="Heap">
+   <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from data warehouses and other sources" />
+   <ComparisonRow column1={true} column2={true} feature="Exports" description="Export data to data warehouses other destinations" />
+   <ComparisonRow column1={true} column2={false} feature="Community integrations" description="Build your own integrations" />
+   <ComparisonRow column1={true} column2={true} feature="Segment" description="Send events via Segment" />
+   <ComparisonRow column1={true} column2={false} feature="Rudderstack" description="Send events via Rudderstack" />    
+   <ComparisonRow column1={true} column2={true} feature="Zapier" description="Trigger Zapier automations" />
+   <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
+   <ComparisonRow column1={true} column2={true} feature="Zendesk" description="Two-way integration for customer support" />
+   <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
+   <ComparisonRow column1={true} column2={true} feature="Hubspot" description="CRM and marketing tools" />
+   <ComparisonRow column1={true} column2={false} feature="Customer.io" description="Marketing automation" />
+   <ComparisonRow column1={true} column2={true} feature="Intercom" description="Marketing automation" />
 </ComparisonTable>
 
-### Marketing & sales
+### Security and compliance
 
-<ComparisonTable column1="Heap" column2="PostHog">
-    <ComparisonRow column1={false} column2={true} feature="Customer.io" description="Sync data and trigger workflows in Customer.io" />
-    <ComparisonRow column1={false} column2={true} feature="Engage" description="Automate onboarding and retention messaging" />
-    <ComparisonRow column1={false} column2={true} feature="Variance" description="Define PQLs with real analytics data" />
-    <ComparisonRow column1={false} column2={true} feature="Engage" description="Automate onboarding and retention messaging" />
-    <ComparisonRow column1={false} column2={true} feature="Pace" description="Identify enterprise sales leads" />
-    <ComparisonRow column1={false} column2={true} feature="Twilio" description="Automated customer engagement platform" />
-    <ComparisonRow column1={true} column2={true} feature="Hubspot" description="Sync customer data to and from Hubspot" />
-    <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync customer data to and from Salesforce" />
-    <ComparisonRow column1={true} column2={true} feature="Sendgrid" description="Automate email workflows" />
-    <ComparisonRow column1={true} column2={false} feature="Mailchimp" description="Automate marketing emails" />
-    <ComparisonRow column1={true} column2={true} feature="Intercom" description="Automate your product comms" />
-    <ComparisonRow column1={true} column2={false} feature="Braze" description="Marketing automation" />
-    <ComparisonRow column1={true} column2={false} feature="Eloqua" description="Marketing automation" />
-    <ComparisonRow column1={true} column2={false} feature="Marketo" description="Marketing automation" />
-</ComparisonTable>
-
-- **Advertising integration:** Neither Heap nor PostHog offer native integrations for advertising platforms (e.g. Google Ads, Facebook Ads, etc.). If you require this, we recommend integrating a CDP like Segment into your data stack.
-
-## Privacy, admin & security
-
-### Privacy compliance
-
-<ComparisonTable column1="Heap" column2="PostHog">
-    <ComparisonRow column1={true} column2={true} feature="GDPR compliant" description="EU hosting or data residency available" />
-    <ComparisonRow column1={true} column2="Self-host only" feature="HIPAA compliant" description="Business Associate Agreement available" />
-    <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Remove personally identifiable information" />
-    <ComparisonRow column1={false} column2={true} feature="Self-hosting option" description="Self-host and keep complete control of your data" />
-    <ComparisonRow column1={false} column2={true} feature="Cookie-less tracking option" description="Use analytics without cookie consent banners" />
-</ComparisonTable>
-
-- **HIPAA compliance:** Heap will sign a Business Associate Agreement if you require HIPAA compliance. At PostHog, we currently recommend self-hosting PostHog if you require [HIPAA compliance](/docs/privacy/hipaa-compliance). This ensures all sensitive data never leaves your infrastructure, giving you complete control and simplifying compliance processes. HIPAA certification for PostHog Cloud is planned in 2023.
-
-- **Cookie-less tracking:** If you'd rather not serve annoying cookie banners to your users, PostHog can be configured to store data in memory so it doesn't persist beyond a single session. See: [How to use PostHog without cookie banners](/tutorials/cookieless-tracking). Some forms of user analysis aren't possible with this method.
-
-### Admin & security
-
-<ComparisonTable column1="Heap" column2="PostHog">
-    <ComparisonRow column1={true} column2={true} feature="SOC 2 certification" description="Externally audited security" />
-    <ComparisonRow column1={true} column2={true} feature="SAML/SSO" description="Organization single sign-on" />
-    <ComparisonRow column1={true} column2={true} feature="User permissions" description="Assign access levels to team members" />
-    <ComparisonRow column1={true} column2={true} feature="Multiple organizations" description="Create orgs for all your internal teams" />
-    <ComparisonRow column1="2 (pay for more)" column2={true} feature="Multiple projects" description="Track multiple products" />
+<ComparisonTable column1="PostHog" column2="Heap">
+  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
+  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
+  <ComparisonRow column1={true} column2={true} feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
 </ComparisonTable>
 
 ## Frequently asked questions
 
 ### How long does it take to deploy PostHog?
 
-Deploying PostHog takes mere minutes. Just [include our tracking snippet](/docs/integrate?tab=snippet) in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session recording via your project settings. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
+Deploying PostHog takes mere minutes. Just [include our tracking snippet](/docs/integrate?tab=snippet) in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session replays and other features via your project settings. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
 
-### How scalable is PostHog?
+### Can PostHog also replace Google Analytics?
 
-PostHog is built on ClickHouse, the world’s fastest column-based database. It’s used by the likes of Uber, Spotify and Cloudflare, and allows us to handle billion-scale event volumes with ease.
+Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using [Google Tag Manager](/docs/libraries/google-tag-manager). See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [an intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
 
-Are you a company with more than 1 billion events per month? [Get in touch](/contact-sales?edition=enterprise) so we can discuss your needs and offer a volume discount.
+### How can I estimate my usage?
 
-### How much do Heap and PostHog cost?
+The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days. Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
 
-Unlike PostHog, Heap doesn't share its pricing publicly, but its free tier is less generous.
+### Does PostHog block bots by default?
 
-Heap's free tier allows for only 10,000 sessions per month, "limited analysis", six months of data history, and limited access to data sources and integrations.
+Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
 
-In comparison, PostHog offers 1 million events per month and 15,000 session recordings for free on all plans with no limits on data integrations – a typical medium-size B2B product with 10,000 monthly active users will generate ~500k events each month.
+### What about ad blockers?
 
-PostHog users who input their card unlock more features and can use billing limits to avoid surprise bills.
+We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
 
-See [PostHog's pricing page](/pricing) for a full breakdown and access to our pricing calculator.
+### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
 
-### Does PostHog use cookies?
+Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 
-Yes, PostHog (like Heap) uses cookies. Cookies are necessary to enable common use cases, such as cross-domain tracking and tracking returning visitors.
-
-It is possible, however, to configure PostHog to track users without requiring without cookie banners by storing cookies in memory so it doesn't persist beyond an individual session.
-
-The PostHog Property Filter app also allows you to further limit the types of information collected to protect user privacy.
-
-If you user privacy is a primary concern for you, consider our [open source Docker Compose deployment](/docs/self-host/open-source/deployment) option.
 
 ### Can you use PostHog on e-commerce websites?
 
 Absolutely. PostHog is [easy to integrate with Shopify](/docs/libraries/shopify). You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress). 
 
-### Can PostHog replace Google Analytics?
-
-Yes, depending on your use case, PostHog could replace Google Analytics. [Our marketing team uses PostHog](/blog/posthog-marketing) effectively, but it isn't primarily designed for marketing use cases. See our [GA4 alternatives guide](/blog/ga4-alternatives) guide for more.
-
 ### How does PostHog compare to Amplitude and Mixpanel?
 
-Amplitude and Mixpanel offer similar features to Heap. Read our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) and [PostHog vs Amplitude](/blog/posthog-vs-amplitude) guides for more info. 
+Amplitude and Mixpanel offer similar features to Heap. Read our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) and [PostHog vs Amplitude](/blog/posthog-vs-amplitude) guides for more info. You may also find guide to the [most popular Heap alternatives](/blog/best-heap-alternatives) useful.
 
 <ArrayCTA />

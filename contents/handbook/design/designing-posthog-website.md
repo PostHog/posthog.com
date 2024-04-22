@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The [Website & Docs Team](/handbook/small-teams/website-docs) is responsible for everything you see on posthog.com. We treat our website & docs as a product, which means we're constantly iterating on it and improving it.
+The [Website & Docs Team](/teams/website-docs) is responsible for everything you see on posthog.com. We treat our website & docs as a product, which means we're constantly iterating on it and improving it.
 
 Because our website has a well-defined aesthetic, we often skip the hifi design process and jump straight from wireframes into code. Having a designer who can code means we can reach the desired level of polish without _always_ having to produce hifi designs, thus leading to huge time savings.
 

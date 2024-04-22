@@ -1,14 +1,19 @@
 import { kea } from 'kea'
-import { inverseCurve, sliderCurve } from './LogSlider'
-import { pricingLogic } from '../pricingLogic'
+import { inverseCurve, sliderCurve } from './Slider'
+import {
+    MAX_FEATURE_FLAGS,
+    MAX_PRODUCT_ANALYTICS,
+    MAX_SESSION_REPLAY,
+    MAX_SURVEYS,
+    MILLION,
+    pricingLogic,
+} from '../pricingLogic'
 
 import type { pricingSliderLogicType } from './pricingSliderLogicType'
 
 const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) => {
     let finalCost = 0
     let alreadyCountedEvents = 0
-
-    console.log(pricingSliderLogic.values.availableProducts)
 
     const tiers = pricingSliderLogic.values.availableProducts
         .find((product) => product.type === pricingOption)
@@ -43,56 +48,78 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
     actions: {
         setEventNumber: (value: number) => ({ value }),
         setInputValue: (value: number) => ({ value }),
-        setSliderValue: (value: number) => ({ value }),
+        setProductAnalyticsSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({
+            value,
+            sliderCurve,
+        }),
         setPricingOption: (option: PricingOptionType) => ({ option }),
-        setSessionRecordingSliderValue: (value: number) => ({ value }),
+        setSessionRecordingSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({
+            value,
+            sliderCurve,
+        }),
         setSessionRecordingInputValue: (value: number) => ({ value }),
-        setFeatureFlagSliderValue: (value: number) => ({ value }),
+        setFeatureFlagSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({ value, sliderCurve }),
         setFeatureFlagInputValue: (value: number) => ({ value }),
-        setSurveyResponseSliderValue: (value: number) => ({ value }),
+        setSurveyResponseSliderValue: (value: number, sliderCurve?: (x: number) => number) => ({ value, sliderCurve }),
         setSurveyResponseInputValue: (value: number) => ({ value }),
+        toggleAnnualBilling: true,
+        toggleHighVolCTA: true,
     },
     reducers: {
         surveyResponseNumber: [
             250,
             {
-                setSurveyResponseSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
+                setSurveyResponseSliderValue: (
+                    _: null,
+                    { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
+                ) => {
+                    return Math.round(sliderCurve ? sliderCurve(value) : value)
+                },
                 setSurveyResponseInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
         featureFlagNumber: [
             1000000,
             {
-                setFeatureFlagSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
+                setFeatureFlagSliderValue: (
+                    _: null,
+                    { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
+                ) => Math.round(sliderCurve ? sliderCurve(value) : value),
                 setFeatureFlagInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
         sessionRecordingEventNumber: [
-            15000,
+            5000,
             {
-                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) =>
-                    Math.round(sliderCurve(value)),
+                setSessionRecordingSliderValue: (
+                    _: null,
+                    { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
+                ) => Math.round(sliderCurve ? sliderCurve(value) : value),
                 setSessionRecordingInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
         eventNumber: [
-            1000000,
+            MILLION,
             {
-                setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
+                setProductAnalyticsSliderValue: (
+                    _: null,
+                    { value, sliderCurve }: { value: number; sliderCurve?: (x: number) => number }
+                ) => Math.round(sliderCurve ? sliderCurve(value) : value),
                 setInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
-        sliderValue: [
+        productAnalyticsSliderValue: [
             null,
             {
-                setSliderValue: (_: null, { value }: { value: number }) => value,
+                setProductAnalyticsSliderValue: (_: null, { value }: { value: number }) => value,
                 setInputValue: (_: null, { value }: { value: number }) => inverseCurve(value * 1000000),
             },
         ],
         inputValue: [
             1,
             {
-                setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value) / 1000000),
+                setProductAnalyticsSliderValue: (_: null, { value }: { value: number }) =>
+                    Math.round(sliderCurve(value) / 1000000),
                 setInputValue: (_: null, { value }: { value: number }) => value,
             },
         ],
@@ -147,6 +174,13 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 setPricingOption: (_: null, { option }: { option: string }) => option,
             },
         ],
+        showAnnualBilling: [
+            true,
+            {
+                toggleAnnualBilling: (state) => !state,
+            },
+        ],
+        showHighVolCTA: [true, { toggleHighVolCTA: (state) => !state }],
     },
     selectors: ({ actions, values }) => ({
         finalCost: [
@@ -195,6 +229,36 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 )
             },
         ],
+        enterpriseLevelSpend: [
+            (s) => [s.monthlyTotal],
+            (monthlyTotal: number) => {
+                return monthlyTotal > 1667
+            },
+        ],
+        productAnalyticsEventsMaxed: [
+            (s) => [s.eventNumber],
+            (eventNumber: number) => {
+                return eventNumber >= MAX_PRODUCT_ANALYTICS
+            },
+        ],
+        sessionReplayRecordingsMaxed: [
+            (s) => [s.sessionRecordingEventNumber],
+            (recordings: number) => {
+                return recordings >= MAX_SESSION_REPLAY
+            },
+        ],
+        featureFlagsRequestsMaxed: [
+            (s) => [s.featureFlagNumber],
+            (requests: number) => {
+                return requests >= MAX_FEATURE_FLAGS
+            },
+        ],
+        surveyResponsesMaxed: [
+            (s) => [s.surveyResponseNumber],
+            (responses: number) => {
+                return responses >= MAX_SURVEYS
+            },
+        ],
         finalMonthlyCost: [
             (s) => [s.finalCost],
             (finalCost: number) => {
@@ -215,3 +279,4 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
         },
     }),
 })
+export { MAX_FEATURE_FLAGS, MAX_PRODUCT_ANALYTICS, MAX_SESSION_REPLAY, MAX_SURVEYS, MILLION }

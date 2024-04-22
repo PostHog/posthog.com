@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - tim-glaser
-featuredImage: ../images/blog/migrating-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/migrating-hog.png
 featuredImageType: full
 category: Inside PostHog
 ---

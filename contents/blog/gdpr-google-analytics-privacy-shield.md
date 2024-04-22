@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/google-analytics-gdpr.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/google-analytics-gdpr.png
 featuredImageType: full
 author:
   - andy-vandervell
@@ -33,7 +34,7 @@ As confirmed by [guidance](https://tweakers.net/nieuws/192020/autoriteit-persoon
 ### 3. This is just the beginning
 This complaint was but one of 100 similar complaints lodged by the same non-profit group. The founder, Max Schrems, [told WIRED](https://www.wired.co.uk/article/google-analytics-europe-austria-privacy-shield): "It's not specific to Google Analytics. It's basically about outsourcing to US providers in general". Other complaints include the use of Google Analytics and Facebook Connect by the likes of Airbnb and Ikea, so expect to hear about more rulings in the coming months.
 
-![Is Google Analytics illegal website](../images/blog/gdpr-privacy-shield/is-ga-legal-website.png)
+![Is Google Analytics illegal website](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gdpr-privacy-shield/is-ga-legal-website.png)
 <figcaption className="text-center">
   The Austrian ruling <a href="https://isgoogleanalyticsillegal.com/">questions the legality</a> of using Google in the EU
 </figcaption>

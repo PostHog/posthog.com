@@ -42,10 +42,10 @@ It's recommended to run the prompt for yourself first to make sure it works as e
 
 Shows in the middle of the screen. It's more intrusive than a popup.
 
-![Modal prompt](../../images/handbook/prompt-modal.png)
+![Modal prompt](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/prompt-modal.png)
 
 ### Popup prompt
 
 Shows in the bottom right corner. It's less intrusive than a modal.
 
-![Popup prompt](../../images/handbook/prompt-popup.png)
+![Popup prompt](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/prompt-popup.png)

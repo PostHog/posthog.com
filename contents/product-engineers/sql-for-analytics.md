@@ -1,13 +1,17 @@
 ---
 date: 2023-09-08
 title: The basics of SQL for analytics
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/hog_ql.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
 category: Engineering
 tags:
   - Product engineers
   - Product analytics
+crosspost:
+  - Blog
 ---
 
 Analytics is one of SQL's most important use cases. There are many ways to slice, modify, and interpret analytics data. SQL provides the depth and customizability to get insights from it, answer questions, and make data-driven decisions.
@@ -18,7 +22,7 @@ This post goes over how to analyze your analytics data with SQL and recommendati
 
 SQL provides complete customization into the retrieval and formatting of analytics data. Because of the limitless options for doing this, it is useful to break down the analysis process into three main blocks: your analytics data, the SQL query, and the results.
 
-![Building blocks](../images/blog/sql-for-analytics/blocks.png)
+![Building blocks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/sql-for-analytics/blocks.png)
 
 ### 1. Your data
 
@@ -84,7 +88,7 @@ As an output from the query on your data, you get a result. The result takes the
 
 Most analytics platforms transform the data from the result into a visual such as a table, formatted page, or graph. This enables further analysis.
 
-![SQL insight](../images/blog/sql-for-analytics/sql.png)
+![SQL insight](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/sql-for-analytics/sql.png)
 
 ## Why use SQL for analytics?
 
@@ -94,7 +98,7 @@ First, SQL enables you to retrieve and format data in any way you like. You aren
 
 The options analytics platform provide are a subset of all possible queries since they likely use SQL to calculate and power those options. Using SQL yourself provides access to all possible SQL queries, data, and formatting. 
 
-![All possible SQL queries](../images/blog/sql-for-analytics/possible.png)
+![All possible SQL queries](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/sql-for-analytics/possible.png)
 
 Although analytics platforms try to cover as many types of analysis and data as possible, they can’t do everything. Many types of queries aren’t possible to template. This is because the format of data for everyone’s analytics is different. For example, your filters might be too complex or your data might be in a format visualizations can’t handle. With SQL knowledge, you can create queries using your own data format and get results relevant to you.
 

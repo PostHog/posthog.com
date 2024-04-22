@@ -1,22 +1,25 @@
 ---
-title: How Adauris tracks performance, tailors activation and grew traffic by 500%
+title: 'How Adauris tracks performance, tailors activation and grew traffic by 500%'
 customer: Adauris
-logo: ../images/customers/adauris/logo.png
-logoDark: ../images/customers/adauris/logo-dark.png
-featuredImage: ../images/customers/adauris/featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo-dark.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/featured.png
 featuredCustomer: false
 industries:
-    - SaaS, Publishing
+  - 'SaaS, Publishing'
 users:
-    - Growth
-    - Engineering
-    - Product
-    - Marketing
+  - Growth
+  - Engineering
+  - Product
+  - Marketing
 toolsUsed:
-    - Experiments
-    - Session Replay
-    - PostHog Cloud
-    - Insights
+  - Experiments
+  - Session Replay
+  - PostHog Cloud
+  - Insights
 date: 2023-11-05
 ---
 
@@ -60,5 +63,5 @@ One example of how Adauris tailors the onboarding flow is by limiting which feat
 
 “We’ve been running these sorts of experiments for a couple of months,” says Varun. “We’ve already increased the number of visits to our landing pages by over 500%, widening the top of our funnel dramatically.” 
 
-“A lot of the ideas come from insights we collect in PostHog, and naturally we track success there too — so it becomes a self-fulfilling loop. The results end up deployed everywhere across the web, wherever our audio player is installed!”
+“A lot of the ideas come from insights we collect in PostHog, and naturally we track success there too — so it becomes [a self-fulfilling loop](/product-engineers/growth-loops). The results end up deployed everywhere across the web, wherever our audio player is installed!”
 

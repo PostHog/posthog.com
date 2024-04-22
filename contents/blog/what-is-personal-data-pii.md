@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/google-analytics-gdpr.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/google-analytics-gdpr.png
 featuredImageType: full
 author:
   - andy-vandervell
@@ -76,8 +77,6 @@ Also, note the use of "data subject" here. It's deliberate. You don't even need 
 
 Of course, any time you're collecting personal data, consent is required: hence cookie consent notices on websites.
 
-Recent legal rulings have cast doubt on the [legality of using Google Analytics](https://isgoogleanalyticsillegal.com/). Our [guide to GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) offers some alternatives if it's a concern for your business.
-
 ### Examples of personal data under GDPR
 
 Names, identification numbers, location data and plenty more besides qualifies as personal data under the GDPR, but there is no official list of what the regulation considers personal data. Common sense prevails, though, and certainly everything in our list of PII examples applies to the GDPR.
@@ -110,10 +109,8 @@ The European Commission published [guidance on the free flow of non-personal dat
 
 ## PostHog and privacy compliance
 
-PostHog is an [open-source product analytics platform](/blog/best-open-source-analytics-tools) you can self-host, so data never has to leave your infrastructure. This is ideal for businesses who handle sensitive data but don't want to sacrifice advanced features like [Feature Flags](/product/feature-flags), [Session Recording](/product/session-recording), [Funnel Analysis](/product/funnels), and [Heatmaps](/product/heatmaps) - all of which are included in PostHog.
+PostHog offers EU hosting for GDPR compliance and a Business Associate Agreement (BAA) is available for companies who need to comply with HIPAA.
 
 Read our [privacy compliance documentation](/docs/privacy), which covers the [GDPR](/docs/privacy/gdpr-compliance), [HIPAA](/docs/privacy/hipaa-compliance) and [CCPA](/docs/privacy/ccpa-compliance) for more information on how to deploy PostHog in a privacy-compliant manner.
-
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
 <ArrayCTA />

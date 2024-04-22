@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -24,7 +25,7 @@ So, without further ado, here they are:
 
 ### [Session Recording (Beta)](https://github.com/PostHog/posthog/issues/1846)
 
-![Session Recording Page Screenshot](../images/blog/array/session-recording.png)
+![Session Recording Page Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/session-recording.png)
 
 Given that our mission at PostHog is to increase the number of successful projects in the world, session recording felt like a feature that fits in perfectly with that goal.
 
@@ -32,7 +33,7 @@ PostHog already provides various features to help you understand and improve you
 
 With PostHog's session recording, you are able to truly feel the pain points of your users first-hand, seeing where they get stuck, debugging exceptions faster, and making your UX smoother. 
 
-![Session Recording Screenshot](../images/blog/array/session-recording-ss.png)
+![Session Recording Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/session-recording-ss.png)
 
 Additionally, you can do so while still preserving the privacy of your users, by determining what shouldn't be captured, as well as being able to turn session recording on and off as you wish.
 
@@ -41,7 +42,7 @@ However, please note that our session recording feature is in **Beta** at the mo
 
 ### [Apps (Beta)](https://github.com/PostHog/posthog/issues/1896)
 
-![Apps Screenshot](../images/blog/array/plugins.png)
+![Apps Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/plugins.png)
 
 Apps is another **Beta** feature that we're extremely excited for. Currently only available for self-hosted instances, apps allow you to add additional logic to your event processing pipeline, in order to do things like enrich your data or send it somewhere else, like a data warehouse. 
 
@@ -58,7 +59,7 @@ Finally, as is the case with session recording, please report any bugs in the fu
 
 ### [Multiple Projects](https://github.com/PostHog/posthog/pull/1562)
 
-![Multiple Projects Screenshot](../images/blog/array/org-project.png)
+![Multiple Projects Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/org-project.png)
 
 You asked and we delivered!
 
@@ -72,13 +73,13 @@ As this is an Enterprise Edition feature, please contact us at _[sales@posthog.c
 
 ### [Dashboard Templates](https://github.com/PostHog/posthog/pull/1942)
 
-![Dashboard Templates Screenshot](../images/blog/array/dashboard-template.png)
+![Dashboard Templates Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/dashboard-template.png)
 
 In order to make it easier to create valuable dashboards to keep track of your business metrics, PostHog now offers the option to create new dashboards based on a template. We will be expanding the power of dashboard templates, but, as of right now, you can already create a dashboard using our web app dashboard template, which provides you with a good starting point for determining and tracking relevant metrics.
 
 ### [Setup Improvements](https://github.com/PostHog/posthog/pull/1990)
 
-![Google Login Screenshot](../images/blog/array/google-login.png)
+![Google Login Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/google-login.png)
 
 In addition to GitHub and GitLab authentication, PostHog now supports signup and login with Google accounts! 
 
@@ -86,7 +87,7 @@ We also improved our setup process by better structuring our settings pages, all
 
 ### [Documentation Level Up](https://github.com/PostHog/posthog.com)
 
-![Docs Screenshot](../images/blog/array/docs.png)
+![Docs Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/docs.png)
 
 We have been working hard to improve our product documentation and had a few big upgrades recently:
 
@@ -191,7 +192,7 @@ Originally built over the span of a few days at an internal hackathon, our apps 
 
 As a result, the linked issue has the following gem, as well as an in-depth discussion (AKA monologue) about the implementation, which is extremely informative:
 
-![Gallery Failed Apps](../images/blog/array/gallery-failed.png)
+![Gallery Failed Apps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/gallery-failed.png)
 
 
 ## PostHog News

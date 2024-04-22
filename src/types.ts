@@ -117,6 +117,8 @@ export interface BillingV2PlanType {
     tiers?: BillingV2TierType[]
     unit?: 'event' | 'recording'
     features?: BillingV2FeatureType[]
+    unit_amount_usd?: string | null
+    contact_support?: boolean
 }
 
 export enum AvailableFeature {

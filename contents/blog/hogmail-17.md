@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/hogmail.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hogmail.png
 featuredImageType: full
 category: General
 ---
@@ -26,7 +27,7 @@ Coming up: how we made revenue go up and to the right, the important traits you 
 
 ## #posthog-blog
 
-🚀 [How we found our Ideal Customer Profile](https://posthog.com/blog/creating-ideal-customer-profile): Creating an Ideal Customer Profile (ICP) is one of the most important things we've ever done. Why? Look at that graph.
+🚀 [How we found our Ideal Customer Profile](/newsletter/ideal-customer-profile-framework): Creating an Ideal Customer Profile (ICP) is one of the most important things we've ever done. Why? Look at that graph.
 
 📲 [How we built an app server (MVP to billions of events)](https://posthog.com/blog/how-we-built-an-app-server): Marius dives deep into how PostHog apps went from three-day MVP to a service handling billions of events.
 

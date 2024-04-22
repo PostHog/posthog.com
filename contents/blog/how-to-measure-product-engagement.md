@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - hanna-crombie
-featuredImage: ../images/blog/lw-queries.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/lw-queries.png
 featuredImageType: full
 category: Product growth
 tags:
@@ -58,7 +59,7 @@ The individual metrics are limitless. You’ll see **pageviews**, **bounce rate*
 ## What is the best way to measure product engagement?
 Listening to users’ actions is important, but how can you track engagement metrics and translate them into actionable insights?
 
-![](../images/blog/how-to-measure-engagement/product-engagement-metrics.jpeg)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-engagement/product-engagement-metrics.jpeg)
 
 A good way to get started is to use some basic metrics to create a broad framework for engagement insight. The following metrics are very easy to track with the help of product analytics software such as PostHog (pictured above).
 
@@ -93,7 +94,7 @@ If users are paying for features they don’t use then it lowers the perceived v
 
 By comparing the values of these metrics against each other you can begin to get an idea of where you’re winning on product engagement, and where you might be losing out. 
 
-![](../images/blog/how-to-measure-engagement/correlation.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-engagement/correlation.png)
 
 ## What tools are good for tracking product engagement?
 Naturally, we think PostHog is the best tool for tracking product engagement. 

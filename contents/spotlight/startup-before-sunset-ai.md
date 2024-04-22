@@ -1,12 +1,14 @@
 ---
-title: "How BeforeSunset AI achieved 'Product of the Month' on Product Hunt"
+title: How BeforeSunset AI achieved 'Product of the Month' on Product Hunt
 date: 2023-08-31
-author: ["joe-martin"]
+author:
+  - joe-martin
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/startup_beforesunset.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/startup_beforesunset.png
 featuredImageType: full
 category: Startups
 ---
@@ -19,7 +21,7 @@ category: Startups
 
 After rebuilding the product around this AI-powered vision, the team wanted to relaunch in earnest — and in June 2023 debuted on Product Hunt, going on to win [Product of the Day, Week, and Month](https://www.producthunt.com/products/beforesunset). Here’s how:
 
-![BeforeSunset AI Launch on Product Hunt](../images/blog/before-sunset-ai.png)
+![BeforeSunset AI Launch on Product Hunt](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/before-sunset-ai.png)
 
 ### 1. Don't leave launch planning to the last minute
 
@@ -49,11 +51,11 @@ Finding the right community or launch channel can be a significant challenge all
 
 One example of this came from BeforeSunset's 'Plan my day' AI feature, where users are intended to add tasks and let the AI schedule time for them. [Session replays](/session-replay) showed users were instead adding their own time blocks in the description. This helped the team understand that when users write down their tasks, they write down the amount of time they want to spend on these tasks next to their to-dos, and they think the AI will assign that time slot to that task.
 
-> **Putting it into action:** Document your target audiences and personas somewhere that everyone can access, then use this to identify the communities where these users may congregate. Use the persona as a benchmark for the quality of your marketing assets, and be sure to engage with communities well in advance of a launch to build goodwill. See how [PostHog does this with ICPs](/blog/creating-ideal-customer-profile) for more info. 
+> **Putting it into action:** Document your target audiences and personas somewhere that everyone can access, then use this to identify the communities where these users may congregate. Use the persona as a benchmark for the quality of your marketing assets, and be sure to engage with communities well in advance of a launch to build goodwill. See how [PostHog does this with ICPs](/newsletter/ideal-customer-profile-framework) for more info. 
 
 ### 3. Move fast. Ask for support personally.
 
-![BeforeSunset AI outreach](../images/blog/before-sunset-outreach.png)
+![BeforeSunset AI outreach](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/before-sunset-outreach.png)
 <Caption>An example of a community outreach message sent by BeforeSunset's team</Caption>
 
 With Product Hunt, you only have a short amount of time in order to get traction and galvanize the community. Take too long and you’ll fall off the daily page, and into the archives. So, you need a strategy to continue currying favor and votes throughout the day.

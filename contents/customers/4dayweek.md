@@ -1,18 +1,21 @@
 ---
 title: How 4DayWeek increased conversion by 4% with one A/B experiment
 customer: 4DayWeek
-logo: ../images/customers/4dayweek/4dayweek-logo.png
-logoDark: ../images/customers/4dayweek/4dayweek-logo-dark.png
-featuredImage: ../images/customers/4dayweek/4dayweek_featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo-dark.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek_featured.png
 industries:
-    - Recruitment
+  - Recruitment
 users:
-    - Marketing
-    - Leadership
-    - Founder
+  - Marketing
+  - Leadership
+  - Founder
 toolsUsed:
-    - Experimentation
-    - Product analytics
+  - Experimentation
+  - Product analytics
 date: 2023-09-15
 ---
 
@@ -26,12 +29,12 @@ The fact that Phil builds in public made him naturally curious about PostHog.
 
 ### Increasing conversions with social proof and A/B testing
 
-Phil was familiar with the _concept_ of A/B testing, but had never tried running a test before. Thankfully, with a little help from ChatGPT and [PostHog’s documentation](/tutorials/categories/experimentation), he quickly got up to speed and began planning how to run A/B tests that could make 4DayWeek even more successful.  
+Phil was familiar with the _concept_ of A/B testing, but had never tried running a test before. Thankfully, with a little help from ChatGPT and [PostHog’s documentation](/tutorials/categories/experimentation), he quickly got up to speed and began planning [how to run A/B tests](/product-engineers/how-to-do-ab-testing) that could make 4DayWeek even more successful.  
 
 “Every test has to begin with a hypothesis,” says Phil. “In my case, I wanted to test if social proofs would help increase the number of newsletter signups. My hypothesis was that users would be more likely to convert if they had an indication that the service was popular and trusted by lots of people.”
 
 ​
-![PostHog 4dayweek experiment](../images/customers/4dayweek/4dayweek-before-after.png)
+![PostHog 4dayweek experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/4dayweek/4dayweek-before-after.png)
 <Caption>Tests in PostHog can have multiple variants, but Phil kept his simple and split traffic 50/50 between the original (left) and the test (right) versions</Caption>
 
 

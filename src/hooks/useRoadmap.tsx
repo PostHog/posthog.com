@@ -50,34 +50,30 @@ const query = graphql`
             nodes {
                 name
                 roadmaps {
-                    ...roadmap
+                    squeakId
+                    betaAvailable
+                    complete
+                    dateCompleted
+                    title
+                    description
+                    image {
+                        url
+                    }
+                    githubPages {
+                        title
+                        html_url
+                        number
+                        closed_at
+                        reactions {
+                            hooray
+                            heart
+                            eyes
+                            plus1
+                        }
+                    }
+                    projectedCompletion
                 }
             }
         }
-    }
-
-    fragment roadmap on SqueakRoadmap {
-        squeakId
-        betaAvailable
-        complete
-        dateCompleted
-        title
-        description
-        image {
-            url
-        }
-        githubPages {
-            title
-            html_url
-            number
-            closed_at
-            reactions {
-                hooray
-                heart
-                eyes
-                plus1
-            }
-        }
-        projectedCompletion
     }
 `

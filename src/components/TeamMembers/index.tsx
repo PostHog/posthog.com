@@ -6,6 +6,7 @@ import { useUser } from 'hooks/useUser'
 import { Close, Plus } from 'components/Icons'
 import { Combobox } from '@headlessui/react'
 import { Skeleton } from 'components/Questions/QuestionsTable'
+import { CallToAction } from 'components/CallToAction'
 
 const teamQuery = (name: string) =>
     qs.stringify(
@@ -59,24 +60,21 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
               })
 
     return (
-        <div className="relative w-full my-1">
+        <div className="relative w-full mt-4">
             <Combobox onChange={handleChange}>
-                <div className="rounded-md bg-accent dark:bg-accent-dark border border-border dark:border-dark w-full flex justify-between items-center overflow-hidden">
+                <div className="rounded-md bg-accent dark:bg-accent-dark border border-border dark:border-dark w-full flex justify-between items-center overflow-hidden relative">
                     <Combobox.Input
                         autoFocus
                         placeholder="Type to search"
-                        className="bg-accent dark:bg-accent-dark flex-shrink-0 border-0 flex-grow !py-2 !px-4"
+                        className="bg-accent dark:bg-accent-dark border-0 flex-grow py-2 px-4"
                         onChange={(e) => setQuery(e.target.value)}
                     />
-                    <button
-                        onClick={() => setShowMods(false)}
-                        className="flex items-center justify-center w-8 outline-none"
-                    >
+                    <button onClick={() => setShowMods(false)} className="absolute -right-2 w-8 outline-none">
                         <Close className="w-3 h-3" />
                     </button>
                 </div>
 
-                <Combobox.Options className="list-none m-0 p-0 mt-1 max-h-80 overflow-auto divide-y divide-border dark:divide-border-dark rounded-md border border-border dark:border-dark absolute w-full z-50">
+                <Combobox.Options className="list-none m-0 p-0 mt-1 max-h-80 overflow-auto divide-y divide-border dark:divide-border-dark rounded-md border border-border dark:border-dark absolute w-full z-[50]">
                     {filteredMods.map((mod) => {
                         const name = [mod?.profile?.firstName, mod?.profile?.lastName].filter(Boolean).join(' ')
                         return (
@@ -88,7 +86,7 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
                                         }`}
                                     >
                                         <img
-                                            className="rounded-full w-[32px] h-[32px] bg-border dark:bg-border-dark"
+                                            className="rounded-full w-[32px] h-[32px] bg-border dark:bg-border-dark border border-border dark:border-dark"
                                             src={mod?.profile?.avatar?.url}
                                         />
                                         <span>{name}</span>
@@ -103,31 +101,21 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
     )
 }
 
-const AddTeamMember = ({ handleChange }) => {
+export const AddTeamMember = ({ handleChange }) => {
     const [showMods, setShowMods] = useState(false)
 
     return showMods ? (
-        <li className="!m-0 flex items-center">
-            <TeamMemberSelect
-                setShowMods={setShowMods}
-                handleChange={(mod) => {
-                    handleChange(mod)
-                    setShowMods(false)
-                }}
-            />
-        </li>
+        <TeamMemberSelect
+            setShowMods={setShowMods}
+            handleChange={(mod) => {
+                handleChange(mod)
+                setShowMods(false)
+            }}
+        />
     ) : (
-        <li className="!m-0 !text-inherit flex space-x-4 items-center relative active:top-[1px] active:scale-[.99] transition-transform h-full group">
-            <button
-                onClick={() => setShowMods(true)}
-                className="flex items-center space-x-2 w-full p-2 hover:bg-accent dark:hover:bg-accent-dark rounded"
-            >
-                <span className=" w-[32px] h-[32px] flex justify-center items-center p-1 rounded-full bg-accent dark:bg-accent-dark border group-hover:border-border dark:group-hover:border-dark border-transparent transition-colors">
-                    <Plus className="w-full h-full" />
-                </span>
-                <span className="font-semibold text-sm">Add team member</span>
-            </button>
-        </li>
+        <CallToAction onClick={() => setShowMods(true)} type="secondary" size="sm" className="mt-4">
+            Add team member
+        </CallToAction>
     )
 }
 
@@ -300,8 +288,8 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                         )
                     })
                 )}
-                {isModerator && <AddTeamMember handleChange={addTeamMember} />}
             </ul>
+            {isModerator && <AddTeamMember handleChange={addTeamMember} />}
         </section>
     )
 }

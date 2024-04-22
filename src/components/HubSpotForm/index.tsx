@@ -5,6 +5,8 @@ import { button } from 'components/CallToAction'
 import { useLocation } from '@reach/router'
 import Confetti from 'react-confetti'
 import usePostHog from 'hooks/usePostHog'
+import * as Yup from 'yup'
+import { IconCheck } from '@posthog/icons'
 
 interface CustomFieldOption {
     label: string
@@ -30,7 +32,9 @@ interface IProps {
     }
     formOptions?: {
         className?: string
+        cols?: 1 | 2
     }
+    autoValidate?: boolean
 }
 
 export interface Form {
@@ -206,16 +210,71 @@ function Radio({
     )
 }
 
+function Checkbox({
+    value,
+    label,
+    name,
+    reference,
+}: {
+    value: string | number
+    label: string
+    name: string
+    reference?: RefObject<HTMLInputElement>
+}) {
+    const { setFieldValue, values } = useFormikContext()
+
+    const handleChange = async (e: React.FormEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget
+        const newValues = values[name].includes(value)
+            ? values[name].filter((v) => v !== value)
+            : [...values[name], value]
+        name && value && (await setFieldValue(name, newValues))
+    }
+
+    const checked = values[name].includes(value)
+
+    return (
+        <label
+            role="option"
+            className="relative w-full text-center cursor-pointer"
+            htmlFor={`${name}-${value}`}
+            aria-selected={checked}
+        >
+            <input
+                checked={checked}
+                className="absolute opacity-0 peer inset-0"
+                type="checkbox"
+                value={value}
+                onChange={handleChange}
+                id={`${name}-${value}`}
+                {...(reference ? { ref: reference } : {})}
+            />
+
+            <span
+                className="flex space-x-2 items-center p-2 w-full rounded-md border-[2px] border-black/10  peer-focus:border-black/40 peer-checked:!border-black/80 dark:border-white/10  dark:peer-focus:border-white/40 dark:peer-checked:!border-white/80
+            text-sm"
+            >
+                <span>
+                    <IconCheck className={`w-4 ${checked ? '' : 'opacity-40'}`} />
+                </span>
+                <span>{label}</span>
+            </span>
+        </label>
+    )
+}
+
 function RadioGroup({
     options,
     name,
     placeholder,
     cols = 2,
+    type,
 }: {
     options: CustomFieldOption[]
     name: string
     placeholder: string
     cols?: 1 | 2
+    type: string
 }) {
     if (!name) return null
     const { openOptions, setOpenOptions } = useContext(FormContext)
@@ -233,7 +292,6 @@ function RadioGroup({
                     setOpenOptions([...openOptions, name])
                     if (!values[name]) {
                         ref.current?.focus()
-                        setFieldValue(name, options[0]?.value)
                     }
                 }
             }}
@@ -243,32 +301,48 @@ function RadioGroup({
                 {placeholder}
             </p>
             <motion.div className="overflow-hidden" animate={{ height: open ? 'auto' : 0 }} initial={{ height: 0 }}>
-                <p className="m-0 mt-1 mb-4 text-xs">
-                    <strong>Tip:</strong> Use{' '}
-                    <kbd
-                        className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
-                        style={{ fontSize: '10px' }}
-                    >
-                        ←
-                    </kbd>
-                    <kbd
-                        className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
-                        style={{ fontSize: '10px' }}
-                    >
-                        →
-                    </kbd>{' '}
-                    to advance through options
-                </p>
+                {type !== 'checkbox' && (
+                    <p className="m-0 mt-1 mb-4 text-xs">
+                        <strong>Tip:</strong> Use{' '}
+                        <kbd
+                            className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
+                            style={{ fontSize: '10px' }}
+                        >
+                            ←
+                        </kbd>
+                        <kbd
+                            className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
+                            style={{ fontSize: '10px' }}
+                        >
+                            →
+                        </kbd>{' '}
+                        to advance through options
+                    </p>
+                )}
+
                 <div
-                    role="radiogroup"
+                    role={type === 'checkbox' ? 'listbox' : 'radiogroup'}
                     aria-labelledby={`group-${name}`}
                     className={`mt-2 grid grid-cols-${cols} gap-x-2 gap-y-2 ${
                         open ? 'opacity-100' : 'opacity-0 absolute'
                     }`}
+                    {...(type === 'checkbox'
+                        ? {
+                              'aria-multiselectable': true,
+                          }
+                        : {})}
                 >
                     {options?.map((option, index) => {
                         const { value, label } = option
-                        return (
+                        return type === 'checkbox' ? (
+                            <Checkbox
+                                {...(index === 0 && ref ? { reference: ref } : {})}
+                                key={value}
+                                value={value}
+                                label={label}
+                                name={name}
+                            />
+                        ) : (
                             <Radio
                                 {...(index === 0 && ref ? { reference: ref } : {})}
                                 key={value}
@@ -305,6 +379,7 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
                     error ? 'bottom-6 placeholder-shown:bottom-8' : 'bottom-2 placeholder-shown:bottom-4'
                 } peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0`}
                 {...props}
+                {...(props.type === 'number' ? { min: 0 } : {})}
                 onFocus={() => setType(props.type ?? 'text')}
                 type={props.type === 'date' ? 'date' : type}
             />
@@ -320,10 +395,11 @@ export default function HubSpotForm({
     formID,
     customFields,
     customMessage,
-    validationSchema,
     onSubmit,
     buttonOptions,
     formOptions,
+    autoValidate,
+    ...other
 }: IProps) {
     const posthog = usePostHog()
     const { href } = useLocation()
@@ -335,6 +411,7 @@ export default function HubSpotForm({
     })
     const [submitted, setSubmitted] = useState(false)
     const [confetti, setConfetti] = useState(true)
+    const [validationSchema, setValidationSchema] = useState(other.validationSchema)
 
     const handleSubmit = async (values) => {
         const distinctId = posthog?.get_distinct_id?.()
@@ -346,8 +423,8 @@ export default function HubSpotForm({
         })
         const submission = {
             pageUri: href,
-            fields: form.fields.map(({ name, objectTypeId }) => {
-                const value = values[name]
+            fields: form.fields.map(({ name, objectTypeId, fieldType }) => {
+                const value = fieldType === 'checkbox' ? values[name].join(';') : values[name]
                 return {
                     objectTypeId,
                     name,
@@ -355,7 +432,6 @@ export default function HubSpotForm({
                 }
             }),
         }
-
         const res = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/6958578/${formID}`, {
             method: 'POST',
             headers: {
@@ -388,6 +464,23 @@ export default function HubSpotForm({
                     message: form.inlineMessage,
                     name: form.name,
                 })
+                if (autoValidate) {
+                    const validationSchema = Yup.object().shape(
+                        Object.fromEntries(
+                            fields.map((field) => [
+                                field.name,
+                                field.required
+                                    ? field.fieldType === 'checkbox'
+                                        ? Yup.array().of(Yup.string()).required(`${field.label} is a required field`)
+                                        : Yup.string().required(`${field.label} is a required field`)
+                                    : field.fieldType === 'checkbox'
+                                    ? Yup.array().of(Yup.string())
+                                    : Yup.string(),
+                            ])
+                        )
+                    )
+                    setValidationSchema(validationSchema)
+                }
             })
     }, [])
 
@@ -408,26 +501,37 @@ export default function HubSpotForm({
                 <Formik
                     validateOnChange={false}
                     validationSchema={validationSchema}
-                    initialValues={Object.fromEntries(form.fields.map(({ name }) => [name, '']))}
+                    initialValues={Object.fromEntries(
+                        form.fields.map(({ name, fieldType }) => [name, fieldType === 'checkbox' ? [] : ''])
+                    )}
                     onSubmit={handleSubmit}
                 >
                     <Form className={formOptions?.className}>
                         <div className="grid divide-y divide-border border border-border dark:divide-border-dark dark:border-dark">
-                            {form.fields.map(({ name, label, type, required, options }, index) => {
+                            {form.fields.map(({ name, label, type, required, options, fieldType }, index) => {
                                 if (customFields && customFields[name])
                                     return {
                                         radioGroup: (
                                             <RadioGroup
+                                                type={fieldType}
                                                 options={customFields[name].options || options}
                                                 name={name}
                                                 placeholder={label}
-                                                cols={customFields[name].cols}
+                                                cols={customFields[name].cols ?? formOptions?.cols}
                                             />
                                         ),
                                     }[customFields[name]?.type]
 
                                 if (type === 'enumeration')
-                                    return <RadioGroup options={options} name={name} placeholder={label} />
+                                    return (
+                                        <RadioGroup
+                                            type={fieldType}
+                                            options={options}
+                                            name={name}
+                                            placeholder={label}
+                                            cols={formOptions?.cols}
+                                        />
+                                    )
 
                                 return (
                                     <Input

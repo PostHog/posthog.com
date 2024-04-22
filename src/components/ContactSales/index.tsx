@@ -4,15 +4,16 @@ import Link from 'components/Link'
 import SEO from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import airbus from '../Home/images/airbus.svg'
-import airbusDark from '../Home/images/airbus_dark.svg'
-import phantom from '../Home/images/phantom.svg'
-import phantomDark from '../Home/images/phantom_dark.svg'
-import landmark from '../Home/images/landmark.svg'
-import landmarkDark from '../Home/images/landmark_dark.svg'
-import Contact from './Contact'
+import airbus from './images/airbus.svg'
+import airbusDark from './images/airbus_dark.svg'
+import phantom from './images/phantom.svg'
+import phantomDark from './images/phantom_dark.svg'
+import landmark from './images/landmark.svg'
+import landmarkDark from './images/landmark_dark.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import HubSpotForm from 'components/HubSpotForm'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const features = [
     'SSO SAML',
@@ -100,12 +101,14 @@ export default function ContactSales({ location }) {
                     </div>
                     <div className="order-1 md:order-2">
                         <h3 className="mb-1">Contact us</h3>
-                        <Contact
-                            initialValues={{
-                                product: params.has('edition')
-                                    ? params.get('edition') === 'enterprise' && 'PostHog Cloud Enterprise'
-                                    : undefined,
-                            }}
+                        <p className="text-sm">
+                            <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
+                            form at a breakneck pace!
+                        </p>
+                        <HubSpotForm
+                            autoValidate
+                            formID="32d0b55f-9de6-4c40-a6ec-ddfd2c39578b"
+                            formOptions={{ cols: 1 }}
                         />
                     </div>
                 </section>

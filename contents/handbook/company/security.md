@@ -23,9 +23,11 @@ Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or what
 
 ## SOC 2
 
-PostHog is certified as SOC 2 Type 1 compliant, following an external audit. 
+PostHog is certified as SOC 2 Type II compliant, following an external audit. 
 
-Our latest [security report](https://drive.google.com/file/d/1hSW8roswMjVn0HReVOs1lQFo3O9ToqXh/view?usp=share_link) is publicly available (last updated April 2023). 
+Our latest [security report](https://drive.google.com/file/d/1hSW8roswMjVn0HReVOs1lQFo3O9ToqXh/view?usp=share_link) is publicly available (covering controls as of February 28th, 2023). 
+
+We are currently in the process of obtaining our Type II certification, and anticipate our report will be available in July. If a customer requires a bridge letter in the meantime, they should email privacy@posthog.com. 
 
 ### Policies
 
@@ -77,7 +79,7 @@ PostHog does not require personally identifiable information or personal data to
 
 - We maintain an extensive security policies to ensure we are managing data responsibly - [see above](/handbook/company/security#policies).  
 - We enter into Data Processing Agreements ('DPAs') with PostHog Cloud customers when requested - [our standard agreement is here](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing). We maintain a register of all DPAs we have entered into. 
-- Customers can shoose whether to host data on our AWS server in the EU (Germany) or US. If data transfer is required from the United Kingdom, EU or EEA to our US-West based AWS environment, we rely on [EU Standard Contractual Clauses](https://docs.google.com/document/d/1reTUk6VTsTLo1ErNYn-Tdmj_ETo8QYNH6tNCaebDwpE/edit?usp=sharing) (SCCs). 
+- Customers can choose whether to host data on our AWS server in the EU (Germany) or US. If data transfer is required from the United Kingdom, EU or EEA to our US-West based AWS environment, we rely on [EU Standard Contractual Clauses](https://docs.google.com/document/d/1reTUk6VTsTLo1ErNYn-Tdmj_ETo8QYNH6tNCaebDwpE/edit?usp=sharing) (SCCs). 
 - We are registered with the Information Commissioner's Office in the United Kingdom as Hiberly Ltd., which is the legal name for our UK entity. 
 - A list of sub-Processors is maintained as part of our [DPA](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing) - we keep this to a strict minimum.
 - Our [Data Processing Register](https://docs.google.com/spreadsheets/d/1HRBhfYINn8jAgwzggVfVH0ttaCfUC18SFAWHU1cjejg/edit#gid=1554885211) is available for viewing by any interested party upon request. 

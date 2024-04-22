@@ -1,6 +1,9 @@
 ---
 title: Sharing or embedding replays
 ---
+import {ProductVideo} from'components/ProductVideo'
+export const shareReplayLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/share-replay-light-mode.mp4"
+export const shareReplayDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/share-replay-dark-mode.mp4"
 
 Replays are typically viewed in **[Session Replay](https://app.posthog.com/replay)** part of PostHog. However, you may want to share specific recordings with people outside of your PostHog organization. You can share them directly using a URL, or embed them in a webpage using an iframe:
 
@@ -14,7 +17,12 @@ Replays are typically viewed in **[Session Replay](https://app.posthog.com/repla
 
 When viewing any recording, press `Share`. You can then configure the recording for **external sharing**. There are also configuration options for the iframe, as well as the ability to specify whether it should start at a particular timestamp.
 
-![Sharing a session replay via the PostHog app](../../images/docs/session-replay/share-replay.mp4)
+<ProductVideo
+    videoLight={shareReplayLight} 
+    videoDark={shareReplayDark}
+    alt="Sharing a session replay via the PostHog app" 
+    classes="rounded"
+/>
 
 ### Method two: Sharing via the PostHog API
 

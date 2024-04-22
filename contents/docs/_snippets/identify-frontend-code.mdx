@@ -18,9 +18,9 @@ PostHog.identify(
 )
 ```
 
-```ios
-posthog.identify("distinct_id", // Replace "distinct_id" with your user's unique identifier
-  properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"]) // optional: set additional user properties
+```ios_swift
+PostHogSDK.shared.identify("distinct_id", // Replace "distinct_id" with your user's unique identifier
+                           userProperties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"]) // optional: set additional user properties
 ```
 
 ```react-native
@@ -28,6 +28,15 @@ posthog.identify('distinct_id', { // Replace "distinct_id" with your user's uniq
     email: 'max@hedgehogmail.com', // optional: set additional user properties
     name: 'Max Hedgehog'
 })
+```
+
+```flutter
+await Posthog().identify(
+  userId: 'distinct_id', // Replace "distinct_id" with your user's unique identifier
+  userProperties: {
+    email: "max@hedgehogmail.com", // optional: set additional user properties
+    name: "Max Hedgehog"
+});
 ```
 
 </MultiLanguage>

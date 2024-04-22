@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -37,7 +38,7 @@ Tell your friends, or apply yourself.
 
 ### [Comparison charts](https://github.com/PostHog/posthog/pull/824)
 
-![Comparison charts](../images/side-by-side-comparison.gif)
+![Comparison charts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/side-by-side-comparison.gif)
 
 The trends page is now even more powerful. You can compare time periods side-by-side - for charts or tables.
 
@@ -47,7 +48,7 @@ Thanks to [Paolo](https://github.com/PaoloC68) for [suggesting this](https://git
 
 ### [View the users inside each datapoint](https://github.com/PostHog/posthog/pull/830/commits/64e1ef34b5d8565934b1980d33432cef4e7002f7)
 
-![Hover breakdown](../images/hover-breakdown.png)
+![Hover breakdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hover-breakdown.png)
 
 Did you know you could do this? If you click the datapoints in your trends graphs, you can see a list of the relevant users.
 

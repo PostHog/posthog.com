@@ -1,25 +1,27 @@
 ---
-title: "How Documenso got 4,000 stars and grew an active GitHub community"
+title: 'How Documenso got 4,000 stars and grew an active GitHub community'
 date: 2023-10-11
-author: ["joe-martin"]
+author:
+  - joe-martin
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/startup_documenso.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/startup_documenso.jpg
 featuredImageType: full
 category: Startups
 ---
 
 > Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work. This time, we spoke to Documenso about how they’ve grown their GitHub community. 
 
-Documenso, the open-source alternative to Docusign, launched in November 2022 but has grown rapidly. The project already has over 4,000 GitHub stars at the time of writing and the team track their Star progress closely, viewing it as a vital community metric.
+Documenso, the open-source alternative to Docusign, launched in November 2022 and has grown rapidly. The project has over 4,000 [GitHub stars](/tutorials/github-star-tracker) at the time of writing and the team track their Star progress closely, viewing it as a vital community metric.
 
-“We track Star, Forks and Contributors on a weekly basis,” says Florent Merian from Documenso. “Stars are mainly useful to us as a social proof. They show that users trust us, and encourage others to do the same — but they also inspire us in the work we do!”
+“We track Star, Forks and Contributors on a weekly basis,” says Florent Merian from Documenso. “Stars are mainly useful to us as a social proof. They show that users trust us, and encourage others to do the same — but they also inspire us in the work we do.”
 
 Over the past year Documenso has put a lot of effort into growing its presence on GitHub, and learned several lessons about what does (and doesn’t) work...
 
-![Documenso GitHub Stars](../images/blog/documenso-stars.png)
+![Documenso GitHub Stars](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/documenso-stars.png)
 <Caption>Documenso has adopted various tactics to create a vibrant GitHub following</Caption>
 
 ### 1. Start small, stay transparent
@@ -58,7 +60,7 @@ Inspired by these surges, Documenso now announces similar milestones whenever it
 
 > **Putting it into practice:** Documenso encourages contributions with a bounty program that posts new issues into their Discord community. Swag is a powerful tool for incentivizing users too! 
 
-![Documenso store](../images/blog/documenso_store.png)
+![Documenso store](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/documenso_store.png)
 <Caption>Documenso uses merch as an incentive for encouraging contributors</Caption>
 
 ### 4. Create incentives

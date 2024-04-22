@@ -1,23 +1,26 @@
 ---
 title: How Groove uses A/B testing and surveys to test new pricing models
 customer: Groove
-logo: ../images/customers/groove/logo.png
-logoDark: ../images/customers/groove/logo-dark.png
-featuredImage: ../images/customers/groove/featured.png
+logo: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/logo.png
+logoDark: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/logo-dark.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/featured.png
 industries:
-    - Helpdesk
+  - Helpdesk
 users:
-    - Engineering
-    - Leadership
-    - Founder
+  - Engineering
+  - Leadership
+  - Founder
 toolsUsed:
-    - Experimentation
-    - Product analytics
-    - Surveys
+  - Experimentation
+  - Product analytics
+  - Surveys
 date: 2023-09-15
 ---
 
-Founded in 2011 by serial founder Alex Turnbull, [Groove](https://www.groovehq.com/) is a simple yet powerful helpdesk and ticketing platform, and a leading alternative to Zendesk for price-conscious teams. It's a crowded market, which makes building quickly on an effective, scalable data stack more vital than ever.
+Founded in 2011 by serial founder Alex Turnbull, [Groove](https://www.groovehq.com/) is a simple yet powerful helpdesk and ticketing platform, and a leading alternative to [Zendesk](/tutorials/zendesk-session-replays) for price-conscious teams. It's a crowded market, which makes building quickly on an effective, scalable data stack more vital than ever.
 
 Alex had used [Mixpanel](/blog/posthog-vs-mixpanel), [Hotjar](/blog/posthog-vs-hotjar) and [Google Analytics 4](/blog/posthog-vs-ga4) in his earlier startups, but felt Groove needed a more complete platform to achieve their goals.
 
@@ -25,7 +28,7 @@ Alex had used [Mixpanel](/blog/posthog-vs-mixpanel), [Hotjar](/blog/posthog-vs-h
 
 Another specific aim was to find a tool which could collect Groove’s qualitative and quantitative data in one place, so that usage data could be charted against NPS scores and other metrics — and that’s what led the team to PostHog. 
 
-​​![PostHog groove experiment](../images/customers/groove/groove-test.jpg)
+​​![PostHog groove experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/customers/groove/groove-test.jpg)
 <Caption>Even simple tests, such as changing the color of a CTA, can have dramatic results. For Groove, a purple button performed 84% better than a green one!</Caption>
 
 ## Building an ICP with user surveys and product analytics 

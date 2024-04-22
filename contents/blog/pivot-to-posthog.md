@@ -50,7 +50,7 @@ What followed was the most intense 3 weeks of work of our lives. We started work
 
 Our only break each day would be a 10 minute walk to the local sandwich shop, and a single episode of Parks and Recreation.
 
-![A PostHog lunch break](../images/02/sandwich-scaled.jpg)
+![A PostHog lunch break](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/sandwich-scaled.jpg)
 
 We kept exercising and eating healthily, but we had to make up for lost time to make the most of the opportunity of demo day.
 
@@ -64,7 +64,7 @@ In parallel, we took $1K, and spent it on some paid ads on a few display network
 
 January 23rd was when we started writing code for PostHog. We set a deadline for the Hacker News launch of February 20th. We had one day off in this period – we went hiking at the hills around Stinson Beach with friends:
 
-![Hiking at Stinson Beach with friends](../images/02/cbcffff9-af00-41d7-896d-65ac04a4b9a3.jpg)
+![Hiking at Stinson Beach with friends](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/02/cbcffff9-af00-41d7-896d-65ac04a4b9a3.jpg)
 
 We wanted to have complete documentation, SDKs, and the product all in existence for that date. Surprise, surprise, after a 3.45am finish the night before, it was done.
 

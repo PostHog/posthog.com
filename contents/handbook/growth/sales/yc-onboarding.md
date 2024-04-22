@@ -37,40 +37,9 @@ We want to make this feel as personalized as possible - there is an outsized imp
 - James H messages every single one of them individually so that a) they have his number, and b) to tell them about the YC deal on Bookface
 - YC companies check out the deal and then book in for an onboarding call (see detailed section below)
 - Once companies are set up with us, we ask them to mark themselves as 'using' PostHog in Bookface
+- Add them to the `#posthog-founders-club` channel in Slack - this is where they can get priority support
 
-## Onboarding call
-
-### Inbound request sources
-
-YC companies can either fill in our [dedicated YC Onboarding form](/yc-onboarding) or email us directly on _[yc@posthog.com](mailto:yc@posthog.com)_.
-
-The YC Onboarding form will automatically populate the [YC Plan Applications](https://tables.zapier.com/app/tables/t/01H2896A4Y47C650WK0ZKX9FPE) Zapier table, looking up Stripe and HubSpot data for the company if we have it.  If people email us directly you'll need to update the table yourself.
-
-When submitting the form users have four options to describe their situation:
-1. "I need a demo" - they will receive an email from Cameron inviting them to sign up and book a demo.
-2. "I just want the YC deal" - they won't receive an email and we just need to Activate them (see below)
-3. "I have a few questions" - they will receive an email from Cameron inviting them to sign up and then email the questions they have.
-4. "I need help with implementation" - they will receive an email from Cameron inviting them to sign up and book a meeting.
-
-### Before the call
-
-Ideally, we want users to have gotten started with PostHog before the demo call. From our YC Onboarding page:
-
-> Before the call, we recommend you sign up to our Cloud version and try installing our snippet on your website. Doing so would allow us to tailor the onboarding to your needs, leveraging data from your website instead of demo data. However, if you prefer to get a demo first, we'll provide a 30-minute overview.
-
-> We require people to be using PostHog Cloud for the YC deal - there are no longer paid plans for self-hosted.
-
-If users come to the call with a ready instance, we can focus more on their needs and setting up relevant views than a basic overview of the platform that they could have gotten without us.
-
-### The demo
-
-Read more about running demos on our [dedicated page](/handbook/growth/sales/demos).
-
-#### Let the user drive
-
-Always tailor the demo to the user specifically! Skip things they don't need and let them decide what they want to see. Be friendly and helpful, not salesy! Our goal is for these users to be able to use PostHog to improve *their* product.
-
-## After the call
+## Setting up billing
 
 To get them set up for the YC Deal there are various options in the [Zapier table](https://tables.zapier.com/app/tables/t/01H2896A4Y47C650WK0ZKX9FPE).
 
@@ -202,8 +171,3 @@ To create a giftcard in Open Collective:
 
 </tbody>
 </table>
-
-## Responsibilities
-
-- James H and Kendal manage 1-1 comms with YC companies initially
-- Simon and Joe handle the rest

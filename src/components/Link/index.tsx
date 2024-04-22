@@ -1,12 +1,10 @@
+import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 import { ExternalLink } from 'components/Icons/Icons'
+import { useLayoutData } from 'components/Layout/hooks'
+import Tooltip from 'components/Tooltip'
 import { Link as GatsbyLink } from 'gatsby'
-import { useValues } from 'kea'
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
-import type { GatsbyLinkProps } from 'gatsby'
-import Tooltip from 'components/Tooltip'
-import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
-import { useLayoutData } from 'components/Layout/hooks'
 
 export interface Props {
     to: string
@@ -22,12 +20,14 @@ export interface Props {
     href?: string
     glossary?: TooltipContentProps[]
     preview?: TooltipContentProps
+    disabled?: boolean
 }
 
 export default function Link({
     to,
     children,
     className = '',
+    disabled,
     onClick,
     disablePrefetch,
     external,
@@ -38,7 +38,7 @@ export default function Link({
     href,
     glossary,
     ...other
-}: Props) {
+}: Props): JSX.Element {
     const { compact } = useLayoutData()
     const posthog = usePostHog()
     const url = to || href
@@ -71,7 +71,7 @@ export default function Link({
     }
 
     return onClick && !url ? (
-        <button onClick={handleClick} className={className}>
+        <button onClick={handleClick} className={className} disabled={disabled}>
             {children}
         </button>
     ) : internal ? (

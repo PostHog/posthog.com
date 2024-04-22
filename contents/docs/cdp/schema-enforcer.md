@@ -1,13 +1,18 @@
 ---
 title: Schema Enforcer
-github: https://github.com/PostHog/schema-enforcer-plugin
-installUrl: https://app.posthog.com/project/apps?name=Schema%20Enforcer
-thumbnail: ../../cdp/thumbnails/schema-enforcer.png
+github: 'https://github.com/PostHog/schema-enforcer-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Schema%20Enforcer'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/schema-enforcer.png
 tags:
-    - schema-enforcer
+  - schema-enforcer
 ---
 
-The app enables you to enforce a schema on events in PostHog as they are ingested. It does this by preventing ingestion if the event:
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
+
+The transformation enables you to enforce a schema on events in PostHog as they are ingested. It does this by preventing ingestion if the event:
 
 -   Is missing a required property
 -   Has a property with the wrong type
@@ -18,18 +23,14 @@ It also:
 -   Removes all other properties from an event except selected ones if acceptOnlySchemaProps is true
 -   Configuration is done via a JSON file uploaded as an attachment
 
-## Requirements
-
-The Schema Enforcer app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
 1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
+2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Schema Enforcer'
-4. Select the app, press 'Install' and follow the on-screen instructions
+4. Select the transformation, press 'Install' and follow the on-screen instructions
 
 ## Configuration
 
@@ -66,11 +67,11 @@ Below is an example configuration file:
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Schema Enforcer](https://www.npmjs.com/package/@posthog/schema-enforcer-plugin) is available on NPM.
+PostHog is open-source and so are all transformations on the platform. The [source code for the Schema Enforcer](https://www.npmjs.com/package/@posthog/schema-enforcer-plugin) is available on NPM.
 
-### Who created this app?
+### Who created this transformation?
 
 A lot of people worked on this app! We'd like to thank the following PostHog team members...
 
@@ -84,14 +85,6 @@ A lot of people worked on this app! We'd like to thank the following PostHog tea
 
 For creating the Schema Enforcer. Thank you, all!
 
-### Who maintains this app?
+<PostHogMaintained />
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

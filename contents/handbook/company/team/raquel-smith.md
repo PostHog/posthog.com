@@ -19,7 +19,7 @@ I live in San Luis Obispo, CA with my husband, AJ, our two little girls, Kacey a
 
 ## Areas of responsibility
 
-- See [Growth Team](/handbook/small-teams/growth)
+- See [Growth Team](/teams/growth)
 
 ## Quirks
 

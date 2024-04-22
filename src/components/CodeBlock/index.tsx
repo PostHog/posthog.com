@@ -148,6 +148,8 @@ export const CodeBlock = ({
 
     const [projectName, setProjectName] = React.useState<string | null>(null)
     const [projectToken, setProjectToken] = React.useState<string | null>(null)
+    const [appHost, setAppHost] = React.useState<string | null>(null)
+    const clientApiHost = appHost?.replace('.posthog.com', '.i.posthog.com') ?? 'https://us.i.posthog.com'
 
     const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
 
@@ -158,6 +160,7 @@ export const CodeBlock = ({
         if (document) {
             setProjectName(getCookie('ph_current_project_name'))
             setProjectToken(getCookie('ph_current_project_token'))
+            setAppHost(getCookie('ph_current_instance'))
         }
     }, [])
 
@@ -166,7 +169,10 @@ export const CodeBlock = ({
             return code
         }
 
-        return code.replace("'<ph_project_api_key>'", projectToken).replace("'<ph_project_name>'", projectName)
+        return code
+            .replace('<ph_project_api_key>', projectToken)
+            .replace('<ph_project_name>', projectName)
+            .replace('<ph_client_api_host>', clientApiHost || 'https://us.i.posthog.com')
     }
 
     const copyToClipboard = () => {
@@ -245,7 +251,7 @@ export const CodeBlock = ({
                                         <SelectorIcon className="w-4 h-4" />
                                     </Listbox.Button>
 
-                                    <Listbox.Options className="absolute top-full right-0 m-0 p-0 mt-1 bg-black text-white list-none rounded text-xs focus:outline-none z-50 overflow-hidden border border-border dark:border-border-dark">
+                                    <Listbox.Options className="absolute top-full right-0 m-0 p-0 mt-1 bg-black text-white list-none rounded text-xs focus:outline-none z-[50] overflow-hidden border border-border dark:border-border-dark">
                                         {languages.map((option) => (
                                             <Listbox.Option
                                                 key={option.language}
@@ -373,9 +379,11 @@ export const CodeBlock = ({
                                                             >
                                                                 {children === "'<ph_project_api_key>'" && projectToken
                                                                     ? `'${projectToken}'`
-                                                                    : children === "'<ph_instance_address>'" &&
-                                                                      projectToken
-                                                                    ? `'https://app.posthog.com'`
+                                                                    : children === "'<ph_client_api_host>'" &&
+                                                                      clientApiHost
+                                                                    ? clientApiHost
+                                                                    : children === "'<ph_app_host>'" && appHost
+                                                                    ? appHost
                                                                     : children}
                                                             </span>
                                                         </span>

@@ -14,7 +14,7 @@ Have been in startups my whole life; love working with small teams and seeing th
 
 ## Areas of responsibility
 
-Making things [grow](/handbook/small-teams/growth) w/ [Raquel](/community/profiles/491).
+Making things [grow](/teams/growth) w/ [Raquel](/raquel).
 
 ## Quirks
 - I tend to be quiet to a fault in larger groups. I contribute much more and feel more comfortable in smaller group formats. It can be effective to directly call on me to contribute in larger meetings.

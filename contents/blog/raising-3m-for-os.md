@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/how-we-raised-3-million-open-source-project.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/how-we-raised-3-million-open-source-project.png
 featuredImageType: full
 author:
   - james-hawkins
@@ -39,7 +40,7 @@ We felt personally the challenge of managing accelerated growth would be a lot m
 
 VC hype begets a bigger team, begets results (hopefully), begets hype:
 
-![VC Hype Cycle](../images/vc-hype-cycle.jpg)
+![VC Hype Cycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/vc-hype-cycle.jpg)
 
 Especially early on, VC is buying into your potential value. This makes sense - if the company that forms around your project has a 1% chance of being worth $1Bn or more, it is rational for people to take that bet if the price is right. Open source companies really can make it big - it's a post for another time, but we believe that open source will eat SaaS's lunch in many product categories.
 
@@ -174,7 +175,7 @@ Polarize people (without being rude of course!), then you'll find those that can
 
 ### Hardware
 
-![Fundraising battlestation](../images/fundraising-battlestation.jpg)
+![Fundraising battlestation](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/fundraising-battlestation.jpg)
 
 If I were to do this again I'd probably put more effort into the setup given how many video calls I ended up making.
 
@@ -284,7 +285,7 @@ That number doesn't reflect that we often had 2 - 5 meetings with the same perso
 
 It was very important that we kept the product getting better and our usage growing during this time. I focused exclusively on the fundraising process, and Tim focused exclusively on building the product with our kick ass team and helping out the community. It would have been much harder if we were solo founders. Some investors during the process of talking to us saw our user number double. ie our user numbers did this:
 
-![user growth](../images/ph-deployments.jpg)
+![user growth](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/ph-deployments.jpg)
 
 Eventually, after the first 4 weeks, we started realizing in the data that there was a clear trend for who seemed the most engaged: general investors < investors with many developer tools companies in their portfolio < investors with a significant open source portfolio. The close rates of the last category was astronomically higher.
 

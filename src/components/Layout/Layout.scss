@@ -1301,6 +1301,39 @@ for all other rows the portrait image wraps above bio*/
     color: $brand_blue;
 }
 
+/* width */
+div:not(.default-scrollbar)::-webkit-scrollbar {
+    width: 10px;
+    margin-left: 20px;
+}
+
+/* track */
+div:not(.default-scrollbar)::-webkit-scrollbar-track {
+    background: #eceff1;
+}
+
+/* handle */
+div:not(.default-scrollbar)::-webkit-scrollbar-thumb {
+    background: #cfd8dc;
+}
+
+/* handle on hover */
+div:not(.default-scrollbar)::-webkit-scrollbar-thumb:hover {
+    background: #b0bec5;
+}
+
+/* Remove scrollbars inside of merch drawer */
+.drawer div::-webkit-scrollbar-track {
+    background: rgb(35, 36, 41);
+}
+.drawer div::-webkit-scrollbar-thumb {
+    background: black;
+}
+.drawer div::-webkit-scrollbar {
+    margin-left: none;
+    width: 0px;
+}
+
 @media screen and (max-width: 834px) {
     li {
         font-size: 16px;

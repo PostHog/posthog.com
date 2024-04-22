@@ -1,0 +1,260 @@
+---
+title: PostHog x Concept Ventures
+showTitle: false
+showSidebar: true
+width: lg
+images:
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/rockwall-mobile.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/rockwall.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/on-belay.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/belay-on.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/oliver-kicks.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-spotlight.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-merch.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-launch.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-credit.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-heart.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/pry.png
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/assemblyai.jpg
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/yc_logo.png
+---
+
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+import { FeatureSnapshot } from 'components/FeatureSnapshot'
+export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-refer.png"
+
+<div class="w-[calc(100%_+_4rem)] relative -mx-4 px-8 md:-mx-16 pt-32 pb-72 -mt-32 md:-mt-44">
+  <div class="md:hidden absolute top-0 left-0 w-full bottom-0 opacity-40">
+    <GatsbyImage image={getImage(props?.images[0])} alt="PostHog for startups" objectFit="cover" className="" />
+  </div>
+  <div class="hidden md:block absolute top-0 left-0 w-full bottom-0">
+    <GatsbyImage image={getImage(props?.images[1])} alt="PostHog for startups" objectFit="cover" className="" />
+  </div>
+  <div class="absolute bottom-0 left-4 w-24 md:left-16 md:w-48">
+    <GatsbyImage image={getImage(props?.images[2])} alt="PostHog for startups" objectFit="contain" className="" />
+  </div>
+  <div class="absolute bottom-0 -right-4 w-28 md:right-16 md:w-60">
+    <GatsbyImage image={getImage(props?.images[3])} alt="PostHog for startups" objectFit="contain" className="" />
+  </div>
+
+  <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-tan/100 via-tan/85 to-tan/0"></div>
+
+  <div className="max-w-[849px] mx-auto text-center">
+  <h1 className="text-4xl md:text-[64px] leading-none mt-0 mb-5">
+  PostHog x Concept Ventures
+  </h1>
+  <h2 className="text-[18px] md:text-[20px] leading-[1.4] font-semibold mb-8 !mt-5">Teams backed by Concept can claim $50k in credit <br className="hidden lg:block" /> and other perks to help get to product-market fit</h2>
+  <CallToAction href="/startups/apply">Apply now</CallToAction>
+  </div>
+</div>
+
+<section class="my-24 px-5">
+  <div class="max-w-screen-2xl mx-auto">
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Backed by Concept? Here's what you can get</h3>
+        <p class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Teams must be less than 2 years old and have less than $5m in funding to qualify</p>
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative text-center sm:text-left">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[8])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">$50,000 in credit</h5>
+          <p class="m-0 text-[15px]">That's equivalent to 30m events, 4bn flag API calls or 50k session replays! Credit lasts a whole year.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[7])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Startup spotlights</h5>
+          <p class="m-0 text-[15px]">Each month we pick a startup to spotlight, featuring the lucky team on our site and socials.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[6])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Free founder merch</h5>
+          <p class="m-0 text-[15px]">You can never have too many stickers, t-shirts, or backpacks. Or origami hedgehogs!</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[9])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 195 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Referral perks</h5>
+          <p class="m-0 text-[15px]">Refer another startup - backed by Concept Ventures or not - to split an extra $10,000 between you.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="my-24 px-5">
+
+  <div class="max-w-screen-lg mx-auto font-bold">
+    
+    <blockquote class="text-2xl text-primary dark:text-primary-dark m-0 quote md:text-[32px] md:leading-tight">
+      <span class="leading-tight">
+        "Our portfolio companies rely on analytics to optimise their products. <span class="text-red"> Understanding user behaviours through platforms like PostHog is  mission-critical.</span> The insights it provides are invaluable for our founders.”
+      </span>
+      <footer class="flex items-center space-x-8 mt-9">
+        <GatsbyImage image={getImage(props?.images[4])} alt="Oliver Kicks" objectFit="contain" style={{ maxWidth: 100 }} />
+        <span class="flex flex-col"><cite class="not-italic text-lg md:text-xl">Oliver Kicks</cite><cite class="not-italic font-medium text-lg opacity-50 md:text-lg">Partner, <span class="inline-block">Concept Ventures</span></cite></span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="my-24 px-5">
+  <div class="max-w-screen-2xl mx-auto">
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-3 sm:mb-8 lg:mb-3">Recommended by other amazing startups</h3>
+    <h3 className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 opacity-75 text-primary text-center text-lg pb-8">(And <a href="/customers">scale-ups and beyond</a> too)</h3>
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-3 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[10])} alt="Pry" objectFit="contain"  align="center" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Pry</h5>
+          <p class="m-0 text-[15px]">Pry used PostHog's session replays to <a href="/customers/pry">increase new user registrations by 30%</a>. Then they were acquired by Brex!</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[11])} alt="AssemblyAI" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">AssemblyAI</h5>
+          <p class="m-0 text-[15px]">AssemblyAI, a cutting edge AI product, <a href="/customers/assemblyai">switched from Mixpanel to PostHog</a> and hasn't looked back since.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[12])} alt="YCombinator" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">YCombinator</h5>
+          <p class="m-0 text-[15px]">The world's leading accelerator, YCombinator has <a href="/customers/ycombinator">improved engagement by +40% with PostHog</a> experiments.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<Section>
+<h2 className="text-3xl lg:text-5xl text-center mb-0">How does PostHog for Startups compare?</h2>
+<h3 className="text-xl m-0 font-semibold opacity-75 text-center !pb-8">Well, it's the only startup program with free laptop stickers...</h3>
+<div className="overflow-x-auto -mx-5 flex justify-start lg:justify-center px-4 lg:px-0">
+<table className="w-400 mt-4" style="max-width: 1100px; font-size: 15px;">
+    <thead>
+        <tr class="border-b border-light dark:border-dark">
+            <td className="w-3/12"></td>
+            <td className="w-2/12 text-center"><a href="/blog/posthog-vs-pendo">Pendo</a></td>
+            <td className="w-2/12 text-center"><a href="/blog/posthog-vs-logrocket">LogRocket</a></td>
+            <td className="w-2/12 text-center"><a href="/blog/posthog-vs-amplitude">Amplitude</a></td>
+            <td className="w-2/12 text-center"><a href="/blog/posthog-vs-mixpanel">Mixpanel</a></td>
+            <td className="w-2/12 text-center bg-accent dark:bg-accent-dark"><strong>PostHog</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="border-b border-light dark:border-dark">
+            <td><strong>Eligibility criteria</strong></td>
+            <td className="text-center">Free plan only</td>
+            <td className="text-center">Free plan only</td>
+            <td className="text-center">&lt;$5m in funding and &lt;20 staff members</td>
+            <td className="text-center">&lt;$8m in funding and less than 5 years old</td>
+            <td className="bg-accent dark:bg-accent-dark text-center">&lt;$5m in funding and less than 2 years old</td>
+        </tr>
+        <tr class="border-b border-light dark:border-dark">
+            <td><strong>Limitations</strong></td>
+            <td className="text-center">500 monthly users</td>
+            <td className="text-center">1,000 monthly sessions</td>
+            <td className="text-center">One year duration</td>
+            <td className="text-center">One year duration</td>
+            <td className="bg-accent dark:bg-accent-dark text-center">One year duration</td>
+        </tr>
+        <tr class="border-b border-light dark:border-dark">
+            <td><strong>Benefits</strong></td>
+            <td className="text-center">None</td>
+            <td className="text-center">None</td>
+            <td className="text-center">200,000 MTUs</td>
+            <td className="text-center">$50,000 credit</td>
+            <td className="bg-accent dark:bg-accent-dark text-center">$50,000 credit</td>
+        </tr>
+        <tr class="border-b border-light dark:border-dark">
+            <td><strong>Open source product</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-accent dark:bg-accent-dark text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr class="border-b border-light dark:border-dark">
+            <td><strong>Free gifts (incl. stickers)</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-accent dark:bg-accent-dark text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr class="border-b border-light dark:border-dark">
+            <td><strong>Partnership opportunities</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-accent dark:bg-accent-dark text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr class="border-b border-light dark:border-dark">
+            <td><strong>Referral bonuses</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-accent dark:bg-accent-dark text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="flex justify-center mt-8">
+<p><a href="/blog/tags/comparisons">Explore more product comparisons</a></p>
+</div>
+</Section>
+
+<section class="my-24 px-5">
+<div class="max-w-screen-md mx-auto space-y-1">
+<details>
+<summary>How do I apply?</summary>
+<p>Just sign up to a paid plan in PostHog (you're only charged for usage) and then fill in this <a href="/startups/apply">form</a>. We will review and apply the credit if you're eligible. If you're accepted into the program, we will notify you by email. </p>
+</details>
+
+<details> 
+<summary>Who's eligible? </summary>
+<p>Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have signed up any time from Jan 1st 2023 onwards. </p>
+</details>
+
+<details>
+<summary>How can I refer another startup?</summary>
+<p>You can refer another startup to unlock $5,000 of extra credit for both parties.</p>
+
+<p>To refer someone, simply tell them to apply as normal and to specify your company name in the application form. We'll review and issue an additional $5,000 of PostHog credit to both you, and them.</p>
+
+<p>There are no limits on how many startups can be referred into the program successfully.  </p>
+</details>
+
+<details>
+<summary>What if I go over the $50k limit? </summary>
+<p>At that point you can move onto <a href="/pricing">another PostHog plan</a>.</p>
+</details>
+
+<details>
+<summary>What happens at the end of the 12 months?</summary>
+<p>At that point you can move onto <a href="/pricing">another PostHog plan</a>. You'll continue to be considered part of the program in terms of invites to office hour events, and other perks. </p>
+</details>
+
+<details>
+<summary>How come you don't offer credits for AWS, Segment etc. like Mixpanel does?</summary>
+<p>Because all of those are available if you just go to the company <a href="https://startupcredits.io/">directly</a> anyway. We've focused this program on benefits which are only available from PostHog, and are not merely curated from other freely available sources. </p>
+</details>
+</div>
+</section>
+
+<div className="text-center">
+
+<h2 className="text-3xl lg:text-5xl pb-8">Ready to get started?</h2>
+<CallToAction href="/startups/apply">Apply now</CallToAction>
+
+</div>

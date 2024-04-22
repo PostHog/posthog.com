@@ -3,11 +3,14 @@ date: 2023-09-13
 title: 5 ways to improve your product analytics data
 author:
   - anna-debenham
-featuredImage: ../images/blog/super-hog-pink.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
   - Product analytics
   - Product engineers
+crosspost:
+  - Blog
 ---
 
 > This is a guest post by [Anna Debenham](https://www.linkedin.com/in/anna-debenham/). Anna is a former developer and director of product at cybersecurity company [Snyk](https://snyk.io/). She is currently an operating partner at [boldstart](https://boldstart.vc/), a VC firm supporting developer-first, infra, and SaaS startups. 

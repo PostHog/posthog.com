@@ -1,0 +1,34 @@
+.slider:hover,
+.slider:focus {
+    cursor: pointer;
+
+    .rc-slider-handle {
+        cursor: pointer;
+        user-drag: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+}
+
+.rc-slider {
+    width: calc(100% - 14px);
+}
+
+@media screen and (max-width: 1076px) {
+    .rc-slider {
+        max-width: 100%;
+    }
+
+    .rc-slider-mark-text {
+        font-size: 13px;
+        font-variation-settings: 'wght' 700;
+        margin-top: 4px;
+
+        &:first-child {
+            transform: none;
+        }
+    }
+}

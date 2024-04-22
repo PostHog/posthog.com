@@ -3,16 +3,38 @@ title: Creating an experiment
 sidebar: Docs
 showTitle: true
 availability:
-    free: none
-    selfServe: full
-    enterprise: full
+  free: none
+  selfServe: full
+  enterprise: full
 ---
 
-To create a new experiment, go to the [experiments tab](https://app.posthog.com/experiments) in the PostHog app, and click on the "New experiment" button in the top right.
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const CreateExperimentLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/create-experiment-light-mode.png"
+export const CreateExperimentDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/create-experiment-dark-mode.png"
+export const ExperimentGoalWarningLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-goal-warning-light-mode.png"
+export const ExperimentGoalWarningDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-goal-warning-dark-mode.png"
+
+import { ProductVideo} from 'components/ProductVideo'
+export const SetExperimentLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-light-mode.mp4"
+export const SetExperimentDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-dark-mode.mp4"
+export const ImprovementCalculatorLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-light-mode.mp4"
+export const ImprovementCalculatorDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-dark-mode.mp4"
+
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=847"
+    className="rounded shadow-xl"
+/>
+
+To create a new experiment, go to the [A/B testing tab](https://app.posthog.com/experiments) in the PostHog app, and click on the "New experiment" button in the top right.
 
 This presents you with a form where you can complete the details of your new experiment:
 
-![How to create an experiment in PostHog](../../images/features/experiments/create-experiment.png)
+<ProductScreenshot
+    imageLight={CreateExperimentLight} 
+    imageDark={CreateExperimentDark}
+    alt="How to create an experiment in PostHog" 
+    classes="rounded"
+/>
 
 Here's a breakdown of each field in the form:
 
@@ -40,7 +62,12 @@ By default, your experiment will target 100% of participants. If you want to tar
 
 Below is a video showing how to navigate there:
 
-![How to set experiment feature flag release conditions](../../images/features/experiments/set-experiment-rollout.mp4)
+<ProductVideo
+    videoLight={SetExperimentLight} 
+    videoDark={SetExperimentDark}
+    alt="How to create an experiment in PostHog" 
+    classes="rounded"
+/>
 
 ## Experiment goal
 
@@ -48,8 +75,17 @@ Setting your goal metric enables PostHog to calculate the impact of your experim
 
 You set the minimum acceptable improvement below. This combines historical data from your goal metric with your desired improvement rate to show a prediction for how long you need to run your experiment to see statistical significant results.
 
-![Minimum acceptable improvement calculator](../../images/features/experiments/improvement-calculator.mp4)
+<ProductVideo
+    videoLight={ImprovementCalculatorLight} 
+    videoDark={ImprovementCalculatorDark}
+    alt="Minimum acceptable improvement calculator" 
+    classes="rounded"
+/>
 
 > **Note:** If you select a server-side event, you may see a warning that no feature flag information can be detected with the event. To resolve this issue, see [step 2 of adding your experiment code and how to submit feature flag information with your events](/docs/experiments/adding-experiment-code#step-2-server-side-only-add-the-feature-flag-property-to-your-events).
 > 
-> ![Experiment goal warning](../../images/features/experiments/experiment-goal-warning.png)
+> <ProductScreenshot 
+    imageLight={ExperimentGoalWarningLight}  
+    imageDark={ExperimentGoalWarningDark} 
+    alt="Experiment goal warning" classes="rounded" 
+/>
