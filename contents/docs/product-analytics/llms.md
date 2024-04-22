@@ -6,8 +6,6 @@ availability:
     enterprise: full
 ---
 
-> This integration is currently in private beta. If you'd like to be added to the beta, email Lior@posthog.com.
-
 We've teamed up with [Langfuse](https://langfuse.com/docs/analytics/posthog) to track metrics for LLM applications. Langfuse is an open source solution for monitoring LLM applications. It tracks metrics such as model costs, latency, token usage, and more.
 
 Combining your Langfuse and PostHog data makes it easy to answer questions like:
@@ -30,9 +28,13 @@ Langfuse supports using any large language model and has simple integrations for
 To get started:
 
 1. First add Langfuse Tracing to your LLM app ([Quickstart](https://langfuse.com/docs/get-started)).
-2. Enable the Langfuse integration in PostHog (in private beta). If you'd like to be added to the beta, email Lior@posthog.com.
+2. In your [Langfuse dashboard](https://cloud.langfuse.com/), click on **Settings** and scroll down to the **Integrations** section to find the PostHog integration settings.
+3. Click **Configure** and paste in your PostHog host and project API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)).
+4. Click **Enabled** and then **Save**.
 
-Once you've added the integration into PostHog, you can use a dashboard template to set up the most relevant insights. To do this:
+![How to set up the Langfuse PostHog integration](https://res.cloudinary.com/dmukukwp6/video/upload/v1713785335/posthog.com/contents/languse.mp4)
+
+Langfuse will now begin exporting your data into PostHog once a day. You can then use a [dashboard template](/docs/product-analytics/dashboards) to set up the most relevant LLM insights. To do this:
 
 1. Go the [dashboard tab](https://us.posthog.com/dashboard) in PostHog.
 2. Click the **New dashboard** button in the top right.
