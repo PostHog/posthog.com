@@ -14,7 +14,7 @@ One of my favorite weeks at PostHog was an offsite in [Aruba](/blog/aruba-hackat
 
 We'd chosen Aruba because the team deserved to celebrate a little. Despite most of [tech struggling](https://www.theatlantic.com/ideas/archive/2023/01/tech-recession-layoffs-google-facebook-microsoft/672798/), we'd had a great year, and everyone had pushed hard to get there. In the absence of any big external milestones, such as a fundraise, we decided to increase the offsite budget, opting for a fairly fancy hotel in the Caribbean.
 
-As fun as that sounds, I felt a little guilty when we arrived. The lobby had a _boat_ in it. There was a _private beach_. You could drink _infinite piña coladas_. I knew we were spending $100K more than we _needed_ to and, as a founder, a core part of my job is making sure we don't run out of money!
+As fun as that sounds, I felt a little guilty when we arrived. The lobby had a _boat_ in it. There was a _private beach_. You could drink _infinite piña coladas_. I knew we were spending $100k more than we _needed_ to and, as a founder, a core part of my job is making sure we don't run out of money!
 
 But, as any right-minded founder would, I:
 
