@@ -69,7 +69,7 @@ We were going to compete in a very crowded market of tools with multiple competi
 
 Our challenge was _standing out_. Being developer-focused and open source would, we thought, achieve this. It was fun, and, thankfully, we were right.
 
-We set the product up to be quick to deploy – we created a [Heroku](https://heroku.com) one-click deployment. We later realized this was a mistake – and eventually focussed on cloud adoption for most users. If I started again, I'd have a cloud product too, even if it took a week or two longer. I would still have an open-source product, but I wouldn't aim to sell a self-hosted paid product.
+We set the product up to be quick to deploy – we created a [Heroku](https://heroku.com) one-click deployment. We later realized this was a mistake – and eventually focused on cloud adoption for most users. If I started again, I'd have a cloud product too, even if it took a week or two longer. I would still have an open-source product, but I wouldn't aim to sell a self-hosted paid product.
 
 Finally, we picked a permissive license (MIT) because we wanted to see if enterprises would use it, and we felt they'd have rules around using non-permissive open-source licenses.
 
