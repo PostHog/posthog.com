@@ -11,7 +11,6 @@ We've organized the team into small teams that are multi-disciplinary and as sel
 
 Our small teams are:
 
-- [Customer Success](/teams/customer-success)
 - [Data Warehouse](/teams/data-warehouse)
 - [Exec](/teams/exec)
 - [Feature Success](/teams/feature-success)
@@ -22,6 +21,7 @@ Our small teams are:
 - [Pipeline](/teams/pipeline)
 - [Product Analytics](/teams/product-analytics)
 - [Replay](/teams/replay)
+- [Sales & Customer Success](/teams/sales-cs)
 - [Web Analytics](/teams/web-analytics)
 - [Website & Docs](/teams/website-docs)
 
