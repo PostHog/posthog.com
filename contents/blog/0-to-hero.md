@@ -105,7 +105,7 @@ Again, watch people using it, ask them about it, look for repeat usage, and perh
 - The earlier you are, the higher the chance of failure. With this in mind, you must be totally geared around failing fast.```
 ## How we got to 100 users
 
-It was time for our bigger launch – [we posted on Hacker News](https://news.ycombinator.com/item?id=22376732), it went well (because we'd achieved the other steps first), and this got us well past this number.
+It was time for our bigger launch. [We posted on Hacker News](https://news.ycombinator.com/item?id=22376732), it went well, mainly because we'd achieved the other steps first, and this got us well past this number.
 
 After the massive bump on launch day, our growth settled to a level that was noticeably higher than before.
 
@@ -157,20 +157,20 @@ In practice, we were at a larger user number before we focused on revenue _but_,
 
 We started off thinking it'd look like this:
 
-* open source to give away value to the masses, which would generate lots of fans in companies big and small 
-* paid self-hosted version for big companies that didn't want to send data to a 3rd party
+* Open source to give away value to the masses, which would generate lots of fans in companies big and small 
+* Paid self-hosted version for big companies that didn't want to send data to a third party
 
-This worked fairly well, we started growing quickly. However, at greater we should host it for people in cloud to make money (with a big free tier since cloud is a better experience for the majority of users, and good experience leads to more word of mouth growth).
+This worked fairly well and we started growing quickly. However, at greater TKTK, we should host it for people in the cloud to make money – with a big free tier since cloud is a better experience for the majority of users, and good experience leads to more word of mouth growth.
 
 However, the cloud would have been very competitive for us. We didn't pick it in the first place as we had a lot of unicorn competitors.
 
-To stand out, however, we realized we could focus on building all the products in one (we started as product analytics, but we now have also got session replay, a/b testing, feature flags, web analytics, a data warehouse, a basic customer data platform and user surveys). The key was to not try to also go upmarket so people would have simpler needs. We could not replace Snowflake in a Fortune 500, but we could provide a warehouse for a 30 person startup, with simpler needs - for example.
+To stand out, however, we realized we could focus on building all the products in one. We started as product analytics, but we now have also got session replay, A/B testing, feature flags, web analytics, a data warehouse, a basic customer data platform, and user surveys. The key was to not try to also go upmarket so people would have simpler needs. We could not replace Snowflake in a Fortune 500, but, for example, we could provide a warehouse for a 30-person startup, with simpler needs.
 
 I did two things to get our very first sales:
 
 1. I talked to users that were already using our product and in our slack community (we've since moved away from Slack to a [custom built forum](https://posthog.com/questions)) about our paid offering and gauging interest.
 
-2. I created a pricing page on our website, listing out our paid extra features and embedding my calendar into it (then gradually making this self serve over time). When someone booked a call, I'd see which extra features they really cared about, and if they wanted to buy.
+2. I created a pricing page on our website, listing our paid extra features and embedding my calendar into it, gradually making this self-serve over time. When someone booked a call, I'd see which extra features they really cared about, and if they wanted to buy.
 
 It turned out to be easier to get sales from people that came freshly through our website and pricing page, than it was to generate demand from the existing community. Both approaches, however, worked. I suspect adverse-selection is at play – if people see a free product, they may be using it _because_ it is free, so you'll find this is the wrong group to try to make money from, even with a ton of great extra features.
 
@@ -190,31 +190,31 @@ We started hitting app performance issues pretty rapidly, so we had to refactor 
 > ANOTHER LESSON HERE... NOT SURE WHAT 
 ## How we got to 100,000 users
 
-... and we kept going. The principles of how we grow are the same - word of mouth and content marketing, but the business has scaled up.
+... and we kept going. The principles of how we grow are the same - word-of-mouth and content marketing, but the business has scaled up.
 
-We added more engineers. We wanted to build more and more products, and we wanted to stay on top of refactoring, bugs and performance. It's around 70% of our team. We think it's important we keep this percentage very high so we never stop adding more products in.
+We added more engineers. We wanted to build more and more products, and we wanted to stay on top of refactoring, bugs, and performance. It's around 70% of our team. We think it's important we keep this percentage very high so we never stop adding more products.
 
-We sprinkled some excellent people (often engineers) into marketing. We wanted to keep on top of the changelog, to create lots of tutorials and better documentation, to be easier to find for people searching for us online, and to write about what we were learning as a business so other engineers could learn more about everything outside of engineering (getting users, early sales, finance, raising money, customer support, marketing, design and so on).
+We sprinkled some excellent people (often engineers) into marketing. We wanted to keep on top of the changelog, to create lots of tutorials and better documentation, to be easier to find for people searching for us online, and to write about what we were learning as a business so other engineers could learn more about everything outside of engineering. From getting users and early sales, to finance, raising money, customer support, marketing, design and so on.
 
-We worked really hard on our website too. We built something world class and we're now known for this. It's a core part of our brand. We just do most pages better than the vast majority of people on the internet by being totally transparent. Design here has an _increasing_ return on investment once you're above average. This is becoming the home for our community of product engineers - something we believe will one day be much larger than our in app users.
+We worked really hard on our website, too. We built something world-class and we're now known for this. It's a core part of our brand. We just do most pages better than the vast majority of people on the internet by being totally transparent. Design here has an _increasing_ return on investment once you're above average. This is becoming the home for our community of product engineers - something we believe will one day be much larger than our in-app users.
 
-I fundraised so we could afford all of the above, but eventually we flipped to running near profitably and hiring more organically when we saw our revenue growing. This means we're not subject to the incentives of an external investor - so we can always ensure we ship more products. I think we could have entirely skipped fundraising or could have only done a seed round - I'd play this differently in future, but that's easy to say with hindsight.
+I fundraised so we could afford all of the above, but eventually we flipped to running near profitably and hiring more organically when we saw our revenue growing. This means we're not subject to the incentives of an external investor - so we can always ensure we ship more products. I think we could have entirely skipped fundraising or could have only done a seed round. I'd play this differently in future, but that's easy to say with hindsight.
 
-We hired a couple of folk into ops - a recruiter, an ops lead, an exec assistant and a VP Ops (who also leads sales and marketing, that's a topic for another day). We wanted to make sure we could hire and retain excellent people. Kendal, PostHog's exec assistant, helps me focus my time on what would help the business the most as I get pulled around quite a bit.
+We hired a couple of folk into ops - a recruiter, an ops lead, an exec assistant, and a VP ops (who also leads sales and marketing, that's a topic for another day). We wanted to make sure we could hire and retain excellent people. Kendal, PostHog's exec assistant, helps me focus my time on what would help the business the most as I get pulled around quite a bit.
 
-We scaled support, but not really by hiring. In fact, we got to 100,000 sign ups, with 10s of thousands of Weekly Active Users _before_ we added _anyone_ exclusively focused on support. The process evolved like this:
+We scaled support, but not really by hiring. In fact, we got to 100,000 sign ups, with tens of thousands of weekly active users _before_ we added _anyone_ exclusively focused on support. The process evolved like this:
 
-* My cofounder did all support (my job was getting users)
-* Our engineers would all do support whenever they felt like it
-* Our engineers would rotate who did support
-* Our engineers would rotate who did support on their products
-* We hired a support engineer to answer and triage tickets for our mature products
-* Recently we've started having a paid support product for faster response times, that is selling a lot - we think we can use the revenue from this to pay for more support engineers to service our free users better too
+* My cofounder did all support. My job was getting users.
+* Our engineers would all do support whenever they felt like it.
+* Our engineers would rotate who did support.
+* Our engineers would rotate who did support on their products.
+* We hired a support engineer to answer and triage tickets for our mature products.
+* Recently we've started having a paid support product for faster response times, that is selling a lot. We think we can use the revenue from this to pay for more support engineers to service our free users better, too.
 
-It started feeling obvious we should have a small growth engineering team too. We had to build a billing system that could cope with a different pricing scheme for every product, credits and much more - my cofounder, as CTO, wound up picking up all these tasks (ie what no one else really owned) until it became too much. Plus we wanted to iterate our pricing over time, own and run experiments around our activation, and quite a bit more .
+It started feeling obvious we should have a small growth engineering team, too. We had to build a billing system that could cope with a different pricing scheme for every product, credits and much more - my cofounder, as CTO, wound up picking up all these tasks (i.e. what no one else really owned) until it became too much. We also wanted to iterate our pricing over time, own and run experiments around our activation, and quite a bit more .
 
 ## and there were are
 
 There's a reason each step gets easier and easier - if you build something people want, the rest is _relatively_ obvious. The problems get far more constrained. No more existential crises!
 
-If you take one thing from reading this - for PostHog there was no growth hacking magic _other_ than building a good product, and tailoring the _entire_ experience of the company (not just your software) towards our end users. If you do those things well, anything else is much more likely to work anyway.
+If you take one thing from reading this - for PostHog there was no growth-hacking magic _other_ than building a good product, and tailoring the _entire_ experience of the company (not just your software) towards our end users. If you do those things well, anything else is much more likely to work anyway.
