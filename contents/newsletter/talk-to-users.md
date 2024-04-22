@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-Talk to users? Isn't that a job for founders, product managers, user researchers, and salespeople? Why do would an engineer ever want or need to do it?
+Talk to users? Isn't that a job for founders, product managers, and salespeople? Why do would an engineer ever want or need to do it?
 
 In his book [*Modern Software Engineering*](https://www.davefarley.net/?p=352), Dave Farley writes that mastering software engineering requires becoming an expert in learning. When learning is prioritized, talking to users becomes a critical part of an engineer's toolkit.
 
@@ -59,7 +59,7 @@ The best information you'll get from talking to users comes from not talking. Be
 
 2. **Your solution.** Resist the urge to explain your features and your thinking. You shouldn't use the time to convince them why your solution is the right one.
 
-3. **Their solutions.** Users likely recommendations and feature requests. These often don't solve their underlying problems, so reframe these to dig deeper into the underlying causes.
+3. **Their solutions.** Users likely have recommendations and feature requests. These often don't solve their underlying problems, so reframe these to dig deeper into the underlying causes.
 
 4. **Macroanalysis**. Focus on an individual's specific use case rather than a company or industry one. Outside research can fill this if necessary.  
 
@@ -77,7 +77,7 @@ The second is **solution validation**. This works best when someone is already u
 - How are you using X now? What are your touchpoints and workflows with X?
 - What is confusing?
 
-Dive deeper into interesting workflows and lines of thought. Get their preference on options. Ask about constraints. Finally, take notes and [share them with your team](https://posthog.com/product-engineers/interview-snapshot-guide) so they can benefit too (we use an AI transcription tool and keep a master interview document).
+Dive deeper into interesting workflows and lines of thought. Ask about their constraints. Finally, take notes and [share them with your team](https://posthog.com/product-engineers/interview-snapshot-guide) so they can benefit too (we use an AI transcription tool and keep a master interview document).
 
 ## Iterating beyond user interviews
 
