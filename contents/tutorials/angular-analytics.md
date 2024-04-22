@@ -155,7 +155,7 @@ Lastly, go back to `main.ts` and make sure to set `capture_pageview` in the Post
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<instance_address>',
+    api_host:'<ph_client_api_host>',
     capture_pageview: false
   }
 )
