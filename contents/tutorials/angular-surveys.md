@@ -42,9 +42,9 @@ Next, Replace the code in `src/app/app.component.html` with a simple heading:
 </div>
 ```
 
-Run `ng serve` and navigate to http://localhost:4200 to see your app in action.
+Run `ng serve` and navigate to `http://localhost:4200` to see your app in action.
 
-![Basic Angular app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-ab-tests/basic-app.png)
+![Basic Angular app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-surveys/basic-app.png)
 
 ## 2. Add PostHog
 
@@ -298,8 +298,11 @@ To fetch the active surveys, we use `posthog.getActiveMatchingSurveys()`. This r
 To fetch this array and integrate it with your survey UI, update your code in `app.component.ts`:
 
 ```typescript file=app.component.ts
-// your existing imports...
-import { Component, ChangeDetectorRef } from '@angular/core';
+// Import OnInit and ChangeDetectorRef
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CustomSurveyComponent } from './components/custom-survey/custom-survey.component';
 import posthog from 'posthog-js'
 
 @Component({
