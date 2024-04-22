@@ -33,13 +33,13 @@ Today, approximately 1,200 companies a week sign up to PostHog, ranging from hob
 
 ## Prerequisites
 
-* If you want to go fast, go alone. If you want to go far, go together. You are going to have to handle a literally-endless series of problems. Find a friend!
+* If you want to go fast, go alone. If you want to go far, go together. You are going to have to handle an endless series of problems. Find a friend!
  
 * The ability to ship and get users for new products very fast, from scratch. If you're doing software, you must be very, very good at shipping and marketing software quickly. Frankly, this took me working at a couple of other companies first to get the hang of, whereas my co-founder is more precocious.
 
 * An [idea](https://www.ycombinator.com/library/8g-how-to-get-startup-ideas) of what to work on. Hopefully a good one.
 
-A note on terminology: I've used the word "users", but for B2B software, I'd treat this as "organizations". The numbers are a little approximate, but what matters is each stage and the sequence of goals that you must achieve, in the given order.
+A note on terminology: I've used the word "users," but for B2B software, I'd treat this as "organizations." The numbers are a little approximate, but what matters is each stage and the sequence of goals that you must achieve, in the given order.
 
 ## How we got to 10 then 50 users
 
@@ -47,11 +47,11 @@ This was the hardest part.
 
 The earlier you are, the higher the chance of failure. With this in mind, you must be totally geared around failing fast. Hence the prerequisites above.
 
-So, we set off doing this... We wound up [pivoting (i.e. failing) five times](pivot-to-posthog) before we landed on PostHog, most frequently failing at this stage – we found it very hard to get 10 companies use our products, even though we thought we met the prerequisites!
+So, we set off doing this. We wound up [pivoting (i.e. failing) five times](pivot-to-posthog) before we landed on PostHog, most frequently failing at this stage. We found it very hard to get ten companies use our products, even though we thought we met the prerequisites!
 
 For PostHog specifically, we wanted to quickly figure out if anyone cared.
 
-To test this, we had a plan that was designed to take one month:
+To test this, we designed a one-month plan.
 
 1. Get friends up and running first.
 2. Check people can get up and running by themselves and if other people would use it.
@@ -61,13 +61,13 @@ We aimed for a month because spending longer would increase the downside of bein
 
 We designed how we worked together, our products, marketing, pricing, support... (everything) to get through the above successfully. It was a crazy time – we were working flat out.
 
-On the product side, we decided to focus on open-source adoption and not revenue. I researched multi-billion dollar open-source companies and couldn't find a single example where they monetized in the first five years. I did this by cold messaging founders asking for advice and from what I could gather online. 
+On the product side, we decided to focus on open-source adoption and not revenue. I researched multi-billion dollar open-source companies and couldn't find a single example where they monetized in the first five years. I did this by cold-messaging founders asking for advice and from what I could gather online. 
 
 This meant we didn't have to worry about building a payment flow, we'd have slightly lower user expectations, and we wouldn't need to figure out how to convert people to paying us from an open-source product. This worked for _us_, but isn't universally good advice!
 
-We were going to compete in a very crowded market of tools with multiple competitors doing around $100M in revenue. That meant we could be confident we'd find a way to monetize. We were also happy with a VC model, so we could afford to do this. Had we been building into a new market, with less validation from competitors, or bootstrapping, then charging money sooner would have been important. 
+We were going to compete in a very crowded market of tools with multiple competitors doing around $100m in revenue. That meant we could be confident we'd find a way to monetize. We were also happy with a VC model, so we could afford to do this. Had we been building into a new market, with less validation from competitors, or bootstrapping, then charging money sooner would have been important. 
 
-Our challenge was _standing out_, and being developer-focused / open source we thought (correctly, thankfully) would achieve this. And it was fun.
+Our challenge was _standing out_. Being developer-focused and open source would, we thought, achieve this. It was fun, and, thankfully, we were right.
 
 We set the product up to be quick to deploy – we created a [Heroku](https://heroku.com) one click deployment. We later realized this was a mistake – we wound up eventually focusing on cloud adoption for most users. If I started again, I'd have a cloud product too even if it took a week or two longer. I would still have an open-source product, but I wouldn't aim to sell a self-hosted paid product.
 
