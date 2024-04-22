@@ -458,7 +458,7 @@ By default, we store all this information in a `cookie`, which means PostHog can
 
 If you want to change how PostHog stores this information, you can do so with the `persistence` configuration option:
 
-- `persistence: "localStorage+cookie"` (default): Stores user's distinct ID in a cookie and everything else in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a>.
+- `persistence: "localStorage+cookie"` (default): Limited things are stored in the cookie such as the distinctID and the sessionID, and everything else in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a>.
 
 - `persistence: "cookie"` : Stores all data in a cookie.
 
