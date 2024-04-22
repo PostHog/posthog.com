@@ -1,6 +1,7 @@
 ---
 title: How to set up analytics in Vue
 date: 2024-01-18
+featuredVideo: https://www.youtube-nocookie.com/embed/Z-1W21kNwi4
 author:
   - lior-neu-ner
 tags:

@@ -44,6 +44,6 @@ GET https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?dele
 
 While most data in PostHog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
 
-This is done because data deletion in ClickHouse is expensive and it can impact performance for other users.
+This is done because data deletion in [ClickHouse](/docs/how-posthog-works/clickhouse) is expensive and it can impact performance for other users.
 
 On self-hosted, asynchronous deletions happen according to the `CLEAR_CLICKHOUSE_REMOVED_DATA_SCHEDULE_CRON` environment variable (defaults to Sunday 5AM UTC). Read more on environment variables [here](/docs/self-host/configure/environment-variables)

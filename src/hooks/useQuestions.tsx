@@ -13,6 +13,7 @@ type UseQuestionsOptions = {
     limit?: number
     sortBy?: 'newest' | 'popular' | 'activity'
     filters?: any
+    revalidateOnFocus?: boolean
 }
 
 const query = (offset: number, options?: UseQuestionsOptions) => {
@@ -146,6 +147,9 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
             return fetch(url, user && jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined).then((r) =>
                 r.json()
             )
+        },
+        {
+            revalidateOnFocus: options?.revalidateOnFocus ?? true,
         }
     )
 

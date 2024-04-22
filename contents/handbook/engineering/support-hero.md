@@ -45,7 +45,7 @@ Your job is simple: resolve ticket after ticket from your team's list.
 
 There are three sources of tickets:
 
-1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support). They include a bunch of useful links, e.g. to the admin panel and to the relevant session recording.
+1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support) (The `Help` tab in the righthand sidebar.) They include a bunch of useful links, e.g. to the admin panel and to the relevant session recording.
 1. Community questions asked on PostHog.com.
 1. Slack threads that have been marked with the 🎫 reaction in customer support channels.
 
@@ -65,8 +65,10 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
+  - If they expressed frustration, acknowledging it ("Sorry for the confusion", "Apologies for the trouble" etc.) can earn goodwill quickly.
+  - Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
 - Follow up!
-- Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
+- Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 
 ## How do I prioritize?
 
@@ -115,7 +117,9 @@ We use [Zendesk Support](https://zendesk.com/) as our internal platform to manag
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
-Zendesk will get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also community questions. These tickets will come with links to the issue or the question posted in the community so you can answer them in the appropriate platform, rather than on Zendesk itself.
+Zendesk is populated with new tickets when issues are sent via the in-app [Support panel](https://us.posthog.com/home#panel=support) (the `Help` tab in the righthand sidebar), from people outside the PostHog GitHub organization adding issues to the `posthog` and `posthog.com` repos, and new [community questions](https://posthog.com/questions).  High priority customers also have Slack channels they can post support questions in. We can [create ZenDesk tickets from Slack questions via Pylon.](#pylon-to-create-zendesk-tickets-from-slack-posts)
+ 
+The ZenDesk tickets will include links to the GitHub issue, Slack thread, or the community question so we can answer in the appropriate platform.  After replying to a community question, make an `internal note` on the ZenDesk ticket confirming that you've replied outside of ZenDesk, and set the [ticket status](#ticket-status) accordingly when submitting the internal note.
 
 ### Accessing Zendesk
 
@@ -153,9 +157,13 @@ This looks at the Content Warning field on the Zendesk Organization, and adds th
 If you do discover any potentially offensive content in a customer account then please update this field on the Zendesk Organization so that other team members are aware of the content.
 
 
-### Pylon
+### Pylon to create ZenDesk tickets from Slack posts
 
-Our Customer Success team uses [Pylon](https://usepylon.com) to turn Slack threads into Zendesk tickets. When creating a ticket by adding the :ticket: emoji, the customer or CS team can assign the thread to a team which will route the Zendesk ticket to the correct place. These will normally be marked as high priority and you can respond to them either in Zendesk or Slack, as there is a two-way sync.
+We use [Pylon](https://usepylon.com/) to create Zendesk tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a ZenDesk ticket from.  
+
+Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies in a thread under the post. The last of those replies includes options for the ZenDesk ticket you're creating: Use the `Group` menu to send the ticket to the appropriate team, and the `Severity` menu to set the severity flag on the ZenDesk ticket, then hit the `Submit` button.
+
+ZenDesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
 
 ### Community questions
 

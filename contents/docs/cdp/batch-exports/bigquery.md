@@ -17,7 +17,7 @@ To set up the right permissions for a batch export targeting BigQuery, you need:
 1. A Service Account.
 2. A dataset which has permissions allowing the service account to access it.
 
-Here's how to set these up so that the connector has access only to the dataset it needs:
+Here's how to set these up so that the destination has access only to the dataset it needs:
 
 1. Create a [Service Account](https://cloud.google.com/iam/docs/service-accounts-create#creating).
 

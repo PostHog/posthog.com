@@ -1,6 +1,7 @@
 ---
 title: How to set up feature flags in Vue
 date: 2024-01-19
+featuredVideo: https://www.youtube-nocookie.com/embed/kMrJz-h1YPA
 author:
   - lior-neu-ner
 showTitle: true

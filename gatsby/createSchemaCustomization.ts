@@ -224,6 +224,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       contact_support: Boolean
       unit_amount_usd: Float
     }
+    type SlackEmoji implements Node {
+      name: String
+      url: String
+      localFile: File @link(from: "fields.localFile")
+    }
   `)
     createTypes([
         schema.buildObjectType({

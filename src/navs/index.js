@@ -227,16 +227,6 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
-        name: 'Exec',
-        url: '',
-        children: [
-            {
-                name: 'Annual planning',
-                url: '/handbook/exec/annual-planning',
-            },
-        ],
-    },
-    {
         name: 'Sales & CS',
         url: '',
         children: [
@@ -245,11 +235,23 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/overview',
             },
             {
+                name: 'New sales',
+                url: '/handbook/growth/sales/new-sales',
+            },
+            {
+                name: 'Expansion & Retention',
+                url: '/handbook/growth/sales/expansion-and-retention',
+            },
+            {
+                name: 'How we work',
+                url: '/handbook/growth/sales/how-we-work',
+            },
+            {
                 name: 'Customer support',
                 url: '/handbook/growth/customer-support',
             },
             {
-                name: 'Sales operations',
+                name: 'RevOps',
                 url: '/handbook/growth/sales/sales-operations',
                 children: [
                     {
@@ -267,10 +269,6 @@ export const handbookSidebar = [
                     {
                         name: 'YC onboarding',
                         url: '/handbook/growth/sales/yc-onboarding',
-                    },
-                    {
-                        name: 'Demos',
-                        url: '/handbook/growth/sales/demos',
                     },
                     {
                         name: 'Contracts',
@@ -400,10 +398,6 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Event ingestion explained',
-                        url: '/handbook/engineering/databases/event-ingestion',
-                    },
-                    {
                         name: 'Making schema changes safely',
                         url: '/handbook/engineering/databases/schema-changes',
                     },
@@ -518,6 +512,20 @@ export const handbookSidebar = [
             {
                 name: 'Tech talks',
                 url: '/handbook/engineering/tech-talks',
+            },
+        ],
+    },
+    {
+        name: 'Exec',
+        url: '',
+        children: [
+            {
+                name: 'Annual planning',
+                url: '/handbook/exec/annual-planning',
+            },
+            {
+                name: 'All hands topics',
+                url: '/handbook/exec/all-hands-topics',
             },
         ],
     },
@@ -674,9 +682,73 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Sales & CS',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/overview',
+            },
+            {
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
+            },
+            {
+                name: 'Sales operations',
+                url: '/handbook/growth/sales/sales-operations',
+                children: [
+                    {
+                        name: 'Managing our CRM',
+                        url: '/handbook/growth/sales/crm',
+                    },
+                    {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/sales/icp',
+                    },
+                    {
+                        name: 'Customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding',
+                    },
+                    {
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
+                    },
+                    {
+                        name: 'Demos',
+                        url: '/handbook/growth/sales/demos',
+                    },
+                    {
+                        name: 'Contracts',
+                        url: '/handbook/growth/sales/contracts',
+                    },
+                    {
+                        name: 'Billing',
+                        url: '/handbook/growth/sales/billing',
+                    },
+                    {
+                        name: 'Automations',
+                        url: '/handbook/growth/sales/automations',
+                    },
+                    {
+                        name: 'Who we do business with',
+                        url: '/handbook/growth/sales/who-we-do-business-with',
+                    },
+                    {
+                        name: 'Historical imports',
+                        url: '/handbook/growth/sales/historical-import',
+                    },
+                ],
+            },
+        ],
+    },
+    {
         name: 'Website & Docs',
         url: '',
         children: [
+            {
+                name: 'Updating docs',
+                url: '/handbook/company/docs',
+            },
             {
                 name: 'Community',
                 url: '',
@@ -720,6 +792,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/markdown',
                     },
                     {
+                        name: 'Uploading assets',
+                        url: '/handbook/engineering/posthog-com/assets',
+                    },
+                    {
                         name: 'Posting a new job',
                         url: '/handbook/engineering/posthog-com/jobs',
                     },
@@ -739,19 +815,25 @@ export const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: 'https://posthog.com/posts',
+    url: '/community',
     icon: 'IconChat',
     children: [
         {
-            name: 'Posts',
+            name: 'News',
             icon: 'IconNewspaper',
+            color: 'blue',
+            url: '/community',
+        },
+        {
+            name: 'Posts',
+            icon: 'IconBook',
             color: 'red',
             url: 'https://posthog.com/posts',
         },
         {
             name: 'Questions',
             icon: 'IconMessage',
-            color: 'blue',
+            color: 'seagreen',
             url: '/questions',
         },
         {
@@ -1399,7 +1481,7 @@ export const docsMenu = {
                             url: '/docs/hogql/expressions',
                         },
                         {
-                            name: 'Supported ClickHouse functions',
+                            name: 'Supported functions',
                             url: '/docs/hogql/clickhouse-functions',
                         },
                         {
@@ -1658,12 +1740,12 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Migrate & export',
-                    url: '',
+                    name: 'Migrate',
+                    url: '/docs/migrate',
                     children: [
                         {
-                            name: 'Ingest historical data',
-                            url: '/docs/migrate/ingest-historic-data',
+                            name: 'Overview',
+                            url: '/docs/migrate',
                         },
                         {
                             name: 'Migrate to PostHog Cloud',
@@ -1672,10 +1754,6 @@ export const docsMenu = {
                         {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
-                        },
-                        {
-                            name: 'Export your events',
-                            url: '/docs/migrate/export-events',
                         },
                     ],
                 },
@@ -1690,6 +1768,10 @@ export const docsMenu = {
                         {
                             name: 'Estimating usage and costs',
                             url: '/docs/billing/estimating-usage-costs',
+                        },
+                        {
+                            name: 'Annual plans',
+                            url: '/docs/billing/annual-plans',
                         },
                         {
                             name: 'Common questions about billing',
@@ -1720,6 +1802,10 @@ export const docsMenu = {
                         {
                             name: 'Querying data',
                             url: '/docs/how-posthog-works/queries',
+                        },
+                        {
+                            name: 'Session replay',
+                            url: '/docs/how-posthog-works/recordings-ingestion',
                         },
                     ],
                 },

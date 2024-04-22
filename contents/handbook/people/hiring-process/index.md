@@ -25,7 +25,15 @@ This has resulted in the highest number of qualified and motivated candidates re
 ## Hiring Process
 
 ### Summary of process for current live roles
-Please check [our careers page](/careers) for any live roles. 
+| Position                     | Team                     | Reporting lead | Interview process                                                                                                                                                                                                                       |
+| ---------------------------- | ------------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account Executive (2x)       | Sales & Customer Success | Simon Fisher   | 1) Culture screen with Coua (30mins) 2) Technical screen w/ Charles (45mins) 3) Small team screen w/ James H. (30mins) 4) SuperDay - task assessment, peer team interview and culture and motivation interview w/ Tim (8-10hrs)         |
+| Full Stack Engineer          | Replay                   | Paul D'Ambra   | 1) Culture screen with Coua (30mins) 2) Technical screen w/ Paul (60mins) 3) Small team screen w/ Tim (30mins) 4) SuperDay - task assessment, peer team interview, and culture and motivation interview w/ James H. (8-10hrs)           |
+| Mobile Engineer              | Replay                   | Paul D'Ambra   | 1) Culture screen with Coua (30mins) 2) Technical screen w/ Paul (60mins) 3) Small team screen w/ Tim (30mins) 4) SuperDay- task assessment, peer team interview, and culture and motivation interview w/ James H. (8-10hrs)            |
+| Clickhouse Engineer          | Data Warehouse           | Eric Duong     | 1) Culture screen with Coua (30mins) 2) Technical screen w/ Eric/James G. (60mins) 3) Small team screen w/ Tim (30mins) 4) SuperDay - task assessment, peer team interview, and culture and motivation interview w/ James H. (8-10hrs)  |
+| Full Stack Engineer          | Product Analytics        | Marius Andra   | 1) Culture screen with Coua (30mins) 2) Technical screen w/ Marius/Michael (60mins) 3) Small team screen w/ Tim (30mins) 4) SuperDay - task assessment, peer team interview, and culture and motivation interview w/ James H. (8-10hrs) |
+| Systems Distributed Engineer | Pipeline                 | Tiina Turban   | 1) Culture screen with Coua (30mins) 2) Technical screen w/ Tomás (60mins) 3) Small team screen w/ Tim (30mins) 4) SuperDay - task assessment, peer team interview, and culture and motivation interview w/ James H. (8-10hrs)          |
+| Infra Security Engineer      | Infrastructure           | Ben White      | 1) Culture screen with Coua (30mins) 2) Technical screen w/ Ben (60mins) 3) Small team screen w/ Tim (30mins) 4) SuperDay - task assessment, peer team interview, and culture and motivation interview w/ James H. (8-10hrs)            |
 
 ### External recruiters
 
@@ -163,7 +171,7 @@ When we book a meeting, we have the option of selecting a Google Meet or Zoom ca
 
 The People & Ops team reviews applications and resumes/portfolios carefully and leaves their feedback as a comment on the candidate's record in Ashby if relevant.
 
-If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
+If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in [our community forum](https://posthog.com/questions)?
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email. Due to the volume of applications we receive, we usually don't provide personalized feedback.
 

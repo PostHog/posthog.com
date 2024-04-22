@@ -39,6 +39,12 @@ import ReactNativeIdentify from './\_snippets/identify.mdx'
 
 <ReactNativeIdentify />
 
+## Alias
+
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+
 ## Setting user properties via an event
 
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
@@ -129,6 +135,7 @@ You can give your users the option to opt in or out by calling the relevant meth
 To Opt in/out of tracking, use the following calls.
 
 ```javascript
+posthog.optedOut() // See if a user has opted out
 posthog.optIn() // opt in
 posthog.optOut() // opt out
 ```

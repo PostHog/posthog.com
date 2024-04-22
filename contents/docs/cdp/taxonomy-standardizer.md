@@ -12,11 +12,11 @@ import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
 
-This connector standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
+This transformation standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
 
 ## Supported taxonomies
 
-This connector can convert from any of these taxonomies, to any other.
+This transformation can convert from any of these taxonomies, to any other.
 
 -   Camel Case: `helloThereHedgehog`
 -   Pascal Case: `HelloThereHedgehog`
@@ -29,8 +29,8 @@ This connector can convert from any of these taxonomies, to any other.
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Taxonomy Standardizer' and select the connector, press Install.
-3. Follow the on-screen steps to configure the connector.
+2. Search for 'Taxonomy Standardizer' and select the transformation, press Install.
+3. Follow the on-screen steps to configure the transformation.
 
 ## Configuration
 
@@ -38,11 +38,11 @@ This connector can convert from any of these taxonomies, to any other.
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub.
+PostHog is open-source and so are all transformations on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this transformation?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Taxonomy Standardizer. Thank you, Yakko!
 

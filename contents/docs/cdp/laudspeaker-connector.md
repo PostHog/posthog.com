@@ -21,7 +21,7 @@ Send event data from PostHog to Laudspeaker, so it can be used to trigger immedi
 
 It is recommended to start by importing PostHog users into Laudspeaker via the event integration on Laudspeaker. More information on this is available in [Laudspeaker's docs](https://laudspeaker.com/docs/).
 
-After configuring PostHog within Laudspeaker, you can install the Laudspeaker Connector in PostHog by following these steps...
+After configuring PostHog within Laudspeaker, you can install the Laudspeaker destination in PostHog by following these steps...
 
 1. Log in to your PostHog instance
 2. Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar

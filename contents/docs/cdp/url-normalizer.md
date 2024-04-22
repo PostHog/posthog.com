@@ -12,7 +12,7 @@ import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
-This connector normalizes the format of URLs so you can more easily compare them in insights.
+This transformation normalizes the format of URLs so you can more easily compare them in insights.
 
 By default, the URL Normalizer converts all URLs to lowercase and strips trailing /s, overriding the old `current_url` property.
 
@@ -21,7 +21,7 @@ By default, the URL Normalizer converts all URLs to lowercase and strips trailin
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'URL Normalizer' and select the connector, press Install.
+2. Search for 'URL Normalizer' and select the transformation, press Install.
 
 ## Configuration
 
@@ -31,11 +31,11 @@ If you'd like to normalize URLs into a different format, please consider contrib
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the URL Normalizer](https://github.com/PostHog/posthog-url-normalizer-plugin) is available on GitHub.
+PostHog is open-source and so are all transformations on the platform. The [source code for the URL Normalizer](https://github.com/PostHog/posthog-url-normalizer-plugin) is available on GitHub.
 
-### Who created this connector?
+### Who created this transformation?
 
 We'd like to thank PostHog user and community member [Mark Bennett](https://github.com/MarkBennett) for creating this app
 

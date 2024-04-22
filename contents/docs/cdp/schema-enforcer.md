@@ -12,7 +12,7 @@ import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
 
-The connector enables you to enforce a schema on events in PostHog as they are ingested. It does this by preventing ingestion if the event:
+The transformation enables you to enforce a schema on events in PostHog as they are ingested. It does this by preventing ingestion if the event:
 
 -   Is missing a required property
 -   Has a property with the wrong type
@@ -30,7 +30,7 @@ It also:
 1. Log in to your PostHog instance
 2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'Schema Enforcer'
-4. Select the connector, press 'Install' and follow the on-screen instructions
+4. Select the transformation, press 'Install' and follow the on-screen instructions
 
 ## Configuration
 
@@ -67,11 +67,11 @@ Below is an example configuration file:
 
 ## FAQ
 
-### Is the source code for this connector available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all connectors on the platform. The [source code for the Schema Enforcer](https://www.npmjs.com/package/@posthog/schema-enforcer-plugin) is available on NPM.
+PostHog is open-source and so are all transformations on the platform. The [source code for the Schema Enforcer](https://www.npmjs.com/package/@posthog/schema-enforcer-plugin) is available on NPM.
 
-### Who created this connector?
+### Who created this transformation?
 
 A lot of people worked on this app! We'd like to thank the following PostHog team members...
 
