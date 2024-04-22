@@ -254,6 +254,10 @@ export const handbookSidebar = [
                 name: 'Brand strategy',
                 url: '/handbook/strategy/brand',
             },
+            {
+                name: 'Product positioning',
+                url: '/handbook/design/positioning',
+            },
         ],
     },
     {
