@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Exec hiring at PostHog
 
-We deliberately keep our [structure flat](https://posthog.com/handbook/company/culture#structured-for-speed-and-autonomy) and we don’t believe in having a lot of fancy titles early on. However, as we grow, we will hire people into more executive-type positions. 
+We deliberately keep our [structure flat](/handbook/company/culture#structured-for-speed-and-autonomy) and we don’t believe in having a lot of fancy titles early on. However, as we grow, we will hire people into more executive-type positions. 
 
 With our exec hiring, moreso than normal, we are aiming for speed, and as always, quality. If a candidate is amazing but doesn't fit with a specific role need we have _right now_, we still aim to treat the hiring process with the same urgency as if posthog.com has gone down. 
 
@@ -51,7 +51,7 @@ In order to ensure speed, we aim to finish the process within 5 working days (as
 *   Strategy and long term outlook
 *   Culture fit
 
-**Day 4: [SuperDay](https://posthog.com/handbook/people/hiring-process#posthog-superday) (_optional_) or meet the team (standup or informal lunch)**
+**Day 4: [SuperDay](/handbook/people/hiring-process#posthog-superday) (_optional_) or meet the team (standup or informal lunch)**
 
 **Day 4: Wrap up call with James and/or Tim -** _30 minutes_
 

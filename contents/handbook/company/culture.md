@@ -23,7 +23,7 @@ All remote has a bunch of advantages:
 
 ## Diverse & inclusive
 
-This is actually so important to us that it has [its own dedicated page](https://posthog.com/handbook/company/diversity). 
+This is actually so important to us that it has [its own dedicated page](/handbook/company/diversity). 
 
 ## Extremely transparent
 

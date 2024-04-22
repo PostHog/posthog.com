@@ -30,7 +30,7 @@ Former games journalist Joe has repeatedly recommended this collection of essays
 
 "I don’t agree about the importance of a dress code, though.”
 
-> **Putting it into practice:** We encourage everyone at PostHog to [write a personal README](/team) about their style of work and how they like to collaborate and be communicated with. 
+> **Putting it into practice:** We encourage everyone at PostHog to [write a personal README](/people) about their style of work and how they like to collaborate and be communicated with. 
 
 
 ![From Switzerland](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/from-switzerland.jpg)
@@ -116,7 +116,7 @@ In addition to the The Mom Test, Annika recommends this book for its practical a
 
 ![the mom test](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/mom-test.jpg)
 ## [The Mom Test by Rob Fitzpatrick](https://www.goodreads.com/book/show/52283963-the-mom-test)
-**Recommended by [basically everyone](/team)**
+**Recommended by [basically everyone](/people)**
 
 One of the most universally popular books among the team (shortly followed by The Design of Everyday Things by Dan Norman), The Mom Test has helped shape the way we think about product design and user feedback at a fundamental level. 
 

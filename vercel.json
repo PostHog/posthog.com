@@ -929,11 +929,11 @@
         { "source": "/tutorials/revenue", "destination": "/tutorials" },
         { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" },
         { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
-        { "source": "/tim", "destination": "/community/profiles/108" },
-        { "source": "/marius", "destination": "/community/profiles/1" },
-        { "source": "/raquel", "destination": "/community/profiles/491" },
-        { "source": "/jamesg", "destination": "/community/profiles/90" },
-        { "source": "/jams", "destination": "/community/profiles/90" },
+        { "source": "/tim", "destination": "/community/profiles/27730" },
+        { "source": "/marius", "destination": "/community/profiles/30202" },
+        { "source": "/raquel", "destination": "/community/profiles/28693" },
+        { "source": "/jamesg", "destination": "/community/profiles/30174" },
+        { "source": "/jams", "destination": "/community/profiles/30174" },
         { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
         { "source": "/docs/surveys/setup", "destination": "/docs/surveys/installation" },
         { "source": "/docs/surveys/new", "destination": "/docs/surveys/creating-surveys" },
@@ -1251,6 +1251,7 @@
         { "source": "/handbook/small-teams/people-ops", "destination": "/teams/people" },
         { "source": "/self-host", "destination": "/docs/self-host" },
         { "source": "/using-posthog", "destination": "/docs" },
-        { "source": "/handbook/company/values", "destination": "/handbook/values" }
+        { "source": "/handbook/company/values", "destination": "/handbook/values" },
+        { "source": "/max", "destination": "/community/profiles/28378" }
     ]
 }

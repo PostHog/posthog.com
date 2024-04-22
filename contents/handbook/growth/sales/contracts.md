@@ -42,7 +42,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
    * **Contract.EffectiveDate** - The start date of the contract expressed in the format `01 Feb 2023`
    * **Contract.Term** - The term in months of the contract (12 months by default)
 7. If an MSA is being used rather than the standard terms you will need to replace the following text:
-   > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “Agreement”)
+   > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
    
    with
    
