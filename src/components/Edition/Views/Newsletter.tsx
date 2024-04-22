@@ -8,7 +8,7 @@ import SEO from 'components/seo'
 
 export default function Newsletter() {
     const { posts, isLoading } = useContext(PostsContext)
-    const [featuredPost, ...rest] = posts.slice(0, 10)
+    const [featuredPost, ...rest] = posts || []
 
     return (
         <div className="mx-auto max-w-screen-xl">
