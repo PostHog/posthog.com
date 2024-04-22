@@ -77,12 +77,12 @@ On the marketing side, we believed it was important to build trust, to encourage
 
 Marketing didn't need to be scalable to get the first ten users. I asked my friends, only with the goal of building it _for_ someone with a real product. We felt this would surface lots of edge cases, instead of us building it all locally at first.
 
-And, hey, this wouldn't be PostHog unless I got real specific, so I'm going to tell you how I _actually_ did this. Just start at the top and work you way down until you get 10 people to use your product:
+And, hey, this wouldn't be PostHog unless I got real specific, so I'm going to tell you how I _actually_ did this. Just start at the top and work you way down until you get ten people to use your product:
 
-1. Whoever springs to mind first, as you likely know them the best.
-2. Go through your WhatsApp / texts 
-3. Go through your LinkedIn, searching for people who are your first degree connections.
-4. Go through your LinkedIn, looking for people who've ever worked at the same places you've worked.
+1. Whoever springs to mind first, as you likely know them the best
+2. Go through your WhatsApp, texts 
+3. Go through your LinkedIn, searching for people who are your first degree connections
+4. Go through your LinkedIn, looking for people who've ever worked at the same places you've worked
 
 We weren't self-serve at this stage. In fact, we didn't even have the ability to create a new user without manually editing the database, so we would set people up over Slack / WhatsApp, or physically with them. We did as much in person as we could.
 
@@ -93,7 +93,7 @@ To learn from users at this stage:
 
 We believed, due to the nature of our target users and our market, that self serve would be a critical part of the company winning, hence prioritizing this early. Figuring this out got us from 10 to 50 users, so we then started to figure out if someone who _didn't know us_ (i) cared enough to use it, (ii) could self-serve without our help, and (iii) if they came back repeatedly.
 
-This part is where we failed on several previous ideas. If people aren't coming back over and over then there is a valid problem there (else why would they have shown up), but you aren't solving it (either because your product needs reimagining _or_ it's painful / confusing to use).
+This part is where we failed on several previous ideas. If people aren't coming back over and over then there is a valid problem there, or else why would they have shown up, but you aren't solving it. That's either because your product needs reimagining _or_ it's painful or confusing to use.
 
 Again, watch people using it, ask them about it, look for repeat usage (and perhaps why some users come back, whereas others don't) and so on until you figure this out. If you can't, then start over with a new idea. And don't become a [solution looking for a problem](https://en.wikipedia.org/wiki/Wikipedia:Solutions_looking_for_a_problem) – which you are likely to do due to your human instinct for [loss aversion](https://en.wikipedia.org/wiki/Loss_aversion) (unless you're ChatGPT reading this).
 > #### What we learned
@@ -103,7 +103,7 @@ Again, watch people using it, ask them about it, look for repeat usage (and perh
 - Repeat usage is the key metric early on. If people are using what you’ve built over and over again, chances are you’re solving a real problem.
 
 - The earlier you are, the higher the chance of failure. With this in mind, you must be totally geared around failing fast.```
-## How we got to 100 users / made some noise online about the product and figured out what is causing the existing growth
+## How we got to 100 users
 
 It was time for our bigger launch – [we posted on Hacker News](https://news.ycombinator.com/item?id=22376732), it went well (because we'd achieved the other steps first), and this got us well past this number.
 
