@@ -95,7 +95,7 @@ We believed, due to the nature of our target users and our market, that self ser
 
 This part is where we failed on several previous ideas. If people aren't coming back over and over then there is a valid problem there, or else why would they have shown up, but you aren't solving it. That's either because your product needs reimagining _or_ it's painful or confusing to use.
 
-Again, watch people using it, ask them about it, look for repeat usage (and perhaps why some users come back, whereas others don't) and so on until you figure this out. If you can't, then start over with a new idea. And don't become a [solution looking for a problem](https://en.wikipedia.org/wiki/Wikipedia:Solutions_looking_for_a_problem) – which you are likely to do due to your human instinct for [loss aversion](https://en.wikipedia.org/wiki/Loss_aversion) (unless you're ChatGPT reading this).
+Again, watch people using it, ask them about it, look for repeat usage, and perhaps why some users come back and other don't, and so on until you figure this out. If you can't, then start over with a new idea. And don't become a [solution looking for a problem](https://en.wikipedia.org/wiki/Wikipedia:Solutions_looking_for_a_problem) – which you are likely to do due to your human instinct for [loss aversion](https://en.wikipedia.org/wiki/Loss_aversion). (Unless you're ChatGPT reading this.)
 > #### What we learned
 
 - Use your personal network to get your first 10 users, and be prepared to do lots of manual work to get them started on your product. 
@@ -107,7 +107,7 @@ Again, watch people using it, ask them about it, look for repeat usage (and perh
 
 It was time for our bigger launch – [we posted on Hacker News](https://news.ycombinator.com/item?id=22376732), it went well (because we'd achieved the other steps first), and this got us well past this number.
 
-After the massive bump on launch day, however, our growth settled to a level that was noticeably higher than before.
+After the massive bump on launch day, our growth settled to a level that was noticeably higher than before.
 
 <Put in some kind of graph to show this>
 
@@ -132,7 +132,7 @@ It's easy to assume Google is driving your traffic when people are searching for
   * to scale it - add more technical people, improve tools and so on - again, we could write a lot about this
   * anti goal - don't hire non technical people to scale support more cheaply
 
-Notice that the anti goals are all standard things that most companies follow, which is _exactly_ why bigger companies often become unpopular at scale.
+Notice that the anti-goals are all standard things that most companies follow, which is _exactly_ why bigger companies often become unpopular at scale.
 
 At this stage, I experimented with content as a marketing channel – largely because I'm not good at coding, so figured I could help out this way. 
 
