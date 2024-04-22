@@ -236,7 +236,7 @@ export const CompensationCalculator = ({
                         </ol>
                     )}
                     <div className="rounded flex justify-between" id="compensation">
-                        <span className="font-bold">Base salary</span>
+                        <span className="font-bold">Salary</span>
                         <span className="flex justify-end flex-col text-right">
                             <span className="font-bold">
                                 {job && country && region && currentLocation && level && step
