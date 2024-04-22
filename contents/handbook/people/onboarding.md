@@ -10,7 +10,7 @@ Giving a new joiner a great onboarding experience is super important to us. We w
 
 > Want to introduce a new joiner to the People team for onboarding, but don't know who on the team does what? Just introduce them to people@posthog.com and a member of the team will jump in and take it from there!
 
-Our [team](/team) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining.
+Our [team](/people) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining.
 
 ## Onboarding checklist
 

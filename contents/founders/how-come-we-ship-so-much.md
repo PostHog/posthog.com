@@ -99,7 +99,7 @@ PostHog works like a group of startups with lots of [small teams](/handbook/comp
 
 It's simple, but if you have lots of spending and focus outside of engineering, you won't get as much built.
 
-At the time of writing, [we are 37 people](/team), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
+At the time of writing, [we are 37 people](/people), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
 
 ![company composition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
 

@@ -125,7 +125,7 @@ The ZenDesk tickets will include links to the GitHub issue, Slack thread, or the
 
 You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com).
 
-The first time you sign into Zendesk, please make sure you include your name and [profile picture](/team) so our users know who they are chatting with!
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](/people) so our users know who they are chatting with!
 
 ### Using Zendesk
 
