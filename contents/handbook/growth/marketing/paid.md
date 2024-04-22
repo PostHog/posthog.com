@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As we believe in [product-led growth](https://posthog.com/blog/product-led-growth), paid ads are _not_ at the heart of our marketing strategy in the long term. Instead, we see them as an important way to kick start and then amplify the work we are doing in other areas of marketing and product. 
+As we believe in [product-led growth](/blog/product-led-growth), paid ads are _not_ at the heart of our marketing strategy in the long term. Instead, we see them as an important way to kick start and then amplify the work we are doing in other areas of marketing and product. 
 
 We work with an agency, [Hey Digital](https://www.heydigital.co/) to manage paid ads. Specifically, they help us with:
 - Paid ad tactics and monthly media plan
@@ -24,7 +24,7 @@ Specific details of our media plan are shared internally only, as they contain c
 Hey Digital create our ad assets for most of our main channels. These guidelines may be useful to you however if you are doing one-off assets for things like paid newsletter sponsorships or one off campaigns on more niche paid channels. 
 
 - For specific messaging to use in copy, you can use our [copy bank](https://docs.google.com/spreadsheets/d/1VOwyDs8qmXw38KgCiPeJMIGS-SedSAZLXfb2zvB_1jE/edit#gid=0), or our [value propositions](/handbook/growth/marketing/value-propositions) if you need to create something from scratch.
-- We have [a handy set of assets](https://posthog.com/media) that you can use. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
+- We have [a handy set of assets](/media) that you can use. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
 
 ## Channels
 

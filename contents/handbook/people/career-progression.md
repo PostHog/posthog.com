@@ -47,7 +47,7 @@ Better than a fancy title - you can show future employers or investors what you 
 
 **Your team around you see your everyday work more than a manager - get direct feedback from them**
 
-Great people + [direct feedback](https://posthog.com/handbook/people/feedback) = learning.
+Great people + [direct feedback](/handbook/people/feedback) = learning.
 
 ## Ways we do not help you progress
 

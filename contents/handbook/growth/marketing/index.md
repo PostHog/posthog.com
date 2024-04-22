@@ -19,11 +19,11 @@ Marketing is the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. 
  
 - Proactively reporting and amplifying company and product news, rather than [artificially creating news](https://en.wikipedia.org/wiki/Tomorrow_Never_Dies) or buzz by telling people what to build.
 
-The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/teams/marketing).
+The latest goals for marketing can be found on the [Marketing Small Team page](/teams/marketing).
 
 ## Marketing & content vision 
 
-PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing & content at PostHog will look like at that point. 
+PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing & content at PostHog will look like at that point. 
 
 ### Things we want to be brilliant at
 

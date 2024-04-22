@@ -168,7 +168,7 @@ All new hires should schedule a 30 minute session with the [support engineer clo
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 
 - [ ] [What the role of a support hero is](/handbook/growth/customer-support#engineers-are-support-heroes) and how they can expect to receive tickets/escalations
-- [ ] [An overview of where tickets come from](https://posthog.com/handbook/growth/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
+- [ ] [An overview of where tickets come from](/handbook/growth/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
 - [ ] [How to create tickets from Slack threads](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) and [reassign tickets to other teams](https://support.zendesk.com/hc/en-us/articles/4408887127450-Manually-assigning-a-ticket)
 - [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
 - [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
@@ -182,7 +182,7 @@ It can be especially helpful for new hires if support engineers demonstrate how 
 
 ## 30/60/90 day check-ins
 
-As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to simply serve as a reminder that these checkpoints have arrived. There is no formal requirement for a manager to do anything different at these stages but there are a few helpful suggestions below to help the new team member's experience and to make sure everything is on track with the onboarding and the [first 3 months probationary period](https://posthog.com/handbook/people/compensation#notice-period) will be passed.
+As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to simply serve as a reminder that these checkpoints have arrived. There is no formal requirement for a manager to do anything different at these stages but there are a few helpful suggestions below to help the new team member's experience and to make sure everything is on track with the onboarding and the [first 3 months probationary period](/handbook/people/compensation#notice-period) will be passed.
 
 - Around the 30 day mark, it's good for the manager to provide initial feedback - especially if there is constructive feedback that needs to be given to ensure the person passes probation. Separately, it's also a good time to reinforce the positive work that has been done by somebody on the right track.
 - Around the 60 day mark, if things are going well, the manager might want to give an indication of this as it can ease any fears the team member may have. A member of the Ops team will also check in with the manager to see if things are on track.
