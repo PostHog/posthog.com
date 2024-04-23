@@ -597,7 +597,6 @@ const Pricing = ({
                                             </div>
                                             {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
                                                 const planFeature = plan?.features?.find((f) => f.key === feature.key)
-                                                console.log('plan', plan)
                                                 return (
                                                     <div
                                                         className="col-span-3 px-3 py-2 text-sm"
