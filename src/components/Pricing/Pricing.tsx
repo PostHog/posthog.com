@@ -28,6 +28,7 @@ import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import usePostHog from 'hooks/usePostHog'
+import { RenderInClient } from 'components/RenderInClient'
 
 interface PlanData {
     title: string
@@ -58,7 +59,11 @@ const getPlanSummary = (posthog): PlanData[] => {
             features: [
                 'Generous free tier on all products',
                 'Advanced product features',
-                posthog?.getFeatureFlag?.('two-project-limit') ? '2 projects' : '10 projects',
+                <RenderInClient
+                    key="plan-summary-projects"
+                    render={() => <>{posthog?.getFeatureFlag?.('two-project-limit') ? '2 projects' : '10 projects'}</>}
+                    placeholder={<></>}
+                />,
                 '7 year data retention',
                 'Email support',
                 'Pay only for what you use',
@@ -604,11 +609,26 @@ const Pricing = ({
                                                                 )}
                                                                 {planFeature.limit && (
                                                                     <span className="opacity-75">
-                                                                        {planFeature.key === 'organizations_projects' &&
-                                                                        posthog?.getFeatureFlag?.('two-project-limit')
-                                                                            ? 2
-                                                                            : planFeature.limit}{' '}
-                                                                        {planFeature.unit}
+                                                                        {planFeature.key ===
+                                                                        'organizations_projects' ? (
+                                                                            <RenderInClient
+                                                                                render={() => (
+                                                                                    <>
+                                                                                        {posthog?.getFeatureFlag?.(
+                                                                                            'two-project-limit'
+                                                                                        )
+                                                                                            ? '2'
+                                                                                            : planFeature.limit}{' '}
+                                                                                        {planFeature.unit}
+                                                                                    </>
+                                                                                )}
+                                                                                placeholder={<></>}
+                                                                            />
+                                                                        ) : (
+                                                                            <>
+                                                                                {planFeature.limit} {planFeature.unit}
+                                                                            </>
+                                                                        )}
                                                                     </span>
                                                                 )}
                                                             </div>
