@@ -14,23 +14,15 @@ crosspost:
   - Blog
 ---
 
-Talking to users? Isn't that a job for founders, product managers, and salespeople? Why would an engineer ever want or need to do it?
+A lot of engineers place shipping code above all else. Anything that gets in the way of this is, apparently, a waste of time. Common metrics for measuring engineering success, like lead time or deployment frequency, reflect this.
 
-In his book *[Modern Software Engineering](https://www.davefarley.net/?p=352)*, Dave Farley writes that mastering software engineering requires becoming an expert in learning. When you prioritize learning, talking to users becomes a critical part of an engineer's toolkit.
+This creates a disregard for shipping features users value. Studies show this is more common than you might think. For example, [Microsoft](https://ai.stanford.edu/~ronnyk/ExPThinkWeek2009Public.pdf) found that only one-third of ideas tested improved metrics they were designed for.
 
-To explain further why this is the case, and to help you get started, we wrote this guide based on what we've learned talking to users as engineers ourselves at PostHog.
-
-## 1. Talking to users isn't a waste of time
-
-A lot of engineers place shipping code above all else. Anything that gets in the way of this is, apparently, a waste of time. This reflects in common metrics for measuring engineering success like lead time or deployment frequency.
-
-This creates a disregard for shipping the right code: features users value. Studies show this is more common than you might think. For example, [Microsoft](https://ai.stanford.edu/~ronnyk/ExPThinkWeek2009Public.pdf) found that only one-third of ideas tested improved metrics they were designed for.
-
-Spending more time learning what users want can solve this problem. It also helps close the gap between what users value and what you are building.
+Spending time talking to users can improve this by closing the gap between what users value and what you are building. To help you do it well, we put together the 7 best insights we learned from talking to users as engineers ourselves.
 
 ![Don't build the wrong features](https://res.cloudinary.com/dmukukwp6/image/upload/v1713470851/posthog.com/contents/images/newsletter/talk-to-users/features.jpg)
 
-## 2. You have an information bottleneck
+## 1. You have an information bottleneck
 
 You might already think you know what users want. Someone spoke to users, turned those insights into tickets, and it's on you to build them. Problem is, a lot of information is lost in the process of going from interviews to tickets.
 
@@ -40,7 +32,7 @@ As an engineer, you miss out on the context and depth of information users can p
 
 Think of user interviews like automated tests. Not doing them saves you time, but also leads to pain over the long term. Both enable you to iterate faster by providing rapid feedback on whether what you've built is working, even if they aren't code you ship.
 
-## 3. How to prepare to talk to users
+## 2. How to prepare to talk to users
 
 To make the most out of talking to users, you should know: 
 
@@ -52,7 +44,7 @@ To make the most out of talking to users, you should know:
 
 You should also set up tools that help you automate the process. These could include PostHog's [user interview survey](https://posthog.com/tutorials/feedback-interviews-site-apps#using-surveys-to-book-user-interviews) and Calendly for scheduling, your video conferencing tool of choice, and an AI notetaker like [Superpowered](https://superpowered.me/).
 
-## 4. How to find the right users to talk to
+## 3. How to find the right users to talk to
 
 You don't need to talk to a huge number of users, nor do you need a statistically significant sample. A few user interviews can be all you need to clarify the next increment of progress.
 
@@ -67,7 +59,7 @@ If this process is going too slow then an incentive, like a merch code or gift c
 
 ![Feedback for merch code](https://res.cloudinary.com/dmukukwp6/image/upload/v1713470870/posthog.com/contents/images/newsletter/talk-to-users/merch.png)
 
-## 5. What to ask during a user interview
+## 4. What to ask during a user interview
 
 Our experience talking to users has revealed two main discussion areas. The first is **problem exploration**. This guides future product decisions, like [what to build next](https://newsletter.posthog.com/p/how-we-decide-what-to-build). Focus on concrete situations by asking questions like:
 
@@ -92,7 +84,7 @@ For both, **follow-up questions** are critical to get the depth you need to buil
 
 Ask one question at a time. Focus on listening. Get more specific as the interview goes on.
 
-## 6. Common mistakes in user interviews
+## 5. Common mistakes in user interviews
 
 The best information you'll get from talking to users comes from not talking. Beyond prioritizing listening, there are some specific areas you should avoid. They include:
 
@@ -104,7 +96,7 @@ The best information you'll get from talking to users comes from not talking. Be
 
 4. **Macroanalysis**. Focus on an individual's specific use case rather than a company or industry one. Outside research can fill this if necessary.
 
-## 7. What to do after an interview
+## 6. What to do after an interview
 
 The first thing you should do after the interview is clean up and [share the notes with your team](https://posthog.com/product-engineers/interview-snapshot-guide). This helps you get more from the work you've done talking to them. We keep all of our user interview notes in a single user interview file, which is currently 378 pages long.
 
@@ -114,7 +106,7 @@ The second thing to do after the interview is to take action. The great part abo
 
 For larger product decisions, you can combine qualitative feedback with analytics, experience, product principles, and personal opinions to make decisions about [what to build next](https://newsletter.posthog.com/p/how-we-decide-what-to-build). The experiences of users are one of the most powerful pieces of information for deciding this. 
 
-## 8. Talking to users doesn't stop at user interviews
+## 7. Talking to users doesn't stop at user interviews
 
 Your users are still your users after you talk to them. This means you should still try to build valuable things and get feedback from them after your conversation.
 
