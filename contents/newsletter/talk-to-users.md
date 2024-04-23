@@ -40,19 +40,19 @@ As an engineer, you miss out on the context and depth of information users can p
 
 Think of user interviews like automated tests. Not doing them saves you time, but also leads to pain over the long term. Both enable you to iterate faster by providing rapid feedback on whether what you've built is working, even if they aren't code you ship.
 
-## 3. Preparing to talk to users
+## 3. How to prepare to talk to users
 
 To make the most out of talking to users, you should know: 
 
 1. **Who are your users.** Read about how we [defined our ICP](https://newsletter.posthog.com/p/defining-our-icp-is-the-most-important) if you don't know the answer to this.
 
-2. **How they are using your product (or competitors).** Watch [session replays](https://posthog.com/session-replay) and use analytics to figure out popular features. Analyze competitors for their feature sets and use cases. 
+2. **How they are using your product or competitors.** Watch [session replays](https://posthog.com/session-replay) and use analytics to figure out popular features. Analyze competitors for their feature sets and use cases. 
 
 3. **What you want to build next.** Understand [the significant problems you could work on](https://posthog.com/founders/product-market-fit-game#level-1---find-a-significant-problem-to-work-on) and create a potential roadmap to solve,  but be open to completely changing it.
 
 You should also set up tools that help you automate the process. These could include PostHog's [user interview survey](https://posthog.com/tutorials/feedback-interviews-site-apps#using-surveys-to-book-user-interviews) and Calendly for scheduling, your video conferencing tool of choice, and an AI notetaker like [Superpowered](https://superpowered.me/).
 
-## 4. Finding the right users to talk to
+## 4. How to find the right users to talk to
 
 Just because we convinced you that talking to users isn't a waste of time doesn't mean we want to waste your time doing so. Lucky for you, you don't need a lot of users. You don't need to find a statistically significant sample. A few user interviews can be all you need to clarify the next increment of progress.
 
