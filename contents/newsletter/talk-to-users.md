@@ -4,7 +4,7 @@ date: 2024-04-23
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/beyond-10x-engineer/super-hog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1713888662/posthog.com/contents/images/newsletter/talk-to-users/talk-to-users-big.png
 featuredImageType: full
 tags:
   - Engineering
@@ -24,11 +24,11 @@ Spending time talking to users can improve this by closing the gap between what 
 
 ## 1. You have an information bottleneck
 
-You might already think you know what users want. Someone spoke to users, turned those insights into tickets, and it's on you to build them. Problem is, a lot of information is lost in the process of going from interviews to tickets.
+You might already think you know what users want. Someone spoke to users, turned those insights into tickets, and it's on you to build them. Problem is, you lose a lot of information going from interviews to tickets.
 
 ![Information bottleneck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
 
-As an engineer, you miss out on the context and depth of information users can provide. The person talking to the user likely doesn't know the options and constraints as well as you do. You miss out on being able to dive deeper on those areas and use that information to find a good solution
+As an engineer, you miss out on the context and depth of information users can provide. The person talking to the user likely doesn't know the options and constraints as well as you do. You miss out on being able to dive deeper into those areas and use that information to find a good solution
 
 Think of user interviews like automated tests. Not doing them saves you time, but also leads to pain over the long term. Both enable you to iterate faster by providing rapid feedback on whether what you've built is working, even if they aren't code you ship.
 
@@ -102,7 +102,7 @@ The first thing you should do after the interview is clean up and [share the not
 
 ![User interview doc](https://res.cloudinary.com/dmukukwp6/image/upload/v1713832564/posthog.com/contents/images/newsletter/talk-to-users/interview-doc.png)
 
-The second thing to do after the interview is to take action. The great part about being an engineer is that you can just ship small changes yourself. For example, our team often makes small UX changes to clarify a user confusion.
+The second thing to do after the interview is to take action. The great part about being an engineer is that you can just ship small changes yourself. For example, our team often makes small UX changes to clarify a user's confusion.
 
 For larger product decisions, you can combine qualitative feedback with analytics, experience, product principles, and personal opinions to make decisions about [what to build next](https://newsletter.posthog.com/p/how-we-decide-what-to-build). The experiences of users are one of the most powerful pieces of information for deciding this. 
 
