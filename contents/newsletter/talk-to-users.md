@@ -20,13 +20,11 @@ This creates a disregard for shipping features users value. Studies show this is
 
 Spending time talking to users can improve this by closing the gap between what users value and what you are building. To help you do it well, we put together the 7 best insights we learned from talking to users as engineers ourselves.
 
-![Don't build the wrong features](https://res.cloudinary.com/dmukukwp6/image/upload/v1713470851/posthog.com/contents/images/newsletter/talk-to-users/features.jpg)
-
 ## 1. You have an information bottleneck
 
 You might already think you know what users want. Someone spoke to users, turned those insights into tickets, and it's on you to build them. Problem is, you lose a lot of information going from interviews to tickets.
 
-![Information bottleneck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
+![Information bottleneck](https://res.cloudinary.com/dmukukwp6/image/upload/v1713894881/posthog.com/contents/images/newsletter/talk-to-users/bottleneck3.png)
 
 As an engineer, you miss out on the context and depth of information users can provide. The person talking to the user likely doesn't know the options and constraints as well as you do. You miss out on being able to dive deeper into those areas and use that information to find a good solution
 
