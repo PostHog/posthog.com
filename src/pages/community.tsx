@@ -250,9 +250,6 @@ const Main = () => {
                     <div className="py-4">
                         <Changelog />
                     </div>
-                    <div className="py-4 hidden">
-                        <WIP />
-                    </div>
                 </div>
             </section>
             <aside className="order-2 sm:flex-[0_0_260px] md:flex-[0_0_300px] lg:order-none flex flex-col gap-4">
