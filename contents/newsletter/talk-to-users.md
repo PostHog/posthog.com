@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-Talk to users? Isn't that a job for founders, product managers, and salespeople? Why would an engineer ever want or need to do it?
+Talking to users? Isn't that a job for founders, product managers, and salespeople? Why would an engineer ever want or need to do it?
 
 In his book *[Modern Software Engineering](https://www.davefarley.net/?p=352)*, Dave Farley writes that mastering software engineering requires becoming an expert in learning. When you prioritize learning, talking to users becomes a critical part of an engineer's toolkit.
 
@@ -26,7 +26,7 @@ A lot of engineers place shipping code above all else. Anything that gets in the
 
 This creates a disregard for shipping the right code: features users value. Studies show this is more common than you might think. For example, [Microsoft](https://ai.stanford.edu/~ronnyk/ExPThinkWeek2009Public.pdf) found that only one-third of ideas tested improved metrics they were designed for.
 
-Spending more time learning what users want is a fix for this. This helps close the gap between what users value and what you are building.
+Spending more time learning what users want can solve this problem. It also helps close the gap between what users value and what you are building.
 
 ![Don't build the wrong features](https://res.cloudinary.com/dmukukwp6/image/upload/v1713470851/posthog.com/contents/images/newsletter/talk-to-users/features.jpg)
 
@@ -54,7 +54,7 @@ You should also set up tools that help you automate the process. These could inc
 
 ## 4. How to find the right users to talk to
 
-Just because we convinced you that talking to users isn't a waste of time doesn't mean we want to waste your time doing so. Lucky for you, you don't need a lot of users. You don't need to find a statistically significant sample. A few user interviews can be all you need to clarify the next increment of progress.
+You don't need to talk to a huge number of users, nor do you need a statistically significant sample. A few user interviews can be all you need to clarify the next increment of progress.
 
 Second, you don't need to go send cold emails to find users to speak with. Once you have [product-market fit](https://posthog.com/founders/product-market-fit-game), your current users work perfectly. From our experience, these are the best ways to find them:
 
@@ -103,8 +103,6 @@ The best information you'll get from talking to users comes from not talking. Be
 3. **Their solutions or ideas.** It is their job to tell you about the problem, it is your job to come up with a solution. Their ideas often don't solve their underlying problems, so reframe them to dig deeper into the underlying causes. 
 
 4. **Macroanalysis**. Focus on an individual's specific use case rather than a company or industry one. Outside research can fill this if necessary.
-
-Any focus other than their problems is a bad one. 
 
 ## 7. What to do after an interview
 
