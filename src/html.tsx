@@ -49,6 +49,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                     }
                                 },
                                 person_profiles: 'identified_only',
+                                __preview_heatmaps: true,
                             })
                             `,
                         }}
