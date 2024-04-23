@@ -53,7 +53,7 @@ Sometimes, you might want to evaluate feature flags using properties that haven'
 posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})
 ```
 
-Note that these are set for the entire session. Successive calls are additive: all properties you set are combined together and sent for flag evaluation.
+> **Note:** These are set for the entire session. Successive calls are additive: all properties you set are combined together and sent for flag evaluation.
 
 Whenever you set these properties, we also trigger a reload of feature flags to ensure we have the latest values. You can disable this by passing in the optional parameter for reloading:
 
@@ -81,23 +81,23 @@ posthog.resetGroupPropertiesForFlags()
 ```
 > **Note:** You don't need to add the group names here, since these properties are automatically attached to the current group (set via `posthog.group()`). When you change the group, these properties are reset.
 
-**Automatic overrides**
+#### Automatic overrides
 
 Whenever you call `posthog.identify` with person properties, we automatically add these properties to flag evaluation calls to help determine the correct flag values. The same is true for when you call `posthog.group()`.
 
-**Default overridden properties**
+#### Default overridden properties
 
 By default, we always override some properties based on the user IP address.
 
 The list of properties that this overrides:
 
-1. $geoip_city_name
-2. $geoip_country_name
-3. $geoip_country_code
-4. $geoip_continent_name
-5. $geoip_continent_code
-6. $geoip_postal_code
-7. $geoip_time_zone
+1. `$geoip_city_name`
+2. `$geoip_country_name`
+3. `$geoip_country_code`
+4. `$geoip_continent_name`
+5. `$geoip_continent_code`
+6. `$geoip_postal_code`
+7. `$geoip_time_zone`
 
 This enables any geolocation-based flags to work without manually setting these properties.
 
