@@ -597,6 +597,7 @@ const Pricing = ({
                                             </div>
                                             {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
                                                 const planFeature = plan?.features?.find((f) => f.key === feature.key)
+                                                console.log('plan', plan)
                                                 return (
                                                     <div
                                                         className="col-span-3 px-3 py-2 text-sm"
@@ -609,8 +610,8 @@ const Pricing = ({
                                                                 )}
                                                                 {planFeature.limit && (
                                                                     <span className="opacity-75">
-                                                                        {planFeature.key ===
-                                                                        'organizations_projects' ? (
+                                                                        {plan.name === 'Pay-per-use' &&
+                                                                        planFeature.key === 'organizations_projects' ? (
                                                                             <RenderInClient
                                                                                 render={() => (
                                                                                     <>
