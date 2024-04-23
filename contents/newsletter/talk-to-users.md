@@ -1,6 +1,6 @@
 ---
-title: 8 things engineers should know about talking to users
-date: 2024-04-22
+title: 7 things engineers should know about talking to users
+date: 2024-04-23
 author:
   - ian-vanagas
 featuredImage: >-
