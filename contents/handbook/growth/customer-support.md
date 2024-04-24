@@ -36,7 +36,7 @@ We have a high volume of tickets and we're a small team so we're not able to res
 
 Note that tickets are automatically prioritized in Zendesk and users are updated with information about response targets to set appropriate expectations. In all cases, tickets are routed to the appropriate team and that team is responsible for meeting the response target.
 
-The response targets listed below are our minimums, and we often respond far faster.
+The response targets listed below are our minimums, and we often respond far faster. Please note that we do not offer any level of weekend customer support.
 
 #### High priority
 **Response target: 12 hours**
