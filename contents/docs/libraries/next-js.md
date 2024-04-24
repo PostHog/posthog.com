@@ -276,6 +276,8 @@ PostHog is now set up and ready to go. Files and components accessing PostHog on
 
 To send `$pageleave` events after setting `capture_pageview` to false, you can set the `capture_pageleave` option to `true`.
 
+<MultiLanguage>
+
 ```js
 // app/providers.js
 'use client'
