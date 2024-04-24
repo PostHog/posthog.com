@@ -113,7 +113,7 @@ export function PHProvider({ children }) {
 }
 ```
 
-```ts
+```tsx
 // app/providers.tsx
 'use client'
 import posthog from 'posthog-js'
@@ -173,7 +173,7 @@ export default function PostHogPageView() {
 }
 ```
 
-```ts
+```tsx
 // app/PostHogPageView.tsx
 'use client'
 
@@ -239,7 +239,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-```ts
+```tsx
 // app/layout.tsx
 
 import './globals.css'
@@ -271,6 +271,51 @@ export default function RootLayout({
 </MultiLanguage>
 
 PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
+
+To send `$pageleave` events when users navigate away from your site, you can use the `capture_pageleave` option.
+
+```js
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false,
+    capture_pageleave: true // Enable automatic pageleave capture
+  })
+}
+
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+```tsx
+// app/providers.tsx
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false,
+    capture_pageleave: true // Enable automatic pageleave capture
+  })
+}
+
+export function PHProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
 
 ### Accessing PostHog using the provider
 
