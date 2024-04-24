@@ -32,46 +32,43 @@ Your objective should be to get the conversation into Zendesk ASAP, because it's
 
 ### Response Targets
 
-We have a high volume of tickets created, and some require more attention than others.  Here we have our targets for _initial_ response/acknowledgement to issues by Customer Priority and Issue [Severity](/docs/support-options#severity-levels), along with an indication of who is responsible for the initial response (CS = Customer Success, SH = designated Support Hero for the impacted team)
+We have a high volume of tickets and we're a small team so we're not able to respond to all issues equally. For this reason we prioritize tickets into three categories. We set a response target for each so that we can be sure that tickets are being handled effectively. 
 
-<table>
-  <tr>
-    <th colspan="2"></th><th colspan="3"> Customer Priority</th>
-  </tr>
-  <tr>
-    <td colspan="2"></td>
-    <th>High</th>
-    <th>Medium</th>
-    <th>Low</th>
-  </tr>
-<tr>
-    <th rowspan="4">Issue Severity</th>
-    <th>Critical</th>
-    <td>1 hour (CS)</td>
-    <td>1 hour (CS)</td>
-    <td>1 day (CS)</td>
-  </tr>
-<tr>
-    <th>High</th>
-    <td>1 hour (CS)</td>
-    <td>1 day (SH)</td>
-    <td>1 day (SH)</td>
-  </tr>
-<tr>
-    <th>Medium</th>
-    <td>1 day (SH)</td>
-    <td>1 day (SH)</td>
-    <td>2 days (SH)</td>
-  </tr>
-<tr>
-    <th>Low</th>
-    <td>1 day (SH)</td>
-    <td>2 days (SH)</td>
-    <td>Automated Response (See below)</td>
-  </tr>
-</table>
+Note that tickets are automatically prioritized in Zendesk and users are updated with information about response targets to set appropriate expectations. In all cases, tickets are routed to the appropriate team and that team is responsible for meeting the response target.
 
-Note for Low Priority/Low Severity tickets we should auto-respond letting customers know that they can ask questions in Community Questions
+The response targets listed below are our minimums, and we often respond far faster. Please note that we do not offer any level of weekend customer support.
+
+#### High priority
+**Response target: 12 hours**
+
+Tickets are considered high priority if they fulfill ANY of the following conditions:
+
+- The user is tagged as belonging to a priority customer org
+- The user is in a trial stage with the product
+- The user raises an issue through a shared Slack channel
+- The user belongs to an org which qualifies as a high-paying customer
+- The ticket is listed as critical severity
+
+This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience. Free users can raise critical impact bugs or issues to an appropriate level.
+
+#### Normal priority
+**Response target: 24 hours**
+
+Tickets are considered normal priority if they fulfill ANY of the following conditions but the user does NOT qualify as a high-paying org:
+
+- The org is a paying customer
+- The org is on a PostHog for Startups or Y Combinator plan
+- The user is raising a billing issue
+- The ticket is listed as high severity
+
+This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response. Free users can raise high impact bugs or issues to an appropriate level.
+
+#### Low priority 
+**Response target: N/A**
+
+Tickets are considered low priority if they fulfill none of the conditions for High or Normal priority. This includes tickets raised in the PostHog community, and is mostly users who are on a free plan and who have not entered a card.
+
+We always aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
 
 ### Support Engineers
 
