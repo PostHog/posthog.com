@@ -318,6 +318,7 @@ export function PHProvider({
 }
 ```
 
+</MultiLanguage>
 
 ### Accessing PostHog using the provider
 
