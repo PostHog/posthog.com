@@ -41,14 +41,15 @@ The response targets listed below are our minimums, and we often respond far fas
 #### High priority
 **Response target: 12 hours**
 
-Tickets are considered high priority if they fulfill any of the following conditions:
+Tickets are considered high priority if they fulfill ANY of the following conditions:
 
 - The user is tagged as belonging to a priority customer org
 - The user is in a trial stage with the product
 - The user raises an issue through a shared Slack channel
 - The user belongs to an org which qualifies as a high-paying customer
+- The ticket is listed as critical severity
 
-This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience.
+This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience. Free users can raise critical impact bugs or issues to an appropriate level.
 
 #### Normal priority
 **Response target: 24 hours**
@@ -58,8 +59,9 @@ Tickets are considered normal priority if they fulfill any of the following cond
 - The org is a paying customer
 - The org is on a PostHog for Startups or Y Combinator plan
 - The user is raising a billing issue
+- The ticket is listed as high severity
 
-This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response. 
+This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response. Free users can raise high impact bugs or issues to an appropriate level.
 
 #### Low priority 
 **Response target: N/A**
@@ -67,7 +69,6 @@ This ensures that most paying users get appropriately rapid support and that all
 Tickets are considered low priority if they fulfill none of the conditions for High or Normal priority. This includes tickets raised in the PostHog community, and is mostly users who are on a free plan and who have not entered a card.
 
 We always aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
-
 
 ### Support Engineers
 
