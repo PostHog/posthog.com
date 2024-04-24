@@ -17,44 +17,64 @@ To ensure consistency in the setup of annual plans we have [Zapier Automation](h
 
 #### Loading contract details
 
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01H9QPTRYEZVGFTJ84XMCYQFSK) with the PandaDoc ID of the document.
+Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01H9QPTRYEZVGFTJ84XMCYQFSK) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
 
-In the table you can then click the button to [Load from PandaDoc](https://zapier.com/app/zap/207323516) - this will look up variables from the Order Form and add them to the table including:
-* Reformatting human-readable numbers into Stripe-parsable ones (e.g. 60 million -> 60000000).
-* Setting checkboxes to show whether a product is included
-* Setting drop-down menus to show whether an overage rate is custom
+#### Upfront vs Monthly Payment Schedule
 
-#### Manual Edits Required
+Customers can choose to pay their subscription fee upfront or in monthly installments. The setup process differs for each option, outlined below.
 
-After loading the information from PandaDoc, you should review it for correctness as well as update the following:
-1. The Contact Email column will have all signer emails, including the PostHog team.  Select the correct customer email and delete the others as appropriate.
-2. Add the Stripe Customer ID (note you might need to create one and add address information if they've not previously been a customer).
+##### Upfront Payment Setup
 
-#### Create the Up-Front Invoice and Subscription Prices
+###### Step 1: Update zapier table with existing Stripe ID
 
-You can now click the [Create Annual Subscription](https://zapier.com/app/zap/206913950) button.  Using the data from the table row where the button was clicked this will:
-1. Create a draft Invoice object against the Stripe Customer Object.
-2. Add the ID of the Invoice to the table (for easy review later on).  The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms.  **You might need to manually change this if we have different terms with the customer.**
-3. Add the up-front price for each of Product Analytics, Group Analytics, Session Replay, Feature Flags and Enterprise to the draft invoice.
-4. Where we have custom overages, create a Stripe Price for each of those and populate the table with the Price IDs.  _NOTE: We don't currently do anything here in cases where overage is none or free - need to figure out in future if this is necessary._
-5. Enable the Amortization and Schedule Subscription buttons in the table.
+If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
-#### Amortize Invoice
+###### Step 2: Create the invoice
+- Go to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
+  - Create a draft Invoice object against the Stripe Customer Object.
+  - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
 
-As Zapier works asynchronously we need to wait until the table is updated with all of the annual prices (indicating that the invoice is ready).  Clicking the [Amortize Invoice](https://zapier.com/app/zap/207286989) button will set the correct metadata for our revenue tracking on the invoice.
+###### Step 3: Verify invoice details and send
+- Use the Invoice ID recorded in the table to locate the invoice in Stripe.
+- Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
+- Send the invoice to the customer and wait for the payment to be completed. Do not proceed to the next steps until payment is confirmed.
 
-#### Schedule Subscription
+###### Step 4: Apply credit
+- Once payment is confirmed, return to the Zapier table and click the “Apply Credit” button to add purchased credits to the customer account.
 
-Once all of the Price IDs are in place in the table, we can [Schedule the Subscription](https://zapier.com/app/zap/207295029).  Using the data from the table row where the button was clicked this will:
-1. Consolidate all of the Price IDs into a query string which the Stripe API accepts.
-2. Create a Subscription Schedule (as it may start in the future) containing all of the prices.  We calculate the number of iterations based on the term of the contract.  An iteration in this case is 1 year, the maximum allowed by Stripe.
-3. Add the ID of the Subscription Schedule to the table
+###### Step 5: Schedule Subscription
+- If the client has an existing subscription, no further action is needed.
+- If this is a brand new account:
+  - Select checkboxes for all the products the client intends to use as part of their subscription.
+  - Click the "Schedule Subscription" button. Using the data from the table row where the button was clicked, this will:
+    - Consolidate all of the Price IDs into a query string which the Stripe API accepts.
+    - Create a Subscription Schedule (as it may start in the future) containing all of the prices. We calculate the number of iterations based on the term of the contract. An iteration in this case is 1 year, the maximum allowed by Stripe.
+    - Add the ID of the Subscription Schedule to the table
 
-#### Checks and going live
+##### Monthly Payment Setup
 
-The invoice will be in a draft state in Stripe.  You'll need to use the Invoice ID in the table to find it in Stripe.  Check it to make sure that everything looks correct, and that you have set up Customer Billing/Shipping addresses and Tax ID on the Customer object correctly.  Once you're happy with all of that you can send the invoice to the customer for payment.
+###### Step 1: Update zapier table with existing Stripe ID
+- Add the existing Stripe customer ID to the column labeled "Stripe ID - existing" in your Zapier table. It's crucial to start with this step as you will add credits to this ID while creating a subsceription on a new ID to correctly capture payment.
 
-The subscription will go live on the start date.  Once it is live you'll need to update the customer object in the [billing admin server](https://billing.posthog.com/admin) with the relevant Subscription ID.  Don't forget to also sync the customer record in the billing server with Stripe to pick up the new plans.
+###### Step 2: Create new Stripe ID
+- Click the "Create Stripe Customer" button to generate a new Stripe customer ID for the same customer.
+
+###### Step 3: Create new subscription
+- Click the “Create and Add - Monthly Sub” button in the Zapier sheet. This will do the following:
+  - Retrieve the annual cost from the "Price" column of your table.
+  - Calculate monthly payment by dividing the annual cost by 12.
+  - Under the "PostHog Credit" product category in Stripe, create a new custom pricing.
+  - Assign this new pricing plan to the customer’s account.
+  - Create a draft invoice for the first payment that is scheduled to go out in an hour.
+
+###### Step 4: Verify subscription and invoice details
+- Use the customer ID stored in the table to locate the customer's subscription in Stripe.
+- Ensure the subscription details, including start date and associated pricing plan, are accurate.
+- Verify the correctness of customer details such as billing/shipping addresses and Tax ID on the customer object.
+
+###### Step 5: Apply credits
+- Once you’ve completed verifying subscription and invoice details, return to the Zapier table.
+- Click the “Apply Credit - monthly” button to apply purchased credits to the customer account.
 
 
 
