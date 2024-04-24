@@ -54,7 +54,7 @@ This ensures that users who pay for support or which are otherwise considered a 
 #### Normal priority
 **Response target: 24 hours**
 
-Tickets are considered normal priority if they fulfill any of the following conditions but the user does _not_ qualify as a high-paying org:
+Tickets are considered normal priority if they fulfill ANY of the following conditions but the user does NOT qualify as a high-paying org:
 
 - The org is a paying customer
 - The org is on a PostHog for Startups or Y Combinator plan
