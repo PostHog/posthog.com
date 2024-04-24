@@ -272,7 +272,9 @@ export default function RootLayout({
 
 PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
 
-Optional: To send `$pageleave` events when users navigate away from your site, you can use the `capture_pageleave` option.
+#### Pageleave events (optional)
+
+To send `$pageleave` events after setting `capture_pageview` to false, you can set the `capture_pageleave` option to `true`.
 
 ```js
 // app/providers.js
