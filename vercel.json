@@ -1252,6 +1252,10 @@
         { "source": "/self-host", "destination": "/docs/self-host" },
         { "source": "/using-posthog", "destination": "/docs" },
         { "source": "/handbook/company/values", "destination": "/handbook/values" },
-        { "source": "/max", "destination": "/community/profiles/28378" }
+        { "source": "/max", "destination": "/community/profiles/28378" },
+        {
+            "source": "/blog/gdpr-google-analytics-privacy-shield",
+            "destination": "/blog/best-gdpr-compliant-analytics-tools"
+        }
     ]
 }
