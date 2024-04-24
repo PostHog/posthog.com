@@ -5,6 +5,7 @@ author:
   - lior-neu-ner
 showTitle: true
 sidebar: Docs
+featuredVideo: https://www.youtube-nocookie.com/embed/KSzLc80FIx4 
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
 tags:
