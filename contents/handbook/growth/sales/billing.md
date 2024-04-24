@@ -29,7 +29,7 @@ Customers can choose to pay their subscription fee upfront or in monthly install
 
 If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
-###### Step 2: Create the invoice
+###### Step 2: Create invoice
 - Go to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
   - Create a draft Invoice object against the Stripe Customer Object.
   - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
@@ -37,12 +37,16 @@ If this is a new contract for an existing customer, you will need to add their e
 ###### Step 3: Verify invoice details and send
 - Use the Invoice ID recorded in the table to locate the invoice in Stripe.
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
-- Send the invoice to the customer and wait for the payment to be completed. Do not proceed to the next steps until payment is confirmed.
+- Send the invoice to the customer and wait for the payment to be completed.
 
-###### Step 4: Apply credit
-- Once payment is confirmed, return to the Zapier table and click the “Apply Credit” button to add purchased credits to the customer account.
+**Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
-###### Step 5: Schedule Subscription
+###### Step 4: Apply credits
+- Make sure that the payment is fully processed to avoid any automatic deductions.
+- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment competion and click the "Apply Credit" button.
+- **If customer wishes to begin using credits  in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
+
+###### Step 5: Schedule subscription
 - If the client has an existing subscription, no further action is needed.
 - If this is a brand new account:
   - Select checkboxes for all the products the client intends to use as part of their subscription.
@@ -73,9 +77,8 @@ If this is a new contract for an existing customer, you will need to add their e
 - Verify the correctness of customer details such as billing/shipping addresses and Tax ID on the customer object.
 
 ###### Step 5: Apply credits
-- Once you’ve completed verifying subscription and invoice details, return to the Zapier table.
-- Click the “Apply Credit - monthly” button to apply purchased credits to the customer account.
-
+- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve completed verifying subscription and invoice details, and click the "Apply credit - monthly" button.
+- **If customer wishes to begin using credits in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
 
 
 ### Stripe Products & Prices
