@@ -504,3 +504,23 @@ In the action details under "Matching events," click the export dropdown and sel
 />
 
 This opens an SQL insight using the action. You can then copy parts of the SQL, like the `WHERE` filter or columns under `SELECT`, to use in your own insights.
+
+### Cohorts
+
+To use cohorts in SQL insights, simply filter where `person_id IN cohort '{name}'`.
+
+For example, to get a count of users in the `Power user` cohort:
+
+```sql
+select count(DISTINCT person_id)
+from cohort_people
+where person_id IN cohort 'Power users'
+```
+
+To get a count of events for users in the `Power user` cohort:
+
+```sql
+select count()
+from events
+where person_id IN cohort 'People in Canada and the US'
+```
