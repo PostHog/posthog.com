@@ -13,7 +13,7 @@ featuredImageType: full
 category: Startups
 ---
 
-> Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work. This time, we spoke to [Alignwith](https://www.alignwith.io/), a product management platform for aligning go-to-market teams and improving communication.
+> Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work. This time, we caught up with [Alignwith](https://www.alignwith.io/), a product management platform for improving communication with go-to-market teams.
 
 As a serial founder, Kenan Akbas has often seen product managers struggle to communicate with or align other teams to their plans. That’s why, with his third startup, he resolved to try and solve the problem once and for all. 
 
