@@ -500,7 +500,7 @@ FROM events
 WHERE matchesAction('clicked homepage button')
 ```
 
-For more details, start by selecting you action in the [actions tab](https://us.posthog.com/data-management/actions) under data management.
+For more customization when using actions, start by selecting you action in the [actions tab](https://us.posthog.com/data-management/actions) under data management.
 
 In the action details under "Matching events," click the export dropdown and select "Edit SQL directly."
 
