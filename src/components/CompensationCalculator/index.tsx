@@ -100,6 +100,10 @@ export const CompensationCalculator = ({
         }
     }, [])
 
+    React.useEffect(() => {
+        setJob(initialJob)
+    }, [initialJob])
+
     const setItem = (type: string) => {
         return (value: any) => {
             if (type === 'job') setJob(value)
