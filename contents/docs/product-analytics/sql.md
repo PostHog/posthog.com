@@ -522,5 +522,5 @@ To get a count of events for users in the `Power user` cohort:
 ```sql
 select count()
 from events
-where person_id IN cohort 'People in Canada and the US'
+where person_id IN cohort 'Power user'
 ```
