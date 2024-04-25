@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
@@ -16,7 +16,7 @@ type UseQuestionsOptions = {
     revalidateOnFocus?: boolean
 }
 
-const query = (offset: number, options?: UseQuestionsOptions) => {
+const query = (offset: number, options?: UseQuestionsOptions, isModerator?: boolean) => {
     const { slug, topicId, profileId, limit = 20, sortBy = 'newest', filters } = options || {}
     const params = {
         pagination: {
@@ -39,30 +39,47 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             ],
         },
         populate: {
-            pinnedTopics: true,
-            topics: true,
+            resolvedBy: {
+                select: ['id'],
+            },
             profile: {
-                fields: ['firstName', 'lastName', 'gravatarURL'],
+                select: ['id', 'firstName', 'lastName', 'gravatarURL'],
                 populate: {
                     avatar: {
-                        fields: ['url'],
+                        select: ['id', 'url'],
                     },
+                    ...(isModerator
+                        ? {
+                              user: {
+                                  fields: ['distinctId', 'email'],
+                              },
+                          }
+                        : null),
                 },
             },
             replies: {
+                sort: ['createdAt:asc'],
                 populate: {
                     profile: {
+                        fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns'],
                         populate: {
+                            avatar: {
+                                fields: ['id', 'url'],
+                            },
+                            teams: {
+                                fields: ['id'],
+                            },
                             user: {
                                 populate: ['role'],
                                 fields: ['role'],
                             },
                         },
-                        fields: ['firstName', 'lastName'],
                     },
                 },
-                fields: ['id', 'createdAt', 'updatedAt'],
             },
+            topics: true,
+            pinnedTopics: true,
+            slugs: true,
         },
     }
 
@@ -137,11 +154,11 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
 export const useQuestions = (options?: UseQuestionsOptions) => {
     const { getJwt, user } = useUser()
     const posthog = usePostHog()
-
+    const isModerator = user?.role?.type === 'moderator'
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite<
         StrapiResult<QuestionData[]>
     >(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options)}`,
+        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options, isModerator)}`,
         async (url: string) => {
             const jwt = await getJwt()
             return fetch(url, user && jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined).then((r) =>
@@ -149,7 +166,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
             )
         },
         {
-            revalidateOnFocus: options?.revalidateOnFocus ?? true,
+            revalidateOnFocus: false,
         }
     )
 
@@ -169,10 +186,6 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
 
     const total = data && data[0]?.meta?.pagination?.total
     const hasMore = total ? questions?.data.length < total : false
-
-    useEffect(() => {
-        mutate()
-    }, [user])
 
     return {
         hasMore,
