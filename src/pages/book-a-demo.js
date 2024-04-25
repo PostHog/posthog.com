@@ -14,16 +14,7 @@ export default function BookADemo() {
                 <header className="flex flex-col md:flex-row justify-between md:items-center pb-4 order-1">
                     <div>
                         <h1 className="text-4xl mt-0 mb-2">Watch a demo</h1>
-                        <p className="md:m-0 p-0">
-                            PostHog Cloud is 100% self-serve. Check out the demo below and sign up to kick the tires.
-                        </p>
                     </div>
-                    <aside className="flex space-x-4">
-                        <SignupCTA>Get started - free</SignupCTA>
-                        {/* <CallToAction type="secondary" to="/contact-sales">
-                            Talk to sales
-                        </CallToAction> */}
-                    </aside>
                 </header>
                 <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <span className="bg-blue rounded-full leading-none flex h-12 w-12 overflow-hidden shrink-0 basis-12">
