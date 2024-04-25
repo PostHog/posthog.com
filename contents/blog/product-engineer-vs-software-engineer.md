@@ -80,7 +80,7 @@ Just remember product engineering is more of a way of working, and thinking, tha
 
 Product engineers are ideal for startups, and companies that want to be agile and move fast, such as B2B SaaS or consumer subscription service. They take a holistic view of the product, and the ability to move fast when the need arises. They're less effective for companies with large, technically complex products, like a data tool, or platforms for large enterprises.
 
-Picking what's right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can talk to users are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded, and more will continue to succeed.
+Picking what's right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can [talk to users](/newsletter/talk-to-users) are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded, and more will continue to succeed.
 
 ## Further reading
 
