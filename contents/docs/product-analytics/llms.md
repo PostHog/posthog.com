@@ -91,7 +91,7 @@ const openai = new OpenAIApi(configuration);
 
 </MultiLanguage>
 
-Helicone events will now be exported into PostHog once per day.
+Helicone events will now be exported into PostHog as soon as they're available.
 
 ## Dashboard templates
 
