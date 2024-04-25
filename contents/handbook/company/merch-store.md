@@ -29,7 +29,7 @@ Shipping is also done through [Printfection](https://app.printfection.com/accoun
 * If you want to ship merch for an event or as part of a giveaway, create a one-off [campaign](https://help.printfection.com/hc/en-us/articles/208654107-Collection-campaigns-How-to-collect-review-and-approve-orders-via-external-ordering-or-csv)
 
 ## How do we sell merch?
-We sell it through our [merch store](https://merch.posthog.com/) store on Shopify - access details are on 1password.
+We sell it through our [merch store](https://merch.posthog.com/) store on Shopify - access details are in 1Password.
 
 ## How do we give away merch for free?
 
