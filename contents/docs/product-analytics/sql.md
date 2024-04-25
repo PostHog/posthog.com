@@ -499,7 +499,7 @@ In the action details under "Matching events," click the export dropdown and sel
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714065991/posthog.com/contents/images/docs/product-analytics/action-sql-light.png" 
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714065992/posthog.com/contents/images/docs/product-analytics/action-sql-dark.png" 
-  alt="Survey results" 
+  alt="Action SQL" 
   classes="rounded"
 />
 
