@@ -44,13 +44,19 @@ And our config would look like:
 
 For information on what code to write and what special functions to use, check out [the overview](/docs/cdp/build) and [the developer reference](/docs/cdp/build/reference).
 
-### Using the transformation source editor
+### Using the source code editor
 
-Go to Data pipeline -> Manage apps tab -> Install app (advanced) -> Start coding.
+Add "pipeline-ui" feature flag and enable it. For destinations you'll need Data Pipelines add-on to be enabled.
 
-![App editor location](https://res.cloudinary.com/dmukukwp6/image/upload/v1712101259/posthog.com/contents/images/docs/cdp/install-app.png)
+Go to Data pipeline 3000 -> Apps Management tab -> enter a name and pick the app kind
 
-Then, click on "Edit Source", and you're good to go. Copy your code and config into the editor, and you're ready to [test the transformation.](#testing)
+![App editor location](https://res.cloudinary.com/dmukukwp6/image/upload/v1714149251/posthog.com/contents/images/docs/cdp/create-source-code-app.png)
+
+It will create the transformation or destination for you, which you can then find in the table on the same page, click on the right to expand the row, then on the pencil to edit the code.
+
+![Edit source app code](https://res.cloudinary.com/dmukukwp6/image/upload/v1714149601/posthog.com/contents/images/docs/cdp/source-app-edit-code.png)
+
+Once finished make it global, so you can find and enable it and you're ready to [test the transformation or destination.](#testing)
 
 ### Using a GitHub repository
 
@@ -66,7 +72,7 @@ Once you've written the code in this new repository, you can run it by installin
 
 When creating your repository, follow the naming convention of `posthog-<plugin-name>-plugin`. For example, the hello world  repository would be called `posthog-hello-world-plugin`.
 
-### Converting a source transformation to a GitHub repository
+### Converting a source transformation or destination to a GitHub repository
 
 If you wish to submit your transformation or destination to the official repository (so it is listed on PostHog Cloud), you need to convert it into a GitHub repository. The easiest way to do this is to start with [the template](https://github.com/PostHog/posthog-plugin-starter-kit/generate) and copy your source code into `index.js` and your config into the config field of `plugin.json`. Then update `package.json` with the appropriate metadata, like name, description, and maintainer.
 
@@ -76,10 +82,10 @@ If you wish to submit your transformation or destination to the official reposit
 
 For now, the best way to test transformations or destinations is to install them locally. 
 
-- If you're writing one in the source editor, this is as easy as clicking "Save".
-- If you're writing one in a GitHub repository, install it locally using the "Install from GitHub, GitLab or npm" option in the Advanced tab.
+- If you're writing one in the source editor, see [using the source code editor](#using-the-source-code-editor).
+- If you're writing one in a GitHub repository, install it locally using the "Install from local path" option in the Apps Management tab (remember to make it global).
 
-![Install transformation or destination location](https://res.cloudinary.com/dmukukwp6/image/upload/v1712101367/posthog.com/contents/images/docs/cdp/install-local.png)
+![Install transformation or destination location](https://res.cloudinary.com/dmukukwp6/image/upload/v1714150263/posthog.com/contents/images/docs/cdp/install-options.png)
 
 This allows you to tweak it and see that everything works fine.
 
@@ -89,20 +95,11 @@ Transformations or destinations can make use of the JavaScript `console` for log
 
 These logs can be seen on the 'Logs' page, which can be accessed on the [Data Pipelines](https://app.posthog.com/apps) tab of the PostHog UI.
 
-## Publishing your transformation or destination
-
-There are four ways to publish transformation or destination you build:
-
-1. Publish them to `npm` and install it with the url from `npmjs.com` 
-1. You can add it via its repository URL (e.g. GitHub/GitLab)
-1. Reference the location of them on your local instance (e.g. `/Users/yourname/path/to/transformation`). This can be configured in 'Settings' -> 'Project Apps'.
-1. Submit it to the official repository so that it can be installed on PostHog Cloud. [See below](#submitting-your-plugin) 
-
 ## Submitting your transformation or destination
 
 You can submit your transformation or destination to the [official library](/cdp). If accepted, it becomes available to all PostHog Cloud users. 
 
-> **Note:** We are only reviewing new apps relying on stateless `processEvent` (no cache or external calls) or `composeWebhook` functions.
+> **Note:** We are only reviewing new apps relying on stateless (no cache or external calls, non async) `processEvent` or `composeWebhook` functions.
 
 If you built one inside the PostHog editor, convert it to a GitHub repository
 
