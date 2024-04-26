@@ -58,7 +58,7 @@ If this is a new contract for an existing customer, you will need to add their e
 ##### Monthly Payment Setup
 
 ###### Step 1: Update zapier table with existing Stripe ID
-- Add the existing Stripe customer ID to the column labeled "Stripe ID - existing" in your Zapier table. It's crucial to start with this step as you will add credits to this ID while creating a subsceription on a new ID to correctly capture payment.
+- Add the existing Stripe customer ID to the column labeled "Stripe ID - existing" in your Zapier table. It's crucial to start with this step as you will add credits to this ID while creating a subscription on a new ID to correctly capture payment.
 
 ###### Step 2: Create new Stripe ID
 - Click the "Create Stripe Customer" button to generate a new Stripe customer ID for the same customer.
