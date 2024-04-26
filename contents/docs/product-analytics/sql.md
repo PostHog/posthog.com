@@ -489,3 +489,26 @@ Nested property or JSON access, such as `properties.$some.nested.property`, work
 Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.
 
 Some queries can error when accessing null values. To avoid this, use the `COALESCE` function to replace null values with a default value or filter `NULL` values with `IS NOT NULL` and use `assumeNotNull` to cast a column to a non-null type.
+
+### Actions
+
+To use [actions](/docs/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
+
+```sql
+SELECT count() 
+FROM events 
+WHERE matchesAction('clicked homepage button')
+```
+
+For more customization when using actions, start by selecting you action in the [actions tab](https://us.posthog.com/data-management/actions) under data management.
+
+In the action details under "Matching events," click the export dropdown and select "Edit SQL directly."
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714065991/posthog.com/contents/images/docs/product-analytics/action-sql-light.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714065992/posthog.com/contents/images/docs/product-analytics/action-sql-dark.png" 
+  alt="Action SQL" 
+  classes="rounded"
+/>
+
+This opens an SQL insight using the action. You can then copy parts of the SQL, like the `WHERE` filter or columns under `SELECT`, to use in your own insights.
