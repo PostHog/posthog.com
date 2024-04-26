@@ -265,7 +265,7 @@ You don't need to import metric data into GrowthBook as it works with your data 
 
 #### Who is GrowthBook for?
 
-GrowthBook is ideal for engineering teams who want flexible, instant control over what users see in their product and already have, or don't require, a broader analytics platform.
+[GrowthBook](/blog/best-growthbook-alternatives) is ideal for engineering teams who want flexible, instant control over what users see in their product and already have, or don't require, a broader analytics platform.
 
 #### Strengths
 - Multivariate feature flags
