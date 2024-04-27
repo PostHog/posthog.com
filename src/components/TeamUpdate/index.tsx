@@ -120,7 +120,7 @@ export default function TeamUpdate({
         if (teamName) {
             fetchTeam()
         }
-    })
+    }, [])
 
     return user?.role?.type === 'moderator' ? (
         <form onSubmit={handleSubmit} className="m-0 mt-4">
