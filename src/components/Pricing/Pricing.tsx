@@ -67,40 +67,6 @@ const planSummary: PlanData[] = [
         ],
     },
     {
-        title: 'Teams',
-        price: '$450',
-        features: [
-            'Generous free tier on all products',
-            <>
-                <span className="relative">
-                    Includes team features{' '}
-                    <Tooltip
-                        content={() => (
-                            <>
-                                <h3 className="mb-1 text-base">Team features</h3>
-                                <ul className="list-none p-0 divide-y divide-light dark:divide-dark">
-                                    <li className="py-1.5 text-sm">Verified events</li>
-                                    <li className="py-1.5 text-sm">Comments on dashboards and insights</li>
-                                    <li className="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li>
-                                </ul>
-                            </>
-                        )}
-                        tooltipClassName="max-w-sm"
-                    >
-                        <span className="relative -top-px">
-                            <IconInfo className="inline-block w-4 h-4" />
-                        </span>
-                    </Tooltip>
-                </span>
-            </>,
-            'Unlimited projects',
-            '7 year data retention',
-            'Priority support',
-            'Pay only for what you use',
-        ],
-        CTAText: 'Get started',
-    },
-    {
         title: 'Enterprise',
         price: 'Custom pricing',
         priceSubtitle: 'w/ fixed terms',

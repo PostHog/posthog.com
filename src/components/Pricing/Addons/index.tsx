@@ -22,15 +22,15 @@ const addons = [
         description:
             'Associate events with a group or entity - such as a company, community, or project. Analyze these events as if they were sent by that entity itself. Great for B2B, marketplaces, and more.',
     },
-    {
-        icon: <IconProfile className="w-6 h-6" />,
-        name: 'Person profiles',
-        price: 0.00002,
-        priceType: 'event',
-        freeAllocation: 1000000,
-        description:
-            "Save custom user properties that can be used in deeper analysis that isn't needed for aggregate analysis (like in Web Analytics).",
-    },
+    // {
+    //     icon: <IconProfile className="w-6 h-6" />,
+    //     name: 'Person profiles',
+    //     price: 0.00002,
+    //     priceType: 'event',
+    //     freeAllocation: 1000000,
+    //     description:
+    //         "Save custom user properties that can be used in deeper analysis that isn't needed for aggregate analysis (like in Web Analytics).",
+    // },
     {
         icon: <IconDecisionTree className="w-6 h-6" />,
         name: 'Data pipelines',
@@ -40,15 +40,15 @@ const addons = [
         description:
             'Get your PostHog data into your data warehouse or other tools like BigQuery, Redshift, Customer.io, and more.',
     },
-    // {
-    //     icon: <IconBuilding className="w-6 h-6" />,
-    //     name: 'Teams',
-    //     price: 450,
-    //     priceType: 'fixed',
-    //     description: 'Priority support, unlimited projects, and features for collaboration with team members',
-    //     descriptionTooltip:
-    //         '<h3 class="mb-1 text-base">Team features</h3><ul class="list-none p-0 divide-y divide-light dark:divide-dark"><li class="py-1.5 text-sm">Verified events</li><li class="py-1.5 text-sm">Comments on dashboards and insights</li><li class="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li></ul>',
-    // },
+    {
+        icon: <IconBuilding className="w-6 h-6" />,
+        name: 'Teams',
+        price: 450,
+        priceType: 'fixed',
+        description: 'Priority support, unlimited projects, and features for collaboration with team members',
+        descriptionTooltip:
+            '<h3 class="mb-1 text-base">Team features</h3><ul class="list-none p-0 divide-y divide-light dark:divide-dark"><li class="py-1.5 text-sm">Verified events</li><li class="py-1.5 text-sm">Comments on dashboards and insights</li><li class="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li></ul>',
+    },
 ]
 
 export const Addons = () => {
