@@ -103,11 +103,11 @@ export async function load() {
     distinctId: 'distinct_id_of_the_user',
     event: 'event_name',
   })
-  await posthog.shutdownAsync()
+  await posthog.shutdown()
 }
 ```
 
-> **Note:** Make sure to always call `posthog.shutdownAsync()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+> **Note:** Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 ## Next steps
 
