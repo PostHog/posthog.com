@@ -108,10 +108,10 @@ Sometimes, tasks need a few review cycles to get resolved, and PRs remain open f
 - First, start your own day by responding to review requests from colleagues, and unblocking their work. This builds goodwill and encourages them to also review your code in priority. Otherwise, if everybody jumps to implement new features before reviewing WIP, we will end up with [three](https://github.com/PostHog/posthog/pull/6717), [different](https://github.com/PostHog/posthog/pull/6722), [PRs](https://github.com/PostHog/posthog/pull/6766), all for the same thing.
 - Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra 30min review cycle that starts with *"Almost there, just it's all black now, and remove that console.log please"*.
 - Help your reviewer by leaving comments that help them review trickier bits. Better yet, write these directly into the code, either as comments or by clearly labelling your variables.
-- It's always good to put new features behind [feature flags](https://posthog.com/docs/user-guides/feature-flags). It's even better to develop partial features behind feature flags. As long as it's clear what needs to be done before a flag can be lifted, you can usually get the smallest bit of any new feature out in a day this way.
+- It's always good to put new features behind [feature flags](/docs/user-guides/feature-flags). It's even better to develop partial features behind feature flags. As long as it's clear what needs to be done before a flag can be lifted, you can usually get the smallest bit of any new feature out in a day this way.
 - Don't be afraid to restart from scratch if the PR gets out of hand. It's a bit of time lost for you, but a lot of time saved for the reviewer if they get a clean PR to review.
 - Push your code out as a draft PR early on, so everyone can see the work in progress, and comment on the validity of the general approach when needed.
-- Remember that PRs can be reverted as easily as they can be merged. Don't be afraid to get stuff in early if it makes things better. [Bias for action](https://posthog.com/handbook/company/values#bias-for-action).
+- Remember that PRs can be reverted as easily as they can be merged. Don't be afraid to get stuff in early if it makes things better. [Bias for action](/handbook/company/values#bias-for-action).
 - Most importantly, [really understand why it's paramount to reduce WIP](https://loom.com/share/5efceb288b634a449041918bdba08202), until you feel it in your bones.
 
 ## Writing code
@@ -159,7 +159,7 @@ Always request a review on your pull request by a fellow team member (or leave u
 
 ## Documenting
 
-If you build it, [document it](https://posthog.com/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
+If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
 It's not the responsibility of either [Website & Docs](/teams/website-docs) or [Marketing](/teams/marketing) to document features.
 
@@ -177,7 +177,7 @@ Engineers should apply the following best practices for _all_ new releases:
 
 ### Self-hosted and hobby versions
 
-We have [sunset support for our kubernetes and helm chart managed self-hosted offering](https://posthog.com/blog/sunsetting-helm-support-posthog). This means we no longer offer support for fixing to specific versions of PostHog. A [docker image is pushed for each commit to master](https://hub.docker.com/r/posthog/posthog). Each of those versions is immediately deployed to PostHog Cloud.
+We have [sunset support for our kubernetes and helm chart managed self-hosted offering](/blog/sunsetting-helm-support-posthog). This means we no longer offer support for fixing to specific versions of PostHog. A [docker image is pushed for each commit to master](https://hub.docker.com/r/posthog/posthog). Each of those versions is immediately deployed to PostHog Cloud.
 
 The [deploy-hobby script](https://github.com/PostHog/posthog/blob/master/bin/deploy-hobby) allows you to set a `POSTHOG_APP_TAG` environment variable and fix your docker-compose deployed version of PostHog. Or you can edit your docker-compose file to replace each instance of `image: posthog/posthog:$POSTHOG_APP_TAG` with a specific tag e.g. `image: posthog/posthog:9c68581779c78489cfe737cfa965b73f7fc5503c`
 

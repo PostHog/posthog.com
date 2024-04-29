@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[PostHog for Startups](https://posthog.com/startups) is our program to support early stage companies. We offer generous credits together with a bunch of extra goodies. This page covers how we run the program.
+[PostHog for Startups](/startups) is our program to support early stage companies. We offer generous credits together with a bunch of extra goodies. This page covers how we run the program.
 
 > The YC Deal is a separate programme that the CS team mostly manage. This is a deal for the latest batch of YC companies and has [its own page here](/handbook/growth/sales/yc-onboarding). 
 

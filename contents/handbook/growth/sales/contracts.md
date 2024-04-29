@@ -39,10 +39,19 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
    * **Client Address Information** - Needs to be their legal correspondence address (check with your customer contact)
    * **Client.Company** - The legal company name
    * **Contract.Discount** - The discount % (appears in the Additional credit purchase section)
-   * **Contract.EffectiveDate** - The start date of the contract expressed in the format `01 Feb 2023`
+   * **Contract.EffectiveDate**
+     - Set the start date of the contract in the format DD MMM YYYY (e.g., 01 Feb 2023). For a new customer, this would be the date they choose to start their subscription. For an existing customer, we have two options:
+       - **Immediate Activation:** If the customer wishes to start using the credits immediately, set the start date to the beginning of their current billing period. This backdating ensures that the credits are applied correctly to the current billing cycle.
+       - **Next Billing Cycle:** If the customer prefers to begin their annual plan at the start of their next billing cycle, set the start date accordingly. This option aligns the contract start date with the upcoming billing period.
+       - For example, let’s say it’s October 15 and you’re setting up an annual plan. You have a pay-as-you-go subscription that started on September 1, and the next billing date is November 1. 
+           - If a customer wants to start using credits immediately for the October cycle, your contract start date should be October 1.
+           - If a customer wants to start using credits starting the next billing cycle, your contract start date should be November 1.
+           - If you set the start date correctly, our Zapier automation flow will create the invoices with correct dates so our revenue calculations are not affected from the transition.
+     - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
+
    * **Contract.Term** - The term in months of the contract (12 months by default)
 7. If an MSA is being used rather than the standard terms you will need to replace the following text:
-   > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “Agreement”)
+   > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
    
    with
    

@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Marketing hiring at PostHog
 
-Our [Marketing](/teams/marketing) team is small and we don't hire into this team very often. Please check our [careers page](https://posthog.com/careers) for our open roles. 
+Our [Marketing](/teams/marketing) team is small and we don't hire into this team very often. Please check our [careers page](/careers) for our open roles. 
 
 ### What we are looking for in Marketing hires
 
@@ -28,7 +28,7 @@ This is our standard culture interview with the People & Ops team. We will at th
 
 #### 2. Technical interview and portfolio review
 
-The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round usually lasts 45-60 minutes and usually involves two of our team members. They will ask questions around background and previous experience, as well as some scenario-based questions. At the end, they will leave time to answer any open questions. 
+The [technical interview](/handbook/people/hiring-process#interview-2) round usually lasts 45-60 minutes and usually involves two of our team members. They will ask questions around background and previous experience, as well as some scenario-based questions. At the end, they will leave time to answer any open questions. 
 
 If relevant, we'll go through a candidate's portfolio. 
 

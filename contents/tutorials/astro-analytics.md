@@ -86,24 +86,25 @@ Finally, we can run our app with `npm run dev` to see our full Astro app running
 
 ## Adding PostHog on the client side
 
-With our app set up, the next step is to add PostHog to it. To start, create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file. In this file, add your Javascript Web snippet which you can find in [your project settings](https://app.posthog.com/settings/project#snippet). 
+With our app set up, the next step is to add PostHog to it. To start, create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file. In this file, add your Javascript Web snippet which you can find in [your project settings](https://app.posthog.com/settings/project#snippet). Be sure to include the `is:inline` directive [to prevent Astro from processing it](https://docs.astro.build/en/guides/client-side-scripts/#opting-out-of-processing), or you will get Typescript and build errors that property 'posthog' does not exist on type 'Window & typeof globalThis'.
+
 
 ```js
 ---
 // src/components/posthog.astro
 ---
-<script>
+<script is:inline>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init(
     '<ph_project_api_key>',
     {
-      api_host:'<ph_instance_address>'
+      api_host:'<ph_client_api_host>'
     }
   )
 </script>
 ```
 
-After doing this, go back to your `Layout.astro` file, import PostHog, and then add it to the header section.
+After doing this, go back to your `Layout.astro` file, import PostHog, and then add it to the head section.
 
 ```js
 ---
@@ -117,7 +118,7 @@ import PostHog from '../components/posthog.astro'
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
-    <PostHog />
+		<PostHog />
 	</head>
 	<body>
 		<a href="/">Home</a>
@@ -221,7 +222,7 @@ let posthogClient = null;
 export default function PostHogClient() {
   if (!posthogClient) {
     posthogClient = new PostHog('<ph_project_api_key>', {
-      host: '<ph_instance_address>',
+      host: '<ph_client_api_host>',
     });
   }
   return posthogClient;
@@ -334,7 +335,7 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
   posthog.init(
     '<ph_project_api_key>',
     {
-      api_host:'<ph_instance_address>',
+      api_host:'<ph_client_api_host>',
       loaded: function(posthog) {
         const distinctId = document.querySelector('.did').innerHTML;
         if (posthog.get_distinct_id() && posthog.get_distinct_id() !== distinctId) {

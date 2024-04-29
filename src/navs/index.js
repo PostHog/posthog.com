@@ -254,6 +254,10 @@ export const handbookSidebar = [
                 name: 'Brand strategy',
                 url: '/handbook/strategy/brand',
             },
+            {
+                name: 'Product positioning',
+                url: '/handbook/design/positioning',
+            },
         ],
     },
     {
@@ -329,10 +333,6 @@ export const handbookSidebar = [
                 name: 'Working with data',
                 url: '',
                 children: [
-                    {
-                        name: 'Event ingestion explained',
-                        url: '/handbook/engineering/databases/event-ingestion',
-                    },
                     {
                         name: 'Making schema changes safely',
                         url: '/handbook/engineering/databases/schema-changes',
@@ -626,12 +626,24 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/overview',
             },
             {
+                name: 'New sales',
+                url: '/handbook/growth/sales/new-sales',
+            },
+            {
+                name: 'Expansion & Retention',
+                url: '/handbook/growth/sales/expansion-and-retention',
+            },
+            {
+                name: 'How we work',
+                url: '/handbook/growth/sales/how-we-work',
+            },
+            {
                 name: 'Customer support',
                 url: '/handbook/growth/customer-support',
             },
             {
-                name: 'Sales operations',
-                url: '/handbook/growth/sales/sales-operations',
+                name: 'RevOps',
+                url: '',
                 children: [
                     {
                         name: 'Managing our CRM',
@@ -648,10 +660,6 @@ export const handbookSidebar = [
                     {
                         name: 'YC onboarding',
                         url: '/handbook/growth/sales/yc-onboarding',
-                    },
-                    {
-                        name: 'Demos',
-                        url: '/handbook/growth/sales/demos',
                     },
                     {
                         name: 'Contracts',
@@ -681,6 +689,10 @@ export const handbookSidebar = [
         name: 'Website & Docs',
         url: '',
         children: [
+            {
+                name: 'Updating docs',
+                url: '/handbook/company/docs',
+            },
             {
                 name: 'Community',
                 url: '',
@@ -747,19 +759,25 @@ export const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: 'https://posthog.com/posts',
+    url: '/community',
     icon: 'IconChat',
     children: [
         {
-            name: 'Posts',
+            name: 'News',
             icon: 'IconNewspaper',
+            color: 'blue',
+            url: '/community',
+        },
+        {
+            name: 'Posts',
+            icon: 'IconBook',
             color: 'red',
             url: 'https://posthog.com/posts',
         },
         {
             name: 'Questions',
             icon: 'IconMessage',
-            color: 'blue',
+            color: 'seagreen',
             url: '/questions',
         },
         {
@@ -1728,6 +1746,10 @@ export const docsMenu = {
                         {
                             name: 'Querying data',
                             url: '/docs/how-posthog-works/queries',
+                        },
+                        {
+                            name: 'Session replay',
+                            url: '/docs/how-posthog-works/recordings-ingestion',
                         },
                     ],
                 },

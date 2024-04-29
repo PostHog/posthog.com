@@ -45,18 +45,18 @@ Windows isn't supported natively. But, Windows users can run a Linux virtual mac
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/engineering/developing-locally.md)!
 
-## Developing with CodeSpaces
+## Developing with Codespaces
 
 This is a faster alternative to get up and running. If you don't want to or can't use Codespaces continue from the next section.
 
 
-1. Create your codespace
+1. Create your codespace.
 ![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
 2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly). Consider also changing "Open in ..." to be your favorite editor.
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
-3. Open a terminal window and run `docker compose -f docker-compose.dev.yml up`
-4. Open a terminal window and run `./bin/migrate` and then `./bin/start`
-5. Open browser to http://localhost:8000/
+3. Open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
+4. Open a terminal window and run `./bin/migrate` and then `./bin/start`.
+5. Open browser to http://localhost:8000/.
 
 ## macOS prerequisites
 
@@ -69,7 +69,7 @@ This is a faster alternative to get up and running. If you don't want to or can'
     <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
 </blockquote>
 
-3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and in its settings give Docker **at least 4 GB of RAM** (or 6 GB if you can afford it) and at least 4 CPU cores.
+3. Install [OrbStack](https://orbstack.dev/) – a more performant Docker Desktop alternative – with `brew install orbstack`. Go to OrbStack settings and set the memory usage limit to **at least 4 GB** (or 8 GB if you can afford it) + the CPU usage limit to at least 4 cores (i.e. 400%).
 
 ## Ubuntu prerequisites
 
@@ -105,24 +105,22 @@ This is a faster alternative to get up and running. If you don't want to or can'
 
 In this step we will start all the external services needed by PostHog to work.
 
-We'll be using `docker compose`, which is the successor to `docker-compose`. One of its features is better compatibility with ARM environments like Apple Silicon Macs. ([See Docker documentation for details.](https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command))
-
 ```bash
 docker compose -f docker-compose.dev.yml up
 ```
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
 
-> **Friendly tip 2:** If you see "Exit Code 137" anywhere, it means that the container has run out of memory. In this case you need to allocate more RAM in Docker Desktop settings.
+> **Friendly tip 2:** If you see "Exit Code 137" anywhere, it means that the container has run out of memory. In this case you need to allocate more RAM in OrbStack settings.
 
-> **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall). Or look into [Podman](https://podman.io/getting-started/installation) as an alternative that supports rootless containers.
+> **Friendly tip 3:** On Linux, you might need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall). Or look into [Podman](https://podman.io/getting-started/installation) as an alternative that supports rootless containers.
 
->**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`,  - refer to this [stackoverflow answer](https://stackoverflow.com/questions/38249434/docker-postgres-failed-to-bind-tcp-0-0-0-05432-address-already-in-use). In most cases, you can solve this by stopping the `postgresql` service.
+>**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`, you have Postgres already running somewhere. Try `docker compose -f docker-compose.dev.yml` first, alternatively run `lsof -i :5432` to see what process is using this port.
 ```bash
 sudo service postgresql stop
 ```
 
-Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop dashboard) that all these services are up and running. They should display something like this in their logs:
+Second, verify via `docker ps` and `docker logs` (or via the OrbStack dashboard) that all these services are up and running. They should display something like this in their logs:
 
 ```shell
 # docker ps                                                                                     NAMES

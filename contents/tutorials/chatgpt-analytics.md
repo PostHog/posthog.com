@@ -59,7 +59,7 @@ root.render(
     <PostHogProvider 
       apiKey={'<ph_project_api_key>'}
       options={{
-        api_host: '<ph_instance_address>',
+        api_host: '<ph_client_api_host>',
       }}
     >
       <App />
@@ -318,4 +318,4 @@ We've shown you the basics of creating insights from your product's ChatGPT API 
 
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 
-- [How to use session replays to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
+- [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)

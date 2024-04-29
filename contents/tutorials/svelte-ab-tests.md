@@ -73,7 +73,7 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_instance_address>' }
+      { api_host: '<ph_client_api_host>' }
     )
   }
   return
@@ -193,7 +193,7 @@ import { PostHog } from 'posthog-node';
 
 export async function load() {
   const posthog = new PostHog('<ph_project_api_key>', 
-  { host: '<ph_instance_address>' });
+  { host: '<ph_client_api_host>' });
   
   let ctaText = 'No variant'
   try {
@@ -243,7 +243,7 @@ import { parse } from 'cookie';
 export async function load({ request }) {
   const projectAPIKey = '<ph_project_api_key>'
   const posthog = new PostHog(projectAPIKey, 
-  { host: '<ph_instance_address>' });
+  { host: '<ph_client_api_host>' });
   
   let ctaText = 'No variant'
   

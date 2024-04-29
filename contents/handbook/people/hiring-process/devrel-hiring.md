@@ -30,7 +30,7 @@ Beyond the specific skills listed in the job description, we generally look for:
 
 #### 1. Culture interview 
 
-The [culture interview](https://posthog.com/handbook/people/hiring-process#interview-1---culture-with-eltje) usually lasts around 30 minutes and will be with someone from our [People and Culture team](https://posthog.com/teams/people). This round is loosely structured into 4 different sections:
+The [culture interview](/handbook/people/hiring-process#interview-1---culture-with-eltje) usually lasts around 30 minutes and will be with someone from our [People and Culture team](/teams/people). This round is loosely structured into 4 different sections:
 
 1. PostHog - mission, vision, team, way of working etc. If it was cold outreach, we provide a little more context up front.
 2. Candidate background and mindset.
@@ -55,7 +55,7 @@ Most developer relations roles will go into detail about the candidates experien
 
 #### DevRel SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](https://posthog.com/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
 
 We will share the task with you at the start of the day. The task is representative of the work someone in this role at PostHog is doing, and it is always the same for each candidate, so we can make clear comparisons.Day
  

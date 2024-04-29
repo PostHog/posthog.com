@@ -28,9 +28,9 @@ Since then, we've realized that the same reasons that PostHog was appealing to u
 
 ## Apr 2020: $3M Seed round
 
-After we finished Y Combinator, [we raised a $3.025M seed round](../../blog/raising-3m-for-os). This was from Y Combinator's Continuity Fund, 1984 Ventures. You can learn more about how we raised the money.
+After we finished Y Combinator, [we raised a $3.025M seed round](/blog/raising-3m-for-os). This was from Y Combinator's Continuity Fund, 1984 Ventures. You can learn more about how we raised the money.
 
-As we started raising, we started hiring. We brought on board [Marius, Eric and James G](../../people).
+As we started raising, we started hiring. We brought on board [Marius, Eric and James G](/people).
 
 ## May 2020: First 1,000 users
 
@@ -38,7 +38,7 @@ We kept shipping, people kept coming!
 
 ## Oct 2020: Billions of events supported
 
-This was a major update - PostHog started providing [ClickHouse support](../../blog/the-posthog-array-1-15-0#clickhouse-). Whilst we launched based on PostgreSQL, as it was the fastest option, this enabled us to scale to billions of events.
+This was a major update - PostHog started providing [ClickHouse support](/blog/the-posthog-array-1-15-0#clickhouse-). Whilst we launched based on PostgreSQL, as it was the fastest option, this enabled us to scale to billions of events.
 
 ## Nov 2020: Building a platform
 
@@ -48,7 +48,7 @@ PostHog now supports [product analytics](/product/trends), [feature flags](/prod
 
 ## Dec 2020: $9M Series A
 
-We kept growing organically and took the opportunity to raise a $9M Series A, topping our funding up to [$12M](../../blog/posthog-announces-9-million-dollar-series-A) led by [GV](https://www.gv.com/) (formerly Google Ventures).
+We kept growing organically and took the opportunity to raise a $9M Series A, topping our funding up to [$12M](/blog/posthog-announces-9-million-dollar-series-A) led by [GV](https://www.gv.com/) (formerly Google Ventures).
 
 Our focus remains firmly product, engineering and design oriented, so we're increasing our team in those areas.
 
@@ -58,7 +58,7 @@ Everyone takes a mandatory two weeks off over Christmas to relax.
 
 ## Jun 2021: $15M Series B
 
-We raised a $15M Series B [a little ahead of schedule](../../blog/why-we-raised-a-15m-series-b-ahead-of-schedule), led by existing investors Y Combinator. 
+We raised a $15M Series B [a little ahead of schedule](/blog/why-we-raised-a-15m-series-b-ahead-of-schedule), led by existing investors Y Combinator. 
 
 We're now focused on achieving strong product/market fit with our [target segment](../../handbook/overview#target-audience-for-2021) in 2021. 
 

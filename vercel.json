@@ -208,6 +208,10 @@
             "destination": "/handbook/product/enterprise-features-prioritization"
         },
         { "source": "/handbook/engineering/debugging", "destination": "/handbook/engineering/production-access" },
+        {
+            "source": "/handbook/engineering/databases/event-ingestion",
+            "destination": "/docs/how-posthog-works/ingestion-pipeline"
+        },
         { "source": "/docs/user-guides/session-recording", "destination": "/docs/user-guides/recordings" },
         { "source": "/blog/sessions-deprecation", "destination": "/blog/sessions-removal" },
         { "source": "/docs/self-host/runbook/overview", "destination": "/docs/self-host/runbook" },
@@ -751,7 +755,6 @@
         { "source": "/ab-testing/features", "destination": "/ab-testing" },
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
-        { "source": "/community", "destination": "/questions", "statusCode": 302 },
         { "source": "/roadmap/changelog", "destination": "/changelog/2024" },
         { "source": "/blog/posthog-changelog", "destination": "/changelog/2024" },
         { "source": "/roadmap/changelog/2023", "destination": "/changelog/2024" },
@@ -926,11 +929,11 @@
         { "source": "/tutorials/revenue", "destination": "/tutorials" },
         { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" },
         { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
-        { "source": "/tim", "destination": "/community/profiles/108" },
-        { "source": "/marius", "destination": "/community/profiles/1" },
-        { "source": "/raquel", "destination": "/community/profiles/491" },
-        { "source": "/jamesg", "destination": "/community/profiles/90" },
-        { "source": "/jams", "destination": "/community/profiles/90" },
+        { "source": "/tim", "destination": "/community/profiles/27730" },
+        { "source": "/marius", "destination": "/community/profiles/30202" },
+        { "source": "/raquel", "destination": "/community/profiles/28693" },
+        { "source": "/jamesg", "destination": "/community/profiles/30174" },
+        { "source": "/jams", "destination": "/community/profiles/30174" },
         { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
         { "source": "/docs/surveys/setup", "destination": "/docs/surveys/installation" },
         { "source": "/docs/surveys/new", "destination": "/docs/surveys/creating-surveys" },
@@ -1248,6 +1251,11 @@
         { "source": "/handbook/small-teams/people-ops", "destination": "/teams/people" },
         { "source": "/self-host", "destination": "/docs/self-host" },
         { "source": "/using-posthog", "destination": "/docs" },
-        { "source": "/handbook/company/values", "destination": "/handbook/values" }
+        { "source": "/handbook/company/values", "destination": "/handbook/values" },
+        { "source": "/max", "destination": "/community/profiles/28378" },
+        {
+            "source": "/blog/gdpr-google-analytics-privacy-shield",
+            "destination": "/blog/best-gdpr-compliant-analytics-tools"
+        }
     ]
 }

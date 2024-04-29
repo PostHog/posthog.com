@@ -196,7 +196,7 @@ const comparison = [
             AmplitudeExperiments: false,
             Optimizely: true,
             VWO: true,
-            PostHog: false,
+            PostHog: true,
         },
     },
     {

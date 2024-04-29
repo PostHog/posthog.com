@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We have a [merch store](https://merch.posthog.com/) where our community can purchase high quality PostHog-branded merch. As we have a limited number of Shopify admins on our current plan, message Charles in the #team-people-and-ops channel if you need any help sending out merch or gift cards, as you probably won't be able to do it yourself. 
+We have a [merch store](https://merch.posthog.com/) where our community can purchase high quality PostHog-branded merch. Instructions for how to get a merch code to our customers is [below](https://posthog.com/handbook/company/merch-store#customers), however if you need any help just send a message to the #merch channel and somebody from Ops will be happy to help. 
 
 ## How do we think about merch?
 
@@ -29,13 +29,13 @@ Shipping is also done through [Printfection](https://app.printfection.com/accoun
 * If you want to ship merch for an event or as part of a giveaway, create a one-off [campaign](https://help.printfection.com/hc/en-us/articles/208654107-Collection-campaigns-How-to-collect-review-and-approve-orders-via-external-ordering-or-csv)
 
 ## How do we sell merch?
-We sell it through our [merch store](https://merch.posthog.com/) store on Shopify - request access to our [admin portal](https://posthog.myshopify.com/) from Marketing team if required. 
+We sell it through our [merch store](https://merch.posthog.com/) store on Shopify - access details are in 1Password.
 
 ## How do we give away merch for free?
 
 ### Customers
 
-Create a gift card in [Shopify admin](https://posthog.myshopify.com/admin/gift_cards). You can either copy the code, or create a 'new customer' and send them the code directly. For contributions we tend to do $50, with no expiration date.
+Create a discount code in [Shopify admin]((https://admin.shopify.com/store/posthog/discounts)). When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount - usually we do fixed amounts of $50 or $100 depending on the purpose. The you can choose "specific collections" and choose "All Products". Limit the use to one use per customer, otherwise it's unlimited free stuff for them, unlimited high cost for us! For code contributions we tend to do $50, with no expiration date.
 
 Alternatively, if you want to send them a specific product via Printfection, you can create a 'New Order' under [this campaign](https://app.printfection.com/account/campaign/manage.php?storeid=304946). 
 

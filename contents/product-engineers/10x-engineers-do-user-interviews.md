@@ -34,7 +34,7 @@ Here's what it looks like when engineers talk directly to users:
 
 Information moves quickly and in both directions, boosting the signal. By increasing the signal you can quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution – something engineers can do most effectively because they have the background on the existing architecture and components. 
 
-Companies still need product managers, but it's easier to ship faster and better work when engineers behave like [product engineers](/blog/what-is-a-product-engineer) and talk to users. And in doing so, product managers are freed from writing tickets to spend more time exploring bigger opportunities.
+Companies still need product managers, but it's easier to ship faster and better work when engineers behave like [product engineers](/blog/what-is-a-product-engineer) and [talk to users](/newsletter/talk-to-users). And in doing so, product managers are freed from writing tickets to spend more time exploring bigger opportunities.
 
 > 💬 **Sidenote:** PostHog's session recording feature came about because one of our engineers took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one product OS.
 
