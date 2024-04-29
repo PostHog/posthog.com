@@ -30,7 +30,7 @@ const Pagination = ({
                     }
                     posts={allPostsRecent.slice(0, 4)}
                 />
-                <NewsletterForm />
+                <NewsletterForm className="-mt-6" />
                 <Posts posts={allPostsRecent.slice(4, 12)} />
                 {allPostsRecent.length > 12 && (
                     <>
