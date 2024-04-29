@@ -32,13 +32,13 @@ Beyond this, there are many use cases that don't require person profiles. Some e
 - B2C apps where users don't sign up or log in
 - High volume API server events
 
-For backward compatibility and to make sure we don't drop person information accidentally, person profile processing is enabled by default for configs without any option set. We also capture person profiles for all events where the user distinct ID already has a person profile created, regardless of the `person_profiles` config option.
+For backward compatibility and to make sure we don't drop person information accidentally, person profile processing is enabled by default for configs without any option set. Also, if a user distinct ID already has a person profile created, we count events as ones with person profiles.
 
 > **Note:** Since we changed our data structure to enable the removal of person profiles, any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
 
 ## Capturing person profiles
 
-By default, PostHog captures events with person profiles. To change this in the JavaScript Web configuration, change the `person_profiles` config option with one of the three options:
+By default, PostHog captures events with person profiles. To change this in the JavaScript Web configuration, change the `person_profiles` config option:
 
 import PersonProfilesJSConfig from '../../docs/libraries/js/_snippets/person-profiles-config.mdx'
 
