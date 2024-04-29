@@ -2695,6 +2695,12 @@ const menu = [
                 url: '/surveys',
             },
             {
+                name: 'LLM Insights',
+                icon: 'IconAdvanced',
+                color: 'yellow',
+                url: '/llm-insights',
+            },
+            {
                 name: 'Product OS',
                 icon: 'IconStack',
                 color: 'blue',
