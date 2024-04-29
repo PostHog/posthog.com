@@ -7,3 +7,5 @@ posthog.identify(
     { first_visited_url: '/blog' } // $set_once, optional
 );
 ```
+
+This creates a person profile if one doesn't exist already. This means all their events are captured with person profiles, regardless of your `person_profiles` [config option](/docs/libraries/js#person-profiles-and-user-properties).

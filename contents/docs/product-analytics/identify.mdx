@@ -192,7 +192,7 @@ You can view whether a user can be merged into another user using `alias` when [
 
 For user identification to work, you must be processing person profiles. This means your JavaScript Web `person_profiles` config option must be set to `always` or `identified_only`. 
 
-If set to `identified_only`, PostHog only captures person profiles once you can one of the following functions or methods:
+If set to `identified_only`, PostHog only captures person profiles once you call one of the following functions or methods:
 
 - `identify`
 - `alias`
@@ -200,6 +200,8 @@ If set to `identified_only`, PostHog only captures person profiles once you can 
 - `setPersonPropertiesForFlags`
 - `group`
 - `setGroupPropertiesForFlags`
+
+Once you create a person profile for a distinct ID, all their events are captured with person profiles, regardless of your `person_profiles` [config option](/docs/libraries/js#person-profiles-and-user-properties). 
 
 ## Troubleshooting and FAQs
 

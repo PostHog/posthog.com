@@ -66,21 +66,9 @@ This creates a special `$set` event that is sent to PostHog. For more details on
 
 To capture events without person profiles, update the `person_profiles` config option with one of the three options:
 
-1. `person_profiles: 'always'` _(default)_ - We include person profiles for all events
-2. `person_profiles: 'never'` - We don't include person profiles on any event.
-3. `person_profiles: 'identified_only'` - We only include person profiles when you call `posthog.identify()`. Anonymous users won't get person profiles.
+import PersonProfilesConfig from './_snippets/person-profiles-config.mdx'
 
-An example of an updated configuration looks like this:
-
-```js-web
-posthog.init(
-    '<ph_project_api_key>',
-    {
-        api_host: '<ph_instance_address>',
-        person_profiles: 'identified_only'
-    }
-)
-```
+<PersonProfilesConfig />
 
 ## Identifying users
 
@@ -89,7 +77,6 @@ posthog.init(
 import JSIdentify from './\_snippets/identify.mdx'
 
 <JSIdentify />
-
 
 ## Alias
 
