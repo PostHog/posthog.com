@@ -1,6 +1,8 @@
-1. `person_profiles: 'always'` _(default)_ - We include person profiles for all events
-2. `person_profiles: 'never'` - We don't include person profiles on any event.
-3. `person_profiles: 'identified_only'` - We only include person profiles for users with person profiles already created. This is triggered by calling functions like `identify()`, `group()`, and [more](/docs/product-analytics/identify#processing-person-profiles). Anonymous users won't get person profiles.
+1. `person_profiles: 'always'` _(default)_ - We capture person profiles for all events.
+
+2. `person_profiles: 'identified_only'` - We only capture person profiles for users where they are already created. This is trigged by calling functions like `identify()`, `group()`, and [more](/docs/product-analytics/identify#processing-person-profiles). New anonymous users won't get person profiles.
+
+3. `person_profiles: 'never'` - We don't capture person profiles and drop events from functions like `identify()`, `group()`, and [others](/docs/product-analytics/identify#processing-person-profiles) that try to do so. However, if a user distinct ID already has a person profile created, we count events as ones with person profiles.
 
 An example of an updated configuration looks like this:
 
