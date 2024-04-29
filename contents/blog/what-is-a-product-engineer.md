@@ -52,7 +52,7 @@ With a basic idea of what a product engineer is, we can dive deeper into the cha
 
 One characteristic that distinguishes product engineers is their “customer obsession.” They care a lot about the people and organizations using their product and want to build a better solution for them.
 
-Customer obsession manifests in a couple of ways. First is that they talk to users. Talking to users isn’t only a job for product managers and salespeople. Product engineers must do this too. They must understand the real problems users are having and figure out solutions for them. This might entail working with a product manager or designer, but it is the ultimate responsibility of the product engineer to make it happen. [incident.io](http://incident.io) is looking for this in their job post:
+Customer obsession manifests in a couple of ways. First is that they [talk to users](/newsletter/talk-to-users). Talking to users isn’t only a job for product managers and salespeople. Product engineers must do this too. They must understand the real problems users are having and figure out solutions for them. This might entail working with a product manager or designer, but it is the ultimate responsibility of the product engineer to make it happen. [incident.io](http://incident.io) is looking for this in their job post:
 
 > "Enjoy speaking directly with customers and understanding their problems”
 
