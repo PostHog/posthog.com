@@ -59,7 +59,7 @@ posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
 
 The survey wait period is set locally on the client. This means, if they clear cookies / local storage, or change browsers, the same user can see the survey multiple times.
 
-Whenever someone responds to or dismisses a survey, we add a user property (if person profiles are enabled). For now, you can use this property to exclude users from targeting by adding these properties to your existing conditions, like so:
+Whenever someone responds to or dismisses a survey, we add a user property (if you are capturing person profiles). For now, you can use this property to exclude users from targeting by adding these properties to your existing conditions, like so:
 
 ![Survey user targeting](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/user-targeting.png)
 

@@ -1,4 +1,4 @@
-Using `identify`, you can associate events with specific users. This enables you to gain full insights as to how they're using your product across different sessions, devices, and platforms.
+Using `identify`, you can associate events with specific users if you capture person profiles. This enables you to gain full insights as to how they're using your product across different sessions, devices, and platforms.
 
 ```js-web
 posthog.identify(
@@ -8,4 +8,4 @@ posthog.identify(
 );
 ```
 
-This creates a person profile if one doesn't exist already. This means all their events are captured with person profiles, regardless of your `person_profiles` [config option](/docs/libraries/js#person-profiles-and-user-properties).
+This creates a person profile if one doesn't exist already. This means all events for that distinct ID count as ones with person profiles, regardless of your `person_profiles` [config option](/docs/libraries/js#person-profiles-and-user-properties).

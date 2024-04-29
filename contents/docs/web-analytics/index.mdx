@@ -34,7 +34,9 @@ Getting started is a simple three-step process.
 
 Follow the [installation instructions](/docs/product-analytics/installation) to setup either the JavaScript snippet or the JavaScript Web SDK for the website you want to track.
 
-Web analytics works without capturing [person profiles](/docs/data/persons). This means if you are primarily using PostHog for web analytics, it can be significantly cheaper for you. To do this, set your [JavaScript Web](/docs/libraries/js) `person_profiles` config option to `identified_only` or `never` like this:
+Web analytics works without capturing [person profiles](/docs/data/persons). This means if you are primarily using PostHog for web analytics, it can be significantly cheaper for you. 
+
+To do this, set your [JavaScript Web](/docs/libraries/js) `person_profiles` config option to `identified_only` or `never` like this:
 
 ```js-web
 posthog.init(

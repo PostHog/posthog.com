@@ -64,7 +64,7 @@ posthog.setPersonProperties(
 
 This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture events without person profiles, update the `person_profiles` config option with one of the three options:
+To control whether you capture person profiles, update the `person_profiles` config option with one of the three options:
 
 import PersonProfilesConfig from './_snippets/person-profiles-config.mdx'
 
@@ -473,7 +473,7 @@ Some of the most relevant options are:
 | `opt_out_persistence_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of browser data storage by this PostHog instance by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
 | `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
 | `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                        | A list of properties that should never be sent with `capture` calls.                                                           |
-| `person_profiles`<br /><br />**Type:** Enum: `always`, `identified_only`, `never`<br/>**Default:** `always`                                                                                | Set whether events should have person profiles enabled |
+| `person_profiles`<br /><br />**Type:** Enum: `always`, `identified_only`, `never`<br/>**Default:** `always`                                                                                | Set whether events should have person profiles processed |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                             | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |

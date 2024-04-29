@@ -1,4 +1,4 @@
-In our client-side SDKs, any event captured after calling `posthog.group` will automatically be linked to the group during that session. You also need to capture [person profiles](/docs/data/persons) for this to work.
+In our client-side SDKs, any event with a [person profile](/docs/data/person) captured after calling `posthog.group` will automatically be linked to the group during that session.
 
 To link an event to a group in our server-side SDKs or API, set the key-value pair `<group type>: <group_id>` to the `groups` property of the event.
 

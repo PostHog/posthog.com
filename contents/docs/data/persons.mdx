@@ -23,7 +23,7 @@ Person profiles and user properties enable:
 - Filtering on user properties
 - Merging identities across `distinct_id` values (i.e. merging an anonymous user with a logged in user)
 - Cohort creation
-- Feature flag targeting on user properties
+- Feature flag, experimentation, and survey targeting on user properties
 - Tracking initial UTM values and referrers across anonymous and identified users
 
 Beyond this, there are many use cases that don't require person profiles. Some examples:
@@ -32,7 +32,9 @@ Beyond this, there are many use cases that don't require person profiles. Some e
 - B2C apps where users don't sign up or log in
 - High volume API server events
 
-For backward compatibility and to make sure we don't drop person information accidentally, processing events with persons is the default for configs without any option set. We also "force upgrade" anonymous users created before person profiles lanched.
+For backward compatibility and to make sure we don't drop person information accidentally, person profile processing is enabled by default for configs without any option set. We also capture person profiles for all events where the user distinct ID already has a person profile created, regardless of the `person_profiles` config option.
+
+> **Note:** Since we changed our data structure to enable the removal of person profiles, any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
 
 ## Capturing person profiles
 
@@ -42,7 +44,7 @@ import PersonProfilesJSConfig from '../../docs/libraries/js/_snippets/person-pro
 
 <PersonProfilesJSConfig />
 
-Other SDKs and the API can pass the `$process_person_profile` property on events. Again, person profiles are enabled by default, but can be disabled by setting the property to `false`.
+Other SDKs and the API can pass the `$process_person_profile` property on events. Again, person profiles are enabled by default, but you can disable this by setting the property to `false`.
 
 ```node
 client.capture({
@@ -56,7 +58,7 @@ client.capture({
 
 ## Viewing person profiles
 
-Clicking on a user opens their profile and shows all their properties.
+Clicking on a person opens their profile and shows all their properties.
 
 <ProductScreenshot
     imageLight={personProfileLight}
@@ -65,17 +67,17 @@ Clicking on a user opens their profile and shows all their properties.
     classes="rounded"
 />
 
-- **Events** shows all the events a user has triggered, which you can search and filter to find specific events.
+- **Events** shows all the events a person has triggered, which you can search and filter to find specific events.
 
-- **Recordings** shows all session replays a user has generated. Note this is subject to the retention policy of your plan, so users who haven't been active recently may have none.
+- **Recordings** shows all session replays a person has generated. Note this is subject to the retention policy of your plan, so people who haven't been active recently may have none.
 
-- **Cohorts** shows all the cohorts a user belongs to.
+- **Cohorts** shows all the cohorts a person belongs to.
 
-- **Related groups:** shows groups (e.g. organizations, projects, and instances) a user belongs to.
+- **Related groups:** shows groups (e.g. organizations, projects, and instances) a person belongs to.
 
-- **Feature flags:** shows all feature flags that are enabled for a user.
+- **Feature flags:** shows all feature flags that are enabled for a person.
 
-- **History:** shows any manual changes that have been made to the user's profile.
+- **History:** shows any manual changes that have been made to the person's profile.
 
 ## Deleting person data
 
