@@ -46,17 +46,17 @@ For information on what code to write and what special functions to use, check o
 
 ### Using the source code editor
 
-Add "pipeline-ui" feature flag and enable it. For destinations you'll need Data Pipelines add-on to be enabled.
+Add "pipeline-ui" feature flag and enable it. For destinations, you'll need data pipelines add-on to be enabled in [your billing settings](https://us.posthog.com/organization/billing).
 
-Go to Data pipeline 3000 -> Apps Management tab -> enter a name and pick the app kind
+Go to Data pipeline 3000 section and click the Apps management tab. Under "Install by writing source code," enter a name and pick the app type. 
 
 ![App editor location](https://res.cloudinary.com/dmukukwp6/image/upload/v1714149251/posthog.com/contents/images/docs/cdp/create-source-code-app.png)
 
-It will create the transformation or destination for you, which you can then find in the table on the same page, click on the right to expand the row, then on the pencil to edit the code.
+This creates transformation or destination for you, which you can then find in the table on the same page. Click to expand the row on the left, and then on the pencil icon to edit the code.
 
 ![Edit source app code](https://res.cloudinary.com/dmukukwp6/image/upload/v1714149601/posthog.com/contents/images/docs/cdp/source-app-edit-code.png)
 
-Once finished make it global, so you can find and enable it and you're ready to [test the transformation or destination.](#testing)
+Edit the `plugin.json` and `index.ts` files to [build your transformation or destination](/docs/cdp/build). Once finished make it global, so you can find and enable it and you're ready to [test the transformation or destination](#testing).
 
 ### Using a GitHub repository
 
@@ -99,7 +99,7 @@ These logs can be seen on the 'Logs' page, which can be accessed on the [Data Pi
 
 You can submit your transformation or destination to the [official library](/cdp). If accepted, it becomes available to all PostHog Cloud users. 
 
-> **Note:** We are only reviewing new apps relying on stateless (no cache or external calls, non async) `processEvent` or `composeWebhook` functions.
+> **Note:** We are only reviewing new apps relying on stateless (no cache or external calls, non-async) `processEvent` or `composeWebhook` functions.
 
 If you built one inside the PostHog editor, convert it to a GitHub repository
 
