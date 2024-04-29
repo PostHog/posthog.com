@@ -132,10 +132,10 @@ Start by installing `uuidv7` and `posthog-node`:
 npm i uuidv7 posthog-node
 ```
 
-Next, create a `utils` folder and create a folder named `gen-id.js`. In this file, we use React's cache feature to generate an ID once and return the same value if we call it again.
+Next, create a `utils` folder and create a folder named `genId.js`. In this file, we use React's cache feature to generate an ID once and return the same value if we call it again.
 
 ```js
-// app/utils/gen-id.js
+// app/utils/genId.js
 import { cache } from 'react'
 import { uuidv7 } from "uuidv7";
  
@@ -145,33 +145,10 @@ export const generateId = cache(() => {
 })
 ```
 
-After this, we are ready to set up the `getBootstrapData` function in `layout.js`:
-
-1. Import PostHog (from Node), the Next `cookies` function, and the `generateId` utility.
-2. Add the `getBootstrapData` function and logic.
-3. Call it from the `RootLayout`.
-4. Pass the data to the `PHProvider`.
+After this, we create another file in `utils` named `getBootstrapData.js`. In it, create a `getBootstrapData` function like this:
 
 ```js
-// app/layout.js
-import './globals.css'
-import PHProvider from "./providers";
-import { PostHog } from 'posthog-node'
-import { cookies } from 'next/headers'
-import { generateId } from './utils/gen-id'
-
-export default async function RootLayout({ children }) {
-  const bootstrapData = await getBootstrapData()
-
-  return (
-    <html lang="en">
-      <PHProvider bootstrapData={bootstrapData}>
-        <body>{children}</body>
-      </PHProvider>
-    </html>
-  )
-}
-
+// app/utils/getBootstrapData.js
 export async function getBootstrapData() {
   let distinct_id = ''
   const phProjectAPIKey = '<ph_project_api_key>'
@@ -197,6 +174,35 @@ export async function getBootstrapData() {
   }
 
   return bootstrap
+}
+```
+
+Next:
+
+1. Import PostHog (from Node), the Next `cookies` function, and the `generateId` utility.
+2. Import and use the `getBootstrapData` function and logic.
+3. Call it from the `RootLayout`.
+4. Pass the data to the `PHProvider`.
+
+```js
+// app/layout.js
+import './globals.css'
+import PHProvider from "./providers";
+import { PostHog } from 'posthog-node'
+import { cookies } from 'next/headers'
+import { generateId } from './utils/genId'
+import { getBootstrapData } from './utils/getBootstrapData'
+
+export default async function RootLayout({ children }) {
+  const bootstrapData = await getBootstrapData()
+
+  return (
+    <html lang="en">
+      <PHProvider bootstrapData={bootstrapData}>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
 }
 ```
 
@@ -272,7 +278,7 @@ To set up the A/B test, we change the `app/page.js` component to be server-rende
 
 ```js
 // app/page.js
-import { getBootstrapData } from "./layout"
+import { getBootstrapData } from "./utils/getBootstrapData"
 
 export default async function Home() {
   const bootstrapData = await getBootstrapData()
