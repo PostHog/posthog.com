@@ -37,6 +37,7 @@ import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import Layout from 'components/Layout'
 
 const product = {
     slug: 'llm-analytics',
@@ -319,7 +320,7 @@ const PairsWithArray = [
     },
 ]
 
-export const ProductSurveys = () => {
+export const LLMInsights = () => {
     const { purplewave, elevenlabs } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
@@ -345,7 +346,7 @@ export const ProductSurveys = () => {
     `)
     const { fullWidthContent } = useLayoutData()
     return (
-        <>
+        <Layout>
             <SEO
                 title="Surveys - PostHog"
                 description="Ask anything with no-code surveys – or use the API for complete control."
@@ -595,8 +596,8 @@ export const ProductSurveys = () => {
                     <CTA />
                 </section>
             </div>
-        </>
+        </Layout>
     )
 }
 
-export default LLM - insights
+export default LLMInsights
