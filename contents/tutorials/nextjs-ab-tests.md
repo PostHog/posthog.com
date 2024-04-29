@@ -149,6 +149,10 @@ After this, we create another file in `utils` named `getBootstrapData.js`. In it
 
 ```js
 // app/utils/getBootstrapData.js
+import { PostHog } from 'posthog-node'
+import { cookies } from 'next/headers'
+import { generateId } from './genId'
+
 export async function getBootstrapData() {
   let distinct_id = ''
   const phProjectAPIKey = '<ph_project_api_key>'
@@ -188,9 +192,6 @@ Next:
 // app/layout.js
 import './globals.css'
 import PHProvider from "./providers";
-import { PostHog } from 'posthog-node'
-import { cookies } from 'next/headers'
-import { generateId } from './utils/genId'
 import { getBootstrapData } from './utils/getBootstrapData'
 
 export default async function RootLayout({ children }) {
