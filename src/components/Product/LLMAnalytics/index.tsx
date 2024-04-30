@@ -332,7 +332,7 @@ export const LLMAnalytics = () => {
     `)
     const { fullWidthContent } = useLayoutData()
     return (
-        <Layout>
+        <>
             <SEO
                 title="LLM analytics - PostHog"
                 description="Ask anything with no-code surveys – or use the API for complete control."
@@ -546,7 +546,7 @@ export const LLMAnalytics = () => {
                     <CTA />
                 </section>
             </div>
-        </Layout>
+        </>
     )
 }
 
