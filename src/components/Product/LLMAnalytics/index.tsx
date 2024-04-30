@@ -10,6 +10,8 @@ import {
     IconPieChart,
     IconNotification,
     IconRewindPlay,
+    IconBolt,
+    IconPeople,
     IconAdvanced,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
@@ -53,45 +55,38 @@ const teamSlug = '/teams/marketing'
 const featuresPerRow = 2
 const features = [
     {
-        title: 'Request counts',
-        description: '',
+        title: 'Measure costs',
+        description: 'Track the cost of each model, or the average cost of each prompt',
         image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
     {
-        title: 'Costs by model',
-        description: 'Choose from the library or start from scratch',
-        image: <StaticImage src="./images/templates.png" width={428} placeholder="none" />,
-        background: true,
-        fade: true,
+        title: 'Track latency',
+        description: 'Monitor the performance of each generation and data model',
+        image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
     {
-        title: 'Generation latency',
-        description: 'Target by URL, user property, or feature flag when used with Feature Flags',
-        image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
+        title: 'User insights',
+        description: 'Investigate your average traces per user, and your WAU',
+        image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
     {
-        title: 'Request paths',
-        description: 'Up to 10 questions',
-        image: <StaticImage src="./images/steps.png" width={428} placeholder="none" />,
+        title: 'Correlate feedback',
+        description: 'Understand how user feedback translates into engagement',
+        image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
 ]
 
-const subfeaturesItemCount = 3
+const subfeaturesItemCount = 2
 const subfeatures = [
     {
-        title: 'Aggregated results',
-        description: 'See feedback summarized and broken down per response',
-        icon: <IconPieChart />,
+        title: 'Dashboard templates',
+        description: 'Get instant insights with ready-made templates',
+        icon: <IconBolt />,
     },
     {
-        title: 'Slack notifications',
-        description: 'Send realtime survey responses to a Slack channel',
-        icon: <IconNotification />,
-    },
-    {
-        title: 'Customizable wait periods',
-        description: 'Set a delay before a survey opens',
-        icon: <IconClock />,
+        title: 'Simple integrations',
+        description: 'Integrate seamlessly with Langfuse or Helicone',
+        icon: <IconPeople />,
     },
 ]
 
@@ -158,16 +153,17 @@ export const LLMAnalytics = () => {
         <>
             <SEO
                 title="LLM analytics - PostHog"
-                description="Ask anything with no-code surveys – or use the API for complete control."
+                description="Get instant insights into LLM products and model performance"
                 image={`/images/og/surveys.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="yellow"
                     icon={<IconAdvanced />}
+                    beta={true}
                     product={product.capitalized}
-                    title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
-                    description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
+                    title='Unlock <span class="text-red dark:text-yellow">instant insights</span> for LLM products'
+                    description="Track specialist LLM and AI metrics, such as model latency, alongside standard product data"
                 />
 
                 <div className="text-center">
@@ -215,6 +211,31 @@ export const LLMAnalytics = () => {
                     </Marquee>
                 </section>
             </div>
+
+            <section
+                id="pricing"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-20 pb-10`}
+            >
+                <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
+                <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
+                    <p className="mb-1">
+                        <strong>While in beta...</strong>
+                    </p>
+                    <p className="mb-2">
+                        LLM analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
+                    </p>
+                    <ul className="mb-2">
+                        <li>
+                            <strong>First 1 million events every month:</strong> Free (get access to both products)
+                        </li>
+                        <li>
+                            <strong>After 1 million events/mo:</strong> Usage is billed through product analytics. Get
+                            access to LLM analytics at no additional cost.
+                        </li>
+                    </ul>
+                    <p className="mb-0">Dedicated pricing for LLM analytics is coming soon.</p>
+                </div>
+            </section>
 
             <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
