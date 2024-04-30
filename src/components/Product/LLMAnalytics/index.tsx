@@ -49,41 +49,29 @@ const product = {
 const team = 'Marketing'
 const teamSlug = '/teams/marketing'
 
-const featuresPerRow = 3
+const featuresPerRow = 2
 const features = [
     {
-        title: 'Question types',
-        description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
+        title: 'Request counts',
+        description: '',
         image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
     {
-        title: 'Templates',
+        title: 'Costs by model',
         description: 'Choose from the library or start from scratch',
         image: <StaticImage src="./images/templates.png" width={428} placeholder="none" />,
         background: true,
         fade: true,
     },
     {
-        title: 'Targeting',
+        title: 'Generation latency',
         description: 'Target by URL, user property, or feature flag when used with Feature Flags',
         image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
     },
     {
-        title: 'Multi-step surveys',
+        title: 'Request paths',
         description: 'Up to 10 questions',
         image: <StaticImage src="./images/steps.png" width={428} placeholder="none" />,
-    },
-    {
-        title: 'Link somewhere',
-        description: 'Send users to a webpage or invite them to book a meeting with a calendar invite',
-        image: <StaticImage src="./images/link-scheduler.png" width={428} placeholder="none" />,
-    },
-    {
-        title: 'No-code? Yes. API? Yes.',
-        description:
-            "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/api/surveys'>Surveys API</a>.",
-        image: <StaticImage src="./images/api.png" width={428} placeholder="none" />,
-        fade: true,
     },
 ]
 
@@ -320,8 +308,8 @@ const PairsWithArray = [
     },
 ]
 
-export const LLMInsights = () => {
-    const { purplewave, elevenlabs } = useStaticQuery(graphql`
+export const LLMAnalytics = () => {
+    const { elevenlabs } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -336,9 +324,6 @@ export const LLMInsights = () => {
             }
         }
         {
-            purplewave: mdx(slug: { eq: "customers/purplewave" }) {
-                ...ProductCustomerFragment
-            }
             elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
@@ -370,12 +355,7 @@ export const LLMInsights = () => {
                     />
                 </div>
                 <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
-                        <CustomerCard
-                            outcome="reached a 25% response rate with surveys"
-                            quote="I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform."
-                            customer={purplewave}
-                        />
+                    <ul className="list-none p-0 grid md:grid-cols-1 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="uses surveys to organize interviews and more"
                             quote="We even use surveys to send a little pop-up to our most active users and ask them to review us on G2."
@@ -411,37 +391,6 @@ export const LLMInsights = () => {
                     </Marquee>
                 </section>
             </div>
-            <section
-                id="pricing"
-                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
-            >
-                <div className="flex flex-col-reverse md:flex-row md:gap-12">
-                    <div className="flex-1">
-                        <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                        <p className="">
-                            Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
-                            <br className="hidden lg:block" />
-                            Either way, your first {product.freeTier} are free – every month.
-                        </p>
-                    </div>
-                    <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/surveys-hog.png" alt="" />
-                    </div>
-                </div>
-
-                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
-                    <div className="flex-grow overflow-auto px-5 md:px-0">
-                        <Plans showHeaders={false} showCTA={false} groupsToShow={['surveys']} />
-                    </div>
-
-                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
-                        <h4 className="text-3xl">FAQs</h4>
-                        {faqs.map((faq, index) => {
-                            return <FAQ {...faq} key={index} />
-                        })}
-                    </div>
-                </div>
-            </section>
 
             <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
@@ -600,4 +549,4 @@ export const LLMInsights = () => {
     )
 }
 
-export default LLMInsights
+export default LLMAnalytics

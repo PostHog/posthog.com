@@ -1951,16 +1951,6 @@ export const docsMenu = {
                     name: 'Tools',
                 },
                 {
-                    name: 'LLM insights',
-                    url: '/docs/product-analytics/llms',
-                    icon: 'IconMagicWand',
-                    color: 'yellow',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Autocapture',
                     url: '/docs/product-analytics/autocapture',
                     icon: 'IconBolt',
@@ -2026,6 +2016,27 @@ export const docsMenu = {
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
                     color: 'blue',
+                },
+            ],
+        },
+        {
+            name: 'LLM analytics',
+            icon: 'IconAdvanced',
+            color: 'yellow',
+            url: '/docs/llm-analytics',
+            children: [
+                {
+                    name: 'LLM analytics',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/llm-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
                 },
             ],
         },

@@ -1,5 +1,5 @@
 ---
-title: LLM insights (beta)
+title: LLM analytics (beta)
 availability:
     free: full
     selfServe: full
@@ -29,7 +29,7 @@ Currently, we support integrations for the following platforms:
 
 ![How to set up the Langfuse PostHog integration](https://res.cloudinary.com/dmukukwp6/video/upload/v1713785335/posthog.com/contents/languse.mp4)
 
-[Langfuse events](https://langfuse.com/docs/analytics/posthog#events) will now be exported into PostHog once per day.
+Langfuse will now begin exporting your data into PostHog once a day. 
 
 ### Helicone
 

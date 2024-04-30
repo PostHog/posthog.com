@@ -67,6 +67,13 @@ const quickLinks = [
         description: 'Easily track the most common web metrics',
         color: 'green',
     },
+    {
+        icon: 'IconAdvanced',
+        name: 'LLM analytics',
+        to: '/docs/LLM-analytics',
+        description: 'Track metrics for LLM products',
+        color: 'yellow',
+    },
 ]
 
 export const DocsIndex = () => {
