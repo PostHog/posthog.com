@@ -1,6 +1,6 @@
 ---
 title: 'The best Statsig alternatives & competitors, compared'
-date: 2024-04-22
+date: 2024-04-30
 author:
   - andy-vandervell
 rootpage: /blog
