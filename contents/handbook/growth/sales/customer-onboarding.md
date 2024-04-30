@@ -50,7 +50,7 @@ By the end of the call we should have a plan for event capture/opt-out capture a
 
 The customer should come prepared to demo their product to us, where we can help figure out the key tracking events needed for the evaluation to be successful.
 
-If they don't already know about AARRR we should share our [AARRR blog post](https://posthog.com/blog/aarrr-pirate-funnel) and [Tracking Plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) and ask them to review it before the call.
+If they don't already know about AARRR we should share our [AARRR blog post](/blog/aarrr-pirate-funnel) and [Tracking Plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) and ask them to review it before the call.
 
 ### Structure
 

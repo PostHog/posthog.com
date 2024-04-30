@@ -17,6 +17,8 @@ const MyComponent = () => {
         return null
     }
 
+    // Optional use the 'useFeatureFlagWithPayload' hook for fetching the feature flag payload
+
     return showFlaggedFeature ? <Text>Testing feature 😄</Text> : <Text>Not Testing feature 😢</Text>
 }
 ```
@@ -36,6 +38,8 @@ const MyComponent = () => {
       // Do something
     }
 
+    // Optional use the 'useFeatureFlagWithPayload' hook for fetching the feature flag payload
+
     return <div/>
 }
 ```
@@ -44,10 +48,16 @@ const MyComponent = () => {
 
 ```react-native
 // Defaults to undefined if not loaded yet or if there was a problem loading
+posthog.isFeatureEnabled('key-for-your-boolean-flag')
+
+// Defaults to undefined if not loaded yet or if there was a problem loading
 posthog.getFeatureFlag('key-for-your-boolean-flag')
 
 // Multivariant feature flags are returned as a string
 posthog.getFeatureFlag('key-for-your-multivariate-flag')
+
+// Optional fetch the payload returns 'JsonType' or undefined if not loaded yet or if there was a problem loading
+posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')
 ```
 
 ### Reloading flags
@@ -60,14 +70,76 @@ If you have the need to forcefully trigger the refresh however you can use `relo
 posthog.reloadFeatureFlagsAsync().then((refreshedFlags) => console.log(refreshedFlags))
 ```
 
+Or when you want to trigger the reload but you don't care about the result:
+
+```react-native
+posthog.reloadFeatureFlags()
+```
+
 ### Request timeout
 
-You can configure the `feature_flag_request_timeout_ms` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+You can configure the `featureFlagsRequestTimeoutMs` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 10 seconds.
 
-```js
-posthog.init('<ph_project_api_key>', { 
-        api_host: '<ph_instance_address>',
-        feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).
-    }
-)
+```react-native
+export const posthog = new PostHog('<ph_project_api_key>', {
+  // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'  
+  host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
+  featureFlagsRequestTimeoutMs: 10000 // Time in milliseconds. Default is 10000 (10 seconds).
+})
 ```
+
+### Overriding server properties
+
+Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls:
+
+```react-native
+posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})
+```
+
+Note that these are set for the entire session. Successive calls are additive: all properties you set are combined together and sent for flag evaluation.
+
+Whenever you set these properties, we also trigger a reload of feature flags to ensure we have the latest values. You can disable this by passing in the optional parameter for reloading:
+
+```react-native
+posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'}, false)
+```
+
+At any point, you can reset these properties by calling `resetPersonPropertiesForFlags`:
+
+```react-native
+posthog.resetPersonPropertiesForFlags()
+```
+
+The same holds for [group](/manual/group-analytics) properties:
+
+```react-native
+// set properties for a group
+posthog.setGroupPropertiesForFlags({'company': {'property1': 'value', property2: 'value2'}})
+
+// reset properties for a given group:
+posthog.resetGroupPropertiesForFlags('company')
+
+// reset properties for all groups:
+posthog.resetGroupPropertiesForFlags()
+```
+> **Note:** You don't need to add the group names here, since these properties are automatically attached to the current group (set via `posthog.group()`). When you change the group, these properties are reset.
+
+**Automatic overrides**
+
+Whenever you call `posthog.identify` with person properties, we automatically add these properties to flag evaluation calls to help determine the correct flag values. The same is true for when you call `posthog.group()`.
+
+**Default overridden properties**
+
+By default, we always override some properties based on the user IP address.
+
+The list of properties that this overrides:
+
+1. $geoip_city_name
+2. $geoip_country_name
+3. $geoip_country_code
+4. $geoip_continent_name
+5. $geoip_continent_code
+6. $geoip_postal_code
+7. $geoip_time_zone
+
+This enables any geolocation-based flags to work without manually setting these properties.

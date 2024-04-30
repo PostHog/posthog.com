@@ -33,7 +33,7 @@ No! The following are definitely not prerequisites to being cracked:
 
 - **How experienced you are.** There is no number of years of experience that correlates with crackedness, in either direction. 
 
-- **You built a side project used by one million people.&& Side projects are often great signs of crackedness/ownership, but they don’t have to be commercially successful – they just have to be interesting. 
+- **You built a side project used by one million people.** Side projects are often great signs of crackedness/ownership, but they don’t have to be commercially successful – they just have to be interesting. 
 
 Adopting this mentality has noticeably increased the diversity of people applying to work with us at PostHog, as it ignores some of the traditional markers of status when it comes to job applications.
 

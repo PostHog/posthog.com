@@ -15,7 +15,7 @@ To declare an incident, type `/incident` anywhere in Slack. This will create a n
 Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
 
 Some things that should definitely be an incident
-- `app.posthog.com` (PostHog Cloud US) or `eu.posthog.com` (PostHog Cloud EU) being completely unavailable (not just for you)
+- `us.posthog.com` (PostHog Cloud US) or `eu.posthog.com` (PostHog Cloud EU) being completely unavailable (not just for you)
 - No insights can be created
 - Feature flags are not being returned at all, or `/decide` is down
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag
@@ -61,7 +61,7 @@ Examples
 ## What happens during an incident?
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
-- Make sure the right people join the call. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](https://posthog.com/handbook/engineering/feature-ownership) and Marketing if relevant. Marketing can assist on running communication if required.
+- Make sure the right people join the call. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Marketing if relevant. Marketing can assist on running communication if required.
 - Take notes in the incident channel. This should include time stamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status banner on app](https://app.posthog.com/feature_flags/984). There are some templates below to make this easier.
 - Update the [status page](https://status.posthog.com/) - this is best done via the incident slack channel via the incident app actions.

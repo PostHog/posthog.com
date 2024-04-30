@@ -27,7 +27,7 @@ The Sales & CS team act as genuine partners with our users. We should feel as mo
 
 ## Sales & CS vision 
 
-PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-vision-for-2026) is to reach $100m ARR and build a genuinely enduring company. This is what we think CS at PostHog will look like at that point. 
+PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to reach $100m ARR and build a genuinely enduring company. This is what we think CS at PostHog will look like at that point. 
 
 ### Things we want to be great at
 

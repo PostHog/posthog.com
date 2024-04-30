@@ -102,7 +102,7 @@ You can configure the `FeatureFlagRequestTimeout` parameter when initializing yo
    os.Getenv("<ph_project_api_key>"),
    posthog.Config{
       PersonalApiKey:            "your personal API key", // Required for feature flags
-      Endpoint:                  "<ph_instance_address>",
+      Endpoint:                  "<ph_client_api_host>",
       FeatureFlagRequestTimeout: 3 // Time in seconds. Default is 3.
    },
 )

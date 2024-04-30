@@ -15,7 +15,7 @@ func main() {
 		os.Getenv("POSTHOG_API_KEY"),
 		posthog.Config{
 			PersonalApiKey: "your personal API key", // Required for feature flags
-			Endpoint:       "<ph_instance_address>",
+			Endpoint:       "<ph_client_api_host>",
 		},
 	)
 	defer client.Close()

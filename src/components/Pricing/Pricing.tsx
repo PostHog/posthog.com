@@ -28,6 +28,8 @@ import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
+import usePostHog from 'hooks/usePostHog'
+import { RenderInClient } from 'components/RenderInClient'
 
 interface PlanData {
     title: string
@@ -38,50 +40,56 @@ interface PlanData {
     CTALink?: string
 }
 
-const planSummary: PlanData[] = [
-    {
-        title: 'Totally free',
-        price: 'Free',
-        priceSubtitle: '- no credit card required',
-        features: [
-            'Generous usage limits on all products',
-            'Basic product features',
-            '1 project',
-            '1 year data retention',
-            'Community support',
-        ],
-    },
-    {
-        title: 'Ridiculously cheap',
-        price: '$0',
-        features: [
-            'Generous free tier on all products',
-            'Advanced product features',
-            '2 projects',
-            '7 year data retention',
-            'Email support',
-            'Pay only for what you use',
-            <>
-                <span className="opacity-60 text-sm">* Included with any product subscription</span>
-            </>,
-        ],
-    },
-    {
-        title: 'Enterprise',
-        price: 'Custom pricing',
-        priceSubtitle: 'w/ fixed terms',
-        features: [
-            'Unlimited everything',
-            'SAML SSO',
-            'Custom MSA',
-            'Dedicated support',
-            'Personalized onboarding & training',
-            'Advanced permissions & audit logs',
-        ],
-        CTAText: 'Get in touch',
-        CTALink: '/contact-sales',
-    },
-]
+const getPlanSummary = (posthog): PlanData[] => {
+    return [
+        {
+            title: 'Totally free',
+            price: 'Free',
+            priceSubtitle: '- no credit card required',
+            features: [
+                'Generous usage limits on all products',
+                'Basic product features',
+                '1 project',
+                '1 year data retention',
+                'Community support',
+            ],
+        },
+        {
+            title: 'Ridiculously cheap',
+            price: '$0',
+            features: [
+                'Generous free tier on all products',
+                'Advanced product features',
+                <RenderInClient
+                    key="plan-summary-projects"
+                    render={() => <>{posthog?.getFeatureFlag?.('two-project-limit') ? '2 projects' : '10 projects'}</>}
+                    placeholder={<></>}
+                />,
+                '7 year data retention',
+                'Email support',
+                'Pay only for what you use',
+                <>
+                    <span className="opacity-60 text-sm">* Included with any product subscription</span>
+                </>,
+            ],
+        },
+        {
+            title: 'Enterprise',
+            price: 'Custom pricing',
+            priceSubtitle: 'w/ fixed terms',
+            features: [
+                'Unlimited everything',
+                'SAML SSO',
+                'Custom MSA',
+                'Dedicated support',
+                'Personalized onboarding & training',
+                'Advanced permissions & audit logs',
+            ],
+            CTAText: 'Get in touch',
+            CTALink: '/contact-sales',
+        },
+    ]
+}
 
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     <div>
@@ -241,6 +249,7 @@ const Pricing = ({
     groupsToShow: undefined | string[]
     currentProduct?: string | null
 }): JSX.Element => {
+    const posthog = usePostHog()
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const products = useProducts()
     const {
@@ -256,6 +265,7 @@ const Pricing = ({
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
+    const planSummary = getPlanSummary(posthog)
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
@@ -565,10 +575,9 @@ const Pricing = ({
                                                     const planFeature = plan?.features?.find(
                                                         (f) => f.key === feature.key
                                                     )
-
                                                     return (
                                                         <div
-                                                            className="col-span-4 px-3 py-2 text-sm"
+                                                            className="col-span-3 px-3 py-2 text-sm"
                                                             key={`${plan.key}-${feature.key}`}
                                                         >
                                                             {planFeature ? (
@@ -578,7 +587,28 @@ const Pricing = ({
                                                                     )}
                                                                     {planFeature.limit && (
                                                                         <span className="opacity-75">
-                                                                            {planFeature.limit} {planFeature.unit}
+                                                                            {plan.name === 'Pay-per-use' &&
+                                                                            planFeature.key ===
+                                                                                'organizations_projects' ? (
+                                                                                <RenderInClient
+                                                                                    render={() => (
+                                                                                        <>
+                                                                                            {posthog?.getFeatureFlag?.(
+                                                                                                'two-project-limit'
+                                                                                            )
+                                                                                                ? '2'
+                                                                                                : planFeature.limit}{' '}
+                                                                                            {planFeature.unit}
+                                                                                        </>
+                                                                                    )}
+                                                                                    placeholder={<></>}
+                                                                                />
+                                                                            ) : (
+                                                                                <>
+                                                                                    {planFeature.limit}{' '}
+                                                                                    {planFeature.unit}
+                                                                                </>
+                                                                            )}
                                                                         </span>
                                                                     )}
                                                                 </div>

@@ -11,7 +11,7 @@ As we grow, we'll increase the number of managers at PostHog. Here's what a mana
 A manager at PostHog has a short list of responsibilities:
 1. Setting the right context for your direct reports to do their jobs
 2. Making sure your direct reports are happy and productive
-3. Acting as the [hiring manager](https://posthog.com/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
+3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person onboarding and small team offsites
 5. Raising team performance concerns with the relevant member of the exec team if you need help
 

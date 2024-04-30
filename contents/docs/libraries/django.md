@@ -22,7 +22,7 @@ class YourAppConfig(AppConfig):
     name = "your_app_name"
     def ready(self):
         posthog.api_key = '<ph_project_api_key>'
-        posthog.host = '<ph_instance_address>'
+        posthog.host = '<ph_client_api_host>'
 ```
 
 You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings). 

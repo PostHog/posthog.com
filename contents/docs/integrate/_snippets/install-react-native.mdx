@@ -32,8 +32,8 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
-            // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-            host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+            // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+            host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
         }}>
             <MyComponent />
         </PostHogProvider>
@@ -59,8 +59,8 @@ const MyComponent = () => {
 import PostHog from 'posthog-react-native'
 
 export const posthog = new PostHog('<ph_project_api_key>', {
-  // usually 'https://app.posthog.com' or 'https://eu.posthog.com'  
-  host: '<ph_instance_address>' // TIP: host is optional if you use https://app.posthog.com
+  // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'  
+  host: '<ph_client_api_host>' // TIP: host is optional if you use https://us.i.posthog.com
 })
 
 
@@ -88,12 +88,16 @@ You can further customize how PostHog works through its configuration on initial
 
 ```ts
 export const posthog = new PostHog("<ph_project_api_key>", {
-    /** PostHog API host (usually 'https://app.posthog.com' by default or 'https://eu.posthog.com') */
-    host?: string, // TIP: host is optional if you use https://app.posthog.com
+    /** PostHog API host (usually 'https://us.i.posthog.com' by default or 'https://eu.i.posthog.com') */
+    host?: string, // TIP: host is optional if you use https://us.i.posthog.com
     /** The number of events to queue before sending to PostHog (flushing) */
     flushAt?: number = 20,
     /** The interval in milliseconds between periodic flushes */
     flushInterval?: number = 10000,
+    /** The maximum number of queued messages to be flushed as part of a single batch (must be higher than 'flushAt'). */
+    maxBatchSize?: number = 100,
+    /** The maximum number of cached messages either in memory or on the local storage (must be higher than 'flushAt'). */
+    maxQueueSize?: number = 1000,
     /** If set to true the SDK is essentially disabled (useful for local environments where you don't want to track anything) */
     disabled?: boolean,
     /** If set to false the SDK will not track until the 'optIn' function is called. */
@@ -115,6 +119,8 @@ export const posthog = new PostHog("<ph_project_api_key>", {
     fetchRetryDelay?: number = 3000,
     /** Timeout in milliseconds for any calls. Defaults to 10 seconds. */
     requestTimeout?: number = 10000,
+    /** Timeout in milliseconds for feature flag calls. Defaults to 10 seconds. */
+    featureFlagsRequestTimeoutMs?: number = 10000,
     /** For Session Analysis how long before we expire a session (defaults to 30 mins) */
     sessionExpirationTimeSeconds?: number = 1800,
     /** Whether to post events to PostHog in JSON or compressed format. Defaults to 'form' */
@@ -134,8 +140,10 @@ export const posthog = new PostHog("<ph_project_api_key>", {
     customStorage?: PostHogCustomStorage,
     /** Captures native app lifecycle events such as Application Installed, Application Updated, Application Opened, Application Became Active and Application Backgrounded.
      * By default is false.
-     * If you're already using the 'captureLifecycleEvents' options with 'withReactNativeNavigation' or 'PostHogProvider, you should not set this to true, otherwise you may see duplicated events.
+     * If you're already using the 'captureLifecycleEvents' options with 'initReactNativeNavigation' or 'PostHogProvider, you should not set this to true, otherwise you may see duplicated events.
      */
-    captureNativeAppLifecycleEvents?: boolean = false
+    captureNativeAppLifecycleEvents?: boolean = false,
+    /** When true, disables automatic GeoIP resolution for events and feature flags. Defaults to false */
+    disableGeoip?: = false
 })
 ```

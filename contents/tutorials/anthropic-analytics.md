@@ -345,6 +345,6 @@ We've shown you the basics of creating insights from your product's Claude usage
 
 ## Further reading
 
+- [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
-- [How to track new and returning users in PostHog](/tutorials/track-new-returning-users)

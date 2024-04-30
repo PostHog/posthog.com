@@ -54,7 +54,7 @@ If you're having issues with recordings not looking correct, there are a few thi
 
 ### Ensure your website permits PostHog CORS
 
-Most assets rendered on your website or app are captured **inline** – meaning we keep a copy of the icon, css etc. to use when replaying. For some assets however, this is either too difficult or too costly to do, so instead we load them directly from the original webserver (just like your website does). This can lead to CORS issues where the webserver does not permit **app.posthog.com** (or **eu.posthog.com**) to load the required asset. Unfortunately we cannot easily detect when this happens, but the browsers's developer tools `(Option + ⌘ + J, or Shift + CTRL + J)` will log when these errors occur saying something like:
+Most assets rendered on your website or app are captured **inline** – meaning we keep a copy of the icon, css etc. to use when replaying. For some assets however, this is either too difficult or too costly to do, so instead we load them directly from the original webserver (just like your website does). This can lead to CORS issues where the webserver does not permit **us.posthog.com** (or **eu.posthog.com**) to load the required asset. Unfortunately we cannot easily detect when this happens, but the browsers's developer tools `(Option + ⌘ + J, or Shift + CTRL + J)` will log when these errors occur saying something like:
 
 ```
 Access to font at 'https://yourwebsite.com/fonts/MyriadPro-Bold.woff2' from origin 'https://app.posthog.com has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.

@@ -38,7 +38,7 @@ const otherLinks = [
         name: 'Company',
         links: [
             { name: 'Story', to: '/handbook/company/story' },
-            { name: 'People', to: '/people' },
+            { name: 'Team', to: '/team' },
             { name: 'Strategy overview', to: '/handbook/strategy/overview' },
             { name: 'Objectives', to: '/handbook/strategy/objectives' },
         ],

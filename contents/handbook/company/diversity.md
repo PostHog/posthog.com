@@ -16,7 +16,7 @@ We are aware that diversity & inclusion efforts are ongoing, and that we will ne
 
 ## How diversity helps us
 
-At PostHog, we view diversity as a tactic, like generous and transparent [compensation](https://posthog.com/handbook/people/compensation#how-it-works), or communicating company goals to set context for our team. There is plenty of research into the link between highly diverse teams and increased [performance](https://www.ucdenver.edu/docs/librariesprovider68/default-document-library/jmna-articles-bonuscontent-2.pdf?Status=Temp&sfvrsn=84c0fb9_2) and [innovation](https://www.bcg.com/en-us/publications/2018/how-diverse-leadership-teams-boost-innovation). 
+At PostHog, we view diversity as a tactic, like generous and transparent [compensation](/handbook/people/compensation#how-it-works), or communicating company goals to set context for our team. There is plenty of research into the link between highly diverse teams and increased [performance](https://www.ucdenver.edu/docs/librariesprovider68/default-document-library/jmna-articles-bonuscontent-2.pdf?Status=Temp&sfvrsn=84c0fb9_2) and [innovation](https://www.bcg.com/en-us/publications/2018/how-diverse-leadership-teams-boost-innovation). 
 
 ### How we support diversity
 
