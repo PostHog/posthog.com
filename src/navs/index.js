@@ -2706,10 +2706,10 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'LLM Insights',
+                name: 'LLM Analytics',
                 icon: 'IconAdvanced',
                 color: 'yellow',
-                url: '/llm-insights',
+                url: '/llm-analytics',
             },
             {
                 name: 'Product OS',

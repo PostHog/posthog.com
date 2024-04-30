@@ -10,6 +10,7 @@ import {
     IconPieChart,
     IconNotification,
     IconRewindPlay,
+    IconAdvanced,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -333,14 +334,14 @@ export const LLMAnalytics = () => {
     return (
         <Layout>
             <SEO
-                title="Surveys - PostHog"
+                title="LLM Analytics - PostHog"
                 description="Ask anything with no-code surveys – or use the API for complete control."
                 image={`/images/og/surveys.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
-                    color="salmon"
-                    icon={<IconMessage />}
+                    color="yellow"
+                    icon={<IconAdvanced />}
                     product={product.capitalized}
                     title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
                     description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
