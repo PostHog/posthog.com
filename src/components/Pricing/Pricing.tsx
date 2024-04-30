@@ -577,7 +577,7 @@ const Pricing = ({
                                                     )
                                                     return (
                                                         <div
-                                                            className="col-span-3 px-3 py-2 text-sm"
+                                                            className="col-span-4 px-3 py-2 text-sm"
                                                             key={`${plan.key}-${feature.key}`}
                                                         >
                                                             {planFeature ? (
