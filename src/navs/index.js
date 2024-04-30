@@ -2038,6 +2038,18 @@ export const docsMenu = {
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Integrating with Langfuse',
+                    url: '/docs/llm-analytics/langfuse',
+                    icon: 'IconShare',
+                    color: 'blue',
+                },
+                {
+                    name: 'Integrating with Helicone',
+                    url: '/docs/llm-analytics/helicone',
+                    icon: 'IconShare',
+                    color: 'blue',
+                },
             ],
         },
         {
