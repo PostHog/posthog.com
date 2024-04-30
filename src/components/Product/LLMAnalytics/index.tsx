@@ -453,24 +453,24 @@ export const LLMAnalytics = () => {
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to run a fake door test"
-                            description='A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building.'
-                            url="/tutorials/fake-door-test"
+                            title="How to set up LLM analytics for Cohere"
+                            description="Discover how to capture important metrics from Cohere and ingest them into PostHog. Track metrics such as cost per model, cost per user, and your average API response time."
+                            url="/tutorials/cohere-analytics"
                         />
                         <TutorialCard
-                            title="Get feedback and book user interviews with surveys"
-                            description="PostHog's surveys help automate the process of getting feedback and booking interviews. In this tutorial, we show how to set up surveys to do both."
-                            url="/tutorials/feedback-interviews-site-apps"
+                            title="How to set up LLM analytics for Anthropic's Claude"
+                            description="Learn how to build a basic Next.js app which implements the Claude API, and then pass events to PostHog so you can track usage metrics for your LLM product."
+                            url="/tutorials/anthropic-analytics"
                         />
                         <TutorialCard
-                            title="How to measure your NPS score in PostHog"
-                            description="Asking NPS asking users how likely they are to recommend your product or service, so you can gauge product-market fit."
-                            url="/tutorials/nps-survey"
+                            title="How to set up LLM analytics for ChatGPT"
+                            description="Track ChatGPT API usage, costs, latency and more. This tutorial guides you through building a demo app, implementing the API, and integrating with PostHog."
+                            url="/tutorials/chatgpt-analytics"
                         />
                         <TutorialCard
-                            title="How to create custom surveys"
-                            description="Use the API to create a completely custom experience."
-                            url="/tutorials/survey"
+                            title="How to analyze surveys ChatGPT"
+                            description="Learn how to create a basic Node.js script, parse a CSV of survey answers, and use the ChatGPT API to extract useful information such as sentiment and theme."
+                            url="/tutorials/chatgpt-analytics"
                         />
                     </ul>
                 </section>
@@ -491,7 +491,9 @@ export const LLMAnalytics = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'surveys').children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'llm analytics').children}
+                    />
                 </section>
 
                 <section id="team" className="mb-20 px-5">
