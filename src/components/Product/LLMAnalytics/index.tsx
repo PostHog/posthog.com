@@ -406,32 +406,24 @@ export const LLMAnalytics = () => {
                                 title="Reasons a competitor might be better for you (for now...)"
                                 image={
                                     <StaticImage
-                                        src="../../../images/products/competitors-surveys.png"
+                                        src="../../../images/products/competitors-pa.png"
                                         className="max-w-[159px]"
                                         placeholder="none"
                                     />
                                 }
                             >
                                 <ul>
-                                    <li>
-                                        Forms
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                PostHog offers multi-step surveys, but they won't be full-page forms
-                                                such as Typeform or Google Forms
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>AI-powered analysis or recommendations based on results</li>
-                                    <li>Limited formatting options</li>
+                                    <li>You want lots of closed-source point solutions</li>
+                                    <li>No need for surveys, flags, experiments, replays</li>
+                                    <li>Alerting for when costs move beyond thresholds</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>No-code surveys with customizable colors and removable branding</li>
-                                    <li>Automatic NPS score calculations</li>
-                                    <li>Robust targeting &amp; integration with feature flags</li>
-                                    <li>Tight integration with analytics, experiments, and session replay</li>
+                                    <li>Integrate with your existing LLM tools</li>
+                                    <li>Track latency, cost, and more in one place</li>
+                                    <li>One-click dashboards to get you setup fast</li>
+                                    <li>Tight integration with analytics, surveys, and replays</li>
                                 </ul>
                             </VsPostHog>
                         </div>
