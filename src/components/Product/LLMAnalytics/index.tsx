@@ -357,8 +357,8 @@ export const LLMAnalytics = () => {
                 <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-1 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="uses surveys to organize interviews and more"
-                            quote="We even use surveys to send a little pop-up to our most active users and ask them to review us on G2."
+                            outcome="uses the entire PostHog toolset to build their generative voice AI."
+                            quote="We used to have Looker, and a bunch of other tools. Now it's just PostHog, BigQuery, and Stripe...PostHog is amazing. It reins in the chaos so we have everything in one place."
                             customer={elevenlabs}
                         />
                     </ul>
