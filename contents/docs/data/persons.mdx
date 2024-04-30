@@ -16,25 +16,27 @@ export const personProfileDark = "https://res.cloudinary.com/dmukukwp6/image/upl
     className="rounded shadow-xl"
 />
 
-People in PostHog represent users who do events. Every event has a `distinct_id` representing a person attached to it. Depending on your person profile processing configuration, these persons may also have profiles in PostHog you can view by clicking on the [People tab](https://us.posthog.com/persons). 
+People in PostHog represent users who do events. Every event has a `distinct_id` representing a person attached to it. 
 
-Person profiles and user properties enable:
+Capturing person profiles and user properties enable:
 
+- Viewing person profiles in the [People tab](https://us.posthog.com/persons)
 - Filtering on user properties
 - Merging identities across `distinct_id` values (i.e. merging an anonymous user with a logged in user)
 - Cohort creation
 - Feature flag, experimentation, and survey targeting on user properties
 - Tracking initial UTM values and referrers across anonymous and identified users
 
-Beyond this, there are many use cases that don't require person profiles. Some examples:
+On the other hand, there are many use cases that don't require person profiles. Some examples:
 
 - Tracking a marketing website
+- Content-focused sites
 - B2C apps where users don't sign up or log in
 - High volume API server events
 
 For backward compatibility and to make sure we don't drop person information accidentally, person profile processing is enabled by default for configs without any option set. Also, if a user distinct ID already has a person profile created, we count events as ones with person profiles.
 
-> **Note:** Since we changed our data structure to enable the removal of person profiles, any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
+> **Note:** Since we changed our data structure to make person profiles optional, any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
 
 ## Capturing person profiles
 
