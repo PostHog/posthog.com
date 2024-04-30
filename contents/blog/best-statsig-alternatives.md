@@ -81,6 +81,8 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 > 
 > PostHog is an ideal Statsig alternative if you're looking for a more powerful analytics tool that can also serve your A/B testing and feature management needs. It also offers a dedicated EU-hosted cloud at no extra cost.
 
+<br />
+
 ## 2. LaunchDarkly
 
 - **Founded:** 2014
@@ -139,12 +141,13 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 >
 > LaunchDarkly is a good alternative if you desire more powerful feature management options compared to Statsig, though it doesn't offer some of Statsig's nice perks, such as unlimited seats and multi-armed bandit experiments. It also has no analytics features, so you'll need a separate tool for that.
 
+<br />
+
 ## 3. Amplitude
 
 - **Founded:** 2012
 - **Most similar to:** PostHog, Statsig
 - **Typical users:** Product managers, data analysts, marketing teams
-- **Typical customers:** Mid-size and large enterprises
 
 ![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/amplitude-website.png)
 
@@ -162,7 +165,7 @@ Unsurprisingly, given it was founded in 2012, it's much more widely used. Accord
 
 ### How does Amplitude compare to Statsig?
 
-Like a few alternatives on this list, Amplitude doesn't support multi-armed bandit experiments like Statsig does, but it's built-in product analytics is significantly more powerful.
+Like a few alternatives on this list, Amplitude doesn't support multi-armed bandit experiments like Statsig does, but its built-in product analytics is significantly more powerful.
 
 <ComparisonTable column1="Amplitude" column2="Statsig">
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
@@ -191,18 +194,19 @@ According to G2 reviews, people like Amplitude because:
 
 > #### Bottom line
 >
-> Like PostHog, Amplitude is a good option if you value powerful 
+> Like PostHog, Amplitude is a good option if you value powerful
+
+<br />
 
 ## 4. Optimizely
 
 - **Founded:** 2010
 - **Similar to:** VWO
 - **Typical users:** Enterprise marketing, frontend teams
-- **Typical customers:** Large retail, travel, and other B2C companies
 
 ![Optimizely](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-launchdarkly-alternatives/optimizely.png)
 
-## What is Optimizely?
+### What is Optimizely?
 
 [Optimizely](/blog/posthog-vs-optimizely) is an all-in-one set of tools for marketing and product teams. It offers a combination of content management, marketing, web and feature experiments, and ecommerce optimization tools, all geared toward optimizing web experiences.
 
@@ -255,12 +259,13 @@ According to G2 reviews, people are fans of Optimizely because:
 >
 > Optimizely's no code experiments make it a good choice if you need a tool that's accessible for non-technical teams, such as marketing, something neither Statsig, nor the likes of PostHog, LaunchDarkly or Amplitude, currently offer.
 
+<br />
+
 ## 5. VWO
 
 - **Founded:** 2009
 - **Similar to:** Optimizely, PostHog
 - **Typical users:** Product managers, engineers, UX designers
-- **Typical customers:** Enterprise B2B and B2C companies
 
 ![VWO](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-launchdarkly-alternatives/vwo.png)
 
@@ -316,12 +321,13 @@ Based on G2 reviews, the biggest reasons to choose VWO are:
 >
 > Like Optimizely, VWO is a good alternative to Statsig if you're looking for a tool anyone in your company can use. It offers a no code editor for marketing experiments, while also offering tools like heatmaps and replays that are useful for non-engineers.
 
+<br />
+
 ## 6. GrowthBook
 
 - **Founded:** 2020
 - **Similar to:** LaunchDarkly, Statsig
 - **Typical users:** Engineers and data scientists
-- **Typical customers:** Security and compliance focused companies
 
 ![GrowthBook](https://res.cloudinary.com/dmukukwp6/image/upload/v1713309283/posthog.com/contents/images/blog/best-split-alternatives/growthbook.png)
 
@@ -375,12 +381,13 @@ According to G2, reviewers choose GrowthBook for the following.
 > #### Bottom line
 > Being open source, free, and self-hostable, GrowthBook makes for a good alternative to Statsig, especially for companies in tricky regulatory situations.
 
+<br />
+
 ## 7. Kameleoon
 
 - **Founded:** 2012
 - **Similar to:** LaunchDarkly, VWO
 - **Typical users:** Product managers and developers
-- **Typical customers:** Ecommerce, retail, and entertainment companies
 
 ![Kameleoon](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355416/posthog.com/contents/images/blog/best-optimizely-alternatives/kameleoon.png)
 
@@ -388,7 +395,7 @@ According to G2, reviewers choose GrowthBook for the following.
 
 Kameleoon is a developer-focused complete optimization platform with A/B testing, feature management, and personalization. On top of these, it includes an AI copilot that helps generate options, do predictive targeting, assist in decisions, and more. According to [BuiltWith](https://trends.builtwith.com/analytics/Kameleoon), as of April 2024, 816 of the top one million websites deploy Kameleoon, similar to Statsig's 706.
 
-### Key features
+#### Key features
 
 - 🌐 **Web experimentation:** Use their smart graphic editor and widget library to run flicker-free A/B tests on your website.
 
