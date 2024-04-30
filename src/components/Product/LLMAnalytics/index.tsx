@@ -394,13 +394,8 @@ export const LLMAnalytics = () => {
 
             <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
-                    <section>
-                        <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
-                    </section>
-
-                    <section className="mb-20">
-                        <h3 className="text-center mb-8">So, what's best for you?</h3>
+                    <section className="mb-20 mt-20">
+                        <h3 className="text-center mb-8">How does PostHog compare?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
                                 title="Reasons a competitor might be better for you (for now...)"
