@@ -5,7 +5,7 @@ author:
   - andy-vandervell
 rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1710126633/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 category: General
 tags:
@@ -438,3 +438,17 @@ According to [G2 reviews](https://www.g2.com/products/kameleoon/reviews), users 
 
 > #### Bottom line
 > For companies looking for a developer-focused optimization platform, Kameleoon is a good alternative. Though it not being self-serve is a major downside.
+
+<br />
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect Split replacement if:
+
+- You value transparency. We're open source and open core.
+- You want more than just A/B testing and feature flags. We have a full suite of product analytics, session replays, and surveys.
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+
+Check out [our product pages](/feature-flags) and [read our docs](/docs) to learn more.
