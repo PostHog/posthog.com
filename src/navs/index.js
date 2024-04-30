@@ -2040,13 +2040,13 @@ export const docsMenu = {
                 },
                 {
                     name: 'Integrating with Langfuse',
-                    url: '/docs/llm-analytics/langfuse',
+                    url: '/docs/llm-analytics/langfuse-posthog',
                     icon: 'IconShare',
                     color: 'blue',
                 },
                 {
                     name: 'Integrating with Helicone',
-                    url: '/docs/llm-analytics/helicone',
+                    url: '/docs/llm-analytics/helicone-posthog',
                     icon: 'IconShare',
                     color: 'blue',
                 },

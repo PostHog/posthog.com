@@ -23,7 +23,7 @@ type LLMAnalyticsProps = {
 
 export const Intro = () => (
     <header className="pb-8">
-        <h1 className="text-4xl mt-0 mb-2">LLM Analytics</h1>
+        <h1 className="text-4xl mt-0 mb-2">LLM analytics</h1>
         <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
             Learn how to gather insights for your LLM products.
         </h3>
@@ -107,7 +107,7 @@ export const Content = ({ quickLinks = false }) => {
             </section>
 
             <section>
-                <h3 className="mb-1 text-xl">Integrations</h3>
+                <h3 className="mb-1 text-xl">Dashboards</h3>
                 <p className="text-[15px]">
                     Choose from a variety of pre-built integrations to get insights quickly from existing tools.
                 </p>
@@ -115,7 +115,7 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-2">
                     <ResourceItem
                         title="Langfuse"
-                        description="Bring Langfuse tracing information into PostHog"
+                        description="Bring Langfuse tracing information into PostHog and track essential metrics"
                         Image={
                             <StaticImage
                                 alt=""
@@ -130,7 +130,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                     <ResourceItem
                         title="Helicone"
-                        description="Integrate with Helicone seamlessly"
+                        description="Integrate with Helicone and export data to a convenient dashboard"
                         Image={
                             <StaticImage
                                 alt=""
