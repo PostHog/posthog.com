@@ -27,7 +27,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog is an open-source, all-in-one platform for feature management, A/B testing, product analytics, session replay, and user surveys. It's also building a [data warehouse for startups](/docs/data-warehouse) and a customer data platform (CDP), though both are currently in closed beta.
 
-By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevanLabs](/customers/elevenlabs) and [carVertical](/feature-flags), which use PostHog for both feature flags and analytics.
+By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [carVertical](/feature-flags), which use PostHog for both feature flags and analytics.
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), PostHog is used by 4,661 (0.47%) of the top 1 million websites, compared to Statsig's 706 (0.07%). This difference is [confirmed by Google Trends](https://trends.google.com/trends/explore?date=today%205-y&q=posthog,statsig) data.
 
@@ -95,7 +95,7 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 
 [LaunchDarkly](/blog/posthog-vs-launchdarkly) is an enterprise feature flag and A/B testing platform. It helps developers de-risk releases, target experiences, and optimize their products. It provides automation and governance features to ensure teams are following [engineering best practices](/product-engineers/feature-flag-best-practices).
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), as of April 2024, 1,072 of the top one million websites use LaunchDarkly, significantly more than the 706 that use Statsig.
+According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), as of April 2024, 1,072 of the top one million websites use LaunchDarkly, more than the 706 that use Statsig.
 
 #### Key features
 
@@ -153,14 +153,18 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 
 ### What is Amplitude?
 
-Amplitude was one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it’s also added A/B testing, feature flags, session replays, and a customer data platform, making it an obvious alternative to Statsig.
+[Amplitude](/blog/best-amplitude-alternatives) was one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it’s also added A/B testing, feature flags, session replays, and a customer data platform, making it an obvious alternative to Statsig.
 
 Unsurprisingly, given it was founded in 2012, it's much more widely used. According to [BuiltWith](https://trends.builtwith.com/analytics/Amplitude), as of April 2024, 9,760 of the top million sites use Amplitude, compared to Statsig's 706.
 
 #### Key features
+
 - 📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+
 - 🧪 **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
+
 - 👦 **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
+
 - 🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
 
 ### How does Amplitude compare to Statsig?
@@ -188,13 +192,13 @@ According to G2 reviews, people like Amplitude because:
 
 1. **It's simple to use:** Amplitude makes it easy for non-technical users to get insights about their product and make improvements. Amplitude is built for users like product managers and marketers, making it a popular choice for them.
 
-2. **It offers built-in A/B testing:** Unlike FullStory, Amplitude offers integrated experimentation features. This enables companies to run experiments on existing cohorts, and then analyze the data in a single place.
+2. **It offers built-in A/B testing:** Amplitude offers integrated experimentation features. This enables companies to run experiments on existing cohorts, and then analyze the data in a single place.
 
 3. **It helps them become data-driven:** Amplitude users appreciate it helps them become data-driven. It becomes easy to add data, visualize it, and make decisions, and they can use it as a source of truth thanks to its built-in customer data platform.
 
 > #### Bottom line
 >
-> Like PostHog, Amplitude is a good option if you value powerful
+> Like PostHog, Amplitude is a good alternative if you value powerful analytics and experimentation in one, though it's less geared to engineers than Statsig or PostHog.
 
 <br />
 
@@ -210,7 +214,7 @@ According to G2 reviews, people like Amplitude because:
 
 [Optimizely](/blog/posthog-vs-optimizely) is an all-in-one set of tools for marketing and product teams. It offers a combination of content management, marketing, web and feature experiments, and ecommerce optimization tools, all geared toward optimizing web experiences.
 
-As one of the oldest alternatives in this guide, it's also one of the most widely used. According to data from [BuiltWith](https://trends.builtwith.com/analytics/Optimizely), as of April 2024 Optimizely is deployed on 5,071 of the top 1 million websites, compared to Statsig's 706. Its popularity has declined somewhat in recent years, however, due in large to greater competition – usage peaked at around 12,500 of the top 1 million websites back in 2016.
+As one of the oldest alternatives in this guide, it's also one of the most widely used. According to data from [BuiltWith](https://trends.builtwith.com/analytics/Optimizely), as of April 2024, Optimizely is deployed on 5,071 of the top 1 million websites, compared to Statsig's 706. Its popularity has declined somewhat in recent years, however, due in large to greater competition – usage peaked at around 12,500 of the top million websites back in 2016.
 
 #### Key features
 
@@ -249,7 +253,7 @@ On paper, Optimizely is quite similar to Statsig, but it's more focused on marke
 
 According to G2 reviews, people are fans of Optimizely because:
 
-1. **It's easy to use for non-engineers**:** Optimizely makes it easy for anyone to run web experiments thanks to no code visual editor.
+1. **It's easy to use for non-engineers**: Optimizely makes it easy for anyone to run web experiments thanks to no code visual editor.
 
 2. **It integrates with their analytics platforms:** Optimizely doesn't have built-in analytics, but reviewers appreciate its integrations with Google Analytics, Adobe Analytics, and others.
 
@@ -270,7 +274,8 @@ According to G2 reviews, people are fans of Optimizely because:
 ![VWO](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-launchdarkly-alternatives/vwo.png)
 
 ### What is VWO?
-VWO is a digital optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics. The platform is home to multiple different products including testing, insights, data, personalize, plan, and web rollouts.
+
+[VWO](/blog/best-vwo-alternatives) is a digital optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics. The platform is home to multiple different products including testing, insights, data, personalize, plan, and web rollouts.
 
 It's a popular tool – according to BuiltWith, as of April 2024 it's used by 8,981 of the top 1 million websites. It's grown noticeably in the last 12 months or so, likely due to customers migrating from Google Optimize, which was shut down in September 2023.
 
@@ -333,7 +338,9 @@ Based on G2 reviews, the biggest reasons to choose VWO are:
 
 ### What is GrowthBook?
 
-[GrowthBook](/blog/posthog-vs-growthbook) is a warehouse-native feature flag and experimentation platform. Its biggest selling point is integrating with the product and data tools you already use. Being open source and warehouse-native makes it a popular choice with companies in strict regulatory environments GrowthBook is open source with 5.5k stars on GitHub. It is self-hostable, but you can also use its hosted cloud version.
+[GrowthBook](/blog/posthog-vs-growthbook) is a warehouse-native feature flag and experimentation platform. Its biggest selling point is integrating with the product and data tools you already use.
+
+It's a popular choice for companies in strict regulatory environments because it is warehouse-native and self-hostable, but you can also use its hosted cloud version.  It is also open source with 5.5k stars on GitHub.
 
 #### Key features
 
@@ -372,7 +379,7 @@ GrowthBook doesn't support all the features Statsig offers, though it does have 
 
 According to G2, reviewers choose GrowthBook for the following.
 
-1. **Warehouse native:** GrowthBook's integrations with the warehouses people are already using is a standout feature. It enables them to extract and make use of the data they already have.
+1. **Warehouse-native:** GrowthBook's integrations with the warehouses people are already using is a standout feature. It enables them to extract and make use of the data they already have.
 
 2. **Visual editor:** The visual A/B test editor and experiment preview enable non-technical users to make full use of GrowthBook.
 
@@ -393,7 +400,9 @@ According to G2, reviewers choose GrowthBook for the following.
 
 ### What is Kameleoon?
 
-Kameleoon is a developer-focused complete optimization platform with A/B testing, feature management, and personalization. On top of these, it includes an AI copilot that helps generate options, do predictive targeting, assist in decisions, and more. According to [BuiltWith](https://trends.builtwith.com/analytics/Kameleoon), as of April 2024, 816 of the top one million websites deploy Kameleoon, similar to Statsig's 706.
+Kameleoon is a developer-focused complete optimization platform with A/B testing, feature management, and personalization. On top of these, it includes an AI copilot that helps generate options, do predictive targeting, assist in decisions, and more. 
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Kameleoon), as of April 2024, 816 of the top one million websites deploy Kameleoon, similar to Statsig's 706.
 
 #### Key features
 
@@ -407,7 +416,7 @@ Kameleoon is a developer-focused complete optimization platform with A/B testing
 
 ### How does Kameleoon compare to Statsig?
 
-Like Statsig, Kameleoon is an A/B testing first and foremost, though it hasn't branched it other arenas, like analytics. Its AI copilot feature is a major differentiator, while it can be self-hosted if this is a requirement for your business.
+Like Statsig, Kameleoon is an A/B testing platform first and foremost, though it hasn't branched it other arenas, like analytics. Its AI copilot feature is a major differentiator, while it can be self-hosted if this is a requirement for your business.
 
 <ComparisonTable column1="Kameleoon" column2="Statsig">
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
@@ -445,7 +454,7 @@ According to [G2 reviews](https://www.g2.com/products/kameleoon/reviews), users 
 
 Here's the (short) sales pitch.
 
-We're biased, obviously, but we think PostHog is the perfect Split replacement if:
+We're biased, obviously, but we think PostHog is the perfect Statsig replacement if:
 
 - You value transparency. We're open source and open core.
 - You want more than just A/B testing and feature flags. We have a full suite of product analytics, session replays, and surveys.
