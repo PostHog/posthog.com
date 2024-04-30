@@ -2050,6 +2050,12 @@ export const docsMenu = {
                     icon: 'IconShare',
                     color: 'blue',
                 },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/llm-analytics/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'red',
+                },
             ],
         },
         {
