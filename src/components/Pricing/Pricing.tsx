@@ -466,7 +466,7 @@ const Pricing = ({
                             All plans include unlimited team members and no limits on tracked users.
                         </p>
                         <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
-                            <div className="grid grid-cols-[repeat(3,_minmax(260px,_1fr))] lg:grid-cols-4 gap-4 mb-12 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
+                            <div className="grid grid-cols-[repeat(3,_minmax(260px,_1fr))] xl:max-w-4xl xl:mx-auto gap-4 mb-12 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
                                 {planSummary.map((plan, index) => (
                                     <Plan key={index} planData={plan} />
                                 ))}
