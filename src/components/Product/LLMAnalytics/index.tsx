@@ -291,20 +291,19 @@ const PairsWithArray = [
     {
         icon: <IconGraph />,
         product: 'Product analytics',
-        description: 'Use insights to breakdown average scores, analyze results over time, or find trends.',
+        description: 'Use insights to dive deeper into your data and track sign-ups, payments, and more.',
         url: '/product-analytics',
     },
     {
-        icon: <IconToggle />,
-        product: 'Feature flags',
-        description: 'Connect a survey to a feature flag to gather feedback on your latest ideas and tests.',
-        url: '/feature-flags',
+        icon: <IconMessage />,
+        product: 'Surveys',
+        description: 'Target users with surveys to gather CSAT scores and measure satisfaction with your model.',
+        url: '/surveys',
     },
     {
         icon: <IconRewindPlay />,
         product: 'Session replay',
-        description:
-            "Watch recordings of users completing a survey to understand full context about a user's behavior.",
+        description: 'Watch recordings of users interacting with your LLM to get full context about their behavior.',
         url: '/session-replay',
     },
 ]
