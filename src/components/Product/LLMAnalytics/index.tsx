@@ -334,7 +334,7 @@ export const LLMAnalytics = () => {
     return (
         <Layout>
             <SEO
-                title="LLM Analytics - PostHog"
+                title="LLM analytics - PostHog"
                 description="Ask anything with no-code surveys – or use the API for complete control."
                 image={`/images/og/surveys.jpg`}
             />

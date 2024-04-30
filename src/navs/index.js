@@ -2706,7 +2706,7 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'LLM Analytics',
+                name: 'LLM analytics',
                 icon: 'IconAdvanced',
                 color: 'yellow',
                 url: '/llm-analytics',
