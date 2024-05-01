@@ -171,6 +171,7 @@ const allProductsData = graphql`
                     description
                     docs_url
                     image_url
+                    icon_key
                     inclusion_only
                     contact_support
                     addons {
@@ -178,6 +179,7 @@ const allProductsData = graphql`
                         description
                         docs_url
                         image_url
+                        icon_key
                         inclusion_only
                         name
                         type
@@ -190,6 +192,8 @@ const allProductsData = graphql`
                             plan_key
                             product_key
                             unit
+                            flat_rate
+                            unit_amount_usd
                             features {
                                 description
                                 key
