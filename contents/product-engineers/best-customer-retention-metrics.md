@@ -1,4 +1,4 @@
-date: 2023-05-09
+date: 2024-05-01
 title: 'The most useful customer retention metrics, ranked'
 author:
   - james-temperton
