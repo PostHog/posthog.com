@@ -71,7 +71,7 @@ const features = [
     },
     {
         title: 'Correlate feedback',
-        description: 'Understand how user feedback translates into engagement',
+        description: 'Understand how user evaluations translates into engagement',
         image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
 ]
