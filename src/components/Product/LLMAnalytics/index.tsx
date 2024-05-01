@@ -49,8 +49,8 @@ const product = {
     freeTier: 'n/a',
 }
 
-const team = 'Marketing'
-const teamSlug = '/teams/marketing'
+const team = 'Product Analytics'
+const teamSlug = '/teams/product-analytics'
 
 const featuresPerRow = 2
 const features = [
