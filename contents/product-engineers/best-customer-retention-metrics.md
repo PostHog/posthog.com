@@ -121,7 +121,7 @@ The more customers pay, the lower your churn should be. At $250 average revenue 
 
 ### What is NPS? 
 
-Developed in the early-2000s and popularized by an article in _[Harvard Business Review](https://hbr.org/2003/12/the-one-number-you-need-to-grow)_, the Net Promoter Score continues to be a very popular way of measuring customer loyalty. It’s based on one question: ‘How likely are you to recommend [company/product/service] to a friend or colleague on a scale of 0 to 10?’** **Customers are then put into one of three buckets. 
+Developed in the early-2000s and popularized by an article in _[Harvard Business Review](https://hbr.org/2003/12/the-one-number-you-need-to-grow)_, the Net Promoter Score continues to be a very popular way of measuring customer loyalty. It’s based on one question: ‘How likely are you to recommend [company/product/service] to a friend or colleague on a scale of 0 to 10?’Customers are then put into one of three buckets. 
 
 * **Promoters**, who gave a score of 9 or 10, are loyal enthusiasts and very likely to recommend you. 
 * **Passives**, who gave a score of 7 or 8, aren’t super happy or unhappy but are also unlikely to promote your business. 
