@@ -603,7 +603,7 @@ const Pricing = ({
                                                         key={`${plan.key}-${feature.key}`}
                                                     >
                                                         {planFeature ? (
-                                                            <div className="flex gap-x-2">
+                                                            <div className="flex gap-x-2 visible">
                                                                 {planFeature.note ?? (
                                                                     <IconCheck className="w-5 h-5 text-green" />
                                                                 )}
