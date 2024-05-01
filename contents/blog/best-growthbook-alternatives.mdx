@@ -1,0 +1,424 @@
+---
+title: 'The best GrowthBook alternatives & competitors, compared'
+date: 2024-04-26
+author:
+  - ian-vanagas
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Similar to:** VWO, LaunchDarkly
+- **Typical users:** Engineers and product teams
+- **Typical customers:** Mid-size B2Bs and startups
+
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/feature-flags.png)
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is an open source suite of product and data tools. It combines feature flags, A/B testing, product analytics, session replay, and user surveys into one product. This means it's not only an alternative to [GrowthBook](/blog/posthog-vs-growthbook) but also tools like [Mixpanel](/blog/posthog-vs-mixpanel) and [Hotjar](/blog/posthog-vs-hotjar).
+
+As of April 2024, 4,661 of the top million websites use PostHog according to [BuiltWith](https://trends.builtwith.com/analytics/PostHog). It also has 17.2k stars on [GitHub](https://github.com/PostHog/posthog), significantly more than GrowthBook's 5.5k.
+
+### Key features
+
+- 🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+
+- 🧪 **A/B tests:** Optimize your app and website with up to nine test variations and track impact on primary and secondary metrics. Calculate test duration, sample size, and statistical significance automatically.
+
+- 📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+
+- 📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+
+- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+
+### How does PostHog compare to GrowthBook?
+
+PostHog has all the features of GrowthBook and more. It includes GrowthBook's selling point of being an open source feature flag and experimentation platform while having features like a full product analytics suite, session replays, and more. 
+
+On top of this, PostHog includes all the data you need to target flags and run tests, something you need a warehouse for in GrowthBook.
+
+<ComparisonTable column1="PostHog" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
+  <ComparisonRow column1={true} column2={true} feature="Automations" description="Trigger flag states based on schedules, triggers" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={true} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
+  <ComparisonRow column1={true} column2={"Edit only"} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={true} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
+  <ComparisonRow column1={"First party"} column2={"Third party"} feature="Data source" description="Main source of data used by flags and A/B tests" />
+</ComparisonTable>
+
+### Why do companies use PostHog?
+
+According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It replaces multiple tools:** PostHog can replace [LaunchDarkly](/blog/posthog-vs-launchdarkly) (feature flags and A/B testing), [Amplitude](/blog/posthog-vs-amplitude) (analytics), and [Fullstory](/blog/posthog-vs-fullstory) (session replay and heatmaps). This simplifies workflows and ensures product data is all in one place.
+
+2. **Pricing is transparent and scalable:** Users appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing) of one million flag requests and one million events per month, and if you stay under this, you can use it for free, forever.
+
+3. **They need a complete picture of users:** PostHog includes every tool necessary to understand usage and improve your products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
+
+> #### Bottom line
+> PostHog is an ideal alternative to GrowthBook. It includes both feature flags and an experimentation suite as well as being open-sourced and free to use. 
+
+## 2. LaunchDarkly
+
+- **Founded:** 2014
+- **Similar to:** Flagsmith, DevCycle
+- **Typical users:** Enterprise engineering teams
+- **Typical customers:** Massive engineering-focused enterprises
+
+![LaunchDarkly](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355416/posthog.com/contents/images/blog/best-optimizely-alternatives/launchdarkly.png)
+
+### What is LaunchDarkly?
+
+[LaunchDarkly](/blog/posthog-vs-launchdarkly) is a feature flag and A/B testing platform helping developers de-risk releases, target experiences, and optimize their product. For enterprises, it includes features like automation and governance to ensure they are following [engineering best practices](/product-engineers/feature-flag-best-practices).
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), as of April 2024, 1,072 of the top million websites deploy LaunchDarkly.
+
+### Key features
+
+- 🚩 **Feature flags:** Control and target the release of features using multi-variate flags. Update them at runtime and use local evaluation for speed.
+
+- 🧪 **Experimentations:** Run [A/B/n tests](/tutorials/abn-testing) against metric groups and segments. Easily discover and roll out winning variants.
+
+- 🤖 **Automation:** Automate and schedule changes to flag state, progressive rollouts, and trigger workflows.
+
+- 🔍 **Governance:** Audit flag changes. Get visibility into flag states across platforms. Use roles-based access controls to decide who can access and change flags.
+
+### How does LaunchDarkly compare to GrowthBook?
+
+GrowthBook positions itself as an open source alternative to LaunchDarkly, so it is no surprise their functionality is similar. Both focus specifically on feature flags and A/B testing for enterprises, but GrowthBook is missing some of the advanced features of LaunchDarkly.
+
+<ComparisonTable column1="LaunchDarkly" column2="GrowthBook">
+  <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
+  <ComparisonRow column1={true} column2={true} feature="Automations" description="Trigger flag states based on schedules, triggers" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={false} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
+  <ComparisonRow column1={true} column2={"Edit only"} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={true} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
+  <ComparisonRow column1={"First party"} column2={"Third party"} feature="Data source" description="Source of data used by flags and A/B tests" />
+</ComparisonTable>
+
+### Why do companies use LaunchDarkly?
+
+According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#reviews), users appreciate these aspects of LaunchDarkly:
+
+1. **SDKs:** Users appreciate how easy it is to integrate LaunchDarkly into their apps thanks to the range of SDKs it provides like JavaScript, Python, Android, and iOS.
+
+2. **Automations:** LaunchDarkly provides automations like scheduled rollouts, rollout templates, DevOps pipeline integrations, and stale flag cleanups. Developers mention this as a big selling point.
+
+3. **Speed and availability:** High uptime and speed are critical for developers. Users highlight local caching and edge computing integrations as critical ways LaunchDarkly supports these.
+
+> #### Bottom line
+> LaunchDarkly has stronger features than GrowthBook. For enterprises, it is worth considering. For smaller teams, it is unlikely the best option because it lacks self-serve and is closed source.
+
+## 3. Flagsmith
+
+- **Founded:** 2018
+- **Similar to:** Unleash, DevCycle
+- **Typical users:** Enterprise engineering teams
+- **Typical customers:** Enterprises with strict regulatory requirements
+
+![Flagsmith](https://res.cloudinary.com/dmukukwp6/image/upload/v1713309717/posthog.com/contents/images/blog/best-split-alternatives/flagsmith.png)
+
+### What is Flagsmith?
+
+Flagsmith is an open source feature flag and [remote configuration](/product-engineers/feature-flags-vs-configuration) service. It enables developers to release and manage features across web, mobile, and server apps. Along with a cloud hosted option, you can host Flagsmith in your own private cloud or on-premise.
+
+As of April 2024, Flagsmith has 4.3k stars on GitHub, just under GrowthBook's 5.5k.
+
+### Key features
+
+- 🚩 **Feature flags:** Manage features across multiple environments. Schedule and target releases to users and percentages.
+
+- 🧪 **A/B testing:** Run A/B/n and multivariate tests and send flag data to an analytics platform for analysis.
+
+- 💽 **Remote configuration:** Alter your application at runtime without redeploying. 
+
+- 🔍 **Governance:** Create and manage approval workflows. Keep audit logs of flag changes. 
+
+### How does Flagsmith compare to GrowthBook?
+
+Both Flagsmith and GrowthBook are open source feature flag platforms. Their feature sets are very similar. Both rely heavily on integrations with third party services. For example, Flagsmith relies on third party services to do A/B testing analysis.
+
+<ComparisonTable column1="Flagsmith" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
+  <ComparisonRow column1={true} column2={true} feature="Automations" description="Trigger flag states based on schedules, triggers" />
+  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={false} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={false} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
+  <ComparisonRow column1={true} column2={"Edit only"} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={true} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
+  <ComparisonRow column1={"Third party"} column2={"Third party"} feature="Data source" description="Source of data used by flags and A/B tests" />
+</ComparisonTable>
+
+### Why do companies use Flagsmith?
+
+According to [reviews on G2](https://www.g2.com/products/flagsmith/reviews), companies use Flagsmith because:
+
+1. **It's simple:** Some feature flagging tools can get complicated, but Flagsmith remains simple with its basic features and segmentation. Users say it puts DevOps into the hands of developers.
+
+2. **SDKs:** Flagsmith developed a range of SDKs from iOS to Python to JavaScript. This enables users to easily add and use it in their apps.
+
+3. **Integrations:** Users appreciate that Flagsmith integrates with project management, integration pipeline, and analytics tools.
+
+> #### Bottom line
+> If you are looking for an open source feature flagging tool, Flagsmith makes a good alternative. It's also good if you have everything but an A/B testing tool setup. If neither is true for you, there are likely better options. 
+
+## 4. VWO
+
+- **Founded:** 2009
+- **Similar to:** PostHog, AB Tasty
+- **Typical users:** Product managers, engineers, UX designers
+- **Typical customers:** Enterprise B2B and B2C companies optimizing customer experiences
+
+![VWO](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-launchdarkly-alternatives/vwo.png)
+
+### What is VWO?
+
+[VWO](/blog/best-vwo-alternatives) is a digital experience optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics.
+
+The VWO platform is home to a bunch of different products including testing, insights, data, personalize, plan, and web rollouts. Each has its own feature sets and pricing.
+
+### Key features
+
+- 🧪 **A/B testing:** Improve and optimize experiences and conversions with web, mobile, and server-side A/B testing.
+
+- 💽 **Data platform:** Collect and analyze customer data across your stack using SDKs, third-party integrations, and direct uploads.
+
+- 🤔 **Insights:** Understand your users with session recordings, heatmaps, analytics, and surveys.
+
+- 👔 **Personalization:** Create and tailor user journeys and campaigns for specific audiences, locations, and times.
+
+- 📋 **Planning:** Ideate, prioritize, and plan optimization campaigns in one location. Connect them directly to data as well.
+
+### How does VWO compare to GrowthBook?
+
+VWO and GrowthBook have slightly different focuses. Although they both have experimentation, VWO adds personalization and behavioral analytics to its stack. GrowthBook has a greater focus on feature flags. 
+
+<ComparisonTable column1="VWO" column2="GrowthBook">
+  <ComparisonRow column1={"Trial only"} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
+  <ComparisonRow column1={true} column2={true} feature="Automations" description="Trigger flag states based on schedules, triggers" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={false} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
+  <ComparisonRow column1={"Edit only"} column2={"Edit only"} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={true} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
+  <ComparisonRow column1={"First party"} column2={"Third party"} feature="Data source" description="Source of data used by flags and A/B tests" />
+</ComparisonTable>
+
+### Why do companies use VWO?
+
+Reviewers on G2 are big fans of VWO for these reasons:
+
+1. **Support:** VWO's support staff are knowledgeable, helpful, and responsive. This helps users get the most out of the platform and leaves them with a positive impression.
+
+2. **Multi-function:** Users like that they can combine A/B tests with surveys, funnels, session replays, and analysis tools to optimize the complete user experience.
+
+3. **Becoming data-driven:** VWO enables technical and non-technical to make more and better data-driven decisions by being the complete source of experience data.
+
+> #### Bottom line
+> VWO is an extensive optimization platform. It can be a good alternative to GrowthBook, especially if you're in the ecommerce or B2C space. The downside is that it only offers a free trial and isn't open source.
+
+## 5. Unleash
+
+- **Founded:** 2015
+- **Similar to:** Flagsmith, DevCycle
+- **Typical users:** Regulatory and security conscious developers
+- **Typical customers:** Large B2B enterprises
+
+![Unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1714148743/posthog.com/contents/images/blog/best-split-alternatives/unleash-mega.jpg)
+
+### What is Unleash?
+
+Unleash is a feature management platform that provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting.
+
+As of April 2024, Unleash has 10.3k stars on its GitHub repo, nearly double GrowthBook's 5.5k.
+
+### Key features
+
+- ⛳ **Feature flags:** A developer-focused feature flag tool that streamlines the software release process.
+
+- ✅ **Approvals:** Require approvals to make changes to feature flags to ensure compliance.
+
+- 🙋 **Self-hostable:** Choose either fully managed or self-hosted to fit with your needs.
+
+- 🌴 **Environments: Configure flags, targeting, and approvals differently for dev, staging, prod.
+
+### How does Unleash compare to GrowthBook?
+
+Unleash is very similar to GrowthBook, but doesn't have A/B testing built in. Instead, it provides the feature flag logic and relies on a third party tool, like PostHog, to do the analysis. Other features, including being open source, are almost identical.
+
+<ComparisonTable column1="Unleash" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
+  <ComparisonRow column1={true} column2={true} feature="Automations" description="Trigger flag states based on schedules, triggers" />
+  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={false} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={false} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
+  <ComparisonRow column1={true} column2={"Edit only"} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={true} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
+  <ComparisonRow column1={"First party (flags)"} column2={"Third party"} feature="Data source" description="Source of data used by flags and A/B tests" />
+</ComparisonTable>
+
+### Why do companies use Unleash?
+
+According to G2, these are the 
+
+1. **Self-hostable:** Many users mention they are using the open source version of Unleash and self-hosting. This means teams with compliance concerns can integrate it into their existing infrastructure.
+
+2. **Developer-focused:** Unleash focuses on developers. Its tooling and SDKs make it relatively simple for them to implement feature management.
+
+2. **Simple UI:** Even though Unleash is developer-focused, its UI is still praised for making it easy to create and manage toggles. Developers mentioned non-developers are able to set up and manage toggles without help.
+
+> #### Bottom line
+> Unleash is very focused on feature flags, and if that is what you are looking for, it makes a good alternative to GrowthBook. If you're searching for A/B testing or other types of optimization and analysis tools, it's best to look elsewhere.
+
+## 6. DevCycle
+
+- **Founded:** 2022
+- **Similar to:** Unleash, Flagsmith
+- **Typical users:** Development teams
+- **Typical customers:** All stages of B2B software companies
+
+![DevCycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-launchdarkly-alternatives/devcycle.png)
+
+### What is DevCycle?
+
+DevCycle is a startup launched out of Taplytics, another A/B testing platform. It is a feature flag management platform built for developers and designed for speed. It has a suite of dev tool integrations, CLI, and simple interface. It uses the OpenFeature standard, which enables it to be swapped easily with other providers.
+
+### Key features
+
+- 🏁 **Feature flags:** Easily and safely rollout and rollback features to deploy faster and reduce risk. Use automation to put an end to manual changes.
+
+- 🤝 **Integrations:** Combine with the tools you are already using for your workflow like GitHub, Terraform, Datadog, and Jira.
+
+- 🧪 **A/B testing:** Run experiments and evaluate the impact of new features. Do multi-armed bandits to compare variations.
+
+- 🧑‍💻 **Developer-focused:** Serverless architecture, edge decisioning support, a CLI, and a robust API help developers make full use of DevCycle.
+
+### How does DevCycle compare to GrowthBook?
+
+DevCycle has similar upsides and downsides to GrowthBook, but is not open source. It's pulled away from A/B testing as a focus and now mainly focuses on feature flagging.
+
+<ComparisonTable column1="DevCycle" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
+  <ComparisonRow column1={true} column2={true} feature="Automations" description="Trigger flag states based on schedules, triggers" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={false} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={false} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
+  <ComparisonRow column1={"Edit only"} column2={"Edit only"} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={"No audit log"} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
+  <ComparisonRow column1={"First party"} column2={"Third party"} feature="Data source" description="Source of data used by flags and A/B tests" />
+</ComparisonTable>
+
+### Why do companies use DevCycle?
+
+According to G2, reviewers appreciate two main areas of DevCycle:
+
+1. **Simplicity:** DevCycle makes it easy for people to get feature flags set up and start improving their feature management process. Users mention the SDKs and documentation makes implementation easy. 
+
+2. **Integrations:** The fact that DevCycle integrates with GitHub and Jira helps developer workflow.
+
+> #### Bottom line
+> Because DevCycle is very similar to GrowthBook, it makes for a good alternative. If you have a strict regulatory environment and could benefit from open source or self-hosting, other options are better. 
+
+## 7. AB Tasty
+
+- **Founded:** 2013
+- **Similar to:** VWO, LaunchDarkly
+- **Typical users:** Marketing and product teams
+- **Typical customers:** Large retail and entertainment companies
+
+![AB Tasty](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-launchdarkly-alternatives/ab-tasty.png)
+
+### What is AB Tasty?
+
+AB Tasty is a platform for optimizing brand and product experiences. This includes web and feature experimentation, personalization, search, and recommendations.
+
+It helps teams build better end-to-end digital user experiences that drive ROI, engagement, and loyalty. The company focuses on retail, entertainment, and ecommerce companies. According to [BuiltWith](https://trends.builtwith.com/analytics/AB-Tasty), as of April 2024, 2,269 of the top million websites deploy AB Tasty.
+
+### Key features
+
+- 🌐 **Web experimentation:** Run A/B and multivariate tests easily with low/no-code tools like a visual editor and pre-built widgets.
+
+- 🧪 **Feature experimentation:** Test new features on specific users or segments in your server-side or mobile apps.
+
+- 🫂 **Personalization:** Create personalized experiences with its audience builder and segmentation tools.
+
+- 🛼 **Rollouts:** Use feature flags to progressively deliver, manage, and rollback new features.
+
+- 🙋‍♂️ **Recommendations:** Show the right products at the right time in customer journeys. Provide unique suggestions to increase conversion.
+
+### How does AB Tasty compare to GrowthBook?
+
+AB Tasty is a fully featured experimentation and feature flagging platform. It also includes more optimization tools like personalization and recommendations. A big downside is that it lacks self-service and isn't open source.
+
+<ComparisonTable column1="AB Tasty" column2="GrowthBook">
+  <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
+  <ComparisonRow column1={true} column2={true} feature="Automations" description="Trigger flag states based on schedules, triggers" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={false} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={false} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
+  <ComparisonRow column1={"Edit only"} column2={"Edit only"} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={"No audit"} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
+  <ComparisonRow column1={"First party"} column2={"Third party"} feature="Data source" description="Source of data used by flags and A/B tests" />
+</ComparisonTable>
+
+### Why do companies use AB Tasty?
+
+According to G2 reviews, users choose AB Tasty for the following reasons:
+
+1. **Ease-of-use:** Non-technical users can create and manage simple A/B tests using the visual editor. Reviewers also praise how simple and intuitive the platform is.
+
+2. **Support:** AB Tasty's customer support receives high praise. The company even provides an option to help you with recommendations and implementation (for a cost) if you need it.
+
+3. **Widgets:** Users enjoy AB Tasty's collection of pre-built widgets such as alerts, banners, and modals to help personalize experiences.
+
+> #### Bottom line
+> For ecommerce companies needing a full suite of optimization tools, AB Tasty is a solid alternative. Developer-focused companies might prefer another option on this list.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect GrowthBook replacement if:
+
+- You value transparency. We're open source and open core.
+- You want all the tools you need to build a better product like product analytics, session replay, and surveys.
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+
+Check out [our product pages](/ab-testing) and [read our docs](/docs) to learn more.
