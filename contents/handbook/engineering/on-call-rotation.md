@@ -20,6 +20,8 @@ Because the stability of production systems is critical, on-call involves weeken
 
 Before going on call, make sure you have the [PagerDuty mobile app](https://support.pagerduty.com/docs/mobile-app) installed and configured. This way it'll be harder to miss an alert.
 
+To get a calendar with all your on-call shifts from PagerDuty. Go to your profile, select On-Call Shifts, go to Export Calendar and copy the link for the webcal feed. In google calendar, add a new calendar from URL and paste the link in there.
+
 ## What if I'm scheduled for a week when I won't be available?
 
 Swap with another engineer in advance! Find a volunteer by asking in Slack, then use PagerDuty schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
