@@ -66,7 +66,7 @@ const features = [
     },
     {
         title: 'User insights',
-        description: 'Investigate your average traces per user, and your WAU',
+        description: 'Investigate your average costs and traces per user',
         image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
     {
