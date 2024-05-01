@@ -163,7 +163,7 @@ export const LLMAnalytics = () => {
                     beta={true}
                     product={product.capitalized}
                     title='Unlock <span class="text-red dark:text-yellow">instant insights</span> for LLM products'
-                    description="Track specialist LLM and AI metrics, such as model latency, alongside standard product data"
+                    description="Track LLM and AI app metrics, such as model costs, latency, evaluations, and more"
                 />
 
                 <div className="text-center">
