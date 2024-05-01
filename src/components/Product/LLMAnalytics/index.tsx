@@ -162,7 +162,7 @@ export const LLMAnalytics = () => {
                     icon={<IconAdvanced />}
                     beta={true}
                     product={product.capitalized}
-                    title='Unlock <span class="text-red dark:text-yellow">instant insights</span> for LLM products'
+                    title='Unlock instant insights for <span class="text-red dark:text-yellow">LLM products</span>'
                     description="Track LLM and AI app metrics, such as model costs, latency, evaluations, and more"
                 />
 
