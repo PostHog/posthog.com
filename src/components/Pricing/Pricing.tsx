@@ -8,6 +8,7 @@ import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { PricingCalculator } from './PricingCalculator'
+import { Addons } from './Addons'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA } from './Plans'
@@ -71,40 +72,6 @@ const getPlanSummary = (posthog): PlanData[] => {
                     <span className="opacity-60 text-sm">* Included with any product subscription</span>
                 </>,
             ],
-        },
-        {
-            title: 'Teams',
-            price: '$450',
-            features: [
-                'Generous free tier on all products',
-                <>
-                    <span className="relative">
-                        Includes team features{' '}
-                        <Tooltip
-                            content={() => (
-                                <>
-                                    <h3 className="mb-1 text-base">Team features</h3>
-                                    <ul className="list-none p-0 divide-y divide-light dark:divide-dark">
-                                        <li className="py-1.5 text-sm">Verified events</li>
-                                        <li className="py-1.5 text-sm">Comments on dashboards and insights</li>
-                                        <li className="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li>
-                                    </ul>
-                                </>
-                            )}
-                            tooltipClassName="max-w-sm"
-                        >
-                            <span className="relative -top-px">
-                                <IconInfo className="inline-block w-4 h-4" />
-                            </span>
-                        </Tooltip>
-                    </span>
-                </>,
-                'Unlimited projects',
-                '7 year data retention',
-                'Priority support',
-                'Pay only for what you use',
-            ],
-            CTAText: 'Get started',
         },
         {
             title: 'Enterprise',
@@ -291,10 +258,10 @@ const Pricing = ({
         },
     } = useStaticQuery(allProductsData)
 
-    const platformAndSuppportProduct = billingProducts.find(
+    const platformAndSupportProduct = billingProducts.find(
         (product: BillingProductV2Type) => product.type === 'platform_and_support'
     )
-    const highestSupportPlan = platformAndSuppportProduct?.plans?.slice(-1)[0]
+    const highestSupportPlan = platformAndSupportProduct?.plans?.slice(-1)[0]
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
@@ -509,7 +476,7 @@ const Pricing = ({
                             All plans include unlimited team members and no limits on tracked users.
                         </p>
                         <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
-                            <div className="grid grid-cols-[repeat(4,_minmax(260px,_1fr))] lg:grid-cols-4 gap-4 mb-12 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
+                            <div className="grid grid-cols-[repeat(3,_minmax(260px,_1fr))] xl:max-w-4xl xl:mx-auto gap-4 mb-12 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
                                 {planSummary.map((plan, index) => (
                                     <Plan key={index} planData={plan} />
                                 ))}
@@ -541,34 +508,41 @@ const Pricing = ({
                         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                             <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
                                 <div className="col-span-4 px-3 py-1">&nbsp;</div>
-                                {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => (
-                                    <div className="col-span-3 px-3 py-1" key={plan.key}>
-                                        <strong className="text-sm opacity-75">{plan.name}</strong>
-                                    </div>
-                                ))}
+                                {platformAndSupportProduct?.plans
+                                    ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                                    ?.map((plan: BillingV2PlanType) => (
+                                        <div className="col-span-4 px-3 py-1" key={plan.key}>
+                                            <strong className="text-sm opacity-75">{plan.name}</strong>
+                                        </div>
+                                    ))}
                             </div>
 
                             <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
                                 <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
                                     <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
                                 </div>
-                                {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
-                                    return (
-                                        <div className="col-span-3 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
-                                            {plan.included_if === 'no_active_subscription' ? (
-                                                <span>Free forever</span>
-                                            ) : plan.included_if === 'has_subscription' ? (
-                                                <span>$0</span>
-                                            ) : plan.unit_amount_usd ? (
-                                                `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
-                                            ) : plan.contact_support ? (
-                                                'Contact us'
-                                            ) : (
-                                                'Contact us'
-                                            )}
-                                        </div>
-                                    )
-                                })}
+                                {platformAndSupportProduct?.plans
+                                    ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                                    ?.map((plan: BillingV2PlanType) => {
+                                        return (
+                                            <div
+                                                className="col-span-4 px-3 py-2 text-sm"
+                                                key={`${plan.key}-base-price`}
+                                            >
+                                                {plan.included_if === 'no_active_subscription' ? (
+                                                    <span>Free forever</span>
+                                                ) : plan.included_if === 'has_subscription' ? (
+                                                    <span>$0</span>
+                                                ) : plan.unit_amount_usd ? (
+                                                    `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
+                                                ) : plan.contact_support ? (
+                                                    'Contact us'
+                                                ) : (
+                                                    'Contact us'
+                                                )}
+                                            </div>
+                                        )
+                                    })}
                                 {highestSupportPlan?.features
                                     ?.filter(
                                         (f: BillingV2FeatureType) =>
@@ -595,49 +569,55 @@ const Pricing = ({
                                                     </strong>
                                                 )}
                                             </div>
-                                            {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
-                                                const planFeature = plan?.features?.find((f) => f.key === feature.key)
-                                                return (
-                                                    <div
-                                                        className="col-span-3 px-3 py-2 text-sm"
-                                                        key={`${plan.key}-${feature.key}`}
-                                                    >
-                                                        {planFeature ? (
-                                                            <div className="flex gap-x-2">
-                                                                {planFeature.note ?? (
-                                                                    <IconCheck className="w-5 h-5 text-green" />
-                                                                )}
-                                                                {planFeature.limit && (
-                                                                    <span className="opacity-75">
-                                                                        {plan.name === 'Pay-per-use' &&
-                                                                        planFeature.key === 'organizations_projects' ? (
-                                                                            <RenderInClient
-                                                                                render={() => (
-                                                                                    <>
-                                                                                        {posthog?.getFeatureFlag?.(
-                                                                                            'two-project-limit'
-                                                                                        )
-                                                                                            ? '2'
-                                                                                            : planFeature.limit}{' '}
-                                                                                        {planFeature.unit}
-                                                                                    </>
-                                                                                )}
-                                                                                placeholder={<></>}
-                                                                            />
-                                                                        ) : (
-                                                                            <>
-                                                                                {planFeature.limit} {planFeature.unit}
-                                                                            </>
-                                                                        )}
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        ) : (
-                                                            <></>
-                                                        )}
-                                                    </div>
-                                                )
-                                            })}
+                                            {platformAndSupportProduct?.plans
+                                                ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                                                ?.map((plan: BillingV2PlanType) => {
+                                                    const planFeature = plan?.features?.find(
+                                                        (f) => f.key === feature.key
+                                                    )
+                                                    return (
+                                                        <div
+                                                            className="col-span-4 px-3 py-2 text-sm"
+                                                            key={`${plan.key}-${feature.key}`}
+                                                        >
+                                                            {planFeature ? (
+                                                                <div className="flex gap-x-2">
+                                                                    {planFeature.note ?? (
+                                                                        <IconCheck className="w-5 h-5 text-green" />
+                                                                    )}
+                                                                    {planFeature.limit && (
+                                                                        <span className="opacity-75">
+                                                                            {plan.name === 'Pay-per-use' &&
+                                                                            planFeature.key ===
+                                                                                'organizations_projects' ? (
+                                                                                <RenderInClient
+                                                                                    render={() => (
+                                                                                        <>
+                                                                                            {posthog?.getFeatureFlag?.(
+                                                                                                'two-project-limit'
+                                                                                            )
+                                                                                                ? '2'
+                                                                                                : planFeature.limit}{' '}
+                                                                                            {planFeature.unit}
+                                                                                        </>
+                                                                                    )}
+                                                                                    placeholder={<></>}
+                                                                                />
+                                                                            ) : (
+                                                                                <>
+                                                                                    {planFeature.limit}{' '}
+                                                                                    {planFeature.unit}
+                                                                                </>
+                                                                            )}
+                                                                        </span>
+                                                                    )}
+                                                                </div>
+                                                            ) : (
+                                                                <></>
+                                                            )}
+                                                        </div>
+                                                    )
+                                                })}
                                         </>
                                     ))}
                             </div>
@@ -655,6 +635,8 @@ const Pricing = ({
             {!currentProduct && (
                 <>
                     <PricingCalculator />
+
+                    <Addons />
 
                     <section className={`${section} my-12 md:my-24 md:px-4`}>
                         <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
