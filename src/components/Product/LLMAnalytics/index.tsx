@@ -299,7 +299,7 @@ export const LLMAnalytics = () => {
                             url="/tutorials/chatgpt-analytics"
                         />
                         <TutorialCard
-                            title="How to analyze surveys ChatGPT"
+                            title="How to analyze surveys with ChatGPT"
                             description="Learn how to create a basic Node.js script, parse a CSV of survey answers, and use the ChatGPT API to extract useful information such as sentiment and theme."
                             url="/tutorials/chatgpt-analytics"
                         />
