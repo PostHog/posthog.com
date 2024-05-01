@@ -640,7 +640,7 @@ const Pricing = ({
                 <>
                     <PricingCalculator />
 
-                    <Addons />
+                    <Addons billingProducts={billingProducts} />
 
                     <section className={`${section} my-12 md:my-24 md:px-4`}>
                         <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
