@@ -4,6 +4,7 @@ date: 2023-09-12
 author:
   - ian-vanagas
 showTitle: true
+featuredVideo: https://www.youtube-nocookie.com/embed/1QhMvLs27yk
 sidebar: Docs
 tags:
   - experimentation
