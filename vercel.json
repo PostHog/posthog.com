@@ -1234,7 +1234,7 @@
         },
         { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
         { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
-
+        { "source": "/docs/ab-testing", "destination": "/docs/experiments" },
         { "source": "/handbook/small-teams/product-analytics", "destination": "/teams/product-analytics" },
         { "source": "/handbook/small-teams/replay", "destination": "/teams/replay" },
         { "source": "/handbook/small-teams/website-docs", "destination": "/teams/website-docs" },
