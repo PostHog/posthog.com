@@ -195,7 +195,7 @@ const EscalateButton = ({ escalate, escalated }) => {
 export const Question = (props: QuestionProps) => {
     const { id, question, showSlug, buttonText, showActions = true } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
-    const { user } = useUser()
+    const { user, notifications, setNotifications } = useUser()
 
     // TODO: Default to question data if passed in
     const {
@@ -227,6 +227,21 @@ export const Question = (props: QuestionProps) => {
     const archived = questionData?.attributes.archived
     const slugs = questionData?.attributes?.slugs
     const escalated = questionData?.attributes.escalated
+
+    useEffect(() => {
+        if (
+            notifications?.length > 0 &&
+            notifications.some(
+                (notification) => notification.question.id === id || notification.question.permalink === id
+            )
+        ) {
+            setNotifications(
+                notifications.filter(
+                    (notification) => notification.question.id !== id && notification.question.permalink !== id
+                )
+            )
+        }
+    }, [notifications])
 
     return (
         <CurrentQuestionContext.Provider
