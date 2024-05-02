@@ -88,7 +88,7 @@ export const InstallingPostHog = () => {
                 <li>
                     <h5>Hosting or deployment questions?</h5>
                     <p>
-                        Checkout out our{' '}
+                        Checkout our{' '}
                         <Link to="/questions" event="next steps - installing posthog: Community forum">
                             community forum
                         </Link>{' '}
