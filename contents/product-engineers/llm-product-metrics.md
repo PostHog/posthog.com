@@ -1,5 +1,5 @@
 ---
-date: 2024-05-01
+date: 2024-05-03
 title: 'Product metrics to track for LLM apps'
 author:
   - lior-neu-ner
@@ -14,13 +14,17 @@ crosspost:
   - Blog
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
 LLM-powered apps differ in three key ways when compared to regular SaaS apps:
 
 1. Their costs increase as as app usage increases.
 2. Request latency spikes and errors are more common.
-3. Evaluation something something
+3. You're not always sure if your LLM output is what was expected.
 
-This means that in addition to [regular product metrics](https://posthog.com/product-engineers/product-health-metrics), you need to monitor AI-specific ones too. This post lists the best metrics to keep track of. We've grouped them into three categories: [cost-related metrics](#cost-related-metrics), [usage metrics](#usage-metrics), and [debug metrics](#debug-metrics).
+This means that in addition to [regular product metrics](https://posthog.com/product-engineers/product-health-metrics), you need to monitor LLM-specific ones too. To understand which ones to track, we've put together a list of useful metrics to track.
+
+The metrics are grouped into three categories: [cost](#cost-related-metrics), [usage](#usage-metrics), and [debugging](#debug-metrics).
 
 ## Cost-related metrics
 
@@ -28,35 +32,53 @@ This means that in addition to [regular product metrics](https://posthog.com/pro
 
 **What is it?** Your total LLM costs divided by the number of active users.
 
-**Why it's useful:** This gives you an idea of how your costs will grow with your product. You can also compare this to revenue per user to understand if your profit margin is viable.
+**Why it's useful:** Gives you an idea of how your costs will grow with your product. You can also compare this to revenue per user to understand if your profit margin is viable.
 
 **Questions to ask:**
 - Are average costs going up or down over time? 
-- If they are increasing over time, is it because of increased product usage or increased generation costs?
-- What specific features or types of interactions contribute to the cost per user?
+- If they're increasing over time, is it because of increased product usage or increased generation costs?
+- What specific features or types of interactions contribute the most to the cost per user?
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714658975/posthog.com/contents/average-cost-per-user-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714658975/posthog.com/contents/average-cost-per-user-dark.png"
+  alt="Line chart showing average LLM cost per user over time"
+/>
 
 ### P95 cost per user
 
 **What is it?** The top 5% of users who are consuming the most LLM costs.
 
-**Why it's useful:** This helps determine if specific users disproportionately affect overall costs. You can then investigate whether these costs are justified by their usage or if there are inefficiencies to address.
+**Why it's useful:** Determines if specific users disproportionately affect overall costs. You can then investigate whether these costs are justified by their usage, or if there are inefficiencies to address.
 
-**Questions to ask**
+**Questions to ask:**
 - What common characteristics or usage patterns do the top 5% of users have?
 - Are there specific feature interactions that result in higher costs for these users?
 - Is the high cost associated with these users sustainable, or does it suggest a need for pricing adjustments?
 
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714658974/posthog.com/contents/p95-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714658974/posthog.com/contents/p95-dark.png"
+  alt="Table showing P95 of users who consume the most LLM costs"
+/>
+
 ### Average cost per interaction
 
-**What is it?** The cost associated with each request in your LLM feature.
+**What is it?** The cost associated with each request in your LLM features.
 
-**Why it's useful**: This enables you to pinpoint exactly which interactions are the most expensive.
+**Why it's useful**: Enables you to pinpoint exactly which interactions are the most expensive.
 
-**Questions to ask**
-- How does this number compare for each model?
+**Questions to ask:**
+- How does this number compare for each LLM model?
 - Which specific requests are the most costly, and are there ways to reduce these costs?
 - Are there noticeable spikes in cost per interaction, and what triggers them?
-  
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714659411/posthog.com/contents/Screenshot_2024-05-02_at_3.16.24_PM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714659429/posthog.com/contents/Screenshot_2024-05-02_at_3.17.04_PM.png"
+  alt="Line chart showing average cost pper LLM interaction over time"
+/>
+
 ## Usage metrics
 
 ### Average usage per user
@@ -79,13 +101,13 @@ This means that in addition to [regular product metrics](https://posthog.com/pro
 **Questions to ask**
 - How has the generation count changed over time, and does this correlate with user growth or engagement?
 - Are there specific times of day or days of the week when generation counts spike?
-- How do different app features affect the generation count?
+- How do different app features contribute to the generation count?
 
 ### User feedback score
 
-**What is it?** That quality of the LLMs output, as rated by your users.
+**What is it?** The quality of the LLM's output, as rated by your users.
 
-**Why is it useful:** Strongly correlated with important product-health metrics such as growth, churn, and [NPS score](/product-engineers/nps-vs-csat-vs-ces).
+**Why is it useful:** Strongly correlated with important product-health metrics such as [growth](/product-engineers/b2b-saas-product-metrics), [churn](/product-engineers/churn-rate-vs-retention-rate), and [NPS score](/product-engineers/nps-vs-csat-vs-ces).
 
 - Are there specific user segments that are more satisfied or dissatisfied with the LLM outputs?
 - What are the specific input and output tokens of the best and worst scores?
@@ -100,7 +122,7 @@ This means that in addition to [regular product metrics](https://posthog.com/pro
 **Why it's useful:** Essential for optimizing performance and cost. Larger requests lead to higher costs and longer processing times, while smaller requests may lead to more frequent requests.
 
 **Questions to ask**
-- What is the average number of tokens per request, and how has it changed over time?
+- How has the average changed over time?
 - Are there specific features or types of interactions that typically involve larger or smaller requests?
 - How do variations in request size impact the latency and costs of responses?
 
