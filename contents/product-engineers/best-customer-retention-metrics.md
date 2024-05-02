@@ -46,6 +46,8 @@ For example, HogTube, a subscription-based, hedgehog-themed YouTube rival, had 1
 
 ### What’s a good customer retention rate?
 
+![Churn](https://res.cloudinary.com/dmukukwp6/image/upload/v1714661002/posthog.com/contents/blog/churn.png)
+
 A good customer retention rate – or churn rate – really depends on the type of company you are and the type of industry you’re in. For small to medium-sized SaaS companies, which bill monthly, anything between [3% and 7%](https://www.kalungi.com/blog/saas-churn-rate-benchmarks) is a good churn rate. [Data from Fullview](https://www.fullview.io/blog/average-churn-rate-for-saas-companies) shows that a monthly churn of more than 8% makes growing a business really hard work. 
 
 More established enterprise B2B SaaS companies, which likely sell to larger companies that pay annually and spend big, need to have lower churn. At these bigger companies, monthly churn should be [closer to 1%](https://www.vitally.io/post/saas-churn-benchmarks).
