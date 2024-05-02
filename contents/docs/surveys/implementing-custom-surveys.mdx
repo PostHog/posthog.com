@@ -8,19 +8,60 @@ availability:
     enterprise: full
 ---
 
-> **Note:** This is **not required** for [popover surveys](/docs/surveys/creating-surveys#presentation).
+At its most basic level, a survey is a collection of response events. If you wanted to, you could capture events from anywhere, like in this example of a hardcoded Next.js feedback survey:
 
-If you're using PostHog's [survey API](/docs/surveys/creating-surveys#presentation) to create a custom survey UI, there are 2 steps to integrating with PostHog:
+```js-web
+'use client'
+import { usePostHog } from 'posthog-js/react';
 
-## Step 1: Fetch active surveys
+export default function Feedback() {
+  const posthog = usePostHog();
 
-To fetch the surveys currently enabled for a user, call `posthog.getActiveMatchingSurveys(callback, forceReload)`.
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    const feedback = e.target.elements.feedback.value;
+    posthog.capture("survey sent", {
+      $survey_id: '018ed910-3b24-0000-e3fd-d51c59aa74b2',
+      $survey_response: feedback
+    })
+  }
 
-Alternatively, if you wish to do survey targeting yourself, you can call `posthog.getSurveys(callback, forceReload)` to return a list of all surveys from PostHog.
+  return (
+    <div>
+      <h1>Give us feedback</h1>
+      <form onSubmit={handleFeedbackSubmit}>
+        <textarea 
+          id="feedbackInput" 
+          name="feedback" 
+          placeholder="Enter your feedback here..." 
+          required
+        ></textarea>
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </div>
+  );
+}
+```
 
-Surveys are cached by default in the posthog-js library, so you can pass `true` to `forceReload` to force a new surveys api call from PostHog.
+The benefit of using PostHog beyond this is that it handles:
 
-Both methods return a callback with an array of `surveys`:
+1. **Survey content.** Customize question type, text, and more. Change it at runtime without needing to redeploy your app.
+
+2. **Targeting logic.** This means not showing the same survey multiple times, the wrong survey, or a survey that has collected enough responses. Leverage property filters, cohorts, feature flags, and more.
+
+If you create a [popover survey](/docs/surveys/creating-surveys#presentation),  updating and targeting are handled automatically. When you create one in API mode, you need to add logic to fetch and display surveys yourself with the help of the JavaScript Web SDK or snippet.
+
+## Fetching surveys
+
+When implementing an API survey, there are two options for fetching surveys from PostHog:
+
+1. To get all surveys, call `getSurveys(callback, forceReload)`. This means you still need to handle targeting yourself.
+
+2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This always returns an active survey if the user meets the targeting conditions, even if they have already seen, dismissed, or responded to the survey.
+
+Surveys are cached by default by the JavaScript SDK, so you can pass `true` to the `forceReload` parameter to force an API call to get the latest surveys.
+
+Both methods return a callback with an array of surveys in this format:
 
 ```json
 // Example surveys response:
@@ -28,8 +69,8 @@ Both methods return a callback with an array of `surveys`:
   "id": "your_survey_id",
   "name": "Your survey name",
   "description": "Metadata describing your survey",
-  "type": "api", // can be either "api" or "popover"
-  "linked_flag_key": null, //Linked feature flag key, if any.
+  "type": "api", // "api" or "popover"
+  "linked_flag_key": null, // Linked feature flag key, if any.
   "targeting_flag_key": "your_survey_targeting_flag_key",
   "questions": [
     {
@@ -42,55 +83,88 @@ Both methods return a callback with an array of `surveys`:
     }
   ],
   "conditions": null,
+  "appearance": {},
   "start_date": "2023-09-19T13:10:49.505000Z",
   "end_date": null
 }]
 ```
 
-Thus you can use show your user a survey using code like this:
+As an example, we can use `getActiveMatchingSurveys()` to make our Next.js feedback survey more dynamic:
 
 ```js-web
-posthog.getActiveMatchingSurveys((surveys) => {
-    // Make sure you filter for surveys that are of type `"api"`. 
-    // This prevents accidentally showing popover surveys to your users.
-    const filteredSurveys = surveys.filter(survey => survey.type === 'api');
-    if (filteredSurveys.length > 0) {
-        // show the survey using your custom UI
-        showSurvey(filteredSurveys[0]);
-    }
-})
+'use client'
+import { usePostHog } from 'posthog-js/react';
+import { useEffect, useState } from 'react';
+
+export default function Feedback() {
+  const [survey, setSurvey] = useState({})  
+  const posthog = usePostHog()
+
+  useEffect(() => {
+    posthog.getActiveMatchingSurveys((surveys) => {
+      if (surveys.length > 0) {
+        const survey = surveys[0];
+        setSurvey(survey)
+      }
+    }); 
+  }, [posthog]);
+
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    const feedback = e.target.elements.feedback.value;
+    posthog.capture("survey sent", {
+      $survey_id: survey.id,
+      $survey_response: feedback
+    })
+  }
+
+  return (
+    <div>
+      {survey && (
+        <>
+          <h1>{survey.questions[0].question}</h1>
+          <form onSubmit={handleFeedbackSubmit}>
+            <textarea 
+              id="feedbackInput" 
+              name="feedback" 
+              placeholder={survey.appearance.placeholder} 
+              required
+            ></textarea>
+            <button type="submit">Submit Feedback</button>
+          </form>
+        </>
+      )}
+    </div>
+  );
+}
 ```
 
-> **Important:** `posthog.getActiveMatchingSurveys()` will always return an active survey if the user meets the targeting conditions, even if they have already seen, dismissed or responded to the survey.
+> **Tip:** To keep track of surveys shown, dismissed, or responded to, store values in a cookie or local storage like this:
+> ```js-web
+> //... other code
+> posthog.capture("survey sent", {
+>   $survey_id: survey.id,
+>   $survey_response: feedback
+> })
+> localStorage.setItem(`hasInteractedWithSurvey_${survey.id}`, 'true');
+> ```
 
-> **Note:** If you're using a URL or selector targeting options, you'll need to poll `posthog.getActiveMatchingSurveys()` to get the most updated results.
+## Capture survey responses
 
-## Step 2: Capture survey events
-
-To show survey results in PostHog, you need to capture user interactions with your surveys using the following 3 events:
+The main event you must capture to track survey results is `survey_sent` which we've already shown. It is formatted like this:
 
 ```js-web
-// 1. When a user is shown a survey
-posthog.capture("survey shown", {
-    $survey_id: survey.id // required
-})
-
-// 2. When a user has dismissed a survey
-posthog.capture("survey dismissed", {
-    $survey_id: survey.id // required
-})
-
-// 3. When a user has responded to a survey
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
     $survey_response: survey_response // required. `survey_response` must be a text value.
-    // Convert numbers to text e.g. 8 should be converted "8".
-    // For multiple choice select surveys, `survey_response` must be an array of values with the selected choices.
-    // e.g., $survey_response: ["response_1", "response_2"]
 })
 ```
 
-## Multiple question surveys
+Survey responses expect text, so you should convert numbers to text e.g. `8` should be converted to `"8"`.
+
+For multiple choice surveys, `survey_response` must be an array of values with the selected choices e.g., `$survey_response: ["response_1", "response_2"]`.
+
+### Capturing multiple responses
 
 If you have a survey with multiple questions, you can capture the responses to each question using the following syntax:
 
@@ -104,3 +178,21 @@ posthog.capture("survey sent", {
 ```
 
 If you want to make the most of PostHog's automatic survey analysis and results visualizations page, you'll need to capture survey responses in the above formats.
+
+## Capture survey lifecycle events
+
+There are two other events you should capture to track the full lifecycle of a survey. They are `survey_shown` and `survey_dismissed`:
+
+```js-web
+// 1. When a user is shown a survey
+posthog.capture("survey shown", {
+    $survey_id: survey.id // required
+})
+
+// 2. When a user has dismissed a survey
+posthog.capture("survey dismissed", {
+    $survey_id: survey.id // required
+})
+```
+
+Capturing all three events ensures you have a full implementation matching popup surveys and that your analysis is accurate in PostHog.
