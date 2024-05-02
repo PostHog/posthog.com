@@ -1,6 +1,7 @@
 ---
 title: How to run A/B tests in Android
 date: 2023-11-22
+featuredVideo: https://www.youtube-nocookie.com/embed/nmQS5EOgalU
 author:
   - lior-neu-ner
 tags:
