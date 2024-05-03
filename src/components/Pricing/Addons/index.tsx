@@ -10,8 +10,17 @@ export const section = cntl`
     px-4
 `
 
-const tooltipLookup = {
-    teams: '<h3 class="mb-1 text-base">Team features</h3><ul class="list-none p-0 divide-y divide-light dark:divide-dark"><li class="py-1.5 text-sm">Verified events</li><li class="py-1.5 text-sm">Comments on dashboards and insights</li><li class="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li></ul>',
+const tooltipLookup: Record<string, JSX.Element> = {
+    teams: (
+        <>
+            <h3 className="mb-1 text-base">Team features</h3>
+            <ul className="list-none p-0 divide-y divide-light dark:divide-dark">
+                <li className="py-1.5 text-sm">Verified events</li>
+                <li className="py-1.5 text-sm">Comments on dashboards and insights</li>
+                <li className="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li>
+            </ul>
+        </>
+    ),
 }
 
 export function getProductIcon(iconKey: string | null, className?: string): JSX.Element {
@@ -79,14 +88,7 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
                             <p className="text-sm mb-0">
                                 <span>{addon.description}</span>
                                 {tooltipLookup[addon.type] && (
-                                    <Tooltip
-                                        placement="top"
-                                        content={() => (
-                                            <>
-                                                <span dangerouslySetInnerHTML={{ __html: tooltipLookup[addon.type] }} />
-                                            </>
-                                        )}
-                                    >
+                                    <Tooltip placement="top" content={() => tooltipLookup[addon.type]}>
                                         <span className="relative -top-px">
                                             <Icons.IconInfo className="w-5 h-5 ml-1 inline-block opacity-75" />
                                         </span>
