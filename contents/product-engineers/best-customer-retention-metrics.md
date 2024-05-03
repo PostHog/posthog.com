@@ -22,11 +22,11 @@ In this guide we’ll cover the key customer retention metrics, who they’re us
 
 ### What are customer retention and churn?
 
-These are the two most important retention metrics. Customer retention, often referred to as logo churn, is a simple measure of how well your business retains customers. Customer churn is the inverse: how many customers business loses. 
+These are the two most important retention metrics. Customer retention is a simple measure of how well your business retains customers. Customer churn, often referred to as logo churn, is the inverse: how many customers business loses. 
 
-How often you measure these two metrics depends on your business: if you run a monthly subscription business, for example, measure retention monthly. If your customers pay annually, measure it annually. Why? Think of it like this: if the vast majority of your customers are locked into annual contracts, they can’t churn that quickly. Measure churn based on a timeframe that makes sense for your business to collect data you can actually use.
+Measuring monthly retention is best if you run a monthly subscriptions business. If most of your customers pay annually, measure it annually. It's useful to track both if you have a mixture of customers on monthly and annual contracts.
 
-### How is it useful?
+### Why are they useful?
 
 Almost any business that relies on repeat customers should be measuring retention and churn. There are some exceptions. If you run a car dealership, for example, you probably don’t need to be measuring retention and churn as cars are, typically, very rare purchases. Likewise, if you’re running a funeral home, customer retention and churn probably isn’t your most important metric.
 
@@ -60,20 +60,22 @@ One reason why Netflix continues to dominate the streaming industry is its incre
 
 This effectively means that Netflix spends a lot less time and money attracting new subscribers to replace people who’ve left. Apple TV+’s 8% monthly churn might not sound that much higher, but churn compounds. Annually, if Apple TV+ did nothing to attract new subscribers, it would lose almost 80% of its customers. Netflix, on the other hand, would lose 22.1%.
 
-Want to go deep on retention and churn? Check out our [in-depth guide to churn analysis](/product-engineers/churn-rate-vs-retention-rate). Or find out how to measure churn [and lower it using PostHog](/tutorials/churn-rate).
+Read our [in-depth guide to churn analysis](/product-engineers/churn-rate-vs-retention-rate) to go deeper on how use these metrics in your business.
 
 
 ## 2. Customer Lifetime Value (CLTV)
 
 ### What is CLTV?
 
-Also known as LTV, this metric looks at an entire customer journey, combining repeat purchases, upsells, and potential future revenue. While it’s not a direct measure of customer retention or churn, things that reduce churn almost always lead to higher CLTV. If you keep customers happier for longer, you increase the revenue they generate and lower churn.
+Also known as LTV, this metric looks at an entire customer journey, combining repeat purchases, upsells, and potential future revenue. 
 
-### How is it useful?
+While it’s not a *direct* measure of customer retention or churn, things that reduce churn almost always lead to higher CLTV, making it a useful proxy to confirm you're making progress.
 
-This is another really important metric for subscription-based businesses. That means SaaS and e-commerce, but also bricks and mortar enterprises like hair salons and gyms. A strong understanding of CLTV will help identify high-value customers and enable you to build the best possible products and services for them.
+### Why is it useful?
 
-A clear understanding of your CLTV also gives you a clear understanding of who your most valuable customers are and how they behave. You can then, for example, work to move more people into that cohort, or work out how to better serve your most loyal customers.
+This is another really important metric for subscription-based businesses, such as SaaS products and online services, especially those where the value of individual customers varies.
+
+A strong understanding of CLTV will help identify high-value customers and how they behave. You can then, for example, work to move more people into that cohort, or work out how to better serve your most loyal customers.
 
 ### How to calculate your CLTV
 
@@ -85,7 +87,7 @@ For example, if your ARPU is $50 per month and your average customer lifespan is
 
 To work this out you need to know your CAC. That’s your customer acquisition cost, or, simply put, the average cost to your business of snagging a new paying customer. If your CAC is lower than your CLTV then you’ve got a healthy business that’s able to acquire new paying customers without losing money. If it’s not, you're in trouble.
 
-As a guide, at early-stage startups the CLTV might be lower as you acquire new customers and find product-market fit. According to data compiled by search optimization firm [First Page Sage](https://firstpagesage.com/seo-blog/the-ltv-to-cac-ratio-benchmark/), the average CLTC to CAC ratio at B2B SaaS companies is 4:1 At B2C SaaS companies it’s 2.5:1.
+As a guide, at early-stage startups the CLTV might be lower as you acquire new customers and find product-market fit. According to data compiled by search optimization firm [First Page Sage](https://firstpagesage.com/seo-blog/the-ltv-to-cac-ratio-benchmark/), the average CLTC to CAC ratio at B2B SaaS companies is 4:1. At B2C SaaS companies, it’s 2.5:1.
 
 And this kind of healthiness compounds: acquiring customers without spending a ton on marketing allows you to focus more on improving and expanding your existing product, delighting your most loyal customers, and improving overall customer satisfaction.
 
@@ -93,25 +95,38 @@ And this kind of healthiness compounds: acquiring customers without spending a t
 
 ### What is revenue churn rate?
 
-It’s not just customers who churn, revenue churns with them. This metric helps you understand how much money your business makes from each user over time. It can help you spot where you’re losing revenue due to downgrades, people failing to renew, or, worst of all, cancellations. 
+It’s not just customers who churn, revenue churns with them. 
 
-While your customer churn rate looks at the number of customers you lose in a given period, your revenue churn specifically focuses on the dollar value of recurring period lost, or gained, in a certain period.
+While your customer churn rate looks at the *number* of customers you lose in a given period, revenue churn specifically focuses on the *dollar value* of recurring revenue lost, or gained, in a certain period.
 
-### How is it useful?
+### Why is it useful?
 
-Any subscription-based business should be measuring their revenue churn rate. These days, that’s pretty much all businesses from coffee subscription businesses to B2B SaaS companies and everything in between. Businesses that sell big, high-value items (think houses, industrial equipment) likely don’t need to focus on revenue churn.
+Because it helps you understand how much money your business makes from each user over time, and the impact of customer churn on revenue.
+
+Not all revenue churn comes from customers failing to renew, or cancelling their contract. It can also come from customers *downgrading* their subscription, or using your product less.
+
+This is really useful for understanding the exact nature of retention and churn in your product. A company, for example, could have a low customer churn rate, but high revenue churn. This would suggest either:
+
+1. Only high-value customers are churning.
+2. Customers are choosing to spend less / downgrade, rather than churn entirely.
+
+Thus, analyzing customer retention and revenue churn together is essential to finding the truth about your business.
 
 ### How to calculate revenue churn rate
 
-You can calculate your revenue churn rate based on either gross or net revenue. A focus on gross revenue is simpler as it’ll show you how much revenue is churning out of your business, but a focus on net revenue will show both the amount of revenue lost from, say, customers downgrading, but also the revenue gained from customer upgrading.
+You can calculate your revenue churn rate based on either gross or net revenue: 
 
-Let’s do the math. For your gross revenue churn rate, take your churned revenue in a month and divide it by the monthly recurring revenue (MRR) from the previous month, and multiply that total by 100. 
+- **Gross revenue** is simpler but less useful, as it’ll show you how much revenue is churning out of your business without much context. 
 
-For example, Hogflix, an imaginary hedgehog-themed Netflix competitor, had an MRR of $100,000 in May. In April, its churned revenue was $17,000. Divide $17,000 by $100,000 to get 0.17, then multiply that by 100. Voila, Hogflix has a gross revenue churn rate of 17%.
+- **Net revenue** is harder to calculate, but way more powerful because it'll show both the amount of revenue lost from, say, customers downgrading, but also the revenue gained from customers upgrading.
 
-To work out your net revenue churn, find your churned revenue in a period and subtract your expansion revenue and divide that total by your monthly recurring revenue in the previous period. Now multiply that new total by 100.
+To calculate gross revenue churn rate, take your churned revenue in a month and divide it by the monthly recurring revenue (MRR) from the previous month, and multiply that total by 100. 
 
-For example, Hogflix had an MRR of $100,000 in May. In April, its churned revenue was $17,000 and its expansion revenue was $3,000. So subtract $3,000 from $17,000 to get $15,000 and divide that by $100,000 to get 0.15. Multiply that by 100 to get 15%.
+For example, Hogflix, a streaming platform for hedgehogs, had an MRR of $100,000 in May. In April, its churned revenue was $17,000. Divide $17,000 by $100,000 to get 0.17, then multiply that by 100. Voila, Hogflix has a gross revenue churn rate of 17%.
+
+To calculate net revenue churn, find your churned revenue in a period and subtract your expansion revenue and divide that total by your monthly recurring revenue in the previous period. Now multiply that new total by 100.
+
+For example, Hogflix had MRR of $100,000 in May. In April, its churned revenue was $17,000 and its expansion revenue was $3,000. So, subtract $3,000 from $17,000 to get $15,000 and divide that by $100,000 to get 0.15. Multiply that by 100 to get 15%.
 
 ### What’s a good revenue churn rate?
 
@@ -125,19 +140,21 @@ The more customers pay, the lower your churn should be. At $250 average revenue 
 
 Developed in the early-2000s and popularized by an article in _[Harvard Business Review](https://hbr.org/2003/12/the-one-number-you-need-to-grow)_, the Net Promoter Score continues to be a very popular way of measuring customer loyalty. It’s based on one question: ‘How likely are you to recommend [company/product/service] to a friend or colleague on a scale of 0 to 10?’Customers are then put into one of three buckets. 
 
-* **Promoters**, who gave a score of 9 or 10, are loyal enthusiasts and very likely to recommend you. 
-* **Passives**, who gave a score of 7 or 8, aren’t super happy or unhappy but are also unlikely to promote your business. 
+* **Promoters**, who gave a score of 9 or 10, are loyal enthusiasts and very likely to recommend you.
+ 
+* **Passives**, who gave a score of 7 or 8, aren’t super happy or unhappy but are also unlikely to promote your business.
+ 
 * **Detractors**, those who rated you between 0 and 6, could potentially damage your business through word-of-mouth.
 
 As you might imagine from a metric that relies on people answering a single question, the NPS is both alluring and [shaky](https://www.wsj.com/articles/the-dubious-management-fad-sweeping-corporate-america-11557932084). Alluring because, amongst a sea of often confusing data points it can seemingly provide clarity. But shaky because, well, a single data point isn’t enough to go on. As a result, it’s important to combine it with other metrics, including user surveys and interviews, to really understand what’s going on.
 
-### How is it useful?
+### Why is it useful?
 
-Pretty much all subscription-based businesses should be measuring their NPS as customer satisfaction is a key driver of churn. This is especially true for e-commerce businesses – if your online store is poorly designed and hard to use, your chances of repeat business will plummet. 
+Because it's an easy to understand, qualitative indicator of retention, and a simple way of measuring whether the changes you're making to your product to improve retention will be successful. If your NPS improve over time you can be reasonably confident retention should improve as well.
 
 ![NPS survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/nps-csat-ces/nps-survey.png)
 
-This isn’t the most useful metric for very early-stage startups. NPS relies on having a large number of established customers to provide meaningful data. CSAT and CES scores, however, are very useful metrics for early-stage startups. More on those a little lower down.
+That said, this isn’t the most useful metric for very early-stage startups. NPS relies on having a large number of established customers to provide meaningful data, and scores from brand new users are less reliable and useful than those from people who have been using your product for a long time.
 
 ### How to calculate your NPS 
 
@@ -153,7 +170,7 @@ According to [Satmetrix](https://www.satmetrix.com/wp-content/uploads/2023/07/NI
 
 Your customer satisfaction score, or CSAT, is similar to your NPS, but is specifically a great customer retention metric to use before you’ve found product-market fit. Satisfaction tends to be short-lived, whereas loyalty takes time to build. And that’s why CSAT is a great metric for early-stage startups.
 
-### How is it useful?
+### Why is it useful?
 
 Any businesses that interact in a very direct, tangible way with customers should be measuring their CSAT: think retailers, restaurants, and customer support. On the flipside, businesses that rely on very transactional relationships with customers (gas stations) or high-value, single-purchase businesses (car dealerships) should place higher importance on other metrics.
 
@@ -173,11 +190,11 @@ A good CSAT score is typically between 75% to 85%. According to [Fullview](https
 
 ### What is a CES?
 
-Another variation on the NPS and CSAT theme, your customer effort score, or CES, is a measure of how easy, or not, your product is to use. This is something of a leading indicator: a low CES score suggests you will probably have low retention because your product is hard to use – unless, miraculously, people are using it in spite of it being badly designed. As such, this is a really good metric to measure at a startup once you’ve found product-market fit.
+Your customer effort score, or CES, is a measure of how easy, or not, your product is to use. This is a crucial metric if "ease of use", rather than features, is the main differentiator between your product and your competition.
 
-### How is it useful?
+### Why is it useful?
 
-This is a crucial metric for e-commerce and SaaS companies. If you’ve built a product or platform that should be easy to use and spark joy, then CES is a hugely important metric. On the flipside, if your business has very limited touchpoints with customers, if you run an insurance firm, for example, then measuring your CES might not be that revelatory.
+This is something of a leading indicator: a low CES score suggests you will probably have low retention because your product is hard to use – unless, miraculously, people are using it in spite of it being badly designed. As such, this is a really good metric to measure at a startup once you’ve found product-market fit.
 
 ### How to calculate your CES
 
