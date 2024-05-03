@@ -42,8 +42,8 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - What specific features or types of interactions contribute the most to the cost per user?
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714658975/posthog.com/contents/average-cost-per-user-light.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714658975/posthog.com/contents/average-cost-per-user-dark.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714744519/posthog.com/contents/average-cost-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714744520/posthog.com/contents/average-cost-dark.png"
   alt="Line chart showing average LLM cost per user over time"
 />
 
@@ -59,8 +59,8 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - Is the high cost associated with these users sustainable, or does it suggest a need for pricing adjustments?
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714658974/posthog.com/contents/p95-light.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714658974/posthog.com/contents/p95-dark.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714744211/posthog.com/contents/Screenshot_2024-05-03_at_2.49.39_PM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714744214/posthog.com/contents/Screenshot_2024-05-03_at_2.50.01_PM.png"
   alt="Table showing P95 of users who consume the most LLM costs"
 />
 
@@ -75,24 +75,24 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - Which specific requests are the most costly, and are there ways to reduce these costs?
 - Are there noticeable spikes in cost per interaction, and what triggers them?
 
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714659411/posthog.com/contents/Screenshot_2024-05-02_at_3.16.24_PM.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714659429/posthog.com/contents/Screenshot_2024-05-02_at_3.17.04_PM.png"
-  alt="Line chart showing average cost pper LLM interaction over time"
-/>
-
 ## Usage metrics
 
 ### Average usage per user
 
 **What is it?** How frequently the average user interacts with your LLM features.
 
-**Why it's useful:** Indicates if your features have good traction and provide value to your users.
+**Why it's useful:** Indicates if your features provide value to your users if they are interacting with them multiple times per day.
 
 **Questions to ask**
 - How does usage vary among different [cohorts](/docs/data/cohorts) or [user personas](https://posthog.com/product-engineers/how-to-create-user-personas)?
 - What are the most engaged users doing that the least engaged are not?
 - Are there specific features that drive more interactions? Why?
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714743804/posthog.com/contents/llm-interaction-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714743740/posthog.com/contents/llm-average-interaction-dark.png"
+  alt="Line chart showing average cost pper LLM interaction over time"
+/>
 
 ### Generation count
 
