@@ -18,13 +18,15 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 LLM-powered apps differ in three key ways when compared to regular SaaS apps:
 
-1. Their costs increase as as app usage increases.
+1. Costs are closely tied to app usage. 
 2. Request latency spikes and errors are more common.
-3. You're not always sure if your LLM output is what was expected.
+3. LLM output is unpredictable and can lead to a negative user experience.
 
 This means that in addition to [regular product metrics](https://posthog.com/product-engineers/product-health-metrics), you need to monitor LLM-specific ones too. To understand which ones to track, we've put together a list of useful metrics to track.
 
 The metrics are grouped into three categories: [cost](#cost-related-metrics), [usage](#usage-metrics), and [debugging](#debug-metrics).
+
+>  **💡 PostHog tip: Use our [Langfuse](/docs/llm-analytics/langfuse-posthog) and [Helicone](/docs/llm-analytics/helicone-posthog) integrations to bring your LLM data into PostHog. Alternatively, we have tutorials on how to capture events from [OpenAI](/tutorials/chatgpt-analytics), [Anthropic](/tutorials/anthropic-analytics), and [Cohere](/tutorials/cohere-analytics).
 
 ## Cost-related metrics
 
@@ -109,6 +111,7 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 
 **Why is it useful:** Strongly correlated with important product-health metrics such as [growth](/product-engineers/b2b-saas-product-metrics), [churn](/product-engineers/churn-rate-vs-retention-rate), and [NPS score](/product-engineers/nps-vs-csat-vs-ces).
 
+**Questions to ask**
 - Are there specific user segments that are more satisfied or dissatisfied with the LLM outputs?
 - What are the specific input and output tokens of the best and worst scores?
 - How likely are users to churn from your product following a bad LLM response?
