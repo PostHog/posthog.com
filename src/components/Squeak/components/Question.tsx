@@ -197,6 +197,20 @@ export const Question = (props: QuestionProps) => {
     const [expanded, setExpanded] = useState(props.expanded || false)
     const { user, notifications, setNotifications } = useUser()
 
+    useEffect(() => {
+        if (
+            notifications?.length > 0 &&
+            notifications.some(
+                (notification) => notification.question.id === id || notification.question.permalink === id
+            )
+        ) {
+            const newNotifications = notifications.filter(
+                (notification) => notification.question.id !== id && notification.question.permalink !== id
+            )
+            setNotifications(newNotifications)
+        }
+    }, [notifications])
+
     // TODO: Default to question data if passed in
     const {
         question: questionData,
@@ -227,21 +241,6 @@ export const Question = (props: QuestionProps) => {
     const archived = questionData?.attributes.archived
     const slugs = questionData?.attributes?.slugs
     const escalated = questionData?.attributes.escalated
-
-    useEffect(() => {
-        if (
-            notifications?.length > 0 &&
-            notifications.some(
-                (notification) => notification.question.id === id || notification.question.permalink === id
-            )
-        ) {
-            setNotifications(
-                notifications.filter(
-                    (notification) => notification.question.id !== id && notification.question.permalink !== id
-                )
-            )
-        }
-    }, [notifications])
 
     return (
         <CurrentQuestionContext.Provider

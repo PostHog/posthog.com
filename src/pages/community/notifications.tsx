@@ -1,6 +1,6 @@
 import Layout from 'components/Layout'
 import { communityMenu } from '../../navs'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useUser } from 'hooks/useUser'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
@@ -8,6 +8,8 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import { IconX } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
+import { navigate } from 'gatsby'
+import SEO from 'components/seo'
 dayjs.extend(relativeTime)
 dayjs.extend(isSameOrAfter)
 
@@ -15,7 +17,11 @@ const Notification = ({ url, title, excerpt, date, count, onDismiss }) => {
     return (
         <li>
             <div className="relative group active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0 rounded px-2 py-1.5 -mt-1.5 mx-[-2px] -mb-3">
-                <Link to={url} className={`flex items-center text-inherit hover:text-inherit`}>
+                <Link
+                    to={url}
+                    className={`flex items-center text-inherit hover:text-inherit`}
+                    state={{ previous: { title: 'Notifications', url: '/community/notifications' } }}
+                >
                     <div className="flex items-center justify-between w-full">
                         <div className="flex items-center space-x-4">
                             <div className="w-full">
@@ -74,11 +80,22 @@ const Question = ({ id, subject, activeAt, permalink, replies, date }) => {
 }
 
 export default function Notifications() {
-    const { notifications } = useUser()
+    const { fetchUser, notifications } = useUser()
+
+    useEffect(() => {
+        fetchUser()
+            .then((user) => {
+                if (!user) {
+                    navigate('/community')
+                }
+            })
+            .catch(() => navigate('/community'))
+    }, [])
 
     return (
         <Layout parent={communityMenu}>
-            <section className="py-12 px-5 max-w-screen-mdlg mx-auto">
+            <SEO title="Notifications - PostHog" />
+            <section className="py-12 mb-12 px-5 max-w-screen-mdlg mx-auto">
                 <h1>Notifications</h1>
                 {notifications?.length > 0 ? (
                     <ul className="list-none m-0 p-0 space-y-4 mt-6">
