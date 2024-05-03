@@ -42,12 +42,31 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
             .filter((addon: any) => !addon.inclusion_only)
     }, [billingProducts])
 
-    const getAddonPrice = (addon: any) => {
-        return addon.plans[0]?.tiers[1]?.unit_amount_usd || addon.plans[0]?.unit_amount_usd
+    const getAddonPrice = (addon: any): number | null => {
+        const tiers = addon.plans[0]?.tiers
+        if (tiers.length > 0) {
+            // If the first tier is free, return the second tier price
+            if (+tiers[0].flat_amount_usd === 0) {
+                return tiers[1]?.unit_amount_usd
+            }
+            return tiers[0]?.unit_amount_usd
+        }
+        // If there are no tiers, return the plan price
+        return addon.plans[0]?.unit_amount_usd
     }
 
-    const getAddonFreeAllocation = (addon: any) => {
-        return addon.plans[0]?.tiers[0]?.up_to
+    const getAddonFreeAllocation = (addon: any): number | null => {
+        const tiers = addon.plans[0]?.tiers
+        console.log(tiers)
+        if (tiers.length > 0) {
+            // If the first tier is free, return the it's allocation
+            if (+tiers[0].flat_amount_usd === 0) {
+                return tiers[0]?.up_to
+            }
+            return 0
+        }
+        // If there are no tiers, return null
+        return null
     }
 
     return (
