@@ -49,7 +49,7 @@ The benefit of using PostHog beyond this is that it handles:
 
 2. **Targeting logic.** This means not showing the same survey multiple times, the wrong survey, or a survey that has collected enough responses. Leverage property filters, cohorts, feature flags, and more.
 
-If you create a [popover survey](/docs/surveys/creating-surveys#presentation),  updating and targeting are handled automatically. When you create one in API mode, you need to add logic to fetch and display surveys yourself with the help of the JavaScript Web SDK or snippet.
+If you create a [popover survey](/docs/surveys/creating-surveys#presentation),  updating and targeting are handled automatically. When you create one in **API mode**, you need to add logic to fetch and display surveys yourself with the help of the [JavaScript Web SDK or snippet](/docs/libraries/js).
 
 ## Fetching surveys
 
@@ -59,7 +59,7 @@ When implementing an API survey, there are two options for fetching surveys from
 
 2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This always returns an active survey if the user meets the targeting conditions, even if they have already seen, dismissed, or responded to the survey.
 
-Surveys are cached by default by the JavaScript SDK, so you can pass `true` to the `forceReload` parameter to force an API call to get the latest surveys.
+Surveys are requested on first load and then cached by default by the JavaScript SDK. If you want to force an API call to get an updated list of surveys, pass `true` to the `forceReload` parameter. You only need to do this if you want changed surveys to appear mid-session for users.
 
 Both methods return a callback with an array of surveys in this format:
 
