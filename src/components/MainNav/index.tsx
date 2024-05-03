@@ -12,7 +12,7 @@ import {
     IconTextWidth,
     IconUser,
     IconChevronDown,
-    IconTie,
+    IconLetter,
 } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
@@ -368,6 +368,15 @@ const enterpiseModeNames = {
     Company: 'Investor relations',
 }
 
+const Notifications = () => {
+    const { notifications } = useUser()
+    return notifications.length > 0 ? (
+        <span className="size-4 text-xs bg-red text-white flex justify-center items-center rounded-full">
+            {notifications.length}
+        </span>
+    ) : null
+}
+
 export const Main = () => {
     const { user } = useUser()
 
@@ -523,11 +532,14 @@ export const Main = () => {
                                             <>
                                                 <li className="px-1">
                                                     <Link
-                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
-                                                        to="/community/dashboard"
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark justify-between"
+                                                        to="/community/notifications"
                                                     >
-                                                        <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                        My discussions
+                                                        <span>
+                                                            <IconLetter className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                            Notifications
+                                                        </span>
+                                                        <Notifications />
                                                     </Link>
                                                 </li>
                                                 <li className="px-1">
@@ -614,11 +626,14 @@ export const Main = () => {
                             }}
                         >
                             {user?.profile ? (
-                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex">
+                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex relative">
                                     <Avatar
                                         src={getAvatarURL(user?.profile)}
                                         className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
                                     />
+                                    <div className="absolute bottom-0 right-0 translate-x-1/2">
+                                        <Notifications />
+                                    </div>
                                 </div>
                             ) : (
                                 <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
