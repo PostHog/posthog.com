@@ -34,6 +34,8 @@ Install `posthog-js` using your package manager:
 yarn add posthog-js
 # or
 npm install --save posthog-js
+# or
+pnpm add posthog-js
 ```
 
 Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
