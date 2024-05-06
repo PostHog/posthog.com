@@ -10,7 +10,7 @@ PostHog provides POST-only public endpoints to capture events, update user or gr
 
 PostHog is event-based meaning your analytics data takes the form of a value sent by a specific user with optional additional data. Much of the functionality of PostHog, including updating users or groups, combining users, and evaluating feature flags, is driven by this event-based structure. [Our SDKs](/docs/libraries) handle the different types of events for you, but with the API, you need to send the right type of event (listed below) to get the functionality you want. The default PostHog events have the `$` prefix. 
 
-> **Note:** Make sure to send API requests to the correct domain. These are `https://app.posthog.com` for US Cloud, `https://eu.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
+> **Note:** Make sure to send API requests to the correct domain. For capture and decide, these are `https://us.i.posthog.com` for US Cloud, `https://eu.i.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
 
 Here are examples of the types of events you can send:
 
@@ -25,7 +25,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "account_type": "pro"
   },
   "timestamp": "[optional timestamp in ISO 8601 format]"
-}' https://app.posthog.com/capture/ 
+}' <ph_client_api_host>/capture/ 
 
 ```
 
@@ -50,7 +50,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     }
     # ...
   ]
-}' https://app.posthog.com/batch/ 
+}' <ph_client_api_host>/batch/ 
 ```
 
 The `historical_migration` field is optional. For realtime events, it can be left out or set to `false`.
@@ -76,7 +76,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   },
   "timestamp": "[optional timestamp in ISO 8601 format]",
   "event": "$create_alias"
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ### Groups
@@ -95,7 +95,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "properties": {
     "$groups": {"company": "<company_name>"}
   }
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ### Group identify
@@ -116,7 +116,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
       "date_joined": "[optional timestamp in ISO 8601 format]"
     }
   }
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ### Identify
@@ -132,7 +132,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   },
   "distinct_id": "1234",
   "event": "$identify"
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ### Pageview
@@ -146,7 +146,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "timestamp": "2020-08-16T09:03:11.913767",
   "distinct_id": "1234",
   "event": "$pageview"
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ### Screen view
@@ -160,7 +160,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "timestamp": "2020-08-16T09:03:11.913767",
   "distinct_id": "1234",
   "event": "$screen"
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ## Feature flags

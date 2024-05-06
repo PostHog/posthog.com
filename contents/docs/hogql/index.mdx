@@ -103,7 +103,7 @@ data = {
 }
 
 response = requests.post(
-    'https://app.posthog.com/api/projects/:project_id/query', 
+    '<ph_client_api_host>/api/projects/:project_id/query', 
     headers=headers, 
     json=data
 )
