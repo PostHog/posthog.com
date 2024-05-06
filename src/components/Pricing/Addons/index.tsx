@@ -57,7 +57,6 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
 
     const getAddonFreeAllocation = (addon: any): number | null => {
         const tiers = addon.plans[0]?.tiers
-        console.log(tiers)
         if (tiers.length > 0) {
             // If the first tier is free, return the it's allocation
             if (+tiers[0].flat_amount_usd === 0) {
