@@ -45,7 +45,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 if (typeof window !== 'undefined') {
   posthog.init("<ph_project_api_key>", {
-    api_host: "<ph_instance_address>"
+    api_host: "<ph_client_api_host>"
   })
 }
 
@@ -208,7 +208,7 @@ Specifically, we evaluate the flag by making a POST request to the `[https://app
   
   // Evaluate experiment flag
   const ph_request = await fetch(
-    'https://app.posthog.com/decide?v=3', // or eu.posthog.com
+    'https://us.i.posthog.com/decide?v=3', // or eu.i.posthog.com
     requestOptions
   );
   const data = await ph_request.json();
@@ -253,7 +253,7 @@ const eventOptions = {
 };
 
 const eventRequest = await fetch(
-  'https://app.posthog.com/capture',
+  'https://us.i.posthog.com/capture',
   eventOptions
 );
 
@@ -302,7 +302,7 @@ export async function middleware(request) {
   };
   
   const ph_request = await fetch(
-    'https://app.posthog.com/decide?v=3', // or eu
+    'https://us.i.posthog.com/decide?v=3', // or eu
     requestOptions
   );
   const data = await ph_request.json();
@@ -327,7 +327,7 @@ export async function middleware(request) {
   };
 
   const eventRequest = await fetch(
-    'https://app.posthog.com/capture',
+    'https://us.i.posthog.com/capture',
     eventOptions
   );
 
@@ -385,7 +385,7 @@ if (typeof window !== 'undefined') {
   }
 
   posthog.init("<ph_posthog_project_api_key", {
-    api_host: "<ph_instance_address>",
+    api_host: "<ph_client_api_host>",
     bootstrap: parsedBootstrapData
   })
 }

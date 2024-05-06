@@ -11,7 +11,7 @@ import slugify from 'slugify'
 const Teams: React.FC = () => {
     const { allTeams } = useStaticQuery(graphql`
         {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
                 nodes {
                     id
                     name
@@ -45,7 +45,11 @@ const Teams: React.FC = () => {
     `)
     return (
         <Layout>
-            <SEO title="Teams - PostHog" />
+            <SEO
+                title="Teams - PostHog"
+                description="We're organized into multi-disciplinary small teams."
+                image={`/images/small-teams.png`}
+            />
 
             <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
                 <section className="mx-auto">
@@ -60,7 +64,7 @@ const Teams: React.FC = () => {
                                 <Link to="/handbook/company/small-teams">Learn more about why we have small teams</Link>
                             </p>
 
-                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 xl:gap-5 text-center">
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
                                 {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (
                                     <Link
                                         to={`/teams/${slugify(name.toLowerCase().replace('ops', ''), {

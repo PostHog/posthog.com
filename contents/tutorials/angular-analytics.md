@@ -108,7 +108,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_instance_address>' // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+    api_host:'<ph_client_api_host>' // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
   }
 )
 
@@ -155,7 +155,7 @@ Lastly, go back to `main.ts` and make sure to set `capture_pageview` in the Post
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<instance_address>',
+    api_host:'<ph_client_api_host>',
     capture_pageview: false
   }
 )

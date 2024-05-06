@@ -42,7 +42,7 @@ unset AWS_ACCESS_KEY_ID && unset AWS_SECRET_ACCESS_KEY && unset AWS_SESSION_TOKE
 
 ### Deploying PostHog
 
-See docs [here](https://posthog.com/docs/self-host/deploy/aws).
+See docs [here](/docs/self-host/deploy/aws).
 
 
 ## GCP
@@ -55,7 +55,7 @@ To give someone access: Navigate to [PostHog project IAM](https://console.cloud.
 
 ### Deploying PostHog
 
-See docs [here](https://posthog.com/docs/self-host/deploy/gcp).
+See docs [here](/docs/self-host/deploy/gcp).
 
 
 ## DigitalOcean
@@ -74,4 +74,4 @@ The code and setup files are in [digitalocean/marketplace-kubernetes repository]
 
 ### Deploying PostHog
 
-See docs [here](https://posthog.com/docs/self-host/deploy/digital-ocean).
+See docs [here](/docs/self-host/deploy/digital-ocean).

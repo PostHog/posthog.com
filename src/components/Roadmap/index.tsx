@@ -48,16 +48,30 @@ export interface IRoadmap {
     githubPages: IGitHubPage[]
 }
 
-const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate }) => {
-    const { user, likeRoadmap, getJwt } = useUser()
+export const VoteBox = ({ likeCount, liked }) => {
+    return (
+        <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent dark:bg-border-dark/50 flex-shrink-0 relative">
+            <p className="m-0 leading-none">
+                <strong className="text-lg leading-none">{likeCount}</strong>
+                <br />
+                <span className="text-sm">vote{likeCount !== 1 && 's'}</span>
+            </p>
+            {liked && (
+                <div className="absolute -top-2 -left-2.5 rotate-6 bg-green p-1 rounded-full">
+                    <IconThumbsUpFilled className="text-white w-4 h-4" />
+                </div>
+            )}
+        </div>
+    )
+}
+
+const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
+    const { user, likeRoadmap } = useUser()
     const { search } = useLocation()
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [publishLoading, setPublishLoading] = useState(false)
-    const [publishConfirm, setPublishConfirm] = useState(false)
     const teamName = teams?.data?.[0]?.attributes?.name
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
-    const isModerator = user?.role?.type === 'moderator'
 
     useEffect(() => {
         setLoading(false)
@@ -72,27 +86,6 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
     const onAuth = (user: User) => {
         like(user)
         setAuthModalOpen(false)
-    }
-
-    const handleUnpublish = async () => {
-        if (!publishConfirm) {
-            setPublishConfirm(true)
-            return
-        }
-        setPublishLoading(true)
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}`, {
-            body: JSON.stringify({
-                data: {
-                    publishedAt: null,
-                },
-            }),
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        }).then((res) => res.json())
-        onUpdate()
     }
 
     useEffect(() => {
@@ -122,23 +115,12 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
             <UpdateWrapper
                 id={id}
                 status="under-consideration"
-                editButtonClassName="absolute top-0 right-0"
+                editButtonClassName="absolute -top-4 md:top-0 right-0"
                 roundButton={false}
                 onSubmit={() => onUpdate()}
             >
                 <div className="flex space-x-4">
-                    <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent dark:bg-accent-dark flex-shrink-0 relative">
-                        <p className="m-0 leading-none">
-                            <strong className="text-lg leading-none">{likeCount}</strong>
-                            <br />
-                            <span className="text-sm">vote{likeCount !== 1 && 's'}</span>
-                        </p>
-                        {liked && (
-                            <div className="absolute -top-2 -left-2.5 rotate-6 bg-green p-1 rounded-full">
-                                <IconThumbsUpFilled className="text-white w-4 h-4" />
-                            </div>
-                        )}
-                    </div>
+                    <VoteBox likeCount={likeCount} liked={liked} />
                     <div>
                         <h3 className="text-lg m-0 leading-tight">{title}</h3>
                         {teamName && (
@@ -151,9 +133,14 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                                 {teamName} Team
                             </Link>
                         )}
-                        <div className="mt-1 text-[15px]">
+                        <div className="mt-1 text-[15px] community-post-markdown">
                             <Markdown>{description}</Markdown>
                         </div>
+                        {githubUrls?.length > 0 && (
+                            <Link to={githubUrls[0]} external className="text-sm relative -top-2 inline-block">
+                                Learn more on GitHub
+                            </Link>
+                        )}
                         <div className="mt-2 flex space-x-2">
                             <CallToAction
                                 disabled={loading}
@@ -181,22 +168,6 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate })
                                     )}
                                 </span>
                             </CallToAction>
-                            {isModerator && (
-                                <CallToAction
-                                    onClick={handleUnpublish}
-                                    type="secondary"
-                                    size="sm"
-                                    disabled={publishLoading}
-                                >
-                                    {publishConfirm ? (
-                                        'ARE YOU ABSOLUTELY SURE'
-                                    ) : publishLoading ? (
-                                        <Spinner className="mx-auto !w-5 !h-5" />
-                                    ) : (
-                                        'Unpublish'
-                                    )}
-                                </CallToAction>
-                            )}
                         </div>
                     </div>
                 </div>
@@ -209,22 +180,14 @@ const Sort = ({ sortBy, className = '' }) => {
     return (
         <div className={`md:space-x-2 items-center mb-4 sm:mb-0 ${className}`}>
             <p className="sr-only">Sort by</p>
-            <div className="flex items-center">
-                <SortButton
-                    className="rounded-tl-md rounded-bl-md"
-                    active={sortBy === 'popular'}
-                    onClick={() => navigate(`?sort=popular`)}
-                >
+            <div className="flex items-center border border-light dark:border-dark md:border-transparent dark:md:border-transparent hover:border-light dark:hover:border-dark p-0.5 rounded gap-x-[3px] transition-all ease-in-out md:delay-500 hover:delay-0 md:duration-500 w-full md:w-auto">
+                <SortButton className="" active={sortBy === 'popular'} onClick={() => navigate(`?sort=popular`)}>
                     Popular
                 </SortButton>
-                <SortButton className="border-x-0" active={sortBy === 'team'} onClick={() => navigate(`?sort=team`)}>
+                <SortButton className="" active={sortBy === 'team'} onClick={() => navigate(`?sort=team`)}>
                     Team
                 </SortButton>
-                <SortButton
-                    className="rounded-tr-md rounded-br-md"
-                    active={sortBy === 'latest'}
-                    onClick={() => navigate(`?sort=latest`)}
-                >
+                <SortButton className="" active={sortBy === 'latest'} onClick={() => navigate(`?sort=latest`)}>
                     Latest
                 </SortButton>
             </div>
@@ -236,8 +199,10 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-4 py-1 border text-sm border-border dark:border-dark opacity-75 hover:bg-accent/75 dark:hover:bg-accent/75 ${
-                active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
+                active
+                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
+                    : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
             } ${className}`}
         >
             {children}
@@ -367,7 +332,7 @@ export default function Roadmap() {
                 <input
                     onChange={(e) => setRoadmapSearch(e.target.value)}
                     placeholder="Search this page..."
-                    className="w-full p-2 rounded-md border border-border dark:border-dark text-black"
+                    className="w-full p-2 rounded-md border border-border dark:bg-accent-dark dark:border-dark text-primary dark:text-primary-dark"
                 />
                 {sortBy === 'team' && teams.length > 0 && (
                     <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-1.5 mt-4">
@@ -379,10 +344,10 @@ export default function Roadmap() {
                                     className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
                                         selectedTeam === team
                                             ? 'bg-accent dark:bg-accent-dark font-bold'
-                                            : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent/75'
+                                            : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
                                     }`}
                                 >
-                                    {team}
+                                    {team.replace(' Team', '')}
                                 </button>
                             )
                         })}

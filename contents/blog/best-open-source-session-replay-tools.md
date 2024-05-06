@@ -147,7 +147,7 @@ UXlens is a good choice for UX designers and product teams who want to study the
 
 The cloud version starts at just $6 per month for 6,000 recordings. Lifetime self-host licenses start at $200.
 
-## 6. [Matomo](https://matomo.org/)
+## 6. [Matomo](/blog/posthog-vs-matomo)
 ![Matomo - open source GA alternative](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
 
 Matomo is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).

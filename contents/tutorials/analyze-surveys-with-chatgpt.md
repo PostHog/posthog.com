@@ -381,5 +381,5 @@ Now, running `node reduce-themes.js` will aggregate similar themes. If you re-im
 ## Further reading
 
 - [How to set up surveys in Next.js](/tutorials/nextjs-surveys)
-- [How to set up surveys in React](/tutorials/react-surveys) 
-- [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
+- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
+- [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 

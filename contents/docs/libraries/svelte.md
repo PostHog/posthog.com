@@ -29,7 +29,7 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_instance_address>' }
+      { api_host: '<ph_client_api_host>' }
     )
   }
   return
@@ -71,7 +71,7 @@ export const load = async () => {
     posthog.init(
       '<ph_project_api_key>',
       {
-        api_host:'<ph_instance_address>',
+        api_host:'<ph_client_api_host>',
         capture_pageview: false,
         capture_pageleave: false
       }
@@ -98,16 +98,16 @@ import { PostHog } from 'posthog-node';
 
 export async function load() {
   const posthog = new PostHog('<ph_project_api_key>', 
-  { host: '<ph_instance_address>' });
+  { host: '<ph_client_api_host>' });
   posthog.capture({
     distinctId: 'distinct_id_of_the_user',
     event: 'event_name',
   })
-  await posthog.shutdownAsync()
+  await posthog.shutdown()
 }
 ```
 
-> **Note:** Make sure to always call `posthog.shutdownAsync()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+> **Note:** Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 ## Next steps
 

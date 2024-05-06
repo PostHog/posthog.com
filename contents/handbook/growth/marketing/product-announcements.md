@@ -31,7 +31,7 @@ We may typically support medium announcements by:
 - Creating an in-app changelog notification.
 - Writing a Twitter and LinkedIn post.
 
-An example of a medium announcement includes the [launch of the NPS app](https://posthog.com/changelog/2023#nps-survey-app).
+An example of a medium announcement includes the [launch of the NPS app](/changelog/2023#nps-survey-app).
 
 ### Major announcements
 Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work.

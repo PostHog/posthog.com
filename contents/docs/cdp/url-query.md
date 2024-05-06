@@ -1,6 +1,6 @@
 ---
 title: URL query parameter converter
-github: 'https://github.com/PostHog/integrations-repository/pull/31'
+github: 'https://github.com/PostHog/posthog-app-url-parameters-to-event-properties'
 installUrl: 'https://app.posthog.com/project/apps?name=url-query-parameter-converter'
 thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/url-query.png
@@ -8,41 +8,33 @@ tags:
   - url-query
 ---
 
-This app automatically converts URL query parameters for specific terms into event properties in PostHog, enabling you to analyse them like any other data point. This can be useful for seeing how your product or content converts based on search terms. 
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
-## Requirements
+This transformation automatically converts URL query parameters for specific terms into event properties in PostHog, enabling you to analyse them like any other data point. This can be useful for seeing how your product or content converts based on search terms. 
 
-This app requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'URL query parameter converter' and select the app, press Install.
-3. Configure the app to whitelist the parameters you want to turn into events.
+2. Search for 'URL query parameter converter' and select the transformation, press Install.
+3. Configure the transformation to whitelist the parameters you want to turn into events.
 
 That's it!
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for this app](https://github.com/PostHog/posthog-app-url-parameters-to-event-properties) is available on GitHub.
+PostHog is open-source and so are all transformations on the platform. The [source code for this transformation](https://github.com/PostHog/posthog-app-url-parameters-to-event-properties) is available on GitHub.
 
-### Who created this app?
+### Who created this transformation?
 
 We'd like to thank PostHog community member [Benjamin Werker](https://github.com/everald) for creating this app.
 
-### Who maintains this app?
+<CommunityMaintained />
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />
 

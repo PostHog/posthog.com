@@ -48,7 +48,7 @@ Internally, _everything_ can be shared apart from people issues – such as HR /
 
 Don't _only_ help the community when you're the person on support hero in your small team. No matter what your goals may be, if you can quickly ship fixes to real life user problems, then you are going to build goodwill, word-of-mouth growth, and a better product all in one swoop.
 
-You can find these in [posthog.com/questions](https://posthog.com/questions).
+You can find these in [posthog.com/questions](/questions).
 
 ## Lore of PostHog / inside jokes
 

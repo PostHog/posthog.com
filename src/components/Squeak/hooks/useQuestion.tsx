@@ -74,7 +74,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const { getJwt, fetchUser, user, isModerator } = useUser()
     const posthog = usePostHog()
 
-    const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
+    const key = options?.data ? null : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
 
     const {
         data: question,
@@ -107,11 +107,12 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     }
 
     const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
+    const questionID = typeof id !== 'string' ? id : question?.id
 
     const reply = async (body: string) => {
         try {
             posthog?.capture('squeak reply start', {
-                questionId: question?.id,
+                questionId: questionID,
             })
 
             const token = await getJwt()
@@ -125,7 +126,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 body: JSON.stringify({
                     data: {
                         body,
-                        question: question?.id,
+                        question: questionID,
                     },
                     populate: {
                         profile: {
@@ -141,7 +142,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             })
 
             posthog?.capture('squeak reply', {
-                questionId: question?.id,
+                questionId: questionID,
             })
 
             await fetchUser()
@@ -150,7 +151,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         } catch (error) {
             posthog?.capture('squeak error', {
                 source: 'useQuestion.reply',
-                questionId: question?.id,
+                questionId: questionID,
                 body,
                 error: JSON.stringify(error),
             })
@@ -162,7 +163,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const handlePublishReply = async (published: boolean, id: number) => {
         try {
             posthog?.capture('squeak publish reply start', {
-                questionId: question?.id,
+                questionId: questionID,
                 replyId: id,
                 published,
             })
@@ -189,14 +190,14 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             mutate()
 
             posthog?.capture('squeak publish reply', {
-                questionId: question?.id,
+                questionId: questionID,
                 replyId: id,
                 published,
             })
         } catch (error) {
             posthog?.capture('squeak error', {
                 source: 'useQuestion.handlePublishReply',
-                questionId: question?.id,
+                questionId: questionID,
                 published,
                 replyId: id,
                 error: JSON.stringify(error),
@@ -209,12 +210,12 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const handleResolve = async (resolved: boolean, resolvedBy: number | null) => {
         try {
             posthog?.capture('squeak resolve start', {
-                questionId: question?.id,
+                questionId: questionID,
                 resolved,
                 resolvedBy,
             })
 
-            const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+            const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     data: {
@@ -237,14 +238,14 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             mutate()
 
             posthog?.capture('squeak resolve', {
-                questionId: question?.id,
+                questionId: questionID,
                 resolved,
                 resolvedBy,
             })
         } catch (error) {
             posthog?.capture('squeak error', {
                 source: 'useQuestion.handleResolve',
-                questionId: question?.id,
+                questionId: questionID,
                 resolved,
                 resolvedBy,
                 error: JSON.stringify(error),
@@ -257,7 +258,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const handleReplyDelete = async (id: number) => {
         try {
             posthog?.capture('squeak delete reply start', {
-                questionId: question?.id,
+                questionId: questionID,
                 replyId: id,
             })
 
@@ -277,13 +278,13 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             mutate()
 
             posthog?.capture('squeak delete reply', {
-                questionId: question?.id,
+                questionId: questionID,
                 replyId: id,
             })
         } catch (error) {
             posthog?.capture('squeak error', {
                 source: 'useQuestion.handleReplyDelete',
-                questionId: question?.id,
+                questionId: questionID,
                 replyId: id,
                 error: JSON.stringify(error),
             })
@@ -293,7 +294,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     }
 
     const addTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
             method: 'PUT',
             body: JSON.stringify({
                 data: {
@@ -312,7 +313,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     }
 
     const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
             method: 'PUT',
             body: JSON.stringify({
                 data: {
@@ -336,7 +337,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 archived: archive,
             },
         })
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}`, {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
             method: 'PUT',
             body,
             headers: {
@@ -350,7 +351,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
     const escalate = async (message?: string) => {
         const body = JSON.stringify({
-            id: questionData?.id,
+            id: questionID,
             message,
         })
         await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/escalate`, {
@@ -373,7 +374,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             },
         })
 
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}`, {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
             method: 'PUT',
             body,
             headers: {

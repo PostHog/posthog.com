@@ -10,7 +10,7 @@ There are a few common reasons that you may not see events appear in your projec
 This is the most common reason events don't appear. To debug this, you can try sending events to `https://webhook.site/`. Make sure to not use sensitive data while debugging using third-party tools.
 
 1. Visit [webhook.site](https://webhook.site/) and copy “Your unique URL”.
-2. In your PostHog [initialization code](https://posthog.com/docs/product-analytics/installation), replace "https://app.posthog.com" or "https://eu.posthog.com" if using the EU Cloud) with the URL you copied from webhook.site. For example:
+2. In your PostHog [initialization code](https://posthog.com/docs/product-analytics/installation), replace "https://us.i.posthog.com" or "https://eu.i.posthog.com" if using the EU Cloud) with the URL you copied from webhook.site. For example:
 
 <MultiLanguage>
 
@@ -69,7 +69,11 @@ If events are visible in webhook.site, it means that you have configured PostHog
 
 ![Events visible on webhook.site](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/events-in-webhook.site.png)
 
-### 2. An app has been configured incorrectly
+### 2. PostHog is adblocked
+
+PostHog can be adblocked, even locally. This prevents requests from being sent from your app to PostHog. To limit the impact of adblockers, [set up a reverse proxy](/docs/advanced/proxy]. 
+
+### 3. An app has been configured incorrectly
 
 Another common reason for missing events is that an app has been configured to drop certain or all events. To debug if this is the case, follow these steps in order:
 
@@ -77,7 +81,7 @@ Another common reason for missing events is that an app has been configured to d
 2. Try to temporarily disable the Filter Out plugin.
 3. Try to temporarily disable all other enabled plugins.
 
-### 3. There is a bug the PostHog library
+### 4. There is a bug the PostHog library
 
 Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite rare.
 
@@ -92,9 +96,9 @@ If you're using the [JavaScript web](/docs/libraries/js) library, you can identi
 
 ![network request being sent to posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/network-request-to-posthog.png)
 
-### 4. Events are not ingested after being received by PostHog
+### 5. Events are not ingested after being received by PostHog
 
-If your library is configured correctly and successfully sending events to PostHog, events may get lost in the ingestion pipeline – e.g. if there is an ongoing outage.
+If your library is configured correctly and successfully sending events to PostHog, events may get lost in the [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline) – e.g. if there is an ongoing outage.
 
 To confirm if this is the issue, use the following steps:
 

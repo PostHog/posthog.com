@@ -1,6 +1,8 @@
 import React from 'react'
 import { Switch } from '@headlessui/react'
 import { classNames } from 'lib/utils'
+import Tooltip from 'components/Tooltip'
+import { IconInfo, IconShieldLock } from '@posthog/icons'
 
 export default function Toggle({
     checked,
@@ -8,12 +10,14 @@ export default function Toggle({
     iconLeft,
     iconRight,
     label,
+    tooltip,
 }: {
     checked: boolean
     onChange: (checked: boolean) => void
     iconLeft?: React.ReactNode
     iconRight?: React.ReactNode
     label?: string
+    tooltip?: string
 }) {
     return (
         <span className="flex space-x-1.5 items-center">
@@ -45,6 +49,13 @@ export default function Toggle({
                     <Switch.Label>
                         <span className="ml-1 font-semibold text-sm">{label}</span>
                     </Switch.Label>
+                )}
+                {tooltip && (
+                    <Tooltip content={tooltip} contentContainerClassName="max-w-xs">
+                        <div className="inline-block relative">
+                            <IconInfo className="w-4 h-4 opacity-50 inline-block" />
+                        </div>
+                    </Tooltip>
                 )}
             </Switch.Group>
             {iconRight && (

@@ -167,6 +167,11 @@ const faqs = [
             "The easiest way is to sign up for the Free plan - no credit card required. You'll get an accurate volume projection after just a few days.",
     },
     {
+        question: 'How can I manage cost at high volume?',
+        children:
+            "You can reduce the number of requests to PostHog with <a href='https://posthog.com/docs/feature-flags/local-evaluation'>local evaluation</a>, which stores flag definitions on your server and only polls PostHog periodically.",
+    },
+    {
         question: 'How long do you retain event data?',
         children:
             'Data is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
