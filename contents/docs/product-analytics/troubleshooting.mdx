@@ -69,7 +69,11 @@ If events are visible in webhook.site, it means that you have configured PostHog
 
 ![Events visible on webhook.site](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/events-in-webhook.site.png)
 
-### 2. An app has been configured incorrectly
+### 2. PostHog is adblocked
+
+PostHog can be adblocked, even locally. This prevents requests from being sent from your app to PostHog. To limit the impact of adblockers, [set up a reverse proxy](/docs/advanced/proxy]. 
+
+### 3. An app has been configured incorrectly
 
 Another common reason for missing events is that an app has been configured to drop certain or all events. To debug if this is the case, follow these steps in order:
 
@@ -77,7 +81,7 @@ Another common reason for missing events is that an app has been configured to d
 2. Try to temporarily disable the Filter Out plugin.
 3. Try to temporarily disable all other enabled plugins.
 
-### 3. There is a bug the PostHog library
+### 4. There is a bug the PostHog library
 
 Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite rare.
 
@@ -92,7 +96,7 @@ If you're using the [JavaScript web](/docs/libraries/js) library, you can identi
 
 ![network request being sent to posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/network-request-to-posthog.png)
 
-### 4. Events are not ingested after being received by PostHog
+### 5. Events are not ingested after being received by PostHog
 
 If your library is configured correctly and successfully sending events to PostHog, events may get lost in the [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline) – e.g. if there is an ongoing outage.
 
