@@ -86,14 +86,20 @@ export default function Community() {
     const { websiteTheme } = useValues(layoutLogic)
     const [ref, inView] = useInView({ threshold: 0 })
     return (
-        <div ref={ref} className="relative">
+        <div
+            ref={ref}
+            className="relative after:bg-gradient-to-b dark:after:from-[#141A26]/0 dark:after:to-dark after:h-20 after:left-0 after:w-full after:absolute after:bottom-0"
+        >
             {inView && (websiteTheme === 'dark' ? <Stars /> : null)}
-            <div className="w-full overflow-hidden">
-                <div className="relative top-16 sm:top-12 lg:mt-12 xl:top-16 px-4 md:px-0 z-40">
-                    <h2 className="m-0 pb-2 px-4 text-4xl md:text-6xl text-center leading-0 md:leading-none">
-                        Join our <span className="text-red dark:text-yellow">open source</span> community
+            <div className="w-full overflow-hidden md:pt-0 before:bg-gradient-to-b dark:before:from-dark dark:before:to-[#141A26]/0 before:absolute before:left-0 before:h-48 before:w-full before:top-0">
+                <div className="md:absolute w-full top-16 sm:top-12 md:-top-16 md:pt-8 lg:pt-0 xl:top-12 2xl:top-20 px-4 md:px-0 z-40">
+                    <h2 className="m-0 pb-2 px-4 text-4xl md:text-5xl lg:text-7xl text-center leading-0 md:leading-none">
+                        Join our <br className="hidden md:block" />
+                        <span className="text-red dark:text-yellow">open source</span>{' '}
+                        <br className="hidden md:block xl:hidden" />
+                        community
                     </h2>
-                    <p className="text-center md:text-lg max-w-lg lg:max-w-xl leading-tight mx-auto my-0 p-0">
+                    <p className="text-center md:text-lg max-w-lg lg:max-w-xl leading-tight mx-auto my-0 pb-4 md:pb-0 px-12 md:px-0">
                         We work in the open. Check out our{' '}
                         <Link to="/handbook/strategy/overview" className="inline-block">
                             company strategy
