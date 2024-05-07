@@ -2020,13 +2020,13 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'LLM analytics',
+            name: 'PostHog for AI',
             icon: 'IconAdvanced',
             color: 'yellow',
             url: '/docs/llm-analytics',
             children: [
                 {
-                    name: 'LLM analytics',
+                    name: 'PostHog for AI',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2724,7 +2724,7 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'LLM analytics',
+                name: 'PostHog for AI',
                 icon: 'IconAdvanced',
                 color: 'yellow',
                 url: '/llm-analytics',

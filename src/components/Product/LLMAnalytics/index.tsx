@@ -44,8 +44,8 @@ import Layout from 'components/Layout'
 
 const product = {
     slug: 'llm-analytics',
-    lowercase: 'LLM analytics',
-    capitalized: 'LLM analytics',
+    lowercase: 'PostHog for AI',
+    capitalized: 'PostHog for AI',
     freeTier: 'n/a',
 }
 
@@ -152,8 +152,8 @@ export const LLMAnalytics = () => {
     return (
         <>
             <SEO
-                title="LLM analytics - PostHog"
-                description="Get instant insights into LLM products and model performance"
+                title="PostHog for AI"
+                description="Get instant insights into AI products and LLM model performance"
                 image={`/images/og/surveys.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
@@ -222,7 +222,8 @@ export const LLMAnalytics = () => {
                         <strong>While in beta...</strong>
                     </p>
                     <p className="mb-2">
-                        LLM analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
+                        Analytics for LLM and AI teams is bundled with{' '}
+                        <Link to="/product-analytics">product analytics</Link>.
                     </p>
                     <ul className="mb-2">
                         <li>
@@ -230,10 +231,10 @@ export const LLMAnalytics = () => {
                         </li>
                         <li>
                             <strong>After 1 million events/mo:</strong> Usage is billed through product analytics. Get
-                            access to LLM analytics at no additional cost.
+                            access to PostHog for AI at no additional cost.
                         </li>
                     </ul>
-                    <p className="mb-0">Dedicated pricing for LLM analytics is coming soon.</p>
+                    <p className="mb-0">Dedicated pricing for LLM and AI teams is coming soon.</p>
                 </div>
             </section>
 

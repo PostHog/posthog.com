@@ -162,9 +162,9 @@ export const Content = ({ quickLinks = false }) => {
 const LLMAnalytics: React.FC<LLMAnalyticsProps> = ({ data }) => {
     return (
         <Layout>
-            <SEO title="LLM analytics - Documentation - PostHog" />
+            <SEO title="PostHog for AI - Documentation - PostHog" />
 
-            <PostLayout title={'LLM Analytics'} hideSurvey hideSidebar>
+            <PostLayout title={'PostHog for AI'} hideSurvey hideSidebar>
                 <Content />
             </PostLayout>
         </Layout>

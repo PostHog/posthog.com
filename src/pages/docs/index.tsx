@@ -69,9 +69,9 @@ const quickLinks = [
     },
     {
         icon: 'IconAdvanced',
-        name: 'LLM analytics',
+        name: 'PostHog for AI',
         to: '/docs/LLM-analytics',
-        description: 'Track metrics for LLM products',
+        description: 'Track metrics for AI & LLM products',
         color: 'yellow',
     },
 ]
