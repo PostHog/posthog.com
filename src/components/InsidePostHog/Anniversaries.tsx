@@ -47,7 +47,7 @@ export default function Anniversaries() {
     return loading ? (
         <Skeleton />
     ) : (
-        <ul className="list-none grid gap-3 mt-2">
+        <ul className="list-none grid gap-3 mt-2 [&>*:nth-child(2)>div:first-child]:bg-blue [&>*:nth-child(3)>div:first-child]:bg-yellow [&>*:nth-child(4)>div:first-child]:bg-teal">
             {teamMembers.map(({ id, years, attributes: { firstName, lastName, companyRole, avatar } }) => {
                 const image = avatar?.data?.attributes?.formats?.thumbnail?.url
                 const name = [firstName, lastName].filter(Boolean).join(' ')

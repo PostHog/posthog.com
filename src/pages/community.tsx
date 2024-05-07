@@ -24,7 +24,8 @@ import FeatureRequests from 'components/InsidePostHog/FeatureRequests'
 import AppStatus from 'components/AppStatus'
 
 const quote =
-    "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
+    // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
+    'Even the smallest hedgehog carries the wisdom of survival, showing us that even in a world full of thorns, one can embrace challenges with grace and courage.'
 
 const TabButton = ({ active, onClick, children, className = '' }) => {
     return (
