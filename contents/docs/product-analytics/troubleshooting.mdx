@@ -90,7 +90,7 @@ To debug if this is the issue, most of our SDKs have an option to [enable debug 
 If you're using the [JavaScript web](/docs/libraries/js) library, you can identify failed requests using the network tab in your browser devtools:
 
 1. Open devtools in your browser and switch to the network tab.
-2. Identify the failed requests to `app.posthog.com/e` (or `eu.posthog.com/e` if you're using EU Cloud).
+2. Identify the failed requests to `https://us.i.posthog.com/e` (or `https://eu.i.posthog.com/e` if you're using EU Cloud).
 3. Right click one of those requests and click Copy -> Copy as cURL.
 4. See below on how to [report your issue](#report-your-issue) and attach your cURL command to get further support.
 
@@ -194,7 +194,7 @@ Body:
 # Library initialization:
 // e.g.
 // from posthog import Posthog
-// posthog = Posthog(phc_yourAPIKey, host='app_or_eu.posthog.com')
+// posthog = Posthog(phc_yourAPIKey, host='us_or_eu.posthog.com')
 
 # What was called:
 // e.g.
