@@ -184,6 +184,31 @@ export const CodeBlock = ({
         }, 1000)
     }
 
+    const replaceClientApiInfo = (tokens: Token[]) => {
+        // Check the next two elements
+        for (let i = 0; i < tokens.length - 2; i++) {
+            if (tokens[i].content === '<' && tokens[i + 2].content === '>') {
+                // Replace the three elements with a single element with updated content
+                if (tokens[i + 1].content === 'ph_client_api_host') {
+                    tokens.splice(i, 3, {
+                        types: ['plain'],
+                        content: '<ph_client_api_host>',
+                    })
+                }
+                if (tokens[i + 1].content === 'ph_project_api_key') {
+                    tokens.splice(i, 3, {
+                        types: ['plain'],
+                        content: '<ph_project_api_key>',
+                    })
+                }
+
+                // After modification, the array is shorter, so adjust the loop to not skip elements
+                i-- // Adjust the index to check for another possible match in the next iteration
+            }
+        }
+        return tokens
+    }
+
     return (
         <div className="code-block relative mt-2 mb-4 border border-light dark:border-dark rounded">
             {showLabel && (
@@ -348,6 +373,7 @@ export const CodeBlock = ({
                                             .find((token) => token.content.startsWith(tooltipKey))
                                             ?.content.replace(tooltipKey, '')
                                     const firstContentIndex = line.findIndex((token) => !!token.content.trim())
+                                    replaceClientApiInfo(line)
                                     return (
                                         <div key={i} className={`${className} relative`} {...props}>
                                             {line
@@ -379,11 +405,29 @@ export const CodeBlock = ({
                                                             >
                                                                 {children === "'<ph_project_api_key>'" && projectToken
                                                                     ? `'${projectToken}'`
+                                                                    : children === '<ph_project_api_key>' &&
+                                                                      projectToken
+                                                                    ? `${projectToken}`
                                                                     : children === "'<ph_client_api_host>'" &&
+                                                                      clientApiHost
+                                                                    ? clientApiHost
+                                                                    : children === '<ph_client_api_host>' &&
                                                                       clientApiHost
                                                                     ? clientApiHost
                                                                     : children === "'<ph_app_host>'" && appHost
                                                                     ? appHost
+                                                                    : children.includes('<ph_client_api_host>') &&
+                                                                      clientApiHost
+                                                                    ? children.replace(
+                                                                          /<ph_client_api_host>/g,
+                                                                          clientApiHost
+                                                                      )
+                                                                    : children.includes('<ph_project_api_key>') &&
+                                                                      projectToken
+                                                                    ? children.replace(
+                                                                          /<ph_project_api_key>/g,
+                                                                          projectToken
+                                                                      )
                                                                     : children}
                                                             </span>
                                                         </span>
