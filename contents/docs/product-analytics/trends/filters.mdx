@@ -1,0 +1,117 @@
+---
+title: Filters
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+export const inlineFilterLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/inline-filter-light-mode.png"
+export const inlineFilterDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/longer-date-range-dark-mode.png"
+export const filterGroupsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/filter-groups-light-mode.png"
+export const filterGroupsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/filter-groups-dark-mode.png"
+export const internalLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/internal-and-test-users-light-mode.png"
+export const internalDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/internal-and-test-users-dark-mode.png"
+
+Trends support two different [types of filters](#types-of-filters):
+
+1. **Inline filters**, which only apply to a specific series in your insight.
+2. **Filter groups**, which are global filters that apply to the whole insight.
+
+Inline filters only support `AND` operators – i.e. all filter conditions must be met for an event or user to be included.
+
+Filter groups support `AND` and `OR` operators – i.e. events will be included if one or both of the filter conditions are met.
+
+## Configuring filters
+
+Filters are comprised of three elements, a property, an operation, and a value.
+
+### 1. The filter property
+
+**Example: _(Current URL, Browser, etc)_**
+
+This is the property that you want to filter based on. These properties can be:
+
+-   Properties on the event itself
+-   Properties on the person who sent the event
+-   Properties on Groups that this event is a member of _(See [Group analytics](/docs/user-guides/group-analytics))_
+-   Properties on sessions
+-   Properties on [Cohorts](/docs/user-guides/cohorts) the user is a member of
+-   Properties on the HTML element if an event was autocaptured
+
+By default, the dropdown will only show properties that have been seen on a specific event before, but if you instead want to filter based on an unseen property, you can scroll all the way to the bottom of the list and click 'Show X properties that haven't been seen with this event'
+
+### 2. The filter operation
+
+**Example: _(equals, contains, etc)_**
+
+This is what PostHog uses to compare the property value to determine whether an event passes the filter or not. Note that the options for this will change based on the type of the property you've selected (e.g. whether a property is a `Number` or `String`).
+
+| Name                  | Description                                                                             |
+| --------------------- | --------------------------------------------------------------------------------------- |
+| = equals              | The property matches the value exactly and can contain multiple values to match against |
+| ≠ doesn't equal       | The property _doesn't_ exactly match any of the values you provided                     |
+| ∈ contains            | The property contains the value as a substring                                          |
+| ∉ doesn't contain     | The property doesn't contain the values as a substring                                  |
+| ~ matches regex       | The property matches a regex _(only available for strings)_                             |
+| ≁ doesn't match regex | The property doesn't matches a regex _(only available for strings)_                     |
+| > greater than        | The property is greater than a specific value _(only available for numeric properties)_ |
+| &lt; less than        | The property is less than a specific value _(only available for numeric properties)_    |
+| ✓ is set              | The property was not set on a specific event                                            |
+| ✕ is not set          | The property has been set on a specific event                                           |
+
+### 3. The comparison value
+
+This is the value that PostHog will compare to the property using the operation you specified. If the operation returns true, then the event will be included in the insight, and if it returns false it will be excluded.
+
+Some operations allow you to pass multiple values to compare against, in which case the event will be included if any of these values return true when compared.
+
+## Types of filters
+
+### Inline filters
+
+<ProductScreenshot
+    imageLight = {inlineFilterLight} 
+    imageDark = {inlineFilterDark}
+    classes="rounded"
+    alt="Example inline filter"
+/>
+
+These filters apply to a specific series within a graph. You can apply totally different filters to each series in a trends insight.
+
+To add a filter to a series, click the <FilterIcon /> icon next to the event name, and search for your desired property. 
+
+Currently, inline filters only support with `AND` operations. If you want to include events that match _at least one_ of a group of filters – i.e. `OR` operations – use filter groups.
+
+### Filter groups
+
+Filter groups allow you to apply filters to **all series** within an insight. These filter groups are composed of a number of single filter, which can be combined in the following two ways:
+
+-   `AND` - Events have to match _every_ filter within the group
+-   `OR` - Events only have to match _a single_ filter within the group
+
+<ProductScreenshot
+    imageLight = {filterGroupsLight} 
+    imageDark = {filterGroupsDark}
+    classes="rounded"
+    alt="Example global filter"
+/>
+
+Click the `+ Add filter group` button to add a filter group. You can add multiple filter groups and you can use `AND` `OR` operators both within and between filter groups.
+
+> **Important:** Since group filters apply to all events within an insight, and these events may not share all their properties, group filters permit you to use any property that has been seen in _at least one_ of your events. If you happen to create a filter that references a property that not all events have, events that do not contain this property will automatically fail the check and will be excluded by the filter.
+
+## Filtering internal and test users
+
+The final option for filtering events is using the option to filter out 'internal and test users'.
+
+This option is useful for excluding events sent from local builds of your product, or by members of your team that you don't want to include in your analysis.
+
+<ProductScreenshot
+    imageLight = {internalLight} 
+    imageDark = {internalDark}
+    classes="rounded"
+    alt="Filtering internal and test users turned on"
+/>
+
+Click on the settings icon to customize the filters that are used.

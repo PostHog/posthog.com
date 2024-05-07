@@ -1891,9 +1891,35 @@ export const docsMenu = {
                 },
                 {
                     name: 'Trends',
-                    url: '/docs/product-analytics/trends',
+                    url: '/docs/product-analytics/trends/overview',
                     icon: 'IconGraph',
                     color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/product-analytics/trends/overview',
+                        },
+                        {
+                            name: 'Chart types',
+                            url: '/docs/product-analytics/trends/charts',
+                        },
+                        {
+                            name: 'Filters',
+                            url: '/docs/product-analytics/trends/filters',
+                        },
+                        {
+                            name: 'Aggregations',
+                            url: '/docs/product-analytics/trends/aggregations',
+                        },
+                        {
+                            name: 'Breakdowns',
+                            url: '/docs/product-analytics/trends/breakdowns',
+                        },
+                        {
+                            name: 'Formulas',
+                            url: '/docs/product-analytics/trends/formulas',
+                        },
+                    ],
                 },
                 {
                     name: 'Funnels',

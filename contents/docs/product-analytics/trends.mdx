@@ -64,11 +64,13 @@ export const CopyIcon = () => <svg class="inline-block w-5 h-5 text-gray" fill="
     className="rounded shadow-xl"
 />
 
+## What are trends?
+
 Trends are a type of [insight](/docs/product-analytics/insights) that enable you to plot data from people, events, and properties.
 
 Trends are an incredibly powerful part of PostHog's analytics toolbox, and are useful for finding patterns in your data, as well as monitoring your product to ensure everything is running smoothly.
 
-### What can you learn from trends?
+## What can you learn from trends?
 
 -   Track how your metrics are changing over time.
 -   Compare the usage of different features side-by-side.
@@ -476,7 +478,7 @@ The **Pie** chart displays the relative distribution of the values of different 
 
 The **World Map** chart displays values in an interactive map of the world, broken down by country code. This display option can't be selected if you're already breaking down by a property other than Country Code.
 
-## Using formulas
+## Formulas
 
 One of the most powerful tools when creating a new trend is using custom formulas. Formulas are custom mathematical expressions that you can use to compare and combine the value of multiple series.
 
@@ -487,13 +489,13 @@ One of the most powerful tools when creating a new trend is using custom formula
     alt="Formula map chart"
 />
 
-To add a formula, open the 'Advanced Options' dropdown and click the 'Add formula' button. Then within the input box, type out the expression you would like to evaluate.
+To add a formula, clikc 'Enable formula mode'. Then within the input box, type out the expression you would like to evaluate.
 
-This expression can contain any number of basic mathematical operators (+, -, \*, /) along with variables (`A`, `B`, `C`, ...) which correspond to the series with that letter.
+This expression can contain any number of basic mathematical operators (+, -, \*, /) along with variables (`A`, `B`, `C`, ...), which correspond to the series with that letter.
 
-For example, if you have two series A and B, then the formula A / B will plot the value of series A divided by the value of series B at each point in time.
+If you have two series A and B, then the formula `A / B` will plot the value of series A divided by the value of series B at each point in time.
 
-> **Note: ** When using a formula, only one series will be displayed on the chart, which will show the output of the formula at each point in time.
+When using a formula, only one series will be displayed on the chart, which will show the output of the formula at each point in time.
 
 ## View source (Beta)
 
