@@ -23,9 +23,9 @@ type LLMAnalyticsProps = {
 
 export const Intro = () => (
     <header className="pb-8">
-        <h1 className="text-4xl mt-0 mb-2">LLM analytics</h1>
+        <h1 className="text-4xl mt-0 mb-2">PostHog for AI</h1>
         <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-            Learn how to gather insights for your LLM products.
+            Learn how to gather insights for your AI and LLM products.
         </h3>
     </header>
 )
@@ -37,7 +37,7 @@ export const Content = ({ quickLinks = false }) => {
             <Intro />
             {(quickLinks || compact) && (
                 <QuickLinks
-                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'LLM analytics')?.children}
+                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'PostHog for AI')?.children}
                 />
             )}
             <section className="mb-12">

@@ -162,8 +162,8 @@ export const LLMAnalytics = () => {
                     icon={<IconAdvanced />}
                     beta={true}
                     product={product.capitalized}
-                    title='Unlock instant insights for <span class="text-red dark:text-yellow">LLM products</span>'
-                    description="Track LLM and AI app metrics, such as model costs, latency, evaluations, and more"
+                    title='Unlock instant insights for <span class="text-red dark:text-yellow">AI and LLM products</span>'
+                    description="Track AI and LLM app metrics, such as model costs, latency, evaluations, and more"
                 />
 
                 <div className="text-center">
@@ -324,7 +324,7 @@ export const LLMAnalytics = () => {
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
                     <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'llm analytics').children}
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'posthog for ai').children}
                     />
                 </section>
 
