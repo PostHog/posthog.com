@@ -21,15 +21,14 @@ export const pieDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v17100
 export const worldMapLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/world-map-light-mode.png"
 export const worldMapDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/world-map-dark-mode.png"
 
-There are nine charts and visualization options in trends. They're split into three categories:
+There are nine charts and visualization options in trends. They're split into two categories:
 
 - **Time series**, which show you how tracked events and data points fluctuate over a time period.
-- **Cumumlative time series**, which show you whether the growth rate of a tracked event or data point is accelerating or declining.
 - **Total value**, which show the total number of tracked events or data points in any given time period.
 
 ## Time series
 
-### Line chart
+### Line chart (linear)
 
 <ProductScreenshot
     imageLight = {linerLight} 
@@ -41,6 +40,19 @@ There are nine charts and visualization options in trends. They're split into th
 The line chart is a simple, linear trend plot with time on the X-axis and each data point corresponding to the grouping value you've chosen.
 
 Additional series or breakdowns you add to a line chart will appear as separate lines on the chart. 
+
+## Line chart (cumulative)
+
+<ProductScreenshot
+    imageLight = {cumulativeLight} 
+    imageDark = {cumulativeDark}
+    classes="rounded"
+    alt="Cumulative plot"
+/>
+
+The cumulative plot displays a running tally of each series over the given time period.
+
+This is useful for understanding how quickly an event or data point is growing, such as whether the number of people signing up for your product is growing eponentially or leveling off.
 
 ### Bar chart
 
@@ -60,19 +72,6 @@ Additional series or breakdowns you add to a bar chart will appear stacked, so y
 [IMAGE HERE]
 
 Area charts are a twist on the line chart. When you add a breakdown, or multiple series, area charts behave like a stack bar chart, but render the data in a line chart showing how each data point contributes to the total.
-
-## Cumulative
-
-<ProductScreenshot
-    imageLight = {cumulativeLight} 
-    imageDark = {cumulativeDark}
-    classes="rounded"
-    alt="Cumulative plot"
-/>
-
-The cumulative plot displays a running tally of each series over the given time period.
-
-This is useful for understanding how quickly an event or data point is growing, such as whether the number of people signing up for your product is growing eponentially or leveling off.
 
 ## Total value 
 
